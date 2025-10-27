@@ -34,21 +34,21 @@
   background-color: transparent !important;
 }
 
-/* Boutons de version : on masque le vrai texte et on affiche un label custom */
 .navbar__link.verdd {
-  display: inline-flex;              /* ← le conteneur s’ajuste à son contenu */
-  align-items: center;               /* ← verticalement centré comme les autres items */
-  gap: .25rem;                       /* espace avec le caret ▼ */
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  /* espace avec le caret ▼ */
   position: relative;
-
+  font-size: 0;
   color: transparent !important;
   text-shadow: none !important;
   user-select: none;
 }
 
-/* notre libellé remplaçant (DANS le flux, pas absolute) */
 .navbar__link.verdd::before {
-  content: '';                       /* sera remplacé ci-dessous par produit */
+  content: '';
+  display: inline-block;
   font-size: var(--ifm-navbar-link-font-size, 1rem);
   line-height: inherit;
   color: var(--ifm-navbar-link-color);
@@ -61,36 +61,36 @@
   margin-left: .1rem;
 }
 
-/* états hover/actif : même style que les autres liens navbar */
 .navbar__link.verdd:hover::before,
 .navbar__link.verdd.active::before,
 .navbar__link.verdd:focus::before {
   color: var(--ifm-navbar-link-hover-color);
 }
 
-/* Libellés par produit */
 .navbar__link.verdd--fast2::before {
   content: 'Fast2';
 }
+
 .navbar__link.verdd--arender::before {
   content: 'Arender';
 }
+
 .navbar__link.verdd--flowerdocs::before {
   content: 'Flowerdocs';
 }
+
 .navbar__link.verdd--uxopian-ai::before {
   content: 'Uxopian AI';
 }
 
-/* (optionnel) sur mobile, laisse le texte réel s’afficher pour l’accessibilité */
 @media (max-width: 996px) {
   .navbar__link.verdd {
-    font-size: inherit !important;           /* ré-affiche "current/v1/v2" */
+    font-size: inherit !important;
     -webkit-text-fill-color: inherit;
     color: var(--ifm-navbar-link-color) !important;
   }
-  .navbar__link.verdd::before { content: none; }
+
+  .navbar__link.verdd::before {
+    content: none;
+  }
 }
-
-
-
