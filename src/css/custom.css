@@ -29,6 +29,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+.hero--primary {
+  background: linear-gradient(135deg, #A14999 0%, #ED8E80 100%) !important;
+  background-color: transparent !important;
+}
+
 /* Boutons de version : on masque le vrai texte et on affiche un label custom */
 .navbar__link.verdd {
   display: inline-flex;              /* ← le conteneur s’ajuste à son contenu */
@@ -72,6 +77,9 @@
 }
 .navbar__link.verdd--flowerdocs::before {
   content: 'Flowerdocs';
+}
+.navbar__link.verdd--uxopian-ai::before {
+  content: 'Uxopian AI';
 }
 
 /* (optionnel) sur mobile, laisse le texte réel s’afficher pour l’accessibilité */

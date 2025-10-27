@@ -14,42 +14,42 @@ const DocumentationList = [
         title: 'FlowerDocs',
         icon: '🌸',
         description: 'Solution de gestion électronique de documents complète',
-        link: '/docs/flower/v2025',
+        link: '/docs/flower',
         color: '#6c5ce7'
     },
     {
         title: 'Fast2',
         icon: '🚀',
         description: 'Plateforme de migration documentaire puissante',
-        link: '/docs/fast2/v2025/getting-started',
+        link: '/docs/fast2/getting-started',
         color: '#fd79a8'
     },
     {
         title: 'Installation',
         icon: '🔧',
         description: 'Installer & déployer les plateformes',
-        link: '/docs/flower/v2025/installation',
+        link: '/docs/flower/installation',
         color: '#fd79a8'
     },
     {
         title: 'Concepts',
         icon: '💡',
         description: 'Prise en main des concepts généraux',
-        link: '/docs/flower/v2025/concepts',
+        link: '/docs/flower/concepts',
         color: '#0984e3'
     },
     {
         title: 'APIs & Développement',
         icon: '�',
         description: 'Les APIs à votre disposition',
-        link: '/docs/flower/v2025/apis',
+        link: '/docs/flower/apis',
         color: '#6c5ce7'
     },
     {
         title: 'Guides pratiques',
         icon: '�',
         description: 'Tutoriels et guides étape par étape',
-        link: '/docs/flower/v2025/tutoriels',
+        link: '/docs/flower/tutoriels',
         color: '#00b894'
     }
 ];

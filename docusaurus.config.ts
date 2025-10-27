@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'UXO Docs',
   tagline: 'Documentation produits',
-  favicon: 'img/favicon.ico',
+  favicon: 'static/img/uxo.png',
 
   url: 'https://corentinlebas45.github.io',
   baseUrl: '/uxodocs/',
@@ -20,20 +20,17 @@ const config: Config = {
     hooks: { onBrokenMarkdownLinks: 'warn' },
   },
 
-  // ✅ On garde le preset classic pour avoir le thème (@docusaurus/theme-classic)
-  //    et on désactive son instance "docs" par défaut pour éviter tout conflit.
   presets: [
     [
       'classic',
       {
-        docs: false, // ⬅️ important: pas d’instance docs ici
+        docs: false,
         blog: false,
         theme: { customCss: './src/css/custom.css' },
       } satisfies Preset.Options,
     ],
   ],
 
-  // ✅ 3 instances de plugin "docs" (une par produit) avec versioning
   plugins: [
     [
       '@docusaurus/plugin-content-docs',
@@ -68,27 +65,27 @@ const config: Config = {
         versions: { current: { label: 'current' } },
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'uxopian-ai',
+        path: 'docs/uxopian-ai',
+        routeBasePath: 'docs/uxopian-ai',
+        sidebarPath: require.resolve('./sidebars_uxopian-ai.ts'),
+        lastVersion: 'current',
+        versions: { current: { label: 'current' } },
+      },
+    ],
   ],
 
   themeConfig: {
     navbar: {
-      title: 'UXO Docs',
-      logo: { alt: 'UXO', src: 'img/logo.svg' },
+      logo: { alt: 'UXO', src: 'img/uxo.png' },
       items: [
         { type: 'docsVersionDropdown', docsPluginId: 'fast2', position: 'left', className: 'verdd verdd--fast2' },
         { type: 'docsVersionDropdown', docsPluginId: 'arender', position: 'left', className: 'verdd verdd--arender' },
         { type: 'docsVersionDropdown', docsPluginId: 'flowerdocs', position: 'left', className: 'verdd verdd--flowerdocs' },
-
-        // Dropdowns de version (un par produit)
-        // { type: 'doc', docsPluginId: 'fast2', docId: 'index', label: 'Docs Fast2' },
-        // { type: 'docsVersionDropdown', docsPluginId: 'fast2', position: 'left', label: 'Fast2' },
-
-        // { type: 'doc', docsPluginId: 'arender', docId: 'index', label: 'Docs Arender' },
-        // { type: 'docsVersionDropdown', docsPluginId: 'arender', position: 'left', label: 'Arender' },
-
-        // { type: 'doc', docsPluginId: 'flowerdocs', docId: 'index', label: 'Docs Flowerdocs' },
-        // { type: 'docsVersionDropdown', docsPluginId: 'flowerdocs', position: 'left', label: 'Flowerdocs' },
-
+        { type: 'docsVersionDropdown', docsPluginId: 'uxopian-ai', position: 'left', className: 'verdd verdd--uxopian-ai' },
 
         { href: 'https://github.com/corentinlebas45/uxodocs', label: 'GitHub', position: 'right' },
       ],
