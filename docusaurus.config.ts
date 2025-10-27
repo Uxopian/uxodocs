@@ -40,7 +40,7 @@ const config: Config = {
         routeBasePath: 'docs/fast2',
         sidebarPath: require.resolve('./sidebars_fast2.ts'),
         lastVersion: 'current',
-        versions: { current: { label: 'current' } },
+        versions: { current: { label: 'v2025.x.x' } },
       },
     ],
     [
@@ -51,7 +51,7 @@ const config: Config = {
         routeBasePath: 'docs/arender',
         sidebarPath: require.resolve('./sidebars_arender.ts'),
         lastVersion: 'current',
-        versions: { current: { label: 'current' } },
+        versions: { current: { label: 'v2023.14.0' } },
       },
     ],
     [
@@ -62,7 +62,7 @@ const config: Config = {
         routeBasePath: 'docs/flowerdocs',
         sidebarPath: require.resolve('./sidebars_flowerdocs.ts'),
         lastVersion: 'current',
-        versions: { current: { label: 'current' } },
+        versions: { current: { label: 'v2025.3.0' } },
       },
     ],
     [
