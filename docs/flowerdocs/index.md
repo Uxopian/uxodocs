@@ -1,8 +1,9 @@
-# Flowerdocs
+---
+title: Documentation
+---
 
-Pages par version
+import FlowerDocsCards from '@site/src/components/FlowerDocsCards';
 
-- [v1](./v1/index)
-- [v2](./v2/index)
-
-_Créez **docs/flowerdocs/index.base.md** pour personnaliser ce haut de page._
+```xml
+<!-- Commentaire nettoyé -->
+```

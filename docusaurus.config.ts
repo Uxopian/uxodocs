@@ -35,12 +35,29 @@ const config: Config = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'default',
+        path: 'docs_default',
+        routeBasePath: 'docs-default',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'fast2',
         path: 'docs/fast2',
         routeBasePath: 'docs/fast2',
         sidebarPath: require.resolve('./sidebars_fast2.ts'),
         lastVersion: 'current',
         versions: { current: { label: 'v2025.x.x' } },
+      },
+    ],
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        indexDocs: true,
+        indexPages: true,
+        hashed: true,
+        // language: ['fr', 'en'],
       },
     ],
     [
@@ -86,6 +103,9 @@ const config: Config = {
         { type: 'docsVersionDropdown', docsPluginId: 'arender', position: 'left', className: 'verdd verdd--arender' },
         { type: 'docsVersionDropdown', docsPluginId: 'flowerdocs', position: 'left', className: 'verdd verdd--flowerdocs' },
         { type: 'docsVersionDropdown', docsPluginId: 'uxopian-ai', position: 'left', className: 'verdd verdd--uxopian-ai' },
+
+        // search bar on the right (works with Algolia or the local search plugin)
+        { type: 'search', position: 'right' },
 
         { href: 'https://github.com/corentinlebas45/uxodocs', label: 'GitHub', position: 'right' },
       ],
