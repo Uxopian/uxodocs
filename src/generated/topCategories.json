@@ -1,0 +1,130 @@
+{
+  "arender": [
+    {
+      "label": "Configuration",
+      "href": "/docs/arender/configuration/"
+    },
+    {
+      "label": "Development",
+      "href": "/docs/arender/development/"
+    },
+    {
+      "label": "Features",
+      "href": "/docs/arender/features/"
+    },
+    {
+      "label": "Guides",
+      "href": "/docs/arender/guides/"
+    },
+    {
+      "label": "Installation",
+      "href": "/docs/arender/installation/"
+    },
+    {
+      "label": "Learn",
+      "href": "/docs/arender/learn/"
+    },
+    {
+      "label": "Learning",
+      "href": "/docs/arender/learning/"
+    },
+    {
+      "label": "Releases",
+      "href": "/docs/arender/releases/"
+    },
+    {
+      "label": "What Is",
+      "href": "/docs/arender/what-is/"
+    },
+    {
+      "label": "What Is Arender",
+      "href": "/docs/arender/what-is-arender/"
+    }
+  ],
+  "fast2": [
+    {
+      "label": "API",
+      "href": "/docs/fast2/API/"
+    },
+    {
+      "label": "Advanced",
+      "href": "/docs/fast2/advanced/"
+    },
+    {
+      "label": "Assets",
+      "href": "/docs/fast2/assets/"
+    },
+    {
+      "label": "Catalog",
+      "href": "/docs/fast2/catalog/"
+    },
+    {
+      "label": "Components",
+      "href": "/docs/fast2/components/"
+    },
+    {
+      "label": "Cookbooks",
+      "href": "/docs/fast2/cookbooks/"
+    },
+    {
+      "label": "Documents",
+      "href": "/docs/fast2/documents/"
+    },
+    {
+      "label": "Getting Started",
+      "href": "/docs/fast2/getting-started/"
+    }
+  ],
+  "flowerdocs": [
+    {
+      "label": "Apis",
+      "href": "/docs/flowerdocs/apis/"
+    },
+    {
+      "label": "Concepts",
+      "href": "/docs/flowerdocs/concepts/"
+    },
+    {
+      "label": "Configuration",
+      "href": "/docs/flowerdocs/configuration/"
+    },
+    {
+      "label": "Connecteurs",
+      "href": "/docs/flowerdocs/connecteurs/"
+    },
+    {
+      "label": "Installation",
+      "href": "/docs/flowerdocs/installation/"
+    },
+    {
+      "label": "Tutoriels",
+      "href": "/docs/flowerdocs/tutoriels/"
+    }
+  ],
+  "uxopian-ai": [
+    {
+      "label": "Administration",
+      "href": "/docs/uxopian-ai/administration/backup-recovery/"
+    },
+    {
+      "label": "Architecture",
+      "href": "/docs/uxopian-ai/architecture/overview/"
+    },
+    {
+      "label": "Concepts",
+      "href": "/docs/uxopian-ai/concepts/overview/"
+    },
+    {
+      "label": "Configuration",
+      "href": "/docs/uxopian-ai/configuration/api-reference/"
+    },
+    {
+      "label": "Getting Started",
+      "href": "/docs/uxopian-ai/getting-started/installation-guide/"
+    },
+    {
+      "label": "How To Guides",
+      "href": "/docs/uxopian-ai/how-to-guides/contributing/"
+    }
+  ]
+}

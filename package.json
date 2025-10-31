@@ -5,6 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "prebuild": "node ./scripts/generateSecondaryNav.mjs && node ./scripts/generateTopCategories.mjs",
+    "generate:topCategories": "node ./scripts/generateTopCategories.mjs",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",

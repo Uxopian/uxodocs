@@ -1,0 +1,308 @@
+.secondary-nav {
+    background: var(--ifm-color-primary, #f6f6f6);
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    position: sticky;
+    top: var(--uxo-secondary-nav-top, var(--ifm-navbar-height, 56px));
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    /* ensure it's above the docs sidebar */
+}
+
+.secondary-nav__inner {
+    display: flex;
+    gap: 0.6rem;
+    /* reduced gap so categories are closer */
+    padding: 0.35rem 0.5rem;
+    /* tighter vertical padding */
+    /* let navbar__inner handle container width/alignment */
+    align-items: center;
+    overflow-x: auto;
+    justify-content: flex-start;
+}
+
+.secondary-nav__item {
+    color: var(--ifm-navbar-link-color, #4a4a4a);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.secondary-nav__item.active,
+.secondary-nav__item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--ifm-color-primary-dark, #000);
+}
+
+/* classes used for filtering the sidebar */
+.uxo-hidden-by-filter {
+    opacity: 0;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    transition: opacity 160ms ease, max-height 180ms ease;
+}
+
+.secondary-nav__showall {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: inherit;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.secondary-nav__showall:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .secondary-nav__inner {
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Per-product theme overrides (uses gradients and color tokens from src/css/custom.css) */
+.secondary-nav--flowerdocs {
+    background: var(--gradient-purple);
+    color: #fff;
+}
+
+.secondary-nav--flowerdocs .secondary-nav__item {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.secondary-nav--flowerdocs .secondary-nav__item.active,
+.secondary-nav--flowerdocs .secondary-nav__item:hover {
+    background: rgba(255, 255, 255, 0.10);
+    color: #fff;
+}
+
+.secondary-nav--flowerdocs .secondary-nav__showall {
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.secondary-nav--fast2 {
+    background: var(--gradient-turquoise);
+    color: #fff;
+}
+
+.secondary-nav--fast2 .secondary-nav__item {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.secondary-nav--fast2 .secondary-nav__item.active,
+.secondary-nav--fast2 .secondary-nav__item:hover {
+    background: rgba(255, 255, 255, 0.10);
+    color: #fff;
+}
+
+.secondary-nav--fast2 .secondary-nav__showall {
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.secondary-nav--arender {
+    background: var(--gradient-blue);
+    color: #fff;
+}
+
+.secondary-nav--arender .secondary-nav__item {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.secondary-nav--arender .secondary-nav__item.active,
+.secondary-nav--arender .secondary-nav__item:hover {
+    background: rgba(255, 255, 255, 0.10);
+    color: #fff;
+}
+
+.secondary-nav--arender .secondary-nav__showall {
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.secondary-nav--uxopian-ai {
+    background: var(--gradient-sunset);
+    color: #fff;
+}
+
+.secondary-nav--uxopian-ai .secondary-nav__item {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.secondary-nav--uxopian-ai .secondary-nav__item.active,
+.secondary-nav--uxopian-ai .secondary-nav__item:hover {
+    background: rgba(255, 255, 255, 0.10);
+    color: #fff;
+}
+
+.secondary-nav--uxopian-ai .secondary-nav__showall {
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Ensure contrast for product-themed nav when page background is dark/light */
+.secondary-nav--flowerdocs .secondary-nav__item,
+.secondary-nav--fast2 .secondary-nav__item,
+.secondary-nav--arender .secondary-nav__item,
+.secondary-nav--uxopian-ai .secondary-nav__item {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Set global primary color per product by adding class to <html> (uxo-product-<product>) */
+.uxo-product-flowerdocs {
+    --ifm-color-primary: var(--uxo-purple-500);
+    --ifm-color-primary-dark: var(--uxo-purple-300);
+    --ifm-color-primary-lighter: var(--uxo-purple-700);
+}
+
+.uxo-product-fast2 {
+    --ifm-color-primary: var(--uxo-turquoise-1);
+    --ifm-color-primary-dark: var(--uxo-turquoise-2);
+    --ifm-color-primary-lighter: var(--uxo-turquoise-2);
+}
+
+.uxo-product-arender {
+    --ifm-color-primary: var(--uxo-blue-1);
+    --ifm-color-primary-dark: var(--uxo-blue-2);
+    --ifm-color-primary-lighter: var(--uxo-blue-2);
+}
+
+.uxo-product-uxopian-ai {
+    --ifm-color-primary: var(--uxo-sunset-2);
+    --ifm-color-primary-dark: var(--uxo-sunset-3);
+    --ifm-color-primary-lighter: var(--uxo-sunset-2);
+}
+
+/* Small safety: if a rule elsewhere forces link color, increase specificity for common link classes */
+.uxo-product-flowerdocs,
+.uxo-product-fast2,
+.uxo-product-arender,
+.uxo-product-uxopian-ai {
+    /* Make the theme primary color drive link variables used by the Docusaurus theme.
+       This is less invasive than forcing every <a> color and respects components
+       that use dedicated link variables. */
+    --ifm-link-color: var(--ifm-color-primary);
+    --ifm-link-color-hover: var(--ifm-color-primary-dark);
+}
+
+/* Also ensure anchors inside typical doc containers and sidebars follow the
+   product color. We target documentation-specific containers to avoid
+   changing unrelated global links (footer, header utilities, etc.). */
+.uxo-product-flowerdocs .theme-doc-markdown a,
+.uxo-product-fast2 .theme-doc-markdown a,
+.uxo-product-arender .theme-doc-markdown a,
+.uxo-product-uxopian-ai .theme-doc-markdown a,
+.uxo-product-flowerdocs .theme-doc-sidebar a,
+.uxo-product-fast2 .theme-doc-sidebar a,
+.uxo-product-arender .theme-doc-sidebar a,
+.uxo-product-uxopian-ai .theme-doc-sidebar a,
+.uxo-product-flowerdocs .docMainContainer a,
+.uxo-product-fast2 .docMainContainer a,
+.uxo-product-arender .docMainContainer a,
+.uxo-product-uxopian-ai .docMainContainer a,
+.uxo-product-flowerdocs nav.menu a,
+.uxo-product-fast2 nav.menu a,
+.uxo-product-arender nav.menu a,
+.uxo-product-uxopian-ai nav.menu a,
+.uxo-product-flowerdocs .pagination-nav a,
+.uxo-product-fast2 .pagination-nav a,
+.uxo-product-arender .pagination-nav a,
+.uxo-product-uxopian-ai .pagination-nav a {
+    color: var(--ifm-color-primary) !important;
+}
+
+/* Strong overrides: target html class and many doc/sidebar link selectors
+   with !important to beat earlier-loaded theme CSS that may reset link
+   colors. We include :hover/:visited to ensure consistent appearance. */
+html.uxo-product-flowerdocs a,
+html.uxo-product-fast2 a,
+html.uxo-product-arender a,
+html.uxo-product-uxopian-ai a,
+html.uxo-product-flowerdocs .theme-doc-markdown a,
+html.uxo-product-fast2 .theme-doc-markdown a,
+html.uxo-product-arender .theme-doc-markdown a,
+html.uxo-product-uxopian-ai .theme-doc-markdown a,
+html.uxo-product-flowerdocs .docMainContainer a,
+html.uxo-product-fast2 .docMainContainer a,
+html.uxo-product-arender .docMainContainer a,
+html.uxo-product-uxopian-ai .docMainContainer a,
+html.uxo-product-flowerdocs .theme-doc-sidebar a,
+html.uxo-product-fast2 .theme-doc-sidebar a,
+html.uxo-product-arender .theme-doc-sidebar a,
+html.uxo-product-uxopian-ai .theme-doc-sidebar a,
+html.uxo-product-flowerdocs .menu__link,
+html.uxo-product-fast2 .menu__link,
+html.uxo-product-arender .menu__link,
+html.uxo-product-uxopian-ai .menu__link,
+html.uxo-product-flowerdocs .menu__link a,
+html.uxo-product-fast2 .menu__link a,
+html.uxo-product-arender .menu__link a,
+html.uxo-product-uxopian-ai .menu__link a,
+html.uxo-product-flowerdocs .pagination-nav a,
+html.uxo-product-fast2 .pagination-nav a,
+html.uxo-product-arender .pagination-nav a,
+html.uxo-product-uxopian-ai .pagination-nav a {
+    color: var(--ifm-color-primary) !important;
+}
+
+html.uxo-product-flowerdocs a:visited,
+html.uxo-product-fast2 a:visited,
+html.uxo-product-arender a:visited,
+html.uxo-product-uxopian-ai a:visited {
+    color: color-mix(in oklab, var(--ifm-color-primary) 80%, black 20%) !important;
+}
+
+html.uxo-product-flowerdocs a:hover,
+html.uxo-product-fast2 a:hover,
+html.uxo-product-arender a:hover,
+html.uxo-product-uxopian-ai a:hover {
+    color: var(--ifm-color-primary-dark) !important;
+}
+
+/* If a secondary nav exists, ensure left/right sidebars are offset and
+   sticky so they don't jump behind the secondary bar when the page is
+   scrolled. Uses the --uxo-secondary-nav-height set by JS. */
+.uxo-has-secondary-nav .theme-doc-sidebar,
+.uxo-has-secondary-nav .theme-doc-sidebar-container,
+.uxo-has-secondary-nav .sidebar_njMd,
+.uxo-has-secondary-nav nav.menu,
+.uxo-has-secondary-nav .menu,
+.uxo-has-secondary-nav .panel.sidebar-menu,
+.uxo-has-secondary-nav .iq-post-sidebar,
+.uxo-has-secondary-nav #left-sidebar,
+.uxo-has-secondary-nav #right-sidebar {
+    position: sticky;
+    top: calc(var(--ifm-navbar-height, 56px) + var(--uxo-secondary-nav-height, 0px));
+    z-index: 10001;
+    /* above secondary-nav (9999) so sidebars remain visible */
+    align-self: start;
+    /* helps in flex/grid layouts */
+}
+
+/* On small screens, sidebars are typically stacked / off-canvas; don't force sticky there */
+@media (max-width: 1024px) {
+
+    .uxo-has-secondary-nav .theme-doc-sidebar,
+    .uxo-has-secondary-nav .theme-doc-sidebar-container,
+    .uxo-has-secondary-nav .sidebar_njMd,
+    .uxo-has-secondary-nav nav.menu,
+    .uxo-has-secondary-nav .menu,
+    .uxo-has-secondary-nav .panel.sidebar-menu,
+    .uxo-has-secondary-nav .iq-post-sidebar,
+    .uxo-has-secondary-nav #left-sidebar,
+    .uxo-has-secondary-nav #right-sidebar {
+        position: static;
+        top: auto;
+        z-index: auto;
+    }
+}
