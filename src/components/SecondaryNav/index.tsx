@@ -12,20 +12,37 @@ export default function SecondaryNav(): React.ReactElement | null {
     const categoriesMap = categories as Record<string, Cat[]>;
 
     let product: string | null = null;
-    const docsMatch = pathname.match(/\/docs\/([^\/]+)/);
-    if (docsMatch) {
-        product = docsMatch[1];
+    let versionPrefix: string = '';
+
+    // Check for versioned docs pattern: /docs/product/v1/product/...
+    const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v\d+)\/\1\//);
+    if (versionedMatch) {
+        product = versionedMatch[1];
+        versionPrefix = `/${versionedMatch[1]}/${versionedMatch[2]}/${versionedMatch[1]}`;
     } else {
-        for (const k of Object.keys(categoriesMap)) {
-            if (!k) continue;
-            if (pathname.includes(`/docs/${k}/`) || pathname.includes(`/${k}/`)) {
-                product = k;
-                break;
+        // Fallback to original logic for non-versioned docs
+        const docsMatch = pathname.match(/\/docs\/([^\/]+)/);
+        if (docsMatch) {
+            product = docsMatch[1];
+        } else {
+            for (const k of Object.keys(categoriesMap)) {
+                if (!k) continue;
+                if (pathname.includes(`/docs/${k}/`) || pathname.includes(`/${k}/`)) {
+                    product = k;
+                    break;
+                }
             }
         }
     }
 
-    const items: Cat[] = (product && categoriesMap[product]) || [];
+    // Adjust items to include version prefix if present
+    const baseItems: Cat[] = (product && categoriesMap[product]) || [];
+    const items: Cat[] = versionPrefix
+        ? baseItems.map(item => ({
+            ...item,
+            href: item.href.replace(`/docs/${product}/`, `/docs${versionPrefix}/`)
+        }))
+        : baseItems;
 
     if (!items || items.length === 0) return null;
     useSyncSidebarToCategory(items, pathname);
