@@ -32,30 +32,37 @@ async function main() {
             const productDir = path.join(docsDir, product);
             const entries = await fs.readdir(productDir, { withFileTypes: true });
             const categories = [];
+
+            // Helper function to check if a directory contains markdown files recursively
+            async function hasMarkdownFiles(dir) {
+                try {
+                    const items = await fs.readdir(dir, { withFileTypes: true });
+                    for (const it of items) {
+                        const pth = path.join(dir, it.name);
+                        if (it.isFile()) {
+                            if (/\.mdx?$/.test(it.name)) return true;
+                        } else if (it.isDirectory()) {
+                            if (await hasMarkdownFiles(pth)) return true;
+                        }
+                    }
+                } catch (err) {
+                    return false;
+                }
+                return false;
+            }
+
             for (const e of entries) {
                 if (e.isDirectory()) {
                     const catName = e.name;
-                    // only include category if it contains at least one .md or .mdx file (recursively)
-                    async function hasMarkdownFiles(dir) {
-                        try {
-                            const items = await fs.readdir(dir, { withFileTypes: true });
-                            for (const it of items) {
-                                const pth = path.join(dir, it.name);
-                                if (it.isFile()) {
-                                    if (/\.mdx?$/.test(it.name)) return true;
-                                } else if (it.isDirectory()) {
-                                    if (await hasMarkdownFiles(pth)) return true;
-                                }
-                            }
-                        } catch (err) {
-                            return false;
-                        }
-                        return false;
+                    const catDir = path.join(productDir, catName);
+
+                    // Skip category if it doesn't contain any markdown files
+                    const containsMd = await hasMarkdownFiles(catDir);
+                    if (!containsMd) {
+                        console.log(`Skipping empty category: ${product}/${catName}`);
+                        continue;
                     }
 
-                    const catDir = path.join(productDir, catName);
-                    const containsMd = await hasMarkdownFiles(catDir);
-                    if (!containsMd) continue; // skip empty categories
                     const idxPaths = [
                         path.join(productDir, catName, 'index.md'),
                         path.join(productDir, catName, 'index.mdx'),

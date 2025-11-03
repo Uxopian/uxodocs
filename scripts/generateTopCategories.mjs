@@ -39,6 +39,24 @@ async function findFirstMarkdown(dir, maxDepth = 4, depth = 0) {
     return null;
 }
 
+// Helper function to check if a directory contains markdown files recursively
+async function hasMarkdownFiles(dir) {
+    try {
+        const items = await fs.readdir(dir, { withFileTypes: true });
+        for (const it of items) {
+            const pth = path.join(dir, it.name);
+            if (it.isFile()) {
+                if (/\.mdx?$/.test(it.name)) return true;
+            } else if (it.isDirectory()) {
+                if (await hasMarkdownFiles(pth)) return true;
+            }
+        }
+    } catch (err) {
+        return false;
+    }
+    return false;
+}
+
 async function build() {
     const result = {};
     const products = await fs.readdir(docsDir, { withFileTypes: true });
@@ -51,6 +69,14 @@ async function build() {
         const outItems = [];
         for (const c of categories) {
             const catPath = path.join(productPath, c);
+
+            // Skip category if it doesn't contain any markdown files
+            const containsMd = await hasMarkdownFiles(catPath);
+            if (!containsMd) {
+                console.log(`Skipping empty category: ${productName}/${c}`);
+                continue;
+            }
+
             const indexMd = path.join(catPath, 'index.md');
             const underscoreIndex = path.join(catPath, '_index.md');
             let href = `/docs/${productName}/${c}/`;
