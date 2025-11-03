@@ -242,4 +242,18 @@
 /* Fix z-index for product dropdown to appear above secondary nav */
 .navbar__item.dropdown .dropdown__menu {
   z-index: 10000 !important;
+  position: relative !important;
+}
+
+/* Ensure the dropdown parent also has proper positioning */
+.navbar__item.dropdown {
+  position: relative !important;
+  z-index: 10000 !important;
+}
+
+/* Version dropdown specifically */
+.navbar__item--version-menu,
+.navbar__item--version-menu .dropdown__menu {
+  z-index: 10000 !important;
+  position: relative !important;
 }

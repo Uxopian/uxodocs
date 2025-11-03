@@ -6,8 +6,8 @@
     top: var(--uxo-secondary-nav-top, var(--ifm-navbar-height, 56px));
     left: 0;
     width: 100%;
-    z-index: 9999;
-    /* ensure it's above the docs sidebar */
+    z-index: 100;
+    /* ensure it's above the docs sidebar but below dropdowns */
 }
 
 .secondary-nav__inner {
@@ -283,8 +283,8 @@ html.uxo-product-uxopian-ai a:hover {
 .uxo-has-secondary-nav #right-sidebar {
     position: sticky;
     top: calc(var(--ifm-navbar-height, 56px) + var(--uxo-secondary-nav-height, 0px));
-    z-index: 10001;
-    /* above secondary-nav (9999) so sidebars remain visible */
+    z-index: 50;
+    /* above content but below secondary-nav and dropdowns */
     align-self: start;
     /* helps in flex/grid layouts */
 }
