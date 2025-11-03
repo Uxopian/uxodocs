@@ -1,42 +1,39 @@
 ---
-title: "Périmètre"
+title: "Scope"
+description: "Isolate your customers/businesses."
+date: "2001-02-02"
 ---
 
-# Scope
 
 :::info
-Les scopes permettent d'isoler les données entre différents clients / métiers tout en utilisant une même plateforme.
+Scopes make it possible to isolate data between different customers/businesses while using the same platform.
 :::
 
-Un scope définit un silo applicatif en isolant ses données et sa configuration. À ce titre, il définit : 
-
-* les équipes d'utilisateurs 
-* les utilisateurs pouvant accéder à celui-ci
-* les langues utilisées
 
 
-Afin de se connecter à un scope, il est nécessaire de renseigner son identifiant comme paramètre d'URL (par exemple : `https://flowerdocs.com/gui?scope=GEC`).
 
-Si FlowerDocs est derrière un proxy, l'utilisation d'une en-tête HTTP `scope` permet de rediriger l'utilisateur vers FlowerDocs GUI avec le paramètre d'URL `scope` et la valeur fournie.
+A scope defines an application silo by isolating its data and configuration. As such, it defines : 
 
-
-Si le paramètre n'est pas renseigné, le scope par défaut défini avec la propriété `scope.default` dans le fichier de configuration `gui.properties` est utilisé.
-
-```properties
-# Dans gui.properties
-scope.default=PRODUCTION
-```
+* user teams 
+* users who can access it
+* languages used
 
 
-Il est possible d'afficher la sélection du scope sur la page de login en configurant la propriété `scope.edit` dans le fichier de configuration `gui.properties`.
+<br/>
 
-```properties
-# Dans gui.properties
-scope.edit=true
-```
 
-## Sécurité et autorisations
 
+To connect to a scope, you need to enter its identifier as a URL parameter (for example: ``http://flowerdocs.com/gui?scope=GEC``. <br/>
+If FlowerDocs is behind a proxy, using the HTTP header `scope` redirects the user to **FlowerDocs GUI**  with the URL parameter `scope` and the value provided. 
+
+<br/>
+
+If the parameter is not set, the default scope defined with the ``scope.default`` property in the ``gui.properties``  configuration file is used.
+
+<br/>
+ It is possible to display the scope selection on the login page by configuring the ``scope.edit property`` in the ``gui.properties`` configuration file.
+	
+	
 :::info
-L'autorisation de l'accès à un scope est déterminée par la permission de lecture sur la liste de contrôle d'accès définie au niveau du scope. Plus de détails sur ce mécanisme peuvent être consultés dans la section [Sécurité](../securite/).
+Access authorization to a scope is determined by the read permission on the access control list defined at scope level. More details on this mechanism can be found [here](/concepts/securite/autorisation.md).
 :::

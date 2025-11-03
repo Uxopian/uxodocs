@@ -1,33 +1,38 @@
 ---
-title: "Authentification"
-description: "Authentifiez les utilisateurs accédant à l'application"
+title: "Authentication"
+description: "Authenticate users accessing the application"
+date: "2018-03-27T13:20:01+02:00"
 ---
 
-# Authentification
 
 :::info
-Plusieurs mécanismes permettent d'assurer l'authentification des utilisateurs (ou clients).
+Several mechanisms can be used to authenticate users (or clients).
 :::
 
-## Annuaire d'entreprise
 
-FlowerDocs supporte nativement le protocole LDAPv2 afin d'authentifier les utilisateurs :  
 
-* récupération des groupes
-* attibuts spéficiques (mail, ...)
-* changement de mot de passe 
+# Company directory
+
+FlowerDocs natively supports the LDAPv2 protocol for user authentication:  
+
+* recovery of groups
+* special attributes (mail, ...)
+* change password 
  
-Les annuaires qualifiés sont : 
+Qualified directories are: 
 
 * Microsoft Active Directory 
 * OpenLDAP
 * Apache Directory Server
 
-## OpenID Connect
+# OpenID Connect
 
-Afin d'intégrer FlowerDocs avec un système d'authentification existant et mutualisé à travers le système d'information, FlowerDocs supporte le protocole OpenID Connect. 
-Ce protocole permet d'authentifier un utilisateur auprès de FlowerDocs GUI. 
+To integrate FlowerDocs with an existing authentication system shared across the information system, FlowerDocs supports the OpenID Connect protocol. 
+This protocol is used to authenticate a user to **FlowerDocs GUI**. 
 
-## Jeton
+# Token
 
-Les APIs de FlowerDocs Core permettent la génération de jeton utilisateur. Le jeton généré peut ensuite être ré-utilisé afin d'authentifier des requêtes effectuées auprès de FlowerDocs Core ou pour ouvrir FlowerDocs GUI.
+The **FlowerDocs Core** APIs enable user tokens to be generated. The token generated can then be re-used to authenticate requests made to **FlowerDocs Core** or to open **FlowerDocs GUI**.
+
+
+More information can be found [here](/config/core/securite/token.md).

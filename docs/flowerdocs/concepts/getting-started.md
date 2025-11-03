@@ -1,22 +1,26 @@
 ---
 title: "Getting Started"
-description: "Premiers pas avec FlowerDocs"
+date: "2000-02-01T12:20:01+02:00"
 ---
 
-:::info
-Prenez en main les concepts liés au modèle de données FlowerDocs conçu dans le but de faciliter : 
-
-* la compréhension
-* la ré-utilisabilité des objets définis
-* l'administration de la solution  
-:::
-
-
-Cette section décrit brièvement les concepts nécessaires à la mise en place d'une solution basée sur FlowerDocs.
 
 
 :::info
-**Vos documents sont encore au _format papier_ ?** 
+Get to grips with the concepts behind the FlowerDocs data model, designed to facilitate: 
 
-[Contactez nous](https://www.arondor.com/arondor/) pour en connaître plus sur notre expertise concernant la dématérialisation et mettre en place une chaîne de dématérialisation afin d'alimenter votre solution FlowerDocs.
+* understanding
+* reusability of defined objects
+* solution administration
 :::
+
+
+
+This section briefly describes the concepts involved in setting up a FlowerDocs-based solution.
+
+<br/>
+:::info
+**Are your documents still in _paper format_?** 
+
+[Contact us](https://www.arondor.com/arondor/) to find out more about our expertise in dematerialisation and set up a dematerialisation chain to feed your FlowerDocs solution.
+:::
+

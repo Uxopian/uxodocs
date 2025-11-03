@@ -1,99 +1,125 @@
 ---
-title: "Autorisation"
-description: "Sécurisez votre application"
+title: "Authorisation"
+description: "Secure your application"
+date: "2018-03-27T13:20:01+02:00"
 ---
 
-# Autorisation
 
 :::info
-Le rôle d'un objet de sécurité est de gérer les différentes permissions sur les objets dans FlowerDocs (composants, recherches sauvegardées, scopes, ...). Ces objets de sécurité sont référencés sur les objets FlowerDocs.
+The role of a security object is to manage the various permissions on objects in FlowerDocs (components, saved searches, scopes, etc.). These security objects are referenced on FlowerDocs objects.
 :::
 
-Au sein de l'application, nous définissons deux types d'objets de sécurité : 
 
-* Liste de contrôle d'accès (ACL)
+Within the application, we define two types of security objects: 
+
+* Access control list (ACL)
 * Proxy
 
-Ces objets de sécurité permettent d'autoriser (ou d'interdire) une identité à effectuer une action.
+These security objects are used to authorise (or prohibit) an identity to perform an action.
 
-## Les objets de sécurité
 
-### Liste de contrôle d'accès (ACL)
+# Security objects
 
-Une liste de contrôle d'accès contient une ou plusieurs entrées de contrôle d'accès (`ACE`). 
+## Access control list (ACL)
 
-Dans chaque entrée, les différentes permissions sont définies pour un ensemble d'identités (utilisateur, groupe, équipe).
+An access control list contains one or more access control entries (`ACE`). 
 
-Par exemple, quand un utilisateur veut accéder en lecture à un composant, l'application va évaluer la permission de lecture en fonction de l'ACL portée par le composant.
+In each entry, different permissions are defined for a set of identities (user, group, team).
+
+<br/>
+
+For example, when a user wants read access to a component, the application will evaluate the read permission according to the ACL carried by the component.
 
 :::info
-Si l'utilisateur n'appartient à aucune identité définie dans l'ACL référencée par un composant, il est considéré qu'il n'a pas de droit d'accès à ce composant. 
+If the user does not belong to any identity defined in the ACL referenced by a component, it is considered that he/she has no access rights to this component. 
 
-Les classes de composants portent une ACL qui est appliquée par défaut à la création d'un composant de cette classe. Cette ACL peut être modifiée plus tard par le biais d'intégration. 
+Component classes carry an ACL which is applied by default when a component of this class is created. This ACL can be modified later via integration.
 :::
+ 
 
-#### Ordre des entrées de contrôles d'accès (ACE)
+### Order of access control inputs (ACE)
 
-L'ordre de définition des `ACE` est important car il correspond à l'ordre d'évaluation de celles-ci. La première entrée correspondant à l'utilisateur, un de ses groupes, une de ses équipes ou __*__, sera celle utilisée pour évaluer les différentes permissions de l'utilisateur pour un composant. 
+The order in which `ACE` are defined is important, as it corresponds to the order in which they are evaluated. The first entry corresponds to the user, one of his groups, one of his teams or __*__, will be the one used to evaluate the various user permissions for a component. 
 
-Par exemple, si la première entrée a pour identité __*__ permettant de voir le composant et que la deuxième a pour identité l'identifiant de l'utilisateur X ne permettant pas de voir le composant, l'utilisateur pourra voir ce composant. 
+<br/>
 
-En inversant les deux entrées de l'`ACL`, tous les utilisateurs pourront voir le composant sauf cet utilisateur X.
+For example, if the first entry has the identity __*__ to view the component, and the second has the identity of the user's identifier X which does not allow the component to be viewed, the user will be able to view this component. 
 
-:::warning
-* Lors de la mise en place d'`ACL`, il est préconnisé de ne pas définir d'entrées avec l'identité __*__.
+By inverting the two`ACL` entries, all users except user X will be able to see the component.
 
-En effet, cela voudrait dire qu'un utilisateur ne faisant pas partie d'un groupe pourrait quand même avoir les permissions de l'`ACL`.
-Il est préférable d'ajouter le nom de tous les groupes/profils en tant qu'entité.
 
-* Il est préconnisé de ne pas dépasser 1000 ACL sur un scope.
-:::
 
-### Proxy d'ACL
+* When setting up`ACL`, it is advisable not to define entries with the identity __*__.
 
-:::warning
-Cette fonctionnalité est en beta. Pour toute volonté d'intégration utilisant les Proxy d'ACl, nous vous invitons à contacter l'équipe FlowerDocs afin de vous accompagner pour trouver une solution optimale à votre besoin.
-:::
+Indeed, this would mean that a user who is not part of a group could still have the permissions of the`ACL`.
+It is preferable to add the name of all groups/profiles as an entity.
 
-Un proxy permet de définir une sécurité dynamique en fonction d'une ou plusieurs règles. 
+* It is recommended not to exceed 1000 ACL on a scope.
 
-Chaque règle correspond à une liste de conditions et un identifiant d'ACL. 
-Si toutes les conditions d'une règle sont satisfaites, les permissions de l'utilisateur sont déterminées selon l'ACL référencée. 
 
-Trois types de conditions sont supportés par l'application :
+## ACL Proxy
 
-* Condition sur les tags
-* Condition sur la classe
-* Condition sur l'utilisateur
 
+This feature is in beta. For any integration requirements using ACl's proxies, please contact the FlowerDocs team to help you find the best solution for your needs.
+
+
+A proxy can be used to define dynamic security based on one or more rules. 
+
+Each rule corresponds to a list of conditions and an ACL identifier. 
+If all the conditions of a rule are met, the user's permissions are determined according to the referenced ACL. 
+
+Three types of conditions are supported by the application:
+
+
+* [Condition on tags](/concepts/tags/conditionnel.md#condition-sur-les-tags.md) 
+* [Condition on class](/concepts/tags/conditionnel.md#condition-sur-la-class.md)
+* [Condition on user](/concepts/tags/conditionnel.md#condition-sur-l-user.md)
+
+
+:::note[Example]
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ACLProxy name="Acl proxy for document" xmlns="https:flower.comdocsdomainacl" xmlns:common="https:flower.comdocsdomaincommon">
-	acl-proxy-document
-	<rules xmlns:xsi="http:www.w3.org2001XMLSchema-instance" xsi:type="ACLConditionalRule">
-		<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-	<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-	<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-	<!-- Commentaire nettoyé -->
+<ACLProxy name="Acl proxy for document" xmlns="http://flower.com/docs/domain/acl" xmlns:common="http://flower.com/docs/domain/common">
+	<common:id>acl-proxy-document</common:id>
+	<rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ACLConditionalRule">
+		<conditions>${user.authorities}.contains("DSI")</conditions>
+		<conditions>${tags.MailType}==Cancellation</conditions>
+		<aclId>acl-courrier-ingoing</aclId>
+	</rules>
+	<rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ACLConditionalRule">
+		<conditions>${user.authorities}.contains("ACCOUNTING")</conditions>
+		<conditions>${data.classid}==IngoingMail</conditions>
+		<aclId>acl-courrier-ingoing</aclId>
+	</rules>
+	<rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ACLConditionalRule">
+		<conditions>!${user.authorities}.contains("LEGAL")</conditions>
+		<conditions>${tags.MailType}!=Contract</conditions>
+		<conditions>${tags.MailType}!=Cancellation</conditions>
+		<aclId>acl-courrier-entrant</aclId>
+	</rules>
+</ACLProxy>
 ```
-
-:::info
-Tout comme les ACLs, si aucune des règles n'est satisfaite, il est considéré que l'utilisateur n'a pas de droit d'accès au composant. 
 :::
 
-## Association d'un objet de sécurité
 
-Un objet de sécurité est associé à un objet à travers son champ `ACL`. Ce champ ne porte que l'identifiant de l'ACL. Ainsi une ACL peut être définie sur plusieurs composants afin de fournir la possibilité de gérer des politiques de sécurité communes à des ensembles de composant. 
+<br/>
+:::info
+Like ACLs, if none of the rules is satisfied, the user is considered to have no access rights to the component.
+:::
 
-L'ACL référencée, par exemple sur un composant, sera utilisée pour déterminer si un utilisateur est autorisé ou non à effectuer une action sur celui-ci.
 
-La création d'un composant est un cas particulier. En effet, celui-ci n'existant pas encore, c'est l'ACL définie au niveau de la classe de composants qui est évaluée. Ainsi afin d'autoriser un utilisateur à créer un composant, il est nécessaire qu'il possède la permission `CREATE` sur l'ACL référencée au niveau de sa classe.
+
+# Security object Association
+
+A security object is associated with an object through its `ACL` field. This field contains only the ACL identifier. In this way, an ACL can be defined on several components, providing the possibility of managing security policies common to sets of components. 
+
+
+The ACL referenced, for example on a component, will be used to determine whether or not a user is authorised to perform an action on it.
+
+<br/>
+Creating a component is a special case. As this does not yet exist, it is the ACL defined at component class level that is evaluated. To authorise a user to create a component, he or she must have the `CREATE` permission on the ACL referenced at class level. 
+
+
+
+
+

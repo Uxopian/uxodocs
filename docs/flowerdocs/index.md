@@ -1,9 +1,5 @@
 ---
-title: Documentation
+title: "Documentation"
+description: "Consult the various documentations of the product."
 ---
 
-import FlowerDocsCards from '@site/src/components/FlowerDocsCards';
-
-```xml
-<!-- Commentaire nettoyé -->
-```

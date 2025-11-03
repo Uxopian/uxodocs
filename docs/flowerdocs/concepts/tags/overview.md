@@ -1,57 +1,63 @@
 ---
 title: "Overview"
-description: "Taguez vos composants pour les retrouver plus facilement"
+description: "Tag your components to find them more easily."
+date: "2018-03-02T13:20:01+02:00"
 ---
 
-# Overview
 
-Les `tags` sont des métadonnées définies sur un composant permettant de le caractériser et de le retrouver plus facilement. 
+ `tags` are metadata defined on a component to characterize it and make it easier to find. 
 
-Ces métadonnées peuvent être de différents types afin d'assurer une cohérence des données stockées dans FlowerDocs.
+This metadata can be of different types to ensure consistency of the data stored in FlowerDocs.
 
-Une classe de tags permet de définir la typologie et les caractéristiques d'un tag au sein d'un scope. 
-Cette classe de tags s'applique à l'ensemble des tags associés aux composants et est composée des éléments suivants : 
+<br/>
+A `tag class` defines the typology and characteristics of a tag within a scope. 
+This tag class applies to all tags associated with components, and is made up of the following elements: 
 
-* `id` : identifiant technique du tag
-* `displayNames` : nom d'affichage du tag (ex : Nom agence, N° immeuble, etc.) internationalisé
-* `searchable` : booléen pour rendre le tag recherchable ou non  
-* `type` : type du tag
+* `id`: technical tag identifier
+* `displayNames`: tag display name (ex : Agency name, building no., etc.) internationalized
+* `searchable`: Boolean to make the tag searchable or not  
+* `Type`: tag id
 
-| Type | Description |
+|Type|Description|
 |------|---------------------|
-| `STRING` | [Chaîne de caractères](textuel.md) (ex : référence, nom du client …) |
-| `TEXT` | [Champ texte](textuel.md) (ex : commentaire …) |
-| `CHOICELIST` | [Liste de choix](liste.md) (ex : type de document …) |
-| `ICON` | [Liste d'icônes](liste.md) (ex : canal d'entrée …) |
-| `FREELIST` | [Liste libre](liste.md) (ex : référence liée à un SI externe …) |
-| `CONDITIONAL` | [Liste de valeurs conditionnées](conditionnel.md) (ex : liste des services en fonction de la direction …) |
-| `FLOAT` | [Nombre décimal](numerique.md) (ex : taux, proportion …) |
-| `INT` | [Nombre entier](numerique.md) (ex : nombre de pièces justificatives …) |
-| `CURRENCY` | [Nombre décimal](numerique.md) limité à 2 décimales (ex : montant …) |
-| `DATE` | [Date](date.md) (ex : date d'échéance …) |
-| `BOOLEAN` | Case à cocher (ex : secret médical …) |
-| `USER` | Lié à un utilisateur de l'annuaire (ex : responsable …) |
+|`STRING`|[String](/concepts/tags/textuel.md) (e.g. reference, customer name ...)|
+|`TEXT`|[Text field](/concepts/tags/textuel.md) (ex: comment ...)|
+|`CHOICELIST`|[Choice list](/concepts/tags/liste.md) (e.g. type of document ...)|
+|`ICON`|[Icon list](/concepts/tags/liste.md) (e.g. input channel ...)|
+|`FREELIST`|[Choice list](/concepts/tags/liste.md) (e.g.: reference linked to an external IS ...)|
+|`CONDITIONAL`|[Conditional value list](/concepts/tags/liste.md) (e.g.: list of departments according to direction ...)|
+|`FLOAT`|[Decimal number](/concepts/tags/numerique.md) (e.g.: rate, proportion ...)|
+|`INT`|[Integer](/concepts/tags/numerique.md) (e.g.: number of supporting documents ...)|
+|`CURRENCY`|[Decimal number](/concepts/tags/numerique.md) limited to 2 decimal places (e.g.: amount ...)|
+|`DATE`|[Date](/concepts/tags/date.md) (e.g. due date ...)|
+|`BOOLEAN`|Check box (e.g.: medical confidentiality ...)|
+|`USER`|Linked to a directory user (e.g. manager)|
 
+:::note[Example]
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-	**Identifier**
-	
-		Display name
-	
-	
-		Nom d'affichage
-	
-	
-        <!-- Commentaire nettoyé -->
-        <!-- Commentaire nettoyé -->
-        <!-- Commentaire nettoyé -->
-    
-	TYPE
-    true
-
+<ns2:TagClass xmlns="http://flower.com/docs/domain/common" xmlns:ns2="http://flower.com/docs/domain/tagclass"
+	xmlns:ns3="http://flower.com/docs/domain/i18n">
+	<id>Identifier</id>
+	<ns2:displayNames language="EN">
+		<ns3:value>Display name</ns3:value>
+	</ns2:displayNames>
+	<ns2:displayNames language="FR">
+		<ns3:value>Display name</ns3:value>
+	</ns2:displayNames>
+	<ns2:data>
+        <owner>owner</owner>
+        <creationDate>2017-10-03 23:26:32.169 +0200</creationDate>
+        <lastUpdateDate>2017-04-02 11:44:40.909 +0200</lastUpdateDate>
+    </ns2:data>
+	<ns2:type>TYPE</ns2:type>
+    <ns2:searchable>true</ns2:searchable>
+</ns2:TagClass>
 ```
+:::
+
 
 :::info
-Ajoutez des tags à vos composants en référençant une classe de tags au niveau d'une classe de composant.
+Add tags to your components by [referencing a tag class](/concepts/classes/tag-reference.md) at component class level.
 :::
+

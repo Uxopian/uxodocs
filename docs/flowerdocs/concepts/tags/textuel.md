@@ -1,37 +1,45 @@
 ---
-title: "Textuel"
-description: "Utilisez les tags textuels"
+title: "Textual"
+description: "Use textual tags."
+date: "2018-03-07T13:20:01+02:00"
 ---
 
-# Textuel
 
-Le modèle de données FlowerDocs offre la possibilité de définir des tags textuels : 
+The FlowerDocs data model allows you to define textual tags: 
 
-* les chaines de caractère `STRING`
-* les zones de texte `TEXT`
+* character strings `STRING`
+* text fields `TEXT`
 
-## Chaînes de caractères
 
-Ce type permet la saisie libre d'une chaîne de caractère.
-Sur ce type de tag, il est possible d'ajouter une expression régulière dans l'attribut `pattern` afin de valider la saisie de l'utilisateur.
+# Character strings
 
+This type allows free input of a character string.
+With this type of tag, you can add a regular expression to the `pattern` attribute to validate the user's input.
+
+:::note[Example]
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
-	**NomClient**
-    STRING
-    [A-Z]*
-
+<ns2:TagClass xmlns="http://flower.com/docs/domain/common" xmlns:ns2="http://flower.com/docs/domain/tagclass"
+	xmlns:ns3="http://flower.com/docs/domain/i18n">
+	<id>CustomerName</id>
+    <ns2:type>STRING</ns2:type>
+    <ns2:pattern>[A-Z]*</ns2:pattern>
+</ns2:TagClass>
 ```
+:::
 
-## Texte
 
-Ce type permet la saisie libre dans une zone de texte.
+# Text
 
+This type allows free input in a text zone.
+
+:::note[Example]
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
-	**Commentaire**
-    TEXT
-
+<ns2:TagClass xmlns="http://flower.com/docs/domain/common" xmlns:ns2="http://flower.com/docs/domain/tagclass"
+	xmlns:ns3="http://flower.com/docs/domain/i18n">
+	<id>Comment</id>
+    <ns2:type>TEXT</ns2:type>
+</ns2:TagClass>
 ```
+:::

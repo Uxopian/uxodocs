@@ -1,8 +1,9 @@
 ---
-title: "Sécurité"
-description: "Concepts de sécurité dans FlowerDocs"
+title: "Security"
+date: "2006-02-02"
 ---
-
-# Sécurité
-
-Cette section couvre les concepts de sécurité dans FlowerDocs, incluant l'authentification, l'autorisation et la gestion des identités.
+---
+title: Security
+root: false 
+date: 2006-02-02
+---
