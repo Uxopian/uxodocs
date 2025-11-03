@@ -1,4 +1,3 @@
-
 /**
  * Uxopian — refreshed color direction
  * - Primary: Uxo Purple (700/500/300)
@@ -28,8 +27,10 @@
 
   --uxo-green-1: #029C75;
   --uxo-green-2: #018262;
-  --uxo-green-3: #00664E; /* per spec (shared deep stop) */
-  --uxo-green-4: #024D43; /* per spec */
+  --uxo-green-3: #00664E;
+  /* per spec (shared deep stop) */
+  --uxo-green-4: #024D43;
+  /* per spec */
 
   --uxo-turquoise-1: #3A8F9D;
   --uxo-turquoise-2: #2F7D8B;
@@ -52,7 +53,8 @@
   --ifm-color-primary: var(--uxo-purple-500);
   /* choose darker chain biased toward depth/contrast */
   --ifm-color-primary-dark: var(--uxo-purple-300);
-  --ifm-color-primary-darker: #5A007A; /* from purple gradient for deep accents */
+  --ifm-color-primary-darker: #5A007A;
+  /* from purple gradient for deep accents */
   --ifm-color-primary-darkest: #490064;
   /* lighter chain biased toward vibrancy */
   --ifm-color-primary-light: color-mix(in oklab, var(--uxo-purple-500), white 18%);
@@ -60,7 +62,7 @@
   --ifm-color-primary-lightest: color-mix(in oklab, var(--uxo-purple-700), white 22%);
 
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0,0,0,0.06);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.06);
 }
 
 /* Dark theme tuning
@@ -73,7 +75,7 @@
   --ifm-color-primary-light: color-mix(in oklab, var(--uxo-purple-700), white 14%);
   --ifm-color-primary-lighter: color-mix(in oklab, var(--uxo-purple-700), white 24%);
   --ifm-color-primary-lightest: color-mix(in oklab, var(--uxo-purple-700), white 34%);
-  --docusaurus-highlighted-code-line-bg: rgba(255,255,255,0.06);
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.06);
 }
 
 /* ------------------------------
@@ -86,16 +88,43 @@
 }
 
 /* Gradient utility helpers */
-.bg-gradient-purple { background-image: var(--gradient-purple) !important; color: #fff; }
-.bg-gradient-sunset { background-image: var(--gradient-sunset) !important; color: #fff; }
-.bg-gradient-green { background-image: var(--gradient-green) !important; color: #fff; }
-.bg-gradient-turquoise { background-image: var(--gradient-turquoise) !important; color: #fff; }
-.bg-gradient-blue { background-image: var(--gradient-blue) !important; color: #fff; }
+.bg-gradient-purple {
+  background-image: var(--gradient-purple) !important;
+  color: #fff;
+}
+
+.bg-gradient-sunset {
+  background-image: var(--gradient-sunset) !important;
+  color: #fff;
+}
+
+.bg-gradient-green {
+  background-image: var(--gradient-green) !important;
+  color: #fff;
+}
+
+.bg-gradient-turquoise {
+  background-image: var(--gradient-turquoise) !important;
+  color: #fff;
+}
+
+.bg-gradient-blue {
+  background-image: var(--gradient-blue) !important;
+  color: #fff;
+}
 
 /* Text color helpers mapped to primaries */
-.text-uxo-purple-700 { color: var(--uxo-purple-700) !important; }
-.text-uxo-purple-500 { color: var(--uxo-purple-500) !important; }
-.text-uxo-purple-300 { color: var(--uxo-purple-300) !important; }
+.text-uxo-purple-700 {
+  color: var(--uxo-purple-700) !important;
+}
+
+.text-uxo-purple-500 {
+  color: var(--uxo-purple-500) !important;
+}
+
+.text-uxo-purple-300 {
+  color: var(--uxo-purple-300) !important;
+}
 
 /* Buttons: primary uses purple gradient by default */
 .button--primary,
@@ -109,10 +138,29 @@
 }
 
 /* Optional alt button styles for other gradients */
-.button--sunset { background-image: var(--gradient-sunset) !important; color: #fff !important; border: none !important; }
-.button--green { background-image: var(--gradient-green) !important; color: #fff !important; border: none !important; }
-.button--turquoise { background-image: var(--gradient-turquoise) !important; color: #fff !important; border: none !important; }
-.button--blue { background-image: var(--gradient-blue) !important; color: #fff !important; border: none !important; }
+.button--sunset {
+  background-image: var(--gradient-sunset) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.button--green {
+  background-image: var(--gradient-green) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.button--turquoise {
+  background-image: var(--gradient-turquoise) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.button--blue {
+  background-image: var(--gradient-blue) !important;
+  color: #fff !important;
+  border: none !important;
+}
 
 /* Focus state for accessibility (visible on dark and light) */
 .button--primary:focus,
@@ -163,10 +211,21 @@
   color: var(--ifm-navbar-link-hover-color);
 }
 
-.navbar__link.verdd--fast2::before { content: 'Fast2'; }
-.navbar__link.verdd--arender::before { content: 'Arender'; }
-.navbar__link.verdd--flowerdocs::before { content: 'Flowerdocs'; }
-.navbar__link.verdd--uxopian-ai::before { content: 'Uxopian AI'; }
+.navbar__link.verdd--fast2::before {
+  content: 'Fast2';
+}
+
+.navbar__link.verdd--arender::before {
+  content: 'Arender';
+}
+
+.navbar__link.verdd--flowerdocs::before {
+  content: 'Flowerdocs';
+}
+
+.navbar__link.verdd--uxopian-ai::before {
+  content: 'Uxopian AI';
+}
 
 @media (max-width: 996px) {
   .navbar__link.verdd {
@@ -174,5 +233,13 @@
     -webkit-text-fill-color: inherit;
     color: var(--ifm-navbar-link-color) !important;
   }
-  .navbar__link.verdd::before { content: none; }
+
+  .navbar__link.verdd::before {
+    content: none;
+  }
+}
+
+/* Fix z-index for product dropdown to appear above secondary nav */
+.navbar__item.dropdown .dropdown__menu {
+  z-index: 10000 !important;
 }
