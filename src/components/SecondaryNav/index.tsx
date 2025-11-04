@@ -134,16 +134,48 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
             if (!s) return '';
             try {
                 const url = new URL(s, window.location.origin);
-                return url.pathname.replace(/^\/+|\/+$/g, '');
+                let path = url.pathname.replace(/^\/+|\/+$/g, '');
+                // Remove /uxodocs/ prefix if present to match hrefs
+                if (path.startsWith('uxodocs/')) {
+                    path = path.substring(8); // Remove 'uxodocs/'
+                }
+                return path;
             } catch (e) {
-                return String(s).replace(/^\/+|\/+$/g, '');
+                let path = String(s).replace(/^\/+|\/+$/g, '');
+                // Remove /uxodocs/ prefix if present
+                if (path.startsWith('uxodocs/')) {
+                    path = path.substring(8);
+                }
+                return path;
             }
         };
 
+        const currentPath = normalize(pathname);
+
+        // Find which category the current page belongs to by checking all items
         const active = items.find((it) => {
-            const n = normalize(it.href);
-            const cur = normalize(pathname);
-            return cur === n || cur.startsWith(n) || cur.includes(`/${n}`) || n.includes(cur);
+            const itemHref = normalize(it.href);
+            // Extract the category base path from this item
+            const itemSegments = itemHref.split('/').filter(Boolean);
+            const docsIdx = itemSegments.indexOf('docs');
+
+            if (docsIdx !== -1 && itemSegments.length > docsIdx + 2) {
+                const product = itemSegments[docsIdx + 1];
+                const potentialVersion = itemSegments[docsIdx + 2];
+                let itemCategoryBase = '';
+
+                if (potentialVersion && potentialVersion.match(/^v\d+$/)) {
+                    if (itemSegments.length > docsIdx + 4) {
+                        itemCategoryBase = itemSegments.slice(0, docsIdx + 5).join('/');
+                    }
+                } else {
+                    itemCategoryBase = itemSegments.slice(0, docsIdx + 3).join('/');
+                }
+
+                // Check if current page is under this category
+                return itemCategoryBase && currentPath.startsWith(itemCategoryBase);
+            }
+            return false;
         });
 
         const findSidebar = () => {
@@ -159,11 +191,16 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
 
         const apply = (sidebar: Element | null) => {
             if (!sidebar) return;
-            const groups = Array.from(sidebar.querySelectorAll('.menu__list-item, details.menu__list-item, .theme-doc-sidebar-item-category, .theme-doc-sidebar-item-link')) as Element[];
+
+            const mainMenu = sidebar.querySelector('.menu__list, ul.menu__list');
+            if (!mainMenu) return; const groups = Array.from(mainMenu.children).filter(el =>
+                el.classList.contains('menu__list-item') ||
+                el.tagName.toLowerCase() === 'li'
+            ) as Element[];
 
             if (!active) {
                 groups.forEach((g) => {
-                    (g as HTMLElement).style.display = '';
+                    (g as HTMLElement).classList.remove('uxo-hidden-by-filter');
                     if (g instanceof HTMLDetailsElement) g.open = false;
                 });
                 return;
@@ -171,16 +208,79 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
 
             const normCat = normalize(active.href);
 
+            const catSegments = normCat.split('/').filter(Boolean);
+            let categoryBasePath = '';
+
+            const docsIdx = catSegments.indexOf('docs');
+            if (docsIdx !== -1 && catSegments.length > docsIdx + 2) {
+                const product = catSegments[docsIdx + 1];
+                const potentialVersion = catSegments[docsIdx + 2];
+
+                if (potentialVersion && potentialVersion.match(/^v\d+$/)) {
+                    if (catSegments.length > docsIdx + 4) {
+                        categoryBasePath = catSegments.slice(0, docsIdx + 5).join('/');
+                    }
+                } else {
+                    categoryBasePath = catSegments.slice(0, docsIdx + 3).join('/');
+                }
+            }
+
+            if (!categoryBasePath) {
+                groups.forEach((g) => (g as HTMLElement).classList.remove('uxo-hidden-by-filter'));
+                return;
+            }
+
             groups.forEach((g) => {
                 try {
-                    const links = Array.from(g.querySelectorAll('a')) as HTMLAnchorElement[];
-                    const has = links.some((a) => {
-                        const p = normalize(a.getAttribute('href'));
-                        return p && (p === normCat || p.startsWith(normCat) || p.includes(`/${normCat}`));
-                    });
-                    if (has) {
+                    let directLink: HTMLAnchorElement | null = null;
+
+                    directLink = g.querySelector(':scope > a') ||
+                        g.querySelector(':scope > .menu__link') ||
+                        g.querySelector(':scope > summary > a') ||
+                        g.querySelector(':scope > div > a');
+
+                    if (!directLink) {
+                        // No direct link found, keep visible (might be a container)
                         (g as HTMLElement).classList.remove('uxo-hidden-by-filter');
-                        if (g instanceof HTMLDetailsElement) g.open = true;
+                        return;
+                    }
+
+                    const linkText = directLink.textContent?.trim() || 'unknown';
+                    const directLinkPath = normalize(directLink.getAttribute('href'));
+                    let shouldShow = false;
+
+                    if (directLinkPath) {
+                        if (directLinkPath === categoryBasePath) {
+                            shouldShow = true;
+                        } else if (directLinkPath.startsWith(categoryBasePath + '/')) {
+                            shouldShow = true;
+                        } else if (categoryBasePath.startsWith(directLinkPath + '/')) {
+                            const remaining = categoryBasePath.substring(directLinkPath.length + 1);
+                            const levels = remaining.split('/').filter(Boolean).length;
+                            if (levels === 1) {
+                                shouldShow = true;
+                            }
+                        }
+                    } else {
+                        const allLinks = Array.from(g.querySelectorAll('a')) as HTMLAnchorElement[];
+                        shouldShow = allLinks.some((a) => {
+                            const linkPath = normalize(a.getAttribute('href'));
+                            if (!linkPath) return false;
+
+                            return linkPath === categoryBasePath ||
+                                linkPath.startsWith(categoryBasePath + '/') ||
+                                (categoryBasePath.startsWith(linkPath + '/') &&
+                                    categoryBasePath.substring(linkPath.length + 1).split('/').filter(Boolean).length === 1);
+                        });
+                    }
+
+                    if (shouldShow) {
+                        (g as HTMLElement).classList.remove('uxo-hidden-by-filter');
+                        if (g instanceof HTMLDetailsElement && directLinkPath) {
+                            if (directLinkPath === currentPath || currentPath.startsWith(directLinkPath + '/')) {
+                                g.open = true;
+                            }
+                        }
                     } else {
                         (g as HTMLElement).classList.add('uxo-hidden-by-filter');
                         if (g instanceof HTMLDetailsElement) g.open = false;
@@ -221,7 +321,7 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
             const sidebar = findSidebar();
             if (sidebar) {
                 const groups = Array.from(sidebar.querySelectorAll('.menu__list-item, details.menu__list-item, .theme-doc-sidebar-item-category, .theme-doc-sidebar-item-link')) as Element[];
-                groups.forEach((g) => ((g as HTMLElement).style.display = ''));
+                groups.forEach((g) => (g as HTMLElement).classList.remove('uxo-hidden-by-filter'));
             }
         };
     }, [items, pathname]);

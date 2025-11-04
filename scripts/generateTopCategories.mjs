@@ -57,6 +57,36 @@ async function hasMarkdownFiles(dir) {
     return false;
 }
 
+// Helper function to extract title from markdown front matter
+async function extractTitleFromMarkdown(filePath) {
+    try {
+        const content = await fs.readFile(filePath, 'utf8');
+        const frontMatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---/);
+        if (frontMatterMatch) {
+            const frontMatter = frontMatterMatch[1];
+            const titleMatch = frontMatter.match(/^title:\s*["']?(.+?)["']?\s*$/m);
+            if (titleMatch) {
+                return titleMatch[1].replace(/^["']|["']$/g, '');
+            }
+        }
+    } catch (err) {
+        // If we can't read the file, return null
+    }
+    return null;
+}
+
+// Helper function to extract label from _category_.json
+async function extractLabelFromCategoryJson(filePath) {
+    try {
+        const content = await fs.readFile(filePath, 'utf8');
+        const json = JSON.parse(content);
+        return json.label || null;
+    } catch (err) {
+        // If we can't read the file, return null
+    }
+    return null;
+}
+
 async function build() {
     const result = {};
     const products = await fs.readdir(docsDir, { withFileTypes: true });
@@ -77,40 +107,50 @@ async function build() {
                 continue;
             }
 
+            const categoryJson = path.join(catPath, '_category_.json');
             const indexMd = path.join(catPath, 'index.md');
+            const indexMdx = path.join(catPath, 'index.mdx');
             const underscoreIndex = path.join(catPath, '_index.md');
-            let href = `/docs/${productName}/${c}/`;
-            if (await exists(indexMd) || await exists(underscoreIndex)) {
-                // keep href as folder
+
+            // Try to extract title - prioritize _category_.json, then index files
+            let label = titleCase(c); // Default fallback
+
+            // First, try _category_.json
+            if (await exists(categoryJson)) {
+                const extractedLabel = await extractLabelFromCategoryJson(categoryJson);
+                if (extractedLabel) {
+                    label = extractedLabel;
+                }
             } else {
-                // Prefer a file named after the category (e.g., administration.md)
-                const preferNames = [
-                    `${c}.md`,
-                    `${c}.mdx`,
-                    path.join(c, 'index.md'),
-                    path.join(c, 'index.mdx'),
-                    'README.md',
-                    'readme.md',
-                ];
-                let found = null;
-                for (const pn of preferNames) {
-                    const pth = path.join(productPath, pn);
-                    if (await exists(pth)) {
-                        found = pth;
-                        break;
+                // Fallback to index files
+                for (const indexFile of [indexMd, indexMdx, underscoreIndex]) {
+                    if (await exists(indexFile)) {
+                        const extractedTitle = await extractTitleFromMarkdown(indexFile);
+                        if (extractedTitle) {
+                            label = extractedTitle;
+                            break;
+                        }
                     }
                 }
-                if (!found) {
-                    found = await findFirstMarkdown(catPath);
-                }
-                if (found) {
-                    // build href from docs-relative path without extension
-                    const rel = path.relative(docsDir, found).split(path.sep).join('/');
+            }
+
+            // Determine the href: use index if exists, otherwise find first markdown
+            let href = `/docs/${productName}/${c}/`;
+
+            // Check if we have an actual index page
+            const hasIndex = await exists(indexMd) || await exists(indexMdx) || await exists(underscoreIndex);
+
+            if (!hasIndex) {
+                // No index file, find the first markdown file to use as landing page
+                const firstMd = await findFirstMarkdown(catPath);
+                if (firstMd) {
+                    const rel = path.relative(docsDir, firstMd).split(path.sep).join('/');
                     const noExt = rel.replace(/\.(md|mdx)$/i, '');
-                    href = `/docs/${noExt}/`;
+                    href = `/docs/${noExt}`;
                 }
             }
-            outItems.push({ label: titleCase(c), href });
+
+            outItems.push({ label, href });
         }
         result[productName] = outItems;
     }

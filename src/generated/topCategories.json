@@ -5,11 +5,11 @@
       "href": "/docs/arender/configuration/"
     },
     {
-      "label": "Development",
+      "label": "Développement",
       "href": "/docs/arender/development/"
     },
     {
-      "label": "Features",
+      "label": "Fonctionnalités",
       "href": "/docs/arender/features/"
     },
     {
@@ -21,7 +21,7 @@
       "href": "/docs/arender/installation/"
     },
     {
-      "label": "Learn",
+      "label": "Apprentissage",
       "href": "/docs/arender/learn/"
     },
     {
@@ -29,7 +29,7 @@
       "href": "/docs/arender/learning/"
     },
     {
-      "label": "Releases",
+      "label": "Versions",
       "href": "/docs/arender/releases/"
     },
     {
@@ -37,7 +37,7 @@
       "href": "/docs/arender/what-is/"
     },
     {
-      "label": "What Is Arender",
+      "label": "Qu'est ce qu'ARender ?",
       "href": "/docs/arender/what-is-arender/"
     }
   ],
@@ -49,10 +49,6 @@
     {
       "label": "Advanced",
       "href": "/docs/fast2/advanced/"
-    },
-    {
-      "label": "Assets",
-      "href": "/docs/fast2/assets/"
     },
     {
       "label": "Catalog",
@@ -67,64 +63,60 @@
       "href": "/docs/fast2/cookbooks/"
     },
     {
-      "label": "Documents",
-      "href": "/docs/fast2/documents/"
-    },
-    {
       "label": "Getting Started",
       "href": "/docs/fast2/getting-started/"
     }
   ],
   "flowerdocs": [
     {
-      "label": "Apis",
-      "href": "/docs/flowerdocs/apis/"
+      "label": "Development",
+      "href": "/docs/flowerdocs/apis/core/dao"
     },
     {
       "label": "Concepts",
-      "href": "/docs/flowerdocs/concepts/"
+      "href": "/docs/flowerdocs/concepts/facts"
     },
     {
-      "label": "Configuration",
-      "href": "/docs/flowerdocs/configuration/"
+      "label": "Guides",
+      "href": "/docs/flowerdocs/config/core/component-identifier"
     },
     {
-      "label": "Connecteurs",
-      "href": "/docs/flowerdocs/connecteurs/"
+      "label": "Connectors",
+      "href": "/docs/flowerdocs/connecteurs/companion/config"
     },
     {
       "label": "Installation",
-      "href": "/docs/flowerdocs/installation/"
+      "href": "/docs/flowerdocs/install/docker"
     },
     {
-      "label": "Tutoriels",
-      "href": "/docs/flowerdocs/tutoriels/"
+      "label": "FlowerDocs Academy",
+      "href": "/docs/flowerdocs/learn/admin-hide-menu/getting-started"
     }
   ],
   "uxopian-ai": [
     {
       "label": "Administration",
-      "href": "/docs/uxopian-ai/administration/backup-recovery/"
+      "href": "/docs/uxopian-ai/administration/backup-recovery"
     },
     {
       "label": "Architecture",
-      "href": "/docs/uxopian-ai/architecture/overview/"
+      "href": "/docs/uxopian-ai/architecture/overview"
     },
     {
       "label": "Concepts",
-      "href": "/docs/uxopian-ai/concepts/overview/"
+      "href": "/docs/uxopian-ai/concepts/overview"
     },
     {
       "label": "Configuration",
-      "href": "/docs/uxopian-ai/configuration/api-reference/"
+      "href": "/docs/uxopian-ai/configuration/api-reference"
     },
     {
       "label": "Getting Started",
-      "href": "/docs/uxopian-ai/getting-started/installation-guide/"
+      "href": "/docs/uxopian-ai/getting-started/installation-guide"
     },
     {
       "label": "How To Guides",
-      "href": "/docs/uxopian-ai/how-to-guides/contributing/"
+      "href": "/docs/uxopian-ai/how-to-guides/contributing"
     }
   ]
 }

@@ -249,3 +249,8 @@
 .navbar__item--version-menu .dropdown__menu {
   z-index: 100 !important;
 }
+
+/* Hide category index pages that are redundant with secondary nav */
+.hidden-sidebar-item {
+  display: none !important;
+}

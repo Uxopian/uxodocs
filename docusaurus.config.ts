@@ -17,7 +17,7 @@ const config: Config = {
 
   onBrokenLinks: 'warn',
   markdown: {
-    hooks: { onBrokenMarkdownLinks: 'warn' },
+    hooks: { onBrokenMarkdownLinks: 'warn' , onBrokenMarkdownImages: 'warn' },
   },
 
   presets: [
