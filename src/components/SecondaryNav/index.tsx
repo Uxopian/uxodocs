@@ -169,14 +169,22 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
             }
         }
 
+        // Check if we're on the product index page (e.g., docs/flowerdocs/v2/flowerdocs)
+        // In this case, we should show ALL categories, not filter
+        const isProductIndexPage = currentVersion &&
+            currentSegments.length === 4 &&
+            currentSegments[currentDocsIdx + 1] === currentSegments[currentDocsIdx + 3];
+
         console.log('[SecondaryNav] Current path analysis:', {
             currentPath,
             currentVersion,
-            itemsCount: items.length
+            itemsCount: items.length,
+            isProductIndexPage
         });
 
+        // If we're on the product index page, don't filter (show all categories)
         // Find which category the current page belongs to by checking all items
-        const active = items.find((it) => {
+        const active = isProductIndexPage ? null : items.find((it) => {
             const itemHref = normalize(it.href);
             // Extract the category base path from this item
             const itemSegments = itemHref.split('/').filter(Boolean);
