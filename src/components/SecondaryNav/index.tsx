@@ -198,13 +198,14 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
         };
 
         const apply = (sidebar: Element | null) => {
-            if (!sidebar) return;
+            if (!sidebar) {
+                console.log('[SecondaryNav] apply: no sidebar');
+                return;
+            }
 
-            // Try to find the main menu list
             let mainMenu = sidebar.querySelector('.menu__list, ul.menu__list');
-
-            // Fallback: if no main menu found, use the sidebar itself
             if (!mainMenu) {
+                console.log('[SecondaryNav] .menu__list not found, using fallback');
                 mainMenu = sidebar.querySelector('ul') || sidebar;
             }
 
@@ -213,8 +214,12 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
                 el.tagName.toLowerCase() === 'li'
             ) as Element[];
 
-            // If no groups found, don't apply filtering
-            if (groups.length === 0) return;
+            console.log('[SecondaryNav] apply: groups found:', groups.length, 'active:', active?.label);
+
+            if (groups.length === 0) {
+                console.log('[SecondaryNav] No groups found, aborting filter');
+                return;
+            }
 
             if (!active) {
                 groups.forEach((g) => {
@@ -311,19 +316,27 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
 
         let observer: MutationObserver | null = null;
         let tried = 0;
-        const maxTries = 10;
+        const maxTries = 20; // Increased from 10
 
         const tryApply = () => {
             const sidebar = findSidebar();
             if (sidebar) {
+                console.log('[SecondaryNav] Sidebar found, applying filter', {
+                    pathname,
+                    active: active?.label,
+                    tried
+                });
                 apply(sidebar);
             } else if (tried < maxTries) {
                 tried++;
-                setTimeout(tryApply, 150);
+                console.log('[SecondaryNav] Sidebar not found, retry', tried, 'of', maxTries);
+                setTimeout(tryApply, 200); // Increased from 150ms
             } else {
+                console.log('[SecondaryNav] Max retries reached, using MutationObserver');
                 observer = new MutationObserver(() => {
                     const s = findSidebar();
                     if (s) {
+                        console.log('[SecondaryNav] Sidebar found via MutationObserver');
                         apply(s);
                         if (observer) observer.disconnect();
                     }
