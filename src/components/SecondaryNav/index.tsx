@@ -157,6 +157,24 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
 
         const currentPath = normalize(pathname);
 
+        // Extract version from current path if present
+        const currentSegments = currentPath.split('/').filter(Boolean);
+        const currentDocsIdx = currentSegments.indexOf('docs');
+        let currentVersion = null;
+
+        if (currentDocsIdx !== -1 && currentSegments.length > currentDocsIdx + 2) {
+            const potentialVersion = currentSegments[currentDocsIdx + 2];
+            if (potentialVersion && potentialVersion.match(/^v\d+$/)) {
+                currentVersion = potentialVersion;
+            }
+        }
+
+        console.log('[SecondaryNav] Current path analysis:', {
+            currentPath,
+            currentVersion,
+            itemsCount: items.length
+        });
+
         // Find which category the current page belongs to by checking all items
         const active = items.find((it) => {
             const itemHref = normalize(it.href);
@@ -169,13 +187,34 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
                 const potentialVersion = itemSegments[docsIdx + 2];
                 let itemCategoryBase = '';
 
+                // Items from topCategories.json don't have version in their path
+                // So we need to build the base path differently for versioned current paths
                 if (potentialVersion && potentialVersion.match(/^v\d+$/)) {
+                    // Item itself has version
                     if (itemSegments.length > docsIdx + 4) {
                         itemCategoryBase = itemSegments.slice(0, docsIdx + 5).join('/');
                     }
                 } else {
-                    itemCategoryBase = itemSegments.slice(0, docsIdx + 3).join('/');
+                    // Item doesn't have version, but current path might
+                    // Build base path: docs/product/[version]/category
+                    const category = itemSegments[docsIdx + 2];
+                    if (currentVersion) {
+                        // Current path has version: docs/flowerdocs/v2/flowerdocs
+                        // Item path: docs/flowerdocs/apis/...
+                        // Build: docs/flowerdocs/v2/apis
+                        itemCategoryBase = `docs/${product}/${currentVersion}/${category}`;
+                    } else {
+                        // No version in current path, use normal logic
+                        itemCategoryBase = itemSegments.slice(0, docsIdx + 3).join('/');
+                    }
                 }
+
+                console.log('[SecondaryNav] Checking item:', {
+                    label: it.label,
+                    itemHref,
+                    itemCategoryBase,
+                    matches: currentPath.startsWith(itemCategoryBase)
+                });
 
                 // Check if current page is under this category
                 return itemCategoryBase && currentPath.startsWith(itemCategoryBase);
