@@ -14,8 +14,8 @@ export default function SecondaryNav(): React.ReactElement | null {
     let product: string | null = null;
     let versionPrefix: string = '';
 
-    // Check for versioned docs pattern: /docs/product/v1/product/...
-    const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v\d+)\/\1\//);
+    // Check for versioned docs pattern: /docs/product/v1/product/... or /docs/product/v1/product
+    const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v\d+)\/\1(?:\/|$)/);
     if (versionedMatch) {
         product = versionedMatch[1];
         versionPrefix = `/${versionedMatch[1]}/${versionedMatch[2]}/${versionedMatch[1]}`;
@@ -284,8 +284,10 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
             }
 
             if (!active) {
+                console.log('[SecondaryNav] No active category, showing all groups');
                 groups.forEach((g) => {
                     (g as HTMLElement).classList.remove('uxo-hidden-by-filter');
+                    (g as HTMLElement).classList.remove('hidden-sidebar-item');
                     if (g instanceof HTMLDetailsElement) g.open = false;
                 });
                 return;
