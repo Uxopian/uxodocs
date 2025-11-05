@@ -288,8 +288,30 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
                 groups.forEach((g) => {
                     (g as HTMLElement).classList.remove('uxo-hidden-by-filter');
                     (g as HTMLElement).classList.remove('hidden-sidebar-item');
+                    // Force visibility with inline style to override any other styles
+                    (g as HTMLElement).style.removeProperty('display');
+                    (g as HTMLElement).style.removeProperty('max-height');
+                    (g as HTMLElement).style.removeProperty('opacity');
                     if (g instanceof HTMLDetailsElement) g.open = false;
                 });
+
+                // Set up a MutationObserver to watch for the class being re-added
+                const observerCallback = () => {
+                    groups.forEach((g) => {
+                        if ((g as HTMLElement).classList.contains('hidden-sidebar-item')) {
+                            (g as HTMLElement).classList.remove('hidden-sidebar-item');
+                            console.log('[SecondaryNav] Removed re-added hidden-sidebar-item class');
+                        }
+                    });
+                };
+
+                // Watch for changes
+                groups.forEach((g) => {
+                    const obs = new MutationObserver(observerCallback);
+                    obs.observe(g, { attributes: true, attributeFilter: ['class'] });
+                    // Store observer to clean up later (we'll let it run for the duration)
+                });
+
                 return;
             }
 
