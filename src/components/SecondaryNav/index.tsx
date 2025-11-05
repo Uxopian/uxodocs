@@ -190,6 +190,9 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
                 document.querySelector('.sidebar_njMd') ||
                 document.querySelector('nav.menu') ||
                 document.querySelector('.menu') ||
+                document.querySelector('aside.theme-doc-sidebar-container') ||
+                document.querySelector('[class*="sidebar"]') ||
+                document.querySelector('aside nav') ||
                 null
             );
         };
@@ -197,11 +200,21 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
         const apply = (sidebar: Element | null) => {
             if (!sidebar) return;
 
-            const mainMenu = sidebar.querySelector('.menu__list, ul.menu__list');
-            if (!mainMenu) return; const groups = Array.from(mainMenu.children).filter(el =>
+            // Try to find the main menu list
+            let mainMenu = sidebar.querySelector('.menu__list, ul.menu__list');
+
+            // Fallback: if no main menu found, use the sidebar itself
+            if (!mainMenu) {
+                mainMenu = sidebar.querySelector('ul') || sidebar;
+            }
+
+            const groups = Array.from(mainMenu.children).filter(el =>
                 el.classList.contains('menu__list-item') ||
                 el.tagName.toLowerCase() === 'li'
             ) as Element[];
+
+            // If no groups found, don't apply filtering
+            if (groups.length === 0) return;
 
             if (!active) {
                 groups.forEach((g) => {
