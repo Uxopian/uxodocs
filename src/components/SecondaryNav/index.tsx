@@ -262,6 +262,12 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
             ) as Element[];
 
             console.log('[SecondaryNav] apply: groups found:', groups.length, 'active:', active?.label);
+            console.log('[SecondaryNav] mainMenu element:', mainMenu);
+            console.log('[SecondaryNav] mainMenu.children:', Array.from(mainMenu.children).map(el => ({
+                tagName: el.tagName,
+                classes: el.className,
+                textContent: el.textContent?.substring(0, 50)
+            })));
 
             if (groups.length === 0) {
                 console.log('[SecondaryNav] No groups found, aborting filter');
