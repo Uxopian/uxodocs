@@ -47,6 +47,22 @@
     transition: opacity 160ms ease, max-height 180ms ease;
 }
 
+/* Force visibility of sidebar items on versioned docs pages */
+/* Override Docusaurus's hidden-sidebar-item class */
+[class*="theme-doc-sidebar"] li.hidden-sidebar-item {
+    display: block !important;
+    opacity: 1 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    visibility: visible !important;
+}
+
+[class*="theme-doc-sidebar"] li.hidden-sidebar-item>* {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
 .secondary-nav__showall {
     margin-left: auto;
     background: transparent;
