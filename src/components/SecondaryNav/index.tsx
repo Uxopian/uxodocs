@@ -38,10 +38,15 @@ export default function SecondaryNav(): React.ReactElement | null {
     // Adjust items to include version prefix if present
     const baseItems: Cat[] = (product && categoriesMap[product]) || [];
     const items: Cat[] = versionPrefix
-        ? baseItems.map(item => ({
-            ...item,
-            href: item.href.replace(`/docs/${product}/`, `/docs${versionPrefix}/`)
-        }))
+        ? baseItems.map(item => {
+            // Extract the path after /docs/product/
+            const pathMatch = item.href.match(/\/docs\/[^\/]+\/(.*)/);
+            const remainingPath = pathMatch ? pathMatch[1] : '';
+            return {
+                ...item,
+                href: `/docs${versionPrefix}/${remainingPath}`
+            };
+        })
         : baseItems;
 
     if (!items || items.length === 0) return null;
