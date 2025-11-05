@@ -256,18 +256,27 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
                 mainMenu = sidebar.querySelector('ul') || sidebar;
             }
 
-            const groups = Array.from(mainMenu.children).filter(el =>
+            let groups = Array.from(mainMenu.children).filter(el =>
                 el.classList.contains('menu__list-item') ||
                 el.tagName.toLowerCase() === 'li'
             ) as Element[];
 
+            if (groups.length === 1) {
+                const nestedList = groups[0].querySelector('ul.menu__list');
+                if (nestedList) {
+                    console.log('[SecondaryNav] Found nested menu structure, using nested items');
+                    const nestedGroups = Array.from(nestedList.children).filter(el =>
+                        el.classList.contains('menu__list-item') ||
+                        el.tagName.toLowerCase() === 'li'
+                    ) as Element[];
+
+                    if (nestedGroups.length > 1) {
+                        groups = nestedGroups;
+                    }
+                }
+            }
+
             console.log('[SecondaryNav] apply: groups found:', groups.length, 'active:', active?.label);
-            console.log('[SecondaryNav] mainMenu element:', mainMenu);
-            console.log('[SecondaryNav] mainMenu.children:', Array.from(mainMenu.children).map(el => ({
-                tagName: el.tagName,
-                classes: el.className,
-                textContent: el.textContent?.substring(0, 50)
-            })));
 
             if (groups.length === 0) {
                 console.log('[SecondaryNav] No groups found, aborting filter');
