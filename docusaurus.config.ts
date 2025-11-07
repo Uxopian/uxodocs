@@ -104,7 +104,6 @@ const config: Config = {
         { type: 'docsVersionDropdown', docsPluginId: 'flowerdocs', position: 'left', className: 'verdd verdd--flowerdocs' },
         { type: 'docsVersionDropdown', docsPluginId: 'uxopian-ai', position: 'left', className: 'verdd verdd--uxopian-ai' },
 
-        // search bar on the right (works with Algolia or the local search plugin)
         { type: 'search', position: 'right' },
 
         { href: 'https://github.com/corentinlebas45/uxodocs', label: 'GitHub', position: 'right' },
