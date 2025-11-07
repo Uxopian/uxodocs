@@ -26,13 +26,18 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Ensure LFS files are real
+      - name: Resolve LFS pointers in sources (pre)
+        shell: bash
         run: |
+          set -euo pipefail
           git lfs fetch --all || true
           git lfs checkout
-          git lfs ls-files | head -n 30
+          # (optionnel) échouer si des pointeurs traînent déjà dans les sources
+          if grep -RIl "git-lfs.github.com/spec/v1" static docs 2>/dev/null; then
+            echo "LFS pointers found in sources before versioning"; exit 1
+          fi
 
-      - name: Fetch all branches
+      - name: Fetch all branches (explicit)
         run: git fetch origin "+refs/heads/*:refs/remotes/origin/*"
 
       - name: Setup Node
@@ -41,34 +46,73 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci
+      - name: Install deps
+        run: npm ci
 
-      - name: Generate Docusaurus versions from test-<product>-v* branches
+      - name: Generate Docusaurus versions from test-<product>-v* branches (LFS-safe)
         shell: bash
         run: |
           set -euo pipefail
+
+          # Réinitialise les versions éphémères
           rm -rf versioned_docs versioned_sidebars
+
           for product in $PRODUCTS; do
             echo "=== ${product} ==="
+
+            # Sauvegarde du "current"
             rm -rf ".cache_${product}_current" && mkdir -p ".cache_${product}_current"
             rsync -a "docs/${product}/" ".cache_${product}_current/"
+
+            # Liste des branches test-<product>-v*
             mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
               | grep "^origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
+
             for br in "${branches[@]}"; do
-              ver="${br##test-${product}-}"
+              ver="${br##test-${product}-}"   # ex: v1, v2
               echo "-> snapshot ${product} ${ver} from ${br}"
+
+              # Worktree détaché sur la ref distante (au lieu de git archive)
+              wt=".wt_${product}_${ver}"
+              git worktree add --force --detach "$wt" "origin/${br}"
+
+              # Résoudre LFS dans ce worktree et copier les vrais fichiers
+              (
+                set -euo pipefail
+                cd "$wt"
+                git lfs pull --include="docs/${product}/**" --exclude=""
+                git lfs checkout
+              )
+
               rm -rf .tmp_docs && mkdir -p .tmp_docs
-              if git cat-file -e "origin/${br}:docs/${product}/" 2>/dev/null; then
-                git archive --format=tar "origin/${br}" "docs/${product}" \
-                  | tar -x -C .tmp_docs --strip-components=1
+              if [ -d "${wt}/docs/${product}" ]; then
+                rsync -a --delete "${wt}/docs/${product}/" .tmp_docs/
               else
-                echo "   (skip ${br}: docs/${product} not found)"; continue
+                echo "   (skip ${br}: docs/${product} not found)"
+                git worktree remove -f "$wt"
+                continue
               fi
+
+              # Remplace le current par le contenu versionné puis génère la version
               rsync -a --delete .tmp_docs/ "docs/${product}/"
               npx docusaurus "docs:version:${product}" "${ver}"
+
+              # Nettoie le worktree
+              git worktree remove -f "$wt"
             done
+
+            # Restaure le "current" d'origine
             rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
           done
+
+      - name: Resolve LFS pointers in sources (post-versioning)
+        shell: bash
+        run: |
+          set -euo pipefail
+          git lfs checkout
+          if grep -RIl "git-lfs.github.com/spec/v1" static docs 2>/dev/null; then
+            echo "LFS pointers still present in sources after versioning"; exit 1
+          fi
 
       - name: Build
         env:
@@ -79,11 +123,12 @@ jobs:
         run: touch build/.nojekyll
 
       - name: Assert no LFS pointers in build
+        shell: bash
         run: |
-          if grep -RIl "git-lfs.github.com/spec/v1" build; then
-            echo "ERROR: LFS pointer found in build output."
-            exit 1
+          if grep -RIl "git-lfs.github.com/spec/v1" build 2>/dev/null; then
+            echo "ERROR: LFS pointer found in build output."; exit 1
           fi
+          echo "OK: no LFS pointers"
 
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v3
