@@ -20,8 +20,17 @@ jobs:
       PRODUCTS: "fast2 arender flowerdocs"
 
     steps:
-      - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
+      - name: Checkout (with LFS)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Ensure LFS files are real
+        run: |
+          git lfs fetch --all || true
+          git lfs checkout
+          git lfs ls-files | head -n 30
 
       - name: Fetch all branches
         run: git fetch origin "+refs/heads/*:refs/remotes/origin/*"
@@ -38,27 +47,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
-          # Nettoyage des versions éphémères (on regénère à chaque run)
           rm -rf versioned_docs versioned_sidebars
-
           for product in $PRODUCTS; do
             echo "=== ${product} ==="
-
-            # Sauvegarde du "current" (branche test)
             rm -rf ".cache_${product}_current" && mkdir -p ".cache_${product}_current"
             rsync -a "docs/${product}/" ".cache_${product}_current/"
-
-            # Liste des branches versionnées pour ce produit (test-product-vX)
             mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
               | grep "^origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
-
             for br in "${branches[@]}"; do
-              ver="${br##test-${product}-}"   # ex: v1, v2
-
+              ver="${br##test-${product}-}"
               echo "-> snapshot ${product} ${ver} from ${br}"
-
-              # extrait docs/<product> depuis la branche versionnée
               rm -rf .tmp_docs && mkdir -p .tmp_docs
               if git cat-file -e "origin/${br}:docs/${product}/" 2>/dev/null; then
                 git archive --format=tar "origin/${br}" "docs/${product}" \
@@ -66,15 +64,9 @@ jobs:
               else
                 echo "   (skip ${br}: docs/${product} not found)"; continue
               fi
-
-              # remplace le current par le contenu de la branche
               rsync -a --delete .tmp_docs/ "docs/${product}/"
-
-              # crée le snapshot de version pour le plugin correspondant
               npx docusaurus "docs:version:${product}" "${ver}"
             done
-
-            # Restaure le current d'origine
             rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
           done
 
@@ -82,6 +74,16 @@ jobs:
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
         run: npm run build
+
+      - name: Add .nojekyll
+        run: touch build/.nojekyll
+
+      - name: Assert no LFS pointers in build
+        run: |
+          if grep -RIl "git-lfs.github.com/spec/v1" build; then
+            echo "ERROR: LFS pointer found in build output."
+            exit 1
+          fi
 
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v3
