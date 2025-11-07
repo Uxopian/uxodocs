@@ -1,24 +1,26 @@
 ---
-title: Architecture dans Alfresco
+title: "Architecture in Alfresco"
 ---
 
-```xml
-<!-- Commentaire nettoyé -->
+
+
+
+
+
+
+![image](/img/arender/diagrams/ARender-Architecture-Alfresco.png)
+
+* **N1: Alfresco UI**: has the responsibility to let the Alfresco user choose which documents he wants to open in ARender,
+* **N2: Browser**: will create the ARender frame using the URL provided by N1,
+* **N3: ARender WEB-UI**: is Spring Boot module which contains the Alfresco connector,
+* **N4: Alfresco Backend**: contains API which ARender connector will interact with to fetch documents (and if needed fetch annotations 
+  and metadata and create new documents or new version of documents),
+* **N5: ARender Rendition**: will generate images, extract text and more.
+
+
+
+
 ```
-
-* **N1: Alfresco UI**: a la responsabilité de laisser l'utilisateur d'Alfresco choisir quel document il veut ouvrir dans ARender,
-* **N2: Browser**: va créer la "frame" d'ARender en utilisant l'URL fourni par N1,
-* **N3: ARender WEB-UI**: est un module Spring Boot qui contient le connecteur d'Alfresco,
-* **N4: Alfresco Backend**: contient une API avec laquelle le connecteur ARender va interagir pour aller chercher les documents 
-(et si besoin les annotations, les métadonnées ou les nouvelles versions de documents),
-* **N5: ARender Rendition**: va générer des images, extraire du texte et plus.
-
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-```
-Le port de votre GED doit être différent du port d'ARender WEB-UI.
+Your ECM port must be different from your ARender WEB-UI port.
 ```
 

@@ -1,22 +1,28 @@
 ---
-title: Télécharger un document en fichier encodé en base64
+title: "Download documents as base64-encoded file"
 ---
 
-Une nouvelle servlet est déployée permettant de télécharger un document encodé en base 64.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **downloadBase64EncodedDocument**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to download a document encoded in base 64. 
+
+## Request 
+
+This functionality is accessible via the servlet: **downloadBase64EncodedDocument**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/downloadBase64EncodedDocument'
 ```
 
-## Réponse de la servlet
+## Servlet Response
 
-Un document est téléchargé. Ce document est encodé en base 64. Il n'est pas possible de l'ouvrir s'il n'a pas été décodé.
+A document is downloaded. This document is encoded in base 64. It is not possible to open it if it has not been decoded.

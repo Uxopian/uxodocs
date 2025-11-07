@@ -1,6 +1,11 @@
 ---
-title: Properties
+title: "Properties"
 ---
+
+
+
+
+
 
 ## about 
  | property | Description | type | default |
@@ -608,9 +613,9 @@ title: Properties
 | visualization.zoom.type | Sets up the default zoom type : Default, FullWidth, FullHeight, In, Out, Custom, FullPage | String | FullWidth | 
 | visualization.zoom.value | Default Zoom value, in percent in case of custom zoom | integer | 100 | 
 | visualization.zoom.animation | Animate on zoom | boolean | false | 
-| visualization.zoom.by.biggest.page | Zoom according to the biggest page (width or height). Otherwise to the first page | boolean | true | 
-| visualization.rotation.save.enabled | Allows rotations to be saved as annotation | boolean | false | 
+| visualization.zoom.by.biggest.page | Zoom according to the biggest page (width or height). Otherwise to the first page | boolean | true |
 | visualization.zoom.step |  Custom zoom step value | float | 0.1 |
+| visualization.rotation.save.enabled | Allows rotations to be saved as annotation | boolean | false | 
 | visualization.guideruler.enabled | Activate the ruler guide for ARender | boolean | false | 
 | visualization.guideruler.height | Defines the height in pixel of the ruler guide | integer | 10 | 
 | visualization.guideruler.increment | Defines the movement in height in pixel for the ruler guide | integer | 10 | 

@@ -1,58 +1,62 @@
 ---
-title: Profils
+title: "Profiles"
 ---
+
+
+
+
+
+
 
 ## Introduction
 
-Dans ARender un profil permet de configurer l'interface ARender de
-différentes manières selon les appels.
+In ARender, a profile enabled the use of a specific interface
+configuration.
 
-Il est possible de jouer sur de nombreux paramètres comme le CSS,
-l'affichage ou non des icônes, la largeur des panels etc...
+Thanks to the profiles feature, you can use specific CSS, hide/show
+icons, modify panel width...
 
-## Profils livrés avec le produit
+## Existing profiles
 
-ARender est livré avec les profils décrits ci-dessous :
+ARender is delivered with a commented configuration file:
 
-| Nom                                             | Description                                                                                                                                          |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| configurations/arender-custom-server.properties | Fichier de configuration contenant toutes les propriétés disponibles commentées. Décommenter et modifier toute propriété que vous souhaitez utiliser |
+| Nom                                             | Description                                                                                                                |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| configurations/arender-custom-client.properties | All commented configuration file offering all available configuration. Uncomment and modify the properties you want to use |
 
-## Ajout d'un ou N profils
+## Add 1 or N profiles
 
-Il est possible d'ajouter 1 ou plusieurs profil(s) spécifique(s) à
-ARender de manière à dédier différentes interfaces à différents
-utilisateurs ou groupes d'utilisateurs.
+It is possible to a multiple specific profiles in order to dedicate
+interface configuration to users ou group of users.
 
-Les propriétés sont listées et commentées dans le fichier **configurations/arender-custom-client.properties** de ARender
-Web-UI.
+Properties are listed and commented in the file **configurations/arender-custom-client.properties** of ARender Web-UI.
 
-### Étapes pour créer un nouveau profil
+### Steps to follow to create a new profile
 
 #### Standalone
 
-- Créer un fichier nommé par exemple *nouveauProfil.properties*
-- Y renseigner les propriétés à modifier (exemple:
+- Create a file named for example *newProfile.properties*
+- Add to this file the properties you want to modify (for example:
   `visualization.rotation.save.enabled=true`)
-- Enregistrer le fichier et ajouter le au dossier **configurations** du jar ARender
+- Save the file and add it to the **configurations** folder of the ARender Web-UI jar
 
-Pour déclencher l'utilisation de ce profil dans ARender il faut
-ajouter le paramètre *props* dans l'URL avec comme valeur le nom (sans
-l'extension) du fichier :
 
-`http://localhost:8080/?url=../samples/arender.pdf&props=nouveauProfil`
+To trigger the use of this specific profile, add to the URL the parameter *props* and the name of the profile (without its extension):
+
+`http://localhost:8080/?url=../samples/arender.pdf&amp;props=newProfile`
+
 
 #### Docker
 
-- Créer un fichier nommé par exemple *nouveauProfil.properties*
-- Y renseigner les propriétés à modifier (exemple:
+- Create a file named for example *newProfile.properties*
+- Add to this file the properties you want to modify (for example:
   `visualization.rotation.save.enabled=true`)
-- Enregistrer le fichier.
-- Lors du "docker run", utiliser un volume pour placer le fichier *nouveauProfil.properties* dans */home/arender/ARenderConfiguration/*
-Exemple de volume : docker run -e ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://votre_ip_rendition:8761 -v C:\nouveauProfil.properties:/home/arender/ARenderConfiguration/nouveauProfil.properties  -p 127.0.0.1:8080:8080 votre_image_id
+- Save the file.
+- When using "docker run", use a volume to place the file *newProfile.properties* in */home/arender/ARenderConfiguration/*
+Example of volume : docker run -e ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://your_ip_rendition:8761 -v C:\newProfile.properties:/home/arender/ARenderConfiguration/newProfile.properties  -p 127.0.0.1:8080:8080 your_image_id
 
-Pour déclencher l'utilisation de ce profil dans ARender il faut
-ajouter le paramètre *props* dans l'URL avec comme valeur le nom (sans
-l'extension) du fichier :
 
-`http://localhost:8080/?url=../samples/arender.pdf&props=nouveauProfil`
+To trigger the use of this specific profile, add to the URL the parameter *props* and the name of the profile (without its extension):
+
+`http://localhost:8080/?url=../samples/arender.pdf&amp;props=newProfile`
+

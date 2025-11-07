@@ -1,16 +1,20 @@
 ---
-title: Traitement des images
+title: "Image processing"
 ---
 
-Pour améliorer la visibilité des éléments sur certains documents, il est possible de manipuler le contraste, la luminosité et l'inversion de couleur. Cette manipulation se fait à l'aide d'un curseur allant de -100 à 100 où 0 est la valeur par défaut. 
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
 
-Les boutons permettant de faire apparaitre les sliders individuellement, peuvent être activés ou non par les propriétés suivantes :  
+
+
+To improve the visibility of elements on certain documents, it is possible to manipulate the contrast, the brightness and the inversion of color by using a slider ranging from -100 to 100 where 0 is the default value.
+
+
+![image](/img/arender/features/imageProcessing/processingPanel.gif)
+
+The buttons to display the sliders individually can be activated with the following properties :
+
 
 ```cfg
 #Activate the brightness slider
@@ -21,14 +25,14 @@ topPanel.imageProcessMenu.contrast.enabled=true
 topPanel.imageProcessMenu.invert.enabled=true
 ```
 
+ 
 
-Par défaut, les boutons pour les sliders du contraste et de la luminosité sont activés.
+ By default, the buttons for the contrast and brightness sliders are enabled.
 
-
-Le traitement de l'image peut être appliqué de trois façons différentes :
-- La page courante
-- Toutes les pages du document courant
-- Toutes les pages de tous les documents ouverts
+Image processing can be applied in three different ways :
+- Current page
+- All pages of the current document
+- All pages of all opened documents
 
 
 
@@ -36,5 +40,6 @@ Le traitement de l'image peut être appliqué de trois façons différentes :
 # Set how image processing is applied : CURRENT_PAGE, ALL_PAGES, ALL_DOCUMENTS
 topPanel.imageProcessMenu.process.mode=ALL_DOCUMENTS
 ```
+
 
 

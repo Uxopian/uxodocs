@@ -1,59 +1,67 @@
 ---
-title: Prérequis
+title: "Requirements"
 ---
 
-## Système d'exploitation
 
-| Catégorie | Pré-requis                                                                                                                                                                                                   |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Windows   | Windows Server 2016 ou supérieur                                                                                                                                                                             |
-| Linux     | Linux Noyau 2.6 ou supérieur, glibc 2.14 ou supérieur. Distributions Linux correspondant à nos pré-requis logiciels : RedHat (7 ou 8), CentOS (7), Debian (8), Ubuntu (14.04+), Amazon Linux AMI (2016.09+)  |
 
-## Configuration matérielle
 
-| Catégorie   | Minimum | Conseillé                                                                                        |
-| ----------- | ------- | ------------------------------------------------------------------------------------------------ |
-| Nb Serveur  | 1       | 2 (Haute disponibilité)                                                                          |
-| RAM         | 8Go     | 16Go                                                                                             |
-| CPU (vCPU)  | 4       | 8                                                                                                |
-| Type de CPU | 64Bits  | 64Bits                                                                                           |
-| Stockage    | 20Go    | Le maximum entre 20Go et une capacité permettant de stocker une journée de documents temporaires |
 
-## Configuration des ports
 
-Les différents ports des micro-services doivent être libre. Ces ports sont :
 
-| Service              | Protocoles  | Port d'écoute par défaut  |
-| :------------------- | :---------: | :-----------------------: |
-| Service broker       | HTTP/HTTPS  |                     8761  |
-| Text handler         |    HTTP     |                     8899  |
-| Renderer             |    HTTP     |                     9091  |
-| Converter            |    HTTP     |                    19999  |
+## Operating system
 
-## Configuration logicielle
+| Category | Requirement                                                                                                                                                                                                                 |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows  | Windows Server 2016 or higher                                                                                                                                                                                               |
+| Linux    | Kernel 2.6 or greater, glibc 2.14 or greater, minimal recommended version for Linux distributions (due to our software requirements): RedHat (7 or 8), CentOS (7), Debian (8), Ubuntu (14.04+), Amazon Linux AMI (2016.09+) |
 
-| Logiciel                     | Pré-requis                                                                   |
-| ---------------------------- | ---------------------------------------------------------------------------- |
-| Java Runtime                 | JRE 1.8 64 bits Minimum, OpenJDK 11 conseillé. JRE IBM J9 est non supportée. |
+## Minimal hardware
 
-Le serveur de rendition vérifie désormais que la JVM est 64 bits et va s'arrêter sinon.
-Cette erreur pourra se lire dans les logs ou la console selon le mode de démarrage de la rendition.
+| Category                      | Minimum | Advised                                                                                  |
+| ----------------------------- | ------- | ---------------------------------------------------------------------------------------- |
+| Number of rendition server(s) | 1       | 2 (for high availability)                                                                |
+| RAM                           | 8GB     | 16GB                                                                                     |
+| CPU (vCPU)                    | 4       | 8                                                                                        |
+| CPU type                      | 64Bits  | 64Bits                                                                                   |
+| Storage                       | 20Go    | The maximum between 20Go and a storage where a full day of temporary files can be stored |
 
-## Droits d'accès
+## Port configuration
+
+The ports of the different micro-services need to be free to use and are as follows:
+
+| Service              | Protocols  | Default listening port |
+| :------------------- | :--------: | :--------------------: |
+| Service broker       | HTTP/HTTPS |                   8761 |
+| Text handler         |    HTTP    |                   8899 |
+| Renderer             |    HTTP    |                   9091 |
+| Converter            |    HTTP    |                  19999 |
+
+## Software requirement
+
+| Software                        | Requirement                                                                                                                                               |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Java Runtime                    | JRE 1.8 64 bits Minimum, OpenJDK 11 advised. Oracle JDK are supported, JRE IBM J9 is unsupported.                                                         |
+
+
+If the JVM used is not **64 bits**, the rendition will now stop its boot and
+warn in the logs/console that the version of the JVM used is incorrect.
+
+
+## Access rights
 
 ### Installation
 
-L'utilisateur doit avoir les droits suivants :
-* Création de dossier
-* Création de service
+The user must have the following rights:
+* Folder creation,
+* Service creation.
 
-### Exécution
+### Launch
 
-L'utilisateur doit avoir les droits suivants :
-* Lecture et exécution sur tous les fichiers du dossier de la Rendition,
-* Lecture et exécution sur tous les logiciels additionnels.
+The user must have the following rights:
+* Read and execution for the files into the Rendition folder, 
+* Read and execution for third party softwares.
 
-## Spécificités pour Amazon Web Services (AWS)
+## Amazon Web Services (AWS) specific
 
-Assurez-vous que le rôle attribué à l'instance EC2 dispose des permissions pour décrire l'instance si celle-ci doit être
-identifiée par un tag.
+Ensure the role attached to the EC2 instance has permissions to describe the instance if it needs to be identified by a 
+tag.

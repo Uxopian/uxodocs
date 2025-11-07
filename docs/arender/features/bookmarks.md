@@ -1,83 +1,60 @@
 ---
-title: Signets
+title: "Bookmarks"
 ---
 
-Vous pouvez accéder aux signets en cliquant sur l'explorateur de signet qui ouvrira le panneau des signets.
-```xml
-<!-- Commentaire nettoyé -->
-```
 
 
-Un signet possède un titre et un lien vers une page du document. 
-
-## Ajout d’un signet
-```xml
-Pour créer un signet, il suffit de cliquer sur l'icône permettant de l’ajouter. <!-- Commentaire nettoyé -->
-```
-
-Lors de sa création, vous devez ajouter le titre du signet. C’est le numéro de page actuel qui sera utilisé comme lien. 
-Si vous souhaitez ajouter un signet dans un autre signet, vous sélectionnez le signet parent puis vous cliquez sur le bouton d’ajout.
 
 
-Vous pouvez également sélectionner le signet, faire un clic droit et ajouter un signet. 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
 
-## Supprimer un signet  
-```xml
-Pour supprimer un signet, vous pouvez le sélectionner puis vous cliquez sur le bouton supprimer. <!-- Commentaire nettoyé -->. 
-```
+You can access the bookmarks by clicking on the bookmark explorer that will open the bookmarks panel.
+![image](/img/arender/documentation/features/bookmarks/bookmark-explorer.png)
+
+A bookmark has a title and a link to a page in the document.
+
+## Adding a bookmark
+
+To create a bookmark, click on the icon to add it. ![image]()
+When creating it, you must add the title of the bookmark. The current page number will be used as a link.
+If you want to add a bookmark to another bookmark, you select the parent bookmark and click the add button. 
 
 
-Vous pouvez sélectionner le signet, faire un clic droit et supprimer.
-```xml
-<!-- Commentaire nettoyé -->
-```
+You can also select the bookmark, right click and add a bookmark.
+![image](/img/arender/documentation/features/bookmarks/contextual-menu-add-bookmark-en.png)
 
-```xml
-Dans ces deux cas, une popup de confirmation apparaîtra. Si le signet supprimé n'a pas d'enfant, cette popup apparaîtra : <!-- Commentaire nettoyé -->. 
-Si le signet supprimé a des enfants, cette popup apparaîtra : <!-- Commentaire nettoyé -->
-```
+## Remove a bookmark
+To remove a bookmark, you can select it and click the remove button. 
+![image]()
 
-```xml
-Sans sélectionner, vous pouvez supprimer un signet en cliquant sur le bouton de suppression. Cette popup apparaît : <!-- Commentaire nettoyé -->
-Si vous acceptez, le bouton passera en mode répétition, <!-- Commentaire nettoyé --> dès que vous cliquerez sur un signet il sera supprimé. Pour désactiver ce mode, appuyez de nouveau sur le bouton supprimer.
-```
+You can also select the bookmark, right click and delete the current bookmark. 
+![image](/img/arender/documentation/features/bookmarks/contextual-menu-remove-bookmark-en.png)
 
-Si vous supprimez un signet parent, ses enfants seront également supprimés.
+In both cases, a confirmation popup will appear. If the deleted bookmark does not have a child, this popup will appear: ![image](/img/arender/documentation/features/bookmarks/remove-bookmark-popup-en.png)
+If the deleted bookmark has children, this popup will appear: ![image](/img/arender/documentation/features/bookmarks/remove-bookmarks-popup-en.png)
 
-## Modifier un signet
+Without selecting, you can delete a bookmark by clicking on the delete button. This popup appears: ![image](/img/arender/documentation/features/bookmarks/repeat-remove-bookmark-popup-en.png)
+If you validate, the button will switch to repeat mode, ![image]() as soon as you click on a bookmark it will be deleted. To disable this mode, click on the delete button again.
 
-Il existe deux façons de renommer un signet : 
-* En faisant un double clique dessus et modifier le texte
-* En faisant un clic droit sur le signet, sélectionner l’option “Renommer” du menu contextuel puis modifier le texte.
+If you delete a parent bookmark, its children will also be deleted.
 
-```xml
- <!-- Commentaire nettoyé -->
-```
+## Modify a bookmark 
 
+To rename a bookmark there are two possibilities:
+*  By double-clicking on it and change the text
+* By right click on the target bookmark and select the “Rename” option in the contextual menu
 
-## Modifier le lien du signet 
+![image](/img/arender/documentation/features/bookmarks/rename-bookmark-en.png)
 
-Pour modifier le numéro de page en lien du signet, sélectionner le signet, faire un clic droit et modifier le lien. 
+## Change the bookmark link 
 
-```xml
-<!-- Commentaire nettoyé --> 
-```
+To change the page number in the bookmark link, select the bookmark, right-click and change the link.
+ ![image](/img/arender/documentation/features/bookmarks/link-bookmark-en.png)
+A popup appears, you need to enter your new page number and confirm. 
+ ![image](/img/arender/documentation/features/bookmarks/link-bookmark-popup-en.png)
 
-Une popup apparaît, vous devez entrer votre nouveau numéro de page et confirmer. 
+ ## Drag and drop
+It is possible to move a bookmark by dragging and dropping it to its new place.
 
-```xml
-<!-- Commentaire nettoyé --> 
-```
-
-## Glisser déposer
-Il est possible de modifier la place d'un signet en le glissant et déposant à sa nouvelle place. 
-
-
-Pendant le glisser déposer, un trait bleu vous indique où le signet serait ajouté.
-```xml
-<!-- Commentaire nettoyé -->
-```
+During the drag drop, a blue line shows you where the bookmark would be added.
+![image](/img/arender/documentation/features/bookmarks/drag-and-drop-bookmark.gif)

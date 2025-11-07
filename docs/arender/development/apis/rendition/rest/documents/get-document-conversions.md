@@ -1,28 +1,35 @@
 ---
-title: Obtenir les conversions d'un document (GET)
+title: "GET document conversions"
 ---
 
-Cette API permet d'obtenir les ids de conversion d'un document.
 
-## Description technique de l'API
 
-Point de terminaison:
+
+
+
+
+
+This API allows you to retrieve a conversion ids of a document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/conversions
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
-## Exemples
+## Examples
 
-### Obtenir les conversions
+### Retrieve conversions
 
-L'exemple ci-dessous permet d'obtenir les conversions d'un document
-avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
+The following example retrieves conversion ids of a document
+with ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
 
 ```bash
 curl -X 'GET' \

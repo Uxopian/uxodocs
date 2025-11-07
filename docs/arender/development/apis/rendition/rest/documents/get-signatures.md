@@ -1,34 +1,39 @@
 ---
-title: Obtenir les signatures (GET)
+title: "GET Signatures"
 ---
 
-Cette API vous permet d'obtenir les signatures d'un document précédemment transmis.
 
-## Description technique de l'API
 
-Point d'entrée :
+
+
+
+
+This API allows you to retrieve the signatures of a specific document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/signatures
 ```
 
+Resource path:
 
-Chemin de la ressource:
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
+Response :
 
-Réponse :
+| Type       | Description                    |
+| :--------- |:-------------------------------|
+| Signatures | The signatures of the document |
 
-| Type         | Description                |
-|:-------------|:---------------------------|
-| Signatures   | Les signatures du document |
+## Examples
 
-## Exemples
+### Retrieve Signatures
 
-### Obtenir les signatures
-
-L'appel ci-dessous génère une requête pour obtenir les signatures du document avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
+The call below generates a request to retrieve the signatures for a document with the ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
 
 ```bash
 curl -X 'GET' \

@@ -1,44 +1,49 @@
 ---
-title: Récupérer un ordre de conversion (GET)
+title: "GET a conversion order"
 ---
 
-Cette API permet de récupérer un ordre de conversion précédemment demandé.
 
-## Description technique de l'API
 
-Point de terminaison :
+
+
+
+
+
+This API allows you to retrieve a conversion order previously requested.
+
+## API technical description
+
+Entry point:
 ```bash
-GET /conversions/<ConversionOrderId>
+GET /conversions/&lt;ConversionOrderId&gt;
 ```
 
-Chemin de ressource :
+Resource path:
 
-| Variable             | Description                    |
-| :------------------- |:-------------------------------|
-| conversionOderId     | L'ID d'un ordre de conversion. |
+| Variable             | Description                   |
+| :------------------- |:------------------------------|
+| conversionOderId     | The ID of a conversion order. |
 
-Réponse :
+Response:
 
-| Attribut              | Type                  | Description            |
-| :-------------------- | :-------------------- |:-----------------------|
-| conversionOrder       | ConversionOrder       | L'ordre de conversion. |
+| Attribute             | Type                  | Description                   |
+| :-------------------- | :-------------------- |:------------------------------|
+| conversionOrder       | ConversionOrder       | the conversion order details. |
 
-## Exemples
+## Examples
 
-### Récupérer un ordre de conversion
+### Retrieve a conversion order
 
-L'appel ci-dessous génère une demande de récupération de l'ordre de conversion avec l'id _123e4567-e89b-12d3-a456-426614174000_.
+The call below generates a request to retrieve the conversion order with id _123e4567-e89b-12d3-a456-426614174000_.
 
 ```bash
-
 curl -X 'GET' \
   'http://localhost:8761/conversions/123e4567-e89b-12d3-a456-426614174000' \
   -H 'accept: */*'
 ```
-
-Exemple de réponse :
+Response sample:
 ```bash
-{
+
   "conversionOrderId": {
     "id": "string"
   },
@@ -46,9 +51,9 @@ Exemple de réponse :
   "documentId": "string",
   "errorMessage": "string",
   "format": "string",
-  "processedDate": "2023-06-19T16:10:36.927Z",
+  "processedDate": "2023-06-19T16:12:24.476Z",
   "processingTime": 0,
-  "queuedDate": "2023-06-19T16:10:36.927Z",
+  "queuedDate": "2023-06-19T16:12:24.476Z",
   "queuedTime": 0
-}
+
 ```

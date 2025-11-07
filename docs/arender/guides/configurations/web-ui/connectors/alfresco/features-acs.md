@@ -1,60 +1,87 @@
 ---
-title: Fonctionnalités Alfresco Content Services
+title: "Features Alfresco Content Services"
 ---
 
-## Utilisation des rôles et permissions Alfresco dans ARender
+
+
+
+
+
+
+## Use Alfresco roles and permissions in ARender
 
 ### Introduction
 
-Alfresco comporte un système d'autorisation : un utilisateur a un rôle qui détermine ce qu'il peut et ne peut pas faire sur un site particulier. Chaque rôle possède un ensemble d'autorisations par défaut.
-Les sections suivantes décrivent ces autorisations :
+Alfresco offers a permission system: a user has a role that determines what he can and cannot do in a specific site. Each role has a default set of permissions.
+The following sections describe these permissions. In general:
 
-- Les **gestionnaires** ont tous les droits sur tout le contenu du site - ce qu'ils ont créé eux-mêmes et ce que les autres membres du site ont créé.
-- Les **collaborateurs** ont tous les droits sur le contenu du site qu'ils possèdent, ils ont le droit de modifier mais pas de supprimer le contenu créé par d'autres membres du site.
-- Les **contributeurs** ont tous les droits sur le contenu du site qu'ils possèdent, ils ne peuvent pas modifier ou supprimer le contenu créé par d'autres membres du site.
-- Les **consommateurs** ont des droits en lecture seule sur un site : ils ne peuvent pas créer leur propre contenu.
+- **Managers** have full rights to all site content - what they have created themselves and what other site members have created.
+- **Collaborators** have full rights to the site content that they own; they have rights to edit but not delete content created by other site members.
+- **Contributors** have full rights to the site content that they own; they cannot edit or delete content created by other site members.
+- **Consumers** have view-only rights in a site : they cannot create their own content.
 
-## Les rôles utilisateur pour ARender
+### User roles for ARender
 
-ARender peut désactiver certaines fonctionnalités en fonction du rôle Alfresco de l'utilisateur connecté.
+ARender can take these into account by disabling some functionalities according to the logged user role.
 
-- Les **gestionnaires** et les **collaborateurs** ont toutes les fonctionnalités d'ARender.
-- Les **contributeurs** peuvent uniquement modifier et supprimer leurs propres annotations. Ils ne peuvent pas non plus supprimer le contenu de rédaction.
-- Les **consommateurs** ne peuvent pas créer, modifier ou supprimer des annotations, utiliser le document builder, créer un bookmark ou utiliser la fonctionnalité de rédaction.
+- **Managers** and **Collaborators** have all the ARender features.
+- **Contributors** can only modify and delete their own annotations. They also can’t delete the redact content.
+- **Consumers** cannot create, modify or delete annotations, use the document builder, create a bookmark or use the redact functionality.
 
-Pour activer l'utilisation des rôles Alfresco, utilisez la propriété suivante :
+To enable the use of Alfresco roles, use the following property :
 
 ```cfg
 arender.server.alfresco.use.roles=true
 ```
 
-### Customisation des rôles Alfresco
+### Customization of Alfresco roles
 
-Les droits pour chaque rôle peuvent être changés, pour cela des fichiers de configuration doivent être modifiés :
+Rights for each role can be changed applying configuration on ARender side to customize alfresco roles:
 
 #### configurations/arender-custom-server.properties
 
-Ce fichier contient divers droits ARender sous forme de propriétés et sont associés aux rôles Alfresco, par défaut :
+This file contains various ARender rights with properties and are associated with Alfresco roles, by default:
+
 
 
 ```cfg
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
 arender.server.alfresco.role.create.annotation=SiteManager,SiteCollaborator,SiteContributor
 arender.server.alfresco.role.modify.annotation=SiteManager,SiteCollaborator
 arender.server.alfresco.role.modify.own.annotation=SiteContributor
 arender.server.alfresco.role.create.redaction=SiteManager,SiteCollaborator,SiteContributor
 arender.server.alfresco.role.delete.redaction=SiteManager,SiteCollaborator
 ```
+```
+```
+```
+```
+```
+```
 
 
-| Propriétés                                            | Droit                                             |
-| ----------------------------------------------------- | ------------------------------------------------- |
-| arender.server.alfresco.role.create.annotation        | Permet la création d'annotations                  |
-| arender.server.alfresco.role.modify.annotation        | Permet la modification d'annotations              |
-| arender.server.alfresco.role.modify.own.annotation    | Permet la modification de ses propres annotations |
-| arender.server.alfresco.role.delete.redaction         | Permet la suppression de contenu redact           |
-| arender.server.alfresco.role.create.redaction         | Permet la création de contenu redact              |
 
-Ces propriétés peuvent être modifiées pour, par exemple, pour restreindre la création d'annotations aux Managers et Contributeurs :
+| Property                                              | Right                                  |
+| ----------------------------------------------------- | -------------------------------------- |
+| arender.server.alfresco.role.create.annotation        | Allows the creation of annotations     |
+| arender.server.alfresco.role.modify.annotation        | Allows the modification of annotations |
+| arender.server.alfresco.role.modify.own.annotation    | Allows modification of own annotations |
+| arender.server.alfresco.role.create.redaction         | Allows the creation of redact content  |
+| arender.server.alfresco.role.delete.redaction         | Allows the deletion of redact content  |
+
+These properties can be overridden to, for example, to restrict annotation creation to the manager and contributor roles.
+
 
 
 ```cfg
@@ -62,9 +89,12 @@ arender.server.alfresco.role.create.annotation=SiteManager,SiteContributor
 ```
 
 
-Pour paramétrer l'utilisation du document builder et des bookmarks, un autre fichier doit être configuré : **role-*roles*.properties**
 
-Pour exemple, la création de bookmarks, pour le rôle manager, peut être permise en ajoutant dans le fichier **role-sitemanager.properties** la ligne suivante :
+To configure the use of the document builder and bookmarks, another file must be configured: **role-*roles*.properties**
+
+For example, the creation of bookmarks for the role manager can be enabled by adding the following line to the **role-sitemanager.properties**
+file:
+
 
 
 ```cfg
@@ -72,45 +102,50 @@ bookmarkexplorer.add.bookmark.enabled=true
 ```
 
 
-### Utilisation des rôles via les permissions pour ARender
 
-Dans Alfresco, des rôles spécifiques peuvent être attribués pour chaque utilisateur ou groupe pour des fichiers ou dossiers individuels depuis la gestion de permissions.
+### Using roles with permissions
 
-Il est possible de retrouver la liste des permissions liées à un node depuis l'API alfresco : */alfresco/s/slingshot/doclib/permissions/workspace/SpacesStore/node*
+In Alfresco, specific roles can be assigned for each user or group for individual files or folders from the permissions management.
 
-Pour activer l'utilisation des permissions :
+It is possible to find the list of permissions linked to a node from the alfresco API : */alfresco/s/slingshot/doclib/permissions/workspace/SpacesStore/node*
+
+To activate the use of permissions :
 ```cfg
 arender.server.alfresco.use.permissions=true
 ```
 
-Quand un document est ouvert, toutes les permissions associées à l'utilisateur courant sont récupérées :
+When a document is open, all the permissions associated with the current user are retrieved:
 
-- Les permissions directement associées à l'utilisateur.
-- Les permissions associées aux groupes dont l'utilisateur appartient.
-- Les permissions héritées du dossier parent.
-- Le rôle associé à l'utilisateur du site.
+- The permissions directly associated with the user.
+- The permissions associated with the groups to which the user belongs.
+- The permissions inherited from the parent folder.
+- The role associated with the site user.
 
-Pour choisir le rôle à appliquer selon les permissions récupérées, une configuration hiérarchique existe :
+To choose the role to apply according to the permissions retrieved, a hierarchical configuration exists:
 ```cfg
 arender.server.alfresco.role.hierarchy=SiteManager,SiteCollaborator,SiteContributor,SiteConsumer
 ```
 
-Les rôles y sont écrits de la plus grande priorité à la plus petite.
+Roles are written there from highest priority to lowest.
 
-Le rôle appliqué sera le rôle le plus élevé dans la liste correspondant aux rôles des permissions retrouvées.
+The applied role will be the highest role in the list corresponding to the roles of the permissions found.
 
-Si aucun des rôles retrouvés ne correspond à un rôle de la liste **arender.server.alfresco.role.hierarchy**, alors le rôle le moins élevé de la liste est appliqué.
-Si la liste **arender.server.alfresco.role.hierarchy** est vide, une liste par défaut est alors prise en compte et a pour valeur : 
+If none of the roles found are matching a role in the **arender.server.alfresco.role.hierarchy** list, then the lowest role in the list is applied.
+If the **arender.server.alfresco.role.hierarchy** list is empty, then a default list is taken into account and has the value : 
 ```cfg
 SiteManager,SiteCollaborator,SiteContributor,SiteConsumer
 ```
+
+
 ## Annotation 
 
-#### Désactivation de la migration des annotations
+#### Deactivate annotation migration
 
-Ajouter la propriété ci-après si les deux conditions suivantes sont respectées :
-* Aucune annotation ARender n'est présente dans Alfresco,
-* ou, les annotations ARender présentes dans Alfresco n'ont été créées **qu'avec des versions d'ARender postérieur à la version 4.0.9**
+Add the property hereafter if the below conditions are respected:
+
+* There is no ARender annotation in Alfresco,
+* Or, ARender annotations that exists in Alfresco have been created only **with versions newer than the 4.0.9**
+
 
 
 ```cfg
@@ -118,12 +153,14 @@ arender.server.alfresco.annotation.migrate.to.new.child.api=false
 ```
 
 
+
 ## Document Builder
 
-### Transférer les annotations via le document builder
+### Annotations transfer through the document builder
 
-Lors de la création ou de la mise à jour d'un nouveau document dans le document builder, les annotations présentes sur le document en cours peuvent être transférées sur le nouveau document.
-Pour cela, la propriété **arender.server.alfresco.document.builder.transfer.annotations** doit être activée :
+When creating or updating a new document on the document builder, the annotations on the current document can be transferred to the new document.
+To do this, the **arender.server.alfresco.document.builder.transfer.annotations** property must be enabled :
+
 
 
 ```cfg
@@ -131,9 +168,11 @@ arender.server.alfresco.document.builder.transfer.annotations=true
 ```
 
 
-### Mise à jour de tous les documents après un découpage de documents
 
-En utilisant fonctionnalité de découpage/fusion de document, la mise à jour de tous les documents est permise avec la propriété :
+### Update all in the document builder
+
+By using the document builder, updating all documents is allowed with the property :
+
 
 
 ```cfg
@@ -141,13 +180,15 @@ documentbuilder.button.updateAll.enabled=true
 ```
 
 
-Plusieurs versions du document original seront ainsi créées correspondant aux découpages effectués. Le transfert d'annotation est possible avec cette fonctionnalité.
 
-### Nombre de renommages de document sauvegardés
+Several versions of the original document will be created corresponding to the documents made in the document builder. Annotation transfer is possible with this feature.
 
-Quand un utilisateur sauvegarde un nouveau document via le Document Builder ARender, le titre du document peut déjà exister dans Alfresco. Dans ce cas, ARender va renommer le titre du document avec un nombre. Exemple : *titreDocument(1).pdf*.
+### Number of renamed built documents
 
-Le nombre de renommages est de 5 par défaut. Pour modifier cette valeur ajouter la propriété ci-dessous :
+When a user saves a new document using ARender Document Builder, the document title can already exist. In that case, ARender will rename the title with a number. Example: *documentName(1).pdf*
+
+The number of renaming is by default: 5. To change this value add the below property:
+
 
 
 ```cfg
@@ -155,11 +196,13 @@ arender.server.alfresco.document.builder.number.try.rename.document=5
 ```
 
 
-## Afficher l'activité de la visualisation de document
 
-Par défaut, l'événement de la visualisation d'un document dans Alfresco est affiché dans le tableau *My activities*.
+## Feed the document view activity
 
-Pour avoir cet événement avec ARender, une propriété doit être activée :
+By default, the activity of viewing a document in Alfresco is displayed in the *My activities* board.
+
+To have this event with ARender, a property must be set :
+
 
 
 ```cfg
@@ -167,9 +210,11 @@ arender.preview.activity.feed.enabled=true
 ```
 
 
-## Afficher des métadonnées Alfresco dans la vignette
+## Show Alfresco metadata in ARender
 
-Pour activer l'affichage de métadonnées dans la vignette du document, la propriété *arender.server.alfresco.show.metadatas* doit être activée.
+To enable the display of metadata while hovering the document thumbnail, the **arender.server.alfresco.show.metadatas**
+property must be enabled.
+
 
 
 ```cfg
@@ -177,11 +222,13 @@ arender.server.alfresco.show.metadatas=true
 ```
 
 
-Pour spécifier quelle métadonnée sera affichée dans la vignette, leurs noms devront être renseigner dans la propriété *arender.server.alfresco.included.metadatas*
 
-Ils devront correspondre au nom de propriétés situées dans le champ *properties* lors de l'appel à l'URL de récupération de métadonnées Alfresco  *http://127.0.0.1:8080/alfresco/service/api/metadata?nodeRef=XXX&shortQNames*
+To specify which metadata will be displayed in the thumbnail, their names will need to be set in the *arender.server.alfresco.included.metadatas* property
 
-Plusieurs propriétés peuvent être affichées séparés par une virgule, ainsi, pour afficher la date de création d'un document et son type de version, la propriété doit être :
+They should match the name of the properties located in the *properties* field when calling the Alfresco metadata retrieval URL *http://127.0.0.1:8080/alfresco/service/api/metadata?nodeRef=XXX&amp;shortQNames*
+
+Multiple properties can be displayed separated by a comma, so to display the creation date of a document and its version type, the property is :
+
 
 
 ```cfg
@@ -189,10 +236,12 @@ arender.server.alfresco.included.metadatas=cm:created,cm:version_type
 ```
 
 
-Le formatage de l'affichage des dates de création et de modification peut-être changé avec la propriété *date.format*, par défaut : 
+
+The formatting of the display of creation and modification dates can be changed with the *date.format* property, by default :
+
 
 
 ```cfg 
-date.format=dd-MM-yyyy HHss
+date.format=dd-MM-yyyy HH:mm:ss
 ```
 

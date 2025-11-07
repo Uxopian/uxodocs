@@ -1,34 +1,39 @@
 ---
-title: Ajouter une annotation de type surlignage
+title: "Add a highlight notification"
 ---
 
-```xml
-L'API JavaScript permet de mettre en place des souscriptions pour recevoir des événements lors d'actions variées sur ARender (ajout / suppression de notification, rotation de page, ou encore clic sur un hyperlien). Ces informations sont accessibles **** **[dans la documentation](<!-- Commentaire nettoyé -->)** ****
-```
-
-
-```xml
-Il est également possible de créer des annotations de type surlignage directement depuis l'application hôte, sans le faire manuellement dans ARender, à l'aide de la fonction **addAnnotation** de l'API JavaScript en suivant **** **[ces indications](<!-- Commentaire nettoyé -->)** ****.
-```
 
 
 
-Pour utiliser cette fonction depuis une autre application qu'ARender, il suffira de remplacer l'objet **window** de la documentation par l'objet adéquat suivant le framework utilisé :
+
+
+
+The JavaScript API allows you to set up subscriptions to receive events during various actions on ARender (e.g., adding/removing notifications, rotating a page, or clicking on a hyperlink). This information is accessible <i class="ti-hand-point-right" /> <ins>[in the documentation](./development/apis/web-ui/javascript/annotation-js-api.md)</ins> <i class="ti-hand-point-left" ></i>
+
+It is also possible to create highlight-type annotations directly from the host application, without doing so manually in ARender, using the **addAnnotation** function of the JavaScript API by following <i class="ti-hand-point-right" /> <ins>[these guidelines](./development/apis/web-ui/javascript/annotation-js-api#create-an-highlight-annotation.md)</ins> <i class="ti-hand-point-left" ></i>.
+
+To use this function from an application other than ARender, simply replace the window object in the documentation with the appropriate object based on the framework being used.
+
+
+    
 ```javascript
 
 const iframeWindow = iframeRef.current.contentWindow
 
-/**
- * Ajoute une annotation au document en cours.
- * @param x La coordonnée x de l'annotation.
- * @param y La coordonnée y de l'annotation.
- * @param w La largeur de l'annotation.
- * @param h La hauteur de l'annotation.
- * @param page Le numéro de page de l'annotation.
- * @param color La couleur de l'annotation.
- * @param opacity L'opacité de l'annotation.
- * @param type Le type de l'annotation.
+/*
+ * Add an highlight annotation 
+ *
+ * @param {string} documentId - ID of the document
+ * @param {string} type - the annotation type (only "Highlight" is supported)
+ * @param {integer} x - the annotation x coordinate
+ * @param {integer} y - the annotation y coordinate
+ * @param {integer} w - the annotation width
+ * @param {integer} h - the annotation height
+ * @param {page} page - the annotation page
+ * @param {string} color - the annotation color
+ * @param {float} opacity - the annotation opacity
  */
+
 var documentId = iframeWindow.getARenderJS().getCurrentDocumentId();
 var type = "Highlight";
 var x = 50;
@@ -42,22 +47,27 @@ var opacity = 0.4;
 iframeWindow.getARenderJS().getAnnotationJSAPI().addAnnotation(
     documentId, type, x, y, w, h, page, color, opacity);
 ```
+    
+    
 
 ```javascript
 
 const iframeWindow = this.iframeRef.nativeElement.contentWindow;
 
-/**
- * Ajoute une annotation au document en cours.
- * @param x La coordonnée x de l'annotation.
- * @param y La coordonnée y de l'annotation.
- * @param w La largeur de l'annotation.
- * @param h La hauteur de l'annotation.
- * @param page Le numéro de page de l'annotation.
- * @param color La couleur de l'annotation.
- * @param opacity L'opacité de l'annotation.
- * @param type Le type de l'annotation.
+/*
+ * Add an highlight annotation 
+ *
+ * @param {string} documentId - ID of the document
+ * @param {string} type - the annotation type (only "Highlight" is supported)
+ * @param {integer} x - the annotation x coordinate
+ * @param {integer} y - the annotation y coordinate
+ * @param {integer} w - the annotation width
+ * @param {integer} h - the annotation height
+ * @param {page} page - the annotation page
+ * @param {string} color - the annotation color
+ * @param {float} opacity - the annotation opacity
  */
+
 var documentId = iframeWindow.getARenderJS().getCurrentDocumentId();
 var type = "Highlight";
 var x = 50;
@@ -71,58 +81,75 @@ var opacity = 0.4;
 iframeWindow.getARenderJS().getAnnotationJSAPI().addAnnotation(
     documentId, type, x, y, w, h, page, color, opacity);
 ```
+    
+    
 ```javascript
 /**
- * Retourne l'objet ARenderJS depuis l'iframe.
- * Génère une erreur si l'iframe n'est pas accessible ou n'est pas chargé.
+ * Returns the ARenderJS object from the iframe.
+ * Throws an error if the iframe is not accessible or not loaded.
  */
-function getARenderJS() <!-- Commentaire nettoyé -->
+function getARenderJS() &#123;
+  const iframeWindow = iframeRef.value?.contentWindow
+    ? iframeRef.value.contentWindow
+    : undefined
+
+  if (iframeWindow) &#123;
+    return iframeWindow.getARenderJS()
+
   throw new Error("The iframe is not accessible or not loaded.")
-}
 
 /**
- * Ajoute une annotation au document en cours.
- * @param x La coordonnée x de l'annotation.
- * @param y La coordonnée y de l'annotation.
- * @param w La largeur de l'annotation.
- * @param h La hauteur de l'annotation.
- * @param page Le numéro de page de l'annotation.
- * @param color La couleur de l'annotation.
- * @param opacity L'opacité de l'annotation.
- * @param type Le type de l'annotation.
+ * Adds an annotation to the current document.
+ * @param x The x coordinate of the annotation.
+ * @param y The y coordinate of the annotation.
+ * @param w The width of the annotation.
+ * @param h The height of the annotation.
+ * @param page The page number of the annotation.
+ * @param color The color of the annotation.
+ * @param opacity The opacity of the annotation.
+ * @param type The type of the annotation.
  */
-
-function addAnnotation(x, y, w, h, page, color, opacity, type = "Highlight") <!-- Commentaire nettoyé -->
+function addAnnotation(x, y, w, h, page, color, opacity, type = "Highlight") &#123;
+  const documentId = getARenderJS().getCurrentDocumentId()
+  getARenderJS()
+    .getAnnotationJSAPI()
+    .addAnnotation(documentId, type, x, y, w, h, page, color, opacity)
 
 /**
- * Expose la fonction `addAnnotation` au composant parent.
+ * Expose the `addAnnotation` function to the parent component.
  */
-defineExpose({
+defineExpose(&#123;
   addAnnotation
-})
+&#125;)
 ```
+    
+    
 ```javascript
 /**
- * Retourne l'objet ARenderJS depuis l'iframe.
- * Génère une erreur si l'iframe n'est pas accessible ou n'est pas chargé.
+ * Returns the ARenderJS object from the iframe.
+ * Throws an error if the iframe is not accessible or not loaded.
  */
-function getARenderJS() <!-- Commentaire nettoyé -->
+function getARenderJS() &#123;
+  const iframeWindow = iframeRef?.contentWindow
+    ? iframeRef.contentWindow
+    : undefined
+
+  if (iframeWindow) &#123;
+    return iframeWindow.getARenderJS()
+
   throw new Error("The iframe is not accessible or not loaded.")
-}
 
 /**
- * Ajoute une annotation au document en cours.
- * @param x La coordonnée x de l'annotation.
- * @param y La coordonnée y de l'annotation.
- * @param w La largeur de l'annotation.
- * @param h La hauteur de l'annotation.
- * @param page Le numéro de page de l'annotation.
- * @param color La couleur de l'annotation.
- * @param opacity L'opacité de l'annotation.
- * @param type Le type de l'annotation.
+ * Adds an annotation to the current document.
+ * @param x The x coordinate of the annotation.
+ * @param y The y coordinate of the annotation.
+ * @param w The width of the annotation.
+ * @param h The height of the annotation.
+ * @param page The page number of the annotation.
+ * @param color The color of the annotation.
+ * @param opacity The opacity of the annotation.
+ * @param type The type of the annotation.
  */
-function addAnnotation(x, y, w, h, page, color, opacity, type = "Highlight") <!-- Commentaire nettoyé -->
-
 export function addAnnotation(
   x,
   y,
@@ -132,24 +159,30 @@ export function addAnnotation(
   color,
   opacity,
   type = "Highlight"
-) <!-- Commentaire nettoyé -->
+) &#123;
+  let documentId = getARenderJS().getCurrentDocumentId()
+  getARenderJS()
+    .getAnnotationJSAPI()
+    .addAnnotation(documentId, type, x, y, w, h, page, color, opacity)
 
 ```
-```xml
-    <!-- Commentaire nettoyé -->
-```
+    
+    
 ```javascript
-/**
- * Ajoute une annotation au document en cours.
- * @param x La coordonnée x de l'annotation.
- * @param y La coordonnée y de l'annotation.
- * @param w La largeur de l'annotation.
- * @param h La hauteur de l'annotation.
- * @param page Le numéro de page de l'annotation.
- * @param color La couleur de l'annotation.
- * @param opacity L'opacité de l'annotation.
- * @param type Le type de l'annotation.
+/*
+ * Add an highlight annotation 
+ *
+ * @param {string&#125; documentId - ID of the document
+ * @param {string&#125; type - the annotation type (only "Highlight" is supported)
+ * @param {integer&#125; x - the annotation x coordinate
+ * @param {integer&#125; y - the annotation y coordinate
+ * @param {integer&#125; w - the annotation width
+ * @param {integer&#125; h - the annotation height
+ * @param {page} page - the annotation page
+ * @param {string} color - the annotation color
+ * @param {float} opacity - the annotation opacity
  */
+
 var documentId = iframeWindow.getARenderJS().getCurrentDocumentId();
 var type = "Highlight";
 var x = 50;
@@ -161,9 +194,13 @@ var color = "#FF0000";
 var opacity = 0.4;
 
 const iframe = document.getElementById('arender-iframe');
-if (iframe && iframe.contentWindow) <!-- Expression supprimée -->;
-} else <!-- Expression supprimée -->;
-}  
+if (iframe && iframe.contentWindow) {
+    getARenderJS().getAnnotationJSAPI().addAnnotation(
+    documentId, type, x, y, w, h, page, color, opacity);
+} else {
+    console.error("The iframe is inaccessible or not loaded yet.");
 
 ```
+
+    
 

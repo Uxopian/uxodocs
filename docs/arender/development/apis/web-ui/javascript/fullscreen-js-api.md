@@ -1,12 +1,18 @@
 ---
-title: Plein écran
+title: "Full screen"
 ---
 
-### Mettre en plein écran
 
-- Objet : getARenderJS().getFullScreenJSAPI()
 
-    | Fonction             | Description                   |
-    | -------------------- | ----------------------------- |
-    | askOpenFullScreen()  | Active le mode plein écran    |
-    | askCloseFullScreen() | Désactive le mode plein écran |
+
+
+
+
+### Switch to Full screen
+
+- Object: getARenderJS().getFullScreenJSAPI()
+
+    | Function             | Description                 |
+    | -------------------- | --------------------------- |
+    | askOpenFullScreen()  | Activate full screen mode   |
+    | askCloseFullScreen() | Deactivate full screen mode |

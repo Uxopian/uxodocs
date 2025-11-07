@@ -1,88 +1,98 @@
 ---
-title: Filigranes
+title: "Watermarks"
 ---
 
-Ce guide va vous aider à configurer ARender pour afficher un filigrane sur toutes les pages du document, à la visualisation et au téléchargement.
 
-## Utilisation du filigrane par défaut
 
-Un filigrane par défaut est pré-configuré dans ARender. Son contenu textuel est le suivant : *Viewed by $USERNAME$ at $TIMESTAMP$*
-$USERNAME$ sera remplacé par le nom de l'utilisateur courant
-$TIMESTAMP$ sera remplacé par la date et l'heure d'ouverture du document
+
+
+
+
+This guide will help you configure ARender to use watermarks.
+
+## Use ARender default Watermark
+
+A pre-configured watermark exists in ARender. Its content is: *Viewed by $USERNAME$ at $TIMESTAMP$*
+$USERNAME$ will be replaced with the current user name
+$TIMESTAMP$ will be replaced with the current time and time
 
 ### Configuration
 
-Pour configurer l'affichage du filigrane il faut ajouter les propriétés ci-dessous dans la configuration serveur de ARender (*configurations/arender-custom-server.properties*) :
+To activate this watermark on all documents you need to add the below properties to ARender server configuration (*arender-server-custom-vanilla.properties*)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
 
 ```cfg
-# Configuration de l'activation de l'ajout d'un filigrane à la visualisation
-# et au téléchargement via fichier de propriété
+# This allows to configure a watermark provider for the type of watermark
+# to apply on document preview
 arender.server.watermark.display.provider=activableDisplayWatermarkProvider
-# Activation du filigrane à la visualisation et au téléchargement
+# Activate the watermark at the viewing and on the downloaded document
 arender.watermark.activate.on.startup=true
-# Activez le traitement du rendu des annotations si vous devez utiliser la biffure ou le filigrane. Peut avoir un impact sur les performances si les annotations mettent du temps à être récupérées.
+# Enable annotations rendition processing if you need to use Redact or Watermark. Can have an impact on performances if the annotations take time to be fetched.
 arender.server.process.annotations.rendition=true
 ```
 
 
+
 ### Activation
 
-Pour activer la configuration précédente redémarrer simplement l'application WEB ARender Web-UI.
+Simply restart ARender web application and you will see watermarks on each page of the document
 
-## Pour aller plus loin
+## To go futher
 
-### Créer votre propre filigrane
+### Create your own watermark
 
-Vous pouvez créer le filigrane de votre choix en configurant son style et son contenu textuel avec des variables comme la date du jour et le nom de l'utilisateur.
-Ci-dessous le filigrane par défaut de ARender :
+You can create the watermark of your choice by configuring its style and its text content (with variables like the date of the day and its User Name).
+Below the default ARender watermark.
+
 
 
 ```xml
-**
-    
-    
-        <value type="com.arondor.viewer.annotation.common.AnnotationType">Stamp<!-- Commentaire nettoyé -->
-    
-    
-        **
-            
-            
-            
-            
-            
-            
-            
-        **
-    <!-- Commentaire nettoyé -->
-    
-**
+<bean id="customWatermark" class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
+    <property name="name" value="CUSTOM" />
+    <property name="annotationType">
+        <value type="com.arondor.viewer.annotation.common.AnnotationType">Stamp</value>
+    </property>
+    <property name="contentTemplate" value="Viewed by $USERNAME$ at $TIMESTAMP$" />
+    <property name="annotationStyle">
+        <bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
+            <property name="fontColor" value="black" />
+            <property name="fontSize" value="20" />
+            <property name="backgroundColor" value="none" />
+            <property name="borderColor" value="black" />
+            <property name="borderStyle" value="0" />
+            <property name="borderWidth" value="0" />
+            <property name="rotation" value="340" />
+        </bean>
+    </property>
+    <!--watermarkPosition available values are: CENTRE and TOP_LEFT-->
+    <property name="watermarkPosition" value="CENTER"/>
+</bean>
 ```
 
 
-#### Créer votre filigrane
 
-Pour créer votre filigrane :
+#### Create you own watermark
 
-- Copier le contenu ci-dessus dans votre configuration spécifique ARender (*arender-custom-server-integration.xml*)
-- Modifier l'ID du bean
-- Définir le style et le contenu textuel en modifiant les propriétés sous *AnnotationStyle*
+To create your own watermark:
 
-#### Pour configurer l'utilisation de votre filigrane  
+- Copy the above content in your specific ARender configuration (*arender-custom-server-integration.xml*)
+- Change the bean ID
+- Define its style and its textual content by modifying properties values under *annotationStyle*
 
-Ajouter la propriété ci-dessous dans la configuration serveur de ARender (*configurations/arender-custom-server.properties*).
-Sa valeur doit être la valeur de l'ID du bean que vous venez de créer.
+#### Configure the use of your own watermark
+
+Add the below property to ARender server configuration (*configurations/arender-custom-server.properties*).
+The value is the id of the bean you just created.
 
 
 ```cfg
-# Configuration du bean du filigrane à utiliser à la visualisation et au téléchargement de document
+# Default watermark used when watermarks are activated on startup
 arender.watermark.bean.name=ChangeWithYouBeanId
 ```
 
 
-### Activer votre filigrane
 
-Pour activer la configuration précédente redémarrer simplement l'application WEB ARender Web-UI.
+### Activate your watermark
+
+Simply restart ARender web application and your own watermark will be displayed on each page of the document.

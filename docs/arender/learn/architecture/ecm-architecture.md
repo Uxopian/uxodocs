@@ -1,14 +1,18 @@
 ---
-title: Architecture générale de GED
+title: "ECM general architecture"
 ---
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-* **N1: ECM UI**: a la responsabilité de laisser l'utilisateur choisir quel document il veut ouvrir dans ARender,
-* **N2: Browser**: va créer la "frame" d'ARender en utilisant l'URL fourni par N1,
-* **N3: ARender WEB-UI**: est un module Spring Boot qui contient le connecteur,
-* **N4: ECM Backend**: contient une API avec laquelle le connecteur ARender va interagir pour aller chercher les documents 
-(et si besoin les annotations, les métadonnées ou les nouvelles versions de documents),
-* **N5: ARender Rendition**: est un module Spring Boot qui va générer des images, extraire du texte et plus.
+
+
+
+
+
+![image](/img/arender/diagrams/ARender-Architecture-With-Connector.png)
+
+* **N1: ECM UI**: has the responsibility to let the user choose which documents he wants to open in ARender,
+* **N2: Browser**: will create the ARender frame using the URL provided by N1,
+* **N3: ARender WEB-UI**: is Spring Boot module which contains the connector,
+* **N4: ECM Backend**: contains API which ARender connector will interact with to fetch documents (and if needed fetch annotations 
+  and metadata and create new documents or new version of documents),
+* **N5: ARender Rendition**: is Spring Boot module that will generate images, extract text and more.

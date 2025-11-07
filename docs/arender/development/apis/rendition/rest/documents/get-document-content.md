@@ -1,46 +1,53 @@
 ---
-title: Obtenir le contenu d'un document (GET)
+title: "GET Document Content"
 ---
 
-Cette API vous permet de récupérer le contenu d'un document dans un format spécifique
-demandé, au format original dans le cas contraire.
 
-## Description de l'API
 
-Endpoint :
+
+
+
+
+
+This API allows you to retrieve the content of a document in specific format
+```javascript
+if provided otherwise in the original format.
+```
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/file
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
-
-
-Paramètres de requête:
-
-| Parameter | Requis | Description                     |
-|:----------|:-------|:--------------------------------|
-| format    | Non    | Le format de sortie du document |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
 
-Réponse :
+Query params:
 
-| Type                | Description                                |
-|:--------------------|:-------------------------------------------|
-| HttpServletResponse | Le contenu du document en tant que fichier |
+| Parameter | Required | Description                        |
+|:----------|:---------|:-----------------------------------|
+| format    | No       | The output format of the document  |
 
-## Exemple
 
-### Obtenir le contenu d'un document
+Response :
 
-L'exemple suivant récupère le contenu d'un document avec l'ID du document spécifié dans le format PDF.
-Le paramètre -o permet de sauvegarder le résultat dans un fichier de sorti.
+| Type                | Description                    |
+|:--------------------|:-------------------------------|
+| HttpServletResponse | The document content as a file |
+
+## Example:
+
+### Get Document Content
+
+The following example retrieves the content of a document with the specified 
+document ID in PDF format. The parameter -o allow to save the result in an output file.
 
 ```bash
 curl -X GET 'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/file?format=pdf' -o document.pdf
 ```
-
-

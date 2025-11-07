@@ -1,13 +1,19 @@
 ---
-title: Signatures
+title: "Signatures"
 ---
 
-### L'onglet des signatures
 
 
-Pour activer l'onglet des signatures, la propriété suivante doit être activée : 
 
-Avant la 4.6.0, la configuration est faite dans le document-service-broker (RenditionEngine)
+
+
+### Signatures tab
+
+
+To enable the Signatures tab, the following property must be enabled :
+
+Before 4.6.0, the configuration is done in the document-service-broker (RenditionEngine)
+
 
 
 ```cfg
@@ -16,7 +22,9 @@ services-broker:
 ```
 
 
-Depuis la 4.6.0, la configuration est faite dans le document-text-handler (PDFBoxEngine)
+
+Since 4.6.0, the configuration is done in the document-text-handler service (PDFBoxEngine)
+
 
 
 ```cfg
@@ -25,69 +33,56 @@ pdf.signatures.enable=true
 
 
 
-Après l'ouverture d'un document, un nouvel onglet dédié à la signature apparaît. En entête de ce dernier deux icônes peuvent apparaître :
 
-Signature valide :
-```xml
-<!-- Commentaire nettoyé -->
-```
-Signature non-valide :
-```xml
-<!-- Commentaire nettoyé -->
-```
+After opening a document, a new tab dedicated to signature appears. At the header of the latter two icons may appear:
 
-### Le cas nominal : une signature valide
+Valid signature :
+![image](/img/arender/signatureExplorerOK.png)
+Invalid signature :
+![image](/img/arender/signatureExplorerNOK.png)
 
-La signature est désignée comme valide à partir du moment où l’entête de l’onglet en question contient l’icône de la signature valide.
+### Nominal case : a valid signature
 
-Un clic sur ce dernier provoque l’ouverture de l’onglet comme ci-dessous :
+The signature is designated as valid as long as the header of the tab in question contains the icon of the valid signature.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+A click on it opens the tab like below :
+![image](/img/arender/SignaturesOK2_en.PNG)
 
-On peut y voir les informations suivantes :
+On this tab, we can see the following signature information :
 
-- Le signataire,
-- La conservation ou non de l’intégrité du document,
-- La validation ou non de la chaîne de certificat,
-- La date et l’heure de la signature,
-- La raison de la signature 
-- Le lieu de cette dernière.
+- The signer,
+- The PDF integrity, whether or not it's preserved,
+- The validation of the certificate chain,
+- The signature date,
+- The signature reason 
+- The signature location.
 
-### Les cas d'erreurs
+### Error cases
 
-Il est possible que le PDF ait été modifié après l’apposition de la signature, que la signature contenue dans le PDF ou que ses certificats ne soient pas valides. 
-Ainsi, l’intégrité n’est pas conservée ou l’identité du signataire ne peut être vérifiée.
+It is possible that the PDF has been modified after affixing the signature, that the signature contained in the PDF or that its certificates are not valid.
+Thus, the integrity is not preserved or the identity of the signatory cannot be verified.
 
-Au niveau de l’interface, l’alerte est donnée par l’icône de signature non-valide.
+At the interface level, the alert is given by the invalid signature icon.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/SignaturesNOK.PNG)
 
-Les différents types d'erreurs sont remontés au niveau du panneau des signatures :
+Different types of errors are reported to the signature panel :
 
-```xml
-- Non intégrité : <!-- Commentaire nettoyé -->
-```
-Si le document a été modifié ou endommagé.
+- Wrong integrity : ![image](/img/arender/signature-nok.svg)
+  Whether the document has been modified or damaged.
 
-```xml
-- Signature non valide : <!-- Commentaire nettoyé -->
-```
-Si la signature du document est non valide.
+- Invalid signature : ![image](/img/arender/document-altered.svg)
+  If the signature of the document is invalid.
 
-```xml
-- Certificat inconnu : <!-- Commentaire nettoyé -->
-```
-Il est possible de paramétrer une liste de certificats valides.
-  Pour cela, placer les certificats voulus dans un dossier défini par la propriété PUBLIC_CERT pour le service document-text-handler, dont la valeur par défaut est ../defaultPathPublicCert  :
+- Unknown certificate: ![image](/img/arender/certificate-unknown.svg)
+  It is possible to configure a list of valid certificates.
+  To do this, place the desired certificates in a folder defined by the PUBLIC_CERT property for the document-text-handler service, whose default value is ../defaultPathPublicCert:
+
 
 
 ```cfg
 PUBLIC_CERT=../defaultPathPublicCert
 ```
 
-Si la signature n'utilise pas un des certificats placés dans ce dossier, alors l'erreur de certificat inconnu sera remontée.
-Pour ne pas contrôler les certificats, laisser le dossier vide.
+If the signature does not use one of the certificates placed in this folder, then the unknown certificate error will be reported.
+To not check the certificates, leave the folder empty.

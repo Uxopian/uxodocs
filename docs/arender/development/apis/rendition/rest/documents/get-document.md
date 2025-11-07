@@ -1,33 +1,40 @@
 ---
-title: Récupérer les métadonnées d'un document (GET)
+title: "GET a document metadata"
 ---
 
-Cette API permet de récupérer les métadonnées d'un document.
 
-## Description technique de l'API
 
-Point de terminaison :
+
+
+
+
+
+This API allows you to retrieve a document metadata.
+
+## API Description
+
+Endpoint :
 ```bash
 GET /documents/{documentId}
 ```
 
-Chemin de ressource :
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
-Réponse :
+Response :
 
-| Type                  | Description             |
-|:----------------------|:------------------------|
-| DFSDocumentAccessor   | L'accesseur du document |
+| Type                | Description            |
+|:--------------------|:-----------------------|
+| DFSDocumentAccessor | The document accessor  |
 
-## Exemples
+## Examples
 
-### Récupérer un document
+### Retrieve a document
 
-L'appel ci-dessous génère une demande de récupération des métadonnées du document avec l'id _b64_bm9yZS92SDMtMS0xMTh1735080237_.
+The call below generates a request to retrieve the metadata of the document with id _b64_bm9yZS92SDMtMS0xMTh1735080237_.
 
 ```bash
 curl -X 'GET' \

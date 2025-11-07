@@ -1,36 +1,40 @@
 ---
-title: dossier d'intégration personnalisées
+title: "Custom XML integration location"
 ---
 
-Dans le dossier de configuration d'ARender (Web-UI) se situent deux
-fichiers permettant d'ajouter des intégrations personnalisées pour
-ARender.
 
-Ces fichiers sont vides par défaut et permettent à chaque version de
-recopier l'intégration personnalisée facilement sans se soucier du
-contenu de ce fichier.
 
-Le but est d'éviter les conflits d'écrasement de version, mais il reste
-important de vérifier les nouveaux paramètres pour garder sa version
-d'ARender à jour.
 
-- Dans la Web-UI:
+
+
+
+We possess in ARender two files dedicated to custom integrations that
+ship out empty in order for integration to include easier custom XML
+into ARender. Those two XML files are imported by ARender.
+
+This avoids conflicts on version upgrade of ARender, and facilitates the
+comparison with the new version of the XML (nothing new is overridden by
+custom integration), those XML files are empty and will always be at
+each new version.
+
+- In the Web-UI:
   
-  - configurations/arender-custom-integration.xml (configuration de la GUI utilisateur)
-  - configurations/arender-custom-server-integration.xml  (configuration du serveur)
+  - configurations/arender-custom-integration.xml (GUI, client side
+    configuration)
+  - configurations/arender-custom-server-integration.xml  (server
+    side configuration)
 
-- Si vous ne souhaitez pas placer vos configurations dans le war
-  ARender, vous pouvez alors utiliser les deux variables
-  d'environnement suivantes :
+- To externalize your XML files, you can set environment variables to change the location
+  from which those two custom files will be read:
+  
+  - customXmlServerPath: corresponds to the import path of
+    configurations/arender-custom-server-integration.xml .
+  - customXmlClientPath: corresponds to the import path of
+    configurations/arender-custom-integration.xml.
 
-  - customXmlServerPath : indique le chemin vers le fichier
-    arender-custom-server-integration.xml .
-  - customXmlClientPath : indique le chemin vers le fichier
-    arender-custom-integration.xml.
-
-Par exemple, vous pouvez définir la variable customXmlServerPath pour la
-faire pointer sur un chemin de votre système de fichier :
+As an example, if you wish to set a file system full path to your custom
+server file, you can set customXmlServerPath to:
 
 ```cfg
-file\\configuration\\arender-server-configuration.xml
+file:C:\\configuration\\arender-server-configuration.xml
 ```

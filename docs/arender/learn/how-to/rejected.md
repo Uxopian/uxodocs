@@ -1,16 +1,22 @@
 ---
-title: Image de document rejeté
+title: "Image for rejected document"
 ---
 
-Depuis la version 4.8.0, il est possible de configurer le serveur de rendition afin d'afficher une image indiquant que le document n'a pas pu être chargé correctement.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-## Activer la fonctionnalité
 
-Pour activer la fonctionnalité, il va falloir faire une modification dans le fichier *application.properties* dans le microservice *document-service-broker*.
+
+
+
+
+Since version 4.8.0, it is possible to configure the rendition server to display an image indicating that the document could not be loaded correctly.
+
+![image](/img/arender/documentation/rendition/rejected/overview.png)
+
+## Activate the feature
+
+To activate the functionality, you will have to make a modification in the *application.properties* file in the *document-service-broker* microservice.
+
 
 
 ```cfg
@@ -19,24 +25,26 @@ rejected.document.enabled=true
 
 
 
-## Modifier l'image par défaut
 
-Pour modifier l'image par défaut, il va falloir faire une modification dans le fichier *application.properties* dans le microservice *document-service-broker*.
+## Change the default image
+
+To modify the default image, you will have to make a modification in the *application.properties* file in the *document-service-broker* microservice.
+
 
 
 ```cfg
-rejected.document.path={chemin_vers_le_document_souhaité}
+rejected.document.path={path_to_the_file}
 ```
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
+![image](/img/arender/documentation/rendition/rejected/custom_image.png)
 
 
-## Modifier le titre du document
+## Change the title of the document
 
-Pour modifier le titre du document, il va falloir faire une modification dans le fichier *application.properties* dans le microservice *document-service-broker*.
+To modify the title of the document, you will have to make a modification in the *application.properties* file in the *document-service-broker* microservice.
+
 
 
 ```cfg
@@ -44,6 +52,5 @@ rejected.document.title=Custom title
 ```
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
+![image](/img/arender/documentation/rendition/rejected/custom_title.png)

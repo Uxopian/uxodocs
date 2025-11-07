@@ -1,42 +1,41 @@
 ---
-title: Ouvrir un document
+title: "Open a document"
 ---
 
-## Ouvrir un document local
 
-Pour ouvrir un document local, cliquer sur le bouton « Fichier » dans le
-bandeau de navigation
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Puis cliquer sur le bouton « Ouvrir depuis un document local » :
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Ouverture d’un pop-up, cliquer sur le bouton « Parcourir » et
-sélectionner le document à importer.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+## Open a local file
 
-Pour annuler l’action, cliquer sur le bouton « Fermer »
+To open a local file, click on this button to display the file
+menu:
 
-## Ouvrir un document depuis une URL
+![image](/img/arender/Document1.png)
 
-Cliquer sur le bouton « Ouvrir une URL »
+Then, click on this button:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/Document2.png)
 
-Ouverture d’un pop-up, saisir l’URL dans le champ et cliquer sur le
-bouton « Ouvrir une URL »
+A pop-in appears. To finish, select your file:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/Document3.png)
+
+To cancel the action , click the "Close" button
+
+## Open a file from an URL
+
+To open a file from an URL, click on this button:
+
+![image](/img/arender/Document4.png)
+
+Then, click on this button:
+
+![image](/img/arender/Document5.png)
+
+A pop-in appears. Enter the URL in the input field, and click on "Open
+an URL"
+
+To cancel the action , click the "Close" button

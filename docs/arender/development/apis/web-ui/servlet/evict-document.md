@@ -1,22 +1,28 @@
 ---
-title: Supprimer les documents
+title: "Evict document"
 ---
 
-Une nouvelle servlet est déployée permettant de supprimer un document du cache mémoire et du système de fichiers.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **evictDocument**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to evict a document from both memory cache and FileSystem cache.
+
+## Request 
+
+This functionality is accessible via the servlet: **evictDocument**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/evictDocument?uuid=doc1UUID'
 ```
 
-## Réponse de la servlet
+## Servlet Response
 
-Si le document est évincé, une page blanche apparaît et le serveur n'a plus accès au document.
+If the document is evicted, a blank page appears and the server has no longer access to the document.

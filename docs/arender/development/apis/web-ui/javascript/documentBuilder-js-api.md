@@ -1,54 +1,70 @@
 ---
-title: Document builder
+title: "Document builder"
 ---
 
-### Interagir avec le documentBuilder
+
+
+
+
+
+
+### Interacting with the documentBuilder
 
 - Object: getARenderJS().getDocumentBuilder()
 
-    | Fonction | Description                            |
-    | -------- | -------------------------------------- |
-    | close()  | Ferme le découpeur de documents        |
-    | open()   | Ouvre le découpeur de documents        |
-    | reset()  | Remet à zéro le découpeur de documents |
+    | Function | Description                         |
+    | -------- | ----------------------------------- |
+    | close()  | Closes the document builder         |
+    | open()   | Open the document builder           |
+    | reset()  | Resets the document builder content |
 
-### S'abonner à la sauvegarde de document découpé
+### Register to the documentBuilder save event
 
 - Object: getARenderJS().getDocumentBuilder()
 
-    | Fonction                                          | Description                                                                           | Arguments                                                                                                                                   |
-    | ------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-    | registerNotifyAlterDocumentContentEvent(callback) | Enregistre une fonction callback à appeler en cas de sauvegarde d'un document découpé | **callback:** La fonction callback à appeler                                                                                                |
-    | registerSubmitAlterDocumentContentEvent(callback) | Enregistre une fonction callback à appeler en cas de demande de creation de document  | **callback:** La fonction callback à appeler                                                                                                |
-    | getSubmittedAlterDocumentContentDescription(obj)  | Récupère la description du contenu du document modifié                                | **obj:** l'objet SubmitAlterDocumentContentEvent source                                                                                     |
-```xml
-    | getDocumentMetadata(desc,index)                   | Extrait l'object DocumentMetadata de l'objet source AlterContentDescription           | <!-- Commentaire nettoyé --><!-- Commentaire nettoyé -->  |
-```
-    | getResultDocumentId(obj)                          | Récupère le documentId qui résulte du découpage de document                           | **obj:** l'événement qui a été envoyé lorsque l'opération altercontent a été effectuée                                                      |
+    | Function                                          | Description                                                                 | Arguments                                                                                                                                |
+    | ------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+    | registerNotifyAlterDocumentContentEvent(callback) | Trigger a callback function when a built document is saved                  | **callback:** the callback function to call                                                                                              |
+    | registerSubmitAlterDocumentContentEvent(callback) | Trigger a callback function when a document creation is submitted           | **callback:** the callback function to call                                                                                              |
+    | getSubmittedAlterDocumentContentDescription(obj)  | Retrieve content description of altered document                            | **obj:** the source SubmitAlterDocumentContentEvent object                                                                               |
+    | getDocumentMetadata(desc,index)                   | Extract the DocumentMetadata object from the source AlterContentDescription |   |
+    | getResultDocumentId(obj)                          | Fetch resulting DocumentId                                                  | **obj:** the event that was sent when the altercontent operation has been done                                                           |
 
 
 - Object: getARenderJS().getDocumentMetadata()
 
-    | Fonction                                          | Description                                                | Arguments                                                                                                                                                                        |
-    | ------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-```xml
-    | addDocumentMetadata(metadata, key, value)         | Ajoute une metadata à un objet documentMetadata            | <!-- Commentaire nettoyé --><!-- Commentaire nettoyé --> |
-```
+    | Function                                          | Description                                                | Arguments                                                                                                                                                                  |
+    | ------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | addDocumentMetadata(metadata, key, value)         | Add a metadata to a documentMetadata object                |  |
+
 
 
 ``` javascript
 function arenderjs_init(arenderjs_)
-<!-- Expression supprimée -->;
+
+  arenderjs_.getDocumentBuilder()
+                .registerSubmitAlterDocumentContentEvent(function(obj){
+                    armt_onSubmitAlterDocumentContentEvent(arenderjs_,obj);
                 });
   arenderjs_.getDocumentBuilder()
-                .registerNotifyAlterDocumentContentEvent(function(obj)<!-- Expression supprimée -->;
+                .registerNotifyAlterDocumentContentEvent(function(obj){
+                    armt_onNotifyAlterDocumentContentEvent(arenderjs_,obj);
                 });
-}
 
 function armt_onSubmitAlterDocumentContentEvent(arenderjs_,obj)
-<!-- Commentaire nettoyé -->
+
+    var desc = arenderjs_.getDocumentBuilder()
+                            .getSubmittedAlterDocumentContentDescription(obj);
+    var meta = arenderjs_.getDocumentBuilder()
+                            .getDocumentMetadata(desc, 0);
+    arenderjs_.getDocumentMetadata().addDocumentMetadata(meta, "name", "value");
 
 function armt_onNotifyAlterDocumentContentEvent(arenderjs_,obj)
-<!-- Commentaire nettoyé -->
+
+    console.log("Notify: " + obj);
+    var docId = arenderjs_.getDocumentBuilder().getResultDocumentId(obj);
+    console.log("Notify: " + docId);
+    console.log("Notify: docId = " + docId);
+
 ```
 

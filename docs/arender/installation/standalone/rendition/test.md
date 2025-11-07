@@ -1,82 +1,87 @@
 ---
-title: Test
+title: "Testing"
 ---
 
-## Liste des tests fonctionnels pour le serveur de rendition
 
-ARender possède un outil de tests. Pour lancer cet utilitaire, il faut
-utiliser la commande suivante en mode administrateur :
 
-```bash
-$> java -jar arondor-arender-rendition-tester-{"NUMÉRO"-VERSION}.jar
-```
 
-| Colonne | Description                                                                                                                                                  |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| d       | Définition du serveur de rendition à utiliser.                                                                                                               |
-| w       | Largeur des images à générer. Le paramètre renseigné peut être soit la "largeur" soit un intervalle de "largeur" avec le nombre à incrémenter. (Par défaut: 595) |
-| t       | Nombre de documents à traiter en parallèle: permet de simuler plusieurs utilisateurs                                                                         |
-| l       | Force l'envoie du fichier au serveur de rendition. Ce paramètre doit être utilisé pour une utilisation distante du tester                                    |
-| c       | Désactivation de la conversion en images des pages                                                                                                           |
-| p       | Pages générées. Le paramétrage est identique à celui de la "largeur" des images. La page est soit renseignée directement soit via un intervalle                |
-| n       | Désactivation de la récupération du contenu textuel des pages                                                                                                |
-| z       | Temps d’attente avant de convertir les pages (après le parsing)                                                                                              |
-| o       | Dossier de sortie où sont stockées les images. S’il n’est renseigné aucun dossier les images sont stockées en cache                                          |
-| f       | Chemin d’un fichier texte contenant une liste de documents de tests                                                                                          |
-| v       | Définit un rapport de test dans le fichier indiqué au format CSV                                                                                             |
-| r       | Définit un rapport de test dans le fichier indiqué au format XML                                                                                             |
-| k       | Dossier de sortie où sont stockés les documents renditionnés                                                                                                 |
-| h       | Menu d'aide                                                                                                                                                  |
 
-- Test basique : Ce test se base sur le document par défaut du serveur
-  de rendition. Pour lancer le test, il suffit d’utiliser une console,
-  naviguer jusqu’à l’emplacement du JAR et taper la commande suivante
-  en mode administrateur :
 
-  ```bash
-  #adapter le port 8761 suivant votre configuration
-```text
-  $> java -jar arondor-arender-rendition-tester-{"NUMÉRO"-VERSION}.jar -d "http://serveur-de-rendition:8761/" -w "(100,1100,100)" -t 4 -v report_ARender.csv
-```
-  ```
 
-- Test à partir des fichiers d'exemple : Afin de tester le serveur de
-  rendition avec des documents métier :
-  - créer un fichier fichiers.txt dans le dossier tester
-  - ajouter un chemin absolu de fichier par ligne
-
-Pour lancer le test, il suffit d’utiliser une console, naviguer jusqu’à
-l’emplacement du JAR et taper la commande suivante en mode
-administrateur :
+The test jar «
+arondor-arender-rendition-tester-**&#123;VERSION-NUMBER&#125;**-jar-with-dependencies.jar
+», allow the user to launch some functional test on rendition server
+with following options **as admin**:
 
 ```bash
-#adapter le port 8761 suivant votre configuration
-$> java -jar arondor-arender-rendition-tester-{"NUMÉRO"-VERSION}.jar -d "http://serveur-de-rendition:8761/" -w "(100,1100,100)" -t 4 -l -f ./fichiers.txt -v rapport_ARender.csv
+$> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar
 ```
 
-## Analyse du rapport
+| Option | Description                                                                                                                           |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| d      | Define the rendition server to use.                                                                                                   |
+| w      | Width of generated pictures. The given parameter can be the width or a width gap with the number to increment. (Default value: 595)   |
+| t      | Number of documents to concurrently process: simulate several users                                                                   |
+| l      | When user open a document (URL), this one is get before to be sent to rendition server                                                |
+| c      | Disable conversion of pages in pictures                                                                                               |
+| p      | Generated pages. The configuration is the same as width parameter, the page is directly given or given in a gap. (Default: all pages) |
+| n      | Disable pages content getting back                                                                                                    |
+| z      | Waiting time between parsing and pages conversion (Default: 0)                                                                        |
+| o      | Output folder where are stored the pictures. If no folder is given, picture are stored in cache                                       |
+| f      | Path of a file containing a test files list                                                                                           |
+| v      | Test reporting file path (CSV)                                                                                                        |
+| r      | Test reporting file path (XML)                                                                                                        |
+| k      | Output folder where are stored renditioned documents                                                                                  |
+| h      | Help menu                                                                                                                             |
 
-| Colonne       | Description                                                  |
-| ------------- | ------------------------------------------------------------ |
-| Name          | Nom de la statistique                                        |
-| Total         | Durée total d'exécution (ms)                                 |
-| Calls         | Nombre total d'appels                                        |
-| Minimum       | Temps minimum d'une exécution (ms)                           |
-| Maximum       | Temps maximum d'une exécution (ms)                           |
-| TheoricalRate | Taux théorique d'opérations par seconde et par thread client |
-| EffectiveRate | Taux effectif d'opération par seconde                        |
+- Basic test: This test is based on the default file of rendition
+server. To launch the test, all you need is, via the console, go to jar
+location and type the following command:
 
-## Statistiques
+```bash
+$> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -v report_ARender.csv
+```
 
-- `[Image_IM]()""_0` : renditions de pages de "largeur"
-  "" (px)
-- Image : rendition de l'ensemble des pages
-- Image_PageContents : extraction du contenu textuel d'une page
-- Fetch_DocumentPageLayout : extraction de la structure du document
-  (type mime, nombre de pages, dimensions des pages) et conversion si
-  nécessaire
+- adapt the port 8761 depending on your configuration
 
-## Exemple de rapport (4 threads)
+In order to test the rendition server against business sample files:
+
+- create a *files.txt* in the tester folder
+- add one absolute file path per line
+
+To launch the test, all you need is, via the console, go to jar location
+and type the following command:
+
+```bash
+$> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -l -f ./fichiers.txt -v rapport_ARender.csv
+```
+
+## Analysis report
+
+### Columns
+
+| Column        | Description                                               |
+| ------------- | --------------------------------------------------------- |
+| Name          | Metric name                                               |
+| Total         | Total execution duration (ms)                             |
+| Calls         | Total number of calls                                     |
+| Minimum       | Minimum execution duration (ms)                           |
+| Maximum       | Maximum execution duration (ms)                           |
+| TheoricalRate | Theorical rate of executions per second and client thread |
+| EffectiveRate | Effective rate of executions per second                   |
+
+### Statistics
+
+- `[Image_IM]()$&#123;width&#125;_0`: renditions of pages of width $&#123;width&#125; (px)
+- Image: renditions of all pages
+- Image_PageContents: extraction of page textual content
+- Fetch_DocumentPageLayout: extraction of document layout
+  information (mime type, page count, page dimensions) and conversion
+```javascript
+  if necessary
+```
+
+### Report example (4 threads)
 
 | name                     | total | calls | minimum | maximum | average      | theoreticalRate  | effectiveRate |
 | ------------------------ | ----- | ----- | ------- | ------- | ------------ | ---------------- | ------------- |
@@ -96,10 +101,8 @@ $> java -jar arondor-arender-rendition-tester-{"NUMÉRO"-VERSION}.jar -d "http:/
 | Image                    | 12875 | 209   | 11      | 211     | 61.60287     | 16.23301         | **54.271618** |
 | Image_PageContents       | 561   | 209   | 1       | 42      | 2.6842105    | 372.549          | 54.271618     |
 
-Ce rapport montre que :
+To conclude, this report shows that:
 
-- il a fallu, en moyenne, 104 millisecondes pour générer des pages de
-  1000 pixels de "largeur"
-- le serveur de rendition a été capable de générer 54 renditions de
-  pages par seconde
-- l'analyse du PDF de test a pris 170 millisecondes
+- the average time to generate 1000 pixels images is 104 milliseconds
+- the rendition server was able to render 54 pages per second
+- PDF layout extract took 170 millisecondes

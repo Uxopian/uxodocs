@@ -1,21 +1,30 @@
 ---
-title: Installation dans ACA
+title: "Installation in ACA"
 ---
 
-## Commencer avec Docker
 
-1. Modifier le contexte d'ARender pour qu'il soit sur le chemin **/arender** de votre serveur.
-Avec le conteneur ARender UI, modifier le contexte avec la variable d'environnement `CONTEXT_PATH=/arender`.
 
-2. Récupérer l'image ACA depuis notre artifactory avec :
+
+
+
+
+## Quick start with Docker
+
+*If needed, learn how to run ARender in docker [here](./installation/docker/_index.en.md).*
+
+1. Change ARender UI context path to **/arender**.
+
+With ARender UI container, change the context with `CONTEXT_PATH=/arender` in the container environment variable.
+
+
+2. Pull the ACA image from our artifactory with:
 
     ```bash
-```xml
-    $> docker pull artifactory.arondor.cloud:5001/adf-content-app-arender:<!-- Commentaire nettoyé -->
-```
+    $> docker pull artifactory.arondor.cloud:5001/adf-content-app-arender:<arender-version>-aca<aca-version>
     ```
 
-3. Puis, exécuter le conteneur avec la configuration suivante :
+3. Then run the container with the following configuration:
+
 
 ```yaml
   version: "3"
@@ -24,15 +33,15 @@ Avec le conteneur ARender UI, modifier le contexte avec la variable d'environnem
     aca:
       image: alfresco-content-app:AR-11007
       environment:
-      # le nom d'hôte de ACA
+      # ACA host
       - ADF_PUBLIC_HOST=http://localhost
-      # Le nom d'hôte de ARender avec /arender pour contexte
+      # ARender host with /arender as context path
       - ARENDER_HOST=http://localhost:8080
-      # Le nom d'hôte du Alfresco content repository
+      # alfresco content repository host
       - ALFRESCO_HOST=http://localhost:8080
-      # Le nom d'hôte du service oauth d'Alfresco
+      # alfresco host for oauth
       - ALFRESCO_OAUTH_HOST=http://localhost:8080
-      # liste des extensions qui ouvre ARender pour la prévisualisation (avec ',' comme séparateur)
+      # list of extensions that opens with arender as preview (separator ',')
       - ARENDER_EXTENSIONS=pdf,docx,docm,dotx,dotm,doc,dot,rtf,odt,ott,xlsx,xlsm,xls,xlt,xml,csv,ods,ots,pptx,pptm,ppt,pps,odp,otp,vsdx,msg,eml,html,htm,txt,dwg,dxf,tif,tiff,dcm,mda,ica,mmr,mca,jpg,jpeg,jpe,jfif,jp2,jpf,jpx,j2k,j2c,jpc,png,gif,webp,bmp,mp4,zip
       ports:
       - 80:8080
@@ -40,69 +49,98 @@ Avec le conteneur ARender UI, modifier le contexte avec la variable d'environnem
 ```
 
 
-## Ajouter ARender à votre Alfresco Content App
 
-### Prérequis
+## Add ARender to your Alfresco Content App
+
+### Requirements
 
 - Alfresco 5.2.4, 6.x
 - Tomcat  7.0
 - NodeJS v10.16.0,
 - npm 6.14.2
 
-### Installation
+### Install
 
-Le module de prévisualisation n'est pas disponible publiquement, il faut donc l'ajouter manuellement.
+As the module is preview and not publicly available you need to add it manually.
 
-1. Cloner le dépot ACA.
+1. Clone the ACA repository.
 
     ```bash
     $> git clone https://github.com/Alfresco/alfresco-content-app.git
     $> git checkout v1.10.1
     ```
 
+2. Download  ARender ACA extension sources [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arender-for-alfresco-ADF-plugin//arender-for-alfresco-ADF-plugin-.zip) and unzip the archive content.
 
-3. Générer une nouvelle librairie nommée **"arondor-arender-viewer"**.
+3. Create a library project.
 
     ```bash
     $> ng g library arondor-arender-viewer
     ```
 
-4. Remplacer le contenue du dossier généré par le contenue précédemment dézippé.
+4. Replace the content of the created folder by ARender ACA extension sources.
 
-5. Ajouter les librairies ARender dans la configuration du compilateur.
+5. Add ARender lib to the compiler config.
+
 
 ```yaml
-<!-- Commentaire nettoyé -->
-  }
-}
+
+  "compilerOptions": &#123;
+    // [...]
+    "paths": &#123;
+    // [...]
+      "@arondor/arender-viewer": ["dist/@arondor/arender-viewer"],
+      "@arondor/arender-viewer/*": ["dist/@arondor/arender-viewer/*"]
+
+
+
 ```
 
-Pour les versions 2.0 et supérieures, se référer à l'installation version 2.0
 
-6. Ajouter les assets à l'application et remplacer les informations du projet.
+For versions 2.0 and above, refer to the version 2.0 installation
+
+
+
+6. Add ARender assets to the app and replace project infos.
+
 
 ```yml
-<!-- Commentaire nettoyé -->,
-              {
+
+  "projects": {
+    "app": &#123;
+      "architect": &#123;
+        //[...]
+        "build": &#123;
+          //[...]
+          "options": &#123;
+            //[...]
+            "assets": [
+              //[...]
+
+                "glob": "arender.plugin.json",
+                "input": "node_modules/@arondor/arender-viewer/assets",
+                "output": "./assets/plugins"
+              &#125;,
+
                 "glob": "arender.plugin.json",
                 "input": "projects/arondor-arender-viewer/assets",
                 "output": "./assets/plugins"
-              },
-              {
+              &#125;,
+
                 "glob": "**/*",
                 "input": "node_modules/@arondor/arender-viewer/assets",
                 "output": "./assets/arender-viewer"
-              },
-              {
+              &#125;,
+
                 "glob": "**/*",
                 "input": "projects/arondor-arender-viewer/assets",
                 "output": "./assets/arender-viewer"
-              }
+
             ]
-          }
-        }
-      }
-    },
+
+
+
+    &#125;,
     //[...]
     "arondor-arender-viewer": {
       "root": "projects/arondor-arender-viewer",
@@ -115,127 +153,206 @@ Pour les versions 2.0 et supérieures, se référer à l'installation version 2.
           "options": {
             "tsConfig": "projects/arondor-arender-viewer/tsconfig.lib.json",
             "project": "projects/arondor-arender-viewer/ng-package.json"
-          }
-        },
+
+        &#125;,
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
-          "options": {
+          "options": &#123;
             "main": "projects/arondor-arender-viewer/src/test.ts",
             "tsConfig": "projects/arondor-arender-viewer/tsconfig.spec.json",
             "karmaConfig": "projects/arondor-arender-viewer/karma.conf.js"
-          }
-        },
-        "lint": <!-- Commentaire nettoyé -->
-        }
-      }
-    }
-  }
-}
+
+        &#125;,
+        "lint": &#123;
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": &#123;
+            "tsConfig": [
+              "projects/arondor-arender-viewer/tsconfig.lib.json",
+              "projects/arondor-arender-viewer/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+
+
+
+
+
+
 ```
 
-7. Ajouter ARender à la liste d'extension.
+
+7. Add ARender extension description.
+
 
 ```yml
-<!-- Commentaire nettoyé -->
+
+  "$references": [
+    "arender.plugin.json",
+    ...
+  ],
+
 ```
 
-8. Importer l'extension ARender.
+
+8. Import ARender extension.
+
 
 ```ts
-import { ArenderExtensionModule } from '@arondor/arender-viewer';
+import { ArenderExtensionModule &#125; from '@arondor/arender-viewer';
 
-@NgModule(<!-- Commentaire nettoyé -->)
+@NgModule({
+  imports: [ArenderExtensionModule, ... ]
+&#125;)
 ```
 
-9. Ajouter les informations de construction.
+
+9. Add ARender ACA extension to the package build scripts.
+
 
 ```yml
-<!-- Commentaire nettoyé -->
-}
+
+  "scripts": {
+    //[...]
+    "build:arender-extension": "npx rimraf dist/@arondor/arender-viewer && ng build arondor-arender-viewer && cpr projects/arondor-arender-viewer/ngi.json dist/@arondor/arender-viewer/ngi.json && cpr projects/arondor-arender-viewer/assets dist/@arondor/arender-viewer/assets",
+    "build.arender": "npm run build:arender-extension",
+    "build.extensions": "npm run build.shared && npm run build.aos && npm run build.arender",
+    //[...]
+
+
 ```
 
 
-Pour les versions 2.0 et supérieures, se référer à l'installation version 2.0
+
+
+For versions 2.0 and above, refer to the version 2.0 installation
+
 
 ### Configuration
 
-#### Configuration du serveur ARender
+#### ARender server config
+
 
 
 ```yml
-{
+
   "arender": {
-    "host": "{protocol}//{hostname}:{port}/arender/",
+    "host": "{protocol&#125;//{hostname}:{port}/arender/",
     "onPromise": true,
     "documentbuilder": true
   },
   //[...]
-}
+
 ```
+
 
 
 Description:
 
-- **arender.host**: le nom d'hôte  d'ARender avec son contexte ,ici, *"/arender"*. Utiliser le nom d'hôte par défaut pour éviter les erreurs de Cross Origin.
-- **arender.onPromise**: permet l'ouverture de plusieurs documents ou dossiers.
-- **arender.documentbuilder**: active la fonction de composition de document par défaut.
+- **arender.host**: arender host with *"/arender"* as context path. Use the default configuration to avoid Cross Origin issues.
+- **arender.onPromise**: enable multiple documents and/or folders opening.
+- **arender.documentbuilder**: enable document composition feature by default.
 
-#### Ouverture des documents par extension
+#### File extension openned
 
-Modifier la variable features.viewer.content.fileExtension.
+Modify features.viewer.content.fileExtension list.
+
 
 ```yml
-<!-- Commentaire nettoyé -->]
-    },
-     [...]
-  }
-}
+
+  //[...]
+  "features": {
+    "viewer": &#123;
+      "content": [&#123;
+        "id": "app.arender.viewer",
+        "fileExtension": [
+          "docx", "docm", "dotx", "dotm", "doc", "dot",
+          "rtf", "odt", "ott",
+          "xlsx", "xlsm", "xls", "xlt", "xml", "csv",
+          "ods", "ots",
+          "pptx", "pptm", "ppt", "pps",
+          "odp", "otp", "vsdx",
+          "msg", "eml",
+          "html", "htm",
+          "txt",
+          "dwg", "dxf", "tif", "tiff", "dcm",
+          "mda", "ica", "mmr", "mca",
+          "jpg", "jpeg", "jpe", "jfif", "jp2", "jpf", "jpx", "j2k", "j2c", "jpc",
+          "png", "gif", "webp", "bmp"
+          // <- Add your extensions here or/and remove element from the list above ^
+        ],
+      &#125;]
+    &#125;,
+    // [...]
+
+
 ```
 
 
-### Contruction et exécution
 
-1. Installer angular-devkit.
+### Build and run
+
+1. Install the angular-devkit.
 
     ```bash
     $> npm install --save-dev @angular-devkit/build-angular
     ```
 
-2. Exécuter le script bash pour construire l'application.
+2. Execute the bash script to build the app.
 
     ```bash
     $> ./build-tomcat-e2e.sh
     ```
 
-3. Copier le dossier généré (alfresco-content-app-1.10.1\dist\app pour ACA v1.10.1) dans votre serveur tomcat dans le dossier "webapps" et renommer le comme bon vous semble.
+3. Copy the generated folder (alfresco-content-app-1.10.1\dist\app for ACA v1.10.1) to your tomcat "/webapps" folder and rename it if needed.
 
-4. Démarer Tomcat.
+4. Start Tomcat.
 
-### Installation pour la version 2.0
+### Install for version 2.0
 
-Pour les versions 2.0 et supérieures, les modifications supplémentaires suivantes sont à prendre en compte :
+For versions 2.0 and above, the following additional changes must be done :
 
-1. Les librairies ARender dans la configuration du compilateur sont placées dans tsconfig.base.json et non tsconfig.json
+1. The ARender lib in the compiler configuration are placed in tsconfig.base.json and not in tsconfig.json
+
 
 
 ```yaml
-<!-- Commentaire nettoyé -->
-  }
-}
+
+  "compilerOptions": {
+    // [...]
+    "paths": {
+    // [...]
+      "@arondor/arender-viewer": ["dist/@arondor/arender-viewer"],
+      "@arondor/arender-viewer/*": ["dist/@arondor/arender-viewer/*"]
+
+
+
 ```
 
 
-2. Ajouter les informations de construction.
+
+2. Add ARender ACA extension to the package build scripts.
+
 
 
 ```yml
-<!-- Commentaire nettoyé -->
-}
+
+  "scripts": {
+    //[...]
+    "build:arender-extension": "npx rimraf dist/@arondor/arender-viewer && ng build arondor-arender-viewer && cpr projects/arondor-arender-viewer/ngi.json dist/@arondor/arender-viewer/ngi.json && cpr projects/arondor-arender-viewer/assets dist/@arondor/arender-viewer/assets",
+    "build.arender": "npm run build:arender-extension",
+    "build.extensions": "npm run build.shared && npm run build.aos && npm run build.arender",
+    "build": "npm run validate-config && npm run build.extensions && npm run build.app -- --prod",
+    //[...]
+
+
 ```
 
 
-3. Exécuter la commande pour construire l'application et avoir le dossier généré (/dist/app) à placer dans le dossier "webapps" de votre serveur tomcat.
+
+3. Execute the command to build the app and have the generated folder (/dist/app) to place in your tomcat server in the "webapps" folder.
 
     ```bash
     $> ng build
     ```
+   

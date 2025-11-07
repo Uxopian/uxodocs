@@ -1,21 +1,28 @@
 ---
-title: Calques (OCG's)
+title: "Layers (OCG's)"
 ---
 
-## Description
 
-La fonctionnalité permet de choisir les calques du document qui seront affichées sur la visionneuse.
-Elle ne fonctionne que sur les documents qui possèdent des calques.
-Les calques font référence à `Optional Content Groups` (OCGs). Ils sont un mécanisme de contrôle sélectif de la visibilité du contenu des pages. 
-Ils sont représentés par les calques. 
 
-Le choix est possible grâce à l'explorateur de calques.
 
-## Utilisation
 
-Il est possible de cocher ou décocher les calques que vous souhaitez affichés.
 
-L'explorateur de claques est activé par défaut. 
+
+## Description 
+
+The feature allows you to choose the document layers which will be displayed. 
+It only works on documents that have layers.
+Layers refer to `Optional Content Groups` (OCGs). They are a mechanism for selective control of the visibility of the pages content.
+They are represented by the layers.
+
+It is possible to choose via the layers explorer.
+
+## Use
+
+It is possible to check or uncheck the layers you want to display.
+
+By default, the layer explorer is activated.
+
 
 
 ```cfg
@@ -24,6 +31,4 @@ layer.explorer.enabled=true
 
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/documentation/features/layers/layers-example.gif)

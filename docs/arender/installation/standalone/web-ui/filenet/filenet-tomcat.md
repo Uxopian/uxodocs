@@ -1,62 +1,96 @@
 ---
-title: "Installation dans Apache Tomcat"
-description: Guide de déploiement de ARender HMI pour FileNet dans le serveur d'application Apache Tomcat
+title: "Installation in Apache Tomcat"
+description: "Deployment guide for IBM Filenet in Apache Tomcat application server"
 ---
 
-Ci-dessous un exemple de déploiement de ARender HMI pour FileNet dans le serveur d'application Apache Tomcat.
 
-Limitation : l'authentification d'ARender vers FileNet doit se faire via un **compte technique**.
 
-Par conséquent :
-- Les documents/annotations/métadonnées vont être récupérés via le compte technique,
-- Les annotations seront sauvegardées au nom du compte technique.
-Si le besoin est de propager l'authentification il faut utiliser le déploiement dans le serveur d'application IBM Websphere (voir la documentation **ici** (lien supprimé)).
 
-Dans notre exemple, nous déployons ARender HMI dans l'environnement suivant :
-- Système d'exploitation : Windows Server 2016
+
+
+Below the deployment of ARender HMI for FileNet in **Apache Tomcat**.
+
+
+
+Limitation: Authentication to IBM FileNet has to be configured with a **technical account**.
+The consequences will be that:
+- Documents/Annotations/Metadata will be fetched with the technical account,
+- Annotations will have the name of the technical account.
+If the need is to propagate the authentication you can either use WebSphere as Application server (see the documentation [here](./installation/standalone/web-ui/filenet/filenet-was.en.md)).
+
+
+
+In our example, we are deploying the presentation server
+in an environment with:
+- Operating System: Windows Server 2016
 - Filenet 5.5
 - Apache Tomcat 9.0
+- ARender HMI for FileNet version 
 
-## Télécharger le WAR ARender HMI pour FileNet
+## Retrieve the ARender HMI WAR for FileNet
 
-En utilisant l'identifiant et mot de passe préalablement fournis,
-vous pouvez récupérer l'application web en format EAR
+Using the username and password beforehand provided,
+you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-filenet//arondor-arender-hmi-filenet-.war).
 
-## Configuration d'ARender HMI WAR pour FileNet
+## Configuration of ARender HMI WAR for FileNet
 
-Plusieurs configurations additionnelles sont nécessaires pour faire fonctionner ARender pour FileNet dans Apache Tomcat.
+Some additional configuration is needed in the ARender for FileNet WAR to be supported in Tomcat.
 
-### Configuration du user-context
+### User context configuration
 
-Ouvrir le fichier ci-dessous :
-Et remplacer le bean ayant l'id suivant **urlFilter** par le bean ci-dessous :
+Open the below file:
+* arondor-arender-hmi-filenet-.war\WEB-INF\classes\arender-user-context.xml
+And replace the bean having the following id **urlFilter** by the following bean: 
 
 ``` xml
-**
-    
-**
+<bean id="urlFilter"
+    class="com.arondor.viewer.server.security.RequestParameterAuthenticationFilter">
+    <property name="authenticationManager" ref="authenticationManager" />
+</bean>
 ```
 
-### Configuration de la sécurité
+### Security configuration
 
-Supprimer le fichier ci-dessous :
+Remove the below file:
+* arondor-arender-hmi-filenet-.war\WEB-INF\lib\arondor-arender-filenet-ce-.jar\META-INF\web-fragment.xml
 
-### Configuration de la connexion avec un compte technique
+### Technical account configuration for the connection to FileNet
 
-Ouvrir le fichier ci-dessous :
-Et ajouter le contenu ci-dessous (en adaptant les valeurs selon votre contexte) :
+Open the below file:
+* arondor-arender-hmi-filenet-.war\WEB-INF\classes\arender-server-custom-filenet.properties
+And add the below content (change with the value matching your context):
 
 ``` cfg
 # Default authentication method is jaasObjectStoreProvider. To activate connect through a technical account use loginPasswordObjectStoreProvider and set the right login and password below
 arender.server.filenet.authentication.method=loginPasswordObjectStoreProvider
-# Exemple of URL for jaasObjectStoreProvider: iiop://localhost:2809/FileNet/Engine and for loginPasswordObjectStoreProvider : http://localhost:9080/wsi/FNCEWS40MTOM/
+# Example of URL for jaasObjectStoreProvider: iiop://localhost:2809/FileNet/Engine and for loginPasswordObjectStoreProvider : http://localhost:9080/wsi/FNCEWS40MTOM/
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
 arender.server.filenet.ce.url=http://localhost:9080/wsi/FNCEWS40MTOM/
 arender.server.filenet.ce.login=loginToChange
 arender.server.filenet.ce.password=passwordToChange
 ```
-### Ajout des librairies additionnelles
+```
+```
+```
+```
+```
+```
 
-Télécharger les JARs ci-dessous : 
-* **xercesImpl** version **2.11.0** : [Lien de téléchargement](https://mvnrepository.com/artifact/xerces/xercesImpl/2.11.0).
-* **xml-apis** version **1.4.01** : [Lien de téléchargement](https://mvnrepository.com/artifact/xml-apis/xml-apis/1.4.01).
+### Add additional libraries
 
+Download the below JARs:
+* **xercesImpl** version **2.11.0**: [download link](https://mvnrepository.com/artifact/xerces/xercesImpl/2.11.0).
+* **xml-apis** version **1.4.01**: [download link](https://mvnrepository.com/artifact/xml-apis/xml-apis/1.4.01).
+
+And place these two libraries into the following folder: arondor-arender-hmi-filenet-.war\WEB-INF\lib.

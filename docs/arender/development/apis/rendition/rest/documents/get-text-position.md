@@ -1,34 +1,40 @@
 ---
-title: Renvoie les positions du texte (GET)
+title: "GET text positions"
 ---
 
-Cette API permet de récupérer les positions du texte d'une page
 
-## Description technique de l'API
 
-Point de terminaison:
+
+
+
+
+This API allows you to retrieve the text position of a page.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/pages/{page}/text/position
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description                               |
-|:-----------|:-------|:------------------------------------------|
-| documentId | Oui    | L'ID du document                          |
-| page       | Oui    | La page du document où récupérer le texte |
+| Variable   | Required | Description                        |
+|:-----------|:---------|:-----------------------------------|
+| documentId | Yes      | The ID of a document               |
+| page       | Yes      | The page where the text is located |
 
-Réponse :
+Response :
 
-| Type         | Description         |
-|:-------------|:--------------------|
-| PageContents | Le texte de la page |
+| Type         | Description          |
+|:-------------|:---------------------|
+| PageContents | The text of the page |
 
-## Exemples
+## Examples
 
-### Obtenir les postions du texte
+### Retrieve Signatures
 
-L'appel ci-dessous permet d'obtenir le texte de la première page d’un document avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
+The call below generates a request to retrieve the first page text of document with ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
 
 ```bash
 curl -X 'GET' \

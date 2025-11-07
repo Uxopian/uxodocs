@@ -1,82 +1,92 @@
 ---
-title: Ancienne installation
+title: "Legacy installation"
 ---
 
-Nous présentons ici l'installation de la Web-UI dans M-Files. 
 
-Dans notre exemple, nous déployons la Web-UI
-dans un environnement avec :
 
-- Système d'exploitation : Windows Server 2016 Datacenter
+
+
+
+
+Here we present the Web-UI installation in M-Files. 
+
+In our example, we deploy the Web-UI
+in an environment with:
+
+- Operating system : Windows Server 2016 Datacenter
 - M-Files 
-- Un serveur Tomcat9
-- Avoir une Rendition fonctionnelle. Il vous suffit de suivre cette ****documentation** (lien supprimé)**.
+- A Tomcat9 server
+- ARender Web-UI version 
+- Have a Functional Rendering. So just follow this **[documentation](./content/installation/standalone/rendition/install.en.md)**.
 
 
-## Étapes pour configurer la Rendition
+## Steps to Configure the Rendition
+
+- Place the *arondor-arender-mfiles-connector-1.0.5.jar* under *rendition-engine-package-/modules/RenditionEngine/client_libs*
+
+docs/install/install-mfiles/arondor-arender-mfiles-connector-1.0.5.jar
+
+- Since 4.8.8, you will need to add under **rendition-engine-package-/modules/RenditionEngine** in *application.properties* the following property: **authorized.urls=http://localhost/REST/**
+
+docs/install/install-mfiles/application.properties
+
+- Start the ARender Rendition server
 
 
+## Steps to install the Web-UI
 
+Using the username and password previously provided (contact arender-sales@arondor.com if you want access),
+you can recover the version of the web application used in WAR format
+**[here](https://artifactory.arondor.cloud:443/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi//arondor-arender-hmi-.war)**.
 
-
-- Démarrer le serveur ARender Rendition
-
-
-## Étapes pour installer la Web-UI
-
-En utilisant l'identifiant et mot de passe préalablement fournis (ou contacter arender-sales@arondor.com si vous souhaitez un accès),
-vous pouvez récupérer la version de l'application web utilisée en format WAR
-
+Use the Tomcat9 server. You just need to deploy your war (*arondor-arender-hmi-.war* into and to **rename it** *arondor-arender-mfiles.war*), now place it there :
 
 * Program Files
     * Apache Software Foundation
         * Tomcat 9.0
             * webapps
 
+Copy the previously downloaded *arondor-arender-mfiles-connector-1.0.5.jar* connector, place it under *arondor-arender-mfiles-\WEB-INF\lib*.
 
-Par la suite :
-
-Vous devez modifier différentes valeurs du fichier *arender-server.properties* en fonction de la configuration de votre coffre-fort M-Files
-
-
-## Étapes pour déployer ARender sur M-Files
-
-- Dézipper ARenderApp.zip avec 7zip
-- Ouvrez **dashboard.html**
-- Modifiez l'URL de l'UI par celle que vous déployez (dans l'exemple il s'agit du 4.8.7)
-```xml
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-```
-- Ouvrez votre coffre
-- Installer le ARenderApp.zip dans les applications de votre coffre.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-*( M-Files Admin -> choisir le coffre -> clique droit -> Applications -> Installer )*
-
-- Déconnectez-vous du coffre et reconnectez-vous pour vous assurer que les changements sont pris en compte
+Afterwards :
+- Place those files *(below)* under ***arondor-arender-mfiles-\WEB-INF\classes***<br/>
+docs/install/install-mfiles/arender-editor-specific-integration.xml
+docs/install/install-mfiles/arender-server.properties
 
 
-## Étapes pour ouvrir un document avec M-Files
+You need to edit different values of the *arender-server.properties* file depending on your M-Files vault configuration
 
-- Redémarrer le serveur IIS
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+## Steps to deploy ARender on M-Files
 
-- Démarrer le serveur Tomcat9
-- Accédez à M-Files sous le lecteur M:\
+- Unzip ARenderApp.zip with 7zip
+docs/install/install-mfiles/ARenderApp.zip
+- Open **dashboard.html**
+- Change UI URL by the UI version you deploy (in this example it is a 4.8.7)
+![mfiles](/img/arender/mfiles/mfiles-dash01.png)
+![mfiles](/img/arender/mfiles/mfiles-dash02.png)
+- Open your M-File safe
+- Install the ARenderApp.zip in your vault apps.
+docs/install/install-mfiles/ARenderApp.zip
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![mfiles](/img/arender/mfiles/mfiles-03.png)
+*( M-Files Admin -> choose your safe -> right clic -> Applications -> Install )*
 
-- Sélectionnez votre coffre
-- Faites glisser et déposez un document pour l'ouvrir avec ARender
+- Log out of the vault and log back in to ensure changes are accounted for
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
+## Steps to open a document with M-Files
+
+- Restart the IIS server
+
+![mfiles](/img/arender/mfiles/mfiles-04.png)
+
+- Start the Tomcat9 server
+- Access M-Files under M:\
+
+![mfiles](/img/arender/mfiles/mfiles-05.png)
+
+- Select your safe
+- Drag and drop a document to open it with ARender
+
+![mfiles](/img/arender/mfiles/mfiles-06.png)

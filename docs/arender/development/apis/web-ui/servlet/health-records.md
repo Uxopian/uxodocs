@@ -1,26 +1,32 @@
 ---
-title: Santé du serveur
+title: "Health records server"
 ---
 
-Une nouvelle servlet est déployée permettant d'afficher l'état de santé du serveur.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **healthRecordsServlet**
-
-La requête est utilisable uniquement en GET.
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to display the server performance.
+
+## Request 
+
+This functionality is accessible via the servlet: **healthRecordsServlet**
+
+Usable in GET.
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/health/records?check=scope'
 ```
 
-* check : (optionnel)
-    * SELF : renvoie la page HTML même si aucun service n'est complet
-    * RENDITION : envoie une erreur si aucune service n'est complet
+* check: (optional)
+    * SELF: returns the HTML page even if no service is complete
+    * RENDITION: sends an error if no service is complete
 
-## Réponse de la servlet
+## Servlet Response
 
-Une page HTML est affichée avec les différents services. Pour chacun, le port, l'état et la disponibilité du service sont affichés.
+An HTML page is displayed with the different services. For each, the port, the state and the availability of the service are display.

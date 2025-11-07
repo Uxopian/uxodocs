@@ -1,27 +1,33 @@
 ---
-title: Supprimer un ordre de transformation (DELETE)
+title: "DELETE a transformation order"
 ---
 
-Cette API permet de supprimer un ordre de transformation précédemment demandé.
 
-## Description technique de l'API
 
-Point de terminaison :
+
+
+
+
+This API allows to delete a transformation order previously requested.
+
+## API technical description
+
+Endpoint :
 ```bash
 DELETE /transformations/<transformationOrderId>
 ```
 
-Chemin de ressource :
+Ressource path :
 
-| Variable             | Description                       |
-| :------------------- | :-------------------------------- |
-| transformationOderId | L'ID d'un ordre de transformation |
+| Variable             | Description             |
+| :------------------- | :---------------------- |
+| transformationOderId | Transformation order ID |
 
-## Exemples
+## Examples
 
-### Supprimer un ordre de transformation
+### Delete a transformation order
 
-L'appel ci-dessous génère une demande de suppression de l'ordre de transformation avec l'id _123e4567-e89b-12d3-a456-426614174000_.
+The call below generates a request to delete the transform order with id _123e4567-e89b-12d3-a456-426614174000_.
 
 ```bash
 curl -X 'DELETE' \

@@ -1,53 +1,58 @@
 ---
-title: Rechercher du texte dans un document (GET)
+title: "GET Text Positions with Search in Document"
 ---
 
-Cette API recherche des positions de texte dans une plage de pages spécifiée, renvoyant un objet contenant la position de texte trouvée, la dernière page recherchée avant l'expiration du processus (puisque le backend a une configuration de délai d'expiration définie) et l'état global de la recherche.
 
-Disponible depuis la version 2023.12.0
 
-## Description technique de l'API
 
-Point d'entrée :
+
+
+
+This API searches for text positions within a specified page range, returning an object that contains the text position found, the last page searched before the process timed out (since the backend has a defined timeout configuration), and the overall status of the search.
+
+Available starting since version 2023.12.0.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/search
 ```
 
-Chemin de la ressource :
+Resource path:
 
-| Variable    | Requis | Description                                                                     |
-|:------------|:-------|:--------------------------------------------------------------------------------|
-| documentId  | Oui    | L'ID du document                                                                |
+| Variable    | Required | Description                                                 |
+|:------------|:---------|:------------------------------------------------------------|
+| documentId  | Yes      | The ID of a document                                        |
 
 
-Paramètres de requête:
+Query params:
 
-| Variable         | Requis | Description                                                                     |
-|:-----------------|:-------|:--------------------------------------------------------------------------------|
-| searchText       | Oui    | Le texte à rechercher                                                           |
-| fromPage         | Oui    | Numéro de la page de départ de la recherche. Index à partir de 0.                                           |
-| toPage           | Non    | Numéro de la dernière page de la recherche. Si ce paramètre est défini sur -1, la recherche se poursuivra jusqu'à la dernière page du document. La valeur par défaut est -1. |
-| caseSensitive    | Non    | Détermine si la recherche est sensible à la casse                               |
-| accentSensitive  | Non    | Détermine si la recherche est sensible aux accents                              |
-| regex            | Non    | Détermine si la valeur du paramètre 'searchText' est une expression régulière   |
+| Variable        | Required | Description                                                                                              |
+|:----------------|:---------|:---------------------------------------------------------------------------------------------------------|
+| searchText      | Yes      | The text to search                                                                                       |
+| fromPage        | Yes      | The starting page number for the search. Index starting from 0                                           |
+| toPage          | No       | The ending page number for the search. If this parameter is set to -1, the search will continue until the last page of the document. Default to -1 |
+| caseSensitive   | No       | Determines if the search is case-sensitive                  |
+| accentSensitive | No       | Determines if the search is accent-sensitive                |
+| regex           | No       | Determines if the search text is a regular expression       |
 
 
 Response :
 
-| Type                    | Description                                                                                                            |
-|:------------------------|:-----------------------------------------------------------------------------------------------------------------------|
-| MultiPagesSearchResult  | Le résultat de la recherche contenant les positions du texte trouvé dans le document entre la plage de page renseignée |
+| Type                    | Description                                                                |
+|:------------------------|:---------------------------------------------------------------------------|
+| MultiPagesSearchResult  | The search result containing the positions of the text within the document |
 
+## Examples
 
-## Exemples
+### Search Page for Text Positions
 
-### Rechercher du texte dans une page
-
-L'exemple suivant montre comment rechercher le texte "exemple" à partir de la page 2 jusqu'à la page 5 du document avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_. 
-La recherche n'est pas sensible à la casse et aux accents.
+The following example demonstrates how to search for the text "example" from page 2 to page 5 of the document with the ID b64_bm9yZS92SDMtMS0xMTh1735080237. 
+The search is case-insensitive and accent-insensitive.
 
 ```bash
 curl -X 'GET' \
-'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/pages/2/text?searchText=exemple&caseSensitive=false&accentSensitive=false&regex=false' \
+'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/search?searchText=example&fromPage=2&toPage=5&caseSensitive=false&accentSensitive=false&regex=false' \
 -H 'accept: application/json'
 ```

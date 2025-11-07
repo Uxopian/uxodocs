@@ -1,20 +1,27 @@
 ---
-title: Sélection de texte
+title: "Text Selection"
 ---
 
-## Généralités
 
 
-| Description                                                            | Clé du paramètre              | Valeur par défaut | Type    |
-| ---------------------------------------------------------------------- | ----------------------------- | ----------------- | ------- |
-| Activation/Désactivation de la sélection de texte par caractère        | text.selection.use.legacy     | true              | Boolean |
-    
+
+
+
+
+## General
+
+
+| Description                                                      | Parameter Key                  | Default value | Type    |
+| ---------------------------------------------------------------- | -------------------------------| ------------- | ------- |
+| Enable/disable default text selection character by character     | text.selection.use.legacy      | true          | Boolean |
+
 
 
 ```cfg
-# Active l'utilisation du sélection de texte par défaut, caractère par caractère 
-# En désactivant, la sélection de texte se fera mot par mot lorsqu'un mot est partiellement ou complètement sélectionné
+# Enable the use of the legacy text selection, character by character :
+# When disabled, the text selection will select word by word when a word is partially or completely selected
 
 text.selection.use.legacy=true
 ```
+
 

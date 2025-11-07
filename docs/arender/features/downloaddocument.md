@@ -1,44 +1,41 @@
 ---
-title: Télécharger un document
+title: "Download a document"
 ---
 
-## Télécharger un document en PDF
 
-Survoler le bouton « Fichier »
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Cliquer sur « Télécharger le document en PDF »
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Si vous avez plusieurs document d’ouverts dans ARender, c’est le
-document visualisé dans le panneau de droite qui est téléchargé.
 
-## Télécharger un document avec des annotations
+## Download a file as PDF
 
-Survoler le bouton « Fichier »
+To download a file, mouse-over on this button to display the file menu:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/new/download1.png)
 
-Cliquer sur « Télécharger le document avec les annotations »
+![image](/img/arender/new/download2.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+If you have more than one document opened in ARender, the document
+currently displayed in the right area is downloaded.
 
-Si vous avez plusieurs document d’ouverts dans ARender, c’est le
-document visualisé dans le panneau de droite qui est téléchargé.
+## Download a file with annotations
 
-### Note textuelle 
+To download a file, mouse-over on this button to display the file menu:
 
-Pour les notes textuelle, il est possible d'afficher, sur le document téléchargé, la date de création ou la date de la dernière modification avec la propriété ci-dessous : 
+![image](/img/arender/new/download1.png)
+
+Then, click on this button:
+
+![image](/img/arender/new/download3.png)
+
+If you have more than one document opened in ARender, the document
+currently displayed in the right area is downloaded.
+
+### Sticky note
+
+For the sticky note, it is possible to display the creation date or the last modification date on the downloaded document.
+
 
 
 ```cfg
@@ -46,21 +43,19 @@ annotation.date.display.creationDate=true
 ```
 
 
-Par défaut, la valeur est `true`. La date de création va être affichée sur les notes textuelles du document téléchargé.
-Si la valeur est mise à `false`, c'est la date de la dernière modification qui sera affichée sur les notes textuelles du document téléchargé.
 
-## Télécharger tous les documents
+By default, the value is `true`. The creation date is displayed on the sticky note of the downloaded document.
+If the value is set to `false`, the last modification date will be displayed on the sticky note of the downloaded document.
 
-Survoler le bouton « Fichier »
+## Download all files
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+To download all files, mouse-over on this button to display the file
+menu:
 
-Cliquer sur « Télécharger tous les documents »
+![image](/img/arender/new/download1.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Then, click on this button:
 
-Ce bouton n’est visible que lorsque plusieurs documents sont ouverts.
+![image](/img/arender/new/download4.png)
+
+This button is only visible when multiple documents are opened.

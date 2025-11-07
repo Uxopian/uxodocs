@@ -1,28 +1,35 @@
 ---
-title: Éviction du document (DELETE)
+title: "DELETE Document"
 ---
 
-Cette API vous permet de supprimer un document du système.
 
-## Description de l'API
 
-Endpoint :
+
+
+
+
+
+This API allows you to evict (remove) a document from the system.
+
+## API Description
+
+Endpoint:
+
 ```bash
-GET /documents/<documentId>
+DELETE /documents/{documentId}
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
-## Exemple 
+## Example
 
-### Supprimer un document
+### Evict a Document
 
-L'exemple suivant permet de supprimer un document avec l'identifiant 
-du document spécifié.
+The following example evicts (removes) a document with the specified document ID.
 
 ```bash
 curl -X DELETE 'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237'

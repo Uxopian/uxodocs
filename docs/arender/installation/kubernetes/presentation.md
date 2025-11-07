@@ -1,35 +1,43 @@
 ---
-title: Serveur de présentation (Web UI)
+title: "Presentation server (Web UI)"
 ---
+
+
+
+
+
+
 
 ## Introduction
 
-Le serveur de présentation est nommé **"web-ui"** dans le Chart. Pour déployer le serveur de présentation d'ARender, assignez le paramètre `web-ui.enabled` à true.
+The presentation server is named **"web-ui"** in the Chart. To deploy the ARender presentation server set `web-ui.enabled` parameter to true.
 
-## Paramètres
+## Parameters
 
-Le tableau liste les paramètres configurables du subchart Web UI d'ARender et leurs valeurs par défaut.
+The following table lists the configurable parameters of the ARender web UI subchart and their default values.
 
-| Paramètres                     | Description                                                                         |                      Défaut                       |
-| :----------------------------- | :---------------------------------------------------------------------------------- | :-----------------------------------------------: |
-| `global.imagePullSecrets`      | Les noms des secrets pour accéder au registre Docker                                | `[]` (n'ajoute pas d'information d'accès au pods) |
-| `web-ui.enabled`               | Active le déploiement du serveur de présentation                                    |                      `true`                       |
-| `web-ui.replicaCount`          | Nombre de réplique de pod à déployer                                                |                        `1`                        |
-| `web-ui.autoscale.enabled`     | Active l'automatisation de la gestion du nombre de pod                              |                      `false`                      |
-| `web-ui.autoscale.maxReplicas` | Nombre maximum de réplique de pod dans le cluster                                   |                        `1`                        |
-| `web-ui.autoscale.cpuLimit`    | Pourcentage de CPU demandé avant augmentation du nombre de pod                      |                       `80`                        |
-| `web-ui.image.pullPolicy`      | Politique de récupération de l'image ARender UI                                     |                     `Always`                      |
-| `web-ui.serviceAccount.create` | Spécifie si un compte de service doit être créé                                     |                      `true`                       |
-| `web-ui.serviceAccount.name`   | Nom du compte de service crée. Si n'est pas renseigné prend la valeur du fullname   |                       `''`                        |
-| `web-ui.podSecurityContext`    | Contexte de sécurité du pod ARender UI                                              |                       `\{\}`                        |
-| `web-ui.securityContext`       | Contexte de sécurité du conteneur                                                   |                       `\{\}`                        |
-| `web-ui.service.type`          | Type du service ARender UI                                                          |                    `ClusterIP`                    |
-| `web-ui.service.port`          | Port du service ARender UI                                                          |                       `80`                        |
-| `web-ui.ingress.enabled`       | Active l'Ingress                                                                    |                      `false`                      |
-| `web-ui.ingress.annotations`   | Annotations de l'Ingress annotations                                                |                       `\{\}`                        |
-| `web-ui.ingress.hosts`         | Nom d'hôtes Ingress                                                                 |                       `[]`                        |
-| `web-ui.ingress.tls`           | Configuration tls                                                                   |                       `\{\}`                        |
-| `web-ui.rendition.hosts`       | Liste d'URL des serveurs de rendition (exemple: `- http://rendition-hostname:8761`) |                       `[]`                        |
-| `web-ui.resources`             | Limites et requêtes de ressource pour ARender UI                                    |                       `\{\}`                        |
-| `web-ui.nodeSelector`          | Sélecteur de node                                                                   |                       `\{\}`                        |
-| `web-ui.environment`           | Variables d'environments à passer au conteneur                                      |                       `\{\}`                        |
+| Parameters                     | Description                                                                      |                         Default                         |
+| :----------------------------- | :------------------------------------------------------------------------------- | :-----------------------------------------------------: |
+| `global.imagePullSecrets`      | Global Docker registry secret names as an array                                  | `[]` (does not add image pull secrets to deployed pods) |
+| `web-ui.enabled`               | Enable the presentation server deployment                                        |                         `true`                          |
+| `web-ui.replicaCount`          | Number of the pod replica to deploy                                              |                           `1`                           |
+| `web-ui.autoscale.enabled`     | Enable horitontal autoscaling of pods                                            |                         `false`                         |
+| `web-ui.autoscale.maxReplicas` | Maximum number of the pod replica in the cluster                                 |                           `1`                           |
+| `web-ui.autoscale.cpuLimit`    | Percentage of CPU requested target to scale horizontally                         |                          `80`                           |
+| `web-ui.image.repository`      | ARender UI image name                                                            |       `/arender-ui`       |
+| `web-ui.image.tag`             | ARender UI image tag                                                             |                ``                |
+| `web-ui.image.pullPolicy`      | ARender UI image pull policy                                                     |                        `Always`                         |
+| `web-ui.serviceAccount.create` | Specifies whether a service account should be created                            |                         `true`                          |
+| `web-ui.serviceAccount.name`   | Name of the service account created. If not set defaulted to ARender UI fullname |                          `''`                           |
+| `web-ui.podSecurityContext`    | ARender UI Pod security context                                                  |                          `{}`                           |
+| `web-ui.securityContext`       | Container security context                                                       |                          `{}`                           |
+| `web-ui.service.type`          | ARender UI service type                                                          |                       `ClusterIP`                       |
+| `web-ui.service.port`          | ARender UI service port                                                          |                          `80`                           |
+| `web-ui.ingress.enabled`       | Enable Ingress                                                                   |                         `false`                         |
+| `web-ui.ingress.annotations`   | Ingress annotations                                                              |                          `{}`                           |
+| `web-ui.ingress.hosts`         | Ingress hosts                                                                    |                          `[]`                           |
+| `web-ui.ingress.tls`           | Tls config                                                                       |                          `{}`                           |
+| `web-ui.rendition.hosts`       | Rendition hosts (example: `- http://rendition-hostname:8761`)                    |                          `[]`                           |
+| `web-ui.resources`             | ARender UI resources limits and requests                                         |                          `{}`                           |
+| `web-ui.nodeSelector`          | Node selector                                                                    |                          `{}`                           |
+| `web-ui.environment`           | Environment variables to pass to the container as a Map                          |                          `{}`                           |

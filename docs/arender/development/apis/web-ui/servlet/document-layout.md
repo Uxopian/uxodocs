@@ -1,32 +1,38 @@
 ---
-title: Structure des documents
+title: "Document layout"
 ---
 
-L'objet `document Layout` décrit la structure d'un document.
-
-Une nouvelle servlet est déployée permettant d'afficher un fichier Json correspondant à la structure du document.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **documentLayout**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A document layout describe the structure of a document.
+
+A new servlet is deployed to display a Json file corresponding to the structure of a document.
+
+## Request 
+
+This functionality is accessible via the servlet: **documentLayout**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/documentLayout?uuid=doc1UUID'
 ```
 
-## Réponse de la servlet
+## Servlet Response
 
-Le navigateur affiche la structure du document en langage Json.
+The browser displays the document structure in Json language.
 
-Voici un exemple de fichier Json :  
+Here an example of a Json file: 
 
 ``` json
-{
+
     "type": "com.arondor.viewer.client.api.document.DocumentPageLayout",
     "documentId": {
         "id": "doc1UUID"
@@ -34,21 +40,21 @@ Voici un exemple de fichier Json :
     "documentTitle": "title.pdf",
     "mimeType": "application/pdf",
     "pageDimensionsList": [
-        {
+
             "width": 720.0,
             "height": 405.0,
             "rotation": 0,
             "dpi": 0,
             "pageLayers": null
         },
-        {
+
             "width": 720.0,
             "height": 405.0,
             "rotation": 0,
             "dpi": 0,
             "pageLayers": null
         },
-        {
+
             "width": 720.0,
             "height": 405.0,
             "rotation": 0,
@@ -56,5 +62,5 @@ Voici un exemple de fichier Json :
             "pageLayers": null
         },
     ]
-}
+
 ```

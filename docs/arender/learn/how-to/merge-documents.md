@@ -1,30 +1,42 @@
 ---
-title: Fusionner des documents
+title: "Merge documents"
 ---
 
-ARender met à disposition un moyen de fusionner plusieurs documents en
-un PDF via une servlet.
 
-## Requête
 
-Cette fonctionnalité est utilisable via la servlet :
+
+
+
+
+ARender provides a way to generate a fusion of multiple documents into
+one PDF.
+
+## Request to use
+
+This functionality relies on the use of the servlet:
 **mergeDocumentsServlet**.
 
-Elle est utilisable en POST et en GET
+Usable in **POST** or **GET**.
 
-### Exemple d'utilisation
+### Request example
 
-Ci-dessous, un exemple avec des documents accessibles via URL. Cette
-fonctionnalité est bien-sûr utilisable pour n'importe quel type de
-connecteur (FileNet, Alfresco etc...).
+You will find below, exemple with documents accessible by URL. You can
+also put any kind of parameter matching any connector (FileNet, Alfresco
+etc...)
 
 ``` bash
-curl --data "url=../../samples/arender.pdf&url=../../samples/fw4.pdf" http://<!-- Commentaire nettoyé -->/ARender/arendergwt/mergeDocumentsServlet?url=../../samples/arender.pdf&url=../../samples/fw4.pdf&url=../../samples/arender-en.pdf'
+curl --data "url=../../samples/arender.pdf&url=../../samples/fw4.pdf" http://<arender_host>/ARender/arendergwt/mergeDocumentsServlet
 ```
 
-## Réponse de la servlet
+``` bash
+curl -X GET 'http://<arender_host>/ARender/arendergwt/mergeDocumentsServlet?url=../../samples/arender.pdf&url=../../samples/fw4.pdf&url=../../samples/arender-en.pdf'
+```
 
-La servlet retourne l'UUID du document fusionné et son nombre de pages.
+## Servlet Response
+
+The servlet returns the UUID of the merged document and its number of
+pages.
+
 
 
 ``` javascript
@@ -32,15 +44,16 @@ La servlet retourne l'UUID du document fusionné et son nombre de pages.
 ```
 
 
-Ici l'UUID est : b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0.
 
-Le nombre de page est 32.
+Here the UUID is: b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0.
 
-Une fois la requête exécutée, le document fusionné est dans le cache
-ARender et est visualisable via l'URL ci-dessous :
+The number of pages is 32.
 
-> `http://\{arender_host\}/ARender/?uuid=b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0`
+One the request executed, the merged document is in ARender cache and
+viewable through the URL below:
 
-Il est même téléchargeable via :
+> `http://&#123;arender_host&#125;/ARender/?uuid=b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0`
 
-> `http://\{arender_host\}/ARender/arendergwt/downloadServlet?uuid=b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0&title=DocumentTitle&type=INITIAL`
+Even downloadable through:
+
+> `http://&#123;arender_host&#125;/ARender/arendergwt/downloadServlet?uuid=b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0&amp;title=DocumentTitle&amp;type=INITIAL`

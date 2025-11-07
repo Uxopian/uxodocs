@@ -1,28 +1,33 @@
 ---
-title: Créer son document accessor
+title: "Create a custom document accessor"
 ---
 
-En fonction du type de service que vous souhaitez utiliser, nous avons
-peut-être déjà chez nous un connecteur pour ce type de service.
-N'hésitez donc pas à venir vers nous en premier lieu.
-
-Si vous préférez directement implémenter votre connecteur, il y aura
-deux étapes à suivre:
-
-Créer un parseur d'URL, qui va prendre de l'URL d'ARender les paramètres
-nécessaires et créer ensuite le second composant dont vous aurez besoin
-: le document accessor.
 
 
 
-La méthode canParse retourne vrai si les paramètres contenus dans l'URL
-d'ARender sont suffisants pour pouvoir parser le document.
 
-La méthode parse doit parser les paramètre de l'URL et pousser un
-DocumentAccessor en rendition, en voici un exemple:
+
+
+Depending the kind of service you want to use, we might already have
+something in-house so don't hesitate to come back to us with the decided
+service that will be used to fetch documents.
+
+If you prefer to directly go and implement your custom integration for
+fetching documents, there will be two things to do:
+
+An URL parser, that will load the parameters you need from the URL and
+create the second component needed, what we call a document accessor.
+
+[http://arender.fr/rendition-api/com/arondor/viewer/rendition/api/DocumentServiceURLParser.html](http://arender.fr/rendition-api/com/arondor/viewer/rendition/api/DocumentServiceURLParser.html)
+
+The method canParse has to return true if the parameters in the URL of
+ARender are sufficient to parse the document.
+
+The method parse will parse the parameters contained in the URL and push
+the documentAccessor to the rendition server. Example:
 
 ``` java
-List();
+List&lt;DocumentIdParameter&gt; parameters = new ArrayList&lt;DocumentIdParameter&gt;();
 parameters.add(new URLDocumentIdParameter(URL_REQUEST_PARAMETER, url));
 DocumentId documentId = DocumentIdFactory.getInstance().generate(parameters);
 DocumentAccessor documentAccessor = new DocumentAccessorURL(url, documentId);
@@ -30,36 +35,30 @@ documentService.loadDocumentAccessor(documentAccessor);
 return documentAccessor.getUUID();
 ```
 
-Ici, au lieu d'un DocumentAcessorURL, vous mettrez votre propre document
-accessor.
+Here, instead of DocumentAcessorURL, you'll put your own custom
+DocumentAccessor.
 
+[http://arender.fr/rendition-api/com/arondor/viewer/rendition/api/document/DocumentAccessor.html](http://arender.fr/rendition-api/com/arondor/viewer/rendition/api/document/DocumentAccessor.html)
 
+The methods detailed in the documentation are very straightforward and
+should not cause you any implementation issues.
 
-Les méthodes détaillées dans la documentation concernant les
-DocumentAccessor sont très simples et parlent d'elles même et ne
-devraient pas vous causer de soucis d'implémentation.
+Once you have developed your couple Parser/Accessor you'll can add the
+parser in the file arender-custom-server.properties contained in the configurations/ folder of ARender Web-UI.
 
-Une fois que vous avez développé votre couple Parser/Accessor vous serez
-capable d'ajouter le Parser au fichier
-*configurations/arender-custom-server.properties* de ARender Web-UI.
+- In the file *configurations/arender-custom-server-integration.xml *, define the bean:
 
-- Déclarer un nouveau bean de parser d'URL dans votre fichier
-  *arender-custom-server-integration.xml * situé dans le répertoire
-  *configurations* et ajouter cette référence à la liste des parser
-  disponibles, en tête de liste du fichier
-  *arender-custom-server.properties* :
-
-- Exemple de définition du bean dans le fichier
-    *arender-custom-server-integration.xml * :
 
 
 ```xml
-        **
+        <bean id="customUrlParser" class="com.arondor.viewer.CustomURLParser" />
 ```
 
 
-- Exemple de la configuration de la propriété afin de référencer le
-    bean dans le fichier *configurations/arender-custom-server.properties*) :
+
+- In the file *configurations/arender-custom-server.properties*, add your bean Id
+  to the list:
+
 
 
 ```cfg
@@ -67,7 +66,7 @@ arender.server.url.parsers.beanNames=customUrlParser,DefaultURLParser,DocumentId
 ```
 
 
-Dans le scénario de création d'un Accessor/Parser nous vous recommandons
-fortement de faire un project Maven et de modifier uniquement les
-fichiers autorisés afin de ne pas écraser des modifications apportées
-par les nouvelles versions.
+
+In the case of creating a custom Accessor/URLParser we recommend you
+strongly to make a Maven project and use properties edition in order to
+overlay and modify default ARender war properly each version.

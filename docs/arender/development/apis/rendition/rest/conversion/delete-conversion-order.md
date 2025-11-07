@@ -1,27 +1,34 @@
 ---
-title: Supprimer un ordre de conversion (DELETE)
+title: "DELETE a conversion order"
 ---
 
-Cette API permet de supprimer un ordre de conversion précédemment demandé.
 
-## Description technique de l'API
 
-Point de terminaison :
+
+
+
+
+
+This API allows to delete a conversion order previously requested.
+
+## API technical description
+
+Endpoint:
 ```bash
-DELETE /conversions/<ConversionOrderId>
+DELETE /conversions/&lt;ConversionOrderId&gt;
 ```
 
-Chemin de ressource :
+Resource path:
 
-| Variable             | Description                                |
-| :------------------- |:-------------------------------------------|
-| conversionOderId     | L'ID d'un ordre de conversion à supprimer. |
+| Variable             | Description                               |
+| :------------------- |:------------------------------------------|
+| conversionOderId     | The id of the conversion order to delete. |
 
-## Exemples
+## Examples
 
-### Supprimer un ordre de conversion
+### Delete a conversion order
 
-L'appel ci-dessous génère une demande de suppression de l'ordre de conversion avec l'id _123e4567-e89b-12d3-a456-426614174000_.
+The call below generates a request to delete the transform order with id _123e4567-e89b-12d3-a456-426614174000_.
 
 ```bash
 curl -X 'DELETE' \

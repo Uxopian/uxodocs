@@ -1,28 +1,31 @@
 ---
-title: Sauvegarde & Restauration
+title: "Backup &amp; Restore"
 ---
 
-## Serveur de rendition
 
-La sauvegarde d'un serveur de rendition consiste en la copie du
-répertoire d'installation. Celle-ci peut aussi bien être effectuée à
-chaud qu'à froid.
 
-Le dossier *tmp* contenu à la racine du répertoire d'installation peut
-être omis afin de limiter l'espace disque des sauvegardes. En effet, il
-contient seulement les documents ouverts et mis en cache lors de
-l'exécution.
 
-La restauration d'une sauvegarde d'un serveur de rendition se déroule en
-deux étapes :
 
-- Restauration de l'installation : Il s'agit d'une simple copie du
-  répertoire sauvegardé.
-- Restauration du service : La copie du répertoire d'installation ne
-  permet pas de conserver le service créé au niveau du système
-  d'exploitation.
 
-Pour le restaurer, il suffit d'exécuter les scripts suivants (suppression du service installé et installation du nouveau) :
+
+## Rendition server
+
+Backing up a rendition server is just the simple copy of the
+installation folder. This can be done while the server running as well
+as when it's shutdown.
+
+To save space the *tmp* folder can be overlooked. The *tmp* folder is
+storing open documents when the server is running.
+
+Restoring a rendition server is done in two steps:
+
+- Installation restoration: Copy the backed-up folder.
+- service restoration: Copying the file doesn't change the service
+  created on the operating system.
+
+To restore, execute the following scripts (it will remove the existing service and install the new one):
+
+
 
 
 ```powershell
@@ -31,21 +34,23 @@ $> .\installAsService.bat
 ```
 
 
+
+
 ```bash
 $> ./removeService.sh
 $> ./installAsService.sh
 ```
 
 
-## Serveur de présentation
 
-La sauvegarde d'un serveur de présentation consiste en la sauvegarde de :
 
-- L'application WEB déployée (WAR ou EAR)
-- La configuration du serveur d'application (si spécifique)
-- Les éléments (fichiers de configuration, librairies...) externalisés
-  (s'il y en a)
+## Presentation server
 
-La restauration d'un serveur de présentation nécessite alors le
-déploiement de l'application WEB déployée, de la configuration ainsi
-que des éléments externalisés.
+To back-up a presentation server you need:
+
+- The deployed web application (WAR or EAR)
+- Application server's configuration (if not default)
+- Various elements (configuration files, libraries...) remote (if any)
+
+Restoring a presentation server require the web application to be
+deployed, configuration files and remote elements.

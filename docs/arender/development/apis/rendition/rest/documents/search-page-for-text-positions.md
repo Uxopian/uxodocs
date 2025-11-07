@@ -1,50 +1,55 @@
 ---
-title: Rechercher du texte dans une page (GET)
+title: "GET Text Positions with Search on Page"
 ---
 
-Cette API vous permet de rechercher les positions du texte au sein d'une page spécifique d'un document.
 
-## Description technique de l'API
 
-Point d'entrée :
+
+
+
+
+This API allows you to search for text positions within a specific page of a document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/pages/{page}/text
 ```
 
-Chemin de la ressource :
+Resource path:
 
-| Variable    | Requis | Description                                                                     |
-|:------------|:-------|:--------------------------------------------------------------------------------|
-| documentId  | Oui    | L'ID du document                                                                |
-| page        | Oui    | L'index de la page dans laquelle vous souhaitez effectuer la recherche de texte |
+| Variable    | Required | Description                                                 |
+|:------------|:---------|:------------------------------------------------------------|
+| documentId  | Yes      | The ID of a document                                        |
+| page        | Yes      | The index of the page where you want to search for the text |
 
 
-Paramètres de requête:
+Query params:
 
-| Variable         | Requis | Description                                                                     |
-|:-----------------|:-------|:--------------------------------------------------------------------------------|
-| searchText       | Oui    | Le texte à rechercher                                                           |
-| caseSensitive    | Non    | Détermine si la recherche est sensible à la casse                               |
-| accentSensitive  | Non    | Détermine si la recherche est sensible aux accents                              |
-| regex            | Non    | Détermine si la valeur du paramètre 'searchText' est une expression régulière   |
+| Variable        | Required | Description                                                 |
+|:----------------|:---------|:------------------------------------------------------------|
+| searchText      | Yes      | The text to search                                          |
+| caseSensitive   | No       | Determines if the search is case-sensitive                  |
+| accentSensitive | No       | Determines if the search is accent-sensitive                |
+| regex           | No       | Determines if the search text is a regular expression       |
 
 
 Response :
 
-| Type              | Description                                                               |
-|:------------------|:--------------------------------------------------------------------------|
-| PageSearchResult  | Le résultat de la recherche contenant les positions du texte dans la page |
+| Type              | Description                                                            |
+|:------------------|:-----------------------------------------------------------------------|
+| PageSearchResult  | The search result containing the positions of the text within the page |
 
+## Examples
 
-## Exemples
+### Search Page for Text Positions
 
-### Rechercher du texte dans une page
-
-L'exemple suivant montre comment rechercher le texte "exemple" dans la page 2 du document avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_. 
-La recherche n'est pas sensible à la casse et aux accents.
+The following example demonstrates how to search for the text "example" within page 2 of the document with the ID b64_bm9yZS92SDMtMS0xMTh1735080237. 
+The search is case-insensitive and accent-insensitive.
 
 ```bash
 curl -X 'GET' \
-'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/pages/2/text?searchText=exemple&caseSensitive=false&accentSensitive=false&regex=false' \
+'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/pages/2/text?searchText=example&caseSensitive=false&accentSensitive=false&regex=false' \
 -H 'accept: application/json'
 ```

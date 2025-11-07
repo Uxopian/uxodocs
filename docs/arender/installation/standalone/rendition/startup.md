@@ -1,38 +1,36 @@
 ---
-title: Démarage
+title: "Start up"
 ---
 
-## Lancement manuel
 
-Il est possible de lancer le "service" ARender manuellement via ligne de
----
-title: Démarrage
----
 
-## Lancement manuel
 
-Il est possible de lancer le "service" ARender manuellement via ligne de
-commande :
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Sous Windows avec ARenderConsole.bat situé dans le répertoire
-```text
-rendition-engine-package-{NUMERO-VERSION} :
-```
+
+## Manual launch
+
+You can launch ARender rendition engine in command line:
+
+
+
+
+In Windows based OS using **ARenderConsole.bat** in the folder
+rendition-engine-package-&#123;VERSION-NUMBER&#125;:
 
 ```cmd
 $> .\ARenderConsole.bat
 ```
 
-Sous Linux avec **ARenderConsole.sh** situé dans le répertoire
-```text
-rendition-engine-package-{NUMERO-VERSION} (pensez à le rendre exécutable) :
-```
+
+
+
+In Linux based OS using **ARenderConsole.sh** in the folder
+rendition-engine-package-&#123;VERSION-NUMBER&#125; (give the file exec rights):
 
 ```bash
 $> ./ARenderConsole.sh
 ```
+
+
 

@@ -1,60 +1,57 @@
 ---
-title: Hyperliens
+title: "Hyperlink"
 ---
 
-## Description 
-Les hyperliens sont visibles sur les documents chargés dans ARender. En cliquant dessus, vous pouvez accéder à un autre contenu. 
-Vous aurez besoin d’un texte source qui sera le texte sélectionné et qui sera cliquable, et d’une cible.
-
-## Utilisations 
-
-Pour permettre la création d'hyperliens, surlignez du texte, le bouton *Créer un lien* apparaîtra alors.
-En cliquant dessus, un menu demandera de sélectionner une page ou de fournir une URL.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-Pour sélectionner la page, changez simplement la page depuis le navigateur de documents et appuyez sur le bouton *OK*.
-
-Pour fournir une URL, entrez l'URL souhaitée dans la zone de texte et appuyez sur le bouton *OK*.
-
-Pour créer un hyperlien vers une zone, cliquez sur le bouton *Créer un lien vers une zone*.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-La fenêtre contextuelle ci-dessous apparaît permettant la sélection de la zone cible.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-Pour modifier le texte source d'un lien hypertexte, cliquez sur le bouton d'édition (icone de crayon) dans le panneau 
-source du lien hypertexte souhaité dans l'explorateur d'hyperliens.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-La source peut être modifiée en sélectionnant un nouveau texte et en appuyant sur le bouton *OK*.
-
-Pour modifier la cible, cliquez sur le bouton d'édition (icone de crayon) dans le panneau cible.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-Il est alors demandé de sélectionner l'option souhaitée : 
-- *sélectionner la page*
-- *sélectionner la zone* 
-- *saisir votre URL*
 
 
-## Explorateur d’hyperliens
 
-Les hyperliens sont visibles dans l’explorateur d’hyperlien. Par défaut, il est activé.
+
+
+
+## Description
+Hyperlinks are visible on documents loaded into ARender. By clicking on it, you can access other content.
+You will need a source text, which will be the selected and clickable text, and a target.
+
+## Uses
+
+To enable the creation of hyperlinks, highlight some text, the *Create link* button will then appears.
+By clicking on it, a menu will ask to select a page or to provide a URL.
+
+![image](/img/arender/documentation/hyperlinks/hyperlink1-1en.png)
+
+To select the page, simply change the page on the document navigator and press the *OK* button.
+
+To provide a URL, enter the desired URL in the text box and press the *OK* button.
+
+To create an hyperlink to a zone, click on the *Create a link to a zone* button.
+
+![image](/img/arender/documentation/hyperlinks/hyperlinkzone2en.png)
+
+Then, the above popup appears and select the target zone.
+
+![image](/img/arender/documentation/hyperlinks/hyperlinkzone1en.png)
+
+To edit the source text of an hyperlink, click on the edit button (pencil icon) in the source panel of the desired 
+hyperlink in the hyperlink explorer.
+
+![image](/img/arender/documentation/hyperlinks/hyperlink_edit_source.png) 
+
+The source can be changed by selecting a new text and by pressing the *OK* button.
+
+To modify the target, click on the edit button (pencil icon) in the target panel. 
+
+![image](/img/arender/documentation/hyperlinks/hyperlink_edit_target.png)
+
+It then asks you to select the desired option: 
+- *select the page*
+- *select the zone*
+- *enter your URL*
+
+
+## Hyperlink Explorer
+
+Hyperlinks are visible in the hyperlink explorer. By default, it is enabled.
+
 
 
 ```cfg
@@ -62,155 +59,147 @@ hyperlinkexplorer.enabled=true
 ```
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Il permet de voir pour chaque hyperlien : 
+![image](/img/arender/documentation/hyperlinks/hyperlink_explorateur_empty_en.png)
 
-* le nom du créateur 
-* la date
-* le texte source
-* le document source
-* la cible 
+The hyperlink explorer displays all the created hyperlinks. A hyperlink contains the following information :
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+* the name of the creator
+* the date
+* the source text
+* the source document
+* the target
+
+![image](/img/arender/documentation/hyperlinks/hyperlink_explorateur_full_en.png)
 
 
-Plusieurs options d’affichage vous sont mises à disposition : 
+Several display options are available:
 
-| Propriété                                                   | Description                                                                  | Valeur par défaut |
-| ----------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------------- |
-| annotation.date.display.creationDate                        | Affiche la date de création sinon la date de la dernière modification        | true              |
-| annotation.comment.explorer.show.date                       | Active l'affichage de la date                                                | true              |
-| annotation.comment.explorer.creator.name.initial.only       | Affiche les initiales du créateur                                            | false             |
-| toolbar.securityList.checkOwner                             | Active la liste de sécurité pour les annotations de l'utilisateur courant    | true              |
-| annotation.date.display.humanizedDate.enabled               | Affiche la date humanisée                                                    | false             |
+| Property                                               | Description                                                               | Default value |
+| ------------------------------------------------------ | ------------------------------------------------------------------------- | ------------- |
+| annotation.date.display.creationDate                   | Displays the date of creation otherwise the date of the last modification | true          |
+| annotation.comment.explorer.show.date                  | Enable date display                                                       | true          |
+| annotation.comment.explorer.creator.name.initial.only  | Show creator’s initials                                                   | false         |
+| toolbar.securityList.checkOwner                        | Enables the security list for current user annotations                    | true          |
+| annotation.date.display.humanizedDate.enabled          | Display humanized date                                                    | false         |
 
 
 
-### Filtrer les hyperliens
+### Filter hyperlinks
 
-A partir de l’explorateur des hyperliens il est possible d’appliquer un filtre. Pour cela, vous pouvez utiliser le bandeau en haut de l'explorateur dédié aux filtres et aux tris. 
+In the hyperlink explorer, several buttons are available to filter or sort the hyperlinks.
 
-```xml
-<!-- Commentaire nettoyé --> 
-```
+![image](/img/arender/documentation/hyperlinks/hyperlink_explorateur_top.png) 
 
+Several filter options are available:
+* by document
+* by creator
+* by date
+* by current user
 
-Plusieurs options de filtre sont disponibles :
-* par document
-* par créateur
-* par date
-* par utilisateur courant
+You can also use the available filter buttons. 
 
-Vous pouvez également utiliser les boutons de filtres mis à disposition dans l'explorateur d'hyperlien. 
+The first one allows you to filter based on the username. By hovering the username, it will appear.
 
-Un pour filtrer en fonction du nom de l’utilisateur. Il apparaît au survol du nom de l'utilisateur.
-
-```xml
-<!-- Commentaire nettoyé --> 
-```
+![image](/img/arender/documentation/hyperlinks/hyperlink_filter_name.png) 
 
 
-Quand ce filtre est activé, il devient bleu. Pour le désactiver, il suffit de cliquer une nouvelle fois dessus.
+When this filter is activated, it will be blue. To deactivate it, simply click on it again.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/documentation/hyperlinks/hyperlink_filter_name_activated.png)
 
 
-Le deuxième filtre pour filtrer en fonction de la date. Il apparaît au survol de la date (uniquement si celle-ci est affichée).
+The second filter allow you to filter according to the date. It will be appear by hovering the date (only if the date is displayed).
 
-```xml
-<!-- Commentaire nettoyé --> 
-```
+![image](/img/arender/documentation/hyperlinks/hyperlink_filter_date.png) 
 
 
-Lui aussi est bleu quand il est activé. Pour le désactiver, il suffit de cliquer une nouvelle fois dessus.
+It also be blue when activated. To deactivate it, simply click on it again.
 
-```xml
-<!-- Commentaire nettoyé --> 
-```
+![image](/img/arender/documentation/hyperlinks/hyperlink_filter_date_activated.png) 
 
-## Liens entre documents
+## Document Linking
 
-La fonctionnalité *docLink* permet de créer des hyperliens entre documents. 
-Elle peut être activée via une propriété dédiée dans le fichier de 
-configuration.
+The *docLink* feature enables the creation of hyperlinks between documents. 
+It can be activated using a dedicated property in the configuration file.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
 
 ```cfg
 topPanel.docLink=true
 ```
 
 
-Une fois activée, un bouton dédié apparaît dans le panneau supérieur.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Once activated, a dedicated button appears in the top panel.
 
-Il est également possible d'activer automatiquement la fonctionnalité au chargement du document en utilisant la propriété suivante :
+![image](/img/arender/documentation/hyperlinks/hyperlink_doclink_button.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+It is also possible to automatically enable the feature when the document is loaded using the following property:
+
+
 
 ```cfg
 topPanel.docLink.activateOnStartup=true
 ```
 
 
+
+Since version 2023.15.0, you can choose whether the 'Blue Frame' button creates a hyperlink from selected text or from a selected area using the following property:
+
+
+
+```cfg
+# If true, the 'blueZone' hyperlink is activated otherwise it is 'blueFrame' hyperlink which is activated
+topPanel.docLink.enableZoneSelection=false
+```
+
+
+
 ### Activation
 
-Deux options sont disponibles via un menu déroulant :
-- Lien texte bleu : Style classique d’hyperlien, avec un texte cliquable en bleu.
-- Lien cadre bleu : Le texte cliquable est entouré d’un cadre bleu.
+Two options are available via a dropdown menu:
 
-Lorsqu’elle est activée, la fonctionnalité docLink affiche les documents côte à 
-côte en mode multi-vue.
-Le document de gauche représente la source de l'hyperlien et le document de 
-droite représente la cible.
-Dans un premier temps, du texte doit être séléctionné dans le document source, 
-le document cible est ainsi désactivé et le curseur passe en mode de sélection 
-de texte. 
+- Blue Text Link: Classic hyperlink style with clickable blue text.
+- Blue Frame Link: The clickable text is surrounded by a blue frame.
 
-Le cas générique consiste en une ouverture de deux documents dans ARender, 
-ceux-ci apparaissent dans la multi-vue, des cas plus spécifiques sont également
-pris en charge : 
+When activated, the docLink feature displays documents side-by-side in 
+multi-view mode.
 
-- Document unique :
-  Le même document est ouvert deux fois dans la multi-vue, côte à côte.
-- Avec trois documents ou plus : 
-  Seuls les deux premiers documents sont affichés côte à côte avec une
-  restriction empêchant de changer de document.
-- En mode multi-vue ou mode comparaison activé :
-  Les documents restent en place, le mode docLink ajuste automatiquement 
-  l’affichage avec la désactivation du document cible et le nettoyage des 
-  résultats de comparaison pour permettre la création de lien.
+The document on the left serves as the hyperlink source and the right one 
+serves as the hyperlink target.
+Initially, text must be selected in the source document. The target document 
+is then deactivated, and the cursor switches to text selection mode.
 
-### Création 
+The generic case involves opening two documents in ARender, displayed 
+side-by-side in multi-view. Specific cases are also handled:
 
-Une fois le mode docLink activé, une sélection de texte doit être effectuée sur
-le document source.
-Après cela, le document source devient désactivé et le document cible est activé
-pour définir la cible de l'hyperlien.
+- Single document: 
+  The same document is opened twice in multi-view mode, displayed side-by-side.
+- Three or more documents:
+  Only the first two documents are displayed side-by-side, with a restriction 
+  preventing any document changes.
+- Multi-View or comparison mode activated:
+  The documents remain in multi-view, and the docLink mode automatically adjusts
+  the display by deactivating the target document and cleaning up comparison 
+  results to enable the hyperlink creation.
 
-Un clic sur une position dans le document cible crée immédiatement l’hyperlien 
-et les documents reviennent à leur état initial.
+### Creation
 
-Si la propriété *ui.legacy.enabled=false* est utilisée, il est possible de 
-cliquer directement sur une vignette pour créer un hyperlien au niveau de la 
-page entière, au lieu d’une position précise.
+Once the docLink mode is activated, text must be selected in the source 
+document.
+After the selection, the source document is deactivated, and the target document
+becomes active to define the hyperlink target.
 
-### Désactivation 
+Clicking on a position in the target document creates the hyperlink immediately,
+and the documents return to their initial state.
 
-En cliquant sur le bouton docLink ou en appuyant sur ÉCHAP, le mode docLink est 
-désactivé. Avec une source sélectionnée, une alerte s’affiche pour avertir 
-l’utilisateur de l’abandon du processus de création de l’hyperlien.
+If the *ui.legacy.enabled=false* property is set, it is possible to click 
+directly on a thumbnail to create a hyperlink at the page level instead of a 
+specific position.
+
+### Deactivation
+
+Clicking the docLink button or pressing ESC deactivates the docLink mode.
+If a source has already been selected, an alert will notify the user of the 
+cancellation of the hyperlink creation process.

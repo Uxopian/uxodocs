@@ -1,106 +1,156 @@
 ---
-title: Charger un document
+title: "Load a document"
 ---
 
-```xml
-L'API JavaScript  permet d'interagir aisément avec ARender à l'aide de différentes commandes ****[ listées ici ](<!-- Commentaire nettoyé -->) ****
-```
 
-## Charger un document
 
-```xml
-Les fonctions **loadDocument** et **openDocument** de l'API, ******[ décrites ici ](<!-- Commentaire nettoyé -->)****** permettent de charger et ouvrir un document sur le serveur d'ARender.
-```
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-### Exemple d'implémentation depuis l'iframe
 
-Les requêtes à l'API JS se font sur l'objet **window** de l'iframe, comme montré ci-dessous.
 
+The JavaScript API allows easy interaction with ARender using various commands <i class="ti-hand-point-right" />[ listed here ](./development/apis/web-ui/javascript.md) <i class="ti-hand-point-left" ></i>.
+
+## Load a document
+
+The **loadDocument** and **openDocument** functions from the API, <i class="ti-hand-point-right" /><ins>[ described here ](./development/apis/web-ui/javascript/document.md)</ins><i class="ti-hand-point-left" ></i> allow you to load and open a document on the ARender server.
+
+<p><i class="ti-alert" /> Note that document opening is secured, so only documents from your document space can be opened.</p>
+
+### Implementation example from the iframe
+
+JavaScript API requests are made on the window object of the iframe, as shown below.
+
+
+    
 ```javascript
-        const loadAndOpenDocument = () => <!-- Commentaire nettoyé -->
+        const loadAndOpenDocument = () => {
+          const iframeWindow = iframeRef.current?.contentWindow;
+
+          if (iframeWindow) {
+            iframeWindow.getARenderJS().loadDocument(
+              "loadingQuery?url=url/du/document.zip",
+              (id) => {
+                console.log(id);
+                iframeWindow.getARenderJS().openDocument(id);
+
             );
-          } else <!-- Expression supprimée -->;
-          }
+          } else {
+            console.error("The iframe is not accessible or not loaded.");
+
         };
 ```
+    
+    
 ```javascript
-        loadAndOpenDocument(): void <!-- Commentaire nettoyé -->
+        loadAndOpenDocument(): void {
+        const iframeWindow = this.iframeRef.nativeElement.contentWindow;
+
+        if (iframeWindow) {
+          iframeWindow.getARenderJS().loadDocument(
+            "loadingQuery?url=url/du/document.zip",
+            (id: string) => {
+              console.log(id);
+              iframeWindow.getARenderJS().openDocument(id);
+
           );
-        } else <!-- Expression supprimée -->;
-        }
-      }
+        } else &#123;
+          console.error("The iframe is not accessible or not loaded.");
+
+
 ```
+    
+    
 ```javascript
 /**
- * Renvoie l'objet ARenderJS depuis l'iframe.
- * Lève une erreur si l'iframe n'est pas accessible ou n'est pas chargé.
+ * Returns the ARenderJS object from the iframe.
+ * Throws an error if the iframe is not accessible or not loaded.
  */
-function getARenderJS() <!-- Commentaire nettoyé -->
+function getARenderJS() {
+  const iframeWindow = iframeRef.value?.contentWindow
+    ? iframeRef.value.contentWindow
+    : undefined
+
+  if (iframeWindow) &#123;
+    return iframeWindow.getARenderJS()
+
   throw new Error("The iframe is not accessible or not loaded.")
-}
 
 /**
- * Charge et ouvre un document dans ARender.
- * @param url L'URL du document à charger.
+ * Loads and opens a document in ARender.
+ * @param url The URL of the document to load.
  */
-function loadAndOpenDocument(url) <!-- Commentaire nettoyé -->)
-}
+function loadAndOpenDocument(url) {
+  getARenderJS().loadDocument("loadingQuery?url=" + url, id => {
+    getARenderJS().openDocument(id)
+  &#125;)
 
 /**
- * Expose la fonction `loadAndOpenDocument` au composant parent.
+ * Expose the `loadAndOpenDocument` function to the parent component.
  */
 defineExpose({
   loadAndOpenDocument
-})
-```
-```javascript
-/**
- * Renvoie l'objet ARenderJS depuis l'iframe.
- * Lève une erreur si l'iframe n'est pas accessible ou n'est pas chargé.
- */
-function getARenderJS() <!-- Commentaire nettoyé -->
-  throw new Error("The iframe is not accessible or not loaded.")
-}
-
-/**
- * Charge et ouvre un document dans ARender.
- * @param url L'URL du document à charger.
- */
-export function loadAndOpenDocument(url) <!-- Commentaire nettoyé -->)
-}
+&#125;)
 ```
     
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-**
-```xml
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-```
-**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
+    
 ```javascript
-    function loadAndOpen() <!-- Commentaire nettoyé -->
-            );
-          } else <!-- Expression supprimée -->;
-          }        
-    }
-```    
-```xml
-<!-- Commentaire nettoyé -->
-```
+/**
+ * Returns the ARenderJS object from the iframe.
+ * Throws an error if the iframe is not accessible or not loaded.
+ */
+function getARenderJS() {
+  const iframeWindow = iframeRef?.contentWindow
+    ? iframeRef.contentWindow
+    : undefined
 
+  if (iframeWindow) {
+    return iframeWindow.getARenderJS()
+
+  throw new Error("The iframe is not accessible or not loaded.")
+
+/**
+ * Loads and opens a document in ARender.
+ * @param url The URL of the document to load.
+ */
+export function loadAndOpenDocument(url) {
+  getARenderJS().loadDocument("loadingQuery?url=" + url, id => {
+    getARenderJS().openDocument(id)
+  })
+
+```
+    
+    
+
+<p><i class="ti-alert" /> Note that if you attempt to <ins>integrate ARender into a local directory</ins>, to interact with a local HTML file, you must first <b>serve it on the localhost port of your choice</b>.</p>
+
+<p>You can do this easily in several ways, with Python, Node.js, PHP, or others. Here is an example with Python 3.x:</p>
+
+<ul>
+<li>Open a command prompt in the directory of the host application</li>
+<li>Start the server with <code>http-server -p 8000</code> (Replace 8000 with the port of your choice)</li>
+<li>Access the HTML file from your browser with the URL <code>http://localhost:8000/index.html</code></li>
+</ul>
+
+<p>To load and open a document in ARender, you can create the following function in the JavaScript file of the host application:</p>
+
+```javascript
+    function loadAndOpen() {
+        const iframe = document.getElementById('arender-iframe');
+        if (iframe && iframe.contentWindow) {
+            iframeWindow.getARenderJS().loadDocument(
+              "loadingQuery?url=", // pass the url of the document to load here, after the equal sign
+              (id) => {
+                console.log(id);
+                iframeWindow.getARenderJS().openDocument(id);
+
+            );
+          } else {
+            console.error("The iframe is inaccesible or has not loaded yet");
+
+
+```    
+
+
+
+    
 

@@ -1,11 +1,17 @@
 ---
-title: Swagger UI
+title: "Swagger UI"
 ---
 
-L'API REST ARender Rendition est livrée avec une documentation Swagger interactive qui vous permet d'explorer et de tester les points de terminaison disponibles sans effort. Pour accéder à l'interface utilisateur de Swagger, accédez à :
+
+
+
+
+
+
+ARender Rendition REST API comes with an interactive Swagger documentation that allows you to explore and test the available endpoints effortlessly. To access the Swagger UI, navigate to: 
 
 ```cfg
 http://localhost:8761/swagger-ui/index.html
 ```
 
-Cette interface conviviale fournit un aperçu complet de la structure de l'API, des points de terminaison disponibles, des paramètres de requête et des formats de réponse.
+This user-friendly interface provides a comprehensive overview of the API's structure, available endpoints, request parameters, and response formats.

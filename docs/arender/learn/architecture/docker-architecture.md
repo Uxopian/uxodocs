@@ -1,14 +1,19 @@
 ---
-title: Architecture Docker
+title: "Docker architecture"
 ---
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-* **N1: ECM UI**: a la responsabilité de laisser l'utilisateur choisir quel document il veut ouvrir dans ARender,
-* **N2: Browser**: va créer la "frame" d'ARender en utilisant l'URL fourni par N1,
-* **N3: ARender WEB-UI**: est un serveur d'application qui contient le connecteur et qui est lancé dans un conteneur docker,
-* **N4: ECM Backend**: contient une API avec laquelle le connecteur ARender va interagir pour aller chercher les documents 
-(et si besoin les annotations, les métadonnées ou les nouvelles versions de documents),
-* **N5: ARender Rendition**: est composé de 4 microservices Spring Boot lancés dans des conteneurs docker qui offrent différents services comme la génération d'images, l'extraction de texte, la conversion de documents et plus encore.
+
+
+
+
+
+
+![img](/img/arender/diagrams/ARender-Architecture-Docker.png)
+
+* **N1: ECM UI**: has the responsibility to let the user choose which documents he wants to open in ARender,
+* **N2: Browser**: will create the ARender frame using the URL provided by N1,
+* **N3: ARender WEB-UI**: is an application server containing the connector and running in a docker container,
+* **N4: ECM Backend**: contains API which ARender connector will interact with to fetch documents (and if needed fetch annotations 
+  and metadata and create new documents or new version of documents),
+* **N5: ARender Rendition**: is compounded of 4 Spring Boot microservices running in docker containers that offer different services such as generating images, extracting text, converting document and more.

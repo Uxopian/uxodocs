@@ -1,15 +1,21 @@
 ---
-title: Vignettes
+title: "Thumbnails"
 ---
 
-### Changer le navigateur de documents
 
-- Objet : getARenderJS().getThumbnailsJSAPI()
 
-    | Fonction               | Description                                                                   |
-    | ---------------------- | ----------------------------------------------------------------------------- |
-    | resetNavigator()       | Remet à zéro la taille du navigateur de documents                             |
-    | hideNavigator()        | Cache le navigateur de vignettes                                              |
-    | showNavigator()        | Montre le navigateur de vignettes                                             |
-    | expandNavigator(width) | Agrandi le navigateur de vignettes (si la taille est supérieure à l'actuelle) |
-    | reduceNavigator(width) | Réduit le navigateur de vignettes (si la taille est inférieure à l'actuelle)  |
+
+
+
+
+### Change the document navigator
+
+- Objet: getARenderJS().getThumbnailsJSAPI()
+
+    | Function               | Description                                                                     |
+    | ---------------------- | ------------------------------------------------------------------------------- |
+    | resetNavigator()       | Reset the document navigator size                                               |
+    | hideNavigator()        | Hide the document navigator                                                     |
+    | showNavigator()        | Show the document navigator                                                     |
+    | expandNavigator(width) | Enlarge the document navigator size (if width is superior to the current width) |
+    | reduceNavigator(width) | Reduce the document navigator size (if width is inferior to the current width)  |

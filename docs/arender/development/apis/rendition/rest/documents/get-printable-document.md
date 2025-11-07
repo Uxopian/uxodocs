@@ -1,39 +1,45 @@
 ---
-title: Obtenir le document imprimable (GET)
+title: "GET Printable Document"
 ---
 
-Cette API vous permet d'obtenir la version imprimable d'un document spécifique.
 
-## Description technique de l'API
 
-Point d'entrée :
+
+
+
+
+This API allows you to retrieve the printable version of a specific document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/printable
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
-Réponse :
+Response :
 
 | Type                  | Description                           |
 |:----------------------|:--------------------------------------|
-| HttpServletResponse   | Le document imprimable au format PDF  |
+| HttpServletResponse   | The printable document in PDF format  |
 
-## Exemples
+## Examples
 
-### Obtenir le document imprimable
+### Retrieve Printable Document
 
-L'exemple suivant illustre comment obtenir le document imprimable pour un document 
-spécifique avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_. Le paramètre -o permet de 
-sauvegarder le résultat dans un fichier de sorti.
+The following example demonstrates how to retrieve the printable
+document for a specific document with ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
+The parameter -o allow to save the result in an output file.
 
 ```bash
 curl -X 'GET' \
-'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/printable' \
--H 'accept: application/pdf' \
--o document_imprimable.pdf
+  'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/printable' \
+  -H 'accept: application/pdf' \
+  -o printable_document.pdf
 ```

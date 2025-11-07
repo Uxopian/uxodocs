@@ -1,110 +1,116 @@
 ---
-title: Barre de menu
+title: "Menu bar"
 ---
 
-## Menu de document
-
-
-| Description                                                                                               | Clé du paramètre                                | Valeur par défaut | Type    |
-| --------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ----------------- | ------- |
-| Activer le sous-menu document                                                                             | topPanel.documentMenu                           | true              | Booléen |
-| Chargement d''un document depuis le poste local                                                           | topPanel.documentMenu.upload                    | true              | Booléen |
-| Chargement d''un document depuis une URL                                                                  | topPanel.documentMenu.url                       | true              | Booléen |
-| Autoriser à utiliser "entrée" pour valider l'URL d'entrée à partir du bouton URL                          | topPanel.documentMenu.url.open.using.enter      | true              | Booléen |
-| Chargement d''annotations au format XFDF depuis le poste local                                            | topPanel.documentMenu.xfdfUpload                | false             | Booléen |
-| Téléchargement du document courant au format PDF                                                          | topPanel.documentMenu.downloadPDF               | true              | Booléen |
-| Téléchargement du document courant au format natif (disponible seulement si le document n'est pas un PDF) | topPanel.documentMenu.download                  | true              | Booléen |
-| Téléchargement de l'ensemble des documents visualisés                                                     | topPanel.documentMenu.downloadAll               | true              | Booléen |
-| Téléchargement du document courant avec ses annotations                                                   | topPanel.documentMenu.downloadAnnotation        | true              | Booléen |
-| Télécharger les annotations au format CSV                                                                 | topPanel.documentMenu.downloadCSVAnnotation     | false             | Booléen |
-| Télécharger le document avec ses annotations au format FDF                                                | topPanel.documentMenu.downloadWithFDFAnnotation | false             | Booléen |
-| Télécharger les annotations au format XFDF                                                                | topPanel.documentMenu.downloadXFDFAnnotations   | false             | Booléen |       
-| Activer le bouton de téléchargement du document composite                                                 | topPanel.documentMenu.download.root             | true              | Booléen |
-| Le comportement par défaut pour le téléchargement : DOWNLOAD_SOURCE or DOWNLOAD_NON_PDF                   | topPanel.documentMenu.download.behavior         | DOWNLOAD_NON_PDF  | Texte   |
-| Télécharger tous les documents actuels au format original dans ZIP                                        | topPanel.documentMenu.downloadAllSources        | true              | Booléen |
-| Télécharger les annotations au format FDF                                                                 | topPanel.documentMenu.downloadFDFAnnotations    | false             | Booléen |
-| Télécharger les documents comparés côte à côte avec le résultat de comparaison dessus                     | topPanel.documentMenu.download.with.compare     | true              | Booléen |
 
 
 
-## Menu d'impression
 
-| Description                                                                   | Clé du paramètre | Valeur par défaut |  Type   |
-| ----------------------------------------------------------------------------- | ---------------- | ----------------- | ------- |
-| Affiche une boîte de dialogue permettant de sélectionner le type d'impression | topPanel.print   | true              | Booléen |
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
+## Document menu
+
+ 
+| Description                                                             | Parameter Key                                   | Default value    | Type    |
+| ----------------------------------------------------------------------- | ----------------------------------------------- | ---------------- | ------- |
+| Activate the document sub-menu                                          | topPanel.documentMenu                           | true             | Boolean |
+| Upload a document from local disk                                       | topPanel.documentMenu.upload                    | true             | Boolean |
+| Upload a document from a remote URL                                     | topPanel.documentMenu.url                       | true             | Boolean |
+| Allow to use "enter" to validate the input URL from the URL button      | topPanel.documentMenu.url.open.using.enter      | true             | Boolean |
+| Upload XFDF annotations from local                                      | topPanel.documentMenu.xfdfUpload                | false            | Boolean |
+| Download current document in PDF                                        | topPanel.documentMenu.downloadPDF               | true             | Boolean |
+| Download current document in native format (only not PDF document)      | topPanel.documentMenu.download                  | true             | Boolean |
+| Download all visualized documents                                       | topPanel.documentMenu.downloadAll               | true             | Boolean |
+| Download current document with its annotations                          | topPanel.documentMenu.downloadAnnotation        | true             | Boolean |
+| Download annotations in CSV format                                      | topPanel.documentMenu.downloadCSVAnnotation     | false            | Boolean |
+| Download document with FDF annotations                                  | topPanel.documentMenu.downloadWithFDFAnnotation | false            | Boolean |
+| Download annotations in XFDF format                                     | topPanel.documentMenu.downloadXFDFAnnotations   | false            | Boolean |       
+| Activate the top panel download composite document button               | topPanel.documentMenu.download.root             | true             | Boolean |
+| The default behavior for download : DOWNLOAD_SOURCE or DOWNLOAD_NON_PDF | topPanel.documentMenu.download.behavior         | DOWNLOAD_NON_PDF | String  |
+| Download all current documents as original format in a ZIP              | topPanel.documentMenu.downloadAllSources        | true             | Boolean |
+| Download the current document as FDF                                    | topPanel.documentMenu.downloadFDFAnnotations    | false            | Boolean |
+| Download the compared documents side by side with compare result on it  | topPanel.documentMenu.download.with.compare     | true             | Boolean |
+| Activate the download sub-menu (Since version 2023.15.0)                | topPanel.downloadMenu.enabled                   | true             | Boolean |
+| Activate the import sub-menu (Since version 2023.15.0)                  | topPanel.importMenu.enabled                     | true             | Boolean |
+
+
+## Print menu
+
+| Description                                                  | Parameter Key  | Default value | Type    |
+| ------------------------------------------------------------ | -------------- | ------------- | ------- |
+| Display a dialog box allowing to choose the type of printing | topPanel.print | true          | Boolean |
+
+
 
 ```cfg
-# Masquer le bouton d'impression
+# Hide the print button
 topPanel.print=false
 ```
 
 
-## Menu d'annotation
 
-| Description                                                                                         | Clé du paramètre                                 | Valeur par défaut | Type    |
-| --------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ----------------- | ------- |
-| Activer le sous-menu d'annotation                                                                   | topPanel.annotationMenu                          | true              | Booléen |
-| Création d''une note textuelle                                                                      | topPanel.annotationMenu.stikyNote                | true              | Booléen |
-| Création d''un rectangle                                                                            | topPanel.annotationMenu.highlight                | true              | Booléen |
-| Création d''un cercle                                                                               | topPanel.annotationMenu.circle                   | true              | Booléen |
-| Création d''une flèche                                                                              | topPanel.annotationMenu.arrow                    | true              | Booléen |
-| Création d''une flèche de mesure                                                                    | topPanel.annotationMenu.arrow.measure            | true              | Booléen |
-| Création de texte surligné                                                                          | topPanel.annotationMenu.highlightText            | false             | Booléen |
-| Création de texte souligné                                                                          | topPanel.annotationMenu.underlineText            | false             | Booléen |
-| Création de texte barré                                                                             | topPanel.annotationMenu.strikethroughText        | false             | Booléen |
-| Création d''un polygone                                                                             | topPanel.annotationMenu.polygon                  | true              | Booléen |
-| Création d''une ligne connecté                                                                      | topPanel.annotationMenu.polyline                 | true              | Booléen |
-| Création d''un dessin à main levée                                                                  | topPanel.annotationMenu.freehand                 | true              | Booléen |
-| Création d''un lien hypertexte                                                                      | topPanel.annotationMenu.hyperlink                | false             | Booléen |
-| Création d''un tampon                                                                               | topPanel.annotationMenu.stamp                    | true              | Booléen |
-| Création d''une annotation audio                                                                    | topPanel.annotationMenu.sound                    | false             | Booléen |
-| Afficher/masquer les annotations                                                                    | topPanel.annotationMenu.hide                     | true              | Booléen |
-| Afficher/masquer annotations & rotations                                                            | topPanel.annotationMenu.hideAll                  | false             | Booléen |
-| Création d'un texte libre                                                                           | topPanel.annotationMenu.freetext                 | true              | Booléen |
-| Autoriser la modification de la note textuelle                                                      | topPanel.annotationMenu.stickyNote.editable      | true              | Booléen |
-| Création d''un rectangle en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)           | topPanel.annotationMenu.highlight.repeat         | false             | Booléen |
-| Création d''une flèche en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)             | topPanel.annotationMenu.arrow.repeat             | false             | Booléen |
-| Création d''une flèche de mesure en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)   | topPanel.annotationMenu.arrow.measure.repeat     | false             | Booléen |
-| Création d''un polygone en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)            | topPanel.annotationMenu.polygon.repeat           | false             | Booléen |
-| Création d''une ligne connecté en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)     | topPanel.annotationMenu.polyline.repeat          | false             | Booléen |
-| Création d''un dessin à main levée en mode répétition (ne s'annule pas à moins d'appuyer à nouveau) | topPanel.annotationMenu.freehand.repeat          | false             | Booléen |
-| Création de texte surligné en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)         | topPanel.annotationMenu.highlightText.repeat     | false             | Booléen |
-| Création de texte souligné en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)         | topPanel.annotationMenu.underlineText.repeat     | false             | Booléen |
-| Création de texte barré en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)            | topPanel.annotationMenu.strikethroughText.repeat | false             | Booléen |
-| Création d''un cercle en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)              | topPanel.annotationMenu.circle.repeat            | false             | Booléen |
-| Création d''un lien hypertexte en mode répétition (ne s'annule pas à moins d'appuyer à nouveau)     | topPanel.annotationMenu.hyperlink.repeat         | false             | Booléen |
+## Annotation menu
 
+
+| Description                                                                      | Parameter Key                                    | Default value | Type    |
+| -------------------------------------------------------------------------------- | ------------------------------------------------ | ------------- | ------- |
+| Activate the annotation sub-menu                                                 | topPanel.annotationMenu                          | true          | Boolean |
+| Create a sticky note                                                             | topPanel.annotationMenu.stikyNote                | true          | Boolean |
+| Create a rectangle                                                               | topPanel.annotationMenu.highlight                | true          | Boolean |
+| Create a circle                                                                  | topPanel.annotationMenu.circle                   | true          | Boolean |
+| Create an arrow                                                                  | topPanel.annotationMenu.arrow                    | true          | Boolean |
+| Create a measurement arrow                                                       | topPanel.annotationMenu.arrow.measure            | true          | Boolean |
+| Create a highlight text                                                          | topPanel.annotationMenu.highlightText            | false         | Boolean |
+| Create an underline text                                                         | topPanel.annotationMenu.underlineText            | false         | Boolean |
+| Create a strikeout text                                                          | topPanel.annotationMenu.strikethroughText        | false         | Boolean |
+| Create a polygon                                                                 | topPanel.annotationMenu.polygon                  | true          | Boolean |
+| Create a polyline                                                                | topPanel.annotationMenu.polyline                 | true          | Boolean |
+| Create a freehand                                                                | topPanel.annotationMenu.freehand                 | true          | Boolean |
+| Create a hyperlink                                                               | topPanel.annotationMenu.hyperlink                | false         | Boolean |
+| Create a stamp                                                                   | topPanel.annotationMenu.stamp                    | true          | Boolean |
+| Create an audio annotation                                                       | topPanel.annotationMenu.sound                    | false         | Boolean |
+| Display/hide all annotations                                                     | topPanel.annotationMenu.hide                     | true          | Boolean |
+| Display/hide annotations &amp; rotations                                             | topPanel.annotationMenu.hideAll                  | false         | Boolean |
+| Create a freetext                                                                | topPanel.annotationMenu.freetext                 | true          | Boolean |
+| Allow the sticky note to be edited                                               | topPanel.annotationMenu.stickyNote.editable      | true          | Boolean |
+| Create a rectangle in repeat mode (does not cancel unless pressed again)         | topPanel.annotationMenu.highlight.repeat         | false         | Boolean |
+| Create an arrow in repeat mode (does not cancel unless pressed again)            | topPanel.annotationMenu.arrow.repeat             | false         | Boolean |
+| Create a measurement arrow in repeat mode (does not cancel unless pressed again) | topPanel.annotationMenu.arrow.measure.repeat     | false         | Boolean |
+| Create a polygon in repeat mode (does not cancel unless pressed again)           | topPanel.annotationMenu.polygon.repeat           | false         | Boolean |
+| Create a polyline in repeat mode (does not cancel unless pressed again)          | topPanel.annotationMenu.polyline.repeat          | false         | Boolean |
+| Create a freehand in repeat mode (does not cancel unless pressed again)          | topPanel.annotationMenu.freehand.repeat          | false         | Boolean |
+| Create a highlight text in repeat mode (does not cancel unless pressed again)    | topPanel.annotationMenu.highlightText.repeat     | false         | Boolean |
+| Create an underline text in repeat mode (does not cancel unless pressed again)   | topPanel.annotationMenu.underlineText.repeat     | false         | Boolean |
+| Create a strikeout text in repeat mode (does not cancel unless pressed again)    | topPanel.annotationMenu.strikethroughText.repeat | false         | Boolean |
+| Create a circle in repeat mode (does not cancel unless pressed again)            | topPanel.annotationMenu.circle.repeat            | false         | Boolean |
+| Create a hyperlink in repeat mode (does not cancel unless pressed again)         | topPanel.annotationMenu.hyperlink.repeat         | false         | Boolean |
 
 
 ## Navigation
 
-
-| Description                | Clé du paramètre                  | Valeur par défaut | Type    |
-| -------------------------- | --------------------------------- | ----------------- | ------- |
-| Aller à la première page   | topPanel.pageNavigation.first     | true              | Booléen |
-| Aller à la page précédente | topPanel.pageNavigation.previous  | true              | Booléen |
-| Aller à la page suivante   | topPanel.pageNavigation.next      | true              | Booléen |
-| Aller à la dernière page   | topPanel.pageNavigation.last      | true              | Booléen |
+| Description         | Parameter Key                         | Default value | Type    |
+| ------------------- | ------------------------------------- | ------------- | ------- |
+| Go to first page    | topPanel.pageNavigation.first         | true          | Boolean |
+| Go to previous page | topPanel.pageNavigation.previous      | true          | Boolean |
+| Go to next page     | topPanel.pageNavigation.next          | true          | Boolean |
+| Go to last page     | topPanel.pageNavigation.last          | true          | Boolean |
 
 
 
 
 ## Zoom
 
-| Description                                               | Clé du paramètre               | Valeur par défaut | Type    |
-| --------------------------------------------------------- | ------------------------------ | ----------------- | ------- |
-| Zoom avant                                                | topPanel.zoom.in               | true              | Booléen |
-| Zoom arrière                                              | topPanel.zoom.out              | true              | Booléen |
-| Zoom sur une zone sélectionnée                            | topPanel.zoom.zone             | true              | Booléen |
-| Adapte le zoom à la largeur de la fenêtre                 | topPanel.zoom.fullWidth        | true              | Booléen |
-| Adapte le zoom à la hauteur de la fenêtre                 | topPanel.zoom.fullHeight       | true              | Booléen |
-| Adapte le zoom à la largeur et à la hauteur de la fenêtre | topPanel.zoom.fullPage         | true              | Booléen |
-| Activer le zoom zonale dans une fenêtre externe           | topPanel.zoom.zoneGlass        | false             | Booléen |
-| Multiplication du zoom zonale                             | topPanel.zoom.zoneGlass.value  | 2                 | Entier  |
+
+| Description                                         | Parameter Key                 | Default value | Type    |
+| --------------------------------------------------- | ----------------------------- | ------------- | ------- |
+| Zoom in                                             | topPanel.zoom.in              | true          | Boolean |
+| Zoom out                                            | topPanel.zoom.out             | true          | Boolean |
+| Zoom on a selected zone                             | topPanel.zoom.zone            | true          | Boolean |
+| Adjust the zoom to the window width                 | topPanel.zoom.fullWidth       | true          | Boolean |
+| Adjust the zoom to the window height                | topPanel.zoom.fullHeight      | true          | Boolean |
+| Adjust the zoom to both the window width and height | topPanel.zoom.fullPage        | true          | Boolean |
+| Enable zone zoom in external window                 | topPanel.zoom.zoneGlass       | false         | Boolean |
+| Zone zoom multiplication                            | topPanel.zoom.zoneGlass.value | 2             | Integer |
 
 
 
@@ -112,44 +118,45 @@ topPanel.print=false
 ## Rotation
 
 
-| Description                                                                             | Clé du paramètre            | Valeur par défaut | Type    |
-| --------------------------------------------------------------------------------------- | --------------------------- | ----------------- | ------- |
-| Rotation horaire de la page courante                                                    | topPanel.rotation.right     | true              | Booléen |
-| Rotation anti-horaire de la page courante                                               | topPanel.rotation.left      | true              | Booléen |
-| Rotation horaire et anti-horaire de toutes les pages                                    | topPanel.rotation.all       | false             | Booléen |
-| Réinitialiser toutes les rotations                                                      | topPanel.rotation.reset     | false             | Booléen |
-| Définit le degré de rotation appliquée lorsque vous appuyez sur les boutons de rotation | topPanel.rotation.degree    | 90                | Entier  |
-| Active le sous-menu des rotations                                                       | topPanel.rotation.add       | true              | Booléen |
+| Description                                                               | Parameter Key              | Default value | Type    |
+| ------------------------------------------------------------------------- | -------------------------- | ------------- | ------- |
+| Rotate current page to the right                                          | topPanel.rotation.right    | true          | Boolean |
+| Rotate current page to the left                                           | topPanel.rotation.left     | true          | Boolean |
+| Rotate all pages to the left and right                                    | topPanel.rotation.all      | false         | Boolean |
+| Reset all rotations                                                       | topPanel.rotation.reset    | false         | Boolean |
+| Sets up the amount of rotation applied when pressing the rotation buttons | topPanel.rotation.degree   | 90            | Integer |
+| Activates rotations sub-menu                                              | topPanel.rotation.add      | true          | Boolean |
 
 
-## Navigation des pages
+## Pages navigation
 
 
-| Description                  | Parameter Key                    | Default value | Type    |
-| ---------------------------- | -------------------------------- | ------------- | ------- |
-| Aller à la première page     | topPanel.pageNavigation.first    | true          | Booléen |
-| Aller à la page précédente   | topPanel.pageNavigation.previous | true          | Booléen |
-| Aller à la page suivante     | topPanel.pageNavigation.next     | true          | Booléen |
-| Aller à la dernière page     | topPanel.pageNavigation.last     | true          | Booléen |
+| Description                     | Parameter Key                    | Default value | Type    |
+| ------------------------------- | -------------------------------- | ------------- | ------- |
+| Go to first page navigation     | topPanel.pageNavigation.first    | true          | Boolean |
+| Go to previous page navigation  | topPanel.pageNavigation.previous | true          | Boolean |
+| Go to next page navigation      | topPanel.pageNavigation.next     | true          | Boolean |
+| Go to last page navigation      | topPanel.pageNavigation.last     | true          | Boolean |
 
 
-## Autres fonctionnalités
+## Other features
 
 
-| Description                                                                                                                                                 | Parameter Key                                | Default value | Type    |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------     | ------------- | ------- |
-| Rafraichir les annotations                                                                                                                                  | topPanel.refresh                             | true          | Booléen |
-| Recherche plein texte                                                                                                                                       | topPanel.search                              | true          | Booléen |
-| Comportement de recherche par défaut. Sinon, ouvrez dans le panneau de recherche avancée                                                                    | topPanel.search.default                      | false         | Booléen |
-| Si true et topPanel.search.default est true, afficher les résultats du texte de recherche dans l'explorateur de recherche avancées                          | topPanel.search.displayResultsInExplorer     | true          | Booléen |
-| Le bouton de recherche "résultat suivant" passera au résultat suivant sur la page visible actuelle au lieu de reprendre là où vous avez laissé la recherche | topPanel.searchByVisiblePage                 | true          | Booléen |
-| Plein écran                                                                                                                                                 | topPanel.fullscreen                          | true          | Booléen |
-| Le mode plein écran masquera totalement le panneau supérieur                                                                                                | topPanel.fullscreen.hideTopPanel             | false         | Booléen |
-| Le panneau supérieur sera toujours visible en plein écran et ne se cachera pas                                                                              | topPanel.fullscreen.alwaysShowTopPanel       | false         | Booléen |                                                                                                                
-| Zoom encadré                                                                                                                                                | topPanel.zoomBox                             | true          | Booléen |
-| Copier tout le texte du document                                                                                                                            | topPanel.document.text                       | false         | Booléen |
-| Copier l'image par zone                                                                                                                                     | topPanel.cropbox.enabled                     | false         | Booléen |
-| Curseur de luminosité                                                                                                                                       | topPanel.imageProcessMenu.brightness.enabled | true          | Booléen |
-| Curseur de contraste                                                                                                                                        | topPanel.imageProcessMenu.contrast.enabled   | false         | Booléen |
-| Curseur d'inversion de couleur                                                                                                                              | topPanel.imageProcessMenu.invert.enabled     | false         | Booléen |
-| Définir comment le traitement d'image est appliqué : CURRENT_PAGE, ALL_PAGES, ALL_DOCUMENTS                                                                 | topPanel.imageProcessMenu.process.mode       | ALL_DOCUMENTS | Texte   |
+| Description                                                                                                                             | Parameter Key                                | Default value | Type    |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------     | ------------- | ------- |
+| Refresh annotations                                                                                                                     | topPanel.refresh                             | true          | Boolean |
+| Full text search                                                                                                                        | topPanel.search                              | true          | Boolean |
+| Default search behavior. Otherwise, open in the advanced search panel                                                                   | topPanel.search.default                      | false         | Boolean |
+| If true and topPanel.search.default is true, display search text results in the AdvancedSearchExplorer                                  | topPanel.search.displayResultsInExplorer     | true          | Boolean |
+| The "next result" search button will jump to the next result on the current visible page instead of resuming where you left the search  | topPanel.searchByVisiblePage                 | true          | Boolean |
+| Full screen mode                                                                                                                        | topPanel.fullscreen                          | true          | Boolean |
+| Full screen mode will hide the top panel totally                                                                                        | topPanel.fullscreen.hideTopPanel             | false         | Boolean |
+| The toppanel will always be visible in full screen and won't hide                                                                       | topPanel.fullscreen.alwaysShowTopPanel       | false         | Boolean |                                                                                                             
+| Boxed zoom                                                                                                                              | topPanel.zoomBox                             | true          | Boolean |
+| Copy all text of the document                                                                                                           | topPanel.document.text                       | false         | Boolean |
+| Cropbox                                                                                                                                 | topPanel.cropbox.enabled                     | false         | Boolean |
+| Brightness slider                                                                                                                       | topPanel.imageProcessMenu.brightness.enabled | true          | Boolean |
+| Contrast slider                                                                                                                         | topPanel.imageProcessMenu.contrast.enabled   | false         | Boolean |
+| Invert color slider                                                                                                                     | topPanel.imageProcessMenu.invert.enabled     | false         | Boolean |
+| Set how image processing is applied : CURRENT_PAGE, ALL_PAGES, ALL_DOCUMENTS                                                            | topPanel.imageProcessMenu.process.mode       | ALL_DOCUMENTS | String  |
+

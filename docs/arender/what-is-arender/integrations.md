@@ -1,12 +1,17 @@
 ---
-title: Connecteurs GED
+title: "ECM connectors"
 ---
 
-## Connecteurs existants
 
-Vous trouverez ci-dessous la liste GED pour lesquels un connecteur ARender existe :
 
-| Éditeur                                   | Produit                                                                                                                                          |
+
+
+
+## Existing connectors
+
+You will find below the list of ECM for which a connector to ARender exists:
+
+| Editor                                    | Product                                                                                                                                          |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [Hyland](https://www.hyland.com/)         | [Nuxeo](https://doc.nuxeo.com/nxdoc/nuxeo-enhanced-viewer/)                                                                                      |
 | [Hyland](https://www.hyland.com/)         | [Alfresco Content Services](https://www.hyland.com/fr/products/alfresco-platform)                                                                |
@@ -21,5 +26,5 @@ Vous trouverez ci-dessous la liste GED pour lesquels un connecteur ARender exist
 | [IBM](https://www.ibm.com/)               | [IBM Content Manager](https://www.ibm.com/products/content-manager)                                                                              |
 | [IBM](https://www.ibm.com/)               | [IBM Content Manager OnDemand](https://www.ibm.com/products/ibm-content-manager-ondemand)                                                        |
 | [Salesforce](https://www.salesforce.com/) | [Salesforce](https://www.salesforce.com/)                                                                                                        |
-| [OpenText](https://www.opentext.com/)     | [OpenText](https://www.opentext.com/)                                                                                                            |
+| [OpenText](https://www.opentext.com/)     | [OpenText](https://www.opentext.com/)                                                                                                            |                                                                      |
 | [OpenText](https://www.opentext.com/)     | [Documentum](https://www.opentext.com/products/documentum-platform)                                                                              |

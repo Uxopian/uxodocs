@@ -1,101 +1,121 @@
 ---
-title: Évènements
+title: "Events"
 ---
 
-## S'abonner aux erreurs de chargement des documents
 
-- Objet : getARenderJS()
 
-    | Fonction                                  | Description                                                                             | Arguments                                                      |
-    | ----------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-    | registerNotifyLoadingErrorEvent(callback) | Enregistre une fonction callback à appeler en cas d'erreur de chargement des documents  | **callback :** la fonction callback à appeler en cas d'erreur  |
+
+
+
+
+## Register to error events while loading documents
+
+- Object: getARenderJS()
+
+    | Function                                  | Description                                                                                                                                                    |
+    | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | registerNotifyLoadingErrorEvent(callback) | Register a callback function that will be called when an error occurs when loading documents. Arguments: - the callback function to call when an error occurs. |
+
 
 
 ```js
 // Subscribe a function to the errors
-getARenderJS().registerNotifyLoadingErrorEvent(function(documentId,message) <!-- Expression supprimée -->;
+getARenderJS().registerNotifyLoadingErrorEvent(function(documentId,message) {
+  console.log("error: "+message)
 });
-
 // Loads the PDF reference document
 // If an error occurs I am notified on the function defined before!
 getARenderJS().loadDocument(
   "loadingQuery?url=http://www.arender.fr/pdf/pdf/PDFReference15_v5.pdf",
-  function(id) <!-- Expression supprimée -->; }
+  function(id) { getARenderJS().openDocument(id); }
 );
 ```
 
 
-## S'abonner à la fin du chargement des modules asynchrones ARender
 
-- Objet : getARenderJS()
-
-    | Fonction                                      | Description                                                                               | Arguments                                                             |
-    | --------------------------------------------- | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-    | registerAllAsyncModulesStartedEvent(callback) | Enregistre une fonction callback à appeler en fin de chargement des modules asynchrones.  | **callback :** la fonction callback à appeler à la fin du chargement  |
-
-
-```js
-// Subscribe a function to the loading. When asynchronous modules are loaded I am notified
-getARenderJS().registerAllAsyncModulesStartedEvent(function() <!-- Expression supprimée -->;
-});
-```
-
-
-## S'abonner à un changement de page
+## Know when ARender finished to load its modules
 
 - Object: getARenderJS()
 
-| Function                                      | Description                                                                         |
-| --------------------------------------------- | ----------------------------------------------------------------------------------- |
-| registerNotifyPageChangeEvent(callback)       | Enregistre une fonction de rappel executée lorsqu'un changement de page est demandé |
+    | Function                                      | Description                                                                                                                                                                  |
+    | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | registerAllAsyncModulesStartedEvent(callback) | Register a callback function that will be called when ARender finishes loading its modules. Arguments: - the callback function to call when asynchronous modules are loaded. |
+
 
 
 ``` javascript
-// Je suis notifié d'une demande de changement de page
-getARenderJS().registerNotifyPageChangeEvent(
-  function(currentPage, pageCount, documentId) <!-- Expression supprimée -->
-  }
+// Subscribe a function to the loading. When asynchronous modules are loaded I am notified
+getARenderJS().registerAllAsyncModulesStartedEvent(
+  function() {console.log("modules are loaded")}
 );
 ```
 
 
-## Préparer un événement de lancement de plugin ARender
 
-- Objet : getARenderJS()
+## Know when a page change occurs
 
-    | Fonction                                 | Description                                                                                  |
-    | ---------------------------------------- | -------------------------------------------------------------------------------------------- |
-    | preparePluginEvent(key,value,pluginName) | Insère un couple (Key,Value) à la future URL du plugin ouvert dans ARender de nom pluginName |
-    | clearPluginEvent(pluginName)             | Nettoie toute valeur potentiellement stockée (Key,Value) au plugin nommé pluginName          |
-    | openPlugin(pluginName,openInMultiView)   | Ouvre le plugin pluginName dans ARender, en multiView ou non avec le booléen openInMultiView |
+- Object: getARenderJS()
 
-Ces fonctions permettent de préparer un événement d'ouverture de plugin
-afin d'enrichir son lancement de manière contextualisée depuis ARender.
+| Function                                      | Description                                                                       |
+| --------------------------------------------- | --------------------------------------------------------------------------------- |
+| registerNotifyPageChangeEvent(callback)       | Register a callback function that will be called when a page change is requested. |
+
+
+
+``` javascript
+// I am notified to a page change request
+getARenderJS().registerNotifyPageChangeEvent(
+  function(currentPage, pageCount, documentId) {
+    console.log("page " + currentPage + " change requested for document " + documentId)
+
+);
+```
+
+
+
+## Setup plugin events and plugin parameters
+
+- Object: getARenderJS()
+
+    | Function                                 | Description                                                                                 |
+    | ---------------------------------------- | ------------------------------------------------------------------------------------------- |
+    | preparePluginEvent(key,value,pluginName) | Insert a (Key,Value) couple in the target URL of the next plugin Event of name pluginName   |
+    | clearPluginEvent(pluginName)             | Clear all couple (Key,Value) stored in for the name pluginName                              |
+    | openPlugin(pluginName,openInMultiView)   | Open the plugin pluginName in ARender, in multiView or not with the boolean openInMultiView |
+
+These functions allow you to prepare a plugin opening event in order to enrich its launch in a contextualized way from ARender.
 
 ``` javascript
 function arenderjs_init(ajs)
-<!-- Commentaire nettoyé -->
+
+    // this line prepare an URL such as http://plumeURL/?To=toto@tutu.com
+    ajs.preparePluginEvent("To","toto@tutu.com","plume");
+    // Here, we clear all stored values for this plugin,
+    // can be useful if called from a "clear" button
+    ajs.clearPluginEvent("plume");
+
 ```
 
-## Interagir avec les ancres 
+## Interact with anchor 
 
 - Objet: getARenderJS()
 
-    | Fonction                                                                                                          | Description                            |
-    | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-    | askOpenAnchorModal(boolean isFromThumbPresenter, String documentId, float x, float y, float w, float h, int page) | Ouvre la popup de création des ancres  |
+    | Function                                                               | Description                            |
+    | ---------------------------------------------------------------------- | -------------------------------------- |
+    | askOpenAnchorModal(isFromThumbPresenter, documentId, x, y, w, h, page) | Ouvre la popup de création des ancres  |
     
-    * isFromThumbPresenter : si true, génère une ancre à partir de la vignette sélectionnée. Si false génère une ancre à  partir de la vue du document.
-    * documentId : l'id du document
-    * x : la position x de l'ancre
-    * y : la position y de l'ancre
-    * w : la largeur de l'ancre
-    * h : la hauteur de l'ancre
-    * page : le numéro de la page de l'ancre
+    * isFromThumbPresenter : If true, generate an anchor from selected pictree thumbnails. If false generate an anchor from document view.
+    * documentId: The ID of the document.
+    * x: The x-coordinate for the anchor's position.
+    * y: The y-coordinate for the anchor's position.
+    * w: The anchor's width.
+    * h: The anchor's height.
+    * page: The page number where the anchor is located.
+
 
 
 ``` javascript
-// Créer une ancre à partir d'une vignette de la page 1 du document
+// To create an anchor from pictree in page 1 of a document
 getARenderJS().askOpenAnchorModal(true, "documentId", 44, 26, 25, 30, 0);
 ```
 

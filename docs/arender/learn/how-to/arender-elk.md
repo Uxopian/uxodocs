@@ -1,77 +1,99 @@
 ---
-title: Configuration de la stack ELK
+title: "ELK stack configuration"
 ---
 
+
+
+
+
+
+
 ## Introduction
-Analysez les performances d’ARender dans une stack ELK.
+Analyse ARender performances in ELK stack.
 
-ARender retourne des informations sur son utilisation, comme le temps de chargement du document ou encore le type de document ouvert. Ces informations sont stockées dans des fichiers de logs et envoyées directement dans Elasticsearch.
+ARender returns statistics on its usage, like the loading time of a document and the opened document type. Information is stored in log files. It is possible to analyse these logs with the ELK stack.
 
-La stack ELK est composée des applications suivantes : Elasticsearch et Kibana :
+You need to use following applications from the ELK stack : Elastisearch and Kibana :
 
-* **Elasticsearch** : qui stocke et indexe les données. C’est une base NoSQL permettant de gérer un grand nombre de données.
-* **Kibana** : qui est une interface Web permettant de rechercher et visualiser graphiquement vos données.
+* **Elasticsearch** : stores and indexes data. It is a NoSQL base allowing to manage big data.
+* **Kibana** : is a Web interface allowing to search and visualize graphical data.
 
-Via Kibana les données sont rendues de manière graphique. La création de ces graphiques est très simple et les possibilités de configuration en fonction des besoins sont larges.
+In Kibana data are shown in a graphical user friendly way. Graphics creation is simple and there are lots of customization possible.
 
-Exemple de visualisations : 
+See below examples : 
 
-* Temps moyen de chargement des documents :
+* Average document loading time :
+![img](/img/arender/ELK/elk-average-time-document-loading.png)
 
+* MIME Type distribution :
+![img](/img/arender/ELK/elk-mimetype-loaded.png)
 
-* Répartition des types MIME des documents visualisés dans ARender :
+## Prerequisites
+### To import visualizations and dashboards with .ndjson files
+* Kibana version 7.2.0 and above
+* ElasticSearch version 7.2.0 and above
 
+### To import visualizations and dashboards with .json files
 
-## Prérequis
-### Pour importer les visualisations et les tableaux de bord avec les fichiers .ndjson
-* Kibana version 7.2.0 et plus récente
-* ElasticSearch version 7.2.0 et plus récente
-
-### Pour importer les visualisations et les tableaux de bord avec les fichiers .json
-* Kibana version 5.x et plus récente
-* ElasticSearch version 5.x et plus récente
+* Kibana version 5.x and above
+* ElasticSearch version 5.x and above
 
 ## Elasticsearch
-### Installation
-Installer ElasticSearch comme indiqué sur la documentation officielle selon votre version : 
 
-### Démarrage
-Démarrer ElasticSearch comme indiqué sur la documentation officielle : 
+### Installation
+
+Follow official documentation to install ElasticSearch : [https://www.elastic.co/guide/en/elasticsearch/reference/current/](https://www.elastic.co/guide/en/elasticsearch/reference/current/)
+
+### Start ElasticSearch
+
+Follow official documentation to start ElasticSearch : [https://www.elastic.co/guide/en/elasticsearch/reference/current/starting-elasticsearch.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/starting-elasticsearch.html)
 
 ## Kibana
+
 ### Installation
-Installer Kibana comme indiqué sur la documentation officielle selon votre version : 
 
-### Démarrage
-Démarrer Kibana comme indiqué sur la documentation officielle : 
+Follow official documentation to install Kibana : [https://www.elastic.co/guide/en/kibana/current/install.html](https://www.elastic.co/guide/en/kibana/current/install.html)
 
-### Prérequis configuration Kibana
-Avant de passer à la configuration de Kibana, veuillez ouvrir au minimum un document dans ARender afin que l'index dans Elasticsearch soit créé.
+### Start Kibana
 
-### Configuration Kibana
-#### Création des pattern d'index
+Follow official documentation to start Kibana : [https://www.elastic.co/guide/en/kibana/current/start-stop.html](https://www.elastic.co/guide/en/kibana/current/start-stop.html)
 
-* Ouvrir Kibana dans votre navigateur. En local : 
+### Kibana configuration prerequisites
 
-* Se rendre dans la configuration :
+Before configuring Kibana, you need to open at least one document in ARender in order to have indexes created in Elasticsearch.
 
+### Kibana configuration
 
-
-* Se rendre dans la gestion des pattern d’index :
+#### Creation of index pattern
 
 
+* Open Kibana in your browser. Local URL : [http://localhost:5601/app/kibana](http://localhost:5601/app/kibana)
 
-* Ajouter les 2 index : 
-    * arender-performance
+* Go to the Management section :
+![img](/img/arender/ELK/configuration.png)
+
+
+* Go to the Index Patterns :
+![img](/img/arender/ELK/indexpattern.png)
+
+
+* Add the 2 indexes : 
+  * arender-performance
     * arender-rendition-performance
 
+![img](/img/arender/ELK/ajoutpattern.png)
 
+#### Import dashboard example
 
-#### Import des exemple des tableaux de bord
-* Se rendre dans les objets sauvegardés :
+* Go to Saved Objects :
+![img](/img/arender/ELK/savedobject.png)
 
+* For version allowing .ndjson file import (Since Kibana 7.2.0):
+    * First import visualization. Click on import and select the file :  /docs/ELK/Arender-visualizations.ndjson
+    * Then import dashboard. Click on import and select the file : /docs/ELK/Arender-dashboard-example.ndjson
+* For version only allowing .json file import :
+    * First import visualization. Click on import and select the file :  /docs/ELK/Arender-visualizations.json
+    * Then import dashboard. Click on import and select the file : /docs/ELK/Arender-dashboard-example.json
 
-* Pour les versions supportant l'import des .ndjson (Depuis Kibana 7.2.0) :
-* Pour les versions supportant uniquement l'import des .json :
-
-* Ouvrir le tableau de bord :  
+* Open dashboard :  
+![img](/img/arender/ELK/dashboard.png)

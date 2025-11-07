@@ -1,13 +1,19 @@
 ---
-title: Téléchargement de document
+title: "Document download"
 ---
 
-### Télécharger des documents
 
-- Objet : getARenderJS().getDownloadDocumentJSAPI()
 
-    | Fonction                    | Description                                                     |
-    | --------------------------- | --------------------------------------------------------------- |
-    | askDownloadDocumentPDF()    | Télécharger le document pdf actif                               |
-    | askDownloadDocumentSource() | Télécharger le document actif au format source                  |
-    | askDownloadAllDocuments()   | Télécharger un unique pdf regroupant tous les documents ouverts |
+
+
+
+
+### Download documents
+
+- Object: getARenderJS().getDownloadDocumentJSAPI()
+
+    | Function                    | Description                                     |
+    | --------------------------- | ----------------------------------------------- |
+    | askDownloadDocumentPDF()    | Download the current document in PDF            |
+    | askDownloadDocumentSource() | Download the current document in source format  |
+    | askDownloadAllDocuments()   | Download a single PDF with all opened documents |

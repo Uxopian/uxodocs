@@ -1,14 +1,18 @@
 ---
-title: Architecture dans IBM Filenet
+title: "Architecture in IBM Filenet"
 ---
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-* **N1: Filenet UI**: a la responsabilité de laisser l'utilisateur de Filenet choisir quel document il veut ouvrir dans ARender,
-* **N2: Browser**: va créer la "frame" d'ARender en utilisant l'URL fourni par N1,
-* **N3: ARender WEB-UI**: est un serveur d'application qui contient ARender WEB-UI et le connecteur FileNet,
-* **N4: Filenet Backend**: contient une API avec laquelle le connecteur ARender va interagir pour aller chercher les documents 
-(et si besoin les annotations, les métadonnées ou les nouvelles versions de documents),
-* **N5: ARender Rendition**: va générer des images, extraire du texte et plus.
+
+
+
+
+
+![image](/img/arender/diagrams/ARender-Architecture-Filenet.png)
+
+* **N1: Filenet UI**: has the responsibility to let the Filenet user choose which documents he wants to open in ARender,
+* **N2: Browser**: will create the ARender frame using the URL provided by N1,
+* **N3: ARender WEB-UI**: is an application server which contains ARender WEB-UI and the Filenet connector,
+* **N4: Filenet Backend**: contains API which ARender connector will interact with to fetch documents (and if needed fetch annotations 
+  and metadata and create new documents or new version of documents),
+* **N5: ARender Rendition**: will generate images, extract text and more.

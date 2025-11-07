@@ -1,83 +1,83 @@
 ---
-title: Office converter
+title: "Office converter"
 ---
 
-Ce tutoriel présente un exemple d’utilisation d’ARender pour la
-conversion d’un document Word en PDF. Pour cela, nous allons voir
-comment exploiter l’API du serveur de rendition d’ARender qui est chargé
-de convertir les documents en PDF et/ou de les transformer en images.
+
+
+
+
+
+
+This tutorial describe an example of usage of ARender to convert a Word
+document into a PDF. In order to do so, we are going to explore the API
+used to connect to the rendition server.
 
 ## Configuration
 
-### Configuration Maven
+### Maven configuration
 
-Avant tout, il s’agit d’importer les dépendances à ARender qui sont
-nécessaires pour cet exemple. Dans le cas d’un projet Maven, ajouter au
-fichier pom.xml :
+Before everything, we need to import the ARender maven dependencies that
+are needed for this example. In the case of a maven project, it is
+sufficient to add this to the pom.xml file:
 
 ``` xml
-<!-- Commentaire nettoyé -->com.arondor.arender<!-- Commentaire nettoyé -->arondor-arender-common<!-- Commentaire nettoyé -->version_ARender<!-- Commentaire nettoyé -->jar<!-- Commentaire nettoyé -->compile<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->com.arondor.arender<!-- Commentaire nettoyé -->arender-rendition-rest-client<!-- Commentaire nettoyé -->version_ARender<!-- Commentaire nettoyé -->jar<!-- Commentaire nettoyé -->compile<!-- Commentaire nettoyé -->
+<dependency>
+       <groupId>com.arondor.arender</groupId>
+       <artifactId>arondor-arender-common</artifactId>
+       <version>ARender_version</version>
+       <type>jar</type>
+       <scope>compile</scope>
+</dependency>
+<dependency>
+       <groupId>com.arondor.arender</groupId>
+       <artifactId>arender-rendition-rest-client</artifactId>
+       <version>ARender_version</version>
+       <type>jar</type>
+       <scope>compile</scope>
+</dependency>
 ```
 
-### Configuration du DocumentService
+### Document service configuration
 
-Cette première étape consiste en la définition des informations
-essentielles pour l’utilisation de l’API. L’objet DocumentService
-encapsule la communication avec le serveur de rendition (qui peut être
-distant).
+This first step defines the necessary information for the usage of the
+API. The object DocumentService encapsulate the communication between
+the Web-UI and the rendition server. (that can be remote)
 
 ``` java
 RenditionRestClient client = new RenditionRestClient();
-client.setRemoteTarget("http://localhost:8761/");
+client.setRemoteTarget("http://rendition-server:8761/");
 client.setMaxTries(3);
 ```
 
-## Chargement du document
+## Document loading
 
-Le chargement du document sur le serveur de rendition est réalisé grâce
-à l’appel de la méthode loadDocument(DocumentAccessor documentAccessor)
-de l’interface DocumentService (que l’objet RenditionRestClient
-implémente). Le paramètre fourni à cette méthode, le DocumentAccessor,
-est un objet permettant au serveur d’accéder à un document (i.e son
-contenu, ses méta-données…). Dans cet exemple, le document en question
-est stocké sur le système de fichier local : nous instancions donc un
-DocumentAccessorByteArray grâce au chemin du document à convertir.
+In order to load the document on the rendition server, we can call
+loadDocumentAccessor(DocumentAccessor documentAccessor) of the
+DocumentService interface. In this example, we give a documentAccessor
+built from an inputStream containing the content of the document.
 
 ``` java
-String fileToConvertPath = "C:\\ARender_User\\Documents\\myWordDocument.docx";
+String fileToConvertPath = "C:\ARender_User\Documents\myWordDocument.docx";
 FileInputStream fileInputStream = new FileInputStream(fileToConvertPath);
 DocumentAccessor documentAccessor = new DocumentAccessorByteArray(fileInputStream);
 client.loadDocumentAccessor(documentAccessor);
 ```
 
-```xml
-<!-- Commentaire nettoyé -->
-```
-Différentes implémentations du DocumentAccessor sont fournies
-nativement par ARender. Mais cette interface reste un point d’extension
-d’ARender qui en lui fournissant un accesseur approprié peut être
-capable de récupérer un document dans n’importe quel système
-d’information.
-```xml
-<!-- Commentaire nettoyé -->
-```
+### Fetching the converted document
 
-### Récupération du document converti
+Within a rendition server, a document can be located in
+different states. In this example, the states that interest us are:
 
-Au sein d’un serveur de rendition, un document peut se trouver dans
-différents états. Dans cet exemple, les états qui nous intéressent sont :
+**Initial**: Corresponds to the document pushed in its initial state,
+without treatment from the rendition server.
 
-**Initial** : Correspond au document dans son état initial, i.e tel qu’il
-a été chargé soit dans son format initial. 
-
-**Rendered** : Correspond au
-document rendered par le serveur de rendition. Pour cela, le document a
-été converti en PDF. C’est donc celui que nous souhaitons récupérer
-Ainsi différents accesseurs, implémentant l’interface DocumentAccessor,
-sont stockés permettant d’accéder à ces différents états. L’énumération
-DocumentAccessorSelector permet ainsi de récupérer le DocumentAccessor
-approprié.
+**Rendered**: Correspond to
+the document once it has been converted/processed by the rendition
+server, this is the document we want to fetch. Therefore, different
+accessors, implementing the interface DocumentAccessor, are stored
+allowing to access different states of a same document. The enumeration
+DocumentAccessorSelector allows to fetch the appropriate
+DocumentAccessor.
 
 ``` java
 DocumentAccessor renderedDocumentAccessor = client.getDocumentAccessor(documentAccessor.getUUID(),DocumentAccessorSelector.RENDERED);

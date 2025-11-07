@@ -1,21 +1,25 @@
 ---
-title: Lasso
+title: "Lasso"
 ---
+
+
+
+
+
+
 
 ## Description
 
-La fonction lasso permet à un utilisateur de récupérer un texte dans le document ouvert. Ce texte sera récupérable pour, par exemple, remplir automatiquement des champs de texte.
+The lasso feature allows a user to retrieve a text in the open document. For example, this text will be retrievable for automatically filling the text fields.
 
-## Utilisation
+## Use
 
-```xml
-La fonction lasso est utilisable avec notre API Javascript. Les explications d'utilisation se trouvent [ici](<!-- Commentaire nettoyé -->).
-```
+The lasso feature can be used with our Javascript API. Instruction to use it can be found [here](./development/apis/web-ui/javascript/js-api.en.md).
 
-## Démonstration
 
-Voici une démonstration avec un bouton personnalisé.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+## Demonstration
+
+Here a demonstration with a custom button.
+
+![image](/img/arender/lasso/lassoFeatureDemo.gif)

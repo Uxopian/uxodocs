@@ -1,27 +1,33 @@
 ---
-title: Image d'une page rognée
+title: "Crop page"
 ---
 
-Une servlet est déployée permettant d'obtenir une image qui correspond à une page rognée d'un document.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **cropImageServlet**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A servlet is deployed to have an image which corresponds to a cropped page of a document.
+
+## Request 
+
+This functionality is accessible via the servlet: **cropImageServlet**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/cropImageServlet?uuid=docUUID&locale=langue&pagePosition=page&desc=size'
 ```
 
-* uuid : l'id du document
-* locale : le langage du texte
-* pagePosition : la page du document
-* desc : les paramètres pour rogner (taille, position, couleur etc)
+* uuid: document id
+* locale: the language of the text
+* pagePosition: the page of the document
+* desc: the settings for cropping (size, position, color etc)
 
-## Réponse de la servlet
+## Servlet Response
 
-Une image est renvoyée correspondant à la page du document en paramètre, avec un texte descriptif expliquant comment sauvegarder l'image.
+An image is returned corresponding to the document page as a parameter, with a descriptive text to explain how to save the image.

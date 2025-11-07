@@ -1,14 +1,20 @@
 ---
-title: Interface de Document Accessor
+title: "Document Accessor interface"
 ---
+
+
+
+
+
+
 
 ## DocumentAccessorHasFileName
 
-Si vous avez besoin de faire la distinction entre le titre du document et le nom de fichier au moment du téléchargement, il faudra implémenter
-l'interface **com.arondor.viewer.rendition.api.document.DocumentAccessorHasFileName**.
+If you need to distinguish between document title and filename at download time, you will need to implement
+the interface **com.arondor.viewer.rendition.api.document.DocumentAccessorHasFileName**.
 
 ```java
 String getFileName();
 ```
 
-L'implémentation de cette interface à votre documentAccessor vous permet au téléchargement que le nom de fichier ne soit pas le même que le titre du document.
+Implementing this interface to your documentAccessor allows you to download the file with a filename different to the document title.

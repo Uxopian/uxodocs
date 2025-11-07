@@ -1,34 +1,40 @@
 ---
-title: Vérifier un document (GET)
+title: "GET Document existence"
 ---
 
-Cette API vous permet de vérifier l'existence d'un document spécifique.
 
-## Description technique de l'API
 
-Point d'entrée :
+
+
+
+
+
+This API allows you to check the existence of a specific document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/check
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
-Réponse :
+Response :
 
-| Type       | Description                                   |
-|:-----------|:----------------------------------------------|
-| HttpStatus | Status HTTP indiquant l'existence du document |
+| Type       | Description                                               |
+| :--------- | :-------------------------------------------------------- |
+| HttpStatus | HTTP status code indicating the existence of the document |
 
-## Exemples
+## Examples
 
-### Vérifier un document
+### Check Document
 
-L'exemple ci-dessous montre comment vérifier l'existence d'un 
-document avec l'identifiant _b64_bm9yZS92SDMtMS0xMTh1735080237_.
+The following example demonstrates how to check the existence of a document with the ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
 
 ```bash
 curl -X 'GET' \

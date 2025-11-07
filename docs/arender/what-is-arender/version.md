@@ -1,12 +1,17 @@
 ---
-title: Nomenclature des versions
+title: "Version nomenclature"
 ---
 
-Les versions sont formés de 3 nombres séparés par des points. On retrouve donc un pattern X.Y.Z.
 
- 
-- X correspond à la version majeure : changements non rétro-compatibles. Les évolutions majeures apportent de nouvelles fonctionnalités, en changeant radicalement l'apparence ou l'architecture du logiciel.
 
-- Y correspond à la version mineure : ajout de fonctionnalités rétro-compatibles, principalement des corrections de bugs, ajout de quelques fonctionnalités.
 
-- Z correspond au correctif : corrections d’anomalies rétro-compatibles, failles de sécurité.
+
+
+
+The versions are formed of 3 numbers separated by dots. We therefore find an X.Y.Z pattern.
+
+- X corresponds to the major version: changes not backward compatible. The major evolutions bring new functionalities, by radically changing the appearance or the architecture of the software.
+
+- Y corresponds to the minor version: addition of backward compatible features, mainly bug fixes, addition of some features.
+
+- Z is patch: backward compatible bug fixes, security vulnerabilities.

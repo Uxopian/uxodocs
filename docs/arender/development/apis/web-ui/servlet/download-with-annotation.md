@@ -1,26 +1,32 @@
 ---
-title: Télécharger les documents avec annotations
+title: "Download documents with annotations"
 ---
 
-Une nouvelle servlet est déployée permettant de télécharger les documents en PDF avec les annotations.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **downloadDocumentWithAnnotations**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to download a PDF document with annotations. 
+
+## Request 
+
+This functionality is accessible via the servlet: **downloadDocumentWithAnnotations**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/downloadDocumentWithAnnotations?operationName=renderAnnotations'
 ```
 
-Le paramètre *operationName* peut prendre plusieurs valeurs : 
-* renderAnnotations : le document final sera un PDF avec les annotations appliquées sur le PDF
-* renderFDFAnnotations : le document final sera un PDF avec les annotations créées en modèle sur le PDF donc modifiables.
+The *operationName* parameter can take several values:
+* renderAnnotations: the final document will be a PDF with annotations applied on the PDF
+* renderFDFAnnotations: the final document will be a PDF with annotations created on the PDF. The annotations are editable.
 
-## Réponse de la servlet
+## Servlet Response
 
-Un document est téléchargé en format PDF avec les annotations.
+A document is downloaded in PDF format with annotations.

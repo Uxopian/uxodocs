@@ -1,29 +1,35 @@
 ---
-title: Imprimer
+title: "Print"
 ---
 
-Une nouvelle servlet est déployée permettant d'imprimer les pages d'un document.
-Une page HTML sera affichée pour confirmer l'impression avec les paramètres envoyés. 
-Une pré-visualisation du résultat sera affiché sur cette page.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **printServlet**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to print the pages of a document.
+An HTML page will be displayed to confirm printing with the parameters given.
+A preview of the result will be displayed on this page.
+
+## Request 
+
+This functionality is accessible via the servlet: **printServlet**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/printServlet?uuid=docUUID&desc=description&pages=pages&imagePrintStyle=style'
 ```
 
-* uuid : l'id du document
-* desc : la description de l'image des pages à imprimer 
-* pages : les numéros des pages à imprimer 
-* imagePrintStyle : le style de l'image des pages à imprimer (optionnel)
+* uuid: document id
+* desc: the image description of the pages to be printed
+* pages: the numbers of the pages to be printed
+* style: the image style of the pages to be printed (optional)
 
-## Réponse de la servlet
+## Servlet Response
 
-Une page HTML pour confirmer l'impression. Une pré-visualisation du résultat sera affichée sur cette page.
+An HTML page to confirm printing. A preview of the result will be displayed on this page.

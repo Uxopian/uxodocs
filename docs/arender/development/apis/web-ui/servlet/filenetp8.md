@@ -1,26 +1,36 @@
 ---
-title: Servlet FileNet
+title: "FileNet servlet"
 ---
 
-## Mise à jour des métadonnées
 
-La servlet *updateDocumentMetadataServlet* est dédiée à la mise à jour des métadonnées de document Filenet en utilisant un appel POST.
 
-```text
-Voici un exemple de l'appel POST, où *{documentId}* est à remplacer par le "documentId" du document ciblé :
-```
+
+
+
+
+## Updating metadata
+
+The servlet *updateDocumentMetadataServlet* is dedicated to updating Filenet document metadata with a POST call.
+
+Here is an example of the POST call, where *&#123;documentId&#125;* is to be replaced by the documentId of the targeted document :
+
+
 
 ```cfg
-http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}
+``````````http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}``````````
 ```
 
-Ensuite, le corps de la requête va accepter une structure JSON définissant chaque nom de métadonnée à modifier et la valeur associée. Les *propertyKey* correspondent aux propriétés *symbolicName* et *displayName* de Filenet. La *propertyValue* est la valeur que va prendre la métadonnée.
 
-```json
-{
-	"propertyKey1": "propertyValue1",
-	"propertyKey2": "propertyValue2"
-}
+
+Then, the body of the request will accept a JSON structure defining each metadata name to modify and the associated value. The *propertyKey* correspond to the *symbolicName* and *displayName* properties of Filenet. The *propertyValue* is the value that the metadata will take.
+
+
+
+```cfg
+
+  "propertyKey1" : "propertyValue1",
+  "propertyKey2" : "propertyValue2"
+
 ```
-```
+
 

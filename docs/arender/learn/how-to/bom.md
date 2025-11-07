@@ -1,60 +1,116 @@
 ---
-title: Importer les dépendances d'ARender
+title: "Import ARender dependencies"
 ---
 
 
-Cette fonctionnalité est utilisable depuis la version 4.4.0
+
+
+
+
+
+
+
+This feature is available from version 4.4.0
+
 
 
 ## Introduction
 
-Le BOM d'ARender est tout simplement un fichier POM contenant certaines des dépendances
-d'ARender définit dans un dependencyManagement. Il permet entre autre à un projet utilisant
-des libraires d'ARender d'être toujours assuré d'utiliser les même versions des libraires
-tierces qu'ARender. L'avantage est que le BOM est importable ce qui laisse toujours la
-possibilité à un projet d'avoir un autre POM parent.
+The ARender BOM is simply a POM file containing some of the ARender dependencies defined
+in a dependencyManagement. Among other things, it makes possible to a project using ARender
+libraries to always be sure to use the same versions of third-party libraries as ARender.
+The advantage is that the BOM is importable and then leaves the possibility for a project
+to have another parent POM.
 
-## Les BOM ARender
+# ARender BOM
 
-Il y a en tout 3 BOM disponible, celui du web-ui, de la rendition et le root qui est le pom
-parent de ces deux derniers et qui contient donc les librairies communes au web-ui et à la
+There are a total of 3 BOMs available: the web-ui, the rendition and the root which
+is the parent pom and which therefore contains the libraries common to the web-ui and to the
 rendition.
 
 ```cfg
-<!-- Commentaire nettoyé -->com.arondor.arender<!-- Commentaire nettoyé -->arender-bom-root<!-- Commentaire nettoyé -->${arender.version}<!-- Commentaire nettoyé -->
+<dependency>
+	<groupId>com.arondor.arender</groupId>
+	<artifactId>arender-bom-root</artifactId>
+	<version>${arender.version}</version>
+</dependency>
 
-<!-- Commentaire nettoyé -->com.arondor.arender<!-- Commentaire nettoyé -->arender-bom-web-ui<!-- Commentaire nettoyé -->{arender.version}<!-- Commentaire nettoyé -->
+<dependency>
+	<groupId>com.arondor.arender</groupId>
+	<artifactId>arender-bom-web-ui</artifactId>
+	<version>{arender.version}</version>
+</dependency>
 
-<!-- Commentaire nettoyé -->com.arondor.arender<!-- Commentaire nettoyé -->arender-bom-rendition<!-- Commentaire nettoyé -->{arender.version}<!-- Commentaire nettoyé -->
+<dependency>
+	<groupId>com.arondor.arender</groupId>
+	<artifactId>arender-bom-rendition</artifactId>
+	<version>{arender.version}</version>
+</dependency>
 ```
 
-### Exemple
+### Example
 
 ```cfg
 
-  <!-- Commentaire nettoyé -->
-  <!-- Commentaire nettoyé -->com.arondor.test<!-- Commentaire nettoyé -->my-parent-pom<!-- Commentaire nettoyé -->0.0.1-SNAPSHOT<!-- Commentaire nettoyé -->
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  &lt;modelVersion&gt;4.0.0</modelVersion>
+  &lt;parent&gt;
+    &lt;groupId&gt;com.arondor.test</groupId>
+    &lt;artifactId&gt;my-parent-pom</artifactId>
+    &lt;version&gt;0.0.1-SNAPSHOT</version>
+  </parent>
 
-  <!-- Commentaire nettoyé -->
-  <!-- Commentaire nettoyé -->
+  &lt;artifactId&gt;custom-arender-connector</artifactId>
+  &lt;packaging&gt;jar</packaging>
 
-  <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->com.arondor.arender<!-- Commentaire nettoyé -->arender-bom-web-ui<!-- Commentaire nettoyé -->${arender.version}<!-- Commentaire nettoyé -->pom<!-- Commentaire nettoyé -->import<!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
+  &lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;com.arondor.arender</groupId>
+        &lt;artifactId&gt;arender-bom-web-ui</artifactId>
+        &lt;version&gt;${arender.version}</version>
+        &lt;type&gt;pom</type>
+        &lt;scope&gt;import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-  <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.security</groupId>
+      &lt;artifactId&gt;spring-security-oauth2-client</artifactId>
+      &lt;scope&gt;provided</scope>
+    </dependency>
+
+    &lt;dependency&gt;
+      &lt;groupId&gt;javax.servlet</groupId>
+      &lt;artifactId&gt;javax.servlet-api</artifactId>
+      &lt;scope&gt;provided</scope>
+    </dependency>
+  </dependencies>
+
+</project>
+```
 
 
 ```
 
-Nous pouvons voir ici l'import du BOM dans le dependencyManagement ainsi que l'utilisation
-de certaines dépendances qui n'ont pas version définit. En effet, maven saura automatiquement
-utiliser la version définit dans le BOM.
+
+```
+
+
+```
+
+
+```
+
+
+```
+
+
+```
+
+We can see here the import of the BOM in the dependencyManagement and the use
+of some dependencies which do not have a defined version. Indeed, maven will 
+automatically know to retrieve the version defined in the BOM and use it.

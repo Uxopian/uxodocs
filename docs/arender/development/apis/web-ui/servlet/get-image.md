@@ -1,26 +1,32 @@
 ---
-title: Récupérer l'image d'une page
+title: "Get page image"
 ---
 
-Une nouvelle servlet est déployée permettant de récupérer l'image d'une page.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **imageServlet**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to get a page from a document.
+
+## Request 
+
+This functionality is accessible via the servlet: **imageServlet**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/imageServlet?uuid=docUUID&pagePosition=page&desc=size'
 ```
 
-* uuid : l'id du document
-* pagePosition : la page du document
-* desc : la taille de l'image en pixel
+* uuid: document id
+* pagePosition: the page of the document
+* desc: the size of the image in pixels
 
-## Réponse de la servlet
+## Servlet Response
 
-Une image apparaît, elle correspond à la page du document passé en paramètre.
+An image appears, it corresponds to the document page given in parameter.

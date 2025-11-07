@@ -1,30 +1,37 @@
 ---
-title: Rotation
+title: "Rotate"
 ---
 
-### Rotation de pages
 
-- Objet : getARenderJS().getRotateJSAPI()
 
-    | Fonction                                                                          | Description                                                                        |
-    | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-    | askRotateCurrentPageLeft()                                                        | Rotation de la page active sur la gauche (sens inverse des aiguilles d'une montre) |
-    | askRotateCurrentPageRight()                                                       | Rotation de la page active sur la droite (sens des aiguilles d'une montre)         |
-    | askRotateAllPageLeft()                                                            | Rotation de toutes les pages sur la gauche                                         |
-    | askRotateAllPageRight()                                                           | Rotation de toutes les pages sur la droite                                         |
-    | askRotatePage(int pageNumber, String documentId, int rotation, boolean clockwise) | Rotation de la page du document                                                    |
+
+
+
+
+### Rotate pages
+
+- Object: getARenderJS().getRotateJSAPI()
+
+    | Function                                                                          | Description                                    |
+    | --------------------------------------------------------------------------------- | ---------------------------------------------- |
+    | askRotateCurrentPageLeft()                                                        | Rotate current page left (counter-clockwise)   |
+    | askRotateCurrentPageRight()                                                       | Rotate current page right (clockwise)          |
+    | askRotateAllPageLeft()                                                            | Rotate all pages of the current document left  |
+    | askRotateAllPageRight()                                                           | Rotate all pages of the current document right |
+    | askRotatePage(int pageNumber, String documentId, int rotation, boolean clockwise) | Rotate a page of a document                    |
     
-    * pageNumber : : Le numéro de la page du document à pivoter
-    * documentId : L'id du document
-    * rotation : La rotation à appliquer (ex : 90, 180 or 270)
-    * clockwise : Si true, la page pivote à droite, si false la page pivote à gauche
+    * pageNumber : : The page number of the document to rotate
+    * documentId : The id of the document
+    * rotation : The rotation to apply (ex : 90, 180 or 270)
+    * clockwise : If true page rotate to the right, if false page rotate to the left
+
 
 
 ```js
-// Pivote la page 3 du document ayant pour id "test" de 90° vers la droite
+// Rotate page 3 of the document with id "test" by 90° to the right
 getARenderJS().getRotateJSAPI().askRotatePage(2, "test", 90, true);
 
-// Pivote la page 3 du document ayant pour id "test" de 270° vers la gauche
+// Rotate page 3 of the document with id "test" by 270° to the left
 getARenderJS().getRotateJSAPI().askRotatePage(2, "test", 270, false);
 ```
 

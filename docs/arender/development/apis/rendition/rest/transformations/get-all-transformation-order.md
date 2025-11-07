@@ -1,27 +1,33 @@
 ---
-title: Récupérer tous les ordres de transformation (GET)
+title: "GET all transformation orders"
 ---
 
-Cette API permet de récupérer tous les ordres de transformation.
 
-## Description technique de l'API
 
-Point de terminaison :
+
+
+
+
+This API allows you to retrieve all transformation orders.
+
+## API technical description
+
+Endpoint :
 ```bash
 GET /transformations
 ```
 
-Réponse :
+Response :
 
-| Attribut             | Type                      | Description                          |
-| :------------------- | :------------------------ | :----------------------------------- |
-| transformationOrders | `List&lt;TransformationOrder&gt;` | La liste des ordre de transformation |
+| Attribute            | Type                      | Description                    |
+| :------------------- | :------------------------ | :----------------------------- |
+| transformationOrders | List&lt;TransformationOrder&gt; | The transformation orders list |
 
-## Exemples
+## Examples
 
-### Récupérer tous les ordres de transformation
+### Get all transformation orders
 
-L'appel ci-dessous génère une demande de récupération des ordres de transformation.
+The call below generates a request to retrieve transformation orders.
 
 ```bash
 curl -X 'GET' \

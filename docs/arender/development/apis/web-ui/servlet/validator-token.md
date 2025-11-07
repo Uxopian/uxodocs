@@ -1,20 +1,26 @@
 ---
-title: Validation token
+title: "Token validation"
 ---
 
-Une nouvelle servlet est déployée permettant de configurer la validation d'un token.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **tokenValidatorServlet**
-
-La requête est utilisable uniquement en POST
 
 
-La validation d'un token est configurable si ce dernier est envoyé comme cookie ou attribut de requête POST à l'URL /arendergwt/validateToken.
 
-Le token doit avoir comme nom "token".
 
-La classe Java de validation personnalisée devra implémenter l'interface TokenValidator. Elle devra être déclarée dans la configuration ARender au travers de la propriété **arender.server.json.load.token.validator**.
-Elle devra implémenter la méthode **validate** qui permet de vérifier si le token passer en paramètre de l'URL est valide ou non. 
-Le validateur par défaut est le **NoopTokenValidator**. Il permet de vérifier si le token n'est pas null.
+
+
+A new servlet is deployed to configure a token validation.
+
+## Request 
+
+This functionality is accessible via the servlet: **tokenValidatorServlet**
+
+Usable in POST
+
+
+The validation of a token is configurable if it is sent as a POST request cookie or attribute to the URL /arendergwt/validateToken.
+
+The token must have the name "token".
+
+The custom validator Java class shall implement the TokenValidator interface. It must be declared in the ARender configuration through the **arender.server.json.load.token.validator** property.
+It will have to implement the **validate** method that checks if the token passed as an URL parameter is valid or not.
+The default validator is **NoopTokenValidator**. It checks if the token is not null.

@@ -1,46 +1,52 @@
 ---
-title: Obtenir le layout du document (GET)
+title: "GET Document Layout"
 ---
 
-Cette API vous permet de récupérer les informations de layout (mise en page) d'un document.
 
-## Description de l'API
 
-Endpoint :
+
+
+
+
+
+This API allows you to retrieve the layout information of a document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/layout
 ```
 
+Resource path:
 
-Chemin de la ressource:
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
-
-Réponse :
+Response :
 
 | Type           | Description                            |
 |:---------------|:---------------------------------------|
-| DocumentLayout | Les informations du layout du document |
+| DocumentLayout | The layout information of the document |
 
-## Exemple
+## Example
 
-### Obtenir la mise en page du document
+### Get Document Layout
 
-L'exemple suivant récupère les informations de layout d'un document avec 
-l'ID du document spécifié.
+The following example retrieves the layout information of a document 
+with the specified document ID.
 
 ```bash
 curl -X GET 'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/layout'
 ```
 
-### Résultat
+### Result
 
-L'exemple suivant montre un DocumentLayout pour un PDF de deux pages.
+The following example show a DocumentLayout for a PDF of wo pages.
 
 ```bash
-{
+
   "type": "com.arondor.viewer.client.api.document.DocumentPageLayout",
   "documentId": {
     "id": "b64_N2U5MzY0MmQtYTQ4YS00MzBlLThiYWYtMjhhMjdlNGZlMDQz"
@@ -48,20 +54,20 @@ L'exemple suivant montre un DocumentLayout pour un PDF de deux pages.
   "documentTitle": null,
   "mimeType": "application/pdf",
   "pageDimensionsList": [
-    {
+
       "width": 595,
       "height": 841,
       "rotation": 0,
       "dpi": 72,
       "pageLayers": null
     },
-    {
+
       "width": 595,
       "height": 841,
       "rotation": 0,
       "dpi": 72,
       "pageLayers": null
-    }
+
   ]
-}
+
 ```

@@ -1,145 +1,195 @@
 ---
-title: Création d'annotation par règle
+title: "Annotation creation by rules"
 ---
 
-## Concept général
 
-Le principe de création des annotations par des règles repose sur la recherche d'un texte ou d'une expression régulière sur laquelle on va venir appliquer une annotation qui aura été définie.
 
-Par exemple, il est possible d'automatiser la biffure d'information sensible ayant un pattern spécifique.
 
-## Structure des règles de création d'annotation
 
-Les règles seront définies via des *bean* dans les fichiers de configurations d'ARender. Une règle est composée de trois grandes parties : 
-- Détails de la règle
-- Détails de la recherche
-- Détails de l'annotation
 
-### Détails de la règle
 
-Une règle a besoin d'un identifiant et d'un nom.
+## General concept
+
+The principle of creation of annotations by rules is based on the search for a text or a regular expression on which we are going to apply a defined annotation.
+
+For example, it is possible to automate the redact of sensitive information having a specific pattern.
+
+## Structure of annotation creation rules
+
+The rules will be defined via *beans* in the ARender configuration files. A rule is made up of three main parts: 
+- Rule details
+- Search details
+- Annotation details
+
+### Rule details
+
+A rule needs an identifier and a name.
+
+
 
 ```xml
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-
-
+<property name="ruleId" value="annotationCreationRuleExample" />
+<property name="ruleName" value="Example of annotation creation rule" />
 ```
 
 
-### Détails de la recherche
 
-Les détails de la recherche vont permettre de choisir un terme à rechercher ou bien une expression régulière. La recherche peut être affinée en choisissant la prise en compte des accents ou de la casse.
+### Search details
 
-Différents types de recherches sont configurables afin de l'appliquer sur différentes zones du document. L'application peut se faire soit sur la page courante, soit sur toutes les pages ou bien une sélection de page : 
+The search details allow you to choose a term or a regular expression to search for. The search can be refined by choosing whether accents or case are taken into account.
+
+Different type of search is configurable in order to apply it on different area of ​​the document. The application can be done either on the current page, or on all the pages or a page selection : 
 - CURRENT_PAGE
 - ALL_PAGES
 - SELECTED_PAGES
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
 
 ```xml
-
-	**
-		
-		
-		
-		
-		
-			<!-- Commentaire nettoyé -->CURRENT_PAGE<!-- Commentaire nettoyé -->
-	**
-<!-- Commentaire nettoyé -->
-
-```xml
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-	<!-- Commentaire nettoyé -->your_page_number_here<!-- Commentaire nettoyé -->another page number..<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-
-	**
-		
-		
-			<!-- Commentaire nettoyé -->Underline<!-- Commentaire nettoyé -->
-		
-			**
-				
-				
-			**
-		<!-- Commentaire nettoyé -->
-```
-
-
-### Règle complète
-
-Voici une exemple de *bean* d'une règle complète réunissant les trois grandes parties. L'exemple permet de souligner en rouge chaque lettre 'e' de la page courante.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-**
-	<!-- Commentaire nettoyé -->
-	
-	
-	<!-- Commentaire nettoyé -->
-	
-		**
-			
-			
-			
-			
-			
-				<!-- Commentaire nettoyé -->CURRENT_PAGE<!-- Commentaire nettoyé -->
-		**
-	<!-- Commentaire nettoyé -->
-	
-		**
-			
-			
-				<!-- Commentaire nettoyé -->Underline<!-- Commentaire nettoyé -->
-			
-				**
-					
-					
-				**
-			<!-- Commentaire nettoyé -->		
-**
-```
-
-
-### Ajout d'une règle au catalogue de règles
-
-Les règles personnalisées ne sont connues d'ARender uniquement à partir du catalogue de règle qui liste les différents identifiants des règles.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-**
-	
-		<!-- Commentaire nettoyé -->
-		<!-- Commentaire nettoyé -->
-**
+<property name="searchOptions">
+	<bean
+		class="com.arondor.viewer.client.api.search.SearchOptions">
+		<property name="searchText" value="your_text_to_be_search" />
+		<property name="accentSensitive" value="false" />
+		<property name="caseSensitive" value="false" />
+		<property name="regex" value="true" />
+		<property name="searchAction">
+			<value
+				type="com.arondor.viewer.client.api.search.SearchAction">CURRENT_PAGE</value>
+		</property>
+	</bean>
+</property>
 ```
 
 
 
-## Utilisation des règles par Javascript
+When the *SELECTED_PAGES* option is used, the *pageSelection* property must be added to the *bean* of the rule, which makes it possible to list the targeted pages.
 
-Il est possible avec du javascript de déclencher l'application de toutes les règles du catalogue.
+
+
+
+```xml
+<!--ONLY FOR THE SEARCH ACTION *SELECTED_PAGES* -->
+<property name ="pageSelection">
+	<list>
+		<value>your_page_number_here</value>
+		<value>another page number..</value>
+	</list>
+</property>
+```
+
+
+
+
+### Annotation details
+
+Annotations compatible with this feature are strikethrough, underline, underline, strikethrough, and text strikethrough annotations. The associated values ​​for each annotation type are : 
+- Strikeout
+- Underline
+- Highlight
+- Redact
+- RedactText
+
+An annotation will need to have the opacity and background color set in order to be constructed. The background color only takes on the value of hexadecimal.
+
+
+
+```xml
+    <property name="annotationTemplate">
+        <bean
+            class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
+            <property name="name" value="" />
+            <property name="annotationType">
+                <value
+                    type="com.arondor.viewer.annotation.common.AnnotationType">Underline</value>
+            </property>
+            <property name="annotationStyle">
+                <bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
+                    <property name="backgroundColor" value="#ff0000" />
+                    <property name="opacity" value="0.8f" />
+                </bean>
+            </property>
+        </bean>
+    </property>
+```
+
+
+
+### Complete rule
+
+Here is an example *bean* of a complete rule combining the three main parts. The example allows underlining in red each word 'document' of the current page.
+
+
+
+```xml
+<bean id="annotationCreationRuleExample"
+	class="com.arondor.viewer.client.api.annotation.AnnotationCreationRule">
+	<!-- Rule details -->
+	<property name="ruleId" value="annotationCreationRuleExample" />
+	<property name="ruleName" value="Example of annotation creation rule" />
+	<!-- Search details -->
+	<property name="searchOptions">
+		<bean
+			class="com.arondor.viewer.client.api.search.SearchOptions">
+			<property name="searchText" value="document" />
+			<property name="accentSensitive" value="false" />
+			<property name="caseSensitive" value="false" />
+			<property name="regex" value="true" />
+			<property name="searchAction">
+				<value
+					type="com.arondor.viewer.client.api.search.SearchAction">CURRENT_PAGE</value>
+			</property>
+		</bean>
+	</property>
+	<!-- Annotation details -->
+	<property name="annotationTemplate">
+		<bean
+			class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
+			<property name="name" value="" />
+			<property name="annotationType">
+				<value
+					type="com.arondor.viewer.annotation.common.AnnotationType">Underline</value>
+			</property>
+			<property name="annotationStyle">
+				<bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
+					<property name="backgroundColor" value="#ff0000" />
+					<property name="opacity" value="0.8f" />
+				</bean>
+			</property>
+		</bean>
+	</property>		
+</bean>
+```
+
+
+
+### Adding a rule to the rule catalog
+
+To use the rules, they must be referenced in the rules catalog. The following example will override the default *annotationCreationRuleCatalog*.
+
+Custom rules are only known to ARender from the rule catalog which lists the different rule identifiers.
+
+
+
+```xml
+<bean id="annotationCreationRuleCatalog"
+	class="com.arondor.viewer.client.api.annotation.AnnotationCreationRuleCatalog">
+	<property name="annotationCreationRules">
+		<list>
+			<ref bean="annotationCreationRuleExample" />
+		</list>
+	</property>
+</bean>
+```
+
+
+
+
+## Use of rules by JavaScript
+
+It is possible with javascript to trigger the application of all the rules of the catalog.
+
 
 
 ```js
@@ -147,7 +197,9 @@ $wnd.getARenderJS().createAnnotationByRuleWithCatalog();
 ```
 
 
-Il est également possible de faire une liste des identifiants des règles présentes dans le catalogue qui doivent être déclenchées : 
+
+It is also possible to make a list of the identifiers of the rules present in the catalog which must be triggered:
+
 
 
 ```js
@@ -156,96 +208,111 @@ $wnd.getARenderJS().createAnnotationByRulesWithRuleId(["annotationCreationRuleEx
 
 
 
-## Exemple d'utilisation
 
-L'exemple qui suit va permettre de définir une règle permettant de biffer les mots *view* sur la page courante.
+## Example of use
 
-### Création d'une règle personnalisée
+The following example will allow you to define a rule allowing to cross out the word *view* on the current page.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-**
-	<!-- Commentaire nettoyé -->
-	
-	
-	<!-- Commentaire nettoyé -->
-	
-		**
-			
-			
-			
-			
-			
-				<!-- Commentaire nettoyé -->CURRENT_PAGE<!-- Commentaire nettoyé -->
-		**
-	<!-- Commentaire nettoyé -->
-	
-		**
-			
-			
-				<!-- Commentaire nettoyé -->RedactText<!-- Commentaire nettoyé -->
-			
-				**
-					
-					
-				**
-			<!-- Commentaire nettoyé -->		
-**
-```
+### Creating a custom rule
 
 
-### Configuration du catalogue des règles d'annotations
 
 ```xml
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-**
-	
-		<!-- Commentaire nettoyé -->
-			<ref>
-		<!-- Commentaire nettoyé -->
-**
-```
-
-
-### Utilisation dans un bouton personnalisé
-
-Premièrement, on définit un bouton personnalisé :
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-**
-	<constructor-arg value="customButton">
-	<constructor-arg value="Custom Button" >
-	<constructor-arg value="standardButton">
-	
-	
-		**
-			
-				<!-- Commentaire nettoyé -->
-			<!-- Commentaire nettoyé -->
-**
+<bean id="redactRuleExample"
+	class="com.arondor.viewer.client.api.annotation.AnnotationCreationRule">
+	<!-- Rule details -->
+	<property name="ruleId" value="redactRuleExample" />
+	<property name="ruleName" value="Example of annotation creation rule for redact" />
+	<!-- Search details -->
+	<property name="searchOptions">
+		<bean
+			class="com.arondor.viewer.client.api.search.SearchOptions">
+			<property name="searchText" value="view" />
+			<property name="accentSensitive" value="false" />
+			<property name="caseSensitive" value="false" />
+			<property name="regex" value="true" />
+			<property name="searchAction">
+				<value
+					type="com.arondor.viewer.client.api.search.SearchAction">CURRENT_PAGE</value>
+			</property>
+		</bean>
+	</property>
+	<!-- Annotation details -->
+	<property name="annotationTemplate">
+		<bean
+			class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
+			<property name="name" value="" />
+			<property name="annotationType">
+				<value
+					type="com.arondor.viewer.annotation.common.AnnotationType">RedactText</value>
+			</property>
+			<property name="annotationStyle">
+				<bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
+					<property name="backgroundColor" value="#000000" />
+					<property name="opacity" value="1.0f" />
+				</bean>
+			</property>
+		</bean>
+	</property>		
+</bean>
 ```
 
 
 
-Ensuite, nous devons ajouter l'identifiant du bean customButtonToRedactSomething à la liste des boutons d'annotation comme ci-dessous : 
+### Configuring the Annotation Rule Catalog
+
+
 
 ```xml
-<!-- Commentaire nettoyé -->
+<bean id="annotationCreationRuleCatalog"
+	class="com.arondor.viewer.client.api.annotation.AnnotationCreationRuleCatalog">
+	<property name="annotationCreationRules">
+		<list>
+			<ref bean="annotationCreationRuleExample" />
+			<ref bean="redactRuleExample" />
+		</list>
+	</property>
+</bean>
 ```
+
+
+
+### Use in a custom button
+
+First, we create the custom button definition:
+
+
+
+```xml
+<bean id="customButtonToRedactSomething"
+	class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter">
+	<constructor-arg value="customButton"/>
+	<constructor-arg value="Custom Button" />
+	<constructor-arg value="standardButton"/>
+	<property name="enabled" value="true" />
+	<property name="buttonHandler">
+		<bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
+			<property name="jsCode">
+				<value>
+					$wnd.getARenderJS().createAnnotationByRulesWithRuleId(["redactRuleExample"]);
+				</value>
+			</property>
+		</bean>
+	</property>
+</bean>
+```
+
+
+
+
+Then we must add the bean identifier customButtonToRedactSomething to the list of annotation buttons like below :
+
+
 
 ```cfg
 topPanel.annotation.buttons.beanNames=addStickyNoteAnnotationButton,addFreeTextAnnotationButton,customButtonToRedactSomething
 ```
 
 
-Cet exemple de configuration ajoute 3 boutons à la section annotation du panneau supérieur.
+
+This example of configuration add 3 buttons to the annotation section of the toppanel.

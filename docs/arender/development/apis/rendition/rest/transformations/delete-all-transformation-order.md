@@ -1,9 +1,15 @@
 ---
-title: Supprimer tous les ordres de transformation (DELETE)
+title: "DELETE all transformation orders"
 ---
 
-Cette API permet de supprimer tous les ordres de transformation précédemment demandés.
-L'appel à cette API devra ête authentifié. Les identifiants sont disponibles dans le fichier de configuration _application.yaml_ du document-service-broker.
+
+
+
+
+
+
+This API allows you to delete all transformation orders previously requested.
+The call to this API must be authenticated. The credentials are available in the _application.yaml_ configuration file of the document-service-broker.
 
 ```yaml
 
@@ -12,20 +18,20 @@ run-mode :
   password : password
 ```
 
-## Description technique de l'API
+## API technical description
 
-Point de terminaison :
+Endpoint :
 ```bash
 DELETE /transformations
 ```
 
-## Exemples
+## Examples
 
-### Supprimer tous les ordres de transformations de manière authentifiée
+### Delete all transformation orders in an authenticated way
 
-L'appel ci-dessous génère une demande de suppression de tous les ordres de transformation.
-Il est authentifié via l'utilisation de la méthode simple du "Basic Authentication",
-en considérant le nom d'utilisateur : _user_ et le mot de passe _password_.
+The call below generates a request to delete all transformation orders.
+It is authenticated using the simple "Basic Authentication" method,
+considering the username: _user_ and the password _password_.
 
 ```bash
 curl -X 'DELETE' \

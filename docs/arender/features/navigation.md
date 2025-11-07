@@ -1,63 +1,59 @@
 ---
-title: Navigation
-description: Navigation dans les documents ARender
-sidebar_position: 3
-keywords: ["feature", "navigation"]
+title: "Navigation"
 ---
 
-# Navigation
 
-## Naviguer dans un document
 
-### Utiliser les flèches dans le bandeau de navigation
 
-![Navigation avec flèches](/img/arender/navigation1.png)
 
-Utiliser les flèches dans le bandeau de navigation pour naviguer.
 
-### Utiliser le numéro de page
 
-![Navigation par numéro de page](/img/arender/navigation3.png)
+## Navigate in a document
 
-Saisir un numéro de page (compris entre 1 et le nombre total de pages du
-document) dans la zone textuelle et appuyer sur la touche « Entrée » ou
-« Tabulation »
+ARender provides many easy ways to navigate a document:
 
-### Utiliser la molette de la souris ou la barre de défilement du navigateur
+### Use arrows in the toolbar
 
-Utiliser la molette de la souris ou la barre de défilement pour passer
-de page en page.
+![image](/img/arender/new/nav1.png)
 
-### Naviguer par la liste des documents
+### Use current page number
 
-![Navigation par vignettes](/img/arender/navigation4.png)
+![image](/img/arender/new/nav2.png)
 
-Cliquer sur une vignette pour naviguer dans le document. La page
-sélectionnée s'affiche dans le volet de droite.
+You can type the number of the page you want to display ( included from
+1 to the total number of pages of your document) in the text area made
+```javascript
+for it and then press « Enter » or « Tab »
+```
 
-![Sommaire cliquable](/img/arender/navigation5.png)
+### Use the mouse cursor/vertical scrollbar
 
-Lorsque votre document comprend une page de sommaire, cliquer sur le
-lien vous amènera sur la page associée
+Use the wheel of your mouse or the vertical scrollbar to scroll through
+the pages
 
-![Lien sommaire](/img/arender/navigation6.png)
+### Use view document pages thumbs tag
 
-### Naviguer par l'onglet sommaire
+You can click on the "view document pages thumbs" tab:
 
-Le sommaire s'adapte en fonction du document source :
+![image](/img/arender/new/nav3.png)
 
-Un sommaire pour un document Word
+Then click on a page thumb:
 
-![Sommaire Word](/img/arender/navigation7.png)
+![image](/img/arender/new/nav4.png)
 
-Des signets pour un document PDF
+The selected page is displayed on the right panel.
 
-![Signets PDF](/img/arender/navigation8.png)
+### Navigate by the summary
 
-Les numéros ou titre de diapositives pour un document PowerPoint
+ARender has a menu corresponding to:
 
-![Diapositives PowerPoint](/img/arender/navigation9.png)
+- A summary for a Word document
+- Bookmarks for a PDF document
+- Slide Numbers for a Power Point document
+- **Navigate by annotations**
 
-### Naviguer par les annotations
+![image](/img/arender/new/nav5.png)
 
-![Navigation par annotations](/img/arender/annotations1.png)
+This menu shows the type of annotation or part of the entered text.
+Annotations are categorized by document and pagination order. Before
+each annotation, the associated page number is specified.

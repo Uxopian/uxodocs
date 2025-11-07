@@ -1,20 +1,25 @@
 ---
-title: Exemple complet pour ajouter des annotations de biffure
+title: "Complete example to add redact annotations"
 ---
 
-Dans cette page, nous allons détailler comment créer des annotations de 
-biffure à partir de l'API REST de transformations de documents.
 
-## Annotation de biffure sur un texte donné
 
-Nous utiliserons ici le texte "Test business" comme exemple.
-Pour créer une biffure sur un texte spécifique dans le document, nous devons 
-d'abord récupérer la position de ce dernier.
 
-### Récupérer la position d'un texte
 
-Pour récupérer la position du texte, le point de terminaison searchText est 
-utilisé.
+
+
+In this page we will detail how to create redact annotations from the document 
+transformations REST API.
+
+## Redact annotation on a given text
+
+Here, we will use the text "Test business" as an example.
+To redact a specific text in the document, we first need to retrieve the 
+position related to.
+
+### Retrieving the position of a text
+
+To retrieve the position of the text, the searchText endpoint is used.
 
 ```bash
 curl -X 'GET' \
@@ -22,47 +27,87 @@ curl -X 'GET' \
   -H 'accept: */*'
 ```
 
-Nous travaillons ici sur la première page du document b64_bXlkb2N1ZW1udA==
+We are working here on the first page of the document b64_bXlkb2N1ZW1udA==
 
-Le résultat nous indique la position du texte souhaité :
+The result tells us the position of the desired text:
 
 ```json
-<!-- Balise invalide supprimée -->,"text":"Test Business","individualWidths":[5.3768005,4.8927994,4.4000015,2.4463997,2.4463997,5.869602,4.8927994,4.4000015,1.953598,4.8927994,4.8927994,4.4000015,4.4000015],"fontSize":8.0,"font":"JQRQXM+Helvetica","clickableDestination":null,"paragraphId":3,"rightToLeftText":false,"startTime":-1.0,"rotation":0},"textRangeList":[<!-- Balise invalide supprimée -->]}
+&#123;"searchResults":[&#123;"positionText":&#123;"pageNumber":0,"position":&#123;"x":42.52,"y":245.07303,"w":55.264004,"h":12.0&#125;,"text":"Test Business","individualWidths":[5.3768005,4.8927994,4.4000015,2.4463997,2.4463997,5.869602,4.8927994,4.4000015,1.953598,4.8927994,4.8927994,4.4000015,4.4000015],"fontSize":8.0,"font":"JQRQXM+Helvetica","clickableDestination":null,"paragraphId":3,"rightToLeftText":false,"startTime":-1.0,"rotation":0&#125;,"textRangeList":[&#123;"firstCharacter":0,"lastCharacter":12&#125;]&#125;]&#125;
 ```
 
-### Créer la biffure annotation
+###  Create the redact annotation
 
-Maintenant, nous savons que la position du texte correspond à :
+Now, we know that the position of the text corresponds to:
 
 ```json
-<!-- Balise invalide supprimée -->,
+&#123;"x":42.52,"y":245.07303,"w":55.264004,"h":12.0&#125;
+```
+
+Let's apply these coordinates to the annotation creation template:
+
+```bash
+curl -X 'POST' \
+  'http://localhost:8761/transformations' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "annotations": &#123;
+    "annotations": [
+
+        "type": "com.arondor.viewer.annotation.api.RedactTextElemType",
+        "documentId": &#123;
+          "id": "b64_bXlkb2N1ZW1udA=="
+        &#125;,
+        "page": 0,
+        "id": &#123;
+          "id": "non-null-value"
+        &#125;,
         "coords": [
-          <!-- Balise invalide supprimée -->
-      }
+
+            "x": 42.52,
+            "y": 245.07303,
+            "w": 55.264004,
+            "h": 12.0
+
+        ],
+        "color": &#123;
+          "r": 0,
+          "g": 0,
+          "b": 0
+
+
     ]
-  },
+  &#125;,
   "format": "pdf",
   "transformationDetails": [
-      <!-- Balise invalide supprimée -->
+
+      "transformationElements": [
+
+          "documentId": "b64_bXlkb2N1ZW1udA==",
+          "pagesSelectionList": [
+
+              "maxPage": 1,
+              "minPage": 1
+
           ]
-        }
+
       ],
 	  "documentTitle": "MyDocument"
-    }
+
   ]
-}'
+&#125;'
 ```
 
-Le résultat nous donne l'ID de la transformation :
+The result gives the id of the transformation:
 
 ```json
-<!-- Balise invalide supprimée -->
+&#123;"transformationOrderId":&#123;"id":"7325e176-400c-460b-b51e-a8026b78c62a"&#125;&#125;
 ```
 
-### Récupérer les informations de la transformation
+###  Retrieve information from the transformation
 
-Récupérons l'identifiant du document via l'ordre de transformation demandé 
-précédemment : *7325e176-400c-460b-b51e-a8026b78c62a*
+Let's retrieve the document id via the previously requested transformation 
+order: *7325e176-400c-460b-b51e-a8026b78c62a*
 
 ```bash
 curl -X 'GET' \
@@ -70,18 +115,18 @@ curl -X 'GET' \
   -H 'accept: */*'
 ```
 
-Résultat : ici nous récupérons le transformationResultDocumentID correspondant 
-à b64_NGZlMWJlMTktNGYyNS00MjAzLWI1ZGQtNGNiYTkxMmI0OGIx
+Result: here we retrieve the transformationResultDocumentID corresponding to 
+b64_NGZlMWJlMTktNGYyNS00MjAzLWI1ZGQtNGNiYTkxMmI0OGIx
 
 ```json
-<!-- Balise invalide supprimée -->]}],"documentTitle":"test123"}],"currentState":"PROCESSED","transformationResultDocumentID":<!-- Balise invalide supprimée -->,"creator":null,"creationDate":null,"opacity":null,"subject":null,"security":null,"startTime":-1.0,"endTime":-1.0,"contentsRichtext":null,"contents":null,"popup":null,"fringe":null,"interiorColor":<!-- Balise invalide supprimée -->]},"format":"pdf","errorMessage":null,"queuedDate":"2024-08-07T14:28:51.188+02:00","processedDate":"2024-08-07T14:28:51.237+02:00","queuedTime":3,"processingTime":45}
+{"transformationOrderId":{"id":"71266b11-2016-4bb6-bcd8-562cf6ca6760"},"transformationDetails":[{"transformationElements":[{"documentId":{"id":"b64_bXlkb2N1ZW1udA=="},"documentTitle":null,"pagesSelectionList":[{"minPage":1,"maxPage":1}]}],"documentTitle":"test123"}],"currentState":"PROCESSED","transformationResultDocumentID":&#123;"id":"b64_NGZlMWJlMTktNGYyNS00MjAzLWI1ZGQtNGNiYTkxMmI0OGIx"&#125;,"annotations":&#123;"annotations":[&#123;"type":"com.arondor.viewer.annotation.api.SquareElemType","color":null,"date":null,"flags":null,"id":null,"documentId":&#123;"id":"b64_bXlkb2N1ZW1udA=="&#125;,"lastModifier":null,"page":0,"position":&#123;"x":42.52,"y":245.07303,"w":55.264004,"h":12.0&#125;,"creator":null,"creationDate":null,"opacity":null,"subject":null,"security":null,"startTime":-1.0,"endTime":-1.0,"contentsRichtext":null,"contents":null,"popup":null,"fringe":null,"interiorColor":&#123;"r":0,"g":0,"b":0&#125;,"width":null,"dashes":null,"style":null,"intensity":null&#125;]&#125;,"format":"pdf","errorMessage":null,"queuedDate":"2024-08-07T14:28:51.188+02:00","processedDate":"2024-08-07T14:28:51.237+02:00","queuedTime":3,"processingTime":45}
 ```
 
-### Téléchargez le document à partir de son identifiant
 
-Maintenant que nous avons l'identifiant du document 
-*b64_NGZlMWJlMTktNGYyNS00MjAzLWI1ZGQtNGNiYTkxMmI0OGIx*, nous pouvons le 
-télécharger :
+### Download the document from its ID
+
+Now that we have the document id 
+*b64_NGZlMWJlMTktNGYyNS00MjAzLWI1ZGQtNGNiYTkxMmI0OGIx* we can download it:
 
 ```bash
 curl -X GET \
@@ -89,43 +134,75 @@ curl -X GET \
   -o my_pdf.pdf
 ```
 
-Ce document téléchargé contient l'annotation biffure souhaitée.
+This downloaded document has the desired redacted annotation. 
 
-## Autre façon de créer des annotations de biffure
+## Other way to create redact annotations
 
-### Créer une annotation de biffure dans une zone définie
+### Create a redact annotation in the defined zone 
 
-Le modèle de création d'annotation peut être utilisé directement pour créer une 
-annotation dans une zone. Pour créer une annotation aux positions
-```xml
-*<!-- Balise invalide supprimée -->,
-        "position": <!-- Balise invalide supprimée -->
-```
-      \}
+The annotation creation template can directly be used to create a annotation in
+a zone. To create an annotation at the positions
+*&#123;"x":35.0,"y":25.0,"w":160.0,"h":25.0&#125;* the call is:
+
+```bash
+curl -X 'POST' \
+  'http://localhost:8761/transformations' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "annotations": &#123;
+    "annotations": [
+
+        "type": "com.arondor.viewer.annotation.api.RedactElemType",
+        "documentId": &#123;
+          "id": "b64_bXlkb2N1ZW1udA=="
+        &#125;,
+        "page": 0,
+        "id": &#123;
+          "id": "non-null-value"
+        &#125;,
+        "position": &#123;
+          "x": 35.0,
+          "y": 25.0,
+          "w": 160.0,
+          "h": 25.0
+        &#125;,
+        "interiorColor": &#123;
+          "r": 0,
+          "g": 0,
+          "b": 0
+
+
     ]
-  \},
+  &#125;,
   "format": "pdf",
   "transformationDetails": [
-```xml
-      <!-- Balise invalide supprimée -->
-```
+
+      "transformationElements": [
+
+          "documentId": "b64_bXlkb2N1ZW1udA==",
+          "pagesSelectionList": [
+
+              "maxPage": 1,
+              "minPage": 1
+
           ]
-        \}
+
       ],
 	  "documentTitle": "MyDocument"
-    \}
+
   ]
-\}'
+&#125;'
 ```
 
-### Créer une annotation de biffure basée sur une règle
+### Create a redact annotation based on a rule
 
-Nous pouvons créer les annotations basées sur des règles.
-Par exemple : pouvoir rédiger tous les montants d'un document.
-Cette expression régulière est ensuite utilisée : (\$[0-9]+(.[0-9]+)?)
+We can create the annotations based on rules.
+As example: be able to redact all amounts in a document.
+This regex is then used:  (\$[0-9]+(.[0-9]+)?)
 
-Nous devons d'abord utiliser l'encodage URL de l'expression régulière donnée 
-pour obtenir : *%28%5C%24%5B0-9%5D%2B%28.%5B0-9%5D%2B%29%3F%29*
+We first need to use the URL encoding to the given regex to get: 
+*%28%5C%24%5B0-9%5D%2B%28.%5B0-9%5D%2B%29%3F%29*
 
 ```bash
 curl -X 'GET' \
@@ -133,6 +210,6 @@ curl -X 'GET' \
    -H 'accept: */*'
 ```
 
-Le résultat nous indique toutes les positions du texte correspondant, nous 
-pouvons maintenant utiliser le modèle de création d'annotations, comme vu 
-précédemment, pour créer les annotations souhaitées.
+The result tells us all the positions of the matching text, now we can use the 
+annotation creation template, as seen previously, to create the desired
+annotations.

@@ -1,19 +1,26 @@
 ---
-title: Estampillage de documents
+title: "Create Watermarked documents"
 ---
 
-Cet extrait de code vous permet, en utilisant la dépendance ARender
-arondor-arender-client-javarest, de communiquer avec les serveurs de
-rendition afin de générer un PDF estampillé avec un tampon configuré au
-préalable.
 
-Dans cet exemple précis, nous allons donc mettre en place des tampons à
-chaque page du document.
 
-## Mise en place des variables
 
-Ici, nous assumons que *data* contient les données binaires de votre
-fichier que vous souhaitez utiliser comme base de l'estampillage.
+
+
+
+This code snippet allows you, using the ARender jar dependency
+arondor-arender-client-javarest, to communicate with rendition servers
+in order to generate PDFs with annotations.
+
+In this particular example, we will setup a repeated stamp annotation on
+each page of the document in order to generate a watermarking.
+
+## Variables setup
+
+Here you will have to setup the address of the rendition server you are
+targeting and the binary content of the original document you want to
+watermark. We assume in this example that the data is stored into the
+field *data* .
 
 ``` java
 RenditionRestClient client = new RenditionRestClient();
@@ -23,11 +30,10 @@ InputStream data;
 DocumentAccessor original = new DocumentAccessorByteArray(data);
 ```
 
-## Chargement du documentAccessor
+## Loading of the documentAccessor
 
-Ici, nous chargeons le documentAccessor et obtenons la version
-*RENDERED* dans le cas où le document aurait eu besoin d'une conversion
-avant son utilisation.
+In this code, we load the documentAccessor and get the *RENDERED*
+version of it in case a conversion is needed on the rendition side.
 
 ``` java
 client.loadDocumentAccessor(original);
@@ -35,21 +41,23 @@ DocumentAccessor accessorConverted = client.getDocumentAccessor(original.getUUID
         DocumentAccessorSelector.RENDERED);
 ```
 
-## Obtention du nombre de pages du document
+## Obtaining the number of pages
 
 ``` java
 DocumentLayout layout = client.getDocumentLayout(accessorConverted.getUUID());
 int nbPages = -1;
 if (layout instanceof DocumentPageLayout)
-<!-- Commentaire nettoyé -->
+
+    nbPages = ((DocumentPageLayout) layout).getPageCount();
+
 else
-{
+
     // send error
     throw ...
-}
+
 ```
 
-## Mise en place du style des tampons
+## Setup the annotation style for stamps
 
 ``` java
 // configure here the ARender stamp style
@@ -66,39 +74,53 @@ styleMap.put("borderWidth", annotationStyle.getBorderWidth() + "");
 styleMap.put("borderColor", annotationStyle.getBorderColor() + "");
 styleMap.put("backgroundColor", annotationStyle.getBackgroundColor() + "");
 String newAppearance = "";
-for (String key : styleMap.keySet())
-<!-- Commentaire nettoyé -->
+for (String key: styleMap.keySet())
+
+    newAppearance += key + ":" + styleMap.get(key) + ";";
+
 // the appearance for the ARender stamp is now built
 ```
 
-## Mise en place de la liste d'annotations à envoyer
+## Setup the list of stamps to send
 
 ``` java
 // now we prepare the list of stamps to send the rendition server
-List<!-- Commentaire nettoyé -->();
-for (int i = 0; i <!-- Commentaire nettoyé -->
+List&lt;Annotation&gt; stamps = new ArrayList&lt;Annotation&gt;();
+for (int i = 0; i < nbPages; i++)
+
+    StampElemType annotation = new StampElemType();
+    annotation.setDocumentId(DocumentIdFactory.getInstance().generate());
+    annotation.setContents("WATERMARK");
+    annotation.setRotation(0);
+    annotation.setPosition(new PageRelativePosition(0, 100, 400, 400));
+
+    annotation.setAppearance(newAppearance);
+
+    annotation.setPage(i);
+    stamps.add(annotation);
+
 ```
 
-## Mise en place de la tache de conversion du PDF en PDF altéré
+## Creation of the conversion task
 
 ``` java
 AlterContentDescriptionWithAnnotations alterContent = new AlterContentDescriptionWithAnnotations();
- set annotations
+// set annotations
 alterContent.setAnnotations(stamps);
- set documentId
-List<!-- Commentaire nettoyé -->();
+// set documentId
+List&lt;DocumentId&gt; sourceDocumentIdList = new ArrayList&lt;DocumentId&gt;();
 sourceDocumentIdList.add(accessorConverted.getUUID());
 DocumentId renderedDoc = client.alterDocumentContent(sourceDocumentIdList, alterContent);
 ```
 
-## Obtention du document final
+## Fetch of the resulting document
 
 ``` java
 DocumentAccessor accessorFinalDocument = client.getDocumentAccessor(renderedDoc,
         DocumentAccessorSelector.RENDERED);
 ```
 
-Les données binaires du document final produit se trouvent dans :
+The binary data of the resulting document is in:
 
 ``` java
 accessorFinalDocument.getInputStream();

@@ -1,69 +1,69 @@
 ---
-title: Marque blanche
+title: "White label"
 ---
+
+
+
+
+
+
+
 
 ## Introduction
 
-ARender permet, depuis la version 4.4.1, de retirer les différentes références à sa marque via de la configuration.
+Since ARender 4.4.1, you can remove any references of the ARender brand through the configuration.
 
 ## Configuration
 
-### Les références à ARender dans le panneau "À propos"
+### The References to ARender in "About" section
 
-Une propriété permet de retirer les références à 'ARender'. Les références retirées sont celles se trouvant dans le panneau "À propos".
-```xml
-<!-- Commentaire nettoyé -->
-```
+A property allows removing references to 'ARender'. Removed references are in the "About" panel.
+![image](/img/arender/aboutARenderEN.png)
 
-Appliquer la propriété suivante afin de retirer ces références : 
+Apply following property to remove those references :
+
 
 ```cfg
-# Supprimer toutes les références à ARender
+# Remove any references of ARender in the application
 arender.white.labeling=true
 ```
 
 
 
-Visuel après activation de la propriété de la marque blanche : 
+
+Result after activation of the white label property :
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-### Références lors du chargement ou de la sauvegarde
+![image](/img/arender/aboutWhiteLabelingEN.png)
 
 
-Lors du chargement ou de la sauvegarde d'un document, le texte 'ARender' est visible au centre de la page.
+### The references at loading and saving
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Ce texte est configurable via la propriété suivante :
+At document loading or saving, an 'ARender' text is visible at the center of the page.
+
+![image](/img/arender/textArenderSave.png)
+
+This text is configurable with the following property :
+
 
 
 ```cfg
-# Affichage d'un label lors du chargement de l'UI ARender
+# Display the label when document starts to open
 startup.loading.label=Just-Loading
 ```
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
+![image](/img/arender/textARenderSaveWhiteLabel.png)
 
 
-### Modification du titre de la page
+### Modification of window title
 
-La dernière référence à ARender se trouve dans le titre par défaut de la page qui va se retrouver directement dans le fichier HTML. Pour la retirer, aller à l'emplacement où ARender Web-UI est déployé. Vous trouverez à la racine du dossier, le fichier ARender.html. Ensuite ouvrez le fichier avec un éditeur de texte afin de retirer la référence à 'ARender' :
+Last 'ARender' reference is in the window title of the browser. This can be modified by editing the file ARender.html that can be found at the root folder of your ARender deployment. Then you can modify the following line to remove 'ARender' :
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/editARenderWindowTitle.png)
 
-Après édition : 
+After edit :
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/editARenderWindowTitleAfter.png)

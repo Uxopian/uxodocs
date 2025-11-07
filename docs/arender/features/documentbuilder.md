@@ -1,16 +1,20 @@
 ---
-title: Composition de documents
+title: "Document Builder"
 ---
 
-## Activer la composition de documents 
 
-Le mode de composition de documents permet de créer un document, modifier ou supprimer le document souhaité, organiser et gérer les pages du document désiré.
 
-Pour l'activer, ajouter la propriété suivante : 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
+
+
+## Activate the document builder
+
+The document builder mode allows you to create a new document, alter or delete the desired document, organize and manage pages of the desired document.
+
+To active it, add the following property: 
+
+
 
 ```cfg
 documentbuilder.enabled=true
@@ -18,156 +22,124 @@ documentbuilder.enabled=true
 
 
 
-## Accès à la composition de documents
 
-Pour activer le mode de composition de document, cliquer sur l’icône «
-Ciseau »
+## Access the document builder
 
-```xml
-<!-- Commentaire nettoyé -->
+In order to activate the document builder mode, click on the "Scissor"
+icon:
+
+![image](/img/arender/features/builder/builder1.png)
+
+The document builder mode will now be displayed
+
+![image](/img/arender/features/builder/builder2.png)
+
+You can decide to hide or display source documents by clicking on the document explorer button or the separator buttons:
+
+![image](/img/arender/features/builder/builder3.png)
+
+
+## Create a new document
+
+In order to create a new document, click on the " + " button shown in
+the following picture
+
+![image](/img/arender/features/builder/builder4.png)
+
+You can also create a new document with a right-click on the document
+builder view:
+
+![image](/img/arender/features/builder/builder5-en.png)
+
+You can rename a document by clicking on the title and then typing the
+```javascript
+new name
 ```
 
-Le mode « Composition de document» est activé
+![image](/img/arender/features/builder/builder6.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Then, you can add pages to your document, from your other documents. If
+you want to keep your other documents, you have to drag and drop your
+pages from the thumbnails navigation, which contains your source
+documents:
 
-Vous pouvez afficher ou masquer les documents sources en cliquant sur le
-bouton de l'exporateur de documents ou sur les boutons séparateurs.
+![image](/img/arender/features/builder/builder7.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+If you do not want to keep your other documents, you can drag and drop
+your pages from the document builder view. The selected page is no
+longer in the first document:
 
+![image](/img/arender/features/builder/builder8.png)
 
-## Créer un nouveau document
+You can drag and drop several pages in a row:
 
-Pour créer un nouveau document, cliquer sur le bouton « + »
+- keep « Ctrl » pressed and click on every pages you want to select
+- keep « Shift » pressed to select all pages between the first page
+  you clicked on and the second one
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder9.png)
 
-Ou clic droit dans le volet de navigation
+## Download the document
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+To download your new document, click on the following icon
 
-Pour changer le nom du document, cliquer sur le titre et saisir un
-nouveau titre
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-Pour ajouter des pages à votre nouveau document provenant de vos autres
-documents. Si vous souhaitez conserver vos documents, utiliser le
-glisser/déposer à partir de vos fichiers sources disponibles dans le
-volet gauche.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-Si vous ne souhaitez pas conserver vos documents, glisser/déposer
-directement les vignettes de la composition de document. La page
-sélectionné n’apparaît plus dans le premier document.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-Vous pouvez glisser/déposer plusieurs pages en même temps :
-
-- Maintenir la touche « Control » pour sélectionner unitairement les
-  pages
-- Maintenir la touche « Majuscule » pour sélectionner une plage de
-  pages
-
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder10.png)
 
 
-## Téléchargé le document
+## Delete a document from the document builder view
 
-Pour télécharger votre nouveau document, cliquer sur l’icône dédiée
+To delete a document from the document builder view, click on the cross
+corresponding to the document to be deleted:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder11.png)
 
+If you delete every pages of a document, the document will be deleted of the view.
 
-## Supprimer un document à partir de la composition de document
+## Merge two documents
 
-Pour supprimer un document du panneau du document builder, cliquer sur la croix correspondant au
-document
+To merge two or more documents, you have to create a new document
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Then, you drag and drop all the pages you want from the source document,
+to your new document:
 
-Si vous supprimez toutes les pages du document, il est également supprimé du panneau.
-
-## Fusionner deux documents
-
-Pour fusionner deux documents ou plus, créer un nouveau document puis
-glisser/déposer toutes les pages dont vous avez besoin des documents
-sources dans le nouveau document
-
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder12.png)
 
 
-## Séparer un document
+## Split a document
 
-Pour séparer un document en plusieurs, créer un nouveau document puis
-glisser/déposer les pages dans chaque nouveau document
+To split a document in several documents, you have to create your new
+documents. Then drag and drop the pages you want in each new documents.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder13.png)
 
 
-## Réorganiser un document
+## Reshape a document
 
-Vous pouvez modifier l’ordonnancement des pages du document avec le
-glisser/déposer dans le vue « composition de document». Par exemple, la
-1ère page a été déplacée en 4ème position :
+You can move a page into a document with a drag and drop in the document
+builder view. In this example, the first page is moved to the fourth
+position:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder14.png)
 
-Vous pouvez ajouter plusieurs fois la même page dans votre document.
-Glisser/déposer la page du document source plusieurs fois dans votre
-nouveau document. Par exemple, la 3ème page a été ajoutée 4 fois
+You can add several times the same page in your document. You have to
+drag and drop the page from the source document to your document in
+building. In this example, the third page is added three times:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder15.png)
 
-Pour supprimer une page, cliquer sur la croix rouge sur la page
+You can delete a page from your document. Click on the red cross on the
+page to be deleted:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder16.png)
 
 
-## Sortir du mode Composition de document
+## Exit the document builder mode
 
-Pour fermer la composition de document, cliquer sur l’icône « Ciseau »
+To close the document builder, you click on the "Scissor" icon:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder17.png)
 
-Vous pouvez aussi fermer la composition de document en faisant un clic
-droit dans la création de document
+You can also close the document builder with a right-click in the
+document builder view:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/features/builder/builder18-en.png)

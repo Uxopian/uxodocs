@@ -1,5 +1,11 @@
 ---
-title: Architecture dans Nuxeo
+title: "Architecture in Nuxeo"
 ---
 
-Vous pouvez trouver l'architecture d'ARender dans Nuxeo [ici](https://doc.nuxeo.com/nxdoc/nuxeo-enhanced-viewer-installation/)
+
+
+
+
+
+
+You can find the ARender architecture in Nuxeo [here](https://doc.nuxeo.com/nxdoc/nuxeo-enhanced-viewer-installation/)

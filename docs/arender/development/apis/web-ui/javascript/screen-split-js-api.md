@@ -1,19 +1,27 @@
 ---
-title: Diviser l'écran
+title: "Screen split"
 ---
 
-## Diviser l'écran
+
+
+
+
+
+
+
+## Screen split
 
 - Objet : getARenderJS().getScreenSplitJSAPI()
 
-    | Fonction                                | Description                                                                                      |
-    | --------------------------------------- | ------------------------------------------------------------------------------------------------ |
-    | askOpenAsNewDocument(String documentId) | Ouvre l'id du document donné en tant que nouveau document. Le document sera ouvert en multiview. |
+    | Function                                | Description                                                                                             |
+    | --------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+    | askOpenAsNewDocument(String documentId) | Method to open the provided document id as new document. The document will be opened in multiple views. |
+
 
 
 ```js
  /*
- * @param {string} documentId - ID du document
+ * @param {string} documentId - document ID
  */
 getARenderJS().getScreenSplitJSAPI().askOpenAsNewDocument("documentId");
 ```

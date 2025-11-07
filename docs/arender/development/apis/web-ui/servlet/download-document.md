@@ -1,31 +1,37 @@
 ---
-title: Télécharger les documents
+title: "Download documents"
 ---
 
-Une nouvelle servlet est déployée permettant de télécharger les documents. 
-Les documents peuvent être téléchargés au format source, en PDF ou en ZIP.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **downloadServlet**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to download documents. 
+Documents can be downloaded as source format, PDF or ZIP format.
+
+## Request 
+
+This functionality is accessible via the servlet: **downloadServlet**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
-curl -X GET 'http://<arender_host>/ARender/arendergwt/downloadServlet?uuid=docUUID&sourceId=source&title=TitreDocument&type=type'
+curl -X GET 'http://<arender_host>/ARender/arendergwt/downloadServlet?uuid=docUUID&sourceId=source&title=DocumentTitle&type=type'
 ```
 
-* uuid : l'id du document
-* sourceId : id initial du document (optionel). Utile si l'id du document est transformé
-* title : titre du document téléchargé
-* type : type de téléchargement :
-    * INITIAL : type initial du document (sans les annotations)
-    * RENDERED : type qui ne pourra pas subir de conversion (pdf, mp4, tiff)
-    * COMPRESSED : type zip
+* uuid: document id
+* sourceId: initial document id (optional). Useful if the document id is transformed
+* title: title of the downloaded document
+* type: type of download :
+     * INITIAL: initial type of document (without annotations)
+     * RENDERED: type that cannot be converted (pdf, mp4, tiff)
+     * COMPRESSED: zip type
 
-## Réponse de la servlet
+## Servlet Response
 
-Le document envoyé en paramètre est téléchargé au format correspondant au paramètre `type`. Il va être renommé selon le paramètre `title`. 
+The document sent as a parameter is downloaded in the format corresponding to the `type` parameter. It will be renamed according to the `title` parameter.

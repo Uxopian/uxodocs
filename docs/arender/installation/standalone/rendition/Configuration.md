@@ -1,39 +1,46 @@
 ---
-title: Configuration
+title: "Configuration"
 ---
 
-## Configuration de l'antivirus
 
-Désactiver le scan du dossier et des sous-dossiers de la Rendition.
 
-## Configuration du cache
+
+
+
+
+## Antivirus Settings
+
+Ensure that the antivirus does not scan the ARender Rendition folder and sub-folders below.
+
+## Cache Management
 
 ### Local vs Shared
 
-ARender utilise Hazelcast pour gérer le cache.
+ARender uses Hazelcast to manage its rendition cache. 
 
-#### Cache local
+#### Local Cache
 
-Par défaut, chaque instance de Rendition maintient son propre cache, ce qui implique que les données en cache ne sont 
-pas partagées entre toutes les instances de Rendition.
+By default, each Rendition instance maintains its own local cache, meaning cached documents are not shared across
+instances.
 
-#### Cache partagé
+#### Shared Cache {#SharedHazelcastCache}
 
-Avec un NFS (Network File System) partagé et un Hazelcast correctement configuré, les données peuvent être partagées 
-entre toutes les instances de Rendition.
+With an NFS (Network File System) shared across all Rendition servers and properly configured Hazelcast, cache data can 
+be shared among instances.
 
-**Avantages du cache partagé:**
+**Benefits of Shared Cache:**
 
-* **Redondance Améliorée** : En cas de panne d'une instance, les autres peuvent toujours accéder aux documents mis en 
-  cache sans avoir à les récupérer à nouveau.
-* **Performance Optimisée** : Réduit le temps de récupération des documents, car ceux déjà mis en cache restent 
-  disponibles pour toutes les instances, améliorant ainsi la rapidité et la fiabilité dans des environnements multi-instances.
+* **Improved Redundancy**: If one instance fails, others can still access cached documents without needing to re-fetch them.
+* **Enhanced Performance**: Reduces retrieval time as previously cached documents remain available to all instances, 
+  enhancing speed and reliability in multi-instance environments.
 
-Pour des informations complètes sur Hazelcast, consultez la [documentation Hazelcast](https://docs.hazelcast.com/home/).
+For comprehensive Hazelcast details, refer to [Hazelcast documentation](https://docs.hazelcast.com/home/).
 
-#### Configuration par Défaut de Hazelcast
+#### Default Hazelcast Configuration
 
-Le fichier de configuration (hazelcast.yaml) se trouve dans les ressources de RenditionEngine.
+The configuration file (hazelcast.yaml) is located within the *RenditionEngine* resources. 
+
+The path to find the configuration is *modules/RenditionEngine/rendition-engine-micro-service-.jar/BOOT-INF/classes/hazelcast.yaml*.
 
 
 
@@ -70,34 +77,38 @@ hazelcast:
           enabled: true
         DATA:
           enabled: true
-
 ```
 
 
-| Propriété                   | Description                                                                                                                                                                                                                                                                                                                                                                                        | 
-| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| max-idle-seconds            | Cette propriété permet de définir le temps où le document est gardé en cache. Cette valeur est en seconde. Par défaut, un document reste en cache 1 heure, donc la valeur par défaut est *3600*. Vous pouvez retrouver plus de détails sur [la documentation associé d'Hazelcast](https://docs.hazelcast.com/cloud/map-configurations#max-idle-seconds).                                           |
-| eviction-policy             | Cette propriété permet de définir la politique d'éviction des documents en cache lorsque la valeur maximale du cache est dépassé. Par défaut, la valeur est *NONE* ce qui correspond à aucune éviction et que la taille maximum est ignoré. Vous pouvez retrouver plus de détails sur [la documentation associé d'Hazelcast](https://docs.hazelcast.com/cloud/map-configurations#eviction-policy). |
-| max-size-policy             | Cette propriété définie comment Hazelcast va calculer la taille maximum du cache. Par défaut la valeur est *PER_NODE* qui définie que la taille maximum du cache est appliqué pour chaque membre du cluster. Vous pouvez retrouver plus de détails sur [la documentation associé d'Hazelcast](https://docs.hazelcast.com/cloud/map-configurations#max-size-policy).                                |
-| size                        | Cette propriété définie la taille maximum du cache. Par défaut la valeur est *5*. Vous pouvez retrouver plus de détails sur [la documentation associé d'Hazelcast](https://docs.hazelcast.com/cloud/map-configurations#max-size).                                                                                                                                                                  |
-| network.join.auto-detection | Cette propriété permet de définir le mécanisme de détection d'Hazelcast des membres d'un clusters sur le même réseau. Par défaut la valeur est *false*. Vous pouvez retrouver plus de détails sur [la documentation associé d'Hazelcast](https://docs.hazelcast.com/imdg/4.1.2/clusters/network-configuration#join).                                                                               |
 
-### Nettoyage du répertoire temporaire au démarrage
+| Property                    | Description                                                                                                                                                                                                                                                                                                                                                    | 
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| max-idle-seconds            | This property is used to define the time when the document is kept in the cache. This value is in seconds. By default, a document is cached for 1 hour, so the default is *3600*. You can find more details on [related Hazelcast documentation](https://docs.hazelcast.com/cloud/map-configurations#max-idle-seconds).                                        |
+| eviction-policy             | This property is used to define the eviction policy for cached documents when the maximum cache value is exceeded. By default, the value is *NONE* which corresponds to no eviction and that the maximum size is ignored. You can find more details on [related Hazelcast documentation](https://docs.hazelcast.com/cloud/map-configurations#eviction-policy). |
+| max-size-policy             | This property defines how Hazelcast will calculate the maximum cache size. By default the value is *PER_NODE* which defines that the maximum cache size is applied for each member of the cluster. You can find more details on [related Hazelcast documentation](https://docs.hazelcast.com/cloud/map-configurations#max-size-policy).                        |
+| size                        | This property defines the maximum size of the cache. By default the value is *5*. You can find more details on [related Hazelcast documentation](https://docs.hazelcast.com/cloud/map-configurations#max-size).                                                                                                                                                |
+| network.join.auto-detection | This property is used to define the Hazelcast detection mechanism for members of a cluster on the same network. By default the value is *false*. You can find more details on [related Hazelcast documentation](https://docs.hazelcast.com/imdg/4.1.2/clusters/network-configuration#join).                                                                    |
 
-Bien que Hazelcast gère l'éviction des entrées dans le cache, il est aussi possible de configurer un nettoyage du 
-répertoire de cache au démarrage de l'application en utilisant :
+### Cleaning the temporary directory at startup
+
+While Hazelcast evicts entries from the cache, you can also configure cache directory cleanup at application startup 
+using:
 
 #### Configuration
+
 
 ```cfg
 default.document.path.startup.clear=true
 ```
 
-#### Paramétrage du Temps de Nettoyage
 
-Par défaut, tous les dossiers créés il y a **plus d'un jour** sont supprimés.
+#### Adjustable Cleanup Timing:
 
-Vous pouvez ajuster cette valeur en modifiant la configuration ci-dessous :
+The default behavior is the deletion of all folders created **more than a day ago**.
+
+Adjust this value by modifying the configuration below:
+
+
 
 ```cfg
 temp:
@@ -107,26 +118,29 @@ temp:
       expiration:
         time: 1
         unit: DAYS
+
 ```
 
-| Property | Description                                                                      | 
-| -------- | -------------------------------------------------------------------------------- |
-| time     | La valeur numérique du temps                                                     |
-| unit     | L'unité de temps associée, qui peut être "SECONDS", "MINUTES", "HOURS" et "DAYS" |
+
+
+| Property | Description                                                                     | 
+| -------- | ------------------------------------------------------------------------------- |
+| time     | The numerical time value                                                        |
+| unit     | The time unit associated, which can be "SECONDS", "MINUTES", "HOURS" and "DAYS" |
 
 ### rest-api
 
-L'API REST est activé par défaut avec la propriété *enabled: true*. Vous pouvez retrouver plus de détails sur 
-[la documentation associé d'Hazelcast](https://docs.hazelcast.com/hazelcast/5.0/maintain-cluster/rest-api).
+The REST API is enabled by default with enabled: true. Endpoint groups can be customized for use; details are available 
+in the [Hazelcast documentation](https://docs.hazelcast.com/hazelcast/5.0/maintain-cluster/rest-api).
 
-##### endpoint-groups
+#### Default Enabled Endpoints
 
-Cette section permet de définir les endpoint group qui peuvent être utilisés avec l'API REST. Vous pouvez retrouver 
-plus de détails sur [la documentation associé d'Hazelcast](https://docs.hazelcast.com/hazelcast/5.0/maintain-cluster/rest-api#using-rest-endpoint-groups).
+This section allows you to define the endpoint groups that can be used with the REST API. You can find more details on 
+[related Hazelcast documentation](https://docs.hazelcast.com/hazelcast/5.0/maintain-cluster/rest-api#using-rest-endpoint-groups).
 
-###### CLUSTER_READ
+##### CLUSTER_READ
 
-Permet l'accès aux endpoints suivants : 
+Allows access to the following endpoints :
 
 - /hazelcast/rest/cluster
 - /hazelcast/rest/management/cluster/state
@@ -136,9 +150,9 @@ Permet l'accès aux endpoints suivants :
 - /hazelcast/rest/instance
 - /hazelcast/rest/log-level (GET)
 
-###### HEALTH_CHECK
+##### HEALTH_CHECK
 
-Permet l'accès aux endpoints suivants : 
+Allows access to the following endpoints : 
 
 - /hazelcast/health/node-state
 - /hazelcast/health/cluster-state
@@ -147,66 +161,65 @@ Permet l'accès aux endpoints suivants :
 - /hazelcast/health/cluster-size
 - /hazelcast/health/ready
 
-### Personnalisation de la Configuration Hazelcast
+### Customizing Hazelcast Configuration
 
-Pour personnaliser la configuration Hazelcast, créez votre propre fichier hazelcast.yaml et copiez-y la configuration du
+To customize the Hazelcast configuration, create your own *hazelcast.yaml* file and copy the configuration from the 
+file *ARender-Rendition-\modules\RenditionEngine\rendition-engine-micro-service-.jar\BOOT-INF\classes\hazelcast.yaml*.
 
-À chaque mise à jour d’ARender, lisez attentivement les notes de version afin de prendre en compte les éventuels 
-changements de configuration.
 
-Après avoir créé votre fichier de configuration, modifiez le fichier custom-setenv.bat (ou custom-setenv.sh) pour 
-indiquer le chemin du nouveau fichier.
 
-Ajoutez l’argument suivant à la liste des arguments JVM : **-Dhazelcast.config=chemin_vers_votre_fichier**.
+For each upgrade of ARender, please read the release note carefully to take into account potential changes to the initial configuration.
 
-Si le chemin spécifié est hazelcast.yaml, alors le fichier doit être placé dans le dossier 
+
+
+After making your own configuration file, modify the *custom-setenv.bat* (or the *custom-setenv.sh*) file to specify the new file path.
+
+Add the following argument to the list of JVM arguments: **-Dhazelcast.config=path_to_your_file**. 
+
+If the path specified is *hazelcast.yaml* then the file should be placed into *ARender-Rendition-\modules\RenditionEngine*.
+
 
 ```cfg
 set ARENDER_BROKER_JVM_ARGS=-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false -Dloader.path="client_libs/" -Dfile.encoding=UTF-8 -Dhazelcast.config=hazelcast.yaml
 ```
 
-### Paramètres du Répertoire de Cache
 
-#### Pour des Répertoires de Cache Séparés entre Plusieurs Instances de Rendition
+### Cache Directory Settings
+#### For Separate Cache Directories Between Multiple Renditions
 
-##### Désactivation de l'Auto-Détection
+##### Disable Auto-Detection
+  
+Make sure the auto-detection property is disabled (this is the default setting).
 
-Assurez-vous que la propriété d'auto-détection est désactivée (c’est le paramètre par défaut).
+##### Web-UI Configuration
 
-##### Configuration du Web-UI
+Specify each Rendition host in the Web-UI server configuration. The distribution will be managed based on the health of 
+the Renditions.
 
-Spécifiez chaque hôte de Rendition dans la configuration du serveur Web-UI. La distribution des tâches sera gérée en 
-fonction de l'état de santé des instances de Rendition.
+Configuration details can be found on the dedicated [page](./installation/standalone/web-ui/configuration.md).
 
-Les détails de configuration sont disponibles sur la **page dédiée** (lien supprimé).
+#### For Shared Cache Directories Among Several Renditions {#SharedCache}
 
-```xml
-#### Pour des Répertoires de Cache Partagés entre Plusieurs Instances de Rendition <!-- Expression supprimée -->
-```
+##### Hazelcast port opening
 
-##### Ouverture du port Hazelcast
+By default, Hazelcast uses port **5701**. Ensure this port is open on all Rendition servers for communication.
 
-Par défaut, Hazelcast utilise le port **5701**. Assurez-vous que ce port soit ouvert sur tous les serveurs de Rendition pour 
-permettre la communication.
+##### Enable Auto-Detection
 
-##### Activation de l'Auto-Détection
+Activate auto-detection to allow Hazelcast to recognize all Rendition instances.
 
-Activez l'auto-détection pour permettre à Hazelcast de reconnaître toutes les instances de Rendition.
+##### Rendition Instance Locations
 
-##### Emplacement des Instances de Rendition
+Ensure all Rendition instances are on the same subnet for cache sharing.
 
-Vérifiez que toutes les instances de Rendition sont sur le même sous-réseau pour permettre le partage de cache.
+##### Configure shared directory 
 
-##### Configuration du Répertoire Partagé
+For using Hazelcast with multiple Rendition instances and a shared directory, the directory must be on [NFS](https://en.wikipedia.org/wiki/Network_File_System). 
 
-Pour utiliser Hazelcast avec plusieurs instances de Rendition et un répertoire partagé, le répertoire doit être hébergé 
-sur un système de fichiers partagé de type [NFS](https://fr.wikipedia.org/wiki/Network_File_System).
+Each microservice needs to specify the location of the shared cache directory in the application.yaml file.
 
-Chaque microservice doit spécifier l’emplacement du répertoire de cache partagé dans le fichier application.yaml.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
 
 
 ```cfg
@@ -216,16 +229,23 @@ temp:
 ```
 
 
-```cfg
-shared-files:
-  sharedPath: ../../tmp/
-```
 
 
 ```cfg
 shared-files:
   sharedPath: ../../tmp/
 ```
+
+
+
+
+```cfg
+shared-files:
+  sharedPath: ../../tmp/
+```
+
+
+
 
 ```cfg
 tmp:
@@ -237,85 +257,83 @@ shared-files:
 ```
 
 
-## Load Balancer
 
-### Configurer le Web-UI avec un Load Balancer
 
-Cette configuration est nécessaire uniquement si le cache est partagé entre plusieurs instances de Rendition. Voir :
+## Load balancer
 
-* **Pour des Répertoires de Cache Partagés entre Plusieurs Instances de Rendition** (lien supprimé),
-* **Cache Partagé** (lien supprimé).
+### Configure the Web-UI with Load balancer
 
-Si un Load Balancer est présent entre le Web-UI et les instances de Rendition, indiquez l’hôte du Load Balancer dans la
-configuration du serveur Web-UI, au lieu de lister les hôtes des instances de Rendition individuelles.
+This configuration is **possible only when the cache is shared** across multiple Rendition instances, see:
+* [For Shared Cache Directories Among Several Renditions](),
+* [Shared Cache]().
+
+If a Load Balancer is present between the Web-UI and Renditions, specify the Load Balancer's host in the Web-UI server 
+configuration instead of listing individual Rendition hosts.
+
+
 
 ```cfg
 arender.server.rendition.hosts=LOAD_BALANCER_HOST
 ```
 
-Les détails de configuration sont trouvables sur la **page dédiée** (lien supprimé).
 
-### Configurer le Web-UI sans Load Balancer
 
-Si aucun Load Balancer n'est utilisé, spécifiez chaque hôte de Rendition dans la configuration du serveur Web-UI. La 
-distribution des tâches sera gérée en fonction de l'état de santé des instances de Rendition.
+### Configure the Web-UI without Load balancer
 
-Vous trouverez la configuration détaillée sur la **page dédiée** (lien supprimé).
+If there’s no Load Balancer, specify each Rendition host in the Web-UI server configuration. The distribution will be managed according to the Renditions' health.
 
-## Configuration du Système de Fichiers en Réseau (NFS)
+Detailed configuration can be found on the dedicated [page](./installation/standalone/web-ui/configuration.md).
 
-Cette configuration est nécessaire uniquement si le cache est partagé entre plusieurs instances de Rendition. Voir :
+## Network File System (NFS) Configuration
 
-* **Pour des Répertoires de Cache Partagés entre Plusieurs Instances de Rendition** (lien supprimé),
-* **Cache Partagé** (lien supprimé).
+This configuration is **required only when the cache is shared** across multiple Rendition instances, see:
+* [For Shared Cache Directories Among Several Renditions](),
+* [Shared Cache]().
 
-Une configuration NFS correcte est essentielle pour synchroniser les différents nœuds. Deux optimisations principales 
-peuvent entraîner une désynchronisation des clients NFS :
+Proper NFS configuration is crucial for synchronizing different nodes. Two primary optimizations can cause NFS clients to become out of sync:
 
-* **Écriture asynchrone** (par défaut) : Cette option est activée par défaut.
-* **Cache de lecture local** : La configuration NFS doit inclure les options suivantes pour assurer la synchronisation des clients :
-
+* **Asynchronous Writing** (default): This option is set by default.
+* **Local Read Cache**: Options for NFS should include the below configuration to ensure client synchronization:
 ```cfg
 sync,noac,lookupcache=none
 ```
 
-**Références :** \
+Refer to the following resources for more information:
+
 [nfs(5) - Linux man page 10.3](https://linux.die.net/man/5/nfs) \
-[NFS Red Hat Enterprise Linux 6](https://access.redhat.com/documentation/fr-fr/red_hat_enterprise_linux/6/html/storage_administration_guide/fscachenfs)
+[NFS Red Hat Enterprise Linux 6](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/storage_administration_guide/fscachenfs)
 
-## Sélection du backend Office (Optionnel)
+## Office backend selection (Optional)
 
-ARender propose trois configurations pour la conversion de documents Office en PDF, chacune ayant ses avantages et 
-inconvénients :
+ARender offers three configurations for converting Office documents to PDF, each with unique strengths and weaknesses:
 
 * **LibreOffice**
-  * **Description** : Convertit les documents Microsoft, OpenOffice et LibreOffice.
-  * **Avantages** : Gratuit et open-source, compatible avec de nombreux formats.
-  * **Inconvénients** : La qualité de conversion peut varier sur les documents complexes ; support limité pour la résolution de problèmes.
-
+    * Description: Converts Microsoft, OpenOffice, and LibreOffice documents.
+    * Pros: Free and open-source, broad file compatibility.
+    * Cons: Conversion quality may vary on complex documents; limited support for issue resolution.
 * **Microsoft Office**
-  * **Description** : Convertit les documents Microsoft, OpenOffice et LibreOffice.
-  * **Avantages** : Excellente qualité de conversion, particulièrement pour les fichiers Office complexes.
-  * **Inconvénients** : Nécessite une licence Microsoft Office, ce qui ajoute un coût supplémentaire.
-
-* **DirectOffice (Recommandé pour une expérience Premium)**
-  * **Description** : Convertit les documents Microsoft ; utilise LibreOffice pour les fichiers OpenOffice et LibreOffice.
-  * **Avantages** : Conversion rapide et de haute qualité ; résolution rapide des problèmes avec le support Uxopian.
-  * **Valeur ajoutée** : Idéal pour les entreprises recherchant une qualité constante et un support technique fiable.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
+    * Description: Converts Microsoft, OpenOffice, and LibreOffice documents.
+    * Pros: Excellent conversion quality, especially for complex Office files.
+    * Cons: Requires a Microsoft Office license, adding cost.
+* **DirectOffice (Recommended for Premium experience)**
+    * Description: Converts Microsoft documents; relies on LibreOffice for OpenOffice and LibreOffice files.
+    * Pros: Fast, high-quality conversion; quick issue resolution through Uxopian support.
+    * Added Value: Ideal for businesses seeking consistent quality and reliable technical support.
 
 
-Aucune action n'est nécessaire, c'est la configuration par défaut :).
 
 
-Pour activer DirectOffice, il doit être configuré pour être associé aux types MIME souhaités :
 
-* Ouvrez le dossier **modules\TaskConversion**
-* Modifiez **application-security.yml**
-* Ajoutez le contenu suivant :
+Nothing to do, it is the default configuration :).
+
+
+
+
+To activate DirectOffice, it must be configured to be associated with the desired mime types:
+
+* Open **modules\TaskConversion**
+* Edit **application-security.yml** 
+* Add the following content:
 
 ```cfg
 mimetype:
@@ -325,123 +343,128 @@ mimetype:
     directoffice: "${mime.type.msoffice.word},${mime.type.msoffice.excel},${mime.type.msoffice.powerpoint}"
 ```
 
-#### Versions de Microsoft Office compatibles
 
-Microsoft Office 2013 et versions ultérieures. Compatible avec Office 365 si le serveur est connecté à Internet. Nous 
-recommandons également de maintenir Office à jour.
+
+#### Microsoft Office supported versions
+
+Microsoft Office 2013 and up. Office 365 compatible if the server is connected to an internet connection. We recommend 
+as well to keep Office up to date.
 
 -------------------------------------------------------------------
-#### Options d'installation
+#### Installation options
 
-**Installation automatique**
+**Scripted installation**
 
-* Téléchargez et décompressez [AromsCheck](/docs/AromsCheck.zip)
-* Exécutez **runCheck.bat** pour un paramétrage automatique.
+* Download and unzip [AromsCheck](/docs/AromsCheck.zip)
+* Run **runCheck.bat** for automatic setup.
 
-**Installation manuelle**
+**Manual installation**
 
-Ignorez cette installation manuelle si l'installation automatique a réussi.
+Skip this manual installation if previous scripted installation was a success.
 
-* Téléchargez et installez les logiciels suivants :
-  * .Net 4.5 : [Télécharger](&lt;https:www.microsoft.comen-usdownloaddetails.aspx?id=30653&gt;)
-  * Microsoft Visual C++ redistribuable 2010 : [Télécharger](&lt;https:www.microsoft.comen-USDownloadconfirmation.aspx?id=14632&gt;)
-  * Microsoft Visual C++ redistribuable 2008 : [Télécharger](&lt;https:www.microsoft.comen-usdownloaddetails.aspx?id=15336&gt;)
+* Download and install the below softwares
+
+    * .Net 4.5: [Download]([https://www.microsoft.com/en-us/download/details.aspx?id=30653](https://www.microsoft.com/en-us/download/details.aspx?id=30653.md).md)
+
+    * Microsoft Visual C++ redistributable 2010: [Download]([https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632](https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632.md).md)
+
+    * Microsoft Visual C++ redistributable 2008: [Download]([https://www.microsoft.com/en-us/download/details.aspx?id=15336](https://www.microsoft.com/en-us/download/details.aspx?id=15336.md).md)
 -------------------------------------------------------------------
 #### Configuration
 
-##### Configuration système Windows
+##### Windows system configuration
 
-**Créez les dossiers système ci-dessous**
+**Create the below system folder**
 ```cfg
 C:\Windows\System32\config\systemprofile\Desktop
 C:\Windows\SysWOW64\config\systemprofile\Desktop
 ```
 
-**Note de configuration importante**
+**Important configuration note**
 
-* Exécutez le service de rendu avec un compte local : Assurez-vous que le compte utilisé (Administrateur ou non) peut 
-  ouvrir Microsoft Office sans fenêtres contextuelles, celles-ci pouvant interrompre le rendu.
-* Configuration de conversion Excel : Ouvrez Excel avec l'utilisateur qui lancera ARender Rendition. Une imprimante par
-  défaut doit être configurée dans Excel (par exemple, une imprimante de sortie XPS) ; sinon, Excel ne pourra pas gérer 
-  la mise en page et les conversions.
-* Évitez les imprimantes de sessions à distance : Ne définissez pas une imprimante de session distante comme imprimante 
-  par défaut, car elle se déconnectera en fin de session, interrompant les conversions.
+* Run Rendition Service with Local Account: Ensure that the account used (Administrator or non-Admin) opens Microsoft Office without pop-ups, as they can interrupt rendering.
+* Excel Conversion Setup: Open Excel with the user that will launch ARender Rendition. The Excel should have a default printer configured (e.g., an XPS output printer); otherwise, Excel won’t handle page setup and conversions.
+* Avoid Remote Session Printers: Avoid setting a forwarded remote session printer as default, as it will disconnect when the session ends, interrupting conversions.
 
-##### Configuration ARender pour Microsoft Office
+##### ARender configuration for Microsoft Office
 
-Pour configurer le rendu de documents Microsoft Office :
-* Ouvrez le dossier suivant : **modules\TaskConversion\aroms2pdf**
-* Modifiez **aroms.properties**
+To configure Microsoft Office document rendering:
+* Open the following folder: **modules\TaskConversion\aroms2pdf**
+* Edit **aroms.properties**
 
-| Propriété            | Valeur par défaut      | Détail |
-| :------------------- | :--------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PDF/A                | false                  | PDFs généré par ARender sont des PDF/A                                                                                                                               |
-| processAutoKill      | false                  | Termine les anciens processus Office au démarrage de Aroms                                                                                                           |
-| TimeoutS             | 120                    | Temps maximum de conversion pris par ARender pour générer un PDF via MS Office. Au delà de ce temps, le processus est terminé                                        |
-| AromsHost            | http://localhost:8000/ | URL sur laquelle Aroms est exposé                                                                                                                                    |
-| LockFields           | false                  | Désactive la mise à jour des champs variable (comme les dates) du document Office                                                                                    |
-| IgnorePrintAreas     | true                   | Désactive l'impression des lignes vides                                                                                                                              |
-| FitSheetOnOnePage    | true                   | True: MS Office va imprimer le document sur une seule page. False: Comportement par défaut de MS Office (découpage en plusieurs page si le document est trop grand). |
+| Properties        |     Default value      |                                                                                                                      Detail |
+| :---------------- | :--------------------: | :-------------------------------------------------------------------------------------------------------------------------- |
+| PDF/A             |         false          |                                                                     PDFs generated by ARender through MS Office are a PDF/A |
+| processAutoKill   |         false          |                                                                                Clean old MS Office processes at Aroms start |
+| TimeoutS          |          120           |                      Maximum time that ARender takes to generates the PDF with MS Office. After that, conversion is aborted |
+| AromsHost         | http://localhost:8000/ |                                                                                       URL on which ARender Aroms is exposed |
+| LockFields        |         false          |                                                               Disable the auto-update of variable field (like a date field) |
+| IgnorePrintAreas  |          true          |                                                                                            Disable the print of empty lines |
+| FitSheetOnOnePage |          true          | True: MS Office will try to print the document in one PDF page. False: MS Office default behavior (split if too much pages) |
 
 
-## PDFOwl : une alternative pour le rendu de documents
+
+
+## PDFOwl: a document renderer alternative
 
 ### Description
 
-Nous avons introduit **PDFOwl** comme alternative au moteur de rendu de documents standard **JNIPdfEngine**.
+We have introduced **PDFOwl** as an alternative to the standard **JNIPdfEngine** for document rendering.
 
-Cette fonctionnalité prend en charge le rendu d’images, de mises en page et de calques, mais ne gère pas encore les 
-filtres d'image ni la fonctionnalité SVG.
 
-Dans la configuration actuelle du moteur de rendu de documents, des erreurs dans la bibliothèque native peuvent 
-entraîner le **crash complet de l'application**, ces problèmes se produisant à un niveau bas et ne pouvant pas être 
-interceptés au niveau de l'application.
+This feature supports images, layouts, and layers rendering, but does not yet include image filter handling or SVG functionality.
 
-Pour renforcer la stabilité, PDFOwl adopte une approche résiliente tout en préservant la performance. Il gère les 
-demandes de rendu via des sous-processus, permettant ainsi de traiter les erreurs sans impact sur le processus principal.
 
-### Installation
+In the existing document-renderer setup, errors within the native library can cause **the entire application to crash**, 
+as these issues occur at a low level and cannot be intercepted at the application level. 
 
-* Accédez à : **modules\RenditionEngine**,
-* Ouvrez ou créez le fichier **application.properties**,
-* Ajoutez la propriété suivante :
+To improve stability, PDFOwl employs a resilient approach that maintains performance while isolating errors. It manages 
+rendering requests through sub-processes, allowing errors to be handled without affecting the main process.
+
+### Setup
+
+* Navigate to: **modules\RenditionEngine**,
+* Open or create the **application.properties** file,
+* Add the following property:
 ```cfg
 micro-services.pdf-renderer=PDFOwl
 ```
 
 ### Configurations
 
-PDFOwl propose plusieurs propriétés configurables avec des valeurs par défaut listées ci-après.
+PDFOwl offers several configurable properties with default values listed below.
 
-Pour modifier ces valeurs :
-* Accédez au dossier : **modules\PDFOwl**,
-* Ouvrez ou créez le fichier **application.properties**,
-* Ajoutez la (ou les) propriété(s) et la (leur) valeur souhaitée.
+To update these properties:
+* Navigate to: **modules\PDFOwl**,
+* Open or create the **application.properties** file,
+* Add the property and its value.
 
 ```cfg
-# Chemin du binaire PdfOwl
+# PdfOwl binary path
 pdfowl.path=pdfowl
-# Timeout d'exécution des commandes pdfowl en millisecondes
+# Timeout for pdfowl commands execution in milliseconds
 pdfowl.client.watchdog=10000
-# Timeout pour les clients pdfOwl inactifs en millisecondes
+# Timeout for idle pdfOwl clients in milliseconds
 pdfowl.client.ttl=30000
-# Limite mémoire utilisée par un thread pour travailler sur un document unique
+# The memory limit used for a thread to work on a single document
 pdfowl.memlimit.mb=1024
 ```
 
+
 ## PDF Configuration
 
-Depuis la version 2023.6.0, nous avons introduit la prise en charge des porte-documents PDF (PDF Portfolio) et les PDF avec pièces jointes.
+Since 2023.6.0, we have introduced the support of PDF Portfolio and PDF with attachments.
 
-Un porte-documents PDF est une collection de plusieurs fichiers (PDF, documents Word, feuilles Excel, images, etc.) combinés dans un seul conteneur PDF.
+A PDF Portfolio is a collection of multiple files (PDFs, Word documents, Excel sheets, images, etc.) combined into a single PDF container.
 
-Un PDF avec pièces jointes est un fichier PDF standard qui contient d'autres fichiers intégrés.
+A PDF with attachments is a standard PDF file that contains other files embedded within it.
 
-### Configurer les porte-documents PDF (PDF Portfolio)
+### Configure PDF Portfolio
 
-Depuis 2023.7.0, elle est désactivée par défaut.
+Since 2023.7.0, it's disabled by default.
 
-Pour activer la fonctionnalité porte-documents PDF, définissez la propriété suivante sur ``true``.
+To enable PDF Portfolio feature, set the following property to ``true``.
+
 
 
 ```cfg
@@ -450,11 +473,13 @@ arender.server.document.pdf.portfolio.enabled=true
 
 
 
-### Configurer les PDF avec pièces jointes
 
-Depuis 2023.7.0, cette fonction est désactivée par défaut.
+### Configure PDF with Attachments
 
-Pour activer la fonctionnalité PDF avec pièces jointes, définissez la propriété suivante sur ``true``.
+Since 2023.7.0, it's disabled by default.
+
+To enable PDF with attachments feature, set the following property to ``true``.
+
 
 
 ```cfg
@@ -464,24 +489,29 @@ arender.server.document.pdf.attachments.enabled=true
 
 
 
-Avant 2023.6.0, le DocumentLayout d'un PDF était de type DocumentPageLayout pour un PDF avec pièces jointes, il ne pouvait donc pas contenir d'informations concernant les fichiers joints.
-
-Mais depuis 2023.6.0, lorsque la propriété est activée, le PDF avec pièces jointes est de type DocumentContainer.
-Dans cette structure :
-- Le premier enfant de la liste ```children``` représente le document PDF lui-même.
-- Le deuxième enfant est un DocumentContainer qui contient tous les fichiers joints au sein du PDF.
 
 
+Before 2023.6.0, the DocumentLayout of a PDF was of type DocumentPageLayout for a PDF with attachments so it was not able to hold information regarding the attachment files.
 
-### Configurer le délai d'expiration du flux de recherche PDF
+But since 2023.6.0, when the property is enabled, PDF with attachments is of type DocumentContainer.
+In this structure:
+- The first child in the ``children`` list represents the PDF document itself.
+- The second child is a DocumentContainer that holds all the attachments files within the PDF.
 
-Depuis la version 2023.12.0, un nouveau point de terminaison permet de rechercher du texte dans une plage de pages spécifique d'un document. La recherche s'exécute pendant une durée définie par la configuration du délai d'expiration du rendu. Si la recherche expire, elle s'arrête à la dernière page activement recherchée. La réponse renvoie alors tous les résultats trouvés jusqu'à ce point, l'état de la recherche et l'index de cette dernière page.
 
-Pour modifier le délai d'expiration, définissez la propriété suivante :
+
+
+### Configure PDF search stream timeout
+
+Since version 2023.12.0, a new endpoint has been available to search for text within a specific page range of a document. The search will run for a duration defined by the Rendition timeout configuration. If the search times out, it will stop at the last page it was actively searching. The response will then return all results found up to that point, the search status, and the index of that last page.
+
+To change the timeout, set the following property to your desire:
+
 
 
 ```cfg
-# Définir le délai d'expiration du flux de recherche PDF en millisecondes
+# Set PDF search streamed timeout in milliseconds
 pdf.search.stream.timeout=500
 ```
+
 

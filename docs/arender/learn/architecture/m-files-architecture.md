@@ -1,14 +1,18 @@
 ---
-title: Architecture dans M-Files
+title: "Architecture in M-Files"
 ---
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-* **N1: M-Files UI**: a la responsabilité de laisser l'utilisateur de M-Files choisir quel document il veut ouvrir dans ARender,
-* **N2: Browser**: va créer la "frame" d'ARender en utilisant l'URL fourni par N1,
-* **N3: ARender WEB-UI**: est un module Spring Boot qui contient le connecteur de M-Files,
-* **N4: M-Files Backend**: contient une API avec laquelle le connecteur ARender va interagir pour aller chercher les documents 
-(et si besoin les annotations, les métadonnées ou les nouvelles versions de documents),
-* **N5: ARender Rendition**: va générer des images, extraire du texte et plus. Contient également le connecteur de M-Files.
+
+
+
+
+
+![image](/img/arender/diagrams/ARender-Architecture-M-Files.png)
+
+* **N1: M-Files UI**: has the responsibility to let the M-Files user choose which documents he wants to open in ARender,
+* **N2: Browser**: will create the ARender frame using the URL provided by N1,
+* **N3: ARender WEB-UI**: is Spring Boot module which contains the M-Files connector,
+* **N4: M-Files Backend**: contains API which ARender connector will interact with to fetch documents (and if needed fetch annotations 
+  and metadata and create new documents or new version of documents),
+* **N5: ARender Rendition**: will generate images, extract text and more. Contains M-Files connector too.

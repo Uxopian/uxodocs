@@ -1,27 +1,58 @@
 ---
-title: Performance serveur / modification serveur
+title: "Server performance / Set server"
 ---
 
-## Afficher les performances serveur
-
-Une servlet est déployée permettant d'afficher les performances de chaque serveur.
-Ces performances seront envoyés dans un fichier, si le paramètre `format` est vide, non envoyé dans l'URL ou égal à `HTML`, le fichier sera un fichier HTML. 
-Sinon le fichier sera un fichier JSON. 
-
-### Requête 
-
-Cette fonctionnalité est accessible via la servlet : **weatherServlet**
-
-La requête est utilisable uniquement en GET
 
 
-#### Exemple d'utilisation
+
+
+
+
+## Server performance
+
+A servlet is deployed to display the performance of each server.
+These performances will be sent as a file, if the `format` parameter is empty, not given in the URL, or equal to `HTML`, the file will be an HTML file.
+Otherwise the file will be a JSON file.
+
+### Request 
+
+This functionality is accessible via the servlet: **weatherServlet**
+
+Usable in GET
+
+
+#### Request example
 
 ``` bash
-curl -X GET 'http://<!-- Commentaire nettoyé -->" 'http://<arender_host>/ARender/arendergwt/weatherServlet'
+curl -X GET 'http://<arender_host>/ARender/arendergwt/weather?format=type'
 ```
-* arender_rendition_host : l'adresse du serveur à ajouter.
 
-### Réponse de la servlet
+* format: the format of the returned file (optional)
 
-Pour s'assure de l'ajout du serveur, il est possible d'utiliser la requête GET qui vous donnera les performances de chacun de vos serveurs.
+### Servlet Response
+
+Performance of each server will be displayed in a file.
+If the `format` parameter is empty, not given in the URL or equals to `HTML` the file will be an HTML file. 
+Otherwise the file will be a JSON file.
+
+## Set server
+
+A servlet is deployed to add a server thanks to its address.
+
+### Request 
+
+This functionality is accessible via the servlet: **weatherServlet**
+
+Usable in POST
+
+#### Request example
+
+``` bash
+curl -X POST -d "<arender_rendition_host>" 'http://<arender_host>/ARender/arendergwt/weatherServlet'
+```
+
+* arender_rendition_host : new server address to add.
+
+### Servlet Response
+
+To make sure the server is added, it is possible to use the GET query which will give you the performance of each of your servers.

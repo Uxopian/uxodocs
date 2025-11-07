@@ -1,35 +1,40 @@
 ---
-title: Obtenir les destinations nommées (GET)
+title: "GET Named Destinations"
 ---
 
-Cette API vous permet de récupérer les destinations nommées d'un document spécifique.
-
-## Description de l'API
 
 
-Endpoint :
+
+
+
+
+This API allows you to retrieve the named destinations of a specific document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/destinations
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
-Réponse :
+Response :
 
-| Type              | Description                                |
-|:------------------|:-------------------------------------------|
-| NamedDestinations | Liste des destinations nommées du document |
+| Type              | Description                                                       |
+|:------------------|:------------------------------------------------------------------|
+| NamedDestinations | A JSON object representing the named destinations of the document |
 
-## Exemples
+## Examples
 
-### Récupérer les destinations nommées
+### Retrieve Named Destinations
 
-L'exemple suivant récupère les destinations nommées d'un document 
-avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
+The following example retrieves the named destinations for a document 
+with ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
 
 ```bash
 curl -X GET 'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/destinations' \

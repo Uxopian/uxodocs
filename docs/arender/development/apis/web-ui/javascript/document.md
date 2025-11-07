@@ -1,84 +1,134 @@
 ---
-title: Ouverture de document
+title: "Opening a document"
 ---
 
-## Ouvrir des documents
 
-- Objet : getARenderJS()
 
-```xml
-<!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->Fonction<!-- Commentaire nettoyé -->Description<!-- Commentaire nettoyé -->Arguments<!-- Commentaire nettoyé -->
-  <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->loadDocument(url, callback)<!-- Commentaire nettoyé -->
+
+
+
+
+## Opening documents
+
+- Object: getARenderJS()
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+      <th>Arguments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>loadDocument(url, callback)</td>
+      <td>
+        Loads a document providing an URL. It will provide an ARender Id back.
+        <p><em><strong>Note</strong>: This is purely a server-side operation, asynchronous at client side.</em></p>
+      </td>
+      <td>
+        <p><strong>url:</strong> the URL to open;<br/>
+        <strong>callback:</strong> the callback function to call when the Id is provided by the server.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>openDocument(id, resetUI)</td>
+      <td>Opens a document with the <strong>id</strong>.<br/> If the value of <strong>resetUI</strong> is true, or if it is not provided, the UI resets to its initial state; otherwise, the UI remains unchanged.</td>
+      <td><strong>id:</strong> ARender id<br/> <strong>resetUI:</strong> Reset or not the UI</td>
+    </tr>
+    <tr>
+      <td>askChangePage(type, index)</td>
+      <td>Changes the current page.</td>
+      <td>
+        <p><strong>type:</strong> 'Relative', 'Index' or 'Absolute';<br/>
+        <strong>index:</strong> -1 or 1 for 'Relative' or 'Absolute', otherwise the page number.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>enablePDFDocumentHyperlinks(boolean)</td>
+      <td>Activate/de-activate the internal hyperlinks of a document.</td>
+      <td><strong>boolean:</strong> Load internal hyperlinks of a document if true, unload them otherwise.</td>
+    </tr>
+    <tr>
+      <td>disallowClickOnHyperlinks(boolean)</td>
+      <td>Allow/disallow clicks on a document hyperlink for ARender.</td>
+      <td><strong>boolean:</strong> if true, disallow internal hyperlinks of a document, allow them otherwise.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+      <th>Arguments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>loadDocument(url, callback)</td>
+      <td>
+        Loads a document providing an URL. It will provide an ARender Id back.
+        <p><em><strong>Note</strong>: This is purely a server-side operation, asynchronous at client side.</em></p>
+      </td>
+      <td>
+        <p><strong>url:</strong> the URL to open;<br/>
+        <strong>callback:</strong> the callback function to call when the Id is provided by the server.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>openDocument(id)</td>
+      <td>Opens a document.</td>
+      <td><strong>id:</strong> ARender id</td>
+    </tr>
+    <tr>
+      <td>askChangePage(type, index)</td>
+      <td>Changes the current page.</td>
+      <td>
+        <p><strong>type:</strong> 'Relative', 'Index' or 'Absolute';<br/>
+        <strong>index:</strong> -1 or 1 for 'Relative' or 'Absolute', otherwise the page number.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>enablePDFDocumentHyperlinks(boolean)</td>
+      <td>Activate/de-activate the internal hyperlinks of a document.</td>
+      <td><strong>boolean:</strong> Load internal hyperlinks of a document if true, unload them otherwise.</td>
+    </tr>
+    <tr>
+      <td>disallowClickOnHyperlinks(boolean)</td>
+      <td>Allow/disallow clicks on a document hyperlink for ARender.</td>
+      <td><strong>boolean:</strong> if true, disallow internal hyperlinks of a document, allow them otherwise.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+```js
+// Loads the PDF reference document
+getARenderJS().loadDocument(
+    "loadingQuery?url=http://www.arender.fr/pdf/pdf/PDFReference15_v5.pdf", 
+    function(id) { getARenderJS().openDocument(id); }
+  );
+// Move to page 24 (note that page index is starting at 0. So page 1 has index 0)
+getARenderJS().askChangePage('Index',23);
+// Move to last page
+getARenderJS().askChangePage('Absolute',1);
 ```
-        Charge un document en fournissant l'URL. La fonction renvoie l'Id ARender.
-```xml
-        <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-        <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->openDocument(id, resetUI)<!-- Commentaire nettoyé -->
-```
-```xml
-        Ouvre un document avec l'<!-- Commentaire nettoyé -->
-```
-```xml
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->**type :** 'Relative', 'Index' ou 'Absolute';
-```
-```xml
-        **index :** -1 ou 1 pour 'Relative' ou 'Absolute'. Sinon, mettre le numéro de la page.<!-- Commentaire nettoyé -->
-```
-```xml
-    <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-  <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
-  <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->****Note :** Cette opération est uniquement côté serveur, Asynchrone côté client.**<!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->**url :** l'URL à ouvrir;
-```
-```xml
-        **callback :** Callback pour la fonction à appeler lorsque l'Id est fourni par le serveur.<!-- Commentaire nettoyé -->
-```
-```xml
-    <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->**type :** 'Relative', 'Index' ou 'Absolute';
-```
-```xml
-        **index :** -1 ou 1 pour 'Relative' ou 'Absolute'. Sinon, mettre le numéro de la page.<!-- Commentaire nettoyé -->
-```
-```xml
-    <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-      <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->)
-```
+
+
+
+In the example above, **loadDocument** returns an ID (in the form of a string starting with "b64_") that will allow manipulation of the document in the ARender view.
+
+**openDocument** is then called with the ID of the loaded document as a parameter, thereby displaying the document in question.
+
+## Multiple document opening
+
+ARender provides the possibility to open several documents by loading a list of documents which will be provided via JSON in order to define the tree structure. All the technical details can be found [here](./content/learn/how-to/composite-accessors.en.md)

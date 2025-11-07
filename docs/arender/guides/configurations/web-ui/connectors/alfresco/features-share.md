@@ -1,36 +1,57 @@
 ---
-title: Fonctionnalités Alfresco Share
+title: "Features Alfresco Share"
 ---
 
-## Configurer ARender pour des groupes spécifiques
 
-Pour configurer le viewer ARender pour des groupes spécifiques Alfresco, veuillez suivre la procédure suivante :
 
-- Aller sur la page de déploiement de module : **/share/page/modules/deploy**
-- Choisir le module ARender : **ARender Preview Plugin**
-- Sélectionner l'évaluateur de droite : **group.module.evaluator**
-- Dans le *Evaluator Properties* :
+
+
+
+
+## ARender for specific groups only
+
+To set ARender viewer to specific Alfresco groups only, follow the below procedure:
+
+- Go to the module deployment page: **&lt;host name&gt;/share/page/modules/deploy**
+- Choose the ARender module: **ARender Preview Plugin**
+- Select the evaluator on the right: **group.module.evaluator**
+- In the *Evaluator Properties* :
 
 ```yaml
 negate : false
 
 relation : OR
 
-groups :  
+groups : <group name>
 ```
 
-## Configurer les types de document à ouvrir avec ARender
+## Configure document types to open with ARender
 
-Pour sélectionner les types de document à ouvrir avec ARender, les autres seront ouverts avec le viewer par défaut configuré dans votre système.
+To configure which type of document should be opened with ARender (other will be opened by the default viewer configured), add the below configuration:
 
-Pour cela ajouter le contenu indiqué ci-dessous :
 
 ``` xml
-
-        
-    
-
-        
-    
-
+<config evaluator="string-compare" condition="ArenderExclusion">
+        <viewerMimeTypes>{mimeType1},{mimeType2},...,{mimeTypeN}</viewerMimeTypes>
+    <!-- exemple : <viewerMimeTypes>"application/msword,image/vnd.dwg,image/x-dwg,image/x-dwf</viewerMimeTypes-->
+</config>
 ```
+
+
+## Configure document types to convert to PDF using ARender
+
+ARender plugin for Alfresco Share can ask a conversion of the Document to PDF, before viewing it.
+
+It has the advantage to show the document faster, especially for complex document like AutoCAD.
+
+Configuration is done like below:
+
+
+``` xml
+<config evaluator="string-compare" condition="ArenderExclusion">
+        <renditionMimeTypes>{mimeType1},{mimeType2},...,{mimeTypeN}</renditionMimeTypes>
+    <!-- exemple : <renditionMimeTypes>"application/msword,image/vnd.dwg,image/x-dwg,image/x-dwf</renditionMimeTypes-->
+</config>
+```
+
+

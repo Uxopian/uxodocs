@@ -1,14 +1,21 @@
 ---
-title: Groupe d'annotations
+title: "Group annotations"
 ---
 
-L'assignation d'un groupe à une annotation se fait avec l'utilisation de la propriété *Security* qui permet de stocker une valeur désignant l'appartenance à un groupe.
 
-Par défaut, seulement deux valeurs sont utilisables :
-- Privé
-- Publique
 
-La liste de valeur est configurable. Une propriété doit être activée afin de visualiser la liste déroulante en étant en mode d'édition d'annotation.
+
+
+
+
+The assignment of a group to an annotation is done with the use of the *Security* property which makes it possible to store the group name of the annotation.
+
+By default, only two values ​​can be used :
+- Private
+- Public
+
+The list of values ​​is configurable. The following property must be enabled in order to view the dropdown list while in annotation edit mode.
+
 
 
 ```cfg
@@ -16,141 +23,193 @@ arender.server.annotations.text.security.support=true
 ```
 
 
-## Modification par configuration
 
-La liste de groupe d'annotation est configurable.
+## Modification by configuration
 
-Exemple de configuration du bean qui va peupler la liste de groupe d'annotation :
+The annotation group list is configurable.
+
+Example of configuration of the bean that will populate the annotation group list:
+
 
 
 ```cfg
-**
-    <!-- Commentaire nettoyé -->
-            **
-                
-                
-                    <!-- Commentaire nettoyé -->
-                        <entry>
-                    <!-- Commentaire nettoyé -->
-            **
-            **
-                
-                
-                    <!-- Commentaire nettoyé -->
-                        <entry>
-                    <!-- Commentaire nettoyé -->
-            **
-            **
-                
-                
-                    <!-- Commentaire nettoyé -->
-                        <entry>
-                    <!-- Commentaire nettoyé -->
-            **
-        <!-- Commentaire nettoyé -->
-**
+<bean id="availableSecurityLevels" class="java.util.ArrayList">
+    <constructor-arg>
+        <list>
+            <bean
+                class="com.arondor.viewer.annotation.common.SecurityLevel">
+                <property name="symbolicName" value="group1" />
+                <property name="localizedDisplayNames">
+                    <map>
+                        <entry key="fr" value="Groupe 1" />
+                        <entry key="en" value="Group 1" />
+                    </map>
+                </property>
+            </bean>
+            <bean
+                class="com.arondor.viewer.annotation.common.SecurityLevel">
+                <property name="symbolicName" value="group2" />
+                <property name="localizedDisplayNames">
+                    <map>
+                        <entry key="fr" value="Groupe 2" />
+                        <entry key="en" value="Group 2" />
+                    </map>
+                </property>
+            </bean>
+            <bean
+                class="com.arondor.viewer.annotation.common.SecurityLevel">
+                <property name="symbolicName" value="group3" />
+                <property name="localizedDisplayNames">
+                    <map>
+                        <entry key="fr" value="Groupe 3" />
+                        <entry key="en" value="Group 3" />
+                    </map>
+                </property>
+            </bean>
+        </list>
+    </constructor-arg>
+</bean>
 ```
 
 
 
-Visuellement, une liste déroulante s'affiche dans le toppanel à l'édition d'une annotation.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Visually, a dropdown list is displayed in the toppanel when editing an annotation.
 
-## Modification par le connecteur
+![image](/img/arender/documentation/GroupeAnnotations/groupeannotation1.png)
 
-Dans la classe Java qui implémente l'interface *DocumentAccessor*, vous pouvez changer l'implémentation du setter pour l'*AnnotationAccessor* afin de définir une nouvelle liste de valeur pour les groupes d'annotation. 
+## Modification by connector
 
-Voici un exemple basique d'implémentation de la fonction *setAnnotationAccessor* qui va définir une nouvelle liste de valeur :
+In the Java class that implements the *DocumentAccessor* interface, you can change the setter implementation for the *AnnotationAccessor* to define a new list of values ​​for annotation groups.
+
+Here is a basic example of the implementation of the function *setAnnotationAccessor* which will define a new list of values:
 
 ```java
 
 @Override
 @JsonIgnore
 public void setAnnotationAccessor(AnnotationAccessor annotationAccessor) throws AnnotationsNotSupportedException
-<!-- Commentaire nettoyé -->
+
+    this.annotationAccessor = annotationAccessor;
+
+    List&lt;SecurityLevel&gt; list = new ArrayList<>();
+    list.add(buildSecuriyLevel("group1", "Groupe 1", "Group 1"));
+    list.add(buildSecuriyLevel("group2", "Groupe 2", "Group 2"));
+    list.add(buildSecuriyLevel("group3", "Groupe 3", "Group 3"));
+    annotationAccessor.getAnnotationCreationPolicy().setAnnotationsSupportSecurity(true);
+    annotationAccessor.getAnnotationCreationPolicy().setAvailableSecurityLevels(list);
 
 private SecurityLevel buildSecuriyLevel(String symbolicName, String fr, String en)
-<!-- Commentaire nettoyé -->
+
+    SecurityLevel securityLevel = new SecurityLevel();
+    securityLevel.setSymbolicName(symbolicName);
+    securityLevel.setLocalizedDisplayNames(buildLocalizedDisplayNames(fr, en));
+    return securityLevel;
 
 private Map<String, String> buildLocalizedDisplayNames(String fr, String en)
-<!-- Commentaire nettoyé -->
+
+    Map<String, String> map = new HashMap<>();
+    map.put("fr", fr);
+    map.put("en", en);
+    return map;
 
 ```
 
 
 
-## Garder la notion d'annotation privée
+## Keep the notion of private annotation
 
-```xml
-La notion d'annotation privée est compatible avec la notion de groupe d'annotation. Il faut garder la définition de *property name="symbolicName" value="private"*. La description des annotations privées est trouvable à la section *Annotation securities configuration* dans la page [Annotation](<!-- Commentaire nettoyé -->)
-```
+The notion of private annotation is compatible with the notion of an annotation group. We must keep the definition of *property name = "symbolicName" value = "private"*. The description of private annotations can be found in the section *Annotation securities configuration* in the page [Annotation](./learn/how-to/annotation.en.md)
 
-Exemple de configuration du bean qui va peupler la liste de groupe d'annotation avec le choix *Privé* :
+Example of configuration of the bean that will populate the annotation group list with the *Private* choice:
+
 
 
 ```cfg
-**
-    <!-- Commentaire nettoyé -->
-            **
-                
-                
-                    <!-- Commentaire nettoyé -->
-                        <entry>
-                    <!-- Commentaire nettoyé -->
-            **
-            **
-                
-                
-                    <!-- Commentaire nettoyé -->
-                        <entry>
-                    <!-- Commentaire nettoyé -->
-            **
-            **
-                
-                
-                    <!-- Commentaire nettoyé -->
-                        <entry>
-                    <!-- Commentaire nettoyé -->
-            **
-            **
-                
-                
-                    <!-- Commentaire nettoyé -->
-                        <entry>
-                    <!-- Commentaire nettoyé -->
-            **
-        <!-- Commentaire nettoyé -->
-**
+<bean id="availableSecurityLevels" class="java.util.ArrayList">
+    <constructor-arg>
+        <list>
+            <bean
+                class="com.arondor.viewer.annotation.common.SecurityLevel">
+                <property name="symbolicName" value="private" />
+                <property name="localizedDisplayNames">
+                    <map>
+                        <entry key="fr" value="Privé" />
+                        <entry key="en" value="Private" />
+                    </map>
+                </property>
+            </bean>
+            <bean
+                class="com.arondor.viewer.annotation.common.SecurityLevel">
+                <property name="symbolicName" value="group1" />
+                <property name="localizedDisplayNames">
+                    <map>
+                        <entry key="fr" value="Groupe 1" />
+                        <entry key="en" value="Group 1" />
+                    </map>
+                </property>
+            </bean>
+            <bean
+                class="com.arondor.viewer.annotation.common.SecurityLevel">
+                <property name="symbolicName" value="group2" />
+                <property name="localizedDisplayNames">
+                    <map>
+                        <entry key="fr" value="Groupe 2" />
+                        <entry key="en" value="Group 2" />
+                    </map>
+                </property>
+            </bean>
+            <bean
+                class="com.arondor.viewer.annotation.common.SecurityLevel">
+                <property name="symbolicName" value="group3" />
+                <property name="localizedDisplayNames">
+                    <map>
+                        <entry key="fr" value="Groupe 3" />
+                        <entry key="en" value="Group 3" />
+                    </map>
+                </property>
+            </bean>
+        </list>
+    </constructor-arg>
+</bean>
 ```
 
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
+![image](/img/arender/documentation/GroupeAnnotations/groupeannotation2.png)
 
 
-## Comment utiliser la notion de groupe
+## How to use the notion of group
 
-Maintenant que les annotations ont une notion de groupe, il est possible, par exemple, de rendre non modifiable les annotations dans le groupe "privé".
+Now that the annotations have a notion of group, it is possible, for example, to make the annotations in the "private" group non-modifiable.
 
-Exemple dans l'implémentation de l'*AnnotationAccessor* qui va créer ou mettre à jour les annotations non modifiable si le groupe est "privé" : 
+Example in the implementation of the *AnnotationAccessor* which will create or update the non-modifiable annotations if the group is "private" :
 ```java
 
 @Override
-public void create(List<!-- Commentaire nettoyé --> annotations) throws AnnotationsNotSupportedException, AnnotationNotAvailableException, AnnotationCredentialsException, InvalidAnnotationFormatException
-<!-- Expression supprimée -->;
+public void create(List&lt;Annotation&gt; annotations) throws AnnotationsNotSupportedException, AnnotationCredentialsException, InvalidAnnotationFormatException, AnnotationNotAvailableException
 
-    // Code custom + appel à la base de donnée pour mettre à jour les annotations
-}
+    updateAnnotationSecurity(annotations);
 
-private void updateAnnotationSecurity(List<Annotation> annotations)
-<!-- Expression supprimée -->;
-        }
-    }
-}
+    // Custom code + call to database to store the annotations
+
+@Override
+public void update(List&lt;Annotation&gt; annotations) throws AnnotationsNotSupportedException, AnnotationNotAvailableException, AnnotationCredentialsException, InvalidAnnotationFormatException
+
+    updateAnnotationSecurity(annotations);
+
+    // Custom code + call to database to update the annotations
+
+private void updateAnnotationSecurity(List&lt;Annotation&gt; annotations)
+
+    for(Annotation annotation : annotations)
+
+        if("private".equals(annotation.getSecurity()))
+
+            annotation.getFlags().setLocked(true);
+            annotation.getFlags().setReadonly(true);
+
+
 
 ```

@@ -1,99 +1,115 @@
 ---
-title: Recherche
-description: Fonctionnalités de recherche dans ARender
-sidebar_position: 2
-keywords: ["feature", "recherche", "avancée"]
+title: "Search"
 ---
 
-# Recherche
 
-## Rechercher du texte
 
-Cliquer sur la zone de recherche et saisir le(s) terme(s) recherché(s)
 
-![Zone de recherche](/img/docusaurus.png)
 
-Par exemple, entrer « Document » et taper sur « Entrée »
 
-![Résultat recherche](/img/docusaurus.png)
 
-## Recherche avancée
+## Search text
+Click on the "Search text" area and enter the text you need to search.
 
-### Généralité 
 
-La recherche avancée est accessible à partir de l'explorateur de recherches. Par défaut, elle est activée.
-La largeur de l'explorateur est configurable.
+![image](/img/arender/new/search1.png)
 
-![Explorateur de recherche](/img/docusaurus.png)
 
-| Propriété                        | Description                              | Valeur par défaut |
-| -------------------------------- | ---------------------------------------- | ----------------- |
-| advanced.searchexplorer.enabled  | Active l'explorateur de recherche        | true              |
-| documentnavigator.search.width   | Changer la largeur de l'explorateur      | 400               |
+For example, enter "Solution" as word and click on "Enter" key:
+
+
+![image](/img/arender/new/search2.png)
+
+## Advanced search
+### General
+Advanced search is accessible from the search explorer. By default, it is enabled.
+The width of the explorer is configurable.
+
+
+![image](/img/arender/features/search/search-explorer.png)
+
+
+| Property                         | Description                      | Default value  |
+| -------------------------------- | -------------------------------- | -------------- |
+| advanced.searchexplorer.enabled  | Activate search explorer         | true           |
+| documentnavigator.search.width   | Change the width of the explorer | 400            |
+
+
 
 ```cfg
 advanced.searchexplorer.enabled=true
 ```
 
-### Utilisation
 
-Cliquez sur la zone de recherche et saisissez le(s) terme(s) à rechercher.
 
-#### Options de recherches
 
-Plusieurs options de recherches sont à votre disposition.
+### Use
+Click on the search box and enter the term(s) you are looking for.
 
-A droite de la zone de recherche il y a : 
-* Le bouton activant la sensibilité à la casse : les textes en majuscules et minuscules peuvent être traités comme distincts (sensibilité à la casse) ou équivalent (insensibilité à la casse).
-* Le bouton activant la sensibilité aux accents : la sensibilité de l'accent est liée à la prise en compte des accents.
-* Le bouton activant les expressions régulières : les expressions régulières ("regex") sont des modèles utilisés pour faire correspondre les combinaisons de caractères dans les chaînes.
 
-![Options de recherche](/img/docusaurus.png)
+#### Search Options
+Several search options are available.
 
-Si vous cliquez sur le bouton à gauche de la zone de recherche, deux listes déroulantes apparaissent.
 
-La liste déroulante de gauche permet de choisir l'étendue de la recherche :
-* Le document entier 
-* Page courante
-* Tous les documents
+To the right of the search area there are:
+* Case-sensitive button: upper and lower case texts can be treated as separate (case-sensitive) or equivalent (case-insensitive).
+* The accents sensitive button: the sensitivity of the accent is linked to the consideration of accents.
+* Regular expressions button: Regular expressions (“regex”) are templates used to match character combinations in strings.
 
-La liste déroulante de droite permet de choisir le contenu cible de la recherche : 
-* Avec les annotations
-* Sans les annotations
-* Seulement les annotations 
 
-![Options avancées](/img/docusaurus.png)
+ ![image](/img/arender/features/search/sensitive-button-en.png)
 
-#### Lancer la recherche
 
-ARender propose plusieurs types de recherche : 
-* La recherche classique 
-* La recherche qui surligne le texte correspondant à la recherche sur le document 
-* La recherche qui biffe le texte correspondant à la recherche sur le document 
+If you click on the button to the left of the search box, two drop-down lists will appear.
 
-Si vous avez activé la propriété permettant de biffer un document et que vous avez les droits pour, le bouton de recherche et biffer apparaîtra.
 
-Le bouton correspondant à la recherche qui surligne les résultats est activé par défaut.
+The drop-down list on the left allows you to choose the scope of the search:
+* The whole document
+* Current page
+* All documents
 
-| Propriété                                         | Description                               | Valeur par défaut |
-| ------------------------------------------------- | ----------------------------------------- | ----------------- |
-| advanced.searchexplorer.search.highlight.enabled  | Active le bouton chercher et surligner    | true              |
+
+
+The drop-down list on the right allows you to choose the target content of the search:
+* With annotations
+* Without annotations
+* Only annotations
+
+
+![image](/img/arender/features/search/list-box-en.png)
+
+
+
+#### Launch the search
+ARender offers several types of search:
+* The classic search
+* The search that highlights the text corresponding to the search on the document
+* The search that redact the text corresponding to the search on the document
+
+
+If you have enabled the redact property and you have the rights to it, the search and delete button will appear.
+
+
+The search button that highlights the results is enabled by default.
+
+| Property                                          | Description                                | Default value     |
+| ------------------------------------------------- | ------------------------------------------ | ----------------- |
+| advanced.searchexplorer.search.highlight.enabled  | Activate the search and highlight button   | true              |
+
+
+
+
 
 ```cfg
 advanced.searchexplorer.search.highlight.enabled=true
 ```
 
-Les résultats apparaîtront dans l'explorateur de recherche et le texte correspondant à la recherche sera mis en avant sur le document.
 
-#### Gestion des résultats de recherche
 
-Grâce aux boutons d'en tête vous pouvez rafraîchir les résultats de recherche (1) , réinitialiser la recherche (2) et réduire/développer l'affichage des résultats (3).
 
-![Gestion résultats](/img/docusaurus.png)
+The results will appear in the search explorer and the text corresponding to the search will be highlighted on the document.
 
-Par exemple, entrer « Document » et taper sur « Entrée ».
+#### Management of research results
+With the header buttons you can refresh the search results (1), reset the search (2) and reduce/expand (3) the display of the results.
 
-## Recherche avancée
-### Généralité 
-La recherche avancée est accessible à partir de l'explorateur de recherches. Par défaut, elle est activée.
-La largeur de l'explorateur est configurable.
+![image](/img/arender/features/search/header-buttons.png)

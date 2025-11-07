@@ -1,23 +1,27 @@
 ---
-title: Ajout de type mime image/vidéo supportés
+title: "Add new image/video mime types"
 ---
 
-Si votre serveur de rendition ne possède pas tous les types mimes que
-vous souhaitez utiliser, il est possible que le serveur puisse tout de
-même convertir votre fichier.
 
-Dans le cas d'une conversion image ou vidéo, la liste exhaustive des
-fichiers images/vidéos supportés par imagemagick/ffmpeg est longue.
 
-Si vous souhaitez rajouter un type mime, il suffit de créer/modifier le
-fichier *application.properties* devant être situé dans le dossier 
-modules/RenditionEngine et le fichier *application-security.yaml* situé
-dans le dossier modules/RenditionEngine de votre rendition.
-Ce fichier viendra surcharger le fichier de configuration de base.
 
-Le fichier *application.properties* dans modules/RenditionEngine avec les les types mime par défaut, 
-à modifier pour ajouter/supprimer les types mime voulus :
 
+
+
+If your rendition server does not possess all the mime types that you
+wish to use, it is then still possible that the rendition server could
+convert your file.
+
+In the specific case of video/image conversion, the full list of files
+that can opened by imagemagick/ffmpeg is long.
+
+If you wish to add a mime type, you just need to create/modify the
+*application.properties* file located in the modules/RenditionEngine 
+and *application-security.yaml* file located in the modules/TaskConversion folder of your rendition.
+This file will override the basic configuration file.
+
+The *application.properties* at modules/RenditionEngine file with the default mime types,
+to modify to add/remove the desired mime types:
 
 ``` cfg
 
@@ -44,11 +48,10 @@ arender.format.conversionTargetMimeTypes.application-pdf=text/rtf,application/ms
   text/html,\
   text/plain
 ```
+<br/>
 
-
-
-Le fichier *application-security.yaml* dans modules/TaskConversion avec les types mime par défaut,
-à modifier pour ajouter/supprimer les types mime voulus au bon convertisseur
+The *application-security.yaml* at modules/TaskConversion file with the default mime types,
+to modify to add/remove the desired mime types to the right converter:
 
 ``` yaml
 

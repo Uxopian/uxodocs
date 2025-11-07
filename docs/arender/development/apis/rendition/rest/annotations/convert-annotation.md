@@ -1,41 +1,48 @@
 ---
-title: Demander une conversion d'annotations
+title: "POST annotation conversions"
 ---
 
-Cette API permet de demander les annotations d'un document au format demandé
 
-## Description technique de l'API
 
-Point de terminaison :
+
+
+
+
+
+This API allows you to convert annotations from an existing document id.
+
+## API technical description
+
+Entry point:
 ```bash
 POST /annotations/conversion
 ```
 
-Paramètre de requête :
+Query Param:
 
-| Variable             | Type   | Requis | Description                                                                          |
-| :------------------- |:-------|:-------|:-------------------------------------------------------------------------------------|
-| sourceType           | String | oui    | Le type actuel des annotations du document, les valeurs acceptées sont XFDF or FDF.  |
-| targetType           | String | oui    | Le type attendu des annotations du document, les valeurs acceptées sont XFDF or FDF. |
-| documentId           | String | oui    | L'id du document contenant les annotations.                                          |
+| Variable             | Type   | Required | Description                                                                                   |
+| :------------------- |:-------|:---------|:----------------------------------------------------------------------------------------------|
+| sourceType           | String | yes      | The source annotation format type, the accepted values are XFDF or FDF.                       |
+| targetType           | String | yes      | The target annotation format type, the accepted values are XFDF or FDF.                       |
+| documentId           | String | yes      | The ID of the requested document.                                                             |
 
-En-tête:
+Header:
 
-| Variable             | Type     | Requis   | Description                                |
-| :------------------- |:---------|:---------|:-------------------------------------------|
-| Accept               | String   | oui      | Le format attendu en retour de la requête. |
- 
-Réponse :
+| Variable             | Type   | Required | Description                                                                                   |
+| :------------------- |:-------|:---------|:----------------------------------------------------------------------------------------------|
+| Accept               | String | yes      | The format output type, the accepted values are application/json or application/octet-stream. |
 
-| Attribute             | Type                     | Description                                   |
-| :-------------------- | :----------------------- |:----------------------------------------------|
-| annotations           | InputStream ou JSON      | Les annotations converties au format demandé. |
+Response:
 
-## Exemples
+| Attribute             | Type                     | Description                                    |
+| :-------------------- | :----------------------- |:-----------------------------------------------|
+| annotations           | InputStream or JSON      | The annotations for the requested document id. |
 
-### Conversion des annotations d'un document
+## Examples
 
-L'appel suivant génère une requête de conversion des annotations XFDF vers FDF pour le document avec l'id _b64_bG9jYWxlPWZyJnJhbmRvbVVVSUQ9ZmFjMTgyOWItYjc0Ni00ZGVlLTg1YWEtNTZhNzY4NTcyOGMx_ et renvoie le résultat sous la forme d'un InputStream.
+### Convert annotations for a specified document
+
+The call below generates a request to convert the XFDF annotations for the document with id _b64_bG9jYWxlPWZyJnJhbmRvbVVVSUQ9ZmFjMTgyOWItYjc0Ni00ZGVlLTg1YWEtNTZhNzY4NTcyOGMx_ to FDF and get the result as InputStream.
 
 ```bash
 $ curl -X 'POST'\

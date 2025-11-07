@@ -1,16 +1,22 @@
 ---
-title: Quick menu
+title: "Quick menu"
 ---
 
-## Généralités
 
-| Description                                                                       | Clé du paramètre                       | Valeur par défaut | Type    |
-| --------------------------------------------------------------------------------- | -------------------------------------- | ----------------- | ------- |
-| Activation du quick menu                                                          | quick.contextual.menu.enabled          | true              | Booléen |
-| Activation du bouton de création d'annotation texte surligné                      | quick.contextual.menu.hasHighlightText | true              | Booléen |
-| Activation du bouton de création d'annotation texte barré                         | quick.contextual.menu.hasStrikeoutText | true              | Booléen |
-| Activation du bouton de création d'annotation texte souligné                      | quick.contextual.menu.hasUnderlineText | true              | Booléen |
-| Activation du bouton de création de liens hypertextes                             | quick.contextual.menu.hasHyperlink     | true              | Booléen |
-| Activation du bouton de création de liens hypertextes avec une zone pour la cible | quick.contextual.menu.hasHyperlinkZone | true              | Booléen |
-| Activation du bouton de biffage du texte                                          | quick.contextual.menu.hasRedactText    | true              | Booléen |
-| Activation du bouton de copie du texte                                            | quick.contextual.menu.hasCopyText      | true              | Booléen |
+
+
+
+
+
+## General
+
+| Description                                                      | Parameter Key                          | Default value | Type    |
+| ---------------------------------------------------------------- | -------------------------------------- | ------------- | ------- |
+| Enable quick menu                                                | quick.contextual.menu.enabled          | true          | Boolean |
+| Enable button to create highlight text annotation                | quick.contextual.menu.hasHighlightText | true          | Boolean |
+| Enable button to create strikeout text annotation                | quick.contextual.menu.hasStrikeoutText | true          | Boolean |
+| Enable button to create underline text annotation                | quick.contextual.menu.hasUnderlineText | true          | Boolean |
+| Enable button to create hyperlink annotation                     | quick.contextual.menu.hasHyperlink     | true          | Boolean |
+| Enable button to create hyperlink annotation with zone as target | quick.contextual.menu.hasHyperlinkZone | true          | Boolean |
+| Enable button to create redact text                              | quick.contextual.menu.hasRedactText    | true          | Boolean |
+| Enable button to create copy text                                | quick.contextual.menu.hasCopyText      | true          | Boolean |

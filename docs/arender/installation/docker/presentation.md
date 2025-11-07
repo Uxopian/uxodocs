@@ -1,37 +1,45 @@
 ---
-title: Serveur de présentation
+title: "Presentation server"
 ---
+
+
+
+
+
+
 
 ## Configuration
 
-### Par variable d'environment
+### By Environment Variables
 
-Toutes les propriétés peuvent être renseignées par variable d'environment en suivant les règles suivantes :
+All properties can be set with environment variables by following the next rules:
 
-- la variable d'environment doit être en lettre capitale
-- remplacer les **"."** par **"_"**
-- les propriétés de profile d'ARender doivent commencer par `"ARENDER_"`
-- les propriétés de serveur d'ARender doivent commencer par `"ARENDERSRV_"`
+- environment variables must be capitalized
+- use **"_"** to replace **"."**
+- any ARender profile properties must be prefixed by `"ARENDER_"`
+- any ARender server properties must be prefixed by `"ARENDERSRV_"`
+
 
 preference.color.mode -> ARENDER_COLOR_PREFERENCE
 
 arender.server.rendition.hosts -> ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS
 
-### Par volumes
+
+### By volumes
 
 #### Profile
 
-**Emplacement du fichier configuration par défaut :** /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/arender.properties
+**Default configuration file location:** /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/arender.properties
 
-**Emplacement du dossier pour la configuration personnel :** /home/arender/ARenderConfiguration
+**Custom config folder location:** /home/arender/ARenderConfiguration
 
-Voir la documentation :
+See documentation:
 
-- **Profile** (lien supprimé)
-- **Liste des propriété front ARender** (lien supprimé)
+- [Profile](./guides/configurations/web-ui/visual/profile.en.md)
+- [ARender front configuration properties list](./guides/configurations/web-ui/properties/full-config.en.md)
 
-#### Serveur
+#### Server
 
-**Emplacement du fichier configuration par défaut :** /home/arender/ARenderConfiguration/arender-custom-server.properties
+**Default configuration file location:** /home/arender/ARenderConfiguration/arender-custom-server.properties
 
-**Emplacement du dossier pour la configuration personnel :** /home/arender/ARenderConfiguration
+**Custom config folder location:** /home/arender/ARenderConfiguration

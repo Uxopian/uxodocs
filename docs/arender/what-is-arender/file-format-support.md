@@ -1,6 +1,11 @@
 ---
-title: Supported File Format
+title: "Supported File Format"
 ---
+
+
+
+
+
 
 ## PDF
 
@@ -30,7 +35,7 @@ title: Supported File Format
 | High Efficiency Image File Format | .heif     | image/heif                                                                                                   |
 | WEBP                              | .webp     | image/webp                                                                                                   |
 
-## MAILS
+## EMAILS
 
 | Format | Extension | MIME TYPE                       |
 | ------ | --------- | ------------------------------- |
@@ -129,11 +134,12 @@ title: Supported File Format
 
 | Format                                               | Extension | MIME TYPE                                                               |
 | ---------------------------------------------------- | --------- | ----------------------------------------------------------------------- |
-| AutoCAD DWG(¹)                                       | .dwg      | image/vnd.dwg, image/x-dwg, image/x-dwt, image/vnd.dwt, image/x-vnd.dwt |
-| AutoCAD DXF (Format de 2013 et plus récents)         | .dxf      | image/vnd.dxf, image/x-dxf                                              |
+| AutoCAD DWG **(¹)**                                  | .dwg      | image/vnd.dwg, image/x-dwg, image/x-dwt, image/vnd.dwt, image/x-vnd.dwt |
+| AutoCAD DXF (File format 2013 and earlier)           | .dxf      | image/vnd.dxf, image/x-dxf                                              |
 | Autodesk Design Web Format (DWF)                     | .dwf      | model/vnd.dwf, image/x-dwf                                              |
 | MicroStation V8 DGN and V7 DGN                       | .dgn      | image/vnd.dgn, image/x-vnd.dgn                                          |
 | Industry Foundation Classes (IFC) versions 2x3 and 4 | .ifc      | application/x-step                                                      |
+
 
 
 DWG 2018 (AC1032) AutoCAD 2018/2019/2020/2021
@@ -155,6 +161,7 @@ DWG R13 (AC1012) AutoCAD Release 13
 DWG R11/12 (AC1009) AutoCAD Release 11/12
 
 
+
 ## Archives
 
 | Format       | Extension | MIME TYPE                                                      |
@@ -163,8 +170,8 @@ DWG R11/12 (AC1009) AutoCAD Release 11/12
 | 7-Zip        | .7z       | application/x-7z-compressed                                    |
 | Java archive | .jar      | application/java-archive                                       |
 
-## Carte de visite
+## Visit Card
 
 | Format            | Extension | MIME TYPE  |
 | ----------------- | --------- | ---------- |
-| vCard (2.1 & 3.0) | .vcf      | text/vcard |
+| vCard (2.1 &amp; 3.0) | .vcf      | text/vcard |

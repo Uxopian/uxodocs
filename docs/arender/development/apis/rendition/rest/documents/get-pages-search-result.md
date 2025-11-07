@@ -1,51 +1,56 @@
 ---
-title: Obtenir les résultats de recherche des pages (GET)
+title: "GET Pages Search Result"
 ---
 
-Cette API vous permet d'obtenir les résultats de recherche des pages d'un document spécifique.
 
-## Description technique de l'API
 
-Point d'entrée :
+
+
+
+
+This API allows you to retrieve the search results for the pages of a specific document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/pages
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
-
-
-Paramètres de requête:
-
-| Variable        | Requis | Description                                                                   |
-|:----------------|:-------|:------------------------------------------------------------------------------|
-| searchText      | Oui    | Le texte à rechercher                                                         |
-| accentSensitive | Non    | Détermine si la recherche est sensible aux accents                            |
-| caseSensitive   | Non    | Détermine si la recherche est sensible à la casse                             |
-| regex           | Non    | Détermine si la valeur du paramètre 'searchText' est une expression régulière |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
 
+Query params:
 
-Réponse :
+| Variable        | Required | Description                                                     |
+|:----------------|:---------|:----------------------------------------------------------------|
+| searchText      | Yes      | The text to search for                                          |
+| accentSensitive | No       | Determines if the search is accent-sensitive                    |
+| caseSensitive   | No       | Determines if the search is case-sensitive                      |
+| regex           | No       | Determines if the value of the searchText parameter is a regex  |
 
-| Type               | Description                                         |
-|:-------------------|:----------------------------------------------------|
-| PagesSearchResult  | Les résultats de recherche des pages au format JSON |
 
-## Exemples
+Response :
 
-### Obtenir les résultats de recherche des pages
+| Type               | Description                                      |
+|:-------------------|:-------------------------------------------------|
+| PagesSearchResult  | The search results for the pages in JSON format  |
 
-L'appel suivant génère une requête pour obtenir les résultats de recherche
-pour le document avec l'ID b64_bm9yZS92SDMtMS0xMTh1735080237. 
-La recherche est effectuée pour le texte "exemple" 
-avec une sensibilité à la casse activée.
+## Examples
+
+### Get Pages Search Result
+
+The following call generates a request to get the search results for the document
+with ID _b64_bm9yZS92SDMtMS0xMTh1735080237_. 
+The search is performed for the text "example" with case sensitivity enabled.
 
 ```bash
 curl -X 'GET' \
-  'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/pages?searchText=exemple&caseSensitive=true' \
+  'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/pages?searchText=example&caseSensitive=true' \
   -H 'accept: application/json'
 ```
+

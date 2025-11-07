@@ -1,32 +1,49 @@
 ---
-title: Récupérer le contenu de la page d'un document
+title: "Get page content"
 ---
 
-Une nouvelle servlet est déployée permettant d'obtenir un fichier Json avec le contenu d'une page d'un document.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **pageContent**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to have a Json file with the page content of a document.
+
+## Request 
+
+This functionality is accessible via the servlet: **pageContent**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/pageContent?uuid=docuuid&pagePosition=numPage'
 ```
 
-* uuid : l'id du document
-* pagePosition : la page du document
+* uuid: document id
+* pagePosition: the page of the document
 
-## Réponse de la servlet
+## Servlet Response
 
-Un fichier Json est retourné avec les informations sur le contenu de la page passée en paramètre.
+A Json file is returned with information about the page content which is given as a parameter.
 
-Voici un exemple de fichier Json : 
+Here an example of a Json file : 
+
 ```json
-<!-- Commentaire nettoyé -->,
+
+  "pageNumber": 3,
+  "positionTextList": [
+
+      "pageNumber": 3,
+      "position": {
+        "x": 124.68,
+        "y": 204.09999,
+        "w": 113.34983,
+        "h": 34.0
+      },
       "text": "Features",
       "individualWidths": [
         15.070442,
@@ -43,8 +60,8 @@ Voici un exemple de fichier Json :
       "paragraphId": 0,
       "rightToLeftText": false,
       "startTime": -1.0
-    }
+
   ],
   "imageHyperlinkPositionList": []
-}
+
 ```

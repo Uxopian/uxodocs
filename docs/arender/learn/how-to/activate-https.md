@@ -1,30 +1,55 @@
 ---
-title: Activer la connexion SSL
+title: "Use SSL"
 ---
 
-Pour pouvoir utiliser une connexion sécurisée vers la rendition depuis
-ARender, vous devrez modifier certains paramètres sur le serveur de
-rendition et le serveur ARender.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
-**Vous ne pourrez pas utiliser la connexion en http et en
-https en même temps.**
 
-## Du côté ARender
 
-Ajouter les lignes suivantes dans votre fichier :
+
+
+
+To allow your Rendition to work over https, you have to change some
+properties in ARender server and Rendition server.
+
+
+**Note that you cannot use both of http and https at the same
+time.**
+
+
+## On ARender server side
+
+Add these lines below in the following file:
+
 
 
 ```cfg
-arender.server.rendition.hosts=https://NOM_HÔTE_RENDITION_:PORT_RENDITION/
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+arender.server.rendition.hosts=https://RENDITION_HOSTNAME:RENDITION_PORT/
 arender.rest.ssl.custom.use=true
+```
+```
+```
+```
+```
+```
 ```
 
 
-## Du côté Rendition
 
-Copier les fichiers se trouvant dans
-"*VOTRE_DOSSIER_RENDITION/secure-mode-properties/*" vers le dossier
-modules, afin d'écraser l'existant.
+## On rendition server side
+
+Copy the files located in
+"*YOUR_RENDITION_FOLDER/secure-mode-properties/*" in their respective
+destination in "*YOUR_RENDITION_FOLDER/modules/*" as it should then
+place them correctly in their respective folders.

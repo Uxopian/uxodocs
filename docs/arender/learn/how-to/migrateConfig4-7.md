@@ -1,33 +1,40 @@
 ---
-title: Migration de configuration de 4.x à 4.7
+title: "Migrate configuration from 4.x to 4.7"
 ---
 
-La version 4.7 apporte son lot de modification visuelle qui implique des changements de configuration au niveau des beans, mais également des propriétés dans ARender.properties ainsi que le CSS. Cette page a pour but de montrer comment bien adapter les anciennes configurations vers la nouvelle.
 
 
-Depuis la 4.7.2, les configurations, faites avant la 4.7, sont rétro-compatible. Il est tout de fois conseillé de faire les modifications vers la nouvelle norme de la configuration.
 
 
-## Le Toppanel
 
-### Nouvelle organisation du Toppanel
 
-Le Toppanel est organisé en plusieurs sections permettant d'organiser les différents boutons. Voici les différentes sections listées dans leur ordre par défaut :
-- File And annotation : Contient les boutons pour les téléchargements, l'impression et les annotations
-- File (Contenue dans la première section) : Contient les boutons pour les téléchargements et l'impression
-- Annotation (Contenue dans la première section) : Contient les boutons pour les annotations
-- Modification : Contient les boutons pour la rotation, la luminosité et le contraste
-- Navigation : Contient les boutons pour la navigation dans le document
-- Zoom : Contient les boutons pour le zoom
-- MultiView tools : Contient les boutons pour la vue multi-document
-- Plugin : Contient les boutons pour les plugins Plume et HTML
-- Right : Contient les boutons devant être à droite dont l'ellipsis
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Version 4.7 brings a lot of visual modification that involves configuration changes in beans, but also properties in arender.properties as well as CSS. This page aims to show how to properly adapt the old configurations to the new one.
 
-Cette organisation est modifiable comme dans les versions précédentes. Voici une liste des différentes propriétés servant à manipuler la disposition des différents éléments du Toppanel : 
+
+
+Since 4.7.2, the configurations made before 4.7 are retro-compatible. However, it is advisable to make the modifications to the new configuration standard.
+
+
+
+## The Toppanel
+
+### New organization of the Toppanel
+
+The Toppanel is organized into several sections to organize the different buttons. Here are the different sections listed in their default order:
+- File And annotation : Contains all buttons related to download, print and annotations
+- File (Contained in the first section) : Contains all buttons related to download and print
+- Annotation (Contained in the first section) : Contains all buttons related to annotations
+- Modification : Contains rotations, brightness and contrasts buttons
+- Navigation : Contains all buttons related to the document navigation
+- Zoom : Contains all buttons related to the zoom.
+- MultiView tools : Contains all buttons related to multiview
+- Plugin : Contains all buttons for Plume and HTML plugins
+- Right : Contains all buttons needed to be to the right like the ellipsis
+
+![image](/img/arender/toppanel/toppanel-sections-description.png)
+
+This organization can be modified as in previous versions. Here is a list of the different properties used to manipulate the arrangement of the different elements of the Toppanel:
 
 - topPanel.widgets.beanNames
 - topPanel.upload.buttons.beanNames
@@ -45,127 +52,276 @@ Cette organisation est modifiable comme dans les versions précédentes. Voici u
 - topPanel.imageProcessing.buttons.vertical.beanNames
 - topPanel.section.right.buttons.beanNames
 
-#### Cas particuliers
+#### Special cases
 
-La section *File and Annotation* est une section qui va simplement servir de conteneur pour les sections *File* et *Annotation* afin de les avoir côte-à-côte. 
+The *File and Annotation* section is a section that will simply serve as a container for the *File* and *Annotation* sections in order to have them side by side.
 
-La section *Right* est la section qui sera toujours la plus à droite et qui va contenir le bouton *Ellipsis* (Menu burger).
+The *Right* section is the section which will always be the furthest to the right and which will contain the *Ellipsis* button (Burger menu).
 
+### Buttons, activable buttons and sub-menu items
 
-### Les boutons, les boutons activables et les items de sous-menu
-
-#### Les boutons d'annotations 
-
-Les boutons d'annotations se trouvent directement dans le toppanel dans la section d'Annotation. Le mode *répétition* est activable avec un double-clic si la propriété associée à l'annotation est bien activée.
-Il est toujours possible d'avoir le mode *répétition* sur un bouton avec un simple clic. 
-
-Pour avoir ce comportement, il faut remplacer la propriété du buttonHandler. Les annotations disposant d'une fonction de répétition vont avoir des références de bean pour le mode normal et le mode répétition.
-
-Voici un exemple de propriété *buttonHandler* actionnant le mode répétition au clic du bouton : 
+#### The annotation buttons
 
 
-```cfg
+The annotation buttons are located directly in the toppanel in the Annotation section. The *repeat* mode can be activated with a double-click if the property associated with the annotation is activated.
+It is still possible to have the *repeat* mode on a button with a single click.
 
-	<ref>
-<!-- Commentaire nettoyé -->
-    
-    
-    
-    
-    
-    
-        <ref>
-    <!-- Commentaire nettoyé -->
-        <ref>
-    <!-- Commentaire nettoyé -->
-        <ref>
-    <!-- Commentaire nettoyé -->
-        <ref>
-    <!-- Commentaire nettoyé -->
-        <ref>
-    <!-- Commentaire nettoyé -->
-    
-    
-    
-    
-    
-        <ref>
-    <!-- Commentaire nettoyé -->
-        <ref>
-    <!-- Commentaire nettoyé -->
-        <ref>
-    <!-- Commentaire nettoyé -->
-    **
-        
-        
-        
-    **
-<!-- Commentaire nettoyé -->
-```
+To have this behavior, you must replace the buttonHandler property. Annotations with a repeat function will have bean references for normal mode and repeat mode.
 
+Here is an example of a *buttonHandler* property that activates repeat mode when the button is clicked:
 
-Propriété à rajouter dans le bean *shortcut* pour activer la touche SHIFT : 
 
 
 ```cfg
-
-```
-
-
-Propriété à rajouter dans le bean *shortcut* pour activer la touche ALT : 
-
-
-```cfg
-
+<property name="buttonHandler">
+	<ref bean="highlightCircleCreationRepeatableAction" />
+</property>
 ```
 
 
 
-#### Conversion entre bouton et item de sous-menu :
-
-Les boutons se trouvant dans les sous menus et les boutons se trouvant dans le toppanel utilisent dorénavant des classes différentes. Cela va se traduire également par des différences de définition de bean.
-
-##### Exemple de bouton, de bouton activable et d'item de sous-menu
-
-Les exemples suivants montrent un bean entièrement construit pour les trois formes mentionnées. L'action qui est déclenchée par chacun est l'impression du document.
 
 
-Un bouton est un simple bouton qui revient à l'état visuel initial après avoir cliqué dessus. Un bouton activable est un bouton qui restera dans un état visuel actif au clic, puis reviendra à l'état visuel par défaut après avoir cliqué dessus à nouveau.
+Bean references for button actions can be found in the file named events-configuration.xml.
 
 
-###### Item de sous-menu
+
+##### Example of a standard annotation button
+
 
 ```cfg
-**
-    <constructor-arg value="printButton">
-     and ${topPanel.print}}">
-    
-    
-        <ref>
-    <!-- Commentaire nettoyé -->
-    
-        **
-            <!-- Commentaire nettoyé -->
-        **
-    <!-- Commentaire nettoyé -->
-     and ${topPanel.print}}">
-    
-    
-        <ref>
-    <!-- Commentaire nettoyé -->
-        **
-            <!-- Commentaire nettoyé -->
-        **
-    <!-- Commentaire nettoyé -->
-     and ${topPanel.print}}">
-    
-    
-        <ref>
-    <!-- Commentaire nettoyé -->
-        **
-            <!-- Commentaire nettoyé -->
-        **
-    <!-- Commentaire nettoyé -->
+<bean id="addHighlightCircleAnnotationButton"
+    class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
+    <constructor-arg value="addHighlightCircleAnnotationButton" />
+    <property name="name" value="Circle" />
+    <property name="supportDoubleClick" value="${topPanel.annotationMenu.circle.repeat}" />
+    <property name="enabled" value="${topPanel.annotationMenu.circle}" />
+    <property name="className" value="standardButton icon-add-circle toppanelButton" />
+    <property name="buttonGroup" value="topPanel" />
+    <property name="buttonTitle">
+        <ref bean="labels#addCircleAnnotation" />
+    </property>
+    <property name="visibilityForTopPanel">
+        <ref bean="topPanelVisibilityMode" />
+    </property>
+    <property name="doubleClickButtonHandler">
+        <ref bean="highlightCircleCreationRepeatableAction" />
+    </property>
+    <property name="inactiveButtonHandler">
+        <ref bean="quitAnnotationCreationAction" />
+    </property>
+    <property name="buttonHandler">
+        <ref bean="highlightCircleCreationAction" />
+    </property>
+</bean>
+```
+
+
+
+
+
+##### Example of annotation button activating repeat mode with one-click
+
+
+```cfg
+ <bean id="addHighlightCircleAnnotationRepeatButton"
+    class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
+    <constructor-arg value="addHighlightCircleAnnotationRepeatButton" />
+    <property name="enabled" value="${topPanel.annotationMenu.circle.repeat}" />
+    <property name="active" value="false" />
+    <property name="className" value="standardButton icon-add-circle toppanelButton" />
+    <property name="buttonGroup" value="topPanel" />
+    <property name="buttonTitle">
+        <ref bean="labels#addCircleAnnotation" />
+    </property>
+    <property name="visibilityForTopPanel">
+        <ref bean="topPanelVisibilityMode" />
+    </property>
+    <property name="buttonHandler">
+        <ref bean="highlightCircleCreationRepeatableAction" />
+    </property>
+</bean>
+```
+
+
+
+
+#### Activate a button with a keyboard shortcut
+
+Buttons can have a keyboard shortcut to activate the action that is usually done on click. The different types of shortcut available are of the form:
+- &#123;Specific key&#125; + &#123;Key&#125;
+- &#123;Specific key&#125; + &#123;Specific key&#125; + &#123;Key&#125;
+- &#123;Specific key&#125; + &#123;Specific key&#125; + &#123;Specific key&#125; + &#123;Key&#125; 
+
+Where &#123;Key&#125; corresponding to a alphabetic or numeric key on the keyboard and &#123;Specific key&#125; can be ALT, SHIFT, or CTRL.
+
+
+For buttons (Using the ButtonPresenter class) and activable buttons (Using the ActivableButtonPresenter class), add the following property in the desired bean:
+
+
+
+```cfg
+<property name="shortcut">
+    <bean
+        class="com.arondor.viewer.client.documentcontent.shortcuts.KeyboardShortCut"
+        scope="prototype">
+        <property name="ctrl" value="true" />
+        <property name="key" value="KEY_TO_USE" />
+        <property name="enabled" value="IS_ENABLED" />
+    </bean>
+</property>
+```
+
+
+
+
+Property to add in the *shortcut* bean to activate the CTRL key:
+
+
+
+```cfg
+<property name="ctrl" value="true" />
+```
+
+
+
+Property to add in the *shortcut* bean to activate the SHIFT key:
+
+
+
+```cfg
+<property name="shift" value="true" />
+```
+
+
+
+Property to add in the *shortcut* bean to activate the ALT key:
+
+
+
+```cfg
+<property name="alt" value="true" />
+```
+
+
+
+
+#### Conversion between button and sub-menu item:
+
+The buttons found in the submenus and the buttons found in the toppanel now use different classes. This will also result in differences in the definition of the bean.
+
+##### Example of button, activable button and sub-menu item
+
+The following examples show a fully constructed bean for the three shapes mentioned. The action that is triggered by each is the printing of the document.
+
+
+
+A button is a simple button that will return to the initial visual state after clicking on it. An activable button is a button that will stay at an active visual state on click and then will go back to the default visual state after clicking on it again.
+
+
+
+###### Sub menu item
+
+
+```cfg
+<bean id="printButton"
+    class="com.arondor.viewer.client.widgets.DropdownMenuItem">
+    <constructor-arg value="printButton"/>
+    <property name="enabled" value="#{ !${isMobile} and ${topPanel.print}}"/>
+    <property name="className" value="standardButton icon-print toppanelButton" />
+    <property name="buttonTitle">
+        <ref bean="labels#printDocument" />
+    </property>
+    <property name="shortCut" value="CTRL + ${shortCut.print.key}" />
+    <property name="buttonHandler">
+        <bean
+            class="com.arondor.viewer.client.toppanel.behavior.document.DocumentPrintHandler">
+            <constructor-arg>
+                <bean
+                    class="com.arondor.viewer.client.events.print.ShowPrintDialogBoxEvent" />
+            </constructor-arg>
+        </bean>
+    </property>
+</bean>
+```
+
+
+
+
+###### Button
+
+
+```cfg
+<bean id="printButton"
+    class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter">
+    <constructor-arg value="printButton"/>
+    <property name="enabled" value="#{ !${isMobile} and ${topPanel.print}}"/>
+    <property name="className" value="standardButton icon-print toppanelButton" />
+    <property name="buttonTitle">
+        <ref bean="labels#printDocument" />
+    </property>
+    <property name="buttonHandler">
+        <bean
+            class="com.arondor.viewer.client.toppanel.behavior.document.DocumentPrintHandler">
+            <constructor-arg>
+                <bean
+                    class="com.arondor.viewer.client.events.print.ShowPrintDialogBoxEvent" />
+            </constructor-arg>
+        </bean>
+    </property>
+</bean>
+```
+
+
+
+###### Activable button
+
+
+
+```cfg
+<bean id="printButton"
+    class="com.arondor.viewer.client.widgets.ActivableButtonPresenter">
+    <constructor-arg value="printButton"/>
+    <property name="enabled" value="#{ !${isMobile} and ${topPanel.print}}"/>
+    <property name="className" value="standardButton icon-print toppanelButton" />
+    <property name="buttonTitle">
+        <ref bean="labels#printDocument" />
+    </property>
+    <property name="buttonHandler">
+        <bean
+            class="com.arondor.viewer.client.toppanel.behavior.document.DocumentPrintHandler">
+            <constructor-arg>
+                <bean
+                    class="com.arondor.viewer.client.events.print.ShowPrintDialogBoxEvent" />
+            </constructor-arg>
+        </bean>
+    </property>
+</bean>
+```
+
+
+
+We see that the beans are similar here. But activable buttons (Using the ActivableButtonPresenter class) can accept the following properties:
+- name
+- buttonGroup
+- inactiveButtonHandler
+- supportShortCut
+- shortcut
+
+For buttons (Using the ButtonPresenter class) only the following properties can be added: 
+- name
+- supportShortCut
+- shortcut
+
+The previous properties cannot be used by submenu items (Using the DropdownMenuItem class).
+
+#### Putting the research directly in the toppanel
+
+The search button corresponds to the bean with the id *searchSection*. This bean must then be deleted from the list of beans to be instantiated.
+
+Location of the use of the id:
+![image](/img/arender/toppanel/toppanel-search-1.png)
+
 
 ```cfg
 topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,searchSection,moreButton
@@ -174,8 +330,10 @@ topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,
 
 
 
-Suppression de l'id en redéfinissant la propriété : 
-<!-- Commentaire nettoyé -->
+
+Removing the id by redefining the property:
+![image](/img/arender/toppanel/toppanel-search-3.png)
+
 
 ```cfg
 topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,moreButton
@@ -185,8 +343,10 @@ topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,
 
 
 
-Ensuite, il faudra redéfinir une propriété avec le bean id *searchBox* : 
-<!-- Commentaire nettoyé -->
+
+Then, you will have to redefine a property with the bean id *searchBox*:
+![image](/img/arender/toppanel/toppanel-search-2.png)
+
 
 ```cfg
 topPanel.section.right.buttons.beanNames=searchBox,documentBuilderButton,fullscreenButton,moreButton
@@ -195,11 +355,12 @@ topPanel.section.right.buttons.beanNames=searchBox,documentBuilderButton,fullscr
 
 
 
-## Modifications de nom de classes
 
-Si vous utilisez la 4.7.0 ou 4.7.1, alors, certaines classes ont changé de package. Veuillez à bien les remplacer.
+## Class name changes
 
-| Ancien nom de package                                                 | Nouveau nom de package                                           |
+If you are using 4.7.0 or 4.7.1, then some classes have changed package. Please replace them.
+
+| Old Package name                                                      | New Package Name                                                 |
 | --------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | com.arondor.viewer.client.toppanel.presenter.SliderPanelPresenter     | com.arondor.viewer.client.annotation.slider.SliderPanelPresenter | 
 | com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter | com.arondor.viewer.client.widgets.ActivableButtonPresenter       | 
@@ -208,21 +369,24 @@ Si vous utilisez la 4.7.0 ou 4.7.1, alors, certaines classes ont changé de pack
 | com.arondor.viewer.client.toppanel.presenter.TopPanelSubMenu          | com.arondor.viewer.client.widgets.TopPanelSubMenu                | 
 
 
-Ces changements de classes sont valables uniquement pour la 4.7.0 et la 4.7.1. À partir de la version 4.7.2, les anciens noms de package ont été remis afin d'avoir une meilleure rétro-compatibilité.
+
+These class changes are only valid for 4.7.0 and 4.7.1. Since version 4.7.2, the old package names have been added again in order to have better retro-compatibility.
 
 
 
-## Modifications de bean 
 
-Le bean avec l’id *annotationMenu* a changé de classe. La nouvelle classe est *com.arondor.viewer.client.toppanel.presenter.SimpleButtonSetPresenter*.
+## Bean changes
 
-Les boutons de sélection de la tête ou de la queue des flèches ont été modifiés. Leur classe est maintenant *com.arondor.viewer.client.widgets.DropdownMenuItem*
+The bean with the id *annotationMenu* has changed class. The new class is *com.arondor.viewer.client.toppanel.presenter.SimpleButtonSetPresenter*.
 
-La propriété *imageResource* n’est plus utilisable dans les définitions des beans.
+The arrow head or tail selection buttons have been changed. Their class is now *com.arondor.viewer.client.widgets.DropdownMenuItem*
 
-## Suppression de bean (4.7.0 et 4.7.1)
+The *imageResource* property can no longer be used in bean definitions.
 
-Liste des ids de beans supprimés pour la version 4.7.0 et 4.7.1.
+## Bean deletion (4.7.0 and 4.7.1)
+
+
+List of bean ids removed for version 4.7.0 and 4.7.1:
 
 - documentMenu
 - imageProcessingVerticalSubMenu
@@ -238,17 +402,22 @@ Liste des ids de beans supprimés pour la version 4.7.0 et 4.7.1.
 - logo
 
 
-Ces beans ont été remis à partir de la version 4.7.2, pour une meilleure rétro-compatibilité, dans le fichier *toppanel-configuration-legacy.xml*
 
 
-## Modification de CSS:
+These beans have been added in version 4.7.2 for better retro-compatibility. These beans are in the file *toppanel-configuration-legacy.xml*.
 
-### Icon en font:
-Les icons du toppanel ont été changés. Les icons sont faits via de la font personnalisé. 
 
-### Ajouts de variable de couleur
 
-Les couleurs de fond, d'icône, de survole dans le toppanel peut se changer entre couleur clair et couleur foncé avec une propriété:
+## CSS modifications
+
+### Icon font
+
+The toppanel icons have been changed. Icons are made with custom font.
+
+### Added color variables
+
+The background, icon and hover colors in the toppanel can be changed between light color and dark color with a property:
+
 
 
 ```cfg
@@ -257,96 +426,98 @@ preference.color.mode=DARK
 
 
 
-La valeur DARK sera pour la couleur foncée par défaut, la valeur LIGHT sera pour la couleur claire et la valeur CUSTOM permet d'utiliser des couleurs custom redéfinies dans un CSS pour la class CSS nommé .custom-theme. Par défaut, la valeur CUSTOM va correspondre aux couleurs définis pour la valeur DARK.
+The DARK value will be for the dark color by default, the LIGHT value will be for the light color and the CUSTOM value allows to use custom colors redefined in a css for the css class named *.custom-theme* . By default, the CUSTOM value will match the colors defined for the DARK value.
 
 #### DARK 
 
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
 
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
 
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
 
-<!-- Commentaire nettoyé -->
 
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
 
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #### LIGHT
 
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-
-<!-- Commentaire nettoyé -->
-
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
 
 
 
-Ces variables de couleurs ne sont pas fonctionnels pour Internet Explorer
 
 
 
-### Liste des modifications de CSS
 
-#### Plugin Plume : 
 
-| Bean id        | Ancienne class CSS | Nouvelle class CSS                                               |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+These color variables are not functional for Internet Explorer.
+
+
+
+
+### List of css modifications
+
+#### Plume Plugin : 
+
+| Bean id        | Old CSS class      | New CSS class                                                    |
 | -------------- | ------------------ | ---------------------------------------------------------------- |
-| plumeMenu      | aucun              | standardButton icon-plugin-plume toppanelButton                  |
-| plumeButton    | aucun              | standardButton icon-plugin-plume toppanelButton                  |
-| replyButton    | aucun              | standardButton icon-reply toppanelButton                         |
-| replyAllButton | aucun              | standardButton dropdown-MenuButton icon-open-file toppanelButton |
-| forwardButton  | aucun              | standardButton icon-forward toppanelButton                       |
+| plumeMenu      | none               | standardButton icon-plugin-plume toppanelButton                  |
+| plumeButton    | none               | standardButton icon-plugin-plume toppanelButton                  |
+| replyButton    | none               | standardButton icon-reply toppanelButton                         |
+| replyAllButton | none               | standardButton dropdown-MenuButton icon-open-file toppanelButton |
+| forwardButton  | none               | standardButton icon-forward toppanelButton                       |
 
-#### Plugin HTML :
+#### HTML Plugin :
 
-| Bean id         | Ancienne class CSS | Nouvelle class CSS                             |
+| Bean id         | Old CSS class      | New CSS class                                  |
 | --------------- | ------------------ | ---------------------------------------------- |
-| htmlPluginMenu  | aucun              | standardButton icon-plugin-html toppanelButton |
-| viewHtmlButton  | aucun              | standardButton icon-plugin-html toppanelButton |
-| closeHtmlButton | aucun              | standardButton icon-close toppanelButton       |
+| htmlPluginMenu  | none               | standardButton icon-plugin-html toppanelButton |
+| viewHtmlButton  | none               | standardButton icon-plugin-html toppanelButton |
+| closeHtmlButton | none               | standardButton icon-close toppanelButton       |
 
 #### Annotations : 
 
-| Bean id                               | Ancienne class CSS                           | Nouvelle class CSS                                     |
+| Bean id                               | Old CSS class                                | New CSS class                                          |
 | ------------------------------------- | -------------------------------------------- | ------------------------------------------------------ |
 | annotationMenu                        | standardButton annotationManagerButton       | fullHeight annotationMenu                              |
 | showAllAnnotationsButton              | standardButton hideAnnotationButton          | standardButton icon-hide toppanelButton                |
@@ -389,16 +560,16 @@ Ces variables de couleurs ne sont pas fonctionnels pour Internet Explorer
 | changeLineTailNone                    | standardButton noneStyleButton               | standardButton icon-arrow-none                         |
 
 
-| Bean id                               | Ancien nom de propriété | Ancienne class CSS                  | Nouveau nom de propriété | Nouvelle class CSS                                     |
+| Bean id                               | Old property name       | Old CSS class                       | New property name        | New CSS class                                          |
 | ------------------------------------- | ----------------------- | ----------------------------------- | ------------------------ | ------------------------------------------------------ |
 | showAllAnnotationsButton              | inactiveClassName       | standardButton hideAnnotationButton | activeClassName          | standardButton icon-show toppanelButton showAnnotation |
 | showAllAnnotationsButton              | className               | standardButton showAnnotationButton | className                | standardButton icon-hide toppanelButton                |
 | showAllAnnotationsAndRotationsButton  | inactiveClassName       | standardButton showAnnotationButton | activeClassName          | standardButton icon-show toppanelButton showAnnotation |
 | showAllAnnotationsAndRotationsButton  | className               | standardButton showAnnotationButton | className                | standardButton icon-show toppanelButton showAnnotation |
 
-#### Menu contextuel :
+#### Contextual menu :
 
-| Bean id                                 | Ancienne class CSS                                   | Nouvelle class CSS                                             |
+| Bean id                                 | Old CSS class                                        | New CSS class                                                  |
 | --------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------- |
 | stampAction                             | standardButton stampAnnotationContextualMenu         | standardButton icon-add-stamp contextualMenu                   |
 | freetextAction                          | standardButton freetextAnnotationContextualMenu      | standardButton icon-add-free-text contextualMenu               |
@@ -421,7 +592,7 @@ Ces variables de couleurs ne sont pas fonctionnels pour Internet Explorer
 | addPolylineAction                       | standardButton polylineAnnotationContextualMenu      | standardButton icon-add-multiline contextualMenu               |
 | addFreehandAction                       | standardButton freehandAnnotationContextualMenu      | standardButton icon-add-hand-draw contextualMenu               |
 | anchorAnnotationAction                  | standardButton anchorAnnotationContextualMenu        | standardButton icon-anchor contextualMenu                      |
-| copyAction                              | aucun                                                | standardButton icon-copy contextualMenu                        |
+| copyAction                              | none                                                 | standardButton icon-copy contextualMenu                        |
 | downloadContextualMenuAction            | pictreeButton saveDocumentButton                     | pictreeButton saveDocumentButton contextualMenu                |
 | downloadAnnotationsContextualMenuAction | pictreeButton saveDocumentWithAnnotationsButton      | pictreeButton saveDocumentWithAnnotationsButton contextualMenu |
 | createFirstContextualMenuAction         | pictreeButton saveDocumentCreateFirstButton          | pictreeButton saveDocumentCreateFirstButton contextualMenu     |
@@ -430,7 +601,7 @@ Ces variables de couleurs ne sont pas fonctionnels pour Internet Explorer
 
 #### Toppanel :
 
-| Bean id                          | Ancienne class CSS                                | Nouvelle class CSS                                         |
+| Bean id                          | Old CSS class                                     | New CSS class                                              |
 | -------------------------------- | ------------------------------------------------- | ---------------------------------------------------------- |
 | documentBuilderButton            | standardButton selectiveCopyButton                | standardButton icon-docbuilder                             |
 | firstPageButton                  | standardButton firstPageButton                    | standardButton icon-go-to-first-page noPadding             |
@@ -473,9 +644,9 @@ Ces variables de couleurs ne sont pas fonctionnels pour Internet Explorer
 | synchronizeScrollButton          | standardButton synchronizeDocumentScrollingButton | standardButton icon-sync-scroll                            |
 | nextButton                       | standardButton nextButton                         | standardButton icon-go-to-next-page                        |
 | moreButton                       | standardButton showMoreButton                     | standardButton icon-ellipsis                               |
-| menuButton                       | aucune                                            | standardButton icon-list-view                              |
+| menuButton                       | none e                                            | standardButton icon-list-view                              |
 
-### Liste des suppressions de CSS
+### List of CSS removed
 
 - topPanelSubMenu:BEFORE
 - topPanelActivableButton

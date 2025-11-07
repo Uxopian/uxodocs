@@ -1,36 +1,51 @@
 ---
-title: Vignette
+title: "Thumbnails"
 ---
+
+
+
+
+
+
 
 ## Introduction
 
-La vue miniature dans ARender offre une représentation visuelle condensée du document, offrant aux utilisateurs
-un moyen rapide et efficace de naviguer dans les pages.
+The Thumbnail View in ARender offers a condensed visual representation of the document, providing users with
+a quick and efficient way to navigate through pages.
 
-## Miniature en surbrillance
+## Highlighted Thumbnails
 
-L'une des fonctionnalités est la mise en évidence dynamique des vignettes en fonction de la page en cours de visualisation.
-Ce repère visuel permet aux utilisateurs d'identifier facilement leur emplacement actuel dans le document, améliorant ainsi la navigation et l'orientation.
+One of the feature is the dynamic highlighting of thumbnails based on the current page being viewed.
+This visual cue allows users to easily identify their current location within the document, enhancing navigation and orientation.
 
-```xml
-<!-- Commentaire nettoyé -->
+![image](/img/arender/documentation/features/thumbnails/thumbnail-highlighted.gif)
+
+## Jump to Page Functionality
+
+Navigating to a specific page becomes effortless with the Thumbnail View. Users can simply select the desired thumbnail,
+and the application will seamlessly jump to the corresponding page.
+This feature streamlines the navigation process, saving users time and effort.
+
+![image](/img/arender/documentation/features/thumbnails/thumbnail-jump-to-page.gif)
+
+## Adjusted thumbnail display structure (v2023.1.0 and later)
+
+For those who desire control over their thumbnail view, ARender provides a dynamic slider that redefines how you interact with the document thumbnails. This feature allows you to seamlessly adjust the display structure of thumbnails.
+
+To use this feature, you can enable it via a simple configuration setting.
+
+
+
+
+
+```cfg
+ui.legacy.enabled=false
 ```
 
-## Saut de page
 
-Naviguer vers une page spécifique devient facile grâce à la vue miniature. Les utilisateurs peuvent simplement sélectionner la vignette souhaitée,
-et l'application passera automatiquement à la page correspondante.
-Cette fonctionnalité rationalise le processus de navigation, économisant du temps et des efforts aux utilisateurs.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-## Ajustement de la structure d'affichage des miniatures (v2023.1.0 et versions ultérieures)
 
-Pour ceux qui souhaitent contrôler leur vue miniature, ARender fournit un curseur dynamique qui redéfinit la façon dont vous interagissez avec les miniatures du document. Cette fonctionnalité vous permet d'ajuster de manière automatique la structure d'affichage des vignettes.
-
-Pour utiliser cette fonctionnalité, vous pouvez l'activer via un simple paramètre de configuration.
 
 
 ```cfg
@@ -38,27 +53,23 @@ ui.legacy.enabled=false
 ```
 
 
-```xml
-<!-- Commentaire nettoyé -->
+
+
+
+![image](/img/arender/documentation/features/thumbnails/thumbnail-reactjs-slider.gif)
+
+## Default number of columns configuration (v2023.4.0 and later)
+
+After enabling the previously mentioned "Adjusted thumbnail display structure" feature,
+thumbnails are displayed by default in 2 columns when ARender loads and when loading each
+```javascript
+new document. This default value can be changed to any number between 1 and 4.
 ```
 
-```cfg
-ui.legacy.enabled=false
-```
+To use this feature, you can configure it via a simple configuration setting.
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-## Configuration du nombre de colonnes par défaut (v2023.4.0 et versions ultérieures)
-
-Suite à l'activation de la fonctionnalité mentionnée précédemment "Ajustement de la structure d'affichage
-des miniatures", au chargement de ARender et à chaque chargement d'un nouveau document, les vignettes sont
-affichées par défaut sur 2 colonnes. Il est possible de changer cette valeur par défaut par un nombre compris
-entre 1 et 4.
-
-Pour utiliser cette fonctionnalité, vous pouvez la configurer via un simple paramètre de configuration.
 
 
 ```cfg
@@ -66,21 +77,38 @@ thumbexplorer.columns=1
 ```
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
+
+
+
 
 ```cfg
 thumbexplorer.columns=1
 ```
 
 
-## Désactivation de l'option de création d'ancre (v2023.4.0 et versions ultérieures)
 
-Par défaut, lorsqu'un utilisateur réalise un clic droit sur une miniature, un menu déroulant apparaît avec
-plusieurs options dont l'option "Créer une ancre à cette page". Il est possible de désactiver cette option.
 
-Pour désactiver cette fonctionnalité, utilisez le paramètre de configuration suivant :
+
+## Disabling the Anchor Creation Option (v2023.4.0 and later)
+
+By default, when a user right-clicks on a thumbnail, a dropdown menu appears with several
+options including "Create anchor at this page". It is possible to disable this option.
+
+To disable this feature, use the following configuration parameter:
+
+
+
+
+
+```cfg
+thumbexplorer.contextualMenu.createPageAnchor=false
+```
+
+
+
+
+
 
 
 ```cfg
@@ -88,23 +116,13 @@ thumbexplorer.contextualMenu.createPageAnchor=false
 ```
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-```cfg
-thumbexplorer.contextualMenu.createPageAnchor=false
-```
 
 
-Par défaut, le paramètre de configuration est à `true`, l'option "Créer une ancre à cette page" est activée.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+By default, the configuration parameter is set to `true`, the "Create anchor at this page" option is enabled.
 
-Avec le paramètre de configuration à `false`, l'option "Créer une ancre à cette page" est désactivée.
+![image](/img/arender/documentation/features/thumbnails/thumbnail_activate_anchor_EN.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+With the configuration parameter set to `false`, the "Create anchor at this page" option is disabled.
+
+![image](/img/arender/documentation/features/thumbnails/thumbnail_deactivate_anchor_EN.png)

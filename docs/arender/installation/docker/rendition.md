@@ -1,15 +1,23 @@
 ---
-title: Partie de rendition
+title: "Rendition stack"
 ---
 
-## Par variables d'environement
 
-Toutes les propriétés yaml peuvent être surchargées par variable d'environnement en suivant les règles suivantes :
 
-- la variable d'environment doit être en lettre capitale
-- les lettres en capitale sont précédés d'un **"."**
-- utiliser **"_"** pour associer les objets
-- utiliser **"[n]"** pour renseigner un élément d'une liste (avec **n** pour l'index)
+
+
+
+
+## By Environment Variables
+
+All yaml properties can be overridden by environment variables by following the next rules:
+
+- environment variables must be all capitalize
+- capitalized character in yaml must be preceded by **"."**
+- use **"_"** to associate an object
+- use **"[n]"** to set a list element (with **n** as index)
+
+
 
 
 ```yaml
@@ -23,6 +31,8 @@ Toutes les propriétés yaml peuvent être surchargées par variable d'environne
 ```
 
 
+
+
 ```yaml
     environment:
       - "DCV_NURSE_SAMPLES.DIRECTORY=../../samples/"
@@ -34,44 +44,11 @@ Toutes les propriétés yaml peuvent être surchargées par variable d'environne
 
 
 
----
-title: Partie de rendition
----
-
-## Par variables d'environement
-
-Toutes les propriétés yaml peuvent être surchargées par variable d'environnement en suivant les règles suivantes :
-
-- la variable d'environment doit être en lettre capitale
-- les lettres en capitale sont précédés d'un **."**
-- utiliser **"_"** pour associer les objets
-- utiliser **"[n]"** pour renseigner un élément d'une liste (avec **n** pour l'index)
 
 
-```yaml
-nurse:
-  samplesDirectory: ../../samples/
-  components:
-    - functionality: TKC_MailConversion
-      factoryName: "mailFactory"
-      samplePath: "test.msg"
-      docIdStr: "m41lS4mpl3"
-```
+## By volumes
 
-
-```yaml
-environment:
-  - "DCV_NURSE_SAMPLES.DIRECTORY=../../samples/"
-  - "DCV_NURSE_COMPONENTS[0]_FUNCTIONALITY=TKC_MailConversion"
-  - "DCV_NURSE_COMPONENTS[0]_FACTORY.NAME=mailFactory"
-  - "DCV_NURSE_COMPONENTS[0]_SAMPLE.PATH=test.msg"
-  - "DCV_NURSE_COMPONENTS[0]_DOC.ID.STR=m41lS4mpl3"
-```
-
-
-## Par volumes
-
-Emplacements des fichiers de configuration :
+Configuration files location:
 
 - /arender/config/application.properties
 - /arender/config/application-*.properties
@@ -79,40 +56,45 @@ Emplacements des fichiers de configuration :
 - /arender/config/application.yaml
 - /arender/config/application-*.yaml
 
-```text
-**{service-name}**: nom du conteneur sans le préfixe "arender"
-```
 
-## PDFOwl: une alternative pour la rendition de document
-
-## Description
-
-La "version" 2023.1.0 a introduit une nouvelle image Docker comme alternative au **document-renderer** habituel, nommée **document-renderer-pdfowl**.
-
-Actuellement, cette fonctionnalité est en phase expérimentale et accessible via un accès anticipé.
-Il prend actuellement en charge le rendu d'images. La mise en page, avec la gestion des calques, les filtres d'image et les fonctionnalités SVG sont encore à implémenter.
-
-Dans le contexte du **document-renderer** actuel, si une erreur se produit dans la bibliothèque native chargée, cela entraîne le crash de l'ensemble de l'application.
-L’erreur se produisant à un niveau inférieur, nous ne sommes pas en mesure de la gérer au niveau de l’application.
-Pour résoudre ce problème, nous avons mis en place une application qui donne la priorité à la résilience tout en maintenant des performances optimales.
-Il génère et gère des sous-processus responsables du traitement des demandes de rendu, capables de renvoyer des erreurs sans provoquer de crash dans le processus principal.
-
-### Image docker
+**&#123;service-name&#125;**: container name without "arender" prefix
 
 
-Exemple d'utilisation de cette image avec docker compose :
+## PDFOwl: a document renderer alternative
+
+### Description
+
+The 2023.1.0 version has introduced a new docker image as an alternative of the usual **document-renderer**, named **document-renderer-pdfowl**.
+
+
+This feature is currently in an experimental, early-access phase. It supports images, layouts, and layers rendering, but does not yet include image filter handling or SVG functionality.
+
+
+In the existing document-renderer setup, errors within the native library can cause the entire application to crash,
+as these issues occur at a low level and cannot be intercepted at the application level.
+
+To improve stability, PDFOwl employs a resilient approach that maintains performance while isolating errors. It manages
+rendering requests through sub-processes, allowing errors to be handled without affecting the main process.
+
+### Docker image
+
+The docker image name with the tag is artifactory.arondor.cloud:5001/document-renderer-pdfowl:
+
+Example of using this image with docker compose :
 
 ```yaml
 version: "3.7"
 
 services:
   ui:
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
     ports:
       - 8080:8080
 
   service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
@@ -124,6 +106,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:
     hostname: drn-service
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
@@ -136,6 +119,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -146,6 +130,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
@@ -160,9 +145,9 @@ volumes:
 
 ```
 
-### Configurations
+## Configurations
 
-Certaines propriétés sont disponibles avec des valeurs par défaut :
+Some properties are available with default values :
 ```cfg
 # PdfOwl binary path
 pdfowl.path=pdfowl

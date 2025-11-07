@@ -1,37 +1,44 @@
 ---
-title: Demander un ordre de compraison (POST)
+title: "POST a comparison order"
 ---
 
-Cette API permet de demander un ordre de comparaison et de récupérer un ComparisonOrderId.
 
-## Description technique de l’API
 
-Point de terminaison :
+
+
+
+
+
+This API allows you to request a comparison order and retrieve a ComparisonOrderId.
+
+## API technical description
+
+Endpoint:
 ```bash
 POST /comparisons
 ```
 
-Corps :
+Body:
 
-| Attribute             | Type                  | Required | Description                                                                                   |
-| :-------------------- | :-------------------- | :------- |:----------------------------------------------------------------------------------------------|
-| leftDocumentId        | String                | oui      | Id du premier document à comparer.                                                            |
-| rightDocumentId       | String                | oui      | Id du second document à comparer.                                                             |
-| fuzz                  | String                | non      | Détermine la précision de la comparaison. La valeur doit être entre 0 et 100.                 |
-| highlightColor        | String                | non      | Couleur de surlignage des différences. La valeur doit être hexadécimal sans le caractère '#'. |
-| lowlightColor         | String                | non      | Couleur de surlignage des similarités. La valeur doit être hexadécimal sans le caractère '#'. |
+| Attribute             | Type                  | Required | Description                                                                                                             |
+| :-------------------- | :-------------------- | :------- |:------------------------------------------------------------------------------------------------------------------------|
+| leftDocumentId        | String                | yes      | Id of the first document to compare.                                                                                    |
+| rightDocumentId       | String                | yes      | Id of the second document to compare.                                                                                   |
+| fuzz                  | String                | no       | Determine the accurate pixel comparison calculation. The value is between 0 and 100.                                    |
+| highlightColor        | String                | no       | Color of the differences. The value is in hexadecimal without the '#' character, for example "ff0000" for red color.    |
+| lowlightColor         | String                | no       | Color of the similarities. The value is in hexadecimal without the '#' character, for example "ffffff" for white color. |
 
-Réponse :
+Response:
 
-| Attribute             | Type                  | Description                                                                                                                                                                        |
-| :-------------------- | :-------------------- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| comparisonOrderId     | ComparisonOrderId     | Id d'ordre de comparaison.Il servira pour l'utilisation des autres API qui permettent par exemple d'avoir des informations sur l'ordre de comparaison ou bien de la supprimer. |
+| Attribute             | Type                  | Description                                                                                                                                                      |
+| :-------------------- | :-------------------- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| comparisonOrderId     | ComparisonOrderId     | Comparison order ID.<br/>This can allow you to use other APIs like the one to retrieve some information about the comparison or to delete it.                     |
 
-## Exemples
+## Examples
 
-### Demander un ordre de comparaison
+### Order Comparison
 
-L'appel ci-dessous génère une demande de comparaison de deux documents déjà connus de la rendition.
+The call below generates a comparison request of two documents already known from the rendition.
 
 ```bash
 curl -X 'POST' \

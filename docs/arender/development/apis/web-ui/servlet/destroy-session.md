@@ -1,25 +1,31 @@
 ---
-title: Détruire la session
+title: "Destroy session"
 ---
 
-Une nouvelle servlet est déployée permettant de détruire les informations de la session de l'utilisateur.
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **destroySession**
-
-La requête est utilisable avec n'importe quelle méthode HTTP.
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to destroy user session information.
+
+## Request 
+
+This functionality is accessible via the servlet: **destroySession**
+
+The request can be used with any HTTP method.
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/destroySession'
 ```
 
-## Réponse de la servlet
+## Servlet Response
 
-La session sera détruite dont les informations d'ARender suivantes : 
-* user 
+The session will be destroyed including the following ARender information:
+* user
 * userAgent
 * versionUserAgent

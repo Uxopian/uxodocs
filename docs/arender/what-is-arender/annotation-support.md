@@ -1,33 +1,38 @@
 ---
-title: Annotations supportées
+title: "Annotation types"
 ---
+
+
+
+
+
 
 ## Annotations
 
-| Nom                       |
-| ------------------------- |
-| Cercle                    |
-| Barrer                    |
-| Flèche                    |
-| Flèche de mesure          |
-| Hyperlien / Ancre         |
-| Main Levée                |
-| Note audio                |
-| Note textuelle            |
-| Polygone                  |
-| Polyline                  |
-| Rectangle                 |
-| Signet                    |
-| Souligner                 |
-| Surlignage de texte       |
-| Tampon texte              |
-| Tampon image              |
-| Zone de texte libre       |
+| Name                  |
+| --------------------- |
+| Arrow                 |
+| Bookmark              |
+| Circle                |
+| Freetext              |
+| Freehand              |
+| Highlight text        |
+| Hyperlink             |
+| Image stamp           |
+| Measurement arrow     |
+| Polygone              |
+| Polyline              |
+| Rectangle             |
+| Sticky Note           |
+| Strikethrough         |
+| Textual stamp         |
+| Underline             |
+| Sound                 |
 
-## Format d'annotation
+## Annotations format
 
-| Éditeur           | Format d'Annotation | Extension |
-| ----------------- | ------------------- | --------- |
-| Adobe Acrobat     | XFDF                | .xml      |
-| IBM FileNet       | IBM FileNet         | .xml      |
-| Daeja ViewONE     | Daeja ViewONE       | .ini      |
+| Editor            | Annotation format | Extension |
+| ----------------- | ----------------- | --------- |
+| Adobe Acrobat     | XFDF              | .xml      |
+| IBM FileNet       | IBM FileNet       | .xml      |
+| Daeja ViewONE     | Daeja ViewONE     | .ini      |

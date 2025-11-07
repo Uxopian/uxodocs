@@ -1,98 +1,94 @@
 ---
-title: Sauvegarde des documents découpés
+title: "Save recomposed document"
 ---
 
-## Configuration de la politique de sauvegarde des documents découpés
 
-### Prérequis
 
-Ci-après sera décrit la configuration de l'interface avec ajout de
-propriétés par profil.
 
-Ainsi, avant de continuer assurez-vous d'avoir lu le chapitre : [Guide de
-```xml
-configuration de la WEB-UI](<!-- Commentaire nettoyé -->).
-```
 
-Par ailleurs, pour créer de nouveaux documents avec ARender il faut que
-la fonctionnalité de découpage/fusion de document soit activée :
+
+
+## Prerequisite
+
+Below you will find a configuration with properties modification.
+
+Be sure to read before the chapter : [Web-UI configuration guide](./installation/standalone/web-ui/standalone/_index.en.md).
+
+Moreover, in order to save new document with ARender you need to
+activate the documentBuilder functionality as below:
 
 ```cfg
 documentbuilder.enabled=true
 ```
 
-### Tutoriel valable pour les versions strictement inférieures à la version 3.1.4
+## Tutorial for ARender versions strictly lower than 3.1.4
 
-Il est possible de définir différents comportements sur la sauvegarde
-d'un document découpé avec ARender.
+It is possible to define different behaviors at the save of a built
+document.
 
-Pour cela il faut modifier le fichier de profil en s'appuyant sur les
-propriétés suivantes :
+Below, the properties to modify:
 
 ```cfg
 documentbuilder.save.behavior=UPDATE_NO_DOCUMENT
 ```
 
-Rôle : Attribution du comportement à adopter lors du clic sur la disquette de
-sauvegarde du document.
+Role: behavior to adopt at the save.
 
-Valeurs possibles :
+Possible values:
 
-CREATE_NEW_FIRST_DOCUMENT : Création d'un nouveau document dans la
-GED.
+CREATE_NEW_FIRST_DOCUMENT: a new document is created in the CSP.
 
-UPDATE_FIRST_DOCUMENT : Création d'une nouvelle version du document
-dans la GED.
+UPDATE_FIRST_DOCUMENT: a new version of the document is created in
+the CSP.
 
-UPDATE_NO_DOCUMENT : Aucune action côté GED.
+UPDATE_NO_DOCUMENT: no action on the CSP side.
 
 ```cfg
 documentbuilder.save.download=true
 ```
 
-Rôle : Activation/désactivation du téléchargement du document découpé sur le
-poste client.
+Role: Activate/deactivate document download on client side.
 
-Valeurs possibles : true/false.
+Possible values: true/false.
 
-### Tutoriel valable pour les versions 3.1.4 et supérieures
+## Tutorial for ARender versions 3.1.4 and higher
 
-Il est possible d'afficher différents bouton dont le comportement sur la
-sauvegarde d'un document découpé avec ARender est spécifique.
+It is possible to show different buttons having specific behavior at
+document save.
 
-Pour cela, il faut modifier le fichier de profil en s'appuyant sur les
-propriétés suivantes :
+Below, the properties to modify:
 
 ```cfg
 documentbuilder.button.legacySave.enabled=true
 ```
 
-Rôle : reprise de comportement des versions précédentes (cf. ci-dessus : [Tutoriel valable pour les versions strictement inférieures à la version 3.1.4](#Tutoriel valable pour les versions strictement inférieures à la version 3.1.4))
+Role: get back to the legacy behavior of pre 3.1.4 ARender versions (see [Tutorial for ARender versions strictly lower than 3.1.4](#tutorial-for-arender-versions-strictly-lower-than-3.1.4)).
 
-Valeurs possibles : true/false.
+Possible values: true/false.
 
 ```cfg
 documentbuilder.button.download.enabled=true
 ```
 
-Rôle : Activation/désactivation du bouton de téléchargement du document
-découpé sur le poste client.
+Role: Activate/deactivate the download button of a built document on the
+client side.
 
-Valeurs possibles : true/false.
+Possible values: true/false.
 
 ```cfg
 documentbuilder.button.createFirst.enabled=true
 ```
 
-Rôle : Activation/désactivation du bouton de création d'un nouveau document en
-GED correspondant au document découpé.
+Role: Activate/deactivate the button that create a new document in the CSP
+corresponding to the built document.
 
-Valeurs possibles : true/false.
+Possible values: true/false.
 
 ```cfg
 documentbuilder.button.updateFirst.enabled=true
 ```
 
-Rôle : Activation/désactivation du bouton de création d'une nouvelle version du document en GED correspondant au document découpé.
+Role: Activate/deactivate the button that create a new version of the document
+in the CSP corresponding to the built document.
 
-Valeurs possibles : true/false.
+Possible values: true/false.

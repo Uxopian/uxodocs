@@ -1,23 +1,29 @@
 ---
-title: Télécharger le CSV des annotations
+title: "Download the CSV of the annotations"
 ---
 
-Une nouvelle servlet est déployée permettant de télécharger le fichier CSV des annotations d'un document. 
-
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **servletCSVAnnotations**
-
-La requête est utilisable uniquement en GET
 
 
-### Exemple d'utilisation
+
+
+
+
+A new servlet is deployed to download the CSV file of the annotations of a document.
+
+## Request 
+
+This functionality is accessible via the servlet: **servletCSVAnnotations**
+
+Usable in GET
+
+
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/servletCSVAnnotations?uuid=docUUID'
 ```
 
 
-## Réponse de la servlet
+## Servlet Response
 
-Le fichier CSV des annotations du document envoyé en paramètre est téléchargé.
+The CSV file of document annotations given as parameter is downloaded.

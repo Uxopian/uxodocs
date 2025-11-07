@@ -1,86 +1,96 @@
 ---
-title: Recherche textuelle
+title: "Textual search"
 ---
 
-### Fonctions de recherche
-Ces fonctions permettent de lancer une recherche textuelle sur un document ouvert, pour surligner et se positionner sur des éléments de texte précis.
 
-- Objet : getARenderJS().getSearchJSAPI()
 
-    | Fonction                                                                                                                         | Description                              | Argument                           |
-    | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ---------------------------------- |
-    | askSearchTextNext(searchText)                                                                                                    | Recherche pour le prochain mot           | **searchText**: (String) le mot que l'on cherche                                                                                                                                                                                                                                                                                                                                                       |
-    | askSearchTextPrevious(searchText)                                                                                                | Recherche pour le précédent mot          | **searchText**: (String) le mot que l'on cherche                                                                                                                                                                                                                                                                                                                                                       |
-    | clearSearchResults()                                                                                                             | Efface les résultats de la recherche     |                                                                                                                                                                                                                                                                                                                                                                                                        |
 
-### Recherche simple
 
-La fonction **askSearchTextNext** permet de lancer une recherche simple. Elle prend en paramètre d'entrée le texte à rechercher.
+
+
+### Search features
+
+- Object: getARenderJS().getSearchJSAPI()
+
+    | Function                                                                                                                   | Description                         | Argument                     |
+    | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ---------------------------- |
+    | askAdvancedSearchText(searchText,isCaseSensitive,isAccentSensitive,isRegex,SearchAction,searchAnnotation,postSearchAction) | Advanced search                     |  |
+    | askSearchTextNext(searchText)                                                                                              | Searching the next term             | **searchText**: (String) the text searched                                                                                                                                                                                                                                                                                                                                                       |
+    | askSearchTextPrevious(searchText)                                                                                          | Searching the previous term         | **searchText**: (String) the text searched                                                                                                                                                                                                                                                                                                                                                       |
+    | clearSearchResults()                                                                                                       | Clear current search results        |                                                                                                                                                                                                                                                                                                                                                                                                  |
+
+### Simple search
+
+The **askSearchTextNext** function is used to perform a simple search. It takes the text to search for as its input parameter:
 ```javascript
 getARenderJS().getSearchJSAPI().askSearchTextNext("arender")
 ```
-Cette recherche surligne le texte recherché sur l'ensemble des documents ouverts, sans respecter la casse, et positionne le viewer sur le premier élément correspondant à partir de la page sur laquelle on est positionné.
+This search highlights the searched text across all open documents, case-insensitively, and positions the viewer on the first matching element starting from the current page.
 
-Il est ensuite possible de naviguer de proche en proche en rappelant la même fonction :
+You can then navigate sequentially by calling the same function again:
 ```javascript
 getARenderJS().getSearchJSAPI().askSearchTextNext("arender")
 ```
 
-Scroller sur le document dans ARender entre deux appels relancera la recherche à partir de la page en cours.
+Scrolling through the document in ARender between two calls will restart the search from the current page.
 
-Il est également possible de se rendre à l'occurrence précédente du texte recherché en faisant appel à la fonction **askSearchTextPrevious** :
+To navigate to the previous occurrence of the searched text, you can use the **askSearchTextPrevious** function:
 ```javascript
 getARenderJS().getSearchJSAPI().askSearchTextPrevious("arender")
 ```
 
-Une fois la recherche terminée, pour enlever la mise en évidence des résultats de recherche sur le document, il conviendra d'utiliser la fonction **clearSearchResults** :
+Once the search is completed, to remove the highlighting of search results on the document, you can use the clearSearchResults function:
 ```javascript
 getARenderJS().getSearchJSAPI().clearSearchResults()
 ```
 
-### Recherche avancée
+### Advanced Search
 
-Le panneau de recherche avancée d'ARender permet de préciser davantage une recherche textuelle.
-Celui-ci peut être ouvert directement depuis l'API JavaScript avec la fonction **askAdvancedSearchText**.
-Cette fonction prend 6 paramètres en entrée :
-- **searchText** : le texte recherché
-- **isCaseSensitive** : sensibilité à la casse (true ou false)
-- **isAccentSensitive** : sensibilité aux accents
-- **isRegex** : si isRegex vaut true, **searchtext** sera interprété comme une expression régulière.
-- **SearchAction** : précise le périmètre de la recherche et peut prendre ces trois valeurs :
-    - *CurrentPage* : Recherche sur la page courante
-    - *AllPages* : Recherche sur l'ensemble des pages du document courant
-    - *AllDocuments* : Recherche dans tous les documents
-- **searchAnnotation** : Précise si la recherche inclut les annotations
-    - *WithAnnotations* : Recherche dans le texte du document et les annotations
-    - *WithoutAnnotations* : Recherche dans le texte du document uniquement
-    - *OnlyAnnotations* : Recherche dans les annotations uniquement
-- **postSearchAction** : Précise ce qui doit être fait des éléments trouvés :
-    - *null* : Aucun traitement particulier
-    - *Redact* : Les éléments trouvés sont convertis en annotation de type masquage (le texte ne s'affiche qu'au survole de la souris)
-    - *Highlight* : les éléments recherchés sont convertis en annotations de type surlignage
+The advanced search panel in ARender allows for more precise text searches.
+It can be opened directly from the JavaScript API using the **askAdvancedSearchText** function.
 
-**Voici un exemple classique d'utilisation :**
+This function takes 6 input parameters:
+- **searchText**: The text to search for.
+- **isCaseSensitive**: Case sensitivity.
+- **isAccentSensitive**: Accent sensitivity (true or false).
+- **isRegex**: If isRegex is true, **searchText** will be interpreted as a regular expression.
+- **SearchAction**: Specifies the scope of the search and can take the following values:
+    - *CurrentPage:* Search on the current page.
+    - *AllPages:* Search across all pages of the current document.
+    - *AllDocuments:* Search across all documents.
+- **searchAnnotation**: Specifies whether the search includes annotations:
+    - *WithAnnotations:* Search within the document text and annotations.
+    - *WithoutAnnotations:* Search within the document text only.
+    - *OnlyAnnotations:* Search within annotations only.
+- **postSearchAction**: Specifies what to do with the found elements:
+    - *null:* No specific action.
+    - *Redact:* The found elements are converted into redaction annotations (text is hidden and only displayed on mouse hover).
+    - *Highlight:* The searched elements are converted into highlight annotations.
+
+**- Here is a classic example of usage:**
 
 ```javascript
 getARenderJS().getSearchJSAPI().askAdvancedSearchText("arender", false, false, false, "AllDocuments", "WithAnnotations", null)
 ```
-Dans cet exemple :
-- la recherche porte sur le terme "arender"
-- la recherche ne tient pas compte de la casse
-- la recherche ne tient pas compte des accents
-- le terme de recherche n'est pas une regex
-- la recherche est effectuée sur l'ensemble des documents ouverts
-- la recherche porte sur le texte du document ainsi que les annotations ajoutées par l'utilisateur
-- aucun traitement particulier n'est effectué sur les éléments retournés par la recherche.
+In this example:
+- The search targets the term "arender".
+- The search is case-insensitive.
+- The search ignores accents.
+- The search term is not a regex.
+- The search is conducted across all open documents.
+- The search covers the document text as well as annotations added by the user.
+- No specific action is performed on the elements returned by the search.
 
 
-La navigation de proche en proche et le nettoyage des résultats se font de la même façon que pour la recherche simple, avec les fonctions **askSearchTextNext**, **askSearchTextPrevious**, et **clearSearchResults**.
+Navigation through results and clearing search results are done in the same way as for a simple search, using the **askSearchTextNext**, **askSearchTextPrevious**, and **clearSearchResults** functions.
 
-**- Exemple de recherche par expression régulière :**
+**- Example of a regular expression search:**
 
-Une expression régulière (ou regex) est une règle permettant de définir quelles séquences de caractères ressortent dans une recherche.
-```xml
-Par exemple, ** &#92;b&#92;w<!-- Balise invalide supprimée -->&#92;b", false, false, true, "AllDocuments", "WithAnnotations", null)
-```
+A regular expression (or regex) is a rule that defines which sequences of characters are highlighted in a search.
+For example, <code>\b\w&#123;16,&#125;\b</code> will match words containing more than 16 characters.
+
+To perform a search with this regex, you would run the search as follows, making sure to specify *true* for the **isRegex** parameter:
+
+```javascript
+getARenderJS().getSearchJSAPI().askAdvancedSearchText("\b\w{16,}\b", false, false, true, "AllDocuments", "WithAnnotations", null)
 ```

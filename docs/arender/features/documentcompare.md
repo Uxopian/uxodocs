@@ -1,168 +1,148 @@
 ---
-title: Comparaison de document
+title: "Document comparison"
 ---
 
-## Mettre deux documents en comparaison
 
 
-La comparaison d'images est une fonctionnalité disponible à partir
-de la version 4.4.0
 
 
-### Lancement manuel
 
-#### Dans le cas de documents textuels
 
-Pour activer la comparaison de deux documents, effectuer un clic droit
-dans le volet de navigation au niveau du document à comparer avec celui
-en cours de visualisation, en cliquant sur *Ouvrir comme un nouveau
-document*.
+## Compare two documents
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Le document s'ouvre alors à côté du premier et les résultats de la
-comparaison s'affichent.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+The image comparison is a feature available from version 4.4.0
 
-#### Dans le cas de documents de type image
 
-Pour activer la comparaison de deux images, effectuer un clic droit
-dans le volet de navigation au niveau du document à comparer avec celui
-en cours de visualisation, en cliquant sur *Ouvrir comme un nouveau
-document et comparer les images*.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+### Manual processing
 
-Le document s'ouvre alors à côté du premier et les résultats de la
-comparaison s'affichent.
+To do a comparison between two documents, right click on a document's
+thumb in the navigation panel and select *Open as new and compare*
+or *Open as new and compare images* if both documents are images.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+#### Case of textual documents
 
-### Lancement automatique au démarrage de l'application
+![image](/img/arender/documentCompare1.png)
 
-Pour lancer automatiquement la comparaison des documents au démarrage de
-l'application, utiliser le paramètre :
+The chosen document opens next to the current one, then the comparison
+results are displayed.
+
+![image](/img/arender/documentCompare2.png)
+
+#### Case of image documents
+
+![image](/img/arender/compareImages1.png)
+
+The chosen document opens next to the current one, then the comparison
+result is displayed as a new image.
+
+![image](/img/arender/compareImages2.png)
+
+### Automatic comparison on start up
+
+To automatically start the comparison after the application loading, use
+the following parameter:
 
     visualization.multiView.doComparison=true
 
-La comparaison ne se lancera que si au moins deux documents sont chargés
-dans l'applciation.
+The comparison will only be triggered if at least two documents are
+loaded.
 
-Le premier document chargé s'ouvrira à gauche et le second à droite.
+The first document of these will be opened on the left and the second
+one on the right.
 
-Si les deux documents sont des images, alors ce sera la comparaison
-d'images qui sera lancée.
+If both documents are images, then the image comparison will be
+triggered.
 
-Comment quitter le mode comparaison ? =============================
+## Close comparison mode
 
-- Pour quitter, cliquer sur la croix présente dans le coin en haut à
-  droite du document à fermer.
+- To go back to the simple view mode, click on the red cross in the
+  upper right corner of the document to close.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/documentCompare3.png)
 
-- Il est également possible d'effectuer un clic droit puis de
-  sélectionner *Fermer la vue multiple*.
+- It is also possible to close the comparison mode by right clicking
+  on a document and select *Close multiView*.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/documentCompare4.png)
 
-## Analyser les résultats d'une comparaison
+## Parse comparison results
 
-La couleur d'une ligne définit sa différence avec l'autre document :
+Each difference type between two documents corresponds to a specific
+color:
 
-| Couleur | Signification                    |
-| ------- | -------------------------------- |
-| Verte   | Ligne ajoutée                    |
-| Rouge   | Ligne supprimée                  |
-| Grise   | Ligne modifiée                   |
-| Orange  | Modification au sein d'une ligne |
+| Color  | Meaning                          |
+| ------ | -------------------------------- |
+| Green  | Added line                       |
+| Red    | Removed line                     |
+| Grey   | Modified line                    |
+| Orange | Modified text on a specific line |
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/documentCompare5.png)
 
-## Parcourir les résultats obtenus
+## Browse results
 
-### Navigation dans les résultats
+### Navigate through results
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/documentCompare6.png)
 
-Cliquer sur le bouton *Résultat suivant* ou *Résultat précédent*
-redirigera sur le résultat le plus proche, peu importe le document.
+Clicking on the *Next result* or *Previous result* button will redirect
+to the closest one, regardless of the document.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/documentCompare7.png)
 
-### Défilement synchronisé des documents
+### Synchronized scroll between documents
 
-Par défaut, lorsqu'une comparaison est effectuée, le défilement
-synchronisé des documents est actif.
+The synchronized scroll function is enabled by default when a comparison
+is done. It can be disabled using the corresponding button in the top
+panel.
 
-Il est possible de le désactiver en utilisant le bouton correspondant
-dans le bandeau de navigation.
+### Result's match
 
-### Correspondance des résultats
+Clicking on a specific result redirects to the matching line on the
+other document.
 
-Cliquer sur un résultat renvoi à la ligne correspondant à cette
-différence dans l'autre document.
+![image](/img/arender/documentCompare8.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-## Spécificités du mode comparaison
 
-- Le mode vue multiple intègre un système de document courant, désigné
-  par le dernier par lequel est passé la souris.
+## Comparison mode's specifications
+
+- The multi-view mode comes with the concept of current document which
+  is defined has the last document hovered.
   
-  C'est ce document qui est pris en compte pour la majorité des
-  fonctionnalités : Annotations, Téléchargement, Impression, Recherche
-  textuelle, Rotation de page ...
+  This document is used for most of functionalities: Annotations,
+  Download, Printing, Text searching, Page rotation, ...
 
-- Le changement de document à l'aide des vignettes du volet de
-  navigation est désactivé.
+- Document changing using navigation panel's thumbs is disabled.
   
-  Seules les vignettes correspondant aux documents ouverts en mode
-  comparaison permettent de changer de page au sein de celui-ci.
+  Only thumbs corresponding to documents currently opened in
+  comparison mode allow to jump to the selected page on it.
 
-## Définir le focus de document par clic
+## How define the focus of document by click
 
-Pour définir le focus de document par clic utilisé le paramètre :
+To define the focus of the document by click use the parameter:
 
     visualization.multiView.focusOnClick=true
 
-## Le résultat de la comparaison d'images
+## The image comparison result
 
-Après le lancement de la comparaison d'images, une nouvelle vue s'affiche où
-vous pouvez voir les deux images comparées, une boîte de configuration dans laquelle
-vous pouvez modifier les valeurs de la "fuzz", la "highlight color" et la "lowlight color",
-ainsi que le résultat de l'image.
+After launching image comparison, a new view is displayed where
+you can see the both images compared, a configuration box in which
+you can modify the "fuzz", "highlight color" and "lowlight color" values,
+and the image result.
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/compareImages2.png)
 
-La comparaison d'images est basée sur des calculs mathématiques affectés
-par la valeur du "fuzz". Plus la valeur du "fuzz" est élevée, moins le calcul
-de comparaison de pixels est précis.
+The image comparison is based on mathematical calculations influenced
+by the value of the "fuzz". A greater "fuzz" value means a less accurate
+pixel comparison calculation.
 
-La valeur par défaut est 3 et est configurable avec la propriété suivante :
+The default fuzz value is 3, and is configurable with the following property: 
+
 
 
 ```cfg
@@ -171,10 +151,12 @@ visualization.image.comparison.default.fuzz=3
 ```
 
 
-Par défaut, les différences sont les zones rouges (highlight color) et les pixels
-qui ne sont pas considérés comme différents sont incolores (lowlight color).
 
-Les couleurs sont configurables avec les propriétés suivantes :
+By default, the differences are the red zones (highlight color) and the pixels
+that are not considered different are colorless (lowlight color). 
+
+The default colors are configurable with the following properties :
+
 
 
 ```cfg
@@ -185,32 +167,36 @@ visualization.image.comparison.default.highlight.color=#FF0000
 visualization.image.comparison.default.lowlight.color=none
 ```
 
-## Télécharger les documents avec les résultats
 
-### Avec l'interface
-Une fois la comparaison faite, un bouton est disponible pour le téléchargement des deux documents côte à côte avec les résultats de comparaison dessus.
+## Download documents with comparison results
 
-```xml
-<!-- Commentaire nettoyé -->
+### With UI
+
+Once the comparison is done, a download button is available to download the two documents side by side with their comparison results on it.
+
+![image](/img/arender/documentCompare9.png)
+
+### With servlet
+
+Example of URL allowing the servlet to be used to perform a comparison and then download the side-by-side documents with their comparison results on it.
+
+
+
+```
+http://<arender_host>/ARender/arendergwt/downloadServlet/mergedWithCompareResult?left=<document_id_left>&right=<document_id_right>
 ```
 
-### Avec la servlet
 
-Exemple d'URL permettant d'utiliser la servlet pour effectuer une comparaison puis le téléchargement des documents côte à côte avec les résultats de comparaison dessus.
+## Allow document switching with vertical scrolling
 
+By default, it is not possible to switch documents with a vertical scroll during a document comparison.
+It is possible to change this behavior and allow document switching with vertical scrolling with the following configuration :
 
-```
-http://<!-- Commentaire nettoyé -->&right="document_id_right"
-```
-
-## Autoriser le changement de document avec un défilement vertical
-
-Par défaut, il est impossible de changer de document avec un défilement vertical lors d'une comparaison de document.
-Il est possible de changer ce comportement et d'autoriser le changement de document avec un défilement vertical avec la configuration suivante :
 
 
 ```cfg
 # Allow the vertical scrolling to change document while in multiview
 visualization.multiView.allow.scroll.document.change=true
 ```
+
 

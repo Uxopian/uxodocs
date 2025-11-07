@@ -1,51 +1,58 @@
 ---
-title: Les raisons des biffures
+title: "Redact reasons"
 ---
 
-### Ajouter une raison
-
-Il est possible d'ajouter des raisons de biffage. Les valeurs du paramètre `symbolicName` seront affichées directement sur la biffure. 
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-```xml
-    **
-		<!-- Commentaire nettoyé -->
-				**
-					
-					
-						<!-- Commentaire nettoyé -->
-							<entry>
-						<!-- Commentaire nettoyé -->
-				**
-			<!-- Commentaire nettoyé -->
-	**
-```
 
 
-## Valeur par défaut 
 
-Vous pouvez ajouter une ou plusieurs raisons par défaut grâce à la propriété suivante. La valeur par défaut (ici '(b)(1)') correspond à la valeur de la propriété avec le nom "symbolicName" (voir l'exemple ci-dessus).
 
-Si plusieurs raisons sont ajoutées comme valeur par défaut elles seront séparées par des virgules (ex : (b)(1),(b)(2) ).
+## Add reason
+It is possible to add redact reasons. These reasons will be directly displayed on the redact.
+
+Change the value to the values you want.
+
+
 
 ```xml
-<!-- Commentaire nettoyé -->
+    <bean id="availableRedactReasons" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean
+					class="com.arondor.viewer.annotation.common.RedactReason">
+					<property name="symbolicName" value="(b)(1)" />
+					<property name="displayName">
+						<map>
+							<entry key="fr" value="Informations classées pour protéger la sécurité nationale." />
+							<entry key="en" value="Information that is classified to protect national security." />
+						</map>
+					</property>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
 ```
+
+
+
+## Default value
+
+You can add one or more default reasons with the following property. The default reason value (here '(b)(1)') corresponds to the value in the “symbolicName” property (see the above example).
+
+If there are several default reasons, it should be comma-separated values (ex:(b)(1),(b)(2)).
+
+
 
 ```cfg
 arender.server.annotations.default.redact.reason=(b)(1)
 ```
 
-Si cette propriété n'a pas de valeur, par défaut la biffure ne possédera pas de raison.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Votre valeur par défaut **doit** être ajoutée dans votre fichier de customisation (la configuration de arender-custom-integration.xml). Sinon, cette valeur ne sera pas prise en compte.
+If this property has no value, by default the redact will have no reason.
 
+
+
+Your default value **must** be added to your customization file (in arender-custom-integration. xml). Otherwise, this value will not be taken into account.
 

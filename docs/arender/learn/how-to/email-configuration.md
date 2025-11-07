@@ -1,21 +1,30 @@
 ---
-title: Configurer les emails
+title: "Configure emails"
 ---
 
-## Formatage des dates
 
-Il est possible de configurer un format de date pour les emails. La configuration suivante va permettre de formater 
-la date *2022-01-24T04:54:42-05* qui donnera le résultat *Mon 24 Jan 2022 04:54:42 -0500*
+
+
+
+
+
+## Date formatting
+
+It is possible to configure a date format for emails. The following configuration will format the date 
+*2022-01-24T04:54:42-05* which will give the result *Mon 24 Jan 2022 04:54:42 -0500*
+
 
 
 ``` cfg
-emltopdf.config.format.date=EEE d MMM yyyy HHss ZZ
+emltopdf.config.format.date=EEE d MMM yyyy HH:mm:ss ZZ
 ```
 
 
-### Date dépendante du fuseau horaire
 
-La date est configurable selon le fuseau horaire de l'utilisateur. Par défaut, la date est formatée selon le fuseau horaire UTC.
+### Date dependent on time zone
+
+The date is configurable according to the user's time zone. By default, the date is formatted according to the UTC time zone.
+
 
 
 ``` cfg
@@ -24,22 +33,44 @@ default.url.parser.use.timeZone.for.ids=true
 
 
 
-## Sujet et pièces jointes avec des caractères non-latin
 
-Les caractères non-latin présent dans le sujet et le nom des pièces jointes peuvent ne pas s'afficher correctement. 
-Pour permettre d'effectuer le bon rendu, il faut configurer le module de rendition *document-converter* de la façon suivante : 
+## Subject and attachments with non-Latin characters
+
+Non-Latin characters in subject and attachment names may not be displayed correctly. 
+To enable proper rendering, you must configure the *document-converter* rendering module as follows :
+
 
 
 ``` cfg
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
 emltopdf.encode.header.with.body.encoding=true
 emltopdf.config.filter.special.characters.regex=
 emltopdf.config.filter.replacement.character=
 ```
+```
+```
+```
+```
+```
+```
 
 
-Dans certain cas, le sujet et les pièces jointes peuvent toujours avoir des problèmes d'affichage. 
-Il faudra donc appliquer la configuration suivante côté *Web-UI-server*. Cela permet de fournir la locale de l'utilisateur 
-qui va servir pour déterminer le bon encodage à appliquer.
+
+In some cases, the subject and attachments may still have display issues. It will therefore be necessary 
+to apply the following configuration on the *Web-UI-server* side. This makes it possible to provide the locale of 
+the user which will be used to determine the correct encoding to apply.
+
 
 
 ``` cfg
@@ -47,10 +78,13 @@ default.url.parser.use.locale.for.ids=true
 ```
 
 
-## Langage de rendu d'en-tête
 
-Il est possible de configurer la langue de rendu des en-têtes pour les emails.
-Par défaut, l'en-tête est rendu en français. Les valeurs possibles sont : "FR", "EN".
+
+## Header rendering language
+
+It is possible configure the header rendering language for emails.
+By default, the header is rendered in French. The possible values are : "FR", "EN".
+
 
 
 ``` cfg

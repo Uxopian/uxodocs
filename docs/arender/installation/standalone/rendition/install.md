@@ -1,122 +1,123 @@
 ---
-title: Installation
+title: "Installation"
 ---
 
-Si l'installation est une montée de version de la version 4.8 vers la version 2023.0, merci de consulter la documentation 
-```xml
-détaillée de mise à jour [ici](<!-- Commentaire nettoyé -->).
-```
-
-## Installation avec l'installeur
-
-Nous recommandons l'installation d'ARender via l'installeur car il contient tous les logiciels additionnels nécessaires 
-au bon fonctionnement du produit et dans les versions validées par nos équipes. C'est la méthode d'installation la plus 
-fiable. 
-Le seul prérequis est un JDK ou JRE valide (voir **Prérequis** (lien supprimé)).
-
-### Téléchargement de l'installeur
-
-Utilisez les informations d'identification fournies (contactez arender-sales@arondor.com pour demander l'accès) pour 
-télécharger le fichier JAR d'installation de Rendition :
 
 
-### Installation
 
-Exécuter la commande ci-dessous :
+
+
+
+
+If upgrading from version 4.8 to version 2023.0, please refer to the detailed upgrade documentation
+[here](./guides/upgrade/4.8_to_2023.0/_index.en.md).
+
+
+## Installer Setup
+
+We strongly recommend installing ARender using the all-in-one installer, as it includes all necessary third-party 
+components in validated versions. This method ensures the most reliable setup experience. The only requirement is a 
+valid JDK or JRE (see [Requirement](./content/installation/standalone/rendition/requirements.en.md)).
+
+### Retrieving the installer
+
+Use the provided credentials (contact arender-sales@arondor.com for access) to download the Rendition installation JAR:
+
+https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/micro/services/rendition-engine-installer//rendition-engine-installer--rendition.jar
+
+### Installation process
+
+Run the following command to start the installation:
 
 ```bash
+$> java -jar rendition-engine-installer--rendition.jar
 ```
 
-Voici un exemple des étapes d'installation sous Windows :
+Below is an example of the installation steps on Windows:
 
-* Sélectionner le dossier d'installation :
+* Select the installation directory:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/installer-jar-arender-1.png)
 
-* Sélectionner les composants à installer. Les composants non sélectionnées devront être installés manuellement.
+* Select the components to install. Unselected items must be installed manually:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/installer-jar-arender-2.png)
 
-* Écran de fin d'installation :
-```xml
-<!-- Commentaire nettoyé -->
-```
+* Completion screen: 
+![image](/img/arender/installer-jar-arender-3.png)
 
-* Les logiciels installés, à l'exception de LibreOffice, seront situés dans le dossier ***third_party*** :
+Installed software, except LibreOffice, will be located in the ***third_party*** software folder:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/installer-jar-arender-4.png)
 
-**Félicitations, l'installation est terminée !**
+**Congratulations, the installation is complete!**
 
-## Méthodes d'Installation Alternatives d'ARender
+## Alternative ARender Installation Methods
 
-## Installation en mode silencieux
+### Silent installation
 
-#### Télécharger le fichier de configuration
+#### Retrieve the configuration file
 
+docs/install/install-rendition.properties
 
-#### Configuration de l'installation
+#### Installation configuration
 
-Diverses propriétés peuvent être ajoutées : 
+Various options can be added:
 
-| Propriétés                                       | Mandatory/Optional | Fonction                                                     | Valeurs possibles |
-| ------------------------------------------------ | ------------------ | ------------------------------------------------------------ | ----------------- |
-| INSTALL_PATH                                     | Obligatoire        | Destination de l'installation                                | Chemin absolue    |
-| arender.silent.install                           | Optionnel          | Mettre à true lors d'une installation silencieuse (-options) | True/false        |
-| arender.install.as.service                       | Optionnel          | Installer en tant que service                                | True/false        |
-| arender.install.libreoffice                      | Optionnel          | Installer Libreoffice                                        | True/false        |
-| arender.install.wkhtmltopdf.portable             | Optionnel          | Installer Wkhtmltopdf                                        | True/false        |
-| arender.install.imagemagick.portable             | Optionnel          | Installer ImageMagick                                        | True/false        |
-| arender.install.ffmpeg.portables                 | Optionnel          | Installer FFmpeg en mode portable                            | True/false        |
-| arender.install.msoffice.prerequisites (Windows) | Optionnel          | Installer les prérequis Microsoft Office pour ARender        | True/false        |
+| Properties                                      | Mandatory/Optional | Function                                           | Possible value |
+| ------------------------------------------------| ------------------ | -------------------------------------------------- | -------------- |
+| INSTALL_PATH                                    | Mandatory          | Installation Path                                  | Absolute path  |
+| arender.silent.install                          | Optional           | Set to true on silent install (-options)           | True/false     |
+| arender.install.as.service                      | Optional           | Install as service                                 | True/false     |
+| arender.install.libreoffice                     | Optional           | Libreoffice setup                                  | True/false     |
+| arender.install.wkhtmltopdf.portable            | Optional           | Install Wkhtmltopdf in portable mode               | True/false     |
+| arender.install.imagemagick.portable            | Optional           | Install ImageMagick in portable mode               | True/false     |
+| arender.install.ffmpeg.portables                | Optional           | Install FFmpeg in portable mode                    | True/false     |
+| arender.install.msoffice.prerequisites (Windows)| Optional           | Install Microsoft Office prerequisites for ARender | True/false     |
 
-Exemple, pour une installation en mode silencieux, ajouter la propriété **arender.silent.install=true** dans 
-**install-rendition.properties**.
+As example, for a silent installation, set **arender.silent.install=true** in **install-rendition.properties**.
 
-#### Commande d'installation silencieuse
+#### Silent Installation Command
 
-Pour une installation en mode silencieux, une option doit être passée en paramètre au moment de lancer l'installation avec le jar.
+For an installation in a silent mode, an option must be passed as a parameter when launching the installation with the jar.
 ```bash
 $> java -jar ARender-rendition-installer.jar -options install-rendition.properties
 ```
 
-### Installation avec le package zip
+### Zip Packaging Installation
 
-#### Prérequis
+#### Third-Party requirements
 
-Pour l'installation avec le package zip, les logiciels additionnels doivent être installés manuellement.
+Install the following additional software:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
-Nous vous recommandons d’utiliser Chocolatey pour gérer cela facilement : 
-Nous vous recommandons d'installer ces logiciels à partir des packages de distribution officiels de l'OS. 
 
-| Type de Documents       | Logiciel                        | Prérequis                                                                                                  |
-| ----------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Documents Office        | LibreOffice ou Microsoft Office | LibreOffice 5+ (LibreOffice 5 sur RHEL/CentOS (6) nécessite libGL.so.1). Microsoft Office 2013+.           |
-| Images                  | ImageMagick                     | ImageMagick 7+ (sous Windows, valider que le binaire convert.exe existe, sinon, le lier à from magick.exe) |
-| Mails et HTML           | WKHtmlToPdf                     | wkhtmltopdf 0.12.5+                                                                                        |
-| Vidéos, Audios et GIFs  | FFmpeg                          | FFmpeg 2.8.15+                                                                                             |
 
-S'assurer que les logiciels additionnels sont dans la PATH du serveur :
+We recommend using Chocolatey to ease the installations: [https://chocolatey.org/](https://chocolatey.org/)
 
-| Logiciel    | Variable qui doit être présente dans la variable d'environnement PATH du serveur                                                                  |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| LibreOffice | *soffice*                                                                                                                                         |
-| ImageMagick | *magick* (Sous Windows, valider que la librairie nommée convert.exe existe, si ce n'est pas le cas merci de la créer via un lien vers magick.exe) |
-| WKHtmlToPdf | *wkhtmltopdf*                                                                                                                                     |
-| FFmpeg      | *ffmpeg* and *ffprobe*                                                                                                                            |
 
-#### Configuration de l'OS (Linux uniquement)
+We recommend installing these third parties from the official OS package distribution.
 
-Si le serveur n'a pas de serveur X (Linux), veuillez installer xfvb et exécuter les commandes ci-dessous :
+
+
+| Document Type           | Software                        | Requirement                                                                                                             |
+| ----------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Office Documents        | LibreOffice or Microsoft Office | LibreOffice 5+ (ensure libGL.so.1 for RHEL/CentOS 6). MS Office 2013+ recommended.                                      |
+| Images                  | ImageMagick                     | ImageMagick 7+ (under Windows, validate that the binary named convert.exe is existing, if not, link it from magick.exe) |
+| Mails and HTML          | WKHtmlToPdf                     | wkhtmltopdf 0.12.5+                                                                                                     |
+| Videos, Audios and GIFs | FFmpeg                          | FFmpeg 2.8.15+                                                                                                          |
+
+Ensure third-party tools are in the server's PATH:
+
+| Software    | Variable that should be in the server PATH environment variable                                                   |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| LibreOffice | *soffice*                                                                                                         |
+| ImageMagick | *magick* (under Windows, validate that the binary named convert.exe is existing, if not, link it from magick.exe) |
+| WKHtmlToPdf | *wkhtmltopdf*                                                                                                     |
+| FFmpeg      | *ffmpeg* and *ffprobe*                                                                                            |
+
+#### OS Configuration (Linux Only)
+
+If the server lacks an X server, install xvfb and run:
 
 ```bash
 $> echo -e '#!/bin/bash\nxvfb-run -a --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf -q $*' > /usr/bin/wkhtmltopdf.sh
@@ -124,9 +125,7 @@ $> chmod a+x /usr/bin/wkhtmltopdf.sh
 $> ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 ```
 
-#### Installation
+#### Installation process
 
-Dézipper le fichier zip de la rendition dans le dossier de votre choix.
-
-Nous recommandons un dossier proche de la racine sous les systèmes Windows pour mieux absorber la limite de caractères 
-des systèmes de fichier Windows.
+Extract the rendition-engine zip file to the desired directory. It is recommended to choose a directory close to the 
+root of your file system to avoid Windows path length limitations.

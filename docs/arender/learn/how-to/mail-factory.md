@@ -1,20 +1,25 @@
 ---
-title: Résoudre les soucis de conversion de mail
+title: "Resolve mail conversion issue"
 ---
 
-Vous avez surement un problème de configuration lié à wkhtmltopdf
 
-## Configuration avancée
 
-Si sous Windows, la conversion de manière unitaire ne fonctionne pas,
-regardez le message d'erreur Windows si vous en avez un, cela pourra
-vous indiquer une potentielle absence de framework. (.NET, Visual Studio
-Redistribuable, etc...)
 
-Si sous Linux, la conversion ne se passe pas avec une erreur indiquant
-un problème de serveur X, vous devez installer le paquet xvfb et faire
-dans votre linux les commandes suivantes (en les adaptant à votre
-installation de wkhtmltopdf)
+
+
+
+You probably have a configuration problem related to wkhtmltopdf.
+
+## Advanced configuration
+
+If on Windows, the unit conversion does not work, look at the Windows
+error message if you have one, this may indicate a potential lack of
+framework. (.NET, Visual Studio Redistributable, etc..)
+
+If on Linux, the conversion does not happen with an error indicating an
+X server problem, you need to install the xvfb package and make the
+following commands in your linux (adapting them to your wkhtmltopdf
+installation)
 
 ``` bash
 mv /usr/bin/wkhtmltopdf /usr/bin/wkhtmltopdf_nohead
@@ -22,17 +27,16 @@ cp wkhtmltopdf_xvfb /usr/bin/wkhtmltopdf
 chmod a+x /usr/bin/wkhtmltopdf
 ```
 
-Le contenu du fichier wkhtmltopdf_xvfb est le suivant:
+The contents of the wkhtmltopdf_xvfb file are as follows:
 
 ``` bash
 #!/bin/bash
 xvfb-run -a -s "-screen 0 640x480x16" /usr/bin/wkhtmltopdf_nohead "$@"
 ```
 
-Si l'erreur est liée à un problème réseau lors de la récupération des
-images du mail, il est alors à votre choix de décider si vous souhaitez
-autoriser la rendition à se connecter au net pour récupérer ces images
-ou donner à wkhtmltopdf dans la configuration de la rendition un proxy
-qui se chargera de résoudre les URLs autorisées et bloquera les autres
-(un proxy bloquant toutes les images est possible mais le rendu en sera
-dégradé)
+If the error is related to a network problem when retrieving the images
+from the mail, it is then up to you to decide whether you want to allow
+the rendition server to connect to the net to recover these images or to
+give wkhtmltopdf in the configuration of the rendition server a proxy
+that will resolve authorized URLs and block others (a proxy blocking all
+the images is possible but the rendering will be degraded).

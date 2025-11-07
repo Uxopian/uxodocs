@@ -1,41 +1,47 @@
 ---
-title: Obtenir un morceau de fichier (GET)
+title: "GET file chunk"
 ---
 
-Cette API permet d'obtenir un morceau de fichier avec une plage de positions donnée.
 
-## Description technique de l'API
 
-Point de terminaison:
+
+
+
+
+This API allows you to retrieve a chunk of a file with a specified range of offset.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/file/chunk
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
 
-Paramètres de requête:
+Query params:
 
-| Paramètre  | Requis | Description                                              |
-|:-----------|:-------|:---------------------------------------------------------|
-| format     | Non    | Le format du document dans lequel on récupère le morceau |
+| Parameter  | Required | Description                                                |
+|:-----------|:---------|:-----------------------------------------------------------|
+| format     | No       | The format of the document in which we retrieve the chunk  |
 
-Ressource de l'en-tête:
+Resource header:
 
-| Variable | Requis | Description                                                                    |
-|:---------|:-------|:-------------------------------------------------------------------------------|
-| range    | Oui    | Valeur de la plage au format “bytes=x-y” avec x et y étant des nombres entiers |
+| Variable | Required | Description                                                   |
+|:---------|:---------|:--------------------------------------------------------------|
+| range    | Yes      | Range value in “bytes=x-y” format with x and y being integers |
 
-## Exemples
+## Examples
 
-### Obtenir tronçon
+### Retrieve Chunk
 
-L'exemple ci-dessous permet d'obtenir un morceau pour un document
-avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_ au format txt qui existe en rendition.
+The following example retrieves a chunk of a document
+with ID _b64_bm9yZS92SDMtMS0xMTh1735080237_ in txt format which exist in rendition.
 
 ```bash
 curl -X 'GET' \

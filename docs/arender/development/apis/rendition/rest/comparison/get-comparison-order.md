@@ -1,39 +1,46 @@
 ---
-title: Récupérer un ordre de comparaison (GET)
+title: "GET a comparison order"
 ---
 
-Cette API permet de récupérer un ordre de comparaison précédemment demandé.
 
-## Description technique de l’API
 
-Point de terminaison :
+
+
+
+
+
+This API allows you to retrieve a comparison order previously requested.
+
+## API technical description
+
+Entry point:
 ```bash
 GET /comparisons/<comparisonOrderId>
 ```
 
-Chemin de ressource :
+Resource path:
 
-| Variable             | Type     | Requis  | Description                                                           |
-| :------------------- |:---------|:--------|:----------------------------------------------------------------------|
-| comparisonOrderId    | String   | oui     | L'id de l'ordre de comparaison à récupérer.                           |
+| Variable             | Type     | Required | Description                                                   |
+| :------------------- |:---------|:---------|:--------------------------------------------------------------|
+| comparisonOrderId    | String   | yes      | The ID of a comparison order to get.                          |
 
-Paramètre de requête :
+Query param:
 
-| Variable             | Type     | Requis  | Description                                                           |
-| :------------------- |:---------|:--------|:----------------------------------------------------------------------|
-| timeoutMs            | String   | non     | Le temps d'attente maximum avant de recupérer l'ordre de comparaison. |
+| Variable             | Type     | Required | Description                                                   |
+| :------------------- |:---------|:---------|:--------------------------------------------------------------|
+| timeoutMs            | String   | no       | The maximum waiting time before getting the comparison order. |
 
-Réponse :
+Response:
 
-| Attribute             | Type                  | Description          |
-| :-------------------- | :-------------------- |:---------------------|
-| comparisonOder        | ComparisonOrder       | Ordre de comparaison |
+| Attribute             | Type                  | Description       |
+| :-------------------- | :-------------------- |:------------------|
+| comparisonOder        | ComparisonOrder       | Comparison order. |
 
-## Exemples
+## Examples
 
-### Récupérer un ordre de comparaison
+### Retrieve a comparison order
 
-L'appel ci-dessous génère une demande de récupération de l'ordre de comparaison avec l'id _123e4567-e89b-12d3-a456-426614174000_ et un temps d'attente de 6000 milliseconds.
+The call below generates a request to retrieve the comparison order with id _123e4567-e89b-12d3-a456-426614174000_.
 
 ```bash
 curl -X 'GET' \
@@ -41,11 +48,10 @@ curl -X 'GET' \
   -H 'accept: */*'
 ```
 
-
-Exemple de réponse :
+Response sample:
 
 ```bash
-{
+
   "comparisonOrderId": {
     "id": "string"
   },
@@ -61,5 +67,5 @@ Exemple de réponse :
   "queuedTime": 0,
   "rightDocumentId": "string",
   "targetDocumentId": "string"
-}
+
 ```

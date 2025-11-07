@@ -1,45 +1,52 @@
 ---
-title: Charger un document (POST)
+title: "POST Document"
 ---
 
-Cette API vous permet de charger un document.
 
-## Description de l'API
 
-Endpoint :
+
+
+
+
+This API allows you to upload a document.
+
+## API Description
+
+Endpoint:
 ```bash
 POST /documents
 ```
 
 
-Paramètres de requête:
+Query params:
 
-| Variable          | Requis | Description                                                                                                                                                                                                                                       |
-|:------------------|:-------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| documentId        | Non    | L'ID du document                                                                                                                                                                                                                                  |
-| documentTitle     | Non    | Le titre du document                                                                                                                                                                                                                              |
-| documentUrl       | Non    | L'URL du document                                                                                                                                                                                                                                 |
-| failOnUnsupported | Non    | **Introduit dans la version 2023.12.0.** Si la valeur est **true** ou non spécifiée, le chargement d'un document non supporté renverra une erreur. Si la valeur est **false**, le chargement d'un document non supporté ne renverra pas d'erreur. |
-
-Corps de la requête:
-
-| Variable     | Description                                       |
-|:-------------|:--------------------------------------------------|
-| inputStream  | Le flux d'entrée contenant le contenu du document |
+| Variable          | Required | Description                                                                                                                                                                                                                |
+|:------------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| documentId        | No       | The reference ID for the document                                                                                                                                                                                          |
+| documentTitle     | No       | The title of the document                                                                                                                                                                                                  |
+| documentUrl       | No       | The URL of the document                                                                                                                                                                                                    |
+| failOnUnsupported | No       | **Introduced in 2023.12.0 version.** If the value is **true** or not specified, loading an unsupported document will return an error. If the value is **false**, loading an unsupported document will not return an error. |
 
 
-Réponses:
+Request body:
 
-| Type       | Description                                                                                                       |
-|:-----------|:------------------------------------------------------------------------------------------------------------------|
-| DocumentId | L'ID du document. Un nouveau documentId est généré si aucun documentId est fourni dans les paramètres de requête |
+| Variable    | Description                                      |
+|:------------|:-------------------------------------------------|
+| inputStream | The input stream containing the document content |
 
-## Exemples
 
-### Charger un document
+Responses:
 
-L'exemple suivant charge un document à partir d'un fichier nommé 
-"example.pdf" sans spécifier de titre de document ni d'URL.
+| Type       | Description                                                                                  |
+|:-----------|:---------------------------------------------------------------------------------------------|
+| DocumentId | The ID of the document. A new documentId is generated if not provided in the query parameter |
+
+## Examples
+
+### Upload a Document
+
+The following example uploads a document from a file named "example.pdf" 
+without specifying a document title or URL.
 
 ```bash
 curl -X 'POST' \
@@ -49,7 +56,7 @@ curl -X 'POST' \
   --data-binary '@example.pdf'
 ```
 
-L'exemple suivant charge un document par URL.
+The following example uploads a document from URL.
 
 ```bash
 curl -X 'POST' \

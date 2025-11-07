@@ -1,230 +1,190 @@
 ---
-title: Installation dans ICN
+title: "Installation in ICN"
 ---
 
-Nous continuons ici l'installation mais dans le module ICN de FileNet.
-
-## Prérequis
-
-Pour l'utilisation du SSO entre ICN et ARender, il faut savoir que le SSO inter-domaine n'est pas supporté. Par exemple z.AAAcompany.com et w.BBBcompany.com, où les domaines DNS sont différents.
-Plus d'information ci-après : https://www.ibm.com/docs/fr/was-nd/8.5.5?topic=authentication-single-sign-using-ltpa-cookies
-
-
-## Récupérer l'archive du serveur de présentation
-
-En utilisant l'identifiant et mot de passe préalablement fournis,
-vous pouvez récupérer le plugin navigator
-
-## ARender et IBM Content Navigator (ou encore IBM Content Manager)
-
-### Partage de clef LTPA
-
-Afin de permettre l’utilisation de la session utilisateur (ICN) au sein d’ARender Web-UI, il faut mettre en place la configuration LTPA, comme suit :
-
-- Export de la clef LTPA du CPE
-
-Dans la console d’administration WebSphere du **CPE**, rendez-vous sur la page **Sécurité** > **Sécurité Globale**, dans la partie **Authentification**, cliquer sur **LTPA**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-Renseigner un mot de passe, un chemin d’export, puis cliquer sur « Exporter les clés »
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-- Import de la clef LTPA du CPE dans la JVM ARender
-
-Copier le fichier de clés sur le serveur où sera déployé ARender Web-UI
-
-Puis, importer les clés dans le profil hébergeant ARender Web-UI depuis la console d’administration WebSphere, comme ci-desous :
-
-- Dans la console d’administration WebSphere, rendez-vous sur la page **Sécurité** > **Sécurité Globale**, dans la partie **Authentification**, cliquer sur **LTPA**
-- Renseigner le même mot de passe que précédemment
-- Renseigner le chemin du fichier contenant les clés
-- Cliquer sur « Importer les clés »
-- Sauvegarder les modifications
-
-### Invalidation de session lors d'un changement d'utilisateur
-
-Depuis ICN version 3.0.6, si vous changez d'utilisateur sur la même session alors vous allez avoir un message d'erreur à l'ouverture d'un document par le nouvel utilisateur qui va ressembler à cela :
 
 
 
-Error 500: com.ibm.websphere.servlet.session.UnauthorizedSessionRequestException: SESN0008E: A user authenticated as user389/CN=userB,CN=Users,DC=ircem,DC=dev has attempted to access a session owned by user389/CN=userA,CN=Users,DC=ircem,DC=dev
 
 
-La session de l'utilisateur userA n'a pas été invalidée à sa déconnexion, ce qui va entrainer l'erreur à l'ouverture d'un document par l'utilisateur userB. Il y a une propriété à rajouter dans une console WebSphere qui va permettre d'invalider une session sur laquelle une requête non autorisée est faite. Cette invalidation de session va permettre la récupération du bon nom d'utilisateur par ARender.
 
-#### Ajout de la propriété
+We continue here the installation but in the ICN module of FileNet.
 
-- Aller sur votre console websphere puis dans le menu aller dans *servers -> server types -> websphere application servers*.
-- Sélectionner le serveur sur lequel vous voulez faire la modification. Dans notre exemple, on choisit *serverICN*
+## Prerequisite
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Concerning SSO between ICN and ARender, cross-domain SSO is not supported, for example z.AAAcompany.com and w.BBBcompany.com - where the DNS domains are different.
+More information here: https://www.ibm.com/docs/en/was-nd/8.5.5?topic=authentication-single-sign-using-ltpa-cookies
 
-- Dans *Container settings* aller dans *Session management*.
+## Retrieve the ARender Web-UI archive
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Using the username and password beforehand provided,
+you can retrieve the navigator plugin [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-navigator-plugin//arondor-arender-navigator-plugin-.jar)
 
-- Dans *Additional properties*, cliquer sur *custom properties*.
+## ARender and IBM Content Navigator (or IBM Content Manager)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+### Sharing the LTPA key
 
-- Cliquer sur *New...* pour rajouter une propriété.
+Thus, you will need to configure LTPA in order to enable session sharing between IBM Content Navigator and ARender Web-UI:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+- Export the LTPA CPE key
 
-- Ajouter la propriété *InvalidateOnUnauthorizedSessionRequestException* avec la valeur *true* afin qu'elle soit appliquée.
+In WebSphere Administration Console of the **CPE**, navigate to **Security** > **Global Security**, under **Authentication**, click **LTPA**
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![filenet](/img/arender/filenet/filenet-18.png)
 
-- Il faut ensuite cliquer sur *Ok* puis *save*. Relancer vos services Filenet pour prendre en compte cette propriété.
+- Specify a password, a filepath, and click "Export keys"
 
-### Intégration du plugin arender pour FileNet
+![filenet](/img/arender/filenet/filenet-19.png)
 
-Un plugin spécifique a été développé pour permettre l’intégration d’ARender avec ICN. Nota : le connecteur ICN est basé sur la syntaxe mixedObjects cité ci-dessus.
+- Import the LTPA CPE key in the ARender JVM
 
-Se connecter au Content Navigator.
+Copy the key in hte ARender Web-UI server.
 
-Aller dans la vue « Administration » et cliquer sur « Plug-ins ».
+Then import this key in ARender, like below:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+- Using the WebSphere Administration Console, navigate to **Security** > **Global Security**, under **Authentification**, click **LTPA**
+- Fill in the same password you entered when exporting the keys
+- Specify the path where you copied the keys
+- Click Import keys
+- Save the modifications
 
-Cliquer sur « Nouveau Plug-in ».
+### Session invalidation when switching user
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Since ICN version 3.0.6, if you change of user on the same session then you will get an error message when opening a document with the new user which will look like this:
 
-Entrer le chemin et nom du JAR et cliquer sur « Charger ».
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Dans le champ **ARender context root** entrer l’adresse (host + port + context root) de ARender. Cf. exemple ci-dessous :
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Error 500: com.ibm.websphere.servlet.session.UnauthorizedSessionRequestException: SESN0008E: A user authenticated as user:localhost:389/CN=userB,CN=Users,DC=ircem,DC=dev has attempted to access a session owned by user:localhost:389/CN=userA,CN=Users,DC=ircem,DC=dev
 
-Remplissez le champ **Unauthorized Desktops for document builder (id1,id2...)** avec des valeurs d'ID de bureau séparées par des virgules.
-Dans la capture d'écran ci-dessous, nous avons mis sur liste noire le bureau FakeDesktop afin que la fonction de création de documents ne soit pas activée.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Remplissez le champ **Watermark applied on download** avec une paire clé-valeur séparée par des virgules contenant respectivement l'ID du bureau et le nom du bean du filigrane. Le nom du bean du filigrane doit être configuré dans ARender. Il existe des noms de bean de filigrane par défaut déjà prédéfinis dans le fichier annotationtemplate-catalog.xml, downloadWatermark et printWatermark.
+The session of the user userA was not invalidated when he disconnected, which will cause the error when opening a document by user userB. There is a property to add in a WebSphere console which will make it possible to invalidate a session on which an unauthorized request is made. This session invalidation will allow the recovery of the correct username by ARender.
 
-Ci-dessous un exemple de filigrane à appliquer au téléchargement en fonction du bureau. Nous avons configuré le bureau OS1 pour utiliser le downloadWatermark et le bureau CustomWatermark pour utiliser également le downloadWatermark.
+#### Adding the property
+
+- Go to your websphere console then in the menu go to *servers -> server types -> websphere application servers*.
+- Select the server on which you want to make the modification. In our example, we choose *serverICN*
+
+![filenet](/img/arender/documentation/filenet/userSession/servers.png)
+
+- In *Container settings* go to *Session management*.
+
+![filenet](/img/arender/documentation/filenet/userSession/specific_serve.png)
+
+- In *Additional properties*, click on *custom properties*.
+
+![filenet](/img/arender/documentation/filenet/userSession/session_management.png)
+
+- Click on *New...* to add the property.
+
+![filenet](/img/arender/documentation/filenet/userSession/custom_properties.png)
+
+- Add the property *InvalidateOnUnauthorizedSessionRequestException* with the value *true* so that it is applied.
+
+![filenet](/img/arender/documentation/filenet/userSession/new_property.png)
+
+- You must then click on *Ok* then *save*. Restart your Filenet services to take this property into account.
+
+### Integration of the arender plugin for FileNet
+
+A specific plugin has been implemented to integrate ARender within ICN. Nota: ICN connector uses mixedObjects syntax.
+
+Connect to Content Navigator.
+
+Go to the ‘Administration View’ and click on ‘Plug-ins’
+
+![filenet](/img/arender/filenet/filenet-22.png)
+
+Click on the button "New Plugin-in".
+
+![filenet](/img/arender/filenet/filenet-23.png)
+
+Enter the JAR file path and click on ‘Load’.
+
+![filenet](/img/arender/filenet/filenet-24.png)
+
+Fill ‘ARender context root’ field with ARender’s address (host + port + context root). Like below:
+
+![filenet](/img/arender/filenet/filenet-30.png)
+
+Fill 'Unauthorized Desktops for document builder (id1,id2...)' field with comma-separated values of desktop ID.
+In the screenshot below, we have black listed the desktop FakeDesktop so it won't have the document builder feature enabled.
+
+![filenet](/img/arender/filenet/filenet-31.png)
+
+Fill 'Watermark applied on download' field with comma-separated key-value pair of respectively desktop id and watermark bean name. The watermark bean name should be configured in ARender. There are some default watermark bean name pre-defined already in the annotationtemplate-catalog.xml, downloadWatermark and printWatermark.
+
+Below an example of watermark to be applied on download depending on the desktop. We configured the desktop OS1 to use the downloadWatermark and the desktop CustomWatermark to use downloadWatermark aswell.
 
 ```bash
 OS1=downloadWatermark,CustomDesktop=downloadWatermark
 ```
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![filenet](/img/arender/filenet/filenet-32.png)
 
-Remplissez le champ **Watermark applied on print** avec une paire clé-valeur séparée par des virgules contenant respectivement l'ID du bureau et le nom du bean du filigrane. Le nom du bean du filigrane doit être configuré dans ARender. Il existe des noms de bean de filigrane par défaut déjà prédéfinis dans le fichier annotationtemplate-catalog.xml, downloadWatermark et printWatermark.
+Fill 'Watermark applied on print' field with comma-separated key-value pair of respectively desktop id and watermark bean name. The watermark bean name should be configured in ARender. There are some default watermark bean name pre-defined already in the annotationtemplate-catalog.xml, downloadWatermark and printWatermark.
 
-Ci-dessous un exemple de filigrane à appliquer au téléchargement en fonction du bureau. Nous avons configuré le bureau OS1 pour utiliser printWatermark et le bureau CustomWatermark pour utiliser également printWatermark.
+Below an example of watermark to be applied on download depending on the desktop. We configured the desktop OS1 to use the printWatermark and the desktop CustomWatermark to use printWatermark aswell.
 
 ```bash
 OS1=printWatermark,CustomDesktop=printWatermark
 ```
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![filenet](/img/arender/filenet/filenet-33.png)
+
+To use this Map, you just need to link it to a Desktop (Desktop tab -> Edit the desktop -> Select the Map in the Viewer Map list)
+
+![filenet](/img/arender/filenet/filenet-26.png)
+
+And finally, click on "Save".
+
+![filenet](/img/arender/filenet/filenet-27.png)
+
+You can now restart your application servers and attempt to open a file in FileNet.
+
+![filenet](/img/arender/filenet/filenet-28.png)
+
+![filenet](/img/arender/filenet/filenet-29.png)
+
+## Use ARender advanced features directly from ICN
+
+End-users can use ARender Compare and Document Builder features directly from ICN.
+
+### Create a dedicated ICN menu to show ARender advanced feature
+
+* In ICN, go in the **Administration** menu
+* Select **Menus**
+* Search the Menu named **Default document context menu**
+    
+![filenet](/img/arender/filenet/Default-document-context-menu.png)
+    
+* Right click on this menu and select **Copy**
+* Define a Name and a description to the new Menu
+* In the *Available* box select **Compare documents** and/or **Merge documents** action and add them into the *Selected* menu on the right
+
+![filenet](/img/arender/filenet/CompareAndMerge-Selected.png)
 
 
-Pour utiliser cette mappe d’afficheur, il suffit de l’associer à un bureau (dans l’onglet général de définition du bureau, Mappe d’afficheur).
+### Add the created menu to the ICN Desktop
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+* In ICN, go in the **Administration** menu
+* Select **Desktops**
+* Select the Desktop to update
+* Select the tab **Menus**
+* Search for the Menu named **Document context menu**
+* In its drop-down list value, select the menu you created above
 
-Et enfin, cliquer sur « Sauvegarder ».
+![filenet](/img/arender/filenet/CompareAndMergeMenu.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+### Use ARender compare feature
 
-Vous pouvez maintenant redémarrer vos serveurs d'application et tenter d'ouvrir un fichier dans FileNet.
+To compare document, you have to select **two documents** and select **Compare documents** from ICN Action menu or using right click
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![filenet](/img/arender/filenet/Compare-Action.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+### Use ARender Document Builder feature
 
-## Utiliser les fonctionnalités avancées d'ARender directement depuis ICN
+To merge and split documents, you have to select at least one document and select **Merge documents** from ICN Action menu or using right click
 
-Les utilisateurs finaux peuvent utiliser les fonctionnalités de comparaison et de fusion/découpage de document(s) directement depuis l'interface d'ICN.
-
-### Créer un menu ICN dédié pour afficher les fonctionnalités avancées ARender
-
-* Dans ICN, ouvrir le menu **Administration**
-* Sélectionner **Menus**
-* Rechercher le menu nommé **Menu contextuel de document par défaut**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-* Faire un clic droit sur ce menu et sélectionner **Copier**
-* Définir le nom et la description de ce menu
-* Dans la partie gauche nommée *Disponible* sélectionner les actions **Comparer les documents** et/ou **Fusionner les documents** et ajouter les dans la partie droite nommée *sélectionné*
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-
-### Ajouter le menu créé dans le bureau ICN
-
-* Dans ICN, ouvrir le menu **Administration**
-* Sélectionner **Bureaux**
-* Sélectionner le bureau à mettre à jour
-* Sélectionner l'onglet **Menus**
-* Rechercher le menu nommé **Menu contextuel de document**
-* Dans sa liste déroulante sélectionner le menu créé plus haut
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-### Utiliser la fonctionnalité de comparaison de document
-
-Pour comparer des documents, sélectionner **deux documents** puis cliquer sur **Comparer les documents** depuis le menu Actions de ICN ou depuis le clic droit.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-### Utiliser la fonctionnalité de découpage/fusion de document
-
-Pour découper ou fusionner des documents, sélectionner au moins un document puis cliquer sur **Fusionner les documents** depuis le menu Actions de ICN ou depuis le clic droit.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
+![filenet](/img/arender/filenet/Merge-Action.png)

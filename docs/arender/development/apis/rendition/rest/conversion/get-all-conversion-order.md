@@ -1,9 +1,16 @@
 ---
-title: Récupérer tous les ordres de conversion (GET)
+title: "GET all conversion orders"
 ---
 
-Cette API permet de récupérer tous les ordres de conversion.
-L'appel à cette API devra être authentifié. Les identifiants sont disponibles dans le fichier de configuration _application.yaml_ du document-service-broker.
+
+
+
+
+
+
+
+This API allows you to retrieve all conversion orders.
+The call to this API must be authenticated. The credentials are available in the _application.yaml_ configuration file of the document-service-broker.
 
 ```yaml
 
@@ -12,26 +19,26 @@ run-mode :
   password : password
 ```
 
-## Description technique de l'API
+## API technical description
 
-Point de terminaison :
+Endpoint:
 ```bash
 GET /conversions
 ```
 
-Réponse :
+Response:
 
-| Attribut             | Type                      | Description                        |
-| :------------------- | :------------------------ |:-----------------------------------|
-| conversionOrders     | `List&lt;ConversionOrder&gt;`     | La liste des ordres de conversion. |
+| Attribute            | Type                      | Description                 |
+| :------------------- | :------------------------ |:----------------------------|
+| conversionOrders     | List&lt;ConversionOrder&gt;     | The conversion orders list. |
 
-## Exemples
+## Examples
 
-### Récupérer tous les ordres de conversion
+### Get all conversion orders
 
-L'appel ci-dessous génère une demande de récupération de tous les ordres de conversion.
-Il est authentifié via l'utilisation de la méthode simple du "Basic Authentication",
-en considérant le nom d'utilisateur : _user_ et le mot de passe _password_.
+The call below generates a request to retrieve all conversion orders.
+It is authenticated using the simple "Basic Authentication" method,
+considering the username: _user_ and the password _password_.
 
 ```bash
 curl -X 'GET' \
@@ -39,10 +46,10 @@ curl -X 'GET' \
   -H 'accept: */*' \
   -H 'Authorization: Basic dXNlcjpwYXNzd29yZA=='
 ```
-Exemple de réponse :
+Response sample:
 ```bash
 [
-  {
+
     "conversionOrderId": {
       "id": "string"
     },
@@ -54,6 +61,6 @@ Exemple de réponse :
     "processingTime": 0,
     "queuedDate": "2023-06-19T16:12:24.476Z",
     "queuedTime": 0
-  }
+
 ]
 ```

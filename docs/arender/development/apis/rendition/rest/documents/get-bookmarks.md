@@ -1,34 +1,41 @@
 ---
-title: Obtenir les signets (GET)
+title: "Get Bookmarks"
 ---
 
-Cette API vous permet de récupérer les signets d'un document spécifique.
 
-## Description technique de l'API
 
-Point d'accès :
+
+
+
+
+
+This API allows you to retrieve the bookmarks of a specific document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/bookmarks
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable   | Requis | Description       |
-|:-----------|:-------|:------------------|
-| documentId | Oui    | L'ID du document  |
+| Variable    | Required | Description           |
+|:------------|:---------|:----------------------|
+| documentId  | Yes      | The ID of a document  |
 
-Réponse :
+Response :
 
-| Type       | Description             |
-|:-----------|:------------------------|
-| Bookmarks  | Les signets du document |
+| Type       | Description                   |
+|:-----------|:------------------------------|
+| Bookmarks  | The bookmarks of the document |
 
-## Exemples
+## Examples
 
-### Obtenir les Bookmarks
+### Get Bookmarks
 
-L'exemple ci-dessous montre comment récupérer les signets 
-d'un document avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
+The example below demonstrates how to retrieve the bookmarks
+of a document with the ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
 
 ```bash
 curl -X 'GET' \

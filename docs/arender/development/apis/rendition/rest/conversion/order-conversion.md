@@ -1,42 +1,49 @@
 ---
-title: Demander un ordre de conversion (POST)
+title: "POST a conversion order"
 ---
 
-Cette API permet de demander un ordre de conversion pour créer un nouveau document dans un format attendu
 
-## Description technique de l'API
 
-Point de terminaison :
+
+
+
+
+
+This API allows you to request a conversion order to create a new document in an expected format.
+
+## API technical description
+
+Endpoint:
 ```bash
 POST /conversions
 ```
 
-Corps :
+Body:
 
-| Attribut              | Type                  | Requis | Description                      |
-| :-------------------- | :-------------------- | :----- |:---------------------------------|
-| documentId            | String                | oui    | L'id du document source.         |
-| format                | String                | oui    | Le format du document en sortie. |
+| Attribute             | Type                  | Required | Description             |
+| :-------------------- | :-------------------- | :------- |:------------------------|
+| documentId            | String                | yes      | Source document id.     |
+| format                | String                | yes      | Target document format. |
 
-Réponse :
+Response:
 
-| Attribut              | Type                  | Description                                                                                                                                                                            |
-| :-------------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| conversionOrderId     | ConversionOrderId     | L'ID de l'ordre de conversion.Il servira pour l'utilisation des autres API qui permettent par exemple d'avoir des informations sur l'ordre de conversion ou bien de la supprimer.  |
+| Attribute             | Type                  | Description                                                                                                                                   |
+| :-------------------- | :-------------------- |:----------------------------------------------------------------------------------------------------------------------------------------------|
+| conversionOrderId     | ConversionOrderId     | conversion order ID.<br/>This can allow you to use other APIs like the one to retrieve some information about the conversion or to delete it.  |
 
-## Exemples
+## Examples
 
-### Conversion d'un document
+### Convert a document
 
-L'appel ci-dessous génère une demande de conversion d'un document déjà connu de la rendition.
-
+The call below generates a conversion request for a document already known from the rendition.
 ```bash
 curl -X 'POST' \
   'http://localhost:8761/conversions' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
-  "documentId": docId,
+  "documentId": "docId",
   "format": "pdf",
 }'
 ```
+

@@ -1,83 +1,76 @@
 ---
-title: Sélection de texte
+title: "Text Selection"
 ---
 
-## Sélection de texte du document
-
-ARender est composé de différentes couches, qui sont :
-
-- Couche Contenu (Couche inférieure) : Chaque page est affichée en tant qu'image
-- Couche Textuelle (Couche intermédiaire) : L'utilisateur peut sélectionner, copier, rechercher ou annoter le texte du document
-- Couche Annotation (Couche supérieure) : L'utilisateur peut visionner, créer, modifier les annotations individuellement
-
-## Comment sélectionner le texte
-
-Lorsque l'utilisateur passe la souris sur le texte, le curseur de la souris devient un pointeur textuel. L'utilisateur peut cliquer et déplacer la souris sur une partie du mot pour le sélectionner et copier ou annoter le texte. Le texte sélectionné est alors surligné en bleu. Pour copier le texte sélectionné, l'utilisateur peut appuyer sur la touche CTRL puis appuyer sur la touche C (CTRL+C).
-Une fois le texte copié, il peut coller le texte dans une autre application tierce.
-L'utilisateur peut également sélectionner un mot en double cliquant dessus.
-
-```xml
-<!-- Commentaire nettoyé -->
-```
 
 
-Lorsque la sélection de texte est finie, le menu rapide s'affiche en dessous du texte pour permettre diverses actions concernant le texte sélectionné.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-## Sélection de texte - Caractère par Caractère
 
-Par défaut, la sélection de texte surligne caractère par caractère :
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+## Document Text Selection
 
-## Sélection de texte - Mot par Mot
+ARender is composed of different layers, which are :
 
-La version 4.1.x d'ARender introduit une nouvelle fonctionnalité de sélection de texte permettant une utilisation plus optimale de traitement de texte.
+- Content Layer (Lower layer) : Each pages are shown as images
+- Text Layer (Middle layer) : User can select, copy, search or annotate text through document text
+- Annotation Layer (Upper layer) : The user can view, create, modify annotations as separate objects
 
-Dès lors qu'un mot ou une partie d'un mot est sélectionné, la sélection s'étend automatiquement pour inclure la totalité du mot.
+## How to select text
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+When the user hovers the mouse over the text, the cursor becomes an I-beam pointer.
+The user can click and drag the mouse over part or the whole word to select and copy or annotate the text. The selected text is then highlighted.
+To copy the selected text, the user can press and hold the CTRL button then press the key C (CTRL+C).
+Once copied, he can paste the text into another software application.
+The user can, as well, double click on a word to select it.
 
-L'utilisateur a la possibilité d'annuler la sélection du mot dans son entièreté en changeant la direction dans laquelle le pointeur de la souris est déplacé lors de la sélection.
-Cette action annule la sélection automatique du mot en entier et permet à l'utilisateur de sélectionner précisément une partie ou la totalité du mot.
+![image](/img/arender/selection-character.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-```xml
-Pour activer cette nouvelle fonctionnalité, veuillez vous référer à la configuration dédiée [ici](<!-- Commentaire nettoyé -->)
-```
+When the text selection is finished, the quick menu is displayed below the text to allow various actions regarding the selected text.
 
-## Sélection de texte - Ligne entière
+![image](/img/arender/features/quickmenu.png)
 
-Depuis la version 4.7.3 d'ARender, il est possible de sélectionner une ligne entière en faisant trois clics consécutifs.
+## Text Selection - Character by Character
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+By default, text selection highlights character by character :
 
-## Sélection de texte - Page entière
+![image](/img/arender/selection-character-demo.gif)
 
-Depuis la version 4.7.3 d'ARender, il est possible de sélectionner une page entière en faisant quatre clics consécutifs.
+## Text Selection - Word by Word
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+ARender version 4.1.x introduces a new text selection feature that improves word processing.
 
-## Sélection de texte - Document entier
+Every time a word (or a part of it) is selected, the selection is automatically expanded to include the entire word.
 
-La version 4.8.0 d'ARender introduit la sélection de tout le texte du document courant. Cette fonctionnalité est disponible par un bouton
- dans le toppanel qui est désactivé par défaut.
+![image](/img/arender/selection-word-demo.gif)
 
-Pour l'activation du bouton, il faut rajouter la propriété suivante au fichier de configuration *configurations/arender-custom-client.properties* :
+The user has the option to override this behavior by changing the direction in which the mouse pointer is being dragged as the selection is made.
+This action undoes the automatic selection of the entire word, and allows the user to precisely select part or the entire word.
+
+![image](/img/arender/selection-word-reversing-demo.gif)
+
+To enable the new feature, please refer to the dedicated configuration [here](./guides/configurations/web-ui/properties/textselection.en.md)
+
+## Text Selection - Line
+
+Since ARender version 4.7.3, you have the possibility to select an entire line with three clicks.
+
+![image](/img/arender/selection-ligne.gif)
+
+## Text Selection - Page
+
+Since ARender version 4.7.3, you have the possibility to select an entire page with four clicks.
+
+![image](/img/arender/selection-page.gif)
+
+## Text Selection - Entire document
+
+ARender version 4.8.0 introduces the selection of all the text of the current document. This feature is available through a button in the
+ toppanel which is disabled by default.
+
+To activate the button, add the following property to the *configurations/arender-custom-client.properties* configuration file :
+
 
 
 ```cfg
@@ -86,25 +79,18 @@ topPanel.copy.document.text=true
 ```
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Au clique, le bouton va lancer la récupération du texte de chaque page du document courant. L'avancement de la copie sera indiqué
- par une notification en bas à droite. Une fois la copie du texte finis, une notification sera à nouveau visible pour informer l'utilisateur.
+![image](/img/arender/documentation/selection/selection-text-document-bouton.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+When clicked, the button will launch the retrieval of the text of each page of the current document. The progress of the copy will be indicated
+ by a notification at the bottom right. Once the copying of the text is finished, a notification will again be visible to inform the user.
 
-## Sélection de texte - Par zone
+![image](/img/arender/documentation/selection/selection-text-document-activation.gif)
 
-Depuis la version 4.5.x d'ARender, il est possible de sélectionner le texte contenu dans une zone tracé.
+## Text Selection - By zone
 
-L'utilisateur peut faire `CTRL + clique-gauche` ou `ALT + clique-gauche` afin de pouvoir commencer la sélection de texte par zone.
+Since ARender version 4.5.x, you have the possibility to select text in a zone.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+The user can do `CTRL + left-click` or `ALT + left-click` to start the text selection by zone.
 
-
+![image](/img/arender/selection-zone.gif)

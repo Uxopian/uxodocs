@@ -1,279 +1,418 @@
 ---
-title: Connecteur FileNet
+title: "FileNet connector"
 ---
 
-## ARender pour IBM FileNet
-
-ARender dispose d'un connecteur pré-configuré pour les GED IBM FileNet P8 (4.x) et IBM FileNet Content Manager (5.x).
-
-| Paramètre       | Description                                                                                                                                         |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id              | Identifiant unique d'une "version" d'un document                                                                                                      |
-| vsId            | Identifiant d'une VersionSeries permettant de récupérer la dernière "version" d'un document                                                           |
-| objectStoreName | Nom de l'ObjectStore dans lequel est stocké le document                                                                                             |
-| objectType      | Type du document à visualiser : document, folder, contentContainerXML, mixedObjects (facultatif dans le cas d'un document)                          |
-| contentElement  | Optionnel, index de l'element de contenu à visualiser  (objet ContentElement). Les valeurs possibles sont comprises entre 1 et le nombre d'éléments |
-
-Voici quelques exemples :
-
-- Ouverture d'un document simple stocké dans FileNet P8 :
-
-    `http://\\{arender_serveur\\}/ARender.html?id=\\{345A81-KT7SK95747S-5IS8-8SK0\\}&objectStoreName=OS1`
-
-- Ouverture de deux documents simultanément avec la syntaxe mixedObjects :
-
-    `http://\\{arender_serveur\\}/ARender.html?ids=doc:\\{345A81-KT7SK95747S-5IS8-8SK0\\},doc:\\{F64A9342-6114-4A5C-A5E1-589A2FFB159F\\}&objectStoreName=OS1&objectType=mixedObjects`
-
-- Ouverture de deux documents et d'un folder simultanément :
-
-    `http://\\{arender_serveur\\}/ARender.html?objectStoreName=OS1&ids=doc:\\{3DBE573A-1AC9-4B08-8CB1-8F9495619954\\},doc:\\{F64A9342-6114-4A5C-A5E1-589A2FFB159F\\},folder:\\{55714817-BDAC-4C8A-9EFB-963E4620A4E4\\}&objectType=mixedObjects`
-
-- Ouverture d'un element de contenu précis :
-
-  `http://\\{arender_serveur\\}/ARender.html?id=\\{345A81-KT7SK95747S-5IS8-8SK0\\}&objectStoreName=OS1&contentElement=2`
 
 
-La syntaxe mixedObjects est la suivante :
-**ids=[ [ "doc" | "folder" ] ":" [ Id du document ou Folder ] [ ","] ]+**
 
-## Configuration de l'accès aux documents
 
-Selon le mode d'authentification choisi, deux types de fournisseur
-peuvent être utilisés pour fournir un accès aux documents.
 
-### Partage de la session FileNet
 
-Dans la même JVM (ou à minima partage de contexte JAAS) en utilisant le
-protocole IIOP :
+## ARender for IBM FileNet
 
-| Paramètre             | Description                                       |
-| --------------------- | ------------------------------------------------- |
-| content_engine_server | URI du Content Engine utilisant le protocole IIOP |
+ARender has a pre-configured connector for IBM FileNet P8 (4.x) and IBM FileNet Content Manager (5.x).
+
+| Parameter       | Description                                                                                                                           |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| id              | Unique id of document version                                                                                                         |
+| vsId            | VersionSeries id allowing to fetch last version of a document                                                                         |
+| objectStoreName | The name of the ObjectStore used to store the document                                                                                |
+| objectType      | Document type: document, folder, containerXML, mixedObjects (optional for documents)                                                  |
+| contentElement  | Optional, index of the content element to display (ContentElement object). Acceptable values are between 1 and the number of elements |
+
+
+Some examples:
+
+- To open a document stored in FileNet P8, try:
+
+  ```````````http://&#123;arender_server&#125;/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1```````````
+
+- To open simultaneously two documents with the mixedObjects syntax:
+
+  ```````````http://&#123;arender_serveur&#125;/ARender.html?ids=doc:{345A81-KT7SK95747S-5IS8-8SK0},doc:&#123;F64A9342-6114-4A5C-A5E1-589A2FFB159F&#125;&amp;objectStoreName=OS1&amp;objectType=mixedObjects```````````
+
+- To open simultaneously two documents and a folder:
+
+  ```````````http://&#123;arender_serveur&#125;/ARender.html?objectStoreName=OS1&amp;ids=doc:{3DBE573A-1AC9-4B08-8CB1-8F9495619954},doc:&#123;F64A9342-6114-4A5C-A5E1-589A2FFB159F&#125;,folder:{55714817-BDAC-4C8A-9EFB-963E4620A4E4}&amp;objectType=mixedObjects```````````
+
+- To open a specific content element:
+
+  ```````````http://&#123;arender_serveur&#125;/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1&amp;contentElement=2```````````
+
+
+
+
+The mixedObjects syntax is: **ids=[ [ “doc” | “folder” ] “:” [ Id du document ou Folder ] [ “,"] ]+**
+
+
+## Document access
+
+Regarding authentication mode, two provider types can be used to provide
+document access.
+
+### Sharing FileNet session
+
+In the same JVM (or at least in a shared JAAS context) using IIOP
+protocol:
+
+| Parameter             | Description                                   |
+| --------------------- | --------------------------------------------- |
+| content_engine_server | URI of Content Engine using the IIOP protocol |
+
 
 
 ```cfg
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
 arender.server.filenet.authentication.method=jaasObjectStoreProvider
-arender.server.filenet.ce.url=iiop://\{content_engine_server\}:2809/FileNet/Engine
+arender.server.filenet.ce.url=iiop://&#123;content_engine_server&#125;:2809/FileNet/Engine
+```
+```
+```
+```
+```
+```
 ```
 
 
-### Compte de "service"
 
-L'utilisation d'un compte de "service" dans ARender pour la connexion à FileNet Content Platform Engine, requiert les modifications ci-dessous.
+### Technical account
 
-#### Désactivation des contraintes de sécurité
+Using a technical account to connect to FileNet Content Platform Engine requires the below modifications.
 
-Commenter les security-constraint et security-role configurés.
+#### Disable security constraints
+
+Comment the security-constraint and security-role pre-configured.
+
 
 
 ```XML
-<?xml "version"="1.0" encoding="UTF-8"?>
-<web-fragment xmlns:xsi="http:www.w3.org2001XMLSchema-instance" xmlns="http:java.sun.comxmlnsjavaee" xmlns:web="http:java.sun.comxmlnsjavaeeweb-app_2_5.xsd" xsi:schemaLocation="http:java.sun.comxmlnsjavaee http:java.sun.comxmlnsjavaeeweb-fragment_3_0.xsd" id="WebAppFragment_ID" "version"="3.0">
-    <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
-        <!-- Commentaire nettoyé -->action<!-- Commentaire nettoyé -->Define the container secured resource<!-- Commentaire nettoyé -->
-        <!-- Commentaire nettoyé -->All Authenticated<!-- Commentaire nettoyé -->
-        **
-            <!-- Commentaire nettoyé -->
-            <!-- Commentaire nettoyé -->
-        **
-    <!-- Commentaire nettoyé -->
-        <!-- Commentaire nettoyé -->
-        <!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->
+<?xml version="1.0" encoding="UTF-8"?>
+<web-fragment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd" id="WebAppFragment_ID" version="3.0">
+    <name>web_fragment_ecm</name>
+    <!--security-constraint>
+        <web-resource-collection>
+            <web-resource-name>action</web-resource-name>
+            <description>Define the container secured resource</description>
+            <url-pattern>/ArondorViewer.jsp</url-pattern>
+            <url-pattern>/ARender.jsp</url-pattern>
+            <url-pattern>/ARender.html</url-pattern>
+            <url-pattern>/DownloadDocumentWithAnnotations.jsp</url-pattern>
+            <url-pattern>/arendergwt/*</url-pattern>
+            <url-pattern>/openExternalDocument.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>All Authenticated</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description>User data constraints</description>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-role>
+        <description>All Authenticated</description>
+        <role-name>All Authenticated</role-name>
+    </security-role-->
+</web-fragment>
 ```
 
-#### Modifier le contexte utilisateur
 
-Modifier le bean d'id urlFilter (par défaut configuré avec la classe JAASUserFilter) par celui ci-dessous :
+#### Modify the user context
+
+Modify the bean having the id urlFilter (by default configured with JAASUserFilter class), by the one below:
+
 
 
 ```XML
-**
-    
-**
+<bean id="urlFilter"
+          class="com.arondor.viewer.server.security.RequestParameterAuthenticationFilter">
+    <property name="authenticationManager" ref="authenticationManager" />
+</bean>
 ```
 
-#### Configurer la connexion HTTP
+
+#### Configure the HTTP connexion
 
 | Parameter             | Description                                              |
 | --------------------- | -------------------------------------------------------- |
-| content_engine_server | URI de Content Engine basé sur FileNet WS (MTOM ou DIME) |
-| p8_identifiant        | Pseudo du compte technique                               |
-| p8_password           | Mot de passe du compte technique                         |
+| content_engine_server | URI of Content Engine based on FileNet WS (MTOM ou DIME) |
+| p8_identifiant        | Username of technical account                            |
+| p8_password           | Password of technical account                            |
+
 
 
 ```cfg
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
 arender.server.filenet.authentication.method=loginPasswordObjectStoreProvider
-arender.server.filenet.ce.url=http://\{content_engine_server\}/wsi/FNCEWS40MTOM/
-arender.server.filenet.ce.login=\{p8_identifiant\}
-arender.server.filenet.ce.password=\{p8_password\}
+arender.server.filenet.ce.url=http://&#123;content_engine_server&#125;/wsi/FNCEWS40MTOM/
+arender.server.filenet.ce.login=&#123;p8_identifiant&#125;
+arender.server.filenet.ce.password=&#123;p8_password&#125;
+```
+```
+```
+```
+```
+```
 ```
 
 
-## Gestion du format de stockage des annotations
 
-### Stockage des annotations au format XML FileNet
+## Configuration the annotation format to be saved in FileNet
 
-Configuration par défaut, aucune configuration à faire.
+### Save annotations as XML FileNet format
 
-### Stockage des annotations au format XFDF
+Default configuration, nothing to do here.
 
-Ajouter simplement la ligne suivante dans le fichier suivant :
+### Save annotation as XFDF
+
+Simply add the line below to the following file:
+
 
 
 ```cfg
-arender.server.default.annotation.accessor=xfdfAnnotationAccessor
+    arender.server.default.annotation.accessor=xfdfAnnotationAccessor
 ```
 
 
-## Gestion des métadonnées à récupérer
 
-``` xml
-**
-**
+## Metadata fetching
+
+```XML
+<bean id="documentPropertiesConfiguration"
+    class="com.arondor.viewer.filenetce.config.DocumentPropertiesConfiguration">
+</bean>
 ```
 
-### Récupérer des métadonnées système
+### Include system metadata
 
-Par défaut, aucune métadonnée système n'est récupérée. Pour forcer la
-récupération d'une ou plusieurs, il faut ajouter/éditer la propriété
-*includedSystemProperties*.
+By default, no system metadata is fetched. In order to force it, you
+need to add/edit *includedSystemProperties* property.
 
 
-```xml
 
-    <!-- Commentaire nettoyé -->DateCreated<!-- Commentaire nettoyé -->DateLastModified<!-- Commentaire nettoyé -->Creator<!-- Commentaire nettoyé -->LastModifier<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-    <!-- Commentaire nettoyé -->FactureRef<!-- Commentaire nettoyé -->
-<!-- Commentaire nettoyé -->
-Le connecteur ICN est basé sur la syntaxe
-mixedObjects cité ci-dessus.
+```XML
+<property name="includedSystemProperties">
+    <list>
+        <value>DateCreated</value>
+        <value>DateLastModified</value>
+        <value>Creator</value>
+        <value>LastModifier</value>
+    </list>
+</property>
+```
 
-1) Se connecter au Content Navigator.
 
-2) Aller dans la vue "Administration" et cliquer sur "Plug-ins".
-<!-- Commentaire nettoyé -->
 
-3) Cliquer sur "Nouveau Plug-in".
-<!-- Commentaire nettoyé -->
+### Exclude custom metadata
 
-4) Entrer le chemin et nom du JAR et cliquer sur "Charger".(Example : _C:\sources\arender-web-ui\arondor-arender-navigator-plugin-2.2.1.jar_)
-<!-- Commentaire nettoyé -->
+By default, all custom metadata are fetched and displayed. In order to
+force exclusion of some ones, you need to add/edit
+*excludedCustomProperties* property
 
-5) Dans le champ ARender context root entrer l'adresse (host + port +
-context root) de ARender. Cf. exemple ci-dessous :
-<!-- Commentaire nettoyé -->
-Si vous souhaitez que le plugin ICN détecte l'hôte de la machine avant
-de l'envoyer au poste client, utilisez le mot clé `--arender.hostname--`
-dans la configuration. Cela remplacera la balise automatiquement.
 
-6) La liste des propriétés définies dans la classe ARenderPlugin est
-automatiquement chargée dans l'interface, cliquer sur "Sauvegarder".
 
-7) Cliquer sur "Éditer" et vérifier que le plug-in a été correctement
-installé.
-<!-- Commentaire nettoyé -->
+```XML
+<property name="excludedCustomProperties">
+    <list>
+        <value>FactureRef</value>
+    </list>
+</property>
+```
 
-8) Mapping du nouveau viewer. Aller dans l'onglet "Mappes d'afficheur".
-<!-- Commentaire nettoyé -->
 
-9) La mappe par défaut s'appelle "Mappe de l'afficheur par défaut" et n'est
-pas modifiable, cliquer dessus et cliquer sur "Copier".
-<!-- Commentaire nettoyé -->
 
-10) Cliquer sur "Nouveau mappage" et sélectionner le nouveau viewer qui
-apparaît dans la liste des afficheurs disponibles.
-<!-- Commentaire nettoyé -->
 
-11) Vous pouvez alors choisir dans la liste des types mimes supportés.
-<!-- Commentaire nettoyé -->
+If the following error appears: *No LoginModules configured
+```javascript
+for FilenetP8WSI*, an additional configuration is required:
+```
 
-12) Pour utiliser cette mappe d'afficheur, il suffit de l'associer à un
-bureau (dans l'onglet général de définition du bureau, Mappe
-d'afficheur).
-<!-- Commentaire nettoyé -->
+- Save the file [jaas.conf.WebSphere](/docs/jadocumentation/as.conf.WebSphere.md) in a folder on the WAS server
+- Add the following parameter to ARender's JVM:
 
-## Fonctionnalités avancées
+  `-Djava.security.auth.login.config=[Path_to_jaas_file.conf.WebSphere]`
 
-### Découpage de document avec fusion des métadonnées avancées
+  **How to:**
+  - Navigate to the menu *Server* and select the related server.
+  - open *Java and Process Management* and click on *Process Definition*.
+  - In *Start command arguments* add the argument.
 
-#### Description et configuration de la fonctionnalité
 
-Voici en premier lieu un descriptif de la fonctionnalité. Pour chaque document source (FileNet) utilisé dans la composition du Document Builder :  
 
-  - Si tous les documents partagent une même métadonnée, avec une même valeur
-    - La métadonnée et sa valeur sont propagées
-  - Si la métadonnée est commune aux documents, mais les valeurs sont différentes 
-    - La métadonnée est propagée, mais la valeur est remise à zéro : 
-        - Les champs type String recevront une chaine vide
-        - Les champs type Entiers/Double recevront 0
-        - Les champs type Date sont remis à la date de l'opération de Document Builder
-        - Les champs type Boolean sont à false
-        - Les champs à cardinalité Liste seront quand à eux peuplés d'une liste d'une seule valeur du type correspondant (liste vide non supportée par l'Engine)
-  - Si la métadonnée est unique à un seul document
-    - Par défaut non propagée, elle pourra être propagée si la configuration l'autorise, par son SymbolicName
+## From an user interface
+
+### IBM Workplace &amp; Workplace XT
+
+In order to define which document types have to be opened within ARender, you need
+to edit the configuration file content-redir.properties (for Workplace XT,
+in folder: _C:\Program Files\FileNet\Config\WebClient_) as follows:
+
+
+
+```cfg
+{mimeType}=/../ARender/ARender.html?{JSP_QUERY_STRING}
+```
+
+
+
+### IBM Content Navigator
+
+A specific plugin has been implemented to integrate ARender within ICN.
+
+
+ICN connector uses mixedObjects syntax.
+
+
+To use it, follow the instruction below:
+
+1) Connect to Content Navigator.
+2) Go to the 'Administration View' and click on 'Plug-ins'
+  ![image](/img/arender/ICN_clickplugin_medium.png)
+
+3) Click on the button "New Plugin-in".
+  ![image](/img/arender/ICN_newplugin_large.png)
+
+4) Enter the JAR file path and click on 'Load'. (Example: _C:\sources\arender-web-ui\*arondor-arender-navigator-plugin-2.2.1.jar_)
+  ![image](/img/arender/ICN_pickjar_backgroundimage.png)
+
+5) Fill 'ARender context root' field with ARender's address (hots + port + context root). Like below:
+  ![image](/img/arender/PluginContextRoot_en_backgroundimage.png)
+  If you want the plugin to automatically detect the host name and replace
+  it in the configuration when called, use the keyword
+  `--arender.hostname--`.
+
+6) Click on the 'Save' button.
+
+7) Click on Edit and check that the plugin is correctly installed.
+  ![image](/img/arender/ICN_editplugin_backgroundimage.png)
+
+8) Map the new viewer. Go to 'Viewer Maps'
+  ![image](/img/arender/ICN_clickmaps_medium.png)
+  The default map is called 'Default viewer map' and is not editable.
+
+9) Click on it and then click on copy.
+![image](/img/arender/ICN_copymap_backgroundimage.png)
+
+10) Click on "New Mapping". Then select 'Filenet Context Manager' for the
+Repository type. Then select ARenderPluginViewer in the list of viewer
+available.
+![image](/img/arender/ICN_namemap_backgroundimage.png)
+
+11) You can now choose the MIME Types you want to open with ARender, then
+  click on OK.
+  ![image](/img/arender/ICN_mapmimes_backgroundimage.png)
+
+12) To use this Map, you just need to link it to a Desktop (Desktop tab ->
+  Edit the desktop -> Select the Map in the Viewer Map list)
+  ![image](/img/arender/ICN_linkdesktop_backgroundimage.png)
+
+## Advanced features
+
+### Document Builder with advanced merge of metadata 
+
+#### Description and configuration 
+
+For each input Document Builder FileNet document :  
+
+  - If all documents share the same property, with the same value
+    - The property and the value are propagated 
+  - If the property is common to all documents, but the values are diverging 
+    - The property is propagated, but the value is zero-ed with the following logic : 
+        - String types will receive an empty String value
+        - Integer/Double types will be set to 0
+        - Date types will be set to the current Date of the Builder operation
+        - Boolean types will be false
+        - List types will be populated of a List of the correctly typed single element (empty lists not supported by the engine)
+  - If the property is existing in a single document
+    - By default, the property will not be propagated, unless specified by its SymbolicName in the configuration
     
-Pour propager une métadonnée unique à un document, voici la propriété où les différents SymbolicNames à autoriser sera à indiquer (séparés par des virgules)
+In order to propagate a unique property by its SymbolicName, you can add those in the following ARender Web-UI property, in a comma separated list. 
 
 ```cfg
 arender.server.filenet.document.builder.update.first.document.properties.advanced.updater.propagation.symbolic.names
 ```
 
-#### Comment activer la fusion avancée des métadonnées
+#### How to activate the advanced merge of metadata
 
-A la création de nouveau documents, pour activer cette fonctionnalité, il faudra modifier la propriété suivante : 
+In order to activate this feature you will have to edit the following ARender Web-UI property : 
 
 ```cfg
 arender.server.filenet.document.builder.update.first.document.properties.copy.bean.name
 ```
 
-Les deux valeurs possibles sont _legacyFileNetPropertiesCopy_ pour ne pas activer la fusion des métadonnées avancées, 
-ou _advancedFileNetPropertiesMerger_ pour l'activer.
-Enfin, pour activer le comportement de fusion avancée de métadonnée lors d'une mise à jour du contenu d'un document 
-(et non uniquement à la création), il suffit d'ajouter le bean suivant à la configuration: 
+The two possible values are _legacyFileNetPropertiesCopy_ (to keep the legacy behavior, by default), or 
+ _advancedFileNetPropertiesMerger_ to active the new feature.
 
-<!-- Commentaire nettoyé -->
+If you want to have the same behavior as well when updating a document content (and not only when creating document) you will have to 
+add the following bean to the configuration : 
+
+
+
 ```xml
 
-    **
-        
-    **
+    <bean id="filenetDocumentUpdaterNewVersion"
+          class="com.arondor.viewer.filenetce.helper.impl.FileNetDocumentUpdaterNewVersion">
+        <property name="fileNetPropertiesUpdater"
+                  ref="${arender.server.filenet.document.builder.update.first.document.properties.copy.bean.name}"/>
+    </bean>
 ``` 
 
-Ainsi le bean de mise à jour de document suivra aussi le même comportement que le bean de création de documents 
-(par défaut, ce bean ne possède pas de propertyUpdater, afin de garder son comportement historique). 
 
-### Interdire la sauvegarde de documents en fonction des IDs d'objectStore
 
-Afin de pouvoir interdire la création de nouveaux documents à partir de certains objectStore FileNet, 
-il est possible de bloquer la fonctionnalité directement dans le code connecteur. 
+By default, this bean does not possess a _fileNetPropertiesUpdater_
+to keep its legacy behavior.
+With this configuration, the bean will follow the same behavior as the one configured for creating new documents.
 
-Pour ce faire, modifiez la propriété serveur Web-UI nommée :
+### Forbid document creation/update in specific ObjectStores, by IDs
+
+In order to disable the creation or update of documents from some specific FileNet ObjectStores, 
+we added a configuration so that you can list (separated by commas) theirs IDs :
 
 ```cfg
 arender.server.filenet.document.builder.unauthorized.object.store.ids=
 ```
 
-Et insérez, séparés par des virgules, la liste des IDs FileNet des objectStores qui n'autoriseront pas la sauvegarde 
-de nouveaux documents via le Document Builder.
+The IDs listed in the configuration property will be protected from any Document Builder operation, 
+and throw an exception when trying to do one regardless.
 
-Par défaut, cette liste est livrée vide pour garder le comportement historique.
+By default, this list is shipped empty, to keep legacy behavior.
 
-### Désactiver la fonctionnalité de découpage pour les documents checkout et archivés
-Il est possible d'interdire la création de nouveaux documents à partir de document checkout ou archivé via l'activation
-de la propriété serveur ci-dessous :
+### Disable DocumentBuilder feature for checkout/archived documents
+It is possible to disable the DocumentBuilder feature for checkout/archived documents via the activation of the below
+property:
 
 ```cfg
 arender.server.filenet.document.builder.disabled.for.checkout.and.archived.documents=true
 ```
 
+## Configuration of watermark display
 
-## Configuration de l'affichage des filigranes
+You can configure the watermark display depending on user group and/or Filenet document class.
 
-Vous avez la possibilité de configurer l'affichage des filigranes selon le groupe utilisateur et/ou la classe filenet du document ouvert.
+To activate the watermark depending on groups and/or document classes, you need to add this property :
 
-Pour l'activation du paramétrage par groupe et/ou par classe de document, il vous faudra rajouter cette propriété : 
 
 
 ```cfg
@@ -281,322 +420,350 @@ arender.server.watermark.display.provider=fileNetDisplayWatermarkProvider
 ```
 
 
-Pour afficher le filigrane pour les utilisateurs appartenant à certains groupes :
+
+To display watermark to all user in certain groups :
 
 
 ```cfg
-#Valeurs séparées par des virgules qui indique quelle groupe Filenet doit avoir un filigrane définis dans arender.watermark.bean.name
+#Comma-separated values that indicates which FileNet groups should have the watermark defined in arender.watermark.bean.name
 arender.server.watermark.filenet.group.with=
 ```
 
 
-Pour ne pas afficher le filigrane pour les utilisateurs appartenant à certains groupes :
+
+To not display watermark to all user in certain groups :
 
 
 ```cfg
-#Valeurs séparées par des virgules qui indique quelle groupe Filenet ne doit pas avoir un filigrane définis dans arender.watermark.bean.name
+#Comma-separated values that indicates which FileNet groups should not have the watermark defined in arender.watermark.bean.name
 arender.server.watermark.filenet.group.without=
 ```
 
 
-Les deux propriétés ne peuvent être utilisés en même temps.
 
-Pour afficher selon la classe FileNet du document (Depuis 4.1.0 jusqu'à 4.2.x):
+
+Both properties can not be used together
+
+
+To display watermark depending on Filenet document class (From 4.1.0 to 4.2.x) :
+
 
 
 ```cfg
-#Valeurs séparées par des virgules qui indique quelle classe de document Filenet doit avoir un filigrane définis dans arender.watermark.bean.name
+#Comma-separated values that indicates which FileNet document classes should have the watermark defined in arender.watermark.bean.name
 arender.server.watermark.filenet.document.class.with=
 ```
 
 
-Pour afficher selon la classe FileNet du document (Depuis 4.3.0):
+
+To display watermark depending on Filenet document class (Since 4.3.0) :
+
+
 
 ```cfg
-#Valeurs séparées par des virgules qui indiquent quelles classes de document Filenet doit avoir un filigrane définis dans arender.watermark.bean.name
+#Comma-separated values that indicate which FileNet document classes should have the watermark defined in arender.watermark.bean.name
 arender.server.watermark.filenet.document.class=
 ```
 
 
-### Configuration avancé des filigranes
 
-Pour définir un filigrane dépendant de la classe de document FileNet et/ou du groupe d'utilisateur, vous devez définir des usages de filigranes pour chaque filigrane voulu. Par défaut :
+### Advanced watermark configuration
+
+To define a watermark depending on Filenet DocumentClass and/or user group, you need to define a watermark usage for each watermark needed. 
+By default:
+
+
+```xml
+<bean id="fileNetWatermarkUsageDefinition"
+    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
+    scope="singleton">
+    <property name="displayWatermarkBeanName" value="${arender.watermark.bean.name}"/>
+    <property name="filenetDocumentClass" ref="fileNetDocumentClassList"/>
+    <property name="ldapGroupWithWatermark" ref="ldapGroup"/>
+    <property name="ldapGroupWithoutWatermark" ref="ldapGroupException"/>        
+</bean>
+
+<!-- List of FileNet DocumentClass will be affected by the watermark usage definition-->
+<bean id="fileNetDocumentClassList"
+  class="org.springframework.util.StringUtils"
+  factory-method="commaDelimitedListToStringArray">
+  <constructor-arg value="${arender.server.watermark.filenet.document.class}"/>
+</bean>
+
+<!-- List of LDAP group that will have the watermark-->
+<bean id="ldapGroup"
+  class="org.springframework.util.StringUtils"
+  factory-method="commaDelimitedListToStringArray">
+  <constructor-arg value="${arender.server.watermark.filenet.group.with}"/>
+</bean>
+
+<!-- List of LDAP group that will not have the watermark-->
+<bean id="ldapGroupException"
+  class="org.springframework.util.StringUtils"
+  factory-method="commaDelimitedListToStringArray">
+  <constructor-arg value="${arender.server.watermark.filenet.group.without}"/>
+</bean>
+```
+
+
+
+#### Examples
+
+You can create a new simple watermark usage definition :
+
+
+```xml
+<bean id="newWatermarkDefinition"
+    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
+    scope="singleton">
+    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>    
+</bean>
+```
+
+
+
+You can create a new watermark usage definition by filtering with LDAP group :
+ 
+
+```xml
+<bean id="newWatermarkDefinition"
+    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
+    scope="singleton">
+    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
+    <property name="ldapGroupWithWatermark" ref="ldapGroupExample"/>    
+</bean>
+
+<!-- List of LDAP group that will have the watermark-->
+<bean id="ldapGroupExample"
+  class="org.springframework.util.StringUtils"
+  factory-method="commaDelimitedListToStringArray">
+  <constructor-arg value="myGroup"/>
+</bean>
+```
+
+
+
+You can create a new watermark usage definition to display watermark for every user except those that are defined here :
+ 
+
+```xml
+<bean id="newWatermarkDefinition"
+    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
+    scope="singleton">
+    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
+    <property name="ldapGroupWithoutWatermark" ref="ldapGroupExample"/>    
+</bean>
+
+<!-- List of LDAP group that will have the watermark-->
+<bean id="ldapGroupExample"
+  class="org.springframework.util.StringUtils"
+  factory-method="commaDelimitedListToStringArray">
+  <constructor-arg value="myGroup"/>
+</bean>
+```
+
+
+
+You can create a new watermark usage definition depending on FileNet documentClass :
+
+
+```xml
+<bean id="newWatermarkDefinition"
+    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
+    scope="singleton">
+    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>   
+    <property name="filenetDocumentClass" ref="fileNetDocumentClassList"/> 
+</bean>
+
+<!-- List of FileNet DocumentClass will be affected by the watermark usage definition-->
+<bean id="fileNetDocumentClassList"
+  class="org.springframework.util.StringUtils"
+  factory-method="commaDelimitedListToStringArray">
+  <constructor-arg value="${arender.server.watermark.filenet.document.class}"/>
+</bean>
+```
+
+
+
+Of course, you can mix them to achieve advanced configuration :
+
+
+```xml
+<bean id="newWatermarkDefinition"
+    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
+    scope="singleton">
+    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>   
+    <property name="filenetDocumentClass" ref="fileNetDocumentClassList"/> 
+    <property name="ldapGroupWithWatermark" ref="ldapGroupExample"/>    
+</bean>
+
+<!-- List of FileNet DocumentClass will be affected by the watermark usage definition-->
+<bean id="fileNetDocumentClassList"
+  class="org.springframework.util.StringUtils"
+  factory-method="commaDelimitedListToStringArray">
+  <constructor-arg value="${arender.server.watermark.filenet.document.class}"/>
+</bean>
+
+<!-- List of LDAP group that will have the watermark-->
+<bean id="ldapGroupExample"
+  class="org.springframework.util.StringUtils"
+  factory-method="commaDelimitedListToStringArray">
+  <constructor-arg value="myLDAPGroup"/>
+</bean>
+```
+
+
+
+
+
+Following line is mandatory to be set :
+
+```xml
+<property name="displayWatermarkBeanName" value="exampleWatermarkBean"/>
+```
+
+
+
+#### Add watermark usage definition
+
+Then you need to add all watermark usages to the watermark provider :
+
 
 
 ```xml
 
-**
-    
-    
-    
-            
-**
+<!-- EXAMPLE -->
 
-```xml
-<!-- Commentaire nettoyé -->
-```
-**
-```xml
-  <constructor-arg value="""">
-```
-**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-**
-```xml
-  <constructor-arg value="""">
-```
-**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-**
-```xml
-  <constructor-arg value="""">
-```
-**
-```
-
-
-#### Exemples
-
-Vous pouvez créer un simple usage de filigrane :
-
-```cfg
-**
-        
-**
-```
-
-
-Vous pouvez créer un usage de filigrane en filtrant par groupe LDAP :
-
-```xml
-**
-    
-        
-**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-**
-```xml
-  <constructor-arg value="myGroup">
-```
-**
-```
-
-
-Vous pouvez créer un usage de filigrane pour tous les utilisateurs sauf ceux définies ici :
-
-```xml
-**
-    
-        
-**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-**
-```xml
-  <constructor-arg value="myGroup">
-```
-**
-```
-
-
-Vous pouvez créer un usage de filigrane qui dépend des classes de document de FileNet :
-
-```xml
-**
-       
-     
-**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-**
-```xml
-  <constructor-arg value="""">
-```
-**
-```
-
-
-Bien entendu, vous pouvez mixer les configurations pour définir des usages de filigrane avancés :
-
-```xml
-**
-       
-     
-        
-**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-**
-```xml
-  <constructor-arg value="""">
-```
-**
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-**
-```xml
-  <constructor-arg value="myLDAPGroup">
-```
-**
+<bean id="fileNetDisplayWatermarkProvider"
+    class="com.arondor.viewer.filenetce.annotation.FileNetDisplayWatermarkProvider"
+    scope="singleton">
+    <property name="fileNetWatermarkDocument" >
+      <list>
+        <ref bean="fileNetWatermarkUsageDefinition"/>
+        <ref bean="newWatermarkDefinition"/>
+      </list>
+    </property>
+</bean>
 ```
 
 
 
-La ligne suivante est obligatoire :
+### Create a PDF/A as new version or new document in document builder
 
-```xml
+Since the ARender version 4.2.0, two new behaviors have been added in order to be able to create or update a document in PDFA.
 
-```
-
-
-#### Ajout des définitions d'usage de filigrane
-
-Vous devez ajouter toutes les définitions d'usage de filigrane dans le provider de filigrane :
-
-
-```xml
-
-```xml
-<!-- Commentaire nettoyé -->
-```
-
-**
-    
-```xml
-      <!-- Commentaire nettoyé -->
-```
-```xml
-        <ref bean="newWatermarkDefinition">
-      <!-- Commentaire nettoyé -->
-```
-**
-```
-
-
-### Créer un PDF/A en tant que nouvelle "version" ou nouveau document via le document builder
-
-Depuis la "version" 4.2.0 d'ARender, deux nouveaux comportements de mise à jour de contenu ont été ajouté pour
-créer ou mettre à jour un document en PDFA.
-
-Les comportements déjà existants sont :
+Already existing content update behaviors are :
 - UPDATE_NO_DOCUMENT
 - UPDATE_FIRST_DOCUMENT
 - CREATE_NEW_FIRST_DOCUMENT
 - UPDATE_ALL_DOCUMENT
 
-Les deux nouveaux sont : 
+The two new ones are : 
 - UPDATE_FIRST_DOCUMENT_PDFA
 - CREATE_NEW_FIRST_DOCUMENT_PDFA
 
-Les deux nouveaux comportements sont similaires à UPDATE_FIRST_DOCUMENT et CREATE_NEW_FIRST_DOCUMENT sauf que le format cible
-des fichiers sera PDFA.
+The new behaviors are similar to UPDATE_FIRST_DOCUMENT and CREATE_NEW_FIRST_DOCUMENT except that the file type will be PDFA.
 
-**En tant que prérequis, il est évidemment nécessaire de disposer du module de rendition PDFA.**
+**As a prerequisite, it is necessary to have the PDFA rendition module.**
 
-#### Exemple
+#### Example
 
-Depuis le fichier de configuration **alterdocumentcontent-configuration.xml**, vous pouvez copier les 
-beans **saveActionUpdateFirst** et **saveActionCreateFirst** vers le fichier **arender-custom-integration.xml**
-et modifier la propriété **contentUpdateBehavior** comme cela:
+From the **alterdocumentcontent-configuration.xml** file configuration, you can copy the
+**saveActionUpdateFirst** and **saveActionCreateFirst** beans to the **arender-custom-integration.xml**
+file and modify the **contentUpdateBehavior** property as it :
+
 
 
 ```xml
-**
-	
-	
-		**
-```xml
-	<!-- Commentaire nettoyé -->
-```
-		&lt;ref&gt;
-```xml
-	<!-- Commentaire nettoyé -->
-```
-	
-		**
-			
-			
-			
-			
-```xml
-				<!-- Commentaire nettoyé -->UPDATE_FIRST_DOCUMENT_PDFA<!-- Commentaire nettoyé -->
-```
-		**
-```xml
-	<!-- Commentaire nettoyé -->
-```
-	
-		**
-```xml
-	<!-- Commentaire nettoyé -->
-```
-		&lt;ref&gt;
-```xml
-	<!-- Commentaire nettoyé -->
-```
-	
-		**
-			
-			
-			
-			
-```xml
-				<!-- Commentaire nettoyé -->CREATE_NEW_FIRST_DOCUMENT_PDFA<!-- Commentaire nettoyé -->
-```
-		**
-	
-**
+<bean id="saveActionUpdateFirst"
+	class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeAction">
+	<property name="enabled"
+		value="${documentbuilder.button.updateFirst.enabled}" />
+	<property name="availability">
+		<bean
+			class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeActionAvailability$IsEnabledAndNotRoot" />
+	</property>
+	<property name="buttonTitle">
+		<ref bean="labels#documentBuilderUpdateFirstDocument" />
+	</property>
+	<property name="className" value="pictreeButton saveDocumentUpdateFirstButton" />
+	<property name="event">
+		<bean
+			class="com.arondor.viewer.client.events.documentbuilder.DocumentBuilderSaveDocumentEvent">
+			<property name="freezeDocument" value="${documentbuilder.save.freeze}" />
+			<property name="downloadDocument" value="${documentbuilder.save.download}" />
+			<property name="deleteDocument" value="${documentbuilder.save.delete}" />
+			<property name="contentUpdateBehavior">
+				<value
+					type="com.arondor.viewer.client.api.document.altercontent.AlterContentDescription$ContentUpdateBehavior">UPDATE_FIRST_DOCUMENT_PDFA</value>
+			</property>
+		</bean>
+	</property>
+</bean>
+
+<bean id="saveActionCreateFirst"
+	class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeAction">
+	<property name="enabled"
+		value="${documentbuilder.button.createFirst.enabled}" />
+	<property name="availability">
+		<bean
+			class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeActionAvailability$IsEnabledAndNotRoot" />
+	</property>
+	<property name="buttonTitle">
+		<ref bean="labels#documentBuilderCreateFirstDocument" />
+	</property>
+	<property name="className" value="pictreeButton saveDocumentCreateFirstButton" />
+	<property name="event">
+		<bean
+			class="com.arondor.viewer.client.events.documentbuilder.DocumentBuilderSaveDocumentEvent">
+			<property name="freezeDocument" value="${documentbuilder.save.freeze}" />
+			<property name="downloadDocument" value="${documentbuilder.save.download}" />
+			<property name="deleteDocument" value="${documentbuilder.save.delete}" />
+			<property name="contentUpdateBehavior">
+				<value
+					type="com.arondor.viewer.client.api.document.altercontent.AlterContentDescription$ContentUpdateBehavior">CREATE_NEW_FIRST_DOCUMENT_PDFA</value>
+			</property>
+		</bean>
+	</property>
+</bean>
 ```
 
 
 
-## Mise à jour des métadonnées
+## Updating metadata
 
-La servlet *updateDocumentMetadataServlet* est dédié à la mise à jour des métadonnées de document Filenet en utilisant un appel POST.
+The servlet *updateDocumentMetadataServlet* is dedicated to updating Filenet document metadata with a POST call.
 
-Voici un exemple de l'appel POST, où *\{documentId\}* est à remplacer par le "documentId" du document ciblé :
+Here is an example of the POST call, where *&#123;documentId&#125;* is to be replaced by the documentId of the targeted document :
+
 
 
 ```cfg
-```text
-http://\\{HOST_ARENDER\\}/arendergwt/updateDocumentMetadataServlet?uuid=\\{documentId\\}
-```
+``````````http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}``````````
 ```
 
 
-Ensuite, le corps de la requête va accepter une structure JSON définissant chaque nom de métadonnée à modifier et la valeur associée. Les *propertyKey* correspondent aux propriétés *symbolicName* et *displayName* de Filenet. La *propertyValue* est la valeur que va prendre la métadonnée.
+
+Then, the body of the request will accept a JSON structure defining each metadata name to modify and the associated value. The *propertyKey* correspond to the *symbolicName* and *displayName* properties of Filenet. The *propertyValue* is the value that the metadata will take.
+
 
 
 ```cfg
-\\{"propertyKey1" : "propertyValue1",
-  "propertyKey2" : "propertyValue2"\\}
+
+  "propertyKey1" : "propertyValue1",
+  "propertyKey2" : "propertyValue2"
+
 ```
 
 
-## Configurer un titre par défaut de document 
 
-La propriété suivante permet d'ajouter un titre par défaut au document qui n'en possède pas.
+## Set a default document title
+
+The following property allows to configure a default title to the document that does not have one.
+
 
 
 ```cfg
-arender.server.default.filenet.document.name ="defaut name"
+arender.server.default.filenet.document.name="default name"
 ```
-
 

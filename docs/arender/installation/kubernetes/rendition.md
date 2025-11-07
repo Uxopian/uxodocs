@@ -1,47 +1,55 @@
 ---
-title: Serveur de rendition
+title: "Rendition server"
 ---
+
+
+
+
+
+
 
 ## Introduction
 
-## Paramètres
+## Parameters
 
-Le tableau liste les paramètres configurables du subchart de la rendition d'ARender et leurs valeurs par défaut.
+The following table lists the configurable parameters of the ARender rendition subchart and their default values.
 
 ### General values
 
-| Parameters                | Description                                          | Default |
-| :------------------------ | :--------------------------------------------------- | :------ |
-| `global.imagePullSecrets` | Les noms des secrets pour accéder au registre Docker | `[]`    |
-| `rendition.enabled`       | Active le déploiement de la rendition                | `true`  |
+| Parameters                | Description                                     | Default |
+| :------------------------ | :---------------------------------------------- | :------ |
+| `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]`    |
+| `rendition.enabled`       | Enable the rendition deployment                 | `true`  |
 
 ### Document service broker
 
-Le tableau liste les paramètres configurables du microservice broker de la rendition d'ARender et leurs valeurs par défaut.
+The following table lists the configurable parameters of the document service broker microservice and their default values.
 
-| Parameters                               | Description                                                                  |                             Default                              |
-| :--------------------------------------- | :--------------------------------------------------------------------------- | :--------------------------------------------------------------: |
-| `rendition.broker.replicaCount`          | Nombre de réplique de pod du broker à déployer                               |                               `1`                                |
-| `rendition.broker.image.tag`             | Tag de l'image du broker. Si vide utilise AppVersion du chart                |                               `''`                               |
-| `rendition.broker.image.pullPolicy`      | Politique de récupération de l'image du broker                               |                             `Always`                             |
-| `rendition.broker.rbac.create`           | Spécifie si les ressources d'attribution de rôle doivent être créées         |                              `true`                              |
-| `rendition.broker.serviceAccount.create` | Spécifie si un compte de service doit être créé                              |                              `true`                              |
-| `rendition.broker.serviceAccount.name`   | Nom du compte de service. Si n'est pas renseigné prend la valeur du fullname |                               `''`                               |
-| `rendition.broker.podSecurityContext`    | Contexte de sécurité des pods du broker                                      |                               `\{\}`                               |
-| `rendition.broker.securityContext`       | Contexte de sécurité des conteneurs du broker                                |                               `\{\}`                               |
-| `rendition.broker.service.type`          | Type de service du broker                                                    |                           `ClusterIP`                            |
-| `rendition.broker.ingress.enabled`       | Active l'ingress pour la rendition                                           |                             `false`                              |
-| `rendition.broker.ingress.annotations`   | Annotation de l'Ingress de la rendition                                      |                               `\{\}`                               |
-| `rendition.broker.ingress.hosts`         | Nom d'hôte Ingress de la rendition                                           |                               `[]`                               |
-| `rendition.broker.ingress.tls`           | Configuration tls de la rendition                                            |                               `[]`                               |
-| `rendition.broker.resources`             | Limites et requêtes de ressources du broker                                  |                               `\{\}`                               |
-| `rendition.broker.nodeSelector`          | Sélecteur de node du broker                                                  |                               `\{\}`                               |
-| `rendition.broker.environment`           | Variables d'environments à passer au conteneur du broker                     |                               `\{\}`                               |
+| Parameters                               | Description                                                                      |                             Default                              |
+| :--------------------------------------- | :------------------------------------------------------------------------------- | :--------------------------------------------------------------: |
+| `rendition.broker.replicaCount`          | Number of the broker pod replica to deploy                                       |                               `1`                                |
+| `rendition.broker.image.repository`      | Broker image name                                                                | `/arender-document-service-broker` |
+| `rendition.broker.image.tag`             | Broker image tag. If empty use AppVersion                                        |                               `''`                               |
+| `rendition.broker.image.pullPolicy`      | Broker image pull policy                                                         |                             `Always`                             |
+| `rendition.broker.rbac.create`           | Specifies whether the role resources to compute the weather should be created    |                              `true`                              |
+| `rendition.broker.serviceAccount.create` | Specifies whether a service account should be created                            |                              `true`                              |
+| `rendition.broker.serviceAccount.name`   | Name of the service account created. If not set defaulted to ARender UI fullname |                               `''`                               |
+| `rendition.broker.podSecurityContext`    | Broker pod security context                                                      |                               `{}`                               |
+| `rendition.broker.securityContext`       | Broker container security context                                                |                               `{}`                               |
+| `rendition.broker.service.type`          | Broker service type                                                              |                           `ClusterIP`                            |
+| `rendition.broker.ingress.enabled`       | Enable rendition Ingress                                                         |                             `false`                              |
+| `rendition.broker.ingress.annotations`   | Ingress rendition annotations                                                    |                               `{}`                               |
+| `rendition.broker.ingress.hosts`         | Ingress rendition hosts                                                          |                               `[]`                               |
+| `rendition.broker.ingress.tls`           | Rendition Tls config                                                             |                               `[]`                               |
+| `rendition.broker.resources`             | Broker resources limits and requests                                             |                               `{}`                               |
+| `rendition.broker.nodeSelector`          | Broker node selector                                                             |                               `{}`                               |
+| `rendition.broker.environment`           | Environment variables to pass to the broker container as a Map                   |                               `{}`                               |
 
 
-Si `rendition.broker.rbac.create` n'est pas à `true`, il faut s'assurer que le compte de service du broker ait les droits nécessaires au calcul du 'weather'.
 
-Les droits par donnés par défaut sont:
+If `rendition.broker.rbac.create` is not set to `true`, insure that the service account of the service broker has enough rights to compute the 'weather'.
+
+By default, given rights are:
 
 ```yaml
 rules:
@@ -54,74 +62,78 @@ rules:
 ```
 
 
+
 ### Document converter
 
-Le tableau liste les paramètres configurables du microservice de conversion de la rendition d'ARender et leurs valeurs par défaut.
+The following table lists the configurable parameters of the document converter microservice and their default values.
 
-| Parameters                                  | Description                                                                  |                           Default                           |
-| :------------------------------------------ | :--------------------------------------------------------------------------- | :---------------------------------------------------------: |
-| `rendition.converter.replicaCount`          | Nombre de réplique de pod du converter à déployer                            |                             `1`                             |
-| `rendition.converter.autoscale.enabled`     | Active l'automatisation de la gestion du nombre de pod                       |                           `false`                           |
-| `rendition.converter.autoscale.maxReplicas` | Nombre maximum de réplique de pod dans le cluster                            |                             `3`                             |
-| `rendition.converter.autoscale.cpuLimit`    | Pourcentage de CPU demandé avant augmentation du nombre de pod               |                            `80`                             |
-| `rendition.converter.image.tag`             | Tag de l'image du converter. Si vide utilise AppVersion du chart             |                            `''`                             |
-| `rendition.converter.imagepullPolicy`       | Politique de récupération de l'image du converter                            |                          `Always`                           |
-| `rendition.converter.serviceAccount.create` | Spécifie si un compte de service doit être créé                              |                           `true`                            |
-| `rendition.converter.serviceAccount.name`   | Nom du compte de service. Si n'est pas renseigné prend la valeur du fullname |                            `''`                             |
-| `rendition.converter.podSecurityContext`    | Contexte de sécurité des pods du converter                                   |                            `\{\}`                             |
-| `rendition.converter.securityContext`       | Contexte de sécurité des conteneurs du converter                             |                            `\{\}`                             |
-| `rendition.converter.service.type`          | Type de service du converter                                                 |                         `ClusterIP`                         |
-| `rendition.converter.resources`             | Limites et requêtes de ressources du converter                               |                            `\{\}`                             |
-| `rendition.converter.nodeSelector`          | Sélecteur de node du converter                                               |                            `\{\}`                             |
-| `rendition.converter.environment`           | Variables d'environments à passer au conteneur du converter                  |                            `\{\}`                             |
+| Parameters                                  | Description                                                                     |                           Default                           |
+| :------------------------------------------ | :------------------------------------------------------------------------------ | :---------------------------------------------------------: |
+| `rendition.converter.replicaCount`          | Number of the converter pod replica to deploy                                   |                             `1`                             |
+| `rendition.converter.autoscale.enabled`     | Enable horizontal autoscaling of converter pods                                 |                           `false`                           |
+| `rendition.converter.autoscale.maxReplicas` | Maximum number of the converter pod replica in the cluster                      |                             `3`                             |
+| `rendition.converter.autoscale.cpuLimit`    | Percentage of CPU requested target to scale horizontally                        |                            `80`                             |
+| `rendition.converter.image.repository`      | Document converter image name                                                   | `/arender-document-converter` |
+| `rendition.converter.image.tag`             | Document converter image tag. If empty use AppVersion                           |                            `''`                             |
+| `rendition.converter.imagepullPolicy`       | Document converter image pull policy                                            |                          `Always`                           |
+| `rendition.converter.serviceAccount.create` | Specifies whether a service account should be created                           |                           `true`                            |
+| `rendition.converter.serviceAccount.name`   | Name of the service account created. If not set defaulted to converter fullname |                            `''`                             |
+| `rendition.converter.podSecurityContext`    | Converter pods security context                                                 |                            `{}`                             |
+| `rendition.converter.securityContext`       | Converter container security context                                            |                            `{}`                             |
+| `rendition.converter.service.type`          | Converter service type                                                          |                         `ClusterIP`                         |
+| `rendition.converter.resources`             | Converter resources limits and requests                                         |                            `{}`                             |
+| `rendition.converter.nodeSelector`          | Converter node selector                                                         |                            `{}`                             |
+| `rendition.converter.environment`           | Environment variables to pass to the converter container as a Map               |                            `{}`                             |
 
 ### Hazelcast
 
-Le tableau liste les paramètres configurables du système de gestion de stockage de fichier Hazelcast de la rendition d'ARender et leurs valeurs par défaut dans *values.yaml*.
+The following table lists the configurable parameters of the service Hazelcast and their default values in the file *values.yaml*.
 
-| paramètres                   | Description                |                            Defaut                             |
-| :--------------------------- | :------------------------- | :-----------------------------------------------------------: |
-| `hazelcast.service.port`     | Port utilisé par Hazelcast |                              `5701`                           |
-| `hazelcast.service.portname` | Nom du port d'Hazelcast    |                            `hazelcast`                        |
+| Parameters                   | Description               |                            Default                             |
+| :--------------------------- | :------------------------ | :------------------------------------------------------------: |
+| `hazelcast.service.port`     | Port used by Hazelcast    |                              `5701`                            |
+| `hazelcast.service.portname` | Port name of Hazelcast    |                            `hazelcast`                         |
 
 ### Document text handler
 
-Le tableau liste les paramètres configurables du microservice de manipulation de texte de la rendition d'ARender et leurs valeurs par défaut.
+The following table lists the configurable parameters of the document text handler microservice and their default values.
 
-| Parameters                                | Description                                                                  |                            Default                             |
-| :---------------------------------------- | :--------------------------------------------------------------------------- | :------------------------------------------------------------: |
-| `rendition.handler.replicaCount`          | Nombre de réplique de pod du handler à déployer                              |                              `1`                               |
-| `rendition.handler.autoscale.enabled`     | Active l'automatisation de la gestion du nombre de pod                       |                            `false`                             |
-| `rendition.handler.autoscale.maxReplicas` | Nombre maximum de réplique de pod dans le cluster                            |                              `3`                               |
-| `rendition.handler.autoscale.cpuLimit`    | Pourcentage de CPU demandé avant augmentation du nombre de pod               |                              `80`                              |
-| `rendition.handler.image.tag`             | Tag de l'image du handler. Si vide utilise AppVersion du chart               |                              `''`                              |
-| `rendition.handler.imagepullPolicy`       | Politique de récupération de l'image du handler                              |                            `Always`                            |
-| `rendition.handler.serviceAccount.create` | Spécifie si un compte de service doit être créé                              |                             `true`                             |
-| `rendition.handler.serviceAccount.name`   | Nom du compte de service. Si n'est pas renseigné prend la valeur du fullname |                              `''`                              |
-| `rendition.handler.podSecurityContext`    | Contexte de sécurité des pods du handler                                     |                              `\{\}`                              |
-| `rendition.handler.securityContext`       | Contexte de sécurité des conteneurs du handler                               |                              `\{\}`                              |
-| `rendition.handler.service.type`          | Type de service du handler                                                   |                          `ClusterIP`                           |
-| `rendition.handler.resources`             | Limites et requêtes de ressources du handler                                 |                              `\{\}`                              |
-| `rendition.handler.nodeSelector`          | Sélecteur de node du handler                                                 |                              `\{\}`                              |
-| `rendition.handler.environment`           | Variables d'environments à passer au conteneur du handler                    |                              `\{\}`                              |
+| Parameters                                | Description                                                                   |                            Default                             |
+| :---------------------------------------- | :---------------------------------------------------------------------------- | :------------------------------------------------------------: |
+| `rendition.handler.replicaCount`          | Number of the handler pod replica to deploy                                   |                              `1`                               |
+| `rendition.handler.autoscale.enabled`     | Enable horizontal autoscaling of handler pods                                 |                            `false`                             |
+| `rendition.handler.autoscale.maxReplicas` | Maximum number of the handler pod replica in the cluster                      |                              `3`                               |
+| `rendition.handler.autoscale.cpuLimit`    | Percentage of CPU requested target to scale horizontally                      |                              `80`                              |
+| `rendition.handler.image.repository`      | Document handler image name                                                   | `/arender-document-text-handler` |
+| `rendition.handler.image.tag`             | Document handler image tag. If empty use AppVersion                           |                              `''`                              |
+| `rendition.handler.imagepullPolicy`       | Document handler image pull policy                                            |                            `Always`                            |
+| `rendition.handler.serviceAccount.create` | Specifies whether a service account should be created                         |                             `true`                             |
+| `rendition.handler.serviceAccount.name`   | Name of the service account created. If not set defaulted to handler fullname |                              `''`                              |
+| `rendition.handler.podSecurityContext`    | handler pods security context                                                 |                              `{}`                              |
+| `rendition.handler.securityContext`       | handler container security context                                            |                              `{}`                              |
+| `rendition.handler.service.type`          | handler service type                                                          |                          `ClusterIP`                           |
+| `rendition.handler.resources`             | handler resources limits and requests                                         |                              `{}`                              |
+| `rendition.handler.nodeSelector`          | handler node selector                                                         |                              `{}`                              |
+| `rendition.handler.environment`           | Environment variables to pass to the handler container as a Map               |                              `{}`                              |
 
 ### Document renderer
 
-Le tableau liste les paramètres configurables du microservice de rendu de document de la rendition d'ARender et leurs valeurs par défaut.
+The following table lists the configurable parameters of the document renderer microservice and their default values.
 
-| Parameters                                 | Description                                                                  |                          Default                           |
-| :----------------------------------------- | :--------------------------------------------------------------------------- | :--------------------------------------------------------: |
-| `rendition.renderer.replicaCount`          | Nombre de réplique de pod du renderer à déployer                             |                            `1`                             |
-| `rendition.renderer.autoscale.enabled`     | Active l'automatisation de la gestion du nombre de pod                       |                          `false`                           |
-| `rendition.renderer.autoscale.maxReplicas` | Nombre maximum de réplique de pod dans le cluster                            |                            `3`                             |
-| `rendition.renderer.autoscale.cpuLimit`    | Pourcentage de CPU demandé avant augmentation du nombre de pod               |                            `80`                            |
-| `rendition.renderer.image.tag`             | Tag de l'image du renderer. Si vide utilise AppVersion du chart              |                            `''`                            |
-| `rendition.renderer.imagepullPolicy`       | Politique de récupération de l'image du renderer                             |                          `Always`                          |
-| `rendition.renderer.serviceAccount.create` | Spécifie si un compte de service doit être créé                              |                           `true`                           |
-| `rendition.renderer.serviceAccount.name`   | Nom du compte de service. Si n'est pas renseigné prend la valeur du fullname |                            `''`                            |
-| `rendition.renderer.podSecurityContext`    | Contexte de sécurité des pods du renderer                                    |                            `\{\}`                            |
-| `rendition.renderer.securityContext`       | Contexte de sécurité des conteneurs du renderer                              |                            `\{\}`                            |
-| `rendition.renderer.service.type`          | Type de service du renderer                                                  |                        `ClusterIP`                         |
-| `rendition.renderer.resources`             | Limites et requêtes de resources du renderer                                 |                            `\{\}`                            |
-| `rendition.renderer.nodeSelector`          | Sélécteur de node du renderer                                                |                            `\{\}`                            |
-| `rendition.renderer.environment`           | Variables d'environments à passer au conteneur du renderer                   |                            `\{\}`                            |
+| Parameters                                 | Description                                                                    |                          Default                           |
+| :----------------------------------------- | :----------------------------------------------------------------------------- | :--------------------------------------------------------: |
+| `rendition.renderer.replicaCount`          | Number of the renderer pod replica to deploy                                   |                            `1`                             |
+| `rendition.renderer.autoscale.enabled`     | Enable horizontal autoscaling of renderer pods                                 |                          `false`                           |
+| `rendition.renderer.autoscale.maxReplicas` | Maximum number of the renderer pod replica in the cluster                      |                            `3`                             |
+| `rendition.renderer.autoscale.cpuLimit`    | Percentage of CPU requested target to scale horizontally                       |                            `80`                            |
+| `rendition.renderer.image.repository`      | Document renderer image name                                                   | `/arender-document-renderer` |
+| `rendition.renderer.image.tag`             | Document renderer image tag. If empty use AppVersion                           |                            `''`                            |
+| `rendition.renderer.imagepullPolicy`       | Document renderer image pull policy                                            |                          `Always`                          |
+| `rendition.renderer.serviceAccount.create` | Specifies whether a service account should be created                          |                           `true`                           |
+| `rendition.renderer.serviceAccount.name`   | Name of the service account created. If not set defaulted to renderer fullname |                            `''`                            |
+| `rendition.renderer.podSecurityContext`    | renderer pods security context                                                 |                            `{}`                            |
+| `rendition.renderer.securityContext`       | renderer container security context                                            |                            `{}`                            |
+| `rendition.renderer.service.type`          | renderer service type                                                          |                        `ClusterIP`                         |
+| `rendition.renderer.resources`             | renderer resources limits and requests                                         |                            `{}`                            |
+| `rendition.renderer.nodeSelector`          | renderer node selector                                                         |                            `{}`                            |
+| `rendition.renderer.environment`           | Environment variables to pass to the renderer container as a Map               |                            `{}`                            |

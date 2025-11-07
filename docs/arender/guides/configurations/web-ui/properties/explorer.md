@@ -1,112 +1,119 @@
 ---
-title: Navigateur de document
+title: "Document navigator"
 ---
 
-## Généralités
-
-Le navigateur de document est, par défaut, ouvert sur l'explorateur de vignettes. L'utilisateur peut naviguer entre les différents panneaux en cliquant sur l'icon correspond. Il peut également fermer le navigateur de document en cliquant sur l'icône du panneau déjà ouvert.
-
-| Description                                                                  | Clé du paramètre                      | Valeur par défaut | Type   |
-| ---------------------------------------------------------------------------- | ------------------------------------- | ----------------  | ------ |
-| Largeur du navigateur de document (en pixels)                                | documentnavigator.width               | 320               | Entier |
-| Largeur du navigateur de recherches (en pixels)                              | documentnavigator.search.width        | 400               | Entier |
-| Largeur du navigateur d'annotations (en pixels)                              | documentnavigator.annotation.width    | 400               | Entier |
-| Le temps d'affichage des poignées du séparateur (déprécié en v.4.7.0, en ms) | documentnavigator.ears.hideTimerDelay | 100               | Entier |
-| Position du séparateur à l'ouverture (Default, Reduced, Expanded)            | documentnavigator.initialWidth        | Default           | Texte  |
-| Configurer le ratio à appliquer au navigateur de documents                   | documentnavigator.expand.reduce.ratio | 70                | Entier |
-
-## Explorateur de vignettes
-
-Le tableau ci-dessous présente la configuration générale de cet
-explorateur.
-
-
-| Description                                                                  | Clé du paramètre                              | Valeur par défaut | Type          |
-| ---------------------------------------------------------------------------- | --------------------------------------------- | ----------------- | ------------- |
-| Activation/désactivation de cet explorateur                                  | thumbexplorer.enabled                         | true              | Booléen       |
-| Indentation entre un document fils et son père (en pixels)                   | thumbexplorer.indentation                     | 20                | Entier        |
-| Niveau de profondeur de sous documents à charger                             | thumbexplorer.maxLevelToLoad                  | 10                | Entier        |
-| Activation/désactivation de l'affichage de métadonnées                       | thumbexplorer.metadata                        | true              | Booléen       |
-| Permet aux titres des vignettes d'avoir un contenu HTML                      | thumbexplorer.title.allowHTML                 | false             | Booléen       |
-| Les vignettes afficheront une popup avec les métadonnées du document (en ms) | thumbexplorer.layout.loading.delay            | 5                 | Entier        |
-| Permet de créer une ancre URL vers une page à partir des vignettes           | thumbexplorer.contextualMenu.createPageAnchor | true              | Booléen       |
-
-
-
-Le tableau ci-dessous présente la configuration liée aux vignettes.
-
-
-| Description                                                                           | Clé du paramètre                     | Valeur par défaut | Type   |
-| ------------------------------------------------------------------------------------- | ------------------------------------ | ----------------- | ------ |
-| Largeur des vignettes (en pixels)                                                     | thumbexplorer.thumb.width            | 100               | Entier |
-| Marge entre chaque vignette (en pixels)                                               | thumbexplorer.thumb.margin           | 5                 | Entier |
-| Largeur de l'explorateur à partir de laquelle les vignettes s'élargissent (en pixels) | thumbexplorer.thumb.grow.min         | 300               | Entier |
-| Incrément d'élargissement des vignettes (en pixels)                                   | thumbexplorer.thumb.grow.increment   | 10                | Entier |
-| Configurer le ratio de croissance correspondant à la croissance du panel              | thumbexplorer.thumb.grow.ratio       | 1                 | Entier |
 
 
 
 
-## Explorateur d'annotations
 
 
-| Description                                                                                                           | Clé du paramètre                                              | Valeur par défaut | Type    |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ----------------- | ------- |
-| Activation de l'affichage de l'onglet de l'explorateur                                                                | annotation.comment.explorer.enabled                           | true              | Booléen |
-| Possibilité d’afficher les annotations au format réduit                                                               | annotation.comment.explorer.inline.enabled                    | false             | Booléen |
-| Affichage des annotations au format réduit dès l’ouverture de l’explorateur d’annotation                              | annotation.comment.explorer.show.annotation.minimized.on.open | false             | Booléen |
-| Configurer l'explorateur d'annotations sur le côté est d'ARender                                                      | annotation.comment.explorer.eastSide.enabled                  | false             | Booléen |
-| Ouvrir l'explorateur d'annotations lorsqu'une annotation est modifiée                                                 | annotation.comment.explorer.openOnEdit                        | false             | Booléen |
-| Animer tout en étendant l'explorateur d'annotations                                                                   | annotation.comment.explorer.animate.on.expand                 | true              | Booléen |
-| Afficher une liste simplifiée de tous les auteurs dans l'explorateur d'annotations                                    | annotation.comment.explorer.showAllAnnotators                 | true              | Booléen |
-| Afficher un nombre total d'annotations dans l'explorateur d'annotations                                               | annotation.comment.explorer.showTotalAnnotationsNumber        | false             | Booléen |
-| Afficher l'explorateur d'annotations au démarrage d'ARender comme panneau par défaut                                  | annotation.comment.explorer.showAtStartup                     | false             | Booléen |
-| Activer/Désactiver pour filtrer également les annotations dans la vue de la page                                      | annotation.comment.explorer.filterPageAnnotations             | false             | Booléen |
-| Configurer le tri par incrémentation de la date sinon par décrémentation de la date                                   | annotation.comment.explorer.sortByIncrementDate               | true              | Booléen |
-| Autoriser ou non l'affichage de la date                                                                               | annotation.comment.explorer.show.date                         | true              | Booléen |
-| Afficher uniquement les initiales du nom du créateur                                                                  | annotation.comment.explorer.creator.name.initial.only         | false             | Booléen |
-| Activer l'affichage d'une seule annotation par page                                                                   | annotation.comment.explorer.show.one.annotation.only          | false             | Booléen |
-| Afficher l'icône cible lorsque l'annotation n'est pas la note textuelle numérotée, sinon l'icône du type d'annotation | annotation.comment.display.target.enabled                     | false             | Booléen |
-| Activer l'entrée en mode édition en cliquant sur un commentaire dans l'explorateur d'annotation                       | comment.edit.annotation.onselection.enabled                   | true              | Booléen |
+## General
+
+By default, the document navigator is opened on the thumb explorer. The user can browse between panels by clicking on the corresponding icon. He can close the panel by clicking on the icon corresponding to the opened panel. 
 
 
-## Explorateur de signets
+| Description                                                        | Parameter Key                         | Default value | Type    |
+| ------------------------------------------------------------------ | ------------------------------------- | ------------- | ------- |
+| Width of document navigator (in pixels)                            | documentnavigator.width               | 320           | Integer |
+| Width of search navigator (in pixels)                              | documentnavigator.search.width        | 400           | Integer |
+| Width of annotations navigator (in pixels)                         | documentnavigator.annotation.width    | 400           | Integer |
+| Time before splitter ears disappear (Deprecated in v.4.7.0, in ms) | documentnavigator.ears.hideTimerDelay | 100           | Integer |
+| Position of the splitter on opening (Default, Reduced, Expanded)   | documentnavigator.initialWidth        | Default       | String  |
+| Sets up the ratio to be applied to the document navigator          | documentnavigator.expand.reduce.ratio | 70            | Integer |
 
+## Thumb explorer
 
-| Description                                                     | Clé du paramètre                         | Valeur par défaut | Type    |
-| --------------------------------------------------------------- | ---------------------------------------- | ----------------- | ------- |
-| Activation/désactivation de cet explorateur                     | bookmarkexplorer.enabled                 | true              | Booléen |
-| Afficher l'explorateur de signets au démarrage de l'application | bookmarkexplorer.showAtStartup           | false             | Booléen |
-| Rendre les signets déplaçables                                  | bookmarkexplorer.draggable               | true              | Booléen |
-| Activer/Désactiver la création de signets                       | bookmarkexplorer.add.bookmark.enabled    | true              | Booléen |
-| Activer/Désactiver la suppression de signets                    | bookmarkexplorer.delete.bookmark.enabled | true              | Booléen |
-| Activer/Désactiver l'animation des signets                      | bookmarkexplorer.animation.enabled       | true              | Booléen |
+The table below lists the general configuration of the explorer allowing
+to browse into documents through thumbs.
 
-
-## Explorateur de la rechercher avancée
-
-| Description                                                                                                                | Clé du paramètre                                 | Valeur par défaut | Type    |
-| -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ----------------- | ------- |
-| Activation/désactivation de cet explorateur                                                                                | advanced.searchexplorer.enabled                  | true              | Booléen |
-| Définir la longueur de caractère minimale autorisée                                                                        | advanced.searchexplorer.min.characterLength      | 0                 | Entier  |
-| Définir la longueur de caractère maximale autorisée                                                                        | advanced.searchexplorer.max.characterLength      | 255               | Entier  |
-| La recherche est mise à jour lors de l'actualisation des annotations lorsque l'explorateur de recherche avancée est activé | advanced.searchexplorer.updates.enabled          | false             | Booléen |
-| Le bouton pour rechercher et surligner est activé                                                                          | advanced.searchexplorer.search.highlight.enabled | true              | Booléen |
+| Description                                                                | Parameter Key                                 | Default value | Type         |
+| -------------------------------------------------------------------------- | --------------------------------------------- | ------------- | ------------ |
+| Enable/disable the explorer                                                | thumbexplorer.enabled                         | true          | Boolean      |
+| Indentation between a master document and its children (in pixels)         | thumbexplorer.indentation                     | 20            | Integer      |
+| Depth level of documents to load                                           | thumbexplorer.maxLevelToLoad                  | 10            | Integer      |
+| Enable/disable metadata display                                            | thumbexplorer.metadata                        | true          | Boolean      |
+| Allows thumbnails titles to have HTML content                              | thumbexplorer.title.allowHTML                 | false         | Boolean      |
+| Thumbnails will display a popup information with document metadata (in ms) | thumbexplorer.layout.loading.delay            | 5             | Integer      |
+| Allows to create an URL anchor to a page from the thumbnails               | thumbexplorer.contextualMenu.createPageAnchor | true          | Boolean      |
 
 
 
-## Explorateur des liens hypertextes
-
-| Description                                 | Clé du paramètre          | Valeur par défaut | Type    |
-| ------------------------------------------- | ------------------------- | ----------------- | ------- |
-| Activation/désactivation de cet explorateur | hyperlinkexplorer.enabled | true              | Booléen |
+The table below enumerates specific configuration related to thumbs.
 
 
+| Description                                                       | Parameter Key                      | Default value | Type    |
+| ----------------------------------------------------------------- | ---------------------------------- | ------------- | ------- |
+| Default width of the thumbs (in pixels)                           | thumbexplorer.thumb.width          | 100           | Integer |
+| Margin between each thumb (in pixels)                             | thumbexplorer.thumb.margin         | 5             | Integer |
+| Explorer width from which thumbs are expanded (in pixels)         | thumbexplorer.thumb.grow.min       | 300           | Integer |
+| Increment of thumb expanding (in pixels)                          | thumbexplorer.thumb.grow.increment | 10            | Integer |
+| Sets up the growth ratio corresponding to the growth of the panel | thumbexplorer.thumb.grow.ratio     | 1             | Integer |
 
-## Explorateur pour biffer
 
-| Description                                       | Clé du paramètre          | Valeur par défaut | Type    |
-| ------------------------------------------------- | ------------------------- | ----------------- | ------- |
-| Activation/désactivation de cet explorateur       | redactexplorer.enabled    | false             | Booléen |
-| Activer le bouton de création de biffure          | redactexplorer.redact     | true              | Booléen |
-| Activer le bouton de création de biffure par zone | redactexplorer.redactZone | true              | Booléen |
+
+## Comment explorer
+
+
+| Description                                                                                                | Property key                                                  | Default value  | Type    |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | -------------- | ------- |
+| Enable/Disable this explorer                                                                               | annotation.comment.explorer.enabled                           | true           | Boolean |
+| Possibility to display annotations in minimized format                                                     | annotation.comment.explorer.inline.enabled                    | false          | Boolean |
+| Display annotations in minimized format when annotation explorer is opened                                 | annotation.comment.explorer.show.annotation.minimized.on.open | false          | Boolean |
+| Sets up the comment explorer on the east side of ARender                                                   | annotation.comment.explorer.eastSide.enabled                  | false          | Boolean |
+| Opens the comment explorer when an annotation is edited                                                    | annotation.comment.explorer.openOnEdit                        | false          | Boolean |
+| Animate while expanding the comment explorer                                                               | annotation.comment.explorer.animate.on.expand                 | true           | Boolean |
+| Shows a simplified list of all authors on the comment explorer tab                                         | annotation.comment.explorer.showAllAnnotators                 | true           | Boolean |
+| Shows a total number of annotations on the comment explorer tab                                            | annotation.comment.explorer.showTotalAnnotationsNumber        | false          | Boolean |
+| Shows the comment explorer at startup of ARender as default panel                                          | annotation.comment.explorer.showAtStartup                     | false          | Boolean |
+| Enable/Disable to also filter annotations in the page view                                                 | annotation.comment.explorer.filterPageAnnotations             | false          | Boolean |
+| Set the sorting in increment otherwise in decrement date                                                   | annotation.comment.explorer.sortByIncrementDate               | true           | Boolean |
+| Allow the display of the date or not                                                                       | annotation.comment.explorer.show.date                         | true           | Boolean |
+| Display only the initials of the creator name                                                              | annotation.comment.explorer.creator.name.initial.only         | false          | Boolean |
+| Enable to display only one annotation per page                                                             | annotation.comment.explorer.show.one.annotation.only          | false          | Boolean |
+| Display target icon when annotation is other than numbered sticky note, otherwise the annotation type icon | annotation.comment.display.target.enabled                     | false          | Boolean |
+| Enable to enter in edition mode when clicking on a comment zone                                            | comment.edit.annotation.onselection.enabled                   | true           | Boolean |
+
+
+
+## Bookmark explorer
+
+
+| Description                                           | Parameter Key                            | Default value | Type    |
+| ----------------------------------------------------- | ---------------------------------------- | ------------- | ------- |
+| Enable/Disable this explorer                          | bookmarkexplorer.enabled                 | true          | Boolean |
+| Show the bookmark explorer at the application startup | bookmarkexplorer.showAtStartup           | false         | Boolean |
+| Make the bookmarks draggable                          | bookmarkexplorer.draggable               | true          | Boolean |
+| Enable/Disable the bookmark creation                  | bookmarkexplorer.add.bookmark.enabled    | true          | Boolean |
+| Enable/Disable the bookmark deletion                  | bookmarkexplorer.delete.bookmark.enabled | true          | Boolean |
+| Enable/Disable the bookmark animation                 | bookmarkexplorer.animation.enabled       | true          | Boolean |
+
+
+## Advanced search explorer 
+
+| Description                                                                         | Parameter Key                                    | Default value | Type    |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------ | ------------- | ------- |
+| Enable/Disable this explorer                                                        | advanced.searchexplorer.enabled                  | true          | Boolean |
+| Sets up the minimum character length allowed                                        | advanced.searchexplorer.min.characterLength      | 0             | Integer |
+| Sets up the maximum character length allowed                                        | advanced.searchexplorer.max.characterLength      | 255           | Integer |
+| Search is updated on annotation refresh when the advanced search explorer is active | advanced.searchexplorer.updates.enabled          | false         | Boolean |
+| The button for search and highlight is enabled                                      | advanced.searchexplorer.search.highlight.enabled | true          | Boolean |
+
+
+
+## Hyperlink explorer
+
+
+| Description                  | Parameter Key             | Default value | Type    |
+| ---------------------------- | ------------------------- | ------------- | ------- |
+| Enable/Disable this explorer | hyperlinkexplorer.enabled | true          | Boolean |
+
+
+
+## Redact explorer
+
+| Description                                   | Parameter Key             | Default value | Type    |
+| --------------------------------------------- | ------------------------- | ------------- | ------- |
+| Enable/Disable this explorer                  | redactexplorer.enabled    | false         | Boolean |
+| Activate the redact annotation button         | redactexplorer.redact     | true          | Boolean |
+| Activate the redact annotation zone button    | redactexplorer.redactZone | true          | Boolean |

@@ -1,47 +1,58 @@
 ---
-title: Connecteur par défaut
+title: "Default connector"
 ---
 
-Ce connecteur est celui fourni par défaut et est utilisé par les
-mécanismes standards au produit. Il répond au paramètres de l'URL
-listés dans le tableau suivant :
-
-| Paramètre | Description                                                                               |
-| --------- | ----------------------------------------------------------------------------------------- |
-| url       | Permet de fournir une URL basée sur les protocoles HTTP et FTP                            |
-| uuid      | Utilisé pour fournir l'identifiant d'un document généré au préalable par ARender (Avancé) |
-| bean      | Utilisé pour spécifié un connecteur (Avancé)                                              |
-
-Voici quelques exemples:
-
-- Ouverture d'un document stocké sur le web
-
-  `http://\{ARENDER_SERVER\}/ARender/ARender.html?url=...`
-
-- Ouverture d'un document via un connecteur spécifique en propageant un identifiant et un jeton de sécurité
-
-  `http://\{SERVEUR_ARENDER\}/ARender.html?bean=monConnecteur&identifiant=123456&token=9GISU9SG4Z`
 
 
-### Configurer la liste des URLs authorisées
 
-L'URI définie dans le paramètre url est vérifiée afin d'autoriser la connexion à un ensemble d'URL de la liste blanche.
 
-Du côté du rendu, en particulier dans le microservice Broker, deux propriétés sont disponibles pour ajouter une URL à la liste blanche basée sur le protocole HTTP et le protocole FTP.
+
+
+This connector is provided as default. It is used for internal product
+mechanism. For these purposes, it can be used with following URL
+parameters:
+
+| Parameter | Description                                          |
+| --------- | ---------------------------------------------------- |
+| url       | Allow to supply a URL based on HTTP or FTP protocol  |
+| uuid      | Used to visualize the id of a ARender document       |
+| bean      | Specify use of a specific connector (Advanced level) |
+
+
+Here are some examples:
+
+- Open a WEB document
+
+  `http://&#123;ARENDER_SERVER&#125;/ARender/ARender.html?url=...`
+
+- Open a document using a specific connector providing a user id and a security token
+
+  `http://&#123;ARENDER_SERVER&#125;/ARender.html?bean=myConnector&amp;user=123456&amp;token=9GISU9SG4Z`
+
+
+
+### Configure authorized URLs
+
+The URI set in the url parameter is checked in order to authorized the connexion against a set of whitelisted URL.
+
+In Rendition side, specifically in the Broker microservice, two properties are available to whitelist URL based on HTTP protocol and FTP protocol.
+
 
 
 
 ```cfg
-# Chemins des documents autorisés séparés par des virgules
+# Authorized documents paths with comma-separated
 authorized.paths=../../samples/,../samples/,../../tmp/,../tmp
-# URL autorisées séparées par des virgules
+# Authorized URLs with comma-separated
 authorized.urls=
 ```
 
 
-Par défaut, aucune URL n'est autorisée.
 
-Par exemple, pour permettre au site de démonstration ARender d'autoriser le document URL suivant https://demo.arender.io/docs/demo/ARender-doc-demo.pdf, nous devons définir la propriété comme ci-dessous :
+By default, no URL is authorized.
+
+For example, to allow the ARender demo site to authorize the following URL document https://demo.arender.io/docs/demo/ARender-doc-demo.pdf, we need to set the property like below : 
+
 
 
 ```cfg
@@ -49,17 +60,19 @@ authorized.urls=https://demo.arender.io,demo.arender.io
 ```
 
 
-Notez que nous avons ajouté 2 URL, une avec le protocole HTTP et une sans. Les deux sont corrects.
-Mais dans le premier, nous autorisons explicitement l'URL HTTPS de la taille de la démo.
 
-Avec la propriété ci-dessus, l'URL suivante ouvrira le document ARender-doc-demo.pdf dans la démo ARender :
+Note, that we added 2 URLs, one with the HTTP protocol and one without. Both are correct. 
+But in the first one, we explicitly authorize HTTPS URL of the demo size.
+
+With the property above, the following URL will open the document ARender-doc-demo.pdf in the ARender demo : 
 
 https://www.demo.arender.io/?url=https://demo.arender.io/docs/demo/ARender-doc-demo.pdf
 
-### Configurer l'authentification basique
+### Configure Basic Authentication
 
-Depuis la version 2023.1.0, une nouvelle propriété est disponible pour configurer les URLs qui ont besoin d'être authentifiées avec une authentification basique.
-La propriété doit être placée dans le microservice Broker.
+Since version 2023.1.0, a new property is available to configure URLs that need to be authenticated with a Basic Authentication.
+The property must be provided in the Broker microservice.
+
 
 
 ```cfg
@@ -69,4 +82,5 @@ La propriété doit être placée dans le microservice Broker.
 # Example : domain1@secret1,domain2@secret2,domain3@secret3
 arender.url.basic.auth=
 ```
+
 

@@ -1,36 +1,41 @@
 ---
-title: Récupérer un ordre de transformation (GET)
+title: "GET a transformation order"
 ---
 
-Cette API permet de récupérer un ordre de transformation précédemment demandé.
 
-## Description technique de l'API
 
-Point de terminaison :
+
+
+
+
+This API allows you to retrieve a transformation order previously requested.
+
+## API technical description
+
+Entry point :
 ```bash
 GET /transformations/<transformationOrderId>
 ```
 
-Chemin de ressource :
+Resource path:
 
-| Variable             | Description                       |
-| :------------------- | :-------------------------------- |
-| transformationOderId | L'ID d'un ordre de transformation |
+| Variable             | Description                      |
+| :------------------- | :------------------------------- |
+| transformationOderId | The ID of a transformation order |
 
-Réponse :
+Response :
 
-| Attribut            | Type                | Description                                                               |
-| :------------------ | :------------------ | :------------------------------------------------------------------------ |
-| transformationOrder | TransformationOrder | Contient toutes les informations relatives au TransformationOrderId donné |
+| Attribute           | Type                | Description                                                           |
+| :------------------ | :------------------ | :-------------------------------------------------------------------- |
+| transformationOrder | TransformationOrder | Contains every information related to the given TransformationOrderId |
 
-## Exemples
+## Examples
 
-### Récupérer un ordre de transformation
+### Retrieve a transformation order
 
-L'appel ci-dessous génère une demande de récupération de l'ordre de transformation avec l'id _123e4567-e89b-12d3-a456-426614174000_.
+The call below generates a request to retrieve the transformation order with id _123e4567-e89b-12d3-a456-426614174000_.
 
 ```bash
-
 curl -X 'GET' \
   'http://localhost:8761/transformations/123e4567-e89b-12d3-a456-426614174000' \
   -H 'accept: */*'

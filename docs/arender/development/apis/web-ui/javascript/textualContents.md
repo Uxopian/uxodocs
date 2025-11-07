@@ -1,37 +1,50 @@
 ---
-title: Contenu textuel
+title: "Textual content"
 ---
 
-## Utiliser la fonctionnalité lasso
-
-- Objet : getARenderJS()
 
 
-La fonctionnalité de lasso est disponible depuis la version 4.5. Le principe est d'enregistrer l'écoute d'un évènement puis d'activer le mode lasso qui va permettre à l'utilisateur de sélectionner un texte du document qui sera récupéré via l'évènement écouté. Ce texte pourra être utilisé par la suite pour remplir un champs texte automatiquement par exemple.
 
-| Fonction                                           | Description                                                                             | Arguments                                                                                                               |
-| -------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| registerNotifyLassoSelectedTextEvent(callback)     | Enregistre une fonction callback à appeler en cas de récupération de texte via le lasso | **callback :** la fonction callback à appeler en cas de récupération de texte via le lasso                              |
-| askActivateLassoMode(lassoID)                      | Active le mode lasso avec un id qui sera renvoyé en même temps que le texte sélectionné | **lassoID :** ID permettant d'identifier d'où provient l'activation du mode lasso pour l'utilisation du texte récupéré  |
-| askDeactivateLassoMode()                           | Désactive le mode lasso                                                                 |                                                                                                                         |
+
+
+
+## Using lasso feature
+
+- Object : getARenderJS()
+
+The lasso feature is available since version 4.5. The principle is to register for an event, then to activate the lasso mode, which will allow the user to select a text in the document which will be retrieved with the registered event. For example, this text can be used subsequently to automatically fill in a text field.
+
+| Function                                           | Description                                                                                | Argument                                                                                                          |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| registerNotifyLassoSelectedTextEvent(callback)     | Registers a callback function to call in case of text retrieval with the lasso             | **callback :** The callback function to call in case of text retrieval with the lasso                             |
+| askActivateLassoMode(lassoID)                      | Activate lasso mode with an id that will be returned at the same time as the selected text | **lassoID :** ID to identify where the activation of the lasso mode comes from for the use of the retrieved text  |
+| askDeactivateLassoMode()                           | Deactivate the lasso mode                                                                  |                                                                                                                   |
+
 
 
 ```js
 var arenderjs;
 
 function arenderjs_init(arenderjs_)
-<!-- Commentaire nettoyé -->);
-}
+
+  arenderjs = arenderjs_
+  arenderjs.registerNotifyLassoSelectedTextEvent(function(text, lassoID){
+    armt_onSubmitNotifyLassoSelectedTextEvent(text,lassoID);
+  });
 
 function armt_onSubmitNotifyLassoSelectedTextEvent(text,lassoID)
-<!-- Commentaire nettoyé -->
+
+  var elem = document.getElementById(lassoID);
+  elem.innerHTML = text;
 
 function armt_activatingLasso(lassoID)
-<!-- Expression supprimée -->; 
-}
+
+  arenderjs.askActivateLassoMode(lassoID); 
 
 function armt_deactivatingLasso()
-<!-- Expression supprimée -->;
-}
+
+  arenderjs.askDeactivateLassoMode();
+
 ```
+
 

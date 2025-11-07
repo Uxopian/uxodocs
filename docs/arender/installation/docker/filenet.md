@@ -1,26 +1,36 @@
 ---
-title: IBM FileNet
+title: "IBM FileNet"
 ---
 
-## ARender UI Spring Boot pour IBM FileNet
 
-### Configuration avec un compte de service
 
-Depuis la version 2023.4.0, nous avons créé une image Docker dédiée pour ARender UI Spring Boot avec le connecteur FileNet 
 
-Pour démarrer le conteneur, exécutez :
+
+
+
+## ARender UI Spring Boot for IBM FileNet
+
+### Configuration with a service account
+
+Since v2023.4.0, we have created dedicated Docker image for ARender UI Spring Boot with FileNet connector 
+named arender-ui-springboot:-filenet.
+
+To run the container, execute:
 
 ```bash
+$> docker run /arender-ui-springboot:-filenet \
 -e ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD="LoginPasswordObjectStoreProvider"\
--e ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL="http://<!-- Commentaire nettoyé -->/wsi/FNCEWS40MTOM/"\
--e ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN="!-- Balise avec caractères invalides supprimée --"
+-e ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL="http://<filenet-url>:<filent-port>/wsi/FNCEWS40MTOM/"\
+-e ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN=<account-name>\
+-e ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD=<account-password>
 ```
 
-### Configuration avec OAuth2
+### Configuration with OAuth2
 
-Remarque : Si vous ne disposez pas des informations d'identification nécessaires pour l'artefact ARender, veuillez contacter arendre-support@arondor.com.
+Note: If you do not have the necessary credential for ARender artifactory, please contact arender-support@arondor.com.
 
-Dans notre exemple, nous utiliserons Docker Compose pour que l’ensemble de la pile soit opérationnel.
+In our example, we will be using Docker Compose so we can have the whole stack up and running.
+
 
 
 ```cfg
@@ -28,20 +38,22 @@ version: "3.7"
 
 services:
   ui:
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:-filenet
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
-      # Vous pouvez configurer les propriétés ARender via une variable d'environnement ou avec le fichier de configuration dans un volume comme plus bas
+      # You can configure ARender properties through environment variable or with the configuration file in a volume like further down
       #- "ARENDERSRV_ARENDER_SERVER_OAUTH2_ENABLED=true"
       #- "ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD=oauth2ObjectStoreProvider"
       #- "ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL=http://localhost:9080/wsi/FNCEWS40MTOM/"
     ports:
       - 8080:8080
-    # Ici nous copions notre configuration pour OAuth2 dans un volume
+    # Here we copy our configuration for OAuth2 in a volume
     volumes:
       - ./volume/config/application.yml:/home/arender/application.yml
       - ./volume/configurations/arender-custom-server.properties:/home/arender/configurations/arender-custom-server.properties
 
   service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
@@ -52,6 +64,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer:
     hostname: drn-service
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
@@ -63,6 +76,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -73,6 +87,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
@@ -88,5 +103,6 @@ volumes:
 
 
 
-Les fichiers de configuration d'ARender ou de connecteur peuvent être placés dans le dossier **/home/arender/configurations/** du conteneur.
-Connector lib peut être placé dans le dossier **/home/arender/lib/** du conteneur.
+
+ARender or connector configuration files can be put in the **/home/arender/configurations/** folder of the container.
+Connector lib can be put in the **/home/arender/lib/** folder of the container.

@@ -1,29 +1,36 @@
 ---
-title: Chargement du schéma de mise en page du document (POST)
+title: "POST Document Layout"
 ---
 
-Cette API vous permet de charger les informations de mise en page d'un document.
 
-## Description de l'API
 
-Endpoint :
 
+
+
+
+This API allows you to upload the layout information for a document.
+
+## API Description
+
+Endpoint:
 ```bash
 POST /documents/layout
 ```
 
-Corps de la requête:
+Request body:
 
-| Paramètre      | Description                            |
-|:---------------|:---------------------------------------|
-| documentLayout | Les informations du layout du document |
+| Parameter      | Description                            |
+| :------------- |:---------------------------------------|
+| documentLayout | The layout information of the document |
 
-## Exemple
+## Example
 
-### Chargement du schéma de mise en page du document
+### Upload Document Layout
 
-L'exemple suivant illustre comment charger les informations 
-de mise en page d'un document "document_layout.json".
+The following example demonstrates how to upload the layout information 
+```javascript
+for a document "document_layout.json".
+```
 
 ```bash
 curl -X 'POST' \

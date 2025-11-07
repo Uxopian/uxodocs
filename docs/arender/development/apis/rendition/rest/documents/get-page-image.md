@@ -1,44 +1,50 @@
 ---
-title: Obtenir l'image d'une page (GET)
+title: "GET Page Image"
 ---
 
-Cette API vous permet d'obtenir l'image d'une page spécifique d'un document.
 
-## Description technique de l'API
 
-Point d'entrée :
+
+
+
+
+This API allows you to retrieve the image of a specific page in a document.
+
+## API Description
+
+Endpoint:
 ```bash
 GET /documents/{documentId}/pages/{page}/image
 ```
 
-Chemin de la ressource:
+Resource path:
 
-| Variable    | Requis | Description                                                                                |
-|:------------|:-------|:-------------------------------------------------------------------------------------------|
-| documentId  | Oui    | L'ID de référence du document                                                              |
-| page        | Oui    | L'index de la page dont vous souhaitez obtenir l'image                                     |
+| Variable              | Required | Description                                                           |
+|:----------------------|:---------|:----------------------------------------------------------------------|
+| documentId            | Yes      | The ID of a document                                                  |
+| page                  | Yes      | The index of the page for which you want to retrieve the image        |
+
+Query params:
+
+| Variable              | Required | Description                                                           |
+|:----------------------|:---------|:----------------------------------------------------------------------|
+| pageImageDescription  | No       | The image description. It specifies the width, rotation, and filters  |
 
 
-Paramètres de requête:
+Response :
 
-| Variable              | Requis | Description                                                                                |
-|:----------------------|:-------|:-------------------------------------------------------------------------------------------|
-| pageImageDescription  | Non    | La description de l'image de la page. Elle spécifie la largeur, la rotation et les filtres |
+| Type  | Description                  |
+|:------|:-----------------------------|
+| Image | The image file in PNG format |
 
+## Examples
 
-Réponse :
+### Retrieve Page Image
 
-| Type   | Description                      |
-|:-------|:---------------------------------|
-| Image  | L'image de la page au format PNG |
+The following example demonstrates how to retrieve the image of page 2 in the document with the ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
+The image has a width of 200 and a rotation of 90 degrees.
+Additionally, the image has filters applied, including contrast and brightness adjustments, as well as inversion.
 
-## Exemples
-
-### Obtenir l'image d'une page
-
-L'exemple suivant montre comment récupérer l'image de la page 2 du document avec l'ID _b64_bm9yZS92SDMtMS0xMTh1735080237_.
-L'image a une largeur de 200 et une rotation de 90 degrés.
-De plus, l'image a des filtres appliqués, notamment des ajustements de contraste et de luminosité, ainsi qu'une inversion.
 ```bash
 curl -X 'GET' \
   'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/pages/2/image?pageImageDescription=IM_200_90_FILTERS~C~35~B~-100~I~50' \

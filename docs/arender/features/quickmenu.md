@@ -1,13 +1,20 @@
 ---
-title: Menu rapide
+title: "Quickmenu"
 ---
+
+
+
+
+
+
 
 ## Description
 
-Le menu rapide est un menu contextuel qui apparait à la fin d'une sélection de texte. 
-Ce menu est positionné en dessous du texte et va permettre d'exécuter des actions sur le texte.
+The quickmenu is a context menu that appears at the end of a text selection.
+This menu is positioned below the text and will allow you to perform actions on the text.
 
-Ce menu est désactivable avec la configuration suivante : 
+This menu can be disabled with the following configuration : 
+
 
 ```cfg
 # Activates ARender quick contextual menu when text is selected
@@ -15,23 +22,23 @@ quick.contextual.menu.enabled=false
 ```
 
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
+![image](/img/arender/features/quickmenu.png)
 
 ## Actions
 
-### Création d'annotations
+### Annotations creation
 
-Les annotations nécessitant une sélection de texte possèdent leur bouton de création dans le menu rapide.
-Le menu rapide supporte l'ajout des annotations suivantes : 
-- surlignage
-- soulignage
-- barré
-- biffure (Si l'utilisateur à les droits d'ajout)
-- hyperlien 
+Annotations requiring text selection have their creation button in the quickmenu.
+The quickmenu supports the following annotations:
+- highlight
+- underline
+- strikeout
+- redact (If user is allowed to add them)
+- hyperlink 
 
-Chaque bouton est activé par défaut. Vous pouvez désactiver individuellement les boutons avec les configurations suivantes : 
+Each button is enabled by default. You can individually disable buttons with the following configurations:
+
 
 ```cfg
 # Enables a textual highlight annotation creation option for the quick contextual menu
@@ -55,10 +62,12 @@ quick.contextual.menu.hasRedactText=false
 
 
 
-### Copie de texte
 
-Un bouton pour copier le texte sélectionné est activé par défaut.
-Ce bouton est désactivable avec la configuration suivante : 
+### Copy of text
+
+A button to copy selected text is enabled by default.
+This button can be deactivated with the following configuration:
+
 
 
 ```cfg

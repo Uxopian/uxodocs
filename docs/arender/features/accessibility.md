@@ -1,41 +1,49 @@
 ---
-title: Accessibilité
+title: "Accessibility"
 ---
 
-Depuis la version 4.5, une meilleure accessibilité à l'utilisation d'ARender par des personnes ayant des problèmes de vision est disponible.
-
-## Lecture du contenu
-
-Le contenu des documents peut être lu grâce à des lecteurs d'écrans. 
-
-Pour le permettre, il a été ajouté dans des balises à l'intérieur du DOM. Ces balises sont utilisables par les logiciels et par les extensions permettant la lecture d'écran. 
-
-Par exemple, quand vous utilisez [l'extension Screen Reader de Google Chrome](https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn), lorsque vous double cliquez sur la page d'un document, l'extension va lire le contenu de cette page. 
-
-## Texte alternatif
-
-Les images porteuses d'informations possèdent un texte alternatif avec l'attribut CSS `alt=` qui permet à des applications tierces de lire avec une voix synthétique pour que l'utilisateur sache si une action est possible en cliquant dessus ou bien si l'icône informe de quelques chose.
-
-Liste des images et icônes possédant une représentation alternative d’une image sous forme de texte :
-
-- Les boutons de la barre de menu
-- L'explorateur des annotations
-- Les onglets du panneaux latéral
-- Les icônes se trouvant dans le panneau de navigation
-- Les miniatures des pages des documents
-- Les icônes des annotations Note textuelle
 
 
-## Les notifications
-
-Il est possible de modifier le temps d'affichage des popups de notifications. 
-
-| Propriété                    | Description                                                                      | Valeur par défaut |
-| ---------------------------- | -------------------------------------------------------------------------------- | ----------------- |
-| toaster.toast.timeout        | Configure le délai d'attente pour que les notifications soient masquées (en ms)  | 2000              |
 
 
-Modifier la valeur par défaut par la valeur *0* permet d'avoir accès aux éléments de la notification avec la tabulation. 
+
+
+Since version 4.5, ARender has a better support for visually impaired users.
+
+## Reading content
+
+The content of the documents can be read by screen readers.
+
+To enable this, the content of the document has been added in tags inside the DOM. 
+These tags can be used by software and screen-reading extensions to read the content.
+
+For example, when you use [the Screen Reader Google Chrome extension](https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn), and you double click items with the mouse, the extension reads the content.
+
+## Alternative text
+
+Images that give information have an alternative text with the CSS attribute `alt=` that allows other applications to read with a synthetic voice for the user to know if an action is possible by clicking or if the icon is just informing for something.
+
+List of images and icons with alternative text :
+
+- Buttons of top panel
+- Annotations explorer
+- Tabs in side panel
+- Icons in navigation panel
+- Thumbnails of pages of documents
+- Icons of sticky notes
+
+
+## Toasters
+
+It is possible to set the display time of toasters.
+
+| Property              | Description                                                        | Default value     |
+| --------------------- | ------------------------------------------------------------------ | ----------------- |
+| toaster.toast.timeout | Sets up the timeout for toaster notifications to be hidden (in ms) | 2000              |
+
+Modifying the default value by the value *0* allows access to the toaster elements with the tabulation.
+
+
 
 
 ```cfg
@@ -43,102 +51,111 @@ toaster.toast.timeout=0
 ```
 
 
-De ce fait, il est possible de fermer ou réinitialiser le panneau des notifications.
 
 
-Elles possèdent l'attribut `role = alert`. Cela permet au lecteur d'écran d'informer l'utilisateur qu'une notification est apparue.
+Therefore, it is possible to close or reset the notification panel.
 
 
-## Navigation avec le clavier
-
-### Utilisation
-
-Il est possible de naviguer dans ARender grâce à la touche de tabulation. Lorsqu'un élément est mis en évidence par la touche 'tabulation', un contour bleu apparaît autour de celui-ci.
- 
-Les déplacements de gauche à droite s'effectuent avec la touche *tab*. A l'inverse les déplacements de droite à gauche s'effectuent avec les touches *shift + tab*.
-
-Les éléments concernés sont : 
-- Les boutons du bandeau du haut
-- Les sous-menus 
-- Les boutons de navigations 
-- Les vignettes
-- Les boutons de gestions des signets
-- Les boutons de la recherche avancée
-- Les éléments de l'explorateur d'hyperliens
-- Les boutons du bandeau d'édition
-- Les sélecteurs de couleurs
-- Les pop-up 
-- Les champs de saisie
+They have the `role=alert` attribute. This allows the screen reader to inform the user that a toaster appears.
 
 
-La navigation de certains éléments ne fonctionne pas de la même manière : 
+## Keyboard navigation 
 
-- Navigation avec les flèches :
-    - Les listes déroulantes
-    - Les signets
-    - Les boutons radio du même groupe 
-    - Les boutons à cocher du même groupe 
+### Use
 
-- *Ctrl + entré* :
-    pour entrer dans les zones de texte :
-    - Annotation texte libre 
-    - Notes textuelles
+It is possible to navigate in ARender with the tabulation key of keyboard. When an element is focused, an blue outline appears on it. 
+
+Movements from left to right are done with the *tab* key. Conversely movements from right to left are done with the keys *shift + tab*.
+
+Apply to: 
+- Top panel buttons
+- Sub-menus 
+- Navigation buttons
+- Pictree 
+- The bookmark management buttons
+- Search advanced buttons
+- Hyperlink explorer buttons
+- Edition panel buttons
+- Color pickers
+- Pop up
+- Text box
+
+The navigation of some elements does not work the same way:
+
+- Keyboard arrows navigation: 
+    - List box
+    - Bookmarks
+    - Radio buttons of the same radio group 
+    - Check box of the same check box group
+
+- *Ctrl + enter*:
+    to enter in text boxes
+    - Freetext
+    - Sticky note 
 
 
-### Le design 
+### The design 
 
-Pour paramétrer le visuel de l'élément mis en évidence à vos besoin, les classes CSS suivantes doivent être modifiées :  
+To set the outline, the following css classes must be changed:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
 
 ```css
 :focus-visible,
 button:focus,
 select:focus,
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
+
+```properties
 [type="checkbox"]:focus-visible+label,
 [type="radio"]:focus-visible+label {
-
-}
+```
+```
+```
+```
+```
+```
 
 .simple-outline:focus-visible,
 button:focus,
 select:focus {
 
-}
 ```
 
 
-## Problèmes de perception des couleurs 
 
-De nouveaux styles ont été ajoutés pour permettre aux personnes atteintes de deutéranopie, de protanopie ou de tritanopie d'avoir des couleurs accordées à leurs besoins.
+## Problems of color perception
 
-Chacun de ces troubles de la perception des couleurs possède son propre style. Il est possible de modifier l'aspect du produit grâce à la propriété suivante et l'une des valeurs attribuée: 
+New styles have been added to allow people with deuteranopia, protanopia or tritanopia to see colors that match with their needs.
 
-| Description                                                                                                                                     | Clé du paramètre        | Valeur par défaut | Type    |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ----------------- | ------- |
-| Changer le thème. Ne fonctionne pas sur Internet Explorer. Valeur autorisée : LEGACY, DARK, LIGHT, CUSTOM, DEUTERANOPIA, PROTANOPIA, TRITANOPIA | preference.color.mode   | LEGACY            | Texte   |
+Each of these color perception disorders has their own style. It is possible to change the appearance of the product with the following property and one of the values assigned:
 
 
+| Description                                                                                                                                 | Parameter Key           | Default value     | Type    |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ----------------- | ------- |
+| Change the colors. Will NOT work on Internet Explorer. Authorized value : LEGACY, DARK, LIGHT, CUSTOM, DEUTERANOPIA, PROTANOPIA, TRITANOPIA | preference.color.mode   | LEGACY            | String  |
 
-Si vous souhaitez modifier l'une des couleurs, il est possible de changer la valeur de la variable associée dans l'une des classes CSS suivante :
+If you want to change one of the colors, you can change the value of the associated variable in one of the following CSS classes:
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+
 
 ```css
 .deuteranopia-theme {
 
-}
-
 .protanopia-theme { 
-
-}
 
 .tritanopia-theme {
 
-}
 ```
+
+
 

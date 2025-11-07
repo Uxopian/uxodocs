@@ -1,15 +1,21 @@
 ---
-title: Zoom api
+title: "Zoom api"
 ---
 
-### Changer le zoom
 
-- Objet : getARenderJS().getZoomJSAPI()
 
-    | Fonction            | Description                                              |
-    | ------------------- | -------------------------------------------------------- |
-    | askZoomIn()         | Zoomer                                                   |
-    | askZoomOut()        | Dézoomer                                                 |
-    | askZoomFullWidth()  | Zoomer suivant la largeur maximal de l'écran             |
-    | askZoomFullHeight() | Zoomer suivant la hauteur                                |
-    | askZoomFullPage()   | Zoomer à la taille la plus adaptée entre hauteur/largeur |
+
+
+
+
+### Change zoom
+
+- Object: getARenderJS().getZoomJSAPI()
+
+    | Function            | Description                                      |
+    | ------------------- | ------------------------------------------------ |
+    | askZoomIn()         | Zoom                                             |
+    | askZoomOut()        | Zoom out                                         |
+    | askZoomFullWidth()  | Zoom full width                                  |
+    | askZoomFullHeight() | Zoom full height                                 |
+    | askZoomFullPage()   | Zoom full page: adapted to both width and height |

@@ -1,9 +1,13 @@
 ---
-title: Annotations
-description: Gestion des annotations dans ARender
-sidebar_position: 1
-keywords: ["feature", "annotations"]
+title: "Annotations"
+description: "Gestion des annotations dans ARender"
 ---
+
+
+
+
+
+
 
 # Annotations
 

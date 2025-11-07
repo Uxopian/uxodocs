@@ -1,11 +1,17 @@
 ---
-title: Enlever l'arborescence des documents
+title: "Remove document tree"
 ---
 
-Une nouvelle servlet est déployée permettant d'enlever l'arborescence des documents.
-Un fichier Json est retourné et liste chaque page des documents enfants sans les hiérarchiser. 
 
-Exemple : 
+
+
+
+
+
+A new servlet is deployed to remove the document tree.
+A Json file is returned and lists each page of child documents without ranking them.
+
+Example : 
 ``` json
 [
   "b64_bG9jYWxlPWZyJnJhbmRvbVVVSUQ9MTFjYmE0YzQtMzUzNy00OWI4LTg2MGEtZjdiNjU4NzU3MjJj/1/1/1/1|0|612.0",
@@ -16,22 +22,19 @@ Exemple :
 ]
 ```
 
+## Request 
+
+This functionality is accessible via the servlet: **flatDocumentLayout**
+
+Usable in GET
 
 
-## Requête 
-
-Cette fonctionnalité est accessible via la servlet : **flatDocumentLayout**
-
-La requête est utilisable uniquement en GET
-
-
-### Exemple d'utilisation
+### Request example
 
 ``` bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/flatDocumentLayout?uuid=docuuid'
 ```
 
+## Servlet Response
 
-## Réponse de la servlet
-
-Un fichier Json est renvoyé avec les documents enfants du document initial sans leur arborescence.
+A Json file is returned with the child documents of the initial document without their tree structure.

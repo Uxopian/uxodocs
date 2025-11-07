@@ -1,94 +1,82 @@
 ---
-title: Optimiser la visualisation
+title: "Optimize visualization"
 ---
 
-ARender fournit une interface simple et rationalisée pour la
-visualisation d'un document. Le visualiser adapte la taille des
-différents éléments de l'interface, ou même de changer le zoom du
-document.
 
-## Personnaliser l’interface dans l’explorateur de documents (Document Explorer)
 
-La taille du menu Document Explorer (à gauche) peut être réglée par
-étirement ou réduction. Sélectionnez la ligne de séparation entre les
-deux panneaux avec la souris et maintenez-la pour agrandir ou réduire la
-taille du menu :
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-Ou cliquer sur les boutons
 
-```xml
-<!-- Commentaire nettoyé -->
-```
 
-3 tailles d’affichage sont disponibles pour l’explorateur de document :
+ARender provides a simple and streamlined Interface for viewing a
+document. The viewer can adapt the size of the various components of the
+interface, or even change the zoom of the document
 
-- Caché
-- Taille par défaut
-- Déplier
+## Customize the interface elements of the document Explorer menu
 
-## Zoomer sur une page d’un document
+The size of the Document Explorer menu (on the left) can be set either
+by stretching or reducing it. Select the separation line between the two
+panels with the mouse and hold to expand or reduce the size of the left
+menu:
 
-Utiliser les boutons de zoom disponibles dans le bandeau de navigation
+![image](/img/arender/new/opti1.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Or click on these following buttons:
 
-Après plusieurs « Zoom arrière sur une page », vous visualisez plusieurs
-pages à la fois
+![image](/img/arender/new/opti2.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Three display sizes are available for the Document Explorer:
 
-Les utilisateurs peuvent afficher une page entière ou faire un zoom de
-zone (utiliser le bouton « Zoom dans la zone ») pour regarder de plus
-près une partie de la page.
+- Hide completely
+- Default size
+- Extended size
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+## Zoom a page of a document
 
-## Adapter la hauteur et la largeur d’une page
+You can access to zoom buttons in the toolbar:
 
-Cliquer sur le bouton « Ajuster la hauteur » pour voir la page sur toute
-sa hauteur, ou cliquer sur le bouton « Ajuster la largeur » pour voir la
-page sur toute sa largeur.
+![image](/img/arender/new/opti3.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+Zoom out several times a page allows you to visualize multiple pages at
+once.
 
-Cliquer sur le bouton « Ajuster à la page » pour revenir à la taille
-originale de la page.
+Users can view full page or zoom in zone (use the "Zoom in zone" button)
+to take a closer look.
 
-## Pivoter les pages d’un document
+## Adapt the height or width of a page
 
-Utiliser les boutons « Rotation horaire » ou « Rotation antihoraire »
-dans le bandeau de navigation
+Click on the "Full height" button to view document in full height, or
+click on "Full width" button to view document in full width.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+![image](/img/arender/new/opti4.png)
 
-Ou faire un clic-droit sur le document :
+You can also click on "Full page" button to zoom to the original page
+size.
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+## Turn a page of a document
 
-## Accéder au mode Plein Écran
+You can use the "Turn page left" or "Turn page right" buttons in the
+toolbar:
 
-Cliquer sur le bouton « Plein Écran » dans le coin droit du bandeau de
-navigation
+![image](/img/arender/new/opti5.png)
 
-```xml
-<!-- Commentaire nettoyé -->
-```
+or you can right-click on the document and choose "Turn page left" or
+"Turn page right" in the menu:
 
-Le mode plein écran affiche tout le contenu du document sans bandeau de
-navigation Vous pouvez sortir de ce mode avec la touche Echap.
+![image](/img/arender/new/opti7.png)
+
+## Turn all document pages with one click
+
+You can also turn all pages of the document at left or at right by
+clicking on these buttons:
+
+![image](/img/arender/new/opti8.png)
+
+## Access the full screen mode
+
+Click on the "Full screen" button in the top right corner.
+
+![image](/img/arender/new/opti6.png)
+
+The full screen mode displays all document content, without page thumbs
+and the top panel. You can exit this mode with the Escape key.
