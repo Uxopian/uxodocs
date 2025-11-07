@@ -26,15 +26,17 @@ jobs:
           fetch-depth: 0
           lfs: true
 
+      # ⬇️ Tirer UNIQUEMENT les objets LFS nécessaires au commit courant
       - name: Resolve LFS pointers in sources (pre)
         shell: bash
         run: |
           set -euo pipefail
-          git lfs fetch --all || true
+          # fetch ciblé (pas de --all pour éviter les refs cassées)
+          git lfs pull --include="static/**,docs/**" --exclude=""
           git lfs checkout
-          # (optionnel) échouer si des pointeurs traînent déjà dans les sources
+          # garde-fou (info): si des pointeurs restent, on les verra ici
           if grep -RIl "git-lfs.github.com/spec/v1" static docs 2>/dev/null; then
-            echo "LFS pointers found in sources before versioning"; exit 1
+            echo "::warning::Some LFS pointers still present in sources after pre step (will be fixed later if not used in build)"
           fi
 
       - name: Fetch all branches (explicit)
@@ -54,7 +56,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Réinitialise les versions éphémères
+          # (Re)génération propre
           rm -rf versioned_docs versioned_sidebars
 
           for product in $PRODUCTS; do
@@ -64,19 +66,19 @@ jobs:
             rm -rf ".cache_${product}_current" && mkdir -p ".cache_${product}_current"
             rsync -a "docs/${product}/" ".cache_${product}_current/"
 
-            # Liste des branches test-<product>-v*
+            # Branches versionnées
             mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
               | grep "^origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
 
             for br in "${branches[@]}"; do
-              ver="${br##test-${product}-}"   # ex: v1, v2
+              ver="${br##test-${product}-}"   # v1, v2, ...
               echo "-> snapshot ${product} ${ver} from ${br}"
 
-              # Worktree détaché sur la ref distante (au lieu de git archive)
+              # ✅ Worktree détaché au lieu de git archive
               wt=".wt_${product}_${ver}"
               git worktree add --force --detach "$wt" "origin/${br}"
 
-              # Résoudre LFS dans ce worktree et copier les vrais fichiers
+              # ✅ Résoudre LFS pour ce worktree uniquement
               (
                 set -euo pipefail
                 cd "$wt"
@@ -93,26 +95,23 @@ jobs:
                 continue
               fi
 
-              # Remplace le current par le contenu versionné puis génère la version
               rsync -a --delete .tmp_docs/ "docs/${product}/"
               npx docusaurus "docs:version:${product}" "${ver}"
 
-              # Nettoie le worktree
               git worktree remove -f "$wt"
             done
 
-            # Restaure le "current" d'origine
+            # Restaure le "current"
             rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
           done
 
+      # Après la versioning, re-matérialiser au cas où
       - name: Resolve LFS pointers in sources (post-versioning)
         shell: bash
         run: |
           set -euo pipefail
+          git lfs pull --include="static/**,docs/**" --exclude=""
           git lfs checkout
-          if grep -RIl "git-lfs.github.com/spec/v1" static docs 2>/dev/null; then
-            echo "LFS pointers still present in sources after versioning"; exit 1
-          fi
 
       - name: Build
         env:
@@ -122,11 +121,13 @@ jobs:
       - name: Add .nojekyll
         run: touch build/.nojekyll
 
+      # 🚨 Le build publié ne doit contenir AUCUN pointeur LFS
       - name: Assert no LFS pointers in build
         shell: bash
         run: |
           if grep -RIl "git-lfs.github.com/spec/v1" build 2>/dev/null; then
-            echo "ERROR: LFS pointer found in build output."; exit 1
+            echo "ERROR: LFS pointer found in build output."
+            exit 1
           fi
           echo "OK: no LFS pointers"
 
