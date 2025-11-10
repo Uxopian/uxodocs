@@ -17,7 +17,7 @@ const config: Config = {
 
   onBrokenLinks: 'warn',
   markdown: {
-    hooks: { onBrokenMarkdownLinks: 'warn' , onBrokenMarkdownImages: 'warn' },
+    hooks: { onBrokenMarkdownLinks: 'warn', onBrokenMarkdownImages: 'warn' },
   },
 
   presets: [
@@ -57,6 +57,33 @@ const config: Config = {
         indexDocs: true,
         indexPages: true,
         hashed: true,
+        docsRouteBasePath: ['docs-default', 'docs/fast2', 'docs/arender', 'docs/flowerdocs', 'docs/uxopian-ai'],
+        docsPluginIdForPreferredVersion: 'default',
+        searchContextByPaths: [
+          {
+            label: 'Toutes les documentations',
+            path: 'docs/',
+          },
+          {
+            label: 'Fast2',
+            path: 'docs/fast2',
+          },
+          {
+            label: 'ARender',
+            path: 'docs/arender',
+          },
+          {
+            label: 'FlowerDocs',
+            path: 'docs/flowerdocs',
+          },
+          {
+            label: 'Uxopian AI',
+            path: 'docs/uxopian-ai',
+          },
+        ],
+        searchBarShortcut: true,
+        searchBarShortcutHint: true,
+        searchBarPosition: 'right',
         // language: ['fr', 'en'],
       },
     ],
