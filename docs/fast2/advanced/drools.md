@@ -92,14 +92,16 @@ There are two different ways to use parameters:
 
 ## :octicons-pencil-16: Write a condition
 
-Conditions, just as in a regular coding snippet, must be performed as a boolean. Actions are executed only if condition is _TRUE_. It’s highly recommended to use `eval(<condition>)` or `!eval(<condition>)` for conditions.
+Conditions, just as in a regular coding snippet, must be performed as a boolean. Actions are executed only if condition is _TRUE_. It's highly recommended to use `eval(<condition>)` or `!eval(<condition>)` for conditions.
 
-!!! Check
+:::tip
 
-    Just as you would write any condition in your code,
+Just as you would write any condition in your code,
 
-    - Conditions must not end by a semi-colon (`;`)
-    - Characters allowed : `<`, `>`, `<=`, `>=`, `||`, `&&`, …
+- Conditions must not end by a semi-colon (`;`)
+- Characters allowed : `<`, `>`, `<=`, `>=`, `||`, `&&`, …
+
+:::
 
 If you want to perform an action no matter what, do `eval($param)` with `$param = true`.
 
@@ -111,9 +113,11 @@ If you need the document to have a specific data before making any action, do:
 
 ## Action examples
 
-!!! Check
+:::tip
 
-    You can put any Java code to perform an action, as long as you end each instruction by a semi-colon (`;`).
+You can put any Java code to perform an action, as long as you end each instruction by a semi-colon (`;`).
+
+:::
 
 ### Add new data
 

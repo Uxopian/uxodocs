@@ -7,7 +7,9 @@ tags: ["xml", "pattern", "document", "AWS S3", "content"]
 
 Extracting metadata from a S3 bucket needs to be done differently than what could be done with a regular content management system, because it is a storage space and not an ECM.
 
-!!! warning "Prior to v2.10, Fast2 needed a few steps to add “manually” (with [AlterDocumentProperties](../catalog/transformer.md#AlterDocumentProperties)) key and bucket information in the XML file, to then get corresponding PDF files."
+:::warning 
+"Prior to v2.10, Fast2 needed a few steps to add “manually” (with [AlterDocumentProperties](../catalog/transformer.md#AlterDocumentProperties)) key and bucket information in the XML file, to then get corresponding PDF files."
+:::
 
 Extracting metadata from a S3 bucket needs to be done differently than what could be done with a regular content management system, where a document is a set of contents and metadata. Indeed, S3 bucket is a storage space and not an ECM (we’ll get into that a little bit later).
 

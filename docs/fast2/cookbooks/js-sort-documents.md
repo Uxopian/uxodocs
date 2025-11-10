@@ -47,10 +47,9 @@ At a glance, we are just couple steps away from sorting our documents : we need 
 
 However we need to go through a String-to-Date conversion so the sorting will be done correctly over datetimes values, instead of alphabetical values.
 
-!!! Check
-
-    We will just reorganise all the documents within the punnet, they will be considered like tiles to rearrange, but we need not to mix their own data up (for obvious data integrity reasons).
-
+:::tip
+We will just reorganise all the documents within the punnet, they will be considered like tiles to rearrange, but we need not to mix their own data up (for obvious data integrity reasons).
+:::
 
 
 ## 🚀 Way to go !

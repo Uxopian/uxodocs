@@ -39,17 +39,25 @@ For each new campaign of Fast2, an index will be created: if you decided to run 
 For an optimal migration setup, this third-party software can be easily configured at different levels to match you needs at most !
 If required, it can even be disabled at will.
 
-=== "v2.4-"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-    ```ini title="./config/applications.properties"
-    broker.elasticsearch.embedded.enabled=true
-    ```
+<Tabs>
+<TabItem value="v2.4-" label="v2.4-">
 
-=== "v2.5+"
+```ini title="./config/applications.properties"
+broker.elasticsearch.embedded.enabled=true
+```
 
-    ```ini title="./config/applications.properties"
-    broker.opensearch.embedded.enabled=true
-    ```
+</TabItem>
+<TabItem value="v2.5+" label="v2.5+">
+
+```ini title="./config/applications.properties"
+broker.opensearch.embedded.enabled=true
+```
+
+</TabItem>
+</Tabs>
 
 ### Port
 
@@ -59,35 +67,45 @@ However, in the case where this port is already used by either another Fast2 ins
 
 Since the embedded database has to be reach from both Fast2 broker and Kibana module — if the latter is enabled — there is exactly 3 places where to mention this change:
 
-=== "v2.4-"
+<Tabs>
+<TabItem value="v2.4-" label="v2.4-">
 
-    | File                                           | Specification                                         |
-    | ---------------------------------------------- | ----------------------------------------------------- |
-    | ./config/application.properties                | `opensearch.port=1790`                                |
-    | ./elasticsearch-X.Y.Z/config/elasticsearch.yml | `http.port: <es-port>`                                |
-    | ./kibana-X.Y.Z/config/kibana.yml               | `elasticsearch.hosts: ["http://localhost:<es-port>"]` |
+| File                                           | Specification                                         |
+| ---------------------------------------------- | ----------------------------------------------------- |
+| ./config/application.properties                | `opensearch.port=1790`                                |
+| ./elasticsearch-X.Y.Z/config/elasticsearch.yml | `http.port: <es-port>`                                |
+| ./kibana-X.Y.Z/config/kibana.yml               | `elasticsearch.hosts: ["http://localhost:<es-port>"]` |
 
-=== "v2.5+"
+</TabItem>
+<TabItem value="v2.5+" label="v2.5+">
 
-    | File                                                           | Specification                                      |
-    | -------------------------------------------------------------- | -------------------------------------------------- |
-    | ./config/application.properties                                | `opensearch.port=1790`                             |
-    | ./opensearch-X.Y.Z/config/opensearch.yml                       | `http.port: <es-port>`                             |
-    | ./opensearch-dashboards-X.Y.Z/config/opensearch_dashboards.yml | `opensearch.hosts: ["http://localhost:<es-port>"]` |
+| File                                                           | Specification                                      |
+| -------------------------------------------------------------- | -------------------------------------------------- |
+| ./config/application.properties                                | `opensearch.port=1790`                             |
+| ./opensearch-X.Y.Z/config/opensearch.yml                       | `http.port: <es-port>`                             |
+| ./opensearch-dashboards-X.Y.Z/config/opensearch_dashboards.yml | `opensearch.hosts: ["http://localhost:<es-port>"]` |
+
+</TabItem>
+</Tabs>
 
 If the dashboard component is installed, the database port also needs to be updated on this front as the dashboard needs to access the DB in order to read the data :
 
-=== "v2.4-"
+<Tabs>
+<TabItem value="v2.4-" label="v2.4-">
 
-    ```ini title="./kibana-X.Y.Z/config/kibana.yml"
-    elasticsearch.hosts: ["http://<DB-server:DB-port>"]
-    ```
+```ini title="./kibana-X.Y.Z/config/kibana.yml"
+elasticsearch.hosts: ["http://<DB-server:DB-port>"]
+```
 
-=== "v2.6+"
+</TabItem>
+<TabItem value="v2.6+" label="v2.6+">
 
-    ```ini title="./opensearch-dashboards-X.Y.Z/config/opensearch_dashboards.yml"
-    opensearch.hosts: ["http://<DB-server:DB-port>"]
-    ```
+```ini title="./opensearch-dashboards-X.Y.Z/config/opensearch_dashboards.yml"
+opensearch.hosts: ["http://<DB-server:DB-port>"]
+```
+
+</TabItem>
+</Tabs>
 
 <br />
 

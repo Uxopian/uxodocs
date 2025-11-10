@@ -1,5 +1,8 @@
 # Dashboards
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Since Fast2 stores every single byte of migration information into its internal database, using dashboard capabilities for intelligible and functional reports just comes in naturally.
 
 :::warning
@@ -10,7 +13,6 @@ However the configuration of these tools are very close (if not identical).
 
 :::
 
-:::
 
 The dashboard only communicates with the database (as illustrated in the [architecture section](../getting-started/overall-concepts.md#architecture)).
 
@@ -30,17 +32,23 @@ In case no dashboard folder is found, this step will be skipped after a given nu
 
 The dashboards can still be disabled, even if they are available in the root folder of Fast2:
 
-=== "v2.4-"
 
-    ```ini title="./config/application.properties"
-    broker.kibana.embedded.enabled=true
-    ```
+<Tabs>
+<TabItem value="v2.4-" label="v2.4-">
 
-=== "v2.6+"
+```ini title="./config/application.properties"
+broker.kibana.embedded.enabled=true
+```
 
-    ```ini title="./config/application.properties"
-    broker.dashboards.embedded.enabled=true
-    ```
+</TabItem>
+<TabItem value="v2.6+" label="v2.6+">
+
+```ini title="./config/application.properties"
+broker.dashboards.embedded.enabled=true
+```
+
+</TabItem>
+</Tabs>
 
 ### Ports
 
@@ -50,31 +58,41 @@ However they can be accessed on a different port, which you will have to highlig
 
 1.  This is required to start the add-on on another port:
 
-    === "v2.4-"
+    <Tabs>
+    <TabItem value="v2.4-" label="v2.4-">
 
-        ```ini title="./config/application.properties"
-        broker.kibana.embedded.port=8888
-        ```
+    ```ini title="./config/application.properties"
+    broker.kibana.embedded.port=8888
+    ```
 
-    === "v2.6+"
+    </TabItem>
+    <TabItem value="v2.6+" label="v2.6+">
 
-        ```ini title="./config/application.properties"
-        broker.dashboards.embedded.port=8888
-        ```
+    ```ini title="./config/application.properties"
+    broker.dashboards.embedded.port=8888
+    ```
+
+    </TabItem>
+    </Tabs>
 
 2.  Fast2 should know where to send the user for the visualizations:
 
-    === "v2.4-"
+    <Tabs>
+    <TabItem value="v2.4-" label="v2.4-">
 
-        ```ini title="./kibana-X.Y.Z/config/kibana.yml"
-        server.port=8888
-        ```
+    ```ini title="./kibana-X.Y.Z/config/kibana.yml"
+    server.port=8888
+    ```
 
-    === "v2.6+"
+    </TabItem>
+    <TabItem value="v2.6+" label="v2.6+">
 
-        ```ini title="./opensearch-dashboards-X.Y.Z/config/opensearch_dashboards.yml"
-        server.port=8888
-        ```
+    ```ini title="./opensearch-dashboards-X.Y.Z/config/opensearch_dashboards.yml"
+    server.port=8888
+    ```
+
+    </TabItem>
+    </Tabs>
 
 ### Remote access to the dashboards
 
@@ -366,9 +384,9 @@ The query is successfully executed once the `acknowledged:true` message is retur
 
 Head now to the Dashboads Management section, choose ‘Index patterns’, and select the one related to Fast2 (`f2_*`).
 
-!!! hint
-
-    You may require to refresh the `f2_*` index, to make sure all the latest properties are fetched from the database.
+:::tip
+You may require to refresh the `f2_*` index, to make sure all the latest properties are fetched from the database.
+:::
 
 Click on the "_Scripted field_" tab to create a new one using the data property you just made accessible.
 

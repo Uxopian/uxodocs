@@ -1,8 +1,10 @@
 # The broker
 
-!!! hint
+:::tip
 
-    The broker is the workflow orchestrator, in charge of database communication, sending punnets to the worker(s) for them to process the operations.
+The broker is the workflow orchestrator, in charge of database communication, sending punnets to the worker(s) for them to process the operations.
+
+:::
 
 ## :material-chef-hat: Configure the broker
 

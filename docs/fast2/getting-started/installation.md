@@ -78,59 +78,69 @@ All commands below are to be run under the Fast2 install path (where the Zip has
 
 ### From command line
 
-=== ":fontawesome-brands-windows: Windows"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-    Go into the Fast2 install folder, and run :
+<Tabs>
+<TabItem value="windows" label="Windows" default>
 
-    ```cmd
-    C:\path-to-fast2\> startup-broker.bat
-    ```
+Go into the Fast2 install folder, and run :
 
-    Administrator rights might be required since Fast2 will handle some port communications.
+```cmd
+C:\path-to-fast2\> startup-broker.bat
+```
 
-=== ":fontawesome-brands-linux: Linux"
+Administrator rights might be required since Fast2 will handle some port communications.
 
-    The following Linux installation steps work for most of Unix-based sytems.
-    Elasticsearch cannot be started from root user, you will need to create a secondary user to start the database binary alongside your Fast2 process.
+</TabItem>
+<TabItem value="linux" label="Linux">
 
-    Once connected as the latter user, start Elasticsearch via its binaries.
+The following Linux installation steps work for most of Unix-based sytems.
+Elasticsearch cannot be started from root user, you will need to create a secondary user to start the database binary alongside your Fast2 process.
 
-    Then, since you started Elasticsearch manually, disable the command triggering Fast2 to start the embedded Elasticsearch, from the `config/application.properties` file :
+Once connected as the latter user, start Elasticsearch via its binaries.
 
-    ```log
-    broker.elasticsearch.embedded.enabled=false
-    ```
+Then, since you started Elasticsearch manually, disable the command triggering Fast2 to start the embedded Elasticsearch, from the `config/application.properties` file :
 
-    You can now properly execute the following script:
+```log
+broker.elasticsearch.embedded.enabled=false
+```
 
-    ```sh
-    $ ./startup-broker.sh
-    ```
+You can now properly execute the following script:
+
+```sh
+$ ./startup-broker.sh
+```
+
+</TabItem>
+</Tabs>
 
 To end the Fast2 process, just hit `Ctrl+C` in the command line the startup file opened.
 
 ### As service
 
-=== ":fontawesome-brands-windows: Windows"
+<Tabs>
+<TabItem value="windows" label="Windows" default>
 
-    Go into the Fast2 installation folder, and open the Windows Command Prompt.
+Go into the Fast2 installation folder, and open the Windows Command Prompt.
 
-    To install the service :
+To install the service :
 
-    ```cmd
-    C:\path-to-fast2\service\windows> Fast2_broker_service.exe install
-    ```
+```cmd
+C:\path-to-fast2\service\windows> Fast2_broker_service.exe install
+```
 
-    Your machine may prompt a message asking to download .NET components. Please click [OK] and proceed.
+Your machine may prompt a message asking to download .NET components. Please click [OK] and proceed.
 
-    Once this command is complete, you should see in your services registory a newly installed Fast2 service. You can start/stop/restart it as any other service, or via the Command Prompt (just replace `install` in the previous command by _start_/_stop_/_uninstall_/_restart_/_status_).
+Once this command is complete, you should see in your services registory a newly installed Fast2 service. You can start/stop/restart it as any other service, or via the Command Prompt (just replace `install` in the previous command by _start_/_stop_/_uninstall_/_restart_/_status_).
 
-    The logs of the service will be available from the `path-to-fast2\service\log` folder.
+The logs of the service will be available from the `path-to-fast2\service\log` folder.
 
-=== ":fontawesome-brands-linux: Linux"
+</TabItem>
+<TabItem value="linux" label="Linux">
 
-    There are several ways to create a service under linux distribution. We will do it through systemd.
-    Its major benefit is that it has been the default init system for the majority of linux distributions (Ubuntu, Red Hat, Fedora...).
+There are several ways to create a service under linux distribution. We will do it through systemd.
+Its major benefit is that it has been the default init system for the majority of linux distributions (Ubuntu, Red Hat, Fedora...).
 
     <br />
 
@@ -260,29 +270,37 @@ To end the Fast2 process, just hit `Ctrl+C` in the command line the startup file
     $ systemctl status fast2-broker.service
     ```
 
-    You can restart or stop the service at anytime with the commands :
+You can restart or stop the service at anytime with the commands :
 
-    ```sh
-    $ service fast2 start | restart | stop | status
-    ```
+```sh
+$ service fast2 start | restart | stop | status
+```
+
+</TabItem>
+</Tabs>
 
 ## Start Fast2 Worker
 
 The Broker starts an embedded worker by default.
 
-=== ":fontawesome-brands-windows: Windows"
+<Tabs>
+<TabItem value="windows" label="Windows" default>
 
-    If you wish to start multiple workers, just hit :
+If you wish to start multiple workers, just hit :
 
-    ```cmd
-    C:\path-to-fast2\> startup-worker.bat
-    ```
+```cmd
+C:\path-to-fast2\> startup-worker.bat
+```
 
-=== ":fontawesome-brands-linux: Linux"
+</TabItem>
+<TabItem value="linux" label="Linux">
 
-    ```
-    ./startup-worker.sh
-    ```
+```sh
+./startup-worker.sh
+```
+
+</TabItem>
+</Tabs>
 
 If the worker and broker are not booted up on the same machine, you need to setup the Broker host name in the worker configuration file.
 Edit the file `config/application.properties` and modify `broker.host` accordingly.

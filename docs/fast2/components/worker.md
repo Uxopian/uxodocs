@@ -1,8 +1,8 @@
 # The worker
 
-!!! Hint
-
-    The Worker is the punnet processor, applying the changes onto the punnet, according to how the tasks have been configured by the user.
+:::Hint
+The Worker is the punnet processor, applying the changes onto the punnet, according to how the tasks have been configured by the user.
+:::
 
 The workers! Corner stones of Fast2, these guys can litterally add up and constitute a real digitized hive working to migrate your documents,
 your contents, your rules, your metadata, all synchronously, exactly where you expect them (or asked them to be), never stepping on each other.
@@ -96,34 +96,42 @@ As indicated in the installation section, starting Fast2 will launch an embedded
 
 Plug the worker-S onto the Fast2 broker (yes, the workers -- as [illustrated here](../getting-started/overall-concepts.md#architecture) -- manifest themselves to the broker, and not the other way around) : to do so, open the `config/application.properties` of the worker-S :
 
-=== "v2.4-"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-    ```ini title="./config/application.properties"  {4}
-    # Fast2 2.1.0 configuration
+<Tabs>
+<TabItem value="v2.4-" label="v2.4-">
 
-    # Remote broker host to use by the worker
-    broker.host=localhost
+```ini title="./config/application.properties" {4}
+# Fast2 2.1.0 configuration
 
-    # Remote broker port to use by the worker
-    # broker.port=1789
-    ...
-    ```
+# Remote broker host to use by the worker
+broker.host=localhost
 
-=== "v2.5+"
+# Remote broker port to use by the worker
+# broker.port=1789
+...
+```
 
-    ```ini title="./config/application.properties"  {4}
-    # Fast2 2.8.0 configuration
+</TabItem>
+<TabItem value="v2.5+" label="v2.5+">
 
-    # Remote broker url to use by the worker
-    broker.url=http://localhost:1789/broker
+```ini title="./config/application.properties" {4}
+# Fast2 2.8.0 configuration
 
-    # Port exposed by Broker
-    server.port=1789
-    # Context path used by Broker
-    server.servlet.context-path=/
+# Remote broker url to use by the worker
+broker.url=http://localhost:1789/broker
 
-    ...
-    ```
+# Port exposed by Broker
+server.port=1789
+# Context path used by Broker
+server.servlet.context-path=/
+
+...
+```
+
+</TabItem>
+</Tabs>
 
 Update the name (or IP address) of the machine where Fast2 is running (`broker.host`), and the name of the queue which the worker will be assigned to (ex/ “extraction”).
 
