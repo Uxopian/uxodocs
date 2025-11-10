@@ -298,7 +298,7 @@ html.uxo-product-uxopian-ai a:hover {
 .uxo-has-secondary-nav #left-sidebar,
 .uxo-has-secondary-nav #right-sidebar {
     position: sticky;
-    top: calc(var(--ifm-navbar-height, 56px) + var(--uxo-secondary-nav-height, 0px));
+    top: calc(var(--ifm-navbar-height, 40px) + var(--uxo-secondary-nav-height, 0px));
     z-index: 1;
     /* Very low z-index to stay below everything */
     align-self: start;

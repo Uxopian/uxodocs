@@ -1,44 +1,28 @@
 {
   "arender": [
     {
-      "label": "Configuration",
-      "href": "/docs/arender/configuration/"
+      "label": "Development",
+      "href": "/docs/arender/development/apis/rendition/rest/admin/version"
     },
     {
-      "label": "Développement",
-      "href": "/docs/arender/development/"
-    },
-    {
-      "label": "Fonctionnalités",
-      "href": "/docs/arender/features/"
+      "label": "Features",
+      "href": "/docs/arender/features/accessibility"
     },
     {
       "label": "Guides",
-      "href": "/docs/arender/guides/"
+      "href": "/docs/arender/guides/configurations/web-ui/connectors/default"
     },
     {
       "label": "Installation",
-      "href": "/docs/arender/installation/"
+      "href": "/docs/arender/installation/docker/alfresco"
     },
     {
-      "label": "Apprentissage",
-      "href": "/docs/arender/learn/"
+      "label": "Learn",
+      "href": "/docs/arender/learn/architecture/alfresco-architecture"
     },
     {
-      "label": "Learning",
-      "href": "/docs/arender/learning/"
-    },
-    {
-      "label": "Versions",
-      "href": "/docs/arender/releases/"
-    },
-    {
-      "label": "What Is",
-      "href": "/docs/arender/what-is/"
-    },
-    {
-      "label": "Qu'est ce qu'ARender ?",
-      "href": "/docs/arender/what-is-arender/"
+      "label": "What is ARender",
+      "href": "/docs/arender/what-is-arender/annotation-support"
     }
   ],
   "fast2": [

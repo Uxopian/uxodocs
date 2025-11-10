@@ -28,9 +28,7 @@
   --uxo-green-1: #029C75;
   --uxo-green-2: #018262;
   --uxo-green-3: #00664E;
-  /* per spec (shared deep stop) */
   --uxo-green-4: #024D43;
-  /* per spec */
 
   --uxo-turquoise-1: #3A8F9D;
   --uxo-turquoise-2: #2F7D8B;
@@ -49,14 +47,10 @@
   --gradient-turquoise: linear-gradient(135deg, var(--uxo-turquoise-1), var(--uxo-turquoise-2), var(--uxo-turquoise-3), var(--uxo-turquoise-4));
   --gradient-blue: linear-gradient(135deg, var(--uxo-blue-1), var(--uxo-blue-2), var(--uxo-blue-3), var(--uxo-blue-4));
 
-  /* Infima primary remapped to Uxo Purple */
   --ifm-color-primary: var(--uxo-purple-500);
-  /* choose darker chain biased toward depth/contrast */
   --ifm-color-primary-dark: var(--uxo-purple-300);
   --ifm-color-primary-darker: #5A007A;
-  /* from purple gradient for deep accents */
   --ifm-color-primary-darkest: #490064;
-  /* lighter chain biased toward vibrancy */
   --ifm-color-primary-light: color-mix(in oklab, var(--uxo-purple-500), white 18%);
   --ifm-color-primary-lighter: var(--uxo-purple-700);
   --ifm-color-primary-lightest: color-mix(in oklab, var(--uxo-purple-700), white 22%);
@@ -65,8 +59,6 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.06);
 }
 
-/* Dark theme tuning
-   Use the brighter 700 accent for contrast, keep deep stops for focus rings/links. */
 [data-theme='dark'] {
   --ifm-color-primary: var(--uxo-purple-700);
   --ifm-color-primary-dark: color-mix(in oklab, var(--uxo-purple-700), black 16%);
@@ -113,7 +105,6 @@
   color: #fff;
 }
 
-/* Text color helpers mapped to primaries */
 .text-uxo-purple-700 {
   color: var(--uxo-purple-700) !important;
 }
@@ -126,7 +117,6 @@
   color: var(--uxo-purple-300) !important;
 }
 
-/* Buttons: primary uses purple gradient by default */
 .button--primary,
 .ifm-button-primary,
 .ifm-btn--primary {
@@ -137,7 +127,6 @@
   box-shadow: none !important;
 }
 
-/* Optional alt button styles for other gradients */
 .button--sunset {
   background-image: var(--gradient-sunset) !important;
   color: #fff !important;
@@ -162,7 +151,6 @@
   border: none !important;
 }
 
-/* Focus state for accessibility (visible on dark and light) */
 .button--primary:focus,
 .ifm-button-primary:focus,
 .ifm-btn--primary:focus,
@@ -174,7 +162,6 @@
   outline-offset: 2px;
 }
 
-/* Keep your custom navbar 'verdd' behavior (unchanged aside from color var mapping) */
 .navbar__link.verdd {
   display: inline-flex;
   align-items: center;
@@ -239,18 +226,42 @@
   }
 }
 
-/* Fix z-index for dropdowns to appear above secondary nav */
-/* Navbar dropdowns should have higher z-index than secondary-nav (10) */
 .navbar__item.dropdown .dropdown__menu {
   z-index: 100 !important;
 }
 
-/* Version dropdown specifically */
 .navbar__item--version-menu .dropdown__menu {
   z-index: 100 !important;
 }
 
-/* Hide category index pages that are redundant with secondary nav */
 .hidden-sidebar-item {
   display: none !important;
+}
+
+.theme-doc-sidebar-container {
+  position: sticky !important;
+  top: calc(var(--ifm-navbar-height) + 1rem) !important;
+  max-height: calc(100vh - var(--ifm-navbar-height) - 2rem) !important;
+  overflow-y: auto !important;
+}
+
+aside[class*="docSidebarContainer"] {
+  position: sticky !important;
+  top: calc(var(--ifm-navbar-height)) !important;
+  max-height: calc(100vh - var(--ifm-navbar-height)) !important;
+}
+
+/* TOC - Ensure it stays below navbar AND secondary nav when scrolling up */
+.theme-doc-toc-desktop {
+  position: sticky !important;
+  /* Keep TOC below navbar + secondary nav (approx 56px + 50px + spacing) */
+  top: calc(var(--ifm-navbar-height) + 50px + 1rem) !important;
+  max-height: calc(100vh - var(--ifm-navbar-height) - 50px - 2rem) !important;
+  align-self: flex-start !important;
+}
+
+/* TOC inner wrapper for scrolling */
+.theme-doc-toc-desktop .table-of-contents {
+  overflow-y: auto !important;
+  max-height: 100% !important;
 }
