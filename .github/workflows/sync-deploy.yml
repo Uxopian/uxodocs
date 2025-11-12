@@ -42,109 +42,48 @@ jobs:
 
       - name: Clean old versions
         run: |
+          # On nettoie uniquement les dossiers de versions éphémères créés par docusaurus
           rm -rf versioned_docs versioned_sidebars
-          rm -f versions-*.json
 
-      - name: Generate Docusaurus versions
+      - name: Generate Docusaurus versions from test-<product>-v* branches
         shell: bash
         run: |
           set -euo pipefail
 
           for product in $PRODUCTS; do
-            echo "=== Processing ${product} ==="
+            echo "=== ${product} ==="
 
-            # Sauvegarder current (docs + sidebar)
-            cp -r "docs/${product}" ".tmp_${product}_current"
-            [ -f "sidebars_${product}.ts" ] && cp "sidebars_${product}.ts" ".tmp_${product}_sidebar_current"
+            # Sauvegarde du "current" (branche test)
+            rm -rf ".cache_${product}_current" && mkdir -p ".cache_${product}_current"
+            rsync -a "docs/${product}/" ".cache_${product}_current/"
 
-            # Récupérer les branches versionnées
-            branches=$(git branch -r | grep "origin/test-${product}-v" | sed 's|origin/||' | sort -V)
+            # Liste des branches versionnées pour ce produit (test-product-v*)
+            mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
+              | grep "^origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
 
-            for branch in $branches; do
-              version="${branch##test-${product}-}"
-              echo "→ Creating version ${version} from ${branch}"
+            for br in "${branches[@]}"; do
+              ver="${br##test-${product}-}"   # ex: v1, v2
 
-              # Checkout de la branche (docs + sidebar)
-              git checkout "origin/${branch}" -- "docs/${product}" 2>/dev/null || {
-                echo "   ⚠️  Skip ${version}: docs/${product} not found"
-                continue
-              }
-              
-              git checkout "origin/${branch}" -- "sidebars_${product}.ts" 2>/dev/null || true
+              echo "-> snapshot ${product} ${ver} from ${br}"
 
-              # Vérifier qu'il y a des fichiers markdown
-              if ! find "docs/${product}" -type f \( -name "*.md" -o -name "*.mdx" \) -quit | grep -q .; then
-                echo "   ⚠️  Skip ${version}: no markdown files"
-                # Restaurer la sidebar courante avant de continuer
-                [ -f ".tmp_${product}_sidebar_current" ] && cp ".tmp_${product}_sidebar_current" "sidebars_${product}.ts"
-                continue
+              # extrait docs/<product> depuis la branche versionnée
+              rm -rf .tmp_docs && mkdir -p .tmp_docs
+              if git cat-file -e "origin/${br}:docs/${product}/" 2>/dev/null; then
+                git archive --format=tar "origin/${br}" "docs/${product}" \
+                  | tar -x -C .tmp_docs --strip-components=1
+              else
+                echo "   (skip ${br}: docs/${product} not found)"; continue
               fi
 
-              # Créer la version Docusaurus
-              npx docusaurus "docs:version:${product}" "${version}"
+              # remplace le current par le contenu de la branche
+              rsync -a --delete .tmp_docs/ "docs/${product}/"
 
-              echo "   ✅ Version ${version} created"
-              
-              # IMPORTANT: Restaurer la sidebar courante après chaque version
-              [ -f ".tmp_${product}_sidebar_current" ] && cp ".tmp_${product}_sidebar_current" "sidebars_${product}.ts"
+              # crée le snapshot de version pour le plugin correspondant
+              npx docusaurus "docs:version:${product}" "${ver}"
             done
 
-            # Restaurer current docs
-            rm -rf "docs/${product}"
-            mv ".tmp_${product}_current" "docs/${product}"
-            
-            # Restaurer current sidebar (au cas où)
-            [ -f ".tmp_${product}_sidebar_current" ] && mv ".tmp_${product}_sidebar_current" "sidebars_${product}.ts"
-          done
-
-      - name: Validate versions
-        shell: bash
-        run: |
-          set -euo pipefail
-          
-          for product in $PRODUCTS; do
-            versions_file="versions-${product}.json"
-            [ ! -f "$versions_file" ] && continue
-
-            echo "Validating ${product} versions..."
-            
-            # Nettoyer les versions vides
-            node -e "
-              const fs = require('fs');
-              const path = require('path');
-              
-              const file = '${versions_file}';
-              const product = '${product}';
-              let versions = JSON.parse(fs.readFileSync(file, 'utf8'));
-              
-              const valid = versions.filter(ver => {
-                const dir = \`versioned_docs/version-\${product}-\${ver}\`;
-                if (!fs.existsSync(dir)) {
-                  console.log(\`  ❌ Missing: \${ver}\`);
-                  return false;
-                }
-                
-                const hasMarkdown = (d) => {
-                  return fs.readdirSync(d, { withFileTypes: true }).some(e => 
-                    (e.isFile() && /\\.mdx?$/.test(e.name)) || 
-                    (e.isDirectory() && hasMarkdown(path.join(d, e.name)))
-                  );
-                };
-                
-                if (!hasMarkdown(dir)) {
-                  console.log(\`  ❌ Empty: \${ver}\`);
-                  return false;
-                }
-                
-                console.log(\`  ✅ Valid: \${ver}\`);
-                return true;
-              });
-              
-              if (valid.length !== versions.length) {
-                console.log(\`Cleaned: \${versions.length} → \${valid.length} versions\`);
-                fs.writeFileSync(file, JSON.stringify(valid, null, 2));
-              }
-            "
+            # Restaure le current d'origine
+            rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
           done
 
       - name: Build
