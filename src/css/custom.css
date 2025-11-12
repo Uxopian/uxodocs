@@ -192,26 +192,36 @@
   height: 1em;
 }
 
-.navbar__link.verdd:hover::before,
-.navbar__link.verdd.active::before,
-.navbar__link.verdd:focus::before {
-  color: var(--ifm-navbar-link-hover-color);
-}
-
 .navbar__link.verdd--fast2::before {
   content: 'Fast2';
+}
+
+.navbar__link.verdd--fast2:hover::before {
+  color: var(--uxo-turquoise-2) !important;
 }
 
 .navbar__link.verdd--arender::before {
   content: 'Arender';
 }
 
+.navbar__link.verdd--arender:hover::before {
+  color: var(--uxo-blue-2) !important;
+}
+
 .navbar__link.verdd--flowerdocs::before {
   content: 'Flowerdocs';
 }
 
+.navbar__link.verdd--flowerdocs:hover::before {
+  color: var(--uxo-purple-500) !important;
+}
+
 .navbar__link.verdd--uxopian-ai::before {
   content: 'Uxopian AI';
+}
+
+.navbar__link.verdd--uxopian-ai:hover::before {
+  color: var(--uxo-sunset-2) !important;
 }
 
 @media (max-width: 996px) {
