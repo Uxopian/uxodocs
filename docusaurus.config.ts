@@ -52,15 +52,6 @@ const config: Config = {
       },
     ],
     [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
-      {
-        indexDocs: true,
-        indexPages: true,
-        hashed: true,
-        // language: ['fr', 'en'],
-      },
-    ],
-    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'arender',
@@ -93,8 +84,17 @@ const config: Config = {
         versions: { current: { label: 'current' } },
       },
     ],
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        indexDocs: true,
+        indexPages: true,
+        hashed: true,
+        // language: ['fr', 'en'],
+      },
+    ],
   ],
-
+  
   themeConfig: {
     navbar: {
       logo: { alt: 'UXO', src: 'img/uxo.png' },
