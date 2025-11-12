@@ -1,6 +1,6 @@
 # The worker
 
-:::Hint
+:::tip
 The Worker is the punnet processor, applying the changes onto the punnet, according to how the tasks have been configured by the user.
 :::
 
