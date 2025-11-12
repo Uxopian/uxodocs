@@ -15,15 +15,9 @@ const config: Config = {
 
   trailingSlash: false,
 
-  // Désactiver i18n pour utiliser une seule locale
-  // i18n: {
-  //   defaultLocale: 'en',
-  //   locales: ['en'],
-  // },
-
   onBrokenLinks: 'warn',
   markdown: {
-    hooks: { onBrokenMarkdownLinks: 'warn', onBrokenMarkdownImages: 'warn' },
+    hooks: { onBrokenMarkdownLinks: 'warn' , onBrokenMarkdownImages: 'warn' },
   },
 
   presets: [
@@ -58,6 +52,15 @@ const config: Config = {
       },
     ],
     [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        indexDocs: true,
+        indexPages: true,
+        hashed: true,
+        // language: ['fr', 'en'],
+      },
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'arender',
@@ -88,52 +91,6 @@ const config: Config = {
         sidebarPath: require.resolve('./sidebars_uxopian-ai.ts'),
         lastVersion: 'current',
         versions: { current: { label: 'current' } },
-      },
-    ],
-    [
-      require.resolve('./plugins/docusaurus-plugin-search-wrapper.js'),
-      {
-        indexDocs: true,
-        indexPages: true,
-        indexBlog: false,
-        hashed: true,
-        docsRouteBasePath: ['docs-default', 'docs/fast2', 'docs/arender', 'docs/flowerdocs', 'docs/uxopian-ai'],
-        ignoreFiles: [
-          /versioned_docs/,
-          /versioned_sidebars/,
-          /\/v[0-9]+\//,
-          /\/v[0-9]+\.[0-9]+/,
-          /-v[0-9]+\.json$/,
-        ],
-        searchContextByPaths: [
-          {
-            label: 'Toutes les documentations',
-            path: 'docs/',
-          },
-          {
-            label: 'Fast2',
-            path: 'docs/fast2',
-          },
-          {
-            label: 'ARender',
-            path: 'docs/arender',
-          },
-          {
-            label: 'FlowerDocs',
-            path: 'docs/flowerdocs',
-          },
-          {
-            label: 'Uxopian AI',
-            path: 'docs/uxopian-ai',
-          },
-        ],
-        searchBarShortcut: true,
-        searchBarShortcutHint: true,
-        searchBarPosition: 'right',
-        // language: ['en'],
-        searchResultLimits: 8,
-        searchResultContextMaxLength: 50,
-        explicitSearchResultPath: false,
       },
     ],
   ],
