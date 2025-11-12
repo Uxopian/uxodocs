@@ -75,6 +75,13 @@ jobs:
                 echo "   (skip ${br}: docs/${product} not found)"; continue
               fi
 
+              # extrait static/img/<product> si existe
+              if git cat-file -e "origin/${br}:static/img/${product}/" 2>/dev/null; then
+                echo "   -> copying static/img/${product} assets"
+                git archive --format=tar "origin/${br}" "static/img/${product}" \
+                  | tar -x -C .
+              fi
+
               # remplace le current par le contenu de la branche
               rsync -a --delete .tmp_docs/ "docs/${product}/"
 
