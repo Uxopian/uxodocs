@@ -19,36 +19,22 @@ jobs:
       PRODUCTS: "fast2 arender flowerdocs"
 
     steps:
-      # ------------------------------------------------------------
-      # Checkout avec LFS activé
-      # ------------------------------------------------------------
       - name: Checkout repository (with LFS)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
 
-      # ------------------------------------------------------------
-      # S'assurer que les fichiers LFS sont bien présents localement
-      # ------------------------------------------------------------
       - name: Resolve LFS pointers (pre)
+        shell: bash
         run: |
           set -euo pipefail
           git lfs pull --include="static/**,docs/**" --exclude=""
           git lfs checkout
-          if grep -RIl "git-lfs.github.com/spec/v1" static docs 2>/dev/null; then
-            echo "::warning::LFS pointers still present before versioning"
-          fi
 
-      # ------------------------------------------------------------
-      # Récupérer toutes les branches
-      # ------------------------------------------------------------
       - name: Fetch all branches
         run: git fetch origin "+refs/heads/*:refs/remotes/origin/*"
 
-      # ------------------------------------------------------------
-      # Installer Node.js et dépendances
-      # ------------------------------------------------------------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -58,33 +44,32 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # ------------------------------------------------------------
-      # Nettoyer les anciennes versions et manifests
-      # ------------------------------------------------------------
       - name: Clean old versions + manifests
         run: |
           rm -rf versioned_docs versioned_sidebars
           rm -f versions-*.json
 
-      # ------------------------------------------------------------
-      # Génération des versions à partir des branches test-<product>-v*
-      # ------------------------------------------------------------
       - name: Generate Docusaurus versions (LFS-safe)
         shell: bash
         run: |
           set -euo pipefail
 
+          have_docs () {
+            # $1 = path
+            find "$1" -type f \( -name "*.md" -o -name "*.mdx" \) -print -quit | grep -q .
+          }
+
           for product in $PRODUCTS; do
             echo "=== ${product} ==="
 
-            # Sauvegarde du "current"
+            # Sauvegarde du current (docs + sidebar)
             mkdir -p ".cache_${product}"
             rsync -a "docs/${product}/" ".cache_${product}/docs_current/"
             if [ -f "sidebars_${product}.ts" ]; then
               cp "sidebars_${product}.ts" ".cache_${product}/sidebars_current.ts"
             fi
 
-            # Lister les branches versionnées
+            # Branches versionnées
             mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
               | grep "^origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
 
@@ -102,26 +87,24 @@ jobs:
                 git lfs checkout
               )
 
-              rm -rf .tmp_docs && mkdir -p .tmp_docs
-              if [ -d "${wt}/docs/${product}" ]; then
-                rsync -a --delete "${wt}/docs/${product}/" .tmp_docs/
-              else
-                echo "   (skip ${br}: docs/${product} not found)"
+              SRC="${wt}/docs/${product}"
+              if [ ! -d "$SRC" ] || ! have_docs "$SRC"; then
+                echo "   (skip ${br}: docs/${product} absent ou sans .md/.mdx)"
                 git worktree remove -f "$wt"
                 continue
               fi
 
+              rm -rf .tmp_docs && mkdir -p .tmp_docs
+              rsync -a --delete "$SRC/" .tmp_docs/
               rsync -a --delete .tmp_docs/ "docs/${product}/"
 
-              # Injecter la sidebar correspondante si elle existe
+              # Injecter la sidebar de la même branche si existante
               if [ -f "${wt}/sidebars_${product}.ts" ]; then
                 cp "${wt}/sidebars_${product}.ts" "sidebars_${product}.ts"
               fi
 
-              # Créer le snapshot de version
               npx docusaurus "docs:version:${product}" "${ver}"
 
-              # Supprimer le worktree
               git worktree remove -f "$wt"
 
               # Restaurer la sidebar courante
@@ -134,19 +117,15 @@ jobs:
             rsync -a --delete ".cache_${product}/docs_current/" "docs/${product}/"
           done
 
-      # ------------------------------------------------------------
-      # Vérifier que les fichiers LFS sont bien résolus après versioning
-      # ------------------------------------------------------------
       - name: Resolve LFS pointers (post)
+        shell: bash
         run: |
           set -euo pipefail
           git lfs pull --include="static/**,docs/**" --exclude=""
           git lfs checkout
 
-      # ------------------------------------------------------------
-      # Vérifier la cohérence des versions
-      # ------------------------------------------------------------
       - name: Sanity check versions
+        shell: bash
         run: |
           set -euo pipefail
           for product in $PRODUCTS; do
@@ -161,11 +140,11 @@ jobs:
                     console.error(\`Version \${ver} for ${product} is declared but missing.\`);
                     process.exit(1);
                   }
-                  const hasDoc=(function walk(d){
+                  const has=(function walk(d){
                     return fs.readdirSync(d,{withFileTypes:true})
-                      .some(e=>e.isFile()&&e.name.match(/\\.mdx?$/)||(e.isDirectory()&&walk(d+'/'+e.name)));
+                      .some(e=> (e.isFile() && /\\.mdx?$/.test(e.name)) || (e.isDirectory() && walk(d+'/'+e.name)));
                   })(dir);
-                  if(!hasDoc){
+                  if (!has) {
                     console.error(\`Version \${ver} for ${product} has no markdown files.\`);
                     process.exit(1);
                   }
@@ -174,24 +153,16 @@ jobs:
             fi
           done
 
-      # ------------------------------------------------------------
-      # Build du site Docusaurus
-      # ------------------------------------------------------------
       - name: Build
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
         run: npm run build
 
-      # ------------------------------------------------------------
-      # Empêche GitHub Pages d’interpréter les fichiers du build
-      # ------------------------------------------------------------
       - name: Add .nojekyll
         run: touch build/.nojekyll
 
-      # ------------------------------------------------------------
-      # Vérifier qu’aucun pointeur LFS n’est présent dans le build
-      # ------------------------------------------------------------
       - name: Assert no LFS pointers in build
+        shell: bash
         run: |
           if grep -RIl "git-lfs.github.com/spec/v1" build 2>/dev/null; then
             echo "ERROR: LFS pointer found in build output."
@@ -199,9 +170,6 @@ jobs:
           fi
           echo "✅ OK: no LFS pointers"
 
-      # ------------------------------------------------------------
-      # Déploiement vers GitHub Pages
-      # ------------------------------------------------------------
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
