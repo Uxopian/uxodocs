@@ -114,6 +114,12 @@ export default function SecondaryNav(): React.ReactElement | null {
 
 
 
+    // Extra links for Fast2
+    const extraLinks = product === 'fast2' ? [
+        { label: 'Get Support', href: 'https://arondor.atlassian.net/servicedesk/customer/portals', external: true },
+        { label: 'Search the Knowledge-Base', href: 'https://arondor.atlassian.net/servicedesk/customer/portals?q=', external: true }
+    ] : [];
+
     return (
         <nav className={"secondary-nav " + (product ? `secondary-nav--${product}` : '')} aria-label="Secondary navigation" data-product={product || ''}>
             <div className="navbar__inner secondary-nav__inner">
@@ -125,6 +131,17 @@ export default function SecondaryNav(): React.ReactElement | null {
                     >
                         {it.label}
                     </Link>
+                ))}
+                {extraLinks.map((link) => (
+                    <a
+                        key={link.href}
+                        href={link.href}
+                        className="secondary-nav__item"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {link.label}
+                    </a>
                 ))}
             </div>
         </nav>
