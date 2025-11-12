@@ -57,10 +57,15 @@
     visibility: visible !important;
 }
 
-[class*="theme-doc-sidebar"] li.hidden-sidebar-item>* {
+[class*="theme-doc-sidebar"] li.hidden-sidebar-item>*:not(a) {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
+}
+
+/* Hide the link inside hidden-sidebar-item */
+[class*="theme-doc-sidebar"] li.hidden-sidebar-item > a {
+    display: none !important;
 }
 
 .secondary-nav__showall {

@@ -14,13 +14,11 @@ export default function SecondaryNav(): React.ReactElement | null {
     let product: string | null = null;
     let versionPrefix: string = '';
 
-    // Check for versioned docs pattern: /docs/product/v1/product/... or /docs/product/v1/product
     const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v\d+)\/\1(?:\/|$)/);
     if (versionedMatch) {
         product = versionedMatch[1];
         versionPrefix = `/${versionedMatch[1]}/${versionedMatch[2]}/${versionedMatch[1]}`;
     } else {
-        // Fallback to original logic for non-versioned docs
         const docsMatch = pathname.match(/\/docs\/([^\/]+)/);
         if (docsMatch) {
             product = docsMatch[1];
@@ -35,11 +33,9 @@ export default function SecondaryNav(): React.ReactElement | null {
         }
     }
 
-    // Adjust items to include version prefix if present
     const baseItems: Cat[] = (product && categoriesMap[product]) || [];
     const items: Cat[] = versionPrefix
         ? baseItems.map(item => {
-            // Extract the path after /docs/product/
             const pathMatch = item.href.match(/\/docs\/[^\/]+\/(.*)/);
             const remainingPath = pathMatch ? pathMatch[1] : '';
             return {
@@ -157,14 +153,12 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
             try {
                 const url = new URL(s, window.location.origin);
                 let path = url.pathname.replace(/^\/+|\/+$/g, '');
-                // Remove /uxodocs/ prefix if present to match hrefs
                 if (path.startsWith('uxodocs/')) {
                     path = path.substring(8); // Remove 'uxodocs/'
                 }
                 return path;
             } catch (e) {
                 let path = String(s).replace(/^\/+|\/+$/g, '');
-                // Remove /uxodocs/ prefix if present
                 if (path.startsWith('uxodocs/')) {
                     path = path.substring(8);
                 }
@@ -174,7 +168,6 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
 
         const currentPath = normalize(pathname);
 
-        // Extract version from current path if present
         const currentSegments = currentPath.split('/').filter(Boolean);
         const currentDocsIdx = currentSegments.indexOf('docs');
         let currentVersion = null;
@@ -186,24 +179,12 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
             }
         }
 
-        // Check if we're on the product index page (e.g., docs/flowerdocs/v2/flowerdocs)
-        // In this case, we should show ALL categories, not filter
         const isProductIndexPage = currentVersion &&
             currentSegments.length === 4 &&
             currentSegments[currentDocsIdx + 1] === currentSegments[currentDocsIdx + 3];
 
-        console.log('[SecondaryNav] Current path analysis:', {
-            currentPath,
-            currentVersion,
-            itemsCount: items.length,
-            isProductIndexPage
-        });
-
-        // If we're on the product index page, don't filter (show all categories)
-        // Find which category the current page belongs to by checking all items
         const active = isProductIndexPage ? null : items.find((it) => {
             const itemHref = normalize(it.href);
-            // Extract the category base path from this item
             const itemSegments = itemHref.split('/').filter(Boolean);
             const docsIdx = itemSegments.indexOf('docs');
 
@@ -212,36 +193,19 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
                 const potentialVersion = itemSegments[docsIdx + 2];
                 let itemCategoryBase = '';
 
-                // Items from topCategories.json don't have version in their path
-                // So we need to build the base path differently for versioned current paths
                 if (potentialVersion && potentialVersion.match(/^v\d+$/)) {
-                    // Item itself has version
                     if (itemSegments.length > docsIdx + 4) {
                         itemCategoryBase = itemSegments.slice(0, docsIdx + 5).join('/');
                     }
                 } else {
-                    // Item doesn't have version, but current path might
-                    // Build base path: docs/product/[version]/category
                     const category = itemSegments[docsIdx + 2];
                     if (currentVersion) {
-                        // Current path has version: docs/flowerdocs/v2/flowerdocs
-                        // Item path: docs/flowerdocs/apis/...
-                        // Build: docs/flowerdocs/v2/apis
                         itemCategoryBase = `docs/${product}/${currentVersion}/${category}`;
                     } else {
-                        // No version in current path, use normal logic
                         itemCategoryBase = itemSegments.slice(0, docsIdx + 3).join('/');
                     }
                 }
 
-                console.log('[SecondaryNav] Checking item:', {
-                    label: it.label,
-                    itemHref,
-                    itemCategoryBase,
-                    matches: currentPath.startsWith(itemCategoryBase)
-                });
-
-                // Check if current page is under this category
                 return itemCategoryBase && currentPath.startsWith(itemCategoryBase);
             }
             return false;
@@ -263,13 +227,11 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
 
         const apply = (sidebar: Element | null) => {
             if (!sidebar) {
-                console.log('[SecondaryNav] apply: no sidebar');
                 return;
             }
 
             let mainMenu = sidebar.querySelector('.menu__list, ul.menu__list');
             if (!mainMenu) {
-                console.log('[SecondaryNav] .menu__list not found, using fallback');
                 mainMenu = sidebar.querySelector('ul') || sidebar;
             }
 
@@ -281,7 +243,6 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
             if (groups.length === 1) {
                 const nestedList = groups[0].querySelector('ul.menu__list');
                 if (nestedList) {
-                    console.log('[SecondaryNav] Found nested menu structure, using nested items');
                     const nestedGroups = Array.from(nestedList.children).filter(el =>
                         el.classList.contains('menu__list-item') ||
                         el.tagName.toLowerCase() === 'li'
@@ -293,15 +254,8 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
                 }
             }
 
-            console.log('[SecondaryNav] apply: groups found:', groups.length, 'active:', active?.label);
-
-            if (groups.length === 0) {
-                console.log('[SecondaryNav] No groups found, aborting filter');
-                return;
-            }
 
             if (!active) {
-                console.log('[SecondaryNav] No active category, showing all groups');
                 groups.forEach((g) => {
                     (g as HTMLElement).classList.remove('uxo-hidden-by-filter');
                     (g as HTMLElement).classList.remove('hidden-sidebar-item');
@@ -317,7 +271,6 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
                     groups.forEach((g) => {
                         if ((g as HTMLElement).classList.contains('hidden-sidebar-item')) {
                             (g as HTMLElement).classList.remove('hidden-sidebar-item');
-                            console.log('[SecondaryNav] Removed re-added hidden-sidebar-item class');
                         }
                     });
                 };
@@ -424,22 +377,14 @@ export function useSyncSidebarToCategory(items: { label: string; href: string }[
         const tryApply = () => {
             const sidebar = findSidebar();
             if (sidebar) {
-                console.log('[SecondaryNav] Sidebar found, applying filter', {
-                    pathname,
-                    active: active?.label,
-                    tried
-                });
                 apply(sidebar);
             } else if (tried < maxTries) {
                 tried++;
-                console.log('[SecondaryNav] Sidebar not found, retry', tried, 'of', maxTries);
                 setTimeout(tryApply, 200); // Increased from 150ms
             } else {
-                console.log('[SecondaryNav] Max retries reached, using MutationObserver');
                 observer = new MutationObserver(() => {
                     const s = findSidebar();
                     if (s) {
-                        console.log('[SecondaryNav] Sidebar found via MutationObserver');
                         apply(s);
                         if (observer) observer.disconnect();
                     }

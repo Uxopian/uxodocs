@@ -2,6 +2,7 @@
 title: Uxopian AI
 description: Complete, standalone framework designed to accelerate and simplify the integration of powerful AI features into any enterprise application
 sidebar_position: 1
+sidebar_class_name: hidden-index-link
 ---
 
 # 🚀 Welcome to **uxopian-ai**

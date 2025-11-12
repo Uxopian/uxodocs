@@ -1,6 +1,7 @@
 ---
 sidebar_label: Welcome
 sidebar_position: 0
+sidebar_class_name: hidden-index-link
 ---
 
 # Welcome to Fast2 official documentation

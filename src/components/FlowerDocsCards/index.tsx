@@ -142,9 +142,6 @@ export default function FlowerDocsCards() {
     return (
         <section className={styles.documentationSection}>
             <div className="container">
-                <h1 className={styles.mainTitle}>Documentation</h1>
-                <p className={styles.subtitle}>Consult the various product documentations.</p>
-
                 <div className={styles.cardsGrid}>
                     {FlowerDocsCardsList.map((props, idx) => (
                         <FlowerDocsCard key={idx} {...props} />
