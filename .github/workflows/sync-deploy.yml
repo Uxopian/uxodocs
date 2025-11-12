@@ -20,28 +20,37 @@ jobs:
       PRODUCTS: "fast2 arender flowerdocs"
 
     steps:
+      # ------------------------------------------------------------
+      # Checkout du dépôt avec les objets LFS
+      # ------------------------------------------------------------
       - name: Checkout (with LFS)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
 
-      # ⬇️ Tirer UNIQUEMENT les objets LFS nécessaires au commit courant
+      # ------------------------------------------------------------
+      # S'assurer que les fichiers LFS sont bien matérialisés
+      # ------------------------------------------------------------
       - name: Resolve LFS pointers in sources (pre)
         shell: bash
         run: |
           set -euo pipefail
-          # fetch ciblé (pas de --all pour éviter les refs cassées)
           git lfs pull --include="static/**,docs/**" --exclude=""
           git lfs checkout
-          # garde-fou (info): si des pointeurs restent, on les verra ici
           if grep -RIl "git-lfs.github.com/spec/v1" static docs 2>/dev/null; then
-            echo "::warning::Some LFS pointers still present in sources after pre step (will be fixed later if not used in build)"
+            echo "::warning::Some LFS pointers still present in sources before versioning"
           fi
 
-      - name: Fetch all branches (explicit)
+      # ------------------------------------------------------------
+      # Récupère toutes les branches (pour les worktrees)
+      # ------------------------------------------------------------
+      - name: Fetch all branches
         run: git fetch origin "+refs/heads/*:refs/remotes/origin/*"
 
+      # ------------------------------------------------------------
+      # Setup Node + dépendances
+      # ------------------------------------------------------------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -51,13 +60,21 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Generate Docusaurus versions from test-<product>-v* branches (LFS-safe)
+      # ------------------------------------------------------------
+      # Supprime les anciennes versions Docusaurus
+      # ------------------------------------------------------------
+      - name: Clean old versions + manifests
+        run: |
+          rm -rf versioned_docs versioned_sidebars
+          rm -f versions-*.json
+
+      # ------------------------------------------------------------
+      # Génération des versions pour chaque produit (LFS-safe)
+      # ------------------------------------------------------------
+      - name: Generate Docusaurus versions from test-<product>-v* branches
         shell: bash
         run: |
           set -euo pipefail
-
-          # (Re)génération propre
-          rm -rf versioned_docs versioned_sidebars
 
           for product in $PRODUCTS; do
             echo "=== ${product} ==="
@@ -66,24 +83,23 @@ jobs:
             rm -rf ".cache_${product}_current" && mkdir -p ".cache_${product}_current"
             rsync -a "docs/${product}/" ".cache_${product}_current/"
 
-            # Branches versionnées
+            # Liste des branches versionnées (test-<product>-v*)
             mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
               | grep "^origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
 
             for br in "${branches[@]}"; do
-              ver="${br##test-${product}-}"   # v1, v2, ...
+              ver="${br##test-${product}-}"
               echo "-> snapshot ${product} ${ver} from ${br}"
 
-              # ✅ Worktree détaché au lieu de git archive
+              # Crée un worktree temporaire pour cette branche
               wt=".wt_${product}_${ver}"
               git worktree add --force --detach "$wt" "origin/${br}"
 
-              # ✅ Résoudre LFS pour ce worktree uniquement
+              # Résout les objets LFS dans le worktree
               (
                 set -euo pipefail
                 cd "$wt"
-                # Télécharger les fichiers LFS pour docs ET static (pour les images/assets)
-                git lfs pull --include="docs/${product}/**,static/**" --exclude=""
+                git lfs pull --include="docs/${product}/**" --exclude=""
                 git lfs checkout
               )
 
@@ -96,17 +112,21 @@ jobs:
                 continue
               fi
 
+              # Copie et versionne
               rsync -a --delete .tmp_docs/ "docs/${product}/"
               npx docusaurus "docs:version:${product}" "${ver}"
 
+              # Supprime le worktree
               git worktree remove -f "$wt"
             done
 
-            # Restaure le "current"
+            # Restaure le current
             rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
           done
 
-      # Après la versioning, re-matérialiser au cas où
+      # ------------------------------------------------------------
+      # Re-matérialiser les LFS (après les snapshots)
+      # ------------------------------------------------------------
       - name: Resolve LFS pointers in sources (post-versioning)
         shell: bash
         run: |
@@ -114,15 +134,47 @@ jobs:
           git lfs pull --include="static/**,docs/**" --exclude=""
           git lfs checkout
 
+      # ------------------------------------------------------------
+      # Vérifier la cohérence des versions (aucune version fantôme)
+      # ------------------------------------------------------------
+      - name: Sanity check versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          for product in $PRODUCTS; do
+            file="versions-${product}.json"
+            if [ -f "$file" ]; then
+              node -e "
+                const fs=require('fs');
+                const arr=JSON.parse(fs.readFileSync('$file','utf8'));
+                for (const ver of arr) {
+                  const dir=\`versioned_docs/version-${product}-\${ver}\`;
+                  if (!fs.existsSync(dir)) {
+                    console.error(\`Version \${ver} for ${product} is declared in ${file} but \${dir} is missing.\`);
+                    process.exit(1);
+                  }
+                }
+              "
+            fi
+          done
+
+      # ------------------------------------------------------------
+      # Build du site
+      # ------------------------------------------------------------
       - name: Build
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
         run: npm run build
 
+      # ------------------------------------------------------------
+      # Ajoute .nojekyll pour GitHub Pages
+      # ------------------------------------------------------------
       - name: Add .nojekyll
         run: touch build/.nojekyll
 
-      # 🚨 Le build publié ne doit contenir AUCUN pointeur LFS
+      # ------------------------------------------------------------
+      # Vérifie qu'aucun pointeur LFS n'a fini dans le build
+      # ------------------------------------------------------------
       - name: Assert no LFS pointers in build
         shell: bash
         run: |
@@ -130,8 +182,11 @@ jobs:
             echo "ERROR: LFS pointer found in build output."
             exit 1
           fi
-          echo "OK: no LFS pointers"
+          echo "✅ OK: no LFS pointers"
 
+      # ------------------------------------------------------------
+      # Déploiement vers GitHub Pages
+      # ------------------------------------------------------------
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
