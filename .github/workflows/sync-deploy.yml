@@ -53,9 +53,9 @@ jobs:
           for product in $PRODUCTS; do
             echo "=== Processing ${product} ==="
 
-            # Sauvegarder current
+            # Sauvegarder current (docs + sidebar)
             cp -r "docs/${product}" ".tmp_${product}_current"
-            [ -f "sidebars_${product}.ts" ] && cp "sidebars_${product}.ts" ".tmp_${product}_sidebar"
+            [ -f "sidebars_${product}.ts" ] && cp "sidebars_${product}.ts" ".tmp_${product}_sidebar_current"
 
             # Récupérer les branches versionnées
             branches=$(git branch -r | grep "origin/test-${product}-v" | sed 's|origin/||' | sort -V)
@@ -64,25 +64,37 @@ jobs:
               version="${branch##test-${product}-}"
               echo "→ Creating version ${version} from ${branch}"
 
-              # Checkout de la branche
-              git checkout "origin/${branch}" -- "docs/${product}" "sidebars_${product}.ts" 2>/dev/null || true
+              # Checkout de la branche (docs + sidebar)
+              git checkout "origin/${branch}" -- "docs/${product}" 2>/dev/null || {
+                echo "   ⚠️  Skip ${version}: docs/${product} not found"
+                continue
+              }
+              
+              git checkout "origin/${branch}" -- "sidebars_${product}.ts" 2>/dev/null || true
 
               # Vérifier qu'il y a des fichiers markdown
               if ! find "docs/${product}" -type f \( -name "*.md" -o -name "*.mdx" \) -quit | grep -q .; then
                 echo "   ⚠️  Skip ${version}: no markdown files"
+                # Restaurer la sidebar courante avant de continuer
+                [ -f ".tmp_${product}_sidebar_current" ] && cp ".tmp_${product}_sidebar_current" "sidebars_${product}.ts"
                 continue
               fi
 
-              # Créer la version
+              # Créer la version Docusaurus
               npx docusaurus "docs:version:${product}" "${version}"
 
               echo "   ✅ Version ${version} created"
+              
+              # IMPORTANT: Restaurer la sidebar courante après chaque version
+              [ -f ".tmp_${product}_sidebar_current" ] && cp ".tmp_${product}_sidebar_current" "sidebars_${product}.ts"
             done
 
-            # Restaurer current
+            # Restaurer current docs
             rm -rf "docs/${product}"
             mv ".tmp_${product}_current" "docs/${product}"
-            [ -f ".tmp_${product}_sidebar" ] && mv ".tmp_${product}_sidebar" "sidebars_${product}.ts"
+            
+            # Restaurer current sidebar (au cas où)
+            [ -f ".tmp_${product}_sidebar_current" ] && mv ".tmp_${product}_sidebar_current" "sidebars_${product}.ts"
           done
 
       - name: Validate versions
