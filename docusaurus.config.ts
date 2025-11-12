@@ -15,6 +15,11 @@ const config: Config = {
 
   trailingSlash: false,
 
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en'],
+  },
+
   onBrokenLinks: 'warn',
   markdown: {
     hooks: { onBrokenMarkdownLinks: 'warn', onBrokenMarkdownImages: 'warn' },
@@ -84,7 +89,7 @@ const config: Config = {
         searchBarShortcut: true,
         searchBarShortcutHint: true,
         searchBarPosition: 'right',
-        // language: ['fr', 'en'],
+        language: ['en'],
       },
     ],
     [
