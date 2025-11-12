@@ -17,7 +17,7 @@ const config: Config = {
 
   onBrokenLinks: 'warn',
   markdown: {
-    hooks: { onBrokenMarkdownLinks: 'warn' , onBrokenMarkdownImages: 'warn' },
+    hooks: { onBrokenMarkdownLinks: 'warn', onBrokenMarkdownImages: 'warn' },
   },
 
   presets: [
@@ -90,11 +90,13 @@ const config: Config = {
         indexDocs: true,
         indexPages: true,
         hashed: true,
-        // language: ['fr', 'en'],
+        docsRouteBasePath: ['docs/fast2', 'docs/arender', 'docs/flowerdocs', 'docs/uxopian-ai'],
+        ignoreFiles: [],
+        removeDefaultStopWordFilter: true,
       },
     ],
   ],
-  
+
   themeConfig: {
     navbar: {
       logo: { alt: 'UXO', src: 'img/uxo.png' },

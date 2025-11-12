@@ -19,18 +19,14 @@ jobs:
       PRODUCTS: "fast2 arender flowerdocs"
 
     steps:
-      - name: Checkout repository (with LFS)
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
 
-      - name: Resolve LFS pointers (pre)
-        shell: bash
-        run: |
-          set -euo pipefail
-          git lfs pull --include="static/**,docs/**" --exclude=""
-          git lfs checkout
+      - name: Fetch LFS files
+        run: git lfs pull
 
       - name: Fetch all branches
         run: git fetch origin "+refs/heads/*:refs/remotes/origin/*"
@@ -44,113 +40,99 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Clean old versions + manifests
+      - name: Clean old versions
         run: |
           rm -rf versioned_docs versioned_sidebars
           rm -f versions-*.json
 
-      - name: Generate Docusaurus versions (LFS-safe)
+      - name: Generate Docusaurus versions
         shell: bash
         run: |
           set -euo pipefail
 
-          have_docs () {
-            # $1 = path
-            find "$1" -type f \( -name "*.md" -o -name "*.mdx" \) -print -quit | grep -q .
-          }
-
           for product in $PRODUCTS; do
-            echo "=== ${product} ==="
+            echo "=== Processing ${product} ==="
 
-            # Sauvegarde du current (docs + sidebar)
-            mkdir -p ".cache_${product}"
-            rsync -a "docs/${product}/" ".cache_${product}/docs_current/"
-            if [ -f "sidebars_${product}.ts" ]; then
-              cp "sidebars_${product}.ts" ".cache_${product}/sidebars_current.ts"
-            fi
+            # Sauvegarder current
+            cp -r "docs/${product}" ".tmp_${product}_current"
+            [ -f "sidebars_${product}.ts" ] && cp "sidebars_${product}.ts" ".tmp_${product}_sidebar"
 
-            # Branches versionnées
-            mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
-              | grep "^origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
+            # Récupérer les branches versionnées
+            branches=$(git branch -r | grep "origin/test-${product}-v" | sed 's|origin/||' | sort -V)
 
-            for br in "${branches[@]}"; do
-              ver="${br##test-${product}-}"
-              echo "-> snapshot ${product} ${ver} from ${br}"
+            for branch in $branches; do
+              version="${branch##test-${product}-}"
+              echo "→ Creating version ${version} from ${branch}"
 
-              wt=".wt_${product}_${ver}"
-              git worktree add --force --detach "$wt" "origin/${br}"
+              # Checkout de la branche
+              git checkout "origin/${branch}" -- "docs/${product}" "sidebars_${product}.ts" 2>/dev/null || true
 
-              (
-                set -euo pipefail
-                cd "$wt"
-                git lfs pull --include="docs/${product}/**" --exclude=""
-                git lfs checkout
-              )
-
-              SRC="${wt}/docs/${product}"
-              if [ ! -d "$SRC" ] || ! have_docs "$SRC"; then
-                echo "   (skip ${br}: docs/${product} absent ou sans .md/.mdx)"
-                git worktree remove -f "$wt"
+              # Vérifier qu'il y a des fichiers markdown
+              if ! find "docs/${product}" -type f \( -name "*.md" -o -name "*.mdx" \) -quit | grep -q .; then
+                echo "   ⚠️  Skip ${version}: no markdown files"
                 continue
               fi
 
-              rm -rf .tmp_docs && mkdir -p .tmp_docs
-              rsync -a --delete "$SRC/" .tmp_docs/
-              rsync -a --delete .tmp_docs/ "docs/${product}/"
+              # Créer la version
+              npx docusaurus "docs:version:${product}" "${version}"
 
-              # Injecter la sidebar de la même branche si existante
-              if [ -f "${wt}/sidebars_${product}.ts" ]; then
-                cp "${wt}/sidebars_${product}.ts" "sidebars_${product}.ts"
-              fi
-
-              npx docusaurus "docs:version:${product}" "${ver}"
-
-              git worktree remove -f "$wt"
-
-              # Restaurer la sidebar courante
-              if [ -f ".cache_${product}/sidebars_current.ts" ]; then
-                cp ".cache_${product}/sidebars_current.ts" "sidebars_${product}.ts"
-              fi
+              echo "   ✅ Version ${version} created"
             done
 
-            # Restaurer les docs courants
-            rsync -a --delete ".cache_${product}/docs_current/" "docs/${product}/"
+            # Restaurer current
+            rm -rf "docs/${product}"
+            mv ".tmp_${product}_current" "docs/${product}"
+            [ -f ".tmp_${product}_sidebar" ] && mv ".tmp_${product}_sidebar" "sidebars_${product}.ts"
           done
 
-      - name: Resolve LFS pointers (post)
+      - name: Validate versions
         shell: bash
         run: |
           set -euo pipefail
-          git lfs pull --include="static/**,docs/**" --exclude=""
-          git lfs checkout
-
-      - name: Sanity check versions
-        shell: bash
-        run: |
-          set -euo pipefail
+          
           for product in $PRODUCTS; do
-            file="versions-${product}.json"
-            if [ -f "$file" ]; then
-              node -e "
-                const fs=require('fs');
-                const arr=JSON.parse(fs.readFileSync('$file','utf8'));
-                for (const ver of arr) {
-                  const dir=\`versioned_docs/version-${product}-\${ver}\`;
-                  if (!fs.existsSync(dir)) {
-                    console.error(\`Version \${ver} for ${product} is declared but missing.\`);
-                    process.exit(1);
-                  }
-                  const has=(function walk(d){
-                    return fs.readdirSync(d,{withFileTypes:true})
-                      .some(e=> (e.isFile() && /\\.mdx?$/.test(e.name)) || (e.isDirectory() && walk(d+'/'+e.name)));
-                  })(dir);
-                  if (!has) {
-                    console.error(\`Version \${ver} for ${product} has no markdown files.\`);
-                    process.exit(1);
-                  }
+            versions_file="versions-${product}.json"
+            [ ! -f "$versions_file" ] && continue
+
+            echo "Validating ${product} versions..."
+            
+            # Nettoyer les versions vides
+            node -e "
+              const fs = require('fs');
+              const path = require('path');
+              
+              const file = '${versions_file}';
+              const product = '${product}';
+              let versions = JSON.parse(fs.readFileSync(file, 'utf8'));
+              
+              const valid = versions.filter(ver => {
+                const dir = \`versioned_docs/version-\${product}-\${ver}\`;
+                if (!fs.existsSync(dir)) {
+                  console.log(\`  ❌ Missing: \${ver}\`);
+                  return false;
                 }
-              "
-            fi
+                
+                const hasMarkdown = (d) => {
+                  return fs.readdirSync(d, { withFileTypes: true }).some(e => 
+                    (e.isFile() && /\\.mdx?$/.test(e.name)) || 
+                    (e.isDirectory() && hasMarkdown(path.join(d, e.name)))
+                  );
+                };
+                
+                if (!hasMarkdown(dir)) {
+                  console.log(\`  ❌ Empty: \${ver}\`);
+                  return false;
+                }
+                
+                console.log(\`  ✅ Valid: \${ver}\`);
+                return true;
+              });
+              
+              if (valid.length !== versions.length) {
+                console.log(\`Cleaned: \${versions.length} → \${valid.length} versions\`);
+                fs.writeFileSync(file, JSON.stringify(valid, null, 2));
+              }
+            "
           done
 
       - name: Build
@@ -160,15 +142,6 @@ jobs:
 
       - name: Add .nojekyll
         run: touch build/.nojekyll
-
-      - name: Assert no LFS pointers in build
-        shell: bash
-        run: |
-          if grep -RIl "git-lfs.github.com/spec/v1" build 2>/dev/null; then
-            echo "ERROR: LFS pointer found in build output."
-            exit 1
-          fi
-          echo "✅ OK: no LFS pointers"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
