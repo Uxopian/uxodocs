@@ -1,16 +1,19 @@
 module.exports = function pluginSearchWrapper(context, options) {
-    const searchPlugin = require('@easyops-cn/docusaurus-search-local');
+    const searchPluginModule = require('@easyops-cn/docusaurus-search-local');
+    const searchPlugin = typeof searchPluginModule === 'function'
+        ? searchPluginModule
+        : searchPluginModule.default || searchPluginModule;
+
+    const originalPluginInstance = searchPlugin(context, options);
 
     return {
-        ...searchPlugin(context, options),
+        ...originalPluginInstance,
         name: 'docusaurus-plugin-search-wrapper',
 
         async postBuild(props) {
-            const originalPlugin = searchPlugin(context, options);
-
-            if (originalPlugin.postBuild) {
+            if (originalPluginInstance.postBuild) {
                 try {
-                    await originalPlugin.postBuild(props);
+                    await originalPluginInstance.postBuild(props);
                 } catch (error) {
                     if (error.code === 'ENOENT' && error.path && error.path.includes('search-index.json')) {
                         console.warn(`[Search Plugin] Skipping missing version index: ${error.path}`);
