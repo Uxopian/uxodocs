@@ -82,7 +82,8 @@ jobs:
               (
                 set -euo pipefail
                 cd "$wt"
-                git lfs pull --include="docs/${product}/**" --exclude=""
+                # Télécharger les fichiers LFS pour docs ET static (pour les images/assets)
+                git lfs pull --include="docs/${product}/**,static/**" --exclude=""
                 git lfs checkout
               )
 
