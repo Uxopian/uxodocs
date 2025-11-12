@@ -90,17 +90,20 @@ const config: Config = {
         versions: { current: { label: 'current' } },
       },
     ],
-    // Plugin de recherche placé EN DERNIER après tous les plugins de docs
     [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
+      require.resolve('./plugins/docusaurus-plugin-search-wrapper.js'),
       {
         indexDocs: true,
         indexPages: true,
+        indexBlog: false,
         hashed: true,
         docsRouteBasePath: ['docs-default', 'docs/fast2', 'docs/arender', 'docs/flowerdocs', 'docs/uxopian-ai'],
         ignoreFiles: [
-          /\/v\d+\//,
           /versioned_docs/,
+          /versioned_sidebars/,
+          /\/v[0-9]+\//,
+          /\/v[0-9]+\.[0-9]+/,
+          /-v[0-9]+\.json$/,
         ],
         searchContextByPaths: [
           {
