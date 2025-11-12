@@ -98,9 +98,10 @@ const config: Config = {
         indexPages: true,
         hashed: true,
         docsRouteBasePath: ['docs-default', 'docs/fast2', 'docs/arender', 'docs/flowerdocs', 'docs/uxopian-ai'],
-        // N'indexer que la version actuelle pour éviter les erreurs de fichiers manquants
-        docsPluginIdForPreferredVersion: ['fast2', 'arender', 'flowerdocs', 'uxopian-ai'],
-        indexDocSidebarParentCategories: 0,
+        ignoreFiles: [
+          /\/v\d+\//,
+          /versioned_docs/,
+        ],
         searchContextByPaths: [
           {
             label: 'Toutes les documentations',
