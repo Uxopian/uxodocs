@@ -15,12 +15,6 @@ const config: Config = {
 
   trailingSlash: false,
 
-  // Configuration i18n - français uniquement pour le moment
-  i18n: {
-    defaultLocale: 'fr',
-    locales: ['fr'],
-  },
-
   onBrokenLinks: 'warn',
   markdown: {
     hooks: { onBrokenMarkdownLinks: 'warn', onBrokenMarkdownImages: 'warn' },
