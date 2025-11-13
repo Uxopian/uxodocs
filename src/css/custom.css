@@ -79,6 +79,11 @@
   color: #fff;
 }
 
+.container {
+  min-width: 100%;
+  padding: 0 0 0 20px;
+}
+
 /* Gradient utility helpers */
 .bg-gradient-purple {
   background-image: var(--gradient-purple) !important;

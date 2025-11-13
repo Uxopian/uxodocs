@@ -1,3 +1,7 @@
+---
+title: Credentials
+---
+
 ## AWSConnectionProvider <small> - AWS S3 user credentials </small> {#AWSConnectionProvider data-toc-label="AWSConnectionProvider"}
 
 With an access key id and the secret access key, you have the option to connect to an AWS S3 instance by specifying the region concerned. However, to perform this king of connection, Fast2 required the permission : AmazonS3FullAccess

@@ -1,3 +1,8 @@
+---
+sidebar_label: API
+sidebar_position: 5
+---
+
 # API documentation
 
 Welcome to the **Fast2 API documentation**.  
