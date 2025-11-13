@@ -63,25 +63,10 @@ protocol:
 
 ```cfg
 
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 arender.server.filenet.authentication.method=jaasObjectStoreProvider
 arender.server.filenet.ce.url=iiop://&#123;content_engine_server&#125;:2809/FileNet/Engine
-```
-```
-```
-```
-```
-```
 ```
 
 
@@ -154,27 +139,12 @@ Modify the bean having the id urlFilter (by default configured with JAASUserFilt
 
 ```cfg
 
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 arender.server.filenet.authentication.method=loginPasswordObjectStoreProvider
 arender.server.filenet.ce.url=http://&#123;content_engine_server&#125;/wsi/FNCEWS40MTOM/
 arender.server.filenet.ce.login=&#123;p8_identifiant&#125;
 arender.server.filenet.ce.password=&#123;p8_password&#125;
-```
-```
-```
-```
-```
-```
 ```
 
 

@@ -46,15 +46,6 @@ This file contains various ARender rights with properties and are associated wit
 
 ```cfg
 
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 arender.server.alfresco.role.create.annotation=SiteManager,SiteCollaborator,SiteContributor
@@ -62,12 +53,6 @@ arender.server.alfresco.role.modify.annotation=SiteManager,SiteCollaborator
 arender.server.alfresco.role.modify.own.annotation=SiteContributor
 arender.server.alfresco.role.create.redaction=SiteManager,SiteCollaborator,SiteContributor
 arender.server.alfresco.role.delete.redaction=SiteManager,SiteCollaborator
-```
-```
-```
-```
-```
-```
 ```
 
 

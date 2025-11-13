@@ -66,25 +66,9 @@ arender.server.filenet.authentication.method=loginPasswordObjectStoreProvider
 # Example of URL for jaasObjectStoreProvider: iiop://localhost:2809/FileNet/Engine and for loginPasswordObjectStoreProvider : http://localhost:9080/wsi/FNCEWS40MTOM/
 
 ```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 arender.server.filenet.ce.url=http://localhost:9080/wsi/FNCEWS40MTOM/
 arender.server.filenet.ce.login=loginToChange
 arender.server.filenet.ce.password=passwordToChange
-```
-```
-```
-```
-```
-```
 ```
 
 ### Add additional libraries

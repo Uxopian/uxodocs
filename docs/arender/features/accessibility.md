@@ -105,24 +105,10 @@ To set the outline, the following css classes must be changed:
 button:focus,
 select:focus,
 
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 [type="checkbox"]:focus-visible+label,
 [type="radio"]:focus-visible+label {
-```
-```
-```
-```
-```
 ```
 
 .simple-outline:focus-visible,

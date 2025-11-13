@@ -46,28 +46,11 @@ The following properties defines the annotation behaviours when creating hyperli
 
 
 ```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 annotation.hyperlink.opacity=0.5f
 annotation.hyperlink.default.color=#0000FF
 annotation.hyperlink.externe.target.enabled=true
 annotation.hyperlink.target.show.timeout=10000
 annotation.hyperlink.use.legacy.creation=false
 annotation.hyperlink.open.document.tab=true
-```
-```
-```
-```
-```
-```
-
 ```
 

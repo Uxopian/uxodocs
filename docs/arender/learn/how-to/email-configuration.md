@@ -42,26 +42,10 @@ To enable proper rendering, you must configure the *document-converter* renderin
 
 
 ``` cfg
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
 ```properties
 emltopdf.encode.header.with.body.encoding=true
 emltopdf.config.filter.special.characters.regex=
 emltopdf.config.filter.replacement.character=
-```
-```
-```
-```
-```
 ```
 ```
 

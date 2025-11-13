@@ -25,24 +25,8 @@ Add these lines below in the following file:
 ```cfg
 
 ```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 arender.server.rendition.hosts=https://RENDITION_HOSTNAME:RENDITION_PORT/
 arender.rest.ssl.custom.use=true
-```
-```
-```
-```
-```
-```
 ```
 
 

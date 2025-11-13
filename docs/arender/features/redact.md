@@ -47,27 +47,12 @@ This panel will give you access to the different redact buttons. By default, fou
 
 ```cfg
 
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 redactexplorer.redact=true
 redactexplorer.redactZone=true
 redactexplorer.redactPageContent=true
 redactexplorer.redactFullPage=true
-```
-```
-```
-```
-```
-```
 ```
 
 
@@ -85,25 +70,9 @@ Two buttons of redactions advanced creation are available.
 ```cfg
 
 ```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 redactexplorer.manualInput=true
 redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
-```
-```
-```
-```
-```
-```
 ```
 
 
@@ -149,26 +118,11 @@ Advanced redact panel offers two buttons, manual input and rules.
 
 ```cfg
 
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 redactexplorer.manualInput=true
 redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
-```
-```
-```
-```
-```
-```
 ```
 
 

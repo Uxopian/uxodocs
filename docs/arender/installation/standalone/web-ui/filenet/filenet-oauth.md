@@ -52,25 +52,10 @@ ARender installation is as simple as:
 arender.server.oauth2.enabled=true
 # Set authentication method to use for FileNet
 
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 arender.server.filenet.authentication.method=oauth2ObjectStoreProvider
 arender.server.filenet.ce.url=http://localhost:9080/wsi/FNCEWS40MTOM/
-```
-```
-```
-```
-```
-```
 ```
 
 

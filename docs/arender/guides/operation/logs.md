@@ -28,26 +28,12 @@ The log4j configuration file for the Web-UI part looked like this :
 
 ``` cfg
 
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 log4j.rootCategory=WARN, default
 log4j.category.com.arondor = INFO
 log4j.category.com.arondor.common.management = FATAL
 log4j.category.arender-startup=INFO
-```
-```
-```
-```
-```
 ```
 
 log4j.category.com.arondor.viewer.common.logger = INFO, perf
@@ -59,36 +45,11 @@ log4j.additivity.com.arondor.viewer.common.logger=false
 
 
 ```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 log4j.appender.default=org.apache.log4j.ConsoleAppender
 log4j.appender.default.layout=org.apache.log4j.PatternLayout
 log4j.appender.default.layout.ConversionPattern=%d&#123;ISO8601&#125; %p [%t] %c:%L - %m%n
 ```
-```
-```
-```
-```
-```
 
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 log4j.appender.VIEWER=org.apache.log4j.RollingFileAppender
@@ -98,22 +59,7 @@ log4j.appender.VIEWER.File=/tmp/viewer/server.log
 log4j.appender.VIEWER.layout=org.apache.log4j.PatternLayout
 log4j.appender.VIEWER.layout.ConversionPattern=%d&#123;ISO8601&#125; %p [%t] %c:%L - %m%n
 ```
-```
-```
-```
-```
-```
 
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 
 ```properties
 log4j.appender.perf=org.apache.log4j.RollingFileAppender
@@ -122,12 +68,6 @@ log4j.appender.perf.MaxBackupIndex=6
 log4j.appender.perf.File=arender-hmi-perf.log
 log4j.appender.perf.layout=org.apache.log4j.PatternLayout
 log4j.appender.perf.layout.ConversionPattern=%m%n
-```
-```
-```
-```
-```
-```
 ```
 
 

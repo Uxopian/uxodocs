@@ -24,26 +24,11 @@ arender.server.perf.logger.use=true
 #configure elastic search connection
 
 ```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
-
-```properties
 arender.server.perf.es.host=localhost
 arender.server.perf.es.port=9200
 arender.server.perf.es.protocol=http
 arender.server.perf.es.index.name=arender-performance
-```
-```
-```
-```
-```
-```
+
 #activate/deactivate the propagation to elastic search of the log messages
 arender.server.perf.es.use=false
 ```
@@ -58,14 +43,14 @@ obtain the same behavior as the ARender Web-UI war:
 
 
 ```yaml
-  aop:
-    active: false
-    activateLogger: true
-    activateEs: false
-    esHost: localhost
-    esPort: 9200
-    esIndexName: arender-rendition-performance
-    esProtocol: http
+aop:
+  active: false
+  activateLogger: true
+  activateEs: false
+  esHost: localhost
+  esPort: 9200
+  esIndexName: arender-rendition-performance
+  esProtocol: http
 ```
 
 
