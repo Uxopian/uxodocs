@@ -98,26 +98,21 @@ The navigation of some elements does not work the same way:
 
 To set the outline, the following css classes must be changed:
 
-
-
 ```css
 :focus-visible,
 button:focus,
 select:focus,
-
-
-```properties
 [type="checkbox"]:focus-visible+label,
 [type="radio"]:focus-visible+label {
-```
+  /* outline styles */
+}
 
 .simple-outline:focus-visible,
 button:focus,
 select:focus {
-
+  /* outline styles */
+}
 ```
-
-
 
 ## Problems of color perception
 
@@ -132,15 +127,18 @@ Each of these color perception disorders has their own style. It is possible to 
 
 If you want to change one of the colors, you can change the value of the associated variable in one of the following CSS classes:
 
-
-
 ```css
 .deuteranopia-theme {
+  /* color variables */
+}
 
-.protanopia-theme { 
+.protanopia-theme {
+  /* color variables */
+}
 
 .tritanopia-theme {
-
+  /* color variables */
+}
 ```
 
 
