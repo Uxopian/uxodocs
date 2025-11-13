@@ -7,21 +7,21 @@ const FlowerDocsCardsList = [
         title: 'Concepts',
         icon: '💡',
         description: 'Getting to grips with the platform\'s general concepts',
-        link: '/docs/flowerdocs/concepts/',
+        link: '/docs/flowerdocs/concepts/getting-started',
         color: '#6c5ce7'
     },
     {
         title: 'Installation',
         icon: '🔧',
         description: 'Installing & deploying the platform',
-        link: '/docs/flowerdocs/install/',
+        link: '/docs/flowerdocs/install/getting-started',
         color: '#fd79a8'
     },
     {
         title: 'FlowerDocs Academy',
         icon: '🎓',
         description: 'Find out more about FlowerDocs through training modules',
-        link: '/docs/flowerdocs/learn/',
+        link: '/docs/flowerdocs/learn/admin-hide-menu/getting-started',
         color: '#00b894'
     }
 ];
@@ -35,22 +35,21 @@ const GuidesList = [
                 icon: '🖥️',
                 title: 'Graphical user interface',
                 description: 'FlowerDocs GUI customisation',
-                link: '/docs/flowerdocs/config/gui/'
+                link: '/docs/flowerdocs/config/gui/getting-started'
             },
             {
                 icon: '🛠️',
                 title: 'Administration',
                 description: 'Administering and configuring FlowerDocs Core',
-                link: '/docs/flowerdocs/config/core/'
+                link: '/docs/flowerdocs/config/core/component-identifier'
             },
             {
                 icon: '👁️',
                 title: 'Operation',
                 description: 'Operating & Supervising your platform',
-                link: '/docs/flowerdocs/config/'
+                link: '/docs/flowerdocs/config/exploit/actuator'
             }
         ],
-        allLink: '/docs/flowerdocs/config/',
         color: '#0984e3'
     },
     {
@@ -61,22 +60,21 @@ const GuidesList = [
                 icon: '🔌',
                 title: 'JS plugins',
                 description: 'Enriching the interface with your own scripts',
-                link: '/docs/flowerdocs/apis/plugins/'
+                link: '/docs/flowerdocs/apis/plugins/getting-started'
             },
             {
                 icon: '📡',
                 title: 'JSAPI',
                 description: 'Enriching the interface with your own scripts',
-                link: '/docs/flowerdocs/apis/jsapi/'
+                link: '/docs/flowerdocs/apis/jsapi/getting-started'
             },
             {
                 icon: '⚙️',
                 title: 'Core APIs',
                 description: 'Consuming the FlowerDocs Core service layer',
-                link: '/docs/flowerdocs/apis/rest/'
+                link: '/docs/flowerdocs/apis/core/intro'
             }
         ],
-        allLink: '/docs/flowerdocs/apis/',
         color: '#6c5ce7'
     }
 ];
@@ -99,7 +97,7 @@ function FlowerDocsCard({ title, icon, description, link, color }) {
     );
 }
 
-function GuidesCard({ title, description, items, allLink, color }) {
+function GuidesCard({ title, description, items, color }) {
     return (
         <div className={styles.guidesCard}>
             <div className={styles.cardHeader}>

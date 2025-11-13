@@ -79,6 +79,17 @@
     margin-bottom: 0.4rem;
 }
 
+.showAllLink {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.showAllLink:hover {
+    color: #2c3e50;
+}
+
 .underline {
     width: 30px;
     height: 2px;
