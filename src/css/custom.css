@@ -9,12 +9,10 @@
    Core tokens
    ------------------------------ */
 :root {
-  /* Uxo Purple scale */
   --uxo-purple-700: #D745FF;
   --uxo-purple-500: #B56BFF;
   --uxo-purple-300: #735EFC;
 
-  /* Gradient scales (stops listed top→bottom / left→right) */
   --uxo-purple-1: #79039A;
   --uxo-purple-2: #6A0091;
   --uxo-purple-3: #5A007A;
@@ -79,9 +77,13 @@
   color: #fff;
 }
 
+body {
+  overflow-x: hidden !important;
+}
+
 .container {
   min-width: 100%;
-  padding: 0 0 0 20px;
+  padding: 0 10px 0 20px;
 }
 
 /* Gradient utility helpers */
