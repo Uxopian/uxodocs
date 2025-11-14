@@ -46,9 +46,6 @@ This panel will give you access to the different redact buttons. By default, fou
 
 
 ```cfg
-
-
-```properties
 redactexplorer.redact=true
 redactexplorer.redactZone=true
 redactexplorer.redactPageContent=true
@@ -68,8 +65,6 @@ Two buttons of redactions advanced creation are available.
 
 
 ```cfg
-
-```properties
 redactexplorer.manualInput=true
 redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
@@ -95,7 +90,7 @@ redactexplorer.redact.with.reasons=true
 
 
 
-The reasons are defined in the configuration files, it is possible to modify them as well as the default reasons as explained in [the dedicated documentation](./content/learn/how-to/redact-reasons.en.md)
+The reasons are defined in the configuration files, it is possible to modify them as well as the default reasons as explained in [the dedicated documentation](../learn/how-to/redact-reasons.md)
 
 
 
@@ -117,9 +112,6 @@ Advanced redact panel offers two buttons, manual input and rules.
 
 
 ```cfg
-
-
-```properties
 redactexplorer.manualInput=true
 redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
@@ -146,7 +138,7 @@ If you want to refine your selection, you can open the results panel:
 ### Rules
 
 The rules option allows you to select one or more rules and apply them. 
-These rules are defined in the configuration files as explained in the  [dedicated documentation](./content/learn/how-to/annotation-creation-rule.en.md)
+These rules are defined in the configuration files as explained in the  [dedicated documentation](../learn/how-to/annotation-creation-rule.md)
 
 Once the rules are selected, trigger the search. It will show a preview of the results in the document.
 If you want to refine your selection, you can open the results panel:
@@ -165,22 +157,22 @@ It is also possible to add your own buttons. In the file *arender-custom-integra
 
 
 ```xml
-    <bean id="addRedact"
-		class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
-             <constructor-arg value="addRedact" />
-             <constructor-arg>
-                 <ref bean="labels#addRedact" />
-             </constructor-arg>
-             <constructor-arg value="standardButton icon-square toppanelButton"/>
-             <property name="enabled" value="${redactexplorer.redactZone}" />
-             <property name="buttonGroup" value="topPanel" />
-             <property name="inactiveButtonHandler">
-                 <ref bean="quitAnnotationCreationAction" />
-             </property>
-             <property name="buttonHandler">
-                 <ref bean="redactZoneCreationAction" />
-             </property>		
-    </bean>
+<bean id="addRedact"
+	class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
+         <constructor-arg value="addRedact" />
+         <constructor-arg>
+             <ref bean="labels#addRedact" />
+         </constructor-arg>
+         <constructor-arg value="standardButton icon-square toppanelButton"/>
+         <property name="enabled" value="${redactexplorer.redactZone}" />
+         <property name="buttonGroup" value="topPanel" />
+         <property name="inactiveButtonHandler">
+             <ref bean="quitAnnotationCreationAction" />
+         </property>
+         <property name="buttonHandler">
+             <ref bean="redactZoneCreationAction" />
+         </property>		
+</bean>
 ```
 
 
