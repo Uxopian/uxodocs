@@ -1,0 +1,120 @@
+---
+title: Release notes
+description: Release notes
+---
+
+# Evolutions
+
+## Accueil 
+
+* Support des valeurs multiples dans les dashlets de type Liste (\{\{% jira id="FD-13228" %\}\}). 
+* La légende des dashlets avec un certain nombre de valeurs est scrollable (\{\{% jira id="FD-13044" %\}\}).  
+
+## Administration
+
+* L'action de purge du cache dans l'administration purge maintenant le cache de libellés de \{\{% gui %\}\} (\{\{% jira id="FD-13193" %\}\}).
+
+## ARender 
+
+* Montée de version ARender : 4.0.9 (\{\{% jira id="FD-13326" %\}\}).
+
+## Sécurité 
+
+* La mise à jour de contenu d'un document est basée sur les permissions `ADD_CONTENT` et `DELETE_CONTENT` ou `UPDATE_CONTENT` (\{\{% jira id="FD-13274" %\}\}). 
+
+## Dossier virtuel 
+
+* Les deux modes de vue d'un dossier virtuel sont synchronisés (\{\{% jira id="FD-13018" %\}\}).  
+* Si un dossier virtuel en mode onglet n'a qu'un bucket, le titre `Autres` n'est plus affiché (\{\{% jira id="FD-13155" %\}\}). 
+* Amélioration de la gestion des buckets ouverts sauvegardés dans l'historique (\{\{% jira id="FD-12631" %\}\}). 
+
+## JSAPI
+
+* Amélioration des actions possibles sur les popups de recherche (\{\{% jira id="FD-12902" %\}\}).  
+
+## Ergonomie
+
+* Meilleure gestion du fil d'Ariane (\{\{% jira id="FD-13034" %\}\}). 
+* Validation des formulaires de création de tampon, dashlet et recherche sauvegardée (\{\{% jira id="FD-13124" %\}\}, \{\{% jira id="FD-13168" %\}\}, \{\{% jira id="FD-12068" %\}\}).
+* Lors du clic sur l'icône d'un composant dans une popup de recherche, le composant n'est plus ouvert (\{\{% jira id="FD-11731" %\}\}). 
+* Le style au survol des résultats de recherches est effectif pour les résultats pairs et impairs  (\{\{% jira id="FD-13185" %\}\}). 
+* Les heures, minutes et secondes sont conservées pour les critères de type Date au changement de valeurs (\{\{% jira id="FD-12999" %\}\}).
+
+## Alfresco 
+
+* Les recherches d'utilisateurs terminant par un _S_ sont filtrées afin de ne pas considérer le _S_ comme un pluriel (\{\{% jira id="FD-12726" %\}\}). 
+
+# Corrections
+
+* L'utilisation dans un dossier virtuel du mode de recherche en miniatures est fonctionnel après avoir changé de bucket (\{\{% jira id="FD-13256" %\}\}).  
+* Les popups de confirmation avec des tags multivalués non modifiés ne sont plus affichées (\{\{% jira id="FD-13261" %\}\}). 
+* Le style des champs monovalués en recherche est le même qu'en indexation (\{\{% jira id="FD-13273" %\}\}). 
+* La scrollbar dans la popup de sélection de colonne est désormais présente à l'ouverture sur IE11 (\{\{% jira id="FD-13107" %\}\}).  
+* Amélioration de la troncature des mots dans certains cas sur IE11 (\{\{% jira id="FD-13246" %\}\}). 
+* L'action d'ajout de conditionnel est désormais nommée `Ajouter` et non `Sauvegarder` pour éviter les confusions (\{\{% jira id="FD-13114" %\}\}).
+* L'API JS d'actions de dossier est à nouveau fonctionnelle (\{\{% jira id="FD-13228" %\}\}).  
+
+# Correctifs
+
+## 2.4.5.1 _02/11/2020_
+
+### Visualisation
+* **Montée de version** de la visionneuse de documents ARender en  **4.1.1** apportant son lot de corrections d'anomalie et d'évolutions (\{\{% jira id="FD-13410" %\}\})
+* Le connecteur ARender a évolué afin de corriger plusieurs anomalies concernant la visualisation des annotations : 
+    * Certaines annotations créées avec un navigateur ne sont pas visibles dans un autre navigateur (\{\{% jira id="FD-13425" %\}\})
+    * Evaluation de la permission `READ` sur chaque annotation (\{\{% jira id="FD-13579" %\}\})
+
+
+### Performance
+* Introduction de caches mémoires pour limiter le nombre d'appels à des caches distribués (stockés dans Redis) (\{\{% jira id="FD-13629" %\}\}).
+* La résolution des utilisateurs à partir de résultats de recherche a été revue. Lors de cette étape, une seule requête, par utilisateur dont le libellé doit être résolu, est exécutée (\{\{% jira id="FD-13417" %\}\}).
+
+### Formulaires
+
+* Possibilité de forcer l'invalidité d'un tag (ou motif de réponse à une tâche) de type `USER` ou `FREE_LIST` à l’aide de l’API JS (\{\{% jira id="FD-13552" %\}\}).
+* Changement de la visibilité de motifs d'une réponse à une tâche à l'aide de l'API JS (\{\{% jira id="FD-13496" %\}\}).
+* Les utilisateurs inexistants (ou supprimés) sont restitués à l'aide de leur identifiant stocké au lieu d'une valeur vide(\{\{% jira id="FD-13472" %\}\}).
+* Le _Drag & Drop_ a été désactivé sur les pièces jointes en lecture seule (\{\{% jira id="FD-13499" %\}\}).
+* Amélioration de la conservation des colonnes définies par un utilisateur pour l'affichage de résultats de recherche (\{\{% jira id="FD-13475" %\}\}).
+
+## 2.4.5.2 _09/11/2020_
+
+* Support du protocole [OpendId Connect](/documentation/config/core/securite/oidc#alfresco) avec le connecteur Alfresco à l'aide d'un `Authentication Subsystem` Alfresco (\{\{% jira id="FD-13650" %\}\}).
+* Possibilité de [surcharger les icônes](/documentation/apis/jsapi/autre/icons) de composants utilisées via l'API JS (\{\{% jira id="FD-12967" %\}\}).
+
+## 2.4.5.3 _24/11/2020_
+
+* **Montée de version** de la visionneuse de documents ARender en  **4.1.2** (\{\{% jira id="FD-13772" %\}\}) corrigeant une anomalie liée à la gestion du cache des documents uploadés sur un serveur de rendition qui pouvait provoquer l'impossibilité de visualiser un document
+* Dans \{\{% gui %\}\}, lorsque la première visualisation concernait un document, deux demandes simultanées d'ouverture du document était faite auprès d'ARender (\{\{% jira id="FD-13774" %\}\})
+
+
+## 2.4.5.4 _24/11/2020_
+
+* Lors du téléchargement d'un fichier CSV, l'extension `txt` était ajoutée (\{\{% jira id="FD-13776" %\}\}) 
+
+## 2.4.5.5 _25/11/2020_
+
+*  Rafraîchissement des valeurs sélectionnées à partir d'un lookup (\{\{% jira id="FD-13766" %\}\}) 
+
+## 2.4.5.6 _27/11/2020_
+
+*  Support des Identity Provider OIDC qui n'exposent pas de endpoint fournissant les informations d'un utilisateur (\{\{% jira id="FD-13785" %\}\}) 
+
+## 2.4.5.7 _10/12/2020_
+
+*  Kibana : résolution des libellés de tags basés sur une liste de choix (\{\{% jira id="FD-13520" %\}\}) 
+
+## 2.4.5.8 _27/01/2021_
+
+* Amélioration de la prolongation d'un jeton utilisateur avant son expiration (\{\{% jira id="FD-13349" %\}\}) 
+* Affichage de l'identifiant d'un utilisateur après sa suppression (\{\{% jira id="FD-13472" %\}\}) 
+
+## 2.4.5.9 _01/03/2021_
+
+* Evaluation de la sécurité lors du téléchargement en CSV (\{\{% jira id="FD-13945" %\}\})
+* **Montée de version** de la visionneuse de documents ARender en **4.3.1** (\{\{% jira id=FD-13859 %\}\})
+* Au sein de la visionneuse de documents, certaines actions pouvaient être actives malgré la sécurité définie (\{\{% jira id=FD-13944 %\}\})
+* Amélioration du déverrouillage d'un composant lors de la fermeture du navigateur (\{\{% jira id=FD-13886 %\}\})
+* Alfresco : 
+    * impossible de rechercher un utilisateur déclaré sans nom de famille (\{\{% jira id="FD-13857" %\}\})
+    * mise en place d'un cache des utilisateurs et groupes (\{\{% jira id="FD-13887" %\}\})

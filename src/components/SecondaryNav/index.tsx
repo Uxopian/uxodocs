@@ -9,6 +9,11 @@ type Cat = { label: string; href: string };
 export default function SecondaryNav(): React.ReactElement | null {
     const { pathname } = useLocation();
 
+    // Ne pas afficher la secondary navbar sur les pages de release notes
+    if (pathname.includes('/release-note/') || pathname.includes('/releases')) {
+        return null;
+    }
+
     const categoriesMap = categories as Record<string, Cat[]>;
 
     let product: string | null = null;

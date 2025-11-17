@@ -1,0 +1,208 @@
+---
+title: Release notes
+description: Release notes
+---
+
+
+# Sécurité
+ 
+*   Chiffrement des contenus stockés sur système de fichiers (\{\{% jira id=FD-12474 %\}\})
+*   Vérification de l'intégrité des contenus stockés sur système de fichiers avec des empreintes SHA-256 (\{\{% jira id=FD-12709 %\}\})
+*   Forcer le scope à l'aide d'une en-tête HTTP `scope` positionnée par un reverse proxy (\{\{% jira id=FD-13861 %\}\})
+*   Utilisation d'attributs LDAP distincts pour les identifiants d'utilisateurs et de groupes (\{\{% jira id=FD-11903 %\}\})
+*   Utilisation de la configuration LDAP des identifiants en minuscule pour la recherche et la récupération d'utilisateurs (\{\{% jira id=FD-13593 %\}\})
+*   La définition du endpoint `UserInfo` n'est plus obligatoire pour la configuration d'un Identity Provider OIDC (\{\{% jira id=FD-13785 %\}\})
+*   Le jeton utilisateur n'est, par défaut, plus exposé au niveau de la GUI (\{\{% jira id=FD-13913 %\}\}) [Documentation](/documentation/apis/jsapi/user#informations-d-un-utilisateur)
+*   \{\{% gui %\}\} supporte une [règle d'ACL Proxy par défaut](/documentation/config/core/securite/acl#règle-par-défaut)  (sans condition) pour autoriser la création (\{\{% jira id=FD-13836 %\}\})
+ 
+
+ 
+# GUI
+ 
+## Recherche
+
+## Formulaires de recherche
+*   Affichage du libellé du workflow après exécution d'une recherche (\{\{% jira id=FD-13875 %\}\})
+*   Affichage de l'identifiant de la classe de tag ne disposant pas de libellé dans le sélecteur de critères (\{\{% jira id=FD-13898 %\}\})
+*   Exécution du lookup dans le cas de tag de type `FreeList` après rafraîchissement de la recherche (\{\{% jira id=FD-13809 %\}\} et \{\{% jira id=FD-13766 %\}\})
+*   Affichage du libellé de suggestions pour un critère après l'exécution de la recherche (\{\{% jira id=FD-13654 %\}\})
+*   Calcul de la validité d'un critère de type `Date` lors de la suppression de toutes ses valeurs (\{\{% jira id=FD-13896 %\}\})
+
+### Résultats de recherche
+ 
+*   Téléchargement de plusieurs documents sélectionnés dans un tableau de résultats de recherche (unitairement ou dans une archive ZIP)  (\{\{% jira id=FD-13839 %\}\})
+*   Conservation de la page courante de résultats dans l’historique (\{\{% jira id=FD-12081 %\}\}) 
+*   Génération de vignette pour les documents composites (archives, emails ou avec plusieurs contenus) (\{\{% jira id=FD-13858 %\}\})
+*   Téléchargement de l'export CSV ou ZIP avec un nom basé sur le contexte courant (nom de la recherche ou du dossier) (\{\{% jira id=FD-13298 %\}\} et \{\{% jira id=FD-13297 %\}\})
+*   Amélioration de la conservation des colonnes de résultats (\{\{% jira id=FD-13475 %\}\}, \{\{% jira id=FD-13803 %\}\} et \{\{% jira id=FD-13834 %\}\})
+*   Tri alphabétique sans prise en compte de la casse et des accents dans le sélecteur de colonnes (\{\{% jira id=FD-13382 %\}\})
+ 
+### Recherches sauvegardées
+ 
+*   Conservation de la catégorie lorsque la recherche est sauvegardée à partir d'un formulaire avec sélecteur de catégorie (\{\{% jira id=FD-13810 %\}\})
+*   Récupération des identités non présentes dans le LDAP ne bloque plus l'affichage des autres identités (\{\{% jira id=FD-13941 %\}\})
+*   Impossibilité de partager une recherche à des équipes si une d'entre elles ne possède pas de nom (\{\{% jira id=FD-13936 %\}\})
+ 
+## API JS
+
+*   Résolution dynamique des icônes de composants (\{\{% jira id=FD-12967 %\}\}, \{\{% jira id=FD-13683 %\}\}, \{\{% jira id=FD-13794 %\}\} et \{\{% jira id=FD-13682 %\}\}) [Documentation](/documentation/apis/jsapi/autre/icons)
+*   Nouveau plugin permettant d'afficher une [barre de recherche rapide](/documentation/learn/search-box/search-box) (\{\{% jira id=FD-13669 %\}\})  
+*   Abonnement à l'assignation d'une tâche (\{\{% jira id=FD-13607 %\}\})[Documentation](/documentation/apis/jsapi/mcd/tasks#réagir-à-une-assignation) 
+*   Conservation de la valeur courante lors de l'ajout de valeurs autorisées pour un tag conditionnel (\{\{% jira id=FD-13166 %\}\})
+*   Déclenchement de l'événement d'ouverture d'une recherche après le chargement des critères (\{\{% jira id=FD-13807 %\}\})
+*   Retour correspondant à l’état d'activation des actions d'une pièce jointe de tâche lors de l'appel à la fonction `isEnabled()` (\{\{% jira id=FD-13318 %\}\})
+
+
+## Composant
+ 
+*   Amélioration du déverrouillage d’un composant à la fermeture du navigateur (\{\{% jira id=FD-13886 %\}\})
+*   Calcul de la validité d'un tag de type `Date` lors de la suppression de toutes ses valeurs (\{\{% jira id=FD-13896 %\}\})
+*   Application des suggestions pour les tags en lecture seule (\{\{% jira id=FD-13917 %\}\})
+*   Exécution du lookup dans le cas de tag de type `FreeList` à l'ouverture d'un composant (\{\{% jira id=FD-13809 %\}\})
+*   Affichage de l'identifiant de l'utilisateur lorsqu'il n'est pas présent dans le LDAP (\{\{% jira id=FD-13472 %\}\})
+*   Affichage de l'icône d'un tag de type `ICON` en lecture seule (\{\{% jira id=FD-13918 %\}\})
+*   Harmonisation de l'affichage des noms de composants en lecture seule (\{\{% jira id=FD-13842 %\}\}, \{\{% jira id=FD-13841 %\}\} et \{\{% jira id=FD-13843 %\}\})
+ 
+### Document
+ 
+*   Suppression de l'affichage de popup d'avertissement lors de la restauration de version pour un document modifié (\{\{% jira id=FD-13893 %\}\})
+*   Remplacement du nom de document par celui du dernier fichier ajouté s'il n'a pas été modifié par l'utilisateur lors de la création d'un document (\{\{% jira id=FD-13501 %\}\})
+*   Utilisation de la même contrainte d'ajout de fichiers via Drag & Drop et depuis l'explorateur (\{\{% jira id=FD-13304 %\}\}) [Documentation](/documentation/config/gui/indexation/form#document)
+ 
+### Tâche
+ 
+*   Restauration de l’application de réponse avec message de confirmation lors de la création de tâche en popup \{\{% jira id=FD-13513 %\}\})
+*   Harmonisation du comportement de création de tâche en activité et popup (\{\{% jira id=FD-13603 %\}\})
+*   Suppression de pièce jointe temporaire ne nécessite plus la permission `DELETE_CONTENT` (\{\{% jira id=FD-13910 %\}\})
+*   Synchronisation entre les pièces jointes et ARender lors de la création d'une tâche (\{\{% jira id=FD-13638 %\}\})
+* Affichage des pièces jointes n'est plus bloqué par les pièces jointes de type dossier virtuel (\{\{% jira id=FD-13921 %\}\})
+ 
+### Dossier virtuel
+ 
+*   Visualisation du contenu des dossiers virtuels au sein d'ARender uniquement s'il contient des documents (\{\{% jira id=FD-13455 %\}\} et \{\{% jira id=FD-13563 %\}\})
+ 
+### Dossier
+ 
+*   Restauration de l'affichage des actions d'en-tête et pied de page lorsque le dossier est réservé (\{\{% jira id=FD-13867 %\}\} et \{\{% jira id=FD-13855 %\}\})
+*   Affichage du sélecteur de classe lors de la création d'un composant au sein d'un dossier ayant plusieurs classes autorisées (\{\{% jira id=FD-13826 %\}\})
+ 
+## Console d'administration
+ 
+*   Accès à l'écran d'administration des délégations pour les administrateurs disposant du rôle `DELEGATION_MANAGER` (\{\{% jira id=FD-13870 %\}\})
+*   Restauration de la sélection de conditions (\{\{% jira id=FD-13592 %\}\})
+*   Support de la suppression des objets de sécurité (ACL et ACL Proxy ) (\{\{% jira id=FD-13831 %\}\})
+*   Affichage du diagramme de conception d'un case dès sa création (\{\{% jira id=FD-13518 %\}\})
+*   Désactivation de l’action de sauvegarde lorsque :
+    * une classe de tag a un identifiant invalide (\{\{% jira id=FD-12996 %\}\})
+    * une ACL n'a pas d'entrée (\{\{% jira id=FD-13606 %\}\})
+*   Support des formats de date contenant des virgules (\{\{% jira id=FD-13814 %\}\})
+ 
+## Expérience utilisateur
+
+*   Amélioration de l'internationalisation de la configuration (\{\{% jira id=FD-12102 %\}\}) 
+*   Amélioration de l'affichage de l'action permettant de vider la sélection dans les listes de choix  (\{\{% jira id=FD-13933 %\}\})
+*   Traduction des libellés natifs dans les listes de choix (\{\{% jira id=FD-13822 %\}\})
+*  Modification du libellé de l'action permettant de détacher une pièce jointe (\{\{% jira id=FD-12426 %\}\})
+*  Suppression du copyright dans le bas de page (\{\{% jira id=FD-13880 %\}\})
+
+
+<br/>
+Cette nouvelle version intègre diverses améliorations de style concernant : 
+ 
+*  Les popups se chevauchant (\{\{% jira id=FD-13860 %\}\})
+*  Les popups de liste de choix (\{\{% jira id=FD-13890 %\}\})
+*  La popup d'attachement d'un composant à un dossier (\{\{% jira id=FD-13935 %\}\} et \{\{% jira id=FD-13919 %\}\})
+*  La popup de partage d'une recherche (\{\{% jira id=FD-13934 %\}\})
+*  Les suggestions pour les tags de type chaîne de caractères (\{\{% jira id=FD-13652 %\}\})
+
+### Préférences
+ 
+*   Rafraîchissement des dashlets et tampons après leurs modifications lorsque le service worker est désactivé (\{\{% jira id=FD-13901 %\}\})
+*   Support des critères de type `Date` ayant uniquement un minimum ou maximum (\{\{% jira id=FD-13789 %\}\})
+*   Affichage des dashlets lorsqu'un utilisateur a accès à un catalogue de widgets (\{\{% jira id=FD-13811 %\}\})
+*   Amélioration de la redirection des dashlets vers des formulaires de recherche (\{\{% jira id=FD-13813 %\}\}, \{\{% jira id=FD-13874 %\}\} et \{\{% jira id=FD-13816 %\}\})
+*   Fil d'Ariane incorrect après l'ouverture de favoris depuis le panneau utilisateur (\{\{% jira id=FD-13817 %\}\})
+*   Affichage des favoris sans nom  (\{\{% jira id=FD-13283 %\}\})
+*   Amélioration du calcul de validité lors de l'édition de tampons (\{\{% jira id=FD-13937 %\}\})
+ 
+## Autre
+ 
+*   Restauration du support des plugins par scope avec Redis (\{\{% jira id=FD-13953 %\}\})
+
+
+# Core
+ 
+## Services
+*   Support de la restauration des composants invalides (\{\{% jira id=FD-13868 %\}\})
+*   Mise à jour de composant obsolète provoque une erreur afin d'éviter d'écraser des modifications antérieures (\{\{% jira id=FD-13739 %\}\})
+*   Vérification de l'unicité des enfants ajoutés à un dossier (\{\{% jira id=FD-13938 %\}\})
+*   Changement de propriétaire de composant uniquement possible par un administrateur lors de la mise à jour celui-ci (\{\{% jira id=FD-13897 %\}\})
+*   Restriction de la modification des tags en lecture seule via les WebServices (\{\{% jira id=FD-13553 %\}\})
+*   Mise à jour de la propriété `component.search.ignore.classes` pour cacher les nouvelles classes techniques (\{\{% jira id=FD-13512 %\}\})
+ 
+## Workflow
+ 
+*   Séparation du delegate HTTP en deux : un pour les réponses textuelles et un pour les fichiers (\{\{% jira id=FD-13902 %\}\})
+*   Possibilité d'éditer les variables d'entrées personnalisées lors de la génération de fichier (\{\{% jira id=FD-13907 %\}\})
+*   Support de la conversion en PDF à partir d'un fichier généré à partir d'un template HTML (\{\{% jira id=FD-13906 %\}\})
+*   Affichage du diagramme de case uniquement si l'utilisateur a la permission `READ_HISTORY` pour le dossier (\{\{% jira id=FD-13930 %\}\})
+ 
+
+# Connecteurs 
+ 
+## ARender 
+ 
+Le connecteur ARender a évolué afin d'intégrer la dernière version, 4.3.1, de la visionneuse de documents ARender (\{\{% jira id=FD-13859 %\}\}). Cette nouvelle version du connecteur intègre divers correctifs concernant : 
+ 
+*   L'encodage des noms de documents contenant des espaces (\{\{% jira id=FD-13331 %\}\})
+*   Des erreurs JavaScript à l'ouverture de documents ou de tâches (\{\{% jira id=FD-13618 %\}\})
+*   Des boutons non visibles lors de l'édition de notes textuelles (\{\{% jira id=FD-13940 %\}\})
+*   La possibilité de supprimer un document lors de la composition de nouveaux documents (\{\{% jira id=FD-13939 %\}\})
+*   La prévention de mise en cache, par le navigateur, de certaines feuilles de style (\{\{% jira id=FD-13895 %\}\})
+*   La visibilité de certaines actions (composition de document, création d'annotations) en fonction des permissions de l'utilisateur connecté (\{\{% jira id=FD-13944 %\}\} et \{\{% jira id=FD-13030 %\}\})
+ 
+## Kibana
+ 
+*   Support des ACL Proxy : les composants qui référencent un ACL Proxy peuvent désormais être restitués dans les dashboards (\{\{% jira id=FD-13828 %\}\})
+*   Résolution des libellés pour les tags basés sur des listes de choix (\{\{% jira id=FD-13520 %\}\} et \{\{% jira id=FD-13856 %\}\})
+*   Support de la mise à jour d'objets Kibana à l'aide du CLM (\{\{% jira id=FD-13123 %\}\})
+*   Par défaut, la création d'un scope avec le CLM ne définit plus de `timeFieldName`. Ce champ est défini avec la valeur de l'argument `timeFieldName` fourni à la commande d'exécution du CLM (\{\{% jira id=FD-13830 %\}\})
+ 
+ 
+## Plume 
+ 
+*   Variables sans valeurs ne provoquent plus d'erreur JavaScript (\{\{% jira id=FD-13617 %\}\})
+*   Support des tags contenant des _ dans les templates (\{\{% jira id=FD-12317 %\}\})
+*   Support du caractère espace dans les noms de pièces jointes (\{\{% jira id=FD-13253 %\}\})
+
+# Référentiels de données
+
+## Alfresco
+ 
+*   Export en CSV d'une recherche porte l’extension attendue (\{\{% jira id=FD-13776 %\}\})
+*   Récupération des utilisateurs n'ayant pas de nom ou prénom ne bloque plus la recherche d'utilisateurs (\{\{% jira id=FD-13857 %\}\})
+*   Ajout du type Route dans le modèle 2.4-2.5  (\{\{% jira id=FD-13942 %\}\})
+*   Ajout des alias de préférences utilisateur (\{\{% jira id=FD-13932 %\}\})
+*   Amélioration du chargement des préfixes et aspects pour les requêtes CMIS (\{\{% jira id=FD-13899 %\}\})
+*   Désactivation de la promotion de document est forcée (\{\{% jira id=FD-13752 %\}\})
+*   Récupération par l'administrateur des décorations et des aspects (\{\{% jira id=FD-13678 %\}\})
+*   Support d'OpenID Connect (\{\{% jira id=FD-13650 %\}\})
+*   Utilisation d’un cache pour les utilisateurs (\{\{% jira id=FD-13887 %\}\})
+
+## FileNet
+ 
+*   Support du Multi-Realm  (\{\{% jira id=FD-13515 %\}\})
+
+
+# Correctifs
+
+## 2.5.1.1 _29/04/2021_
+
+* Drag & Drop de plusieurs fichiers dans un dossier physique (\{\{% jira id=FD-14048 %\}\})
+* Encodage du paramètre `targetURL` passé dans les URLs (\{\{% jira id=FD-14055 %\}\})
+* ADLDS : Possibilité de modifier un utilisateur ou un groupe (\{\{% jira id=FD-14061 %\}\})
+
+
+## 2.5.1.2 _04/05/2021_
+
+* **Montée de version** de la visionneuse de documents ARender en **4.3.2** (\{\{% jira id=FD-14071 %\}\})

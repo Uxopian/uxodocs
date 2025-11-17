@@ -1,0 +1,218 @@
+[
+  {
+    "version": "2025.7.0",
+    "majorVersion": "2025",
+    "date": "2025-11-07",
+    "description": "Summary of the changes in version 2025.7.0 of Fast2.",
+    "latest": true,
+    "slug": "release-note-2025-7-0"
+  },
+  {
+    "version": "2025.6.0",
+    "majorVersion": "2025",
+    "date": "2025-10-03",
+    "description": "Summary of the changes in version 2025.6.0 of Fast2.",
+    "latest": false,
+    "slug": "release-note-2025-6-0"
+  },
+  {
+    "version": "2025.5.0",
+    "majorVersion": "2025",
+    "date": "2025-09-05",
+    "description": "Summary of the changes in version 2025.5.0 of Fast2.",
+    "latest": false,
+    "slug": "release-note-2025-5-0"
+  },
+  {
+    "version": "2025.4.1",
+    "majorVersion": "2025",
+    "date": "2025-08-01",
+    "description": "Summary of the changes in version 2025.4.1 of Fast2.",
+    "latest": false,
+    "slug": "release-note-2025-4-1"
+  },
+  {
+    "version": "2025.3.0",
+    "majorVersion": "2025",
+    "date": "2025-07-07",
+    "description": "Summary of the changes in version 2025.3.0 of Fast2.",
+    "latest": false,
+    "slug": "release-note-2025-3-0"
+  },
+  {
+    "version": "2025.2.0",
+    "majorVersion": "2025",
+    "date": "2025-06-06",
+    "description": "Summary of the changes in version 2025.2.0 of Fast2.",
+    "latest": false,
+    "slug": "release-note-2025-2-0"
+  },
+  {
+    "version": "2025.1.0",
+    "majorVersion": "2025",
+    "date": "2025-05-02",
+    "description": "Summary of the changes in version 2025.1.0 of Fast2.",
+    "latest": false,
+    "slug": "release-note-2025-1-0"
+  },
+  {
+    "version": "2025.0.0",
+    "majorVersion": "2025",
+    "date": "2025-04-04",
+    "description": "Summary of the changes in version 2025.0.0 of Fast2.",
+    "latest": false,
+    "slug": "release-note-2025-0-0"
+  },
+  {
+    "version": "2.12.4",
+    "majorVersion": "2",
+    "date": "2025-09-11",
+    "description": "Summary of the changes in version 2.12.4 of Fast2.",
+    "latest": true,
+    "slug": "release-note-2-12-4"
+  },
+  {
+    "version": "2.12.2",
+    "majorVersion": "2",
+    "date": "2024-12-05",
+    "description": "Bugfix before next major version",
+    "latest": false,
+    "slug": "release-note-2-12-2"
+  },
+  {
+    "version": "2.12.1",
+    "majorVersion": "2",
+    "date": "2024-09-27",
+    "description": "Bugfix before next major version",
+    "latest": false,
+    "slug": "release-note-2-12-1"
+  },
+  {
+    "version": "2.12.0",
+    "majorVersion": "2",
+    "date": "2024-05-20",
+    "description": "Bugfix and a lot of evolutions",
+    "latest": false,
+    "slug": "release-note-2-12-0"
+  },
+  {
+    "version": "2.11.0",
+    "majorVersion": "2",
+    "date": "2023-12-13",
+    "description": "New connectors and UX improvement",
+    "latest": false,
+    "slug": "release-note-2-11-0"
+  },
+  {
+    "version": "2.10.0",
+    "majorVersion": "2",
+    "date": "2023-09-01",
+    "description": "",
+    "latest": false,
+    "slug": "release-note-2-10-0"
+  },
+  {
+    "version": "2.9.1",
+    "majorVersion": "2",
+    "date": "2023-06-16",
+    "description": "Fix scheduler issue",
+    "latest": false,
+    "slug": "release-note-2-9-1"
+  },
+  {
+    "version": "2.9.0",
+    "majorVersion": "2",
+    "date": "2023-04-25",
+    "description": "",
+    "latest": false,
+    "slug": "release-note-2-9-0"
+  },
+  {
+    "version": "2.8.0",
+    "majorVersion": "2",
+    "date": "2023-01-10",
+    "description": "",
+    "latest": false,
+    "slug": "release-note-2-8-0"
+  },
+  {
+    "version": "2.7.0",
+    "majorVersion": "2",
+    "date": "2022-10-11",
+    "description": "Stop and restart workers from UI, Filenet injector improvement, addition of Documentum extractor",
+    "latest": false,
+    "slug": "release-note-2-7-0"
+  },
+  {
+    "version": "2.6.0",
+    "majorVersion": "2",
+    "date": "2022-08-03",
+    "description": "Switch from Kibana to Opensearch-Dashboards, simplified transactions with a remote worker, clearest starting prompt ",
+    "latest": false,
+    "slug": "release-note-2-6-0"
+  },
+  {
+    "version": "2.5.0",
+    "majorVersion": "2",
+    "date": "2022-05-04",
+    "description": "Switch from Elasticsearch to OpenSearch, faster results in Explorer, OCR integration, annotation-dedicatd SQL task",
+    "latest": false,
+    "slug": "release-note-2-5-0"
+  },
+  {
+    "version": "2.4.7",
+    "majorVersion": "2",
+    "date": "2022-03-10",
+    "description": "Annotations conversion, PatternResolver in Sources, memory management, ARender upgrade, UI/UX improvements",
+    "latest": false,
+    "slug": "release-note-2-4-7"
+  },
+  {
+    "version": "2.4.6",
+    "majorVersion": "2",
+    "date": "2022-02-11",
+    "description": "Annotations conversion, PatternResolver, FileNet connector, Alfresco metadata query, Alfresco update",
+    "latest": false,
+    "slug": "release-note-2-4-6"
+  },
+  {
+    "version": "2.4.0",
+    "majorVersion": "2",
+    "date": "2021-12-16",
+    "description": "Annotations conversion, ARender dependency, Alfresco REST connector",
+    "latest": false,
+    "slug": "release-note-2-4-0"
+  },
+  {
+    "version": "2.2.9",
+    "majorVersion": "2",
+    "date": "2021-08-02",
+    "description": "JSON serialization, FileNet object-typed properties",
+    "latest": false,
+    "slug": "release-note-2-2-9"
+  },
+  {
+    "version": "2.2.6",
+    "majorVersion": "2",
+    "date": "2021-07-16",
+    "description": "FileNet multiversion",
+    "latest": false,
+    "slug": "release-note-2-2-6"
+  },
+  {
+    "version": "2.2.0",
+    "majorVersion": "2",
+    "date": "2021-06-29",
+    "description": "New icon set, retry punnets feature, Shared Object conversion, ports updated",
+    "latest": false,
+    "slug": "release-note-2-2-0"
+  },
+  {
+    "version": "2.1.0",
+    "majorVersion": "2",
+    "date": "2021-04-21",
+    "description": "Default dashboard in Kibana, Zip task, FileNet annotations",
+    "latest": false,
+    "slug": "release-note-2-1-0"
+  }
+]

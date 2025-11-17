@@ -1,0 +1,200 @@
+---
+title: Release notes
+description: Release notes
+---
+
+
+# Significant changes in 2.8
+
+## Security vulnerabilities
+
+With the aim of improving security within FlowerDocs, several fixes have been made : 
+\{\{% evo id = FD-16162 %\}\} Service Directory password encryption via the CLM
+
+\{\{% fix id = FD-16170 subIds = FD-16223 %\}\} Minor security vulnerabilities fixed on the CLM and administration GUI
+
+## Search enhancements
+
+Several changes have been made to the search function to make it easier and more fluid to use :
+
+\{\{% evo id = FD-16253 %\}\} The “Search” and “Add criteria” buttons are always visible on the screen, regardless of the number of search criteria.
+
+\{\{% evo id = FD-14502 %\}\} Manually added criteria remain displayed until the form is reset. They are saved when a search is saved, so that users can customize their searches even further.
+
+\{\{% evo id = FD-13782 %\}\} New functionality for resetting added and entered search criteria to return to the default search form.
+
+<br />
+
+When criteria are displayed in columns :
+\{\{% evo id = FD-16255 %\}\} Le nombre de résultats par page et le bouton pour ajouter des colonnes sont toujours visibles au-dessus des tableaux quel que soit le nombre de résultats affichés.
+
+\{\{% evo id = FD-16254 %\}\} The number of results per page and the button for adding columns are always visible above the tables, regardless of the number of results displayed.
+
+## SSO
+
+\{\{% evo id = FD-16587 %\}\} When there is an SSO and a directory service, FlowerDocs uses the identifier retrieved from the directory service for all actions performed in FlowerDocs.
+
+## Administration
+
+\{\{% epic id = FD-15971 %\}\} CLM, it is now possible to partially update a scope with the following commands : update-config, update-model, update-report, update-content, update-scope
+
+## WS
+
+\{\{% evo id = FD-16267 %\}\} Full-text search - Exposure of a WS for adding, deleting and updating the textual content of a file retrieved by a third-party application in FlowerDocs.
+
+# Facilitating integration
+
+\{\{% fix id = FD-16187 %\}\} The variable $\{user.authorities\} takes into account all user information: directory groups and FlowerDocs profiles, whatever the context of use.
+
+## Full-text search
+
+\{\{% evo id = FD-16427 %\}\} From the administration GUI, it is possible to configure an external OperationHook that calls a technical component external to FlowerDocs to extract the textual content of documents by filtering on the desired mime types for indexing.
+
+## ScriptOperationHandler
+
+\{\{% fix id = FD-16297 %\}\} Filters are taken into account when executing operation handler scripts.
+
+\{\{% fix id = FD-16299 %\}\} Operation handler scripts can be run on administration components.
+
+## Tasks
+
+\{\{% evo id = FD-16348 %\}\} It is possible to add technical parameters when applying a response to a task. This makes it possible to convey the information required for technical processing without overloading the FlowerDocs data model.
+
+## Default scope
+
+\{\{% task id = FD-16013 %\}\} Added a deliverable containing the basic FlowerDocs scope needed to run the application.
+
+\{\{% task id = FD-16115 %\}\} Add the acl-annotation ACL to the “Annotation” document class to make it easier to understand how annotations security works.
+
+# Bug fixes
+
+## Tags
+
+\{\{% fix id = FD-16344 %\}\} FlowerDocs manages the fact of not displaying suggestions on a read-only tag.
+
+## Menus (Virtual Folders)
+
+\{\{% fix id = FD-16291 %\}\} Counters are always displayed regardless of the size of the label for the various levels (aggregations).
+
+## Results table
+
+\{\{% fix id = FD-16100 %\}\} Display conditional tag labels regardless of the condition performed.
+
+\{\{% fix id = FD-16132 %\}\} Display of the special character “ ‘ “ in table columns.
+
+## Folders (Virtual Folders)
+
+\{\{% fix id = FD-16333 %\}\} Display of the special character “ ‘ “ in the classification plan (aggregations).
+
+## Task
+
+\{\{% fix id = FD-16288 %\}\} Creation of a task after verification of its existence, tooltips are displayed for all tags present in the pop-up.
+
+## History
+
+\{\{% fix id = FD-15861 %\}\} Special characters are correctly displayed.
+
+## Companion Plugin, interface with the Office suite
+
+\{\{% fix id = FD-FD-15322 %\}\} E-mail transfer from Outlook to FlowerDocs is back on track.
+
+\{\{% fix id = FD-16249 %\}\} The Companion plugin works with HTTPS and SSL security.
+
+## RGAA
+
+\{\{% fix id = FD-15786 %\}\} Improved contrast in the “History” pop-up.
+
+\{\{% fix id = FD-16000 %\}\} Reading List tags when they are read-only.
+
+\{\{% fix id = FD-16561 %\}\} Text tags displayed in black when in write mode.
+
+## Administration
+
+\{\{% fix id = FD-15486 %\}\} Conditional tag: it is now possible to condition the display of values according to a component's class identifier.
+
+\{\{% fix id = FD-14965 %\}\} Deleting a report from the GUI is now functional.
+
+\{\{% fix id = FD-15813 %\}\} When deleting a user from a group, confirmation is requested to avoid mistakes.
+
+\{\{% fix id = FD-16454 %\}\} Operation handler - The section is always displayed from the administration GUI.
+
+\{\{% fix id = FD-16184 %\}\} Scope teams are now displayed correctly from the “Identities/Teams” menu in administration.
+
+## WS
+
+\{\{% fix id = FD-16548 %\}\} Adding a document - The addFiles service returns the identifier of the file created, regardless of the versioning mode defined for the document class.
+
+# Known issues
+
+## Search
+
+* Full-text search - After restoring a document version, the content of the restored version is not re-indexed and therefore not searchable.
+* The “Reset” action must not be present on the document search pop-up.
+* The focus remains on the “Reset” action after clicking on it.
+
+
+# Patch versions
+
+## 2.8.1 _03/06/2024_
+
+### :closed_lock_with_key: Security
+
+**ARender version upgrade to 4.8.17 to benefit from the fix to resolve a vulnerability.**
+
+This patch strengthens the application's security and protects our users from potential threats.
+
+For more details, please contact us via our ticketing tool !
+
+### ARender
+
+**ARender version upgrade from 4.8.13 to 4.8.17 to benefit from all the improvements made in the viewer.**
+
+For more information, see the ARender release notes[here](https://hub.arender.io/fr/technical-blog).
+
+
+### RGAA
+
+\{\{% evo id = FD-16647 %\}\} To ensure that the product meets general accessibility requirements for all types of disability, a link to the FlowerDocs accessibility declaration has been added to the avatar menu.
+
+### Bug fixes
+
+\{\{% fix id = FD-16651 %\}\} **:mag_right: Search : “Reset” action removed from pop-ups**
+
+To avoid visual overload on document search pop-ups, the action to reset the search form has been removed.
+<br/><br/>
+
+\{\{% fix id = FD-16436 %\}\} **:mag_right: Full-text search : indexing content after restoration**
+
+It is now possible to search the contents of a document after restoring a version.
+
+In previous versions of the product, following a restore, the associated content was not indexed and therefore not searchable.
+<br/><br/>
+
+\{\{% fix id = FD-16290 %\}\} **RGAA - Improved keyboard navigation on verification pop-ups before creating a task.**
+
+Here's how it works to comply with RGAA rules :
+Existing tasks are checked when the focus is on the “Check” button in the pop-up window.
+
+The pop-up is closed if the user uses the “Esc” key or if the focus is on the “Close” button.
+
+If the focus is in a pop-up field, then when the enter key is pressed, the action is performed in the field (input validation, list scrolling, etc.).
+<br/><br/>
+
+\{\{% fix id = FD-16570 %\}\} **Viewing a document directly in ARender**
+
+When a document is viewed in the viewer in external mode, i.e. without the FlowerDocs forms being displayed, the user rights set up in FlowerDocs are once again taken into account.
+
+Ex: a user who has the right to download or print the document can do so again.
+
+
+## 2.8.2 _27/06/2024_
+
+\{\{% fix id = FD-16915 %\}\} Updating a document without adding content no longer deletes the old content.
+
+## 2.8.3 _31/12/2024_
+
+\{\{% evo id = FD-17349 %\}\} ARender version upgrade from 4.8.17 to 4.8.20 to benefit from all the improvements made in the viewer.
+
+## 2.8.4 _04/03/2025_
+
+\{\{% evo id = FD-17515 %\}\} ARender version upgrade to 4.8.21

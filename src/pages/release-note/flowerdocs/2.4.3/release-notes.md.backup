@@ -1,0 +1,167 @@
+---
+title: Release notes
+description: Release notes
+---
+
+# Evolutions
+
+## GUI
+
+* Optimisation des performances de l'affichage des documents d'un dossier virtuel (\{\{% jira id="FD-12555" %\}\}).
+* Création de dashlet sur la page d'accueil par les utilisateurs (\{\{% jira id="FD-12715" %\}\}).
+* Notification push (\{\{% jira id="FD-12907" %\}\}).
+* Support de langues supplémentaires via l'ajout de fichier de propriété contenant les libellés (\{\{% jira id="FD-12882" %\}\}).
+* Conservation du mode de présentation d'un dossier virtuel (agrégation ou tabulaire) lors de la navigation (\{\{% jira id="FD-12768" %\}\}).
+* Affichage direct des actions secondaires de composant et de recherche lorsqu'il y a suffisamment de place (\{\{% jira id="FD-12762" %\}\}).
+
+* Le champ `classid` est désormais membre du contexte d'un formulaire (\{\{% jira id="FD-12824" %\}\}).
+
+
+
+## Ergonomie
+
+* Navigation au clavier dans les formulaires avec la touche tabulation (\{\{% jira id="FD-12469" %\}\}).
+* Amélioration de la gestion de la touche Entrée dans les popups (\{\{% jira id="FD-11745" %\}\}).
+* Amélioration du redimensionnement des panneaux (\{\{% jira id="FD-12819" %\}\}).
+* Mise en évidence du champ ayant le focus (\{\{% jira id="FD-12835" %\}\}).
+* Fil d'Ariane à gauche et plus contrasté.
+* Critères d'un formulaire de recherche :  
+ * les critères sont affichés sur une seule colonne dès que la taille de la fenêtre est inférieure à `1900px`.
+ * les critères libres peuvent être filtrés.
+ * possibilité de réduire le panneau de critères.
+* Résultats de recherche : 
+ * les actions de téléchargement ont été remontées au dessus des résultats.
+ * le nombre de résultats est affiché directement dans le titre de l'encart.
+ * les en-têtes sont fixes lorsque l'utilisateur scroll (pour les navigateurs le supportant).
+ * augmentation du contraste (en-têtes, lignes sélectionnées...).
+ * le sélecteur de colonnes reste ouvert après la sélection/désélection d'une colonne.
+ * Drag & Drop des colonnes \{\{% beta %\}\}
+ * Conservation des colonnes sélectionnées \{\{% beta %\}\}
+
+
+## Alfresco
+
+* Support des tags de type `ICON` (\{\{% jira id="FD-12778" %\}\}).
+* Support des réservations pour les tâches et dossiers virtuels (\{\{% jira id="FD-12774" %\}\}).
+* Par défaut, les tags techniques ne sont plus propagés d'un composant à un autre (\{\{% jira id="FD-12780" %\}\}).
+* Modifications du modèles par défaut
+ * Tri sur la colonne `assigné à` (\{\{% jira id="FD-12772" %\}\}).
+* Support d'une ACL par défaut sur les classes de composants (\{\{% jira id="FD-12870" %\}\})
+* Par défaut, la gestion de conflit de version Elasticsearch est désactivée (\{\{% jira id="FD-12858" %\}\})
+
+## ARender
+
+* Création de tampon personnalisé par les utilisateurs ayant la permission `CREATE_ANNOTATION` sur le scope (\{\{% jira id="FD-12714" %\}\}).
+* La locale de l'utilisateur est fournie à ARender afin d'adapter la rendition des emails (\{\{% jira id="FD-12976" %\}\})
+
+## CLM
+
+* Lorsque une erreur est renvoyée lors de l'exécution, un code de retour approprié est renvoyé (\{\{% jira id="FD-12600" %\}\}).
+* Import d'objets Kibana (\{\{% jira id="FD-12924" %\}\})
+* Afin de faciliter la gestion de classe de tags avec des valeurs, un nouveau job a été introduit afin d'en générer à partir d'un CSV (\{\{% jira id="FD-12955" %\}\}).
+
+# Corrections
+
+* Modifications de code à travers la console d'administration en utilisant Internet Explorer (\{\{% jira id="FD-12839" %\}\}).
+* Dashlet de type DONUT avec Internet Explorer.
+* Création de tâche à partir d'une sélection de plusieurs composants (\{\{% jira id="FD-12841" %\}\}).
+* Une valeur d'un tag conditionnel pouvait être considérée comme valide si elle n'était pas du tout autorisée (\{\{% jira id="FD-12859" %\}\}).
+* Dans une popup, la scrollbar n'est pas cliquable (\{\{% jira id="FD-12991" %\}\})
+* Le contenu d'un dossier n'est affiché que si l'utilisateur a la permission `READ_CONTENT` (\{\{% jira id="FD-11994" %\}\}).
+
+# Correctifs 
+
+## 2.4.3.1 _20/01/2020_
+
+###  GUI
+
+* Amélioration des performances des champs conditionnels (\{\{% jira id="FD-13047" %\}\}).
+* L'affichage des favoris est fait de façon asynchrone (\{\{% jira id="FD-13048" %\}\}).
+* Le scroll est fonctionnel dans les résultats de recherche sur Firefox (\{\{% jira id="FD-13078" %\}\}).
+* Amélioration de l'affichage des popups de création de tampons et dashlets sur Internet Explorer (\{\{% jira id="FD-13050" %\}\}).
+
+### Alfresco 
+
+* Augmentation du nombre maximum d'objets à remonter lors de la récupération de la configuration, des pièces jointes de tâche (\{\{% jira id="FD-12913" %\}\},\{\{% jira id="FD-13076" %\}\}, \{\{% jira id="FD-13028" %\}\}). 
+* Désactivation de la décoration des tags multivalués et meilleure gestion de la surcharge de la valeur par défaut (\{\{% jira id="FD-13046" %\}\}).
+
+### ARender
+
+* Le menu ARender est correctement affiché lorsque l'environnement a des lenteurs (\{\{% jira id="FD-13043" %\}\}).
+* Le profil fourni via intégration à ARender est fourni en mode externe (\{\{% jira id="FD-13045" %\}\}).
+
+## 2.4.3.2 _06/02/2020_
+
+### Ergonomie 
+
+* Le calendrier d'un tag de type Date est désormais internationalisé (\{\{% jira id="FD-13108" %\}\}).
+* Le menu de vertical reste replié lorsque l'utilisateur redimensionne les différents panneaux de l'application (indexation, visionneuse, recherche, ...) (\{\{% jira id="FD-12988" %\}\}). 
+* Amélioration du support mobile et de la gestion du scroll (\{\{% jira id="FD-13112" %\}\}, \{\{% jira id="FD-13118" %\}\}).
+
+### Tag conditionnel 
+
+* Le champ de recherche des champs conditionnel est à nouveau fonctionnel (\{\{% jira id="FD-13100" %\}\}).
+* Les valeurs autorisées des champs conditionnels sont triées par ordre alphabétique (\{\{% jira id="FD-13099" %\}\}).
+* Les valeurs affichées lors d'un export de résultat de recherche des tags conditionnels sont localisées (\{\{% jira id="FD-12928" %\}\}). 
+* Restriction la liste de valeurs autorisées d'un tag conditionnel en JS (\{\{% jira id="FD-12940" %\}\}).
+
+### Internet Explorer 11
+
+* Amélioration de la gestion de l'historique des recherches via mot-clés dû à la restriction de taille d'URL avec Internet Explorer (\{\{% jira id="FD-13090" %\}\}).
+* Les pièces jointes de tâches sont affichées dans l'ordre d'ajout et non de façon aléatoire (\{\{% jira id="FD-13084" %\}\}).
+
+### Autres
+
+* L'action de téléchargement au format natif est affichée lorsque le document n'est pas un PDF (\{\{% jira id="FD-12928" %\}\}).
+* Lors de la navigation entre une recherche et une recherche en popup, la sauvegarde de la recherche suivante n'est plus la dernière ouverte mais la recherche courante  (\{\{% jira id="FD-13126" %\}\}).
+
+## 2.4.3.3 _25/02/2020_
+
+### Ergonomie
+
+* La section de tampon personnalisé n'est affiché que si l'utilisateur a des tampons personnalisés ou qu'il peut en créer (\{\{% jira id="FD-13098" %\}\}).
+* Les critères fixes ne sont plus affiché dans le sélecteur de critères additionnels (\{\{% jira id="FD-13130" %\}\}).
+* Les critères additionnels sont triés par ordre alphabétique (\{\{% jira id="FD-13131" %\}\}).
+
+### Internet Explorer 11
+
+* Amélioration des performances de chargements du tableau de résultats de recherche (\{\{% jira id="FD-13149" %\}\}).
+* Amélioration de l'affichage d'une entrée de l'historique si elle est longue (\{\{% jira id="FD-13106" %\}\}).
+* Les popups n'apparaissent plus avec une transparence (\{\{% jira id="FD-13049" %\}\}).
+
+### Dossier virtuel 
+
+* La tentative d'affichage d'un document pour lequel l'utilisateur n'est pas autorisé à voir le contenu masque la visionneuse (\{\{% jira id="FD-13151" %\}\}).
+* Le panel de chargement est correctement masqué lors du clic sur le chevron dans l'arborescence du dossier virtuel (\{\{% jira id="FD-13141" %\}\}).
+
+### Alfresco
+
+* La récupération des favoris est fonctionnel avec Alfresco (\{\{% jira id="FD-13042" %\}\}).
+
+## 2.4.3.4 _26/02/2020_
+* Correction d'une régression introduite en 2.4.3.3 empêchant l'ouverture d'un composant depuis une recherche en double cliquant dessus (\{\{% jira id="FD-13164" %\}\}).
+
+## 2.4.3.5 _13/03/2020_
+### ARender 
+
+* **Montée de version ARender : 4.0.4-2** (\{\{% jira id="FD-13163" %\}\}).
+* L'erreur lors de la mise à jour d'une annotation non autorisée ne bloque pas les futures mise à jour d'annotation (\{\{% jira id="FD-13191" %\}\}).
+
+### Sécurité 
+
+* Correction d'une faille XSS (\{\{% jira id="FD-13189" %\}\}).
+* Correction d'exposition de données (\{\{% jira id="FD-13188" %\}\} et \{\{% jira id="FD-13190" %\}\} ).
+
+### Autres 
+
+* Le *drag and drop* d'un fichier sur une pièce jointe de tâche initialise la popup de création du document avec le nom du fichier (\{\{% jira id="FD-13176" %\}\}).
+* Correction d'une régression introduite en 2.4.3.3 affichant un tableau sans colonnes dans la corbeille de purge (\{\{% jira id="FD-13184" %\}\}).
+
+## 2.4.3.6 _15/06/2020_
+
+* L'ajout de composant à une pièce jointe de tâche multivaluée ne peut plus mener à une duplication des références vers les composants déjà attachés à cette pièce jointe (\{\{% jira id="FD-13372" %\}\}).
+
+## 2.4.3.7 _19/06/2020_
+
+* Le endpoint ARender permettant de vérifier l'état de la rendition est accessible sans authentification (\{\{% jira id="FD-13383" %\}\}).
+* Le filtre de vérification du scope peut être désactivé (\{\{% jira id="FD-13384" %\}\}).

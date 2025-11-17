@@ -1,0 +1,293 @@
+---
+title: Release notes
+description: Release notes
+---
+
+:::info
+\{\{% evo %\}\} Les évolutions, \{\{% fix %\}\} corrections d'anomalies et \{\{% task %\}\} tâches incluses dans cette version sont listées dans cette section.
+:::
+
+
+# Changements importants de la 2.6.0
+## Montées de versions
+
+Afin de profiter des correctifs de sécurité, des nouvelles fonctionnalités et de versions supportées par leurs éditeurs, les montées de versions suivantes ont été effectuées : 
+\{\{% evo id = FD-14570 %\}\} ARender 4.8.5
+
+\{\{% evo id = FD-14257 %\}\} Redis 6.2.7
+
+\{\{% evo id = FD-14256 %\}\} Spring Boot 2.5.14
+
+\{\{% evo id = FD-14535 %\}\} FontAwesome 6.1.1
+
+\{\{% evo id = FD-13819 %\}\} JDK11
+
+## Migration de Elasticsearch 5.2 vers OpenSearch 
+
+\{\{% evo id = FD-14255 %\}\} Support d'OpenSearch 1.3.4 
+
+\{\{% evo id = FD-14431 %\}\} Support d'OpenSearch Dashboards pour l'affichage des rapports
+<br /><br />
+\{\{% evo id = FD-14273 subIds = FD-14391 %\}\} Afin de faciliter et automatiser la montée de version suite au support d'OpenSearch au profit d'Elasticsearch, un job de migration est intégré au CLM. 
+
+## Configuration
+
+\{\{% evo id = 14753 %\}\} La propriété `autoAssign` est maintenant portée par la classe de tâche et plus par la configuration de l'activité de l'interface graphique. 
+
+## Interface graphique 
+
+\{\{% evo id = FD-14510 subIds = FD-14583,FD-14548,FD-14622 %\}\} Dans notre volonté de mise en conformité avec le RGAA, les contrastes ont été réhaussés et les couleurs de FlowerDocs variabilisées afin de permettre la personnalisation de FlowerDocs en toute simplicité.
+
+## Sécurisation applicative
+
+\{\{% evo id = FD-14438 subIds = FD-14538 %\}\} FlowerDocs Core expose un ensemble de services pouvant être consommés via différents clients. La cohérence d'évaluation des permissions de l'utilisateur courant a été amélioré quel que soit le client utilisé.
+
+## Documentation
+
+Dans une volonté de faciliter le support et les intégrations sur la version 2.5.4 de FlowerDocs, la documentation de cette version reste disponible \{\{% new-tab title ="ici" url = https://flowerdocs.com/lts/documentation/ %\}\} jusqu'à la sortie de la prochaine version majeure. 
+
+# Fonctionnalités clés 
+## Traitement en série 
+
+\{\{% evo id = FD-14246 %\}\} Un traitement plus performant des composants : le traitement des composants en série. Au cours d'une session de traitement d'une liste de composants l'utilisateur passe au composant suivant sans revenir sur la place ayant initiée la session.
+
+\{\{<comment>\}\}
+## WEBEditor / MailEditor
+
+\{\{% evo id = FD-14308 %\}\} WEBEditor : Création et édition de contenu depuis FlowerDocs. 
+
+\{\{% evo id = FD-14308 %\}\} MailEditor : Envoi de mail depuis FlowerDocs. **Dépréciation de l'usage du plugin Plume**.
+
+<br />
+
+Les deux plugins s’ouvrent dans un OffMenu pour permettre à l’utilisateur de mettre en pause l’édition de contenu et de le reprendre au moment opportun. Il permet également de chercher la ou les pièces jointes adéquates dans FlowerDocs.
+
+<br />
+
+*Plus d'informations bientôt dans la \{\{% new-tab title ="FlowerDocs Academy" url = /documentation/learn %\}\}.*
+\{\{</comment>\}\}
+
+## Nouveau mode d'affichage de contenu 
+
+\{\{% evo id = FD-14310 subIds = FD-14618 %\}\} Cette nouvelle version intègre un tout nouveau mode d'affichage de contenu : le OffMenu. 
+
+<br/>
+
+Ses objectifs : permettre la consultation d'informations en parallèle et répondre à de nombreux cas d'usage à forte navigation. Comment ? Grâce à un mode d'affichage de contenu dans un panneau latéral repliable et conservable au cours de la navigation. 
+
+## Recherche plein texte
+
+\{\{% evo id = FD-14205 %\}\} Refonte de la fonctionnalité de recherche plein texte 
+
+\{\{% evo id = FD-14205 %\}\} Extraction de contenu des documents textuels et OCRisation des images avec un OperationHandler  
+
+## FlowerDocs Companion
+
+\{\{% task id = FD-14760 subIds = FD-14623 %\}\} Refonte du plugin Office désormais nommé FlowerDocs Companion. Support de Microsoft Excel, Microsoft PowerPoint et édition de contenu font parties de ses nouvelles fonctionnalités. 
+
+# Changelog 
+
+## GUI 
+### Versioning  
+
+\{\{% evo id = FD-14218 %\}\} La gestion de promotion des versions d'un document est maintenant possible par les utilisateurs en fonction de la stratégie définie sur la classe de document. \{\{% documentation url = apis/jsapi/version %\}\}.
+
+\{\{% fix id = FD-14715 %\}\} Absence de génération d'identifiant de version lors de la création d'un document dans le cas où le moteur génère déjà cet identifiant. 
+
+### ARender 
+
+\{\{% evo id = FD-14094 %\}\} Afin de faciliter la saisie des utilisateurs et réduire les erreurs de saisie, FlowerDocs intègre la fonctionnalité de Lasso d'ARender. Ainsi, la sélection de valeurs dans le contenu du document visualisé permet de remplir les tags du composant ouvert. 
+
+\{\{% evo id = FD-14647 %\}\} Désactivation des appels à la page mère d'ARender par configuration  
+
+\{\{% fix id = FD-14601 %\}\} L'ouverture de fichier externe dans ARender ne doit pas être possible.
+
+\{\{% fix id = FD-14627 %\}\} La sélection d'une pièce jointe de tâche affiche son contenu dans ARender. Dans un cas particulier, ceci n'avait pas lieu. 
+
+### Expérience utilisateur 
+
+\{\{% evo id = FD-14480 %\}\} Refonte des icônes des actions d'assignation
+
+\{\{% fix id = FD-14566 %\}\} Les vignettes ont toutes la même taille. Leur titre est tronqué suite au manque d'espace et est lisible au survol.
+
+\{\{% fix id = FD-14565 %\}\} Les icônes des enveloppes dans les tableaux de résultats de recherche ont les couleurs souhaitées.
+
+\{\{% fix id = FD-14636 %\}\} Les critères de recherche sont affichés une seule fois lors de l'ouverture d'un recherche depuis un Dashlet.
+
+\{\{% fix id = FD-14656 %\}\} Un message d'erreur du chargement de contenu est affiché à l'utilisateur lorsque celui-ci échoue
+
+\{\{% fix id = FD-14360 %\}\} Le menu est chargé correctement dans le cas où des onglets sont non résolus.
+
+### Favoris 
+
+\{\{% evo id = FD-14196 %\}\} Le menu des favoris, déjà présent dans les versions antérieures, a évolué pour permettre une consultation de tous les favoris organisés selon leur catégorie. Leur gestion en est aussi améliorée avec la possibilité d'en supprimer directement depuis le menu sans nécessiter la réouverture du composant.
+
+\{\{% fix id = FD-14319 %\}\} Le chargement des favoris est terminé en cas d'erreur à la récupération de ceux-ci.
+
+\{\{% fix id = FD-14149 %\}\} Le fil d'Ariane est correctement mis à jour lors de l'ouverture d'un favori.
+
+## Intégration 
+### API JS 
+
+\{\{% evo id = FD-14619 %\}\} L'API JS de FlowerDocs permet de construire des formulaires d'indexation de composants
+
+
+\{\{% fix id = FD-14524 %\}\} La valeur d'un tag ayant des suggestions ajoutées en intégration est modifiable via l'API JS
+
+<br />
+
+\{\{% evo id = FD-13376 %\}\} Plusieurs plugins d'attachement de pièces jointes de tâches sont désormais disponibles : 
+
+* \{\{% evo id = FD-13376 %\}\} l'ajout d'un composant déjà présent en GED basé sur une recherche
+* \{\{% evo id = FD-14634 %\}\} la création/édition d'un composant via le WEBEditor
+* \{\{% evo id = FD-14635 %\}\} l'édition d'un document à partir d'un modèle via FlowerDocs Companion
+* \{\{% evo id = FD-14620 %\}\} Un plugin de visualisation des métadonnées des pièces jointes dans un OffMenu
+
+### Opérations
+
+\{\{% evo id = FD-13764 %\}\} Le service des `Features` est accessible depuis les `OperationHandlers`
+
+
+### Workflow 
+
+\{\{% evo id = FD-14321 %\}\} Les processus Camunda peuvent réagir à la création d'un utilisateur
+
+\{\{% evo id = FD-14334 %\}\} Une tâche de purge périodique de l'historique de connexion est disponible dans Camunda 
+
+\{\{% fix id = FD-14385 %\}\} Le scope est toujours fourni aux tâches de type Script dans Camunda
+
+\{\{% evo id = FD-14278 %\}\} Lancement d'un processus possible depuis l'administration des processus
+
+## Sécurité 
+
+###  GUI
+
+\{\{% evo id = FD-14609 %\}\} Support des ACL proxys pour l'évaluation des permissions lors de l'affichage des actions du menu contextuel  
+
+\{\{% evo id = FD-14637 %\}\} L'affichage d'un panneau de chargement empêche toutes actions utilisateur durant la suppression d'un composant 
+
+\{\{% fix id = FD-14651 %\}\} Il n'est plus possible de détacher un composant ouvert en lecture seule d'un dossier
+
+\{\{% fix id = FD-14603 %\}\} Désactivation des actions de sauvegarde et de réponse des tâches jusqu'à l'obtention d'une tâche valide
+
+\{\{% fix id = FD-14736 %\}\} La mise à jour du titre d'un composant sans classe valide ne modifie plus la validité du composant.  
+
+\{\{% fix id = FD-13390 %\}\} La validité d'une popup de création de composant prend en compte son titre. 
+
+\{\{% fix id = FD-14537 %\}\} La déconnexion est effectuée sur tous les onglets
+
+### Connexions 
+
+\{\{% evo id = FD-14332 %\}\} Enregistrement des connexions par OAuth2 dans l'historique de connexion 
+
+\{\{% fix id = FD-14658 %\}\} La désactivation de l'évaluation du paramètre `nonce` n'est plus possible.
+
+## Performance 
+
+\{\{% evo id = FD-14331 %\}\} Le contenu temporaire d'un document en création est déplacé si possible afin d'éviter de multiples étapes d'écriture 
+
+\{\{% fix id = FD-14626 %\}\} Une seule requête est envoyée à l'ouverture d'une popup de recherche. 
+
+\{\{% fix id = FD-14591 %\}\} Les polices utilisées dans FlowerDocs sont maintenant toutes incluses dans le produit sans être chargées par des sites externes
+
+## Exploitation
+
+\{\{% evo id = FD-14705 %\}\} Support du service AWS ElastiCache en lieu et place de Redis.
+
+\{\{% evo id = FD-14640 %\}\} Le endpoint de `health` est exposée sans authentification requise pour les applications portant l'annotation `@FlowerDocsClient` 
+
+\{\{% evo id = FD-14285 %\}\} Pour une lecture facilitée et une analyse simplifiée, les logs client sont déobfusqués.
+
+\{\{% evo id = FD-14679 %\}\} Clarification des erreurs des classes de composants
+
+# Correctifs
+
+## 2.6.0.1 _26/10/2022_
+
+### Évolution
+\{\{% evo id = FD-14911 %\}\} Montée de version ARender 4.8.7
+
+\{\{% evo id = FD-14599 %\}\} Création de `réponse avec motif` avec tags depuis la JSAPI FlowerDocs
+
+\{\{% evo id = FD-14888 %\}\} Ajout de la classe `java.lang.Runnable` à la liste des classes chargées et utilisables par les Drools, scripts etc.
+
+### Anomalie
+
+\{\{% fix id = FD-14668 %\}\} Le statut d'un composant est conservée lors de la création  
+
+\{\{% fix id = FD-14704 %\}\} Paramétrage du client TCP de Redis
+
+\{\{% fix id = FD-14787 %\}\} Restauration des délégations pour toute action sur les tâches
+
+\{\{% fix id = FD-14788 %\}\} L'action de lasso est accessible uniquement pour les champs éditables
+
+\{\{% fix id = FD-14806 %\}\} Le cadenas indique que le composant est réservé par un autre utilisateur
+
+\{\{% fix id = FD-14871 %\}\} Les titres des composants sont editables en fonction du context `IdBasedContext`
+
+\{\{% fix id = FD-14880 %\}\} Restauration de l'auto assignation avec Alfresco
+
+\{\{% fix id = FD-14882 %\}\} Gestion des erreurs OpenSearch 
+
+\{\{% fix id = FD-14885 %\}\} Traduction du libellé d'auto assignation
+
+\{\{% fix id = FD-14887 %\}\} Les tags des tâches sont toujours affichés avant les pièces jointes
+
+\{\{% fix id = FD-14889 %\}\} Restauration de la résolution des plugins d'IHM
+
+\{\{% fix id = FD-14897 %\}\} Restauration de la route Plume jusqu'à la fin de son support
+
+\{\{% fix id = FD-14908 %\}\} Le CLM utilise les même configuration Jasypt que \{\{% core %\}\}
+
+\{\{% fix id = FD-14918 %\}\} Application de réponses à une tâche sans erreur
+
+\{\{% fix id = FD-14931 %\}\} Restauration de l'affichage de la description de l'application
+
+\{\{% fix id = FD-14933 %\}\} La tâche en édition prend en compte les modifications effectuées par un `OperationHandler` à l'assignation
+
+\{\{% fix id = FD-14934 %\}\} Les actions effectuées lors de l’application d’une réponse via un `OperationHandler` ne sont pas soumises aux droits de l’utilisateur
+
+### Tâche
+
+\{\{% task id = FD-14811 %\}\} Restauration de la création de tâche empreinte de workflow
+
+\{\{% task id = FD-14875 %\}\} Le libellé de l'action de plein écran du `MailEditor` est positionné à droite pour éviter d'être tronqué
+
+## 2.6.0.2 _21/11/2022_
+
+### Évolution
+
+\{\{% evo id = FD-15052 %\}\} La notion de `lecture seule` des tags et pièces jointes est uniquement vérifiée par l'IHM 
+
+\{\{% evo id = FD-15053 %\}\} La liste de classes pouvant être créées pour les pièces jointes autorisant toutes les classes peut désormais être filtrée
+
+### Anomalie
+
+\{\{% fix id = FD-14961 %\}\} La réservation d'un composant est supprimée lors de la déconnexion de l'utilisateur
+
+\{\{% fix id = FD-14963 %\}\} Le mapping des index est migré lors de la migration ElasticSearch vers OpenSearch 
+
+\{\{% fix id = FD-14975 %\}\} Restauration de la visualisation du contenu de tous les niveaux d’arborescences d’un dossier virtuel dans ARender
+
+\{\{% fix id = FD-15040 %\}\} L'action de Lasso n'est plus affichée sur les champs affichés en `lecture seule` grâce à l'API JS
+  
+\{\{% fix id = FD-15051 %\}\} Restauration du mode MultiDAO bloquant le démarrage de FlowerDocs Core
+
+## 2.6.0.3 _21/12/2022_
+
+### Évolution
+
+\{\{% evo id = FD-15092 %\}\} Le job de réindexation du CLM `reindex` dispose d'une option permettant la réindexation des rapports Kibana ou non `--reindexation.reportings.enabled=true` (par défaut désactivé)
+
+\{\{% evo id = FD-15122 %\}\} Ajout de logs d'erreur sur l'authentification OpenId Connect facilitant l'analyse
+
+### Anomalie
+
+\{\{% fix id = FD-14909 %\}\} L'action de Lasso est affichée après le changement de classe d'un composant
+
+\{\{% fix id = FD-15058 %\}\} L'action de Lasso est affichée une seule fois sur les dossiers virtuels
+
+\{\{% fix id = FD-15038 %\}\} Le job de réindexation du CLM `reindex` pour passer d'Elasticsearch à OpenSearch gère la transformation du mapping des données
+
+\{\{% fix id = FD-15096 %\}\}  L'action de Lasso n'est plus affichée sur les tags en lecture seule à la création d'un composant
+

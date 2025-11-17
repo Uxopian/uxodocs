@@ -1,0 +1,60 @@
+---
+title: Release notes
+description: Release notes
+---
+
+# Dossier virtuel 
+
+* Historisation de la requête de recherche (\{\{% jira id="FD-12016" %\}\} et \{\{% jira id="FD-12235" %\}\}).
+
+# Dossier
+
+* Indexation multiple après *Glisser Déposer* d'un dossier ou plusieurs fichiers (\{\{% jira id="FD-11991" %\}\}). *Avec Internet Explorer, le Glisser Déposer d'un dossier n'est pas possible à cause d'une limitation navigateur, il faut effectuer le Glisser Déposer avec le contenu de ce dossier*.
+* Historisation du tri des tableaux de recherche (\{\{% jira id="FD-12235" %\}\}).
+
+# Tâche 
+
+* La touche **Entrée** valide une réponse avec motif et ne l'annule plus (\{\{% jira id="FD-11791" %\}\}).
+* Les tâches de tâches n'ayant pas de pièces jointes ne bloquent plus l'affichage d'ARender (\{\{% jira id="FD-12152" %\}\}).
+
+# Document 
+
+* Téléchargement de tout les contenus du document et non plus uniquement le premier (\{\{% jira id="FD-12231" %\}\}).
+
+# Recherche
+
+* Lors du téléchargement au format CSV ou ZIP, la requête de recherche n'est plus fournie en tant que paramètre d'URL mais dans le corps de la requête pour contourner les limitations de taille d'URL d'Internet Explorer (\{\{% jira id="FD-12312" %\}\} et \{\{% jira id="FD-12323" %\}\}).
+* Un champ conditionné par un autre champ est réinitialisé lorsqu'aucune valeur n'est sélectionnée dans l'autre champ (\{\{% jira id="FD-12314" %\}\}). 
+* Les critères de type **Date** avec un opérateur **Entre** ne peuvent plus être envoyés sans valeurs au serveur (\{\{% jira id="FD-12359" %\}\}).
+* Historisation de la requête de recherche (\{\{% jira id="FD-12016" %\}\} et \{\{% jira id="FD-12235" %\}\}).
+
+# ARender 
+
+* Ajout de tampons par équipe, groupe ou utilisateur (\{\{% jira id="FD-12067" %\}\}).
+* Lors de l'ajout d'une pièce jointe à une tâche, celle-ci est sélectionnée et affichée dans ARender (\{\{% jira id="FD-12346" %\}\}).
+
+# \{\{% core %\}\}
+
+* Un DroolsOperationHandler n'est parsé qu'à son premier chargement puis mis en cache (\{\{% jira id="FD-12292" %\}\}).
+* L'héritage de groupe LDAP est désormais supporté (\{\{% jira id="FD-12076" %\}\}).
+* Le changement de mot de passe lorsque l'application est déployée sous forme de deux applications Web est fonctionnel (\{\{% jira id="FD-12233" %\}\}).
+* Lors de la suppression de document, les fichiers associés dans Elasticsearch sont supprimés (\{\{% jira id="FD-12268" %\}\}).
+
+# IHM 
+
+* Diverses améliorations de style (\{\{% jira id="FD-12293" %\}\}, \{\{% jira id="FD-12283" %\}\}) 
+* La taille des URL a été réduite grâce à l'abréviation des différents paramètres (\{\{% jira id="FD-12365" %\}\}).
+
+# Administration
+
+* Les équipes peuvent être supprimées d'un scope sans avoir à modifier un autre champ (\{\{% jira id="FD-12233" %\}\})
+* 2 équipes ou ACLs avec des noms d'affichage identiques n'entrent plus en conflit lors de leur affichage (\{\{% jira id="FD-12159" %\}\}).
+
+# Alfresco 
+
+* Configuration des timeouts du client HTTP (\{\{% jira id="FD4AL-126" %\}\}).
+* Support de la date de mise à jour dans les résultats de recherches (\{\{% jira id="FD4AL-122" %\}\}).
+* Support de la recherche plein texte (\{\{% jira id="FD4AL-117" %\}\}).
+* Un utilisateur est toujours remonté avec ses groupes, et non uniquement lorsqu'un administrateur (\{\{% jira id="FD4AL-127" %\}\}).
+* Le contenu d'un document FlowerDocs est téléchargé avec le nom du document dans Alfresco (\{\{% jira id="FD4AL-125" %\}\}).
+

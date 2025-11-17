@@ -1,106 +1,251 @@
 .productsSection {
-    padding: 4rem 0;
-    background: white;
+    padding: 3rem 0 4rem;
+    min-height: calc(100vh - var(--ifm-navbar-height));
+    position: relative;
+    overflow: hidden;
+}
+
+.backgroundWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.backgroundLight,
+.backgroundDark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.3s ease;
+}
+
+.backgroundLight {
+    opacity: 1;
+}
+
+.backgroundDark {
+    opacity: 0;
+}
+
+[data-theme='dark'] .backgroundLight {
+    opacity: 0;
+}
+
+[data-theme='dark'] .backgroundDark {
+    opacity: 1;
+}
+
+.backgroundLight::before,
+.backgroundDark::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme='dark'] .backgroundDark::before {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.backgroundLogo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 1;
+}
+
+[data-theme='dark'] .backgroundLogo {
+    opacity: 0.08;
+}
+
+.productsSection>.container {
+    position: relative;
+    z-index: 2;
 }
 
 .mainTitle {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--ifm-font-color-base);
+    margin-bottom: 0.75rem;
     text-align: center;
 }
 
 .subtitle {
     font-size: 1.1rem;
-    color: #7f8c8d;
-    margin-bottom: 3rem;
+    color: var(--ifm-color-emphasis-700);
+    margin-bottom: 2.5rem;
     text-align: center;
+    opacity: 0.85;
 }
 
 .cardsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 1rem;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
 }
 
 .card {
     background: white;
-    border: 1px solid #e1e8ed;
-    border-radius: 12px;
-    padding: 2.5rem;
-    transition: all 0.3s ease;
-    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    text-align: center;
+    flex: 1 1 280px;
+    max-width: 320px;
+    min-width: 260px;
+    min-height: 400px;
+    position: relative;
+    z-index: 10;
+}
+
+[data-theme='dark'] .card {
+    background: #2a2a2a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover {
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
-    border-color: #ddd;
-    transform: translateY(-3px);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+}
+
+[data-theme='dark'] .card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .cardHeader {
-    margin-bottom: 1.5rem;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    display: block;
+.cardHeader::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.logoWrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
 .cardTitle {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-}
-
-.underline {
-    width: 60px;
-    height: 4px;
-    margin: 0 auto 1rem auto;
-    border-radius: 2px;
+    color: white;
+    margin: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .cardDescription {
-    color: #7f8c8d;
-    font-size: 1.1rem;
+    color: var(--ifm-color-emphasis-700);
+    font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 2rem;
+    padding: 1.5rem 2rem;
     flex-grow: 1;
+}
+
+[data-theme='dark'] .cardDescription {
+    color: var(--ifm-color-emphasis-600);
 }
 
 .cardLink {
     font-weight: 600;
     text-decoration: none;
     font-size: 1rem;
-    padding: 12px 24px;
-    border-radius: 6px;
+    padding: 0.75rem 2rem;
+    margin: 0 2rem 2rem;
+    border-radius: 8px;
     border: 2px solid;
     transition: all 0.3s ease;
     display: inline-block;
+    text-align: center;
+    background: transparent;
 }
 
 .cardLink:hover {
-    background-color: currentColor;
+    background-color: var(--card-color);
     color: white !important;
     text-decoration: none;
-    transform: translateY(-1px);
+    transform: scale(1.02);
+    border-color: var(--card-color);
+}
+
+@media (max-width: 1200px) {
+    .cardsGrid {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 996px) {
+    .cardsGrid {
+        flex-direction: column;
+        max-width: 500px;
+    }
+
+    .card {
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
-    .cardsGrid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
     .mainTitle {
         font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
     }
 }

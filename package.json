@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node ./scripts/generateSecondaryNav.mjs && node ./scripts/generateTopCategories.mjs",
+    "prebuild": "node ./scripts/generateSecondaryNav.mjs && node ./scripts/generateTopCategories.mjs && node ./scripts/generateFast2Releases.mjs && node ./scripts/generateFlowerDocsReleases.mjs",
     "generate:topCategories": "node ./scripts/generateTopCategories.mjs",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",

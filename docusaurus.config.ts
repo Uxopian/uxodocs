@@ -106,9 +106,9 @@ const config: Config = {
         { type: 'docsVersionDropdown', docsPluginId: 'flowerdocs', position: 'left', className: 'verdd verdd--flowerdocs' },
         { type: 'docsVersionDropdown', docsPluginId: 'uxopian-ai', position: 'left', className: 'verdd verdd--uxopian-ai' },
 
+        { to: '/releases', label: 'Release Notes', position: 'right' },
         { type: 'search', position: 'right' },
 
-        { href: 'https://github.com/corentinlebas45/uxodocs', label: 'GitHub', position: 'right' },
       ],
     },
     footer: {

@@ -1,3 +1,47 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4d106a5f63edf1d9ffbc39fa51a320b5eb8672b2a32819d9355586c7e017ba34
-size 7844
+<svg xmlns="http://www.w3.org/2000/svg" width="670.621" height="622.428" viewBox="0 0 670.621 622.428">
+  <g id="undraw_elements_cipa" transform="translate(0)">
+    <path id="Tracé_5889" data-name="Tracé 5889" d="M415.318,449.781c-24.6,91.33-76.675,171.26-171.26,171.26A171.259,171.259,0,0,1,72.8,449.781c0-94.584,99.692-109.42,171.26-171.26C389.391,152.942,491.71,166.16,415.318,449.781Z" transform="translate(-72.799 -84.904)" fill="#f2f2f2"/>
+    <circle id="Ellipse_1332" data-name="Ellipse 1332" cx="54.674" cy="54.674" r="54.674" transform="translate(338.018 29.945)" fill="#ff6584"/>
+    <rect id="Rectangle_984" data-name="Rectangle 984" width="28.945" height="28.945" transform="translate(462.644 8.236)" fill="#ff6584"/>
+    <ellipse id="Ellipse_1333" data-name="Ellipse 1333" cx="136.686" cy="18.595" rx="136.686" ry="18.595" transform="translate(36.662 517.893)" fill="#3f3d56"/>
+    <rect id="Rectangle_985" data-name="Rectangle 985" width="184.928" height="94.072" transform="translate(211.785 103.917)" fill="#04aeef"/>
+    <circle id="Ellipse_1334" data-name="Ellipse 1334" cx="63.519" cy="63.519" r="63.519" transform="translate(102.436 382.113)" fill="#2f2e41"/>
+    <rect id="Rectangle_986" data-name="Rectangle 986" width="19.297" height="34.574" transform="translate(137.009 495.482)" fill="#2f2e41"/>
+    <rect id="Rectangle_987" data-name="Rectangle 987" width="19.297" height="34.574" transform="translate(175.603 495.482)" fill="#2f2e41"/>
+    <ellipse id="Ellipse_1335" data-name="Ellipse 1335" cx="16.081" cy="6.03" rx="16.081" ry="6.03" transform="translate(137.009 524.427)" fill="#2f2e41"/>
+    <ellipse id="Ellipse_1336" data-name="Ellipse 1336" cx="16.081" cy="6.03" rx="16.081" ry="6.03" transform="translate(175.603 523.623)" fill="#2f2e41"/>
+    <circle id="Ellipse_1337" data-name="Ellipse 1337" cx="21.709" cy="21.709" r="21.709" transform="translate(145.854 407.842)" fill="#fff"/>
+    <circle id="Ellipse_1338" data-name="Ellipse 1338" cx="7.236" cy="7.236" r="7.236" transform="translate(160.326 422.315)" fill="#3f3d56"/>
+    <path id="Tracé_5890" data-name="Tracé 5890" d="M202.339,524.029c-5.129-22.969,11.266-46.179,36.619-51.84s50.063,8.37,55.192,31.339-11.674,31.441-37.026,37.1S207.468,547,202.339,524.029Z" transform="translate(-98 -137.467)" fill="#04aeef"/>
+    <circle id="Ellipse_1339" data-name="Ellipse 1339" cx="63.519" cy="63.519" r="63.519" transform="translate(80.727 199.597)" fill="#2f2e41"/>
+    <rect id="Rectangle_988" data-name="Rectangle 988" width="19.297" height="34.574" transform="translate(115.3 312.966)" fill="#2f2e41"/>
+    <rect id="Rectangle_989" data-name="Rectangle 989" width="19.297" height="34.574" transform="translate(153.894 312.966)" fill="#2f2e41"/>
+    <ellipse id="Ellipse_1340" data-name="Ellipse 1340" cx="16.081" cy="6.03" rx="16.081" ry="6.03" transform="translate(115.3 341.911)" fill="#2f2e41"/>
+    <ellipse id="Ellipse_1341" data-name="Ellipse 1341" cx="16.081" cy="6.03" rx="16.081" ry="6.03" transform="translate(153.894 341.107)" fill="#2f2e41"/>
+    <circle id="Ellipse_1342" data-name="Ellipse 1342" cx="21.709" cy="21.709" r="21.709" transform="translate(124.145 225.326)" fill="#fff"/>
+    <circle id="Ellipse_1343" data-name="Ellipse 1343" cx="7.236" cy="7.236" r="7.236" transform="translate(138.617 239.799)" fill="#3f3d56"/>
+    <path id="Tracé_5891" data-name="Tracé 5891" d="M175.339,297.029c-5.129-22.969,11.266-46.179,36.619-51.84s50.063,8.37,55.192,31.339-11.673,31.441-37.026,37.1S180.468,320,175.339,297.029Z" transform="translate(-92.709 -92.983)" fill="#04aeef"/>
+    <ellipse id="Ellipse_1344" data-name="Ellipse 1344" cx="31.759" cy="9.97" rx="31.759" ry="9.97" transform="matrix(0.357, -0.934, 0.934, 0.357, 182.303, 241.257)" fill="#2f2e41"/>
+    <ellipse id="Ellipse_1345" data-name="Ellipse 1345" cx="9.97" cy="31.759" rx="9.97" ry="31.759" transform="translate(39.735 229.041) rotate(-64.626)" fill="#2f2e41"/>
+    <path id="Tracé_5892" data-name="Tracé 5892" d="M213.4,410.057c0,6.217,16.007,18.493,33.77,18.493s34.416-17.5,34.416-23.719-16.654,1.206-34.416,1.206S213.4,403.841,213.4,410.057Z" transform="translate(-100.351 -124.027)" fill="#fff"/>
+    <rect id="Rectangle_990" data-name="Rectangle 990" width="184.928" height="94.072" transform="translate(229.473 90.248)" fill="none" stroke="#3f3d56" stroke-miterlimit="10" stroke-width="2"/>
+    <rect id="Rectangle_991" data-name="Rectangle 991" width="28.945" height="28.945" transform="translate(472.292 1)" fill="none" stroke="#3f3d56" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Tracé_5893" data-name="Tracé 5893" d="M1084.616,560.3c0,65.792-39.113,88.765-87.36,88.765S909.9,626.092,909.9,560.3s87.36-149.49,87.36-149.49S1084.616,494.507,1084.616,560.3Z" transform="translate(-413.995 -135.527)" fill="#f2f2f2"/>
+    <path id="Tracé_5894" data-name="Tracé 5894" d="M933.234,582.563l.895-55.063,37.235-68.119-37.095,59.483.4-24.759,25.662-49.284-25.556,42.732h0l.724-44.529,27.479-39.236-27.366,32.234.452-81.65-2.84,108.09L933.46,458l-27.939-42.765,27.491,51.325-2.6,49.731-.077-1.32-32.209-45,32.111,49.667-.326,6.219-.058.093.027.51-6.6,126.172H932.1l1.058-65.169,32.033-49.545Z" transform="translate(-353.155 -79.09)" fill="#3f3d56"/>
+    <ellipse id="Ellipse_1346" data-name="Ellipse 1346" cx="30.376" cy="9" rx="30.376" ry="9" transform="translate(543.495 564.538)" fill="#3f3d56"/>
+    <ellipse id="Ellipse_1347" data-name="Ellipse 1347" cx="136.686" cy="18.595" rx="136.686" ry="18.595" transform="translate(300.923 585.238)" fill="#3f3d56"/>
+    <circle id="Ellipse_1348" data-name="Ellipse 1348" cx="63.519" cy="63.519" r="63.519" transform="translate(375.699 445.036)" fill="#2f2e41"/>
+    <rect id="Rectangle_992" data-name="Rectangle 992" width="19.297" height="34.574" transform="translate(468.162 592.979) rotate(180)" fill="#2f2e41"/>
+    <rect id="Rectangle_993" data-name="Rectangle 993" width="19.297" height="34.574" transform="translate(429.568 592.979) rotate(180)" fill="#2f2e41"/>
+    <ellipse id="Ellipse_1349" data-name="Ellipse 1349" cx="16.081" cy="6.03" rx="16.081" ry="6.03" transform="translate(398.962 599.417) rotate(-30)" fill="#2f2e41"/>
+    <ellipse id="Ellipse_1350" data-name="Ellipse 1350" cx="16.081" cy="6.03" rx="16.081" ry="6.03" transform="translate(436.752 599.417) rotate(-30)" fill="#2f2e41"/>
+    <circle id="Ellipse_1351" data-name="Ellipse 1351" cx="21.709" cy="21.709" r="21.709" transform="translate(415.9 470.765)" fill="#fff"/>
+    <circle id="Ellipse_1352" data-name="Ellipse 1352" cx="7.236" cy="7.236" r="7.236" transform="translate(422.979 475.991)" fill="#3f3d56"/>
+    <path id="Tracé_5895" data-name="Tracé 5895" d="M893.427,614.528c5.129-22.969-11.266-46.179-36.619-51.84s-50.063,8.37-55.192,31.339,11.674,31.441,37.027,37.1S888.3,637.5,893.427,614.528Z" transform="translate(-392.595 -165.044)" fill="#04aeef"/>
+    <ellipse id="Ellipse_1353" data-name="Ellipse 1353" cx="9.97" cy="31.759" rx="9.97" ry="31.759" transform="translate(350.444 483.392) rotate(-66.829)" fill="#2f2e41"/>
+    <ellipse id="Ellipse_1354" data-name="Ellipse 1354" cx="9.97" cy="31.759" rx="9.97" ry="31.759" transform="translate(469.441 526.007) rotate(-66.829)" fill="#2f2e41"/>
+    <rect id="Rectangle_994" data-name="Rectangle 994" width="28.945" height="28.945" transform="translate(332.123 448.654)" fill="#ff6584"/>
+    <rect id="Rectangle_995" data-name="Rectangle 995" width="28.945" height="28.945" transform="translate(301.57 397.196)" fill="none" stroke="#3f3d56" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Tracé_5896" data-name="Tracé 5896" d="M848.146,733.084a14.473,14.473,0,1,1-28.945,0c0-7.993,6.48-9.648,14.473-9.648S848.146,725.092,848.146,733.084Z" transform="translate(-396.222 -196.791)" fill="#fff"/>
+  </g>
+</svg>

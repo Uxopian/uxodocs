@@ -1,0 +1,39 @@
+---
+title: Release notes
+description: Release notes
+---
+
+# Page d'accueil
+
+* Rafraichissement des widgets lors de l'ouverture de la page d'accueil (\{\{% jira id="FD-10783" %\}\}).
+
+
+# Formulaires 
+
+* Si la propriété search.template n'a pas de nom alors le titre du formulaire de recherche sera utilisé (\{\{% jira id="FD-11980" %\}\}).
+* Ajout d'un bouton X pour vider les champs de type String et Date (\{\{% jira id="FD-11976" %\}\}). 
+
+# Dossier virtuels
+
+* Les buckets d'agrégation de dossier virtuels permettent d'afficher la recherche associée (\{\{% jira id="FD-11977" %\}\}).
+
+# Configuration
+
+* Le format de date à utiliser peut être défini par classe et référence de tag (\{\{% jira id="FD-11939" %\}\}).
+* Un format de date est maintenant dédié aux informations techniques, (\{\{% jira id="FD-11987" %\}\}). 
+* Le MTOM est désormais désactivable (\{\{% jira id="FD-12015" %\}\}).
+
+# Administration 
+
+* Un identifiant de requête permet de suivre une requête pour un reporting facilité (\{\{% jira id="FD-11988" %\}\}).
+* Afin d'éviter des problème de cache, une version est ajouté lors de la récupération des scripts internes à FlowerDocs (\{\{% jira id="FD-12111" %\}\}).
+
+# \{\{% core %\}\}
+
+* Augmentation du nombre de faits d'historique à afficher (auparavant limité à 10) (\{\{% jira id="FD-12094" %\}\}).
+* L'affichage des reporting Kibana et les plugins externes passent par un proxy permettant de gérer la sécurité (\{\{% jira id="FD-12056" %\}\}, \{\{% jira id="FD-12057" %\}\}). 
+* Un mécanisme de préférence utilisateur a été mis en place. La première utilisation de celui-ci est la notion de composant favoris (\{\{% jira id="FD-11978" %\}\}).
+
+# Sécurité
+
+* Les mots de passe avec des caractères spéciaux permettent de se connecter à FlowerDocs  (\{\{% jira id="FD-12103" %\}\}).
