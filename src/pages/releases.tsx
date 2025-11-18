@@ -16,11 +16,11 @@ const products = [
     },
     {
         name: 'ARender',
-        version: 'v2023.14.0',
+        version: 'v2023.15.0',
         icon: '/img/arender/arender_logo_white.png',
         color: '#4A8FEF',
         gradient: 'linear-gradient(135deg, #4A8FEF, #3A7EE5, #2A6DD8, #1865D8)',
-        releaseNotesLink: '/docs/arender/releases',
+        releaseNotesLink: '/releases/arender',
     },
     {
         name: 'FlowerDocs',

@@ -1,0 +1,50 @@
+[
+  {
+    "version": "v2023.15.0",
+    "title": "ARender v2023.15.0 – Release Notes",
+    "date": "2025-10-31",
+    "description": "Minor release introducing major stability fixes, enhancements to hyperlink creation, and important",
+    "slug": "/release-note/arender/v2023.15.0/release-notes",
+    "hasUpgradeNotes": true
+  },
+  {
+    "version": "v2023.14.0",
+    "title": "ARender v2023.14.0 – Release Notes",
+    "date": "2025-09-30",
+    "description": "Minor release with fixes for text and PDF rendering issues, hyperlink behavior, digital signature display,",
+    "slug": "/release-note/arender/v2023.14.0/release-notes",
+    "hasUpgradeNotes": true
+  },
+  {
+    "version": "v2023.13.0",
+    "title": "ARender v2023.13.0 – Release Notes",
+    "date": "2025-08-29",
+    "description": "Minor release including fix for wrong text selection coordinates and new JVM options for session affinity",
+    "slug": "/release-note/arender/v2023.13.0/release-notes",
+    "hasUpgradeNotes": true
+  },
+  {
+    "version": "v2023.12.0",
+    "title": "ARender v2023.12.0 – Release Notes",
+    "date": "2025-07-28",
+    "description": "Minor release fixing issue with annotation with transparent color while downloading PDF with annotations, issue with FDF annotations, issue with duplicate information in sticky note annotation, issue with multiple rendition configuration.",
+    "slug": "/release-note/arender/v2023.12.0/release-notes",
+    "hasUpgradeNotes": true
+  },
+  {
+    "version": "v2023.11.0",
+    "title": "ARender v2023.11.0 – Release Notes",
+    "date": "2025-06-27",
+    "description": "Minor release improving signed-PDF rendering, long Base64 URL handling, PDF/A printing and hyperlink accuracy.",
+    "slug": "/release-note/arender/v2023.11.0/release-notes",
+    "hasUpgradeNotes": true
+  },
+  {
+    "version": "v2023.6.1",
+    "title": "ARender v2023.6.1 – Release Notes",
+    "date": "2025-08-06",
+    "description": "Minor release including new distribution strategies of documents to renditions, disk space based query acceptance, fixing issue with encrypted perishable docuument id not reversible anb issue with multiple rendition configuration.",
+    "slug": "/release-note/arender/v2023.6.1/release-notes",
+    "hasUpgradeNotes": true
+  }
+]

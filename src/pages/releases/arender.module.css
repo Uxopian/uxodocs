@@ -9,7 +9,7 @@
 
 .pageHeader {
     padding: 3rem 0 2.5rem;
-    background: linear-gradient(135deg, #D745FF, #C045E8, #A47BFF, #9566E8);
+    background: linear-gradient(135deg, #4A8FEF, #3A7EE5, #2A6DD8, #1865D8);
     color: white;
     position: relative;
     overflow: hidden;
@@ -68,8 +68,7 @@
 }
 
 .productIcon {
-    height: 50px;
-    width: auto;
+    font-size: 2.5rem;
 }
 
 .pageSubtitle {
@@ -129,15 +128,15 @@
 }
 
 .filterButtonActive {
-    background: linear-gradient(135deg, #D745FF, #A47BFF);
+    background: linear-gradient(135deg, #4A8FEF, #3A7EE5);
     color: white !important;
     border-color: transparent;
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(215, 69, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(74, 143, 239, 0.3);
 }
 
 .filterButtonActive:hover {
-    background: linear-gradient(135deg, #C045E8, #9566E8);
+    background: linear-gradient(135deg, #3A7EE5, #2A6DD8);
     transform: scale(1.05);
 }
 
@@ -202,8 +201,36 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+.cardHeader {
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, rgba(74, 143, 239, 0.1), rgba(58, 126, 229, 0.05));
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .cardHeader {
+    background: linear-gradient(135deg, rgba(74, 143, 239, 0.15), rgba(58, 126, 229, 0.08));
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.versionBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.versionNumber {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #2A6DD8;
+}
+
+[data-theme='dark'] .versionNumber {
+    color: #4A8FEF;
+}
+
 .deprecationBadge {
-    background: linear-gradient(135deg, #dc3545, #c82333);
+    background: linear-gradient(135deg, #e8590c, #d31b14);
     color: white;
     padding: 0.75rem 1rem;
     font-size: 0.875rem;
@@ -220,38 +247,10 @@
     background: linear-gradient(135deg, #c82333, #a71d2a);
 }
 
-.cardHeader {
-    padding: 1.25rem 1.5rem;
-    background: linear-gradient(135deg, rgba(215, 69, 255, 0.1), rgba(164, 123, 255, 0.05));
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-[data-theme='dark'] .cardHeader {
-    background: linear-gradient(135deg, rgba(215, 69, 255, 0.15), rgba(164, 123, 255, 0.08));
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-.versionBadge {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-}
-
-.versionNumber {
-    font-size: 1.375rem;
-    font-weight: 700;
-    color: #9566E8;
-}
-
-[data-theme='dark'] .versionNumber {
-    color: #D745FF;
-}
-
 .latestBadge {
     display: inline-block;
     padding: 0.25rem 0.625rem;
-    background: linear-gradient(135deg, #D745FF, #A47BFF);
+    background: linear-gradient(135deg, #4A8FEF, #3A7EE5);
     color: white;
     font-size: 0.75rem;
     font-weight: 700;
@@ -298,21 +297,15 @@
 }
 
 [data-theme='dark'] .description {
-    color: #ccc;
-}
-
-.links {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+    color: #bbb;
 }
 
 .readMoreLink {
     display: inline-block;
     padding: 0.4rem 1rem;
-    border: 2px solid var(--card-color, #D745FF);
+    border: 2px solid var(--card-color, #4A8FEF);
     border-radius: 6px;
-    color: var(--card-color, #D745FF);
+    color: var(--card-color, #4A8FEF);
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -322,35 +315,11 @@
 }
 
 .readMoreLink:hover {
-    background-color: var(--card-color, #D745FF);
+    background-color: var(--card-color, #4A8FEF);
     color: white !important;
     text-decoration: none;
     transform: scale(1.02);
-    border-color: var(--card-color, #D745FF);
-}
-
-.upgradeLink {
-    display: inline-block;
-    padding: 0.4rem 1rem;
-    border: 2px solid var(--card-color, #D745FF);
-    border-radius: 6px;
-    color: var(--card-color, #D745FF);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-size: 0.8rem;
-    background: transparent;
-    text-align: center;
-    opacity: 0.8;
-}
-
-.upgradeLink:hover {
-    background-color: var(--card-color, #D745FF);
-    color: white !important;
-    text-decoration: none;
-    transform: scale(1.02);
-    border-color: var(--card-color, #D745FF);
-    opacity: 1;
+    border-color: var(--card-color, #4A8FEF);
 }
 
 .emptyState {
@@ -377,17 +346,19 @@
         font-size: 2rem;
     }
 
-    .productIcon {
-        height: 40px;
+    .pageSubtitle {
+        font-size: 1rem;
+    }
+
+    .filterBar {
+        padding: 1rem;
     }
 
     .releaseGrid {
         grid-template-columns: 1fr;
     }
 
-    .links {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
+    .mainContent {
+        padding: 2rem 0;
     }
 }

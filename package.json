@@ -5,8 +5,9 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node ./scripts/generateSecondaryNav.mjs && node ./scripts/generateTopCategories.mjs && node ./scripts/generateFast2Releases.mjs && node ./scripts/generateFlowerDocsReleases.mjs",
+    "prebuild": "node ./scripts/generateSecondaryNav.mjs && node ./scripts/generateTopCategories.mjs",
     "generate:topCategories": "node ./scripts/generateTopCategories.mjs",
+    "generate:releases": "node ./scripts/generateFast2Releases.mjs && node ./scripts/generateFlowerDocsReleases.mjs && node ./scripts/generateARenderReleases.mjs",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
