@@ -35,7 +35,18 @@ function ReleaseNoteCard({ note }: { note: ReleaseNote }) {
             </div>
             <div className={styles.cardBody}>
                 <p className={styles.description}>{note.description}</p>
-                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: note.hasUpgradeNotes ? 'space-between' : 'flex-end', alignItems: 'center' }}>
+                    {note.hasUpgradeNotes && (
+                        <Link
+                            to={`/release-note/arender/${note.version}/upgrade-notes`}
+                            className={styles.upgradeLink}
+                            style={{
+                                '--card-color': '#4A8FEF'
+                            } as React.CSSProperties}
+                        >
+                            Upgrade Guide
+                        </Link>
+                    )}
                     <Link
                         to={note.slug}
                         className={styles.readMoreLink}
@@ -45,17 +56,6 @@ function ReleaseNoteCard({ note }: { note: ReleaseNote }) {
                     >
                         Read more →
                     </Link>
-                    {note.hasUpgradeNotes && (
-                        <Link
-                            to={`/release-note/arender/${note.version}/upgrade-notes`}
-                            className={styles.readMoreLink}
-                            style={{
-                                '--card-color': '#4A8FEF'
-                            } as React.CSSProperties}
-                        >
-                            Upgrade Notes →
-                        </Link>
-                    )}
                 </div>
             </div>
         </div>

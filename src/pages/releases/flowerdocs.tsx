@@ -36,16 +36,7 @@ function ReleaseNoteCard({ note, latestV2Version }: { note: ReleaseNote; latestV
             </div>
             <div className={styles.cardBody}>
                 <p className={styles.description}>{note.description}</p>
-                <div className={styles.links}>
-                    <Link
-                        to={`/uxodocs/release-note/flowerdocs/${note.slug}/release-notes`}
-                        className={styles.readMoreLink}
-                        style={{
-                            '--card-color': '#D745FF'
-                        } as React.CSSProperties}
-                    >
-                        Release Notes →
-                    </Link>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: note.hasUpgradeNotes ? 'space-between' : 'flex-end', alignItems: 'center' }}>
                     {note.hasUpgradeNotes && (
                         <Link
                             to={`/uxodocs/release-note/flowerdocs/${note.slug}/upgrade-notes`}
@@ -54,9 +45,18 @@ function ReleaseNoteCard({ note, latestV2Version }: { note: ReleaseNote; latestV
                                 '--card-color': '#D745FF'
                             } as React.CSSProperties}
                         >
-                            Upgrade Notes
+                            Upgrade Guide
                         </Link>
                     )}
+                    <Link
+                        to={`/uxodocs/release-note/flowerdocs/${note.slug}/release-notes`}
+                        className={styles.readMoreLink}
+                        style={{
+                            '--card-color': '#D745FF'
+                        } as React.CSSProperties}
+                    >
+                        Read more →
+                    </Link>
                 </div>
             </div>
         </div>

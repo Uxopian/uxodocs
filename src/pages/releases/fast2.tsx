@@ -41,15 +41,17 @@ function ReleaseNoteCard({ note, latestV2Version }: { note: ReleaseNote; latestV
             </div>
             <div className={styles.cardBody}>
                 <p className={styles.description}>{note.description}</p>
-                <Link
-                    to={`/release-note/fast2/${note.slug}`}
-                    className={styles.readMoreLink}
-                    style={{
-                        '--card-color': '#5CB8C7'
-                    } as React.CSSProperties}
-                >
-                    Read more →
-                </Link>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Link
+                        to={`/release-note/fast2/${note.slug}`}
+                        className={styles.readMoreLink}
+                        style={{
+                            '--card-color': '#5CB8C7'
+                        } as React.CSSProperties}
+                    >
+                        Read more →
+                    </Link>
+                </div>
             </div>
         </div>
     );

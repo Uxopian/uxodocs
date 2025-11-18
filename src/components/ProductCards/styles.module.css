@@ -83,19 +83,35 @@
 }
 
 .mainTitle {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    color: var(--ifm-font-color-base);
+    color: #1a1a1a;
     margin-bottom: 0.75rem;
     text-align: center;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 10;
+}
+
+[data-theme='dark'] .mainTitle {
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.5);
 }
 
 .subtitle {
-    font-size: 1.1rem;
-    color: var(--ifm-color-emphasis-700);
-    margin-bottom: 2.5rem;
+    font-size: 1.2rem;
+    color: #2a2a2a;
+    margin-bottom: 3rem;
     text-align: center;
-    opacity: 0.85;
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4);
+    position: relative;
+    z-index: 10;
+}
+
+[data-theme='dark'] .subtitle {
+    color: #e0e0e0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
 .cardsGrid {
@@ -201,26 +217,56 @@
     color: var(--ifm-color-emphasis-600);
 }
 
-.cardLink {
+.cardButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0 2rem 2rem;
+}
+
+.cardLinkPrimary {
     font-weight: 600;
     text-decoration: none;
     font-size: 1rem;
     padding: 0.75rem 2rem;
-    margin: 0 2rem 2rem;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    text-align: center;
+    background-color: var(--card-color);
+    color: white !important;
+    border: 2px solid var(--card-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cardLinkPrimary:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+}
+
+.cardLinkSecondary {
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.5rem;
     border-radius: 8px;
     border: 2px solid;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-block;
     text-align: center;
     background: transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
 }
 
-.cardLink:hover {
+.cardLinkSecondary:hover {
     background-color: var(--card-color);
     color: white !important;
     text-decoration: none;
-    transform: scale(1.02);
+    transform: translateY(-2px);
     border-color: var(--card-color);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 1200px) {

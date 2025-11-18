@@ -303,7 +303,7 @@
 .readMoreLink {
     display: inline-block;
     padding: 0.4rem 1rem;
-    border: 2px solid var(--card-color, #4A8FEF);
+    border: none;
     border-radius: 6px;
     color: var(--card-color, #4A8FEF);
     font-weight: 600;
@@ -315,6 +315,26 @@
 }
 
 .readMoreLink:hover {
+    color: var(--card-color, #4A8FEF);
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.upgradeLink {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: 2px solid var(--card-color, #4A8FEF);
+    border-radius: 6px;
+    color: var(--card-color, #4A8FEF);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    background: transparent;
+    text-align: center;
+}
+
+.upgradeLink:hover {
     background-color: var(--card-color, #4A8FEF);
     color: white !important;
     text-decoration: none;

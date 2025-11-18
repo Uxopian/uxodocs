@@ -6,49 +6,49 @@ const DocumentationList = [
     {
         title: 'ARender',
         icon: '📄',
-        description: 'Solution de visualisation de documents sécurisée et collaborative',
+        description: 'Secure and collaborative document viewing solution',
         link: '/docs/arender',
         color: '#e74c3c'
     },
     {
         title: 'FlowerDocs',
         icon: '🌸',
-        description: 'Solution de gestion électronique de documents complète',
+        description: 'Complete electronic document management solution',
         link: '/docs/flower',
         color: '#6c5ce7'
     },
     {
         title: 'Fast2',
         icon: '🚀',
-        description: 'Plateforme de migration documentaire puissante',
+        description: 'Powerful document migration platform',
         link: '/docs/fast2/getting-started',
         color: '#fd79a8'
     },
     {
         title: 'Installation',
         icon: '🔧',
-        description: 'Installer & déployer les plateformes',
+        description: 'Install & deploy the platforms',
         link: '/docs/flower/installation',
         color: '#fd79a8'
     },
     {
         title: 'Concepts',
         icon: '💡',
-        description: 'Prise en main des concepts généraux',
+        description: 'Getting started with general concepts',
         link: '/docs/flower/concepts',
         color: '#0984e3'
     },
     {
-        title: 'APIs & Développement',
+        title: 'APIs & Development',
         icon: '�',
-        description: 'Les APIs à votre disposition',
+        description: 'APIs at your disposal',
         link: '/docs/flower/apis',
         color: '#6c5ce7'
     },
     {
-        title: 'Guides pratiques',
+        title: 'Practical Guides',
         icon: '�',
-        description: 'Tutoriels et guides étape par étape',
+        description: 'Step-by-step tutorials and guides',
         link: '/docs/flower/tutoriels',
         color: '#00b894'
     }
@@ -66,7 +66,7 @@ function DocumentationCard({ title, icon, description, link, color }) {
             </div>
             <p className={styles.cardDescription}>{description}</p>
             <Link className={styles.cardLink} to={link} style={{ color }}>
-                Découvrir →
+                Discover →
             </Link>
         </div>
     );
@@ -77,7 +77,7 @@ export default function DocumentationCards() {
         <section className={styles.documentationSection}>
             <div className="container">
                 <h1 className={styles.mainTitle}>Documentation</h1>
-                <p className={styles.subtitle}>Consulter les différentes documentations produit.</p>
+                <p className={styles.subtitle}>Browse the different product documentations.</p>
 
                 <div className={styles.cardsGrid}>
                     {DocumentationList.map((props, idx) => (

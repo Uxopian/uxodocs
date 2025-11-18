@@ -7,38 +7,42 @@ const ProductList = [
     {
         title: 'Fast2',
         logo: '/img/fast2/Fast2_favicon_white.png',
-        description: 'Plateforme de migration documentaire pour transformer et migrer vos documents vers différents systèmes',
+        description: 'Document migration platform to transform and migrate your documents to different systems',
         link: '/docs/fast2',
+        releaseNotesLink: '/releases/fast2',
         color: '#5CB8C7',
         gradient: 'linear-gradient(135deg, #5CB8C7, #4AA5B4, #3A8F9D, #2F7D8B)'
     },
     {
         title: 'FlowerDocs',
         logo: '/img/flowerdocs/logo_flower_white.png',
-        description: 'Solution de gestion électronique de documents (GED) pour organiser, gérer et exploiter vos contenus documentaires',
+        description: 'Electronic document management (EDM) solution to organize, manage and exploit your document content',
         link: '/docs/flowerdocs',
+        releaseNotesLink: '/releases/flowerdocs',
         color: '#D745FF',
         gradient: 'linear-gradient(135deg, #D745FF, #C55BFF, #B56BFF, #A47BFF)'
     },
     {
         title: 'ARender',
         logo: '/img/arender/arender_logo_white.png',
-        description: 'Visualiseur de documents haute performance pour afficher et annoter tous types de documents',
+        description: 'High-performance document viewer to display and annotate all types of documents',
         link: '/docs/arender',
+        releaseNotesLink: '/releases/arender',
         color: '#4A8FEF',
         gradient: 'linear-gradient(135deg, #4A8FEF, #3A7EE5, #2A6DD8, #1865D8)'
     },
     {
         title: 'Uxopian AI',
         logo: '/img/uxo_white.png',
-        description: 'Framework complet pour intégrer facilement des fonctionnalités d\'IA puissantes dans vos applications d\'entreprise',
+        description: 'Complete framework to easily integrate powerful AI features into your enterprise applications',
         link: '/docs/uxopian-ai',
+        releaseNotesLink: '/docs/uxopian-ai',
         color: '#E88AA0',
         gradient: 'linear-gradient(135deg, #F5A882, #EC9059, #E07869, #D36D78)'
     }
 ];
 
-function ProductCard({ title, logo, description, link, color, gradient }) {
+function ProductCard({ title, logo, description, link, releaseNotesLink, color, gradient }) {
     const logoUrl = useBaseUrl(logo);
 
     return (
@@ -50,17 +54,28 @@ function ProductCard({ title, logo, description, link, color, gradient }) {
                 <h3 className={styles.cardTitle}>{title}</h3>
             </div>
             <p className={styles.cardDescription}>{description}</p>
-            <Link
-                className={styles.cardLink}
-                to={link}
-                style={{
-                    '--card-color': color,
-                    borderColor: color,
-                    color: color
-                } as React.CSSProperties}
-            >
-                Découvrir →
-            </Link>
+            <div className={styles.cardButtons}>
+                <Link
+                    className={styles.cardLinkPrimary}
+                    to={link}
+                    style={{
+                        '--card-color': color
+                    } as React.CSSProperties}
+                >
+                    Documentation →
+                </Link>
+                <Link
+                    className={styles.cardLinkSecondary}
+                    to={releaseNotesLink}
+                    style={{
+                        '--card-color': color,
+                        borderColor: color,
+                        color: color
+                    } as React.CSSProperties}
+                >
+                    Release Notes
+                </Link>
+            </div>
         </div>
     );
 }
@@ -79,8 +94,8 @@ export default function ProductCards() {
             <div className={styles.backgroundLogo} style={{ backgroundImage: `url(${uxoLogo})` }}></div>
 
             <div className="container">
-                <h1 className={styles.mainTitle}>Documentation produits</h1>
-                <p className={styles.subtitle}>Découvrez nos solutions documentaires et d'intelligence artificielle complètes.</p>
+                <h1 className={styles.mainTitle}>Product Documentation</h1>
+                <p className={styles.subtitle}>Discover our complete document management and artificial intelligence solutions.</p>
 
                 <div className={styles.cardsGrid}>
                     {ProductList.map((props, idx) => (

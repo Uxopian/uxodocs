@@ -303,7 +303,7 @@
 .readMoreLink {
     display: inline-block;
     padding: 0.4rem 1rem;
-    border: 2px solid var(--card-color, #5CB8C7);
+    border: none;
     border-radius: 6px;
     color: var(--card-color, #5CB8C7);
     font-weight: 600;
@@ -315,11 +315,9 @@
 }
 
 .readMoreLink:hover {
-    background-color: var(--card-color, #5CB8C7);
-    color: white !important;
+    color: var(--card-color, #5CB8C7);
     text-decoration: none;
-    transform: scale(1.02);
-    border-color: var(--card-color, #5CB8C7);
+    opacity: 0.7;
 }
 
 .emptyState {

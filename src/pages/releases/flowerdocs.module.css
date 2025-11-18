@@ -310,7 +310,7 @@
 .readMoreLink {
     display: inline-block;
     padding: 0.4rem 1rem;
-    border: 2px solid var(--card-color, #D745FF);
+    border: none;
     border-radius: 6px;
     color: var(--card-color, #D745FF);
     font-weight: 600;
@@ -322,11 +322,9 @@
 }
 
 .readMoreLink:hover {
-    background-color: var(--card-color, #D745FF);
-    color: white !important;
+    color: var(--card-color, #D745FF);
     text-decoration: none;
-    transform: scale(1.02);
-    border-color: var(--card-color, #D745FF);
+    opacity: 0.7;
 }
 
 .upgradeLink {
@@ -338,10 +336,9 @@
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     background: transparent;
     text-align: center;
-    opacity: 0.8;
 }
 
 .upgradeLink:hover {
