@@ -24,9 +24,18 @@ jobs:
         with:
           ref: test-v2
           fetch-depth: 0
-          lfs: true
+          lfs: false  # On désactive le téléchargement auto
 
-      - name: Fetch LFS files
+      - name: Cache Git LFS objects
+        uses: actions/cache@v3
+        with:
+          path: .git/lfs
+          key: git-lfs-${{ hashFiles('.gitattributes') }}-${{ github.sha }}
+          restore-keys: |
+            git-lfs-${{ hashFiles('.gitattributes') }}-
+            git-lfs-
+
+      - name: Fetch LFS files (with cache)
         run: git lfs pull
 
       - name: Fetch all branches
