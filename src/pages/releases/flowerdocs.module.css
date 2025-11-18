@@ -176,30 +176,110 @@
 }
 
 .releaseCard {
-    background: white;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 6px 24px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.9);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     height: 100%;
+    position: relative;
+}
+
+/* Effet de reflet liquide */
+.releaseCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+    transition: left 0.6s ease;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.releaseCard:hover::before {
+    left: 100%;
+}
+
+/* Effet de brillance en haut */
+.releaseCard::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 255, 255, 0.08) 30%,
+        transparent 100%
+    );
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 1;
 }
 
 [data-theme='dark'] .releaseCard {
-    background: #2a2a2a;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(20, 20, 25, 0.6);
+    backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
+    box-shadow: 
+        0 6px 24px rgba(0, 0, 0, 0.6),
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme='dark'] .releaseCard::after {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 20%,
+        rgba(255, 255, 255, 0.02) 40%,
+        transparent 100%
+    );
+    opacity: 1;
 }
 
 .releaseCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.15),
+        0 6px 16px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+        inset 0 2px 8px rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 [data-theme='dark'] .releaseCard:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.8),
+        0 6px 16px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+        inset 0 2px 8px rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.9),
+        0 0 30px rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
 .deprecationBadge {
@@ -222,12 +302,16 @@
 
 .cardHeader {
     padding: 1.25rem 1.5rem;
-    background: linear-gradient(135deg, rgba(215, 69, 255, 0.1), rgba(164, 123, 255, 0.05));
+    background: linear-gradient(135deg, rgba(215, 69, 255, 0.12), rgba(164, 123, 255, 0.06));
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 [data-theme='dark'] .cardHeader {
-    background: linear-gradient(135deg, rgba(215, 69, 255, 0.15), rgba(164, 123, 255, 0.08));
+    background: linear-gradient(135deg, rgba(215, 69, 255, 0.18), rgba(164, 123, 255, 0.1));
     border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -258,6 +342,11 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border-radius: 6px;
+    box-shadow: 
+        0 2px 8px rgba(215, 69, 255, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .latestV2Badge {
@@ -270,6 +359,11 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border-radius: 6px;
+    box-shadow: 
+        0 2px 8px rgba(253, 126, 20, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .releaseDate {
@@ -287,6 +381,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+    z-index: 2;
 }
 
 .description {
@@ -311,20 +407,50 @@
     display: inline-block;
     padding: 0.4rem 1rem;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     color: var(--card-color, #D745FF);
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 0.85rem;
-    background: transparent;
+    background: rgba(215, 69, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme='dark'] .readMoreLink {
+    background: rgba(215, 69, 255, 0.12);
+}
+
+/* Effet de reflet sur le lien */
+.readMoreLink::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.readMoreLink:hover::before {
+    left: 100%;
 }
 
 .readMoreLink:hover {
     color: var(--card-color, #D745FF);
     text-decoration: none;
-    opacity: 0.7;
+    background: rgba(215, 69, 255, 0.15);
+    transform: translateX(4px);
 }
 
 .upgradeLink {

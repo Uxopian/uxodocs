@@ -233,9 +233,7 @@ body {
 
 @media (max-width: 996px) {
   .navbar__link.verdd {
-    font-size: inherit !important;
-    -webkit-text-fill-color: inherit;
-    color: var(--ifm-navbar-link-color) !important;
+    display: none !important;
   }
 
   .navbar__link.verdd::before {

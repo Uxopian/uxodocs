@@ -83,7 +83,7 @@ function ProductCard({ title, logo, description, link, releaseNotesLink, color, 
 export default function ProductCards() {
     const uxoLogo = useBaseUrl('/img/uxo_white.png');
     const sunsetBg = useBaseUrl('/img/uxopian-sunset-background.jpg');
-    const nightBg = useBaseUrl('/img/uxopian-night-background.jpg');
+    const nightBg = useBaseUrl('/img/uxopian-night-background2.jpg');
 
     return (
         <section className={styles.productsSection}>

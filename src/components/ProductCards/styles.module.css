@@ -85,10 +85,10 @@
 .mainTitle {
     font-size: 3rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #ffffff;
     margin-bottom: 0.75rem;
     text-align: center;
-    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
     position: relative;
     z-index: 10;
 }
@@ -100,11 +100,11 @@
 
 .subtitle {
     font-size: 1.2rem;
-    color: #2a2a2a;
+    color: #ffffff;
     margin-bottom: 3rem;
     text-align: center;
     font-weight: 500;
-    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
     position: relative;
     z-index: 10;
 }
@@ -127,11 +127,17 @@
 }
 
 .card {
-    background: white;
-    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.9);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     flex: 1 1 280px;
@@ -140,21 +146,96 @@
     min-height: 400px;
     position: relative;
     z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Effet de reflet liquide */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+    transition: left 0.6s ease;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+/* Effet de brillance en haut */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        transparent 100%
+    );
+    border-radius: 24px 24px 0 0;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 1;
 }
 
 [data-theme='dark'] .card {
-    background: #2a2a2a;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+    background: rgba(20, 20, 25, 0.6);
+    backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme='dark'] .card::after {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.06) 20%,
+        rgba(255, 255, 255, 0.02) 40%,
+        transparent 100%
+    );
+    opacity: 1;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 8px 20px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+        inset 0 2px 8px rgba(255, 255, 255, 0.95);
     z-index: 20;
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 [data-theme='dark'] .card:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.8),
+        0 8px 20px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+        inset 0 2px 8px rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
 .cardHeader {
@@ -164,15 +245,31 @@
     overflow: hidden;
 }
 
+/* Reflet liquide amélioré */
 .cardHeader::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: -50%;
+    left: -50%;
+    right: -50%;
     bottom: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    background: 
+        radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.35) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
     pointer-events: none;
+    transition: transform 0.4s ease;
+}
+
+[data-theme='dark'] .cardHeader::before {
+    background: 
+        radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 45%),
+        radial-gradient(ellipse at 80% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 45%);
+}
+
+.card:hover .cardHeader::before {
+    transform: scale(1.1);
 }
 
 .logoWrapper {
@@ -182,11 +279,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.25);
     border-radius: 20px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
     position: relative;
     z-index: 1;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .logoWrapper {
+    transform: scale(1.05);
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.15),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -203,6 +315,9 @@
     margin: 0;
     position: relative;
     z-index: 1;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 
+                 0 1px 3px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.02em;
 }
 
 .cardDescription {
@@ -211,6 +326,8 @@
     line-height: 1.6;
     padding: 1.5rem 2rem;
     flex-grow: 1;
+    position: relative;
+    z-index: 2;
 }
 
 [data-theme='dark'] .cardDescription {
@@ -222,6 +339,8 @@
     flex-direction: column;
     gap: 0.75rem;
     padding: 0 2rem 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .cardLinkPrimary {
@@ -229,20 +348,47 @@
     text-decoration: none;
     font-size: 1rem;
     padding: 0.75rem 2rem;
-    border-radius: 8px;
+    border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-block;
     text-align: center;
     background-color: var(--card-color);
     color: white !important;
     border: 2px solid var(--card-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet de reflet sur le bouton */
+.cardLinkPrimary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.cardLinkPrimary:hover::before {
+    left: 100%;
 }
 
 .cardLinkPrimary:hover {
     text-decoration: none;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.25),
+        inset 0 1px 3px rgba(255, 255, 255, 0.4);
     filter: brightness(1.1);
 }
 
@@ -251,13 +397,44 @@
     text-decoration: none;
     font-size: 0.95rem;
     padding: 0.65rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     border: 2px solid;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-block;
     text-align: center;
-    background: transparent;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.05),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme='dark'] .cardLinkSecondary {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Effet de reflet sur le bouton secondaire */
+.cardLinkSecondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.cardLinkSecondary:hover::before {
+    left: 100%;
 }
 
 .cardLinkSecondary:hover {
@@ -266,12 +443,19 @@
     text-decoration: none;
     transform: translateY(-2px);
     border-color: var(--card-color);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.2),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 1200px) {
     .cardsGrid {
         gap: 1rem;
+    }
+    
+    .card {
+        flex: 1 1 250px;
+        min-width: 240px;
     }
 }
 
@@ -279,19 +463,209 @@
     .cardsGrid {
         flex-direction: column;
         max-width: 500px;
+        padding: 0 1rem;
     }
 
     .card {
         max-width: 100%;
+        min-width: 100%;
     }
 }
 
 @media (max-width: 768px) {
+    .productsSection {
+        padding: 2rem 0 3rem;
+    }
+    
     .mainTitle {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        padding: 0 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .subtitle {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .cardsGrid {
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .card {
+        min-height: 420px;
+        border-radius: 20px;
+    }
+    
+    .cardHeader {
+        padding: 2rem 1.5rem 2.5rem;
+        min-height: 180px;
+    }
+    
+    .logoWrapper {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 1.25rem;
+        border-radius: 18px;
+    }
+    
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .cardTitle {
+        font-size: 1.35rem;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 
+                     0 1px 3px rgba(0, 0, 0, 0.4);
+        font-weight: 800;
+    }
+    
+    .cardDescription {
+        padding: 1.25rem 1.5rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    .cardButtons {
+        gap: 0.65rem;
+        padding: 0 1.5rem 1.75rem;
+    }
+    
+    .cardLinkPrimary {
+        padding: 0.7rem 1.75rem;
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+    
+    .cardLinkSecondary {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+    
+    .backgroundLogo {
+        width: 600px;
+        height: 600px;
+    }
+}
+
+@media (max-width: 480px) {
+    .productsSection {
+        padding: 1.5rem 0 2.5rem;
+    }
+    
+    .mainTitle {
+        font-size: 1.75rem;
+        padding: 0 0.75rem;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.75rem;
+        padding: 0 0.75rem;
+    }
+    
+    .cardsGrid {
+        gap: 1.25rem;
+        padding: 0 0.75rem;
+    }
+    
+    .card {
+        min-height: 400px;
+        border-radius: 18px;
+    }
+    
+    .cardHeader {
+        padding: 2rem 1.25rem 2.25rem;
+        min-height: 170px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .logoWrapper {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 1rem;
+        border-radius: 16px;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .cardTitle {
+        font-size: 1.25rem;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 
+                     0 1px 3px rgba(0, 0, 0, 0.4);
+        font-weight: 900;
+    }
+    
+    .cardDescription {
+        padding: 1rem 1.25rem;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .cardButtons {
+        gap: 0.6rem;
+        padding: 0 1.25rem 1.5rem;
+    }
+    
+    .cardLinkPrimary {
+        padding: 0.65rem 1.5rem;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+    
+    .cardLinkSecondary {
+        padding: 0.55rem 1.25rem;
+        font-size: 0.85rem;
+        border-radius: 10px;
+    }
+    
+    .backgroundLogo {
+        width: 400px;
+        height: 400px;
+    }
+    
+    /* Réduire les effets de hover sur mobile pour de meilleures performances */
+    .card:hover {
+        transform: translateY(-6px) scale(1.01);
+    }
+    
+    .card:hover .logoWrapper {
+        transform: scale(1.03);
+    }
+}
+
+@media (max-width: 360px) {
+    .mainTitle {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .cardTitle {
+        font-size: 1.15rem;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 
+                     0 1px 3px rgba(0, 0, 0, 0.4);
+        font-weight: 900;
+    }
+    
+    .cardDescription {
+        font-size: 0.85rem;
+    }
+    
+    .cardLinkPrimary,
+    .cardLinkSecondary {
+        font-size: 0.85rem;
     }
 }
