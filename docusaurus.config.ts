@@ -113,7 +113,7 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
-      copyright: `© ${new Date().getFullYear()} Uxopian`,
+      copyright: `© ${new Date().getFullYear()} Uxopian Software All rights reserved`,
     },
     prism: {
       theme: prismThemes.github,

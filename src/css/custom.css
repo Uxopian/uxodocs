@@ -254,6 +254,19 @@ li.hidden-index-link > a {
   display: none !important;
 }
 
+/* Hide sidebar ONLY on product index pages that have documentation cards OR when active link has hidden-index-link class */
+div:has(main article [class*="documentationSection"]) > aside[class*="docSidebarContainer"],
+aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
+  display: none !important;
+}
+
+/* Expand main content when sidebar is hidden on index pages */
+div:has(main article [class*="documentationSection"]) > div > main,
+div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active) > div > main {
+  max-width: 100% !important;
+  padding-left: 7rem;
+}
+
 .theme-doc-sidebar-container {
   position: sticky !important;
   top: calc(var(--ifm-navbar-height) + 1rem) !important;
