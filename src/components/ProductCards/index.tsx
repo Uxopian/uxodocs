@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 const ProductList = [
     {
         title: 'Fast2',
+        version: 'v2025.x.x',
         logo: '/img/fast2/Fast2_favicon_white.png',
         description: 'Document migration platform to transform and migrate your documents to different systems',
         link: '/docs/fast2',
@@ -15,6 +16,7 @@ const ProductList = [
     },
     {
         title: 'FlowerDocs',
+        version: 'v2025.3.0',
         logo: '/img/flowerdocs/logo_flower_white.png',
         description: 'Electronic document management (EDM) solution to organize, manage and exploit your document content',
         link: '/docs/flowerdocs',
@@ -24,6 +26,7 @@ const ProductList = [
     },
     {
         title: 'ARender',
+        version: 'v2023.15.0',
         logo: '/img/arender/arender_logo_white.png',
         description: 'High-performance document viewer to display and annotate all types of documents',
         link: '/docs/arender',
@@ -33,6 +36,7 @@ const ProductList = [
     },
     {
         title: 'Uxopian AI',
+        version: 'current',
         logo: '/img/uxo_white.png',
         description: 'Complete framework to easily integrate powerful AI features into your enterprise applications',
         link: '/docs/uxopian-ai',
@@ -42,7 +46,7 @@ const ProductList = [
     }
 ];
 
-function ProductCard({ title, logo, description, link, releaseNotesLink, color, gradient }) {
+function ProductCard({ title, version, logo, description, link, releaseNotesLink, color, gradient }) {
     const logoUrl = useBaseUrl(logo);
 
     return (
@@ -52,6 +56,7 @@ function ProductCard({ title, logo, description, link, releaseNotesLink, color, 
                     <img src={logoUrl} alt={`${title} logo`} className={styles.logo} />
                 </div>
                 <h3 className={styles.cardTitle}>{title}</h3>
+                <div className={styles.version}>{version}</div>
             </div>
             <p className={styles.cardDescription}>{description}</p>
             <div className={styles.cardButtons}>
@@ -82,8 +87,8 @@ function ProductCard({ title, logo, description, link, releaseNotesLink, color, 
 
 export default function ProductCards() {
     const uxoLogo = useBaseUrl('/img/uxo_white.png');
-    const sunsetBg = useBaseUrl('/img/uxopian-sunset-background.jpg');
-    const nightBg = useBaseUrl('/img/uxopian-night-background2.jpg');
+    const sunsetBg = useBaseUrl('/img/uxopian-sunset-background3.jpg');
+    const nightBg = useBaseUrl('/img/uxopian-night-background4.jpg');
 
     return (
         <section className={styles.productsSection}>

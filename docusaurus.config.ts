@@ -4,8 +4,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'UXO Docs',
-  tagline: 'Documentation produits',
-  favicon: 'static/img/uxo.png',
+  tagline: 'Product Documentation',
+  favicon: 'img/uxopian-o.png',
 
   url: 'https://corentinlebas45.github.io',
   baseUrl: '/uxodocs/',
@@ -99,14 +99,13 @@ const config: Config = {
 
   themeConfig: {
     navbar: {
-      logo: { alt: 'UXO', src: 'img/uxo.png' },
+      logo: { alt: 'UXO', src: 'img/uxopian-o.png' },
       items: [
         { type: 'docsVersionDropdown', docsPluginId: 'fast2', position: 'left', className: 'verdd verdd--fast2' },
         { type: 'docsVersionDropdown', docsPluginId: 'arender', position: 'left', className: 'verdd verdd--arender' },
         { type: 'docsVersionDropdown', docsPluginId: 'flowerdocs', position: 'left', className: 'verdd verdd--flowerdocs' },
         { type: 'docsVersionDropdown', docsPluginId: 'uxopian-ai', position: 'left', className: 'verdd verdd--uxopian-ai' },
 
-        { to: '/releases', label: 'Release Notes', position: 'right' },
         { type: 'search', position: 'right' },
 
       ],

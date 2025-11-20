@@ -1,13 +1,15 @@
 .productsSection {
     padding: 3rem 0 4rem;
-    min-height: calc(100vh - var(--ifm-navbar-height));
+    min-height: 100vh;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    margin-top: calc(-1 * var(--ifm-navbar-height));
+    padding-top: calc(3rem + var(--ifm-navbar-height));
 }
 
 .backgroundWrapper {
     position: absolute;
-    top: 0;
+    top: calc(-1 * var(--ifm-navbar-height));
     left: 0;
     right: 0;
     bottom: 0;
@@ -146,7 +148,7 @@
     min-height: 400px;
     position: relative;
     z-index: 10;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: none;
 }
 
 /* Effet de reflet liquide */
@@ -202,7 +204,7 @@
         inset 0 0 0 1px rgba(255, 255, 255, 0.2),
         inset 0 2px 4px rgba(255, 255, 255, 0.1),
         0 0 0 1px rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* border: none; */
 }
 
 [data-theme='dark'] .card::after {
@@ -239,7 +241,7 @@
 }
 
 .cardHeader {
-    padding: 2.5rem 2rem;
+    padding: 2rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -318,6 +320,26 @@
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 
                  0 1px 3px rgba(0, 0, 0, 0.4);
     letter-spacing: 0.02em;
+}
+
+.version {
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+    display: inline-block;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme='dark'] .version {
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .cardDescription {
@@ -498,7 +520,7 @@
     }
     
     .cardHeader {
-        padding: 2rem 1.5rem 2.5rem;
+        padding: 1rem 1rem 1rem;
         min-height: 180px;
     }
     
@@ -577,7 +599,7 @@
     }
     
     .cardHeader {
-        padding: 2rem 1.25rem 2.25rem;
+        padding: 1rem 1.25rem 1rem;
         min-height: 170px;
         display: flex;
         flex-direction: column;

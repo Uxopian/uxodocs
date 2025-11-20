@@ -22,3 +22,20 @@
   justify-content: center;
 }
 
+/* Glassmorphism navbar on home page */
+.homePageWrapper :global(.navbar) {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(180%) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+[data-theme='dark'] .homePageWrapper :global(.navbar) {
+  background: rgba(20, 20, 25, 0.5) !important;
+  backdrop-filter: blur(10px) saturate(180%) brightness(1.1) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(180%) brightness(1.1) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+

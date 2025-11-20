@@ -12,8 +12,9 @@ export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Bienvenue sur ${siteConfig.title}`}
-      description="Documentation complète pour Fast2 et FlowerDocs">
+      title={`${siteConfig.title}`}
+      description="Product documentation for Uxopian Software"
+      wrapperClassName={styles.homePageWrapper}>
       <main>
         <ProductCards />
       </main>

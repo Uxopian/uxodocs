@@ -1,10 +1,3 @@
-/**
- * Uxopian — refreshed color direction
- * - Primary: Uxo Purple (700/500/300)
- * - Gradient tokens: Purple, Sunset, Green, Turquoise, Blue
- * This file targets Docusaurus/Infima variables and adds gradient utility classes.
- */
-
 /* ------------------------------
    Core tokens
    ------------------------------ */
@@ -203,32 +196,26 @@ body {
   content: 'Fast2';
 }
 
-.navbar__link.verdd--fast2:hover::before {
-  color: var(--uxo-turquoise-2) !important;
-}
-
 .navbar__link.verdd--arender::before {
   content: 'Arender';
-}
-
-.navbar__link.verdd--arender:hover::before {
-  color: var(--uxo-blue-2) !important;
 }
 
 .navbar__link.verdd--flowerdocs::before {
   content: 'Flowerdocs';
 }
 
-.navbar__link.verdd--flowerdocs:hover::before {
-  color: var(--uxo-purple-500) !important;
-}
-
 .navbar__link.verdd--uxopian-ai::before {
   content: 'Uxopian AI';
 }
 
+/* On hover, do NOT change color — just underline the label */
+.navbar__link.verdd:hover::before,
+.navbar__link.verdd--fast2:hover::before,
+.navbar__link.verdd--arender:hover::before,
+.navbar__link.verdd--flowerdocs:hover::before,
 .navbar__link.verdd--uxopian-ai:hover::before {
-  color: var(--uxo-sunset-2) !important;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 @media (max-width: 996px) {
@@ -251,6 +238,16 @@ body {
 
 /* Hide the link of index pages in sidebar */
 li.hidden-index-link > a {
+  display: none !important;
+}
+
+/* Hide sidebar items with hidden-sidebar-item class */
+li.hidden-sidebar-item {
+  display: none !important;
+}
+
+/* Hide collapsible menu items with hidden-sidebar-item class */
+li.hidden-sidebar-item .menu__list-item-collapsible {
   display: none !important;
 }
 
@@ -293,4 +290,78 @@ aside[class*="docSidebarContainer"] {
 .theme-doc-toc-desktop .table-of-contents {
   overflow-y: auto !important;
   max-height: 100% !important;
+}
+
+/* Glassmorphism navbar on home page */
+body[class*="indexPage"] .navbar,
+body:has(main > section[class*="productsSection"]) .navbar {
+  background: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(10px) saturate(100%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(100%) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  border-bottom: none !important;
+}
+
+[data-theme='dark'] body[class*="indexPage"] .navbar,
+[data-theme='dark'] body:has(main > section[class*="productsSection"]) .navbar {
+  background: rgba(20, 20, 25, 0.3) !important;
+  backdrop-filter: blur(15px) saturate(150%) brightness(1.05) !important;
+  -webkit-backdrop-filter: blur(15px) saturate(150%) brightness(1.05) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  border-bottom: none !important;
+}
+
+body:not([data-theme='dark']) .navbar,
+body:not([data-theme='dark']) .navbar a {
+  color: #fff !important;
+}
+
+/* Dark mode : tout le texte de la navbar en blanc */
+[data-theme='dark'] .navbar,
+[data-theme='dark'] .navbar a,
+[data-theme='dark'] .navbar__inner .navbar__items,
+[data-theme='dark'] .navbar__inner .navbar__items .navbar__item,
+[data-theme='dark'] .navbar__inner .navbar__items .navbar__link,
+[data-theme='dark'] .navbar__inner .navbar__items a,
+[data-theme='dark'] .navbar__brand,
+[data-theme='dark'] .navbar__title,
+[data-theme='dark'] .navbar__item,
+[data-theme='dark'] .navbar__link,
+[data-theme='dark'] .navbar__item a,
+[data-theme='dark'] .navbar__inner .navbar__item .menu__link,
+[data-theme='dark'] .navbar__inner .navbar__items .navbar__link::before {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+body[class*="indexPage"] .navbar,
+body:has(main > section[class*="productsSection"]) .navbar,
+body[class*="indexPage"] .navbar a,
+body:has(main > section[class*="productsSection"]) .navbar a {
+  color: #ffffff !important;
+}
+
+
+/* Light mode : labels produits en noir */
+body:not([data-theme='dark']) .navbar__link[class^="verdd"]::before {
+  color: #000000 !important;
+}
+
+/* Homepage, pages produits & dark mode : labels produits en blanc */
+body[class*="indexPage"] .navbar__link[class^="verdd"]::before,
+body:has(main > section[class*="productsSection"]) .navbar__link[class^="verdd"]::before,
+[data-theme='dark'] .navbar__link[class^="verdd"]::before {
+  color: #ffffff !important;
+}
+
+
+.secondary-nav,
+.secondary-nav__item,
+.secondary-nav__item a,
+.secondary-nav .menu__link,
+body .navbar__inner.secondary-nav__inner .secondary-nav__item,
+body .navbar__inner.secondary-nav__inner a.secondary-nav__item,
+body .navbar .secondary-nav .secondary-nav__item {
+  color: #ffffff !important;
 }

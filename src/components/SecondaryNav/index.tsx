@@ -3,6 +3,7 @@ import { useLocation } from '@docusaurus/router';
 import Link from '@docusaurus/Link';
 import categories from '../../generated/topCategories.json';
 import '../../css/secondary-nav.css';
+import ExternalLinkIcon from '@site/static/img/utils/external-link-svgrepo-com.svg';
 
 type Cat = { label: string; href: string };
 
@@ -142,6 +143,7 @@ export default function SecondaryNav(): React.ReactElement | null {
                         rel="noopener noreferrer"
                     >
                         {link.label}
+                        <ExternalLinkIcon style={{ marginLeft: '0.3rem', width: '20px', height: '20px', display: 'inline-block', verticalAlign: 'middle' }} />
                     </a>
                 ))}
             </div>
