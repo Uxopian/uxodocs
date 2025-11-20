@@ -77,48 +77,55 @@
     // Initial load
     function init() {
         processDropdowns();
+
+        // Setup observer only after body is available
+        if (document.body) {
+            const observer = new MutationObserver((mutations) => {
+                let shouldProcess = false;
+                for (const mutation of mutations) {
+                    for (const node of mutation.addedNodes) {
+                        if (node.nodeType === 1) { // Element node
+                            const element = node;
+                            if (element.classList &&
+                                (element.classList.contains('dropdown__menu') ||
+                                    element.querySelector && element.querySelector('.dropdown__menu'))) {
+                                shouldProcess = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (shouldProcess) break;
+                }
+                if (shouldProcess) {
+                    // Small delay to ensure dropdown is fully rendered
+                    setTimeout(processDropdowns, 10);
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+
+        // Also process on click events (backup mechanism)
+        document.addEventListener('click', (e) => {
+            const target = e.target;
+            if (target && target.closest && target.closest('.navbar__item')) {
+                setTimeout(processDropdowns, 50);
+            }
+        }, true);
     }
 
-    // Run on page load
+    // Run on page load - wait for body to be available
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
-        init();
+        // If already loaded, wait a tick to ensure body exists
+        if (document.body) {
+            init();
+        } else {
+            setTimeout(init, 0);
+        }
     }
-
-    // Watch for dynamically added dropdowns
-    const observer = new MutationObserver((mutations) => {
-        let shouldProcess = false;
-        for (const mutation of mutations) {
-            for (const node of mutation.addedNodes) {
-                if (node.nodeType === 1) { // Element node
-                    const element = node;
-                    if (element.classList &&
-                        (element.classList.contains('dropdown__menu') ||
-                            element.querySelector && element.querySelector('.dropdown__menu'))) {
-                        shouldProcess = true;
-                        break;
-                    }
-                }
-            }
-            if (shouldProcess) break;
-        }
-        if (shouldProcess) {
-            // Small delay to ensure dropdown is fully rendered
-            setTimeout(processDropdowns, 10);
-        }
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-
-    // Also process on click events (backup mechanism)
-    document.addEventListener('click', (e) => {
-        const target = e.target;
-        if (target && target.closest && target.closest('.navbar__item')) {
-            setTimeout(processDropdowns, 50);
-        }
-    }, true);
 })();
