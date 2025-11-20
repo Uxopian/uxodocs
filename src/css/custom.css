@@ -365,3 +365,93 @@ body .navbar__inner.secondary-nav__inner a.secondary-nav__item,
 body .navbar .secondary-nav .secondary-nav__item {
   color: #ffffff !important;
 }
+
+/* Searchbar: centered, larger, semi-transparent */
+.navbar__search {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  max-width: 450px !important;
+}
+
+.navbar__search-input {
+  width: 100% !important;
+  height: 44px !important;
+  font-size: 1.05rem !important;
+  padding: 0.7rem 4rem 0.7rem 1.2rem !important;
+  background: rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme='dark'] .navbar__search-input {
+  background: rgba(30, 30, 40, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
+}
+
+.navbar__search-input::placeholder {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme='dark'] .navbar__search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.navbar__search-input:focus {
+  outline: 2px solid var(--ifm-color-primary) !important;
+  outline-offset: 2px !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-theme='dark'] .navbar__search-input:focus {
+  background: rgba(30, 30, 40, 0.5) !important;
+}
+
+/* Position Ctrl+K badge inside searchbar */
+.DocSearch-Button-Keys,
+.DocSearch-Button-Key {
+  position: absolute !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  padding: 0.2rem 0.5rem !important;
+  border-radius: 6px !important;
+  font-size: 0.85rem !important;
+}
+
+[data-theme='dark'] .DocSearch-Button-Keys,
+[data-theme='dark'] .DocSearch-Button-Key {
+  background: rgba(60, 60, 70, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+@media (max-width: 996px) {
+  .navbar__search {
+    position: relative !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Version dropdown text: black in light mode, white in dark mode */
+body:not([data-theme='dark']) .dropdown__menu,
+body:not([data-theme='dark']) .dropdown__menu a,
+body:not([data-theme='dark']) .dropdown__link,
+body:not([data-theme='dark']) .navbar__item.dropdown .dropdown__menu a {
+  color: #000000 !important;
+}
+
+[data-theme='dark'] .dropdown__menu,
+[data-theme='dark'] .dropdown__menu a,
+[data-theme='dark'] .dropdown__link {
+  color: #ffffff !important;
+}
