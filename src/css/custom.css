@@ -338,20 +338,22 @@ body:not([data-theme='dark']) .navbar a {
 body[class*="indexPage"] .navbar,
 body:has(main > section[class*="productsSection"]) .navbar,
 body[class*="indexPage"] .navbar a,
-body:has(main > section[class*="productsSection"]) .navbar a {
+body:has(main > section[class*="productsSection"]) .navbar a,
+body[class*="indexPage"]:not([data-theme='dark']) .navbar__link,
+body:has(main > section[class*="productsSection"]):not([data-theme='dark']) .navbar__link {
   color: #ffffff !important;
 }
 
 
 /* Light mode : labels produits en noir */
-body:not([data-theme='dark']) .navbar__link[class^="verdd"]::before {
+body:not([data-theme='dark']) .navbar__link.verdd::before {
   color: #000000 !important;
 }
 
 /* Homepage, pages produits & dark mode : labels produits en blanc */
-body[class*="indexPage"] .navbar__link[class^="verdd"]::before,
-body:has(main > section[class*="productsSection"]) .navbar__link[class^="verdd"]::before,
-[data-theme='dark'] .navbar__link[class^="verdd"]::before {
+body[class*="indexPage"] .navbar__link.verdd::before,
+body:has(main > section[class*="productsSection"]) .navbar__link.verdd::before,
+[data-theme='dark'] .navbar__link.verdd::before {
   color: #ffffff !important;
 }
 
