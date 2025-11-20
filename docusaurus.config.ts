@@ -31,6 +31,11 @@ const config: Config = {
     ],
   ],
 
+  // Client scripts
+  scripts: [
+    { src: '/uxodocs/js/augment-version-dropdowns.js', async: false },
+  ],
+
   plugins: [
     [
       '@docusaurus/plugin-content-docs',

@@ -457,3 +457,23 @@ body:not([data-theme='dark']) .navbar__item.dropdown .dropdown__menu a {
 [data-theme='dark'] .dropdown__link {
   color: #ffffff !important;
 }
+
+/* Separator and injected "Release notes" link for version dropdowns */
+.dropdown__separator {
+  list-style: none;
+  height: 1px;
+  margin: 6px 0;
+  background: rgba(0,0,0,0.06);
+}
+
+[data-theme='dark'] .dropdown__separator {
+  background: rgba(255,255,255,0.06);
+}
+
+.dropdown__menu > li > .dropdown__link[href$="/releases/fast2"],
+.dropdown__menu > li > .dropdown__link[href$="/releases/arender"],
+.dropdown__menu > li > .dropdown__link[href$="/releases/flowerdocs"],
+.dropdown__menu > li > .dropdown__link[href$="/releases/uxopian-ai"] {
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+}
