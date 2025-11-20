@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import styles from './fast2.module.css';
+import ReleaseSwitcher from '@site/src/components/ReleaseSwitcher';
 import releasesData from '@site/src/generated/fast2Releases.json';
 
 interface ReleaseNote {
@@ -114,6 +115,7 @@ export default function Fast2Releases() {
 
                 <main className={styles.mainContent}>
                     <div className="container">
+                        <ReleaseSwitcher current="fast2" />
                         {/* Version filter */}
                         <div className={styles.filterBar}>
                             <button
@@ -140,7 +142,7 @@ export default function Fast2Releases() {
                             {filteredNotes.map((note, index) => (
                                 <div
                                     key={`${selectedMajor}-${note.version}`}
-                                    style={{ animationDelay: `${index * 0.05}s` }}
+                                    style={{ animationDelay: `${index * 0.02}s` }}
                                 >
                                     <ReleaseNoteCard note={note} latestV2Version={latestByMajor['2'] || ''} />
                                 </div>

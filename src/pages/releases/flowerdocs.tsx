@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import styles from './flowerdocs.module.css';
 import releasesData from '../../generated/flowerDocsReleases.json';
+import ReleaseSwitcher from '@site/src/components/ReleaseSwitcher';
 
 interface ReleaseNote {
     version: string;
@@ -117,6 +118,7 @@ export default function FlowerDocsReleases() {
 
                 <main className="container">
                     <div className={styles.mainContent}>
+                        <ReleaseSwitcher current="flowerdocs" />
                         {/* Filter buttons */}
                         <div className={styles.filterBar}>
                             <button
@@ -143,7 +145,7 @@ export default function FlowerDocsReleases() {
                             {filteredNotes.map((note, index) => (
                                 <div
                                     key={`${selectedMajor}-${note.version}`}
-                                    style={{ animationDelay: `${index * 0.05}s` }}
+                                    style={{ animationDelay: `${index * 0.02}s` }}
                                 >
                                     <ReleaseNoteCard note={note} latestV2Version={latestByMajor['2'] || ''} />
                                 </div>

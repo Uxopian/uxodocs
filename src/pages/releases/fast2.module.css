@@ -79,9 +79,6 @@
     z-index: 1;
 }
 
-.mainContent {
-    padding: 3rem 0;
-}
 
 .filterBar {
     display: flex;

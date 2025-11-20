@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import styles from './arender.module.css';
 import releasesData from '@site/src/generated/arenderReleases.json';
+import ReleaseSwitcher from '@site/src/components/ReleaseSwitcher';
 
 interface ReleaseNote {
     version: string;
@@ -110,6 +111,7 @@ export default function ARenderReleases() {
 
                 <main className={styles.mainContent}>
                     <div className="container">
+                        <ReleaseSwitcher current="arender" />
                         <div className={styles.filterBar}>
                             <button
                                 className={`${styles.filterButton} ${selectedYear === 'all' ? styles.filterButtonActive : ''
@@ -137,7 +139,7 @@ export default function ARenderReleases() {
 
                         <div className={styles.releaseGrid}>
                             {filteredNotes.map((note, index) => (
-                                <div key={note.version} style={{ animationDelay: `${index * 0.05}s` }}>
+                                <div key={note.version} style={{ animationDelay: `${index * 0.02}s` }}>
                                     <ReleaseNoteCard note={note} />
                                 </div>
                             ))}

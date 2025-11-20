@@ -74,14 +74,10 @@
 .pageSubtitle {
     font-size: 1.125rem;
     opacity: 0.95;
-    max-width: 700px;
     position: relative;
     z-index: 1;
 }
 
-.mainContent {
-    padding: 3rem 0;
-}
 
 .filterBar {
     display: flex;

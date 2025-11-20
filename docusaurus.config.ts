@@ -112,7 +112,56 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
-      copyright: `© ${new Date().getFullYear()} Uxopian Software All rights reserved`,
+      links: [
+        {
+          title: 'Resources',
+          items: [
+            {
+              label: 'Support',
+              href: 'https://support.uxopian.com', // À remplacer
+            },
+            {
+              label: 'Contact',
+              href: 'https://uxopian.com/contact', // À remplacer
+            },
+          ],
+        },
+        {
+          title: 'Company',
+          items: [
+            {
+              label: 'About Uxopian',
+              href: 'https://uxopian.com', // À remplacer
+            },
+            {
+              label: 'Privacy Policy',
+              to: '/privacy-policy',
+            },
+          ],
+        },
+        {
+          title: 'Follow Us',
+          items: [
+            {
+              label: 'LinkedIn',
+              href: 'https://linkedin.com/company/uxopian', // À remplacer
+            },
+            {
+              label: 'YouTube',
+              href: 'https://youtube.com/@uxopian', // À remplacer
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/uxopian', // À remplacer
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/uxopian', // À remplacer
+            },
+          ],
+        },
+      ],
+      copyright: `© ${new Date().getFullYear()} Uxopian Software. All rights reserved.`,
     },
     prism: {
       theme: prismThemes.github,
