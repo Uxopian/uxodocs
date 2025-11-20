@@ -31,9 +31,9 @@ const config: Config = {
     ],
   ],
 
-  // Client scripts
+  // Client scripts (use relative path so it works both locally and when deployed)
   scripts: [
-    { src: '/uxodocs/js/augment-version-dropdowns.js', async: false },
+    { src: 'js/augment-version-dropdowns.js', async: false },
   ],
 
   plugins: [
