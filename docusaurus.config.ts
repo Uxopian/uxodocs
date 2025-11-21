@@ -31,11 +31,6 @@ const config: Config = {
     ],
   ],
 
-  // Client scripts (use relative path so it works both locally and when deployed)
-  scripts: [
-    { src: 'js/augment-version-dropdowns.js', async: false },
-  ],
-
   plugins: [
     [
       '@docusaurus/plugin-content-docs',

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
-import ReleaseSwitcher from '@site/src/components/ReleaseSwitcher';
+import ProductCarousel3D from '@site/src/components/ProductCarousel3D';
 
 type RawNote = any;
 
@@ -42,7 +42,7 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink }:
             <div className={styles.cardHeader}>
                 <div className={styles.versionBadge}>
                     <span className={styles.versionNumber}>{note.version}</span>
-                    {note.latest && <span className={styles.latestBadge}>Latest</span>}
+                    {note.latest && !note.isLatestV2 && <span className={styles.latestBadge}>Latest</span>}
                     {note.isLatestV2 && <span className={styles.latestV2Badge}>Latest v2.x</span>}
                 </div>
                 <div className={styles.releaseDate}>{formattedDate}</div>
@@ -121,28 +121,10 @@ export default function ReleasePage({
     return (
         <Layout title={`${title} - Release Notes`} description={subtitle || ''}>
             <div className={styles.releasesPage}>
-                <header className={styles.pageHeader}>
-                    <div className="container">
-                        <div className={styles.breadcrumb}>
-                            <Link to="/releases" className={styles.breadcrumbLink}>
-                                Release Notes
-                            </Link>
-                            <span className={styles.breadcrumbSeparator}>/</span>
-                            <span className={styles.breadcrumbCurrent}>{title}</span>
-                        </div>
-                        <Heading as="h1" className={styles.pageTitle}>
-                            {logoSrc && (
-                                <img src={logoSrc} alt={logoAlt || title} style={{ height: '2.5rem', width: 'auto' }} />
-                            )}
-                            {title}
-                        </Heading>
-                        {subtitle && <p className={styles.pageSubtitle}>{subtitle}</p>}
-                    </div>
-                </header>
+                <ProductCarousel3D current={productKey} />
 
                 <main className={styles.mainContent}>
                     <div className="container">
-                        <ReleaseSwitcher current={productKey} />
                         <div className={styles.filterBar}>
                             {filterBy !== 'none' && (
                                 <>
