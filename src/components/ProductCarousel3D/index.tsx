@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { useHistory } from '@docusaurus/router'; // Import important pour la navigation manuelle
+import { useHistory } from '@docusaurus/router';
 import styles from './styles.module.css';
 
 type Product = {
@@ -68,11 +68,27 @@ export default function ProductCarousel3D({ current }: ProductCarousel3DProps) {
   const activeIndex = PRODUCTS.findIndex((p) => p.id === activeId);
   const safeActiveIndex = activeIndex === -1 ? 0 : activeIndex;
 
-  // Gérer le clic pour animer d'abord, naviguer ensuite
   const handleCardClick = (e: React.MouseEvent, product: Product) => {
-    e.preventDefault(); // Bloque la navigation immédiate
+    e.preventDefault();
 
-    if (product.id === activeId) return; // Rien ne se passe si on clique sur le centre
+    if (product.id === activeId) return;
+
+    const realCard = document.getElementById(`card-${product.id}`);
+    if (realCard) {
+      const clickedElement = e.currentTarget as HTMLElement;
+      const rect = clickedElement.getBoundingClientRect();
+      const isLeftClick = rect.left < window.innerWidth / 2;
+      realCard.style.transition = 'none';
+      if (isLeftClick) {
+        realCard.classList.remove(styles.posFarRight);
+        realCard.classList.add(styles.posFarLeft);
+      } else {
+        realCard.classList.remove(styles.posFarLeft);
+        realCard.classList.add(styles.posFarRight);
+      }
+      void realCard.offsetWidth;
+      realCard.style.transition = '';
+    }
 
     setActiveId(product.id);
 
@@ -89,7 +105,9 @@ export default function ProductCarousel3D({ current }: ProductCarousel3DProps) {
     if (offset === 0) return styles.posCenter;
     if (offset === 1) return styles.posRight;
     if (offset === -1) return styles.posLeft;
-    if (offset === 2 || offset === -2) return styles.posFarRight; // Par défaut le "loin" va à droite
+    
+    if (offset === 2 || offset === -2) return styles.posFarRight; 
+    
     return styles.posHidden;
   };
 
@@ -97,15 +115,15 @@ export default function ProductCarousel3D({ current }: ProductCarousel3DProps) {
     const index = PRODUCTS.findIndex(p => p.id === product.id);
     let positionClass = getPositionClass(index, safeActiveIndex, PRODUCTS.length);
     
-    if (isGhost) {
+     if (isGhost) {
        positionClass = styles.posFarLeft; 
-    } else if (positionClass === styles.posFarRight) {
-    }
+     }
 
     const isActive = product.id === activeId;
 
     return (
       <a
+        id={!isGhost ? `card-${product.id}` : undefined}
         key={isGhost ? `${product.id}-ghost` : product.id}
         href={product.to}
         onClick={(e) => handleCardClick(e, product)}
