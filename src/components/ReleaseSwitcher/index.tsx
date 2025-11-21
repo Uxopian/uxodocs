@@ -5,10 +5,10 @@ import styles from './styles.module.css';
 type Product = { id: string; label: string; to: string };
 
 const PRODUCTS: Product[] = [
-  { id: 'fast2', label: 'Fast2', to: '/releases/fast2' },
-  { id: 'arender', label: 'ARender', to: '/releases/arender' },
-  { id: 'flowerdocs', label: 'FlowerDocs', to: '/releases/flowerdocs' },
-  { id: 'uxopian-ai', label: 'Uxopian AI', to: '/releases/uxopian-ai' },
+  { id: 'fast2', label: 'Fast2', to: '/releases?product=fast2' },
+  { id: 'arender', label: 'ARender', to: '/releases?product=arender' },
+  { id: 'flowerdocs', label: 'FlowerDocs', to: '/releases?product=flowerdocs' },
+  { id: 'uxopian-ai', label: 'Uxopian AI', to: '/releases?product=uxopian-ai' },
 ];
 
 export default function ReleaseSwitcher({ current }: { current?: string }) {

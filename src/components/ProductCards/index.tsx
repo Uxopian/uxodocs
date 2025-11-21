@@ -10,7 +10,7 @@ const ProductList = [
         logo: '/img/fast2/Fast2_favicon_white.png',
         description: 'Document migration platform to transform and migrate your documents to different systems',
         link: '/docs/fast2',
-        releaseNotesLink: '/releases/fast2',
+        releaseNotesLink: '/releases?product=fast2',
         color: '#5CB8C7',
         gradient: 'linear-gradient(135deg, #5CB8C7, #4AA5B4, #3A8F9D, #2F7D8B)'
     },
@@ -20,7 +20,7 @@ const ProductList = [
         logo: '/img/flowerdocs/logo_flower_white.png',
         description: 'Electronic document management (EDM) solution to organize, manage and exploit your document content',
         link: '/docs/flowerdocs',
-        releaseNotesLink: '/releases/flowerdocs',
+        releaseNotesLink: '/releases?product=flowerdocs',
         color: '#D745FF',
         gradient: 'linear-gradient(135deg, #D745FF, #C55BFF, #B56BFF, #A47BFF)'
     },
@@ -30,7 +30,7 @@ const ProductList = [
         logo: '/img/arender/arender_logo_white.png',
         description: 'High-performance document viewer to display and annotate all types of documents',
         link: '/docs/arender',
-        releaseNotesLink: '/releases/arender',
+        releaseNotesLink: '/releases?product=arender',
         color: '#4A8FEF',
         gradient: 'linear-gradient(135deg, #4A8FEF, #3A7EE5, #2A6DD8, #1865D8)'
     },

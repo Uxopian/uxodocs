@@ -17,7 +17,7 @@ const PRODUCTS: Product[] = [
   {
     id: 'fast2',
     label: 'Fast2',
-    to: '/uxodocs/releases/fast2',
+    to: '/uxodocs/releases',
     logo: '/img/fast2/Fast2_favicon_white.png',
     gradient: 'linear-gradient(135deg, #5CB8C7 0%, #4AA5B4 50%, #3A8F9D 100%)',
     color: '#5CB8C7',
@@ -26,7 +26,7 @@ const PRODUCTS: Product[] = [
   {
     id: 'arender',
     label: 'ARender',
-    to: '/uxodocs/releases/arender',
+    to: '/uxodocs/releases',
     logo: '/img/arender/arender_logo_white.png',
     gradient: 'linear-gradient(135deg, #4A8FEF 0%, #3A7EE5 50%, #2A6DD8 100%)',
     color: '#4A8FEF',
@@ -35,7 +35,7 @@ const PRODUCTS: Product[] = [
   {
     id: 'flowerdocs',
     label: 'FlowerDocs',
-    to: '/uxodocs/releases/flowerdocs',
+    to: '/uxodocs/releases',
     logo: '/img/flowerdocs/logo_flower_white.png',
     gradient: 'linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #7E22CE 100%)',
     color: '#A855F7',
@@ -44,7 +44,7 @@ const PRODUCTS: Product[] = [
   {
     id: 'uxopian-ai',
     label: 'Uxopian AI',
-    to: '/uxodocs/releases/uxopian-ai',
+    to: '/uxodocs/releases',
     logo: '/img/uxo_white.png',
     gradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #B45309 100%)',
     color: '#F59E0B',
@@ -54,9 +54,10 @@ const PRODUCTS: Product[] = [
 
 interface ProductCarousel3DProps {
   current?: string;
+  onProductChange?: (productId: string) => void;
 }
 
-export default function ProductCarousel3D({ current }: ProductCarousel3DProps) {
+export default function ProductCarousel3D({ current, onProductChange }: ProductCarousel3DProps) {
   const history = useHistory();
   
   const [activeId, setActiveId] = useState(current || PRODUCTS[0].id);
@@ -92,9 +93,11 @@ export default function ProductCarousel3D({ current }: ProductCarousel3DProps) {
 
     setActiveId(product.id);
 
-    setTimeout(() => {
-      history.push(product.to);
-    }, 400);
+    if (onProductChange) {
+        onProductChange(product.id);
+    } else {
+        history.push(product.to);
+    }
   };
 
   const getPositionClass = (index: number, centerIndex: number, total: number) => {
