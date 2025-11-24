@@ -1,6 +1,3 @@
-/* ------------------------------
-   Core tokens
-   ------------------------------ */
 :root {
   --uxo-purple-700: #D745FF;
   --uxo-purple-500: #B56BFF;
@@ -31,7 +28,6 @@
   --uxo-blue-3: #2B3FAB;
   --uxo-blue-4: #2D2F8F;
 
-  /* Derived gradients */
   --gradient-purple: linear-gradient(135deg, var(--uxo-purple-1), var(--uxo-purple-2), var(--uxo-purple-3), var(--uxo-purple-4));
   --gradient-sunset: linear-gradient(135deg, var(--uxo-sunset-1), var(--uxo-sunset-2), var(--uxo-sunset-3), var(--uxo-sunset-4));
   --gradient-green: linear-gradient(135deg, var(--uxo-green-1), var(--uxo-green-2), var(--uxo-green-3), var(--uxo-green-4));
@@ -61,9 +57,6 @@
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.06);
 }
 
-/* ------------------------------
-   Hero + primary CTA use Purple gradient by default
-   ------------------------------ */
 .hero--primary {
   background: var(--gradient-sunset) !important;
   background-color: transparent !important;
@@ -79,7 +72,6 @@ body {
   padding: 0 10px 0 20px;
 }
 
-/* Gradient utility helpers */
 .bg-gradient-purple {
   background-image: var(--gradient-purple) !important;
   color: #fff;
@@ -192,8 +184,6 @@ body {
   height: 1em;
 }
 
-/* Ensure the color mode toggle (theme switch) icon follows the navbar link color.
-   This makes the toggle icon black in light/navbar-black contexts and white in dark mode. */
 .navbar .colorModeToggle_DEke,
 .navbar .colorModeToggle_DEke button,
 .navbar .colorModeToggle_DEke svg,
@@ -207,8 +197,6 @@ body {
   stroke: currentColor !important;
 }
 
-/* Context-specific overrides: some navbar link colors are applied to pseudo-elements
-   or specific pages, so make the toggle icon explicit in those cases. */
 body[class*="indexPage"] .navbar .colorModeToggle_DEke svg,
 body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke svg,
 [data-theme='dark'] .navbar .colorModeToggle_DEke svg,
@@ -218,7 +206,6 @@ body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke
   stroke: currentColor !important;
 }
 
-/* Default light-mode navbar: make toggle icon black so it matches link labels. */
 body:not([data-theme='dark']) .navbar .colorModeToggle_DEke svg,
 body:not([data-theme='dark']) .navbar .toggleIcon_g3eP {
   color: #000000 !important;
@@ -226,8 +213,6 @@ body:not([data-theme='dark']) .navbar .toggleIcon_g3eP {
   stroke: currentColor !important;
 }
 
-/* Strong rule: ensure the actual <path> inside the toggle SVG is white in dark/home/product contexts.
-   This targets the path element directly with high specificity and !important to override other rules. */
 [data-theme='dark'] .navbar .colorModeToggle_DEke svg path,
 body[class*="indexPage"] .navbar .colorModeToggle_DEke svg path,
 body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke svg path {
@@ -235,14 +220,12 @@ body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke
   stroke: #ffffff !important;
 }
 
-/* Fallback: also force svg color property for those contexts (covers currentColor usage). */
 [data-theme='dark'] .navbar .colorModeToggle_DEke svg,
 body[class*="indexPage"] .navbar .colorModeToggle_DEke svg,
 body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke svg {
   color: #ffffff !important;
 }
 
-/* Make the theme toggle icon visually lighter: remove heavy strokes and slightly reduce size. */
 .navbar .colorModeToggle_DEke svg,
 .navbar .toggleIcon_g3eP,
 .navbar .toggle_vylO svg {
@@ -255,7 +238,6 @@ body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke
 .navbar .toggle_vylO svg path {
   stroke-width: 0 !important;
   stroke: none !important;
-  /* keep fill as currentColor (controlled elsewhere) */
 }
 
 .navbar__link.verdd--fast2::before {
@@ -274,7 +256,12 @@ body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke
   content: 'Uxopian AI';
 }
 
-/* On hover, do NOT change color — just underline the label */
+.navbar__link.verdd--releases::before {
+  content: 'Release Notes';
+  font-size: var(--ifm-navbar-link-font-size, 1rem);
+  line-height: inherit;
+}
+
 .navbar__link.verdd:hover::before,
 .navbar__link.verdd--fast2:hover::before,
 .navbar__link.verdd--arender:hover::before,
@@ -302,28 +289,23 @@ body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke
   z-index: 100 !important;
 }
 
-/* Hide the link of index pages in sidebar */
 li.hidden-index-link > a {
   display: none !important;
 }
 
-/* Hide sidebar items with hidden-sidebar-item class */
 li.hidden-sidebar-item {
   display: none !important;
 }
 
-/* Hide collapsible menu items with hidden-sidebar-item class */
 li.hidden-sidebar-item .menu__list-item-collapsible {
   display: none !important;
 }
 
-/* Hide sidebar ONLY on product index pages that have documentation cards OR when active link has hidden-index-link class */
 div:has(main article [class*="documentationSection"]) > aside[class*="docSidebarContainer"],
 aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
   display: none !important;
 }
 
-/* Expand main content when sidebar is hidden on index pages */
 div:has(main article [class*="documentationSection"]) > div > main,
 div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active) > div > main {
   max-width: 100% !important;
@@ -343,22 +325,18 @@ aside[class*="docSidebarContainer"] {
   max-height: calc(100vh - var(--ifm-navbar-height)) !important;
 }
 
-/* TOC - Ensure it stays below navbar AND secondary nav when scrolling up */
 .theme-doc-toc-desktop {
   position: sticky !important;
-  /* Keep TOC below navbar + secondary nav (approx 56px + 50px + spacing) */
   top: calc(var(--ifm-navbar-height) + 50px + 1rem) !important;
   max-height: calc(100vh - var(--ifm-navbar-height) - 50px - 2rem) !important;
   align-self: flex-start !important;
 }
 
-/* TOC inner wrapper for scrolling */
 .theme-doc-toc-desktop .table-of-contents {
   overflow-y: auto !important;
   max-height: 100% !important;
 }
 
-/* Glassmorphism navbar on home page */
 body[class*="indexPage"] .navbar,
 body:has(main > section[class*="productsSection"]) .navbar {
   background: rgba(255, 255, 255, 0.3) !important;
@@ -382,7 +360,6 @@ body:not([data-theme='dark']) .navbar a {
   color: #fff !important;
 }
 
-/* Dark mode : tout le texte de la navbar en blanc */
 [data-theme='dark'] .navbar,
 [data-theme='dark'] .navbar a,
 [data-theme='dark'] .navbar__inner .navbar__items,
@@ -410,19 +387,15 @@ body:has(main > section[class*="productsSection"]):not([data-theme='dark']) .nav
   color: #ffffff !important;
 }
 
-
-/* Light mode : labels produits en noir */
 body:not([data-theme='dark']) .navbar__link.verdd::before {
   color: #000000 !important;
 }
 
-/* Homepage, pages produits & dark mode : labels produits en blanc */
 body[class*="indexPage"] .navbar__link.verdd::before,
 body:has(main > section[class*="productsSection"]) .navbar__link.verdd::before,
 [data-theme='dark'] .navbar__link.verdd::before {
   color: #ffffff !important;
 }
-
 
 .secondary-nav,
 .secondary-nav__item,
@@ -434,7 +407,6 @@ body .navbar .secondary-nav .secondary-nav__item {
   color: #ffffff !important;
 }
 
-/* Searchbar: centered, larger, semi-transparent */
 .navbar__search {
   left: 50% !important;
   transform: translateX(-50%) !important;
@@ -479,7 +451,6 @@ body .navbar .secondary-nav .secondary-nav__item {
   background: rgba(30, 30, 40, 0.5) !important;
 }
 
-/* Position Ctrl+K badge inside searchbar */
 .DocSearch-Button-Keys,
 .DocSearch-Button-Key {
   position: absolute !important;
@@ -510,7 +481,60 @@ body .navbar .secondary-nav .secondary-nav__item {
   }
 }
 
-/* Version dropdown text: black in light mode, white in dark mode */
+.navbar__link--active,
+.navbar__item a[aria-current="page"],
+.navbar__item .navbar__link--active,
+.navbar__item .navbar__link[aria-current="page"] {
+  display: inline-flex !important;
+  align-items: center;
+  gap: .25rem;
+  padding: 0.35rem 0.8rem !important;
+  border-radius: 999px !important;
+  transition: all 200ms ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: none !important;
+  
+  /* DEFAULT LIGHT MODE: Contrast increased to 20% primary color */
+  background-color: color-mix(in srgb, var(--ifm-color-primary), white 80%) !important;
+  color: var(--ifm-color-primary) !important;
+  font-weight: 600;
+}
+
+.navbar__link.verdd[aria-current="page"]::before,
+.navbar__link.verdd.navbar__link--active::before {
+  color: var(--ifm-color-primary) !important;
+  font-weight: 600;
+}
+
+html[data-theme='dark'] .navbar__link--active,
+html[data-theme='dark'] .navbar__item a[aria-current="page"],
+body[class*="indexPage"] .navbar__link--active,
+body[class*="indexPage"] .navbar__item a[aria-current="page"],
+body:has(main > section[class*="productsSection"]) .navbar__link--active,
+body:has(main > section[class*="productsSection"]) .navbar__item a[aria-current="page"] {
+  /* DARK/TRANSPARENT MODE: Opacity increased to 30% */
+  background-color: rgba(255, 255, 255, 0.30) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+html[data-theme='dark'] .navbar__link.verdd[aria-current="page"]::before,
+html[data-theme='dark'] .navbar__link.verdd.navbar__link--active::before,
+body[class*="indexPage"] .navbar__link.verdd[aria-current="page"]::before,
+body[class*="indexPage"] .navbar__link.verdd.navbar__link--active::before,
+body:has(main > section[class*="productsSection"]) .navbar__link.verdd[aria-current="page"]::before,
+body:has(main > section[class*="productsSection"]) .navbar__link.verdd.navbar__link--active::before {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.navbar__link--active:hover,
+.navbar__item a[aria-current="page"]:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
 body:not([data-theme='dark']) .dropdown__menu,
 body:not([data-theme='dark']) .dropdown__menu a,
 body:not([data-theme='dark']) .dropdown__link,
@@ -524,7 +548,6 @@ body:not([data-theme='dark']) .navbar__item.dropdown .dropdown__menu a {
   color: #ffffff !important;
 }
 
-/* Separator and injected "Release notes" link for version dropdowns */
 .dropdown__separator {
   list-style: none;
   height: 1px;

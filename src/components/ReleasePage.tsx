@@ -2,6 +2,7 @@ import React, { useState, useMemo, memo } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import ProductCarousel3D from '@site/src/components/ProductCarousel3D';
+import overrideStyles from './ReleasePage.module.css';
 
 type RawNote = any;
 
@@ -130,7 +131,7 @@ export default function ReleasePage({
 
                 <main className={styles.mainContent}>
                     <div className="container">
-                        <div className={styles.filterBar}>
+                        <div className={`${styles.filterBar} ${overrideStyles.centered}`}>
                             {filterBy !== 'none' && (
                                 <>
                                     <button

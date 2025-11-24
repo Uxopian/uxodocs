@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import ProductCarousel3D from '@site/src/components/ProductCarousel3D';
+import overrideStyles from '@site/src/components/ReleasePage.module.css';
 import fast2ReleasesData from '@site/src/generated/fast2Releases.json';
 import arenderReleasesData from '@site/src/generated/arenderReleases.json';
 import flowerDocsReleasesData from '@site/src/generated/flowerDocsReleases.json';
@@ -216,7 +217,7 @@ export default function UnifiedReleasesPage() {
 
                 <main className={config.styles.mainContent}>
                     <div className="container">
-                        <div className={config.styles.filterBar}>
+                        <div className={`${config.styles.filterBar} ${overrideStyles.centered}`}>
                             {config.filterBy !== 'none' && allNotes.length > 0 && (
                                 <>
                                     <button

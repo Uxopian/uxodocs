@@ -137,20 +137,16 @@ export default function ProductCarousel3D({ current, onProductChange }: ProductC
     return styles.posHidden;
   }, []);
 
-  const renderCard = (product: Product, isGhost = false) => {
+  const renderCard = (product: Product) => {
     const index = PRODUCTS.findIndex(p => p.id === product.id);
-    let positionClass = getPositionClass(index, safeActiveIndex, PRODUCTS.length);
-    
-     if (isGhost) {
-       positionClass = styles.posFarLeft; 
-     }
+    const positionClass = getPositionClass(index, safeActiveIndex, PRODUCTS.length);
 
     const isActive = product.id === activeId;
 
     return (
       <a
-        id={!isGhost ? `card-${product.id}` : undefined}
-        key={isGhost ? `${product.id}-ghost` : product.id}
+        id={`card-${product.id}`}
+        key={product.id}
         href={product.to}
         onClick={(e) => handleCardClick(e, product)}
         className={`${styles.productCard} ${positionClass} ${isActive ? styles.active : ''}`}
@@ -173,15 +169,11 @@ export default function ProductCarousel3D({ current, onProductChange }: ProductC
     );
   };
 
-  const ghostIndex = (safeActiveIndex + 2) % PRODUCTS.length;
-  const ghostProduct = PRODUCTS[ghostIndex];
-
   return (
     <div className={styles.carouselContainer}>
       <div className={styles.carouselWrapper}>
         <div className={styles.cardsScene}>
-          {PRODUCTS.map(product => renderCard(product, false))}
-          {ghostProduct && renderCard(ghostProduct, true)}
+          {PRODUCTS.map(product => renderCard(product))}
         </div>
       </div>
       
