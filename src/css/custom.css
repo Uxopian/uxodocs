@@ -549,7 +549,6 @@ body:not([data-theme='dark']) .navbar__item.dropdown .dropdown__menu a {
   background-color: #0b0c0e; 
   color: #94a3b8;
   padding: 25px 0 25px;
-  margin-top: 60px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden;
 }
