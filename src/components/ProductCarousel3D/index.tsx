@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { useHistory } from '@docusaurus/router';
 import styles from './styles.module.css';
@@ -57,9 +57,28 @@ interface ProductCarousel3DProps {
   onProductChange?: (productId: string) => void;
 }
 
+const ProductLogo = React.memo(({ logo, label }: { logo: string, label: string }) => {
+    const logoUrl = useBaseUrl(logo);
+    const fallback = useBaseUrl('/img/uxo.png');
+    
+    return (
+        <img
+            src={logoUrl}
+            alt={label}
+            className={styles.productLogo}
+            onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                if (img.src !== fallback) {
+                    img.src = fallback;
+                    img.onerror = null;
+                }
+            }}
+        />
+    );
+});
+
 export default function ProductCarousel3D({ current, onProductChange }: ProductCarousel3DProps) {
   const history = useHistory();
-  
   const [activeId, setActiveId] = useState(current || PRODUCTS[0].id);
 
   useEffect(() => {
@@ -69,17 +88,20 @@ export default function ProductCarousel3D({ current, onProductChange }: ProductC
   const activeIndex = PRODUCTS.findIndex((p) => p.id === activeId);
   const safeActiveIndex = activeIndex === -1 ? 0 : activeIndex;
 
-  const handleCardClick = (e: React.MouseEvent, product: Product) => {
+  const handleCardClick = useCallback((e: React.MouseEvent, product: Product) => {
     e.preventDefault();
 
     if (product.id === activeId) return;
 
     const realCard = document.getElementById(`card-${product.id}`);
+    
     if (realCard) {
       const clickedElement = e.currentTarget as HTMLElement;
       const rect = clickedElement.getBoundingClientRect();
       const isLeftClick = rect.left < window.innerWidth / 2;
+
       realCard.style.transition = 'none';
+      
       if (isLeftClick) {
         realCard.classList.remove(styles.posFarRight);
         realCard.classList.add(styles.posFarLeft);
@@ -87,6 +109,7 @@ export default function ProductCarousel3D({ current, onProductChange }: ProductC
         realCard.classList.remove(styles.posFarLeft);
         realCard.classList.add(styles.posFarRight);
       }
+
       void realCard.offsetWidth;
       realCard.style.transition = '';
     }
@@ -98,9 +121,9 @@ export default function ProductCarousel3D({ current, onProductChange }: ProductC
     } else {
         history.push(product.to);
     }
-  };
+  }, [activeId, history, onProductChange]);
 
-  const getPositionClass = (index: number, centerIndex: number, total: number) => {
+  const getPositionClass = useCallback((index: number, centerIndex: number, total: number) => {
     let offset = index - centerIndex;
     if (offset > total / 2) offset -= total;
     if (offset < -total / 2) offset += total;
@@ -112,7 +135,7 @@ export default function ProductCarousel3D({ current, onProductChange }: ProductC
     if (offset === 2 || offset === -2) return styles.posFarRight; 
     
     return styles.posHidden;
-  };
+  }, []);
 
   const renderCard = (product: Product, isGhost = false) => {
     const index = PRODUCTS.findIndex(p => p.id === product.id);
@@ -140,24 +163,7 @@ export default function ProductCarousel3D({ current, onProductChange }: ProductC
           <div className={styles.cardContent}>
             <div className={styles.logoContainer}>
               <div className={styles.logoBackdrop} />
-              {(() => {
-                const logoUrl = useBaseUrl(product.logo);
-                const fallback = useBaseUrl('/img/uxo.png');
-                return (
-                  <img
-                    src={logoUrl}
-                    alt={product.label}
-                    className={styles.productLogo}
-                    onError={(e) => {
-                      const img = e.currentTarget as HTMLImageElement;
-                      if (img.src !== fallback) {
-                        img.src = fallback;
-                        img.onerror = null;
-                      }
-                    }}
-                  />
-                );
-              })()}
+              <ProductLogo logo={product.logo} label={product.label} />
             </div>
             <h3 className={styles.productName}>{product.label}</h3>
             <p className={styles.productDescription}>{product.description}</p>
@@ -175,7 +181,6 @@ export default function ProductCarousel3D({ current, onProductChange }: ProductC
       <div className={styles.carouselWrapper}>
         <div className={styles.cardsScene}>
           {PRODUCTS.map(product => renderCard(product, false))}
-          
           {ghostProduct && renderCard(ghostProduct, true)}
         </div>
       </div>

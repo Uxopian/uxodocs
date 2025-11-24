@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, memo } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import ProductCarousel3D from '@site/src/components/ProductCarousel3D';
@@ -28,7 +28,7 @@ interface ReleasePageProps {
     cardColor?: string;
 }
 
-function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink }: any) {
+const ReleaseNoteCard = memo(function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink }: any) {
     const formattedDate = new Date(note.date).toLocaleDateString('fr-FR', {
         year: 'numeric',
         month: 'long',
@@ -73,7 +73,7 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink }:
             </div>
         </div>
     );
-}
+});
 
 export default function ReleasePage({
     productKey,
@@ -89,31 +89,39 @@ export default function ReleasePage({
     upgradeLink,
     cardColor,
 }: ReleasePageProps) {
-    const allNotes = releasesData.map(mapNote);
+    const allNotes = useMemo(() => releasesData.map(mapNote), [releasesData, mapNote]);
+    
     const [selectedFilter, setSelectedFilter] = useState<string>('all');
 
-    const filterKeys: string[] =
-        filterBy === 'year'
-            ? Array.from(new Set(allNotes.map((n) => n.version.split('.')[0].replace('v', '')))).sort((a, b) => Number(b) - Number(a))
-            : filterBy === 'major'
-                ? Array.from(new Set(allNotes.map((n) => n.majorVersion))).sort((a, b) => Number(b) - Number(a))
-                : [];
+    const filterKeys: string[] = useMemo(() => {
+        if (filterBy === 'year') {
+            return Array.from(new Set(allNotes.map((n) => n.version.split('.')[0].replace('v', '')))).sort((a, b) => Number(b) - Number(a));
+        }
+        if (filterBy === 'major') {
+            return Array.from(new Set(allNotes.map((n) => n.majorVersion))).sort((a, b) => Number(b) - Number(a));
+        }
+        return [];
+    }, [filterBy, allNotes]);
 
-    const filteredNotes =
-        selectedFilter === 'all' || filterBy === 'none'
+    const enhancedNotes = useMemo(() => {
+        const filtered = (selectedFilter === 'all' || filterBy === 'none')
             ? [...allNotes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
             : filterBy === 'year'
                 ? allNotes.filter((note) => note.version.startsWith(`v${selectedFilter}`))
                 : allNotes.filter((note) => note.majorVersion === selectedFilter);
 
-    const latestByMajor: Record<string, string> = {};
-    allNotes.forEach((note) => {
-        if (note.majorVersion && !latestByMajor[note.majorVersion]) {
-            latestByMajor[note.majorVersion] = note.version;
-        }
-    });
+        const latestByMajor: Record<string, string> = {};
+        allNotes.forEach((note) => {
+            if (note.majorVersion && !latestByMajor[note.majorVersion]) {
+                latestByMajor[note.majorVersion] = note.version;
+            }
+        });
 
-    const enhancedNotes = filteredNotes.map((n) => ({ ...n, isLatestV2: n.majorVersion === '2' && n.version === (latestByMajor['2'] || '') }));
+        return filtered.map((n) => ({
+            ...n,
+            isLatestV2: n.majorVersion === '2' && n.version === (latestByMajor['2'] || '')
+        }));
+    }, [allNotes, selectedFilter, filterBy]);
 
     return (
         <Layout title={`${title} - Release Notes`} description={subtitle || ''}>
@@ -150,11 +158,21 @@ export default function ReleasePage({
                         </div>
 
                         <div className={styles.releaseGrid} key={selectedFilter}>
-                            {enhancedNotes.map((note: any, index: number) => (
-                                <div key={note.version} style={{ animationDelay: `${index * 0.02}s` }}>
-                                    <ReleaseNoteCard note={note} styles={styles} cardColor={cardColor} readMoreLink={readMoreLink} upgradeLink={upgradeLink} />
-                                </div>
-                            ))}
+                            {enhancedNotes.map((note: any, index: number) => {
+                                const animationIndex = index > 20 ? 20 : index;
+                                
+                                return (
+                                    <div key={note.version} style={{ animationDelay: `${animationIndex * 0.02}s` }}>
+                                        <ReleaseNoteCard 
+                                            note={note} 
+                                            styles={styles} 
+                                            cardColor={cardColor} 
+                                            readMoreLink={readMoreLink} 
+                                            upgradeLink={upgradeLink} 
+                                        />
+                                    </div>
+                                );
+                            })}
                         </div>
 
                         {enhancedNotes.length === 0 && (
