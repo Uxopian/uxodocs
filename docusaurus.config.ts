@@ -114,24 +114,11 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Resources',
-          items: [
-            {
-              label: 'Support',
-              href: 'https://support.uxopian.com', // À remplacer
-            },
-            {
-              label: 'Contact',
-              href: 'https://uxopian.com/contact', // À remplacer
-            },
-          ],
-        },
-        {
           title: 'Company',
           items: [
             {
               label: 'About Uxopian',
-              href: 'https://uxopian.com', // À remplacer
+              href: 'https://uxopian.com',
             },
             {
               label: 'Privacy Policy',
@@ -144,19 +131,11 @@ const config: Config = {
           items: [
             {
               label: 'LinkedIn',
-              href: 'https://linkedin.com/company/uxopian', // À remplacer
+              href: 'https://www.linkedin.com/company/uxopiansoftware/posts/?feedView=all',
             },
             {
               label: 'YouTube',
-              href: 'https://youtube.com/@uxopian', // À remplacer
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/uxopian', // À remplacer
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/uxopian', // À remplacer
+              href: 'https://www.youtube.com/@Uxopian',
             },
           ],
         },

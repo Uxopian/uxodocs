@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import Heading from '@theme/Heading';
 import ProductCarousel3D from '@site/src/components/ProductCarousel3D';
 
 type RawNote = any;
@@ -107,7 +106,6 @@ export default function ReleasePage({
                 ? allNotes.filter((note) => note.version.startsWith(`v${selectedFilter}`))
                 : allNotes.filter((note) => note.majorVersion === selectedFilter);
 
-    // Determine latest v2 if any
     const latestByMajor: Record<string, string> = {};
     allNotes.forEach((note) => {
         if (note.majorVersion && !latestByMajor[note.majorVersion]) {
@@ -115,7 +113,6 @@ export default function ReleasePage({
         }
     });
 
-    // add helper flags
     const enhancedNotes = filteredNotes.map((n) => ({ ...n, isLatestV2: n.majorVersion === '2' && n.version === (latestByMajor['2'] || '') }));
 
     return (
@@ -152,8 +149,6 @@ export default function ReleasePage({
                             )}
                         </div>
 
-                        {/* key on grid forces React to remount the grid when filter changes
-                            so animations restart for all cards on each filter click */}
                         <div className={styles.releaseGrid} key={selectedFilter}>
                             {enhancedNotes.map((note: any, index: number) => (
                                 <div key={note.version} style={{ animationDelay: `${index * 0.02}s` }}>

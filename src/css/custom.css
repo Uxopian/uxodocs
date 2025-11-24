@@ -192,6 +192,72 @@ body {
   height: 1em;
 }
 
+/* Ensure the color mode toggle (theme switch) icon follows the navbar link color.
+   This makes the toggle icon black in light/navbar-black contexts and white in dark mode. */
+.navbar .colorModeToggle_DEke,
+.navbar .colorModeToggle_DEke button,
+.navbar .colorModeToggle_DEke svg,
+.navbar .toggle,
+.navbar .toggle button,
+.navbar .toggle svg,
+.navbar .toggleButton_gllP,
+.navbar .toggleButton_gllP svg {
+  color: inherit !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Context-specific overrides: some navbar link colors are applied to pseudo-elements
+   or specific pages, so make the toggle icon explicit in those cases. */
+body[class*="indexPage"] .navbar .colorModeToggle_DEke svg,
+body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke svg,
+[data-theme='dark'] .navbar .colorModeToggle_DEke svg,
+[data-theme='dark'] .navbar .toggleIcon_g3eP {
+  color: #ffffff !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Default light-mode navbar: make toggle icon black so it matches link labels. */
+body:not([data-theme='dark']) .navbar .colorModeToggle_DEke svg,
+body:not([data-theme='dark']) .navbar .toggleIcon_g3eP {
+  color: #000000 !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Strong rule: ensure the actual <path> inside the toggle SVG is white in dark/home/product contexts.
+   This targets the path element directly with high specificity and !important to override other rules. */
+[data-theme='dark'] .navbar .colorModeToggle_DEke svg path,
+body[class*="indexPage"] .navbar .colorModeToggle_DEke svg path,
+body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke svg path {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Fallback: also force svg color property for those contexts (covers currentColor usage). */
+[data-theme='dark'] .navbar .colorModeToggle_DEke svg,
+body[class*="indexPage"] .navbar .colorModeToggle_DEke svg,
+body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke svg {
+  color: #ffffff !important;
+}
+
+/* Make the theme toggle icon visually lighter: remove heavy strokes and slightly reduce size. */
+.navbar .colorModeToggle_DEke svg,
+.navbar .toggleIcon_g3eP,
+.navbar .toggle_vylO svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.navbar .colorModeToggle_DEke svg path,
+.navbar .toggleIcon_g3eP path,
+.navbar .toggle_vylO svg path {
+  stroke-width: 0 !important;
+  stroke: none !important;
+  /* keep fill as currentColor (controlled elsewhere) */
+}
+
 .navbar__link.verdd--fast2::before {
   content: 'Fast2';
 }
@@ -476,4 +542,139 @@ body:not([data-theme='dark']) .navbar__item.dropdown .dropdown__menu a {
 .dropdown__menu > li > .dropdown__link[href$="/releases/uxopian-ai"] {
   font-weight: 700;
   padding: 0.5rem 1rem;
+}
+
+.uxo-footer {
+  position: relative;
+  background-color: #0b0c0e; 
+  color: #94a3b8;
+  padding: 25px 0 25px;
+  margin-top: 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.uxo-footer-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 1px;
+  opacity: 0.5;
+  pointer-events: none;
+  --glow-color: var(--ifm-color-primary); 
+  background: linear-gradient(90deg, transparent, var(--glow-color), transparent);
+  box-shadow: 0 0 80px 20px var(--glow-color);
+  transition: all 0.5s ease;
+}
+
+.uxo-footer.footer-variant-arender .uxo-footer-glow {
+  --glow-color: #4A8FEF;
+}
+
+.uxo-footer.footer-variant-fast2 .uxo-footer-glow {
+  --glow-color: #5CB8C7;
+}
+
+.uxo-footer.footer-variant-flowerdocs .uxo-footer-glow {
+  --glow-color: #A855F7;
+}
+
+.uxo-footer.footer-variant-ai .uxo-footer-glow {
+  --glow-color: #F59E0B;
+}
+
+.uxo-footer-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.uxo-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.uxo-footer-column h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+.uxo-footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.uxo-footer-column li {
+  margin-bottom: 14px;
+}
+
+.uxo-footer-column a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.uxo-footer-column a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px var(--glow-color, var(--ifm-color-primary));
+}
+
+.uxo-footer-social {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-link:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+  border-color: transparent;
+}
+
+.uxo-footer-bottom {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.uxo-footer-bottom small {
+  color: #475569;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .uxo-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
 }
