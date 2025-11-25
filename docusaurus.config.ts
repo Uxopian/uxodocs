@@ -106,6 +106,7 @@ const config: Config = {
         { type: 'docsVersionDropdown', docsPluginId: 'flowerdocs', position: 'left', className: 'verdd verdd--flowerdocs' },
         { type: 'docsVersionDropdown', docsPluginId: 'uxopian-ai', position: 'left', className: 'verdd verdd--uxopian-ai' },
 
+          { label: 'Release Notes', to: '/releases', position: 'right', className: 'verdd verdd--releases nav-release-notes' },
         { type: 'search', position: 'right' },
 
       ],
