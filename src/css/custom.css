@@ -245,11 +245,11 @@ body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke
 }
 
 .navbar__link.verdd--arender::before {
-  content: 'Arender';
+  content: 'ARender';
 }
 
 .navbar__link.verdd--flowerdocs::before {
-  content: 'Flowerdocs';
+  content: 'FlowerDocs';
 }
 
 .navbar__link.verdd--uxopian-ai::before {
@@ -488,15 +488,12 @@ body .navbar .secondary-nav .secondary-nav__item {
   display: inline-flex !important;
   align-items: center;
   gap: .25rem;
-  padding: 0.35rem 0.8rem !important;
+  /* padding: 0.35rem 0.8rem !important; */
   border-radius: 999px !important;
   transition: all 200ms ease;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   box-shadow: none !important;
   
-  /* DEFAULT LIGHT MODE: Contrast increased to 20% primary color */
-  background-color: color-mix(in srgb, var(--ifm-color-primary), white 80%) !important;
+  background-color: color-mix(in srgb, var(--ifm-color-primary), white 0%) !important;
   color: var(--ifm-color-primary) !important;
   font-weight: 600;
 }
@@ -507,20 +504,13 @@ body .navbar .secondary-nav .secondary-nav__item {
   font-weight: 600;
 }
 
-html[data-theme='dark'] .navbar__link--active,
-html[data-theme='dark'] .navbar__item a[aria-current="page"],
-body[class*="indexPage"] .navbar__link--active,
-body[class*="indexPage"] .navbar__item a[aria-current="page"],
-body:has(main > section[class*="productsSection"]) .navbar__link--active,
-body:has(main > section[class*="productsSection"]) .navbar__item a[aria-current="page"] {
-  /* DARK/TRANSPARENT MODE: Opacity increased to 30% */
-  background-color: rgba(255, 255, 255, 0.30) !important;
-  color: #ffffff !important;
+
+html[data-theme='dark'] .navbar__link.verdd[aria-current="page"]::before,
+html[data-theme='dark'] .navbar__link.verdd.navbar__link--active::before {
+  color: #fff !important;
   font-weight: 600;
 }
 
-html[data-theme='dark'] .navbar__link.verdd[aria-current="page"]::before,
-html[data-theme='dark'] .navbar__link.verdd.navbar__link--active::before,
 body[class*="indexPage"] .navbar__link.verdd[aria-current="page"]::before,
 body[class*="indexPage"] .navbar__link.verdd.navbar__link--active::before,
 body:has(main > section[class*="productsSection"]) .navbar__link.verdd[aria-current="page"]::before,
@@ -529,10 +519,19 @@ body:has(main > section[class*="productsSection"]) .navbar__link.verdd.navbar__l
   font-weight: 600;
 }
 
+html[data-theme='dark'] .navbar__link--active,
+html[data-theme='dark'] .navbar__item a[aria-current="page"],
+body[class*="indexPage"] .navbar__link--active,
+body[class*="indexPage"] .navbar__item a[aria-current="page"],
+body:has(main > section[class*="productsSection"]) .navbar__link--active,
+body:has(main > section[class*="productsSection"]) .navbar__item a[aria-current="page"] {
+  /* DARK/TRANSPARENT MODE: Opacity increased to 30% */
+  color: #000000 !important;
+  font-weight: 600;
+}
 .navbar__link--active:hover,
 .navbar__item a[aria-current="page"]:hover {
   opacity: 0.9;
-  transform: scale(1.02);
 }
 
 body:not([data-theme='dark']) .dropdown__menu,
@@ -699,4 +698,29 @@ body:not([data-theme='dark']) .navbar__item.dropdown .dropdown__menu a {
     grid-template-columns: 1fr;
     gap: 48px;
   }
+}
+
+html[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"],
+html[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"],
+body[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"],
+html[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"]::before,
+body[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"]::before,
+html[data-theme='dark'] .navbar__link.verdd[aria-current="page"],
+body[data-theme='dark'] .navbar__link.verdd[aria-current="page"],
+html[data-theme='dark'] .navbar__link.verdd[aria-current="page"]::before,
+body[data-theme='dark'] .navbar__link.verdd[aria-current="page"]::before {
+  /* User request: active product label text should be WHITE in dark theme */
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* Strongest override for active product label text: force white in all themes
+   to ensure contrast on dark pills (this rule is intentionally very specific) */
+.navbar .navbar__inner .navbar__items a.navbar__link.verdd[aria-current="page"]::before,
+.navbar .navbar__inner .navbar__items a.navbar__link.verdd.navbar__link--active::before,
+a.navbar__link.verdd[aria-current="page"]::before,
+a.navbar__link.verdd.navbar__link--active::before {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
