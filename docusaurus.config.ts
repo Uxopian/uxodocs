@@ -7,9 +7,9 @@ const config: Config = {
   tagline: 'Product Documentation',
   favicon: 'img/uxopian-o.png',
 
-  url: 'https://corentinlebas45.github.io',
-  baseUrl: '/uxodocs/',
-  organizationName: 'corentinlebas45',
+  url: 'https://uxopian.github.io',
+  baseUrl: '/',
+  organizationName: 'uxopian',
   projectName: 'uxodocs',
   deploymentBranch: 'gh-pages',
 
@@ -106,11 +106,12 @@ const config: Config = {
         { type: 'docsVersionDropdown', docsPluginId: 'flowerdocs', position: 'left', className: 'verdd verdd--flowerdocs' },
         { type: 'docsVersionDropdown', docsPluginId: 'uxopian-ai', position: 'left', className: 'verdd verdd--uxopian-ai' },
 
-          { label: 'Release Notes', to: '/releases', position: 'right', className: 'verdd verdd--releases nav-release-notes' },
+        { label: 'Release Notes', to: '/releases', position: 'right', className: 'verdd verdd--releases nav-release-notes' },
         { type: 'search', position: 'right' },
 
       ],
     },
+	
     footer: {
       style: 'dark',
       links: [

@@ -489,7 +489,7 @@ body .navbar .secondary-nav .secondary-nav__item {
   align-items: center;
   gap: .25rem;
   /* padding: 0.35rem 0.8rem !important; */
-  border-radius: 999px !important;
+  border-radius: 10px !important;
   transition: all 200ms ease;
   box-shadow: none !important;
   
@@ -700,23 +700,6 @@ body:not([data-theme='dark']) .navbar__item.dropdown .dropdown__menu a {
   }
 }
 
-html[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"],
-html[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"],
-body[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"],
-html[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"]::before,
-body[data-theme='dark'] .navbar .navbar__inner .navbar__items .navbar__link.verdd[aria-current="page"]::before,
-html[data-theme='dark'] .navbar__link.verdd[aria-current="page"],
-body[data-theme='dark'] .navbar__link.verdd[aria-current="page"],
-html[data-theme='dark'] .navbar__link.verdd[aria-current="page"]::before,
-body[data-theme='dark'] .navbar__link.verdd[aria-current="page"]::before {
-  /* User request: active product label text should be WHITE in dark theme */
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  fill: #ffffff !important;
-}
-
-/* Strongest override for active product label text: force white in all themes
-   to ensure contrast on dark pills (this rule is intentionally very specific) */
 .navbar .navbar__inner .navbar__items a.navbar__link.verdd[aria-current="page"]::before,
 .navbar .navbar__inner .navbar__items a.navbar__link.verdd.navbar__link--active::before,
 a.navbar__link.verdd[aria-current="page"]::before,
