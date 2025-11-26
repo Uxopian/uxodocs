@@ -8,7 +8,7 @@ const config: Config = {
   favicon: 'img/uxopian-o.png',
 
   url: 'https://uxopian.github.io',
-  baseUrl: '/',
+  baseUrl: '/uxodocs/',
   organizationName: 'uxopian',
   projectName: 'uxodocs',
   deploymentBranch: 'gh-pages',
