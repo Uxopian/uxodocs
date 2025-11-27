@@ -706,4 +706,5 @@ a.navbar__link.verdd[aria-current="page"]::before,
 a.navbar__link.verdd.navbar__link--active::before {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
+  margin-left: 3px;
 }
