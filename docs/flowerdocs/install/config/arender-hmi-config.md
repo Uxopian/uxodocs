@@ -1,6 +1,10 @@
 ---
-title: "ARender HMI Configuration"
-date: "2000-03-31T13:20:01+02:00"
+title: ARender HMI Configuration
+date: '2000-03-31T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6aa072f29bb95bd6b13d53650b4f012ffd15b44e2860f725a8b5d1a04661fd06
 ---
 
 

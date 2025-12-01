@@ -1,5 +1,9 @@
 ---
-title: "Activating performance logs"
+title: Activating performance logs
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 8753cd494f15777749f20d3b313188a4ca446cbde7b0f1c2461492f34238c4f2
 ---
 
 

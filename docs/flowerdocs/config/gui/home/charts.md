@@ -1,6 +1,10 @@
 ---
-title: "Graphs"
-date: "2000-06-28T13:20:01+02:00"
+title: Graphs
+date: '2000-06-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 84abe83a9441c5ff2e70449d885f6b629c171497baabd9cddd31248eec79607f
 ---
 
 

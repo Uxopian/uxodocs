@@ -1,7 +1,11 @@
 ---
-title: "User management"
-description: "Create, modify, search for users"
-date: "2018-05-02T12:20:01+02:00"
+title: User management
+description: 'Create, modify, search for users'
+date: '2018-05-02T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: d85ef294e8b32c38e96ccc2453db4bde089ae09db41694e1a10f4ca9e12a5225
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

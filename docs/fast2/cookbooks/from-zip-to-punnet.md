@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a5f11da7f6a2c83bd865f6b67bf137021f4da28b1e836e97278eb05bb69e35b3
+---
 ![Blog cover](../assets/img/cookbooks/fromZiptoPunnet_cover.jpg)
 
 Dealing with archive files was never close to seldom in the past times, and surely won't ever be !

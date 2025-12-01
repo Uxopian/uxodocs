@@ -1,7 +1,11 @@
 ---
-title: "Decorations"
-description: "Decorating your search results"
-date: "2005-03-28T13:21:01+02:00"
+title: Decorations
+description: Decorating your search results
+date: '2005-03-28T13:21:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 3dcdc66f44b0ba943095fd364534e7260af3ec8d8d23b0fe425074dea9e55e05
 ---
 
 

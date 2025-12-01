@@ -1,7 +1,11 @@
 ---
-title: "Hook"
-description: "Adapt, enhance, control..."
-date: "2010-12-28T13:20:01+02:00"
+title: Hook
+description: 'Adapt, enhance, control...'
+date: '2010-12-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: bc74e7ce503c4021a5e3e32327c937c6cc08463b3aeca852a1073b5f487ba977
 ---
 
 

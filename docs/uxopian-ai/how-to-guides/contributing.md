@@ -2,6 +2,10 @@
 title: Contributing Prompts and Goals
 description: How to manage Prompts and Goals and use advanced templating features
 sidebar_position: 1
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6ee522140cffb90a34a381f1f757777629ba2f7d6920a1ba36e3bee1cdeadf78
 ---
 
 # How to Contribute Prompts and Goals

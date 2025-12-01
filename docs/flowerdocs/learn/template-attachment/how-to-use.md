@@ -1,6 +1,10 @@
 ---
-title: "Use of the plugin"
-date: "2020-02-01T14:20:01+02:00"
+title: Use of the plugin
+date: '2020-02-01T14:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a85d0dc6222e4928ebec5dda125e52a20cf24ea18b3f7d922cf24b01892af3fc
 ---
 
 

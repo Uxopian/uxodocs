@@ -1,7 +1,11 @@
 ---
-title: "ARender Customisations"
-description: "Customise ARender within FlowerDocs."
-date: "2010-06-28T13:20:01+02:00"
+title: ARender Customisations
+description: Customise ARender within FlowerDocs.
+date: '2010-06-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a83e950dabd900a8dc350f1a48c923655a64574f0cc63e973bd6329a67fcd83c
 ---
 
 

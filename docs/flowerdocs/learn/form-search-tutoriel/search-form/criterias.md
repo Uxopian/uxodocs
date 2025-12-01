@@ -1,6 +1,10 @@
 ---
-title: "Criteria"
-date: "2020-03-03T09:20:01+02:00"
+title: Criteria
+date: '2020-03-03T09:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: d42f1356d0c4c0d4709d5a052cac74594559326d2d2ecb9fb3285e56d44d0052
 ---
 
 

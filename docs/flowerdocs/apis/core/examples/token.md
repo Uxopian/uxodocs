@@ -1,7 +1,11 @@
 ---
-title: "Managing authentication tokens"
-description: "Generate and validate your tokens"
-date: "2018-06-21T09:40:01+02:00"
+title: Managing authentication tokens
+description: Generate and validate your tokens
+date: '2018-06-21T09:40:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 1ed25f8bf0402d2200a66c55f4c853e43fdd43d91f2337a7cd2785983d7e0f08
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -1,7 +1,11 @@
 ---
-title: "Scope management"
-description: "Recover information, delete from your scopes"
-date: "2023-06-22T12:00:00+02:00"
+title: Scope management
+description: 'Recover information, delete from your scopes'
+date: '2023-06-22T12:00:00+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 54fb2e279f09bad8d99b797497a673ec0356cedbddb41346a71dda98954a937a
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -2,6 +2,10 @@
 title: Installation Guide
 description: Instructions for deploying the uxopian-ai service using Docker or Java
 sidebar_position: 1
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 169260571b7a1db2a2253c1358272fa453d79daefa30b00604e70813e58d5264
 ---
 
 # 📦 Installation Guide

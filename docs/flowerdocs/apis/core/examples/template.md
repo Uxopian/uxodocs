@@ -1,7 +1,11 @@
 ---
-title: "Using templates"
-description: "Enrich an HTML or MS Word template with tag values"
-date: "2018-04-02T12:20:01+01:59"
+title: Using templates
+description: Enrich an HTML or MS Word template with tag values
+date: '2018-04-02T12:20:01+01:59'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 9e3f0d9f343f56f51bf4143a32bde16e44f2855b323fb593e8a4a110f1851781
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

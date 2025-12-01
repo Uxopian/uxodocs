@@ -1,7 +1,11 @@
 ---
-title: "Lifecycle"
-description: "Manage document versions"
-date: "2020-02-01"
+title: Lifecycle
+description: Manage document versions
+date: '2020-02-01'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: dbac42d2b97c06d39fdc36f55e6eb79ed010e4b8880e9f567abdbb1e8c699202
 ---
 
 :::info

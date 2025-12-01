@@ -1,5 +1,9 @@
 ---
-title: "Download documents with annotations"
+title: Download documents with annotations
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 72a2ca961cd702eb6f00cb6a02c11933e360d22a1c2f88f7a8fc276c92687385
 ---
 
 

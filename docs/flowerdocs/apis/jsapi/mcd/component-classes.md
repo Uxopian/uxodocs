@@ -1,7 +1,11 @@
 ---
-title: "Component classes"
-description: "Manipulating component classes in JavaScript"
-date: "2001-02-02"
+title: Component classes
+description: Manipulating component classes in JavaScript
+date: '2001-02-02'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6f72c480327565c7d46eb3579da75cb9599de514c13b732eadfe3513b513d7c4
 ---
 
 

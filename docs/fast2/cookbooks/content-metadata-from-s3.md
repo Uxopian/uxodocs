@@ -1,6 +1,15 @@
 ---
-title: "Retrieve content and metadata from an S3 bucket"
-tags: ["xml", "pattern", "document", "AWS S3", "content"]
+title: Retrieve content and metadata from an S3 bucket
+tags:
+  - xml
+  - pattern
+  - document
+  - AWS S3
+  - content
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 00ea5905da8972ed1f76ebc38c5dd8d605e7caf2298c1de4636a42c64be3b33f
 ---
 
 ![Blog cover](../assets/img/cookbooks/content-metadata-from-s3_cover.png)

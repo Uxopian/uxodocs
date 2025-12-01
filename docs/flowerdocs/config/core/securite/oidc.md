@@ -1,7 +1,11 @@
 ---
-title: "OpenID Connect"
-description: "One for all, all for one"
-date: "2019-06-05T13:20:01+02:00"
+title: OpenID Connect
+description: 'One for all, all for one'
+date: '2019-06-05T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ccad3d874159c7f2ed0e2d616ced8e86df1cc40dbfb09717b4c6ed6ed90d1d2e
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

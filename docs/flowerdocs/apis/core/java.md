@@ -1,7 +1,11 @@
 ---
-title: "Java client"
-description: "Consume web services using the Java client."
-date: "2001-04-01T13:20:01+02:00"
+title: Java client
+description: Consume web services using the Java client.
+date: '2001-04-01T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ea5f0c030a85f00c3c82aef5868c1fe255bffb6c5336b61c8d38f48845253645
 ---
 
 :::info

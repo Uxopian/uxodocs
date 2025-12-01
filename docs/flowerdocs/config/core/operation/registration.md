@@ -1,8 +1,12 @@
 ---
-title: "Subscribing to an operation"
-description: "Determine which operations to respond to"
-date: "2001-03-28T13:20:01+02:00"
+title: Subscribing to an operation
+description: Determine which operations to respond to
+date: '2001-03-28T13:20:01+02:00'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 81585a98fcd62c74db1a2c2b13ae42aa25ca75282d256d757e3d687e23e7a86b
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

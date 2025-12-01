@@ -1,5 +1,9 @@
 ---
-title: "Installation in ICN"
+title: Installation in ICN
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: da17d2ee20bb5d49229b323203e94ae83bcc90ea7e0ab2e3b7ad9453cfee2987
 ---
 
 

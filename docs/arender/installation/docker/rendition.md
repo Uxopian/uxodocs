@@ -1,5 +1,9 @@
 ---
-title: "Rendition stack"
+title: Rendition stack
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: cb8b4d5954635923123c76f164115e6b419c163b928a7e996e1d855b43c19eba
 ---
 
 

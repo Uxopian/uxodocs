@@ -1,5 +1,9 @@
 ---
-title: "GET differences"
+title: GET differences
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 2a7818a2c228858b44737c285b730bd54e7913a285d5fdb4b8290caa63471f9a
 ---
 
 

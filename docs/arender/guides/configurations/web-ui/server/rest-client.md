@@ -1,5 +1,9 @@
 ---
-title: "Rendition REST client"
+title: Rendition REST client
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: cb0383dd81cc2385d997ca70e399c2b9c5942d9acee66838768dc5704df309d7
 ---
 
 

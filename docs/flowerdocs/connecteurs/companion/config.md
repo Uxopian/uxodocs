@@ -1,6 +1,10 @@
 ---
-title: "Configuration"
-date: "2003-03-28T13:20:01+02:00"
+title: Configuration
+date: '2003-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 04cd30c50fa24a91f3bedcaefb7e12e0fa91bed4eb21c985380fd04ff8b48326
 ---
 
 

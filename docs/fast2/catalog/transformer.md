@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 695ad66aa57183cc167ea072ce8b7282d73b1f68ea11755ddc48964b95ab196e
+---
 ## AlterDocumentContent <small> - Create, embed, delete or update document content </small> {#AlterDocumentContent data-toc-label="AlterDocumentContent"}
 
 Use this task to remove existing content of a processed document, add content to this document based on a dynamically resolved path, of even more.

@@ -1,6 +1,10 @@
 ---
-title: "Advanced search"
-date: "2020-02-02T08:20:01+02:00"
+title: Advanced search
+date: '2020-02-02T08:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: dadd836f6e6820fdb2dd0ed00618905ea6470f4c831385de8401b856ad81175d
 ---
 
 

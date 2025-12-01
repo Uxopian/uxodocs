@@ -1,6 +1,15 @@
 ---
-title : "Upload content and metadata in a S3 bucket"
-tags : ["xml", "pattern", "document", "serialization", "AWS S3"]
+title: Upload content and metadata in a S3 bucket
+tags:
+  - xml
+  - pattern
+  - document
+  - serialization
+  - AWS S3
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 58372bec30aa16b5bd70f82c063a33351954bba38521f72cb784cb647eabbcae
 ---
 
 ![Cover upload](../assets/img/cookbooks/cover.png)

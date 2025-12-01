@@ -1,6 +1,10 @@
 ---
-title: "Contextual menus"
-date: "2012-03-28T13:20:01+02:00"
+title: Contextual menus
+date: '2012-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 9293bec074c516bc45f05440c6efaa5f9f3f6b8864b709c33ebf0e6a1ac350e2
 ---
 
 

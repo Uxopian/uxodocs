@@ -1,6 +1,10 @@
 ---
-title: "Utility functions"
-date: "2018-03-28T13:22:01+02:00"
+title: Utility functions
+date: '2018-03-28T13:22:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 7787089a4249d31a32a8d7ce1a930719d7f4ca9cf4cb97027a96eae590684369
 ---
 
 

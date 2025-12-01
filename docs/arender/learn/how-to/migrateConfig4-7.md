@@ -1,5 +1,9 @@
 ---
-title: "Migrate configuration from 4.x to 4.7"
+title: Migrate configuration from 4.x to 4.7
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 33e6b008438e19396107524cf629f82cce48012d764069f68bbd47ad03bdba56
 ---
 
 

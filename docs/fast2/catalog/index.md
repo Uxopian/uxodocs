@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 4873ca63a930527934e482c8d77450a7870d5336db53ea3dab9c93033e66e88f
+---
 # Catalog
 
 All along this documentation concerning the configuration of Fast2 objects (either tasks or tools used within tasks), consider the default value set to `false` if no default value is mentionned for boolean fields.

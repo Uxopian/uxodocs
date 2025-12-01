@@ -1,7 +1,11 @@
 ---
-title: "Integration"
-description: "Configure the plugin from the admin console."
-date: "2020-02-01T15:20:01+02:00"
+title: Integration
+description: Configure the plugin from the admin console.
+date: '2020-02-01T15:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 2821d1fe1d18d0838efda6e31a209869bab83a6a935c9b93bdfd981b404ab774
 ---
 
 

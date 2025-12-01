@@ -1,7 +1,11 @@
 ---
-title: "Virtual folders"
-description: "Virtual folder classes"
-date: "2018-03-02T14:20:01+02:00"
+title: Virtual folders
+description: Virtual folder classes
+date: '2018-03-02T14:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 3a6b0d3b9e8187488b67b769e663be33b3fdc85823c356e1628064161d422342
 ---
 
 

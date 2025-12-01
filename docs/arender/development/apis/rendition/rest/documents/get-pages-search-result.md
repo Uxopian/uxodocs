@@ -1,5 +1,9 @@
 ---
-title: "GET Pages Search Result"
+title: GET Pages Search Result
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: d71f9340bbdaa1f041f6c25157f517f3d778fe9cd74ae14f587ecffe1383c89b
 ---
 
 

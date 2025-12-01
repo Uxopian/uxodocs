@@ -1,6 +1,10 @@
 ---
-title: "Reservations"
-date: "2008-02-02"
+title: Reservations
+date: '2008-02-02'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a374fcc5dc244f6d2f304543100708ccd3006daafc50dda0d6cd66a06b3ffa6f
 ---
 
 

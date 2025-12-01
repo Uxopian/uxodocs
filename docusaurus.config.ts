@@ -38,6 +38,7 @@ const config: Config = {
         id: 'default',
         path: 'docs_default',
         routeBasePath: 'docs-default',
+        showLastUpdateTime: true,
       },
     ],
     [
@@ -49,6 +50,7 @@ const config: Config = {
         sidebarPath: require.resolve('./sidebars_fast2.ts'),
         lastVersion: 'current',
         versions: { current: { label: 'v2025.x.x' } },
+        showLastUpdateTime: true,
       },
     ],
     [
@@ -60,6 +62,7 @@ const config: Config = {
         sidebarPath: require.resolve('./sidebars_arender.ts'),
         lastVersion: 'current',
         versions: { current: { label: 'v2023.14.0' } },
+        showLastUpdateTime: true,
       },
     ],
     [
@@ -71,6 +74,7 @@ const config: Config = {
         sidebarPath: require.resolve('./sidebars_flowerdocs.ts'),
         lastVersion: 'current',
         versions: { current: { label: 'v2025.3.0' } },
+        showLastUpdateTime: true,
       },
     ],
     [
@@ -81,7 +85,8 @@ const config: Config = {
         routeBasePath: 'docs/uxopian-ai',
         sidebarPath: require.resolve('./sidebars_uxopian-ai.ts'),
         lastVersion: 'current',
-        versions: { current: { label: 'current' } },
+        versions: { current: { label: 'v2026.0.0' } },
+        showLastUpdateTime: true,
       },
     ],
     [

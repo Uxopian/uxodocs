@@ -1,6 +1,10 @@
 ---
-title: "Version upgrade"
-date: "2000-03-31T13:20:01+02:00"
+title: Version upgrade
+date: '2000-03-31T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ee5c6305da518c5101ad7eb8df0161e71932ca95ff32e7035a04817a863bc6c5
 ---
 
 

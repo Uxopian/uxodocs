@@ -1,6 +1,10 @@
 ---
-title: "Component-related actions"
-date: "2003-03-28T13:20:01+02:00"
+title: Component-related actions
+date: '2003-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 79b8f4f2df27b7d4e4a6446f0304c8f3ff0ba769ba79002a267e5c9ef1f8cb09
 ---
 
 

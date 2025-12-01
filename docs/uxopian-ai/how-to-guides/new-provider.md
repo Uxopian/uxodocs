@@ -2,6 +2,10 @@
 title: Adding a New LLM Provider
 description: How to add new LLM providers and implement custom extensions
 sidebar_position: 2
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: f416f137771d360fc858e48b77a17d8905402e79bb88c5e86166da3e9730529d
 ---
 
 # How to Add a New LLM Provider & Other Extensions

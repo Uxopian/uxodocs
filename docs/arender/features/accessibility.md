@@ -1,5 +1,9 @@
 ---
-title: "Accessibility"
+title: Accessibility
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 82b0a3fcd973dbaa5e5cce81223d992391d1042d63c2354505315404a5d774da
 ---
 
 

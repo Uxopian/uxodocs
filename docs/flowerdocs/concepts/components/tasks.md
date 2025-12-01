@@ -1,7 +1,11 @@
 ---
-title: "The tasks"
-description: "Manage your business or technical processes."
-date: "2018-03-05T13:20:01+02:00"
+title: The tasks
+description: Manage your business or technical processes.
+date: '2018-03-05T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 39d39faff5b0feeb8e8d3b6ca53a5437ca149a95757dcef3e713054f781dfab2
 ---
 
 

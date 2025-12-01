@@ -1,5 +1,9 @@
 ---
-title: "Add a highlight notification"
+title: Add a highlight notification
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 4770d8e38f73660858685e7e2e4ab9ab0827dcccd6e44c00f14c76d55c27f558
 ---
 
 

@@ -1,10 +1,19 @@
 ---
-title: "Sort documents in a punnet"
-date: "2023-01-12"
-author: "Joseph TESSIER"
-tags: ["worker", "json", "javascript", "document", "nashorn"]
-photograph: "Héctor J. Rivas"
-photograph_pseudo: "@@hjrc33"
+title: Sort documents in a punnet
+date: '2023-01-12'
+author: Joseph TESSIER
+tags:
+  - worker
+  - json
+  - javascript
+  - document
+  - nashorn
+photograph: Héctor J. Rivas
+photograph_pseudo: '@@hjrc33'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 4b0914d1283df1e8ee972e8db09eb43b22afe5b266f8f7d12b947bd1ade74aa1
 ---
 ![photo cover](../assets/img/cookbooks/photo-cover.avif)
 

@@ -1,5 +1,9 @@
 ---
-title: "New installation"
+title: New installation
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5eb3fa936ea2fba2426c11555dfb306ea7c1916567bbcb9da38cea534a95cc5e
 ---
 
 

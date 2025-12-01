@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
+import UXopianFeed from '../FlowerDocsCards/UXopianFeed';
 
 const ARenderCardsList = [
     {
@@ -176,16 +177,24 @@ export default function ARenderCards() {
     return (
         <section className={styles.documentationSection}>
             <div className="container">
-                <div className={styles.cardsGrid}>
-                    {ARenderCardsList.map((props, idx) => (
-                        <ARenderCard key={idx} {...props} />
-                    ))}
-                </div>
+                <div className={styles.layoutWrapper}>
+                    <div className={styles.leftColumn}>
+                        <div className={styles.cardsGrid}>
+                            {ARenderCardsList.map((props, idx) => (
+                                <ARenderCard key={idx} {...props} />
+                            ))}
+                        </div>
 
-                <div className={styles.guidesGrid}>
-                    {GuidesList.map((props, idx) => (
-                        <GuidesCard key={idx} {...props} />
-                    ))}
+                        <div className={styles.guidesGrid}>
+                            {GuidesList.map((props, idx) => (
+                                <GuidesCard key={idx} {...props} />
+                            ))}
+                        </div>
+                    </div>
+
+                    <aside className={styles.rightColumn} aria-label="UXopian blog preview">
+                        <UXopianFeed />
+                    </aside>
                 </div>
             </div>
         </section>

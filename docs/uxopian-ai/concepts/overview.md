@@ -2,6 +2,10 @@
 title: Core Concepts
 description: Primary entities and concepts that form the uxopian-ai framework
 sidebar_position: 1
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 60f4fea4aeb7608211fc1ab9ad359c2f9a9a2ad7f9b7ad05ed5d3961146cd063
 ---
 
 # 🧠 Core Concepts

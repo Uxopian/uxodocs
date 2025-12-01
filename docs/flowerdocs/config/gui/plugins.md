@@ -1,7 +1,11 @@
 ---
-title: "Plugins"
-description: "Integrate customized WEB applications within the GUI."
-date: "2012-04-28T13:20:01+02:00"
+title: Plugins
+description: Integrate customized WEB applications within the GUI.
+date: '2012-04-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 56e853c6a807c5753d8a27ab975fd81e80fc6c05e6a7c1ccffaae90a7a8b4ddc
 ---
 
 

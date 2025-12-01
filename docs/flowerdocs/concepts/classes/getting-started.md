@@ -1,8 +1,12 @@
 ---
-title: "Overview"
-description: "Component class overview"
-date: "2018-03-01T12:20:01+02:00"
+title: Overview
+description: Component class overview
+date: '2018-03-01T12:20:01+02:00'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: d4f92b6f1673e5486c50a5aea0269a4d072fc4eb87483cff9faddf50986ee80c
 ---
 
 

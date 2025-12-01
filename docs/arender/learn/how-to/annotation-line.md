@@ -1,5 +1,9 @@
 ---
-title: "Custom annotation"
+title: Custom annotation
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: c4806678595f0b437157f5b15eb0e2d847a07af1990370e166de4b3d1206963b
 ---
 
 

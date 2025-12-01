@@ -1,5 +1,9 @@
 ---
-title: "POST Document Layout"
+title: POST Document Layout
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 608deeeca9bce31f4158335c404cf800abffd14cf73c4d777d10b09a74d8b1ec
 ---
 
 

@@ -1,7 +1,13 @@
 ---
-title: "Files"
-description: "This section applies to the OpenSearch connector coupled with file system storage."
-date: "2023-06-01"
+title: Files
+description: >-
+  This section applies to the OpenSearch connector coupled with file system
+  storage.
+date: '2023-06-01'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 94bfdd91e623e1e3511cf64ca005266c831c347c52d4e652ce5ab547f9d4f9bf
 ---
 
 

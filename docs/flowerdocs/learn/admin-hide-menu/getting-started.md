@@ -1,7 +1,13 @@
 ---
-title: "Getting Started"
-description: "Display only the tabs or sub-menus you want according to user profiles in Administration"
-date: "2020-01-01T12:20:01+02:00"
+title: Getting Started
+description: >-
+  Display only the tabs or sub-menus you want according to user profiles in
+  Administration
+date: '2020-01-01T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 1d566011ed35cb187d52e41975e5effe9ac63c279c765cafc08a9992449578a5
 ---
 
 

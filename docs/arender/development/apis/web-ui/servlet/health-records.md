@@ -1,5 +1,9 @@
 ---
-title: "Health records server"
+title: Health records server
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 1a33ba590c1af1ed3cc40e2f5939b4edc85a1392dea2c50eba1af34c7547af9c
 ---
 
 

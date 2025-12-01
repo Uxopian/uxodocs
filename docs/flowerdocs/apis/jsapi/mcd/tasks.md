@@ -1,7 +1,11 @@
 ---
-title: "Tasks & processes"
-description: "Handling tasks in JavaScript"
-date: "2004-02-03"
+title: Tasks & processes
+description: Handling tasks in JavaScript
+date: '2004-02-03'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 7129f5b67bc7db44ccf1621407badb983d4d6e04319801ba8334bdda0eb2c8aa
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

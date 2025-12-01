@@ -1,6 +1,10 @@
 ---
-title: "Command Line Manager (CLM)"
-date: "2004-03-21T13:20:01+02:00"
+title: Command Line Manager (CLM)
+date: '2004-03-21T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ee152fd29a33ac98f35c18de0a24f721a98d8407c5e751effbf96ea043d9f900
 ---
 
 

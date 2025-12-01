@@ -1,6 +1,10 @@
 ---
 sidebar_label: Getting Started
 sidebar_position: 1
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: de829f63ed99b76b6a677ea74fbf92621c753026ef013cd10dcc633120285e32
 ---
 
 # Getting started with Fast2

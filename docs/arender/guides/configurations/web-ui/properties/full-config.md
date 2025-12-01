@@ -1,5 +1,9 @@
 ---
-title: "Properties"
+title: Properties
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 0177235d9cc7693df4d25f394d69db84b29e1839930ea7457982890218e750a7
 ---
 
 

@@ -40,9 +40,9 @@ const ProductList = [
         logo: '/img/uxo_white.png',
         description: 'Complete framework to easily integrate powerful AI features into your enterprise applications',
         link: '/docs/uxopian-ai',
-        releaseNotesLink: '/docs/uxopian-ai',
-        color: '#E88AA0',
-        gradient: 'linear-gradient(135deg, #F5A882, #EC9059, #E07869, #D36D78)'
+        releaseNotesLink: '/releases?product=uxopian-ai',
+        color: '#F59E0B',
+        gradient: 'linear-gradient(135deg, #F59E0B, #E07D09, #C76E08, #A85A07)'
     }
 ];
 

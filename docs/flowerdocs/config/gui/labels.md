@@ -1,6 +1,10 @@
 ---
-title: "Labels"
-date: "2009-03-29T13:20:01+02:00"
+title: Labels
+date: '2009-03-29T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6e4cd787541b657462d9406aee814a42fa930926dfab496a928238f44550b767
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

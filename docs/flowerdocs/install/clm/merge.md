@@ -1,7 +1,13 @@
 ---
-title: "Merge of several scopes"
-description: "Description of the rules used to merge scopes: which elements are merged, behaviour in the event of conflicts, etc."
-date: "2004-03-21T13:22:01+02:00"
+title: Merge of several scopes
+description: >-
+  Description of the rules used to merge scopes: which elements are merged,
+  behaviour in the event of conflicts, etc.
+date: '2004-03-21T13:22:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: e41cf1c791fc7eca0d9957d0db2e2aa976ddcfb9a36dddf313ce51ed758ee9af
 ---
 
 

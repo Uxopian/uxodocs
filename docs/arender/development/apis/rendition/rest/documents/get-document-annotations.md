@@ -1,5 +1,9 @@
 ---
-title: "GET PDF Document Annotations"
+title: GET PDF Document Annotations
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 44746b53aaac53cae295b6a19ac8be9cf0036720d4f1b31529472d9b4cb9269e
 ---
 
 

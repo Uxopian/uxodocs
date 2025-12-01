@@ -1,8 +1,12 @@
 ---
-title: "HTML templates"
-description: "Reusable templates, by scope, that can be enhanced with variables"
-date: "2020-02-01"
+title: HTML templates
+description: 'Reusable templates, by scope, that can be enhanced with variables'
+date: '2020-02-01'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a876369a18925e4ade0af548422e586a04d6b7d6581ed0ac84a5f565d757ead6
 ---
 
 

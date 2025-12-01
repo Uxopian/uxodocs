@@ -1,5 +1,9 @@
 ---
-title: "JNDI Configuration for ARender Web-UI"
+title: JNDI Configuration for ARender Web-UI
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 23f0c4ee7cee6f3e37f1dccef3d800448b2e287450d7cb65f5046b2b791020ec
 ---
 
 

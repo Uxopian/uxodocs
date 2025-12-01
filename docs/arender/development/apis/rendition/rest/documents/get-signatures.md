@@ -1,5 +1,9 @@
 ---
-title: "GET Signatures"
+title: GET Signatures
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 19e92d32e4861f73e6e36b161bd49eab9d5baab2b59735f4713cccf058b312a2
 ---
 
 

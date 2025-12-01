@@ -1,7 +1,11 @@
 ---
-title: "Virtual folders"
-description: "Dynamically organize your components."
-date: "2018-03-04T13:20:01+02:00"
+title: Virtual folders
+description: Dynamically organize your components.
+date: '2018-03-04T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ddaabcb510c292f858c969f37e556140557abdadb33735634c02f946c2cb81c5
 ---
 
 

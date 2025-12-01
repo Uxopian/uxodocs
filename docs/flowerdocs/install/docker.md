@@ -1,6 +1,10 @@
 ---
-title: "Docker"
-date: "2000-03-31T13:20:01+02:00"
+title: Docker
+date: '2000-03-31T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6c13164ab57b0ad01070ca6cf96abf8ecadc6cc44154670ac838fdb5a5bce1cc
 ---
 
 

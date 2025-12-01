@@ -1,10 +1,16 @@
 ---
 draft: false
-
 title: Add data from file name
-date: 2022-11-10
-
-tags: ["worker", "json", "javascript", "boilerplate"]
+date: 2022-11-10T00:00:00.000Z
+tags:
+  - worker
+  - json
+  - javascript
+  - boilerplate
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: e3fa8bbd516376eb9ba359afcca6364fa379b121bfef8755d456a51b34802b6f
 ---
 
 ![Data from file name cover](../assets/img/cookbooks/dataFromFilename_cover.png)

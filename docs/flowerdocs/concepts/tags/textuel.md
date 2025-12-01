@@ -1,7 +1,11 @@
 ---
-title: "Textual"
-description: "Use textual tags."
-date: "2018-03-07T13:20:01+02:00"
+title: Textual
+description: Use textual tags.
+date: '2018-03-07T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a85b7d07620e3cb863c82715b611a9d41ef47156f45104dba50fadcf6c9f4c2f
 ---
 
 

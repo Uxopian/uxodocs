@@ -1,7 +1,11 @@
 ---
-title: "Tag references"
-description: "Tag your components by referencing tags on a component class."
-date: "2018-03-02T12:00:01+02:00"
+title: Tag references
+description: Tag your components by referencing tags on a component class.
+date: '2018-03-02T12:00:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 026fa256357b3dc8df19dfdd78a0cdf5320b2fbdef15a96a961013fcc4a79fcb
 ---
 
 

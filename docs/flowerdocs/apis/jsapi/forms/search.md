@@ -1,6 +1,10 @@
 ---
-title: "Search"
-date: "2001-03-28T13:21:01+02:00"
+title: Search
+date: '2001-03-28T13:21:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 4b603eaf4b3fd4a6fbed9162923de2dda594346f898a340cacdc1540948e4157
 ---
 
 

@@ -1,6 +1,10 @@
 ---
-title: "Installation in IBM Websphere (recommended)"
-description: "Deployment guide for IBM Filenet in IBM WebSphere application server"
+title: Installation in IBM Websphere (recommended)
+description: Deployment guide for IBM Filenet in IBM WebSphere application server
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 230e3314d6df2d3c28b2750fae41357c634c75f1c67005dc378afbda01503c09
 ---
 
 

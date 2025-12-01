@@ -1,7 +1,11 @@
 ---
-title: "Folders"
-description: "Classify your components to suit your needs."
-date: "2018-03-03"
+title: Folders
+description: Classify your components to suit your needs.
+date: '2018-03-03'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 2dda2e188215a5b90aa3c0b665aae11ea8596e060cd7a8a0592191d15b90bc20
 ---
 
 :::info

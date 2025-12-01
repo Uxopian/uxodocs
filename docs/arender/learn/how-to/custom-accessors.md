@@ -1,5 +1,9 @@
 ---
-title: "Create a custom document accessor"
+title: Create a custom document accessor
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 9a4e406f26f1db1b2e644804ee0822269c6c747f9e74c50a56a00580dd3c8c93
 ---
 
 

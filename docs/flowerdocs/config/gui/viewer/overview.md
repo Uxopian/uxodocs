@@ -1,7 +1,11 @@
 ---
-title: "ARender at a glance"
-description: "View documents in your browser."
-date: "2001-03-01T13:20:01+02:00"
+title: ARender at a glance
+description: View documents in your browser.
+date: '2001-03-01T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 108d3c697fa35d2026d61b22b229ea96f7590027d89b3b939c7bd3bed4f7f9de
 ---
 
 

@@ -1,5 +1,9 @@
 ---
-title: "DELETE all transformation orders"
+title: DELETE all transformation orders
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 9ad7679d46228274e62e9983c092e713d19cb9304ea39e7c9b1614b01b4769dc
 ---
 
 

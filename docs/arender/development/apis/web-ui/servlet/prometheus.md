@@ -1,5 +1,9 @@
 ---
-title: "Prometheus metrics"
+title: Prometheus metrics
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 748b80ee6208333edc992e04b8ad27c281c742d7db3080fb5491beab5e511d0f
 ---
 
 

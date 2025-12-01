@@ -1,5 +1,9 @@
 ---
-title: "Supported File Format"
+title: Supported File Format
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: bfb7a8b293a4237571a1f7f9dd0ae2db22428a559cd68d88da262896b1cda29a
 ---
 
 

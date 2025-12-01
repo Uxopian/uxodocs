@@ -1,5 +1,9 @@
 ---
-title: "Rendition server"
+title: Rendition server
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 4f9572bb1169bf128ea932d1d881911ad932f54ca83624db7684c7f02fbe15d6
 ---
 
 

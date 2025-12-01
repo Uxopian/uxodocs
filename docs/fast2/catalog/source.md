@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 38ea1c0f16303644043ee0ea5057637feea2f842d41cd03a046621d6c817dc29
+---
 ## AWSSource <small> - Complete extractor module from AWS S3 </small> {#AWSSource data-toc-label="AWSSource"}
 
 This AWS extractor performs from a list of sources the extraction of your document content. Many options (suffix, prefix...) exist to optimally specify the documents you want to take into account

@@ -1,7 +1,11 @@
 ---
-title: "Stamp templates"
-description: "Collaborate on documents using annotations."
-date: "2005-08-28T13:20:01+02:00"
+title: Stamp templates
+description: Collaborate on documents using annotations.
+date: '2005-08-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 711fde69096f7fd223a61973e47baaf54374812741bdf9b9ef567eec0674abb3
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

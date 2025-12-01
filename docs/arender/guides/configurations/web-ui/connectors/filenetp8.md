@@ -1,5 +1,9 @@
 ---
-title: "FileNet connector"
+title: FileNet connector
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 9a012bf7027500b5797683a740645e3f725a9b9e0d96cae1cc0442c62ecdfe3b
 ---
 
 

@@ -1,7 +1,11 @@
 ---
-title: "Document attachment"
-description: "Popups displayed within the graphical user interface"
-date: "2004-03-28T13:25:01+02:00"
+title: Document attachment
+description: Popups displayed within the graphical user interface
+date: '2004-03-28T13:25:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: c06a3281de222184fab13a215082169f9aada1a7e626070667a39b8f479e4a8b
 ---
 
 

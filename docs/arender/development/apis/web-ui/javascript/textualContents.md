@@ -1,5 +1,9 @@
 ---
-title: "Textual content"
+title: Textual content
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 7c82bb0cd5f26ffe1ebfc4bb0b6a8a456d5714854becaa7f5fc639aea4f6a710
 ---
 
 

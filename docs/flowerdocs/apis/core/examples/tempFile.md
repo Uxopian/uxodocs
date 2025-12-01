@@ -1,7 +1,11 @@
 ---
-title: "Handling a temporary file"
-description: "Create, modify, delete temporary files"
-date: "2001-04-15T13:20:01+02:00"
+title: Handling a temporary file
+description: 'Create, modify, delete temporary files'
+date: '2001-04-15T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 06aa1fe08699e78dccefc4208f0c23dba8ef5f95d01a2b8b986b7729340988ee
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

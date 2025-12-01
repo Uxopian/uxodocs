@@ -1,6 +1,10 @@
 ---
-title: "Task attachments"
-date: "2001-03-29T13:22:01+02:00"
+title: Task attachments
+date: '2001-03-29T13:22:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 74f17fc0af247e06d4b04834441bd722e2926a16f3196f65969cef7a8916cd70
 ---
 
 

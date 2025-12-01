@@ -1,5 +1,9 @@
 ---
-title: "GET file chunk"
+title: GET file chunk
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5f1f2dac6c58d17d9b0560b08799e0e582aa9c31cd7423f22df3a088f7a8fc6a
 ---
 
 

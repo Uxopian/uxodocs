@@ -1,5 +1,9 @@
 ---
-title: "Opening a document"
+title: Opening a document
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 3aeb1272f2d48efed81a59b184d6f4f17c2231b1088586ed1b337744f178943d
 ---
 
 

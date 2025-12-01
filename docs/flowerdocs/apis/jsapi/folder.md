@@ -1,7 +1,11 @@
 ---
-title: "Folder content"
-description: "Customise folder contents"
-date: "2012-03-28T13:20:01+02:00"
+title: Folder content
+description: Customise folder contents
+date: '2012-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 945a97fa0c6d748bbeeb801652d9ea1c1e28c311fcfb839d19c79c6aa7efaae7
 ---
 
 

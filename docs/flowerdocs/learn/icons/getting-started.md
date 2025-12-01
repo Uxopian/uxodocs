@@ -1,7 +1,11 @@
 ---
-title: "Getting Started"
-description: "Stack your icons for an icon better suited to your actions"
-date: "2020-02-01T12:20:01+02:00"
+title: Getting Started
+description: Stack your icons for an icon better suited to your actions
+date: '2020-02-01T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 18639b6f42d3b133812bc8623338614128af719b89ec4b06f0dd6099ae141e84
 ---
 
 

@@ -1,5 +1,9 @@
 ---
-title: "Plugins"
+title: Plugins
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 01944cbfe43564204c350b9b00dcf29657d1892f28581ad54a4f224dbb14dfa4
 ---
 
 

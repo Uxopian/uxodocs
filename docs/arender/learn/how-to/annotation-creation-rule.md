@@ -1,5 +1,9 @@
 ---
-title: "Annotation creation by rules"
+title: Annotation creation by rules
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5f9f8c1218e07419faa9b6ee5438814bedee3cf202fa28d83d242e8811f89377
 ---
 
 

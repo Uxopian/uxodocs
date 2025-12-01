@@ -1,5 +1,9 @@
 ---
-title: "Hyperlink"
+title: Hyperlink
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: fba9e120143cffa8404b512e57bfa2877fd33b05acad4b78c8859a8e751d605e
 ---
 
 

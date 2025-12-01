@@ -1,6 +1,10 @@
 ---
-title: "IFrameOffMenu"
-date: "2001-03-01"
+title: IFrameOffMenu
+date: '2001-03-01'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: e93e6434457d6ad8ac2ec72218e9bb03465b04eb0bce537248905a35edadad74
 ---
 
 

@@ -1,6 +1,10 @@
 ---
-title: "Validation"
-date: "2000-02-04T13:20:01+02:00"
+title: Validation
+date: '2000-02-04T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 7d3034d5602464f93728340cc7184b8f49973e800a280bfdeeaaac2c26f94259
 ---
 
 

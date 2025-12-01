@@ -1,6 +1,10 @@
 ---
-title: "Association"
-date: "2020-06-06T12:20:01+02:00"
+title: Association
+date: '2020-06-06T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 4d8ba2fe6633c33fee2f555c435cccb3bbd35e9c3c740a4cbba5fa15ed50a174
 ---
 
 

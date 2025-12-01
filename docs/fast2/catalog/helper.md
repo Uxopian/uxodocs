@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6661be5b2971564b4af30b35372681ca77b67761deae489e125faa571b8a3405
+---
 ## DctmConfiguration <small> - Module for customized Documentum configuration </small> {#DctmConfiguration data-toc-label="DctmConfiguration"}
 
 

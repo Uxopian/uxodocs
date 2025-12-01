@@ -1,7 +1,11 @@
 ---
-title: "Versions"
-description: "Document versioning strategies"
-date: "2012-03-28T13:20:01+02:00"
+title: Versions
+description: Document versioning strategies
+date: '2012-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 3c22944172421aaeed1d88a701be490e2e9798221e4fb8eeb270cdd3b7967aa4
 ---
 
 A naming strategy defines the labels that users can enter when creating a document version. Different strategies are available: 

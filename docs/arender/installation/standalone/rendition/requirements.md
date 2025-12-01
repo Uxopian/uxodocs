@@ -1,5 +1,9 @@
 ---
-title: "Requirements"
+title: Requirements
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 1a95ce179857512bbf8eaf9060eae1224d0e293d51dfd9da458070799ec3919a
 ---
 
 

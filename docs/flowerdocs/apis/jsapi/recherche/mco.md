@@ -1,7 +1,11 @@
 ---
-title: "Model"
-description: "Searching for components through the JS API"
-date: "2005-03-28T13:20:01+02:00"
+title: Model
+description: Searching for components through the JS API
+date: '2005-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: d204614d7d4fd1cb0f026527b233bdd7b8ab5864057a6b57aaeffa8dc1b7aa16
 ---
 
 

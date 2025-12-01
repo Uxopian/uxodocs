@@ -1,5 +1,9 @@
 ---
-title: "Color palette"
+title: Color palette
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 25c740fadd9d5d4998e6fa47e90681f21e14fdeb1052905183bdb2f2c7b43d33
 ---
 
 

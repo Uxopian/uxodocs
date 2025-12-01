@@ -1,5 +1,9 @@
 ---
-title: "Office converter"
+title: Office converter
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 38a18f5cb112706f8cd6a1a9fdb7e8483218c8cf2afcb2f0d0e281c37a84fa61
 ---
 
 

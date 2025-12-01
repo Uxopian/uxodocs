@@ -1,7 +1,11 @@
 ---
-title: "Task's serial processing"
-description: "Process a list of tasks without going back to the search"
-date: "2005-04-28T13:20:01+02:00"
+title: Task's serial processing
+description: Process a list of tasks without going back to the search
+date: '2005-04-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: af6f49ccf121c0ab422fc1634a48a9cac6e54af14b253ec1338d4fab660c6d47
 ---
 
 

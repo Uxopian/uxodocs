@@ -1,5 +1,9 @@
 ---
-title: "GET a document metadata"
+title: GET a document metadata
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 02683c868dd31d9b191d20772d1d928b8112cb3a92931f006de8fa6c93c12a21
 ---
 
 

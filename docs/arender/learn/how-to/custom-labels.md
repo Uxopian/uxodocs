@@ -1,5 +1,9 @@
 ---
-title: "Create custom localized labels"
+title: Create custom localized labels
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: b7189e3f659e2b2d9060bff4039c5edbd785ff849b151cacaaa68e01cbc274d7
 ---
 
 

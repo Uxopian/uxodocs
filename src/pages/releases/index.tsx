@@ -9,6 +9,7 @@ import flowerDocsReleasesData from '@site/src/generated/flowerDocsReleases.json'
 import fast2Styles from './fast2.module.css';
 import arenderStyles from './arender.module.css';
 import flowerDocsStyles from './flowerdocs.module.css';
+import uxopianAiStyles from './uxopian-ai.module.css';
 
 type Product = 'fast2' | 'arender' | 'flowerdocs' | 'uxopian-ai';
 
@@ -94,11 +95,28 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
         title: 'Uxopian AI',
         subtitle: 'Coming soon - AI-powered documentation and automation.',
         logoSrc: '/uxodocs/img/uxo_white.png',
-        releasesData: [],
-        styles: fast2Styles, // fallback style
-        filterBy: 'none',
-        mapNote: (note: any) => note,
-        readMoreLink: (note: any) => '#',
+        releasesData: [
+            {
+                // store version without leading `v` for consistency
+                version: '2025.0.0',
+                date: '2025-12-01',
+                description: 'General availability of uxopian-ai 2025.0.0 — a standalone framework for enterprise GenAI integrations built on Java 21 LTS and Spring 3.5, with conversation management, orchestration, and native multi-tenant security.',
+                // slug matches the markdown filename under /release-note/uxopian-ai/
+                slug: 'release-note-2025.0',
+                hasUpgradeNotes: false,
+            },
+        ],
+        styles: uxopianAiStyles, // uxopian-ai specific styles
+        filterBy: 'major',
+        mapNote: (note: any) => ({
+            version: `v${note.version}`,
+            date: note.date,
+            description: note.description,
+            slug: note.slug,
+            majorVersion: note.version.split('.')[0],
+            hasUpgradeNotes: note.hasUpgradeNotes,
+        }),
+        readMoreLink: (note: any) => `/release-note/uxopian-ai/${note.slug}`,
         cardColor: '#F59E0B',
     },
 };
@@ -110,8 +128,28 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink }:
         day: 'numeric',
     });
 
+    // Helper to convert hex to rgba string
+    const hexToRgba = (hex: string, alpha: number) => {
+        const h = hex.replace('#', '');
+        const bigint = parseInt(h.length === 3 ? h.split('').map(c=>c+c).join('') : h, 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    };
+
+    const bg1 = cardColor ? hexToRgba(cardColor, 0.12) : 'rgba(74,143,239,0.12)';
+    const bg2 = cardColor ? hexToRgba(cardColor, 0.06) : 'rgba(58,143,157,0.06)';
+
     return (
-        <div className={styles.releaseCard}>
+        <div
+            className={styles.releaseCard}
+            style={{
+                '--card-color': cardColor || '#4A8FEF',
+                '--card-color-bg': bg1,
+                '--card-color-bg-2': bg2,
+            } as React.CSSProperties}
+        >
             {note.deprecation && <div className={styles.deprecationBadge}>{note.deprecation}</div>}
             <div className={styles.cardHeader}>
                 <div className={styles.versionBadge}>
@@ -148,6 +186,17 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink }:
             </div>
         </div>
     );
+}
+
+// Utility: convert hex to rgba string with given alpha
+function hexToRgba(hex: string, alpha = 1) {
+    const h = hex.replace('#', '');
+    const full = h.length === 3 ? h.split('').map((c) => c + c).join('') : h;
+    const bigint = parseInt(full, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
 export default function UnifiedReleasesPage() {
@@ -223,6 +272,16 @@ export default function UnifiedReleasesPage() {
                                     <button
                                         className={`${config.styles.filterButton} ${selectedFilter === 'all' ? config.styles.filterButtonActive : ''}`}
                                         onClick={() => setSelectedFilter('all')}
+                                        style={(() => {
+                                            const isActive = selectedFilter === 'all';
+                                            if (!config.cardColor) return undefined;
+                                            return {
+                                                '--card-color': config.cardColor,
+                                                background: isActive ? `linear-gradient(135deg, ${hexToRgba(config.cardColor, 0.12)}, ${hexToRgba(config.cardColor, 0.06)})` : undefined,
+                                                boxShadow: isActive ? `0 8px 24px ${hexToRgba(config.cardColor, 0.18)}` : undefined,
+                                                color: isActive ? 'white' : undefined,
+                                            } as React.CSSProperties;
+                                        })()}
                                     >
                                         All ({allNotes.length})
                                     </button>
@@ -230,13 +289,24 @@ export default function UnifiedReleasesPage() {
                                         const count = allNotes.filter((note) =>
                                             config.filterBy === 'year' ? note.version.startsWith(`v${k}`) : note.majorVersion === k
                                         ).length;
+                                        const isActive = selectedFilter === k;
+                                        const buttonStyle = config.cardColor
+                                            ? {
+                                                '--card-color': config.cardColor,
+                                                background: isActive ? `linear-gradient(135deg, ${hexToRgba(config.cardColor, 0.12)}, ${hexToRgba(config.cardColor, 0.06)})` : undefined,
+                                                boxShadow: isActive ? `0 8px 24px ${hexToRgba(config.cardColor, 0.18)}` : undefined,
+                                                color: isActive ? 'white' : undefined,
+                                            } as React.CSSProperties
+                                            : undefined;
+
                                         return (
                                             <button
                                                 key={k}
-                                                className={`${config.styles.filterButton} ${selectedFilter === k ? config.styles.filterButtonActive : ''}`}
+                                                className={`${config.styles.filterButton} ${isActive ? config.styles.filterButtonActive : ''}`}
                                                 onClick={() => setSelectedFilter(k)}
+                                                style={buttonStyle}
                                             >
-                                                {config.filterBy === 'year' ? `${k} (${count})` : `${k}.x version`}
+                                                {config.filterBy === 'year' ? `${k} (${count})` : `${k}`}
                                             </button>
                                         );
                                     })}

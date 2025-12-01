@@ -1,7 +1,11 @@
 ---
-title: "Actions"
-description: "Add actions in the search form."
-date: "2023-03-28T13:20:01+02:00"
+title: Actions
+description: Add actions in the search form.
+date: '2023-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5f3420055b33e418a62f2cb17986c75fd16a4ac994f97b4019f137c9235deac5
 ---
 
 

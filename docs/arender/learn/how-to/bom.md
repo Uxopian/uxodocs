@@ -1,5 +1,9 @@
 ---
-title: "Import ARender dependencies"
+title: Import ARender dependencies
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 1f65570410e48693e7806b332fb9764af57c455cdc6b87a46cd81094a3cbe018
 ---
 
 

@@ -1,6 +1,10 @@
 ---
-title: "Loading panel"
-date: "2018-03-28T13:21:01+02:00"
+title: Loading panel
+date: '2018-03-28T13:21:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 9e09eaa8dfa68ead62ad437fac3c3637395a84eed6d3217cfd409b3fd37c30ed
 ---
 
 

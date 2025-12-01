@@ -1,6 +1,10 @@
 ---
-title: "Annotations"
-description: "Gestion des annotations dans ARender"
+title: Annotations
+description: Gestion des annotations dans ARender
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a60be2b6cd7807d388d8e7847a8e0cca919c54ea65b24d9d0d074f2edcc77873
 ---
 
 

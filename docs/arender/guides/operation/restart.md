@@ -1,5 +1,9 @@
 ---
-title: "Restart"
+title: Restart
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: e9ded8300d10b4821035cb6875769917411a810447dfff483b4ecd86f5d95926
 ---
 
 

@@ -1,7 +1,13 @@
 ---
 title: Architecture Overview
-description: Framework design, covering both high-level components and software-level interactions
+description: >-
+  Framework design, covering both high-level components and software-level
+  interactions
 sidebar_position: 1
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a1110fd5edbb2013f4627cfe6cf17f839560c3a24047e5e3510411b25ca7ed6e
 ---
 
 # Architecture

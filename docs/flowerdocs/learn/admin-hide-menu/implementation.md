@@ -1,6 +1,10 @@
 ---
-title: "Implementation"
-date: "2020-02-01T12:20:01+02:00"
+title: Implementation
+date: '2020-02-01T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 1daef6e45e13b84cdc9149c881167f9014df0956befad3288b6b68eb3903a567
 ---
 
 

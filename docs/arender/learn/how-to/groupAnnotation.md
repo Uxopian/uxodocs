@@ -1,5 +1,9 @@
 ---
-title: "Group annotations"
+title: Group annotations
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 29c251afc44bc0a8b61cbfc34a2b4bf37ec948800a46bf65a41190b48f705e8a
 ---
 
 

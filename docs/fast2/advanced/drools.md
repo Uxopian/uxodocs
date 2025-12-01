@@ -3,6 +3,10 @@ tags:
   - Drools
   - Java
   - Excel
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 2f99c1ff29c7a25ed3d0b17aff45d987d91d7306b46f96e73b60e8d999803c5f
 ---
 
 # Drools: the Java rules engine

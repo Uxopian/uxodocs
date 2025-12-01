@@ -1,6 +1,10 @@
 ---
-title: "Cards"
-date: "2009-03-28T13:20:01+02:00"
+title: Cards
+date: '2009-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 959edce7abe91f1b14f0cbd0273cc6f81f5cdddbaa4cb2553ea25f28e8fbb27c
 ---
 
 

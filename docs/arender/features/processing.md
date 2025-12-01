@@ -1,5 +1,9 @@
 ---
-title: "Image processing"
+title: Image processing
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: c3439cd3eb8218a2c84f040bd89f4d294575be0e1f5f0014dc984eade4e17abd
 ---
 
 

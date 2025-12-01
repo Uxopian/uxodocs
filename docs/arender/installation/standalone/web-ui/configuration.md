@@ -1,5 +1,9 @@
 ---
-title: "Configuration"
+title: Configuration
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: b5f75867bbe083982240207552050e284c9fb34f825b550142306452d1e2404f
 ---
 
 

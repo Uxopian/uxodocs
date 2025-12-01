@@ -1,5 +1,9 @@
 ---
-title: "Document navigator"
+title: Document navigator
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 248c1d50d2bde0fe90c15d243403fac9339c2e96593f2505095376798447bc12
 ---
 
 

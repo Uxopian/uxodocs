@@ -1,5 +1,9 @@
 ---
-title: "Textual search"
+title: Textual search
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 13b522a79881cdc0ccce7ed1b89a1c8e518d7d448d4d0d1b0b1fa3b5053af987
 ---
 
 

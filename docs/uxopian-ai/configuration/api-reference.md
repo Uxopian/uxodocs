@@ -1,7 +1,13 @@
 ---
 title: Configuration & API Reference
-description: How to configure the uxopian-ai service using .yml files and interact with it through its REST API
+description: >-
+  How to configure the uxopian-ai service using .yml files and interact with it
+  through its REST API
 sidebar_position: 1
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5ab8106947d231304ed038560ff3e04655b8f1c08746a6d0b41c025cbb22b3a5
 ---
 
 # Configuration & API

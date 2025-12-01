@@ -1,6 +1,10 @@
 ---
-title: "Outgoing email"
-date: "2003-03-29T13:20:01+02:00"
+title: Outgoing email
+date: '2003-03-29T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5bc056b2a82f0601800c419e7963ab9029842e017baa5169e6c209d49e2a6b20
 ---
 
 

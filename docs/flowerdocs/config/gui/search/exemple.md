@@ -1,6 +1,10 @@
 ---
-title: "Full example"
-date: "2023-03-29T13:20:01+02:00"
+title: Full example
+date: '2023-03-29T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 9a76fb60051d1d074429be5827467aca7de24eb80cd2abc70a0488c82fbc9678
 ---
 
 

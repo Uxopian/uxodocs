@@ -1,7 +1,11 @@
 ---
-title: "Headers"
-description: "Secure requests made to FlowerDocs Core."
-date: "2019-06-01T13:25:01+02:00"
+title: Headers
+description: Secure requests made to FlowerDocs Core.
+date: '2019-06-01T13:25:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: d545554f5bcfa7af8d5300e6f64665c5a7bbe492d697ea5b5411b0de09f2f54c
 ---
 
 

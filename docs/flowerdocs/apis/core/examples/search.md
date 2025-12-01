@@ -1,7 +1,11 @@
 ---
-title: "Search for a component"
-description: "Build your search queries"
-date: "2001-03-29T13:30:01+02:00"
+title: Search for a component
+description: Build your search queries
+date: '2001-03-29T13:30:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 8750b939018ea6e8071718bddd39f5b9421095b65f11f47e79b43f8225b645e1
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -1,8 +1,11 @@
 ---
 weight: 10
 draft: false
-
 title: Installation
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 41badbdb76d0b707ccded1b168ec9d3e2cd7d00d22bb461a39776b773470c19a
 ---
 
 ## Requirements

@@ -1,7 +1,11 @@
 ---
-title: "Test"
-description: "Validating the configuration of a Fast2 injection"
-date: "2001-03-28T15:20:01+02:00"
+title: Test
+description: Validating the configuration of a Fast2 injection
+date: '2001-03-28T15:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: b408e9fe35ec545f1b894cd0eb7f9d60d5dd8678cd82703e7642bb8c50a21570
 ---
 
 

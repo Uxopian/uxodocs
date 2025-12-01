@@ -1,5 +1,9 @@
 ---
-title: "Upload/load a document on the server"
+title: Upload/load a document on the server
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: eeb24e92e0d1e364e29705bc2f08ac7ae07c80642cb912ece86c2cff0330bd6f
 ---
 
 

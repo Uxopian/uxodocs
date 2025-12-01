@@ -1,7 +1,11 @@
 ---
-title: "“DOCX templates"
-description: "Reusable templates, by scope, that can be enhanced with variables"
-date: "2020-02-02"
+title: “DOCX templates
+description: 'Reusable templates, by scope, that can be enhanced with variables'
+date: '2020-02-02'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 74d923cd4edbb13834d2e49c5fe1404e68b00ea0dde56365aac1d74a3475683f
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

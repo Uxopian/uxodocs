@@ -1,7 +1,11 @@
 ---
-title: "Authorisation"
-description: "Secure your application"
-date: "2018-03-27T13:20:01+02:00"
+title: Authorisation
+description: Secure your application
+date: '2018-03-27T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 93d217a79063ff54b9e97f893436b9dcb0caca3cfa7fa8041eaef5e613b0d1c4
 ---
 
 

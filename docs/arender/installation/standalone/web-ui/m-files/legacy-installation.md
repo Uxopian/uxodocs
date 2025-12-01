@@ -1,5 +1,9 @@
 ---
-title: "Legacy installation"
+title: Legacy installation
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ed6a4d86d0368591090494283a42397c086f99c5a75a96d7825b9c9563487ba8
 ---
 
 

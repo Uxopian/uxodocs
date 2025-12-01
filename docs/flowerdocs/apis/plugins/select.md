@@ -1,7 +1,11 @@
 ---
-title: "Component selection"
-description: "Offer users a library of models"
-date: "2021-11-17T10:20:01+02:00"
+title: Component selection
+description: Offer users a library of models
+date: '2021-11-17T10:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 65904dceb074183a8a998be459e745ae8529986a3d8d7d683ccb659be6de0b81
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -1,8 +1,12 @@
 ---
-title: "Logging"
-description: "Log the execution of operations."
-date: "2009-03-28T13:20:01+02:00"
+title: Logging
+description: Log the execution of operations.
+date: '2009-03-28T13:20:01+02:00'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: b97699c1462b6c4ce1e251e153250de6b7775d823bffb24341621076b9e58d14
 ---
 
 

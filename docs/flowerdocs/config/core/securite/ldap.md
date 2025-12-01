@@ -1,7 +1,11 @@
 ---
-title: "Directory"
-description: "Authenticate users to a company directory"
-date: "2000-03-20T13:20:01+02:00"
+title: Directory
+description: Authenticate users to a company directory
+date: '2000-03-20T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a044dbf11a7c1a27f28f084df9dc1fef6e49978270ee6b74ef4027679fa72a56
 ---
 
 

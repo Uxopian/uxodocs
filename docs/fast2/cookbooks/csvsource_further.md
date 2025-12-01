@@ -1,7 +1,12 @@
 ---
-title : "CSV source : a step further" 
+title: 'CSV source : a step further'
 author: Joseph TESSIER
-tags: ["csv"]
+tags:
+  - csv
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 30e5b65ec9bd25a9923edcccaacbcfc4959de59291195be1108d11d26326184e
 ---
 
 ![unsplash drawers](../assets/img/cookbooks/unsplash-drawers.jpg)

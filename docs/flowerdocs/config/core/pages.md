@@ -1,8 +1,12 @@
 ---
-title: "Pages"
-description: "Show ad-hoc HTML pages."
-date: "2020-02-02"
+title: Pages
+description: Show ad-hoc HTML pages.
+date: '2020-02-02'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: eef70916488b7fee6140d89d13ed01d338277467470de65da623a085ac7f1f6e
 ---
 
 

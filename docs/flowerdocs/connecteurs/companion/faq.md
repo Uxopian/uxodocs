@@ -1,6 +1,10 @@
 ---
-title: "FAQ"
-date: "2004-03-28T13:20:01+02:00"
+title: FAQ
+date: '2004-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6a0d572e94f493f2c5dc06e1bb7f1cecf258b5fb0e70662afb62b804531d12fd
 ---
 
  #1. __Hiding configuration within applications__ 

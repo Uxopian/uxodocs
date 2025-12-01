@@ -1,6 +1,10 @@
 ---
-title: "Graphical user interface customization"
-date: "2022-04-19T12:20:01+02:00"
+title: Graphical user interface customization
+date: '2022-04-19T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 361cd784345514292e413cf136ce9e8124d724593a8df3431fd70501f4ddd08a
 ---
 
 

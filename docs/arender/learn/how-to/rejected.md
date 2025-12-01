@@ -1,5 +1,9 @@
 ---
-title: "Image for rejected document"
+title: Image for rejected document
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: e4fd951e128cfb8e396ccca70bca4b0b0ef57de51a7635aa9e1386953c9d773f
 ---
 
 

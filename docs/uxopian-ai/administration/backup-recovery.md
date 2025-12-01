@@ -2,6 +2,10 @@
 title: Backup and Recovery
 description: Guidance on protecting critical data managed by the uxopian-ai framework
 sidebar_position: 1
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 761b878cab57c8893fff4dc49645fa13ba58f0eb4ee76caa9affd1e0cad47649
 ---
 
 # Backup and Recovery

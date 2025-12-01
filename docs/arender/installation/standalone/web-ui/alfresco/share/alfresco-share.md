@@ -1,5 +1,9 @@
 ---
-title: "Installation in Share"
+title: Installation in Share
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: c58c239f992751502cb77ed89a8805a83c46afbd12d4fb0429df6b477ccfc54f
 ---
 
 

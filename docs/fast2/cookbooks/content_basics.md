@@ -1,6 +1,13 @@
 ---
-title: "Contents in Fast2"
-tags: ["boilerplate", "content", "java"]
+title: Contents in Fast2
+tags:
+  - boilerplate
+  - content
+  - java
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 91c5b358816217e5460def82331869cd2843c294963e88550dbfa5231571a59d
 ---
 
 # Learn how to deal with contents

@@ -1,6 +1,10 @@
 ---
-title: "Classes"
-date: "2000-03-02"
+title: Classes
+date: '2000-03-02'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: f5e87e5f99f61e4ecce363cf9e7a339f547dc8485feb2d9ff003a795d0c0d402
 ---
 
 

@@ -1,7 +1,11 @@
 ---
-title: "Content indexing"
-description: "Index document content"
-date: "2009-03-28T13:20:01+02:00"
+title: Content indexing
+description: Index document content
+date: '2009-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 363c922d0103af9e15880480fe7e41ae46d8de9400c065809b58ba08a3cdb112
 ---
 
 

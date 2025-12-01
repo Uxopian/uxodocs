@@ -1,6 +1,10 @@
 ---
-title: "OpenSearch version upgrade"
-date: "2006-03-28T13:20:01+02:00"
+title: OpenSearch version upgrade
+date: '2006-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: f950a6fc8f4460272d1b573c297c6bcff8ea77d2eeca6ca3514e0dfd590222d1
 ---
 
 

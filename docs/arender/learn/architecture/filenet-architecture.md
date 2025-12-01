@@ -1,5 +1,9 @@
 ---
-title: "Architecture in IBM Filenet"
+title: Architecture in IBM Filenet
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 828549459cfe66887398a242fe95dc5f8804aeaa095454293f47e1ed0d41e3b3
 ---
 
 

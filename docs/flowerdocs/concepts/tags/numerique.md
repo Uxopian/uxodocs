@@ -1,7 +1,11 @@
 ---
-title: "Digital"
-description: "Use digital tags."
-date: "2018-03-07T13:23:01+02:00"
+title: Digital
+description: Use digital tags.
+date: '2018-03-07T13:23:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 45851e1863a2be1e36bea3538aa436ec4ecc369eaef8a17d3fe8cdcb3728d69a
 ---
 
 

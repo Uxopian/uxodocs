@@ -1,0 +1,22 @@
+.uxopianUnderSidebar {
+  margin-top: 1rem;
+}
+
+.uxopianFallback {
+  margin-top: 2rem;
+}
+
+.feedWrapper {
+  max-width: 320px;
+}
+
+/* Make sure the feed inside sidebar looks compact */
+.feedWrapper .uxopianFeed {
+  box-shadow: none;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 900px) {
+  .feedWrapper { max-width: 100%; }
+}

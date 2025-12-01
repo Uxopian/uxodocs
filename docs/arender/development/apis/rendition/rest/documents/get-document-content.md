@@ -1,5 +1,9 @@
 ---
-title: "GET Document Content"
+title: GET Document Content
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 37eea4934428b233bbef39096a28dea099a923fc11599657001848056b20b7e4
 ---
 
 

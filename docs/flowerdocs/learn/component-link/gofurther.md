@@ -1,6 +1,10 @@
 ---
-title: "Going further"
-date: "2020-02-03T12:20:01+02:00"
+title: Going further
+date: '2020-02-03T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a996b7e7fe182069ada04fa2d43893667a5af62ad5e3b247a8d83a44c180a3b1
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

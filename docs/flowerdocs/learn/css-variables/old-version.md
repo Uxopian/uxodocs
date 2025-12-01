@@ -1,6 +1,10 @@
 ---
-title: "Return to FlowerDocs 2.5 theme"
-date: "2022-04-19T13:20:01+02:00"
+title: Return to FlowerDocs 2.5 theme
+date: '2022-04-19T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: cbe22af677ebae7d088dcbef016a4fd62e38a0e132cdf12dc3fbbdda4538271a
 ---
 
 

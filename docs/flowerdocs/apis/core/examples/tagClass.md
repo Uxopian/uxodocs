@@ -1,7 +1,11 @@
 ---
-title: "Manipulating a tag class"
-description: "Create, retrieve, modify, delete your tag classes"
-date: "2001-04-29T13:30:01+01:02"
+title: Manipulating a tag class
+description: 'Create, retrieve, modify, delete your tag classes'
+date: '2001-04-29T13:30:01+01:02'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 2dbab95e40d894d8055252812f3a7cfa804737f79266a952ebb6540ba854336e
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

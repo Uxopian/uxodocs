@@ -1,6 +1,14 @@
 ---
 author: Joseph TESSIER
-tags: ["boilerplate", "punnet", "content", "java"]
+tags:
+  - boilerplate
+  - punnet
+  - content
+  - java
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 88f565988a022b5866fe758512143ae5a425aa4ba709106d5028b90a3a5a0874
 ---
 
 # Learn how to deal with punnets

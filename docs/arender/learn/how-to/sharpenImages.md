@@ -1,5 +1,9 @@
 ---
-title: "Obtain sharper images"
+title: Obtain sharper images
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: d0b3d92143486ffc39a77820f8e397a07e699fd560bec94dc58c55780fa3e483
 ---
 
 

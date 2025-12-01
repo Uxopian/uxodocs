@@ -1,6 +1,10 @@
 ---
-title: "Going further"
-date: "2020-02-02T15:20:01+02:00"
+title: Going further
+date: '2020-02-02T15:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 33ab754ea1588aa143f0f1cbacc05ba7f9d44a9da3f1a24cf54d4940f74843fc
 ---
 
 

@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ad93b29a7e245dd88101c549fcebe5ec6ca64333bc0d7b324e87fbbfbd1fa66a
+---
 ## ArchiveBuilder <small> - Punnet zipper </small> {#ArchiveBuilder data-toc-label="ArchiveBuilder"}
 
 Zip punnets into a zip file. A zip cannot contains a few punnets but documents carried by the punnet can be splitted into multiple zip files.

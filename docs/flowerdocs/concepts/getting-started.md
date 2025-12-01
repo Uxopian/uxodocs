@@ -1,6 +1,10 @@
 ---
-title: "Getting Started"
-date: "2000-02-01T12:20:01+02:00"
+title: Getting Started
+date: '2000-02-01T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5264f49a92e1a19e90eaf61a86e945164f911bec1bba18fb708b447566f503ea
 ---
 
 

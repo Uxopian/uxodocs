@@ -1,7 +1,11 @@
 ---
-title: "Search"
-description: "Search form within a popup."
-date: "2004-03-28T13:23:01+02:00"
+title: Search
+description: Search form within a popup.
+date: '2004-03-28T13:23:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 653a6a31cf2b1f173d4fa7f50755e591c3c19812b71fb648a7ebf68caea0f684
 ---
 
 

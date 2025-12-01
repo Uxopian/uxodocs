@@ -1,0 +1,92 @@
+.documentationSection {
+    padding: 2rem 0;
+    background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .documentationSection {
+    background: var(--ifm-background-color);
+}
+
+/* Layout for two columns: left content + right feed */
+.layoutWrapper {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.leftColumn {
+    min-width: 0;
+}
+
+.rightColumn {
+    position: relative;
+}
+
+@media (max-width: 1200px) {
+    .layoutWrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mainTitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--ifm-font-color-base);
+    margin-bottom: 1.5rem;
+}
+
+.intro {
+    font-size: 1rem;
+    color: var(--ifm-color-emphasis-700);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ifm-font-color-base);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.sectionContent {
+    font-size: 1rem;
+    color: var(--ifm-color-emphasis-700);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.sectionContent a {
+    color: var(--ifm-color-primary);
+    text-decoration: none;
+}
+
+.sectionContent a:hover {
+    text-decoration: underline;
+}
+
+.infoBox {
+    background: rgba(0, 120, 212, 0.1);
+    border-left: 4px solid var(--ifm-color-primary);
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 2rem 0;
+}
+
+.infoBox p {
+    margin: 0;
+    color: var(--ifm-font-color-base);
+}
+
+.infoBox a {
+    color: var(--ifm-color-primary);
+}
+
+.signature {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 2rem;
+    color: var(--ifm-font-color-base);
+}

@@ -1,6 +1,10 @@
 ---
-title: "In the FlowerDocs GUI properties file."
-date: "2020-03-01T13:20:01+02:00"
+title: In the FlowerDocs GUI properties file.
+date: '2020-03-01T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: e98f6e1bae957c00b077221db250f7666ff725e9228cff7fc30f270dfce87cb2
 ---
 
 

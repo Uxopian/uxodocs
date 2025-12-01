@@ -1,5 +1,9 @@
 ---
-title: "Complete example to add redact annotations"
+title: Complete example to add redact annotations
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 23d96bd7f224ef026b1a407b6ba5413ded39b99c705bed434c44087dab177077
 ---
 
 

@@ -1,8 +1,12 @@
 ---
-title: "Script execution"
-description: "Respond to an operation by executing a JavaScript script"
-date: "2002-03-28T13:20:01+02:00"
+title: Script execution
+description: Respond to an operation by executing a JavaScript script
+date: '2002-03-28T13:20:01+02:00'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6d869cd3cdb1524fc43c8b13bca17db07e4aa989aedcd367d72483acf5b67494
 ---
 
 

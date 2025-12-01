@@ -1,5 +1,9 @@
 ---
-title: "Destroy session"
+title: Destroy session
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: c8f1da1e9ce67c27047bf1344a9b7647bd44c59e0ed0e83036d0d98e32733cef
 ---
 
 

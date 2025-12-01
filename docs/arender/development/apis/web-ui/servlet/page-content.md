@@ -1,5 +1,9 @@
 ---
-title: "Get page content"
+title: Get page content
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: e88cbddcdb58d0aba17734aae7f4aa04c92e6b65708e28e66198b25c42e58c88
 ---
 
 

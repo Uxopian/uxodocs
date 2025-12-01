@@ -1,6 +1,10 @@
 ---
-title: "Other"
-date: "2018-03-28T13:20:01+02:00"
+title: Other
+date: '2018-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a7f49bbd609965041e67fdce0972a5db02dea8699e8e2fc3b496539feba370fb
 ---
 
 

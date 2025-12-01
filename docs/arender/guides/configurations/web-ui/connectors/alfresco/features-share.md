@@ -1,5 +1,9 @@
 ---
-title: "Features Alfresco Share"
+title: Features Alfresco Share
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 531e690965d6777afb9121ad7596fe67f3fea1325fc5fe913d6ca723714e658a
 ---
 
 

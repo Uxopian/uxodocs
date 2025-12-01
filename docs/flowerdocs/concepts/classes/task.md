@@ -1,7 +1,11 @@
 ---
-title: "Tasks"
-description: "tasks classes"
-date: "2018-03-02T13:20:01+02:00"
+title: Tasks
+description: tasks classes
+date: '2018-03-02T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: c7d5ec64444af4cae96070ddacf9a7e75b58d978290662fdc27a165a4ac524ab
 ---
 
 

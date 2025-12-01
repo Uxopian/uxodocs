@@ -1,5 +1,9 @@
 ---
-title: "GET Page Image"
+title: GET Page Image
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 2b8c70790defd58abf98e70cf2810b19b2d33baf3acc15f2b30d4d303f05413c
 ---
 
 

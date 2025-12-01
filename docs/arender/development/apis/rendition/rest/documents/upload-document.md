@@ -1,5 +1,9 @@
 ---
-title: "POST Document"
+title: POST Document
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: cd15426f536ad6573049f3fe51df827f13c5dce7f91ae9e37dbd313c52809aeb
 ---
 
 

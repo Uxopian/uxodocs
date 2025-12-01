@@ -1,8 +1,12 @@
 ---
-title: "Decision table"
-description: "React to an operation through a Drools decision table"
-date: "2002-01-28T13:20:01+02:00"
+title: Decision table
+description: React to an operation through a Drools decision table
+date: '2002-01-28T13:20:01+02:00'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 48105ab3bd1369bdcd5dc092461f3ffc9a5c3c9fb1c17104bc51983463d3752b
 ---
 
 

@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5632c68bd0720ec784a237c17f79368fd4c3efad7b81273da55f715c7664328f
+---
 # Dashboards
 
 import Tabs from '@theme/Tabs';

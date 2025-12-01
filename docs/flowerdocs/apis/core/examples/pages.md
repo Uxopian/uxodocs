@@ -1,7 +1,11 @@
 ---
-title: "Retrieve page content"
-description: "Recover the HTML code of your pages"
-date: "2018-04-02T12:20:01+01:58"
+title: Retrieve page content
+description: Recover the HTML code of your pages
+date: '2018-04-02T12:20:01+01:58'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 96637406dde83850f4d655d1ebf915e6986dd03c2e24b388ed7bf0541d4c8dc3
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

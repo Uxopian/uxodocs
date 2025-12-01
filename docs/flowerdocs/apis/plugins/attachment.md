@@ -1,7 +1,11 @@
 ---
-title: "Attachment action"
-description: "Actions on a task attachment"
-date: "2021-12-02T10:20:01+02:00"
+title: Attachment action
+description: Actions on a task attachment
+date: '2021-12-02T10:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ca181afd9b41a1c26aedfc8711023aa87fe79eb445a345e5b438e262be80d74b
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

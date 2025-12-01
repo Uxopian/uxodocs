@@ -1,7 +1,11 @@
 ---
-title: "Categories"
-description: "Organize tags by category."
-date: "2018-04-07T13:20:01+02:00"
+title: Categories
+description: Organize tags by category.
+date: '2018-04-07T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 461726329fcac66b68dfd0c7c794461696dbc1a333fba740beaadeef163da2dd
 ---
 
 

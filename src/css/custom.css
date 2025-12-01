@@ -488,12 +488,11 @@ body .navbar .secondary-nav .secondary-nav__item {
   display: inline-flex !important;
   align-items: center;
   gap: .25rem;
-  /* padding: 0.35rem 0.8rem !important; */
   border-radius: 10px !important;
   transition: all 200ms ease;
   box-shadow: none !important;
   
-  background-color: color-mix(in srgb, var(--ifm-color-primary), white 0%) !important;
+  background-color: var(--ifm-color-primary) !important;
   color: var(--ifm-color-primary) !important;
   font-weight: 600;
 }

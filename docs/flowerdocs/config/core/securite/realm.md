@@ -1,7 +1,11 @@
 ---
-title: "Internal users"
-description: "Define internal users"
-date: "2019-06-02T13:20:01+02:00"
+title: Internal users
+description: Define internal users
+date: '2019-06-02T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ce9483bbfa433b2e7fd3c138d5b9efd06aa314baaba80117ddadca0009146ed6
 ---
 
 :::info

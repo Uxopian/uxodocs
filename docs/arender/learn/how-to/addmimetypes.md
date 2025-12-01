@@ -1,5 +1,9 @@
 ---
-title: "Add new image/video mime types"
+title: Add new image/video mime types
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 8bf2f746a95ac22eddab23299c2013e570bb44f409d8090f906bb16463545e13
 ---
 
 

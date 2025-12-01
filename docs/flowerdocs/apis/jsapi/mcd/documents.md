@@ -1,7 +1,11 @@
 ---
-title: "Documents & their files"
-description: "Manipulating documents in JavaScript"
-date: "2004-02-01"
+title: Documents & their files
+description: Manipulating documents in JavaScript
+date: '2004-02-01'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 3e3679682653e1048626c0d8f311f394261f431594f7a4256d4fb6956ad3213a
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

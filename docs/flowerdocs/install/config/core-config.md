@@ -1,6 +1,10 @@
 ---
-title: "Core Configuration"
-date: "2000-03-31T13:20:01+02:00"
+title: Core Configuration
+date: '2000-03-31T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: be53a4cbaf9212813c0722b67327632f06293d951bcaac0a247ff3ff4f7ffc66
 ---
 
 

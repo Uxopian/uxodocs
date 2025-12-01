@@ -1,7 +1,11 @@
 ---
-title: "Documents"
-description: "Manage your electronic documents."
-date: "2018-03-02T13:20:01+02:00"
+title: Documents
+description: Manage your electronic documents.
+date: '2018-03-02T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: c1bf428a458e6f26a01e19d8bfe1a13c01bbf2e15d444c5555e35ef614e5d078
 ---
 
 

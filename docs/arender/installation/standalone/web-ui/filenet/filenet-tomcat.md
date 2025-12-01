@@ -1,6 +1,10 @@
 ---
-title: "Installation in Apache Tomcat"
-description: "Deployment guide for IBM Filenet in Apache Tomcat application server"
+title: Installation in Apache Tomcat
+description: Deployment guide for IBM Filenet in Apache Tomcat application server
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: e3cbefba474f7d3375bdbfa7ae6aee525f941e2768c0e4443f88ef3d21345bf4
 ---
 
 

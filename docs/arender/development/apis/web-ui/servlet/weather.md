@@ -1,5 +1,9 @@
 ---
-title: "Server performance / Set server"
+title: Server performance / Set server
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: cb1ccbb4f6ac1d676502250ea8c6cc3412e1e636219403d8bffd3b7389e40d5b
 ---
 
 

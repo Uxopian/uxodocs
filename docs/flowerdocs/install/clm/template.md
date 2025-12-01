@@ -1,6 +1,10 @@
 ---
-title: "Template"
-date: "2004-03-20T13:20:01+02:00"
+title: Template
+date: '2004-03-20T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 337d6bfd16cfeca6e83a06630d1e7a13ca42e03769093ae45dc7ec7254004439
 ---
 
 

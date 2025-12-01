@@ -1,5 +1,9 @@
 ---
-title: "Custom display name"
+title: Custom display name
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 9f9aeb309be1565d50d1114d2a6228fdae887813547be9715d6bbd388617f415
 ---
 
 

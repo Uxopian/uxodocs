@@ -1,6 +1,10 @@
 ---
-title: "Standard jobs"
-date: "2004-03-21T13:21:01+02:00"
+title: Standard jobs
+date: '2004-03-21T13:21:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 7272a8aeab8f29eb1c3148748bdbcf2308d00137fd7bdf531c41a12f98c29e4c
 ---
 
 

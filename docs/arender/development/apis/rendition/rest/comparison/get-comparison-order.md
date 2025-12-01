@@ -1,5 +1,9 @@
 ---
-title: "GET a comparison order"
+title: GET a comparison order
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5f9a872d21c857fbd2f44684811b78e53ed89910638ffa8b63b02afe64620f77
 ---
 
 

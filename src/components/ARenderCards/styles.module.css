@@ -7,6 +7,40 @@
     background: var(--ifm-background-color);
 }
 
+/* Layout for two columns: left content + right feed */
+.layoutWrapper {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.leftColumn {
+    min-width: 0;
+}
+
+.rightColumn {
+    position: relative;
+}
+
+@media (max-width: 1200px) {
+    .layoutWrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .cardsGrid,
+    .guidesGrid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .mainTitle {
+        font-size: 2.5rem;
+    }
+}
+
 .mainTitle {
     font-size: 2rem;
     font-weight: bold;

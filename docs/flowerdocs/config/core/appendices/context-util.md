@@ -1,7 +1,11 @@
 ---
-title: "ContextUtil"
-date: "2002-03-28T13:20:01+02:00"
+title: ContextUtil
+date: '2002-03-28T13:20:01+02:00'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 74418a2c93cb7a11388e72ebfe732840c30a60f3de6c6ed622cd074fb9652abd
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

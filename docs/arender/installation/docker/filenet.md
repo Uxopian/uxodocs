@@ -1,5 +1,9 @@
 ---
-title: "IBM FileNet"
+title: IBM FileNet
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5811fed8acbed05e4ac7a64a20654ee63f49a81574bece4ed041701f673cc6c8
 ---
 
 

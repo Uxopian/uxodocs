@@ -281,7 +281,7 @@
 
 .cardHeader {
     padding: 1.25rem 1.5rem;
-    background: linear-gradient(135deg, rgba(92, 184, 199, 0.12), rgba(58, 143, 157, 0.06));
+    background: linear-gradient(135deg, var(--card-color-bg, rgba(92, 184, 199, 0.12)), var(--card-color-bg-2, rgba(58, 143, 157, 0.06)));
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
     z-index: 2;
@@ -290,7 +290,7 @@
 }
 
 [data-theme='dark'] .cardHeader {
-    background: linear-gradient(135deg, rgba(92, 184, 199, 0.18), rgba(58, 143, 157, 0.1));
+    background: linear-gradient(135deg, var(--card-color-bg, rgba(92, 184, 199, 0.18)), var(--card-color-bg-2, rgba(58, 143, 157, 0.1)));
     border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -304,11 +304,10 @@
 .versionNumber {
     font-size: 1.375rem;
     font-weight: 700;
-    color: #3A8F9D;
+    color: var(--card-color, #3A8F9D);
 }
-
 [data-theme='dark'] .versionNumber {
-    color: #5CB8C7;
+    color: var(--card-color, #5CB8C7);
 }
 
 .deprecationBadge {
@@ -404,7 +403,7 @@
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 0.85rem;
-    background: rgba(92, 184, 199, 0.08);
+    background: var(--card-color-bg, rgba(92, 184, 199, 0.08));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     text-align: center;
@@ -413,7 +412,7 @@
 }
 
 [data-theme='dark'] .readMoreLink {
-    background: rgba(92, 184, 199, 0.12);
+    background: var(--card-color-bg, rgba(92, 184, 199, 0.12));
 }
 
 /* Effet de reflet sur le lien */
@@ -440,7 +439,7 @@
 .readMoreLink:hover {
     color: var(--card-color, #5CB8C7);
     text-decoration: none;
-    background: rgba(92, 184, 199, 0.15);
+    background: var(--card-color-bg-2, rgba(92, 184, 199, 0.15));
     transform: translateX(4px);
 }
 

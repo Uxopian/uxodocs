@@ -1,7 +1,11 @@
 ---
-title: "Components"
-description: "Manipulating component in JavaScript"
-date: "2001-02-01"
+title: Components
+description: Manipulating component in JavaScript
+date: '2001-02-01'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: beaf1b1b3ce9c76882400e646196e095a90b85b8fe8402fa7fb7538718633702
 ---
 
 

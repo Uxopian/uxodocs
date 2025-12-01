@@ -1,6 +1,10 @@
 ---
-title: "Documents"
-date: "2000-04-02"
+title: Documents
+date: '2000-04-02'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: bdbe6fb572ac8dfbde7d8441f15b300d2b1ac0ac920e99c773d4096afe8fcba9
 ---
 
 

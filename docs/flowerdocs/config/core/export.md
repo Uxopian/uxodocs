@@ -1,7 +1,11 @@
 ---
-title: "Export results"
-description: "Export search results"
-date: "2020-02-01"
+title: Export results
+description: Export search results
+date: '2020-02-01'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 404f7953c987062a221129405e7c454a47832f732ef94d39d6b8f167fec74c1d
 ---
 
 

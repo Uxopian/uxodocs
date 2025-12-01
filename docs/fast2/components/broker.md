@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 61c3bb88439754308d764409631a1013cfa2fd029373a45e09a71aaae616ddc7
+---
 # The broker
 
 :::tip

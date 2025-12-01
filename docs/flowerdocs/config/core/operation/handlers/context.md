@@ -1,7 +1,11 @@
 ---
-title: "Operation context"
-description: "Use the operation context of an operation"
-date: "2002-01-27T13:20:01+02:00"
+title: Operation context
+description: Use the operation context of an operation
+date: '2002-01-27T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 18fd020d997b489f87f88cfcba1d7c43738f22ffda594b50e09b98abfad4a468
 ---
 
 

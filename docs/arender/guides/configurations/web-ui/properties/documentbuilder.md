@@ -1,5 +1,9 @@
 ---
-title: "Document builder"
+title: Document builder
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: f22dea08244e1a5502ff0cc7e52811acc816d3f3bd236678f5fc07f24e857eb5
 ---
 
 

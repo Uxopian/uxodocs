@@ -1,6 +1,10 @@
 ---
-title: "FlowerDocs 2.6 version upgrade"
-date: "2022-02-14T13:20:01+02:00"
+title: FlowerDocs 2.6 version upgrade
+date: '2022-02-14T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6dad91feb3b6c75f6e1c7b0751a587b563dac910a2d6c7784e70a9c6b9fd6bdf
 ---
 
 

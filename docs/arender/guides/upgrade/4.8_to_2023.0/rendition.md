@@ -1,5 +1,9 @@
 ---
-title: "Rendition changes"
+title: Rendition changes
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: bcc42571dfd3317a2521ccc36c24580a369b0be8d3a7ecc22c6b8c9bff226b94
 ---
 
 

@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: c8faeafc30c6147b1fd6e15f6f24793e85f3873d433da3fc5a0229f611681ed5
+---
 # Components
 
 Here's a quick intro explaining the purpose and role of the four main components in Fast2 :

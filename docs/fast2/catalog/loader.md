@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 35988f64d83fdf34f2e338314e52564e2abcfe965e33c74ef5c642cd557fb10f
+---
 ## AlfrescoBulkImporter <small> - Perform a bulk import on Alfresco </small> {#AlfrescoBulkImporter data-toc-label="AlfrescoBulkImporter"}
 
 Load documents and metadata into Alfresco without changing the current tree structure of those same documents. The good performances of such injection are restrained with the complexity of the tree-view setup

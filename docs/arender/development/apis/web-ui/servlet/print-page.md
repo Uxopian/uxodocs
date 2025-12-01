@@ -1,5 +1,9 @@
 ---
-title: "Print pages"
+title: Print pages
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 750e57a2b889066822614cd757f7ee0be337766072dff43955f74c39109f68cb
 ---
 
 

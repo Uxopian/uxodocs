@@ -1,5 +1,9 @@
 ---
-title: "Layers (OCG's)"
+title: Layers (OCG's)
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 9a55755db5328c9de20a28f16bb4e7f2c9a7dc3e462757788f2cbec1f4433229
 ---
 
 

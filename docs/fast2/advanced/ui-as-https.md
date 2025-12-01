@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 16a09162b2b729a0d8d6141d9437961de49d631fa762e88ddcbe079028b5f962
+---
 # HTTPS Configuration Guide
 
 This guide outlines the steps to enable HTTPS for your application, including generating a self-signed SSL certificate, importing it into the Java keystore, and configuring your server to use HTTPS. 

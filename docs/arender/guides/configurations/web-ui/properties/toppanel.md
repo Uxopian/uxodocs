@@ -1,5 +1,9 @@
 ---
-title: "Menu bar"
+title: Menu bar
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: fc0bc96410467361b3ef06db429c19cc73c02df57753a861804cfb84e1b27dc4
 ---
 
 

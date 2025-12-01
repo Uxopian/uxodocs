@@ -1,7 +1,11 @@
 ---
-title: "Configuration"
-description: "Configure the ARender viewer."
-date: "2005-06-28T13:20:01+02:00"
+title: Configuration
+description: Configure the ARender viewer.
+date: '2005-06-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: af21550c6a36c5490a3f5082a8211e9821f76186ac5b5195d2e30eb7dd1e6e6a
 ---
 
 

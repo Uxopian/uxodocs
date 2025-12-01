@@ -1,5 +1,9 @@
 ---
-title: "Composite documents"
+title: Composite documents
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ed4114cf08f90d8095297ab956e0bec920da86e5e8f2265f99a444b78002405a
 ---
 
 

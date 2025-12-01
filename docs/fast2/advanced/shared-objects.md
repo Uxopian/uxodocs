@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: b1666e67b242ceaabf85176592ce5554e3a4fe25df299b2837da352079ade644
+---
 :::warning
 
     This page has been moved to the Knowledge-Base at 🔗[Understand the Shared Objects in Fast2](https://arondor.atlassian.net/servicedesk/customer/portal/82/article/4188307457)

@@ -1,5 +1,9 @@
 ---
-title: "Alfresco"
+title: Alfresco
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: d5710816c9b26223cc8ed6bb14075d781860d798d84ecce080f5818e773767a0
 ---
 
 

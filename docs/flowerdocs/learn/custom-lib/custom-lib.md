@@ -1,7 +1,11 @@
 ---
-title: "Customised library"
-description: "Develop a Java library to override a Core behavior."
-date: "2020-02-01T12:20:01+02:00"
+title: Customised library
+description: Develop a Java library to override a Core behavior.
+date: '2020-02-01T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: e144ef5cf09c615a1a5f787d11d6c5b39a80e251b8590b99f8cff3159271986c
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 2cbac4f31157a0da5c0ed34d8bf25cea4b4abea55d261e71e714ede29c822631
+---
 # Authentication & Team management
 
 ## Account registration

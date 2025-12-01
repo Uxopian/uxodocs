@@ -1,6 +1,10 @@
 ---
-title: "GUI configuration"
-date: "2000-03-30T13:20:01+02:00"
+title: GUI configuration
+date: '2000-03-30T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 89ec3be2e5a15316776816fdf01e8132ab5b2394b27e1f7901a6c3362a526d85
 ---
 
 

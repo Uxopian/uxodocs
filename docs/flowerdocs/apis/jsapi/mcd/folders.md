@@ -1,7 +1,11 @@
 ---
-title: "Folders & their content"
-description: "Manipulating folders in JavaScript"
-date: "2004-02-02"
+title: Folders & their content
+description: Manipulating folders in JavaScript
+date: '2004-02-02'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: cabe2244413bd9b95c7b43707261bd00b1af845b2e76777c8c46dd7fe381edbe
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

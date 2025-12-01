@@ -1,6 +1,10 @@
 ---
-title: "Default page"
-date: "2001-03-02T13:20:01+02:00"
+title: Default page
+date: '2001-03-02T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 4dfd2b2b287538d57a51684669da813c1f091401c1f2814be200777522cf9baf
 ---
 
 

@@ -1,7 +1,11 @@
 ---
-title: "Icons"
-description: "Modify component icons in JavaScript"
-date: "2000-02-01"
+title: Icons
+description: Modify component icons in JavaScript
+date: '2000-02-01'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ad2556de6056379e317fbc7c72c34e5e3419310a3c4ce9b0fe095323b4f2ce98
 ---
 
 :::info

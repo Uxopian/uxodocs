@@ -1,7 +1,11 @@
 ---
-title: "List"
-description: "Use tags linked to lists."
-date: "2018-03-07T13:21:01+02:00"
+title: List
+description: Use tags linked to lists.
+date: '2018-03-07T13:21:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6a8eef0f1af209316ce9d3638d1e837722cef5bc0416a594aed4c6d14c7b264d
 ---
 
 

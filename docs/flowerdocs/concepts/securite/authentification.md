@@ -1,7 +1,11 @@
 ---
-title: "Authentication"
-description: "Authenticate users accessing the application"
-date: "2018-03-27T13:20:01+02:00"
+title: Authentication
+description: Authenticate users accessing the application
+date: '2018-03-27T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: b5e4e8d5319c735f88a0a2d6d32d18fe4fc4f45be1a4a513a4fdb208c7886353
 ---
 
 

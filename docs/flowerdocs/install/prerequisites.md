@@ -1,6 +1,10 @@
 ---
-title: "Prerequisites"
-date: "2000-03-28T13:20:01+02:00"
+title: Prerequisites
+date: '2000-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 117616407268262d038bbe87fcef6645f6a54149a8239f50b7238173bca0ef46
 ---
 
 

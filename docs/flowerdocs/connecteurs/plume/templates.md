@@ -1,6 +1,10 @@
 ---
-title: "Models"
-date: "2003-03-28T13:20:01+02:00"
+title: Models
+date: '2003-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 2b80195093eed9c31aef6fdcefbba5fecfe6d63fde7ec2e3ea1fe8cae3866a39
 ---
 
 

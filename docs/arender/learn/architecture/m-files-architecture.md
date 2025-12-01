@@ -1,5 +1,9 @@
 ---
-title: "Architecture in M-Files"
+title: Architecture in M-Files
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 12b80e9d85ef6bc742f22bd63ec6697bf01c41af72b7508befe2d684c63ad906
 ---
 
 

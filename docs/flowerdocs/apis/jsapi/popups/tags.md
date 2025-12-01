@@ -1,7 +1,11 @@
 ---
-title: "Tags"
-description: "Displaying component tags in a popup window."
-date: "2004-03-28T13:21:01+02:00"
+title: Tags
+description: Displaying component tags in a popup window.
+date: '2004-03-28T13:21:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: ca7d69f184a7c4cfb7ef49d33443623756a0ca56ea3edc744cf3ee29125532de
 ---
 
 

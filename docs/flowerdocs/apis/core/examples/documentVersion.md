@@ -1,7 +1,11 @@
 ---
-title: "Handling document versions"
-description: "Create, restore, delete document versions"
-date: "2001-03-30T13:20:02+02:00"
+title: Handling document versions
+description: 'Create, restore, delete document versions'
+date: '2001-03-30T13:20:02+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 89f4d558de744bd90d018f28bb44a2c390813ef3c12ec8fe89ff5b5a69453601
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

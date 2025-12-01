@@ -1,5 +1,9 @@
 ---
-title: "Architecture in Alfresco"
+title: Architecture in Alfresco
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5682ef2d5342f1a8f14da55632e610297e2f0b3ef805b928ddd8c39358f6464d
 ---
 
 

@@ -1,6 +1,10 @@
 ---
-title: "Full example"
-date: "2020-07-07T12:20:01+02:00"
+title: Full example
+date: '2020-07-07T12:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 863a2c16de3f8f6041d044f4a4c9424446987ed411782285bd4e2d59b18aec65
 ---
 
 

@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 0c2153fa2444b0ba9df1de27d56805ed07a7411f59e1d4a8ddd78715e6c79177
+---
 Using the [JSTransform](../catalog/transformer.md#JSTransform) task can comes in quite handy for any tweaking of metadata, but will also get you covered in case of heavier operations, as long as your JavaScript talents match you problem solving skills !
 To iterate through all documents crossing your JS task, here is a short code snippet to help you get started:
 

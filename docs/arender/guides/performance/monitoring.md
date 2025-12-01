@@ -1,5 +1,9 @@
 ---
-title: "Monitoring performance"
+title: Monitoring performance
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: fc74e6456c936d81aa155e043dfae544c62d4a10775218154508986cc793d36c
 ---
 
 

@@ -1,5 +1,9 @@
 ---
-title: "Get started with the javascript API"
+title: Get started with the javascript API
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 57e54208b42637f7cec4d970c7928aa4e1180540139af9bf49fcff107e94e661
 ---
 
 

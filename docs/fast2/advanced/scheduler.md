@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: bc6ccf342fc114b998a8f79f712fb777d3d615c2a030fa861e4e60ef0542d859
+---
 # Schedule your campaigns
 
 Fast2 has a module allowing you to schedule your next runs.

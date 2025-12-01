@@ -1,6 +1,10 @@
 ---
-title: "Labels"
-date: "2004-02-28T13:20:01+02:00"
+title: Labels
+date: '2004-02-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: a303bbbcee0c065698cf02e645fdf604f28b3d79227e799f39627cff7c013cfb
 ---
 
 

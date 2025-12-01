@@ -1,5 +1,9 @@
 ---
-title: "Print"
+title: Print
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 335927dca7bcbe479fea66561219e6dfc3e3ac21f711ae679da0f2413c2f9cd0
 ---
 
 

@@ -1,5 +1,9 @@
 ---
-title: "Get Bookmarks"
+title: Get Bookmarks
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 8783f7181fa9988579af3d5b10dd6c96e6490c694a8395a425199357d27f8f87
 ---
 
 

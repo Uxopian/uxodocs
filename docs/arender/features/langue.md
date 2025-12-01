@@ -1,5 +1,9 @@
 ---
-title: "Internationalization"
+title: Internationalization
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 36b82b5c0cc00fd5ec3a97e2e598dd79758df2053a3e809a2c68b7caf8ee748c
 ---
 
 

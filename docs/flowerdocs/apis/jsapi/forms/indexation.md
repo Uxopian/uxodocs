@@ -1,6 +1,10 @@
 ---
-title: "Indexing"
-date: "2001-03-28T13:20:01+02:00"
+title: Indexing
+date: '2001-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: b781e251c650d393e8b2ee8f3b479ad8a128bed93a6277a547eb33ed19f46c88
 ---
 
 

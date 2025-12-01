@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 25776bb3de62ec69d3d193af67b8837bb9d7adb999c2803f14ae2ce81f1c2dc3
+---
 # The worker
 
 :::tip

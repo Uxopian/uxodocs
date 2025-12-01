@@ -1,5 +1,9 @@
 ---
-title: "GET Text Positions with Search in Document"
+title: GET Text Positions with Search in Document
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 0e88ad47796411127eddcaa07bbb8dfe5f0c1a072ba27d307fa0d40c574e5984
 ---
 
 

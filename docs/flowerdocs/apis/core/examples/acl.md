@@ -1,7 +1,11 @@
 ---
-title: "Managing ACLs"
-description: "Manage your access control lists"
-date: "2018-04-02T12:20:01+01:57"
+title: Managing ACLs
+description: Manage your access control lists
+date: '2018-04-02T12:20:01+01:57'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 62702421a66e6244cc544ae3f29ca3f22bafa581eb7780dde5275c24a5236f08
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

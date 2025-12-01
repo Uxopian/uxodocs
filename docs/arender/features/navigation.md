@@ -1,5 +1,9 @@
 ---
-title: "Navigation"
+title: Navigation
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 8c1947cba509ee1ed7b7f56d45bcd9f90515ddd20632a6be7c6a8b82bd7a6a68
 ---
 
 

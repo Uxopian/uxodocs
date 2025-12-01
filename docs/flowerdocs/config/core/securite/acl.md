@@ -1,7 +1,11 @@
 ---
-title: "Access control list"
-description: "Secure access to components"
-date: "2019-06-06"
+title: Access control list
+description: Secure access to components
+date: '2019-06-06'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5f77e827799021c0d59cbb303e7a9f8e72f290290d62a47a46023ca67194421f
 ---
 
 

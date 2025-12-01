@@ -1,7 +1,16 @@
 ---
 image: images/cookbooks/fast2-models/punnet.png
 author: Joseph TESSIER
-tags: ["boilerplate", "document", "dataset", "content", "java"]
+tags:
+  - boilerplate
+  - document
+  - dataset
+  - content
+  - java
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 07dfa25923502cd3329514291f50e8733129b4401d3e6f8abddef2749f744a99
 ---
 
 # Learn how to deal with documents

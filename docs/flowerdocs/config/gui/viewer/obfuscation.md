@@ -1,7 +1,11 @@
 ---
-title: "Obfuscation"
-description: "Obfuscate sensitive data within documents."
-date: "2005-08-29T13:20:01+02:00"
+title: Obfuscation
+description: Obfuscate sensitive data within documents.
+date: '2005-08-29T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 5a90d136a3008ffb0b6f29f5fec5c58d430c1544274b8a731b8be91919bc7427
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

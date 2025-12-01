@@ -1,0 +1,90 @@
+/* uxopian-ai specific release styles
+   This file composes the base layout from fast2.module.css and sets
+   product-specific CSS variables so the page and cards use the Uxopian color.
+*/
+
+.releasesPage {
+  composes: releasesPage from './fast2.module.css';
+  /* product variables (fallbacks used by card styles) */
+  --card-color: #F59E0B;
+  --card-color-bg: rgba(245, 158, 11, 0.12);
+  --card-color-bg-2: rgba(245, 158, 11, 0.06);
+}
+
+.mainContent {
+  composes: mainContent from './fast2.module.css';
+}
+
+.filterBar {
+  composes: filterBar from './fast2.module.css';
+}
+
+.filterButton {
+  composes: filterButton from './fast2.module.css';
+}
+
+.filterButtonActive {
+  composes: filterButtonActive from './fast2.module.css';
+}
+
+.releaseGrid {
+  composes: releaseGrid from './fast2.module.css';
+}
+
+.releaseCard {
+  composes: releaseCard from './fast2.module.css';
+}
+
+.cardHeader {
+  composes: cardHeader from './fast2.module.css';
+}
+
+.versionBadge {
+  composes: versionBadge from './fast2.module.css';
+}
+
+.versionNumber {
+  composes: versionNumber from './fast2.module.css';
+}
+
+.releaseDate {
+  composes: releaseDate from './fast2.module.css';
+}
+
+.cardBody {
+  composes: cardBody from './fast2.module.css';
+}
+
+.description {
+  composes: description from './fast2.module.css';
+}
+
+.readMoreLink {
+  composes: readMoreLink from './fast2.module.css';
+}
+
+.upgradeLink {
+  composes: readMoreLink from './fast2.module.css';
+}
+
+.deprecationBadge {
+  composes: deprecationBadge from './fast2.module.css';
+}
+
+.latestBadge {
+  composes: latestBadge from './fast2.module.css';
+}
+
+.latestV2Badge {
+  composes: latestV2Badge from './fast2.module.css';
+}
+
+.emptyState {
+  composes: emptyState from './fast2.module.css';
+}
+
+/* Ensure dark theme header uses same variables when applied at page level */
+[data-theme='dark'] .releasesPage {
+  --card-color-bg: rgba(245, 158, 11, 0.18);
+  --card-color-bg-2: rgba(245, 158, 11, 0.1);
+}

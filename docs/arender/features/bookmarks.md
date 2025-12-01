@@ -1,5 +1,9 @@
 ---
-title: "Bookmarks"
+title: Bookmarks
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 1d7b9b4ee9ad3754d042389a0addfd87af95076190c0b02d5ab6b96a839800b0
 ---
 
 

@@ -1,8 +1,13 @@
 ---
 draft: false
-
 title: Patterns
-tags: ["configuration", "Java"]
+tags:
+  - configuration
+  - Java
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: b6a2c322052df953de591c0944ffa9d7026045bed145d1498cb2220c2fe1088a
 ---
 
 A pattern is a sequence of instructions, a model, which can be easily recognized by an aware glance. It is strictly under this definition that Fast2 patterns stand.

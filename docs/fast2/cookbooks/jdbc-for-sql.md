@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: b664dfdad442b68197a602ee33636390c7b52a20f70f1a0db47bcfa1f7b52d34
+---
 # JDBC : How to link Fast2 and SQL DB
 
 ![Cover image for JDBC cookbook](../assets/img/cookbooks/jdbc.png)

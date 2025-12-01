@@ -1,6 +1,10 @@
 ---
-title: "Reasoned answer"
-date: "2001-03-28T13:22:01+02:00"
+title: Reasoned answer
+date: '2001-03-28T13:22:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: f48adccaa6e17aebc854e293247b8e8e207316f333c7b88688a05db1772165a0
 ---
 
 

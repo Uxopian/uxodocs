@@ -1,7 +1,11 @@
 ---
-title: "Handling a task"
-description: "Create, retrieve, modify, delete, respond to and assign your tasks"
-date: "2001-04-29T13:30:01+02:00"
+title: Handling a task
+description: 'Create, retrieve, modify, delete, respond to and assign your tasks'
+date: '2001-04-29T13:30:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 95753e3cd0f4a907c3912ca30ea3946ad3b37b4347f2f8e1a3a3ab0c830b7855
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

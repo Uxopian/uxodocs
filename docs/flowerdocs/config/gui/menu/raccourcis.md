@@ -1,6 +1,10 @@
 ---
-title: "Shortcuts"
-date: "2001-03-03T13:20:01+02:00"
+title: Shortcuts
+date: '2001-03-03T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: f2f532d806cdf75cfd8fd6fbf57afdb5851fce126d83a47cbabcd4ce9826f704
 ---
 
 

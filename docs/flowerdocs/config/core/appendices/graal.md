@@ -1,8 +1,12 @@
 ---
-title: "Graal"
-description: "JavaScript engine included in FlowerDocs Core."
-date: "2002-03-28T13:20:01+02:00"
+title: Graal
+description: JavaScript engine included in FlowerDocs Core.
+date: '2002-03-28T13:20:01+02:00'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 16e5a4a5433e2d707b180f27bcac8f8cb289b9fb65b43271b4f6c4af1166f8dc
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

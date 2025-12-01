@@ -1,12 +1,16 @@
 ---
-title: "Operation"
-description: "Reacting to operations."
-date: "2008-01-03T13:22:01+02:00"
+title: Operation
+description: Reacting to operations.
+date: '2008-01-03T13:22:01+02:00'
 custom_edit_url: null
+last_update:
+  date: '2025-12-01T15:13:12.089Z'
+  author: CI/CD Bot
+content_hash: 5a78f187c99756a64f79a0a0dc904b8a0eebeb9b1e4ecc6bc7350643ed7ba74a
 ---
 
 
-# Principle
+## Principle
 
 The `Operation API` reacts to the execution of operations within **FlowerDocs Core**. A **operation** is an action performed by a user on a component. 
 
@@ -26,7 +30,7 @@ The following steps may be interrupted by an exception raised by an operation ha
 :::
 
 
-# Subscription
+## Subscription
 
 In order for an operation manager to react to the execution of an operation, it must be subscribed to it. Subscribing to the execution of an operation involves creating a configuration document of class `OperationHandlerRegistration`. 
 
@@ -49,7 +53,7 @@ The fields on which filters can be applied depend on the  chosen. Here is an exh
 Via the administration interface, it is possible to select other fields, notably on administration components: they will not be taken into account.
 
 
-# Operations Manager
+## Operations Manager
 
 An **operations Manager** (or [`com.flower.docs.operation.api.OperationHandler`](#javadoc-com-flower-docs-operation-api-OperationHandler)) is a code fragment called when an operation is executed.
 They can be divided into three categories: 

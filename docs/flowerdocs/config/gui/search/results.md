@@ -1,7 +1,11 @@
 ---
-title: "Search results"
-description: "Customize the presentation of search results."
-date: "2005-04-28T13:20:01+02:00"
+title: Search results
+description: Customize the presentation of search results.
+date: '2005-04-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 45e72e0781106dec571344ed0356dbbdcd296be100fd2f7efc716590c913888e
 ---
 
 

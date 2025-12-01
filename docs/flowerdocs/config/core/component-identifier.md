@@ -1,6 +1,10 @@
 ---
-title: "Component identifiers"
-date: "2004-03-28T13:20:01+02:00"
+title: Component identifiers
+date: '2004-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: d59edfe35f1cbf0082f9c614fdb2e72a0fc18af60bf22543e91e93512b70c529
 ---
 
 

@@ -1,6 +1,10 @@
 ---
-title: "Minimum configuration"
-date: "2001-03-28T14:20:01+02:00"
+title: Minimum configuration
+date: '2001-03-28T14:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 46623198bf5ab39b38dd2cee089e9712ddd3580fe16ee005c1bb2961d905d239
 ---
 
 

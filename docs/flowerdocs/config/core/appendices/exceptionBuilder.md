@@ -1,7 +1,11 @@
 ---
-title: "ExceptionBuilder"
-description: "Building a JAVA Exception with FlowerDocs identifiers"
-date: "2002-03-28T13:20:01+02:00"
+title: ExceptionBuilder
+description: Building a JAVA Exception with FlowerDocs identifiers
+date: '2002-03-28T13:20:01+02:00'
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: 6a0c619bcabf7bdd94b3d3dccdb3463cb67021b99e8ca9ffd6de8bb795349545
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

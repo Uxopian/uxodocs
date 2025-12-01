@@ -1,3 +1,9 @@
+---
+last_update:
+  date: '2025-12-01T14:30:57.777Z'
+  author: CI/CD Bot
+content_hash: c692fcc71e4efbdbaee24c13468ba87c387f1d9d0762b9cf6e1388158b88d4b3
+---
 ## AlfrescoRestDeleteNode <small> - Alfresco delete nodes using Alfresco REST protocol </small> {#AlfrescoRestDeleteNode data-toc-label="AlfrescoRestDeleteNode"}
 
 This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco REST client) to delete nodes.
