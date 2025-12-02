@@ -98,6 +98,7 @@ const config: Config = {
         docsRouteBasePath: ['docs/fast2', 'docs/arender', 'docs/flowerdocs', 'docs/uxopian-ai'],
         ignoreFiles: [],
         removeDefaultStopWordFilter: true,
+        explicitSearchResultPath: true,
       },
     ],
   ],
