@@ -102,92 +102,64 @@ function useSearchResultsDecorator() {
         
         const hitPath = suggestion.querySelector('[class*="hitPath"]') as HTMLElement | null;
         
-        // Détecter le produit - D'ABORD via l'URL du document (plus fiable)
+        // Fonction robuste pour détecter le produit depuis une URL ou texte
+        const detectProductFromUrl = (url: string): string | null => {
+          const lowerUrl = url.toLowerCase();
+          // Patterns: /uxodocs/docs/PRODUCT/ ou /docs/PRODUCT/ ou docs/PRODUCT/
+          if (lowerUrl.match(/\/docs\/arender[\/\?#]|docs\/arender[\/\?#]/)) return 'arender';
+          if (lowerUrl.match(/\/docs\/fast2[\/\?#]|docs\/fast2[\/\?#]/)) return 'fast2';
+          if (lowerUrl.match(/\/docs\/flowerdocs[\/\?#]|docs\/flowerdocs[\/\?#]/)) return 'flowerdocs';
+          if (lowerUrl.match(/\/docs\/uxopian-ai[\/\?#]|docs\/uxopian-ai[\/\?#]/)) return 'uxopian-ai';
+          return null;
+        };
+        
         let product: string | null = null;
         
-        // Chercher l'élément caché avec l'URL du document (ajouté par le patch)
+        // 1. Chercher l'URL dans l'élément caché (patch)
         const urlMarker = suggestionEl.querySelector('.search-doc-url') as HTMLElement | null;
         if (urlMarker?.dataset?.url) {
-          const docUrl = urlMarker.dataset.url.toLowerCase();
-          if (docUrl.includes('/docs/arender/') || docUrl.startsWith('docs/arender/')) {
-            product = 'arender';
-          } else if (docUrl.includes('/docs/fast2/') || docUrl.startsWith('docs/fast2/')) {
-            product = 'fast2';
-          } else if (docUrl.includes('/docs/flowerdocs/') || docUrl.startsWith('docs/flowerdocs/')) {
-            product = 'flowerdocs';
-          } else if (docUrl.includes('/docs/uxopian-ai/') || docUrl.startsWith('docs/uxopian-ai/')) {
-            product = 'uxopian-ai';
-          }
+          product = detectProductFromUrl(urlMarker.dataset.url);
         }
         
-        // Fallback: Chercher le lien dans la suggestion
+        // 2. Chercher dans le lien <a href>
         if (!product) {
-          const link = suggestionEl.querySelector('a[href]') as HTMLAnchorElement | null;
+          const link = suggestionEl.closest('a[href]') as HTMLAnchorElement | null 
+                    || suggestionEl.querySelector('a[href]') as HTMLAnchorElement | null;
           if (link?.href) {
-            const href = link.href.toLowerCase();
-            if (href.includes('/docs/arender/') || href.includes('/docs/arender?')) {
-              product = 'arender';
-            } else if (href.includes('/docs/fast2/') || href.includes('/docs/fast2?')) {
-              product = 'fast2';
-            } else if (href.includes('/docs/flowerdocs/') || href.includes('/docs/flowerdocs?')) {
-              product = 'flowerdocs';
-            } else if (href.includes('/docs/uxopian-ai/') || href.includes('/docs/uxopian-ai?')) {
-              product = 'uxopian-ai';
-            }
+            product = detectProductFromUrl(link.href);
           }
         }
         
-        // Fallback: détecter via le chemin affiché
+        // 3. Chercher dans tout le HTML de la suggestion (liens internes)
+        if (!product) {
+          const allLinks = suggestionEl.querySelectorAll('a[href]');
+          for (const a of allLinks) {
+            const href = (a as HTMLAnchorElement).href;
+            product = detectProductFromUrl(href);
+            if (product) break;
+          }
+        }
+        
+        // 4. Chercher dans les attributs data-* de la suggestion
+        if (!product) {
+          const allDataAttrs = Object.values(suggestionEl.dataset || {}).join(' ');
+          product = detectProductFromUrl(allDataAttrs);
+        }
+        
+        // 5. Fallback: détecter via le texte du chemin affiché
         if (!product && hitPath?.textContent) {
           const pathText = hitPath.textContent;
           
-          // Détecter le produit via les patterns de version
-          // ARender: v2023.x, v2024.x (années 2023-2024)
-          if (pathText.match(/v202[34]\.\d/)) {
-            product = 'arender';
-          }
-          // FlowerDocs: v2025.3.x (spécifiquement 2025.3)
-          else if (pathText.match(/v2025\.3/)) {
-            product = 'flowerdocs';
-          }
-          // Fast2: v2025.x.x (2025 mais pas .3)
-          else if (pathText.match(/v2025\.[012456789x]/) || pathText.match(/v2025\.[1-9]\d/)) {
-            product = 'fast2';
-          }
-          // Uxopian AI: v2026.x
-          else if (pathText.match(/v2026/)) {
-            product = 'uxopian-ai';
-          }
-          // Sinon chercher le nom du produit directement (si déjà remplacé)
-          else if (pathText.includes('ARender')) {
-            product = 'arender';
-          }
-          else if (pathText.includes('Fast2')) {
-            product = 'fast2';
-          }
-          else if (pathText.includes('FlowerDocs')) {
-            product = 'flowerdocs';
-          }
-          else if (pathText.includes('Uxopian')) {
-            product = 'uxopian-ai';
-          }
-          // Fallback sur des mots-clés
-          else {
-            const lowerPath = pathText.toLowerCase();
-            if (lowerPath.includes('rendition') || lowerPath.includes('annotation') || 
-                lowerPath.includes('alfresco') || lowerPath.includes('m-files') ||
-                lowerPath.includes('aca') || lowerPath.includes('share')) {
-              product = 'arender';
-            }
-            else if (lowerPath.includes('punnet') || lowerPath.includes('broker') || 
-                     lowerPath.includes('campaign') || lowerPath.includes('getting started')) {
-              product = 'fast2';
-            }
-            else if (lowerPath.includes('flower') || lowerPath.includes('workflow') ||
-                     lowerPath.includes('opensearch')) {
-              product = 'flowerdocs';
-            }
-          }
+          // Chercher le nom du produit directement
+          if (pathText.includes('ARender')) product = 'arender';
+          else if (pathText.includes('Fast2')) product = 'fast2';
+          else if (pathText.includes('FlowerDocs')) product = 'flowerdocs';
+          else if (pathText.includes('Uxopian')) product = 'uxopian-ai';
+          // Versions
+          else if (pathText.match(/v202[34]\.\d/)) product = 'arender';
+          else if (pathText.match(/v2025\.3/)) product = 'flowerdocs';
+          else if (pathText.match(/v2025\.[012456789x]/)) product = 'fast2';
+          else if (pathText.match(/v2026/)) product = 'uxopian-ai';
         }
         
         // Si toujours pas de produit, ne pas décorer
