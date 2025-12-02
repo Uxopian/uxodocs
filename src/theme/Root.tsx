@@ -102,10 +102,43 @@ function useSearchResultsDecorator() {
         
         const hitPath = suggestion.querySelector('[class*="hitPath"]') as HTMLElement | null;
         
-        // Détecter le produit via le chemin affiché
+        // Détecter le produit - D'ABORD via l'URL du document (plus fiable)
         let product: string | null = null;
         
-        if (hitPath?.textContent) {
+        // Chercher l'élément caché avec l'URL du document (ajouté par le patch)
+        const urlMarker = suggestionEl.querySelector('.search-doc-url') as HTMLElement | null;
+        if (urlMarker?.dataset?.url) {
+          const docUrl = urlMarker.dataset.url.toLowerCase();
+          if (docUrl.includes('/docs/arender/') || docUrl.startsWith('docs/arender/')) {
+            product = 'arender';
+          } else if (docUrl.includes('/docs/fast2/') || docUrl.startsWith('docs/fast2/')) {
+            product = 'fast2';
+          } else if (docUrl.includes('/docs/flowerdocs/') || docUrl.startsWith('docs/flowerdocs/')) {
+            product = 'flowerdocs';
+          } else if (docUrl.includes('/docs/uxopian-ai/') || docUrl.startsWith('docs/uxopian-ai/')) {
+            product = 'uxopian-ai';
+          }
+        }
+        
+        // Fallback: Chercher le lien dans la suggestion
+        if (!product) {
+          const link = suggestionEl.querySelector('a[href]') as HTMLAnchorElement | null;
+          if (link?.href) {
+            const href = link.href.toLowerCase();
+            if (href.includes('/docs/arender/') || href.includes('/docs/arender?')) {
+              product = 'arender';
+            } else if (href.includes('/docs/fast2/') || href.includes('/docs/fast2?')) {
+              product = 'fast2';
+            } else if (href.includes('/docs/flowerdocs/') || href.includes('/docs/flowerdocs?')) {
+              product = 'flowerdocs';
+            } else if (href.includes('/docs/uxopian-ai/') || href.includes('/docs/uxopian-ai?')) {
+              product = 'uxopian-ai';
+            }
+          }
+        }
+        
+        // Fallback: détecter via le chemin affiché
+        if (!product && hitPath?.textContent) {
           const pathText = hitPath.textContent;
           
           // Détecter le produit via les patterns de version
