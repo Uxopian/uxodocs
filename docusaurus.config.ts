@@ -99,6 +99,7 @@ const config: Config = {
         ignoreFiles: [],
         removeDefaultStopWordFilter: true,
         explicitSearchResultPath: true,
+        highlightSearchTermsOnTargetPage: true,
       },
     ],
   ],

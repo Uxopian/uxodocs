@@ -66,19 +66,6 @@ function useSearchResultsDecorator() {
   const baseUrl = siteConfig.baseUrl;
 
   useEffect(() => {
-    // Patch le template de suggestion pour inclure l'URL
-    const patchAutocomplete = () => {
-      // Intercepter les clics pour récupérer l'URL
-      document.addEventListener('click', (e) => {
-        const suggestion = (e.target as HTMLElement).closest('[class*="suggestion"]');
-        if (suggestion) {
-          // L'URL sera dans l'événement autocomplete:selected
-        }
-      }, true);
-    };
-    
-    patchAutocomplete();
-
     const decorateSearchResults = () => {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       
@@ -239,6 +226,103 @@ function useSearchResultsDecorator() {
         // S'assurer que la suggestion est en flexbox
         suggestionEl.style.display = 'flex';
         suggestionEl.style.alignItems = 'center';
+        
+        // Ajouter l'aperçu au survol
+        const urlMarkerForPreview = suggestionEl.querySelector('.search-doc-url') as HTMLElement | null;
+        const docUrl = urlMarkerForPreview?.dataset?.url;
+        
+        if (docUrl) {
+          // Créer le conteneur d'aperçu (caché par défaut)
+          const previewContainer = document.createElement('div');
+          previewContainer.className = 'search-preview';
+          previewContainer.style.cssText = `
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 350px;
+            max-height: 300px;
+            overflow: hidden;
+            background: var(--ifm-background-color, #1b1b1d);
+            border: 1px solid var(--ifm-color-emphasis-300, #444);
+            border-radius: 8px;
+            padding: 12px;
+            margin-left: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--ifm-font-color-base, #e3e3e3);
+          `;
+          previewContainer.innerHTML = '<div style="color: #888; font-style: italic;">Chargement...</div>';
+          
+          // Positionner la suggestion en relative pour l'aperçu absolu
+          suggestionEl.style.position = 'relative';
+          suggestionEl.appendChild(previewContainer);
+          
+          let previewLoaded = false;
+          let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
+          
+          suggestionEl.addEventListener('mouseenter', () => {
+            // Délai avant d'afficher l'aperçu (évite les flashs)
+            hoverTimeout = setTimeout(() => {
+              previewContainer.style.display = 'block';
+              
+              // Ajuster la position si dépasse l'écran
+              const rect = previewContainer.getBoundingClientRect();
+              if (rect.right > window.innerWidth) {
+                previewContainer.style.left = 'auto';
+                previewContainer.style.right = '100%';
+                previewContainer.style.marginLeft = '0';
+                previewContainer.style.marginRight = '8px';
+              }
+              if (rect.bottom > window.innerHeight) {
+                previewContainer.style.top = 'auto';
+                previewContainer.style.bottom = '0';
+              }
+              
+              // Charger le contenu si pas encore fait
+              if (!previewLoaded) {
+                previewLoaded = true;
+                const fullUrl = baseUrl.replace(/\/$/, '') + '/' + docUrl.replace(/^\//, '');
+                
+                fetch(fullUrl)
+                  .then(res => res.text())
+                  .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Extraire le contenu principal
+                    const article = doc.querySelector('article') || doc.querySelector('.markdown') || doc.querySelector('main');
+                    if (article) {
+                      // Nettoyer le contenu
+                      let text = article.textContent || '';
+                      // Supprimer les espaces multiples et retours à la ligne
+                      text = text.replace(/\s+/g, ' ').trim();
+                      // Limiter à ~300 caractères
+                      if (text.length > 300) {
+                        text = text.substring(0, 300) + '...';
+                      }
+                      previewContainer.innerHTML = text || '<em>Aucun aperçu disponible</em>';
+                    } else {
+                      previewContainer.innerHTML = '<em>Aucun aperçu disponible</em>';
+                    }
+                  })
+                  .catch(() => {
+                    previewContainer.innerHTML = '<em>Erreur de chargement</em>';
+                  });
+              }
+            }, 300); // 300ms de délai
+          });
+          
+          suggestionEl.addEventListener('mouseleave', () => {
+            if (hoverTimeout) {
+              clearTimeout(hoverTimeout);
+              hoverTimeout = null;
+            }
+            previewContainer.style.display = 'none';
+          });
+        }
       });
     };
 
@@ -294,7 +378,8 @@ function useHighlightParam() {
       });
 
       const params = new URLSearchParams(location.search);
-      const highlightText = params.get('h') || params.get('highlight');
+      // Supporter les deux paramètres : h (custom) et _highlight (plugin)
+      const highlightText = params.get('h') || params.get('highlight') || params.getAll('_highlight').join(',');
       
       if (!highlightText || highlightText.trim() === '') {
         return;
