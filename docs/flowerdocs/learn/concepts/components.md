@@ -2,22 +2,22 @@
 title: Components
 date: '2000-02-01'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: c38d51b9acc6162df9b886c7496d0c656bb0be89af5a1bc599ee3db545d0417f
+content_hash: b06392ec0c06be9c61743a7769e920d8eb76fe0c3d9094b1f29d02d43c8fa431
 ---
 
 
 
-The objects manipulated through the interface and APIs are `components`. Each component is classified according to business or technical criteria using a [component class](/concepts/classes/getting-started.md).
+The objects manipulated through the interface and APIs are `components`. Each component is classified according to business or technical criteria using a [component class](/docs/flowerdocs/concepts/classes/getting-started).
 
 :::info
 Find out more about the different component categories: 
 
-* [Documents](/concepts/components/documents.md)
-* [Folders](/concepts/components/folders.md)
-* [Virtual folders](/concepts/components/virtual-folders.md)
-* [Tasks](/concepts/components/virtual-folders.md)
+* [Documents](/docs/flowerdocs/concepts/components/documents)
+* [Folders](/docs/flowerdocs/concepts/components/folders)
+* [Virtual folders](/docs/flowerdocs/concepts/components/virtual-folders)
+* [Tasks](/docs/flowerdocs/concepts/components/virtual-folders)
 :::
 
 

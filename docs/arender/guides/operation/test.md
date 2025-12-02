@@ -1,9 +1,9 @@
 ---
 title: Behaviour testing
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: ac964f4402eb9b9465a0be5120c2108fbf82e27cad54cc010758756a8d7b3e39
+content_hash: 0dd44136605eaa94e5988a43fc1636df7aa04dc3fe421e3ea3dd3f2e762d9541
 ---
 
 
@@ -18,7 +18,7 @@ well as continuously to supervise.
 
 ## Rendition server
 
-The easiest way to validate ARender Rendition installation is to check the health page, [see post installation documentation](./content/installation/standalone/rendition/verification.en.md).  
+The easiest way to validate ARender Rendition installation is to check the health page, [see post installation documentation](/docs/arender/installation/standalone/rendition/verification).  
 
 ## Presentation server
 

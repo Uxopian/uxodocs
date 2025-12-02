@@ -3,9 +3,9 @@ title: Authorisation
 description: Secure your application
 date: '2018-03-27T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 93d217a79063ff54b9e97f893436b9dcb0caca3cfa7fa8041eaef5e613b0d1c4
+content_hash: 77c2fdf32e0ece6df9b1a2864da0d13323bdc3b4097418ffff0438cde423dd58
 ---
 
 
@@ -75,9 +75,9 @@ If all the conditions of a rule are met, the user's permissions are determined a
 Three types of conditions are supported by the application:
 
 
-* [Condition on tags](/concepts/tags/conditionnel.md#condition-sur-les-tags.md) 
-* [Condition on class](/concepts/tags/conditionnel.md#condition-sur-la-class.md)
-* [Condition on user](/concepts/tags/conditionnel.md#condition-sur-l-user.md)
+* [Condition on tags](/docs/flowerdocs/concepts/tags/conditionnel#condition-sur-les-tags) 
+* [Condition on class](/docs/flowerdocs/concepts/tags/conditionnel#condition-sur-la-class)
+* [Condition on user](/docs/flowerdocs/concepts/tags/conditionnel#condition-sur-l-user)
 
 
 :::note[Example]

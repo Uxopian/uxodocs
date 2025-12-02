@@ -3,9 +3,9 @@ title: Virtual folders
 description: Virtual folder classes
 date: '2018-03-02T14:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 3a6b0d3b9e8187488b67b769e663be33b3fdc85823c356e1628064161d422342
+content_hash: f9c77dcaf3d73e17c954c0dccd36a850cd0866adff7ad4a40fcef649a92404d0
 ---
 
 
@@ -37,7 +37,7 @@ When the tree structure of a virtual folder is in `View` mode, we recommend not 
 
 # Research variabilization 
 
-In searches for a class of virtual folders, the defined criteria can be either fixed values or variables. It works in the same way as conditional tags for [variable resolution](/concepts/tags/conditionnel.md).
+In searches for a class of virtual folders, the defined criteria can be either fixed values or variables. It works in the same way as conditional tags for [variable resolution](/docs/flowerdocs/concepts/tags/conditionnel).
 
 Thanks to this mechanism, it is possible to define a single virtual folder of the *Personal tray* using a criterion `assignee = ${user.id}`. 
 Variables of `tags` type are based on the tags carried by the virtual folder.

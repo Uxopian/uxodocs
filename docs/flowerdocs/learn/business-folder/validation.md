@@ -2,9 +2,9 @@
 title: Validation
 date: '2000-02-04T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 7d3034d5602464f93728340cc7184b8f49973e800a280bfdeeaaac2c26f94259
+content_hash: 97d4430a048ca56321216a5ee4c3c95b0d1a90411ae7afad4c82903394a69820
 ---
 
 
@@ -35,12 +35,12 @@ To validate the data model you have created, open the customer folder you have c
 :::info
 __Resources__:
 
-To facilitate client management between the virtual folder and the documents, use the [plugin to link one component to another](/learn/component-link/getting-started.md).
+To facilitate client management between the virtual folder and the documents, use the [plugin to link one component to another](/docs/flowerdocs/learn/component-link/getting-started).
 :::
 
 
 <!--:::info
-Find the scope module corresponding to this training [here]("".md)
+Find the scope module corresponding to this training [here]("")
 :::
 -->
 

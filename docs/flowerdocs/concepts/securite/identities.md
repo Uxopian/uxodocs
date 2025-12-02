@@ -3,9 +3,9 @@ title: Identities
 description: Organise users accessing your application
 date: '2018-03-20T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: ad0a3b412219a14ccc06da6afdaf33a796515f3d75819d1579289370917ad415
+content_hash: a4b15a1a1d62b886da9fa61708f37dc4878c6f8ce570b9c4a79028a841245d2a
 ---
 
 
@@ -19,7 +19,7 @@ This concept identifies the users who use the platform so that:
 * **FlowerDocs GUI** 's configuration is adapted to users' needs
 
 
-These identities are stored in a [corporate directory](/config/core/securite/ldap.md) configured by scope or in the [internal users]’ repository (/documentation/config/core/securite/realm.md).
+These identities are stored in a [corporate directory](/docs/flowerdocs/config/core/securite/ldap) configured by scope or in the [internal users]’ repository (/documentation/config/core/securite/realm.md).
 
 
 

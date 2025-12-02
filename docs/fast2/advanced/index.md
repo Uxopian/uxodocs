@@ -2,9 +2,9 @@
 sidebar_label: Advanced
 sidebar_position: 2
 last_update:
-  date: '2025-12-02T08:13:30.445Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 7d1c0e112adb68ea91732fb0bdf13fd621187ce5e2e3110a68807f677cae7fcf
+content_hash: c61e23ab7578a7c38cbfa101a18167b616709c0d82b94cb68a1b73c1656c481d
 ---
 
 # Advanced section
@@ -17,8 +17,8 @@ This section related of diverse topics for more specific uses of Fast2, but you 
 
 In case of any confusion, please refer to the appropriate sections of the documentation, such as :
 
-- the [broker](../components/broker.md) details,
-- how the [workers](../components/worker.md) work,
+- the [broker](/docs/fast2/components/broker) details,
+- how the [workers](/docs/fast2/components/worker) work,
 - tool architecture
 
 and any other relevant resources.

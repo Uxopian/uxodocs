@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: b664dfdad442b68197a602ee33636390c7b52a20f70f1a0db47bcfa1f7b52d34
+content_hash: 5ffe6b700d9f2fa4477d60cb9b80b9e713b38fd63404ca9debe242f96070a5f6
 ---
 # JDBC : How to link Fast2 and SQL DB
 
@@ -93,6 +93,6 @@ SELECT * from table_test_connection;
 
 Congrats, you've made it !
 <br/><br/>
-Now you can also use the JDBC connection for other tasks such as [SQLMultiQueryTask](../catalog/tool.md#SQLMultiQueryTask) or [SQLSource](../catalog/source.md#SQLSource).
+Now you can also use the JDBC connection for other tasks such as [SQLMultiQueryTask](/docs/fast2/catalog/tool#SQLMultiQueryTask) or [SQLSource](/docs/fast2/catalog/source#SQLSource).
 <br/>
 In addition to inserting or updating your database, you can also use these tasks to remove the contents of your tables !

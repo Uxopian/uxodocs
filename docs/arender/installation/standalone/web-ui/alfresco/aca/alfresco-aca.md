@@ -1,9 +1,9 @@
 ---
 title: Installation in ACA
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:34:16.372Z'
   author: CI/CD Bot
-content_hash: 1e81c2f696f893b148befbffbb630d19a6cf713106ecc5b7150f6932dcd5a2b1
+content_hash: 4cf953b8aa08b50c1f41e53549afe713f0208498d7a89b034b109dd67ad396d3
 ---
 
 
@@ -14,7 +14,7 @@ content_hash: 1e81c2f696f893b148befbffbb630d19a6cf713106ecc5b7150f6932dcd5a2b1
 
 ## Quick start with Docker
 
-*If needed, learn how to run ARender in docker [here](./installation/docker/_index.en.md).*
+*If needed, learn how to run ARender in docker [here](/docs/arender/installation/docker/presentation).*
 
 1. Change ARender UI context path to **/arender**.
 

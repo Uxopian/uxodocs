@@ -1,9 +1,9 @@
 ---
 title: Redact
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: a4033ac698b9d0ffce932c6fbecd722be9f91b63da77f7d613c1b9ef547f413e
+content_hash: f1b87fe1476cafb7e6cbdb9a349927d3809014f63f9136f313660a1e5514a301
 ---
 
 
@@ -94,7 +94,7 @@ redactexplorer.redact.with.reasons=true
 
 
 
-The reasons are defined in the configuration files, it is possible to modify them as well as the default reasons as explained in [the dedicated documentation](../learn/how-to/redact-reasons.md)
+The reasons are defined in the configuration files, it is possible to modify them as well as the default reasons as explained in [the dedicated documentation](/docs/arender/learn/how-to/redact-reasons)
 
 
 
@@ -142,7 +142,7 @@ If you want to refine your selection, you can open the results panel:
 ### Rules
 
 The rules option allows you to select one or more rules and apply them. 
-These rules are defined in the configuration files as explained in the  [dedicated documentation](../learn/how-to/annotation-creation-rule.md)
+These rules are defined in the configuration files as explained in the  [dedicated documentation](/docs/arender/learn/how-to/annotation-creation-rule)
 
 Once the rules are selected, trigger the search. It will show a preview of the results in the document.
 If you want to refine your selection, you can open the results panel:

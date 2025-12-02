@@ -1,9 +1,9 @@
 ---
 title: Logs
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: 060b1a7a0467599ee4e9a6beaf60d5762f32a21b82e8c3573981d1526c6794cc
+content_hash: c80e66c7b085f80a42d9fdff801af34ea76f455cf04a12dae56fe3652afe37ed
 ---
 
 
@@ -22,7 +22,7 @@ To harmonize the use of Web-UI and Rendition logs, we have opted to switch to Lo
 
 Obviously, this will have an impact on the configuration since the Log4J configuration is different from Logback.
 
-To migrate the log4j.properties files to its logback equivalent, you can use the log4j.properties translator ([here](http://logback.qos.ch/translator/)).
+To migrate the log4j.properties files to its logback equivalent, you can use the log4j.properties translator ([here](http://logback.qos.ch/translator/).
 
 ## Convert Log4J configuration file to Logback
 

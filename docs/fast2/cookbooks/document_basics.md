@@ -8,9 +8,9 @@ tags:
   - content
   - java
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 07dfa25923502cd3329514291f50e8733129b4401d3e6f8abddef2749f744a99
+content_hash: 9912a1aa58121f6da106fd22a23c9c8a4a92aca5967587c5e15dc712b61eb26f
 ---
 
 # Learn how to deal with documents
@@ -19,11 +19,11 @@ content_hash: 07dfa25923502cd3329514291f50e8733129b4401d3e6f8abddef2749f744a99
 
 The documents are a main part of any migration, if not the purpose of it. Here are the basics for an appropriate understanding of the Java API of the document object.
 
-For a better understanding of the following, the document structure needs to be clearly visualized. If required, go back to [the definition](../getting-started/overall-concepts.md#document) of such an object in Fast2.
+For a better understanding of the following, the document structure needs to be clearly visualized. If required, go back to [the definition](/docs/fast2/getting-started/overall-concepts#document) of such an object in Fast2.
 
 ## Creation
 
-As explained in the [basics of punnet](punnet_basics.md) a document can be created on the fly:
+As explained in the [basics of punnet](punnet_basics) a document can be created on the fly:
 
 ```java
 Document myDoc = myPunnet.addDocument(DocumentId.id());
@@ -60,7 +60,7 @@ DataSet myDataset = myDoc.getDataSet();
 
 A document is built with an empty dataset by default.
 
-For more information concerning the dataset, head out to the [dedicated section](dataset_basics.md).
+For more information concerning the dataset, head out to the [dedicated section](dataset_basics).
 
 ## Contents
 
@@ -89,7 +89,7 @@ ContentSet myContents = myDoc.getContentSet();
 
 A document is built with an empty contentset by default.
 
-For more information concerning the contentset, head out to the [dedicated section](content_basics.md).
+For more information concerning the contentset, head out to the [dedicated section](content_basics).
 
 ## Mime-type
 
@@ -105,7 +105,7 @@ This data can also be set from the document level:
 myDoc.setMimeType("myMimetype");
 ```
 
-As said earlier, this method is just a shortcut to add a mime-type data into the document [dataset](dataset_basics.md).
+As said earlier, this method is just a shortcut to add a mime-type data into the document [dataset](dataset_basics).
 
 ## Folders
 
@@ -119,7 +119,7 @@ FolderSet myFolders = myDoc.getFolders();
 
 A document is built with an empty folderset by default.
 
-For more information concerning the folders, head out to the [dedicated section](folders_basics.md).
+For more information concerning the folders, head out to the [dedicated section](folders_basics).
 
 ## Annotations
 

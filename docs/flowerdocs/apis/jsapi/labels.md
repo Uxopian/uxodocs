@@ -2,9 +2,9 @@
 title: Labels
 date: '2004-02-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: a303bbbcee0c065698cf02e645fdf604f28b3d79227e799f39627cff7c013cfb
+content_hash: 6e917d5e6e9661427cfdbad038ee0a87b2ef844f8624b394770f479d17d5923b
 ---
 
 
@@ -21,7 +21,7 @@ JSAPI.get().getLabelsAPI();
 
 <br/>
 
-This functionality is also available by overloading part of the labels via property files. Documentation for this part is available [here](../../config/gui/labels.md).
+This functionality is also available by overloading part of the labels via property files. Documentation for this part is available [here](/docs/flowerdocs/config/gui/labels).
 :::
 
 

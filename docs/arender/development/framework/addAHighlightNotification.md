@@ -1,9 +1,9 @@
 ---
 title: Add a highlight notification
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 4770d8e38f73660858685e7e2e4ab9ab0827dcccd6e44c00f14c76d55c27f558
+content_hash: fc65c80c20e6712ecd42a471fc305c8740a97b3aa1704fb695055a4ab169e110
 ---
 
 
@@ -12,9 +12,9 @@ content_hash: 4770d8e38f73660858685e7e2e4ab9ab0827dcccd6e44c00f14c76d55c27f558
 
 
 
-The JavaScript API allows you to set up subscriptions to receive events during various actions on ARender (e.g., adding/removing notifications, rotating a page, or clicking on a hyperlink). This information is accessible <i class="ti-hand-point-right" /> <ins>[in the documentation](./development/apis/web-ui/javascript/annotation-js-api.md)</ins> <i class="ti-hand-point-left" ></i>
+The JavaScript API allows you to set up subscriptions to receive events during various actions on ARender (e.g., adding/removing notifications, rotating a page, or clicking on a hyperlink). This information is accessible <i class="ti-hand-point-right" /> <ins>[in the documentation](/docs/arender/development/apis/web-ui/javascript/annotation-js-api)</ins> <i class="ti-hand-point-left" ></i>
 
-It is also possible to create highlight-type annotations directly from the host application, without doing so manually in ARender, using the **addAnnotation** function of the JavaScript API by following <i class="ti-hand-point-right" /> <ins>[these guidelines](./development/apis/web-ui/javascript/annotation-js-api#create-an-highlight-annotation.md)</ins> <i class="ti-hand-point-left" ></i>.
+It is also possible to create highlight-type annotations directly from the host application, without doing so manually in ARender, using the **addAnnotation** function of the JavaScript API by following <i class="ti-hand-point-right" /> <ins>[these guidelines](/docs/arender/development/apis/web-ui/javascript/annotation-js-api#create-an-highlight-annotation.md)</ins> <i class="ti-hand-point-left" ></i>.
 
 To use this function from an application other than ARender, simply replace the window object in the documentation with the appropriate object based on the framework being used.
 

@@ -3,9 +3,9 @@ title: List
 description: Use tags linked to lists.
 date: '2018-03-07T13:21:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: 6a8eef0f1af209316ce9d3638d1e837722cef5bc0416a594aed4c6d14c7b264d
+content_hash: 47d66c127ba33ef77f1cace6dac9304e81a7e0a42b4c7a5f133e8c10d020eca1
 ---
 
 
@@ -97,6 +97,6 @@ A free list tag is an extension of a choice list without validation. This type o
 
 
 :::info
-This type of tag is particularly well suited to integration with third-party repositories (for example, using a [lookup](/apis/jsapi/lookup.md)).
+This type of tag is particularly well suited to integration with third-party repositories (for example, using a [lookup](/docs/flowerdocs/apis/jsapi/lookup).
 :::
 

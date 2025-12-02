@@ -5,9 +5,9 @@ tags:
   - content
   - java
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 91c5b358816217e5460def82331869cd2843c294963e88550dbfa5231571a59d
+content_hash: fdee2ea5eecb2e0c07def6a1872d5aa14e319ca21b793c526633ed67b56e39de
 ---
 
 # Learn how to deal with contents
@@ -22,7 +22,7 @@ Contents are often referred as **ContentContainers**.
 
 This section relates of how to add a content from the code.
 
-If you wish to add a content (or delete it), head out to the [AlterDocumentContent](../catalog/transformer.md#AlterDocumentContent) task.
+If you wish to add a content (or delete it), head out to the [AlterDocumentContent](/docs/fast2/catalog/transformer#AlterDocumentContent) task.
 
 ```java
 
@@ -83,13 +83,13 @@ RandomAccessInterface myRAI = task.getManager()
 
 ## Mime-type
 
-The content mime-type is a property usually added by the [MimeTypeFinder](../catalog/tool.md#MimeTypeFinder) task. However you could be willing to force it, which can be done like so:
+The content mime-type is a property usually added by the [MimeTypeFinder](/docs/fast2/catalog/tool#MimeTypeFinder) task. However you could be willing to force it, which can be done like so:
 
 ```java
 myContent.setMimeType("the right mime-type");
 ```
 
-This is basically what the [MimeTypeFinder](../catalog/tool.md#MimeTypeFinder) will do once the mime-type resolved from the content format.
+This is basically what the [MimeTypeFinder](/docs/fast2/catalog/tool#MimeTypeFinder) will do once the mime-type resolved from the content format.
 
 To access this value, a regular java getter will do:
 

@@ -1,9 +1,9 @@
 ---
 title: Check
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: b098ef3a110d588f9a664dbb9279bee62453354e1b91d796a510f4c519714894
+content_hash: e0a8d54f4103d68d3f6a95921911e5df7d7fc0dca61cedba30579f915de1130a
 ---
 
 
@@ -25,4 +25,4 @@ It may happen that not all services appear when rendition does not
 still completely started, in this case you have to wait a few minutes.
 
 If some services or features are incomplete or not started,
-thank you kindly check [the prerequisites of the rendition](/installation/standalone/rendition/requirements/.md).
+thank you kindly check [the prerequisites of the rendition](/docs/arender/installation/standalone/rendition/requirements/).

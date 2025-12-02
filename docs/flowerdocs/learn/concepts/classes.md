@@ -2,9 +2,9 @@
 title: Classes
 date: '2000-03-02'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: f5e87e5f99f61e4ecce363cf9e7a339f547dc8485feb2d9ff003a795d0c0d402
+content_hash: 0b5dce5a6fc600a2bd01d5499ebec116ff28d40963be9256ae1b58f9f5d8fa24
 ---
 
 
@@ -25,29 +25,29 @@ The tags that can be defined on a component are determined by the existing tag c
 FlowerDocs offers several types of values for a tag: 
 
 
-* [String](/concepts/tags/textuel.md) (e.g. reference, contractor) on which a validation mask (or pattern) can be defined
-* [Decimal number](/concepts/tags/numerique.md) (e.g. amount, tax)
-* [Integer](/concepts/tags/numerique.md) (e.g. Number of supporting documents)
-* [Currency](/concepts/tags/numerique.md)
+* [String](/docs/flowerdocs/concepts/tags/textuel) (e.g. reference, contractor) on which a validation mask (or pattern) can be defined
+* [Decimal number](/docs/flowerdocs/concepts/tags/numerique) (e.g. amount, tax)
+* [Integer](/docs/flowerdocs/concepts/tags/numerique) (e.g. Number of supporting documents)
+* [Currency](/docs/flowerdocs/concepts/tags/numerique)
 * Boolean (True/False)
 * User
-* [Date](/concepts/tags/date.md) (e.g. due date, effective date)
-* [Choice list](/concepts/tags/liste.md) (e.g. invoice types)
-* [Text field](/concepts/tags/textuel.md) (e.g. description, comment)
-* [Conditional value list](/concepts/tags/liste.md)
-* [Choice list](/concepts/tags/liste.md)
+* [Date](/docs/flowerdocs/concepts/tags/date) (e.g. due date, effective date)
+* [Choice list](/docs/flowerdocs/concepts/tags/liste) (e.g. invoice types)
+* [Text field](/docs/flowerdocs/concepts/tags/textuel) (e.g. description, comment)
+* [Conditional value list](/docs/flowerdocs/concepts/tags/liste)
+* [Choice list](/docs/flowerdocs/concepts/tags/liste)
 
 
 
 :::info
-Add tags to your components by [referencing a tag class](/concepts/classes/tag-reference.md) at component class level.
+Add tags to your components by [referencing a tag class](/docs/flowerdocs/concepts/classes/tag-reference) at component class level.
 :::
 
 
 
 # Component classes
 
-A component class defines the common characteristics of a logical set of components. These sets are characterized by [tags](/concepts/tags/overview.md) (or metadata), security, business or technical rules that are specific to them.   
+A component class defines the common characteristics of a logical set of components. These sets are characterized by [tags](/docs/flowerdocs/concepts/tags/overview) (or metadata), security, business or technical rules that are specific to them.   
 
 
 This section defines the notion of component class, used to characterize the components (documents, folders, tasks, etc.) handled within the application.
@@ -83,7 +83,7 @@ When a tag is referenced on a component class, it can then be characterized with
 
 
 :::info
-Add tags to your components by [referencing a tag class](/concepts/classes/tag-reference.md) at component class level.
+Add tags to your components by [referencing a tag class](/docs/flowerdocs/concepts/classes/tag-reference) at component class level.
 <br/>
-[ComponentClass](/concepts/classes/getting-started.md)      ---&rightarrow;      [TagReference](/concepts/classes/tag-reference.md)     ---&rightarrow;      [TagClass](/concepts/tags/overview.md)
+[ComponentClass](/docs/flowerdocs/concepts/classes/getting-started)      ---&rightarrow;      [TagReference](/docs/flowerdocs/concepts/classes/tag-reference)     ---&rightarrow;      [TagClass](/docs/flowerdocs/concepts/tags/overview)
 :::

@@ -3,9 +3,9 @@ title: Searches
 description: Enjoy the richness of FlowerDocs
 date: '2005-02-02'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 0fd96a5ecd795a06c602e392fbc12b778de02268377910ede55ef05f11976147
+content_hash: b4c20afc45524d6e6385f8c7cee53781ea98bfb6cf9ef31d36b9d8c8be825372
 ---
 
 
@@ -20,7 +20,7 @@ The classic search functions of a DMS are described, including:
 * pagination of results
 * etc.
 
-_more details can be found in the [technical documentation](/apis/core/examples/search.md)_
+_more details can be found in the [technical documentation](/docs/flowerdocs/apis/core/examples/search)_
 
 <br/>
 
@@ -60,6 +60,6 @@ To find a document containing the name "John-Peter", use the search "John Peter"
 
 	
 :::info
-Full-text search works only on documents whose content has been indexed beforehand. The content is indexed using a [operation subscription](/config/core/operation/handlers/fulltext.md).
+Full-text search works only on documents whose content has been indexed beforehand. The content is indexed using a [operation subscription](/docs/flowerdocs/config/core/operation/handlers/fulltext).
 :::
 

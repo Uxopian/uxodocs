@@ -1,9 +1,9 @@
 ---
 title: Text Selection
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 574f7ea60da48fb6ca2beddf0bd5f2707682855774b7f83c1359d6ca7694f7b0
+content_hash: f623a07c9643408ce3b4c9e50de48cd59d44b0a0b2d32b4a7cc5cfaf3152afcd
 ---
 
 
@@ -54,7 +54,7 @@ This action undoes the automatic selection of the entire word, and allows the us
 
 ![image](/img/arender/selection-word-reversing-demo.gif)
 
-To enable the new feature, please refer to the dedicated configuration [here](./guides/configurations/web-ui/properties/textselection.en.md)
+To enable the new feature, please refer to the dedicated configuration [here](/docs/arender/guides/configurations/web-ui/properties/textselection)
 
 ## Text Selection - Line
 

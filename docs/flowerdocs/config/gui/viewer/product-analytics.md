@@ -3,9 +3,9 @@ title: Product Analytics
 description: Let Uxopian understand how ARender is used
 date: '2005-07-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:44:23.025Z'
   author: CI/CD Bot
-content_hash: 22b9477243e759f9aad00955c0d5ce8efdf8a6007571646dcbf559f3d66377cd
+content_hash: 712479c848f1e2b044c89e2d5f33f3d1e203997fe447d81c5212ff8035f7c5de
 ---
 
 
@@ -32,5 +32,5 @@ More information about this new feature and the collected information are availa
  
  To disable Product Analytics, add the property ``arender.data.analytics.enabled=false`` into the profile.
 
-Documentation about the profile overriding can be found [here](/config/gui/viewer/viewer.md#profile-override.md).
+Documentation about the profile overriding can be found [here](./arender-config).
 

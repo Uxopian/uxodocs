@@ -11,14 +11,14 @@ tags:
 photograph: Héctor J. Rivas
 photograph_pseudo: '@@hjrc33'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 4b0914d1283df1e8ee972e8db09eb43b22afe5b266f8f7d12b947bd1ade74aa1
+content_hash: 4aa9fa4d6191ea6b56345efc5a5911a241c7954b6de50534bd7d70961a14be95
 ---
 ![photo cover](../assets/img/cookbooks/photo-cover.avif)
 
 
-As we have seen before in the [punnet structure](../getting-started/overall-concepts.md#punnet), punnets can be composed with several different documents, each one of them embedding its own data and values.
+As we have seen before in the [punnet structure](/docs/fast2/getting-started/overall-concepts#punnet), punnets can be composed with several different documents, each one of them embedding its own data and values.
 
 Whether it be for the purpose of processing order of these documents or any other operation requiring these same documents to be sorted in a different order, the catalog provides sufficient tooling to tackle this challenge.
 

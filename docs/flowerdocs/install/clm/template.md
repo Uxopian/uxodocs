@@ -2,9 +2,9 @@
 title: Template
 date: '2004-03-20T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 337d6bfd16cfeca6e83a06630d1e7a13ca42e03769093ae45dc7ec7254004439
+content_hash: 80c555864e2ee3d3990e887cfe9c96616ab4c57b3a47bf5afcb58e7e8b529ad3
 ---
 
 
@@ -55,7 +55,7 @@ In configuration XML files for ``OperationHandlerRegistration``, ``Script``, and
 
 # Create scope with default template
 
-The default FlowerDocs template can be downloaded from the [downloads](/install/getting-started.md) page.
+The default FlowerDocs template can be downloaded from the [downloads](/docs/flowerdocs/install/getting-started) page.
 It can then be used as a basis for creating a customized scope.
 
 

@@ -2,9 +2,9 @@
 title: Docker
 date: '2000-03-31T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 6c13164ab57b0ad01070ca6cf96abf8ecadc6cc44154670ac838fdb5a5bce1cc
+content_hash: db6727cb1f8bc68875b2e507f6cafa5446c2098f568dbbf718bfcb2794813472
 ---
 
 
@@ -40,7 +40,7 @@ In the `docker` folder, a `.env` file is present. It may be hidden, depending on
 * Run the following command in this folder: `docker-compose -f flowerdocs-stack.yml --profile="*" up`
 
 
-For use in a non-development environment, `token.key` and `system.admin.password` must be changed. More details are available [here](/config/core/securite/ldap.md).
+For use in a non-development environment, `token.key` and `system.admin.password` must be changed. More details are available [here](/docs/flowerdocs/config/core/securite/ldap).
 
 
 # Déploiement de scope 

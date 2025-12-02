@@ -4,9 +4,9 @@ description: Show ad-hoc HTML pages.
 date: '2020-02-02'
 custom_edit_url: null
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: eef70916488b7fee6140d89d13ed01d338277467470de65da623a085ac7f1f6e
+content_hash: 7eb2627d055bdae4ae28d403ee13e98155e35ae943b3fd7964f0d0cd900f53b9
 ---
 
 
@@ -18,7 +18,7 @@ These pages can be restricted to certain users according to their authorizations
 
 This concept requires two types of configuration: 
 
-* a [template](/config/core/templates/html.md)
+* a [template](/docs/flowerdocs/config/core/templates/html)
 * a page
 
 # Private page

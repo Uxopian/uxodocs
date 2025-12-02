@@ -3,9 +3,9 @@ title: Getting Started
 description: Stack your icons for an icon better suited to your actions
 date: '2020-02-01T12:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 18639b6f42d3b133812bc8623338614128af719b89ec4b06f0dd6099ae141e84
+content_hash: 47b3e7f3a003451abfb707e850e5b35aac64868e274e662977e661cc12d72e70
 ---
 
 
@@ -16,7 +16,7 @@ When you have finished this module, you will be able to create custom icons from
 
 # Before getting started
 
-This tutorial is based on [adding actions via the FlowerDocs JS API](/apis/jsapi/actions.md).
+This tutorial is based on [adding actions via the FlowerDocs JS API](/docs/flowerdocs/apis/jsapi/actions).
 
 <br/> 
 For the purposes of this tutorial, we will be using icons from the [FontAwesome icon library](https://fontawesome.com/icons), which corresponds to the library available in FlowerDocs.

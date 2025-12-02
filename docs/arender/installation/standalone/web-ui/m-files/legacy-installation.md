@@ -1,9 +1,9 @@
 ---
 title: Legacy installation
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: ed6a4d86d0368591090494283a42397c086f99c5a75a96d7825b9c9563487ba8
+content_hash: a0af217cca1005b4c4249f53f0262acfec209041ced175006a5fd71462294a79
 ---
 
 
@@ -21,7 +21,7 @@ in an environment with:
 - M-Files 
 - A Tomcat9 server
 - ARender Web-UI version 
-- Have a Functional Rendering. So just follow this **[documentation](./content/installation/standalone/rendition/install.en.md)**.
+- Have a Functional Rendering. So just follow this **[documentation](/docs/arender/installation/standalone/rendition/install)**.
 
 
 ## Steps to Configure the Rendition

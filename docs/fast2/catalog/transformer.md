@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 695ad66aa57183cc167ea072ce8b7282d73b1f68ea11755ddc48964b95ab196e
+content_hash: ac5dc492fb73289df0350e24c748f3397759229862327aa8c3767f9f535a7158
 ---
 ## AlterDocumentContent <small> - Create, embed, delete or update document content </small> {#AlterDocumentContent data-toc-label="AlterDocumentContent"}
 
@@ -198,7 +198,7 @@ Provide a campaign name, task name, and unique ID field to find a single punnet 
 
 | Key | Type                             | Description |
 | --- | -------------------------------- | ----------- |
-| Embedded Db connection provider | [EmbeddedDbConnectionProvider](credentials.md#EmbeddedDbConnectionProvider) | |
+| Embedded Db connection provider | [EmbeddedDbConnectionProvider](credentials#EmbeddedDbConnectionProvider) | |
 | Campaign prefix | `String` | Generally Map name, but can be changed, so the part that comes before _Run# |
 | Fields for OpenSearch query | `String/Pattern map` | Fields used to construct OpenSearch query. Recommended to include at least the following 3: campaign.keyword, stepName.keyword, punnet.documents.documentId.keyword (or similar unique ID). The query should only return one punnet. |
 | Data to enrich current punnet | `String/Pattern map` | List of data coming from the OpenSearch fetched punnet to add to the current punnet. Give a literal name such as edb-hash and an expression to fill the value like `${hash}` or `${property('file:content:digest')}` for properties with colons in the name. |
@@ -245,7 +245,7 @@ This class allow you to connect to your mail box and select mails to delete. You
 
 | Key                           | Type                                              | Description                                                           | Default value    |
 | ----------------------------- | ------------------------------------------------- | --------------------------------------------------------------------- | ---------------- |
-| Mail connection provider      | [MailBoxProvider](credentials.md#MailBoxProvider) |                                                                       |
+| Mail connection provider      | [MailBoxProvider](credentials#MailBoxProvider) |                                                                       |
 | Maximum connection ttl        | `Long`                                            | Time in milliseconds                                                  | `60 `            |
 | Search term type              | `String`                                          |                                                                       | `Message-Id `    |
 | Pattern to evaluate property  | `String`                                          |                                                                       | `${Message-Id} ` |

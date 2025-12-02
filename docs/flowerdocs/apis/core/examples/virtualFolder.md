@@ -3,9 +3,9 @@ title: Handling a virtual folder
 description: 'Create, retrieve, modify, delete and search your virtual folders'
 date: '2001-04-29T13:30:01+01:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 2190b41ce353366255260f5d2833c4c62e8202227288d9ddb46d76a34f3434e4
+content_hash: 8a29df6f7645ff1e1ad0adf095c048825c6c5c10f4f294ec03b8eac1e7be607c
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -211,7 +211,7 @@ Content-Type: application/json
 
 # Recherche de virtual folder
 
-The search operations all work on the same model as described [here](/apis/core/examples/search.md).
+The search operations all work on the same model as described [here](/docs/flowerdocs/apis/core/examples/search).
 
 # Virtual folder deletion
 

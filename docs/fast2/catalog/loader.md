@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 35988f64d83fdf34f2e338314e52564e2abcfe965e33c74ef5c642cd557fb10f
+content_hash: d275c022a27a076b592428bbb58cc5a24d775863b39f101b3e7544cb0751af03
 ---
 ## AlfrescoBulkImporter <small> - Perform a bulk import on Alfresco </small> {#AlfrescoBulkImporter data-toc-label="AlfrescoBulkImporter"}
 
@@ -37,7 +37,7 @@ This task can be used to inject documents into Alfresco, using the CMIS protocol
 
 | Key                          | Type                                                                            | Description                                                                                                 |
 | ---------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Alfresco connection provider | [AlfrescoCMISConnectionProvider](credentials.md#AlfrescoCMISConnectionProvider) | This modules is responsible of the two-way communication between Fast2 and the designated Alfresco instance |
+| Alfresco connection provider | [AlfrescoCMISConnectionProvider](credentials#AlfrescoCMISConnectionProvider) | This modules is responsible of the two-way communication between Fast2 and the designated Alfresco instance |
 
 <b>Optional settings</b>
 
@@ -62,7 +62,7 @@ This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco RE
 
 | Key                          | Type                                                                            | Description |
 | ---------------------------- | ------------------------------------------------------------------------------- | ----------- |
-| Alfresco connection provider | [AlfrescoRESTConnectionProvider](credentials.md#AlfrescoRESTConnectionProvider) |             |
+| Alfresco connection provider | [AlfrescoRESTConnectionProvider](credentials#AlfrescoRESTConnectionProvider) |             |
 
 <b>Optional settings</b>
 
@@ -86,7 +86,7 @@ Fast2 proposes this task to load your documents, metadata and more within design
 | Key                | Type                                                          | Description                                                     | Default value    |
 | ------------------ | ------------------------------------------------------------- | --------------------------------------------------------------- | ---------------- |
 | Destination bucket | `String`                                                      | The name of the bucket where the documents will be migrated to. | `fast2-default ` |
-| AWS credentials    | [AWSConnectionProvider](credentials.md#AWSConnectionProvider) | Must have granted AmazonS3FullAccess permission                 |
+| AWS credentials    | [AWSConnectionProvider](credentials#AWSConnectionProvider) | Must have granted AmazonS3FullAccess permission                 |
 
 <b>Optional settings</b>
 
@@ -138,13 +138,13 @@ Use this task to inject into Documentum ECM system. Fast2 embeds v6.7 of Documen
 
 | Key         | Type                                                            | Description                                                                        |
 | ----------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Credentials | [DctmConnectionProvider](credentials.md#DctmConnectionProvider) | Connection module establishing the communication with a given Documentum instance. |
+| Credentials | [DctmConnectionProvider](credentials#DctmConnectionProvider) | Connection module establishing the communication with a given Documentum instance. |
 
 <b>Optional settings</b>
 
 | Key                      | Type                                             | Description                                                                                                                                          |
 | ------------------------ | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Documentum configuration | [DctmConfiguration](helper.md#DctmConfiguration) | Customize here the Documentum details related to the instance you are planning to inject documents into. For more, refer to the appropriate section. |
+| Documentum configuration | [DctmConfiguration](helper#DctmConfiguration) | Customize here the Documentum details related to the instance you are planning to inject documents into. For more, refer to the appropriate section. |
 
 ## FileNet35Injector <small> - Injector for FileNet P8 3.5 </small> {#FileNet35Injector data-toc-label="FileNet35Injector"}
 
@@ -154,7 +154,7 @@ Use this task to inject documents and data into a FileNet P8 3.5
 
 | Key                             | Type                                                                      | Description                                                                            |
 | ------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| The FileNet connection provider | [FileNet35ConnectionProvider](credentials.md#FileNet35ConnectionProvider) | Module to establish the connection with the destination FileNet infrastructure         |
+| The FileNet connection provider | [FileNet35ConnectionProvider](credentials#FileNet35ConnectionProvider) | Module to establish the connection with the destination FileNet infrastructure         |
 | ObjectStore name                | `String`                                                                  | Name of the destination object-store where the documents and metadata will be injected |
 
 <b>Optional settings</b>
@@ -195,14 +195,14 @@ Use this task to inject documents and data into a FileNet. If all documents have
 
 | Key                             | Type                                                                  | Description                                                                                                                                    |
 | ------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| The FileNet connection provider | [FileNetConnectionProvider](credentials.md#FileNetConnectionProvider) | The module establishing the connection to the remote FileNet instance. For more configuration about this object, refer to appropriate section. |
+| The FileNet connection provider | [FileNetConnectionProvider](credentials#FileNetConnectionProvider) | The module establishing the connection to the remote FileNet instance. For more configuration about this object, refer to appropriate section. |
 | ObjectStore name                | `String`                                                              | Name of the destination object-store where the documents and metadata will be injected                                                         |
 
 <b>Optional settings</b>
 
 | Key                                            | Type                                     | Description                                                                                                                                                                                                                                                                  | Default value        |
 | ---------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| Property Helper                                | [PropertyHelper](tool.md#PropertyHelper) |                                                                                                                                                                                                                                                                              |
+| Property Helper                                | [PropertyHelper](tool#PropertyHelper) |                                                                                                                                                                                                                                                                              |
 | Try using 'DocumentTitle' property             | `Boolean`                                | When filing a document into a folder, try to use the FileNet 'DocumentTitle' for the RelationShip name                                                                                                                                                                       |
 | Process multi-pages content as multi-content   | `Boolean`                                | Treat the content of multi-pages document as multi-content document in FileNet                                                                                                                                                                                               |
 | Keep original VersionSeries ID                 | `Boolean`                                | If true, Fast2 will create the multiversion documents with the VersionSeries ID specified in the 'VersionSeries metadata' configuration field.                                                                                                                               |
@@ -246,7 +246,7 @@ Allows to load a component (document, task, folder or virtual folder) into Flowe
 
 | Key                            | Type                                                                        | Description                                                                   |
 | ------------------------------ | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| FlowerDocs connection provider | [FlowerDocsConnectionProvider](credentials.md#FlowerDocsConnectionProvider) |                                                                               |
+| FlowerDocs connection provider | [FlowerDocsConnectionProvider](credentials#FlowerDocsConnectionProvider) |                                                                               |
 | Component category             | `String`                                                                    | FlowerDocs component category can be DOCUMENT, TASK, FOLDER or VIRTUAL_FOLDER |
 
 <b>Optional settings</b>
@@ -267,7 +267,7 @@ This task will send custom built emails to specific people or mailing list of yo
 
 | Key            | Type                                                    | Description                                                                                                                                                                                 |
 | -------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Email provider | [MailSenderProvider](credentials.md#MailSenderProvider) | The Fast2 module establishing the connection to the email server, from the account of a given user. For more about the configuration of the object, please refer to the appropriate section |
+| Email provider | [MailSenderProvider](credentials#MailSenderProvider) | The Fast2 module establishing the connection to the email server, from the account of a given user. For more about the configuration of the object, please refer to the appropriate section |
 
 <b>Optional settings</b>
 
@@ -298,7 +298,7 @@ This task will upload documents and metadata onto Mobius, from version 8 up to v
 
 | Key                        | Type                                                                | Description                                                                                   |
 | -------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Mobius connection provider | [MobiusConnectionProvider](credentials.md#MobiusConnectionProvider) | The Fast2 module required to establish the communication with the destination Mobius instance |
+| Mobius connection provider | [MobiusConnectionProvider](credentials#MobiusConnectionProvider) | The Fast2 module required to establish the communication with the destination Mobius instance |
 
 <b>Optional settings</b>
 
@@ -313,7 +313,7 @@ This task will upload documents and metadata onto Mobius, from version 8 up to v
 | Key          | Type                                                          | Description                                                                                          |
 | ------------ | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | WHERE clause | `String`                                                      | All matching rows will be updated. This field will be resolved by Fast2 before the task is executed  |
-| Query caller | [SQLQueryGenericCaller](credentials.md#SQLQueryGenericCaller) | This modules is responsible of establishing the connection between Fast2 and the designated database |
+| Query caller | [SQLQueryGenericCaller](credentials#SQLQueryGenericCaller) | This modules is responsible of establishing the connection between Fast2 and the designated database |
 | Table name   | `String`                                                      | The table of the row to update                                                                       |
 
 <b>Optional settings</b>
@@ -331,7 +331,7 @@ This task load documents and metadata into a given Nuxeo instance using the Nuxe
 
 | Key                       | Type                                                              | Description |
 | ------------------------- | ----------------------------------------------------------------- | ----------- |
-| Nuxeo connection provider | [NuxeoConnectionProvider](credentials.md#NuxeoConnectionProvider) |             |
+| Nuxeo connection provider | [NuxeoConnectionProvider](credentials#NuxeoConnectionProvider) |             |
 
 <b>Optional settings</b>
 
@@ -353,7 +353,7 @@ This task load documents and metadata into a given Nuxeo instance using the Nuxe
 | Key                          | Type                                                      | Description                                                                                                                                                                                                     |
 | ---------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Attribute file path          | `String`                                                  | OpenText category must be associated with their ids within the file. Fast2 will automatically translate the data name to the correct id specified by the file <br/> <p> Ex/ ../config/attributes.properties</p> |
-| OpenText credentials         | [OpenTextCredentials](credentials.md#OpenTextCredentials) |                                                                                                                                                                                                                 |
+| OpenText credentials         | [OpenTextCredentials](credentials#OpenTextCredentials) |                                                                                                                                                                                                                 |
 | Expected folder architecture | `String list`                                             |                                                                                                                                                                                                                 |
 | OpenText client              | OpenTextRestClient                                        |                                                                                                                                                                                                                 |
 
@@ -394,7 +394,7 @@ With this task, you will be able to perform any SQL instruction (such as inserti
 | Key           | Type                                                          | Description                                                                                                                                                                                                                   |
 | ------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | SQL statement | `String`                                                      | The statement you want Fast2 to run on the database. The syntax needs to match SQL standards. Use a ? to reference your annotation <br/> <p> Ex/ INSERT INTO table_name (doc_id, annotation) VALUES (`'${documentId}'`, ?);</p> |
-| Query caller  | [SQLQueryGenericCaller](credentials.md#SQLQueryGenericCaller) | This modules is responsible of establishing the connection between Fast2 and the designated database                                                                                                                          |
+| Query caller  | [SQLQueryGenericCaller](credentials#SQLQueryGenericCaller) | This modules is responsible of establishing the connection between Fast2 and the designated database                                                                                                                          |
 
 <b>Optional settings</b>
 
@@ -411,7 +411,7 @@ This task will perform update instructions base on document data onto a given SQ
 
 | Key                     | Type                                                          | Description                                                                         |
 | ----------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| SQL connection provider | [SQLQueryGenericCaller](credentials.md#SQLQueryGenericCaller) | The module establishing the communication between Fast2 and the designated database |
+| SQL connection provider | [SQLQueryGenericCaller](credentials#SQLQueryGenericCaller) | The module establishing the communication between Fast2 and the designated database |
 | Name of the new column  | `String`                                                      | The name of the column which will be added to the row with the value to update      |
 | Table name              | `String`                                                      | The name of the SQL table on which all update statements will be performed          |
 

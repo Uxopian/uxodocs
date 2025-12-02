@@ -3,9 +3,9 @@ title: ARender Customisations
 description: Customise ARender within FlowerDocs.
 date: '2010-06-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:44:23.025Z'
   author: CI/CD Bot
-content_hash: a83e950dabd900a8dc350f1a48c923655a64574f0cc63e973bd6329a67fcd83c
+content_hash: d8bbd669d080eeb88e41e6efcb2be0593d0cd1e46887c7369edc58d75e7d6074
 ---
 
 
@@ -16,7 +16,7 @@ ARender can be configured using a number of parameters, not all of which have be
 You can find below the list of customisations that have been tested and validated in FlowerDocs.
 
 
-You can follow this documentation page to learn how to use these customisations [here](viewer.md#profile-overide.md)
+You can follow this documentation page to learn how to use these customisations [here](./arender-config)
 
 ## Annotation styles
 

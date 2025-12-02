@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: da6902b1b686f4f4c44c315cf1c8328a8d05526475947cfc659d19aba4738a8a
+content_hash: 73b0e72860863ff300f3655774468db76bad5856868cbc62d0810529962d9c33
 ---
 # Create a map
 
@@ -22,7 +22,7 @@ With Fast2 started, go to the UI (default address `<http://localhost:1789/index.
 
 :::warning
 
-A map must start with a <b><i>Source</i></b> task, picked up from the list in the [task configuration section](../catalog/source.md).
+A map must start with a <b><i>Source</i></b> task, picked up from the list in the [task configuration section](/docs/fast2/catalog/source).
 
 :::
 

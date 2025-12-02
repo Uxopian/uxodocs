@@ -2,9 +2,9 @@
 title: Date management
 date: '2009-03-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 092c9034584e0365e190cb75612b6bdd11419a1ade8fb27cb0694405d241e051
+content_hash: 8719bf5d28c8102478181bed85daa25fd273586dab7d598612697514b5732836
 ---
 
 
@@ -28,4 +28,4 @@ In a form, to obtain dates of the type 01/12/2016, the ``gui.date.form=dd/MM/yyy
 
 # Date format configuration by tag class or tag reference
 
-In a ``Date`` tag class or a ``Date`` tag reference, it is possible to use a custom date format from [supported date formats](/concepts/tags/date.md). Format internationalization is managed by the application.
+In a ``Date`` tag class or a ``Date`` tag reference, it is possible to use a custom date format from [supported date formats](/docs/flowerdocs/concepts/tags/date). Format internationalization is managed by the application.

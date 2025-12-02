@@ -5,9 +5,9 @@ tags:
   - configuration
   - Java
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: b6a2c322052df953de591c0944ffa9d7026045bed145d1498cb2220c2fe1088a
+content_hash: 8466df0ef60b49221de3365f00b703b9968b9e24d169b49b128f8b072b99dd08
 ---
 
 A pattern is a sequence of instructions, a model, which can be easily recognized by an aware glance. It is strictly under this definition that Fast2 patterns stand.
@@ -43,7 +43,7 @@ Pattern-related syntax `${...}` is not required, fill the field with your expres
 
 :::
 
-Based on SpEL ([Spring Expression Language](https://docs.spring.io/spring-framework/docs/4.3.10.RELEASE/spring-framework-reference/html/expressions.html)), the syntax of these conditions will sound familiar to anyone who's already coded one day:
+Based on SpEL ([Spring Expression Language](https://docs.spring.io/spring-framework/docs/4.3.10.RELEASE/spring-framework-reference/html/expressions.html), the syntax of these conditions will sound familiar to anyone who's already coded one day:
 
 ![Example of pattern implementation as link condition](../assets/img/advanced/pattern_condition2025.png)
 
@@ -91,9 +91,9 @@ From now on, if the 'missingData' is not fount either at the punnet or document 
 
 ### Access data of Fast2 objects
 
-Whether you need [subtypes](../getting-started/overall-concepts.md#fast2-objects) properties for conditional routing or metadata elaboration, Fast2 gives you access to any data stored in the punnet.
+Whether you need [subtypes](/docs/fast2/getting-started/overall-concepts#fast2-objects) properties for conditional routing or metadata elaboration, Fast2 gives you access to any data stored in the punnet.
 
-However targetting object is not always intuitive, so here are the different keywords required to access the [Fast2 objects](../getting-started/overall-concepts.md#fast2-objects) :
+However targetting object is not always intuitive, so here are the different keywords required to access the [Fast2 objects](/docs/fast2/getting-started/overall-concepts#fast2-objects) :
 
 | Keyword                | Description                                                                                                                                      | Examples                                                                                        |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
@@ -130,7 +130,7 @@ An other example could be to add today's date as a new data. Such a pattern migh
 ${T(java.time.LocalDate).now().toString()}
 ```
 
-Bringing it further, we might also want the time when the document got through the migration (namely this [AlterDocumentProperties](../catalog/transformer.md#AlterDocumentProperties) task), with
+Bringing it further, we might also want the time when the document got through the migration (namely this [AlterDocumentProperties](/docs/fast2/catalog/transformer#AlterDocumentProperties) task), with
 
 ```java
 ${T(java.time.LocalDateTime).now().toString()}

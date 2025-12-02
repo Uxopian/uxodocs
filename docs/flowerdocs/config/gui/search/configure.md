@@ -2,9 +2,9 @@
 title: Form
 date: '2004-04-02T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 437906c656b4b4fa1a3fcf74ad59a9cb8770db4d726a91347f6cd9c147cf3bfe
+content_hash: 6b77c8d1e98fe4fd5a5c1a997e316f776480ed7294a5f0d6b301bbd6cb0e4fe3
 ---
 
 
@@ -313,7 +313,7 @@ To assign this class criterion to an advanced search, set the `classCriterionPre
 
 # Filters
 
-When an aggregation is defined for the [hidden request](/config/gui/search/hidden-request.md) of the search form, results are displayed in a tree structure. When a bucket is selected, the search is run using the criteria corresponding to the bucket. 
+When an aggregation is defined for the [hidden request](/docs/flowerdocs/config/gui/search/hidden-request) of the search form, results are displayed in a tree structure. When a bucket is selected, the search is run using the criteria corresponding to the bucket. 
 
 # Technical data
    

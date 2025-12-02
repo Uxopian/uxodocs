@@ -4,9 +4,9 @@ description: 'Reusable templates, by scope, that can be enhanced with variables'
 date: '2020-02-01'
 custom_edit_url: null
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: a876369a18925e4ade0af548422e586a04d6b7d6581ed0ac84a5f565d757ead6
+content_hash: ae9dbfe930ceaefd114eabff2b59b5f962cfeb6cf4fea7d0d405e11f0f7e114d
 ---
 
 
@@ -18,7 +18,7 @@ It allows you to generate documents based on the same template, using HTML.
 :::info
 Use these HTML templates to: 
 
-* Add [private or public pages](/config/core/pages.md)
+* Add [private or public pages](/docs/flowerdocs/config/core/pages)
 :::
 
 

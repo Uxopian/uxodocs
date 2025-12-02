@@ -2,9 +2,9 @@
 title: Installation in Apache Tomcat
 description: Deployment guide for IBM Filenet in Apache Tomcat application server
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: e3cbefba474f7d3375bdbfa7ae6aee525f941e2768c0e4443f88ef3d21345bf4
+content_hash: f01995166be6cf73b7ec9c7d9788299efccf12eebdfd519ad98d90cfdb835915
 ---
 
 
@@ -20,7 +20,7 @@ Limitation: Authentication to IBM FileNet has to be configured with a **technica
 The consequences will be that:
 - Documents/Annotations/Metadata will be fetched with the technical account,
 - Annotations will have the name of the technical account.
-If the need is to propagate the authentication you can either use WebSphere as Application server (see the documentation [here](./installation/standalone/web-ui/filenet/filenet-was.en.md)).
+If the need is to propagate the authentication you can either use WebSphere as Application server (see the documentation [here](/docs/arender/installation/standalone/web-ui/filenet/filenet-was).
 
 
 

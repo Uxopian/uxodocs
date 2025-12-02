@@ -1,9 +1,9 @@
 ---
 title: New installation
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 5eb3fa936ea2fba2426c11555dfb306ea7c1916567bbcb9da38cea534a95cc5e
+content_hash: a72e1675d76113ad025b5301a5569850451a167efbf7a84b2db93a89dd7f98bd
 ---
 
 
@@ -21,7 +21,7 @@ in an environment with:
 - M-Files 
 - A Tomcat9 server
 - ARender Web-UI version 
-- Have a Functional Rendering. So just follow this **[documentation](./content/installation/standalone/rendition/install.en.md)**.
+- Have a Functional Rendering. So just follow this **[documentation](/docs/arender/installation/standalone/rendition/install)**.
 
 
 ## Steps to Configure the Rendition

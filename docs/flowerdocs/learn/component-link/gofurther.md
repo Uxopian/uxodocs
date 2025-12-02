@@ -2,9 +2,9 @@
 title: Going further
 date: '2020-02-03T12:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: a996b7e7fe182069ada04fa2d43893667a5af62ad5e3b247a8d83a44c180a3b1
+content_hash: ec3085eff9c061c6b89ba0601c37c8e6b3ff3ec7a4b97386096c9a01449d7219
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -97,6 +97,6 @@ plugin.bind();
 -->
 
 <!--:::info
-Find the scope module corresponding to this training [here]("".md)
+Find the scope module corresponding to this training [here]("")
 :::
 -->

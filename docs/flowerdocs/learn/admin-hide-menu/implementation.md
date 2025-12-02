@@ -2,9 +2,9 @@
 title: Implementation
 date: '2020-02-01T12:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 1daef6e45e13b84cdc9149c881167f9014df0956befad3288b6b68eb3903a567
+content_hash: 8cd8559ebec7d0bf385a9ebb9d7a9c11cd64c4577ab1954c94f32f091166d290
 ---
 
 
@@ -16,7 +16,7 @@ The following CSS property hides the element to which it is applied:
 	display:none;
 ```
 <br/> 
-We are therefore going to apply the `display: none` style to all [the elements we want to hide](/learn/admin-hide-menu/getting-started.md) :
+We are therefore going to apply the `display: none` style to all [the elements we want to hide](/docs/flowerdocs/learn/admin-hide-menu/getting-started) :
 
 ```css
 	.AdminPlace//tools//memory,
@@ -78,7 +78,7 @@ if(profiles.includes('MANAGER')){
 ``` 
 
 <!--:::info
-Find the scope module corresponding to this training [here]("".md)
+Find the scope module corresponding to this training [here]("")
 :::
 -->
 

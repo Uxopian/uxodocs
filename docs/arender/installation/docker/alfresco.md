@@ -1,9 +1,9 @@
 ---
 title: Alfresco
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: d5710816c9b26223cc8ed6bb14075d781860d798d84ecce080f5818e773767a0
+content_hash: d01b1c902a960c2458431a4356787542e215986472470eade53c2184f7b25164
 ---
 
 
@@ -27,7 +27,7 @@ Add the ARender plugin in Alfresco share container and Alfresco content reposito
 
 If needed, some resources about ARender for Alfresco are available below:
 
-- [See Alfresco documentation](./guides/configurations/web-ui/connectors/alfresco/_index.en.md)
+- [See Alfresco documentation](/docs/arender/guides/configurations/web-ui/connectors/alfresco/features-share)
 - [Download Alfresco plugin](https://artifactory.arondor.cloud/artifactory/webapp/#/artifacts/browse/tree/General/arondor-release/com/arondor/arender/arender-for-alfresco-share-plugin//arender-for-alfresco-share-plugin-.jar)
 
 

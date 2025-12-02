@@ -4,9 +4,9 @@ description: Reacting to operations.
 date: '2008-01-03T13:22:01+02:00'
 custom_edit_url: null
 last_update:
-  date: '2025-12-01T15:13:12.089Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 5a78f187c99756a64f79a0a0dc904b8a0eebeb9b1e4ecc6bc7350643ed7ba74a
+content_hash: fd378c230c89e5402125e4ae88c3e9e0efe1e75b4aab1075f16e2842fdd0ac32
 ---
 
 
@@ -58,11 +58,11 @@ Via the administration interface, it is possible to select other fields, notably
 An **operations Manager** (or [`com.flower.docs.operation.api.OperationHandler`](#javadoc-com-flower-docs-operation-api-OperationHandler)) is a code fragment called when an operation is executed.
 They can be divided into three categories: 
 
-* [native](/config/core/operation/handlers/drools.md) : provided natively by **FlowerDocs Core** and executed within its JVM
+* [native](/docs/flowerdocs/config/core/operation/handlers/drools) : provided natively by **FlowerDocs Core** and executed within its JVM
 
 * specific: developed specifically and added as libraries to **FlowerDocs Core** (*on-premise only*)
 
-* [hooks](/config/core/operation/handlers/hook.md): exposed as REST web services
+* [hooks](/docs/flowerdocs/config/core/operation/handlers/hook): exposed as REST web services
 
 <br/>
 To contextualize their execution, an object [`com.flower.docs.operation.api.OperationContext`](#javadoc-com-flower-docs-operation-api-OperationContext) is provided as input. The context can be used to retrieve information concerning the execution of the operation, such as the component concerned or the modifications made.

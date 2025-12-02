@@ -4,9 +4,9 @@ description: Determine which operations to respond to
 date: '2001-03-28T13:20:01+02:00'
 custom_edit_url: null
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: 81585a98fcd62c74db1a2c2b13ae42aa25ca75282d256d757e3d687e23e7a86b
+content_hash: 301d955b5b50390ac0a2cf33fbb9579d40f30940fe81eff2f677065a3076b239
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -31,7 +31,7 @@ The tags referenced by this class are used to configure the subscription:
 |``Asynchronous`` |*boolean*|Determines whether the OperationHandler should be executed asynchronously or not|
 |``RegistrationOrder`` |*integer*|Scheduling different subscriptions to the same operation|
 |``StopOnException`` |*boolean*| Determines whether operation execution should be stopped in the event of an exception (*only if synchronous*)|
-|``Authorization``|*string*|  basic authorization string to be supplied to the hook (generated online using [blitter](https://www.blitter.se/utils/basic-authentication-header-generator/))  |
+|``Authorization``|*string*|  basic authorization string to be supplied to the hook (generated online using [blitter](https://www.blitter.se/utils/basic-authentication-header-generator/)  |
 
   </TabItem>
 </Tabs>

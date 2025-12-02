@@ -3,9 +3,9 @@ title: Customised library
 description: Develop a Java library to override a Core behavior.
 date: '2020-02-01T12:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: e144ef5cf09c615a1a5f787d11d6c5b39a80e251b8590b99f8cff3159271986c
+content_hash: e69cc88a1d5fbda82d3034d69905c895898b6396c081ba3c9e7e27529c5964b6
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -148,7 +148,7 @@ To compile the library, use your IDE with the `clean` and `install` goals or run
 
 ## Linux service
 
-When the Core is started as a Linux service (as shown [here](/install/start.md) ), the `libs` folder is added to the JVM classpath launched by the service.
+When the Core is started as a Linux service (as shown [here](/docs/flowerdocs/install/start) ), the `libs` folder is added to the JVM classpath launched by the service.
 All JARs included in this directory will be added to the JVM classpath.
 
 All you need to do is copy the library into this directory with the same user as the one with whom the service is launched (or who has read rights on the file).

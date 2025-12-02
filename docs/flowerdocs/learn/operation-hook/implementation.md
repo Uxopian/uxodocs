@@ -2,9 +2,9 @@
 title: Implementation
 date: '2020-02-01T11:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: b39fd7968bf26e3e6654412b538451bc7b321a11db0a21e69243ab639d87d169
+content_hash: bfc4eac97749c8a4a5743118fb54f688e0e374ac5b378b384df4c9282f7732b2
 ---
 
 
@@ -12,7 +12,7 @@ content_hash: b39fd7968bf26e3e6654412b538451bc7b321a11db0a21e69243ab639d87d169
 This tutorial is based on Maven and requires the use of the Arondor Artifactory in which the FlowerDocs libraries are implemented.
 If you are extern to Arondor, please ask the FlowerDocs support to get the mentioned librairies.
 
-When you have completed this training module, you will be able to develop a secure [`OperationHook`](/concepts/operation.md) to respond to the creation of documents and rename them automatically.
+When you have completed this training module, you will be able to develop a secure [`OperationHook`](/docs/flowerdocs/concepts/operation) to respond to the creation of documents and rename them automatically.
 :::
 
 
@@ -65,7 +65,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 
 # Spring Boot application
 
-This Spring Boot application is based on the [Spring Boot starter](/apis/core/java.md) provided by FlowerDocs.
+This Spring Boot application is based on the [Spring Boot starter](/docs/flowerdocs/apis/core/java) provided by FlowerDocs.
 
 * To start with, we need a _main class_ Spring Boot annotated with the `@SpringBootApplication` annotation: 
 

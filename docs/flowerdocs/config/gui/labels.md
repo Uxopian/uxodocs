@@ -2,9 +2,9 @@
 title: Labels
 date: '2009-03-29T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: 6e4cd787541b657462d9406aee814a42fa930926dfab496a928238f44550b767
+content_hash: 39ec1368d6e6e09e5b847034129af01cbe55f1f38ba2199720c6db3bc3384da8
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -15,7 +15,7 @@ This section explains how to configure the FlowerDocs GUI labels. The applicatio
 These native labels can be defined using: 
 
 * property files
-* the JS API (see [documentation](/apis/jsapi/labels.md))
+* the JS API (see [documentation](/docs/flowerdocs/apis/jsapi/labels)
 
 # Defining labels
 
@@ -54,6 +54,6 @@ When no label is defined for the user locale, English (`en`) is used by default.
 
 <br/>
 :::info
-Labels can also be determined dynamically using the [JS API](/apis/jsapi/labels.md).
+Labels can also be determined dynamically using the [JS API](/docs/flowerdocs/apis/jsapi/labels).
 :::
 

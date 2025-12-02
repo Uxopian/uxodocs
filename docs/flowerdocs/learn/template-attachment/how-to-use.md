@@ -2,9 +2,9 @@
 title: Use of the plugin
 date: '2020-02-01T14:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: a85d0dc6222e4928ebec5dda125e52a20cf24ea18b3f7d922cf24b01892af3fc
+content_hash: 219c8ae900033d820a99b4d0b88dad0dd89925887598a9abd074f9e6f3e437c9
 ---
 
 
@@ -30,7 +30,7 @@ You will then have a choice of templates. Select the template that meets your ne
 
 When you validate the desired document template, a new folder is created in FlowerDocs. The content of this is a file in Word format generated according to the selected template.  
 
-This file is then saved locally and can be edited directly in Word and then updated on FlowerDocs. If the [Microsoft Word plugin](/connecteurs/companion/install.md) is installed on your computer, the file will be opened in Word and you can update it on FlowerDocs directly from Word.
+This file is then saved locally and can be edited directly in Word and then updated on FlowerDocs. If the [Microsoft Word plugin](/docs/flowerdocs/connecteurs/companion/install) is installed on your computer, the file will be opened in Word and you can update it on FlowerDocs directly from Word.
 
 <br/>
 The only thing left to do is to save the task or apply a reply to it for the attachment to be taken into account.

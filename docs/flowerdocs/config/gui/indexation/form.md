@@ -3,9 +3,9 @@ title: Indexing form
 description: Configure indexing forms
 date: '2002-02-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 4104537d24e10b4967751b04497f064b2b66c4ff86af3182553f7ce8ccb75526
+content_hash: 33839a1452fcdae817467055359442aec5ef5f8646a516118ec8abc13fb2bc40
 ---
 
 
@@ -17,7 +17,7 @@ Indexing views are composed of two parts:
 
 <br/>
 
-To add a configuration, first define the ``componentActivityConfigurations`` bean and save the configuration, contained in the ``ComponentActivityConfiguration`` object, according to the [context](/config/gui/indexation/context.md): 
+To add a configuration, first define the ``componentActivityConfigurations`` bean and save the configuration, contained in the ``ComponentActivityConfiguration`` object, according to the [context](/docs/flowerdocs/config/gui/indexation/context): 
 
 __Example:__ 
 

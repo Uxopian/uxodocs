@@ -3,16 +3,16 @@ title: Folders & their content
 description: Manipulating folders in JavaScript
 date: '2004-02-02'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: cabe2244413bd9b95c7b43707261bd00b1af845b2e76777c8c46dd7fe381edbe
+content_hash: 0b37595c39f86a10768dac45f320a9e4d7ff9a793df0b638f378f32f69d86c7b
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
 
-A [folder](/concepts/components/folders.md) can contain components: its children.
+A [folder](/docs/flowerdocs/concepts/components/folders) can contain components: its children.
 A folder's children can be components of any category, but only documents and sub-folders are displayed in **FlowerDocs GUI**.
 
 

@@ -5,9 +5,9 @@ description: >-
   interactions
 sidebar_position: 1
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: a1110fd5edbb2013f4627cfe6cf17f839560c3a24047e5e3510411b25ca7ed6e
+content_hash: 0dbc297cd7021c24ca0b5e8460cfc7fcc8d632b0ad7d2e23f3989ce096e72c06
 ---
 
 # Architecture
@@ -59,4 +59,4 @@ The chat module handles incoming messages with a clear priority system: a `goalN
 
 ---
 
-Next, let's dive into the [Core Concepts](../concepts/overview) of the framework.
+Next, let's dive into the [Core Concepts](/docs/uxopian-ai/concepts/overview) of the framework.

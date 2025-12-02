@@ -3,9 +3,9 @@ title: services
 description: Consuming FlowerDocs services from the JS API
 date: '2001-03-29T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 5bef62e9c6fd913a5d6b926fafc869b251f95fdb9227eeb0e265575b3fc6b900
+content_hash: 642d9e4c36c3d228a4549c268aaf8c9848d11d3b5aea884ae3395098a886f3a6
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -96,7 +96,7 @@ JSAPI.get().getComponentGetAPI().getComponent(reference.getCategory(), reference
 
 # Find components
 
-Components can be searched using component services and a [SearchRequest](/apis/jsapi/recherche/mco.md) supplied as a parameter to the function `search(request, successCallback, errorCallback)`.
+Components can be searched using component services and a [SearchRequest](/docs/flowerdocs/apis/jsapi/recherche/mco) supplied as a parameter to the function `search(request, successCallback, errorCallback)`.
 
 The `successCallback` parameter is a function called once the search has been successful, with the table of results found in accordance with the query supplied.
 Optionally, the `errorCallback` function can be passed as a parameter to react to any error.

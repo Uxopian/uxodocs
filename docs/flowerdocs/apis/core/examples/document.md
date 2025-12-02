@@ -3,9 +3,9 @@ title: Handling a document
 description: 'Create, modify, delete your documents'
 date: '2001-03-30T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 6cbbdef69da709a447c9ea981a9504676fa7c3cf7047ea2f7b9b410b5f8f00a7
+content_hash: 4d1832e664b826f9f8a353c42f67bb5ad3105b1033ebc33dad0dafecb174defe
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -348,7 +348,7 @@ New file name
 
 # Search document
 
-The search operations all work on the same model as described [here](../examples/search.md).
+The search operations all work on the same model as described [here](../examples/search).
 
 # Document deletion
 

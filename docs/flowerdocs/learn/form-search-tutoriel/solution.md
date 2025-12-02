@@ -2,9 +2,9 @@
 title: Full example
 date: '2020-07-07T12:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 863a2c16de3f8f6041d044f4a4c9424446987ed411782285bd4e2d59b18aec65
+content_hash: a772373fa6f1f0c6bd3a0d3543458615a5a156f94facdf971387926d32b63d10
 ---
 
 
@@ -196,7 +196,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
 <br/>
 
 <!--:::info
-Find the scope module corresponding to this training [here]("".md)
+Find the scope module corresponding to this training [here]("")
 :::
 -->
 

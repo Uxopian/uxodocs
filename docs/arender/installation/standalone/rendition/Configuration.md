@@ -1,9 +1,9 @@
 ---
 title: Configuration
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 79875cbd16cde514c1453119f6910779302ac480601dd362f88817ecfebf04f4
+content_hash: da6d84a25b9643bcbbbfefaab70df66ba436c03ba7c37e6c028fda23ca3fa0f7
 ---
 
 
@@ -200,7 +200,7 @@ Make sure the auto-detection property is disabled (this is the default setting).
 Specify each Rendition host in the Web-UI server configuration. The distribution will be managed based on the health of 
 the Renditions.
 
-Configuration details can be found on the dedicated [page](./installation/standalone/web-ui/configuration.md).
+Configuration details can be found on the dedicated [page](/docs/arender/installation/standalone/web-ui/configuration).
 
 #### For Shared Cache Directories Among Several Renditions {#SharedCache}
 
@@ -286,7 +286,7 @@ arender.server.rendition.hosts=LOAD_BALANCER_HOST
 
 If there’s no Load Balancer, specify each Rendition host in the Web-UI server configuration. The distribution will be managed according to the Renditions' health.
 
-Detailed configuration can be found on the dedicated [page](./installation/standalone/web-ui/configuration.md).
+Detailed configuration can be found on the dedicated [page](/docs/arender/installation/standalone/web-ui/configuration).
 
 ## Network File System (NFS) Configuration
 
@@ -368,11 +368,11 @@ Skip this manual installation if previous scripted installation was a success.
 
 * Download and install the below softwares
 
-    * .Net 4.5: [Download]([https://www.microsoft.com/en-us/download/details.aspx?id=30653](https://www.microsoft.com/en-us/download/details.aspx?id=30653.md).md)
+    * .Net 4.5: [Download]([https://www.microsoft.com/en-us/download/details.aspx?id=30653](https://www.microsoft.com/en-us/download/details.aspx?id=30653).md)
 
-    * Microsoft Visual C++ redistributable 2010: [Download]([https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632](https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632.md).md)
+    * Microsoft Visual C++ redistributable 2010: [Download]([https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632](https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632).md)
 
-    * Microsoft Visual C++ redistributable 2008: [Download]([https://www.microsoft.com/en-us/download/details.aspx?id=15336](https://www.microsoft.com/en-us/download/details.aspx?id=15336.md).md)
+    * Microsoft Visual C++ redistributable 2008: [Download]([https://www.microsoft.com/en-us/download/details.aspx?id=15336](https://www.microsoft.com/en-us/download/details.aspx?id=15336).md)
 -------------------------------------------------------------------
 #### Configuration
 

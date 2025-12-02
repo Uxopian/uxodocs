@@ -3,9 +3,9 @@ title: Overview
 description: Tag your components to find them more easily.
 date: '2018-03-02T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 8021a5203127f233d194ec4c6a54b559580bd40cafff942eb8c6be610e133e04
+content_hash: 38cb38fd375e5b2ed1efce9e33fe4de1f01dc8dfe97b88da0e3f8b21bf53c5fe
 ---
 
 
@@ -24,16 +24,16 @@ This tag class applies to all tags associated with components, and is made up of
 
 |Type|Description|
 |------|---------------------|
-|`STRING`|[String](/concepts/tags/textuel.md) (e.g. reference, customer name ...)|
-|`TEXT`|[Text field](/concepts/tags/textuel.md) (ex: comment ...)|
-|`CHOICELIST`|[Choice list](/concepts/tags/liste.md) (e.g. type of document ...)|
-|`ICON`|[Icon list](/concepts/tags/liste.md) (e.g. input channel ...)|
-|`FREELIST`|[Choice list](/concepts/tags/liste.md) (e.g.: reference linked to an external IS ...)|
-|`CONDITIONAL`|[Conditional value list](/concepts/tags/liste.md) (e.g.: list of departments according to direction ...)|
-|`FLOAT`|[Decimal number](/concepts/tags/numerique.md) (e.g.: rate, proportion ...)|
-|`INT`|[Integer](/concepts/tags/numerique.md) (e.g.: number of supporting documents ...)|
-|`CURRENCY`|[Decimal number](/concepts/tags/numerique.md) limited to 2 decimal places (e.g.: amount ...)|
-|`DATE`|[Date](/concepts/tags/date.md) (e.g. due date ...)|
+|`STRING`|[String](/docs/flowerdocs/concepts/tags/textuel) (e.g. reference, customer name ...)|
+|`TEXT`|[Text field](/docs/flowerdocs/concepts/tags/textuel) (ex: comment ...)|
+|`CHOICELIST`|[Choice list](/docs/flowerdocs/concepts/tags/liste) (e.g. type of document ...)|
+|`ICON`|[Icon list](/docs/flowerdocs/concepts/tags/liste) (e.g. input channel ...)|
+|`FREELIST`|[Choice list](/docs/flowerdocs/concepts/tags/liste) (e.g.: reference linked to an external IS ...)|
+|`CONDITIONAL`|[Conditional value list](/docs/flowerdocs/concepts/tags/liste) (e.g.: list of departments according to direction ...)|
+|`FLOAT`|[Decimal number](/docs/flowerdocs/concepts/tags/numerique) (e.g.: rate, proportion ...)|
+|`INT`|[Integer](/docs/flowerdocs/concepts/tags/numerique) (e.g.: number of supporting documents ...)|
+|`CURRENCY`|[Decimal number](/docs/flowerdocs/concepts/tags/numerique) limited to 2 decimal places (e.g.: amount ...)|
+|`DATE`|[Date](/docs/flowerdocs/concepts/tags/date) (e.g. due date ...)|
 |`BOOLEAN`|Check box (e.g.: medical confidentiality ...)|
 |`USER`|Linked to a directory user (e.g. manager)|
 
@@ -62,6 +62,6 @@ This tag class applies to all tags associated with components, and is made up of
 
 
 :::info
-Add tags to your components by [referencing a tag class](/concepts/classes/tag-reference.md) at component class level.
+Add tags to your components by [referencing a tag class](/docs/flowerdocs/concepts/classes/tag-reference) at component class level.
 :::
 

@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: bc6ccf342fc114b998a8f79f712fb777d3d615c2a030fa861e4e60ef0542d859
+content_hash: 01d9de525338f2a066269b415726e3fe39d506757eddaf56330956a721f7297d
 ---
 # Schedule your campaigns
 
@@ -37,7 +37,7 @@ Jobs are automatically saved when all their fields are correctly filled. If the 
 
 Despite Fast2 validates the name and the CRON expression, the match between the campaign and the job action is not tested. It is the user's responsibility to have a clear idea about what to do with which campaign.
 
-If the action of a job is to stop a campaign, nothing will happen if the campaign is not running. The behavior is the same as the run place. See our [run section](../getting-started/create-workflow.md#run-a-map) as a reminder in case you need it.
+If the action of a job is to stop a campaign, nothing will happen if the campaign is not running. The behavior is the same as the run place. See our [run section](/docs/fast2/getting-started/create-workflow#run-a-map) as a reminder in case you need it.
 
 Additionally, it is important to note that when executing a job as _START AS NEW_, the next-to-come campaign will be triggered only once the previous campaign ends (status _FINISHED_). This ensures sequential execution and prevents overlapping campaigns, maintaining the integrity of the workflow.
 
@@ -89,7 +89,7 @@ Cron expressions can be really useful but might quite hard to use.
 
 :::tip "Build it yourself"
 
-    To generate your own cron expressions easily, we suggest you to use some web generator (like [freeformatter.com](https://www.freeformatter.com/cron-expression-generator-quartz.html)).
+    To generate your own cron expressions easily, we suggest you to use some web generator (like [freeformatter.com](https://www.freeformatter.com/cron-expression-generator-quartz.html).
 :::
 ## Maximum number of executions
 

@@ -4,14 +4,14 @@ description: Component class overview
 date: '2018-03-01T12:20:01+02:00'
 custom_edit_url: null
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: d4f92b6f1673e5486c50a5aea0269a4d072fc4eb87483cff9faddf50986ee80c
+content_hash: 1b887c5add208620dcbd7c45839f2a3b72389b9ca503ca7175e5ff2e2b2163f5
 ---
 
 
 
-A component class defines the common characteristics of a logical set of components. These sets are characterised by [tags](/concepts/tags/overview.md) (or metadata), security, business or technical rules that are specific to them.   
+A component class defines the common characteristics of a logical set of components. These sets are characterised by [tags](/docs/flowerdocs/concepts/tags/overview) (or metadata), security, business or technical rules that are specific to them.   
 
 
 This section defines the notion of component class, used to characterise the components (documents, folders, tasks, etc.) handled within the application.

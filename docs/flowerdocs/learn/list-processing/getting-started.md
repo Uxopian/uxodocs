@@ -2,9 +2,9 @@
 title: Getting Started
 date: '2020-01-01T11:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 4af7d3ba583e8d8dc0ce80a7c34b014f93699ca840ccd2a9ff42486fd9b017fe
+content_hash: 3bbb7cb4b6506777fa122338770914b48e41f2c9037bff923bd006d92ed82335
 ---
 
 
@@ -14,7 +14,7 @@ In this module, you will configure an example of a processing session that can b
  
 # Before getting started
 
-This tutorial is based on the configuration of a processing session via the [FlowerDocs JS API](/apis/jsapi/recherche/list-processing.md)
+This tutorial is based on the configuration of a processing session via the [FlowerDocs JS API](/docs/flowerdocs/apis/jsapi/recherche/list-processing)
 
 In this tutorial we will be using the following components: 
 

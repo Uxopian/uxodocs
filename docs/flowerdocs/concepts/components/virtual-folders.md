@@ -3,9 +3,9 @@ title: Virtual folders
 description: Dynamically organize your components.
 date: '2018-03-04T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: ddaabcb510c292f858c969f37e556140557abdadb33735634c02f946c2cb81c5
+content_hash: 244e9f0f49193e2a0d6907d4247b39bc3761d0955b0687f571fd2d094ad25208
 ---
 
 
@@ -42,7 +42,7 @@ To restrict access or modifications to a virtual folder, several permissions are
 
 * Attach the virtual folder to a folder : `ATTACH`
 
-Some actions are only available if the user has write access to the virtual folder. To do this, the permission has to be set on `UPDATE` for this user and this user should have reserved the virtual folder (see [Reservation](/concepts/reservations.md)). 
+Some actions are only available if the user has write access to the virtual folder. To do this, the permission has to be set on `UPDATE` for this user and this user should have reserved the virtual folder (see [Reservation](/docs/flowerdocs/concepts/reservations). 
 
 
 :::info

@@ -3,14 +3,14 @@ title: Components
 description: Manipulating component in JavaScript
 date: '2001-02-01'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: beaf1b1b3ce9c76882400e646196e095a90b85b8fe8402fa7fb7538718633702
+content_hash: 5ee3012b0958c52c73e358771a4a487f014a780a60a723173d81f04615343241
 ---
 
 
 :::info
-The [components](/concepts/components/getting-started.md) are the main objects used by FlowerDocs. 
+The [components](/docs/flowerdocs/concepts/components/getting-started) are the main objects used by FlowerDocs. 
 Thanks to the JS API, they can be manipulated by scripts to meet specific needs in the development of vertical solutions.
 :::
 
@@ -59,7 +59,7 @@ Depending on the information, the following functions are available to access or
 
 # Tags management
 
-The [tags](/concepts/tags/overview.md) of a component can be manipulated via the JS API using several functions.
+The [tags](/docs/flowerdocs/concepts/tags/overview) of a component can be manipulated via the JS API using several functions.
 The `getTags()` function can be used to determine the tags already present on a component by returning an array containing the names of each of the component's tags.
 
 ## Adding or modifying a tag

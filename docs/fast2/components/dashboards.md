@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: 5632c68bd0720ec784a237c17f79368fd4c3efad7b81273da55f715c7664328f
+content_hash: da288e7054ff230442bfaf80090a6796529b650d8148f3cc7ac0c354cde35485
 ---
 # Dashboards
 
@@ -20,7 +20,7 @@ However the configuration of these tools are very close (if not identical).
 :::
 
 
-The dashboard only communicates with the database (as illustrated in the [architecture section](../getting-started/overall-concepts.md#architecture)).
+The dashboard only communicates with the database (as illustrated in the [architecture section](/docs/fast2/getting-started/overall-concepts#architecture).
 
 All the chart visualizations which can be built up with this add-on and integrated to the most advanced dashboards, solely serve one purpose: data digestion for tracking progress, by making now possible to follow edge-cases of a handful of documents lost in a week-long non-stopping flood, and building reports out of it.
 
@@ -422,7 +422,7 @@ This new dimension of data analysis via Kibana opens up way more possibilities, 
 
 ### :material-connection: Dashboards do not reach the database {#cannot-reach-db data-toc-label="Unable to access database"}
 
-Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database.md#port) for more details.
+Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database#port) for more details.
 
 ### :material-lan-connect: Could not ping dashboard on port 1791 {#port-not-showing data-toc-label="Unable to access dashboards"}
 
@@ -460,7 +460,7 @@ Since the dashboards fetch data directly from the database, it is not possible t
 
 ### :octicons-question-24: Dashboards do not reach the database {#cannot-reach-db data-toc-label="Unable to access database"}
 
-Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database.md#port) for more details.
+Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database#port) for more details.
 
 ### :octicons-question-24: Could not ping dashboard on port 1791 {#port-not-showing data-toc-label="Unable to access dashboards"}
 

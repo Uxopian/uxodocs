@@ -3,14 +3,14 @@ title: Component classes
 description: Manipulating component classes in JavaScript
 date: '2001-02-02'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 6f72c480327565c7d46eb3579da75cb9599de514c13b732eadfe3513b513d7c4
+content_hash: 92799663af8be6d5664e1384b0f6e7e2529f5669b1444b02924659fb7616090e
 ---
 
 
 :::info
-The [component classes](/concepts/classes/getting-started.md) define component typologies.
+The [component classes](/docs/flowerdocs/concepts/classes/getting-started) define component typologies.
 Thanks to the JS API, they can be manipulated by scripts to access a scope's data model.
 :::
 
@@ -63,7 +63,7 @@ For the functions ``getDisplayNames()`` and ``getDescriptions()``, the returns a
 
 # Access to tag references 
 
-Each component class has a list of [tag references](/concepts/classes/tag-reference.md). These references can be used to associate [tag classes](/concepts/tags/overview.md) to a component typology.
+Each component class has a list of [tag references](/docs/flowerdocs/concepts/classes/tag-reference). These references can be used to associate [tag classes](/docs/flowerdocs/concepts/tags/overview) to a component typology.
 
 From a component class, the `getTagReferences()` function exhibits tag references in the form of an array of objects. The following functions can be used for each of these objects: 
 

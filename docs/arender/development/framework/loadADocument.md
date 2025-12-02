@@ -1,9 +1,9 @@
 ---
 title: Load a document
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: 5d6e40440aca1876ec6210abee2ca7aba6f0b5eb600143e8e3796ad2eb949352
+content_hash: 9db0a5da6d219a451749b2564dfd8129eee4ea8510f801c8af15a96ee70db8a8
 ---
 
 
@@ -12,11 +12,11 @@ content_hash: 5d6e40440aca1876ec6210abee2ca7aba6f0b5eb600143e8e3796ad2eb949352
 
 
 
-The JavaScript API allows easy interaction with ARender using various commands <i class="ti-hand-point-right" />[ listed here ](./development/apis/web-ui/javascript.md) <i class="ti-hand-point-left" ></i>.
+The JavaScript API allows easy interaction with ARender using various commands <i class="ti-hand-point-right" />[ listed here ](/docs/arender/development/apis/web-ui/javascript/js-api) <i class="ti-hand-point-left" ></i>.
 
 ## Load a document
 
-The **loadDocument** and **openDocument** functions from the API, <i class="ti-hand-point-right" /><ins>[ described here ](./development/apis/web-ui/javascript/document.md)</ins><i class="ti-hand-point-left" ></i> allow you to load and open a document on the ARender server.
+The **loadDocument** and **openDocument** functions from the API, <i class="ti-hand-point-right" /><ins>[ described here ](/docs/arender/development/apis/web-ui/javascript/document)</ins><i class="ti-hand-point-left" ></i> allow you to load and open a document on the ARender server.
 
 <p><i class="ti-alert" /> Note that document opening is secured, so only documents from your document space can be opened.</p>
 

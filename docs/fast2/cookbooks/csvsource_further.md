@@ -4,9 +4,9 @@ author: Joseph TESSIER
 tags:
   - csv
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 30e5b65ec9bd25a9923edcccaacbcfc4959de59291195be1108d11d26326184e
+content_hash: c2c1c88293aee21373abdf043f6782ecea22f69e3c347d54ea20c5d4f6caf294
 ---
 
 ![unsplash drawers](../assets/img/cookbooks/unsplash-drawers.jpg)
@@ -81,7 +81,7 @@ the created document will only have a dataset looking like:
 
 Fast2 will keep no trace of the old header names, generating a document with a dataset populated from the CSV file alongside new data names.
 
-Of course this data name mapping could have been handled by an additional task, such as [Drools](../catalog/transformer.md#ApplyDroolsTask) or [JSTransform](../catalog/transformer.md#JSTransform) (just to name a few).
+Of course this data name mapping could have been handled by an additional task, such as [Drools](/docs/fast2/catalog/transformer#ApplyDroolsTask) or [JSTransform](/docs/fast2/catalog/transformer#JSTransform) (just to name a few).
 
 But this CSV task here combines these 2 steps (of parsing and mapping) into a single one, lowering room for error and freeing the document of unnecessary information you'd not even have used.
 

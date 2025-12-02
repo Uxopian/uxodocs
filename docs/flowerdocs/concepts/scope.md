@@ -3,9 +3,9 @@ title: Scope
 description: Isolate your customers/businesses.
 date: '2001-02-02'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 76d613fd9b5aa7393b5da00693a0bf2ebfc97d690fa665e94da01f4505670348
+content_hash: 3b262489f3c2853146014b48afc147dd3be83dcea0d64ba9cab773b38ebd4826
 ---
 
 
@@ -39,5 +39,5 @@ If the parameter is not set, the default scope defined with the ``scope.default`
 	
 	
 :::info
-Access authorization to a scope is determined by the read permission on the access control list defined at scope level. More details on this mechanism can be found [here](/concepts/securite/autorisation.md).
+Access authorization to a scope is determined by the read permission on the access control list defined at scope level. More details on this mechanism can be found [here](/docs/flowerdocs/concepts/securite/autorisation).
 :::

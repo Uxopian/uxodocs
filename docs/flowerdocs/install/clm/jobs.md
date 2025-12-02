@@ -2,16 +2,16 @@
 title: Standard jobs
 date: '2004-03-21T13:21:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 7272a8aeab8f29eb1c3148748bdbcf2308d00137fd7bdf531c41a12f98c29e4c
+content_hash: 3d6e2bd9be0eb43e0044b865592424bb3ae3e480fa28cac8cb52edd88a7a6731
 ---
 
 
 
 # Create
 
-The CLM can be used to create a scope from a [template](/install/clm/template.md) using the `create` job.  
+The CLM can be used to create a scope from a [template](/docs/flowerdocs/install/clm/template) using the `create` job.  
 
 ```properties
 <clm> create --template=<template> --scope=<scope> --admin=<admin>

@@ -1,9 +1,9 @@
 ---
 title: Group annotations
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 29c251afc44bc0a8b61cbfc34a2b4bf37ec948800a46bf65a41190b48f705e8a
+content_hash: b67423cd9ffd885070e051f37ee7e52ed5ac2270174f636bb62b95097613ee5f
 ---
 
 
@@ -123,7 +123,7 @@ private Map<String, String> buildLocalizedDisplayNames(String fr, String en)
 
 ## Keep the notion of private annotation
 
-The notion of private annotation is compatible with the notion of an annotation group. We must keep the definition of *property name = "symbolicName" value = "private"*. The description of private annotations can be found in the section *Annotation securities configuration* in the page [Annotation](./learn/how-to/annotation.en.md)
+The notion of private annotation is compatible with the notion of an annotation group. We must keep the definition of *property name = "symbolicName" value = "private"*. The description of private annotations can be found in the section *Annotation securities configuration* in the page [Annotation](/docs/arender/learn/how-to/annotation)
 
 Example of configuration of the bean that will populate the annotation group list with the *Private* choice:
 

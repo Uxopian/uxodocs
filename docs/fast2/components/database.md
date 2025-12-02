@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: d2bba693554aeb80764293da8c86fef695b0d822940fe5d558f24663de312801
+content_hash: 7a4dbe0c73d5deb9a663e196c666836fbd481911a60b992101280a1c977149dd
 ---
 # Internal database
 
@@ -203,7 +203,7 @@ In reason of the tight commmunication between the broker and the database, chanc
 
 ### Server error 500 when starting a campaign
 
-After running quite a bunch of campaigns, you might end up not being able to start anymore of them due to the limit of shards of the embedded database (for more in-depth details about the shards, checkout the [Official Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/scalability.html)).
+After running quite a bunch of campaigns, you might end up not being able to start anymore of them due to the limit of shards of the embedded database (for more in-depth details about the shards, checkout the [Official Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/scalability.html).
 
 The symptom of this limitations comes as a regular 500 server error toast in the UI, but is is by checking the logs/broker.log file that its raw nature is exposed:
 

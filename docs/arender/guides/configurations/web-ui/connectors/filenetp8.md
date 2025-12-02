@@ -1,9 +1,9 @@
 ---
 title: FileNet connector
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 9a012bf7027500b5797683a740645e3f725a9b9e0d96cae1cc0442c62ecdfe3b
+content_hash: dd3173b7b3708983fa1ddbd674b395146250f9dca010ae46351f27cb5300bc79
 ---
 
 
@@ -223,7 +223,7 @@ If the following error appears: *No LoginModules configured
 for FilenetP8WSI*, an additional configuration is required:
 ```
 
-- Save the file [jaas.conf.WebSphere](/docs/jadocumentation/as.conf.WebSphere.md) in a folder on the WAS server
+- Save the file [jaas.conf.WebSphere](/docs/jadocumentation/as.conf.WebSphere) in a folder on the WAS server
 - Add the following parameter to ARender's JVM:
 
   `-Djava.security.auth.login.config=[Path_to_jaas_file.conf.WebSphere]`

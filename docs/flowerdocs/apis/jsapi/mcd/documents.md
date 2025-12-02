@@ -3,9 +3,9 @@ title: Documents & their files
 description: Manipulating documents in JavaScript
 date: '2004-02-01'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 3e3679682653e1048626c0d8f311f394261f431594f7a4256d4fb6956ad3213a
+content_hash: 6069e333bbea1c38c649c70483c980af7be19251ab68909a001ca386d810c7b9
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 # Handling files
 
-In addition to the tags associated with a [document](../.././../concepts/components/documents.md), files can be associated with it.
+In addition to the tags associated with a [document](../.././../concepts/components/documents), files can be associated with it.
 The JS API enables them to be manipulated through various consultation or modification functions.
 
 ## File access

@@ -4,9 +4,9 @@ description: Respond to an operation by executing a JavaScript script
 date: '2002-03-28T13:20:01+02:00'
 custom_edit_url: null
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 6d869cd3cdb1524fc43c8b13bca17db07e4aa989aedcd367d72483acf5b67494
+content_hash: 252e151292b4f22f62e49b001d02e8330c57e4c5df252d93366b886a4d192cfe
 ---
 
 
@@ -29,7 +29,7 @@ When a search is run, the request and the response (if available) are provided u
 
 ## Utilities
 
-To facilitate their development, an object accessible through the `util` variable is made available whose exposed methods are listed [here](/config/core/appendices/context-util.md).
+To facilitate their development, an object accessible through the `util` variable is made available whose exposed methods are listed [here](/docs/flowerdocs/config/core/appendices/context-util).
 
 
 :::note[Creating a folder when creating a document]

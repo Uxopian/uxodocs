@@ -3,9 +3,9 @@ title: Tasks
 description: tasks classes
 date: '2018-03-02T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: c7d5ec64444af4cae96070ddacf9a7e75b58d978290662fdc27a165a4ac524ab
+content_hash: 8fe3289710591015bc3fd7a1fc45ef11ee3ce949f590728231b386e25230d303
 ---
 
 
@@ -51,7 +51,7 @@ The summary can be configured, by scope language, to display the tags of the att
 
 By default, the summary displays the component creation date.
 
-To go even further, you can use the JS API to define your own summary. A dedicated section [here](/apis/jsapi/forms/task-attachment#summary.md).
+To go even further, you can use the JS API to define your own summary. A dedicated section [here](/docs/flowerdocs/apis/jsapi/forms/task-attachment#summary).
 
 # Answers
 

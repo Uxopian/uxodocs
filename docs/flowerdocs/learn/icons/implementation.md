@@ -2,9 +2,9 @@
 title: Implementation
 date: '2020-02-01T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 0ea1807cf89a29e8f8509e02f5b0018c9d1bdc4b26124acb88a6176c9ef2e4d8
+content_hash: 2d46cf62226b4d93fcc92420830339fd6ff99befa5271a22c0ea51fe6296fd1d
 ---
 
 
@@ -87,6 +87,6 @@ stacked(fa fa-envelope-open-text fa-lg green,fa fa-pen fa-sm align-text-top ml-0
 ```
 
 <!--:::info
-Find the scope module corresponding to this training [here]("".md)
+Find the scope module corresponding to this training [here]("")
 :::
 -->

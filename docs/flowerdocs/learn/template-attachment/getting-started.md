@@ -3,9 +3,9 @@ title: Getting Started
 description: Generate an attachment in Word format
 date: '2020-02-01T12:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 9711d9854edb8c9a7b15ee93814049c9a438609edeb08d6d6392c71218e76d5b
+content_hash: 1d9e08c15fd5d098a9e302a6b22b3b23fa48afae411bf24dbaa339eab5dbbf07
 ---
 
 
@@ -20,4 +20,4 @@ When you have finished this module, you will be able to:
 
 # Before getting started
 
-This tutorial requires the use of the GEC scope, as well as the FlowerDocs JavaScript API. It is based on the [TemplateAttachmentPlugin](/apis/plugins/attachment.md#TemplateAttachmentPlugin).
+This tutorial requires the use of the GEC scope, as well as the FlowerDocs JavaScript API. It is based on the [TemplateAttachmentPlugin](/docs/flowerdocs/apis/plugins/attachment#TemplateAttachmentPlugin).

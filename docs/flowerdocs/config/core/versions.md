@@ -3,9 +3,9 @@ title: Lifecycle
 description: Manage document versions
 date: '2020-02-01'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: dbac42d2b97c06d39fdc36f55e6eb79ed010e4b8880e9f567abdbb1e8c699202
+content_hash: b286d895c7148c8c4d77a0fa84f6a58b2cb0f6ca9c82c2d861f89b25e9a07bf2
 ---
 
 :::info
@@ -86,7 +86,7 @@ This mode is defined by document class to configure how versions are managed.
 
 By default, the `NumberedVersionLabelStrategy` strategy is used for each automatic version creation. It automatically defines the label of a new version as a minor version, incremented with each new version.
 
-From the document version consultation popup, you can manually create document versions. This action is accessible only if manual or automatic tracking is enabled and the user has permission to update content. [Different strategies](/apis/jsapi/version.md) are therefore available for naming versions. 
+From the document version consultation popup, you can manually create document versions. This action is accessible only if manual or automatic tracking is enabled and the user has permission to update content. [Different strategies](/docs/flowerdocs/apis/jsapi/version) are therefore available for naming versions. 
 
 
 ## Storage

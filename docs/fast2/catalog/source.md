@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: 38ea1c0f16303644043ee0ea5057637feea2f842d41cd03a046621d6c817dc29
+content_hash: 15fe923c28f745ee33dcd5bf9eef384a186536d3653091f4c72a97e993c22add
 ---
 ## AWSSource <small> - Complete extractor module from AWS S3 </small> {#AWSSource data-toc-label="AWSSource"}
 
@@ -12,7 +12,7 @@ This AWS extractor performs from a list of sources the extraction of your docume
 
 |Key      | Type    | Description | 
 | - | - | - |
- | AWS connection provider | [AWSConnectionProvider](credentials.md#AWSConnectionProvider) | Must have AmazonS3FullAccess permission | 
+ | AWS connection provider | [AWSConnectionProvider](credentials#AWSConnectionProvider) | Must have AmazonS3FullAccess permission | 
  | Source buckets | `String list` | Buckets where folders are stored | 
 
 
@@ -49,7 +49,7 @@ This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco RE
 |Key      | Type    | Description | 
 | - | - | - |
  | CMIS query or AFTS query | `String` | Query used to retrieve the objects from Alfresco <br/> <p> Ex/  SELECT * FROM cmis:document WHERE cmis:name LIKE 'test%' or cm:title:'test%'</p> | 
- | Alfresco connection provider | [AlfrescoRESTConnectionProvider](credentials.md#AlfrescoRESTConnectionProvider) |  | 
+ | Alfresco connection provider | [AlfrescoRESTConnectionProvider](credentials#AlfrescoRESTConnectionProvider) |  | 
 
 
 <b>Optional settings</b>
@@ -70,7 +70,7 @@ Through an SQL query, this alfresco extractor will use the CMIS technology to fe
 |Key      | Type    | Description | 
 | - | - | - |
  | SQL query to extract documents | `String` | Fast2 will retrieve all documents, folder, references, items and metadata matching this query. If the query is exhaustively specifying data to extract, uncheck the 'Extract document properties'. The data `cmis:objectId` will be mandatory. <br/> <p> Ex/  SELECT * FROM cmis:document</p> | 
- | Alfresco connection provider  | [AlfrescoCMISConnectionProvider](credentials.md#AlfrescoCMISConnectionProvider) | CMIS version must be 1.1 | 
+ | Alfresco connection provider  | [AlfrescoCMISConnectionProvider](credentials#AlfrescoCMISConnectionProvider) | CMIS version must be 1.1 | 
 
 
 <b>Optional settings</b>
@@ -113,7 +113,7 @@ This task is used to extract documents in the Content-Manager On Demand ECM. One
 
 |Key      | Type    | Description | 
 | - | - | - |
- | CMOD connection provider | [CMODConnectionProvider](credentials.md#CMODConnectionProvider) |  | 
+ | CMOD connection provider | [CMODConnectionProvider](credentials#CMODConnectionProvider) |  | 
  | Folders to extract | `String list` | List of CMOD folders which will be scanned. Additional level(s) of filter can be used with the SQL query down below. | 
 
 
@@ -137,7 +137,7 @@ This task is used to extract documents in the Content-Manager On Demand ECM. One
 
 |Key      | Type    | Description | 
 | - | - | - |
- | CM connection provider | [CMConnectionProvider](credentials.md#CMConnectionProvider) |  | 
+ | CM connection provider | [CMConnectionProvider](credentials#CMConnectionProvider) |  | 
  | SQL query | `String` | Select precisely documents you want to extract through a classic SQL query | 
 
 
@@ -201,7 +201,7 @@ This connector will extract basic information from the source Documentum reposit
 
 |Key      | Type    | Description | 
 | - | - | - |
- | Connexion information to Documentum Repository | [DctmConnectionProvider](credentials.md#DctmConnectionProvider) |  | 
+ | Connexion information to Documentum Repository | [DctmConnectionProvider](credentials#DctmConnectionProvider) |  | 
  | The DQL Query to run to fetch documents | `String` | The less attributes you fetch, the faster the query will be executed on the Documentum side. <br/> <p> Ex/  `SELECT r_object_id FROM dm_document WHERE ...`</p> | 
 
 
@@ -237,7 +237,7 @@ The FileNet35Source retrieves existing documents from the FileNet P8 3.5 ECM thr
 
 |Key      | Type    | Description | 
 | - | - | - |
- | FileNet 3.5 connection provider | [FileNet35ConnectionProvider](credentials.md#FileNet35ConnectionProvider) | Connection parameters to the FileNet instance | 
+ | FileNet 3.5 connection provider | [FileNet35ConnectionProvider](credentials#FileNet35ConnectionProvider) | Connection parameters to the FileNet instance | 
  | SQL query | `String` | SQL query corresponding to the list of documents to extract | 
 
 
@@ -262,7 +262,7 @@ The FileNetSource source retrieves existing documents from the FileNet P8 5.x EC
 | - | - | - |
  | Object store name | `String list` | Name of the repository to extract from | 
  | SQL query | `String` | SQL query corresponding to the list of documents to extract | 
- | FileNet connection provider | [FileNetConnectionProvider](credentials.md#FileNetConnectionProvider) | Connection parameters to the FileNet instance | 
+ | FileNet connection provider | [FileNetConnectionProvider](credentials#FileNetConnectionProvider) | Connection parameters to the FileNet instance | 
 
 
 <b>Optional settings</b>
@@ -290,7 +290,7 @@ Components can be documents, folders, virtual folders or tasks.
 
 |Key      | Type    | Description | 
 | - | - | - |
- | FlowerDocs connection provider | [FlowerDocsConnectionProvider](credentials.md#FlowerDocsConnectionProvider) |  | 
+ | FlowerDocs connection provider | [FlowerDocsConnectionProvider](credentials#FlowerDocsConnectionProvider) |  | 
  | Flower component category | `String` | Choose among DOCUMENT, TASK, FOLDER or VIRTUAL_FOLDER | 
  | JSON Flower Search Request | `String` |  | 
 
@@ -330,7 +330,7 @@ The MailSource task extracts messages from an e-mail box. Each extracted message
 
 |Key      | Type    | Description | 
 | - | - | - |
- | MailBox connection provider | [MailBoxProvider](credentials.md#MailBoxProvider) |  | 
+ | MailBox connection provider | [MailBoxProvider](credentials#MailBoxProvider) |  | 
 
 
 <b>Optional settings</b>
@@ -358,7 +358,7 @@ The MailSource task extracts messages from an e-mail box. Each extracted message
 
 |Key      | Type    | Description | 
 | - | - | - |
- | OpenText credentials | [OpenTextCredentials](credentials.md#OpenTextCredentials) |  | 
+ | OpenText credentials | [OpenTextCredentials](credentials#OpenTextCredentials) |  | 
  | OpenText client | OpenTextRestClient |  | 
  | Node Id | `Integer` |  | 
 
@@ -405,7 +405,7 @@ Extract and map to punnet or document layout specified properties
 
 |Key      | Type    | Description | 
 | - | - | - |
- | SQL connection provider | [SQLQueryGenericCaller](credentials.md#SQLQueryGenericCaller) |  | 
+ | SQL connection provider | [SQLQueryGenericCaller](credentials#SQLQueryGenericCaller) |  | 
  | SQL query | `String` | Select precisely documents you want to extract through a classic SQL query | 
 
 

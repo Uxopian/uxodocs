@@ -1,9 +1,9 @@
 ---
 title: Installation in Share
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: c58c239f992751502cb77ed89a8805a83c46afbd12d4fb0429df6b477ccfc54f
+content_hash: b3e3420d5cdc86ee597a4be06b16f85aafcb62c689eed0b5e1781e5c4b864e75
 ---
 
 
@@ -47,4 +47,4 @@ You can now start the alfresco server and try to open a file stored in it.
 
 ![alfresco](/img/arender/alfresco/alfresco-04.png)
 
-You have finished the quick installation of ARender for Alfresco Share. To go further, go to the page here : **[Advanced configuration](./guides/configurations/web-ui/connectors/alfresco/features-share.en.md)**
+You have finished the quick installation of ARender for Alfresco Share. To go further, go to the page here : **[Advanced configuration](/docs/arender/guides/configurations/web-ui/connectors/alfresco/features-share)**

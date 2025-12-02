@@ -2,9 +2,9 @@
 title: Minimum configuration
 date: '2001-03-28T14:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 46623198bf5ab39b38dd2cee089e9712ddd3580fe16ee005c1bb2961d905d239
+content_hash: 515fce2b6467f302b896e8e81a9966c7131f5c969f5b15927f3a098c0a1a42b0
 ---
 
 
@@ -64,4 +64,4 @@ To activate Plume in ARender, you need to :
 	plugins.routes.plume.url=http://localhost:8080/plume
 ```
 
-For more information on the use of **FlowerDocs GUI** plug-ins, see the documentation [here](/config/gui/plugins.md). 
+For more information on the use of **FlowerDocs GUI** plug-ins, see the documentation [here](/docs/flowerdocs/config/gui/plugins). 

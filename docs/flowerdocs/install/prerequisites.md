@@ -2,9 +2,9 @@
 title: Prerequisites
 date: '2000-03-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: 117616407268262d038bbe87fcef6645f6a54149a8239f50b7238173bca0ef46
+content_hash: 2662ab060c9fafc33b22bcfb48f0481f3a01d338871919e18b129b0d7cd95dd6
 ---
 
 
@@ -94,7 +94,7 @@ Applications can be configured via the following files:
 The FlowerDocs ARender connector `flower-docs-arender-hmi-.jar` is also required for the  application to be able to retrieve documents stored in FlowerDocs.
 
 :::info
-The necessary configuration is described on the dedicated page [here](./config/arender-hmi-config.md).
+The necessary configuration is described on the dedicated page [here](/docs/flowerdocs/install/config/arender-hmi-config).
 :::
 
 
@@ -124,7 +124,7 @@ To do this, you need to calculate the file's hash using the `SHA-256` hash funct
 
 <br/>
 :::info
-Would you like to download another version? Go to [old releases](../../../releases.md).
+Would you like to download another version? Go to [old releases](../../../releases).
 :::
 
 

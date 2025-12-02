@@ -7,9 +7,9 @@ tags:
   - AWS S3
   - content
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: 00ea5905da8972ed1f76ebc38c5dd8d605e7caf2298c1de4636a42c64be3b33f
+content_hash: 93ae7dd559f894be88d0c74a911bcc1e29ae03caf7490d77a1c3709a5e8c5b95
 ---
 
 ![Blog cover](../assets/img/cookbooks/content-metadata-from-s3_cover.png)
@@ -17,7 +17,7 @@ content_hash: 00ea5905da8972ed1f76ebc38c5dd8d605e7caf2298c1de4636a42c64be3b33f
 Extracting metadata from a S3 bucket needs to be done differently than what could be done with a regular content management system, because it is a storage space and not an ECM.
 
 :::warning 
-"Prior to v2.10, Fast2 needed a few steps to add “manually” (with [AlterDocumentProperties](../catalog/transformer.md#AlterDocumentProperties)) key and bucket information in the XML file, to then get corresponding PDF files."
+"Prior to v2.10, Fast2 needed a few steps to add “manually” (with [AlterDocumentProperties](/docs/fast2/catalog/transformer#AlterDocumentProperties) key and bucket information in the XML file, to then get corresponding PDF files."
 :::
 
 Extracting metadata from a S3 bucket needs to be done differently than what could be done with a regular content management system, where a document is a set of contents and metadata. Indeed, S3 bucket is a storage space and not an ECM (we’ll get into that a little bit later).
@@ -60,7 +60,7 @@ And finally, thanks to the source information, and XML metadata, we resolve the 
 
 ### 🔎 Find content from metadata
 
-In the [AWSSource](../catalog/source.md#AWSSource) task , we extract only interested XML files because they contain metadata :
+In the [AWSSource](/docs/fast2/catalog/source#AWSSource) task , we extract only interested XML files because they contain metadata :
 
 To only select punnet-formated XML correponding to the punnets, you will need to fill the AWS suffix field with : `xml`.
 
@@ -68,7 +68,7 @@ Optionally, you can also provide the concerned folder(s) in the Source folders i
 
 ![AWSContentSource task configuration](../assets/img/cookbooks/Image_AWS_Source2025.png)
 
-In the [AWSContentSource](../catalog/contentsource.md#AWSContentSource) task configuration, fields to fill are :
+In the [AWSContentSource](/docs/fast2/catalog/contentsource#AWSContentSource) task configuration, fields to fill are :
 
 - Bucket name : `${bucket}`
 - Content path (S3 object key) :

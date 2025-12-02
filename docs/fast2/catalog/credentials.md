@@ -1,9 +1,9 @@
 ---
 title: Credentials
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: d4d0df000ba3a24f18e3325be7f1a1f1e860897d0099e380a470739e3982868e
+content_hash: c183312eb178d9a167f94eadb7dab4e1e6d147a65ad2829e43997fb461bee1ef
 ---
 
 ## AWSConnectionProvider <small> - AWS S3 user credentials </small> {#AWSConnectionProvider data-toc-label="AWSConnectionProvider"}
@@ -131,7 +131,7 @@ This task is used to provide connection information to connect specifically to t
 | ------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
 | WCM Config resource | `String`                                               |                                                            |
 | Object store name   | `String`                                               | Name of the docbase involved in the migration              |
-| URL settings        | [WcmApiConfigSettings](helper.md#WcmApiConfigSettings) | Class used for setting multiple URLs (download, upload...) |
+| URL settings        | [WcmApiConfigSettings](helper#WcmApiConfigSettings) | Class used for setting multiple URLs (download, upload...) |
 
 ## FileNetConnectionProvider <small> - Connection provider for FileNet P8 solution </small> {#FileNetConnectionProvider data-toc-label="FileNetConnectionProvider"}
 

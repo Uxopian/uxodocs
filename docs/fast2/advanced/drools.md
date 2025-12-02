@@ -4,14 +4,14 @@ tags:
   - Java
   - Excel
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 2f99c1ff29c7a25ed3d0b17aff45d987d91d7306b46f96e73b60e8d999803c5f
+content_hash: 5b428f73ba351e7164c2300c3a203284eaf07f053b8dc0151f773181bc74ea63
 ---
 
 # Drools: the Java rules engine
 
-Based on Excel document, “drools” is a rule engine used to execute code scripts, Java code in our context. Users can define business and/or functional rules as data transformations, mapping, etc. One of the key benefits is its adaptation to any structure and any level of complexity as long as your code respects the punnet structure ([quick reminder here](../getting-started/overall-concepts.md#punnet) if need be 😉). It can easily be shared between your team members for complex project to have concerned people seamlessly involved. Another upside: no development skill is required to build your own rules. Fast2 supports such feature with the ApplyDroolsTask.
+Based on Excel document, “drools” is a rule engine used to execute code scripts, Java code in our context. Users can define business and/or functional rules as data transformations, mapping, etc. One of the key benefits is its adaptation to any structure and any level of complexity as long as your code respects the punnet structure ([quick reminder here](/docs/fast2/getting-started/overall-concepts#punnet) if need be 😉). It can easily be shared between your team members for complex project to have concerned people seamlessly involved. Another upside: no development skill is required to build your own rules. Fast2 supports such feature with the ApplyDroolsTask.
 
 A sample of Drools spreadsheet can be downloaded to help you getting started.
 

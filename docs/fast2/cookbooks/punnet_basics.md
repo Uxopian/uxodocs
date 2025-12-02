@@ -6,9 +6,9 @@ tags:
   - content
   - java
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 88f565988a022b5866fe758512143ae5a425aa4ba709106d5028b90a3a5a0874
+content_hash: 8a033119e3b2c0bb00c667e0f4a531fca70c1922daec5a202c18acdc1bb23cfb
 ---
 
 # Learn how to deal with punnets
@@ -17,7 +17,7 @@ content_hash: 88f565988a022b5866fe758512143ae5a425aa4ba709106d5028b90a3a5a0874
 
 Since the punnet is the pivot format into Fast2, all documents, folders and metadata can only be manipulated through this object. Here are the basics for an appropriate understanding of the Java API of the punnet object.
 
-For a better understanding of the following, the punnet structure needs to be clearly visualized. If required, go back to [the definition](../getting-started/overall-concepts.md#punnet) of such an object in Fast2.
+For a better understanding of the following, the punnet structure needs to be clearly visualized. If required, go back to [the definition](/docs/fast2/getting-started/overall-concepts#punnet) of such an object in Fast2.
 
 ## Creating a punnet
 
@@ -87,7 +87,7 @@ List<Document> myDocuments = myPunnet.getDocuments();
 
 As any Java list, documents can be removed as long as the correct index is provided.
 
-For more information concerning the documents, head out to the [dedicated section](document_basics.md).
+For more information concerning the documents, head out to the [dedicated section](document_basics).
 
 ## DataSet
 
@@ -101,7 +101,7 @@ DataSet myDataset = myPunnet.getDataSet();
 
 A punnet is built with an empty dataset by default.
 
-For more information concerning the dataset, head out to the [dedicated section](dataset_basics.md).
+For more information concerning the dataset, head out to the [dedicated section](dataset_basics).
 
 <!-- ## Workflows -->
 

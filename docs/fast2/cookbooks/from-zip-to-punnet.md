@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:38:43.134Z'
   author: CI/CD Bot
-content_hash: a5f11da7f6a2c83bd865f6b67bf137021f4da28b1e836e97278eb05bb69e35b3
+content_hash: 9d55040efb2af6b30920d691c79686ad585b677b57faa50fec385c45330d0660
 ---
 ![Blog cover](../assets/img/cookbooks/fromZiptoPunnet_cover.jpg)
 
@@ -57,11 +57,11 @@ At a glance, we are just 3 (major) steps away from having a PDF content in our p
 <br/>
 <br/>
 
-Since our purpose is to dive into the ZIP files, we first need to gather them all with the [LocalSource](../catalog/source.md#LocalSource) task, providing the parent folder where all these archives are currently being stored. The only required parameter is the path of the parent folder(s).
+Since our purpose is to dive into the ZIP files, we first need to gather them all with the [LocalSource](/docs/fast2/catalog/source#LocalSource) task, providing the parent folder where all these archives are currently being stored. The only required parameter is the path of the parent folder(s).
 
-The second step is now to open these files up, in order to provide access to both the PDF content and the JSON file, revealing at the same time the metadata we are looking for. Such exposure can be achieved by using the [DispatchingArchive](../catalog/converter.md#DispatchingArchive) task.
+The second step is now to open these files up, in order to provide access to both the PDF content and the JSON file, revealing at the same time the metadata we are looking for. Such exposure can be achieved by using the [DispatchingArchive](/docs/fast2/catalog/converter#DispatchingArchive) task.
 
-Once accessible, the JSON file can be parsed by the [JSTransform](../catalog/transformer.md#JSTransform) task. Choice is yours regarding where to store the data found in the JSON content of our ZIP archive, here they will be added to the dataset of the document.
+Once accessible, the JSON file can be parsed by the [JSTransform](/docs/fast2/catalog/transformer#JSTransform) task. Choice is yours regarding where to store the data found in the JSON content of our ZIP archive, here they will be added to the dataset of the document.
 
 Not a big deal, right ? Let's then tackle this challenge right away, shall we !!
 
@@ -76,20 +76,20 @@ Not a big deal, right ? Let's then tackle this challenge right away, shall we !!
 
 Inside Fast2, the map design is now pretty straightforward, given our ideas are rather clear in terms of <strike>the mission</strike> the overall order of the operations.
 
-The map is even quite close to the 3 steps detailed earlier. The [DispatchingArchive](../catalog/converter.md#DispatchingArchive) task just needs to be preceeded by a [MimeTypeFinder](../catalog/tool.md#MimeTypeFinder) task to highlight the archive format (here the ZIP extension is correct, but you could deal with archives without any extension, or mis-identified format).
+The map is even quite close to the 3 steps detailed earlier. The [DispatchingArchive](/docs/fast2/catalog/converter#DispatchingArchive) task just needs to be preceeded by a [MimeTypeFinder](/docs/fast2/catalog/tool#MimeTypeFinder) task to highlight the archive format (here the ZIP extension is correct, but you could deal with archives without any extension, or mis-identified format).
 
 That way, we end up with 4 tasks :
 
-- [LocalSource](../catalog/source.md#LocalSource), to collect the documents from local storage,
-- [MimeTypeFinder](../catalog/tool.md#MimeTypeFinder), to assert the archive file format,
-- [DispatchingArchive](../catalog/converter.md#DispatchingArchive), to open up the ZIPs,
-- [JSTransform](../catalog/transformer.md#JSTransform), to focus on the JSONs and parse its content.
+- [LocalSource](/docs/fast2/catalog/source#LocalSource), to collect the documents from local storage,
+- [MimeTypeFinder](/docs/fast2/catalog/tool#MimeTypeFinder), to assert the archive file format,
+- [DispatchingArchive](/docs/fast2/catalog/converter#DispatchingArchive), to open up the ZIPs,
+- [JSTransform](/docs/fast2/catalog/transformer#JSTransform), to focus on the JSONs and parse its content.
 
 ![Map to build for ZIP extraction](../assets/img/cookbooks/fromZip2Punnet_map.png)
 
-Although the configuration of the 3 first tasks can be easily guessed, the [JSTransform](../catalog/transformer.md#JSTransform) may need some extra consideration: the focus on the JSON content of the ZIP content of the document of the punnet (see where we are heading, here ? 👀) plus the parsing phase all happen here.
+Although the configuration of the 3 first tasks can be easily guessed, the [JSTransform](/docs/fast2/catalog/transformer#JSTransform) may need some extra consideration: the focus on the JSON content of the ZIP content of the document of the punnet (see where we are heading, here ? 👀) plus the parsing phase all happen here.
 
-The base script for this task (as it is presented [here](../advanced/javascript.md#map-from-json)) almost suits our need, except a minor tweaking to reach down the subcontent:
+The base script for this task (as it is presented [here](/docs/fast2/advanced/javascript#map-from-json) almost suits our need, except a minor tweaking to reach down the subcontent:
 
 ```js
 // First, get the document

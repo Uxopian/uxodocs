@@ -2,9 +2,9 @@
 title: Implementation
 date: '2020-02-01T11:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 3ac2034536c74d6126c68a6645e326827263000abf2ad8832510363ea47119c7
+content_hash: ba9e293a86ae19c878148fa47bf85e8edd5623f88092718e87dd6f140444268f
 ---
 
 
@@ -50,7 +50,7 @@ if(place.getPlaceType().startsWith('Browse') && (aggregation.indexOf('ENCOURS') 
 
 We now want to force the session to open only those tasks for which the priority entered is the same as that of the task at the origin of the session. 
 To do this, the user could modify the application search to include this search criterion. 
-However, it is also possible, by configuration, to modify the [session request](/apis/jsapi/recherche/list-processing.md)
+However, it is also possible, by configuration, to modify the [session request](/docs/flowerdocs/apis/jsapi/recherche/list-processing)
  as well as other parameters.
 
 In our example, we will modify our request and add the following priority criterion: 

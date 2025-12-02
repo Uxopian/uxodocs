@@ -2,9 +2,9 @@
 title: Contextual menus
 date: '2012-03-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 9293bec074c516bc45f05440c6efaa5f9f3f6b8864b709c33ebf0e6a1ac350e2
+content_hash: 435f6d28000e0266ea93e13647131059444eb2f2ec80e6eb557b4a17e9b5f88a
 ---
 
 
@@ -56,7 +56,7 @@ class="com.flower.docs.gui.client.search.document.DocumentContextualMenuPresente
 
 To define actions, it is necessary to: 
 
-* define them in the Spring context. To do this, refer to [this part of the documentation](/config/gui/indexation/context.md).
+* define them in the Spring context. To do this, refer to [this part of the documentation](/docs/flowerdocs/config/gui/indexation/context).
 * references in the appropriate context menu. 
 
 Example :__ Adding an ``exportToCRM`` JavaScript action to the context menu of the ``DefaultSearch`` document search form 

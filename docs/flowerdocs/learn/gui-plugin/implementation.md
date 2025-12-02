@@ -2,15 +2,15 @@
 title: Implementation
 date: '2020-02-01T11:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:41:34.882Z'
   author: CI/CD Bot
-content_hash: 6445b656289dbdd3422fc0b1d6c41e2324713968d2c35d2fc602c760cb06ec83
+content_hash: 0bea8e7efc904d6b55c738c7b84520b7914e4265e26dabb077f96131f10af23e
 ---
 
 
 # Goal
 
-The aim of this training module is to lay the foundations for the development of a secured [GUI plugin](index.md).
+The aim of this training module is to lay the foundations for the development of a secured [GUI plugin](configuration).
 This plugin can be consumed from and through **FlowerDocs GUI**. It will expose a service consuming the services exposed by **FlowerDocs Core**.
 
 
@@ -70,7 +70,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 
 ## Spring Boot application
 
-This Spring Boot application is based on the [Spring Boot starter](/apis/core/java.md) provided by FlowerDocs.
+This Spring Boot application is based on the [Spring Boot starter](/docs/flowerdocs/apis/core/java) provided by FlowerDocs.
 
 To start with, we need a _main class_ Spring Boot annotated with the `@SpringBootApplication` annotation: 
 

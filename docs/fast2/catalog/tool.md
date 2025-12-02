@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:26:41.610Z'
   author: CI/CD Bot
-content_hash: c692fcc71e4efbdbaee24c13468ba87c387f1d9d0762b9cf6e1388158b88d4b3
+content_hash: 1d56abf61e028e7a774b67c8528783e1cabb28dbc646fb048280444215c3a019
 ---
 ## AlfrescoRestDeleteNode <small> - Alfresco delete nodes using Alfresco REST protocol </small> {#AlfrescoRestDeleteNode data-toc-label="AlfrescoRestDeleteNode"}
 
@@ -12,7 +12,7 @@ This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco RE
 
 |Key      | Type    | Description | 
 | - | - | - |
- | Alfresco connection provider | [AlfrescoRESTConnectionProvider](credentials.md#AlfrescoRESTConnectionProvider) |  | 
+ | Alfresco connection provider | [AlfrescoRESTConnectionProvider](credentials#AlfrescoRESTConnectionProvider) |  | 
 
 
 <b>Optional settings</b>
@@ -32,7 +32,7 @@ Reorganize your files inside your AWS S3 environment.
 
 |Key      | Type    | Description | 
 | - | - | - |
- | AWS access credentials | [AWSConnectionProvider](credentials.md#AWSConnectionProvider) | Must have granted AmazonS3FullAccess permission | 
+ | AWS access credentials | [AWSConnectionProvider](credentials#AWSConnectionProvider) | Must have granted AmazonS3FullAccess permission | 
  | Target key | `String` | The destination path inside your bucket where the document must be placed. Use as standard Pattern (includes S3 Folders) | 
 
 
@@ -182,7 +182,7 @@ This task will be useful when your needs will be to move a given email conversat
 
 |Key      | Type    | Description | 
 | - | - | - |
- | Email provider | [MailBoxProvider](credentials.md#MailBoxProvider) | The Fast2 module establishing the connection to the email server, from the account of a given user. For more about the configuration of the object, please refer to the appropriate section | 
+ | Email provider | [MailBoxProvider](credentials#MailBoxProvider) | The Fast2 module establishing the connection to the email server, from the account of a given user. For more about the configuration of the object, please refer to the appropriate section | 
  | Destination folder | `String` | The folder where the email will eventually be moved to. This value will be resolved by Fast2 prior to the task execution | 
 
 
@@ -387,7 +387,7 @@ This task is responsible to find the mime type of a document accross either its 
 
 |Key      | Type    | Description | 
 | - | - | - |
- | Mime type retriever | [MimeTypeFinder](tool.md#MimeTypeFinder) | Module to find content mime type | 
+ | Mime type retriever | [MimeTypeFinder](tool#MimeTypeFinder) | Module to find content mime type | 
 
 
 <b>Optional settings</b>

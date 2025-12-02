@@ -1,11 +1,12 @@
 ---
 title: Configuration
 description: Configure the ARender viewer.
+slug: arender-config
 date: '2005-06-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:44:23.025Z'
   author: CI/CD Bot
-content_hash: af21550c6a36c5490a3f5082a8211e9821f76186ac5b5195d2e30eb7dd1e6e6a
+content_hash: 464f5d6fcc43e689c2d73dfbaa1e56bfa7395f9e5488a414f6bd295c67a424b2
 ---
 
 

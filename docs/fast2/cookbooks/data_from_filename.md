@@ -8,9 +8,9 @@ tags:
   - javascript
   - boilerplate
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: e3fa8bbd516376eb9ba359afcca6364fa379b121bfef8755d456a51b34802b6f
+content_hash: 27488360486d2497d27c697743fabb13c6ae1b6f701a14bae9ca616331f8bd16
 ---
 
 ![Data from file name cover](../assets/img/cookbooks/dataFromFilename_cover.png)
@@ -49,7 +49,7 @@ At a glance, we are just 3 (major) steps away from having a PDF content in our p
 
 1. Scan the parent folder and list all the documents with names to map,
 1. Get the document path, and isolate the file name
-1. Parse the file name and attach the metadata to the [dataset](../getting-started/overall-concepts.md#dataset). For this example, data will be mapped onto the document dataset.
+1. Parse the file name and attach the metadata to the [dataset](/docs/fast2/getting-started/overall-concepts#dataset). For this example, data will be mapped onto the document dataset.
 
 <br/>
 <br/>
@@ -58,14 +58,14 @@ At a glance, we are just 3 (major) steps away from having a PDF content in our p
 
 Inside Fast2, the map design is now pretty straightforward, given our ideas are rather clear in terms of the overall order of the operations.
 
-The map is even quite close to the 3 steps detailed earlier. The [LocalSource](../catalog/source.md#LocalSource) task just needs to be given the path of the folders to deal with. This task will also identify the file name and attach the metadata to the document dataset.
+The map is even quite close to the 3 steps detailed earlier. The [LocalSource](/docs/fast2/catalog/source#LocalSource) task just needs to be given the path of the folders to deal with. This task will also identify the file name and attach the metadata to the document dataset.
 
-Then the [JSTranform](../catalog/transformer.md#JSTransform) will retrieve the corresponding document path, and carry on with the data mapping.
+Then the [JSTranform](/docs/fast2/catalog/transformer#JSTransform) will retrieve the corresponding document path, and carry on with the data mapping.
 
 That way, we end up with 4 tasks :
 
-- [LocalSource](../catalog/source.md#LocalSource), to collect the documents from local storage,
-- [JSTranform](../catalog/transformer.md#JSTransform), whose role will be to :<br/>
+- [LocalSource](/docs/fast2/catalog/source#LocalSource), to collect the documents from local storage,
+- [JSTranform](/docs/fast2/catalog/transformer#JSTransform), whose role will be to :<br/>
   :one: parse the file name<br/>
   :two: add the data to the dataset
 
@@ -78,7 +78,7 @@ That way, we end up with 4 tasks :
 
 ### :test_tube: JavaScript elaboration
 
-Although the configuration of the first task can be easily guessed, the [JSTranform](../catalog/transformer.md#JSTransform) final resulting script should look something like this :
+Although the configuration of the first task can be easily guessed, the [JSTranform](/docs/fast2/catalog/transformer#JSTransform) final resulting script should look something like this :
 
 ```js
 punnet.getDocuments().forEach(function (doc) {
@@ -144,7 +144,7 @@ At the latest stage of your workflow, the document dataset is filled with the pr
 
 ## :clap: Let's sum up
 
-We can bring this scenario further by mapping data from the parent folder(s). We would just need the document path, which can be retrieved easily, as explained in [the advanced section of how to handle the JS Tranform task](../advanced/javascript.md).
+We can bring this scenario further by mapping data from the parent folder(s). We would just need the document path, which can be retrieved easily, as explained in [the advanced section of how to handle the JS Tranform task](/docs/fast2/advanced/javascript).
 
 For a OS-proofed script (Linux or Windows have their own subtleties when it comes to paths), you may need to make sure the parsing is done correctly, by standardizing the folder-architecture-related special characters from the Windows `\` to a regular `/`.
 

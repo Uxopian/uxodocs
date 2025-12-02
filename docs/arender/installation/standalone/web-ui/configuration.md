@@ -1,9 +1,9 @@
 ---
 title: Configuration
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:34:16.372Z'
   author: CI/CD Bot
-content_hash: b5f75867bbe083982240207552050e284c9fb34f825b550142306452d1e2404f
+content_hash: ac41ae5080cbf1f6705aed6e0594bf8a269ec4dbb6b1b720faa2bb819a4fb19a
 ---
 
 
@@ -18,11 +18,11 @@ content_hash: b5f75867bbe083982240207552050e284c9fb34f825b550142306452d1e2404f
 
 | File name                             | Details                                                                                                                                                                                                                                                                                                  |
 | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| arender-custom-client.properties      | Custom **ARender client properties** file. Available properties are listed inside. Uncomment and modify the properties value to use. More information here: [Profile](./guides/configurations/web-ui/visual/profile.en.md)                                                           |
+| arender-custom-client.properties      | Custom **ARender client properties** file. Available properties are listed inside. Uncomment and modify the properties value to use. More information here: [Profile](/docs/arender/guides/configurations/web-ui/visual/profile)                                                           |
 | arender-custom-server.properties      | Custom **ARender server properties** file. Available properties are listed inside. Uncomment and modify the properties value to use.                                                                                                                                                                     |
 | arender-custom-integration.xml        | Custom **Spring Bean XML** file. Add your custom XML **client configuration** in this file.                                                                                                                                                                                                              |
 | arender-custom-server-integration.xml | Custom **Spring Bean XML** file. Add your custom XML **server configuration** in this file.                                                                                                                                                                                                              |
-| application.properties                | Custom **Spring Boot properties** file. Add your custom Spring Boot configuration in this file. The various properties available are listed in [Spring's online documentation]("https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html".md). (File to create if needed).|
+| application.properties                | Custom **Spring Boot properties** file. Add your custom Spring Boot configuration in this file. The various properties available are listed in [Spring's online documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html). (File to create if needed).|
 
 ### Rendition server definition
 

@@ -3,9 +3,9 @@ title: Navigation
 description: Manage navigation between different screens
 date: '2006-03-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 9c178f30dc2a8d6b10936a1f6293528c2a62c4135dbb6a1a524e754738871060
+content_hash: a5b9ab2b4f01868614fc62d2481ee452809b7e0fb20674810c48df89c76e4c49
 ---
 
 :::info
@@ -32,7 +32,7 @@ var navigationJSAPI = JSAPI.get().getNavigationAPI();
 |goToComponentPlace(String category, String identifiant, boolean confirmation)| Redirects the user to the component modification screen, providing : <br/>- ``category`` : ``DOCUMENT``, ``FOLDER``, ``TASK``, ``VIRTUAL_FOLDER`` <br/>- ``identifiant`` : identifier of component to open <br/>- ``confirmation``: Boolean to deactivate confirmation at change of place if there are unsaved modifications   |   
 |goTo(Place place, boolean confirmation)                | Redirects the user to a seat <br/>- ``place`` : identifier of place to open <br/>- ``confirmation``: Boolean to deactivate confirmation at change of place if there are unsaved modifications |
 
-It is possible to redirect the user to a place built from different [tokens](/config/gui/menu/default.md).  
+It is possible to redirect the user to a place built from different [tokens](/docs/flowerdocs/config/gui/menu/default).  
 __Example :__ Redirect to a task creation screen ``GEC_Step0_Creation``
 
 ```javascript

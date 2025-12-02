@@ -4,9 +4,9 @@ description: React to an operation through a Drools decision table
 date: '2002-01-28T13:20:01+02:00'
 custom_edit_url: null
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 48105ab3bd1369bdcd5dc092461f3ffc9a5c3c9fb1c17104bc51983463d3752b
+content_hash: 325c43e06698ee0d25d7aa7b4e2df2ff182b3128daa8162895b95741c8ac57d5
 ---
 
 
@@ -27,7 +27,7 @@ The decision table is stored as the content of the document used to configure su
 # Conditions & Actions
 
 The conditions and actions defined must be Java code that can be compiled within **FlowerDocs Core**'s JVM.
-To facilitate their development, an object accessible through the variable `util` is made available whose exposed methods are listed [here](/config/core/appendices/context-util.md).
+To facilitate their development, an object accessible through the variable `util` is made available whose exposed methods are listed [here](/docs/flowerdocs/config/core/appendices/context-util).
 
 In order to contextualize decision-making, the `context` and `component` variables are provided when evaluating a decision table. They can therefore be used in conditions or actions. The `context` variable contains a [`com.flower.docs.operation.api.OperationContext`](#javadoc-com-flower-docs-operation-api-OperationContext) object storing the operation execution context.
 <br/>

@@ -2,9 +2,9 @@
 title: Indexing
 date: '2001-03-28T13:20:01+02:00'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: b781e251c650d393e8b2ee8f3b479ad8a128bed93a6277a547eb33ed19f46c88
+content_hash: 427dbf2bc4fafb9a45a83829d9b269bee2eca3f9638278a8a24f4bfc15003755
 ---
 
 
@@ -33,7 +33,7 @@ A number of functions are available for this purpose.
 |getTaskActions()                            | Retrieves task action container                                      | 
 |getFooterActions()                          | Retrieves action container from footer (validation, cancellation...)| 
 
-Section [Actions](/apis/jsapi/actions.md) documents the functions available for interacting with the various actions’ containers and the actions retrieved from these 3 containers. 
+Section [Actions](/docs/flowerdocs/apis/jsapi/actions) documents the functions available for interacting with the various actions’ containers and the actions retrieved from these 3 containers. 
 
 
 ## Adding cards 

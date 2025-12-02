@@ -5,9 +5,9 @@ description: >-
   storage.
 date: '2023-06-01'
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-02T14:29:22.460Z'
   author: CI/CD Bot
-content_hash: 94bfdd91e623e1e3511cf64ca005266c831c347c52d4e652ce5ab547f9d4f9bf
+content_hash: 0d3ca8b87e0c5754998e9b5ac3580ecc6544326de774e70ef2961d426ce39290
 ---
 
 
@@ -119,7 +119,7 @@ java -jar flower-docs-clm--bundle.jar dir encrypt --input=<directory to encrypt>
 
 ### Derived key
 
-In order to encrypt a directory using a derived key, the parameter to be supplied is `conf` with the value of the path to a configuration file containing the information mentioned in the [Derived key](/config/core/securite/files#derived-key.md) section and enable encryption: 
+In order to encrypt a directory using a derived key, the parameter to be supplied is `conf` with the value of the path to a configuration file containing the information mentioned in the [Derived key](/docs/flowerdocs/config/core/securite/files#derived-key) section and enable encryption: 
 
 ```properties
 #Enable encryption 
@@ -131,7 +131,7 @@ file.encrypt.passphrase=MyDerivedKey
 
 ### Keystore
 
-In order to encrypt a directory using a keystore strategy, the parameter to be supplied is `conf` with the value of the path to a configuration file containing the information mentioned in the [Keystore](/config/core/securite/files#keystore.md) section and enable encryption: 
+In order to encrypt a directory using a keystore strategy, the parameter to be supplied is `conf` with the value of the path to a configuration file containing the information mentioned in the [Keystore](/docs/flowerdocs/config/core/securite/files#keystore) section and enable encryption: 
 
 ```properties
 #Enable encryption 
