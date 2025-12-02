@@ -50,6 +50,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Patch search plugin
+        run: node scripts/patch-search-plugin.js
+
       - name: Clean old versions
         run: |
           # On nettoie uniquement les dossiers de versions éphémères créés par docusaurus
