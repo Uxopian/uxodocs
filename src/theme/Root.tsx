@@ -108,20 +108,20 @@ function useSearchResultsDecorator() {
         if (hitPath?.textContent) {
           const pathText = hitPath.textContent;
           
-          // D'abord vérifier les versions (plus fiable)
-          // v2023.14.x = ARender
-          if (pathText.match(/v2023\.14/)) {
+          // Détecter le produit via les patterns de version
+          // ARender: v2023.x, v2024.x (années 2023-2024)
+          if (pathText.match(/v202[34]\.\d/)) {
             product = 'arender';
           }
-          // v2025.3.x = FlowerDocs
+          // FlowerDocs: v2025.3.x (spécifiquement 2025.3)
           else if (pathText.match(/v2025\.3/)) {
             product = 'flowerdocs';
           }
-          // v2025.x.x (sans .3) = Fast2
-          else if (pathText.match(/v2025\.[x\d]/) && !pathText.match(/v2025\.3/)) {
+          // Fast2: v2025.x.x (2025 mais pas .3)
+          else if (pathText.match(/v2025\.[012456789x]/) || pathText.match(/v2025\.[1-9]\d/)) {
             product = 'fast2';
           }
-          // v2026 = Uxopian AI
+          // Uxopian AI: v2026.x
           else if (pathText.match(/v2026/)) {
             product = 'uxopian-ai';
           }
@@ -181,16 +181,32 @@ function useSearchResultsDecorator() {
           (hitAction as HTMLElement).style.cssText = 'display: none !important;';
         }
         
-        // Modifier le chemin pour afficher le nom du produit au lieu de la version
+        // Modifier le chemin pour afficher le nom du produit au début
         if (hitPath) {
           let pathText = hitPath.textContent || '';
-          // Remplacer toutes les versions par le nom du produit
-          pathText = pathText.replace(/^v[\d.x]+\s*›\s*/i, config.name + ' › ');
-          pathText = pathText.replace(/^v[\d.x]+\s*>\s*/i, config.name + ' › ');
-          // Si ça commence encore par une version
-          if (pathText.match(/^v\d/i)) {
-            pathText = config.name + ' › ' + pathText.replace(/^v[\d.x]+\s*›?\s*/i, '');
+          
+          // Vérifier si le chemin commence déjà par le nom du produit
+          const startsWithProductName = 
+            pathText.startsWith('Fast2') || 
+            pathText.startsWith('ARender') || 
+            pathText.startsWith('FlowerDocs') || 
+            pathText.startsWith('Uxopian');
+          
+          // Vérifier si le chemin commence par une version
+          const startsWithVersion = pathText.match(/^v\d/i);
+          
+          if (startsWithVersion) {
+            // Remplacer la version par le nom du produit
+            pathText = pathText.replace(/^v\d{4}(?:\.\d+)*(?:\.x)*\s*[›>]\s*/i, config.name + ' › ');
+            // Si ça commence encore par une version (autre format)
+            if (pathText.match(/^v\d/i)) {
+              pathText = config.name + ' › ' + pathText.replace(/^v\d{4}(?:\.\d+)*(?:\.x)*\s*[›>]?\s*/i, '');
+            }
+          } else if (!startsWithProductName) {
+            // Pas de version et pas de nom de produit -> ajouter le nom du produit au début
+            pathText = config.name + ' › ' + pathText;
           }
+          
           hitPath.textContent = pathText;
         }
         
