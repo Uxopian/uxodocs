@@ -27,8 +27,8 @@ export default function Footer(): JSX.Element {
           <div className="uxo-footer-column">
             <h4>Resources</h4>
             <ul>
-              <li><a href="https://uxopian.com/support" target="_blank" rel="noreferrer">Support</a></li>
-              <li><Link to="/contact">Contact Us</Link></li>
+              <li><a href="https://arondor.atlassian.net/servicedesk/customer/portal" target="_blank" rel="noreferrer">Support</a></li>
+              <li><Link to="https://www.uxopian.com/en/contact-us">Contact Us</Link></li>
             </ul>
           </div>
 

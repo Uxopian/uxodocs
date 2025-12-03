@@ -118,7 +118,7 @@ export default function SecondaryNav(): React.ReactElement | null {
 
     // Extra links for Fast2
     const extraLinks = product === 'fast2' ? [
-        { label: 'Get Support', href: 'https://arondor.atlassian.net/servicedesk/customer/portals', external: true },
+        { label: 'Get Support', href: 'https://arondor.atlassian.net/servicedesk/customer/portal/82', external: true },
         { label: 'Search the Knowledge-Base', href: 'https://arondor.atlassian.net/servicedesk/customer/portals?q=', external: true }
     ] : [];
 

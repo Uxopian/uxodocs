@@ -1,0 +1,109 @@
+.searchQueryInput {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1.1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  margin-bottom: 1.5rem;
+}
+
+.searchQueryInput:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-light);
+}
+
+.searchContextInput {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.searchQueryColumn {
+  padding-right: 0.5rem;
+}
+
+.searchContextColumn {
+  padding-left: 0.5rem;
+}
+
+.searchResultItem {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.searchResultItem:last-child {
+  border-bottom: none;
+}
+
+.searchResultItemContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.productLogo {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background-size: 55%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.searchResultItemText {
+  flex: 1;
+  min-width: 0;
+}
+
+.searchResultItem h2 {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.searchResultItem h2 a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.searchResultItem h2 a:hover {
+  text-decoration: underline;
+}
+
+.searchResultItemPath {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+  margin: 0 0 0.6rem 0;
+  display: block;
+}
+
+.searchResultItemSummary {
+  font-size: 0.95rem;
+  color: var(--ifm-font-color-secondary);
+  margin: 0.4rem 0 0 0;
+  line-height: 1.5;
+  display: block;
+}
+
+/* Highlight search terms */
+.searchResultItem mark {
+  background-color: var(--ifm-color-warning-contrast-background);
+  color: inherit;
+  padding: 0.1em 0.2em;
+  border-radius: 2px;
+}
+
+[data-theme='dark'] .searchResultItem mark {
+  background-color: rgba(255, 213, 79, 0.3);
+}

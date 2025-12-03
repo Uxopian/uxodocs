@@ -945,3 +945,50 @@ mark.url-highlight {
   opacity: 0.4;
   margin-bottom: 12px;
 }
+
+/* ========================================
+   SHAREABLE SEARCH BUTTON
+   ======================================== */
+
+/* Input wrapper in dropdown needs relative positioning */
+[class*="inputWrapper"] {
+  position: relative !important;
+}
+
+/* Search share button styling - positioned inside input wrapper */
+.search-share-btn {
+  position: absolute !important;
+  right: 32px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  color: var(--ifm-color-emphasis-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  z-index: 10;
+}
+
+.search-share-btn:hover {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-primary);
+}
+
+.search-share-btn:active {
+  transform: translateY(-50%) scale(0.92) !important;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .search-share-btn {
+  color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .search-share-btn:hover {
+  background: var(--ifm-color-emphasis-700);
+  color: var(--ifm-color-primary);
+}
