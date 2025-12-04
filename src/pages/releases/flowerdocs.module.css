@@ -178,7 +178,7 @@
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 
+    box-shadow:
         0 6px 24px rgba(0, 0, 0, 0.08),
         0 2px 8px rgba(0, 0, 0, 0.04),
         inset 0 0 0 1px rgba(255, 255, 255, 0.5),
@@ -199,12 +199,10 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.15),
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.15),
+            transparent);
     transition: left 0.6s ease;
     pointer-events: none;
     z-index: 100;
@@ -222,12 +220,10 @@
     left: 0;
     right: 0;
     height: 40%;
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.35) 0%,
-        rgba(255, 255, 255, 0.08) 30%,
-        transparent 100%
-    );
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.35) 0%,
+            rgba(255, 255, 255, 0.08) 30%,
+            transparent 100%);
     border-radius: 16px 16px 0 0;
     pointer-events: none;
     opacity: 0.6;
@@ -238,7 +234,7 @@
     background: rgba(20, 20, 25, 0.6);
     backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
     -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
-    box-shadow: 
+    box-shadow:
         0 6px 24px rgba(0, 0, 0, 0.6),
         0 2px 8px rgba(0, 0, 0, 0.4),
         inset 0 0 0 1px rgba(255, 255, 255, 0.2),
@@ -248,19 +244,17 @@
 }
 
 [data-theme='dark'] .releaseCard::after {
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.05) 20%,
-        rgba(255, 255, 255, 0.02) 40%,
-        transparent 100%
-    );
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 20%,
+            rgba(255, 255, 255, 0.02) 40%,
+            transparent 100%);
     opacity: 1;
 }
 
 .releaseCard:hover {
     transform: translateY(-8px) scale(1.01);
-    box-shadow: 
+    box-shadow:
         0 16px 48px rgba(0, 0, 0, 0.15),
         0 6px 16px rgba(0, 0, 0, 0.08),
         inset 0 0 0 1px rgba(255, 255, 255, 0.6),
@@ -269,7 +263,7 @@
 }
 
 [data-theme='dark'] .releaseCard:hover {
-    box-shadow: 
+    box-shadow:
         0 16px 48px rgba(0, 0, 0, 0.8),
         0 6px 16px rgba(0, 0, 0, 0.6),
         inset 0 0 0 1px rgba(255, 255, 255, 0.25),
@@ -339,7 +333,7 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border-radius: 6px;
-    box-shadow: 
+    box-shadow:
         0 2px 8px rgba(215, 69, 255, 0.4),
         inset 0 1px 2px rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
@@ -356,7 +350,7 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border-radius: 6px;
-    box-shadow: 
+    box-shadow:
         0 2px 8px rgba(253, 126, 20, 0.4),
         inset 0 1px 2px rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
@@ -430,12 +424,10 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.15),
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.15),
+            transparent);
     transition: left 0.5s ease;
 }
 
@@ -502,12 +494,60 @@
     }
 
     .releaseGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .releaseCard {
+        border-radius: 12px;
+    }
+
+    .cardHeader {
+        padding: 0.75rem 1rem;
+    }
+
+    .versionNumber {
+        font-size: 1rem;
+    }
+
+    .releaseDate {
+        font-size: 0.75rem;
+    }
+
+    .cardBody {
+        padding: 0.75rem 1rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+        line-height: 1.4;
+        margin-bottom: 0.75rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .readMoreLink {
+        padding: 0.3rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .upgradeLink {
+        padding: 0.3rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .latestBadge,
+    .latestV2Badge {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.4rem;
     }
 
     .links {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.75rem;
+        gap: 0.5rem;
     }
 }
