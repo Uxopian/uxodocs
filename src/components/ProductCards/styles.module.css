@@ -4,7 +4,7 @@
     position: relative;
     overflow: visible;
     margin-top: calc(-1 * var(--ifm-navbar-height));
-    padding-top: calc(3rem + var(--ifm-navbar-height));
+    padding-top: calc(1rem + var(--ifm-navbar-height));
 }
 
 .backgroundWrapper {

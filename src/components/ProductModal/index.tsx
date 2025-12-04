@@ -94,7 +94,6 @@ interface ProductCardWithVersionsProps {
 function ProductCardWithVersions({ title, pluginId, logo, description, link, color, gradient, onClose }: ProductCardWithVersionsProps) {
     const logoUrl = useBaseUrl(logo);
     
-    // Récupérer les versions depuis les données du plugin
     let versions: string[] = [];
     try {
         const pluginData = usePluginData(`docusaurus-plugin-content-docs`, pluginId) as any;
@@ -102,7 +101,6 @@ function ProductCardWithVersions({ title, pluginId, logo, description, link, col
             versions = pluginData.versions.map((v: any) => v.label || v.name);
         }
     } catch (error) {
-        // Si pas de versions disponibles (en local), ne rien afficher
         console.log(`No versions found for ${title}`);
     }
 

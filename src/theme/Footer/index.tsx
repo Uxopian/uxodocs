@@ -44,7 +44,9 @@ export default function Footer(): JSX.Element {
             <h4>Connect</h4>
             <div className="uxo-footer-social">
               <a className="social-link" href="https://www.linkedin.com/company/uxopiansoftware/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.6 4.1 5.5 3 5.5C1.9 5.5 1 4.6 1 3.5C1 2.4 1.9 1.5 3 1.5C4.1 1.5 4.98 2.4 4.98 3.5Z"/><path d="M6 8H1V23H6V8Z"/><path d="M11 8H6V23H11V15.5C11 12.42 16 12.08 16 15.5V23H21V14C21 8.5 14.5 8.2 11 11.2V8Z"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19 0H5C2.23858 0 0 2.23858 0 5V19C0 21.7614 2.23858 24 5 24H19C21.7614 24 24 21.7614 24 19V5C24 2.23858 21.7614 0 19 0ZM7 19H4V9H7V19ZM5.5 7.732C4.53498 7.732 3.75 6.94802 3.75 5.982C3.75 5.016 4.53498 4.232 5.5 4.232C6.46602 4.232 7.25 5.016 7.25 5.982C7.25 6.94802 6.46602 7.732 5.5 7.732ZM20 19H17V13.396C17 11.934 16.974 9.998 14.813 9.998C12.624 9.998 12.25 11.868 12.25 13.272V19H9.25V9H12.062V10.26H12.108C12.558 9.552 13.663 8.8 15.298 8.8C18.972 8.8 20 10.872 20 13.796V19Z" />
+                </svg>
               </a>
 
               <a className="social-link" href="https://www.youtube.com/@Uxopian" target="_blank" rel="noreferrer" aria-label="YouTube">

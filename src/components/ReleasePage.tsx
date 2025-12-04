@@ -30,7 +30,7 @@ interface ReleasePageProps {
 }
 
 const ReleaseNoteCard = memo(function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink }: any) {
-    const formattedDate = new Date(note.date).toLocaleDateString('fr-FR', {
+    const formattedDate = new Date(note.date).toLocaleDateString('en-EN', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
