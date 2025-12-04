@@ -110,8 +110,8 @@ export default function UXopianFeed() {
     return (
       <div className={styles.uxopianFeed}>
         <div className={styles.feedHeader}>Last articles</div>
-        <div className={styles.feedList} style={{padding: '1rem', textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem'}}>
-          Loading...
+        <div className={styles.feedList}>
+          <div className={styles.loadingText}>Loading...</div>
         </div>
       </div>
     );

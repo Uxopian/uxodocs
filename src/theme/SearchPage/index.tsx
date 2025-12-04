@@ -320,7 +320,7 @@ function SearchResultItem({
   if (Mark && tokens.length > 0) {
     const params = new URLSearchParams();
     for (const token of tokens) {
-      params.append("_highlight", token);
+      params.append("h", token);
     }
     search = `?${params.toString()}`;
   }

@@ -916,16 +916,31 @@ mark.url-highlight {
   padding-top: 12px !important;
   border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
   text-align: center !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 [data-theme='dark'] [class*="hitFooter"] {
   border-top-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-[class*="hitFooter"] a {
+[class*="hitFooter"],
+[class*="hitFooter"] a,
+[class*="hitFooter"] span,
+[class*="hitFooter"] * {
   color: var(--ifm-color-primary) !important;
   font-weight: 600 !important;
   font-size: 0.85rem !important;
+}
+
+/* Protection du lien "See all results" même quand sélectionné */
+[class*="suggestion"][class*="cursor"] [class*="hitFooter"],
+[class*="suggestion"][class*="cursor"] [class*="hitFooter"] a,
+[class*="suggestion"][class*="cursor"] [class*="hitFooter"] span,
+[class*="suggestion"][class*="cursor"] [class*="hitFooter"] *,
+[class*="cursor"] [class*="hitFooter"],
+[class*="cursor"] [class*="hitFooter"] a,
+[class*="cursor"] [class*="hitFooter"] * {
+  color: var(--ifm-color-primary) !important;
 }
 
 [class*="hitFooter"] a:hover {
