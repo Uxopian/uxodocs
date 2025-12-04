@@ -2,6 +2,42 @@
    NAVBAR - STYLES & COMPORTEMENT
    ======================================== */
 
+/* Masquer les dropdowns de version dans le menu mobile et utiliser ::before pour afficher le nom du produit */
+@media (max-width: 996px) {
+  .navbar-sidebar .navbar__item.dropdown .navbar__link {
+    font-size: 0 !important;
+  }
+  
+  /* Fast2 */
+  .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/fast2"]) .navbar__link::before {
+    content: 'Fast2';
+    font-size: 1rem;
+  }
+  
+  /* ARender */
+  .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/arender"]) .navbar__link::before {
+    content: 'ARender';
+    font-size: 1rem;
+  }
+  
+  /* FlowerDocs */
+  .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/flowerdocs"]) .navbar__link::before {
+    content: 'FlowerDocs';
+    font-size: 1rem;
+  }
+  
+  /* Uxopian AI */
+  .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/uxopian-ai"]) .navbar__link::before {
+    content: 'Uxopian AI';
+    font-size: 1rem;
+  }
+  
+  /* Garder les icônes visibles */
+  .navbar-sidebar .navbar__item.dropdown .navbar__link svg {
+    font-size: 1rem !important;
+  }
+}
+
 .navbar__link.verdd {
   display: inline-flex;
   align-items: center;
@@ -127,6 +163,7 @@ body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke
   .navbar__link.verdd::before {
     content: none;
   }
+
 }
 
 .navbar__item.dropdown .dropdown__menu {
