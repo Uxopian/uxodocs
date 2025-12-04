@@ -105,6 +105,10 @@ const config: Config = {
   ],
 
   themeConfig: {
+    colorMode: {
+      defaultMode: 'dark',
+      respectPrefersColorScheme: false,
+    },
     navbar: {
       logo: { alt: 'UXO', src: 'img/uxopian-o.png' },
       items: [
@@ -118,7 +122,7 @@ const config: Config = {
 
       ],
     },
-	
+
     footer: {
       style: 'dark',
       links: [
