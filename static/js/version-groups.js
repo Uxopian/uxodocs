@@ -155,34 +155,51 @@
             reset();
             setTimeout(groupVersions, 200);
         });
-        
+
         // Hook dans le router Docusaurus si disponible
-        const checkAndReapply = function() {
+        const checkAndReapply = function () {
             const hasGroups = document.querySelector('.version-group');
             const hasVersionLinks = document.querySelector('.navbar__item.dropdown .dropdown__menu a');
-            
+
             if (hasVersionLinks && !hasGroups) {
                 console.log('Version links found without groups, applying...');
                 groupVersions();
             }
         };
-        
+
         // Vérifier périodiquement pendant les 5 premières secondes après le chargement
         let checks = 0;
-        const interval = setInterval(function() {
+        const interval = setInterval(function () {
             checkAndReapply();
             checks++;
             if (checks >= 10) {
                 clearInterval(interval);
             }
         }, 500);
-        
+
         // Vérifier aussi à chaque clic sur un dropdown
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             const dropdown = e.target.closest('.navbar__item.dropdown');
             if (dropdown) {
                 setTimeout(checkAndReapply, 100);
             }
+        });
+        
+        // Écouter les événements de navigation Docusaurus (SPA)
+        // Docusaurus émet un événement personnalisé lors de la navigation
+        let lastUrl = location.href;
+        const urlChangeObserver = new MutationObserver(function() {
+            if (location.href !== lastUrl) {
+                lastUrl = location.href;
+                console.log('URL changed (SPA navigation), reapplying...');
+                reset();
+                setTimeout(groupVersions, 300);
+            }
+        });
+        
+        urlChangeObserver.observe(document.querySelector('body'), {
+            childList: true,
+            subtree: true
         });
     }
 })();
