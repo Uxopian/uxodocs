@@ -84,9 +84,9 @@
                 // Insérer avant le premier lien du groupe
                 versions[0].parentNode.insertBefore(groupWrapper, versions[0]);
 
-                // Cacher tous les liens originaux de ce groupe
+                // SUPPRIMER (pas juste cacher) tous les liens originaux de ce groupe
                 versions.forEach(link => {
-                    link.style.display = 'none';
+                    link.remove();
                 });
             });
             
@@ -95,12 +95,6 @@
                 console.log(`Found ${others.length} other versions (not grouped)`);
                 // Les laisser telles quelles, elles apparaîtront après les groupes
             }
-            
-            // IMPORTANT : Cacher tous les liens originaux qui ont été groupés
-            // Cela évite les doublons quand une version est sélectionnée
-            allGroupedLinks.forEach(link => {
-                link.style.display = 'none';
-            });
         });
     }
 
