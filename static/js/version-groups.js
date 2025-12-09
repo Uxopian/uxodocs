@@ -135,6 +135,7 @@
         });
 
         if (shouldReapply) {
+            console.log('DOM changed, reapplying grouping...');
             reset();
             setTimeout(groupVersions, 150);
         }
@@ -144,13 +145,44 @@
         const navbar = document.querySelector('.navbar');
         if (navbar) {
             observer.observe(navbar, { childList: true, subtree: true });
+            console.log('Observer installed on navbar');
         }
     }, 1000);
 
     if (typeof window !== 'undefined') {
         window.addEventListener('popstate', function () {
+            console.log('Navigation detected (popstate)');
             reset();
             setTimeout(groupVersions, 200);
+        });
+        
+        // Hook dans le router Docusaurus si disponible
+        const checkAndReapply = function() {
+            const hasGroups = document.querySelector('.version-group');
+            const hasVersionLinks = document.querySelector('.navbar__item.dropdown .dropdown__menu a');
+            
+            if (hasVersionLinks && !hasGroups) {
+                console.log('Version links found without groups, applying...');
+                groupVersions();
+            }
+        };
+        
+        // Vérifier périodiquement pendant les 5 premières secondes après le chargement
+        let checks = 0;
+        const interval = setInterval(function() {
+            checkAndReapply();
+            checks++;
+            if (checks >= 10) {
+                clearInterval(interval);
+            }
+        }, 500);
+        
+        // Vérifier aussi à chaque clic sur un dropdown
+        document.addEventListener('click', function(e) {
+            const dropdown = e.target.closest('.navbar__item.dropdown');
+            if (dropdown) {
+                setTimeout(checkAndReapply, 100);
+            }
         });
     }
 })();
