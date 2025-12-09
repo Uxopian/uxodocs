@@ -1,6 +1,3 @@
-/* Groupement visuel des versions par année avec sous-menu */
-
-/* Conteneur pour le groupe d'années */
 .navbar__item.dropdown .dropdown__menu {
   overflow: visible !important;
 }
@@ -60,11 +57,10 @@
   color: var(--ifm-font-color-base);
 }
 
-/* S'assurer qu'aucun lien actif ne garde son style dans le sous-menu */
 .version-group__submenu-item.dropdown__link--active {
-  background: transparent !important;
-  color: var(--ifm-font-color-base) !important;
-  font-weight: normal !important;
+  background: var(--ifm-menu-color-background-active) !important;
+  color: var(--ifm-menu-color-active) !important;
+  font-weight: 600 !important;
 }
 
 /* Mode sombre */
