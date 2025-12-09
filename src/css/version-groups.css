@@ -1,0 +1,80 @@
+/* Groupement visuel des versions par année avec sous-menu */
+
+/* Conteneur pour le groupe d'années */
+.navbar__item.dropdown .dropdown__menu {
+  overflow: visible !important;
+}
+
+.version-group {
+  position: relative;
+  margin: 4px 0;
+}
+
+.version-group__header {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  transition: background 0.2s ease;
+}
+
+.version-group__header:hover {
+  background: var(--ifm-color-emphasis-200);
+}
+
+.version-group__submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 140px;
+  background: var(--ifm-dropdown-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  box-shadow: var(--ifm-global-shadow-md);
+  margin-left: 4px;
+  z-index: 1001;
+  padding: 4px 0;
+}
+
+.version-group:hover .version-group__submenu {
+  display: block;
+}
+
+.version-group__submenu-item {
+  display: block;
+  padding: 8px 16px;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.version-group__submenu-item:hover {
+  background: var(--ifm-color-emphasis-100);
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+}
+
+/* Mode sombre */
+[data-theme='dark'] .version-group__header {
+  background: var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .version-group__header:hover {
+  background: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .version-group__submenu {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .version-group__submenu-item:hover {
+  background: var(--ifm-color-emphasis-200);
+}
+
