@@ -12,6 +12,15 @@
             // Éviter de traiter plusieurs fois le même dropdown
             if (processed.has(dropdown)) return;
 
+            // Vérifier s'il y a déjà des groupes créés (éviter double traitement)
+            if (dropdown.querySelector('.version-group')) {
+                console.log('Already grouped, skipping dropdown');
+                processed.add(dropdown);
+                return;
+            }
+
+            console.log('Processing dropdown:', dropdown);
+
             const links = Array.from(dropdown.querySelectorAll('a'));
             console.log('Found links:', links.length);
 
@@ -21,7 +30,7 @@
             const groups = {};
             const others = [];
             const allGroupedLinks = new Set();
-            
+
             links.forEach(link => {
                 const text = link.textContent.trim();
                 // Format vYYYY.X.X ou vYYYY.X
@@ -75,6 +84,11 @@
                 versions.forEach(link => {
                     const linkClone = link.cloneNode(true);
                     linkClone.className = 'version-group__submenu-item';
+
+                    // Retirer toutes les classes d'état actif
+                    linkClone.classList.remove('dropdown__link--active');
+                    linkClone.removeAttribute('aria-current');
+
                     submenu.appendChild(linkClone);
                 });
 
@@ -89,7 +103,7 @@
                     link.remove();
                 });
             });
-            
+
             // Gérer les versions "autres" (v1, v2, etc.) - ne pas les grouper si peu nombreuses
             if (others.length > 0) {
                 console.log(`Found ${others.length} other versions (not grouped)`);
@@ -100,13 +114,21 @@
 
     // Fonction pour réinitialiser l'état
     function reset() {
+        console.log('Resetting version groups...');
         processed.clear();
+
+        // Retirer tous les groupes existants
+        const existingGroups = document.querySelectorAll('.version-group');
+        console.log('Removing', existingGroups.length, 'existing groups');
+        existingGroups.forEach(function (group) {
+            group.remove();
+        });
     }
 
     // Exécuter au chargement avec plusieurs tentatives
     function tryGroupVersions(attempts = 0) {
         groupVersions();
-        
+
         // Réessayer si aucun dropdown n'a été traité (max 5 fois)
         if (processed.size === 0 && attempts < 5) {
             setTimeout(() => tryGroupVersions(attempts + 1), 200);
@@ -123,13 +145,21 @@
 
     // Observer les changements dans la navbar pour réappliquer après navigation
     const observer = new MutationObserver(function (mutations) {
+        let shouldReapply = false;
+
         mutations.forEach(function (mutation) {
-            if (mutation.addedNodes.length > 0) {
-                // Réinitialiser et réappliquer
-                reset();
-                setTimeout(groupVersions, 100);
-            }
+            // Vérifier si des liens de version ont été ajoutés
+            mutation.addedNodes.forEach(function (node) {
+                if (node.nodeType === 1 && (node.matches('a') || node.querySelector('a'))) {
+                    shouldReapply = true;
+                }
+            });
         });
+
+        if (shouldReapply) {
+            reset();
+            setTimeout(groupVersions, 150);
+        }
     });
 
     // Observer la navbar
@@ -139,10 +169,10 @@
             observer.observe(navbar, { childList: true, subtree: true });
         }
     }, 1000);
-    
+
     // Réappliquer au changement de route (navigation Docusaurus)
     if (typeof window !== 'undefined') {
-        window.addEventListener('popstate', function() {
+        window.addEventListener('popstate', function () {
             reset();
             setTimeout(groupVersions, 200);
         });

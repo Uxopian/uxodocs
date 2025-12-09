@@ -60,6 +60,13 @@
   color: var(--ifm-font-color-base);
 }
 
+/* S'assurer qu'aucun lien actif ne garde son style dans le sous-menu */
+.version-group__submenu-item.dropdown__link--active {
+  background: transparent !important;
+  color: var(--ifm-font-color-base) !important;
+  font-weight: normal !important;
+}
+
 /* Mode sombre */
 [data-theme='dark'] .version-group__header {
   background: var(--ifm-color-emphasis-200);
