@@ -20,6 +20,7 @@
             // Grouper par année et format
             const groups = {};
             const others = [];
+            const allGroupedLinks = new Set();
             
             links.forEach(link => {
                 const text = link.textContent.trim();
@@ -31,6 +32,7 @@
                         groups[year] = [];
                     }
                     groups[year].push(link);
+                    allGroupedLinks.add(link);
                 } else {
                     // Versions sans année (v1, v2, etc.)
                     others.push(link);
@@ -93,22 +95,44 @@
                 console.log(`Found ${others.length} other versions (not grouped)`);
                 // Les laisser telles quelles, elles apparaîtront après les groupes
             }
+            
+            // IMPORTANT : Cacher tous les liens originaux qui ont été groupés
+            // Cela évite les doublons quand une version est sélectionnée
+            allGroupedLinks.forEach(link => {
+                link.style.display = 'none';
+            });
         });
     }
 
-    // Exécuter au chargement
+    // Fonction pour réinitialiser l'état
+    function reset() {
+        processed.clear();
+    }
+
+    // Exécuter au chargement avec plusieurs tentatives
+    function tryGroupVersions(attempts = 0) {
+        groupVersions();
+        
+        // Réessayer si aucun dropdown n'a été traité (max 5 fois)
+        if (processed.size === 0 && attempts < 5) {
+            setTimeout(() => tryGroupVersions(attempts + 1), 200);
+        }
+    }
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(groupVersions, 500);
+            setTimeout(() => tryGroupVersions(), 300);
         });
     } else {
-        setTimeout(groupVersions, 500);
+        setTimeout(() => tryGroupVersions(), 300);
     }
 
     // Observer les changements dans la navbar pour réappliquer après navigation
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
             if (mutation.addedNodes.length > 0) {
+                // Réinitialiser et réappliquer
+                reset();
                 setTimeout(groupVersions, 100);
             }
         });
@@ -121,4 +145,12 @@
             observer.observe(navbar, { childList: true, subtree: true });
         }
     }, 1000);
+    
+    // Réappliquer au changement de route (navigation Docusaurus)
+    if (typeof window !== 'undefined') {
+        window.addEventListener('popstate', function() {
+            reset();
+            setTimeout(groupVersions, 200);
+        });
+    }
 })();
