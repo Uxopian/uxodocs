@@ -80,7 +80,7 @@
   "uxopian-ai": [
     {
       "label": "Administration",
-      "href": "/docs/uxopian-ai/administration/backup-recovery"
+      "href": "/docs/uxopian-ai/administration/application_monitoring"
     },
     {
       "label": "Architecture",
@@ -92,15 +92,15 @@
     },
     {
       "label": "Configuration",
-      "href": "/docs/uxopian-ai/configuration/api-reference"
+      "href": "/docs/uxopian-ai/configuration/api_references"
     },
     {
       "label": "Getting Started",
-      "href": "/docs/uxopian-ai/getting-started/installation-guide"
+      "href": "/docs/uxopian-ai/getting_started/installation_guide"
     },
     {
       "label": "How To Guides",
-      "href": "/docs/uxopian-ai/how-to-guides/contributing"
+      "href": "/docs/uxopian-ai/how_to_guides/common_operational_tasks"
     }
   ]
 }

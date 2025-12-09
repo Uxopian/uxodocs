@@ -18,7 +18,10 @@ const config: Config = {
 	onBrokenLinks: 'warn',
 	markdown: {
 		hooks: { onBrokenMarkdownLinks: 'warn', onBrokenMarkdownImages: 'warn' },
+		mermaid: true,
 	},
+
+	themes: ['@docusaurus/theme-mermaid'],
 
 	presets: [
 		[

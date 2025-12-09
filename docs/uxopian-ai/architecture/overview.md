@@ -1,62 +1,175 @@
 ---
-title: Architecture Overview
-description: >-
-  Framework design, covering both high-level components and software-level
-  interactions
-sidebar_position: 1
+title: Overview
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
+  date: '2025-12-09T08:57:14.951Z'
   author: CI/CD Bot
-content_hash: 0dbc297cd7021c24ca0b5e8460cfc7fcc8d632b0ad7d2e23f3989ce096e72c06
+content_hash: 1e4801aae3574bb82fef84ae71ad2fb03d82613bec74f8e29094530fb2d51015
 ---
-
-# Architecture
 
 This section provides insight into the framework's design, covering both the high-level components and the software-level interactions.
 
+---
+
 ## Component Architecture
 
-The `uxopian-ai` framework is composed of several key components that work together to deliver its functionality.
+This section provides insight into the framework's design, covering both the high-level components and the software-level interactions, specifically highlighting the security integration via the BFF pattern.
 
-![Component Architecture](/img/uxopian-ai/mermaid-graph.png)
+The **uxopian-ai** framework is designed as a backend microservice that sits behind a security gateway. It is composed of several key components working in concert.
 
-* **Client Application**: The user-facing application (like ARender or FlowerDocs) that initiates requests to the `uxopian-ai` service via its REST API.
-* **uxopian-ai Service**: The core of the framework. This standalone Java application is responsible for:
+```mermaid
+graph TD
+    subgraph "Client Environment"
+        Client[Client Application: e.g. ARender, FlowerDocs]
+    end
 
-  * Exposing the REST API for all interactions.
-  * Managing conversations and messages.
-  * Resolving Goals and Prompts using the templating engine.
-  * Connecting to various external LLM providers via the `llm-clients` module.
-  * Persisting conversation history.
-* **OpenSearch**: The primary data store for the framework. It is used to save and retrieve all Conversations, Messages, Prompts, and Goals, providing the necessary context for ongoing interactions.
-* **ARender Rendition Service**: An external service used by the templating engine to fetch data, such as extracting the full text of a document using its ID (`documentService.extractTextualContent(documentId)`).
-* **Qdrant**: An optional vector database used for advanced Retrieval-Augmented Generation (RAG) use cases.
-* **External LLM Providers**: Third-party services (like OpenAI, Anthropic, Azure OpenAI, etc.) that perform the actual language model processing. The `uxopian-ai` service acts as a unified gateway to these providers.
+    subgraph "Security Layer"
+        BFF[BFF / Gateway: Handles Auth & Header Injection]
+    end
+
+    subgraph "uxopian-ai Service"
+        Service[ai-standalone: Spring Boot Application]
+    end
+
+    subgraph "External & Dependent Services"
+        OpenSearch[(OpenSearch)]
+        Rendition[ARender Rendition Service]
+        Qdrant[(Qdrant: Vector Database)]
+        LLM[External LLM Providers: OpenAI, Azure, etc.]
+    end
+
+    Client -- REST API Request --> BFF
+    BFF -- Proxies Request (Adds X-User headers) --> Service
+    
+    Service -- Stores & Retrieves Data --> OpenSearch
+    Service -- Fetches document content: e.g. documentService.extractTextualContent --> Rendition
+    Service -- (Optional) RAG/Vector Search --> Qdrant
+    Service -- Sends Prompts --> LLM
+    
+    LLM -- Returns Completions --> Service
+    
+    Service -- API Response --> BFF
+    BFF -- Proxies Response --> Client
+```
+
+### Component Descriptions
+
+**Client Application**
+User-facing application (e.g., **ARender**, **FlowerDocs**) that initiates requests.
+It never communicates directly with **uxopian-ai**.
+
+**BFF / Gateway (Security Layer)**
+Entry point for all traffic. Responsible for:
+
+- Authenticating the user (SSO, OAuth, etc.)
+- Injecting security headers (`X-User-TenantId`, `X-User-Id`, `X-User-Roles`)
+- Proxying the request to the backend service
+
+**uxopian-ai Service**
+The core of the framework. This standalone Java application:
+
+- Exposes the REST API (consumed by the BFF)
+- Manages conversations and messages per Tenant ID
+- Resolves Goals and Prompts via the templating engine
+- Connects to external LLM providers using the `llm-clients` module
+
+**OpenSearch**
+Primary data store for:
+
+- Conversations
+- Messages
+- Prompts
+- Goals
+
+**ARender Rendition Service**
+External service used to fetch document content (e.g., extracting text).
+
+**Qdrant**
+Optional vector database enabling RAG (Retrieval-Augmented Generation).
+
+**External LLM Providers**
+Third-party services (OpenAI, Azure, etc.) handling natural language processing.
 
 ---
 
 ## Software Architecture (Request Flow)
 
-To understand how the components interact, let's trace the lifecycle of a typical API call: sending a message that uses a Goal.
+To understand how the components interact, here is the lifecycle of a typical API call: sending a message that triggers a Goal.
 
-The chat module handles incoming messages with a clear priority system: a `goalName` is processed first, followed by a `promptId`, and finally a simple content message.
+The request flow emphasizes the role of the **BFF** in establishing the security context before the service logic executes.
 
 ### Sequence Diagram: Executing a Goal
 
-![Sequence Diagram](/img/uxopian-ai/mermaid-sequence.png)
+```mermaid
+sequenceDiagram
+    participant Client
+    participant BFF as BFF / Gateway
+    participant Service as uxopian-ai Service
+    participant OS as OpenSearch
+    participant LLM as External LLM
 
-### Workflow Steps
+    Client->>+BFF: POST /api/v1/requests?conversation=\{id\}
+    Note right of Client: \{ inputs: [ \{ type: "goal", value: "compare", payload: \{...\} \} ] \}
 
-1. **Request**: The client sends a message to a conversation, specifying a `goalName` and a payload with context variables.
-2. **Goal Resolution**: The service queries OpenSearch to find the Goal(s) matching the specified name.
-3. **Filter Evaluation**: It evaluates the filter conditions defined in the retrieved Goal(s) against the payload to select the appropriate `promptId`.
-4. **Prompt Retrieval**: The service retrieves the corresponding Prompt definition from OpenSearch using its ID.
-5. **Context Retrieval**: It queries OpenSearch to fetch the recent message history for the conversation, providing context.
-6. **Template Rendering**: The templating engine (Thymeleaf) assembles the final prompt, injecting the message history and the variables from the client's payload. This may involve calling external services like the ARender Rendition Service to fetch data.
-7. **LLM Interaction**: The service sends the complete prompt to the configured external LLM provider.
-8. **Persistence**: Upon receiving the response, the service saves both the user's request and the LLM's answer as new messages in OpenSearch.
-9. **Response**: The final answer from the LLM is sent back to the client.
+    Note over BFF: Authenticate User
+    BFF->>BFF: Inject Headers (X-User-TenantId, X-User-Id...)
 
----
+    BFF->>+Service: Forward Request (with Auth Headers)
+    
+    Service->>Service: Identify message type (Goal > PromptId > Content)
+    Note over Service: Goal detected in input. Resolving...
 
-Next, let's dive into the [Core Concepts](/docs/uxopian-ai/concepts/overview) of the framework.
+    Service->>+OS: Find Goal named "compare"
+    OS-->>-Service: Return matching Goal definitions
+
+    Service->>Service: Evaluate Goal filters vs. payload
+    Note over Service: Filter matches => selects promptId: "detailedComparison"
+
+    Service->>+OS: Get Prompt by ID "detailedComparison"
+    OS-->>-Service: Return Prompt template
+
+    Service->>+OS: Get recent conversation messages
+    OS-->>-Service: Return context history
+
+    Service->>Service: Render final prompt with Thymeleaf
+
+    Service->>+LLM: Send rendered prompt
+    LLM-->>-Service: Return LLM-generated response
+
+    Service->>+OS: Persist user message and LLM response
+    OS-->>-Service: Confirm storage
+
+    Service-->>-BFF: Return response
+    BFF-->>-Client: Forward response
+```
+
+## Workflow Steps
+
+1. **Client Request**
+   Client sends a request to the BFF (e.g., `POST /api/v1/requests`) with a goal input such as `"compare"`.
+
+2. **Authentication & Injection**
+   The BFF authenticates, then injects `X-User-TenantId`, `X-User-Id`, etc.
+
+3. **Context Establishment**
+   uxopian-ai reads the headers to derive the security context.
+
+4. **Goal Resolution**
+   The service queries OpenSearch for Goals matching `"compare"` in the tenant.
+
+5. **Filter Evaluation**
+   SpEL filters narrow the choice to a specific `promptId` (e.g., `"detailedComparison"`).
+
+6. **Prompt & Context Retrieval**
+   The Prompt definition and conversation history are loaded.
+
+7. **Template Rendering**
+   Thymeleaf produces the final LLM prompt, optionally pulling external content.
+
+8. **LLM Interaction**
+   The prompt is sent to the configured LLM provider.
+
+9. **Persistence**
+   User message and LLM response are saved in OpenSearch.
+
+10. **Response**
+    The final response is returned through the BFF to the client.
