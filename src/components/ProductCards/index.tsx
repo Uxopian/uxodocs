@@ -11,7 +11,7 @@ const ProductList = [
         description: 'Document migration platform to transform and migrate your documents to different systems',
         link: '/docs/fast2',
         releaseNotesLink: '/releases?product=fast2',
-        color: '#5CB8C7',
+        color: '#2D7A86',
         gradient: 'linear-gradient(135deg, #5CB8C7, #4AA5B4, #3A8F9D, #2F7D8B)'
     },
     {
@@ -21,7 +21,7 @@ const ProductList = [
         description: 'Electronic document management (EDM) solution to organize, manage and exploit your document content',
         link: '/docs/flowerdocs',
         releaseNotesLink: '/releases?product=flowerdocs',
-        color: '#D745FF',
+        color: '#9B1FCC',
         gradient: 'linear-gradient(135deg, #D745FF, #C55BFF, #B56BFF, #A47BFF)'
     },
     {
@@ -31,7 +31,7 @@ const ProductList = [
         description: 'High-performance document viewer to display and annotate all types of documents',
         link: '/docs/arender',
         releaseNotesLink: '/releases?product=arender',
-        color: '#4A8FEF',
+        color: '#2563D8',
         gradient: 'linear-gradient(135deg, #4A8FEF, #3A7EE5, #2A6DD8, #1865D8)'
     },
     {
@@ -41,7 +41,7 @@ const ProductList = [
         description: 'Complete framework to easily integrate powerful AI features into your enterprise applications',
         link: '/docs/uxopian-ai',
         releaseNotesLink: '/releases?product=uxopian-ai',
-        color: '#F59E0B',
+        color: '#C46F05',
         gradient: 'linear-gradient(135deg, #F59E0B, #E07D09, #C76E08, #A85A07)'
     }
 ];

@@ -184,19 +184,17 @@
                 setTimeout(checkAndReapply, 100);
             }
         });
-        
-        // Écouter les événements de navigation Docusaurus (SPA)
-        // Docusaurus émet un événement personnalisé lors de la navigation
+
         let lastUrl = location.href;
-        const urlChangeObserver = new MutationObserver(function() {
+        const urlChangeObserver = new MutationObserver(function () {
             if (location.href !== lastUrl) {
                 lastUrl = location.href;
                 console.log('URL changed (SPA navigation), reapplying...');
                 reset();
-                setTimeout(groupVersions, 300);
+                setTimeout(groupVersions, 100);
             }
         });
-        
+
         urlChangeObserver.observe(document.querySelector('body'), {
             childList: true,
             subtree: true
