@@ -15,15 +15,6 @@ type Product = {
 
 const PRODUCTS: Product[] = [
   {
-    id: 'fast2',
-    label: 'Fast2',
-    to: '/uxodocs/releases?product=fast2',
-    logo: '/img/fast2/Fast2_favicon_white.png',
-    gradient: 'linear-gradient(135deg, #5CB8C7 0%, #4AA5B4 50%, #3A8F9D 100%)',
-    color: '#5CB8C7',
-    description: 'Content Migration Platform',
-  },
-  {
     id: 'arender',
     label: 'ARender',
     to: '/uxodocs/releases?product=arender',
@@ -31,6 +22,15 @@ const PRODUCTS: Product[] = [
     gradient: 'linear-gradient(135deg, #4A8FEF 0%, #3A7EE5 50%, #2A6DD8 100%)',
     color: '#4A8FEF',
     description: 'Document Viewing Solution',
+  },
+  {
+    id: 'fast2',
+    label: 'Fast2',
+    to: '/uxodocs/releases?product=fast2',
+    logo: '/img/fast2/Fast2_favicon_white.png',
+    gradient: 'linear-gradient(135deg, #5CB8C7 0%, #4AA5B4 50%, #3A8F9D 100%)',
+    color: '#5CB8C7',
+    description: 'Content Migration Platform',
   },
   {
     id: 'flowerdocs',

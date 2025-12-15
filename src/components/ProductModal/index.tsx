@@ -6,6 +6,15 @@ import styles from './styles.module.css';
 
 const ProductList = [
     {
+        title: 'ARender',
+        pluginId: 'arender',
+        logo: '/img/arender/arender_logo_white.png',
+        description: 'High-performance document viewer to display and annotate all types of documents',
+        link: '/docs/arender',
+        color: '#4A8FEF',
+        gradient: 'linear-gradient(135deg, #4A8FEF, #3A7EE5)'
+    },
+    {
         title: 'Fast2',
         pluginId: 'fast2',
         logo: '/img/fast2/Fast2_favicon_white.png',
@@ -22,15 +31,6 @@ const ProductList = [
         link: '/docs/flowerdocs',
         color: '#D745FF',
         gradient: 'linear-gradient(135deg, #D745FF, #C55BFF)'
-    },
-    {
-        title: 'ARender',
-        pluginId: 'arender',
-        logo: '/img/arender/arender_logo_white.png',
-        description: 'High-performance document viewer to display and annotate all types of documents',
-        link: '/docs/arender',
-        color: '#4A8FEF',
-        gradient: 'linear-gradient(135deg, #4A8FEF, #3A7EE5)'
     },
     {
         title: 'Uxopian AI',
@@ -93,7 +93,7 @@ interface ProductCardWithVersionsProps {
 
 function ProductCardWithVersions({ title, pluginId, logo, description, link, color, gradient, onClose }: ProductCardWithVersionsProps) {
     const logoUrl = useBaseUrl(logo);
-    
+
     let versions: string[] = [];
     try {
         const pluginData = usePluginData(`docusaurus-plugin-content-docs`, pluginId) as any;
@@ -118,8 +118,8 @@ function ProductCardWithVersions({ title, pluginId, logo, description, link, col
                 <div className={styles.cardBody}>
                     <div className={styles.versions}>
                         {versions.map((version, idx) => (
-                            <Link 
-                                key={idx} 
+                            <Link
+                                key={idx}
                                 to={link}
                                 className={styles.versionLink}
                                 onClick={onClose}

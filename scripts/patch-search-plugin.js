@@ -67,17 +67,14 @@ try {
     console.error('❌ Error patching SuggestionTemplate:', error.message);
 }
 
-// === PATCH 2: SearchBar - change _highlight to h ===
 try {
     let content = fs.readFileSync(searchBarPath, 'utf8');
 
-    if (content.includes('SEARCH_PARAM_HIGHLIGHT = "_highlight"')) {
+    if (content.includes('SEARCH_PARAM_HIGHLIGHT = "h"')) {
         content = content.replace(
-            'const SEARCH_PARAM_HIGHLIGHT = "_highlight"',
-            'const SEARCH_PARAM_HIGHLIGHT = "h"'
+            'const SEARCH_PARAM_HIGHLIGHT = "h"',
         );
         fs.writeFileSync(searchBarPath, content, 'utf8');
-        console.log('✅ SearchBar patched (_highlight → h)');
     } else if (content.includes('SEARCH_PARAM_HIGHLIGHT = "h"')) {
         console.log('✅ SearchBar already patched');
     } else {

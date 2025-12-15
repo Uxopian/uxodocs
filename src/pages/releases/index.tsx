@@ -131,7 +131,7 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink }:
     // Helper to convert hex to rgba string
     const hexToRgba = (hex: string, alpha: number) => {
         const h = hex.replace('#', '');
-        const bigint = parseInt(h.length === 3 ? h.split('').map(c=>c+c).join('') : h, 16);
+        const bigint = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
         const r = (bigint >> 16) & 255;
         const g = (bigint >> 8) & 255;
         const b = bigint & 255;
@@ -202,10 +202,10 @@ function hexToRgba(hex: string, alpha = 1) {
 export default function UnifiedReleasesPage() {
     // Get initial product from URL parameter
     const getInitialProduct = (): Product => {
-        if (typeof window === 'undefined') return 'fast2';
+        if (typeof window === 'undefined') return 'arender';
         const params = new URLSearchParams(window.location.search);
         const productParam = params.get('product') as Product;
-        return PRODUCTS_CONFIG[productParam] ? productParam : 'fast2';
+        return PRODUCTS_CONFIG[productParam] ? productParam : 'arender';
     };
 
     const [activeProduct, setActiveProduct] = useState<Product>(getInitialProduct());
@@ -246,9 +246,9 @@ export default function UnifiedReleasesPage() {
         }
     });
 
-    const enhancedNotes = filteredNotes.map((n) => ({ 
-        ...n, 
-        isLatestV2: n.majorVersion === '2' && n.version === (latestByMajor['2'] || '') 
+    const enhancedNotes = filteredNotes.map((n) => ({
+        ...n,
+        isLatestV2: n.majorVersion === '2' && n.version === (latestByMajor['2'] || '')
     }));
 
     // Reset filter when product changes
@@ -259,8 +259,8 @@ export default function UnifiedReleasesPage() {
     return (
         <Layout title="Release Notes" description="Explore all product release notes">
             <div className={config.styles.releasesPage}>
-                <ProductCarousel3D 
-                    current={activeProduct} 
+                <ProductCarousel3D
+                    current={activeProduct}
                     onProductChange={handleProductChange}
                 />
 
@@ -317,12 +317,12 @@ export default function UnifiedReleasesPage() {
                         <div className={config.styles.releaseGrid} key={`${activeProduct}-${selectedFilter}`}>
                             {enhancedNotes.map((note: any, index: number) => (
                                 <div key={note.version} style={{ animationDelay: `${index * 0.02}s` }}>
-                                    <ReleaseNoteCard 
-                                        note={note} 
-                                        styles={config.styles} 
-                                        cardColor={config.cardColor} 
-                                        readMoreLink={config.readMoreLink} 
-                                        upgradeLink={config.upgradeLink} 
+                                    <ReleaseNoteCard
+                                        note={note}
+                                        styles={config.styles}
+                                        cardColor={config.cardColor}
+                                        readMoreLink={config.readMoreLink}
+                                        upgradeLink={config.upgradeLink}
                                     />
                                 </div>
                             ))}
@@ -331,8 +331,8 @@ export default function UnifiedReleasesPage() {
                         {enhancedNotes.length === 0 && (
                             <div className={config.styles.emptyState}>
                                 <p>
-                                    {allNotes.length === 0 
-                                        ? 'No releases available yet for this product.' 
+                                    {allNotes.length === 0
+                                        ? 'No releases available yet for this product.'
                                         : 'No releases found for this filter.'}
                                 </p>
                             </div>
