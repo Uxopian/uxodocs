@@ -109,7 +109,7 @@ jobs:
       - name: Build
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
-        run: npm run build
+        run: BUILD_PDF=1 npm run build
 
       - name: Add .nojekyll
         run: touch build/.nojekyll
