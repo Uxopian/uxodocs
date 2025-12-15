@@ -109,3 +109,87 @@
   background-color: #ffd54f;
   color: #000;
 }
+
+/* Product Filters */
+.productFilters {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.productFilterButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 70px;
+}
+
+.productFilterButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.productFilterButtonActive {
+  border-color: var(--product-color, var(--ifm-color-primary));
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background: var(--ifm-color-emphasis-100);
+}
+
+.productFilterIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-size: 55%;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+}
+
+.productFilterButton:first-child .productFilterIcon {
+  background-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .productFilterButton:first-child .productFilterIcon {
+  background-color: var(--ifm-color-emphasis-400);
+}
+
+.productFilterLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  text-align: center;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .productFilters {
+    gap: 0.5rem;
+  }
+
+  .productFilterButton {
+    min-width: 60px;
+    padding: 0.4rem;
+  }
+
+  .productFilterIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .productFilterLabel {
+    font-size: 0.7rem;
+  }
+}

@@ -28,17 +28,17 @@ import { Mark, searchContextByPaths, useAllContextsWithNoSearchContext } from "@
 import { normalizeContextByPath } from "@easyops-cn/docusaurus-search-local/dist/client/client/utils/normalizeContextByPath";
 import styles from "./SearchPage.module.css";
 
-// Product configuration
+// Product configuration - in alphabetical order
 const PRODUCT_CONFIG: Record<string, { name: string; logo: string; bgColor: string }> = {
-  'fast2': {
-    name: 'Fast2',
-    logo: '/img/fast2/Fast2_favicon_white.png',
-    bgColor: '#2D7D9A',
-  },
   'arender': {
     name: 'ARender',
     logo: '/img/arender/arender_logo_white.png',
     bgColor: '#3A6FD8',
+  },
+  'fast2': {
+    name: 'Fast2',
+    logo: '/img/fast2/Fast2_favicon_white.png',
+    bgColor: '#2D7D9A',
   },
   'flowerdocs': {
     name: 'FlowerDocs',
@@ -52,36 +52,39 @@ const PRODUCT_CONFIG: Record<string, { name: string; logo: string; bgColor: stri
   },
 };
 
+// Product keys in alphabetical order
+const PRODUCT_KEYS = ['arender', 'fast2', 'flowerdocs', 'uxopian-ai'] as const;
+
 function detectProduct(url: string, pathText: string): string | null {
   const combined = (url + ' ' + pathText).toLowerCase();
-  
+
   if (combined.includes('/docs/arender') || combined.includes('arender')) return 'arender';
   if (combined.includes('/docs/fast2') || combined.includes('fast2')) return 'fast2';
   if (combined.includes('/docs/flowerdocs') || combined.includes('flowerdocs')) return 'flowerdocs';
   if (combined.includes('/docs/uxopian-ai') || combined.includes('uxopian')) return 'uxopian-ai';
-  
+
   // Version-based detection
   if (combined.match(/v202[34]\.\d/)) return 'arender';
   if (combined.match(/v2025\.3/)) return 'flowerdocs';
   if (combined.match(/v2025\.[012456789x]/)) return 'fast2';
   if (combined.match(/v2026/)) return 'uxopian-ai';
-  
+
   return null;
 }
 
 function formatPathWithProduct(pathText: string, productName: string): string {
   // Replace version at the start with product name
   const versionPattern = /^v\d{4}(?:\.\d+)*(?:\.x)?\s*[›>•·\-]?\s*/i;
-  
+
   if (versionPattern.test(pathText)) {
     return pathText.replace(versionPattern, productName + ' › ');
   }
-  
+
   // If doesn't start with product name, prepend it
   if (!pathText.startsWith(productName)) {
     return productName + ' › ' + pathText;
   }
-  
+
   return pathText;
 }
 
@@ -108,24 +111,25 @@ function SearchPageContent() {
   } = useSearchQuery();
   const [searchQuery, setSearchQuery] = useState(searchValue);
   const [searchResults, setSearchResults] = useState<any[]>();
+  const [selectedProduct, setSelectedProduct] = useState<string>('all');
   const versionUrl = `${baseUrl}${searchVersion}`;
 
   const pageTitle = useMemo(
     () =>
       searchQuery
         ? translate(
-            {
-              id: "theme.SearchPage.existingResultsTitle",
-              message: 'Search results for "{query}"',
-              description: "The search page title for non-empty query",
-            },
-            { query: searchQuery }
-          )
+          {
+            id: "theme.SearchPage.existingResultsTitle",
+            message: 'Search results for "{query}"',
+            description: "The search page title for non-empty query",
+          },
+          { query: searchQuery }
+        )
         : translate({
-            id: "theme.SearchPage.emptyResultsTitle",
-            message: "Search the documentation",
-            description: "The search page title for empty query",
-          }),
+          id: "theme.SearchPage.emptyResultsTitle",
+          message: "Search the documentation",
+          description: "The search page title for empty query",
+        }),
     [searchQuery]
   );
 
@@ -249,21 +253,74 @@ function SearchPageContent() {
           </div>
         )}
 
+        {searchResults && searchResults.length > 0 && (
+          <div className={styles.productFilters}>
+            <button
+              className={`${styles.productFilterButton} ${selectedProduct === 'all' ? styles.productFilterButtonActive : ''}`}
+              onClick={() => setSelectedProduct('all')}
+              title="All Products"
+            >
+              <div className={styles.productFilterIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+              </div>
+              <span className={styles.productFilterLabel}>All</span>
+            </button>
+            {PRODUCT_KEYS.map((productKey) => {
+              const config = PRODUCT_CONFIG[productKey];
+              const logoUrl = baseUrl.replace(/\/$/, '') + config.logo;
+              return (
+                <button
+                  key={productKey}
+                  className={`${styles.productFilterButton} ${selectedProduct === productKey ? styles.productFilterButtonActive : ''}`}
+                  onClick={() => setSelectedProduct(productKey)}
+                  style={{
+                    '--product-color': config.bgColor,
+                  } as React.CSSProperties}
+                  title={config.name}
+                >
+                  <div
+                    className={styles.productFilterIcon}
+                    style={{
+                      backgroundImage: `url('${logoUrl}')`,
+                      backgroundColor: config.bgColor,
+                    }}
+                  />
+                  <span className={styles.productFilterLabel}>{config.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
         {searchResults &&
           (searchResults.length > 0 ? (
             <p>
-              {selectMessage(
-                searchResults.length,
-                translate(
-                  {
-                    id: "theme.SearchPage.documentsFound.plurals",
-                    message: "1 document found|{count} documents found",
-                    description:
-                      'Pluralized label for "{count} documents found".',
-                  },
-                  { count: searchResults.length }
-                )
-              )}
+              {(() => {
+                const filteredCount = selectedProduct === 'all'
+                  ? searchResults.length
+                  : searchResults.filter((item) => {
+                    const pathText = concatDocumentPath((item.type === SearchDocumentType.Title ? item.document.b : item.page.b).slice());
+                    const product = detectProduct(item.document.u || '', pathText);
+                    return product === selectedProduct;
+                  }).length;
+                return selectMessage(
+                  filteredCount,
+                  translate(
+                    {
+                      id: "theme.SearchPage.documentsFound.plurals",
+                      message: "1 document found|{count} documents found",
+                      description:
+                        'Pluralized label for "{count} documents found".',
+                    },
+                    { count: filteredCount }
+                  )
+                );
+              })()}
             </p>
           ) : process.env.NODE_ENV === "production" ? (
             <p>
@@ -282,13 +339,20 @@ function SearchPageContent() {
 
         <section>
           {searchResults &&
-            searchResults.map((item: any) => (
-              <SearchResultItem
-                key={item.document.i}
-                searchResult={item}
-                baseUrl={baseUrl}
-              />
-            ))}
+            searchResults
+              .filter((item: any) => {
+                if (selectedProduct === 'all') return true;
+                const pathText = concatDocumentPath((item.type === SearchDocumentType.Title ? item.document.b : item.page.b).slice());
+                const product = detectProduct(item.document.u || '', pathText);
+                return product === selectedProduct;
+              })
+              .map((item: any) => (
+                <SearchResultItem
+                  key={item.document.i}
+                  searchResult={item}
+                  baseUrl={baseUrl}
+                />
+              ))}
         </section>
       </div>
     </React.Fragment>
@@ -330,7 +394,7 @@ function SearchResultItem({
   const product = detectProduct(document.u || '', pathText);
   const config = product ? PRODUCT_CONFIG[product] : null;
   const logoUrl = config ? baseUrl.replace(/\/$/, '') + config.logo : null;
-  
+
   // Format path with product name
   const formattedPath = config ? formatPathWithProduct(pathText, config.name) : pathText;
 
@@ -355,11 +419,11 @@ function SearchResultItem({
                   isContent || isDescriptionOrKeywords
                     ? highlight(articleTitle, tokens)
                     : highlightStemmed(
-                        articleTitle,
-                        getStemmedPositions(metadata, "t"),
-                        tokens,
-                        100
-                      ),
+                      articleTitle,
+                      getStemmedPositions(metadata, "t"),
+                      tokens,
+                      100
+                    ),
               }}
             />
           </h2>
