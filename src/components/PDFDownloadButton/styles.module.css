@@ -1,0 +1,56 @@
+.pdfButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    padding: 1rem;
+}
+
+.pdfButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.875rem 1.75rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.25);
+    cursor: pointer;
+}
+
+.pdfButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+    text-decoration: none;
+    color: white;
+}
+
+.pdfButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.pdfIcon {
+    flex-shrink: 0;
+}
+
+/* Dark mode support */
+[data-theme='dark'] .pdfButton {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+}
+
+[data-theme='dark'] .pdfButton:hover {
+    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.5);
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .pdfButton {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9375rem;
+    }
+}

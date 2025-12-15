@@ -9,7 +9,7 @@
     "update:lastModified": "node ./scripts/updateLastModified.mjs",
     "generate:topCategories": "node ./scripts/generateTopCategories.mjs",
     "generate:releases": "node ./scripts/generateFast2Releases.mjs && node ./scripts/generateFlowerDocsReleases.mjs && node ./scripts/generateARenderReleases.mjs",
-    "build": "docusaurus build",
+    "build": "docusaurus build && if [ \"$BUILD_PDF\" = \"1\" ]; then node scripts/organize-pdfs.mjs; fi",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -26,6 +26,7 @@
     "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
+    "docusaurus-plugin-papersaurus": "^2.0.3",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

@@ -6,11 +6,14 @@ sidebar_class_name: hidden-index-link
 hide_table_of_contents: true
 hide_title: true
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-15T09:44:45.737Z'
   author: CI/CD Bot
-content_hash: 5f9e5520a8c09d80a4d7ad918c6455e8161cfecb8745cf38cdf3ef9c3ca1eb93
+content_hash: 2286f020ac7b7c7d338d8a8f54f7be6a1f568435cf8de7b2d5dd1f6e99114307
 ---
 
 import Fast2Cards from '@site/src/components/Fast2Cards';
+import PDFDownloadButton from '@site/src/components/PDFDownloadButton';
 
 <Fast2Cards />
+
+<PDFDownloadButton productId="fast2" />

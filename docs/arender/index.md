@@ -4,11 +4,14 @@ hide_table_of_contents: true
 sidebar_class_name: hidden-index-link
 sidebar_position: 0
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-15T09:44:45.737Z'
   author: CI/CD Bot
-content_hash: 3bded2e29000e734b22f39e232c4107365c7ae1e62c51a359b25dbed8bf0b59e
+content_hash: bff616380d93adf3a06c52dda4d103369a1baff5b375b03063913a5c573f784a
 ---
 
 import ARenderCards from '@site/src/components/ARenderCards';
+import PDFDownloadButton from '@site/src/components/PDFDownloadButton';
 
 <ARenderCards />
+
+<PDFDownloadButton productId="arender" />

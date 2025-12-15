@@ -2,6 +2,13 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+const getPdfFileName = (siteConfig: any, pluginConfig: any, pageTitle: string, pageId: string, parentTitles: string[], parentIds: string[], version: string, versionPath: string) => {
+	if (pageId === siteConfig.projectName) {
+		return `${pluginConfig.docPluginId}-${version}`;
+	}
+	return pageId;
+};
+
 const config: Config = {
 	title: 'UXO Docs',
 	tagline: 'Product Documentation',
@@ -20,6 +27,8 @@ const config: Config = {
 		hooks: { onBrokenMarkdownLinks: 'warn', onBrokenMarkdownImages: 'warn' },
 		mermaid: true,
 	},
+
+
 
 	themes: ['@docusaurus/theme-mermaid'],
 
@@ -90,6 +99,62 @@ const config: Config = {
 				lastVersion: 'current',
 				versions: { current: { label: 'v2026.0.0' } },
 				showLastUpdateTime: true,
+			},
+		],
+		[
+			require.resolve('./plugins/docusaurus-plugin-papersaurus'),
+			{
+				id: 'fast2-pdf',
+				docPluginId: 'fast2',
+				autoBuildPdfs: false,
+				addDownloadButton: false,
+				keepDebugHtmls: false,
+				sidebarNames: ['docs'],
+				author: 'Uxopian',
+				productTitles: ['Fast2'],
+				getPdfFileName: getPdfFileName,
+			},
+		],
+		[
+			require.resolve('./plugins/docusaurus-plugin-papersaurus'),
+			{
+				id: 'arender-pdf',
+				docPluginId: 'arender',
+				autoBuildPdfs: false,
+				addDownloadButton: false,
+				keepDebugHtmls: false,
+				sidebarNames: ['docs'],
+				author: 'Uxopian',
+				productTitles: ['ARender'],
+				getPdfFileName: getPdfFileName,
+			},
+		],
+		[
+			require.resolve('./plugins/docusaurus-plugin-papersaurus'),
+			{
+				id: 'flowerdocs-pdf',
+				docPluginId: 'flowerdocs',
+				autoBuildPdfs: false,
+				addDownloadButton: false,
+				keepDebugHtmls: false,
+				sidebarNames: ['docs'],
+				author: 'Uxopian',
+				productTitles: ['FlowerDocs'],
+				getPdfFileName: getPdfFileName,
+			},
+		],
+		[
+			require.resolve('./plugins/docusaurus-plugin-papersaurus'),
+			{
+				id: 'uxopian-ai-pdf',
+				docPluginId: 'uxopian-ai',
+				autoBuildPdfs: false,
+				addDownloadButton: false,
+				keepDebugHtmls: false,
+				sidebarNames: ['docs'],
+				author: 'Uxopian',
+				productTitles: ['Uxopian AI'],
+				getPdfFileName: getPdfFileName,
 			},
 		],
 		[

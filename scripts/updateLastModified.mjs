@@ -238,6 +238,13 @@ async function main() {
     console.log(`   📝 Updated: ${updatedCount}`);
     console.log(`   ✅ Unchanged: ${unchangedCount}`);
     console.log(`   📄 Total: ${files.length}`);
+
+    const hasChanges = newCount > 0 || updatedCount > 0;
+    try {
+        await fs.writeFile('pdf-build-status.json', JSON.stringify({ hasChanges }), 'utf8');
+    } catch (e) {
+        console.error('Failed to write pdf-build-status.json', e);
+    }
 }
 
 main().catch(err => {
