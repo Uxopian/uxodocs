@@ -102,7 +102,7 @@ const config: Config = {
 			},
 		],
 		[
-			require.resolve('./plugins/docusaurus-plugin-papersaurus'),
+			require.resolve('./plugins/docusaurus-plugin-papersaurus/lib/index.js'),
 			{
 				id: 'fast2-pdf',
 				docPluginId: 'fast2',
@@ -116,7 +116,7 @@ const config: Config = {
 			},
 		],
 		[
-			require.resolve('./plugins/docusaurus-plugin-papersaurus'),
+			require.resolve('./plugins/docusaurus-plugin-papersaurus/lib/index.js'),
 			{
 				id: 'arender-pdf',
 				docPluginId: 'arender',
@@ -130,7 +130,7 @@ const config: Config = {
 			},
 		],
 		[
-			require.resolve('./plugins/docusaurus-plugin-papersaurus'),
+			require.resolve('./plugins/docusaurus-plugin-papersaurus/lib/index.js'),
 			{
 				id: 'flowerdocs-pdf',
 				docPluginId: 'flowerdocs',
@@ -144,7 +144,7 @@ const config: Config = {
 			},
 		],
 		[
-			require.resolve('./plugins/docusaurus-plugin-papersaurus'),
+			require.resolve('./plugins/docusaurus-plugin-papersaurus/lib/index.js'),
 			{
 				id: 'uxopian-ai-pdf',
 				docPluginId: 'uxopian-ai',
