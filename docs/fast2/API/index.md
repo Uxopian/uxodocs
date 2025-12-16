@@ -2,9 +2,9 @@
 sidebar_label: API
 sidebar_position: 5
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
+  date: '2025-12-16T09:46:40.746Z'
   author: CI/CD Bot
-content_hash: 3707870e577599585de61d30e6fdaa95c2ec84e39bb5fd071149b7b28ede218a
+content_hash: 501aa31fda894f5ca5907c9f44f9da8dc424641e2fa3a65b3280ef5443d2611d
 ---
 
 # API documentation
@@ -13,7 +13,7 @@ Welcome to the **Fast2 API documentation**.
 This section provides a complete reference for interacting programmatically with Fast2 using its RESTful web services.
 
 The API allows you to:
-
+ 
 - Trigger and monitor migrations
 - Manage configurations, workers, and migration jobs
 - Query results and punnets data

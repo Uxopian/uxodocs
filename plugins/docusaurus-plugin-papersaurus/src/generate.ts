@@ -149,22 +149,22 @@ export async function generatePdfFiles(
 
         let productVersion = "";
 
-        if ((docPlugin.content as LoadedContent).loadedVersions.length === 1){
+        if ((docPlugin.content as LoadedContent).loadedVersions.length === 1) {
           productVersion = pluginOptions.productVersion;
         }
 
         // Create all PDF files for this sidebar
         await createPdfFilesRecursive(
-          rootCategory, 
-          [], 
-          [], 
-          versionInfo, 
-          pluginOptions, 
-          siteConfig, 
-          versionBuildDir, 
-          versionPdfPath, 
-          browser, 
-          siteAddress, 
+          rootCategory,
+          [],
+          [],
+          versionInfo,
+          pluginOptions,
+          siteConfig,
+          versionBuildDir,
+          versionPdfPath,
+          browser,
+          siteAddress,
           productTitle,
           productVersion
         );
@@ -192,7 +192,7 @@ export async function generatePdfFiles(
   console.log(`${pluginLogPrefix}generatePdfFiles finished!`);
 }
 
-function stripTrailingSlash (str: string) {
+function stripTrailingSlash(str: string) {
   return str.endsWith('/') ?
     str.slice(0, -1) : str;
 };
@@ -340,11 +340,17 @@ async function createPdfFilesRecursive(sideBarItem: any,
     documentTitle = productTitle + ' / ' + documentTitle;
   }
 
-  if (articles.length > 0) {
+  // Filter out ignored documents from the articles list
+  const filteredArticles = articles.filter(article =>
+    !pluginOptions.ignoreDocs.includes(article.unversionedId || '-IdIsEmpty-')
+  );
+
+  // Only create PDF if there are articles left after filtering
+  if (filteredArticles.length > 0) {
     await createPdfFromArticles(documentTitle,
       productVersion || version.label,
       pdfFilename,
-      articles,
+      filteredArticles,
       pluginOptions,
       siteConfig,
       buildDir,
@@ -354,7 +360,7 @@ async function createPdfFilesRecursive(sideBarItem: any,
     sideBarItem.pdfFilename = `${pdfPath}/${pdfFilename}.pdf`;
   }
 
-  return articles;
+  return filteredArticles;
 }
 
 function readHtmlForItem(
@@ -470,10 +476,6 @@ async function createPdfFromArticles(
 
   let fullHtml = '';
   for (const article of articleList) {
-    if (articleList.length > 1 && pluginOptions.ignoreDocs.includes(article.unversionedId || '-IdIsEmpty-')) {
-      // Don't add ignored articles to PDF's with multiple articles (section pdf's, complete document pdf)
-      continue;
-    }
     fullHtml += article.articleHtml || '';
   }
 
