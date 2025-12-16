@@ -36,7 +36,7 @@ const ProductList = [
     },
     {
         title: 'Uxopian AI',
-        version: 'current',
+        version: '2025.0.0',
         logo: '/img/uxo_white.png',
         description: 'Complete framework to easily integrate powerful AI features into your enterprise applications',
         link: '/docs/uxopian-ai',

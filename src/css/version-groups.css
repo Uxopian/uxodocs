@@ -24,10 +24,10 @@
 }
 
 .version-group__submenu {
-  display: none;
-  position: absolute;
-  left: 100%;
-  top: 0;
+  display: none !important;
+  position: absolute !important;
+  left: 100% !important;
+  top: 0 !important;
   min-width: 140px;
   background: var(--ifm-dropdown-background-color);
   border: 1px solid var(--ifm-color-emphasis-300);
@@ -39,7 +39,7 @@
 }
 
 .version-group:hover .version-group__submenu {
-  display: block;
+  display: block !important;
 }
 
 .version-group__submenu-item {
@@ -80,4 +80,3 @@
 [data-theme='dark'] .version-group__submenu-item:hover {
   background: var(--ifm-color-emphasis-200);
 }
-
