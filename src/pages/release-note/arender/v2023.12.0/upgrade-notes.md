@@ -9,7 +9,6 @@ date: "2025-07-28"
 
 This release introduces new property configurations and changes to session management. Integrators will now require additional access to our new Cloudsmith repository for Maven libraries and binaries.
 
-
 ## Product
 
 ### Configuration
@@ -21,7 +20,6 @@ Starting with this version, ARender will publish libraries to Uxopian Cloudsmith
 Below is the `settings.xml` configuration file, which includes both the Artifactory and Cloudsmith repositories.
 
 \{\{< tag type="code" title="~/.m2/settings.xml" >\}\}
-
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -98,11 +96,9 @@ Replace **CLOUDSMITH_TOKEN** with the customer/partner Cloudsmith API Key.
 
 For Artifactory or Cloudsmith access, please contact the ARender Support Team at arender-support@uxopian.com.
 
-
 #### ARender Web-UI
 
 The following configuration properties have been added to the server side of the ARender Web-UI.
-
 
 \{\{< tag type="code" title="WEB-INF/classes/arender-server-default.properties" >\}\}
 
@@ -142,27 +138,26 @@ From v2023.12.0 onwards:
 
 For WAR and EAR packaging, session management is now handled by the Servlet Container, and the cookie name is **JSESSIONID**.
 
-For JAR packaging, Spring Session Hazelcast is used by default, and the cookie name is **SESSION**. This can be disabled to revert to Servlet Container session management by setting the following property: ```arender.server.session.hazelcast.enabled=false```.
+For JAR packaging, Spring Session Hazelcast is used by default, and the cookie name is **SESSION**. This can be disabled to revert to Servlet Container session management by setting the following property: `arender.server.session.hazelcast.enabled=false`.
 
+---
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-|  Version  |  WAR/EAR   |                                                                JAR                                                                |
-|-----------|------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| 4.8.x     | JSESSIONID |                                                                N/A                                                                |
-| 2023.0.0  | JSESSIONID |                                                             JSESSIONID                                                            |
-| 2023.1.0  | JSESSIONID |                                                             JSESSIONID                                                            |
-| 2023.2.0  | JSESSIONID |                                                             JSESSIONID                                                            |
-| 2023.3.0  | JSESSIONID |                                                             JSESSIONID                                                            |
-| 2023.4.0  | SESSION    |                                                              SESSION                                                              |
-| 2023.5.0  | SESSION    |                                                              SESSION                                                              |
-| 2023.6.0  | SESSION    |                                                              SESSION                                                              |
-| 2023.7.0  | SESSION    |                                                              SESSION                                                              |
-| 2023.8.0  | SESSION    |                                                              SESSION                                                              |
-| 2023.9.0  | SESSION    |                                                              SESSION                                                              |
-| 2023.10.0 | SESSION    |                                                              SESSION                                                              |
-| 2023.11.0 | SESSION    |                                                              SESSION                                                              |
+| Version   | WAR/EAR    | JAR                                                                                                                               |
+| --------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| 4.8.x     | JSESSIONID | N/A                                                                                                                               |
+| 2023.0.0  | JSESSIONID | JSESSIONID                                                                                                                        |
+| 2023.1.0  | JSESSIONID | JSESSIONID                                                                                                                        |
+| 2023.2.0  | JSESSIONID | JSESSIONID                                                                                                                        |
+| 2023.3.0  | JSESSIONID | JSESSIONID                                                                                                                        |
+| 2023.4.0  | SESSION    | SESSION                                                                                                                           |
+| 2023.5.0  | SESSION    | SESSION                                                                                                                           |
+| 2023.6.0  | SESSION    | SESSION                                                                                                                           |
+| 2023.7.0  | SESSION    | SESSION                                                                                                                           |
+| 2023.8.0  | SESSION    | SESSION                                                                                                                           |
+| 2023.9.0  | SESSION    | SESSION                                                                                                                           |
+| 2023.10.0 | SESSION    | SESSION                                                                                                                           |
+| 2023.11.0 | SESSION    | SESSION                                                                                                                           |
 | 2023.12.0 | JSESSIONID | SESSION (arender.server.session.hazelcast.enabled=true, by default) / JSESSIONID (arender.server.session.hazelcast.enabled=false) |
-
 
 ## Important
 

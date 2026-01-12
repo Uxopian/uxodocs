@@ -1,14 +1,14 @@
 ---
 title: Retrieve content and metadata from an S3 bucket
 tags:
-  - xml
-  - pattern
-  - document
-  - AWS S3
-  - content
+    - xml
+    - pattern
+    - document
+    - AWS S3
+    - content
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: 93ae7dd559f894be88d0c74a911bcc1e29ae03caf7490d77a1c3709a5e8c5b95
 ---
 
@@ -16,7 +16,7 @@ content_hash: 93ae7dd559f894be88d0c74a911bcc1e29ae03caf7490d77a1c3709a5e8c5b95
 
 Extracting metadata from a S3 bucket needs to be done differently than what could be done with a regular content management system, because it is a storage space and not an ECM.
 
-:::warning 
+:::warning
 "Prior to v2.10, Fast2 needed a few steps to add “manually” (with [AlterDocumentProperties](/docs/fast2/catalog/transformer#AlterDocumentProperties) key and bucket information in the XML file, to then get corresponding PDF files."
 :::
 

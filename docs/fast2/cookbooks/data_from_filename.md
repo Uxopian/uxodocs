@@ -3,13 +3,13 @@ draft: false
 title: Add data from file name
 date: 2022-11-10T00:00:00.000Z
 tags:
-  - worker
-  - json
-  - javascript
-  - boilerplate
+    - worker
+    - json
+    - javascript
+    - boilerplate
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 27488360486d2497d27c697743fabb13c6ae1b6f701a14bae9ca616331f8bd16
 ---
 
@@ -82,20 +82,16 @@ Although the configuration of the first task can be easily guessed, the [JSTranf
 
 ```js
 punnet.getDocuments().forEach(function (doc) {
-  // (1)
-  var filenameWithoutExtension = doc
-    .getDataSet()
-    .getData("fileName")
-    .getValue()
-    .split(".")[0];
+    // (1)
+    var filenameWithoutExtension = doc.getDataSet().getData("fileName").getValue().split(".")[0];
 
-  // (2)
-  var data = filenameWithoutExtension.split("-");
+    // (2)
+    var data = filenameWithoutExtension.split("-");
 
-  // (3)
-  doc.getDataSet().addData("document-type", "String", data[0]);
-  doc.getDataSet().addData("data1", "String", data[1]);
-  doc.getDataSet().addData("data2", "String", data[2]);
+    // (3)
+    doc.getDataSet().addData("document-type", "String", data[0]);
+    doc.getDataSet().addData("data1", "String", data[1]);
+    doc.getDataSet().addData("data2", "String", data[2]);
 });
 ```
 

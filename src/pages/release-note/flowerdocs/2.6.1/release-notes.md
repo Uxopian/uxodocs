@@ -7,10 +7,9 @@ description: Release notes
 ✅ Les évolutions, 🔴 corrections d'anomalies et 📋 tâches incluses dans cette version sont listées dans cette section.
 :::
 
-
 # Changements importants de la 2.6.1
 
-✅ Dans la continuité de mise en conformité avec le RGAA, la navigation clavier a été entièrement revue pour une meilleure accessibilité. 
+✅ Dans la continuité de mise en conformité avec le RGAA, la navigation clavier a été entièrement revue pour une meilleure accessibilité.
 
 ✅ Un menu d'accessibilité est disponible grâce à un raccourci clavier (`Ctrl+Alt+N`, avec `N` pour navigation) afin de pouvoir naviguer plus simplement entre les différents éléments de chaque écran.
 
@@ -18,10 +17,9 @@ description: Release notes
 
 ## GUI
 
+✅ Le sélecteur de colonne à afficher permet de rechercher facilement les colonnes souhaitées
 
-✅ Le sélecteur de colonne à afficher permet de rechercher facilement les colonnes souhaitées 
-
-✅ Support du mode `non over` du OffMenu  
+✅ Support du mode `non over` du OffMenu
 
 🔴 Les libellés de date de création par défaut des vignettes ainsi que le message de service worker sont internationalisés
 
@@ -47,20 +45,21 @@ description: Release notes
 
 🔴 Les fichiers de configuration vides n'empêchent plus le rechargement de la page à leur sauvegarde
 
-🔴 Les liste des critères de filtre de recherche d'un dossier virtuel et type de tags sont triées par ordre alphabétique 
+🔴 Les liste des critères de filtre de recherche d'un dossier virtuel et type de tags sont triées par ordre alphabétique
 
-✅ La navigation pour l'administration des pages est facilitée par le lien vers le modèle associé à la page  
+✅ La navigation pour l'administration des pages est facilitée par le lien vers le modèle associé à la page
 
-### Dashlets 
+### Dashlets
+
 ✅ Le total de composants de chaque agrégation est affiché dans la légende des différents widgets de page d'accueil
 
 ✅ La création de dashlet de type `Compteur` est possible depuis les recherches
 
-✅ Les widgets de pages d'accueil sont consultables en plein écran 
+✅ Les widgets de pages d'accueil sont consultables en plein écran
 
 📋 Les champs disponibles à la création de dashlet sont basés sur le catalogue de critères recherchables
 
-## Intégration 
+## Intégration
 
 ### API JS
 
@@ -70,8 +69,7 @@ description: Release notes
 
 ### CLM
 
-🔴 Le merge effectué par le CLM conserve l'ordre des propriétés pour tous les objets  
-
+🔴 Le merge effectué par le CLM conserve l'ordre des propriétés pour tous les objets
 
 ## Sécurité
 
@@ -79,21 +77,21 @@ description: Release notes
 
 ✅ Sécurisation des `OperationHook` grâce à l'injection du token de l'utilisateur courant avec le tag `InjectToken`
 
-🔴 Les exceptions FlowerDocs des plugins de la GUI sont transmises dans la réponse d'erreur 
+🔴 Les exceptions FlowerDocs des plugins de la GUI sont transmises dans la réponse d'erreur
 
 ✅ Les données sensibles des fichiers de configuration stockés dans FlowerDocs sont chiffrables
 
+## Exploitation
 
-## Exploitation 
+📋 La configuration de la rendition ARender dans \{\{% core %\}\} utilise la même propriété que \{\{% gui %\}\} : `arender.rendition.nodes`
 
-📋 La configuration de la rendition ARender dans \{\{% core %\}\} utilise la même propriété que \{\{% gui %\}\} : `arender.rendition.nodes`  
 ### S3
 
 ✅ Support de la configuration du endpoint et de l'accès forcée par chemin
 
 📋 La région spécifiée dans la configuration du bucket supporte désormais le nom de la région et non plus uniquement son nom dans le SDK
 
-### Cache 
+### Cache
 
 ✅ Le Time to live (`TTL`) de cache est configurable par type d’objet ou combinaison scope et type d’objet
 

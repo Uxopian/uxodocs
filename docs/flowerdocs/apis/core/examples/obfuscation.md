@@ -1,22 +1,21 @@
 ---
 title: Obfuscating content
 description: Obfuscate sensitive data within documents
-date: '2018-04-02T12:20:01+02:00'
+date: "2018-04-02T12:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: eb39879f356866c588062aff9f6c4263140440b804a69087b022df0c2c0bcf61
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
-
-The `ObfuscationService` service exposes a `create` operation. All parts of the document content corresponding to the search defined in the call will be automatically obfuscated. 
+The `ObfuscationService` service exposes a `create` operation. All parts of the document content corresponding to the search defined in the call will be automatically obfuscated.
 
 # Search for areas to obfuscate
 
-The research model used in the call for proposals is as follows: 
+The research model used in the call for proposals is as follows:
 
 ```json
 
@@ -27,7 +26,7 @@ The research model used in the call for proposals is as follows:
 
 ```
 
-The `text` is the value or pattern you are looking for. The default value is a pattern. To find the exact value and not a pattern, the value `regex` must be set to `false`. 
+The `text` is the value or pattern you are looking for. The default value is a pattern. To find the exact value and not a pattern, the value `regex` must be set to `false`.
 <br/>
 The `accentSensitive` and `caseSensitive` parameters indicate that the search should be accent-sensitive and case-sensitive respectively.
 

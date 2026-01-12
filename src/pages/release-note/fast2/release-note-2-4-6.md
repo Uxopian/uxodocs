@@ -6,8 +6,8 @@ date: 2022-02-11
 
 # To modify
 version: "2.4.6"
-major_version: "2"    # minor version of the release note
-description : "Annotations conversion, PatternResolver, FileNet connector, Alfresco metadata query, Alfresco update"    # Heavily-keywords-charged sentence for short preview of the release note + google SEO
+major_version: "2" # minor version of the release note
+description: "Annotations conversion, PatternResolver, FileNet connector, Alfresco metadata query, Alfresco update" # Heavily-keywords-charged sentence for short preview of the release note + google SEO
 ---
 
 ### Evolution

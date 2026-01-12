@@ -1,29 +1,29 @@
 ---
 title: ARender HMI Configuration
-date: '2000-03-31T13:20:01+02:00'
+date: "2000-03-31T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 6aa072f29bb95bd6b13d53650b4f012ffd15b44e2860f725a8b5d1a04661fd06
 ---
 
-
-This section describes the various configurations for the  application, needed in the application's `arender-custom-server.properties` file.
+This section describes the various configurations for the application, needed in the application's `arender-custom-server.properties` file.
 
 # General
 
-|Propriété					    |Description																|
-|-------------------------------|-----------------------------------------------------------------------|
-|arender.server.rendition.hosts	|Addresses of the various ARender renditions separated by a ``,``.		|
-|token.key					    |Token shared between **FlowerDocs Core**, **FlowerDocs GUI** and 	|
-|ws.url						    |**FlowerDocs Core** WebServices access URL 									|
+| Propriété                      | Description                                                      |
+| ------------------------------ | ---------------------------------------------------------------- |
+| arender.server.rendition.hosts | Addresses of the various ARender renditions separated by a `,`.  |
+| token.key                      | Token shared between **FlowerDocs Core**, **FlowerDocs GUI** and |
+| ws.url                         | **FlowerDocs Core** WebServices access URL                       |
 
 # Logging
 
-In order to configure logging for  and the FlowerDocs ARender connector, it is necessary to create a `configurations` folder next to the  application containing the following `logback.xml` file:
+In order to configure logging for and the FlowerDocs ARender connector, it is necessary to create a `configurations` folder next to the application containing the following `logback.xml` file:
 
 :::note[logback.xml ]
-```xml 
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
@@ -42,7 +42,7 @@ In order to configure logging for  and the FlowerDocs ARender connector, it is n
             <maxFileSize>50MB</maxFileSize>
         </triggeringPolicy>
     </appender>
-    
+
     <!-- File Appender for Web-UI perf log -->
     <appender name="PERF" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>arender-hmi-perf.log</file>
@@ -65,7 +65,7 @@ In order to configure logging for  and the FlowerDocs ARender connector, it is n
             <pattern>%d{ISO8601} %p [%t] %c:%L - %m%n</pattern>
         </encoder>
     </appender>
-    
+
     <!-- Logger -->
     <logger name="arender-startup" level="INFO" />
     <logger name="com.arondor.common.reflection.parser.spring" level="OFF"/>
@@ -79,14 +79,13 @@ In order to configure logging for  and the FlowerDocs ARender connector, it is n
     	<appender-ref ref="SERVER" />
     </logger>
     <logger name="com.arondor.common.management" level="FATAL" />
-    
+
     <root level="WARN">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
 ```
+
 :::
-
-
 
 It is not recommended to modify ARender properties by setting parameters in the `arender-custom-server.properties` file. Properties that are not defined in the documentation are not qualified by FlowerDocs: the correct operation of the application is therefore not guaranteed with these modifications.

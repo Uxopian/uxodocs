@@ -1,16 +1,14 @@
 ---
 title: Going further
-date: '2020-02-03T12:20:01+02:00'
+date: "2020-02-03T12:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: ec3085eff9c061c6b89ba0601c37c8e6b3ff3ec7a4b97386096c9a01449d7219
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-
-
 
 # Enabling creation
 
@@ -22,20 +20,19 @@ To enable this, the `creation` option accepts indexing phases during which the u
 
 ```javascript
 var plugin = new LinkFreeListPlugin({
-	toPopulate: 'RH_OfferLink',
-	category: 'TASK',
-	classId: 'JobOffer',
-	tagsToDisplay: ['RH_Service', 'RH_Job'],
-	title: labelsAPI.getLabel("suggestOfferTitle"),
-	description: labelsAPI.getLabel("suggestOfferDescription"),
-	creation: { phases: ['INSERT', 'MODIFY']}
+    toPopulate: "RH_OfferLink",
+    category: "TASK",
+    classId: "JobOffer",
+    tagsToDisplay: ["RH_Service", "RH_Job"],
+    title: labelsAPI.getLabel("suggestOfferTitle"),
+    description: labelsAPI.getLabel("suggestOfferDescription"),
+    creation: { phases: ["INSERT", "MODIFY"] },
 });
 plugin.bind();
 ```
 
   </TabItem>
 </Tabs>
-
 
 # Reacting to the selection
 
@@ -63,7 +60,6 @@ plugin.bind();
 
   </TabItem>
 </Tabs>
-
 
 <!--
 # Filters

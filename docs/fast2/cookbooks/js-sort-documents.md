@@ -1,22 +1,22 @@
 ---
 title: Sort documents in a punnet
-date: '2023-01-12'
+date: "2023-01-12"
 author: Joseph TESSIER
 tags:
-  - worker
-  - json
-  - javascript
-  - document
-  - nashorn
+    - worker
+    - json
+    - javascript
+    - document
+    - nashorn
 photograph: Héctor J. Rivas
-photograph_pseudo: '@@hjrc33'
+photograph_pseudo: "@@hjrc33"
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 4aa9fa4d6191ea6b56345efc5a5911a241c7954b6de50534bd7d70961a14be95
 ---
-![photo cover](../assets/img/cookbooks/photo-cover.avif)
 
+![photo cover](../assets/img/cookbooks/photo-cover.avif)
 
 As we have seen before in the [punnet structure](/docs/fast2/getting-started/overall-concepts#punnet), punnets can be composed with several different documents, each one of them embedding its own data and values.
 
@@ -25,6 +25,7 @@ Whether it be for the purpose of processing order of these documents or any othe
 For the matter, we will consider having to sort the documents based on a `Date` data, which will go by the name of "creation_date".
 
 ## 🧐 Where do we come from ?
+
 For the educational aspect of this topic, let us consider a punnet gathering several documents, all with the same data : `creation_date`, currently `String`-typed.
 
 Our punnet would look like this:
@@ -52,6 +53,7 @@ Our punnet would look like this:
 As we can see, the correct order should be **document_2**, then **document_3** and finally **document_1**.
 
 ## 🤔 Where to go ?
+
 At a glance, we are just couple steps away from sorting our documents : we need to go over all documents, dig into their dataset and retrieve the value of the sorting criteria.
 
 However we need to go through a String-to-Date conversion so the sorting will be done correctly over datetimes values, instead of alphabetical values.
@@ -60,12 +62,12 @@ However we need to go through a String-to-Date conversion so the sorting will be
 We will just reorganise all the documents within the punnet, they will be considered like tiles to rearrange, but we need not to mix their own data up (for obvious data integrity reasons).
 :::
 
-
 ## 🚀 Way to go !
+
 The JSTransform task will be our hobbyhorse here since it offers the ability to handle the punnet at a pretty low cost in terms of performance and setup.
 
-
 ### ⚗️ JavaScript elaboration
+
 You will need to add a new JSTransform task right after any task in your workflow have the punnet with all the documents (ex/ a ContentExtractor with all versions of a document extracted).
 
 This JavaScript-ish task will be configured with the following script :
@@ -83,12 +85,12 @@ var dateFormat = "MM/d/yyyy h:mm:ss aa";
 var formatter = new SimpleDateFormat(dateFormat);
 
 var compareByDate = function (doc1, doc2) {
-  try {
-    return formatter
-      .parse(doc1.getDataSet().getDataValue(dataToSort))
-      .compareTo(formatter.parse(doc2.getDataSet().getDataValue(dataToSort)));
-  } catch (e) {}
-  return 0;
+    try {
+        return formatter
+            .parse(doc1.getDataSet().getDataValue(dataToSort))
+            .compareTo(formatter.parse(doc2.getDataSet().getDataValue(dataToSort)));
+    } catch (e) {}
+    return 0;
 };
 
 Collections.sort(punnet.getDocuments(), compareByDate);
@@ -97,17 +99,17 @@ Collections.sort(punnet.getDocuments(), compareByDate);
 Explanations :
 
 - L7 : the data which you want to sort, in our case the `creation_date`
-- L8 : the date format we deduced from the `String` value of the previous data 
+- L8 : the date format we deduced from the `String` value of the previous data
 - L12-L17 : we need to parse the value as date, to compare the date as so instead of regular `String` values (which could be too approximative) <br/>
 
 The output of this task will be the same documents in the punnet, just ordered by creation date ascending.
 
 <br/>
 
-
 Head out now to the Run screen, and start your campaign.
 
 ### 🏁 Result
+
 At the latest stage of your workflow, the document dataset is filled with the properties found in the JSON and integrated as metadata.
 
 <figure markdown>
@@ -131,6 +133,7 @@ At the latest stage of your workflow, the document dataset is filled with the pr
 </figure>
 
 ## 👏 Let's sum up
+
 We can bring this scenario further by sorting based on 2 or more data, regular `int` values or else.
 
 Since its just sorting, you might want to sort the documents in the reverse order. In this example, we left the default behavior (ascending), but a minor tweak to the previous script and you'll be good to go !

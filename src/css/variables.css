@@ -3,73 +3,103 @@
    ======================================== */
 
 :root {
-  --uxo-purple-700: #D745FF;
-  --uxo-purple-500: #B56BFF;
-  --uxo-purple-300: #735EFC;
+    --uxo-purple-700: #d745ff;
+    --uxo-purple-500: #b56bff;
+    --uxo-purple-300: #735efc;
 
-  --uxo-purple-1: #79039A;
-  --uxo-purple-2: #6A0091;
-  --uxo-purple-3: #5A007A;
-  --uxo-purple-4: #490064;
+    --uxo-purple-1: #79039a;
+    --uxo-purple-2: #6a0091;
+    --uxo-purple-3: #5a007a;
+    --uxo-purple-4: #490064;
 
-  --uxo-sunset-1: #C6678A;
-  --uxo-sunset-2: #D36D78;
-  --uxo-sunset-3: #E07869;
-  --uxo-sunset-4: #EC9059;
+    --uxo-sunset-1: #c6678a;
+    --uxo-sunset-2: #d36d78;
+    --uxo-sunset-3: #e07869;
+    --uxo-sunset-4: #ec9059;
 
-  --uxo-green-1: #029C75;
-  --uxo-green-2: #018262;
-  --uxo-green-3: #00664E;
-  --uxo-green-4: #024D43;
+    --uxo-green-1: #029c75;
+    --uxo-green-2: #018262;
+    --uxo-green-3: #00664e;
+    --uxo-green-4: #024d43;
 
-  --uxo-turquoise-1: #3A8F9D;
-  --uxo-turquoise-2: #2F7D8B;
-  --uxo-turquoise-3: #276A77;
-  --uxo-turquoise-4: #205763;
+    --uxo-turquoise-1: #3a8f9d;
+    --uxo-turquoise-2: #2f7d8b;
+    --uxo-turquoise-3: #276a77;
+    --uxo-turquoise-4: #205763;
 
-  --uxo-blue-1: #1865D8;
-  --uxo-blue-2: #2351C2;
-  --uxo-blue-3: #2B3FAB;
-  --uxo-blue-4: #2D2F8F;
+    --uxo-blue-1: #1865d8;
+    --uxo-blue-2: #2351c2;
+    --uxo-blue-3: #2b3fab;
+    --uxo-blue-4: #2d2f8f;
 
-  --gradient-purple: linear-gradient(135deg, var(--uxo-purple-1), var(--uxo-purple-2), var(--uxo-purple-3), var(--uxo-purple-4));
-  --gradient-sunset: linear-gradient(135deg, var(--uxo-sunset-1), var(--uxo-sunset-2), var(--uxo-sunset-3), var(--uxo-sunset-4));
-  --gradient-green: linear-gradient(135deg, var(--uxo-green-1), var(--uxo-green-2), var(--uxo-green-3), var(--uxo-green-4));
-  --gradient-turquoise: linear-gradient(135deg, var(--uxo-turquoise-1), var(--uxo-turquoise-2), var(--uxo-turquoise-3), var(--uxo-turquoise-4));
-  --gradient-blue: linear-gradient(135deg, var(--uxo-blue-1), var(--uxo-blue-2), var(--uxo-blue-3), var(--uxo-blue-4));
+    --gradient-purple: linear-gradient(
+        135deg,
+        var(--uxo-purple-1),
+        var(--uxo-purple-2),
+        var(--uxo-purple-3),
+        var(--uxo-purple-4)
+    );
+    --gradient-sunset: linear-gradient(
+        135deg,
+        var(--uxo-sunset-1),
+        var(--uxo-sunset-2),
+        var(--uxo-sunset-3),
+        var(--uxo-sunset-4)
+    );
+    --gradient-green: linear-gradient(
+        135deg,
+        var(--uxo-green-1),
+        var(--uxo-green-2),
+        var(--uxo-green-3),
+        var(--uxo-green-4)
+    );
+    --gradient-turquoise: linear-gradient(
+        135deg,
+        var(--uxo-turquoise-1),
+        var(--uxo-turquoise-2),
+        var(--uxo-turquoise-3),
+        var(--uxo-turquoise-4)
+    );
+    --gradient-blue: linear-gradient(
+        135deg,
+        var(--uxo-blue-1),
+        var(--uxo-blue-2),
+        var(--uxo-blue-3),
+        var(--uxo-blue-4)
+    );
 
-  --ifm-color-primary: var(--uxo-purple-500);
-  --ifm-color-primary-dark: var(--uxo-purple-300);
-  --ifm-color-primary-darker: #5A007A;
-  --ifm-color-primary-darkest: #490064;
-  --ifm-color-primary-light: color-mix(in oklab, var(--uxo-purple-500), white 18%);
-  --ifm-color-primary-lighter: var(--uxo-purple-700);
-  --ifm-color-primary-lightest: color-mix(in oklab, var(--uxo-purple-700), white 22%);
+    --ifm-color-primary: var(--uxo-purple-500);
+    --ifm-color-primary-dark: var(--uxo-purple-300);
+    --ifm-color-primary-darker: #5a007a;
+    --ifm-color-primary-darkest: #490064;
+    --ifm-color-primary-light: color-mix(in oklab, var(--uxo-purple-500), white 18%);
+    --ifm-color-primary-lighter: var(--uxo-purple-700);
+    --ifm-color-primary-lightest: color-mix(in oklab, var(--uxo-purple-700), white 22%);
 
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.06);
+    --ifm-code-font-size: 95%;
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.06);
 
-  /* Variables pour la recherche locale */
-  --search-local-modal-width: 520px;
-  --search-local-modal-width-sm: 95vw;
-  --search-local-hit-height: auto;
-  --search-local-spacing: 10px;
-  --search-local-hit-background: #ffffff;
-  --search-local-modal-background: #f8f9fa;
-  --search-local-highlight-color: var(--ifm-color-primary);
+    /* Variables pour la recherche locale */
+    --search-local-modal-width: 520px;
+    --search-local-modal-width-sm: 95vw;
+    --search-local-hit-height: auto;
+    --search-local-spacing: 10px;
+    --search-local-hit-background: #ffffff;
+    --search-local-modal-background: #f8f9fa;
+    --search-local-highlight-color: var(--ifm-color-primary);
 }
 
-[data-theme='dark'] {
-  --ifm-color-primary: var(--uxo-purple-700);
-  --ifm-color-primary-dark: color-mix(in oklab, var(--uxo-purple-700), black 16%);
-  --ifm-color-primary-darker: #6A0091;
-  --ifm-color-primary-darkest: #490064;
-  --ifm-color-primary-light: color-mix(in oklab, var(--uxo-purple-700), white 14%);
-  --ifm-color-primary-lighter: color-mix(in oklab, var(--uxo-purple-700), white 24%);
-  --ifm-color-primary-lightest: color-mix(in oklab, var(--uxo-purple-700), white 34%);
-  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.06);
+[data-theme="dark"] {
+    --ifm-color-primary: var(--uxo-purple-700);
+    --ifm-color-primary-dark: color-mix(in oklab, var(--uxo-purple-700), black 16%);
+    --ifm-color-primary-darker: #6a0091;
+    --ifm-color-primary-darkest: #490064;
+    --ifm-color-primary-light: color-mix(in oklab, var(--uxo-purple-700), white 14%);
+    --ifm-color-primary-lighter: color-mix(in oklab, var(--uxo-purple-700), white 24%);
+    --ifm-color-primary-lightest: color-mix(in oklab, var(--uxo-purple-700), white 34%);
+    --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.06);
 
-  /* Variables pour la recherche locale en dark mode */
-  --search-local-hit-background: rgba(255, 255, 255, 0.06);
-  --search-local-modal-background: #1e1e24;
+    /* Variables pour la recherche locale en dark mode */
+    --search-local-hit-background: rgba(255, 255, 255, 0.06);
+    --search-local-modal-background: #1e1e24;
 }

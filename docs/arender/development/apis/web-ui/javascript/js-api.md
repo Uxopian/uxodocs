@@ -1,16 +1,10 @@
 ---
 title: Get started with the javascript API
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 57e54208b42637f7cec4d970c7928aa4e1180540139af9bf49fcff107e94e661
 ---
-
-
-
-
-
-
 
 ## Configuring a custom JavaScript file
 
@@ -45,8 +39,8 @@ Or directly in the URL parameters:
 https://www.demo.arender.io/?url=https://arender.io/docs/demo/ARender-doc-demo.pdf&arenderjs.startupScript=scripts/arenderJSPAPITest.js
 ```
 
-See the default profile jsapi-demo.properties (in the 
-arondor-arender-hmi-spring-boot-.jar\BOOT-INF\classes\ folder of the ARender 
+See the default profile jsapi-demo.properties (in the
+arondor-arender-hmi-spring-boot-.jar\BOOT-INF\classes\ folder of the ARender
 Web-UI) for an example profile. Note that the JavaScript URL can be provided:
 
 - as a relative URL: the URL is relative to the ARender Web-UI context
@@ -57,7 +51,7 @@ Web-UI) for an example profile. Note that the JavaScript URL can be provided:
 
 ### The "[Hollywood Principle](https://en.wikipedia.org/wiki/Hollywood_principle)"
 
-The other option is to define the init function arenderjs\_init() in
+The other option is to define the init function arenderjs_init() in
 ARender's parent context. Consider ARender in a IFrame inclusion; the
 calling application creates an IFrame with a URL pointing to ARender.
 In this case, the calling application only has to define the function:

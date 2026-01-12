@@ -44,7 +44,9 @@
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
-    transition: opacity 160ms ease, max-height 180ms ease;
+    transition:
+        opacity 160ms ease,
+        max-height 180ms ease;
 }
 
 /* Force visibility of sidebar items on versioned docs pages */
@@ -57,7 +59,7 @@
     visibility: visible !important;
 }
 
-[class*="theme-doc-sidebar"] li.hidden-sidebar-item>*:not(a) {
+[class*="theme-doc-sidebar"] li.hidden-sidebar-item > *:not(a) {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -102,7 +104,7 @@
 
 .secondary-nav--flowerdocs .secondary-nav__item.active,
 .secondary-nav--flowerdocs .secondary-nav__item:hover {
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
 }
 
@@ -122,7 +124,7 @@
 
 .secondary-nav--fast2 .secondary-nav__item.active,
 .secondary-nav--fast2 .secondary-nav__item:hover {
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
 }
 
@@ -142,7 +144,7 @@
 
 .secondary-nav--arender .secondary-nav__item.active,
 .secondary-nav--arender .secondary-nav__item:hover {
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
 }
 
@@ -162,7 +164,7 @@
 
 .secondary-nav--uxopian-ai .secondary-nav__item.active,
 .secondary-nav--uxopian-ai .secondary-nav__item:hover {
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
 }
 
@@ -312,7 +314,6 @@ html.uxo-product-uxopian-ai a:hover {
 
 /* On small screens, sidebars are typically stacked / off-canvas; don't force sticky there */
 @media (max-width: 1024px) {
-
     .uxo-has-secondary-nav .theme-doc-sidebar,
     .uxo-has-secondary-nav .theme-doc-sidebar-container,
     .uxo-has-secondary-nav .sidebar_njMd,

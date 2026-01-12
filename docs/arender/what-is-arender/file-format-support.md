@@ -1,25 +1,20 @@
 ---
 title: Supported File Format
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: bfb7a8b293a4237571a1f7f9dd0ae2db22428a559cd68d88da262896b1cda29a
 ---
 
-
-
-
-
-
 ## PDF
 
-| Format                                                     | Extension         | MIME TYPE           |
-| ---------------------------------------------------------- | ----------------- | ------------------- |
-| Portable Document Format (1.x to 2.0)                      | .pdf              | application/pdf     |
-| Portable Document Format Archive PDF/A-1, PDF/A-2, PDF/A-3 | .pdf              | application/pdf     |
-| Portable Document Format Portfolio                         | .pdf              | application/pdf     |
-| Form Data Format (FDF)                                     | .fdf              | application/vnd.fdf |
-| XML Forms Data Format (XFDF)                               | .xml              | text/xml            |
+| Format                                                     | Extension | MIME TYPE           |
+| ---------------------------------------------------------- | --------- | ------------------- |
+| Portable Document Format (1.x to 2.0)                      | .pdf      | application/pdf     |
+| Portable Document Format Archive PDF/A-1, PDF/A-2, PDF/A-3 | .pdf      | application/pdf     |
+| Portable Document Format Portfolio                         | .pdf      | application/pdf     |
+| Form Data Format (FDF)                                     | .fdf      | application/vnd.fdf |
+| XML Forms Data Format (XFDF)                               | .xml      | text/xml            |
 
 ## Images
 
@@ -43,7 +38,7 @@ content_hash: bfb7a8b293a4237571a1f7f9dd0ae2db22428a559cd68d88da262896b1cda29a
 
 | Format | Extension | MIME TYPE                       |
 | ------ | --------- | ------------------------------- |
-| MSG    | .msg      | application/vnd.ms-outlook     |
+| MSG    | .msg      | application/vnd.ms-outlook      |
 | EML    | .eml      | message/rfc822,application/mbox |
 
 ## HTML
@@ -54,36 +49,36 @@ content_hash: bfb7a8b293a4237571a1f7f9dd0ae2db22428a559cd68d88da262896b1cda29a
 
 ## Office Text
 
-| Format                            | Extension                  | MIME TYPE                                                                                                    |
-| --------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Microsoft Word                    | .doc,.dot                  | application/msword                                                                                           |
-| Microsoft Office Open XML         | .docx, .dotx, .docm, .dotm | application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.wordprocessingml.template, application/vnd.ms-word.document.macroEnabled.12, application/vnd.ms-word.template.macroEnabled.12 |
-| Rich Text Format                  | .rtf                       | text/rtf                                                                                                                                                                                                                                             |
-| OpenDocument Text                 | .odt, .odm, .ott           | application/vnd.oasis.opendocument.text                                                                                                                                                                                                              |
+| Format                    | Extension                  | MIME TYPE                                                                                                                                                                                                                                            |
+| ------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Microsoft Word            | .doc,.dot                  | application/msword                                                                                                                                                                                                                                   |
+| Microsoft Office Open XML | .docx, .dotx, .docm, .dotm | application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.wordprocessingml.template, application/vnd.ms-word.document.macroEnabled.12, application/vnd.ms-word.template.macroEnabled.12 |
+| Rich Text Format          | .rtf                       | text/rtf                                                                                                                                                                                                                                             |
+| OpenDocument Text         | .odt, .odm, .ott           | application/vnd.oasis.opendocument.text                                                                                                                                                                                                              |
 
 ## Office Presentation
 
-| Format                            | Extension                  | MIME TYPE                                                                                                                                                                                                                                                            |
-| --------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Microsoft PowerPoint              | .ppt,.pot,.pps, .ppa       | application/vnd.ms-powerpoint                                                                                                                                                                                                                                        |
-| Microsoft PowerPoint Open XML     | .pptx, .potx, .pptm, .potm | application/vnd.openxmlformats-officedocument.presentationml.presentation, application/vnd.openxmlformats-officedocument.presentationml.template, application/vnd.ms-powerpoint.presentation.macroEnabled.12, application/vnd.ms-powerpoint.template.macroEnabled.12 |
-| OpenDocument Presentation         | .odp                       | application/vnd.oasis.opendocument.presentation                                                                                                                                                                                                                      |
+| Format                        | Extension                  | MIME TYPE                                                                                                                                                                                                                                                            |
+| ----------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Microsoft PowerPoint          | .ppt,.pot,.pps, .ppa       | application/vnd.ms-powerpoint                                                                                                                                                                                                                                        |
+| Microsoft PowerPoint Open XML | .pptx, .potx, .pptm, .potm | application/vnd.openxmlformats-officedocument.presentationml.presentation, application/vnd.openxmlformats-officedocument.presentationml.template, application/vnd.ms-powerpoint.presentation.macroEnabled.12, application/vnd.ms-powerpoint.template.macroEnabled.12 |
+| OpenDocument Presentation     | .odp                       | application/vnd.oasis.opendocument.presentation                                                                                                                                                                                                                      |
 
 ## Office Excel
 
-| Format                            | Extension                  | MIME TYPE                                                                                                                                                                                                                                  |
-| --------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Microsoft Excel                   | .xls,.xlt, .xla            | application/vnd.ms-excel, application/x-ms-excel                                                                                                                                                                                           |
-| Microsoft PowerPoint Open XML     | .xlsx, .xslm, .xltx, .xltm | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel.sheet.macroEnabled.12, application/vnd.openxmlformats-officedocument.spreadsheetml.template, application/vnd.ms-excel.template.macroEnabled.12 |
-| OpenDocument Spreadsheet          | .ods                       | application/vnd.oasis.opendocument.spreadsheet                                                                                                                                                                                             |
+| Format                        | Extension                  | MIME TYPE                                                                                                                                                                                                                                  |
+| ----------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Microsoft Excel               | .xls,.xlt, .xla            | application/vnd.ms-excel, application/x-ms-excel                                                                                                                                                                                           |
+| Microsoft PowerPoint Open XML | .xlsx, .xslm, .xltx, .xltm | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel.sheet.macroEnabled.12, application/vnd.openxmlformats-officedocument.spreadsheetml.template, application/vnd.ms-excel.template.macroEnabled.12 |
+| OpenDocument Spreadsheet      | .ods                       | application/vnd.oasis.opendocument.spreadsheet                                                                                                                                                                                             |
 
 ## Office Visio
 
-| Format                            | Extension                  | MIME TYPE                                                                                                              |
-| --------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Microsoft Visio                   | .vsd                       | application/visio,application/x-visio, application/vsd, application/x-vsd, image/x-vsd, zz-application/zz-winassoc-vsd |
-| Microsoft PowerPoint Open XML     | .vsdx                      | application/vnd.visio, application/vnd.ms-visio, application/visio.drawing                                             |
-| OpenDocument Draw                 | .odg                       | application/vnd.oasis.opendocument.graphics                                                                            |
+| Format                        | Extension | MIME TYPE                                                                                                              |
+| ----------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Microsoft Visio               | .vsd      | application/visio,application/x-visio, application/vsd, application/x-vsd, image/x-vsd, zz-application/zz-winassoc-vsd |
+| Microsoft PowerPoint Open XML | .vsdx     | application/vnd.visio, application/vnd.ms-visio, application/visio.drawing                                             |
+| OpenDocument Draw             | .odg      | application/vnd.oasis.opendocument.graphics                                                                            |
 
 ## Microsoft Project
 
@@ -144,8 +139,6 @@ content_hash: bfb7a8b293a4237571a1f7f9dd0ae2db22428a559cd68d88da262896b1cda29a
 | MicroStation V8 DGN and V7 DGN                       | .dgn      | image/vnd.dgn, image/x-vnd.dgn                                          |
 | Industry Foundation Classes (IFC) versions 2x3 and 4 | .ifc      | application/x-step                                                      |
 
-
-
 DWG 2018 (AC1032) AutoCAD 2018/2019/2020/2021
 
 DWG 2013 (AC1027) AutoCAD 2013/2014/2015/2016/2017
@@ -164,8 +157,6 @@ DWG R13 (AC1012) AutoCAD Release 13
 
 DWG R11/12 (AC1009) AutoCAD Release 11/12
 
-
-
 ## Archives
 
 | Format       | Extension | MIME TYPE                                                      |
@@ -176,6 +167,6 @@ DWG R11/12 (AC1009) AutoCAD Release 11/12
 
 ## Visit Card
 
-| Format            | Extension | MIME TYPE  |
-| ----------------- | --------- | ---------- |
+| Format                | Extension | MIME TYPE  |
+| --------------------- | --------- | ---------- |
 | vCard (2.1 &amp; 3.0) | .vcf      | text/vcard |

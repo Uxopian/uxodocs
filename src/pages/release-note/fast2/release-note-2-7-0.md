@@ -1,13 +1,13 @@
 ---
 # Do not modify
-draft : false
+draft: false
 title: "Fast2 release notes - "
 date: 2022-10-11
 
 # To modify
-version: "2.7.0"   # ex of format: 2.2.1
-major_version: "2"    # minor version of the release note    ex: 2.2
-description : "Stop and restart workers from UI, Filenet injector improvement, addition of Documentum extractor" # Heavily-keywords-charged sentence for short preview of the release note + google SEO
+version: "2.7.0" # ex of format: 2.2.1
+major_version: "2" # minor version of the release note    ex: 2.2
+description: "Stop and restart workers from UI, Filenet injector improvement, addition of Documentum extractor" # Heavily-keywords-charged sentence for short preview of the release note + google SEO
 ---
 
 ### Evolution
@@ -34,8 +34,7 @@ Worker : stop/restart from UI controls
 
 Nuxeo injector: Support creating other document classes than Nuxeo.FILE
 
-
-### Issue 
+### Issue
 
 Can start OpenSearch Dashboard on Linux without modifying node file rights
 
@@ -48,7 +47,6 @@ Data values as XML \(multiline, with quotes\) give erroneous CSV output when dow
 Inconsistency in campaign status
 
 Null Punnet values shouldn't block Punnet processing nor block whole maps
-
 
 ### New feature
 

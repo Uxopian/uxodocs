@@ -1,26 +1,18 @@
 ---
 title: Installation
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: ed2d6e2ca3137f3cdc477e9e238ea12a792fa0ee5a26e1a0eeda0c48e7077ae0
 ---
-
-
-
-
-
-
-
 
 If upgrading from version 4.8 to version 2023.0, please refer to the detailed upgrade documentation
 [here](/docs/arender/guides/upgrade/4.8_to_2023.0/rendition).
 
-
 ## Installer Setup
 
-We strongly recommend installing ARender using the all-in-one installer, as it includes all necessary third-party 
-components in validated versions. This method ensures the most reliable setup experience. The only requirement is a 
+We strongly recommend installing ARender using the all-in-one installer, as it includes all necessary third-party
+components in validated versions. This method ensures the most reliable setup experience. The only requirement is a
 valid JDK or JRE (see [Requirement](/docs/arender/installation/standalone/rendition/requirements).
 
 ### Retrieving the installer
@@ -39,18 +31,18 @@ $> java -jar rendition-engine-installer--rendition.jar
 
 Below is an example of the installation steps on Windows:
 
-* Select the installation directory:
+- Select the installation directory:
 
 ![image](/img/arender/installer-jar-arender-1.png)
 
-* Select the components to install. Unselected items must be installed manually:
+- Select the components to install. Unselected items must be installed manually:
 
 ![image](/img/arender/installer-jar-arender-2.png)
 
-* Completion screen: 
-![image](/img/arender/installer-jar-arender-3.png)
+- Completion screen:
+  ![image](/img/arender/installer-jar-arender-3.png)
 
-Installed software, except LibreOffice, will be located in the ***third_party*** software folder:
+Installed software, except LibreOffice, will be located in the **_third_party_** software folder:
 
 ![image](/img/arender/installer-jar-arender-4.png)
 
@@ -68,22 +60,23 @@ docs/install/install-rendition.properties
 
 Various options can be added:
 
-| Properties                                      | Mandatory/Optional | Function                                           | Possible value |
-| ------------------------------------------------| ------------------ | -------------------------------------------------- | -------------- |
-| INSTALL_PATH                                    | Mandatory          | Installation Path                                  | Absolute path  |
-| arender.silent.install                          | Optional           | Set to true on silent install (-options)           | True/false     |
-| arender.install.as.service                      | Optional           | Install as service                                 | True/false     |
-| arender.install.libreoffice                     | Optional           | Libreoffice setup                                  | True/false     |
-| arender.install.wkhtmltopdf.portable            | Optional           | Install Wkhtmltopdf in portable mode               | True/false     |
-| arender.install.imagemagick.portable            | Optional           | Install ImageMagick in portable mode               | True/false     |
-| arender.install.ffmpeg.portables                | Optional           | Install FFmpeg in portable mode                    | True/false     |
-| arender.install.msoffice.prerequisites (Windows)| Optional           | Install Microsoft Office prerequisites for ARender | True/false     |
+| Properties                                       | Mandatory/Optional | Function                                           | Possible value |
+| ------------------------------------------------ | ------------------ | -------------------------------------------------- | -------------- |
+| INSTALL_PATH                                     | Mandatory          | Installation Path                                  | Absolute path  |
+| arender.silent.install                           | Optional           | Set to true on silent install (-options)           | True/false     |
+| arender.install.as.service                       | Optional           | Install as service                                 | True/false     |
+| arender.install.libreoffice                      | Optional           | Libreoffice setup                                  | True/false     |
+| arender.install.wkhtmltopdf.portable             | Optional           | Install Wkhtmltopdf in portable mode               | True/false     |
+| arender.install.imagemagick.portable             | Optional           | Install ImageMagick in portable mode               | True/false     |
+| arender.install.ffmpeg.portables                 | Optional           | Install FFmpeg in portable mode                    | True/false     |
+| arender.install.msoffice.prerequisites (Windows) | Optional           | Install Microsoft Office prerequisites for ARender | True/false     |
 
 As example, for a silent installation, set **arender.silent.install=true** in **install-rendition.properties**.
 
 #### Silent Installation Command
 
 For an installation in a silent mode, an option must be passed as a parameter when launching the installation with the jar.
+
 ```bash
 $> java -jar ARender-rendition-installer.jar -options install-rendition.properties
 ```
@@ -94,14 +87,9 @@ $> java -jar ARender-rendition-installer.jar -options install-rendition.properti
 
 Install the following additional software:
 
-
-
 We recommend using Chocolatey to ease the installations: [https://chocolatey.org/](https://chocolatey.org/)
 
-
 We recommend installing these third parties from the official OS package distribution.
-
-
 
 | Document Type           | Software                        | Requirement                                                                                                             |
 | ----------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
@@ -114,10 +102,10 @@ Ensure third-party tools are in the server's PATH:
 
 | Software    | Variable that should be in the server PATH environment variable                                                   |
 | ----------- | ----------------------------------------------------------------------------------------------------------------- |
-| LibreOffice | *soffice*                                                                                                         |
-| ImageMagick | *magick* (under Windows, validate that the binary named convert.exe is existing, if not, link it from magick.exe) |
-| WKHtmlToPdf | *wkhtmltopdf*                                                                                                     |
-| FFmpeg      | *ffmpeg* and *ffprobe*                                                                                            |
+| LibreOffice | _soffice_                                                                                                         |
+| ImageMagick | _magick_ (under Windows, validate that the binary named convert.exe is existing, if not, link it from magick.exe) |
+| WKHtmlToPdf | _wkhtmltopdf_                                                                                                     |
+| FFmpeg      | _ffmpeg_ and _ffprobe_                                                                                            |
 
 #### OS Configuration (Linux Only)
 
@@ -131,5 +119,5 @@ $> ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
 
 #### Installation process
 
-Extract the rendition-engine zip file to the desired directory. It is recommended to choose a directory close to the 
+Extract the rendition-engine zip file to the desired directory. It is recommended to choose a directory close to the
 root of your file system to avoid Windows path length limitations.

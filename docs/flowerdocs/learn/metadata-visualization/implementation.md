@@ -1,23 +1,21 @@
 ---
 title: Implementation
-date: '2020-02-01T11:20:01+02:00'
+date: "2020-02-01T11:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 9d52a93a6afbfe5d6a5627f3423867e5e2ef3f2592540e9cd99bf4bfe0d9365d
 ---
-
-
-
 
 # Visualize metadata for all job attachments
 
 To begin with, we'll simply configure the plugin to allow us to view the metadata of each attachment to a `GEC_Step2_ATraiter` class task.
 
-Add the following script: 
+Add the following script:
+
 ```javascript
 new MetadataVisualizationAttachmentPlugin({
-classId: 'GEC_Step2_ATraiter',
+    classId: "GEC_Step2_ATraiter",
 }).bind();
 ```
 
@@ -27,39 +25,42 @@ The user can now view the metadata of each attachment of a `GEC_Step2_ATraiter` 
 
 We will now restrict the view of this action. We want only the attachment identified as `Mail` to have the visualization action. To do this, we add the `attachmentId` option to our plugin configuration to specify which attachment the action should be positioned on.
 
-
 :::note[ __Restriction on the attachment__]
+
 ```javascript
 attachmentId: ‘Mail'
 ```
+
 :::
 
-
-We therefore obtain the following script: 
+We therefore obtain the following script:
 :::note[__Visualization action on attachment Incoming mail from a task Mail to be processed__]
+
 ```javascript
 new MetadataVisualizationAttachmentPlugin({
 	classId: 'GEC_Step2_ATraiter',
   	attachmentId: ‘Mail'
 }).bind();
 ```
-:::
 
+:::
 
 # To go further: customize your action
 
-Now we want to customize the visualization action. We are going to add the options for customizing the title and icon of the action to our script: 
+Now we want to customize the visualization action. We are going to add the options for customizing the title and icon of the action to our script:
 
 :::note[ __Options for customizing the visualization action__]
+
 ```javascript
 	title: ‘Visualizing incoming mail data',
 	icon:'fa-up-right-from-square'
 ```
+
 :::
 
-
-With this script, the visualization action is fully customized: 
+With this script, the visualization action is fully customized:
 :::note[__Customizing the metadata visualization action__]
+
 ```javascript
 new MetadataVisualizationAttachmentPlugin({
 	classId: 'GEC_Step2_ATraiter',
@@ -68,4 +69,5 @@ new MetadataVisualizationAttachmentPlugin({
 	icon:'fa-up-right-from-square'
 }).bind();
 ```
+
 :::

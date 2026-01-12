@@ -1,8 +1,8 @@
 ---
 title: Credentials
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: c183312eb178d9a167f94eadb7dab4e1e6d147a65ad2829e43997fb461bee1ef
 ---
 
@@ -110,8 +110,8 @@ Module used by Fast2 to connect to its own database.
 
 <b>Mandatory settings</b>
 
-| Key      | Type     | Description | Default value |
-| -------- | -------- | ----------- | ------------- |
+| Key               | Type     | Description                        | Default value             |
+| ----------------- | -------- | ---------------------------------- | ------------------------- |
 | Database endPoint | `String` | The endpoint of the Fast2 database | `"http://localhost:1790 ` |
 
 ## FileNet35ConnectionProvider <small> - Connection provider for FileNet 3.5 solution </small> {#FileNet35ConnectionProvider data-toc-label="FileNet35ConnectionProvider"}
@@ -127,10 +127,10 @@ This task is used to provide connection information to connect specifically to t
 
 <b>Optional settings</b>
 
-| Key                 | Type                                                   | Description                                                |
-| ------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
-| WCM Config resource | `String`                                               |                                                            |
-| Object store name   | `String`                                               | Name of the docbase involved in the migration              |
+| Key                 | Type                                                | Description                                                |
+| ------------------- | --------------------------------------------------- | ---------------------------------------------------------- |
+| WCM Config resource | `String`                                            |                                                            |
+| Object store name   | `String`                                            | Name of the docbase involved in the migration              |
 | URL settings        | [WcmApiConfigSettings](helper#WcmApiConfigSettings) | Class used for setting multiple URLs (download, upload...) |
 
 ## FileNetConnectionProvider <small> - Connection provider for FileNet P8 solution </small> {#FileNetConnectionProvider data-toc-label="FileNetConnectionProvider"}
@@ -214,19 +214,18 @@ This module will grant Fast2 access to send emails on behalf of a given user
 | ----- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Debug | `Boolean` | Set the debug setting for this Session. Since the debug setting can be turned on only after the Session has been created, to turn on debugging in the Session constructor, set the property `mail.debug` in the Properties object passed in to the constructor to `true` |
 
-
 ## MFilesConnectionProvider <small> - Connection settings for MFiles </small> {#MFilesConnectionProvider data-toc-label="MFilesConnectionProvider"}
 
 Credentials to connect to M-Files remote system via its REST API.
 
 <b>Mandatory settings</b>
 
-| Key               | Type     | Description                                                            | Default value |
-| ----------------- | -------- | ---------------------------------------------------------------------- | ------------- |
-| M-Files REST endpoint | `String` | | http://ip.address/REST |
-| Login | `String` | |  |
-| Password | `String` | |  |
-| Vault GUID | `String` | ex : `{15c876e7-8462-4a35-83d6-c8c21694eed6}` |  |
+| Key                   | Type     | Description                                   | Default value          |
+| --------------------- | -------- | --------------------------------------------- | ---------------------- |
+| M-Files REST endpoint | `String` |                                               | http://ip.address/REST |
+| Login                 | `String` |                                               |                        |
+| Password              | `String` |                                               |                        |
+| Vault GUID            | `String` | ex : `{15c876e7-8462-4a35-83d6-c8c21694eed6}` |                        |
 
 ## MobiusConnectionProvider <small> - Mobius connection provider </small> {#MobiusConnectionProvider data-toc-label="MobiusConnectionProvider"}
 
@@ -251,12 +250,12 @@ This Mobius connection module is required for Fast2 to successfully establish th
 
 <b>Mandatory settings</b>
 
-| Key                | Type     | Description                                                              | Default value |
-| ------------------ | -------- | ------------------------------------------------------------------------ | ------------- |
-| Accessible schemas | `String` | List of document schemas accessible with this connexion                  | `* `          |
+| Key                | Type     | Description                                                                  | Default value |
+| ------------------ | -------- | ---------------------------------------------------------------------------- | ------------- |
+| Accessible schemas | `String` | List of document schemas accessible with this connexion                      | `* `          |
 | Connexion URL      | `String` | `http://hostname:port/nuxeo` <br/> <p> Ex/ `http://localhost:8080/nuxeo`</p> |
-| Password           | `String` |                                                                          |
-| UserName           | `String` |                                                                          |
+| Password           | `String` |                                                                              |
+| UserName           | `String` |                                                                              |
 
 ## OpenTextCredentials <small> - OpenText user credentials </small> {#OpenTextCredentials data-toc-label="OpenTextCredentials"}
 

@@ -1,57 +1,57 @@
-import React from 'react';
-import Link from '@docusaurus/Link';
-import styles from './styles.module.css';
+import React from "react";
+import Link from "@docusaurus/Link";
+import styles from "./styles.module.css";
 
 const DocumentationList = [
     {
-        title: 'ARender',
-        icon: '📄',
-        description: 'Secure and collaborative document viewing solution',
-        link: '/docs/arender',
-        color: '#e74c3c'
+        title: "ARender",
+        icon: "📄",
+        description: "Secure and collaborative document viewing solution",
+        link: "/docs/arender",
+        color: "#e74c3c",
     },
     {
-        title: 'FlowerDocs',
-        icon: '🌸',
-        description: 'Complete electronic document management solution',
-        link: '/docs/flower',
-        color: '#6c5ce7'
+        title: "FlowerDocs",
+        icon: "🌸",
+        description: "Complete electronic document management solution",
+        link: "/docs/flower",
+        color: "#6c5ce7",
     },
     {
-        title: 'Fast2',
-        icon: '🚀',
-        description: 'Powerful document migration platform',
-        link: '/docs/fast2/getting-started',
-        color: '#fd79a8'
+        title: "Fast2",
+        icon: "🚀",
+        description: "Powerful document migration platform",
+        link: "/docs/fast2/getting-started",
+        color: "#fd79a8",
     },
     {
-        title: 'Installation',
-        icon: '🔧',
-        description: 'Install & deploy the platforms',
-        link: '/docs/flower/installation',
-        color: '#fd79a8'
+        title: "Installation",
+        icon: "🔧",
+        description: "Install & deploy the platforms",
+        link: "/docs/flower/installation",
+        color: "#fd79a8",
     },
     {
-        title: 'Concepts',
-        icon: '💡',
-        description: 'Getting started with general concepts',
-        link: '/docs/flower/concepts',
-        color: '#0984e3'
+        title: "Concepts",
+        icon: "💡",
+        description: "Getting started with general concepts",
+        link: "/docs/flower/concepts",
+        color: "#0984e3",
     },
     {
-        title: 'APIs & Development',
-        icon: '�',
-        description: 'APIs at your disposal',
-        link: '/docs/flower/apis',
-        color: '#6c5ce7'
+        title: "APIs & Development",
+        icon: "�",
+        description: "APIs at your disposal",
+        link: "/docs/flower/apis",
+        color: "#6c5ce7",
     },
     {
-        title: 'Practical Guides',
-        icon: '�',
-        description: 'Step-by-step tutorials and guides',
-        link: '/docs/flower/tutoriels',
-        color: '#00b894'
-    }
+        title: "Practical Guides",
+        icon: "�",
+        description: "Step-by-step tutorials and guides",
+        link: "/docs/flower/tutoriels",
+        color: "#00b894",
+    },
 ];
 
 function DocumentationCard({ title, icon, description, link, color }) {

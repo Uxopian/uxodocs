@@ -1,16 +1,10 @@
 ---
 title: Save recomposed document
 last_update:
-  date: '2025-12-02T14:34:16.372Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:34:16.372Z"
+    author: CI/CD Bot
 content_hash: e4503760b279088fb1f26b5773fb987d27808ee345f07607cf5ab056c8f70604
 ---
-
-
-
-
-
-
 
 ## Prerequisite
 

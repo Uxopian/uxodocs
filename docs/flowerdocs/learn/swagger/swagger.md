@@ -1,18 +1,18 @@
 ---
 title: Swagger UI
 description: Test and consume REST web services.
-date: '2000-02-01T12:20:01+02:00'
+date: "2000-02-01T12:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 099791ba9a26247711c87cecc4387267142a327899825738c8bf34988d660730
 ---
 
-
 # Goal
+
 The aim of this module is to give you the keys to getting to grips with and using Swagger UI to consume the REST web services exposed by **FlowerDocs Core**.
 
-# Access 
+# Access
 
 Swagger UI is available from **FlowerDocs Core** at `/swagger-ui/index.html`.
 For example, for an online demonstration, Swagger UI is available [here](https://flowerdocs.com/core/swagger-ui/index.html).
@@ -21,39 +21,37 @@ For example, for an online demonstration, Swagger UI is available [here](https:/
 
 The services exposed by **FlowerDocs Core** require the client to be authenticated, so it is necessary to provide a token for requests executed from Swagger UI.
 
-We will start by generating a user token : 
+We will start by generating a user token :
 
-* In the menu bar, select the `Authentication` specification 
-* Select the `authentication-rest-controller` web service 
-* Unfold the endpoint ``POST /rest/authentication``
-* Click on ``Try it out`` 
-* In the request editor, fill in the ``password``, ``scope`` and ``user`` fields 
+- In the menu bar, select the `Authentication` specification
+- Select the `authentication-rest-controller` web service
+- Unfold the endpoint `POST /rest/authentication`
+- Click on `Try it out`
+- In the request editor, fill in the `password`, `scope` and `user` fields
 
-If the information entered is correct, the HTTP response section shows: 
+If the information entered is correct, the HTTP response section shows:
 
-* a return code 200
-* a JSON token object with its text value and expiry date
+- a return code 200
+- a JSON token object with its text value and expiry date
 
+Then, to authenticate future requests:
 
-Then, to authenticate future requests: 
-
-* Copy and paste the text value of the generated token (``value`` field)
-* Click on the ``Authorize`` button 
-* Paste the copied token 
+- Copy and paste the text value of the generated token (`value` field)
+- Click on the `Authorize` button
+- Paste the copied token
 
 Future requests will provide **FlowerDocs Core** with the defined token to authenticate them.
 
 # My first request
 
 In this section, we will test our first request using Swagger UI.
-This request will search for all documents whose name contains the letter ``a``.
+This request will search for all documents whose name contains the letter `a`.
 
-* In the menu bar, select the `Component` specification 
-* Select the `document-rest-controller` web service 
-* Unfold the endpoint ``POST /rest/documents/search``
-* Click on ``Try it out`` 
-* In the request editor, copy and paste the following request: 
-
+- In the menu bar, select the `Component` specification
+- Select the `document-rest-controller` web service
+- Unfold the endpoint `POST /rest/documents/search`
+- Click on `Try it out`
+- In the request editor, copy and paste the following request:
 
 ```javascript
 
@@ -69,5 +67,4 @@ This request will search for all documents whose name contains the letter ``a``.
 
 ```
 
-
-To execute the search, click on the ``Execute`` button and consult the results found in the section presenting the HTTP response.
+To execute the search, click on the `Execute` button and consult the results found in the section presenting the HTTP response.

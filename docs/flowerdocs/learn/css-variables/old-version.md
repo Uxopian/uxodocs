@@ -1,51 +1,50 @@
 ---
 title: Return to FlowerDocs 2.5 theme
-date: '2022-04-19T13:20:01+02:00'
+date: "2022-04-19T13:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: ed810aced5e67bd7170538ad827e401f983fae2c338c4a821a1a1c49c15c57da
 ---
-
 
 # Visual change
 
 To meet [RGAA] requirements (https://design.numerique.gouv.fr/accessibilite-numerique/rgaa/), the colors of the FlowerDocs interface have changed.
 
-Based on the use of variables, it is quite possible to get a visual similar to FlowerDocs version 2.5.x. 
+Based on the use of variables, it is quite possible to get a visual similar to FlowerDocs version 2.5.x.
 Find out how to do this below.
 
 ```css
 body{
   --btn-success: #1abc9c;
   --btn-success-hover: #159a80;
-  
+
   --checkbox: #84c7c1;
   --checkbox-after: #26a69a;
-  
+
   --btn-secondary: #6c757d;
   --btn-secondary-hover: #5a6268;
-  
+
   --btn-danger: #f1556c;
   --btn-danger-hover: #ee324d;
-  
+
   --btn-pink: #f672a7;
   --btn-pink-hover: #f44e91;
-  
+
   --text-sidebar-menu-hover: #00acc1;
   --element-focus: #26a69a;
-  
+
   --badge-pink: #f672a7;
   --badge-success: #1abc9c;
 
-button.btn-primary.disabled, 
+button.btn-primary.disabled,
 button.btn-primary:disabled{
-  color: #fff;  
+  color: #fff;
   background-color: #6658dd;
   border-color: #6658dd;
   opacity: .65;
 
-button.btn-success.disabled, 
+button.btn-success.disabled,
 button.btn-success:disabled{
   color: #fff;
   background-color: var(--btn-secondary);
@@ -55,7 +54,7 @@ button.btn-success:disabled{
 .contextual-menu .menu-item:hover {
   background-color: #5fbeaa;
 
-.contextual-menu .menu-item:hover .icon:before, 
+.contextual-menu .menu-item:hover .icon:before,
 .contextual-menu .menu-item:hover .label {
     color: #FFF!important;
 

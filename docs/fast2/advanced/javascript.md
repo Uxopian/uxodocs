@@ -1,15 +1,16 @@
 ---
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 4fe6c3adde0620855afbe5e2488f5d92afe4418786bcf186f1e11b1ef2d1b31d
 ---
+
 Using the [JSTransform](/docs/fast2/catalog/transformer#JSTransform) task can comes in quite handy for any tweaking of metadata, but will also get you covered in case of heavier operations, as long as your JavaScript talents match you problem solving skills !
 To iterate through all documents crossing your JS task, here is a short code snippet to help you get started:
 
 ```js
 punnet.getDocuments().forEach(function (doc) {
-  // do something
+    // do something
 });
 ```
 
@@ -25,12 +26,7 @@ The following script is one way to parse a basic JSON metadata file.
 
 ```js
 // First, get content as String
-var content = punnet
-  .getDocumentList()
-  .get(0)
-  .getContentSet()
-  .getContent()
-  .get(0);
+var content = punnet.getDocumentList().get(0).getContentSet().getContent().get(0);
 var bytes = manager.getPunnetContentFactory().getContentAsByteArray(content);
 
 var String = Java.type("java.lang.String");
@@ -44,8 +40,7 @@ punnet.getDocumentList().clear();
 var doc = punnet.addDocument(com.fast2.model.punnet.DocumentId.id());
 
 // Fetch all properties from existing fragment and create them as Document data
-for (pty in jsonObject)
-  doc.getDataSet().addData(pty, "String", jsonObject[pty]);
+for (pty in jsonObject) doc.getDataSet().addData(pty, "String", jsonObject[pty]);
 ```
 
 Once this script is executed, you'll end up with a punnet whose first and only document will have its dataset full of metadata matching both keys and values from the JSON file.
@@ -54,9 +49,9 @@ Considering the following input embedded in a JSON file:
 
 ```json
 {
-  "name": "testName",
-  "contentPath": "C:/path/to/sample.pdf",
-  "key": "value"
+    "name": "testName",
+    "contentPath": "C:/path/to/sample.pdf",
+    "key": "value"
 }
 ```
 
@@ -64,17 +59,17 @@ the ouput punnet would then look like this:
 
 ```json
 {
-  "documents": [
-    {
-      "data": {
-        "contentPath": "C:/path/to/sample.pdf",
-        "key": "value",
-        "name": "testName"
-      },
-      "documentId": "ffde4769-3acd-4964-ab72-5912f1e65e1e"
-    }
-  ],
-  "punnetId": "punnet.json#1"
+    "documents": [
+        {
+            "data": {
+                "contentPath": "C:/path/to/sample.pdf",
+                "key": "value",
+                "name": "testName"
+            },
+            "documentId": "ffde4769-3acd-4964-ab72-5912f1e65e1e"
+        }
+    ],
+    "punnetId": "punnet.json#1"
 }
 ```
 
@@ -122,15 +117,12 @@ Speaking of it, the strategy will be to iterate through all the documents of the
 
 ```js
 punnet.getDocuments().forEach(function (document) {
-  var duplicate = [].concat(document.getContentSet());
+    var duplicate = [].concat(document.getContentSet());
 
-  duplicate.forEach(function (content) {
-    if (
-      content.getProperty("contentKey") !=
-      punnet.getDataSet().getDataValue("punnetKey")
-    )
-      document.getContentSet().remove(content);
-  });
+    duplicate.forEach(function (content) {
+        if (content.getProperty("contentKey") != punnet.getDataSet().getDataValue("punnetKey"))
+            document.getContentSet().remove(content);
+    });
 });
 ```
 
@@ -166,16 +158,16 @@ If the content to filter out was inside a parent content of this document (i.e. 
 
 ```js
 punnet.getDocuments().forEach(function (document) {
-  document.getContentSet().forEach(function (firstLevelContent) {
-    var duplicate = [].concat(firstLevelContent.getSubContents());
-    duplicate.forEach(function (secondLevelContent) {
-      if (
-        secondLevelContent.getProperty("contentKeyA") !=
-        punnet.getDataSet().getDataValue("punnetKeyA")
-      )
-        firstLevelContent.getSubContents().remove(secondLevelContent);
+    document.getContentSet().forEach(function (firstLevelContent) {
+        var duplicate = [].concat(firstLevelContent.getSubContents());
+        duplicate.forEach(function (secondLevelContent) {
+            if (
+                secondLevelContent.getProperty("contentKeyA") !=
+                punnet.getDataSet().getDataValue("punnetKeyA")
+            )
+                firstLevelContent.getSubContents().remove(secondLevelContent);
+        });
     });
-  });
 });
 ```
 

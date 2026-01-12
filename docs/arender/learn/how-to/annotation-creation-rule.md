@@ -1,16 +1,10 @@
 ---
 title: Annotation creation by rules
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 5f9f8c1218e07419faa9b6ee5438814bedee3cf202fa28d83d242e8811f89377
 ---
-
-
-
-
-
-
 
 ## General concept
 
@@ -20,7 +14,8 @@ For example, it is possible to automate the redact of sensitive information havi
 
 ## Structure of annotation creation rules
 
-The rules will be defined via *beans* in the ARender configuration files. A rule is made up of three main parts: 
+The rules will be defined via _beans_ in the ARender configuration files. A rule is made up of three main parts:
+
 - Rule details
 - Search details
 - Annotation details
@@ -29,26 +24,20 @@ The rules will be defined via *beans* in the ARender configuration files. A rule
 
 A rule needs an identifier and a name.
 
-
-
 ```xml
 <property name="ruleId" value="annotationCreationRuleExample" />
 <property name="ruleName" value="Example of annotation creation rule" />
 ```
 
-
-
 ### Search details
 
 The search details allow you to choose a term or a regular expression to search for. The search can be refined by choosing whether accents or case are taken into account.
 
-Different type of search is configurable in order to apply it on different area of ​​the document. The application can be done either on the current page, or on all the pages or a page selection : 
+Different type of search is configurable in order to apply it on different area of ​​the document. The application can be done either on the current page, or on all the pages or a page selection :
+
 - CURRENT_PAGE
 - ALL_PAGES
 - SELECTED_PAGES
-
-
-
 
 ```xml
 <property name="searchOptions">
@@ -66,12 +55,7 @@ Different type of search is configurable in order to apply it on different area 
 </property>
 ```
 
-
-
-When the *SELECTED_PAGES* option is used, the *pageSelection* property must be added to the *bean* of the rule, which makes it possible to list the targeted pages.
-
-
-
+When the _SELECTED_PAGES_ option is used, the _pageSelection_ property must be added to the _bean_ of the rule, which makes it possible to list the targeted pages.
 
 ```xml
 <!--ONLY FOR THE SEARCH ACTION *SELECTED_PAGES* -->
@@ -83,12 +67,10 @@ When the *SELECTED_PAGES* option is used, the *pageSelection* property must be a
 </property>
 ```
 
-
-
-
 ### Annotation details
 
-Annotations compatible with this feature are strikethrough, underline, underline, strikethrough, and text strikethrough annotations. The associated values ​​for each annotation type are : 
+Annotations compatible with this feature are strikethrough, underline, underline, strikethrough, and text strikethrough annotations. The associated values ​​for each annotation type are :
+
 - Strikeout
 - Underline
 - Highlight
@@ -96,8 +78,6 @@ Annotations compatible with this feature are strikethrough, underline, underline
 - RedactText
 
 An annotation will need to have the opacity and background color set in order to be constructed. The background color only takes on the value of hexadecimal.
-
-
 
 ```xml
     <property name="annotationTemplate">
@@ -118,13 +98,9 @@ An annotation will need to have the opacity and background color set in order to
     </property>
 ```
 
-
-
 ### Complete rule
 
-Here is an example *bean* of a complete rule combining the three main parts. The example allows underlining in red each word 'document' of the current page.
-
-
+Here is an example _bean_ of a complete rule combining the three main parts. The example allows underlining in red each word 'document' of the current page.
 
 ```xml
 <bean id="annotationCreationRuleExample"
@@ -162,19 +138,15 @@ Here is an example *bean* of a complete rule combining the three main parts. The
 				</bean>
 			</property>
 		</bean>
-	</property>		
+	</property>
 </bean>
 ```
 
-
-
 ### Adding a rule to the rule catalog
 
-To use the rules, they must be referenced in the rules catalog. The following example will override the default *annotationCreationRuleCatalog*.
+To use the rules, they must be referenced in the rules catalog. The following example will override the default _annotationCreationRuleCatalog_.
 
 Custom rules are only known to ARender from the rule catalog which lists the different rule identifiers.
-
-
 
 ```xml
 <bean id="annotationCreationRuleCatalog"
@@ -187,39 +159,25 @@ Custom rules are only known to ARender from the rule catalog which lists the dif
 </bean>
 ```
 
-
-
-
 ## Use of rules by JavaScript
 
 It is possible with javascript to trigger the application of all the rules of the catalog.
-
-
 
 ```js
 $wnd.getARenderJS().createAnnotationByRuleWithCatalog();
 ```
 
-
-
 It is also possible to make a list of the identifiers of the rules present in the catalog which must be triggered:
-
-
 
 ```js
 $wnd.getARenderJS().createAnnotationByRulesWithRuleId(["annotationCreationRuleExample"]);
 ```
 
-
-
-
 ## Example of use
 
-The following example will allow you to define a rule allowing to cross out the word *view* on the current page.
+The following example will allow you to define a rule allowing to cross out the word _view_ on the current page.
 
 ### Creating a custom rule
-
-
 
 ```xml
 <bean id="redactRuleExample"
@@ -257,15 +215,11 @@ The following example will allow you to define a rule allowing to cross out the 
 				</bean>
 			</property>
 		</bean>
-	</property>		
+	</property>
 </bean>
 ```
 
-
-
 ### Configuring the Annotation Rule Catalog
-
-
 
 ```xml
 <bean id="annotationCreationRuleCatalog"
@@ -279,13 +233,9 @@ The following example will allow you to define a rule allowing to cross out the 
 </bean>
 ```
 
-
-
 ### Use in a custom button
 
 First, we create the custom button definition:
-
-
 
 ```xml
 <bean id="customButtonToRedactSomething"
@@ -306,17 +256,10 @@ First, we create the custom button definition:
 </bean>
 ```
 
-
-
-
 Then we must add the bean identifier customButtonToRedactSomething to the list of annotation buttons like below :
-
-
 
 ```cfg
 topPanel.annotation.buttons.beanNames=addStickyNoteAnnotationButton,addFreeTextAnnotationButton,customButtonToRedactSomething
 ```
-
-
 
 This example of configuration add 3 buttons to the annotation section of the toppanel.

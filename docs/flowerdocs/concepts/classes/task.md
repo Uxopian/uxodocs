@@ -1,53 +1,50 @@
 ---
 title: Tasks
 description: tasks classes
-date: '2018-03-02T13:20:01+02:00'
+date: "2018-03-02T13:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 8fe3289710591015bc3fd7a1fc45ef11ee3ce949f590728231b386e25230d303
 ---
 
-
 :::info
-A task class is used to define the task model to be created. Its special features are : 
+A task class is used to define the task model to be created. Its special features are :
 
-* an icon (example: ``fa fa-envelope``)
-* a workflow identifier
-* possible answers  
-* expected attachments
-:::
-
+- an icon (example: `fa fa-envelope`)
+- a workflow identifier
+- possible answers
+- expected attachments
+  :::
 
 # Attachments
 
 When processing a task, it may be necessary for the user to add one or more components.
- 
-These components are called task attachments and are globally defined by task class. 
 
-Each expected attachment has the following attributes: 
+These components are called task attachments and are globally defined by task class.
 
-* a identifier
-* an internationalized name
-* definition of a component class (identifier and category) 
-* a tag list: precisely defines attachment metadata
+Each expected attachment has the following attributes:
 
-These attachments can also be characterized by the following parameters: 
+- a identifier
+- an internationalized name
+- definition of a component class (identifier and category)
+- a tag list: precisely defines attachment metadata
 
-* required: defines whether the attachment must be added to validate changes made to the task, required later or optional 
-* technical: defines whether or not the attachment should be displayed to users
-* multivalued: defines whether the attachment can be composed of several components
-* read-only: defines whether users can modify the attachment (the read-only aspect of an attachment also depends on the permissions defined at task level)
+These attachments can also be characterized by the following parameters:
 
-To describe an attachment, you can define : 
+- required: defines whether the attachment must be added to validate changes made to the task, required later or optional
+- technical: defines whether or not the attachment should be displayed to users
+- multivalued: defines whether the attachment can be composed of several components
+- read-only: defines whether users can modify the attachment (the read-only aspect of an attachment also depends on the permissions defined at task level)
 
-* a description that will be displayed when the mouse hovers over the attachment
-* a summary displayed under the name of the component added as an attachment
+To describe an attachment, you can define :
 
+- a description that will be displayed when the mouse hovers over the attachment
+- a summary displayed under the name of the component added as an attachment
 
 # Summary
 
-The summary can be configured, by scope language, to display the tags of the attached component (example: ``${Priority} Created by ${owner}``)	
+The summary can be configured, by scope language, to display the tags of the attached component (example: `${Priority} Created by ${owner}`)
 
 By default, the summary displays the component creation date.
 
@@ -55,12 +52,12 @@ To go even further, you can use the JS API to define your own summary. A dedicat
 
 # Answers
 
-Responses are used to steer tasks in a direction suggested by a workflow. 
-Each answer has the following attributes: 
+Responses are used to steer tasks in a direction suggested by a workflow.
+Each answer has the following attributes:
 
-* an identifier
-* an internationalized name
-* an internationalized confirmation message
+- an identifier
+- an internationalized name
+- an internationalized confirmation message
 
 ## Answers with reason
 
@@ -87,10 +84,10 @@ You can define a patterned response as follows:
 	<ns4:reasons tagName="Comments" order="0" mandatory="true" />
 </ns4:answers>
 ```
-	
+
 To add a motif with a pattern, the following properties must be defined:
 
-* ``descriptions``, the internationalized description of the tag when the user has not yet entered a value in the field
-* ``pattern``, the rule to apply 
+- `descriptions`, the internationalized description of the tag when the user has not yet entered a value in the field
+- `pattern`, the rule to apply
 
-For example, the rule ``^M[0-9]*$`` accepts only values beginning with ``M`` and ending with digits.
+For example, the rule `^M[0-9]*$` accepts only values beginning with `M` and ending with digits.

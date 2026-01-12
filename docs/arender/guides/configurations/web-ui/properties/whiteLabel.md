@@ -1,17 +1,10 @@
 ---
 title: White label
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: ca4aba2402daa890d4edf49009af868cc73f927f9b1dc5daa14f1e49a56be39e
 ---
-
-
-
-
-
-
-
 
 ## Introduction
 
@@ -26,23 +19,16 @@ A property allows removing references to 'ARender'. Removed references are in th
 
 Apply following property to remove those references :
 
-
 ```cfg
 # Remove any references of ARender in the application
 arender.white.labeling=true
 ```
 
-
-
-
 Result after activation of the white label property :
-
 
 ![image](/img/arender/aboutWhiteLabelingEN.png)
 
-
 ### The references at loading and saving
-
 
 At document loading or saving, an 'ARender' text is visible at the center of the page.
 
@@ -50,17 +36,12 @@ At document loading or saving, an 'ARender' text is visible at the center of the
 
 This text is configurable with the following property :
 
-
-
 ```cfg
 # Display the label when document starts to open
 startup.loading.label=Just-Loading
 ```
 
-
-
 ![image](/img/arender/textARenderSaveWhiteLabel.png)
-
 
 ### Modification of window title
 

@@ -1,16 +1,15 @@
 ---
 title: Favorites
-date: '2000-04-02T13:20:01+02:00'
+date: "2000-04-02T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: b484ea0d14384245232f0cb6114b6241bb87ed37ed613be251690e53e12f4492
 ---
 
-
 This type of widget displays the user's favorites based on a configured search.
 
-Users can click on the results displayed to access the component. 
+Users can click on the results displayed to access the component.
 
 In the example below, we start by defining the request that will populate the widget:
 
@@ -28,14 +27,15 @@ In the example below, we start by defining the request that will populate the wi
 	<property name="max" value="10" />
 </bean>
 ```
-Note that the ``id`` property used in this bean represents the bean identifier for a parameterized search.
 
-Next, we build the ``favoriteDocumentsWidget`` widget to display the search. 
-In this example, we define: 
+Note that the `id` property used in this bean represents the bean identifier for a parameterized search.
 
-* the type of component required, the category: here ``DOCUMENT``, the available categories are ``DOCUMENT``, ``TASK``, ``FOLDER``, ``VIRTUAL_FOLDER``. 
-* the widget's internationalized title and description
-* the request defined previously ``favoriteRequest``
+Next, we build the `favoriteDocumentsWidget` widget to display the search.
+In this example, we define:
+
+- the type of component required, the category: here `DOCUMENT`, the available categories are `DOCUMENT`, `TASK`, `FOLDER`, `VIRTUAL_FOLDER`.
+- the widget's internationalized title and description
+- the request defined previously `favoriteRequest`
 
 ```xml
 <bean id="favoriteDocumentsWidget" class="com.flower.docs.gui.client.preferences.favorite.HomeFavoritesPresenter">
@@ -45,7 +45,7 @@ In this example, we define:
 			    <bean class="com.flower.docs.domain.common.Id">
 			        <property name="value" value="documentSearch" />
 			    </bean>
-			</property>				
+			</property>
 			<property name="category">
 				<value type="com.flower.docs.domain.component.Category">DOCUMENT</value>
 			</property>
@@ -67,7 +67,7 @@ In this example, we define:
 </bean>
 ```
 
-And finally, we associate the ``favoriteDocumentWidget`` widget with a catalog named ``homeWidgets``
+And finally, we associate the `favoriteDocumentWidget` widget with a catalog named `homeWidgets`
 
 ```xml
 <bean id="homeWidgets" class="com.flower.docs.gui.client.util.SimpleWidgetCatalog">
@@ -78,4 +78,5 @@ And finally, we associate the ``favoriteDocumentWidget`` widget with a catalog n
 	</property>
 </bean>
 ```
+
 The widget title is clickable, allowing users to directly access the associated search results by pressing it.

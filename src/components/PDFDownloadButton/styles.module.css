@@ -38,12 +38,12 @@
 }
 
 /* Dark mode support */
-[data-theme='dark'] .pdfButton {
+[data-theme="dark"] .pdfButton {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
 }
 
-[data-theme='dark'] .pdfButton:hover {
+[data-theme="dark"] .pdfButton:hover {
     box-shadow: 0 6px 12px rgba(102, 126, 234, 0.5);
 }
 

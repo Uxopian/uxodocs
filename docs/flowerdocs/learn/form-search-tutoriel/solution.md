@@ -1,20 +1,19 @@
 ---
 title: Full example
-date: '2020-07-07T12:20:01+02:00'
+date: "2020-07-07T12:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: a772373fa6f1f0c6bd3a0d3543458615a5a156f94facdf971387926d32b63d10
 ---
 
+Reminder: Access the editor via the **Administration > Configuration > XML** menu:
 
-Reminder:  Access the editor via the **Administration > Configuration > XML** menu: 
-
-* Click on the **+** to create a new XML file,
-* In the first field, enter **Search for client folders**  to name the XML file
-* Copy the XML code below,
-* Paste the code into the editor,
-* Click on the **Save**button.
+- Click on the **+** to create a new XML file,
+- In the first field, enter **Search for client folders** to name the XML file
+- Copy the XML code below,
+- Paste the code into the editor,
+- Click on the **Save**button.
 
 <br/>
 
@@ -23,14 +22,15 @@ Reminder:  Access the editor via the **Administration > Configuration > XML** me
 <br/>
 
 :::note[Full example]
-```xml 
+
+```xml
 
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
+<beans xmlns="http://www.springframework.org/schema/beans"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans  
-       http://www.springframework.org/schema/beans/spring-beans.xsd    
-       http://www.springframework.org/schema/context  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
   	<bean id="NomAdherentCriterion"
 		class="com.flower.docs.gui.client.search.criterion.SimpleCriterionPresenter">
@@ -190,8 +190,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
 </beans>
 
 ```
-:::
 
+:::
 
 <br/>
 
@@ -199,4 +199,3 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
 Find the scope module corresponding to this training [here]("")
 :::
 -->
-

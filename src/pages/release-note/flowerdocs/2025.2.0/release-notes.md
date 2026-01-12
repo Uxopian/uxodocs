@@ -3,22 +3,20 @@ title: FlowerDocs 2025.2.0 Release notes
 description: FlowerDocs 2025.2.0 Release notes
 ---
 
-
 <br />
 
 **Legend**
 
-* 💻 Native feature
-* ⚙️ Feature requires configuration to be activated
-* 👨‍💻 Feature requiring development to be activated
-* 👑 Premium feature
+- 💻 Native feature
+- ⚙️ Feature requires configuration to be activated
+- 👨‍💻 Feature requiring development to be activated
+- 👑 Premium feature
 
 <br />
 
 # Overview
 
 FlowerDocs **2025.2.0** enhances the reporting experience with a more intuitive design and strengthens integration capabilities through the introduction of a dedicated Java REST client. This new client simplifies and accelerates API integrations while marking the official deprecation of the SOAP API. The release also includes important fixes and security improvements (CVEs), reinforcing stability and reliability in production.
-
 
 # Upgrade Notes
 
@@ -53,7 +51,6 @@ The user creation or update screen now clearly highlights all required fields. T
 The group creation or update screen clearly highlights all mandatory fields. The "Create" or "Save" button remains inactive until all mandatory fields have been filled in.
 ![Image](/uxodocs/img/flowerdocs/release-notes/GroupManagment_EN.png)
 
-
 # For integrators
 
 ## 👨‍💻 New Java REST Client
@@ -72,9 +69,9 @@ Starting with this version, **the SOAP API and its associated Java client are de
 
 New REST endpoints are available:
 
-* to create or retrieve annotations in json format instead of XFDF format in order to facilitate these actions via APIs  
-* to manipulate reservations by providing a list of component references  
-* to retrieve a token with an expiry date
+- to create or retrieve annotations in json format instead of XFDF format in order to facilitate these actions via APIs
+- to manipulate reservations by providing a list of component references
+- to retrieve a token with an expiry date
 
 See details in the upgrade notes: [here](./upgrade-notes#adding-methods)
 
@@ -82,33 +79,31 @@ See details in the upgrade notes: [here](./upgrade-notes#adding-methods)
 
 To view all the groups to which a user is entitled, even if they are nested in the directory, you need to activate the user.groups.resolve-recursively=true property in the core.properties file. It is no longer possible to activate this property via the administration GUI.
 
-
 # For operators
 
 ## 💻 Security Enhancements (CVE Fixes)
 
 Several CVEs have been addressed in this version. Specific details are withheld to protect against exploit attempts.
 
-
 # Bug fixes
 
-| Bug | Linked issues |
-| :---- | :---- |
-| **Users** |  |
-| Administration \- Within a group, it is possible to add two users with similar IDs | TMAFLW-960 |
-| Administration \- When modifying a team, adding or deleting a user or a group, the changes are only taken into account after clicking on "Save".  If the administrator wishes to cancel these modifications, he can do so by clicking on the "Cancel" button. | TMAFLW-342 |
-| The default ratio between the indexing panel and the viewer panel has been revised for 14" screens to benefit from a larger document display. |  |
-| Reports \- Clicking on the "Full screen" action in a report displays it in full screen mode, making the information easier to read. | TMAFLW-1015 |
-| History \- Following a mass assignment of several tasks, when the history of one of the tasks is consulted, only one assignment fact is present, the one corresponding to it. | TMAFLW-1080 |
-| **Integrators** |  |
-| CLM \- When exporting configuration jobs (export-config job), only configurations are exported. Annotations are no longer present. |  |
-|  | TMAFLW-1127 |
-| Tags of type FreeList trigger the registerForFieldChange method again on the first call | TMAFLW-1127 |
+| Bug                                                                                                                                                                                                                                                          | Linked issues |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| **Users**                                                                                                                                                                                                                                                    |               |
+| Administration \- Within a group, it is possible to add two users with similar IDs                                                                                                                                                                           | TMAFLW-960    |
+| Administration \- When modifying a team, adding or deleting a user or a group, the changes are only taken into account after clicking on "Save". If the administrator wishes to cancel these modifications, he can do so by clicking on the "Cancel" button. | TMAFLW-342    |
+| The default ratio between the indexing panel and the viewer panel has been revised for 14" screens to benefit from a larger document display.                                                                                                                |               |
+| Reports \- Clicking on the "Full screen" action in a report displays it in full screen mode, making the information easier to read.                                                                                                                          | TMAFLW-1015   |
+| History \- Following a mass assignment of several tasks, when the history of one of the tasks is consulted, only one assignment fact is present, the one corresponding to it.                                                                                | TMAFLW-1080   |
+| **Integrators**                                                                                                                                                                                                                                              |               |
+| CLM \- When exporting configuration jobs (export-config job), only configurations are exported. Annotations are no longer present.                                                                                                                           |               |
+|                                                                                                                                                                                                                                                              | TMAFLW-1127   |
+| Tags of type FreeList trigger the registerForFieldChange method again on the first call                                                                                                                                                                      | TMAFLW-1127   |
 
 # Known issues
 
-* It is no longer possible to modify group information from the FlowerDocs administration GUI. Modifications made directly in the directory are taken into account.
-* Java REST client - The addFiles() method returns only 1 of the added documents instead of all documents when sending multiple documents.
+- It is no longer possible to modify group information from the FlowerDocs administration GUI. Modifications made directly in the directory are taken into account.
+- Java REST client - The addFiles() method returns only 1 of the added documents instead of all documents when sending multiple documents.
 
 # FlowerDocs eProcess
 
@@ -116,15 +111,15 @@ Several CVEs have been addressed in this version. Specific details are withheld 
 
 No specific changes have been made to this version. It benefits from the following corrections and improvements made by FlowerDocs:
 
-* Improved reporting
-* Improved user and group management
+- Improved reporting
+- Improved user and group management
 
 ## Bug fixes
 
-| Bug | Linked issues |
-| :---- | :---- |
-| **Utilisateurs** |  |
-| When the eProcess solution is deployed with the GEC solution, the "Send for information" action is not present when creating an envelope | TMAFLW-1009 |
+| Bug                                                                                                                                      | Linked issues |
+| :--------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| **Utilisateurs**                                                                                                                         |               |
+| When the eProcess solution is deployed with the GEC solution, the "Send for information" action is not present when creating an envelope | TMAFLW-1009   |
 
 # FlowerDocs GEC
 
@@ -132,5 +127,5 @@ No specific changes have been made to this version. It benefits from the followi
 
 No specific changes have been made to this version. It benefits from the following corrections and improvements made by FlowerDocs:
 
-* Improved reporting
-* Improved user and group management
+- Improved reporting
+- Improved user and group management

@@ -1,17 +1,15 @@
 ---
 title: Installation process
-date: '2000-03-29T13:20:01+02:00'
+date: "2000-03-29T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 3df9b38cbebcb66edef3119da16b3ffbdaf28adcdcf119f5adb8b78d465962e3
 ---
 
-
 :::info
-This section describes how to install the **FlowerDocs GUI**, **FlowerDocs Core** and  applications.
+This section describes how to install the **FlowerDocs GUI**, **FlowerDocs Core** and applications.
 :::
-
 
 In the rest of this page, `${APP_HOME}` corresponds to the folder in which each application will be deployed.
 
@@ -19,31 +17,29 @@ In the rest of this page, `${APP_HOME}` corresponds to the folder in which each 
  
 # **FlowerDocs GUI**
 
-* After completing the downloads mentioned in the prerequisites, place the `flower-docs-gui-webapp-.jar` application in the `${APP_HOME}` folder.
-* Add `application.properties` file with the following properties: 
+- After completing the downloads mentioned in the prerequisites, place the `flower-docs-gui-webapp-.jar` application in the `${APP_HOME}` folder.
+- Add `application.properties` file with the following properties:
+
 ```javascript
 spring.task.execution.pool.core-size=16
 spring.task.execution.pool.max-size=16
 spring.task.execution.thread-name-prefix=flowerdocs-async-
 ```
-* Add the `gui.properties` configuration file to `${APP_HOME}`.
 
-# 
+- Add the `gui.properties` configuration file to `${APP_HOME}`.
 
-* After completing the downloads mentioned in the prerequisites, place the `arondor-arender-hmi-spring-boot-.jar` application in the `${APP_HOME}` folder.
-* Create the folders `${APP_HOME}/configurations` and `${APP_HOME}/lib`.
-* Add the `arender-custom-server.properties` configuration file to `${APP_HOME}/configurations`.
-* Add ARender FlowerDocs connector `flower-docs-arender-hmi-.jar` to `${APP_HOME}/lib`.
+#
 
+- After completing the downloads mentioned in the prerequisites, place the `arondor-arender-hmi-spring-boot-.jar` application in the `${APP_HOME}` folder.
+- Create the folders `${APP_HOME}/configurations` and `${APP_HOME}/lib`.
+- Add the `arender-custom-server.properties` configuration file to `${APP_HOME}/configurations`.
+- Add ARender FlowerDocs connector `flower-docs-arender-hmi-.jar` to `${APP_HOME}/lib`.
 
 For high availability, it is necessary to activate session affinity on each HMI.
 
-
-
 Please note that Hazelcast in ARenderHMI with FlowerDocs is not functional and should not be activated.
-
 
 # **FlowerDocs Core**
 
-* After completing the downloads mentioned in the prerequisites, place the `flower-docs-core-webapp-.jar` application in the `${APP_HOME}` folder.
-* Add the `core.properties` configuration file to `${APP_HOME}`.
+- After completing the downloads mentioned in the prerequisites, place the `flower-docs-core-webapp-.jar` application in the `${APP_HOME}` folder.
+- Add the `core.properties` configuration file to `${APP_HOME}`.

@@ -1,16 +1,15 @@
 ---
 title: Handling a task
-description: 'Create, retrieve, modify, delete, respond to and assign your tasks'
-date: '2001-04-29T13:30:01+02:00'
+description: "Create, retrieve, modify, delete, respond to and assign your tasks"
+date: "2001-04-29T13:30:01+02:00"
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 334f92cad69ba844b9e81e94551843b03a3c0cc5690b186c1e38fc55ca36e1f4
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-
 
 The `Task` service exposes all the operations available around `TASK` type components.
 
@@ -49,7 +48,6 @@ Content-Type: application/json
 
   </TabItem>
 </Tabs>
-
 
 # Task creation
 
@@ -143,7 +141,6 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Task modification
 
 This operation updates a task's tags and data (class identifier, task name, ACL, etc.).
@@ -151,7 +148,6 @@ This operation updates a task's tags and data (class identifier, task name, ACL,
 :::info
 This service operates on a cancel and replace basis, so all tag values must be supplied by the service at the time of update. It is therefore advisable to recover the job, make the changes and call the update service.
 :::
-
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -233,7 +229,6 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Job search
 
 The search operations all work on the same model as described [here](/docs/flowerdocs/apis/core/examples/search).
@@ -273,10 +268,10 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Application of an answer
 
 ## Simple answer
+
 The examples below show how to apply a simple answer to a list of tasks from a list of identifiers.
 
 <Tabs>
@@ -317,10 +312,9 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
-
 ## Answer with reason
-The examples below show how to retrieve tasks from an ID list.  
+
+The examples below show how to retrieve tasks from an ID list.
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -372,7 +366,6 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Task assignment
 
 The examples below show how to assign a task list to a user from an ID list.
@@ -409,4 +402,3 @@ Content-Type: application/json
 
   </TabItem>
 </Tabs>
-

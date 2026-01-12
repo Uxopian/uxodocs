@@ -1,12 +1,11 @@
 ---
 title: Implementation
-date: '2020-02-01T11:20:01+02:00'
+date: "2020-02-01T11:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: bfc4eac97749c8a4a5743118fb54f688e0e374ac5b378b384df4c9282f7732b2
 ---
-
 
 :::info
 This tutorial is based on Maven and requires the use of the Arondor Artifactory in which the FlowerDocs libraries are implemented.
@@ -15,10 +14,9 @@ If you are extern to Arondor, please ask the FlowerDocs support to get the menti
 When you have completed this training module, you will be able to develop a secure [`OperationHook`](/docs/flowerdocs/concepts/operation) to respond to the creation of documents and rename them automatically.
 :::
 
-
 # Project creation
 
-Using your favorite IDE, start by creating a new Maven project with the following POM: 
+Using your favorite IDE, start by creating a new Maven project with the following POM:
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -60,14 +58,13 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 </project>
 ```
 
-
-```
+````
 
 # Spring Boot application
 
 This Spring Boot application is based on the [Spring Boot starter](/docs/flowerdocs/apis/core/java) provided by FlowerDocs.
 
-* To start with, we need a _main class_ Spring Boot annotated with the `@SpringBootApplication` annotation: 
+* To start with, we need a _main class_ Spring Boot annotated with the `@SpringBootApplication` annotation:
 
 
 package com.flower.samples;
@@ -75,7 +72,7 @@ package com.flower.samples;
 ```javascript
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-```
+````
 
 ```javascript
 import com.flower.docs.FlowerDocsClient;
@@ -85,6 +82,7 @@ import com.flower.docs.SecurityMode;
 @SpringBootApplication
 @FlowerDocsClient(security = SecurityMode.USER)
 public class ModifyHookApplication
+
 ```json
 
     public static void main(String[] args)
@@ -94,9 +92,7 @@ public class ModifyHookApplication
 
 ```
 
-
-* Then add the `application.properties` file to your project's `src/main/resources` directory to configure the application: 
-
+- Then add the `application.properties` file to your project's `src/main/resources` directory to configure the application:
 
 ```properties
 spring.application.name=modify-hook
@@ -106,12 +102,10 @@ server.servlet.context-path=/modify
 
 ws.url=http://localhost:8081/core/services
 
-
 ```properties
 internal.realm.users[0].id=<user>
 internal.realm.users[0].password=<password>
 ```
-
 
     1 Spring Boot application name
 
@@ -125,11 +119,9 @@ internal.realm.users[0].password=<password>
 
     8 User password for accessing the `OperationHook`
 
-
 # Hook development
 
-Now we move on to `Operation Hook`! To implement your first hook, create a `ModifyOperationHook` class such as: 
-
+Now we move on to `Operation Hook`! To implement your first hook, create a `ModifyOperationHook` class such as:
 
 package com.flower.samples;
 
@@ -149,6 +141,7 @@ import com.flower.docs.operation.api.OperationHook;
 
 @RestController
 public class ModifyOperationHook extends OperationHook
+
 ```json
 
     @Override
@@ -166,7 +159,6 @@ public class ModifyOperationHook extends OperationHook
 
 ```
 
-
 13 The `@RestController` annotation defines the hook as a REST web service exposed on `/`
 
 14 The `ModifyOperationHook` class extends the `OperationHook` class, making it easier to implement a hook using the Spring Boot framework
@@ -176,4 +168,3 @@ public class ModifyOperationHook extends OperationHook
 17 The`OperationHook` reacts only to `DefaultComponentOperationContext` class contexts
 
 24 Each component of the operating context is renamed using the current date
-

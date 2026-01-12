@@ -5,18 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import fs from 'fs-extra';
-import importFresh from 'import-fresh';
-import {DocusaurusConfig} from '@docusaurus/types';
+import fs from "fs-extra";
+import importFresh from "import-fresh";
+import { DocusaurusConfig } from "@docusaurus/types";
 
 export default function loadConfig(configPath: string): DocusaurusConfig {
+    const pluginLogPrefix = "[papersaurus] ";
 
-  const pluginLogPrefix = '[papersaurus] ';
+    if (!fs.existsSync(configPath)) {
+        throw new Error(`${pluginLogPrefix}Config file "${configPath}" not found`);
+    }
 
-  if (!fs.existsSync(configPath)) {
-    throw new Error(`${pluginLogPrefix}Config file "${configPath}" not found`);
-  }
-
-  const loadedConfig = importFresh(configPath) as DocusaurusConfig;
-  return loadedConfig
+    const loadedConfig = importFresh(configPath) as DocusaurusConfig;
+    return loadedConfig;
 }

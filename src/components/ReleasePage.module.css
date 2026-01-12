@@ -1,14 +1,14 @@
 .centered {
-  display: flex !important;
-  width: 100%;
-  justify-content: center !important;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  align-items: center;
+    display: flex !important;
+    width: 100%;
+    justify-content: center !important;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
-  .centered {
-    justify-content: center;
-  }
+    .centered {
+        justify-content: center;
+    }
 }

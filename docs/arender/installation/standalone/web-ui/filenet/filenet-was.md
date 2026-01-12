@@ -2,16 +2,10 @@
 title: Installation in IBM Websphere (recommended)
 description: Deployment guide for IBM Filenet in IBM WebSphere application server
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 230e3314d6df2d3c28b2750fae41357c634c75f1c67005dc378afbda01503c09
 ---
-
-
-
-
-
-
 
 Below the deployment of ARender HMI for FileNet in **IBM WebSphere application server**.
 
@@ -21,7 +15,7 @@ in an environment with:
 - Operating System: Windows Server 2016
 - Filenet 5.5
 - Websphere 9.0.5.0 Application Server
-- ARender HMI for FileNet version 
+- ARender HMI for FileNet version
 
 ## Retrieve the ARender HMI EAR archive for FileNet
 
@@ -30,12 +24,8 @@ you can retrieve the web application in EAR format [here](https://artifactory.ar
 
 ## WebSphere requirements
 
-
-
 The version of websphere used here must have java 8 installed and activated.
 If you like, please follow the instructions [here](https://www.ibm.com/docs/en/was-nd/8.5.5?topic=waso-java-se-8-in-websphere-application-server-v85).
-
-
 
 ## Deployment of the EAR in IBM WebSphere
 
@@ -86,17 +76,15 @@ Websphere must be configured in parent-last which means it has to load its libra
 
 You can now access a Filenet document via a URL formed like this:
 
-```html
+```````````html
 ``````````http://{server_arender}:{port_arender}/ARender/?id={id}&objectStoreName={ObjectStoreName}``````````
-```
+```````````
 
 ![filenet](/img/arender/filenet/filenet-new-01.png)
 
 ## 🧭 Load Balancing and Session Management for ARender on IBM WebSphere
 
-
 This section applies from ARender version 2023.12.0 and above.
-
 
 This section will guide you to implement a robust **load balancing** architecture for **ARender** **HMI** deployed on IBM WebSphere Application Server. This setup ensures optimal performance, session stability, and high availability by leveraging **IBM HTTP Server (IHS)** as the load balancer.
 

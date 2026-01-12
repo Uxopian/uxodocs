@@ -59,7 +59,6 @@ async function main() {
                     // Skip category if it doesn't contain any markdown files
                     const containsMd = await hasMarkdownFiles(catDir);
                     if (!containsMd) {
-                        console.log(`Skipping empty category: ${product}/${catName}`);
                         continue;
                     }
 
@@ -93,7 +92,6 @@ async function main() {
     }
     await fs.mkdir(outDir, { recursive: true });
     await fs.writeFile(outFile, JSON.stringify(result, null, 2), 'utf8');
-    console.log('Generated', outFile);
 }
 
 main();

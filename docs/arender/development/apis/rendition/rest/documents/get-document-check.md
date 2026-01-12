@@ -1,32 +1,26 @@
 ---
 title: GET Document existence
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: dc04c3f09bc68ddffe09494bf2c51f89bc4f3fa92d0c7a3b602af33fcedecbd5
 ---
-
-
-
-
-
-
-
 
 This API allows you to check the existence of a specific document.
 
 ## API Description
 
 Endpoint:
+
 ```bash
 GET /documents/{documentId}/check
 ```
 
 Resource path:
 
-| Variable    | Required | Description           |
-|:------------|:---------|:----------------------|
-| documentId  | Yes      | The ID of a document  |
+| Variable   | Required | Description          |
+| :--------- | :------- | :------------------- |
+| documentId | Yes      | The ID of a document |
 
 Response :
 

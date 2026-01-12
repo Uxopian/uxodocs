@@ -1,8 +1,8 @@
 ---
 title: Installation Guide
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 412bc2daa8581d8871b0fb3ce52cc5af11bebc2662bfd9461364dd6c3c467f1f
 ---
 
@@ -54,7 +54,6 @@ docker pull artifactory.arondor.cloud:5001/uxopian-ai/gateway:latest
 You may need to update the `image:` fields in `uxopian-ai-stack.yml` to match the full path of the images you just pulled (e.g., replace `image: 'ai-standalone'` with `artifactory.arondor.cloud:5001/uxopian-ai/ai-standalone:latest`).
 :::
 
-
 ### 🔹 Step 3: Configuration
 
 Before starting the stack, you must configure your LLM providers and environment.
@@ -84,7 +83,6 @@ The `uxopian-ai-stack.yml` file orchestrates three services:
 The example stack uses `SPRING_PROFILES_ACTIVE=dev`, which **disables authentication**. For production deployments, remove this variable and configure proper security in the gateway.
 :::
 
-
 For a detailed reference of every file inside the `config/` directory, please refer to the [Configuration Files documentation](https://www.google.com/search?q=../configuration/config_files).
 
 ### 🔹 Step 4: Start the Stack
@@ -108,7 +106,6 @@ If you cannot use Docker, you can run the service directly as a Java application
 
 :::note Prerequisites
 :::
-
 
 ### 🔹 Step 1: Download the Package
 

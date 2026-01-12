@@ -1,26 +1,23 @@
 ---
 title: Decision table
 description: React to an operation through a Drools decision table
-date: '2002-01-28T13:20:01+02:00'
+date: "2002-01-28T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 325c43e06698ee0d25d7aa7b4e2df2ff182b3128daa8162895b95741c8ac57d5
 ---
-
-
-
 
 # Principle
 
 This operation manager relies on the [Drools] rules engine (https://www.drools.org/) to execute a decision table.
-A decision table is a Microsoft Excel file with two types of columns: 
+A decision table is a Microsoft Excel file with two types of columns:
 
-* conditions: determines the cases in which to apply a rule 
-* actions: the actions to be executed for a given rule
+- conditions: determines the cases in which to apply a rule
+- actions: the actions to be executed for a given rule
 
-For each defined rule (or line), the defined actions are executed if all conditions are met. 
+For each defined rule (or line), the defined actions are executed if all conditions are met.
 
 The decision table is stored as the content of the document used to configure subscription to the execution of an operation.
 
@@ -39,8 +36,7 @@ The `component` variable contains the component (see [`com.flower.docs.domain.co
 To manually define this operation handler, the `com.flower.docs.core.tsp.operation.DroolsOperationHandler` identifier can be used as the value of the `OperationHandler` tag.
 :::
 
-
-
 Drools-type operation managers do not support certain execution contexts:
-* on administration objects (component classes, security objects, etc.)
-* on document version modification
+
+- on administration objects (component classes, security objects, etc.)
+- on document version modification

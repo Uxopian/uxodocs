@@ -1,39 +1,34 @@
 ---
 title: Folder content
 description: Customise folder contents
-date: '2012-03-28T13:20:01+02:00'
+date: "2012-03-28T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 945a97fa0c6d748bbeeb801652d9ea1c1e28c311fcfb839d19c79c6aa7efaae7
 ---
 
-
-
 The management of creation actions within a folder can be configured by registering a processor.
-This processor determines whether or not creative actions are activated. 
-
+This processor determines whether or not creative actions are activated.
 
 ```javascript
 JSAPI.get().folder().registerForCreateAction(identifier, processor);
 ```
 
-
 The `identify` variable is used to identify the folder (or context) in which the native management of creation actions should be overloaded.
-This character string can take on the following values: 
+This character string can take on the following values:
 
-* a folder identifier
-* a folder class identifier
-* `'*'` for all folders
+- a folder identifier
+- a folder class identifier
+- `'*'` for all folders
 
+The `processor` variable is a closure used to define the desired behavior: a creation action is visible or not.
+The following variables are provided as input to this closure:
 
-The `processor` variable is a closure used to define the desired behavior: a creation action is visible or not. 
-The following variables are provided as input to this closure: 
-
-* folder: the folder concerned by the creation actions
-* childCategory: the components category that can be created using the action
-* action: the creative action
-* callback: the callback indicates to the graphical user interface the configuration to be applied (enables asynchronous processing)
+- folder: the folder concerned by the creation actions
+- childCategory: the components category that can be created using the action
+- action: the creative action
+- callback: the callback indicates to the graphical user interface the configuration to be applied (enables asynchronous processing)
 
 <br/>
 For example, to hide the document creation action in the `Projects` folder:

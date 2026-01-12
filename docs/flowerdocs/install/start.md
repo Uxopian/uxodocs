@@ -1,19 +1,18 @@
 ---
 title: Launch
-date: '2000-03-29T13:20:01+02:00'
+date: "2000-03-29T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 114e6041f91897d5962e74a451729a35f00df71388640882ef3b9648255e5878
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
-
 # Manual launch
 
-To manually launch the **FlowerDocs GUI**, **FlowerDocs Core** and  applications, simply issue the following commands:
+To manually launch the **FlowerDocs GUI**, **FlowerDocs Core** and applications, simply issue the following commands:
 
 <Tabs>
   <TabItem value="gui" label="GUI">
@@ -31,7 +30,7 @@ To manually launch the **FlowerDocs GUI**, **FlowerDocs Core** and  applications
 
   </TabItem>
 </Tabs>
- 
+
 
 # Installation in service
 
@@ -43,7 +42,7 @@ In this section, it is assumed that the JARs `flower-docs-gui-webapp-.jar`, `flo
 
 ### Service init.d
 
-To install FlowerDocs applications as an `init.d`  service, simply create a symbolic link in the `/etc/init.d` directory: 
+To install FlowerDocs applications as an `init.d` service, simply create a symbolic link in the `/etc/init.d` directory:
 
 <Tabs>
   <TabItem value="gui" label="GUI">
@@ -56,11 +55,10 @@ ln -s /opt/flowerdocs/flower-docs-gui-webapp-.jar /etc/init.d/gui
   </TabItem>
 </Tabs>
 
-
-With this type of service, the user to whom the JAR belongs is used to run the application. 
+With this type of service, the user to whom the JAR belongs is used to run the application.
 One log file per application is stored in the `/var/log` directory.
 
-So that the service starts automatically when the system is booted: 
+So that the service starts automatically when the system is booted:
 
 <Tabs>
   <TabItem value="gui" label="GUI">
@@ -71,7 +69,7 @@ update-rc.d gui defaults
 
   </TabItem>
 </Tabs>
- 
+
 
 If the service is not found, it may be necessary to run the following command:
 
@@ -86,13 +84,13 @@ To install FlowerDocs applications as a `systemd` service, the `gui.service`, `c
 <Tabs>
   <TabItem value="gui" label="GUI">
 
-```service
+````service
 [Unit]
 
 ```properties
 Description=**FlowerDocs GUI**
 After=syslog.target
-```
+````
 
 [Service]
 
@@ -104,11 +102,12 @@ SuccessExitStatus=143
 
 [Install]
 WantedBy=multi-user.target
-```
+
+````
 
   </TabItem>
 </Tabs>
- 
+
 
 To have the service started automatically by `systemd`, run the following commands:
 
@@ -118,7 +117,7 @@ To have the service started automatically by `systemd`, run the following comman
 
 ```bash
 systemctl enable gui.service
-```
+````
 
   </TabItem>
   <TabItem value="core" label="Core">
@@ -136,16 +135,16 @@ systemctl enable arender-hmi.service
 
   </TabItem>
 </Tabs>
- 
+
 
 ### JVM configuration
 
-To configure the JVM of the application launched by the Linux service, you need to add a configuration file in the same directory as the JAR. 
+To configure the JVM of the application launched by the Linux service, you need to add a configuration file in the same directory as the JAR.
 This configuration file must have the same name as the JAR, with the extension `conf`.
 
 ### Commands
 
-To start the services, simply issue the commands: 
+To start the services, simply issue the commands:
 
 <Tabs>
   <TabItem value="gui" label="GUI">
@@ -156,6 +155,6 @@ service gui start
 
   </TabItem>
 </Tabs>
- 
+
 
 Other standard commands are also supported: `status`, `stop` or `restart`.

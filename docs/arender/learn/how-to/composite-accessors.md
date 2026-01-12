@@ -1,16 +1,10 @@
 ---
 title: Composite documents
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: ed4114cf08f90d8095297ab956e0bec920da86e5e8f2265f99a444b78002405a
 ---
-
-
-
-
-
-
 
 Starting from 3.1.10 a new servlet exists in ARender in order to create
 composite (folder) documents over the limits imposed by the URL.
@@ -22,27 +16,27 @@ The following JS call will be functional if the loadbalancer in front of the ARe
 
 It relies on a JSON object that is passed through ARender JS API:
 
-``` javascript
+```javascript
 getARenderJS().loadDocuments(jsonString, loadingErrorHandlerFunction, customLoadActionFunction);
 ```
 
 If you provide a custom action function, documents won't be loaded
 directly into ARender. Instead, you'll get a callback on the function
-*customLoadActionFunction* with the documentId generated as parameter.
+_customLoadActionFunction_ with the documentId generated as parameter.
 If you do not provide any custom action(by not providing the function),
 the documents will automatically load into ARender.
 
 If you wish to test your JSON file, you can use this CURL command on a
 non-clusterized environnement:
 
-``` bash
+```bash
 curl -X POST http://<arender_host>/arendergwt/compositeAccessorServlet -d @test_openDoc_json.json --header "Content-Type: application/json"
 ```
 
 This will return you the ARender ID of the processed document. Here is
 the content of the Json provided for this example:
 
-``` json
+```json
 
    "title": "test_Container",
    "references": [{

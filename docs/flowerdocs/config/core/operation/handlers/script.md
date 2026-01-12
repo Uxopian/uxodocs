@@ -1,14 +1,13 @@
 ---
 title: Script execution
 description: Respond to an operation by executing a JavaScript script
-date: '2002-03-28T13:20:01+02:00'
+date: "2002-03-28T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 252e151292b4f22f62e49b001d02e8330c57e4c5df252d93366b886a4d192cfe
 ---
-
 
 # Principle
 
@@ -31,19 +30,20 @@ When a search is run, the request and the response (if available) are provided u
 
 To facilitate their development, an object accessible through the `util` variable is made available whose exposed methods are listed [here](/docs/flowerdocs/config/core/appendices/context-util).
 
-
 :::note[Creating a folder when creating a document]
+
 ```javascript
-var folder = ComponentBuilder.folder().classId('Folder').build();
+var folder = ComponentBuilder.folder().classId("Folder").build();
 folder.setName("Dossier " + component.getName());
 util.getFolderService().create(Lists.newArrayList(folder));
-util.getFolderService().addChildren(folder.getId(), Lists.newArrayList(ReferenceBuilder.from(component)), false);
+util.getFolderService().addChildren(
+    folder.getId(),
+    Lists.newArrayList(ReferenceBuilder.from(component)),
+    false
+);
 ```
+
 :::
-
-
-
-
 
 :::info
 To manually define this operation handler, the `com.flower.docs.core.tsp.operation.script.ScriptOperationHandler` identifier can be used as the value of the `OperationHandler` tag.

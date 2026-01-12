@@ -1,36 +1,29 @@
 ---
 title: XFDF of the annotations
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: a15dfa27e921762f42ddf429cbca424807f13763b89e6c0f26085a741a323157
 ---
-
-
-
-
-
-
 
 ## Download XFDF or FDF
 
 A servlet is deployed to download the XFDF or FDF file of the annotations of a document.
 
-### Request 
+### Request
 
 This functionality is accessible via the servlet: **servletXFDFAnnotations**
 
 Usable in GET
 
-
 #### Request example
 
-``` bash
+```bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/servletXFDFAnnotations?uuid=docUUID&type=typeFile'
 ```
 
-* uuid: document id
-* type: the type of file to download. XFDF or FDF (default: XFDF)
+- uuid: document id
+- type: the type of file to download. XFDF or FDF (default: XFDF)
 
 ### Servlet Response
 
@@ -40,27 +33,26 @@ The XFDF or FDF file of document annotations given as parameter is downloaded.
 
 A servlet is deployed to load the XFDF file of the annotations to a document sent in parameter.
 
-### Request 
+### Request
 
 This functionality is accessible via the servlet: **servletXFDFAnnotations**
 
 Usable in POST
 
-
 #### Request example
 
-``` bash
+```bash
 curl -X POST -H "Content-Type: multipart/form-data" -F "file=@yourXFDF.xfdf" "https://<arender_host>/ARender/arendergwt/servletXFDFAnnotations?uuid=docUUID"
 ```
 
-* uuid: document id
-* yourXFDF: title of your XFDF file
+- uuid: document id
+- yourXFDF: title of your XFDF file
 
 If the file or annotations format are in FDF format, they will be loaded in XFDF format.
 
 **Example XFDF file**
 
-``` xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <ns0:xfdf xmlns:ns0="http://ns.adobe.com/xfdf/"><ns0:annots>
 <ns0:highlight color="#273746" flags="obfuscate" name="c553fe65-a3a0-4628-b396-1201bfea6285" page="1" rect="153.26161,334.42,264.57193,374.02002" title="admin" creationdate="D:20221214090312+00'00'" opacity="1.0" coords="153.26161,374.02002,264.57193,374.02002,153.26161,334.42,264.57193,334.42"/>

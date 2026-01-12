@@ -4,38 +4,37 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+    padding: 4rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+    .heroBanner {
+        padding: 2rem;
+    }
 }
 
 .buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Glassmorphism navbar on home page */
 .homePageWrapper :global(.navbar) {
-  background: rgba(255, 255, 255, 0.5) !important;
-  backdrop-filter: blur(10px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(180%) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(10px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(180%) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
 }
 
-[data-theme='dark'] .homePageWrapper :global(.navbar) {
-  background: rgba(20, 20, 25, 0.5) !important;
-  backdrop-filter: blur(10px) saturate(180%) brightness(1.1) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(180%) brightness(1.1) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+[data-theme="dark"] .homePageWrapper :global(.navbar) {
+    background: rgba(20, 20, 25, 0.5) !important;
+    backdrop-filter: blur(10px) saturate(180%) brightness(1.1) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(180%) brightness(1.1) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-

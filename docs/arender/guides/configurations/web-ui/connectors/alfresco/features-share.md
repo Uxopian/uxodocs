@@ -1,16 +1,10 @@
 ---
 title: Features Alfresco Share
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 531e690965d6777afb9121ad7596fe67f3fea1325fc5fe913d6ca723714e658a
 ---
-
-
-
-
-
-
 
 ## ARender for specific groups only
 
@@ -19,28 +13,26 @@ To set ARender viewer to specific Alfresco groups only, follow the below procedu
 - Go to the module deployment page: **&lt;host name&gt;/share/page/modules/deploy**
 - Choose the ARender module: **ARender Preview Plugin**
 - Select the evaluator on the right: **group.module.evaluator**
-- In the *Evaluator Properties* :
+- In the _Evaluator Properties_ :
 
 ```yaml
-negate : false
+negate: false
 
-relation : OR
+relation: OR
 
-groups : <group name>
+groups: <group name>
 ```
 
 ## Configure document types to open with ARender
 
 To configure which type of document should be opened with ARender (other will be opened by the default viewer configured), add the below configuration:
 
-
-``` xml
+```xml
 <config evaluator="string-compare" condition="ArenderExclusion">
         <viewerMimeTypes>{mimeType1},{mimeType2},...,{mimeTypeN}</viewerMimeTypes>
     <!-- exemple : <viewerMimeTypes>"application/msword,image/vnd.dwg,image/x-dwg,image/x-dwf</viewerMimeTypes-->
 </config>
 ```
-
 
 ## Configure document types to convert to PDF using ARender
 
@@ -50,12 +42,9 @@ It has the advantage to show the document faster, especially for complex documen
 
 Configuration is done like below:
 
-
-``` xml
+```xml
 <config evaluator="string-compare" condition="ArenderExclusion">
         <renditionMimeTypes>{mimeType1},{mimeType2},...,{mimeTypeN}</renditionMimeTypes>
     <!-- exemple : <renditionMimeTypes>"application/msword,image/vnd.dwg,image/x-dwg,image/x-dwf</renditionMimeTypes-->
 </config>
 ```
-
-

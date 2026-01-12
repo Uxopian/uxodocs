@@ -1,14 +1,13 @@
 ---
 title: HTML templates
-description: 'Reusable templates, by scope, that can be enhanced with variables'
-date: '2020-02-01'
+description: "Reusable templates, by scope, that can be enhanced with variables"
+date: "2020-02-01"
 custom_edit_url: null
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: ae9dbfe930ceaefd114eabff2b59b5f962cfeb6cf4fea7d0d405e11f0f7e114d
 ---
-
 
 # Principle
 
@@ -16,30 +15,30 @@ An HTML template is a document with an HTML file. This file is used by the [Thym
 It allows you to generate documents based on the same template, using HTML.
 
 :::info
-Use these HTML templates to: 
+Use these HTML templates to:
 
-* Add [private or public pages](/docs/flowerdocs/config/core/pages)
-:::
-
+- Add [private or public pages](/docs/flowerdocs/config/core/pages)
+  :::
 
 # Syntax
 
-*This section does not cover all the possibilities offered by the [Thymeleaf] engine (https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)#using-texts) but is intended to provide an initial overview.*
+_This section does not cover all the possibilities offered by the [Thymeleaf] engine (https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)#using-texts) but is intended to provide an initial overview._
 
 ## Texts
 
-The `th:text` attribute defines the textual value of an HTML tag. It can thus be used with a context variable to display its value: 
+The `th:text` attribute defines the textual value of an HTML tag. It can thus be used with a context variable to display its value:
 
 ```xml
 <span th:text="${customerName}">Mrs. Murielle Palutat</span>
 ```
+
 When the HTML file is generated, the text of the `span` tag is replaced by that of the context variable. It is advisable to define a default text in this type of tag to facilitate rendering previews.
 
 With the `th:text` attribute, the generated text is escaped. If variables contain HTML (e.g. for hypertext links), it is necessary to use the `th:utext` attribute, which does not escape the generated text.
 
 ## Conditions
 
-The `th:if` attribute conditions the addition of the tag to which it is added. This attribute can be used, for example, to define conditional text blocks: 
+The `th:if` attribute conditions the addition of the tag to which it is added. This attribute can be used, for example, to define conditional text blocks:
 
 ```xml
 <p th:if="${customerAge > 18}">...</p>

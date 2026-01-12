@@ -1,17 +1,15 @@
 ---
 title: Use of the plugin
-date: '2020-02-01T14:20:01+02:00'
+date: "2020-02-01T14:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 219c8ae900033d820a99b4d0b88dad0dd89925887598a9abd074f9e6f3e437c9
 ---
 
-
-
 # Goal
 
-In this section, we will look at how to use the plugin configured in the previous step.  
+In this section, we will look at how to use the plugin configured in the previous step.
 
 # Prerequisites
 
@@ -23,12 +21,11 @@ First of all, you need to have a `GEC_Step2_ToBeProcessed` task assigned to you.
 
 ![Icône de création de document word](/img/flowerdocs/documentation/learn/TemplateAttachmentPluginIcon.png)
 
-
 You will then have a choice of templates. Select the template that meets your needs, then confirm your choice.
 
 # Modifying a document in Microsoft Word
 
-When you validate the desired document template, a new folder is created in FlowerDocs. The content of this is a file in Word format generated according to the selected template.  
+When you validate the desired document template, a new folder is created in FlowerDocs. The content of this is a file in Word format generated according to the selected template.
 
 This file is then saved locally and can be edited directly in Word and then updated on FlowerDocs. If the [Microsoft Word plugin](/docs/flowerdocs/connecteurs/companion/install) is installed on your computer, the file will be opened in Word and you can update it on FlowerDocs directly from Word.
 

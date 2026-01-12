@@ -1,23 +1,21 @@
 ---
 title: Miniatures
-date: '2000-04-03T13:20:01+02:00'
+date: "2000-04-03T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 3ee1dd1aaf38e796271784db273d87a9086538de853174a79333a312ef3324f3
 ---
 
+There is another type of search catalogue that is not based on a list of widgets like the `WidgetCatalog` but based on a search, the `SearchWidgetCatalog`. This provides a map widget for each search.
 
-There is another type of search catalogue that is not based on a list of widgets like the ``WidgetCatalog`` but based on a search, the ``SearchWidgetCatalog``. This provides a map widget for each search. 
+The properties to be defined are as follows:
 
-The properties to be defined are as follows: 
-
-* ``category``: the component category to be searched
-* ``titleTemplate``: the search template used for the title
-* ``headingTemplate``: the search template used for the header
-* ``contentTemplate``: the search template used for content
-* ``search``: the search
-
+- `category`: the component category to be searched
+- `titleTemplate`: the search template used for the title
+- `headingTemplate`: the search template used for the header
+- `contentTemplate`: the search template used for content
+- `search`: the search
 
 ```xml
 <bean id="incidentCatalog" class="com.flower.docs.gui.client.home.SearchWidgetCatalog">
@@ -125,5 +123,3 @@ The properties to be defined are as follows:
 	</property>
 </bean>
 ```
-
-

@@ -1,16 +1,15 @@
 ---
 title: Handling task classes
-description: 'Create, get, modify and delete your task classes'
-date: '2001-04-29T13:30:01+01:02'
+description: "Create, get, modify and delete your task classes"
+date: "2001-04-29T13:30:01+01:02"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 4e5e7aef4b6be26aeb17b5e17a746e4ebcc535f1f509c10cba78d9cb96cb5404
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-
 
 The `TaskClassService` service exposes all operations available around `TaskClass` type components.
 
@@ -26,10 +25,10 @@ The examples below show how to retrieve all task classes.
 ```http
 GET {{core}}/rest/taskclass HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 
--- Headers -- 
+-- Headers --
 token: {{token}}
 ```
 
@@ -49,7 +48,6 @@ token: {{token}}
   </TabItem>
 </Tabs>
 
-
 ## Retrieve a defined list of task classes
 
 The examples below show how to retrieve a list of task classes from their identifiers.
@@ -60,11 +58,11 @@ The examples below show how to retrieve a list of task classes from their identi
 ```http
 GET {{core}}/rest/taskclass/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 ids: list of task class identifiers
 
--- Headers -- 
+-- Headers --
 token: {{token}}
 ```
 
@@ -86,10 +84,9 @@ token: {{token}}
   </TabItem>
 </Tabs>
 
-
 # Creating task classes
 
-The examples below show how to create a task class. 
+The examples below show how to create a task class.
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -97,10 +94,10 @@ The examples below show how to create a task class.
 ```http
 POST {{core}}/rest/taskclass HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 
--- Headers -- 
+-- Headers --
 token: {{token}}
 Content-Type: application/json
 
@@ -162,7 +159,7 @@ Content-Type: application/json
 ```Java
 @Autowired
     private TaskClassService taskClassService;
-    
+
 	public void createTaskClasses() throws FunctionalException, TechnicalException
 
         List<I18NLabel> answerLabels = new ArrayList<>();
@@ -206,7 +203,6 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Modifying task classes
 
 The examples below show how to modify a task class.
@@ -217,7 +213,7 @@ The examples below show how to modify a task class.
 ```http
 POST {{core}}/rest/taskclass/{ids} HTTP/1.1
 
--- URL Parameters -- 
+-- URL Parameters --
 core: FlowerDocs Core host
 ids : comma-separated list of task class identifiers to be updated
 
@@ -292,7 +288,7 @@ Content-Type: application/json
 ```Java
 @Autowired
     private TaskClassService taskClassService;
-    
+
 	public List<TaskClass> updatetaskClass(TaskClass taskClass) throws FunctionalException, TechnicalException
 
         List<I18NLabel> answerLabels = new ArrayList<>();
@@ -317,10 +313,7 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
-
-If you use the REST service, any information that has not been filled in will be emptied: you need to send the entire task class, not just the information to be modified. 
-
+If you use the REST service, any information that has not been filled in will be emptied: you need to send the entire task class, not just the information to be modified.
 
 # Deleting task classes
 
@@ -332,7 +325,7 @@ The examples below show how to delete a list of task classes.
 ```http
 DELETE {{core}}/rest/taskclass/{ids} HTTP/1.1
 
--- URL Parameters -- 
+-- URL Parameters --
 core: FlowerDocs Core host
 ids : comma-separated list of task class identifiers to be deleted
 
@@ -346,7 +339,7 @@ token: {{token}}
 ```Java
 @Autowired
 	private TaskClassService taskClassService;
-	
+
     public void deleteTaskClasses() throws FunctionalException, TechnicalException
 
         List<Id> taskClassesIds = Lists.newArrayList(new Id("taskClassId"));
@@ -356,7 +349,5 @@ token: {{token}}
 
   </TabItem>
 </Tabs>
-
-
 
 Before deleting a task class, it's important to make sure you've deleted all instances of this class, as well as all references to it in workflow objects.

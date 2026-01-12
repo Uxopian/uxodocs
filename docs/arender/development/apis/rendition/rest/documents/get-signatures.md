@@ -1,36 +1,31 @@
 ---
 title: GET Signatures
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 19e92d32e4861f73e6e36b161bd49eab9d5baab2b59735f4713cccf058b312a2
 ---
-
-
-
-
-
-
 
 This API allows you to retrieve the signatures of a specific document.
 
 ## API Description
 
 Endpoint:
+
 ```bash
 GET /documents/{documentId}/signatures
 ```
 
 Resource path:
 
-| Variable    | Required | Description           |
-|:------------|:---------|:----------------------|
-| documentId  | Yes      | The ID of a document  |
+| Variable   | Required | Description          |
+| :--------- | :------- | :------------------- |
+| documentId | Yes      | The ID of a document |
 
 Response :
 
 | Type       | Description                    |
-| :--------- |:-------------------------------|
+| :--------- | :----------------------------- |
 | Signatures | The signatures of the document |
 
 ## Examples

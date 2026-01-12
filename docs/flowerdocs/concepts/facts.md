@@ -1,32 +1,31 @@
 ---
 title: History
 description: Recording operations.
-date: '2008-01-05T13:20:01+02:00'
+date: "2008-01-05T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: a05f0527bb42c038e85b1afaef6899617d04370be7670551decad9aef904bf84
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+# Principle
 
+A component's history is made up of a set of facts. Each fact logs an action performed by a user on a component and stores the following information:
 
-# Principle 
-
-A component's history is made up of a set of facts. Each fact logs an action performed by a user on a component and stores the following information: 
-
-|Name|Automatic|Description|
-|------|---------------------|-----------|
-|`id`|yes|Unique identifier|
-|`creationDate`|yes|Completion date|
-|`user`|yes|Identifier of the user who performed the operation|
-|`requestId`|yes|Identifier of the request at the origin of the action|
-|`technical`|yes|Determines whether the fact is technical or business|
-|`action`|no|Action performed|
-|`objectId`|no|Object identifier in question|
-|`objectType`|no|Object type in question|
+| Name           | Automatic | Description                                           |
+| -------------- | --------- | ----------------------------------------------------- |
+| `id`           | yes       | Unique identifier                                     |
+| `creationDate` | yes       | Completion date                                       |
+| `user`         | yes       | Identifier of the user who performed the operation    |
+| `requestId`    | yes       | Identifier of the request at the origin of the action |
+| `technical`    | yes       | Determines whether the fact is technical or business  |
+| `action`       | no        | Action performed                                      |
+| `objectId`     | no        | Object identifier in question                         |
+| `objectType`   | no        | Object type in question                               |
 
 # Technical facts
 
@@ -35,59 +34,57 @@ Technical facts are generated automatically by **FlowerDocs Core** when a histor
 <Tabs>
   <TabItem value="documents" label="Documents">
 
-|Action|Default|Description|
-|------|---------------------|-----------|
-|`create`|yes|Creation|
-|`read`|no|Access|
-|`get_content`|no|Content access|
-|`update`|yes|Update|
-|`add_content`|no|Adding content|
-|`delete_content`|no|Deleting content|
-|`revert`|yes|Restoring a version|
-|`delete`|yes|Physical removal|
+| Action           | Default | Description         |
+| ---------------- | ------- | ------------------- |
+| `create`         | yes     | Creation            |
+| `read`           | no      | Access              |
+| `get_content`    | no      | Content access      |
+| `update`         | yes     | Update              |
+| `add_content`    | no      | Adding content      |
+| `delete_content` | no      | Deleting content    |
+| `revert`         | yes     | Restoring a version |
+| `delete`         | yes     | Physical removal    |
 
   </TabItem>
   <TabItem value="tasks" label="Tasks">
 
-|Action|Default|Description|
-|------|---------------------|-----------|
-|`create`|yes|Creation|
-|`read`|no|Access|
-|`update`|yes|Update|
-|`assign`|yes|Assignment|
-|`add_content`|yes|Add attachment(s)|
-|`delete_content`|yes|Deleting attachments|
-|`answer`|yes|Application of an answer|
-|`delete`|yes|Physical removal|
+| Action           | Default | Description              |
+| ---------------- | ------- | ------------------------ |
+| `create`         | yes     | Creation                 |
+| `read`           | no      | Access                   |
+| `update`         | yes     | Update                   |
+| `assign`         | yes     | Assignment               |
+| `add_content`    | yes     | Add attachment(s)        |
+| `delete_content` | yes     | Deleting attachments     |
+| `answer`         | yes     | Application of an answer |
+| `delete`         | yes     | Physical removal         |
 
   </TabItem>
   <TabItem value="folders" label="Folders">
 
-|Action|Default|Description|
-|------|---------------------|-----------|
-|`create`|yes|Creation|
-|`read`|no|Access|
-|`update`|yes|Update|
-|`add_content`|yes|Adding component(s)|
-|`delete_content`|yes|Deleting component(s)|
-|`delete`|yes|Physical removal|
+| Action           | Default | Description           |
+| ---------------- | ------- | --------------------- |
+| `create`         | yes     | Creation              |
+| `read`           | no      | Access                |
+| `update`         | yes     | Update                |
+| `add_content`    | yes     | Adding component(s)   |
+| `delete_content` | yes     | Deleting component(s) |
+| `delete`         | yes     | Physical removal      |
 
   </TabItem>
   <TabItem value="virtual-folders" label="Virtual folders">
 
-|Action|Default|Description|
-|------|---------------------|-----------|
-|`create`|yes|Creation|
-|`read`|no|Access|
-|`update`|yes|Update|
-|`delete`|yes|Physical removal|
+| Action   | Default | Description      |
+| -------- | ------- | ---------------- |
+| `create` | yes     | Creation         |
+| `read`   | no      | Access           |
+| `update` | yes     | Update           |
+| `delete` | yes     | Physical removal |
 
   </TabItem>
 </Tabs>
 
-
-
-To modify historical actions, the `core.properties` file must be modified using the default configuration: 
+To modify historical actions, the `core.properties` file must be modified using the default configuration:
 
 ```properties
 fact.registrations.document=create,update,delete,version,revert
@@ -99,18 +96,15 @@ fact.registrations.task=create,update,delete,answer,assign,add_content,delete_co
 # Business facts
 
 A business fact is generated programmatically to record a particular state or action for a component.
-This generation must be configured or developed specifically for the situations concerned thanks to: 
+This generation must be configured or developed specifically for the situations concerned thanks to:
 
-* APIs exposed for each component category
-* the [ContextUtil] object(/documentation/config/core/appendices/context-util.md)
+- APIs exposed for each component category
+- the [ContextUtil] object(/documentation/config/core/appendices/context-util.md)
 
-*The user responsible for generating a business fact must have the `ADMIN` role.*
+_The user responsible for generating a business fact must have the `ADMIN` role._
 
 In the graphical user interface, a technical fact is linked to a business fact if they have the same request identifier (`requestId`).
 Technical facts generated before and linked to a business fact are displayed in detail.
-
-
-
 
 <Tabs>
   <TabItem value="http" label="HTTP">
@@ -136,23 +130,21 @@ Content-Type: application/json
 
 ```javascript
 //ScriptOperationHandler
-var builder = com.flower.docs.common.fact.FactBuilder.objectId(component.getId()).type('DOCUMENT');
-builder.action('custom').description('Generated by script operation handler.').field('tag', 'text');
+var builder = com.flower.docs.common.fact.FactBuilder.objectId(component.getId()).type("DOCUMENT");
+builder.action("custom").description("Generated by script operation handler.").field("tag", "text");
 util.createFact(builder.build());
 ```
 
   </TabItem>
 </Tabs>
 
-
 # Custom Facts
 
 A custom fact is created outside the product's native historical logs. It can be used by integrators to trace specific actions based on their needs. It can be:
 
-* A business fact : Traces a business action (e.g., creating a letter).  
-* A technical fact : Traces a technical operation (e.g., integration with a CRM).  
+- A business fact : Traces a business action (e.g., creating a letter).
+- A technical fact : Traces a technical operation (e.g., integration with a CRM).
 
-  
 The distinction is made via a boolean, but the underlying Java object is the same. When creating custom facts via an `OperationHandler`, the user logged in the fact will, by default, be the administrator executing the OH. This is due to administrative privileges that ensure security and prevent unauthorized manipulation.
 
 <br/>
@@ -173,9 +165,9 @@ FlowerDocs provides a document class `FactFieldsConfiguration` that lets you sim
 
 This document allows you to define:
 
-* the object type: `DOCUMENT`, `TASK`, `VIRTUAL_FOLDER`, `FOLDER`
-* component class identifiers
-* tag identifiers
+- the object type: `DOCUMENT`, `TASK`, `VIRTUAL_FOLDER`, `FOLDER`
+- component class identifiers
+- tag identifiers
 
 <br/>
 This configuration document is accessible from the FlowerDocs administration interface: Configuration > Historical facts.

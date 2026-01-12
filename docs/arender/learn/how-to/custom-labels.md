@@ -1,16 +1,10 @@
 ---
 title: Create custom localized labels
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: b7189e3f659e2b2d9060bff4039c5edbd785ff849b151cacaaa68e01cbc274d7
 ---
-
-
-
-
-
-
 
 This guide will help you create custom localized labels.
 
@@ -20,19 +14,17 @@ ARender internationalization approach uses **.properties** files where localizab
 
 ARender allows you to customize localized labels from external custom resource files.
 
-By default, ARender uses the following order to fetch custom localized resource files: 
+By default, ARender uses the following order to fetch custom localized resource files:
+
 - Configuration properties
 - &lt;HOME_DIR&gt;/ARenderCustomLabels/
-- arondor-arender-hmi-spring-boot-.jar\BOOT-INF\classes\labels\ 
-
+- arondor-arender-hmi-spring-boot-.jar\BOOT-INF\classes\labels\
 
 ## To go further
 
 ### Define the folder path containing the custom labels
 
 To define the folder path where the custom labels are stored, you must edit the following property :
-
-
 
 ```cfg
 # ARender label configuration
@@ -42,10 +34,10 @@ To define the folder path where the custom labels are stored, you must edit the 
 arender.server.external.custom.labels.path=
 ```
 
-
 ### Create your own custom localized labels
 
-Typical resource files are named as **CustomLabels\_&#123;lang&#125;.properties**, which *lang* corresponds to locale code :
+Typical resource files are named as **CustomLabels\_&#123;lang&#125;.properties**, which _lang_ corresponds to locale code :
+
 - ar (Arabic)
 - de (German)
 - en (English)
@@ -65,34 +57,23 @@ For each language or the one needed, store localizable information in the form o
 
 To provide a concrete example, suppose you need a custom label for a custom button in 3 different languages: english, spanish and french :
 
-These **.properties** files are to be placed whether in *&lt;HOME_DIR&gt;/ARenderCustomLabels/* or in *arondor-arender-hmi-spring-boot-.jar\BOOT-INF\classes\labels\*.
-
-
+These **.properties** files are to be placed whether in _&lt;HOME_DIR&gt;/ARenderCustomLabels/_ or in \*arondor-arender-hmi-spring-boot-.jar\BOOT-INF\classes\labels\*.
 
 ```cfg
 hello=Hello World
 ```
 
-
-
-
 ```cfg
 hello=Hola Mundo
 ```
-
-
-
 
 ```cfg
 hello=Bonjour le monde
 ```
 
-
 To use this custom label, you will need to reference it with the tag **customLabels#&#123;label-key&#125;**.
 
-Since version 2023.0.0: 
-
-
+Since version 2023.0.0:
 
 ```xml
 <!-- Sample implementation of a Custom button -->

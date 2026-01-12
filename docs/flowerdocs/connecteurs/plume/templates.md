@@ -1,27 +1,26 @@
 ---
 title: Models
-date: '2003-03-28T13:20:01+02:00'
+date: "2003-03-28T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 2b80195093eed9c31aef6fdcefbba5fecfe6d63fde7ec2e3ea1fe8cae3866a39
 ---
-
 
 These templates are determined from a document search using the `Template` class (this class can be modified using the `flower.template.class` property).
 The templates must therefore be accessible to Plume users.
 
 # Filters
 
-The models available to a user can be filtered according to different filters. 
+The models available to a user can be filtered according to different filters.
 
 The first concerns the model source. In this documentation, only models from FlowerDocs are documented, which is why the various filter examples have the `source` property set to `flower`.
 
 <br/>
-It is also possible to define filters on tags carried by models. For example, if the `Template` class has a `TemplateType` tag, it is possible to define a set of filters such as :  
+It is also possible to define filters on tags carried by models. For example, if the `Template` class has a `TemplateType` tag, it is possible to define a set of filters such as :
 
 ```javascript
-var filters = { "source": [ "flower" ], "TemplateType": ["Custom"] };
+var filters = { source: ["flower"], TemplateType: ["Custom"] };
 ```
 
 # Model types
@@ -44,22 +43,21 @@ The second type of template concerns the signature of the user writing the email
 context.initSignature(filters);
 ```
 
-
 # Variables
 
 The notion of variable can be used within templates to pre-fill them and thus facilitate the writing of an email.
 
 <br/>
-By default, several variables are valued as : 
+By default, several variables are valued as :
 
-* tags: all tags in the open component are added as variables,
-* the URL of **FlowerDocs GUI**: `flowerURL`,
-* the name of the logged-in user: `userDisplayName`,
-* logged-in user's email address: `userMail`,
-* the current scope: `scope`.
+- tags: all tags in the open component are added as variables,
+- the URL of **FlowerDocs GUI**: `flowerURL`,
+- the name of the logged-in user: `userDisplayName`,
+- logged-in user's email address: `userMail`,
+- the current scope: `scope`.
 
 <br/>
-It is also possible to add custom variables: 
+It is also possible to add custom variables:
 
 ```javascript
 $wnd.getARenderJS().preparePluginEvent("<name>", "<value>", "plume");

@@ -1,16 +1,10 @@
 ---
 title: Activating performance logs
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 8753cd494f15777749f20d3b313188a4ca446cbde7b0f1c2461492f34238c4f2
 ---
-
-
-
-
-
-
 
 You can since ARender 4.0.1 send directly each log fragment to the disk
 (through classic logger), to elasticSearch (6) or both !
@@ -19,9 +13,7 @@ You can since ARender 4.0.1 send directly each log fragment to the disk
 
 Alter, corresponding to your need, the following properties in:
 
-
-
-```cfg
+````cfg
 #activate/deactivate the use of the disk based logger
 arender.server.perf.logger.use=true
 
@@ -35,29 +27,23 @@ arender.server.perf.es.index.name=arender-performance
 
 #activate/deactivate the propagation to elastic search of the log messages
 arender.server.perf.es.use=false
-```
-
-
+````
 
 ## At rendition side
 
 YAML properties can be added to the rendition micro service in order to
 obtain the same behavior as the ARender Web-UI war:
 
-
-
 ```yaml
 aop:
-  active: false
-  activateLogger: true
-  activateEs: false
-  esHost: localhost
-  esPort: 9200
-  esIndexName: arender-rendition-performance
-  esProtocol: http
+    active: false
+    activateLogger: true
+    activateEs: false
+    esHost: localhost
+    esPort: 9200
+    esIndexName: arender-rendition-performance
+    esProtocol: http
 ```
-
-
 
 You will have to alter those values to the desired target in order to
 activate performance log at the rendition side. To activate the logs,
@@ -75,16 +61,12 @@ activate the backup of documents which caused issues to ARender.
 
 Here are the existing parameters:
 
-
-
 ```yaml
-  aop:
+aop:
     rejectedDocs: false
     nbDaysKept: 1
     rejectedPath: "rejected/"
 ```
-
-
 
 The property "rejectedDocs" activates the mechanism. The property
 "nbDaysKept" indicates how many days the documents will be kept inside

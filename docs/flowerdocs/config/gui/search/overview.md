@@ -1,27 +1,25 @@
 ---
 title: Getting started
-date: '2004-03-28T13:20:01+02:00'
+date: "2004-03-28T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 22923f3b62bb197870078e46ce0859b716305af00c943ed947e1166e8f30a5a1
 ---
-
-
 
 :::info
 Search forms are pre-configured search templates, which are then made available to end users.
 :::
 
+# Presentation
 
-# Presentation 
 A search form allows you to fully configure a search screen.
 These are associated with scope teams to personalize the display presented to the user.
 
 <br/>
-__Example:__ A basic ``AgentSearch`` search form with the title Agent file search with description 
+__Example:__ A basic ``AgentSearch`` search form with the title Agent file search with description
 
-```xml      
+```xml
 <bean id="RechercheAgent" class="com.flower.docs.gui.client.search.ComponentSearchPresenter" scope="prototype">
   	<property name="title">
 			<list>
@@ -56,8 +54,9 @@ __Example:__ A basic ``AgentSearch`` search form with the title Agent file searc
 
 A search form can be linked to a user team through a property that can be set via:
 
-* the CLM and the `scope.xml` file: 
-:::note[Team example]
+- the CLM and the `scope.xml` file:
+  :::note[Team example]
+
 ```xml
 <profiles>
 	<name>ALL_USERS</name>
@@ -69,10 +68,11 @@ A search form can be linked to a user team through a property that can be set vi
 	</properties>
 </profiles>
 ```
+
 :::
 
-* the administration console: in the `Security > Teams > Properties` section, add a `Search form ` property
- 
+- the administration console: in the `Security > Teams > Properties` section, add a `Search form ` property
+
 <br/> 
 This property has the following value: `&lt;identifiant&gt;(&lt;language&gt;=&lt;label&gt;,&lt;language2&gt;=&lt;label2&gt;)` for example `template_id(fr=Label de formulaire,en=form label)`
 

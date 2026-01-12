@@ -1,16 +1,10 @@
 ---
 title: Introduction
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: ee80b742a65db7d0cdaca623f3fb3a878d407ff5262be0457a1c9ff29cd4bda2
 ---
-
-
-
-
-
-
 
 ### How does ARender work
 
@@ -69,21 +63,22 @@ ARender documentation to understand the Auditing possibilities ARender has to of
 
 ### Discover Seamless Integrations with ARender:
 
-Explore a multitude of pre-built integrations designed to enhance your document management experience. Our ready-to-use 
+Explore a multitude of pre-built integrations designed to enhance your document management experience. Our ready-to-use
 integrations include:
-* [IBM FileNet](https://www.arender.io/integrations/ibm-filenet),
-* [Nuxeo](https://doc.nuxeo.com/nxdoc/nuxeo-enhanced-viewer/),
-* [Alfresco](https://www.arender.io/integrations/alfresco),
-* [FlowerDocs](https://flowerdocs.com/).
 
-We also support various other Document Management Systems (DMS), and you can find the complete list of existing 
+- [IBM FileNet](https://www.arender.io/integrations/ibm-filenet),
+- [Nuxeo](https://doc.nuxeo.com/nxdoc/nuxeo-enhanced-viewer/),
+- [Alfresco](https://www.arender.io/integrations/alfresco),
+- [FlowerDocs](https://flowerdocs.com/).
+
+We also support various other Document Management Systems (DMS), and you can find the complete list of existing
 connectors [here](/docs/arender/what-is-arender/integrations)
 
 #### Tailor-Made solutions for your unique requirements:
 
-If your preferred DMS is not on the list or if you have specific requirements, ARender provides the flexibility to 
-create your custom connector. Visit our dedicated documentation for detailed guidance on creating your personalized 
+If your preferred DMS is not on the list or if you have specific requirements, ARender provides the flexibility to
+create your custom connector. Visit our dedicated documentation for detailed guidance on creating your personalized
 connector: [documentation](/docs/arender/development/framework/loadADocument).
 
-Empower your document management strategy with ARender’s versatile integrations and customizable solutions. Enhance 
+Empower your document management strategy with ARender’s versatile integrations and customizable solutions. Enhance
 collaboration, streamline workflows, and optimize your document-centric processes effortlessly.

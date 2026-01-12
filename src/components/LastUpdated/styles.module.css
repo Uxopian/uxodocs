@@ -1,12 +1,12 @@
 .lastUpdated {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  font-size: 0.8rem;
-  color: var(--ifm-color-emphasis-600);
-  text-align: right;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+    font-size: 0.8rem;
+    color: var(--ifm-color-emphasis-600);
+    text-align: right;
 }
 
 .lastUpdated span {
-  opacity: 0.7;
+    opacity: 0.7;
 }

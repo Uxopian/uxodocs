@@ -1,8 +1,8 @@
 ---
 title: How to Contribute Prompts and Goals
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 1c8ab5b6325c996911a4001742369b5ef0d8efd3becc76ac8d2b69648092466c
 ---
 
@@ -117,18 +117,18 @@ Goals use the `index` property to determine priority (lower numbers are checked 
 
 ```json
 [
-  {
-    "goalName": "compare",
-    "promptId": "detailedComparison",
-    "filter": "[[${documentType == 'contract'}]]",
-    "index": 125
-  },
-  {
-    "goalName": "compare",
-    "promptId": "genericComparison",
-    "filter": "true",
-    "index": 1000
-  }
+    {
+        "goalName": "compare",
+        "promptId": "detailedComparison",
+        "filter": "[[${documentType == 'contract'}]]",
+        "index": 125
+    },
+    {
+        "goalName": "compare",
+        "promptId": "genericComparison",
+        "filter": "true",
+        "index": 1000
+    }
 ]
 ```
 

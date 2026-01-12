@@ -1,16 +1,10 @@
 ---
 title: Rendition changes
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: bcc42571dfd3317a2521ccc36c24580a369b0be8d3a7ecc22c6b8c9bff226b94
 ---
-
-
-
-
-
-
 
 ## Document Service Broker (RenditionEngine module)
 
@@ -34,14 +28,12 @@ content_hash: bcc42571dfd3317a2521ccc36c24580a369b0be8d3a7ecc22c6b8c9bff226b94
 | arender.endpoint.metrics.export.document.size.enabled     | ARender document size endpoint metrics export          |
 | arender.endpoint.metrics.export.document.dpi.enabled      | ARender document dpi endpoint metrics export           |
 
-
 #### Renamed properties
 
 | Version 4                                              | Version 2023                                           | Description                                             |
 | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------- |
 | arender.endpoint.metrics.export.alter.document.enabled | arender.endpoint.metrics.export.transformation.enabled | ARender document transformation endpoint metrics export |
 | arender.endpoint.metrics.export.video.enabled          | arender.endpoint.metrics.export.get.file.chunk.enabled | ARender file chunk endpoint metrics export              |
-
 
 ### Properties in application.yaml file
 
@@ -82,18 +74,16 @@ Connections are still configurable with new properties located in the applicatio
 | arender.endpoint.metrics.export.document.size.enabled     | ARender document size endpoint metrics export                                             |
 | arender.endpoint.metrics.export.document.dpi.enabled      | ARender document dpi endpoint metrics export                                              |
 
-
 #### Renamed properties
 
-| Version 4                                                               | Version 2023                                           | Description                                             |
-| ----------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------- |
-| rendition.office.options=--headless,--convert-to,pdf:writer_pdf_Export  | rendition.office.options=--headless,--convert-to       | Office options                                          |
-| obfuscate.deleteText=true                                               | redact.deleteText=true                                 | Property name changed                                   |
-| obfuscate.flattenText=false                                             | redact.flattenText=false                               | Property name changed                                   |
-| document.fallback.font.path=../fonts/                                   | document.font.path=../fonts/                           | Property name changed                                   |
-| arender.endpoint.metrics.export.alter.document.enabled                  | arender.endpoint.metrics.export.transformation.enabled | ARender document transformation endpoint metrics export |
-| arender.endpoint.metrics.export.video.enabled                           | arender.endpoint.metrics.export.get.file.chunk.enabled | ARender file chunk endpoint metrics export              |
-
+| Version 4                                                              | Version 2023                                           | Description                                             |
+| ---------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------- |
+| rendition.office.options=--headless,--convert-to,pdf:writer_pdf_Export | rendition.office.options=--headless,--convert-to       | Office options                                          |
+| obfuscate.deleteText=true                                              | redact.deleteText=true                                 | Property name changed                                   |
+| obfuscate.flattenText=false                                            | redact.flattenText=false                               | Property name changed                                   |
+| document.fallback.font.path=../fonts/                                  | document.font.path=../fonts/                           | Property name changed                                   |
+| arender.endpoint.metrics.export.alter.document.enabled                 | arender.endpoint.metrics.export.transformation.enabled | ARender document transformation endpoint metrics export |
+| arender.endpoint.metrics.export.video.enabled                          | arender.endpoint.metrics.export.get.file.chunk.enabled | ARender file chunk endpoint metrics export              |
 
 The mail configuration properties have actually moved to application.properties of Document Service Broker
 
@@ -165,32 +155,29 @@ How to configure mime type has changed, for more information see [there]().
 | arender.endpoint.metrics.export.alter.document.enabled | arender.endpoint.metrics.export.transformation.enabled | ARender document transformation endpoint metrics export |
 | arender.endpoint.metrics.export.video.enabled          | arender.endpoint.metrics.export.get.file.chunk.enabled | ARender file chunk endpoint metrics export              |
 
-
 ### Properties in application.yaml file
 
 #### Deleted properties
 
-| Version 4                                        | Description                                                                        |
-| ------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| eureka:instance:statusPageUrlPath                | Former property no longer in use even in latests V4                                |
-| eureka:instance:healthCheckUrlPath               | Former property no longer in use even in latests V4                                |
-| eureka:instance:leaseRenewalIntervalInSeconds    | Former property no longer in use even in latests V4                                |
-| eureka:instance:leaseExpirationDurationInSeconds | Former property no longer in use even in latests V4                                |
-| eureka:client:serviceUrl:defaultZone             | Former property no longer in use even in latests V4                                |
-| kubprovider:services:Rendition-Engine:serviceId  | Former property no longer in use even in latests V4                                |
-| kubprovider:services:Rendition-Engine:host       | Former property no longer in use even in latests V4                                |
-| kubprovider:services:Rendition-Engine:port       | Former property no longer in use even in latests V4                                |
-| kubprovider:services:Rendition-Engine:secure     | Former property no longer in use even in latests V4                                |
-| kubprovider:services:Rendition-Engine:uri        | Former property no longer in use even in latests V4                                |
-| cache:document:maxCacheSize                      | Former property no longer in use even in latests V4                                |
-| cache:renderer:cacheDuration                     | Former property no longer in use even in latests V4                                |
-| rest-template:connect-timeout                    | Determines the timeout until a new connection is fully established                 |
-| rest-template:read-timeout                       | Determines the timeout until it finishes reading data bytes from the socket        |
-| rest-template:max-connection-total               | The total number of connections that can be reused when future requests            |
-| rest-template:max-connection-per-route           | The total number of connections per route that can be reused when future requests  |
-| rest-template:max-keep-alive                     | Determines the lifespan of a connection while it is not used                       |
-
-
+| Version 4                                        | Description                                                                       |
+| ------------------------------------------------ | --------------------------------------------------------------------------------- |
+| eureka:instance:statusPageUrlPath                | Former property no longer in use even in latests V4                               |
+| eureka:instance:healthCheckUrlPath               | Former property no longer in use even in latests V4                               |
+| eureka:instance:leaseRenewalIntervalInSeconds    | Former property no longer in use even in latests V4                               |
+| eureka:instance:leaseExpirationDurationInSeconds | Former property no longer in use even in latests V4                               |
+| eureka:client:serviceUrl:defaultZone             | Former property no longer in use even in latests V4                               |
+| kubprovider:services:Rendition-Engine:serviceId  | Former property no longer in use even in latests V4                               |
+| kubprovider:services:Rendition-Engine:host       | Former property no longer in use even in latests V4                               |
+| kubprovider:services:Rendition-Engine:port       | Former property no longer in use even in latests V4                               |
+| kubprovider:services:Rendition-Engine:secure     | Former property no longer in use even in latests V4                               |
+| kubprovider:services:Rendition-Engine:uri        | Former property no longer in use even in latests V4                               |
+| cache:document:maxCacheSize                      | Former property no longer in use even in latests V4                               |
+| cache:renderer:cacheDuration                     | Former property no longer in use even in latests V4                               |
+| rest-template:connect-timeout                    | Determines the timeout until a new connection is fully established                |
+| rest-template:read-timeout                       | Determines the timeout until it finishes reading data bytes from the socket       |
+| rest-template:max-connection-total               | The total number of connections that can be reused when future requests           |
+| rest-template:max-connection-per-route           | The total number of connections per route that can be reused when future requests |
+| rest-template:max-keep-alive                     | Determines the lifespan of a connection while it is not used                      |
 
 ## Document Text Handler (PDFBoxEngine module)
 
@@ -215,22 +202,21 @@ How to configure mime type has changed, for more information see [there]().
 
 #### Deleted properties
 
-| Version 4                                        | Description                                                                        |
-| ------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| eureka:instance:statusPageUrlPath                | Former property no longer in use even in latests V4                                |
-| eureka:instance:healthCheckUrlPath               | Former property no longer in use even in latests V4                                |
-| eureka:instance:leaseRenewalIntervalInSeconds    | Former property no longer in use even in latests V4                                |
-| eureka:instance:leaseExpirationDurationInSeconds | Former property no longer in use even in latests V4                                |
-| eureka:client:serviceUrl:defaultZone             | Former property no longer in use even in latests V4                                |
-| rest-template:connect-timeout                    | Determines the timeout until a new connection is fully established                 |
-| rest-template:read-timeout                       | Determines the timeout until it finishes reading data bytes from the socket        |
-| rest-template:max-connection-total               | The total number of connections that can be reused when future requests            |
-| rest-template:max-connection-per-route           | The total number of connections per route that can be reused when future requests  |
-| rest-template:max-keep-alive                     | Determines the lifespan of a connection while it is not used                       |
-
+| Version 4                                        | Description                                                                       |
+| ------------------------------------------------ | --------------------------------------------------------------------------------- |
+| eureka:instance:statusPageUrlPath                | Former property no longer in use even in latests V4                               |
+| eureka:instance:healthCheckUrlPath               | Former property no longer in use even in latests V4                               |
+| eureka:instance:leaseRenewalIntervalInSeconds    | Former property no longer in use even in latests V4                               |
+| eureka:instance:leaseExpirationDurationInSeconds | Former property no longer in use even in latests V4                               |
+| eureka:client:serviceUrl:defaultZone             | Former property no longer in use even in latests V4                               |
+| rest-template:connect-timeout                    | Determines the timeout until a new connection is fully established                |
+| rest-template:read-timeout                       | Determines the timeout until it finishes reading data bytes from the socket       |
+| rest-template:max-connection-total               | The total number of connections that can be reused when future requests           |
+| rest-template:max-connection-per-route           | The total number of connections per route that can be reused when future requests |
+| rest-template:max-keep-alive                     | Determines the lifespan of a connection while it is not used                      |
 
 #### Renamed properties
 
-| Version 4                                   | Version 2023                                      | Description   |
-| ------------------------------------------- | ------------------------------------------------- | ------------- |
-| eureka:instance:metadataMap:context         | eureka:instance:metadataMap:context               | Value changed |
+| Version 4                           | Version 2023                        | Description   |
+| ----------------------------------- | ----------------------------------- | ------------- |
+| eureka:instance:metadataMap:context | eureka:instance:metadataMap:context | Value changed |

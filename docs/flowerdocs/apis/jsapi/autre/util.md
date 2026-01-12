@@ -1,47 +1,50 @@
 ---
 title: Utility functions
-date: '2018-03-28T13:22:01+02:00'
+date: "2018-03-28T13:22:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 7787089a4249d31a32a8d7ce1a930719d7f4ca9cf4cb97027a96eae590684369
 ---
 
-
 # Permissions
 
-It is possible to determine whether the current user has got a permission: 
+It is possible to determine whether the current user has got a permission:
 
-* from a component
+- from a component
 
 ```javascript
-ACLHelper.isGranted(component,"CREATE", function(granted){console.info("granted: "+granted);});
+ACLHelper.isGranted(component, "CREATE", function (granted) {
+    console.info("granted: " + granted);
+});
 ```
 
-* from an ACL identifier
+- from an ACL identifier
 
 ```javascript
-ACLHelper.isGranted(component.getACL(),"CREATE", function(granted){console.info("granted: "+granted);});
+ACLHelper.isGranted(component.getACL(), "CREATE", function (granted) {
+    console.info("granted: " + granted);
+});
 ```
 
 # Identifier extraction
 
-To extract identifiers from an array of components, you can use the following function: 
+To extract identifiers from an array of components, you can use the following function:
 
 ```javascript
-Ids.from(components)
+Ids.from(components);
 ```
 
 # Tag Propagation
 
-To propagate common tag values from one or more components to a target component, the following functions are available: 
+To propagate common tag values from one or more components to a target component, the following functions are available:
 
-| Functions                                  | Description                                                                    |
-|--------------------------------------------|--------------------------------------------------------------------------------|
-|predict(sourceComponent, targetComponent)   | Propagate common tags from a component to a target component                |        
-|predict(sourceComponents, targetComponent)  | Propagate common tags from a set of components to a target component    |        
+| Functions                                  | Description                                                          |
+| ------------------------------------------ | -------------------------------------------------------------------- |
+| predict(sourceComponent, targetComponent)  | Propagate common tags from a component to a target component         |
+| predict(sourceComponents, targetComponent) | Propagate common tags from a set of components to a target component |
 
-__Example:__ Creating a task from two documents
+**Example:** Creating a task from two documents
 
 ```javascript
 ContextualMenuAPI.get().registerForLoad(function(api){
@@ -53,25 +56,22 @@ ContextualMenuAPI.get().registerForLoad(function(api){
 	api.add("createTask", icon.asElement() , "Task", function(){
 		var newTask = new Task();
 		newTask.setClassId("GEC_Step0_Creation");
-		TagOracle.predict(api.getSelected(), newTask);			
-		newTask.addAttachments("Courrier", Ids.from(api.getSelected()), "DOCUMENT");			
+		TagOracle.predict(api.getSelected(), newTask);
+		newTask.addAttachments("Courrier", Ids.from(api.getSelected()), "DOCUMENT");
 		var popup = JSAPI.get().getPopupAPI().buildComponentCreation(newTask);
 		popup.show();
-	});  
+	});
 });
 ```
 
-
 # Version comparison
 
-The `compareVersion('x.y.z')` function compares the input version with the deployed version: 
+The `compareVersion('x.y.z')` function compares the input version with the deployed version:
 
-| Results                                  | Description                                                                    |
-|--------------------------------------------|--------------------------------------------------------------------------------|
-|`-1` | The deployed version is older than the supplied version *|        
-|`0`  | The deployed version is identical to the supplied version *|        
-|`1`  | The deployed version is newer than the supplied version *|        
+| Results | Description                                                  |
+| ------- | ------------------------------------------------------------ |
+| `-1`    | The deployed version is older than the supplied version \*   |
+| `0`     | The deployed version is identical to the supplied version \* |
+| `1`     | The deployed version is newer than the supplied version \*   |
 
-
-
-**comparison does not take the patch number into account*
+\*_comparison does not take the patch number into account_

@@ -1,16 +1,10 @@
 ---
 title: Optimize visualization
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 18bf7160f4d3282c4394712f371869459af47892d09e5465957c6b955275dad0
 ---
-
-
-
-
-
-
 
 ARender provides a simple and streamlined Interface for viewing a
 document. The viewer can adapt the size of the various components of the

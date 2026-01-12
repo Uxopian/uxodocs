@@ -5,44 +5,39 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {LoadContext, Plugin, DocusaurusConfig} from '@docusaurus/types';
-import {generatePdfFiles} from './generate';
-import {PluginOptions, PapersaurusPluginOptions} from './types';
-import {processOptions} from './validateOptions';
-import importFresh from 'import-fresh';
+import { LoadContext, Plugin, DocusaurusConfig } from "@docusaurus/types";
+import { generatePdfFiles } from "./generate";
+import { PluginOptions, PapersaurusPluginOptions } from "./types";
+import { processOptions } from "./validateOptions";
+import importFresh from "import-fresh";
 import * as fs from "fs";
 
 function loadConfig(configPath: string): DocusaurusConfig {
-  if (!fs.existsSync(configPath)) {
-    throw new Error(`Config file "${configPath}" not found`);
-  }
-  const loadedConfig = importFresh(configPath) as DocusaurusConfig;
-  return loadedConfig
+    if (!fs.existsSync(configPath)) {
+        throw new Error(`Config file "${configPath}" not found`);
+    }
+    const loadedConfig = importFresh(configPath) as DocusaurusConfig;
+    return loadedConfig;
 }
 
-export default function (
-  _context: LoadContext,
-  options?: PluginOptions,
-): Plugin<void> {
+export default function (_context: LoadContext, options?: PluginOptions): Plugin<void> {
+    let pluginOptions: PapersaurusPluginOptions = processOptions(options);
 
-  let pluginOptions:PapersaurusPluginOptions = processOptions(options);
+    return {
+        name: "docusaurus-plugin-papersaurus",
 
-  return {
+        injectHtmlTags() {
+            if (!pluginOptions.addDownloadButton) {
+                return {};
+            }
 
-    name: 'docusaurus-plugin-papersaurus',
+            const CWD = process.cwd();
+            const siteConfig = loadConfig(`${CWD}/docusaurus.config.js`);
 
-    injectHtmlTags() {
-
-      if (!pluginOptions.addDownloadButton) {
-        return {};
-      }
-
-      const CWD = process.cwd();
-      const siteConfig = loadConfig(`${CWD}/docusaurus.config.js`);
-
-      return {
-        headTags: [`
-        ${(pluginOptions.jQueryUrl ? "<script src='" + pluginOptions.jQueryUrl + "'></script>" : "")}
+            return {
+                headTags: [
+                    `
+        ${pluginOptions.jQueryUrl ? "<script src='" + pluginOptions.jQueryUrl + "'></script>" : ""}
         <script>
           var pdfData = {};
 
@@ -158,19 +153,21 @@ export default function (
                 setInterval(checkAndInsertPdfButtons, 1000);
               });
           });
-        </script>`
-        ],
-      };
-    },
+        </script>`,
+                ],
+            };
+        },
 
-    async postBuild(props) {
-      let forceBuild = process.env.BUILD_PDF || "";
-      if ((pluginOptions.autoBuildPdfs && !forceBuild.startsWith("0")) || forceBuild.startsWith("1")) {
-        await generatePdfFiles(_context.outDir, pluginOptions, props);
-      }
-    },
-
-  };
+        async postBuild(props) {
+            let forceBuild = process.env.BUILD_PDF || "";
+            if (
+                (pluginOptions.autoBuildPdfs && !forceBuild.startsWith("0")) ||
+                forceBuild.startsWith("1")
+            ) {
+                await generatePdfFiles(_context.outDir, pluginOptions, props);
+            }
+        },
+    };
 }
 
 export { validateOptions } from "./validateOptions";

@@ -10,7 +10,6 @@ major_version: "2025" # minor version of the release note    ex: 2.2
 description: "Summary of the changes in version 2025.0.0 of Fast2." # Heavily-keywords-charged sentence for short preview of the release note + google SEO
 ---
 
-
 ## **What's up ?**
 
 <br />
@@ -120,15 +119,15 @@ New Feature: In the “Scheduler” place, job creation is possible only on a cu
 
 Improvement: Task exceptions are now discriminated into several subclasses:
 
- - TaskException: the standard and legacy exception occurring while running a task
+- TaskException: the standard and legacy exception occurring while running a task
 
- - TaskConfigException and TaskOptionalConfigException: the exceptions caused by incorrect parameters in the configuration of the task
+- TaskConfigException and TaskOptionalConfigException: the exceptions caused by incorrect parameters in the configuration of the task
 
- - TaskConnectException: the exception occurring when the product fails to connect to a third party application during the execution of a task
+- TaskConnectException: the exception occurring when the product fails to connect to a third party application during the execution of a task
 
- - TaskProcessException: the standard exception due to the execution of a task
+- TaskProcessException: the standard exception due to the execution of a task
 
- - TaskProcessAnnotationException, TaskProcessContentException, TaskProcessDataException and TaskProcessFolderException: the exceptions triggered when the task fails to manipulate respectively annotations, contents, metadata or folders.
+- TaskProcessAnnotationException, TaskProcessContentException, TaskProcessDataException and TaskProcessFolderException: the exceptions triggered when the task fails to manipulate respectively annotations, contents, metadata or folders.
 
 Improvement: A link to the logs added in the error toasts.
 
@@ -160,9 +159,9 @@ New Feature: Added the Undo / Redo functionality on canva and configuration.
 
 New Feature: Added the map description (long text) functionality.
 
- - The map description area can be reduced and moved.
+- The map description area can be reduced and moved.
 
- - The map description is available in the “Maps Overview” place.
+- The map description is available in the “Maps Overview” place.
 
 Improvement: Links with a long name are now fully displayed.
 
@@ -174,91 +173,91 @@ New Feature: Added the possibility to drag and drop tasks from the catalog to th
 
 New Feature: New tasks were added to the catalog:
 
- - AlterPunnetProperties: to do the same as AlterPunnetProperty but for several properties at the same time.
+- AlterPunnetProperties: to do the same as AlterPunnetProperty but for several properties at the same time.
 
- - DeleteContent: to delete files from local storage based on user URI input (supports wild cards and patterns)Conn
+- DeleteContent: to delete files from local storage based on user URI input (supports wild cards and patterns)Conn
 
- - EmbeddedDbSource: to use punnets from a previous campaign as a source for a new campaign. A REST version is released. Both can be used, but one will be deprecated and removed in a future major version.
+- EmbeddedDbSource: to use punnets from a previous campaign as a source for a new campaign. A REST version is released. Both can be used, but one will be deprecated and removed in a future major version.
 
- - EmbeddedDbQuery: to gather metadata from punnets from a previous campaign, or previous campaigns.
+- EmbeddedDbQuery: to gather metadata from punnets from a previous campaign, or previous campaigns.
 
- - ParseXMLAsProperties: to parse XML and add content as document metadata
+- ParseXMLAsProperties: to parse XML and add content as document metadata
 
- - ParseJSONAsProperties: to parse JSON and add content as document metadata
+- ParseJSONAsProperties: to parse JSON and add content as document metadata
 
- - PunnetCounter: to count punnets as they go through (QA internal need)
+- PunnetCounter: to count punnets as they go through (QA internal need)
 
 Improvement: Several tasks were improved:
 
- - AlterDocumentContent: Add option to skip specific files based on their extensions
+- AlterDocumentContent: Add option to skip specific files based on their extensions
 
- - AlterDocumentContent: Improve performances
+- AlterDocumentContent: Improve performances
 
- - AlterDocumentContent: the “check if files exist” option is ignored when using wildcards, since wildcards consist in scanning for existing files validating a pattern, therefore no missing file can be defined with a wildcard.
+- AlterDocumentContent: the “check if files exist” option is ignored when using wildcards, since wildcards consist in scanning for existing files validating a pattern, therefore no missing file can be defined with a wildcard.
 
- - AWSInjector: now avoids sending a content-type when the mime-type of a file is missing. Sending a content-type without sending the mime-type could lead to errors during the S3 injection.
+- AWSInjector: now avoids sending a content-type when the mime-type of a file is missing. Sending a content-type without sending the mime-type could lead to errors during the S3 injection.
 
- - ConvertP8ToXFDF: improve output structure of created annotation
+- ConvertP8ToXFDF: improve output structure of created annotation
 
- - CSVSource: continueOnFail avoids to stop the task processing when documentId column is empty for one document
+- CSVSource: continueOnFail avoids to stop the task processing when documentId column is empty for one document
 
- - CSVSource: now supports wildcards for input files
+- CSVSource: now supports wildcards for input files
 
- - CSVSource: now silent fails when a file is impossible to read
+- CSVSource: now silent fails when a file is impossible to read
 
- - CSVWriter: now supports a relative output path in the form of “file.csv”
+- CSVWriter: now supports a relative output path in the form of “file.csv”
 
- - CSVWriter: headers generation can now compile documents with different metadata between them
+- CSVWriter: headers generation can now compile documents with different metadata between them
 
- - DeleteFileFromSystem: all deleted files and folders are now counted as expected
+- DeleteFileFromSystem: all deleted files and folders are now counted as expected
 
- - EndTaskWritter: this task can now manage delayed punnets, which would have caused a campaign to run forever, in previous versions.
+- EndTaskWritter: this task can now manage delayed punnets, which would have caused a campaign to run forever, in previous versions.
 
- - FlowerDocsInjector: standard Date tags are now correctly populated with timestamps, as expected by FlowerDocs API. Since the connector doesn’t know about the type of custom tags, users are still responsible for converting dates to timestamp for custom tags.
+- FlowerDocsInjector: standard Date tags are now correctly populated with timestamps, as expected by FlowerDocs API. Since the connector doesn’t know about the type of custom tags, users are still responsible for converting dates to timestamp for custom tags.
 
- - HashSignTask: improved performance with resource-safe approach
+- HashSignTask: improved performance with resource-safe approach
 
- - IDMISContentExtractor: now extracts annotations with no defined color, from ImageServices, as expected.
+- IDMISContentExtractor: now extracts annotations with no defined color, from ImageServices, as expected.
 
- - IDMISContentExtractor: this task used to extract annotations and convert them immediately into a P8 format, which is not the responsibility of an extractor. Now extracts annotations in their original format, letting users decide to convert them into another format later in the map. 
+- IDMISContentExtractor: this task used to extract annotations and convert them immediately into a P8 format, which is not the responsibility of an extractor. Now extracts annotations in their original format, letting users decide to convert them into another format later in the map.
 
- - ConvertIStoXFDF and ConvertIStoFDF: both tasks have been improved to integrate the legacy conversion capabilities of the IDMISContentExtractor.
+- ConvertIStoXFDF and ConvertIStoFDF: both tasks have been improved to integrate the legacy conversion capabilities of the IDMISContentExtractor.
 
- - IDMIS: supports extraction of documents without their content
+- IDMIS: supports extraction of documents without their content
 
- - MailDeleter: can now close a closed folder
+- MailDeleter: can now close a closed folder
 
- - MailMover: can now close a closed folder
+- MailMover: can now close a closed folder
 
- - MailMover: stores new path for documents once moved
+- MailMover: stores new path for documents once moved
 
- - MailSource: supports retrieval of mail conversations attachments
+- MailSource: supports retrieval of mail conversations attachments
 
- - MoveContent: allows forcing a new file name when moving content of a document.
+- MoveContent: allows forcing a new file name when moving content of a document.
 
- - MDOWriter: allows a dynamic folder creation when prompted
+- MDOWriter: allows a dynamic folder creation when prompted
 
- - MoveContent: allows to overwrite file
+- MoveContent: allows to overwrite file
 
- - MovePunnet: allows a dynamic folder creation when prompted
+- MovePunnet: allows a dynamic folder creation when prompted
 
- - TesseractInvoker: now rotates files for a better reading, based on content type
+- TesseractInvoker: now rotates files for a better reading, based on content type
 
- - Tiff2PdfBox: now defines a default page orientation when the information is missing
+- Tiff2PdfBox: now defines a default page orientation when the information is missing
 
 Improvement: Some tasks are not used or can be replaced by better tasks for achieving the same goal, therefore they are removed from the task catalog to clean the catalog and make it easier to use. If you need any of these tasks, please contact support who can provide you with an archived version of them.
 
- - ASG Mobius
+- ASG Mobius
 
- - Ripole
+- Ripole
 
- - Sanitize Jpeg
+- Sanitize Jpeg
 
- - OpenOffice
+- OpenOffice
 
- - DocumentIDGetter
+- DocumentIDGetter
 
- - FileNetDocumentIdGetter 
+- FileNetDocumentIdGetter
 
 ##### Config panel
 
@@ -330,6 +329,7 @@ New Feature: Values are now highlighted in json view.
 Bugfix: When a word is searched in a punnet, each of its occurrences is now highlighted.
 
 ##### Punnet Tracker
+
 New Feature: Jump to another task with one click.
 
 New Feature: Now possible to move to the next or previous task with the arrow key on the keyboard.
@@ -402,11 +402,11 @@ Improvement: Better management of input streams.
 
 Improvement: For workers, the application.properties file now exposes three parameters to define the endpoint of the broker instead of the old broker.url parameter:
 
- - server.host
+- server.host
 
- - server.protocol
+- server.protocol
 
- - server.port
+- server.port
 
 Improvement: In the broker logs, the ACR log level is now synchronized to the broker log level.
 
@@ -448,13 +448,12 @@ Improvement: QA: More and more complete test cycles (Zephyr).
 
 - Recent patches: Some recent patches directly delivered by Professional Services, whether for enhancement or bug fixing, were integrated too late in this version life cycle to be released in time. Contact your Professional Services referee if you want further information about your own installed patches. Know that 2025.0 is compatible with 2.12 worker libs.
 
-- New task: MFilesInjector, new connector for M-Files through its API REST 
+- New task: MFilesInjector, new connector for M-Files through its API REST
 
-- New task: ComparePunnets, compare documents and data between source and injector 
+- New task: ComparePunnets, compare documents and data between source and injector
 
-- Evolution: FileNetInjector: Complete logs with advice on DateParseError 
+- Evolution: FileNetInjector: Complete logs with advice on DateParseError
 
 - Evolution: LocalSource : Skip exception when parse Json does not work
 
 - Security & confidentiality: Fast2 UI users can create a map and run a campaign with the JSTransform and ReadContent tasks to access local files, which represents a breach in confidentiality and security. We are working on a resolution for the final release. Please, for safety reasons, reduce access to only trusted IP addresses.
-

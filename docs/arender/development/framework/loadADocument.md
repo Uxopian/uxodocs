@@ -1,16 +1,10 @@
 ---
 title: Load a document
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: 9db0a5da6d219a451749b2564dfd8129eee4ea8510f801c8af15a96ee70db8a8
 ---
-
-
-
-
-
-
 
 The JavaScript API allows easy interaction with ARender using various commands <i class="ti-hand-point-right" />[ listed here ](/docs/arender/development/apis/web-ui/javascript/js-api) <i class="ti-hand-point-left" ></i>.
 
@@ -24,8 +18,6 @@ The **loadDocument** and **openDocument** functions from the API, <i class="ti-h
 
 JavaScript API requests are made on the window object of the iframe, as shown below.
 
-
-    
 ```javascript
         const loadAndOpenDocument = () => {
           const iframeWindow = iframeRef.current?.contentWindow;
@@ -43,8 +35,7 @@ JavaScript API requests are made on the window object of the iframe, as shown be
 
         };
 ```
-    
-    
+
 ```javascript
         loadAndOpenDocument(): void {
         const iframeWindow = this.iframeRef.nativeElement.contentWindow;
@@ -62,8 +53,7 @@ JavaScript API requests are made on the window object of the iframe, as shown be
 
 
 ```
-    
-    
+
 ```javascript
 /**
  * Returns the ARenderJS object from the iframe.
@@ -95,8 +85,7 @@ defineExpose({
   loadAndOpenDocument
 &#125;)
 ```
-    
-    
+
 ```javascript
 /**
  * Returns the ARenderJS object from the iframe.
@@ -122,8 +111,6 @@ export function loadAndOpenDocument(url) {
   })
 
 ```
-    
-    
 
 <p><i class="ti-alert" /> Note that if you attempt to <ins>integrate ARender into a local directory</ins>, to interact with a local HTML file, you must first <b>serve it on the localhost port of your choice</b>.</p>
 
@@ -152,9 +139,4 @@ export function loadAndOpenDocument(url) {
             console.error("The iframe is inaccesible or has not loaded yet");
 
 
-```    
-
-
-
-    
-
+```

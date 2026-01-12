@@ -1,16 +1,10 @@
 ---
 title: Navigation
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 8c1947cba509ee1ed7b7f56d45bcd9f90515ddd20632a6be7c6a8b82bd7a6a68
 ---
-
-
-
-
-
-
 
 ## Navigate in a document
 
@@ -26,6 +20,7 @@ ARender provides many easy ways to navigate a document:
 
 You can type the number of the page you want to display ( included from
 1 to the total number of pages of your document) in the text area made
+
 ```javascript
 for it and then press « Enter » or « Tab »
 ```

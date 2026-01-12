@@ -1,16 +1,10 @@
 ---
 title: Office converter
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 38a18f5cb112706f8cd6a1a9fdb7e8483218c8cf2afcb2f0d0e281c37a84fa61
 ---
-
-
-
-
-
-
 
 This tutorial describe an example of usage of ARender to convert a Word
 document into a PDF. In order to do so, we are going to explore the API
@@ -24,7 +18,7 @@ Before everything, we need to import the ARender maven dependencies that
 are needed for this example. In the case of a maven project, it is
 sufficient to add this to the pom.xml file:
 
-``` xml
+```xml
 <dependency>
        <groupId>com.arondor.arender</groupId>
        <artifactId>arondor-arender-common</artifactId>
@@ -47,7 +41,7 @@ This first step defines the necessary information for the usage of the
 API. The object DocumentService encapsulate the communication between
 the Web-UI and the rendition server. (that can be remote)
 
-``` java
+```java
 RenditionRestClient client = new RenditionRestClient();
 client.setRemoteTarget("http://rendition-server:8761/");
 client.setMaxTries(3);
@@ -60,7 +54,7 @@ loadDocumentAccessor(DocumentAccessor documentAccessor) of the
 DocumentService interface. In this example, we give a documentAccessor
 built from an inputStream containing the content of the document.
 
-``` java
+```java
 String fileToConvertPath = "C:\ARender_User\Documents\myWordDocument.docx";
 FileInputStream fileInputStream = new FileInputStream(fileToConvertPath);
 DocumentAccessor documentAccessor = new DocumentAccessorByteArray(fileInputStream);
@@ -83,7 +77,7 @@ allowing to access different states of a same document. The enumeration
 DocumentAccessorSelector allows to fetch the appropriate
 DocumentAccessor.
 
-``` java
+```java
 DocumentAccessor renderedDocumentAccessor = client.getDocumentAccessor(documentAccessor.getUUID(),DocumentAccessorSelector.RENDERED);
 InputStream pdfDocumentInputStream = renderedDocumentAccessor.getInputStream();
 ```

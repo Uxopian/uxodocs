@@ -1,8 +1,8 @@
 ---
 title: Overview
 last_update:
-  date: '2025-12-09T08:57:14.951Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:57:14.951Z"
+    author: CI/CD Bot
 content_hash: 1e4801aae3574bb82fef84ae71ad2fb03d82613bec74f8e29094530fb2d51015
 ---
 
@@ -39,14 +39,14 @@ graph TD
 
     Client -- REST API Request --> BFF
     BFF -- Proxies Request (Adds X-User headers) --> Service
-    
+
     Service -- Stores & Retrieves Data --> OpenSearch
     Service -- Fetches document content: e.g. documentService.extractTextualContent --> Rendition
     Service -- (Optional) RAG/Vector Search --> Qdrant
     Service -- Sends Prompts --> LLM
-    
+
     LLM -- Returns Completions --> Service
-    
+
     Service -- API Response --> BFF
     BFF -- Proxies Response --> Client
 ```
@@ -114,7 +114,7 @@ sequenceDiagram
     BFF->>BFF: Inject Headers (X-User-TenantId, X-User-Id...)
 
     BFF->>+Service: Forward Request (with Auth Headers)
-    
+
     Service->>Service: Identify message type (Goal > PromptId > Content)
     Note over Service: Goal detected in input. Resolving...
 

@@ -1,24 +1,23 @@
 ---
 title: Hidden request
-date: '2020-04-04T10:20:01+02:00'
+date: "2020-04-04T10:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 076effbbad4e6e76ad03f05d8f4df9bb70c53eca18d8a959a1c77f732f15765a
 ---
 
-
-In the previous section, you saw how to define the form and search criteria. You will now see how to configure the results display. 
+In the previous section, you saw how to define the form and search criteria. You will now see how to configure the results display.
 
 <br/>
 
-To do this, you are going to use a hidden request because the user cannot interact with it. 
+To do this, you are going to use a hidden request because the user cannot interact with it.
 
 <br/>
 
 This XML block should be placed in the `ComponentSearchPresenter` bean, at the same level as the `advancedCriteriaPresenter` property.
 
-This hidden search is defined using the `hiddenRequest` property: 
+This hidden search is defined using the `hiddenRequest` property:
 
 <br/>
 
@@ -34,15 +33,16 @@ This hidden search is defined using the `hiddenRequest` property:
 
 ## Columns to be displayed
 
-Place the `SelectClause` property in the `SearchRequest` bean. Set this property as below to display the table columns: 
+Place the `SelectClause` property in the `SearchRequest` bean. Set this property as below to display the table columns:
 
 :::note[XML code: Definition of columns to be displayed]
+
 ```xml
 
 <property name="selectClause">
 	<bean class="com.flower.docs.domain.search.SelectClause">
 		<property name="fields">
-			<list>		
+			<list>
 				<!-- Colonnes à afficher -->
 				<value>name</value>
 				<value>NomClient</value>
@@ -53,8 +53,8 @@ Place the `SelectClause` property in the `SearchRequest` bean. Set this property
 </property>
 
 ```
-:::
 
+:::
 
 <br/>
 
@@ -64,11 +64,12 @@ Place the `SelectClause` property in the `SearchRequest` bean. Set this property
 
 Place the `filterClauses` property after the `selectClause` property. Set the `filterClauses` property as below to search client folders:
 
-* The `STRING` type is used to specify that the search criterion will be a character string,
-* The `EQUALS_TO` operator will be responsible for client folder feedback,
-* the customer files to be searched will be of the `ClientFile` type,
+- The `STRING` type is used to specify that the search criterion will be a character string,
+- The `EQUALS_TO` operator will be responsible for client folder feedback,
+- the customer files to be searched will be of the `ClientFile` type,
 
 :::note[XML code: Filter definition]
+
 ```xml
 
 <property name="filterClauses">
@@ -86,7 +87,7 @@ Place the `filterClauses` property after the `selectClause` property. Set the `f
 						</property>
 						<property name="values">
 							<list>
-								<value>DossierClient</value>								
+								<value>DossierClient</value>
 							</list>
 						</property>
 					</bean>
@@ -97,10 +98,11 @@ Place the `filterClauses` property after the `selectClause` property. Set the `f
 </property>
 
 ```
+
 :::
 
-
 ## Sorting
+
 FlowerDocs allows results to be sorted according to techniques and tags.
 
 <br/>
@@ -112,6 +114,7 @@ In this case, you will sort the result according to the `creationDate` property,
 Use the `orderClauses` property to define the sorting of customer files from most recent to oldest:
 
 :::note[XML code: Definition of customer file sorting]
+
 ```xml
 
 <property name="orderClauses">
@@ -124,8 +127,8 @@ Use the `orderClauses` property to define the sorting of customer files from mos
 </property>
 
 ```
-:::
 
+:::
 
 <br/>
 
@@ -133,13 +136,8 @@ The number of results returned by the search. This property allows you to set a 
 
 <br/>
 
-
 ```xml
 
 <property name="max" value="25" />
 
 ```
-
-
-
-

@@ -1,17 +1,15 @@
 ---
 title: Search
-date: '2000-04-01T13:20:01+02:00'
+date: "2000-04-01T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 2e9afe8f78d22649cfc89f1989f274bb4d3d2b7a83f74a5f8f759dc19b509a82
 ---
 
-
-
 This type of widget displays the concatenation of fields present in the `selectClause` search for each component retrieved by the configured search.
 
-Users can click on one of the displayed results to access the component. 
+Users can click on one of the displayed results to access the component.
 
 In the example below, we start by defining the request that will populate the widget:
 
@@ -62,12 +60,12 @@ In the example below, we start by defining the request that will populate the wi
 </bean>
 ```
 
-Next, we build the ``tenLastBillWidget`` widget to display the search. 
-In this example, we define: 
+Next, we build the `tenLastBillWidget` widget to display the search.
+In this example, we define:
 
-* the type of component required, the category: here ``DOCUMENT``, the available categories are ``DOCUMENT``, ``TASK``, ``FOLDER``, ``VIRTUAL_FOLDER``. 
-* internationalized widget title and description
-* the previously defined request ``tenLastBillRequest``
+- the type of component required, the category: here `DOCUMENT`, the available categories are `DOCUMENT`, `TASK`, `FOLDER`, `VIRTUAL_FOLDER`.
+- internationalized widget title and description
+- the previously defined request `tenLastBillRequest`
 
 ```xml
 <bean id="tenLastBillWidget" class="com.flower.docs.gui.client.home.HomeSearchPresenter">
@@ -106,7 +104,7 @@ In this example, we define:
 </bean>
 ```
 
-Finally, we associate the widget ``tenLastBillWidget`` with a catalog named ``homeWidgets``
+Finally, we associate the widget `tenLastBillWidget` with a catalog named `homeWidgets`
 
 ```xml
 <bean id="homeWidgets" class="com.flower.docs.gui.client.util.SimpleWidgetCatalog">

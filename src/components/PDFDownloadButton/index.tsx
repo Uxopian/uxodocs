@@ -1,13 +1,15 @@
-import React from 'react';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import { useDocsVersion } from '@docusaurus/plugin-content-docs/client';
-import styles from './styles.module.css';
+import React from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
+import styles from "./styles.module.css";
 
 interface PDFDownloadButtonProps {
     productId: string;
 }
 
-export default function PDFDownloadButton({ productId }: PDFDownloadButtonProps): React.JSX.Element {
+export default function PDFDownloadButton({
+    productId,
+}: PDFDownloadButtonProps): React.JSX.Element {
     const version = useDocsVersion();
 
     // Generate PDF path based on product and version

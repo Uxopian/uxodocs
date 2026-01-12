@@ -3,15 +3,14 @@ title: FlowerDocs 2025.1 Release notes
 description: FlowerDocs 2025.1 Release notes
 ---
 
-
 <br />
 
 **Legend**
 
-* 💻 Native feature
-* ⚙️ Feature requires configuration to be activated
-* 👨‍💻 Feature requiring development to be activated
-* 👑 Premium feature
+- 💻 Native feature
+- ⚙️ Feature requires configuration to be activated
+- 👨‍💻 Feature requiring development to be activated
+- 👑 Premium feature
 
 <br />
 
@@ -19,7 +18,6 @@ description: FlowerDocs 2025.1 Release notes
 
 Version 2025.1 introduces significant advances in functionality and usability. It also includes patches and security enhancements (CVEs).  
 Highlights include a redesigned login page for improved visual comfort, simplified document adding for both users and APIs, and enhanced full-text search.
-
 
 # Upgrade Notes
 
@@ -42,7 +40,7 @@ To add a document to FlowerDocs without a specific context, you can now **drag a
 Depending on the settings, it is also possible to add a document **directly to a virtual folder** using the 'Add document' button or by dragging and dropping directly into the file plan area. The new document is automatically indexed in the same way as the folder to simplify indexing and avoid errors.
 ![Image](/uxodocs/img/flowerdocs/release-notes/AjoutDocDossier_EN.gif)
 
-*\* Depending on the settings, the "+" button or the "Add a document" button will appear in a virtual folder.*
+_\* Depending on the settings, the "+" button or the "Add a document" button will appear in a virtual folder._
 
 ## 💻 Full-text search, a complete use
 
@@ -51,7 +49,7 @@ Full-text search has been optimised, allowing the use of '' to perform strict se
 The word or words being searched for are also **automatically highlighted in the viewer**, so users can quickly see why the document has appeared in the search results.
 ![Image](/uxodocs/img/flowerdocs/release-notes/RecherchePleinTexte_EN.gif)
 
-*\* As a reminder, full text search can be enabled in the settings.*
+_\* As a reminder, full text search can be enabled in the settings._
 
 ## 💻 Optimised versions management
 
@@ -74,16 +72,15 @@ Information about the product, such as the version installed, is moved from the 
 
 This new version of the viewer offers enhanced security and the following new features:
 
-* Disable information notifications (blue) to make it easier to consult documents. Error messages are always present to warn of abnormal behaviour.   
-    
-* Integration with Mixpanel, which provides anonymous usage data to the Uxopian team, enabling data-driven improvements to ARender. No personal or sensitive information is collected, ensuring full compliance with the RGPD, the California Consumer Privacy Act (CCPA) and other global privacy standards.  
+- Disable information notifications (blue) to make it easier to consult documents. Error messages are always present to warn of abnormal behaviour.  
+
+- Integration with Mixpanel, which provides anonymous usage data to the Uxopian team, enabling data-driven improvements to ARender. No personal or sensitive information is collected, ensuring full compliance with the RGPD, the California Consumer Privacy Act (CCPA) and other global privacy standards.  
   By centralising this anonymous data, we gain valuable insight into feature usage, enabling us to prioritise updates and deliver meaningful improvements for all users.  
   You can change this default configuration by following the documentation [here](/documentation/config/gui/viewer/product-analytics)
 
 **Transparency First :**  
 Our approach to data collection and usage is fully documented, ensuring clarity and trust :
 [More about Product Analytics](https://docs.arender.io/learn/product-analytics/)
-
 
 # For integrators
 
@@ -94,7 +91,7 @@ Addition of an Asynchronous column in the Operations Handlers table to facilitat
 
 ## ⚙️ Virtual folder
 
-A new parameter has been added to limit the document classes created directly from a virtual folder: children 
+A new parameter has been added to limit the document classes created directly from a virtual folder: children
 ![Image](/uxodocs/img/flowerdocs/release-notes/DossierClientEnfant_EN.png)![Image](/uxodocs/img/flowerdocs/release-notes/DossierClientEnfant_XML.png)
 To find out more, see the upgrade notes [here](./upgrade-notes#adding-documents-made-easy)
 
@@ -105,11 +102,10 @@ Documentation available [here](/documentation/install/clm/jobs#update).
 
 ## 👨‍💻 New endpoints for documents
 
-Two new REST APIs are available for : 
+Two new REST APIs are available for :
 
-* Create a document with the associated file in a single call instead of successive calls: create a temporary file, create a document, then link the temporary file to the document : `/core/rest/documents/unique`
-    
-* Update a document to add a file in a single call instead of successive calls: Create a temporary file, then link the temporary file to the document : `/core/rest/documents/\{id\}/unique`
+- Create a document with the associated file in a single call instead of successive calls: create a temporary file, create a document, then link the temporary file to the document : `/core/rest/documents/unique`
+- Update a document to add a file in a single call instead of successive calls: Create a temporary file, then link the temporary file to the document : `/core/rest/documents/\{id\}/unique`
 
 These two new APIs will make it easier to create or update a document. They will also facilitate error management for applications using FlowerDocs services.
 
@@ -137,36 +133,36 @@ To find out more, see the upgrade note [here](./upgrade-notes#exploitation).
 
 ## 👨‍💻 End points
 
-* A new API has been created to make it easier to purge the GUI cache : `/\{gui\}/rest/caches/\{cacheNames\}`.
-More details [here](/documentation/config/exploit/cache)
+- A new API has been created to make it easier to purge the GUI cache : `/\{gui\}/rest/caches/\{cacheNames\}`.
+  More details [here](/documentation/config/exploit/cache)
 
-* The API for checking the status of Core machines no longer requires authentication, to facilitate the platform's monitoring mechanisms : `\{core\}/actuator/status`
+- The API for checking the status of Core machines no longer requires authentication, to facilitate the platform's monitoring mechanisms : `\{core\}/actuator/status`
 
 # Bug fixes
 
-| Bug | Ticket support |
-| :---- | :---- |
-| **Functional user** |  |
-| Full-text search \- Text extraction from emails is now functional |  |
-| Search \- The & character is interpreted as a standard character and not as a value separator. | TMAFLW-761 |
-| Physical folder \- Whatever the configuration of the user workstation (window size), child folders or documents are displayed correctly. | TMAFLW-540 |
-| Virtual folder \- Whatever the configuration of the user workstation, the list of documents is displayed. | TMAFLW-594 TMAFLW-866 |
-| Virtual folder \- The ratio between the panel of the indexing form and the panel of the viewer or list of documents, set in the configuration file, is respected whatever the configuration of the workstation. | TMAFLW-650 |
-| Virtual folder \- Data that can be added in columns in tables is always available, whatever display the user chooses | TMAFLW-1019 |
-| Currency type tag \- The comma or full stop is accepted as the separator between the integer part and the decimal part. | TMAFLW-876 |
-| SSO connection \- The SSO connection is always available, even after the platform has been restarted. | TMAFLW-971 |
-| Task \- Users can annotate a document attached to a task even if the task is read-only. This depends on the rights granted to the attached document | TMAFLW-1006 |
-| Task \- The task icon is always displayed in the columns of a results table, even if the table does not have the class id column. |  |
-| Sequential processing \- When serial processing is enabled, if the user opens a component and then a pop-up for adding or indexing a document, for example, and cancels these actions, the user returns to the component. |  |
-| **Integrator** |  |
-| CLM \- The CLM (Command Line Manager) is now working in https mode. The SSL error that appeared previously, suggesting that there was a problem, no longer exists.  |  |
-| GUIConfiguration file error handling \- GUIConfiguration file errors are now better handled. Error-free files are loaded even if a file has an error and the error message clearly identifies the file with the problem. | TMAFLW-840 |
-| Task attachment \- Tasks are saved with document classes containing the permitted special characters attached. | TMAFLW-1001 |
+| Bug                                                                                                                                                                                                                       | Ticket support        |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------- |
+| **Functional user**                                                                                                                                                                                                       |                       |
+| Full-text search \- Text extraction from emails is now functional                                                                                                                                                         |                       |
+| Search \- The & character is interpreted as a standard character and not as a value separator.                                                                                                                            | TMAFLW-761            |
+| Physical folder \- Whatever the configuration of the user workstation (window size), child folders or documents are displayed correctly.                                                                                  | TMAFLW-540            |
+| Virtual folder \- Whatever the configuration of the user workstation, the list of documents is displayed.                                                                                                                 | TMAFLW-594 TMAFLW-866 |
+| Virtual folder \- The ratio between the panel of the indexing form and the panel of the viewer or list of documents, set in the configuration file, is respected whatever the configuration of the workstation.           | TMAFLW-650            |
+| Virtual folder \- Data that can be added in columns in tables is always available, whatever display the user chooses                                                                                                      | TMAFLW-1019           |
+| Currency type tag \- The comma or full stop is accepted as the separator between the integer part and the decimal part.                                                                                                   | TMAFLW-876            |
+| SSO connection \- The SSO connection is always available, even after the platform has been restarted.                                                                                                                     | TMAFLW-971            |
+| Task \- Users can annotate a document attached to a task even if the task is read-only. This depends on the rights granted to the attached document                                                                       | TMAFLW-1006           |
+| Task \- The task icon is always displayed in the columns of a results table, even if the table does not have the class id column.                                                                                         |                       |
+| Sequential processing \- When serial processing is enabled, if the user opens a component and then a pop-up for adding or indexing a document, for example, and cancels these actions, the user returns to the component. |                       |
+| **Integrator**                                                                                                                                                                                                            |                       |
+| CLM \- The CLM (Command Line Manager) is now working in https mode. The SSL error that appeared previously, suggesting that there was a problem, no longer exists.                                                        |                       |
+| GUIConfiguration file error handling \- GUIConfiguration file errors are now better handled. Error-free files are loaded even if a file has an error and the error message clearly identifies the file with the problem.  | TMAFLW-840            |
+| Task attachment \- Tasks are saved with document classes containing the permitted special characters attached.                                                                                                            | TMAFLW-1001           |
 
 # Known issues
 
-* The new endpoints for creating or saving a document by directly associating it with a file have does not work with Swagger.
-* Highlighting the searched word(s) in the viewer after a full-text search does not work the first time you view the page (first opening of open in new window). If you open the page a second time or refresh it, the words will be highlighted without having to search in the viewer.
+- The new endpoints for creating or saving a document by directly associating it with a file have does not work with Swagger.
+- Highlighting the searched word(s) in the viewer after a full-text search does not work the first time you view the page (first opening of open in new window). If you open the page a second time or refresh it, the words will be highlighted without having to search in the viewer.
 
 # FlowerDocs eProcess
 
@@ -189,10 +185,10 @@ The process of assigning envelopes to a specific user has been reviewed to reduc
 
 # Bug Fixes
 
-| Bug | Ticket support |
-| :---- | :---- |
-| **Operator** |  |
-| The eProcess APIs for creating or modifying an envelope have been modified to cache tag classes and their values to prevent performance degradation during use. |  |
+| Bug                                                                                                                                                             | Ticket support |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- |
+| **Operator**                                                                                                                                                    |                |
+| The eProcess APIs for creating or modifying an envelope have been modified to cache tag classes and their values to prevent performance degradation during use. |                |
 
 # FlowerDocs GEC
 

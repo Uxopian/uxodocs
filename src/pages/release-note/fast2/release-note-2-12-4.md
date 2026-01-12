@@ -6,9 +6,9 @@ date: 2025-09-11
 
 # To modify
 version: "2.12.4"
-major_version: "2" 
-latest : true #delete this line if it's not the latest version for this major version
-description: "Summary of the changes in version 2.12.4 of Fast2." 
+major_version: "2"
+latest: true #delete this line if it's not the latest version for this major version
+description: "Summary of the changes in version 2.12.4 of Fast2."
 ---
 
 ## **What's new?**
@@ -21,6 +21,7 @@ Discover the details of the fix below.
 <br />
 
 ---
+
 ## 🌏 Generic Features & UI
 
 No change has been operated on this part.
@@ -36,6 +37,7 @@ No change has been operated on this part.
 ## ⚙️ Technical & Configuration
 
 ### 🐞 Bug Fixes
+
 - **Database**: Corrected an issue where an annotation's ID was not being correctly saved in the embedded database.
 
 ---
@@ -60,6 +62,6 @@ No change has been operated on this part.
 
 ## 🧑‍💻 Support Tickets Included in this Release
 
-| Support Tickets | Solved by | Summary                                                                  |
-|-----------------|-----------|--------------------------------------------------------------------------|
-| TMAFAST-745     | FAST-5026 | Annotation ID value not correctly serialized in embedded-DB              |
+| Support Tickets | Solved by | Summary                                                     |
+| --------------- | --------- | ----------------------------------------------------------- |
+| TMAFAST-745     | FAST-5026 | Annotation ID value not correctly serialized in embedded-DB |

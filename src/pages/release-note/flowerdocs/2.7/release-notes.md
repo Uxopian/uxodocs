@@ -3,13 +3,12 @@ title: Release notes
 description: Release notes
 ---
 
-
 # Changements importants de la 2.7
 
 ## Correctifs de sécurité
 
-Dans l'objectif d'améliorer la sécurité au sein de FlowerDocs, de nombreux correctifs ont été apportés : 
-\{\{% epic id = FD-15523 %\}\} Correction de failles XSS 
+Dans l'objectif d'améliorer la sécurité au sein de FlowerDocs, de nombreux correctifs ont été apportés :
+\{\{% epic id = FD-15523 %\}\} Correction de failles XSS
 
 \{\{% epic id = FD-15494 %\}\} Correction de failles de sécurité
 
@@ -35,9 +34,9 @@ Dans l'objectif d'améliorer la sécurité au sein de FlowerDocs, de nombreux co
 
 🔴 La suppression d'un document attaché à une tâche n'entraîne plus de problèmes à la visualisation des autres pièces jointes de la tâche
 
-## RGAA 
+## RGAA
 
-Poursuite de la mise en conformité avec le RGAA : 
+Poursuite de la mise en conformité avec le RGAA :
 \{\{% epic id = FD-15526 %\}\} Amélioration de la lisibilité de l'application par un lecteur d'écran
 
 \{\{% epic id = FD-15534 %\}\} Amélioration de la navigation clavier
@@ -65,6 +64,7 @@ Poursuite de la mise en conformité avec le RGAA :
 🔴 Les API REST des jobs Redis ne sont plus exposées
 
 ## Recherche
+
 \{\{% epic id = FD-15859 %\}\} Amélioration des filtres au sein d'un dossier virtuel
 
 🔴 Filtre des étapes sélectionnables en fonction du workflow renseigné
@@ -73,7 +73,7 @@ Poursuite de la mise en conformité avec le RGAA :
 
 \{\{% epic id = FD-15720 %\}\} Suppression du script vendormin.js
 
-✅ Les actions du service worker ne sont plus affichées 
+✅ Les actions du service worker ne sont plus affichées
 
 ✅ La notification du service worker devient une notification push commune à toute l'application FlowerDocs
 
@@ -83,9 +83,9 @@ Poursuite de la mise en conformité avec le RGAA :
 
 ## 2.7.1 _26/10/2023_
 
-🔴 Amélioration du processus de migration de Elasticsearch et FlowerDocs 2.5 vers OpenSearch et FlowerDocs 2.7 
+🔴 Amélioration du processus de migration de Elasticsearch et FlowerDocs 2.5 vers OpenSearch et FlowerDocs 2.7
 
-🔴 L'authentification est de nouveau fonctionnelle dans FlowerDocs Companion 
+🔴 L'authentification est de nouveau fonctionnelle dans FlowerDocs Companion
 
 🔴 Les abonnements aux opérations sont executés lors de l'ouverture de composant
 

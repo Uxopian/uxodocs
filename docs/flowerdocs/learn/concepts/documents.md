@@ -1,13 +1,11 @@
 ---
 title: Documents
-date: '2000-04-02'
+date: "2000-04-02"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: bdbe6fb572ac8dfbde7d8441f15b300d2b1ac0ac920e99c773d4096afe8fcba9
 ---
-
-
 
 # Document content
 
@@ -18,14 +16,12 @@ These contents can be viewed in the  [ARender](https://arender.io/) document vie
 
 # Document permissions
 
-In order to restrict access to, or modifications of, a document's content, a number of permissions are available to control possible operations: 
+In order to restrict access to, or modifications of, a document's content, a number of permissions are available to control possible operations:
 
-* View content: `READ_CONTENT`
-* Add or delete document content: `UPDATE_CONTENT`
-* Download document content: `DOWNLOAD_CONTENT`
-* Enable printing in the viewer: `PRINT`
-* View document annotations: `READ_ANNOTATION`
-* Annotate document content: `CREATE_ANNOTATION`
-* Document composition: `BUILD_NEW_DOCUMENT`
-
-
+- View content: `READ_CONTENT`
+- Add or delete document content: `UPDATE_CONTENT`
+- Download document content: `DOWNLOAD_CONTENT`
+- Enable printing in the viewer: `PRINT`
+- View document annotations: `READ_ANNOTATION`
+- Annotate document content: `CREATE_ANNOTATION`
+- Document composition: `BUILD_NEW_DOCUMENT`

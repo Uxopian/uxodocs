@@ -3,12 +3,11 @@ title: Release notes
 description: Release notes
 ---
 
-
 # Significant changes in 2.8
 
 ## Security vulnerabilities
 
-With the aim of improving security within FlowerDocs, several fixes have been made : 
+With the aim of improving security within FlowerDocs, several fixes have been made :
 ✅ Service Directory password encryption via the CLM
 
 🔴 Minor security vulnerabilities fixed on the CLM and administration GUI
@@ -128,10 +127,9 @@ When criteria are displayed in columns :
 
 ## Search
 
-* Full-text search - After restoring a document version, the content of the restored version is not re-indexed and therefore not searchable.
-* The “Reset” action must not be present on the document search pop-up.
-* The focus remains on the “Reset” action after clicking on it.
-
+- Full-text search - After restoring a document version, the content of the restored version is not re-indexed and therefore not searchable.
+- The “Reset” action must not be present on the document search pop-up.
+- The focus remains on the “Reset” action after clicking on it.
 
 # Patch versions
 
@@ -150,7 +148,6 @@ For more details, please contact us via our ticketing tool !
 **ARender version upgrade from 4.8.13 to 4.8.17 to benefit from all the improvements made in the viewer.**
 
 For more information, see the ARender release notes[here](https://hub.arender.io/fr/technical-blog).
-
 
 ### RGAA
 
@@ -185,7 +182,6 @@ If the focus is in a pop-up field, then when the enter key is pressed, the actio
 When a document is viewed in the viewer in external mode, i.e. without the FlowerDocs forms being displayed, the user rights set up in FlowerDocs are once again taken into account.
 
 Ex: a user who has the right to download or print the document can do so again.
-
 
 ## 2.8.2 _27/06/2024_
 

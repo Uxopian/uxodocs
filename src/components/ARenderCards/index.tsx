@@ -1,120 +1,120 @@
-import React from 'react';
-import Link from '@docusaurus/Link';
-import styles from './styles.module.css';
-import UXopianFeed from '../FlowerDocsCards/UXopianFeed';
+import React from "react";
+import Link from "@docusaurus/Link";
+import styles from "./styles.module.css";
+import UXopianFeed from "../FlowerDocsCards/UXopianFeed";
 
 const ARenderCardsList = [
     {
-        title: 'What is ARender ?',
-        icon: '💡',
-        description: 'Discover ARender and its capabilities',
-        link: '/docs/arender/what-is-arender/introduction',
-        color: '#B56BFF'
+        title: "What is ARender ?",
+        icon: "💡",
+        description: "Discover ARender and its capabilities",
+        link: "/docs/arender/what-is-arender/introduction",
+        color: "#B56BFF",
     },
     {
-        title: 'Installation',
-        icon: '🔧',
-        description: 'Installing & deploying ARender',
-        link: '/docs/arender/installation/docker/alfresco',
-        color: '#D745FF'
+        title: "Installation",
+        icon: "🔧",
+        description: "Installing & deploying ARender",
+        link: "/docs/arender/installation/docker/alfresco",
+        color: "#D745FF",
     },
     {
-        title: 'Learn',
-        icon: '📚',
-        description: 'Learn how to use ARender through guides and tutorials',
-        link: '/docs/arender/learn/architecture/ecm-architecture',
-        color: '#735EFC'
-    }
+        title: "Learn",
+        icon: "📚",
+        description: "Learn how to use ARender through guides and tutorials",
+        link: "/docs/arender/learn/architecture/ecm-architecture",
+        color: "#735EFC",
+    },
 ];
 
 const GuidesList = [
     {
-        title: 'Guides',
-        description: 'Configure and operate your ARender platform',
+        title: "Guides",
+        description: "Configure and operate your ARender platform",
         items: [
             {
-                icon: '⚙️',
-                title: 'Configurations',
-                description: 'Configure ARender to meet your needs',
-                link: '/docs/arender/guides/configurations/web-ui/connectors/default'
+                icon: "⚙️",
+                title: "Configurations",
+                description: "Configure ARender to meet your needs",
+                link: "/docs/arender/guides/configurations/web-ui/connectors/default",
             },
             {
-                icon: '💻',
-                title: 'Exploitation',
-                description: 'Operating and managing your platform',
-                link: '/docs/arender/guides/exploitation/'
+                icon: "💻",
+                title: "Exploitation",
+                description: "Operating and managing your platform",
+                link: "/docs/arender/guides/exploitation/",
             },
             {
-                icon: '🔄',
-                title: 'Operation',
-                description: 'Day-to-day operations and maintenance',
-                link: '/docs/arender/guides/operation/'
+                icon: "🔄",
+                title: "Operation",
+                description: "Day-to-day operations and maintenance",
+                link: "/docs/arender/guides/operation/",
             },
             {
-                icon: '🔼',
-                title: 'Upgrade',
-                description: 'Upgrading your ARender installation',
-                link: '/docs/arender/guides/upgrade/4.8_to_2023.0/rendition'
-            }
+                icon: "🔼",
+                title: "Upgrade",
+                description: "Upgrading your ARender installation",
+                link: "/docs/arender/guides/upgrade/4.8_to_2023.0/rendition",
+            },
         ],
-        color: '#0984e3'
+        color: "#0984e3",
     },
     {
-        title: 'Features',
-        description: 'Explore ARender\'s powerful features',
+        title: "Features",
+        description: "Explore ARender's powerful features",
         items: [
             {
-                icon: '♿',
-                title: 'Accessibility',
-                description: 'Accessibility features for all users',
-                link: '/docs/arender/features/accessibility'
+                icon: "♿",
+                title: "Accessibility",
+                description: "Accessibility features for all users",
+                link: "/docs/arender/features/accessibility",
             },
             {
-                icon: '💬',
-                title: 'Annotations',
-                description: 'Annotate and collaborate on documents',
-                link: '/docs/arender/features/annotations'
+                icon: "💬",
+                title: "Annotations",
+                description: "Annotate and collaborate on documents",
+                link: "/docs/arender/features/annotations",
             },
             {
-                icon: '🔖',
-                title: 'Bookmarks',
-                description: 'Navigate documents with bookmarks',
-                link: '/docs/arender/features/bookmarks'
+                icon: "🔖",
+                title: "Bookmarks",
+                description: "Navigate documents with bookmarks",
+                link: "/docs/arender/features/bookmarks",
             },
             {
-                icon: '🔨',
-                title: 'Document Builder',
-                description: 'Build and assemble documents',
-                link: '/docs/arender/features/documentbuilder'
-            }
+                icon: "🔨",
+                title: "Document Builder",
+                description: "Build and assemble documents",
+                link: "/docs/arender/features/documentbuilder",
+            },
         ],
-        color: '#735EFC'
+        color: "#735EFC",
     },
     {
-        title: 'Development',
-        description: 'Extend ARender with APIs and connectors',
+        title: "Development",
+        description: "Extend ARender with APIs and connectors",
         items: [
             {
-                icon: '🔌',
-                title: 'Connector',
-                description: 'Connect ARender to your systems',
-                link: '/docs/arender/development/connector/documentAccessorInterface'
+                icon: "🔌",
+                title: "Connector",
+                description: "Connect ARender to your systems",
+                link: "/docs/arender/development/connector/documentAccessorInterface",
             },
             {
-                icon: '🧩',
-                title: 'Framework',
-                description: 'ARender development framework',
-                link: '/docs/arender/development/framework/addAHighlightNotification'
+                icon: "🧩",
+                title: "Framework",
+                description: "ARender development framework",
+                link: "/docs/arender/development/framework/addAHighlightNotification",
             },
             {
-                icon: '📡',
-                title: 'APIs',
-                description: 'RESTful and Java APIs',
-                link: '/docs/arender/development/apis/rendition/rest/admin/version'
-            }
+                icon: "📡",
+                title: "APIs",
+                description: "RESTful and Java APIs",
+                link: "/docs/arender/development/apis/rendition/rest/admin/version",
+            },
         ],
-        color: '#B56BFF'
-    }
+        color: "#B56BFF",
+    },
 ];
 
 function ARenderCard({ title, icon, description, link, color }) {
@@ -145,7 +145,7 @@ function GuidesCard({ title, description, items, color }) {
             <p className={styles.cardDescription}>{description}</p>
 
             <div className={styles.itemsList}>
-                {items.map((item, idx) => (
+                {items.map((item, idx) =>
                     item.link ? (
                         <Link key={idx} to={item.link} className={styles.guideItem}>
                             <div className={styles.guideIcon} style={{ color }}>
@@ -167,7 +167,7 @@ function GuidesCard({ title, description, items, color }) {
                             </div>
                         </div>
                     )
-                ))}
+                )}
             </div>
         </div>
     );

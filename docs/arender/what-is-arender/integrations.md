@@ -1,22 +1,17 @@
 ---
 title: ECM connectors
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 5d76339112262af8efa7803f186d51f2eafdb9e313125949042cc9d35cda568d
 ---
-
-
-
-
-
 
 ## Existing connectors
 
 You will find below the list of ECM for which a connector to ARender exists:
 
 | Editor                                    | Product                                                                                                                                          |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
 | [Hyland](https://www.hyland.com/)         | [Nuxeo](https://doc.nuxeo.com/nxdoc/nuxeo-enhanced-viewer/)                                                                                      |
 | [Hyland](https://www.hyland.com/)         | [Alfresco Content Services](https://www.hyland.com/fr/products/alfresco-platform)                                                                |
 | [Hyland](https://www.hyland.com/)         | [Alfresco Process Services](https://docs.alfresco.com/process-services/latest/)                                                                  |
@@ -30,5 +25,5 @@ You will find below the list of ECM for which a connector to ARender exists:
 | [IBM](https://www.ibm.com/)               | [IBM Content Manager](https://www.ibm.com/products/content-manager)                                                                              |
 | [IBM](https://www.ibm.com/)               | [IBM Content Manager OnDemand](https://www.ibm.com/products/ibm-content-manager-ondemand)                                                        |
 | [Salesforce](https://www.salesforce.com/) | [Salesforce](https://www.salesforce.com/)                                                                                                        |
-| [OpenText](https://www.opentext.com/)     | [OpenText](https://www.opentext.com/)                                                                                                            |                                                                      |
+| [OpenText](https://www.opentext.com/)     | [OpenText](https://www.opentext.com/)                                                                                                            |     |
 | [OpenText](https://www.opentext.com/)     | [Documentum](https://www.opentext.com/products/documentum-platform)                                                                              |

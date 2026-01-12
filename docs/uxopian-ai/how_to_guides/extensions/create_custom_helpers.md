@@ -1,8 +1,8 @@
 ---
 title: How to Create Custom Prompt Helpers
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 38ea3d69948d1962eb85cabc9a429841f62bb83681a4f493af18aafb2a817074
 ---
 
@@ -103,7 +103,6 @@ This ensures all your specific dependencies are included inside the JAR file. Yo
 Ensure you do not bundle core Spring or Uxopian dependencies that conflict with the running server. Scope strictly necessary dependencies.
 :::
 
-
 ---
 
 ## Step 4: Deployment
@@ -152,16 +151,16 @@ If your prompt contains `[[${myTools.greet(customerName)}]]`, your JSON payload 
 
 ```json
 {
-  "conversation": "...",
-  "inputs": [
-    {
-      "role": "user",
-      "content": "...",
-      "payload": {
-        "customerName": "Alice"
-      }
-    }
-  ]
+    "conversation": "...",
+    "inputs": [
+        {
+            "role": "user",
+            "content": "...",
+            "payload": {
+                "customerName": "Alice"
+            }
+        }
+    ]
 }
 ```
 
@@ -170,4 +169,3 @@ If your helper returns null or throws an error, verify that:
 1\. The payload key matches the argument name used in the Thymeleaf expression exactly.
 2\. The variable type in the payload matches the method signature (e.g., Integer vs String).
 :::
-

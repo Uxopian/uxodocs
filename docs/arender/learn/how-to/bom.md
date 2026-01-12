@@ -1,22 +1,12 @@
 ---
 title: Import ARender dependencies
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 1f65570410e48693e7806b332fb9764af57c455cdc6b87a46cd81094a3cbe018
 ---
 
-
-
-
-
-
-
-
-
 This feature is available from version 4.4.0
-
-
 
 ## Introduction
 
@@ -54,7 +44,7 @@ rendition.
 
 ### Example
 
-```cfg
+````cfg
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -95,20 +85,17 @@ rendition.
   </dependencies>
 
 </project>
-```
-
-
-```
-
+````
 
 ```
 
 
 ```
 
-
 ```
 
+
+```
 
 ```
 
@@ -116,5 +103,5 @@ rendition.
 ```
 
 We can see here the import of the BOM in the dependencyManagement and the use
-of some dependencies which do not have a defined version. Indeed, maven will 
+of some dependencies which do not have a defined version. Indeed, maven will
 automatically know to retrieve the version defined in the BOM and use it.

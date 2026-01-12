@@ -4,68 +4,68 @@
 
 /* Masquer les dropdowns de version dans le menu mobile et utiliser ::before pour afficher le nom du produit */
 @media (max-width: 996px) {
-  .navbar-sidebar .navbar__item.dropdown .navbar__link {
-    font-size: 0 !important;
-  }
-  
-  /* Fast2 */
-  .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/fast2"]) .navbar__link::before {
-    content: 'Fast2';
-    font-size: 1rem;
-  }
-  
-  /* ARender */
-  .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/arender"]) .navbar__link::before {
-    content: 'ARender';
-    font-size: 1rem;
-  }
-  
-  /* FlowerDocs */
-  .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/flowerdocs"]) .navbar__link::before {
-    content: 'FlowerDocs';
-    font-size: 1rem;
-  }
-  
-  /* Uxopian AI */
-  .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/uxopian-ai"]) .navbar__link::before {
-    content: 'Uxopian AI';
-    font-size: 1rem;
-  }
-  
-  /* Garder les icônes visibles */
-  .navbar-sidebar .navbar__item.dropdown .navbar__link svg {
-    font-size: 1rem !important;
-  }
+    .navbar-sidebar .navbar__item.dropdown .navbar__link {
+        font-size: 0 !important;
+    }
+
+    /* Fast2 */
+    .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/fast2"]) .navbar__link::before {
+        content: "Fast2";
+        font-size: 1rem;
+    }
+
+    /* ARender */
+    .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/arender"]) .navbar__link::before {
+        content: "ARender";
+        font-size: 1rem;
+    }
+
+    /* FlowerDocs */
+    .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/flowerdocs"]) .navbar__link::before {
+        content: "FlowerDocs";
+        font-size: 1rem;
+    }
+
+    /* Uxopian AI */
+    .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/uxopian-ai"]) .navbar__link::before {
+        content: "Uxopian AI";
+        font-size: 1rem;
+    }
+
+    /* Garder les icônes visibles */
+    .navbar-sidebar .navbar__item.dropdown .navbar__link svg {
+        font-size: 1rem !important;
+    }
 }
 
 .navbar__link.verdd {
-  display: inline-flex;
-  align-items: center;
-  gap: .25rem;
-  position: relative;
-  font-size: 0;
-  color: transparent !important;
-  text-shadow: none !important;
-  user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    position: relative;
+    font-size: 0;
+    color: transparent !important;
+    text-shadow: none !important;
+    user-select: none;
 }
 
 .navbar__link.verdd::before {
-  content: '';
-  display: inline-block;
-  font-size: var(--ifm-navbar-link-font-size, 1rem);
-  line-height: inherit;
-  color: var(--ifm-navbar-link-color);
+    content: "";
+    display: inline-block;
+    font-size: var(--ifm-navbar-link-font-size, 1rem);
+    line-height: inherit;
+    color: var(--ifm-navbar-link-color);
 }
 
 .navbar__link.verdd svg {
-  color: var(--ifm-navbar-link-color) !important;
-  fill: currentColor;
-  margin-left: .1rem;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: var(--ifm-navbar-link-font-size, 1rem);
-  width: 1em;
-  height: 1em;
+    color: var(--ifm-navbar-link-color) !important;
+    fill: currentColor;
+    margin-left: 0.1rem;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: var(--ifm-navbar-link-font-size, 1rem);
+    width: 1em;
+    height: 1em;
 }
 
 .navbar .colorModeToggle_DEke,
@@ -76,74 +76,74 @@
 .navbar .toggle svg,
 .navbar .toggleButton_gllP,
 .navbar .toggleButton_gllP svg {
-  color: inherit !important;
-  fill: currentColor !important;
-  stroke: currentColor !important;
+    color: inherit !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
 }
 
 body[class*="indexPage"] .navbar .colorModeToggle_DEke svg,
 body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke svg,
-[data-theme='dark'] .navbar .colorModeToggle_DEke svg,
-[data-theme='dark'] .navbar .toggleIcon_g3eP {
-  color: #ffffff !important;
-  fill: currentColor !important;
-  stroke: currentColor !important;
+[data-theme="dark"] .navbar .colorModeToggle_DEke svg,
+[data-theme="dark"] .navbar .toggleIcon_g3eP {
+    color: #ffffff !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
 }
 
-body:not([data-theme='dark']) .navbar .colorModeToggle_DEke svg,
-body:not([data-theme='dark']) .navbar .toggleIcon_g3eP {
-  color: #000000 !important;
-  fill: currentColor !important;
-  stroke: currentColor !important;
+body:not([data-theme="dark"]) .navbar .colorModeToggle_DEke svg,
+body:not([data-theme="dark"]) .navbar .toggleIcon_g3eP {
+    color: #000000 !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
 }
 
-[data-theme='dark'] .navbar .colorModeToggle_DEke svg path,
+[data-theme="dark"] .navbar .colorModeToggle_DEke svg path,
 body[class*="indexPage"] .navbar .colorModeToggle_DEke svg path,
 body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke svg path {
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
 }
 
-[data-theme='dark'] .navbar .colorModeToggle_DEke svg,
+[data-theme="dark"] .navbar .colorModeToggle_DEke svg,
 body[class*="indexPage"] .navbar .colorModeToggle_DEke svg,
 body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke svg {
-  color: #ffffff !important;
+    color: #ffffff !important;
 }
 
 .navbar .colorModeToggle_DEke svg,
 .navbar .toggleIcon_g3eP,
 .navbar .toggle_vylO svg {
-  width: 20px !important;
-  height: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
 }
 
 .navbar .colorModeToggle_DEke svg path,
 .navbar .toggleIcon_g3eP path,
 .navbar .toggle_vylO svg path {
-  stroke-width: 0 !important;
-  stroke: none !important;
+    stroke-width: 0 !important;
+    stroke: none !important;
 }
 
 .navbar__link.verdd--fast2::before {
-  content: 'Fast2';
+    content: "Fast2";
 }
 
 .navbar__link.verdd--arender::before {
-  content: 'ARender';
+    content: "ARender";
 }
 
 .navbar__link.verdd--flowerdocs::before {
-  content: 'FlowerDocs';
+    content: "FlowerDocs";
 }
 
 .navbar__link.verdd--uxopian-ai::before {
-  content: 'Uxopian AI';
+    content: "Uxopian AI";
 }
 
 .navbar__link.verdd--releases::before {
-  content: 'Release Notes';
-  font-size: var(--ifm-navbar-link-font-size, 1rem);
-  line-height: inherit;
+    content: "Release Notes";
+    font-size: var(--ifm-navbar-link-font-size, 1rem);
+    line-height: inherit;
 }
 
 .navbar__link.verdd:hover::before,
@@ -151,87 +151,86 @@ body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke
 .navbar__link.verdd--arender:hover::before,
 .navbar__link.verdd--flowerdocs:hover::before,
 .navbar__link.verdd--uxopian-ai:hover::before {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 @media (max-width: 996px) {
-  .navbar__link.verdd {
-    display: none !important;
-  }
+    .navbar__link.verdd {
+        display: none !important;
+    }
 
-  .navbar__link.verdd::before {
-    content: none;
-  }
-
+    .navbar__link.verdd::before {
+        content: none;
+    }
 }
 
 .navbar__item.dropdown .dropdown__menu {
-  z-index: 100 !important;
+    z-index: 100 !important;
 }
 
 .navbar__item--version-menu .dropdown__menu {
-  z-index: 100 !important;
+    z-index: 100 !important;
 }
 
 body[class*="indexPage"] .navbar,
 body:has(main > section[class*="productsSection"]) .navbar {
-  background: rgba(255, 255, 255, 0.3) !important;
-  backdrop-filter: blur(10px) saturate(100%) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(100%) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
-  border-bottom: none !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(10px) saturate(100%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(100%) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+    border-bottom: none !important;
 }
 
-[data-theme='dark'] body[class*="indexPage"] .navbar,
-[data-theme='dark'] body:has(main > section[class*="productsSection"]) .navbar {
-  background: rgba(20, 20, 25, 0.3) !important;
-  backdrop-filter: blur(15px) saturate(150%) brightness(1.05) !important;
-  -webkit-backdrop-filter: blur(15px) saturate(150%) brightness(1.05) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-  border-bottom: none !important;
+[data-theme="dark"] body[class*="indexPage"] .navbar,
+[data-theme="dark"] body:has(main > section[class*="productsSection"]) .navbar {
+    background: rgba(20, 20, 25, 0.3) !important;
+    backdrop-filter: blur(15px) saturate(150%) brightness(1.05) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(150%) brightness(1.05) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+    border-bottom: none !important;
 }
 
-body:not([data-theme='dark']) .navbar,
-body:not([data-theme='dark']) .navbar a {
-  color: #fff !important;
+body:not([data-theme="dark"]) .navbar,
+body:not([data-theme="dark"]) .navbar a {
+    color: #fff !important;
 }
 
-[data-theme='dark'] .navbar,
-[data-theme='dark'] .navbar a,
-[data-theme='dark'] .navbar__inner .navbar__items,
-[data-theme='dark'] .navbar__inner .navbar__items .navbar__item,
-[data-theme='dark'] .navbar__inner .navbar__items .navbar__link,
-[data-theme='dark'] .navbar__inner .navbar__items a,
-[data-theme='dark'] .navbar__brand,
-[data-theme='dark'] .navbar__title,
-[data-theme='dark'] .navbar__item,
-[data-theme='dark'] .navbar__link,
-[data-theme='dark'] .navbar__item a,
-[data-theme='dark'] .navbar__inner .navbar__item .menu__link,
-[data-theme='dark'] .navbar__inner .navbar__items .navbar__link::before {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  fill: #ffffff !important;
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .navbar a,
+[data-theme="dark"] .navbar__inner .navbar__items,
+[data-theme="dark"] .navbar__inner .navbar__items .navbar__item,
+[data-theme="dark"] .navbar__inner .navbar__items .navbar__link,
+[data-theme="dark"] .navbar__inner .navbar__items a,
+[data-theme="dark"] .navbar__brand,
+[data-theme="dark"] .navbar__title,
+[data-theme="dark"] .navbar__item,
+[data-theme="dark"] .navbar__link,
+[data-theme="dark"] .navbar__item a,
+[data-theme="dark"] .navbar__inner .navbar__item .menu__link,
+[data-theme="dark"] .navbar__inner .navbar__items .navbar__link::before {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    fill: #ffffff !important;
 }
 
 body[class*="indexPage"] .navbar,
 body:has(main > section[class*="productsSection"]) .navbar,
 body[class*="indexPage"] .navbar a,
 body:has(main > section[class*="productsSection"]) .navbar a,
-body[class*="indexPage"]:not([data-theme='dark']) .navbar__link,
-body:has(main > section[class*="productsSection"]):not([data-theme='dark']) .navbar__link {
-  color: #ffffff !important;
+body[class*="indexPage"]:not([data-theme="dark"]) .navbar__link,
+body:has(main > section[class*="productsSection"]):not([data-theme="dark"]) .navbar__link {
+    color: #ffffff !important;
 }
 
-body:not([data-theme='dark']) .navbar__link.verdd::before {
-  color: #000000 !important;
+body:not([data-theme="dark"]) .navbar__link.verdd::before {
+    color: #000000 !important;
 }
 
 body[class*="indexPage"] .navbar__link.verdd::before,
 body:has(main > section[class*="productsSection"]) .navbar__link.verdd::before,
-[data-theme='dark'] .navbar__link.verdd::before {
-  color: #ffffff !important;
+[data-theme="dark"] .navbar__link.verdd::before {
+    color: #ffffff !important;
 }
 
 .secondary-nav,
@@ -241,7 +240,7 @@ body:has(main > section[class*="productsSection"]) .navbar__link.verdd::before,
 body .navbar__inner.secondary-nav__inner .secondary-nav__item,
 body .navbar__inner.secondary-nav__inner a.secondary-nav__item,
 body .navbar .secondary-nav .secondary-nav__item {
-  color: #ffffff !important;
+    color: #ffffff !important;
 }
 
 /* Liens actifs dans la navbar */
@@ -249,91 +248,92 @@ body .navbar .secondary-nav .secondary-nav__item {
 .navbar__item a[aria-current="page"],
 .navbar__item .navbar__link--active,
 .navbar__item .navbar__link[aria-current="page"] {
-  display: inline-flex !important;
-  align-items: center;
-  gap: .25rem;
-  border-radius: 10px !important;
-  transition: all 200ms ease;
-  box-shadow: none !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 10px !important;
+    transition: all 200ms ease;
+    box-shadow: none !important;
 
-  background-color: var(--ifm-color-primary) !important;
-  color: var(--ifm-color-primary) !important;
-  font-weight: 600;
+    background-color: var(--ifm-color-primary) !important;
+    color: var(--ifm-color-primary) !important;
+    font-weight: 600;
 }
 
 .navbar__link.verdd[aria-current="page"]::before,
 .navbar__link.verdd.navbar__link--active::before {
-  color: var(--ifm-color-primary) !important;
-  font-weight: 600;
+    color: var(--ifm-color-primary) !important;
+    font-weight: 600;
 }
 
-html[data-theme='dark'] .navbar__link.verdd[aria-current="page"]::before,
-html[data-theme='dark'] .navbar__link.verdd.navbar__link--active::before {
-  color: #fff !important;
-  font-weight: 600;
+html[data-theme="dark"] .navbar__link.verdd[aria-current="page"]::before,
+html[data-theme="dark"] .navbar__link.verdd.navbar__link--active::before {
+    color: #fff !important;
+    font-weight: 600;
 }
 
 body[class*="indexPage"] .navbar__link.verdd[aria-current="page"]::before,
 body[class*="indexPage"] .navbar__link.verdd.navbar__link--active::before,
 body:has(main > section[class*="productsSection"]) .navbar__link.verdd[aria-current="page"]::before,
-body:has(main > section[class*="productsSection"]) .navbar__link.verdd.navbar__link--active::before {
-  color: #ffffff !important;
-  font-weight: 600;
+body:has(main > section[class*="productsSection"])
+    .navbar__link.verdd.navbar__link--active::before {
+    color: #ffffff !important;
+    font-weight: 600;
 }
 
-html[data-theme='dark'] .navbar__link--active,
-html[data-theme='dark'] .navbar__item a[aria-current="page"],
+html[data-theme="dark"] .navbar__link--active,
+html[data-theme="dark"] .navbar__item a[aria-current="page"],
 body[class*="indexPage"] .navbar__link--active,
 body[class*="indexPage"] .navbar__item a[aria-current="page"],
 body:has(main > section[class*="productsSection"]) .navbar__link--active,
 body:has(main > section[class*="productsSection"]) .navbar__item a[aria-current="page"] {
-  color: #000000 !important;
-  font-weight: 600;
+    color: #000000 !important;
+    font-weight: 600;
 }
 
 .navbar__link--active:hover,
 .navbar__item a[aria-current="page"]:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 .navbar .navbar__inner .navbar__items a.navbar__link.verdd[aria-current="page"]::before,
 .navbar .navbar__inner .navbar__items a.navbar__link.verdd.navbar__link--active::before,
 a.navbar__link.verdd[aria-current="page"]::before,
 a.navbar__link.verdd.navbar__link--active::before {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  margin-left: 3px;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    margin-left: 3px;
 }
 
 /* Dropdowns */
-body:not([data-theme='dark']) .dropdown__menu,
-body:not([data-theme='dark']) .dropdown__menu a,
-body:not([data-theme='dark']) .dropdown__link,
-body:not([data-theme='dark']) .navbar__item.dropdown .dropdown__menu a {
-  color: #000000 !important;
+body:not([data-theme="dark"]) .dropdown__menu,
+body:not([data-theme="dark"]) .dropdown__menu a,
+body:not([data-theme="dark"]) .dropdown__link,
+body:not([data-theme="dark"]) .navbar__item.dropdown .dropdown__menu a {
+    color: #000000 !important;
 }
 
-[data-theme='dark'] .dropdown__menu,
-[data-theme='dark'] .dropdown__menu a,
-[data-theme='dark'] .dropdown__link {
-  color: #ffffff !important;
+[data-theme="dark"] .dropdown__menu,
+[data-theme="dark"] .dropdown__menu a,
+[data-theme="dark"] .dropdown__link {
+    color: #ffffff !important;
 }
 
 .dropdown__separator {
-  list-style: none;
-  height: 1px;
-  margin: 6px 0;
-  background: rgba(0, 0, 0, 0.06);
+    list-style: none;
+    height: 1px;
+    margin: 6px 0;
+    background: rgba(0, 0, 0, 0.06);
 }
 
-[data-theme='dark'] .dropdown__separator {
-  background: rgba(255, 255, 255, 0.06);
+[data-theme="dark"] .dropdown__separator {
+    background: rgba(255, 255, 255, 0.06);
 }
 
-.dropdown__menu>li>.dropdown__link[href$="/releases/fast2"],
-.dropdown__menu>li>.dropdown__link[href$="/releases/arender"],
-.dropdown__menu>li>.dropdown__link[href$="/releases/flowerdocs"],
-.dropdown__menu>li>.dropdown__link[href$="/releases/uxopian-ai"] {
-  font-weight: 700;
-  padding: 0.5rem 1rem;
+.dropdown__menu > li > .dropdown__link[href$="/releases/fast2"],
+.dropdown__menu > li > .dropdown__link[href$="/releases/arender"],
+.dropdown__menu > li > .dropdown__link[href$="/releases/flowerdocs"],
+.dropdown__menu > li > .dropdown__link[href$="/releases/uxopian-ai"] {
+    font-weight: 700;
+    padding: 0.5rem 1rem;
 }

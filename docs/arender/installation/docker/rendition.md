@@ -1,16 +1,10 @@
 ---
 title: Rendition stack
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: cb8b4d5954635923123c76f164115e6b419c163b928a7e996e1d855b43c19eba
 ---
-
-
-
-
-
-
 
 ## By Environment Variables
 
@@ -18,51 +12,39 @@ All yaml properties can be overridden by environment variables by following the 
 
 - environment variables must be all capitalize
 - capitalized character in yaml must be preceded by **"."**
-- use **"_"** to associate an object
+- use **"\_"** to associate an object
 - use **"[n]"** to set a list element (with **n** as index)
 
-
-
-
 ```yaml
-  nurse:
+nurse:
     samplesDirectory: ../../samples/
     components:
-      - functionality: TKC_MailConversion
-        factoryName: "mailFactory"
-        samplePath: "test.msg"
-        docIdStr: "m41lS4mpl3"
+        - functionality: TKC_MailConversion
+          factoryName: "mailFactory"
+          samplePath: "test.msg"
+          docIdStr: "m41lS4mpl3"
 ```
-
-
-
 
 ```yaml
-    environment:
-      - "DCV_NURSE_SAMPLES.DIRECTORY=../../samples/"
-      - "DCV_NURSE_COMPONENTS[0]_FUNCTIONALITY=TKC_MailConversion"
-      - "DCV_NURSE_COMPONENTS[0]_FACTORY.NAME=mailFactory"
-      - "DCV_NURSE_COMPONENTS[0]_SAMPLE.PATH=test.msg"
-      - "DCV_NURSE_COMPONENTS[0]_DOC.ID.STR=m41lS4mpl3"
+environment:
+    - "DCV_NURSE_SAMPLES.DIRECTORY=../../samples/"
+    - "DCV_NURSE_COMPONENTS[0]_FUNCTIONALITY=TKC_MailConversion"
+    - "DCV_NURSE_COMPONENTS[0]_FACTORY.NAME=mailFactory"
+    - "DCV_NURSE_COMPONENTS[0]_SAMPLE.PATH=test.msg"
+    - "DCV_NURSE_COMPONENTS[0]_DOC.ID.STR=m41lS4mpl3"
 ```
-
-
-
-
 
 ## By volumes
 
 Configuration files location:
 
 - /arender/config/application.properties
-- /arender/config/application-*.properties
+- /arender/config/application-\*.properties
 
 - /arender/config/application.yaml
-- /arender/config/application-*.yaml
-
+- /arender/config/application-\*.yaml
 
 **&#123;service-name&#125;**: container name without "arender" prefix
-
 
 ## PDFOwl: a document renderer alternative
 
@@ -70,9 +52,7 @@ Configuration files location:
 
 The 2023.1.0 version has introduced a new docker image as an alternative of the usual **document-renderer**, named **document-renderer-pdfowl**.
 
-
 This feature is currently in an experimental, early-access phase. It supports images, layouts, and layers rendering, but does not yet include image filter handling or SVG functionality.
-
 
 In the existing document-renderer setup, errors within the native library can cause the entire application to crash,
 as these issues occur at a low level and cannot be intercepted at the application level.
@@ -152,6 +132,7 @@ volumes:
 ## Configurations
 
 Some properties are available with default values :
+
 ```cfg
 # PdfOwl binary path
 pdfowl.path=pdfowl

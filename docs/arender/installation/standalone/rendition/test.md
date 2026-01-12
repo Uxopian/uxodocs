@@ -1,16 +1,10 @@
 ---
 title: Testing
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 52fe117f5921e511da4719a9b8c4e24b364aad70e4be2429995da398858f0921
 ---
-
-
-
-
-
-
 
 The test jar «
 arondor-arender-rendition-tester-**&#123;VERSION-NUMBER&#125;**-jar-with-dependencies.jar
@@ -39,8 +33,8 @@ $> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar
 | h      | Help menu                                                                                                                             |
 
 - Basic test: This test is based on the default file of rendition
-server. To launch the test, all you need is, via the console, go to jar
-location and type the following command:
+  server. To launch the test, all you need is, via the console, go to jar
+  location and type the following command:
 
 ```bash
 $> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -v report_ARender.csv
@@ -50,7 +44,7 @@ $> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar -d http://ren
 
 In order to test the rendition server against business sample files:
 
-- create a *files.txt* in the tester folder
+- create a _files.txt_ in the tester folder
 - add one absolute file path per line
 
 To launch the test, all you need is, via the console, go to jar location
@@ -81,6 +75,7 @@ $> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar -d http://ren
 - Image_PageContents: extraction of page textual content
 - Fetch_DocumentPageLayout: extraction of document layout
   information (mime type, page count, page dimensions) and conversion
+
 ```javascript
   if necessary
 ```

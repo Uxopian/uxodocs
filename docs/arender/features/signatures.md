@@ -1,42 +1,27 @@
 ---
 title: Signatures
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 577b8440a421ef6892cc5647e4df308ba739eac193d47963fe1c130ac8f99097
 ---
 
-
-
-
-
-
 ### Signatures tab
-
 
 To enable the Signatures tab, the following property must be enabled :
 
 Before 4.6.0, the configuration is done in the document-service-broker (RenditionEngine)
-
-
 
 ```cfg
 services-broker:
   signaturePDF: true
 ```
 
-
-
 Since 4.6.0, the configuration is done in the document-text-handler service (PDFBoxEngine)
-
-
 
 ```cfg
 pdf.signatures.enable=true
 ```
-
-
-
 
 After opening a document, a new tab dedicated to signature appears. At the header of the latter two icons may appear:
 
@@ -58,7 +43,7 @@ On this tab, we can see the following signature information :
 - The PDF integrity, whether or not it's preserved,
 - The validation of the certificate chain,
 - The signature date,
-- The signature reason 
+- The signature reason
 - The signature location.
 
 ### Error cases
@@ -81,8 +66,6 @@ Different types of errors are reported to the signature panel :
 - Unknown certificate: ![image](/img/arender/certificate-unknown.svg)
   It is possible to configure a list of valid certificates.
   To do this, place the desired certificates in a folder defined by the PUBLIC_CERT property for the document-text-handler service, whose default value is ../defaultPathPublicCert:
-
-
 
 ```cfg
 PUBLIC_CERT=../defaultPathPublicCert

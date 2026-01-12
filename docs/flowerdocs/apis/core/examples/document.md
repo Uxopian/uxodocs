@@ -1,19 +1,17 @@
 ---
 title: Handling a document
-description: 'Create, modify, delete your documents'
-date: '2001-03-30T13:20:01+02:00'
+description: "Create, modify, delete your documents"
+date: "2001-03-30T13:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: 4d1832e664b826f9f8a353c42f67bb5ad3105b1033ebc33dad0dafecb174defe
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
-
 The `Document` service exhibits all the operations available around `DOCUMENT` type components.
-
 
 # Document recovery
 
@@ -53,7 +51,6 @@ public List<Document> get() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-
 ## Version recovery
 
 This service allows you to retrieve a specific version of a document:
@@ -85,14 +82,13 @@ public Document getVersion() throws FunctionalException, TechnicalException
 
 	Id documentId = new Id("documentId"));
 	Id versionId = new Id("versionId"));
-	
+
 	return service.getVersion(documentId, versionId);
 
 ```
 
   </TabItem>
 </Tabs>
-
 
 ## Retrieving associated files
 
@@ -134,7 +130,6 @@ public List<DocumentFile> get() throws FunctionalException, TechnicalException
 
   </TabItem>
 </Tabs>
-
 
 # Document creation
 
@@ -184,7 +179,7 @@ public List<Document> create() throws FunctionalException, TechnicalException
     tags.getTags().add(new Tag(Arrays.asList("C0012")), "B_RefClient", false));
     tags.getTags().add(new Tag(Arrays.asList("Supplier 12"), "B_ClientName", false));
     tags.getTags().add(new Tag(Arrays.asList("RIB"), "B_TypeDocument", false));
-    document.setTags(tags);	
+    document.setTags(tags);
 	documents.add(document);
 	return service.create(documents);
 
@@ -193,13 +188,9 @@ public List<Document> create() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-
 # Document creation with a content
 
 The examples below show how to create a document with its content using the following operation.
-
-
-
 
 # Document modification
 
@@ -209,9 +200,6 @@ The examples below show how to update documents.
 
 This operation allows to modify the data of a document (class identifier, document name, ACL, etc.) as well as modifying its content in the same call.
 
-
-
-
 ## Data modification
 
 This operation updates a document's tags and data (class identifier, document name, ACL, etc.) but also its content.
@@ -219,7 +207,6 @@ This operation updates a document's tags and data (class identifier, document na
 :::info
 This service operates on a cancel and replace basis, so all the contents and tag values must be supplied by the service at the time of update. It is therefore advisable to retrieve the document, make the changes and call the update service.
 :::
-
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -264,7 +251,7 @@ public List<Document> update(Document document) throws FunctionalException, Tech
 
 	List<Document> documents = new ArrayList();
     tags.getTags().add(new Tag(Arrays.asList("Contract"), "B_TypeDocument", false));
-    document.setTags(tags);	
+    document.setTags(tags);
 	documents.add(document);
 	return service.update(documents);
 
@@ -272,7 +259,6 @@ public List<Document> update(Document document) throws FunctionalException, Tech
 
   </TabItem>
 </Tabs>
-
 
 ## Add file
 
@@ -319,7 +305,6 @@ public List<Document> addContent(Document document) throws FunctionalException, 
   </TabItem>
 </Tabs>
 
-
 ## Rename file
 
 This operation allows you to rename a file associated with a document:
@@ -345,7 +330,6 @@ New file name
   </TabItem>
 </Tabs>
 
-
 # Search document
 
 The search operations all work on the same model as described [here](../examples/search).
@@ -368,7 +352,7 @@ DELETE {{core}}/rest/documents/{ids} HTTP/1.1
 core: FlowerDocs Core host
 ids: identifiers of documents to be deleted
 
--- Header -- 
+-- Header --
 token: {{token}}
 Content-Type: application/json
 ```
@@ -390,7 +374,6 @@ public void delete() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-
 ## File deletion
 
 This operation allows you to delete a file.
@@ -406,7 +389,7 @@ Host: {{core}}
 documentId: document identifier
 fileId: content identifier to be deleted
 
--- Headers -- 
+-- Headers --
 token: {{token}}
 Content-Type: application/json
 ```
@@ -427,7 +410,6 @@ public void delete() throws FunctionalException, TechnicalException
 
   </TabItem>
 </Tabs>
-
 
 # Content
 
@@ -471,7 +453,6 @@ public List<DocumentFile> get() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-
 ## Index document content
 
 This service indexes the content passed in parameter and associated with the file identifier.
@@ -501,7 +482,7 @@ document content
 ```java
 @Autowired
 	private DocumentContentService service;
-	
+
 	public Id addContent() throws FunctionalException, TechnicalException
 
 		return service.index(new Id("documentId"), new Id("fileId"), "File contents");
@@ -510,7 +491,6 @@ document content
 
   </TabItem>
 </Tabs>
-
 
 ## Remove content indexing from a document
 
@@ -538,7 +518,7 @@ Content-Type: application/json
 ```java
 @Autowired
 	private DocumentContentService service;
-	
+
 	public void removeContent() throws FunctionalException, TechnicalException
 
 		service.deindex(new Id("documentId"), new Id("fileId"));
@@ -547,7 +527,5 @@ Content-Type: application/json
 
   </TabItem>
 </Tabs>
-
-
 
 This service removes indexing from all files associated with the document.

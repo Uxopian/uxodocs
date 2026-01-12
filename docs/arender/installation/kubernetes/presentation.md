@@ -1,16 +1,10 @@
 ---
 title: Presentation server (Web UI)
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 386f9599da42a11c8cf1edf28ae99d59a786dc7b93538ccce84190fac31c8b68
 ---
-
-
-
-
-
-
 
 ## Introduction
 
@@ -28,8 +22,8 @@ The following table lists the configurable parameters of the ARender web UI subc
 | `web-ui.autoscale.enabled`     | Enable horitontal autoscaling of pods                                            |                         `false`                         |
 | `web-ui.autoscale.maxReplicas` | Maximum number of the pod replica in the cluster                                 |                           `1`                           |
 | `web-ui.autoscale.cpuLimit`    | Percentage of CPU requested target to scale horizontally                         |                          `80`                           |
-| `web-ui.image.repository`      | ARender UI image name                                                            |       `/arender-ui`       |
-| `web-ui.image.tag`             | ARender UI image tag                                                             |                ``                |
+| `web-ui.image.repository`      | ARender UI image name                                                            |                      `/arender-ui`                      |
+| `web-ui.image.tag`             | ARender UI image tag                                                             |                           ``                            |
 | `web-ui.image.pullPolicy`      | ARender UI image pull policy                                                     |                        `Always`                         |
 | `web-ui.serviceAccount.create` | Specifies whether a service account should be created                            |                         `true`                          |
 | `web-ui.serviceAccount.name`   | Name of the service account created. If not set defaulted to ARender UI fullname |                          `''`                           |

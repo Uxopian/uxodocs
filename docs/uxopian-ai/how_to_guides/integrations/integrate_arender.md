@@ -1,8 +1,8 @@
 ---
 title: How-To Integrate AI Features in ARender
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 942399e798a99f452a4504f02e4276c4fca778c04776407ca5cdd0f3ea92b5a7
 ---
 
@@ -42,22 +42,21 @@ First, we create the prompt in the Uxopian-ai backend. This prompt utilizes a se
 
 ```json
 {
-  "id": "summarizeDocMd",
-  "role": "user",
-  "content": "Summarize the following document in a plain text format: \n [[${documentService.extractTextualContent(documentId)}]]",
-  "defaultLlmProvider": "openai",
-  "defaultLlmModel": "gpt-4o",
-  "temperature": "0.7",
-  "timeSaved": 300,
-  "requiresMultiModalModel": false,
-  "requiresFunctionCallingModel": false
+    "id": "summarizeDocMd",
+    "role": "user",
+    "content": "Summarize the following document in a plain text format: \n [[${documentService.extractTextualContent(documentId)}]]",
+    "defaultLlmProvider": "openai",
+    "defaultLlmModel": "gpt-4o",
+    "temperature": "0.7",
+    "timeSaved": 300,
+    "requiresMultiModalModel": false,
+    "requiresFunctionCallingModel": false
 }
 ```
 
 :::note Context Injection
 The expression `[[${documentService.extractTextualContent(documentId)}]]` indicates that the text extraction happens on the server side (Uxopian backend) using the `documentId` passed in the payload.
 :::
-
 
 ---
 

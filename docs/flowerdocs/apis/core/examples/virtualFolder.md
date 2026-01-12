@@ -1,16 +1,15 @@
 ---
 title: Handling a virtual folder
-description: 'Create, retrieve, modify, delete and search your virtual folders'
-date: '2001-04-29T13:30:01+01:00'
+description: "Create, retrieve, modify, delete and search your virtual folders"
+date: "2001-04-29T13:30:01+01:00"
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 8a29df6f7645ff1e1ad0adf095c048825c6c5c10f4f294ec03b8eac1e7be607c
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-
 
 The `VirtualFolder` service exposes all the operations available around the `VirtualFolder` type components.
 
@@ -24,10 +23,10 @@ The examples below show how to retrieve virtual folders from a list of identifie
 ```http
 GET {{core}}/rest/virtualFolder/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 ids: list of virtual folder identifiers to be retrieved
 
--- Headers -- 
+-- Headers --
 core: FlowerDocs Core host
 token: {{token}}
 Content-Type: application/json
@@ -50,10 +49,9 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Virtual folder creation
 
-The examples below show how to create a list of virtual folders. 
+The examples below show how to create a list of virtual folders.
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -61,7 +59,7 @@ The examples below show how to create a list of virtual folders.
 ```http
 POST {{core}}/rest/virtualFolder/ HTTP/1.1
 
--- Headers -- 
+-- Headers --
 core: FlowerDocs Core host
 token: {{token}}
 Content-Type: application/json
@@ -109,7 +107,7 @@ Content-Type: application/json
 ```Java
 @Autowired
     private VirtualFolderService vfService;
-    
+
     public List<VirtualFolder> create() throws FunctionalException, TechnicalException
 
         VirtualFolder vF = ComponentBuilder.component(Category.VIRTUAL_FOLDER).name("123654 - Doe Jules")
@@ -126,7 +124,6 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Virtual folder modification
 
 This operation updates the data in a virtual folder: tags and data (class identifier, ACL, owner, etc.).
@@ -135,14 +132,13 @@ This operation updates the data in a virtual folder: tags and data (class identi
 This service operates on a cancel and replace basis, so all tag values must be supplied by the service at the time of update. It is therefore advisable to retrieve the virtual folder, make the changes and call the update service.
 :::
 
-
 <Tabs>
   <TabItem value="rest" label="REST">
 
 ```http
 POST {{core}}/rest/virtualFolder/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 ids: list of virtual folder identifiers to be updated
 
 -- Headers --
@@ -193,7 +189,7 @@ Content-Type: application/json
 ```Java
 @Autowired
 	private VirtualFolderService vfService;
-    
+
 	public List<VirtualFolder> update(VirtualFolder vF) throws FunctionalException, TechnicalException
 
 		//ComponentBuilder.component(Category.VIRTUAL_FOLDER).name("123654 - Doe Marc").classId(new Id("DossierClient")).build();
@@ -207,7 +203,6 @@ Content-Type: application/json
 
   </TabItem>
 </Tabs>
-
 
 # Recherche de virtual folder
 
@@ -223,7 +218,7 @@ The examples below show how to delete a list of virtual folders from a list of i
 ```http
 DELETE {{core}}/rest/virtualFolder/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 ids: list of virtual folder identifiers to be deleted
 
 -- Headers --
@@ -238,7 +233,7 @@ Content-Type: application/json
 ```Java
 @Autowired
 	private VirtualFolderService vfService;
-	
+
 	public void delete() throws FunctionalException, TechnicalException
 
         List<Id> ids = Lists.newArrayList(new Id("123654"));

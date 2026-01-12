@@ -1,11 +1,11 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: c3c1867bcf808e110397ab017ef6c2f8e39545932e099b3cdce0daadc399ac12
 ---
-# What you need to know before committing to Fast2
 
+# What you need to know before committing to Fast2
 
 ## :octicons-arrow-switch-24: Basic jargon
 
@@ -216,8 +216,6 @@ The punnet will iterate through the follwing lifecycle until the last step is re
 
 <!-- https://mermaid-js.github.io/mermaid/#/flowchart -->
 
-
-
 ## Task
 
 Task can be represented as a processing unit to be applied to a punnet. A punnet comes at the entry of the task, as an input. The task performs operations and then outputs the modified punnet.
@@ -253,8 +251,6 @@ A user has the opportunity to stop any campaign when he wants. He can always res
 A retry feature is also available after each campaign. This makes possible to filter certain punnets and to replay them directly in the campaign. For instance, retry each punnet in exception. You can even select which type of exception you want.
 
 ### Lifecycle
-
-
 
 ### Punnet status
 

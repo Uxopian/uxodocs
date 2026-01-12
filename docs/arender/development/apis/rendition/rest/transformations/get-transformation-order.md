@@ -1,22 +1,17 @@
 ---
 title: GET a transformation order
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 2767590bef3ec85655fff549f9e7e68a64b9e379f54fb1d787c1c58ae769246a
 ---
-
-
-
-
-
-
 
 This API allows you to retrieve a transformation order previously requested.
 
 ## API technical description
 
 Entry point :
+
 ```bash
 GET /transformations/<transformationOrderId>
 ```

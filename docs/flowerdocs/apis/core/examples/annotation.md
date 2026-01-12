@@ -1,19 +1,17 @@
 ---
 title: Handling annotations
-description: 'Create, modify, delete your annotations'
-date: '2001-03-30T13:20:01+02:00'
+description: "Create, modify, delete your annotations"
+date: "2001-03-30T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: d168eaab16039e19f51a531cfd0a932dc7977a28784e844771b497cbf1353a8d
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
-
 The `Annotation` service exhibits all the operations available around a document annotations.
-
 
 # Annotations recovery
 
@@ -53,12 +51,11 @@ public List<Annotation> get() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-
 <!-- ## Rotations recovery
 
 This functionnality is not implemented yet -->
 
-# Annotation creation 
+# Annotation creation
 
 ## From a json
 
@@ -146,11 +143,7 @@ public void create() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-
 ## From xml
-
-
-
 
 # Annotation modification
 
@@ -178,15 +171,13 @@ public void update() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-
-
 # Annotation deletion
 
 The examples below show how to delete annotations.
 
 ## Part of annotations deletion
 
-This operation allows to delete some of the annotations of a document 
+This operation allows to delete some of the annotations of a document
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -199,7 +190,7 @@ core: FlowerDocs core host
 documentId: identifier of the document where are the annotations to delete
 annotationIds: identifiers of annotations to delete
 
--- Header -- 
+-- Header --
 token: {{token}}
 Content-Type: application/json
 ```
@@ -223,7 +214,6 @@ public void delete() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-
 ## All annotations deletion
 
 This operation allows to delete all the annotations of a document.
@@ -238,7 +228,7 @@ DELETE {{core}}/rest/documents/{documentId}/annotations/allAnnotations HTTP/1.1
 core: FlowerDocs core host
 documentId: identifier of the document where are the annotations to delete
 
--- Headers -- 
+-- Headers --
 token: {{token}}
 Content-Type: application/json
 ```
@@ -259,5 +249,3 @@ public void delete() throws FunctionalException, TechnicalException
 
   </TabItem>
 </Tabs>
-
-

@@ -1,28 +1,26 @@
 ---
 title: Advanced search
-date: '2020-02-02T08:20:01+02:00'
+date: "2020-02-02T08:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: dadd836f6e6820fdb2dd0ed00618905ea6470f4c831385de8401b856ad81175d
 ---
-
-
 
 XML files are used to configure search forms. Use the internal editor to edit the file.
 
 <br/>
 
-The editor can be accessed via the **Administration > Display > XML menu** : 
+The editor can be accessed via the **Administration > Display > XML menu** :
 
-* Click on the **+** to create a new XML file,
-* In the first field, enter **Client folder search** to name the XML file,
-* Enter the XML code described in the rest of this tutorial,
-* Click on the **Save**button.
+- Click on the **+** to create a new XML file,
+- In the first field, enter **Client folder search** to name the XML file,
+- Enter the XML code described in the rest of this tutorial,
+- Click on the **Save**button.
 
 ## Identifier
 
-The first thing to do is to give the search a `dossierClientSearch` unique identifier.  This identifier will make it easy to retrieve this search.
+The first thing to do is to give the search a `dossierClientSearch` unique identifier. This identifier will make it easy to retrieve this search.
 
 <br/>
 
@@ -32,10 +30,11 @@ This identifier will also be used to associate the search form with the team tha
 
 ```xml
 
-	<bean id="dossierClientSearch" class="com.flower.docs.gui.client.search.ComponentSearchPresenter" scope="prototype">	  
+	<bean id="dossierClientSearch" class="com.flower.docs.gui.client.search.ComponentSearchPresenter" scope="prototype">
 	</bean>
 
 ```
+
 <br/>
 
 _Note: These two tags correspond to the start and end tags of a search definition. As a result, everything that will be described in the rest of this example must be inserted between these two tags._
@@ -46,10 +45,10 @@ _Note: These two tags correspond to the start and end tags of a search definitio
 
 From a technical point of view, the identifier enables the search to be retrieved, but is not visible to users.
 
-In this case, the name, description and category will make it easier to use the advanced search: 
+In this case, the name, description and category will make it easier to use the advanced search:
 
-* Set the `title` property to its value **Client folders**,
-* Describe the property `description` with its value **Search for a client folder by reference, surname or first name.**
+- Set the `title` property to its value **Client folders**,
+- Describe the property `description` with its value **Search for a client folder by reference, surname or first name.**
 
 <br/>
 ```xml
@@ -57,9 +56,9 @@ In this case, the name, description and category will make it easier to use the 
 <property name="title" value="Dossiers Clients" />
 <property name="description" value="Rechercher un dossier client par sa référence, son nom ou son prénom."/>
 
-```
+````
 <br/>
-Categorize the search using the `categorieSelectorPresenter` property: 
+Categorize the search using the `categorieSelectorPresenter` property:
 
 * Enable a single category with the `FakeCategorySelectorPresenter` class,
 * Use `VIRTUAL_FOLDER` for client folders.
@@ -73,7 +72,8 @@ Categorize the search using the `categorieSelectorPresenter` property:
 				</property>
 		</bean>
 	</property>
-```
+````
+
 <br/>
 
 The `keywordCriteriaPresenter` keyword search will not be used. Disable this search using the `enabled` property and its value `false`:
@@ -87,11 +87,11 @@ The `keywordCriteriaPresenter` keyword search will not be used. Disable this sea
 	</bean>
 </property>
 
-```
+````
 <br/>
 
 All the properties described in the rest of this page must be placed in the `AdvancedCriteriaPresenter` bean.
-Define advanced search with the `AdvancedCriteriaPresenter` property: 
+Define advanced search with the `AdvancedCriteriaPresenter` property:
 
 <br/>
 ```xml
@@ -100,11 +100,11 @@ Define advanced search with the `AdvancedCriteriaPresenter` property:
     <bean class="com.flower.docs.gui.client.search.criteria.advanced.AdvancedCriteriaPresenter" />
 </property>
 
-```
+````
 
 <br/>
 
-Disable the class selector `displayClassSelector` using its `false` value which allows only client folders to be searched as follows: 
+Disable the class selector `displayClassSelector` using its `false` value which allows only client folders to be searched as follows:
 
 <br/>
 
@@ -113,12 +113,12 @@ Disable the class selector `displayClassSelector` using its `false` value which 
 <property name="displayClassSelector" value="false" />
 
 ```
+
 <br/>
 
 To force the opening of the advanced search, add the `forceOpen` property with its `true` value:
 
 <br/>
-
 
 ```xml
 
@@ -140,10 +140,9 @@ Set the `addEmptyCriterion` property to `true` so that the user can add criteria
 
 <br/>
 
-Define the `showSearchButton` to launch the search: 
+Define the `showSearchButton` to launch the search:
 
 <br/>
-
 
 ```xml
 

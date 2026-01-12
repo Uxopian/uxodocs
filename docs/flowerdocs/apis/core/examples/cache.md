@@ -1,24 +1,23 @@
 ---
 title: Purging caches
 description: Purge your scope's caches
-date: '2001-01-29T12:20:01+01:58'
+date: "2001-01-29T12:20:01+01:58"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 6e2445c17dddb176e9c328bf045420a30c4c6aad1620dc4c4b575f23c4a77700
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
-
 The CacheService service lets you perform getAll, clear and clearAll operations on your scope's caches.
 
-* `getAll` allows you to retrieve all caches in the scope.
+- `getAll` allows you to retrieve all caches in the scope.
 
-* `clearAll` purges all your scope's caches.
+- `clearAll` purges all your scope's caches.
 
-* `clear` allows you to purge a list of caches defined by their name.
+- `clear` allows you to purge a list of caches defined by their name.
 
 # Cache retrieval
 
@@ -26,8 +25,6 @@ The following examples show how to retrieve the list of all FlowerDocs scope cac
 
 <br/>
 GET ALL:
-
-
 
 # Cache purge
 
@@ -68,7 +65,6 @@ public void clearAll() throws FunctionalException, TechnicalException
 
   </TabItem>
 </Tabs>
-
 
 <br/>
 CLEAR:

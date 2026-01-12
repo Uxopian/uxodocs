@@ -1,46 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import { usePluginData } from '@docusaurus/useGlobalData';
-import styles from './styles.module.css';
+import React, { useEffect, useState } from "react";
+import Link from "@docusaurus/Link";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { usePluginData } from "@docusaurus/useGlobalData";
+import styles from "./styles.module.css";
 
 const ProductList = [
     {
-        title: 'ARender',
-        pluginId: 'arender',
-        logo: '/img/arender/arender_logo_white.png',
-        description: 'High-performance document viewer to display and annotate all types of documents',
-        link: '/docs/arender',
-        color: '#4A8FEF',
-        gradient: 'linear-gradient(135deg, #4A8FEF, #3A7EE5)'
+        title: "ARender",
+        pluginId: "arender",
+        logo: "/img/arender/arender_logo_white.png",
+        description:
+            "High-performance document viewer to display and annotate all types of documents",
+        link: "/docs/arender",
+        color: "#4A8FEF",
+        gradient: "linear-gradient(135deg, #4A8FEF, #3A7EE5)",
     },
     {
-        title: 'Fast2',
-        pluginId: 'fast2',
-        logo: '/img/fast2/Fast2_favicon_white.png',
-        description: 'Document migration platform to transform and migrate your documents to different systems',
-        link: '/docs/fast2',
-        color: '#5CB8C7',
-        gradient: 'linear-gradient(135deg, #5CB8C7, #4AA5B4)'
+        title: "Fast2",
+        pluginId: "fast2",
+        logo: "/img/fast2/Fast2_favicon_white.png",
+        description:
+            "Document migration platform to transform and migrate your documents to different systems",
+        link: "/docs/fast2",
+        color: "#5CB8C7",
+        gradient: "linear-gradient(135deg, #5CB8C7, #4AA5B4)",
     },
     {
-        title: 'FlowerDocs',
-        pluginId: 'flowerdocs',
-        logo: '/img/flowerdocs/logo_flower_white.png',
-        description: 'Electronic document management (EDM) solution to organize, manage and exploit your document',
-        link: '/docs/flowerdocs',
-        color: '#D745FF',
-        gradient: 'linear-gradient(135deg, #D745FF, #C55BFF)'
+        title: "FlowerDocs",
+        pluginId: "flowerdocs",
+        logo: "/img/flowerdocs/logo_flower_white.png",
+        description:
+            "Electronic document management (EDM) solution to organize, manage and exploit your document",
+        link: "/docs/flowerdocs",
+        color: "#D745FF",
+        gradient: "linear-gradient(135deg, #D745FF, #C55BFF)",
     },
     {
-        title: 'Uxopian AI',
-        pluginId: 'uxopian-ai',
-        logo: '/img/uxo_white.png',
-        description: 'Complete framework to easily integrate powerful AI features into your enterprise applications',
-        link: '/docs/uxopian-ai',
-        color: '#F59E0B',
-        gradient: 'linear-gradient(135deg, #F59E0B, #E07D09)'
-    }
+        title: "Uxopian AI",
+        pluginId: "uxopian-ai",
+        logo: "/img/uxo_white.png",
+        description:
+            "Complete framework to easily integrate powerful AI features into your enterprise applications",
+        link: "/docs/uxopian-ai",
+        color: "#F59E0B",
+        gradient: "linear-gradient(135deg, #F59E0B, #E07D09)",
+    },
 ];
 
 interface ProductModalProps {
@@ -54,9 +58,9 @@ export default function ProductModal({ isOpen, onClose }: ProductModalProps) {
     useEffect(() => {
         if (isOpen) {
             setIsVisible(true);
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = "hidden";
         } else {
-            document.body.style.overflow = '';
+            document.body.style.overflow = "";
             const timer = setTimeout(() => setIsVisible(false), 300);
             return () => clearTimeout(timer);
         }
@@ -65,7 +69,7 @@ export default function ProductModal({ isOpen, onClose }: ProductModalProps) {
     if (!isVisible) return null;
 
     return (
-        <div className={`${styles.modalOverlay} ${isOpen ? styles.open : ''}`} onClick={onClose}>
+        <div className={`${styles.modalOverlay} ${isOpen ? styles.open : ""}`} onClick={onClose}>
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <button className={styles.closeButton} onClick={onClose} aria-label="Close">
                     ✕
@@ -91,7 +95,16 @@ interface ProductCardWithVersionsProps {
     onClose: () => void;
 }
 
-function ProductCardWithVersions({ title, pluginId, logo, description, link, color, gradient, onClose }: ProductCardWithVersionsProps) {
+function ProductCardWithVersions({
+    title,
+    pluginId,
+    logo,
+    description,
+    link,
+    color,
+    gradient,
+    onClose,
+}: ProductCardWithVersionsProps) {
     const logoUrl = useBaseUrl(logo);
 
     let versions: string[] = [];
@@ -100,9 +113,7 @@ function ProductCardWithVersions({ title, pluginId, logo, description, link, col
         if (pluginData?.versions) {
             versions = pluginData.versions.map((v: any) => v.label || v.name);
         }
-    } catch (error) {
-        console.log(`No versions found for ${title}`);
-    }
+    } catch {}
 
     return (
         <div className={styles.card}>

@@ -10,7 +10,6 @@ major_version: "2" # minor version of the release note    ex: 2.2
 # description : "Stop and restart workers from UI, Filenet injector improvement, addition of Documentum extractor" # Heavily-keywords-charged sentence for short preview of the release note + google SEO
 ---
 
-
 ### New feature
 
 Entropic Persistent: Faster queueing and consuming of queued punnets
@@ -146,9 +145,10 @@ AlfrescoRestInjector : Could not upload content if 'name' is not on document
 <br /><br /><br />
 And other minor improvements.
 
-<br />
+## <br />
+
 ---
----
+
 <br />
 ## 🧐 Known issues to be fixed
 
@@ -167,7 +167,3 @@ Scheduler Place: Rerun job issue (identified in 2.9)
 Shared Object: Auto-save when leaving the place give bad UX (identified in 2.10)
 
 Startup : Difficulties to do a cold restart after Fast2 crash (identified in 2.10)
-
-
-
-

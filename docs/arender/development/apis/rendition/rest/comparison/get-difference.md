@@ -1,38 +1,32 @@
 ---
 title: GET differences
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 2a7818a2c228858b44737c285b730bd54e7913a285d5fdb4b8290caa63471f9a
 ---
-
-
-
-
-
-
-
 
 This API allows you to request a textual comparison and retrieve a DocumentCompareResult.
 
 ## API technical description
 
 Endpoint:
+
 ```bash
 GET /difference
 ```
 
 Query param:
 
-| Attribute             | Type                  | Required | Description                           |
-| --------------------- | --------------------- | -------- |---------------------------------------|
-| leftDocumentId        | String                | yes      | Id of the first document to compare.  |
-| rightDocumentId       | String                | yes      | Id of the second document to compare. |
+| Attribute       | Type   | Required | Description                           |
+| --------------- | ------ | -------- | ------------------------------------- |
+| leftDocumentId  | String | yes      | Id of the first document to compare.  |
+| rightDocumentId | String | yes      | Id of the second document to compare. |
 
 Response:
 
 | Attribute             | Type                  | Description                                                  |
-| :-------------------- | :-------------------- |:-------------------------------------------------------------|
+| :-------------------- | :-------------------- | :----------------------------------------------------------- |
 | documentCompareResult | DocumentCompareResult | DocumentCompareResult contains the result of the comparison. |
 
 ## Examples
@@ -40,6 +34,7 @@ Response:
 ### Retrieve a difference
 
 The call below generates a build request from two documents with IDs:
+
 - left document id= _123e4567-e89b-12d3-a456-426614174000_
 - right document id= _b64_bm9yZS92SDMtMS0xMTh1735080237_
 

@@ -1,11 +1,11 @@
 ---
 tags:
-  - Drools
-  - Java
-  - Excel
+    - Drools
+    - Java
+    - Excel
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 5b428f73ba351e7164c2300c3a203284eaf07f053b8dc0151f773181bc74ea63
 ---
 

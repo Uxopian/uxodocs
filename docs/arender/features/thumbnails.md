@@ -1,16 +1,10 @@
 ---
 title: Thumbnails
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 52ca2a206e82a0d4a05f37598cb3fae355b9397af4fd2109f37fcdb00f9755b0
 ---
-
-
-
-
-
-
 
 ## Introduction
 
@@ -38,27 +32,13 @@ For those who desire control over their thumbnail view, ARender provides a dynam
 
 To use this feature, you can enable it via a simple configuration setting.
 
-
-
-
-
 ```cfg
 ui.legacy.enabled=false
 ```
 
-
-
-
-
-
-
 ```cfg
 ui.legacy.enabled=false
 ```
-
-
-
-
 
 ![image](/img/arender/documentation/features/thumbnails/thumbnail-reactjs-slider.gif)
 
@@ -66,33 +46,20 @@ ui.legacy.enabled=false
 
 After enabling the previously mentioned "Adjusted thumbnail display structure" feature,
 thumbnails are displayed by default in 2 columns when ARender loads and when loading each
+
 ```javascript
 new document. This default value can be changed to any number between 1 and 4.
 ```
 
 To use this feature, you can configure it via a simple configuration setting.
 
-
-
-
-
 ```cfg
 thumbexplorer.columns=1
 ```
 
-
-
-
-
-
-
 ```cfg
 thumbexplorer.columns=1
 ```
-
-
-
-
 
 ## Disabling the Anchor Creation Option (v2023.4.0 and later)
 
@@ -101,27 +68,13 @@ options including "Create anchor at this page". It is possible to disable this o
 
 To disable this feature, use the following configuration parameter:
 
-
-
-
-
 ```cfg
 thumbexplorer.contextualMenu.createPageAnchor=false
 ```
 
-
-
-
-
-
-
 ```cfg
 thumbexplorer.contextualMenu.createPageAnchor=false
 ```
-
-
-
-
 
 By default, the configuration parameter is set to `true`, the "Create anchor at this page" option is enabled.
 

@@ -1,8 +1,8 @@
 ---
 title: Adding a Custom Gateway Authentication Provider
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: af129b4c5d4c5b987d206f1a88cbccd5447ad3e3591b9f4fc5e65025a7193a1f
 ---
 
@@ -183,27 +183,27 @@ In your `gateway-service` configuration (e.g., `application.yml`), locate the `r
 
 ```yaml
 app:
-  gateway:
-    provider-header: X-Provider-ID
-  routes:
-    - id: uxopian-ai
-      uri: http://uxopian-ai-standalone:8080 # The internal address of the Core Service
-      prefix: /uxopian-ai/
-      path: /uxopian-ai/**
-      rewritePath: /uxopian-ai/?(?<segment>.*), /uxopian-ai/${segment}
+    gateway:
+        provider-header: X-Provider-ID
+    routes:
+        - id: uxopian-ai
+          uri: http://uxopian-ai-standalone:8080 # The internal address of the Core Service
+          prefix: /uxopian-ai/
+          path: /uxopian-ai/**
+          rewritePath: /uxopian-ai/?(?<segment>.*), /uxopian-ai/${segment}
 
-      # MAPPING HAPPENS HERE:
-      provider: DevProvider # Must match @Service("DevProvider")
+          # MAPPING HAPPENS HERE:
+          provider: DevProvider # Must match @Service("DevProvider")
 
-      # Public/Private Path Security Rules
-      security:
-        - path: /.well-known/**
-          public: true
-        - path: /swagger-ui/**
-          public: true
-        - path: /api/v1/admin/**
-          # roles: [ "ADMIN" ] # Uncomment to enforce role checks
-          public: true
+          # Public/Private Path Security Rules
+          security:
+              - path: /.well-known/**
+                public: true
+              - path: /swagger-ui/**
+                public: true
+              - path: /api/v1/admin/**
+                # roles: [ "ADMIN" ] # Uncomment to enforce role checks
+                public: true
 ```
 
 ---

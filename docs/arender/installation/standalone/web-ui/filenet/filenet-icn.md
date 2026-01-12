@@ -1,16 +1,10 @@
 ---
 title: Installation in ICN
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: da17d2ee20bb5d49229b323203e94ae83bcc90ea7e0ab2e3b7ad9453cfee2987
 ---
-
-
-
-
-
-
 
 We continue here the installation but in the ICN module of FileNet.
 
@@ -56,39 +50,34 @@ Then import this key in ARender, like below:
 
 Since ICN version 3.0.6, if you change of user on the same session then you will get an error message when opening a document with the new user which will look like this:
 
-
-
-
 Error 500: com.ibm.websphere.servlet.session.UnauthorizedSessionRequestException: SESN0008E: A user authenticated as user:localhost:389/CN=userB,CN=Users,DC=ircem,DC=dev has attempted to access a session owned by user:localhost:389/CN=userA,CN=Users,DC=ircem,DC=dev
-
-
 
 The session of the user userA was not invalidated when he disconnected, which will cause the error when opening a document by user userB. There is a property to add in a WebSphere console which will make it possible to invalidate a session on which an unauthorized request is made. This session invalidation will allow the recovery of the correct username by ARender.
 
 #### Adding the property
 
-- Go to your websphere console then in the menu go to *servers -> server types -> websphere application servers*.
-- Select the server on which you want to make the modification. In our example, we choose *serverICN*
+- Go to your websphere console then in the menu go to _servers -> server types -> websphere application servers_.
+- Select the server on which you want to make the modification. In our example, we choose _serverICN_
 
 ![filenet](/img/arender/documentation/filenet/userSession/servers.png)
 
-- In *Container settings* go to *Session management*.
+- In _Container settings_ go to _Session management_.
 
 ![filenet](/img/arender/documentation/filenet/userSession/specific_serve.png)
 
-- In *Additional properties*, click on *custom properties*.
+- In _Additional properties_, click on _custom properties_.
 
 ![filenet](/img/arender/documentation/filenet/userSession/session_management.png)
 
-- Click on *New...* to add the property.
+- Click on _New..._ to add the property.
 
 ![filenet](/img/arender/documentation/filenet/userSession/custom_properties.png)
 
-- Add the property *InvalidateOnUnauthorizedSessionRequestException* with the value *true* so that it is applied.
+- Add the property _InvalidateOnUnauthorizedSessionRequestException_ with the value _true_ so that it is applied.
 
 ![filenet](/img/arender/documentation/filenet/userSession/new_property.png)
 
-- You must then click on *Ok* then *save*. Restart your Filenet services to take this property into account.
+- You must then click on _Ok_ then _save_. Restart your Filenet services to take this property into account.
 
 ### Integration of the arender plugin for FileNet
 
@@ -157,27 +146,26 @@ End-users can use ARender Compare and Document Builder features directly from IC
 
 ### Create a dedicated ICN menu to show ARender advanced feature
 
-* In ICN, go in the **Administration** menu
-* Select **Menus**
-* Search the Menu named **Default document context menu**
-    
+- In ICN, go in the **Administration** menu
+- Select **Menus**
+- Search the Menu named **Default document context menu**
+
 ![filenet](/img/arender/filenet/Default-document-context-menu.png)
-    
-* Right click on this menu and select **Copy**
-* Define a Name and a description to the new Menu
-* In the *Available* box select **Compare documents** and/or **Merge documents** action and add them into the *Selected* menu on the right
+
+- Right click on this menu and select **Copy**
+- Define a Name and a description to the new Menu
+- In the _Available_ box select **Compare documents** and/or **Merge documents** action and add them into the _Selected_ menu on the right
 
 ![filenet](/img/arender/filenet/CompareAndMerge-Selected.png)
 
-
 ### Add the created menu to the ICN Desktop
 
-* In ICN, go in the **Administration** menu
-* Select **Desktops**
-* Select the Desktop to update
-* Select the tab **Menus**
-* Search for the Menu named **Document context menu**
-* In its drop-down list value, select the menu you created above
+- In ICN, go in the **Administration** menu
+- Select **Desktops**
+- Select the Desktop to update
+- Select the tab **Menus**
+- Search for the Menu named **Document context menu**
+- In its drop-down list value, select the menu you created above
 
 ![filenet](/img/arender/filenet/CompareAndMergeMenu.png)
 

@@ -6,4 +6,3 @@ FixDate: 25/05/2020
 FixVersion: 5
 StartPage: release-notes
 ---
-

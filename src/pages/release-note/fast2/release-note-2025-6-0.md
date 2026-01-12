@@ -6,8 +6,8 @@ date: 2025-10-03
 
 # To modify
 version: "2025.6.0"
-major_version: "2025" 
-description: "Summary of the changes in version 2025.6.0 of Fast2." 
+major_version: "2025"
+description: "Summary of the changes in version 2025.6.0 of Fast2."
 ---
 
 ## **What's new?**
@@ -30,6 +30,7 @@ _Details below for the other features..._
 <br />
 
 ---
+
 ## 🌏 Generic Features & UI
 
 No change has been operated on this part.
@@ -45,15 +46,18 @@ No change has been operated on this part.
 ## ⚙️ Technical & Configuration
 
 ### ✨ New Features
+
 - **REST Connector**: A new generic task to consume REST APIs has been added, initially supporting the GET method.
 
 ### 🔧 Improvements
+
 - **REST Connector**: The new REST API task has been enhanced to also support the DELETE method.
 - **PatternResolver**: This configuration task now supports multi-value data, allowing for more complex data manipulation.
 - **Serialization**: Content is now serialized with its corresponding file extension, improving how data is handled and identified.
 - **Codebase**: The entire project has been reformatted to ensure code style consistency and improve readability.
 
 ### 🐞 Bug Fixes
+
 - **Development Environment**: Fixed a build issue that occurred specifically on Windows operating systems.
 
 ---
@@ -89,4 +93,5 @@ No change in this version deals with a support ticket.
 ---
 
 ## ⚠️ Erratum
+
 - **Connectors**: Contrary to what was communicated lately, there is no new JSON Parsing task in this release. This false information was published due to an incorrect status on a cancelled ticket.

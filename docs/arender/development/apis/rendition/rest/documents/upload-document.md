@@ -1,55 +1,47 @@
 ---
 title: POST Document
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: cd15426f536ad6573049f3fe51df827f13c5dce7f91ae9e37dbd313c52809aeb
 ---
-
-
-
-
-
-
 
 This API allows you to upload a document.
 
 ## API Description
 
 Endpoint:
+
 ```bash
 POST /documents
 ```
 
-
 Query params:
 
 | Variable          | Required | Description                                                                                                                                                                                                                |
-|:------------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | documentId        | No       | The reference ID for the document                                                                                                                                                                                          |
 | documentTitle     | No       | The title of the document                                                                                                                                                                                                  |
 | documentUrl       | No       | The URL of the document                                                                                                                                                                                                    |
 | failOnUnsupported | No       | **Introduced in 2023.12.0 version.** If the value is **true** or not specified, loading an unsupported document will return an error. If the value is **false**, loading an unsupported document will not return an error. |
 
-
 Request body:
 
 | Variable    | Description                                      |
-|:------------|:-------------------------------------------------|
+| :---------- | :----------------------------------------------- |
 | inputStream | The input stream containing the document content |
-
 
 Responses:
 
 | Type       | Description                                                                                  |
-|:-----------|:---------------------------------------------------------------------------------------------|
+| :--------- | :------------------------------------------------------------------------------------------- |
 | DocumentId | The ID of the document. A new documentId is generated if not provided in the query parameter |
 
 ## Examples
 
 ### Upload a Document
 
-The following example uploads a document from a file named "example.pdf" 
+The following example uploads a document from a file named "example.pdf"
 without specifying a document title or URL.
 
 ```bash

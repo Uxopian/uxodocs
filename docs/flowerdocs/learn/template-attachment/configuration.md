@@ -1,18 +1,16 @@
 ---
 title: Configuration
-date: '2020-02-01T13:20:01+02:00'
+date: "2020-02-01T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 11052d4a28f1bb2ed0a9b7914ec48b2c940fbe27b2484dd9a95e83fcb4d919d5
 ---
-
 
 # Goal
 
 This section explains how to configure the plugin and implement it on a scope integrating the GEC module.  
 We want to apply it to the `Response` attachment of the `GEC_Step2_ToBeProcessed` tasks. Here we want a new document to be created directly from a Word template and associated with the `Response` attachment.
-
 
 # Prerequisites
 
@@ -24,9 +22,8 @@ Check that `TemplateAttachmentPlugin` is present on the scope. It can be found i
 The plugin must be configured for a specific element before it can be used.
 To do this, follow these steps:
 
-* Create a new JavaScript script in the **Display > Scripts** tab of FlowerDocs administration. You can name this script TemplateAttachmentConfiguration.
-* The contents of this script will be as follows:
-
+- Create a new JavaScript script in the **Display > Scripts** tab of FlowerDocs administration. You can name this script TemplateAttachmentConfiguration.
+- The contents of this script will be as follows:
 
 ```javascript
 new TemplateAttachmentPlugin({
@@ -43,9 +40,7 @@ new TemplateAttachmentPlugin({
 }).bind();
 ```
 
-
-
-* Save the script, then purge the application cache. This takes into account any changes made to the scope configuration.
+- Save the script, then purge the application cache. This takes into account any changes made to the scope configuration.
 
 :::note[Script explanation]
 1 We use the `TemplateAttachmentPlugin` as expected.
@@ -60,18 +55,19 @@ new TemplateAttachmentPlugin({
 
 9 The document is returned when called by the API.
 :::
-  
 
 <br/>
 You can add options to this script:
 
 :::note[Script options]
+
 ```javascript
 	canAttach:
 		function(card, definition, formAPI) {
 			return formAPI.getComponent().getAssignee() == JSAPI.get().getUserAPI().getId();
 		},
 ```
+
 Restricts plugin use to the user to whom the task is assigned.
 
 <br/>
@@ -90,4 +86,3 @@ It must be called in the `instantiator` function as follows (after document inst
 			doc.setName(name);
 ```
 :::
-

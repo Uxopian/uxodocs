@@ -1,16 +1,10 @@
 ---
 title: Requirements
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 1a95ce179857512bbf8eaf9060eae1224d0e293d51dfd9da458070799ec3919a
 ---
-
-
-
-
-
-
 
 ## Operating system
 
@@ -33,39 +27,39 @@ content_hash: 1a95ce179857512bbf8eaf9060eae1224d0e293d51dfd9da458070799ec3919a
 
 The ports of the different micro-services need to be free to use and are as follows:
 
-| Service              | Protocols  | Default listening port |
-| :------------------- | :--------: | :--------------------: |
-| Service broker       | HTTP/HTTPS |                   8761 |
-| Text handler         |    HTTP    |                   8899 |
-| Renderer             |    HTTP    |                   9091 |
-| Converter            |    HTTP    |                  19999 |
+| Service        | Protocols  | Default listening port |
+| :------------- | :--------: | :--------------------: |
+| Service broker | HTTP/HTTPS |          8761          |
+| Text handler   |    HTTP    |          8899          |
+| Renderer       |    HTTP    |          9091          |
+| Converter      |    HTTP    |         19999          |
 
 ## Software requirement
 
-| Software                        | Requirement                                                                                                                                               |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Java Runtime                    | JRE 1.8 64 bits Minimum, OpenJDK 11 advised. Oracle JDK are supported, JRE IBM J9 is unsupported.                                                         |
-
+| Software     | Requirement                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------- |
+| Java Runtime | JRE 1.8 64 bits Minimum, OpenJDK 11 advised. Oracle JDK are supported, JRE IBM J9 is unsupported. |
 
 If the JVM used is not **64 bits**, the rendition will now stop its boot and
 warn in the logs/console that the version of the JVM used is incorrect.
-
 
 ## Access rights
 
 ### Installation
 
 The user must have the following rights:
-* Folder creation,
-* Service creation.
+
+- Folder creation,
+- Service creation.
 
 ### Launch
 
 The user must have the following rights:
-* Read and execution for the files into the Rendition folder, 
-* Read and execution for third party softwares.
+
+- Read and execution for the files into the Rendition folder,
+- Read and execution for third party softwares.
 
 ## Amazon Web Services (AWS) specific
 
-Ensure the role attached to the EC2 instance has permissions to describe the instance if it needs to be identified by a 
+Ensure the role attached to the EC2 instance has permissions to describe the instance if it needs to be identified by a
 tag.

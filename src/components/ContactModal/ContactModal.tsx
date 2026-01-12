@@ -1,30 +1,32 @@
-import React from 'react';
-import styles from './styles.module.css';
+import React from "react";
+import styles from "./styles.module.css";
 
 interface ContactModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-export default function ContactModal({ isOpen, onClose }: ContactModalProps): React.JSX.Element | null {
-
+export default function ContactModal({
+    isOpen,
+    onClose,
+}: ContactModalProps): React.JSX.Element | null {
     // IMPORTANT: useEffect doit être AVANT le return null pour restaurer le scroll
     React.useEffect(() => {
         if (isOpen) {
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = "hidden";
             const handleKeyDown = (e: KeyboardEvent) => {
-                if (e.key === 'Escape') {
+                if (e.key === "Escape") {
                     onClose();
                 }
             };
-            document.addEventListener('keydown', handleKeyDown);
+            document.addEventListener("keydown", handleKeyDown);
             return () => {
-                document.body.style.overflow = '';
-                document.removeEventListener('keydown', handleKeyDown);
+                document.body.style.overflow = "";
+                document.removeEventListener("keydown", handleKeyDown);
             };
         } else {
             // S'assurer que le scroll est restauré même si la modal se ferme
-            document.body.style.overflow = '';
+            document.body.style.overflow = "";
         }
     }, [isOpen, onClose]);
 
@@ -37,7 +39,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps): Re
     };
 
     const handleEscapeKey = (e: React.KeyboardEvent) => {
-        if (e.key === 'Escape') {
+        if (e.key === "Escape") {
             onClose();
         }
     };
@@ -57,12 +59,26 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps): Re
                     onClick={onClose}
                     aria-label="Close contact form"
                 >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M18 6L6 18M6 6L18 18"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
                     </svg>
                 </button>
 
-                <h2 id="contact-modal-title" className={styles.visuallyHidden}>Contact Us</h2>
+                <h2 id="contact-modal-title" className={styles.visuallyHidden}>
+                    Contact Us
+                </h2>
 
                 <iframe
                     src="https://www.uxopian.com/en/contact-us"

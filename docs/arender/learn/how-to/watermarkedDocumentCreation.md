@@ -1,16 +1,10 @@
 ---
 title: Create Watermarked documents
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 4755c2e64b5d050ee4d81d1842a98b6bf85d59bd981e02a5b65580ffc52aec03
 ---
-
-
-
-
-
-
 
 This code snippet allows you, using the ARender jar dependency
 arondor-arender-client-javarest, to communicate with rendition servers
@@ -24,9 +18,9 @@ each page of the document in order to generate a watermarking.
 Here you will have to setup the address of the rendition server you are
 targeting and the binary content of the original document you want to
 watermark. We assume in this example that the data is stored into the
-field *data* .
+field _data_ .
 
-``` java
+```java
 RenditionRestClient client = new RenditionRestClient();
 client.setAddress("http://localhost:8761");
 // Assuming that this "data" contains your documentContent
@@ -36,10 +30,10 @@ DocumentAccessor original = new DocumentAccessorByteArray(data);
 
 ## Loading of the documentAccessor
 
-In this code, we load the documentAccessor and get the *RENDERED*
+In this code, we load the documentAccessor and get the _RENDERED_
 version of it in case a conversion is needed on the rendition side.
 
-``` java
+```java
 client.loadDocumentAccessor(original);
 DocumentAccessor accessorConverted = client.getDocumentAccessor(original.getUUID(),
         DocumentAccessorSelector.RENDERED);
@@ -47,7 +41,7 @@ DocumentAccessor accessorConverted = client.getDocumentAccessor(original.getUUID
 
 ## Obtaining the number of pages
 
-``` java
+```java
 DocumentLayout layout = client.getDocumentLayout(accessorConverted.getUUID());
 int nbPages = -1;
 if (layout instanceof DocumentPageLayout)
@@ -63,7 +57,7 @@ else
 
 ## Setup the annotation style for stamps
 
-``` java
+```java
 // configure here the ARender stamp style
 AnnotationStyle annotationStyle = new AnnotationStyle();
 
@@ -87,7 +81,7 @@ for (String key: styleMap.keySet())
 
 ## Setup the list of stamps to send
 
-``` java
+```java
 // now we prepare the list of stamps to send the rendition server
 List&lt;Annotation&gt; stamps = new ArrayList&lt;Annotation&gt;();
 for (int i = 0; i < nbPages; i++)
@@ -107,7 +101,7 @@ for (int i = 0; i < nbPages; i++)
 
 ## Creation of the conversion task
 
-``` java
+```java
 AlterContentDescriptionWithAnnotations alterContent = new AlterContentDescriptionWithAnnotations();
 // set annotations
 alterContent.setAnnotations(stamps);
@@ -119,13 +113,13 @@ DocumentId renderedDoc = client.alterDocumentContent(sourceDocumentIdList, alter
 
 ## Fetch of the resulting document
 
-``` java
+```java
 DocumentAccessor accessorFinalDocument = client.getDocumentAccessor(renderedDoc,
         DocumentAccessorSelector.RENDERED);
 ```
 
 The binary data of the resulting document is in:
 
-``` java
+```java
 accessorFinalDocument.getInputStream();
 ```

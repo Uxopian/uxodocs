@@ -1,23 +1,16 @@
 ---
 title: Redact reasons
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 3f170120d99749c018d63bf4790461d68f90acdcbbff210f1f479a7fd7b44646
 ---
 
-
-
-
-
-
-
 ## Add reason
+
 It is possible to add redact reasons. These reasons will be directly displayed on the redact.
 
 Change the value to the values you want.
-
-
 
 ```xml
     <bean id="availableRedactReasons" class="java.util.ArrayList">
@@ -38,25 +31,16 @@ Change the value to the values you want.
 	</bean>
 ```
 
-
-
 ## Default value
 
 You can add one or more default reasons with the following property. The default reason value (here '(b)(1)') corresponds to the value in the “symbolicName” property (see the above example).
 
 If there are several default reasons, it should be comma-separated values (ex:(b)(1),(b)(2)).
 
-
-
 ```cfg
 arender.server.annotations.default.redact.reason=(b)(1)
 ```
 
-
-
 If this property has no value, by default the redact will have no reason.
 
-
-
 Your default value **must** be added to your customization file (in arender-custom-integration. xml). Otherwise, this value will not be taken into account.
-

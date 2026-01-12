@@ -1,7 +1,7 @@
 ---
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: dab751ce0e43848f39ebd867284d240ced4c8a05606f662d81b627172dca5c4c
 ---
 
@@ -23,15 +23,13 @@ This feature allows you to import new JAR libraries or replace existing ones dir
 
 1. Go to **Servers Place** → **LIBRARIES** tab
 
-   
-   ![Upload JAR](../assets/img/catalog/serversPlace.png)
+    ![Upload JAR](../assets/img/catalog/serversPlace.png)
 
 2. Click on **Import jar** (top right button)
 3. Select a JAR that does not exist in `/worker-libs`
 4. Either **Cancel** or **Import** the JAR
 
-   
-   ![Import JAR](../assets/img/catalog/importJar.png)
+    ![Import JAR](../assets/img/catalog/importJar.png)
 
 5. Workers on the same server as the broker are restarted
 6. The JAR is added to `/worker-libs`

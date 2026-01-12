@@ -1,16 +1,10 @@
 ---
 title: Annotations
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 0129a127cc679c1c0ad9e700f10977f0601950cdb76e4f085f70cce438331fd6
 ---
-
-
-
-
-
-
 
 ## Annotation creation policy configuration
 
@@ -49,9 +43,7 @@ Configurable properties are:
 | Border style     | borderStyle     | Integer (0 or 1, without or with border) |
 | Rotation (°)     | rotation        | Integer                                  |
 
-
-
-``` xml
+```xml
 <bean class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
     <property name="name" value="Urgent" />
     <property name="annotationType">
@@ -73,8 +65,6 @@ Configurable properties are:
 </bean>
 ```
 
-
-
 ### Image Stamp
 
 Configurable properties are:
@@ -88,9 +78,7 @@ Configurable properties are:
 | Height       | height          | Integer                            |
 | Rotation (°) | rotation        | Integer                            |
 
-
-
-``` xml
+```xml
 <bean class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
     <property name="name" value="Image" />
         <property name="annotationType">
@@ -113,8 +101,6 @@ Configurable properties are:
 </bean>
 ```
 
-
-
 ## Annotation creation configuration
 
 In a annotation creation action button it is possible to override
@@ -127,7 +113,7 @@ In the creation action bean, definition of an annotation is needed.
 
 Complete definition of empty blue border rectangle:
 
-``` xml
+```xml
 <bean id="SquareCreationAction" class="com.arondor.viewer.client.toppanel.behavior.annotation.CreateAnnotationButtonHandler">
     <constructor-arg>
         <bean class="com.arondor.viewer.client.annotation.events.PrepareAnnotationCreationEvent">
@@ -174,9 +160,9 @@ Available properties are:
 Precision about properties:
 
 - Color: a color is defined on this model. r,g et b values are
-between 0 and 255.
+  between 0 and 255.
 
-``` xml
+```xml
 <property name="color">
     <bean class="com.arondor.viewer.annotation.common.Color">
         <property name="r" value="0" />
@@ -187,10 +173,10 @@ between 0 and 255.
 ```
 
 - LineEndType: authorized values `SQUARE`, `CIRCLE`, `DIAMOND`,
-`OPEN_ARROW`, `CLOSED_ARROW`, `NONE`, `BUTT`, `R_OPEN_ARROW`,
-`R_CLOSED_ARROW`
+  `OPEN_ARROW`, `CLOSED_ARROW`, `NONE`, `BUTT`, `R_OPEN_ARROW`,
+  `R_CLOSED_ARROW`
 
-``` xml
+```xml
 <property name="head">
     <value type="com.arondor.viewer.annotation.api.LineEndType">NONE</value>
 </property>
@@ -198,7 +184,7 @@ between 0 and 255.
 
 - AnnotationFlags: obfuscate tag is available
 
-``` xml
+```xml
 <property name="annotationFlags">
     <bean class="com.arondor.viewer.annotation.common.AnnotationFlags">
         <property name="obfuscate" value="true" />
@@ -208,7 +194,7 @@ between 0 and 255.
 
 - Style: Two styles are available: `CLOUDY` and `SOLID`
 
-``` xml
+```xml
 <property name="style">
     <bean class=" com.arondor.viewer.annotation.api.StyleBEType">
         <constructor-arg>
@@ -228,9 +214,7 @@ annotation is in edit mode. Every security has two parameters:
 - **localizedDisplayNames**, a map which have for every entry locale
   as key and display name as value.
 
-
-
-``` xml
+```xml
 <bean id="availableSecurityLevels" class="java.util.ArrayList">
     <constructor-arg>
         <list>
@@ -277,9 +261,6 @@ annotation is in edit mode. Every security has two parameters:
 </bean>
 ```
 
-
-
-
 ## Configuration of a submenu for the annotation creation buttons
 
 Since the version 4.7.x, the annotation buttons are in the toppanel by default, they are no longer in a submenu.
@@ -288,11 +269,9 @@ Since the version 4.7.x, the annotation buttons are in the toppanel by default, 
 
 ### Current configuration of the buttons in the toppanel
 
-Here is the current configuration of the bean serving as the container for the annotation creation buttons : 
+Here is the current configuration of the bean serving as the container for the annotation creation buttons :
 
-
-
-``` xml
+```xml
     <bean id="annotationMenu"
 		class="com.arondor.viewer.client.toppanel.presenter.SimpleButtonSetPresenter">
 		<property name="enabled" value="${topPanel.annotationMenu}" />
@@ -307,20 +286,16 @@ Here is the current configuration of the bean serving as the container for the a
 	</bean>
 ```
 
+Here is an example of a bean that defines an annotation creation button located in the toppanel:
 
-
-Here is an example of a bean that defines an annotation creation button located in the toppanel: 
-
-
-
-``` xml
+```xml
     <bean id="addHighlightRectangleAnnotationButton"
 		class="com.arondor.viewer.client.widgets.ActivableButtonPresenter">
 		<constructor-arg value="addHighlightRectangleAnnotationButton" />
 		<property name="name" value="Square" />
 		<property name="supportDoubleClick" value="${topPanel.annotationMenu.highlight.repeat}" />
 		<property name="enabled" value="${topPanel.annotationMenu.highlight}" />
-		<property name="className" value="standardButton icon-highlight-area toppanelButton" /> 
+		<property name="className" value="standardButton icon-highlight-area toppanelButton" />
 		<property name="buttonGroup" value="topPanel" />
 		<property name="buttonTitle">
 			<ref bean="labels#addRectangleAnnotation" />
@@ -350,13 +325,12 @@ Here is an example of a bean that defines an annotation creation button located 
 	</bean>
 ```
 
-
-
 ### Configuration to put the buttons in a submenu
 
 #### The submenu
 
 The container will have to be modified in order to become a button opening a submenu. First the following properties must be deleted because they are not compatible with the submenu :
+
 - shrinkToDropDown
 - dropdownId
 - dropdownClassName
@@ -365,9 +339,7 @@ The class of the bean must be modified so that it corresponds to a button openin
 
 Here is the complete example of the bean, to be put in the _arender-custom-integration.xml_ file, which allows to have a button opening a submenu instead of a simple button container in the toppanel :
 
-
-
-``` xml
+```xml
 <bean id="annotationMenu"
     class="com.arondor.viewer.client.toppanel.presenter.SubMenuButtonPresenter">
     <constructor-arg value="annotationMenu"/>
@@ -381,12 +353,10 @@ Here is the complete example of the bean, to be put in the _arender-custom-integ
 </bean>
 ```
 
-
-
-
 #### The buttons in the submenu
 
-To put the buttons in a submenu, you will have to take the bean corresponding to the annotations you want to put in the submenu, then add them to the _arender-custom-integration.xml_ file. Then the following properties will need to be removed as they are not compatible with a submenu button : 
+To put the buttons in a submenu, you will have to take the bean corresponding to the annotations you want to put in the submenu, then add them to the _arender-custom-integration.xml_ file. Then the following properties will need to be removed as they are not compatible with a submenu button :
+
 - name
 - buttonGroup
 - inactiveButtonHandler
@@ -395,27 +365,21 @@ To put the buttons in a submenu, you will have to take the bean corresponding to
 
 The class of the bean must be modified in order to have a button that can be integrated into the submenu. The new class to use is _com.arondor.viewer.client.widgets.DropdownMenuItem_.
 
-If the double-click must be managed, then it will be necessary to add before the _buttonHandler_ property, the following property allowing to define the time, in milliseconds, of the interval between the two clicks : 
+If the double-click must be managed, then it will be necessary to add before the _buttonHandler_ property, the following property allowing to define the time, in milliseconds, of the interval between the two clicks :
 
-
-
-``` xml
+```xml
 <property name="clickInterval" value="200" />
 ```
 
+Once these steps are completed, you will have a bean that looks like the following example. The step will have to be repeated for each button to be added in a submenu.
 
-
-Once these steps are completed, you will have a bean that looks like the following example. The step will have to be repeated for each button to be added in a submenu. 
-
-
-
-``` xml
+```xml
 <bean id="addHighlightRectangleAnnotationButton"
     class="com.arondor.viewer.client.widgets.DropdownMenuItem">
     <constructor-arg value="addHighlightRectangleAnnotationButton" />
     <property name="supportDoubleClick" value="${topPanel.annotationMenu.highlight.repeat}" />
     <property name="enabled" value="${topPanel.annotationMenu.highlight}" />
-    <property name="className" value="standardButton icon-highlight-area toppanelButton" /> 
+    <property name="className" value="standardButton icon-highlight-area toppanelButton" />
     <property name="clickInterval" value="200" />
     <property name="buttonTitle">
         <ref bean="labels#addRectangleAnnotation" />
@@ -431,8 +395,6 @@ Once these steps are completed, you will have a bean that looks like the followi
     </property>
 </bean>
 ```
-
-
 
 Result with several annotation creation buttons in the submenu :
 

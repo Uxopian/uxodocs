@@ -1,40 +1,29 @@
 ---
 title: Group annotations
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: b67423cd9ffd885070e051f37ee7e52ed5ac2270174f636bb62b95097613ee5f
 ---
 
-
-
-
-
-
-
-The assignment of a group to an annotation is done with the use of the *Security* property which makes it possible to store the group name of the annotation.
+The assignment of a group to an annotation is done with the use of the _Security_ property which makes it possible to store the group name of the annotation.
 
 By default, only two values ​​can be used :
+
 - Private
 - Public
 
 The list of values ​​is configurable. The following property must be enabled in order to view the dropdown list while in annotation edit mode.
 
-
-
 ```cfg
 arender.server.annotations.text.security.support=true
 ```
-
-
 
 ## Modification by configuration
 
 The annotation group list is configurable.
 
 Example of configuration of the bean that will populate the annotation group list:
-
-
 
 ```cfg
 <bean id="availableSecurityLevels" class="java.util.ArrayList">
@@ -75,18 +64,15 @@ Example of configuration of the bean that will populate the annotation group lis
 </bean>
 ```
 
-
-
-
 Visually, a dropdown list is displayed in the toppanel when editing an annotation.
 
 ![image](/img/arender/documentation/GroupeAnnotations/groupeannotation1.png)
 
 ## Modification by connector
 
-In the Java class that implements the *DocumentAccessor* interface, you can change the setter implementation for the *AnnotationAccessor* to define a new list of values ​​for annotation groups.
+In the Java class that implements the _DocumentAccessor_ interface, you can change the setter implementation for the _AnnotationAccessor_ to define a new list of values ​​for annotation groups.
 
-Here is a basic example of the implementation of the function *setAnnotationAccessor* which will define a new list of values:
+Here is a basic example of the implementation of the function _setAnnotationAccessor_ which will define a new list of values:
 
 ```java
 
@@ -119,15 +105,11 @@ private Map<String, String> buildLocalizedDisplayNames(String fr, String en)
 
 ```
 
-
-
 ## Keep the notion of private annotation
 
-The notion of private annotation is compatible with the notion of an annotation group. We must keep the definition of *property name = "symbolicName" value = "private"*. The description of private annotations can be found in the section *Annotation securities configuration* in the page [Annotation](/docs/arender/learn/how-to/annotation)
+The notion of private annotation is compatible with the notion of an annotation group. We must keep the definition of _property name = "symbolicName" value = "private"_. The description of private annotations can be found in the section _Annotation securities configuration_ in the page [Annotation](/docs/arender/learn/how-to/annotation)
 
-Example of configuration of the bean that will populate the annotation group list with the *Private* choice:
-
-
+Example of configuration of the bean that will populate the annotation group list with the _Private_ choice:
 
 ```cfg
 <bean id="availableSecurityLevels" class="java.util.ArrayList">
@@ -178,17 +160,14 @@ Example of configuration of the bean that will populate the annotation group lis
 </bean>
 ```
 
-
-
-
 ![image](/img/arender/documentation/GroupeAnnotations/groupeannotation2.png)
-
 
 ## How to use the notion of group
 
 Now that the annotations have a notion of group, it is possible, for example, to make the annotations in the "private" group non-modifiable.
 
-Example in the implementation of the *AnnotationAccessor* which will create or update the non-modifiable annotations if the group is "private" :
+Example in the implementation of the _AnnotationAccessor_ which will create or update the non-modifiable annotations if the group is "private" :
+
 ```java
 
 @Override

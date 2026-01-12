@@ -1,8 +1,8 @@
 ---
 title: How-To Integrate AI Features in FlowerDocs
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 54c32a753cdb9c1ba3f8ba2eacff0c7d38b91ed63e2e46509623d50b4b44e0e4
 ---
 
@@ -33,22 +33,21 @@ We will create a prompt with the ID `summarizeDocumentMarkdown`.
 
 ```json
 {
-  "id": "summarizeDocMd",
-  "role": "user",
-  "content": "Summarize the following document in a plain text format: \n [[${documentService.extractTextualContent(documentId)}]]",
-  "defaultLlmProvider": "openai",
-  "defaultLlmModel": "gpt-4o",
-  "temperature": "0.7",
-  "timeSaved": 300,
-  "requiresMultiModalModel": false,
-  "requiresFunctionCallingModel": false
+    "id": "summarizeDocMd",
+    "role": "user",
+    "content": "Summarize the following document in a plain text format: \n [[${documentService.extractTextualContent(documentId)}]]",
+    "defaultLlmProvider": "openai",
+    "defaultLlmModel": "gpt-4o",
+    "temperature": "0.7",
+    "timeSaved": 300,
+    "requiresMultiModalModel": false,
+    "requiresFunctionCallingModel": false
 }
 ```
 
 :::note Variables
 Notice the usage of `[[${documentId}]]` in the content. This variable will be dynamically replaced by the JavaScript script in the next step.
 :::
-
 
 ---
 
@@ -60,41 +59,36 @@ This script uses an **IIFE (Immediately Invoked Function Expression)** to encaps
 
 ```javascript
 (function () {
-  /**
-   * ============================================================
-   * 1. CONFIGURATION & CONSTANTS
-   * Constants are scoped to this function to prevent global conflicts.
-   * ============================================================
-   */
-  const BASE_URL = window.location.origin;
-  const ENDPOINTS = {
-    CHAT: `${BASE_URL}/gui/gateway/uxopian-ai`,
-    WS: `${BASE_URL}/gui/gateway/uxopian-ai`,
-    // Dynamically retrieve the gateway URL based on the current user scope
-    getGATEWAY: () =>
-      `${BASE_URL}/gui/plugins/${JSAPI.get()
-        .getUserAPI()
-        .getScope()}/gateway/uxopian-ai`,
-  };
+    /**
+     * ============================================================
+     * 1. CONFIGURATION & CONSTANTS
+     * Constants are scoped to this function to prevent global conflicts.
+     * ============================================================
+     */
+    const BASE_URL = window.location.origin;
+    const ENDPOINTS = {
+        CHAT: `${BASE_URL}/gui/gateway/uxopian-ai`,
+        WS: `${BASE_URL}/gui/gateway/uxopian-ai`,
+        // Dynamically retrieve the gateway URL based on the current user scope
+        getGATEWAY: () =>
+            `${BASE_URL}/gui/plugins/${JSAPI.get().getUserAPI().getScope()}/gateway/uxopian-ai`,
+    };
 
-  /**
-   * ============================================================
-   * 2. HELPER FUNCTIONS
-   * ============================================================
-   */
+    /**
+     * ============================================================
+     * 2. HELPER FUNCTIONS
+     * ============================================================
+     */
 
-  /**
-   * Generates the technical context (JSON) required by the AI.
-   * This injects the current FlowerDocs Component ID and ARender Document ID.
-   */
-  function getComponentContext() {
-    const flowerId = JSAPI.get()
-      .getLastComponentFormAPI()
-      .getComponent()
-      .getId();
-    const arenderId = arenderJSAPI.getCurrentDocumentId();
+    /**
+     * Generates the technical context (JSON) required by the AI.
+     * This injects the current FlowerDocs Component ID and ARender Document ID.
+     */
+    function getComponentContext() {
+        const flowerId = JSAPI.get().getLastComponentFormAPI().getComponent().getId();
+        const arenderId = arenderJSAPI.getCurrentDocumentId();
 
-    return InputBuilder.textAsSystem(`
+        return InputBuilder.textAsSystem(`
       /* Contextual Data */
       {
         flowerdocId: { 
@@ -107,76 +101,76 @@ This script uses an **IIFE (Immediately Invoked Function Expression)** to encaps
         }
       }
     `);
-  }
+    }
 
-  /**
-   * Initiates the AI Chat interface using the Web Component's exposed function.
-   */
-  function openChatWindow(requestPayload) {
-    fetch(ENDPOINTS.getGATEWAY())
-      .then(() =>
-        createChat({
-          endpoint: ENDPOINTS.CHAT,
-          wsEndpoint: ENDPOINTS.WS,
-          request: requestPayload,
-        })
-      )
-      .catch((error) => console.error("Failed to open chat:", error));
-  }
+    /**
+     * Initiates the AI Chat interface using the Web Component's exposed function.
+     */
+    function openChatWindow(requestPayload) {
+        fetch(ENDPOINTS.getGATEWAY())
+            .then(() =>
+                createChat({
+                    endpoint: ENDPOINTS.CHAT,
+                    wsEndpoint: ENDPOINTS.WS,
+                    request: requestPayload,
+                })
+            )
+            .catch((error) => console.error("Failed to open chat:", error));
+    }
 
-  /**
-   * Registers a custom button in the application header.
-   */
-  function registerHeaderAction({ label, icon, onExecute }) {
-    const jsapi = JSAPI.get();
+    /**
+     * Registers a custom button in the application header.
+     */
+    function registerHeaderAction({ label, icon, onExecute }) {
+        const jsapi = JSAPI.get();
 
-    // Register the label for translation
-    jsapi.getLabelsAPI().setLabels([label]);
+        // Register the label for translation
+        jsapi.getLabelsAPI().setLabels([label]);
 
-    jsapi.registerForComponentChange((api) => {
-      const resolvedLabel = jsapi.getLabelsAPI().getLabel(label.name);
-      const headerActions = api.getActions().getHeaderActions();
+        jsapi.registerForComponentChange((api) => {
+            const resolvedLabel = jsapi.getLabelsAPI().getLabel(label.name);
+            const headerActions = api.getActions().getHeaderActions();
 
-      const actionItem = jsapi
-        .getActionFactoryAPI()
-        .buildMenu(
-          `ai-action-${label.name}`,
-          resolvedLabel,
-          icon || "fa-solid fa-robot",
-          onExecute
-        );
+            const actionItem = jsapi
+                .getActionFactoryAPI()
+                .buildMenu(
+                    `ai-action-${label.name}`,
+                    resolvedLabel,
+                    icon || "fa-solid fa-robot",
+                    onExecute
+                );
 
-      headerActions.add(actionItem);
+            headerActions.add(actionItem);
+        });
+    }
+
+    /**
+     * ============================================================
+     * 3. MAIN EXECUTION
+     * ============================================================
+     */
+    registerHeaderAction({
+        icon: "fa fa-file-alt",
+        label: {
+            name: "summarizeDocMd",
+            FR: "Résumer le document en Markdown",
+            EN: "Summarize the document in Markdown",
+        },
+        // The onExecute function builds the request at the moment of the click
+        onExecute: () => {
+            const request = {
+                inputs: [
+                    // 1. Inject System Context (IDs)
+                    getComponentContext(),
+                    // 2. Inject User Prompt with dynamic Arender ID
+                    InputBuilder.promptAsUser("summarizeDocMd", {
+                        documentId: arenderJSAPI.getCurrentDocumentId(),
+                    }),
+                ],
+            };
+            openChatWindow(request);
+        },
     });
-  }
-
-  /**
-   * ============================================================
-   * 3. MAIN EXECUTION
-   * ============================================================
-   */
-  registerHeaderAction({
-    icon: "fa fa-file-alt",
-    label: {
-      name: "summarizeDocMd",
-      FR: "Résumer le document en Markdown",
-      EN: "Summarize the document in Markdown",
-    },
-    // The onExecute function builds the request at the moment of the click
-    onExecute: () => {
-      const request = {
-        inputs: [
-          // 1. Inject System Context (IDs)
-          getComponentContext(),
-          // 2. Inject User Prompt with dynamic Arender ID
-          InputBuilder.promptAsUser("summarizeDocMd", {
-            documentId: arenderJSAPI.getCurrentDocumentId(),
-          }),
-        ],
-      };
-      openChatWindow(request);
-    },
-  });
 })();
 ```
 

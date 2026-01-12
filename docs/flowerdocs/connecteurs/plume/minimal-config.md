@@ -1,28 +1,26 @@
 ---
 title: Minimum configuration
-date: '2001-03-28T14:20:01+02:00'
+date: "2001-03-28T14:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 515fce2b6467f302b896e8e81a9966c7131f5c969f5b15927f3a098c0a1a42b0
 ---
 
-
 :::info
-This documentation describes the various connectors available for Plume. At the very least, you need to define one in the ``plume.properties`` file in the ``plume.config.dir`` folder entered in the previous section.
+This documentation describes the various connectors available for Plume. At the very least, you need to define one in the `plume.properties` file in the `plume.config.dir` folder entered in the previous section.
 :::
 
+The sender of the e-mail is indicated by the `email.from` property, with a default value of `plume@arondor.com`.
 
-The sender of the e-mail is indicated by the ``email.from`` property, with a default value of ``plume@arondor.com``.
-
-# Connectors 
+# Connectors
 
 ## FlowerDocs
 
 The FlowerDocs connector lets you store emails written with Plume in FlowerDocs.
-To activate it, add the `flower.enabled=true` property. 
+To activate it, add the `flower.enabled=true` property.
 
-In addition, the `flower.url` property must be filled in with the URL of FlowerDocs web services. 
+In addition, the `flower.url` property must be filled in with the URL of FlowerDocs web services.
 
 ```properties
 flower.enabled=true
@@ -46,22 +44,21 @@ smtp.parameters.starttls.enable=true
 
 You can add parameters to the SMTP connector by adding properties `smtp.parameters.&lt;name&gt;=&lt;value&gt;`.
 
-
 # HMI activation
 
-To activate Plume in ARender, you need to : 
-	
-* Add the ``plume.enabled`` property to the profile supplied to ARender  
+To activate Plume in ARender, you need to :
+
+- Add the `plume.enabled` property to the profile supplied to ARender
 
 ```properties
 	gui.client.arender.profile=arender&plume.enabled=true
 ```
 
-* Configure Plume as a **FlowerDocs GUI** plugin: 
+- Configure Plume as a **FlowerDocs GUI** plugin:
 
 ```properties
 	plugins.routes.plume.path=/plume/**
 	plugins.routes.plume.url=http://localhost:8080/plume
 ```
 
-For more information on the use of **FlowerDocs GUI** plug-ins, see the documentation [here](/docs/flowerdocs/config/gui/plugins). 
+For more information on the use of **FlowerDocs GUI** plug-ins, see the documentation [here](/docs/flowerdocs/config/gui/plugins).

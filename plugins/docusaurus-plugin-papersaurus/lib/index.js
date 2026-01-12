@@ -5,28 +5,48 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
+var __createBinding =
+    (this && this.__createBinding) ||
+    (Object.create
+        ? function (o, m, k, k2) {
+              if (k2 === undefined) k2 = k;
+              Object.defineProperty(o, k2, {
+                  enumerable: true,
+                  get: function () {
+                      return m[k];
+                  },
+              });
+          }
+        : function (o, m, k, k2) {
+              if (k2 === undefined) k2 = k;
+              o[k2] = m[k];
+          });
+var __setModuleDefault =
+    (this && this.__setModuleDefault) ||
+    (Object.create
+        ? function (o, v) {
+              Object.defineProperty(o, "default", { enumerable: true, value: v });
+          }
+        : function (o, v) {
+              o["default"] = v;
+          });
+var __importStar =
+    (this && this.__importStar) ||
+    function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null)
+            for (var k in mod)
+                if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
+                    __createBinding(result, mod, k);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+var __importDefault =
+    (this && this.__importDefault) ||
+    function (mod) {
+        return mod && mod.__esModule ? mod : { default: mod };
+    };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateOptions = void 0;
 const generate_1 = require("./generate");
@@ -43,7 +63,7 @@ function loadConfig(configPath) {
 function default_1(_context, options) {
     let pluginOptions = (0, validateOptions_1.processOptions)(options);
     return {
-        name: 'docusaurus-plugin-papersaurus',
+        name: "docusaurus-plugin-papersaurus",
         injectHtmlTags() {
             var _a;
             if (!pluginOptions.addDownloadButton) {
@@ -52,8 +72,9 @@ function default_1(_context, options) {
             const CWD = process.cwd();
             const siteConfig = loadConfig(`${CWD}/docusaurus.config.js`);
             return {
-                headTags: [`
-        ${(pluginOptions.jQueryUrl ? "<script src='" + pluginOptions.jQueryUrl + "'></script>" : "")}
+                headTags: [
+                    `
+        ${pluginOptions.jQueryUrl ? "<script src='" + pluginOptions.jQueryUrl + "'></script>" : ""}
         <script>
           var pdfData = {};
 
@@ -169,13 +190,16 @@ function default_1(_context, options) {
                 setInterval(checkAndInsertPdfButtons, 1000);
               });
           });
-        </script>`
+        </script>`,
                 ],
             };
         },
         async postBuild(props) {
             let forceBuild = process.env.BUILD_PDF || "";
-            if ((pluginOptions.autoBuildPdfs && !forceBuild.startsWith("0")) || forceBuild.startsWith("1")) {
+            if (
+                (pluginOptions.autoBuildPdfs && !forceBuild.startsWith("0")) ||
+                forceBuild.startsWith("1")
+            ) {
                 await (0, generate_1.generatePdfFiles)(_context.outDir, pluginOptions, props);
             }
         },
@@ -183,4 +207,9 @@ function default_1(_context, options) {
 }
 exports.default = default_1;
 var validateOptions_2 = require("./validateOptions");
-Object.defineProperty(exports, "validateOptions", { enumerable: true, get: function () { return validateOptions_2.validateOptions; } });
+Object.defineProperty(exports, "validateOptions", {
+    enumerable: true,
+    get: function () {
+        return validateOptions_2.validateOptions;
+    },
+});

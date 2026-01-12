@@ -9,6 +9,7 @@ version: "2.9.0" # ex of format: 2.2.1
 major_version: "2" # minor version of the release note    ex: 2.2
 # description : "Stop and restart workers from UI, Filenet injector improvement, addition of Documentum extractor" # Heavily-keywords-charged sentence for short preview of the release note + google SEO
 ---
+
 ### Regression
 
 Workers : still alive after stopping Fast2 for Linux
@@ -29,7 +30,7 @@ Improve layout conversion for P8 annotations
 
 ExplorePlace : data not searchable without a type
 
-Dashboards : avoid start exception when dashboards are disabled 
+Dashboards : avoid start exception when dashboards are disabled
 
 OpenText : logging categories thrown an exception
 
@@ -91,22 +92,21 @@ SQLSource : Allow extraction of duplicated data
 
 SQLStatement : handles contents and annotations
 
-FileNet Extractor : silent fail for corrupted annotations 
+FileNet Extractor : silent fail for corrupted annotations
 
 FileNet Extraction : Check if punnet is not empty
 
 Improve layout conversion for P8 annotations with complex contents
 
-AWS SnowBall : connection details for injection 
+AWS SnowBall : connection details for injection
 
 AWS S3 : save old key when processing S3 objects as punnets
 
 OpenText : handles set data type for categories
 
-OpenText : Proxy password should be hidden 
+OpenText : Proxy password should be hidden
 
 OCR : Tesseract verify if output doc is corrupted
-
 
 <br /><br />
 And other minor improvements.

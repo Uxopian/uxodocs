@@ -3,7 +3,7 @@
     background: var(--ifm-background-color);
 }
 
-[data-theme='dark'] .documentationSection {
+[data-theme="dark"] .documentationSection {
     background: var(--ifm-background-color);
 }
 

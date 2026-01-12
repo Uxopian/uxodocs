@@ -1,8 +1,8 @@
 ---
 title: Prompts Management
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 05e60ee814299bcc6df549558a2894907e06cc96dd1bccab9d38e1a03c981c1c
 ---
 
@@ -31,9 +31,9 @@ The editor allows for granular configuration of prompt behavior.
 - **Content Editor:** Edit the **Thymeleaf template** used to generate the prompt dynamically.
 - **Model Configuration:** Set the default LLM provider (e.g., OpenAI) and model (e.g., GPT-4).
 - **Capabilities:** Toggle specific flags based on the prompt's needs:
-  - **Reasoning:** Enable or disable reasoning capabilities.
-  - **Multi-modal:** Flag if the prompt requires image/audio inputs.
-  - **Function Calling:** Flag if the prompt triggers external tools.
+    - **Reasoning:** Enable or disable reasoning capabilities.
+    - **Multi-modal:** Flag if the prompt requires image/audio inputs.
+    - **Function Calling:** Flag if the prompt triggers external tools.
 
 ### ROI Settings
 

@@ -1,9 +1,10 @@
 ---
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: 9d55040efb2af6b30920d691c79686ad585b677b57faa50fec385c45330d0660
 ---
+
 ![Blog cover](../assets/img/cookbooks/fromZiptoPunnet_cover.jpg)
 
 Dealing with archive files was never close to seldom in the past times, and surely won't ever be !
@@ -32,19 +33,17 @@ Each ZIP archive embeds a PDF content as flat file, alongside a JSON listing the
 
 The metadata contained in the JSON files are simply arranged like so:
 
-
 ```json
 {
-  "agency": "Agency_name",
-  "customerNumber": "658217041",
-  "contractNumber": "0121443-01",
-  "operationDate": "20170523000000",
-  "docType": "Bill",
-  "fiscalYear": "2016",
-  "treatmentType": "Archiving"
+    "agency": "Agency_name",
+    "customerNumber": "658217041",
+    "contractNumber": "0121443-01",
+    "operationDate": "20170523000000",
+    "docType": "Bill",
+    "fiscalYear": "2016",
+    "treatmentType": "Archiving"
 }
 ```
-
 
 ## 🤔 Where to go ?
 
@@ -65,9 +64,7 @@ Once accessible, the JSON file can be parsed by the [JSTransform](/docs/fast2/ca
 
 Not a big deal, right ? Let's then tackle this challenge right away, shall we !!
 
-
 ![TopGun GIF](../assets/img/cookbooks/top-gun_aircraft-salute.gif)
-
 
 <br/>
 <br/>
@@ -98,9 +95,7 @@ var doc = punnet.getDocumentList().get(0);
 // get JSON sub-content of ZIP-content of the document
 var zipContent = doc.getContentSet().getContent().get(0);
 var jsonContent = zipContent.getSubContents().get(1); // empirical decision, PDF comes first
-var bytes = manager
-  .getPunnetContentFactory()
-  .getContentAsByteArray(jsonContent);
+var bytes = manager.getPunnetContentFactory().getContentAsByteArray(jsonContent);
 
 var String = Java.type("java.lang.String");
 var lines = new String(bytes);
@@ -109,8 +104,7 @@ var lines = new String(bytes);
 var jsonObject = JSON.parse(lines);
 
 // Fetch all properties from existing fragment and create them as Document data
-for (pty in jsonObject)
-  doc.getDataSet().addData(pty, "String", jsonObject[pty]);
+for (pty in jsonObject) doc.getDataSet().addData(pty, "String", jsonObject[pty]);
 ```
 
 You might even bring it further, with content deletion or architectural changed of the punnet (e.g. bringing the PDF content as direct content in the punnet, while deleting the ZIP details as they are no longer required).

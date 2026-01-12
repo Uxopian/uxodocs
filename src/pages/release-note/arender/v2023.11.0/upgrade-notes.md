@@ -15,12 +15,11 @@ No architectural or configuration changes.
 
 - PDFOwl : 1.24-15 to 1.24-17
 
-
 ## Important
 
 ### Regression in ARender Internal Load Balancing (Versions 2023.0.0 - 2023.11.0)
 
-A regression has been identified in ARender versions from 2023.0.0 through 2023.11.0 (included) affecting internal load balancing when using multiple rendition URLs with the ```arender.server.rendition.hosts``` property.
+A regression has been identified in ARender versions from 2023.0.0 through 2023.11.0 (included) affecting internal load balancing when using multiple rendition URLs with the `arender.server.rendition.hosts` property.
 
 This issue will be resolved in version 2023.12.0.
 

@@ -1,13 +1,13 @@
 ---
 # Do not modify
-draft : false
+draft: false
 title: "Fast2 release notes - "
 date: 2022-05-04
 
 # To modify
 version: "2.5.0"
-major_version: "2"    # minor version of the release note
-description : "Switch from Elasticsearch to OpenSearch, faster results in Explorer, OCR integration, annotation-dedicatd SQL task"    # Heavily-keywords-charged sentence for short preview of the release note + google SEO
+major_version: "2" # minor version of the release note
+description: "Switch from Elasticsearch to OpenSearch, faster results in Explorer, OCR integration, annotation-dedicatd SQL task" # Heavily-keywords-charged sentence for short preview of the release note + google SEO
 ---
 
 ### Evolution
@@ -31,7 +31,6 @@ Spring Core & Spring Boot - Upgrade Spring version due to 2022-04 vulnerability
 UI - Create campaign name based on map name
 
 UI - Improve performance in RuntimeExplorer for large dataset
-
 
 ### Issue
 

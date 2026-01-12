@@ -1,32 +1,26 @@
 ---
 title: DELETE a conversion order
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 07f9f709d2bfb82b790e855c3688594ea5460acc3cd51695aeb68428cd30df87
 ---
-
-
-
-
-
-
-
 
 This API allows to delete a conversion order previously requested.
 
 ## API technical description
 
 Endpoint:
+
 ```bash
 DELETE /conversions/&lt;ConversionOrderId&gt;
 ```
 
 Resource path:
 
-| Variable             | Description                               |
-| :------------------- |:------------------------------------------|
-| conversionOderId     | The id of the conversion order to delete. |
+| Variable         | Description                               |
+| :--------------- | :---------------------------------------- |
+| conversionOderId | The id of the conversion order to delete. |
 
 ## Examples
 

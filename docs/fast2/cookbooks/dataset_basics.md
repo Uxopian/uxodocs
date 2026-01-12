@@ -1,13 +1,13 @@
 ---
 title: Datasets
 tags:
-  - boilerplate
-  - dataset
-  - java
-  - data
+    - boilerplate
+    - dataset
+    - java
+    - data
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: a644442927e0abd9e798cf9b94f23c749b0150ab1666aecfcbcd30fa4294f2df
 ---
 

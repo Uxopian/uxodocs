@@ -1,8 +1,8 @@
 ---
 title: Backup and Recovery
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: f0d9ddb2ebf39a3f920ed192d52e0736a9dc1dc7a3b161d16e2a92b5bf536c65
 ---
 
@@ -33,16 +33,16 @@ You only need to configure the directory path where backups should be stored.
 
 ```yaml
 prompts:
-  backup:
-    path: ${PROMPTS_BACKUP_PATH:./prompts/}
+    backup:
+        path: ${PROMPTS_BACKUP_PATH:./prompts/}
 ```
 
 **For Goals (`goals.yml`):**
 
 ```yaml
 goals:
-  backup:
-    path: ${GOALS_BACKUP_PATH:./goals/}
+    backup:
+        path: ${GOALS_BACKUP_PATH:./goals/}
 ```
 
 ### 📂 File Naming Convention
@@ -60,10 +60,10 @@ A backup file contains the raw definition of a tenant's configuration.
 ```yaml
 tenantId: Tenant-development
 prompts:
-  - id: basePrompt
-    role: SYSTEM
-    content: "..."
-    # ...
+    - id: basePrompt
+      role: SYSTEM
+      content: "..."
+      # ...
 ```
 
 ---
@@ -90,16 +90,16 @@ This method allows you to restore data by injecting the backup content directly 
 
 ```yaml
 prompts:
-  globals: [...]
+    globals: [...]
 
-  # Paste your backup here under 'tenants'
-  tenants:
-    - tenantId: Tenant-development # <--- From Backup
-      mergeStrategy: OVERRIDE # <--- ADD THIS MANUALLY
-      prompts: # <--- From Backup
-        - id: basePrompt
-          role: SYSTEM
-          content: "..."
+    # Paste your backup here under 'tenants'
+    tenants:
+        - tenantId: Tenant-development # <--- From Backup
+          mergeStrategy: OVERRIDE # <--- ADD THIS MANUALLY
+          prompts: # <--- From Backup
+              - id: basePrompt
+                role: SYSTEM
+                content: "..."
 ```
 
 5.  **Restart:** Restart `uxopian-ai`. The service will process the tenants list and apply the configuration to OpenSearch according to the `mergeStrategy`.
@@ -131,9 +131,9 @@ When using **Method 1**, the `mergeStrategy` field controls how the restored dat
 #### ➕ MERGE (Update/Patch)
 
 - **Behavior:**
-  - Updates items with matching IDs.
-  - Creates items that do not exist.
-  - Does **not** delete items that are in OpenSearch but not in the YAML.
+    - Updates items with matching IDs.
+    - Creates items that do not exist.
+    - Does **not** delete items that are in OpenSearch but not in the YAML.
 - **Use Case:** Applying configuration updates without losing data created by users since the backup.
 
 #### 🆕 CREATE_IF_MISSING (Safe Init)

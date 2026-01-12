@@ -3,80 +3,80 @@
    ======================================== */
 
 .hero--primary {
-  background: var(--gradient-sunset) !important;
-  background-color: transparent !important;
-  color: #fff;
+    background: var(--gradient-sunset) !important;
+    background-color: transparent !important;
+    color: #fff;
 }
 
 .bg-gradient-purple {
-  background-image: var(--gradient-purple) !important;
-  color: #fff;
+    background-image: var(--gradient-purple) !important;
+    color: #fff;
 }
 
 .bg-gradient-sunset {
-  background-image: var(--gradient-sunset) !important;
-  color: #fff;
+    background-image: var(--gradient-sunset) !important;
+    color: #fff;
 }
 
 .bg-gradient-green {
-  background-image: var(--gradient-green) !important;
-  color: #fff;
+    background-image: var(--gradient-green) !important;
+    color: #fff;
 }
 
 .bg-gradient-turquoise {
-  background-image: var(--gradient-turquoise) !important;
-  color: #fff;
+    background-image: var(--gradient-turquoise) !important;
+    color: #fff;
 }
 
 .bg-gradient-blue {
-  background-image: var(--gradient-blue) !important;
-  color: #fff;
+    background-image: var(--gradient-blue) !important;
+    color: #fff;
 }
 
 .text-uxo-purple-700 {
-  color: var(--uxo-purple-700) !important;
+    color: var(--uxo-purple-700) !important;
 }
 
 .text-uxo-purple-500 {
-  color: var(--uxo-purple-500) !important;
+    color: var(--uxo-purple-500) !important;
 }
 
 .text-uxo-purple-300 {
-  color: var(--uxo-purple-300) !important;
+    color: var(--uxo-purple-300) !important;
 }
 
 .button--primary,
 .ifm-button-primary,
 .ifm-btn--primary {
-  background-image: var(--gradient-purple) !important;
-  background-color: transparent !important;
-  border: none !important;
-  color: #ffffff !important;
-  box-shadow: none !important;
+    background-image: var(--gradient-purple) !important;
+    background-color: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
 }
 
 .button--sunset {
-  background-image: var(--gradient-sunset) !important;
-  color: #fff !important;
-  border: none !important;
+    background-image: var(--gradient-sunset) !important;
+    color: #fff !important;
+    border: none !important;
 }
 
 .button--green {
-  background-image: var(--gradient-green) !important;
-  color: #fff !important;
-  border: none !important;
+    background-image: var(--gradient-green) !important;
+    color: #fff !important;
+    border: none !important;
 }
 
 .button--turquoise {
-  background-image: var(--gradient-turquoise) !important;
-  color: #fff !important;
-  border: none !important;
+    background-image: var(--gradient-turquoise) !important;
+    color: #fff !important;
+    border: none !important;
 }
 
 .button--blue {
-  background-image: var(--gradient-blue) !important;
-  color: #fff !important;
-  border: none !important;
+    background-image: var(--gradient-blue) !important;
+    color: #fff !important;
+    border: none !important;
 }
 
 .button--primary:focus,
@@ -86,6 +86,6 @@
 .button--green:focus,
 .button--turquoise:focus,
 .button--blue:focus {
-  outline: 2px solid var(--ifm-color-primary-lightest);
-  outline-offset: 2px;
+    outline: 2px solid var(--ifm-color-primary-lightest);
+    outline-offset: 2px;
 }

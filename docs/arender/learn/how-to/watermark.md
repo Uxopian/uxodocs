@@ -1,30 +1,22 @@
 ---
 title: Watermarks
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: fb49613691d046eaf5b3978886c126c402e37a7ee93f01c909b11a7ca9132faa
 ---
-
-
-
-
-
-
 
 This guide will help you configure ARender to use watermarks.
 
 ## Use ARender default Watermark
 
-A pre-configured watermark exists in ARender. Its content is: *Viewed by $USERNAME$ at $TIMESTAMP$*
+A pre-configured watermark exists in ARender. Its content is: _Viewed by $USERNAME$ at $TIMESTAMP$_
 $USERNAME$ will be replaced with the current user name
 $TIMESTAMP$ will be replaced with the current time and time
 
 ### Configuration
 
-To activate this watermark on all documents you need to add the below properties to ARender server configuration (*arender-server-custom-vanilla.properties*)
-
-
+To activate this watermark on all documents you need to add the below properties to ARender server configuration (_arender-server-custom-vanilla.properties_)
 
 ```cfg
 # This allows to configure a watermark provider for the type of watermark
@@ -36,8 +28,6 @@ arender.watermark.activate.on.startup=true
 arender.server.process.annotations.rendition=true
 ```
 
-
-
 ### Activation
 
 Simply restart ARender web application and you will see watermarks on each page of the document
@@ -48,8 +38,6 @@ Simply restart ARender web application and you will see watermarks on each page 
 
 You can create the watermark of your choice by configuring its style and its text content (with variables like the date of the day and its User Name).
 Below the default ARender watermark.
-
-
 
 ```xml
 <bean id="customWatermark" class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
@@ -74,28 +62,23 @@ Below the default ARender watermark.
 </bean>
 ```
 
-
-
 #### Create you own watermark
 
 To create your own watermark:
 
-- Copy the above content in your specific ARender configuration (*arender-custom-server-integration.xml*)
+- Copy the above content in your specific ARender configuration (_arender-custom-server-integration.xml_)
 - Change the bean ID
-- Define its style and its textual content by modifying properties values under *annotationStyle*
+- Define its style and its textual content by modifying properties values under _annotationStyle_
 
 #### Configure the use of your own watermark
 
-Add the below property to ARender server configuration (*configurations/arender-custom-server.properties*).
+Add the below property to ARender server configuration (_configurations/arender-custom-server.properties_).
 The value is the id of the bean you just created.
-
 
 ```cfg
 # Default watermark used when watermarks are activated on startup
 arender.watermark.bean.name=ChangeWithYouBeanId
 ```
-
-
 
 ### Activate your watermark
 

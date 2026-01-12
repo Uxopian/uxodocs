@@ -1,22 +1,17 @@
 ---
 title: DELETE a transformation order
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 4fa9fbf2c277d4db1293790918c71498b5e1794cd0e5e5eec9407a24608bd4fd
 ---
-
-
-
-
-
-
 
 This API allows to delete a transformation order previously requested.
 
 ## API technical description
 
 Endpoint :
+
 ```bash
 DELETE /transformations/<transformationOrderId>
 ```

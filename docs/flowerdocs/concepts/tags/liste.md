@@ -1,21 +1,18 @@
 ---
 title: List
 description: Use tags linked to lists.
-date: '2018-03-07T13:21:01+02:00'
+date: "2018-03-07T13:21:01+02:00"
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: 47d66c127ba33ef77f1cace6dac9304e81a7e0a42b4c7a5f133e8c10d020eca1
 ---
 
+This section describes the different types of list-based tags:
 
-
-This section describes the different types of list-based tags: 
-
-* Choice list `CHOICELIST`
-* Icon list `ICON`
-* Free list `FREELIST`
-
+- Choice list `CHOICELIST`
+- Icon list `ICON`
+- Free list `FREELIST`
 
 For performance reasons, we do not recommend the use of choice lists or icon lists with more than 1000 values.
 
@@ -24,12 +21,12 @@ For integration with larger volumes, please contact the FlowerDocs team.
 Also, FlowerDocs only displays a maximum of 100 items in the list, even if it contains more.
 Simply refine the selection to display items not displayed by default.
 
-
 # List of choices
 
 A choice list tag allows you to restrict the possible values of a tag to defined choices.
 
 :::note[Example]
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns2:TagClass xmlns="http://flower.com/docs/domain/common" xmlns:ns2="http://flower.com/docs/domain/tagclass"
@@ -48,17 +45,17 @@ A choice list tag allows you to restrict the possible values of a tag to defined
 	</ns2:allowedValues>
 </ns2:TagClass>
 ```
-:::
 
- 
+:::
 
 # Icon list
 
-An icon list tag is an extension of a list of choices for which an icon can be defined. 
+An icon list tag is an extension of a list of choices for which an icon can be defined.
 
 This icon must be defined with the appropriate CSS class using the library available in FlowerDocs [Font Awesome 5.15.4](https://fontawesome.com/icons?d=gallery&m=free)
 
 :::note[Example]
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns2:TagClass xmlns="http://flower.com/docs/domain/common" xmlns:ns2="http://flower.com/docs/domain/tagclass"
@@ -74,17 +71,17 @@ This icon must be defined with the appropriate CSS class using the library avail
 	</ns2:allowedValues>
 </ns2:TagClass>
 ```
+
 :::
 
-
-If two icons are to be placed side by side, an icon of the following type can be used: ``stacked(fas fa-exclamation red,fas fa-flag red)``.  
-
+If two icons are to be placed side by side, an icon of the following type can be used: `stacked(fas fa-exclamation red,fas fa-flag red)`.
 
 # Free list
 
-A free list tag is an extension of a choice list without validation. This type of list can be used to value a tag with values that are not known to FlowerDocs. 
+A free list tag is an extension of a choice list without validation. This type of list can be used to value a tag with values that are not known to FlowerDocs.
 
 :::note[Example]
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns2:TagClass xmlns="http://flower.com/docs/domain/common" xmlns:ns2="http://flower.com/docs/domain/tagclass"
@@ -93,10 +90,9 @@ A free list tag is an extension of a choice list without validation. This type o
 	<ns2:type>FREELIST</ns2:type>
 </ns2:TagClass>
 ```
-:::
 
+:::
 
 :::info
 This type of tag is particularly well suited to integration with third-party repositories (for example, using a [lookup](/docs/flowerdocs/apis/jsapi/lookup).
 :::
-

@@ -1,39 +1,34 @@
 ---
 title: POST a transformation order
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 1b9c56cc2eb9cbedc1281efe51852dba188f3feeedbda90ad4187a1870a389a5
 ---
-
-
-
-
-
-
 
 This API allows you to request a transformation order to create a new document in an expected format and according to transformation criteria.
 
 ## API technical description
 
 Endpoint :
+
 ```bash
 POST /transformations
 ```
 
 Body :
 
-| Attribute             | Type                        | Required | Description                                                       |
-| :-------------------- | :-------------------------- | :------- | :---------------------------------------------------------------- |
-| format                | String                      | yes      | Target document format                                            |
+| Attribute             | Type                              | Required | Description                                                       |
+| :-------------------- | :-------------------------------- | :------- | :---------------------------------------------------------------- |
+| format                | String                            | yes      | Target document format                                            |
 | transformationDetails | List&lt;TransformationDetails&gt; | yes      | The list of transformation details                                |
-| annotations           | Annotations                 | no       | Annotations correctly built according to the referenced documents |
+| annotations           | Annotations                       | no       | Annotations correctly built according to the referenced documents |
 
 Response :
 
 | Attribute             | Type                  | Description                                                                                                                                                 |
 | :-------------------- | :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| transformationOrderId | TransformationOrderId | Transformation order ID.<br/>This will can permit you to use other APIs like the one to retrieve some information about the transformation or to delete it.  |
+| transformationOrderId | TransformationOrderId | Transformation order ID.<br/>This will can permit you to use other APIs like the one to retrieve some information about the transformation or to delete it. |
 
 ## Examples
 
@@ -128,6 +123,7 @@ curl -X 'POST' \
 ### Burn annotations in a document
 
 The call below uses the same build request as in the previous example, but adds the following annotations:
+
 - A "Square" type annotation from page 1 of document docId1
 - A "Freetext" type annotation from page 1 of the document docId2
 - A "Text" type annotation from page 1 of the document docId1

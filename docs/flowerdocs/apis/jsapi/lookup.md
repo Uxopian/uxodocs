@@ -1,12 +1,11 @@
 ---
 title: Lookups
-date: '2011-03-28T13:20:01+02:00'
+date: "2011-03-28T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 18cd6660d1e445e045c61f74eb44cc7e1fd52f558ee129e0b3ef5cf129d1a49c
 ---
-
 
 A lookup involves retrieving data from a third-party or other repository, and building dynamic lists of values. This mechanism enhances the user experience and enriches the data stored or retrieved through FlowerDocs.
 
@@ -14,19 +13,19 @@ This functionality is based on the notion of plug-ins, which can be used to exec
 
 # Lookup plugins
 
-__Example :__
+**Example :**
 
-A lookup plugin can be defined in JavaScript using the API provided. To do this, you need to instantiate a `LookupPlugin` object, as shown in the example below. A plugin of this type has a `LookupHandler` called when the lookup is executed to provide FlowerDocs with a list of matching results. 
+A lookup plugin can be defined in JavaScript using the API provided. To do this, you need to instantiate a `LookupPlugin` object, as shown in the example below. A plugin of this type has a `LookupHandler` called when the lookup is executed to provide FlowerDocs with a list of matching results.
 
 ```javascript
 var lookupPlugin = new LookupPlugin();
-lookupPlugin.setLookupHandler(function(fieldName, fieldValue, callback){
-	var results = new Array();
-	callback.onSuccess(results);
+lookupPlugin.setLookupHandler(function (fieldName, fieldValue, callback) {
+    var results = new Array();
+    callback.onSuccess(results);
 });
 ```
 
-Each plugin must then be made available to the application. The snipet below shows how to register the plugin where `lookupId` corresponds to the lookup name.  
+Each plugin must then be made available to the application. The snipet below shows how to register the plugin where `lookupId` corresponds to the lookup name.
 
 ```javascript
 var lookupAPI = JSAPI.get().getLookupAPI();
@@ -41,44 +40,42 @@ Lookups stored in the application can be used in a variety of ways, depending on
 
 Here's the code for executing a lookup:
 
-__Example :__ Executing a lookup ``SampleLookup``
+**Example :** Executing a lookup `SampleLookup`
 
 ```javascript
-JSAPI.get().getLookupAPI().lookup("SampleLookup" ,"BusinessReference", "ref123", function(results) {
-	// Using lookup results
-});
+JSAPI.get()
+    .getLookupAPI()
+    .lookup("SampleLookup", "BusinessReference", "ref123", function (results) {
+        // Using lookup results
+    });
 ```
 
-The ``results`` object is an array of ``LookupResult`` objects exposing the methods: 
+The `results` object is an array of `LookupResult` objects exposing the methods:
 
-| Functions                                  | Description                                                                    |
-|--------------------------------------------|--------------------------------------------------------------------------------|
-|getKey()                                    | Retrieves the key of a result (i.e. symbolic name)                 |        
-|getValue()                                  | Retrieves the value or label of a result                      |        
+| Functions  | Description                                        |
+| ---------- | -------------------------------------------------- |
+| getKey()   | Retrieves the key of a result (i.e. symbolic name) |
+| getValue() | Retrieves the value or label of a result           |
 
-
-In this example, we execute the ``LookupPlugin`` whose identifier is ``SampleLookup`` with the tag name and value as parameters. By reacting to the modification of its value, it is then possible to modify the list of proposed values according to the user's input.
+In this example, we execute the `LookupPlugin` whose identifier is `SampleLookup` with the tag name and value as parameters. By reacting to the modification of its value, it is then possible to modify the list of proposed values according to the user's input.
 
 <br/>
 *In these examples, the `SampleLookup` lookup is used to suggest values for the `Amount` tag, (either as a suggestion or as a closed list).*
 
-__Example :__ Suggested value for a tag  
+**Example :** Suggested value for a tag
 
 ```javascript
-formAPI.registerForFieldChange(“Amount", function(fieldName, fieldValue) {			
+formAPI.registerForFieldChange(“Amount", function(fieldName, fieldValue) {
 	JSAPI.get().getLookupAPI().lookup(“SampleLookup”,”Amount", fieldValue, function(results) {
 		formAPI.suggest("Amount", results);
 	});
 });
 ```
 
-
-
-__Example:__ Definition of allowed values in a list
-
+**Example:** Definition of allowed values in a list
 
 ```javascript
-formAPI.registerForFieldChange(“Amount", function(fieldName, fieldValue) {			
+formAPI.registerForFieldChange(“Amount", function(fieldName, fieldValue) {
 	JSAPI.get().getLookupAPI().lookup(“SampleLookup”,”Amount", fieldValue, function(results) {
 		var restrictedAllowedValues = new Array();
 		for ( var i in results) {
@@ -105,13 +102,13 @@ function buildAllowedValue(symbolicName, label) {
 
 ## Link with a tag
 
-This JS API also provides the ability to automatically link a tag from the return of a ``LookupPlugin``. 
-This can be done using the ``function bindFieldOnLookup(String tagName, String lookupId)`` where : 
+This JS API also provides the ability to automatically link a tag from the return of a `LookupPlugin`.
+This can be done using the `function bindFieldOnLookup(String tagName, String lookupId)` where :
 
-* ``tagName`` is the identifier of the tag concerned 
-* ``lookupId`` is the identifier of the ``LookupPlugin`` to be used. 
+- `tagName` is the identifier of the tag concerned
+- `lookupId` is the identifier of the `LookupPlugin` to be used.
 
-__Example :__ Binding a tag on the lookup `userLookup`
+**Example :** Binding a tag on the lookup `userLookup`
 
 ```javascript
 formAPI.bindFieldOnLookup("DestinatairePourInfo", "userLookup");

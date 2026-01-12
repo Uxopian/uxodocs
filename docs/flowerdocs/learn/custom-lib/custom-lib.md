@@ -1,16 +1,15 @@
 ---
 title: Customised library
 description: Develop a Java library to override a Core behavior.
-date: '2020-02-01T12:20:01+02:00'
+date: "2020-02-01T12:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: e69cc88a1d5fbda82d3034d69905c895898b6396c081ba3c9e7e27529c5964b6
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-
 
 # Goal
 
@@ -23,11 +22,10 @@ In fact, we are going to add to each user token a custom attribute named `custom
 ## Maven project
 
 To start developing the custom library, first open your favorite IDE, then create a new Maven project from the following POM.
-In this module, we will need the following two dependencies: 
+In this module, we will need the following two dependencies:
 
-* Spring Boot: to take advantage of the framework's configuration mechanisms, so that the library can be used by **FlowerDocs Core**
-* FlowerDocs Core Services to override the default token generator used by the service layer
-
+- Spring Boot: to take advantage of the framework's configuration mechanisms, so that the library can be used by **FlowerDocs Core**
+- FlowerDocs Core Services to override the default token generator used by the service layer
 
 <Tabs>
   <TabItem value="pom-xml" label="pom.xml">
@@ -54,8 +52,7 @@ In this module, we will need the following two dependencies:
 </project>
 ```
 
-
-```
+````
 
   </TabItem>
 </Tabs>
@@ -87,12 +84,10 @@ public class CustomTokenHelper extends JWTTokenHelper
         return super.generate(user, validityTime);
 
 
-```
+````
 
   </TabItem>
 </Tabs>
-
-
 
 ## Auto-configuration
 
@@ -124,8 +119,7 @@ public class SampleLibAutoConfiguration
   </TabItem>
 </Tabs>
 
-
-For this configuration class to be loaded automatically by the Auto-configuration mechanism, it must be referenced in a `META-META-INF/spring.factories` file. 
+For this configuration class to be loaded automatically by the Auto-configuration mechanism, it must be referenced in a `META-META-INF/spring.factories` file.
 With Maven, this file must be placed in the `src/main/resources` directory of your project.
 
 <Tabs>
@@ -138,7 +132,6 @@ com.flower.samples.SampleLibAutoConfiguration
 
   </TabItem>
 </Tabs>
-
 
 ## Compilation
 
@@ -155,19 +148,18 @@ All you need to do is copy the library into this directory with the same user as
 
 ## Executable JAR
 
-When the Core is started as an executable JAR with a command such as `java -jar`, the custom library must be manually added to the JVM classpath. 
+When the Core is started as an executable JAR with a command such as `java -jar`, the custom library must be manually added to the JVM classpath.
 To do this, use the `-cp` parameter.
 
 # Test
 
-* Generate a token (e.g. using Swagger `/core/swagger-ui/index.html`) using the: 
-    * Scope
-    * User identifier
-    * Password
+- Generate a token (e.g. using Swagger `/core/swagger-ui/index.html`) using the:
+    - Scope
+    - User identifier
+    - Password
 
-* From the generated token: 
-    * Open a browser and go to [jwt.io](https://jwt.io/) 
-    * Paste the generated token into the _Encoded_ field
+- From the generated token:
+    - Open a browser and go to [jwt.io](https://jwt.io/)
+    - Paste the generated token into the _Encoded_ field
 
 The `custom` attribute added by the `CustomTokenHelper` object is indeed present in the attributes added to the token.
-

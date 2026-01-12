@@ -1,8 +1,8 @@
 ---
 title: Global Statistics
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 7b967d44c1110ea500348bf2f4737acfc81b3ab912afc8e532488402019dab7f
 ---
 

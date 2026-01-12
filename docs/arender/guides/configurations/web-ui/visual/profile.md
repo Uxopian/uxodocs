@@ -1,16 +1,10 @@
 ---
 title: Profiles
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: feadc7efaea624471e89028d6cef7366210e0d456f8aabe0ef71131e9a456c31
 ---
-
-
-
-
-
-
 
 ## Introduction
 
@@ -39,28 +33,24 @@ Properties are listed and commented in the file **configurations/arender-custom-
 
 #### Standalone
 
-- Create a file named for example *newProfile.properties*
+- Create a file named for example _newProfile.properties_
 - Add to this file the properties you want to modify (for example:
   `visualization.rotation.save.enabled=true`)
 - Save the file and add it to the **configurations** folder of the ARender Web-UI jar
 
-
-To trigger the use of this specific profile, add to the URL the parameter *props* and the name of the profile (without its extension):
+To trigger the use of this specific profile, add to the URL the parameter _props_ and the name of the profile (without its extension):
 
 `http://localhost:8080/?url=../samples/arender.pdf&amp;props=newProfile`
-
 
 #### Docker
 
-- Create a file named for example *newProfile.properties*
+- Create a file named for example _newProfile.properties_
 - Add to this file the properties you want to modify (for example:
   `visualization.rotation.save.enabled=true`)
 - Save the file.
-- When using "docker run", use a volume to place the file *newProfile.properties* in */home/arender/ARenderConfiguration/*
-Example of volume : docker run -e ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://your_ip_rendition:8761 -v C:\newProfile.properties:/home/arender/ARenderConfiguration/newProfile.properties  -p 127.0.0.1:8080:8080 your_image_id
+- When using "docker run", use a volume to place the file _newProfile.properties_ in _/home/arender/ARenderConfiguration/_
+  Example of volume : docker run -e ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://your_ip_rendition:8761 -v C:\newProfile.properties:/home/arender/ARenderConfiguration/newProfile.properties -p 127.0.0.1:8080:8080 your_image_id
 
-
-To trigger the use of this specific profile, add to the URL the parameter *props* and the name of the profile (without its extension):
+To trigger the use of this specific profile, add to the URL the parameter _props_ and the name of the profile (without its extension):
 
 `http://localhost:8080/?url=../samples/arender.pdf&amp;props=newProfile`
-

@@ -1,31 +1,20 @@
 ---
 title: Document Builder
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: e66f5d108ceb9767f7e2f25a6760a2313039dcb2a0f8ec6764696833a748cbee
 ---
-
-
-
-
-
-
 
 ## Activate the document builder
 
 The document builder mode allows you to create a new document, alter or delete the desired document, organize and manage pages of the desired document.
 
-To active it, add the following property: 
-
-
+To active it, add the following property:
 
 ```cfg
 documentbuilder.enabled=true
 ```
-
-
-
 
 ## Access the document builder
 
@@ -42,7 +31,6 @@ You can decide to hide or display source documents by clicking on the document e
 
 ![image](/img/arender/features/builder/builder3.png)
 
-
 ## Create a new document
 
 In order to create a new document, click on the " + " button shown in
@@ -56,8 +44,9 @@ builder view:
 ![image](/img/arender/features/builder/builder5-en.png)
 
 You can rename a document by clicking on the title and then typing the
+
 ```javascript
-new name
+new name();
 ```
 
 ![image](/img/arender/features/builder/builder6.png)
@@ -89,7 +78,6 @@ To download your new document, click on the following icon
 
 ![image](/img/arender/features/builder/builder10.png)
 
-
 ## Delete a document from the document builder view
 
 To delete a document from the document builder view, click on the cross
@@ -108,14 +96,12 @@ to your new document:
 
 ![image](/img/arender/features/builder/builder12.png)
 
-
 ## Split a document
 
 To split a document in several documents, you have to create your new
 documents. Then drag and drop the pages you want in each new documents.
 
 ![image](/img/arender/features/builder/builder13.png)
-
 
 ## Reshape a document
 
@@ -135,7 +121,6 @@ You can delete a page from your document. Click on the red cross on the
 page to be deleted:
 
 ![image](/img/arender/features/builder/builder16.png)
-
 
 ## Exit the document builder mode
 

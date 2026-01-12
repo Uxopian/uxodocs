@@ -1,12 +1,11 @@
 ---
 title: Setting up the template
-date: '2000-02-01T13:20:01+02:00'
+date: "2000-02-01T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: c1c7007bceaa2e14f0377d5a1b37702d7e813b777289b4df9f056d8add66778c
 ---
-
 
 Using the client file as an example, we can test the setting up of a practical example.
 
@@ -19,12 +18,12 @@ To begin, create a string `ClientReference` tag class.
 
 To do this, follow the steps below:
 
-* Go to the admin console,
-* Open the `Components > Tag classes` section,
-* Click on the `+` button to start creation,
-* Select the value type `Character string` then go on to the next step,
-* In the form displayed, enter the `ReferenceClient` value as the identifier for this tag class,
-* Click on `Create`.
+- Go to the admin console,
+- Open the `Components > Tag classes` section,
+- Click on the `+` button to start creation,
+- Select the value type `Character string` then go on to the next step,
+- In the form displayed, enter the `ReferenceClient` value as the identifier for this tag class,
+- Click on `Create`.
 
 Congratulations! You have created the `ClientReference` tag class, which will be used to classify a client's documents within the same folder.
 
@@ -34,17 +33,16 @@ To create instances of client folders, you need to create the virtual folder cla
 
 To do this, follow the steps below:
 
-* Go to the admin console,
-* Open the `Components > Virtual folder classes` section,
-* Click on the `+` button to start creation,
-*  Click on the + button to start creation, In the form displayed, enter the `ClientFolder` value as the class identifier, and select `Security Total Control` as the Security value,
-* In the `Tags` tab, click the `Add` button and select the `ClientReference` tag class,
-* In the `Search` tab, click `Filters` then `Add` to initiate a new search to link the documents,
-* Check that there is an identifier for the search
-* Indicate 10 results to be displayed in `Display > Number of results`
-* Add a search criterion with the `ClientReference` identifier as its name, the `EQUALS_TO` operator and the variable `${tags.ReferenceClient}` as its value, 
-* Finally, click `Create`.
-
+- Go to the admin console,
+- Open the `Components > Virtual folder classes` section,
+- Click on the `+` button to start creation,
+- Click on the + button to start creation, In the form displayed, enter the `ClientFolder` value as the class identifier, and select `Security Total Control` as the Security value,
+- In the `Tags` tab, click the `Add` button and select the `ClientReference` tag class,
+- In the `Search` tab, click `Filters` then `Add` to initiate a new search to link the documents,
+- Check that there is an identifier for the search
+- Indicate 10 results to be displayed in `Display > Number of results`
+- Add a search criterion with the `ClientReference` identifier as its name, the `EQUALS_TO` operator and the variable `${tags.ReferenceClient}` as its value,
+- Finally, click `Create`.
 
 # Client documents
 
@@ -52,9 +50,9 @@ In order to create instances of client documents, it is necessary to create the 
 
 To do this, follow the steps below:
 
-* Go to the admin console,
-* Open the `Components > Document classes` section,
-* Click on the `+` button to start creation,
-* In the form displayed, enter the `ClientDocument` value as the identifier for this class and `Security Total control` as the Security value,
-* In the `Tags` tab, click the `Add` button and select the `ClientReference` tag class,
-* Finally, click `Create`.
+- Go to the admin console,
+- Open the `Components > Document classes` section,
+- Click on the `+` button to start creation,
+- In the form displayed, enter the `ClientDocument` value as the identifier for this class and `Security Total control` as the Security value,
+- In the `Tags` tab, click the `Add` button and select the `ClientReference` tag class,
+- Finally, click `Create`.

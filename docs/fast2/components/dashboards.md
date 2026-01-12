@@ -1,9 +1,10 @@
 ---
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: da288e7054ff230442bfaf80090a6796529b650d8148f3cc7ac0c354cde35485
 ---
+
 # Dashboards
 
 import Tabs from '@theme/Tabs';
@@ -18,7 +19,6 @@ Prior to the v2.5, Fast2 was relying on Kibana for data vizualisation. This comp
 However the configuration of these tools are very close (if not identical).
 
 :::
-
 
 The dashboard only communicates with the database (as illustrated in the [architecture section](/docs/fast2/getting-started/overall-concepts#architecture).
 
@@ -37,7 +37,6 @@ When Fast2 is booted up, it will by default look for the dashboard folder at the
 In case no dashboard folder is found, this step will be skipped after a given number of retries (which you can find the in the `./config/application.properties` file).
 
 The dashboards can still be disabled, even if they are available in the root folder of Fast2:
-
 
 <Tabs>
 <TabItem value="v2.4-" label="v2.4-">
@@ -128,7 +127,7 @@ The visualizations created from the dashboards add-on needs to be attached to th
 
 :::warning
 
-Make sure to set the *time filter* to _"I don't want to use the time filter"_ to prevent any issue when trying to pull the data out from the database.
+Make sure to set the _time filter_ to _"I don't want to use the time filter"_ to prevent any issue when trying to pull the data out from the database.
 
 :::
 
@@ -267,23 +266,23 @@ the final syntax is (for DSL -- <i>Dashboards Query Language</i> -- or KQL -- <i
 
 ```json
 {
-  "query": {
-    "bool": {
-      "should": [
-        {
-          "term": { "status.keyword": "ProcessedException" }
-        },
-        {
-          "bool": {
-            "must": [
-              { "term": { "status.keyword": "ProcessedOK" } },
-              { "term": { "stepName.keyword": "Last task" } }
+    "query": {
+        "bool": {
+            "should": [
+                {
+                    "term": { "status.keyword": "ProcessedException" }
+                },
+                {
+                    "bool": {
+                        "must": [
+                            { "term": { "status.keyword": "ProcessedOK" } },
+                            { "term": { "stepName.keyword": "Last task" } }
+                        ]
+                    }
+                }
             ]
-          }
         }
-      ]
     }
-  }
 }
 ```
 
@@ -400,7 +399,7 @@ Enter a relevant name (ex/ ContentSize-float), select the new type of this field
 
 ```js
 if (doc.containsKey("punnet.documents.data.ContentSize"))
-  return Float.parseFloat(doc["punnet.documents.data.ContentSize"].value);
+    return Float.parseFloat(doc["punnet.documents.data.ContentSize"].value);
 else return -1;
 ```
 

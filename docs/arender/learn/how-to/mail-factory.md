@@ -1,16 +1,10 @@
 ---
 title: Resolve mail conversion issue
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: c1975019e5f59599095d8b2eb2729efc527166de2f1f1ba7eb6ac283f0466690
 ---
-
-
-
-
-
-
 
 You probably have a configuration problem related to wkhtmltopdf.
 
@@ -25,7 +19,7 @@ X server problem, you need to install the xvfb package and make the
 following commands in your linux (adapting them to your wkhtmltopdf
 installation)
 
-``` bash
+```bash
 mv /usr/bin/wkhtmltopdf /usr/bin/wkhtmltopdf_nohead
 cp wkhtmltopdf_xvfb /usr/bin/wkhtmltopdf
 chmod a+x /usr/bin/wkhtmltopdf
@@ -33,7 +27,7 @@ chmod a+x /usr/bin/wkhtmltopdf
 
 The contents of the wkhtmltopdf_xvfb file are as follows:
 
-``` bash
+```bash
 #!/bin/bash
 xvfb-run -a -s "-screen 0 640x480x16" /usr/bin/wkhtmltopdf_nohead "$@"
 ```

@@ -1,8 +1,8 @@
 ---
 title: Core Concepts
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 5168f0ed48174bf1c45182c788b8c517c28af4bde64aef95bd2870e0c076fa62
 ---
 
@@ -49,8 +49,8 @@ A **Request** represents a single exchange (a "turn") within a conversation. Unl
 
 - **Structure**: A request consists of a list of inputs (what was sent) and an answer (what the AI generated) .
 - **Multi-Modal Content**: The Input block supports various content types. It is not limited to text; it can handle image content or references to prompt IDs and goal names .
-  - **Dynamic Images**: The image input type also supports **Thymeleaf templating**, allowing you to dynamically inject image data (e.g., ).
-  - **Constraint**: If using templating for images, the expression **must resolve to a raw Base64 string** representing the image.
+    - **Dynamic Images**: The image input type also supports **Thymeleaf templating**, allowing you to dynamically inject image data (e.g., ).
+    - **Constraint**: If using templating for images, the expression **must resolve to a raw Base64 string** representing the image.
 - **Token Tracking**: Every request logs inputTokenCount and outputTokenCount for precise cost monitoring .
 - **Feedback**: Each request can be tagged with user feedback (Good, Bad, or Neutral) to help tune performance over time .
 
@@ -77,5 +77,5 @@ A **Goal** is a high-level orchestration unit. It decouples the user's intent fr
 - **Global Stats**: Tracks total conversations, requests, tokens, and aggregated time saved .
 - **Time Series**: Provides activity data (requests, tokens, time saved) aggregated by time intervals (e.g., DAY) to visualize trends .
 - **Adoption & ROI**:
-  - **Feature Adoption**: Tracks the usage rate of advanced features like multi-modal and function calling .
-  - **Time Saved**: Ranks prompts by the total estimated hours they have saved users .
+    - **Feature Adoption**: Tracks the usage rate of advanced features like multi-modal and function calling .
+    - **Time Saved**: Ranks prompts by the total estimated hours they have saved users .

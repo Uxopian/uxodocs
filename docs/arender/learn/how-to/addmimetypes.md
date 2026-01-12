@@ -1,16 +1,10 @@
 ---
 title: Add new image/video mime types
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 8bf2f746a95ac22eddab23299c2013e570bb44f409d8090f906bb16463545e13
 ---
-
-
-
-
-
-
 
 If your rendition server does not possess all the mime types that you
 wish to use, it is then still possible that the rendition server could
@@ -20,14 +14,14 @@ In the specific case of video/image conversion, the full list of files
 that can opened by imagemagick/ffmpeg is long.
 
 If you wish to add a mime type, you just need to create/modify the
-*application.properties* file located in the modules/RenditionEngine 
-and *application-security.yaml* file located in the modules/TaskConversion folder of your rendition.
+_application.properties_ file located in the modules/RenditionEngine
+and _application-security.yaml_ file located in the modules/TaskConversion folder of your rendition.
 This file will override the basic configuration file.
 
-The *application.properties* at modules/RenditionEngine file with the default mime types,
+The _application.properties_ at modules/RenditionEngine file with the default mime types,
 to modify to add/remove the desired mime types:
 
-``` cfg
+```cfg
 
 # List of mime types that does not need conversion to be rendered
 arender.format.nativeMimeTypes=application/pdf,image/tiff,video/mp4
@@ -52,23 +46,24 @@ arender.format.conversionTargetMimeTypes.application-pdf=text/rtf,application/ms
   text/html,\
   text/plain
 ```
+
 <br/>
 
-The *application-security.yaml* at modules/TaskConversion file with the default mime types,
+The _application-security.yaml_ at modules/TaskConversion file with the default mime types,
 to modify to add/remove the desired mime types to the right converter:
 
-``` yaml
-
+```yaml
 app:
-  factoriesBeanNames:
-    imageFactory: "image/webp,image/png,image/jpeg,image/gif,image/x-ms-bmp,image/x-bmp,image/x-portable-bitmap,image/vnd.adobe.photoshop,image/x-eps,application/postscript,application/dicom,application/pcx,application/x-pcx,image/pcx,image/x-pc-paintbrush,image/x-pcx,zz-application/zz-winassoc-pcx,image/jp2,image/heif,image/wmf"
-    imageIOFactory: "image/tiff"
-    htmlFactory: "text/html"
-    genericConvertOffice: "${mime.type.msoffice.word},${mime.type.msoffice.rtf},${mime.type.libreoffice.text},
-                             ${mime.type.msoffice.excel},${mime.type.libreoffice.sheet},
-                             ${mime.type.msoffice.powerpoint},${mime.type.libreoffice.presentation},
-                             ${mime.type.msoffice.visio},${mime.type.libreoffice.graphics},
-                             ${mime.type.msoffice.project}"
-    pdfboxTextFactory: "text/plain"
-    videoConversionFactory: "video/mp4,audio/x-wav,audio/mp3,audio/mpeg,audio/x-mpeg,video/quicktime,video/3gpp,video/x-flv,video/mpeg,video/x-msvideo,video/x-matroska,video/x-ms-asf,audio/x-aiff,audio/mp4,video/gif,video/mp2p"
+    factoriesBeanNames:
+        imageFactory: "image/webp,image/png,image/jpeg,image/gif,image/x-ms-bmp,image/x-bmp,image/x-portable-bitmap,image/vnd.adobe.photoshop,image/x-eps,application/postscript,application/dicom,application/pcx,application/x-pcx,image/pcx,image/x-pc-paintbrush,image/x-pcx,zz-application/zz-winassoc-pcx,image/jp2,image/heif,image/wmf"
+        imageIOFactory: "image/tiff"
+        htmlFactory: "text/html"
+        genericConvertOffice:
+            "${mime.type.msoffice.word},${mime.type.msoffice.rtf},${mime.type.libreoffice.text},
+            ${mime.type.msoffice.excel},${mime.type.libreoffice.sheet},
+            ${mime.type.msoffice.powerpoint},${mime.type.libreoffice.presentation},
+            ${mime.type.msoffice.visio},${mime.type.libreoffice.graphics},
+            ${mime.type.msoffice.project}"
+        pdfboxTextFactory: "text/plain"
+        videoConversionFactory: "video/mp4,audio/x-wav,audio/mp3,audio/mpeg,audio/x-mpeg,video/quicktime,video/3gpp,video/x-flv,video/mpeg,video/x-msvideo,video/x-matroska,video/x-ms-asf,audio/x-aiff,audio/mp4,video/gif,video/mp2p"
 ```

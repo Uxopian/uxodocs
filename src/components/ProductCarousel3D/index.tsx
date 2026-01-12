@@ -1,66 +1,66 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import { useHistory } from '@docusaurus/router';
-import styles from './styles.module.css';
+import React, { useState, useEffect, useCallback } from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { useHistory } from "@docusaurus/router";
+import styles from "./styles.module.css";
 
 type Product = {
-  id: string;
-  label: string;
-  to: string;
-  logo: string;
-  gradient: string;
-  color: string;
-  description: string;
+    id: string;
+    label: string;
+    to: string;
+    logo: string;
+    gradient: string;
+    color: string;
+    description: string;
 };
 
 const PRODUCTS: Product[] = [
-  {
-    id: 'arender',
-    label: 'ARender',
-    to: '/uxodocs/releases?product=arender',
-    logo: '/img/arender/arender_logo_white.png',
-    gradient: 'linear-gradient(135deg, #4A8FEF 0%, #3A7EE5 50%, #2A6DD8 100%)',
-    color: '#4A8FEF',
-    description: 'Document Viewing Solution',
-  },
-  {
-    id: 'fast2',
-    label: 'Fast2',
-    to: '/uxodocs/releases?product=fast2',
-    logo: '/img/fast2/Fast2_favicon_white.png',
-    gradient: 'linear-gradient(135deg, #5CB8C7 0%, #4AA5B4 50%, #3A8F9D 100%)',
-    color: '#5CB8C7',
-    description: 'Content Migration Platform',
-  },
-  {
-    id: 'flowerdocs',
-    label: 'FlowerDocs',
-    to: '/uxodocs/releases?product=flowerdocs',
-    logo: '/img/flowerdocs/logo_flower_white.png',
-    gradient: 'linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #7E22CE 100%)',
-    color: '#A855F7',
-    description: 'Document Management System',
-  },
-  {
-    id: 'uxopian-ai',
-    label: 'Uxopian AI',
-    to: '/uxodocs/releases?product=uxopian-ai',
-    logo: '/img/uxo_white.png',
-    gradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #B45309 100%)',
-    color: '#F59E0B',
-    description: 'AI-Powered Solutions',
-  },
+    {
+        id: "arender",
+        label: "ARender",
+        to: "/uxodocs/releases?product=arender",
+        logo: "/img/arender/arender_logo_white.png",
+        gradient: "linear-gradient(135deg, #4A8FEF 0%, #3A7EE5 50%, #2A6DD8 100%)",
+        color: "#4A8FEF",
+        description: "Document Viewing Solution",
+    },
+    {
+        id: "fast2",
+        label: "Fast2",
+        to: "/uxodocs/releases?product=fast2",
+        logo: "/img/fast2/Fast2_favicon_white.png",
+        gradient: "linear-gradient(135deg, #5CB8C7 0%, #4AA5B4 50%, #3A8F9D 100%)",
+        color: "#5CB8C7",
+        description: "Content Migration Platform",
+    },
+    {
+        id: "flowerdocs",
+        label: "FlowerDocs",
+        to: "/uxodocs/releases?product=flowerdocs",
+        logo: "/img/flowerdocs/logo_flower_white.png",
+        gradient: "linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #7E22CE 100%)",
+        color: "#A855F7",
+        description: "Document Management System",
+    },
+    {
+        id: "uxopian-ai",
+        label: "Uxopian AI",
+        to: "/uxodocs/releases?product=uxopian-ai",
+        logo: "/img/uxo_white.png",
+        gradient: "linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #B45309 100%)",
+        color: "#F59E0B",
+        description: "AI-Powered Solutions",
+    },
 ];
 
 interface ProductCarousel3DProps {
-  current?: string;
-  onProductChange?: (productId: string) => void;
+    current?: string;
+    onProductChange?: (productId: string) => void;
 }
 
-const ProductLogo = React.memo(({ logo, label }: { logo: string, label: string }) => {
+const ProductLogo = React.memo(({ logo, label }: { logo: string; label: string }) => {
     const logoUrl = useBaseUrl(logo);
-    const fallback = useBaseUrl('/img/uxo.png');
-    
+    const fallback = useBaseUrl("/img/uxo.png");
+
     return (
         <img
             src={logoUrl}
@@ -78,110 +78,115 @@ const ProductLogo = React.memo(({ logo, label }: { logo: string, label: string }
 });
 
 export default function ProductCarousel3D({ current, onProductChange }: ProductCarousel3DProps) {
-  const history = useHistory();
-  const [activeId, setActiveId] = useState(current || PRODUCTS[0].id);
+    const history = useHistory();
+    const [activeId, setActiveId] = useState(current || PRODUCTS[0].id);
 
-  useEffect(() => {
-    if (current) setActiveId(current);
-  }, [current]);
+    useEffect(() => {
+        if (current) setActiveId(current);
+    }, [current]);
 
-  const activeIndex = PRODUCTS.findIndex((p) => p.id === activeId);
-  const safeActiveIndex = activeIndex === -1 ? 0 : activeIndex;
+    const activeIndex = PRODUCTS.findIndex((p) => p.id === activeId);
+    const safeActiveIndex = activeIndex === -1 ? 0 : activeIndex;
 
-  const handleCardClick = useCallback((e: React.MouseEvent, product: Product) => {
-    e.preventDefault();
+    const handleCardClick = useCallback(
+        (e: React.MouseEvent, product: Product) => {
+            e.preventDefault();
 
-    if (product.id === activeId) return;
+            if (product.id === activeId) return;
 
-    const realCard = document.getElementById(`card-${product.id}`);
-    
-    if (realCard) {
-      const clickedElement = e.currentTarget as HTMLElement;
-      const rect = clickedElement.getBoundingClientRect();
-      const isLeftClick = rect.left < window.innerWidth / 2;
+            const realCard = document.getElementById(`card-${product.id}`);
 
-      realCard.style.transition = 'none';
-      
-      if (isLeftClick) {
-        realCard.classList.remove(styles.posFarRight);
-        realCard.classList.add(styles.posFarLeft);
-      } else {
-        realCard.classList.remove(styles.posFarLeft);
-        realCard.classList.add(styles.posFarRight);
-      }
+            if (realCard) {
+                const clickedElement = e.currentTarget as HTMLElement;
+                const rect = clickedElement.getBoundingClientRect();
+                const isLeftClick = rect.left < window.innerWidth / 2;
 
-      void realCard.offsetWidth;
-      realCard.style.transition = '';
-    }
+                realCard.style.transition = "none";
 
-    setActiveId(product.id);
+                if (isLeftClick) {
+                    realCard.classList.remove(styles.posFarRight);
+                    realCard.classList.add(styles.posFarLeft);
+                } else {
+                    realCard.classList.remove(styles.posFarLeft);
+                    realCard.classList.add(styles.posFarRight);
+                }
 
-    if (onProductChange) {
-        onProductChange(product.id);
-    } else {
-        history.push(product.to);
-    }
-  }, [activeId, history, onProductChange]);
+                void realCard.offsetWidth;
+                realCard.style.transition = "";
+            }
 
-  const getPositionClass = useCallback((index: number, centerIndex: number, total: number) => {
-    let offset = index - centerIndex;
-    if (offset > total / 2) offset -= total;
-    if (offset < -total / 2) offset += total;
+            setActiveId(product.id);
 
-    if (offset === 0) return styles.posCenter;
-    if (offset === 1) return styles.posRight;
-    if (offset === -1) return styles.posLeft;
-    
-    if (offset === 2 || offset === -2) return styles.posFarRight; 
-    
-    return styles.posHidden;
-  }, []);
+            if (onProductChange) {
+                onProductChange(product.id);
+            } else {
+                history.push(product.to);
+            }
+        },
+        [activeId, history, onProductChange]
+    );
 
-  const renderCard = (product: Product) => {
-    const index = PRODUCTS.findIndex(p => p.id === product.id);
-    const positionClass = getPositionClass(index, safeActiveIndex, PRODUCTS.length);
+    const getPositionClass = useCallback((index: number, centerIndex: number, total: number) => {
+        let offset = index - centerIndex;
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
 
-    const isActive = product.id === activeId;
+        if (offset === 0) return styles.posCenter;
+        if (offset === 1) return styles.posRight;
+        if (offset === -1) return styles.posLeft;
+
+        if (offset === 2 || offset === -2) return styles.posFarRight;
+
+        return styles.posHidden;
+    }, []);
+
+    const renderCard = (product: Product) => {
+        const index = PRODUCTS.findIndex((p) => p.id === product.id);
+        const positionClass = getPositionClass(index, safeActiveIndex, PRODUCTS.length);
+
+        const isActive = product.id === activeId;
+
+        return (
+            <a
+                id={`card-${product.id}`}
+                key={product.id}
+                href={product.to}
+                onClick={(e) => handleCardClick(e, product)}
+                className={`${styles.productCard} ${positionClass} ${isActive ? styles.active : ""}`}
+                style={
+                    {
+                        "--card-gradient": product.gradient,
+                        "--card-color": product.color,
+                    } as React.CSSProperties
+                }
+            >
+                <div className={styles.cardInner}>
+                    <div className={styles.cardContent}>
+                        <div className={styles.logoContainer}>
+                            <div className={styles.logoBackdrop} />
+                            <ProductLogo logo={product.logo} label={product.label} />
+                        </div>
+                        <h3 className={styles.productName}>{product.label}</h3>
+                        <p className={styles.productDescription}>{product.description}</p>
+                    </div>
+                </div>
+            </a>
+        );
+    };
 
     return (
-      <a
-        id={`card-${product.id}`}
-        key={product.id}
-        href={product.to}
-        onClick={(e) => handleCardClick(e, product)}
-        className={`${styles.productCard} ${positionClass} ${isActive ? styles.active : ''}`}
-        style={{
-          '--card-gradient': product.gradient,
-          '--card-color': product.color,
-        } as React.CSSProperties}
-      >
-        <div className={styles.cardInner}>
-          <div className={styles.cardContent}>
-            <div className={styles.logoContainer}>
-              <div className={styles.logoBackdrop} />
-              <ProductLogo logo={product.logo} label={product.label} />
+        <div className={styles.carouselContainer}>
+            <div className={styles.carouselWrapper}>
+                <div className={styles.cardsScene}>
+                    {PRODUCTS.map((product) => renderCard(product))}
+                </div>
             </div>
-            <h3 className={styles.productName}>{product.label}</h3>
-            <p className={styles.productDescription}>{product.description}</p>
-          </div>
-        </div>
-      </a>
-    );
-  };
 
-  return (
-    <div className={styles.carouselContainer}>
-      <div className={styles.carouselWrapper}>
-        <div className={styles.cardsScene}>
-          {PRODUCTS.map(product => renderCard(product))}
+            <div className={styles.backgroundEffects}>
+                <div className={styles.blob1}></div>
+                <div className={styles.blob2}></div>
+                <div className={styles.blob3}></div>
+            </div>
         </div>
-      </div>
-      
-      <div className={styles.backgroundEffects}>
-        <div className={styles.blob1}></div>
-        <div className={styles.blob2}></div>
-        <div className={styles.blob3}></div>
-      </div>
-    </div>
-  );
+    );
 }

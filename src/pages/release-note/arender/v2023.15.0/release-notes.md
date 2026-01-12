@@ -8,11 +8,11 @@ date: "2025-10-31"
 
 ## Overview
 
-ARender 2023.15.0 is a minor version that introduces: critical stability fixes, additional configuration options for 
+ARender 2023.15.0 is a minor version that introduces: critical stability fixes, additional configuration options for
 clustering and load distribution, security upgrades, and a new feature to create hyperlinks from
 rectangular zones.
 
-⚠️ **This release is strongly recommended for all production environments**, as it resolves major issues that could lead to 
+⚠️ **This release is strongly recommended for all production environments**, as it resolves major issues that could lead to
 blocked sessions or rendering failures.
 
 ## Prerequisites
@@ -24,11 +24,11 @@ blocked sessions or rendering failures.
 ## User Perspective
 
 **Hyperlink creation from zones**  
-Users can now create hyperlinks not only from selected text but also from any rectangular zone, allowing linking over 
+Users can now create hyperlinks not only from selected text but also from any rectangular zone, allowing linking over
 signatures, images, or blank areas. (AR-17701)
 
-To avoid any disrupion in the user interface, this feature is disabled by default, more information see the property 
-**topPanel.docLink.enableZoneSelection** described in the documentation 
+To avoid any disrupion in the user interface, this feature is disabled by default, more information see the property
+**topPanel.docLink.enableZoneSelection** described in the documentation
 [here](/features/hyperlink#document-linking).
 ![Create hyperlink from zone](/uxodocs/img/arender/annotations/ZonaldocLink.gif)
 
@@ -36,12 +36,14 @@ To avoid any disrupion in the user interface, this feature is disabled by defaul
 
 **Load balancing – Round Robin support**  
 New configuration option added to the weather polling strategy to allow round-robin distribution of load across multiple
-Rendition nodes. (AR-17736)  
-* See the related documentation [here](/guides/configurations/web-ui/server/rendition-host#rendition-load-document-balancing).
+Rendition nodes. (AR-17736)
+
+- See the related documentation [here](/guides/configurations/web-ui/server/rendition-host#rendition-load-document-balancing).
 
 **Mixpanel instrumentation improvements**  
 ARender now tracks detailed analytics like Time to First View, Viewing Duration, and Page Count across document open/close events. (AR-17787)
-* See the related documentation [here](/learn/product-analytics/_index).
+
+- See the related documentation [here](/learn/product-analytics/_index).
 
 **Docker packaging fixes**  
 Missing connectors in Alfresco/FileNet images have been resolved. (AR-17825)
@@ -49,14 +51,15 @@ Missing connectors in Alfresco/FileNet images have been resolved. (AR-17825)
 ## Exploitation Perspective
 
 **Critical stability fixes:**
-* Resolved an issue where connections remained blocked when errors occurred and max.connections=1. (AR-17845)
-* Fixed CR/LF characters in document titles causing error 400 in logs. (AR-17842)
-* Avoid unnecessary calls when Micrometer is disabled. (AR-17844)
+
+- Resolved an issue where connections remained blocked when errors occurred and max.connections=1. (AR-17845)
+- Fixed CR/LF characters in document titles causing error 400 in logs. (AR-17842)
+- Avoid unnecessary calls when Micrometer is disabled. (AR-17844)
 
 ## Changelog
 
 | Summary                                                                            | Type        | Internal ticket                                           | Linked Issues                                                                                                                                                                |
-|------------------------------------------------------------------------------------|-------------|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------------------------------------------------------------- | ----------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Spring updated to 2.7.18 / Boot 2.7.30                                             | Security    | [AR-17890](https://arondor.atlassian.net/browse/AR-17890) |                                                                                                                                                                              |
 | Hyperlink creation from rectangular zones                                          | New Feature | [AR-17701](https://arondor.atlassian.net/browse/AR-17701) | [TMAPR-6326](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6326)                                                                                        |
 | Connector JARs missing from Docker (Alfresco/FileNet)                              | Regression  | [AR-17825](https://arondor.atlassian.net/browse/AR-17825) |                                                                                                                                                                              |
@@ -65,7 +68,7 @@ Missing connectors in Alfresco/FileNet images have been resolved. (AR-17825)
 | XLSX rendering timeout                                                             | Issue       | [AR-17484](https://arondor.atlassian.net/browse/AR-17484) | [TMAPR-6230](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6230)                                                                                        |
 | Rendering issue with email/zip + watermark                                         | Issue       | [AR-17488](https://arondor.atlassian.net/browse/AR-17488) | [TMAPR-6236](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6236)                                                                                        |
 | Load distribution strategy: Round Robin                                            | Issue       | [AR-17736](https://arondor.atlassian.net/browse/AR-17736) |                                                                                                                                                                              |
-| CCR/LF in doc titles → error 400	Issue                                             | Issue       | [AR-17842](https://arondor.atlassian.net/browse/AR-17842) | [TMAPR-6482](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6482), [TMAPR-6505](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6505) |
+| CCR/LF in doc titles → error 400 Issue                                             | Issue       | [AR-17842](https://arondor.atlassian.net/browse/AR-17842) | [TMAPR-6482](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6482), [TMAPR-6505](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6505) |
 | Avoid unnecessary micrometer calls                                                 | Issue       | [AR-17844](https://arondor.atlassian.net/browse/AR-17844) |                                                                                                                                                                              |
 | Connections blocked if error on document                                           | Issue       | [AR-17845](https://arondor.atlassian.net/browse/AR-17845) | [TMAPR-6482](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6482), [TMAPR-6576](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6576) |
 | Fix InvalidPathException for trailing spaces in doc titles                         | Issue       | [AR-17848](https://arondor.atlassian.net/browse/AR-17848) | [TMAPR-6483](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6483)                                                                                        |
@@ -74,7 +77,7 @@ Missing connectors in Alfresco/FileNet images have been resolved. (AR-17825)
 ## Download
 
 | Description                                                       | Binary                                                                                                                                                                                                | SHA-256                                                                                                                                                                                                     |
-|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ARender Rendition Server installer                                | [Download](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/micro/services/rendition-engine-installer/2023.15.0/rendition-engine-installer-2023.15.0-rendition.jar)  | [SHA-256](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/micro/services/rendition-engine-installer/2023.15.0/rendition-engine-installer-2023.15.0-rendition.jar.sha256)  |
 | ARender WEB-UI - Spring Boot Application - Standalone             | [Download](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-spring-boot-package/2023.15.0/arondor-arender-hmi-spring-boot-package-2023.15.0.zip) | [SHA-256](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-spring-boot-package/2023.15.0/arondor-arender-hmi-spring-boot-package-2023.15.0.zip.sha256) |
 | ARender HMI - J2EE EAR Application - FileNet 5.x                  | [Download](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-filenet-ear/2023.15.0/arondor-arender-hmi-filenet-ear-2023.15.0.ear)                 | [SHA-256](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-filenet-ear/2023.15.0/arondor-arender-hmi-filenet-ear-2023.15.0.ear.sha256)                 |

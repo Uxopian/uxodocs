@@ -1,9 +1,10 @@
 ---
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 73b0e72860863ff300f3655774468db76bad5856868cbc62d0810529962d9c33
 ---
+
 # Create a map
 
 :::warning
@@ -73,6 +74,7 @@ If you upload multiple times the same map, Fast2 will create a new copy of the m
 :::info
 
     Maps can only be deleted from the Configuration Place
+
 :::
 To go on the configuration place, click on the gear icon at the top right banner. Use the checkboxes to select the map(s) you want to delete then click on the bin icon.
 
@@ -130,20 +132,20 @@ Two tasks cannot be linked both ways.
 
 ### Configure link
 
-| Link condition         | Details                                                                                                                            |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| PatternCondition       | Set specific condition with java language                                                                                          |
+| Link condition         | Details                                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| PatternCondition       | Set specific condition with java language                                                                                           |
 | Otherwise              | Punnet which doesn't match other conditions will pass<br/>:warning: Consider using when a task has at least 2 multiple output links |
-| AlwaysTrue             | All punnets will pass, no matter what                                                                                              |
-| AlwaysFalse            | All punnets will be blocked, no matter what                                                                                        |
-| PunnetInException      | All punnets in exception will pass                                                                                                 |
-| ContentMimeTypeMatches | Filter depending on document mimetype                                                                                              |
-| NumberOfDocuments      | Filter depending on the number of document carried by the punnet                                                                   |
-| PunnetHasData          | If an expected data exists the punnet will pass (punnet level)                                                                     |
-| DocumentHasData        | If an expected data exists the punnet will pass (document level)                                                                   |
-| Or                     | Use multiple link conditions and if one of them is ok, the punnet will pass                                                        |
-| And                    | Use multiple link conditions and if all of them are ok, the punnet will pass                                                       |
-| Not                    | Use any link condition but with negatively                                                                                         |
+| AlwaysTrue             | All punnets will pass, no matter what                                                                                               |
+| AlwaysFalse            | All punnets will be blocked, no matter what                                                                                         |
+| PunnetInException      | All punnets in exception will pass                                                                                                  |
+| ContentMimeTypeMatches | Filter depending on document mimetype                                                                                               |
+| NumberOfDocuments      | Filter depending on the number of document carried by the punnet                                                                    |
+| PunnetHasData          | If an expected data exists the punnet will pass (punnet level)                                                                      |
+| DocumentHasData        | If an expected data exists the punnet will pass (document level)                                                                    |
+| Or                     | Use multiple link conditions and if one of them is ok, the punnet will pass                                                         |
+| And                    | Use multiple link conditions and if all of them are ok, the punnet will pass                                                        |
+| Not                    | Use any link condition but with negatively                                                                                          |
 
 ![Set link](../assets/img/create_workflow/setLink2025.gif)
 
@@ -213,16 +215,16 @@ At this moment you have two series of campaigns related to your map _Production_
 Fast2 allows you to create multiple versions of the same map. This feature provides several significant benefits:
 
 1. **Change Management and Tracking**
-: **Historical Record**: Versioning allows you to maintain a record of all changes made to a map. This is critical for understanding how workflows have evolved over time.
-: **Auditability**: Regulatory or internal compliance often requires a clear audit trail. Versioned maps make it easy to demonstrate changes and decisions.
+   : **Historical Record**: Versioning allows you to maintain a record of all changes made to a map. This is critical for understanding how workflows have evolved over time.
+   : **Auditability**: Regulatory or internal compliance often requires a clear audit trail. Versioned maps make it easy to demonstrate changes and decisions.
 
 2. **Flexibility for Iteration**
-: **Testing New Versions**: You can test new map configurations while maintaining the stability of the current version in production. This reduces risk and allows for experimentation.
-: **Rollback Capabilities**: If a new version introduces issues, you can quickly revert to a previous version.
+   : **Testing New Versions**: You can test new map configurations while maintaining the stability of the current version in production. This reduces risk and allows for experimentation.
+   : **Rollback Capabilities**: If a new version introduces issues, you can quickly revert to a previous version.
 
 3. **Support for Continuous Improvement**
-: **Incremental Optimization**: Maps can be improved incrementally while keeping a reliable baseline version in production.
-: **Data-Driven Updates**: Analyze performance data from different versions to identify which version works best.
+   : **Incremental Optimization**: Maps can be improved incrementally while keeping a reliable baseline version in production.
+   : **Data-Driven Updates**: Analyze performance data from different versions to identify which version works best.
 
 Seamless version creation for the user: they have nothing to do and cannot create a version themselves (there is no manual version creation). The version number is incremented automatically. Current version you are working on is always available in the top right corner.
 ![Map version position](../assets/img/create_workflow/current map version.png)
@@ -238,31 +240,30 @@ Orange color for previous versions means that they cannot be edited. If you deci
 For any reason, if you need to work and make changes to a previous version, you can duplicate it and create a new map from it.
 ![Duplicate map](../assets/img/create_workflow/duplicate map.gif)
 
-
 ## Automatic Save Feature
 
 The automatic save functionality ensures that changes made to the workflow and its configurations are saved seamlessly, enhancing reliability and reducing the risk of data loss. Below are the differents statuses of the save button:
 
 - **Not saved**: The map has not been saved yet (Opensearch database is not reachable).
-![Unsaved status](../assets/img/create_workflow/unsaved.png)
+  ![Unsaved status](../assets/img/create_workflow/unsaved.png)
 - **Saved**: The map has been saved successfully.
-![Saved status](../assets/img/create_workflow/saved.png)
+  ![Saved status](../assets/img/create_workflow/saved.png)
 - **Saving...**: The map is currently being saved.
-![Saving status](../assets/img/create_workflow/saving.png)
+  ![Saving status](../assets/img/create_workflow/saving.png)
 
 ### When Does Auto Save Trigger?
 
 The auto save is triggered under the following conditions:
 
 1. **Configuration Changes:**
-: Any changes made to tasks or links configuration fields are saved as soon as the focus is lost from the edited field.
-![Autosave field edition](../assets/img/create_workflow/Autosave field edition.gif)
+   : Any changes made to tasks or links configuration fields are saved as soon as the focus is lost from the edited field.
+   ![Autosave field edition](../assets/img/create_workflow/Autosave field edition.gif)
 
 2. **Tasks and Links:**
-: Adding or deleting a task triggers an automatic save. Adding or deleting a link between tasks also triggers an automatic save.
+   : Adding or deleting a task triggers an automatic save. Adding or deleting a link between tasks also triggers an automatic save.
 
-1. **Task Movements:**
-: Moving tasks within the map also triggers an automatic save.
+3. **Task Movements:**
+   : Moving tasks within the map also triggers an automatic save.
 
 ### What Gets Saved?
 
@@ -279,4 +280,3 @@ Modifications to a shared object within the Shared Objects place also trigger an
 ![Shared objects place](../assets/img/create_workflow/shared objects place.png)
 
 This ensures that all updates, regardless of where or how they are performed, are reliably captured.
-

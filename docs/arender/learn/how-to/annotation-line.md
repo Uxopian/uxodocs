@@ -1,16 +1,10 @@
 ---
 title: Custom annotation
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: c4806678595f0b437157f5b15eb0e2d847a07af1990370e166de4b3d1206963b
 ---
-
-
-
-
-
-
 
 ## Example: Line annotation
 
@@ -32,9 +26,7 @@ arrowCreationAction's bean from the file named
 _event-configuration.xml_. Once it's done,
 to have a line, we need the head and tail properties set to NONE
 
-
-
-``` xml
+```xml
 <bean id="lineCreationAction" class="com.arondor.viewer.client.toppanel.behavior.annotation.CreateAnnotationButtonHandler">
   <constructor-arg>
     <bean class="com.arondor.viewer.client.annotation.events.PrepareAnnotationCreationEvent">
@@ -58,21 +50,15 @@ to have a line, we need the head and tail properties set to NONE
 </bean>
 ```
 
-
-
 It's possible to custom furthermore the annotation to have a particular
 color or a default size.
 
 ### Annotation's button
 
 Now, we will made the annotation button. We can use the arrow button
-model from_toppannel-annotations-configuration.xml_and custom it in _arender-custom-integration.xml_.
+model from*toppannel-annotations-configuration.xml_and custom it in \_arender-custom-integration.xml*.
 
-
-
-
-
-``` xml
+```xml
 <bean id="addLineAnnotationButton"
     class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter"
     scope="prototype">
@@ -85,18 +71,14 @@ model from_toppannel-annotations-configuration.xml_and custom it in _arender-cus
     </property>
     <property name="buttonTitle">
         <value>Line</value>
-    </property>  
+    </property>
     <property name="buttonHandler">
         <ref bean="lineCreationAction" />
     </property>
 </bean>
 ```
 
-
-
-
-
-``` xml
+```xml
 <bean id="addArrowAnnotationButton"
 		class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
 		<constructor-arg value="addArrowAnnotationButton" />
@@ -133,11 +115,7 @@ model from_toppannel-annotations-configuration.xml_and custom it in _arender-cus
 	</bean>
 ```
 
-
-
-
-
-``` xml
+```xml
 <bean id="addArrowAnnotationButton"
 		class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
 		<constructor-arg value="addArrowAnnotationButton" />
@@ -173,9 +151,6 @@ model from_toppannel-annotations-configuration.xml_and custom it in _arender-cus
 	</bean>
 ```
 
-
-
-
 In the example, the icon has been loaded from the icons folder of
 ARender front end server. The value could be an external URL from a
 website.
@@ -187,25 +162,17 @@ website.
 If the value `topPanel.annotation.buttons.beanNames` doesn't exist,
 add it, and add your button.
 
-
-
 ```cfg
 topPanel.annotation.buttons.beanNames=addLineAnnotationButton
 ```
-
-
 
 Warning, if you want all the annotations buttons, you should retrieve
 _configurations/arender-custom-client.properties_'s `topPanel.annotation.buttons.beanNames` and
 add your button in the list. After that, you should activate your annotation.
 
-
-
 ```cfg
 topPanel.annotationMenu.line=true
 ```
-
-
 
 Reload your ARender front end application server and your line
 annotation will be in the annotation menu.

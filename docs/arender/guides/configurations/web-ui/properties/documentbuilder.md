@@ -1,19 +1,12 @@
 ---
 title: Document builder
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: f22dea08244e1a5502ff0cc7e52811acc816d3f3bd236678f5fc07f24e857eb5
 ---
 
-
-
-
-
-
-
 ## General
-
 
 | Description                                                                                                | Parameter Key                                                            | Default value       | Type    |
 | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------- | ------- |
@@ -52,4 +45,3 @@ content_hash: f22dea08244e1a5502ff0cc7e52811acc816d3f3bd236678f5fc07f24e857eb5
 | Enable create first document button in the document builder contextual menu                                | documentbuilder.contextual.menu.createFirst.enabled                      | false               | Boolean |
 | Enable update first document button in the document builder contextual menu                                | documentbuilder.contextual.menu.updateFirst.enabled                      | false               | Boolean |
 | Enable delete document button in the document builder contextual menu                                      | documentbuilder.contextual.menu.delete.enabled                           | false               | Boolean |
-

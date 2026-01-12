@@ -1,19 +1,19 @@
 ---
 title: Actions
 description: Add actions in the search form.
-date: '2023-03-28T13:20:01+02:00'
+date: "2023-03-28T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 5f3420055b33e418a62f2cb17986c75fd16a4ac994f97b4019f137c9235deac5
 ---
 
-
 For each search form, it is possible to define a list of actions that a user can perform.
 
-These actions must be defined through the  ``actions`` property on the `ComponentSearchPresenter` object. 
+These actions must be defined through the `actions` property on the `ComponentSearchPresenter` object.
 
 :::note[Example]
+
 ```xml
 <bean id="EnvelopeSearch" class="com.flower.docs.gui.client.search.ComponentSearchPresenter" scope="prototype">
 	<property name="actions">
@@ -24,27 +24,26 @@ These actions must be defined through the  ``actions`` property on the `Componen
 	</property>
 </bean>
 ```
+
 :::
 
-
-
-By default, these actions are only visible once the search has been executed. To change this behaviour, you can add the following property:   
+By default, these actions are only visible once the search has been executed. To change this behaviour, you can add the following property:
 
 ```xml
 <property name="enableActionsIfDirty" value="false" />
 ```
 
-# Types of action		
+# Types of action
 
 ## Component creation
 
-An action can be added to allow users to create a component from a search form. 
-This type of action pre-indexes the component to be created based on the search criteria. 
+An action can be added to allow users to create a component from a search form.
+This type of action pre-indexes the component to be created based on the search criteria.
 
-For example, if a user searches for a document in the ``Invoice`` class with a ``status`` tag whose value is ``paid``, then the action will create a document with the same information. 
-
+For example, if a user searches for a document in the `Invoice` class with a `status` tag whose value is `paid`, then the action will create a document with the same information.
 
 :::note[Example: Folder creation]
+
 ```xml
 <bean id="EnvelopeSearch" class="com.flower.docs.gui.client.search.ComponentSearchPresenter" scope="prototype">
 	<property name="actions">
@@ -69,16 +68,15 @@ For example, if a user searches for a document in the ``Invoice`` class with a `
 	</property>
 </bean>
 ```
+
 :::
 
+## Screen change
 
-		
-##  Screen change 
-
-``GoToPlaceActionPresenter`` type actions are used to switch screens.
-
+`GoToPlaceActionPresenter` type actions are used to switch screens.
 
 :::note[Example: Go to a task creation screen with verification]
+
 ```xml
 <bean class="com.flower.docs.gui.client.search.action.GoToPlaceActionPresenter">
 	<constructor-arg type="java.util.List">
@@ -107,42 +105,40 @@ For example, if a user searches for a document in the ``Invoice`` class with a `
 	</property>
 </bean>
 ```
+
 :::
-
-
 
 # Activation
 
-Like all actions, it is possible to define the activation strategy using the ``enablingStrategy`` property. 
+Like all actions, it is possible to define the activation strategy using the `enablingStrategy` property.
 
-Several strategies are provided natively: 
+Several strategies are provided natively:
 
-* Whatever the search results (default): ``AnyResultEnablingStrategy``
+- Whatever the search results (default): `AnyResultEnablingStrategy`
 
-```xml 
+```xml
 <bean class="com.flower.docs.gui.client.search.action.AnyResultEnablingStrategy" />
 ```
 
-* Only if the search leads to no results: ``NoResultEnablingStrategy``
+- Only if the search leads to no results: `NoResultEnablingStrategy`
 
-```xml 
+```xml
 <bean class="com.flower.docs.gui.client.search.action.NoResultEnablingStrategy" />
 ```
 
-	
-* If the user has selected a certain number of components based on an operator: ``MultipleComponentsEnablingStrategy``
-This activation strategy has two properties: 
- 
-	* ``operator``: The operator used to evaluate the number of components selected. The following operators are available:  ``EQUALS_TO``, ``GREATER_THAN``, ``LESS_THAN`` and ``DIFFERENT``.
-	* ``componentsCount``: The number of components 
+- If the user has selected a certain number of components based on an operator: `MultipleComponentsEnablingStrategy`
+  This activation strategy has two properties:
 
-	__Example:__ Activating the action, if the number of selected components is equal or more than 2.   
-	
-	```xml 
-	<bean class="com.flower.docs.gui.client.search.action.MultipleComponentsEnablingStrategy">
-		<property name="componentsCount" value="2"/>
-		<property name="operator">
-			<value type="com.flower.docs.domain.search.Operators">GREATER_THAN</value>
-		</property>
-	</bean>
-	```
+        * ``operator``: The operator used to evaluate the number of components selected. The following operators are available:  ``EQUALS_TO``, ``GREATER_THAN``, ``LESS_THAN`` and ``DIFFERENT``.
+        * ``componentsCount``: The number of components
+
+        __Example:__ Activating the action, if the number of selected components is equal or more than 2.
+
+        ```xml
+        <bean class="com.flower.docs.gui.client.search.action.MultipleComponentsEnablingStrategy">
+        	<property name="componentsCount" value="2"/>
+        	<property name="operator">
+        		<value type="com.flower.docs.domain.search.Operators">GREATER_THAN</value>
+        	</property>
+        </bean>
+        ```

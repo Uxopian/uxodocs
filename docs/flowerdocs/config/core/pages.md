@@ -1,14 +1,13 @@
 ---
 title: Pages
 description: Show ad-hoc HTML pages.
-date: '2020-02-02'
+date: "2020-02-02"
 custom_edit_url: null
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 7eb2627d055bdae4ae28d403ee13e98155e35ae943b3fd7964f0d0cd900f53b9
 ---
-
 
 # Principle
 
@@ -16,14 +15,14 @@ Pages allow you to expose HTML pages to your users. They are configured by scope
 
 These pages can be restricted to certain users according to their authorizations, or made public so that they are accessible to all.
 
-This concept requires two types of configuration: 
+This concept requires two types of configuration:
 
-* a [template](/docs/flowerdocs/config/core/templates/html)
-* a page
+- a [template](/docs/flowerdocs/config/core/templates/html)
+- a page
 
 # Private page
 
-A page is considered `private` if it has an ACL in its definition. 
+A page is considered `private` if it has an ACL in its definition.
 In this case, only authenticated users can access it, and the configured ACL is evaluated to determine whether the user is authorized to consult it.
 
 <br/>

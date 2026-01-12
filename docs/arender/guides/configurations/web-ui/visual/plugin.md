@@ -1,21 +1,15 @@
 ---
 title: Plugins
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 01944cbfe43564204c350b9b00dcf29657d1892f28581ad54a4f224dbb14dfa4
 ---
-
-
-
-
-
-
 
 ARender allow to integrate plugins. They can be opened in two different
 ways:
 
-- Direct opening from the ARender URL with the parameter *plugin=pluginName*
+- Direct opening from the ARender URL with the parameter _plugin=pluginName_
 - Opening from ARender by events (Button press/configuration)
 
 ## Plugins XML configuration
@@ -23,9 +17,7 @@ ways:
 If you use the button mode to launch your plugin, you have to make a
 configuration of it in toppanel-configuration.xml:
 
-
-
-``` xml
+```xml
 <bean id="topPanel" class="com.arondor.viewer.client.toppanel.TopPanel">
     <property name="containedWidgets">
         <list>
@@ -70,12 +62,7 @@ configuration of it in toppanel-configuration.xml:
 </bean>
 ```
 
-
-
-
-
-
-``` xml
+```xml
 <bean id="topPanel" class="com.arondor.viewer.client.toppanel.TopPanel">
     <property name="containedWidgets">
         <list>
@@ -113,23 +100,18 @@ configuration of it in toppanel-configuration.xml:
 </bean>
 ```
 
-
-
-
 The important configuration points in this example are:
 
-- *openInMultiView* announces to ARender that the plugin can be
+- _openInMultiView_ announces to ARender that the plugin can be
   opened in multiView and not in full window.
-- *AskOpenPluginEvent* possess a constructor-arg that refers the
+- _AskOpenPluginEvent_ possess a constructor-arg that refers the
   pluginName defined in the server side XML.
 
 In order to configure the plugin itself, it is important to add the
 configuration either in arender-plugin.xml or in a separate file,
 referenced in the arender-plugin.xml.
 
-
-
-``` xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans default-lazy-init="true" default-autowire="no"
@@ -142,10 +124,7 @@ referenced in the arender-plugin.xml.
 </beans>
 ```
 
-
-
-
-``` xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans default-lazy-init="true" default-autowire="no"
@@ -159,10 +138,8 @@ referenced in the arender-plugin.xml.
 </beans>
 ```
 
-
-
 Please observe the configuration of the class
-*com.arondor.viewer.common.plugin.Plugin* where we use the property
+_com.arondor.viewer.common.plugin.Plugin_ where we use the property
 iframeSrc. This property allows to setup and iframe source URL in case
 the plugin refers to an existing webpage. This webpage will then be
 integrated into ARender as an iframe.

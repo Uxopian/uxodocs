@@ -1,9 +1,10 @@
 ---
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: 7a4dbe0c73d5deb9a663e196c666836fbd481911a60b992101280a1c977149dd
 ---
+
 # Internal database
 
 :::warning

@@ -1,9 +1,10 @@
 ---
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: 01d9de525338f2a066269b415726e3fe39d506757eddaf56330956a721f7297d
 ---
+
 # Schedule your campaigns
 
 Fast2 has a module allowing you to schedule your next runs.
@@ -44,7 +45,9 @@ Additionally, it is important to note that when executing a job as _START AS NEW
 :::info "For example"
 
     For example, even if the CRON expression indicates a frequency of 10 seconds with the CRON expression `*/10 * * * * *` between each trigger, the next campaign will only start once the previous one is finished.
+
 :
+
 ## Cron expression
 
 A CRON is a String composed of 6 or 7 fields separated by spaces. Each field represents a specific section of time. The 1st field will be the second unit, the 2nd one will concern the minutes and so on. All the fields are listed below with the allowed characters.
@@ -90,7 +93,9 @@ Cron expressions can be really useful but might quite hard to use.
 :::tip "Build it yourself"
 
     To generate your own cron expressions easily, we suggest you to use some web generator (like [freeformatter.com](https://www.freeformatter.com/cron-expression-generator-quartz.html).
+
 :::
+
 ## Maximum number of executions
 
 The **Max # of executions** input field allows users to specify the maximum number of times a campaign should be executed.

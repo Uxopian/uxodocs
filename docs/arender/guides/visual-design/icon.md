@@ -1,17 +1,13 @@
 ---
 title: Icons
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 0b4eda3cbb844c54a2834e6f06fa3af0e5afd9a7588fddbff1c847ff60658315
 ---
 
-
-
-
-
-
 ## Icon of ARender
+
 <br/>
 <div class="flex-wrap">
     <div class="glyph fs1">
@@ -1066,25 +1062,25 @@ content_hash: 0b4eda3cbb844c54a2834e6f06fa3af0e5afd9a7588fddbff1c847ff60658315
     </div>
 </div>
 
-
 ## Font Awesome
+
 ### Description
+
 Font Awesome is a font and icon tool based on CSS, Less and Sass. This tool offers a wide variety of free icons.
 
 ### Use
+
 To customize your icons with Font Awesome you need to change the value of the “class name” of your button starting with “icon” to Font Awesome icon class name.
 
 It is important to change only the value starting with “icon”.
 
-
 It is necessary to have the class name “fa” or “fas” or “fa-solid” in the class name of the icon. Otherwise the class name of font-awesome will not be taken into account.
 
-You can find the available icons here: https://fontawesome.com/icons 
+You can find the available icons here: https://fontawesome.com/icons
 
 ### Example
 
-
-```xml
+````xml
 Example with the free text annotation button:
 
 
@@ -1120,14 +1116,15 @@ Example with the free text annotation button:
         </bean>
     </property>
 </bean>
-```
-```
+````
+
+````
 
 ![image](/img/arender/custom icon/font_awesome.png)
 
 ## Material Design Icons
 
-### Description 
+### Description
 Material Design Icons is a font and icon tool based on CSS, Less and Sass. This tool offers a wide variety of free icons.
 
 
@@ -1179,9 +1176,11 @@ Example with the free text annotation button:
         </bean>
     </property>
 </bean>
-```
+````
+
 ```
 
 
 
 ![image](/img/arender/custom icon/mdi.png)
+```

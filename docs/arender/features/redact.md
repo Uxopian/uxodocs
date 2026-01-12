@@ -1,17 +1,10 @@
 ---
 title: Redact
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: f1b87fe1476cafb7e6cbdb9a349927d3809014f63f9136f313660a1e5514a301
 ---
-
-
-
-
-
-
-
 
 ## Activate true redaction
 
@@ -19,17 +12,13 @@ By default and for performance optimization, ARender allows any user to select t
 
 If you need to deactivate this behaviour you need to use true redact, i.e. configure ARender to only fetch the text for authorized users. It is necessary to:
 
-* Activate the fetch of redaction before the image generation:
-
-
+- Activate the fetch of redaction before the image generation:
 
 ```cfg
 arender.server.process.annotations.rendition=true
 ```
 
-
-
-* Implement the **AuthenticationServiceProvider** interface. Example available on [GitHub](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-hmi/arender-sample-hmi-connector/src/main/java/com/arondor/arender/sample/connector/authentication/service/CustomAuthenticationServiceProvider.java)
+- Implement the **AuthenticationServiceProvider** interface. Example available on [GitHub](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-hmi/arender-sample-hmi-connector/src/main/java/com/arondor/arender/sample/connector/authentication/service/CustomAuthenticationServiceProvider.java)
 
 ## Default behaviour
 
@@ -37,17 +26,11 @@ ARender offers the possibility to hide the content of any type of document via t
 
 To activate the redact panel, add the following property. By default, it is disabled.
 
-
-
 ```cfg
 redactexplorer.enabled=true
 ```
 
-
-
 This panel will give you access to the different redact buttons. By default, four redaction classic creation buttons are available.
-
-
 
 ```cfg
 redactexplorer.redact=true
@@ -56,25 +39,18 @@ redactexplorer.redactPageContent=true
 redactexplorer.redactFullPage=true
 ```
 
-
-
-
-The first one allows you to add a redact over text. 
-The second one allows you to add a redact over a plotted area. 
+The first one allows you to add a redact over text.
+The second one allows you to add a redact over a plotted area.
 The third allows you to redact all the textual content of the current page.
-The fourth allows you to redact the whole page. 
+The fourth allows you to redact the whole page.
 
-Two buttons of redactions advanced creation are available. 
-
-
+Two buttons of redactions advanced creation are available.
 
 ```cfg
 redactexplorer.manualInput=true
 redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
 ```
-
-
 
 The first one allows you to open manual input panel.
 The second one allows you to open rules panel.
@@ -85,35 +61,25 @@ It is possible to select reasons to apply on redactions.
 
 By default the "With reason" radio button is selected.
 
-
-
 ```cfg
-# If true, the radio button "With reason" is selected 
+# If true, the radio button "With reason" is selected
 redactexplorer.redact.with.reasons=true
 ```
 
-
-
 The reasons are defined in the configuration files, it is possible to modify them as well as the default reasons as explained in [the dedicated documentation](/docs/arender/learn/how-to/redact-reasons)
-
-
 
 By default, only **admin user** can save redacts
 
 To test please:
-* Log in to ARender as admin:
-    * Either Clear the ARender Cookies ,
-    * **Or** Open a browser in private navigation.
-* Open ARender with the following query strings in the URL: ?user=admin&amp;redactexplorer.enabled=true
 
-
-
+- Log in to ARender as admin:
+    - Either Clear the ARender Cookies ,
+    - **Or** Open a browser in private navigation.
+- Open ARender with the following query strings in the URL: ?user=admin&amp;redactexplorer.enabled=true
 
 ## Advanced redact
 
-Advanced redact panel offers two buttons, manual input and rules. 
-
-
+Advanced redact panel offers two buttons, manual input and rules.
 
 ```cfg
 redactexplorer.manualInput=true
@@ -121,44 +87,39 @@ redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
 ```
 
-
-
-
 ### Manual input
 
-The manual input allows you to redact a informed text or a informed pattern in the input text. 
+The manual input allows you to redact a informed text or a informed pattern in the input text.
 
-You can personalize the redact application through the dedicated button: 
+You can personalize the redact application through the dedicated button:
+
 - Page selection: allows you to choose all pages, a range of pages, several pages or the current page
-By default, the "All pages" option is selected.
+  By default, the "All pages" option is selected.
 
 Once the search is done, you can see a preview of the results on your document.
 If you want to refine your selection, you can open the results panel:
+
 - A vertical panel is opened showing all the results
 - Unselect the results you don't want to redact
 - Apply all the selected redaction by clicking on the "Apply" button.
-
 
 ### Rules
 
-The rules option allows you to select one or more rules and apply them. 
-These rules are defined in the configuration files as explained in the  [dedicated documentation](/docs/arender/learn/how-to/annotation-creation-rule)
+The rules option allows you to select one or more rules and apply them.
+These rules are defined in the configuration files as explained in the [dedicated documentation](/docs/arender/learn/how-to/annotation-creation-rule)
 
 Once the rules are selected, trigger the search. It will show a preview of the results in the document.
 If you want to refine your selection, you can open the results panel:
+
 - A vertical panel is opened showing all the results
 - Unselect the results you don't want to redact
 - Apply all the selected redaction by clicking on the "Apply" button.
-
-
 
 ## Advanced options
 
 ### Add custom buttons
 
-It is also possible to add your own buttons. In the file *arender-custom-integration.xml* add the information of the button.
-
-
+It is also possible to add your own buttons. In the file _arender-custom-integration.xml_ add the information of the button.
 
 ```xml
 <bean id="addRedact"
@@ -175,15 +136,11 @@ It is also possible to add your own buttons. In the file *arender-custom-integra
          </property>
          <property name="buttonHandler">
              <ref bean="redactZoneCreationAction" />
-         </property>		
+         </property>
 </bean>
 ```
 
-
-
 Then add the bean id of your button to the list named “redactButtons”. If it doesn’t exist, create it.
-
-
 
 ```xml
 <bean id="redactExplorerView"
@@ -197,8 +154,6 @@ Then add the bean id of your button to the list named “redactButtons”. If it
 </bean>
 ```
 
-
-
 ## Conversion from V3/V4 redactions to V2023 redactions
 
 The redaction model has evolved in ARender version 2023. To facilitate the conversion process, a new annotation accessor called RedactConverterAnnotationAccessor has been introduced, which allows for easy on-the-fly conversion.
@@ -207,17 +162,11 @@ The redaction model has evolved in ARender version 2023. To facilitate the conve
 
 The new annotation accessor takes the bean name of another annotation accessor as a parameter. You can modify this bean name as follows:
 
-
-
 ```cfg
 arender.server.wrapper.source.annotation.accessor=myCustomAnnotationAccessorBeanName
 ```
 
-
-
 myCustomAnnotationAccessorBeanName is the annotation accessor that will be added to the annotation accessor performing the conversion.
-
-
 
 The annotation accessor must have a constructor with the following signature:
 
@@ -225,40 +174,22 @@ The annotation accessor must have a constructor with the following signature:
 public CustomAnnotationAccessor(DocumentService documentService, DocumentAccessor documentAccessor)
 ```
 
-
-
-
-
 ### Usage via Java Code
 
-If you instantiate your *CustomAnnotationAccessor* using Java code, you will need to modify the instantiation as follows:
-
-
+If you instantiate your _CustomAnnotationAccessor_ using Java code, you will need to modify the instantiation as follows:
 
 ```java
 RedactConverterAnnotationAccessor myConverterAccessor = new RedactConverterAnnotationAccessor(new CustomAnnotationAccessor());
 ```
 
-
-
-
 If you want to stop the on-the-fly conversion, you should use the following method:
-
-
-
 
 ```java
 redactConverterAnnotationAccessor().setConvert(false);
 ```
 
-
-
-
-And the property: 
-
-
+And the property:
 
 ```cfg
 arender.server.wrapper.source.convert=false
 ```
-

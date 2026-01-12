@@ -1,20 +1,13 @@
 ---
 title: Menu bar
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: fc0bc96410467361b3ef06db429c19cc73c02df57753a861804cfb84e1b27dc4
 ---
 
-
-
-
-
-
-
 ## Document menu
 
- 
 | Description                                                             | Parameter Key                                   | Default value    | Type    |
 | ----------------------------------------------------------------------- | ----------------------------------------------- | ---------------- | ------- |
 | Activate the document sub-menu                                          | topPanel.documentMenu                           | true             | Boolean |
@@ -28,7 +21,7 @@ content_hash: fc0bc96410467361b3ef06db429c19cc73c02df57753a861804cfb84e1b27dc4
 | Download current document with its annotations                          | topPanel.documentMenu.downloadAnnotation        | true             | Boolean |
 | Download annotations in CSV format                                      | topPanel.documentMenu.downloadCSVAnnotation     | false            | Boolean |
 | Download document with FDF annotations                                  | topPanel.documentMenu.downloadWithFDFAnnotation | false            | Boolean |
-| Download annotations in XFDF format                                     | topPanel.documentMenu.downloadXFDFAnnotations   | false            | Boolean |       
+| Download annotations in XFDF format                                     | topPanel.documentMenu.downloadXFDFAnnotations   | false            | Boolean |
 | Activate the top panel download composite document button               | topPanel.documentMenu.download.root             | true             | Boolean |
 | The default behavior for download : DOWNLOAD_SOURCE or DOWNLOAD_NON_PDF | topPanel.documentMenu.download.behavior         | DOWNLOAD_NON_PDF | String  |
 | Download all current documents as original format in a ZIP              | topPanel.documentMenu.downloadAllSources        | true             | Boolean |
@@ -37,24 +30,18 @@ content_hash: fc0bc96410467361b3ef06db429c19cc73c02df57753a861804cfb84e1b27dc4
 | Activate the download sub-menu (Since version 2023.15.0)                | topPanel.downloadMenu.enabled                   | true             | Boolean |
 | Activate the import sub-menu (Since version 2023.15.0)                  | topPanel.importMenu.enabled                     | true             | Boolean |
 
-
 ## Print menu
 
 | Description                                                  | Parameter Key  | Default value | Type    |
 | ------------------------------------------------------------ | -------------- | ------------- | ------- |
 | Display a dialog box allowing to choose the type of printing | topPanel.print | true          | Boolean |
 
-
-
 ```cfg
 # Hide the print button
 topPanel.print=false
 ```
 
-
-
 ## Annotation menu
-
 
 | Description                                                                      | Parameter Key                                    | Default value | Type    |
 | -------------------------------------------------------------------------------- | ------------------------------------------------ | ------------- | ------- |
@@ -74,7 +61,7 @@ topPanel.print=false
 | Create a stamp                                                                   | topPanel.annotationMenu.stamp                    | true          | Boolean |
 | Create an audio annotation                                                       | topPanel.annotationMenu.sound                    | false         | Boolean |
 | Display/hide all annotations                                                     | topPanel.annotationMenu.hide                     | true          | Boolean |
-| Display/hide annotations &amp; rotations                                             | topPanel.annotationMenu.hideAll                  | false         | Boolean |
+| Display/hide annotations &amp; rotations                                         | topPanel.annotationMenu.hideAll                  | false         | Boolean |
 | Create a freetext                                                                | topPanel.annotationMenu.freetext                 | true          | Boolean |
 | Allow the sticky note to be edited                                               | topPanel.annotationMenu.stickyNote.editable      | true          | Boolean |
 | Create a rectangle in repeat mode (does not cancel unless pressed again)         | topPanel.annotationMenu.highlight.repeat         | false         | Boolean |
@@ -89,21 +76,16 @@ topPanel.print=false
 | Create a circle in repeat mode (does not cancel unless pressed again)            | topPanel.annotationMenu.circle.repeat            | false         | Boolean |
 | Create a hyperlink in repeat mode (does not cancel unless pressed again)         | topPanel.annotationMenu.hyperlink.repeat         | false         | Boolean |
 
-
 ## Navigation
 
-| Description         | Parameter Key                         | Default value | Type    |
-| ------------------- | ------------------------------------- | ------------- | ------- |
-| Go to first page    | topPanel.pageNavigation.first         | true          | Boolean |
-| Go to previous page | topPanel.pageNavigation.previous      | true          | Boolean |
-| Go to next page     | topPanel.pageNavigation.next          | true          | Boolean |
-| Go to last page     | topPanel.pageNavigation.last          | true          | Boolean |
-
-
-
+| Description         | Parameter Key                    | Default value | Type    |
+| ------------------- | -------------------------------- | ------------- | ------- |
+| Go to first page    | topPanel.pageNavigation.first    | true          | Boolean |
+| Go to previous page | topPanel.pageNavigation.previous | true          | Boolean |
+| Go to next page     | topPanel.pageNavigation.next     | true          | Boolean |
+| Go to last page     | topPanel.pageNavigation.last     | true          | Boolean |
 
 ## Zoom
-
 
 | Description                                         | Parameter Key                 | Default value | Type    |
 | --------------------------------------------------- | ----------------------------- | ------------- | ------- |
@@ -116,51 +98,42 @@ topPanel.print=false
 | Enable zone zoom in external window                 | topPanel.zoom.zoneGlass       | false         | Boolean |
 | Zone zoom multiplication                            | topPanel.zoom.zoneGlass.value | 2             | Integer |
 
-
-
-
 ## Rotation
 
-
-| Description                                                               | Parameter Key              | Default value | Type    |
-| ------------------------------------------------------------------------- | -------------------------- | ------------- | ------- |
-| Rotate current page to the right                                          | topPanel.rotation.right    | true          | Boolean |
-| Rotate current page to the left                                           | topPanel.rotation.left     | true          | Boolean |
-| Rotate all pages to the left and right                                    | topPanel.rotation.all      | false         | Boolean |
-| Reset all rotations                                                       | topPanel.rotation.reset    | false         | Boolean |
-| Sets up the amount of rotation applied when pressing the rotation buttons | topPanel.rotation.degree   | 90            | Integer |
-| Activates rotations sub-menu                                              | topPanel.rotation.add      | true          | Boolean |
-
+| Description                                                               | Parameter Key            | Default value | Type    |
+| ------------------------------------------------------------------------- | ------------------------ | ------------- | ------- |
+| Rotate current page to the right                                          | topPanel.rotation.right  | true          | Boolean |
+| Rotate current page to the left                                           | topPanel.rotation.left   | true          | Boolean |
+| Rotate all pages to the left and right                                    | topPanel.rotation.all    | false         | Boolean |
+| Reset all rotations                                                       | topPanel.rotation.reset  | false         | Boolean |
+| Sets up the amount of rotation applied when pressing the rotation buttons | topPanel.rotation.degree | 90            | Integer |
+| Activates rotations sub-menu                                              | topPanel.rotation.add    | true          | Boolean |
 
 ## Pages navigation
 
-
-| Description                     | Parameter Key                    | Default value | Type    |
-| ------------------------------- | -------------------------------- | ------------- | ------- |
-| Go to first page navigation     | topPanel.pageNavigation.first    | true          | Boolean |
-| Go to previous page navigation  | topPanel.pageNavigation.previous | true          | Boolean |
-| Go to next page navigation      | topPanel.pageNavigation.next     | true          | Boolean |
-| Go to last page navigation      | topPanel.pageNavigation.last     | true          | Boolean |
-
+| Description                    | Parameter Key                    | Default value | Type    |
+| ------------------------------ | -------------------------------- | ------------- | ------- |
+| Go to first page navigation    | topPanel.pageNavigation.first    | true          | Boolean |
+| Go to previous page navigation | topPanel.pageNavigation.previous | true          | Boolean |
+| Go to next page navigation     | topPanel.pageNavigation.next     | true          | Boolean |
+| Go to last page navigation     | topPanel.pageNavigation.last     | true          | Boolean |
 
 ## Other features
 
-
-| Description                                                                                                                             | Parameter Key                                | Default value | Type    |
-| --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------     | ------------- | ------- |
-| Refresh annotations                                                                                                                     | topPanel.refresh                             | true          | Boolean |
-| Full text search                                                                                                                        | topPanel.search                              | true          | Boolean |
-| Default search behavior. Otherwise, open in the advanced search panel                                                                   | topPanel.search.default                      | false         | Boolean |
-| If true and topPanel.search.default is true, display search text results in the AdvancedSearchExplorer                                  | topPanel.search.displayResultsInExplorer     | true          | Boolean |
-| The "next result" search button will jump to the next result on the current visible page instead of resuming where you left the search  | topPanel.searchByVisiblePage                 | true          | Boolean |
-| Full screen mode                                                                                                                        | topPanel.fullscreen                          | true          | Boolean |
-| Full screen mode will hide the top panel totally                                                                                        | topPanel.fullscreen.hideTopPanel             | false         | Boolean |
-| The toppanel will always be visible in full screen and won't hide                                                                       | topPanel.fullscreen.alwaysShowTopPanel       | false         | Boolean |                                                                                                             
-| Boxed zoom                                                                                                                              | topPanel.zoomBox                             | true          | Boolean |
-| Copy all text of the document                                                                                                           | topPanel.document.text                       | false         | Boolean |
-| Cropbox                                                                                                                                 | topPanel.cropbox.enabled                     | false         | Boolean |
-| Brightness slider                                                                                                                       | topPanel.imageProcessMenu.brightness.enabled | true          | Boolean |
-| Contrast slider                                                                                                                         | topPanel.imageProcessMenu.contrast.enabled   | false         | Boolean |
-| Invert color slider                                                                                                                     | topPanel.imageProcessMenu.invert.enabled     | false         | Boolean |
-| Set how image processing is applied : CURRENT_PAGE, ALL_PAGES, ALL_DOCUMENTS                                                            | topPanel.imageProcessMenu.process.mode       | ALL_DOCUMENTS | String  |
-
+| Description                                                                                                                            | Parameter Key                                | Default value | Type    |
+| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | ------------- | ------- |
+| Refresh annotations                                                                                                                    | topPanel.refresh                             | true          | Boolean |
+| Full text search                                                                                                                       | topPanel.search                              | true          | Boolean |
+| Default search behavior. Otherwise, open in the advanced search panel                                                                  | topPanel.search.default                      | false         | Boolean |
+| If true and topPanel.search.default is true, display search text results in the AdvancedSearchExplorer                                 | topPanel.search.displayResultsInExplorer     | true          | Boolean |
+| The "next result" search button will jump to the next result on the current visible page instead of resuming where you left the search | topPanel.searchByVisiblePage                 | true          | Boolean |
+| Full screen mode                                                                                                                       | topPanel.fullscreen                          | true          | Boolean |
+| Full screen mode will hide the top panel totally                                                                                       | topPanel.fullscreen.hideTopPanel             | false         | Boolean |
+| The toppanel will always be visible in full screen and won't hide                                                                      | topPanel.fullscreen.alwaysShowTopPanel       | false         | Boolean |
+| Boxed zoom                                                                                                                             | topPanel.zoomBox                             | true          | Boolean |
+| Copy all text of the document                                                                                                          | topPanel.document.text                       | false         | Boolean |
+| Cropbox                                                                                                                                | topPanel.cropbox.enabled                     | false         | Boolean |
+| Brightness slider                                                                                                                      | topPanel.imageProcessMenu.brightness.enabled | true          | Boolean |
+| Contrast slider                                                                                                                        | topPanel.imageProcessMenu.contrast.enabled   | false         | Boolean |
+| Invert color slider                                                                                                                    | topPanel.imageProcessMenu.invert.enabled     | false         | Boolean |
+| Set how image processing is applied : CURRENT_PAGE, ALL_PAGES, ALL_DOCUMENTS                                                           | topPanel.imageProcessMenu.process.mode       | ALL_DOCUMENTS | String  |

@@ -9,7 +9,7 @@ date: "2025-09-30"
 ## Overview
 
 ARender 2023.14.0 is a minor release that includes multiple fixes across text rendering, hyperlink interactions, digital
-signatures, and platform stability. This version also includes security upgrades and RHEL8 offline 
+signatures, and platform stability. This version also includes security upgrades and RHEL8 offline
 installation improvements.
 
 ## Prerequisites
@@ -44,7 +44,7 @@ Special characters in .html files now render properly. (AR-17805)
 ## Developer / Integrator Perspective
 
 **Token Expiry Handling**  
-ARender now correctly redirects users to the login page if their refresh token has expired, avoiding HTTP 500 errors. 
+ARender now correctly redirects users to the login page if their refresh token has expired, avoiding HTTP 500 errors.
 (AR-17769)
 
 **Improved Offline Installation for RHEL8**  
@@ -53,15 +53,14 @@ Rendition installation now completes successfully in RHEL8 environments without 
 **Spring Boot Security Upgrade**  
 Spring upgraded to 2.7.18 and Spring Boot to 2.7.29 to address recent security CVEs. (AR-17841, AR-17851)
 
-
 ## Exploitation Perspective
 
-*No operational-specific changes in this version.*
+_No operational-specific changes in this version._
 
 ## Changelog
 
 | Summary                                             | Type  | Internal ticket                                           | Linked Issues                                                                         |
-|-----------------------------------------------------|-------|-----------------------------------------------------------|---------------------------------------------------------------------------------------|
+| --------------------------------------------------- | ----- | --------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | .txt files misdetected as email                     | Issue | [AR-16678](https://arondor.atlassian.net/browse/AR-16678) | [TMAPR-5550](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-5550) |
 | Digital signature not shown properly                | Issue | [AR-17212](https://arondor.atlassian.net/browse/AR-17212) | [TMAPR-6064](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6064) |
 | PDF too large after TIFF to JPEG conversion         | Issue | [AR-17326](https://arondor.atlassian.net/browse/AR-17326) | [TMAPR-6108](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6108) |
@@ -77,7 +76,7 @@ Spring upgraded to 2.7.18 and Spring Boot to 2.7.29 to address recent security C
 ## Download
 
 | Description                                                       | Binary                                                                                                                                                                                                | SHA-256                                                                                                                                                                                                     |
-|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ARender Rendition Server installer                                | [Download](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/micro/services/rendition-engine-installer/2023.14.0/rendition-engine-installer-2023.14.0-rendition.jar)  | [SHA-256](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/micro/services/rendition-engine-installer/2023.14.0/rendition-engine-installer-2023.14.0-rendition.jar.sha256)  |
 | ARender WEB-UI - Spring Boot Application - Standalone             | [Download](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-spring-boot-package/2023.14.0/arondor-arender-hmi-spring-boot-package-2023.14.0.zip) | [SHA-256](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-spring-boot-package/2023.14.0/arondor-arender-hmi-spring-boot-package-2023.14.0.zip.sha256) |
 | ARender HMI - J2EE EAR Application - FileNet 5.x                  | [Download](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-filenet-ear/2023.14.0/arondor-arender-hmi-filenet-ear-2023.14.0.ear)                 | [SHA-256](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-filenet-ear/2023.14.0/arondor-arender-hmi-filenet-ear-2023.14.0.ear.sha256)                 |

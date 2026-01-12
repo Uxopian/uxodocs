@@ -1,16 +1,15 @@
 ---
 title: Manipulating a tag class
-description: 'Create, retrieve, modify, delete your tag classes'
-date: '2001-04-29T13:30:01+01:02'
+description: "Create, retrieve, modify, delete your tag classes"
+date: "2001-04-29T13:30:01+01:02"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 2dbab95e40d894d8055252812f3a7cfa804737f79266a952ebb6540ba854336e
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-
 
 The `TagClassService` service exposes all the operations available around `TagClass` type components.
 
@@ -24,10 +23,10 @@ The examples below show how to retrieve all tag classes.
 ```http
 GET {{core}}/rest/tagclass HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 
--- Headers -- 
+-- Headers --
 token: {{token}}
 ```
 
@@ -47,10 +46,9 @@ token: {{token}}
   </TabItem>
 </Tabs>
 
-
 # Tag class creation
 
-The examples below show how to create a tag class. 
+The examples below show how to create a tag class.
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -58,10 +56,10 @@ The examples below show how to create a tag class.
 ```http
 POST {{core}}/rest/tagclass HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 
--- Headers -- 
+-- Headers --
 token: {{token}}
 Content-Type: application/json
 
@@ -95,7 +93,7 @@ Content-Type: application/json
 ```Java
 @Autowired
     private TagClassService tcService;
-    
+
     public List<TagClass> create() throws FunctionalException, TechnicalException
 
         List<TagClass> tcList = new ArrayList<VirtualFolderClass>();
@@ -110,7 +108,7 @@ Content-Type: application/json
         labels.add(labelFR);
         labels.add(labelEN);
         tc.setDisplayNames(labels);
- 
+
         tcList.add(tc);
 
         return tcService.create(vfcList);
@@ -119,7 +117,6 @@ Content-Type: application/json
 
   </TabItem>
 </Tabs>
-
 
 # Modifying tag classes
 
@@ -131,7 +128,7 @@ This operation updates the data of a tag class
 ```http
 POST {{core}}/rest/tagclass/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 ids: comma-separated list of virtual folder class identifiers to be updated
 
@@ -170,7 +167,7 @@ Content-Type: application/json
 ```Java
 @Autowired
     private TagClassService tcService;
-    
+
     public List<TagClass> update(TagClass tc) throws FunctionalException, TechnicalException
 
         List<I18NLabel> labels = new ArrayList<>();
@@ -191,7 +188,6 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Tag class search
 
 The example below shows how to retrieve a tag class from a list of identifiers.
@@ -202,7 +198,7 @@ The example below shows how to retrieve a tag class from a list of identifiers.
 ```http
 GET {{core}}/rest/tagclass/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 ids: comma-separated list of tag class identifiers to be retrieved
 
@@ -216,7 +212,7 @@ token: {{token}}
 ```Java
 @Autowired
 	private TagClassService tcService;
-	
+
     public List<TagClass> get() throws FunctionalException, TechnicalException
 
         List<Id> ids = Lists.newArrayList(new Id("Test"));
@@ -226,7 +222,6 @@ token: {{token}}
 
   </TabItem>
 </Tabs>
-
 
 # Tag class deletion
 
@@ -238,7 +233,7 @@ This operation deletes a list of tag classes from a list of identifiers.
 ```http
 DELETE {{core}}/rest/tagclass/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 ids: comma-separated list of tag class identifiers to be deleted
 
@@ -252,7 +247,7 @@ token: {{token}}
 ```Java
 @Autowired
 	private TagClassService tcService;
-	
+
     @DeleteMapping()
     public void delete() throws FunctionalException, TechnicalException
 

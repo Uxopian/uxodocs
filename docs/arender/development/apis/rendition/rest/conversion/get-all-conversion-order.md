@@ -1,40 +1,33 @@
 ---
 title: GET all conversion orders
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 658c3ae730b6a5acf0347d0945e4202fc06862db9d6f2cfd08c77fe84213be95
 ---
-
-
-
-
-
-
-
 
 This API allows you to retrieve all conversion orders.
 The call to this API must be authenticated. The credentials are available in the _application.yaml_ configuration file of the document-service-broker.
 
 ```yaml
-
-run-mode :
-  username : username
-  password : password
+run-mode:
+    username: username
+    password: password
 ```
 
 ## API technical description
 
 Endpoint:
+
 ```bash
 GET /conversions
 ```
 
 Response:
 
-| Attribute            | Type                      | Description                 |
-| :------------------- | :------------------------ |:----------------------------|
-| conversionOrders     | List&lt;ConversionOrder&gt;     | The conversion orders list. |
+| Attribute        | Type                        | Description                 |
+| :--------------- | :-------------------------- | :-------------------------- |
+| conversionOrders | List&lt;ConversionOrder&gt; | The conversion orders list. |
 
 ## Examples
 
@@ -50,7 +43,9 @@ curl -X 'GET' \
   -H 'accept: */*' \
   -H 'Authorization: Basic dXNlcjpwYXNzd29yZA=='
 ```
+
 Response sample:
+
 ```bash
 [
 

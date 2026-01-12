@@ -1,16 +1,10 @@
 ---
 title: Text Selection
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: f623a07c9643408ce3b4c9e50de48cd59d44b0a0b2d32b4a7cc5cfaf3152afcd
 ---
-
-
-
-
-
-
 
 ## Document Text Selection
 
@@ -29,7 +23,6 @@ Once copied, he can paste the text into another software application.
 The user can, as well, double click on a word to select it.
 
 ![image](/img/arender/selection-character.png)
-
 
 When the text selection is finished, the quick menu is displayed below the text to allow various actions regarding the selected text.
 
@@ -71,23 +64,19 @@ Since ARender version 4.7.3, you have the possibility to select an entire page w
 ## Text Selection - Entire document
 
 ARender version 4.8.0 introduces the selection of all the text of the current document. This feature is available through a button in the
- toppanel which is disabled by default.
+toppanel which is disabled by default.
 
-To activate the button, add the following property to the *configurations/arender-custom-client.properties* configuration file :
-
-
+To activate the button, add the following property to the _configurations/arender-custom-client.properties_ configuration file :
 
 ```cfg
 # Activate the copy all text of the document button
 topPanel.copy.document.text=true
 ```
 
-
-
 ![image](/img/arender/documentation/selection/selection-text-document-bouton.png)
 
 When clicked, the button will launch the retrieval of the text of each page of the current document. The progress of the copy will be indicated
- by a notification at the bottom right. Once the copying of the text is finished, a notification will again be visible to inform the user.
+by a notification at the bottom right. Once the copying of the text is finished, a notification will again be visible to inform the user.
 
 ![image](/img/arender/documentation/selection/selection-text-document-activation.gif)
 

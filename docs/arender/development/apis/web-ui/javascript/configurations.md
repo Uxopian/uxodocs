@@ -1,21 +1,15 @@
 ---
 title: Configurations
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 9668f7c84788a0874a0ee577140c41b88d122ecb31a78aeab64cee1e132fe6cb
 ---
-
-
-
-
-
-
 
 ### Retrieve the value of a UI property in JS
 
 Since version 2023.4.0, it is possible to retrieve the value of some properties from ARender's JS APIs.
-To be precise, these are the UI configuration properties which can be found in *configurations/arender-custom-client.properties*.
+To be precise, these are the UI configuration properties which can be found in _configurations/arender-custom-client.properties_.
 
 ### JS API
 
@@ -29,7 +23,7 @@ Object: getARenderJS()
 
 Here is the list of properties recoverable in version 2023.4.0:
 
-| Property                                      | Default value (in *configurations/arender-custom-client.properties*) |
+| Property                                      | Default value (in _configurations/arender-custom-client.properties_) |
 | --------------------------------------------- | -------------------------------------------------------------------- |
 | documentnavigator.width                       | 320                                                                  |
 | documentnavigator.initialWidth                | Default                                                              |
@@ -38,10 +32,8 @@ Here is the list of properties recoverable in version 2023.4.0:
 
 ### Example
 
-
-
-Recovery of the property value *thumbexplorer.contextualMenu.createPageAnchor*
+Recovery of the property value _thumbexplorer.contextualMenu.createPageAnchor_
 
 ```js
-getARenderJS().getConfiguration("thumbexplorer.contextualMenu.createPageAnchor")
+getARenderJS().getConfiguration("thumbexplorer.contextualMenu.createPageAnchor");
 ```

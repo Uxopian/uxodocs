@@ -1,44 +1,38 @@
 ---
 title: GET Document Layout
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 9318a3a0a630eaeebefca1036b62b6b4d9448f13921f7d6b2daa8ffab46f60cc
 ---
-
-
-
-
-
-
-
 
 This API allows you to retrieve the layout information of a document.
 
 ## API Description
 
 Endpoint:
+
 ```bash
 GET /documents/{documentId}/layout
 ```
 
 Resource path:
 
-| Variable    | Required | Description           |
-|:------------|:---------|:----------------------|
-| documentId  | Yes      | The ID of a document  |
+| Variable   | Required | Description          |
+| :--------- | :------- | :------------------- |
+| documentId | Yes      | The ID of a document |
 
 Response :
 
 | Type           | Description                            |
-|:---------------|:---------------------------------------|
+| :------------- | :------------------------------------- |
 | DocumentLayout | The layout information of the document |
 
 ## Example
 
 ### Get Document Layout
 
-The following example retrieves the layout information of a document 
+The following example retrieves the layout information of a document
 with the specified document ID.
 
 ```bash

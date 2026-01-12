@@ -1,15 +1,13 @@
 ---
 title: Delegations
-date: '2002-03-28T13:20:01+02:00'
+date: "2002-03-28T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 1d637b1a49511325387986588cea61f173fbb57c8e8f062512df3096365143f6
 ---
 
-
 This feature enables users to delegate their work during an absence.
-
 
 # Principle
 
@@ -35,6 +33,4 @@ All this is necessary to enable the delegate to carry out the absent person ' s 
 
 In the history, it is always the user who actually performed the action who is recorded.
 
-
 If an administrator user delegates to a non-administrator user, the latter will access the administration interface during this period.
-

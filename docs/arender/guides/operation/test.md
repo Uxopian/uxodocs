@@ -1,16 +1,10 @@
 ---
 title: Behaviour testing
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: 0dd44136605eaa94e5988a43fc1636df7aa04dc3fe421e3ea3dd3f2e762d9541
 ---
-
-
-
-
-
-
 
 This chapter is meant to check if ARender is working as expected. The
 tests can be performed on a punctual basis (install, upgrade, etc) as
@@ -18,7 +12,7 @@ well as continuously to supervise.
 
 ## Rendition server
 
-The easiest way to validate ARender Rendition installation is to check the health page, [see post installation documentation](/docs/arender/installation/standalone/rendition/verification).  
+The easiest way to validate ARender Rendition installation is to check the health page, [see post installation documentation](/docs/arender/installation/standalone/rendition/verification).
 
 ## Presentation server
 
@@ -43,14 +37,12 @@ able to use every single connector.
 
 - Step 2: Loading page test:
 
-[http://localhost:8080/arendergwt/imageServlet?uuid=b64_I2RlZmF1bHQ=&amp;pagePosition=1&amp;desc=IM_800_0](http://localhost:8080/arendergwt/imageServlet?uuid=b64_I2RlZmF1bHQ=&amp;pagePosition=1&amp;desc=IM_800_0)
+[http://localhost:8080/arendergwt/imageServlet?uuid=b64_I2RlZmF1bHQ=&amp;pagePosition=1&amp;desc=IM_800_0](http://localhost:8080/arendergwt/imageServlet?uuid=b64_I2RlZmF1bHQ=&pagePosition=1&desc=IM_800_0)
 
 This servlet is made to test the generation of a 800px pictures of page
 one from the document **b64_I2RlZmF1bHQ=**
 
-
-*In case of complex architecture, this methodology won't be able
+_In case of complex architecture, this methodology won't be able
 to test every branch of the platform. Typically, If a rendition farm
 is defined, it's not possible, using this, to ensure both rendition
-server have been tested.*
-
+server have been tested._

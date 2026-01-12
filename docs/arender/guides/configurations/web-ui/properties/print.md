@@ -1,19 +1,12 @@
 ---
 title: Print
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: e8561da8eef224b8a47d9bc0d8840c146ab5608593f8a4d199a7196f72b8e852
 ---
 
-
-
-
-
-
-
 ## General
-
 
 | Description                                          | Key parameter                    | Default value | Type    |
 | ---------------------------------------------------- | -------------------------------- | ------------- | ------- |
@@ -24,5 +17,3 @@ content_hash: e8561da8eef224b8a47d9bc0d8840c146ab5608593f8a4d199a7196f72b8e852
 | Force the print of annotations (cannot be unchecked) | print.forcePrintAnnotations      | false         | Boolean |
 | Print using a PDF instead of a set of images         | print.usePDFPrint                | true          | Boolean |
 | Print by default all documents                       | print.allDocumentsByDefault      | false         | Boolean |
-
-

@@ -35,8 +35,6 @@ Documentation can be found [here](/installation/standalone/web-ui/filenet/filene
 These options are optional. If unset, the application will use default behavior.
 Make sure to apply these settings consistently across all nodes behind the load balancer for proper affinity.
 
-
-
 ## Important
 
 ### Regression

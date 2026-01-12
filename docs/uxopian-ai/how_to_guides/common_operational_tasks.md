@@ -1,8 +1,8 @@
 ---
 title: User Guide Integration  Common Operations
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 1e9e06929c226d1b6436b8e172e6695c5151b64adfe67a39a366bd21ad1a24af
 ---
 
@@ -65,22 +65,19 @@ curl -X POST "http://localhost:8080/api/v1/conversations" \
 
 ```javascript
 const createConversation = async (tenantId, userId) => {
-  const response = await fetch(
-    "http://uxopian-ai-service:8080/api/v1/conversations",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // The Gateway injects these headers
-        "X-User-TenantId": tenantId,
-        "X-User-Id": userId,
-      },
-    }
-  );
+    const response = await fetch("http://uxopian-ai-service:8080/api/v1/conversations", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            // The Gateway injects these headers
+            "X-User-TenantId": tenantId,
+            "X-User-Id": userId,
+        },
+    });
 
-  const data = await response.json();
-  console.log("New Conversation ID:", data.id);
-  return data;
+    const data = await response.json();
+    console.log("New Conversation ID:", data.id);
+    return data;
 };
 ```
 

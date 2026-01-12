@@ -1,9 +1,10 @@
 ---
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: cb05d8645a390fb530edf6675631ba5f0f8351629e848a39291da1fe44f53c48
 ---
+
 # The worker
 
 :::tip
@@ -215,16 +216,14 @@ However there would be absolutely no point in starting another worker assigned t
 
 This guide explains how to configure a remote worker to your broker. It covers both scenarios: when both applications are on the same network and when they are on different networks.
 
-
 #### Prerequisites
 
 - Java Development Environment: Both the worker and broker applications should have at least a jdk8+ available on their environment. We highly recommend a jdk11.
 - Network Connectivity: Both systems should be able to connect to each other through the network (whether local or remote).
 
-
 #### Remote worker config
 
-```properties 
+```properties
 server.host=<broker_ip_address>
 
 # Remote = docs ends broker side
@@ -250,13 +249,15 @@ worker.content.factory=<remote|local>
 
 **Step 1: Ensure Network Connectivity**
 On the worker machine, ensure that you can ping the public IP address of the broker. You may need to test it by pinging broker_public_ip_address.
+
 ```bash
 ping <broker_public_ip_address>
 ```
+
 If the ping works, proceed to the next step. If the ping does not work, there may be an issue with the router, firewall, or routing configuration.
 
 **Step 2: Update the broker.url in the Worker Configuration**
-On the worker machine, update the **server.host** property in your *config/application.properties* file to the local IP address of the broker.
+On the worker machine, update the **server.host** property in your _config/application.properties_ file to the local IP address of the broker.
 
 If needed, you can change the protocol and port information as well. The **broker.url** variable is automatically updated. Do not change it.
 
@@ -267,10 +268,12 @@ server.port=1789
 
 broker.url=${server.protocol}://${server.host}:${server.port}/broker
 ```
+
 Make sure the port is open and the broker is listening on the specified port.
 
 **Step 3: Verify broker is listening on specified port**
 On the broker machine, verify that the broker application is listening on the port you specified by using the following command:
+
 ```bash
 # Linux
 sudo netstat -tuln | grep <port>
@@ -278,13 +281,16 @@ sudo netstat -tuln | grep <port>
 # Windows
 `netstat -ano | findstr <port>`
 ```
+
 The output should show something like:
+
 ```ruby
 tcp6       0      0 :::<port>                 :::*                    LISTEN
 ```
 
 **Step 4: Test the connection**
 On the worker machine, test the connection to the broker using nc (netcat) to check if the port is open and accessible:
+
 ```bash
 # Linux
 nc -zv <broker_local_ip_address> <port>
@@ -292,8 +298,8 @@ nc -zv <broker_local_ip_address> <port>
 # Windows
 telnet <broker_local_ip_address> <port>
 ```
-If the connection is successful, the worker and broker can communicate.
 
+If the connection is successful, the worker and broker can communicate.
 
 #### Configure Worker and Broker on different networks
 
@@ -317,6 +323,7 @@ sudo ufw allow <port>/tcp
 **Step 3: Repeat steps explained for same network**
 
 #### Remote worker configuration
+
 You have multiple options through the application.properties file to configure your remote worker.
 
 ##### File storage : broker or worker ?
@@ -332,10 +339,11 @@ worker.content.factory=<remote|local>
 - Select **local** (default value) to keep documents processed by the worker from its side
 
 ##### Example
+
 This is an example to understand what happens for both scenarios. Imagine that we are extracting some documents from a Documentum environment and we need to convert tiff files to a pdf format.
 
 <!-- ###### Local
-```mermaid 
+```mermaid
 sequenceDiagram
 Worker ->> Broker: Hi broker, I'm available
 Broker ->> Worker: Hello worker, I have some work for you
@@ -348,7 +356,7 @@ Worker ->> Broker: I'm still available if you need
 ``` -->
 
 <!-- ###### Remote
-```mermaid 
+```mermaid
 sequenceDiagram
 Worker ->> Broker: Hi broker, I'm available
 Broker ->> Worker: Hello worker, I have some work for you
@@ -372,20 +380,25 @@ Then documents will follow a strict hierarchy as mentioned in the property **wor
 worker.files.dir=files/
 worker.files.pattern=@{campaign?:'shared'}/@{step?:'shared'}/@{documentId?:punnetId}
 ```
+
 Values shown above are used by default. Feel free to change it to match your requirements in term of folder organization.
 
-
 #### Troubleshooting
+
 ##### Common Issues
 
 ###### Ping does not work
+
 Ensure that the devices can actually communicate over the network. Double-check the network cables, Wi-Fi connection, and make sure there are no misconfigured network settings or firewalls blocking ICMP packets.
 
 ###### Connection times out
+
 If using public IP addresses, check the router’s port forwarding configuration and verify that the firewall on both the broker and worker machines allows traffic on the relevant port.
 
 ###### Port is closed
+
 Verify that the broker application is actually listening on the specified port, and ensure the port is not blocked by a firewall.
 
 ###### Public IP changes
+
 If the public IP of the broker changes frequently, consider using a Dynamic DNS (DDNS) service to map a domain name to the changing IP address, so the worker can use the domain name instead of an IP address.

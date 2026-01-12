@@ -1,44 +1,38 @@
 ---
 title: GET a comparison order
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 5f9a872d21c857fbd2f44684811b78e53ed89910638ffa8b63b02afe64620f77
 ---
-
-
-
-
-
-
-
 
 This API allows you to retrieve a comparison order previously requested.
 
 ## API technical description
 
 Entry point:
+
 ```bash
 GET /comparisons/<comparisonOrderId>
 ```
 
 Resource path:
 
-| Variable             | Type     | Required | Description                                                   |
-| :------------------- |:---------|:---------|:--------------------------------------------------------------|
-| comparisonOrderId    | String   | yes      | The ID of a comparison order to get.                          |
+| Variable          | Type   | Required | Description                          |
+| :---------------- | :----- | :------- | :----------------------------------- |
+| comparisonOrderId | String | yes      | The ID of a comparison order to get. |
 
 Query param:
 
-| Variable             | Type     | Required | Description                                                   |
-| :------------------- |:---------|:---------|:--------------------------------------------------------------|
-| timeoutMs            | String   | no       | The maximum waiting time before getting the comparison order. |
+| Variable  | Type   | Required | Description                                                   |
+| :-------- | :----- | :------- | :------------------------------------------------------------ |
+| timeoutMs | String | no       | The maximum waiting time before getting the comparison order. |
 
 Response:
 
-| Attribute             | Type                  | Description       |
-| :-------------------- | :-------------------- |:------------------|
-| comparisonOder        | ComparisonOrder       | Comparison order. |
+| Attribute      | Type            | Description       |
+| :------------- | :-------------- | :---------------- |
+| comparisonOder | ComparisonOrder | Comparison order. |
 
 ## Examples
 

@@ -6,10 +6,9 @@ date: 2025-05-02
 
 # To modify
 version: "2025.1.0"
-major_version: "2025" 
-description: "Summary of the changes in version 2025.1.0 of Fast2." 
+major_version: "2025"
+description: "Summary of the changes in version 2025.1.0 of Fast2."
 ---
-
 
 ## **What's up ?**
 
@@ -137,4 +136,3 @@ Bugfix: Fixed a bug when the scheduler prevented the selection of an unlimited n
 - Recent patches: Some recent patches directly delivered by Professional Services, whether for enhancement or bug fixing, were integrated too late in this version life cycle to be released in time. Contact your Professional Services referee if you want further information about your own installed patches. Know that 2025.1 is compatible with 2.12 worker libs. (are concerned: MFilesInjector, ComparePunnets, FileNetInjector, LocalSource)
 
 - Security & confidentiality: Fast2 UI users can create a map and run a campaign with the JSTransform and ReadContent tasks to access local files, which represents a breach in confidentiality and security. We are working on a resolution for the final release. Please, for safety reasons, reduce access to only trusted IP addresses.
-

@@ -34,8 +34,22 @@ export interface PluginOptions {
     getPdfFileName?: FileNameFunction;
 }
 export declare type PapersaurusPluginOptions = Required<PluginOptions>;
-export declare type PageFunction = (siteConfig: any, pluginConfig: PapersaurusPluginOptions, pageTitle: string, version: string) => string;
-export declare type FileNameFunction = (siteConfig: any, pluginConfig: PapersaurusPluginOptions, pageTitle: string, pageId: string, parentTitles: string[], parentIds: string[], version: string, versionPath: string) => string;
+export declare type PageFunction = (
+    siteConfig: any,
+    pluginConfig: PapersaurusPluginOptions,
+    pageTitle: string,
+    version: string
+) => string;
+export declare type FileNameFunction = (
+    siteConfig: any,
+    pluginConfig: PapersaurusPluginOptions,
+    pageTitle: string,
+    pageId: string,
+    parentTitles: string[],
+    parentIds: string[],
+    version: string,
+    versionPath: string
+) => string;
 export declare type UsePath = {
     serverPath: string;
     localPath: string;

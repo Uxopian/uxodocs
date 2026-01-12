@@ -1,23 +1,21 @@
 ---
 title: Graphs
-date: '2000-06-28T13:20:01+02:00'
+date: "2000-06-28T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 84abe83a9441c5ff2e70449d885f6b629c171497baabd9cddd31248eec79607f
 ---
 
+On the home page, graphs defined by searches can be displayed. The chart type is automatically determined from the number of aggregations:
 
-
-On the home page, graphs defined by searches can be displayed. The chart type is automatically determined from the number of aggregations: 
-
-* one level of aggregation: donut 
-* two levels of aggregation: histogram 
+- one level of aggregation: donut
+- two levels of aggregation: histogram
 
 # Donut
 
-__Example: Donut of my mails according to their status__
- 
+**Example: Donut of my mails according to their status**
+
 ```xml
 <bean id="myMailsGraph" class="com.flower.docs.gui.client.home.graph.HomeGraphPresenter">
 	<property name="search">
@@ -26,7 +24,7 @@ __Example: Donut of my mails according to their status__
 			    <bean class="com.flower.docs.domain.common.Id">
 			        <property name="value" value="pliSearch" />
 			    </bean>
-			</property>				
+			</property>
 			<property name="category">
 				<value type="com.flower.docs.domain.component.Category">TASK</value>
 			</property>
@@ -98,7 +96,7 @@ __Example: Donut of my mails according to their status__
 			</bean>
 		</list>
 	</property>
-</bean> 
+</bean>
 ```
 
 <br/>
@@ -107,13 +105,11 @@ The following result on the home page:
 
 ![Donut demonstration](/img/flowerdocs/documentation/donut.png)
 
-
 :::info
 To redirect the user when clicking on a series, override the `handleDonutClick(selector, fieldName, fieldValue, label)` JavaScript method.
 :::
 
-
-__Exemple : Redirect to PersonelleTab with filter on selected Statut value__
+**Exemple : Redirect to PersonelleTab with filter on selected Statut value**
 
 ```js
 	function handleDonutClick(selector, fieldName, fieldValue, label){
@@ -128,7 +124,7 @@ __Exemple : Redirect to PersonelleTab with filter on selected Statut value__
 
 With this type of graph, the first level of aggregation is used to display vertical columns. The second level defines the series.
 
-__Example: Histogram of all correspondence by department and status__
+**Example: Histogram of all correspondence by department and status**
 
 ```xml
 <bean id="allMailsGraph" class="com.flower.docs.gui.client.home.graph.HomeGraphPresenter">
@@ -138,7 +134,7 @@ __Example: Histogram of all correspondence by department and status__
 			    <bean class="com.flower.docs.domain.common.Id">
 			        <property name="value" value="allSearch" />
 			    </bean>
-			</property>				
+			</property>
 			<property name="category">
 				<value type="com.flower.docs.domain.component.Category">TASK</value>
 			</property>
@@ -224,14 +220,11 @@ The following result on the home page:
 
 ![Histogram demonstration](/img/flowerdocs/documentation/histogram.png)
 
-
-
 :::info
-To redirect the user when clicking on a series, override the `handleStackedBarClick(selector, bar, serie)`  JavaScript method.
+To redirect the user when clicking on a series, override the `handleStackedBarClick(selector, bar, serie)` JavaScript method.
 :::
 
-
-__Exemple : Redirect to CollectiveTab tab with filter on selected series and Status value__
+**Exemple : Redirect to CollectiveTab tab with filter on selected series and Status value**
 
 ```js
 function handleStackedBarClick(selector, barName,barValue, serieName, serieValue){

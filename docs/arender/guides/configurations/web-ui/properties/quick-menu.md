@@ -1,16 +1,10 @@
 ---
 title: Quick menu
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 07fd494679552db8f7b7f33ffb6564dd9bc7e497fd5f77d279732fde4278eb21
 ---
-
-
-
-
-
-
 
 ## General
 

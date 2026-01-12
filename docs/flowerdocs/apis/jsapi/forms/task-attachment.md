@@ -1,22 +1,21 @@
 ---
 title: Task attachments
-date: '2001-03-29T13:22:01+02:00'
+date: "2001-03-29T13:22:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 74f17fc0af247e06d4b04834441bd722e2926a16f3196f65969cef7a8916cd70
 ---
-
 
 # Document as attachment without indexing
 
 It is possible to use the old mode of document creation as an attachment without an indexing form by defining a strategy to activate the *Legacy*mode.
 
-In the following example, attachments with the identifier `Appendices` use the old mode, the others the new.  
+In the following example, attachments with the identifier `Appendices` use the old mode, the others the new.
 
 ```javascript
 LegacyDocumentAttachmentCreationStrategy.registerStrategy(function(task,attachment){
-	if("Appendices" == attachment.getId()){ 
+	if("Appendices" == attachment.getId()){
 		return true;
 
     return false;
@@ -25,21 +24,21 @@ LegacyDocumentAttachmentCreationStrategy.registerStrategy(function(task,attachme
 
 # Summary
 
-Attachment summaries can be overloaded using the `TaskAttachmentSynopsisHelper` API. 
+Attachment summaries can be overloaded using the `TaskAttachmentSynopsisHelper` API.
 
-__Example:__ Define part summary based on parent task tags
+**Example:** Define part summary based on parent task tags
 
 ```javascript
 helper = JSAPI.get().getHelperFactory().getTaskAttachmentSynopsisHelper();
-helper.register(function(task, definition, attachedComponent, callback){
-	new TemplateResolver("TASK").resolveTemplate(task, "${Priority}", function(resolved){
-	    console.log("Resolved template: " + resolved); 
-	    callback.onSuccess(resolved);
-	});
+helper.register(function (task, definition, attachedComponent, callback) {
+    new TemplateResolver("TASK").resolveTemplate(task, "${Priority}", function (resolved) {
+        console.log("Resolved template: " + resolved);
+        callback.onSuccess(resolved);
+    });
 });
 ```
 
-__Example:__ Define the summary of an unsigned attachment
+**Example:** Define the summary of an unsigned attachment
 
 ```javascript
 helper = JSAPI.get().getHelperFactory().getTaskAttachmentSynopsisHelper();

@@ -1,8 +1,8 @@
 ---
 title: User Management
 last_update:
-  date: '2025-12-09T08:47:49.723Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:47:49.723Z"
+    author: CI/CD Bot
 content_hash: 4fc30f203c0e5fb660ae9f3e71ff67db3ebfd09a44e3ee5b3717e5ea7c4257b2
 ---
 

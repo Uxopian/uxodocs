@@ -1,41 +1,33 @@
 ---
 title: New installation
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: a72e1675d76113ad025b5301a5569850451a167efbf7a84b2db93a89dd7f98bd
 ---
 
-
-
-
-
-
-
-Here we present the Web-UI installation in M-Files. 
+Here we present the Web-UI installation in M-Files.
 
 In our example, we deploy the Web-UI
 in an environment with:
 
 - Operating system : Windows Server 2016 Datacenter
-- M-Files 
+- M-Files
 - A Tomcat9 server
-- ARender Web-UI version 
+- ARender Web-UI version
 - Have a Functional Rendering. So just follow this **[documentation](/docs/arender/installation/standalone/rendition/install)**.
-
 
 ## Steps to Configure the Rendition
 
-- Place the *arondor-arender-mfiles-connector-1.0.5.jar* under *rendition-engine-package-/modules/RenditionEngine/client_libs*
+- Place the _arondor-arender-mfiles-connector-1.0.5.jar_ under _rendition-engine-package-/modules/RenditionEngine/client_libs_
 
 docs/install/install-mfiles/arondor-arender-mfiles-connector-1.0.5.jar
 
-- Since 4.8.8, you will need to add under **rendition-engine-package-/modules/RenditionEngine** in *application.properties* the following property: **authorized.urls=http://localhost/REST/**
+- Since 4.8.8, you will need to add under **rendition-engine-package-/modules/RenditionEngine** in _application.properties_ the following property: **authorized.urls=http://localhost/REST/**
 
 docs/install/install-mfiles/application.properties
 
 - Start the ARender Rendition server
-
 
 ## Steps to install the Web-UI
 
@@ -43,56 +35,55 @@ Using the username and password previously provided (contact arender-sales@arond
 you can recover the version of the web application used in WAR format
 **[here](https://artifactory.arondor.cloud:443/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi//arondor-arender-hmi-.war)**.
 
-Use the Tomcat9 server. You just need to deploy your war (*arondor-arender-hmi-.war* into and to **rename it** *arondor-arender-mfiles.war*), now place it there :
+Use the Tomcat9 server. You just need to deploy your war (_arondor-arender-hmi-.war_ into and to **rename it** _arondor-arender-mfiles.war_), now place it there :
 
-* Program Files
-    * Apache Software Foundation
-        * Tomcat 9.0
-            * webapps
+- Program Files
+    - Apache Software Foundation
+        - Tomcat 9.0
+            - webapps
 
-Copy the previously downloaded *arondor-arender-mfiles-connector-1.0.5.jar* connector, place it under *arondor-arender-mfiles-\WEB-INF\lib*.
+Copy the previously downloaded _arondor-arender-mfiles-connector-1.0.5.jar_ connector, place it under _arondor-arender-mfiles-\WEB-INF\lib_.
 
 Afterwards :
-- Place those files *(below)* under ***arondor-arender-mfiles-\WEB-INF\classes***<br/>
-docs/install/install-mfiles/arender-editor-specific-integration.xml
-docs/install/install-mfiles/vaf/arender-server.properties
 
+- Place those files _(below)_ under **_arondor-arender-mfiles-\WEB-INF\classes_**<br/>
+  docs/install/install-mfiles/arender-editor-specific-integration.xml
+  docs/install/install-mfiles/vaf/arender-server.properties
 
-You need to edit different values of the *arender-server.properties* file depending on your M-Files vault configuration
-
+You need to edit different values of the _arender-server.properties_ file depending on your M-Files vault configuration
 
 ## Steps to deploy ARender on M-Files
 
 To install ARender on M-Files vault, follow the steps below:
-- Download VAF_MFF_ArenderConnector: 
-docs/install/install-mfiles/VAF_MFF_ArenderConnector_22.12.3.0.mfappx
+
+- Download VAF_MFF_ArenderConnector:
+  docs/install/install-mfiles/VAF_MFF_ArenderConnector_22.12.3.0.mfappx
 - Run M-Files Admin console
 - Right click on the desired vault and select **Applications**
 - Click **Install...**
 - Select the previously downloaded **VAF_MFF_ArenderConnector_22.12.3.mfappx** file
 - Click **Yes** if this window shows up
-![mfiles](/img/arender/mfiles/mfiles-app-popup.png)
+  ![mfiles](/img/arender/mfiles/mfiles-app-popup.png)
 - The application is now installed
 - Click **Close**
 - Click **Yes** if this window shows up
-![mfiles](/img/arender/mfiles/mfiles-app-popup.png)
+  ![mfiles](/img/arender/mfiles/mfiles-app-popup.png)
 
 Now that we have installed ARender on M-Files vault, we can start configuring the application.
 
 ## Steps to configure ARender on M-Files
 
-VAF_MFF_ArenderConnector uses a JSON configuration file. You can manage it through the graphic interface within the M-Files Admin client. 
+VAF_MFF_ArenderConnector uses a JSON configuration file. You can manage it through the graphic interface within the M-Files Admin client.
 
 - Run M-Files Admin client
 - Click on the arrow next to your vault
-![mfiles](/img/arender/mfiles/mfiles-07.png)
+  ![mfiles](/img/arender/mfiles/mfiles-07.png)
 - Click on **Configurations** for your vault
 - Select **Other Applications** then select **VAF_MFF_ArenderConnector**. The dashboard appears
 - Click on **Configuration** tab
 - Fill in every configuration properties. When clicking the **i** icon, you will get a help showing up.
-![mfiles](/img/arender/mfiles/mfiles-app-configuration.png)
+  ![mfiles](/img/arender/mfiles/mfiles-app-configuration.png)
 - Once you have configured, click **Save**
-
 
 ## Steps to open a document with M-Files
 

@@ -1,9 +1,10 @@
 ---
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 5ffe6b700d9f2fa4477d60cb9b80b9e713b38fd63404ca9debe242f96070a5f6
 ---
+
 # JDBC : How to link Fast2 and SQL DB
 
 ![Cover image for JDBC cookbook](../assets/img/cookbooks/jdbc.png)
@@ -79,7 +80,6 @@ Basically, two fields are mandory:
 
     ![SQLStatement](../assets/img/cookbooks/jdbc_SQLStatement.png)
 
-
 Now let's start your Fast2 map and check that your table has new values !
 
 ```sql
@@ -87,7 +87,6 @@ SELECT * from table_test_connection;
 ```
 
 ![Before and after, results comparison](../assets/img/cookbooks/jdbc_before_after_injection.png)
-
 
 ## 👏 Fast2: 1, JDBC & SQL: 0
 

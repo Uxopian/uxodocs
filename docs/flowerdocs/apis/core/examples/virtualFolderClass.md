@@ -1,16 +1,15 @@
 ---
 title: Manipulating a virtual folder class
-description: 'Create, retrieve, modify, delete your virtual folder classes'
-date: '2001-04-29T13:30:01+01:01'
+description: "Create, retrieve, modify, delete your virtual folder classes"
+date: "2001-04-29T13:30:01+01:01"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 78e7708ddbadb95d25ab95e6423e96388baf7876aa74f249bfded39538398b6b
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-
 
 The `VirtualFolderClass` service exposes all the operations available around the `VirtualFolderClass` type components.
 
@@ -24,10 +23,10 @@ The examples below show how to retrieve all virtual folder classes.
 ```http
 GET {{core}}/rest/virtualfolderclass HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 
--- Headers -- 
+-- Headers --
 token: {{token}}
 Content-Type: application/json
 ```
@@ -49,10 +48,9 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Virtual folder class creation
 
-The examples below show how to create ACLs using the operation of create. 
+The examples below show how to create ACLs using the operation of create.
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -60,10 +58,10 @@ The examples below show how to create ACLs using the operation of create.
 ```http
 POST {{core}}/rest/virtualfolderclass HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 
--- Headers -- 
+-- Headers --
 token: {{token}}
 Content-Type: application/json
 
@@ -160,7 +158,7 @@ Content-Type: application/json
 ```Java
 @Autowired
     private VirtualFolderClassService vfcService;
-    
+
 	@PostMapping
     public List<VirtualFolderClass> create() throws FunctionalException, TechnicalException
 
@@ -186,7 +184,6 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Virtual folder class modification
 
 This operation updates the data of a virtual folder class: tags and search
@@ -195,14 +192,13 @@ This operation updates the data of a virtual folder class: tags and search
 This service operates on a cancel and replace basis, so all tag values must be supplied by the service at the time of update. It is therefore advisable to retrieve the virtual folder class, make the modifications and call the update service.
 :::
 
-
 <Tabs>
   <TabItem value="rest" label="REST">
 
 ```http
 POST {{core}}/rest/virtualfolderclass/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 ids: comma-separated list of virtual folder class identifiers to be updated
 
@@ -305,7 +301,7 @@ Content-Type: application/json
 ```Java
 @Autowired
 	private VirtualFolderClassService vfcService;
-    
+
 	@PostMapping("/update")
     public void update() throws FunctionalException, TechnicalException
 
@@ -331,7 +327,6 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Virtual folder class search
 
 The example below shows how to retrieve a virtual folder class from a list of identifiers.
@@ -342,7 +337,7 @@ The example below shows how to retrieve a virtual folder class from a list of id
 ```http
 GET {{core}}/rest/virtualfolderclass/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 ids: comma-separated list of virtual folder class identifiers to be retrieved
 
@@ -357,7 +352,7 @@ Content-Type: application/json
 ```Java
 @Autowired
 	private VirtualFolderClassService vfcService;
-	
+
     @GetMapping
     public List<VirtualFolderClass> get() throws FunctionalException, TechnicalException
 
@@ -369,7 +364,6 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 # Virtual folder class deletion
 
 This operation deletes a list of virtual folder classes from a list of identifiers.
@@ -380,7 +374,7 @@ This operation deletes a list of virtual folder classes from a list of identifie
 ```http
 DELETE {{core}}/rest/virtualfolderclass/{ids} HTTP/1.1
 
--- URL parameters -- 
+-- URL parameters --
 core: FlowerDocs Core host
 ids: comma-separated list of virtual folder class identifiers to be deleted
 
@@ -395,7 +389,7 @@ Content-Type: application/json
 ```Java
 @Autowired
 	private VirtualFolderClassService vfcService;
-	
+
     @DeleteMapping()
     public void delete() throws FunctionalException, TechnicalException
 

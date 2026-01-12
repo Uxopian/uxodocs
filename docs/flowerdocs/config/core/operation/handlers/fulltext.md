@@ -1,13 +1,12 @@
 ---
 title: Content indexing
 description: Index document content
-date: '2009-03-28T13:20:01+02:00'
+date: "2009-03-28T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 363c922d0103af9e15880480fe7e41ae46d8de9400c065809b58ba08a3cdb112
 ---
-
 
 # Principle
 
@@ -20,9 +19,9 @@ This operation can be activated on the `CREATE` and `ADD_CONTENT` actions.
 To manually define this operation handler, the `com.flower.docs.core.tsp.operation.fulltext.FullTextOperationHandler` identifier must be used as the value of the `OperationHandler` tag.
 :::
 
-
 # Using an external library
-It is possible to call an external hook for indexing content using a library other than Tikka, which is the one used internally by FlowerDocs. To do this, you can add the URL of the external hook and the specific mime types on which it will be called. 
+
+It is possible to call an external hook for indexing content using a library other than Tikka, which is the one used internally by FlowerDocs. To do this, you can add the URL of the external hook and the specific mime types on which it will be called.
 <br/>
 The external hook url can be built as follows : `http://{ip de la machine host}:{port}/{route}`, for example : http://25.42.62.95:3079/fullText/indexation.
 :::info

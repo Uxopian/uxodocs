@@ -1,30 +1,30 @@
 ---
 title: Handling document versions
-description: 'Create, restore, delete document versions'
-date: '2001-03-30T13:20:02+02:00'
+description: "Create, restore, delete document versions"
+date: "2001-03-30T13:20:02+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 89f4d558de744bd90d018f28bb44a2c390813ef3c12ec8fe89ff5b5a69453601
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
 The `VersionService` service displays the following operations:
 
-* `promote`: to create a version of a document
-* `getVersions`: to retrieve document versions
-* `revert`: to restore a version of a document
-* `deleteVersion`: to delete a version of a document
-* `deleteVersions`: to delete all versions of a document
+- `promote`: to create a version of a document
+- `getVersions`: to retrieve document versions
+- `revert`: to restore a version of a document
+- `deleteVersion`: to delete a version of a document
+- `deleteVersions`: to delete all versions of a document
 
 # Creating a version
 
 The example below shows how to create a version of a document.
 <br/>
 <Tabs>
-  <TabItem value="rest" label="REST">
+<TabItem value="rest" label="REST">
 
 ```http
 POST {{core}}/rest/documents/{documentId}/versions HTTP/1.1
@@ -59,13 +59,12 @@ public Document promote() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-
 # Versions recovery
 
 The example below shows how to recover versions of a document.
 <br/>
 <Tabs>
-  <TabItem value="rest" label="REST">
+<TabItem value="rest" label="REST">
 
 ```http
 GET {{core}}/rest/documents/{documentId}/versions HTTP/1.1
@@ -96,13 +95,12 @@ public VersionSeries getVersions() throws TechnicalException, FunctionalExceptio
   </TabItem>
 </Tabs>
 
-
 # Restoring a version
 
 The example below shows how to restore a version of a document.
 <br/>
 <Tabs>
-  <TabItem value="rest" label="REST">
+<TabItem value="rest" label="REST">
 
 ```http
 POST {{core}}/rest/documents/{documentId}/versions/{versionId}/revert HTTP/1.1
@@ -135,7 +133,6 @@ public Document revert() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-
 # Version deletion
 
 ## Deleting a version
@@ -143,7 +140,7 @@ public Document revert() throws TechnicalException, FunctionalException
 The example below shows how to delete a version of a document.
 <br/>
 <Tabs>
-  <TabItem value="rest" label="REST">
+<TabItem value="rest" label="REST">
 
 ```http
 DELETE {{core}}/rest/documents/{documentId}/versions/{versionId} HTTP/1.1
@@ -176,13 +173,12 @@ public void deleteVersion() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-
 ## All versions deletion
 
 The example below shows how to delete all versions of a document.
 <br/>
 <Tabs>
-  <TabItem value="rest" label="REST">
+<TabItem value="rest" label="REST">
 
 ```http
 DELETE {{core}}/rest/documents/{documentId}/versions HTTP/1.1
@@ -212,4 +208,3 @@ public void deleteVersion() throws TechnicalException, FunctionalException
 
   </TabItem>
 </Tabs>
-

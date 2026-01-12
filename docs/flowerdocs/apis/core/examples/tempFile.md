@@ -1,21 +1,21 @@
 ---
 title: Handling a temporary file
-description: 'Create, modify, delete temporary files'
-date: '2001-04-15T13:20:01+02:00'
+description: "Create, modify, delete temporary files"
+date: "2001-04-15T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 06aa1fe08699e78dccefc4208f0c23dba8ef5f95d01a2b8b986b7729340988ee
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
 The `TempFileService` service exposes the following operations:
 
-* `create`: to create a temporary file 
-* `getContent`: to retrieve a temporary file  
-* `delete`: to delete a temporary file
+- `create`: to create a temporary file
+- `getContent`: to retrieve a temporary file
+- `delete`: to delete a temporary file
 
 # Creating a temporary file
 
@@ -31,7 +31,7 @@ POST {{core}}/rest/files/tmp HTTP/1.1
 
 -- URL parameters --
 core: FlowerDocs Core host
-file: temporary file to create 
+file: temporary file to create
 
 -- Headers --
 token: {{token}}
@@ -56,7 +56,6 @@ public DocumentFile create() throws TechnicalException, FunctionalException
 
   </TabItem>
 </Tabs>
-
 
 # Recovering a temporary file
 
@@ -95,7 +94,6 @@ public DocumentFile get() throws TechnicalException, FunctionalException
 
   </TabItem>
 </Tabs>
-
 
 # Deleting a temporary file
 

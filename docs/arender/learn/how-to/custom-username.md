@@ -1,16 +1,10 @@
 ---
 title: Custom display name
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 9f9aeb309be1565d50d1114d2a6228fdae887813547be9715d6bbd388617f415
 ---
-
-
-
-
-
-
 
 ARender allows to customize display names.
 
@@ -21,9 +15,9 @@ browser side and let the server handle the real unique user ID.
 
 In order to simplify reading the annotations, ARender allows to
 implement in the Front end side (Web-UI) an interface of
-*DisplayNameProvider*.
+_DisplayNameProvider_.
 
-``` java
+```java
 public interface DisplayNameProvider
 
     String fetchDisplayName(String originalCreatorName);
@@ -33,13 +27,13 @@ public interface DisplayNameProvider
 ```
 
 Those two methods needs to be implemented (one of them being a list
-format call of the first) and to return *displayNames* from given
+format call of the first) and to return _displayNames_ from given
 userNames.
 
 Here is a default base sample (available inside ARender default
-packaging) which allows to prefix all usernames by *arender*.
+packaging) which allows to prefix all usernames by _arender_.
 
-``` java
+```java
 public class DefaultPrefixerDisplayNameProvider implements DisplayNameProvider
 
     private String prefix = "arender";
@@ -94,14 +88,14 @@ The last remaining step is required to indicate to ARender which display
 names provider it should use. This is done in the following files:
 
 - Example of bean definition (modifications to do in
-*arender-custom-server-integration.xml *):
+  _arender-custom-server-integration.xml _):
 
 ```xml
 <bean id="myCustomNameProvider" class="com.arondor.viewer.MyCustomDisplayNameProvider" />
 ```
 
 - Example of property setup (modifications to do in
-*configurations/arender-custom-server.properties*):
+  _configurations/arender-custom-server.properties_):
 
 ```cfg
 arender.server.displayName.provider=myCustomNameProvider

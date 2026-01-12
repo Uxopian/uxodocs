@@ -1,13 +1,13 @@
 ---
 author: Joseph TESSIER
 tags:
-  - boilerplate
-  - punnet
-  - content
-  - java
+    - boilerplate
+    - punnet
+    - content
+    - java
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 8a033119e3b2c0bb00c667e0f4a531fca70c1922daec5a202c18acdc1bb23cfb
 ---
 
@@ -69,15 +69,15 @@ Whatever the reason, the documents can be added to the punnet in two ways:
 
 1. The document was **already existing**:
 
-   ```java
-   Document myDoc = myPunnet.addDocument(myDocument);
-   ```
+    ```java
+    Document myDoc = myPunnet.addDocument(myDocument);
+    ```
 
 2. The document **needs to be created**, which can be done on the fly:
 
-   ```java
-   Document myDoc = myPunnet.addDocument(DocumentId.id());
-   ```
+    ```java
+    Document myDoc = myPunnet.addDocument(DocumentId.id());
+    ```
 
 All documents can be access via the list of all documents stored in the punnet:
 

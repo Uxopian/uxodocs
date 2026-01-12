@@ -1,28 +1,21 @@
 ---
 title: Annotations
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 154896d0397094fa11a1feb33cf4ab208ccd0dbc6a1e7cd139cbabdfac423d58
 ---
 
-
-
-
-
-
-
 ## General
 
-| Description                                       | Parameter Key                                 | Default value | Type    |
-| ------------------------------------------------- | --------------------------------------------- | ------------- | ------- |
-| Automatic save mode                               | annotation.autosave                           | false         | Boolean |
-| Auto refreshes the annotations after save         | annotation.autorefresh                        | true          | Boolean |
-| Load existing annotations                         | annotation.loadExisting                       | true          | Boolean |
-| Display loading GIF when saving annotations       | annotation.loadingGIF                         | true          | Boolean |
-| Include annotation textual content when searching | annotation.searchTextInAnnotations            | true          | Boolean |
-| Allow annotation preferences update upon edition  | annotation.preferences.update.onEdit.enabled  | false         | Boolean |
-
+| Description                                       | Parameter Key                                | Default value | Type    |
+| ------------------------------------------------- | -------------------------------------------- | ------------- | ------- |
+| Automatic save mode                               | annotation.autosave                          | false         | Boolean |
+| Auto refreshes the annotations after save         | annotation.autorefresh                       | true          | Boolean |
+| Load existing annotations                         | annotation.loadExisting                      | true          | Boolean |
+| Display loading GIF when saving annotations       | annotation.loadingGIF                        | true          | Boolean |
+| Include annotation textual content when searching | annotation.searchTextInAnnotations           | true          | Boolean |
+| Allow annotation preferences update upon edition  | annotation.preferences.update.onEdit.enabled | false         | Boolean |
 
 ## Autosave
 
@@ -30,7 +23,6 @@ content_hash: 154896d0397094fa11a1feb33cf4ab208ccd0dbc6a1e7cd139cbabdfac423d58
 | ----------------------------------------------------------------- | -------------------------------------- | ------------- | ------- |
 | Saving may be triggered when using annotation creation repeatable | annotation.autosave.repeatMode.enabled | false         | Boolean |
 | Auto save annotation timer delay in milliseconds                  | annotation.autosave.timerDelay         | 1000          | Integer |
-
 
 ## Sticky Note
 
@@ -90,13 +82,12 @@ content_hash: 154896d0397094fa11a1feb33cf4ab208ccd0dbc6a1e7cd139cbabdfac423d58
 | Background color                       | annotation.highlighttext.default.color      | #EAF39C       | String |
 | Strike width ratio (underline, strike) | annotation.highlighttext.strike.width.ratio | 0.1           | Float  |
 
-
 ## Redact
 
-| Description            | Parameter Key               | Default value | Type    |
-| ---------------------- | --------------------------- | ------------- | ------- |
-| Allow hiding redact    | annotation.can.hide.redact  | false         | Boolean |
-| Lock redact            | toolbar.redact.locked       | false         | Boolean |
+| Description         | Parameter Key              | Default value | Type    |
+| ------------------- | -------------------------- | ------------- | ------- |
+| Allow hiding redact | annotation.can.hide.redact | false         | Boolean |
+| Lock redact         | toolbar.redact.locked      | false         | Boolean |
 
 ## Polygon
 
@@ -106,7 +97,6 @@ content_hash: 154896d0397094fa11a1feb33cf4ab208ccd0dbc6a1e7cd139cbabdfac423d58
 | Background color | annotation.polygon.backgroundColor | #2A4869       | String |
 | Border width     | annotation.polygon.width           | 2.0f          | Float  |
 | Border color     | annotation.polygon.borderColor     | #2A4869       | Float  |
-
 
 ## Polyline
 
@@ -132,7 +122,7 @@ content_hash: 154896d0397094fa11a1feb33cf4ab208ccd0dbc6a1e7cd139cbabdfac423d58
 | Compute the arrow size                                                                                  | annotation.arrow.computeDistance          | false         | Boolean                            |
 | Minimum head size                                                                                       | annotation.arrow.minimal.head.size        | -1            | Integer (-1 to disable)            |
 | Default distance between head and tail (X-Axis)                                                         | annotation.arrow.x.defaultDistance        | 12            | Integer                            |
-| Default distance between head and tail (Y-Axis)                                                         | annotation.arrow.y.defaultDistance        | 12            | Integer                            |                      
+| Default distance between head and tail (Y-Axis)                                                         | annotation.arrow.y.defaultDistance        | 12            | Integer                            |
 | Opacity                                                                                                 | annotation.arrow.opacity                  | 1.0           | Float                              |
 | Border width                                                                                            | annotation.arrow.border.width             | 4.0           | Float                              |
 | Head type : NONE, SQUARE, CIRCLE, DIAMOND, OPEN_ARROW, CLOSED_ARROW, BUTT, R_OPEN_ARROW, R_CLOSED_ARROW | annotation.arrow.head.type                | OPEN_ARROW    | String                             |
@@ -146,13 +136,12 @@ content_hash: 154896d0397094fa11a1feb33cf4ab208ccd0dbc6a1e7cd139cbabdfac423d58
 | Background color                                                                                        | annotation.arrow.backgroundColor          | #2A4869       | String (RGB or hexadecimal format) |
 | Minimum head size                                                                                       | annotation.arrow.minimal.head.size        | -1            | Integer (-1 to disable)            |
 | Default distance between head and tail (X-Axis)                                                         | annotation.arrow.x.defaultDistance        | 12            | Integer                            |
-| Default distance between head and tail (Y-Axis)                                                         | annotation.arrow.y.defaultDistance        | 12            | Integer                            |                      
+| Default distance between head and tail (Y-Axis)                                                         | annotation.arrow.y.defaultDistance        | 12            | Integer                            |
 | Opacity                                                                                                 | annotation.arrow.opacity                  | 1.0           | Float                              |
 | Border width                                                                                            | annotation.arrow.border.width             | 4.0           | Float                              |
 | Head type : NONE, SQUARE, CIRCLE, DIAMOND, OPEN_ARROW, CLOSED_ARROW, BUTT, R_OPEN_ARROW, R_CLOSED_ARROW | annotation.arrow.measurement.head.type    | BUTT          | String                             |
 | Tail type : NONE, SQUARE, CIRCLE, DIAMOND, OPEN_ARROW, CLOSED_ARROW, BUTT, R_OPEN_ARROW, R_CLOSED_ARROW | annotation.arrow.measurement.tail.type    | BUTT          | String                             |
 | Defines a degree of accuracy for the arrow displayed measure                                            | annotation.arrow.distance.degree.accuracy | 0.01          | Float                              |
-
 
 ## Date display
 
@@ -162,23 +151,23 @@ content_hash: 154896d0397094fa11a1feb33cf4ab208ccd0dbc6a1e7cd139cbabdfac423d58
 | Display creation date on comments and sticky notes   | annotation.date.display.creationDate          | true          | Boolean |
 
 ## Comment explorer
-|  
-| Description                                                  | Parameter Key                                                 | Default value | Type    |
-| ------------------------------------------------------------ | ------------------------------------------------------------- | ------------- | ------- |
-| The order in which comments appear in the exploration panel  | annotation.comment.explorer.sortByIncrementDate               | false         | Boolean |
-| Also filters annotations on the page view                    | annotation.comment.explorer.filterPageAnnotations             | true          | Boolean |
-| Sets up the comment explorer on the east side                | annotation.comment.explorer.eastSide.enabled                  | false         | Boolean |
-| Opens the comment explorer when an annotation is edited      | annotation.comment.explorer.openOnEdit                        | false         | Boolean |
-| Animate while expanding the comment explorer                 | annotation.comment.explorer.animate.on.expand                 | true          | Boolean |
-| Shows a simplified list of all authors                       | annotation.comment.explorer.showAllAnnotators                 | true          | Boolean |
-| Shows a total number of annotations                          | annotation.comment.explorer.showTotalAnnotationsNumber        | false         | Boolean |
-| Shows the comment explorer at startup                        | annotation.comment.explorer.showAtStartup                     | false         | Boolean |
-| Enable to display annotation in one line if needed           | annotation.comment.explorer.inline.enabled                    | false         | Boolean |
-| Annotation in comment explorer will be displayed in one line | annotation.comment.explorer.show.annotation.minimized.on.open | false         | Boolean |
-| Allow the display of the date                                | annotation.comment.explorer.show.date                         | true          | Boolean |
-| Display only the initials of the creator name                | annotation.comment.explorer.creator.name.initial.only         | false         | Boolean |
-| Enable to display only one annotation per page               | annotation.comment.explorer.show.one.annotation.only          | false         | Boolean |
 
+|  
+| Description | Parameter Key | Default value | Type |
+| ------------------------------------------------------------ | ------------------------------------------------------------- | ------------- | ------- |
+| The order in which comments appear in the exploration panel | annotation.comment.explorer.sortByIncrementDate | false | Boolean |
+| Also filters annotations on the page view | annotation.comment.explorer.filterPageAnnotations | true | Boolean |
+| Sets up the comment explorer on the east side | annotation.comment.explorer.eastSide.enabled | false | Boolean |
+| Opens the comment explorer when an annotation is edited | annotation.comment.explorer.openOnEdit | false | Boolean |
+| Animate while expanding the comment explorer | annotation.comment.explorer.animate.on.expand | true | Boolean |
+| Shows a simplified list of all authors | annotation.comment.explorer.showAllAnnotators | true | Boolean |
+| Shows a total number of annotations | annotation.comment.explorer.showTotalAnnotationsNumber | false | Boolean |
+| Shows the comment explorer at startup | annotation.comment.explorer.showAtStartup | false | Boolean |
+| Enable to display annotation in one line if needed | annotation.comment.explorer.inline.enabled | false | Boolean |
+| Annotation in comment explorer will be displayed in one line | annotation.comment.explorer.show.annotation.minimized.on.open | false | Boolean |
+| Allow the display of the date | annotation.comment.explorer.show.date | true | Boolean |
+| Display only the initials of the creator name | annotation.comment.explorer.creator.name.initial.only | false | Boolean |
+| Enable to display only one annotation per page | annotation.comment.explorer.show.one.annotation.only | false | Boolean |
 
 ## Comments and sticky notes field text
 
@@ -193,7 +182,6 @@ This part concerns the comments and the sticky notes.
 This part concerns the popups which display annotation information on
 mouse over.
 
-
 | Description                                          | Parameter Key                        | Default value | Type    |
 | ---------------------------------------------------- | ------------------------------------ | ------------- | ------- |
 | Enable / disable popup                               | annotation.info.popup.enabled        | true          | Boolean |
@@ -202,7 +190,7 @@ mouse over.
 
 ### Per page annotation loading
 
-If the connector implements the Interface *AnnotationPageAccessor*,
+If the connector implements the Interface _AnnotationPageAccessor_,
 annotations can be loaded on a per page basis in ARender version 3.1.0+.
 
 In order to use this feature activate this parameter:
@@ -211,7 +199,7 @@ In order to use this feature activate this parameter:
 
 The signature of the interface is the following:
 
-``` java
+```java
 List<Annotationget(int page) throws AnnotationsNotSupportedException, AnnotationCredentialsException, InvalidAnnotationFormatException;
 ```
 
@@ -224,5 +212,5 @@ Using local storage for annotation properties can be made possible with the prop
 Its activation does not allow to use the modifications of certain properties on the fly like the use of profiles.
 
 | Description       | Parameter Key                | Type    |
-| ------------------| ---------------------------- | ------- |
+| ----------------- | ---------------------------- | ------- |
 | Use local storage | annotation.use.local.storage | boolean |

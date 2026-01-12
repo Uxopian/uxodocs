@@ -1,23 +1,21 @@
 ---
 title: Form
-date: '2004-04-02T13:20:01+02:00'
+date: "2004-04-02T13:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: 6b77c8d1e98fe4fd5a5c1a997e316f776480ed7294a5f0d6b301bbd6cb0e4fe3
 ---
 
-
-
 # Category selector
 
-To run a search, you need to define the type of object you are looking for (documents, folders, etc.): a component category. 
+To run a search, you need to define the type of object you are looking for (documents, folders, etc.): a component category.
 
-A category selector is available for this purpose. To hide it, the ``FakeCategorySelectorPresenter`` class is used to define the category without the user having to select it.
+A category selector is available for this purpose. To hide it, the `FakeCategorySelectorPresenter` class is used to define the category without the user having to select it.
 
-__Example:__ Defining the category for a virtual folder search
-   
-```xml 
+**Example:** Defining the category for a virtual folder search
+
+```xml
 <property name="categorySelectorPresenter">
         <bean class="com.flower.docs.gui.client.search.criteria.item.FakeCategorySelectorPresenter">
             <property name="value">
@@ -27,27 +25,26 @@ __Example:__ Defining the category for a virtual folder search
 </property>
 ```
 
-
 # Keyword search
 
 The keyword search is configured by adding the following property:
 
-```xml 
+```xml
 <property name="keywordCriteriaPresenter">
 	<bean class="com.flower.docs.gui.client.search.criteria.KeywordCriteriaPresenter" />
 </property>
 ```
 
-To disable the keyword search, add the following property to the ``KeywordCriteriaPresenter`` class bean: 
+To disable the keyword search, add the following property to the `KeywordCriteriaPresenter` class bean:
 
-```xml 
+```xml
 <property name="enabled" value="false" />
 ```
 
 By default, the keyword search will search all component tags. You can change this behaviour and specify which tags
-should be searched by keyword: 
+should be searched by keyword:
 
-```xml 
+```xml
 <property name="fields">
     <list>
     	<value>Matricule</value>
@@ -60,23 +57,22 @@ should be searched by keyword:
 
 The keyword search is configured by adding the following property:
 
-```xml 
+```xml
 <property name="advancedCriteriaPresenter">
     <bean class="com.flower.docs.gui.client.search.criteria.advanced.AdvancedCriteriaPresenter" />
 </property>
 ```
 
-
 To disable the keyword search, add the following property:
 
-```xml 
+```xml
 <property name="enabled" value="false" />
 ```
 
 By default, the advanced search allows you to filter on one or more component classes.
 To avoid displaying the class selector, add the following property:
 
-```xml 
+```xml
 <property name="displayClassSelector" value="false" />
 ```
 
@@ -86,17 +82,17 @@ To make the advanced searchavailable online, add the following property:
 ```xml 
 <property name="inline" value="true" />
 ```
---> 
+-->
 
 To open the advanced search and hide the button for collapsing it, add the following property:
 
-```xml 
+```xml
 <property name="forceOpen" value="true" />
 ```
 
-The default action label is ``Search``, which can be overridden by adding the property: 	
+The default action label is `Search`, which can be overridden by adding the property:
 
-```xml 
+```xml
 <property name="searchButtonTitle">
 	<list>
 		<bean class="com.flower.docs.domain.i18n.I18NLabel">
@@ -115,21 +111,20 @@ The default action label is ``Search``, which can be overridden by adding the pr
 When using a search criterion on a `CONDITIONAL` tag, if the tag on which it depends is not filled in, all the values of the `CONDITIONAL` tag are displayed.
 :::
 
-
-
 ## Free criteria
 
-
 By default, all tag classes defined as **searchable** can be added as search criteria.
-To restrict the scope of your searches, you can: 
+To restrict the scope of your searches, you can:
 
-*	Prevent users from adding a free criterion using the ``+`` button: add the following property to the ``AdvancedCriteriaPresenter`` bean: 
-```xml 
+- Prevent users from adding a free criterion using the `+` button: add the following property to the `AdvancedCriteriaPresenter` bean:
+
+```xml
 <property name="addEmptyCriterion" value="false" />
 ```
-	
-*	Hide a tag from the list of available criteria: add its identifier value to the ``unsearchableCriteria`` property
-```xml 
+
+- Hide a tag from the list of available criteria: add its identifier value to the `unsearchableCriteria` property
+
+```xml
 <property name="unsearchableCriteria">
 	<list>
 		<value>ServiceName</value>
@@ -138,9 +133,10 @@ To restrict the scope of your searches, you can:
 </property>
 ```
 
-*	Force tags that can be used as criteria in a search form: add the value of its identifier to the ``searchableCriteria`` property.
-	When this property is set, the ``unsearchableCriteria`` property is not used.
-```xml 
+- Force tags that can be used as criteria in a search form: add the value of its identifier to the `searchableCriteria` property.
+  When this property is set, the `unsearchableCriteria` property is not used.
+
+```xml
 <property name="searchableCriteria">
 	<list>
 		<value>Nature</value>
@@ -149,13 +145,13 @@ To restrict the scope of your searches, you can:
 ```
 
 ## Fixed criteria
-   
+
 The advanced search can be configured to display, by default, fixed criteria that the user only has to fill in before running the search.
 For string criteria, it is possible to define a description, using the `description` property, which will be presented to the user.
 
-To define a fixed criterion: 
+To define a fixed criterion:
 
-```xml 
+```xml
 <bean id="FirstnameCriterionPresenter" class="com.flower.docs.gui.client.search.criterion.SimpleCriterionPresenter">
     <property name="model">
         <bean class="com.flower.docs.domain.search.Criterion">
@@ -181,10 +177,10 @@ To define a fixed criterion:
 		</list>
 	</property></bean>
 ```
-    
+
 To assign these criteria to an advanced search:
 
-```xml 
+```xml
 <property name="fixedCriterionPresenters">
 	<list>
 		<ref bean="FirstnameCriterionPresenter" />
@@ -192,15 +188,15 @@ To assign these criteria to an advanced search:
 </property>
 ```
 
-A field display can be customised with a ``com.flower.docs.gui.client.search.criterion.FilterCriterionPresenter`` class bean using various properties: 
+A field display can be customised with a `com.flower.docs.gui.client.search.criterion.FilterCriterionPresenter` class bean using various properties:
 
-* ``displayOperatorSelector``: hides the operator selector
-* ``forceMonovalued``: forces the user to choose only one value for a normally multivalued criterion
-* ``mandatory``: makes the field mandatory for searching
+- `displayOperatorSelector`: hides the operator selector
+- `forceMonovalued`: forces the user to choose only one value for a normally multivalued criterion
+- `mandatory`: makes the field mandatory for searching
 
-__Example:__
- 
-```xml 
+**Example:**
+
+```xml
 <bean id="ValidationStatusCriterionPresenter" class="com.flower.docs.gui.client.search.criterion.FilterCriterionPresenter">
 	<property name="description">
 		<list>
@@ -230,11 +226,10 @@ __Example:__
 	</property>
 </bean>
 ```
- 
 
 To assign these criteria to an advanced search:
 
-```xml 
+```xml
 <property name="fixedCriterionPresenters">
 	<list>
 		<ref bean="ValidationStatusCriterionPresenter" />
@@ -242,12 +237,12 @@ To assign these criteria to an advanced search:
 </property>
 ```
 
-__Multiple criteria:__ 
+**Multiple criteria:**
 
-By default, all these criteria are defined as ``unique``, i.e. each tag in the list of criteria can only be used once.
-However, it is possible to define that a tag can correspond to several criteria, thanks to the ``nonUniqueCriteria`` property:
+By default, all these criteria are defined as `unique`, i.e. each tag in the list of criteria can only be used once.
+However, it is possible to define that a tag can correspond to several criteria, thanks to the `nonUniqueCriteria` property:
 
-```xml 
+```xml
 <property name="nonUniqueCriteria">
 	<list>
 		<value>name</value>
@@ -257,26 +252,26 @@ However, it is possible to define that a tag can correspond to several criteria,
 </property>
 ```
 
-This feature can be disabled by adding the ``activateUniqueCriteria`` property
+This feature can be disabled by adding the `activateUniqueCriteria` property
 
-```xml 
+```xml
 <property name="activateUniqueCriteria" value="false" />
 ```
 
 # Class selector
 
-The selection of the component class during a search can be customized using a 
-``com.flower.docs.gui.client.search.criteria.clazz.ComponentClassCriterionSelectorPresenter`` class bean. 
+The selection of the component class during a search can be customized using a
+`com.flower.docs.gui.client.search.criteria.clazz.ComponentClassCriterionSelectorPresenter` class bean.
 
-This class criterion can be customized in the same way as the filter criteria listed above:  
+This class criterion can be customized in the same way as the filter criteria listed above:
 
-* ``displayOperatorSelector``: hides the operator selector
-* ``forceMonovalued``: forces the user to choose only one value for a normally multivalued criterion
-* ``mandatory``: makes the field mandatory for searching
+- `displayOperatorSelector`: hides the operator selector
+- `forceMonovalued`: forces the user to choose only one value for a normally multivalued criterion
+- `mandatory`: makes the field mandatory for searching
 
-__Example:__
+**Example:**
 
-```xml 
+```xml
 <bean id="classIdCriterionPresenter" class="com.flower.docs.gui.client.search.criteria.clazz.ComponentClassCriterionSelectorPresenter">
 	<property name="displayOperatorSelector" value="false" />
 	<property name="forceMonovalued" value="true" />
@@ -295,12 +290,12 @@ __Example:__
 </bean>
 ```
 
-The `com.flower.docs.gui.client.search.criteria.clazz.CreatableTaskClassCriterionSelectorPresenter`  class selector 
-will only display jobs that do not have mandatory or technical attachments, and where the user has creation rights. 
+The `com.flower.docs.gui.client.search.criteria.clazz.CreatableTaskClassCriterionSelectorPresenter` class selector
+will only display jobs that do not have mandatory or technical attachments, and where the user has creation rights.
 
 To assign this class criterion to an advanced search, set the `classCriterionPresenter` property and display the class criterion:
 
-```xml 
+```xml
 <property name="advancedCriteriaPresenter">
 		<bean class="com.flower.docs.gui.client.search.criteria.advanced.AdvancedCriteriaPresenter">
 			<property name="enabled" value="true" />
@@ -313,10 +308,10 @@ To assign this class criterion to an advanced search, set the `classCriterionPre
 
 # Filters
 
-When an aggregation is defined for the [hidden request](/docs/flowerdocs/config/gui/search/hidden-request) of the search form, results are displayed in a tree structure. When a bucket is selected, the search is run using the criteria corresponding to the bucket. 
+When an aggregation is defined for the [hidden request](/docs/flowerdocs/config/gui/search/hidden-request) of the search form, results are displayed in a tree structure. When a bucket is selected, the search is run using the criteria corresponding to the bucket.
 
 # Technical data
-   
+
 Technical information positioned by FlowerDocs can also be used as a search criterion or filter:
 
 - `name`: component title
@@ -333,16 +328,15 @@ Technical information positioned by FlowerDocs can also be used as a search crit
 To be able to search this data, you need to define a `.com.flower.docs.gui.client.search.SearchableFieldCatalog` type `dataCriteriaCatalog` bean.
 :::
 
-
 # Validation
 
-To decide whether or not the search button should be disabled, the `enableIfInvalid` property can be set. This property accepts the following values: 
+To decide whether or not the search button should be disabled, the `enableIfInvalid` property can be set. This property accepts the following values:
 
-* `true`: the search form may be invalid
-* `false`: the form must be valid to activate the action
-
+- `true`: the search form may be invalid
+- `false`: the form must be valid to activate the action
 
 :::note[Example]
+
 ```xml
 <bean id="RechercheAgent" class="com.flower.docs.gui.client.search.ComponentSearchPresenter" scope="prototype">
 	<property name="title">
@@ -356,12 +350,12 @@ To decide whether or not the search button should be disabled, the `enableIfInva
 				<property name="value" value="Rechercher des dossiers agents"/>
 			</bean>
 		</list>
-	</property>  
+	</property>
 	<property name="enableIfInvalid" value="true" />
 </bean>
 ```
-:::
 
+:::
 
 # Advanced configuration of virtual folders
 
@@ -371,27 +365,27 @@ Filters can be configured within a virtual folder and the search used can be ove
 
 To do this, simply follow the naming convention for the search bean as follows:
 
--  to apply the form to all searches in the virtual folder, use the following bean name: ``content{VirtualFolder class id with first letter in uppercase}VirtualFolder``
-	
-    __Example:__ for the CourrierCollective virtual folder class, the name of the associated search form bean will be ``contentCourriercollectiveVirtualFolder``
+- to apply the form to all searches in the virtual folder, use the following bean name: `content{VirtualFolder class id with first letter in uppercase}VirtualFolder`
 
-- to apply the form to one of the searches in a virtual folder, use the following bean name: ``content{VirtualFolder class id with first letter capitalized}VirtualFolder{search id with first letter capitalized}``
+    **Example:** for the CourrierCollective virtual folder class, the name of the associated search form bean will be `contentCourriercollectiveVirtualFolder`
 
-    __Example:__for the CourrierCollective virtual folder class with the CourrierSearch search, the name of the associated search form bean will be ``contentCourriercollectiveVirtualFolderCourriersearch``
+- to apply the form to one of the searches in a virtual folder, use the following bean name: `content{VirtualFolder class id with first letter capitalized}VirtualFolder{search id with first letter capitalized}`
 
-- to apply the form to this search for all virtual folders, use the following bean: ``contentVirtualFolder{search id with first letter in uppercase}``
+    **Example:**for the CourrierCollective virtual folder class with the CourrierSearch search, the name of the associated search form bean will be `contentCourriercollectiveVirtualFolderCourriersearch`
 
-    __Example:__ for the CourrierSearch search, the name of the associated search form bean will be ``contentVirtualFolderCourriersearch``
+- to apply the form to this search for all virtual folders, use the following bean: `contentVirtualFolder{search id with first letter in uppercase}`
+
+    **Example:** for the CourrierSearch search, the name of the associated search form bean will be `contentVirtualFolderCourriersearch`
 
 <br/>
 
-If the virtual folder or search form ID contains underscores (``_``), then this is not carried over into the bean name and the following letter must be capitalized.
-    __Example :__ for the Courrier_Mail virtual folder class, the name of the associated search form bean will be ``contentCourrierMailVirtualFolder``.
-
+If the virtual folder or search form ID contains underscores (`_`), then this is not carried over into the bean name and the following letter must be capitalized.
+**Example :** for the Courrier_Mail virtual folder class, the name of the associated search form bean will be `contentCourrierMailVirtualFolder`.
 
 :::note[Example]
+
 ```xml
-	<bean id="contentCourriercollectiveVirtualFolderCourriersearch" 
+	<bean id="contentCourriercollectiveVirtualFolderCourriersearch"
 		class="com.flower.docs.gui.client.search.ComponentSearchPresenter"
 		scope="prototype">
 		<property name="responsePresenterProvider">
@@ -439,7 +433,7 @@ If the virtual folder or search form ID contains underscores (``_``), then this 
 							<property name="value" value="Filtrer"/>
 						</bean>
 					</list>
-				</property>				
+				</property>
 				<property name="fixedCriterionPresenters">
 					<list>
 						<ref bean="ObjetCriterion" />
@@ -458,28 +452,28 @@ If the virtual folder or search form ID contains underscores (``_``), then this 
 		</property>
 	</bean>
 ```
-:::
 
+:::
 
 ## Indexation
 
 The definition of a search form for a virtual folder in indexing is very similar to the one in tabbing, you just need to respect the naming convention of the search bean as follows:
 
--  to apply the form to all searches in the virtual folder, use the following bean name: ``content{VirtualFolder class id with first letter in uppercase}VirtualFolder{Phase}``
-	
-    __Example:__ for the CourrierCollective virtual folder class under modification, the name of the associated search form bean will be ``contentCourriercollectiveVirtualFolderModify``
+- to apply the form to all searches in the virtual folder, use the following bean name: `content{VirtualFolder class id with first letter in uppercase}VirtualFolder{Phase}`
 
-- to apply the form to one of the searches in a virtual folder, use the following bean name: ``content{VirtualFolder class id with first letter in uppercase}VirtualFolder{Phase}{search id with first letter in uppercase}``
+    **Example:** for the CourrierCollective virtual folder class under modification, the name of the associated search form bean will be `contentCourriercollectiveVirtualFolderModify`
 
-    __Example:__for the CourrierCollective virtual folder class with the CourrierSearch search, the name of the associated search form bean will be ``contentCourriercollectiveVirtualFolderModifyCourriersearch``
+- to apply the form to one of the searches in a virtual folder, use the following bean name: `content{VirtualFolder class id with first letter in uppercase}VirtualFolder{Phase}{search id with first letter in uppercase}`
 
-- to apply the form to this search for all indexed virtual folders, use the following bean: ``contentVirtualFolder{Phase}{search id with first letter in uppercase}``
+    **Example:**for the CourrierCollective virtual folder class with the CourrierSearch search, the name of the associated search form bean will be `contentCourriercollectiveVirtualFolderModifyCourriersearch`
 
-    __Example:__ for the CourrierSearch search, the name of the associated search form bean will be ``contentVirtualFolderModifyCourriersearch``
+- to apply the form to this search for all indexed virtual folders, use the following bean: `contentVirtualFolder{Phase}{search id with first letter in uppercase}`
 
-*NB:* The available values for the phase are: `Modify` and `ReadOnly`.
+    **Example:** for the CourrierSearch search, the name of the associated search form bean will be `contentVirtualFolderModifyCourriersearch`
+
+_NB:_ The available values for the phase are: `Modify` and `ReadOnly`.
 
 <br/>
 
-If the virtual folder or search form ID contains underscores (``_``), then this is not carried over into the bean name and the following letter must be capitalized.
-    Example :__ for the Courrier_Mail virtual folder class, the name of the associated search form bean will be ``contentCourrierMailVirtualFolderModify``.
+If the virtual folder or search form ID contains underscores (`_`), then this is not carried over into the bean name and the following letter must be capitalized.
+Example :\_\_ for the Courrier_Mail virtual folder class, the name of the associated search form bean will be `contentCourrierMailVirtualFolderModify`.

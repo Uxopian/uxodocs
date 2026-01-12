@@ -1,16 +1,10 @@
 ---
 title: Add a highlight notification
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: fc65c80c20e6712ecd42a471fc305c8740a97b3aa1704fb695055a4ab169e110
 ---
-
-
-
-
-
-
 
 The JavaScript API allows you to set up subscriptions to receive events during various actions on ARender (e.g., adding/removing notifications, rotating a page, or clicking on a hyperlink). This information is accessible <i class="ti-hand-point-right" /> <ins>[in the documentation](/docs/arender/development/apis/web-ui/javascript/annotation-js-api)</ins> <i class="ti-hand-point-left" ></i>
 
@@ -18,14 +12,11 @@ It is also possible to create highlight-type annotations directly from the host 
 
 To use this function from an application other than ARender, simply replace the window object in the documentation with the appropriate object based on the framework being used.
 
-
-    
 ```javascript
-
-const iframeWindow = iframeRef.current.contentWindow
+const iframeWindow = iframeRef.current.contentWindow;
 
 /*
- * Add an highlight annotation 
+ * Add an highlight annotation
  *
  * @param {string} documentId - ID of the document
  * @param {string} type - the annotation type (only "Highlight" is supported)
@@ -48,18 +39,17 @@ var page = 0;
 var color = "#FF0000";
 var opacity = 0.4;
 
-iframeWindow.getARenderJS().getAnnotationJSAPI().addAnnotation(
-    documentId, type, x, y, w, h, page, color, opacity);
+iframeWindow
+    .getARenderJS()
+    .getAnnotationJSAPI()
+    .addAnnotation(documentId, type, x, y, w, h, page, color, opacity);
 ```
-    
-    
 
 ```javascript
-
 const iframeWindow = this.iframeRef.nativeElement.contentWindow;
 
 /*
- * Add an highlight annotation 
+ * Add an highlight annotation
  *
  * @param {string} documentId - ID of the document
  * @param {string} type - the annotation type (only "Highlight" is supported)
@@ -82,11 +72,12 @@ var page = 0;
 var color = "#FF0000";
 var opacity = 0.4;
 
-iframeWindow.getARenderJS().getAnnotationJSAPI().addAnnotation(
-    documentId, type, x, y, w, h, page, color, opacity);
+iframeWindow
+    .getARenderJS()
+    .getAnnotationJSAPI()
+    .addAnnotation(documentId, type, x, y, w, h, page, color, opacity);
 ```
-    
-    
+
 ```javascript
 /**
  * Returns the ARenderJS object from the iframe.
@@ -126,8 +117,7 @@ defineExpose(&#123;
   addAnnotation
 &#125;)
 ```
-    
-    
+
 ```javascript
 /**
  * Returns the ARenderJS object from the iframe.
@@ -170,11 +160,10 @@ export function addAnnotation(
     .addAnnotation(documentId, type, x, y, w, h, page, color, opacity)
 
 ```
-    
-    
+
 ```javascript
 /*
- * Add an highlight annotation 
+ * Add an highlight annotation
  *
  * @param {string&#125; documentId - ID of the document
  * @param {string&#125; type - the annotation type (only "Highlight" is supported)
@@ -205,6 +194,3 @@ if (iframe && iframe.contentWindow) {
     console.error("The iframe is inaccessible or not loaded yet.");
 
 ```
-
-    
-

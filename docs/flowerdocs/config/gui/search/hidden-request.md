@@ -1,27 +1,25 @@
 ---
 title: Hidden request
-date: '2004-04-03T13:20:01+02:00'
+date: "2004-04-03T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 71de82056cea4e7b752a4623a1f46612843069dd2be7a31beff43ea393cbc4ac
 ---
 
-
 For each search form, a search request can be set up that is hidden and therefore not visible to users.
 
-This request allows you to: 
+This request allows you to:
 
-* add hidden criteria
-* configure the columns to be displayed
-* set default sorting
-* set the number of results to be displayed
-
+- add hidden criteria
+- configure the columns to be displayed
+- set default sorting
+- set the number of results to be displayed
 
 The `ComponentSearchPresenter` object accepts a `hiddenRequest` property with a `com.flower.docs.domain.search.SearchRequest` class bean.
 
-
 :::note[Example]
+
 ```xml
 <bean id="monFormulaire" class="com.flower.docs.gui.client.search.ComponentSearchPresenter"
 		scope="prototype">
@@ -71,24 +69,23 @@ The `ComponentSearchPresenter` object accepts a `hiddenRequest` property with a 
 		<!-- ... -->
 	</bean>
 ```
+
 :::
-
-
 
 <br/>
 
-In some cases, it may be necessary to add tags to the `selectClause` of the hidden request in order to retrieve the values of a tag without the column being visible. This can be achieved by adding the ``hiddenColumns`` property to the `ComponentSearchPresenter` object, as shown below: 
+In some cases, it may be necessary to add tags to the `selectClause` of the hidden request in order to retrieve the values of a tag without the column being visible. This can be achieved by adding the `hiddenColumns` property to the `ComponentSearchPresenter` object, as shown below:
 
-```xml 
+```xml
 <property name="hiddenColumns">
 	<list>
 		<value>TypeCourrier</value>
 	</list>
 </property>
 ```
-	
 
 :::info
-* We recommend using the notion of hidden requests to simplify access to components, rather than to secure access to them.
-* Add the `ADD_FILTERS_TO_SELECT` criterion with the `true` value in the request contexts to display the criteria filled in as columns.
-:::
+
+- We recommend using the notion of hidden requests to simplify access to components, rather than to secure access to them.
+- Add the `ADD_FILTERS_TO_SELECT` criterion with the `true` value in the request contexts to display the criteria filled in as columns.
+  :::

@@ -3,8 +3,8 @@ weight: 10
 draft: false
 title: Installation
 last_update:
-  date: '2025-12-02T14:29:22.460Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:29:22.460Z"
+    author: CI/CD Bot
 content_hash: ad22b23586a7d6ba5793afe0bad9a6a2ca1d0df8e1ca37a0287e4247ba1c29c9
 ---
 
@@ -12,13 +12,12 @@ content_hash: ad22b23586a7d6ba5793afe0bad9a6a2ca1d0df8e1ca37a0287e4247ba1c29c9
 
 The installation of Fast2 requires a few environment specifications to run properly :
 
-
 | What      |                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | --------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | RAM       | 8GB+                   | We highly recommend having at least 8GB. <br /><br />When switching to production environments, 16GB or 32GB will be required since more documents will be handled at once, and heavy tasks (_e.g._ conversion, extraction) might get short on resources.                                                                                                                                                                                                                                                                                                                                  |
 | Processor | 8 CPUs                 | Processor capabilities need to be aligned with migration requirements, such as data mapping, content conversion and heavy I/O.                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Storage   | 128GB+                 | Although the contents dealt by Fast2 will be temporarily stored (and deleted afterwards if asked), the server needs enough storage for the files/contents alongside the database tracking all the migration information.                                                                                                                                                                                                                                                                                                                                                                   |
-| Java      | JDK-11          | Any provider will fit (Oracle, [OpenJDK](https://developers.redhat.com/products/openjdk/download), etc). If you have multiple JDK/JRE already installed, specify the correct one in the `./config/env.properties` file.                                                                                                                                                                                                                                                                                                                                                                    |
+| Java      | JDK-11                 | Any provider will fit (Oracle, [OpenJDK](https://developers.redhat.com/products/openjdk/download), etc). If you have multiple JDK/JRE already installed, specify the correct one in the `./config/env.properties` file.                                                                                                                                                                                                                                                                                                                                                                    |
 | OS        | Windows&nbsp;7+, Linux | All versions of Windows 7+ are supported. <br/><br/>All common distros of Linux are supported (Ubuntu, RedHat, CentOS, etc)<br /><br />Power architecture are supported as well (except the ones running in AIX), but only Java parts will work seamlessly whereas third-party software (_e.g._ imagemagick, libreoffice, etc) might not, as they have not all have been developed for such platforms. <br/><br/> Although the broker will not run correctly on an Windows 2003, a worker can still run on it, remotely, and communicate with a broker installed on a more recent version. |
 | Bandwidth | 1GB                    | The more calls, payloads, and contents Fast2 will have to deal with, the bigger the network bandwidth must be to reduce latency. If 250-500MB might do for lower environments, we recommend 1GB for Production environments.                                                                                                                                                                                                                                                                                                                                                               |
 
@@ -27,7 +26,9 @@ While setting up the production server for Fast2, make sure to scale the Fast2 m
 :::warning
 
     If you decide to go for a custom Elasticsearch database, make sure to confirm the compatibility with your environment at [Elasticsearch Support Matrix](https://www.elastic.co/fr/support/matrix).
+
 :::
+
 ## Fast2 packages
 
 The Fast2 distribution you need depends on your target environment. It exists three way to deploy a Fast2 :
@@ -153,7 +154,7 @@ Its major benefit is that it has been the default init system for the majority o
 
     Let's condider here our user to be *fast2user*.
 
-    Open the `./startup-broker.sh` file and update the last line to switch users (with `su fast2user -c`) for the Java command:  
+    Open the `./startup-broker.sh` file and update the last line to switch users (with `su fast2user -c`) for the Java command:
 
     <table>
     <tr style={{color: "red"}}>
@@ -318,6 +319,7 @@ You can setup Fast2 Worker as a service the same way you did for the Fast2 Broke
     - The `executable` tag has to be changed to point to the `startup-worker.bat` file which is at Fast2 root level.
 
 The `Fast2_worker_service.xml` file will look like this :
+
 ```xml
 <service>
     <id>Fast2WorkerDCTM</id>
@@ -336,6 +338,7 @@ The `Fast2_worker_service.xml` file will look like this :
 ```
 
 And then, to install the worker as a service :
+
 ```cmd
 C:\path-to-fast2\service\windows> Fast2_worker_service.exe install
 ```

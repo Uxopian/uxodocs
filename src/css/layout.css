@@ -3,61 +3,63 @@
    ======================================== */
 
 body {
-  overflow-x: hidden !important;
+    overflow-x: hidden !important;
 }
 
 .container {
-  min-width: 100%;
-  padding: 0 10px 0 20px;
+    min-width: 100%;
+    padding: 0 10px 0 20px;
 }
 
 /* Masquage conditionnel des éléments */
-li.hidden-index-link>a {
-  display: none !important;
+li.hidden-index-link > a {
+    display: none !important;
 }
 
 li.hidden-sidebar-item {
-  display: none !important;
+    display: none !important;
 }
 
 li.hidden-sidebar-item .menu__list-item-collapsible {
-  display: none !important;
+    display: none !important;
 }
 
-div:has(main article [class*="documentationSection"])>aside[class*="docSidebarContainer"],
+div:has(main article [class*="documentationSection"]) > aside[class*="docSidebarContainer"],
 aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
-  display: none !important;
+    display: none !important;
 }
 
-div:has(main article [class*="documentationSection"])>div>main,
-div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)>div>main {
-  max-width: 100% !important;
-  padding-left: 7rem;
+div:has(main article [class*="documentationSection"]) > div > main,
+div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)
+    > div
+    > main {
+    max-width: 100% !important;
+    padding-left: 7rem;
 }
 
 /* Sidebar sticky */
 .theme-doc-sidebar-container {
-  position: sticky !important;
-  top: calc(var(--ifm-navbar-height) + 1rem) !important;
-  max-height: calc(100vh - var(--ifm-navbar-height) - 2rem) !important;
-  overflow-y: auto !important;
+    position: sticky !important;
+    top: calc(var(--ifm-navbar-height) + 1rem) !important;
+    max-height: calc(100vh - var(--ifm-navbar-height) - 2rem) !important;
+    overflow-y: auto !important;
 }
 
 aside[class*="docSidebarContainer"] {
-  position: sticky !important;
-  top: calc(var(--ifm-navbar-height)) !important;
-  max-height: calc(100vh - var(--ifm-navbar-height)) !important;
+    position: sticky !important;
+    top: calc(var(--ifm-navbar-height)) !important;
+    max-height: calc(100vh - var(--ifm-navbar-height)) !important;
 }
 
 /* Table of contents sticky */
 .theme-doc-toc-desktop {
-  position: sticky !important;
-  top: calc(var(--ifm-navbar-height) + 50px + 1rem) !important;
-  max-height: calc(100vh - var(--ifm-navbar-height) - 50px - 2rem) !important;
-  align-self: flex-start !important;
+    position: sticky !important;
+    top: calc(var(--ifm-navbar-height) + 50px + 1rem) !important;
+    max-height: calc(100vh - var(--ifm-navbar-height) - 50px - 2rem) !important;
+    align-self: flex-start !important;
 }
 
 .theme-doc-toc-desktop .table-of-contents {
-  overflow-y: auto !important;
-  max-height: 100% !important;
+    overflow-y: auto !important;
+    max-height: 100% !important;
 }

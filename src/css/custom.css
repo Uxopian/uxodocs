@@ -3,10 +3,10 @@
    Les styles sont organisés en fichiers séparés
    ======================================== */
 
-@import './variables.css';
-@import './buttons.css';
-@import './navbar.css';
-@import './search.css';
-@import './footer.css';
-@import './layout.css';
-@import './version-groups.css';
+@import "./variables.css";
+@import "./buttons.css";
+@import "./navbar.css";
+@import "./search.css";
+@import "./footer.css";
+@import "./layout.css";
+@import "./version-groups.css";

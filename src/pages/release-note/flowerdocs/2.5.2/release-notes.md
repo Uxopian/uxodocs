@@ -15,9 +15,10 @@ Découvrez les changements principaux apportés par cette nouvelle version.
 
 ✅ L'[obfuscation](/documentation/config/gui/viewer/obfuscation) introduit une nouvelle fonctionnalité permettant de masquer des données au sein de documents. Que ce soit grâce à la visionneuse de documents ou aux web services exposés, les utilisateurs définissent des zones restreintes à d'autres utilisateurs.
 Ces derniers n'ont ensuite plus la possibilité d'accéder aux données obfusquées (visualisation, téléchargement...).
+
 ## Dossiers
 
-Dans la continuité des précédentes versions, l'expérience liée à l'utilisation des dossiers physiques s'améliore encore. Lors de la consultation d'un dossier physique : 
+Dans la continuité des précédentes versions, l'expérience liée à l'utilisation des dossiers physiques s'améliore encore. Lors de la consultation d'un dossier physique :
 ✅ Les utilisateurs peuvent désormais filtrer les documents d'un dossier. A l'aide de la classe de document, son nom ou des autres critères disponibles, il est encore plus facile d'accéder au bon document.
 
 ✅ En proposant le même formulaire d'indexation, lors du dépôt de plusieurs fichiers dans un dossier, l'indexation de nouveaux documents est grandement accélérée.
@@ -27,7 +28,6 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 📋 Cette version intègre une nouvelle version de la visionneuse de documents [ARender](https://arender.io). La montée de version (4.5.1) des serveurs de rendition est requise avant le déploiement de cette nouvelle version.
 
 📋 Un nouveau mécanisme de class loader est utilisé, par défaut, pour le chargement des classes Java utilisées par les développements spécifiques. Si besoin des classes autorisées peuvent être ajoutées à l'aide du paramètre `secured.classloader.whitelist.additional`. Ce mécanisme peut également être désactivé avec la propriété `secured.classloader.enabled=false`.
-
 
 # Changelog
 
@@ -44,7 +44,6 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 🔴 Le classement d'un document ne doit être appliqué qu'après la sauvegarde du document
 
 🔴 La sélection rapide de sous-dossiers conserve l'état "sélectionné" de dossiers précédemment ouverts
-
 
 ### Formulaires de recherche
 
@@ -84,7 +83,6 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 
 📋 Afficher l'identifiant de la pièce jointe dans l'historique si elle n'a pas de libellé
 
-
 #### Documents
 
 🔴 Durant la comparaison de versions, l'ancienne version est affichée à gauche
@@ -92,7 +90,6 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 🔴 Tri des versions d'un document dans l'historique
 
 📋 Notifier l'utilisateur lors de l'échec d'un upload de fichier
-
 
 ### Dashlets & Rapports
 
@@ -110,7 +107,6 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 
 📋 Exposition de la [récupération des fichiers](/documentation/apis/jsapi/mcd/documents) d'un document
 
-
 ### Redirections
 
 🔴 Conservation des paramètres de l'URL après l'authentification d'un utilisateur
@@ -121,7 +117,6 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 
 📋 Encodage du paramètre `targetURL` nécessaire pour certains proxys
 
-
 ## \{\{% core %\}\}
 
 ### Services
@@ -131,7 +126,6 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 🔴 Récupération de n'importe quel contenu d'un document à travers le service REST
 
 🔴 La génération de document à partir d'un modèle Microsoft Word fournit un nom avec la bonne extension (REST)
-
 
 ### BPM
 
@@ -155,7 +149,7 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 
 📋 Initialisation du contexte d'exécution d'un delegate asynchrone
 
-#### Case 
+#### Case
 
 ✅ A partir d'un case, une tâche sans tag est démarrée dès le clic (sans affichage d'un formulaire vide)
 
@@ -168,7 +162,6 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 📋 Amélioration des clients REST
 
 📋 Suppression de la synchronisation sur les événements internes
-
 
 ## Connecteurs
 
@@ -196,11 +189,9 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 
 📋 Mécanisme de suppression de certains tags en retours des appels aux services de composants
 
-
 ### ADLDS
 
 🔴 Modification d'identités stockées dans Microsoft ADLDS
-
 
 ## Sécurité
 
@@ -210,10 +201,6 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 
 ✅ Chiffrement d'un répertoire à l'aide du CLM et d'un magasin de clés
 
-
 ## Intégration
 
 ✅ Nouveau mode de sécurité basé sur un jeton pour le [client Java](/documentation/learn/gui-plugin/implementation)
-
-
-

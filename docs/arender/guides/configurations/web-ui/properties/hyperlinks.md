@@ -1,16 +1,10 @@
 ---
 title: Hyperlinks
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: c01dd2b31b396c783319514cdac0d7df878ae3e1bb2519dcfe242790d1dc0720
 ---
-
-
-
-
-
-
 
 ## General
 
@@ -27,7 +21,7 @@ content_hash: c01dd2b31b396c783319514cdac0d7df878ae3e1bb2519dcfe242790d1dc0720
 These parameters allow to influence of the behavior associated with
 internal hyperlinks stored into source documents. If you do not wish to
 have the internal links of a PDF to be displayed or clicked, use the
-parameter *hyperlinks.loadFromPDF=false*.
+parameter _hyperlinks.loadFromPDF=false_.
 
 ## Annotation
 
@@ -44,9 +38,7 @@ The following properties defines the annotation behaviours when creating hyperli
     | Set the legacy hyperlink creation. If true, the target page starts from index 1 otherwise it starts from index 0. | annotation.hyperlink.use.legacy.creation    | Boolean |
     | If true, clicking on a hyperlink leading to another document will open this document in a new tab.                | annotation.hyperlink.open.document.tab      | Boolean |
 
-
-
-```cfg
+````cfg
 
 
 ```properties
@@ -56,5 +48,4 @@ annotation.hyperlink.externe.target.enabled=true
 annotation.hyperlink.target.show.timeout=10000
 annotation.hyperlink.use.legacy.creation=false
 annotation.hyperlink.open.document.tab=true
-```
-
+````

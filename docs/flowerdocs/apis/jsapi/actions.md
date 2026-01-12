@@ -1,18 +1,17 @@
 ---
 title: Actions
-date: '2001-03-01'
+date: "2001-03-01"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 9f4db0be9387a328a76eb1ebb2053a6c7429fde79a94cafec154f30eb6c2a9f7
 ---
 
+Several types of actions are available:
 
-Several types of actions are available: 
-
-* Button: text presented as a button
-* Icon: based on the icon font supported by FlowerDocs [Font Awesome 5.15.4](https://fontawesome.com/icons?d=gallery&m=free)
-* DOM: HTML element 
+- Button: text presented as a button
+- Icon: based on the icon font supported by FlowerDocs [Font Awesome 5.15.4](https://fontawesome.com/icons?d=gallery&m=free)
+- DOM: HTML element
 
 # Actions’ container
 
@@ -21,7 +20,8 @@ To access an action, it is therefore necessary to identify which container is co
 
 <br/>
 
-To list the actions present in a container ``container``, use the following function: 
+To list the actions present in a container `container`, use the following function:
+
 ```javascript
 console.log("Container actions: " + container.getIds());
 ```
@@ -30,58 +30,59 @@ console.log("Container actions: " + container.getIds());
 
 All FlowerDocs actions’ containers are accessible via the API JS. This allows them to be manipulated. For example, you can add, delete, deactivate, hide or modify actions in this container.
 
-## In a form 
+## In a form
 
-The object ``componentFormAPI.getActions()`` is used to interact with the actions of a form presenting a document, folder... 
+The object `componentFormAPI.getActions()` is used to interact with the actions of a form presenting a document, folder...
 
 Several functions are available for this purpose:
 
-| Function                                   | Description                                                                    |
-|--------------------------------------------|--------------------------------------------------------------------------------|
-|getHeaderActions()                          | Retrieves action container from header                                		  | 
-|getTaskActions()                            | Retrieves action container for task creation             					  | 
-|getFooterActions()                          | Retrieves the footer action container (validation, cancellation...)   		  | 
+| Function           | Description                                                         |
+| ------------------ | ------------------------------------------------------------------- |
+| getHeaderActions() | Retrieves action container from header                              |
+| getTaskActions()   | Retrieves action container for task creation                        |
+| getFooterActions() | Retrieves the footer action container (validation, cancellation...) |
 
 ## Go to an action
 
-From an action container ``container``, there are several ways to access an action.
+From an action container `container`, there are several ways to access an action.
 
-* Synchronously (which requires the action to have already been added to the container at runtime): 
+- Synchronously (which requires the action to have already been added to the container at runtime):
+
 ```javascript
 var action = container.get(actionId);
 ```
 
-* Asynchronously: 
+- Asynchronously:
+
 ```javascript
-container.registerForAdd(function(action){});
+container.registerForAdd(function (action) {});
 ```
 
 :::info
 Any customization of existing actions must be carried out in the `registerForAdd` to ensure that the action is loaded onto the form.
 :::
 
-
-#  Actions
+# Actions
 
 ## Available functions
 
 Once an action has been retrieved, you can interact with it using the functions provided:
 
-| Functions                                  | Description                                                                    |
-|--------------------------------------------|--------------------------------------------------------------------------------|
-|setEnabled(boolean enabled)                 | Activates or deactivates the action                                            | 
-|isEnabled()                                 | Determines whether the action is activated or not                              |
-|setTemporaryDisabled(boolean disabled)      | Temporarily disables an action (for buttons only)        					  |
-|getId()                                     | Retrieves action identifier                                           		  |
-|execute()                                   | Executes action programmatically                                    			  |
+| Functions                              | Description                                       |
+| -------------------------------------- | ------------------------------------------------- |
+| setEnabled(boolean enabled)            | Activates or deactivates the action               |
+| isEnabled()                            | Determines whether the action is activated or not |
+| setTemporaryDisabled(boolean disabled) | Temporarily disables an action (for buttons only) |
+| getId()                                | Retrieves action identifier                       |
+| execute()                              | Executes action programmatically                  |
+
 <!---
 |getStyle()                                  | Retrieves the action’s styles (HTML attribute ``class``)                       |
 |setStyle(String style)                      | Defines action style                                                   		  |
-|addStyle(String style)                      | Adds style to the action                                                       | 
+|addStyle(String style)                      | Adds style to the action                                                       |
 -->
 
-
-__Example:__ Disabling the action `Cancel` of a component 
+**Example:** Disabling the action `Cancel` of a component
 
 ```javascript
 formAPI.getActions().getFooterActions().registerForAdd(function(action){
@@ -91,19 +92,17 @@ formAPI.getActions().getFooterActions().registerForAdd(function(action){
 });
 ```
 
-
 ## Interactions with component actions
 
+The execution of an action can be reacted at within a component indexing form.
 
-The execution of an action can be reacted at within a component indexing form. 
+To do this, simply use the function `registerForActionConfirmation(container, name, function(value, executor){})`:
 
-To do this, simply use the function ``registerForActionConfirmation(container, name, function(value, executor){})``:  
+- `container`: string correspoonfing to the action's container, either `header`, `footer` or `task`
+- `name`: string correspoonfing to the name of the action
+- `function(value, executor)`: the function to be executed when the user interacts with the action
 
-* ``container``: string correspoonfing to the action's container, either ``header``, ``footer`` or ``task``
-* ``name``: string correspoonfing to the name of the action 
-* ``function(value, executor)``: the function to be executed when the user interacts with the action 
-
-__Example:__ To call a function each time a user clicks on the button ``Cancel`` on an indexing page
+**Example:** To call a function each time a user clicks on the button `Cancel` on an indexing page
 
 ```javascript
 formAPI.getActions().getFooterActions().registerForAdd(function(action){
@@ -112,74 +111,76 @@ formAPI.getActions().getFooterActions().registerForAdd(function(action){
 
 });
 ```
-	
-For even greater control over actions, the object ``executor`` supplied as a parameter to the closure can be used to: 
 
-* Block action execution: 
+For even greater control over actions, the object `executor` supplied as a parameter to the closure can be used to:
+
+- Block action execution:
 
 ```javascript
 executor.hold();
 ```
 
-* Resume action execution: 
+- Resume action execution:
 
 ```javascript
 executor.resume();
 ```
 
-* Determine whether action execution is blocked or not:
+- Determine whether action execution is blocked or not:
 
 ```javascript
 executor.isHeld();
 ```
 
-__Note:__ if an action is not blocked, it will resume once the closure has been executed.
+**Note:** if an action is not blocked, it will resume once the closure has been executed.
 
 <br/>
 
-__Examples:__ Blocking the execution of an action until an asynchronous call returns
+**Examples:** Blocking the execution of an action until an asynchronous call returns
 
 ```javascript
-var actions = formAPI.getActions(); 
+var actions = formAPI.getActions();
 actions.registerForActionConfirmation("footer", “Validate", function(value, executor) {
     executor.hold();
-    setTimeout(function(){ 
-        executor.resume(); 
+    setTimeout(function(){
+        executor.resume();
     }, 3000);
 });
 ```
 
 ```javascript
-var actions = formAPI.getActions(); 
+var actions = formAPI.getActions();
 actions.registerForActionConfirmation("footer", “Refuse", function(value, executor) {
     executor.hold();
-    setTimeout(function(){  
-        JSAPI.get().getNotificationAPI().sendError("The task cannot be refused."); 
+    setTimeout(function(){
+        JSAPI.get().getNotificationAPI().sendError("The task cannot be refused.");
     }, 3000);
 });
 ```
 
 # Build an action
- 
-Customized actions can be created thanks to API ``ActionFactoryAPI``
+
+Customized actions can be created thanks to API `ActionFactoryAPI`
 
 ## Button action
 
+Two types of button action can be created:
 
-Two types of button action can be created: 
+- textual or main ones:
 
-
-* textual or main ones:  
 ```javascript
 JSAPI.get().getActionFactoryAPI().buildTextual(String id, String displayName, function(a){});
 ```
 
-* minors 
-```javascript
-JSAPI.get().getActionFactoryAPI().buildMinor(id, displayName, function(a){});
-```		
+- minors
 
-__Example:__ Add a button-type action to the table displaying the contents of a folder 
+```javascript
+JSAPI.get()
+    .getActionFactoryAPI()
+    .buildMinor(id, displayName, function (a) {});
+```
+
+**Example:** Add a button-type action to the table displaying the contents of a folder
 
 ```javascript
 JSAPI.get().registerForFolderChildrenLoaded(function(api, phase, component) {
@@ -195,7 +196,7 @@ JSAPI.get().registerForFolderChildrenLoaded(function(api, phase, component) {
 
 This type of action is based on the FontAwesome font, offering a wide choice of icons through CSS styles.
 
-__Example:__ Add icon action on task attachments 
+**Example:** Add icon action on task attachments
 
 ```javascript
 var cardAPI = JSAPI.get().getCardAPI();
@@ -213,7 +214,7 @@ cardAPI.registerForAttachment(function(card, task, definition, component){
 
 This type of action is based on the FontAwesome font, offering a wide choice of icons through CSS styles and a label.
 
-__Example:__ Add a menu action to a form header.
+**Example:** Add a menu action to a form header.
 
 ```javascript
 var actionSet = formAPI.getActions().getHeaderActions();
@@ -226,22 +227,28 @@ actionSet.add(action)
 
 ## Responsive action
 
-This type of action combines both an icon-type action and a menu-type action. 
+This type of action combines both an icon-type action and a menu-type action.
 
 During construction, an integer is supplied to indicate the weight of this action. This weight determines the priority of the action to be displayed directly (as an icon) when enough space is available.
 
-When there isn't enough space to display all actions, those with the greatest weight are displayed as icons first. The others are displayed in menu form. 
+When there isn't enough space to display all actions, those with the greatest weight are displayed as icons first. The others are displayed in menu form.
 
 ```javascript
 var actionSet = formAPI.getActions().getHeaderActions();
 var actionAPI = JSAPI.get().getActionFactoryAPI();
-var action = actionAPI.buildResponsive("myAction", "My menu", "fa fa-user", 10, function(actionPresenter){
-		console.info("on click");
-});
-actionSet.add(action)
+var action = actionAPI.buildResponsive(
+    "myAction",
+    "My menu",
+    "fa fa-user",
+    10,
+    function (actionPresenter) {
+        console.info("on click");
+    }
+);
+actionSet.add(action);
 ```
 
-You can also change the weight of a native responsive action using the function `setWeight(String actionId, int weight)` in the action container. 
+You can also change the weight of a native responsive action using the function `setWeight(String actionId, int weight)` in the action container.
 
 ```javascript
 JSAPI.get().registerForComponentChange( function(formAPI, component, phase) {
@@ -255,25 +262,24 @@ JSAPI.get().registerForComponentChange( function(formAPI, component, phase) {
     });
 });
 ```
- 
 
-__Note:__ *this type of action can only be used for `headerActions` of a component indexing form.*
+**Note:** _this type of action can only be used for `headerActions` of a component indexing form._
 
 ## DOM action
 
-This fifth type of action also has the ``name`` and ``label`` properties. The last property is a DOM element ``element``. 
-It is possible to interact with this DOM element using classic DOM events such as *onclick*, *onmouseover*, ...
+This fifth type of action also has the `name` and `label` properties. The last property is a DOM element `element`.
+It is possible to interact with this DOM element using classic DOM events such as _onclick_, _onmouseover_, ...
 
-__Example:__ 
+**Example:**
 
 ```javascript
 	var actionAPI = JSAPI.get().getActionFactoryAPI();
-	
-	var element = document.createElement('button'); 
+
+	var element = document.createElement('button');
 	element.innerHTML = "Custom button title";
 	var action = actionAPI.buildDOM("className", "hover label", element);
 
-	element.onclick= function(){ 
+	element.onclick= function(){
 		console.log("Click on DOM button");
 
 ```

@@ -2,16 +2,10 @@
 title: Annotations
 description: Gestion des annotations dans ARender
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: a60be2b6cd7807d388d8e7847a8e0cca919c54ea65b24d9d0d074f2edcc77873
 ---
-
-
-
-
-
-
 
 # Annotations
 
@@ -96,11 +90,11 @@ cliquant sur le bouton :
 
 ![Quitter édition](/img/arender/annotations15.png)
 
-*Attention : Internet Explorer 8 force certaines conditions sur le
+_Attention : Internet Explorer 8 force certaines conditions sur le
 formatage des champs rich text dans les pages web. Afin que nous
 puissions avoir le même rendu visuel sur tous les navigateurs une
 nouvelle ligne vide ne peut se faire qu'avec shift+Entrée sous Internet
-Explorer 8.*
+Explorer 8._
 
 ### Voir les détails d'une note textuelle
 
@@ -118,7 +112,7 @@ Pour sortir du pop-up, cliquer n'importe où dans le document.
 ### Supprimer une note textuelle
 
 Pour supprimer une note textuelle, passer en mode Edition. Dans le bandeau des annotations,
- cliquer sur le bouton « Supprimer la note » :
+cliquer sur le bouton « Supprimer la note » :
 
 ![Supprimer note](/img/arender/annotations18.png)
 
@@ -154,7 +148,7 @@ Grâce au bandeau d'édition vous pouvez :
 
 ### Supprimer un surlignage de zone
 
-Pour supprimer une zone de surlignage, passer en mode Edition. 
+Pour supprimer une zone de surlignage, passer en mode Edition.
 Dans le bandeau des annotations, cliquer sur le bouton « Supprimer la zone » :
 
 ![Supprimer surlignage](/img/arender/annotations23.png)

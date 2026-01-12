@@ -19,7 +19,6 @@ In this release, there is no architecture changes but there are additionnal conf
 **image.conversion.target.mime.type**: Mime type of the generated images for TIFF document. Possible values are _image/png_ and _image/jpeg_.
 **disk.free.space.threshold**: Disk space threshold (in Gb) availability check for uploading document to the Rendition.
 
-
 ## Product
 
 ### Technical changes
@@ -28,8 +27,6 @@ In this release, there is no architecture changes but there are additionnal conf
 - Improvement in the way how temporary files are written and checked in the file system.
 - End user is correctly redirected to the configured login page when refreshing the web page while having an expired session.
 - Added missing support of crop image and image filter with the PDFOwl microservice
-
-
 
 ## Important
 

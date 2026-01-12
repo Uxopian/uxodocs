@@ -3,196 +3,196 @@
    ======================================== */
 
 .uxo-footer {
-  position: relative;
-  background-color: #0b0c0e;
-  color: #94a3b8;
-  padding: 25px 0 25px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  overflow: hidden;
+    position: relative;
+    background-color: #0b0c0e;
+    color: #94a3b8;
+    padding: 25px 0 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
 }
 
 .uxo-footer-glow {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  height: 1px;
-  opacity: 0.5;
-  pointer-events: none;
-  --glow-color: var(--ifm-color-primary);
-  background: linear-gradient(90deg, transparent, var(--glow-color), transparent);
-  box-shadow: 0 0 80px 20px var(--glow-color);
-  transition: all 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 1px;
+    opacity: 0.5;
+    pointer-events: none;
+    --glow-color: var(--ifm-color-primary);
+    background: linear-gradient(90deg, transparent, var(--glow-color), transparent);
+    box-shadow: 0 0 80px 20px var(--glow-color);
+    transition: all 0.5s ease;
 }
 
 .uxo-footer.footer-variant-arender .uxo-footer-glow {
-  --glow-color: #4A8FEF;
+    --glow-color: #4a8fef;
 }
 
 .uxo-footer.footer-variant-fast2 .uxo-footer-glow {
-  --glow-color: #5CB8C7;
+    --glow-color: #5cb8c7;
 }
 
 .uxo-footer.footer-variant-flowerdocs .uxo-footer-glow {
-  --glow-color: #A855F7;
+    --glow-color: #a855f7;
 }
 
 .uxo-footer.footer-variant-ai .uxo-footer-glow {
-  --glow-color: #F59E0B;
+    --glow-color: #f59e0b;
 }
 
 .uxo-footer-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 24px;
-  position: relative;
-  z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
 }
 
 .uxo-footer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  text-align: center;
-  margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .uxo-footer-column h4 {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 24px;
-  opacity: 0.9;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+    opacity: 0.9;
 }
 
 .uxo-footer-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .uxo-footer-column li {
-  margin-bottom: 14px;
+    margin-bottom: 14px;
 }
 
 .uxo-footer-column a {
-  color: #94a3b8;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s ease;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
 }
 
 .uxo-footer-column a:hover {
-  color: #fff;
-  text-shadow: 0 0 10px var(--glow-color, var(--ifm-color-primary));
+    color: #fff;
+    text-shadow: 0 0 10px var(--glow-color, var(--ifm-color-primary));
 }
 
 .uxo-footer-social {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
 }
 
 .social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: #94a3b8;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-link:hover {
-  background: var(--ifm-color-primary);
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
-  border-color: transparent;
+    background: var(--ifm-color-primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+    border-color: transparent;
 }
 
 .uxo-footer-bottom {
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
 }
 
 .uxo-footer-bottom small {
-  color: #475569;
-  font-size: 0.85rem;
+    color: #475569;
+    font-size: 0.85rem;
 }
 
 @media (max-width: 768px) {
-  .uxo-footer {
-    padding: 20px 0 15px;
-  }
+    .uxo-footer {
+        padding: 20px 0 15px;
+    }
 
-  .uxo-footer-inner {
-    padding: 0 16px;
-  }
+    .uxo-footer-inner {
+        padding: 0 16px;
+    }
 
-  .uxo-footer-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px 16px;
-    margin-bottom: 16px;
-    text-align: center;
-  }
+    .uxo-footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px 16px;
+        margin-bottom: 16px;
+        text-align: center;
+    }
 
-  .uxo-footer-column h4 {
-    font-size: 0.7rem;
-    margin-bottom: 10px;
-    letter-spacing: 0.8px;
-  }
+    .uxo-footer-column h4 {
+        font-size: 0.7rem;
+        margin-bottom: 10px;
+        letter-spacing: 0.8px;
+    }
 
-  .uxo-footer-column li {
-    margin-bottom: 8px;
-  }
+    .uxo-footer-column li {
+        margin-bottom: 8px;
+    }
 
-  .uxo-footer-column a {
-    font-size: 0.8rem;
-  }
+    .uxo-footer-column a {
+        font-size: 0.8rem;
+    }
 
-  .uxo-footer-social {
-    gap: 10px;
-    justify-content: center;
-  }
+    .uxo-footer-social {
+        gap: 10px;
+        justify-content: center;
+    }
 
-  .social-link {
-    width: 34px;
-    height: 34px;
-  }
+    .social-link {
+        width: 34px;
+        height: 34px;
+    }
 
-  .social-link svg {
-    width: 16px;
-    height: 16px;
-  }
+    .social-link svg {
+        width: 16px;
+        height: 16px;
+    }
 
-  .uxo-footer-bottom {
-    padding-top: 16px;
-  }
+    .uxo-footer-bottom {
+        padding-top: 16px;
+    }
 
-  .uxo-footer-bottom small {
-    font-size: 0.75rem;
-  }
+    .uxo-footer-bottom small {
+        font-size: 0.75rem;
+    }
 }
 
 @media (max-width: 480px) {
-  .uxo-footer-grid {
-    gap: 16px 12px;
-  }
-  
-  .uxo-footer-column h4 {
-    font-size: 0.65rem;
-  }
-  
-  .uxo-footer-column a {
-    font-size: 0.75rem;
-  }
+    .uxo-footer-grid {
+        gap: 16px 12px;
+    }
+
+    .uxo-footer-column h4 {
+        font-size: 0.65rem;
+    }
+
+    .uxo-footer-column a {
+        font-size: 0.75rem;
+    }
 }

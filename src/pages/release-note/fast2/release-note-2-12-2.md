@@ -10,7 +10,6 @@ major_version: "2" # minor version of the release note    ex: 2.2
 description: "Bugfix before next major version" # Heavily-keywords-charged sentence for short preview of the release note + google SEO
 ---
 
-
 ## **What's up ?**
 
 <br />

@@ -1,26 +1,23 @@
 ---
 title: Going further
-date: '2020-02-02T15:20:01+02:00'
+date: "2020-02-02T15:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 33ab754ea1588aa143f0f1cbacc05ba7f9d44a9da3f1a24cf54d4940f74843fc
 ---
-
 
 :::info
 Not directly linked to the module, this section allows you to go further in implementing a FlowerDocs client.
 :::
 
-
 # Validation type
 
 The `@FlowerDocsClient(security = SecurityMode.TOKEN)` annotation secures requests received by the application by requiring a user token.
-By default, a received token is validated by querying **FlowerDocs Core** but this behaviour can be changed thanks to the `token.validation.type` property which accepts the values: 
+By default, a received token is validated by querying **FlowerDocs Core** but this behaviour can be changed thanks to the `token.validation.type` property which accepts the values:
 
-* `none`: no token validation at client level. The token supplied must be legible, but its signature is not validated. This mode should therefore be used with caution, for example when all requests received by the FlowerDocs client are forwarded to **FlowerDocs Core**. In this case, the token will be validated directly by **FlowerDocs Core** when requests are received.
-* `local`: token validation is carried out by the customer. This mode requires the client to have the secret key (`secret.key`) used to verify the tokens.
-
+- `none`: no token validation at client level. The token supplied must be legible, but its signature is not validated. This mode should therefore be used with caution, for example when all requests received by the FlowerDocs client are forwarded to **FlowerDocs Core**. In this case, the token will be validated directly by **FlowerDocs Core** when requests are received.
+- `local`: token validation is carried out by the customer. This mode requires the client to have the secret key (`secret.key`) used to verify the tokens.
 
 # Customized safety
 
@@ -29,7 +26,6 @@ Custom security mode (`SecurityMode.CUSTOM`) gives developers the freedom to imp
 
 <br/>
 The security configuration below, for example, allows you to implement your security management by defining an HTTP filter to intercept incoming requests.
-
 
 ```java
 package com.flower.samples;

@@ -6,8 +6,8 @@ date: 2025-08-01
 
 # To modify
 version: "2025.4.1"
-major_version: "2025" 
-description: "Summary of the changes in version 2025.4.1 of Fast2." 
+major_version: "2025"
+description: "Summary of the changes in version 2025.4.1 of Fast2."
 ---
 
 ## **What's new?**
@@ -52,12 +52,15 @@ Dive into our official documentation to explore how you can leverage campaign pa
 <br />
 
 ---
+
 ## 🌏 Generic Features & UI
 
 ### 🔧 Improvements
+
 - The reliability of the content download feature has been enhanced.
 
 ### 🐞 Bug Fixes
+
 - **Tables**: It is once again possible to scroll in tables after a fix for an issue that was preventing it.
 - **Tables**: A table's scrollbar no longer resets to the top after selecting a row.
 - **Lists**: It is no longer necessary to refresh the libraries page after canceling an import.
@@ -70,10 +73,12 @@ Dive into our official documentation to explore how you can leverage campaign pa
 ## 🔐 Authentication & Team Management
 
 ### 🔧 Improvements
+
 - **Home Page**: The design of the login and registration pages has been modernized for a more intuitive experience.
 - **Configuration**: The property to enable or disable user registration has been removed to simplify configuration.
 
 ### 🐞 Bug Fixes
+
 - **Security**: A successful login by one user no longer unlocks other users' accounts.
 - **Brute Force Protection**: The failed login attempt counter is now correctly reset after a successful login.
 - **Error Messages**: Clear error messages are now displayed when a user is locked.
@@ -87,11 +92,13 @@ Dive into our official documentation to explore how you can leverage campaign pa
 ## ⚙️ Technical & Configuration
 
 ### 🔧 Improvements
+
 - **Queues**: The number of threads for the default queue has been increased to improve processing performance.
 - **JSTransform**: The JavaScript runtime engine has been updated to GraalVM to improve performance and security.
 - **DevMode**: The port used by `devMode` has been adjusted to facilitate local development.
 
 ### 🐞 Bug Fixes
+
 - **Workers**: Fixed an issue where a worker thread could get stuck after a fresh start of the application.
 - **Dependencies**: Resolved various technical and dependency issues to improve code robustness.
 
@@ -100,12 +107,15 @@ Dive into our official documentation to explore how you can leverage campaign pa
 ## 🚀 Campaigns & Scheduler
 
 ### ✨ New Features
+
 - **Campaign Management**: It is now possible to stop all running campaigns in a single click, simplifying maintenance and management operations.
 
 ### 🔧 Improvements
+
 - **Campaign Parameters**: You can now start a campaign by directly passing parameters to it.
 
 ### 🐞 Bug Fixes
+
 - **Campaigns Deletion**: Campaigns with the "Deleting" status are now correctly deleted after a Fast2 restart.
 - **Error Messages**: The error message displayed for an empty job name is now correct.
 - **Job Names**: Special characters are no longer allowed in job titles to prevent errors.
@@ -116,9 +126,11 @@ Dive into our official documentation to explore how you can leverage campaign pa
 ## 📚 Places & Data Model
 
 ### 🔧 Improvements
+
 - **Error Messages**: The error message displayed when uploading a file that is not a map has been clarified.
 
 ### 🐞 Bug Fixes
+
 - **Queues**: Importing a map that refers to non-existent queues now creates them automatically.
 - **Explorer Place**: It is now possible to access the explorer place from a map even if no campaign was run for this map.
 

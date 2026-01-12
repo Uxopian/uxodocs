@@ -1,16 +1,10 @@
 ---
 title: Server performance / Set server
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: cb1ccbb4f6ac1d676502250ea8c6cc3412e1e636219403d8bffd3b7389e40d5b
 ---
-
-
-
-
-
-
 
 ## Server performance
 
@@ -18,32 +12,31 @@ A servlet is deployed to display the performance of each server.
 These performances will be sent as a file, if the `format` parameter is empty, not given in the URL, or equal to `HTML`, the file will be an HTML file.
 Otherwise the file will be a JSON file.
 
-### Request 
+### Request
 
 This functionality is accessible via the servlet: **weatherServlet**
 
 Usable in GET
 
-
 #### Request example
 
-``` bash
+```bash
 curl -X GET 'http://<arender_host>/ARender/arendergwt/weather?format=type'
 ```
 
-* format: the format of the returned file (optional)
+- format: the format of the returned file (optional)
 
 ### Servlet Response
 
 Performance of each server will be displayed in a file.
-If the `format` parameter is empty, not given in the URL or equals to `HTML` the file will be an HTML file. 
+If the `format` parameter is empty, not given in the URL or equals to `HTML` the file will be an HTML file.
 Otherwise the file will be a JSON file.
 
 ## Set server
 
 A servlet is deployed to add a server thanks to its address.
 
-### Request 
+### Request
 
 This functionality is accessible via the servlet: **weatherServlet**
 
@@ -51,11 +44,11 @@ Usable in POST
 
 #### Request example
 
-``` bash
+```bash
 curl -X POST -d "<arender_rendition_host>" 'http://<arender_host>/ARender/arendergwt/weatherServlet'
 ```
 
-* arender_rendition_host : new server address to add.
+- arender_rendition_host : new server address to add.
 
 ### Servlet Response
 

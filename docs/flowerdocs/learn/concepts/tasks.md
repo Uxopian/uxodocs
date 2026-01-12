@@ -1,13 +1,12 @@
 ---
 title: Tasks
 description: Manage your business or technical processes.
-date: '2000-06-05T13:20:01+02:00'
+date: "2000-06-05T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 55c4763b4dd4c7ab2682e14d0597cfd809a7b8a139c5b08e6b8de703f9b7d881
 ---
-
 
 :::info
 FlowerDocs can be integrated with any workflow engine on the market.
@@ -17,64 +16,60 @@ In FlowerDocs terms, a workflow is a logical sequence of several classes of task
 <br/>
 __Example:__ ``1. Invoice import`` --> ``2. Validation comptable`` --> ``3. Validation frais généraux`` --> ``4. Payment``
 
-These three stages correspond to three classes of tasks, each of which has two types of response: 
+These three stages correspond to three classes of tasks, each of which has two types of response:
 
-* Confirm
-* Refuse
-:::
-
-
+- Confirm
+- Refuse
+  :::
 
 # Attachments
 
 When processing a task, it may be necessary for the user to add one or more components.
-These documents are called task attachments and are globally defined by task class. 
+These documents are called task attachments and are globally defined by task class.
 
-In order to perform actions on attachments, the following permissions may be required: 
+In order to perform actions on attachments, the following permissions may be required:
 
-* Add attachment: `CREATE` for the component class to be created
-* Update the content of an attachment: `UPDATE_CONTENT` for the component class to be created
-* Delete an attachment: `DELETE_CONTENT`
+- Add attachment: `CREATE` for the component class to be created
+- Update the content of an attachment: `UPDATE_CONTENT` for the component class to be created
+- Delete an attachment: `DELETE_CONTENT`
 
-__Note:__ These actions are not possible if the attachment definition is read-only. 
- 
+**Note:** These actions are not possible if the attachment definition is read-only.
+
 # Answers
 
 When a user has finished filling in the necessary information for a task, they can select an answer from among those proposed.
 These answers enable a workflow to move in one of the proposed directions.
 
-To apply a response to a task, the ``APPLY_ANSWER`` permission is required.
+To apply a response to a task, the `APPLY_ANSWER` permission is required.
 
 # Assignment
 
-To edit a task, the user must: 
+To edit a task, the user must:
 
-* have the right to update the task: `UPDATE`
-* be assigned to processing the task 
+- have the right to update the task: `UPDATE`
+- be assigned to processing the task
 
-In order to assign a user to process a task, several means are available. 
-From a technical point of view, all you need to do is fill in the task's ``assignee`` field with the identifier of the user, group or team to which the task is assigned.
+In order to assign a user to process a task, several means are available.
+From a technical point of view, all you need to do is fill in the task's `assignee` field with the identifier of the user, group or team to which the task is assigned.
 
 ## Appropriation
 
-Appropriating a task means assigning it to oneself. 
+Appropriating a task means assigning it to oneself.
 A task cannot be appropriated if it has not been assigned to a user, or to one of the logged-in user's teams.
-This type of assignment requires the ``APPROPRIATE`` permission.
+This type of assignment requires the `APPROPRIATE` permission.
 
-It is also possible to assign a task to yourself that has already been assigned to another user if you have the ``APPROPRIATE_ALREADY_ASSIGNED`` permission.
-
+It is also possible to assign a task to yourself that has already been assigned to another user if you have the `APPROPRIATE_ALREADY_ASSIGNED` permission.
 
 ## Assignment
 
 Assigning a task to a user consists in assigning a task from user A to user B.
 This type of assignment can be made even if the task is already assigned to another user.
 
-This type of assignment requires the ``ASSIGN`` permission.
-
+This type of assignment requires the `ASSIGN` permission.
 
 :::info
-To find out more, have a look at a few references: 
+To find out more, have a look at a few references:
 
-* `Task`
-* `Task class`
-:::
+- `Task`
+- `Task class`
+  :::

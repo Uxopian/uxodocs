@@ -2,11 +2,11 @@
 draft: false
 title: Patterns
 tags:
-  - configuration
-  - Java
+    - configuration
+    - Java
 last_update:
-  date: '2025-12-02T14:38:43.134Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:38:43.134Z"
+    author: CI/CD Bot
 content_hash: 8466df0ef60b49221de3365f00b703b9968b9e24d169b49b128f8b072b99dd08
 ---
 

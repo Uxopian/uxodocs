@@ -1,72 +1,88 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  align-items: start;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
 }
 
 .left {
-  min-width: 0;
+    min-width: 0;
 }
 
 .right {
-  position: relative;
+    position: relative;
 }
 
 @media (max-width: 900px) {
-  .wrapper {
-    grid-template-columns: 1fr;
-  }
-  .right {
-    order: 2;
-  }
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+    .right {
+        order: 2;
+    }
 }
 
 /* Drawer styles for feed */
 .drawerWrap {
-  position: fixed;
-  right: 24px;
-  top: 120px;
-  z-index: 60;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+    position: fixed;
+    right: 24px;
+    top: 120px;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .drawerToggle {
-  background: linear-gradient(90deg, #8b45ff 0%, #ff458b 100%);
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    background: linear-gradient(90deg, #8b45ff 0%, #ff458b 100%);
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 .drawer {
-  width: 380px;
-  max-height: 76vh;
-  margin-top: 10px;
-  transform: translateY(-10px) scale(0.98);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 220ms cubic-bezier(0.2,0,0,1);
+    width: 380px;
+    max-height: 76vh;
+    margin-top: 10px;
+    transform: translateY(-10px) scale(0.98);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 220ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .drawer.open {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-  pointer-events: auto;
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 @media (max-width: 1100px) {
-  .drawerWrap { right: 12px; top: 110px }
-  .drawer { width: 320px }
+    .drawerWrap {
+        right: 12px;
+        top: 110px;
+    }
+    .drawer {
+        width: 320px;
+    }
 }
 
 @media (max-width: 900px) {
-  .drawerWrap { position: static; right: auto; top: auto; margin-left: 0; margin-top: 0 }
-  .drawer { width: 100%; max-height: 48vh }
-  .drawerToggle { align-self: stretch }
+    .drawerWrap {
+        position: static;
+        right: auto;
+        top: auto;
+        margin-left: 0;
+        margin-top: 0;
+    }
+    .drawer {
+        width: 100%;
+        max-height: 48vh;
+    }
+    .drawerToggle {
+        align-self: stretch;
+    }
 }

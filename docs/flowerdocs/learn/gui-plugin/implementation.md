@@ -1,18 +1,16 @@
 ---
 title: Implementation
-date: '2020-02-01T11:20:01+02:00'
+date: "2020-02-01T11:20:01+02:00"
 last_update:
-  date: '2025-12-02T14:41:34.882Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:41:34.882Z"
+    author: CI/CD Bot
 content_hash: 0bea8e7efc904d6b55c738c7b84520b7914e4265e26dabb077f96131f10af23e
 ---
-
 
 # Goal
 
 The aim of this training module is to lay the foundations for the development of a secured [GUI plugin](configuration).
 This plugin can be consumed from and through **FlowerDocs GUI**. It will expose a service consuming the services exposed by **FlowerDocs Core**.
-
 
 # Prerequisites
 
@@ -23,7 +21,7 @@ If you are extern to Arondor, please ask the FlowerDocs support to get the menti
 
 ## Project creation
 
-Using your favorite IDE, start by creating a new Maven project with the following POM: 
+Using your favorite IDE, start by creating a new Maven project with the following POM:
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -65,14 +63,13 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 </project>
 ```
 
-
-```
+````
 
 ## Spring Boot application
 
 This Spring Boot application is based on the [Spring Boot starter](/docs/flowerdocs/apis/core/java) provided by FlowerDocs.
 
-To start with, we need a _main class_ Spring Boot annotated with the `@SpringBootApplication` annotation: 
+To start with, we need a _main class_ Spring Boot annotated with the `@SpringBootApplication` annotation:
 
 ```java
 package com.flower.samples;
@@ -92,27 +89,28 @@ public class SecuredGUIPlugin
 		SpringApplication.run(SecuredGUIPlugin.class, args);
 
 
-```
+````
 
-Here, the `@FlowerDocsClient` annotation automatically configures: 
+Here, the `@FlowerDocsClient` annotation automatically configures:
 
-* the Java client for consuming the web services exposed by **FlowerDocs Core**
-* secure requests: a token is required to consume the `@RestController` exposed by the application
+- the Java client for consuming the web services exposed by **FlowerDocs Core**
+- secure requests: a token is required to consume the `@RestController` exposed by the application
 
 <br/>
-To configure the application, this `application.properties` file in the `src/main/resources` directory of your project. 
+To configure the application, this `application.properties` file in the `src/main/resources` directory of your project.
 
 ## Configuration
 
-```bash
+````bash
 
 ```properties
 spring.application.name=secured-gui-plugin
 server.port=2802
 server.servlet.context-path=/secured
 ws.url=http://localhost:8081/core/services
-```
-```
+````
+
+````
 :::info
 The other configuration options offered by the Spring Boot framework can also be used.
 This makes it possible to outsource application configuration.
@@ -148,6 +146,6 @@ public class FlowerRestController
 		return "documents: " + documentService.search(new SearchRequest()).getFound();
 
 
-```
+````
 
 Here, the `documentService` document management service is used to determine the total number of documents.

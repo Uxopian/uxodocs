@@ -12,20 +12,22 @@ This plugin is ported from existing `papersaurus` project built for [Docusaurus]
 
 It is a [Docusaurus](https://docusaurus.io/) 2.x plugin and can be triggered automatically after docusaurus builds or on docusaurus command line.
 
-It uses  [Puppeteer](https://pptr.dev/) to convert html pages to PDF.
+It uses [Puppeteer](https://pptr.dev/) to convert html pages to PDF.
 
 ### Please note
 
 1. Puppeteer does not yet support individual headers / footers for the cover page. Therefore this plugin generates a PDF with just uses [easy-pdf-merge](https://www.npmjs.com/package/easy-pdf-merge) See [this SO question](https://stackoverflow.com/questions/55470714/trying-to-hide-first-footer-header-on-pdf-generated-with-puppeteer)
 
-2. Puppeteer does not yet support the generation of TOCs. See [this feature request](https://github.com/puppeteer/puppeteer/issues/1778) and [this Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=840455). Therefore this package generates a PDF, then parses it again to update the page numbers in the TOC. Therefore the parameter  footerParser...
+2. Puppeteer does not yet support the generation of TOCs. See [this feature request](https://github.com/puppeteer/puppeteer/issues/1778) and [this Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=840455). Therefore this package generates a PDF, then parses it again to update the page numbers in the TOC. Therefore the parameter footerParser...
 
 ## Installation
 
 ```
 yarn add docusaurus-plugin-papersaurus
 ```
+
 or
+
 ```
 npm install docusaurus-plugin-papersaurus --save
 ```
@@ -58,7 +60,7 @@ Default: `true`
 
 ### keepDebugHtmls
 
-The plugin creates one temporary HTML file per generated PDF file that is then converted using  [Puppeteer](https://pptr.dev/) to a PDF file. This HTML file also contains the table of contents including page numbers.
+The plugin creates one temporary HTML file per generated PDF file that is then converted using [Puppeteer](https://pptr.dev/) to a PDF file. This HTML file also contains the table of contents including page numbers.
 After generating the PDF file, these temporary HTML files are deleted. You may want to keep these HTML files to debug your printing CSS file in a browser.
 
 Set this parameter to `true` to keep the files.
@@ -187,7 +189,7 @@ getPdfCoverPage: (siteConfig, pluginConfig, pageTitle, version) => {
     <!DOCTYPE html>
     <html>
     <head>
-      
+
     </head>
 
       <body>
@@ -196,7 +198,7 @@ getPdfCoverPage: (siteConfig, pluginConfig, pageTitle, version) => {
           <h2 style="color:#005479;font-size:16px;font-family:sans-serif;">${(pageTitle || siteConfig.tagline)}<h2>
 
           <dl style="font-family:sans-serif;margin-top:10em;display: flex; flex-flow: row; flex-wrap: wrap; width: 600px; overflow: visible;color:#005479;font-size:12px;font-weight:normal;">
-            <dt style="margin-top:1em;flex: 0 0 20%; text-overflow: ellipsis; overflow: hidden;">Author:</dt>    
+            <dt style="margin-top:1em;flex: 0 0 20%; text-overflow: ellipsis; overflow: hidden;">Author:</dt>
             <dd style="margin-top:1em;flex:0 0 80%; margin-left: auto; text-align: left;text-overflow: ellipsis; overflow: hidden;">Your name</dd>
             <dt style="margin-top:1em;flex: 0 0 20%; text-overflow: ellipsis; overflow: hidden;">Date:</dt>
             <dd style="margin-top:1em;flex:0 0 80%; margin-left: auto; text-align: left;text-overflow: ellipsis; overflow: hidden;">${new Date().toISOString().substring(0,10)}</dd>
@@ -218,10 +220,10 @@ getPdfPageHeader: (siteConfig, pluginConfig, pageTitle) => {
     return `
       <div style="justify-content: center;align-items: center;height:2.5cm;display:flex;margin: 0 1.5cm;color: #005479;font-size:9px;font-family:sans-serif;width:100%;">
         <div style="flex-grow: 1; width: 50%; text-align:left;margin-left:-3px">
-          <img 
-            style='display:block; width:2cm;' 
-            id='base64image'                 
-            src='data:image/svg+xml;base64, <Your Logo as base64>' 
+          <img
+            style='display:block; width:2cm;'
+            id='base64image'
+            src='data:image/svg+xml;base64, <Your Logo as base64>'
           />
         </div>
         <span style="flex-grow: 1; width: 50%; text-align:right;">${pageTitle}</span>
@@ -251,21 +253,22 @@ Puppeteer uses classes to inject values at print time. See: https://pptr.dev/#?p
 
 String you would like to use as author.
 
-The value may be used in `getPdfCoverPage`, `getPdfPageHeader` or `getPdfPageFooter` with `pluginConfig.author`. 
+The value may be used in `getPdfCoverPage`, `getPdfPageHeader` or `getPdfPageFooter` with `pluginConfig.author`.
 
 ### footerParser
 
-In order to update the TOC with the correct page numbers, this package has to parse the generated PDF and then manually update the TOC. In order to split the parsed text by pages, a regex expression is used to identify the content footer text. Think of calling jQuery's ```$.text()``` on the footer wrapper. The regular expression must match this text.
+In order to update the TOC with the correct page numbers, this package has to parse the generated PDF and then manually update the TOC. In order to split the parsed text by pages, a regex expression is used to identify the content footer text. Think of calling jQuery's `$.text()` on the footer wrapper. The regular expression must match this text.
 
 Example:
 
-```/© Your Company\d{4}-\d{2}-\d{2}Page \d* \/ \d*/g```
+`/© Your Company\d{4}-\d{2}-\d{2}Page \d* \/ \d*/g`
 
 ### coverMargins
 
 Margins for the cover page.
 
 Default:
+
 ```
 {
   top: "10cm",
@@ -280,6 +283,7 @@ Default:
 Margins for content pages.
 
 Default:
+
 ```
 {
   top: "5cm",
@@ -294,7 +298,7 @@ Default:
 In case you have stylesheets or scripts that needs to be included from some other folder than the output folder specify them here.
 
 Example:
-```useExtraPaths: [{serverPath: "/", localPath: ".."}]```
+`useExtraPaths: [{serverPath: "/", localPath: ".."}]`
 
 Default: `[]`
 
@@ -303,7 +307,7 @@ Default: `[]`
 A list of css selectors that can be used to remove elements of the html before rendering it to pdf.
 
 Example:
-```ignoreCssSelectors: [".breadcrumbs", ".theme-doc-version-badge"]```
+`ignoreCssSelectors: [".breadcrumbs", ".theme-doc-version-badge"]`
 
 Default: `[]`
 
@@ -318,6 +322,7 @@ Default: `https://code.jquery.com/jquery-3.6.0.min.js`
 Override this function to customize the file name of the generated pdfs. By default the names are based on the page ids.
 
 Example:
+
 ```
 getPdfFileName: (siteConfig, pluginConfig, pageTitle, pageId, parentTitles, parentIds, version, versionPath) => {
   let verString = version;

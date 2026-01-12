@@ -1,13 +1,13 @@
 ---
 # Do not modify
-draft : false
+draft: false
 title: "Fast2 release notes - "
 date: 2021-06-29
 
 # To modify
 version: "2.2.0"
-major_version: "2"    # minor version of the release note
-description : "New icon set, retry punnets feature, Shared Object conversion, ports updated"    # Heavily-keywords-charged sentence for short preview of the release note + google SEO
+major_version: "2" # minor version of the release note
+description: "New icon set, retry punnets feature, Shared Object conversion, ports updated" # Heavily-keywords-charged sentence for short preview of the release note + google SEO
 ---
 
 ### Evolution

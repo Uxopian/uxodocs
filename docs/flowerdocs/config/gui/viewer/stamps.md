@@ -1,31 +1,27 @@
 ---
 title: Stamp templates
 description: Collaborate on documents using annotations.
-date: '2005-08-28T13:20:01+02:00'
+date: "2005-08-28T13:20:01+02:00"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 711fde69096f7fd223a61973e47baaf54374812741bdf9b9ef567eec0674abb3
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
-
 # Principle
 
-Stamp templates are used to define the stamps a user can create. They can be of two types: 
+Stamp templates are used to define the stamps a user can create. They can be of two types:
 
-* textual: based on a character string
-* image: based on an image _(encoded using the base64 format)_
+- textual: based on a character string
+- image: based on an image _(encoded using the base64 format)_
 
+A stamp template is stored as a catalogue in a document of class `UserPreference` with the following tags:
 
-
-A stamp template is stored as a catalogue in a document of class `UserPreference` with the following tags: 
-
-* `UserPreferenceType` with `STAMP` value
-* `User` with the value of the identity to which the stamp template is shared
-
+- `UserPreferenceType` with `STAMP` value
+- `User` with the value of the identity to which the stamp template is shared
 
 # By user
 
@@ -100,6 +96,6 @@ The `User` tag is filled in with the identifier of the team of users who can use
 </annotationTemplateCatalog>
 
 ```
+
   </TabItem>
 </Tabs>
-

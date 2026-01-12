@@ -1,30 +1,29 @@
 ---
 title: Managing ACLs
 description: Manage your access control lists
-date: '2018-04-02T12:20:01+01:57'
+date: "2018-04-02T12:20:01+01:57"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 62702421a66e6244cc544ae3f29ca3f22bafa581eb7780dde5275c24a5236f08
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
-
 The ACLService service displays various operations you can perform on ACLs:
 
-* `get` retrieves all ACLs in the scope.
+- `get` retrieves all ACLs in the scope.
 
-* `create` creates a list of `securityObjects`. The list of objects must be supplied as input, before they can be created in the application.
+- `create` creates a list of `securityObjects`. The list of objects must be supplied as input, before they can be created in the application.
 
-* `getForComponent` retrieves a component's ACL from the component's category and identifier.
+- `getForComponent` retrieves a component's ACL from the component's category and identifier.
 
-* `getById` retrieves ACLs from the list of their identifiers.
+- `getById` retrieves ACLs from the list of their identifiers.
 
-* `updateById` updates ACLs using their identifiers.
+- `updateById` updates ACLs using their identifiers.
 
-* `deleteById` deletes ACLs based on their identifiers.
+- `deleteById` deletes ACLs based on their identifiers.
 
 # ACL recovery
 
@@ -62,7 +61,6 @@ public List<SecurityObject> getAllAcl() throws TechnicalException, FunctionalExc
 
   </TabItem>
 </Tabs>
-
 
 <br/>
 GET FOR COMPONENT:
@@ -102,7 +100,6 @@ public SecurityObject getForComponentAcl() throws FunctionalException, Technical
   </TabItem>
 </Tabs>
 
-
 <br/>
 GET BY ID:
 
@@ -136,7 +133,6 @@ public List<SecurityObject> get() throws FunctionalException, TechnicalException
 
   </TabItem>
 </Tabs>
-
 
 # ACL creation
 
@@ -189,7 +185,6 @@ public List<SecurityObject> create() throws FunctionalException, TechnicalExcept
 
   </TabItem>
 </Tabs>
-
 
 # ACL modification
 
@@ -245,7 +240,6 @@ public List<SecurityObject> update() throws FunctionalException, TechnicalExcept
   </TabItem>
 </Tabs>
 
-
 # Deleting ACL
 
 The examples below show how to delete ACLs using the operation of `delete`.
@@ -281,4 +275,3 @@ public void delete() throws FunctionalException, TechnicalException
 
   </TabItem>
 </Tabs>
-

@@ -1,6 +1,6 @@
-import React from 'react';
-import OriginalDocItem from '@theme-original/DocItem';
+import React from "react";
+import OriginalDocItem from "@theme-original/DocItem";
 
 export default function DocItemWrapper(props) {
-  return <OriginalDocItem {...props} />;
+    return <OriginalDocItem {...props} />;
 }

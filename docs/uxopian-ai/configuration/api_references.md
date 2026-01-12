@@ -1,8 +1,8 @@
 ---
 title: REST API  Swagger
 last_update:
-  date: '2025-12-09T08:50:47.882Z'
-  author: CI/CD Bot
+    date: "2025-12-09T08:50:47.882Z"
+    author: CI/CD Bot
 content_hash: 56a32d181d657c03539e92472c3afaf6428b976287fc7ad8a26fe2d45c142dd9
 ---
 

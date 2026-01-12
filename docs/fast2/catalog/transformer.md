@@ -1,9 +1,10 @@
 ---
 last_update:
-  date: '2025-12-02T14:26:41.610Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:26:41.610Z"
+    author: CI/CD Bot
 content_hash: ac5dc492fb73289df0350e24c748f3397759229862327aa8c3767f9f535a7158
 ---
+
 ## AlterDocumentContent <small> - Create, embed, delete or update document content </small> {#AlterDocumentContent data-toc-label="AlterDocumentContent"}
 
 Use this task to remove existing content of a processed document, add content to this document based on a dynamically resolved path, of even more.
@@ -34,7 +35,7 @@ Use this task to remove existing content of a processed document, add content to
 | Append as child to existing folder | `Boolean`            | Add as a child of an already existing folder the new folder | `false `      |
 | Target folder class name           | Pattern              | The symbolic name of your new folder, i.e. the path         |
 | Folder name to create              | Pattern              | Leave empty to not create folder                            |
-| Property map                       | `String/Pattern map` | <br/> <p> Ex/ targetProperty = `${variableName}`</p>          |
+| Property map                       | `String/Pattern map` | <br/> <p> Ex/ targetProperty = `${variableName}`</p>        |
 
 ## AlterDocumentProperties <small> - Alter multiple document properties </small> {#AlterDocumentProperties data-toc-label="AlterDocumentProperties"}
 
@@ -196,12 +197,12 @@ Provide a campaign name, task name, and unique ID field to find a single punnet 
 
 <b>Mandatory settings</b>
 
-| Key | Type                             | Description |
-| --- | -------------------------------- | ----------- |
-| Embedded Db connection provider | [EmbeddedDbConnectionProvider](credentials#EmbeddedDbConnectionProvider) | |
-| Campaign prefix | `String` | Generally Map name, but can be changed, so the part that comes before _Run# |
-| Fields for OpenSearch query | `String/Pattern map` | Fields used to construct OpenSearch query. Recommended to include at least the following 3: campaign.keyword, stepName.keyword, punnet.documents.documentId.keyword (or similar unique ID). The query should only return one punnet. |
-| Data to enrich current punnet | `String/Pattern map` | List of data coming from the OpenSearch fetched punnet to add to the current punnet. Give a literal name such as edb-hash and an expression to fill the value like `${hash}` or `${property('file:content:digest')}` for properties with colons in the name. |
+| Key                             | Type                                                                     | Description                                                                                                                                                                                                                                                  |
+| ------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Embedded Db connection provider | [EmbeddedDbConnectionProvider](credentials#EmbeddedDbConnectionProvider) |                                                                                                                                                                                                                                                              |
+| Campaign prefix                 | `String`                                                                 | Generally Map name, but can be changed, so the part that comes before \_Run#                                                                                                                                                                                 |
+| Fields for OpenSearch query     | `String/Pattern map`                                                     | Fields used to construct OpenSearch query. Recommended to include at least the following 3: campaign.keyword, stepName.keyword, punnet.documents.documentId.keyword (or similar unique ID). The query should only return one punnet.                         |
+| Data to enrich current punnet   | `String/Pattern map`                                                     | List of data coming from the OpenSearch fetched punnet to add to the current punnet. Give a literal name such as edb-hash and an expression to fill the value like `${hash}` or `${property('file:content:digest')}` for properties with colons in the name. |
 
 ## FileNet35ExtraSearchTask <small> - File Net search </small> {#FileNet35ExtraSearchTask data-toc-label="FileNet35ExtraSearchTask"}
 
@@ -243,14 +244,14 @@ This class allow you to connect to your mail box and select mails to delete. You
 
 <b>Optional settings</b>
 
-| Key                           | Type                                              | Description                                                           | Default value    |
-| ----------------------------- | ------------------------------------------------- | --------------------------------------------------------------------- | ---------------- |
+| Key                           | Type                                           | Description                                                           | Default value    |
+| ----------------------------- | ---------------------------------------------- | --------------------------------------------------------------------- | ---------------- |
 | Mail connection provider      | [MailBoxProvider](credentials#MailBoxProvider) |                                                                       |
-| Maximum connection ttl        | `Long`                                            | Time in milliseconds                                                  | `60 `            |
-| Search term type              | `String`                                          |                                                                       | `Message-Id `    |
-| Pattern to evaluate property  | `String`                                          |                                                                       | `${Message-Id} ` |
-| Exception when mail not found | `Boolean`                                         | Throw an exception when the mail is not found. Otherwise, silent fail | `true `          |
-| Save message changes          | `Boolean`                                         |                                                                       | `true `          |
+| Maximum connection ttl        | `Long`                                         | Time in milliseconds                                                  | `60 `            |
+| Search term type              | `String`                                       |                                                                       | `Message-Id `    |
+| Pattern to evaluate property  | `String`                                       |                                                                       | `${Message-Id} ` |
+| Exception when mail not found | `Boolean`                                      | Throw an exception when the mail is not found. Otherwise, silent fail | `true `          |
+| Save message changes          | `Boolean`                                      |                                                                       | `true `          |
 
 ## RenameDocumentProperties <small> - Rename multiple document properties </small> {#RenameDocumentProperties data-toc-label="RenameDocumentProperties"}
 
@@ -274,10 +275,10 @@ Use this task to change a system-wide configuration setting at runtime. Mainly u
 
 <b>Mandatory settings</b>
 
-| Key                          | Type     | Description                                                                                                                                                                                                                                                                                          |
-| ---------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Key                          | Type     | Description                                                                                                                                                                                                                                                                                            |
+| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Shared object new value      | `String` | Can be almost any type of variable (String, int...) except object and tasks of the Fast2 catalog. You can also access to any custom document data value from the pattern using `${variableName}`. Already known variables : base, campaign, taskFlowMap, step, punnetTraceId, punnetId and documentId. |
-| Shared object name to update | `String` | Name of the object to update. The shared object will be automatically created if does not already exists.                                                                                                                                                                                            |
+| Shared object name to update | `String` | Name of the object to update. The shared object will be automatically created if does not already exists.                                                                                                                                                                                              |
 
 <b>Optional settings</b>
 

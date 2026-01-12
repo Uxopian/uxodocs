@@ -1,25 +1,18 @@
 ---
 title: Installation in ACA
 last_update:
-  date: '2025-12-02T14:34:16.372Z'
-  author: CI/CD Bot
+    date: "2025-12-02T14:34:16.372Z"
+    author: CI/CD Bot
 content_hash: 4cf953b8aa08b50c1f41e53549afe713f0208498d7a89b034b109dd67ad396d3
 ---
 
-
-
-
-
-
-
 ## Quick start with Docker
 
-*If needed, learn how to run ARender in docker [here](/docs/arender/installation/docker/presentation).*
+_If needed, learn how to run ARender in docker [here](/docs/arender/installation/docker/presentation)._
 
 1. Change ARender UI context path to **/arender**.
 
 With ARender UI container, change the context with `CONTEXT_PATH=/arender` in the container environment variable.
-
 
 2. Pull the ACA image from our artifactory with:
 
@@ -29,37 +22,33 @@ With ARender UI container, change the context with `CONTEXT_PATH=/arender` in th
 
 3. Then run the container with the following configuration:
 
-
 ```yaml
-  version: "3"
+version: "3"
 
-  services:
+services:
     aca:
-      image: alfresco-content-app:AR-11007
-      environment:
-      # ACA host
-      - ADF_PUBLIC_HOST=http://localhost
-      # ARender host with /arender as context path
-      - ARENDER_HOST=http://localhost:8080
-      # alfresco content repository host
-      - ALFRESCO_HOST=http://localhost:8080
-      # alfresco host for oauth
-      - ALFRESCO_OAUTH_HOST=http://localhost:8080
-      # list of extensions that opens with arender as preview (separator ',')
-      - ARENDER_EXTENSIONS=pdf,docx,docm,dotx,dotm,doc,dot,rtf,odt,ott,xlsx,xlsm,xls,xlt,xml,csv,ods,ots,pptx,pptm,ppt,pps,odp,otp,vsdx,msg,eml,html,htm,txt,dwg,dxf,tif,tiff,dcm,mda,ica,mmr,mca,jpg,jpeg,jpe,jfif,jp2,jpf,jpx,j2k,j2c,jpc,png,gif,webp,bmp,mp4,zip
-      ports:
-      - 80:8080
-
+        image: alfresco-content-app:AR-11007
+        environment:
+            # ACA host
+            - ADF_PUBLIC_HOST=http://localhost
+            # ARender host with /arender as context path
+            - ARENDER_HOST=http://localhost:8080
+            # alfresco content repository host
+            - ALFRESCO_HOST=http://localhost:8080
+            # alfresco host for oauth
+            - ALFRESCO_OAUTH_HOST=http://localhost:8080
+            # list of extensions that opens with arender as preview (separator ',')
+            - ARENDER_EXTENSIONS=pdf,docx,docm,dotx,dotm,doc,dot,rtf,odt,ott,xlsx,xlsm,xls,xlt,xml,csv,ods,ots,pptx,pptm,ppt,pps,odp,otp,vsdx,msg,eml,html,htm,txt,dwg,dxf,tif,tiff,dcm,mda,ica,mmr,mca,jpg,jpeg,jpe,jfif,jp2,jpf,jpx,j2k,j2c,jpc,png,gif,webp,bmp,mp4,zip
+        ports:
+            - 80:8080
 ```
-
-
 
 ## Add ARender to your Alfresco Content App
 
 ### Requirements
 
 - Alfresco 5.2.4, 6.x
-- Tomcat  7.0
+- Tomcat 7.0
 - NodeJS v10.16.0,
 - npm 6.14.2
 
@@ -74,7 +63,7 @@ As the module is preview and not publicly available you need to add it manually.
     $> git checkout v1.10.1
     ```
 
-2. Download  ARender ACA extension sources [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arender-for-alfresco-ADF-plugin//arender-for-alfresco-ADF-plugin-.zip) and unzip the archive content.
+2. Download ARender ACA extension sources [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arender-for-alfresco-ADF-plugin//arender-for-alfresco-ADF-plugin-.zip) and unzip the archive content.
 
 3. Create a library project.
 
@@ -85,7 +74,6 @@ As the module is preview and not publicly available you need to add it manually.
 4. Replace the content of the created folder by ARender ACA extension sources.
 
 5. Add ARender lib to the compiler config.
-
 
 ```yaml
 
@@ -100,13 +88,9 @@ As the module is preview and not publicly available you need to add it manually.
 
 ```
 
-
 For versions 2.0 and above, refer to the version 2.0 installation
 
-
-
 6. Add ARender assets to the app and replace project infos.
-
 
 ```yml
 
@@ -185,9 +169,7 @@ For versions 2.0 and above, refer to the version 2.0 installation
 
 ```
 
-
 7. Add ARender extension description.
-
 
 ```yml
 
@@ -198,9 +180,7 @@ For versions 2.0 and above, refer to the version 2.0 installation
 
 ```
 
-
 8. Import ARender extension.
-
 
 ```ts
 import { ArenderExtensionModule &#125; from '@arondor/arender-viewer';
@@ -210,9 +190,7 @@ import { ArenderExtensionModule &#125; from '@arondor/arender-viewer';
 &#125;)
 ```
 
-
 9. Add ARender ACA extension to the package build scripts.
-
 
 ```yml
 
@@ -226,17 +204,11 @@ import { ArenderExtensionModule &#125; from '@arondor/arender-viewer';
 
 ```
 
-
-
-
 For versions 2.0 and above, refer to the version 2.0 installation
-
 
 ### Configuration
 
 #### ARender server config
-
-
 
 ```yml
 
@@ -249,18 +221,15 @@ For versions 2.0 and above, refer to the version 2.0 installation
 
 ```
 
-
-
 Description:
 
-- **arender.host**: arender host with *"/arender"* as context path. Use the default configuration to avoid Cross Origin issues.
+- **arender.host**: arender host with _"/arender"_ as context path. Use the default configuration to avoid Cross Origin issues.
 - **arender.onPromise**: enable multiple documents and/or folders opening.
 - **arender.documentbuilder**: enable document composition feature by default.
 
 #### File extension openned
 
 Modify features.viewer.content.fileExtension list.
-
 
 ```yml
 
@@ -292,8 +261,6 @@ Modify features.viewer.content.fileExtension list.
 
 ```
 
-
-
 ### Build and run
 
 1. Install the angular-devkit.
@@ -318,8 +285,6 @@ For versions 2.0 and above, the following additional changes must be done :
 
 1. The ARender lib in the compiler configuration are placed in tsconfig.base.json and not in tsconfig.json
 
-
-
 ```yaml
 
   "compilerOptions": {
@@ -333,11 +298,7 @@ For versions 2.0 and above, the following additional changes must be done :
 
 ```
 
-
-
 2. Add ARender ACA extension to the package build scripts.
-
-
 
 ```yml
 
@@ -352,11 +313,8 @@ For versions 2.0 and above, the following additional changes must be done :
 
 ```
 
-
-
 3. Execute the command to build the app and have the generated folder (/dist/app) to place in your tomcat server in the "webapps" folder.
 
     ```bash
     $> ng build
     ```
-   

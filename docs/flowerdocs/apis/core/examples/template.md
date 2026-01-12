@@ -1,35 +1,40 @@
 ---
 title: Using templates
 description: Enrich an HTML or MS Word template with tag values
-date: '2018-04-02T12:20:01+01:59'
+date: "2018-04-02T12:20:01+01:59"
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 9e3f0d9f343f56f51bf4143a32bde16e44f2855b323fb593e8a4a110f1851781
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
-
 # HTML template
+
 The `HTML` service shows the following operation:
 
-* `getProcessedTemplate`: to download an enriched template with tag values
+- `getProcessedTemplate`: to download an enriched template with tag values
 
 ## Model
-The template used by the `getProcessedTemplate` call looks like this: 
+
+The template used by the `getProcessedTemplate` call looks like this:
+
 ```json
 
     "string":"string"
 
 ```
+
 This is a set of key/value pairs, the tag identifier and its value.
 
 ## Reply
-The reply is a text composed of the HTML template, with the tag identifiers replaced by their values. 
+
+The reply is a text composed of the HTML template, with the tag identifiers replaced by their values.
 
 ## Example
+
 The examples below show how to obtain an HTML template by enriching it with tag values.
 
 <Tabs>
@@ -51,7 +56,7 @@ Content-Type: application/json
     "MailObject": "Termination of a contract",
     "RefClient":"123456",
     "CustomerName": “Doe",
-    "CustomerName": "John" 
+    "CustomerName": "John"
 
 ```
 
@@ -92,16 +97,17 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
-
 # MS Word template
+
 The `MSOffice` service shows the following operations:
 
-* `downloadFromTags`: to download a template enriched with tag values
-* `storeFromTags`: to create a temporary file in FLowerDocs from an enriched template
+- `downloadFromTags`: to download a template enriched with tag values
+- `storeFromTags`: to create a temporary file in FLowerDocs from an enriched template
 
 ## Model
-The model used by the `downloadFromTags` and `storeFromTags` calls looks like this: 
+
+The model used by the `downloadFromTags` and `storeFromTags` calls looks like this:
+
 ```json
 [
 
@@ -113,17 +119,20 @@ The model used by the `downloadFromTags` and `storeFromTags` calls looks like th
 
 ]
 ```
+
 Here is the description associated with the call data set:
 
-* `name`: tag id
-* `readOnly` : 
-* `value`: list of tag values
+- `name`: tag id
+- `readOnly` :
+- `value`: list of tag values
 
 ## Reply
+
 The `downloadFromTags` call returns the file in docx format with the replaced tag values.
-The `storeFromTags` call returns the identifier of the temporary file created in FlowerDocs. This identifier can then be used to create a document. 
+The `storeFromTags` call returns the identifier of the temporary file created in FlowerDocs. This identifier can then be used to create a document.
 
 ## Examples - Download
+
 The examples below show how to download an MSWord template and enrich it with tag values.
 
 <Tabs>
@@ -207,8 +216,8 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-
 ## Examples - Temporary file
+
 The examples below show how to create a temporary MSWord template file, enriching it with tag values.
 
 <Tabs>
@@ -257,7 +266,7 @@ Content-Type: application/json
 ```Java
 @Autowired
     private MSOfficeTemplateService service;
-    
+
 	@Autowired
     private TempFileService tempFileService;
 

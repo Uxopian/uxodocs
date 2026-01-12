@@ -10,7 +10,6 @@ major_version: "2" # minor version of the release note    ex: 2.2
 description: "Bugfix and a lot of evolutions" # Heavily-keywords-charged sentence for short preview of the release note + google SEO
 ---
 
-
 ## **What's up ?**
 
 <br />
@@ -20,7 +19,6 @@ Thanks to your feedback, bugfix has been our priority.
 A lot of evolutions have still been done.
 
 You will find a new EmbeddedDBSource connector, better quality of tasks and the Explorer Place.
-
 
 And much more !
 <br />
@@ -41,7 +39,6 @@ Json punnet: Single universal format during serialization to support all metadat
 OpenSearch: Upgrade from 1.3.1 to 1.3.15 version
 
 Security: Upgrade other minor versions of dependencies
-
 
 ##### Solved Issue
 
@@ -67,7 +64,6 @@ FlowerInjector: Flower connection provider is multi-thread safe
 
 FlowerInjector: Have a whitelist of document properties to inject
 
-
 ##### Solved Issue
 
 CSV Source: Parse special characters correctly
@@ -80,14 +76,11 @@ IDMISContentExtractor: Update ImageServices extractor for Fast2 2.x
 
 wkHtmlToPdfConverter: Better conversion robustness
 
-
 ##### Regression
 
 DctmContentExtractor: Fix memory management to support big amount of documents
 
 LocalSource: Recover the possibility to configure the task with relative path
-
-
 
 <br />
 
@@ -107,7 +100,7 @@ Link condition: Incorrect configuration sends errors and broker does not freeze 
 
 Scheduler: Active box not available before job creation anymore
 
-Scheduler:  job, wait the end of a campaign to start a new one (no overlapping)
+Scheduler: job, wait the end of a campaign to start a new one (no overlapping)
 
 ##### Regression
 
@@ -129,9 +122,7 @@ Explorer pop-up: Improve the display of XML punnet
 
 Punnet Tracker: Sort PunnetContext list by previous punnet context ID strengthens the backwork
 
-
 ##### Solved Issue
-
 
 Database: Backwards compatibility solved with “Run” prefixed renamed “Try” for campaigns
 
@@ -140,7 +131,6 @@ Explorer pop-up: Tooltip “History Punnet” updated to “Punnet Tracker”
 Punnet Tracker: Track order issue is fixed with Exception punnets
 
 Punnet Tracker: Stop at the end of the workflow
-
 
 ##### Regression
 

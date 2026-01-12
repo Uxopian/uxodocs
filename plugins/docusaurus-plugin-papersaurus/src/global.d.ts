@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-declare module 'html-toc';
+declare module "html-toc";

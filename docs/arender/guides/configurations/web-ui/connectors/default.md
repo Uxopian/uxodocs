@@ -1,16 +1,10 @@
 ---
 title: Default connector
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: e874dd18970de7f144e9aecccbab755a53227615abf649f7a54ab0704866c6ca
 ---
-
-
-
-
-
-
 
 This connector is provided as default. It is used for internal product
 mechanism. For these purposes, it can be used with following URL
@@ -22,27 +16,21 @@ parameters:
 | uuid      | Used to visualize the id of a ARender document       |
 | bean      | Specify use of a specific connector (Advanced level) |
 
-
 Here are some examples:
 
 - Open a WEB document
 
-  `http://&#123;ARENDER_SERVER&#125;/ARender/ARender.html?url=...`
+    `http://&#123;ARENDER_SERVER&#125;/ARender/ARender.html?url=...`
 
 - Open a document using a specific connector providing a user id and a security token
 
-  `http://&#123;ARENDER_SERVER&#125;/ARender.html?bean=myConnector&amp;user=123456&amp;token=9GISU9SG4Z`
-
-
+    `http://&#123;ARENDER_SERVER&#125;/ARender.html?bean=myConnector&amp;user=123456&amp;token=9GISU9SG4Z`
 
 ### Configure authorized URLs
 
 The URI set in the url parameter is checked in order to authorized the connexion against a set of whitelisted URL.
 
 In Rendition side, specifically in the Broker microservice, two properties are available to whitelist URL based on HTTP protocol and FTP protocol.
-
-
-
 
 ```cfg
 # Authorized documents paths with comma-separated
@@ -51,24 +39,18 @@ authorized.paths=../../samples/,../samples/,../../tmp/,../tmp
 authorized.urls=
 ```
 
-
-
 By default, no URL is authorized.
 
-For example, to allow the ARender demo site to authorize the following URL document https://demo.arender.io/docs/demo/ARender-doc-demo.pdf, we need to set the property like below : 
-
-
+For example, to allow the ARender demo site to authorize the following URL document https://demo.arender.io/docs/demo/ARender-doc-demo.pdf, we need to set the property like below :
 
 ```cfg
 authorized.urls=https://demo.arender.io,demo.arender.io
 ```
 
-
-
-Note, that we added 2 URLs, one with the HTTP protocol and one without. Both are correct. 
+Note, that we added 2 URLs, one with the HTTP protocol and one without. Both are correct.
 But in the first one, we explicitly authorize HTTPS URL of the demo size.
 
-With the property above, the following URL will open the document ARender-doc-demo.pdf in the ARender demo : 
+With the property above, the following URL will open the document ARender-doc-demo.pdf in the ARender demo :
 
 https://www.demo.arender.io/?url=https://demo.arender.io/docs/demo/ARender-doc-demo.pdf
 
@@ -77,8 +59,6 @@ https://www.demo.arender.io/?url=https://demo.arender.io/docs/demo/ARender-doc-d
 Since version 2023.1.0, a new property is available to configure URLs that need to be authenticated with a Basic Authentication.
 The property must be provided in the Broker microservice.
 
-
-
 ```cfg
 # Set a list of key-value pairs of base64-secrets for domains
 # The key and the value are separated by the character '@'
@@ -86,5 +66,3 @@ The property must be provided in the Broker microservice.
 # Example : domain1@secret1,domain2@secret2,domain3@secret3
 arender.url.basic.auth=
 ```
-
-

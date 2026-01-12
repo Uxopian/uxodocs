@@ -1,38 +1,32 @@
 ---
 title: Get Bookmarks
 last_update:
-  date: '2025-12-01T14:30:57.777Z'
-  author: CI/CD Bot
+    date: "2025-12-01T14:30:57.777Z"
+    author: CI/CD Bot
 content_hash: 8783f7181fa9988579af3d5b10dd6c96e6490c694a8395a425199357d27f8f87
 ---
-
-
-
-
-
-
-
 
 This API allows you to retrieve the bookmarks of a specific document.
 
 ## API Description
 
 Endpoint:
+
 ```bash
 GET /documents/{documentId}/bookmarks
 ```
 
 Resource path:
 
-| Variable    | Required | Description           |
-|:------------|:---------|:----------------------|
-| documentId  | Yes      | The ID of a document  |
+| Variable   | Required | Description          |
+| :--------- | :------- | :------------------- |
+| documentId | Yes      | The ID of a document |
 
 Response :
 
-| Type       | Description                   |
-|:-----------|:------------------------------|
-| Bookmarks  | The bookmarks of the document |
+| Type      | Description                   |
+| :-------- | :---------------------------- |
+| Bookmarks | The bookmarks of the document |
 
 ## Examples
 
