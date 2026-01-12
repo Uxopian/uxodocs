@@ -52,7 +52,7 @@ Dans une volonté de faciliter le support et les intégrations sur la version 2.
 
 ✅ Un traitement plus performant des composants : le traitement des composants en série. Au cours d'une session de traitement d'une liste de composants l'utilisateur passe au composant suivant sans revenir sur la place ayant initiée la session.
 
-{/_ Comment: WEBEditor / MailEditor _/}
+{/* Comment: WEBEditor / MailEditor */}
 
 ## WEBEditor / MailEditor
 
@@ -67,7 +67,7 @@ Les deux plugins s’ouvrent dans un OffMenu pour permettre à l’utilisateur d
 <br />
 
 _Plus d'informations bientôt dans la ._
-{/_ End comment _/}
+{/* End comment */}
 
 ## Nouveau mode d'affichage de contenu
 

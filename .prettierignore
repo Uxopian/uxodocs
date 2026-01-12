@@ -1,0 +1,12 @@
+# Build outputs
+build/
+.docusaurus/
+node_modules/
+
+# Generated files
+.cache/
+*.min.js
+*.min.css
+
+# Package lock files
+package-lock.json
