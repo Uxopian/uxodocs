@@ -2,9 +2,9 @@
 title: Clustering & HA
 date: "2000-03-28"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 96da8712e6fe001ee4efef105792e5cb9389f7b19bdda6d0df3dd52e353c616d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: bcf52d9e361575d66aa8e5ff5b41920cabaff84020b648befbcee036b08b1ac9
 ---
 
 # Activation

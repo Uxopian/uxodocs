@@ -3,9 +3,9 @@ title: Searches
 description: Enjoy the richness of FlowerDocs
 date: "2005-02-02"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: b4c20afc45524d6e6385f8c7cee53781ea98bfb6cf9ef31d36b9d8c8be825372
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 67ba43b41b0bfb8aa5507908185127333bae760d71fa8bbb2a9970317b2071c7
 ---
 
 FlowerDocs' search capabilities make the most of the document base, while maintaining the ergonomics required by end-users.

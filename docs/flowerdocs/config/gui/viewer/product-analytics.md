@@ -3,9 +3,9 @@ title: Product Analytics
 description: Let Uxopian understand how ARender is used
 date: "2005-07-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:44:23.025Z"
-    author: CI/CD Bot
-content_hash: 712479c848f1e2b044c89e2d5f33f3d1e203997fe447d81c5212ff8035f7c5de
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 18f2a8d3da80b9650adc46fceec41b3bbb1cec95add6e9e9fbd446c2ed09c3fc
 ---
 
 # Principle

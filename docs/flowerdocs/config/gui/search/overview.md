@@ -2,9 +2,9 @@
 title: Getting started
 date: "2004-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 22923f3b62bb197870078e46ce0859b716305af00c943ed947e1166e8f30a5a1
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 80dc2cc4132ae1c3b6a8720c256a8eebfe2ff4fce9fb0e3f09f167bb7abef9ab
 ---
 
 :::info

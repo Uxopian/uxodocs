@@ -3,9 +3,9 @@ title: Components creation
 description: Popup allowing creation of a component from an indexing form.
 date: "2004-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e984ffc8a6647dc610eeeb8766b280a83ec77a9bf4644e3e7386ca1fc2e3b07c
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 54d6008ac4a55841a18e2c64113b805713f9fb4ca3c353503bfca63ee0588cf3
 ---
 
 :::info

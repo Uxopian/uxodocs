@@ -4,9 +4,9 @@ description: Respond to an operation by executing a JavaScript script
 date: "2002-03-28T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 252e151292b4f22f62e49b001d02e8330c57e4c5df252d93366b886a4d192cfe
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1154e01ee7fdbfba15412307ebcbaaefe3ed728670ab7d5bb8a2c758905a7ccb
 ---
 
 # Principle

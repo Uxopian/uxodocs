@@ -1,9 +1,9 @@
 ---
 title: Prepare the opening of an external document
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e21c0b2a9664928f69582de3bb79947f805a796aadf6d223d5180a1c50ed4d95
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 38f70ebce95205943d7f6452ebf2b311d446466a9369fb6ec66707a779c1f769
 ---
 
 A new servlet is deployed to generate an encrypted UUID.

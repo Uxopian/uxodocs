@@ -3,9 +3,9 @@ title: Retrieve page content
 description: Recover the HTML code of your pages
 date: "2018-04-02T12:20:01+01:58"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 96637406dde83850f4d655d1ebf915e6986dd03c2e24b388ed7bf0541d4c8dc3
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2b8e1cda48ad213ed3727fa89ce6a2eaa099a28bf2857130d19056f85c60bb8a
 ---
 
 import Tabs from '@theme/Tabs';

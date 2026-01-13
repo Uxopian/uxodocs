@@ -2,9 +2,9 @@
 title: OpenSearch version upgrade
 date: "2006-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: f950a6fc8f4460272d1b573c297c6bcff8ea77d2eeca6ca3514e0dfd590222d1
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 9b6f2e8da9c6dfb730fbeaa665ec06f2123709f020437e73db88838c8e69443a
 ---
 
 To upgrade OpenSearch, you need to install a new OpenSearch cluster in the target version.

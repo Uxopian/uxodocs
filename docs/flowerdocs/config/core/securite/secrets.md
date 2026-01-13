@@ -3,9 +3,9 @@ title: Secrets
 description: To keep secrets secret
 date: "2019-06-03T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 5149c7f4d18ea68261cfe81be4d320b8543a64b376ad8ee480c656d22d737234
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: bbd2d2d35bfcfcfc80968fd515e9eb345d6c6b54e7ba99cb58f709a1e298d597
 ---
 
 import Tabs from '@theme/Tabs';

@@ -2,9 +2,9 @@
 title: Labels
 date: "2009-03-29T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 39ec1368d6e6e09e5b847034129af01cbe55f1f38ba2199720c6db3bc3384da8
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 957648951d0216a32c257c26ad196cd11575f620a282c44e55987f9930417bd9
 ---
 
 import Tabs from '@theme/Tabs';

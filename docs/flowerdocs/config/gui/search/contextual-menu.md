@@ -2,9 +2,9 @@
 title: Contextual menus
 date: "2012-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 435f6d28000e0266ea93e13647131059444eb2f2ec80e6eb557b4a17e9b5f88a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 3e4238a7e64629d8d920d8c7a1588143f9399f7c945248aaab800d08d7df9499
 ---
 
 When you right-click on one or more search results, a contextual menu appears. It features both:

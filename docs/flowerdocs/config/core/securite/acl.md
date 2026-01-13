@@ -3,9 +3,9 @@ title: Access control list
 description: Secure access to components
 date: "2019-06-06"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 5f77e827799021c0d59cbb303e7a9f8e72f290290d62a47a46023ca67194421f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 68ff86a70c065ff7bd154de20a232d7a52e71210cfdd4e9d98872667483c96ca
 ---
 
 # Permissions

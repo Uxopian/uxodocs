@@ -2,9 +2,9 @@
 title: Implementation
 date: "2020-02-01T11:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: ba9e293a86ae19c878148fa47bf85e8edd5623f88092718e87dd6f140444268f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4bc39a5bffc85591e7583e02b53144b6c519620a2eeffedf61d91ebbdfa2d986
 ---
 
 # Starting a session based on the context

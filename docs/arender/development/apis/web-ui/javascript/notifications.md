@@ -1,9 +1,9 @@
 ---
 title: Notifications
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 28e3e8a3da65225e50155e83f41ec8fd3c6d2bbd31fc8bf874e2d266711bfe4d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a576a94272235015399e5614f2510211cad484de34f7171d7dbc9c9a457c9b44
 ---
 
 ## Change notifications

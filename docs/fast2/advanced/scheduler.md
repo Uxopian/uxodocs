@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 01d9de525338f2a066269b415726e3fe39d506757eddaf56330956a721f7297d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: e3d000f5ee271792288116907a37d87b160177522f47fd3476f5ce57c93b7849
 ---
 
 # Schedule your campaigns

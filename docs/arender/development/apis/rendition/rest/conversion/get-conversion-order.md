@@ -1,9 +1,9 @@
 ---
 title: GET a conversion order
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 9142489ec211f39a7f10cbedc6f764c462e53d9c29c699c26d12edec97562ffa
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8f5aa56ae9fe4f831ae35469ed21d4696003b139b0224b66b6b3e17a7f96ffd3
 ---
 
 This API allows you to retrieve a conversion order previously requested.

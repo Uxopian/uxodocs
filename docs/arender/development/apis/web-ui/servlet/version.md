@@ -1,9 +1,9 @@
 ---
 title: Version
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: fa362eefda6b5daa6a7e633b3f2dff05f2420831a3c03e5714a6d0e8a8661e74
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: df4c16b705e8796543db97923495b7eb80b0e9cd790a7cbf5d24603eb8b89e50
 ---
 
 Since version 2023.6.0, a new servlet has been introduced to display the ARender version.

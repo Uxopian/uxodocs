@@ -1,9 +1,9 @@
 ---
 title: Contextual menu
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: cde2bf967aa59e219d81c30e5711d8eb04e5bce4d6bd2348f64ffd61f759522b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 72bd97fffe6677e485aa71271ff42f30378b897ddc39160ffeb4ddbf322e1423
 ---
 
 ## General

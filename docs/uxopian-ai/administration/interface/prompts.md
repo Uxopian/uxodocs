@@ -1,9 +1,9 @@
 ---
 title: Prompts Management
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: 05e60ee814299bcc6df549558a2894907e06cc96dd1bccab9d38e1a03c981c1c
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a9c7259775a804e2017d8dddf647722125541dc0cbaaaa28016e42507011d6ec
 ---
 
 # Prompts Management

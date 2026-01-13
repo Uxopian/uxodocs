@@ -1,9 +1,9 @@
 ---
 title: Remove document tree
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: f9c1c1f33c478963406c9262d63d338de6857a2c7e850b84007812fd0ca8776b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 743b8b5f8b2b2eac35d4327c8d3ddedc852c5a370764d236edabf257eda257a7
 ---
 
 A new servlet is deployed to remove the document tree.

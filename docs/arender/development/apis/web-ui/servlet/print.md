@@ -1,9 +1,9 @@
 ---
 title: Print
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 335927dca7bcbe479fea66561219e6dfc3e3ac21f711ae679da0f2413c2f9cd0
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f1a2b7c3e5a6639dfcc12d63a3d6eabc2f53d55f2837a47845a15e804015dd46
 ---
 
 A new servlet is deployed to print the pages of a document.

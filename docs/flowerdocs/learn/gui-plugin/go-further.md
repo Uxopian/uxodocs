@@ -2,9 +2,9 @@
 title: Going further
 date: "2020-02-02T15:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 33ab754ea1588aa143f0f1cbacc05ba7f9d44a9da3f1a24cf54d4940f74843fc
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 31c4cd25dce718fed04f1503fadd2fb76880782829e6e4e7dbf085e14affb9c4
 ---
 
 :::info

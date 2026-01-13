@@ -1,9 +1,9 @@
 ---
 title: Internationalization
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 36b82b5c0cc00fd5ec3a97e2e598dd79758df2053a3e809a2c68b7caf8ee748c
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f2ea316e20d5298a68d663b1f3ac2135ba259dc50de7833d3af4d1b141319c4d
 ---
 
 ARender is translated into 13 languages:

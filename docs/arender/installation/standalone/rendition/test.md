@@ -1,9 +1,9 @@
 ---
 title: Testing
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 52fe117f5921e511da4719a9b8c4e24b364aad70e4be2429995da398858f0921
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c8a44706b1e0a22f7abc69ef34116f2e7f39caa762d562737e1f09dfdf521f4e
 ---
 
 The test jar «

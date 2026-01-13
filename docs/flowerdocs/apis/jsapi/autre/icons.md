@@ -3,9 +3,9 @@ title: Icons
 description: Modify component icons in JavaScript
 date: "2000-02-01"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: ad2556de6056379e317fbc7c72c34e5e3419310a3c4ce9b0fe095323b4f2ce98
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8f874f38d154cd013f2982629145af50c9f16c96839046368f5d58124e03c372
 ---
 
 :::info

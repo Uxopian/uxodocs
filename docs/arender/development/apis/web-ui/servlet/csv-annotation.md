@@ -1,9 +1,9 @@
 ---
 title: Download the CSV of the annotations
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e27b426b2aae935e81d6c35f58a8947e55b4ae233dae0030d5274a084b72ef97
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 01595b6ecbfc1a24fa2e33c2f34fc926c0e8ad4fb32d1014e00bceb22726245e
 ---
 
 A new servlet is deployed to download the CSV file of the annotations of a document.

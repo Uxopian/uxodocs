@@ -1,9 +1,9 @@
 ---
 title: Embed ARender in an application
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 83fa5649e390916620df37a62d793ee539382907f50df7f718e4d2d88eff8a61
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 90bc1a4bee7bd6d47b9df1b61c78b3c63b48ef10a0a7bad7b8fb642e4de235af
 ---
 
 To integrate ARender into your application, simply add an iframe tag pointing to the ARender server in the HTML code of your application.

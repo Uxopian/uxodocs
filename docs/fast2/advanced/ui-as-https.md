@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 16a09162b2b729a0d8d6141d9437961de49d631fa762e88ddcbe079028b5f962
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a2dc19d77df2c05d831764deb365693bd1a2c2ae8ad4eff9b92fd5c6fb5a4c35
 ---
 
 # HTTPS Configuration Guide

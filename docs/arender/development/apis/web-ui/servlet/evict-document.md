@@ -1,9 +1,9 @@
 ---
 title: Evict document
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: edad50e50a550fcd8fa6e188a0ad95ea6b2025d2dcfb5a935b2d2e9b718d086b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 295c03c37b84d734ceb620fd3fb9b7aec36040f1abf7953f948bee54ad0e79dd
 ---
 
 A new servlet is deployed to evict a document from both memory cache and FileSystem cache.

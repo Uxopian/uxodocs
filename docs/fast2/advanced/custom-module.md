@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 206f398bc672507f36ef8fd4baed9b7759dd094f4e3789ee419b44eff71e5a78
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 3762e0c89d8cc093013ed84f84f0b51d55ac150ada155a1058f89fe0f9b3b42e
 ---
 
 :::warning

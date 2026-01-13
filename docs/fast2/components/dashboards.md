@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: da288e7054ff230442bfaf80090a6796529b650d8148f3cc7ac0c354cde35485
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 43db3589a165c8e856008ac9944a5c34cd122364429bc5ae815127943c27f56e
 ---
 
 # Dashboards
@@ -24,7 +24,7 @@ The dashboard only communicates with the database (as illustrated in the [archit
 
 All the chart visualizations which can be built up with this add-on and integrated to the most advanced dashboards, solely serve one purpose: data digestion for tracking progress, by making now possible to follow edge-cases of a handful of documents lost in a week-long non-stopping flood, and building reports out of it.
 
-## :material-chart-bar: Configure the dashboards
+## <i class="fas fa-chart-bar"></i> Configure the dashboards
 
 Fast2 does not embed any dashboard by default. However, you can get the add-on through the same portal you downloaded the Fast2 binaries. Unzip the package at the root of Fast2 installation folder.
 
@@ -185,7 +185,7 @@ Here is an example of a table gathering :
 
 To get started with this visualisation, or to add it to your existing dashboard, click down below :
 
-[:material-file-download: Download this resource](../documents/dashboards_exception-data-table.ndjson)
+[<i class="fas fa-download"></i> Download this resource](../documents/dashboards_exception-data-table.ndjson)
 
 This resources can be imported as [explained previously](#imports-objects-into-the-dashboards-feature)
 <br/>
@@ -206,7 +206,7 @@ For a graph visualization of the success ratio per map/campaign, the following r
 
 To get started with this visualisation, or to add it to your existing dashboard, click down below :
 
-[:material-file-download: Download this visualization](../documents/dashboards_Campaign-success-ratio-per-day.ndjson)
+[<i class="fas fa-download"></i> Download this visualization](../documents/dashboards_Campaign-success-ratio-per-day.ndjson)
 
 This resources can be imported as [explained previously](#imports-objects-into-the-dashboards-feature).
 <br/>
@@ -227,7 +227,7 @@ For a graph visualization of the success ratio per map/campaign, the following r
 
 To get started with this visualisation, or to add it to your existing dashboard, click down below :
 
-[:material-file-download: Download this visualization](../documents/dashboards_processing_speed_per_task.ndjson)
+[<i class="fas fa-download"></i> Download this visualization](../documents/dashboards_processing_speed_per_task.ndjson)
 
 This resources can be imported as [explained previously](#imports-objects-into-the-dashboards-feature).
 <br/>
@@ -417,17 +417,17 @@ This new dimension of data analysis via Kibana opens up way more possibilities, 
 
 <br />
 
-## :octicons-bug-24: Troubleshooting
+## <i class="fas fa-bug"></i> Troubleshooting
 
-### :material-connection: Dashboards do not reach the database {#cannot-reach-db data-toc-label="Unable to access database"}
+### <i class="fas fa-plug"></i> Dashboards do not reach the database {#cannot-reach-db data-toc-label="Unable to access database"}
 
 Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database#port) for more details.
 
-### :material-lan-connect: Could not ping dashboard on port 1791 {#port-not-showing data-toc-label="Unable to access dashboards"}
+### <i class="fas fa-network-wired"></i> Could not ping dashboard on port 1791 {#port-not-showing data-toc-label="Unable to access dashboards"}
 
 Make sure declaring your port in the 2 expected places. Head to the [port section](#ports) for more details.
 
-### :material-web-remove: Connection refused when accessing the dashboards port {#connection-refused data-toc-label="Connection refused"}
+### <i class="fas fa-ban"></i> Connection refused when accessing the dashboards port {#connection-refused data-toc-label="Connection refused"}
 
 In case you cannot reach the dashboards UI remotely, you might want to check several things :
 
@@ -440,13 +440,13 @@ In case you cannot reach the dashboards UI remotely, you might want to check sev
 
 ## FAQ
 
-### :octicons-question-24: Run Fast2 without dashboards
+### <i class="fas fa-question-circle"></i> Run Fast2 without dashboards
 
 It is possible to run Fast2 without the dashboards, as this add-on is just reading data stored in the internal database, to serve them as graphical vizualisation.
 
 By no mean this add-on is **necessary** for the migration.
 
-### :octicons-question-24: Access dashboard when not migrating
+### <i class="fas fa-question-circle"></i> Access dashboard when not migrating
 
 Visualizations can be reached via 2 different ways, depending on your needs:
 
@@ -457,10 +457,10 @@ The latter option gives access to the tool even when Fast2 is not running.
 
 Since the dashboards fetch data directly from the database, it is not possible to populate the visualizations with migration data if the database is not running as well.
 
-### :octicons-question-24: Dashboards do not reach the database {#cannot-reach-db data-toc-label="Unable to access database"}
+### <i class="fas fa-question-circle"></i> Dashboards do not reach the database {#cannot-reach-db data-toc-label="Unable to access database"}
 
 Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database#port) for more details.
 
-### :octicons-question-24: Could not ping dashboard on port 1791 {#port-not-showing data-toc-label="Unable to access dashboards"}
+### <i class="fas fa-question-circle"></i> Could not ping dashboard on port 1791 {#port-not-showing data-toc-label="Unable to access dashboards"}
 
 Make sure declaring your port in the 2 expected places. Head to the [port section](#ports) for more details.

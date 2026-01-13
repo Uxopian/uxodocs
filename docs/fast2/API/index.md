@@ -1,10 +1,10 @@
 ---
 sidebar_label: API
-sidebar_position: 5
+sidebar_position: 6
 last_update:
-    date: "2025-12-16T13:09:37.109Z"
-    author: CI/CD Bot
-content_hash: 3707870e577599585de61d30e6fdaa95c2ec84e39bb5fd071149b7b28ede218a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 163d5c73e9d7fb73d2c61105129677f13d851a927a3314089fed01dbeafd9b1b
 ---
 
 # API documentation

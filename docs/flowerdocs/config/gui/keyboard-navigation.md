@@ -2,9 +2,9 @@
 title: RGAA - Keyboard navigation
 date: "1999-02-28"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: f5ead5c5bc8d4ef4a8518fb6b74c8c7ebe1eeded3ff2570fbdecdca288474109
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 9522831c6a491886612a69749b96a81811c49c858b08558f15dac772ac2a5e74
 ---
 
 :::info

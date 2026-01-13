@@ -1,9 +1,9 @@
 ---
 title: GET Pages Search Result
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: d71f9340bbdaa1f041f6c25157f517f3d778fe9cd74ae14f587ecffe1383c89b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2a0126bb2f2e0e8607ad8e098e1df96187c7695bdde8c2a0ab3e030310bbbe28
 ---
 
 This API allows you to retrieve the search results for the pages of a specific document.

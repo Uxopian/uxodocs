@@ -2,9 +2,9 @@
 title: Counter
 date: "2000-04-15T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 402172c87065eac5b04dedd0f28cf458bdfea46cccaabc6e9ef685c6d07786d8
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d81aeb46b0b7a475509e430658b10ee366ed93758431d3c795ca1e73fd754774
 ---
 
 A counter displays the number of search results in a widget on the home page.

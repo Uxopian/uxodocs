@@ -2,9 +2,9 @@
 title: Installation
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e6505625ececee7010415c4e8c1c2b9af32e947bd29d04aed3310f80d42bc3d6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 481b2013031e0efbf7683df84b2bf85c25e1424c684a65b8b36f76b0ec89a4a0
 ---
 
 import Tabs from '@theme/Tabs';

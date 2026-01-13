@@ -3,9 +3,9 @@ title: Content storage
 description: Manage document content storage
 date: "2003-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: b85c294f1ad13ea67faaed9d53a19eb44fab88c4ad46e4bbc149bafa1251f634
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: fd30e359d5c1d0cf05c03eb9e95a5bf08d1e1560d289cb84ae810e1a953eac7c
 ---
 
 import Tabs from '@theme/Tabs';

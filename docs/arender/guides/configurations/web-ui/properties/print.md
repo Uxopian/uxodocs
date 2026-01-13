@@ -1,9 +1,9 @@
 ---
 title: Print
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e8561da8eef224b8a47d9bc0d8840c146ab5608593f8a4d199a7196f72b8e852
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 097060317c920d7c8e90c0d0cc391352ec5749581bd133d0276610e94b0eca9c
 ---
 
 ## General

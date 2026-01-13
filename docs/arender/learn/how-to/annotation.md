@@ -1,9 +1,9 @@
 ---
 title: Annotations
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 0129a127cc679c1c0ad9e700f10977f0601950cdb76e4f085f70cce438331fd6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8c0a7af9fb34ed5f037e6bc5e04534abfe2681d7e24702efced6349f773e779e
 ---
 
 ## Annotation creation policy configuration

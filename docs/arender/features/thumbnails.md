@@ -1,9 +1,9 @@
 ---
 title: Thumbnails
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 52ca2a206e82a0d4a05f37598cb3fae355b9397af4fd2109f37fcdb00f9755b0
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: fdd03b360e33ed1e7d7143e40fb4a85a4c8e46ab34fdfde206da614688cbc76d
 ---
 
 ## Introduction

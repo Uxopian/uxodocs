@@ -1,9 +1,9 @@
 ---
 title: FileNet servlet
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 7ab789fefb1d791a894a883d79f48b7405ef0297a9d02ca33c6960c3e395691d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 9a65f21ac9851cdb6d3ebd5b7ddd9df318d54f347888919c936c10b197e48cf6
 ---
 
 ## Updating metadata

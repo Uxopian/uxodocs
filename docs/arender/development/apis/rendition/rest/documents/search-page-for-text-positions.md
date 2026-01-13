@@ -1,9 +1,9 @@
 ---
 title: GET Text Positions with Search on Page
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 87881c8fee3ad48d1af2c5ef510c2926739743eb9a2b50bb9993c4a4a76fd2e9
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: fd9052c3b59a6ee93eb1869257a246a2c4006c59749cbf50b0bab291629d9de6
 ---
 
 This API allows you to search for text positions within a specific page of a document.

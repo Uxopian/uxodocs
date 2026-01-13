@@ -1,9 +1,9 @@
 ---
 title: Image processing
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: c3439cd3eb8218a2c84f040bd89f4d294575be0e1f5f0014dc984eade4e17abd
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 77b210855492a830a9516321f2d550fedfd37b20147cf8754ba4da2a895d8b6f
 ---
 
 To improve the visibility of elements on certain documents, it is possible to manipulate the contrast, the brightness and the inversion of color by using a slider ranging from -100 to 100 where 0 is the default value.

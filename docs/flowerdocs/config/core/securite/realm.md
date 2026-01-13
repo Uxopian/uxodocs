@@ -3,9 +3,9 @@ title: Internal users
 description: Define internal users
 date: "2019-06-02T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: ce9483bbfa433b2e7fd3c138d5b9efd06aa314baaba80117ddadca0009146ed6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 481c2fca2c85cf83e4b9a538379256956b8f772f5b162caf69f8412288ceda90
 ---
 
 :::info

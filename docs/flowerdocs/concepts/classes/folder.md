@@ -3,9 +3,9 @@ title: Folder
 description: Folder classes
 date: "2018-03-02T14:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 94661d200ee0ffa82bb5864e1503a058d0951eb96785f599e8745fad9918cab0
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 6bb213aa0e072221f07bb255395190b1ea20f336f28a0db7b23fd29c211078f3
 ---
 
 :::info

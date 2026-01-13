@@ -3,9 +3,9 @@ title: Getting Started
 description: Generate an attachment in Word format
 date: "2020-02-01T12:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 1d9e08c15fd5d098a9e302a6b22b3b23fa48afae411bf24dbaa339eab5dbbf07
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d961e7edf1bea3a04f812966e9291c3b93d79f618f2c239c36f8ab15f86ce4a2
 ---
 
 # Goal

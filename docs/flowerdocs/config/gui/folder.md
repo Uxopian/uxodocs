@@ -2,9 +2,9 @@
 title: Folder contents
 date: "2004-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 3a0901603c6e11f4ca732fa638ff7289d877f1917fd350a6dfb5ffee4d76fff6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 916ea5c0f709f39023bea894e453bb7327d168b1bc2e07383cc64b9bb2fd3d4a
 ---
 
 # Folder contents

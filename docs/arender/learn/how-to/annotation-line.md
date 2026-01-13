@@ -1,9 +1,9 @@
 ---
 title: Custom annotation
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: c4806678595f0b437157f5b15eb0e2d847a07af1990370e166de4b3d1206963b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: ab46b553e9a1435febc59d6aebf332ec4de75485591d56066c65ae34826f6b65
 ---
 
 ## Example: Line annotation

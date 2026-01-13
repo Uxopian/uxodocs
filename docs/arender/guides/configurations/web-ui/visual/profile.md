@@ -1,9 +1,9 @@
 ---
 title: Profiles
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: feadc7efaea624471e89028d6cef7366210e0d456f8aabe0ef71131e9a456c31
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: bd79dd7aa2d9d52fe1a1b102056c07e36b19f4bdb7b11ccea37a53616a8443ca
 ---
 
 ## Introduction

@@ -2,9 +2,9 @@
 title: Use cases
 date: "2010-02-02"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 681e91f913580fde5ba365838cb388ffb43ad4214cfeb8f49d526144fff870af
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b119a39b51656fa624bb73acf10e799fb5a8441536bbd6d5119d68feb5351b76
 ---
 
 :::info

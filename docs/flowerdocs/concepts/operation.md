@@ -4,9 +4,9 @@ description: Reacting to operations.
 date: "2008-01-03T13:22:01+02:00"
 custom_edit_url: null
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: fd378c230c89e5402125e4ae88c3e9e0efe1e75b4aab1075f16e2842fdd0ac32
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4fef0d504eb1f90e98523a4e70f6b4575f90ec91fa8ceabbb60ce9f626fc861d
 ---
 
 ## Principle

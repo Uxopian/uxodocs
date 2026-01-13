@@ -1,9 +1,9 @@
 ---
 title: Core Concepts
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: 5168f0ed48174bf1c45182c788b8c517c28af4bde64aef95bd2870e0c076fa62
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: af60c0cce1263144d25ed8d27b77a5eb9db69d9fbb581a7cad90f905d08af8c7
 ---
 
 # **🧠 Core Concepts**

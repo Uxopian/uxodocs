@@ -1,9 +1,9 @@
 ---
 title: Download documents
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 2c847882069b39fe4bbc877e31080343136385d5d76eeacffe9a7f7c3fd325ec
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: e22845e7f6d811bc17e095577bd0fc4249985f28b54da89172d11066a3640101
 ---
 
 A new servlet is deployed to download documents.

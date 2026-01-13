@@ -1,9 +1,9 @@
 ---
 title: Rendition server
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 4f9572bb1169bf128ea932d1d881911ad932f54ca83624db7684c7f02fbe15d6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 9939282c390f64141527a022421cb8f5dfb8821ad51701108a089a92e9c5fdce
 ---
 
 ## Introduction

@@ -3,9 +3,9 @@ title: Obfuscating content
 description: Obfuscate sensitive data within documents
 date: "2018-04-02T12:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: eb39879f356866c588062aff9f6c4263140440b804a69087b022df0c2c0bcf61
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 68b81a5c6ea7ee65504c153bcf7c8bfe4146187de6ec04ed0f943d240477156d
 ---
 
 import Tabs from '@theme/Tabs';

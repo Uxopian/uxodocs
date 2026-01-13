@@ -1,9 +1,9 @@
 ---
 title: Custom XML integration location
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: f6acd1fdcd870e00ba6611646b1a79d4d317d96fe7c3471c579f4eb50423d872
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 49282a08182278e866e811746a956f9c01323f83975fce2b85cf0a9ffc4b3bf6
 ---
 
 We possess in ARender two files dedicated to custom integrations that

@@ -1,9 +1,9 @@
 ---
 title: Visualization
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: faf45d2b2695c61b733c40bb3fc419266458f34867dd287054057acd9f58a925
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c02f4367469c61b0ed1a55c24e80994c3b9445d6e41b24bf1738aaff53e0c0c2
 ---
 
 ## General

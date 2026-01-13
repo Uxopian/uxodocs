@@ -1,9 +1,9 @@
 ---
 title: GET Document Content
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 37eea4934428b233bbef39096a28dea099a923fc11599657001848056b20b7e4
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d6658a46a109df4bda82aa9da6dad2ce7ea91acafd40d475b539d64d284f5b0d
 ---
 
 This API allows you to retrieve the content of a document in specific format

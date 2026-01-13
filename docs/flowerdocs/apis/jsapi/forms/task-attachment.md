@@ -2,9 +2,9 @@
 title: Task attachments
 date: "2001-03-29T13:22:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 74f17fc0af247e06d4b04834441bd722e2926a16f3196f65969cef7a8916cd70
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 96a20df1ba590cf9d735a68d219a3cdc09e65a5c8b38fd729dfcaee3aacc1fb4
 ---
 
 # Document as attachment without indexing

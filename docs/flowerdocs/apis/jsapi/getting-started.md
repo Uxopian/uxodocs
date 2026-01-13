@@ -2,9 +2,9 @@
 title: Getting Started
 date: "2000-01-01T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: cb332aa18e0aaca3ce00b4f40608ce9fc928379ea625db5c845b4d624009d8e6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 62a3368a8a8b5076dee931880c3be1fb061bbada1a12307fabb073bc18ffc22a
 ---
 
 The FlowerDocs graphical user interface can be customised using scripts written in JavaScript.

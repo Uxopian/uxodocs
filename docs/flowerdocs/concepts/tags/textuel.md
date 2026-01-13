@@ -3,9 +3,9 @@ title: Textual
 description: Use textual tags.
 date: "2018-03-07T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: a85b7d07620e3cb863c82715b611a9d41ef47156f45104dba50fadcf6c9f4c2f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8f7fd6e47247af2c380d5d444a982ef110a81a6d622528dfd8590aea46714dc6
 ---
 
 The FlowerDocs data model allows you to define textual tags:

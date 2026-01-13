@@ -1,9 +1,9 @@
 ---
 title: How-To Integrate AI Features in FlowerDocs
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: 54c32a753cdb9c1ba3f8ba2eacff0c7d38b91ed63e2e46509623d50b4b44e0e4
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: cf1f267496550a5092a19c8a1872937fd6735daa4a9f1fcaaa5bab4744b30bed
 ---
 
 # How-To: Integrate AI Features in FlowerDocs

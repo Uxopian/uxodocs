@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 960a6b9accb8a6fdb0e18a06a4845ca4f61da0681743b577370c4c5dd774908b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 69dc1d90eeb91aef1ca2c66836f8feeeb3485b68fadc1558bb883824ce87c4af
 ---
 
 # Welcome to Uxo Documentation

@@ -3,9 +3,9 @@ title: Getting Started
 description: Configure the graphical user interface.
 date: "1998-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: b646c8cb0a209c954991f4fbe4f5f201e40f153868e339a25b56eae6592889e6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 44cfe1fbc7b8412918cef044d8df610f911ead096804a0bb0e00c28d3cef7b93
 ---
 
 # Introduction

@@ -1,9 +1,9 @@
 ---
 title: GET Printable Document
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 1f4625883afbd672e2c992fe6cd7efcf747964187b070dd894a20b39a9ad3a97
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: ad655410b38da24af74665429382fb2bf5c1ce1ceac9538c61f92e2ed44af1fc
 ---
 
 This API allows you to retrieve the printable version of a specific document.

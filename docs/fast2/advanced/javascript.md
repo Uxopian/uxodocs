@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 4fe6c3adde0620855afbe5e2488f5d92afe4418786bcf186f1e11b1ef2d1b31d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a944f723692f742db3ef0b41120f3a4685c186292c2882dd1c33bdbd2f394b54
 ---
 
 Using the [JSTransform](/docs/fast2/catalog/transformer#JSTransform) task can comes in quite handy for any tweaking of metadata, but will also get you covered in case of heavier operations, as long as your JavaScript talents match you problem solving skills !

@@ -3,9 +3,9 @@ title: Scope management
 description: "Recover information, delete from your scopes"
 date: "2023-06-22T12:00:00+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 54fb2e279f09bad8d99b797497a673ec0356cedbddb41346a71dda98954a937a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 0bcac646e99b5ac5da55f313bd7a371d1d8bc9ec71b5c7ff1629dfb3f7a80ab9
 ---
 
 import Tabs from '@theme/Tabs';

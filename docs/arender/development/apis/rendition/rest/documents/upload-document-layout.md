@@ -1,9 +1,9 @@
 ---
 title: POST Document Layout
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 608deeeca9bce31f4158335c404cf800abffd14cf73c4d777d10b09a74d8b1ec
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 822f82eccc2db86bef63e5a42cf14d22d6e4e3606c939c7c2ee5458befa78e96
 ---
 
 This API allows you to upload the layout information for a document.

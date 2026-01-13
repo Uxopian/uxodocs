@@ -4,9 +4,9 @@ description: React to an operation through a Drools decision table
 date: "2002-01-28T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 325c43e06698ee0d25d7aa7b4e2df2ff182b3128daa8162895b95741c8ac57d5
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4815b14ea25bae1a65577b551f5e539423c7f7e61bf4f583d150fa6d3a5c8a4d
 ---
 
 # Principle

@@ -1,9 +1,9 @@
 ---
 title: Textual search
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 13b522a79881cdc0ccce7ed1b89a1c8e518d7d448d4d0d1b0b1fa3b5053af987
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 7e94ac67e209fae407f0dc572a1547f01098dcfe04ec20f3849661207b9b5670
 ---
 
 ### Search features

@@ -1,9 +1,9 @@
 ---
 title: Sliders
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 4bd7b1c65fca64e95db11ffd79ec5a88a9d9c4af437b30ddafb9845c7c02e3e9
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: ec5e55c41f599a5b27bd7f61629983fb946069f14e7a08e4b380ffef7af2d063
 ---
 
 ## Description

@@ -3,9 +3,9 @@ title: Component classes
 description: Manipulating component classes in JavaScript
 date: "2001-02-02"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 92799663af8be6d5664e1384b0f6e7e2529f5669b1444b02924659fb7616090e
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1b9a60b28a91d36366b92f240db816d05dd6a515dc5e0c9d9bdede17f3689fb9
 ---
 
 :::info

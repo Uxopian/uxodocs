@@ -2,9 +2,9 @@
 title: Classes
 date: "2000-03-02"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 0b5dce5a6fc600a2bd01d5499ebec116ff28d40963be9256ae1b58f9f5d8fa24
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 00098d034b50abdd70281180642ca371ca202e6049128dc7505e66c1551c92a7
 ---
 
 # What is it for?

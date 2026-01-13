@@ -1,9 +1,9 @@
 ---
 title: Configuration
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: 99cf40a81ed851ba57cae28fd5d16c6ff4009255ce0d21f4a4df8db8b4d1f8ea
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 55a72322bf9769ca28f3f48437d3afbebbab4215bf343f8027762d82a0b58df3
 ---
 
 # **⚙️ Configuration**

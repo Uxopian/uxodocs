@@ -2,9 +2,9 @@
 title: Search
 date: "2001-03-28T13:21:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 11cc0daa29c31bde4b84fdca0d5495b3c138bbd13503269f32c6144856bc3a8f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 0ebfbb43a4f692950d9802636558232ddba203551dafe2b07fc7ba0e7516d177
 ---
 
 # Subscription

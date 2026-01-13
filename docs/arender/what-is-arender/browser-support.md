@@ -1,9 +1,9 @@
 ---
 title: Browser support
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 3e856b4fa0db9b49dfe93a8722037426ad57c57b76b6608a5c48129d36f04f2a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c8a37bf84a11e561550cb85134cf93bdab16736db8fa258c4eeeba58a8153a8e
 ---
 
 | Browser | ARender v5                                                               |

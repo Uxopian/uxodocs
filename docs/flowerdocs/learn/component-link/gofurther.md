@@ -2,9 +2,9 @@
 title: Going further
 date: "2020-02-03T12:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: ec3085eff9c061c6b89ba0601c37c8e6b3ff3ec7a4b97386096c9a01449d7219
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d30b79e90002ca70c4d17c615cf7fada036392c1071ae9b002400756de72b698
 ---
 
 import Tabs from '@theme/Tabs';

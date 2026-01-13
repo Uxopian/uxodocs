@@ -1,9 +1,9 @@
 ---
 title: Get page content
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e88cbddcdb58d0aba17734aae7f4aa04c92e6b65708e28e66198b25c42e58c88
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2f58e2931d73606c1f6f7a36cf46cde1cf5f1151e154486ad3dff57fd921aebb
 ---
 
 A new servlet is deployed to have a Json file with the page content of a document.

@@ -1,9 +1,9 @@
 ---
 title: Hôte de Rendition
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: a0f86aa81854388f427ac841bc57f21aace712928f1348526ca270fc4f567c32
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 99c3e22a6cac231d94df5cb9220a156b6f53be021598199f6281613d8595bab0
 ---
 
 ## Rendition hosts

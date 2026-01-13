@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: d275c022a27a076b592428bbb58cc5a24d775863b39f101b3e7544cb0751af03
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 0d7ae4b4c7fba23600b2735cdca7c150fe2fcdb5352b865bec93aeb77b012704
 ---
 
 ## AlfrescoBulkImporter <small> - Perform a bulk import on Alfresco </small> {#AlfrescoBulkImporter data-toc-label="AlfrescoBulkImporter"}

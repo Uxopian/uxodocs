@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: ad93b29a7e245dd88101c549fcebe5ec6ca64333bc0d7b324e87fbbfbd1fa66a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a45e0e10756f10831ece178e9bc197d20a811b4681614b7c6aca1ac8d246df88
 ---
 
 ## ArchiveBuilder <small> - Punnet zipper </small> {#ArchiveBuilder data-toc-label="ArchiveBuilder"}

@@ -3,9 +3,9 @@ title: Indexing form
 description: Configure indexing forms
 date: "2002-02-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 33839a1452fcdae817467055359442aec5ef5f8646a516118ec8abc13fb2bc40
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2954fba383606eb14acb069b6982661171d34f29e600ab2f54a3cbec8eecb148
 ---
 
 Indexing views are composed of two parts:

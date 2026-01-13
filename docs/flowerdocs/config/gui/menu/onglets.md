@@ -2,9 +2,9 @@
 title: Tabs
 date: "2001-03-01T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: d7c1bc77f9b25694403e113cc023245fdbdadfc22871176905b54ad1993481fc
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a1ae1eea266851e09119965b9af2c9b87fb1a00ac491b297ba016baca359f82c
 ---
 
 # The different types of tabs

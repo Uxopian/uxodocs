@@ -2,9 +2,9 @@
 title: Getting Started
 date: "2000-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 1ef97e88ef05bf4d12531e9b2947c356116f48927968778260ca7a47279bc2a0
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 20dd83e0fb8bc4bbe7ea17fe3015e437fc879e016f2c31e7f658009fd9e9fea1
 ---
 
 The OpenSearch connector is based on the version of OpenSearch.

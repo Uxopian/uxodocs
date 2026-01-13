@@ -1,9 +1,9 @@
 ---
 title: Web-UI changes
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 76e2a65c5f1415676cb64f0e612438c2479d66201368472cf5b410caa905ebea
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 174ecf234238861da9f3a0dad247c194cb6fa3b5f7e3a61754f0af19a41e6fde
 ---
 
 ## Properties

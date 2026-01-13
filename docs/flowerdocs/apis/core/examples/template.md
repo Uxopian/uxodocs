@@ -3,9 +3,9 @@ title: Using templates
 description: Enrich an HTML or MS Word template with tag values
 date: "2018-04-02T12:20:01+01:59"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 9e3f0d9f343f56f51bf4143a32bde16e44f2855b323fb593e8a4a110f1851781
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: ed4182342a7516b530ad11bc77d02e802e600f100ab5c460f9222bc0be9bf939
 ---
 
 import Tabs from '@theme/Tabs';

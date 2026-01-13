@@ -1,9 +1,9 @@
 ---
 title: Docker architecture
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e9fbec39bb013f68cedb27889706a7ea77f46909255f82a36922157f0ff2a1b7
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b225c5e32d922286a7425122a72241ad61ed530714a3d9019142e6a2e190cf1b
 ---
 
 ![img](/img/arender/diagrams/ARender-Architecture-Docker.png)

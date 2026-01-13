@@ -2,9 +2,9 @@
 title: Interactions with fields
 date: "2001-03-28T13:19:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: bc44aacafc50a4521234b402352adbceee49dd0b42acec885920c678426990bf
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8c31b7341232cf04d0973b1c1d176302722e3b6165b24ce5174212acf06aa106
 ---
 
 :::info

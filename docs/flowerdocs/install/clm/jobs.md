@@ -2,9 +2,9 @@
 title: Standard jobs
 date: "2004-03-21T13:21:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 3d6e2bd9be0eb43e0044b865592424bb3ae3e480fa28cac8cb52edd88a7a6731
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d2242af11b2496481af57070783e2fb61d225c9d82d963fdea78088de7c80c34
 ---
 
 # Create

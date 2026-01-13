@@ -1,9 +1,9 @@
 ---
 title: Backup &amp; Restore
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: a6e729105e8ee8a230bd565d15889e3110ef0cc65616e3cc5ba82d16aaa6d691
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4e324178c4c294f7dae27b0e82e2877fd627046f9e58b5f383d86eeef977523b
 ---
 
 ## Rendition server

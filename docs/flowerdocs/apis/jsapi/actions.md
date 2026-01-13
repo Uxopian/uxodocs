@@ -2,9 +2,9 @@
 title: Actions
 date: "2001-03-01"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 9f4db0be9387a328a76eb1ebb2053a6c7429fde79a94cafec154f30eb6c2a9f7
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c4dd07ea00cfd47bb03a806c91505df42e34887dbf6a93ca376824bb60e1fcc1
 ---
 
 Several types of actions are available:

@@ -1,9 +1,9 @@
 ---
 title: ELK stack configuration
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 9a35b2c3ac1a54531c3532e4f70576cb4fe2cb8a6a1a27ffc6a2624c19972194
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f95c87e8f162b11e19ada681b4bfd73a212d9c008c58a841c453518288955ed1
 ---
 
 ## Introduction

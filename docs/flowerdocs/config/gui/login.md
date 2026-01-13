@@ -2,9 +2,9 @@
 title: Login page
 date: "2000-03-29T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 949b9eaf3cea2164d2bb29bb3b58a5bf9887040a4cda1457cf1dd04351fc3933
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b90a08d3e03e1fb649abb6b9574f90cfce4a036d0c7092230db9cfa039cb8fd2
 ---
 
 The display of the login form can be configured using properties defined in the `gui.properties` file:

@@ -1,10 +1,10 @@
 ---
 sidebar_label: Advanced
-sidebar_position: 2
+sidebar_position: 5
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: c61e23ab7578a7c38cbfa101a18167b616709c0d82b94cb68a1b73c1656c481d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 829dc7f6d50f2fed69ca7cf8f175db3d9437f1fabe0b5abeb6153baee2fecfc8
 ---
 
 # Advanced section

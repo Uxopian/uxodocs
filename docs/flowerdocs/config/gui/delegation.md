@@ -2,9 +2,9 @@
 title: Delegations
 date: "2002-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 1d637b1a49511325387986588cea61f173fbb57c8e8f062512df3096365143f6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 3447a6e7dd474ed6897aa73280f18b37915aa2146da6139a93c10666b5d942de
 ---
 
 This feature enables users to delegate their work during an absence.

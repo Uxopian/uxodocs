@@ -2,9 +2,9 @@
 title: Date management
 date: "2009-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 8719bf5d28c8102478181bed85daa25fd273586dab7d598612697514b5732836
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8fa85b580dbf5195f423fb7f45ef1238cdde690248bdca68a48570e4c22d1493
 ---
 
 # Global configuration

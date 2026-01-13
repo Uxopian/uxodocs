@@ -3,9 +3,9 @@ title: The tasks
 description: Manage your business or technical processes.
 date: "2018-03-05T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 39d39faff5b0feeb8e8d3b6ca53a5437ca149a95757dcef3e713054f781dfab2
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2a9a915eaebe69d84e2d8d048e50bcd55c54d342e4277ed5a61cc49a0210936f
 ---
 
 :::info

@@ -3,9 +3,9 @@ title: Document attachment
 description: Popups displayed within the graphical user interface
 date: "2004-03-28T13:25:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: c06a3281de222184fab13a215082169f9aada1a7e626070667a39b8f479e4a8b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 762977139bdfe94dd73086a190d09b633683e2e2350dedb47fae7fbfd248a3f4
 ---
 
 This section describes the possible interactions with the widget called `ComponentAttacher` which allows you to attach a component to a folder.

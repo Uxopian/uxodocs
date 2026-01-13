@@ -2,9 +2,9 @@
 title: Hook test
 date: "2020-02-01T15:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 9858bde28cb84e1d4b97b2cc64fb73ec870407eae83cf66a4757a7e0934a9d92
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 65582bcad8909e5bb94f13a98e4d5ba8967646ce9dd99933fdcc23367b932852
 ---
 
 # Subscription

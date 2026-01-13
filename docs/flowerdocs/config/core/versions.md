@@ -3,9 +3,9 @@ title: Lifecycle
 description: Manage document versions
 date: "2020-02-01"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: b286d895c7148c8c4d77a0fa84f6a58b2cb0f6ca9c82c2d861f89b25e9a07bf2
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 6946ca51484c3a58c0f8f21f5e271a264e33f4c89d042093032d646e9f99fcd1
 ---
 
 :::info

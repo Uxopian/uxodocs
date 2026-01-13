@@ -1,9 +1,9 @@
 ---
 title: Features
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 0784a2ccf205bec6beb69b8d7bbf41d2a551b467dccddcdd09c85fbb9ebcc4a4
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 84fa8d6ee2b926091af9cc677aa9a9b71b0d2ff16beb8a0a42c66766e0a7453f
 ---
 
 | Feature                            | Standard / Optional module |

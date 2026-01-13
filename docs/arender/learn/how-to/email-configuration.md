@@ -1,9 +1,9 @@
 ---
 title: Configure emails
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 485362d5526d74567ee73765e4bfd8d18d48e95220d5ad9fbb2f40580ce5294b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a825f1886f7b0298de3acfea124d7a45d1c177ba6fd312ea5d1e1ba6caf704d1
 ---
 
 ## Date formatting

@@ -1,8 +1,9 @@
 ---
+sidebar_position: 4
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 88e4e8908acc4d3bd260d6c94d9f4ba78afa65431269da835419f975d29d6a13
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: da002d8dcf95b61f0db0fb2890c2c09b960cbdb8d38764caf515ae18bbab3023
 ---
 
 # Fast2 cookbooks

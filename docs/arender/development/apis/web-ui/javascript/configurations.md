@@ -1,9 +1,9 @@
 ---
 title: Configurations
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 9668f7c84788a0874a0ee577140c41b88d122ecb31a78aeab64cee1e132fe6cb
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: de4e2ddc46b969df50451773d7f83a2dd9ab62f265a46c37edbe50b04863fd77
 ---
 
 ### Retrieve the value of a UI property in JS

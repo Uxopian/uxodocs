@@ -3,9 +3,9 @@ title: Folders
 description: Classify your components to suit your needs.
 date: "2018-03-03"
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: e84181869ce6c99677a85d447546e3d56a483b2fa3abaac7f18a5ec86716c411
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4b979d5e615f0aa4ec3fa6adae50472d128d37b44a6a9cdda2533a030c276740
 ---
 
 :::info

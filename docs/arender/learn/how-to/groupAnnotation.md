@@ -1,9 +1,9 @@
 ---
 title: Group annotations
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: b67423cd9ffd885070e051f37ee7e52ed5ac2270174f636bb62b95097613ee5f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 9e98b9660d0697f1669e52970db058a68ef5989f3c92f8fb9e7b586fdc4bada4
 ---
 
 The assignment of a group to an annotation is done with the use of the _Security_ property which makes it possible to store the group name of the annotation.

@@ -1,9 +1,9 @@
 ---
 title: Crop page
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 72b6c369d2d1a9f1a6fa7c95f27245629e2e143718f78ba3c6061ffb11a3dd7d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 0d2d3ab0df36714e305a1c1a5b91ab1eddfc8e09cebc7c286f34932836b57fdc
 ---
 
 A servlet is deployed to have an image which corresponds to a cropped page of a document.

@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 61c3bb88439754308d764409631a1013cfa2fd029373a45e09a71aaae616ddc7
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 9d673fb7dfb45847c73e6987ea4054cec19c9cf62b9626a3249eadb0d03a2d78
 ---
 
 # The broker
@@ -13,7 +13,7 @@ The broker is the workflow orchestrator, in charge of database communication, se
 
 :::
 
-## :material-chef-hat: Configure the broker
+## <i class="fas fa-hat-chef"></i> Configure the broker
 
 Depending on the amount of documents you are dealing with, you may want to control max memory usage allowed (Xmx) for broker.
 
@@ -29,7 +29,7 @@ If the campaign are involving a couple of millions of documents, increasing this
 
 <br />
 
-## :material-laptop: Configure the UI port
+## <i class="fas fa-laptop"></i> Configure the UI port
 
 The UI port is also subject to configuration.
 

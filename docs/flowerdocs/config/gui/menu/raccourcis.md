@@ -2,9 +2,9 @@
 title: Shortcuts
 date: "2001-03-03T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: f2f532d806cdf75cfd8fd6fbf57afdb5851fce126d83a47cbabcd4ce9826f704
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d8b3d6147580b6846923deb3f5f92c7be9a57e46a3ecb95267a529693bde32b2
 ---
 
 # Creation shortcuts

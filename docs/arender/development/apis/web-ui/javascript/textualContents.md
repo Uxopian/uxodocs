@@ -1,9 +1,9 @@
 ---
 title: Textual content
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 7c82bb0cd5f26ffe1ebfc4bb0b6a8a456d5714854becaa7f5fc639aea4f6a710
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 6cef7004237a637b632f2819f31a8a9e8d9063d7d2dc64fc8428065c55dd48d4
 ---
 
 ## Using lasso feature

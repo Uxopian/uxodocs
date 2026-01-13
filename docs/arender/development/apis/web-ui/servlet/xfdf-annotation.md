@@ -1,9 +1,9 @@
 ---
 title: XFDF of the annotations
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: a15dfa27e921762f42ddf429cbca424807f13763b89e6c0f26085a741a323157
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4cda93495c1737cf40770feb8933c4208236b5750e7a728aba159188845b037d
 ---
 
 ## Download XFDF or FDF

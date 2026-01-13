@@ -1,9 +1,9 @@
 ---
 title: Properties
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 0177235d9cc7693df4d25f394d69db84b29e1839930ea7457982890218e750a7
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: e922068e31ceb0f2f954a4c10d25cd0b92acad5cd88688e554d5650d71fc64bd
 ---
 
 ## about

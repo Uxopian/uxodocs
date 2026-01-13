@@ -3,9 +3,9 @@ title: List
 description: Use tags linked to lists.
 date: "2018-03-07T13:21:01+02:00"
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 47d66c127ba33ef77f1cace6dac9304e81a7e0a42b4c7a5f133e8c10d020eca1
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 0ff73789814faea29add093c885021d4a759b64fac77c3324187585b7e6aff49
 ---
 
 This section describes the different types of list-based tags:

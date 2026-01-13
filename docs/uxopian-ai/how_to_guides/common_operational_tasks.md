@@ -1,9 +1,9 @@
 ---
 title: User Guide Integration  Common Operations
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: 1e9e06929c226d1b6436b8e172e6695c5151b64adfe67a39a366bd21ad1a24af
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 02d9693782a3f347c8d2dbdcaf2b7a37bed9d495ab6d453e6ecfe40d8c3b24c6
 ---
 
 # 📘 User Guide: Integration & Common Operations

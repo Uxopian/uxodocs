@@ -3,9 +3,9 @@ title: Tasks & processes
 description: Handling tasks in JavaScript
 date: "2004-02-03"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 7129f5b67bc7db44ccf1621407badb983d4d6e04319801ba8334bdda0eb2c8aa
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1014e6540b528378b2c5131fc0c79bbbb1be9d34038abf168de307c656531eb5
 ---
 
 import Tabs from '@theme/Tabs';

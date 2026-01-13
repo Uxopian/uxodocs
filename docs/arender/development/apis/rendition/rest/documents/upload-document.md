@@ -1,9 +1,9 @@
 ---
 title: POST Document
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: cd15426f536ad6573049f3fe51df827f13c5dce7f91ae9e37dbd313c52809aeb
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: cabc1fca0f3a2d4b969775ce637ab4c866c307674b60672da8e3f09431b51163
 ---
 
 This API allows you to upload a document.

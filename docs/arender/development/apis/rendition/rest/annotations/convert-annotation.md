@@ -1,9 +1,9 @@
 ---
 title: POST annotation conversions
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: c567ca3df7cd24b20199da23b1293467deba0a67ce42622aff6cc7d98f670356
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 91e383ee7c3f6284a1b92d56cd583a6cccb14024880398bcf2c671758b4225a4
 ---
 
 This API allows you to convert annotations from an existing document id.

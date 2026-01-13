@@ -3,9 +3,9 @@ title: Token
 description: Secure requests made to FlowerDocs Core.
 date: "2019-06-01T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 1e58089f35f56e9588e8c15c71135c00653013c3537b9a686f7e9ba14ef9c2dd
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 46bc9281d4d3a95069e6cfc72fe20cbd0d9e788963224236cc0ee603bde5f235
 ---
 
 # User token

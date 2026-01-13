@@ -3,9 +3,9 @@ title: Folders & their content
 description: Manipulating folders in JavaScript
 date: "2004-02-02"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 0b37595c39f86a10768dac45f320a9e4d7ff9a793df0b638f378f32f69d86c7b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b67d80e2bbbd38afa31e4c0aaf7f0e1f118f3c6d4831f063e192ca80460aad0c
 ---
 
 import Tabs from '@theme/Tabs';

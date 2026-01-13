@@ -4,9 +4,9 @@ description: JavaScript engine included in FlowerDocs Core.
 date: "2002-03-28T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 16e5a4a5433e2d707b180f27bcac8f8cb289b9fb65b43271b4f6c4af1166f8dc
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2f67714270d34548148923661621bc8b1ba7716ebff204b9202fd2bb3e55f9bc
 ---
 
 import Tabs from '@theme/Tabs';

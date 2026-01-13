@@ -3,9 +3,9 @@ title: Authorisation
 description: Secure your application
 date: "2018-03-27T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 77c2fdf32e0ece6df9b1a2864da0d13323bdc3b4097418ffff0438cde423dd58
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1a0ec779e782938696c02d9182e4763a8ec99b31708e5249a4da4550347b339c
 ---
 
 :::info

@@ -3,9 +3,9 @@ title: Java client
 description: Consume web services using the Java client.
 date: "2001-04-01T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: a4921bc135a82d585a78997fc6be0298cdfc917ff6eba71f7074027c069ffa34
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2e7d873f7b7cbf5a7ced849395e39df82dfe5fa6b2fc9d79516cd570b3babef2
 ---
 
 :::info

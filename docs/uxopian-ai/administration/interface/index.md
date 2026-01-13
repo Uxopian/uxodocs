@@ -1,9 +1,9 @@
 ---
 title: Admin Dashboard
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: 83c4d4be8f586a0a40ce0f54515ca89aee0bb050664f41c1e11b126c79628e42
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8fe4b40908492e17ad32f866b0e2bccbc189d80d425eb4a553a256a1c18f4c25
 ---
 
 # Admin Dashboard

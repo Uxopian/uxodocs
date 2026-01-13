@@ -1,9 +1,9 @@
 ---
 title: Create Watermarked documents
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 4755c2e64b5d050ee4d81d1842a98b6bf85d59bd981e02a5b65580ffc52aec03
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 57425a493cfaa2c67e5b34c0a9311a3391354cdc33e6c5715fcd4624dcf8f4cb
 ---
 
 This code snippet allows you, using the ARender jar dependency

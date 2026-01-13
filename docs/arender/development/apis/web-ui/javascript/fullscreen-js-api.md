@@ -1,9 +1,9 @@
 ---
 title: Full screen
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: b3b36d3c5e26c75267a98573088e834777fb00f5bd46b72cb1f655ab4b6f3c5b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 5549c9aee8ebbfda8a690db5c410e7ea0e606526433596a0bfeb50f52bbc8732
 ---
 
 ### Switch to Full screen

@@ -1,9 +1,9 @@
 ---
 title: GET Page Image
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 2b8c70790defd58abf98e70cf2810b19b2d33baf3acc15f2b30d4d303f05413c
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f3faaa84420307eb97c21079b187c0dc8de335538d32c34a7039dd13df3b9a1b
 ---
 
 This API allows you to retrieve the image of a specific page in a document.

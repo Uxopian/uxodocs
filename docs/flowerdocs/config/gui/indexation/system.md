@@ -3,9 +3,9 @@ title: System metadata
 description: Configure indexing forms
 date: "2002-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 7d0e80be4a62cb951cf3b51526cc4a18169410995e7d76faec6d0e46595cadd7
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 016ae25975478d9630f85002522317c57e675ed2165f5117fb13eecc5f4de72f
 ---
 
 # System metadata

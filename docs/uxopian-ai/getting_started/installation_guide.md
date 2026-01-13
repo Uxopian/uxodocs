@@ -1,9 +1,9 @@
 ---
 title: Installation Guide
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: 412bc2daa8581d8871b0fb3ce52cc5af11bebc2662bfd9461364dd6c3c467f1f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2c0bdfb2f03c1a7003ac17d897e2954fc13520e6b5788ec79210d2995d1864ef
 ---
 
 # 📦 Installation Guide

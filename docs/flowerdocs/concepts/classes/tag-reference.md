@@ -3,9 +3,9 @@ title: Tag references
 description: Tag your components by referencing tags on a component class.
 date: "2018-03-02T12:00:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 026fa256357b3dc8df19dfdd78a0cdf5320b2fbdef15a96a961013fcc4a79fcb
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 20683048c3f0751c3703c686710f84afb5c2a2e8effecdad108e4ee18b9c3b01
 ---
 
 A tag referenced to a component class can be characterized by the following parameters:

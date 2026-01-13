@@ -1,9 +1,9 @@
 ---
 title: Icons
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 0b4eda3cbb844c54a2834e6f06fa3af0e5afd9a7588fddbff1c847ff60658315
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1824d9f23cf056eedce1e61def72573f44a87af790e425eab8bf246839222593
 ---
 
 ## Icon of ARender

@@ -2,9 +2,9 @@
 title: Labels
 date: "2004-02-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 6e917d5e6e9661427cfdbad038ee0a87b2ef844f8624b394770f479d17d5923b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 15747b36f66ca206e56e992d3c60325c0bbcee31eb2546e5fe3e24d26d51af45
 ---
 
 :::info

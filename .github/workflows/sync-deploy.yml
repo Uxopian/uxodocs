@@ -24,7 +24,7 @@ jobs:
         with:
           ref: test-v2
           fetch-depth: 0
-          lfs: false  # On désactive le téléchargement auto
+          lfs: false
 
       - name: Cache Git LFS objects
         uses: actions/cache@v3

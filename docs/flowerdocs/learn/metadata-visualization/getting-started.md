@@ -2,9 +2,9 @@
 title: Getting Started
 date: "2020-02-01T11:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 25b77c0444f922401ec4a768722da4295003776649c162be7f69b217406442dc
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 78e77e80680dc4ae0a3ceb8e8d355548d653753ca3832e318e2ae0261ba9b1c4
 ---
 
 # Goals

@@ -2,9 +2,9 @@
 title: Installation
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 72395c7d4a7428caf2ec89c743e6939ac6509ef491c2a6ca697b10a2afb4e944
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 749aaa7773f321a04cde6bf776aa3df69d2b4ff45961ca5d7332c483627809c7
 ---
 
 # Install FlowerDocs Companion

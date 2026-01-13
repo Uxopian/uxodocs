@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 9d55040efb2af6b30920d691c79686ad585b677b57faa50fec385c45330d0660
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 092c9bb7a41ca82d998f1bc7e8fe72c4b5764e4e8696a1639ccd223607c4eaf1
 ---
 
 ![Blog cover](../assets/img/cookbooks/fromZiptoPunnet_cover.jpg)

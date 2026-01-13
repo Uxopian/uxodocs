@@ -1,9 +1,9 @@
 ---
 title: GET a document metadata
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 02683c868dd31d9b191d20772d1d928b8112cb3a92931f006de8fa6c93c12a21
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: e4ba212ffe9f217685cc583bcaf09780859930104748e0eb2c69ec12cd83ffa4
 ---
 
 This API allows you to retrieve a document metadata.

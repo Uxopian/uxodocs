@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 2cbac4f31157a0da5c0ed34d8bf25cea4b4abea55d261e71e714ede29c822631
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1a970580b5225450a05af35da3cb405cfd14d14c6edd73f74dd4448e478b512d
 ---
 
 # Authentication & Team management

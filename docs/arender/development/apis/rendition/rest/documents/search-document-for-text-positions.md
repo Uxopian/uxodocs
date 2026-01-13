@@ -1,9 +1,9 @@
 ---
 title: GET Text Positions with Search in Document
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 0e88ad47796411127eddcaa07bbb8dfe5f0c1a072ba27d307fa0d40c574e5984
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8a44d277f31acb8b5e3980e76e387bf6f876d8bdd3bc765ff155ceb6513e2b87
 ---
 
 This API searches for text positions within a specified page range, returning an object that contains the text position found, the last page searched before the process timed out (since the backend has a defined timeout configuration), and the overall status of the search.

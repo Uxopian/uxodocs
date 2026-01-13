@@ -1,9 +1,9 @@
 ---
 title: Text Selection
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: f623a07c9643408ce3b4c9e50de48cd59d44b0a0b2d32b4a7cc5cfaf3152afcd
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 846c55c310c1196112519a8896e659b8eeb09cb2143b593bd31b95ef1b5cc5d0
 ---
 
 ## Document Text Selection

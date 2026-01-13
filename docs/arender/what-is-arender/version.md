@@ -1,9 +1,9 @@
 ---
 title: Version nomenclature
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e2cdf0c3eb6d4729c01ac12b55981927927e482416ffdfb2831d1f305b01d06d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 6b3a86f09afcbfca221f6a560fe087c6eec9d3155a95b6bd366cf803c4a048b7
 ---
 
 The versions are formed of 3 numbers separated by dots. We therefore find an X.Y.Z pattern.

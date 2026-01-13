@@ -1,9 +1,9 @@
 ---
 title: Quickmenu
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: ec44172bd4f0c47ae417e45f0f8703f81bd5ea6eb16ba923dd66293cf6f99407
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 5078ff73fded55097e10eb158928afb304680d3206697b3a9605503ecad54bc0
 ---
 
 ## Description

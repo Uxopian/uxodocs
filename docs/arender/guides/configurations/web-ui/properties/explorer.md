@@ -1,9 +1,9 @@
 ---
 title: Document navigator
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 248c1d50d2bde0fe90c15d243403fac9339c2e96593f2505095376798447bc12
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 927fd01ac9dc1313cad7037d7321e3ad4ddae6e8eef98119a09b6ad2f2eecd97
 ---
 
 ## General

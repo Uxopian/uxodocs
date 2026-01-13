@@ -4,9 +4,9 @@ description: Show ad-hoc HTML pages.
 date: "2020-02-02"
 custom_edit_url: null
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 7eb2627d055bdae4ae28d403ee13e98155e35ae943b3fd7964f0d0cd900f53b9
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d62a16d3c76515e0cb73366bf61dfc22a42e57d2cac9b2ac884b024b8266f00b
 ---
 
 # Principle

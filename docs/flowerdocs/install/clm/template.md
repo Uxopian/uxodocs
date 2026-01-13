@@ -2,9 +2,9 @@
 title: Template
 date: "2004-03-20T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 80c555864e2ee3d3990e887cfe9c96616ab4c57b3a47bf5afcb58e7e8b529ad3
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 46b699bb81f0bd07fac84ad2b65586a657d161a6d2d14c9e65d85b348ac8c0c4
 ---
 
 # Scope import

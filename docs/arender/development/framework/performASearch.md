@@ -1,9 +1,9 @@
 ---
 title: Perform a search
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: 333f4caa13ba6eda7de53b8b7e273a7c01e7d52656b7b27489397249a49748fe
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f4af785c3d6787ab749ef761794ea28889e963a8af7290f7c36cf56577714753
 ---
 
 The JavaScript API functions <i class="ti-hand-point-right" /> <ins>[described here](/docs/arender/development/apis/web-ui/javascript/search-js-api)</ins> <i class="ti-hand-point-left" ></i> allow you to launch a textual search on an open document, to highlight and position yourself on specific text elements on the ARender viewer.

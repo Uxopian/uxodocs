@@ -3,9 +3,9 @@ title: Overview
 description: Tag your components to find them more easily.
 date: "2018-03-02T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 38cb38fd375e5b2ed1efce9e33fe4de1f01dc8dfe97b88da0e3f8b21bf53c5fe
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 87597c49395b2b2037ce8d3ca75d3e12a7fb5fed0ed1badcd8c699c740d2e254
 ---
 
 `tags` are metadata defined on a component to characterize it and make it easier to find.

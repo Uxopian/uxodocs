@@ -1,9 +1,9 @@
 ---
 title: Check
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: e0a8d54f4103d68d3f6a95921911e5df7d7fc0dca61cedba30579f915de1130a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 721dcf046cc8148c84f490c62304f4fc5e53ca656382a6564c0645b1d0011457
 ---
 
 Once the server is starting, you can check the URL

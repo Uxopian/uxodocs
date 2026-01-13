@@ -1,9 +1,9 @@
 ---
 title: Complete example to add redact annotations
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 23d96bd7f224ef026b1a407b6ba5413ded39b99c705bed434c44087dab177077
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8aab1803d6ea9612acf5e5dfaa802c773e678364d68e49ed25d333e1ba061c2a
 ---
 
 In this page we will detail how to create redact annotations from the document

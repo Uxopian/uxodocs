@@ -3,9 +3,9 @@ title: Search results
 description: Customize the presentation of search results.
 date: "2005-04-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 45e72e0781106dec571344ed0356dbbdcd296be100fd2f7efc716590c913888e
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: fc309d4760af660cf4cbcdde7848d55894cffd40eb44ee15978fe965cbd53c14
 ---
 
 # Hiding columns

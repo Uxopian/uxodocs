@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: b1666e67b242ceaabf85176592ce5554e3a4fe25df299b2837da352079ade644
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: bcfa0ad84812a5daeb98aef1466934322c19ad0e42ec416a94375b973bd9085d
 ---
 
 :::warning
@@ -21,7 +21,7 @@ The shared objects can have either scopes :
 - **Map** : the object is attached to the map from where it was created (and embedded into it in case you share the map file). This object will be reachable from any task of this map, as long as the task configuration accepts such type of an object.
 - **Global** : the object is shared between all the Fast2 maps. Global shared objects are stored in `{FAST2_HOME}/config/sharedObjects.xml` file. If you share a map containing global shared objects, these latter will not be embedded.
 
-## :octicons-tools-24: Create shared objects
+## <i class="fas fa-tools"></i> Create shared objects
 
 Shared objects are accessible from the Configuration Place (accessible via the gear icon of the top banner in both Design and Run places, tab #3 "Shared objects").
 
@@ -46,11 +46,11 @@ To visualize all the shared object available in this Fast2 instance, click on th
 
 <br />
 
-## :octicons-trash-24: Delete shared objects
+## <i class="fas fa-trash"></i> Delete shared objects
 
 To delete a shared object, use the "Minus" sign on the right of the object, from the "Shared object" tab.
 
-## :octicons-zap-24: Complete example
+## <i class="fas fa-bolt"></i> Complete example
 
 Let's go through a complete scenario to see how a shared object will be used in your tasks. For the sake of this example, we want to inject into an lcoal Alfresco instance.
 

@@ -1,9 +1,9 @@
 ---
 title: Use SSL
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 987e30b547b9581dd0dc8f594afc697f209868c723fad8578c4d06654d4556bf
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f2604731d38ae44fbc79e2d9e76f3aa4a0af557d3304bd6b1405abf9223b13fc
 ---
 
 To allow your Rendition to work over https, you have to change some

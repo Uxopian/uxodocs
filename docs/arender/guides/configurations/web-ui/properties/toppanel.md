@@ -1,9 +1,9 @@
 ---
 title: Menu bar
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: fc0bc96410467361b3ef06db429c19cc73c02df57753a861804cfb84e1b27dc4
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 8b89df792ae817c0b8b12990b192bef9ece76d963bcfcf1ac7b3fd8b562450eb
 ---
 
 ## Document menu

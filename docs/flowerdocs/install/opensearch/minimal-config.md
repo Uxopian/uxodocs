@@ -2,9 +2,9 @@
 title: Minimum configuration
 date: "2001-03-28T12:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 93078cc327e30c8c9d25606a3be5f11b5b3e6edba179c835263f026a42ee842a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 384d2afda6ca16468113662907aae6a491ac5271acdc86ad473f213e098a56d2
 ---
 
 :::info

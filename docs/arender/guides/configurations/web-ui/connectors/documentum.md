@@ -1,9 +1,9 @@
 ---
 title: Documentum connector
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 10a794838424f03b492741805c544d1352570da579439c1a9cbc7c00484207c2
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 5de95e3ef517a3c955a7d346a76e70fe10def54bf89e3fac544248448b18c053
 ---
 
 ## General

@@ -1,9 +1,9 @@
 ---
 title: How-To Integrate AI into a Basic Web Page
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: ed25d564da1f82ab78888331b9405880f702805b56bf941158fa4672153ed099
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 95f28fef3791abf441d81b937bfc51268fd62e08d5d7b84ec28b90d3a0184a2c
 ---
 
 # How-To: Integrate AI into a Basic Web Page

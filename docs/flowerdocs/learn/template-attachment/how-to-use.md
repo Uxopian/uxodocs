@@ -2,9 +2,9 @@
 title: Use of the plugin
 date: "2020-02-01T14:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 219c8ae900033d820a99b4d0b88dad0dd89925887598a9abd074f9e6f3e437c9
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 5ce0d3e691cef953cf087dee68de7a0d2d04d083439d4234a1b6123b9c43405e
 ---
 
 # Goal

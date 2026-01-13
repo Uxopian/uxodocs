@@ -1,9 +1,9 @@
 ---
 title: POST a comparison order
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 233a9e1de8e9740908dbb6cc8c7c3196baf401efaf4703a8a65af66af8891b9a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 7475d005561487e63426dd028ff32160efeac1447335e5f06ee5034247e36509
 ---
 
 This API allows you to request a comparison order and retrieve a ComparisonOrderId.

@@ -3,9 +3,9 @@ title: Identities
 description: Organise users accessing your application
 date: "2018-03-20T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: a4b15a1a1d62b886da9fa61708f37dc4878c6f8ce570b9c4a79028a841245d2a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2e29f096fbe79826f1123f07376c66703c902e850f2c5f61334370087eaa31e0
 ---
 
 # Principle

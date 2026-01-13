@@ -5,9 +5,9 @@ description: >-
     Administration
 date: "2020-01-01T12:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 4f6bb1260a5cd12ac980cbbebbdb7ac79cae2dc8377e07512cc2d08bbd70382f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 09c08a69748601fd4ad87fbefa50220a746a4db53767f51aef13c4d2733c881d
 ---
 
 # Goal

@@ -1,9 +1,9 @@
 ---
 title: Server performance / Set server
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: cb1ccbb4f6ac1d676502250ea8c6cc3412e1e636219403d8bffd3b7389e40d5b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b0d7aa11eada0ba14865a32df1eba8abd96efbe5ddc56c72c4502a6c9c42395e
 ---
 
 ## Server performance

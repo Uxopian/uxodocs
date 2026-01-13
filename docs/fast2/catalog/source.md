@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: 15fe923c28f745ee33dcd5bf9eef384a186536d3653091f4c72a97e993c22add
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b133bbb5098d31870d5abbd0ffffeeeaf76f61399d430d17b31583af6d3f0f36
 ---
 
 ## AWSSource <small> - Complete extractor module from AWS S3 </small> {#AWSSource data-toc-label="AWSSource"}

@@ -1,9 +1,9 @@
 ---
 title: GET Signatures
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 19e92d32e4861f73e6e36b161bd49eab9d5baab2b59735f4713cccf058b312a2
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 3ac67a258774b94c1f5ceba78fe398612a9084cec8cb8b8ded2b7ffb265d2441
 ---
 
 This API allows you to retrieve the signatures of a specific document.

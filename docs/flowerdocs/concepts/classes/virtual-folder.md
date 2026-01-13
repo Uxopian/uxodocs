@@ -3,9 +3,9 @@ title: Virtual folders
 description: Virtual folder classes
 date: "2018-03-02T14:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: f9c77dcaf3d73e17c954c0dccd36a850cd0866adff7ad4a40fcef649a92404d0
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: bd36d1fdcc7edb60e6e79e223673e8a0a347855ec691cb0db5d30ec1485fcb0d
 ---
 
 :::info

@@ -1,9 +1,9 @@
 ---
 title: Monitoring
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 3ff38137c90ff726c8b9ec2351bb18c9c97b378e1ba172eee8d7771cd0d256d3
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: e6d31ea2721d0f4d638c5bbb8f95bb3767aac04f19cf11b702aa9381f9bbcde2
 ---
 
 ## Health check probe

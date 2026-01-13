@@ -1,9 +1,9 @@
 ---
 title: Bookmarks
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 1d7b9b4ee9ad3754d042389a0addfd87af95076190c0b02d5ab6b96a839800b0
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1a6b31b85926e675a8360c636d0d4b2abe177337733b46fa4aab2a338aa8950d
 ---
 
 You can access the bookmarks by clicking on the bookmark explorer that will open the bookmarks panel.

@@ -1,9 +1,9 @@
 ---
 title: Adding a Custom Gateway Authentication Provider
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: af129b4c5d4c5b987d206f1a88cbccd5447ad3e3591b9f4fc5e65025a7193a1f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 0b5ff1a23d2dcbd45fcdac180e11747086b609611127ea4c71feaf0af2b92a38
 ---
 
 # Adding a Custom Gateway Authentication Provider

@@ -2,9 +2,9 @@
 title: Sign in
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: f66054047b5202b28bfb43f334421f1e4323a9313360053beb7a805be68d7fbf
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 16298101fa0670e88b5e84623a3dc90c7a215924fc55ec8f147a2a3a0cc4ba73
 ---
 
 import Tabs from '@theme/Tabs';

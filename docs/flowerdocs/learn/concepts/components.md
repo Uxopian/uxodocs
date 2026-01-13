@@ -2,9 +2,9 @@
 title: Components
 date: "2000-02-01"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: b06392ec0c06be9c61743a7769e920d8eb76fe0c3d9094b1f29d02d43c8fa431
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 52cda6f6072903111fc48f9a0b4492c9c5dcc2b11468bd4940615c25b65583c2
 ---
 
 The objects manipulated through the interface and APIs are `components`. Each component is classified according to business or technical criteria using a [component class](/docs/flowerdocs/concepts/classes/getting-started).

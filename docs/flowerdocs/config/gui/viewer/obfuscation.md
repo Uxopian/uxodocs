@@ -3,9 +3,9 @@ title: Obfuscation
 description: Obfuscate sensitive data within documents.
 date: "2005-08-29T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 5a90d136a3008ffb0b6f29f5fec5c58d430c1544274b8a731b8be91919bc7427
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 93139b6b2b635bec66bc7dee9717e5c93b4490c80121a239cce725fbc5f31822
 ---
 
 import Tabs from '@theme/Tabs';

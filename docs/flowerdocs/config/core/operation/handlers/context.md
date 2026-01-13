@@ -3,9 +3,9 @@ title: Operation context
 description: Use the operation context of an operation
 date: "2002-01-27T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 18fd020d997b489f87f88cfcba1d7c43738f22ffda594b50e09b98abfad4a468
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 3948c99a07db883a7b4b9ae14c7555b3c60ab9a1ea27248f47758d6d6fe02ea4
 ---
 
 # Principle

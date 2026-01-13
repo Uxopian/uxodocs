@@ -3,9 +3,9 @@ title: ARender Customisations
 description: Customise ARender within FlowerDocs.
 date: "2010-06-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:44:23.025Z"
-    author: CI/CD Bot
-content_hash: d8bbd669d080eeb88e41e6efcb2be0593d0cd1e46887c7369edc58d75e7d6074
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b34038f7a8d246fc6e069d00635caf45ea4d091bf999966405de3ecb01024a38
 ---
 
 # Introduction

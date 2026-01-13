@@ -3,9 +3,9 @@ title: Navigation
 description: Manage navigation between different screens
 date: "2006-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: a5b9ab2b4f01868614fc62d2481ee452809b7e0fb20674810c48df89c76e4c49
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c2949e9998c1059678beb23c228d7590307c4fa929cee71285a44d11077887ad
 ---
 
 :::info

@@ -1,9 +1,9 @@
 ---
 title: Architecture in M-Files
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 12b80e9d85ef6bc742f22bd63ec6697bf01c41af72b7508befe2d684c63ad906
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 05f731309ac9e887b17dd16f8822a79f9a15ce6454f1d96829d351ea4b667d43
 ---
 
 ![image](/img/arender/diagrams/ARender-Architecture-M-Files.png)

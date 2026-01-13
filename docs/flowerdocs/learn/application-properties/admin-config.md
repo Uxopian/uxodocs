@@ -2,9 +2,9 @@
 title: Using the FlowerDocs application
 date: "2020-02-01T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: f78bae6f61b532753341391a15aebb51f0afbe1cd46f6650402042384d4da3f5
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 82119d0768679b0423d78ce5367a8a629158136cd22189d02a7d3bcea88d1fc4
 ---
 
 # Set up

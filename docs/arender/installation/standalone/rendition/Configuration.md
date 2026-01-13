@@ -1,9 +1,9 @@
 ---
 title: Configuration
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: da6d84a25b9643bcbbbfefaab70df66ba436c03ba7c37e6c028fda23ca3fa0f7
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 917714687dec0b4201bb366fe98fd53270486747158503dcd70b776ae47ae15d
 ---
 
 ## Antivirus Settings

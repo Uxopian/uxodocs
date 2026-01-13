@@ -1,9 +1,9 @@
 ---
 title: Download documents with annotations
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 72a2ca961cd702eb6f00cb6a02c11933e360d22a1c2f88f7a8fc276c92687385
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b2f99c861f38c369d44043070dcb27ee7c886b4d48fae41df4a0a9d4e37b26f1
 ---
 
 A new servlet is deployed to download a PDF document with annotations.

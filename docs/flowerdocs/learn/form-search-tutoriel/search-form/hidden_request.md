@@ -2,9 +2,9 @@
 title: Hidden request
 date: "2020-04-04T10:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 076effbbad4e6e76ad03f05d8f4df9bb70c53eca18d8a959a1c77f732f15765a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c1948d33a6518b3efc08e55c2a4f3974ad14cfd126ddf4fa8c81fac263eac95b
 ---
 
 In the previous section, you saw how to define the form and search criteria. You will now see how to configure the results display.

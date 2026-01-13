@@ -5,9 +5,9 @@ description: >-
     behaviour in the event of conflicts, etc.
 date: "2004-03-21T13:22:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e41cf1c791fc7eca0d9957d0db2e2aa976ddcfb9a36dddf313ce51ed758ee9af
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c1b6d70066db9019cda8bed7771e3b4faf049c59a2b15fff17f8e2f092faf550
 ---
 
 :::info

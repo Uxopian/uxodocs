@@ -2,9 +2,9 @@
 title: Component-related actions
 date: "2003-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 79b8f4f2df27b7d4e4a6446f0304c8f3ff0ba769ba79002a267e5c9ef1f8cb09
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 6947c9ab91b753df8395a276508b6ecbfcff8f2243d124a21f9d4cf31313e731
 ---
 
 # Component-related actions

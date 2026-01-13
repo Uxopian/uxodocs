@@ -1,9 +1,9 @@
 ---
 title: Signatures
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 577b8440a421ef6892cc5647e4df308ba739eac193d47963fe1c130ac8f99097
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 03378849d1fdf086e7ddc250b72cafb283859619704879d059f84ab440b6ccfc
 ---
 
 ### Signatures tab

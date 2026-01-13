@@ -3,9 +3,9 @@ title: Tags
 description: Displaying component tags in a popup window.
 date: "2004-03-28T13:21:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: ca7d69f184a7c4cfb7ef49d33443623756a0ca56ea3edc744cf3ee29125532de
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4b8d3cf9ba84db2bedc560d088a52666dc8eee1d65accde3f9717cda281137de
 ---
 
 :::info

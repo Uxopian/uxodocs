@@ -1,9 +1,9 @@
 ---
 title: Download documents as base64-encoded file
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 3720437dbe7c3d36857c1b00018a792f4dbd5027ac05def35bc51ef80ea5c2a4
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b42f5ec61309e3dfc96c68e1fa8a09acb93b480311e3fa6e88f0e8bff00ae8c6
 ---
 
 A new servlet is deployed to download a document encoded in base 64.

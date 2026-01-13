@@ -6,9 +6,9 @@ tags:
     - content
     - java
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 8a033119e3b2c0bb00c667e0f4a531fca70c1922daec5a202c18acdc1bb23cfb
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 338fe0467a5af501c6d63bec000b6a5c502358a19152d5848410e00ea91e04ae
 ---
 
 # Learn how to deal with punnets

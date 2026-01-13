@@ -1,9 +1,9 @@
 ---
 title: Obtain sharper images
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: d0b3d92143486ffc39a77820f8e397a07e699fd560bec94dc58c55780fa3e483
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 73e469f1d404d1b28d4b25dc2adf151b10ebbfd4f2c03ebd3aaaf5089c2848a8
 ---
 
 By default, internet browsers smooth out the displayed pictures to make

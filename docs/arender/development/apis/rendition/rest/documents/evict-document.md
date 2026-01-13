@@ -1,9 +1,9 @@
 ---
 title: DELETE Document
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 4ca504abb75f45cd749a6fc00e9157aaa39d89f5ed07430b8376e4163f30a8ec
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c35ea6d08c889b453998028dd916aa860093770b25b936aec76817083b30f040
 ---
 
 This API allows you to evict (remove) a document from the system.

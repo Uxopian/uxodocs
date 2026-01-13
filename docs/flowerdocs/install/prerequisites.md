@@ -2,9 +2,9 @@
 title: Prerequisites
 date: "2000-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 2662ab060c9fafc33b22bcfb48f0481f3a01d338871919e18b129b0d7cd95dd6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d87ca499dd9bf18394c231efee5f216751203768593304ae467e4b3e1aac547d
 ---
 
 :::info

@@ -5,9 +5,9 @@ description: >-
     storage.
 date: "2023-06-01"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 0d3ca8b87e0c5754998e9b5ac3580ecc6544326de774e70ef2961d426ce39290
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: cef1018db3a0e997dd552646fc3a8f6987b5c7f31c244cdb1c847d93d6d44239
 ---
 
 # Encryption

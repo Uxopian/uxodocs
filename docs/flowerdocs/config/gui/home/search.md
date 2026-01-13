@@ -2,9 +2,9 @@
 title: Search
 date: "2000-04-01T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 2e9afe8f78d22649cfc89f1989f274bb4d3d2b7a83f74a5f8f759dc19b509a82
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 737bcde8c80c60b125ef4822cab4c18b123c30751dca6183aafea2063122f2a9
 ---
 
 This type of widget displays the concatenation of fields present in the `selectClause` search for each component retrieved by the configured search.

@@ -3,9 +3,9 @@ title: Content indexing
 description: Index document content
 date: "2009-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 363c922d0103af9e15880480fe7e41ae46d8de9400c065809b58ba08a3cdb112
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 959c091ad822c2f18eaa99c18d8c1661c73f189e9077381582c5cf227ab60ea7
 ---
 
 # Principle

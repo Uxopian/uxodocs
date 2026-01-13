@@ -3,9 +3,9 @@ title: Model
 description: Searching for components through the JS API
 date: "2005-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: a691d336746d172fc31f3547916817be9cc70a80efff5d52b73182e3a9e49182
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 181467ad5276b83a4908e14c5830f037f68d9602b2c6e11d14372fa43cde57bc
 ---
 
 To search for components via the JS API, use the `search` function for the various service APIs **[here](../mcd/services)**.

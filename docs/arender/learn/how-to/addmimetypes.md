@@ -1,9 +1,9 @@
 ---
 title: Add new image/video mime types
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 8bf2f746a95ac22eddab23299c2013e570bb44f409d8090f906bb16463545e13
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 610799bb48cc70896987ac6918134fb9ca212826da782d21f590d6e9f2f52e58
 ---
 
 If your rendition server does not possess all the mime types that you

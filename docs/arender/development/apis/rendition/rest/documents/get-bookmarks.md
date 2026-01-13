@@ -1,9 +1,9 @@
 ---
 title: Get Bookmarks
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 8783f7181fa9988579af3d5b10dd6c96e6490c694a8395a425199357d27f8f87
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 18dd1153c58b2b4871fa61f14ac54dcdb8d9601f3c639b2b5c25b1649e1c71a7
 ---
 
 This API allows you to retrieve the bookmarks of a specific document.

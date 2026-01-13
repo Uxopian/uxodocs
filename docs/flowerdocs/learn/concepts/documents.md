@@ -2,9 +2,9 @@
 title: Documents
 date: "2000-04-02"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: bdbe6fb572ac8dfbde7d8441f15b300d2b1ac0ac920e99c773d4096afe8fcba9
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: afcd75f86083c2e44e15df8e64d97c8eb4b0788c6b30be28f48b169d437ae44b
 ---
 
 # Document content

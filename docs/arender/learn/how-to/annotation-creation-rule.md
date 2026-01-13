@@ -1,9 +1,9 @@
 ---
 title: Annotation creation by rules
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 5f9f8c1218e07419faa9b6ee5438814bedee3cf202fa28d83d242e8811f89377
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 91942894ad7dc49abd75f1652c27b81a4abd12d898c7b9b358263ec8e0cb6300
 ---
 
 ## General concept

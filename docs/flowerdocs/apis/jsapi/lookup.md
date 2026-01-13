@@ -2,9 +2,9 @@
 title: Lookups
 date: "2011-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 18cd6660d1e445e045c61f74eb44cc7e1fd52f558ee129e0b3ef5cf129d1a49c
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: db4c4da939a8826d623abaa07d108c276d291ee42e29800f5cd444940fa0ebdd
 ---
 
 A lookup involves retrieving data from a third-party or other repository, and building dynamic lists of values. This mechanism enhances the user experience and enriches the data stored or retrieved through FlowerDocs.

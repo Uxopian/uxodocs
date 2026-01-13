@@ -2,9 +2,9 @@
 title: Before getting started
 date: "2000-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 87f11f5f22aed452dc69f2cda5542fde049e4350aaf65f9fdb5acb893090b945
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a35f95917de8de9f8f4a4c62e88d53428beb0a75039d0ab27d9c130d58366d3d
 ---
 
 # Presentation layer

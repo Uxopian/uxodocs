@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: 957c01894b8bc7777950ee34848be15e6387b1014bce0fa9e492eefce4077e65
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f46fcfe8ff94f84b5397f4d97e41a6d12e144c4acfe25f1fbd8d442d16857d85
 ---
 
 ## AWSContentSource <small> - Extract content from AWS S3 bucket </small> {#AWSContentSource data-toc-label="AWSContentSource"}

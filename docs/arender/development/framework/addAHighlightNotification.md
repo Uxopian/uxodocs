@@ -1,9 +1,9 @@
 ---
 title: Add a highlight notification
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: fc65c80c20e6712ecd42a471fc305c8740a97b3aa1704fb695055a4ab169e110
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 5eee8901c79baac234c1e07bf8f11e1be157e9caf8060827587ccec28f9b1675
 ---
 
 The JavaScript API allows you to set up subscriptions to receive events during various actions on ARender (e.g., adding/removing notifications, rotating a page, or clicking on a hyperlink). This information is accessible <i class="ti-hand-point-right" /> <ins>[in the documentation](/docs/arender/development/apis/web-ui/javascript/annotation-js-api)</ins> <i class="ti-hand-point-left" ></i>

@@ -2,9 +2,9 @@
 title: Backup & restoration
 date: "2005-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 90e6342772e4c1876b820f5ea395775fbe4f703c0e5c04b722a9fd458992d687
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1d977a6b9254dd15b7908b933351aa8ac537e57fbac43b495ff097f57964cf62
 ---
 
 import Tabs from '@theme/Tabs';

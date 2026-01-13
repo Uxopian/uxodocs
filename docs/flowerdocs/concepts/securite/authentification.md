@@ -3,9 +3,9 @@ title: Authentication
 description: Authenticate users accessing the application
 date: "2018-03-27T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: e6de1ab4543c336af0cdbed6c632b019c838255cdc36d94e9d10ceb225f51db8
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d0e42575502b989f13a8ea00953c66cdda1246f2e1ba4031a61ff242450b5a99
 ---
 
 :::info

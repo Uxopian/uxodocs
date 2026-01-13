@@ -3,9 +3,9 @@ title: Handling a document
 description: "Create, modify, delete your documents"
 date: "2001-03-30T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: 4d1832e664b826f9f8a353c42f67bb5ad3105b1033ebc33dad0dafecb174defe
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 0561c66591d841398e3bfcf61de27f0aff6414aa66b3fe249b01bcb7bab63615
 ---
 
 import Tabs from '@theme/Tabs';

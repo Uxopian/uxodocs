@@ -7,9 +7,9 @@ tags:
     - AWS S3
     - content
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 93ae7dd559f894be88d0c74a911bcc1e29ae03caf7490d77a1c3709a5e8c5b95
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 7dad164edce3ad7025774933aba0b01decab11507ffb0c0556d89fe7eca12718
 ---
 
 ![Blog cover](../assets/img/cookbooks/content-metadata-from-s3_cover.png)

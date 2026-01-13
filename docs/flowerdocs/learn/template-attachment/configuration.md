@@ -2,9 +2,9 @@
 title: Configuration
 date: "2020-02-01T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 11052d4a28f1bb2ed0a9b7914ec48b2c940fbe27b2484dd9a95e83fcb4d919d5
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a04d9968c953a5e5e92917bf7a053f86200eda004bd2e6bdbf949483fae019e4
 ---
 
 # Goal

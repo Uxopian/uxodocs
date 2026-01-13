@@ -2,9 +2,9 @@
 title: Docker
 date: "2000-03-31T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: db6727cb1f8bc68875b2e507f6cafa5446c2098f568dbbf718bfcb2794813472
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f0901c12e4b540a4afc141f41c9b8eaa9ef559e196115b3d94dc0e9f7c556cc8
 ---
 
 # Docker installation

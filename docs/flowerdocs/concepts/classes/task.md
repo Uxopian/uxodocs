@@ -3,9 +3,9 @@ title: Tasks
 description: tasks classes
 date: "2018-03-02T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 8fe3289710591015bc3fd7a1fc45ef11ee3ce949f590728231b386e25230d303
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4670c591c66fd3d2261e3622d6c0908eddcd14449990dcfa15916244e7cd6a1b
 ---
 
 :::info

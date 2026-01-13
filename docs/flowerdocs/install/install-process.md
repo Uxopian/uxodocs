@@ -2,9 +2,9 @@
 title: Installation process
 date: "2000-03-29T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 3df9b38cbebcb66edef3119da16b3ffbdaf28adcdcf119f5adb8b78d465962e3
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2598cbc40801e734d58f6767709157515f259d78e923f2662da2dd958ee2aedd
 ---
 
 :::info

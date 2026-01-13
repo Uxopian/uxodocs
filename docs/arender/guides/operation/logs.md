@@ -1,9 +1,9 @@
 ---
 title: Logs
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: c80e66c7b085f80a42d9fdff801af34ea76f455cf04a12dae56fe3652afe37ed
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b31d5a643d52447b2d62f4dda32ac20c1fb016d066a6883ffb7aca5c8fb8ecc7
 ---
 
 Since version 3, ARender relied on two different logging libraries: [Log4j] (http://logging.apache.org/) 1.x (Web-UI)

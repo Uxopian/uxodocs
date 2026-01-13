@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: 1d56abf61e028e7a774b67c8528783e1cabb28dbc646fb048280444215c3a019
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 9538eec6f9f844adfe573d206b06ff3fc605a89a182ecf15251860f1e88625a8
 ---
 
 ## AlfrescoRestDeleteNode <small> - Alfresco delete nodes using Alfresco REST protocol </small> {#AlfrescoRestDeleteNode data-toc-label="AlfrescoRestDeleteNode"}

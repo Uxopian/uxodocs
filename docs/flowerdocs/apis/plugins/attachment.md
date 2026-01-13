@@ -3,9 +3,9 @@ title: Attachment action
 description: Actions on a task attachment
 date: "2021-12-02T10:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: ca181afd9b41a1c26aedfc8711023aa87fe79eb445a345e5b438e262be80d74b
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 5e0c8f30ab2534a4b3675cb8d637a243464445f9eaddff86943868262c1a3cd8
 ---
 
 import Tabs from '@theme/Tabs';

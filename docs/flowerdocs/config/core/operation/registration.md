@@ -4,9 +4,9 @@ description: Determine which operations to respond to
 date: "2001-03-28T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 301d955b5b50390ac0a2cf33fbb9579d40f30940fe81eff2f677065a3076b239
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 22c05e2abd178ce44d6d44a8218a06159fa692e55d1a7fdfaec4cfc44f7ef2a8
 ---
 
 import Tabs from '@theme/Tabs';

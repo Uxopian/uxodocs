@@ -3,9 +3,9 @@ title: Subscription
 description: Subscribing to the execution of a search
 date: "2005-03-28T13:22:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 5109f737477c8bb64c174def0cb0158471176e9e64ba3ca41f8ff4ce9160e5bd
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 3f8af8cc170d4f0bf63358804b54de072f61ec86bbe6f2cfbb7777fe0b9bd511
 ---
 
 Subscription to the execution of a search request is based on the search template.

@@ -3,9 +3,9 @@ title: Manipulating a tag class
 description: "Create, retrieve, modify, delete your tag classes"
 date: "2001-04-29T13:30:01+01:02"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 2dbab95e40d894d8055252812f3a7cfa804737f79266a952ebb6540ba854336e
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: ec33e765e57b3374a6f82a1886edfcac36943f8b49dc582dd88842011c38e97f
 ---
 
 import Tabs from '@theme/Tabs';

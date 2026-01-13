@@ -1,9 +1,9 @@
 ---
 title: Hyperlink
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: fba9e120143cffa8404b512e57bfa2877fd33b05acad4b78c8859a8e751d605e
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 76b505aff5e1e8f0ec5857032cb1853c42e0becac9cb145bf1432ded26d915be
 ---
 
 ## Description

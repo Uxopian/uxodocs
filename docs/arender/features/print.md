@@ -1,9 +1,9 @@
 ---
 title: Print a document
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: e923800c8aeea87b0ceb86e5372c08518c192de2b422674c9b4dff2e7d8cc894
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 0f78d938a2365e9934ce9b25a8ed0a5b7d0c8a107b3d3279a4f4121ac407329d
 ---
 
 Click on the "Print Document" button:

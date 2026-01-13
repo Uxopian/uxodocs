@@ -1,9 +1,9 @@
 ---
 title: DELETE a transformation order
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 4fa9fbf2c277d4db1293790918c71498b5e1794cd0e5e5eec9407a24608bd4fd
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b82e77a1041208750e61bcf4e4ea6622ef92d36de4f443534428e8551f03de07
 ---
 
 This API allows to delete a transformation order previously requested.

@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: cb05d8645a390fb530edf6675631ba5f0f8351629e848a39291da1fe44f53c48
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a30597978a7fa79ffbff17261c257817ac111e3ac963acc061ae81610738cb9d
 ---
 
 # The worker
@@ -19,17 +19,17 @@ If their role can seem quite important, they are paradoxically as easy and strai
 
 One of the major aspects of a promising migration project is what all project managers will ask you to vouch for: performance metrics. Let’s suppose you need to migrate documents from a source system into a second one, the latter having a much higher input flow tolerance. No need for empirical statistics to know that the old ECM will be the bottleneck. An architecture similar to a hybrid deployment variant (topic we presented [here](https://www.fast2.tech/blog/deployment-variants/) could easily be envisioned. But let’s complicate things a little bit here: in-between the extraction and the injection phase, the metadata have to be updated, with new date formatting and heavy mapping of document related properties. Can still a hybrid-like architecture save you now ?
 
-## :material-hard-hat: Configure the worker(s)
+## <i class="fas fa-hard-hat"></i> Configure the worker(s)
 
 The required files for the worker to run properly are the following:
 
 | Item                                                     | Purpose                                             |
 | -------------------------------------------------------- | --------------------------------------------------- |
-| :material-folder: config/\*                              | Configuration files, broker endpoint etc            |
-| :material-folder: worker-libs/\*                         | All libraries and dependencies for tasks executions |
-| :fontawesome-brands-java: fast2-worker-package-X.Y.Z.jar | Worker main unit                                    |
-| :material-microsoft-windows: startup-worker.bat          | Binary file for Windows                             |
-| :fontawesome-brands-linux: startup-worker.sh             | Binary file for Linux                               |
+| <i class="fas fa-folder"></i> config/\*                              | Configuration files, broker endpoint etc            |
+| <i class="fas fa-folder"></i> worker-libs/\*                         | All libraries and dependencies for tasks executions |
+| <i class="fab fa-java"></i> fast2-worker-package-X.Y.Z.jar | Worker main unit                                    |
+| <i class="fab fa-windows"></i> startup-worker.bat          | Binary file for Windows                             |
+| <i class="fab fa-linux"></i> startup-worker.sh             | Binary file for Linux                               |
 
 ### Change JDK
 
@@ -83,7 +83,7 @@ In case serveral workers are required for specific queues and tasks, there might
 broker.embedded.worker.autostart=false
 ```
 
-## :octicons-zap-24: Advanced use
+## <i class="fas fa-bolt"></i> Advanced use
 
 One of the major aspects of a promising migration project is what all project managers will ask you to vouch for: performance metrics.
 Let’s suppose you need to migrate documents from a source system into a second one, the latter having a much higher input flow tolerance. No need for empirical statistics to know that the old ECM will be the bottleneck. An architecture similar to a hybrid deployment variant (topic we presented [here](https://www.fast2.tech/blog/deployment-variants/) could easily be envisioned. But let’s complicate things a little bit here: in-between the extraction and the injection phase, the metadata have to be updated, with new date formatting and heavy mapping of document related properties. Can still a hybrid-like architecture save you now ?

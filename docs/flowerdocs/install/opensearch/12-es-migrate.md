@@ -2,9 +2,9 @@
 title: FlowerDocs 2.6 version upgrade
 date: "2022-02-14T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 6dad91feb3b6c75f6e1c7b0751a587b563dac910a2d6c7784e70a9c6b9fd6bdf
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c368798ed5dc67fecbc5d70010f8c9425be83186d1d1b61ea22e2fbdc8641efc
 ---
 
 When upgrading FlowerDocs from version 2.5 and lower to version 2.6 and its minor versions, it is necessary to migrate the data. The indexing engine used in FlowerDocs 2.6.0 is OpenSearch, a fork of Elasticsearch version 7.10.2. Elasticsearch's internal data model has been overhauled following version 6.0 by removing support for types in indexes. A migration with rewriting is therefore necessary to carry out this version upgrade.

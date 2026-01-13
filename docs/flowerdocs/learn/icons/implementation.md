@@ -2,9 +2,9 @@
 title: Implementation
 date: "2020-02-01T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: 2d46cf62226b4d93fcc92420830339fd6ff99befa5271a22c0ea51fe6296fd1d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 7e05864c682e1286041257f8323ed2135efc036f79f316412249b0698af35183
 ---
 
 # Goal

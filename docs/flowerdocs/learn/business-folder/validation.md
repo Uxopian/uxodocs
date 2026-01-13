@@ -2,9 +2,9 @@
 title: Validation
 date: "2000-02-04T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 97d4430a048ca56321216a5ee4c3c95b0d1a90411ae7afad4c82903394a69820
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: a1b4d517ab99b75e49d1dbd67b954953e85eec898bca8605a5721d5b5b0d05a0
 ---
 
 To validate the correct operation of what has been set up, start by creating a customer document.

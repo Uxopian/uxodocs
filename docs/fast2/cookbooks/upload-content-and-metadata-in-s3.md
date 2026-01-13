@@ -7,9 +7,9 @@ tags:
     - serialization
     - AWS S3
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: e1f5fe9a1fbc8e2a2156fa76df9899261500f016d810bba0fa555c02e6796a80
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: fcf4d1a0fca4519562bc7441dee4e89ea16c03231d1eca270850fd6645818ac2
 ---
 
 ![Cover upload](../assets/img/cookbooks/cover.png)

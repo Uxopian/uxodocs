@@ -1,9 +1,9 @@
 ---
 title: Color palette
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 25c740fadd9d5d4998e6fa47e90681f21e14fdeb1052905183bdb2f2c7b43d33
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: c632ce4183a4feb0972b85ad2bdf4a8d2a465388085db894c83474b33a526bde
 ---
 
 ### Blue

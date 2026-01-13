@@ -2,9 +2,9 @@
 title: Implementation
 date: "2020-02-01T11:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 9d52a93a6afbfe5d6a5627f3423867e5e2ef3f2592540e9cd99bf4bfe0d9365d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4a39b8b17cd3c18162ebd0cbfe8febe791594d6ef391a0acbe9ad1b5b86bcd9d
 ---
 
 # Visualize metadata for all job attachments

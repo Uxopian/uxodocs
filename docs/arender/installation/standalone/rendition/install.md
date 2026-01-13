@@ -1,9 +1,9 @@
 ---
 title: Installation
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: ed2d6e2ca3137f3cdc477e9e238ea12a792fa0ee5a26e1a0eeda0c48e7077ae0
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 80c9b8137a03d84d65e622a4f33a297a80ff91be6b8822dcf8a4d89b3d92648b
 ---
 
 If upgrading from version 4.8 to version 2023.0, please refer to the detailed upgrade documentation

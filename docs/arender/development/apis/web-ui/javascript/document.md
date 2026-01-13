@@ -1,9 +1,9 @@
 ---
 title: Opening a document
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: 65f478f84461bf5d1cc64e20ad468e42ef7d5da500c52d866abce31c77b9e934
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 5fd080578272f1923cb599a09c66ae16ddff3e7d780a294764c51bc362e00333
 ---
 
 ## Opening documents

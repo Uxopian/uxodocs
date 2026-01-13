@@ -1,9 +1,9 @@
 ---
 title: Presentation server (Web UI)
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 386f9599da42a11c8cf1edf28ae99d59a786dc7b93538ccce84190fac31c8b68
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 22328952764a52ba6d30588781fe0f20fdbbe401384d897b9afa8982e5b514e8
 ---
 
 ## Introduction

@@ -2,9 +2,9 @@
 title: Full example
 date: "2020-07-07T12:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: a772373fa6f1f0c6bd3a0d3543458615a5a156f94facdf971387926d32b63d10
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 98326824b94e7d69e8d85d5871420a234e590abe7791d6d460b6e6c4886dad29
 ---
 
 Reminder: Access the editor via the **Administration > Configuration > XML** menu:

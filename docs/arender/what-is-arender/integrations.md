@@ -1,9 +1,9 @@
 ---
 title: ECM connectors
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 5d76339112262af8efa7803f186d51f2eafdb9e313125949042cc9d35cda568d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 7c31218573a2e5c75c75971a812270b43163bae9a1e84608c4268f318f63478e
 ---
 
 ## Existing connectors

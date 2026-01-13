@@ -3,9 +3,9 @@ title: Handling a task
 description: "Create, retrieve, modify, delete, respond to and assign your tasks"
 date: "2001-04-29T13:30:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 334f92cad69ba844b9e81e94551843b03a3c0cc5690b186c1e38fc55ca36e1f4
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 9c3acfba2598743c2a26a590442f327505f05fa8db0f43c06cbecf760ce464d8
 ---
 
 import Tabs from '@theme/Tabs';

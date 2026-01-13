@@ -3,9 +3,9 @@ title: Scope
 description: Isolate your customers/businesses.
 date: "2001-02-02"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 3b262489f3c2853146014b48afc147dd3be83dcea0d64ba9cab773b38ebd4826
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: e32a0e347c4b6eb4c4d0b7631f75fe15494942e3f10ef59f4c1c38ec1edf7eb0
 ---
 
 :::info

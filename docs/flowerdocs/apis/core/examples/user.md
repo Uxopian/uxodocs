@@ -3,9 +3,9 @@ title: User management
 description: "Create, modify, search for users"
 date: "2018-05-02T12:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: d85ef294e8b32c38e96ccc2453db4bde089ae09db41694e1a10f4ca9e12a5225
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f0de7f5deca1ab1ca6d5556f64b7a815246fe28019a522c1ddc41e8bd70359db
 ---
 
 import Tabs from '@theme/Tabs';

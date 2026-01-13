@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 7a4dbe0c73d5deb9a663e196c666836fbd481911a60b992101280a1c977149dd
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 7cd59aa460be64e76037db84dd8b6a6f2a07e4b14764b3e02d04801238ddfdad
 ---
 
 # Internal database
@@ -21,7 +21,7 @@ In addition, we can easily rollback or resume operations in case of server crash
 
 There is the logic behind real-time backups in ES.
 
-## :octicons-list-unordered-24: Indexes
+## <i class="fas fa-list"></i> Indexes
 
 Each database index referenced by Fast2 will be registered with a `f2_` prefix. An index is always written in lower case even if the campaign name in Fast2 contains characters in upper cases.
 
@@ -39,7 +39,7 @@ During the step of broker intantiation at Fast2 startup, some indices are automa
 
 For each new campaign of Fast2, an index will be created: if you decided to run a new campaign named `EcmInjection`, the new index will be `f2_ecminjection_try1`.
 
-## :material-database-cog: Configuration
+## <i class="fas fa-cog"></i> Configuration
 
 ### With or without
 

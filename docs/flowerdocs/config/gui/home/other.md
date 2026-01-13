@@ -2,9 +2,9 @@
 title: Other
 date: "2018-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: a7f49bbd609965041e67fdce0972a5db02dea8699e8e2fc3b496539feba370fb
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 697e8b5f2ddb7e66ea640144c9f908ce73673bd524dd0fb99e29dbd31d56c508
 ---
 
 # Link to a search form

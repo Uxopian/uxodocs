@@ -1,9 +1,9 @@
 ---
 title: Document comparison
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: f584370c8cc748d2bb4ef10144213a7c68b15e8bcad4b242556cbf3a72304353
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f92ee9ddf0a4fdfcfdc1da63ed2a1306c7cb0094213e26ae4f19058726fb529e
 ---
 
 ## Compare two documents

@@ -1,9 +1,9 @@
 ---
 title: Monitoring performance
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: fc74e6456c936d81aa155e043dfae544c62d4a10775218154508986cc793d36c
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 21c2298d3d2e7c579bc10b4ce3be15091a426e6053e6968c2bdd7c73912c4ec7
 ---
 
 Monitoring ARender performance is done by logging method execution and complementary fields in logs files.

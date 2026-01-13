@@ -3,9 +3,9 @@ weight: 10
 draft: false
 title: Installation
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: ad22b23586a7d6ba5793afe0bad9a6a2ca1d0df8e1ca37a0287e4247ba1c29c9
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: f5523af68bf2e3de2105aae4ad0ab653f9e599d8c1a2c04871b5e99b210529c5
 ---
 
 ## Requirements
@@ -33,9 +33,9 @@ While setting up the production server for Fast2, make sure to scale the Fast2 m
 
 The Fast2 distribution you need depends on your target environment. It exists three way to deploy a Fast2 :
 
-&nbsp;&nbsp;&nbsp;&nbsp;:material-folder-zip-outline: On premise: regular package, as an all-in-one zip file<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;:fontawesome-brands-aws: AWS: Standard AMIs<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;:material-docker: K8S: Docker Images
+&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-file-zipper"></i> On premise: regular package, as an all-in-one zip file<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-aws"></i> AWS: Standard AMIs<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-docker"></i> K8S: Docker Images
 
 Each distribution ships the following
 
@@ -47,18 +47,18 @@ Each distribution ships the following
 
 | Item                                                      | Purpose                                             |
 | --------------------------------------------------------- | --------------------------------------------------- |
-| :material-folder: config                                  | Configuration files, broker endpoint, Java home     |
-| :material-folder: logs                                    | Logging files for both broker and worker(s)         |
-| :material-folder: maps                                    | XML files of all maps accessible from the UI        |
-| :material-folder: opensearch-X.Y.Z or elasticsearch-X.Y.Z | Either Elasticsearch or OpenSearch                  |
-| :material-folder: service                                 | All files required to start Fast2 as a service      |
-| :material-folder: worker-libs/\*                          | All libraries and dependencies for tasks executions |
-| :fontawesome-brands-java: fast2-broker-package-X.Y.Z.jar  | Broker unit                                         |
-| :fontawesome-brands-java: fast2-worker-package-X.Y.Z.jar  | Worker main unit                                    |
-| :material-microsoft-windows: startup-broker.bat           | Binary file for Windows                             |
-| :fontawesome-brands-linux: startup-broker.sh              | Binary file for Linux                               |
-| :material-microsoft-windows: startup-worker.bat           | Binary file for Windows                             |
-| :fontawesome-brands-linux: startup-worker.sh              | Binary file for Linux                               |
+| <i class="fas fa-folder"></i> config                                  | Configuration files, broker endpoint, Java home     |
+| <i class="fas fa-folder"></i> logs                                    | Logging files for both broker and worker(s)         |
+| <i class="fas fa-folder"></i> maps                                    | XML files of all maps accessible from the UI        |
+| <i class="fas fa-folder"></i> opensearch-X.Y.Z or elasticsearch-X.Y.Z | Either Elasticsearch or OpenSearch                  |
+| <i class="fas fa-folder"></i> service                                 | All files required to start Fast2 as a service      |
+| <i class="fas fa-folder"></i> worker-libs/\*                          | All libraries and dependencies for tasks executions |
+| <i class="fab fa-java"></i> fast2-broker-package-X.Y.Z.jar  | Broker unit                                         |
+| <i class="fab fa-java"></i> fast2-worker-package-X.Y.Z.jar  | Worker main unit                                    |
+| <i class="fab fa-windows"></i> startup-broker.bat           | Binary file for Windows                             |
+| <i class="fab fa-linux"></i> startup-broker.sh              | Binary file for Linux                               |
+| <i class="fab fa-windows"></i> startup-worker.bat           | Binary file for Windows                             |
+| <i class="fab fa-linux"></i> startup-worker.sh              | Binary file for Linux                               |
 
 ## Start-up sequence
 
@@ -85,7 +85,7 @@ All commands below are to be run under the Fast2 install path (where the Zip has
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs>
+<Tabs groupId="operating-system">
 <TabItem value="windows" label="Windows" default>
 
 Go into the Fast2 install folder, and run :
@@ -123,7 +123,7 @@ To end the Fast2 process, just hit `Ctrl+C` in the command line the startup file
 
 ### As service
 
-<Tabs>
+<Tabs groupId="operating-system">
 <TabItem value="windows" label="Windows" default>
 
 Go into the Fast2 installation folder, and open the Windows Command Prompt.
@@ -148,7 +148,7 @@ Its major benefit is that it has been the default init system for the majority o
 
     <br />
 
-    ##### :material-numeric-1-circle: Create a user for Fast2
+    ##### <i class="fas fa-circle-1"></i> Create a user for Fast2
 
     Since the embedded database cannot be started in sudo mode, you must use an existing user that meets your requirements or create a new one on the Linux machine. This will allow the broker to successfully initiate the database startup
 
@@ -168,7 +168,7 @@ Its major benefit is that it has been the default init system for the majority o
     </table>
     <br/>
 
-    ##### :material-numeric-2-circle: Execution path
+    ##### <i class="fas fa-circle-2"></i> Execution path
 
     Edit the `ExecStart` field from the file `service/linux/fast2-broker.service`: it must point out to the Fast2 installation path.
 
@@ -212,7 +212,7 @@ Its major benefit is that it has been the default init system for the majority o
 
     <br />
 
-    ##### :material-numeric-3-circle: Symbolic link
+    ##### <i class="fas fa-circle-3"></i> Symbolic link
 
     Now link it to the `/etc/systemd/system` directory through a symbolic link.
 
@@ -258,7 +258,7 @@ Its major benefit is that it has been the default init system for the majority o
 
     <br />
 
-    ##### :material-numeric-4-circle: Script uses
+    ##### <i class="fas fa-circle-4"></i> Script uses
 
     Test your script by starting it and then checking the status :
 
@@ -287,7 +287,7 @@ $ service fast2 start | restart | stop | status
 
 The Broker starts an embedded worker by default.
 
-<Tabs>
+<Tabs groupId="operating-system">
 <TabItem value="windows" label="Windows" default>
 
 If you wish to start multiple workers, just hit :

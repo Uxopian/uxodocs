@@ -1,9 +1,9 @@
 ---
 title: GET text positions
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: bbf5bcc18ea89e66053cda1f0ec30d79caad6f19c1f3cff81120c907d1048caa
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 2961182a0011da17b40a3bee2df02a24f240571a8ba4a3b465ffc590c66ea80f
 ---
 
 This API allows you to retrieve the text position of a page.

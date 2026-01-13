@@ -1,9 +1,9 @@
 ---
 title: Overview
 last_update:
-    date: "2025-12-09T08:57:14.951Z"
-    author: CI/CD Bot
-content_hash: 1e4801aae3574bb82fef84ae71ad2fb03d82613bec74f8e29094530fb2d51015
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 998fe4e6d9af1b6eec6e73a172ce941269cc028a4a051e30a495087a55c7df94
 ---
 
 This section provides insight into the framework's design, covering both the high-level components and the software-level interactions.

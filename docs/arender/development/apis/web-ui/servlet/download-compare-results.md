@@ -1,9 +1,9 @@
 ---
 title: Download comparison results
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: cd8ae80208736b48acb99e60c7b5d898c4020cd1a72f9b4b92a7eae61042056e
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 507143a47e1d25c02e5a5fea43da48c25c3e2d822f1446493eb1664ce353e892
 ---
 
 A new servlet is deployed allowing to download the results of the comparison of two documents.

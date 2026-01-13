@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 73b0e72860863ff300f3655774468db76bad5856868cbc62d0810529962d9c33
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 7fb65e5a8e6c78022e7e8f5f1944fcef335265419bb54aa133ab3fdd2d96cdd7
 ---
 
 # Create a map

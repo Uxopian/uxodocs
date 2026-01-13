@@ -2,9 +2,9 @@
 title: Default page
 date: "2001-03-02T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 4dfd2b2b287538d57a51684669da813c1f091401c1f2814be200777522cf9baf
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 94af0c745321cde870ba371344477ed95e89a21e43e1e119a0f0caea03210c40
 ---
 
 The default page is the one displayed at login.

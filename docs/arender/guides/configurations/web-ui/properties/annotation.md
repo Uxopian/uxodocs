@@ -1,9 +1,9 @@
 ---
 title: Annotations
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 154896d0397094fa11a1feb33cf4ab208ccd0dbc6a1e7cd139cbabdfac423d58
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1a70f9c7d394332501ed5f2208ea15238cd2e57fd96042f6eea802b03d27e8c5
 ---
 
 ## General

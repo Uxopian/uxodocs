@@ -1,9 +1,9 @@
 ---
 title: Credentials
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: c183312eb178d9a167f94eadb7dab4e1e6d147a65ad2829e43997fb461bee1ef
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 470255f113ba86f3f53f61ea1c047b5b492486c4184f4e6de7736192d36d5d65
 ---
 
 ## AWSConnectionProvider <small> - AWS S3 user credentials </small> {#AWSConnectionProvider data-toc-label="AWSConnectionProvider"}

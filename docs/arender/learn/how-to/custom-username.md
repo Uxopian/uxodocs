@@ -1,9 +1,9 @@
 ---
 title: Custom display name
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 9f9aeb309be1565d50d1114d2a6228fdae887813547be9715d6bbd388617f415
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b6ac80a6819425ff29fbd236acdd533d3ea45807f17c4987babb72c02e327afb
 ---
 
 ARender allows to customize display names.

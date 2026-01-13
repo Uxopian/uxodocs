@@ -2,9 +2,9 @@
 title: Configuration
 date: "2003-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 04cd30c50fa24a91f3bedcaefb7e12e0fa91bed4eb21c985380fd04ff8b48326
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 27ab9643d190e642bc39cdb8ce00e10ee595e97ae4639e8f0916f734aefff473
 ---
 
 # Configuration modification

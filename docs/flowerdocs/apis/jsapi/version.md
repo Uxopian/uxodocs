@@ -3,9 +3,9 @@ title: Versions
 description: Document versioning strategies
 date: "2012-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 3c22944172421aaeed1d88a701be490e2e9798221e4fb8eeb270cdd3b7967aa4
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 23f020e8d232d7389741ee6181a002e71ee66fb0788df8478166ce2b482e7552
 ---
 
 A naming strategy defines the labels that users can enter when creating a document version. Different strategies are available:

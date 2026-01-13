@@ -1,9 +1,9 @@
 ---
 title: Lasso
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: 5e670f76bf63c3f4433436856fd97f0b4671ea244f97d8865126ddc20320bb80
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d95bc2c72263ebbc998a3abd56be59ea61b560d4119b25d45ad8eaaf6e7697e0
 ---
 
 ## Description

@@ -1,9 +1,9 @@
 ---
 title: Features Alfresco Share
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 531e690965d6777afb9121ad7596fe67f3fea1325fc5fe913d6ca723714e658a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 419c941ee8fec6492ec7fadc7bb25d624fbbcb925220c989b189a87538eda5d9
 ---
 
 ## ARender for specific groups only

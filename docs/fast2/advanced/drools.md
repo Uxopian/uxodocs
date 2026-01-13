@@ -4,9 +4,9 @@ tags:
     - Java
     - Excel
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 5b428f73ba351e7164c2300c3a203284eaf07f053b8dc0151f773181bc74ea63
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 00dcc734f408ab0671fc5ef0191c2f9acb81b55b264ed7240278434e9d66fffd
 ---
 
 # Drools: the Java rules engine
@@ -15,9 +15,9 @@ Based on Excel document, “drools” is a rule engine used to execute code scri
 
 A sample of Drools spreadsheet can be downloaded to help you getting started.
 
-[:material-file-download: Download drools template](../documents/Drools-template.xlsx)
+[<i class="fas fa-download"></i> Download drools template](../documents/Drools-template.xlsx)
 
-## :octicons-light-bulb-16: Spreadsheet structure
+## <i class="fas fa-lightbulb"></i> Spreadsheet structure
 
 The following picture represents a drool sheet as you could find one in an Excel document:
 
@@ -57,7 +57,7 @@ It’s composed with :
 
 <br /><br />
 
-## :octicons-light-bulb-16: How to read
+## <i class="fas fa-lightbulb"></i> How to read
 
 Quite simple! A rule is a row read from left to right, as regular code.
 
@@ -94,7 +94,7 @@ There are two different ways to use parameters:
 
 <br /><br />
 
-## :octicons-pencil-16: Write a condition
+## <i class="fas fa-pencil"></i> Write a condition
 
 Conditions, just as in a regular coding snippet, must be performed as a boolean. Actions are executed only if condition is _TRUE_. It's highly recommended to use `eval(<condition>)` or `!eval(<condition>)` for conditions.
 
@@ -161,7 +161,7 @@ You can stop the rule execution at a specific time when an action has been perfo
 
 The next action(s) will not be performed as the rule execution is stopped (useful in case of error management).
 
-## :material-check-all: Good practices
+## <i class="fas fa-check-double"></i> Good practices
 
 We advise you to create a folder at the root of Fast2 and name it Rules. However, Fast2 will be able to fetch your drools files anywhere as long as the specified path is accessible to the Fast2 server.
 

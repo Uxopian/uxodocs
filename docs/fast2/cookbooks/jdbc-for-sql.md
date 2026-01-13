@@ -1,8 +1,8 @@
 ---
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 5ffe6b700d9f2fa4477d60cb9b80b9e713b38fd63404ca9debe242f96070a5f6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 5c54ec5c1e9ec1cb5049e8d9d8163ea3a1069800e3cef472135950f553906aae
 ---
 
 # JDBC : How to link Fast2 and SQL DB

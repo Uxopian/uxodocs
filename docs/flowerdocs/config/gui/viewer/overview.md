@@ -3,9 +3,9 @@ title: ARender at a glance
 description: View documents in your browser.
 date: "2001-03-01T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: c708e47b04b1b2ef8e34044788c33d6a6bcbf7da57931a7ee670eaf409e8e062
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: dbc26b719998c5ad1cde0393a443363394e4266fd9d5602c6d871516fd74418c
 ---
 
 Users view their documents directly in their browser, using [ARender](https://arender.io).

@@ -1,9 +1,9 @@
 ---
 title: ECM general architecture
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 6bd4e09ac6690461c2e8fd83ede60ed4934ed8286866d3948dd13adfb64891fa
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 71c177e3ccdcc86128cfa80e49943e871b12592eb5a2a7c5e8b1e48475fc533c
 ---
 
 ![image](/img/arender/diagrams/ARender-Architecture-With-Connector.png)

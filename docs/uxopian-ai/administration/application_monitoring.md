@@ -1,9 +1,9 @@
 ---
 title: Application Performance Monitoring APM
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: fc33824e73c742382a82fca45f67da1694b41d099f58b8b1e6291263df78889d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d518021eeb4ba16a4ce0da0c7d50d9532c56f930ba4235506b56ec4548042836
 ---
 
 # Application Performance Monitoring (APM)

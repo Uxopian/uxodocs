@@ -2,9 +2,9 @@
 title: Graphical user interface customization
 date: "2022-04-19T12:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: b25419d0d5b1ac641499eacaca53397f2abdbf6d51915845242505cd0ab190fe
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 66bb8a3851992fe64d2cf25cc037557645059e071516773897218a7af6da2d4f
 ---
 
 # Goal

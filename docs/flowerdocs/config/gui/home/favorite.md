@@ -2,9 +2,9 @@
 title: Favorites
 date: "2000-04-02T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: b484ea0d14384245232f0cb6114b6241bb87ed37ed613be251690e53e12f4492
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: e35fd808ce0a167238a705f769cb2800f1351704900c877f74d2729f2a36dcd7
 ---
 
 This type of widget displays the user's favorites based on a configured search.

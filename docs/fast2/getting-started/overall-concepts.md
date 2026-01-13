@@ -1,13 +1,13 @@
 ---
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: c3c1867bcf808e110397ab017ef6c2f8e39545932e099b3cdce0daadc399ac12
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 5be99378406ebe55869ff8b3cd00d23553656ddf0bc68ba420f4973002a9d464
 ---
 
 # What you need to know before committing to Fast2
 
-## :octicons-arrow-switch-24: Basic jargon
+## <i class="fas fa-arrow-right-arrow-left"></i> Basic jargon
 
 **Source**
 
@@ -55,7 +55,7 @@ content_hash: c3c1867bcf808e110397ab017ef6c2f8e39545932e099b3cdce0daadc399ac12
 ![Fast2 architecture](../assets/img/architecture_dark.png#only-dark)
 ![Fast2 architecture](../assets/img/architecture_light.png#only-light)
 
-## :fontawesome-solid-basket-shopping: Fast2 objects
+## <i class="fas fa-shopping-basket"></i> Fast2 objects
 
 ### Folder
 

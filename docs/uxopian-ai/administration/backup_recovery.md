@@ -1,9 +1,9 @@
 ---
 title: Backup and Recovery
 last_update:
-    date: "2025-12-09T08:47:49.723Z"
-    author: CI/CD Bot
-content_hash: f0d9ddb2ebf39a3f920ed192d52e0736a9dc1dc7a3b161d16e2a92b5bf536c65
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d71a0eaa641b60fb3af7b77b669140404de4527fe1ee88da075ef701354c5d3f
 ---
 
 # 🛡️ Backup and Recovery

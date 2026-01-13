@@ -1,9 +1,9 @@
 ---
 title: Alfresco
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: d01b1c902a960c2458431a4356787542e215986472470eade53c2184f7b25164
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 7bb946f83f30cb4b91176fcf0fe9b50f7ad281820cab0e5d8137771247f079d5
 ---
 
 ## ARender UI for Alfresco

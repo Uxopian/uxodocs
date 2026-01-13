@@ -2,9 +2,9 @@
 title: Installation
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 265f6d25ba31a20cc18cccb4ee37663681927c4a55fee346a8f34953a7e59dbc
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: e1a66daeaf692b5efdc8c45ab680c1ddc174d01aa0b5ac1f272ecd94fe5d3f7d
 ---
 
 Two types of packaging are supplied:

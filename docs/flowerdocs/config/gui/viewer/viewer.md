@@ -4,9 +4,9 @@ description: Configure the ARender viewer.
 slug: arender-config
 date: "2005-06-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:44:23.025Z"
-    author: CI/CD Bot
-content_hash: 464f5d6fcc43e689c2d73dfbaa1e56bfa7395f9e5488a414f6bd295c67a424b2
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 4a1bd926b3c49c04db480dfb0c4818f0a04cfcab1efb23e89783a381782e24ce
 ---
 
 # Profile override

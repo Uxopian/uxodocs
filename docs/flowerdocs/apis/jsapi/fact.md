@@ -3,9 +3,9 @@ title: History
 description: Managing a component's history
 date: "2012-03-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: fe441c65eaa5ef4d329f225ac2f01e4a56a824cc1119619d737ad3a144a6bb2d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 70d9f83c6b94f43730ed67b6fba253d6551cde32043c8b1d950077e83197efb5
 ---
 
 :::info

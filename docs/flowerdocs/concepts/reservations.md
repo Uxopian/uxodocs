@@ -2,9 +2,9 @@
 title: Reservations
 date: "2008-02-02"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: a374fcc5dc244f6d2f304543100708ccd3006daafc50dda0d6cd66a06b3ffa6f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 37d1f4dac8f4b3fcd135c3d3381354f94dd81af374f24eaae14a98c2e46e219b
 ---
 
 :::info

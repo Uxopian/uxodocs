@@ -3,9 +3,9 @@ title: Documents & their files
 description: Manipulating documents in JavaScript
 date: "2004-02-01"
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: 6069e333bbea1c38c649c70483c980af7be19251ab68909a001ca386d810c7b9
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: bb0df61f78a970d27f3e327e4e806f785d1aa7b74e31c0817e3d890d16350b52
 ---
 
 import Tabs from '@theme/Tabs';

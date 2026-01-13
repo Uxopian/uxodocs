@@ -2,9 +2,9 @@
 title: Graphs
 date: "2000-06-28T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 84abe83a9441c5ff2e70449d885f6b629c171497baabd9cddd31248eec79607f
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 1221b76f74d4ac095cc6c254b8efebd9d6c0e37eb193301414625b6dc724fb0f
 ---
 
 On the home page, graphs defined by searches can be displayed. The chart type is automatically determined from the number of aggregations:

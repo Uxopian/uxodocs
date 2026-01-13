@@ -1,9 +1,9 @@
 ---
 title: Requirements
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 1a95ce179857512bbf8eaf9060eae1224d0e293d51dfd9da458070799ec3919a
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d77349fbbd54c479e9226a3bd31bc7af02fe288564ff5abdb072ec965e1c47c2
 ---
 
 ## Operating system

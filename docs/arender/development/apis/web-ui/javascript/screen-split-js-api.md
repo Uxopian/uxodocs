@@ -1,9 +1,9 @@
 ---
 title: Screen split
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 24a068fd169527f6942b72e4a550a2e5fc1d51830d825e01ac01eb45dfa961e0
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: e943dfbc6baa052a338e96cbefe227ec3f49200fdb90b91648d64d0cde4196e2
 ---
 
 ## Screen split

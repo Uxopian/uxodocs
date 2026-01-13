@@ -1,9 +1,9 @@
 ---
 title: Load a document
 last_update:
-    date: "2025-12-02T14:38:43.134Z"
-    author: CI/CD Bot
-content_hash: 9db0a5da6d219a451749b2564dfd8129eee4ea8510f801c8af15a96ee70db8a8
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: fc811370e89e0e3e914ee27775588eaa341e0ea891672e74ec237091f3710d3c
 ---
 
 The JavaScript API allows easy interaction with ARender using various commands <i class="ti-hand-point-right" />[ listed here ](/docs/arender/development/apis/web-ui/javascript/js-api) <i class="ti-hand-point-left" ></i>.

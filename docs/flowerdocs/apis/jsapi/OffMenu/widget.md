@@ -2,9 +2,9 @@
 title: WidgetOffMenu
 date: "2001-03-01"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 0b183c99585251f9128bd2a817282f54a0b1a9b07d27d5ab8010a3514a6d08f6
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: d0569a674469e35464e42972bf1a0bae2dfe24c1bcc3eea6b4d8b25267571759
 ---
 
 Widget OffMenus allow you to view and interact with this widget to the menu. The [attachment metadata viewer plugin] (/documentation/apis/plugins/attachment.md) is based on this type of menu.

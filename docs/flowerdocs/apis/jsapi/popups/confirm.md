@@ -3,9 +3,9 @@ title: Confirmation
 description: Pop up allowing to confirm a user choice
 date: "2004-03-27T13:25:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 38b57bdacc3c9c53f830a0f8b21e3e3a5f5387e38df23af1cf63c5957149636d
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: b26c41ac0fd17a368fbccf47d5715a3b9328e4efb1edd4d84a7a678c1f0a1710
 ---
 
 import Tabs from '@theme/Tabs';

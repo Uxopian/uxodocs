@@ -1,9 +1,9 @@
 ---
 title: GET Document Layout
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 9318a3a0a630eaeebefca1036b62b6b4d9448f13921f7d6b2daa8ffab46f60cc
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 53cdbc627628da896e5a354257699c89a1a878412ecafd5aceb1f22cab6d2c92
 ---
 
 This API allows you to retrieve the layout information of a document.

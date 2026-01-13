@@ -2,9 +2,9 @@
 title: Return to FlowerDocs 2.5 theme
 date: "2022-04-19T13:20:01+02:00"
 last_update:
-    date: "2025-12-02T14:26:41.610Z"
-    author: CI/CD Bot
-content_hash: ed810aced5e67bd7170538ad827e401f983fae2c338c4a821a1a1c49c15c57da
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 7597bb1d0d6070b24f01cc31e71d2f5ac2856c25c43a23fe81483f3480e21ab5
 ---
 
 # Visual change

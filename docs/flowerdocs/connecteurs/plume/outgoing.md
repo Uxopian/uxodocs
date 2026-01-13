@@ -2,9 +2,9 @@
 title: Outgoing email
 date: "2003-03-29T13:20:01+02:00"
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: 5bc056b2a82f0601800c419e7963ab9029842e017baa5169e6c209d49e2a6b20
+  date: '2026-01-13T09:15:17.464Z'
+  author: CI/CD Bot
+content_hash: 3df414187866da7ad1dcd2807477cca3a5f5d79519ace75a81a4d298216505b3
 ---
 
 # Indexing outgoing mail
