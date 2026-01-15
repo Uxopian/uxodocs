@@ -9,7 +9,6 @@ import { PapersaurusPluginOptions, TocInfo } from "./types";
 import { Props, LoadedPlugin } from "@docusaurus/types";
 import { LoadedContent, LoadedVersion, DocMetadata } from "@docusaurus/plugin-content-docs";
 import puppeteer = require("puppeteer");
-import toc = require("html-toc");
 const pdfMerge = require("easy-pdf-merge");
 const pdfParse = require("pdf-parse");
 const join = require("path").join;
@@ -22,6 +21,68 @@ const cheerio = require("cheerio");
 let slugger = new GithubSlugger();
 
 const pluginLogPrefix = "[papersaurus] ";
+
+/**
+ * Generate table of contents from HTML content using cheerio
+ * Replacement for html-toc module
+ */
+function generateToc(html: string, options: {
+    anchorTemplate: (id: string) => string;
+    selectors: string;
+    parentLink: boolean;
+    header: string;
+    minLength: number;
+    addId: boolean;
+}): string {
+    const $ = cheerio.load(html);
+    const headings = $(options.selectors);
+    
+    if (headings.length < options.minLength) {
+        return html;
+    }
+    
+    let tocHtml = '<nav class="nav sidenav">';
+    if (options.header) {
+        tocHtml += options.header;
+    }
+    tocHtml += '<ol class="nav">';
+    
+    headings.each((index: number, element: any) => {
+        const $el = $(element);
+        const text = $el.text();
+        const tagName = element.tagName.toLowerCase();
+        const level = parseInt(tagName.substring(1));
+        
+        // Generate or use existing ID
+        let id = $el.attr('id');
+        if (!id && options.addId) {
+            id = slugger.slug(text);
+            $el.attr('id', id);
+        }
+        
+        if (id) {
+            // Add anchor before heading if anchorTemplate is provided
+            if (options.anchorTemplate) {
+                const anchor = options.anchorTemplate(`#${id}`);
+                $el.before(anchor);
+            }
+            
+            // Add to TOC
+            const className = `nav-item nav-level-${level}`;
+            tocHtml += `<li class="${className}"><a href="#${id}">${text}</a></li>`;
+        }
+    });
+    
+    tocHtml += '</ol></nav>';
+    
+    // Insert TOC at the beginning
+    const tocDiv = $('#toc');
+    if (tocDiv.length > 0) {
+        tocDiv.replaceWith(tocHtml);
+    }
+    
+    return $.html();
+}
 
 export async function generatePdfFiles(
     outDir: string,
@@ -549,8 +610,8 @@ async function createPdfFromArticles(
 
     fullHtml = $.html();
 
-    // Add table of contents
-    fullHtml = toc('<div id="toc"></div>' + fullHtml, {
+    // Add table of contents using custom generateToc function (replacement for html-toc)
+    fullHtml = generateToc('<div id="toc"></div>' + fullHtml, {
         anchorTemplate: function (id: string) {
             return `<a class="toc-target" href="${id}" id="${id}"></a>`;
         },
@@ -561,13 +622,16 @@ async function createPdfFromArticles(
         addId: false, //=default
     });
 
-    let htmlToc = fullHtml.substring(14, fullHtml.indexOf("</div>"));
+    // Extract TOC HTML from the generated content
+    const tocMatch = fullHtml.match(/<nav class="nav sidenav">([\s\S]*?)<\/nav>/);
+    let htmlToc = tocMatch ? tocMatch[0] : "";
 
     htmlToc = htmlToc.replace(/class="nav sidenav"/g, 'class="toc-headings"');
     htmlToc = htmlToc.replace(/class="nav"/g, 'class="toc-headings"');
     htmlToc = htmlToc.replace(/[\r\n]+/g, "");
 
-    const htmlArticles = fullHtml.substring(fullHtml.indexOf("</div>") + 6);
+    // Extract content after TOC (remove the nav element from fullHtml)
+    const htmlArticles = fullHtml.replace(/<nav class="nav sidenav">[\s\S]*?<\/nav>/, "");
     const tocLinks = htmlToc.match(/<a href="#[^<>]+">[^<>]+<\/a>/g);
     let tocLinksInfos = tocLinks?.map((link) => {
         const entry: TocInfo = {

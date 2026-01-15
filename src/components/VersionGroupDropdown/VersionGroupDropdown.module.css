@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  padding: 8px 0;
 }
 
 .versionGroup {
@@ -12,40 +13,22 @@
   display: flex;
   align-items: center;
   padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
   border-radius: 4px;
   user-select: none;
-}
-
-.groupHeader:hover {
-  background-color: var(--ifm-dropdown-hover-background-color);
-}
-
-.groupHeaderActive {
-  background-color: var(--ifm-dropdown-hover-background-color);
-}
-
-.groupIcon {
-  margin-left: auto;
-  transition: transform 0.2s ease;
-}
-
-.groupIconExpanded {
-  transform: rotate(90deg);
+  color: var(--ifm-font-color-base);
+  font-weight: 500;
 }
 
 .submenu {
   display: flex;
   flex-direction: column;
-  padding-left: 16px;
-  margin-top: 2px;
+  padding-left: 12px;
   gap: 2px;
 }
 
 .submenuItem {
   display: block;
-  padding: 6px 12px;
+  padding: 8px 12px;
   border-radius: 4px;
   text-decoration: none;
   color: var(--ifm-font-color-base);
@@ -55,17 +38,18 @@
 .submenuItem:hover {
   background-color: var(--ifm-dropdown-hover-background-color);
   text-decoration: none;
+  color: var(--ifm-font-color-base);
 }
 
 .submenuItemActive {
   background-color: var(--ifm-color-primary);
-  color: white;
+  color: white !important;
   font-weight: 600;
 }
 
 .submenuItemActive:hover {
   background-color: var(--ifm-color-primary-dark);
-  color: white;
+  color: white !important;
 }
 
 .regularItem {
@@ -80,15 +64,16 @@
 .regularItem:hover {
   background-color: var(--ifm-dropdown-hover-background-color);
   text-decoration: none;
+  color: var(--ifm-font-color-base);
 }
 
 .regularItemActive {
   background-color: var(--ifm-color-primary);
-  color: white;
+  color: white !important;
   font-weight: 600;
 }
 
 .regularItemActive:hover {
   background-color: var(--ifm-color-primary-dark);
-  color: white;
+  color: white !important;
 }

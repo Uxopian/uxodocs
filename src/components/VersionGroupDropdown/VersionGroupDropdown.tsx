@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './VersionGroupDropdown.module.css';
 
 interface VersionItem {
@@ -17,8 +17,6 @@ interface VersionGroupDropdownProps {
 }
 
 const VersionGroupDropdown: React.FC<VersionGroupDropdownProps> = ({ versions }) => {
-  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
-
   const { groups, others } = React.useMemo(() => {
     const groupsMap: Record<string, VersionItem[]> = {};
     const othersList: VersionItem[] = [];
@@ -47,62 +45,26 @@ const VersionGroupDropdown: React.FC<VersionGroupDropdownProps> = ({ versions })
     return { groups: sortedGroups, others: othersList };
   }, [versions]);
 
-  const toggleGroup = (year: string) => {
-    setExpandedGroups((prev) => {
-      const next = new Set(prev);
-      if (next.has(year)) {
-        next.delete(year);
-      } else {
-        next.add(year);
-      }
-      return next;
-    });
-  };
-
   return (
     <div className={styles.versionDropdown}>
-      {groups.map((group) => {
-        const isExpanded = expandedGroups.has(group.year);
-        const hasActiveVersion = group.versions.some((v) => v.isActive);
-
-        return (
-          <div key={group.year} className={styles.versionGroup}>
-            <div
-              className={`${styles.groupHeader} ${hasActiveVersion ? styles.groupHeaderActive : ''}`}
-              onClick={() => toggleGroup(group.year)}
-            >
-              <span>v{group.year}.x</span>
-              <svg
-                width="10"
-                height="10"
-                viewBox="0 0 10 10"
-                fill="currentColor"
-                className={`${styles.groupIcon} ${isExpanded ? styles.groupIconExpanded : ''}`}
-              >
-                <path
-                  d="M3.5 1.75l3.5 3.5-3.5 3.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-              </svg>
-            </div>
-            {isExpanded && (
-              <div className={styles.submenu}>
-                {group.versions.map((version, index) => (
-                  <a
-                    key={index}
-                    href={version.href}
-                    className={`${styles.submenuItem} ${version.isActive ? styles.submenuItemActive : ''}`}
-                  >
-                    {version.label}
-                  </a>
-                ))}
-              </div>
-            )}
+      {groups.map((group) => (
+        <div key={group.year} className={styles.versionGroup}>
+          <div className={styles.groupHeader}>
+            <span>v{group.year}.x</span>
           </div>
-        );
-      })}
+          <div className={styles.submenu}>
+            {group.versions.map((version, index) => (
+              <a
+                key={index}
+                href={version.href}
+                className={`${styles.submenuItem} ${version.isActive ? styles.submenuItemActive : ''}`}
+              >
+                {version.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
       {others.map((version, index) => (
         <a
           key={index}

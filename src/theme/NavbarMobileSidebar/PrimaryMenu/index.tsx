@@ -1,6 +1,5 @@
-import React from "react";
+import React, { JSX } from "react";
 import { useNavbarMobileSidebar } from "@docusaurus/theme-common/internal";
-import { translate } from "@docusaurus/Translate";
 
 export default function NavbarMobileSidebarPrimaryMenu(): JSX.Element {
     const mobileSidebar = useNavbarMobileSidebar();

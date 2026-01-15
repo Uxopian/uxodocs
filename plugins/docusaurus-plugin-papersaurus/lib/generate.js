@@ -9,27 +9,27 @@ var __createBinding =
     (this && this.__createBinding) ||
     (Object.create
         ? function (o, m, k, k2) {
-              if (k2 === undefined) k2 = k;
-              Object.defineProperty(o, k2, {
-                  enumerable: true,
-                  get: function () {
-                      return m[k];
-                  },
-              });
-          }
+            if (k2 === undefined) k2 = k;
+            Object.defineProperty(o, k2, {
+                enumerable: true,
+                get: function () {
+                    return m[k];
+                },
+            });
+        }
         : function (o, m, k, k2) {
-              if (k2 === undefined) k2 = k;
-              o[k2] = m[k];
-          });
+            if (k2 === undefined) k2 = k;
+            o[k2] = m[k];
+        });
 var __setModuleDefault =
     (this && this.__setModuleDefault) ||
     (Object.create
         ? function (o, v) {
-              Object.defineProperty(o, "default", { enumerable: true, value: v });
-          }
+            Object.defineProperty(o, "default", { enumerable: true, value: v });
+        }
         : function (o, v) {
-              o["default"] = v;
-          });
+            o["default"] = v;
+        });
 var __importStar =
     (this && this.__importStar) ||
     function (mod) {
@@ -45,7 +45,6 @@ var __importStar =
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generatePdfFiles = void 0;
 const puppeteer = require("puppeteer");
-const toc = require("html-toc");
 const pdfMerge = require("easy-pdf-merge");
 const pdfParse = require("pdf-parse");
 const join = require("path").join;
@@ -55,6 +54,51 @@ const GithubSlugger = require("github-slugger");
 const cheerio = require("cheerio");
 let slugger = new GithubSlugger();
 const pluginLogPrefix = "[papersaurus] ";
+/**
+ * Generate table of contents from HTML content using cheerio
+ * Replacement for html-toc module
+ */
+function generateToc(html, options) {
+    const $ = cheerio.load(html);
+    const headings = $(options.selectors);
+    if (headings.length < options.minLength) {
+        return html;
+    }
+    let tocHtml = '<nav class="nav sidenav">';
+    if (options.header) {
+        tocHtml += options.header;
+    }
+    tocHtml += '<ol class="nav">';
+    headings.each((index, element) => {
+        const $el = $(element);
+        const text = $el.text();
+        const tagName = element.tagName.toLowerCase();
+        const level = parseInt(tagName.substring(1));
+        // Generate or use existing ID
+        let id = $el.attr('id');
+        if (!id && options.addId) {
+            id = slugger.slug(text);
+            $el.attr('id', id);
+        }
+        if (id) {
+            // Add anchor before heading if anchorTemplate is provided
+            if (options.anchorTemplate) {
+                const anchor = options.anchorTemplate(`#${id}`);
+                $el.before(anchor);
+            }
+            // Add to TOC
+            const className = `nav-item nav-level-${level}`;
+            tocHtml += `<li class="${className}"><a href="#${id}">${text}</a></li>`;
+        }
+    });
+    tocHtml += '</ol></nav>';
+    // Insert TOC at the beginning
+    const tocDiv = $('#toc');
+    if (tocDiv.length > 0) {
+        tocDiv.replaceWith(tocHtml);
+    }
+    return $.html();
+}
 async function generatePdfFiles(outDir, pluginOptions, { siteConfig, plugins }) {
     console.log(`${pluginLogPrefix}Execute generatePdfFiles...`);
     if (!plugins) {
@@ -87,7 +131,7 @@ async function generatePdfFiles(outDir, pluginOptions, { siteConfig, plugins }) 
     ) {
         throw new Error(
             `${pluginLogPrefix}Could not find a valid docusaurus build directory at "${docusaurusBuildDir}". ` +
-                'Did you run "docusaurus build" before?'
+            'Did you run "docusaurus build" before?'
         );
     }
     // Check pdf build directory and clean if requested
@@ -473,7 +517,7 @@ function readHtmlForItem(item, parentTitles, rootDocUrl, htmlDir, version, siteC
     stylePath = getStylesheetPathFromHTML(htmlFileContent, origin);
     try {
         scriptPath = getScriptPathFromHTML(htmlFileContent, origin);
-    } catch (_a) {}
+    } catch (_a) { }
     const articleMatch = htmlFileContent.match(/<article>.*<\/article>/s);
     if (articleMatch) {
         html = articleMatch[0];
@@ -576,8 +620,8 @@ async function createPdfFromArticles(
     $(".theme-doc-toc-mobile").remove();
     $(".buttonGroup__atx").remove();
     fullHtml = $.html();
-    // Add table of contents
-    fullHtml = toc('<div id="toc"></div>' + fullHtml, {
+    // Add table of contents using custom generateToc function (replacement for html-toc)
+    fullHtml = generateToc('<div id="toc"></div>' + fullHtml, {
         anchorTemplate: function (id) {
             return `<a class="toc-target" href="${id}" id="${id}"></a>`;
         },
@@ -587,23 +631,26 @@ async function createPdfFromArticles(
         minLength: 0,
         addId: false, //=default
     });
-    let htmlToc = fullHtml.substring(14, fullHtml.indexOf("</div>"));
+    // Extract TOC HTML from the generated content
+    const tocMatch = fullHtml.match(/<nav class="nav sidenav">([\s\S]*?)<\/nav>/);
+    let htmlToc = tocMatch ? tocMatch[0] : "";
     htmlToc = htmlToc.replace(/class="nav sidenav"/g, 'class="toc-headings"');
     htmlToc = htmlToc.replace(/class="nav"/g, 'class="toc-headings"');
     htmlToc = htmlToc.replace(/[\r\n]+/g, "");
-    const htmlArticles = fullHtml.substring(fullHtml.indexOf("</div>") + 6);
+    // Extract content after TOC (remove the nav element from fullHtml)
+    const htmlArticles = fullHtml.replace(/<nav class="nav sidenav">[\s\S]*?<\/nav>/, "");
     const tocLinks = htmlToc.match(/<a href="#[^<>]+">[^<>]+<\/a>/g);
     let tocLinksInfos =
         tocLinks === null || tocLinks === void 0
             ? void 0
             : tocLinks.map((link) => {
-                  const entry = {
-                      link: link,
-                      href: link.substring(link.indexOf('href="') + 6, link.indexOf('">')),
-                      text: link.substring(link.indexOf('">') + 2, link.indexOf("</a>")),
-                  };
-                  return entry;
-              });
+                const entry = {
+                    link: link,
+                    href: link.substring(link.indexOf('href="') + 6, link.indexOf('">')),
+                    text: link.substring(link.indexOf('">') + 2, link.indexOf("</a>")),
+                };
+                return entry;
+            });
     tocLinksInfos = tocLinksInfos || [];
     for (const tocLinkInfo of tocLinksInfos) {
         htmlToc = htmlToc.replace(
