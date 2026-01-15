@@ -175,15 +175,15 @@ export default function DocsVersionDropdownNavbarItem({
   }
 
   return (
-    <div className="navbar__item dropdown" ref={dropdownRef}>
+    <div 
+      className="navbar__item dropdown dropdown--hoverable" 
+      ref={dropdownRef}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
       <button
         className="navbar__link"
         onClick={() => setIsOpen(!isOpen)}
-        onBlur={(e) => {
-          if (!dropdownRef.current?.contains(e.relatedTarget as Node)) {
-            setIsOpen(false);
-          }
-        }}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
