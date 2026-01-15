@@ -174,6 +174,8 @@ export default function DocsVersionDropdownNavbarItem({
 		);
 	}
 
+	const isProductActive = activeDocContext.activeVersion !== undefined;
+
 	return (
 		<div
 			className="navbar__item dropdown dropdown--hoverable"
@@ -182,7 +184,7 @@ export default function DocsVersionDropdownNavbarItem({
 			onMouseLeave={() => setIsOpen(false)}
 		>
 			<button
-				className={`navbar__link ${props.className || ''}`}
+				className={`navbar__link ${props.className || ''} ${isProductActive ? 'navbar__link--active' : ''}`}
 				onClick={() => setIsOpen(!isOpen)}
 				aria-expanded={isOpen}
 				aria-haspopup="true"
@@ -198,7 +200,7 @@ export default function DocsVersionDropdownNavbarItem({
 						versions={items.map((item) => ({
 							label: item.label,
 							href: item.to as string,
-							isActive: item.isActive ? item.isActive : false,
+							isActive: item.isActive ? item.isActive() : false,
 						}))}
 					/>
 				</div>
