@@ -69,14 +69,17 @@ async function extractTitleFromMarkdown(filePath) {
     return null;
 }
 
-async function extractLabelFromCategoryJson(filePath) {
+async function extractCategoryInfo(filePath) {
     try {
         const content = await fs.readFile(filePath, 'utf8');
         const json = JSON.parse(content);
-        return json.label || null;
+        return {
+            label: json.label || null,
+            position: json.position !== undefined ? json.position : 999
+        };
     } catch (err) {
     }
-    return null;
+    return { label: null, position: 999 };
 }
 
 async function build() {
@@ -87,7 +90,7 @@ async function build() {
         const productName = p.name;
         const productPath = path.join(docsDir, productName);
         const entries = await fs.readdir(productPath, { withFileTypes: true });
-        const categories = entries.filter((e) => e.isDirectory()).map((e) => e.name).sort();
+        const categories = entries.filter((e) => e.isDirectory()).map((e) => e.name);
         const outItems = [];
         for (const c of categories) {
             const catPath = path.join(productPath, c);
@@ -103,12 +106,14 @@ async function build() {
             const underscoreIndex = path.join(catPath, '_index.md');
 
             let label = titleCase(c);
+            let position = 999;
 
             if (await exists(categoryJson)) {
-                const extractedLabel = await extractLabelFromCategoryJson(categoryJson);
-                if (extractedLabel) {
-                    label = extractedLabel;
+                const categoryInfo = await extractCategoryInfo(categoryJson);
+                if (categoryInfo.label) {
+                    label = categoryInfo.label;
                 }
+                position = categoryInfo.position;
             } else {
                 for (const indexFile of [indexMd, indexMdx, underscoreIndex]) {
                     if (await exists(indexFile)) {
@@ -134,9 +139,12 @@ async function build() {
                 }
             }
 
-            outItems.push({ label, href });
+            outItems.push({ label, href, position });
         }
-        result[productName] = outItems;
+        // Sort by position
+        outItems.sort((a, b) => a.position - b.position);
+        // Remove position from final output
+        result[productName] = outItems.map(({ label, href }) => ({ label, href }));
     }
 
     await fs.mkdir(path.dirname(outFile), { recursive: true });
