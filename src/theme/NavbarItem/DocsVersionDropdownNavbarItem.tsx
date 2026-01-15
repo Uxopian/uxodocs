@@ -182,7 +182,7 @@ export default function DocsVersionDropdownNavbarItem({
       onMouseLeave={() => setIsOpen(false)}
     >
       <button
-        className="navbar__link"
+        className={`navbar__link ${props.className || ''}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-haspopup="true"
