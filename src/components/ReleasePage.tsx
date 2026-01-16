@@ -132,11 +132,11 @@ export default function ReleasePage({
         const filtered =
             selectedFilter === "all" || filterBy === "none"
                 ? [...allNotes].sort(
-                      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-                  )
+                    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+                )
                 : filterBy === "year"
-                  ? allNotes.filter((note) => note.version.startsWith(`v${selectedFilter}`))
-                  : allNotes.filter((note) => note.majorVersion === selectedFilter);
+                    ? allNotes.filter((note) => note.version.startsWith(`v${selectedFilter}`))
+                    : allNotes.filter((note) => note.majorVersion === selectedFilter);
 
         const latestByMajor: Record<string, string> = {};
         allNotes.forEach((note) => {
@@ -180,8 +180,8 @@ export default function ReleasePage({
                                                 onClick={() => setSelectedFilter(k)}
                                             >
                                                 {filterBy === "year"
-                                                    ? `${k} (${count})`
-                                                    : `${k}.x version`}
+                                                    ? `v${k} (${count})`
+                                                    : `v${k}.x version`}
                                             </button>
                                         );
                                     })}

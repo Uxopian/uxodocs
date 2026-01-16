@@ -124,16 +124,22 @@
 }
 
 .filterButtonActive {
-    background: linear-gradient(135deg, #4a8fef, #3a7ee5);
-    color: white !important;
+    background: linear-gradient(135deg, rgba(74, 143, 239, 0.85), rgba(58, 126, 229, 0.85)) !important;
+    color: #000 !important;
     border-color: transparent;
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(74, 143, 239, 0.3);
+    box-shadow: 0 6px 16px rgba(74, 143, 239, 0.6), 0 2px 8px rgba(74, 143, 239, 0.4) !important;
+}
+
+[data-theme="dark"] .filterButtonActive {
+    color: white !important;
+    background: linear-gradient(135deg, rgba(74, 143, 239, 0.85), rgba(58, 126, 229, 0.85)) !important;
 }
 
 .filterButtonActive:hover {
-    background: linear-gradient(135deg, #3a7ee5, #2a6dd8);
+    background: linear-gradient(135deg, rgba(58, 126, 229, 0.9), rgba(42, 109, 216, 0.9)) !important;
     transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(74, 143, 239, 0.7), 0 4px 10px rgba(74, 143, 239, 0.5) !important;
 }
 
 .releaseGrid {
@@ -155,7 +161,7 @@
     }
 }
 
-.releaseGrid > div {
+.releaseGrid>div {
     animation: slideInCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
@@ -216,12 +222,10 @@
     left: 0;
     right: 0;
     height: 40%;
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.35) 0%,
-        rgba(255, 255, 255, 0.08) 30%,
-        transparent 100%
-    );
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.35) 0%,
+            rgba(255, 255, 255, 0.08) 30%,
+            transparent 100%);
     border-radius: 16px 16px 0 0;
     pointer-events: none;
     opacity: 0.6;
@@ -242,13 +246,11 @@
 }
 
 [data-theme="dark"] .releaseCard::after {
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.05) 20%,
-        rgba(255, 255, 255, 0.02) 40%,
-        transparent 100%
-    );
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 20%,
+            rgba(255, 255, 255, 0.02) 40%,
+            transparent 100%);
     opacity: 1;
 }
 

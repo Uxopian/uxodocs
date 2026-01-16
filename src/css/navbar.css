@@ -194,9 +194,18 @@ body:has(main > section[class*="productsSection"]) .navbar {
     border-bottom: none !important;
 }
 
-body:not([data-theme="dark"]) .navbar,
-body:not([data-theme="dark"]) .navbar a {
-    color: #fff !important;
+/* Only make navbar white on homepage and products section */
+body[class*="indexPage"] .navbar,
+body:has(main > section[class*="productsSection"]) .navbar,
+body[class*="indexPage"] .navbar a,
+body:has(main > section[class*="productsSection"]) .navbar a {
+    color: #ffffff !important;
+}
+
+/* Regular pages in light mode should have black navbar text */
+body:not([data-theme="dark"]):not([class*="indexPage"]) .navbar a:not(.navbar__link.verdd),
+body:not([data-theme="dark"]):not(:has(main > section[class*="productsSection"])) .navbar a:not(.navbar__link.verdd) {
+    color: #000000 !important;
 }
 
 [data-theme="dark"] .navbar,
@@ -217,16 +226,17 @@ body:not([data-theme="dark"]) .navbar a {
     fill: #ffffff !important;
 }
 
-body[class*="indexPage"] .navbar,
-body:has(main > section[class*="productsSection"]) .navbar,
-body[class*="indexPage"] .navbar a,
-body:has(main > section[class*="productsSection"]) .navbar a,
 body[class*="indexPage"]:not([data-theme="dark"]) .navbar__link,
 body:has(main > section[class*="productsSection"]):not([data-theme="dark"]) .navbar__link {
     color: #ffffff !important;
 }
 
 body:not([data-theme="dark"]) .navbar__link.verdd::before {
+    color: #000000 !important;
+}
+
+/* Ensure Release Notes is also black in light mode */
+body:not([data-theme="dark"]) .navbar__link.verdd--releases::before {
     color: #000000 !important;
 }
 
@@ -259,13 +269,13 @@ body .navbar .secondary-nav .secondary-nav__item {
     box-shadow: none !important;
     padding: 8px 5px 8px 12px;
     background-color: var(--ifm-color-primary) !important;
-    color: var(--ifm-color-primary) !important;
+    color: #ffffff !important;
     font-weight: 600;
 }
 
 .navbar__link.verdd[aria-current="page"]::before,
 .navbar__link.verdd.navbar__link--active::before {
-    color: var(--ifm-color-primary) !important;
+    color: #ffffff !important;
     font-weight: 600;
 }
 
@@ -275,22 +285,12 @@ html[data-theme="dark"] .navbar__link.verdd.navbar__link--active::before {
     font-weight: 600;
 }
 
-body[class*="indexPage"] .navbar__link.verdd[aria-current="page"]::before,
-body[class*="indexPage"] .navbar__link.verdd.navbar__link--active::before,
-body:has(main > section[class*="productsSection"]) .navbar__link.verdd[aria-current="page"]::before,
-body:has(main > section[class*="productsSection"])
-    .navbar__link.verdd.navbar__link--active::before {
-    color: #ffffff !important;
-    font-weight: 600;
-}
-
 html[data-theme="dark"] .navbar__link--active,
 html[data-theme="dark"] .navbar__item a[aria-current="page"],
 body[class*="indexPage"] .navbar__link--active,
 body[class*="indexPage"] .navbar__item a[aria-current="page"],
 body:has(main > section[class*="productsSection"]) .navbar__link--active,
 body:has(main > section[class*="productsSection"]) .navbar__item a[aria-current="page"] {
-    color: #000000 !important;
     font-weight: 600;
 }
 
@@ -303,8 +303,6 @@ body:has(main > section[class*="productsSection"]) .navbar__item a[aria-current=
 .navbar .navbar__inner .navbar__items a.navbar__link.verdd.navbar__link--active::before,
 a.navbar__link.verdd[aria-current="page"]::before,
 a.navbar__link.verdd.navbar__link--active::before {
-    color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
     margin-left: 3px;
 }
 
@@ -333,10 +331,10 @@ body:not([data-theme="dark"]) .navbar__item.dropdown .dropdown__menu a {
     background: rgba(255, 255, 255, 0.06);
 }
 
-.dropdown__menu > li > .dropdown__link[href$="/releases/fast2"],
-.dropdown__menu > li > .dropdown__link[href$="/releases/arender"],
-.dropdown__menu > li > .dropdown__link[href$="/releases/flowerdocs"],
-.dropdown__menu > li > .dropdown__link[href$="/releases/uxopian-ai"] {
+.dropdown__menu>li>.dropdown__link[href$="/releases/fast2"],
+.dropdown__menu>li>.dropdown__link[href$="/releases/arender"],
+.dropdown__menu>li>.dropdown__link[href$="/releases/flowerdocs"],
+.dropdown__menu>li>.dropdown__link[href$="/releases/uxopian-ai"] {
     font-weight: 700;
     padding: 0.5rem 1rem;
 }

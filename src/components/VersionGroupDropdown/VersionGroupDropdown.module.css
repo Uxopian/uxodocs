@@ -97,3 +97,19 @@
   background-color: var(--ifm-color-primary-dark);
   color: white !important;
 }
+
+/* Light mode: ensure "All" text is black */
+:global(html:not([data-theme="dark"])) .regularItem {
+  color: #000000 !important;
+}
+
+/* Light mode: ensure active product name is white with background */
+:global(html:not([data-theme="dark"])) .regularItemActive {
+  background-color: var(--ifm-color-primary) !important;
+  color: white !important;
+}
+
+:global(html:not([data-theme="dark"])) .regularItemActive:hover {
+  background-color: var(--ifm-color-primary-dark) !important;
+  color: white !important;
+}
