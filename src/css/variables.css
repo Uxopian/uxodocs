@@ -32,41 +32,31 @@
     --uxo-blue-3: #2b3fab;
     --uxo-blue-4: #2d2f8f;
 
-    --gradient-purple: linear-gradient(
-        135deg,
-        var(--uxo-purple-1),
-        var(--uxo-purple-2),
-        var(--uxo-purple-3),
-        var(--uxo-purple-4)
-    );
-    --gradient-sunset: linear-gradient(
-        135deg,
-        var(--uxo-sunset-1),
-        var(--uxo-sunset-2),
-        var(--uxo-sunset-3),
-        var(--uxo-sunset-4)
-    );
-    --gradient-green: linear-gradient(
-        135deg,
-        var(--uxo-green-1),
-        var(--uxo-green-2),
-        var(--uxo-green-3),
-        var(--uxo-green-4)
-    );
-    --gradient-turquoise: linear-gradient(
-        135deg,
-        var(--uxo-turquoise-1),
-        var(--uxo-turquoise-2),
-        var(--uxo-turquoise-3),
-        var(--uxo-turquoise-4)
-    );
-    --gradient-blue: linear-gradient(
-        135deg,
-        var(--uxo-blue-1),
-        var(--uxo-blue-2),
-        var(--uxo-blue-3),
-        var(--uxo-blue-4)
-    );
+    --gradient-purple: linear-gradient(135deg,
+            var(--uxo-purple-1),
+            var(--uxo-purple-2),
+            var(--uxo-purple-3),
+            var(--uxo-purple-4));
+    --gradient-sunset: linear-gradient(135deg,
+            var(--uxo-sunset-1),
+            var(--uxo-sunset-2),
+            var(--uxo-sunset-3),
+            var(--uxo-sunset-4));
+    --gradient-green: linear-gradient(135deg,
+            var(--uxo-green-1),
+            var(--uxo-green-2),
+            var(--uxo-green-3),
+            var(--uxo-green-4));
+    --gradient-turquoise: linear-gradient(135deg,
+            var(--uxo-turquoise-1),
+            var(--uxo-turquoise-2),
+            var(--uxo-turquoise-3),
+            var(--uxo-turquoise-4));
+    --gradient-blue: linear-gradient(135deg,
+            var(--uxo-blue-1),
+            var(--uxo-blue-2),
+            var(--uxo-blue-3),
+            var(--uxo-blue-4));
 
     --ifm-color-primary: var(--uxo-purple-500);
     --ifm-color-primary-dark: var(--uxo-purple-300);
@@ -77,7 +67,7 @@
     --ifm-color-primary-lightest: color-mix(in oklab, var(--uxo-purple-700), white 22%);
 
     --ifm-code-font-size: 95%;
-    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.06);
+    --docusaurus-highlighted-code-line-bg: rgba(255, 235, 59, 0.25);
 
     /* Variables pour la recherche locale */
     --search-local-modal-width: 520px;
@@ -97,7 +87,7 @@
     --ifm-color-primary-light: color-mix(in oklab, var(--uxo-purple-700), white 14%);
     --ifm-color-primary-lighter: color-mix(in oklab, var(--uxo-purple-700), white 24%);
     --ifm-color-primary-lightest: color-mix(in oklab, var(--uxo-purple-700), white 34%);
-    --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.06);
+    --docusaurus-highlighted-code-line-bg: rgba(255, 235, 59, 0.15);
 
     /* Variables pour la recherche locale en dark mode */
     --search-local-hit-background: rgba(255, 255, 255, 0.06);

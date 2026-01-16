@@ -227,6 +227,12 @@ const config: Config = {
                     position: "right",
                     className: "verdd verdd--releases nav-release-notes",
                 },
+                {
+                    label: "Github",
+                    href: "https://github.com/uxopian/uxodocs",
+                    position: "right",
+                    className: "nav-github",
+                },
                 { type: "search", position: "right" },
             ],
         },

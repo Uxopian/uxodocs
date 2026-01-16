@@ -107,9 +107,22 @@
 :global(html:not([data-theme="dark"])) .regularItemActive {
   background-color: var(--ifm-color-primary) !important;
   color: white !important;
+  font-weight: 600;
 }
 
 :global(html:not([data-theme="dark"])) .regularItemActive:hover {
+  background-color: var(--ifm-color-primary-dark) !important;
+  color: white !important;
+}
+
+/* Light mode: ensure active submenu item is white with background */
+:global(html:not([data-theme="dark"])) .submenuItemActive {
+  background-color: var(--ifm-color-primary) !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+:global(html:not([data-theme="dark"])) .submenuItemActive:hover {
   background-color: var(--ifm-color-primary-dark) !important;
   color: white !important;
 }
