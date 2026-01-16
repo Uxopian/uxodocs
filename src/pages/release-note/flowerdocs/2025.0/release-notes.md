@@ -3,6 +3,8 @@ title: FlowerDocs 2025.0 Release notes
 description: FlowerDocs 2025.0 Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 <br />
 
 **Legend**
@@ -204,3 +206,5 @@ FlowerDocs supports the RFC 2183 standard for the Content-Disposition header, al
 - Search \- When using a date criterion in a full date format, hours, minutes and seconds are no longer taken into account.
 - Serial processing \- When serial processing is enabled in a menu, when the user opens a component (document, task or folder) then a pop-up (adding a document, for example) then cancels, the user returns to the menu instead of to the open component.
 - Result table \- Unstable state of icons displayed for tasks if the class id is not present in the columns and the columns are modified.
+
+<FlowerDocsDownloads version="2025.0" />

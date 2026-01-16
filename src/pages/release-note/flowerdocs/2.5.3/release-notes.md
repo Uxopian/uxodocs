@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 :::info
 ✅ Les évolutions, 🔴 corrections d'anomalies et 📋 tâches incluses dans cette version sont listées dans cette section.
 :::
@@ -143,3 +145,5 @@ Introduits il y a plusieurs années, les [gestionnaires d'opérations](/document
 📋 Lors de la modification d'un document utilisé comme configuration, le cache approprié est automatiquement vidé.
 
 📋 Lors de la suppression physique d'un document, il est détaché de ses dossiers parents en tant qu'administrateur.
+
+<FlowerDocsDownloads version="2.5.3" />

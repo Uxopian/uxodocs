@@ -3,6 +3,8 @@ title: FlowerDocs 2025.2.0 Release notes
 description: FlowerDocs 2025.2.0 Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 <br />
 
 **Legend**
@@ -129,3 +131,5 @@ No specific changes have been made to this version. It benefits from the followi
 
 - Improved reporting
 - Improved user and group management
+
+<FlowerDocsDownloads version="2025.2.0" />

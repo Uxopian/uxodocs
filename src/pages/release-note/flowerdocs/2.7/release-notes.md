@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Changements importants de la 2.7
 
 ## Correctifs de sécurité
@@ -126,3 +128,5 @@ Poursuite de la mise en conformité avec le RGAA :
 ## 2.7.8 _27/11/2024_
 
 📋 FlowerDocs Core now includes ARender version 4.8.20
+
+<FlowerDocsDownloads version="2.7" />

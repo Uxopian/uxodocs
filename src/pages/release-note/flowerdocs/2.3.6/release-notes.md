@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Formulaires
 
 - Le sélecteur de classe et les tags sous forme de liste de choix et utilisateur ont une nouvelle présentation (, , ).
@@ -38,3 +40,5 @@ description: Release notes
 
 - Protection contre les attaques XSS ().
 - Protection contre les attaques de type _path tranversal attack_ ().
+
+<FlowerDocsDownloads version="2.3.6" />

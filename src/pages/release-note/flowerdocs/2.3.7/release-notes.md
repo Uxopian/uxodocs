@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Page d'accueil
 
 - Rafraichissement des widgets lors de l'ouverture de la page d'accueil ().
@@ -36,3 +38,5 @@ description: Release notes
 # Sécurité
 
 - Les mots de passe avec des caractères spéciaux permettent de se connecter à FlowerDocs ().
+
+<FlowerDocsDownloads version="2.3.7" />

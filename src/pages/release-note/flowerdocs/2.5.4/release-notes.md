@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 :::info
 ✅ Les évolutions, 🔴 corrections d'anomalies et 📋 tâches incluses dans cette version sont listées dans cette section.
 :::
@@ -220,3 +222,5 @@ Cette version est la dernière version mineure de la 2.5. Elle contient principa
 ## 2.5.4.12 _23/06/23_
 
 🔴 Correction du client Alfresco pour empêcher des réinitialisations de la connexion
+
+<FlowerDocsDownloads version="2.5.4" />

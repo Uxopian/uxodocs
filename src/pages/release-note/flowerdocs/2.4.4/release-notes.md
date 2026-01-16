@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Evolutions
 
 ## Administration
@@ -74,3 +76,5 @@ description: Release notes
 ## 2.4.4.5 _25/05/2020_
 
 - **Montée de version :** ARender : 4.0.8-11145 à 4.0.8-11145-2 ().
+
+<FlowerDocsDownloads version="2.4.4" />

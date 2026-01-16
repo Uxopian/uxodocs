@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Evolutions
 
 ## Accueil
@@ -118,3 +120,5 @@ description: Release notes
 - Alfresco :
     - impossible de rechercher un utilisateur déclaré sans nom de famille ()
     - mise en place d'un cache des utilisateurs et groupes ()
+
+<FlowerDocsDownloads version="2.4.5" />

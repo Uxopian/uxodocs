@@ -1,270 +1,325 @@
-# 🚀 Gestion des Versions par Branches/Tags Git
+# 🚀 UxoDocs Versioning & Architecture
 
-Cette solution permet de gérer les versions de documentation sans stocker toutes les versions en local dans le repository principal.
+## 📋 Overview
 
-## 📁 Structure du Système
+Multi-product documentation platform built with Docusaurus 3.9.2, managing documentation for **Fast2**, **ARender**, **FlowerDocs**, and **Uxopian AI** with independent versioning and automated builds.
+
+---
+
+## 🏗️ Project Structure
 
 ```
 uxodocs/
-├── docs/                          # Documentation courante (en développement)
-├── versioned_docs/               # 🚫 GÉNÉRÉ - Ne pas commiter
-├── scripts/
-│   ├── build-versions.js         # Script principal de gestion des versions
-│   └── generate-docusaurus-config.js  # Génération config dynamique
-├── versions.json                 # Configuration des versions disponibles
-└── .docusaurus-generated-config.json  # 🚫 GÉNÉRÉ - Config Docusaurus
+├── docs/                          # Current documentation (development)
+│   ├── fast2/
+│   ├── arender/
+│   ├── flowerdocs/
+│   └── uxopian-ai/
+│
+├── versioned_docs/                # 🚫 GENERATED (CI/CD only)
+├── versioned_sidebars/            # 🚫 GENERATED (CI/CD only)
+│
+├── src/
+│   ├── components/                # React components
+│   ├── pages/                     # Static pages & release notes
+│   ├── generated/                 # 🚫 Auto-generated navigation & releases
+│   └── css/                       # Global styles
+│
+├── scripts/                       # Build automation
+│   ├── updateLastModified.mjs     # Content tracking & timestamps
+│   ├── generateTopCategories.mjs  # Navigation generation
+│   ├── generateSecondaryNav.mjs   # Secondary nav
+│   └── generate*Releases.mjs      # Release notes indexing
+│
+├── .github/workflows/
+│   └── sync-deploy.yml            # CI/CD pipeline
+│
+└── docusaurus.config.ts           # Main configuration
 ```
 
-## 🎯 Principe de Fonctionnement
+---
 
-1. **Une seule version en local** : Le dossier `docs/` contient uniquement la version en cours de développement
-2. **Versions en branches/tags** : Chaque version historique vit dans une branche ou un tag Git
-3. **Build automatique** : Au moment du build, le script checkout automatiquement toutes les versions et les copie dans `versioned_docs/`
-4. **Configuration dynamique** : Docusaurus s'adapte automatiquement aux versions disponibles
+## 🔄 Versioning System
 
-## 🔧 Configuration des Versions
+### Branch-Based Strategy
 
-Le fichier `versions.json` définit toutes les versions disponibles :
+Each version is stored in a dedicated Git branch, keeping the main repository lightweight.
 
-```json
-{
-  "products": {
-    "flower": {
-      "name": "FlowerDocs",
-      "versions": {
-        "v2025": {
-          "ref": "flower/v2025",           // Branche ou tag Git
-          "sourcePath": "docs/flower/v2025", // Chemin source dans la branche
-          "targetPath": "flower/v2025",     // Destination dans versioned_docs/
-          "label": "v2025",
-          "isLatest": true
-        }
-      }
-    }
-  }
-}
+**Branch Naming Convention:**
+```
+test-<product>-v<version>
 ```
 
-## 📝 Workflow de Développement
+**Examples:**
+- `test-fast2-v2025.2.0`
+- `test-flowerdocs-v2`
+- `test-arender-v2023.14.0`
 
-### 1. Développement d'une Nouvelle Version
+### How It Works
+
+1. **Development**: Work on `test` branch with current versions in `docs/<product>/`
+2. **Version Branches**: Each release lives in its own branch
+3. **CI/CD**: Pipeline fetches all version branches, extracts docs, and builds complete site
+
+---
+
+## ⚙️ Build Workflow
+
+### Pre-Build Scripts (Automatic)
+
+Run before each build via `package.json` `prebuild`:
+
+1. **`updateLastModified.mjs`**
+   - Calculates SHA-256 hash of content
+   - Updates `last_update.date` only when content changes
+   - Generates `pdf-build-status.json` for incremental PDF builds
+
+2. **`generateTopCategories.mjs`** & **`generateSecondaryNav.mjs`**
+   - Scan product directories for categories
+   - Read `_category_.json` for labels and positions
+   - Generate `src/generated/topCategories.json`
+
+3. **`generate*Releases.mjs`**
+   - Index release notes from `src/pages/release-note/<product>/`
+   - Extract frontmatter metadata
+   - Generate JSON for release page filtering
+
+### Build Commands
 
 ```bash
-# Travailler sur la version courante dans docs/
-git checkout main
-# Modifier docs/flower/, docs/fast2/, docs/arender/, etc.
-```
+# Development (current version only)
+npm start
 
-### 2. Release d'une Version
-
-Quand une version est prête à être figée :
-
-```bash
-# Option A: Créer une branche
-git checkout -b flower/v2025
-git add docs/flower/v2025/
-git commit -m "Release FlowerDocs v2025"
-git push origin flower/v2025
-
-# Option B: Créer un tag
-git tag -a flower/v2025 -m "FlowerDocs v2025"
-git push origin flower/v2025
-```
-
-### 3. Mettre à Jour versions.json
-
-Ajouter la nouvelle version dans `versions.json` :
-
-```json
-{
-  "products": {
-    "flower": {
-      "versions": {
-        "v2025": {
-          "ref": "flower/v2025",
-          "sourcePath": "docs/flower/v2025",
-          "targetPath": "flower/v2025",
-          "label": "v2025",
-          "isLatest": true
-        },
-        "v2.8-lts": {
-          "ref": "flower/v2.8-lts",
-          "sourcePath": "docs/flower/v2.8-lts", 
-          "targetPath": "flower/v2.8-lts",
-          "label": "v2.8 LTS",
-          "isLatest": false
-        }
-      }
-    }
-  }
-}
-```
-
-## 🛠️ Scripts Disponibles
-
-### Build Complet
-
-```bash
-# Build toutes les versions + site Docusaurus
+# Production build (all versions via CI/CD)
 npm run build
 
-# Build seulement Docusaurus (sans versions)
-npm run build:docs-only
+# Update timestamps manually
+npm run update:lastModified
+
+# Generate release notes
+npm run generate:releases
 ```
 
-### Build par Produit
+---
+
+## 🚀 CI/CD Pipeline
+
+**File:** `.github/workflows/sync-deploy.yml`  
+**Trigger:** Push to `test` or `test-*` branches
+
+### Process
+
+1. **Setup**
+   - Checkout `test-v2` with full history
+   - Cache Git LFS objects and npm packages
+   - Install dependencies
+
+2. **Version Snapshot Generation**
+   
+   For each product:
+   ```bash
+   # Cache current version
+   rsync -a "docs/${product}/" ".cache_${product}_current/"
+   
+   # For each test-<product>-v* branch:
+   #   1. Extract docs from branch
+   #   2. Replace current docs
+   #   3. Create Docusaurus snapshot
+   npx docusaurus "docs:version:${product}" "${version}"
+   
+   # Restore current version
+   rsync -a ".cache_${product}_current/" "docs/${product}/"
+   ```
+
+3. **Build & Deploy**
+   - Build site: `npm run build`
+   - Deploy to GitHub Pages (`gh-pages` branch)
+
+**Deployment URL:** `https://uxopian.github.io/uxodocs/`
+
+---
+
+## 📝 Development Workflow
+
+### 1. Working on Current Version
 
 ```bash
-# Build seulement les versions FlowerDocs
-npm run build:versions:flower
-
-# Build seulement les versions Fast2
-npm run build:versions:fast2
-
-# Build seulement les versions ARender
-npm run build:versions:arender
+git checkout test
+# Edit docs/<product>/
+git commit -m "Update documentation"
+git push origin test
 ```
 
-### Build Sélectif
+### 2. Creating a New Version
 
 ```bash
-# Build seulement une version spécifique pour tous les produits
-npm run build:versions -- --version=v2025
+# Create version branch
+git checkout -b test-fast2-v2025.2.0
+git add docs/fast2/
+git commit -m "Release Fast2 v2025.2.0"
+git push origin test-fast2-v2025.2.0
 
-# Build un produit spécifique
-npm run build:versions -- --product=flower
-
-# Combinaison
-npm run build:versions -- --product=flower --version=v2025
+# Return to development
+git checkout test
 ```
 
-### Développement
+### 3. Updating Existing Version
 
 ```bash
-# Start en mode développement (version courante uniquement)
+git checkout test-fast2-v2025.2.0
+# Make changes
+git commit -m "Fix typo"
+git push origin test-fast2-v2025.2.0
+# CI/CD rebuilds automatically
+```
+
+### 4. Testing Versions Locally
+
+```bash
+# Create snapshot manually
+npx docusaurus docs:version:fast2 v2025.2.0
 npm start
 
-# Start avec nettoyage du cache
-npm start:clean
+# Clean up
+rm -rf versioned_docs/ versioned_sidebars/
 ```
 
-## 📋 Avantages de cette Approche
+---
 
-✅ **Repository léger** : Une seule version en local  
-✅ **Historique préservé** : Versions figées dans Git  
-✅ **Build flexible** : Choix des versions à builder  
-✅ **CI/CD compatible** : Scripts automatisables  
-✅ **Navigation cohérente** : Toutes versions accessibles sur le site  
+## 📦 Plugin Architecture
 
-## 🔄 Migration depuis l'Ancienne Structure
+### Multi-Instance Docs
 
-### Étape 1: Sauvegarder les Versions Existantes
+Each product has its own plugin instance:
 
-```bash
-# Pour chaque version existante, créer une branche
-git checkout -b flower/v2025
-git add docs/flower/v2025/
-git commit -m "Archive FlowerDocs v2025"
-git push origin flower/v2025
-
-git checkout main
-git checkout -b flower/v2.8-lts
-git add docs/flower/v2.8-lts/
-git commit -m "Archive FlowerDocs v2.8 LTS"
-git push origin flower/v2.8-lts
+```typescript
+{
+  id: 'fast2',
+  path: 'docs/fast2',
+  routeBasePath: 'docs/fast2',
+  sidebarPath: './sidebars_fast2.ts',
+  lastVersion: 'current',
+  versions: { current: { label: 'v2025.x.x' } }
+}
 ```
 
-### Étape 2: Nettoyer la Branche Principale
+### PDF Generation (Papersaurus)
 
-```bash
-git checkout main
-# Supprimer les versions archivées
-rm -rf docs/flower/v2025/
-rm -rf docs/flower/v2.8-lts/
-rm -rf docs/fast2/v2x/
-# etc.
-
-# Garder seulement les versions en développement actif
-git add .
-git commit -m "Clean: Move historical versions to branches"
+```typescript
+{
+  id: 'fast2-pdf',
+  docPluginId: 'fast2',
+  autoBuildPdfs: false,
+  ignoreDocs: ['index'],
+  author: 'Uxopian'
+}
 ```
 
-### Étape 3: Configurer versions.json
+### Search (Local)
 
-Créer la configuration correspondant aux branches créées.
-
-### Étape 4: Premier Build
-
-```bash
-npm run build:versions
-npm start
+```typescript
+{
+  indexDocs: true,
+  docsRouteBasePath: ['docs/fast2', 'docs/arender', ...],
+  highlightSearchTermsOnTargetPage: true
+}
 ```
+
+---
+
+## 📄 Content Management
+
+### Markdown Frontmatter
+
+```yaml
+---
+title: "Page Title"
+sidebar_position: 1
+last_update:
+  date: '2024-12-15T10:30:00.000Z'
+  author: CI/CD Bot
+content_hash: abc123...
+---
+```
+
+### Category Configuration
+
+`_category_.json`:
+```json
+{
+  "label": "Getting Started",
+  "position": 1,
+  "collapsed": false
+}
+```
+
+### Release Notes Format
+
+```yaml
+---
+version: "2025.2.0"
+major_version: "2025"
+date: "2024-12-15"
+description: "New features"
+latest: true
+---
+```
+
+---
 
 ## 🐛 Troubleshooting
 
-### Erreur "ref not found"
+### Version Not Appearing
 
 ```bash
-# Vérifier que la branche/tag existe
-git branch -a | grep flower/v2025
-git tag | grep flower/v2025
+# Check branch exists
+git branch -r | grep test-<product>-v
 
-# Fetch si nécessaire
-git fetch --all --tags
+# Fetch all branches
+git fetch --all
 ```
 
-### Erreur "sourcePath not found"
-
-Vérifier que le chemin `sourcePath` dans `versions.json` correspond bien à la structure dans la branche/tag.
-
-### Problème de Build
+### Build Fails
 
 ```bash
-# Nettoyer et rebuilder
+# Verify branch structure
+git checkout test-<product>-v<version>
+ls docs/<product>/
+
+# Clear cache
 npm run clear
-rm -rf versioned_docs/
-rm -f .docusaurus-generated-config.json
 npm run build
 ```
 
-## 🚀 Intégration CI/CD
+### Outdated Timestamps
 
-Exemple pour GitHub Actions :
-
-```yaml
-name: Build Documentation
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Important pour accéder à toutes les branches/tags
-          
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          
-      - name: Install dependencies
-        run: npm ci
-        
-      - name: Build with all versions
-        run: npm run build
-        
-      - name: Deploy
-        run: npm run deploy
+```bash
+npm run update:lastModified
 ```
+
+---
+
+## 🎯 Key Features
+
+✅ **Lightweight Repository** - Only current versions stored locally  
+✅ **Independent Versioning** - Each product has its own timeline  
+✅ **Automated Tracking** - SHA-256 hashing for change detection  
+✅ **Dynamic Navigation** - Auto-generated from directory structure  
+✅ **Offline Search** - No external dependencies  
+✅ **Release Management** - Centralized, filterable release notes  
+✅ **Incremental PDFs** - Only rebuild when content changes  
+
+---
 
 ## 📞 Support
 
-Pour toute question ou problème :
-1. Vérifier ce README
-2. Consulter les logs de build
-3. Vérifier la configuration dans `versions.json`
-4. Tester avec `npm run build:versions -- --product=nom --version=version`
+1. Check this documentation
+2. Review CI/CD logs in GitHub Actions
+3. Inspect `src/generated/` files
+4. Test locally with `npm start`
+
+---
+
+**Built with:** Docusaurus 3.9.2 • React 19.0.0 • TypeScript 5.6.2  
+**Maintained by:** Uxopian Software  
+**Last Updated:** 2026-01-16

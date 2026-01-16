@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Dossier
 
 - Lors de l'ajout d'un enfant à un dossier, la mise à jour des dossiers est faite après la mise à jour des enfants.
@@ -62,3 +64,5 @@ description: Release notes
 
 - Configuration du nombre de membres d'un groupe maximum et du nombre de groupes maximum d'un utilisateur remonté par Alfresco.
 - Amélioration de la construction de critère avec l'opérateur `EQUALS_TO`.
+
+<FlowerDocsDownloads version="2.3.10" />

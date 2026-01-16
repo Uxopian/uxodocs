@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Significant changes in 2.8
 
 ## Security vulnerabilities
@@ -194,3 +196,5 @@ Ex: a user who has the right to download or print the document can do so again.
 ## 2.8.4 _04/03/2025_
 
 ✅ ARender version upgrade to 4.8.21
+
+<FlowerDocsDownloads version="2.8" />

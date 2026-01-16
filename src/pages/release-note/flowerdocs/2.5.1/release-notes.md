@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Sécurité
 
 - Chiffrement des contenus stockés sur système de fichiers ()
@@ -198,3 +200,5 @@ Le connecteur ARender a évolué afin d'intégrer la dernière version, 4.3.1, d
 ## 2.5.1.2 _04/05/2021_
 
 - **Montée de version** de la visionneuse de documents ARender en **4.3.2** ()
+
+<FlowerDocsDownloads version="2.5.1" />

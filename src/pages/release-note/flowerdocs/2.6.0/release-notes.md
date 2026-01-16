@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 :::info
 ✅ Les évolutions, 🔴 corrections d'anomalies et 📋 tâches incluses dans cette version sont listées dans cette section.
 :::
@@ -293,3 +295,5 @@ Ses objectifs : permettre la consultation d'informations en parallèle et répon
 🔴 Le job de réindexation du CLM `reindex` pour passer d'Elasticsearch à OpenSearch gère la transformation du mapping des données
 
 🔴 L'action de Lasso n'est plus affichée sur les tags en lecture seule à la création d'un composant
+
+<FlowerDocsDownloads version="2.6.0" />

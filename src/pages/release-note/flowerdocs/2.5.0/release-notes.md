@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 :::info
 Découvrez les nouvelles fonctionnalités et changements introduits par cette nouvelle version majeure.
 :::
@@ -166,3 +168,5 @@ Cette nouvelle version implique une montée de version des composants suivants :
 - Support du mode Compacte pour les dossiers virtuels affichés en tant qu'onglet et sans agrégation ()
 - Après réduction de l'arborescence d'un dossier virtuel, l'icône permettant de l'ouvrir n'est pas visible ()
 - Mauvaise initialisation lors de la création d'une page publique depuis la console d'administration ()
+
+<FlowerDocsDownloads version="2.5.0" />

@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Dossier virtuel
 
 - Historisation de la requête de recherche ( et ).
@@ -57,3 +59,5 @@ description: Release notes
 - Support de la recherche plein texte ().
 - Un utilisateur est toujours remonté avec ses groupes, et non uniquement lorsqu'un administrateur ().
 - Le contenu d'un document FlowerDocs est téléchargé avec le nom du document dans Alfresco ().
+
+<FlowerDocsDownloads version="2.3.9" />

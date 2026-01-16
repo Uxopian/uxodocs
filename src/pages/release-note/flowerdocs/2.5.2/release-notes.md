@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 :::info
 ✅ Les évolutions, 🔴 corrections d'anomalies et 📋 tâches incluses dans cette version sont listées dans cette section.
 :::
@@ -204,3 +206,5 @@ Dans la continuité des précédentes versions, l'expérience liée à l'utilisa
 ## Intégration
 
 ✅ Nouveau mode de sécurité basé sur un jeton pour le [client Java](/documentation/learn/gui-plugin/implementation)
+
+<FlowerDocsDownloads version="2.5.2" />

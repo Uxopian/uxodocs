@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # Evolutions
 
 ## GUI
@@ -164,3 +166,5 @@ description: Release notes
 
 - Le endpoint ARender permettant de vérifier l'état de la rendition est accessible sans authentification ().
 - Le filtre de vérification du scope peut être désactivé ().
+
+<FlowerDocsDownloads version="2.4.3" />

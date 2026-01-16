@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 :::info
 ✅ Les évolutions, 🔴 corrections d'anomalies et 📋 tâches incluses dans cette version sont listées dans cette section.
 :::
@@ -110,3 +112,5 @@ description: Release notes
 ## 2.6.1.1 _11/07/2023_
 
 🔴 Le webservices FlowerDocs `job-rest-controller` sont de nouveau exposés
+
+<FlowerDocsDownloads version="2.6.1" />

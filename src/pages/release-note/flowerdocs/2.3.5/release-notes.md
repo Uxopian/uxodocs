@@ -3,6 +3,8 @@ title: Release notes
 description: Release notes
 ---
 
+import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
+
 # \{\{% core %\}\}
 
 - Le timeout de connexion et réception des webservices est désormais configurable. ()
@@ -37,3 +39,5 @@ description: Release notes
 
 - Création de composant ou d'action à partir d'une requête de recherche. ()
 - Abonnement à l'exécution de la recherche. ()
+
+<FlowerDocsDownloads version="2.3.5" />
