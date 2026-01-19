@@ -298,6 +298,15 @@ body:has(main > section[class*="productsSection"]) .navbar__item a[aria-current=
     font-weight: 600;
 }
 
+/* Force white text for active links in light mode */
+html:not([data-theme="dark"]) .navbar__link--active,
+html:not([data-theme="dark"]) .navbar__item a[aria-current="page"],
+html:not([data-theme="dark"]) .navbar__item .navbar__link--active,
+html:not([data-theme="dark"]) .navbar__item .navbar__link[aria-current="page"] {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
 .navbar__link--active:hover,
 .navbar__item a[aria-current="page"]:hover {
     opacity: 0.9;
