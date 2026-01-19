@@ -375,7 +375,34 @@ body[class*="indexPage"] .navbar__link.nav-github svg,
 body:has(main > section[class*="productsSection"]) .navbar__link.nav-github,
 body:has(main > section[class*="productsSection"]) .navbar__link.nav-github svg {
     color: #ffffff !important;
-    fill: currentColor !important;
+    fill: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Force white color on homepage even in light mode */
+body[class*="indexPage"]:not([data-theme="dark"]) .navbar__link.nav-github,
+body[class*="indexPage"]:not([data-theme="dark"]) .navbar__link.nav-github svg,
+body:has(main > section[class*="productsSection"]):not([data-theme="dark"]) .navbar__link.nav-github,
+body:has(main > section[class*="productsSection"]):not([data-theme="dark"]) .navbar__link.nav-github svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Force SVG paths to be white in dark mode */
+[data-theme="dark"] .navbar__link.nav-github svg path,
+[data-theme="dark"] .navbar__link.nav-github svg {
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+}
+
+/* Additional specificity for dark mode */
+html[data-theme="dark"] .navbar .navbar__link.nav-github,
+html[data-theme="dark"] .navbar .navbar__link.nav-github svg,
+html[data-theme="dark"] .navbar .navbar__link.nav-github svg path {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
 }
 
 .header-github-link {
