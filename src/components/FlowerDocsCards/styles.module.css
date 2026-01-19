@@ -264,13 +264,16 @@
 .feedList::-webkit-scrollbar {
     width: 9px;
 }
+
 .feedList::-webkit-scrollbar-track {
     background: transparent;
 }
+
 .feedList::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.06);
     border-radius: 999px;
 }
+
 .feedList::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.11);
 }
@@ -319,6 +322,7 @@
     .iframeContainer iframe::-webkit-scrollbar-thumb {
         background: rgba(0, 0, 0, 0.12);
     }
+
     .iframeContainer iframe {
         scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
     }
@@ -480,6 +484,7 @@
 }
 
 @media (max-width: 768px) {
+
     .cardsGrid,
     .guidesGrid {
         grid-template-columns: 1fr;
@@ -496,5 +501,157 @@
 
     .mainTitle {
         font-size: 2.5rem;
+    }
+}
+
+/* Connecteurs Section */
+.connectorsSection {
+    margin-top: 2rem;
+}
+
+.connectorsSectionHeader {
+    margin-bottom: 1.5rem;
+}
+
+.connectorsTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ifm-font-color-base);
+    margin: 0 0 0.25rem 0;
+}
+
+.connectorsSubtitle {
+    font-size: 0.9rem;
+    color: var(--ifm-color-emphasis-700);
+    margin: 0;
+}
+
+.connectorsViewAll {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6366f1;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.connectorsViewAll:hover {
+    color: #4f46e5;
+    text-decoration: none;
+    transform: translateX(4px);
+}
+
+[data-theme="dark"] .connectorsViewAll {
+    color: #818cf8;
+}
+
+[data-theme="dark"] .connectorsViewAll:hover {
+    color: #a5b4fc;
+}
+
+.connectorsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.25rem;
+    max-width: 1200px;
+}
+
+.connectorCard {
+    background: var(--ifm-card-background-color);
+    border: 1px solid var(--ifm-color-emphasis-300);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+[data-theme="dark"] .connectorCard {
+    background: #2a2a2a;
+    border-color: var(--ifm-color-emphasis-200);
+}
+
+.connectorCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: #ddd;
+    text-decoration: none;
+}
+
+[data-theme="dark"] .connectorCard:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.connectorIcon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ifm-color-emphasis-100);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .connectorIcon {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.connectorCard:hover .connectorIcon {
+    transform: scale(1.05);
+}
+
+.connectorIcon img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.connectorTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ifm-font-color-base);
+    margin: 0 0 0.5rem 0;
+}
+
+.connectorDescription {
+    font-size: 0.85rem;
+    color: var(--ifm-color-emphasis-700);
+    margin: 0;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .connectorsSection {
+        margin-top: 1.5rem;
+    }
+
+
+
+    .connectorsTitle {
+        font-size: 1.3rem;
+    }
+
+    .connectorsGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .connectorCard {
+        padding: 1.25rem;
+    }
+
+    .connectorIcon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .connectorIcon img {
+        width: 45px;
+        height: 45px;
     }
 }

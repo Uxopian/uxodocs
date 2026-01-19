@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "@docusaurus/Link";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
 import UXopianFeed from "./UXopianFeed";
 
@@ -136,6 +137,42 @@ function GuidesCard({ title, description, items, color }) {
     );
 }
 
+const ConnectorsList = [
+    {
+        title: "FlowerDocs Companion",
+        logo: "/img/flowerdocs/documentation/microsoft.png",
+        description:
+            "Injecting documents into FlowerDocs from the Microsoft Office suite",
+        link: "/docs/flowerdocs/connecteurs/companion/install",
+    },
+    {
+        title: "Plume",
+        logo: "/img/flowerdocs/documentation/plume.png",
+        description: "Writing emails from FlowerDocs",
+        link: "/docs/flowerdocs/connecteurs/plume/getting-started",
+    },
+    {
+        title: "Fast2",
+        logo: "/img/flowerdocs/documentation/fast2.png",
+        description: "ETL Documentary",
+        link: "/docs/flowerdocs/connecteurs/fast2/getting-started",
+    },
+];
+
+function ConnectorCard({ title, logo, description, link }) {
+    const logoUrl = useBaseUrl(logo);
+
+    return (
+        <Link to={link} className={styles.connectorCard}>
+            <div className={styles.connectorIcon}>
+                <img src={logoUrl} alt={`${title} logo`} />
+            </div>
+            <h4 className={styles.connectorTitle}>{title}</h4>
+            <p className={styles.connectorDescription}>{description}</p>
+        </Link>
+    );
+}
+
 export default function FlowerDocsCards() {
     return (
         <section className={styles.documentationSection}>
@@ -152,6 +189,20 @@ export default function FlowerDocsCards() {
                             {GuidesList.map((props, idx) => (
                                 <GuidesCard key={idx} {...props} />
                             ))}
+                        </div>
+
+                        <div className={styles.connectorsSection}>
+                            <div className={styles.connectorsSectionHeader}>
+                                <h2 className={styles.connectorsTitle}>Connectors</h2>
+                                <p className={styles.connectorsSubtitle}>
+                                    Configuring the connector used
+                                </p>
+                            </div>
+                            <div className={styles.connectorsGrid}>
+                                {ConnectorsList.map((props, idx) => (
+                                    <ConnectorCard key={idx} {...props} />
+                                ))}
+                            </div>
                         </div>
                     </div>
 

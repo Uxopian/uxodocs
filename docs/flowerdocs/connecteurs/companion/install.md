@@ -6,10 +6,12 @@ last_update:
   author: CI/CD Bot
 content_hash: 749aaa7773f321a04cde6bf776aa3df69d2b4ff45961ca5d7332c483627809c7
 ---
+import FlowerDocsCompanionDownload from '@site/src/components/FlowerDocsCompanionDownload';
 
 # Install FlowerDocs Companion
 
-- Download the [FlowerDocs Companion](https://artifactory.arondor.cloud/artifactory/arondor-release/com/flower/docs/companion/flowerdocs-companion-.msi) installer
+
+- Download the <FlowerDocsCompanionDownload /> installer
 - Run the downloaded msi file
 - Follow the different installer steps
 - Once installation is complete, check the "Launch FlowerDocs Companion" box to start the Companion on your workstation

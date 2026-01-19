@@ -102,6 +102,20 @@ function ProductCard({
     );
 }
 
+function ConnectorCard({ title, logo, description, link }) {
+    const logoUrl = useBaseUrl(logo);
+
+    return (
+        <Link to={link} className={styles.connectorCard}>
+            <div className={styles.connectorIcon}>
+                <img src={logoUrl} alt={`${title} logo`} />
+            </div>
+            <h4 className={styles.connectorTitle}>{title}</h4>
+            <p className={styles.connectorDescription}>{description}</p>
+        </Link>
+    );
+}
+
 export default function ProductCards() {
     const uxoLogo = useBaseUrl("/img/uxo_white.png");
     const sunsetBg = useBaseUrl("/img/uxopian-sunset-background3.jpg");
