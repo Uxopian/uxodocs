@@ -5,6 +5,12 @@ description: FlowerDocs 2025.1 Release notes
 
 import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
 
+This version requires the following software versions as prerequisites:
+
+- **ARender**: 2023.8.1
+- **Redis**: 6.2.12
+- **OpenSearch**: 1.3.19
+
 <br />
 
 **Legend**

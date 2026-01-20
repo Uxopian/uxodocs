@@ -5,6 +5,14 @@ description: Release notes
 
 import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
 
+This version requires the following software versions as prerequisites:
+
+- **ARender**: 4.6.18
+- **Redis**: 4.0.14
+- **Elasticsearch**: 5.2.1
+
+<br />
+
 :::info
 ✅ Les évolutions, 🔴 corrections d'anomalies et 📋 tâches incluses dans cette version sont listées dans cette section.
 :::

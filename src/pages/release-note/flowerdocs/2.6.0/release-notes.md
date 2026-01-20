@@ -5,6 +5,14 @@ description: Release notes
 
 import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
 
+This version requires the following software versions as prerequisites:
+
+- **ARender**: 4.8.7
+- **Redis**: 6.2.12
+- **OpenSearch**: 1.3.4
+
+<br />
+
 :::info
 ✅ Les évolutions, 🔴 corrections d'anomalies et 📋 tâches incluses dans cette version sont listées dans cette section.
 :::
