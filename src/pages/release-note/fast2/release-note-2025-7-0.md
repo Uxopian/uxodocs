@@ -119,8 +119,8 @@ _Details below for the other features..._
 
 | Support Tickets | Solved by | Summary                                                                  |
 | --------------- | --------- | ------------------------------------------------------------------------ |
-| TMAFAST-859     | FAST-5444 | Failing to extract dctm extractor if document has more than 500 versions |
-| TMAFAST-840     | FAST-5397 | Failed Authentication Warning in Fast2-2025                              |
-| TMAFAST-779     | FAST-5193 | Not able to send/receive “Email statistics feature” from the Worker P... |
+| [TMAFAST-859](https://arondor.atlassian.net/browse/TMAFAST-859)     | [FAST-5444](https://arondor.atlassian.net/browse/FAST-5444) | Failing to extract dctm extractor if document has more than 500 versions |
+| [TMAFAST-840](https://arondor.atlassian.net/browse/TMAFAST-840)     | [FAST-5397](https://arondor.atlassian.net/browse/FAST-5397) | Failed Authentication Warning in Fast2-2025                              |
+| [TMAFAST-779](https://arondor.atlassian.net/browse/TMAFAST-779)     | [FAST-5193](https://arondor.atlassian.net/browse/FAST-5193) | Not able to send/receive "Email statistics feature" from the Worker P... |
 
 ---

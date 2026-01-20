@@ -2,9 +2,9 @@
 title: Installation
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T10:40:25.232Z'
   author: CI/CD Bot
-content_hash: 749aaa7773f321a04cde6bf776aa3df69d2b4ff45961ca5d7332c483627809c7
+content_hash: 3dd8261cbcf2fdd50229e6a588e77ccba118854d339df040166717ea54739ed2
 ---
 import FlowerDocsCompanionDownload from '@site/src/components/FlowerDocsCompanionDownload';
 

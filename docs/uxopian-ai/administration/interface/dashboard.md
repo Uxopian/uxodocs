@@ -1,12 +1,12 @@
 ---
-title: Admin Dashboard
+title: Dashboard
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T14:02:07.044Z'
   author: CI/CD Bot
-content_hash: 8fe4b40908492e17ad32f866b0e2bccbc189d80d425eb4a553a256a1c18f4c25
+content_hash: d28d83b2a3ede14413c43ddd1da9c702c042445df19ec5f9b63ca5bc7926d64d
 ---
 
-# Admin Dashboard
+# Dashboard
 
 The **Uxopian-ai Admin Panel** acts as the central command center for your AI infrastructure. It provides a visual interface to manage resources, monitor usage statistics, and oversee user activity.
 

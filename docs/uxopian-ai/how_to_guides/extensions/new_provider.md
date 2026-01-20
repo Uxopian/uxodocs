@@ -1,9 +1,9 @@
 ---
-title: Adding a New LLM Provider Custom Connector
+title: Adding a New LLM Provider
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T14:02:07.044Z'
   author: CI/CD Bot
-content_hash: ad81f497dbe3a46643cd452b08b7c44bca984c49196999bd0e1ff4bfea27edbc
+content_hash: 6944ce165615c2a3a97088551d829a5851daec06bf163d6ad5985b5cdc5acdfb
 ---
 
 # Adding a New LLM Provider (Custom Connector)

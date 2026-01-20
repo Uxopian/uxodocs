@@ -1,9 +1,9 @@
 ---
 title: Installation Guide
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T14:02:07.044Z'
   author: CI/CD Bot
-content_hash: 2c0bdfb2f03c1a7003ac17d897e2954fc13520e6b5788ec79210d2995d1864ef
+content_hash: 71bccec33bff3485ac42617060fcd2d97d286f333c2dcc15f6f35d557fcf4407
 ---
 
 # 📦 Installation Guide
@@ -83,7 +83,7 @@ The `uxopian-ai-stack.yml` file orchestrates three services:
 The example stack uses `SPRING_PROFILES_ACTIVE=dev`, which **disables authentication**. For production deployments, remove this variable and configure proper security in the gateway.
 :::
 
-For a detailed reference of every file inside the `config/` directory, please refer to the [Configuration Files documentation](https://www.google.com/search?q=../configuration/config_files).
+For a detailed reference of every file inside the `config/` directory, please refer to the [Configuration Files documentation](/docs/uxopian-ai/configuration/config_files/).
 
 ### 🔹 Step 4: Start the Stack
 
@@ -104,7 +104,8 @@ docker-compose -f uxopian-ai-stack.yml up -d
 
 If you cannot use Docker, you can run the service directly as a Java application.
 
-:::note Prerequisites
+:::important Prerequisites
+*Java 21 Runtime Environment (JRE) installed.* OpenSearch 2.x installed and running separately.
 :::
 
 ### 🔹 Step 1: Download the Package

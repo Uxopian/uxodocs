@@ -64,4 +64,4 @@ No change has been operated on this part.
 
 | Support Tickets | Solved by | Summary                                                     |
 | --------------- | --------- | ----------------------------------------------------------- |
-| TMAFAST-745     | FAST-5026 | Annotation ID value not correctly serialized in embedded-DB |
+| [TMAFAST-745](https://arondor.atlassian.net/browse/TMAFAST-745)     | [FAST-5026](https://arondor.atlassian.net/browse/FAST-5026) | Annotation ID value not correctly serialized in embedded-DB |

@@ -1,9 +1,9 @@
 ---
-title: How-To Integrate AI Features in ARender
+title: Adding ARender features
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T14:02:07.044Z'
   author: CI/CD Bot
-content_hash: 6d0208ad666f7c2002f3b691781b43ec594377e636d27f0539e8e51e67999aea
+content_hash: e254274c5240c56c1883a7e321fc8f4e2be32e812ce7d91337c55bac68a45eab
 ---
 
 # How-To: Integrate AI Features in ARender

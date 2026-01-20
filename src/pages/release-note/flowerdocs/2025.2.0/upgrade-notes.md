@@ -11,7 +11,7 @@ description: Upgrade Notes 2025.2.0
 
 ## Added properties
 
-- Following the ARender 2023.12.0 version upgrade, there has been a change in the way the `application.properties` file is managed: some FlowerDocs properties can no longer be supplied in the connector. It is now necessary to add this file when installing the application. [ARender HMI](/documentation/install/install-process#arender-hmi)
+- Following the ARender 2023.12.0 version upgrade, there has been a change in the way the `application.properties` file is managed: some FlowerDocs properties can no longer be supplied in the connector. It is now necessary to add this file when installing the application. [ARender HMI](/flowerdocs/documentation/install/install-process#arender-hmi)
 
 ## Technical changes
 
@@ -44,9 +44,9 @@ description: Upgrade Notes 2025.2.0
     - Generation : `PUT /core/rest/token/user`
     - Generation with a validity period : `POST /core/rest/token/user`
 
-\{\{% warn %\}\}
+:::warning
 For use via the FlowerDocs Java APIs, all the above methods are only implemented for REST services. Calling these methods with SOAP services will result in an exception being thrown.
-\{\{% /warn %\}\}
+:::
 
 ## New depreciation
 

@@ -1,9 +1,9 @@
 ---
 title: Configuration
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T14:02:07.044Z'
   author: CI/CD Bot
-content_hash: 55a72322bf9769ca28f3f48437d3afbebbab4215bf343f8027762d82a0b58df3
+content_hash: 927332dabcdc3ee357adc1c11b8004683e5e3211a5af2fc15ae911a9ee615c2a
 ---
 
 # **⚙️ Configuration**
@@ -169,21 +169,51 @@ llm:
 
 ```yml
 openai:
-    api-key: ${OPENAI_API_KEY:}
-    model-name: gpt-3.5-turbo
-    temperature: 0.7
-    timeout: 60s
-    max-retries: 3
-    supported-models:
-        - modelName: gpt-4o
-          multi-modal-supported: true
-          function-call-supported: true
-        - modelName: gpt-3.5-turbo
-          multi-modal-supported: false
-          function-call-supported: true
-        - modelName: dall-e-3
-          multi-modal-supported: false
-          function-call-supported: false
+	api-key: ${OPENAI_API_KEY:}
+	model-name: gpt-5
+	temperature: 1
+	timeout: 60s
+	max-retries: 3
+	supported-models:
+	- modelName: gpt-5.1
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: gpt-5
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: gpt-5-mini
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: gpt-5-nano
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: gpt-4.1
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: gpt-4.1-mini
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: gpt-4.1-nano
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: gpt-4o
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: gpt-4o-mini
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: gpt-4-turbo
+		multi-modal-supported: true
+		function-call-supported: true
+	- modelName: o3-mini
+		multi-modal-supported: false
+		function-call-supported: true
+	- modelName: o4-mini
+		multi-modal-supported: false
+		function-call-supported: true
+	- modelName: gpt-3.5-turbo
+		multi-modal-supported: false
+		function-call-supported: true
 ```
 
 #### **☁️ Azure OpenAI**
@@ -237,15 +267,27 @@ bedrock:
 
 ```yml
 gemini:
-    api-key: ${GEMINI_API_KEY:none}
-    model-name: gemini-1.5-pro-latest
-    supported-models:
-        - modelName: gemini-1.5-pro-latest
-          multi-modal-supported: false
-          function-call-supported: true
-        - modelName: gemini-1.5-flash-latest
-          multi-modal-supported: false
-          function-call-supported: true
+	api-key: ${GEMINI_API_KEY:none}
+	model-name: gemini-2.5-flash
+	supported-models:
+    	- modelName: gemini-3-pro-preview
+    		function-call-supported: true
+    		multi-modal-supported: true
+    	- modelName: gemini-2.5-flash
+    		multi-modal-supported: false
+    		function-call-supported: true
+    	- modelName: gemini-2.5-flash-lite
+    		function-call-supported: true
+    		multi-modal-supported: true
+    	- modelName: gemini-2.5-pro
+    		multi-modal-supported: true
+    		function-call-supported: true
+    	- modelName: gemini-2.0-flash
+    		multi-modal-supported: true
+    		function-call-supported: true
+    	- modelName: gemini-2.0-flash-lite
+    		multi-modal-supported: false
+    		function-call-supported: false
 ```
 
 #### **🤗 HuggingFace**

@@ -128,9 +128,9 @@ No change has been operated on this part.
 
 | Support Tickets | Solved by | Summary                                                       |
 | --------------- | --------- | ------------------------------------------------------------- |
-| TMAFAST-785     | FAST-5345 | Memory leak : Homogeneize jackson versions and upgrade spring |
-| TMAFAST-799     | FAST-3807 | (beta) CSVWriter: Append folder data to output csv file       |
-| TMAFAST-822     | FAST-5359 | ApplyDroolsTask doesn't work                                  |
+| [TMAFAST-785](https://arondor.atlassian.net/browse/TMAFAST-785)     | [FAST-5345](https://arondor.atlassian.net/browse/FAST-5345) | Memory leak : Homogeneize jackson versions and upgrade spring |
+| [TMAFAST-799](https://arondor.atlassian.net/browse/TMAFAST-799)     | [FAST-3807](https://arondor.atlassian.net/browse/FAST-3807) | (beta) CSVWriter: Append folder data to output csv file       |
+| [TMAFAST-822](https://arondor.atlassian.net/browse/TMAFAST-822)     | [FAST-5359](https://arondor.atlassian.net/browse/FAST-5359) | ApplyDroolsTask doesn't work                                  |
 
 ## ⚠️ Erratum
 

@@ -1,9 +1,9 @@
 ---
-title: How-To Integrate AI into a Basic Web Page
+title: Adding Uxopian AI features into a Basic Web Page
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T14:02:07.044Z'
   author: CI/CD Bot
-content_hash: 95f28fef3791abf441d81b937bfc51268fd62e08d5d7b84ec28b90d3a0184a2c
+content_hash: f03a3245069e0b9391eef0ad0e51910ac27874aef313521967b1a80be48f31bf
 ---
 
 # How-To: Integrate AI into a Basic Web Page

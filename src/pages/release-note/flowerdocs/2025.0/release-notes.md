@@ -181,30 +181,30 @@ FlowerDocs supports the RFC 2183 standard for the Content-Disposition header, al
 | Bug                                                                                                                                      | Ticket support          |
 | :--------------------------------------------------------------------------------------------------------------------------------------- | :---------------------- |
 | **Functional Users**                                                                                                                     |                         |
-| ARender \- Documents respect the order in which attachments are displayed, even if an eml is present as an attachment                    | TMAFLW-343              |
-| Search \- When searching on content, no empty columns are added to the result table                                                      | TMAFLW-563 / TMAFLW-569 |
-| Search \- LSearches are efficient even when there are a large number of ACLs                                                             | TMAFLW-615              |
-| Search \- When a search is run for the first time, if the value of a suggestion is validated by pressing Enter, it is taken into account | TMAFLW-700              |
-| Search \- After a reset, criteria operators are reset to their initial values                                                            | TMAFLW-829              |
-| Full-text search \- Content search is functional for documents in landscape format                                                       | TMAFLW-489              |
-| Full-text search works with FlowerDocs encryption                                                                                        | TMAFLW-791              |
-| Document \- The "Add new version" function is not operational even if the document has no content                                        | TMAFLW-613              |
-| For Date tags, the value displayed in the tooltip corresponds to the value entered                                                       | TMAFLW-680              |
-| Report on home page (Dashlet) \- Once a report has been modified, it can be clicked to access the search function                        | TMAFLW-804              |
-| A Boolean tag cannot be modified if configured as read-only                                                                              | TMAFLW-805              |
-| A document can be created or updated with a date between 07/09/1969 07:13:21 and 28/12/1969 15:48:44                                     | TMAFLW-853              |
+| ARender \- Documents respect the order in which attachments are displayed, even if an eml is present as an attachment                    | [TMAFLW-343](https://arondor.atlassian.net/browse/TMAFLW-343)              |
+| Search \- When searching on content, no empty columns are added to the result table                                                      | [TMAFLW-563](https://arondor.atlassian.net/browse/TMAFLW-563) / [TMAFLW-569](https://arondor.atlassian.net/browse/TMAFLW-569) |
+| Search \- LSearches are efficient even when there are a large number of ACLs                                                             | [TMAFLW-615](https://arondor.atlassian.net/browse/TMAFLW-615)              |
+| Search \- When a search is run for the first time, if the value of a suggestion is validated by pressing Enter, it is taken into account | [TMAFLW-700](https://arondor.atlassian.net/browse/TMAFLW-700)              |
+| Search \- After a reset, criteria operators are reset to their initial values                                                            | [TMAFLW-829](https://arondor.atlassian.net/browse/TMAFLW-829)              |
+| Full-text search \- Content search is functional for documents in landscape format                                                       | [TMAFLW-489](https://arondor.atlassian.net/browse/TMAFLW-489)              |
+| Full-text search works with FlowerDocs encryption                                                                                        | [TMAFLW-791](https://arondor.atlassian.net/browse/TMAFLW-791)              |
+| Document \- The "Add new version" function is not operational even if the document has no content                                        | [TMAFLW-613](https://arondor.atlassian.net/browse/TMAFLW-613)              |
+| For Date tags, the value displayed in the tooltip corresponds to the value entered                                                       | [TMAFLW-680](https://arondor.atlassian.net/browse/TMAFLW-680)              |
+| Report on home page (Dashlet) \- Once a report has been modified, it can be clicked to access the search function                        | [TMAFLW-804](https://arondor.atlassian.net/browse/TMAFLW-804)              |
+| A Boolean tag cannot be modified if configured as read-only                                                                              | [TMAFLW-805](https://arondor.atlassian.net/browse/TMAFLW-805)              |
+| A document can be created or updated with a date between 07/09/1969 07:13:21 and 28/12/1969 15:48:44                                     | [TMAFLW-853](https://arondor.atlassian.net/browse/TMAFLW-853)              |
 | **Integrators**                                                                                                                          |                         |
-| Administration \- A user can be added to an empty group                                                                                  | TMAFLW-802              |
-| API JS \- setReadOnly works on search forms                                                                                              | TMAFLW-721              |
-| API WS \- Updating a document via WS without defining a file ID preserves the content and only updates the tags                          | TMAFLW-733              |
-| API \- WS error code review                                                                                                              | TMAFLW-862              |
-| OH \- In the event of multiple component updates, processing is no longer stopped at the first exception                                 | TMAFLW-600              |
-| CLM \- The password encryption job is functional                                                                                         | TMAFLW-712              |
-| Permission \- Ability to update document tags with UPDATE permission only                                                                | TMAFLW-734              |
-| Permission \- Access to the document or its contents with READ and READ_CONTENT permissions respectively                                 | TMAFLW-788              |
+| Administration \- A user can be added to an empty group                                                                                  | [TMAFLW-802](https://arondor.atlassian.net/browse/TMAFLW-802)              |
+| API JS \- setReadOnly works on search forms                                                                                              | [TMAFLW-721](https://arondor.atlassian.net/browse/TMAFLW-721)              |
+| API WS \- Updating a document via WS without defining a file ID preserves the content and only updates the tags                          | [TMAFLW-733](https://arondor.atlassian.net/browse/TMAFLW-733)              |
+| API \- WS error code review                                                                                                              | [TMAFLW-862](https://arondor.atlassian.net/browse/TMAFLW-862)              |
+| OH \- In the event of multiple component updates, processing is no longer stopped at the first exception                                 | [TMAFLW-600](https://arondor.atlassian.net/browse/TMAFLW-600)              |
+| CLM \- The password encryption job is functional                                                                                         | [TMAFLW-712](https://arondor.atlassian.net/browse/TMAFLW-712)              |
+| Permission \- Ability to update document tags with UPDATE permission only                                                                | [TMAFLW-734](https://arondor.atlassian.net/browse/TMAFLW-734)              |
+| Permission \- Access to the document or its contents with READ and READ_CONTENT permissions respectively                                 | [TMAFLW-788](https://arondor.atlassian.net/browse/TMAFLW-788)              |
 | **Operators**                                                                                                                            |                         |
-| Core starts up with FileSystem connector and encryption enabled                                                                          | TMAFLW-776              |
-| API WS \- The endpoint retrieving the connection history returns the connection history with or without a specified date                 | TMAFLW-644              |
+| Core starts up with FileSystem connector and encryption enabled                                                                          | [TMAFLW-776](https://arondor.atlassian.net/browse/TMAFLW-776)              |
+| API WS \- The endpoint retrieving the connection history returns the connection history with or without a specified date                 | [TMAFLW-644](https://arondor.atlassian.net/browse/TMAFLW-644)              |
 
 # Known issues
 
