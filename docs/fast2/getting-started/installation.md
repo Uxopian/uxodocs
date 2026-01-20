@@ -1,27 +1,29 @@
 ---
-weight: 10
-draft: false
 title: Installation
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T16:11:38.246Z'
   author: CI/CD Bot
-content_hash: f5523af68bf2e3de2105aae4ad0ab653f9e599d8c1a2c04871b5e99b210529c5
+content_hash: c357b151ad2fe80f3089774abe5783da9e8b477fe84368112a1740558023f6dc
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 ## Requirements
 
 The installation of Fast2 requires a few environment specifications to run properly :
 
-| What      |                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| --------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| RAM       | 8GB+                   | We highly recommend having at least 8GB. <br /><br />When switching to production environments, 16GB or 32GB will be required since more documents will be handled at once, and heavy tasks (_e.g._ conversion, extraction) might get short on resources.                                                                                                                                                                                                                                                                                                                                  |
-| Processor | 8 CPUs                 | Processor capabilities need to be aligned with migration requirements, such as data mapping, content conversion and heavy I/O.                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Storage   | 128GB+                 | Although the contents dealt by Fast2 will be temporarily stored (and deleted afterwards if asked), the server needs enough storage for the files/contents alongside the database tracking all the migration information.                                                                                                                                                                                                                                                                                                                                                                   |
-| Java      | JDK-11                 | Any provider will fit (Oracle, [OpenJDK](https://developers.redhat.com/products/openjdk/download), etc). If you have multiple JDK/JRE already installed, specify the correct one in the `./config/env.properties` file.                                                                                                                                                                                                                                                                                                                                                                    |
+| What      |                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RAM       | 8GB+                   | We highly recommend having at least 8GB. <br /><br />When switching to production environments, 16GB or 32GB will be required since more documents will be handled at once, and heavy tasks (_e.g._ conversion, extraction) might get short on resources.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Processor | 8 CPUs                 | Processor capabilities need to be aligned with migration requirements, such as data mapping, content conversion and heavy I/O.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Storage   | 128GB+                 | Although the contents dealt by Fast2 will be temporarily stored (and deleted afterwards if asked), the server needs enough storage for the files/contents alongside the database tracking all the migration information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Java      | JDK-11                 | Any provider will fit (Oracle, [OpenJDK](https://developers.redhat.com/products/openjdk/download), etc). If you have multiple JDK/JRE already installed, specify the correct one in the `./config/env.properties` file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | OS        | Windows&nbsp;7+, Linux | All versions of Windows 7+ are supported. <br/><br/>All common distros of Linux are supported (Ubuntu, RedHat, CentOS, etc)<br /><br />Power architecture are supported as well (except the ones running in AIX), but only Java parts will work seamlessly whereas third-party software (_e.g._ imagemagick, libreoffice, etc) might not, as they have not all have been developed for such platforms. <br/><br/> Although the broker will not run correctly on an Windows 2003, a worker can still run on it, remotely, and communicate with a broker installed on a more recent version. |
-| Bandwidth | 1GB                    | The more calls, payloads, and contents Fast2 will have to deal with, the bigger the network bandwidth must be to reduce latency. If 250-500MB might do for lower environments, we recommend 1GB for Production environments.                                                                                                                                                                                                                                                                                                                                                               |
+| Bandwidth | 1GB                    | The more calls, payloads, and contents Fast2 will have to deal with, the bigger the network bandwidth must be to reduce latency. If 250-500MB might do for lower environments, we recommend 1GB for Production environments.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
-While setting up the production server for Fast2, make sure to scale the Fast2 machine accordingly. You may need to increase the allocated memory for both the broker and the background database. If you planned to deal with campaigns of a few millions of documents, setting **8GB** of memory for the [broker](/docs/fast2/components/broker#configure-the-broker) and **8GB** for the [database](/docs/fast2/components/database#configuration) as well is a good starting point.
+While setting up the production server for Fast2, make sure to scale the Fast2 machine accordingly. You may need to increase the allocated memory for both the broker and the background database. If you planned to deal with campaigns of a few millions of documents, setting **8GB** of memory for the [broker](../components/broker.md#configure-the-broker) and **8GB** for the [database](../components/database.md#configuration) as well is a good starting point.
 
 :::warning
 
@@ -47,18 +49,18 @@ Each distribution ships the following
 
 | Item                                                      | Purpose                                             |
 | --------------------------------------------------------- | --------------------------------------------------- |
-| <i class="fas fa-folder"></i> config                                  | Configuration files, broker endpoint, Java home     |
-| <i class="fas fa-folder"></i> logs                                    | Logging files for both broker and worker(s)         |
-| <i class="fas fa-folder"></i> maps                                    | XML files of all maps accessible from the UI        |
+| <i class="fas fa-folder"></i> config                      | Configuration files, broker endpoint, Java home     |
+| <i class="fas fa-folder"></i> logs                        | Logging files for both broker and worker(s)         |
+| <i class="fas fa-folder"></i> maps                        | XML files of all maps accessible from the UI        |
 | <i class="fas fa-folder"></i> opensearch-X.Y.Z or elasticsearch-X.Y.Z | Either Elasticsearch or OpenSearch                  |
-| <i class="fas fa-folder"></i> service                                 | All files required to start Fast2 as a service      |
-| <i class="fas fa-folder"></i> worker-libs/\*                          | All libraries and dependencies for tasks executions |
-| <i class="fab fa-java"></i> fast2-broker-package-X.Y.Z.jar  | Broker unit                                         |
-| <i class="fab fa-java"></i> fast2-worker-package-X.Y.Z.jar  | Worker main unit                                    |
-| <i class="fab fa-windows"></i> startup-broker.bat           | Binary file for Windows                             |
-| <i class="fab fa-linux"></i> startup-broker.sh              | Binary file for Linux                               |
-| <i class="fab fa-windows"></i> startup-worker.bat           | Binary file for Windows                             |
-| <i class="fab fa-linux"></i> startup-worker.sh              | Binary file for Linux                               |
+| <i class="fas fa-folder"></i> service                     | All files required to start Fast2 as a service      |
+| <i class="fas fa-folder"></i> worker-libs/\* | All libraries and dependencies for tasks executions |
+| <i class="fab fa-java"></i> fast2-broker-package-X.Y.Z.jar | Broker unit                                         |
+| <i class="fab fa-java"></i> fast2-worker-package-X.Y.Z.jar | Worker main unit                                    |
+| <i class="fab fa-windows"></i> startup-broker.bat         | Binary file for Windows                             |
+| <i class="fab fa-linux"></i> startup-broker.sh            | Binary file for Linux                               |
+| <i class="fab fa-windows"></i> startup-worker.bat         | Binary file for Windows                             |
+| <i class="fab fa-linux"></i> startup-worker.sh            | Binary file for Linux                               |
 
 ## Start-up sequence
 
@@ -68,13 +70,13 @@ When Fast2 is started, either as a standalone application or a service, its diff
 - The worker is then triggered, and has to register itself to the broker.
 - Finally, the dashboard will be started if asked so, and if the binaries have been detected. First, Fast2 will try to connect to any dashboard instance running on the configured port.
 
-There is no direct connection between the broker and the dashboard. The only exchange area is the Elasticsearch database, as explained in the [architecture section](overall-concepts#architecture).
+There is no direct connection between the broker and the dashboard. The only exchange area is the Elasticsearch database, as explained in the [architecture section](overall-concepts.md#architecture).
 
 ## Start Fast2 Broker
 
 Once the regular Fast2 package is unzipped, Fast2 can be launched right away.
 
-Whether Fast2 is launched from the batch file or as a service on your environment, the UI will be available at http://localhost:1789/.
+Whether Fast2 is launched from the batch file or as a service on your environment, the UI will be available at [http://localhost:1789/](http://localhost:1789/).
 
 By default, Fast2 Broker starts an embedded Elastic Search and an embedded Fast2 Worker.
 
@@ -82,39 +84,36 @@ All commands below are to be run under the Fast2 install path (where the Zip has
 
 ### From command line
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 <Tabs groupId="operating-system">
 <TabItem value="windows" label="Windows" default>
 
-Go into the Fast2 install folder, and run :
+    Go into the Fast2 install folder, and run :
 
-```cmd
-C:\path-to-fast2\> startup-broker.bat
-```
+    ```cmd
+    C:\path-to-fast2\> startup-broker.bat
+    ```
 
-Administrator rights might be required since Fast2 will handle some port communications.
+    Administrator rights might be required since Fast2 will handle some port communications.
 
 </TabItem>
 <TabItem value="linux" label="Linux">
 
-The following Linux installation steps work for most of Unix-based sytems.
-Elasticsearch cannot be started from root user, you will need to create a secondary user to start the database binary alongside your Fast2 process.
+    The following Linux installation steps work for most of Unix-based sytems.
+    Elasticsearch cannot be started from root user, you will need to create a secondary user to start the database binary alongside your Fast2 process.
 
-Once connected as the latter user, start Elasticsearch via its binaries.
+    Once connected as the latter user, start Elasticsearch via its binaries.
 
-Then, since you started Elasticsearch manually, disable the command triggering Fast2 to start the embedded Elasticsearch, from the `config/application.properties` file :
+    Then, since you started Elasticsearch manually, disable the command triggering Fast2 to start the embedded Elasticsearch, from the `config/application.properties` file :
 
-```log
-broker.elasticsearch.embedded.enabled=false
-```
+    ```log
+    broker.elasticsearch.embedded.enabled=false
+    ```
 
-You can now properly execute the following script:
+    You can now properly execute the following script:
 
-```sh
-$ ./startup-broker.sh
-```
+    ```sh
+    $ ./startup-broker.sh
+    ```
 
 </TabItem>
 </Tabs>
@@ -126,25 +125,25 @@ To end the Fast2 process, just hit `Ctrl+C` in the command line the startup file
 <Tabs groupId="operating-system">
 <TabItem value="windows" label="Windows" default>
 
-Go into the Fast2 installation folder, and open the Windows Command Prompt.
+    Go into the Fast2 installation folder, and open the Windows Command Prompt.
 
-To install the service :
+    To install the service :
 
-```cmd
-C:\path-to-fast2\service\windows> Fast2_broker_service.exe install
-```
+    ```cmd
+    C:\path-to-fast2\service\windows> Fast2_broker_service.exe install
+    ```
 
-Your machine may prompt a message asking to download .NET components. Please click [OK] and proceed.
+    Your machine may prompt a message asking to download .NET components. Please click [OK] and proceed.
 
-Once this command is complete, you should see in your services registory a newly installed Fast2 service. You can start/stop/restart it as any other service, or via the Command Prompt (just replace `install` in the previous command by _start_/_stop_/_uninstall_/_restart_/_status_).
+    Once this command is complete, you should see in your services registory a newly installed Fast2 service. You can start/stop/restart it as any other service, or via the Command Prompt (just replace `install` in the previous command by _start_/_stop_/_uninstall_/_restart_/_status_).
 
-The logs of the service will be available from the `path-to-fast2\service\log` folder.
+    The logs of the service will be available from the `path-to-fast2\service\log` folder.
 
 </TabItem>
 <TabItem value="linux" label="Linux">
 
-There are several ways to create a service under linux distribution. We will do it through systemd.
-Its major benefit is that it has been the default init system for the majority of linux distributions (Ubuntu, Red Hat, Fedora...).
+    There are several ways to create a service under linux distribution. We will do it through systemd.
+    Its major benefit is that it has been the default init system for the majority of linux distributions (Ubuntu, Red Hat, Fedora...).
 
     <br />
 
@@ -154,7 +153,7 @@ Its major benefit is that it has been the default init system for the majority o
 
     Let's condider here our user to be *fast2user*.
 
-    Open the `./startup-broker.sh` file and update the last line to switch users (with `su fast2user -c`) for the Java command:
+    Open the `./startup-broker.sh` file and update the last line to switch users (with `su fast2user -c`) for the Java command:  
 
     <table>
     <tr style={{color: "red"}}>
@@ -234,7 +233,9 @@ Its major benefit is that it has been the default init system for the majority o
             ```sh
             sudo ln -s service/linux/fast2-broker-2.11.0.service /etc/systemd/system
             ```
+
     :::
+
     <br/>
 
     If the links are broken once they're created, you probably need to put an absolute path for the target as follow ;
@@ -274,11 +275,11 @@ Its major benefit is that it has been the default init system for the majority o
     $ systemctl status fast2-broker.service
     ```
 
-You can restart or stop the service at anytime with the commands :
+    You can restart or stop the service at anytime with the commands :
 
-```sh
-$ service fast2 start | restart | stop | status
-```
+    ```sh
+    $ service fast2 start | restart | stop | status
+    ```
 
 </TabItem>
 </Tabs>
@@ -290,18 +291,18 @@ The Broker starts an embedded worker by default.
 <Tabs groupId="operating-system">
 <TabItem value="windows" label="Windows" default>
 
-If you wish to start multiple workers, just hit :
+    If you wish to start multiple workers, just hit :
 
-```cmd
-C:\path-to-fast2\> startup-worker.bat
-```
+    ```cmd
+    C:\path-to-fast2\> startup-worker.bat
+    ```
 
 </TabItem>
 <TabItem value="linux" label="Linux">
 
-```sh
-./startup-worker.sh
-```
+    ```
+    ./startup-worker.sh
+    ```
 
 </TabItem>
 </Tabs>
@@ -325,7 +326,6 @@ The `Fast2_worker_service.xml` file will look like this :
     <id>Fast2WorkerDCTM</id>
     <name>Fast2 Worker DCTM</name>
     <description>Fast2 Worker DCTM v-2.12.1</description>
-    <!-- Fast2_service lives in service\windows, rewind 2 levels to find home -->
     <env name="FAST2_HOME" value="%BASE%\..\.." />
     <executable>%BASE%\..\..\startup-worker.bat</executable>
     <logpath>%BASE%\..\log</logpath>

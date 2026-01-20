@@ -1,8 +1,8 @@
 ---
 last_update:
-  date: '2026-01-20T14:02:07.044Z'
+  date: '2026-01-20T14:26:06.217Z'
   author: CI/CD Bot
-content_hash: dd22f8fa0a9528997ccc47ffaae03e590c5536f11236103013f8d1ab30d9a55a
+content_hash: 050487e03ae0062114cabf5577759fb5311d3f8c646f0fa0f2f1601fb65a5457
 ---
 
 # How to Create Custom Prompt Tools

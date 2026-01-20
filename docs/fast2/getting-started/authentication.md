@@ -1,8 +1,9 @@
 ---
+sidebar_position: 3
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T16:11:38.246Z'
   author: CI/CD Bot
-content_hash: 1a970580b5225450a05af35da3cb405cfd14d14c6edd73f74dd4448e478b512d
+content_hash: c2150ee31aa25b2ec6dbd36c9ce75555adb18bd7916678e58389ff483301bb7d
 ---
 
 # Authentication & Team management
@@ -10,7 +11,7 @@ content_hash: 1a970580b5225450a05af35da3cb405cfd14d14c6edd73f74dd4448e478b512d
 ## Account registration
 
 When reaching the Fast2 UI for the first time, you will be prompted to create an account.
-![Registration](../assets/img/authentication/registration page.png)
+![Registration](../assets/img/authentication/registration_page.png)
 
 To create a new account in Fast2, follow these steps:
 
@@ -36,7 +37,7 @@ To create a new account in Fast2, follow these steps:
 ## Login
 
 Once you have registered, you can log in to the Fast2 UI using your email and password.
-![Login](../assets/img/authentication/login page.png)
+![Login](../assets/img/authentication/login_page.png)
 
 ## Team management
 

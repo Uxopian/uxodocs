@@ -99,17 +99,15 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
         logoSrc: "/uxodocs/img/uxo_white.png",
         releasesData: [
             {
-                // store version without leading `v` for consistency
-                version: "2025.0.0",
+                version: "2026.0.0",
                 date: "2025-12-01",
                 description:
-                    "General availability of uxopian-ai 2025.0.0 — a standalone framework for enterprise GenAI integrations built on Java 21 LTS and Spring 3.5, with conversation management, orchestration, and native multi-tenant security.",
-                // slug matches the markdown filename under /release-note/uxopian-ai/
-                slug: "release-note-2025.0",
+                    "General availability of uxopian-ai 2026.0.0 — a standalone framework for enterprise GenAI integrations built on Java 21 LTS and Spring 3.5, with conversation management, orchestration, and native multi-tenant security.",
+                slug: "release-note-2026.0.0",
                 hasUpgradeNotes: false,
             },
         ],
-        styles: uxopianAiStyles, // uxopian-ai specific styles
+        styles: uxopianAiStyles,
         filterBy: "major",
         mapNote: (note: any) => ({
             version: `v${note.version}`,

@@ -1,61 +1,75 @@
 ---
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T16:11:38.246Z'
   author: CI/CD Bot
-content_hash: 5be99378406ebe55869ff8b3cd00d23553656ddf0bc68ba420f4973002a9d464
+sidebar_position: 1
+title : Overall concepts 
+content_hash: 9bd50c0326f9ef72c9e6c965ab264367c3d9ee9222b4300842279352dd79081b
 ---
+
+import ThemedImage from '@theme/ThemedImage';
+
+[map]: #map
+[campaign]: #campaign
+[content]: #content
 
 # What you need to know before committing to Fast2
 
-## <i class="fas fa-arrow-right-arrow-left"></i> Basic jargon
+## Basic jargon
 
 **Source**
 
-: A source is a Fast2 task whose role is to gather the documents or items to migrate. As they are identified, the source converts them into punnets.
+A source is a Fast2 task whose role is to gather the documents or items to migrate. As they are identified, the source converts them into punnets.
 
 **Punnet**
 
-: The Punnet is the pivot format which is used for data mapping, content conversions and folder management. This is the migration entity, processed and then forwarded by the workflow tasks.
+The Punnet is the pivot format which is used for data mapping, content conversions and folder management. This is the migration entity, processed and then forwarded by the workflow tasks.
 
 **Task**
 
-: A task is either an extract-, transform- or injection-step that composes a workflow. Each task can be configured to match the user’s needs. Once all tasks are completed in the specific order, the migration is over.
+A task is either an extract-, transform- or injection-step that composes a workflow. Each task can be configured to match the user's needs. Once all tasks are completed in the specific order, the migration is over.
 
 **Map**
 
-: A workflow (aka _"Map"_) is a succession of tasks, where the output of the ones is the input of the following others. Each task can be considered as a step of the workflow.
+A workflow (aka _"Map"_) is a succession of tasks, where the output of the ones is the input of the following others. Each task can be considered as a step of the workflow.
 
 **Campaign**
 
-: A campaign is the perimeter where a map is executed (once or several times). Different campaigns can either be cumulative or independent.
+A campaign is the perimeter where a map is executed (once or several times). Different campaigns can either be cumulative or independent.
 
 **Worker**
 
-: The Worker is the punnet processor, applying the changes onto the punnet, according to how the tasks have been configured by the user.
+The Worker is the punnet processor, applying the changes onto the punnet, according to how the tasks have been configured by the user.
 
-    They are waiting in silence to do their job. When a punnet needs to be processed by a task, the broker triggers the assigned worker.
+They are waiting in silence to do their job. When a punnet needs to be processed by a task, the broker triggers the assigned worker.
 
-    If the workload is too important, you can manually add workers to speed up processing.
+If the workload is too important, you can manually add workers to speed up processing.
 
 **Broker**
 
-: The broker is the trump card of the migration. It is basically the workflow orchestrator, in charge of database communication, sending punnets to the worker(s) for them to process the operations.
+The broker is the trump card of the migration. It is basically the workflow orchestrator, in charge of database communication, sending punnets to the worker(s) for them to process the operations.
 
-    Scheduling, orchestrating or even managing queues : the broker is everywhere.
+Scheduling, orchestrating or even managing queues : the broker is everywhere.
 
-    His first job is to handle the workers. Worker coordination is a key point in terms of performance, knowing that there may be a multitude of them.
+His first job is to handle the workers. Worker coordination is a key point in terms of performance, knowing that there may be a multitude of them.
 
-    In addition, the broker ensures the persistence and traceability of the data carried out by the punnets into the database, where logs, data and errors and more are stored.
+In addition, the broker ensures the persistence and traceability of the data carried out by the punnets into the database, where logs, data and errors and more are stored.
 
 <br />
 <br />
 
 ## Architecture
 
-![Fast2 architecture](../assets/img/architecture_dark.png#only-dark)
-![Fast2 architecture](../assets/img/architecture_light.png#only-light)
+<ThemedImage
+  alt="Fast2 architecture"
+  sources={{
+    light: require('../assets/img/architecture_light.png').default,
+    dark: require('../assets/img/architecture_dark.png').default,
+  }}
+  style={{width: '60%'}}
+/>
 
-## <i class="fas fa-shopping-basket"></i> Fast2 objects
+## Fast2 objects
 
 ### Folder
 
@@ -216,6 +230,23 @@ The punnet will iterate through the follwing lifecycle until the last step is re
 
 <!-- https://mermaid-js.github.io/mermaid/#/flowchart -->
 
+```mermaid
+graph TD
+    A(Created) --> B(Queued);
+    B --> C(Processing);
+    C --> D{ };
+    D -->|Success| F(Processed OK);
+    D -->|Failure| E(Processed KO);
+    F -. Next task ? .-> B;
+    E -.->|Retry| H( );
+    F -.->|Retry| H;
+    H -.-> I( );
+    I -.->|Previous try| J{ };
+    I -.-> B;
+    J -.->|KO| L[SupersededException];
+    J -.->|OK| K[SupersededOK];
+```
+
 ## Task
 
 Task can be represented as a processing unit to be applied to a punnet. A punnet comes at the entry of the task, as an input. The task performs operations and then outputs the modified punnet.
@@ -252,11 +283,21 @@ A retry feature is also available after each campaign. This makes possible to fi
 
 ### Lifecycle
 
+```mermaid
+graph LR
+  A(Undefined) --> B(Starting);
+  B --> C(Started);
+  C --> D(Running);
+  D -.->|Stops source iterator| F(Stopping);
+  D --> E(Finished);
+  F -.->|Restart source iterator| B;
+```
+
 ### Punnet status
 
 For each task, the color bubble indicates the status of punnet processing.
 
-![Fast2 bubbles](../assets/img/colored bubbles.png)
+![Fast2 bubbles](../assets/img/colored%20bubbles.png)
 
 Each colored bubble shows a specific metric:
 

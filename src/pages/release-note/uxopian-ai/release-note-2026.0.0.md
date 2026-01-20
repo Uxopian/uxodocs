@@ -1,9 +1,9 @@
-# Release Notes: uxopian-ai v2025.0.0
+# Release Notes: uxopian-ai v2026.0.0-ft1-rc2
 
 **Release Date:** December 2025
-**Version:** 2025.0.0
+**Version:** v2026.0.0-ft1-rc2
 
-We are thrilled to announce the general availability of **uxopian-ai 2025.0.0**!
+We are thrilled to announce the general availability of **uxopian-ai v2026.0.0-ft1-rc2**!
 
 **uxopian-ai** is a complete, standalone framework designed to accelerate the integration of GenAI features into enterprise applications. Built on **Java 21 LTS** and **Spring 3.5**, it moves beyond simple libraries to provide a deployable service with full conversation management, advanced orchestration, and enterprise-grade security.
 

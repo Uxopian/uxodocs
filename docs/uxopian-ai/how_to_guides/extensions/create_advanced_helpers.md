@@ -1,9 +1,9 @@
 ---
 title: How to Create Advanced Prompt Helpers
 last_update:
-  date: '2026-01-20T14:02:07.044Z'
+  date: '2026-01-20T14:26:06.217Z'
   author: CI/CD Bot
-content_hash: 639cbb6aee9e3de06d91c39a74452eab5bb3ed4e21bdc88eae5acde884266e4e
+content_hash: 3a6f622cb8d9c995af77d85c4e07db49d9cca3d75a1f0aed233b6963665d1d9b
 ---
 
 # Advanced Helpers: Map-Reduce Paradigm

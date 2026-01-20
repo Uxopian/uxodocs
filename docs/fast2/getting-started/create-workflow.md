@@ -1,8 +1,10 @@
 ---
+sidebar_position: 4
+title: Create a workflow
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-20T16:11:38.246Z'
   author: CI/CD Bot
-content_hash: 7fb65e5a8e6c78022e7e8f5f1944fcef335265419bb54aa133ab3fdd2d96cdd7
+content_hash: 50e4f6bdc93c314a7d87c047212fa1be84825873d1c5469058daec8a98620aa9
 ---
 
 # Create a map
@@ -19,11 +21,11 @@ The very first step of every migration is to start building the workflow. Since 
 1. then you perform any required transformation to get the content compliant with the target system,
 1. finally you load the content and/or its metadata.
 
-With Fast2 started, go to the UI (default address `<http://localhost:1789/index.html>`). From here, you can create a new map browse your machine to import an existing one.
+With Fast2 started, go to the UI (default address [http://localhost:1789/index.html](http://localhost:1789/index.html)). From here, you can create a new map browse your machine to import an existing one.
 
 :::warning
 
-A map must start with a <b><i>Source</i></b> task, picked up from the list in the [task configuration section](/docs/fast2/catalog/source).
+A map must start with a <b><i>Source</i></b> task, picked up from the list in the [task configuration section](../catalog/source.md).
 
 :::
 
@@ -33,8 +35,6 @@ To add any task to the map, toggle the right panel and search for the task. The 
 To select a task, click on its name and it will appear in the design area. You will be able to configure it straight afterwards, since the right panel now displays the configuration fields of the task you just added.
 
 ![New map GIF](../assets/img/create_workflow/newMap2025.gif)
-
-<!-- todo -->
 
 For task and link configuration, please head towards the [task configuration](#tasks) and [link configuration](#links) sections.
 
@@ -61,7 +61,9 @@ Fast2 also stores maps into the database instance.
 
 ### Upload a map
 
-> ℹ️ **Note**: When uploading a map locally using the `/maps` folder, only files ending with `.map.xml` will be taken into account. Other files will be ignored.
+:::note
+When uploading a map locally using the `/maps` folder, only files ending with `.map.xml` will be taken into account. Other files will be ignored.
+:::
 
 V1 maps are compatible with the V2, but not the other way around. V2 maps are compatible with the V2025.
 
@@ -73,9 +75,10 @@ If you upload multiple times the same map, Fast2 will create a new copy of the m
 
 :::info
 
-    Maps can only be deleted from the Configuration Place
+Maps can only be deleted from the Configuration Place
 
 :::
+
 To go on the configuration place, click on the gear icon at the top right banner. Use the checkboxes to select the map(s) you want to delete then click on the bin icon.
 
 However, a backup copy is still saved in the database in case you want to restore it later.
@@ -132,20 +135,20 @@ Two tasks cannot be linked both ways.
 
 ### Configure link
 
-| Link condition         | Details                                                                                                                             |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| PatternCondition       | Set specific condition with java language                                                                                           |
-| Otherwise              | Punnet which doesn't match other conditions will pass<br/>:warning: Consider using when a task has at least 2 multiple output links |
-| AlwaysTrue             | All punnets will pass, no matter what                                                                                               |
-| AlwaysFalse            | All punnets will be blocked, no matter what                                                                                         |
-| PunnetInException      | All punnets in exception will pass                                                                                                  |
-| ContentMimeTypeMatches | Filter depending on document mimetype                                                                                               |
-| NumberOfDocuments      | Filter depending on the number of document carried by the punnet                                                                    |
-| PunnetHasData          | If an expected data exists the punnet will pass (punnet level)                                                                      |
-| DocumentHasData        | If an expected data exists the punnet will pass (document level)                                                                    |
-| Or                     | Use multiple link conditions and if one of them is ok, the punnet will pass                                                         |
-| And                    | Use multiple link conditions and if all of them are ok, the punnet will pass                                                        |
-| Not                    | Use any link condition but with negatively                                                                                          |
+| Link condition         | Details                                                                                                                            |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| PatternCondition       | Set specific condition with java language                                                                                          |
+| Otherwise              | Punnet which doesn't match other conditions will pass<br/><i class="fas fa-exclamation-triangle"></i> Consider using when a task has at least 2 multiple output links |
+| AlwaysTrue             | All punnets will pass, no matter what                                                                                              |
+| AlwaysFalse            | All punnets will be blocked, no matter what                                                                                        |
+| PunnetInException      | All punnets in exception will pass                                                                                                 |
+| ContentMimeTypeMatches | Filter depending on document mimetype                                                                                              |
+| NumberOfDocuments      | Filter depending on the number of document carried by the punnet                                                                   |
+| PunnetHasData          | If an expected data exists the punnet will pass (punnet level)                                                                     |
+| DocumentHasData        | If an expected data exists the punnet will pass (document level)                                                                   |
+| Or                     | Use multiple link conditions and if one of them is ok, the punnet will pass                                                        |
+| And                    | Use multiple link conditions and if all of them are ok, the punnet will pass                                                       |
+| Not                    | Use any link condition but with negatively                                                                                         |
 
 ![Set link](../assets/img/create_workflow/setLink2025.gif)
 
@@ -167,7 +170,7 @@ From the toggle button you are able to switch between the Design and the Run pla
 
 Next to this toggle button, you'll find the control buttons. It's with these three buttons that you will be able to interact with the campaign.
 
-![Top panel controls](../assets/img/create_workflow/controlButtons2025.png)
+<img src={require('../assets/img/create_workflow/controlButtons2025.png').default} alt="Top panel controls" style={{width: '20%'}} />
 
 From left to right :
 
@@ -215,55 +218,61 @@ At this moment you have two series of campaigns related to your map _Production_
 Fast2 allows you to create multiple versions of the same map. This feature provides several significant benefits:
 
 1. **Change Management and Tracking**
-   : **Historical Record**: Versioning allows you to maintain a record of all changes made to a map. This is critical for understanding how workflows have evolved over time.
-   : **Auditability**: Regulatory or internal compliance often requires a clear audit trail. Versioned maps make it easy to demonstrate changes and decisions.
+    * **Historical Record**: Versioning allows you to maintain a record of all changes made to a map. This is critical for understanding how workflows have evolved over time.
+    * **Auditability**: Regulatory or internal compliance often requires a clear audit trail. Versioned maps make it easy to demonstrate changes and decisions.
 
 2. **Flexibility for Iteration**
-   : **Testing New Versions**: You can test new map configurations while maintaining the stability of the current version in production. This reduces risk and allows for experimentation.
-   : **Rollback Capabilities**: If a new version introduces issues, you can quickly revert to a previous version.
+    * **Testing New Versions**: You can test new map configurations while maintaining the stability of the current version in production. This reduces risk and allows for experimentation.
+    * **Rollback Capabilities**: If a new version introduces issues, you can quickly revert to a previous version.
 
 3. **Support for Continuous Improvement**
-   : **Incremental Optimization**: Maps can be improved incrementally while keeping a reliable baseline version in production.
-   : **Data-Driven Updates**: Analyze performance data from different versions to identify which version works best.
+    * **Incremental Optimization**: Maps can be improved incrementally while keeping a reliable baseline version in production.
+    * **Data-Driven Updates**: Analyze performance data from different versions to identify which version works best.
 
 Seamless version creation for the user: they have nothing to do and cannot create a version themselves (there is no manual version creation). The version number is incremented automatically. Current version you are working on is always available in the top right corner.
-![Map version position](../assets/img/create_workflow/current map version.png)
+
+<img src={require('../assets/img/create_workflow/current map version.png').default} alt="Map version position" style={{width: '80%'}} />
 
 ### Map versions history
 
 You can access the map versions history by clicking on the `Maps Overview` button in the left navigation menu. If a map has several versions, you can expand and see all the versions by clicking on the last version. Note that current version and previous versions are highlighted differently (green and orange).
-![Map versions history](../assets/img/create_workflow/Maps overview.gif)
+
+<img src={require('../assets/img/create_workflow/Maps overview.gif').default} alt="Map versions history" style={{width: '100%'}} />
 
 Orange color for previous versions means that they cannot be edited. If you decide to view a previous version, it will be opened in read-only mode.
-![Read-only mode](../assets/img/create_workflow/read only mode.png)
+
+<img src={require('../assets/img/create_workflow/read only mode.png').default} alt="Read-only mode" style={{width: '100%'}} />
 
 For any reason, if you need to work and make changes to a previous version, you can duplicate it and create a new map from it.
-![Duplicate map](../assets/img/create_workflow/duplicate map.gif)
+
+<img src={require('../assets/img/create_workflow/duplicate map.gif').default} alt="Duplicate map" style={{width: '100%'}} />
 
 ## Automatic Save Feature
 
 The automatic save functionality ensures that changes made to the workflow and its configurations are saved seamlessly, enhancing reliability and reducing the risk of data loss. Below are the differents statuses of the save button:
 
 - **Not saved**: The map has not been saved yet (Opensearch database is not reachable).
-  ![Unsaved status](../assets/img/create_workflow/unsaved.png)
+<img src={require('../assets/img/create_workflow/unsaved.png').default} alt="Unsaved status" style={{width: '10%'}} />
+
 - **Saved**: The map has been saved successfully.
-  ![Saved status](../assets/img/create_workflow/saved.png)
+<img src={require('../assets/img/create_workflow/saved.png').default} alt="Saved status" style={{width: '10%'}} />
+
 - **Saving...**: The map is currently being saved.
-  ![Saving status](../assets/img/create_workflow/saving.png)
+<img src={require('../assets/img/create_workflow/saving.png').default} alt="Saving status" style={{width: '10%'}} />
 
 ### When Does Auto Save Trigger?
 
 The auto save is triggered under the following conditions:
 
 1. **Configuration Changes:**
-   : Any changes made to tasks or links configuration fields are saved as soon as the focus is lost from the edited field.
-   ![Autosave field edition](../assets/img/create_workflow/Autosave field edition.gif)
+    * Any changes made to tasks or links configuration fields are saved as soon as the focus is lost from the edited field.
+<img src={require('../assets/img/create_workflow/Autosave field edition.gif').default} alt="Autosave field edition" style={{width: '100%'}} />
 
 2. **Tasks and Links:**
-   : Adding or deleting a task triggers an automatic save. Adding or deleting a link between tasks also triggers an automatic save.
+    * Adding or deleting a task triggers an automatic save. Adding or deleting a link between tasks also triggers an automatic save.
 
 3. **Task Movements:**
-   : Moving tasks within the map also triggers an automatic save.
+    * Moving tasks within the map also triggers an automatic save.
 
 ### What Gets Saved?
 
@@ -277,6 +286,7 @@ The following elements are included in the automatic save process:
 ### Specific Case: Map Shared Objects
 
 Modifications to a shared object within the Shared Objects place also trigger an automatic save, not limited to edits made in the main Edit place.
-![Shared objects place](../assets/img/create_workflow/shared objects place.png)
+
+<img src={require('../assets/img/create_workflow/shared objects place.png').default} alt="Shared objects place" style={{width: '80%'}} />
 
 This ensures that all updates, regardless of where or how they are performed, are reliably captured.

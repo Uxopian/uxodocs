@@ -25,6 +25,20 @@
 
 .filterButtonActive {
     composes: filterButtonActive from "./fast2.module.css";
+    /* Override Fast2's cyan with Uxopian AI's orange */
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.85), rgba(217, 119, 6, 0.85)) !important;
+    color: #000 !important;
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.6), 0 2px 8px rgba(245, 158, 11, 0.4) !important;
+}
+
+[data-theme="dark"] .filterButtonActive {
+    color: white !important;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.85), rgba(217, 119, 6, 0.85)) !important;
+}
+
+.filterButtonActive:hover {
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.9), rgba(180, 83, 9, 0.9)) !important;
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.7), 0 4px 10px rgba(245, 158, 11, 0.5) !important;
 }
 
 .releaseGrid {
