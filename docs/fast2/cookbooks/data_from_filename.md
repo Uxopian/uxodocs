@@ -1,4 +1,5 @@
 ---
+sidebar_position: 10
 draft: false
 title: Add data from file name
 date: 2022-11-10T00:00:00.000Z

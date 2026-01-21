@@ -1,4 +1,5 @@
 ---
+sidebar_position: 6
 title: Upload content and metadata in a S3 bucket
 tags:
     - xml

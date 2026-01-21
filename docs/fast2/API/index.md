@@ -80,9 +80,9 @@ Body format:
 
 ```json
 {
-    "currentPassword": "string",
-    "newPassword": "string",
-    "newPasswordConfirmation": "string"
+  "currentPassword": "string",
+  "newPassword": "string",
+  "newPasswordConfirmation": "string"
 }
 ```
 
@@ -156,8 +156,8 @@ Body format:
 
 ```json
 {
-    "email": "string",
-    "password": "string"
+  "email": "string",
+  "password": "string"
 }
 ```
 
@@ -294,9 +294,9 @@ Body format:
 
 ```json
 {
-    "targetUser": "string",
-    "newPassword": "string",
-    "newPasswordConfirmation": "string"
+  "targetUser": "string",
+  "newPassword": "string",
+  "newPasswordConfirmation": "string"
 }
 ```
 
@@ -804,7 +804,7 @@ Body format:
 
 ```json
 {
-    "empty": true
+  "empty": true
 }
 ```
 
@@ -1167,9 +1167,9 @@ Body format:
 
 ```json
 {
-    "email": "string",
-    "active": true,
-    "emailId": {}
+  "email": "string",
+  "active": true,
+  "emailId": {}
 }
 ```
 
@@ -1210,9 +1210,9 @@ Body format:
 
 ```json
 {
-    "email": "string",
-    "active": true,
-    "emailId": {}
+  "email": "string",
+  "active": true,
+  "emailId": {}
 }
 ```
 
@@ -1260,10 +1260,10 @@ Body format:
 
 ```json
 {
-    "from": 0,
-    "size": 0,
-    "orderBy": "string",
-    "ascending": true
+  "from": 0,
+  "size": 0,
+  "orderBy": "string",
+  "ascending": true
 }
 ```
 
@@ -1312,10 +1312,10 @@ Body format:
 
 ```json
 {
-    "from": 0,
-    "size": 0,
-    "orderBy": "string",
-    "ascending": true
+  "from": 0,
+  "size": 0,
+  "orderBy": "string",
+  "ascending": true
 }
 ```
 
@@ -1464,19 +1464,19 @@ Body format:
 
 ```json
 {
-    "jobId": {},
-    "jobName": "string",
-    "campaign": {
-        "name": "string",
-        "index": "string",
-        "prefix": "string",
-        "suffix": 0
-    },
-    "taskFlowMapRef": {},
-    "maxNumberExecutions": 0,
-    "action": "STOP",
-    "active": true,
-    "cronExpression": "string"
+  "jobId": {},
+  "jobName": "string",
+  "campaign": {
+    "name": "string",
+    "index": "string",
+    "prefix": "string",
+    "suffix": 0
+  },
+  "taskFlowMapRef": {},
+  "maxNumberExecutions": 0,
+  "action": "STOP",
+  "active": true,
+  "cronExpression": "string"
 }
 ```
 
@@ -1537,19 +1537,19 @@ Body format:
 
 ```json
 {
-    "jobId": {},
-    "jobName": "string",
-    "campaign": {
-        "name": "string",
-        "index": "string",
-        "prefix": "string",
-        "suffix": 0
-    },
-    "taskFlowMapRef": {},
-    "maxNumberExecutions": 0,
-    "action": "STOP",
-    "active": true,
-    "cronExpression": "string"
+  "jobId": {},
+  "jobName": "string",
+  "campaign": {
+    "name": "string",
+    "index": "string",
+    "prefix": "string",
+    "suffix": 0
+  },
+  "taskFlowMapRef": {},
+  "maxNumberExecutions": 0,
+  "action": "STOP",
+  "active": true,
+  "cronExpression": "string"
 }
 ```
 
@@ -1919,10 +1919,10 @@ Body format:
 
 ```json
 {
-    "from": 0,
-    "size": 0,
-    "orderBy": "string",
-    "ascending": true
+  "from": 0,
+  "size": 0,
+  "orderBy": "string",
+  "ascending": true
 }
 ```
 
@@ -2167,7 +2167,7 @@ Body format:
 
 ```json
 {
-    "file": "string"
+  "file": "string"
 }
 ```
 
@@ -2551,9 +2551,9 @@ Body format:
 
 ```json
 {
-    "queueId": {},
-    "numberOfSourceThreads": 0,
-    "numberOfTaskThreads": 0
+  "queueId": {},
+  "numberOfSourceThreads": 0,
+  "numberOfTaskThreads": 0
 }
 ```
 
@@ -2594,9 +2594,9 @@ Body format:
 
 ```json
 {
-    "queueId": {},
-    "numberOfSourceThreads": 0,
-    "numberOfTaskThreads": 0
+  "queueId": {},
+  "numberOfSourceThreads": 0,
+  "numberOfTaskThreads": 0
 }
 ```
 
@@ -2744,10 +2744,10 @@ Body format:
 
 ```json
 {
-    "from": 0,
-    "size": 0,
-    "orderBy": "string",
-    "ascending": true
+  "from": 0,
+  "size": 0,
+  "orderBy": "string",
+  "ascending": true
 }
 ```
 
@@ -2800,10 +2800,10 @@ Body format:
 
 ```json
 {
-    "from": 0,
-    "size": 0,
-    "orderBy": "string",
-    "ascending": true
+  "from": 0,
+  "size": 0,
+  "orderBy": "string",
+  "ascending": true
 }
 ```
 
@@ -2975,19 +2975,19 @@ Body format:
 
 ```json
 {
-    "fields": {},
-    "className": "string",
-    "scope": "MAP",
-    "fullyConfigured": true,
-    "singleton": true,
-    "objectName": "string",
-    "objectConfigurationId": "string",
-    "constructorArguments": [
-        {
-            "fieldConfigurationType": "Primitive"
-        }
-    ],
-    "fieldConfigurationType": "Primitive"
+  "fields": {},
+  "className": "string",
+  "scope": "MAP",
+  "fullyConfigured": true,
+  "singleton": true,
+  "objectName": "string",
+  "objectConfigurationId": "string",
+  "constructorArguments": [
+    {
+      "fieldConfigurationType": "Primitive"
+    }
+  ],
+  "fieldConfigurationType": "Primitive"
 }
 ```
 
@@ -3054,19 +3054,19 @@ Body format:
 
 ```json
 {
-    "fields": {},
-    "className": "string",
-    "scope": "MAP",
-    "fullyConfigured": true,
-    "singleton": true,
-    "objectName": "string",
-    "objectConfigurationId": "string",
-    "constructorArguments": [
-        {
-            "fieldConfigurationType": "Primitive"
-        }
-    ],
-    "fieldConfigurationType": "Primitive"
+  "fields": {},
+  "className": "string",
+  "scope": "MAP",
+  "fullyConfigured": true,
+  "singleton": true,
+  "objectName": "string",
+  "objectConfigurationId": "string",
+  "constructorArguments": [
+    {
+      "fieldConfigurationType": "Primitive"
+    }
+  ],
+  "fieldConfigurationType": "Primitive"
 }
 ```
 
@@ -3204,9 +3204,9 @@ Body format:
 
 ```json
 {
-    "firstname": "string",
-    "lastname": "string",
-    "role": "USER"
+  "firstname": "string",
+  "lastname": "string",
+  "role": "USER"
 }
 ```
 
@@ -3251,11 +3251,11 @@ Body format:
 
 ```json
 {
-    "password": "string",
-    "firstname": "string",
-    "lastname": "string",
-    "email": "string",
-    "role": "USER"
+  "password": "string",
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string",
+  "role": "USER"
 }
 ```
 
@@ -3305,11 +3305,11 @@ Body format:
 
 ```json
 {
-    "password": "string",
-    "firstname": "string",
-    "lastname": "string",
-    "email": "string",
-    "role": "USER"
+  "password": "string",
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string",
+  "role": "USER"
 }
 ```
 
@@ -3365,11 +3365,11 @@ Body format:
 
 ```json
 {
-    "password": "string",
-    "firstname": "string",
-    "lastname": "string",
-    "email": "string",
-    "role": "USER"
+  "password": "string",
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string",
+  "role": "USER"
 }
 ```
 
@@ -3516,9 +3516,9 @@ Body format:
 
 ```json
 {
-    "firstname": "string",
-    "lastname": "string",
-    "role": "USER"
+  "firstname": "string",
+  "lastname": "string",
+  "role": "USER"
 }
 ```
 
@@ -3719,7 +3719,7 @@ Body format:
 
 ```json
 {
-    "file": "string"
+  "file": "string"
 }
 ```
 

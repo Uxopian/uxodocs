@@ -1,9 +1,12 @@
 ---
+sidebar_position: 7
 last_update:
   date: '2026-01-13T09:15:17.464Z'
   author: CI/CD Bot
 content_hash: 9538eec6f9f844adfe573d206b06ff3fc605a89a182ecf15251860f1e88625a8
 ---
+
+# Tool
 
 ## AlfrescoRestDeleteNode <small> - Alfresco delete nodes using Alfresco REST protocol </small> {#AlfrescoRestDeleteNode data-toc-label="AlfrescoRestDeleteNode"}
 
@@ -116,6 +119,18 @@ This task will generates different exception types : either TaskException or Run
 | No-exception ratio       | `Integer` | The number of no-exception which will be thrown by Fast2      | `4 `          |
 | Task exceptions ratio    | `Integer` | The number of task exception which will be thrown by Fast2    | `3 `          |
 
+## FlowerDocsQuerier <small> - FlowerDocs querier </small> {#FlowerDocsQuerier data-toc-label="FlowerDocsQuerier"}
+
+Allows components extraction from FlowerDocs using JSON formatted FlowerDocs request. Components can be documents, folders, virtual folders or tasks.
+
+<b>Mandatory settings</b>
+
+|Key      | Type    | Description | Default value | Example |
+| - | - | - | - | - |
+| FlowerDocs connection provider | [FlowerDocsConnectionProvider](credentials.md#FlowerDocsConnectionProvider) |  |  |  |
+| JSON Flower Search Request | `String` | This field supports pattern `${...}` syntax. |  | `{\"filterClauses\": [{\"criteria\": [{\"name\": \"B_IdPli\",\"operator\": \"EQUALS_TO\",\"type\": \"STRING\",\"values\": [\"KOFAX_e57f087f-0fe5-48d0-bee6-2d6b10a874a9\"]}]}],\"max\": 100,\"start\": 0}` |
+| Flower component category | `String` | Choose among DOCUMENT, TASK, FOLDER or VIRTUAL_FOLDER. This field supports pattern `${...}` syntax. |  |  |
+
 ## GenerateExceptionTask <small> - Throw exception when condition is verified </small> {#GenerateExceptionTask data-toc-label="GenerateExceptionTask"}
 
 This task is responsible for exception generation based on a condition which can be dynamically built for each punnet.
@@ -125,6 +140,22 @@ This task is responsible for exception generation based on a condition which can
 | Key       | Type     | Description                                                                                                                                                 | Default value |
 | --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | Condition | `String` | Set here the condition to trigger exception. This field will be resolved by Fast2 before the task is executed <br/> <p> Ex/ mimeType == application/pdf</p> | `true `       |
+
+## GenericRestApiTask <small> - Consume a REST API </small> {#GenericRestApiTask data-toc-label="GenericRestApiTask"}
+
+Consume any generic REST API task and add the response in the punnet. Supported Methods: GET, PUT, POST and DELETE.
+Configuration: Allows defining the API endpoint URL, headers, and query parameters.
+Response Handling: The HTTP status code (e.g., 200) and the response body (e.g., JSON) are automatically mapped to punnet metadata fields, with configurable key names.
+Error Handling: In case of a failed API call, the error code and response body (if available) are still added to the punnet to allow for diagnostics.
+
+<b>Mandatory settings</b>
+
+|Key      | Type    | Description |  Default value |
+| - | - | - | - |
+| Response code metadata key | `Pattern` | Property name of the response code in the dataset | |
+| Body metadata key | `Pattern` | Property name of the body in the dataset | |
+| REST API client | [GenericRestClient](credentials.md#GenericRestClient) | | |
+| Continue task after document failed | `Boolean` | Continue the task process even if an API call failed with a document | `true` |
 
 ## HashSignTask <small> - Compute content hash </small> {#HashSignTask data-toc-label="HashSignTask"}
 
@@ -270,10 +301,19 @@ This task only works with JDK-11. If any record matches the input query, the UUI
 
 <b>Mandatory settings</b>
 
-| Key                      | Type                      | Description                                                                                                                    |
-| ------------------------ | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Nuxeo connection details | `NuxeoConnectionProvider` |                                                                                                                                |
-| Nuxeo query              | `String`                  | NXQL query, with double-quotes around values (Ex: SELECT \* FROM Document WHERE dc:title = `\"${nom}\"` AND ecm:isTrashed = 0) |
+|Key      | Type    | Description | 
+| - | - | - |
+| Nuxeo connection details | `NuxeoConnectionProvider` |  |
+| Nuxeo query | `String` | NXQL query, with double-quotes around values (Ex: `SELECT * FROM Document WHERE dc:title = \"${nom}\" AND ecm:isTrashed = 0`) |
+
+## ParseJsonAsProperties <small> - Task to add new data from a JSON file as data </small> {#ParseJsonAsProperties data-toc-label="ParseJsonAsProperties"}
+
+
+<b>Mandatory settings</b>
+
+|Key      | Type    | Description | Example | Default value |
+| - | - | - | - | - |
+| Path of JSON file to parse | Pattern | `${absolutePath}/myFile.json` | Path of JSON file for properties to map. Pattern syntax `${...}` is supported, wilcards are not. |
 
 ## PropertyHelper <small> - FileNet submodule for properties management </small> {#PropertyHelper data-toc-label="PropertyHelper"}
 

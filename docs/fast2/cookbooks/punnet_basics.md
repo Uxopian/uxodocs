@@ -1,4 +1,6 @@
 ---
+title: Punnets management
+sidebar_position: 1
 author: Joseph TESSIER
 tags:
     - boilerplate

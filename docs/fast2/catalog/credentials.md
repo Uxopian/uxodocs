@@ -1,4 +1,5 @@
 ---
+sidebar_position: 3
 title: Credentials
 last_update:
   date: '2026-01-13T09:15:17.464Z'
@@ -104,6 +105,24 @@ Module used by Fast2 to establish to communication with the destination Document
 | Password     | `String` | Password of the aforementioned username.                   |
 | Username     | `String` | Login with scope to access the docbase with proper rights. |
 
+## DctmSshClient <small> - Documentum SSH client" </small> {#DctmSshClient data-toc-label="DctmSshClient"}
+
+Module used by Fast2 to establish the connection with the destination Documentum server.
+
+:::warning
+
+    Using this feature may significantly degrade performance. To use this option, the Client must be set on all Documentum tasks.
+:::
+
+<b>Mandatory settings</b>
+
+| Key          | Type     | Description                                                |
+| ------------ | -------- | ---------------------------------------------------------- |
+| Username | `String` | Documentum machine username |
+| Password | `String` | Documentum machine password |
+| IP | `String` | Documentum machine IP |
+
+
 ## EmbeddedDbConnectionProvider <small> - OpenSearch connection provider </small> {#EmbeddedDbConnectionProvider data-toc-label="EmbeddedDbConnectionProvider"}
 
 Module used by Fast2 to connect to its own database.
@@ -159,18 +178,48 @@ Module responsible for authentication of Fast2 for FlowerDocs
 
 <b>Mandatory settings</b>
 
-| Key          | Type     | Description                                             |
-| ------------ | -------- | ------------------------------------------------------- |
-| URL endpoint | `String` | Web services target URL                                 |
-| Password     | `String` | Password of the service account used for authentication |
-| Scope        | `String` | Scope of the service account used for authentication    |
-| Username     | `String` | Username of the service account used for authentication |
+| Key          | Type     | Description                                                                                                      |
+| ------------ | -------- | ---------------------------------------------------------------------------------------------------------------- |
+| URL endpoint | `String` | Web services target URL. For example : https://www.demo.flowerdocs.cloud/flower-docs-ws/services                 |
+| Password     | `String` | Password of the service account used for authentication                                                          |
+| Scope        | `String` | Scope of the service account used for authentication                                                             |
+| Username     | `String` | Username of the service account used for authentication                                                          |
 
 <b>Optional settings</b>
 
 | Key                          | Type      | Description                              | Default value |
 | ---------------------------- | --------- | ---------------------------------------- | ------------- |
 | Overrides authenticated user | `Boolean` | Allows connections to multiple endpoints | `false `      |
+
+## GenericRestClient <small> - Generic REST client connection </small> {#GenericRestClient data-toc-label="GenericRestClient"}
+
+Allows Fast2 to connect to any REST API.
+
+ <b>Mandatory settings</b>
+
+| Key      | Type     | Description |
+| -------- | -------- | ----------- |
+| Endpoint | `Pattern` | Complete URI address of the endpoint |
+| Method   | `String` | HTTP method to use <br/> <p> Ex/ GET, POST, PUT, DELETE</p>|
+
+<b>Optional settings</b>
+
+| Key      | Type     | Description | Example | Default value |
+| -------- | -------- | ----------- | ------------- | ------------- |
+| Header  | `String/Pattern map` | Parameters of the header | | |
+| Query parameters | `String/Pattern map` | | | |
+| Body content type in request | `String` | | application/json | |
+| Proxy host | `String` | | | |
+| Proxy port | `Integer` | | | |
+| Proxy username | `String` | | | |
+| Proxy password | `String` | | | |
+| Socket timeout | `Integer` | Timeout to receive data (in ms) | | 60000 |
+| Request timeout | `Integer` | Timeout until a connection with the server is established (in ms) | | 30000 |
+| Total number of connections | `Integer` | Set the maximum number of total open connections | 2048 | |
+| Max connections per route | `Integer` | Set the maximum number of concurrent connections per route | | 2048 |
+| Form field body | `String/Pattern map` | Field used to send structured data in Key/Value pairs. Required for content types: multipart/form-data, and application/x-www-form-urlencoded. FILE UPLOADS (Multipart) : To include files within a form, enter the absolute or relative file path as the value and add '_file' at the end of the corresponding key. | | |
+| Raw body | `Pattern` | Field used when the request body is a single content. Required for: text/plain, application/xml, and all single binary file uploads (e.g., image/*, application/pdf). FILE UPLOADS : Enter the file path and check the file path option. Otherwise, enter the literal content (text or XML string). | | |
+| File Path | `Boolean` | Indicates if the raw body contains a file path | | `false ` |
 
 ## MailBoxProvider <small> - Mail box connection </small> {#MailBoxProvider data-toc-label="MailBoxProvider"}
 
@@ -250,12 +299,17 @@ This Mobius connection module is required for Fast2 to successfully establish th
 
 <b>Mandatory settings</b>
 
-| Key                | Type     | Description                                                                  | Default value |
-| ------------------ | -------- | ---------------------------------------------------------------------------- | ------------- |
-| Accessible schemas | `String` | List of document schemas accessible with this connexion                      | `* `          |
-| Connexion URL      | `String` | `http://hostname:port/nuxeo` <br/> <p> Ex/ `http://localhost:8080/nuxeo`</p> |
-| Password           | `String` |                                                                              |
-| UserName           | `String` |                                                                              |
+| Key                | Type     | Description                                                              | Default value | Example |
+| ------------------ | -------- | ------------------------------------------------------------------------ | ------------- | ------- |
+| URL endpoint      | `String` | `http://hostname:port/nuxeo` | | `http://localhost:8080/nuxeo` |
+| Password           | `String` | | | |
+| UserName           | `String` | | | |
+
+<b>Optional settings</b>
+
+| Key                | Type     | Description                                                              | Default value | Example |
+| ------------------ | -------- | ------------------------------------------------------------------------ | ------------- | ------- |
+| Accessible schemas | `String` | List of document schemas accessible with this connexion | `* ` | |                                                              |
 
 ## OpenTextCredentials <small> - OpenText user credentials </small> {#OpenTextCredentials data-toc-label="OpenTextCredentials"}
 

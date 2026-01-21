@@ -1,9 +1,12 @@
 ---
+sidebar_position: 8
 last_update:
   date: '2026-01-13T09:15:17.464Z'
   author: CI/CD Bot
 content_hash: 0d7ae4b4c7fba23600b2735cdca7c150fe2fcdb5352b865bec93aeb77b012704
 ---
+
+# Injectors
 
 ## AlfrescoBulkImporter <small> - Perform a bulk import on Alfresco </small> {#AlfrescoBulkImporter data-toc-label="AlfrescoBulkImporter"}
 
@@ -98,7 +101,7 @@ Fast2 proposes this task to load your documents, metadata and more within design
 | Dry run               | `Boolean` | Simulates an injection, performs document integrity controls, but does not load the document into AWS S3                                                                    | `false `      |
 | Destination file name | `String`  | Metadata for the file name once injected into the S3 bucket. Pattern syntax is supported.                                                                                   | `${name} `    |
 | Encryption context    | `String`  | Context used for server-side encryption. This context is a JSON map. <br/> <p> Ex/ `{\"testKey\":\"testValue\"}`</p>                                                        |
-| ARN key               | `String`  | Key used for client-side encryption, before loading the document into S3. <br/> <p> Ex/ arn:aws:kms:\<region\>:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</p>    |
+| ARN key               | `String`  | Key used for client-side encryption, before loading the document into S3. <br/> <p> Ex/ arn:aws:kms::111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</p>    |
 | Update only           | `Boolean` | Only changing metadata, content is left as is                                                                                                                               | `false `      |
 
 ## CSVWriter <small> - CSV file writer </small> {#CSVWriter data-toc-label="CSVWriter"}
@@ -138,15 +141,16 @@ Use this task to inject into Documentum ECM system. Fast2 embeds v6.7 of Documen
 
 <b>Mandatory settings</b>
 
-| Key         | Type                                                         | Description                                                                        |
-| ----------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| Credentials | [DctmConnectionProvider](credentials#DctmConnectionProvider) | Connection module establishing the communication with a given Documentum instance. |
+| Key         | Type                                                            | Description                                                                        |
+| ----------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Credentials | [DctmConnectionProvider](credentials.md#DctmConnectionProvider) | Connection module establishing the communication with a given Documentum instance. |
 
 <b>Optional settings</b>
 
-| Key                      | Type                                          | Description                                                                                                                                          |
-| ------------------------ | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Documentum configuration | [DctmConfiguration](helper#DctmConfiguration) | Customize here the Documentum details related to the instance you are planning to inject documents into. For more, refer to the appropriate section. |
+| Key                      | Type                                             | Description                                                                                                                                          |
+| ------------------------ | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Documentum configuration | [DctmConfiguration](helper.md#DctmConfiguration) | Customize here the Documentum details related to the instance you are planning to inject documents into. For more, refer to the appropriate section. |
+| SSH client | [DctmSshClient](credentials.md#DctmSshClient) | SSH client used to establish the connection with the Documentum server |
 
 ## FileNet35Injector <small> - Injector for FileNet P8 3.5 </small> {#FileNet35Injector data-toc-label="FileNet35Injector"}
 
@@ -231,14 +235,32 @@ Use this task to inject documents and data into a FileNet. If all documents have
 | Update system properties                       | `Boolean`                             | It can only be used for either document creation or update (when a new version is created)                                                                                                                                                                                   |
 | Use UpdatingBatch on documents                 | `Boolean`                             | Run the 'UpdatingBatch' feature of FileNet, at each punnet being processed.                                                                                                                                                                                                  |
 | Default MimeType                               | `String`                              | The mime-type to set when no MimeType has been provided neither in document nor its content                                                                                                                                                                                  |
-| Limit CE connection life-time                  | `Long`                                | At end of TTL, the connection will be replaced by a brand new one                                                                                                                                                                                                            | `Long.MAX_VALUE `    |
+| Limit CE connection life-time                  | `Long`                                | At end of TTL, the connection will be replaced by a brand new one. Default value is Long.MAX_VALUE                                                                                                                                                                                                         | `9223372036854775807` |
 | Fields to update                               | `String`                              | Default query to select fields to update                                                                                                                                                                                                                                     | `* `                 |
 | VersionSeries metadata                         | `String`                              | Name of the VersionSeries property common to all documents in punnet. If all documents have the same value, they will be considered as one same multiversioned document in FileNet.                                                                                          | `VersionSeries `     |
 | Post-commit delta                              | `Integer`                             | Time to wait after a commit instruction, may be useful to let FileNet perform asynchronous handling of document injection                                                                                                                                                    | `0 `                 |
 | Force folder creation                          | `Boolean`                             | Overwrite folder canCreate property : create folders when they do not exist                                                                                                                                                                                                  |
 | Prevent document overwriting                   | `Boolean`                             | Check if the document already exists before creating it using `WHERE` clause. You can throw an exception in case an older document can be found (see _Throw exception if document already exists_). If false, create all documents without control                           |
 | Force to perform update                        | `Boolean`                             | Force document Update action. In case the document did not exist, an error is thrown                                                                                                                                                                                         |
-| WHERE clause for update                        | `String`                              | The criteria which the documents to update will have to match <br/> <p> Ex/ [Id]=`${myFileNetDocumentId}`</p>                                                                                                                                                                |
+| WHERE clause for update                        | `String`                              | The criteria which the documents to update will have to match <br/> <p> Ex/ [Id]=`${myFileNetDocumentId}`</p>   
+
+## FlowerDocsIndexPlainText <small> - Push input for plain-text search indexing in FlowerDocs </small> {#FlowerDocsIndexPlainText data-toc-label="FlowerDocsIndexPlainText"}
+
+<b>Mandatory settings</b>
+
+| Key      | Type    | Description |
+| - | - | - |
+| FlowerDocs REST endpoint | `String` |  |
+| Username | `String` |  |
+| Password | `String` |  |
+| Scope | `String` |  |
+| Text for indexing | Pattern |  |
+
+<b>Optional settings</b>
+
+| Key      | Type    | Description |
+| - | - | - |
+| FlowerDocs document ID | Pattern |  |                                                                                                                                                             |
 
 ## FlowerInjector <small> - Fast2 injector module for FlowerDocs </small> {#FlowerInjector data-toc-label="FlowerInjector"}
 

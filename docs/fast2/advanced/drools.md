@@ -1,4 +1,6 @@
 ---
+title: Drools
+sidebar_position: 1
 tags:
     - Drools
     - Java
@@ -27,31 +29,31 @@ It’s composed with :
 
 - **RuleSet**
 
-: means that the current speadsheet is a decision table
+  means that the current speadsheet is a decision table
 
 - **Import**
 
-: all java classes required, separated by a comma. These are the same packages that would be imported in a regular Java class in order to have the code running properly.
+  all java classes required, separated by a comma. These are the same packages that would be imported in a regular Java class in order to have the code running properly.
 
 - **Sequential** (optional)
 
-: specify here the order in which rules should apply
+  specify here the order in which rules should apply
 
 - **RuleTable** rules
 
-: name of the table
+  name of the table
 
 - **NAME** column
 
-: represents the name of the differents rules
+  represents the name of the differents rules
 
 - **CONDITION** column
 
-: condition to verify to perform an action
+  condition to verify to perform an action
 
 - **ACTION** column
 
-: action to perform if all previous conditions have been validated
+  action to perform if all previous conditions have been validated
 
 - Variables used are indicated below the column CONDITION (doc : Document)
 

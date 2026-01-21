@@ -1,9 +1,12 @@
 ---
+sidebar_position: 5
 last_update:
   date: '2026-01-13T09:15:17.464Z'
   author: CI/CD Bot
 content_hash: 34391f4995b0d7d9e526fcac3d3bc8d6404f34f25d8c5c5168f4c8159d0e6d52
 ---
+
+# Transformation tasks
 
 ## AlterDocumentContent <small> - Create, embed, delete or update document content </small> {#AlterDocumentContent data-toc-label="AlterDocumentContent"}
 

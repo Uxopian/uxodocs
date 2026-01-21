@@ -1,4 +1,5 @@
 ---
+sidebar_position: 2
 draft: false
 title: Patterns
 tags:
@@ -43,7 +44,7 @@ Pattern-related syntax `${...}` is not required, fill the field with your expres
 
 :::
 
-Based on SpEL ([Spring Expression Language](https://docs.spring.io/spring-framework/docs/4.3.10.RELEASE/spring-framework-reference/html/expressions.html), the syntax of these conditions will sound familiar to anyone who's already coded one day:
+Based on SpEL ([Spring Expression Language](https://docs.spring.io/spring-framework/docs/4.3.10.RELEASE/spring-framework-reference/html/expressions.html)), the syntax of these conditions will sound familiar to anyone who's already coded one day:
 
 ![Example of pattern implementation as link condition](../assets/img/advanced/pattern_condition2025.png)
 

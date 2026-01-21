@@ -1,4 +1,6 @@
 ---
+sidebar_position: 2
+title: Documents management
 image: images/cookbooks/fast2-models/punnet.png
 author: Joseph TESSIER
 tags:

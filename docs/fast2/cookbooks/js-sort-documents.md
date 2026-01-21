@@ -1,4 +1,5 @@
 ---
+sidebar_position: 9
 title: Sort documents in a punnet
 date: "2023-01-12"
 author: Joseph TESSIER

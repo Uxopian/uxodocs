@@ -1,4 +1,5 @@
 ---
+sidebar_position: 7
 title: Retrieve content and metadata from an S3 bucket
 tags:
     - xml

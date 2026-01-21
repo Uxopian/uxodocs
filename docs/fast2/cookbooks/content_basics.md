@@ -1,5 +1,6 @@
 ---
-title: Contents in Fast2
+title: Contents management
+sidebar_position: 3
 tags:
     - boilerplate
     - content

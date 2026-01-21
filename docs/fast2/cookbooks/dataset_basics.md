@@ -1,5 +1,6 @@
 ---
-title: Datasets
+title: Dataset management
+sidebar_position: 4
 tags:
     - boilerplate
     - dataset

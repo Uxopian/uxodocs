@@ -21,7 +21,7 @@ The very first step of every migration is to start building the workflow. Since 
 1. then you perform any required transformation to get the content compliant with the target system,
 1. finally you load the content and/or its metadata.
 
-With Fast2 started, go to the UI (default address [http://localhost:1789/index.html](http://localhost:1789/index.html)). From here, you can create a new map browse your machine to import an existing one.
+With Fast2 started, go to the UI (default address [http://localhost:1789](http://localhost:1789)). From here, you can create a new map browse your machine to import an existing one.
 
 :::warning
 

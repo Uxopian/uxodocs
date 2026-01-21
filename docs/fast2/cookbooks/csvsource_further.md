@@ -1,4 +1,5 @@
 ---
+sidebar_position: 8
 title: "CSV source : a step further"
 author: Joseph TESSIER
 tags:

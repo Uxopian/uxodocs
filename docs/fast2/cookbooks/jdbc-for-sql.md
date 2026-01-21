@@ -1,11 +1,20 @@
 ---
+sidebar_position: 10
+title: Interact with a SQL database
 last_update:
   date: '2026-01-13T09:15:17.464Z'
   author: CI/CD Bot
 content_hash: 5c54ec5c1e9ec1cb5049e8d9d8163ea3a1069800e3cef472135950f553906aae
 ---
 
-# JDBC : How to link Fast2 and SQL DB
+:::warning
+
+    This page has been moved to the Knowledge-Base at 🔗[JDBC : How to link Fast2 and SQL DB](https://arondor.atlassian.net/servicedesk/customer/portal/82/article/4008771588)
+
+:::
+
+
+<!-- # JDBC : How to link Fast2 and SQL DB
 
 ![Cover image for JDBC cookbook](../assets/img/cookbooks/jdbc.png)
 
@@ -94,4 +103,5 @@ Congrats, you've made it !
 <br/><br/>
 Now you can also use the JDBC connection for other tasks such as [SQLMultiQueryTask](/docs/fast2/catalog/tool#SQLMultiQueryTask) or [SQLSource](/docs/fast2/catalog/source#SQLSource).
 <br/>
-In addition to inserting or updating your database, you can also use these tasks to remove the contents of your tables !
+In addition to inserting or updating your database, you can also use these tasks to remove the contents of your tables ! 
+-->

@@ -1,9 +1,12 @@
 ---
+sidebar_position: 6
 last_update:
   date: '2026-01-13T09:15:17.464Z'
   author: CI/CD Bot
 content_hash: 749ecf91c45a6255c2db5ba3476c0849f175b8364dd41a94ad6ad52658856890
 ---
+
+# Helper
 
 ## DctmConfiguration <small> - Module for customized Documentum configuration </small> {#DctmConfiguration data-toc-label="DctmConfiguration"}
 
