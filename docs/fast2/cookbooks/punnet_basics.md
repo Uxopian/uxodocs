@@ -8,9 +8,9 @@ tags:
     - content
     - java
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 338fe0467a5af501c6d63bec000b6a5c502358a19152d5848410e00ea91e04ae
+content_hash: d1f6a84acbeac4e91b32b476e888e5fbab0369e37f9b72288d423e0fc2b7a177
 ---
 
 # Learn how to deal with punnets

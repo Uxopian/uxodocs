@@ -2,9 +2,9 @@
 sidebar_position: 3
 title: Database
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 7cd59aa460be64e76037db84dd8b6a6f2a07e4b14764b3e02d04801238ddfdad
+content_hash: 1fdc0d61a4aa3c0c9e57da540930d74e3e6d506871a9e87a6d47f72551212481
 ---
 
 # Internal database

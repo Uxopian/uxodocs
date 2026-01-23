@@ -2,9 +2,9 @@
 sidebar_position: 5
 title: From ZIP to punnet
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 092c9bb7a41ca82d998f1bc7e8fe72c4b5764e4e8696a1639ccd223607c4eaf1
+content_hash: 08da475b3de195ff774ce06e1b0db62eb832631f3b84de185873fce0a556b2a2
 ---
 
 ![Blog cover](../assets/img/cookbooks/fromZiptoPunnet_cover.jpg)

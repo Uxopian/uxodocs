@@ -2,9 +2,9 @@
 title: Adding/Replacing libraries
 sidebar_position: 9
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 4057dd17baac3eb300052a1ea2d14b48b5fdc46a54c501f7cb74d93807e5b11b
+content_hash: f5227f4436aeaf1d045127d675ccc0596f9ecc1bcc81a1561f167d56d29e1823
 ---
 
 # Importing or Replacing JAR Files from the Fast2 UI (available from v2025.2.0)

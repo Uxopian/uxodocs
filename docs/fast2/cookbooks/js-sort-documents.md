@@ -12,9 +12,9 @@ tags:
 photograph: Héctor J. Rivas
 photograph_pseudo: "@@hjrc33"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: f961082c8233e10028c4f6003bd154350ba46005c8a2978c207d859174bf5cb3
+content_hash: 6cd03b391fcf21917323bbe932bafa766288d6a00a39c7de1a57471e57ee04c8
 ---
 
 ![photo cover](../assets/img/cookbooks/photo-cover.avif)

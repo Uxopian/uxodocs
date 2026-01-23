@@ -9,9 +9,9 @@ tags:
     - javascript
     - boilerplate
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: f5d8b4c73cc1f9f74dbdb8a23a8f170ecea0dc097a64251ec9ff487c0616dcc6
+content_hash: 9ba491fcfed2fddcae71e1e9ab6ac3ee0cdc894d9bc7190dcf20672c69d82428
 ---
 
 ![Data from file name cover](../assets/img/cookbooks/dataFromFilename_cover.png)

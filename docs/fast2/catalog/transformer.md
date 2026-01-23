@@ -1,9 +1,9 @@
 ---
 sidebar_position: 5
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 34391f4995b0d7d9e526fcac3d3bc8d6404f34f25d8c5c5168f4c8159d0e6d52
+content_hash: 6aa278f6d7ce001a49c765ad93340be6b330a301dc7f4b90e305d5a23e09b1b3
 ---
 
 # Transformation tasks

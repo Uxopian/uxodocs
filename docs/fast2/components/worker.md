@@ -2,9 +2,9 @@
 sidebar_position: 2
 title: Worker
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: a30597978a7fa79ffbff17261c257817ac111e3ac963acc061ae81610738cb9d
+content_hash: 83265769afd21eabfd94f6267ac2f85b448c9748e36922b5e3e1b0cf64a9aef8
 ---
 
 # The worker
@@ -19,19 +19,19 @@ No migration project could be overcome if it was not by them!
 
 If their role can seem quite important, they are paradoxically as easy and straight forward to get up and running. Just the right files to gather, as mentioned here, and a new worker just enrolled!
 
-One of the major aspects of a promising migration project is what all project managers will ask you to vouch for: performance metrics. Let’s suppose you need to migrate documents from a source system into a second one, the latter having a much higher input flow tolerance. No need for empirical statistics to know that the old ECM will be the bottleneck. An architecture similar to a hybrid deployment variant (topic we presented [here](https://www.fast2.tech/blog/deployment-variants/) could easily be envisioned. But let’s complicate things a little bit here: in-between the extraction and the injection phase, the metadata have to be updated, with new date formatting and heavy mapping of document related properties. Can still a hybrid-like architecture save you now ?
+One of the major aspects of a promising migration project is what all project managers will ask you to vouch for: performance metrics. Let’s suppose you need to migrate documents from a source system into a second one, the latter having a much higher input flow tolerance. No need for empirical statistics to know that the old ECM will be the bottleneck. An architecture similar to a hybrid deployment variant (topic we presented [here](https://www.fast2.tech/blog/deployment-variants/)) could easily be envisioned. But let’s complicate things a little bit here: in-between the extraction and the injection phase, the metadata have to be updated, with new date formatting and heavy mapping of document related properties. Can still a hybrid-like architecture save you now ?
 
 ## <i class="fas fa-hard-hat"></i> Configure the worker(s)
 
 The required files for the worker to run properly are the following:
 
-| Item                                                     | Purpose                                             |
-| -------------------------------------------------------- | --------------------------------------------------- |
-| <i class="fas fa-folder"></i> config/\*                              | Configuration files, broker endpoint etc            |
-| <i class="fas fa-folder"></i> worker-libs/\*                         | All libraries and dependencies for tasks executions |
-| <i class="fab fa-java"></i> fast2-worker-package-X.Y.Z.jar | Worker main unit                                    |
-| <i class="fab fa-windows"></i> startup-worker.bat          | Binary file for Windows                             |
-| <i class="fab fa-linux"></i> startup-worker.sh             | Binary file for Linux                               |
+| Item                                                  | Purpose                                             |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| <i class="fas fa-folder"></i> `config/*`             | Configuration files, broker endpoint etc            |
+| <i class="fas fa-folder"></i> `worker-libs/*`        | All libraries and dependencies for tasks executions |
+| <i class="fab fa-java"></i> `fast2-worker-package-X.Y.Z.jar` | Worker main unit                                    |
+| <i class="fab fa-windows"></i> `startup-worker.bat`  | Binary file for Windows                             |
+| <i class="fab fa-linux"></i> `startup-worker.sh`     | Binary file for Linux                               |
 
 ### Change JDK
 
@@ -71,7 +71,7 @@ The queues names will also be declared in the tasks configuration panel, so the 
 
 In order to have specific worker tied to particular queues, the configuration needs to be updated here:
 
-```ini title="./config/application.properties" {2}
+```ini title="./config/application.properties" hl_lines="2"
 # Worker queue regex filter
 # worker.queue.regex=.*
 ```
@@ -80,7 +80,7 @@ In order to have specific worker tied to particular queues, the configuration ne
 
 In case serveral workers are required for specific queues and tasks, there might be no more need of the embedded worker itself. To make sure not to have it running pointlessly, this worker can be disactivated from the `./config/application.properties` files, as so :
 
-```ini title="./config/application.properties" {2}
+```ini title="./config/application.properties" hl_lines="2"
 # Disable auto-launch of embedded worker
 broker.embedded.worker.autostart=false
 ```
@@ -88,14 +88,14 @@ broker.embedded.worker.autostart=false
 ## <i class="fas fa-bolt"></i> Advanced use
 
 One of the major aspects of a promising migration project is what all project managers will ask you to vouch for: performance metrics.
-Let’s suppose you need to migrate documents from a source system into a second one, the latter having a much higher input flow tolerance. No need for empirical statistics to know that the old ECM will be the bottleneck. An architecture similar to a hybrid deployment variant (topic we presented [here](https://www.fast2.tech/blog/deployment-variants/) could easily be envisioned. But let’s complicate things a little bit here: in-between the extraction and the injection phase, the metadata have to be updated, with new date formatting and heavy mapping of document related properties. Can still a hybrid-like architecture save you now ?
+Let’s suppose you need to migrate documents from a source system into a second one, the latter having a much higher input flow tolerance. No need for empirical statistics to know that the old ECM will be the bottleneck. An architecture similar to a hybrid deployment variant (topic we presented [here](https://www.fast2.tech/blog/deployment-variants/)) could easily be envisioned. But let’s complicate things a little bit here: in-between the extraction and the injection phase, the metadata have to be updated, with new date formatting and heavy mapping of document related properties. Can still a hybrid-like architecture save you now ?
 
 ### Several workers
 
 ### Context
 
 One of the major aspects of a promising migration project is what all project managers will ask you to vouch for: performance metrics.
-Let’s suppose you need to migrate documents from a source system into a second one, the latter having a much higher input flow tolerance. No need for empirical statistics to know that the old ECM will be the bottleneck. An architecture similar to a hybrid deployment variant (topic we presented [here](https://www.fast2.tech/blog/deployment-variants/) could easily be envisioned.
+Let’s suppose you need to migrate documents from a source system into a second one, the latter having a much higher input flow tolerance. No need for empirical statistics to know that the old ECM will be the bottleneck. An architecture similar to a hybrid deployment variant (topic we presented [here](https://www.fast2.tech/blog/deployment-variants/)) could easily be envisioned.
 But let’s complicate things a little bit here: in-between the extraction and the injection phase, the metadata have to be updated, with new date formatting and heavy mapping of document related properties. Can still a hybrid-like architecture save you now ?
 
 ### How to set up
@@ -103,7 +103,7 @@ But let’s complicate things a little bit here: in-between the extraction and t
 Checkout in the official documentation the required Fast2 files and folders to set up a new worker. Leave a copy of the required files and folders on the machine hosting the source environment. This worker -- let’s label it as worker-S for “source” -- will be assigned to the extraction part.
 As indicated in the installation section, starting Fast2 will launch an embedded worker, assigned by default to all tasks composing the migration workflow. This worker here will be our worker-D (for “Destination”, or “Default”).
 
-Plug the worker-S onto the Fast2 broker (yes, the workers -- as [illustrated here](/docs/fast2/getting-started/overall-concepts#architecture) -- manifest themselves to the broker, and not the other way around) : to do so, open the `config/application.properties` of the worker-S :
+Plug the worker-S onto the Fast2 broker (yes, the workers -- as [illustrated here](../getting-started/overall-concepts.md#architecture) -- manifest themselves to the broker, and not the other way around) : to do so, open the `config/application.properties` of the worker-S :
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -144,8 +144,8 @@ server.servlet.context-path=/
 
 Update the name (or IP address) of the machine where Fast2 is running (`broker.host`), and the name of the queue which the worker will be assigned to (ex/ “extraction”).
 
-1. Start now the Fast2 server ([documentation here](/docs/fast2/getting-started/installation#start-fast2-broker) to have it up and running alongside the worker-D. This latter will be assigned to both the _mapping_ of the metadata and the injection of the documents in the destination environment.
-2. Then start the worker-S ([documentation here](/docs/fast2/getting-started/installation#start-fast2-worker).
+1. Start now the Fast2 server ([documentation here](../getting-started/installation.md#start-fast2-broker)) to have it up and running alongside the worker-D. This latter will be assigned to both the _mapping_ of the metadata and the injection of the documents in the destination environment.
+2. Then start the worker-S ([documentation here](../getting-started/installation.md#start-fast2-worker)).
 
 ![Schema of the architecture for a 2-worker migration](../assets/img/components/workers.png)
 
@@ -218,14 +218,16 @@ However there would be absolutely no point in starting another worker assigned t
 
 This guide explains how to configure a remote worker to your broker. It covers both scenarios: when both applications are on the same network and when they are on different networks.
 
+
 #### Prerequisites
 
 - Java Development Environment: Both the worker and broker applications should have at least a jdk8+ available on their environment. We highly recommend a jdk11.
 - Network Connectivity: Both systems should be able to connect to each other through the network (whether local or remote).
 
+
 #### Remote worker config
 
-```properties
+```properties 
 server.host=<broker_ip_address>
 
 # Remote = docs ends broker side
@@ -251,15 +253,13 @@ worker.content.factory=<remote|local>
 
 **Step 1: Ensure Network Connectivity**
 On the worker machine, ensure that you can ping the public IP address of the broker. You may need to test it by pinging broker_public_ip_address.
-
 ```bash
 ping <broker_public_ip_address>
 ```
-
 If the ping works, proceed to the next step. If the ping does not work, there may be an issue with the router, firewall, or routing configuration.
 
 **Step 2: Update the broker.url in the Worker Configuration**
-On the worker machine, update the **server.host** property in your _config/application.properties_ file to the local IP address of the broker.
+On the worker machine, update the **server.host** property in your *config/application.properties* file to the local IP address of the broker.
 
 If needed, you can change the protocol and port information as well. The **broker.url** variable is automatically updated. Do not change it.
 
@@ -270,12 +270,10 @@ server.port=1789
 
 broker.url=${server.protocol}://${server.host}:${server.port}/broker
 ```
-
 Make sure the port is open and the broker is listening on the specified port.
 
 **Step 3: Verify broker is listening on specified port**
 On the broker machine, verify that the broker application is listening on the port you specified by using the following command:
-
 ```bash
 # Linux
 sudo netstat -tuln | grep <port>
@@ -283,16 +281,13 @@ sudo netstat -tuln | grep <port>
 # Windows
 `netstat -ano | findstr <port>`
 ```
-
 The output should show something like:
-
 ```ruby
 tcp6       0      0 :::<port>                 :::*                    LISTEN
 ```
 
 **Step 4: Test the connection**
 On the worker machine, test the connection to the broker using nc (netcat) to check if the port is open and accessible:
-
 ```bash
 # Linux
 nc -zv <broker_local_ip_address> <port>
@@ -300,8 +295,8 @@ nc -zv <broker_local_ip_address> <port>
 # Windows
 telnet <broker_local_ip_address> <port>
 ```
-
 If the connection is successful, the worker and broker can communicate.
+
 
 #### Configure Worker and Broker on different networks
 
@@ -325,7 +320,6 @@ sudo ufw allow <port>/tcp
 **Step 3: Repeat steps explained for same network**
 
 #### Remote worker configuration
-
 You have multiple options through the application.properties file to configure your remote worker.
 
 ##### File storage : broker or worker ?
@@ -341,11 +335,10 @@ worker.content.factory=<remote|local>
 - Select **local** (default value) to keep documents processed by the worker from its side
 
 ##### Example
-
 This is an example to understand what happens for both scenarios. Imagine that we are extracting some documents from a Documentum environment and we need to convert tiff files to a pdf format.
 
-<!-- ###### Local
-```mermaid
+###### Local
+```mermaid 
 sequenceDiagram
 Worker ->> Broker: Hi broker, I'm available
 Broker ->> Worker: Hello worker, I have some work for you
@@ -355,10 +348,10 @@ Worker ->> Worker: Convert tiff to pdf
 Note right of Worker: Tiff and output <br> pdf files will be stored <br> from worker side
 Broker ->> Worker: Good job, campaign finished
 Worker ->> Broker: I'm still available if you need
-``` -->
+```
 
-<!-- ###### Remote
-```mermaid
+###### Remote
+```mermaid 
 sequenceDiagram
 Worker ->> Broker: Hi broker, I'm available
 Broker ->> Worker: Hello worker, I have some work for you
@@ -371,7 +364,7 @@ Worker ->> Worker: Clean up space
 Note right of Worker: To avoid duplicates, <br/> worker will clean files <br/> from its environment
 Broker ->> Worker: Good job, campaign finished
 Worker ->> Broker: I'm still available if you need
-``` -->
+```
 
 ##### File storage architecture
 
@@ -382,25 +375,20 @@ Then documents will follow a strict hierarchy as mentioned in the property **wor
 worker.files.dir=files/
 worker.files.pattern=@{campaign?:'shared'}/@{step?:'shared'}/@{documentId?:punnetId}
 ```
-
 Values shown above are used by default. Feel free to change it to match your requirements in term of folder organization.
 
-#### Troubleshooting
 
+#### Troubleshooting
 ##### Common Issues
 
 ###### Ping does not work
-
 Ensure that the devices can actually communicate over the network. Double-check the network cables, Wi-Fi connection, and make sure there are no misconfigured network settings or firewalls blocking ICMP packets.
 
 ###### Connection times out
-
 If using public IP addresses, check the router’s port forwarding configuration and verify that the firewall on both the broker and worker machines allows traffic on the relevant port.
 
 ###### Port is closed
-
 Verify that the broker application is actually listening on the specified port, and ensure the port is not blocked by a firewall.
 
 ###### Public IP changes
-
 If the public IP of the broker changes frequently, consider using a Dynamic DNS (DDNS) service to map a domain name to the changing IP address, so the worker can use the domain name instead of an IP address.

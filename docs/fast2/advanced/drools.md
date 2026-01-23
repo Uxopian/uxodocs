@@ -6,9 +6,9 @@ tags:
     - Java
     - Excel
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 00dcc734f408ab0671fc5ef0191c2f9acb81b55b264ed7240278434e9d66fffd
+content_hash: 7988066ad284a943bfe19ae335e230ca944959e60148bdfcb19aaa6af9dd2bc9
 ---
 
 # Drools: the Java rules engine

@@ -2,9 +2,9 @@
 sidebar_position: 4
 title: Create a workflow
 last_update:
-  date: '2026-01-20T16:11:38.246Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 50e4f6bdc93c314a7d87c047212fa1be84825873d1c5469058daec8a98620aa9
+content_hash: 83f198cd339ed431bab6b0ddcf505a3606ce1aff63171d48801bc781a713c986
 ---
 
 # Create a map

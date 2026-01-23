@@ -2,9 +2,9 @@
 sidebar_position: 10
 title: Interact with a SQL database
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 5c54ec5c1e9ec1cb5049e8d9d8163ea3a1069800e3cef472135950f553906aae
+content_hash: b0f2e7d81e9db02c0f59a087f06951a10cd4b1b4d4aae01d5269be11147ebe68
 ---
 
 :::warning

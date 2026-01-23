@@ -10,9 +10,9 @@ tags:
     - content
     - java
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: 9912a1aa58121f6da106fd22a23c9c8a4a92aca5967587c5e15dc712b61eb26f
+  date: '2026-01-23T15:35:56.881Z'
+  author: CI/CD Bot
+content_hash: 1e5587e001c3ac9eecc782f37bd8f95974a0a1ec934f7b7e8036e097098c8c76
 ---
 
 # Learn how to deal with documents

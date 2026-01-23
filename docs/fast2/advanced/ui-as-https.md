@@ -1,9 +1,9 @@
 ---
 draft: true
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: a2dc19d77df2c05d831764deb365693bd1a2c2ae8ad4eff9b92fd5c6fb5a4c35
+content_hash: c7d143cbde2a142e03ea73e10282870134c8871a395bff96c047313cefc1184b
 ---
 
 # HTTPS Configuration Guide

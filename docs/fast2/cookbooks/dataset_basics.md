@@ -7,9 +7,9 @@ tags:
     - java
     - data
 last_update:
-    date: "2025-12-01T14:30:57.777Z"
-    author: CI/CD Bot
-content_hash: a644442927e0abd9e798cf9b94f23c749b0150ab1666aecfcbcd30fa4294f2df
+  date: '2026-01-23T15:35:56.881Z'
+  author: CI/CD Bot
+content_hash: faada52c2270dce21667a3a298c5365818b296182921ec30ef3ab9486705d1b8
 ---
 
 # Learn how to deal with datasets

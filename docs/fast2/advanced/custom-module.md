@@ -1,9 +1,9 @@
 ---
 title: Custom module
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 3762e0c89d8cc093013ed84f84f0b51d55ac150ada155a1058f89fe0f9b3b42e
+content_hash: 1d24d71c633bae3a63ca22ca286c9e0c27d8b3ec7c8d557c1ee090cd7ee86464
 ---
 
 :::warning

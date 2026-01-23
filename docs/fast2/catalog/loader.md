@@ -1,9 +1,9 @@
 ---
 sidebar_position: 8
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 0d7ae4b4c7fba23600b2735cdca7c150fe2fcdb5352b865bec93aeb77b012704
+content_hash: 326e29429843883af6bf64fac575f604b5828e1fd72d91c48b0231a5d0bb86ff
 ---
 
 # Injectors

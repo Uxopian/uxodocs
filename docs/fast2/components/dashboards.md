@@ -2,9 +2,9 @@
 sidebar_position: 4
 title: Dashboards
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 43db3589a165c8e856008ac9944a5c34cd122364429bc5ae815127943c27f56e
+content_hash: cb72cccc50ee56a5af876901809c22d92081af06993dc66573fdcac1a0777483
 ---
 
 # Dashboards

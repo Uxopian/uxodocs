@@ -5,9 +5,9 @@ author: Joseph TESSIER
 tags:
     - csv
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 28d235aa9530fd078c1cd6d04bff25402dd5d20c80cbe1d5740209fba0595002
+content_hash: 95dc3c1117e9291443904b251b85f75b6a9874d1b59d48f966d95f88d985aad6
 ---
 
 ![unsplash drawers](../assets/img/cookbooks/unsplash-drawers.jpg)

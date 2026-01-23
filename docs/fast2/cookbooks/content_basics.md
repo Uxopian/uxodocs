@@ -6,9 +6,9 @@ tags:
     - content
     - java
 last_update:
-    date: "2025-12-02T14:29:22.460Z"
-    author: CI/CD Bot
-content_hash: fdee2ea5eecb2e0c07def6a1872d5aa14e319ca21b793c526633ed67b56e39de
+  date: '2026-01-23T15:35:56.881Z'
+  author: CI/CD Bot
+content_hash: 77b8c30b3485943c683f7e4c6114d784765049898f1ab65d878244c60738b2b5
 ---
 
 # Learn how to deal with contents

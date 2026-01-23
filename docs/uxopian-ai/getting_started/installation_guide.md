@@ -1,131 +1,151 @@
 ---
 title: Installation Guide
+sidebar_position: 1
 last_update:
-  date: '2026-01-20T14:02:07.044Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: 71bccec33bff3485ac42617060fcd2d97d286f333c2dcc15f6f35d557fcf4407
+content_hash: 13c1a679d9f6a428ce76cd2330b93869acf2b6c4d91d5f89bc59f01a8c73426e
 ---
 
-# 📦 Installation Guide
+# 📚 Guide: Uxopian AI Service Deployment
 
-This guide provides instructions for deploying the **uxopian-ai** service. We cover two methods:
-
-1.  **Docker Compose (Recommended):** Deploys the full stack (AI Service, Gateway, OpenSearch) using a provided starter kit.
-2.  **Java Application:** Manual deployment for specific custom environments.
+This guide covers the installation process for the **Uxopian AI** backend service and its vector database.
 
 ---
 
-## 🐳 Docker Deployment (Recommended)
+# 📦 Backend Deployment (AI Service)
 
-The easiest way to get started is using the provided Docker Compose starter kit. This sets up the AI service, a secured Gateway, and a dedicated OpenSearch node for vector storage.
+This section covers the installation of the AI engine and its vector database. Two scenarios are possible: **Docker** (Recommended via Starter Kit) or **Standalone** (Native Java).
 
-### 🔹 Step 1: Download the Starter Kit
+## 🚀 Scenario A: Docker Deployment (Starter Kit)
 
-Download the [uxopian-ai_docker_example.zip](./uxopian-ai_docker_example.zip) archive from the release repository.
+The Starter Kit provides a ready-to-use stack containing the AI service and an OpenSearch node.
 
-**Archive Structure:**
-Once extracted, you will see the following structure. This folder contains the stack definition and all necessary configuration files.
+### 🔹 Step 1: Download and Structure
+
+Download the [uxopian-ai_docker_example.zip](./uxopian-ai_docker_example.zip) archive. Once extracted, you should have the following directory structure:
 
 ```text
-uxopian-ai_docker_example
+.
 ├── config
-│   ├── application.yml             # Core application settings
-│   ├── goals.yml                   # Predefined AI goals
-│   ├── llm-clients-config.yml      # LLM Provider settings (OpenAI, Azure, etc.)
-│   ├── mcp-server.yml              # Model Context Protocol settings
-│   ├── metrics.yml                 # Observability configuration
-│   ├── opensearch.yml              # Vector database connection config
-│   └── prompts.yml                 # System prompts definitions
-├── gateway-application.yaml        # Configuration for the API Gateway
-└── uxopian-ai-stack.yml            # Docker Compose definition
+│   ├── application.yml             # Main Spring configuration
+│   ├── goals.yml                   # AI Goals definition
+│   ├── llm-clients-config.yml      # API Keys and Model selection (OpenAI, Mistral, etc.)
+│   ├── mcp-server.yml              # Model Context Protocol config
+│   ├── opensearch.yml              # Vector database connection
+│   └── prompts.yml                 # Pre-defined prompts
+├── gateway-application.yaml        # Gateway config (if used)
+└── uxopian-ai-stack.yml            # The docker-compose file
+
 ```
 
-### 🔹 Step 2: Pull the Docker Images
+### 🔹 Step 2: Pull Images
 
-Ensure you have access to the Artifactory and pull the required images.
+Pull the required images (example via Cloudsmith or Artifactory):
 
 ```bash
-docker pull artifactory.arondor.cloud:5001/uxopian-ai/ai-standalone:latest
-docker pull artifactory.arondor.cloud:5001/uxopian-ai/gateway:latest
-# OpenSearch is pulled from the public registry automatically by the compose file
+docker pull docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft1-rc3
+docker pull docker.uxopian.com/preview/gateway:2026.0.0-ft1-rc3
+# Note: The OpenSearch image is public and will be pulled automatically by the compose file.
+
 ```
 
-:::note Image Tags
-You may need to update the `image:` fields in `uxopian-ai-stack.yml` to match the full path of the images you just pulled (e.g., replace `image: 'ai-standalone'` with `artifactory.arondor.cloud:5001/uxopian-ai/ai-standalone:latest`).
-:::
+### 🔹 Step 3: Environment Variable Configuration
 
-### 🔹 Step 3: Configuration
+The `uxopian-ai-stack.yml` file orchestrates the containers. **Do not modify the YAML structure**, but you must adapt the environment variables of the `uxopian-ai-standalone` service to ensure network communication.
 
-Before starting the stack, you must configure your LLM providers and environment.
+There are two distinct communication flows to configure:
 
-#### 1\. LLM API Keys
+#### 1. Integration Communication (AI to Document Service)
 
-Edit `config/llm-clients-config.yml` to add your API keys (e.g., OpenAI, Anthropic), or pass them as environment variables in the `uxopian-ai-stack.yml` file.
+The AI must contact the Document Service (e.g., ARender Service Broker) to read document text via the internal Docker network.
 
-#### 2\. Service Configuration
+| Variable          | Description                    | Example (Internal Docker)     |
+| ----------------- | ------------------------------ | ----------------------------- |
+| `OPENSEARCH_HOST` | OpenSearch container hostname. | `uxopian-ai-opensearch-node1` |
+| `OPENSEARCH_PORT` | OpenSearch port.               | `9200`                        |
 
-The `uxopian-ai-stack.yml` file orchestrates three services:
+#### 2. Client Access Configuration (Browser to AI)
 
-- **OpenSearch:** Stores vector embeddings.
-- **Gateway:** Handles routing and exposure (Port `8085`).
-- **AI Standalone:** The core intelligence engine.
+The user interface (running in the user's browser) must contact the AI service.
 
-**Key Environment Variables in `uxopian-ai-stack.yml`:**
+| Variable                 | Description                                             | Example (Public)        |
+| ------------------------ | ------------------------------------------------------- | ----------------------- |
+| `UXOPIAN_AI_PORT`        | Internal listening port of the service.                 | `8080`                  |
+| `APP_BASE_URL`           | Public URL of the AI application (for callbacks).       | `http://localhost:8085` |
+| `SPRING_PROFILES_ACTIVE` | Configuration profile (`dev` disables strict security). | `dev`                   |
 
-| Variable                 | Description                        | Default / Example                                   |
-| :----------------------- | :--------------------------------- | :-------------------------------------------------- |
-| `OPENSEARCH_HOST`        | Hostname of the vector DB          | `uxopian-ai-opensearch-node1` (Internal Docker DNS) |
-| `UXOPIAN_AI_PORT`        | Internal port for the AI service   | `8080`                                              |
-| `APP_BASE_URL`           | URL where the gateway is reachable | `http://localhost:8085`                             |
-| `SPRING_PROFILES_ACTIVE` | Active Spring profile              | `dev` (Disables authentication for testing)         |
-
-:::warning Production Warning
-The example stack uses `SPRING_PROFILES_ACTIVE=dev`, which **disables authentication**. For production deployments, remove this variable and configure proper security in the gateway.
-:::
-
-For a detailed reference of every file inside the `config/` directory, please refer to the [Configuration Files documentation](/docs/uxopian-ai/configuration/config_files/).
-
-### 🔹 Step 4: Start the Stack
-
-Navigate to the extracted folder and start the services.
+### 🔹 Step 4: Start
 
 ```bash
 docker-compose -f uxopian-ai-stack.yml up -d
+
 ```
-
-**Verification:**
-
-- **Gateway:** Accessible at `http://localhost:8085`
-- **Health Check:** `http://localhost:8085/uxopian-ai/actuator/health`
 
 ---
 
-## ☕ Java Application Deployment
+## ☕ Scenario B: Manual Installation (ZIP / Java)
 
-If you cannot use Docker, you can run the service directly as a Java application.
+Use this method for deployment on a standard server (VM Linux/Windows) without Docker.
 
-:::important Prerequisites
-*Java 21 Runtime Environment (JRE) installed.* OpenSearch 2.x installed and running separately.
-:::
+**Prerequisites:**
 
-### 🔹 Step 1: Download the Package
+- **Java 21** Runtime Environment (JRE).
+- **OpenSearch 2.x** installed and running on the network.
 
-Download the installation ZIP file from the Arondor Artifactory:
-🔗 `ai-standalone-[version].zip`
+### 🔹 Step 1: Installation
 
-### 🔹 Step 2: Configure
+1. Download the complete package: `ai-standalone-2026.0.0-ft1-rc3-complete-package.zip`.
+2. Unzip the archive:
 
-1.  Unzip the package.
-2.  Navigate to the `config` directory.
-3.  Edit `opensearch.yml` to point to your existing OpenSearch instance.
-4.  Edit `llm-clients-config.yml` to provide your API keys.
+```bash
+unzip ai-standalone-2026.0.0-ft1-rc3-complete-package.zip
+cd ai-standalone
 
-Detailed configuration options are available here: [Configuration Files](../configuration/config_files).
+```
 
-### 🔹 Step 3: Run
+### 🔹 Step 2: Configuration
 
-From the root of the unzipped directory, execute:
+All files are located in the `config/` folder. You **must** edit them:
+
+- **`opensearch.yml`**: Enter the IP and credentials of your external OpenSearch cluster.
+- **`llm-clients-config.yml`**: Configure your LLM providers (Azure OpenAI, Mistral, etc.) and API keys.
+- **`application.yml`**: General settings (ports, logs).
+
+Documentation is available at: [Configuration](../../configuration/config_files/)
+
+### 🔹 Step 3: Execution
+
+Run the Java service:
 
 ```bash
 java -jar ai-standalone.jar
+
 ```
+
+!!! note "Production Recommendations"
+
+- Use `JAVA_OPTS` to allocate enough memory (e.g., `-Xmx4g`).
+- Place the service behind a Reverse Proxy (NGINX/Apache) to handle SSL.
+
+---
+
+## 🔹 Step 4: Prompt Creation (Backend)
+
+Once the backend is running, you must define what the AI should do by creating a prompt via the API.
+
+- **URL:** `POST /api/v1/admin/prompts`
+- **Body:**
+
+```json
+{
+  "id": "summarizeDocMd",
+  "role": "user",
+  "content": "Summarize the following document: \n [[${documentService.extractTextualContent(documentId)}]]",
+  "defaultLlmProvider": "openai",
+  "defaultLlmModel": "gpt-4o",
+  "temperature": "0.7"
+}
+```
+
+_Note: `[[...]]` is a server-side instruction to inject the document text._

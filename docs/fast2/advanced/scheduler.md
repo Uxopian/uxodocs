@@ -2,9 +2,9 @@
 sidebar_position: 3
 title: Scheduler
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-23T15:35:56.881Z'
   author: CI/CD Bot
-content_hash: e3d000f5ee271792288116907a37d87b160177522f47fd3476f5ce57c93b7849
+content_hash: e6de0e432f2d183c058a1f695a21703dcc41f73c0da2f059aca0c60443690919
 ---
 
 # Schedule your campaigns
