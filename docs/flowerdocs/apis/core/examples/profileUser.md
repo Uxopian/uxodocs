@@ -2,7 +2,6 @@
 title: Recover users’ profiles
 sidebar_position: 18
 description: Search for user profiles
-sidebar_position: 18
 date: "2018-04-02T12:20:31+01:58"
 last_update:
   date: '2026-01-26T14:16:25.927Z'
