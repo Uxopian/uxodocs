@@ -1,218 +1,227 @@
 [
-    {
-        "version": "2025.2.0",
-        "majorVersion": "2025",
-        "date": "2025-09-05",
-        "description": "FlowerDocs **2025.2.0** enhances the reporting experience with a more intuitive design and strengthens integration capabilities through the introduction of a dedicated Java REST client. This new clien",
-        "hasUpgradeNotes": true,
-        "slug": "2025.2.0",
-        "latest": true
-    },
-    {
-        "version": "2025.1",
-        "majorVersion": "2025",
-        "date": "2025-06-10",
-        "description": "Version 2025.1 introduces significant advances in functionality and usability. It also includes patches and security enhancements (CVEs).  ",
-        "hasUpgradeNotes": true,
-        "slug": "2025.1",
-        "latest": false
-    },
-    {
-        "version": "2025.0",
-        "majorVersion": "2025",
-        "date": "2025-01-28",
-        "description": "Version 2025.0 brings significant improvements in terms of performance and usability. Highlights include a new version of the ARender viewer, more intuitive versioning, improvements to serial processi",
-        "hasUpgradeNotes": true,
-        "slug": "2025.0",
-        "latest": false
-    },
-    {
-        "version": "2.8",
-        "majorVersion": "2",
-        "date": "2024-04-08",
-        "description": "Release notes for FlowerDocs 2.8",
-        "hasUpgradeNotes": false,
-        "slug": "2.8",
-        "latest": false
-    },
-    {
-        "version": "2.7",
-        "majorVersion": "2",
-        "date": "2023-09-28",
-        "description": "Release notes for FlowerDocs 2.7",
-        "hasUpgradeNotes": false,
-        "slug": "2.7",
-        "latest": false
-    },
-    {
-        "version": "2.6.1",
-        "majorVersion": "2",
-        "date": "2023-01-31",
-        "description": "Release notes for FlowerDocs 2.6.1",
-        "hasUpgradeNotes": false,
-        "slug": "2.6.1",
-        "latest": false
-    },
-    {
-        "version": "2.6.0",
-        "majorVersion": "2",
-        "date": "2022-08-31",
-        "description": "Release notes for FlowerDocs 2.6.0",
-        "hasUpgradeNotes": false,
-        "slug": "2.6.0",
-        "latest": false
-    },
-    {
-        "version": "2.5.4",
-        "majorVersion": "2",
-        "date": "2022-02-28",
-        "description": "Release notes for FlowerDocs 2.5.4",
-        "hasUpgradeNotes": false,
-        "slug": "2.5.4",
-        "latest": false
-    },
-    {
-        "version": "2.5.3",
-        "majorVersion": "2",
-        "date": "2021-10-30",
-        "description": "Release notes for FlowerDocs 2.5.3",
-        "hasUpgradeNotes": false,
-        "slug": "2.5.3",
-        "latest": false
-    },
-    {
-        "version": "2.5.2",
-        "majorVersion": "2",
-        "date": "2021-06-30",
-        "description": "Release notes for FlowerDocs 2.5.2",
-        "hasUpgradeNotes": false,
-        "slug": "2.5.2",
-        "latest": false
-    },
-    {
-        "version": "2.5.1",
-        "majorVersion": "2",
-        "date": "2021-02-26",
-        "description": "Release notes for FlowerDocs 2.5.1",
-        "hasUpgradeNotes": false,
-        "slug": "2.5.1",
-        "latest": false
-    },
-    {
-        "version": "2.5.0",
-        "majorVersion": "2",
-        "date": "2020-07-31",
-        "description": "Release notes for FlowerDocs 2.5.0",
-        "hasUpgradeNotes": false,
-        "slug": "2.5.0",
-        "latest": false
-    },
-    {
-        "version": "2.4.5",
-        "majorVersion": "2",
-        "date": "2020-07-07",
-        "description": "Release notes for FlowerDocs 2.4.5",
-        "hasUpgradeNotes": false,
-        "slug": "2.4.5",
-        "latest": false
-    },
-    {
-        "version": "2.4.4",
-        "majorVersion": "2",
-        "date": "2020-04-10",
-        "description": "Release notes for FlowerDocs 2.4.4",
-        "hasUpgradeNotes": false,
-        "slug": "2.4.4",
-        "latest": false
-    },
-    {
-        "version": "2.4.3",
-        "majorVersion": "2",
-        "date": "2020-01-07",
-        "description": "Release notes for FlowerDocs 2.4.3",
-        "hasUpgradeNotes": false,
-        "slug": "2.4.3",
-        "latest": false
-    },
-    {
-        "version": "2.4.2",
-        "majorVersion": "2",
-        "date": "2019-09-30",
-        "description": "Release notes for FlowerDocs 2.4.2",
-        "hasUpgradeNotes": false,
-        "slug": "2.4.2",
-        "latest": false
-    },
-    {
-        "version": "2.4.1",
-        "majorVersion": "2",
-        "date": "2019-07-28",
-        "description": "Release notes for FlowerDocs 2.4.1",
-        "hasUpgradeNotes": false,
-        "slug": "2.4.1",
-        "latest": false
-    },
-    {
-        "version": "2.4.0",
-        "majorVersion": "2",
-        "date": "2019-04-02",
-        "description": "Release notes for FlowerDocs 2.4.0",
-        "hasUpgradeNotes": false,
-        "slug": "2.4.0",
-        "latest": false
-    },
-    {
-        "version": "2.3.10",
-        "majorVersion": "2",
-        "date": "2019-03-31",
-        "description": "Release notes for FlowerDocs 2.3.10",
-        "hasUpgradeNotes": false,
-        "slug": "2.3.10",
-        "latest": false
-    },
-    {
-        "version": "2.3.9",
-        "majorVersion": "2",
-        "date": "2019-01-11",
-        "description": "Release notes for FlowerDocs 2.3.9",
-        "hasUpgradeNotes": false,
-        "slug": "2.3.9",
-        "latest": false
-    },
-    {
-        "version": "2.3.8",
-        "majorVersion": "2",
-        "date": "2018-11-09",
-        "description": "Release notes for FlowerDocs 2.3.8",
-        "hasUpgradeNotes": false,
-        "slug": "2.3.8",
-        "latest": false
-    },
-    {
-        "version": "2.3.7",
-        "majorVersion": "2",
-        "date": "2018-08-01",
-        "description": "Release notes for FlowerDocs 2.3.7",
-        "hasUpgradeNotes": false,
-        "slug": "2.3.7",
-        "latest": false
-    },
-    {
-        "version": "2.3.6",
-        "majorVersion": "2",
-        "date": "2018-05-25",
-        "description": "Release notes for FlowerDocs 2.3.6",
-        "hasUpgradeNotes": false,
-        "slug": "2.3.6",
-        "latest": false
-    },
-    {
-        "version": "2.3.5",
-        "majorVersion": "2",
-        "date": "2018-04-16",
-        "description": "Release notes for FlowerDocs 2.3.5",
-        "hasUpgradeNotes": false,
-        "slug": "2.3.5",
-        "latest": false
-    }
+  {
+    "version": "2025.3.0",
+    "majorVersion": "2025",
+    "date": "2025-12-01",
+    "description": "Version **2025.3.0** has been developed to enhance the clarity, efficiency and user-friendliness of FlowerDocs.  ",
+    "hasUpgradeNotes": true,
+    "slug": "2025.3.0",
+    "latest": true
+  },
+  {
+    "version": "2025.2.0",
+    "majorVersion": "2025",
+    "date": "2025-09-05",
+    "description": "FlowerDocs **2025.2.0** enhances the reporting experience with a more intuitive design and strengthens integration capabilities through the introduction of a dedicated Java REST client. This new clien",
+    "hasUpgradeNotes": true,
+    "slug": "2025.2.0",
+    "latest": false
+  },
+  {
+    "version": "2025.1",
+    "majorVersion": "2025",
+    "date": "2025-06-10",
+    "description": "Version 2025.1 introduces significant advances in functionality and usability. It also includes patches and security enhancements (CVEs).  ",
+    "hasUpgradeNotes": true,
+    "slug": "2025.1",
+    "latest": false
+  },
+  {
+    "version": "2025.0",
+    "majorVersion": "2025",
+    "date": "2025-01-28",
+    "description": "Version 2025.0 brings significant improvements in terms of performance and usability. Highlights include a new version of the ARender viewer, more intuitive versioning, improvements to serial processi",
+    "hasUpgradeNotes": true,
+    "slug": "2025.0",
+    "latest": false
+  },
+  {
+    "version": "2.8",
+    "majorVersion": "2",
+    "date": "2024-04-08",
+    "description": "Release notes for FlowerDocs 2.8",
+    "hasUpgradeNotes": false,
+    "slug": "2.8",
+    "latest": false
+  },
+  {
+    "version": "2.7",
+    "majorVersion": "2",
+    "date": "2023-09-28",
+    "description": "Release notes for FlowerDocs 2.7",
+    "hasUpgradeNotes": false,
+    "slug": "2.7",
+    "latest": false
+  },
+  {
+    "version": "2.6.1",
+    "majorVersion": "2",
+    "date": "2023-01-31",
+    "description": "Release notes for FlowerDocs 2.6.1",
+    "hasUpgradeNotes": false,
+    "slug": "2.6.1",
+    "latest": false
+  },
+  {
+    "version": "2.6.0",
+    "majorVersion": "2",
+    "date": "2022-08-31",
+    "description": "Release notes for FlowerDocs 2.6.0",
+    "hasUpgradeNotes": false,
+    "slug": "2.6.0",
+    "latest": false
+  },
+  {
+    "version": "2.5.4",
+    "majorVersion": "2",
+    "date": "2022-02-28",
+    "description": "Release notes for FlowerDocs 2.5.4",
+    "hasUpgradeNotes": false,
+    "slug": "2.5.4",
+    "latest": false
+  },
+  {
+    "version": "2.5.3",
+    "majorVersion": "2",
+    "date": "2021-10-30",
+    "description": "Release notes for FlowerDocs 2.5.3",
+    "hasUpgradeNotes": false,
+    "slug": "2.5.3",
+    "latest": false
+  },
+  {
+    "version": "2.5.2",
+    "majorVersion": "2",
+    "date": "2021-06-30",
+    "description": "Release notes for FlowerDocs 2.5.2",
+    "hasUpgradeNotes": false,
+    "slug": "2.5.2",
+    "latest": false
+  },
+  {
+    "version": "2.5.1",
+    "majorVersion": "2",
+    "date": "2021-02-26",
+    "description": "Release notes for FlowerDocs 2.5.1",
+    "hasUpgradeNotes": false,
+    "slug": "2.5.1",
+    "latest": false
+  },
+  {
+    "version": "2.5.0",
+    "majorVersion": "2",
+    "date": "2020-07-31",
+    "description": "Release notes for FlowerDocs 2.5.0",
+    "hasUpgradeNotes": false,
+    "slug": "2.5.0",
+    "latest": false
+  },
+  {
+    "version": "2.4.5",
+    "majorVersion": "2",
+    "date": "2020-07-07",
+    "description": "Release notes for FlowerDocs 2.4.5",
+    "hasUpgradeNotes": false,
+    "slug": "2.4.5",
+    "latest": false
+  },
+  {
+    "version": "2.4.4",
+    "majorVersion": "2",
+    "date": "2020-04-10",
+    "description": "Release notes for FlowerDocs 2.4.4",
+    "hasUpgradeNotes": false,
+    "slug": "2.4.4",
+    "latest": false
+  },
+  {
+    "version": "2.4.3",
+    "majorVersion": "2",
+    "date": "2020-01-07",
+    "description": "Release notes for FlowerDocs 2.4.3",
+    "hasUpgradeNotes": false,
+    "slug": "2.4.3",
+    "latest": false
+  },
+  {
+    "version": "2.4.2",
+    "majorVersion": "2",
+    "date": "2019-09-30",
+    "description": "Release notes for FlowerDocs 2.4.2",
+    "hasUpgradeNotes": false,
+    "slug": "2.4.2",
+    "latest": false
+  },
+  {
+    "version": "2.4.1",
+    "majorVersion": "2",
+    "date": "2019-07-28",
+    "description": "Release notes for FlowerDocs 2.4.1",
+    "hasUpgradeNotes": false,
+    "slug": "2.4.1",
+    "latest": false
+  },
+  {
+    "version": "2.4.0",
+    "majorVersion": "2",
+    "date": "2019-04-02",
+    "description": "Release notes for FlowerDocs 2.4.0",
+    "hasUpgradeNotes": false,
+    "slug": "2.4.0",
+    "latest": false
+  },
+  {
+    "version": "2.3.10",
+    "majorVersion": "2",
+    "date": "2019-03-31",
+    "description": "Release notes for FlowerDocs 2.3.10",
+    "hasUpgradeNotes": false,
+    "slug": "2.3.10",
+    "latest": false
+  },
+  {
+    "version": "2.3.9",
+    "majorVersion": "2",
+    "date": "2019-01-11",
+    "description": "Release notes for FlowerDocs 2.3.9",
+    "hasUpgradeNotes": false,
+    "slug": "2.3.9",
+    "latest": false
+  },
+  {
+    "version": "2.3.8",
+    "majorVersion": "2",
+    "date": "2018-11-09",
+    "description": "Release notes for FlowerDocs 2.3.8",
+    "hasUpgradeNotes": false,
+    "slug": "2.3.8",
+    "latest": false
+  },
+  {
+    "version": "2.3.7",
+    "majorVersion": "2",
+    "date": "2018-08-01",
+    "description": "Release notes for FlowerDocs 2.3.7",
+    "hasUpgradeNotes": false,
+    "slug": "2.3.7",
+    "latest": false
+  },
+  {
+    "version": "2.3.6",
+    "majorVersion": "2",
+    "date": "2018-05-25",
+    "description": "Release notes for FlowerDocs 2.3.6",
+    "hasUpgradeNotes": false,
+    "slug": "2.3.6",
+    "latest": false
+  },
+  {
+    "version": "2.3.5",
+    "majorVersion": "2",
+    "date": "2018-04-16",
+    "description": "Release notes for FlowerDocs 2.3.5",
+    "hasUpgradeNotes": false,
+    "slug": "2.3.5",
+    "latest": false
+  }
 ]
