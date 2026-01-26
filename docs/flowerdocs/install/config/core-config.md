@@ -3,9 +3,9 @@ title: Core Configuration
 sidebar_position: 3
 date: "2000-03-31T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-26T15:40:22.642Z'
   author: CI/CD Bot
-content_hash: 823528d15acf1e0b2bbfd2d819656a3de67e11656b5d9deba6144f31a5c8cbd2
+content_hash: ef5bab607a698d5a68aaa777dc7c0a6df2f768f00349b7329067d330aefdc125
 ---
 
 This section describes the various FlowerDocs Core configurations to be defined in the application's `core.properties` file.
@@ -48,6 +48,6 @@ This section describes the various FlowerDocs Core configurations to be defined 
 
 | Property                | Description                                                  |
 | ----------------------- | ------------------------------------------------------------ |
-| arender.rendition.nodes | Addresses of the various OpenSearch nodes separated by a `,` |
+| arender.rendition.nodes | Address of the ARender rendition or a Load Balancer |
 
 It is not recommended to modify ARender properties by setting parameters in the `core.properties` file. Properties that are not defined in the documentation are not qualified by FlowerDocs: the correct operation of the application is therefore not guaranteed with these modifications.

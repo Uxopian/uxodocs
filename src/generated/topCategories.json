@@ -57,15 +57,15 @@
       "href": "/docs/flowerdocs/concepts/getting-started"
     },
     {
-      "label": "Install",
+      "label": "Installation",
       "href": "/docs/flowerdocs/install/getting-started"
     },
     {
-      "label": "Learn",
+      "label": "FlowerDocs Academy",
       "href": "/docs/flowerdocs/learn/admin-hide-menu/getting-started"
     },
     {
-      "label": "Config",
+      "label": "Guides",
       "href": "/docs/flowerdocs/config/gui/getting-started"
     },
     {
@@ -73,7 +73,7 @@
       "href": "/docs/flowerdocs/apis/jsapi/getting-started"
     },
     {
-      "label": "Connecteurs",
+      "label": "Connectors",
       "href": "/docs/flowerdocs/connecteurs/companion/getting-started"
     }
   ],

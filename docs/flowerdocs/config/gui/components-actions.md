@@ -1,11 +1,12 @@
 ---
 title: Component-related actions
+draft: true
 sidebar_position: 8
 date: "2003-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-26T15:40:22.642Z'
   author: CI/CD Bot
-content_hash: a49f6c2c65ee83f7ed5b3c684c696d8a171e6f718bed3330fb4196682fc8ea55
+content_hash: 655c6a1745d349a57f9ec51bd7804dd2c79bdc3813b7039f5f9f9254897c07e6
 ---
 
 # Component-related actions
