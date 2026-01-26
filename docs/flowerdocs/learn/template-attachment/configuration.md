@@ -1,10 +1,11 @@
 ---
 title: Configuration
+sidebar_position: 2
 date: "2020-02-01T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: a04d9968c953a5e5e92917bf7a053f86200eda004bd2e6bdbf949483fae019e4
+content_hash: df12171bb38862d9e70b85175212fd6dda4ad82acf1d51fc3a6b86929cdbafe6
 ---
 
 # Goal

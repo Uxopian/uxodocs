@@ -1,11 +1,12 @@
 ---
 title: Decorations
+sidebar_position: 2
 description: Decorating your search results
 date: "2005-03-28T13:21:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: ea039cd6bb6f8a13082f9ef223f0e04bdce600a7663e15e92ef3e54d5f84c564
+content_hash: 60facccf533f8f7b123af0926acf74980c4d0eccdc9ce8deaccc4d5ea94204ac
 ---
 
 # Date format search results

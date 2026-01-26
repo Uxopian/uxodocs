@@ -1,11 +1,12 @@
 ---
 title: Indexing form
+sidebar_position: 2
 description: Configure indexing forms
 date: "2002-02-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 2954fba383606eb14acb069b6982661171d34f29e600ab2f54a3cbec8eecb148
+content_hash: cfb71bf2a7d3a5705c30852ee39d253a13f37162df4b88a7b42b88ff72975424
 ---
 
 Indexing views are composed of two parts:

@@ -1,10 +1,11 @@
 ---
 title: Validation
+sidebar_position: 3
 date: "2000-02-04T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: a1b4d517ab99b75e49d1dbd67b954953e85eec898bca8605a5721d5b5b0d05a0
+content_hash: 3928837606626f8a58054166e736e48b46c98627b92f31c03b048cc3aef8d434
 ---
 
 To validate the correct operation of what has been set up, start by creating a customer document.

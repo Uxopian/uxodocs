@@ -1,11 +1,12 @@
 ---
 title: History
+sidebar_position: 15
 description: Managing a component's history
 date: "2012-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 70d9f83c6b94f43730ed67b6fba253d6551cde32043c8b1d950077e83197efb5
+content_hash: c631e5b3b9755d4a7ac4a52c7db6627a86a85703522e6e57af15c94a95c54548
 ---
 
 :::info

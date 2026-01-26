@@ -1,10 +1,11 @@
 ---
 title: Hidden request
+sidebar_position: 3
 date: "2004-04-03T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 571bc39d6a71fb5525e466d3d3622a11b113551fd8011817532e48d0a2ef11bd
+content_hash: f7fdb4b83e722d0601ed94b88c808253122de06ce51849d0c31f2fe4735edca4
 ---
 
 For each search form, a search request can be set up that is hidden and therefore not visible to users.

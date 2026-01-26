@@ -1,10 +1,11 @@
 ---
 title: Minimum configuration
+sidebar_position: 2
 date: "2001-03-28T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 384d2afda6ca16468113662907aae6a491ac5271acdc86ad473f213e098a56d2
+content_hash: 1cb01a568e008f4ebc18a0602a0c95aeafbac6ce099773c6fbb35b75cdd5abe9
 ---
 
 :::info

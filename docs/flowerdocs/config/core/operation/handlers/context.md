@@ -1,11 +1,12 @@
 ---
 title: Operation context
+sidebar_position: 1
 description: Use the operation context of an operation
 date: "2002-01-27T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 3948c99a07db883a7b4b9ae14c7555b3c60ab9a1ea27248f47758d6d6fe02ea4
+content_hash: 88a72f7cc37b22b2f6af25f61132b126b7729fcbdd1b7a79358613e457523165
 ---
 
 # Principle

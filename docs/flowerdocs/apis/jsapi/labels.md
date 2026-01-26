@@ -1,10 +1,11 @@
 ---
 title: Labels
+sidebar_position: 8
 date: "2004-02-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 15747b36f66ca206e56e992d3c60325c0bbcee31eb2546e5fe3e24d26d51af45
+content_hash: 48c6ead68d25c078b4d313f1de7fa6cbfe7ca7ddccda45eddc6cb96399d47b0e
 ---
 
 :::info

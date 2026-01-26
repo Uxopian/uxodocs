@@ -1,11 +1,12 @@
 ---
 title: System metadata
+sidebar_position: 3
 description: Configure indexing forms
 date: "2002-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 016ae25975478d9630f85002522317c57e675ed2165f5117fb13eecc5f4de72f
+content_hash: 8d3b4ddc60f9bebdf1fdaaaa20967daa4836f1273e1a9ce1377d0bd609c61b05
 ---
 
 # System metadata

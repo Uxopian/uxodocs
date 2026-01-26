@@ -1,11 +1,12 @@
 ---
 title: Managing authentication tokens
 description: Generate and validate your tokens
+sidebar_position: 21
 date: "2018-06-21T09:40:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 30e7097360b283f3b3526bd057eb2210e836330e62b69672fe0f2f98acc0259d
+content_hash: 1d3a7f4b375d5c46e3cc75dcbbba52f8c6b6891d70398c5dcad2e2ba7f2e7612
 ---
 
 import Tabs from '@theme/Tabs';

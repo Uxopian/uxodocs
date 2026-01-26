@@ -1,11 +1,12 @@
 ---
 title: Digital
+sidebar_position: 5
 description: Use digital tags.
 date: "2018-03-07T13:23:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: c99baf0f23abfb7e4a65ca8805dea6b55aa415cf22f942f128a034252f8fa1ac
+content_hash: fba5eefef5a5d3f8c1f414013ca3537f6f61df112efba5d5b13db6e5f3514077
 ---
 
 The FlowerDocs data model allows you to define three types of digital tags:

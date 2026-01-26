@@ -1,11 +1,12 @@
 ---
 title: Confirmation
+sidebar_position: 2
 description: Pop up allowing to confirm a user choice
 date: "2004-03-27T13:25:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: b26c41ac0fd17a368fbccf47d5715a3b9328e4efb1edd4d84a7a678c1f0a1710
+content_hash: 12f1add11dedb87728cc49ce7d43be6320166bcc74e51b681387debe91632d80
 ---
 
 import Tabs from '@theme/Tabs';

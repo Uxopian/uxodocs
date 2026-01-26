@@ -1,10 +1,11 @@
 ---
 title: RGAA - Keyboard navigation
+sidebar_position: 2
 date: "1999-02-28"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 9522831c6a491886612a69749b96a81811c49c858b08558f15dac772ac2a5e74
+content_hash: 44d3fd91b8f92a42b9ecc6ecda0061adc35c3859686e755e07588a2b88080265
 ---
 
 :::info

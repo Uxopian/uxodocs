@@ -1,10 +1,11 @@
 ---
 title: User
+sidebar_position: 10
 date: "2007-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: b9d80bdccc848543970e319596eea07753556d23cf644a3493eebe87257966cb
+content_hash: 0389727ac7f534de11288304fb059417670b0981b82cab174e9084567fdd2f20
 ---
 
 A JS API can be used to obtain information about users:

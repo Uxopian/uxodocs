@@ -1,10 +1,11 @@
 ---
 title: Favorites
+sidebar_position: 3
 date: "2000-04-02T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: e35fd808ce0a167238a705f769cb2800f1351704900c877f74d2729f2a36dcd7
+content_hash: 9497951c3e0f44447242f29cd2b8037ef8767899c8c28d94dc82d119f0206758
 ---
 
 This type of widget displays the user's favorites based on a configured search.

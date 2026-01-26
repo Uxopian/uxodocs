@@ -1,11 +1,12 @@
 ---
 title: Search for a component
 description: Build your search queries
+sidebar_position: 3
 date: "2001-03-29T13:30:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 594941111f415cab6faacf6752d99ca77e7b91729acb39cd0f8158a3a14a9946
+content_hash: c2275922618fdffc195284efe48ee0dd759197e0254a658e079d999d6152f5c6
 ---
 
 import Tabs from '@theme/Tabs';

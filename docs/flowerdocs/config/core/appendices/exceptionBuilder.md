@@ -1,11 +1,12 @@
 ---
 title: ExceptionBuilder
+sidebar_position: 2
 description: Building a JAVA Exception with FlowerDocs identifiers
 date: "2002-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 26c8cb360f0d4cb192d2a070eb8d9b1ca67f5c456a66acd21f4dd72059bdd6eb
+content_hash: e68e3ee246e566c28c9a76bb4ded27df971ff8699eaec68e0b3164c02f96e4b0
 ---
 
 import Tabs from '@theme/Tabs';

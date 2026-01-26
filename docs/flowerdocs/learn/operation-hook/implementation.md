@@ -1,10 +1,11 @@
 ---
 title: Implementation
+sidebar_position: 1
 date: "2020-02-01T11:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 57ade4811722b2f1299566fb0803a6f3912410edaa8936db7dc86923fb0e0866
+content_hash: 5f2cd3107424d6a3ad0fc2174e71f76b5cc982dc790dd05c4a2d46237980faa9
 ---
 
 :::info

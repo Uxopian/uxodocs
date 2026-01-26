@@ -1,11 +1,12 @@
 ---
 title: Directory
+sidebar_position: 1
 description: Authenticate users to a company directory
 date: "2000-03-20T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 9ec94b6da946c649eafed692521e372b5be758a20caab0160ee33054e7b3971d
+content_hash: ca8995f77f3e2edd702a998e27e90cd13cbac6b5d033336f4e2653550568bce3
 ---
 
 # Directory configuration

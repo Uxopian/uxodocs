@@ -1,11 +1,12 @@
 ---
 title: Folders
+sidebar_position: 3
 description: Classify your components to suit your needs.
 date: "2018-03-03"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 4b979d5e615f0aa4ec3fa6adae50472d128d37b44a6a9cdda2533a030c276740
+content_hash: acb99c0752b379f97e08298c410e9cc44556ae809741fcdbc9a20aa92b8f8ef9
 ---
 
 :::info

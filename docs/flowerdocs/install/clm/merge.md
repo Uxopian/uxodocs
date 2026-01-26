@@ -1,13 +1,14 @@
 ---
 title: Merge of several scopes
+sidebar_position: 4
 description: >-
     Description of the rules used to merge scopes: which elements are merged,
     behaviour in the event of conflicts, etc.
 date: "2004-03-21T13:22:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: c1b6d70066db9019cda8bed7771e3b4faf049c59a2b15fff17f8e2f092faf550
+content_hash: e6c299d85e2d942f29ba323c030a610dec0c768d73a6f5165092d8b56aa578eb
 ---
 
 :::info

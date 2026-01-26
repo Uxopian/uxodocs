@@ -1,11 +1,12 @@
 ---
 title: Overview
+sidebar_position: 1
 description: Open your own popups.
 date: "2001-03-28T13:19:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 9aa30f0470c13e1709f6bad42958acf1e2fd656061408cf6cb20f0025e4339c9
+content_hash: 0bab98860f75898b7c952f2a198959a2a7ff8de6d0d9e224931bef8c6f06559b
 ---
 
 Different types of popup can be instantiated or modified:

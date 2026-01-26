@@ -1,10 +1,11 @@
 ---
 title: Script and result
+sidebar_position: 2
 date: "2000-02-03T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: b91b961f9cdc1e9d07033b6a9592d45e34a66832336dd17759b81db35b08c59e
+content_hash: 2283c40bec714e517c667fe13479599b97860b39dbf676e56eef0b232c387b8d
 ---
 
 # Script

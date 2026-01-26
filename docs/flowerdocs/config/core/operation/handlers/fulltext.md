@@ -1,11 +1,12 @@
 ---
 title: Content indexing
+sidebar_position: 4
 description: Index document content
 date: "2009-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 959c091ad822c2f18eaa99c18d8c1661c73f189e9077381582c5cf227ab60ea7
+content_hash: ee3a8b7aa8797841da6b5c94c18b3efbe5bf346672095e8515d14eedbb4e547b
 ---
 
 # Principle

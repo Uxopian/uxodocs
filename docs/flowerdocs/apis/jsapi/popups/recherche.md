@@ -1,11 +1,12 @@
 ---
 title: Search
+sidebar_position: 5
 description: Search form within a popup.
 date: "2004-03-28T13:23:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: ad49b0b289f0bd369b370439c679e4862c5853c670157416c41c91821e94690b
+content_hash: a1c9a464c61c0abc45e3a1304ee65747cd4683eee0bb464203dc2cde2f334071
 ---
 
 :::info

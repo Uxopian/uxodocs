@@ -1,10 +1,11 @@
 ---
 title: Template
+sidebar_position: 1
 date: "2004-03-20T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 46b699bb81f0bd07fac84ad2b65586a657d161a6d2d14c9e65d85b348ac8c0c4
+content_hash: 677d6317dc199835fbbf74253a34581e95fe08eb3e56f5c6053b0fdf7129ffe1
 ---
 
 # Scope import

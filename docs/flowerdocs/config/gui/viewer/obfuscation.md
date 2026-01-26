@@ -1,11 +1,12 @@
 ---
 title: Obfuscation
+sidebar_position: 5
 description: Obfuscate sensitive data within documents.
 date: "2005-08-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 93139b6b2b635bec66bc7dee9717e5c93b4490c80121a239cce725fbc5f31822
+content_hash: cec193f4f1784d28d22f566070f0bdca027a6a68791627e5956088779b987b5a
 ---
 
 import Tabs from '@theme/Tabs';

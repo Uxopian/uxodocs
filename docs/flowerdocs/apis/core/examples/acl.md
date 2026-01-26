@@ -1,11 +1,12 @@
 ---
 title: Managing ACLs
 description: Manage your access control lists
+sidebar_position: 19
 date: "2018-04-02T12:20:01+01:57"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 1d83ef77b8cb1840a33ac0ae3231e01e9041d3e59606ea4a440c76928b800b7a
+content_hash: ffbadf42312c8483d84c259606a7819c9f2e11355c39152376cf900c59f534dd
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,10 +1,11 @@
 ---
 title: Component tracking
+sidebar_position: 4
 date: "2002-04-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 637d103482d193c38ce99ed36b28ffead3cbb2aa6b5391977f5efc61e1bc75e6
+content_hash: b506b187595ad42651149c82f1256534410223bdd89067b97e462bfac340ab76
 ---
 
 Component tracking allows you to view the various tasks linked to a component. This `task tracking` can be configured using the following XML fragment, by setting the desired category via the `category` property of a `taskTrackingConfiguration` bean.

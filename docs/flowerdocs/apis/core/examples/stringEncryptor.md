@@ -1,11 +1,12 @@
 ---
 title: Encrypting a character string
 description: Encrypt your passwords and sensitive data
+sidebar_position: 5
 date: "2001-03-30T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: f302d161e62be40800509a5e808ff52a5f64274c7e081286cd2890a73fe6bacb
+content_hash: c8f68dc80b6975c330eff0bfc1a48f85e53bfc1b4c2cab1396d10c98d741674b
 ---
 
 import Tabs from '@theme/Tabs';

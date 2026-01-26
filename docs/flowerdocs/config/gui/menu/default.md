@@ -1,10 +1,11 @@
 ---
 title: Default page
+sidebar_position: 2
 date: "2001-03-02T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 94af0c745321cde870ba371344477ed95e89a21e43e1e119a0f0caea03210c40
+content_hash: 2b9dcac45181340d5c714ac996e0a408b455d960be7bb2b70856df8030bc5c6d
 ---
 
 The default page is the one displayed at login.

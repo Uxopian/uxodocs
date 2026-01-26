@@ -1,11 +1,12 @@
 ---
 title: Scope
+sidebar_position: 2
 description: Isolate your customers/businesses.
 date: "2001-02-02"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: e32a0e347c4b6eb4c4d0b7631f75fe15494942e3f10ef59f4c1c38ec1edf7eb0
+content_hash: 3fafa5fe85d8c070bd37b94c5bbdddf0efb42cb678bb19627152f3c8981c0966
 ---
 
 :::info

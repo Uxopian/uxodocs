@@ -1,11 +1,12 @@
 ---
 title: List
+sidebar_position: 3
 description: Use tags linked to lists.
 date: "2018-03-07T13:21:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 0ff73789814faea29add093c885021d4a759b64fac77c3324187585b7e6aff49
+content_hash: 4319b6d31737ee15222a5476a76118746e8d969891ec02ef27ef7b4aa6f42e40
 ---
 
 This section describes the different types of list-based tags:

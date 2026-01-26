@@ -1,10 +1,11 @@
 ---
 title: Version upgrade
+sidebar_position: 7
 date: "2000-03-31T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 8fa21563b603cb2784bcea913f7d96f16f50da9da4ee7cb53a6706464ed8cf47
+content_hash: 6280bd15823640ff4e4fdd6d93cee3b6c48dc299b7741a870fe543b2dde1a521
 ---
 
 This section describes the actions to be taken after an application upgrade.

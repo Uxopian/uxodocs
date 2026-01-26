@@ -1,11 +1,12 @@
 ---
 title: Manipulating a virtual folder class
 description: "Create, retrieve, modify, delete your virtual folder classes"
+sidebar_position: 13
 date: "2001-04-29T13:30:01+01:01"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 686d6575d72852a5bade83eb53393eba9a8efd0d7ec2bc653a2410af1815adc6
+content_hash: 497ad544d86edc4071c4d10c467364c5d737b20fbbf2288ae9905563a9d026d4
 ---
 
 import Tabs from '@theme/Tabs';

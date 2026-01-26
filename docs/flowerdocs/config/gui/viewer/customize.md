@@ -1,11 +1,12 @@
 ---
 title: ARender Customisations
+sidebar_position: 6
 description: Customise ARender within FlowerDocs.
 date: "2010-06-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: b34038f7a8d246fc6e069d00635caf45ea4d091bf999966405de3ecb01024a38
+content_hash: c9fcd7d768276b6581ce624f728639d1dcf1820c2b6d35bc5320135f816e78a6
 ---
 
 # Introduction

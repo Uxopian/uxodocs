@@ -1,11 +1,12 @@
 ---
 title: Hook
+sidebar_position: 6
 description: "Adapt, enhance, control..."
 date: "2010-12-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 94cb9427bdb46c97aecc12905259dcc3291300375a1f585d21f354df37659e89
+content_hash: 1b3b9e208235a9c12961f1bb87a7242cfde4e6de18ef62d6a3767157f11c0f36
 ---
 
 # Principle

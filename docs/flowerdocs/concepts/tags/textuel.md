@@ -1,11 +1,12 @@
 ---
 title: Textual
+sidebar_position: 2
 description: Use textual tags.
 date: "2018-03-07T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 8f7fd6e47247af2c380d5d444a982ef110a81a6d622528dfd8590aea46714dc6
+content_hash: f56b2c1dd2bf5aac00d04973b57e8fa0f277327bf154f472f8addee0e862e199
 ---
 
 The FlowerDocs data model allows you to define textual tags:

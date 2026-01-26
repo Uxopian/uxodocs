@@ -1,11 +1,12 @@
 ---
 title: Documents
+sidebar_position: 2
 description: Manage your electronic documents.
 date: "2018-03-02T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: a1676be2a084ca8bcc8c79c94ec0d8a4081f7699e1f6cdcc597213f22cccf6ae
+content_hash: 0bc9da87a0ade13e0eba5d7193b40b515965f9543d05013ae6fffd980bbdb4b6
 ---
 
 A document is a component in its own right, with the distinctive feature of having one or more contents. These are also known as files.

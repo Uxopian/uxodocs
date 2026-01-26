@@ -1,11 +1,12 @@
 ---
 title: Folder
+sidebar_position: 3
 description: Folder classes
 date: "2018-03-02T14:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 6bb213aa0e072221f07bb255395190b1ea20f336f28a0db7b23fd29c211078f3
+content_hash: 050a506ff2836d839208aee9d2f2206602e5af819ae6ae84dabd54b0b39f867c
 ---
 
 :::info

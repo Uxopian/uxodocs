@@ -1,11 +1,12 @@
 ---
 title: Handling task classes
 description: "Create, get, modify and delete your task classes"
+sidebar_position: 11
 date: "2001-04-29T13:30:01+01:02"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 5537b6a08f2ee8a6df51f6340cce1c48117054deee910f1e9085bbbafa06daf6
+content_hash: d33b6e88c1d249d1f3762aceb44d11eac9480721d2f297b76e86d73c48fc82fc
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,12 +1,13 @@
 ---
 title: Subscribing to an operation
+sidebar_position: 1
 description: Determine which operations to respond to
 date: "2001-03-28T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 22c05e2abd178ce44d6d44a8218a06159fa692e55d1a7fdfaec4cfc44f7ef2a8
+content_hash: 300d36556de3a3a4f84693a8d887158b87ea0940b18012eaa482a4c6c1a30056
 ---
 
 import Tabs from '@theme/Tabs';

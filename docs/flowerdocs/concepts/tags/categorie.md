@@ -1,11 +1,12 @@
 ---
 title: Categories
+sidebar_position: 7
 description: Organize tags by category.
 date: "2018-04-07T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: b114d5b27a26540d727e6a1abe31a6a8f69dba0cb0ba0a72f51fd478a8fcb535
+content_hash: 15d10dcb409f1e13228622e951a4ecfe486140ff208463347fd31085402134a2
 ---
 
 Tag categories enable logically related tags to be grouped together for display.

@@ -1,11 +1,12 @@
 ---
 title: Identities
+sidebar_position: 1
 description: Organise users accessing your application
 date: "2018-03-20T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 2e29f096fbe79826f1123f07376c66703c902e850f2c5f61334370087eaa31e0
+content_hash: 30c3d48a3fcc2cc9e4ac98e69f6dced7e26ac1c460027663451565ab6ee304c0
 ---
 
 # Principle

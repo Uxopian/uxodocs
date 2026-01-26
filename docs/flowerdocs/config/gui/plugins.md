@@ -1,11 +1,12 @@
 ---
 title: Plugins
+sidebar_position: 14
 description: Integrate customized WEB applications within the GUI.
 date: "2012-04-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: af2dcbaa4543dd50588f5dfd98e8b55400bdc6d735ffab9957de24b509b93aa3
+content_hash: 5d4480b9370d9a570c6bef984c090f9c682094f6affdf0ce8fade418ea70a5f0
 ---
 
 # What is a GUI plugin?

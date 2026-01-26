@@ -1,10 +1,11 @@
 ---
 title: Search
+sidebar_position: 3
 date: "2001-03-28T13:21:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 0ebfbb43a4f692950d9802636558232ddba203551dafe2b07fc7ba0e7516d177
+content_hash: 7eac023144b3da7d7578f8c72b93b12e294b0368dbacd2de8dd0267b832a6a8c
 ---
 
 # Subscription

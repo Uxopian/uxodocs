@@ -1,11 +1,12 @@
 ---
 title: OpenID Connect
+sidebar_position: 6
 description: "One for all, all for one"
 date: "2019-06-05T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 59ab496b9ff108450c6b883f1eecea6c1c68b7743b038b14b291c608f39a5dc5
+content_hash: 4df192cc8d1aa05e2c41436d74669f5fdd5f4fede9e3fdfa1a6569c22f9d9fc1
 ---
 
 import Tabs from '@theme/Tabs';

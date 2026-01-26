@@ -1,11 +1,12 @@
 ---
 title: Headers
+sidebar_position: 3
 description: Secure requests made to FlowerDocs Core.
 date: "2019-06-01T13:25:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: f3214637164cc7538229be531a4aadd8fd2a00eb75ed2f5740d5869ae2cf8ebe
+content_hash: c908135ec9c113fccb2cd0623cd9f8b82c093e8d82dcce5ead6770f8b872ba04
 ---
 
 # Content security policy (CSP) and HTTP Strict Transport Security (HSTS)

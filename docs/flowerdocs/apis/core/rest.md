@@ -1,11 +1,12 @@
 ---
 title: REST
+sidebar_position: 4
 description: To consume REST web services.
 date: "2004-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 947de075d0b0821187db454c134c64e99705b71ad9f89261e5a7f47a14db939e
+content_hash: 001aa0462ce4c132d400d2e18b597d70e4c14fb3467594fd3f7b0b869243887c
 ---
 
 Documentation for this API is provided through _Swagger_ exhibited by **FlowerDocs Core** under the path `{host.core}/swagger-ui/index.html`.

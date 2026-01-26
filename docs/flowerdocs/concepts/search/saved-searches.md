@@ -1,11 +1,12 @@
 ---
 title: Stored searches
+sidebar_position: 2
 description: Save searches you use regularly
 date: "2005-02-03"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: eca19725329126bfb50d1ff1c92f4199f202390b7f85f8fe6bd2a5576b13771d
+content_hash: 78fc26a45845074654d1199588f503ed178315e6f63479c92b195366d3c2435f
 ---
 
 # Stored searches

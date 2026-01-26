@@ -1,10 +1,11 @@
 ---
 title: Graphs
+sidebar_position: 7
 date: "2000-06-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 1221b76f74d4ac095cc6c254b8efebd9d6c0e37eb193301414625b6dc724fb0f
+content_hash: 452d43c723de84362e16cb3a7ce4e3292c51362e0b574c86b8a7dcccc51cfc7a
 ---
 
 On the home page, graphs defined by searches can be displayed. The chart type is automatically determined from the number of aggregations:

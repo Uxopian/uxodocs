@@ -1,12 +1,13 @@
 ---
 title: HTML templates
+sidebar_position: 1
 description: "Reusable templates, by scope, that can be enhanced with variables"
 date: "2020-02-01"
 custom_edit_url: null
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 116726b9aaf4038c5ba38d88307f096ec740d0b029ec006ab6abbbde655fa514
+content_hash: 153284d501568820c7e97be52255cece0faff3e95b7cb16408cee2b8ed980c25
 ---
 
 # Principle

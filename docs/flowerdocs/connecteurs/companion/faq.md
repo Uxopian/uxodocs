@@ -1,10 +1,11 @@
 ---
 title: FAQ
+sidebar_position: 4
 date: "2004-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 2118bcb6f4161e2ba738803d2ef7b7b14a78eeaa2c7d4559b5ae4827b35616b2
+content_hash: eb49aade7e4e08221ea6bb9685955a08e8aa337b99015f40a2783cb8daea6ae5
 ---
 
 #1. **Hiding configuration within applications**

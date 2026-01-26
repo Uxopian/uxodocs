@@ -1,11 +1,12 @@
 ---
 title: DOM
+sidebar_position: 6
 description: Popups displayed within the graphical user interface
 date: "2004-03-28T13:24:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: a80b5971c8d5d89df5fcc6defd7e13d3f3e26b41d23e07f8788618384d36e571
+content_hash: f53185bdc5f43bb6f74c3f0179ab8e085d15cb20733a2834ef59c3f075df5175
 ---
 
 The DOM Content popup allows you to add an element _DOM_ in a popup window. This allows you to add a JS element to a popup.

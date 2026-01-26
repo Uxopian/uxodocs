@@ -1,10 +1,11 @@
 ---
 title: Shortcuts
+sidebar_position: 3
 date: "2001-03-03T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: d8b3d6147580b6846923deb3f5f92c7be9a57e46a3ecb95267a529693bde32b2
+content_hash: 7e18d9ce37b4d6d446d963a543fd2c81aab7b0f76fb37386ff2f9f65d3e23f8e
 ---
 
 # Creation shortcuts

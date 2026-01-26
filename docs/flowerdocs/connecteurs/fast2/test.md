@@ -1,11 +1,12 @@
 ---
 title: Test
 description: Validating the configuration of a Fast2 injection
+sidebar_position: 4
 date: "2001-03-28T15:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 354d95efddd3ecf099d53f7d1fb1059049ed5dbaef7e7524dd7a092daf22353d
+content_hash: 62506d3184d7372f9a1d7ec4f79def0b40fa98a9bb011a10f762a2ed3d24d009
 ---
 
 # Import task

@@ -1,10 +1,11 @@
 ---
 title: Utility functions
+sidebar_position: 4
 date: "2018-03-28T13:22:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: e28bc6644dcae3e550b0e34a1dde110771b8524d9cbcec45784b7f1702400b1d
+content_hash: 5715fc1c292c11006e83af7415cd8f1933c095eafc56da4a2a28128802dbc860
 ---
 
 # Permissions

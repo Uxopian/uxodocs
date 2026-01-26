@@ -1,11 +1,12 @@
 ---
 title: Task's serial processing
+sidebar_position: 5
 description: Process a list of tasks without going back to the search
 date: "2005-04-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 62f2afec8cf6d414714a282914b7b085d8dc9e8b564f18b00f7c532f5deb5022
+content_hash: d4b6ec0b6c2de84157743ef234ee90134650dd6563cc18264894438e4c1f824e
 ---
 
 For more efficient processing of a task list, it is possible to define serial processing sessions. During these sessions, the user will move on to the next task without going back to the search that initiated the session.

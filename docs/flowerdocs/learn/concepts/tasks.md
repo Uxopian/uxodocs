@@ -1,11 +1,12 @@
 ---
 title: Tasks
+sidebar_position: 6
 description: Manage your business or technical processes.
 date: "2000-06-05T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: e4b67bc5195b010bb75c1ee0aa02aa724078d706c4abc1c15a33142990a44e79
+content_hash: 70604c7a2167378e12869c6d97c130d12b8b68691f0746a9d48acd21a7eb260f
 ---
 
 :::info

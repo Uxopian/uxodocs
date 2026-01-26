@@ -1,11 +1,12 @@
 ---
 title: Authentication
+sidebar_position: 2
 description: Authenticate users accessing the application
 date: "2018-03-27T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: d0e42575502b989f13a8ea00953c66cdda1246f2e1ba4031a61ff242450b5a99
+content_hash: 712bda49ba18526d1b606cbe65813b70a0faef2be9c241c322b8f21b267b221c
 ---
 
 :::info

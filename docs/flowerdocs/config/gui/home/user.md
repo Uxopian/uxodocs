@@ -1,10 +1,11 @@
 ---
 title: History
+sidebar_position: 4
 date: "2000-04-03T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: c2696b6cedf1e18dc606e198920a43c4d6795fe60b2cd0d5629c87be4b783f88
+content_hash: 1a3fbc339990caaa4e8c87100b97729c8fa1119ee9edc59b00d4a52925a4ea5d
 ---
 
 This section details the display of widgets based on components modified, created or viewed by the current user.

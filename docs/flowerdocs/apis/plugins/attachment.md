@@ -1,11 +1,12 @@
 ---
 title: Attachment action
+sidebar_position: 3
 description: Actions on a task attachment
 date: "2021-12-02T10:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 5e0c8f30ab2534a4b3675cb8d637a243464445f9eaddff86943868262c1a3cd8
+content_hash: 5049aef733894f10d7757ca5897e0d09d273093471af1d50310f051d221cfdeb
 ---
 
 import Tabs from '@theme/Tabs';

@@ -28,7 +28,7 @@
   "fast2": [
     {
       "label": "Getting started",
-      "href": "/docs/fast2/getting-started/authentication"
+      "href": "/docs/fast2/getting-started/"
     },
     {
       "label": "Components",
@@ -54,11 +54,11 @@
   "flowerdocs": [
     {
       "label": "Concepts",
-      "href": "/docs/flowerdocs/concepts/facts"
+      "href": "/docs/flowerdocs/concepts/getting-started"
     },
     {
       "label": "Install",
-      "href": "/docs/flowerdocs/install/docker"
+      "href": "/docs/flowerdocs/install/getting-started"
     },
     {
       "label": "Learn",
@@ -66,15 +66,15 @@
     },
     {
       "label": "Config",
-      "href": "/docs/flowerdocs/config/core/component-identifier"
+      "href": "/docs/flowerdocs/config/gui/getting-started"
     },
     {
-      "label": "Apis",
-      "href": "/docs/flowerdocs/apis/core/dao"
+      "label": "Development",
+      "href": "/docs/flowerdocs/apis/jsapi/getting-started"
     },
     {
       "label": "Connecteurs",
-      "href": "/docs/flowerdocs/connecteurs/companion/config"
+      "href": "/docs/flowerdocs/connecteurs/companion/getting-started"
     }
   ],
   "uxopian-ai": [

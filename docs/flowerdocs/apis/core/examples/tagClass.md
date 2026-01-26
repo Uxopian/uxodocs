@@ -1,11 +1,12 @@
 ---
 title: Manipulating a tag class
 description: "Create, retrieve, modify, delete your tag classes"
+sidebar_position: 12
 date: "2001-04-29T13:30:01+01:02"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: ec33e765e57b3374a6f82a1886edfcac36943f8b49dc582dd88842011c38e97f
+content_hash: 679bf14fe3aff4d698ea863e1a4e62f1cb61e11b66f15c50df0c760d215591c8
 ---
 
 import Tabs from '@theme/Tabs';

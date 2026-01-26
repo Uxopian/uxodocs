@@ -1,10 +1,11 @@
 ---
 title: Getting Started
+sidebar_position: 1
 date: "2000-01-01T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: f21fcabc1076ab65c44fad13bfd55f263cf6b6dd1efa900af3b6fc33682a24bc
+content_hash: 68242d403ab44908af611e27c10d908265989553a0ae364c4df80a313ef9f587
 ---
 
 :::info

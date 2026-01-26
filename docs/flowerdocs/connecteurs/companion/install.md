@@ -1,10 +1,11 @@
 ---
 title: Installation
+sidebar_position: 2
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-20T10:40:25.232Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 3dd8261cbcf2fdd50229e6a588e77ccba118854d339df040166717ea54739ed2
+content_hash: 3c81c85e93a1a404b9a4246fd3d4896159f6790e4d415c325a567e868cc46737
 ---
 import FlowerDocsCompanionDownload from '@site/src/components/FlowerDocsCompanionDownload';
 

@@ -1,11 +1,12 @@
 ---
 title: Component selection
+sidebar_position: 2
 description: Offer users a library of models
 date: "2021-11-17T10:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: df4e0d225e04515ee7adc239247e1534afd5870d1059a0b3ef4616a0631270cc
+content_hash: f66912135ed0771e642b1749a04347daef0344183324d25da7ad2f528f411dc9
 ---
 
 import Tabs from '@theme/Tabs';

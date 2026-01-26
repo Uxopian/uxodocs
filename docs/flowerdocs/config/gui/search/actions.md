@@ -1,11 +1,12 @@
 ---
 title: Actions
+sidebar_position: 6
 description: Add actions in the search form.
 date: "2023-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 4cb9972f971f023ca6a4cc3964074f22e20ea9c681a408ccadae0735b2d61273
+content_hash: cf5225dc112d04d238bfa84be92a253b41d66290ac67a97765a7634cd9e45220
 ---
 
 For each search form, it is possible to define a list of actions that a user can perform.

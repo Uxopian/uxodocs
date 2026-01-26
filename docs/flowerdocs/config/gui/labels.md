@@ -1,10 +1,11 @@
 ---
 title: Labels
+sidebar_position: 13
 date: "2009-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 957648951d0216a32c257c26ad196cd11575f620a282c44e55987f9930417bd9
+content_hash: a674ae8fe6b1902923d7d1b5eeb8a45b262d2b22e6fdc3bf539ce400cd166052
 ---
 
 import Tabs from '@theme/Tabs';

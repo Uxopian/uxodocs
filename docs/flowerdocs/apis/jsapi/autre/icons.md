@@ -1,11 +1,12 @@
 ---
 title: Icons
+sidebar_position: 1
 description: Modify component icons in JavaScript
 date: "2000-02-01"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 8f874f38d154cd013f2982629145af50c9f16c96839046368f5d58124e03c372
+content_hash: b39bed82f4e7843a854baa0607c4b162b517a369bbcd64254394ebc94c19df8d
 ---
 
 :::info

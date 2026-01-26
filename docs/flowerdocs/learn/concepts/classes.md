@@ -1,10 +1,11 @@
 ---
 title: Classes
+sidebar_position: 3
 date: "2000-03-02"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 00098d034b50abdd70281180642ca371ca202e6049128dc7505e66c1551c92a7
+content_hash: 4b4c2cb8f291846b7c3ea1df6864f00815bd55426d65c201b7947bd293f68bc5
 ---
 
 # What is it for?

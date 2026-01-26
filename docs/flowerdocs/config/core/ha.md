@@ -1,10 +1,11 @@
 ---
 title: Clustering & HA
+sidebar_position: 1
 date: "2000-03-28"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: bcf52d9e361575d66aa8e5ff5b41920cabaff84020b648befbcee036b08b1ac9
+content_hash: bab45d295eba3935ca621e94f4de63b4086d96b109d2689c8cd5dbf4a06cd397
 ---
 
 # Activation

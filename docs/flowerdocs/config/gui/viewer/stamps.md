@@ -1,11 +1,12 @@
 ---
 title: Stamp templates
+sidebar_position: 4
 description: Collaborate on documents using annotations.
 date: "2005-08-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: b33145db3df7c2ccea32066d996d0406e10f8acae5ea43196c4e323759692dec
+content_hash: 672932647e6b71085606d753b4c0728858f5d40746c9ec7d3b266c285c0fd5c5
 ---
 
 import Tabs from '@theme/Tabs';

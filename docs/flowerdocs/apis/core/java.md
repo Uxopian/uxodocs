@@ -1,11 +1,12 @@
 ---
 title: Java client
+sidebar_position: 3
 description: Consume web services using the Java client.
 date: "2001-04-01T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 2e7d873f7b7cbf5a7ced849395e39df82dfe5fa6b2fc9d79516cd570b3babef2
+content_hash: 83ce9b49bfcf2556c45815c434b6f1f2ba7205ff1e53330def9ea913ac3cfa6e
 ---
 
 :::info

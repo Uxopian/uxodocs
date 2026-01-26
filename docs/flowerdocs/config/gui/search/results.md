@@ -1,11 +1,12 @@
 ---
 title: Search results
+sidebar_position: 4
 description: Customize the presentation of search results.
 date: "2005-04-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: fc309d4760af660cf4cbcdde7848d55894cffd40eb44ee15978fe965cbd53c14
+content_hash: ea82863b37a26a5e9a88412a688bc794cf5670957ff277b120540bae440ce67c
 ---
 
 # Hiding columns

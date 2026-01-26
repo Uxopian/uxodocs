@@ -1,10 +1,11 @@
 ---
 title: IFrameOffMenu
+sidebar_position: 3
 date: "2001-03-01"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 08ea402cc8eef64caf5b5dc3845cd8889b9de341e1df7659d73dbfc33d82d71f
+content_hash: adcac44f9f0d84a69beb86d32e4072eadf93dba8257b8630418b8eabd4b77a81
 ---
 
 IFrame OffMenus allow you to add an IFrame to the menu.

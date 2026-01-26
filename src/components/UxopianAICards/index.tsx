@@ -158,7 +158,7 @@ export default function UxopianAICards() {
                         <h2 className={styles.sectionTitle}>🚀 Getting Started</h2>
                         <p className={styles.sectionContent}>
                             Ready to dive in? Check out the{" "}
-                            <Link to="/docs/uxopian-ai/getting_started/installation_guide">
+                            <Link to="/docs/uxopian-ai/getting_started/">
                                 <strong>Installation Guide</strong>
                             </Link>{" "}
                             to set up your first instance of <strong>uxopian-ai</strong>.

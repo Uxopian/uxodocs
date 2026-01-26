@@ -1,11 +1,12 @@
 ---
 title: Handling annotations
 description: "Create, modify, delete your annotations"
+sidebar_position: 7
 date: "2001-03-30T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 0de041d0f9da8d0c8f4ee7b4132add68f392f7474c42a498654822d02193ba8a
+content_hash: 32b88fada4a3aa27f7c9aef2fd5afbd49366b4f9e8646619d95c1bfb1d9db021
 ---
 
 import Tabs from '@theme/Tabs';

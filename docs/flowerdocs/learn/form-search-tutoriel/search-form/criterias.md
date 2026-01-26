@@ -1,10 +1,11 @@
 ---
 title: Criteria
+sidebar_position: 2
 date: "2020-03-03T09:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: acdfcd089364a04760ebcff8f0b6af2b4a6c453023c631e2af3bfb3b2cb1e05b
+content_hash: 52ce8bf0f7eb884a241b4e5c59d265bda406fabeb63455314f363cdeafe0ec9e
 ---
 
 :::info

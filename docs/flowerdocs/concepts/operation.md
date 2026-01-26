@@ -1,12 +1,13 @@
 ---
 title: Operation
+sidebar_position: 8
 description: Reacting to operations.
 date: "2008-01-03T13:22:01+02:00"
 custom_edit_url: null
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 4fef0d504eb1f90e98523a4e70f6b4575f90ec91fa8ceabbb60ce9f626fc861d
+content_hash: 691060b6e8b0d4207a16f8ca6ae0eb99cbcd6872dad1e824b8f26b4657498200
 ---
 
 ## Principle

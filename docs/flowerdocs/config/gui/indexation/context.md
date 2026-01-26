@@ -1,11 +1,12 @@
 ---
 title: Contexts
+sidebar_position: 1
 description: Configure indexing forms
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: ac02e9ba7dec0bba6e84436634188ff687b56ba250f1cd54b752a786313e4a14
+content_hash: 91775efbf226ba9d947f79e615fcda7cc0c910bd6b9f492236963faa7719111e
 ---
 
 To configure an indexing screen, you first need to identify the components for which you wish to apply the configuration. This identification is based on context.

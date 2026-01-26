@@ -1,10 +1,11 @@
 ---
 title: Docker
+sidebar_position: 6
 date: "2000-03-31T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: f0901c12e4b540a4afc141f41c9b8eaa9ef559e196115b3d94dc0e9f7c556cc8
+content_hash: 992af14e4b4457cbb35997b4a4828a38a6604d3a2b060075d011f9ae05a15288
 ---
 
 # Docker installation

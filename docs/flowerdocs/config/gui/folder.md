@@ -1,10 +1,11 @@
 ---
 title: Folder contents
+sidebar_position: 9
 date: "2004-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 916ea5c0f709f39023bea894e453bb7327d168b1bc2e07383cc64b9bb2fd3d4a
+content_hash: 6e9e8894adbcae0daeda857d7cd00c12a96cdfbd171d3adb17983dfe08e1f1a7
 ---
 
 # Folder contents

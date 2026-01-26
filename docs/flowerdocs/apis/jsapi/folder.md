@@ -1,11 +1,12 @@
 ---
 title: Folder content
+sidebar_position: 14
 description: Customise folder contents
 date: "2012-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: e16c6483c7c00c299f243634ac2404d83974fb9589b0779e5745c019a764095d
+content_hash: b15751074ae04cd521ab4ff352bed6d6dfe2b8f2e2fb93403e610f46057ba2fc
 ---
 
 The management of creation actions within a folder can be configured by registering a processor.

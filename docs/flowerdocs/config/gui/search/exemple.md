@@ -1,10 +1,11 @@
 ---
 title: Full example
+sidebar_position: 7
 date: "2023-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 7369cffe12d7a41024a09096d6373ebc5122074037b0f4ab9c613ceafbdbed82
+content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
 ---
 
 ```xml

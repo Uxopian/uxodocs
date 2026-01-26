@@ -1,13 +1,14 @@
 ---
 title: Files
+sidebar_position: 8
 description: >-
     This section applies to the OpenSearch connector coupled with file system
     storage.
 date: "2023-06-01"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: cef1018db3a0e997dd552646fc3a8f6987b5c7f31c244cdb1c847d93d6d44239
+content_hash: 07cc181aa4a63e7eb806ff74339304f0f590144664c5d693a03591159a3f40f2
 ---
 
 # Encryption

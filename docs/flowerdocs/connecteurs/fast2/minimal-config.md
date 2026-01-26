@@ -1,10 +1,11 @@
 ---
 title: Minimum configuration
+sidebar_position: 3
 date: "2001-03-28T14:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 48df1563400b587394261c6fddfb43c3a351fd44b9f22278bd77adaadf0b8f38
+content_hash: c07569b6a920a6998afd0d3924438b4d0e74077e65a9d9d14447d85d3632ebaf
 ---
 
 # Access to FlowerDocs

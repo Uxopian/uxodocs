@@ -1,10 +1,11 @@
 ---
 title: Full example
+sidebar_position: 4
 date: "2020-07-07T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 98326824b94e7d69e8d85d5871420a234e590abe7791d6d460b6e6c4886dad29
+content_hash: 69a9928b953f203b84512d8a3a92c6b423a1f536cce4b3c495af2c8c671c66cb
 ---
 
 Reminder: Access the editor via the **Administration > Configuration > XML** menu:

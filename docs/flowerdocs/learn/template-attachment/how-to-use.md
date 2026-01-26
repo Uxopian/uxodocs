@@ -1,10 +1,11 @@
 ---
 title: Use of the plugin
+sidebar_position: 3
 date: "2020-02-01T14:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 5ce0d3e691cef953cf087dee68de7a0d2d04d083439d4234a1b6123b9c43405e
+content_hash: 536d3d4cb57298ee91a947c073e6b6c5f7fe5d3a5114aed08012288cf69ede30
 ---
 
 # Goal

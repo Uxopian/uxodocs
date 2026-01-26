@@ -1,11 +1,12 @@
 ---
 title: Handling a virtual folder
 description: "Create, retrieve, modify, delete and search your virtual folders"
+sidebar_position: 14
 date: "2001-04-29T13:30:01+01:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: ecb503c8f52c6f9e2118165d1adbddb72b84b7f65e90dee454b997af2a43fd4b
+content_hash: b8009a16cf6212149b0b8a371a54d3131c0ff808fa95cbef26435360f0e09fe8
 ---
 
 import Tabs from '@theme/Tabs';

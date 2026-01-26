@@ -1,11 +1,12 @@
 ---
 title: Internal users
+sidebar_position: 4
 description: Define internal users
 date: "2019-06-02T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 481c2fca2c85cf83e4b9a538379256956b8f772f5b162caf69f8412288ceda90
+content_hash: 9a0716c8399c50b5f605293a014c450f06335ea6fb06fb58b0a9d58feea59a01
 ---
 
 :::info

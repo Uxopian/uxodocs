@@ -1,11 +1,12 @@
 ---
 title: Getting Started
+sidebar_position: 1
 description: Generate an attachment in Word format
 date: "2020-02-01T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: d961e7edf1bea3a04f812966e9291c3b93d79f618f2c239c36f8ab15f86ce4a2
+content_hash: 2a0d3728362e50cf258931e4043b4f51363b77ab178814f8668d2528a7882a0d
 ---
 
 # Goal

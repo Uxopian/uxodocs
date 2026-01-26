@@ -1,11 +1,12 @@
 ---
 title: Using templates
 description: Enrich an HTML or MS Word template with tag values
+sidebar_position: 16
 date: "2018-04-02T12:20:01+01:59"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: ed4182342a7516b530ad11bc77d02e802e600f100ab5c460f9222bc0be9bf939
+content_hash: c289acea0ac6ccbdff8b02d1a99efa56eeb19e0881249aa11a7d384bb30e4512
 ---
 
 import Tabs from '@theme/Tabs';

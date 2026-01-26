@@ -1,10 +1,11 @@
 ---
 title: Counter
+sidebar_position: 6
 date: "2000-04-15T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: d81aeb46b0b7a475509e430658b10ee366ed93758431d3c795ca1e73fd754774
+content_hash: 4dcb63ec3b4f8c6cfda305d6f00125348b2488f98ba3278aa0389c11525af053
 ---
 
 A counter displays the number of search results in a widget on the home page.

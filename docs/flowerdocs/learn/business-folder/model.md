@@ -1,10 +1,11 @@
 ---
 title: Setting up the template
+sidebar_position: 2
 date: "2000-02-01T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 1ef8291165a049a86e5bc457d50b9cdac995625ea6cb5d5362fa0350c62e876f
+content_hash: b41725c77a9f2dd81b467c12bce824d1de5a0abfe0f070ac4f9f819753c3f353
 ---
 
 Using the client file as an example, we can test the setting up of a practical example.

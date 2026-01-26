@@ -1,11 +1,12 @@
 ---
 title: Purging caches
 description: Purge your scope's caches
+sidebar_position: 1
 date: "2001-01-29T12:20:01+01:58"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 26c82728ab985c68407dfcd3e0cc7f3ec588b1d6e45b7ca0d40eeccf5b9ca4f2
+content_hash: 987ff1a43ad3fe939f65d68098a28e0c1183b8d8b886740b51481fa3ea34e8a8
 ---
 
 import Tabs from '@theme/Tabs';

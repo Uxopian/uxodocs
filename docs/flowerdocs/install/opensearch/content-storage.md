@@ -1,11 +1,12 @@
 ---
 title: Content storage
+sidebar_position: 4
 description: Manage document content storage
 date: "2003-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: fd30e359d5c1d0cf05c03eb9e95a5bf08d1e1560d289cb84ae810e1a953eac7c
+content_hash: 1f7e1a40a4294c51bc4230eb4471ec9e7705ae5986246d28d0f6e8c1f34bc59f
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,10 +1,11 @@
 ---
 title: Installation
+sidebar_position: 2
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: e1a66daeaf692b5efdc8c45ab680c1ddc174d01aa0b5ac1f272ecd94fe5d3f7d
+content_hash: 838e7d1674ae22a53988c4284c47644bf4d2253f5efa30cdf72564f9a8baf774
 ---
 
 Two types of packaging are supplied:

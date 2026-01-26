@@ -24,11 +24,31 @@ async function exists(p) {
 async function findFirstMarkdown(dir, maxDepth = 4, depth = 0) {
     if (depth > maxDepth) return null;
     const entries = await fs.readdir(dir, { withFileTypes: true });
-    const files = entries.filter((e) => e.isFile()).map((e) => e.name).sort();
-    for (const f of files) {
+    const files = entries.filter((e) => e.isFile()).map((e) => e.name);
+
+    // First, check for getting-started.md or getting-started.mdx in current directory
+    const gettingStarted = files.find(f => /^getting-started\.mdx?$/i.test(f));
+    if (gettingStarted) return path.join(dir, gettingStarted);
+
+    // Then check for other markdown files in current directory, sorted alphabetically
+    const sortedFiles = files.sort();
+    for (const f of sortedFiles) {
         if (/\.mdx?$/i.test(f)) return path.join(dir, f);
     }
+
+    // If no markdown files in current directory, recurse into subdirectories
     const dirs = entries.filter((e) => e.isDirectory()).map((e) => e.name).sort();
+
+    // First pass: look for getting-started.md in subdirectories
+    for (const d of dirs) {
+        const subPath = path.join(dir, d);
+        const subEntries = await fs.readdir(subPath, { withFileTypes: true });
+        const subFiles = subEntries.filter((e) => e.isFile()).map((e) => e.name);
+        const subGettingStarted = subFiles.find(f => /^getting-started\.mdx?$/i.test(f));
+        if (subGettingStarted) return path.join(subPath, subGettingStarted);
+    }
+
+    // Second pass: recurse normally if no getting-started found
     for (const d of dirs) {
         const found = await findFirstMarkdown(path.join(dir, d), maxDepth, depth + 1);
         if (found) return found;

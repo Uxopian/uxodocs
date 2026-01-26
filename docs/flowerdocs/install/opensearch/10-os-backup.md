@@ -1,10 +1,11 @@
 ---
 title: Backup & restoration
+sidebar_position: 5
 date: "2005-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 1d977a6b9254dd15b7908b933351aa8ac537e57fbac43b495ff097f57964cf62
+content_hash: f3e8c94ae1db4438b64fa4e72c561d50d234ed7e0abda6dd1b382b360dcfd9c9
 ---
 
 import Tabs from '@theme/Tabs';

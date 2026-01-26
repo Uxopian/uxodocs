@@ -1,10 +1,11 @@
 ---
 title: Shortcuts
+sidebar_position: 1
 date: "2008-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 24abead4784e6abebb73fd21b0917746ec40c5622e094363970b416df16067b1
+content_hash: 30e0bad1339c114e87d8aa625e3abb8eba7b4cdeb1df4a1365d854d27c137fbb
 ---
 
 To facilitate access to certain actions, several shortcut containers can be manipulated through the JS API:

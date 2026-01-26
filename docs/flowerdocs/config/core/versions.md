@@ -1,11 +1,12 @@
 ---
+sidebar_position: 4
 title: Lifecycle
 description: Manage document versions
 date: "2020-02-01"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 6946ca51484c3a58c0f8f21f5e271a264e33f4c89d042093032d646e9f99fcd1
+content_hash: c9a3a46af4a2ca2525e78c464b2d6c894547c1dc549e761b21e86873e58f25b5
 ---
 
 :::info

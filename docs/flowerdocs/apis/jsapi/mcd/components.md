@@ -1,11 +1,12 @@
 ---
 title: Components
+sidebar_position: 1
 description: Manipulating component in JavaScript
 date: "2001-02-01"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: e4bddf9af11d97a77414af92d76be2bc19e9e411be30ee8f0c5381a315d38b39
+content_hash: 15eac386bcefbcfafa86e5df30586381d10adaddfa5b76050b5c92798df017c2
 ---
 
 :::info

@@ -1,11 +1,12 @@
 ---
 title: Handling document versions
 description: "Create, restore, delete document versions"
+sidebar_position: 8
 date: "2001-03-30T13:20:02+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 909f61a49c09c7cd33433e8f7e2290550e81c52898bfe82d31f13941ab32782b
+content_hash: 08c4129136b4c91d90425187530bf82ae36587ae83b14057b61471ecbf791694
 ---
 
 import Tabs from '@theme/Tabs';

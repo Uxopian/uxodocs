@@ -1,11 +1,12 @@
 ---
 title: Navigation
+sidebar_position: 9
 description: Manage navigation between different screens
 date: "2006-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: c2949e9998c1059678beb23c228d7590307c4fa929cee71285a44d11077887ad
+content_hash: 93fa7867986e029384f266f51b6e46f3ff1256e6e89445ba25303c77f670bd4c
 ---
 
 :::info

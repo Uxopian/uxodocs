@@ -1,11 +1,12 @@
 ---
 title: Date
+sidebar_position: 6
 description: Use date tags.
 date: "2018-03-07T13:24:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: a38c1211f5f116748d24382df97465053ac36604a6a77db919d21b24239ebce4
+content_hash: 3c6d9826daf3cc3e08972f134089252f35b7d4ffa3dcfae19d7b43401dce8f87
 ---
 
 The FlowerDocs data model allows you to define tags of type `DATE`.

@@ -1,11 +1,12 @@
 ---
 title: Tags
+sidebar_position: 4
 description: Displaying component tags in a popup window.
 date: "2004-03-28T13:21:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 4b8d3cf9ba84db2bedc560d088a52666dc8eee1d65accde3f9717cda281137de
+content_hash: e6708e6891e878df93d6e8a36e4942c9bdd0c48f5a56f330c3bc3d3c436e6b07
 ---
 
 :::info

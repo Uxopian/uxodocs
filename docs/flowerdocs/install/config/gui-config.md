@@ -1,10 +1,11 @@
 ---
 title: GUI configuration
+sidebar_position: 1
 date: "2000-03-30T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: a25880545f7d9bb77eda7a38bed2480860e66cbdfad777ad92050873b28a3097
+content_hash: ba3c078471ccb03bbf82a5cbbaeca32101e45f24d98625b8188776701e2f11eb
 ---
 
 This section describes the various FlowerDocs GUI configurations to be defined in the application's `gui.properties` file.

@@ -1,11 +1,12 @@
 ---
 title: Conditional
+sidebar_position: 4
 description: Condition the lists associated with your tags according to context.
 date: "2018-03-07T13:22:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: f6cecdbaaf0a633f57266a89db21b53a6063fcdeafb50842aec01fcaf1332ea0
+content_hash: 2b1e4eef8679d29599de55977777f7e225598dae754bc2d4fbe6c0ff46db529c
 ---
 
 The `CONDITIONAL` type is used to define conditions on the various choices (or sets of choices) offered to the user in indexing or search forms.

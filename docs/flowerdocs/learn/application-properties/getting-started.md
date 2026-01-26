@@ -1,11 +1,12 @@
 ---
 title: Getting Started
+sidebar_position: 1
 description: Find out about the different ways to customize the application logo
 date: "2000-01-01T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: f34ed3da1955b0180a7fe3a09758c71c804e278a39dc3f08dfae4725dde1933c
+content_hash: bf1ad4e30188685c6f0443ccf894f2cb799c7dcf21bdb25a45fda66a038e0533
 ---
 
 # Goal

@@ -1,11 +1,12 @@
 ---
 title: Handling a temporary file
 description: "Create, modify, delete temporary files"
+sidebar_position: 9
 date: "2001-04-15T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 5c1bc45577fe1fc5ce837934a837e34a371b30b04cffae48f40c5e94187114e4
+content_hash: 367d5284d5df1909947383e9980bc3b526849add48b8da831c57fb2d13f0c12f
 ---
 
 import Tabs from '@theme/Tabs';

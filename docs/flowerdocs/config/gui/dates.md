@@ -1,10 +1,11 @@
 ---
 title: Date management
+sidebar_position: 12
 date: "2009-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 8fa85b580dbf5195f423fb7f45ef1238cdde690248bdca68a48570e4c22d1493
+content_hash: d5234d1833165ee9df37ca9b394e6e65e5d2869b7ae14d2a4c919f25df8a4d1a
 ---
 
 # Global configuration

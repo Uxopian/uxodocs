@@ -1,10 +1,11 @@
 ---
 title: Component identifiers
+sidebar_position: 2
 date: "2004-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: c95bff07257d08fa9144451aab4f653f964f94ec0f93e3c4c6db415d8c678f60
+content_hash: 966fb2fe825f437753a1fcc37c57726c682e8fe6a330ddf84c5cd1b8087f5445
 ---
 
 # Component identifiers

@@ -1,11 +1,12 @@
 ---
 title: Getting Started
+sidebar_position: 1
 description: Configure the graphical user interface.
 date: "1998-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 44cfe1fbc7b8412918cef044d8df610f911ead096804a0bb0e00c28d3cef7b93
+content_hash: 909c3b6c8c9b4d38a0d75073aaa2c43bcccd38269aa5e0d280e9603272c674bd
 ---
 
 # Introduction

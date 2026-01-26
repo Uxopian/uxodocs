@@ -1,10 +1,11 @@
 ---
 title: Indexing
+sidebar_position: 2
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: b21ecd0873791eb4439f748db913448fbd83ba8e19d28c8c518bae53b7f923f2
+content_hash: fef75961f19f07bcf5b7e35a9df46f94345597691efdeb4f91c664fff114bd8a
 ---
 
 An indexing form lets you view and modify a component's tags. In order to interact with this type of form, it is necessary to subscribe to its opening:

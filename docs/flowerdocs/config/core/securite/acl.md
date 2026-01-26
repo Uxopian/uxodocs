@@ -1,11 +1,12 @@
 ---
 title: Access control list
+sidebar_position: 7
 description: Secure access to components
 date: "2019-06-06"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 68ff86a70c065ff7bd154de20a232d7a52e71210cfdd4e9d98872667483c96ca
+content_hash: 9234b06aa7370518da953683873604866d0828b1777a41e0fa871a4ee84ed9b4
 ---
 
 # Permissions

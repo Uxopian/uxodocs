@@ -1,11 +1,12 @@
 ---
 title: Export results
+sidebar_position: 3
 description: Export search results
 date: "2020-02-01"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: c26552a2fa4a95fa9b04d9e2f7d62eecbf29e6647a0ae55613debc64569e2339
+content_hash: 282aee6a4206ffe08b92b2b74617fac2632db0f75a0893f62a69b15aa5af92cd
 ---
 
 This section describes how to configure the download of search results in CSV format.

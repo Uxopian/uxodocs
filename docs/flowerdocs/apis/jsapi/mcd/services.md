@@ -1,11 +1,12 @@
 ---
 title: services
+sidebar_position: 2
 description: Consuming FlowerDocs services from the JS API
 date: "2001-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 1786cf125f3572d40df682f34cba6bf5b6cc43ebe47fd5d6df4b14e2430d87b8
+content_hash: 7b4e81ea627dace9c0ffa3d7f5385ad7ea53d33bbf20b43734d626de6886bee1
 ---
 
 import Tabs from '@theme/Tabs';

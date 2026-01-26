@@ -1,11 +1,12 @@
 ---
 title: Tasks
+sidebar_position: 4
 description: tasks classes
 date: "2018-03-02T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 4670c591c66fd3d2261e3622d6c0908eddcd14449990dcfa15916244e7cd6a1b
+content_hash: afe19fb33171a8195f99d59edd32721e929093b17541a46d3473123805e835f9
 ---
 
 :::info

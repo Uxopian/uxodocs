@@ -1,10 +1,11 @@
 ---
 title: Getting Started
+sidebar_position: 1
 date: "2000-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 3688e0d7b313164091777457dfa93fe5457ef2e48391fea86a65ecc7e45e50f2
+content_hash: 73debbac195de326e22dbe326f94384ae702b47df8293a1afeb23cc6b6addd80
 ---
 
 To carry out mass and/or planned document injections within FlowerDocs,

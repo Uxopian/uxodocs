@@ -1,12 +1,13 @@
 ---
 title: Script execution
+sidebar_position: 3
 description: Respond to an operation by executing a JavaScript script
 date: "2002-03-28T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 1154e01ee7fdbfba15412307ebcbaaefe3ed728670ab7d5bb8a2c758905a7ccb
+content_hash: 454edb6c803cd13c6c98b72f27e26573796536ef2da84c2e3d3f3193db409251
 ---
 
 # Principle

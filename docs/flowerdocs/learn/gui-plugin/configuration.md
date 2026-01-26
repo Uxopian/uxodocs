@@ -1,11 +1,12 @@
 ---
 title: Integration
+sidebar_position: 2
 description: Configure the plugin from the admin console.
 date: "2020-02-01T15:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: f715b26a2813d822539a24d4add62cc50b6d4157b52e3c02157f0e35c44d4522
+content_hash: d7846cacce1f2c1f9c54008898c915ec80e5198754f602e1e78a7a3e40bb49ae
 ---
 
 # Plugin configuration

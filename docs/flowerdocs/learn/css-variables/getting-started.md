@@ -1,10 +1,11 @@
 ---
 title: Graphical user interface customization
+sidebar_position: 1
 date: "2022-04-19T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 66bb8a3851992fe64d2cf25cc037557645059e071516773897218a7af6da2d4f
+content_hash: b21256127fb12078bb200bba89c8bd45b710cf9d8c23958070e8bfe5f6488a58
 ---
 
 # Goal

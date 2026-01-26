@@ -1,10 +1,11 @@
 ---
 title: Outgoing email
+sidebar_position: 5
 date: "2003-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 3df414187866da7ad1dcd2807477cca3a5f5d79519ace75a81a4d298216505b3
+content_hash: 43a2f0c498d4aa5d6fba50b402393cf40259778a4322612f9e1597e90aae0cd2
 ---
 
 # Indexing outgoing mail

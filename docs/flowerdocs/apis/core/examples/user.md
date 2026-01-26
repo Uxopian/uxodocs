@@ -1,11 +1,12 @@
 ---
 title: User management
 description: "Create, modify, search for users"
+sidebar_position: 20
 date: "2018-05-02T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: f0de7f5deca1ab1ca6d5556f64b7a815246fe28019a522c1ddc41e8bd70359db
+content_hash: a1aeb5df70cd7e5639efd5e937048a325f1f5f7f03c5d88a9a6b355ddd39d560
 ---
 
 import Tabs from '@theme/Tabs';

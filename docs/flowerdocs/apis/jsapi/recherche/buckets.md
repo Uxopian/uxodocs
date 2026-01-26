@@ -1,11 +1,12 @@
 ---
 title: Buckets
+sidebar_position: 4
 description: Managing the organisation with buckets search results
 date: "2005-03-28T13:23:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 26dcb4710a4a75c3d844343674162410a2be631ac7a1b3c16597d85110dda161
+content_hash: 3f8a89b4506cc1cbe71c0b34a03d3f1a56743841e7f7808a91d9d708490ff0e8
 ---
 
 # "Managing buckets"

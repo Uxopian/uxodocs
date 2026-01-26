@@ -1,12 +1,13 @@
 ---
 title: Graal
+sidebar_position: 3
 description: JavaScript engine included in FlowerDocs Core.
 date: "2002-03-28T13:20:01+02:00"
 custom_edit_url: null
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: 2f67714270d34548148923661621bc8b1ba7716ebff204b9202fd2bb3e55f9bc
+content_hash: 619b427d9bc3f1a3aa9bebb29343f5bc4b71ec71b5186259778af37251f62654
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,10 +1,11 @@
 ---
 title: Models
+sidebar_position: 4
 date: "2003-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 88d3e3253478ece18068964ad0b73072ccff3fee11503cdf10796dd3ecaa4070
+content_hash: f23e8a4e8c99a7af90f0bc20ad9f4467ba1d0eb6882cfde9c2d53a8e5cdd73bf
 ---
 
 These templates are determined from a document search using the `Template` class (this class can be modified using the `flower.template.class` property).

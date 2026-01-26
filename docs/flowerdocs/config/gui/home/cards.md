@@ -1,10 +1,11 @@
 ---
 title: Miniatures
+sidebar_position: 5
 date: "2000-04-03T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: dff857a56e174897a4afeccbda2fce1b13c0aa02e6db26d035803e26f78638ab
+content_hash: fcfa0f8c334e5681321963792912bd158d018b3b00d0761b667a05320cb8b91c
 ---
 
 There is another type of search catalogue that is not based on a list of widgets like the `WidgetCatalog` but based on a search, the `SearchWidgetCatalog`. This provides a map widget for each search.

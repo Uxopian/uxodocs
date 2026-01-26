@@ -1,11 +1,12 @@
 ---
 title: Recover users’ profiles
+sidebar_position: 18
 description: Search for user profiles
 date: "2018-04-02T12:20:31+01:58"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T14:16:25.927Z'
   author: CI/CD Bot
-content_hash: 48746228f65f20ab6e93c69aaa58707a188bcc388534efafef320318b9f9b115
+content_hash: eb65d520257ebcb12f98d0bbbb868c45f0af4da1d049fd2354474b1a5e4d4e13
 ---
 
 import Tabs from '@theme/Tabs';

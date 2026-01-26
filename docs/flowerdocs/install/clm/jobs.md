@@ -1,10 +1,11 @@
 ---
 title: Standard jobs
+sidebar_position: 3
 date: "2004-03-21T13:21:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: d2242af11b2496481af57070783e2fb61d225c9d82d963fdea78088de7c80c34
+content_hash: e8e51dd0dfd6e7ef2e082e4d22482c0f82c5fd92fe6f0b10ea3c41b351c6e10b
 ---
 
 # Create

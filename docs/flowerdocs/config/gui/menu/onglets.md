@@ -1,10 +1,11 @@
 ---
 title: Tabs
+sidebar_position: 1
 date: "2001-03-01T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-26T13:36:00.326Z'
   author: CI/CD Bot
-content_hash: a1ae1eea266851e09119965b9af2c9b87fb1a00ac491b297ba016baca359f82c
+content_hash: 93b0ac7d2f2e639da295bfd634f3b5314da4b45416a85b3303d295c087f17b57
 ---
 
 # The different types of tabs
