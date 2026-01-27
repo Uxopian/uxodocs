@@ -24,35 +24,23 @@ li.hidden-sidebar-item .menu__list-item-collapsible {
     display: none !important;
 }
 
-/* Hide sidebar on product homepage, but NOT on versioned docs homepage.
-   The original rule was hiding sidebar on ALL pages with documentationSection,
-   including versioned pages like /docs/flowerdocs/v2.8-LTS/flowerdocs/.
+/* Hide sidebar on ALL product homepages (versioned and non-versioned)
+   This includes:
+   - /docs/flowerdocs/ (non-versioned)
+   - /docs/flowerdocs/v2.8-LTS/flowerdocs/ (versioned)
+   - /docs/fast2/, /docs/arender/, etc.
    
-   SOLUTION: We've disabled the problematic rule. The sidebar will now show
-   on versioned documentation pages. For non-versioned product homepages,
-   the sidebar will also show, which is acceptable. */
-
-/* DISABLED: This was hiding sidebar on ALL documentationSection pages, including versioned docs
-div:has(main article [class*="documentationSection"]) > aside[class*="docSidebarContainer"],
-aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
-    display: none !important;
-}
-*/
-
-/* Keep sidebar hidden only when hidden-index-link is active */
+   The sidebar will be visible on all other documentation pages. */
+div:has(main article [class*="documentationSection"])>aside[class*="docSidebarContainer"],
 aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
     display: none !important;
 }
 
-/* DISABLED: This was expanding main content when sidebar was hidden on documentationSection pages
-div:has(main article [class*="documentationSection"]) > div > main,
-div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)
-    > div
-    > main {
+div:has(main article [class*="documentationSection"])>div>main,
+div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)>div>main {
     max-width: 100% !important;
     padding-left: 7rem;
 }
-*/
 
 /* Sidebar sticky */
 .theme-doc-sidebar-container {
