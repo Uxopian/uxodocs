@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import { useLocation } from "@docusaurus/router";
 import styles from "./styles.module.css";
 import UXopianFeed from "./UXopianFeed";
 
@@ -82,28 +81,6 @@ const GuidesList = [
     },
 ];
 
-const ConnectorsList = [
-    {
-        title: "FlowerDocs Companion",
-        logo: "/img/flowerdocs/documentation/microsoft.png",
-        description:
-            "Injecting documents into FlowerDocs from the Microsoft Office suite",
-        link: "/docs/flowerdocs/connecteurs/companion/install",
-    },
-    {
-        title: "Plume",
-        logo: "/img/flowerdocs/documentation/plume.png",
-        description: "Writing emails from FlowerDocs",
-        link: "/docs/flowerdocs/connecteurs/plume/getting-started",
-    },
-    {
-        title: "Fast2",
-        logo: "/img/flowerdocs/documentation/fast2.png",
-        description: "ETL Documentary",
-        link: "/docs/flowerdocs/connecteurs/fast2/getting-started",
-    },
-];
-
 function FlowerDocsCard({ title, icon, description, link, color }) {
     return (
         <div className={styles.card}>
@@ -160,6 +137,28 @@ function GuidesCard({ title, description, items, color }) {
     );
 }
 
+const ConnectorsList = [
+    {
+        title: "FlowerDocs Companion",
+        logo: "/img/flowerdocs/documentation/microsoft.png",
+        description:
+            "Injecting documents into FlowerDocs from the Microsoft Office suite",
+        link: "/docs/flowerdocs/connecteurs/companion/install",
+    },
+    {
+        title: "Plume",
+        logo: "/img/flowerdocs/documentation/plume.png",
+        description: "Writing emails from FlowerDocs",
+        link: "/docs/flowerdocs/connecteurs/plume/getting-started",
+    },
+    {
+        title: "Fast2",
+        logo: "/img/flowerdocs/documentation/fast2.png",
+        description: "ETL Documentary",
+        link: "/docs/flowerdocs/connecteurs/fast2/getting-started",
+    },
+];
+
 function ConnectorCard({ title, logo, description, link }) {
     const logoUrl = useBaseUrl(logo);
 
@@ -174,67 +173,20 @@ function ConnectorCard({ title, logo, description, link }) {
     );
 }
 
-// Helper function to detect version and adjust links
-function useVersionAwareLinks() {
-    const { pathname } = useLocation();
-
-    // Detect if we're on a versioned path like /docs/flowerdocs/v2.8-LTS/flowerdocs/
-    const versionMatch = pathname.match(/\/docs\/([^\/]+)\/(v[\d.-]+[^\/]*)\//);
-
-    if (versionMatch) {
-        const product = versionMatch[1];
-        const version = versionMatch[2];
-        const versionPrefix = `/${product}/${version}/${product}`;
-
-        return (link: string) => {
-            // Replace /docs/flowerdocs/ with /docs/flowerdocs/v2.8-LTS/flowerdocs/
-            const pathMatch = link.match(/\/docs\/[^\/]+\/(.*)/);
-            if (pathMatch) {
-                return `/docs${versionPrefix}/${pathMatch[1]}`;
-            }
-            return link;
-        };
-    }
-
-    // No version detected, return links as-is
-    return (link: string) => link;
-}
-
 export default function FlowerDocsCards() {
-    const adjustLink = useVersionAwareLinks();
-
-    // Adjust all links based on current version
-    const versionAwareFlowerDocsCards = FlowerDocsCardsList.map(card => ({
-        ...card,
-        link: adjustLink(card.link)
-    }));
-
-    const versionAwareGuidesList = GuidesList.map(guide => ({
-        ...guide,
-        items: guide.items.map(item => ({
-            ...item,
-            link: item.link ? adjustLink(item.link) : undefined
-        }))
-    }));
-
-    const versionAwareConnectorsList = ConnectorsList.map(connector => ({
-        ...connector,
-        link: adjustLink(connector.link)
-    }));
-
     return (
         <section className={styles.documentationSection}>
             <div className="container">
                 <div className={styles.layoutWrapper}>
                     <div className={styles.leftColumn}>
                         <div className={styles.cardsGrid}>
-                            {versionAwareFlowerDocsCards.map((props, idx) => (
+                            {FlowerDocsCardsList.map((props, idx) => (
                                 <FlowerDocsCard key={idx} {...props} />
                             ))}
                         </div>
 
                         <div className={styles.guidesGrid}>
-                            {versionAwareGuidesList.map((props, idx) => (
+                            {GuidesList.map((props, idx) => (
                                 <GuidesCard key={idx} {...props} />
                             ))}
                         </div>
@@ -247,7 +199,7 @@ export default function FlowerDocsCards() {
                                 </p>
                             </div>
                             <div className={styles.connectorsGrid}>
-                                {versionAwareConnectorsList.map((props, idx) => (
+                                {ConnectorsList.map((props, idx) => (
                                     <ConnectorCard key={idx} {...props} />
                                 ))}
                             </div>
