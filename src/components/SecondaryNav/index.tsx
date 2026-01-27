@@ -20,10 +20,12 @@ export default function SecondaryNav(): React.ReactElement | null {
     let product: string | null = null;
     let versionPrefix: string = "";
 
-    const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v\d+)\/\1(?:\/|$)/);
+    // Match versioned paths like /docs/flowerdocs/v2.8-LTS/flowerdocs/
+    const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v[\d.-]+[^\/]*)\//);
     if (versionedMatch) {
         product = versionedMatch[1];
-        versionPrefix = `/${versionedMatch[1]}/${versionedMatch[2]}/${versionedMatch[1]}`;
+        const version = versionedMatch[2];
+        versionPrefix = `/${product}/${version}/${product}`;
     } else {
         const docsMatch = pathname.match(/\/docs\/([^\/]+)/);
         if (docsMatch) {
@@ -42,13 +44,13 @@ export default function SecondaryNav(): React.ReactElement | null {
     const baseItems: Cat[] = (product && categoriesMap[product]) || [];
     const items: Cat[] = versionPrefix
         ? baseItems.map((item) => {
-              const pathMatch = item.href.match(/\/docs\/[^\/]+\/(.*)/);
-              const remainingPath = pathMatch ? pathMatch[1] : "";
-              return {
-                  ...item,
-                  href: `/docs${versionPrefix}/${remainingPath}`,
-              };
-          })
+            const pathMatch = item.href.match(/\/docs\/[^\/]+\/(.*)/);
+            const remainingPath = pathMatch ? pathMatch[1] : "";
+            return {
+                ...item,
+                href: `/docs${versionPrefix}/${remainingPath}`,
+            };
+        })
         : baseItems;
 
     if (!items || items.length === 0) return null;
@@ -129,17 +131,17 @@ export default function SecondaryNav(): React.ReactElement | null {
     const extraLinks =
         product === "fast2"
             ? [
-                  {
-                      label: "Get Support",
-                      href: "https://arondor.atlassian.net/servicedesk/customer/portal/82",
-                      external: true,
-                  },
-                  {
-                      label: "Search the Knowledge-Base",
-                      href: "https://arondor.atlassian.net/servicedesk/customer/portals?q=",
-                      external: true,
-                  },
-              ]
+                {
+                    label: "Get Support",
+                    href: "https://arondor.atlassian.net/servicedesk/customer/portal/82",
+                    external: true,
+                },
+                {
+                    label: "Search the Knowledge-Base",
+                    href: "https://arondor.atlassian.net/servicedesk/customer/portals?q=",
+                    external: true,
+                },
+            ]
             : [];
 
     return (
@@ -220,7 +222,8 @@ export function useSyncSidebarToCategory(
 
         if (currentDocsIdx !== -1 && currentSegments.length > currentDocsIdx + 2) {
             const potentialVersion = currentSegments[currentDocsIdx + 2];
-            if (potentialVersion && potentialVersion.match(/^v\d+$/)) {
+            // Match versions like v2.8-LTS, v3, v2.0, etc.
+            if (potentialVersion && potentialVersion.match(/^v[\d.-]+/)) {
                 currentVersion = potentialVersion;
             }
         }
@@ -233,32 +236,33 @@ export function useSyncSidebarToCategory(
         const active = isProductIndexPage
             ? null
             : items.find((it) => {
-                  const itemHref = normalize(it.href);
-                  const itemSegments = itemHref.split("/").filter(Boolean);
-                  const docsIdx = itemSegments.indexOf("docs");
+                const itemHref = normalize(it.href);
+                const itemSegments = itemHref.split("/").filter(Boolean);
+                const docsIdx = itemSegments.indexOf("docs");
 
-                  if (docsIdx !== -1 && itemSegments.length > docsIdx + 2) {
-                      const product = itemSegments[docsIdx + 1];
-                      const potentialVersion = itemSegments[docsIdx + 2];
-                      let itemCategoryBase = "";
+                if (docsIdx !== -1 && itemSegments.length > docsIdx + 2) {
+                    const product = itemSegments[docsIdx + 1];
+                    const potentialVersion = itemSegments[docsIdx + 2];
+                    let itemCategoryBase = "";
 
-                      if (potentialVersion && potentialVersion.match(/^v\d+$/)) {
-                          if (itemSegments.length > docsIdx + 4) {
-                              itemCategoryBase = itemSegments.slice(0, docsIdx + 5).join("/");
-                          }
-                      } else {
-                          const category = itemSegments[docsIdx + 2];
-                          if (currentVersion) {
-                              itemCategoryBase = `docs/${product}/${currentVersion}/${category}`;
-                          } else {
-                              itemCategoryBase = itemSegments.slice(0, docsIdx + 3).join("/");
-                          }
-                      }
+                    // Match versions like v2.8-LTS, v3, v2.0, etc.
+                    if (potentialVersion && potentialVersion.match(/^v[\d.-]+/)) {
+                        if (itemSegments.length > docsIdx + 4) {
+                            itemCategoryBase = itemSegments.slice(0, docsIdx + 5).join("/");
+                        }
+                    } else {
+                        const category = itemSegments[docsIdx + 2];
+                        if (currentVersion) {
+                            itemCategoryBase = `docs/${product}/${currentVersion}/${category}`;
+                        } else {
+                            itemCategoryBase = itemSegments.slice(0, docsIdx + 3).join("/");
+                        }
+                    }
 
-                      return itemCategoryBase && currentPath.startsWith(itemCategoryBase);
-                  }
-                  return false;
-              });
+                    return itemCategoryBase && currentPath.startsWith(itemCategoryBase);
+                }
+                return false;
+            });
 
         const findSidebar = () => {
             return (
@@ -344,7 +348,8 @@ export function useSyncSidebarToCategory(
                 const product = catSegments[docsIdx + 1];
                 const potentialVersion = catSegments[docsIdx + 2];
 
-                if (potentialVersion && potentialVersion.match(/^v\d+$/)) {
+                // Match versions like v2.8-LTS, v3, v2.0, etc.
+                if (potentialVersion && potentialVersion.match(/^v[\d.-]+/)) {
                     if (catSegments.length > docsIdx + 4) {
                         categoryBasePath = catSegments.slice(0, docsIdx + 5).join("/");
                     }
