@@ -3,9 +3,9 @@ title: Interactions with fields
 sidebar_position: 1
 date: "2001-03-28T13:19:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: 155ccef05d7619c69c76ec978e2c74962d65c371afe9a26cbf2c56428dcd783d
+content_hash: 352e35b3e1187951363f00c2025f8d7ca0c77d74101126a42f5ffda2494473f7
 ---
 
 :::info
@@ -77,7 +77,6 @@ formAPI.suggest("MailObject", suggestions);
 
 # Choice lists
 
-
 | Function               								                     | Description                                             |
 |----------------------------------------------------------------------------|---------------------------------------------------------|
 |getAllowedValues(String fieldName)          						         | Retrieves all permitted values for a CHOICELIST field   |
@@ -119,7 +118,6 @@ Several functions can be used to change the status of a field within a form. The
 |getTagValidity(String fieldName)					| Retrieves the validity of a field                                              |
 |setValid(String fieldName, boolean valid)          | Modifies the validity of a field If the parameter ``valid`` is <br/> ``false`` then the form submission cannot be validated |
 |setVisible(String fieldName, boolean isVisible)    | Defines whether the field is visible or hidden                                 |
-
 
 __Example:__ Changing the visibility of a field in an indexing form
 

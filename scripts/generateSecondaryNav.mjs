@@ -30,36 +30,40 @@ async function findFirstMarkdownFile(dir, product, catName) {
     try {
         const entries = await fs.readdir(dir, { withFileTypes: true });
 
-        // First, look for index files (preferred)
-        const indexFiles = ['index.md', 'index.mdx', '_index.md', '_index.mdx'];
-        for (const indexFile of indexFiles) {
-            const indexPath = path.join(dir, indexFile);
-            try {
-                const stat = await fs.stat(indexPath);
-                if (stat && stat.isFile()) {
-                    // For index files, return the directory path with trailing slash
-                    return `/docs/${product}/${catName}/`;
-                }
-            } catch (e) {
-                // continue
-            }
-        }
-
-        // If no index file, find the first .md or .mdx file
+        // First, look for a file with sidebar_position: 1
+        const mdFiles = [];
         for (const entry of entries) {
             if (entry.isFile() && /\.(md|mdx)$/.test(entry.name)) {
                 const filePath = path.join(dir, entry.name);
-                return filePath.replace(/.*\/docs\//, '/docs/').replace(/\.(mdx?)$/, '');
+                const position = await getPositionFromIndex(filePath);
+                mdFiles.push({ name: entry.name, path: filePath, position });
             }
         }
 
-        // If no files, search subdirectories
+        // Sort by position and get the first one
+        if (mdFiles.length > 0) {
+            mdFiles.sort((a, b) => a.position - b.position);
+            const firstFile = mdFiles[0];
+            return firstFile.path.replace(/.*\/docs\//, '/docs/').replace(/\.(mdx?)$/, '');
+        }
+
+        // If no files, search subdirectories (sorted by position from _category_.json)
+        const subdirs = [];
         for (const entry of entries) {
             if (entry.isDirectory()) {
                 const subPath = path.join(dir, entry.name);
-                const found = await findFirstMarkdownFile(subPath, product, catName);
-                if (found) return found;
+                const catInfo = await getCategoryInfo(subPath, entry.name);
+                subdirs.push({ name: entry.name, path: subPath, position: catInfo.position });
             }
+        }
+
+        // Sort subdirectories by position
+        subdirs.sort((a, b) => a.position - b.position);
+
+        // Search in subdirectories in order
+        for (const subdir of subdirs) {
+            const found = await findFirstMarkdownFile(subdir.path, product, catName);
+            if (found) return found;
         }
     } catch (err) {
         // ignore

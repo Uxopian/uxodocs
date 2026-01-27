@@ -3,9 +3,9 @@ title: Indexing
 sidebar_position: 2
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: fef75961f19f07bcf5b7e35a9df46f94345597691efdeb4f91c664fff114bd8a
+content_hash: 562f463fbee275c15d1be464e0ec5c6dba5243cf0818d09cce04eb4f67b6ff62
 ---
 
 An indexing form lets you view and modify a component's tags. In order to interact with this type of form, it is necessary to subscribe to its opening:
@@ -77,7 +77,6 @@ function buildCard(title, heading, style){
 function addChildren(parent, children){
 	for (i=0; i < children.length; ++i) {
     	parent.appendChild(children[i]);
-
 
 ```
 

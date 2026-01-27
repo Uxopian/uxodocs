@@ -3,9 +3,9 @@ title: Graphs
 sidebar_position: 7
 date: "2000-06-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: 452d43c723de84362e16cb3a7ce4e3292c51362e0b574c86b8a7dcccc51cfc7a
+content_hash: 8839780dbcb1e82b0d2b1e016e3e46c5939a4d2cb84d7d5f3bcde46ee5a81d97
 ---
 
 On the home page, graphs defined by searches can be displayed. The chart type is automatically determined from the number of aggregations:
@@ -117,7 +117,6 @@ To redirect the user when clicking on a series, override the `handleDonutClick(s
 		if (selector.indexOf("#pliSearch") != -1 && fieldName==="Statut") {
 	      	var place = new flower.docs.PlaceBuilder.build("browse(id=PersonnelleTab,leaf=" + fieldValue + ")");
 	      	JSAPI.get().getNavigationAPI().goTo(place);
-
 
 ```
 

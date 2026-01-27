@@ -4,9 +4,9 @@ sidebar_position: 4
 description: Managing the organisation with buckets search results
 date: "2005-03-28T13:23:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: 3f8a89b4506cc1cbe71c0b34a03d3f1a56743841e7f7808a91d9d708490ff0e8
+content_hash: 9a0bb3c13a7b828f99d9ea5b2646026ea578d40402b065f3b1cbf04072e83d5b
 ---
 
 # "Managing buckets"
@@ -110,7 +110,6 @@ bucketAPI.register(function(buckets, callback){
 		if(bucket.hasChildren() && bucket.getChildren().length ==1){
 			if(bucket.getName().toUpperCase() == bucket.getChildren()[0].getName().toUpperCase()){
 				bucket.setSkipDisplay(true);
-
 
 		ordered.push(bucket);
 

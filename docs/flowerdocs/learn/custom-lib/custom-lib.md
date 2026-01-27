@@ -3,9 +3,9 @@ title: Customised library
 description: Develop a Java library to override a Core behavior.
 date: "2020-02-01T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: 070859891f3d0a3b186136db36f654fa498efe1dfc9bc613d6ea6cfdb92dd5a6
+content_hash: a31e57ecb8b14ecfb929534a0ca26835570e1019ee4d7e544c3fa83fecfcbbdb
 ---
 
 import Tabs from '@theme/Tabs';
@@ -57,7 +57,6 @@ In this module, we will need the following two dependencies:
   </TabItem>
 </Tabs>
 
-
 ## Token generator
 
 In this module, we want to add a `custom` attribute to users authenticating to FlowerDocs.
@@ -82,7 +81,6 @@ public class CustomTokenHelper extends JWTTokenHelper
 
         user.getAttributes().add(new IdentityAttribute("custom", Lists.newArrayList("value")));
         return super.generate(user, validityTime);
-
 
 ````
 
@@ -112,7 +110,6 @@ public class SampleLibAutoConfiguration
     CustomTokenHelper customTokenHelpder()
 
         return new CustomTokenHelper();
-
 
 ```
 

@@ -2,9 +2,9 @@
 title: Going further
 date: "2020-02-02T15:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: 31c4cd25dce718fed04f1503fadd2fb76880782829e6e4e7dbf085e14affb9c4
+content_hash: 63ecb745291455714c90b925e23e0fd0bc16860fec69875d8392e3ec64a3442b
 ---
 
 :::info
@@ -61,6 +61,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     Filter customFilter() throws Exception
 
         // Return custom HTTP filter
-
 
 ```

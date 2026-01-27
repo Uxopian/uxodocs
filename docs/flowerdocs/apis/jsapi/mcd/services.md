@@ -4,9 +4,9 @@ sidebar_position: 2
 description: Consuming FlowerDocs services from the JS API
 date: "2001-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: 7b4e81ea627dace9c0ffa3d7f5385ad7ea53d33bbf20b43734d626de6886bee1
+content_hash: 6ed278d143d8ca6ce5ac68cf5e24929e8cb996d7468b407865c25922b3a9b102
 ---
 
 import Tabs from '@theme/Tabs';
@@ -32,7 +32,6 @@ Each function exposed by these services accepts two function-type parameters:
    
 * `successCallback`: a callback executed on success
 * `errorCallback`: an optional callback executed in the event of an error
-
 
 # Creating components
 

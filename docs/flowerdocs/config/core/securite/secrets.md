@@ -4,9 +4,9 @@ sidebar_position: 5
 description: To keep secrets secret
 date: "2019-06-03T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: b5b36dd6e9ed99082753e689f269b598b71c7a1a780a7b942f4a85029e5451ea
+content_hash: b101596d120894bc450675c6a4b8934bc148b23babef34d38902748510d86929
 ---
 
 import Tabs from '@theme/Tabs';
@@ -36,7 +36,6 @@ curl -X POST \
 
   </TabItem>
 </Tabs>
-
 
 :::info
 With this method, we recommend setting the properties `token.key` and `system.admin.password` as a minimum.

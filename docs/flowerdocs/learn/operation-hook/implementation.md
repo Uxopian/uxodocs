@@ -3,9 +3,9 @@ title: Implementation
 sidebar_position: 1
 date: "2020-02-01T11:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: 5f2cd3107424d6a3ad0fc2174e71f76b5cc982dc790dd05c4a2d46237980faa9
+content_hash: 5fe2f8333f27f43812eeb9711226454b7be00842bc38a93616add8874e0c418d
 ---
 
 :::info
@@ -67,7 +67,6 @@ This Spring Boot application is based on the [Spring Boot starter](/docs/flowerd
 
 * To start with, we need a _main class_ Spring Boot annotated with the `@SpringBootApplication` annotation:
 
-
 package com.flower.samples;
 
 ```javascript
@@ -89,7 +88,6 @@ public class ModifyHookApplication
     public static void main(String[] args)
 
         SpringApplication.run(ModifyHookApplication.class, args);
-
 
 ```
 
@@ -154,9 +152,6 @@ public class ModifyOperationHook extends OperationHook
             for (Component component : componentContext.getComponents())
 
                 component.setName(component.getName() + "_" + Time.absoluteTime());
-
-
-
 
 ```
 

@@ -2,9 +2,9 @@
 title: Implementation
 date: "2020-02-01T13:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: 7e05864c682e1286041257f8323ed2135efc036f79f316412249b0698af35183
+content_hash: f20b4a1c5afb4e655a7045581c3827d3563f56254f343e9616d3d0ad5112d0ad
 ---
 
 # Goal
@@ -41,7 +41,6 @@ JSAPI.get().registerForComponentChange(function(componentFormAPI, component, pha
 		actionSet.add(action)
 
 });
-
 
 ```
 

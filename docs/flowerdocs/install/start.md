@@ -3,9 +3,9 @@ title: Launch
 sidebar_position: 4
 date: "2000-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
-content_hash: d883306889a5b62ca14ec5209e6420e16ce700873f97a6a1c776c1d56716dba3
+content_hash: 39159c9591538310a9d95af0c00addf9eb8cce16cbb8febe33796d5d408b115f
 ---
 
 import Tabs from '@theme/Tabs';
@@ -31,7 +31,6 @@ To manually launch the **FlowerDocs GUI**, **FlowerDocs Core** and applications,
 
   </TabItem>
 </Tabs>
-
 
 # Installation in service
 
@@ -71,7 +70,6 @@ update-rc.d gui defaults
   </TabItem>
 </Tabs>
 
-
 If the service is not found, it may be necessary to run the following command:
 
 ```bash
@@ -109,9 +107,7 @@ WantedBy=multi-user.target
   </TabItem>
 </Tabs>
 
-
 To have the service started automatically by `systemd`, run the following commands:
-
 
 <Tabs>
   <TabItem value="gui" label="GUI">
@@ -137,7 +133,6 @@ systemctl enable arender-hmi.service
   </TabItem>
 </Tabs>
 
-
 ### JVM configuration
 
 To configure the JVM of the application launched by the Linux service, you need to add a configuration file in the same directory as the JAR.
@@ -156,6 +151,5 @@ service gui start
 
   </TabItem>
 </Tabs>
-
 
 Other standard commands are also supported: `status`, `stop` or `restart`.
