@@ -184,6 +184,17 @@ export default function FlowerDocsCards() {
         versionPrefix = `/flowerdocs/${versionedMatch[1]}/flowerdocs`;
     }
 
+    // Add a class to body to indicate we're on a product homepage
+    // This allows CSS to hide the sidebar specifically on this page
+    React.useEffect(() => {
+        if (typeof document !== "undefined") {
+            document.body.classList.add("uxo-product-homepage");
+            return () => {
+                document.body.classList.remove("uxo-product-homepage");
+            };
+        }
+    }, []);
+
     // Adjust links based on version
     const adjustLink = (link: string) => {
         if (!versionPrefix) return link;

@@ -24,31 +24,35 @@ li.hidden-sidebar-item .menu__list-item-collapsible {
     display: none !important;
 }
 
-/* Hide sidebar ONLY on product homepage pages where FlowerDocsCards/ProductCards is the main content.
+/* Hide sidebar ONLY on product homepage pages.
    
-   The key difference from the previous version is using the child combinator (>)
-   instead of descendant combinator (space). This ensures we only match when
-   documentationSection is a DIRECT child of the article element, which only
-   happens on the homepage (index.md).
+   The FlowerDocsCards component (and other product card components) add the
+   class "uxo-product-homepage" to the body element when they mount. This allows
+   us to reliably hide the sidebar only on homepage, not on content pages.
    
-   On content pages like /docs/flowerdocs/concepts/scope, the documentationSection
-   class doesn't exist at all, so this rule won't apply.
-   
-   This will match:
-   - /docs/flowerdocs/ (non-versioned homepage with FlowerDocsCards)
-   - /docs/flowerdocs/v2.8-LTS/flowerdocs/ (versioned homepage with FlowerDocsCards)
+   This will hide sidebar on:
+   - /docs/flowerdocs/ (non-versioned homepage)
+   - /docs/flowerdocs/v2.8-LTS/flowerdocs/ (versioned homepage)
    - /docs/fast2/, /docs/arender/, etc. (other product homepages)
    
-   But will NOT match content pages like:
+   But will NOT hide sidebar on content pages like:
    - /docs/flowerdocs/concepts/scope
    - /docs/flowerdocs/v2.8-LTS/flowerdocs/concepts/scope
 */
-div:has(main article > [class*="documentationSection"])>aside[class*="docSidebarContainer"],
+body.uxo-product-homepage aside[class*="docSidebarContainer"] {
+    display: none !important;
+}
+
+body.uxo-product-homepage div:has(aside[class*="docSidebarContainer"])>div>main {
+    max-width: 100% !important;
+    padding-left: 7rem;
+}
+
+/* Also hide sidebar when hidden-index-link is active (fallback) */
 aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
     display: none !important;
 }
 
-div:has(main article > [class*="documentationSection"])>div>main,
 div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)>div>main {
     max-width: 100% !important;
     padding-left: 7rem;
@@ -65,7 +69,7 @@ div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--a
 aside[class*="docSidebarContainer"] {
     position: sticky !important;
     top: calc(var(--ifm-navbar-height)) !important;
-    max-height: calc(100vh - var(--ifm-navbar-height)) !important;
+    max-height: calc(var(--ifm-navbar-height)) !important;
 }
 
 /* Table of contents sticky */
