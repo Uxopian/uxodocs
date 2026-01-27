@@ -20,7 +20,6 @@ export default function SecondaryNav(): React.ReactElement | null {
     let product: string | null = null;
     let versionPrefix: string = "";
 
-    // Match versioned paths like /docs/flowerdocs/v2.8-LTS/flowerdocs/
     const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v[\d.-]+[^\/]*)\//);
     if (versionedMatch) {
         product = versionedMatch[1];
