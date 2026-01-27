@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import { useLocation } from "@docusaurus/router";
 import styles from "./styles.module.css";
 import UXopianFeed from "./UXopianFeed";
 
@@ -174,6 +175,22 @@ function ConnectorCard({ title, logo, description, link }) {
 }
 
 export default function FlowerDocsCards() {
+    const { pathname } = useLocation();
+
+    // Detect if we're on a versioned page
+    let versionPrefix = "";
+    const versionedMatch = pathname.match(/\/docs\/flowerdocs\/(v[\d.]+-?[A-Z]*)\/flowerdocs/);
+    if (versionedMatch) {
+        versionPrefix = `/flowerdocs/${versionedMatch[1]}/flowerdocs`;
+    }
+
+    // Adjust links based on version
+    const adjustLink = (link: string) => {
+        if (!versionPrefix) return link;
+        // Replace /docs/flowerdocs/ with /docs{versionPrefix}/
+        return link.replace(/^\/docs\/flowerdocs\//, `/docs${versionPrefix}/`);
+    };
+
     return (
         <section className={styles.documentationSection}>
             <div className="container">
@@ -181,13 +198,24 @@ export default function FlowerDocsCards() {
                     <div className={styles.leftColumn}>
                         <div className={styles.cardsGrid}>
                             {FlowerDocsCardsList.map((props, idx) => (
-                                <FlowerDocsCard key={idx} {...props} />
+                                <FlowerDocsCard
+                                    key={idx}
+                                    {...props}
+                                    link={adjustLink(props.link)}
+                                />
                             ))}
                         </div>
 
                         <div className={styles.guidesGrid}>
                             {GuidesList.map((props, idx) => (
-                                <GuidesCard key={idx} {...props} />
+                                <GuidesCard
+                                    key={idx}
+                                    {...props}
+                                    items={props.items.map(item => ({
+                                        ...item,
+                                        link: adjustLink(item.link)
+                                    }))}
+                                />
                             ))}
                         </div>
 
@@ -200,7 +228,11 @@ export default function FlowerDocsCards() {
                             </div>
                             <div className={styles.connectorsGrid}>
                                 {ConnectorsList.map((props, idx) => (
-                                    <ConnectorCard key={idx} {...props} />
+                                    <ConnectorCard
+                                        key={idx}
+                                        {...props}
+                                        link={adjustLink(props.link)}
+                                    />
                                 ))}
                             </div>
                         </div>
