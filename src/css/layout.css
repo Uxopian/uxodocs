@@ -11,7 +11,6 @@ body {
     padding: 0 10px 0 20px;
 }
 
-/* Masquage conditionnel des éléments */
 li.hidden-index-link>a {
     display: none !important;
 }
@@ -24,21 +23,16 @@ li.hidden-sidebar-item .menu__list-item-collapsible {
     display: none !important;
 }
 
-/* Hide sidebar ONLY on product homepage pages.
-   
-   The FlowerDocsCards component (and other product card components) add the
-   class "uxo-product-homepage" to the body element when they mount. This allows
-   us to reliably hide the sidebar only on homepage, not on content pages.
-   
-   This will hide sidebar on:
-   - /docs/flowerdocs/ (non-versioned homepage)
-   - /docs/flowerdocs/v2.8-LTS/flowerdocs/ (versioned homepage)
-   - /docs/fast2/, /docs/arender/, etc. (other product homepages)
-   
-   But will NOT hide sidebar on content pages like:
-   - /docs/flowerdocs/concepts/getting-started
-   - /docs/flowerdocs/v2.8-LTS/flowerdocs/concepts/getting-started
-*/
+aside[class*="docSidebarContainer"] .menu__list>li:first-child>a,
+aside[class*="docSidebarContainer"] .menu__list>li:first-child>.menu__link,
+aside[class*="docSidebarContainer"] .menu__list>li:first-child>.menu__list-item-collapsible>a {
+    display: none !important;
+}
+
+aside[class*="docSidebarContainer"] .menu__list>li:first-child>ul {
+    display: block !important;
+}
+
 body.uxo-product-homepage aside[class*="docSidebarContainer"] {
     display: none !important;
 }
@@ -48,20 +42,6 @@ body.uxo-product-homepage div:has(aside[class*="docSidebarContainer"])>div>main 
     padding-left: 7rem;
 }
 
-/* REMOVED: This rule was hiding sidebar on versioned pages incorrectly
-   The hidden-index-link class is used in index.md frontmatter, but Docusaurus
-   was marking it as active even on sub-pages of versioned docs, causing the
-   sidebar to be hidden everywhere.
-   
-aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
-    display: none !important;
-}
-
-div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active) > div > main {
-    max-width: 100% !important;
-    padding-left: 7rem;
-}
-*/
 
 /* Sidebar sticky */
 .theme-doc-sidebar-container {

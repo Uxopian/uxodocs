@@ -289,6 +289,9 @@ export function useSyncSidebarToCategory(
                     el.classList.contains("menu__list-item") || el.tagName.toLowerCase() === "li"
             ) as Element[];
 
+            // ALWAYS unwrap single parent groups (like "Documentation FlowerDocs")
+            // This removes the unnecessary top-level wrapper from the sidebar hierarchy
+            // even when a category is active
             if (groups.length === 1) {
                 const nestedList = groups[0].querySelector("ul.menu__list");
                 if (nestedList) {
