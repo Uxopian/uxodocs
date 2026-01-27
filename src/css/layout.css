@@ -36,8 +36,8 @@ li.hidden-sidebar-item .menu__list-item-collapsible {
    - /docs/fast2/, /docs/arender/, etc. (other product homepages)
    
    But will NOT hide sidebar on content pages like:
-   - /docs/flowerdocs/concepts/scope
-   - /docs/flowerdocs/v2.8-LTS/flowerdocs/concepts/scope
+   - /docs/flowerdocs/concepts/getting-started
+   - /docs/flowerdocs/v2.8-LTS/flowerdocs/concepts/getting-started
 */
 body.uxo-product-homepage aside[class*="docSidebarContainer"] {
     display: none !important;
@@ -48,15 +48,20 @@ body.uxo-product-homepage div:has(aside[class*="docSidebarContainer"])>div>main 
     padding-left: 7rem;
 }
 
-/* Also hide sidebar when hidden-index-link is active (fallback) */
+/* REMOVED: This rule was hiding sidebar on versioned pages incorrectly
+   The hidden-index-link class is used in index.md frontmatter, but Docusaurus
+   was marking it as active even on sub-pages of versioned docs, causing the
+   sidebar to be hidden everywhere.
+   
 aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
     display: none !important;
 }
 
-div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)>div>main {
+div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active) > div > main {
     max-width: 100% !important;
     padding-left: 7rem;
 }
+*/
 
 /* Sidebar sticky */
 .theme-doc-sidebar-container {
@@ -69,7 +74,7 @@ div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--a
 aside[class*="docSidebarContainer"] {
     position: sticky !important;
     top: calc(var(--ifm-navbar-height)) !important;
-    max-height: calc(var(--ifm-navbar-height)) !important;
+    max-height: calc(100vh - var(--ifm-navbar-height)) !important;
 }
 
 /* Table of contents sticky */
