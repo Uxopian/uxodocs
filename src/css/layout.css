@@ -24,19 +24,31 @@ li.hidden-sidebar-item .menu__list-item-collapsible {
     display: none !important;
 }
 
-/* Hide sidebar on ALL product homepages (versioned and non-versioned)
-   This includes:
-   - /docs/flowerdocs/ (non-versioned)
-   - /docs/flowerdocs/v2.8-LTS/flowerdocs/ (versioned)
-   - /docs/fast2/, /docs/arender/, etc.
+/* Hide sidebar ONLY on product homepage pages where FlowerDocsCards/ProductCards is the main content.
    
-   The sidebar will be visible on all other documentation pages. */
-div:has(main article [class*="documentationSection"])>aside[class*="docSidebarContainer"],
+   The key difference from the previous version is using the child combinator (>)
+   instead of descendant combinator (space). This ensures we only match when
+   documentationSection is a DIRECT child of the article element, which only
+   happens on the homepage (index.md).
+   
+   On content pages like /docs/flowerdocs/concepts/scope, the documentationSection
+   class doesn't exist at all, so this rule won't apply.
+   
+   This will match:
+   - /docs/flowerdocs/ (non-versioned homepage with FlowerDocsCards)
+   - /docs/flowerdocs/v2.8-LTS/flowerdocs/ (versioned homepage with FlowerDocsCards)
+   - /docs/fast2/, /docs/arender/, etc. (other product homepages)
+   
+   But will NOT match content pages like:
+   - /docs/flowerdocs/concepts/scope
+   - /docs/flowerdocs/v2.8-LTS/flowerdocs/concepts/scope
+*/
+div:has(main article > [class*="documentationSection"])>aside[class*="docSidebarContainer"],
 aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
     display: none !important;
 }
 
-div:has(main article [class*="documentationSection"])>div>main,
+div:has(main article > [class*="documentationSection"])>div>main,
 div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)>div>main {
     max-width: 100% !important;
     padding-left: 7rem;
