@@ -83,7 +83,7 @@ jobs:
               rm -rf .tmp_docs && mkdir -p .tmp_docs
               if git cat-file -e "origin/${br}:docs/${product}/" 2>/dev/null; then
                 git archive --format=tar "origin/${br}" "docs/${product}" \
-                  | tar -x -C .tmp_docs --strip-components=1
+                  | tar -x -C .tmp_docs --strip-components=2
               else
                 echo "   (skip ${br}: docs/${product} not found)"; continue
               fi
