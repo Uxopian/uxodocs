@@ -108,7 +108,7 @@ Plug the worker-S onto the Fast2 broker (yes, the workers -- as [illustrated her
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs>
+<Tabs groupId="fast2-version">
 <TabItem value="v2.4-" label="v2.4-">
 
 ```ini title="./config/application.properties" {4}

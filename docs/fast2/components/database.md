@@ -51,7 +51,7 @@ If required, it can even be disabled at will.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs>
+<Tabs groupId="fast2-version">
 <TabItem value="v2.4-" label="v2.4-">
 
 ```ini title="./config/applications.properties"
@@ -76,7 +76,7 @@ However, in the case where this port is already used by either another Fast2 ins
 
 Since the embedded database has to be reach from both Fast2 broker and Kibana module — if the latter is enabled — there is exactly 3 places where to mention this change:
 
-<Tabs>
+<Tabs groupId="fast2-version">
 <TabItem value="v2.4-" label="v2.4-">
 
 | File                                           | Specification                                         |
@@ -99,7 +99,7 @@ Since the embedded database has to be reach from both Fast2 broker and Kibana mo
 
 If the dashboard component is installed, the database port also needs to be updated on this front as the dashboard needs to access the DB in order to read the data :
 
-<Tabs>
+<Tabs groupId="fast2-version">
 <TabItem value="v2.4-" label="v2.4-">
 
 ```ini title="./kibana-X.Y.Z/config/kibana.yml"

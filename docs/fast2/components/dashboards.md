@@ -40,7 +40,7 @@ In case no dashboard folder is found, this step will be skipped after a given nu
 
 The dashboards can still be disabled, even if they are available in the root folder of Fast2:
 
-<Tabs>
+<Tabs groupId="fast2-version">
 <TabItem value="v2.4-" label="v2.4-">
 
 ```ini title="./config/application.properties"
@@ -65,7 +65,7 @@ However they can be accessed on a different port, which you will have to highlig
 
 1.  This is required to start the add-on on another port:
 
-    <Tabs>
+    <Tabs groupId="fast2-version">
     <TabItem value="v2.4-" label="v2.4-">
 
     ```ini title="./config/application.properties"
@@ -84,7 +84,7 @@ However they can be accessed on a different port, which you will have to highlig
 
 2.  Fast2 should know where to send the user for the visualizations:
 
-    <Tabs>
+    <Tabs groupId="fast2-version">
     <TabItem value="v2.4-" label="v2.4-">
 
     ```ini title="./kibana-X.Y.Z/config/kibana.yml"
