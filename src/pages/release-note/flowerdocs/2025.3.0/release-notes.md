@@ -163,4 +163,4 @@ The token is no longer passed through the URL but is now transmitted via an **HT
 
 The Companion MSI installer is available [here](/flowerdocs/documentation/connecteurs/companion/install)
 
-<FlowerDocsDownloads version="2025.3.0" />
+<FlowerDocsDownloads version="2025.3.0" arenderVersion="2023.15.0" />

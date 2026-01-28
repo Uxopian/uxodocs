@@ -138,4 +138,4 @@ No specific changes have been made to this version. It benefits from the followi
 - Improved reporting
 - Improved user and group management
 
-<FlowerDocsDownloads version="2025.2.0" />
+<FlowerDocsDownloads version="2025.2.0" arenderVersion="2023.12.0" />

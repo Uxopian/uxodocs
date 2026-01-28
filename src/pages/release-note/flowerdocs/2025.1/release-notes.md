@@ -211,4 +211,4 @@ For more intuitive and faster access to mails from the home page, the donut and 
 
 Adding a document to a folder has been modified to take advantage of all the ergonomic improvements of FlowerDocs within eProcess. More information [here](./#span-title-native-feature-class-span-rn-i-class-fa-solid-fa-laptop-i-rn-style-color-651fff-i-i-class-fa-solid-fa-check-i-rn-style-color-33cc33-font-size-0-5em-i-span-easier-to-add-documents).
 
-<FlowerDocsDownloads version="2025.1" />
+<FlowerDocsDownloads version="2025.1" arenderVersion="2023.8.1" />

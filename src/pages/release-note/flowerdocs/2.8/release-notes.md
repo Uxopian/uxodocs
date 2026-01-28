@@ -205,4 +205,4 @@ Ex: a user who has the right to download or print the document can do so again.
 
 ✅ ARender version upgrade to 4.8.21
 
-<FlowerDocsDownloads version="2.8" />
+<FlowerDocsDownloads version="2.8" arenderVersion="4.8.21" />
