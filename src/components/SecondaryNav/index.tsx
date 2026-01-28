@@ -52,7 +52,7 @@ export default function SecondaryNav(): React.ReactElement | null {
         : baseItems;
 
     if (!items || items.length === 0) return null;
-    useSyncSidebarToCategory(items, pathname);
+    // useSyncSidebarToCategory(items, pathname); // Removed legacy DOM filtering
 
     React.useEffect(() => {
         if (typeof document === "undefined") return;
