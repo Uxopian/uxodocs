@@ -40,11 +40,11 @@ To restrict access or modifications to a virtual folder, several permissions are
 
 - Attach the virtual folder to a folder : `ATTACH`
 
-Some actions are only available if the user has write access to the virtual folder. To do this, the permission has to be set on `UPDATE` for this user and this user should have reserved the virtual folder (see [Reservation](/docs/flowerdocs/concepts/reservations).
+Some actions are only available if the user has write access to the virtual folder. To do this, the permission has to be set on `UPDATE` for this user and this user should have reserved the virtual folder (see [Reservation](/docs/flowerdocs/concepts/reservations)).
 
 :::info
 To go further, consult the Javadoc:
 
-- `Virtual folder`
-- `Virtual folder class`
+- [Virtual folder](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/virtualfolder/VirtualFolder.html)
+- [Virtual folder class](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/virtualfolderclass/VirtualFolderClass.html)
   :::

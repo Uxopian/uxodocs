@@ -32,6 +32,6 @@ Some actions are only available if the user has write access to the document. To
 :::info
 To go further, consult the Javadoc:
 
-- `Document`
-- `Document class`
+- [Document](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/document/Document.html)
+- [Document class](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/documentclass/DocumentClass.html)
   :::

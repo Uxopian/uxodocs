@@ -44,6 +44,6 @@ Some actions are only available if the user has write access to the folder. To d
 :::info
 To go further, consult the Javadoc:
 
-- `Folder`
-- `Folder classes`
+- [Folder](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/folder/Folder.html)
+- [Folder classes](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/folderclass/FolderClass.html)
   :::

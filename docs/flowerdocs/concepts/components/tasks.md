@@ -81,6 +81,6 @@ This type of assignment requires the `ASSIGN` permission.
 :::info
 To find out more, take a look at some references:
 
-- `Task`
-- `Task class`
+- [Task](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/task/Task.html)
+- [Task class](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/taskclass/TaskClass.html)
   :::

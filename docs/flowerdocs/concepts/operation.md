@@ -12,7 +12,7 @@ content_hash: 691060b6e8b0d4207a16f8ca6ae0eb99cbcd6872dad1e824b8f26b4657498200
 
 ## Principle
 
-The `Operation API` reacts to the execution of operations within **FlowerDocs Core**. A **operation** is an action performed by a user on a component.
+The [Operation API](https://flowerdocs.com/javadocs/operation/index.html) reacts to the execution of operations within **FlowerDocs Core**. A **operation** is an action performed by a user on a component.
 
 The **operations managers** (or [`com.flower.docs.operation.api.OperationHandler`](#javadoc-com-flower-docs-operation-api-OperationHandler)) are called when an operation is executed to react to it and apply specific processing. They can be called before (_pre-treatment_) or after (_post-processing_) the execution of the operation.
 
