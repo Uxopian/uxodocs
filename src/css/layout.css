@@ -11,8 +11,14 @@ body {
     padding: 0 10px 0 20px;
 }
 
-li.hidden-index-link > a {
+li.hidden-index-link>a {
     display: none !important;
+}
+
+/* Flatten hierarchy visually for hidden index wrapper */
+li.hidden-index-link .menu__list {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
 }
 
 li.hidden-sidebar-item {
@@ -23,15 +29,14 @@ li.hidden-sidebar-item .menu__list-item-collapsible {
     display: none !important;
 }
 
-div:has(main article [class*="documentationSection"]) > aside[class*="docSidebarContainer"],
-aside[class*="docSidebarContainer"]:has(li.hidden-index-link a.menu__link--active) {
+div:has(main article [class*="documentationSection"])>aside[class*="docSidebarContainer"],
+aside[class*="docSidebarContainer"]:has(li.hidden-index-link > .menu__list-item-collapsible > a.menu__link--active),
+aside[class*="docSidebarContainer"]:has(li.hidden-index-link > a.menu__link--active) {
     display: none !important;
 }
 
-div:has(main article [class*="documentationSection"]) > div > main,
-div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)
-    > div
-    > main {
+div:has(main article [class*="documentationSection"])>div>main,
+div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)>div>main {
     max-width: 100% !important;
     padding-left: 7rem;
 }
