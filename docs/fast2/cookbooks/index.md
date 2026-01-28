@@ -1,5 +1,6 @@
 ---
-sidebar_position: 4
+title: Cookbooks
+sidebar_position: 0
 last_update:
   date: '2026-01-13T09:15:17.464Z'
   author: CI/CD Bot
