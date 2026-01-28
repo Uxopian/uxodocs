@@ -12,7 +12,7 @@ When upgrading FlowerDocs from version 2.5 and lower to version 2.6 and its mino
 
 <br/>
 
-For this purpose, FlowerDocs CLM provides a `job`, responsible for re-indexing scope data from an Elasticsearch 5.2.1 instance into an OpenSearch instance.
+For this purpose, FlowerDocs CLM provides a `job`, responsible for re-indexing scope data from an Elasticsearch 5.2.1 instance into an OpenSearch 1.3.19 instance.
 
 <br/>
 

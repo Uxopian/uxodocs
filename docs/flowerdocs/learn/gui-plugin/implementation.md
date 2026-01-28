@@ -37,7 +37,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 		&lt;dependency&gt;
 			&lt;groupId&gt;com.flower.docs</groupId>
 			&lt;artifactId&gt;flower-docs-starter-client</artifactId>
-			&lt;version&gt;</version>
+			&lt;version&gt;2025.3.0</version>
 		</dependency>
 	</dependencies>
 
@@ -46,7 +46,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 			&lt;plugin&gt;
 				&lt;groupId&gt;org.springframework.boot</groupId>
 				&lt;artifactId&gt;spring-boot-maven-plugin</artifactId>
-				&lt;version&gt;</version>
+				&lt;version&gt;2.7.18</version>
 				&lt;executions&gt;
 					&lt;execution&gt;
 						&lt;goals&gt;

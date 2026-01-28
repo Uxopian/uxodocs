@@ -87,7 +87,7 @@ By analyzing a directory before encrypting its contents, you can determine the s
 The directory is analyzed using the CLM `dir analyze` job, which takes the directory to be analyzed as the `input` parameter.
 
 ```properties
-java -jar flower-docs-clm--bundle.jar dir analyze --input=<directory to analyze>
+java -jar flower-docs-clm-2025.3.0-bundle.jar dir analyze --input=<directory to analyze>
 ```
 
 :::info
@@ -107,7 +107,7 @@ The directory is analyzed using the CLM `dir analyze` job. It requires the follo
 The command to be executed is as follows:
 
 ```properties
-java -jar flower-docs-clm--bundle.jar dir encrypt --input=<directory to encrypt> --output=<target directory with encrypted data> --conf=<config file path>
+java -jar flower-docs-clm-2025.3.0-bundle.jar dir encrypt --input=<directory to encrypt> --output=<target directory with encrypted data> --conf=<config file path>
 ```
 
 ### Derived key

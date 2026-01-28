@@ -19,14 +19,14 @@ To manually launch the **FlowerDocs GUI**, **FlowerDocs Core** and applications,
   <TabItem value="gui" label="GUI">
 
 ```bash
-./flower-docs-gui-webapp-.jar
+./flower-docs-gui-webapp-2025.3.0.jar
 ```
 
   </TabItem>
   <TabItem value="arender-hmi" label="ARender HMI">
 
 ```bash
-./arondor-arender-hmi-spring-boot-.jar
+./arondor-arender-hmi-spring-boot-2023.15.0.jar
 ```
 
   </TabItem>
@@ -39,7 +39,7 @@ To manually launch the **FlowerDocs GUI**, **FlowerDocs Core** and applications,
 
 FlowerDocs applications can be installed simply as a Linux service `init.d` or `systemd`.
 
-In this section, it is assumed that the JARs `flower-docs-gui-webapp-.jar`, `flower-docs-core-webapp-.jar` and `arondor-arender-hmi-spring-boot-.jar` are placed in the `/opt/flowerdocs` folder. This folder is also used as a configuration directory.
+In this section, it is assumed that the JARs `flower-docs-gui-webapp-2025.3.0.jar`, `flower-docs-core-webapp-2025.3.0.jar` and `arondor-arender-hmi-spring-boot-2023.15.0.jar` are placed in the `/opt/flowerdocs` folder. This folder is also used as a configuration directory.
 
 ### Service init.d
 
@@ -49,8 +49,8 @@ To install FlowerDocs applications as an `init.d` service, simply create a symbo
   <TabItem value="gui" label="GUI">
 
 ```bash
-chmod +x /opt/flowerdocs/flower-docs-gui-webapp-.jar
-ln -s /opt/flowerdocs/flower-docs-gui-webapp-.jar /etc/init.d/gui
+chmod +x /opt/flowerdocs/flower-docs-gui-webapp-2025.3.0.jar
+ln -s /opt/flowerdocs/flower-docs-gui-webapp-2025.3.0.jar /etc/init.d/gui
 ```
 
   </TabItem>
@@ -97,7 +97,7 @@ After=syslog.target
 
 ```properties
 User=flowerdocs
-ExecStart=/opt/flowerdocs/flower-docs-gui-webapp-.jar
+ExecStart=/opt/flowerdocs/flower-docs-gui-webapp-2025.3.0.jar
 SuccessExitStatus=143
 ```
 

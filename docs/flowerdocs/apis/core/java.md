@@ -12,7 +12,7 @@ content_hash: 83ce9b49bfcf2556c45815c434b6f1f2ba7205ff1e53330def9ea913ac3cfa6e
 :::info
 The Java client lets you interact with **FlowerDocs Core** through the web services on display.
 
-This documentation is based on the use of [Maven](https://maven.apache.org/) and [Spring Boot ] (https://spring.io/projects/spring-boot).
+This documentation is based on the use of [Maven](https://maven.apache.org/) and [Spring Boot 2.7.18] (https://spring.io/projects/spring-boot).
 :::
 
 # Set-up
@@ -28,7 +28,7 @@ To use the Java client in a Maven project, start by adding the following depende
 <dependency>
     <groupId>com.flower.docs</groupId>
     <artifactId>flower-docs-starter-client</artifactId>
-    <version></version>
+    <version>2025.3.0</version>
 </dependency>
 ```
 

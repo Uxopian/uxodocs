@@ -30,7 +30,7 @@ Installing a FlowerDocs platform requires Linux servers. FlowerDocs is supported
 
 Java Runtime 11 must be installed to run FlowerDocs.
 
-This documentation does not cover the installation of the ARender rendition server (version ). It must therefore be installed beforehand and be accessible via HTTP or HTTPS protocol from **FlowerDocs GUI**, **FlowerDocs Core** and (version ).
+This documentation does not cover the installation of the ARender rendition server (version 2023.15.0). It must therefore be installed beforehand and be accessible via HTTP or HTTPS protocol from **FlowerDocs GUI**, **FlowerDocs Core** and (version 2023.15.0).
 
 ### OpenSearch and Redis
 
@@ -66,9 +66,9 @@ It is necessary to use UTF-8 encoding on component installation servers, to ensu
 
 The FlowerDocs platform requires the installation of the following executable JARs:
 
-- `flower-docs-gui-webapp-.jar`
-- `flower-docs-core-webapp-.jar`
-- `arondor-arender-hmi-spring-boot-.jar`
+- `flower-docs-gui-webapp-2025.3.0.jar`
+- `flower-docs-core-webapp-2025.3.0.jar`
+- `arondor-arender-hmi-spring-boot-2023.15.0.jar`
 
 These applications can be configured by property files located in the same directory as the application.
 
@@ -82,7 +82,7 @@ Applications can be configured via the following files:
 | **FlowerDocs GUI**  | `gui.properties`                   |
 |                     | `arender-custom-server.properties` |
 
-The FlowerDocs ARender connector `flower-docs-arender-hmi-.jar` is also required for the application to be able to retrieve documents stored in FlowerDocs.
+The FlowerDocs ARender connector `flower-docs-arender-hmi-2025.3.0.jar` is also required for the application to be able to retrieve documents stored in FlowerDocs.
 
 :::info
 The necessary configuration is described on the dedicated page [here](/docs/flowerdocs/install/config/arender-hmi-config).

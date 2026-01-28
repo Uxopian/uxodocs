@@ -41,12 +41,12 @@ In this module, we will need the following two dependencies:
 		&lt;dependency&gt;
 			&lt;groupId&gt;org.springframework.boot</groupId>
 			&lt;artifactId&gt;spring-boot-starter-web</artifactId>
-			&lt;version&gt;</version>
+			&lt;version&gt;2.7.18</version>
 		</dependency>
 		&lt;dependency&gt;
 			&lt;groupId&gt;com.flower.docs.core</groupId>
 			&lt;artifactId&gt;flower-docs-services</artifactId>
-			&lt;version&gt;</version>
+			&lt;version&gt;2025.3.0</version>
 		</dependency>
 	</dependencies>
 </project>

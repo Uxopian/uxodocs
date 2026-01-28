@@ -11,7 +11,7 @@ content_hash: f31f98f56962c35696a544ae8b7bdbd1e3e5c64d918b632b0df7135881b68455
 Several types of actions are available:
 
 - Button: text presented as a button
-- Icon: based on the icon font supported by FlowerDocs [Font Awesome 5.15.4](https://fontawesome.com/icons?d=gallery&m=free)
+- Icon: based on the icon font supported by FlowerDocs [Font Awesome 6.5.2](https://fontawesome.com/icons?d=gallery&m=free)
 - DOM: HTML element
 
 # Actions’ container

@@ -53,7 +53,7 @@ A choice list tag allows you to restrict the possible values of a tag to defined
 
 An icon list tag is an extension of a list of choices for which an icon can be defined.
 
-This icon must be defined with the appropriate CSS class using the library available in FlowerDocs [Font Awesome 5.15.4](https://fontawesome.com/icons?d=gallery&m=free)
+This icon must be defined with the appropriate CSS class using the library available in FlowerDocs [Font Awesome 6.5.2](https://fontawesome.com/icons?d=gallery&m=free)
 
 :::note[Example]
 
