@@ -36,7 +36,8 @@ aside[class*="docSidebarContainer"]:has(li.hidden-index-link > a.menu__link--act
 }
 
 div:has(main article [class*="documentationSection"])>div>main,
-div:has(aside[class*="docSidebarContainer"] li.hidden-index-link a.menu__link--active)>div>main {
+div:has(aside[class*="docSidebarContainer"] li.hidden-index-link > .menu__list-item-collapsible > a.menu__link--active)>div>main,
+div:has(aside[class*="docSidebarContainer"] li.hidden-index-link > a.menu__link--active)>div>main {
     max-width: 100% !important;
     padding-left: 7rem;
 }
