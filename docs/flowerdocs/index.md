@@ -3,9 +3,9 @@ title: Documentation FlowerDocs
 hide_table_of_contents: true
 sidebar_class_name: hidden-index-link
 last_update:
-    date: "2025-12-15T09:44:45.737Z"
-    author: CI/CD Bot
-content_hash: 159e538a87dd2b8f21a7ee6f37fbef28292e2ca19000dca55d159bb0841931f8
+  date: '2026-01-28T14:38:12.740Z'
+  author: CI/CD Bot
+content_hash: fa63274ea1221fd174aeff02ee9a8604a874a3665202a8572b450cffc08f93df
 ---
 
 import FlowerDocsCards from '@site/src/components/FlowerDocsCards';

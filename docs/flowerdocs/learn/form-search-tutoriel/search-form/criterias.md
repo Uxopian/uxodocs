@@ -3,9 +3,9 @@ title: Criteria
 sidebar_position: 2
 date: "2020-03-03T09:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-28T14:38:12.740Z'
   author: CI/CD Bot
-content_hash: 52ce8bf0f7eb884a241b4e5c59d265bda406fabeb63455314f363cdeafe0ec9e
+content_hash: 3b100a177bd7b8e53372b07ce6284c6e530b38318a09bf833d63bc2a1c2a50ad
 ---
 
 :::info
@@ -71,9 +71,9 @@ The different properties of a criterion :
 
 - `name`: (here equal to `NomClient`) the symbolic name of the tag to be used as a criterion.
 
-- `type`: the type of value to be entered in the field (`Field type`).
+- `type`: the type of value to be entered in the field ([Field type](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/search/Types.html)).
 
-- `operator`: the default operator displayed in the search ([Operator] (/javadocs/domain/com/flower/docs/domain/search/Operators.html)).
+- `operator`: the default operator displayed in the search ([Operator](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/search/Operators.html)).
 
 <br/>
 

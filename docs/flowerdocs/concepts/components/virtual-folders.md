@@ -4,9 +4,9 @@ sidebar_position: 4
 description: Dynamically organize your components.
 date: "2018-03-04T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-28T14:38:12.740Z'
   author: CI/CD Bot
-content_hash: f3ee12603c3d163a5820cc1dd6d9523493c93090652dacde5fc387376c7ed782
+content_hash: 1ff6eeccfcae024ba8ff77cbd67c7ab7e70073a76109a434f9ba2dd1db55f02a
 ---
 
 Virtual folders are a key concept in FlowerDocs. This type of component defines a folder whose contents are dynamically resolved. Its content is therefore said to be "virtual".
@@ -45,6 +45,6 @@ Some actions are only available if the user has write access to the virtual fold
 :::info
 To go further, consult the Javadoc:
 
-- `Virtual folder`
-- `Virtual folder class`
+- [Virtual folder](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/virtualfolder/VirtualFolder.html)
+- [Virtual folder class](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/virtualfolderclass/VirtualFolderClass.html)
   :::

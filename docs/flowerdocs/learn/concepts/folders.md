@@ -4,9 +4,9 @@ sidebar_position: 5
 description: Classify your components to suit your needs.
 date: "2000-05-03"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-28T14:38:12.740Z'
   author: CI/CD Bot
-content_hash: 88949fceef93b5f5fb7aa43bbe79ae7295ddf789a01284e063f850373a9cb1ac
+content_hash: 8353c453674c764cf87b56c545463173308d3aa36646b5ae796a6f86f76f2d1c
 ---
 
 :::info
@@ -36,6 +36,6 @@ Some actions are only available if the user has write access to the document. To
 :::info
 To go further, consult the Javadoc:
 
-- `Folder`
-- `Folder classes`
+- [Folder](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/folder/Folder.html)
+- [Folder classes](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/folderclass/FolderClass.html)
   :::

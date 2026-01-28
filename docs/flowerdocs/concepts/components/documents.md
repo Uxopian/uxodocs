@@ -4,9 +4,9 @@ sidebar_position: 2
 description: Manage your electronic documents.
 date: "2018-03-02T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-28T14:38:12.740Z'
   author: CI/CD Bot
-content_hash: 0bc9da87a0ade13e0eba5d7193b40b515965f9543d05013ae6fffd980bbdb4b6
+content_hash: 9ba32765b4bfd59106d005abdea43d9219b7e59ecd7dc1d369a0a885be85b6ad
 ---
 
 A document is a component in its own right, with the distinctive feature of having one or more contents. These are also known as files.
@@ -32,6 +32,6 @@ Some actions are only available if the user has write access to the document. To
 :::info
 To go further, consult the Javadoc:
 
-- `Document`
-- `Document class`
+- [Document](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/document/Document.html)
+- [Document class](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/documentclass/DocumentClass.html)
   :::

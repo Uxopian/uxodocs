@@ -4,9 +4,9 @@ sidebar_position: 1
 description: Tag your components to find them more easily.
 date: "2018-03-02T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-28T14:38:12.740Z'
   author: CI/CD Bot
-content_hash: 35a8a337ab8b21850866aceecbdc047f8d7541e3a6949dda82b372ef1a4ac23f
+content_hash: 4ac810de8fae5d16cb9f99884dc51389f36639d29c5d82c14e6509f4cb6090f4
 ---
 
 `tags` are metadata defined on a component to characterize it and make it easier to find.
@@ -14,7 +14,7 @@ content_hash: 35a8a337ab8b21850866aceecbdc047f8d7541e3a6949dda82b372ef1a4ac23f
 This metadata can be of different types to ensure consistency of the data stored in FlowerDocs.
 
 <br/>
-A `tag class` defines the typology and characteristics of a tag within a scope. 
+A [tag class](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/tagclass/TagClass.html) defines the typology and characteristics of a tag within a scope. 
 This tag class applies to all tags associated with components, and is made up of the following elements:
 
 - `id`: technical tag identifier

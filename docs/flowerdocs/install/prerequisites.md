@@ -30,7 +30,7 @@ Installing a FlowerDocs platform requires Linux servers. FlowerDocs is supported
 
 Java Runtime 11 must be installed to run FlowerDocs.
 
-This documentation does not cover the installation of the ARender rendition server (version ). It must therefore be installed beforehand and be accessible via HTTP or HTTPS protocol from **FlowerDocs GUI**, **FlowerDocs Core** and (version ).
+This documentation does not cover the installation of the ARender rendition server (version 2.8.3). It must therefore be installed beforehand and be accessible via HTTP or HTTPS protocol from **FlowerDocs GUI**, **FlowerDocs Core**.
 
 ### OpenSearch and Redis
 

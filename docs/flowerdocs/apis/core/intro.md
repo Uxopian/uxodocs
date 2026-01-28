@@ -11,6 +11,9 @@ content_hash: 3c0dd100daaab12a5975ceefc8ba22868d1a75715bbadbd4484ab8ed236f67ef
 **FlowerDocs Core** exhibits a set of services to facilitate integration with third-party applications.
 These services can be consumed in various ways, which are described in the following sections.
 
-<br/>
+:::info JavaDoc
 
-_The javadoc is available online:_
+- [Core Services](https://documentation.flowerdocs.com/javadocs/service/index.html) 
+
+- [WS REST](https://documentation.flowerdocs.com/javadocs/ws/index.html)
+:::

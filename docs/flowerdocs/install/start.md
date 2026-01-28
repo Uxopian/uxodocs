@@ -19,14 +19,14 @@ To manually launch the **FlowerDocs GUI**, **FlowerDocs Core** and applications,
   <TabItem value="gui" label="GUI">
 
 ```bash
-./flower-docs-gui-webapp-.jar
+./flower-docs-gui-webapp-2.8.3.jar
 ```
 
   </TabItem>
   <TabItem value="arender-hmi" label="ARender HMI">
 
 ```bash
-./arondor-arender-hmi-spring-boot-.jar
+./arondor-arender-hmi-spring-boot-2.8.3.jar
 ```
 
   </TabItem>

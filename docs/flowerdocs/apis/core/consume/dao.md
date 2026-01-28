@@ -12,3 +12,5 @@ The DAO API enables the development of FlowerDocs connector to access other data
 
 <br/>
 *The Javadoc is available online:*
+
+[DAO API](https://flowerdocs.com/javadocs/dao/index.html)

@@ -4,9 +4,9 @@ sidebar_position: 5
 description: Manage your business or technical processes.
 date: "2018-03-05T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-28T14:38:12.740Z'
   author: CI/CD Bot
-content_hash: 5b364a39ad7ab7b7d4357b0116cfa718dc4ebb12ed79d2fee1f2d07a99346c31
+content_hash: 3855397dcefe355a67ae805e2e0c963e151257b832f8dd7888235d1121162daa
 ---
 
 :::info
@@ -81,6 +81,6 @@ This type of assignment requires the `ASSIGN` permission.
 :::info
 To find out more, take a look at some references:
 
-- `Task`
-- `Task class`
+- [Task](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/task/Task.html)
+- [Task class](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/taskclass/TaskClass.html)
   :::

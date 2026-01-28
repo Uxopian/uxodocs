@@ -1,4 +1,6 @@
 ---
+title: SOAP
+sidebar_position: 3
 last_update:
   date: '2026-01-27T09:19:20.024Z'
   author: CI/CD Bot
