@@ -179,9 +179,9 @@ export default function FlowerDocsCards() {
 
     // Detect if we're on a versioned page
     let versionPrefix = "";
-    const versionedMatch = pathname.match(/\/docs\/flowerdocs\/(v[\d.]+-?[A-Z]*)\/flowerdocs/);
+    const versionedMatch = pathname.match(/\/docs\/flowerdocs\/(v[\d.]+-?[A-Z]*)\//);
     if (versionedMatch) {
-        versionPrefix = `/flowerdocs/${versionedMatch[1]}/flowerdocs`;
+        versionPrefix = `/${versionedMatch[1]}`;
     }
 
     // Add a class to body to indicate we're on a product homepage
@@ -198,8 +198,8 @@ export default function FlowerDocsCards() {
     // Adjust links based on version
     const adjustLink = (link: string) => {
         if (!versionPrefix) return link;
-        // Replace /docs/flowerdocs/ with /docs{versionPrefix}/
-        return link.replace(/^\/docs\/flowerdocs\//, `/docs${versionPrefix}/`);
+        // Replace /docs/flowerdocs/ with /docs/flowerdocs{versionPrefix}/
+        return link.replace(/^\/docs\/flowerdocs\//, `/docs/flowerdocs${versionPrefix}/`);
     };
 
     return (

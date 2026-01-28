@@ -20,10 +20,10 @@ export default function SecondaryNav(): React.ReactElement | null {
     let product: string | null = null;
     let versionPrefix: string = "";
 
-    const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v[\d.]+-?[A-Z]*)\/\1(?:\/|$)/);
+    const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v[\d.]+-?[A-Z]*)(?:\/|$)/);
     if (versionedMatch) {
         product = versionedMatch[1];
-        versionPrefix = `/${versionedMatch[1]}/${versionedMatch[2]}/${versionedMatch[1]}`;
+        versionPrefix = `/${versionedMatch[1]}/${versionedMatch[2]}`;
     } else {
         const docsMatch = pathname.match(/\/docs\/([^\/]+)/);
         if (docsMatch) {
