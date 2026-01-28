@@ -3,9 +3,9 @@ sidebar_position: 5
 draft: false
 title: Shared objects
 last_update:
-  date: '2026-01-23T15:35:56.881Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: 2a2b5ad2b1d85bd309d7a088ce765e96e961dbd7043803185e3087a9c11effd2
+content_hash: 882ab166c9060b09690e00f068c2cbee1aaeb21f8a65af54df002fc0e0041d4b
 ---
 
 :::warning

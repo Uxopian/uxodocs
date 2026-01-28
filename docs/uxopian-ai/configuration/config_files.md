@@ -1,9 +1,10 @@
 ---
-title: Configuration
+title: Config files
+sidebar_position: 1
 last_update:
-  date: '2026-01-20T14:02:07.044Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: 927332dabcdc3ee357adc1c11b8004683e5e3211a5af2fc15ae911a9ee615c2a
+content_hash: b03dc5e0a308364162dcea6e62856d289e59bd254e430349e59496b9a3e8c0b0
 ---
 
 # **⚙️ Configuration**

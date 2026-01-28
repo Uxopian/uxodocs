@@ -1,9 +1,9 @@
 ---
 sidebar_position: 1
 last_update:
-  date: '2026-01-23T15:35:56.881Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: ea753c2babc9ccae5b900c7bd0976f508f79609a9cb302ed28d45aad88e5543a
+content_hash: 36248e819742097dff33e59441116634eac9b5ca5989cd4c8e8259dc18ba23a5
 ---
 
 # Components

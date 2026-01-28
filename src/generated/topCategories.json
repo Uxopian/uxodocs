@@ -101,6 +101,10 @@
     {
       "label": "How To Guides",
       "href": "/docs/uxopian-ai/how_to_guides/common_operational_tasks"
+    },
+    {
+      "label": "QA",
+      "href": "/docs/uxopian-ai/qa/"
     }
   ]
 }

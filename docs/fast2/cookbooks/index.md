@@ -2,9 +2,9 @@
 title: Cookbooks
 sidebar_position: 0
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: da002d8dcf95b61f0db0fb2890c2c09b960cbdb8d38764caf515ae18bbab3023
+content_hash: 4b9875b212e4fe7893a3e95a0db65ca2b5ceb2644add26ebdb2c7c2f892b3257
 ---
 
 # Fast2 cookbooks

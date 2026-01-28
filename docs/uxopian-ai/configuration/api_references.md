@@ -1,9 +1,10 @@
 ---
-title: REST API  Swagger
+title: REST API Swagger
+sidebar_position: 2
 last_update:
-    date: "2025-12-09T08:50:47.882Z"
-    author: CI/CD Bot
-content_hash: 56a32d181d657c03539e92472c3afaf6428b976287fc7ad8a26fe2d45c142dd9
+  date: '2026-01-28T13:32:53.239Z'
+  author: CI/CD Bot
+content_hash: e6acaa7dedd8dc78e7b1d03e5491d041adc9df3786da9b775476eebd70b81863
 ---
 
 # **🧪 REST API & Swagger**

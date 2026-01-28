@@ -2,9 +2,9 @@
 sidebar_position: 3
 title: Worker
 last_update:
-  date: '2026-01-26T08:36:53.826Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: 1e1aee48a91a06590d3b69a5d083d756df55443c37a1737a5a5a9225059ae775
+content_hash: 65419fb004dc37b6e6241b49188139c5ba523aac735c9ab3392ff5d1928e5d30
 ---
 
 # The worker

@@ -1,8 +1,10 @@
 ---
+title: Catalog
+sidebar_position: 0
 last_update:
-  date: '2026-01-23T15:35:56.881Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: fb11e0ee161c2d2bd93ab78d8746f4c826e781593c84013f65911560c85592b0
+content_hash: 2b7dad573a5e4a93c6487a2646c271dbad5f62fdd2cbc885dac2a251d11940b2
 ---
 
 # Catalog

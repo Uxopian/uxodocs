@@ -2,9 +2,9 @@
 sidebar_position: 2
 title: Broker
 last_update:
-  date: '2026-01-23T15:35:56.881Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: c27c7fbd9120ae491ee5eb3b79c18a429e1eb1071fd35a43abe5be62f342ea2c
+content_hash: 1b8499be50e7c42e2ca7a052389fcdce2cc0e22574bc92103e72adafb9ea253a
 ---
 
 # The broker

@@ -1,9 +1,10 @@
 ---
-title: User Guide Integration  Common Operations
+title: Common Operational Tasks
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: 02d9693782a3f347c8d2dbdcaf2b7a37bed9d495ab6d453e6ecfe40d8c3b24c6
+content_hash: 5c73deb682894b4355eb8f920535f85619e61283173433459f3bf60aea4274fb
 ---
 
 # 📘 User Guide: Integration & Common Operations

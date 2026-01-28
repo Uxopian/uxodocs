@@ -6,9 +6,9 @@ tags:
     - configuration
     - Java
 last_update:
-  date: '2026-01-23T15:35:56.881Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: 8d4e8b8b3c272779e9e31fdf9b7412a3a63c003119d20682b527c995ab5e2e06
+content_hash: a4b7fd9595c620942548fe55c0c539db44eddb66ae8189c04a8536c510262630
 ---
 
 A pattern is a sequence of instructions, a model, which can be easily recognized by an aware glance. It is strictly under this definition that Fast2 patterns stand.

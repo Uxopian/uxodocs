@@ -3,9 +3,9 @@ title: Advanced
 sidebar_label: Advanced
 sidebar_position: 1
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-28T13:32:53.239Z'
   author: CI/CD Bot
-content_hash: 829dc7f6d50f2fed69ca7cf8f175db3d9437f1fabe0b5abeb6153baee2fecfc8
+content_hash: ba1fe5b399d7a2505a802b56887d9f14113b743f9d30ad4e554ae9d6a378c438
 ---
 
 # Advanced section
