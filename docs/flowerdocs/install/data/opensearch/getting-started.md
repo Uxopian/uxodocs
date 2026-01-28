@@ -8,7 +8,7 @@ last_update:
 content_hash: a8cfb7c846184f8936fd4f42b0d952aa0810d5bfda1aaf9761c7639838b08a20
 ---
 
-The OpenSearch connector is based on the version of OpenSearch.
+The OpenSearch connector is based on the version 1.3.4 of OpenSearch.
 
 Direct access to the OpenSearch repository used by FlowerDocs is not recommended. FlowerDocs does not guarantee that the OpenSearch data model will remain unchanged over time, as it may be modified during a release upgrade.
 

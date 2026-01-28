@@ -18,7 +18,7 @@ In the rest of this page, `${APP_HOME}` corresponds to the folder in which each 
  
 # **FlowerDocs GUI**
 
-- After completing the downloads mentioned in the prerequisites, place the `flower-docs-gui-webapp-.jar` application in the `${APP_HOME}` folder.
+- After completing the downloads mentioned in the prerequisites, place the `flower-docs-gui-webapp-2.8.3.jar` application in the `${APP_HOME}` folder.
 - Add `application.properties` file with the following properties:
 
 ```javascript
@@ -31,10 +31,10 @@ spring.task.execution.thread-name-prefix=flowerdocs-async-
 
 #
 
-- After completing the downloads mentioned in the prerequisites, place the `arondor-arender-hmi-spring-boot-.jar` application in the `${APP_HOME}` folder.
+- After completing the downloads mentioned in the prerequisites, place the `arondor-arender-hmi-spring-boot-4.8.20.jar` application in the `${APP_HOME}` folder.
 - Create the folders `${APP_HOME}/configurations` and `${APP_HOME}/lib`.
 - Add the `arender-custom-server.properties` configuration file to `${APP_HOME}/configurations`.
-- Add ARender FlowerDocs connector `flower-docs-arender-hmi-.jar` to `${APP_HOME}/lib`.
+- Add ARender FlowerDocs connector `flower-docs-arender-hmi-2.8.3.jar` to `${APP_HOME}/lib`.
 
 For high availability, it is necessary to activate session affinity on each HMI.
 
@@ -42,5 +42,5 @@ Please note that Hazelcast in ARenderHMI with FlowerDocs is not functional and s
 
 # **FlowerDocs Core**
 
-- After completing the downloads mentioned in the prerequisites, place the `flower-docs-core-webapp-.jar` application in the `${APP_HOME}` folder.
+- After completing the downloads mentioned in the prerequisites, place the `flower-docs-core-webapp-2.8.3.jar` application in the `${APP_HOME}` folder.
 - Add the `core.properties` configuration file to `${APP_HOME}`.

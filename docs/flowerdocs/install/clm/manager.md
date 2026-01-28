@@ -22,7 +22,7 @@ description = "FlowerDocs Manager tool lets you deploy a scope from a Git projec
 * Open a terminal and enter the command: 
  
 ```properties
-java -jar flower-docs-manager-2.8.jar
+java -jar flower-docs-manager-2.8.3.jar
 ```
     
 * Open a browser and go to http://localhost:2503/flower-manager/

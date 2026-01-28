@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
 
 ## Installation procedure
 
-There are several ways to install OpenSearch, explained step by step in the [official documentation](https://opensearch.org/docs//opensearch/install/index).
+There are several ways to install OpenSearch, explained step by step in the [official documentation](https://opensearch.org/docs/1.3/opensearch/install/index).
 
 ## Configuration
 
@@ -45,7 +45,7 @@ To change a user's password:
 - in order for the changes to take effect, run the ``$`OPENSEARCH_HOME`/plugins/opensearch-security/tools/securityadmin.sh`` script
 
 <br/>
-For more information on securing an OpenSearch instance, official documentation is available [here](https://opensearch.org/docs//security-plugin/index).
+For more information on securing an OpenSearch instance, official documentation is available [here](https://opensearch.org/docs/1.3/security-plugin/index).
 
 ### Start
 

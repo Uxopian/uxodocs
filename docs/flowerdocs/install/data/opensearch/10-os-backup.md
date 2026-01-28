@@ -11,7 +11,7 @@ content_hash: b026159e0ea5011f420364ca042bd03f6429fa375c76e1b050c5e2a527625e8c
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The backup & restoration procedure described below is based on the Opensearch [snapshot](https://opensearch.org/docs//opensearch/snapshot-restore/) mechanism.
+The backup & restoration procedure described below is based on the Opensearch [snapshot](https://opensearch.org/docs/1.3/opensearch/snapshot-restore/) mechanism.
 
 # Output directory
 

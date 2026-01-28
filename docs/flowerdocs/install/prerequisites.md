@@ -66,9 +66,9 @@ It is necessary to use UTF-8 encoding on component installation servers, to ensu
 
 The FlowerDocs platform requires the installation of the following executable JARs:
 
-- `flower-docs-gui-webapp-.jar`
-- `flower-docs-core-webapp-.jar`
-- `arondor-arender-hmi-spring-boot-.jar`
+- `flower-docs-gui-webapp-2.8.3.jar`
+- `flower-docs-core-webapp-2.8.3.jar`
+- `arondor-arender-hmi-spring-boot-4.8.20.jar`
 
 These applications can be configured by property files located in the same directory as the application.
 
@@ -82,7 +82,7 @@ Applications can be configured via the following files:
 | **FlowerDocs GUI**  | `gui.properties`                   |
 |                     | `arender-custom-server.properties` |
 
-The FlowerDocs ARender connector `flower-docs-arender-hmi-.jar` is also required for the application to be able to retrieve documents stored in FlowerDocs.
+The FlowerDocs ARender connector `flower-docs-arender-hmi-2.8.3.jar` is also required for the application to be able to retrieve documents stored in FlowerDocs.
 
 :::info
 The necessary configuration is described on the dedicated page [here](/docs/flowerdocs/install/config/arender-hmi-config).
