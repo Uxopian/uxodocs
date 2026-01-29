@@ -1,9 +1,10 @@
 ---
 title: Annotation types
+sidebar_position: 6
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 8fc0f9086b01f4b3377fd7e47213479949354529e1488dd13c4440c7cb7e16f7
+content_hash: aa0a82eddf84afb2849017d7f7730560d9d8eb007e7a6acfa4d1b9661e89bf66
 ---
 
 ## Annotations

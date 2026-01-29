@@ -1,9 +1,10 @@
 ---
 title: Monitoring
+sidebar_position: 6
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: e6d31ea2721d0f4d638c5bbb8f95bb3767aac04f19cf11b702aa9381f9bbcde2
+content_hash: fed89f409c4593617062afd37c2780e0daed5afd2372702a8ce9f9e38604c38a
 ---
 
 ## Health check probe

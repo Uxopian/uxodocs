@@ -1,4 +1,4 @@
 {
-    "label": "Standalone",
-    "link": null
+    "label": "Standalone (non-docker)",
+    "position": 1
 }

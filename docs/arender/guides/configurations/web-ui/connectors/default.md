@@ -1,9 +1,10 @@
 ---
 title: Default connector
+sidebar_position: 1
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 51388ddebaf2ef0643deedce732f63f103c046363a9d9c1942fda0098132b899
+content_hash: 2b95c8ad8c61b63a972662923abe4f8ffb5e77f332e04eb308d86fddc1b70753
 ---
 
 This connector is provided as default. It is used for internal product

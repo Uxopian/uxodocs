@@ -1,9 +1,10 @@
 ---
 title: Browser support
+sidebar_position: 7
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: c8a37bf84a11e561550cb85134cf93bdab16736db8fa258c4eeeba58a8153a8e
+content_hash: 09f747f222ea650c4e7f6713090a663b321a5aec391ec661c971fa1bd36b32de
 ---
 
 | Browser | ARender v5                                                               |

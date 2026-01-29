@@ -1,9 +1,10 @@
 ---
 title: ELK stack configuration
+sidebar_position: 13
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: f95c87e8f162b11e19ada681b4bfd73a212d9c008c58a841c453518288955ed1
+content_hash: b967f97942ee7af08f7bfe83e70afb4d6f533e3bd07330c21aa8a32482a5a463
 ---
 
 ## Introduction

@@ -1,9 +1,10 @@
 ---
 title: Testing
+sidebar_position: 6
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: c8a44706b1e0a22f7abc69ef34116f2e7f39caa762d562737e1f09dfdf521f4e
+content_hash: 90d366a3f807d28ecefe14c7bc357f86113414869465c3f0b1dd500eac7617b6
 ---
 
 The test jar «

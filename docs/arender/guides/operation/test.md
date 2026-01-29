@@ -1,9 +1,10 @@
 ---
 title: Behaviour testing
+sidebar_position: 4
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: e666dcfd4955bfefcce9aeb61cfbfd0cbfbfe089a819b7300691efb3dbc964a9
+content_hash: b4784778759dc7c524fda92d60e0031f5bee2d4cceb028d70608f80546d2a83c
 ---
 
 This chapter is meant to check if ARender is working as expected. The

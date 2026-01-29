@@ -3,9 +3,9 @@ title: DAO
 sidebar_position: 5
 date: "2005-03-27T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-01-29T13:25:38.088Z'
   author: CI/CD Bot
-content_hash: 52a5901e84f753f1cc1bed3192f0c6d99ac1f2c82e925f974150a9181bf3b1c3
+content_hash: d375da3e772768bc7ccfd75cc3a2074139a24b0f41f395fa02013fd001266f7b
 ---
 
 The DAO API enables the development of FlowerDocs connector to access other data repositories.

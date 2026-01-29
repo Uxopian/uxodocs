@@ -1,9 +1,10 @@
 ---
 title: Configuration
+sidebar_position: 2
 last_update:
-  date: '2026-01-29T10:50:12.660Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 5ba8b6be63896084bf8bc7d22e0a89e42645f4f99671373abe924c2d4cb7eb6d
+content_hash: c9d1fd34fc79e3bfe54a9c0dfe9ff7faf548acba1655a5bad1340d8cca6411db
 ---
 
 ## Configuration files of ARender Web-UI

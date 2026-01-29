@@ -1,9 +1,10 @@
 ---
 title: Visualization
+sidebar_position: 12
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: c02f4367469c61b0ed1a55c24e80994c3b9445d6e41b24bf1738aaff53e0c0c2
+content_hash: 6b45f7fce9eb18b2537dd3ea8dbadd3a924aacad8ae1466eed58f79e0454c913
 ---
 
 ## General

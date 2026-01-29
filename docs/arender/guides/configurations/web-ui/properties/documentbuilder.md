@@ -1,9 +1,10 @@
 ---
 title: Document builder
+sidebar_position: 3
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 46abfee1f1e92223f0c6caee742ab168317048aa6596925604ffa9c517edaefd
+content_hash: 4dcfa0eec0f8cd878f51215411753463f866e9afcaeeb8c16bfd59708401e12d
 ---
 
 ## General

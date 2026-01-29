@@ -1,9 +1,10 @@
 ---
 title: Architecture in IBM Filenet
+sidebar_position: 4
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: ec8d0c90dc5b8cfcbcb691bc53f7281f9149a6e060e3226c75dad34bd72c4b79
+content_hash: 1aff9e621383ca396ef03ab4618aa5036f924f4918360849c235fe79d358579a
 ---
 
 ![image](/img/arender/diagrams/ARender-Architecture-Filenet.png)

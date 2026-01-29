@@ -1,9 +1,10 @@
 ---
 title: Rendition stack
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 2d86a02d2e49218a018424c1718aed135efde9e101dbd744143600f7e2e7b87c
+content_hash: 9bee2992ecff2287f45c94df7dd4672b03ac7fd2cf354dc8597bdbf10a0d5e24
 ---
 
 ## By Environment Variables

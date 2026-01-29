@@ -10,11 +10,11 @@
     },
     {
       "label": "Learn",
-      "href": "/docs/arender/learn/architecture/alfresco-architecture"
+      "href": "/docs/arender/learn/product-analytics"
     },
     {
       "label": "Guides",
-      "href": "/docs/arender/guides/"
+      "href": "/docs/arender/guides/configurations/rendition/service-broker"
     },
     {
       "label": "Features",

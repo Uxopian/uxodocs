@@ -1,9 +1,10 @@
 ---
 title: New installation
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: b3c1b9c173481a11c8150427cb273d7cccd060dba71c18d7fcc6a74813955eda
+content_hash: 4b75872dd57a4fba57bd7dcb98dae76c5273117f2da7bbabd4e534cefc1eabda
 ---
 
 Here we present the Web-UI installation in M-Files.

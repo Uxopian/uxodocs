@@ -1,9 +1,10 @@
 ---
 title: Print
+sidebar_position: 8
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 097060317c920d7c8e90c0d0cc391352ec5749581bd133d0276610e94b0eca9c
+content_hash: 54ebaac7ec5d92f03961d0b9ec97b8de66dd38460f7edb2ce1fc238c9299c5e0
 ---
 
 ## General

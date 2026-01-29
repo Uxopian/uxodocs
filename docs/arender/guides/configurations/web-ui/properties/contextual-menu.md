@@ -1,9 +1,10 @@
 ---
 title: Contextual menu
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 72bd97fffe6677e485aa71271ff42f30378b897ddc39160ffeb4ddbf322e1423
+content_hash: 256025d5fc4878b41473436509db48f6b58eee13f997de0324033285e6c2b71c
 ---
 
 ## General

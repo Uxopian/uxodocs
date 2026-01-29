@@ -1,9 +1,10 @@
 ---
 title: Requirements
+sidebar_position: 1
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: d77349fbbd54c479e9226a3bd31bc7af02fe288564ff5abdb072ec965e1c47c2
+content_hash: b0d589bbcc2e1cff86186467d786981a8869607b79bc51a582d9c3b82dca0e5d
 ---
 
 ## Operating system

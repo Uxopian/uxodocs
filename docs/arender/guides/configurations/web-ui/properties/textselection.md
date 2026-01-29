@@ -1,9 +1,10 @@
 ---
 title: Text Selection
+sidebar_position: 1
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 3ca845e7177c2cdda452bccf531c2beeb4c55f0effb25f74a9322d6ed9ce57a5
+content_hash: 801d5d2e419b900b983d5b3d28e278c6b2a92d3b0328ca5294de309a47abfd3b
 ---
 
 ## General

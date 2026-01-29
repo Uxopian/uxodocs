@@ -1,9 +1,10 @@
 ---
 title: Menu bar
+sidebar_position: 7
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 8b89df792ae817c0b8b12990b192bef9ece76d963bcfcf1ac7b3fd8b562450eb
+content_hash: 59af685869442cc051e92bbb736329c88174ab717ba1c65fcf6eed0745d93e43
 ---
 
 ## Document menu

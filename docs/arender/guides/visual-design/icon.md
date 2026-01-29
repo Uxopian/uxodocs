@@ -1,9 +1,9 @@
 ---
 title: Icons
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 1824d9f23cf056eedce1e61def72573f44a87af790e425eab8bf246839222593
+content_hash: 4d15e48aba8d339e5333222b842d34d80069d394c5879b6e845a6cd37b83f2ca
 ---
 
 ## Icon of ARender
@@ -1083,9 +1083,8 @@ You can find the available icons here: https://fontawesome.com/icons
 ````xml
 Example with the free text annotation button:
 
+```
 
-
-```xml
 <bean id="addFreeTextAnnotationButton"
 ```javascript
     class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
@@ -1118,9 +1117,7 @@ Example with the free text annotation button:
 </bean>
 ````
 
-````
-
-![image](/img/arender/custom icon/font_awesome.png)
+![image](/img/arender/custom_icon/font_awesome.png)
 
 ## Material Design Icons
 
@@ -1178,9 +1175,4 @@ Example with the free text annotation button:
 </bean>
 ````
 
-```
-
-
-
-![image](/img/arender/custom icon/mdi.png)
-```
+![image](/img/arender/custom_icon/mdi.png)

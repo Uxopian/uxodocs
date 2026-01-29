@@ -1,9 +1,10 @@
 ---
 title: Features
+sidebar_position: 3
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 84fa8d6ee2b926091af9cc677aa9a9b71b0d2ff16beb8a0a42c66766e0a7453f
+content_hash: 65043591b4c118140ff9a3a723fc4d952fd4912a47e8da0dbabb3d8b9baa6b52
 ---
 
 | Feature                            | Standard / Optional module |

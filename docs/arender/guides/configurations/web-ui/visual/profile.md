@@ -1,9 +1,10 @@
 ---
 title: Profiles
+sidebar_position: 1
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: bd79dd7aa2d9d52fe1a1b102056c07e36b19f4bdb7b11ccea37a53616a8443ca
+content_hash: d58f6277fa49756078fac80fbf9a5c896a3bb3a187d87b0c4b51e3a4ba18d487
 ---
 
 ## Introduction

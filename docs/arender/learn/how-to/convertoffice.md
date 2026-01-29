@@ -1,9 +1,10 @@
 ---
 title: Office converter
+sidebar_position: 21
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: b58f270c231be8ea4f970393aea74a81df8bfa550a013de6aa8f2b66d2b083f9
+content_hash: 20bd54c46a8309014928cef905cc76196fd7dacdd87941fd14ac97909378a87a
 ---
 
 This tutorial describe an example of usage of ARender to convert a Word

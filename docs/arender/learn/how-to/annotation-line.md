@@ -1,10 +1,14 @@
 ---
 title: Custom annotation
+sidebar_position: 10
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: ab46b553e9a1435febc59d6aebf332ec4de75485591d56066c65ae34826f6b65
+content_hash: a149a75896a94e9120c7421b4259dd2589acaab4453a2b1ae200c5aa775fc7e9
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 ## Example: Line annotation
 
@@ -58,6 +62,9 @@ color or a default size.
 Now, we will made the annotation button. We can use the arrow button
 model from*toppannel-annotations-configuration.xml_and custom it in \_arender-custom-integration.xml*.
 
+<Tabs>
+<TabItem value="before470" label="Before 4.7.0">
+
 ```xml
 <bean id="addLineAnnotationButton"
     class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter"
@@ -77,6 +84,9 @@ model from*toppannel-annotations-configuration.xml_and custom it in \_arender-cu
     </property>
 </bean>
 ```
+
+</TabItem>
+<TabItem value="after470" label="After 4.7.0">
 
 ```xml
 <bean id="addArrowAnnotationButton"
@@ -115,6 +125,9 @@ model from*toppannel-annotations-configuration.xml_and custom it in \_arender-cu
 	</bean>
 ```
 
+</TabItem>
+<TabItem value="after481" label="After 4.8.1">
+
 ```xml
 <bean id="addArrowAnnotationButton"
 		class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
@@ -150,6 +163,9 @@ model from*toppannel-annotations-configuration.xml_and custom it in \_arender-cu
 		</property>
 	</bean>
 ```
+
+</TabItem>
+</Tabs>
 
 In the example, the icon has been loaded from the icons folder of
 ARender front end server. The value could be an external URL from a

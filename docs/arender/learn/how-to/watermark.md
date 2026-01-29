@@ -1,9 +1,10 @@
 ---
 title: Watermarks
+sidebar_position: 26
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 2c281dff31e54c4a091ef5e961e559e7d64df4f842cea85ca13a61863e865006
+content_hash: 314aa44423770aaabb97849d9ad5cf71f5390658fa06044a7904f59619d078a4
 ---
 
 This guide will help you configure ARender to use watermarks.

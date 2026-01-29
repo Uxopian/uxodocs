@@ -1,9 +1,10 @@
 ---
 title: Installation in Share
+sidebar_position: 2
 last_update:
-  date: '2026-01-29T10:50:12.660Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: c146548f9902eec3faf31ad9efaa3036a82d2139759bec4f248eb25710023433
+content_hash: 3d08a30b56dafffe579108fd4e943a646329cd5d9eabf9b0eefc1e0a0993383c
 ---
 
 We present here the continuation of the installation of the Web-UI, in the Share module of Alfresco.
@@ -26,12 +27,12 @@ The two plugins respectively allow to extend the ACS REST API used by ARender an
 
 Add the following lines to the _&#123;alfresco_tomcat&#125;/shared/classes/alfresco/web-extension/**share-config-custom.xml**_ file between the alfresco-config attributes.
 
-```````````xml
+```xml
 <config evaluator="string-compare" condition="Arender">
-        <url>``````````http://{arender_serveur}:{arender_port}/{arender_contexte}</url>``````````
+        <url>`http://{arender_serveur}:{arender_port}/{arender_contexte}</url>`
         <!-- exemple: <url>http://192.168.1.8:8080/ARenderHMI</url> -->
 </config>
-```````````
+```
 
 ![alfresco](/img/arender/alfresco/alfresco-03.png)
 

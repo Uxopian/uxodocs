@@ -1,9 +1,10 @@
 ---
 title: Configuration
+sidebar_position: 3
 last_update:
-  date: '2026-01-29T10:50:12.660Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 037d5f86404913aad29a04c943b6f551056d550fc93ad92bcdcaabedaca2e2bb
+content_hash: 71d5fc4d352ff91ae1acb07946cbe4f7ceb99f6cf2110b06becfca733b79aa0f
 ---
 
 ## Antivirus Settings

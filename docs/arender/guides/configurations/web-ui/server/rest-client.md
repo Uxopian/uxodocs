@@ -1,9 +1,10 @@
 ---
 title: Rendition REST client
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 0e4de057519be7e4510536f6f1117a42466a7a82ad317868cb536492fef71ee8
+content_hash: da12bba05913780a7e90f67f360222dcaa5d744d14ac91ea5626636633bc8cc9
 ---
 
 ## Configurations

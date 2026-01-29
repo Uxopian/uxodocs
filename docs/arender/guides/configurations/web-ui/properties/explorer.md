@@ -1,9 +1,10 @@
 ---
 title: Document navigator
+sidebar_position: 4
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 927fd01ac9dc1313cad7037d7321e3ad4ddae6e8eef98119a09b6ad2f2eecd97
+content_hash: 01d96a8732d20cb3677634e096d2020b3c087cb95adebe6834dd26f8430a2b94
 ---
 
 ## General

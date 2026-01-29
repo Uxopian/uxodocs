@@ -1,9 +1,10 @@
 ---
 title: Installation
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 80c9b8137a03d84d65e622a4f33a297a80ff91be6b8822dcf8a4d89b3d92648b
+content_hash: 126e762327012c4b9a7c85c2dbe2ef4bc43206b5cb80df6dd72ad4d111024867
 ---
 
 If upgrading from version 4.8 to version 2023.0, please refer to the detailed upgrade documentation
@@ -13,7 +14,7 @@ If upgrading from version 4.8 to version 2023.0, please refer to the detailed up
 
 We strongly recommend installing ARender using the all-in-one installer, as it includes all necessary third-party
 components in validated versions. This method ensures the most reliable setup experience. The only requirement is a
-valid JDK or JRE (see [Requirement](/docs/arender/installation/standalone/rendition/requirements).
+valid JDK or JRE (see [Requirement](/docs/arender/installation/standalone/rendition/requirements)).
 
 ### Retrieving the installer
 

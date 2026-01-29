@@ -1,9 +1,10 @@
 ---
-title: Backup &amp; Restore
+title: Backup & Restore
+sidebar_position: 1
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 4e324178c4c294f7dae27b0e82e2877fd627046f9e58b5f383d86eeef977523b
+content_hash: b8323d01ca008bbfb3095b5d094b677ae8d72f8f1be42bc3544b916d19270820
 ---
 
 ## Rendition server

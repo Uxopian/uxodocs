@@ -1,9 +1,10 @@
 ---
 title: Migrate configuration from 4.x to 4.7
+sidebar_position: 19
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 44fe30daca7143cb44998ea729a7b78de522bdd3e432da57df910240ac26ee54
+content_hash: 0f03e447995b24baee4ff0b03dbcd6ac7600d3d2f17f44284fa7af1137522761
 ---
 
 Version 4.7 brings a lot of visual modification that involves configuration changes in beans, but also properties in arender.properties as well as CSS. This page aims to show how to properly adapt the old configurations to the new one.

@@ -1,9 +1,10 @@
 ---
 title: Quick menu
+sidebar_position: 10
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 7d6e5575a9408d3dba7a759c295c26f949a5de6961b377f80e0492a471fa0d77
+content_hash: d35778c2e6b249c25708bea67e9f6f4e27b34f8f48c40b57eec7fdae1fd63910
 ---
 
 ## General

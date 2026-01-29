@@ -1,9 +1,10 @@
 ---
 title: Annotation creation by rules
+sidebar_position: 3
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 91942894ad7dc49abd75f1652c27b81a4abd12d898c7b9b358263ec8e0cb6300
+content_hash: 9302e6db0694b24585694cc2651fbb19e81470cf48b4f060bf43f6b84623a56f
 ---
 
 ## General concept

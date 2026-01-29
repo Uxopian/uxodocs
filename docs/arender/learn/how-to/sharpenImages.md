@@ -1,9 +1,10 @@
 ---
 title: Obtain sharper images
+sidebar_position: 20
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 73e469f1d404d1b28d4b25dc2adf151b10ebbfd4f2c03ebd3aaaf5089c2848a8
+content_hash: 9960ce781565fd2a4d904f66983d82eee1318be9895e2ab137d63567ed0f9d11
 ---
 
 By default, internet browsers smooth out the displayed pictures to make

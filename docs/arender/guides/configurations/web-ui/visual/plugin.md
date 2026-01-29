@@ -1,9 +1,10 @@
 ---
 title: Plugins
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: fa047b8756b0a3a22f88d091e7a1ff454fe03089fe1d933dba39810cb3181143
+content_hash: 98b35afacbf6b509d4c5c6c4e1a099588201023dc3526c5498c99e78d59f1833
 ---
 
 ARender allow to integrate plugins. They can be opened in two different

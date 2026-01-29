@@ -1,9 +1,10 @@
 ---
 title: Features Alfresco Content Services
+sidebar_position: 1
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: b833dc7ab86b25ab4601aada6c57ebd706be183b9344d54788956660a0d7fe45
+content_hash: dd0b780df4a061ed36a41c80cf539e7a4aede898fdb2d01271da6f27bc849b60
 ---
 
 ## Use Alfresco roles and permissions in ARender

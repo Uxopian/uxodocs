@@ -1,9 +1,10 @@
 ---
 title: Supported File Format
+sidebar_position: 5
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 486ca86a472a2b040e8886e29ef37931c474962797586d51d5a082263fc1ebf2
+content_hash: 505ab8b184af637744fae5bf9ecc40787d2f1fca41c9299da687d801c6018034
 ---
 
 ## PDF

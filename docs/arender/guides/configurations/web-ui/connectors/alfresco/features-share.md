@@ -1,9 +1,10 @@
 ---
 title: Features Alfresco Share
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 419c941ee8fec6492ec7fadc7bb25d624fbbcb925220c989b189a87538eda5d9
+content_hash: 11a01d5d14c899cab6ff84e082eeb683b7caef6bd2b26fe3f843d4bdc438ef43
 ---
 
 ## ARender for specific groups only

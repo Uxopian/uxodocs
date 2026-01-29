@@ -1,9 +1,10 @@
 ---
 title: Introduction
+sidebar_position: 2
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: d545e8876b4fde5e723da666dde013450c983f844e135bb4f85c74834f69b84b
+content_hash: d70ffe34421b52ade454a84e861f0408e8f2e00850a32f4e06d174a86441a2b5
 ---
 
 ### How does ARender work

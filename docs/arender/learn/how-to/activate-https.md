@@ -1,9 +1,10 @@
 ---
 title: Use SSL
+sidebar_position: 25
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: f2604731d38ae44fbc79e2d9e76f3aa4a0af557d3304bd6b1405abf9223b13fc
+content_hash: b91799477aa765af572406072b1de4b12565b28d2a0b666ab15ef282572383a2
 ---
 
 To allow your Rendition to work over https, you have to change some

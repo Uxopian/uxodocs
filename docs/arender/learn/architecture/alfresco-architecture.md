@@ -1,9 +1,10 @@
 ---
 title: Architecture in Alfresco
+sidebar_position: 3
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T16:00:59.573Z'
   author: CI/CD Bot
-content_hash: 8e0372a2c1e84dfd177cf3b4414d70106a951f32307935ffdfeff79ac18df70e
+content_hash: 4006a449a2ddd75255abb6ea2ec5c6a1be863d70776cfa35a5027b1129846c05
 ---
 
 ![image](/img/arender/diagrams/ARender-Architecture-Alfresco.png)
