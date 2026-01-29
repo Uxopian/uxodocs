@@ -3,9 +3,9 @@ title: Criteria
 sidebar_position: 2
 date: "2020-03-03T09:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-29T08:27:50.243Z'
   author: CI/CD Bot
-content_hash: 52ce8bf0f7eb884a241b4e5c59d265bda406fabeb63455314f363cdeafe0ec9e
+content_hash: 3b100a177bd7b8e53372b07ce6284c6e530b38318a09bf833d63bc2a1c2a50ad
 ---
 
 :::info

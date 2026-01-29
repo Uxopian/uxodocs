@@ -3,9 +3,9 @@ title: Prerequisites
 sidebar_position: 2
 date: "2000-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-29T08:27:50.243Z'
   author: CI/CD Bot
-content_hash: 12df4890b0d1e61299c00572f9031561aabe2584ab486994505a815fc7088c90
+content_hash: b486597f9b5b3a1cc9e2e3a1c19f1471a89c6842956f89dc4a74d95be3f577d3
 ---
 
 :::info

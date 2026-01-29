@@ -11,7 +11,7 @@ description: Upgrade Notes 2025.2.0
 
 ## Added properties
 
-- Following the ARender 2023.12.0 version upgrade, there has been a change in the way the `application.properties` file is managed: some FlowerDocs properties can no longer be supplied in the connector. It is now necessary to add this file when installing the application. [ARender HMI](/flowerdocs/documentation/install/install-process#arender-hmi)
+- Following the ARender 2023.12.0 version upgrade, there has been a change in the way the `application.properties` file is managed: some FlowerDocs properties can no longer be supplied in the connector. It is now necessary to add this file when installing the application. [ARender HMI](/uxodocs/docs/flowerdocs/install/install-process#arender-hmi)
 
 ## Technical changes
 

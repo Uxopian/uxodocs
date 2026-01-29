@@ -3,9 +3,9 @@ title: Backup & restoration
 sidebar_position: 5
 date: "2005-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-29T08:27:50.243Z'
   author: CI/CD Bot
-content_hash: f3e8c94ae1db4438b64fa4e72c561d50d234ed7e0abda6dd1b382b360dcfd9c9
+content_hash: a110b58eb8e435abcf81add79f95b5ccc835db1b67784c942cf22ead64427722
 ---
 
 import Tabs from '@theme/Tabs';

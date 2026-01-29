@@ -45,7 +45,7 @@ The former options "**Aggregation 1**" and "**Aggregation 2**" have been replace
 * **Display by**  *(formerly Aggregation 1)* : This data represents the key data points that are displayed in the graph.  
 * **Break down by** *(formerly Aggregation 2)* : This data enables you to subdivide the display according to a second criterion.
 
-![Image](/uxodocs/img/release-notes/Histogram.png)
+![Image](/uxodocs/img/flowerdocs/release-notes/Histogram.png)
 
 This new terminology has been designed to make data manipulation more intuitive and to help users better understand the structure of their Donuts and Histograms.
 
@@ -75,7 +75,7 @@ FlowerDocs is pleased to announce the inclusion of **ARender 2023.15.0**, which 
 The "**Task & BPM**" menu has been renamed "**Task and Process**" in order to use clearer terminology that is more in line with the features offered.  
 Please note that this change is purely visual and does not affect current functionality for users or integrators.
 
-![Image](/uxodocs/img/release-notes/Task_Process.png)
+![Image](/uxodocs/img/flowerdocs/release-notes/Task_Process.png)
 
 
 # For operators
@@ -153,7 +153,7 @@ This change enables the handling of larger authentication tokens, particularly f
 
 This update also improves JavaScript compatibility, as Edge uses the same engine as Chrome.
 
-The Companion MSI installer is available [here](/flowerdocs/documentation/connecteurs/companion/install)
+The Companion MSI installer is available [here](/uxodocs/docs/flowerdocs/connecteurs/companion/install)
 
 ## Companion 2025.3.2 _29/12/2025_
 
@@ -161,6 +161,6 @@ The Companion MSI installer is available [here](/flowerdocs/documentation/connec
 
 The token is no longer passed through the URL but is now transmitted via an **HTTP header**, whose maximum size can be configured at the infrastructure level.
 
-The Companion MSI installer is available [here](/flowerdocs/documentation/connecteurs/companion/install)
+The Companion MSI installer is available [here](/uxodocs/docs/flowerdocs/connecteurs/companion/install)
 
 <FlowerDocsDownloads version="2025.3.0" arenderVersion="2023.15.0" />

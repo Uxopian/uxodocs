@@ -4,9 +4,9 @@ sidebar_position: 4
 description: Dynamically organize your components.
 date: "2018-03-04T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-29T08:27:50.243Z'
   author: CI/CD Bot
-content_hash: f3ee12603c3d163a5820cc1dd6d9523493c93090652dacde5fc387376c7ed782
+content_hash: 9b8980de1d95b8680c615fbefed27777a2d76fc077fec442f8028d8479602d3a
 ---
 
 Virtual folders are a key concept in FlowerDocs. This type of component defines a folder whose contents are dynamically resolved. Its content is therefore said to be "virtual".

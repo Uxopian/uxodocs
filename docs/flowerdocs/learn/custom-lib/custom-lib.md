@@ -3,9 +3,9 @@ title: Customised library
 description: Develop a Java library to override a Core behavior.
 date: "2020-02-01T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T08:27:50.243Z'
   author: CI/CD Bot
-content_hash: 070859891f3d0a3b186136db36f654fa498efe1dfc9bc613d6ea6cfdb92dd5a6
+content_hash: 1381b174a1e5e1fd8ce817c15110a18a5e47cf8aac99c86b8cbe3e2d0c4d7c9d
 ---
 
 import Tabs from '@theme/Tabs';

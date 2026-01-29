@@ -3,9 +3,9 @@ title: Getting Started
 sidebar_position: 1
 date: "2000-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-29T08:27:50.243Z'
   author: CI/CD Bot
-content_hash: a8cfb7c846184f8936fd4f42b0d952aa0810d5bfda1aaf9761c7639838b08a20
+content_hash: fe6fc9e6ce24dcb65c4f8b5f2430b0390e0a813e5facef67359fe87ebcda93ff
 ---
 
 The OpenSearch connector is based on the version 1.3.19 of OpenSearch.

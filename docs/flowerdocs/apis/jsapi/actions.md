@@ -3,9 +3,9 @@ title: Actions
 sidebar_position: 5
 date: "2001-03-01"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-01-29T08:27:50.243Z'
   author: CI/CD Bot
-content_hash: f31f98f56962c35696a544ae8b7bdbd1e3e5c64d918b632b0df7135881b68455
+content_hash: c135abac741b5ca41a594e0f503696e2f632b98acddff4224f895785970d8bf3
 ---
 
 Several types of actions are available:

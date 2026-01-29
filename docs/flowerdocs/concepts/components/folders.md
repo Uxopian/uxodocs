@@ -4,9 +4,9 @@ sidebar_position: 3
 description: Classify your components to suit your needs.
 date: "2018-03-03"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-29T08:27:50.243Z'
   author: CI/CD Bot
-content_hash: acb99c0752b379f97e08298c410e9cc44556ae809741fcdbc9a20aa92b8f8ef9
+content_hash: dead65d5bdff07906631e722865e58cce4624ad3c52c92f84016f681a7c130a3
 ---
 
 :::info

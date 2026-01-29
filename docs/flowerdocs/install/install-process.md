@@ -3,9 +3,9 @@ title: Installation process
 sidebar_position: 3
 date: "2000-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-29T08:27:50.243Z'
   author: CI/CD Bot
-content_hash: 096a5378d335c78edd5425669553c21392b26823843b57686b1d4943dc8b3165
+content_hash: 29282d4a2cf16e7978721269e8b5a714444e03cd812d1cc87ca2326536b0071b
 ---
 
 :::info
