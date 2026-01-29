@@ -2,7 +2,7 @@ name: Version from branches → Build → Deploy
 
 on:
   push:
-    branches: [ test, 'test-*' ]
+    branches: [ staging, 'test-*' ]
   workflow_dispatch:
 
 permissions:
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: test-v2
+          ref: staging
           fetch-depth: 0
           lfs: false
 
@@ -66,7 +66,7 @@ jobs:
           for product in $PRODUCTS; do
             echo "=== ${product} ==="
 
-            # Sauvegarde du "current" (branche test)
+            # Sauvegarde du "current" (branche staging)
             rm -rf ".cache_${product}_current" && mkdir -p ".cache_${product}_current"
             rsync -a "docs/${product}/" ".cache_${product}_current/"
 
