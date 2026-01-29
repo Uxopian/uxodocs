@@ -1,9 +1,9 @@
 ---
 title: Installation in ICN
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T10:50:12.660Z'
   author: CI/CD Bot
-content_hash: b11792ec75f9e02a54334907fc1afaca1b61f43a3de8ec134815f79c66bd1b27
+content_hash: 11c525cd0613eec5df9d46d87bee67b833ca498e04824f9dbbd81d7b9b0595a6
 ---
 
 We continue here the installation but in the ICN module of FileNet.

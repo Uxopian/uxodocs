@@ -1,5 +1,13 @@
 [
     {
+        "version": "v2023.16.0",
+        "title": "ARender v2023.16.0 – Release Notes",
+        "date": "2025-12-02",
+        "description": "Minor release with security patches, Spring upgrades, better email image handling and critical stability improvements.",
+        "slug": "/release-note/arender/v2023.16.0/release-notes",
+        "hasUpgradeNotes": true
+    },
+    {
         "version": "v2023.15.0",
         "title": "ARender v2023.15.0 – Release Notes",
         "date": "2025-10-31",

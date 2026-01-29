@@ -52,7 +52,7 @@ Missing connectors in Alfresco/FileNet images have been resolved. (AR-17825)
 
 **Critical stability fixes:**
 
-- Resolved an issue where connections remained blocked when errors occurred and max.connections=1. (AR-17845)
+- Resolved an issue where connections remained blocked when HTTP errors occurs between HMI and Rendition. (AR-17845)
 - Fixed CR/LF characters in document titles causing error 400 in logs. (AR-17842)
 - Avoid unnecessary calls when Micrometer is disabled. (AR-17844)
 

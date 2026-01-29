@@ -14,3 +14,5 @@ These services can be consumed in various ways, which are described in the follo
 <br/>
 
 _The javadoc is available online:_
+
+[Core API](https://documentation.flowerdocs.com/javadocs/service/index.html)

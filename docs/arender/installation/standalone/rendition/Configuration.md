@@ -1,9 +1,9 @@
 ---
 title: Configuration
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T10:50:12.660Z'
   author: CI/CD Bot
-content_hash: 917714687dec0b4201bb366fe98fd53270486747158503dcd70b776ae47ae15d
+content_hash: 037d5f86404913aad29a04c943b6f551056d550fc93ad92bcdcaabedaca2e2bb
 ---
 
 ## Antivirus Settings
@@ -454,3 +454,31 @@ To change the timeout, set the following property to your desire:
 # Set PDF search streamed timeout in milliseconds
 pdf.search.stream.timeout=500
 ```
+
+## Mail Configuration
+
+### Configure HTML size and conversion performance
+
+The property `emltopdf.resize.embedded.image.enabled` is a Boolean configuration setting that controls whether embedded images within the body of an email are automatically resized during the html-to-PDF conversion process.
+
+```cfg title="modules/RenditionEngine/application.properties"
+emltopdf.resize.embedded.image.enabled=false
+```
+
+Enabling this feature provides two main benefits:
+
+* **Visual Layout**: Images are scaled down to fit within the boundaries of the PDF document, preventing content overflow.
+
+* **Performance Optimization**: Scaling down the image dimensions significantly reduces the overall size (octet) of the HTML, which leads to faster conversion times and lower resource consumption for the rendering engine.
+
+:::warning[Warning]
+
+Enabling this property can significantly alter the rendering and resulting page count of the converted PDF.
+
+By scaling down large embedded images, the overall vertical length of the document is reduced, often resulting in fewer pages than if the property were disabled.
+
+Crucially, this change in page count and content flow will likely invalidate any existing page-number-based references or annotations associated with previously converted versions of the same email.
+
+If your workflow relies on consistent page numbering or pre-existing annotation files linked to specific page coordinates, you must exercise caution when enabling this feature.
+
+:::

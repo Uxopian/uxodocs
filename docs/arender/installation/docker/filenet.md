@@ -1,9 +1,9 @@
 ---
 title: IBM FileNet
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T10:50:12.660Z'
   author: CI/CD Bot
-content_hash: ecd115714ca94bad1613dde4ea91c6a98d362230603b7fdb90914eff214c6cc4
+content_hash: ea0abfc05cfb19eb504b8f5a0bd8327070bc03bd56c565923e58b8a51be8cf7e
 ---
 
 ## ARender UI Spring Boot for IBM FileNet

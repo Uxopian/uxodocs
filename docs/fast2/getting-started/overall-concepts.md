@@ -1,10 +1,10 @@
 ---
 last_update:
-  date: '2026-01-20T16:11:38.246Z'
+  date: '2026-01-29T10:50:12.660Z'
   author: CI/CD Bot
 sidebar_position: 1
 title : Overall concepts 
-content_hash: 9bd50c0326f9ef72c9e6c965ab264367c3d9ee9222b4300842279352dd79081b
+content_hash: cf058215b3a47e2cf188e0955ce094b1b691a87d91a3d4539de2f7e23e2e0370
 ---
 
 import ThemedImage from '@theme/ThemedImage';

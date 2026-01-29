@@ -1,9 +1,9 @@
 ---
 title: Redact
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-01-29T10:50:12.660Z'
   author: CI/CD Bot
-content_hash: 66376d92a5c7c6023da10cbb134efc9a7d3df473d876a22b00130543c149c129
+content_hash: 556431c391137a6b49fcb3bb9104aa92aac83739cbd95d342fbc3b12e301ec39
 ---
 
 ## Activate true redaction
