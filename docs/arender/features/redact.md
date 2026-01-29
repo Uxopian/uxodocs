@@ -14,7 +14,7 @@ If you need to deactivate this behaviour you need to use true redact, i.e. confi
 
 - Activate the fetch of redaction before the image generation:
 
-```cfg
+```cfg title="~/configurations/arender-custom-server.properties"
 arender.server.process.annotations.rendition=true
 ```
 
@@ -26,13 +26,13 @@ ARender offers the possibility to hide the content of any type of document via t
 
 To activate the redact panel, add the following property. By default, it is disabled.
 
-```cfg
+```cfg title="configurations/arender-custom-client.properties"
 redactexplorer.enabled=true
 ```
 
 This panel will give you access to the different redact buttons. By default, four redaction classic creation buttons are available.
 
-```cfg
+```cfg title="configurations/arender-custom-client.properties"
 redactexplorer.redact=true
 redactexplorer.redactZone=true
 redactexplorer.redactPageContent=true
@@ -61,13 +61,14 @@ It is possible to select reasons to apply on redactions.
 
 By default the "With reason" radio button is selected.
 
-```cfg
+```cfg title="configurations/arender-custom-client.properties"
 # If true, the radio button "With reason" is selected
 redactexplorer.redact.with.reasons=true
 ```
 
 The reasons are defined in the configuration files, it is possible to modify them as well as the default reasons as explained in [the dedicated documentation](/docs/arender/learn/how-to/redact-reasons)
 
+:::warning
 By default, only **admin user** can save redacts
 
 To test please:
@@ -76,6 +77,7 @@ To test please:
     - Either Clear the ARender Cookies ,
     - **Or** Open a browser in private navigation.
 - Open ARender with the following query strings in the URL: ?user=admin&amp;redactexplorer.enabled=true
+:::
 
 ## Advanced redact
 
@@ -121,7 +123,7 @@ If you want to refine your selection, you can open the results panel:
 
 It is also possible to add your own buttons. In the file _arender-custom-integration.xml_ add the information of the button.
 
-```xml
+```xml title="configurations/arender-custom-integration.xml"
 <bean id="addRedact"
 	class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
          <constructor-arg value="addRedact" />
@@ -142,7 +144,7 @@ It is also possible to add your own buttons. In the file _arender-custom-integra
 
 Then add the bean id of your button to the list named “redactButtons”. If it doesn’t exist, create it.
 
-```xml
+```xml title="configurations/arender-custom-integration.xml"
 <bean id="redactExplorerView"
 	class="com.arondor.viewer.client.documentnavigator.redact.RedactExplorerView"
 	scope="prototype">
@@ -162,34 +164,36 @@ The redaction model has evolved in ARender version 2023. To facilitate the conve
 
 The new annotation accessor takes the bean name of another annotation accessor as a parameter. You can modify this bean name as follows:
 
-```cfg
+```cfg title="configurations/arender-custom-server.properties"
 arender.server.wrapper.source.annotation.accessor=myCustomAnnotationAccessorBeanName
 ```
 
 myCustomAnnotationAccessorBeanName is the annotation accessor that will be added to the annotation accessor performing the conversion.
 
+:::warning
 The annotation accessor must have a constructor with the following signature:
 
 ```java
 public CustomAnnotationAccessor(DocumentService documentService, DocumentAccessor documentAccessor)
 ```
+:::
 
 ### Usage via Java Code
 
 If you instantiate your _CustomAnnotationAccessor_ using Java code, you will need to modify the instantiation as follows:
 
-```java
+```java title="Code Example"
 RedactConverterAnnotationAccessor myConverterAccessor = new RedactConverterAnnotationAccessor(new CustomAnnotationAccessor());
 ```
 
 If you want to stop the on-the-fly conversion, you should use the following method:
 
-```java
+```java title="Code Example"
 redactConverterAnnotationAccessor().setConvert(false);
 ```
 
 And the property:
 
-```cfg
+```cfg title="Code Example"
 arender.server.wrapper.source.convert=false
 ```

@@ -40,7 +40,7 @@ It is possible to set the display time of toasters.
 
 Modifying the default value by the value _0_ allows access to the toaster elements with the tabulation.
 
-```cfg
+```cfg title="configurations/arender-custom-client.properties"
 toaster.toast.timeout=0
 ```
 
@@ -87,7 +87,7 @@ The navigation of some elements does not work the same way:
 
 To set the outline, the following css classes must be changed:
 
-```css
+```css title="your-custom-css-file.css"
 :focus-visible,
 button:focus,
 select:focus,
@@ -115,7 +115,7 @@ Each of these color perception disorders has their own style. It is possible to 
 
 If you want to change one of the colors, you can change the value of the associated variable in one of the following CSS classes:
 
-```css
+```css title="your-custom-css-file.css"
 .deuteranopia-theme {
     /* color variables */
 }

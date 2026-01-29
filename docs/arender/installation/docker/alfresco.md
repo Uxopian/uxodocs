@@ -11,7 +11,7 @@ content_hash: 7bb946f83f30cb4b91176fcf0fe9b50f7ad281820cab0e5d8137771247f079d5
 To run the container, execute:
 
 ```bash
-$> docker run /arender-ui-springboot:-alfresco \
+$> docker run artifactory.arondor.cloud:5001/arender-ui-springboot:2023.16.0-alfresco \
 -e ARENDERSRV_ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL="http://<alfresco-host>:<alfresco-port>/alfresco/api/-default-/cmis/versions/1.1/atom"
 ```
 
@@ -22,7 +22,7 @@ Add the ARender plugin in Alfresco share container and Alfresco content reposito
 If needed, some resources about ARender for Alfresco are available below:
 
 - [See Alfresco documentation](/docs/arender/guides/configurations/web-ui/connectors/alfresco/features-share)
-- [Download Alfresco plugin](https://artifactory.arondor.cloud/artifactory/webapp/#/artifacts/browse/tree/General/arondor-release/com/arondor/arender/arender-for-alfresco-share-plugin//arender-for-alfresco-share-plugin-.jar)
+- [Download Alfresco plugin](https://artifactory.arondor.cloud/artifactory/webapp/#/artifacts/browse/tree/General/arondor-release/com/arondor/arender/arender-for-alfresco-share-plugin/2023.16.0/arender-for-alfresco-share-plugin-2023.16.0.jar)
 
 The share plugin must be /tomcat/shared/lib. Insure these paths are listed in shared.lib property in Alfresco component's **catalina.properties**.
 

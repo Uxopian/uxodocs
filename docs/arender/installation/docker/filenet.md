@@ -11,12 +11,12 @@ content_hash: ecd115714ca94bad1613dde4ea91c6a98d362230603b7fdb90914eff214c6cc4
 ### Configuration with a service account
 
 Since v2023.4.0, we have created dedicated Docker image for ARender UI Spring Boot with FileNet connector
-named arender-ui-springboot:-filenet.
+named arender-ui-springboot:2023.16.0-filenet.
 
 To run the container, execute:
 
 ```bash
-$> docker run /arender-ui-springboot:-filenet \
+$> docker run artifactory.arondor.cloud:5001/arender-ui-springboot:2023.16.0-filenet \
 -e ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD="LoginPasswordObjectStoreProvider"\
 -e ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL="http://<filenet-url>:<filent-port>/wsi/FNCEWS40MTOM/"\
 -e ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN=<account-name>\
@@ -34,7 +34,7 @@ version: "3.7"
 
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:-filenet
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:2023.16.0-filenet
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
       # You can configure ARender properties through environment variable or with the configuration file in a volume like further down
@@ -49,7 +49,7 @@ services:
       - ./volume/configurations/arender-custom-server.properties:/home/arender/configurations/arender-custom-server.properties
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:2023.16.0
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
@@ -60,7 +60,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer:2023.16.0
     hostname: drn-service
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
@@ -72,7 +72,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:2023.16.0
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -83,7 +83,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:2023.16.0
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"

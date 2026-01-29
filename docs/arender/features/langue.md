@@ -12,4 +12,4 @@ Arabic, German, English, Spanish, French, Italian, Portuguese, Chinese, Brazilia
 
 It is also possible to add new languages to the ARender WAR or EAR deployment by adding a label file.
 
-To do this, copy the English translation of the labels located in arondor-arender-hmi-spring-boot-.jar\BOOT-INF\classes\labels\ARenderLabels_en.properties and create your own translation by renaming it with the locale you want to see supported.
+To do this, copy the English translation of the labels located in arondor-arender-hmi-spring-boot-2023.16.0.jar\BOOT-INF\classes\labels\ARenderLabels_en.properties and create your own translation by renaming it with the locale you want to see supported.

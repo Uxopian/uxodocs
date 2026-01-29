@@ -97,7 +97,7 @@ arender.server.cache.hazelCast.config.path=
 arender.server.routing.table.type=Hazelcast
 ```
 
-See below the default Hazelcast configuration for ARender :
+See below the default Hazelcast configuration for ARender (arondor-arender-hmi-springboot-2023.16.0.jar/BOOT-INF/classes/hazelcast.yaml):
 
 ```cfg
 hazelcast:

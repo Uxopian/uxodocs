@@ -145,7 +145,7 @@ For rendition log files, you can find them in the following locations:
 
 | Service       |                               Path                                |                                    Detail |
 | :------------ | :---------------------------------------------------------------: | ----------------------------------------: |
-| Web-UI Server | arondor-arender-hmi-spring-boot-.jar\BOOT-INF\classes\logback.xml | Logs dedicated to the presentation server |
+| Web-UI Server | arondor-arender-hmi-spring-boot-2023.16.0.jar\BOOT-INF\classes\logback.xml | Logs dedicated to the presentation server |
 
 ### Rendition
 
