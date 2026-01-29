@@ -69,7 +69,7 @@ In addition, the broker ensures the persistence and traceability of the data car
   style={{width: '60%'}}
 />
 
-## Fast2 objects
+## <i className="fas fa-shopping-basket"></i> Fast2 objects
 
 ### Folder
 
