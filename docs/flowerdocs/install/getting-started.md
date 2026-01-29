@@ -3,74 +3,105 @@ title: Before getting started
 sidebar_position: 1
 date: "2000-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-29T08:51:52.623Z'
   author: CI/CD Bot
-content_hash: 7c0254d7b5b6efdccfbac792fa1914469534bac3d2698935cb053807e36eca76
+content_hash: 4a6474f8e08039e7f7310723cf4de40c49dfef5386e9ede477d20ed63bc2b55f
 ---
 
-# Presentation layer
+:::info
+This section describes the prerequisites for the **FlowerDocs GUI**, **FlowerDocs Core** and applications.
+:::
 
-## **FlowerDocs GUI**
+# Prerequisites
 
-**FlowerDocs GUI** is a WEB application providing the presentation layer integrating the ARender viewer interface.
-It is based on [Spring Boot](https://spring.io/projects/spring-boot) and WEB technologies (HTML, JavaScript...).
+Be careful to harmonise the date/time configuration on the various servers making up the target architecture by using the same timezone (FlowerDocs servers but also all third-party components). Date gap can cause problems when FlowerDocs checks the validity of a token (SSO, Web Services, etc.).
 
-Default port : 8080. It can be overridden using the `server.port` property in the `gui.properties` file.
+FlowerDocs must only be used in HTTPS.
 
-##
+## Operating system
 
-[](https://arender.io/), developed by [Uxopian](https://www.uxopian.com), is a WEB application integrated into **FlowerDocs GUI** as an `iframe`. It visualizes documents generated via ARender Rendition Server.
+### Linux
 
-Default port : 8080. It can be overridden using the `server.port` property in the `application.properties` file.
+Installing a FlowerDocs platform requires Linux servers. FlowerDocs is supported and qualified on the Amazon Linux 2023 system.
 
-# Service layer
+\*Any other Linux system is deemed to be functional if it can install the required version of Java.
 
-## **FlowerDocs Core**
+## Application components
 
-**FlowerDocs Core** is the **ECM engine**. It is a Java Web application based on [Spring Boot](https://spring.io/projects/spring-boot). It can be used to manage very large quantities of documents (add, delete, update documents, search, dynamic folders, etc.). It exposes **SOAP** and **REST** Web Services that are consumed by the various clients:
+Java Runtime 11 must be installed to run FlowerDocs.
 
-- the native Web Interface **FlowerDocs GUI**
-- third-party applications
-- third-party applications, etc.
+This documentation does not cover the installation of the ARender rendition server (version 2.8.3). It must therefore be installed beforehand and be accessible via HTTP or HTTPS protocol from **FlowerDocs GUI**, **FlowerDocs Core**.
 
-For data persistence, OpenSearch is used for the metadata part and a storage space for the document content part. Communication with OpenSearch is via its REST API.
-Document content is stored according to need, and the exchange protocol depends on the technology being studied.
+### OpenSearch and Redis
 
-Integration with a corporate directory (LDAP(s)-type) is required to access information linked to the application's users.
+You need to install OpenSearch and Redis, which are prerequisites for FlowerDocs to work properly.
+OpenSearch and Redis versions corresponding to FlowerDocs versions are indicated at the beginning of the release notes.
 
-Default port : 8081. It can be overridden using the `server.port` property in the `core.properties` file.
+## Sizing
 
-## ARender Rendition Server
+The architecture depends on the estimated load, but it is recommended to have at least :
 
-[ARender Rendition](https://arender.io/), a product developed by [Uxopian](https://www.uxopian.com), is the rendition engine used to generate images corresponding to the various pages of the documents to be visualized.
-This engine exposes a REST API enabling the various elements required for visualization to be retrieved from the client workstation.
+| Component                    | vCPU | RAM  | Note                                                                                                |
+| ---------------------------- | ---- | ---- | --------------------------------------------------------------------------------------------------- |
+| **FlowerDocs**               | 2    | 4 Go | The **FlowerDocs GUI**, **FlowerDocs Core** and applications must be installed on separate servers. |
+| **ARender Rendition Server** | 4    | 8 Go | Rendition server sizing is strongly linked to the typology and number of documents viewed.          |
 
-Default port : 8761.
+The sizing of a FlowerDocs platform needs to be carefully considered in order to achieve the best possible performance.
+The most important factors are the number of concurrent users and the number of documents viewed.
 
-# Data
+We recommend isolating each component on separate machines:
 
-## OpenSearch
+- **FlowerDocs Core**
+- **FlowerDocs GUI**
+-
+- ARender Rendition
+- Redis
+- OpenSearch
 
-OpenSearch engine, a standalone Java application, is used to index and search data. It provides a distributed, multi-entity search engine, as well as NoSQL document storage. FlowerDocs uses these features to store document metadata in the NoSQL part and advanced search engine capabilities for queries on documents, tasks and folders.
+## Encoding
 
-Communication is via the OpenSearch Transport Protocol, based on a specific TCP-based module.
+It is necessary to use UTF-8 encoding on component installation servers, to ensure proper handling of accented letters and other characters in the application.
 
-Default port : 9200.
+# Applications
 
-## Content storage
+The FlowerDocs platform requires the installation of the following executable JARs:
 
-The **contents** of the documents (PDF, Microsoft Office Word, etc.) managed by FlowerDocs are not stored in OpenSearch but on a dedicated storage space which can be :
+- `flower-docs-gui-webapp-2.8.3.jar`
+- `flower-docs-core-webapp-2.8.3.jar`
+- `arondor-arender-hmi-spring-boot-4.8.20.jar`
 
-- a NAS-type file system via **NFS**.
-- an object storage service such as **AWS S3** via the REST APIs made available.
+These applications can be configured by property files located in the same directory as the application.
 
 <br/>
 
-![Architecture example](/img/flowerdocs/documentation/fd-architecture.png)
+Applications can be configured via the following files:
 
-## Redis
+| Application         | Configuration file name            |
+| ------------------- | ---------------------------------- |
+| **FlowerDocs Core** | `core.properties`                  |
+| **FlowerDocs GUI**  | `gui.properties`                   |
+|                     | `arender-custom-server.properties` |
 
-Redis is an in-memory database used mainly as a message broker.
-With FlowerDocs, it is used to manage certain caches as well as for its OperationHandler asynchronous processing queue mechanism.
+The FlowerDocs ARender connector `flower-docs-arender-hmi-2.8.3.jar` is also required for the application to be able to retrieve documents stored in FlowerDocs.
 
-Default port : 6379.
+:::info
+The necessary configuration is described on the dedicated page [here](/docs/flowerdocs/install/config/arender-hmi-config).
+:::
+
+# Verification of downloaded application integrity
+
+After downloading the application, check the integrity of the executable before installing it. It is important to check that it has not been altered (corrupted or fraudulently modified `.jar` file).
+<br/><br/>
+
+To do this, you need to calculate the file's hash using the `SHA-256` hash function, so that you can verify it.
+
+- Use the command: `sha256sum {fileName}`.
+- Then retrieve the result of the command, which corresponds to the file's fingerprint.
+- Check that the fingerprint of each downloaded file is equal to the content of the corresponding `.sha256` file.
+
+# Download
+
+<br/>
+:::info
+Would you like to download another version? Go to [old releases](../../../releases).
+:::

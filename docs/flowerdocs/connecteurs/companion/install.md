@@ -3,9 +3,9 @@ title: Installation
 sidebar_position: 2
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-27T09:19:20.024Z'
+  date: '2026-01-29T08:51:52.623Z'
   author: CI/CD Bot
-content_hash: 85773beb03ddfb8689a566ec0146edae51e3053527ae29e6104d5d0560bea8ef
+content_hash: 40d2d1e3989e15092bc9db2e0f232df4aab7526c8aa36027003fb751f3cec6f7
 ---
 
 # Install FlowerDocs Companion

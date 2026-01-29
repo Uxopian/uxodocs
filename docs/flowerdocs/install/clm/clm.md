@@ -3,9 +3,9 @@ title: Command Line Manager (CLM)
 sidebar_position: 2
 date: "2004-03-21T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-01-29T08:51:52.623Z'
   author: CI/CD Bot
-content_hash: 35dd7642525e45c077ba5f9f76052b7ea8bc65ac9226e0d0eca9b7f0920b6787
+content_hash: 56dd232944a1c22c661b75c959bf6f7e539f4188e34f111031a1474b6697f909
 ---
 
 This tool lets you interact with FlowerDocs from the command line. It offers a range of features:

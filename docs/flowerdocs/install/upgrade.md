@@ -1,6 +1,6 @@
 ---
 title: Version upgrade
-sidebar_position: 7
+sidebar_position: 3
 date: "2000-03-31T13:20:01+02:00"
 last_update:
   date: '2026-01-26T13:36:00.326Z'

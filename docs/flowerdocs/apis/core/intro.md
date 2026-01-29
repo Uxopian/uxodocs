@@ -3,9 +3,9 @@ title: Overview
 sidebar_position: 1
 date: "2000-01-01T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-01-29T08:51:52.623Z'
   author: CI/CD Bot
-content_hash: 3c0dd100daaab12a5975ceefc8ba22868d1a75715bbadbd4484ab8ed236f67ef
+content_hash: 9ecdda986674065716ec3c5a7ab5e8784efed9fff8d1448e1bb70d8a1006482e
 ---
 
 **FlowerDocs Core** exhibits a set of services to facilitate integration with third-party applications.

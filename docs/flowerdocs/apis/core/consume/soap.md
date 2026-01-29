@@ -2,9 +2,9 @@
 title: SOAP
 sidebar_position: 3
 last_update:
-  date: '2026-01-27T09:19:20.024Z'
+  date: '2026-01-29T08:51:52.623Z'
   author: CI/CD Bot
-content_hash: ac104beae85b195ef169e5e416f10296a68dc262de5f403cf2079e1035d814ea
+content_hash: c016f4edb1dfa26ab1ba39df50c52cf307120ba092c665017da59698cf4c5c1e
 ---
 
 [WSDL](https://www.w3schools.com/xml/xml_wsdl.asp) defines the service contract for web services **SOAP** available at FlowerDocs Core.

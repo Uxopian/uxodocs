@@ -4,9 +4,9 @@ sidebar_position: 3
 description: Consume web services using the Java client.
 date: "2001-04-01T13:20:01+02:00"
 last_update:
-  date: '2026-01-28T14:38:12.740Z'
+  date: '2026-01-29T08:51:52.623Z'
   author: CI/CD Bot
-content_hash: 5efb4f0b2161845c41e5a4d39c5e5a47de770f7f514b106af037932798f6eb05
+content_hash: a3e1691cbd82d91ec594a0871a85efd9c5592482f3e3a979042fb981d1a7877b
 ---
 
 :::info
