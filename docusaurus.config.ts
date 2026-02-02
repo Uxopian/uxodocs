@@ -60,6 +60,7 @@ const config: Config = {
                 showLastUpdateTime: true,
             },
         ],
+        /*
         [
             "@docusaurus/plugin-content-docs",
             {
@@ -72,6 +73,7 @@ const config: Config = {
                 showLastUpdateTime: true,
             },
         ],
+        */
         [
             "@docusaurus/plugin-content-docs",
             {
@@ -84,6 +86,7 @@ const config: Config = {
                 showLastUpdateTime: true,
             },
         ],
+        /*
         [
             "@docusaurus/plugin-content-docs",
             {
@@ -108,6 +111,7 @@ const config: Config = {
                 showLastUpdateTime: true,
             },
         ],
+        */
         [
             require.resolve("./plugins/docusaurus-plugin-papersaurus/lib/index.js"),
             {
