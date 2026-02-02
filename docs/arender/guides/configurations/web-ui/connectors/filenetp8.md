@@ -616,7 +616,7 @@ The servlet _updateDocumentMetadataServlet_ is dedicated to updating Filenet doc
 Here is an example of the POST call, where _&#123;documentId&#125;_ is to be replaced by the documentId of the targeted document :
 
 ```cfg
-`http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}`
+`http://&#123;HOST_ARENDER&#125;/arendergwt/updateDocumentMetadataServlet?uuid=&#123;documentId&#125;`
 ```
 
 Then, the body of the request will accept a JSON structure defining each metadata name to modify and the associated value. The _propertyKey_ correspond to the _symbolicName_ and _displayName_ properties of Filenet. The _propertyValue_ is the value that the metadata will take.
