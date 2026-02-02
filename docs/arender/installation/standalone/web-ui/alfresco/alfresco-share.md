@@ -18,14 +18,14 @@ and the arender for ACS plugin here: [arender-for-alfresco-ACS-plugin-2023.16.0.
 ## Re-deployment of the ARender Web-UI server in Alfresco
 
 If your Alfresco and Share module does not share the same tomcat, you will have to drop the plugin
-**arender-for-alfresco-share-plugin-&#123;version&#125;.jar** and **arender-for-alfresco-ACS-plugin-&#123;version&#125;.jar** in the _lib/_ folder of each of these
+**arender-for-alfresco-share-plugin-\{version\}.jar** and **arender-for-alfresco-ACS-plugin-\{version\}.jar** in the _lib/_ folder of each of these
 deployed applications.
 
-If they are deployed in the same tomcat, then drop the **arender-for-alfresco-share-plugin-&#123;version&#125;.jar** and **arender-for-alfresco-ACS-plugin-&#123;version&#125;.jar** plugin into _&#123;alfresco_tomcat&#125;/shared/lib_.
+If they are deployed in the same tomcat, then drop the **arender-for-alfresco-share-plugin-\{version\}.jar** and **arender-for-alfresco-ACS-plugin-\{version\}.jar** plugin into _\{alfresco_tomcat\}/shared/lib_.
 
 The two plugins respectively allow to extend the ACS REST API used by ARender and the integration of the ARender viewer in share.
 
-Add the following lines to the _&#123;alfresco_tomcat&#125;/shared/classes/alfresco/web-extension/**share-config-custom.xml**_ file between the alfresco-config attributes.
+Add the following lines to the _\{alfresco_tomcat\}/shared/classes/alfresco/web-extension/**share-config-custom.xml**_ file between the alfresco-config attributes.
 
 ```xml
 <config evaluator="string-compare" condition="Arender">

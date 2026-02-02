@@ -37,7 +37,7 @@ arender.server.external.custom.labels.path=
 
 ### Create your own custom localized labels
 
-Typical resource files are named as **CustomLabels\_&#123;lang&#125;.properties**, which _lang_ corresponds to locale code :
+Typical resource files are named as **CustomLabels\_\{lang\}.properties**, which _lang_ corresponds to locale code :
 
 - ar (Arabic)
 - de (German)
@@ -72,7 +72,7 @@ hello=Hola Mundo
 hello=Bonjour le monde
 ```
 
-To use this custom label, you will need to reference it with the tag **customLabels#&#123;label-key&#125;**.
+To use this custom label, you will need to reference it with the tag **customLabels#\{label-key\}**.
 
 Since version 2023.0.0:
 
