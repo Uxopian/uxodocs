@@ -52,7 +52,7 @@ In this module, we will need the following two dependencies:
 </project>
 ```
 
-````
+```
 
   </TabItem>
 </Tabs>
@@ -84,7 +84,7 @@ public class CustomTokenHelper extends JWTTokenHelper
         return super.generate(user, validityTime);
 
 
-````
+```
 
   </TabItem>
 </Tabs>

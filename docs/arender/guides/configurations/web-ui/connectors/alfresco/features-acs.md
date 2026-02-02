@@ -41,7 +41,7 @@ Rights for each role can be changed applying configuration on ARender side to cu
 
 This file contains various ARender rights with properties and are associated with Alfresco roles, by default:
 
-````cfg
+```cfg
 
 
 ```properties
@@ -50,7 +50,7 @@ arender.server.alfresco.role.modify.annotation=SiteManager,SiteCollaborator
 arender.server.alfresco.role.modify.own.annotation=SiteContributor
 arender.server.alfresco.role.create.redaction=SiteManager,SiteCollaborator,SiteContributor
 arender.server.alfresco.role.delete.redaction=SiteManager,SiteCollaborator
-````
+```
 
 | Property                                           | Right                                  |
 | -------------------------------------------------- | -------------------------------------- |

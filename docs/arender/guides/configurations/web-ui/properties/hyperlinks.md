@@ -39,7 +39,7 @@ The following properties defines the annotation behaviours when creating hyperli
     | Set the legacy hyperlink creation. If true, the target page starts from index 1 otherwise it starts from index 0. | annotation.hyperlink.use.legacy.creation    | Boolean |
     | If true, clicking on a hyperlink leading to another document will open this document in a new tab.                | annotation.hyperlink.open.document.tab      | Boolean |
 
-````cfg
+```cfg
 
 
 ```properties
@@ -49,4 +49,4 @@ annotation.hyperlink.externe.target.enabled=true
 annotation.hyperlink.target.show.timeout=10000
 annotation.hyperlink.use.legacy.creation=false
 annotation.hyperlink.open.document.tab=true
-````
+```

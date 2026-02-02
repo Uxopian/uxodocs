@@ -59,7 +59,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 </project>
 ```
 
-````
+```
 
 # Spring Boot application
 
@@ -73,7 +73,7 @@ package com.flower.samples;
 ```javascript
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-````
+```
 
 ```javascript
 import com.flower.docs.FlowerDocsClient;

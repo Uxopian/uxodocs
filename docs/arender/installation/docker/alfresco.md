@@ -29,9 +29,9 @@ The share plugin must be /tomcat/shared/lib. Insure these paths are listed in sh
 
 To inform share about the location of the ARender UI server, add the following lines in Alfresco share configuration file.
 
-```````````XML
+```XML
   <config evaluator="string-compare" condition="Arender">
-    <url>``````````http://{arender-web-ui-server}</url>``````````
+    <url>http://{arender-web-ui-server}</url>
     <!-- example: <url>http://localhost</url> -->
   </config>
-```````````
+```

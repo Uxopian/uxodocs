@@ -64,7 +64,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 </project>
 ```
 
-````
+```
 
 ## Spring Boot application
 
@@ -90,7 +90,7 @@ public class SecuredGUIPlugin
 		SpringApplication.run(SecuredGUIPlugin.class, args);
 
 
-````
+```
 
 Here, the `@FlowerDocsClient` annotation automatically configures:
 
@@ -102,16 +102,16 @@ To configure the application, this `application.properties` file in the `src/mai
 
 ## Configuration
 
-````bash
+```bash
 
 ```properties
 spring.application.name=secured-gui-plugin
 server.port=2802
 server.servlet.context-path=/secured
 ws.url=http://localhost:8081/core/services
-````
+```
 
-````
+```
 :::info
 The other configuration options offered by the Spring Boot framework can also be used.
 This makes it possible to outsource application configuration.
@@ -147,6 +147,6 @@ public class FlowerRestController
 		return "documents: " + documentService.search(new SearchRequest()).getFound();
 
 
-````
+```
 
 Here, the `documentService` document management service is used to determine the total number of documents.

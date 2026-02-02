@@ -23,7 +23,7 @@ To migrate the log4j.properties files to its logback equivalent, you can use the
 
 The log4j configuration file for the Web-UI part looked like this :
 
-````cfg
+```cfg
 
 
 ```properties
@@ -31,7 +31,7 @@ log4j.rootCategory=WARN, default
 log4j.category.com.arondor = INFO
 log4j.category.com.arondor.common.management = FATAL
 log4j.category.arender-startup=INFO
-````
+```
 
 log4j.category.com.arondor.viewer.common.logger = INFO, perf
 

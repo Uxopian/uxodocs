@@ -1080,13 +1080,13 @@ You can find the available icons here: https://fontawesome.com/icons
 
 ### Example
 
-````xml
+```xml
 Example with the free text annotation button:
 
 ```
 
-<bean id="addFreeTextAnnotationButton"
 ```javascript
+<bean id="addFreeTextAnnotationButton"
     class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
     <constructor-arg value="addFreeTextAnnotationButton" />
     <property name="enabled" value="${topPanel.annotationMenu.freetext}" />
@@ -1115,7 +1115,7 @@ Example with the free text annotation button:
         </bean>
     </property>
 </bean>
-````
+```
 
 ![image](/img/arender/custom_icon/font_awesome.png)
 
@@ -1173,6 +1173,6 @@ Example with the free text annotation button:
         </bean>
     </property>
 </bean>
-````
+```
 
 ![image](/img/arender/custom_icon/mdi.png)

@@ -126,7 +126,7 @@ file.encrypt.passphrase=MyDerivedKey
 
 In order to encrypt a directory using a keystore strategy, the parameter to be supplied is `conf` with the value of the path to a configuration file containing the information mentioned in the [Keystore](/docs/flowerdocs/config/core/securite/files#keystore) section and enable encryption:
 
-````properties
+```properties
 #Enable encryption
 file.encrypt.enabled=true
 
@@ -137,7 +137,7 @@ key-store.path=file:PATH
 key-store.password=****
 file.encrypt.key.alias=my-file-encryption-key-alias
 file.encrypt.key.password=****
-````
+```
 
 ```
 <br/>

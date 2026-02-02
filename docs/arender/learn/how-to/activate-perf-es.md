@@ -14,7 +14,7 @@ You can since ARender 4.0.1 send directly each log fragment to the disk
 
 Alter, corresponding to your need, the following properties in:
 
-````cfg
+```cfg
 #activate/deactivate the use of the disk based logger
 arender.server.perf.logger.use=true
 
@@ -28,7 +28,7 @@ arender.server.perf.es.index.name=arender-performance
 
 #activate/deactivate the propagation to elastic search of the log messages
 arender.server.perf.es.use=false
-````
+```
 
 ## At rendition side
 

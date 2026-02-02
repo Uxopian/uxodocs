@@ -57,7 +57,7 @@ In this case, the name, description and category will make it easier to use the 
 <property name="title" value="Dossiers Clients" />
 <property name="description" value="Rechercher un dossier client par sa référence, son nom ou son prénom."/>
 
-````
+```
 <br/>
 Categorize the search using the `categorieSelectorPresenter` property:
 
@@ -73,7 +73,7 @@ Categorize the search using the `categorieSelectorPresenter` property:
 				</property>
 		</bean>
 	</property>
-````
+```
 
 <br/>
 
@@ -88,7 +88,7 @@ The `keywordCriteriaPresenter` keyword search will not be used. Disable this sea
 	</bean>
 </property>
 
-````
+```
 <br/>
 
 All the properties described in the rest of this page must be placed in the `AdvancedCriteriaPresenter` bean.
@@ -101,7 +101,7 @@ Define advanced search with the `AdvancedCriteriaPresenter` property:
     <bean class="com.flower.docs.gui.client.search.criteria.advanced.AdvancedCriteriaPresenter" />
 </property>
 
-````
+```
 
 <br/>
 

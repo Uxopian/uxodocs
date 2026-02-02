@@ -29,14 +29,14 @@ default.url.parser.use.timeZone.for.ids=true
 Non-Latin characters in subject and attachment names may not be displayed correctly.
 To enable proper rendering, you must configure the _document-converter_ rendering module as follows :
 
-````cfg
+```cfg
 ```properties
 emltopdf.encode.header.with.body.encoding=true
 emltopdf.config.filter.special.characters.regex=
 emltopdf.config.filter.replacement.character=
-````
+```
 
-````
+```
 
 
 
@@ -48,7 +48,7 @@ the user which will be used to determine the correct encoding to apply.
 
 ``` cfg
 default.url.parser.use.locale.for.ids=true
-````
+```
 
 ## Header rendering language
 

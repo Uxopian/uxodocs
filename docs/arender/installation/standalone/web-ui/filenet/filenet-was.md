@@ -77,9 +77,9 @@ Websphere must be configured in parent-last which means it has to load its libra
 
 You can now access a Filenet document via a URL formed like this:
 
-```````````html
-``````````http://{server_arender}:{port_arender}/ARender/?id={id}&objectStoreName={ObjectStoreName}``````````
-```````````
+```html
+http://{server_arender}:{port_arender}/ARender/?id={id}&objectStoreName={ObjectStoreName}
+```
 
 ![filenet](/img/arender/filenet/filenet-new-01.png)
 

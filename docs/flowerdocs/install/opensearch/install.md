@@ -59,14 +59,14 @@ To install OpenSearch as a `systemd` service, the following file must be created
 
 :::note[opensearch.service]
 
-````sh
+```sh
 [Unit]
 
 ```properties
 Description=opensearch
 Wants=network-online.target
 After=network-online.target
-````
+```
 
 [Service]
 
@@ -132,7 +132,7 @@ SuccessExitStatus=143
 [Install]
 WantedBy=multi-user.target
 
-````
+```
 :::
 
 
@@ -144,7 +144,7 @@ To have the service started automatically by systemd, run the following commands
 
 ```bash
 systemctl enable opensearch.service
-````
+```
 
   </TabItem>
 </Tabs>

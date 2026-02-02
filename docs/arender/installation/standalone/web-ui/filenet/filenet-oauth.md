@@ -45,7 +45,7 @@ ARender installation is as simple as:
 4. Copy the connector into the **lib/** folder of the step 2
 5. Edit the **arender-custom-server.properties** in the **configurations/** folder and add the following properties:
 
-````cfg
+```cfg
 # Enable OAuth2
 arender.server.oauth2.enabled=true
 # Set authentication method to use for FileNet
@@ -54,7 +54,7 @@ arender.server.oauth2.enabled=true
 ```properties
 arender.server.filenet.authentication.method=oauth2ObjectStoreProvider
 arender.server.filenet.ce.url=http://localhost:9080/wsi/FNCEWS40MTOM/
-````
+```
 
 6. Create a **application.yml** file in the root of the installation folder and edit the file like below.
 

@@ -17,12 +17,12 @@ time.**
 
 Add these lines below in the following file:
 
-````cfg
+```cfg
 
 ```properties
 arender.server.rendition.hosts=https://RENDITION_HOSTNAME:RENDITION_PORT/
 arender.rest.ssl.custom.use=true
-````
+```
 
 ## On rendition server side
 

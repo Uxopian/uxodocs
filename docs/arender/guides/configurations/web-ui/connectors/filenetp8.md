@@ -53,13 +53,13 @@ protocol:
 | --------------------- | --------------------------------------------- |
 | content_engine_server | URI of Content Engine using the IIOP protocol |
 
-````cfg
+```cfg
 
 
 ```properties
 arender.server.filenet.authentication.method=jaasObjectStoreProvider
 arender.server.filenet.ce.url=iiop://&#123;content_engine_server&#125;:2809/FileNet/Engine
-````
+```
 
 ### Technical account
 
@@ -119,7 +119,7 @@ Modify the bean having the id urlFilter (by default configured with JAASUserFilt
 | p8_identifiant        | Username of technical account                            |
 | p8_password           | Password of technical account                            |
 
-````cfg
+```cfg
 
 
 ```properties
@@ -127,7 +127,7 @@ arender.server.filenet.authentication.method=loginPasswordObjectStoreProvider
 arender.server.filenet.ce.url=http://&#123;content_engine_server&#125;/wsi/FNCEWS40MTOM/
 arender.server.filenet.ce.login=&#123;p8_identifiant&#125;
 arender.server.filenet.ce.password=&#123;p8_password&#125;
-````
+```
 
 ## Configuration the annotation format to be saved in FileNet
 
@@ -615,9 +615,9 @@ The servlet _updateDocumentMetadataServlet_ is dedicated to updating Filenet doc
 
 Here is an example of the POST call, where _&#123;documentId&#125;_ is to be replaced by the documentId of the targeted document :
 
-```````````cfg
-``````````http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}``````````
-```````````
+```cfg
+`http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}`
+```
 
 Then, the body of the request will accept a JSON structure defining each metadata name to modify and the associated value. The _propertyKey_ correspond to the _symbolicName_ and _displayName_ properties of Filenet. The _propertyValue_ is the value that the metadata will take.
 

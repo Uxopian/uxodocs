@@ -57,7 +57,7 @@ To suggest values for a field to the user, you can use the function `suggest(fie
 The `suggestions` to be passed as parameters are composed of a symbolic name (`setValue(symbolicName)`) and a label (`setName(displayName)`).
 So if the user selects one of the suggestions, the form will be submitted with the symbolic name.
 
-````javascript
+```javascript
 function buildSuggestion(name, value){
 	var suggestion = new LookupResult();
 	suggestion.setName(name);
@@ -66,14 +66,12 @@ function buildSuggestion(name, value){
 
 var suggestions = new Array();
 
-```properties
 suggestions[0] = buildSuggestion("name1", "value1");
 suggestions[1] = buildSuggestion("name2", "value2");
-````
 
 formAPI.suggest("MailObject", suggestions);
 
-````
+```
 
 # Choice lists
 
@@ -97,14 +95,12 @@ function buildAllowedValue(symbolicName, label) {
 
 var restrictedAllowedValues = new Array();
 
-```properties
 restrictedAllowedValues[0] = buildAllowedValue("symbolicName1", "firstLabel");
 restrictedAllowedValues[1] = buildAllowedValue("symbolicName2", "secondLabel");
-````
 
 formAPI.setAllowedValues("BillType", restrictedAllowedValues);
 
-````
+```
 
 # Field status
 
@@ -125,7 +121,7 @@ __Example:__ Changing the visibility of a field in an indexing form
 
 ```javascript
 formAPI.setVisible("BillType", false);
-````
+```
 
 ## Form validity change subscription
 

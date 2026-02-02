@@ -214,7 +214,7 @@ getARenderJS()
     | getAvailableDocLinkDocumentId()             | Get the available document Id in docLink mode to know which document is not disabled                                  |
     | createDocLink(pageNumber)                   | Create the docLink at the desired page. The value of _pageNumber_ starts from 0, which corresponds to the first page. |
 
-````js
+```js
 /*
 * Register to a selected text in docLink mode
 *
@@ -259,8 +259,6 @@ getARenderJS().getAnnotationJSAPI().getAvailableDocLinkDocumentId();
 ```javascript
 var pageNumber = 3; // This value is corresponding to the 4th page
 getARenderJS().getAnnotationJSAPI().createDocLink(pageNumber);
-````
-
 ```
 
 ```
