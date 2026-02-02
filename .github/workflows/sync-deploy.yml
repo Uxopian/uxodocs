@@ -77,7 +77,9 @@ jobs:
 
             # Liste des branches versionnées pour ce produit (test-product-v*)
             mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
-              | grep "^origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
+              | grep "origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
+
+            echo "DEBUG: Branches found for ${product}: ${branches[*]}"
 
             for br in "${branches[@]}"; do
               ver="${br##test-${product}-}"   # ex: v1, v2
@@ -128,6 +130,9 @@ jobs:
                 
                 # Check out the docs directory from the latest branch
                 git checkout "origin/$latest_branch" -- "docs/${product}"
+                
+                echo "DEBUG: Content of docs/${product} after checkout:"
+                ls -F "docs/${product}" || echo "Error listing docs/${product}"
             else
                 echo "-> No version branches found, restoring original staging content"
                 rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
