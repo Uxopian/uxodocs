@@ -118,8 +118,20 @@ jobs:
               npx docusaurus "docs:version:${product}" "${ver}"
             done
 
-            # Restaure le current d'origine
-            rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
+            # Populate 'current' content from the latest version branch
+            if [ ${#branches[@]} -gt 0 ]; then
+                latest_branch="${branches[-1]}"
+                echo "-> Fetching 'current' content from latest branch: $latest_branch"
+                
+                # Ensure the directory is clean
+                rm -rf "docs/${product}"
+                
+                # Check out the docs directory from the latest branch
+                git checkout "origin/$latest_branch" -- "docs/${product}"
+            else
+                echo "-> No version branches found, restoring original staging content"
+                rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
+            fi
           done
 
           # Restore du sidebar current original
