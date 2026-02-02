@@ -41,8 +41,8 @@ Access to [http://localhost:8080/arondor-arender-hmi-VERSION/](http://localhost:
 :::note
 The URL to use should be built like this: `http://{hmiHostName}:{portHMI}/{ARenderContext}/`:
 
-- *{hmiHostName}*: the host name of the application server
-- *{portHMI}*: the application server port
-- *{ARenderContext}*: the root context of the HMI in the application server
+- `{hmiHostName}`: the host name of the application server
+- `{portHMI}`: the application server port
+- `{ARenderContext}`: the root context of the HMI in the application server
 
 :::

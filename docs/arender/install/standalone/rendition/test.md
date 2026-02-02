@@ -1,18 +1,18 @@
 ---
 title: "Testing"
 last_update:
-  date: '2026-02-02T12:40:13.105Z'
+  date: '2026-02-02T13:09:05.172Z'
   author: CI/CD Bot
-content_hash: 0f209488321a77987d908e5f4b77d95391f3eb3723d1576415d9f0826f83a242
+content_hash: e046dd399173e3ef80d4162b28818a951389b49ffb0e03b3fc150bbaacc17ebb
 ---
 
 The test jar «
-arondor-arender-rendition-tester-**&#123;VERSION-NUMBER&#125;**-jar-with-dependencies.jar
+arondor-arender-rendition-tester-`VERSION_NUMBER`-jar-with-dependencies.jar
 », allow the user to launch some functional test on rendition server
 with following options **as admin**:
 
 ```bash
-$> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar
+$> java -jar arondor-arender-rendition-tester-VERSION_NUMBER.jar
 ```
 
 | Option | Description                                                                                                                           |
@@ -37,7 +37,7 @@ server. To launch the test, all you need is, via the console, go to jar
 location and type the following command:
 
 ```bash
-$> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -v report_ARender.csv
+$> java -jar arondor-arender-rendition-tester-VERSION_NUMBER.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -v report_ARender.csv
 ```
 
 - adapt the port 8761 depending on your configuration
@@ -51,7 +51,7 @@ To launch the test, all you need is, via the console, go to jar location
 and type the following command:
 
 ```bash
-$> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -l -f ./fichiers.txt -v rapport_ARender.csv
+$> java -jar arondor-arender-rendition-tester-VERSION_NUMBER.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -l -f ./fichiers.txt -v rapport_ARender.csv
 ```
 
 ## Analysis report
@@ -70,7 +70,7 @@ $> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar -d http://ren
 
 ### Statistics
 
-- `[Image_IM]()`&#36;{width}_0: renditions of pages of width &#36;{width} (px)
+- `[Image_IM]()`WIDTH`_0`: renditions of pages of width `WIDTH` (px)
 - Image: renditions of all pages
 - Image_PageContents: extraction of page textual content
 - Fetch_DocumentPageLayout: extraction of document layout

@@ -18,7 +18,7 @@ You can launch ARender rendition engine in command line:
 
 <TabItem value="Windows" label="Windows">
 In Windows based OS using **ARenderConsole.bat** in the folder
-rendition-engine-package-{VERSION-NUMBER}:
+rendition-engine-package-`{VERSION-NUMBER}`:
 
 ```cmd
 $> .\ARenderConsole.bat
@@ -28,7 +28,7 @@ $> .\ARenderConsole.bat
 <TabItem value="Linux" label="Linux">
 
 In Linux based OS using **ARenderConsole.sh** in the folder
-rendition-engine-package-{VERSION-NUMBER} (give the file exec rights):
+rendition-engine-package-`{VERSION-NUMBER}` (give the file exec rights):
 
 ```bash
 $> ./ARenderConsole.sh
