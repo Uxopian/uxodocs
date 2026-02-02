@@ -100,6 +100,33 @@ const config: Config = {
                 highlightSearchTermsOnTargetPage: true,
             },
         ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "fast2",
+                path: "docs/fast2",
+                routeBasePath: "docs/fast2",
+                sidebarPath: require.resolve("./sidebars.ts"),
+            },
+        ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "flowerdocs",
+                path: "docs/flowerdocs",
+                routeBasePath: "docs/flowerdocs",
+                sidebarPath: require.resolve("./sidebars.ts"),
+            },
+        ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "uxopian-ai",
+                path: "docs/uxopian-ai",
+                routeBasePath: "docs/uxopian-ai",
+                sidebarPath: require.resolve("./sidebars.ts"),
+            },
+        ],
     ],
 
     themeConfig: {
@@ -129,24 +156,24 @@ const config: Config = {
                     position: "right",
                     className: "nav-github",
                 },
-                // {
-                //     type: "docsVersionDropdown",
-                //     docsPluginId: "fast2",
-                //     position: "left",
-                //     className: "verdd verdd--fast2",
-                // },
-                // {
-                //     type: "docsVersionDropdown",
-                //     docsPluginId: "flowerdocs",
-                //     position: "left",
-                //     className: "verdd verdd--flowerdocs",
-                // },
-                // {
-                //     type: "docsVersionDropdown",
-                //     docsPluginId: "uxopian-ai",
-                //     position: "left",
-                //     className: "verdd verdd--uxopian-ai",
-                // },
+                {
+                    type: "docsVersionDropdown",
+                    docsPluginId: "fast2",
+                    position: "left",
+                    className: "verdd verdd--fast2",
+                },
+                {
+                    type: "docsVersionDropdown",
+                    docsPluginId: "flowerdocs",
+                    position: "left",
+                    className: "verdd verdd--flowerdocs",
+                },
+                {
+                    type: "docsVersionDropdown",
+                    docsPluginId: "uxopian-ai",
+                    position: "left",
+                    className: "verdd verdd--uxopian-ai",
+                },
                 { type: "search", position: "right" },
             ],
         },
