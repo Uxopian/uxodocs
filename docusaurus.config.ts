@@ -29,7 +29,6 @@ const config: Config = {
     organizationName: "uxopian",
     projectName: "uxodocs",
     deploymentBranch: "gh-pages",
-
     trailingSlash: false,
 
     onBrokenLinks: "warn",
