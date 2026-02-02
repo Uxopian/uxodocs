@@ -74,7 +74,7 @@ hello=Hola Mundo
 hello=Bonjour le monde
 ```
 
-To use this custom label, you will need to reference it with the tag **customLabels#{label-key}**.
+To use this custom label, you will need to reference it with the tag **customLabels#\{label-key\}**.
 
 Before version 4.7.0 : 
 
