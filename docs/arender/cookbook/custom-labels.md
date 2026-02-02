@@ -37,7 +37,7 @@ arender.server.external.custom.labels.path=
 
 ### Create your own custom localized labels
 
-Typical resource files are named as **CustomLabels_{lang}.properties**, which `lang` corresponds to locale code :
+Typical resource files are named as **CustomLabels_\{lang\}.properties**, which `lang` corresponds to locale code :
 - ar (Arabic)
 - de (German)
 - en (English)
