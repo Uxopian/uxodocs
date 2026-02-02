@@ -6,6 +6,7 @@ import "../../css/secondary-nav.css";
 import ExternalLinkIcon from "@site/static/img/utils/external-link-svgrepo-com.svg";
 
 type Cat = { label: string; href: string };
+type CategoriesStructure = Record<string, Record<string, Cat[]>>;
 
 export default function SecondaryNav(): React.ReactElement | null {
     const { pathname } = useLocation();
@@ -15,15 +16,15 @@ export default function SecondaryNav(): React.ReactElement | null {
         return null;
     }
 
-    const categoriesMap = categories as Record<string, Cat[]>;
+    const categoriesMap = categories as CategoriesStructure;
 
     let product: string | null = null;
-    let versionPrefix: string = "";
+    let version: string = "current";
 
     const versionedMatch = pathname.match(/\/docs\/([^\/]+)\/(v[\d.]+-?[A-Z]*)(?:\/|$)/);
     if (versionedMatch) {
         product = versionedMatch[1];
-        versionPrefix = `/${versionedMatch[1]}/${versionedMatch[2]}`;
+        version = versionedMatch[2];
     } else {
         const docsMatch = pathname.match(/\/docs\/([^\/]+)/);
         if (docsMatch) {
@@ -39,17 +40,9 @@ export default function SecondaryNav(): React.ReactElement | null {
         }
     }
 
-    const baseItems: Cat[] = (product && categoriesMap[product]) || [];
-    const items: Cat[] = versionPrefix
-        ? baseItems.map((item) => {
-            const pathMatch = item.href.match(/\/docs\/[^\/]+\/(.*)/);
-            const remainingPath = pathMatch ? pathMatch[1] : "";
-            return {
-                ...item,
-                href: `/docs${versionPrefix}/${remainingPath}`,
-            };
-        })
-        : baseItems;
+    // Get categories for the detected product and version
+    const productCategories = (product && categoriesMap[product]) || {};
+    const items: Cat[] = productCategories[version] || productCategories['current'] || [];
 
     if (!items || items.length === 0) return null;
     // useSyncSidebarToCategory(items, pathname); // Removed legacy DOM filtering

@@ -102,69 +102,119 @@ async function extractCategoryInfo(filePath) {
     return { label: null, position: 999 };
 }
 
+async function scanProductCategories(productPath, productName, versionSlug = null) {
+    const entries = await fs.readdir(productPath, { withFileTypes: true });
+    const categories = entries.filter((e) => e.isDirectory()).map((e) => e.name);
+    const outItems = [];
+
+    for (const c of categories) {
+        const catPath = path.join(productPath, c);
+
+        const containsMd = await hasMarkdownFiles(catPath);
+        if (!containsMd) {
+            continue;
+        }
+
+        const categoryJson = path.join(catPath, '_category_.json');
+        const indexMd = path.join(catPath, 'index.md');
+        const indexMdx = path.join(catPath, 'index.mdx');
+        const underscoreIndex = path.join(catPath, '_index.md');
+
+        let label = titleCase(c);
+        let position = 999;
+
+        if (await exists(categoryJson)) {
+            const categoryInfo = await extractCategoryInfo(categoryJson);
+            if (categoryInfo.label) {
+                label = categoryInfo.label;
+            }
+            position = categoryInfo.position;
+        } else {
+            for (const indexFile of [indexMd, indexMdx, underscoreIndex]) {
+                if (await exists(indexFile)) {
+                    const extractedTitle = await extractTitleFromMarkdown(indexFile);
+                    if (extractedTitle) {
+                        label = extractedTitle;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Build href with version slug if provided
+        let href = versionSlug
+            ? `/docs/${productName}/${versionSlug}/${c}/`
+            : `/docs/${productName}/${c}/`;
+
+        const hasIndex = await exists(indexMd) || await exists(indexMdx) || await exists(underscoreIndex);
+
+        if (!hasIndex) {
+            const firstMd = await findFirstMarkdown(catPath);
+            if (firstMd) {
+                // For versioned docs, we need to adjust the relative path calculation
+                const baseDir = versionSlug
+                    ? path.join(process.cwd(), 'versioned_docs', `${productName}-${versionSlug}`)
+                    : docsDir;
+                const rel = path.relative(baseDir, firstMd).split(path.sep).join('/');
+                const noExt = rel.replace(/\.(md|mdx)$/i, '');
+                href = versionSlug
+                    ? `/docs/${productName}/${versionSlug}/${noExt}`
+                    : `/docs/${noExt}`;
+            }
+        }
+
+        outItems.push({ label, href, position });
+    }
+
+    // Sort by position
+    outItems.sort((a, b) => a.position - b.position);
+    // Remove position from final output
+    return outItems.map(({ label, href }) => ({ label, href }));
+}
+
 async function build() {
     const result = {};
+
+    // Scan current versions from docs/
     const products = await fs.readdir(docsDir, { withFileTypes: true });
     for (const p of products) {
         if (!p.isDirectory()) continue;
         const productName = p.name;
         const productPath = path.join(docsDir, productName);
-        const entries = await fs.readdir(productPath, { withFileTypes: true });
-        const categories = entries.filter((e) => e.isDirectory()).map((e) => e.name);
-        const outItems = [];
-        for (const c of categories) {
-            const catPath = path.join(productPath, c);
 
-            const containsMd = await hasMarkdownFiles(catPath);
-            if (!containsMd) {
-                continue;
+        // Initialize product with nested structure
+        result[productName] = {
+            current: await scanProductCategories(productPath, productName)
+        };
+    }
+
+    // Scan versioned content from versioned_docs/
+    const versionedDocsDir = path.join(process.cwd(), 'versioned_docs');
+    if (await exists(versionedDocsDir)) {
+        const versionedDirs = await fs.readdir(versionedDocsDir, { withFileTypes: true });
+
+        for (const vDir of versionedDirs) {
+            if (!vDir.isDirectory()) continue;
+
+            // Parse directory name: e.g., "arender-v2.8-LTS" -> product: "arender", version: "v2.8-LTS"
+            const match = vDir.name.match(/^(.+?)-(v[\d.]+-?[A-Z]*)$/);
+            if (!match) continue;
+
+            const [, productName, versionSlug] = match;
+            const versionedProductPath = path.join(versionedDocsDir, vDir.name);
+
+            // Initialize product if not exists
+            if (!result[productName]) {
+                result[productName] = { current: [] };
             }
 
-            const categoryJson = path.join(catPath, '_category_.json');
-            const indexMd = path.join(catPath, 'index.md');
-            const indexMdx = path.join(catPath, 'index.mdx');
-            const underscoreIndex = path.join(catPath, '_index.md');
-
-            let label = titleCase(c);
-            let position = 999;
-
-            if (await exists(categoryJson)) {
-                const categoryInfo = await extractCategoryInfo(categoryJson);
-                if (categoryInfo.label) {
-                    label = categoryInfo.label;
-                }
-                position = categoryInfo.position;
-            } else {
-                for (const indexFile of [indexMd, indexMdx, underscoreIndex]) {
-                    if (await exists(indexFile)) {
-                        const extractedTitle = await extractTitleFromMarkdown(indexFile);
-                        if (extractedTitle) {
-                            label = extractedTitle;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            let href = `/docs/${productName}/${c}/`;
-
-            const hasIndex = await exists(indexMd) || await exists(indexMdx) || await exists(underscoreIndex);
-
-            if (!hasIndex) {
-                const firstMd = await findFirstMarkdown(catPath);
-                if (firstMd) {
-                    const rel = path.relative(docsDir, firstMd).split(path.sep).join('/');
-                    const noExt = rel.replace(/\.(md|mdx)$/i, '');
-                    href = `/docs/${noExt}`;
-                }
-            }
-
-            outItems.push({ label, href, position });
+            // Add versioned categories
+            result[productName][versionSlug] = await scanProductCategories(
+                versionedProductPath,
+                productName,
+                versionSlug
+            );
         }
-        // Sort by position
-        outItems.sort((a, b) => a.position - b.position);
-        // Remove position from final output
-        result[productName] = outItems.map(({ label, href }) => ({ label, href }));
     }
 
     await fs.mkdir(path.dirname(outFile), { recursive: true });
