@@ -29,7 +29,7 @@ const config: Config = {
     organizationName: "uxopian",
     projectName: "uxodocs",
     deploymentBranch: "gh-pages",
-    
+
     trailingSlash: false,
 
     onBrokenLinks: "warn",
@@ -66,7 +66,7 @@ const config: Config = {
                 id: "arender",
                 path: "docs/arender",
                 routeBasePath: "docs/arender",
-                sidebarPath: require.resolve("./sidebars_arender_current.ts"),
+                sidebarPath: require.resolve("./sidebars_arender.ts"),
                 lastVersion: "current",
                 versions: { current: { label: "v2023.14.0" } },
                 showLastUpdateTime: true,
