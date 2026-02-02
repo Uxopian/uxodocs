@@ -63,6 +63,11 @@ jobs:
         run: |
           set -euo pipefail
 
+          # Backup du sidebar current s'il existe
+          if [ -f "sidebars_arender_current.ts" ]; then
+             cp sidebars_arender_current.ts sidebars_arender_current.ts.bak
+          fi
+
           for product in $PRODUCTS; do
             echo "=== ${product} ==="
 
@@ -98,6 +103,17 @@ jobs:
               # remplace le current par le contenu de la branche
               rsync -a --delete .tmp_docs/ "docs/${product}/"
 
+              # Gestion dynamique du sidebar configuration pour ARender
+              if [ "$product" == "arender" ]; then
+                if git cat-file -e "origin/${br}:sidebars_arender.ts" 2>/dev/null; then
+                    echo "   -> using sidebars_arender.ts from ${br}"
+                    git show "origin/${br}:sidebars_arender.ts" > sidebars_arender_current.ts
+                elif git cat-file -e "origin/${br}:sidebars_arender_current.ts" 2>/dev/null; then
+                    echo "   -> using sidebars_arender_current.ts from ${br}"
+                    git show "origin/${br}:sidebars_arender_current.ts" > sidebars_arender_current.ts
+                fi
+              fi
+
               # crée le snapshot de version pour le plugin correspondant
               npx docusaurus "docs:version:${product}" "${ver}"
             done
@@ -105,6 +121,11 @@ jobs:
             # Restaure le current d'origine
             rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
           done
+
+          # Restore du sidebar current original
+          if [ -f "sidebars_arender_current.ts.bak" ]; then
+             mv sidebars_arender_current.ts.bak sidebars_arender_current.ts
+          fi
 
       - name: Build
         env:
