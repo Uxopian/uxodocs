@@ -17,10 +17,10 @@ and the arender for ACS plugin here: [arender-for-alfresco-ACS-plugin-VERSION.ja
 ## Re-deployment of the ARender Web-UI server in Alfresco
 
 If your Alfresco and Share module does not share the same tomcat, you will have to drop the plugin
-**arender-for-alfresco-share-plugin-{version}.jar** and **arender-for-alfresco-ACS-plugin-{version}.jar** in the *lib/* folder of each of these
+**arender-for-alfresco-share-plugin-`{version}`.jar** and **arender-for-alfresco-ACS-plugin-`{version}`.jar** in the *lib/* folder of each of these
 deployed applications.
 
-If they are deployed in the same tomcat, then drop the **arender-for-alfresco-share-plugin-{version}.jar** and **arender-for-alfresco-ACS-plugin-{version}.jar** plugin into *{alfresco_tomcat}/shared/lib*.
+If they are deployed in the same tomcat, then drop the **arender-for-alfresco-share-plugin-`{version}`.jar** and **arender-for-alfresco-ACS-plugin-`{version}`.jar** plugin into *{alfresco_tomcat}/shared/lib*.
 
 The two plugins respectively allow to extend the ACS REST API used by ARender and the integration of the ARender viewer in share.
 
@@ -28,7 +28,7 @@ Add the following lines to the _{alfresco_tomcat}/shared/classes/alfresco/web-ex
 
 ```xml
 <config evaluator="string-compare" condition="Arender">
-        <url>http://{arender_serveur}:{arender_port}/{arender_contexte}</url>
+        <url>http://`{arender_serveur}`:`{arender_port}`/`{arender_contexte}`</url>
         <!-- exemple: <url>http://192.168.1.8:8080/arender-web-ui</url> -->
 </config>
 ```

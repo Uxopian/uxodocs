@@ -14,8 +14,8 @@ ARender has a pre-configured connector for IBM FileNet P8 (4.x) and IBM FileNet 
 | --------------- | ------------------------------------------------------------------------------------ |
 | id              | Unique id of document version                                                        |
 | vsId            | VersionSeries id allowing to fetch last version of a document                        |
-| objectStoreName | The name of the ObjectStore used to store the document                               |
-| objectType      | Document type: document, folder, containerXML, mixedObjects (optional for documents) |
+| objectStoreName | The name of the `objectStoreName` used to store the document                               |
+| objectType      | Document type: `document`, `folder`, `containerXML`, `mixedObjects` (optional for documents) |
 
 :::note
 Some examples:

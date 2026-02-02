@@ -88,10 +88,10 @@ If the document is loaded then you will get the complete document layout of the 
 You can retrieve the source, or the converted versions of a document using the following request in GET call:
 
 ```cfg
-GET {ARender_rendition_host}/accessor/getContent/raw/{documentId}/{selector}
+GET `{ARender_rendition_host}`/accessor/getContent/raw/`{documentId}`/`{selector}`
 ```
 
-Please see below the details for the {selector} values:
+Please see below the details for the `{selector}` values:
 
 | Value      | Description                                                                                                   |
 | ---------- | ------------------------------------------------------------------------------------------------------------- |

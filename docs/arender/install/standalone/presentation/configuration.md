@@ -32,11 +32,11 @@ In order to define one or several rendition servers, edit the
 follow:
 
 ```cfg title="arender-server-custom-&lt;...\>.properties"
-arender.server.rendition.hosts={rendition_server_1},{rendition_server_2},{rendition_server_n}
+arender.server.rendition.servers=http://`{rendition_server_1}`:8761/ arondor-arender-rendition-Main/, http://`{rendition_server_2}`:8761/ arondor-arender-rendition-Main/
 ```
 
 :::note
-The value of _"{rendition_server_x}"_ here has to be
+The value of _"`{rendition_server_x}`"_ here has to be
 changed by the right rendition server address
 
 *(Don't forget to reboot your Web-UI)*

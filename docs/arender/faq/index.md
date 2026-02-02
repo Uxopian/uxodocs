@@ -194,7 +194,7 @@ Complicated images may be much heavier (scan documents, photos). On [this docume
 ARender's default configuration is conservative quality wise, it works for most documents. However there is no miracle.
 **To be clear, there is always the need to make choices between quality and size the images produced.**
 
-On ARender's side, the entire configuration is made on the rendition server, on the arender-rendition-{unix|windows}.xml, bean "jnipdfRenderer". to be precise. Six main parameters can be used to tip the scale, following are the default values:
+On ARender's side, the entire configuration is made on the rendition server, on the arender-rendition-`{unix|windows}`.xml, bean "jnipdfRenderer". to be precise. Six main parameters can be used to tip the scale, following are the default values:
 
 ```XML
   <property name="**pageImageMimeType**" value="image/jpeg" />

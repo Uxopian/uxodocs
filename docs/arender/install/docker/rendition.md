@@ -59,5 +59,5 @@ Configuration files location:
 - /arender/config/application-*.yaml
 
 :::note
-**{service-name}**: container name without "arender" prefix
+**`{service-name}`**: container name without "arender" prefix
 :::

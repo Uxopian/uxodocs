@@ -18,12 +18,12 @@ in an environment with:
 ## Retrieve the presentation server archive
 
 Using the username and password beforehand provided (contact arender-sales@arondor.com if you want an access),
-you can retrieve the web application version used in WAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-alfresco/VERSION/arondor-arender-hmi-alfresco-VERSION.war).
+you can retrieve the web application version used in WAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-alfresco/`VERSION`/arondor-arender-hmi-alfresco-`VERSION`.war).
 
 ## Deployment of the ARender Web-UI server in Alfresco
 
 - Stop the Alfresco service
-- Copy the file **arondor-arender-hmi-alfresco-{version}.war** in your *{alfresco_tomcat}/webapps* folder
+- Copy the file **arondor-arender-alfresco-`{version}`.ampwar** in your *`{alfresco_tomcat}`/webapps* folder
 - Rename the .war file to **ARenderHMI.war**
 
 ![alfresco](/img/arender/alfresco/alfresco-01.png)

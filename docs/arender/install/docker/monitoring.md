@@ -41,7 +41,7 @@ import TabItem from '@theme/TabItem';
 
 | Component                       | Files                                                         |
 | ------------------------------- | ------------------------------------------------------------- |
-| arender-ui                      | /usr/local/tomcat/logs/localhost.{year-month-day}.log, stdout |
+| arender-ui                      | /usr/local/tomcat/logs/localogs-`{year}`-`{month}`-`{day}`.ziplog, stdout |
 | arender-document-service-broker | /arender/logs/arender-server.log                              |
 | arender-document-renderer       | /arender/logs/document-renderer/arender-jnipdf.log            |
 | arender-document-text-handler   | /arender/logs/document-text-handler/arender-pdfbox.log        |
