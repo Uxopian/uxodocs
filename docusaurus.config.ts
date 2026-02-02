@@ -106,7 +106,7 @@ const config: Config = {
                 id: "fast2",
                 path: "docs/fast2",
                 routeBasePath: "docs/fast2",
-                sidebarPath: require.resolve("./sidebars.ts"),
+                sidebarPath: require.resolve("./sidebars_fast2.ts"),
             },
         ],
         [
@@ -115,7 +115,7 @@ const config: Config = {
                 id: "flowerdocs",
                 path: "docs/flowerdocs",
                 routeBasePath: "docs/flowerdocs",
-                sidebarPath: require.resolve("./sidebars.ts"),
+                sidebarPath: require.resolve("./sidebars_flowerdocs.ts"),
             },
         ],
         [
@@ -124,7 +124,7 @@ const config: Config = {
                 id: "uxopian-ai",
                 path: "docs/uxopian-ai",
                 routeBasePath: "docs/uxopian-ai",
-                sidebarPath: require.resolve("./sidebars.ts"),
+                sidebarPath: require.resolve("./sidebars_uxopian_ai.ts"),
             },
         ],
     ],
