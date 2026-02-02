@@ -1,0 +1,219 @@
+---
+title: "Docker"
+last_update:
+  date: '2026-02-02T12:14:50.879Z'
+  author: CI/CD Bot
+content_hash: 2bd7ca79d8b94816107c49e23c6dafd4373fa93840d4d91c83869cc92b50f67a
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+## Registry
+
+### Location
+
+All ARender docker images are available on our artifactory, [artifactory.arondor.cloud](https://artifactory.arondor.cloud).
+
+### Login
+
+To authenticate, use the docker command with your artifactory credentials
+
+```bash
+$> docker login DOCKER-REGISTRY
+```
+
+If you do not have access to our artifactory, please contact our **support service**.
+
+## Repository list
+
+A complete ARender stack is composed by 6 types of containers:
+
+| Component             | Repository                      |         Latest Version  |   Suffix |
+| :-------------------- | :------------------------------ | ---------------------:  | -------: |
+| web UI                | arender-ui                      | VERSION |          |
+| or Alfresco web UI    | arender-ui                      | VERSION | alfresco |
+| or IBM FileNet web UI | arender-ui                      | VERSION |  filenet |
+|                       |                                 |                         |          |
+| rendition             | arender-document-service-broker | VERSION |          |
+| rendition             | arender-document-renderer       | VERSION |          |
+| rendition             | arender-document-text-handler   | VERSION |          |
+| rendition             | arender-document-converter      | VERSION |          |
+
+### Pulling images
+
+To pull images, use docker pull command with Arondor registry as prefix.
+
+<Tabs>
+<TabItem value="default" label="default">
+
+```bash
+$> docker pull DOCKER-REGISTRY/<Repository>:<Version>
+```
+
+</TabItem>
+<TabItem value="specific" label="specific">
+
+```bash
+$> docker pull DOCKER-REGISTRY/<Repository>:<Version>-<Suffix>
+```
+
+</TabItem>
+</Tabs>
+
+## Docker compose
+
+To start ARender quickly with docker-compose, execute the following commands:
+
+```bash
+$> wget -O docker-compose.yml /docs/docker/v4/docker-compose.yml
+$> echo "VERSION=VERSION" > .env
+$> docker-compose up -d
+```
+
+These commands will run the configuration below:
+
+<Tabs>
+<TabItem value="Since 4.5" label="Since 4.5">
+
+```yaml
+version: "3.7"
+
+services:
+  ui:
+    image: artifactory.arondor.cloud:5001/arender-ui:${VERSION}
+    container_name: ui
+    environment:
+      - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://dsb-service:8761/"
+    ports:
+      - 8080:8080
+
+  service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:${VERSION}
+    container_name: dsb-service
+    environment:
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DCV-SERVICE=19999"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DRN-SERVICE=9091"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DTH-SERVICE=8899"
+    ports:
+      - 8761:8761
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer:${VERSION}
+    container_name: drn-service
+    environment:
+      - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=drn-service"
+      - "DRN_EUREKA_INSTANCE_HOSTNAME=dsb-service"
+      - "DRN_EUREKA_SERVER_PORT=8761"
+    ports:
+      - 9091:9091
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:${VERSION}
+    container_name: dth-service
+    environment:
+      - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dth-service"
+      - "DTH_EUREKA_INSTANCE_HOSTNAME=dsb-service"
+      - "DTH_EUREKA_SERVER_PORT=8761"
+    ports:
+      - 8899:8899
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:${VERSION}
+    container_name: dcv-service
+    environment:
+      - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dcv-service"
+      - "DCV_APP_EUREKA_HOSTNAME=dsb-service"
+      - "DCV_APP_EUREKA_PORT=8761"
+    ports:
+      - 19999:19999
+    volumes:
+      - arender-tmp:/arender/tmp
+
+# Shared temporary folder
+volumes:
+  arender-tmp:
+```
+
+</TabItem>
+<TabItem value="before 4.5" label="before 4.5">
+
+```yaml
+version: "2"
+
+services:
+  ui:
+    image: artifactory.arondor.cloud:5001/arender-ui:4.4.1
+    mem_limit: 2g
+    container_name: ui
+    environment:
+      - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://dsb-service:8761/"
+    ports:
+      - 80:8080
+
+  service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:4.4.1
+    mem_limit: 1g
+    container_name: dsb-service
+    environment:
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DCV-SERVICE=19999"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DRN-SERVICE=9091"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DTH-SERVICE=8899"
+    ports:
+      - 8761:8761
+
+  document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer:4.4.1
+    mem_limit: 1g
+    container_name: drn-service
+    environment:
+      - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=drn-service"
+      - "DRN_EUREKA_INSTANCE_HOSTNAME=dsb-service"
+      - "DRN_EUREKA_SERVER_PORT=8761"
+    ports:
+      - 9091:9091
+
+  document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:4.4.1
+    mem_limit: 1g
+    container_name: dth-service
+    environment:
+      - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dth-service"
+      - "DTH_EUREKA_INSTANCE_HOSTNAME=dsb-service"
+      - "DTH_EUREKA_SERVER_PORT=8761"
+    ports:
+      - 8899:8899
+
+  document-file-storage:
+    image: artifactory.arondor.cloud:5001/arender-document-file-storage:4.4.1
+    mem_limit: 500m
+    container_name: dfs-service
+    environment:
+      - "DFS_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dfs-service"
+      - "DFS_EUREKA_INSTANCE_METADATA.MAP_SOURCE.D.F.S=http://dfs-service:8081"
+      - "DFS_EUREKA_INSTANCE_HOSTNAME=dsb-service"
+      - "DFS_EUREKA_SERVER_PORT=8761"
+    ports:
+      - 8081:8081
+
+  document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:4.4.1
+    mem_limit: 1g
+    container_name: dcv-service
+    environment:
+      - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dcv-service"
+      - "DCV_APP_EUREKA_HOSTNAME=dsb-service"
+      - "DCV_APP_EUREKA_PORT=8761"
+    ports:
+      - 19999:19999
+```
+
+</TabItem>
+</Tabs>

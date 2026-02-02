@@ -1,0 +1,40 @@
+---
+title: "Resolve mail conversion issue"
+last_update:
+  date: '2026-02-02T11:59:59.803Z'
+  author: CI/CD Bot
+content_hash: 5b731b30b7c2b213eea394b506f7a5884033f13bc8ad415b4f37739621360e07
+---
+
+You probably have a configuration problem related to wkhtmltopdf.
+
+## Advanced configuration
+
+If on Windows, the unit conversion does not work, look at the Windows
+error message if you have one, this may indicate a potential lack of
+framework. (.NET, Visual Studio Redistributable, etc..)
+
+If on Linux, the conversion does not happen with an error indicating an
+X server problem, you need to install the xvfb package and make the
+following commands in your linux (adapting them to your wkhtmltopdf
+installation)
+
+``` bash
+mv /usr/bin/wkhtmltopdf /usr/bin/wkhtmltopdf_nohead
+cp wkhtmltopdf_xvfb /usr/bin/wkhtmltopdf
+chmod a+x /usr/bin/wkhtmltopdf
+```
+
+The contents of the wkhtmltopdf_xvfb file are as follows:
+
+``` bash
+#!/bin/bash
+xvfb-run -a -s "-screen 0 640x480x16" /usr/bin/wkhtmltopdf_nohead "$@"
+```
+
+If the error is related to a network problem when retrieving the images
+from the mail, it is then up to you to decide whether you want to allow
+the rendition server to connect to the net to recover these images or to
+give wkhtmltopdf in the configuration of the rendition server a proxy
+that will resolve authorized URLs and block others (a proxy blocking all
+the images is possible but the rendering will be degraded).
