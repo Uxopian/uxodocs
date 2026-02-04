@@ -153,7 +153,7 @@ async function scanProductCategories(productPath, productName, versionSlug = nul
             if (firstMd) {
                 // For versioned docs, we need to adjust the relative path calculation
                 const baseDir = versionSlug
-                    ? path.join(process.cwd(), 'versioned_docs', `${productName}-${versionSlug}`)
+                    ? path.join(process.cwd(), `${productName}_versioned_docs`, `version-${versionSlug}`)
                     : docsDir;
                 const rel = path.relative(baseDir, firstMd).split(path.sep).join('/');
                 const noExt = rel.replace(/\.(md|mdx)$/i, '');
@@ -188,20 +188,33 @@ async function build() {
         };
     }
 
-    // Scan versioned content from versioned_docs/
-    const versionedDocsDir = path.join(process.cwd(), 'versioned_docs');
-    if (await exists(versionedDocsDir)) {
-        const versionedDirs = await fs.readdir(versionedDocsDir, { withFileTypes: true });
+    // Scan versioned content from {pluginId}_versioned_docs/version-{version}/
+    // Docusaurus multi-instance plugins use format: arender_versioned_docs/version-v4/
+    const rootDir = process.cwd();
+    const rootEntries = await fs.readdir(rootDir, { withFileTypes: true });
 
-        for (const vDir of versionedDirs) {
-            if (!vDir.isDirectory()) continue;
+    for (const entry of rootEntries) {
+        if (!entry.isDirectory()) continue;
 
-            // Parse directory name: e.g., "arender-v2.8-LTS" -> product: "arender", version: "v2.8-LTS"
-            const match = vDir.name.match(/^(.+?)-(v[\d.]+-?[A-Z]*)$/);
-            if (!match) continue;
+        // Match pattern like "arender_versioned_docs"
+        const versionedDirMatch = entry.name.match(/^(.+)_versioned_docs$/);
+        if (!versionedDirMatch) continue;
 
-            const [, productName, versionSlug] = match;
-            const versionedProductPath = path.join(versionedDocsDir, vDir.name);
+        const productName = versionedDirMatch[1];
+        const versionedDocsPath = path.join(rootDir, entry.name);
+
+        // Scan version folders inside (e.g., version-v4, version-v2.8-LTS)
+        const versionFolders = await fs.readdir(versionedDocsPath, { withFileTypes: true });
+
+        for (const vFolder of versionFolders) {
+            if (!vFolder.isDirectory()) continue;
+
+            // Match pattern like "version-v4" or "version-v2.8-LTS"
+            const versionMatch = vFolder.name.match(/^version-(v[\d.]+-?[A-Z]*)$/);
+            if (!versionMatch) continue;
+
+            const versionSlug = versionMatch[1];
+            const versionedProductPath = path.join(versionedDocsPath, vFolder.name);
 
             // Initialize product if not exists
             if (!result[productName]) {
