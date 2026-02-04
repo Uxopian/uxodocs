@@ -120,23 +120,11 @@ jobs:
               npx docusaurus "docs:version:${product}" "${ver}"
             done
 
-            # Populate 'current' content from the latest version branch
-            if [ ${#branches[@]} -gt 0 ]; then
-                latest_branch="${branches[-1]}"
-                echo "-> Fetching 'current' content from latest branch: $latest_branch"
-                
-                # Ensure the directory is clean
-                rm -rf "docs/${product}"
-                
-                # Check out the docs directory from the latest branch
-                git checkout "origin/$latest_branch" -- "docs/${product}"
-                
-                echo "DEBUG: Content of docs/${product} after checkout:"
-                ls -F "docs/${product}" || echo "Error listing docs/${product}"
-            else
-                echo "-> No version branches found, restoring original staging content"
-                rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
-            fi
+            # Always restore original staging content for 'current'
+            echo "-> Restoring 'current' content from staging cache"
+            rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
+            echo "DEBUG: Content of docs/${product} after restore:"
+            ls -F "docs/${product}" || echo "Error listing docs/${product}"
           done
 
           # Restore du sidebar current original
