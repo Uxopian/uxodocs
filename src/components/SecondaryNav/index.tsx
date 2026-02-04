@@ -236,8 +236,8 @@ export function useSyncSidebarToCategory(
                     let itemCategoryBase = "";
 
                     if (potentialVersion && potentialVersion.match(/^v[\d.]+-?[A-Z]*$/)) {
-                        if (itemSegments.length > docsIdx + 4) {
-                            itemCategoryBase = itemSegments.slice(0, docsIdx + 5).join("/");
+                        if (itemSegments.length > docsIdx + 3) {
+                            itemCategoryBase = itemSegments.slice(0, docsIdx + 4).join("/");
                         }
                     } else {
                         const category = itemSegments[docsIdx + 2];
@@ -340,9 +340,9 @@ export function useSyncSidebarToCategory(
                 const product = catSegments[docsIdx + 1];
                 const potentialVersion = catSegments[docsIdx + 2];
 
-                if (potentialVersion && potentialVersion.match(/^v\d+$/)) {
-                    if (catSegments.length > docsIdx + 4) {
-                        categoryBasePath = catSegments.slice(0, docsIdx + 5).join("/");
+                if (potentialVersion && potentialVersion.match(/^v[\d.]+-?[A-Z]*$/)) {
+                    if (catSegments.length > docsIdx + 3) {
+                        categoryBasePath = catSegments.slice(0, docsIdx + 4).join("/");
                     }
                 } else {
                     categoryBasePath = catSegments.slice(0, docsIdx + 3).join("/");
