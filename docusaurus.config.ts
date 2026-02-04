@@ -102,10 +102,13 @@ const config: Config = {
         [
             "@docusaurus/plugin-content-docs",
             {
-                id: "fast2",
+               id: "fast2",
                 path: "docs/fast2",
                 routeBasePath: "docs/fast2",
                 sidebarPath: require.resolve("./sidebars_fast2.ts"),
+                lastVersion: "current",
+                versions: { current: { label: "v2025.8.2" } },
+                showLastUpdateTime: true,
             },
         ],
         [
@@ -115,6 +118,9 @@ const config: Config = {
                 path: "docs/flowerdocs",
                 routeBasePath: "docs/flowerdocs",
                 sidebarPath: require.resolve("./sidebars_flowerdocs.ts"),
+                lastVersion: "current",
+                versions: { current: { label: "v2025.3.0" } },
+                showLastUpdateTime: true,
             },
         ],
         [
@@ -124,6 +130,9 @@ const config: Config = {
                 path: "docs/uxopian-ai",
                 routeBasePath: "docs/uxopian-ai",
                 sidebarPath: require.resolve("./sidebars_uxopian_ai.ts"),
+                lastVersion: "current",
+                versions: { current: { label: "v2026.0.0" } },
+                showLastUpdateTime: true,
             },
         ],
     ],
