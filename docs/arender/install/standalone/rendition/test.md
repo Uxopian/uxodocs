@@ -7,12 +7,12 @@ content_hash: e046dd399173e3ef80d4162b28818a951389b49ffb0e03b3fc150bbaacc17ebb
 ---
 
 The test jar «
-arondor-arender-rendition-tester-`VERSION_NUMBER`-jar-with-dependencies.jar
+arondor-arender-rendition-tester-`4.8.21`-jar-with-dependencies.jar
 », allow the user to launch some functional test on rendition server
 with following options **as admin**:
 
 ```bash
-$> java -jar arondor-arender-rendition-tester-VERSION_NUMBER.jar
+$> java -jar arondor-arender-rendition-tester-4.8.21.jar
 ```
 
 | Option | Description                                                                                                                           |
@@ -37,7 +37,7 @@ server. To launch the test, all you need is, via the console, go to jar
 location and type the following command:
 
 ```bash
-$> java -jar arondor-arender-rendition-tester-VERSION_NUMBER.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -v report_ARender.csv
+$> java -jar arondor-arender-rendition-tester-4.8.21.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -v report_ARender.csv
 ```
 
 - adapt the port 8761 depending on your configuration
@@ -51,7 +51,7 @@ To launch the test, all you need is, via the console, go to jar location
 and type the following command:
 
 ```bash
-$> java -jar arondor-arender-rendition-tester-VERSION_NUMBER.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -l -f ./fichiers.txt -v rapport_ARender.csv
+$> java -jar arondor-arender-rendition-tester-4.8.21.jar -d http://rendition-server:8761/ -w "(100,1100,100)" -t 4 -l -f ./fichiers.txt -v rapport_ARender.csv
 ```
 
 ## Analysis report

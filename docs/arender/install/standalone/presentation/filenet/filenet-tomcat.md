@@ -26,12 +26,12 @@ in an environment with:
 - Operating System: Windows Server 2016
 - Filenet 5.5
 - Apache Tomcat 9.0
-- ARender HMI for FileNet version VERSION
+- ARender HMI for FileNet version 4.8.21
 
 ## Retrieve the ARender HMI WAR for FileNet
 
 Using the username and password beforehand provided,
-you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-filenet/VERSION/arondor-arender-hmi-filenet-VERSION.war).
+you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-filenet/4.8.21/arondor-arender-hmi-filenet-4.8.21.war).
 
 ## Configuration of ARender HMI WAR for FileNet
 
@@ -40,7 +40,7 @@ Some additional configuration is needed in the ARender for FileNet WAR to be sup
 ### User context configuration
 
 Open the below file:
-* arondor-arender-hmi-filenet-VERSION.war\WEB-INF\classes\arender-user-context.xml
+* arondor-arender-hmi-filenet-4.8.21.war\WEB-INF\classes\arender-user-context.xml
 
 And replace the bean having the following id **urlFilter** by the following bean: 
 ``` xml
@@ -52,12 +52,12 @@ And replace the bean having the following id **urlFilter** by the following bean
 ### Security configuration
 
 Remove the below file:
-* arondor-arender-hmi-filenet-VERSION.war\WEB-INF\lib\arondor-arender-filenet-ce-VERSION.jar\META-INF\web-fragment.xml
+* arondor-arender-hmi-filenet-4.8.21.war\WEB-INF\lib\arondor-arender-filenet-ce-4.8.21.jar\META-INF\web-fragment.xml
 
 ### Technical account configuration for the connection to FileNet
 
 Open the below file:
-* arondor-arender-hmi-filenet-VERSION.war\WEB-INF\classes\arender-server-custom-filenet.properties
+* arondor-arender-hmi-filenet-4.8.21.war\WEB-INF\classes\arender-server-custom-filenet.properties
 
 And add the below content (change with the value matching your context):
 ``` cfg
@@ -75,4 +75,4 @@ Download the below JARs:
 * **xercesImpl** version **2.11.0**: [download link](https://mvnrepository.com/artifact/xerces/xercesImpl/2.11.0).
 * **xml-apis** version **1.4.01**: [download link](https://mvnrepository.com/artifact/xml-apis/xml-apis/1.4.01).
 
-And place these two libraries into the following folder: arondor-arender-hmi-filenet-VERSION.war\WEB-INF\lib.
+And place these two libraries into the following folder: arondor-arender-hmi-filenet-4.8.21.war\WEB-INF\lib.

@@ -14,16 +14,16 @@ in an environment with:
 - Operating system : Windows Server 2016 Datacenter
 - M-Files 
 - A Tomcat9 server
-- ARender Web-UI version VERSION
-- ARender Rendition version VERSION. For more information on how to install, see **[documentation](/v4/install/standalone/presentation/install.md)**
+- ARender Web-UI version 4.8.21
+- ARender Rendition version 4.8.21. For more information on how to install, see **[documentation](/v4/install/standalone/presentation/install.md)**
 
 
 ## Steps to Configure the Rendition
 
-- Place the *arondor-arender-mfiles-connector-1.0.5.jar* under *rendition-engine-package-VERSION/modules/RenditionEngine/client_libs*
+- Place the *arondor-arender-mfiles-connector-1.0.5.jar* under *rendition-engine-package-4.8.21/modules/RenditionEngine/client_libs*
 
 [arondor-arender-mfiles-connector-1.0.5.jar](/docs/install/install-mfiles/arondor-arender-mfiles-connector-1.0.5.jar)
-- Place the following property file *application.properties* under *rendition-engine-package-VERSION/modules/RenditionEngine/*
+- Place the following property file *application.properties* under *rendition-engine-package-4.8.21/modules/RenditionEngine/*
 
 [application.properties](/docs/install/install-mfiles/application.properties)
 - Start the ARender Rendition server
@@ -32,19 +32,19 @@ in an environment with:
 
 Using the username and password previously provided (contact arender-sales@arondor.com if you want access),
 you can recover the version of the web application used in WAR format
-**[here](https://artifactory.arondor.cloud:443/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi/VERSION/arondor-arender-hmi-VERSION.war)**.
+**[here](https://artifactory.arondor.cloud:443/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi/4.8.21/arondor-arender-hmi-4.8.21.war)**.
 
-Use the Tomcat9 server. You just need to deploy your war (*arondor-arender-hmi-VERSION.war* into and to **rename it** *arondor-arender-mfiles.war*), now place it there :
+Use the Tomcat9 server. You just need to deploy your war (*arondor-arender-hmi-4.8.21.war* into and to **rename it** *arondor-arender-mfiles.war*), now place it there :
 
 * Program Files
     * Apache Software Foundation
         * Tomcat 9.0
             * webapps
 
-Copy the previously downloaded *arondor-arender-mfiles-connector-1.0.5.jar* connector, place it under *arondor-arender-mfiles-VERSION/WEB-INF/lib*.
+Copy the previously downloaded *arondor-arender-mfiles-connector-1.0.5.jar* connector, place it under *arondor-arender-mfiles-4.8.21/WEB-INF/lib*.
 
 Afterwards :
-- Place those files *(below)* under ***arondor-arender-mfiles-VERSION/WEB-INF/classes***<br/>
+- Place those files *(below)* under ***arondor-arender-mfiles-4.8.21/WEB-INF/classes***<br/>
 [arender-editor-specific-integration.xml](/docs/install/install-mfiles/arender-editor-specific-integration.xml)
 [arender-server.properties](/docs/install/install-mfiles/vaf/arender-server.properties)
 

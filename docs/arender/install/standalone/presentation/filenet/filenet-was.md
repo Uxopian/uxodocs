@@ -18,12 +18,12 @@ in an environment with:
 - Operating System: Windows Server 2016
 - Filenet 5.5
 - Websphere 9.0.5.0 Application Server
-- ARender HMI for FileNet version VERSION
+- ARender HMI for FileNet version 4.8.21
 
 ## Retrieve the ARender HMI EAR archive for FileNet
 
 Using the username and password beforehand provided,
-you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-filenet-ear/VERSION/arondor-arender-hmi-filenet-ear-VERSION.ear).
+you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-filenet-ear/4.8.21/arondor-arender-hmi-filenet-ear-4.8.21.ear).
 
 ## WebSphere requirements
 

@@ -21,7 +21,7 @@ All ARender docker images are available on our artifactory, [artifactory.arondor
 To authenticate, use the docker command with your artifactory credentials
 
 ```bash
-$> docker login DOCKER-REGISTRY
+$> docker login artifactory.arondor.cloud:5001
 ```
 
 If you do not have access to our artifactory, please contact our **support service**.
@@ -32,14 +32,14 @@ A complete ARender stack is composed by 6 types of containers:
 
 | Component             | Repository                      |         Latest Version  |   Suffix |
 | :-------------------- | :------------------------------ | ---------------------:  | -------: |
-| web UI                | arender-ui                      | VERSION |          |
-| or Alfresco web UI    | arender-ui                      | VERSION | alfresco |
-| or IBM FileNet web UI | arender-ui                      | VERSION |  filenet |
+| web UI                | arender-ui                      | 4.8.21 |          |
+| or Alfresco web UI    | arender-ui                      | 4.8.21 | alfresco |
+| or IBM FileNet web UI | arender-ui                      | 4.8.21 |  filenet |
 |                       |                                 |                         |          |
-| rendition             | arender-document-service-broker | VERSION |          |
-| rendition             | arender-document-renderer       | VERSION |          |
-| rendition             | arender-document-text-handler   | VERSION |          |
-| rendition             | arender-document-converter      | VERSION |          |
+| rendition             | arender-document-service-broker | 4.8.21 |          |
+| rendition             | arender-document-renderer       | 4.8.21 |          |
+| rendition             | arender-document-text-handler   | 4.8.21 |          |
+| rendition             | arender-document-converter      | 4.8.21 |          |
 
 ### Pulling images
 
@@ -49,14 +49,14 @@ To pull images, use docker pull command with Arondor registry as prefix.
 <TabItem value="default" label="default">
 
 ```bash
-$> docker pull DOCKER-REGISTRY/<Repository>:<Version>
+$> docker pull artifactory.arondor.cloud:5001/<Repository>:<Version>
 ```
 
 </TabItem>
 <TabItem value="specific" label="specific">
 
 ```bash
-$> docker pull DOCKER-REGISTRY/<Repository>:<Version>-<Suffix>
+$> docker pull artifactory.arondor.cloud:5001/<Repository>:<Version>-<Suffix>
 ```
 
 </TabItem>
@@ -68,7 +68,7 @@ To start ARender quickly with docker-compose, execute the following commands:
 
 ```bash
 $> wget -O docker-compose.yml /docs/docker/v4/docker-compose.yml
-$> echo "VERSION=VERSION" > .env
+$> echo "4.8.21=4.8.21" > .env
 $> docker-compose up -d
 ```
 
@@ -82,7 +82,7 @@ version: "3.7"
 
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui:${VERSION}
+    image: artifactory.arondor.cloud:5001/arender-ui:${4.8.21}
     container_name: ui
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://dsb-service:8761/"
@@ -90,7 +90,7 @@ services:
       - 8080:8080
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:${VERSION}
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:${4.8.21}
     container_name: dsb-service
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DCV-SERVICE=19999"
@@ -102,7 +102,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer:${VERSION}
+    image: artifactory.arondor.cloud:5001/arender-document-renderer:${4.8.21}
     container_name: drn-service
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=drn-service"
@@ -114,7 +114,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler:${VERSION}
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:${4.8.21}
     container_name: dth-service
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dth-service"
@@ -126,7 +126,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter:${VERSION}
+    image: artifactory.arondor.cloud:5001/arender-document-converter:${4.8.21}
     container_name: dcv-service
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dcv-service"

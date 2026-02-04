@@ -8,12 +8,12 @@ content_hash: f0a985e5e6458b9788a965bff9763c54f77d711b44b328eeb56fd7a1e3952e0a
 
 ## ARender UI for Alfresco
 
-ARender ui for Alfresco images tag are prefixed with "-alfresco" (e.g arender-ui:VERSION-alfresco).
+ARender ui for Alfresco images tag are prefixed with "-alfresco" (e.g arender-ui:4.8.21-alfresco).
 
 To run the container, execute:
 
 ```bash
-$> docker run DOCKER-REGISTRY/arender-ui:VERSION-alfresco \
+$> docker run artifactory.arondor.cloud:5001/arender-ui:4.8.21-alfresco \
 -e ARENDERSRV_ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL="http://<alfresco-host>:<alfresco-port>/alfresco/api/-default-/cmis/versions/1.1/atom"
 ```
 
@@ -24,7 +24,7 @@ Add the ARender plugin in Alfresco share container and Alfresco content reposito
 If needed, some resources about ARender for Alfresco are available below:
 
 - [See Alfresco documentation](/v4/connector/alfresco/_index.md)
-- [Download Alfresco plugin](https://artifactory.arondor.cloud/artifactory/webapp/#/artifacts/browse/tree/General/arondor-release/com/arondor/arender/arender-for-alfresco-share-plugin/VERSION/arender-for-alfresco-share-plugin-VERSION.jar)
+- [Download Alfresco plugin](https://artifactory.arondor.cloud/artifactory/webapp/#/artifacts/browse/tree/General/arondor-release/com/arondor/arender/arender-for-alfresco-share-plugin/4.8.21/arender-for-alfresco-share-plugin-4.8.21.jar)
 
 :::warning
 The plugin must be in tomcat/lib or /tomcat/shared/lib. Insure these paths are listed in shared.lib property in Alfresco component's **catalina.properties**.

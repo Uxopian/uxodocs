@@ -17,12 +17,12 @@ In our example, we are deploying the presentation server in an environment with:
 - Operating System: Windows Server 2012 R2 Standard
 - Content Manager 8.6
 - Websphere 9.0.5.0 Application Server (you can also use Apache Tomcat 8+)
-- ARender HMI version VERSION
+- ARender HMI version 4.8.21
 
 ## Retrieve the ARender HMI archive
 
 Using the username and password beforehand provided,
-you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-cm-ear/VERSION/arondor-arender-hmi-cm-ear-VERSION.ear).
+you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-cm-ear/4.8.21/arondor-arender-hmi-cm-ear-4.8.21.ear).
 
 ## WebSphere requirements
 

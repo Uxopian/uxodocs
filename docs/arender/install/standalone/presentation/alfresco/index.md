@@ -13,12 +13,12 @@ in an environment with:
 
 - Operating system: Ubuntu 16.04.5
 - Alfresco Community 5.2.0 (with tomcat server)
-- ARender Web-UI version VERSION
+- ARender Web-UI version 4.8.21
 
 ## Retrieve the presentation server archive
 
 Using the username and password beforehand provided (contact arender-sales@arondor.com if you want an access),
-you can retrieve the web application version used in WAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-alfresco/`VERSION`/arondor-arender-hmi-alfresco-`VERSION`.war).
+you can retrieve the web application version used in WAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-alfresco/`4.8.21`/arondor-arender-hmi-alfresco-`4.8.21`.war).
 
 ## Deployment of the ARender Web-UI server in Alfresco
 

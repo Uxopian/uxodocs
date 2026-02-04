@@ -22,8 +22,8 @@ The following table lists the configurable parameters of the ARender web UI subc
 | `web-ui.autoscale.enabled`     | Enable horitontal autoscaling of pods                                            |                         `false`                         |
 | `web-ui.autoscale.maxReplicas` | Maximum number of the pod replica in the cluster                                 |                           `1`                           |
 | `web-ui.autoscale.cpuLimit`    | Percentage of CPU requested target to scale horizontally                         |                          `80`                           |
-| `web-ui.image.repository`      | ARender UI image name                                                            |       `DOCKER-REGISTRY/arender-ui`       |
-| `web-ui.image.tag`             | ARender UI image tag                                                             |               `VERSION`                 |
+| `web-ui.image.repository`      | ARender UI image name                                                            |       `artifactory.arondor.cloud:5001/arender-ui`       |
+| `web-ui.image.tag`             | ARender UI image tag                                                             |               `4.8.21`                 |
 | `web-ui.image.pullPolicy`      | ARender UI image pull policy                                                     |                        `Always`                         |
 | `web-ui.serviceAccount.create` | Specifies whether a service account should be created                            |                         `true`                          |
 | `web-ui.serviceAccount.name`   | Name of the service account created. If not set defaulted to ARender UI fullname |                          `''`                           |

@@ -12,7 +12,7 @@ Below a standalone installation of the ARender HMI. For installation on ECM syst
 
 The only requirement: a valid JDK or JRE (see [Requirement](requirements.md)). Here we will use Apache Tomcat 9.0.21
 
-* Download the last version of ARender HMI : [ARender HMI VERSION ↓](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi/VERSION/arondor-arender-hmi-VERSION.war)
+* Download the last version of ARender HMI : [ARender HMI 4.8.21 ↓](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi/4.8.21/arondor-arender-hmi-4.8.21.war)
 
 ## Deploy ARender HMI
 
@@ -24,7 +24,7 @@ Move the WAR to the **webapps** folder of the tomcat application server in order
     * bin
     * ...
     * webapps
-        * arondor-arender-hmi-VERSION
+        * arondor-arender-hmi-4.8.21
 
 ### Start the application server
 
@@ -33,7 +33,7 @@ Start the application server using the **startup.bat** script located in the *bi
 ### Open a browser new window
 
 :::note
-Access to [http://localhost:8080/arondor-arender-hmi-VERSION/](http://localhost:8080/arondor-arender-hmi-VERSION/) via a web browser.
+Access to [http://localhost:8080/arondor-arender-hmi-4.8.21/](http://localhost:8080/arondor-arender-hmi-4.8.21/) via a web browser.
 :::
 
 ![DefaultDocument](/img/arender/arenderDefaultDocument.png)

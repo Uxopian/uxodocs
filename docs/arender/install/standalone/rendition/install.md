@@ -18,14 +18,14 @@ The only requirement: a valid JDK or JRE (see [Requirement](requirements.md)).
 ### Retrieve the installer
 
 Using the username and password beforehand provided (contact arender-sales@arondor.com if you want an access),
-you can retrieve the Rendition installation in JAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/micro/services/rendition-engine-installer/VERSION/rendition-engine-installer-VERSION-rendition.jar).
+you can retrieve the Rendition installation in JAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/micro/services/rendition-engine-installer/4.8.21/rendition-engine-installer-4.8.21-rendition.jar).
 
 ### Installation process
 
 Simply execute the below command to launch the installation:
 
 ```bash
-$> java -jar rendition-engine-installer-VERSION-rendition.jar
+$> java -jar rendition-engine-installer-4.8.21-rendition.jar
 ```
 
 Below an example of the different installation steps for Windows: 

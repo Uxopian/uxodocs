@@ -15,7 +15,7 @@ If not, find more informations on [https://kubernetes.io/docs/home/](https://kub
 ## TL;DR
 
 ```bash
-$> helm repo add arondor HELM-URL --username <your_user> --password <your_password>
+$> helm repo add arondor https://artifactory.arondor.cloud/artifactory/ARenderHelmVirtual --username <your_user> --password <your_password>
 $> helm install my-release arondor/arender
 ```
 
@@ -45,7 +45,7 @@ The Chart is composed of two subchart: rendition and web-ui. You can choose to u
 To install the chart with the release name `my-release`, run the following commands with your Artifactory credentials:
 
 ```bash
-$> helm repo add arondor HELM-URL --username <your_user> --password <your_password>
+$> helm repo add arondor https://artifactory.arondor.cloud/artifactory/ARenderHelmVirtual --username <your_user> --password <your_password>
 $> helm install my-release arondor/arender
 ```
 
