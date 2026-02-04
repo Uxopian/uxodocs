@@ -45,7 +45,7 @@ export default function SecondaryNav(): React.ReactElement | null {
     const items: Cat[] = productCategories[version] || productCategories['current'] || [];
 
     if (!items || items.length === 0) return null;
-    // useSyncSidebarToCategory(items, pathname); // Removed legacy DOM filtering
+    useSyncSidebarToCategory(items, pathname); // Re-enabled sidebar filtering
 
     React.useEffect(() => {
         if (typeof document === "undefined") return;
