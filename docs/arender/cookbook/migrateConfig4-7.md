@@ -1,5 +1,6 @@
 ---
 title: "Migrate configuration from 4.x to 4.7"
+sidebar_position: 19
 last_update:
   date: '2026-02-02T12:16:59.945Z'
   author: CI/CD Bot

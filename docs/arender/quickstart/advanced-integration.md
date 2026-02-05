@@ -1,5 +1,6 @@
 ---
 title: "Advanced integration"
+sidebar_position: 3
 last_update:
   date: '2026-02-02T12:23:28.934Z'
   author: CI/CD Bot

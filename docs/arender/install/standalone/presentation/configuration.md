@@ -1,5 +1,6 @@
 ---
 title: "Configuration"
+sidebar_position: 5
 last_update:
   date: '2026-02-02T12:24:53.639Z'
   author: CI/CD Bot

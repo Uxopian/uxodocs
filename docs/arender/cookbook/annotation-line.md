@@ -1,5 +1,6 @@
 ---
 title: "Custom annotation"
+sidebar_position: 10
 last_update:
   date: '2026-02-02T12:23:28.934Z'
   author: CI/CD Bot

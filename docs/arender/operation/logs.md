@@ -1,5 +1,6 @@
 ---
 title: "Logs"
+sidebar_position: 2
 last_update:
   date: '2026-02-02T12:26:26.896Z'
   author: CI/CD Bot
@@ -163,7 +164,7 @@ next to the jar of each of the micro services with the following property to ind
 ```cfg
 logging.config=file:`YOUR_PATH`/logback-spring.xml
 ```
-
+:::
 
 ## Format logs in JSON
 
@@ -192,7 +193,7 @@ Here is an example of the default Broker microservice configuration so that logs
     </triggeringPolicy>
 </appender>
 ```
-
+:::
 
 To configure the formatting in JSON, you must redefine the **encoder** tag to use the **LayoutWrappingEncoder**.
 This will allow us to use the **layout** tag to set the JSON formatting as described below:
@@ -221,7 +222,7 @@ This will allow us to use the **layout** tag to set the JSON formatting as descr
     </triggeringPolicy>
 </appender>
 ```
-
+:::
 
 ## Automatically reloading configuration file upon modification
 
@@ -237,3 +238,4 @@ to automatically re-configure itself set the scan attribute of the &lt;configura
     ...
 </configuration>
 ```
+:::

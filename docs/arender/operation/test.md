@@ -1,5 +1,6 @@
 ---
 title: "Behaviour testing"
+sidebar_position: 5
 last_update:
   date: '2026-02-02T12:41:03.333Z'
   author: CI/CD Bot

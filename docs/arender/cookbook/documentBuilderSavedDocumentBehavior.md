@@ -1,5 +1,6 @@
 ---
 title: "Save recomposed document"
+sidebar_position: 23
 last_update:
   date: '2026-02-02T11:59:59.803Z'
   author: CI/CD Bot

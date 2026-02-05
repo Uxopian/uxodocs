@@ -1,5 +1,6 @@
 ---
 title: "Install in ICN"
+sidebar_position: 3
 last_update:
   date: '2026-02-02T12:16:59.945Z'
   author: CI/CD Bot

@@ -1,5 +1,6 @@
 ---
 title: "Textual search"
+sidebar_position: 12
 last_update:
   date: '2026-02-02T11:59:59.803Z'
   author: CI/CD Bot

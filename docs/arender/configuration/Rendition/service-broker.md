@@ -1,9 +1,6 @@
 ---
 title: "Service broker"
-last_update:
-  date: '2026-02-02T11:59:59.803Z'
-  author: CI/CD Bot
-content_hash: 6f08938ff4debbf4913af3f1aee144f22ca4ffc68deb480c7b5e5ae706d6f349
+sidebar_position: 1
 ---
 
 ## Environment
@@ -13,7 +10,7 @@ content_hash: 6f08938ff4debbf4913af3f1aee144f22ca4ffc68deb480c7b5e5ae706d6f349
     | Description                    | Parameter Key | Type             |
     | ------------------------------ | ------------- | ---------------- |
     | Use localhost for all services | useLocalhost  | Boolean          |
-    | Map of service host and ports  | kubeHosts     | Map&lt;String, int&gt; |
+    | Map of service host and ports  | kubeHosts     | `Map<String, int>` |
 
 ```yaml title="application.yaml"
 kubeprovider:

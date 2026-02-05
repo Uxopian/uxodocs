@@ -1,5 +1,6 @@
 ---
 title: "IBM FileNet"
+sidebar_position: 4
 last_update:
   date: '2026-02-02T12:36:16.359Z'
   author: CI/CD Bot
