@@ -1,9 +1,9 @@
 ---
 title: "Alfresco"
 last_update:
-  date: '2026-02-05T15:11:39.219Z'
+  date: '2026-02-05T15:28:19.384Z'
   author: CI/CD Bot
-content_hash: b5b2a17ed36ebffc21d4050a607c58cb71ddaab81ce899eaf0e2eeb3698cf406
+content_hash: cff50d98109fa3668104116b60a4d96f677ff769f85e8cea8ad78e93727b1342
 ---
 
 We present here the installation of the ARender Web-UI in alfresco.
@@ -38,4 +38,4 @@ http://{arender_serveur}:{arender_port}/ARenderHMI/?nodeRef={nodeRef}&user={user
 
 ![alfresco](pathname:///img/arender/alfresco/alfresco-new-01.png)
 
-You have finished the quick installation of ARender for Alfresco. To go further, go to the page here : **[Advanced configuration](/v4/connector/alfresco/_index.md)**
+You have finished the quick installation of ARender for Alfresco. To go further, go to the page here : **[Advanced configuration](../../../../connector/alfresco/index.md)**

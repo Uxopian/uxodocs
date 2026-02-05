@@ -2,9 +2,9 @@
 title: "ARender for FileNet in Apache Tomcat Application Server"
 sidebar_position: 2
 last_update:
-  date: '2026-02-05T15:05:05.898Z'
+  date: '2026-02-05T15:28:19.384Z'
   author: CI/CD Bot
-content_hash: b07bc97c8de8646a3ef1ce96553fa1ec81c1fbca89b2beb5435dcea2cf883f38
+content_hash: 6fe3fe49ea878e7a165f44626e3633a2109d691a60d53393b0938f54477649bf
 ---
 
 Below the deployment of ARender HMI for FileNet in **Apache Tomcat**.
@@ -17,7 +17,7 @@ The consequences will be that:
 - Documents/Annotations/Metadata will be fetched with the technical account,
 - Annotations will have the name of the technical account.
 
-If the need is to propagate the authentication you can either use WebSphere as Application server (see the documentation [here](/v4/install/standalone/presentation/filenet/filenet-was.md)).
+If the need is to propagate the authentication you can either use WebSphere as Application server (see the documentation [here](./filenet-was.md)).
 
 :::
 

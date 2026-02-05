@@ -19,11 +19,11 @@
       },
       {
         "label": "APIs",
-        "href": "/docs/arender/apis/javascript/annotation-js-api"
+        "href": "/docs/arender/apis/rendition"
       },
       {
         "label": "Configuration",
-        "href": "/docs/arender/configuration/web-ui/annotation"
+        "href": "/docs/arender/configuration/Rendition/service-broker"
       },
       {
         "label": "Performance",

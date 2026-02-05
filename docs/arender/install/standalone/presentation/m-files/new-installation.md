@@ -2,9 +2,9 @@
 title: "New installation"
 sidebar_position: 2
 last_update:
-  date: '2026-02-05T15:11:39.219Z'
+  date: '2026-02-05T15:28:19.384Z'
   author: CI/CD Bot
-content_hash: 5eaf98edff39e1d94ea5ea7bb2a2dbb3a766a8ebcc5ea1f14f75bc6eae247dac
+content_hash: 59f5b06b045f07d1cbcfed142535222154540d7203def74efa81a43912e859c9
 ---
 
 Here we present the Web-UI installation in M-Files. 
@@ -16,7 +16,7 @@ in an environment with:
 - M-Files 
 - A Tomcat9 server
 - ARender Web-UI version 4.8.21
-- ARender Rendition version 4.8.21. For more information on how to install, see **[documentation](/v4/install/standalone/presentation/install.md)**
+- ARender Rendition version 4.8.21. For more information on how to install, see **[documentation](../install.md)**
 
 
 ## Steps to Configure the Rendition

@@ -2,9 +2,9 @@
 title: "Presentation server"
 sidebar_position: 2
 last_update:
-  date: '2026-02-05T15:05:05.898Z'
+  date: '2026-02-05T15:28:19.384Z'
   author: CI/CD Bot
-content_hash: 42c09c592bc96fdc6f89be49ea90058083ed7a2c2ea4a62f37471614c4bf3548
+content_hash: 8ff89db00601f318ff2155d7100b14971bbd0d1a6f5768991ff78e3ba48f18bc
 ---
 
 ## Configuration
@@ -34,8 +34,8 @@ arender.server.rendition.hosts -> ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS
 
 See documentation:
 
-- [Profile](/v4/configuration/web-ui/profile.md)
-- [ARender front configuration properties list](/v4/configuration/web-ui/full-config.md)
+- [Profile](../../configuration/web-ui/profile.md)
+- [ARender front configuration properties list](../../configuration/web-ui/full-config.md)
 
 #### Server
 

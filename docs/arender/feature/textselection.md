@@ -2,9 +2,9 @@
 title: Text Selection
 sidebar_position: 18
 last_update:
-  date: '2026-02-05T15:11:39.219Z'
+  date: '2026-02-05T15:28:19.384Z'
   author: CI/CD Bot
-content_hash: a5afda55def107d443dc46a03e313aec54136a982c22b01bf31d6198c20a95c0
+content_hash: a6a4f10e51b0b8632647f4284979cb5450efbb27ebdf08a29590735195906be7
 ---
 
 ## Document Text Selection
@@ -44,7 +44,7 @@ This action undoes the automatic selection of the entire word, and allows the us
 
 ![image](pathname:///img/arender/selection-word-reversing-demo.gif)
 
-To enable the new feature, please refer to the dedicated configuration [here](/v4/configuration/web-ui/textselection.md)
+To enable the new feature, please refer to the dedicated configuration [here](../../configuration/web-ui/textselection.md)
 
 ## Text Selection - Line
 

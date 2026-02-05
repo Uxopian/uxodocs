@@ -1,9 +1,9 @@
 ---
 title: "Alfresco connector"
 last_update:
-  date: '2026-02-05T15:11:39.219Z'
+  date: '2026-02-05T15:28:19.384Z'
   author: CI/CD Bot
-content_hash: e63abec8b8c8dc35241c536ae107bdb8be8f49df24289108e14a590a515e78ba
+content_hash: 09e921b6f5e04991a788768e3accca2d2bc9f8c4db41f11dad31346f193bbe17
 ---
 
 ## Introduction
@@ -67,7 +67,7 @@ By default, the context path is *alfresco* (for /alfresco).
 
 No configuration is needed for annotations storage in Alfresco.
 
-Annotations will be stored as a child node of the document Node itself. Child node name is: **cm:arender-annotations-v{version document}**.
+Annotations will be stored as a child node of the document Node itself. Child node name is: **`cm:arender-annotations-v{version document}`**.
 
 ![Annotation child node image](pathname:///img/arender/alfresco/ARender4Alfresco-AnnotationChildNode.png)
 

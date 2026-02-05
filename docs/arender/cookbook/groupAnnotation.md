@@ -2,9 +2,9 @@
 title: "Group annotations"
 sidebar_position: 14
 last_update:
-  date: '2026-02-05T15:11:39.219Z'
+  date: '2026-02-05T15:28:19.384Z'
   author: CI/CD Bot
-content_hash: 3eae84cc2819147ad0720b0febf9e5c8b141503b211248b6fd12719e367a24b0
+content_hash: 7d7ef1be9e4358cd1cae5621c48049fbc6a70a9b7ca2d2c3b0a0c5035b3c7480
 ---
 
 The assignment of a group to an annotation is done with the use of the *Security* property which makes it possible to store the group name of the annotation.
@@ -113,7 +113,7 @@ private Map<String, String> buildLocalizedDisplayNames(String fr, String en)
 
 ## Keep the notion of private annotation
 
-The notion of private annotation is compatible with the notion of an annotation group. We must keep the definition of *property name = "symbolicName" value = "private"*. The description of private annotations can be found in the section *Annotation securities configuration* in the page [Annotation](/v4/cookbook/annotation.md)
+The notion of private annotation is compatible with the notion of an annotation group. We must keep the definition of *property name = "symbolicName" value = "private"*. The description of private annotations can be found in the section *Annotation securities configuration* in the page [Annotation](./annotation.md)
 
 Example of configuration of the bean that will populate the annotation group list with the *Private* choice :
 

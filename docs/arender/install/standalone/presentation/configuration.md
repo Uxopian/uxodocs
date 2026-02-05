@@ -2,9 +2,9 @@
 title: "Configuration"
 sidebar_position: 5
 last_update:
-  date: '2026-02-05T15:05:05.898Z'
+  date: '2026-02-05T15:28:19.384Z'
   author: CI/CD Bot
-content_hash: 7240d485e7a69521f89de06e994e7bdba56bb00032682a6c6de1a4950bbbbd46
+content_hash: 89aae0d2d8aa8a7e6c2a4b1f5ae06f75cbdad5ca4ec2ab2eb9440e385e17a765
 ---
 
 ## Configuration files of ARender Web-UI
@@ -21,7 +21,7 @@ content_hash: 7240d485e7a69521f89de06e994e7bdba56bb00032682a6c6de1a4950bbbbd46
 | ehcache.xml                                      | Yes      | Cache configuration of documents opened via the graphical interface.                                                        |
 | log4j.properties                                 | Yes      | Application logs configuration.                                                                                             |
 | arender-default.properties                       | No       | Default interface configuration.                                                                                            |
-| arender.properties                               | Yes      | Custom configuration of ARender Web-UI (Cf. [Profile](/v4/configuration/web-ui/profile.md))                |
+| arender.properties                               | Yes      | Custom configuration of ARender Web-UI (Cf. [Profile](../../../../configuration/web-ui/profile.md))                |
 | customClient/&lt;...\>-custom-client-ui.properties  | Yes      | Another custom configuration of ARender Web-UI that support a wilcard filename                                              |
 | arender-env.properties                           | No       | Configuration of ARender Web-UI provided through Docker environment variables                                               |
 
