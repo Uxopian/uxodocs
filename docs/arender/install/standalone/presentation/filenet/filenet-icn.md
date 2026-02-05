@@ -2,9 +2,9 @@
 title: "Install in ICN"
 sidebar_position: 3
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 1074046a4cc3b3aba9d8bd6ed47a5e30ac84e017c05c446d1e168e26f0f9845f
+content_hash: 67be75f12eeb436ea361dee6c80bf31c543749703f34d4c6e7af08267a6e6339
 ---
 
 We continue here the installation but in the ICN module of FileNet.
@@ -29,11 +29,11 @@ Thus, you will need to configure LTPA in order to enable session sharing between
 
 In WebSphere Administration Console of the **CPE**, navigate to **Security** > **Global Security**, under **Authentication**, click **LTPA**
 
-![filenet](/img/arender/filenet/filenet-18.png)
+![filenet](pathname:///img/arender/filenet/filenet-18.png)
 
 - Specify a password, a filepath, and click "Export keys"
 
-![filenet](/img/arender/filenet/filenet-19.png)
+![filenet](pathname:///img/arender/filenet/filenet-19.png)
 
 - Import the LTPA CPE key in the ARender JVM
 
@@ -66,23 +66,23 @@ The session of the user userA was not invalidated when he disconnected, which wi
 - Go to your websphere console then in the menu go to *servers -> server types -> websphere application servers*.
 - Select the server on which you want to make the modification. In our example, we choose *serverICN*
 
-![filenet](/img/arender/documentation/filenet/userSession/servers.png)
+![filenet](pathname:///img/arender/documentation/filenet/userSession/servers.png)
 
 - In *Container settings* go to *Session management*.
 
-![filenet](/img/arender/documentation/filenet/userSession/specific_serve.png)
+![filenet](pathname:///img/arender/documentation/filenet/userSession/specific_serve.png)
 
 - In *Additional properties*, click on *custom properties*.
 
-![filenet](/img/arender/documentation/filenet/userSession/session_management.png)
+![filenet](pathname:///img/arender/documentation/filenet/userSession/session_management.png)
 
 - Click on *New...* to add the property.
 
-![filenet](/img/arender/documentation/filenet/userSession/custom_properties.png)
+![filenet](pathname:///img/arender/documentation/filenet/userSession/custom_properties.png)
 
 - Add the property *InvalidateOnUnauthorizedSessionRequestException* with the value *true* so that it is applied.
 
-![filenet](/img/arender/documentation/filenet/userSession/new_property.png)
+![filenet](pathname:///img/arender/documentation/filenet/userSession/new_property.png)
 
 - You must then click on *Ok* then *save*. Restart your Filenet services to take this property into account.
 
@@ -94,33 +94,33 @@ Connect to Content Navigator.
 
 Go to the ‘Administration View’ and click on ‘Plug-ins’
 
-![filenet](/img/arender/filenet/filenet-22.png)
+![filenet](pathname:///img/arender/filenet/filenet-22.png)
 
 Click on the button "New Plugin-in".
 
-![filenet](/img/arender/filenet/filenet-23.png)
+![filenet](pathname:///img/arender/filenet/filenet-23.png)
 
 Enter the JAR file path and click on ‘Load’.
 
-![filenet](/img/arender/filenet/filenet-24.png)
+![filenet](pathname:///img/arender/filenet/filenet-24.png)
 
 Fill ‘ARender context root’ field with ARender’s address (hots + port + context root). Like below:
 
-![filenet](/img/arender/filenet/filenet-25.png)
+![filenet](pathname:///img/arender/filenet/filenet-25.png)
 
 To use this Map, you just need to link it to a Desktop (Desktop tab -> Edit the desktop -> Select the Map in the Viewer Map list)
 
-![filenet](/img/arender/filenet/filenet-26.png)
+![filenet](pathname:///img/arender/filenet/filenet-26.png)
 
 And finally, click on "Save".
 
-![filenet](/img/arender/filenet/filenet-27.png)
+![filenet](pathname:///img/arender/filenet/filenet-27.png)
 
 You can now restart your application servers and attempt to open a file in FileNet.
 
-![filenet](/img/arender/filenet/filenet-28.png)
+![filenet](pathname:///img/arender/filenet/filenet-28.png)
 
-![filenet](/img/arender/filenet/filenet-29.png)
+![filenet](pathname:///img/arender/filenet/filenet-29.png)
 
 ## Use ARender advanced features directly from ICN
 
@@ -132,13 +132,13 @@ End-users can use ARender Compare and Document Builder features directly from IC
 * Select **Menus**
 * Search the Menu named **Default document context menu**
     
-![filenet](/img/arender/filenet/Default-document-context-menu.png)
+![filenet](pathname:///img/arender/filenet/Default-document-context-menu.png)
     
 * Right click on this menu and select **Copy**
 * Define a Name and a description to the new Menu
 * In the *Available* box select **Compare documents** and/or **Merge documents** action and add them into the *Selected* menu on the right
 
-![filenet](/img/arender/filenet/CompareAndMerge-Selected.png)
+![filenet](pathname:///img/arender/filenet/CompareAndMerge-Selected.png)
 
 
 ### Add the created menu to the ICN Desktop
@@ -150,16 +150,16 @@ End-users can use ARender Compare and Document Builder features directly from IC
 * Search for the Menu named **Document context menu**
 * In its drop-down list value, select the menu you created above
 
-![filenet](/img/arender/filenet/CompareAndMergeMenu.png)
+![filenet](pathname:///img/arender/filenet/CompareAndMergeMenu.png)
 
 ### Use ARender compare feature
 
 To compare document, you have to select **two documents** and select **Compare documents** from ICN Action menu or using right click
 
-![filenet](/img/arender/filenet/Compare-Action.png)
+![filenet](pathname:///img/arender/filenet/Compare-Action.png)
 
 ### Use ARender Document Builder feature
 
 To merge and split documents, you have to select at least one document and select **Merge documents** from ICN Action menu or using right click
 
-![filenet](/img/arender/filenet/Merge-Action.png)
+![filenet](pathname:///img/arender/filenet/Merge-Action.png)

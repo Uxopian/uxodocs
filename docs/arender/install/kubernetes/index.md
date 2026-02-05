@@ -1,9 +1,9 @@
 ---
 title: "Kubernetes"
 last_update:
-  date: '2026-02-02T12:14:50.879Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 8fde6e438d8dba99fab40c53e65caffac329a0a1c2dd6445963cedfd08c34915
+content_hash: b752685a555cb6f8f1b05d419bff728f54b72140419ae6b638b29f503782af95
 ---
 
 :::warning

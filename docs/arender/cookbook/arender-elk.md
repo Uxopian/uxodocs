@@ -2,9 +2,9 @@
 title: "ELK stack configuration"
 sidebar_position: 13
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: cedb0d22a1bd54283c6aec0e1dac59b111b9c9a5878a7b208229e4092d3ce32e
+content_hash: ccbb565f315dbd2537ecd40eb5257100ce0aeea6d357d2fe31f1f2f3fc95cf00
 ---
 
 ## Introduction
@@ -22,10 +22,10 @@ In Kibana data are shown in a graphical user friendly way. Graphics creation is 
 See below examples : 
 
 * Average document loading time :
-![img](/img/arender/ELK/elk-average-time-document-loading.png)
+![img](pathname:///img/arender/ELK/elk-average-time-document-loading.png)
 
 * MIME Type distribution :
-![img](/img/arender/ELK/elk-mimetype-loaded.png)
+![img](pathname:///img/arender/ELK/elk-mimetype-loaded.png)
 
 ## Prerequisites
 ### To import visualizations and dashboards with .ndjson files
@@ -69,23 +69,23 @@ Before configuring Kibana, you need to open at least one document in ARender in 
 * Open Kibana in your browser. Local URL : [http://localhost:5601/app/kibana](http://localhost:5601/app/kibana)
 
 * Go to the Management section :
-![img](/img/arender/ELK/configuration.png)
+![img](pathname:///img/arender/ELK/configuration.png)
 
 
 * Go to the Index Patterns :
-![img](/img/arender/ELK/indexpattern.png)
+![img](pathname:///img/arender/ELK/indexpattern.png)
 
 
 * Add the 2 indexes : 
   * arender-performance
     * arender-rendition-performance
 
-![img](/img/arender/ELK/ajoutpattern.png)
+![img](pathname:///img/arender/ELK/ajoutpattern.png)
 
 #### Import dashboard example
 
 * Go to Saved Objects :
-![img](/img/arender/ELK/savedobject.png)
+![img](pathname:///img/arender/ELK/savedobject.png)
 
 * For version allowing .ndjson file import (Since Kibana 7.2.0):
     * First import visualization. Click on import and select the file :  [ Arender-visualizations.ndjson](/docs/ELK/Arender-visualizations.ndjson)
@@ -95,4 +95,4 @@ Before configuring Kibana, you need to open at least one document in ARender in 
     * Then import dashboard. Click on import and select the file : [ Arender-dashboard-example.json](/docs/ELK/Arender-dashboard-example.json)
 
 * Open dashboard :  
-![img](/img/arender/ELK/dashboard.png)
+![img](pathname:///img/arender/ELK/dashboard.png)

@@ -1,9 +1,9 @@
 ---
 title: "Alfresco"
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: cc64f74eac85e9a1cf74ee300c34cdfb7d0faca3639dd749ecd8f986c9765970
+content_hash: b5b2a17ed36ebffc21d4050a607c58cb71ddaab81ce899eaf0e2eeb3698cf406
 ---
 
 We present here the installation of the ARender Web-UI in alfresco.
@@ -26,7 +26,7 @@ you can retrieve the web application version used in WAR format [here](https://a
 - Copy the file **arondor-arender-alfresco-`{version}`.ampwar** in your *`{alfresco_tomcat}`/webapps* folder
 - Rename the .war file to **ARenderHMI.war**
 
-![alfresco](/img/arender/alfresco/alfresco-01.png)
+![alfresco](pathname:///img/arender/alfresco/alfresco-01.png)
 
 ## The installation is complete
 
@@ -36,6 +36,6 @@ You can now start the alfresco server and try to open a file with a link formed 
 http://{arender_serveur}:{arender_port}/ARenderHMI/?nodeRef={nodeRef}&user={user}&alf_ticket={ticket}&versionLabel={version}
 ```
 
-![alfresco](/img/arender/alfresco/alfresco-new-01.png)
+![alfresco](pathname:///img/arender/alfresco/alfresco-new-01.png)
 
 You have finished the quick installation of ARender for Alfresco. To go further, go to the page here : **[Advanced configuration](/v4/connector/alfresco/_index.md)**

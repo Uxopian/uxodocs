@@ -2,9 +2,9 @@
 title: "Obtain sharper images"
 sidebar_position: 20
 last_update:
-  date: '2026-02-02T12:23:28.934Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 38d515059f0071dc0e4c9938c761e1f9da67364246685ead5ead4e28c5ca2347
+content_hash: fbb76eb0e25f137e94603411eb837701a4de47e8cea44243ab7ba1cde2333232
 ---
 
 import Tabs from '@theme/Tabs';
@@ -24,13 +24,13 @@ The parameter to modify is the following:
 
 <Tabs>
 <TabItem value="0 md" label="0 md">
-![image](/img/arender/blurry.png)
+![image](pathname:///img/arender/blurry.png)
 </TabItem>
 <TabItem value="1 md" label="1 md">
-![image](/img/arender/unblurry.png)
+![image](pathname:///img/arender/unblurry.png)
 </TabItem>
 <TabItem value="2 md" label="2 md">
-![image](/img/arender/adobePixel.png)
+![image](pathname:///img/arender/adobePixel.png)
 </TabItem>
 </Tabs>
 

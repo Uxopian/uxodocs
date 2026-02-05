@@ -2,15 +2,15 @@
 title: Redaction
 sidebar_position: 14
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 787d74dba2f658134c48931dbf0bdc05b222f970a7fbf6844cbe486346a96377
+content_hash: 4ec55a13b9d783cf59d671f2685649f49ff9ee693929dcc480b80e72d1281757
 ---
 ## Default behavior 
 
 ARender offers the possibility to hide content from any document thanks to the **redaction feature**.
 
-![image](/img/arender/features/redaction.gif)
+![image](pathname:///img/arender/features/redaction.gif)
 
 To show the redaction buttons, add the below properties:
 

@@ -2,60 +2,60 @@
 title: Document Builder
 sidebar_position: 3
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 228070dc409ea84f8ded08ee57f803221b34c5716dc68e31bc1274f88b7170c8
+content_hash: 3b8988bd50f107f49f697d3730f7087c68cc780d898ad2de002abd786a3e85e6
 ---
 
 ## Access the document builder
 
 In order to activate the document builder mode, click on the "Scissor"
 
-![image](/img/arender/new/en_builder1.png)
+![image](pathname:///img/arender/new/en_builder1.png)
 
 The document builder mode will now be displayed
 
-![image](/img/arender/new/en_builder2.png)
+![image](pathname:///img/arender/new/en_builder2.png)
 
 You can decide to hide or display source documents by clicking on those
 following buttons:
 
-![image](/img/arender/new/en_builder3.png)
+![image](pathname:///img/arender/new/en_builder3.png)
 
 You can also hide or extend source documents by clicking on these
 buttons:
 
-![image](/img/arender/new/en_builder4.png)
+![image](pathname:///img/arender/new/en_builder4.png)
 
 ## Create a new document
 
 In order to create a new document, click on the " + " button shown in
 the following picture
 
-![image](/img/arender/new/en_builder5.png)
+![image](pathname:///img/arender/new/en_builder5.png)
 
 You can also create a new document with a right-click on the document
 builder view:
 
-![image](/img/arender/new/en_builder6.png)
+![image](pathname:///img/arender/new/en_builder6.png)
 
 You can rename a document by clicking on the title and then typing the
 new name
 
-![image](/img/arender/new/en_builder7.png)
+![image](pathname:///img/arender/new/en_builder7.png)
 
 Then, you can add pages to your document, from your other documents. If
 you want to keep your other documents, you have to drag and drop your
 pages from the thumbnails navigation, which contains your source
 documents:
 
-![image](/img/arender/new/en_builder8.png)
+![image](pathname:///img/arender/new/en_builder8.png)
 
 If you do not want to keep your other documents, you can drag and drop
 your pages from the document builder view. The selected page is no
 longer in the first document:
 
-![image](/img/arender/new/en_builder9.png)
+![image](pathname:///img/arender/new/en_builder9.png)
 
 You can drag and drop several pages in a row:
 
@@ -65,7 +65,7 @@ You can drag and drop several pages in a row:
 
 Then, save your new document by clicking on the following icon
 
-![image](/img/arender/new/en_builder10.png)
+![image](pathname:///img/arender/new/en_builder10.png)
 
 The document is now downloaded.
 
@@ -74,7 +74,7 @@ The document is now downloaded.
 To delete a document from the document builder view, click on the cross
 corresponding to the document to be deleted:
 
-![image](/img/arender/new/en_builder11.png)
+![image](pathname:///img/arender/new/en_builder11.png)
 
 If you delete every pages of a document, the document will be deleted.
 
@@ -85,11 +85,11 @@ To merge two or more documents, you have to create a new document
 Then, you drag and drop all the pages you want from the source document,
 to your new document:
 
-![image](/img/arender/new/en_builder12.png)
+![image](pathname:///img/arender/new/en_builder12.png)
 
 Then to save your document, click on the following icon.
 
-![image](/img/arender/new/en_builder13.png)
+![image](pathname:///img/arender/new/en_builder13.png)
 
 ## Split a document
 
@@ -97,11 +97,11 @@ To split a document in several documents, you have to create your new
 documents (more information about document creation here). Then drag and
 drop the pages you want in each new documents.
 
-![image](/img/arender/new/en_builder14.png)
+![image](pathname:///img/arender/new/en_builder14.png)
 
 Then, to save your new documents, click on these following icons
 
-![image](/img/arender/new/en_builder15.png)
+![image](pathname:///img/arender/new/en_builder15.png)
 
 ## Reshape a document
 
@@ -109,33 +109,33 @@ You can move a page into a document with a drag and drop in the document
 builder view. In this example, the first page is moved to the fourth
 position:
 
-![image](/img/arender/new/en_builder16.png)
+![image](pathname:///img/arender/new/en_builder16.png)
 
 You can add several times the same page in your document. You have to
 drag and drop the page from the source document to your document in
 building. In this example, the third page is added three times:
 
-![image](/img/arender/new/en_builder17.png)
+![image](pathname:///img/arender/new/en_builder17.png)
 
 You can delete a page from your document. Click on the red cross on the
 page to be deleted:
 
-![image](/img/arender/new/en_builder18.png)
+![image](pathname:///img/arender/new/en_builder18.png)
 
 To save your changes, click on the following icon:
 
-![image](/img/arender/new/en_builder20.png)
+![image](pathname:///img/arender/new/en_builder20.png)
 
 ## Exit the document builder mode
 
 To close the document builder, you click on the "Scissor" icon:
 
-![image](/img/arender/new/en_builder21.png)
+![image](pathname:///img/arender/new/en_builder21.png)
 
 You can also close the document builder with a right-click in the
 document builder view:
 
-![image](/img/arender/new/en_builder22.png)
+![image](pathname:///img/arender/new/en_builder22.png)
 
 ## Use custom document builder layout 
 
@@ -224,7 +224,7 @@ This object is a JSON format of the custom document builder created, containing 
 
 The custom document builder layout scheme looks like so :
 
-![image](/img/arender/customDocumentBuilder/customLayoutScheme.PNG)
+![image](pathname:///img/arender/customDocumentBuilder/customLayoutScheme.PNG)
 
 The document builder layout contains several documents (nodes) that contains :
 
@@ -334,7 +334,7 @@ Sample :
 
 The options are given as proposals to fill the drop-down list.
 
-![image](/img/arender/customDocumentBuilder/customOptions.PNG)
+![image](pathname:///img/arender/customDocumentBuilder/customOptions.PNG)
 
 The key attributes of this option list will match the *type* attribute of the *metadata* of the json file of the document builder layout.
 In this example with the previous *documentBuilderLayout.json* used, the type *Accepted Step 2 CS Applications* matches the type of the metadata of the first document.
@@ -345,7 +345,7 @@ In the others drop-down lists, no given type (*Sample* or *Rejected*) is matchin
 
 Here is the visual results of the document builder in ARender :
 
-![image](/img/arender/customDocumentBuilder/customDocumentBuilder.PNG)
+![image](pathname:///img/arender/customDocumentBuilder/customDocumentBuilder.PNG)
 
 The empty fields can then be filled with desired values or left empty.
 
@@ -353,7 +353,7 @@ The empty fields can then be filled with desired values or left empty.
 
 When the save button is pressed, the code given in the *registerDocumentBuilderSaveCustomEvent* function of the javascript part is executed.
 
-![image](/img/arender/customDocumentBuilder/customLayoutSaveAll.PNG)
+![image](pathname://img/arender/customDocumentBuilder/customLayoutSaveAll.PNG)
 
 In this example, it will log the json format of the current layout of the document builder.
 

@@ -2,9 +2,9 @@
 title: "Create custom localized labels"
 sidebar_position: 8
 last_update:
-  date: '2026-02-02T12:23:28.934Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 2a65d32ce48868d059eb66b23c67e8cac55b4aacb6e3005ffdc95db48b970d9e
+content_hash: aef637fc03ecf95f267fa099516ab4f31961f1b6cf57bb813bf291fa11c5391b
 ---
 
 This guide will help you create custom localized labels.

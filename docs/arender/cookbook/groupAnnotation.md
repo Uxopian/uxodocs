@@ -2,9 +2,9 @@
 title: "Group annotations"
 sidebar_position: 14
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: c1b1cdd4c550116bb64da154e697bf2e49c3e67be514c4b50025fce5bfad5206
+content_hash: 3eae84cc2819147ad0720b0febf9e5c8b141503b211248b6fd12719e367a24b0
 ---
 
 The assignment of a group to an annotation is done with the use of the *Security* property which makes it possible to store the group name of the annotation.
@@ -67,7 +67,7 @@ Example of configuration of the bean that will populate the annotation group lis
 
 Visually, a dropdown list is displayed in the toppanel when editing an annotation.
 
-![image](/img/arender/documentation/GroupeAnnotations/groupeannotation1.png)
+![image](pathname:///img/arender/documentation/GroupeAnnotations/groupeannotation1.png)
 
 ## Modification by connector
 
@@ -167,7 +167,7 @@ Example of configuration of the bean that will populate the annotation group lis
 ```
 
 
-![image](/img/arender/documentation/GroupeAnnotations/groupeannotation2.png)
+![image](pathname:///img/arender/documentation/GroupeAnnotations/groupeannotation2.png)
 
 
 ## How to use the notion of group

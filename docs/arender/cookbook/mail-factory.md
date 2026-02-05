@@ -2,9 +2,9 @@
 title: "Resolve mail conversion issue"
 sidebar_position: 22
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 5b731b30b7c2b213eea394b506f7a5884033f13bc8ad415b4f37739621360e07
+content_hash: b2a14dd9b22807f3de05571d1f74dee49eaa70859958d76dfba27d11d03d2462
 ---
 
 You probably have a configuration problem related to wkhtmltopdf.

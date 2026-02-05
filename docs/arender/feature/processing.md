@@ -2,15 +2,15 @@
 title: Image processing
 sidebar_position: 7
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 817b34cbc64f6988ecfbec04d01b27699ef73541ba111e8e8bac7e96ccbb2aa1
+content_hash: b5524c1d8b11638f90b00bb421df43a348585341053e813acf3fe9897dcccc6f
 ---
 
 To improve the visibility of elements on certain documents, it is possible to manipulate the contrast and brightness by using a slider ranging from -100 to 100 where 0 is the default value.
 
 
-![image](/img/arender/features/imageProcessing/processingPanel.gif)
+![image](pathname:///img/arender/features/imageProcessing/processingPanel.gif)
 
 
 The feature can be activated with the following configuration :

@@ -1,9 +1,9 @@
 ---
 title: "FAQ"
 last_update:
-  date: '2026-02-02T12:41:03.333Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: ec8389ed6c35a06898f4667dcd930d32a72d5bb9ce3afb28530652beef0a598c
+content_hash: d0c70dbe7c74510d22cbc03cc2de8f8c9553fff4f3e00121bd2478e55423a7a6
 ---
 
 import Tabs from '@theme/Tabs';
@@ -225,7 +225,7 @@ In details:
 
     Summary:
 
-    ![image](/img/arender/png_vs_jpeg_medium.png)
+    ![image](pathname:///img/arender/png_vs_jpeg_medium.png)
 
 - **quality:** Image compression level, jpeg or png (1-100), default is 100. Grain and compression levels depend on the generated image's type. Maximal quality is selected by default.
 

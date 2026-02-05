@@ -2,9 +2,9 @@
 title: "Check"
 sidebar_position: 5
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 5c4c1c75c92553115fb75793a800772ea5e7fce8a89eeea524e596cd4b25658e
+content_hash: 6fe80fe34ade6ca3dfa4b10753a66108f95bbf0388359d4ca5c127cd1e8b8777
 ---
 
 Once the server is starting, you can check the URL
@@ -12,7 +12,7 @@ Once the server is starting, you can check the URL
 to see status services (please replace "renditionServerHost" with your actual *hostname* on which
 the rendition server is running).
 
-![HealthRecords](/img/arender/healthRecords_V4.png)
+![HealthRecords](pathname:///img/arender/healthRecords_V4.png)
 
 All services must be visible, started, and functional.
 

@@ -1,9 +1,9 @@
 ---
 title: "Alfresco connector"
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 7f78050fa1f03a12bab714649104c0bc156b8191ff5b17223884d030f9a2e6c1
+content_hash: e63abec8b8c8dc35241c536ae107bdb8be8f49df24289108e14a590a515e78ba
 ---
 
 ## Introduction
@@ -12,13 +12,13 @@ This article details the integration and installation of CMIS connector
 Arender. This covers the integration part in Alfresco and Web-UI
 configuration part.
 
-![image](/img/arender/ARender-for-Alfresco_imagefull.png)
+![image](pathname:///img/arender/ARender-for-Alfresco_imagefull.png)
 
 ## Architecture
 
 Below a communication diagram of ARender deployed in an Alfresco context:
 
-![image](/img/arender/alfresco/ARender4Alfresco-CommunicationDiagram.png)
+![image](pathname:///img/arender/alfresco/ARender4Alfresco-CommunicationDiagram.png)
 
 Note that this connector uses CMIS protocol, so it can be used with any ECM that supports CMIS protocol
 
@@ -69,7 +69,7 @@ No configuration is needed for annotations storage in Alfresco.
 
 Annotations will be stored as a child node of the document Node itself. Child node name is: **cm:arender-annotations-v{version document}**.
 
-![Annotation child node image](/img/arender/alfresco/ARender4Alfresco-AnnotationChildNode.png)
+![Annotation child node image](pathname:///img/arender/alfresco/ARender4Alfresco-AnnotationChildNode.png)
 
 #### Deactivate annotation migration
 

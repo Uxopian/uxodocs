@@ -2,9 +2,9 @@
 title: "Annotations"
 sidebar_position: 3
 last_update:
-  date: '2026-02-02T12:23:28.934Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: e33cce197ee8ba8569bc82eb3aa633b15a6722d617436c7c6afacd624f9fef40
+content_hash: 2e23de5d827f296a298c660ab10280f6444327e2a29be5428020949b4b677eb7
 ---
 
 ## Annotation creation policy configuration
@@ -275,7 +275,7 @@ annotation is in edit mode. Every security has two parameters:
 
 Since the version 4.7.x, the annotation buttons are in the toppanel by default, they are no longer in a submenu.
 
-![img](/img/arender/toppanel/toppanel-annotation-1.png)
+![img](pathname:///img/arender/toppanel/toppanel-annotation-1.png)
 
 ### Current configuration of the buttons in the toppanel
 
@@ -417,4 +417,4 @@ Once these steps are completed, you will have a bean that looks like the followi
 
 Result with several annotation creation buttons in the submenu :
 
-![img](/img/arender/toppanel/toppanel-annotation-2.png)
+![img](pathname:///img/arender/toppanel/toppanel-annotation-2.png)

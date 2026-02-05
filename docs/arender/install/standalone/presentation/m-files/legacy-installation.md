@@ -2,9 +2,9 @@
 title: "Legacy installation"
 sidebar_position: 1
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: f70e891f62dca0b9b8e024c9711ae2afd88a88cf166813e300663fa382ded3ce
+content_hash: 5af4e2e20813770731d263aafe7a438db7d290f013dde2d01e5175302cb8ddc4
 ---
 
 Here we present the Web-UI installation in M-Files. 
@@ -59,7 +59,7 @@ You need to edit different values of the *arender-server.properties* file depend
 - Install the ARenderApp.zip in your vault apps.
 [ARenderApp.zip](/docs/install/install-mfiles/ARenderApp.zip)
 
-![mfiles](/img/arender/mfiles/mfiles-03.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-03.png)
 *( M-Files Admin -> choose your vault -> right click -> Applications -> Install )*
 
 - Log out of the vault and log back in to ensure changes are accounted for
@@ -68,14 +68,14 @@ You need to edit different values of the *arender-server.properties* file depend
 
 - Restart the IIS server
 
-![mfiles](/img/arender/mfiles/mfiles-04.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-04.png)
 
 - Start the Tomcat9 server
 - Access M-Files under M:/
 
-![mfiles](/img/arender/mfiles/mfiles-05.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-05.png)
 
 - Select your safe
 - Drag and drop a document to open it with ARender
 
-![mfiles](/img/arender/mfiles/mfiles-06.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-06.png)

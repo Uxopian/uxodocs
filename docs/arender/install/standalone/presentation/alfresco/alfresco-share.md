@@ -2,9 +2,9 @@
 title: "Installation in Share"
 sidebar_position: 1
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 5209e1672ca3aaf84d0e7e8d970872df475f4cb0a016e2c8365c1a2a50996fb2
+content_hash: 9c0d2338fe562b75caff1ddf50d00d1817a9370ae8da6ebc550102a0eeeeb05e
 ---
 
 We present here the continuation of the installation of the Web-UI, in the Share module of Alfresco.
@@ -34,12 +34,12 @@ Add the following lines to the _\{alfresco_tomcat\}/shared/classes/alfresco/web-
 </config>
 ```
 
-![alfresco](/img/arender/alfresco/alfresco-03.png)
+![alfresco](pathname:///img/arender/alfresco/alfresco-03.png)
 
 ## The installation complete
 
 You can now start the alfresco server and try to open a file stored in it.
 
-![alfresco](/img/arender/alfresco/alfresco-04.png)
+![alfresco](pathname:///img/arender/alfresco/alfresco-04.png)
 
 You have finished the quick installation of ARender for Alfresco Share. To go further, please refer to the [Features documentation](../../../../connector/alfresco/features-share.md) page to know the features of such integration.**

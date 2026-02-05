@@ -2,9 +2,9 @@
 title: Sliders
 sidebar_position: 17
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 928d566ab9afb9be2b9a99a8d621916b57ccbbde095b24f1f22891f160d881ea
+content_hash: ff99b0ceb25fe05f396eef419939a2469115b1a8950265962cc5c85f47299c9e
 ---
 
 ## Description

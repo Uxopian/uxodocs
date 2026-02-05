@@ -2,9 +2,9 @@
 title: Plume
 sidebar_position: 12
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 0875a8af251646ddc7b0c321c147d81f4729eb144323942e96c00db390973141
+content_hash: 21515efb822f9ea9de351eb98cac40ce33d80014c366b343e7c00874acf122a2
 ---
 ## Sending emails in ARender
 

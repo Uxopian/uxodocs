@@ -2,9 +2,9 @@
 title: "Configuration"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: b8f3e38be02454d042d567635fca591f33691b6ce917e67bc94ec4cb1a2a2f8a
+content_hash: a231d213ce269682e3fb6ecc98ec0fc3936a17b38dcab39f69e6f3201cfdcd47
 ---
 
 import Tabs from '@theme/Tabs';

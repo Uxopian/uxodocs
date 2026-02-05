@@ -2,9 +2,9 @@
 title: Lasso
 sidebar_position: 8
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 58f7036c24cdc0b2a71e44dd273e1af6674ceb6b37c622f1d06fe51207e43b5a
+content_hash: 32501d43474558a6aee00f3c4ccf0c025f6ee46bd5f1252a96c0f8aca4d434b3
 ---
 
 ## Description
@@ -19,4 +19,4 @@ The lasso feature can be used with our Javascript API. Instruction to use it can
 
 Here a demonstration with a custom button.
 
-![image](/img/arender/lasso/lassoFeatureDemo.gif)
+![image](pathname:///img/arender/lasso/lassoFeatureDemo.gif)

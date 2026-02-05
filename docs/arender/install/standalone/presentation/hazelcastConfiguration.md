@@ -2,9 +2,9 @@
 title: "Configuration of Hazelcast"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: ce97ff605bda58cb768aeccd33d9c711e24ec1c507330fc893052d49d3a34cd4
+content_hash: fafce7126b08ca4d95aa1832535d0ef1c46e5d50a9f14945a1321578b55fcbb8
 ---
 
 Since the version 4.8.2, it is possible to configure HazelCast for caching DocumentAccessor.

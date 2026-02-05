@@ -2,9 +2,9 @@
 title: "Fullscreen"
 sidebar_position: 10
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: caf88d710141668152ff87be05c76b08a332235e0136dae2085366f2c174f35f
+content_hash: 76e354047c678aa807a15c9f9008759d03233c763e49107c2cc9701ac27f5e27
 ---
 
 ### Switch to Fullscreen

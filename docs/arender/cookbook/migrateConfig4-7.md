@@ -2,9 +2,9 @@
 title: "Migrate configuration from 4.x to 4.7"
 sidebar_position: 19
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 82eac5506e98a31d8ac3ee7d592e316914fc5c82d6a8dae49c5f5884d28ff525
+content_hash: 59f3ec33a366df494ed25d272d632c97a6251a240e65eebec69ceb8bc85becab
 ---
 
 
@@ -32,7 +32,7 @@ The Toppanel is organized into several sections to organize the different button
 - Plugin : Contains all buttons for Plume and HTML plugins
 - Right : Contains all buttons needed to be to the right like the ellipsis
 
-![image](/img/arender/toppanel/toppanel-sections-description.png)
+![image](pathname:///img/arender/toppanel/toppanel-sections-description.png)
 
 This organization can be modified as in previous versions. Here is a list of the different properties used to manipulate the arrangement of the different elements of the Toppanel:
 
@@ -282,7 +282,7 @@ The previous properties cannot be used by submenu items (Using the DropdownMenuI
 The search button corresponds to the bean with the id *searchSection*. This bean must then be deleted from the list of beans to be instantiated.
 
 Location of the use of the id:
-![image](/img/arender/toppanel/toppanel-search-1.png)
+![image](pathname:///img/arender/toppanel/toppanel-search-1.png)
 ```cfg title="arender-default.properties"
 topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,searchSection,moreButton
 ```
@@ -290,7 +290,7 @@ topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,
 
 
 Removing the id by redefining the property:
-![image](/img/arender/toppanel/toppanel-search-3.png)
+![image](pathname:///img/arender/toppanel/toppanel-search-3.png)
 ```cfg title="arender.properties"
 topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,moreButton
 ```
@@ -299,7 +299,7 @@ topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,
 
 
 Then, you will have to redefine a property with the bean id *searchBox*:
-![image](/img/arender/toppanel/toppanel-search-2.png)
+![image](pathname:///img/arender/toppanel/toppanel-search-2.png)
 ```cfg title="arender.properties"
 topPanel.section.right.buttons.beanNames=searchBox,documentBuilderButton,fullscreenButton,moreButton
 ```

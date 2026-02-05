@@ -2,9 +2,9 @@
 title: "IBM FileNet"
 sidebar_position: 4
 last_update:
-  date: '2026-02-02T12:36:16.359Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: fb6e43bb7620f4f8c7c74e4c789b9ac040e422f429b0d337def4bcecfc45b4c5
+content_hash: 24f19ac8e3113b2f501acd12ee20efe4c5552ed7bec6cb78287b31c0eb9f5024
 ---
 
 ## ARender UI for IBM FileNet

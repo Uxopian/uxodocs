@@ -2,9 +2,9 @@
 title: Signatures
 sidebar_position: 16
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 28da976d73aca2c1fa1414b924c95c3d140c7240befa94675a40a5fa9132c109
+content_hash: 585cf751d267e2a79cfd9eda96b828f7a7c1a7fbed465a0d45cf3d7e31683040
 ---
 ### Signatures tab
 
@@ -28,16 +28,16 @@ pdf.signatures.enable=true
 After opening a document, a new tab dedicated to signature appears. At the header of the latter two icons may appear:
 
 Valid signature :
-![image](/img/arender/signatureExplorerOK.png)
+![image](pathname:///img/arender/signatureExplorerOK.png)
 Invalid signature :
-![image](/img/arender/signatureExplorerNOK.png)
+![image](pathname:///img/arender/signatureExplorerNOK.png)
 
 ### Nominal case : a valid signature
 
 The signature is designated as valid as long as the header of the tab in question contains the icon of the valid signature.
 
 A click on it opens the tab like below :
-![image](/img/arender/SignaturesOK2_en.PNG)
+![image](pathname:///img/arender/SignaturesOK2_en.PNG)
 
 On this tab, we can see the following signature information :
 
@@ -55,17 +55,17 @@ Thus, the integrity is not preserved or the identity of the signatory cannot be 
 
 At the interface level, the alert is given by the invalid signature icon.
 
-![image](/img/arender/SignaturesNOK.PNG)
+![image](pathname:///img/arender/SignaturesNOK.PNG)
 
 Different types of errors are reported to the signature panel :
 
-- Wrong integrity : ![image](/img/arender/signature-nok.svg)
+- Wrong integrity : ![image](pathname:///img/arender/signature-nok.svg)
   Whether the document has been modified or damaged.
 
-- Invalid signature : ![image](/img/arender/document-altered.svg)
+- Invalid signature : ![image](pathname:///img/arender/document-altered.svg)
   If the signature of the document is invalid.
 
-- Unknown certificate: ![image](/img/arender/certificate-unknown.svg)
+- Unknown certificate: ![image](pathname:///img/arender/certificate-unknown.svg)
   It is possible to configure a list of valid certificates.
   To do this, place the desired certificates in a folder defined by the PUBLIC_CERT property for the document-text-handler service, whose default value is ../defaultPathPublicCert:
 

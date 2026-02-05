@@ -2,9 +2,9 @@
 title: "Pre-configuration"
 sidebar_position: 3
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: b82afafff61aea3cb52aaad21612bc594aaacf200d3fcaef02b7d7b907f9c579
+content_hash: 973f6cd32e7648bd0a3f16cd069dfbff7c4b47df7d69bd357cf1d67f4c1c16ff
 ---
 
 Here we will make the rendition server reachable

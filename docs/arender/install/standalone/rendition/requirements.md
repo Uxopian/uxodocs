@@ -2,9 +2,9 @@
 title: "Requirements"
 sidebar_position: 1
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 41244789b1e3d42bd8426122156ca9a27910c8893c2b7fdc94240a42e74ee575
+content_hash: d43b05144bf3e0bb8995eeea310b1c057b6743614f2465b1ed95e61f25476539
 ---
 
 import Tabs from '@theme/Tabs';

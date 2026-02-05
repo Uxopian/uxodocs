@@ -2,9 +2,9 @@
 title: "Content Manager"
 sidebar_position: 7
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 2132c361225a7eb5ec6dbcd103cc5e8946d60935049d4b31d8caab4eb11f3975
+content_hash: 2919a13092de06c8aa9bb8b29b9e7757368e59fa6c80696ee5e78e54fbc21c92
 ---
 
 import Tabs from '@theme/Tabs';
@@ -42,31 +42,31 @@ If you like, please follow the instructions [here](https://www.ibm.com/support/k
 
 - To launch installation, click on "Install"
 
-![filenet](/img/arender/filenet/filenet-02.png)
+![filenet](pathname:///img/arender/filenet/filenet-02.png)
 
 - Choose the EAR path to deploy and click on "Next"
 
-![filenet](/img/arender/filenet/cm-03.png)
+![filenet](pathname:///img/arender/filenet/cm-03.png)
 
 - To accept default parameters, click on "Next"
 
-![filenet](/img/arender/filenet/filenet-05.png)
+![filenet](pathname:///img/arender/filenet/filenet-05.png)
 
-![filenet](/img/arender/filenet/filenet-06.png)
+![filenet](pathname:///img/arender/filenet/filenet-06.png)
 
 - Select webserver(s) and/or server(s) of the Workplace, then click on "Next"
 
-![filenet](/img/arender/filenet/filenet-07.png)
+![filenet](pathname:///img/arender/filenet/filenet-07.png)
 
 - To accept the parameters by default (virtual host: default_host), click on "Next"
 
-![filenet](/img/arender/filenet/filenet-08.png)
+![filenet](pathname:///img/arender/filenet/filenet-08.png)
 
-![filenet](/img/arender/filenet/filenet-09.png)
+![filenet](pathname:///img/arender/filenet/filenet-09.png)
 
 - In recap window, click on « Finish » to begin the installation with these parameters after checking them
 
-![filenet](/img/arender/filenet/filenet-10.png)
+![filenet](pathname:///img/arender/filenet/filenet-10.png)
 
 ## Post setup
 
@@ -88,15 +88,15 @@ Websphere must be configured in parent-last which means it has to load its libra
 
 - Click on **Manage Modules**
 
-![filenet](/img/arender/filenet/cm-11.png)
+![filenet](pathname:///img/arender/filenet/cm-11.png)
 
 - Click on the WAR: **arondor-arender-hmi-cm-4.8.X.war**
 
-![filenet](/img/arender/filenet/cm-12.png)
+![filenet](pathname:///img/arender/filenet/cm-12.png)
 
 - Select the parent-last configuration in the **Class loader order** drop-down list
 
-![filenet](/img/arender/filenet/cm-13.png)
+![filenet](pathname:///img/arender/filenet/cm-13.png)
 
 - Click on "OK" and save the modifications
 

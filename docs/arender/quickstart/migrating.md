@@ -2,9 +2,9 @@
 title: "Migrate from v3"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 6040bac7952f9f1e21e9248a3b1ad8bc4a388d89942f23447323bd8d64a5e091
+content_hash: 0777537b06234c029d85a40258a84794aec97b377349ba50a009a1df569b9800
 ---
 
 ## Migrating from ARender 3 to ARender 4

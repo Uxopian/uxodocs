@@ -2,9 +2,9 @@
 title: Hyperlink
 sidebar_position: 6
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 6c8205b503e4551bd96e11d24c70b80489be6c139a74941e62656697cf422082
+content_hash: fa781f561200d25d1dd943c609a1539bf5c4667aeeae1e6b3dc4ed13545bea28
 ---
 
 ## Description
@@ -19,15 +19,15 @@ then you will need a target which can be a page number of the current document o
 
 First, select the text that will be the hyperlink. Then right-click and click on the *Create a link* option.
 
-![image](/img/arender/documentation/hyperlinks/hyperlink1.png)
+![image](pathname:///img/arender/documentation/hyperlinks/hyperlink1.png)
 
 Then a window appears where you must choose the type of link, either a URL or a page number of the current document.
 
-![image](/img/arender/documentation/hyperlinks/hyperlink2.png)
+![image](pathname:///img/arender/documentation/hyperlinks/hyperlink2.png)
 
 Once the choice is made, press *Validate*. The hyperlink has been created.
 
-![image](/img/arender/documentation/hyperlinks/hyperlink3.png)
+![image](pathname:///img/arender/documentation/hyperlinks/hyperlink3.png)
 
 ### Since version 4.8.0
 
@@ -47,15 +47,15 @@ topPanel.annotationMenu.hyperlink.repeat=true
 
 ```
 
-![image](/img/arender/documentation/hyperlinks/hyperlink4.png)
+![image](pathname:///img/arender/documentation/hyperlinks/hyperlink4.png)
 
 On clicking the button, you will be asked to select the text where the hyperlink will be.
 
-![image](/img/arender/documentation/hyperlinks/hyperlink5.png)
+![image](pathname:///img/arender/documentation/hyperlinks/hyperlink5.png)
 
  After selection, the cursor changes into a target to let you know that a target is needed for the hyperlink.
 
-![image](/img/arender/documentation/hyperlinks/hyperlink6.png) 
+![image](pathname:///img/arender/documentation/hyperlinks/hyperlink6.png) 
  
 Click on the page of the current document that you choose as target to create the hyperlink.
 

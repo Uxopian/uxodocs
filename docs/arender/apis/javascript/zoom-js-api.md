@@ -2,9 +2,9 @@
 title: "Zoom api"
 sidebar_position: 14
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 22e67e50b9b836a681b3bab7f4ba18691d7f24de02d62fe630e4e02b6b22f754
+content_hash: e4dcb751906da9dc2e4d80f4950572791ac52dec71e50c556587bd5e22550c3b
 ---
 
 ### Change zoom

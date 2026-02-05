@@ -2,9 +2,9 @@
 title: "Installation"
 sidebar_position: 3
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 14254bce09d10a2c8648fdc9c9f539863b595fbb2e1e9e5d61db6e795680c1c6
+content_hash: e4026cec213f08497b6ccbc737e7c8336577a7516992f7dbf6682ac7daee759a
 ---
 
 import Tabs from '@theme/Tabs';
@@ -33,18 +33,18 @@ Below an example of the different installation steps for Windows:
 
 * Choose where to install your rendition server:
 
-![image](/img/arender/installer-jar-arender-1.png)
+![image](pathname:///img/arender/installer-jar-arender-1.png)
 
 * Choose which requirements to install. If you unselect some of them, you will have to install them manually on the system
 
-![image](/img/arender/installer-jar-arender-2.png)
+![image](pathname:///img/arender/installer-jar-arender-2.png)
 
 * All done! 
-![image](/img/arender/installer-jar-arender-3.png)
+![image](pathname:///img/arender/installer-jar-arender-3.png)
 
 Aside from Libreoffice which does not support it, you will find all your installed softwares in the third_party software folder.
 
-![image](/img/arender/installer-jar-arender-4.png)
+![image](pathname:///img/arender/installer-jar-arender-4.png)
 
 **You have finished the installation!**
 

@@ -2,18 +2,18 @@
 title: Print a document
 sidebar_position: 13
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 0f78d938a2365e9934ce9b25a8ed0a5b7d0c8a107b3d3279a4f4121ac407329d
+content_hash: d382fa7f475871422c6e0f2aaf219adb6bc595e72a932c6d29babab9c8d3a754
 ---
 
 Click on the "Print Document" button:
 
-![image](/img/arender/new/print1.png)
+![image](pathname:///img/arender/new/print1.png)
 
 A pop-in appears
 
-![image](/img/arender/new/print2.png)
+![image](pathname:///img/arender/new/print2.png)
 
 There is a choice of various solutions for printing:
 

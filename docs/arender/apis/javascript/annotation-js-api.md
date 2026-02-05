@@ -2,9 +2,9 @@
 title: "Annotations"
 sidebar_position: 6
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: d65a9ed2a19df7ca36240b09ce28d9d6d7f2b0f2a8e008d7db49de9da4fdc5ea
+content_hash: 2f5d18d3421f659eb0cc94b982689acf70f0cd52b607b37c2e6ead69e1a157ee
 ---
 
 ### Intercept Hyperlinks

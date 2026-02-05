@@ -2,9 +2,9 @@
 title: Optimize visualization
 sidebar_position: 11
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 9d9427f18646553240a7d6ab1fc288c32469743be1f038c022e77630cf68c11d
+content_hash: 92d78d18e1739efe9f24f0f263967db05e44217d2d3443e5725aeb7de1ae4b5c
 ---
 
 ARender provides a simple and streamlined Interface for viewing a
@@ -18,11 +18,11 @@ by stretching or reducing it. Select the separation line between the two
 panels with the mouse and hold to expand or reduce the size of the left
 menu:
 
-![image](/img/arender/new/opti1.png)
+![image](pathname:///img/arender/new/opti1.png)
 
 Or click on these following buttons:
 
-![image](/img/arender/new/opti2.png)
+![image](pathname:///img/arender/new/opti2.png)
 
 Three display sizes are available for the Document Explorer:
 
@@ -34,7 +34,7 @@ Three display sizes are available for the Document Explorer:
 
 You can access to zoom buttons in the toolbar:
 
-![image](/img/arender/new/opti3.png)
+![image](pathname:///img/arender/new/opti3.png)
 
 Zoom out several times a page allows you to visualize multiple pages at
 once.
@@ -47,7 +47,7 @@ to take a closer look.
 Click on the "Full height" button to view document in full height, or
 click on "Full width" button to view document in full width.
 
-![image](/img/arender/new/opti4.png)
+![image](pathname:///img/arender/new/opti4.png)
 
 You can also click on "Full page" button to zoom to the original page
 size.
@@ -57,25 +57,25 @@ size.
 You can use the "Turn page left" or "Turn page right" buttons in the
 toolbar:
 
-![image](/img/arender/new/opti5.png)
+![image](pathname:///img/arender/new/opti5.png)
 
 or you can right-click on the document and choose "Turn page left" or
 "Turn page right" in the menu:
 
-![image](/img/arender/new/opti7.png)
+![image](pathname:///img/arender/new/opti7.png)
 
 ## Turn all document pages with one click
 
 You can also turn all pages of the document at left or at right by
 clicking on these buttons:
 
-![image](/img/arender/new/opti8.png)
+![image](pathname:///img/arender/new/opti8.png)
 
 ## Access the full screen mode
 
 Click on the "Full screen" button in the top right corner.
 
-![image](/img/arender/new/opti6.png)
+![image](pathname:///img/arender/new/opti6.png)
 
 The full screen mode displays all document content, without page thumbs
 and the top panel. You can exit this mode with the Escape key.

@@ -2,9 +2,9 @@
 title: "Activating performance logs"
 sidebar_position: 1
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 4d1ca5d129c03359bfde87b6f0ff002ee5a0304b9289487caf8a77767b1c917a
+content_hash: ae319b38ba3ea382135946cc139edc4db94648b4def5f86839e5977da51d33de
 ---
 
 You can since ARender 4.0.1 send directly each log fragment to the disk

@@ -2,9 +2,9 @@
 title: "Requirements"
 sidebar_position: 1
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: bc25431ab21936227a31354d860e7f732936f2eddd09e7081d8de130396473a3
+content_hash: 8fdfcedb002505698adb269b6de292778f38ff09657ad9787d6b03ddcea0b62d
 ---
 
 ## Port configuration

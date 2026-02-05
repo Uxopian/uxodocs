@@ -2,9 +2,9 @@
 title: "Thumbnails"
 sidebar_position: 13
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 91c92b9719b7a1920afc22fb45d09b53432e00dabdd98ff61dd8e693aec08458
+content_hash: f61cdc17f9de802c95abbf114f27acebd1b7c47ed00bf9432a0858ee64782f99
 ---
 
 ### Change the document navigator

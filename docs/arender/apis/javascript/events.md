@@ -2,9 +2,9 @@
 title: "Events"
 sidebar_position: 3
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: aed7877366fa693280ad4151aace9030aa1b5555f45b046a2eca562f25167e6c
+content_hash: 0fc5e72239c93bc8c40471ae1b630bfdb0fe2ed72c9f67160246c9d697b8b27c
 ---
 
 ## Register to error events while loading documents

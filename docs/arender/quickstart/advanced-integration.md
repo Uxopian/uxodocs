@@ -2,9 +2,9 @@
 title: "Advanced integration"
 sidebar_position: 3
 last_update:
-  date: '2026-02-02T12:23:28.934Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: d8ffe8910369e270d3d0c37ee7fd5c146b9f2d40665f5f14f76ee47e84aa40b2
+content_hash: 886666dc15cd0c15a8e859a5f677891991acb1803b85f15910912bcd35a97e3d
 ---
 
 ## ARender personalization

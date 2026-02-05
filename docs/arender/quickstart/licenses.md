@@ -2,9 +2,9 @@
 title: "Licenses"
 sidebar_position: 1
 last_update:
-  date: '2026-02-02T12:23:28.934Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: d6c5a27bfd8073634662cd058b1e0613bafc911160400495646649b75cb4e9a2
+content_hash: 59233b6ca1ae2d3f86f8612194709073981e3e730aeba09abb4f05a5f5fa165a
 ---
 
 Here are listed the licenses of the third-party programs used by ARender.

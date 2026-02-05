@@ -2,9 +2,9 @@
 title: Text Selection
 sidebar_position: 18
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 5200c26c0efb8a74b8fa9c90a4f8fbb6de3a9ca134a17ec28ca3b6c4354ad088
+content_hash: a5afda55def107d443dc46a03e313aec54136a982c22b01bf31d6198c20a95c0
 ---
 
 ## Document Text Selection
@@ -23,13 +23,13 @@ To copy the selected text, the user can press and hold the CTRL button then pres
 Once copied, he can paste the text into another software application.
 The user can, as well, double click on a word to select it.
 
-![image](/img/arender/selection-character.png)
+![image](pathname:///img/arender/selection-character.png)
 
 ## Text Selection - Character by Character
 
 By default, text selection highlights character by character :
 
-![image](/img/arender/selection-character-demo.gif)
+![image](pathname:///img/arender/selection-character-demo.gif)
 
 ## Text Selection - Word by Word
 
@@ -37,12 +37,12 @@ ARender version 4.1.x introduces a new text selection feature that improves word
 
 Every time a word (or a part of it) is selected, the selection is automatically expanded to include the entire word.
 
-![image](/img/arender/selection-word-demo.gif)
+![image](pathname:///img/arender/selection-word-demo.gif)
 
 The user has the option to override this behavior by changing the direction in which the mouse pointer is being dragged as the selection is made.
 This action undoes the automatic selection of the entire word, and allows the user to precisely select part or the entire word.
 
-![image](/img/arender/selection-word-reversing-demo.gif)
+![image](pathname:///img/arender/selection-word-reversing-demo.gif)
 
 To enable the new feature, please refer to the dedicated configuration [here](/v4/configuration/web-ui/textselection.md)
 
@@ -50,13 +50,13 @@ To enable the new feature, please refer to the dedicated configuration [here](/v
 
 Since ARender version 4.7.3, you have the possibility to select an entire line with three clicks.
 
-![image](/img/arender/selection-ligne.gif)
+![image](pathname:///img/arender/selection-ligne.gif)
 
 ## Text Selection - Page
 
 Since ARender version 4.7.3, you have the possibility to select an entire page with four clicks.
 
-![image](/img/arender/selection-page.gif)
+![image](pathname:///img/arender/selection-page.gif)
 
 ## Text Selection - Entire document
 
@@ -70,12 +70,12 @@ To activate the button, add the following property to the *arender.properties* c
 topPanel.copy.document.text=true
 ```
 
-![image](/img/arender/documentation/selection/selection-text-document-bouton.png)
+![image](pathname:///img/arender/documentation/selection/selection-text-document-bouton.png)
 
 When clicked, the button will launch the retrieval of the text of each page of the current document. The progress of the copy will be indicated
  by a notification at the bottom right. Once the copying of the text is finished, a notification will again be visible to inform the user.
 
-![image](/img/arender/documentation/selection/selection-text-document-activation.gif)
+![image](pathname:///img/arender/documentation/selection/selection-text-document-activation.gif)
 
 ## Text Selection - By zone
 
@@ -83,4 +83,4 @@ Since ARender version 4.5.x, you have the possibility to select text in a zone.
 
 The user can do `CTRL + left-click` or `ALT + left-click` to start the text selection by zone.
 
-![image](/img/arender/selection-zone.gif)
+![image](pathname:///img/arender/selection-zone.gif)

@@ -2,9 +2,9 @@
 title: "Supported MIME types"
 sidebar_position: 24
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 39f2db69d655396880e6546aa943d338ecf890c98a5ca37c80b702eb408ff9f3
+content_hash: f881debd210210ecafbc80583345357a085c33f323407e339136cc5c71d45566
 ---
 
 ## PDF

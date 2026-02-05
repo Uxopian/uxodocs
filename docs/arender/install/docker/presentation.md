@@ -2,9 +2,9 @@
 title: "Presentation server"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: d82cc4d4bf31a78ab6c0d9bca65cb37db18787ef91c966ca0456bf68c0ade008
+content_hash: 42c09c592bc96fdc6f89be49ea90058083ed7a2c2ea4a62f37471614c4bf3548
 ---
 
 ## Configuration

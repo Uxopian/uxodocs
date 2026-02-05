@@ -2,9 +2,9 @@
 title: "Textual search"
 sidebar_position: 12
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: b99113df4197d91f7bb3b284150efb09d1cbad51de7124a56610c65af596c88f
+content_hash: 03d572a5d58c6df908818462b0903a21f4d46b589f388ce2bd8e40a5a6598206
 ---
 
 ### Search features

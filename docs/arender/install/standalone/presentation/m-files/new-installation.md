@@ -2,9 +2,9 @@
 title: "New installation"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 8f4cc2b4fdb1e41677f74e704743ed20464af9e67180c898346e9b7ea0a6fe9b
+content_hash: 5eaf98edff39e1d94ea5ea7bb2a2dbb3a766a8ebcc5ea1f14f75bc6eae247dac
 ---
 
 Here we present the Web-UI installation in M-Files. 
@@ -64,11 +64,11 @@ To install ARender on M-Files vault, follow the steps below:
 - Click **Install...**
 - Select the previously downloaded **VAF_MFF_ArenderConnector_22.12.3.mfappx** file
 - Click **Yes** if this window shows up
-![mfiles](/img/arender/mfiles/mfiles-app-popup.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-app-popup.png)
 - The application is now installed
 - Click **Close**
 - Click **Yes** if this window shows up
-![mfiles](/img/arender/mfiles/mfiles-app-popup.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-app-popup.png)
 
 Now that we have installed ARender on M-Files vault, we can start configuring the application.
 
@@ -81,7 +81,7 @@ VAF_MFF_ArenderConnector uses a JSON configuration file. You can manage it throu
 - Select **Other Applications** then select **VAF_MFF_ArenderConnector**. The dashboard appears
 - Click on **Configuration** tab
 - Fill in every configuration properties. When clicking the **i** icon, you will get a help showing up.
-![mfiles](/img/arender/mfiles/mfiles-app-configuration.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-app-configuration.png)
 - Once you have configured, click **Save**
 
 
@@ -89,14 +89,14 @@ VAF_MFF_ArenderConnector uses a JSON configuration file. You can manage it throu
 
 - Restart the IIS server
 
-![mfiles](/img/arender/mfiles/mfiles-04.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-04.png)
 
 - Start the Tomcat9 server
 - Access M-Files under M:/
 
-![mfiles](/img/arender/mfiles/mfiles-05.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-05.png)
 
 - Select your safe
 - Drag and drop a document to open it with ARender
 
-![mfiles](/img/arender/mfiles/mfiles-06.png)
+![mfiles](pathname:///img/arender/mfiles/mfiles-06.png)

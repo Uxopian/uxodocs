@@ -1,9 +1,9 @@
 ---
 title: "Print"
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 03a65b4b6e75130924bd3018fb002bc32fbff763dc285889b678314de0c05108
+content_hash: 66732608d576aaee2bd2e43138cebaa1a76e2a19d25a1d96f7aecd24209fd907
 ---
 
 ## General

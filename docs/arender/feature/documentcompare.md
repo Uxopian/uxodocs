@@ -2,9 +2,9 @@
 title: Document comparison
 sidebar_position: 4
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: 7cd1580179c39d25ac4c4e4ed91ea1d8fb02984423ba86b118a643ed824926b0
+content_hash: 7982797981e01d27dab503c1bb63970109aae30061c7193d5a102923d34c21f5
 ---
 
 ## Compare two documents
@@ -24,21 +24,21 @@ or *Open as new and compare images* if both documents are images.
 
 #### Case of textual documents
 
-![image](/img/arender/documentCompare1.png)
+![image](pathname:///img/arender/documentCompare1.png)
 
 The chosen document opens next to the current one, then the comparison
 results are displayed.
 
-![image](/img/arender/documentCompare2.png)
+![image](pathname:///img/arender/documentCompare2.png)
 
 #### Case of image documents
 
-![image](/img/arender/compareImages1.png)
+![image](pathname:///img/arender/compareImages1.png)
 
 The chosen document opens next to the current one, then the comparison
 result is displayed as a new image.
 
-![image](/img/arender/compareImages2.png)
+![image](pathname:///img/arender/compareImages2.png)
 
 ### Automatic comparison on start up
 
@@ -61,12 +61,12 @@ triggered.
 - To go back to the simple view mode, click on the red cross in the
   upper right corner of the document to close.
 
-![image](/img/arender/documentCompare3.png)
+![image](pathname:///img/arender/documentCompare3.png)
 
 - It is also possible to close the comparison mode by right clicking
   on a document and select *Close multiView*.
 
-![image](/img/arender/documentCompare4.png)
+![image](pathname:///img/arender/documentCompare4.png)
 
 ## Parse comparison results
 
@@ -80,18 +80,18 @@ color:
 | Grey   | Modified line                    |
 | Orange | Modified text on a specific line |
 
-![image](/img/arender/documentCompare5.png)
+![image](pathname:///img/arender/documentCompare5.png)
 
 ## Browse results
 
 ### Navigate through results
 
-![image](/img/arender/documentCompare6.png)
+![image](pathname:///img/arender/documentCompare6.png)
 
 Clicking on the *Next result* or *Previous result* button will redirect
 to the closest one, regardless of the document.
 
-![image](/img/arender/documentCompare7.png)
+![image](pathname:///img/arender/documentCompare7.png)
 
 ### Synchronized scroll between documents
 
@@ -104,7 +104,7 @@ panel.
 Clicking on a specific result redirects to the matching line on the
 other document.
 
-![image](/img/arender/documentCompare8.png)
+![image](pathname:///img/arender/documentCompare8.png)
 
 
 
@@ -135,7 +135,7 @@ you can modifiate the "fuzz", "highlight color" and "lowlight color" values,
 and the image result.
 
 
-![image](/img/arender/compareImages2.png)
+![image](pathname:///img/arender/compareImages2.png)
 
 The image comparison is based on mathematical calculations influenced
 by the value of the "fuzz". A greater "fuzz" value means a less accurate
@@ -166,7 +166,7 @@ visualization.image.comparison.default.lowlight.color=none
 
 Once the comparison is done, a download button is available to download the two documents side by side with their comparison results on it.
 
-![image](/img/arender/documentCompare9.png)
+![image](pathname:///img/arender/documentCompare9.png)
 
 ### With servlet
 

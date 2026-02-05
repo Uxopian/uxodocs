@@ -2,9 +2,9 @@
 title: "JNDI Configuration for ARender Web-UI"
 sidebar_position: 17
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: b26d66e143f40d4384bbec0bfe23e55f342447d97fe391701b3b597453c4210c
+content_hash: 7cfdb826ce3ea493bb2ce3999071fb2d117e31f6b70c4633d73120928246e795
 ---
 
 ## Prerequisite
@@ -120,11 +120,11 @@ arender.server.rendition.hosts=http://rendition-server:8761/
 - Open Websphere console and go to: Environment -> Naming -> Name
   space bindings:
 
-![image](/img/arender/Websphere_JNDI_Naming.png)
+![image](pathname:///img/arender/Websphere_JNDI_Naming.png)
 
 - Click on New, then select String and click on Next:
 
-![image](/img/arender/Websphere_JNDI_Naming_new_value.png)
+![image](pathname:///img/arender/Websphere_JNDI_Naming_new_value.png)
 
 - Then fill the fiels like below:
 
@@ -138,10 +138,10 @@ arender.server.rendition.hosts=http://rendition-server:8761/
   String value: Its value is the path of the folder containing the
   property file *customer-`integration_type`.properties* defined above.
 
-![image](/img/arender/Websphere_JNDI_Naming_set_property.png)
+![image](pathname:///img/arender/Websphere_JNDI_Naming_set_property.png)
 
 - Finally click on Finish
 
-![image](/img/arender/Websphere_JNDI_Naming_Summary.png)
+![image](pathname:///img/arender/Websphere_JNDI_Naming_Summary.png)
 
 - Restart the application server.

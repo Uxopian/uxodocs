@@ -2,9 +2,9 @@
 title: "Web UI API"
 sidebar_position: 1
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 995e8458803953828c1d603b74d8382346b5f3ff2f658778408837e05217b53b
+content_hash: c92bf21d443dbac026fc16d05c789b30fa3678c5184a78edc82b51fbb7a325b3
 ---
 
 ## Get the document UUID

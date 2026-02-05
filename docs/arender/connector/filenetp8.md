@@ -2,9 +2,9 @@
 title: FileNet connector
 sidebar_position: 5
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: c2ae40cb1f9458bd3199d868bd598db378a9fbdbf0d5ac74356a4a8b70c7c66e
+content_hash: ad89b8024b9deb4c8f5db94977d168a094ca10ba45edb5891461f6efb2fa980c
 ---
 
 ## ARender for IBM FileNet
@@ -219,16 +219,16 @@ To use it, follow the instruction below:
 
 1. Connect to Content Navigator.
 2. Go to the 'Administration View' and click on 'Plug-ins'
-   ![image](/img/arender/ICN_clickplugin_medium.png)
+   ![image](pathname:///img/arender/ICN_clickplugin_medium.png)
 
 3. Click on the button "New Plugin-in".
-   ![image](/img/arender/ICN_newplugin_large.png)
+   ![image](pathname:///img/arender/ICN_newplugin_large.png)
 
 4. Enter the JAR file path and click on 'Load'. (Example: _C:\sources\arender-web-ui\*arondor-arender-navigator-plugin-2.2.1.jar_)
-   ![image](/img/arender/ICN_pickjar_backgroundimage.png)
+   ![image](pathname:///img/arender/ICN_pickjar_backgroundimage.png)
 
 5. Fill 'ARender context root' field with ARender's address (hots + port + context root). Like below:
-   ![image](/img/arender/PluginContextRoot_en_backgroundimage.png)
+   ![image](pathname:///img/arender/PluginContextRoot_en_backgroundimage.png)
    If you want the plugin to automatically detect the host name and replace
    it in the configuration when called, use the keyword
    `--arender.hostname--`.
@@ -236,27 +236,27 @@ To use it, follow the instruction below:
 6. Click on the 'Save' button.
 
 7. Click on Edit and check that the plugin is correctly installed.
-   ![image](/img/arender/ICN_editplugin_backgroundimage.png)
+   ![image](pathname:///img/arender/ICN_editplugin_backgroundimage.png)
 
 8. Map the new viewer. Go to 'Viewer Maps'
-   ![image](/img/arender/ICN_clickmaps_medium.png)
+   ![image](pathname:///img/arender/ICN_clickmaps_medium.png)
    The default map is called 'Default viewer map' and is not editable.
 
 9. Click on it and then click on copy.
-   ![image](/img/arender/ICN_copymap_backgroundimage.png)
+   ![image](pathname:///img/arender/ICN_copymap_backgroundimage.png)
 
 10. Click on "New Mapping". Then select 'Filenet Context Manager' for the
     Repository type. Then select ARenderPluginViewer in the list of viewer
     available.
-    ![image](/img/arender/ICN_namemap_backgroundimage.png)
+    ![image](pathname:///img/arender/ICN_namemap_backgroundimage.png)
 
 11. You can now choose the MIME Types you want to open with ARender, then
     click on OK.
-    ![image](/img/arender/ICN_mapmimes_backgroundimage.png)
+    ![image](pathname:///img/arender/ICN_mapmimes_backgroundimage.png)
 
 12. To use this Map, you just need to link it to a Desktop (Desktop tab ->
     Edit the desktop -> Select the Map in the Viewer Map list)
-    ![image](/img/arender/ICN_linkdesktop_backgroundimage.png)
+    ![image](pathname:///img/arender/ICN_linkdesktop_backgroundimage.png)
 
 ## Advanced features
 

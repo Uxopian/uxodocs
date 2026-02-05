@@ -2,9 +2,9 @@
 title: "ARender for FileNet in IBM Websphere Application Server (recommended)"
 sidebar_position: 1
 last_update:
-  date: '2026-02-02T12:16:59.945Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: f3d331d38289b730c9ca17d26373928b265a0f1d2dc62a4c8a5aca093bd5bf4f
+content_hash: d8713f8226e1ba7622c69bb66f4b7ab8dfab49063c8324fb1cd75964256e1945
 ---
 
 import Tabs from '@theme/Tabs';
@@ -43,31 +43,31 @@ If you like, please follow the instructions [here](https://www.ibm.com/docs/en/w
 
 - To launch installation, click on "**Install**"
 
-![filenet](/img/arender/filenet/filenet-02.png)
+![filenet](pathname:///img/arender/filenet/filenet-02.png)
 
 - Choose the EAR path to deploy and click on "**Next**"
 
-![filenet](/img/arender/filenet/filenet-03.png)
+![filenet](pathname:///img/arender/filenet/filenet-03.png)
 
 - To accept default parameters, click on "**Next**"
 
-![filenet](/img/arender/filenet/filenet-05.png)
+![filenet](pathname:///img/arender/filenet/filenet-05.png)
 
-![filenet](/img/arender/filenet/filenet-06.png)
+![filenet](pathname:///img/arender/filenet/filenet-06.png)
 
 - Select webserver(s) and/or server(s) of the Workplace, then click on "**Next**"
 
-![filenet](/img/arender/filenet/filenet-07.png)
+![filenet](pathname:///img/arender/filenet/filenet-07.png)
 
 - To accept the parameters by default (virtual host: default_host), click on "**Next**"
 
-![filenet](/img/arender/filenet/filenet-08.png)
+![filenet](pathname:///img/arender/filenet/filenet-08.png)
 
-![filenet](/img/arender/filenet/filenet-09.png)
+![filenet](pathname:///img/arender/filenet/filenet-09.png)
 
 - In recap window, click on "**Finish**" to begin the installation with these parameters after checking them
 
-![filenet](/img/arender/filenet/filenet-10.png)
+![filenet](pathname:///img/arender/filenet/filenet-10.png)
 
 ## Post setup
 
@@ -89,15 +89,15 @@ Websphere must be configured in parent-last which means it has to load its libra
 
 - Click on "Manage Modules"
 
-![filenet](/img/arender/filenet/filenet-13.png)
+![filenet](pathname:///img/arender/filenet/filenet-13.png)
 
 - Click on ARender module
 
-![filenet](/img/arender/filenet/filenet-11.png)
+![filenet](pathname:///img/arender/filenet/filenet-11.png)
 
 - Select in the drop down list « Class loader order »: « Classes loaded with local class loaded first (parent last) »
 
-![filenet](/img/arender/filenet/filenet-14.png)
+![filenet](pathname:///img/arender/filenet/filenet-14.png)
 
 - Click on "OK" and save the modifications
 
@@ -115,4 +115,4 @@ You can now access a Filenet document via a URL formed like this:
 http://{server_arender}:{port_arender}/ARender/?id={id}&objectStoreName={ObjectStoreName}
 ```
 
-![filenet](/img/arender/filenet/filenet-new-01.png)
+![filenet](pathname:///img/arender/filenet/filenet-new-01.png)

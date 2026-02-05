@@ -2,9 +2,9 @@
 title: "Installation"
 sidebar_position: 4
 last_update:
-  date: '2026-02-02T12:23:28.934Z'
+  date: '2026-02-05T15:11:39.219Z'
   author: CI/CD Bot
-content_hash: b20f2dd65b8437ad0cd876806aff48748f9eff2eaf478b536c9595047e87574c
+content_hash: 5de059461816db0e4adbd35424261d8fdf203aea72a79c2f513fb37bddc28f7a
 ---
 
 Below a standalone installation of the ARender HMI. For installation on ECM systems, you can skip this page.
@@ -37,7 +37,7 @@ Start the application server using the **startup.bat** script located in the *bi
 Access to [http://localhost:8080/arondor-arender-hmi-4.8.21/](http://localhost:8080/arondor-arender-hmi-4.8.21/) via a web browser.
 :::
 
-![DefaultDocument](/img/arender/arenderDefaultDocument.png)
+![DefaultDocument](pathname:///img/arender/arenderDefaultDocument.png)
 
 :::note
 The URL to use should be built like this: `http://{hmiHostName}:{portHMI}/{ARenderContext}/`:

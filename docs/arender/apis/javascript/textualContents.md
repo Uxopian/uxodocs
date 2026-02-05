@@ -2,9 +2,9 @@
 title: "Textual content"
 sidebar_position: 5
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 3879bbdee01e1d2f96958cab5e4636474cfd5436f5db13a1c98f6f6b1a7e62ea
+content_hash: ea7694cc69c6d324d4463970163dcadd6b4efeda3b3e647bfec8b6262d78edd9
 ---
 
 ## Using lasso feature

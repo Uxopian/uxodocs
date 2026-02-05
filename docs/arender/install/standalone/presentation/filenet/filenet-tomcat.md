@@ -2,9 +2,9 @@
 title: "ARender for FileNet in Apache Tomcat Application Server"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 48f4971d8a6e71a914fe75386974dc6acbbae077f241562a96def862765769dd
+content_hash: b07bc97c8de8646a3ef1ce96553fa1ec81c1fbca89b2beb5435dcea2cf883f38
 ---
 
 Below the deployment of ARender HMI for FileNet in **Apache Tomcat**.

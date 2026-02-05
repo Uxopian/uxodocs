@@ -2,9 +2,9 @@
 title: "Document Layout"
 sidebar_position: 9
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 49fe568efc615284fc173889a42d5e983748bca8d55efdb10dd826678d5a43c8
+content_hash: 02783365fc879ee85765dbc5af45a19d4a42b04204746a134556f6f6653e09b1
 ---
 
 ### Retrieve the Document Layout

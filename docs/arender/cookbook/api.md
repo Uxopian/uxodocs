@@ -2,9 +2,9 @@
 title: "Use REST API"
 sidebar_position: 25
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: e611bc5f7b0b00135c21d472b22df4774c15b865c6ce4ad6192b3410e52b0a0f
+content_hash: fbcf3b1495aeb5710269bf850362002ebda3ddb31316f9e23b2fe1e41e4c5e77
 ---
 
 This guide is using as default URL for the rendition server

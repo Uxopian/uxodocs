@@ -2,9 +2,9 @@
 title: "Rendition server"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 0e375b1c1fab9816a81db8408e9d3b710a10ee9895398486137e9a8f9e1ee377
+content_hash: 96a2bc3bff5699cc0bf6e0f19a50bd9e60f85ac69fd489963c1205060cc4746c
 ---
 
 ## Introduction

@@ -1,6 +1,10 @@
 ---
 title: "Service broker"
+last_update:
+  date: '2026-02-05T15:05:05.898Z'
+  author: CI/CD Bot
 sidebar_position: 1
+content_hash: 1a1aa7ae57da69c74d9bea6acf214a33176bf71e1f819219447938c2ca13292c
 ---
 
 ## Environment

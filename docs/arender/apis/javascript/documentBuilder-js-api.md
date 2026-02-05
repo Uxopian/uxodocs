@@ -2,9 +2,9 @@
 title: "Document builder"
 sidebar_position: 7
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 6589046eaeecab4efc3105b7b157452dfe19c5ac4039871942a498150c338153
+content_hash: 3d03616cf3fc28dde8734132d7b022305d65a55e1cbbf63acd30acc3bc9f65fe
 ---
 
 ### Interacting with the documentBuilder

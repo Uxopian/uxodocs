@@ -2,9 +2,9 @@
 title: "Opening a document"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: cf0839cc80951873c2a22c6c43267d9bad7c39169f9ecd13a2618a8f58b324aa
+content_hash: 17200aa4f0fc1e9e893b97dac2eb8258328906e50fef41bafa2d52639bd2a6f8
 ---
 
 ## Opening documents

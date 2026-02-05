@@ -2,9 +2,9 @@
 title: "Create a conversion module"
 sidebar_position: 6
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 31a885a5c8f26908034c04b43b2cb19bd7e1fa1fd59afa1c86c0cc40bb73eaa4
+content_hash: b0ec19f7e483d8b5ff21573d53bcdf81a5163b0007e9c194bf1ec45ad0a36f90
 ---
 
 In this tutorial we will focus on the possibility of creating a document

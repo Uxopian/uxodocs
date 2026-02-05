@@ -2,9 +2,9 @@
 title: "Presentation server (Web UI)"
 sidebar_position: 1
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: f474adef1aa852539348f1bd41bd5f6fc2e853fdd9f778eb12f46f370d0d8ea2
+content_hash: e2b47ee64899a3eeb137f456b3e1eb20b3740659d6af93b9df603f669057a698
 ---
 
 ## Introduction

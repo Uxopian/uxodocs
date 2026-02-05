@@ -2,9 +2,9 @@
 title: "Installation in ACA"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 4cdbc6b2e0675ba6e62cde1a62f7c3e44cbb9055a8ef8b701ae048cc067ded12
+content_hash: b20a41b867df5721bdbb04b4b2bcc2c015e382304c0ef86a54e74b032d150dcb
 ---
 
 ## Quick start with Docker

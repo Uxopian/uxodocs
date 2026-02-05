@@ -2,9 +2,9 @@
 title: "Logs"
 sidebar_position: 2
 last_update:
-  date: '2026-02-02T12:26:26.896Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: a2ff12cbd629a4cbd3bd6b29970e18ca1a7d60a59b119e39fe6ca4896774e5dc
+content_hash: 56893d4bdf151e1c8b1af5ce8c2fc44cb3be112fbf450acac637428c64d8f153
 ---
 
 Since version 3, ARender relied on two different logging libraries: [Log4j] (http://logging.apache.org/) 1.x (Web-UI)

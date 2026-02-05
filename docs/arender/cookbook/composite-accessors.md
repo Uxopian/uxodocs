@@ -2,9 +2,9 @@
 title: "Composite documents"
 sidebar_position: 4
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: c56700328f9b527e3e3d7b913ec1bc276d323e0ec2d58fae5d450d829ffced18
+content_hash: a1fa1643b562b731e10480d1072fd0525ac602860518441a9762536f524f2d5f
 ---
 
 Starting from 3.1.10 a new servlet exists in ARender in order to create

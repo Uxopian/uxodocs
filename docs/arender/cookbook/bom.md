@@ -2,9 +2,9 @@
 title: "Import ARender dependencies"
 sidebar_position: 16
 last_update:
-  date: '2026-02-02T11:59:59.803Z'
+  date: '2026-02-05T15:05:05.898Z'
   author: CI/CD Bot
-content_hash: 20382351a99ef0fccb5b6503b7ac5c2495913c9f88533d73fa1f06bdf1ad8c0a
+content_hash: f2390480d680001874ac2bbabf31e203987ecd145375e7552c9a1fa74b7b4604
 ---
 
 :::info BOM
