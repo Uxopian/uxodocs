@@ -7,23 +7,23 @@
       },
       {
         "label": "Installation",
-        "href": "/docs/arender/install/"
+        "href": "/docs/arender/install/docker/alfresco"
       },
       {
         "label": "Operation",
-        "href": "/docs/arender/operation/"
+        "href": "/docs/arender/operation/backup-restore"
       },
       {
         "label": "Features",
-        "href": "/docs/arender/feature/"
+        "href": "/docs/arender/feature/accessibility"
       },
       {
         "label": "APIs",
-        "href": "/docs/arender/apis/"
+        "href": "/docs/arender/apis/javascript/annotation-js-api"
       },
       {
         "label": "Configuration",
-        "href": "/docs/arender/configuration/"
+        "href": "/docs/arender/configuration/web-ui/annotation"
       },
       {
         "label": "Performance",
@@ -31,11 +31,11 @@
       },
       {
         "label": "Connectors",
-        "href": "/docs/arender/connector/"
+        "href": "/docs/arender/connector/custom"
       },
       {
         "label": "Cookbooks",
-        "href": "/docs/arender/cookbook/"
+        "href": "/docs/arender/cookbook/activate-https"
       },
       {
         "label": "FAQ",

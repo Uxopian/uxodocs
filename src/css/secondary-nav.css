@@ -59,14 +59,29 @@
     visibility: visible !important;
 }
 
-[class*="theme-doc-sidebar"] li.hidden-sidebar-item > *:not(a) {
+[class*="theme-doc-sidebar"] li.hidden-sidebar-item>*:not(a) {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
 }
 
 /* Hide the link inside hidden-sidebar-item */
-[class*="theme-doc-sidebar"] li.hidden-sidebar-item > a {
+[class*="theme-doc-sidebar"] li.hidden-sidebar-item>a {
+    display: none !important;
+}
+
+/* Hide "Documentation Version X" wrapper link in sidebar */
+/* Target the wrapper element that was marked by JS */
+[class*="theme-doc-sidebar"] .uxo-hide-version-wrapper>a:first-child,
+[class*="theme-doc-sidebar"] .uxo-hide-version-wrapper>.menu__link:first-child,
+[class*="theme-doc-sidebar"] .uxo-hide-version-wrapper>div>a:first-child {
+    display: none !important;
+}
+
+/* Also hide by content matching "Documentation Version" */
+[class*="theme-doc-sidebar"] a.menu__link:has-text("Documentation Version"),
+[class*="theme-doc-sidebar"] .menu__list-item>a[href$="/arender"]:only-of-type,
+[class*="theme-doc-sidebar"] .menu__list-item>a[href$="/arender/"]:only-of-type {
     display: none !important;
 }
 
@@ -314,6 +329,7 @@ html.uxo-product-uxopian-ai a:hover {
 
 /* On small screens, sidebars are typically stacked / off-canvas; don't force sticky there */
 @media (max-width: 1024px) {
+
     .uxo-has-secondary-nav .theme-doc-sidebar,
     .uxo-has-secondary-nav .theme-doc-sidebar-container,
     .uxo-has-secondary-nav .sidebar_njMd,

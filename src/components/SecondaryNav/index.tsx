@@ -45,7 +45,7 @@ export default function SecondaryNav(): React.ReactElement | null {
     const items: Cat[] = productCategories[version] || productCategories['current'] || [];
 
     if (!items || items.length === 0) return null;
-    // useSyncSidebarToCategory(items, pathname); // Removed legacy DOM filtering
+    useSyncSidebarToCategory(items, pathname);
 
     React.useEffect(() => {
         if (typeof document === "undefined") return;
@@ -236,8 +236,8 @@ export function useSyncSidebarToCategory(
                     let itemCategoryBase = "";
 
                     if (potentialVersion && potentialVersion.match(/^v[\d.]+-?[A-Z]*$/)) {
-                        if (itemSegments.length > docsIdx + 4) {
-                            itemCategoryBase = itemSegments.slice(0, docsIdx + 5).join("/");
+                        if (itemSegments.length > docsIdx + 3) {
+                            itemCategoryBase = itemSegments.slice(0, docsIdx + 4).join("/");
                         }
                     } else {
                         const category = itemSegments[docsIdx + 2];
@@ -282,9 +282,6 @@ export function useSyncSidebarToCategory(
                     el.classList.contains("menu__list-item") || el.tagName.toLowerCase() === "li"
             ) as Element[];
 
-            // ALWAYS unwrap single parent groups (like "Documentation FlowerDocs")
-            // This removes the unnecessary top-level wrapper from the sidebar hierarchy
-            // even when a category is active
             if (groups.length === 1) {
                 const nestedList = groups[0].querySelector("ul.menu__list");
                 if (nestedList) {
@@ -295,10 +292,32 @@ export function useSyncSidebarToCategory(
                     ) as Element[];
 
                     if (nestedGroups.length > 1) {
+                        groups[0].classList.add("uxo-hide-version-wrapper");
+
+                        const wrapperLink = groups[0].querySelector("a.menu__link, a");
+                        if (wrapperLink && wrapperLink.textContent?.includes("Documentation")) {
+                            (wrapperLink as HTMLElement).style.display = "none";
+                        }
+
                         groups = nestedGroups;
                     }
                 }
             }
+
+            // Hide all "Documentation Version X" links anywhere in the sidebar
+            groups.forEach((g) => {
+                const links = g.querySelectorAll("a");
+                links.forEach((link) => {
+                    if (link.textContent?.includes("Documentation Version")) {
+                        (link as HTMLElement).style.display = "none";
+                        // Also hide the parent list item if it only contains this link
+                        const parent = link.closest(".menu__list-item");
+                        if (parent && parent.querySelectorAll("a").length === 1) {
+                            (parent as HTMLElement).style.display = "none";
+                        }
+                    }
+                });
+            });
 
             if (!active) {
                 groups.forEach((g) => {
