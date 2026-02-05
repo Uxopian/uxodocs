@@ -151,5 +151,4 @@ jobs:
       - name: Deploy to S3
         run: |
           # Synchronise le dossier build vers le bucket S3
-          # --delete supprime les fichiers distants qui ne sont plus dans le build local
           aws s3 sync build/ s3://${{ secrets.S3_BUCKET }} --delete
