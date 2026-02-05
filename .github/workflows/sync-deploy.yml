@@ -62,7 +62,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
           # Backup du sidebar current s'il existe
           if [ -f "sidebars_arender_current.ts" ]; then
              cp sidebars_arender_current.ts sidebars_arender_current.ts.bak
