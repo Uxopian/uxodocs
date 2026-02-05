@@ -1,9 +1,9 @@
 ---
 title: Optimize visualization
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-02-05T16:03:58.461Z'
   author: CI/CD Bot
-content_hash: 9d9427f18646553240a7d6ab1fc288c32469743be1f038c022e77630cf68c11d
+content_hash: f23eb043727d17f505daa6128cd0bbca602bc9af3f057e1e41f6df85709b521d
 ---
 
 ARender provides a simple and streamlined Interface for viewing a

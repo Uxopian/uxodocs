@@ -1,9 +1,9 @@
 ---
 title: Rendition changes
 last_update:
-  date: '2026-02-05T13:50:19.106Z'
+  date: '2026-02-05T16:03:58.461Z'
   author: CI/CD Bot
-content_hash: 2be76bb007990363caf3c3591a909ffaf647e9b9ff354c7f12ef5617a651ad0f
+content_hash: 10c843d336da64333ac34d664c8e33164305be3f6b75988db86c5226afd0515d
 ---
 
 ## Document Service Broker (RenditionEngine module)

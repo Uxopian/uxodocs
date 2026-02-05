@@ -1,10 +1,10 @@
 ---
 title: Overview
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-05T16:03:58.461Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 3a07e4926cb9df6df1363279405f210dbbdab9380d5cd6888c097cfe4866c977
+content_hash: 0c7f33f84689c14283ef9a292459db85437686ef1d36c13343304ddf38d8e383
 ---
 
 This page details the configuration of ARender for the ECM Alfresco

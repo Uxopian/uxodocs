@@ -2,9 +2,9 @@
 title: Image for rejected document
 sidebar_position: 15
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-05T16:03:58.461Z'
   author: CI/CD Bot
-content_hash: a6400d4592a77ef8a9ca0b74f06c83250988a9fb39f148f37ce1c83444341e0f
+content_hash: ebf77f7ee38b8475c6d6a5364dcc44f95d725d459c8ebc1ae799bcf2cc86ceb6
 ---
 
 Since version 4.8.0, it is possible to configure the rendition server to display an image indicating that the document could not be loaded correctly.
