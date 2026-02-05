@@ -29,7 +29,7 @@ const config: Config = {
     organizationName: "uxopian",
     projectName: "uxodocs",
     deploymentBranch: "staging",
-    trailingSlash: false,
+    trailingSlash: true,
 
     onBrokenLinks: "warn",
     markdown: {
