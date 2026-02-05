@@ -36,17 +36,17 @@ You can find out about the major technical changes in this version by consulting
 ## 💻 Login page, a new style
 
 The login page has been modified to make it easier for users to view. Depending on the settings, the login page offers username and password authentication and/or single sign-on.
-![Image](/uxodocs/img/flowerdocs/release-notes/PageConnexion_EN.png)
+![Image](pathname:///img/flowerdocs/release-notes/PageConnexion_EN.png)
 
 ## 💻 Easier to add documents
 
 New ways of manually adding a document to FlowerDocs have been added to reduce the number of actions users have to perform, saving a significant amount of time.
 
 To add a document to FlowerDocs without a specific context, you can now **drag and drop a file from your workstation to the ‘+’ button** on the banner.
-![Image](/uxodocs/img/flowerdocs/release-notes/AjoutDocD&D_EN.gif)
+![Image](pathname:///img/flowerdocs/release-notes/AjoutDocD&D_EN.gif)
 
 Depending on the settings, it is also possible to add a document **directly to a virtual folder** using the 'Add document' button or by dragging and dropping directly into the file plan area. The new document is automatically indexed in the same way as the folder to simplify indexing and avoid errors.
-![Image](/uxodocs/img/flowerdocs/release-notes/AjoutDocDossier_EN.gif)
+![Image](pathname:///img/flowerdocs/release-notes/AjoutDocDossier_EN.gif)
 
 _\* Depending on the settings, the "+" button or the "Add a document" button will appear in a virtual folder._
 
@@ -55,26 +55,26 @@ _\* Depending on the settings, the "+" button or the "Add a document" button wil
 Full-text search has been optimised, allowing the use of '' to perform strict searches and extract text from zip documents.
 
 The word or words being searched for are also **automatically highlighted in the viewer**, so users can quickly see why the document has appeared in the search results.
-![Image](/uxodocs/img/flowerdocs/release-notes/RecherchePleinTexte_EN.gif)
+![Image](pathname:///img/flowerdocs/release-notes/RecherchePleinTexte_EN.gif)
 
 _\* As a reminder, full text search can be enabled in the settings._
 
 ## 💻 Optimised versions management
 
 You can restore a version directly from the version you are viewing. This makes it quicker and easier to restore the version you want.
-![Image](/uxodocs/img/flowerdocs/release-notes/Restore_EN.png)
+![Image](pathname:///img/flowerdocs/release-notes/Restore_EN.png)
 
 ## 💻 Serial processing
 
 Serial processing is available by opening it in the same window or assigning it to yourself from the context menu, to suit all applications.  
-![Image](/uxodocs/img/flowerdocs/release-notes/TraitementSerie_EN.gif)
+![Image](pathname:///img/flowerdocs/release-notes/TraitementSerie_EN.gif)
 
 This function is not available when opening in a new window, to avoid errors or misunderstandings between different processing sessions.
 
 ## 💻 Faster access to product information
 
 Information about the product, such as the version installed, is moved from the avatar menu to the menu.
-![Image](/uxodocs/img/flowerdocs/release-notes/MenuAPropos_EN.gif)
+![Image](pathname:///img/flowerdocs/release-notes/MenuAPropos_EN.gif)
 
 ## 👨‍💻 The ARender viewer, improvements and new features
 
@@ -95,12 +95,12 @@ Our approach to data collection and usage is fully documented, ensuring clarity 
 ## 💻 Administration
 
 Addition of an Asynchronous column in the Operations Handlers table to facilitate analysis.
-![Image](/uxodocs/img/flowerdocs/release-notes/OHTableau_EN.png)
+![Image](pathname:///img/flowerdocs/release-notes/OHTableau_EN.png)
 
 ## ⚙️ Virtual folder
 
 A new parameter has been added to limit the document classes created directly from a virtual folder: children
-![Image](/uxodocs/img/flowerdocs/release-notes/DossierClientEnfant_EN.png)![Image](/uxodocs/img/flowerdocs/release-notes/DossierClientEnfant_XML.png)
+![Image](pathname:///img/flowerdocs/release-notes/DossierClientEnfant_EN.png)![Image](pathname:///img/flowerdocs/release-notes/DossierClientEnfant_XML.png)
 To find out more, see the upgrade notes [here](./upgrade-notes#adding-documents-made-easy)
 
 ## 👨‍💻 CLM
@@ -179,7 +179,7 @@ To find out more, see the upgrade note [here](./upgrade-notes#exploitation).
 ### 💻 All reports are clickable
 
 For more intuitive and faster access to envelopes from the home page, the donut and histogram reports available to all users are clickable.
-![Image](/uxodocs/img/flowerdocs/release-notes/WidgeteProcess_EN.gif)
+![Image](pathname:///img/flowerdocs/release-notes/WidgeteProcess_EN.gif)
 
 ### 💻 Adding a document to a folder
 
@@ -205,7 +205,7 @@ The process of assigning envelopes to a specific user has been reviewed to reduc
 ### 💻 All reports are clickable
 
 For more intuitive and faster access to mails from the home page, the donut and histogram reports available to all users are clickable.
-![Image](/uxodocs/img/flowerdocs/release-notes/WidgetGEC_EN.gif)
+![Image](pathname:///img/flowerdocs/release-notes/WidgetGEC_EN.gif)
 
 ### 💻 Adding a document to a folder
 

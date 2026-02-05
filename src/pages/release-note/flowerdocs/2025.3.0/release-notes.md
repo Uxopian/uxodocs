@@ -45,7 +45,7 @@ The former options "**Aggregation 1**" and "**Aggregation 2**" have been replace
 * **Display by**  *(formerly Aggregation 1)* : This data represents the key data points that are displayed in the graph.  
 * **Break down by** *(formerly Aggregation 2)* : This data enables you to subdivide the display according to a second criterion.
 
-![Image](/uxodocs/img/flowerdocs/release-notes/Histogram.png)
+![Image](pathname:///img/flowerdocs/release-notes/Histogram.png)
 
 This new terminology has been designed to make data manipulation more intuitive and to help users better understand the structure of their Donuts and Histograms.
 
@@ -75,7 +75,7 @@ FlowerDocs is pleased to announce the inclusion of **ARender 2023.15.0**, which 
 The "**Task & BPM**" menu has been renamed "**Task and Process**" in order to use clearer terminology that is more in line with the features offered.  
 Please note that this change is purely visual and does not affect current functionality for users or integrators.
 
-![Image](/uxodocs/img/flowerdocs/release-notes/Task_Process.png)
+![Image](pathname:///img/flowerdocs/release-notes/Task_Process.png)
 
 
 # For operators

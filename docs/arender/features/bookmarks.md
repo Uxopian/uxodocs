@@ -13,7 +13,7 @@ A bookmark has a title and a link to a page in the document.
 
 ## Adding a bookmark
 
-To create a bookmark, click on the icon to add it. ![image]()
+To create a bookmark, click on the icon to add it. ![image](/img/arender/documentation/features/bookmarks/add-bookmark.png)
 When creating it, you must add the title of the bookmark. The current page number will be used as a link.
 If you want to add a bookmark to another bookmark, you select the parent bookmark and click the add button.
 
@@ -23,7 +23,7 @@ You can also select the bookmark, right click and add a bookmark.
 ## Remove a bookmark
 
 To remove a bookmark, you can select it and click the remove button.
-![image]()
+![image](/img/arender/documentation/features/bookmarks/remove-bookmark.png)
 
 You can also select the bookmark, right click and delete the current bookmark.
 ![image](/img/arender/documentation/features/bookmarks/contextual-menu-remove-bookmark-en.png)
@@ -32,7 +32,7 @@ In both cases, a confirmation popup will appear. If the deleted bookmark does no
 If the deleted bookmark has children, this popup will appear: ![image](/img/arender/documentation/features/bookmarks/remove-bookmarks-popup-en.png)
 
 Without selecting, you can delete a bookmark by clicking on the delete button. This popup appears: ![image](/img/arender/documentation/features/bookmarks/repeat-remove-bookmark-popup-en.png)
-If you validate, the button will switch to repeat mode, ![image]() as soon as you click on a bookmark it will be deleted. To disable this mode, click on the delete button again.
+If you validate, the button will switch to repeat mode, ![image](/img/arender/documentation/features/bookmarks/repeat-remove-bookmark.png) as soon as you click on a bookmark it will be deleted. To disable this mode, click on the delete button again.
 
 If you delete a parent bookmark, its children will also be deleted.
 

@@ -2,9 +2,9 @@
 title: Import ARender dependencies
 sidebar_position: 16
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-05T13:50:19.106Z'
   author: CI/CD Bot
-content_hash: a539e7132ba9b5eaa1967124d755c1691c10fa36a24fa138c7ab3d9136aea924
+content_hash: 772543ace498ff7c11583b7ff3c8f8bd185f1defe2bb96983a2e773d7e1dc34d
 ---
 
 This feature is available from version 4.4.0

@@ -2,9 +2,9 @@
 title: Configure emails
 sidebar_position: 6
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-05T13:50:19.106Z'
   author: CI/CD Bot
-content_hash: e0241f65679969b6b6cf199144d4f3a2f0ed3c243852ff8cb9e1f8634712a046
+content_hash: 11526b9ba38a080c863849435a413fd984ec3ffce323580fc769aed72c02ab00
 ---
 
 ## Date formatting

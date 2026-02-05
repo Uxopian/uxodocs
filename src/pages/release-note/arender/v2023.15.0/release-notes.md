@@ -30,7 +30,7 @@ signatures, images, or blank areas. (AR-17701)
 To avoid any disrupion in the user interface, this feature is disabled by default, more information see the property
 **topPanel.docLink.enableZoneSelection** described in the documentation
 [here](/features/hyperlink#document-linking).
-![Create hyperlink from zone](/uxodocs/img/arender/annotations/ZonaldocLink.gif)
+![Create hyperlink from zone](pathname:///img/arender/annotations/ZonaldocLink.gif)
 
 ## Developer / Integrator Perspective
 

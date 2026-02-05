@@ -2,9 +2,9 @@
 title: Installation in Share
 sidebar_position: 2
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-05T13:50:19.106Z'
   author: CI/CD Bot
-content_hash: 3d08a30b56dafffe579108fd4e943a646329cd5d9eabf9b0eefc1e0a0993383c
+content_hash: 0744b7cb0580dab871012bd7ede50805fbdd9602b3e90ca1809c155e732dbec8
 ---
 
 We present here the continuation of the installation of the Web-UI, in the Share module of Alfresco.

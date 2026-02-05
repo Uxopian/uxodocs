@@ -3,9 +3,9 @@ title: Installation
 sidebar_position: 3
 date: "2001-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-29T08:27:50.243Z'
+  date: '2026-02-05T13:50:19.106Z'
   author: CI/CD Bot
-content_hash: e9d3e456f1e782c8a645b9f0f9c3de7fd333d2b383db2069d421993ba4215fb4
+content_hash: a375e80de6769c614d0c2827e7863895aa6ec4aac3e8c8abddd282bb2657c0e5
 ---
 
 import Tabs from '@theme/Tabs';

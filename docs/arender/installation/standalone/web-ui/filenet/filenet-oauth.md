@@ -3,9 +3,9 @@ title: Installation ARender Spring Boot with OAuth2
 sidebar_position: 2
 description: Deployment guide for IBM Filenet with ARender Spring Boot and OAuth2
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-05T13:50:19.106Z'
   author: CI/CD Bot
-content_hash: dec6e513eb77160cbd3e7df2538fcd52f0bf2e4846f29676ad615c4adcb7af21
+content_hash: 0843f170d3a4f26454bb48da8340416153298e525ec18203653e5d8a00dcf6e0
 ---
 
 # Overview

@@ -66,9 +66,9 @@ By default, the context path is *alfresco* (for /alfresco).
 
 No configuration is needed for annotations storage in Alfresco.
 
-Annotations will be stored as a child node of the document Node itself. Child node name is: **cm:arender-annotations-v{version document}**.
+Annotations will be stored as a child node of the document Node itself. Child node name is : `cm:arender-annotations-v{version document}`.
 
-![Annotation child node image](/uxodocs/img/arender/alfresco/ARender4Alfresco-AnnotationChildNode.png)
+![Annotation child node image](pathname:///img/arender/alfresco/ARender4Alfresco-AnnotationChildNode.png)
 
 ## The installation is complete
 

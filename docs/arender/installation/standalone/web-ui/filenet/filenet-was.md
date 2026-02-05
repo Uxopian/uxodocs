@@ -3,9 +3,9 @@ title: Installation in IBM Websphere (recommended)
 sidebar_position: 1
 description: Deployment guide for IBM Filenet in IBM WebSphere application server
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-05T13:50:19.106Z'
   author: CI/CD Bot
-content_hash: 92eee4135fe09eb682311a2e72ecf3e9263aabdddec91d6df63577a9fd7f7c37
+content_hash: b6c8a9620c85b675e24a11515b98691920ba18e1777dcabef29afe968380d98c
 ---
 
 Below the deployment of ARender HMI for FileNet in **IBM WebSphere application server**.

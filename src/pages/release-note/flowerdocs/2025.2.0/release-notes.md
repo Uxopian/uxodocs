@@ -43,7 +43,7 @@ In addition, when users click on the title of one of their personal reports, the
 These changes are only the beginning: **further improvements to reports are planned for upcoming versions** to continue enhancing the user experience.
 
 We encourage our users to **share their use cases, needs, or ideas, and to vote on our [product portal](https://portal.productboard.com/xm7hyfq2qsh4iq5go1hqbc7g)** to help us shape the next evolutions
-![Image](pathname:///uxodocs/img/flowerdocs/release-notes/DashletTitleAccessSearch.gif)
+![Image](pathname:///img/flowerdocs/release-notes/DashletTitleAccessSearch.gif)
 
 ## 💻 The ARender viewer, improvements
 
@@ -52,12 +52,12 @@ This new version of the viewer offers enhanced security following the correction
 ## 💻 Administration, users management
 
 The user creation or update screen now clearly highlights all required fields. The "Create" or “Save” button will remain inactive until all mandatory fields are completed.
-![Image](pathname:///uxodocs/img/flowerdocs/release-notes/UserManagment_EN.png)
+![Image](pathname:///img/flowerdocs/release-notes/UserManagment_EN.png)
 
 ## 💻 Administration, groups management
 
 The group creation or update screen clearly highlights all mandatory fields. The "Create" or "Save" button remains inactive until all mandatory fields have been filled in.
-![Image](pathname:///uxodocs/img/flowerdocs/release-notes/GroupManagment_EN.png)
+![Image](pathname:///img/flowerdocs/release-notes/GroupManagment_EN.png)
 
 # For integrators
 

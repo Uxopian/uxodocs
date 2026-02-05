@@ -1,10 +1,10 @@
 ---
 title: Standalone
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-05T14:03:45.113Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 870759037d9910a81c1cd17b6f96ef86ff2ec28c8f14e03a0e2b4c9bd1c08c41
+content_hash: 668882436cbbef654fef2f3bc81567e430c9b51a22e9946ae0c01ef04c25d851
 ---
 
 Below a standalone installation of the ARender Web-UI.
@@ -65,7 +65,7 @@ java -jar [Web-UI-folder]/arondor-arender-hmi-spring-boot-2023.16.0.jar
 Access to `http://localhost:8080` via a web browser.
 :::
 
-![DefaultDocument](/uxodocs/img/arender/arenderDefaultDocumentV5.png)
+![DefaultDocument](pathname:///img/arender/arenderDefaultDocumentV5.png)
 
 :::note
 The URL to use should be built like this: `http://{Web-UI-HostName}:{port-Web-UI}/{ARenderContext}`:
@@ -77,7 +77,7 @@ The URL to use should be built like this: `http://{Web-UI-HostName}:{port-Web-UI
 
 You may have encountered the below error notification.
 
-![DefaultDocument-KO](/uxodocs/img/arender/arenderDefaultDocumentV5-ko.png)
+![DefaultDocument-KO](pathname:///img/arender/arenderDefaultDocumentV5-ko.png)
 
 It may mean that:
 * Either the local Rendition is not installed/started

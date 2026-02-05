@@ -11,7 +11,7 @@ ARender is a secure web viewer allowing you to view and annotate
 [many different document formats](./file-format-support) on any device than runs a 
 Web Browser.
 
-![img](/uxodocs/img/arender/ARender-Version5.png)
+![img](pathname:///img/arender/ARender-Version5.png)
 
 ARender is mobile friendly, as we have dedicated interfaces for mobile phones and tablets.
 

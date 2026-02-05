@@ -3,9 +3,9 @@ title: Implementation
 sidebar_position: 1
 date: "2020-02-01T11:20:01+02:00"
 last_update:
-  date: '2026-01-29T08:27:50.243Z'
+  date: '2026-02-05T13:50:19.106Z'
   author: CI/CD Bot
-content_hash: 36a66b3de7441143d2093e057309ac1417f81131b750d4d6d04e997f088ce6be
+content_hash: 89c09e3ffae9caf55ad31997a557122f89a217f3f1bcf781a551bf06d820edd7
 ---
 
 # Goal

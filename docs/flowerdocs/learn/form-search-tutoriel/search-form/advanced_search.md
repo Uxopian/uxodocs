@@ -3,9 +3,9 @@ title: Advanced search
 sidebar_position: 1
 date: "2020-02-02T08:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-02-05T13:50:19.106Z'
   author: CI/CD Bot
-content_hash: 12718a2903c12ad74c6e68aac5f80c527c0dba08192a36065643529451919019
+content_hash: c4c91755e1995131c360fe48a4e77d575d1cf5630508c280f51568918516e8eb
 ---
 
 XML files are used to configure search forms. Use the internal editor to edit the file.

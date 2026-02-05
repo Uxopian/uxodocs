@@ -61,14 +61,10 @@ toolbar:
 or you can right-click on the document and choose "Turn page left" or
 "Turn page right" in the menu:
 
-![image](/img/arender/new/opti7.png)
-
 ## Turn all document pages with one click
 
 You can also turn all pages of the document at left or at right by
 clicking on these buttons:
-
-![image](/img/arender/new/opti8.png)
 
 ## Access the full screen mode
 

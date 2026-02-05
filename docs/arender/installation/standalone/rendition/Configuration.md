@@ -233,8 +233,8 @@ shared-files:
 
 This configuration is **possible only when the cache is shared** across multiple Rendition instances, see:
 
-- [For Shared Cache Directories Among Several Renditions](),
-- [Shared Cache]().
+- [For Shared Cache Directories Among Several Renditions](#configure-the-web-ui-without-load-balancer),
+- [Shared Cache](#local-vs-shared).
 
 If a Load Balancer is present between the Web-UI and Renditions, specify the Load Balancer's host in the Web-UI server
 configuration instead of listing individual Rendition hosts.
@@ -253,8 +253,8 @@ Detailed configuration can be found on the dedicated [page](/docs/arender/instal
 
 This configuration is **required only when the cache is shared** across multiple Rendition instances, see:
 
-- [For Shared Cache Directories Among Several Renditions](),
-- [Shared Cache]().
+- [For Shared Cache Directories Among Several Renditions](#configure-the-web-ui-without-load-balancer),
+- [Shared Cache](#local-vs-shared).
 
 Proper NFS configuration is crucial for synchronizing different nodes. Two primary optimizations can cause NFS clients to become out of sync:
 

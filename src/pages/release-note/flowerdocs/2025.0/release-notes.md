@@ -42,20 +42,20 @@ To find out more, read the upgrade notes [here](./upgrade-notes#performances)
 This new version of the viewer brings significant ergonomic improvements and enhanced security.
 
 - **Quick menu at text selection**: When a text is selected, a quick menu appears below the selected text, allowing the user to copy, highlight and underline, making interaction with documents quicker and more efficient.
-  ![Image](/uxodocs/img/flowerdocs/release-notes/ARender_MenuRapide.gif)
+  ![Image](pathname:///img/flowerdocs/release-notes/ARender_MenuRapide.gif)
 
 - **The toolbar has been simplified and grouped together for a more user-friendly experience.** Annotations and buttons are neatly organised in productivity-enhancing submenus.
-  ![Image](/uxodocs/img/flowerdocs/release-notes/ARender_BarreOutilsSimplifiéeRegroupée.png)
+  ![Image](pathname:///img/flowerdocs/release-notes/ARender_BarreOutilsSimplifiéeRegroupée.png)
 
 - **Optimized navigation within documents displayed in the viewer.**
 
 It is now possible to display all pages, only the first page or only the title for open.
-![Image](/uxodocs/img/flowerdocs/release-notes/ARender_OptimisationNavigation_EN.png)
+![Image](pathname:///img/flowerdocs/release-notes/ARender_OptimisationNavigation_EN.png)
 or navigate through documents using a list.
-![Image](/uxodocs/img/flowerdocs/release-notes/ARender_NavigationListeDocument.png)
+![Image](pathname:///img/flowerdocs/release-notes/ARender_NavigationListeDocument.png)
 
 - The redact menu (beta feature) has been moved to the left to make it easier to create and view strikethroughs.
-  ![Image](/uxodocs/img/flowerdocs/release-notes/ARender_Biffure_EN.png)
+  ![Image](pathname:///img/flowerdocs/release-notes/ARender_Biffure_EN.png)
 
 For more information, please consult the ARender release notes : [here](https://hub.arender.io/technical-blog)
 
@@ -74,9 +74,9 @@ Create a new ACL: acl-rotation, which is applied to all rotation annotations. To
 
 The display of versions has been modified in the document history and for version consultation, to offer a more efficient user experience.
 Earlier versions now have a new blue icon to identify them more quickly in history.
-![Image](/uxodocs/img/flowerdocs/release-notes/Version_PopUpHistoriqueVersions_EN.png)
+![Image](pathname:///img/flowerdocs/release-notes/Version_PopUpHistoriqueVersions_EN.png)
 Consultation of a previous version is carried out in a new tab, in which the proposed actions have been redesigned to offer the functionalities applicable to a version, including comparison with the working version.
-![Image](/uxodocs/img/flowerdocs/release-notes/Version_Consultation_EN.png)
+![Image](pathname:///img/flowerdocs/release-notes/Version_Consultation_EN.png)
 
 ## 💻 Improved search and full-text search
 
@@ -87,13 +87,13 @@ The zip export function for all documents returned as search results has been re
 ## 👨‍💻 Serial processing for higher productivity
 
 Users can index documents or process jobs from a results table, gaining efficiency through serial processing. Actions follow on from one another, without having to return to the search result or processing table.
-![Image](/uxodocs/img/flowerdocs/release-notes/Traitement en série.gif)
+![Image](pathname:///img/flowerdocs/release-notes/Traitement en série.gif)
 For further information, please consult the documentation [here](/documentation/learn/list-processing/implementation)
 
 ## 💻 Ideas portal : Accelerating the evolution of FlowerDocs
 
 Thanks to the integration of an ideas portal within FlowerDocs, each user can submit the evolutions they would like to see in the product to the Uxopian Software team. This provides valuable information for prioritizing and proposing new features and significant improvements for all users.
-![Image](/uxodocs/img/flowerdocs/release-notes/PortailIdées_EN.png)
+![Image](pathname:///img/flowerdocs/release-notes/PortailIdées_EN.png)
 
 ## 💻 Improved accessibility
 
@@ -106,7 +106,7 @@ The following features have been removed:
 
 - 💻 OpenSearch Dashboards, for security reasons. If you have reporting needs, you can use the WS provided by FlowerDocs to extract raw data and inject it into external reporting tools.
 - 👨‍💻 The shortcut button for creating documents, tasks or folders on the home page. This feature duplicated the creation shortcut in the FlowerDocs banner.
-  ![Image](/uxodocs/img/flowerdocs/release-notes/BoutonRaccourciSupprimé_EN.png)
+  ![Image](pathname:///img/flowerdocs/release-notes/BoutonRaccourciSupprimé_EN.png)
 - ⚙️ The Camunda workflow engine. In FlowerDocs, it is still possible to set up workflows via processes, task classes and a ScriptOperationHandler, or to go even faster by deploying the e-Process case manager, which enriches Flowerdocs with turnkey case management capabilities.
 - ⚙️ On the administrator side, mass import of users. When initializing a project, you can use an ldif import directly from the directory to facilitate the creation of all users.
 

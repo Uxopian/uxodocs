@@ -1,9 +1,9 @@
 ---
 title: Rendition changes
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-02-05T13:50:19.106Z'
   author: CI/CD Bot
-content_hash: da7804a058e1c69aad7b6a84284325b3636295126b0592c882f77170e421a459
+content_hash: 2be76bb007990363caf3c3591a909ffaf647e9b9ff354c7f12ef5617a651ad0f
 ---
 
 ## Document Service Broker (RenditionEngine module)
@@ -121,10 +121,10 @@ How to configure mime type has changed, for more information see [there](../../.
 | app:alterDocumentContentOperations:renderAnnotations      | Internal operation name that determines what document transformation process to do |
 | app:alterDocumentContentOperations:renderFDFAnnotations   | Internal operation name that determines what document transformation process to do |
 | app:alterDocumentContentOperations:compress               | Internal operation name that determines what document transformation process to do |
-| nurse:components[0]functionality                          | Mail nurse configuration                                                           |
-| nurse:components[0]factoryName                            | Mail nurse configuration                                                           |
-| nurse:components[0]samplePath                             | Mail nurse configuration                                                           |
-| nurse:components[0]docIdStr                               | Mail nurse configuration                                                           |
+| `nurse:components[0]functionality`                          | Mail nurse configuration                                                           |
+| `nurse:components[0]factoryName`                            | Mail nurse configuration                                                           |
+| `nurse:components[0]samplePath`                             | Mail nurse configuration                                                           |
+| `nurse:components[0]docIdStr`                               | Mail nurse configuration                                                           |
 
 #### Renamed properties
 
@@ -133,8 +133,8 @@ How to configure mime type has changed, for more information see [there](../../.
 | eureka:instance:metadataMap:context           | eureka:instance:metadataMap:context                 | Value changed |
 | app:factoriesBeanNames:imageFactory           | app:factoriesBeanNames:imageFactory                 | Value changed |
 | app:factoriesBeanNames:textFactory            | app:factoriesBeanNames:pdfboxTextFactory            | Name changed  |
-| nurse:components[1]samplePath: "video.mp4"    | nurse:components[1]samplePath: "video.avi"          | Value changed |
-| nurse:components[2]factoryName: "textFactory" | nurse:components[2]factoryName: "pdfboxTextFactory" | Value changed |
+| `nurse:components[1]samplePath`: "video.mp4"    | `nurse:components[1]samplePath`: "video.avi"          | Value changed |
+| `nurse:components[2]factoryName`: "textFactory" | `nurse:components[2]factoryName`: "pdfboxTextFactory" | Value changed |
 
 ## Document Renderer (JNIPdfEngine module)
 
