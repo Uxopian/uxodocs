@@ -38,3 +38,12 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+
+/* Force white color for product names on homepage */
+.homePageWrapper :global(.navbar__link.verdd::before) {
+    color: #ffffff !important;
+}
+
+.homePageWrapper :global(.navbar__link.verdd) {
+    color: #ffffff !important;
+}

@@ -3,11 +3,11 @@
     "current": [
       {
         "label": "What is ARender",
-        "href": "/docs/arender/what-is-arender/annotation-support"
+        "href": "/docs/arender/what-is-arender/overview"
       },
       {
         "label": "Installation",
-        "href": "/docs/arender/installation/docker/alfresco"
+        "href": "/docs/arender/installation/docker/overview"
       },
       {
         "label": "Learn",
@@ -99,7 +99,7 @@
       },
       {
         "label": "Configuration",
-        "href": "/docs/uxopian-ai/configuration/api_references"
+        "href": "/docs/uxopian-ai/configuration/config_files"
       },
       {
         "label": "Administration",
@@ -107,7 +107,7 @@
       },
       {
         "label": "How To Guides",
-        "href": "/docs/uxopian-ai/how_to_guides/common_operational_tasks"
+        "href": "/docs/uxopian-ai/how_to_guides/contributing"
       },
       {
         "label": "QA",

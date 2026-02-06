@@ -34,7 +34,7 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
         key: "fast2",
         title: "Fast2",
         subtitle: "Discover all the updates, improvements, and fixes for Fast2",
-        logoSrc: "/uxodocs/img/fast2/Fast2_favicon_white.png",
+        logoSrc: "/img/fast2/Fast2_favicon_white.png",
         releasesData: fast2ReleasesData,
         styles: fast2Styles,
         filterBy: "major",
@@ -55,7 +55,7 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
         key: "arender",
         title: "ARender",
         subtitle: "Explore all ARender updates: new features, improvements, and critical fixes.",
-        logoSrc: "/uxodocs/img/arender/arender_logo_white.png",
+        logoSrc: "/img/arender/arender_logo_white.png",
         releasesData: arenderReleasesData,
         styles: arenderStyles,
         filterBy: "year",
@@ -75,7 +75,7 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
         title: "FlowerDocs",
         subtitle:
             "Explore the complete version history of FlowerDocs, from the latest features to improvements and fixes.",
-        logoSrc: "/uxodocs/img/flowerdocs/logo_flower_white.png",
+        logoSrc: "/img/flowerdocs/logo_flower_white.png",
         releasesData: flowerDocsReleasesData,
         styles: flowerDocsStyles,
         filterBy: "major",
@@ -88,15 +88,15 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
             hasUpgradeNotes: note.hasUpgradeNotes,
             latest: note.latest,
         }),
-        readMoreLink: (note: any) => `/uxodocs/release-note/flowerdocs/${note.slug}/release-notes`,
-        upgradeLink: (note: any) => `/uxodocs/release-note/flowerdocs/${note.slug}/upgrade-notes`,
+        readMoreLink: (note: any) => `/release-note/flowerdocs/${note.slug}/release-notes`,
+        upgradeLink: (note: any) => `/release-note/flowerdocs/${note.slug}/upgrade-notes`,
         cardColor: "#D745FF",
     },
     "uxopian-ai": {
         key: "uxopian-ai",
         title: "Uxopian AI",
         subtitle: "Coming soon - AI-powered documentation and automation.",
-        logoSrc: "/uxodocs/img/uxo_white.png",
+        logoSrc: "/img/uxo_white.png",
         releasesData: [
             {
                 version: "2026.0.0",
@@ -135,9 +135,9 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink }:
         const bigint = parseInt(
             h.length === 3
                 ? h
-                      .split("")
-                      .map((c) => c + c)
-                      .join("")
+                    .split("")
+                    .map((c) => c + c)
+                    .join("")
                 : h,
             16
         );
@@ -219,9 +219,9 @@ function hexToRgba(hex: string, alpha = 1) {
     const full =
         h.length === 3
             ? h
-                  .split("")
-                  .map((c) => c + c)
-                  .join("")
+                .split("")
+                .map((c) => c + c)
+                .join("")
             : h;
     const bigint = parseInt(full, 16);
     const r = (bigint >> 16) & 255;
@@ -258,20 +258,20 @@ export default function UnifiedReleasesPage() {
     const filterKeys: string[] =
         config.filterBy === "year"
             ? Array.from(
-                  new Set(allNotes.map((n) => n.version.split(".")[0].replace("v", "")))
-              ).sort((a, b) => Number(b) - Number(a))
+                new Set(allNotes.map((n) => n.version.split(".")[0].replace("v", "")))
+            ).sort((a, b) => Number(b) - Number(a))
             : config.filterBy === "major"
-              ? Array.from(new Set(allNotes.map((n) => n.majorVersion))).sort(
+                ? Array.from(new Set(allNotes.map((n) => n.majorVersion))).sort(
                     (a, b) => Number(b) - Number(a)
                 )
-              : [];
+                : [];
 
     const filteredNotes =
         selectedFilter === "all" || config.filterBy === "none"
             ? [...allNotes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
             : config.filterBy === "year"
-              ? allNotes.filter((note) => note.version.startsWith(`v${selectedFilter}`))
-              : allNotes.filter((note) => note.majorVersion === selectedFilter);
+                ? allNotes.filter((note) => note.version.startsWith(`v${selectedFilter}`))
+                : allNotes.filter((note) => note.majorVersion === selectedFilter);
 
     // Determine latest v2 if any
     const latestByMajor: Record<string, string> = {};
@@ -330,15 +330,15 @@ export default function UnifiedReleasesPage() {
                                         const isActive = selectedFilter === k;
                                         const buttonStyle = config.cardColor
                                             ? ({
-                                                  "--card-color": config.cardColor,
-                                                  background: isActive
-                                                      ? `linear-gradient(135deg, ${hexToRgba(config.cardColor, 0.12)}, ${hexToRgba(config.cardColor, 0.06)})`
-                                                      : undefined,
-                                                  boxShadow: isActive
-                                                      ? `0 8px 24px ${hexToRgba(config.cardColor, 0.18)}`
-                                                      : undefined,
-                                                  color: isActive ? "white" : undefined,
-                                              } as React.CSSProperties)
+                                                "--card-color": config.cardColor,
+                                                background: isActive
+                                                    ? `linear-gradient(135deg, ${hexToRgba(config.cardColor, 0.12)}, ${hexToRgba(config.cardColor, 0.06)})`
+                                                    : undefined,
+                                                boxShadow: isActive
+                                                    ? `0 8px 24px ${hexToRgba(config.cardColor, 0.18)}`
+                                                    : undefined,
+                                                color: isActive ? "white" : undefined,
+                                            } as React.CSSProperties)
                                             : undefined;
 
                                         return (

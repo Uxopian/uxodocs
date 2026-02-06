@@ -155,7 +155,7 @@ This update also improves JavaScript compatibility, as Edge uses the same engine
 
 The Companion MSI installer is available [here](/uxodocs/docs/flowerdocs/connecteurs/companion/install)
 
-## Companion 2025.3.2 _29/12/2025_
+## Companion 2025.3.0 _29/12/2025_
 
 ### 💻 Companion Add-in – Improved Authentication Handling (TMAFLW-685 / TMAFLW-1186)
 

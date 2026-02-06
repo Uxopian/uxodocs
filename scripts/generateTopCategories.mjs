@@ -21,6 +21,22 @@ async function exists(p) {
     }
 }
 
+async function extractSidebarPosition(filePath) {
+    try {
+        const content = await fs.readFile(filePath, 'utf8');
+        const frontMatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---/);
+        if (frontMatterMatch) {
+            const frontMatter = frontMatterMatch[1];
+            const positionMatch = frontMatter.match(/^sidebar_position:\s*(\d+)\s*$/m);
+            if (positionMatch) {
+                return parseInt(positionMatch[1], 10);
+            }
+        }
+    } catch (err) {
+    }
+    return 999; // Default position if not found
+}
+
 async function findFirstMarkdown(dir, maxDepth = 4, depth = 0) {
     if (depth > maxDepth) return null;
     const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -30,10 +46,27 @@ async function findFirstMarkdown(dir, maxDepth = 4, depth = 0) {
     const gettingStarted = files.find(f => /^getting-started\.mdx?$/i.test(f));
     if (gettingStarted) return path.join(dir, gettingStarted);
 
-    // Then check for other markdown files in current directory, sorted alphabetically
-    const sortedFiles = files.sort();
-    for (const f of sortedFiles) {
-        if (/\.mdx?$/i.test(f)) return path.join(dir, f);
+    // Then check for other markdown files in current directory, sorted by sidebar_position
+    const mdFiles = files.filter(f => /\.mdx?$/i.test(f));
+    if (mdFiles.length > 0) {
+        // Get sidebar positions for all markdown files
+        const filesWithPositions = await Promise.all(
+            mdFiles.map(async (f) => {
+                const filePath = path.join(dir, f);
+                const position = await extractSidebarPosition(filePath);
+                return { file: f, position, filePath };
+            })
+        );
+
+        // Sort by sidebar_position, then alphabetically
+        filesWithPositions.sort((a, b) => {
+            if (a.position !== b.position) {
+                return a.position - b.position;
+            }
+            return a.file.localeCompare(b.file);
+        });
+
+        return filesWithPositions[0].filePath;
     }
 
     // If no markdown files in current directory, recurse into subdirectories

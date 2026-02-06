@@ -19,7 +19,7 @@ Default port : 8080. It can be overridden using the `server.port` property in th
 
 ##
 
-[](https://arender.io/), developed by [Uxopian](https://www.uxopian.com), is a WEB application integrated into **FlowerDocs GUI** as an `iframe`. It visualizes documents generated via ARender Rendition Server.
+[ARender HMI](https://arender.io/), developed by [Uxopian](https://www.uxopian.com), is a WEB application integrated into **FlowerDocs GUI** as an `iframe`. It visualizes documents generated via ARender Rendition Server.
 
 Default port : 8080. It can be overridden using the `server.port` property in the `application.properties` file.
 

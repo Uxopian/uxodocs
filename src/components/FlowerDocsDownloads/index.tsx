@@ -133,7 +133,7 @@ const FlowerDocsDownloads: React.FC<FlowerDocsDownloadsProps> = ({
 
             <div className={styles.otherVersions}>
                 <a
-                    href="/uxodocs/releases?product=flowerdocs"
+                    href="/releases?product=flowerdocs"
                     className={styles.otherVersionsLink}
                 >
                     Other versions

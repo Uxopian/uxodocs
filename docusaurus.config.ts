@@ -29,7 +29,7 @@ const config: Config = {
     organizationName: "uxopian",
     projectName: "uxodocs",
     deploymentBranch: "staging",
-    
+
     trailingSlash: true,
 
     onBrokenLinks: "warn",
@@ -75,7 +75,7 @@ const config: Config = {
         [
             "@docusaurus/plugin-content-docs",
             {
-               id: "fast2",
+                id: "fast2",
                 path: "docs/fast2",
                 routeBasePath: "docs/fast2",
                 sidebarPath: require.resolve("./sidebars_fast2.ts"),
@@ -154,7 +154,7 @@ const config: Config = {
                 },
 
                 {
-                    label: "Release Notes",
+                    html: '<span></span>',
                     to: "/releases",
                     position: "right",
                     className: "verdd verdd--releases nav-release-notes",

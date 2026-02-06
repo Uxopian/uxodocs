@@ -85,7 +85,7 @@ export default function Navbar(props: any) {
 
             if (burgerButton && window.innerWidth <= 996) {
                 // Vérifier si on est sur la page d'accueil ou les release notes
-                const isHomePage = location.pathname === "/" || location.pathname === "/uxodocs/";
+                const isHomePage = location.pathname === "/";
                 const isReleasesPage =
                     location.pathname.startsWith("/releases") ||
                     location.pathname.includes("/release-note");

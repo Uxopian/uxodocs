@@ -11,11 +11,6 @@ type CategoriesStructure = Record<string, Record<string, Cat[]>>;
 export default function SecondaryNav(): React.ReactElement | null {
     const { pathname } = useLocation();
 
-    // Ne pas afficher la secondary navbar sur les pages de release notes
-    if (pathname.includes("/release-note/") || pathname.includes("/releases")) {
-        return null;
-    }
-
     const categoriesMap = categories as CategoriesStructure;
 
     let product: string | null = null;
@@ -40,13 +35,8 @@ export default function SecondaryNav(): React.ReactElement | null {
         }
     }
 
-    // Get categories for the detected product and version
-    const productCategories = (product && categoriesMap[product]) || {};
-    const items: Cat[] = productCategories[version] || productCategories['current'] || [];
-
-    if (!items || items.length === 0) return null;
-    useSyncSidebarToCategory(items, pathname); // Re-enabled sidebar filtering
-
+    // ALWAYS set product colors, even if SecondaryNav won't be displayed
+    // This ensures navbar active states get the correct background color
     React.useEffect(() => {
         if (typeof document === "undefined") return;
         const root = document.documentElement;
@@ -56,7 +46,6 @@ export default function SecondaryNav(): React.ReactElement | null {
             .forEach((c) => root.classList.remove(c));
         if (product) {
             root.classList.add(`${prefix}${product}`);
-            root.classList.add("uxo-has-secondary-nav");
             try {
                 const tokenMap: Record<string, string> = {
                     flowerdocs: "--uxo-purple-500",
@@ -86,7 +75,6 @@ export default function SecondaryNav(): React.ReactElement | null {
         }
         return () => {
             if (product) root.classList.remove(`${prefix}${product}`);
-            root.classList.remove("uxo-has-secondary-nav");
             try {
                 document.documentElement.style.removeProperty("--ifm-color-primary");
                 document.documentElement.style.removeProperty("--ifm-color-primary-dark");
@@ -95,6 +83,29 @@ export default function SecondaryNav(): React.ReactElement | null {
             }
         };
     }, [product]);
+
+    // Ne pas afficher la secondary navbar sur les pages de release notes
+    // (but product colors are still set via the useEffect above)
+    if (pathname.includes("/release-note/") || pathname.includes("/releases")) {
+        return null;
+    }
+
+    // Get categories for the detected product and version
+    const productCategories = (product && categoriesMap[product]) || {};
+    const items: Cat[] = productCategories[version] || productCategories['current'] || [];
+
+    if (!items || items.length === 0) return null;
+    useSyncSidebarToCategory(items, pathname); // Re-enabled sidebar filtering
+
+    // Set uxo-has-secondary-nav class ONLY when SecondaryNav is actually displayed
+    React.useEffect(() => {
+        if (typeof document === "undefined") return;
+        const root = document.documentElement;
+        root.classList.add("uxo-has-secondary-nav");
+        return () => {
+            root.classList.remove("uxo-has-secondary-nav");
+        };
+    }, []);
 
     React.useEffect(() => {
         if (typeof document === "undefined") return;

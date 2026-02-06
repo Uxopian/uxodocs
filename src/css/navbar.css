@@ -38,7 +38,7 @@
     }
 }
 
-.navbar__link.verdd {
+.navbar__link.verdd:not(.navbar__link--active) {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
@@ -57,7 +57,8 @@
     display: inline-block;
     font-size: var(--ifm-navbar-link-font-size, 1rem);
     line-height: inherit;
-    color: var(--ifm-navbar-link-color);
+    /* Use inherit instead of CSS variable to allow overrides */
+    color: inherit;
 }
 
 .navbar__link.verdd svg {
@@ -207,8 +208,8 @@ body:has(main > section[class*="productsSection"]) .navbar a {
 }
 
 /* Regular pages in light mode should have black navbar text */
-body:not([data-theme="dark"]):not([class*="indexPage"]) .navbar a:not(.navbar__link.verdd),
-body:not([data-theme="dark"]):not(:has(main > section[class*="productsSection"])) .navbar a:not(.navbar__link.verdd) {
+body:not([data-theme="dark"]):not([class*="indexPage"]):not(:has([class*="homePageWrapper"])) .navbar a:not(.navbar__link.verdd),
+body:not([data-theme="dark"]):not(:has(main > section[class*="productsSection"])):not(:has([class*="homePageWrapper"])) .navbar a:not(.navbar__link.verdd) {
     color: #000000 !important;
 }
 
@@ -235,18 +236,25 @@ body:has(main > section[class*="productsSection"]):not([data-theme="dark"]) .nav
     color: #ffffff !important;
 }
 
-body:not([data-theme="dark"]) .navbar__link.verdd::before {
+/* Black product names on regular pages in light mode (not on homepage) */
+body:not([data-theme="dark"]):not([class*="indexPage"]):not(:has(main > section[class*="productsSection"])) .navbar__link.verdd::before {
     color: #000000 !important;
 }
 
-/* Ensure Release Notes is also black in light mode */
-body:not([data-theme="dark"]) .navbar__link.verdd--releases::before {
+/* Ensure Release Notes is also black in light mode (not on homepage) */
+body:not([data-theme="dark"]):not([class*="indexPage"]):not(:has(main > section[class*="productsSection"])) .navbar__link.verdd--releases::before {
     color: #000000 !important;
 }
 
+/* White product names on homepage (light mode), products section, and dark mode */
+body:not([data-theme="dark"])[class*="indexPage"] .navbar__link.verdd::before,
+body:not([data-theme="dark"]):has(main > section[class*="productsSection"]) .navbar__link.verdd::before,
 body[class*="indexPage"] .navbar__link.verdd::before,
 body:has(main > section[class*="productsSection"]) .navbar__link.verdd::before,
-[data-theme="dark"] .navbar__link.verdd::before {
+[data-theme="dark"] .navbar__link.verdd::before,
+/* Also target homePageWrapper which is the actual class on index page */
+body:has([class*="homePageWrapper"]) .navbar__link.verdd::before,
+body:has([class*="homePageWrapper"]) .navbar__link.verdd::before {
     color: #ffffff !important;
 }
 

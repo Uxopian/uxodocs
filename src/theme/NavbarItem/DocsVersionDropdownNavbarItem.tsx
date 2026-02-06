@@ -7,6 +7,7 @@ import {
 } from '@docusaurus/plugin-content-docs/client';
 import { translate } from '@docusaurus/Translate';
 import { useHistorySelector } from '@docusaurus/theme-common';
+import Link from '@docusaurus/Link';
 import DefaultNavbarItem from '@theme/NavbarItem/DefaultNavbarItem';
 import VersionGroupDropdown from '@site/src/components/VersionGroupDropdown/VersionGroupDropdown';
 import type {
@@ -162,19 +163,26 @@ export default function DocsVersionDropdownNavbarItem({
 			: getVersionTargetDoc(displayedVersionItem.version, activeDocContext)
 				.path;
 
+	const isProductActive = activeDocContext.activeVersion !== undefined;
+	const pathname = useHistorySelector((history) => history.location.pathname);
+	const isProductInPath = pathname.includes(`/docs/${docsPluginId}/`);
+	const isTrulyActive = isProductActive || isProductInPath;
+
 	if (items.length <= 1) {
+		const cleanLabel = docsPluginId
+			.split('-')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+		const cleanClassName = (props.className || '').replace(/\bverdd\b/g, '').trim();
 		return (
-			<DefaultNavbarItem
-				{...props}
-				mobile={mobile}
-				label={dropdownLabel}
+			<Link
 				to={dropdownTo}
-				isActive={dropdownActiveClassDisabled ? () => false : undefined}
-			/>
+				className={`navbar__item navbar__link ${cleanClassName} ${isTrulyActive ? 'navbar__link--active' : ''}`}
+			>
+				{cleanLabel}
+			</Link>
 		);
 	}
-
-	const isProductActive = activeDocContext.activeVersion !== undefined;
 
 	return (
 		<div
@@ -184,7 +192,7 @@ export default function DocsVersionDropdownNavbarItem({
 			onMouseLeave={() => setIsOpen(false)}
 		>
 			<button
-				className={`navbar__link ${props.className || ''} ${isProductActive ? 'navbar__link--active' : ''}`}
+				className={`navbar__link ${props.className || ''} ${isTrulyActive ? 'navbar__link--active' : ''}`}
 				onClick={() => setIsOpen(!isOpen)}
 				aria-expanded={isOpen}
 				aria-haspopup="true"
