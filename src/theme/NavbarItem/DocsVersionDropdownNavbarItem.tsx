@@ -147,21 +147,21 @@ export default function DocsVersionDropdownNavbarItem({
 		...dropdownItemsAfter,
 	];
 
-	// Toujours utiliser le nom du produit comme label (sans numéro de version)
-	const productLabel = docsPluginId
+	// Mapping pour les noms de produits avec la casse correcte
+	const productLabels: Record<string, string> = {
+		'arender': 'ARender',
+		'fast2': 'Fast2',
+		'flowerdocs': 'FlowerDocs',
+		'uxopian-ai': 'Uxopian AI',
+	};
+
+	// Utiliser le mapping ou formater par défaut
+	const productLabel = productLabels[docsPluginId] || docsPluginId
 		.split('-')
 		.map(word => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(' ');
 
-	const dropdownLabel =
-		mobile && items.length > 1
-			? translate({
-				id: 'theme.navbar.mobileVersionsDropdown.label',
-				message: 'Versions',
-				description:
-					'The label for the navbar versions dropdown on mobile view',
-			})
-			: productLabel;
+	const dropdownLabel = productLabel;
 
 	const dropdownTo =
 		mobile && items.length > 1

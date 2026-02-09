@@ -2,74 +2,27 @@
    NAVBAR - STYLES & COMPORTEMENT
    ======================================== */
 
-/* Masquer les dropdowns de version dans le menu mobile et utiliser ::before pour afficher le nom du produit */
-@media (max-width: 996px) {
-    .navbar-sidebar .navbar__item.dropdown .navbar__link {
-        font-size: 0 !important;
-    }
 
-    /* Fast2 */
-    .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/fast2"]) .navbar__link::before {
-        content: "Fast2";
-        font-size: 1rem;
-    }
-
-    /* ARender */
-    .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/arender"]) .navbar__link::before {
-        content: "ARender";
-        font-size: 1rem;
-    }
-
-    /* FlowerDocs */
-    .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/flowerdocs"]) .navbar__link::before {
-        content: "FlowerDocs";
-        font-size: 1rem;
-    }
-
-    /* Uxopian AI */
-    .navbar-sidebar .navbar__item.dropdown:has(a[href*="/docs/uxopian-ai"]) .navbar__link::before {
-        content: "Uxopian AI";
-        font-size: 1rem;
-    }
-
-    /* Garder les icônes visibles */
-    .navbar-sidebar .navbar__item.dropdown .navbar__link svg {
-        font-size: 1rem !important;
-    }
+/* Empêcher la flèche par défaut de Docusaurus de s'afficher (nous avons notre propre SVG) */
+.navbar__link.verdd::after {
+    display: none !important;
 }
 
-.navbar__link.verdd:not(.navbar__link--active) {
+
+
+.navbar__link.verdd {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    position: relative;
-    font-size: 0;
-    color: transparent !important;
-    text-shadow: none !important;
-    user-select: none;
-    border: none !important;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Styles pour les éléments inactifs : transparents et sans bordure */
+.navbar__link.verdd:not(.navbar__link--active) {
     background: transparent !important;
-    padding: var(--ifm-navbar-item-padding-vertical) var(--ifm-navbar-item-padding-horizontal);
-}
-
-.navbar__link.verdd::before {
-    content: "";
-    display: inline-block;
-    font-size: var(--ifm-navbar-link-font-size, 1rem);
-    line-height: inherit;
-    /* Use inherit instead of CSS variable to allow overrides */
-    color: inherit;
-}
-
-.navbar__link.verdd svg {
-    color: var(--ifm-navbar-link-color) !important;
-    fill: currentColor;
-    margin-left: 0.1rem;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: var(--ifm-navbar-link-font-size, 1rem);
-    width: 1em;
-    height: 1em;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .navbar .colorModeToggle_DEke,
@@ -128,48 +81,23 @@ body:has(main > section[class*="productsSection"]) .navbar .colorModeToggle_DEke
     stroke: none !important;
 }
 
-.navbar__link.verdd--fast2::before {
-    content: "Fast2";
-}
-
-.navbar__link.verdd--arender::before {
-    content: "ARender";
-}
-
-.navbar__link.verdd--flowerdocs::before {
-    content: "FlowerDocs";
-}
-
-.navbar__link.verdd--uxopian-ai::before {
-    content: "Uxopian AI";
-}
-
 .navbar__link.verdd--releases::before {
     content: "Release Notes";
     font-size: var(--ifm-navbar-link-font-size, 1rem);
     line-height: inherit;
+    display: inline-block;
 }
 
 .navbar__link.verdd--releases {
     margin-right: 1rem;
+    font-size: 0;
+    /* Hide original text for releases custom link */
 }
 
-.navbar__link.verdd:hover::before,
-.navbar__link.verdd--fast2:hover::before,
-.navbar__link.verdd--arender:hover::before,
-.navbar__link.verdd--flowerdocs:hover::before,
-.navbar__link.verdd--uxopian-ai:hover::before {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-
+/* On mobile/tablet, releases link handling might differ, but keeping logic consistent */
 @media (max-width: 996px) {
-    .navbar__link.verdd {
+    .navbar__link.verdd--releases {
         display: none !important;
-    }
-
-    .navbar__link.verdd::before {
-        content: none;
     }
 }
 
@@ -236,25 +164,20 @@ body:has(main > section[class*="productsSection"]):not([data-theme="dark"]) .nav
     color: #ffffff !important;
 }
 
-/* Black product names on regular pages in light mode (not on homepage) */
-body:not([data-theme="dark"]):not([class*="indexPage"]):not(:has(main > section[class*="productsSection"])) .navbar__link.verdd::before {
-    color: #000000 !important;
-}
 
-/* Ensure Release Notes is also black in light mode (not on homepage) */
+
+/* Ensure Release Notes is also black in light mode */
 body:not([data-theme="dark"]):not([class*="indexPage"]):not(:has(main > section[class*="productsSection"])) .navbar__link.verdd--releases::before {
     color: #000000 !important;
 }
 
 /* White product names on homepage (light mode), products section, and dark mode */
-body:not([data-theme="dark"])[class*="indexPage"] .navbar__link.verdd::before,
-body:not([data-theme="dark"]):has(main > section[class*="productsSection"]) .navbar__link.verdd::before,
-body[class*="indexPage"] .navbar__link.verdd::before,
-body:has(main > section[class*="productsSection"]) .navbar__link.verdd::before,
-[data-theme="dark"] .navbar__link.verdd::before,
-/* Also target homePageWrapper which is the actual class on index page */
-body:has([class*="homePageWrapper"]) .navbar__link.verdd::before,
-body:has([class*="homePageWrapper"]) .navbar__link.verdd::before {
+body:not([data-theme="dark"])[class*="indexPage"] .navbar__link.verdd,
+body:not([data-theme="dark"]):has(main > section[class*="productsSection"]) .navbar__link.verdd,
+body[class*="indexPage"] .navbar__link.verdd,
+body:has(main > section[class*="productsSection"]) .navbar__link.verdd,
+[data-theme="dark"] .navbar__link.verdd,
+body:has([class*="homePageWrapper"]) .navbar__link.verdd {
     color: #ffffff !important;
 }
 
@@ -279,53 +202,47 @@ body .navbar .secondary-nav .secondary-nav__item {
     border-radius: 10px !important;
     transition: all 200ms ease;
     box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
     padding: 8px 5px 8px 12px;
     background-color: var(--ifm-color-primary) !important;
     color: #ffffff !important;
     font-weight: 600;
 }
 
-.navbar__link.verdd[aria-current="page"]::before,
-.navbar__link.verdd.navbar__link--active::before {
+/* Default: White arrows (for dark mode and active states) */
+.navbar__link.verdd svg,
+.navbar__link.verdd svg path,
+.navbar__link--active svg,
+.navbar__link--active svg path {
+    stroke: #ffffff !important;
     color: #ffffff !important;
-    font-weight: 600;
 }
 
-html[data-theme="dark"] .navbar__link.verdd[aria-current="page"]::before,
-html[data-theme="dark"] .navbar__link.verdd.navbar__link--active::before {
-    color: #fff !important;
-    font-weight: 600;
+/* Light mode overrides for INACTIVE items: Black text and arrows */
+html[data-theme='light'] body:not([class*="indexPage"]):not(:has(main > section[class*="productsSection"])) .navbar__link.verdd:not(.navbar__link--active) {
+    color: #000000 !important;
 }
 
-html[data-theme="dark"] .navbar__link--active,
-html[data-theme="dark"] .navbar__item a[aria-current="page"],
-body[class*="indexPage"] .navbar__link--active,
-body[class*="indexPage"] .navbar__item a[aria-current="page"],
-body:has(main > section[class*="productsSection"]) .navbar__link--active,
-body:has(main > section[class*="productsSection"]) .navbar__item a[aria-current="page"] {
-    font-weight: 600;
+html[data-theme='light'] body:not([class*="indexPage"]):not(:has(main > section[class*="productsSection"])) .navbar__link.verdd:not(.navbar__link--active) svg,
+html[data-theme='light'] body:not([class*="indexPage"]):not(:has(main > section[class*="productsSection"])) .navbar__link.verdd:not(.navbar__link--active) svg path {
+    stroke: #000000 !important;
+    color: #000000 !important;
 }
 
-/* Force white text for active links in light mode */
-html:not([data-theme="dark"]) .navbar__link--active,
-html:not([data-theme="dark"]) .navbar__item a[aria-current="page"],
-html:not([data-theme="dark"]) .navbar__item .navbar__link--active,
-html:not([data-theme="dark"]) .navbar__item .navbar__link[aria-current="page"] {
+/* Explicit Dark mode verification: White text and arrows for ALL verdd items */
+html[data-theme='dark'] .navbar__link.verdd {
     color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
 }
 
-.navbar__link--active:hover,
-.navbar__item a[aria-current="page"]:hover {
-    opacity: 0.9;
+html[data-theme='dark'] .navbar__link.verdd svg,
+html[data-theme='dark'] .navbar__link.verdd svg path {
+    stroke: #ffffff !important;
+    color: #ffffff !important;
 }
 
-.navbar .navbar__inner .navbar__items a.navbar__link.verdd[aria-current="page"]::before,
-.navbar .navbar__inner .navbar__items a.navbar__link.verdd.navbar__link--active::before,
-a.navbar__link.verdd[aria-current="page"]::before,
-a.navbar__link.verdd.navbar__link--active::before {
-    margin-left: 3px;
-}
+/* Remove duplicated before content selectors */
+
 
 /* Dropdowns */
 body:not([data-theme="dark"]) .dropdown__menu,

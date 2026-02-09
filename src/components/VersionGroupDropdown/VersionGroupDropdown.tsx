@@ -62,6 +62,20 @@ const VersionGroupDropdown: React.FC<VersionGroupDropdownProps> = ({ versions })
     return (
         <div className={styles.versionDropdown}>
             {groups.map((group) => {
+                // If a group has only one version, flatten it (display directly without dropdown)
+                if (group.versions.length === 1) {
+                    const version = group.versions[0];
+                    return (
+                        <a
+                            key={group.year}
+                            href={version.href}
+                            className={`${styles.regularItem} ${version.isActive ? styles.regularItemActive : ''}`}
+                        >
+                            {version.label}
+                        </a>
+                    );
+                }
+
                 const isExpanded = expandedGroups.has(group.year);
 
                 return (
