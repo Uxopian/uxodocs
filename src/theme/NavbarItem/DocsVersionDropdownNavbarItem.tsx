@@ -147,6 +147,12 @@ export default function DocsVersionDropdownNavbarItem({
 		...dropdownItemsAfter,
 	];
 
+	// Toujours utiliser le nom du produit comme label (sans numéro de version)
+	const productLabel = docsPluginId
+		.split('-')
+		.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(' ');
+
 	const dropdownLabel =
 		mobile && items.length > 1
 			? translate({
@@ -155,7 +161,7 @@ export default function DocsVersionDropdownNavbarItem({
 				description:
 					'The label for the navbar versions dropdown on mobile view',
 			})
-			: displayedVersionItem.label;
+			: productLabel;
 
 	const dropdownTo =
 		mobile && items.length > 1
@@ -168,21 +174,7 @@ export default function DocsVersionDropdownNavbarItem({
 	const isProductInPath = pathname.includes(`/docs/${docsPluginId}/`);
 	const isTrulyActive = isProductActive || isProductInPath;
 
-	if (items.length <= 1) {
-		const cleanLabel = docsPluginId
-			.split('-')
-			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
-			.join(' ');
-		const cleanClassName = (props.className || '').replace(/\bverdd\b/g, '').trim();
-		return (
-			<Link
-				to={dropdownTo}
-				className={`navbar__item navbar__link ${cleanClassName} ${isTrulyActive ? 'navbar__link--active' : ''}`}
-			>
-				{cleanLabel}
-			</Link>
-		);
-	}
+	// Ne plus court-circuiter pour un seul item - on affiche toujours le dropdown
 
 	return (
 		<div
@@ -206,9 +198,9 @@ export default function DocsVersionDropdownNavbarItem({
 				<div className="dropdown__menu">
 					<VersionGroupDropdown
 						versions={items.map((item) => ({
-							label: item.label,
+							label: String(item.label ?? ''),
 							href: item.to as string,
-							isActive: item.isActive ? item.isActive() : false,
+							isActive: item.isActive ? item.isActive({} as any, {} as any) : false,
 						}))}
 					/>
 				</div>
