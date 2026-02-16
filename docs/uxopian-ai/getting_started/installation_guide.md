@@ -2,6 +2,7 @@
 title: "Deploy with Docker"
 sidebar_position: 2
 ---
+
 # 📚 Guide: Uxopian AI Service Deployment
 
 This guide covers the installation process for the **Uxopian AI** backend service and its vector database.
@@ -21,7 +22,6 @@ The Starter Kit provides a ready-to-use stack containing the AI service and an O
 :::tip[Download]
 **[uxopian-ai_docker_example.zip](./uxopian-ai_docker_example.zip)**
 :::
-
 
 Once extracted, you should have the following directory structure:
 
@@ -54,7 +54,6 @@ docker pull artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft1-rc3
 The compose file uses `artifactory.arondor.cloud:5001/` by default. If your organization hosts images on a different registry (e.g., `docker.uxopian.com/preview/`), update the `image:` fields in `uxopian-ai-stack.yml` accordingly.
 :::
 
-
 ### 🔹 Step 3: Environment Variable Configuration
 
 The `uxopian-ai-stack.yml` file orchestrates the containers. **Do not modify the YAML structure**, but you must adapt the environment variables of the `uxopian-ai-standalone` service to ensure network communication.
@@ -86,7 +85,6 @@ The starter kit ships with `SPRING_PROFILES_ACTIVE=dev` and **no Gateway service
 In a **production** deployment, you should remove the `dev` profile and deploy the [Uxopian Gateway (BFF)](../understanding/security.md) in front of the AI service. The Gateway authenticates users, extracts their identity from JWT/OAuth2/LDAP tokens, and injects the `X-User-TenantId`, `X-User-Id`, `X-User-Roles`, and `X-User-Token` headers. The Gateway service is also included in this compose file (commented out) — uncomment the `uxopian-ai-gateway` block, configure its `provider`, and remove the `dev` profile to switch to a secured setup.
 :::
 
-
 ### 🔹 Step 4: Start
 
 ```bash
@@ -112,7 +110,6 @@ Use this method for deployment on a standard server (VM Linux/Windows) without D
 
 _Contact your Uxopian representative for access to this package._
 :::
-
 
 Unzip the archive:
 
@@ -144,9 +141,9 @@ java -jar ai-standalone.jar
 :::note[Production Recommendations]
 :::
 
-
 - Use `JAVA_OPTS` to allocate enough memory (e.g., `-Xmx4g`).
 - Place the service behind a Reverse Proxy (NGINX/Apache) to handle SSL.
+  :::
 
 ---
 

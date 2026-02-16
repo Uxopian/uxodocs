@@ -47,19 +47,26 @@ Each version is stored in a dedicated Git branch, keeping the main repository li
 
 **Branch Naming Convention:**
 ```
-test-<product>-v<version>
+dev-<product>-v<version>   # Development branch
+test-<product>-v<version>  # Staging/version branch
 ```
 
+**Main Branches:**
+- `staging` - Integration branch with all products (triggers staging deployment)
+- `master` - Production branch (manual deployment only)
+
 **Examples:**
-- `test-fast2-v2025.2.0`
-- `test-flowerdocs-v2`
-- `test-arender-v2023.14.0`
+- `dev-fast2-v2025.2.0` → `test-fast2-v2025.2.0`
+- `dev-flowerdocs-v2` → `test-flowerdocs-v2`
+- `dev-arender-v2023.14.0` → `test-arender-v2023.14.0`
 
 ### How It Works
 
-1. **Development**: Work on `test` branch with current versions in `docs/<product>/`
-2. **Version Branches**: Each release lives in its own branch
-3. **CI/CD**: Pipeline fetches all version branches, extracts docs, and builds complete site
+1. **Development**: Work on `dev-<product>-v<version>` branch with only one product in `docs/<product>/`
+2. **Testing**: Rename to `test-<product>-v<version>` when ready for staging
+3. **Version Branches**: Each release lives in its own `test-*` branch
+4. **CI/CD**: Pipeline fetches all `test-*` branches, extracts docs, and builds complete site
+5. **Production**: Manual workflow dispatch from `master` branch
 
 ---
 
@@ -92,12 +99,6 @@ npm start
 
 # Production build (all versions via CI/CD)
 npm run build
-
-# Update timestamps manually
-npm run update:lastModified
-
-# Generate release notes
-npm run generate:releases
 ```
 
 ---
@@ -105,12 +106,12 @@ npm run generate:releases
 ## 🚀 CI/CD Pipeline
 
 **File:** `.github/workflows/sync-deploy.yml`  
-**Trigger:** Push to `test` or `test-*` branches
+**Trigger:** Push to `staging` or `test-*` branches
 
 ### Process
 
 1. **Setup**
-   - Checkout `test-v2` with full history
+   - Checkout `staging` branch with full history
    - Cache Git LFS objects and npm packages
    - Install dependencies
 
@@ -133,56 +134,108 @@ npm run generate:releases
 
 3. **Build & Deploy**
    - Build site: `npm run build`
-   - Deploy to GitHub Pages (`gh-pages` branch)
+   - Deploy to AWS S3 staging bucket
 
-**Deployment URL:** `https://uxopian.github.io/uxodocs/`
+**Staging URL:** `https://staging.doc.uxopian.com/`  
+**Production URL:** `https://doc.uxopian.com/` (manual deployment from `master`)
 
 ---
 
 ## 📝 Development Workflow
 
-### 1. Working on Current Version
+### 1. Creating a New Version Branch
+
+**Step 1: Branch from staging**
 
 ```bash
-git checkout test
-# Edit docs/<product>/
-git commit -m "Update documentation"
-git push origin test
+git checkout staging
+git pull origin staging
+git checkout -b dev-fast2-v2025.2.0
 ```
 
-### 2. Creating a New Version
+**Step 2: Clean up other products**
 
 ```bash
-# Create version branch
-git checkout -b test-fast2-v2025.2.0
-git add docs/fast2/
-git commit -m "Release Fast2 v2025.2.0"
-git push origin test-fast2-v2025.2.0
+# Keep only Fast2 documentation
+rm -rf docs/arender docs/flowerdocs docs/uxopian-ai
 
-# Return to development
-git checkout test
+# Verify
+ls docs/  # Should only show fast2/
+```
+
+**Step 3: Configure for single product**
+
+Edit `docusaurus.config.ts` and comment out all plugins/presets that don't concern Fast2:
+
+```typescript
+// Comment these sections:
+// - arender plugin instance
+// - flowerdocs plugin instance
+// - uxopian-ai plugin instance
+// - arender PDF plugin
+// - flowerdocs PDF plugin
+// - uxopian-ai PDF plugin
+
+// Keep only:
+// - fast2 plugin instance
+// - fast2 PDF plugin (if needed)
+```
+
+**Step 4: Develop and test**
+
+```bash
+# Install and start dev server
+npm ci
+npm start
+
+# Edit docs/fast2/ as needed
+git add docs/fast2/
+git commit -m "Update Fast2 documentation"
+git push origin dev-fast2-v2025.2.0
+```
+
+**Step 5: Promote to staging**
+
+When ready for deployment:
+
+```bash
+# Rename branch to trigger CI/CD
+git branch -m test-fast2-v2025.2.0
+git push origin test-fast2-v2025.2.0
+git push origin :dev-fast2-v2025.2.0  # Delete old branch
+
+# CI/CD will automatically build and deploy to staging
+```
+
+### 2. Working on Staging (All Products)
+
+```bash
+git checkout staging
+# Edit docs/<any-product>/
+git commit -m "Update documentation"
+git push origin staging
+# Triggers automatic staging deployment
 ```
 
 ### 3. Updating Existing Version
 
 ```bash
 git checkout test-fast2-v2025.2.0
-# Make changes
+# Make changes to docs/fast2/
 git commit -m "Fix typo"
 git push origin test-fast2-v2025.2.0
-# CI/CD rebuilds automatically
+# CI/CD rebuilds staging automatically
 ```
 
-### 4. Testing Versions Locally
+### 4. Deploying to Production
 
-```bash
-# Create snapshot manually
-npx docusaurus docs:version:fast2 v2025.2.0
-npm start
+**Manual process via GitHub Actions:**
 
-# Clean up
-rm -rf versioned_docs/ versioned_sidebars/
-```
+1. Merge `staging` into `master`
+2. Go to Actions → "Deploy to PRODUCTION (Manual)"
+3. Click "Run workflow" on `master` branch
+
+### 5. Testing Versions Locally
 
 ---
 
@@ -256,70 +309,9 @@ content_hash: abc123...
 ### Release Notes Format
 
 ```yaml
----
 version: "2025.2.0"
 major_version: "2025"
 date: "2024-12-15"
 description: "New features"
 latest: true
----
 ```
-
----
-
-## 🐛 Troubleshooting
-
-### Version Not Appearing
-
-```bash
-# Check branch exists
-git branch -r | grep test-<product>-v
-
-# Fetch all branches
-git fetch --all
-```
-
-### Build Fails
-
-```bash
-# Verify branch structure
-git checkout test-<product>-v<version>
-ls docs/<product>/
-
-# Clear cache
-npm run clear
-npm run build
-```
-
-### Outdated Timestamps
-
-```bash
-npm run update:lastModified
-```
-
----
-
-## 🎯 Key Features
-
-✅ **Lightweight Repository** - Only current versions stored locally  
-✅ **Independent Versioning** - Each product has its own timeline  
-✅ **Automated Tracking** - SHA-256 hashing for change detection  
-✅ **Dynamic Navigation** - Auto-generated from directory structure  
-✅ **Offline Search** - No external dependencies  
-✅ **Release Management** - Centralized, filterable release notes  
-✅ **Incremental PDFs** - Only rebuild when content changes  
-
----
-
-## 📞 Support
-
-1. Check this documentation
-2. Review CI/CD logs in GitHub Actions
-3. Inspect `src/generated/` files
-4. Test locally with `npm start`
-
----
-
-**Built with:** Docusaurus 3.9.2 • React 19.0.0 • TypeScript 5.6.2  
-**Maintained by:** Uxopian Software  
-**Last Updated:** 2026-01-16
