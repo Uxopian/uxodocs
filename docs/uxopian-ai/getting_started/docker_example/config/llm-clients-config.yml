@@ -1,0 +1,69 @@
+llm:
+  # Default LLM configuration (provider, model)
+  default:
+    model: ${LLM_DEFAULT_MODEL:gpt-5.1}
+    provider: ${LLM_DEFAULT_PROVIDER:openai}
+    base-prompt: ${LLM_DEFAULT_PROMPT:basePrompt}
+
+  # Default context size (history length)
+  context: ${LLM_CONTEXT_SIZE:10}
+  debug:
+    enabled: ${LLM_DEBUG:false}
+
+  # Dynamic LLM provider configurations
+  # Loaded into OpenSearch at startup, then manageable via Admin API/UI
+  provider:
+    globals:
+      - provider: openai
+        defaultLlmModelConfName: gpt5
+        globalConf:
+          apiSecret: ${OPENAI_API_KEY:}
+          temperature: 1
+          timeout: 60s
+          maxRetries: 3
+        llModelConfs:
+          - llmModelConfName: gpt5
+            modelName: gpt-5.1
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt5-std
+            modelName: gpt-5
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt5-mini
+            modelName: gpt-5-mini
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt5-nano
+            modelName: gpt-5-nano
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt41
+            modelName: gpt-4.1
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt41-mini
+            modelName: gpt-4.1-mini
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt41-nano
+            modelName: gpt-4.1-nano
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt4o
+            modelName: gpt-4o
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt4o-mini
+            modelName: gpt-4o-mini
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: o3-mini
+            modelName: o3-mini
+            multiModalSupported: false
+            functionCallSupported: true
+          - llmModelConfName: o4-mini
+            modelName: o4-mini
+            multiModalSupported: false
+            functionCallSupported: true
+

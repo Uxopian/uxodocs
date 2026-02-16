@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="true" default-autowire="no"
+    xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="aiMenu"
+       class="com.arondor.viewer.client.toppanel.presenter.SubMenuButtonPresenter">
+       <constructor-arg value="aiMenu" />
+       <constructor-arg value="AI" />
+       <constructor-arg value="standardButton fas fa-robot toppanelButton"/>
+       <property name="enabled" value="true" />
+       <property name="visibilityForTopPanel">
+          <ref bean="topPanelVisibilityMode" />
+       </property>
+       <property name="orderedNamedList" value="summarizeTxtButton,summarizeMDButton,detailedComparisonButton,genericComparisonButton,translateFRButton,translateENButton,openChatButton" />
+    </bean>
+
+
+    <bean id="summarizeTxtButton"
+       class="com.arondor.viewer.client.toppanel.presenter.DropdownMenuItemPresenter">
+       <constructor-arg value="summarizeTxtButton"/>
+        <constructor-arg value="Summarize in text format"/>
+       <constructor-arg value="standardButton fas fa-list toppanelButton"/>
+       <property name="enabled" value="true" />
+        <property name="closingOnClick" value="true" />
+       <property name="buttonHandler">
+          <bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
+             <property name="jsCode">
+                <value>
+try {
+    $wnd.createChat({
+        endpoint: "${uxopian.ai.host}",
+        wsEndpoint: "${uxopian.ai.host}",
+        request: {
+            inputs: [{
+                role: 'user',
+                content: [{
+                    type: 'PROMPT',
+                    value: 'summarizeDocumentText',
+                    payload: {
+                        documentId: $wnd.getARenderJS().getCurrentDocumentId()
+                    }
+                }]
+            }]
+        }
+    });
+} catch(e) {
+  console.log('Error : ' + e);
+}
+                </value>
+             </property>
+          </bean>
+       </property>
+    </bean>
+
+    <bean id="summarizeMDButton"
+       class="com.arondor.viewer.client.toppanel.presenter.DropdownMenuItemPresenter">
+       <constructor-arg value="summarizeMDButton"/>
+        <constructor-arg value="Summarize in MD format"/>
+       <constructor-arg value="standardButton fas fa-table-list toppanelButton"/>
+       <property name="enabled" value="true" />
+        <property name="closingOnClick" value="true" />
+       <property name="buttonHandler">
+          <bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
+             <property name="jsCode">
+                <value>
+try {
+    $wnd.createChat({
+        endpoint: "${uxopian.ai.host}",
+        wsEndpoint: "${uxopian.ai.host}",
+        request: {
+            inputs: [{
+                role: 'user',
+                content: [{
+                    type: 'PROMPT',
+                    value: 'summarizeDocumentMarkdown',
+                    payload: {
+                        documentId: $wnd.getARenderJS().getCurrentDocumentId()
+                    }
+                }]
+            }]
+        }
+    });
+} catch(e) {
+  console.log('Error : ' + e);
+}
+                </value>
+             </property>
+          </bean>
+       </property>
+    </bean>
+
+    <bean id="detailedComparisonButton"
+       class="com.arondor.viewer.client.toppanel.presenter.DropdownMenuItemPresenter">
+       <constructor-arg value="detailedComparisonButton"/>
+        <constructor-arg value="Detailed comparison"/>
+       <constructor-arg value="standardButton icon-compare toppanelButton"/>
+       <property name="enabled" value="true" />
+        <property name="closingOnClick" value="true" />
+       <property name="buttonHandler">
+          <bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
+             <property name="jsCode">
+                <value>
+try {
+    $wnd.getARenderJS().getDocumentLayout().getDocumentLayout(
+        $wnd.getARenderJS().getMasterDocumentId(),
+        function (layout) {
+            $wnd.createChat({
+                endpoint: '${uxopian.ai.host}',
+                wsEndpoint: '${uxopian.ai.host}',
+                request: {
+                    inputs: [{
+                        role: 'user',
+                        content: [{
+                            type: 'PROMPT',
+                            value: 'detailedComparison',
+                            payload: {
+                                documentType: 'documentation',
+                                documentIds: layout.getChildren().map(function (child) {
+                                    return child.getDocumentId();
+                                })
+                            }
+                        }]
+                    }]
+                }
+            });
+        },
+        null
+    );
+} catch(e) {
+  console.log('Error : ' + e);
+}
+                </value>
+             </property>
+          </bean>
+       </property>
+    </bean>
+
+    <bean id="genericComparisonButton"
+       class="com.arondor.viewer.client.toppanel.presenter.DropdownMenuItemPresenter">
+       <constructor-arg value="genericComparisonButton"/>
+        <constructor-arg value="Generic comparison"/>
+       <constructor-arg value="standardButton icon-compare toppanelButton"/>
+       <property name="enabled" value="true" />
+        <property name="closingOnClick" value="true" />
+       <property name="buttonHandler">
+          <bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
+             <property name="jsCode">
+                <value>
+try {
+    $wnd.getARenderJS().getDocumentLayout().getDocumentLayout(
+        $wnd.getARenderJS().getMasterDocumentId(),
+        function (layout) {
+            $wnd.createChat({
+                endpoint: '${uxopian.ai.host}',
+                wsEndpoint: '${uxopian.ai.host}',
+                request: {
+                    inputs: [{
+                        role: 'user',
+                        content: [{
+                            type: 'PROMPT',
+                            value: 'genericComparison',
+                            payload: {
+                                language: 'french',
+                                leftDocumentId: layout.getChildren()[0].getDocumentId(),
+                                rightDocumentId: layout.getChildren()[1].getDocumentId()
+                            }
+                        }]
+                    }]
+                }
+            });
+        },
+        null
+    );
+} catch(e) {
+  console.log('Error : ' + e);
+}
+                </value>
+             </property>
+          </bean>
+       </property>
+    </bean>
+
+    <bean id="translateFRButton"
+       class="com.arondor.viewer.client.toppanel.presenter.DropdownMenuItemPresenter">
+       <constructor-arg value="translateFRButton"/>
+        <constructor-arg value="Translate in french"/>
+       <constructor-arg value="standardButton fas fa-language toppanelButton"/>
+       <property name="enabled" value="true" />
+        <property name="closingOnClick" value="true" />
+       <property name="buttonHandler">
+          <bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
+             <property name="jsCode">
+                <value>
+try {
+    $wnd.createChat({
+        endpoint: "${uxopian.ai.host}",
+        wsEndpoint: "${uxopian.ai.host}",
+        request: {
+            inputs: [{
+                role: 'user',
+                content: [{
+                    type: 'PROMPT',
+                    value: 'translate',
+                    payload: {
+                        language: 'french',
+                        documentId: $wnd.getARenderJS().getCurrentDocumentId()
+                    }
+                }]
+            }]
+        }
+    });
+} catch(e) {
+  console.log('Error : ' + e);
+}
+                </value>
+             </property>
+          </bean>
+       </property>
+    </bean>
+
+    <bean id="translateENButton"
+       class="com.arondor.viewer.client.toppanel.presenter.DropdownMenuItemPresenter">
+       <constructor-arg value="translateENButton"/>
+        <constructor-arg value="Translate in english"/>
+       <constructor-arg value="standardButton fas fa-language toppanelButton"/>
+       <property name="enabled" value="true" />
+        <property name="closingOnClick" value="true" />
+       <property name="buttonHandler">
+          <bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
+             <property name="jsCode">
+                <value>
+try {
+    $wnd.createChat({
+        endpoint: "${uxopian.ai.host}",
+        wsEndpoint: "${uxopian.ai.host}",
+        request: {
+            inputs: [{
+                role: 'user',
+                content: [{
+                    type: 'PROMPT',
+                    value: 'translate',
+                    payload: {
+                        language: 'english',
+                        documentId: $wnd.getARenderJS().getCurrentDocumentId()
+                    }
+                }]
+            }]
+        }
+    });
+} catch(e) {
+  console.log('Error : ' + e);
+}
+                </value>
+             </property>
+          </bean>
+       </property>
+    </bean>
+
+    <bean id="openChatButton"
+         class="com.arondor.viewer.client.toppanel.presenter.DropdownMenuItemPresenter">
+       <constructor-arg value="openChatButton"/>
+       <constructor-arg value="Open chat with AI"/>
+       <constructor-arg value="standardButton fas fa-robot toppanelButton"/>
+       <property name="enabled" value="true" />
+        <property name="closingOnClick" value="true" />
+       <property name="buttonHandler">
+          <bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
+             <property name="jsCode">
+                <value>
+try {
+    $wnd.createChat({
+       endpoint: "${uxopian.ai.host}",
+       wsEndpoint: "${uxopian.ai.host}",
+       request: {
+           inputs: [{
+               role: 'system',
+               content: [{
+                   type: 'PROMPT',
+                   value: 'arenderContext',
+                   payload: {
+                       documentId: $wnd.getARenderJS().getCurrentDocumentId()
+                   }
+               }]
+           }]
+       }
+    });
+} catch(e) {
+    console.log('Error : ' + e);
+}
+                </value>
+             </property>
+          </bean>
+       </property>
+    </bean>
+</beans>

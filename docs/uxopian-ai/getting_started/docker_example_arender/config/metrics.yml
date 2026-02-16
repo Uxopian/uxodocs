@@ -1,0 +1,26 @@
+# Micrometer & Actuator
+management:
+  elastic:
+    metrics:
+      export:
+        enabled: true
+        host: http://${opensearch.host}:${opensearch.port}
+        index: micrometer-metrics
+        auto-create-index: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,loggers
+  metrics:
+    uxopian-ai:
+      enable: true
+    enable:
+      application: false
+      tomcat: false
+      logback: false
+      jvm: false
+      system: false
+      http: false
+      process: false
+      disk: false
+      executor: false
