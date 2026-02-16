@@ -60,42 +60,42 @@ const config: Config = {
                 showLastUpdateTime: true,
             },
         ],
-        // [
-        //     "@docusaurus/plugin-content-docs",
-        //     {
-        //         id: "arender",
-        //         path: "docs/arender",
-        //         routeBasePath: "docs/arender",
-        //         sidebarPath: require.resolve("./sidebars_arender.ts"),
-        //         lastVersion: "current",
-        //         versions: { current: { label: "v2023.14.0" } },
-        //         showLastUpdateTime: true,
-        //     },
-        // ],
-        // [
-        //     "@docusaurus/plugin-content-docs",
-        //     {
-        //         id: "fast2",
-        //         path: "docs/fast2",
-        //         routeBasePath: "docs/fast2",
-        //         sidebarPath: require.resolve("./sidebars_fast2.ts"),
-        //         lastVersion: "current",
-        //         versions: { current: { label: "v2025.8.2" } },
-        //         showLastUpdateTime: true,
-        //     },
-        // ],
-        // [
-        //     "@docusaurus/plugin-content-docs",
-        //     {
-        //         id: "flowerdocs",
-        //         path: "docs/flowerdocs",
-        //         routeBasePath: "docs/flowerdocs",
-        //         sidebarPath: require.resolve("./sidebars_flowerdocs.ts"),
-        //         lastVersion: "current",
-        //         versions: { current: { label: "v2025.3.0" } },
-        //         showLastUpdateTime: true,
-        //     },
-        // ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "arender",
+                path: "docs/arender",
+                routeBasePath: "docs/arender",
+                sidebarPath: require.resolve("./sidebars_arender.ts"),
+                lastVersion: "current",
+                versions: { current: { label: "v2023.14.0" } },
+                showLastUpdateTime: true,
+            },
+        ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "fast2",
+                path: "docs/fast2",
+                routeBasePath: "docs/fast2",
+                sidebarPath: require.resolve("./sidebars_fast2.ts"),
+                lastVersion: "current",
+                versions: { current: { label: "v2025.8.2" } },
+                showLastUpdateTime: true,
+            },
+        ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "flowerdocs",
+                path: "docs/flowerdocs",
+                routeBasePath: "docs/flowerdocs",
+                sidebarPath: require.resolve("./sidebars_flowerdocs.ts"),
+                lastVersion: "current",
+                versions: { current: { label: "v2025.3.0" } },
+                showLastUpdateTime: true,
+            },
+        ],
         [
             "@docusaurus/plugin-content-docs",
             {
@@ -108,21 +108,21 @@ const config: Config = {
                 showLastUpdateTime: true,
             },
         ],
-        // [
-        //     require.resolve("./plugins/docusaurus-plugin-papersaurus/lib/index.js"),
-        //     {
-        //         id: "arender-pdf",
-        //         docPluginId: "arender",
-        //         autoBuildPdfs: false,
-        //         addDownloadButton: false,
-        //         keepDebugHtmls: false,
-        //         sidebarNames: ["docs"],
-        //         ignoreDocs: ["index"],
-        //         author: "Uxopian",
-        //         productTitles: ["ARender"],
-        //         getPdfFileName: getPdfFileName,
-        //     },
-        // ],
+        [
+            require.resolve("./plugins/docusaurus-plugin-papersaurus/lib/index.js"),
+            {
+                id: "arender-pdf",
+                docPluginId: "arender",
+                autoBuildPdfs: false,
+                addDownloadButton: false,
+                keepDebugHtmls: false,
+                sidebarNames: ["docs"],
+                ignoreDocs: ["index"],
+                author: "Uxopian",
+                productTitles: ["ARender"],
+                getPdfFileName: getPdfFileName,
+            },
+        ],
         [
             require.resolve("@easyops-cn/docusaurus-search-local"),
             {
@@ -146,12 +146,12 @@ const config: Config = {
         navbar: {
             logo: { alt: "UXO", src: "img/uxopian-o.png" },
             items: [
-                // {
-                //     type: "docsVersionDropdown",
-                //     docsPluginId: "arender",
-                //     position: "left",
-                //     className: "verdd verdd--arender",
-                // },
+                {
+                    type: "docsVersionDropdown",
+                    docsPluginId: "arender",
+                    position: "left",
+                    className: "verdd verdd--arender",
+                },
 
                 {
                     html: '<span></span>',
@@ -165,18 +165,18 @@ const config: Config = {
                     position: "right",
                     className: "nav-github",
                 },
-                // {
-                //     type: "docsVersionDropdown",
-                //     docsPluginId: "fast2",
-                //     position: "left",
-                //     className: "verdd verdd--fast2",
-                // },
-                // {
-                //     type: "docsVersionDropdown",
-                //     docsPluginId: "flowerdocs",
-                //     position: "left",
-                //     className: "verdd verdd--flowerdocs",
-                // },
+                {
+                    type: "docsVersionDropdown",
+                    docsPluginId: "fast2",
+                    position: "left",
+                    className: "verdd verdd--fast2",
+                },
+                {
+                    type: "docsVersionDropdown",
+                    docsPluginId: "flowerdocs",
+                    position: "left",
+                    className: "verdd verdd--flowerdocs",
+                },
                 {
                     type: "docsVersionDropdown",
                     docsPluginId: "uxopian-ai",
