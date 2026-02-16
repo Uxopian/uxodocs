@@ -36,32 +36,18 @@ The Uxopian Gateway is a **standalone service**, built and deployed independentl
 
 Every request passes through two filters before reaching the backend:
 
-```text
-Client Request
-    │
-    ▼
-┌─────────────────────────────┐
-│ 1. DefaultProviderHeaderFilter │  ← Matches the request path to a route
-│    (HIGHEST_PRECEDENCE)        │    and injects X-Provider-ID header
-└─────────────────────────────┘
-    │
-    ▼
-┌─────────────────────────────┐
-│ 2. AuthFilter                  │  ← Uses the provider to authenticate,
-│    (HIGHEST_PRECEDENCE + 1)    │    then enriches the request with
-│                                │    X-User-Id, X-User-Roles,
-│                                │    X-User-TenantId, X-User-Token
-└─────────────────────────────┘
-    │
-    ▼
-┌─────────────────────────────┐
-│ 3. Spring Cloud Gateway        │  ← Routes to the backend service URI
-│    (Route + Path Rewrite)      │
-└─────────────────────────────┘
-    │
-    ▼
-  uxopian-ai Service (port 8080)
+<div style={{textAlign: 'center'}}>
+
+```mermaid
+flowchart TD
+    A["Client Request"] --> B
+    B["DefaultProviderHeaderFilter"] -- "Injects X-Provider-ID header" --> C
+    C["AuthFilter"] -- "Enriches with X-User headers" --> D
+    D["Spring Cloud Gateway"] -- "Routes to backend" --> E
+    E["uxopian-ai Service"]
 ```
+
+</div>
 
 1. **`DefaultProviderHeaderFilter`** — Uses `AntPathMatcher` to match the incoming request URL against the configured routes. When a match is found, it injects the `X-Provider-ID` internal header with the provider name from the route config (e.g., `FlowerDocsProvider`, `Fast2Provider`, `DevProvider`).
 
