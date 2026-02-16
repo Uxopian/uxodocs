@@ -1,6 +1,10 @@
 ---
 title: "Dashboard"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 1
+content_hash: 744da4e51e52a679c7e21d90cb09531b962ea1312b9ec07a396d9970ebeeb200
 ---
 # Admin Dashboard
 

@@ -1,6 +1,10 @@
 ---
 title: "Managing Prompts and Goals"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 1
+content_hash: 48a45c5fb4e4aab335f91e2730d9bff29862016ba32383ab7c3437ab8c618163
 ---
 # Managing Prompts and Goals
 

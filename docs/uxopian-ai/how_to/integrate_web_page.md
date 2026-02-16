@@ -1,6 +1,10 @@
 ---
 title: "Embedding in a Web Page"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 5
+content_hash: 1e1a08bd7b4f7edbee750dd749e1dcdeea41e74111b24a6b3c1ca68f8a28902b
 ---
 # How-To: Integrate AI into a Basic Web Page
 

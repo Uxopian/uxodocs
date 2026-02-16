@@ -1,6 +1,10 @@
 ---
 title: "Monitoring Performance"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 7
+content_hash: dbfd5c8f5b5ddcdf9925fecec3d49f1fed7d7fc3f7759daa48b05097372de0b8
 ---
 # Monitoring Performance
 

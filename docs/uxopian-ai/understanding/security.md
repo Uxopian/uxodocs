@@ -1,6 +1,10 @@
 ---
 title: "Security Model (BFF Pattern)"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 4
+content_hash: a10071a606ec0750617407b142ce85e3648b960cb1264ff19f03b42a93042d1f
 ---
 # Security Model (BFF Pattern)
 

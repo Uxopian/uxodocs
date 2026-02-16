@@ -1,6 +1,10 @@
 ---
 title: "Configuration Files"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 1
+content_hash: eb45fb5bc578c4188c4e768336136c0bcb127a6c2feb8cbf27ed493d52dc2c3d
 ---
 # **⚙️ Configuration**
 

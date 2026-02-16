@@ -1,6 +1,10 @@
 ---
 title: "Core Concepts"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 2
+content_hash: f311882e28947fd3f9fdcba8fc93f99e635debda4eae12d1eeb10b420e96700c
 ---
 # **🧠 Core Concepts**
 

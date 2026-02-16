@@ -1,6 +1,10 @@
 ---
 title: "Deploy with Docker + ARender"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 3
+content_hash: ea82d9838ef6f657aa2794c0fa0d0f0824e147c1238b151824c9d71ae021a0a6
 ---
 # 📚 Complete Guide: Uxopian AI Deployment & ARender Integration
 

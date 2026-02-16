@@ -1,6 +1,10 @@
 ---
 title: "The Templating Engine"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 3
+content_hash: 7f4fc9075bb78f771a84b88d6b1655dd37c468b1ea382a4a450db8f3da0c2f2d
 ---
 # The Templating Engine
 

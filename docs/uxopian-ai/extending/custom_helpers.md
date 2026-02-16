@@ -1,6 +1,10 @@
 ---
 title: "Creating Custom Helpers"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 1
+content_hash: 46a5a59824d39a9b265ef0a242b6ec46688cce0ad90d882292ac3193ae82ae39
 ---
 # How to Create Custom Prompt Helpers
 

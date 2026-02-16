@@ -1,6 +1,10 @@
 ---
 title: "Architecture Overview"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 1
+content_hash: ef73814807c3e41a351acff54b41ddefabc8180c154495ae352ff99a3ee0db20
 ---
 This section provides insight into the framework's design, covering both the high-level components and the software-level interactions.
 

@@ -1,6 +1,10 @@
 ---
 title: "Deploy with Docker"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 2
+content_hash: f2a6ae1d46017e20f5eb47c1369afd0665a4715072d2c8cb190dd9a0ffe0d4f1
 ---
 
 # 📚 Guide: Uxopian AI Service Deployment

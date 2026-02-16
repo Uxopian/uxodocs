@@ -1,6 +1,10 @@
 ---
 title: "Environment Variables"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 3
+content_hash: 1a7df9a6eb8e54d98a761a199ec90a7b91c58cf548af6e9ba10e78edfffb4863
 ---
 # Environment Variables Reference
 

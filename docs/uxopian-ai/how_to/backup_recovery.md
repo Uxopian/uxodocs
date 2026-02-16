@@ -1,6 +1,10 @@
 ---
 title: "Backup and Recovery"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 6
+content_hash: 112a0126a59ba1ff4f18fb03b4af472fac90e44420b43e5f812d9b18e842a367
 ---
 # 🛡️ Backup and Recovery
 

@@ -1,6 +1,10 @@
 ---
 title: "Prompt Management"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 2
+content_hash: e36bc0ad045583f79c1bdea7c7853e04fa061f39705e0720c65fb2310ab49cdf
 ---
 # Prompts Management
 

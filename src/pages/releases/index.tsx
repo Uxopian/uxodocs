@@ -6,6 +6,7 @@ import overrideStyles from "@site/src/components/ReleasePage.module.css";
 import fast2ReleasesData from "@site/src/generated/fast2Releases.json";
 import arenderReleasesData from "@site/src/generated/arenderReleases.json";
 import flowerDocsReleasesData from "@site/src/generated/flowerDocsReleases.json";
+import uxopianAiReleasesData from "@site/src/generated/uxopianAiReleases.json";
 import fast2Styles from "./fast2.module.css";
 import arenderStyles from "./arender.module.css";
 import flowerDocsStyles from "./flowerdocs.module.css";
@@ -95,18 +96,10 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
     "uxopian-ai": {
         key: "uxopian-ai",
         title: "Uxopian AI",
-        subtitle: "Coming soon - AI-powered documentation and automation.",
+        subtitle:
+            "Explore all Uxopian AI updates: new features, improvements, and enterprise GenAI capabilities.",
         logoSrc: "/img/uxo_white.png",
-        releasesData: [
-            {
-                version: "2026.0.0",
-                date: "2025-12-01",
-                description:
-                    "General availability of uxopian-ai 2026.0.0 — a standalone framework for enterprise GenAI integrations built on Java 21 LTS and Spring 3.5, with conversation management, orchestration, and native multi-tenant security.",
-                slug: "release-note-2026.0.0",
-                hasUpgradeNotes: false,
-            },
-        ],
+        releasesData: uxopianAiReleasesData,
         styles: uxopianAiStyles,
         filterBy: "major",
         mapNote: (note: any) => ({
@@ -114,8 +107,8 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
             date: note.date,
             description: note.description,
             slug: note.slug,
-            majorVersion: note.version.split(".")[0],
-            hasUpgradeNotes: note.hasUpgradeNotes,
+            majorVersion: note.majorVersion,
+            latest: note.latest,
         }),
         readMoreLink: (note: any) => `/release-note/uxopian-ai/${note.slug}`,
         cardColor: "#F59E0B",

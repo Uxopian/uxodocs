@@ -1,6 +1,10 @@
 ---
 title: "Creating Custom Tools"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 3
+content_hash: a861915616130722d8811ab281c4946326c5c4cf5e8da0900c87829e7554dc8d
 ---
 # How to Create Custom Prompt Tools
 

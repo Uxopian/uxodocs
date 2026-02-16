@@ -1,6 +1,10 @@
 ---
 title: "Statistics & ROI"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 4
+content_hash: 7cb9d7adcbb1092e2a3b5bdcf356ca727c593ef2e351f7429b5ae3a3c2dbb8bf
 ---
 # Global Statistics
 

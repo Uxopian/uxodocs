@@ -1,6 +1,10 @@
 ---
 title: "REST API"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 2
+content_hash: b4a8924a383e974dd9408906d6c97668bf43b6e3b3818dc6ca83696875eb9e89
 ---
 # REST API Reference
 

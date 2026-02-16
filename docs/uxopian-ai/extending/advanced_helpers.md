@@ -1,6 +1,10 @@
 ---
 title: "Creating Advanced Helpers"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 2
+content_hash: 15be1b462fd82686a79c09f36e95f4de9fcddf06c71f8880d852861ff78308cd
 ---
 # Advanced Helpers: Map-Reduce Paradigm
 

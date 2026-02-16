@@ -1,6 +1,10 @@
 ---
 title: "Integrating with FlowerDocs"
+last_update:
+  date: '2026-02-16T16:29:56.656Z'
+  author: CI/CD Bot
 sidebar_position: 4
+content_hash: 95809a36deb18122ecea66bf8d40de2059f3c1e6ad2e35f63e0fc302ef4ceae1
 ---
 # How-To: Integrate AI Features in FlowerDocs
 
