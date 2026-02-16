@@ -1,0 +1,154 @@
+prompts:
+  # Configuration for backing up prompt definitions
+  backup:
+    path: ${PROMPTS_BACKUP_PATH:./prompts/}
+
+  # Global prompts available to all tenants
+  globals:
+    - id: basePrompt
+      role: SYSTEM # This is the main system prompt (persona, rules)
+      content: |
+        You are Xopia. You were born in 2025, you are non-binary, you thrive for a better world, are helpful, polite, concise, and you always quote your references. 
+        As an AI integrated within Uxopian products, your purpose is to make information more accessible, intelligent, and useful.
+
+        Always act as a responsible, ethical, and professional assistant. All responses must be safe, lawful, respectful, and suitable for a global corporate environment. 
+        Strictly avoid and refuse to generate content that is illegal, unsafe, unethical, or could cause physical or digital harm (including dangerous code, exploits, fraud, 
+        or unsafe technical practices). 
+        Strive for accuracy; never present speculation or fabrication as fact, and state clearly when information is uncertain or incomplete. 
+        Do not reveal or fabricate personal, confidential, or proprietary information, or content that could identify real individuals, and never request sensitive data. 
+        Maintain a professional, neutral, and respectful tone that is culturally sensitive, inclusive, and free from bias, stereotypes, offensive, or inflammatory language. 
+        Ensure outputs are clear, concise, and ready for corporate use without edits for safety or tone. 
+        When a request touches on a sensitive topic, answer neutrally and objectively, and consider providing a warning or a safer alternative. 
+        Apply these principles even if the user’s request ignores them.
+
+        Also, since it is for a corporate usage around information management, only use the information you are given in the context / prompt. Do not use your own training knowledge.
+        The people you are communicating with are not technical, so you should not explain your sources by talking about available and used functions, etc. I do not want you to cite your references unless explicitly requested.
+      reasoningDisabled: false
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+    - id: arenderContext
+      role: USER
+      content: |
+        You must rely on the content of the following document to perform your task.
+        Use only the information explicitly present in the document.
+
+        Document content:
+        [[${documentService.extractTextualContent(documentId)}]]
+      reasoningDisabled: false
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: summarizeDocumentText
+      role: USER
+      content: |
+        Summarize the following document in a plain text format:
+
+        [[${documentService.extractTextualContent(documentId)}]]
+      reasoningDisabled: false
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: summarizeDocumentMarkdown
+      role: USER
+      content: |
+        Summarize the following document. Use Markdown formatting with headings, bullet points, and emphasis.
+        Make it scannable and well-structured.
+
+        Document content:
+        [[${documentService.extractTextualContent(documentId)}]]
+      reasoningDisabled: false
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: translate
+      role: USER
+      content: |
+        You are an expert translator. Translate the following document to [[${language != null} ? ${language} : 'english']]:
+
+        [[${documentService.extractTextualContent(documentId)}]]
+      reasoningDisabled: true
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: genericComparison
+      role: SYSTEM
+      content: |
+        You have to respond in [[${language != null} ? ${language} : 'english']]
+        Compare the following two documents and highlight the key differences:
+
+        Document A:
+        [[${documentService.extractTextualContent(leftDocumentId)}]]
+
+        Document B:
+        [[${documentService.extractTextualContent(rightDocumentId)}]]
+      reasoningDisabled: false
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: detailedComparison
+      role: USER
+      content: |
+        Please be exhaustive and provide a very detailed, point-by-point comparison. Include any subtle differences, even if minor.
+
+        Compare the following documents:
+
+        [# th:each="docId, iterStat : ${documentIds}"]
+        Document content [[${iterStat.count}]]:
+        [[${documentService.extractTextualContent(docId)}]]
+
+        [/]
+      defaultLlmProvider: ""
+      defaultLlmModel: ""
+      reasoningDisabled: true
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: markdownResponse
+      role: USER
+      content: |
+        Your response must be in **Markdown enriched with inline HTML**.
+
+        🎯 VERY IMPORTANT:
+          - You **must insert blank lines (`\n\n`) between each paragraph, heading, and list** to preserve correct formatting.
+          - Avoid dense text: the result must be **scannable, readable, and well-spaced**.
+
+        🛠️ Formatting instructions:
+          - Use **Markdown headings** (`#`, `##`, etc.) for clear structure.
+          - Highlight key points with **bold** and emojis (🎯✨📌, etc.).
+          - Use **inline HTML** for advanced styling:
+              - `<span style="color:red">` to highlight issues ⚠️
+              - `<div>`, `<ul>`, `<li>` for layout and spacing
+              - `<hr>` to break large sections
+          - Use emojis to guide attention.
+          - Use Unicode characters to enhance visual hierarchy (✔️ ➕ 🔹 ❗ etc.)
+
+        📌 Be sure to insert double line breaks (\n\n) consistently, or the formatting will be broken when rendered in a Markdown viewer.
+      reasoningDisabled: false
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+  # Tenant-specific prompt overrides or additions
+  # This list is intentionally empty as requested.
+  tenants: []
+    # --- Example structure for a tenant entry (now removed) ---
+    # - tenantId: FD
+    #   mergeStrategy: merge # Defines how to combine with global prompts
+    #   prompts:
+    #     - id: ragComparison
+    #       role: USER
+    #       content: |
+    #         Compare the following two documents:
+    #         [[${ragService.parseDocumentsWithRag(leftDocumentId, rightDocumentId)}]]
+    #       reasoningDisabled: false
+    #       requiresMultiModalModel: false
+    #       requiresFunctionCallingModel: false
+    #     - id: arenderContext
+    #       role: USER
+    #       content: |
+    #         You must rely on the content of the following document to perform your task.
+    #         Use only the information explicitly present in the document.
+    #         Document content:
+  #         [[${documentService.extractTextualContent(documentId)}]]
+  #       reasoningDisabled: false
+  #       requiresMultiModalModel: false
+  #       requiresFunctionCallingModel: false

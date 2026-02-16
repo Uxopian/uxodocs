@@ -1,0 +1,79 @@
+version: "3.7"
+
+services:
+  # --- Uxopian AI Infrastructure ---
+  uxopian-ai-opensearch-node1:
+    image: opensearchproject/opensearch:2.12.0
+    container_name: uxopian-ai-opensearch-node1
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node1
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "DISABLE_INSTALL_DEMO_CONFIG=true"
+      - "DISABLE_SECURITY_PLUGIN=true"
+      - "discovery.type=single-node"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data
+    networks:
+      - uxopian-ai-net
+    healthcheck:
+      test:
+        ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  uxopian-ai-standalone:
+    image: artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft1-rc3
+    # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft1-rc3
+    container_name: uxopian-ai-standalone-service
+    environment:
+      - JAVA_OPTS=-Xmx768m -Xms512m
+      - OPENSEARCH_HOST=uxopian-ai-opensearch-node1
+      - OPENSEARCH_PORT=9200
+      - OPENSEARCH_FORCE_REFRESH_INDEX=false
+      - APP_BASE_URL=http://localhost:8085
+      - UXOPIAN_AI_PORT=8080
+        # DEV ONLY : used to disable authentication
+      - SPRING_PROFILES_ACTIVE=dev
+    ports:
+      - "8085:8080"
+    volumes:
+      - ./config:/app/config
+    networks:
+      - uxopian-ai-net
+    depends_on:
+      uxopian-ai-opensearch-node1:
+        condition: service_healthy
+
+  #xopian-ai-gateway:
+  # image: artifactory.arondor.cloud:5001/gateway:2026.0.0-ft1-rc3
+  # # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft1-rc3
+  # container_name: uxopian-ai-gateway-service
+  # environment:
+  #   - JAVA_OPTS=-Xmx768m -Xms512m
+  # networks:
+  #   - uxopian-ai-net
+  # ports:
+  #   - "8085:8085"
+  # volumes:
+  #   - ./gateway-application.yaml:/app/application.yaml
+
+volumes:
+  arender-tmp:
+  opensearch-data1:
+
+networks:
+  uxopian-ai-net:

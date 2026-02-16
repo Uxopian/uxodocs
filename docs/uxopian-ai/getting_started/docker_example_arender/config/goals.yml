@@ -1,0 +1,45 @@
+goals:
+  # Configuration for backing up goals
+  backup:
+    # Path where backups are stored.
+    # Uses environment variable GOALS_BACKUP_PATH or defaults to ./goals/
+    path: ${GOALS_BACKUP_PATH:./goals/}
+
+  # Tenant-specific goal configurations.
+  # This list is intentionally empty as requested.
+  tenants: [ ]
+    # --- Example structure for a tenant entry (now removed) ---
+    # - tenantId: tenant-id-1
+    #   mergeStrategy: merge # Strategy to merge with global goals (e.g., merge, replace)
+    #   goalGroups:
+    #     - id: compare # A group of related goals
+    #       goals:
+    #         - promptId: detailedComparisonForTenant1 # ID of the prompt to use
+    #           filter: "[[${documentType == 'contract'}]]" # Condition (filter) to apply this goal
+    #           index: 125 # Priority or order
+    #         - promptId: genericComparison
+    #           filter: "true"
+    #           index: 1000
+    #     - id: text-style
+    #       goals:
+    #         - promptId: contractResponseForTenant1
+  #           filter: "[[${documentType == 'contract'}]]"
+  #           index: 1
+
+  # Global goal configurations that apply to all tenants unless overridden.
+  # This list is intentionally empty as requested.
+  globals: [ ]
+    # --- Example structure for a global entry (now removed) ---
+    # - id: test
+    #   goals:
+    #     - promptId: detailedComparisonForTenant1
+    #       filter: "[[${documentType == 'contract'}]]"
+    #       index: 125
+    #     - promptId: genericComparison
+    #       filter: "true"
+    #       index: 1000
+    # - id: text-style2
+    #   goals:
+    #     - promptId: contractResponseForTenant1
+  #       filter: "[[${documentType == 'contract'}]]"
+  #       index: 1

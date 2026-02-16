@@ -87,31 +87,31 @@
     "current": [
       {
         "label": "Getting Started",
-        "href": "/docs/uxopian-ai/getting_started/installation_guide"
+        "href": "/docs/uxopian-ai/getting_started/quickstart"
       },
       {
-        "label": "Architecture",
-        "href": "/docs/uxopian-ai/architecture/overview"
+        "label": "Understanding Uxopian-ai",
+        "href": "/docs/uxopian-ai/understanding/architecture"
       },
       {
-        "label": "Concepts",
-        "href": "/docs/uxopian-ai/concepts/overview"
+        "label": "How-To Guides",
+        "href": "/docs/uxopian-ai/how_to/managing_prompts_goals"
       },
       {
-        "label": "Configuration",
-        "href": "/docs/uxopian-ai/configuration/config_files"
+        "label": "Extending Uxopian-ai",
+        "href": "/docs/uxopian-ai/extending/custom_helpers"
       },
       {
-        "label": "Administration",
-        "href": "/docs/uxopian-ai/administration/application_monitoring"
+        "label": "Reference",
+        "href": "/docs/uxopian-ai/reference/config_files"
       },
       {
-        "label": "How To Guides",
-        "href": "/docs/uxopian-ai/how_to_guides/contributing"
+        "label": "Admin Panel",
+        "href": "/docs/uxopian-ai/admin/dashboard"
       },
       {
-        "label": "QA",
-        "href": "/docs/uxopian-ai/qa/overview"
+        "label": "Release Notes",
+        "href": "/docs/uxopian-ai/release_notes/v2026.0.0-ft2"
       }
     ]
   }
