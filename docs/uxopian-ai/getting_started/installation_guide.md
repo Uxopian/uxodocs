@@ -123,11 +123,11 @@ java -jar ai-standalone.jar
 
 ```
 
-!!! note "Production Recommendations"
+:::note "Production Recommendations"
 
 - Use `JAVA_OPTS` to allocate enough memory (e.g., `-Xmx4g`).
 - Place the service behind a Reverse Proxy (NGINX/Apache) to handle SSL.
-
+:::
 ---
 
 ## 🔹 Step 4: Prompt Creation (Backend)
