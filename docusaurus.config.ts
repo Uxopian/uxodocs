@@ -23,7 +23,7 @@ const config: Config = {
     tagline: "Product Documentation",
     favicon: "img/uxopian-o.png",
 
-    url: "https://staging.doc.uxopian.com/",
+    url: process.env.SITE_URL || "https://staging.doc.uxopian.com/",
     baseUrl: "/",
 
     organizationName: "uxopian",

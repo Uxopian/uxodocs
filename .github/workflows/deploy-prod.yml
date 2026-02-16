@@ -1,0 +1,139 @@
+name: Deploy to PRODUCTION (Manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ci-pages-prod
+  cancel-in-progress: true
+
+jobs:
+  build_deploy_prod:
+    runs-on: ubuntu-latest
+    env:
+      PRODUCTS: "fast2 arender flowerdocs uxopian-ai"
+      AWS_REGION: eu-west-1
+      SITE_URL: "https://doc.uxopian.com/" 
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: prod
+          fetch-depth: 0
+          lfs: false
+
+      - name: Cache Git LFS objects
+        uses: actions/cache@v3
+        with:
+          path: .git/lfs
+          key: git-lfs-${{ hashFiles('.gitattributes') }}-${{ github.sha }}
+          restore-keys: |
+            git-lfs-${{ hashFiles('.gitattributes') }}-
+            git-lfs-
+
+      - name: Fetch LFS files (with cache)
+        run: git lfs pull
+
+      - name: Fetch all branches
+        run: git fetch origin "+refs/heads/*:refs/remotes/origin/*"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Patch search plugin
+        run: node scripts/patch-search-plugin.js
+
+      - name: Clean old versions
+        run: |
+          rm -rf versioned_docs versioned_sidebars
+
+      - name: Generate Docusaurus versions from test-<product>-v* branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f "sidebars_arender_current.ts" ]; then
+             cp sidebars_arender_current.ts sidebars_arender_current.ts.bak
+          fi
+
+          for product in $PRODUCTS; do
+            echo "=== ${product} ==="
+
+            rm -rf ".cache_${product}_current" && mkdir -p ".cache_${product}_current"
+            rsync -a "docs/${product}/" ".cache_${product}_current/"
+
+            mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
+              | grep "origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
+
+            echo "DEBUG: Branches found for ${product}: ${branches[*]}"
+
+            for br in "${branches[@]}"; do
+              ver="${br##test-${product}-}"   # ex: v1, v2
+
+              echo "-> snapshot ${product} ${ver} from ${br}"
+
+              rm -rf .tmp_docs && mkdir -p .tmp_docs
+              if git cat-file -e "origin/${br}:docs/${product}/" 2>/dev/null; then
+                git archive --format=tar "origin/${br}" "docs/${product}" \
+                  | tar -x -C .tmp_docs --strip-components=2
+              else
+                echo "   (skip ${br}: docs/${product} not found)"; continue
+              fi
+
+              if git cat-file -e "origin/${br}:static/img/${product}/" 2>/dev/null; then
+                echo "   -> copying static/img/${product} assets"
+                git archive --format=tar "origin/${br}" "static/img/${product}" \
+                  | tar -x -C .
+              fi
+
+              rsync -a --delete .tmp_docs/ "docs/${product}/"
+
+              if [ "$product" == "arender" ]; then
+                if git cat-file -e "origin/${br}:sidebars_arender.ts" 2>/dev/null; then
+                    echo "   -> using sidebars_arender.ts from ${br}"
+                    git show "origin/${br}:sidebars_arender.ts" > sidebars_arender_current.ts
+                elif git cat-file -e "origin/${br}:sidebars_arender_current.ts" 2>/dev/null; then
+                    echo "   -> using sidebars_arender_current.ts from ${br}"
+                    git show "origin/${br}:sidebars_arender_current.ts" > sidebars_arender_current.ts
+                fi
+              fi
+
+              npx docusaurus "docs:version:${product}" "${ver}"
+            done
+
+            echo "-> Restoring 'current' content from staging cache"
+            rsync -a --delete ".cache_${product}_current/" "docs/${product}/"
+          done
+
+          if [ -f "sidebars_arender_current.ts.bak" ]; then
+             mv sidebars_arender_current.ts.bak sidebars_arender_current.ts
+          fi
+
+      - name: Regenerate topCategories with versioned content
+        run: npm run generate:topCategories
+
+      - name: Build for Production
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy to S3 PRODUCTION
+        run: |
+          # MODIFICATION ICI : On vise le bucket de production
+          aws s3 sync build/ s3://${{ secrets.S3_BUCKET_PROD }} --delete
