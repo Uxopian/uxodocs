@@ -1,0 +1,76 @@
+---
+title: Tasks
+sidebar_position: 6
+description: Manage your business or technical processes.
+date: "2000-06-05T13:20:01+02:00"
+last_update:
+  date: '2026-01-26T13:36:00.326Z'
+  author: CI/CD Bot
+content_hash: 70604c7a2167378e12869c6d97c130d12b8b68691f0746a9d48acd21a7eb260f
+---
+
+:::info
+FlowerDocs can be integrated with any workflow engine on the market.
+
+In FlowerDocs terms, a workflow is a logical sequence of several classes of tasks where each step corresponds to a type of task (a class of tasks).
+
+<br/>
+__Example:__ ``1. Invoice import`` --> ``2. Validation comptable`` --> ``3. Validation frais généraux`` --> ``4. Payment``
+
+These three stages correspond to three classes of tasks, each of which has two types of response:
+
+- Confirm
+- Refuse
+  :::
+
+# Attachments
+
+When processing a task, it may be necessary for the user to add one or more components.
+These documents are called task attachments and are globally defined by task class.
+
+In order to perform actions on attachments, the following permissions may be required:
+
+- Add attachment: `CREATE` for the component class to be created
+- Update the content of an attachment: `UPDATE_CONTENT` for the component class to be created
+- Delete an attachment: `DELETE_CONTENT`
+
+**Note:** These actions are not possible if the attachment definition is read-only.
+
+# Answers
+
+When a user has finished filling in the necessary information for a task, they can select an answer from among those proposed.
+These answers enable a workflow to move in one of the proposed directions.
+
+To apply a response to a task, the `APPLY_ANSWER` permission is required.
+
+# Assignment
+
+To edit a task, the user must:
+
+- have the right to update the task: `UPDATE`
+- be assigned to processing the task
+
+In order to assign a user to process a task, several means are available.
+From a technical point of view, all you need to do is fill in the task's `assignee` field with the identifier of the user, group or team to which the task is assigned.
+
+## Appropriation
+
+Appropriating a task means assigning it to oneself.
+A task cannot be appropriated if it has not been assigned to a user, or to one of the logged-in user's teams.
+This type of assignment requires the `APPROPRIATE` permission.
+
+It is also possible to assign a task to yourself that has already been assigned to another user if you have the `APPROPRIATE_ALREADY_ASSIGNED` permission.
+
+## Assignment
+
+Assigning a task to a user consists in assigning a task from user A to user B.
+This type of assignment can be made even if the task is already assigned to another user.
+
+This type of assignment requires the `ASSIGN` permission.
+
+:::info
+To find out more, have a look at a few references:
+
+- `Task`
+- `Task class`
+  :::
