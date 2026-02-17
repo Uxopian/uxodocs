@@ -1,111 +1,513 @@
-# UxoDocs
+# UxoDocs User Guide
 
-Multi-product documentation platform built with [Docusaurus 3.9.2](https://docusaurus.io/), serving documentation for ARender, Fast2, FlowerDocs, and Uxopian AI.
+This guide will help you set up your workstation and manage documentation for ARender, Fast2, FlowerDocs, and Uxopian AI.
 
-## Prerequisites
+## Table of Contents
 
-- Node.js >= 20
-- npm (not yarn)
-- Git LFS (for large files)
+1. [Workstation Setup](#workstation-setup)
+2. [Understanding the Branch Structure](#understanding-the-branch-structure)
+3. [Common Workflows](#common-workflows)
+   - [Updating Current Version](#updating-current-version)
+   - [Updating Old Version](#updating-old-version)
+   - [Creating New Current Version](#creating-new-current-version)
+   - [Creating New Old Version](#creating-new-old-version)
+4. [Testing in Staging](#testing-in-staging)
+5. [Deploying to Production](#deploying-to-production)
+6. [Tips and Tricks](#tips-and-tricks)
 
-## Installation
+---
+
+## Workstation Setup
+
+### Prerequisites
+
+You'll need the following tools installed on your workstation:
+
+1. **Git Bash** - For version control operations
+2. **VSCode** - Code editor for making changes
+3. **Node.js** (version 20 or higher) - Required for building the documentation site
+4. **GitHub Access** - Google Single Sign-On (SSO) for authentication
+
+### Installation Steps
+
+#### 1. Install Git Bash
+
+Download and install Git Bash from [git-scm.com](https://git-scm.com/downloads)
+
+#### 2. Install Node.js
+
+Download and install Node.js 20+ from [nodejs.org](https://nodejs.org/)
+
+Verify installation:
+```bash
+node --version  # Should show v20.x.x or higher
+npm --version
+```
+
+#### 3. Install VSCode
+
+Download and install from [code.visualstudio.com](https://code.visualstudio.com/)
+
+#### 4. Clone the Repository
+
+Open Git Bash and clone the repository:
+
+```bash
+git clone https://github.com/uxopian/uxodocs.git
+cd uxodocs
+```
+
+#### 5. Install Dependencies
 
 ```bash
 npm ci
 ```
 
-## Local Development
+#### 6. Verify Setup
+
+Start the local development server:
 
 ```bash
 npm start
 ```
 
-Starts a local development server with hot reload at http://localhost:3000.
+Your browser should open at `http://localhost:3000` with the documentation site.
 
-## Build
+---
 
-### Standard Build
+## Understanding the Branch Structure
 
+### Branch Types
+
+The project uses a specific branching strategy:
+
+| Branch Type | Pattern | Purpose | Deployed to Site? |
+|-------------|---------|---------|-------------------|
+| **Production** | `master` | Production environment | Yes (manual trigger) |
+| **Staging** | `develop` | Current versions, staging environment | Yes (auto) |
+| **Working Branch** | `dev-<product>-vX.Y.Z` | Work in progress | No |
+| **Version Branch** | `<product>-vX.Y.Z` | Archived/old versions | Yes (auto) |
+
+### Version Naming Convention
+
+Versions follow the pattern `vX.Y.Z`:
+- **X** = Year of major version release (e.g., 2024, 2025)
+- **Y** = Minor version increment (e.g., 0, 1, 2)
+- **Z** = Fix/patch version increment (e.g., 0, 1, 2)
+
+Examples: `v2024.1.0`, `v2024.2.1`, `v2025.0.0`
+
+### Visual Overview
+
+```
+Master (Production)
+│
+Develop (Staging - Current Versions)
+│
+├── dev-fast2-v2024.2.0 (Working)
+│   └── fast2-v2024.1.0 (Old Version)
+│       └── fast2-v2024.1.1 (Newer Old Version)
+│
+└── dev-arender-v2024.3.0 (Working)
+    └── arender-v2024.2.0 (Old Version)
+```
+
+### Deployment Rules
+
+**Staging** (`staging.doc.uxopian.com`):
+- Builds from `develop` + all non-dev branches
+- Auto-deploys when changes are pushed
+
+**Production** (`doc.uxopian.com`):
+- Builds from `master` + all non-dev non-develop branches
+- Manual deployment trigger required
+
+---
+
+## Common Workflows
+
+### Updating Current Version
+
+Use this workflow when updating the current version of a product's documentation.
+
+#### Steps
+
+1. **Create working branch from develop**
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git checkout -b dev-fast2-v2024.2.0
+   ```
+
+2. **Make your changes**
+   - Edit files in `docs/fast2/` (or your product's folder)
+   - Test locally with `npm start`
+   - Commit your changes:
+     ```bash
+     git add .
+     git commit -m "Update Fast2 documentation for feature X"
+     ```
+
+3. **Push to GitHub**
+   ```bash
+   git push origin dev-fast2-v2024.2.0
+   ```
+
+4. **Test in staging**
+   ```bash
+   git checkout develop
+   git merge dev-fast2-v2024.2.0
+   git push origin develop
+   ```
+   
+   Check your changes at `staging.doc.uxopian.com`
+
+5. **If changes look good, prepare for production**
+   - Before the next release, you'll archive the current version (see "Creating New Current Version")
+
+---
+
+### Updating Old Version
+
+Use this workflow when fixing documentation for an already released version.
+
+#### Steps
+
+1. **Create working branch from the old version branch**
+   ```bash
+   git fetch origin
+   git checkout -b dev-fast2-v2024.1.0 origin/fast2-v2024.1.0
+   ```
+
+2. **Make your changes**
+   - Edit files in `docs/fast2/`
+   - Test locally with `npm start`
+   - Commit your changes:
+     ```bash
+     git add .
+     git commit -m "Fix typo in Fast2 v2024.1.0 installation guide"
+     ```
+
+3. **Push working branch to GitHub**
+   ```bash
+   git push origin dev-fast2-v2024.1.0
+   ```
+
+4. **Rename branch to make it visible in staging**
+   
+   In GitHub web interface:
+   - Go to the repository
+   - Click on "branches"
+   - Find `dev-fast2-v2024.1.0`
+   - Click the pencil icon to rename
+   - Remove `dev-` prefix: `fast2-v2024.1.0`
+
+5. **Validate in staging**
+   
+   Visit `staging.doc.uxopian.com` and verify your changes
+
+6. **Deploy to production or rollback**
+   
+   If OK: Manually trigger the production workflow
+   
+   If NOT OK:
+   - Rename back to `dev-fast2-v2024.1.0` in GitHub
+   - Make additional fixes
+   - Repeat from step 3
+
+---
+
+### Creating New Current Version
+
+Use this workflow when releasing a new version of a product (e.g., going from v2024.1.0 to v2024.2.0).
+
+#### Steps
+
+1. **Create working branch for new version**
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git checkout -b dev-fast2-v2024.2.0
+   ```
+
+2. **Make your changes for the new version**
+   - Update documentation in `docs/fast2/`
+   - Add new features, update screenshots, etc.
+   - Test locally with `npm start`
+   - Commit your changes:
+     ```bash
+     git add .
+     git commit -m "Add Fast2 v2024.2.0 documentation"
+     ```
+
+3. **Push to GitHub**
+   ```bash
+   git push origin dev-fast2-v2024.2.0
+   ```
+
+4. **Archive the previous current version**
+   
+   Before merging your new version to develop, create an archive branch for the old current version:
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git checkout -b fast2-v2024.1.0
+   git push origin fast2-v2024.1.0
+   ```
+   
+   This creates a permanent snapshot of v2024.1.0 that will appear on the documentation site.
+
+5. **Merge new version to develop**
+   ```bash
+   git checkout develop
+   git merge dev-fast2-v2024.2.0
+   git push origin develop
+   ```
+
+6. **Validate in staging**
+   
+   Visit `staging.doc.uxopian.com` and verify:
+   - New current version (v2024.2.0) appears correctly
+   - Old version (v2024.1.0) is still accessible in the version selector
+
+7. **Deploy to production when ready**
+   
+   See "Deploying to Production" section below
+
+---
+
+### Creating New Old Version
+
+Use this workflow when creating a fix/patch version from an existing old version (e.g., v2024.1.0 → v2024.1.1).
+
+#### Steps
+
+1. **Create working branch from existing old version**
+   ```bash
+   git fetch origin
+   git checkout -b dev-fast2-v2024.1.1 origin/fast2-v2024.1.0
+   ```
+
+2. **Make your changes**
+   - Fix issues, update content
+   - Test locally with `npm start`
+   - Commit your changes:
+     ```bash
+     git add .
+     git commit -m "Fix security documentation for Fast2 v2024.1.1"
+     ```
+
+3. **Push to GitHub**
+   ```bash
+   git push origin dev-fast2-v2024.1.1
+   ```
+
+4. **Rename branch to make it a version branch**
+   
+   In GitHub web interface:
+   - Go to the repository
+   - Click on "branches"
+   - Find `dev-fast2-v2024.1.1`
+   - Click the pencil icon
+   - Rename to `fast2-v2024.1.1` (remove `dev-` prefix)
+
+5. **Validate in staging**
+   
+   Visit `staging.doc.uxopian.com` and check:
+   - v2024.1.1 appears in the version selector
+   - Changes are correct
+
+6. **Deploy to production or rollback**
+   
+   If OK: Manually trigger the production workflow
+   
+   If NOT OK:
+   - Rename back to `dev-fast2-v2024.1.1`
+   - Fix issues
+   - Repeat from step 3
+
+---
+
+## Testing in Staging
+
+The staging environment automatically builds and deploys when:
+- Changes are pushed to `develop`
+- Changes are pushed to any non-dev branch (version branches)
+
+### Accessing Staging
+
+Visit: `staging.doc.uxopian.com`
+
+### What Gets Deployed to Staging
+
+- Current versions from `develop`
+- All version branches (anything matching `<product>-vX.Y.Z`)
+- Common pages and site structure from `develop`
+
+### What Does NOT Get Deployed to Staging
+
+- Working branches (anything starting with `dev-`)
+- The `master` branch
+
+### Testing Checklist
+
+Before deploying to production, verify in staging:
+- [ ] All links work correctly
+- [ ] Images display properly
+- [ ] Version selector shows correct versions
+- [ ] Navigation menus are correct
+- [ ] Search functionality works
+- [ ] Code examples are properly formatted
+- [ ] Release notes are up to date
+
+---
+
+## Deploying to Production
+
+Production deployment is a **manual process** to ensure quality control.
+
+### Prerequisites
+
+Before deploying to production:
+1. All changes must be validated in staging
+2. If you updated current versions, merge `develop` into `master`
+
+### Steps
+
+#### 1. Merge develop into master (if needed)
+
+If you made changes to current versions or site structure:
+
+```bash
+git checkout master
+git pull origin master
+git merge develop
+git push origin master
+```
+
+Skip this step if you only updated old version branches.
+
+#### 2. Manually trigger the production workflow
+
+1. Go to the GitHub repository
+2. Click on "Actions" tab
+3. Find the production deployment workflow
+4. Click "Run workflow"
+5. Select `master` branch
+6. Click "Run workflow" button
+
+#### 3. Monitor the deployment
+
+- Watch the workflow execution in the Actions tab
+- Check for any errors
+- Wait for completion (usually a few minutes)
+
+#### 4. Verify production
+
+Visit: `doc.uxopian.com`
+
+Verify:
+- [ ] Changes appear correctly
+- [ ] All versions are accessible
+- [ ] No broken links or errors
+- [ ] Version selector works
+
+---
+
+## Tips and Tricks
+
+### Working Locally
+
+**Start development server:**
+```bash
+npm start
+```
+
+**Build the site locally:**
 ```bash
 npm run build
 ```
 
-This runs the prebuild pipeline automatically:
-1. Updates last modified dates based on content hashes
-2. Generates secondary navigation from directory structure
-3. Generates top categories from `_category_.json` files
-
-### Build with PDF Generation
-
-```bash
-BUILD_PDF=1 npm run build
-```
-
-Generates PDFs incrementally based on content changes tracked in `pdf-build-status.json`.
-
-### Clear Cache
-
-If the build fails, clear the Docusaurus cache:
-
+**Clear cache if build fails:**
 ```bash
 npm run clear
 ```
 
-## Available Scripts
+### Branch Management
 
+**See all branches:**
 ```bash
-npm start              # Dev server with hot reload
-npm run build          # Production build (prebuild runs automatically)
+git branch -a
 ```
 
-### Manual Script Execution
-
+**Switch between branches:**
 ```bash
-npm run generate:releases      # Re-index release notes from all products
-npm run update:lastModified    # Update content hashes and timestamps
-npm run generate:topCategories # Regenerate top categories navigation
+git checkout <branch-name>
 ```
 
-## Project Structure
+**Update your local branch with remote changes:**
+```bash
+git pull origin <branch-name>
+```
 
-This is a multi-product documentation platform with independent versioning per product:
+**Delete a local branch:**
+```bash
+git branch -d <branch-name>
+```
 
-| Product     | Docs Path            | Route               | Sidebar                  |
-|-------------|----------------------|---------------------|--------------------------|
-| ARender     | `docs/arender/`      | `/docs/arender`     | `sidebars_arender.ts`    |
-| Fast2       | `docs/fast2/`        | `/docs/fast2`       | `sidebars_fast2.ts`      |
-| FlowerDocs  | `docs/flowerdocs/`   | `/docs/flowerdocs`  | `sidebars_flowerdocs.ts` |
-| Uxopian AI  | `docs/uxopian-ai/`   | `/docs/uxopian-ai`  | `sidebars_uxopian_ai.ts` |
+### Renaming Branches in GitHub
 
-## Versioning
+**Via GitHub Web Interface:**
+1. Go to repository → Branches
+2. Find the branch to rename
+3. Click the pencil icon next to the branch name
+4. Enter new name
+5. Click "Rename branch"
 
-This project uses branch-based versioning. Each version lives in a `test-<product>-v<version>` branch. The CI/CD pipeline:
+**Via Git Command Line:**
+```bash
+# Rename local branch
+git branch -m old-name new-name
 
-1. Fetches all version branches
-2. Creates Docusaurus snapshots for each version
-3. Builds the site with all versions
-4. Deploys to staging or production
+# Delete old branch on remote
+git push origin :old-name
 
-See [VERSIONING.md](VERSIONING.md) for detailed information.
+# Push new branch to remote
+git push origin new-name
 
-## Deployment
+# Reset upstream
+git push origin -u new-name
+```
 
-Deployment is automated via GitHub Actions:
+### Quick Reference
 
-- **Staging**: Automatic deployment on push to `staging` or `test-*` branches
-- **Production**: Manual deployment via workflow dispatch from `master` branch
+**I want to...** | **What to do**
+--- | ---
+Update current docs | Create `dev-<product>-vX.Y.Z` from `develop`, merge back to `develop`
+Fix old version | Create `dev-<product>-vX.Y.Z` from `<product>-vX.Y.Z`, rename to remove `dev-`
+Release new version | Create version branch from current `develop`, merge new work to `develop`
+Test before production | Check `staging.doc.uxopian.com`
+Deploy to production | Merge `develop` to `master`, manually trigger workflow
 
-The workflows handle:
-- Multi-version snapshot creation from branches
-- LFS file caching
-- Node dependencies caching
-- Build optimization with 4GB memory allocation
-- AWS S3 deployment
+---
 
-## Development Guidelines
+## Getting Help
 
-- **Language**: TypeScript only
-- **Styling**: CSS Modules only (no Tailwind, SASS, or CSS-in-JS)
-- **Components**: Functional components typed with `React.FC<Props>`
-- **Formatting**: Prettier with 4-space indent, double quotes
-- **No comments**: Code should be self-documenting
+If you encounter issues:
+1. Check the staging environment first
+2. Clear your local cache: `npm run clear`
+3. Pull latest changes: `git pull origin develop`
+4. Ask the team in your communication channel
+5. Contact the original developer for technical issues
+
+---
+
+## Additional Resources
+
+- [Docusaurus Documentation](https://docusaurus.io/)
+- [GitHub Documentation](https://docs.github.com/)
+- [Markdown Guide](https://www.markdownguide.org/)
+
+---
+
+**Happy documenting! 📚**
