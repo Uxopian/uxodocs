@@ -9,9 +9,7 @@ last_update:
 content_hash: cf5225dc112d04d238bfa84be92a253b41d66290ac67a97765a7634cd9e45220
 ---
 
-For each search form, it is possible to define a list of actions that a user can perform.
-
-These actions must be defined through the `actions` property on the `ComponentSearchPresenter` object.
+Define actions available on a search form with the ``actions`` property on the `ComponentSearchPresenter` object:
 
 :::note[Example]
 
@@ -111,9 +109,7 @@ For example, if a user searches for a document in the `Invoice` class with a `st
 
 # Activation
 
-Like all actions, it is possible to define the activation strategy using the `enablingStrategy` property.
-
-Several strategies are provided natively:
+Control when an action is available with the ``enablingStrategy`` property. Built-in strategies:
 
 - Whatever the search results (default): `AnyResultEnablingStrategy`
 
