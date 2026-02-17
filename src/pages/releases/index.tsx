@@ -66,6 +66,7 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
             description: note.description,
             slug: note.slug,
             hasUpgradeNotes: note.hasUpgradeNotes,
+            latest: note.latest,
         }),
         readMoreLink: (note: any) => note.slug,
         upgradeLink: (note: any) => `/release-note/arender/${note.version}/upgrade-notes`,

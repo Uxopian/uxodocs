@@ -2,9 +2,9 @@
 title: Annotations
 sidebar_position: 1
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-17T10:47:49.798Z'
   author: CI/CD Bot
-content_hash: 47047366cd04b1af5b28d94d3c1d7582a3b48fbf3c66e5705f6d7cf45c0e5ac6
+content_hash: 5cec2145fbcf65a53fea27ec02709642ac308546cbc366628f0ac3a5968450fd
 ---
 
 ## General
@@ -79,7 +79,7 @@ content_hash: 47047366cd04b1af5b28d94d3c1d7582a3b48fbf3c66e5705f6d7cf45c0e5ac6
 
 | Description                            | Parameter Key                               | Default value | Type   |
 | -------------------------------------- | ------------------------------------------- | ------------- | ------ |
-| Opacity                                | annotation.highligthtext.opacity            | 0.7           | Float  |
+| Opacity                                | annotation.highlighttext.opacity            | 0.7           | Float  |
 | Background color                       | annotation.highlighttext.default.color      | #EAF39C       | String |
 | Strike width ratio (underline, strike) | annotation.highlighttext.strike.width.ratio | 0.1           | Float  |
 

@@ -127,6 +127,11 @@ function main() {
     // Trier les releases par version (décroissant)
     releases.sort(compareVersions);
 
+    // Ajouter le flag "latest" à la première version
+    if (releases.length > 0) {
+        releases[0].latest = true;
+    }
+
     // Écrire le fichier JSON
     const outputDir = dirname(OUTPUT_FILE);
     if (!existsSync(outputDir)) {

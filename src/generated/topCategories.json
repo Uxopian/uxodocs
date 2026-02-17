@@ -1,4 +1,88 @@
 {
+  "arender": {
+    "current": [
+      {
+        "label": "What is ARender",
+        "href": "/docs/arender/what-is-arender/overview"
+      },
+      {
+        "label": "Installation",
+        "href": "/docs/arender/installation/overview"
+      },
+      {
+        "label": "Learn",
+        "href": "/docs/arender/learn/product-analytics"
+      },
+      {
+        "label": "Guides",
+        "href": "/docs/arender/guides/configurations/rendition/service-broker"
+      },
+      {
+        "label": "Features",
+        "href": "/docs/arender/features/accessibility"
+      },
+      {
+        "label": "Development",
+        "href": "/docs/arender/development/apis/rendition/rest/admin/version"
+      }
+    ]
+  },
+  "fast2": {
+    "current": [
+      {
+        "label": "Getting started",
+        "href": "/docs/fast2/getting-started/"
+      },
+      {
+        "label": "Components",
+        "href": "/docs/fast2/components/"
+      },
+      {
+        "label": "Catalog",
+        "href": "/docs/fast2/catalog/"
+      },
+      {
+        "label": "Advanced",
+        "href": "/docs/fast2/advanced/"
+      },
+      {
+        "label": "Cookbooks",
+        "href": "/docs/fast2/cookbooks/"
+      },
+      {
+        "label": "API",
+        "href": "/docs/fast2/API/"
+      }
+    ]
+  },
+  "flowerdocs": {
+    "current": [
+      {
+        "label": "Concepts",
+        "href": "/docs/flowerdocs/concepts/getting-started"
+      },
+      {
+        "label": "Installation",
+        "href": "/docs/flowerdocs/install/getting-started"
+      },
+      {
+        "label": "FlowerDocs Academy",
+        "href": "/docs/flowerdocs/learn/admin-hide-menu/getting-started"
+      },
+      {
+        "label": "Guides",
+        "href": "/docs/flowerdocs/config/gui/getting-started"
+      },
+      {
+        "label": "Development",
+        "href": "/docs/flowerdocs/apis/jsapi/getting-started"
+      },
+      {
+        "label": "Connectors",
+        "href": "/docs/flowerdocs/connecteurs/companion/getting-started"
+      }
+    ]
+  },
   "uxopian-ai": {
     "current": [
       {
