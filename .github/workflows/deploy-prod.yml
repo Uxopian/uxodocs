@@ -125,7 +125,7 @@ jobs:
       - name: Build for Production
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
-        run: npm run build
+        run: BUILD_PDF=1 npm run build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -135,5 +135,4 @@ jobs:
 
       - name: Deploy to S3 PRODUCTION
         run: |
-          # MODIFICATION ICI : On vise le bucket de production
           aws s3 sync build/ s3://${{ secrets.S3_BUCKET_PROD }} --delete
