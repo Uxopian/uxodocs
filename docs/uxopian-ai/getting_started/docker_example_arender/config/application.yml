@@ -1,0 +1,16 @@
+app:
+  base-url: ${APP_BASE_URL:}
+  
+server:
+  servlet:
+    context-path: ${CONTEXT_PATH:}
+  port: ${UXOPIAN_AI_PORT:8080}
+
+# If you wish to disable the tools, please enable the following configuration
+#tools:
+#  enabled: ${TOOLS_ENABLED:true}
+
+# If you wish to disable authentication, please add the “dev” profile
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:}

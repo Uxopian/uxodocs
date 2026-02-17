@@ -1,0 +1,39 @@
+app:
+  gateway:
+    provider-header: X-Provider-ID
+  routes:
+    - id: uxopian-ai
+      uri: http://uxopian-ai-standalone-service:8080
+      path: /**
+      rewritePath: /?(?<segment>.*), /$\{segment}
+      provider: DevProvider
+      security:
+        - path: /.well-known/**
+          public: true
+        - path: /assets/**
+          public: true
+        - path: /v3/**
+          public: true
+        - path: /swagger-ui/**
+          public: true
+        - path: /actuator/health
+          public: true
+        - path: /admin/**
+          #roles: [ "ADMIN" ]
+          public: true
+        - path: /api/v1/admin/**
+          #roles: [ "ADMIN" ]
+          public: true
+        - path: /swagger-ui/index.html
+          public: true
+
+    - id: uxopian-ai-ws
+      uri: ws://uxopian-ai-standalone:8080
+      path: /ws/**
+      prefix: /ws/
+      security:
+        - path: /**
+          public: true
+
+server:
+  port: 8085

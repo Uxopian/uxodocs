@@ -1,10 +1,10 @@
 ---
 title: "Task Conversion"
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-17T10:47:49.798Z'
   author: CI/CD Bot
 sidebar_position: 2
-content_hash: d23e3c5ed046b22c02b900e5a86b5ba22db74639f0a6eef301fe46a7a6c74e3b
+content_hash: 7b1559f0f77ce50eb3eeb95158dc4de7e7ed111caaf3f05a26c688b7ed20bb90
 ---
 
 ## Rendition without internet Access and mails with external images
@@ -13,7 +13,7 @@ If the Rendition is installed on a server that **does not have access to Interne
 
 - Add a proxy for WKHTMLTOPDF configuration. Create a file named **application.properties** in the TaskConversion module containing the below property (adapt the proxy host if needed) (compatible with version 4.3.8 and higher):
 
-```cfg title="application.properties located in ARender-Rendition-2023.X.Y\modules\TaskConversion"
+```cfg title="application.properties located in ARender-Rendition-2023.17.0\modules\TaskConversion"
 tools.wkhtmltopdf.options=--disable-javascript,--quiet,--encoding,UTF-8,--load-error-handling,ignore,--disable-external-links,--disable-internal-links,--disable-local-file-access,--proxy,localhost
 ```
 
@@ -27,7 +27,7 @@ Note this can impact the render of the HTML in ARender:
 
 The default properties in the TaskConversion service looks like this: 
 
-```cfg title="application.properties located in ARender-Rendition-2023.X.Y\modules\TaskConversion"
+```cfg title="application.properties located in ARender-Rendition-2023.17.0\modules\TaskConversion"
 tools.wkhtmltopdf.options=--disable-javascript,--quiet,--encoding,UTF-8,--load-error-handling,ignore,--disable-external-links,--disable-internal-links,--disable-local-file-access
 # Disable iframe URL as a safety measure
 tools.wkhtmltopdf.iframe.disabled=true
@@ -41,7 +41,7 @@ It is possible to change the language of these labels. For now, two languages â€
 
 The default property in the TaskConversion service looks like this: 
 
-```cfg title="application.properties located in ARender-Rendition-2023.X.Y\modules\TaskConversion"
+```cfg title="application.properties located in ARender-Rendition-2023.17.0\modules\TaskConversion"
 # Configure the information fields language. Possible values are : "FR", "EN".
 vcard.label.language=EN
 ```
@@ -50,9 +50,36 @@ vcard.label.language=EN
 
 Properties are available to configure the rendering of images generated from TIFFs.
 
-**application.properties located in ARender-Rendition-2023.X.Y\modules\TaskConversion**
+:::note application.properties located in ARender-Rendition-2023.17.0\modules\TaskConversion
 
 | Description                                                                                                             | Parameter Key                     | Default value | Type    |
 | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------- | ------- |
 | For PDF creation from images, the maximum asked width (in pixel)                                                        | image.conversion.maximum.width.px | 2000          | Integer |
 | The mime type of the generated images (Since version 2023.14.0) Possible values are **image/png** and **image/jpeg** | image.conversion.target.mime.type | image/png     | String  |
+:::
+
+## Convert JPEG and PNG with Apache PDFBox
+
+Since the version 2023.17.0, it is possible de configure a new *factory* to convert PNG and JPEG files by using Apache PDFBox.
+This will improve performance in some cases, but above all, it will ensure that the output PDF file is of a similar size to the original file.
+
+To activate this feature, configure it as follows:
+
+:::info[application-security.yaml]
+
+```cfg
+app:
+  factoriesBeanNames:
+    imageFactory: "image/webp,image/gif,image/x-ms-bmp,image/x-bmp,image/x-portable-bitmap,image/vnd.adobe.photoshop,image/x-eps,application/postscript,application/dicom,application/pcx,application/x-pcx,image/pcx,image/x-pc-paintbrush,image/x-pcx,zz-application/zz-winassoc-pcx,image/jp2,image/heif,image/wmf"
+    pdfboxImageFactory: "image/png,image/jpeg"
+```
+
+:::
+
+:::warning[Warning]
+
+Enabling this property can alter the rendering and resulting the page dimensions.
+
+If your workflow relies on consistent page dimensions or pre-existing annotation files linked to specific page coordinates, you must exercise caution when enabling this feature.
+
+:::

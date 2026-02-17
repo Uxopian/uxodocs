@@ -1,0 +1,237 @@
+llm:
+  default:
+    model: ${LLM_DEFAULT_MODEL:gpt-5.1}
+    provider: ${LLM_DEFAULT_PROVIDER:openai}
+    base-prompt: ${LLM_DEFAULT_PROMPT:basePrompt}
+
+  context: ${LLM_CONTEXT_SIZE:10}
+  debug:
+    enabled: ${LLM_DEBUG:false}
+
+  # ──────────────────────────────────────────────────────────────────
+  # Dynamic LLM Provider Configurations
+  # Loaded into OpenSearch at startup, then manageable via Admin API/UI.
+  # See: reference/config_files.md#dynamic-provider-configuration
+  # ──────────────────────────────────────────────────────────────────
+  provider:
+    # ── Global providers (apply to all tenants) ──────────────────────
+    globals:
+
+      # ── OpenAI ─────────────────────────────────────────────────────
+      - provider: openai
+        defaultLlmModelConfName: gpt5
+        globalConf:
+          apiSecret: ${OPENAI_API_KEY:}
+          temperature: 1
+          timeout: 60s
+          maxRetries: 3
+        llModelConfs:
+          - llmModelConfName: gpt5
+            modelName: gpt-5.1
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt5-std
+            modelName: gpt-5
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt5-mini
+            modelName: gpt-5-mini
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt5-nano
+            modelName: gpt-5-nano
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt41
+            modelName: gpt-4.1
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt41-mini
+            modelName: gpt-4.1-mini
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt41-nano
+            modelName: gpt-4.1-nano
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt4o
+            modelName: gpt-4o
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt4o-mini
+            modelName: gpt-4o-mini
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: o3-mini
+            modelName: o3-mini
+            multiModalSupported: false
+            functionCallSupported: true
+          - llmModelConfName: o4-mini
+            modelName: o4-mini
+            multiModalSupported: false
+            functionCallSupported: true
+
+      # ── Anthropic (Claude) ─────────────────────────────────────────
+      - provider: anthropic
+        defaultLlmModelConfName: claude-sonnet
+        globalConf:
+          apiSecret: ${ANTHROPIC_API_KEY:none}
+          endpointUrl: https://api.anthropic.com/v1/
+          temperature: 0.7
+          maxRetries: 3
+          timeout: 60s
+        llModelConfs:
+          - llmModelConfName: claude-sonnet
+            modelName: claude-sonnet-4-20250514
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: claude-opus
+            modelName: claude-opus-4-20250514
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: claude-haiku
+            modelName: claude-haiku-4-20250514
+            multiModalSupported: true
+            functionCallSupported: true
+
+      # ── Azure OpenAI ───────────────────────────────────────────────
+      - provider: azure
+        defaultLlmModelConfName: azure-gpt4o
+        globalConf:
+          apiSecret: ${AZURE_OPENAI_API_KEY:none}
+          endpointUrl: https://your-resource.openai.azure.com/
+          temperature: 0.7
+          maxRetries: 3
+          timeout: 60s
+          extras:
+            deploymentName: your-deployment-name
+        llModelConfs:
+          - llmModelConfName: azure-gpt4o
+            modelName: gpt-4o
+            multiModalSupported: true
+            functionCallSupported: true
+
+      # ── AWS Bedrock ────────────────────────────────────────────────
+      - provider: bedrock
+        defaultLlmModelConfName: bedrock-claude
+        globalConf:
+          timeout: 60s
+          maxRetries: 3
+          extras:
+            accessKey: ${BEDROCK_AWS_ACCESS_KEY:none}
+            secretKey: ${BEDROCK_AWS_SECRET_KEY:none}
+            region: us-east-1
+        llModelConfs:
+          - llmModelConfName: bedrock-claude
+            modelName: anthropic.claude-3-sonnet-20240229-v1:0
+            multiModalSupported: false
+            functionCallSupported: true
+          - llmModelConfName: bedrock-cohere
+            modelName: cohere.command-r-plus-v1:0
+            multiModalSupported: false
+            functionCallSupported: true
+
+      # ── Google Gemini ──────────────────────────────────────────────
+      - provider: gemini
+        defaultLlmModelConfName: gemini-flash
+        globalConf:
+          apiSecret: ${GEMINI_API_KEY:none}
+          temperature: 0.7
+          maxRetries: 3
+          timeout: 60s
+        llModelConfs:
+          - llmModelConfName: gemini-pro
+            modelName: gemini-2.5-pro
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gemini-flash
+            modelName: gemini-2.5-flash
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gemini-flash-lite
+            modelName: gemini-2.5-flash-lite
+            multiModalSupported: true
+            functionCallSupported: true
+
+      # ── HuggingFace ────────────────────────────────────────────────
+      - provider: huggingface
+        defaultLlmModelConfName: mistral-7b
+        globalConf:
+          apiSecret: ${HUGGINGFACE_API_KEY:none}
+          temperature: 0.7
+          timeout: 60s
+        llModelConfs:
+          - llmModelConfName: mistral-7b
+            modelName: mistralai/Mistral-7B-Instruct-v0.3
+            multiModalSupported: false
+            functionCallSupported: true
+          - llmModelConfName: llama3-8b
+            modelName: meta-llama/Meta-Llama-3-8B-Instruct
+            multiModalSupported: false
+            functionCallSupported: true
+
+      # ── Mistral AI ─────────────────────────────────────────────────
+      - provider: mistral
+        defaultLlmModelConfName: mistral-large
+        globalConf:
+          apiSecret: ${MISTRAL_API_KEY:none}
+          endpointUrl: https://api.mistral.ai/v1/
+          temperature: 0.7
+          maxRetries: 3
+          timeout: 60s
+        llModelConfs:
+          - llmModelConfName: mistral-large
+            modelName: mistral-large-latest
+            multiModalSupported: false
+            functionCallSupported: true
+          - llmModelConfName: mistral-small
+            modelName: mistral-small-latest
+            multiModalSupported: false
+            functionCallSupported: true
+
+      # ── Ollama (Local) ─────────────────────────────────────────────
+      - provider: ollama
+        defaultLlmModelConfName: llama3
+        globalConf:
+          endpointUrl: http://localhost:11434
+          temperature: 0.7
+          maxRetries: 3
+          timeout: 60s
+        llModelConfs:
+          - llmModelConfName: llama3
+            modelName: llama3
+            multiModalSupported: false
+            functionCallSupported: true
+
+      # ── NuExtract (Specialized) ────────────────────────────────────
+      - provider: nu-extract
+        defaultLlmModelConfName: nu-extract-report
+        globalConf:
+          apiSecret: ${NUEXTRACT_API_KEY:}
+          endpointUrl: https://nuextract.ai/api/projects/
+          timeout: 60s
+        llModelConfs:
+          - llmModelConfName: nu-extract-report
+            modelName: nu-extract-accident-report
+            multiModalSupported: false
+            functionCallSupported: false
+            extras:
+              modelId: c13ef081-1791-4882-8ba9-2d2ade17b0e2
+
+    # ── Tenant-specific overrides ──────────────────────────────────
+    # Uncomment and adapt to customize providers per tenant.
+    #
+    # tenants:
+    #   - tenantId: tenant-A
+    #     mergeStrategy: MERGE   # MERGE | OVERWRITE | CREATE_IF_MISSING
+    #     providers:
+    #       - provider: openai
+    #         defaultLlmModelConfName: gpt5
+    #         globalConf:
+    #           apiSecret: sk-tenant-a-specific-key
+    #         llModelConfs:
+    #           - llmModelConfName: gpt5
+    #             modelName: gpt-5.1
+    #             multiModalSupported: true
+    #             functionCallSupported: true
+

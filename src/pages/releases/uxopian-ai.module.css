@@ -1,33 +1,68 @@
-/* uxopian-ai specific release styles
-   This file composes the base layout from fast2.module.css and sets
-   product-specific CSS variables so the page and cards use the Uxopian color.
-*/
+/* Uxopian AI release page styles — standalone, no fast2 dependency */
 
 .releasesPage {
-    composes: releasesPage from "./fast2.module.css";
-    /* product variables (fallbacks used by card styles) */
+    min-height: calc(100vh - var(--ifm-navbar-height));
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
     --card-color: #f59e0b;
     --card-color-bg: rgba(245, 158, 11, 0.12);
     --card-color-bg-2: rgba(245, 158, 11, 0.06);
 }
 
-.mainContent {
-    composes: mainContent from "./fast2.module.css";
+[data-theme="dark"] .releasesPage {
+    background: linear-gradient(180deg, #1a1a1a 0%, #242424 100%);
+    --card-color-bg: rgba(245, 158, 11, 0.18);
+    --card-color-bg-2: rgba(245, 158, 11, 0.1);
 }
 
 .filterBar {
-    composes: filterBar from "./fast2.module.css";
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    padding: 1.25rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .filterBar {
+    background: #2a2a2a;
 }
 
 .filterButton {
-    composes: filterButton from "./fast2.module.css";
+    padding: 0.625rem 1.25rem;
+    border: 2px solid transparent;
+    background: #f8f9fa;
+    color: #666;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
+}
+
+[data-theme="dark"] .filterButton {
+    background: #333;
+    color: #bbb;
+}
+
+.filterButton:hover {
+    background: #e9ecef;
+    color: #333;
+    transform: scale(1.05);
+}
+
+[data-theme="dark"] .filterButton:hover {
+    background: #404040;
+    color: #fff;
 }
 
 .filterButtonActive {
-    composes: filterButtonActive from "./fast2.module.css";
-    /* Override Fast2's cyan with Uxopian AI's orange */
     background: linear-gradient(135deg, rgba(245, 158, 11, 0.85), rgba(217, 119, 6, 0.85)) !important;
     color: #000 !important;
+    border-color: transparent;
+    transform: scale(1.05);
     box-shadow: 0 6px 16px rgba(245, 158, 11, 0.6), 0 2px 8px rgba(245, 158, 11, 0.4) !important;
 }
 
@@ -38,67 +73,436 @@
 
 .filterButtonActive:hover {
     background: linear-gradient(135deg, rgba(217, 119, 6, 0.9), rgba(180, 83, 9, 0.9)) !important;
+    transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(245, 158, 11, 0.7), 0 4px 10px rgba(245, 158, 11, 0.5) !important;
 }
 
 .releaseGrid {
-    composes: releaseGrid from "./fast2.module.css";
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+    animation: fadeInGrid 0.3s ease-out;
+    padding-bottom: 1.5rem;
+}
+
+@keyframes fadeInGrid {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.releaseGrid > div {
+    animation: slideInCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+@keyframes slideInCard {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .releaseCard {
-    composes: releaseCard from "./fast2.module.css";
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+        0 6px 24px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.9);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    height: 100%;
+    position: relative;
+}
+
+.releaseCard::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.releaseCard:hover::before {
+    left: 100%;
+}
+
+.releaseCard::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 255, 255, 0.08) 30%,
+        transparent 100%
+    );
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+[data-theme="dark"] .releaseCard {
+    background: rgba(20, 20, 25, 0.6);
+    backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(1.1);
+    box-shadow:
+        0 6px 24px rgba(0, 0, 0, 0.6),
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .releaseCard::after {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 20%,
+        rgba(255, 255, 255, 0.02) 40%,
+        transparent 100%
+    );
+    opacity: 1;
+}
+
+.releaseCard:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.15),
+        0 6px 16px rgba(0, 0, 0, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+        inset 0 2px 8px rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .releaseCard:hover {
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.8),
+        0 6px 16px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+        inset 0 2px 8px rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.9),
+        0 0 30px rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
 .cardHeader {
-    composes: cardHeader from "./fast2.module.css";
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(
+        135deg,
+        var(--card-color-bg, rgba(245, 158, 11, 0.12)),
+        var(--card-color-bg-2, rgba(245, 158, 11, 0.06))
+    );
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .cardHeader {
+    background: linear-gradient(
+        135deg,
+        var(--card-color-bg, rgba(245, 158, 11, 0.18)),
+        var(--card-color-bg-2, rgba(245, 158, 11, 0.1))
+    );
+    border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .versionBadge {
-    composes: versionBadge from "./fast2.module.css";
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .versionNumber {
-    composes: versionNumber from "./fast2.module.css";
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--card-color, #b45309);
+}
+
+[data-theme="dark"] .versionNumber {
+    color: var(--card-color, #f59e0b);
 }
 
 .releaseDate {
-    composes: releaseDate from "./fast2.module.css";
+    font-size: 0.875rem;
+    color: #666;
+}
+
+[data-theme="dark"] .releaseDate {
+    color: #999;
 }
 
 .cardBody {
-    composes: cardBody from "./fast2.module.css";
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
 }
 
 .description {
-    composes: description from "./fast2.module.css";
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1.25rem;
+    flex: 1;
+}
+
+[data-theme="dark"] .description {
+    color: #bbb;
 }
 
 .readMoreLink {
-    composes: readMoreLink from "./fast2.module.css";
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: none;
+    border-radius: 8px;
+    color: var(--card-color, #f59e0b);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.85rem;
+    background: var(--card-color-bg, rgba(245, 158, 11, 0.08));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .readMoreLink {
+    background: var(--card-color-bg, rgba(245, 158, 11, 0.12));
+}
+
+.readMoreLink::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.5s ease;
+}
+
+.readMoreLink:hover::before {
+    left: 100%;
+}
+
+.readMoreLink:hover {
+    color: var(--card-color, #f59e0b);
+    text-decoration: none;
+    background: var(--card-color-bg-2, rgba(245, 158, 11, 0.15));
+    transform: translateX(4px);
 }
 
 .upgradeLink {
-    composes: readMoreLink from "./fast2.module.css";
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: none;
+    border-radius: 8px;
+    color: var(--card-color, #f59e0b);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.85rem;
+    background: var(--card-color-bg, rgba(245, 158, 11, 0.08));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .upgradeLink {
+    background: var(--card-color-bg, rgba(245, 158, 11, 0.12));
+}
+
+.upgradeLink::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.5s ease;
+}
+
+.upgradeLink:hover::before {
+    left: 100%;
+}
+
+.upgradeLink:hover {
+    color: var(--card-color, #f59e0b);
+    text-decoration: none;
+    background: var(--card-color-bg-2, rgba(245, 158, 11, 0.15));
+    transform: translateX(4px);
 }
 
 .deprecationBadge {
-    composes: deprecationBadge from "./fast2.module.css";
+    background: linear-gradient(135deg, #e8590c, #d31b14);
+    color: white;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+[data-theme="dark"] .deprecationBadge {
+    background: linear-gradient(135deg, #c82333, #a71d2a);
 }
 
 .latestBadge {
-    composes: latestBadge from "./fast2.module.css";
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    box-shadow:
+        0 2px 8px rgba(245, 158, 11, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+}
+
+.latestBadge:hover {
+    background: linear-gradient(135deg, #d97706, #b45309);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5);
+    transform: translateY(-1px);
 }
 
 .latestV2Badge {
-    composes: latestV2Badge from "./fast2.module.css";
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    background: linear-gradient(135deg, #fd7e14, #e8590c);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    box-shadow:
+        0 2px 8px rgba(253, 126, 20, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .emptyState {
-    composes: emptyState from "./fast2.module.css";
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #999;
+    animation: fadeIn 0.5s ease-out;
 }
 
-/* Ensure dark theme header uses same variables when applied at page level */
-[data-theme="dark"] .releasesPage {
-    --card-color-bg: rgba(245, 158, 11, 0.18);
-    --card-color-bg-2: rgba(245, 158, 11, 0.1);
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .filterBar {
+        padding: 1rem;
+    }
+
+    .releaseGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .releaseCard {
+        border-radius: 12px;
+    }
+
+    .cardHeader {
+        padding: 0.75rem 1rem;
+    }
+
+    .versionNumber {
+        font-size: 1rem;
+    }
+
+    .releaseDate {
+        font-size: 0.75rem;
+    }
+
+    .cardBody {
+        padding: 0.75rem 1rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+        line-height: 1.4;
+        margin-bottom: 0.75rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .readMoreLink,
+    .upgradeLink {
+        padding: 0.3rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .latestBadge,
+    .latestV2Badge {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.4rem;
+    }
+
+    .mainContent {
+        padding: 2rem 0;
+    }
 }
