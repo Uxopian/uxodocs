@@ -63,7 +63,23 @@ cd uxodocs
 npm ci
 ```
 
-#### 6. Verify Setup
+#### 6. Configure GitHub Authentication
+
+To be able to push changes to GitHub, you need to create a Personal Access Token.
+
+**Steps to create your token:**
+
+1. Go to https://github.com/settings/tokens
+2. Click **"Generate new token"** → **"Generate new token (classic)"**
+3. Give it a descriptive name: `UxoDocs Workstation`
+4. Set expiration: Choose **90 days** or **No expiration** (depending on your preference)
+5. Select scopes: Check **`repo`** (this gives full control of private repositories)
+6. Click **"Generate token"** at the bottom
+7. **IMPORTANT: Copy the token immediately!** You won't be able to see it again
+
+**Save your token somewhere safe** (like a password manager) in case you need it later.
+
+#### 7. Verify Setup
 
 Start the local development server:
 
@@ -72,6 +88,26 @@ npm start
 ```
 
 Your browser should open at `http://localhost:3000` with the documentation site.
+
+#### 8. First Push to GitHub
+
+The first time you push changes to GitHub, Git will ask for authentication:
+
+```bash
+git push origin your-branch-name
+```
+
+You'll see prompts like:
+```
+Username for 'https://github.com': your-github-username
+Password for 'https://your-github-username@github.com':
+```
+
+**Important:** 
+- For **Username**: Enter your GitHub username
+- For **Password**: **Paste your Personal Access Token** (NOT your GitHub password!)
+
+After this first authentication, Git will automatically remember your credentials using Windows Credential Manager, so you won't need to enter them again for future pushes.
 
 ---
 
@@ -84,7 +120,7 @@ The project uses a specific branching strategy:
 | Branch Type | Pattern | Purpose | Deployed to Site? |
 |-------------|---------|---------|-------------------|
 | **Production** | `master` | Production environment | Yes (manual trigger) |
-| **Staging** | `develop` | Current versions, staging environment | Yes (auto) |
+| **Staging** | `staging` | Current versions, staging environment | Yes (auto) |
 | **Working Branch** | `dev-<product>-vX.Y.Z` | Work in progress | No |
 | **Version Branch** | `<product>-vX.Y.Z` | Archived/old versions | Yes (auto) |
 
@@ -102,7 +138,7 @@ Examples: `v2024.1.0`, `v2024.2.1`, `v2025.0.0`
 ```
 Master (Production)
 │
-Develop (Staging - Current Versions)
+Staging (Current Versions)
 │
 ├── dev-fast2-v2024.2.0 (Working)
 │   └── fast2-v2024.1.0 (Old Version)
@@ -115,11 +151,11 @@ Develop (Staging - Current Versions)
 ### Deployment Rules
 
 **Staging** (`staging.doc.uxopian.com`):
-- Builds from `develop` + all non-dev branches
+- Builds from `staging` + all non-dev branches
 - Auto-deploys when changes are pushed
 
 **Production** (`doc.uxopian.com`):
-- Builds from `master` + all non-dev non-develop branches
+- Builds from `master` + all non-dev non-staging branches
 - Manual deployment trigger required
 
 ---
@@ -132,10 +168,10 @@ Use this workflow when updating the current version of a product's documentation
 
 #### Steps
 
-1. **Create working branch from develop**
+1. **Create working branch from staging**
    ```bash
-   git checkout develop
-   git pull origin develop
+   git checkout staging
+   git pull origin staging
    git checkout -b dev-fast2-v2024.2.0
    ```
 
@@ -155,9 +191,9 @@ Use this workflow when updating the current version of a product's documentation
 
 4. **Test in staging**
    ```bash
-   git checkout develop
+   git checkout staging
    git merge dev-fast2-v2024.2.0
-   git push origin develop
+   git push origin staging
    ```
    
    Check your changes at `staging.doc.uxopian.com`
@@ -225,8 +261,8 @@ Use this workflow when releasing a new version of a product (e.g., going from v2
 
 1. **Create working branch for new version**
    ```bash
-   git checkout develop
-   git pull origin develop
+   git checkout staging
+   git pull origin staging
    git checkout -b dev-fast2-v2024.2.0
    ```
 
@@ -247,21 +283,21 @@ Use this workflow when releasing a new version of a product (e.g., going from v2
 
 4. **Archive the previous current version**
    
-   Before merging your new version to develop, create an archive branch for the old current version:
+   Before merging your new version to staging, create an archive branch for the old current version:
    ```bash
-   git checkout develop
-   git pull origin develop
+   git checkout staging
+   git pull origin staging
    git checkout -b fast2-v2024.1.0
    git push origin fast2-v2024.1.0
    ```
    
    This creates a permanent snapshot of v2024.1.0 that will appear on the documentation site.
 
-5. **Merge new version to develop**
+5. **Merge new version to staging**
    ```bash
-   git checkout develop
+   git checkout staging
    git merge dev-fast2-v2024.2.0
-   git push origin develop
+   git push origin staging
    ```
 
 6. **Validate in staging**
@@ -331,7 +367,7 @@ Use this workflow when creating a fix/patch version from an existing old version
 ## Testing in Staging
 
 The staging environment automatically builds and deploys when:
-- Changes are pushed to `develop`
+- Changes are pushed to `staging`
 - Changes are pushed to any non-dev branch (version branches)
 
 ### Accessing Staging
@@ -340,9 +376,9 @@ Visit: `staging.doc.uxopian.com`
 
 ### What Gets Deployed to Staging
 
-- Current versions from `develop`
+- Current versions from `staging`
 - All version branches (anything matching `<product>-vX.Y.Z`)
-- Common pages and site structure from `develop`
+- Common pages and site structure from `staging`
 
 ### What Does NOT Get Deployed to Staging
 
@@ -370,18 +406,18 @@ Production deployment is a **manual process** to ensure quality control.
 
 Before deploying to production:
 1. All changes must be validated in staging
-2. If you updated current versions, merge `develop` into `master`
+2. If you updated current versions, merge `staging` into `master`
 
 ### Steps
 
-#### 1. Merge develop into master (if needed)
+#### 1. Merge staging into master (if needed)
 
 If you made changes to current versions or site structure:
 
 ```bash
 git checkout master
 git pull origin master
-git merge develop
+git merge staging
 git push origin master
 ```
 
@@ -496,7 +532,7 @@ Deploy to production | Merge `develop` to `master`, manually trigger workflow
 If you encounter issues:
 1. Check the staging environment first
 2. Clear your local cache: `npm run clear`
-3. Pull latest changes: `git pull origin develop`
+3. Pull latest changes: `git pull origin staging`
 4. Ask the team in your communication channel
 5. Contact the original developer for technical issues
 
