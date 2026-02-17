@@ -3,9 +3,9 @@ title: Full example
 sidebar_position: 7
 date: "2023-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-02-17T14:41:59.174Z'
   author: CI/CD Bot
-content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
+content_hash: 6c16563bb5fc1e80416586beb8447e68efe5ecec1afa88b98e3749007c303f3a
 ---
 
 ```xml

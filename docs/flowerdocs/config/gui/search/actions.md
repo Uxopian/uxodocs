@@ -4,9 +4,9 @@ sidebar_position: 6
 description: Add actions in the search form.
 date: "2023-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-02-17T14:41:59.174Z'
   author: CI/CD Bot
-content_hash: cf5225dc112d04d238bfa84be92a253b41d66290ac67a97765a7634cd9e45220
+content_hash: 174e1e351517b8e68179f78c9d5545d7fc6e218aaef5f1918e50ee1dc5f71be5
 ---
 
 Define actions available on a search form with the ``actions`` property on the `ComponentSearchPresenter` object:
