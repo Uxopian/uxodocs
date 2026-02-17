@@ -9,7 +9,7 @@ content_hash: 8c868f31e44f0087745a4f06134744c2660be2b28f978e45c56c667454991a9b
 ---
 
 :::info
-Search forms are pre-configured search templates, which are then made available to end users.
+Search forms are pre-configured templates made available to end users.
 :::
 
 # Presentation
@@ -53,7 +53,7 @@ __Example:__ A basic ``AgentSearch`` search form with the title Agent file searc
 
 # Define access
 
-A search form can be linked to a user team through a property that can be set via:
+Link a search form to a user team via:
 
 - the CLM and the `scope.xml` file:
   :::note[Team example]

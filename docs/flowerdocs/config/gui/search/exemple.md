@@ -10,6 +10,7 @@ content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
 
 ```xml
 <bean id="AgentSearch" class="com.flower.docs.gui.client.search.ComponentSearchPresenter" scope="prototype">
+	<!-- Title -->
 	<property name="title">
 		<list>
 			<bean class="com.flower.docs.domain.i18n.I18NLabel">
@@ -26,7 +27,7 @@ content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
 		<list>
 			<bean class="com.flower.docs.domain.i18n.I18NLabel">
 				<property name="language" value="EN"/>
-				<property name="value" value="Fill criteria to easyly find desired folder"/>
+				<property name="value" value="Fill criteria to easily find desired folder"/>
 			</bean>
 			<bean class="com.flower.docs.domain.i18n.I18NLabel">
 				<property name="language" value="FR"/>
@@ -34,6 +35,7 @@ content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
 			</bean>
 		</list>
 	</property>
+	<!-- Category: search virtual folders only -->
 	<property name="categorySelectorPresenter">
 		<bean class="com.flower.docs.gui.client.search.criteria.item.FakeCategorySelectorPresenter">
 			<property name="value">
@@ -41,11 +43,13 @@ content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
 			</property>
 		</bean>
 	</property>
+	<!-- Keyword search: disabled -->
 	<property name="keywordCriteriaPresenter">
 		<bean class="com.flower.docs.gui.client.search.criteria.KeywordCriteriaPresenter">
 			<property name="enabled" value="false" />
 		</bean>
 	</property>
+	<!-- Advanced search: fixed criteria, no class selector -->
 	<property name="advancedCriteriaPresenter">
 		<bean class="com.flower.docs.gui.client.search.criteria.advanced.AdvancedCriteriaPresenter">
 			<property name="enabled" value="true" />
@@ -59,12 +63,14 @@ content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
 			</property>
 		</bean>
 	</property>
+	<!-- Hidden columns -->
 	<property name="hiddenColumns">
 		<list>
 			<value>status</value>
 			<value>Matricule</value>
 		</list>
 	</property>
+	<!-- Hidden request: columns, filter, max results -->
 	<property name="hiddenRequest">
 		<bean class="com.flower.docs.domain.search.SearchRequest">
 			<property name="selectClause">
@@ -106,6 +112,7 @@ content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
 			</property>
 		</bean>
 	</property>
+	<!-- Empty results message -->
 	<property name="emptyResultsMessages">
 		<list>
 			<bean class="com.flower.docs.domain.i18n.I18NLabel">
@@ -120,7 +127,8 @@ content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
 	</property>
 </bean>
 
-<bean id="EDSCriterionPresenter" class="com.flower.docs.gui.client.search.criterion.SimpleCriterionPresenter">
+<!-- Criterion: EDS (string, contains) -->
+<bean id="EDSCriterionPresenter" class="com.flower.docs.gui.client.search.criterion.FilterCriterionPresenter">
     <property name="model">
         <bean class="com.flower.docs.domain.search.Criterion">
             <property name="name" value="EDS" />
@@ -134,7 +142,8 @@ content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
     </property>
 </bean>
 
-<bean id="MatriculeCriterionPresenter" class="com.flower.docs.gui.client.search.criterion.SimpleCriterionPresenter">
+<!-- Criterion: Matricule (string, starts with) -->
+<bean id="MatriculeCriterionPresenter" class="com.flower.docs.gui.client.search.criterion.FilterCriterionPresenter">
     <property name="model">
         <bean class="com.flower.docs.domain.search.Criterion">
             <property name="name" value="Matricule" />
@@ -148,7 +157,8 @@ content_hash: 2c295a036d44d76382b93e58efaba7f501257c21da8281d5e3b1701751e2463b
     </property>
 </bean>
 
-<bean id="creationDateCriterion" class="com.flower.docs.gui.client.search.criterion.SimpleCriterionPresenter">
+<!-- Criterion: creationDate (timestamp, between) -->
+<bean id="creationDateCriterion" class="com.flower.docs.gui.client.search.criterion.FilterCriterionPresenter">
 	<property name="model">
 		<bean class="com.flower.docs.domain.search.Criterion">
 			<property name="name" value="creationDate" />

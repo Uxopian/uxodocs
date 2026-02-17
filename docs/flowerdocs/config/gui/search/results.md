@@ -11,9 +11,9 @@ content_hash: ea82863b37a26a5e9a88412a688bc794cf5670957ff277b120540bae440ce67c
 
 # Hiding columns
 
-You can hide columns in the results table. To do this, add the `hiddenColumns` property.
+Hide columns in the results table with the ``hiddenColumns`` property:
 
-:::note[Example]
+**Example**
 
 ```xml
 <property name="hiddenColumns">
@@ -23,23 +23,20 @@ You can hide columns in the results table. To do this, add the `hiddenColumns` p
 </property>
 ```
 
-:::
 
-# Display
 
-FlowerDocs lets you display search results in three different ways:
+# Display modes
 
-- tabular: results are presented in the classic tabular format
-- thumbnail: ARender is used to generate a thumbnail of the component
-- aggregation: search results are displayed as a tree structure
+FlowerDocs supports two display modes for search results:
 
-## Tabular and thumbnails
+- **Tabular** -- classic table format
+- **Thumbnail** -- ARender generates a thumbnail of the component
 
-The default display allows the user to choose how the results are presented.
-By default, the user is presented with a tabular display.
+## Tabular and thumbnails (switcher)
 
-<br/>
-To display search results as thumbnails by default, add the `tableByDefault` property with the `false` value:
+The default display lets the user switch between tabular and thumbnail modes. Tabular is shown first by default.
+
+To default to thumbnails, set `tableByDefault` to `false`:
 
 ```xml
 <property name="responsePresenterProvider">
@@ -49,8 +46,7 @@ To display search results as thumbnails by default, add the `tableByDefault` pro
 </property>
 ```
 
-<br/>
-To go a step further and configure thumbnail content, add the following property to the ``SwitcherSearchResponsePresenterProvider`` object:
+To configure thumbnail card content, add the `cardPresenter` property:
 
 ```xml
 <property name="cardPresenter">
@@ -75,7 +71,7 @@ To go a step further and configure thumbnail content, add the following property
 				</bean>
 				<bean class="com.flower.docs.domain.i18n.I18NLabel">
 					<property name="language" value="FR" />
-					<property name="value" value="Ajouté le ${creationDate}, par ${owner}" />
+					<property name="value" value="AjoutÃ© le ${creationDate}, par ${owner}" />
 				</bean>
 			</list>
 		</property>
@@ -83,9 +79,17 @@ To go a step further and configure thumbnail content, add the following property
 </property>
 ```
 
-## Tabular
+The `CardSearchResponsePresenterProvider` supports three template properties. Each uses `${fieldName}` placeholders that are replaced with actual values from the search results:
 
-If you want the user to be able to see/use only the tabular presentation mode:
+| Property | Description |
+|----------|-------------|
+| `titleTemplate` | Main title of the card |
+| `headingTemplate` | Subtitle displayed below the title |
+| `contentTemplate` | Body content of the card |
+
+## Tabular only
+
+Force tabular-only display:
 
 ```xml
 <property name="responsePresenterProvider">
@@ -93,43 +97,18 @@ If you want the user to be able to see/use only the tabular presentation mode:
 </property>
 ```
 
-## Thumbnail:
+## Thumbnail only
 
-If you want the user to be able to see/use only the thumbnail presentation mode:
+Use `CardSearchResponsePresenterProvider` directly as the `responsePresenterProvider`. It supports the same `titleTemplate`, `headingTemplate`, and `contentTemplate` properties as described above.
 
 ```xml
 <property name="responsePresenterProvider">
 	<bean class="com.flower.docs.gui.client.search.response.CardSearchResponsePresenterProvider">
-		<property name="titleTemplate">
-			<list>
-				<bean class="com.flower.docs.domain.i18n.I18NLabel">
-					<property name="language" value="EN" />
-					<property name="value" value="${name}" />
-				</bean>
-				<bean class="com.flower.docs.domain.i18n.I18NLabel">
-					<property name="language" value="FR" />
-					<property name="value" value="${name}" />
-				</bean>
-			</list>
-		</property>
-		<property name="headingTemplate">
-			<list>
-				<bean class="com.flower.docs.domain.i18n.I18NLabel">
-					<property name="language" value="EN" />
-					<property name="value" value="Added ${creationDate}, by ${owner}" />
-				</bean>
-				<bean class="com.flower.docs.domain.i18n.I18NLabel">
-					<property name="language" value="FR" />
-					<property name="value" value="Ajouté le ${creationDate}, par ${owner}" />
-				</bean>
-			</list>
-		</property>
+		<!-- Configure titleTemplate, headingTemplate, contentTemplate as needed -->
 	</bean>
 </property>
 ```
 
 # Export
 
-Search results can be exported as a CSV file.
-
-To ensure optimum performance, the export of results is limited to the first 200 results.
+Search results can be exported as a CSV file. The export is limited to the first 200 results for performance.
