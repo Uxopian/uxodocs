@@ -8,18 +8,18 @@ last_update:
 content_hash: f7fdb4b83e722d0601ed94b88c808253122de06ce51849d0c31f2fe4735edca4
 ---
 
-For each search form, a search request can be set up that is hidden and therefore not visible to users.
+Define a hidden search request on a form to apply criteria, columns, sorting, or aggregations invisible to users.
 
-This request allows you to:
+The `ComponentSearchPresenter` object accepts a `hiddenRequest` property with a `com.flower.docs.domain.search.SearchRequest` class bean. This request allows you to:
 
-- add hidden criteria
-- configure the columns to be displayed
-- set default sorting
-- set the number of results to be displayed
+* add hidden criteria
+* configure the columns to be displayed
+* set default sorting
+* set the number of results to be displayed
+* configure aggregations for tree-view display
 
-The `ComponentSearchPresenter` object accepts a `hiddenRequest` property with a `com.flower.docs.domain.search.SearchRequest` class bean.
 
-:::note[Example]
+**Example**
 
 ```xml
 <bean id="monFormulaire" class="com.flower.docs.gui.client.search.ComponentSearchPresenter"
@@ -71,22 +71,54 @@ The `ComponentSearchPresenter` object accepts a `hiddenRequest` property with a 
 	</bean>
 ```
 
-:::
+# Sorting
 
-<br/>
-
-In some cases, it may be necessary to add tags to the `selectClause` of the hidden request in order to retrieve the values of a tag without the column being visible. This can be achieved by adding the `hiddenColumns` property to the `ComponentSearchPresenter` object, as shown below:
+The default sort order of results is configured using the `orderClauses` property on the `SearchRequest` object. Each `OrderClause` defines a field name and a sort direction.
 
 ```xml
-<property name="hiddenColumns">
-	<list>
-		<value>TypeCourrier</value>
-	</list>
+<property name="orderClauses">
+    <list>
+        <bean class="com.flower.docs.domain.search.OrderClause">
+            <property name="name" value="creationDate" />
+            <property name="ascending" value="false" />
+        </bean>
+    </list>
 </property>
 ```
 
+Multiple sort clauses can be combined. They are applied in order of declaration.
+
+# Aggregation
+
+An aggregation groups search results by field values, displaying them as a tree structure. When a bucket is selected, the search is filtered to match that bucket's criteria.
+
+Aggregations are configured using the `aggregation` property on the `SearchRequest` object with a `FieldAggregation` bean. Nested aggregations create multi-level grouping.
+
+```xml
+<property name="aggregation">
+    <bean class="com.flower.docs.domain.search.FieldAggregation">
+        <property name="nested">
+            <list>
+                <bean class="com.flower.docs.domain.search.FieldAggregation">
+                    <property name="field" value="TypeCourrier" />
+                </bean>
+                <bean class="com.flower.docs.domain.search.FieldAggregation">
+                    <property name="field" value="CanalEntree" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+</property>
+```
+
+# Hidden columns
+
+To retrieve tag values via the `selectClause` without displaying them as visible columns, use the `hiddenColumns` property on the `ComponentSearchPresenter`. See [Search results](/docs/flowerdocs/config/gui/search/results) for details.
+
+
 :::info
 
-- We recommend using the notion of hidden requests to simplify access to components, rather than to secure access to them.
-- Add the `ADD_FILTERS_TO_SELECT` criterion with the `true` value in the request contexts to display the criteria filled in as columns.
-  :::
+* We recommend using the notion of hidden requests to simplify access to components, rather than to secure access to them.
+* Add the `ADD_FILTERS_TO_SELECT` criterion with the `true` value in the request contexts to display the criteria filled in as columns.
+
+:::

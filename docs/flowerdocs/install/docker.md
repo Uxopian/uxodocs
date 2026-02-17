@@ -31,7 +31,7 @@ In the `docker` folder, a `.env` file is present. It may be hidden, depending on
 ## FlowerDocs installation
 
 - Open the `docker` folder
-- Copy the `.env`, `flowerdocs-stack.yml`, `custom-opensearch.yml`, `core.properties`, `gui.properties` files and `arender-hmi` folder into the folder of your choice.
+- Copy the `.env`, `flowerdocs-stack.yml`, `custom-opensearch.yml`, `core.properties`, `gui.properties` files into the folder of your choice.
 - Within the `flowerdocs-stack.yml` file, change the LDAP administrator password `LDAP_ADMIN_PASSWORD`.
 - Run the following command in this folder: `docker-compose -f flowerdocs-stack.yml --profile="*" up`
 
