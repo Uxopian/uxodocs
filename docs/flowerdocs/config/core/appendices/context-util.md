@@ -25,9 +25,9 @@ Two utility objects are available in operation handler scripts. They serve diffe
 
 `RuleUtil` is a static class reference injected by the script engine. Because all its methods are static, call them as `RuleUtil.methodName(...)`.
 
-{{% info %}}
+:::info
 Since `RuleContextUtil` extends `RuleUtil`, calling static methods through the `util` instance (e.g., `util.setTagValue(...)`) also works in GraalJS. However, the recommended convention is to use `RuleUtil` for static calls and `util` for instance calls, to make the intent clear.
-{{% /info %}}
+:::
 
 # Access to services
 
