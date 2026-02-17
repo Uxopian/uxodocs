@@ -46,7 +46,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.generatePdfFiles = void 0;
 const puppeteer = require("puppeteer");
 const pdfMerge = require("easy-pdf-merge");
-const pdfParse = require("pdf-parse");
+const { PDFParse } = require("pdf-parse");
 const join = require("path").join;
 const express = require("express");
 const fs = __importStar(require("fs-extra"));
@@ -715,7 +715,9 @@ async function createPdfFromArticles(
   </html>`;
     await generateContentPdf(contentRawPdfFile);
     const dataBuffer = fs.readFileSync(contentRawPdfFile);
-    const parsedData = await pdfParse(dataBuffer);
+    const pdfParser = new PDFParse({ data: dataBuffer });
+    const parsedData = await pdfParser.getText();
+    await pdfParser.destroy();
     htmlContent = getPageWithFixedToc(
         pluginOptions.footerParser,
         tocLinksInfos,

@@ -3,9 +3,9 @@ title: Hidden request
 sidebar_position: 3
 date: "2004-04-03T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-02-17T14:41:59.174Z'
   author: CI/CD Bot
-content_hash: f7fdb4b83e722d0601ed94b88c808253122de06ce51849d0c31f2fe4735edca4
+content_hash: 5041555190c2e5ec7b3b1145a6294e89c580c061bee5440e4df58e583ac23635
 ---
 
 Define a hidden search request on a form to apply criteria, columns, sorting, or aggregations invisible to users.
