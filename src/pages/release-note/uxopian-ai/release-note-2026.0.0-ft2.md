@@ -1,0 +1,149 @@
+---
+draft: false
+title: "Uxopian AI release notes - 2026.0.0-ft2"
+date: 2026-02-01
+version: "2026.0.0-ft2"
+major_version: "2026"
+latest: true
+description: "Dynamic LLM provider management, standalone Gateway service, expanded statistics API, prompt tester, and admin UI improvements."
+---
+
+# Release Notes: uxopian-ai v2026.0.0-ft2
+
+**Release Date:** February 2026
+**Version:** 2026.0.0-ft2
+
+This release introduces **dynamic LLM provider management**, a **standalone Gateway service**, and significant improvements to the admin panel, statistics, and developer experience.
+
+---
+
+## 🌟 Highlights
+
+### 🔧 Dynamic LLM Provider Configuration
+
+LLM provider configurations are now **dynamic entities** stored in OpenSearch, replacing the previous static YAML-only approach. Providers, models, and their parameters can be created, updated, and deleted at runtime — per tenant — without restarting the service.
+
+**Key changes:**
+
+- New provider configuration entity with global settings and per-model overrides.
+- Full CRUD via the Admin API (`/api/v1/admin/llm/provider-conf`).
+- Per-tenant configuration with merge strategies: `OVERWRITE`, `MERGE`, `CREATE_IF_MISSING`.
+- AES-GCM encryption for API secrets at rest.
+- YAML bootstrapping still supported — configurations defined in `llm-clients-config.yml` are loaded into OpenSearch at startup, then managed dynamically.
+
+See [Configuration Files — Dynamic Provider Configuration](/docs/uxopian-ai/reference/config_files#dynamic-provider-configuration) and [LLM Provider Management](/docs/uxopian-ai/admin/llm_providers).
+
+### 🛡️ Standalone Gateway Service
+
+The **BFF Gateway** is now a standalone service, deployed independently from the AI service. The runtime architecture remains the same (Gateway authenticates, injects headers, proxies to AI service), but the Gateway can now be scaled and updated independently. This simplifies deployment and allows independent scaling of the security layer.
+
+See [Security Model](/docs/uxopian-ai/understanding/security).
+
+### 📊 Statistics Improvements
+
+The statistics API has been expanded from a single endpoint to **5 dedicated endpoints**, each with a configurable time interval parameter:
+
+- `GET /api/v1/admin/stats/global` — Aggregate counters
+- `GET /api/v1/admin/stats/timeseries?interval=DAY` — Time-series trends
+- `GET /api/v1/admin/stats/llm-distribution` — Model usage breakdown
+- `GET /api/v1/admin/stats/top-prompts-time-saved` — ROI ranking
+- `GET /api/v1/admin/stats/feature-adoption` — Advanced feature usage rates
+
+Supported intervals: `HOUR`, `DAY`, `WEEK`, `MONTH`, `YEAR`.
+
+See [Statistics & ROI](/docs/uxopian-ai/admin/statistics) and [REST API Reference](/docs/uxopian-ai/reference/api#administration--statistics).
+
+---
+
+## ✨ New Features
+
+### 🧪 Prompt Tester
+
+The admin panel now includes a **Prompt Tester** that lets you execute prompts directly from the UI:
+
+- Automatically detects Thymeleaf variables in the prompt template.
+- Provides input fields for each variable (text or image).
+- Executes the prompt against the configured LLM and displays the result.
+- Generates the equivalent cURL command for easy reproduction.
+
+See [Prompt Management — Prompt Tester](/docs/uxopian-ai/admin/prompts#4-prompt-tester).
+
+### 🖥️ LLM Provider Admin UI
+
+A complete management interface for LLM provider configurations:
+
+- **Provider List** — Table with search, filter, and CRUD actions.
+- **Provider Editor** — Form to configure provider identity, global settings, and per-model overrides.
+- **Connection Tester** — Test connectivity per model with live status badges.
+
+See [LLM Provider Management](/docs/uxopian-ai/admin/llm_providers).
+
+### 🔑 Fast2 Authentication Provider
+
+New built-in `Fast2Provider` for the Gateway. It validates JWT tokens issued by Fast2 by fetching the public key from a configurable remote endpoint. Configure it as `provider: Fast2Provider` in the Gateway route configuration.
+
+### 📖 Swagger / OpenAPI Improvements
+
+- All admin controllers now use consistent `Admin -` tag prefixes for better organization.
+- Complete request/response schema documentation on all endpoints.
+- Swagger UI is publicly accessible (no authentication required) — ideal for API exploration during development.
+
+---
+
+## 🏗️ Technical Changes
+
+### 🤖 ModelProvider Interface Update
+
+The `ModelProvider` interface has been simplified:
+
+- **Before:** `createChatModelInstance(String modelName)`, `getDefaultModelName()`, `getSupportedModels()`
+- **After:** `createChatModelInstance(LlmModelConf params)`, `createStreamingChatModelInstance(LlmModelConf params)`
+
+The `getDefaultModelName()` and `getSupportedModels()` methods have been **removed** — model metadata is now managed via dynamic provider configurations. Custom providers should extend `AbstractLlmClient` and use `params.getModelName()`, `params.getApiSecret()`, etc.
+
+See [Adding a New LLM Provider](/docs/uxopian-ai/extending/new_provider).
+
+### ⚖️ Parameter Precedence (5 Levels)
+
+The parameter resolution hierarchy has been extended from 3 to **5 levels**:
+
+1. **API Call Parameters** — Values passed directly in the request.
+2. **Prompt Defaults** — `defaultLlmModel`, `defaultLlmProvider` on the Prompt entity.
+3. **Provider Model Config** — Per-model settings in `LlmModelConf`.
+4. **Provider Global Config** — Shared settings in `LlmProviderConf.globalConf`.
+5. **YAML Global Defaults** — `llm.default.*` in `llm-clients-config.yml`.
+
+### 📦 Dependency Upgrades
+
+| Dependency | Previous | Current |
+| :--------- | :------- | :------ |
+| Spring Boot | 3.5.x | 3.5.10 |
+| LangChain4J | 1.x | 1.11.0 |
+| OpenSearch Client | 2.x | 3.5.0 |
+| Docker Base Image | 1.0.x | 1.0.4 |
+
+---
+
+## 🎨 Frontend Changes
+
+- Improved state management for better performance and responsiveness.
+- Fixed edge cases in markdown rendering within chat responses.
+- Improved auto-scroll behavior during streaming responses.
+
+---
+
+## 🔄 Migration Notes
+
+### From v2026.0.0-ft1-rc2
+
+1. **LLM Configuration**: The `llm-clients-config.yml` format has changed. The previous `supported-models` lists under each provider section are **no longer supported**. You must migrate your provider and model definitions to the new `llm.provider.globals` / `llm.provider.tenants` structure. These configurations are loaded into OpenSearch at startup and can then be managed dynamically via the Admin API or UI. See [Configuration Files — Dynamic Provider Configuration](/docs/uxopian-ai/reference/config_files#dynamic-provider-configuration) for the new format and a full YAML example.
+
+2. **Gateway Deployment**: The Gateway is now deployed as a separate service. Update your Docker compose to use the dedicated Gateway image (`uxopian-ai/gateway-service`). The configuration format (`application.yml` with routes) remains the same.
+
+3. **Custom LLM Providers**: If you have custom `ModelProvider` implementations, update them to accept `LlmModelConf` instead of `String` in factory methods. Extend `AbstractLlmClient` for convenience. See the [updated guide](/docs/uxopian-ai/extending/new_provider).
+
+4. **API Secret Encryption**: Set the `APP_SECURITY_SECRET_KEY` environment variable (Base64-encoded AES key) to enable encryption of provider API secrets stored in OpenSearch. If not set, secrets are stored in clear text.
+
+---
+
+> Ready to start? Check out the [Quick Start](/docs/uxopian-ai/getting_started/quickstart) or the full [Installation Guide](/docs/uxopian-ai/getting_started/installation_guide).

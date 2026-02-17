@@ -2,65 +2,105 @@
 title: Requirements
 sidebar_position: 1
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-17T10:47:49.798Z'
   author: CI/CD Bot
-content_hash: b0d589bbcc2e1cff86186467d786981a8869607b79bc51a582d9c3b82dca0e5d
+content_hash: d83146bcf5e0a3d7ff66daa7c76c1d19b86b09948645b39a03dff0e19a606d95
 ---
 
-## Operating system
+ARender Rendition runs on a wide range of enterprise environments.  
+The platforms listed below are **officially supported**, and the Docker (Ubuntu-based) image is **QA-validated**.  
+Other platforms may work but are not part of the default QA matrix.
 
-| Category | Requirement                                                                                                                                                                                                                 |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Windows  | Windows Server 2016 or higher                                                                                                                                                                                               |
-| Linux    | Kernel 2.6 or greater, glibc 2.14 or greater, minimal recommended version for Linux distributions (due to our software requirements): RedHat (7 or 8), CentOS (7), Debian (8), Ubuntu (14.04+), Amazon Linux AMI (2016.09+) |
+---
 
-## Minimal hardware
+## 1. Java Requirements (Mandatory)
 
-| Category                      | Minimum | Advised                                                                                  |
-| ----------------------------- | ------- | ---------------------------------------------------------------------------------------- |
-| Number of rendition server(s) | 1       | 2 (for high availability)                                                                |
-| RAM                           | 8GB     | 16GB                                                                                     |
-| CPU (vCPU)                    | 4       | 8                                                                                        |
-| CPU type                      | 64Bits  | 64Bits                                                                                   |
-| Storage                       | 20Go    | The maximum between 20Go and a storage where a full day of temporary files can be stored |
+ARender Rendition requires **Java 11**.
 
-## Port configuration
+| Component                    | Requirement                                            |
+|------------------------------|--------------------------------------------------------|
+| **Java Version**             | **JDK 11 (LTS)**                                       |
+| **Recommended Distribution** | Eclipse Temurin 11                                     |
+| **Architecture**             | x86_64                                                 |
+| **Notes**                    | Java 17+ are not supported in the 2023.x release line. |
 
-The ports of the different micro-services need to be free to use and are as follows:
+Download:  
+https://adoptium.net/temurin/releases?version=11
 
-| Service        | Protocols  | Default listening port |
-| :------------- | :--------: | :--------------------: |
-| Service broker | HTTP/HTTPS |          8761          |
-| Text handler   |    HTTP    |          8899          |
-| Renderer       |    HTTP    |          9091          |
-| Converter      |    HTTP    |         19999          |
+---
 
-## Software requirement
+## 2. Supported Operating Systems
 
-| Software     | Requirement                                                                                       |
-| ------------ | ------------------------------------------------------------------------------------------------- |
-| Java Runtime | JRE 1.8 64 bits Minimum, OpenJDK 11 advised. Oracle JDK are supported, JRE IBM J9 is unsupported. |
+The following systems are supported for standalone Rendition deployment:
 
-If the JVM used is not **64 bits**, the rendition will now stop its boot and
-warn in the logs/console that the version of the JVM used is incorrect.
+| Operating System               | Type    | Vendor Support End   | Status       |
+|--------------------------------|---------|----------------------|--------------|
+| **Windows Server 2022**        | Windows | Oct 14, 2031         | âœ”ï¸ Supported |
+| **Red Hat Enterprise Linux 9** | Linux   | ~2032                | âœ”ï¸ Supported |
+| **Ubuntu 22.04 LTS**           | Linux   | Apr 2027 (ESM 2032)  | âœ”ï¸ Supported |
+| **Amazon Linux 2023**          | Linux   | Mar 2026             | âœ”ï¸ Supported |
 
-## Access rights
+> Primary QA validation is performed on the **Docker Ubuntu jammy 22.04 base image**.
 
-### Installation
+---
 
-The user must have the following rights:
+## 3. Hardware Requirements
 
-- Folder creation,
-- Service creation.
+### Recommended hardware sizing
 
-### Launch
+| Sizing Tier     | CPU      | RAM    | Disk                                                                                     |
+|-----------------|----------|--------|------------------------------------------------------------------------------------------|
+| **Minimum**     | 4 cores  | 8 GB   | 20 GB                                                                                    |
+| **Recommended** | 8 cores  | 16 GB  | The maximum between 20Go and a storage where a full day of temporary files can be stored |
 
-The user must have the following rights:
+---
 
-- Read and execution for the files into the Rendition folder,
-- Read and execution for third party softwares.
+## 4. Network & Ports
 
-## Amazon Web Services (AWS) specific
+Rendition exposes several internal services.  
+These ports must be **available on the host**.
 
-Ensure the role attached to the EC2 instance has permissions to describe the instance if it needs to be identified by a
+| Service            | Protocol   | Default Port |
+|--------------------|------------|--------------|
+| **Service Broker** | HTTP/HTTPS | **8761**     |
+| **Text Handler**   | HTTP       | **8899**     |
+| **Renderer**       | HTTP       | **9091**     |
+| **Converter**      | HTTP       | **19999**    |
+
+> **Ports can be customized** via configuration.
+
+---
+
+## 5. File System & Permissions
+
+### Installation User
+
+The user performing the installation must have:
+
+- Permission to create folders
+- Permission to create Windows/Linux services
+
+### Runtime User
+
+The user running the Rendition service must have:
+
+- Read & execute rights on all Rendition files
+- Read & execute rights on external software
+
+---
+
+## 6. Cloud-Specific Notes
+
+### Amazon Web Services (AWS)
+
+Ensure the role attached to the EC2 instance has permissions to describe the instance if it needs to be identified by a 
 tag.
+
+## 7. Notes & Best Practices
+
+- Ensure antivirus or endpoint protection does not block temporary file creation.
+- Logs and temporary files should be placed on fast storage (SSD recommended).
+
+---
+
+If you need assistance with sizing or infrastructure validation, please contact **ARender Support**.

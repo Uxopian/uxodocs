@@ -1,10 +1,10 @@
 ---
 title: Overview
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-17T10:47:49.798Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 234649b3114d16b5ebb13555c2527f297affe2f60d6b2c341dd3fb57e9615b78
+content_hash: b0a523e1d710caacc5e08c40e0830e88563b67aef27ba6c4e77c2fffa76418da
 ---
 
 :::warning
@@ -12,6 +12,17 @@ content_hash: 234649b3114d16b5ebb13555c2527f297affe2f60d6b2c341dd3fb57e9615b78
 
 If not, find more information on [https://kubernetes.io/docs/home/](https://kubernetes.io/docs/home/).
 :::
+
+## Supported Kubernetes Platforms
+
+ARender is compatible with the following orchestration environments:
+
+| Platform               | Status        |
+|------------------------|---------------|
+| **Kubernetes**         | ✔️ Supported  |
+| **Red Hat OpenShift**  | ✔️ Supported  |
+| **Amazon EKS**         | ✔️ Supported  |
+| **Azure AKS**          | ✔️ Supported  |
 
 ## TL;DR
 

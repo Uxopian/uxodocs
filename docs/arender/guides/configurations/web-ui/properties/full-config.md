@@ -2,9 +2,9 @@
 title: Properties
 sidebar_position: 9
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-17T10:47:49.798Z'
   author: CI/CD Bot
-content_hash: 980b67d1c65d7857dd6417af626a309e0a17b6127ed2db80d1d339b165dd21db
+content_hash: 9ba6deca8c2884eaec3649e5d24620f7d2507b9e6303deb9309ab868a10cf4a1
 ---
 
 ## about
@@ -389,12 +389,73 @@ content_hash: 980b67d1c65d7857dd6417af626a309e0a17b6127ed2db80d1d339b165dd21db
 
 ## shortCut
 
-| property               | Description                       | type    | default |
-| ---------------------- | --------------------------------- | ------- | ------- |
-| shortCut.copy.enabled  | Enables copy shortcut with CRTL+C | boolean | true    |
-| shortCut.cut.enabled   | Enables copy shortcut with CRTL+X | boolean | true    |
-| shortCut.print.key     | Configures a print key shortcut   | String  | p       |
-| shortCut.print.enabled | Enables a print key shortcut      | boolean | true    |
+:::note 
+To disable any shortcut, leave its `.key` property empty.
+:::
+
+| property                      | Description                     | type    | default    |
+| ----------------------------- | ------------------------------- | ------- | ---------- |
+| shortCut.copy.enabled         | Enable Copy (Ctrl-c & Ctrl-x)   | boolean | true       |
+| shortcut.print.key            | Print                           | String  | p          |
+| shortcut.print.ctrl           |                                 | boolean | true       |
+| shortcut.print.shift          |                                 | boolean | false      |
+| shortcut.print.alt            |                                 | boolean | false      |
+| shortcut.zoomin.key           | Zoom In                         | String  | k          |
+| shortcut.zoomin.ctrl          |                                 | boolean | true       |
+| shortcut.zoomin.shift         |                                 | boolean | false      |
+| shortcut.zoomin.alt           |                                 | boolean | false      |
+| shortcut.zoomout.key          | Zoom Out                        | String  | i          |
+| shortcut.zoomout.ctrl         |                                 | boolean | true       |
+| shortcut.zoomout.shift        |                                 | boolean | false      |
+| shortcut.zoomout.alt          |                                 | boolean | false      |
+| shortcut.fullscreen.key       | Fullscreen                      | String  | q          |
+| shortcut.fullscreen.ctrl      |                                 | boolean | true       |
+| shortcut.fullscreen.shift     |                                 | boolean | false      |
+| shortcut.fullscreen.alt       |                                 | boolean | false      |
+| shortcut.search.key           | Search                          | String  | f          |
+| shortcut.search.ctrl          |                                 | boolean | true       |
+| shortcut.search.shift         |                                 | boolean | false      |
+| shortcut.search.alt           |                                 | boolean | false      |
+| shortcut.save.key             | Save                            | String  | s          |
+| shortcut.save.ctrl            |                                 | boolean | true       |
+| shortcut.save.shift           |                                 | boolean | false      |
+| shortcut.save.alt             |                                 | boolean | false      |
+| shortcut.duplicate.key        | Duplicate Annotation            | String  | d          |
+| shortcut.duplicate.ctrl       |                                 | boolean | true       |
+| shortcut.duplicate.shift      |                                 | boolean | false      |
+| shortcut.duplicate.alt        |                                 | boolean | false      |
+| shortcut.about.key            | About Dialog                    | String  | ,          |
+| shortcut.about.ctrl           |                                 | boolean | true       |
+| shortcut.about.shift          |                                 | boolean | false      |
+| shortcut.about.alt            |                                 | boolean | false      |
+| shortcut.delthumb.key         | Delete Thumbnail                | String  | Delete     |
+| shortcut.delthumb.ctrl        |                                 | boolean | false      |
+| shortcut.delthumb.shift       |                                 | boolean | true       |
+| shortcut.delthumb.alt         |                                 | boolean | false      |
+| shortcut.nextPage.key         | Next Page                       | String  | ArrowRight |
+| shortcut.nextPage.ctrl        |                                 | boolean | false      |
+| shortcut.nextPage.shift       |                                 | boolean | false      |
+| shortcut.nextPage.alt         |                                 | boolean | false      |
+| shortcut.previousPage.key     | Previous Page                   | String  | ArrowLeft  |
+| shortcut.previousPage.ctrl    |                                 | boolean | false      |
+| shortcut.previousPage.shift   |                                 | boolean | false      |
+| shortcut.previousPage.alt     |                                 | boolean | false      |
+| shortcut.movePageDown.key     | Move Page Down                  | String  | ArrowDown  |
+| shortcut.movePageDown.ctrl    |                                 | boolean | false      |
+| shortcut.movePageDown.shift   |                                 | boolean | false      |
+| shortcut.movePageDown.alt     |                                 | boolean | false      |
+| shortcut.movePageUp.key       | Move Page Up                    | String  | ArrowUp    |
+| shortcut.movePageUp.ctrl      |                                 | boolean | false      |
+| shortcut.movePageUp.shift     |                                 | boolean | false      |
+| shortcut.movePageUp.alt       |                                 | boolean | false      |
+| shortcut.pageDown.key         | Scroll Page Down                | String  | PageDown   |
+| shortcut.pageDown.ctrl        |                                 | boolean | false      |
+| shortcut.pageDown.shift       |                                 | boolean | false      |
+| shortcut.pageDown.alt         |                                 | boolean | false      |
+| shortcut.pageUp.key           | Scroll Page Up                  | String  | PageUp     |
+| shortcut.pageUp.ctrl          |                                 | boolean | false      |
+| shortcut.pageUp.shift         |                                 | boolean | false      |
+| shortcut.pageUp.alt           |                                 | boolean | false      |
 
 ## shortcut
 
@@ -420,6 +481,9 @@ content_hash: 980b67d1c65d7857dd6417af626a309e0a17b6127ed2db80d1d339b165dd21db
 | shortcut.annotation.measure.enabled    | Enables the shortcut for arrow distance creation with CTRL + key      | boolean | true    |
 | shortcut.annotation.stamp.key          | Configures a key shortcut for stamp creation                          | integer | 0       |
 | shortcut.annotation.stamp.enabled      | Enables the shortcut for stamp creation with CTRL + key               | boolean | true    |
+| toolbar.link.hasOpacity                | Enables opacity support for link annotations                          | boolean | true    | 
+| toolbar.link.hasColor                  | Enables color support for link annotations                            | boolean | true    | 
+| toolbar.link.hasStyle                  | Enables style support for link annotations                            | boolean | true    |
 
 ## startup
 

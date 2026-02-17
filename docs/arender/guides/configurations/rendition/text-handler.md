@@ -1,10 +1,10 @@
 ---
 title: "Text handler"
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-02-17T10:47:49.798Z'
   author: CI/CD Bot
 sidebar_position: 3
-content_hash: 07e9b8e10af14e6d8348758d8eb277683415155dcbe2f1dec91e34d8cba036e3
+content_hash: b06861a0f1dfe9594120d53bd4b21d82dbeff9217eb66ff770eb78946da66594
 ---
 
 ## Digital signature management
@@ -13,7 +13,7 @@ ARender supports the display and verification of digital signatures in PDF files
 This feature is disabled by default, but can be enabled in the settings.
 Once enabled, signature information becomes visible, and trusted certificates can be configured to verify the authenticity of signatures in documents.
 
-**application.properties situé dans ARender-Rendition-2023.X.Y\modules\PDFBoxEngine**
+**application.properties situé dans ARender-Rendition-2023.17.0\modules\PDFBoxEngine**
 
 | Description                                                                                                  | Parameter Key                  | Default value            | Type    |
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------ | ------------------------ | ------- |

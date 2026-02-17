@@ -1,0 +1,10 @@
+#mcp:
+#  client:
+#    name: uxopian-ai-mcp-server
+#    log-requests: true
+#  sse:
+#  url: ${MCP_SSE_URL:http://localhost:8081/uxopian/ai/sse}
+#  level:
+#    org:
+#      springframework:
+#        web: TRACE

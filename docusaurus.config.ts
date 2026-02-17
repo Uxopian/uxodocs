@@ -68,7 +68,7 @@ const config: Config = {
                 routeBasePath: "docs/arender",
                 sidebarPath: require.resolve("./sidebars_arender.ts"),
                 lastVersion: "current",
-                versions: { current: { label: "v2023.14.0" } },
+                versions: { current: { label: "v2023.17.0" } },
                 showLastUpdateTime: true,
             },
         ],
