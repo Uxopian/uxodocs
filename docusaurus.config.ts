@@ -92,7 +92,7 @@ const config: Config = {
                 routeBasePath: "docs/flowerdocs",
                 sidebarPath: require.resolve("./sidebars_flowerdocs.ts"),
                 lastVersion: "current",
-                versions: { current: { label: "v2025.3.0" } },
+                versions: { current: { label: "v2025.4.0" } },
                 showLastUpdateTime: true,
             },
         ],

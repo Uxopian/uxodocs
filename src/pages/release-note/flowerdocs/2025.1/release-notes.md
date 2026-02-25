@@ -29,7 +29,7 @@ Highlights include a redesigned login page for improved visual comfort, simplifi
 
 # Upgrade Notes
 
-You can find out about the major technical changes in this version by consulting the upgrade notes [here](./upgrade-notes)
+You can find out about the major technical changes in this version by consulting the upgrade notes [here](../upgrade-notes)
 
 # For Functional Users
 
@@ -101,7 +101,7 @@ Addition of an Asynchronous column in the Operations Handlers table to facilitat
 
 A new parameter has been added to limit the document classes created directly from a virtual folder: children
 ![Image](pathname:///img/flowerdocs/release-notes/DossierClientEnfant_EN.png)![Image](pathname:///img/flowerdocs/release-notes/DossierClientEnfant_XML.png)
-To find out more, see the upgrade notes [here](./upgrade-notes#adding-documents-made-easy)
+To find out more, see the upgrade notes [here](../upgrade-notes#adding-documents-made-easy)
 
 ## 👨‍💻 CLM
 
@@ -120,7 +120,7 @@ These two new APIs will make it easier to create or update a document. They will
 ## 👨‍💻 Login page, SSO activation only
 
 The configuration of the login page allows you to activate only the SSO (Single Sign On) connection to enhance the security of the platform
-To find out more, see the upgrade notes [here](./upgrade-notes#login-page).
+To find out more, see the upgrade notes [here](../upgrade-notes#login-page).
 
 # For operators
 
@@ -137,7 +137,7 @@ A user's saved searches that have been shared with other users will be kept so a
 ## 💻 OpenSearch, using alias
 
 In order to facilitate operations, OpenSearch indexes are now queried via their aliases instead of their names. It is still possible to query the index directly, but this is deprecated.
-To find out more, see the upgrade note [here](./upgrade-notes#exploitation).
+To find out more, see the upgrade note [here](../upgrade-notes#exploitation).
 
 ## 👨‍💻 End points
 

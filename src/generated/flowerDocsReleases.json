@@ -1,12 +1,21 @@
 [
   {
+    "version": "2025.4.0",
+    "majorVersion": "2025",
+    "date": "2026-02-25",
+    "description": "FlowerDocs 2025.4.0 Release notes is a minor release that includes bug fixes and security updates",
+    "hasUpgradeNotes": true,
+    "slug": "2025.4.0",
+    "latest": true
+  },
+  {
     "version": "2025.3.0",
     "majorVersion": "2025",
     "date": "2025-12-01",
     "description": "Version **2025.3.0** has been developed to enhance the clarity, efficiency and user-friendliness of FlowerDocs.  ",
     "hasUpgradeNotes": true,
     "slug": "2025.3.0",
-    "latest": true
+    "latest": false
   },
   {
     "version": "2025.2.0",

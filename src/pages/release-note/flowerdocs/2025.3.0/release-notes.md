@@ -30,7 +30,7 @@ Key features include streamlined report creation, CSV export synchronised with t
 
 # Upgrade Notes
 
-You can find out about the major technical changes in this version by consulting the upgrade notes [here](./upgrade-notes)
+You can find out about the major technical changes in this version by consulting the upgrade notes [here](../upgrade-notes)
 
 # For Users
 
