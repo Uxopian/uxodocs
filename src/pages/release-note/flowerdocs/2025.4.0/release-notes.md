@@ -52,7 +52,7 @@ FlowerDocs now includes ARender 2023.17.0, which incorporates numerous enhanceme
 
 For comprehensive details on these developments, please refer to the [Release Notes ARender](https://docs.arender.io/fr/releases/)
 
-## 👨‍💻 Data entry: work faster with copy and paste
+## 💻 Data entry: work faster with copy and paste
 
 In our ongoing efforts to optimize the user experience, we have decided to disable the Lasso feature by default. This change is intended to streamline data entry by promoting the use of copy and paste, a more direct and natural method common to all everyday applications.
 
