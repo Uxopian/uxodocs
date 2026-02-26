@@ -28,7 +28,7 @@ const ProductList = [
     },
     {
         title: "FlowerDocs",
-        version: "v2025.3.0",
+        version: "v2025.4.0",
         logo: "/img/flowerdocs/logo_flower_white.png",
         description:
             "Electronic document management (EDM) solution to organize, manage and exploit your document content",

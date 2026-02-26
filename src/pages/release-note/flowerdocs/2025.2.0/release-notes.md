@@ -28,7 +28,7 @@ FlowerDocs **2025.2.0** enhances the reporting experience with a more intuitive 
 
 # Upgrade Notes
 
-You can find out about the major technical changes in this version by consulting the upgrade notes [here](./upgrade-notes)
+You can find out about the major technical changes in this version by consulting the upgrade notes [here](../upgrade-notes)
 
 # For Functional Users
 
@@ -70,7 +70,7 @@ Compared to SOAP, REST is **lighter, more standardized, and widely adopted in mo
 Ideal for partners and integrators building middleware or custom automations, this REST client shortens time-to-integration while providing a reliable, standardized foundation.
 
 :::info
-Starting with this version, **the SOAP API and its associated Java client are deprecated**. We strongly encourage our partners and clients to plan their migration to the Java REST client to benefit from improved performance, simplified maintenance, and stronger compatibility with modern standards, by following the upgrade notes [here](./upgrade-notes#technical-changes)
+Starting with this version, **the SOAP API and its associated Java client are deprecated**. We strongly encourage our partners and clients to plan their migration to the Java REST client to benefit from improved performance, simplified maintenance, and stronger compatibility with modern standards, by following the upgrade notes [here](../upgrade-notes#technical-changes)
 :::
 
 ## 👨‍💻 New endpoints
@@ -81,7 +81,7 @@ New REST endpoints are available:
 - to manipulate reservations by providing a list of component references
 - to retrieve a token with an expiry date
 
-See details in the upgrade notes: [here](./upgrade-notes#adding-methods)
+See details in the upgrade notes: [here](../upgrade-notes#adding-methods)
 
 ## 💻 Administration, directory management
 

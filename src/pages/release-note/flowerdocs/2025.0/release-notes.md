@@ -28,14 +28,14 @@ Version 2025.0 brings significant improvements in terms of performance and usabi
 
 # Upgrade Notes
 
-You can find out about the major technical changes in this version by consulting the upgrade notes [here](./upgrade-notes)
+You can find out about the major technical changes in this version by consulting the upgrade notes [here](../upgrade-notes)
 
 # For Functional Users
 
 ## 💻 Optimised performance \!
 
 The performance of FlowerDocs has been optimised to ensure that it runs smoothly, whatever the volume of documents, tasks and files or the complexity of the data model. In a test with 100 simultaneous users and 1,000,000 documents and tasks, the time taken for one user to complete the scenario was halved.
-To find out more, read the upgrade notes [here](./upgrade-notes#performances)
+To find out more, read the upgrade notes [here](../upgrade-notes#performances)
 
 ## 💻 ARender viewer version upgrade to 2023.4.0
 
@@ -68,7 +68,7 @@ It is possible to modify certain standard configurations by following the docume
 
 Page rotation management has been optimized for more efficient processing. In this new version, a user does not need to have annotation rights to save a page rotation. By default, as soon as a user has the right to consult a document, he or she has the right to rotate misaligned pages, and any changes made are automatically saved.
 🛠️ Technical details :  
-Create a new ACL: acl-rotation, which is applied to all rotation annotations. To find out more, see the upgrade notes: [here](./upgrade-notes#arender)
+Create a new ACL: acl-rotation, which is applied to all rotation annotations. To find out more, see the upgrade notes: [here](../upgrade-notes#arender)
 
 ## 💻 Optimized display and use of versions
 
@@ -131,7 +131,7 @@ Permission management has been simplified for the following elements:
 
 ## 👨‍💻 ScriptOperationHandler
 
-The Nashorn JavaScript engine is replaced by GraalJS. To find out more, see the upgrade note [here](./upgrade-notes#obsolete-replaced-configuration-properties)
+The Nashorn JavaScript engine is replaced by GraalJS. To find out more, see the upgrade note [here](../upgrade-notes#obsolete-replaced-configuration-properties)
 
 ## 👨‍💻 New endpoints around files added as Document
 
@@ -151,13 +151,13 @@ Two new APIs are available:
 - 👨‍💻 In virtual folders, the ShowNodeContent parameter was not used.
 - 👨‍💻 The Mail Editor module.
 - 👨‍💻 The OperationHandlerAddDisplayToSearchOperationHandler was not used.
-- 👨‍💻 Removal of scope rules and associated endpoints: getRules, setRules and getAll from ScopeService. To find out more, see the upgrade note: [here](./upgrade-notes#removed-methods)
+- 👨‍💻 Removal of scope rules and associated endpoints: getRules, setRules and getAll from ScopeService. To find out more, see the upgrade note: [here](../upgrade-notes#removed-methods)
 
 # For operators
 
 ## 💻 ARender viewer version upgrade to 2023.4.0
 
-The ARender GUI is now an application in its own right, and is no longer embedded in FlowerDocs GUI. To find out more, see the upgrade notes [here](./upgrade-notes#added-components)
+The ARender GUI is now an application in its own right, and is no longer embedded in FlowerDocs GUI. To find out more, see the upgrade notes [here](../upgrade-notes#added-components)
 
 ## 💻 OpenSearch
 
@@ -166,7 +166,7 @@ Delete unused OpenSearch indices:
 - \*-flower-docs-content
 - \*-flower-docs-version
 
-To find out more, see the upgrade notes [here](./upgrade-notes#scripting-requirements-and-api-calls)
+To find out more, see the upgrade notes [here](../upgrade-notes#scripting-requirements-and-api-calls)
 
 ## 💻 RFC standard support
 
