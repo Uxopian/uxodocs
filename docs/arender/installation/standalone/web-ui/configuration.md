@@ -25,10 +25,10 @@ In order to define one or several rendition servers, edit the **arender-custom-s
 configuration file as follows:
 
 ```cfg
-arender.server.rendition.hosts=&#123;rendition_server_1:8761/&#125;,&#123;rendition_server_2:8761/&#125;,&#123;rendition_server_n:8761/&#125;
+arender.server.rendition.hosts={rendition_server_1:8761/},{rendition_server_2:8761/},{rendition_server_n:8761/}
 ```
 
-The value of _"&#123;rendition_server_x&#125;"_ here has to be changed by the right rendition server address.
+The value of _"{rendition_server_x}"_ here has to be changed by the right rendition server address.
 
 _(Don't forget to reboot your Web-UI)_
 

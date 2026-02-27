@@ -42,36 +42,36 @@ curl -X 'POST' \
   'http://localhost:8761/transformations' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
-  -d '&#123;
+  -d '{
   "annotations": null,
   "format": "pdf",
   "transformationDetails": [
-
+    {
       "transformationElements": [
-
+        {
           "documentId": "docId1",
           "pagesSelectionList": [
-
+            {
               "maxPage": 4,
               "minPage": 1
-            &#125;,
-
+            },
+            {
               "maxPage": 1,
               "minPage": 1
-
+            }
           ]
         },
-
+        {
           "documentId": "docId2",
           "pagesSelectionList": [
-
+            {
               "maxPage": 1,
               "minPage": 1
-
+            }
           ]
-
+        }
       ]
-
+    }
   ]
 }'
 ```
@@ -86,36 +86,36 @@ curl -X 'POST' \
   'http://localhost:8761/transformations' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
-  -d '&#123;
+  -d '{
   "annotations": null,
   "format": "pdf",
   "transformationDetails": [
-
+    {
       "transformationElements": [
-
+        {
           "documentId": "docId1",
           "pagesSelectionList": [
-
+            {
               "maxPage": 1,
               "minPage": 1
-
+            }
           ]
-
+        }
       ]
-    &#125;,
-
+    },
+    {
       "transformationElements": [
-
+        {
           "documentId": "docId2",
           "pagesSelectionList": [
-
+            {
               "maxPage": 1,
               "minPage": 1
-
+            }
           ]
-
+        }
       ]
-
+    }
   ]
 }'
 ```
@@ -139,7 +139,7 @@ curl -X 'POST' \
   -d '{
   "annotations": {
     "annotations": [
-
+      {
         "type": "com.arondor.viewer.annotation.api.SquareElemType",
         "documentId": {
           "id": "docId1"
@@ -155,9 +155,9 @@ curl -X 'POST' \
           "r": 0,
           "g": 255,
           "b": 0
-
+        }
       },
-
+      {
         "type": "com.arondor.viewer.annotation.api.FreetextElemType",
         "color": {
           "r": 0,
@@ -183,7 +183,7 @@ curl -X 'POST' \
         "width": 2.0,
         "defaultappearance": "0 R 1 0 0"
       },
-
+      {
         "type": "com.arondor.viewer.annotation.api.TextElemType",
         "color": {
           "r": 250,
@@ -210,69 +210,69 @@ curl -X 'POST' \
         "contents": "This a sticky note",
         "icon": "Note"
       },
-
+      {
         "type": "com.arondor.viewer.annotation.api.LineElemType",
-        "color": &#123;
+        "color": {
           "r": 100,
           "g": 100,
           "b": 100
-        &#125;,
-        "documentId": &#123;
+        },
+        "documentId": {
           "id": "docId2"
-        &#125;,
+        },
         "page": 0,
-        "position": &#123;
+        "position": {
           "x": 350.0,
           "y": 300.0,
           "w": 150.0,
           "h": 50.0
-        &#125;,
-        "contentsRichtext": &#123;
+        },
+        "contentsRichtext": {
           "type": "com.arondor.viewer.annotation.api.RichtextElemType",
           "value": "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body><p class=\"arrowDistance\">1.84in</p></body></html>"
-        &#125;,
-        "start": &#123;
+        },
+        "start": {
           "x": 350.0,
           "y": 300.0
-        &#125;,
-        "end": &#123;
+        },
+        "end": {
           "x": 450.0,
           "y": 350.0
-        &#125;,
+        },
         "head": "OPEN_ARROW",
         "tail": "NONE",
         "width": 2.0
-
+      }
     ]
   },
   "format": "pdf",
   "transformationDetails": [
-
+    {
       "transformationElements": [
-
+        {
           "documentId": "docId1",
           "pagesSelectionList": [
-
+            {
               "maxPage": 4,
               "minPage": 1
             },
-
+            {
               "maxPage": 1,
               "minPage": 1
-
+            }
           ]
         },
-
+        {
           "documentId": "docId2",
           "pagesSelectionList": [
-
+            {
               "maxPage": 1,
               "minPage": 1
-
+            }
           ]
-
+        }
       ]
-
+    }
   ]
 }'
 ```
@@ -290,42 +290,42 @@ curl -X 'POST' \
   -d '{
   "annotations": {
     "annotations": [
-
+      {
         "type": "com.arondor.viewer.annotation.api.SquareElemType",
         "id": "21ea93fe-ca56-4b25-9a6b-e8091d45fd35",
         "creationDate": 1667828859995,
         "flags" : {
         },
-        "documentId": &#123;
+        "documentId": {
           "id": "docId"
-        &#125;,
+        },
         "page": 0,
-        "position": &#123;
+        "position": {
           "x": 10.0,
           "y": 10.0,
           "w": 100.0,
           "h": 100.0
-        &#125;,
-        "interiorColor": &#123;
+        },
+        "interiorColor": {
           "r": 0,
           "g": 255,
           "b": 0
-        &#125;,
+        },
         "opacity": 0.5,
         "height": 90.0,
         "width": 180.0
-
+      }
     ]
   },
   "format": "pdf-fdf",
   "transformationDetails": [
-
+    {
       "transformationElements": [
-
+        {
           "documentId": "docId"
-
+        }
       ]
-
+    }
   ]
 }'
 ```
@@ -340,20 +340,20 @@ curl -X 'POST' \
   'http://localhost:8761/transformations' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
-  -d '&#123;
+  -d '{
   "annotations": null,
   "format": "pdf",
   "transformationDetails": [
-
+    {
       "transformationElements": [
-
+        {
           "documentId": "docId1"
-        &#125;,
-
+        },
+        {
           "documentId": "docId2"
-
+        }
       ]
-
+    }
   ]
 }'
 ```
@@ -373,18 +373,18 @@ curl -X 'POST' \
   "annotations": null,
   "format": "zip",
   "transformationDetails": [
-
+    {
       "transformationElements": [
-
+        {
           "documentId": "docId1",
           "documentTitle": "documentTitle1"
         },
-
+        {
           "documentId": "docId2",
           "documentTitle": "documentTitle2"
-
+        }
       ]
-
+    }
   ]
 }'
 ```

@@ -21,11 +21,11 @@ Here are some examples:
 
 - Open a WEB document
 
-    `http://&#123;ARENDER_SERVER&#125;/ARender/ARender.html?url=...`
+    `http://{ARENDER_SERVER}/ARender/ARender.html?url=...`
 
 - Open a document using a specific connector providing a user id and a security token
 
-    `http://&#123;ARENDER_SERVER&#125;/ARender.html?bean=myConnector&amp;user=123456&amp;token=9GISU9SG4Z`
+    `http://{ARENDER_SERVER}/ARender.html?bean=myConnector&amp;user=123456&amp;token=9GISU9SG4Z`
 
 ### Configure authorized URLs
 

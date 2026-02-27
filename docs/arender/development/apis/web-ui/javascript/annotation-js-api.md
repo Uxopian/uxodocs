@@ -51,9 +51,9 @@ getARenderJS()
  * @param {string} documentId - ID of the document
  * @param {string} annotation - The json of the deleted annotation from the document
  */
-getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationDeletedEvent(function(documentId, annotation) &#123;
+getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationDeletedEvent(function(documentId, annotation) {
   console.log("Annotation deleted. DocumentId " + documentId + " annotation: " + annotation);
-&#125;);
+});
 ```
 
 ### Register to updated annotation event
@@ -71,9 +71,9 @@ getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationDeletedEvent(functio
  * @param {string} documentId - ID of the document
  * @param {string} annotation - Updated annotation from the document
  */
-getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationUpdatedEvent(function(documentId, annotation) &#123;
+getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationUpdatedEvent(function(documentId, annotation) {
   console.log("Annotation updated. DocumentId " + documentId + " annotation: " + annotation);
-&#125;);
+});
 ```
 
 ### Register to Page rotated event

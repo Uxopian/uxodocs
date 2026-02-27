@@ -13,7 +13,7 @@ This API allows you to retrieve a conversion order previously requested.
 Entry point:
 
 ```bash
-GET /conversions/&lt;ConversionOrderId&gt;
+GET /conversions/<ConversionOrderId>
 ```
 
 Resource path:
@@ -42,8 +42,8 @@ curl -X 'GET' \
 
 Response sample:
 
-```bash
-
+```json
+{
   "conversionOrderId": {
     "id": "string"
   },
@@ -55,5 +55,5 @@ Response sample:
   "processingTime": 0,
   "queuedDate": "2023-06-19T16:12:24.476Z",
   "queuedTime": 0
-
+}
 ```

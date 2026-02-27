@@ -10,7 +10,7 @@ content_hash: 2e64352545bb917dfd94f4269411baf1eb368b10e4c39bc456771231fe05dddb
 
 The servlet _updateDocumentMetadataServlet_ is dedicated to updating Filenet document metadata with a POST call.
 
-Here is an example of the POST call, where _&#123;documentId&#125;_ is to be replaced by the documentId of the targeted document :
+Here is an example of the POST call, where _{documentId}_ is to be replaced by the documentId of the targeted document :
 
 ```cfg
 `http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}`

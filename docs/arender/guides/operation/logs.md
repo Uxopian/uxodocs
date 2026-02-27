@@ -44,7 +44,7 @@ log4j.additivity.com.arondor.viewer.common.logger=false
 ```properties
 log4j.appender.default=org.apache.log4j.ConsoleAppender
 log4j.appender.default.layout=org.apache.log4j.PatternLayout
-log4j.appender.default.layout.ConversionPattern=%d&#123;ISO8601&#125; %p [%t] %c:%L - %m%n
+log4j.appender.default.layout.ConversionPattern=%d{ISO8601} %p [%t] %c:%L - %m%n
 ```
 
 ```properties
@@ -53,7 +53,7 @@ log4j.appender.VIEWER.MaxFileSize=20000KB
 log4j.appender.VIEWER.MaxBackupIndex=6
 log4j.appender.VIEWER.File=/tmp/viewer/server.log
 log4j.appender.VIEWER.layout=org.apache.log4j.PatternLayout
-log4j.appender.VIEWER.layout.ConversionPattern=%d&#123;ISO8601&#125; %p [%t] %c:%L - %m%n
+log4j.appender.VIEWER.layout.ConversionPattern=%d{ISO8601} %p [%t] %c:%L - %m%n
 ```
 
 ```properties

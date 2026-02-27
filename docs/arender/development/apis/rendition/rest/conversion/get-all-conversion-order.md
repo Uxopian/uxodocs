@@ -46,9 +46,9 @@ curl -X 'GET' \
 
 Response sample:
 
-```bash
+```json
 [
-
+  {
     "conversionOrderId": {
       "id": "string"
     },
@@ -60,6 +60,6 @@ Response sample:
     "processingTime": 0,
     "queuedDate": "2023-06-19T16:12:24.476Z",
     "queuedTime": 0
-
+  }
 ]
 ```

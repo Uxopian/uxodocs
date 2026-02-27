@@ -47,7 +47,7 @@ server.
   _customer-&lt;integration_type&gt;.properties_ defined above. Example:
 
 ```xml
-&lt;Context&gt;
+<Context>
     <Environment name="propertiesFileLocation" value="C:\Dev\apache-tomcat-8.5.13\customConfiguration" type="java.lang.String" override="false"/>
 </Context>
 ```

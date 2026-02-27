@@ -83,7 +83,7 @@ public void setAnnotationAccessor(AnnotationAccessor annotationAccessor) throws 
 
     this.annotationAccessor = annotationAccessor;
 
-    List&lt;SecurityLevel&gt; list = new ArrayList<>();
+    List<SecurityLevel> list = new ArrayList<>();
     list.add(buildSecuriyLevel("group1", "Groupe 1", "Group 1"));
     list.add(buildSecuriyLevel("group2", "Groupe 2", "Group 2"));
     list.add(buildSecuriyLevel("group3", "Groupe 3", "Group 3"));
@@ -172,20 +172,20 @@ Example in the implementation of the _AnnotationAccessor_ which will create or u
 ```java
 
 @Override
-public void create(List&lt;Annotation&gt; annotations) throws AnnotationsNotSupportedException, AnnotationCredentialsException, InvalidAnnotationFormatException, AnnotationNotAvailableException
+public void create(List<Annotation> annotations) throws AnnotationsNotSupportedException, AnnotationCredentialsException, InvalidAnnotationFormatException, AnnotationNotAvailableException
 
     updateAnnotationSecurity(annotations);
 
     // Custom code + call to database to store the annotations
 
 @Override
-public void update(List&lt;Annotation&gt; annotations) throws AnnotationsNotSupportedException, AnnotationNotAvailableException, AnnotationCredentialsException, InvalidAnnotationFormatException
+public void update(List<Annotation> annotations) throws AnnotationsNotSupportedException, AnnotationNotAvailableException, AnnotationCredentialsException, InvalidAnnotationFormatException
 
     updateAnnotationSecurity(annotations);
 
     // Custom code + call to database to update the annotations
 
-private void updateAnnotationSecurity(List&lt;Annotation&gt; annotations)
+private void updateAnnotationSecurity(List<Annotation> annotations)
 
     for(Annotation annotation : annotations)
 

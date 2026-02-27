@@ -26,7 +26,7 @@ The method parse will parse the parameters contained in the URL and push
 the documentAccessor to the rendition server. Example:
 
 ```java
-List&lt;DocumentIdParameter&gt; parameters = new ArrayList&lt;DocumentIdParameter&gt;();
+List<DocumentIdParameter> parameters = new ArrayList<DocumentIdParameter>();
 parameters.add(new URLDocumentIdParameter(URL_REQUEST_PARAMETER, url));
 DocumentId documentId = DocumentIdFactory.getInstance().generate(parameters);
 DocumentAccessor documentAccessor = new DocumentAccessorURL(url, documentId);

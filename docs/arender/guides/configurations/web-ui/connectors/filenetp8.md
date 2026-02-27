@@ -23,19 +23,19 @@ Some examples:
 
 - To open a document stored in FileNet P8, try:
 
-    `http://&#123;arender_server&#125;/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1`
+    `http://{arender_server}/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1`
 
 - To open simultaneously two documents with the mixedObjects syntax:
 
-    `http://&#123;arender_serveur&#125;/ARender.html?ids=doc:{345A81-KT7SK95747S-5IS8-8SK0},doc:&#123;F64A9342-6114-4A5C-A5E1-589A2FFB159F&#125;&amp;objectStoreName=OS1&amp;objectType=mixedObjects`
+    `http://{arender_serveur}/ARender.html?ids=doc:{345A81-KT7SK95747S-5IS8-8SK0},doc:{F64A9342-6114-4A5C-A5E1-589A2FFB159F}&amp;objectStoreName=OS1&amp;objectType=mixedObjects`
 
 - To open simultaneously two documents and a folder:
 
-    `http://&#123;arender_serveur&#125;/ARender.html?objectStoreName=OS1&amp;ids=doc:{3DBE573A-1AC9-4B08-8CB1-8F9495619954},doc:&#123;F64A9342-6114-4A5C-A5E1-589A2FFB159F&#125;,folder:{55714817-BDAC-4C8A-9EFB-963E4620A4E4}&amp;objectType=mixedObjects`
+    `http://{arender_serveur}/ARender.html?objectStoreName=OS1&amp;ids=doc:{3DBE573A-1AC9-4B08-8CB1-8F9495619954},doc:{F64A9342-6114-4A5C-A5E1-589A2FFB159F},folder:{55714817-BDAC-4C8A-9EFB-963E4620A4E4}&amp;objectType=mixedObjects`
 
 - To open a specific content element:
 
-    `http://&#123;arender_serveur&#125;/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1&amp;contentElement=2`
+    `http://{arender_serveur}/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1&amp;contentElement=2`
 
 The mixedObjects syntax is: **ids=[ [ “doc” | “folder” ] “:” [ Id du document ou Folder ] [ “,"] ]+**
 
@@ -58,7 +58,7 @@ protocol:
 
 ```properties
 arender.server.filenet.authentication.method=jaasObjectStoreProvider
-arender.server.filenet.ce.url=iiop://&#123;content_engine_server&#125;:2809/FileNet/Engine
+arender.server.filenet.ce.url=iiop://{content_engine_server}:2809/FileNet/Engine
 ```
 
 ### Technical account
@@ -124,9 +124,9 @@ Modify the bean having the id urlFilter (by default configured with JAASUserFilt
 
 ```properties
 arender.server.filenet.authentication.method=loginPasswordObjectStoreProvider
-arender.server.filenet.ce.url=http://&#123;content_engine_server&#125;/wsi/FNCEWS40MTOM/
-arender.server.filenet.ce.login=&#123;p8_identifiant&#125;
-arender.server.filenet.ce.password=&#123;p8_password&#125;
+arender.server.filenet.ce.url=http://{content_engine_server}/wsi/FNCEWS40MTOM/
+arender.server.filenet.ce.login={p8_identifiant}
+arender.server.filenet.ce.password={p8_password}
 ```
 
 ## Configuration the annotation format to be saved in FileNet
@@ -613,10 +613,10 @@ file and modify the **contentUpdateBehavior** property as it :
 
 The servlet _updateDocumentMetadataServlet_ is dedicated to updating Filenet document metadata with a POST call.
 
-Here is an example of the POST call, where _&#123;documentId&#125;_ is to be replaced by the documentId of the targeted document :
+Here is an example of the POST call, where _{documentId}_ is to be replaced by the documentId of the targeted document :
 
 ```cfg
-`http://&#123;HOST_ARENDER&#125;/arendergwt/updateDocumentMetadataServlet?uuid=&#123;documentId&#125;`
+`http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}`
 ```
 
 Then, the body of the request will accept a JSON structure defining each metadata name to modify and the associated value. The _propertyKey_ correspond to the _symbolicName_ and _displayName_ properties of Filenet. The _propertyValue_ is the value that the metadata will take.

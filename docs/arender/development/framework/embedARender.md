@@ -95,7 +95,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./arender.component.css']
 })
 export class ARenderComponent {
-  @ViewChild('iframeRef', { static: false }) iframeRef!: ElementRef&lt;HTMLIFrameElement&gt;; // Reference to the iframe
+  @ViewChild('iframeRef', { static: false }) iframeRef!: ElementRef<HTMLIFrameElement>; // Reference to the iframe
   arenderIsDisplayed: boolean = true; // Controls the iframe visibility
 
 ```
@@ -114,7 +114,7 @@ export class ARenderComponent {
 
 <p>- Add ARenderComponent to the main module (file app.module.ts) if necessary by adding the arender component to the declarations list.</p>
 
-<p>- Insert the component into the application by placing this tag in the HTML code of the appropriate file: <code>&lt;app-arender&gt;&lt;/app-arender&gt;</code></p>
+<p>- Insert the component into the application by placing this tag in the HTML code of the appropriate file: <code><app-arender></app-arender></code></p>
 
 <p>- The <code>@ViewChild</code> attribute will allow easy interaction with the iframe without needing to use getElementById.</p>
 

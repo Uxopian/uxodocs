@@ -83,12 +83,12 @@ iframeWindow
  * Returns the ARenderJS object from the iframe.
  * Throws an error if the iframe is not accessible or not loaded.
  */
-function getARenderJS() &#123;
+function getARenderJS() {
   const iframeWindow = iframeRef.value?.contentWindow
     ? iframeRef.value.contentWindow
     : undefined
 
-  if (iframeWindow) &#123;
+  if (iframeWindow) {
     return iframeWindow.getARenderJS()
 
   throw new Error("The iframe is not accessible or not loaded.")
@@ -104,7 +104,7 @@ function getARenderJS() &#123;
  * @param opacity The opacity of the annotation.
  * @param type The type of the annotation.
  */
-function addAnnotation(x, y, w, h, page, color, opacity, type = "Highlight") &#123;
+function addAnnotation(x, y, w, h, page, color, opacity, type = "Highlight") {
   const documentId = getARenderJS().getCurrentDocumentId()
   getARenderJS()
     .getAnnotationJSAPI()
@@ -113,9 +113,9 @@ function addAnnotation(x, y, w, h, page, color, opacity, type = "Highlight") &#1
 /**
  * Expose the `addAnnotation` function to the parent component.
  */
-defineExpose(&#123;
+defineExpose({
   addAnnotation
-&#125;)
+})
 ```
 
 ```javascript
@@ -123,12 +123,12 @@ defineExpose(&#123;
  * Returns the ARenderJS object from the iframe.
  * Throws an error if the iframe is not accessible or not loaded.
  */
-function getARenderJS() &#123;
+function getARenderJS() {
   const iframeWindow = iframeRef?.contentWindow
     ? iframeRef.contentWindow
     : undefined
 
-  if (iframeWindow) &#123;
+  if (iframeWindow) {
     return iframeWindow.getARenderJS()
 
   throw new Error("The iframe is not accessible or not loaded.")
@@ -153,7 +153,7 @@ export function addAnnotation(
   color,
   opacity,
   type = "Highlight"
-) &#123;
+) {
   let documentId = getARenderJS().getCurrentDocumentId()
   getARenderJS()
     .getAnnotationJSAPI()
@@ -165,12 +165,12 @@ export function addAnnotation(
 /*
  * Add an highlight annotation
  *
- * @param {string&#125; documentId - ID of the document
- * @param {string&#125; type - the annotation type (only "Highlight" is supported)
- * @param {integer&#125; x - the annotation x coordinate
- * @param {integer&#125; y - the annotation y coordinate
- * @param {integer&#125; w - the annotation width
- * @param {integer&#125; h - the annotation height
+ * @param {string} documentId - ID of the document
+ * @param {string} type - the annotation type (only "Highlight" is supported)
+ * @param {integer} x - the annotation x coordinate
+ * @param {integer} y - the annotation y coordinate
+ * @param {integer} w - the annotation width
+ * @param {integer} h - the annotation height
  * @param {page} page - the annotation page
  * @param {string} color - the annotation color
  * @param {float} opacity - the annotation opacity

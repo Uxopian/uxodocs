@@ -48,7 +48,7 @@ JavaScript API requests are made on the window object of the iframe, as shown be
               iframeWindow.getARenderJS().openDocument(id);
 
           );
-        } else &#123;
+        } else {
           console.error("The iframe is not accessible or not loaded.");
 
 
@@ -64,7 +64,7 @@ function getARenderJS() {
     ? iframeRef.value.contentWindow
     : undefined
 
-  if (iframeWindow) &#123;
+  if (iframeWindow) {
     return iframeWindow.getARenderJS()
 
   throw new Error("The iframe is not accessible or not loaded.")
@@ -76,14 +76,14 @@ function getARenderJS() {
 function loadAndOpenDocument(url) {
   getARenderJS().loadDocument("loadingQuery?url=" + url, id => {
     getARenderJS().openDocument(id)
-  &#125;)
+  })
 
 /**
  * Expose the `loadAndOpenDocument` function to the parent component.
  */
 defineExpose({
   loadAndOpenDocument
-&#125;)
+})
 ```
 
 ```javascript

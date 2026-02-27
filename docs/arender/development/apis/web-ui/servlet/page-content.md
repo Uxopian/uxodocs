@@ -30,10 +30,10 @@ A Json file is returned with information about the page content which is given a
 Here an example of a Json file :
 
 ```json
-
+{
   "pageNumber": 3,
   "positionTextList": [
-
+    {
       "pageNumber": 3,
       "position": {
         "x": 124.68,
@@ -57,8 +57,8 @@ Here an example of a Json file :
       "paragraphId": 0,
       "rightToLeftText": false,
       "startTime": -1.0
-
+    }
   ],
   "imageHyperlinkPositionList": []
-
+}
 ```

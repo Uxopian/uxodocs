@@ -29,35 +29,35 @@ The browser displays the document structure in Json language.
 Here an example of a Json file:
 
 ```json
-
-    "type": "com.arondor.viewer.client.api.document.DocumentPageLayout",
-    "documentId": {
-        "id": "doc1UUID"
+{
+  "type": "com.arondor.viewer.client.api.document.DocumentPageLayout",
+  "documentId": {
+    "id": "doc1UUID"
+  },
+  "documentTitle": "title.pdf",
+  "mimeType": "application/pdf",
+  "pageDimensionsList": [
+    {
+      "width": 720.0,
+      "height": 405.0,
+      "rotation": 0,
+      "dpi": 0,
+      "pageLayers": null
     },
-    "documentTitle": "title.pdf",
-    "mimeType": "application/pdf",
-    "pageDimensionsList": [
-
-            "width": 720.0,
-            "height": 405.0,
-            "rotation": 0,
-            "dpi": 0,
-            "pageLayers": null
-        },
-
-            "width": 720.0,
-            "height": 405.0,
-            "rotation": 0,
-            "dpi": 0,
-            "pageLayers": null
-        },
-
-            "width": 720.0,
-            "height": 405.0,
-            "rotation": 0,
-            "dpi": 0,
-            "pageLayers": null
-        },
-    ]
-
+    {
+      "width": 720.0,
+      "height": 405.0,
+      "rotation": 0,
+      "dpi": 0,
+      "pageLayers": null
+    },
+    {
+      "width": 720.0,
+      "height": 405.0,
+      "rotation": 0,
+      "dpi": 0,
+      "pageLayers": null
+    }
+  ]
+}
 ```

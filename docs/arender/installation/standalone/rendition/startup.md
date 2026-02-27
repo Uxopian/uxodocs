@@ -12,14 +12,14 @@ content_hash: e89e623ab303e4297a1620c83fb90f937dee55dca8d8ac264bba2913e00312e0
 You can launch ARender rendition engine in command line:
 
 In Windows based OS using **ARenderConsole.bat** in the folder
-rendition-engine-package-&#123;VERSION-NUMBER&#125;:
+rendition-engine-package-{VERSION-NUMBER}:
 
 ```cmd
 $> .\ARenderConsole.bat
 ```
 
 In Linux based OS using **ARenderConsole.sh** in the folder
-rendition-engine-package-&#123;VERSION-NUMBER&#125; (give the file exec rights):
+rendition-engine-package-{VERSION-NUMBER} (give the file exec rights):
 
 ```bash
 $> ./ARenderConsole.sh

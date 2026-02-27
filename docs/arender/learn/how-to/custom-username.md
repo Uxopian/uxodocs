@@ -23,7 +23,7 @@ public interface DisplayNameProvider
 
     String fetchDisplayName(String originalCreatorName);
 
-    List&lt;String&gt; fetchDisplayNames(List&lt;String&gt; originalCreatorNames);
+    List<String> fetchDisplayNames(List<String> originalCreatorNames);
 
 ```
 
@@ -47,9 +47,9 @@ public class DefaultPrefixerDisplayNameProvider implements DisplayNameProvider
         return getPrefixedString(originalCreatorName);
 
     @Override
-    public List&lt;String&gt; fetchDisplayNames(List&lt;String&gt; originalCreatorNames)
+    public List<String> fetchDisplayNames(List<String> originalCreatorNames)
 
-        List&lt;String&gt; prefixed = new ArrayList&lt;String&gt;();
+        List<String> prefixed = new ArrayList<String>();
         for (String originalCreatorName: originalCreatorNames)
 
             prefixed.add(getPrefixedString(originalCreatorName));

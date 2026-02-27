@@ -84,7 +84,7 @@ for (String key: styleMap.keySet())
 
 ```java
 // now we prepare the list of stamps to send the rendition server
-List&lt;Annotation&gt; stamps = new ArrayList&lt;Annotation&gt;();
+List<Annotation> stamps = new ArrayList<Annotation>();
 for (int i = 0; i < nbPages; i++)
 
     StampElemType annotation = new StampElemType();
@@ -107,7 +107,7 @@ AlterContentDescriptionWithAnnotations alterContent = new AlterContentDescriptio
 // set annotations
 alterContent.setAnnotations(stamps);
 // set documentId
-List&lt;DocumentId&gt; sourceDocumentIdList = new ArrayList&lt;DocumentId&gt;();
+List<DocumentId> sourceDocumentIdList = new ArrayList<DocumentId>();
 sourceDocumentIdList.add(accessorConverted.getUUID());
 DocumentId renderedDoc = client.alterDocumentContent(sourceDocumentIdList, alterContent);
 ```

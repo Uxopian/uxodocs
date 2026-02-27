@@ -45,7 +45,7 @@ Configuration files location:
 - /arender/config/application.yaml
 - /arender/config/application-\*.yaml
 
-**&#123;service-name&#125;**: container name without "arender" prefix
+**{service-name}**: container name without "arender" prefix
 
 ## PDFOwl: a document renderer alternative
 
