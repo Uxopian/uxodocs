@@ -8,7 +8,7 @@ content_hash: 5eee8901c79baac234c1e07bf8f11e1be157e9caf8060827587ccec28f9b1675
 
 The JavaScript API allows you to set up subscriptions to receive events during various actions on ARender (e.g., adding/removing notifications, rotating a page, or clicking on a hyperlink). This information is accessible <i class="ti-hand-point-right" /> <ins>[in the documentation](/docs/arender/development/apis/web-ui/javascript/annotation-js-api)</ins> <i class="ti-hand-point-left" ></i>
 
-It is also possible to create highlight-type annotations directly from the host application, without doing so manually in ARender, using the **addAnnotation** function of the JavaScript API by following <i class="ti-hand-point-right" /> <ins>[these guidelines](/docs/arender/development/apis/web-ui/javascript/annotation-js-api#create-an-highlight-annotation.md)</ins> <i class="ti-hand-point-left" ></i>.
+It is also possible to create highlight-type annotations directly from the host application, without doing so manually in ARender, using the **addAnnotation** function of the JavaScript API by following <i class="ti-hand-point-right" /> <ins>[these guidelines](/docs/arender/development/apis/web-ui/javascript/annotation-js-api#create-an-highlight-annotation)</ins> <i class="ti-hand-point-left" ></i>.
 
 To use this function from an application other than ARender, simply replace the window object in the documentation with the appropriate object based on the framework being used.
 
