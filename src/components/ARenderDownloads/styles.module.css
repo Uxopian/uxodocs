@@ -1,0 +1,134 @@
+.downloadsSection {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.downloadsTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--ifm-heading-color);
+    border-bottom: 2px solid var(--ifm-color-primary);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.downloadItem {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 2rem;
+}
+
+.downloadInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.downloadTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--ifm-heading-color);
+}
+
+.downloadDescription {
+    margin: 0;
+    color: var(--ifm-color-emphasis-700);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.downloadButtons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.downloadButton {
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    border: 1px solid var(--ifm-color-emphasis-300);
+    background-color: transparent;
+    color: var(--ifm-link-color);
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.downloadButton:hover {
+    text-decoration: none;
+    background-color: var(--ifm-color-emphasis-100);
+    color: var(--ifm-link-hover-color);
+}
+
+.downloadButtonPrimary {
+    background-color: var(--ifm-color-primary);
+    color: #fff;
+    border-color: var(--ifm-color-primary);
+}
+
+.downloadButtonPrimary:hover {
+    background-color: var(--ifm-color-primary-dark);
+    border-color: var(--ifm-color-primary-dark);
+    color: #fff;
+}
+
+.divider {
+    margin: 0;
+    border: none;
+    border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.otherVersions {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    text-align: right;
+}
+
+.otherVersionsLink {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background-color: var(--ifm-color-emphasis-200);
+    color: var(--ifm-font-color-base);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.otherVersionsLink:hover {
+    background-color: var(--ifm-color-emphasis-300);
+    text-decoration: none;
+    color: var(--ifm-font-color-base);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .downloadItem {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .downloadButtons {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .otherVersions {
+        text-align: center;
+    }
+
+    .otherVersionsLink {
+        display: block;
+        width: 100%;
+    }
+}
