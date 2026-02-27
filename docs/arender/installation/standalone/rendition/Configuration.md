@@ -322,11 +322,11 @@ as well to keep Office up to date.
 Skip this manual installation if previous scripted installation was a success.
 
 - Download and install the below softwares
-    - .Net 4.5: [Download](<[https://www.microsoft.com/en-us/download/details.aspx?id=30653](https://www.microsoft.com/en-us/download/details.aspx?id=30653).md>)
+    - .Net 4.5: [Download](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 
-    - Microsoft Visual C++ redistributable 2010: [Download](<[https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632](https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632).md>)
+    - Microsoft Visual C++ redistributable 2010: [Download](https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632)
 
-    - Microsoft Visual C++ redistributable 2008: [Download](<[https://www.microsoft.com/en-us/download/details.aspx?id=15336](https://www.microsoft.com/en-us/download/details.aspx?id=15336).md>)
+    - Microsoft Visual C++ redistributable 2008: [Download](https://www.microsoft.com/en-us/download/details.aspx?id=15336)
 
 ---
 
