@@ -1,6 +1,13 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import remarkVariables from "./scripts/remark-variables.mjs";
+
+// Update these when releasing a new version. They are injected into all
+// markdown files at build time via the remarkVariables script,
+// replacing {{version}} placeholders.
+const arenderVersion = "2023.17.0";
+
 
 const getPdfFileName = (
     siteConfig: any,
@@ -68,8 +75,9 @@ const config: Config = {
                 routeBasePath: "docs/arender",
                 sidebarPath: require.resolve("./sidebars_arender.ts"),
                 lastVersion: "current",
-                versions: { current: { label: "v2023.17.0" } },
+                versions: { current: { label: `v${arenderVersion}` } },
                 showLastUpdateTime: true,
+                remarkPlugins: [[remarkVariables, { variables: { version: arenderVersion } }]],
             },
         ],
         [

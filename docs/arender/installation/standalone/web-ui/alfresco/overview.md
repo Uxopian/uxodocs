@@ -19,7 +19,7 @@ If not yet, then head to this link [here](../standalone).
 
 Add the cmis connector in the folder /lib.
 
-* Download the jar file [arondor-arender-cmis-2023.16.0-jar-with-dependencies.jar](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-cmis/2023.16.0/arondor-arender-cmis-2023.16.0-jar-with-dependencies.jar)
+* Download the jar file [arondor-arender-cmis-{{version}}-jar-with-dependencies.jar](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-cmis/{{version}}/arondor-arender-cmis-{{version}}-jar-with-dependencies.jar)
 
 ## Configurations 
 

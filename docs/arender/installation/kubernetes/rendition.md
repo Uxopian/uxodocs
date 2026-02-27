@@ -28,7 +28,7 @@ The following table lists the configurable parameters of the document service br
 | :--------------------------------------- | :------------------------------------------------------------------------------- | :--------------------------------: |
 | `rendition.broker.replicaCount`          | Number of the broker pod replica to deploy                                       |                `1`                 |
 | `rendition.broker.image.repository`      | Broker image name                                                                | `artifactory.arondor.cloud:5001/arender-document-service-broker` |
-| `rendition.broker.image.tag`             | Broker image tag. If empty use AppVersion                                        | `2023.16.0`         |
+| `rendition.broker.image.tag`             | Broker image tag. If empty use AppVersion                                        | `{{version}}`         |
 | `rendition.broker.image.pullPolicy`      | Broker image pull policy                                                         |              `Always`              |
 | `rendition.broker.rbac.create`           | Specifies whether the role resources to compute the weather should be created    |               `true`               |
 | `rendition.broker.serviceAccount.create` | Specifies whether a service account should be created                            |               `true`               |
@@ -69,7 +69,7 @@ The following table lists the configurable parameters of the document converter 
 | `rendition.converter.autoscale.maxReplicas` | Maximum number of the converter pod replica in the cluster                      |              `3`              |
 | `rendition.converter.autoscale.cpuLimit`    | Percentage of CPU requested target to scale horizontally                        |             `80`              |
 | `rendition.converter.image.repository`      | Document converter image name                                                   | `artifactory.arondor.cloud:5001/arender-document-converter` |
-| `rendition.converter.image.tag`             | Document converter image tag. If empty use AppVersion                           | `2023.16.0`         |
+| `rendition.converter.image.tag`             | Document converter image tag. If empty use AppVersion                           | `{{version}}`         |
 | `rendition.converter.imagepullPolicy`       | Document converter image pull policy                                            |           `Always`            |
 | `rendition.converter.serviceAccount.create` | Specifies whether a service account should be created                           |            `true`             |
 | `rendition.converter.serviceAccount.name`   | Name of the service account created. If not set defaulted to converter fullname |             `''`              |
@@ -100,7 +100,7 @@ The following table lists the configurable parameters of the document text handl
 | `rendition.handler.autoscale.maxReplicas` | Maximum number of the handler pod replica in the cluster                      |               `3`                |
 | `rendition.handler.autoscale.cpuLimit`    | Percentage of CPU requested target to scale horizontally                      |               `80`               |
 | `rendition.handler.image.repository`      | Document handler image name                                                   | `artifactory.arondor.cloud:5001/arender-document-text-handler` |
-| `rendition.handler.image.tag`             | Document handler image tag. If empty use AppVersion                           | `2023.16.0`          |
+| `rendition.handler.image.tag`             | Document handler image tag. If empty use AppVersion                           | `{{version}}`          |
 | `rendition.handler.imagepullPolicy`       | Document handler image pull policy                                            |             `Always`             |
 | `rendition.handler.serviceAccount.create` | Specifies whether a service account should be created                         |              `true`              |
 | `rendition.handler.serviceAccount.name`   | Name of the service account created. If not set defaulted to handler fullname |               `''`               |
@@ -122,7 +122,7 @@ The following table lists the configurable parameters of the document renderer m
 | `rendition.renderer.autoscale.maxReplicas` | Maximum number of the renderer pod replica in the cluster                      |             `3`              |
 | `rendition.renderer.autoscale.cpuLimit`    | Percentage of CPU requested target to scale horizontally                       |             `80`             |
 | `rendition.renderer.image.repository`      | Document renderer image name                                                   | `artifactory.arondor.cloud:5001/arender-document-renderer` |
-| `rendition.renderer.image.tag`             | Document renderer image tag. If empty use AppVersion                           | `2023.16.0`          |
+| `rendition.renderer.image.tag`             | Document renderer image tag. If empty use AppVersion                           | `{{version}}`          |
 | `rendition.renderer.imagepullPolicy`       | Document renderer image pull policy                                            |           `Always`           |
 | `rendition.renderer.serviceAccount.create` | Specifies whether a service account should be created                          |            `true`            |
 | `rendition.renderer.serviceAccount.name`   | Name of the service account created. If not set defaulted to renderer fullname |             `''`             |

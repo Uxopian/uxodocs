@@ -16,7 +16,7 @@ Each PDFOwl process is started for a single document, and can processing a singl
 For a given document, multiple PDFOwl processes can coexist simultaneously.
 The PDFOwl microservice recycles PDFOwl processes for a given document, until the `pdfowl.client.ttl` limit is reached.
 
-:::note[application.properties located in ARender-Rendition-2023.17.0/modules/PDFOwl]
+:::note[application.properties located in ARender-Rendition-{{version}}/modules/PDFOwl]
 
 | Description                                                                                                             | Parameter Key                     | Default value | Type    |
 | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------- | ------- |

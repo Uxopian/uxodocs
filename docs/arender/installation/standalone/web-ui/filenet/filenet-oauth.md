@@ -39,7 +39,7 @@ Requirements:
 
 ARender installation is as simple as:
 
-1. Download **arondor-arender-hmi-spring-boot-package-2023.16.0.zip**
+1. Download **arondor-arender-hmi-spring-boot-package-{{version}}.zip**
 2. Unzip it into a folder
 3. Download **arondor-arender-filenet-ce--jar-with-dependencies.jar**
 4. Copy the connector into the **lib/** folder of the step 2

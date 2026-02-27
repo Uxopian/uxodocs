@@ -12,8 +12,8 @@ We present here the continuation of the installation of the Web-UI, in the Share
 ## Retrieve the presentation server archives
 
 Using the username and password beforehand provided,
-you can retrieve the arender for Share plugin here: [arender-for-alfresco-share-plugin-2023.16.0.jar](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arender-for-alfresco-share-plugin/2023.16.0/arender-for-alfresco-share-plugin-2023.16.0.jar)
-and the arender for ACS plugin here: [arender-for-alfresco-ACS-plugin-2023.16.0.jar](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arender-for-alfresco-ACS-plugin/2023.16.0/arender-for-alfresco-ACS-plugin-2023.16.0.jar)
+you can retrieve the arender for Share plugin here: [arender-for-alfresco-share-plugin-{{version}}.jar](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arender-for-alfresco-share-plugin/{{version}}/arender-for-alfresco-share-plugin-{{version}}.jar)
+and the arender for ACS plugin here: [arender-for-alfresco-ACS-plugin-{{version}}.jar](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arender-for-alfresco-ACS-plugin/{{version}}/arender-for-alfresco-ACS-plugin-{{version}}.jar)
 
 ## Re-deployment of the ARender Web-UI server in Alfresco
 

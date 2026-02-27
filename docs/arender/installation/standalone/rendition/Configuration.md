@@ -39,7 +39,7 @@ For comprehensive Hazelcast details, refer to [Hazelcast documentation](https://
 
 The configuration file (hazelcast.yaml) is located within the _RenditionEngine_ resources.
 
-The path to find the configuration is _modules/RenditionEngine/rendition-engine-micro-service-2023.16.0.jar/BOOT-INF/classes/hazelcast.yaml_.
+The path to find the configuration is _modules/RenditionEngine/rendition-engine-micro-service-{{version}}.jar/BOOT-INF/classes/hazelcast.yaml_.
 
 ```cfg
 hazelcast:
@@ -153,7 +153,7 @@ Allows access to the following endpoints :
 ### Customizing Hazelcast Configuration
 
 To customize the Hazelcast configuration, create your own _hazelcast.yaml_ file and copy the configuration from the
-file _ARender-Rendition-\modules\RenditionEngine\rendition-engine-micro-service-2023.16.0.jar\BOOT-INF\classes\hazelcast.yaml_.
+file _ARender-Rendition-\modules\RenditionEngine\rendition-engine-micro-service-{{version}}.jar\BOOT-INF\classes\hazelcast.yaml_.
 
 For each upgrade of ARender, please read the release note carefully to take into account potential changes to the initial configuration.
 

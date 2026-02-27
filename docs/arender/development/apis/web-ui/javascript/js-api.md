@@ -40,7 +40,7 @@ https://www.demo.arender.io/?url=https://arender.io/docs/demo/ARender-doc-demo.p
 ```
 
 See the default profile jsapi-demo.properties (in the
-arondor-arender-hmi-spring-boot-2023.16.0.jar\BOOT-INF\classes\ folder of the ARender
+arondor-arender-hmi-spring-boot-{{version}}.jar\BOOT-INF\classes\ folder of the ARender
 Web-UI) for an example profile. Note that the JavaScript URL can be provided:
 
 - as a relative URL: the URL is relative to the ARender Web-UI context

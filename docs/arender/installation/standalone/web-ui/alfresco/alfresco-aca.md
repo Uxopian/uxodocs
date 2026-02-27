@@ -64,7 +64,7 @@ As the module is preview and not publicly available you need to add it manually.
     $> git checkout v1.10.1
     ```
 
-2. Download ARender ACA extension sources [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arender-for-alfresco-ADF-plugin/2023.16.0/arender-for-alfresco-ADF-plugin-2023.16.0.zip) and unzip the archive content.
+2. Download ARender ACA extension sources [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arender-for-alfresco-ADF-plugin/{{version}}/arender-for-alfresco-ADF-plugin-{{version}}.zip) and unzip the archive content.
 
 3. Create a library project.
 

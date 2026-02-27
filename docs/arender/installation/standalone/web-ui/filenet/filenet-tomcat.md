@@ -52,7 +52,7 @@ Open the below file:
 
 Remove the below file:
 
-- arondor-arender-hmi-filenet-2023.16.0.war\WEB-INF\lib\arondor-arender-filenet-ce-2023.16.0.jar\META-INF\web-fragment.xml
+- arondor-arender-hmi-filenet-{{version}}.war\WEB-INF\lib\arondor-arender-filenet-ce-{{version}}.jar\META-INF\web-fragment.xml
 
 ### Technical account configuration for the connection to FileNet
 

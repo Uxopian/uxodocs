@@ -17,7 +17,7 @@ More information here: https://www.ibm.com/docs/en/was-nd/8.5.5?topic=authentica
 ## Retrieve the ARender Web-UI archive
 
 Using the username and password beforehand provided,
-you can retrieve the navigator plugin [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-navigator-plugin/2023.16.0/arondor-arender-navigator-plugin-2023.16.0.jar)
+you can retrieve the navigator plugin [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-navigator-plugin/{{version}}/arondor-arender-navigator-plugin-{{version}}.jar)
 
 ## ARender and IBM Content Navigator (or IBM Content Manager)
 
