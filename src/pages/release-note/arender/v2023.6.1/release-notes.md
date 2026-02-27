@@ -4,7 +4,7 @@ description: Minor release including new distribution strategies of documents to
 date: "2025-08-06"
 ---
 
-> **Upgrade note:** See [v2023.6.1](./upgrade-notes) for detailed instructions.
+> **Upgrade note:** See [v2023.6.1](../upgrade-notes) for detailed instructions.
 
 ## Overview
 

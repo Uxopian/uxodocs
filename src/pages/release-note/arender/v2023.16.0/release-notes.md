@@ -4,7 +4,7 @@ description: Minor release with security patches, Spring upgrades, better email 
 date: "2025-12-02"
 ---
 
-> **Upgrade note:** See [v2023.16.0](./upgrade-notes) for detailed instructions.
+> **Upgrade note:** See [v2023.16.0](../upgrade-notes) for detailed instructions.
 
 ## Overview
 

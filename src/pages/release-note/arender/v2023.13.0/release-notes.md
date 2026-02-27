@@ -4,7 +4,7 @@ description: Minor release including fix for wrong text selection coordinates an
 date: "2025-08-29"
 ---
 
-> **Upgrade note:** See [v2023.13.0](./upgrade-notes) for detailed instructions.
+> **Upgrade note:** See [v2023.13.0](../upgrade-notes) for detailed instructions.
 
 ## Overview
 

@@ -4,7 +4,7 @@ description: Minor release with fixes for text and PDF rendering issues, hyperli
 date: "2025-09-30"
 ---
 
-> **Upgrade note:** See [v2023.14.0](./upgrade-notes) for detailed instructions.
+> **Upgrade note:** See [v2023.14.0](../upgrade-notes) for detailed instructions.
 
 ## Overview
 

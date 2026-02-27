@@ -9,7 +9,7 @@ _build:
   list: never
 ---
 
-> **Release note:** See [v2023.17.0](/releases/release-notes/v2023.17.0/).
+> **Release note:** See [v2023.17.0](../release-notes).
 
 ## ⚙️ Customization and Configuration
 
