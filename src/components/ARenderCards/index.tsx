@@ -15,7 +15,7 @@ const ARenderCardsList = [
         title: "Installation",
         icon: "🔧",
         description: "Installing & deploying ARender",
-        link: "/docs/arender/installation/docker/alfresco",
+        link: "/docs/arender/installation/overview",
         color: "#D745FF",
     },
     {
