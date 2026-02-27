@@ -30,7 +30,7 @@ The width of the explorer is configurable.
 | advanced.searchexplorer.enabled | Activate search explorer         | true          |
 | documentnavigator.search.width  | Change the width of the explorer | 400           |
 
-```cfg
+```properties
 advanced.searchexplorer.enabled=true
 ```
 
@@ -82,7 +82,7 @@ The search button that highlights the results is enabled by default.
 | ------------------------------------------------ | ---------------------------------------- | ------------- |
 | advanced.searchexplorer.search.highlight.enabled | Activate the search and highlight button | true          |
 
-```cfg
+```properties
 advanced.searchexplorer.search.highlight.enabled=true
 ```
 

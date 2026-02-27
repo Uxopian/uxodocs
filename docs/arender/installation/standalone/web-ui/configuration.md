@@ -24,11 +24,11 @@ content_hash: c9d1fd34fc79e3bfe54a9c0dfe9ff7faf548acba1655a5bad1340d8cca6411db
 In order to define one or several rendition servers, edit the **arender-custom-server.properties**
 configuration file as follows:
 
-```cfg
+```properties
 arender.server.rendition.hosts={rendition_server_1:8761/},{rendition_server_2:8761/},{rendition_server_n:8761/}
 ```
 
-The value of _"{rendition_server_x}"_ here has to be changed by the right rendition server address.
+The value of _"&#123;rendition_server_x&#125;"_ here has to be changed by the right rendition server address.
 
 _(Don't forget to reboot your Web-UI)_
 
@@ -40,7 +40,7 @@ _(Don't forget to reboot your Web-UI)_
 
 To add a _.css_ file named _test.css_, place it in the **public** folder:
 
-```cfg
+```properties
 style.sheet=css/arender-style.css,test.css
 ```
 
@@ -88,7 +88,7 @@ This configuration should only be used if the environment is like below:
 
 To activate the cache feature you need to modify the **arender-custom-server.properties** like below:
 
-```cfg
+```properties
 # Defines the cache strategy to use. Valid values : ehCacheStrategy, hazelCastStrategy
 arender.server.cache.strategy=hazelCastStrategy
 # Path of the hazelCast configuration file, if the value is empty then the default one in the classpath will be used.
@@ -100,7 +100,7 @@ arender.server.routing.table.type=Hazelcast
 
 See below the default Hazelcast configuration for ARender (arondor-arender-hmi-springboot-{{version}}.jar/BOOT-INF/classes/hazelcast.yaml):
 
-```cfg
+```yml
 hazelcast:
   map:
     documentAccessorsHMI:

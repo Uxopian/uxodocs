@@ -33,23 +33,23 @@ to have a line, we need the head and tail properties set to NONE
 ```xml
 <bean id="lineCreationAction" class="com.arondor.viewer.client.toppanel.behavior.annotation.CreateAnnotationButtonHandler">
   <constructor-arg>
-    <bean class="com.arondor.viewer.client.annotation.events.PrepareAnnotationCreationEvent">
-      <constructor-arg>
-        <value type="com.arondor.viewer.annotation.common.AnnotationType">Line</value>
-      </constructor-arg>
-      <property name="model">
-        <!-- Annotation class -->
-        <bean class="com.arondor.viewer.annotation.api.LineElemType">
-          <!-- annotation properties -->
-          <property name="head">
-            <value type="com.arondor.viewer.annotation.api.LineEndType">NONE</value>
-          </property>
-          <property name="tail">
-            <value type="com.arondor.viewer.annotation.api.LineEndType">NONE</value>
-          </property>
-        </bean>
+  <bean class="com.arondor.viewer.client.annotation.events.PrepareAnnotationCreationEvent">
+    <constructor-arg>
+    <value type="com.arondor.viewer.annotation.common.AnnotationType">Line</value>
+    </constructor-arg>
+    <property name="model">
+    <!-- Annotation class -->
+    <bean class="com.arondor.viewer.annotation.api.LineElemType">
+      <!-- annotation properties -->
+      <property name="head">
+      <value type="com.arondor.viewer.annotation.api.LineEndType">NONE</value>
+      </property>
+      <property name="tail">
+      <value type="com.arondor.viewer.annotation.api.LineEndType">NONE</value>
       </property>
     </bean>
+    </property>
+  </bean>
   </constructor-arg>
 </bean>
 ```
@@ -66,22 +66,21 @@ model from*toppannel-annotations-configuration.xml_and custom it in \_arender-cu
 <TabItem value="before470" label="Before 4.7.0">
 
 ```xml
-<bean id="addLineAnnotationButton"
-    class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter"
-    scope="prototype">
-    <property name="enabled" value="${topPanel.annotationMenu.line}" />
-    <property name="imageResource">
-        <bean class="com.arondor.viewer.client.defferedmodules.ExternalImageResource">
-            <property name="width" value="32" /> <property name="height" value="32" />
-            <property name="url" value="icons/line.png" />
-        </bean>
-    </property>
-    <property name="buttonTitle">
-        <value>Line</value>
-    </property>
-    <property name="buttonHandler">
-        <ref bean="lineCreationAction" />
-    </property>
+<bean id="addLineAnnotationButton" class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter"
+  scope="prototype">
+  <property name="enabled" value="${topPanel.annotationMenu.line}" />
+  <property name="imageResource">
+    <bean class="com.arondor.viewer.client.defferedmodules.ExternalImageResource">
+      <property name="width" value="32" /> <property name="height" value="32" />
+      <property name="url" value="icons/line.png" />
+    </bean>
+  </property>
+  <property name="buttonTitle">
+    <value>Line</value>
+  </property>
+  <property name="buttonHandler">
+    <ref bean="lineCreationAction" />
+  </property>
 </bean>
 ```
 
@@ -89,79 +88,77 @@ model from*toppannel-annotations-configuration.xml_and custom it in \_arender-cu
 <TabItem value="after470" label="After 4.7.0">
 
 ```xml
-<bean id="addArrowAnnotationButton"
-		class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
-		<constructor-arg value="addArrowAnnotationButton" />
-		<property name="name" value="Line" />
-		<property name="supportDoubleClick" value="${topPanel.annotationMenu.arrow.repeat}" />
-		<property name="enabled" value="${topPanel.annotationMenu.arrow}" />
-		<property name="className" value="standardButton icon-add-arrow toppanelButton" />
-		<property name="buttonGroup" value="topPanel" />
-	  <property name="buttonTitle">
-			<ref bean="labels#addArrowAnnotation" />
-		</property>
-		<property name="visibilityForTopPanel">
-			<ref bean="topPanelVisibilityMode" />
-		</property>
-		<property name="doubleClickButtonHandler">
-			<ref bean="arrowCreationRepeatableAction" />
-		</property>
-		<property name="inactiveButtonHandler">
-			<ref bean="quitAnnotationCreationAction" />
-		</property>
-		<property name="buttonHandler">
-			<ref bean="arrowCreationAction" />
-		</property>
-		<property name="supportShortCut" value="true"/>
-		<property name="shortcut">
-			<bean
-				class="com.arondor.viewer.client.documentcontent.shortcuts.KeyboardShortCut"
-				scope="prototype">
-				<property name="ctrl" value="true" />
-				<property name="key" value="${shortcut.annotation.arrow.key}" />
-				<property name="enabled" value="${shortcut.annotation.arrow.enabled}" />
-			</bean>
-		</property>
-	</bean>
+<bean id="addArrowAnnotationButton" class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
+  <constructor-arg value="addArrowAnnotationButton" />
+  <property name="name" value="Line" />
+  <property name="supportDoubleClick" value="${topPanel.annotationMenu.arrow.repeat}" />
+  <property name="enabled" value="${topPanel.annotationMenu.arrow}" />
+  <property name="className" value="standardButton icon-add-arrow toppanelButton" />
+  <property name="buttonGroup" value="topPanel" />
+  <property name="buttonTitle">
+    <ref bean="labels#addArrowAnnotation" />
+  </property>
+  <property name="visibilityForTopPanel">
+    <ref bean="topPanelVisibilityMode" />
+  </property>
+  <property name="doubleClickButtonHandler">
+    <ref bean="arrowCreationRepeatableAction" />
+  </property>
+  <property name="inactiveButtonHandler">
+    <ref bean="quitAnnotationCreationAction" />
+  </property>
+  <property name="buttonHandler">
+    <ref bean="arrowCreationAction" />
+  </property>
+  <property name="supportShortCut" value="true"/>
+  <property name="shortcut">
+    <bean
+    class="com.arondor.viewer.client.documentcontent.shortcuts.KeyboardShortCut"
+    scope="prototype">
+    <property name="ctrl" value="true" />
+    <property name="key" value="${shortcut.annotation.arrow.key}" />
+    <property name="enabled" value="${shortcut.annotation.arrow.enabled}" />
+    </bean>
+  </property>
+  </bean>
 ```
 
 </TabItem>
 <TabItem value="after481" label="After 4.8.1">
 
 ```xml
-<bean id="addArrowAnnotationButton"
-		class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
-		<constructor-arg value="addArrowAnnotationButton" />
-		<property name="supportDoubleClick" value="${topPanel.annotationMenu.arrow.repeat}" />
-		<property name="enabled" value="${topPanel.annotationMenu.arrow}" />
-		<property name="className" value="standardButton icon-add-arrow toppanelButton" />
-		<property name="buttonGroup" value="topPanel" />
-	  <property name="buttonTitle">
-			<ref bean="labels#addArrowAnnotation" />
-		</property>
-		<property name="visibilityForTopPanel">
-			<ref bean="topPanelVisibilityMode" />
-		</property>
-		<property name="doubleClickButtonHandler">
-			<ref bean="arrowCreationRepeatableAction" />
-		</property>
-		<property name="inactiveButtonHandler">
-			<ref bean="quitAnnotationCreationAction" />
-		</property>
-		<property name="buttonHandler">
-			<ref bean="arrowCreationAction" />
-		</property>
-		<property name="supportShortCut" value="true"/>
-		<property name="shortcut">
-			<bean
-				class="com.arondor.viewer.client.documentcontent.shortcuts.KeyboardShortCut"
-				scope="prototype">
-				<property name="ctrl" value="true" />
-				<property name="key" value="${shortcut.annotation.arrow.key}" />
-				<property name="enabled" value="${shortcut.annotation.arrow.enabled}" />
-			</bean>
-		</property>
-	</bean>
+<bean id="addArrowAnnotationButton" class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
+  <constructor-arg value="addArrowAnnotationButton" />
+  <property name="supportDoubleClick" value="${topPanel.annotationMenu.arrow.repeat}" />
+  <property name="enabled" value="${topPanel.annotationMenu.arrow}" />
+  <property name="className" value="standardButton icon-add-arrow toppanelButton" />
+  <property name="buttonGroup" value="topPanel" />
+  <property name="buttonTitle">
+    <ref bean="labels#addArrowAnnotation" />
+  </property>
+  <property name="visibilityForTopPanel">
+    <ref bean="topPanelVisibilityMode" />
+  </property>
+  <property name="doubleClickButtonHandler">
+    <ref bean="arrowCreationRepeatableAction" />
+  </property>
+  <property name="inactiveButtonHandler">
+    <ref bean="quitAnnotationCreationAction" />
+  </property>
+  <property name="buttonHandler">
+    <ref bean="arrowCreationAction" />
+  </property>
+  <property name="supportShortCut" value="true"/>
+  <property name="shortcut">
+    <bean
+    class="com.arondor.viewer.client.documentcontent.shortcuts.KeyboardShortCut"
+    scope="prototype">
+    <property name="ctrl" value="true" />
+    <property name="key" value="${shortcut.annotation.arrow.key}" />
+    <property name="enabled" value="${shortcut.annotation.arrow.enabled}" />
+    </bean>
+  </property>
+</bean>
 ```
 
 </TabItem>
@@ -178,7 +175,7 @@ website.
 If the value `topPanel.annotation.buttons.beanNames` doesn't exist,
 add it, and add your button.
 
-```cfg
+```properties
 topPanel.annotation.buttons.beanNames=addLineAnnotationButton
 ```
 
@@ -186,7 +183,7 @@ Warning, if you want all the annotations buttons, you should retrieve
 _configurations/arender-custom-client.properties_'s `topPanel.annotation.buttons.beanNames` and
 add your button in the list. After that, you should activate your annotation.
 
-```cfg
+```properties
 topPanel.annotationMenu.line=true
 ```
 

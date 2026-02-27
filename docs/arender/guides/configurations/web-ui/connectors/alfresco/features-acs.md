@@ -29,7 +29,7 @@ ARender can take these into account by disabling some functionalities according 
 
 To enable the use of Alfresco roles, use the following property :
 
-```cfg
+```properties
 arender.server.alfresco.use.roles=true
 ```
 
@@ -40,8 +40,6 @@ Rights for each role can be changed applying configuration on ARender side to cu
 #### configurations/arender-custom-server.properties
 
 This file contains various ARender rights with properties and are associated with Alfresco roles, by default:
-
-```cfg
 
 
 ```properties
@@ -62,7 +60,7 @@ arender.server.alfresco.role.delete.redaction=SiteManager,SiteCollaborator
 
 These properties can be overridden to, for example, to restrict annotation creation to the manager and contributor roles.
 
-```cfg
+```properties
 arender.server.alfresco.role.create.annotation=SiteManager,SiteContributor
 ```
 
@@ -71,7 +69,7 @@ To configure the use of the document builder and bookmarks, another file must be
 For example, the creation of bookmarks for the role manager can be enabled by adding the following line to the **role-sitemanager.properties**
 file:
 
-```cfg
+```properties
 bookmarkexplorer.add.bookmark.enabled=true
 ```
 
@@ -83,7 +81,7 @@ It is possible to find the list of permissions linked to a node from the alfresc
 
 To activate the use of permissions :
 
-```cfg
+```properties
 arender.server.alfresco.use.permissions=true
 ```
 
@@ -96,7 +94,7 @@ When a document is open, all the permissions associated with the current user ar
 
 To choose the role to apply according to the permissions retrieved, a hierarchical configuration exists:
 
-```cfg
+```properties
 arender.server.alfresco.role.hierarchy=SiteManager,SiteCollaborator,SiteContributor,SiteConsumer
 ```
 
@@ -107,7 +105,7 @@ The applied role will be the highest role in the list corresponding to the roles
 If none of the roles found are matching a role in the **arender.server.alfresco.role.hierarchy** list, then the lowest role in the list is applied.
 If the **arender.server.alfresco.role.hierarchy** list is empty, then a default list is taken into account and has the value :
 
-```cfg
+```properties
 SiteManager,SiteCollaborator,SiteContributor,SiteConsumer
 ```
 
@@ -120,7 +118,7 @@ Add the property hereafter if the below conditions are respected:
 - There is no ARender annotation in Alfresco,
 - Or, ARender annotations that exists in Alfresco have been created only **with versions newer than the 4.0.9**
 
-```cfg
+```properties
 arender.server.alfresco.annotation.migrate.to.new.child.api=false
 ```
 
@@ -131,7 +129,7 @@ arender.server.alfresco.annotation.migrate.to.new.child.api=false
 When creating or updating a new document on the document builder, the annotations on the current document can be transferred to the new document.
 To do this, the **arender.server.alfresco.document.builder.transfer.annotations** property must be enabled :
 
-```cfg
+```properties
 arender.server.alfresco.document.builder.transfer.annotations=true
 ```
 
@@ -139,7 +137,7 @@ arender.server.alfresco.document.builder.transfer.annotations=true
 
 By using the document builder, updating all documents is allowed with the property :
 
-```cfg
+```properties
 documentbuilder.button.updateAll.enabled=true
 ```
 
@@ -151,7 +149,7 @@ When a user saves a new document using ARender Document Builder, the document ti
 
 The number of renaming is by default: 5. To change this value add the below property:
 
-```cfg
+```properties
 arender.server.alfresco.document.builder.number.try.rename.document=5
 ```
 
@@ -161,7 +159,7 @@ By default, the activity of viewing a document in Alfresco is displayed in the _
 
 To have this event with ARender, a property must be set :
 
-```cfg
+```properties
 arender.preview.activity.feed.enabled=true
 ```
 
@@ -170,7 +168,7 @@ arender.preview.activity.feed.enabled=true
 To enable the display of metadata while hovering the document thumbnail, the **arender.server.alfresco.show.metadatas**
 property must be enabled.
 
-```cfg
+```properties
 arender.server.alfresco.show.metadatas=true
 ```
 
@@ -180,12 +178,12 @@ They should match the name of the properties located in the _properties_ field w
 
 Multiple properties can be displayed separated by a comma, so to display the creation date of a document and its version type, the property is :
 
-```cfg
+```properties
 arender.server.alfresco.included.metadatas=cm:created,cm:version_type
 ```
 
 The formatting of the display of creation and modification dates can be changed with the _date.format_ property, by default :
 
-```cfg
+```properties
 date.format=dd-MM-yyyy HH:mm:ss
 ```

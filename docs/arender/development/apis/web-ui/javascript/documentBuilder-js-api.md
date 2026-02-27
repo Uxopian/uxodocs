@@ -35,30 +35,29 @@ content_hash: 85c56d7a6e33d41e4405db514a1244f18a93ff3e337b41ab99f462e251184517
     | addDocumentMetadata(metadata, key, value) | Add a metadata to a documentMetadata object |           |
 
 ```javascript
-function arenderjs_init(arenderjs_)
-
+function arenderjs_init(arenderjs_) {
   arenderjs_.getDocumentBuilder()
-                .registerSubmitAlterDocumentContentEvent(function(obj){
-                    armt_onSubmitAlterDocumentContentEvent(arenderjs_,obj);
-                });
+    .registerSubmitAlterDocumentContentEvent(function (obj) {
+      armt_onSubmitAlterDocumentContentEvent(arenderjs_, obj);
+    });
   arenderjs_.getDocumentBuilder()
-                .registerNotifyAlterDocumentContentEvent(function(obj){
-                    armt_onNotifyAlterDocumentContentEvent(arenderjs_,obj);
-                });
+    .registerNotifyAlterDocumentContentEvent(function (obj) {
+      armt_onNotifyAlterDocumentContentEvent(arenderjs_, obj);
+    });
+}
 
-function armt_onSubmitAlterDocumentContentEvent(arenderjs_,obj)
+function armt_onSubmitAlterDocumentContentEvent(arenderjs_, obj) {
+  var desc = arenderjs_.getDocumentBuilder()
+    .getSubmittedAlterDocumentContentDescription(obj);
+  var meta = arenderjs_.getDocumentBuilder()
+    .getDocumentMetadata(desc, 0);
+  arenderjs_.getDocumentMetadata().addDocumentMetadata(meta, "name", "value");
+}
 
-    var desc = arenderjs_.getDocumentBuilder()
-                            .getSubmittedAlterDocumentContentDescription(obj);
-    var meta = arenderjs_.getDocumentBuilder()
-                            .getDocumentMetadata(desc, 0);
-    arenderjs_.getDocumentMetadata().addDocumentMetadata(meta, "name", "value");
-
-function armt_onNotifyAlterDocumentContentEvent(arenderjs_,obj)
-
-    console.log("Notify: " + obj);
-    var docId = arenderjs_.getDocumentBuilder().getResultDocumentId(obj);
-    console.log("Notify: " + docId);
-    console.log("Notify: docId = " + docId);
-
+function armt_onNotifyAlterDocumentContentEvent(arenderjs_, obj) {
+  console.log("Notify: " + obj);
+  var docId = arenderjs_.getDocumentBuilder().getResultDocumentId(obj);
+  console.log("Notify: " + docId);
+  console.log("Notify: docId = " + docId);
+}
 ```

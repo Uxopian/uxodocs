@@ -7,4 +7,4 @@ sidebar_position: 1
 content_hash: 7e325627d0fe32d0efe0a3751fb746af113ddd18dcbc362a6ece0fff1408ae27
 ---
 
-![img](pathname:///img/arender/ARender-Version5-Architecture.png)
+![img](pathname:///img/arender/diagrams/ARender-Version5-Architecture.png)

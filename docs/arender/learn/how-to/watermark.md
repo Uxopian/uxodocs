@@ -19,7 +19,7 @@ $TIMESTAMP$ will be replaced with the current time and time
 
 To activate this watermark on all documents you need to add the below properties to ARender server configuration (_arender-server-custom-vanilla.properties_)
 
-```cfg
+```properties
 # This allows to configure a watermark provider for the type of watermark
 # to apply on document preview
 arender.server.watermark.display.provider=activableDisplayWatermarkProvider
@@ -42,24 +42,24 @@ Below the default ARender watermark.
 
 ```xml
 <bean id="customWatermark" class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
-    <property name="name" value="CUSTOM" />
-    <property name="annotationType">
-        <value type="com.arondor.viewer.annotation.common.AnnotationType">Stamp</value>
-    </property>
-    <property name="contentTemplate" value="Viewed by $USERNAME$ at $TIMESTAMP$" />
-    <property name="annotationStyle">
-        <bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
-            <property name="fontColor" value="black" />
-            <property name="fontSize" value="20" />
-            <property name="backgroundColor" value="none" />
-            <property name="borderColor" value="black" />
-            <property name="borderStyle" value="0" />
-            <property name="borderWidth" value="0" />
-            <property name="rotation" value="340" />
-        </bean>
-    </property>
-    <!--watermarkPosition available values are: CENTRE and TOP_LEFT-->
-    <property name="watermarkPosition" value="CENTER"/>
+  <property name="name" value="CUSTOM" />
+  <property name="annotationType">
+    <value type="com.arondor.viewer.annotation.common.AnnotationType">Stamp</value>
+  </property>
+  <property name="contentTemplate" value="Viewed by $USERNAME$ at $TIMESTAMP$" />
+  <property name="annotationStyle">
+    <bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
+      <property name="fontColor" value="black" />
+      <property name="fontSize" value="20" />
+      <property name="backgroundColor" value="none" />
+      <property name="borderColor" value="black" />
+      <property name="borderStyle" value="0" />
+      <property name="borderWidth" value="0" />
+      <property name="rotation" value="340" />
+    </bean>
+  </property>
+  <!--watermarkPosition available values are: CENTRE and TOP_LEFT-->
+  <property name="watermarkPosition" value="CENTER"/>
 </bean>
 ```
 
@@ -76,7 +76,7 @@ To create your own watermark:
 Add the below property to ARender server configuration (_configurations/arender-custom-server.properties_).
 The value is the id of the bean you just created.
 
-```cfg
+```properties
 # Default watermark used when watermarks are activated on startup
 arender.watermark.bean.name=ChangeWithYouBeanId
 ```

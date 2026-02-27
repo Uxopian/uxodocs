@@ -45,13 +45,10 @@ ARender installation is as simple as:
 4. Copy the connector into the **lib/** folder of the step 2
 5. Edit the **arender-custom-server.properties** in the **configurations/** folder and add the following properties:
 
-```cfg
+```properties
 # Enable OAuth2
 arender.server.oauth2.enabled=true
 # Set authentication method to use for FileNet
-
-
-```properties
 arender.server.filenet.authentication.method=oauth2ObjectStoreProvider
 arender.server.filenet.ce.url=http://localhost:9080/wsi/FNCEWS40MTOM/
 ```
@@ -60,7 +57,7 @@ arender.server.filenet.ce.url=http://localhost:9080/wsi/FNCEWS40MTOM/
 
 Note: This is example with Keycloak
 
-```cfg
+```yml
 # Here we are changing the port of the ARender application since Keycloak server is already running in port 8080.
 server:
   port: 8082

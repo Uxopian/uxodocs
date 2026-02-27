@@ -10,7 +10,7 @@ A new servlet is deployed to generate an encrypted UUID.
 This UUID represents the URL parameters interpreted by the connector.
 Depending on this configuration the UUID will be base64 or encrypted.
 
-```cfg
+```properties
 # document id bean names, values are documentIdGenerator (base64) and encryptedDocumentIdGenerator (encrypted)
 arender.documentid.generator.beanName=documentIdGenerator
 ```

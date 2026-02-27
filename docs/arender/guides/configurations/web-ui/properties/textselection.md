@@ -13,9 +13,8 @@ content_hash: 801d5d2e419b900b983d5b3d28e278c6b2a92d3b0328ca5294de309a47abfd3b
 | ------------------------------------------------------------ | ------------------------- | ------------- | ------- |
 | Enable/disable default text selection character by character | text.selection.use.legacy | true          | Boolean |
 
-```cfg
+```properties
 # Enable the use of the legacy text selection, character by character :
 # When disabled, the text selection will select word by word when a word is partially or completely selected
-
 text.selection.use.legacy=true
 ```

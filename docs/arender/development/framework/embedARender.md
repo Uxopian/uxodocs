@@ -6,6 +6,9 @@ last_update:
 content_hash: 90bc1a4bee7bd6d47b9df1b61c78b3c63b48ef10a0a7bad7b8fb642e4de235af
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 To integrate ARender into your application, simply add an iframe tag pointing to the ARender server in the HTML code of your application.
 
 ## 1. Embedding the iframe
@@ -14,13 +17,8 @@ The ARender iframe should be inserted into your application at the most relevant
 
 Here is a minimal example compatible with any type of framework:
 
-```javascript
-<iframe
-    id="arender-iframe"
-    src="Insert the ARender URL here"
-    title="Integrated ARender iframe"
-    allow="microphone"
-/>
+```html
+<iframe id="arender-iframe" src="Insert the ARender URL here" title="Integrated ARender iframe" allow="microphone"></iframe>
 ```
 
 - The **id** uniquely identifies the iframe and allows its instance to be retrieved in JavaScript:
@@ -45,48 +43,48 @@ ARender integration tests have been conducted with the following versions:
 <p>- In React, you can use a <b>reference</b> to interact with the iframe using the <b>ref</b> parameter, instead of using an ID query.</p>
 <p>- You can also style the iframe by adding the <b>classname</b> parameter.</p> <p>- Finally, the URL associated with the iframe through the <b>src</b> parameter can be made dynamic, allowing it to be modified dynamically.</p>
 
-```javascript
+
+<Tabs>
+<TabItem value="react" label="ReactJS">
+<p>- Create a component called ARender.tsx or ARender.jsx and insert the iframe as shown in the code below. The component can then be instantiated wherever you need it using the tag: `<ARender />`</p>
+
+<p>- In React, you can use a <b>reference</b> to interact with the iframe using the <b>ref</b> parameter, instead of using an ID query.</p>
+<p>- You can also style the iframe by adding the <b>classname</b> parameter.</p> <p>- Finally, the URL associated with the iframe through the <b>src</b> parameter can be made dynamic, allowing it to be modified dynamically.</p>
+
+```javascript title="ARender.component.tsx"
 import { useRef, useState } from "react";
-```
 
-```javascript
-      function ARender() {
-          const iframeRef = useRef(null);
-          const [arenderUrl, setARenderUrl] = useState('')
-          // A dynamic url allow you to update easily the parameters
-          const [arenderIsDisplayed, setArenderIsDisplayed] = useState(true)
-```
+function ARender() {
+  const iframeRef = useRef(null);
+  const [arenderUrl, setARenderUrl] = useState('')
+  // A dynamic url allow you to update easily the parameters
+  const [arenderIsDisplayed, setArenderIsDisplayed] = useState(true)
 
-```javascript
-      return (
-          <>
-```
-
-```json
-
-              <iframe
-                ref={iframeRef}
-                className={`iframe ${arenderIsDisplayed ? '' : 'hidden'}`}
-                title='integrated-arender'
-                id='arender-iframe'
-                src={arenderUrl}
-                allow='microphone'
-              />
-
-          </>
-        );
-
-```
-
-```javascript
+  return (
+    <>
+      {
+        <iframe
+          ref={iframeRef}
+          className={`iframe ${arenderIsDisplayed ? '' : 'hidden'}`}
+          title='integrated-arender'
+          id='arender-iframe'
+          src={arenderUrl}
+          allow='microphone'
+        />
+      }
+    </>
+  );
+}
 export default ARender;
 ```
+</TabItem>
 
-        - Create an angular component (you can do it using this CLI command :
-        <code>ng generate component Arender</code>)
-        - Fill typescript and html files as presented below :
+<TabItem value="angular" label="Angular">
+- Create an angular component (you can do it using this CLI command :
+  <code>ng generate component Arender</code>)
+- Fill typescript and html files as presented below :
 
-```javascript
+```javascript title="arender.component.ts"
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
@@ -97,19 +95,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 export class ARenderComponent {
   @ViewChild('iframeRef', { static: false }) iframeRef!: ElementRef<HTMLIFrameElement>; // Reference to the iframe
   arenderIsDisplayed: boolean = true; // Controls the iframe visibility
-
+}
 ```
-
-```javascript
-<iframe
-  #iframeRef
-  class="iframe"
-  [class.hidden]="!arenderIsDisplayed"
-  title="integrated-arender"
-  id="arender-iframe"
-  src="" // Add ARender url here
-  allow="microphone"
-></iframe>
+```html title="arender.component.html"
+<!-- Set the src attribute with ARender URL-->
+<iframe #iframeRef class="iframe" [class.hidden]="!arenderIsDisplayed" title="integrated-arender" id="arender-iframe"
+  src="" allow="microphone"></iframe>
 ```
 
 <p>- Add ARenderComponent to the main module (file app.module.ts) if necessary by adding the arender component to the declarations list.</p>
@@ -117,34 +108,29 @@ export class ARenderComponent {
 <p>- Insert the component into the application by placing this tag in the HTML code of the appropriate file: <code><app-arender></app-arender></code></p>
 
 <p>- The <code>@ViewChild</code> attribute will allow easy interaction with the iframe without needing to use getElementById.</p>
+</TabItem>
 
+<TabItem value="vue" label="VueJS">
 <h4> Installation </h4>
 - Create a new file named ARenderItem.vue and insert the following code:
 
-
-```html
+```html title="ArenderItem.vue"
 <script setup>
-    import { ref } from "vue";
+  import { ref } from "vue";
 
-    const { arenderIsDisplayed = true } = defineProps();
-    const iframeRef = ref(null);
+  const { arenderIsDisplayed = true } = defineProps();
+  const iframeRef = ref(null);
 </script>
 
 <template>
-    <iframe
-        ref="iframeRef"
-        :class="{ hidden: !arenderIsDisplayed }"
-        class="iframe"
-        title="integrated-arender"
-        id="arender-iframe"
-        :src="arenderUrl"
-        allow="microphone"
-    ></iframe>
+  <iframe ref="iframeRef" :class="{ hidden: !arenderIsDisplayed }" class="iframe" title="integrated-arender"
+    id="arender-iframe" :src="arenderUrl" allow="microphone"></iframe>
 </template>
 
 <style scoped>
-    iframe {
-      ...
+  iframe {
+    ...
+  }
 </style>
 ```
 
@@ -152,14 +138,14 @@ export class ARenderComponent {
 
 You can use the ARender component in your Vue application as follows:
 
-```html
+```html title="App.vue"
 <script setup>
-    import Arender from "./components/ArenderItem.vue";
-    import { ref } from "vue";
+  import Arender from "./components/ArenderItem.vue";
+  import { ref } from "vue";
 </script>
 
 <template>
-    <Arender ref="arenderRef" />
+  <Arender ref="arenderRef" />
 </template>
 ```
 
@@ -184,25 +170,21 @@ You can use the ARender component in your Vue application as follows:
     You can modify the iframe source dynamically by updating the src attribute.
   </li>
 </ol>
+</TabItem>
 
+<TabItem value="svelte" label="Svelte">
 <h4> Installation </h4>
 - Create a new file named ARender.svelte and insert the following code:
 
-
-```html
+```html title="Arender.svelte"
 <script>
   let { arenderIsDisplayed = $bindable(true), iframeRef = $bindable() } = $props();
 </script>
 
-<iframe
-  bind:this={iframeRef}
-  class="iframe"
-  class:hidden={!arenderIsDisplayed}
-  title="integrated-arender"
-  id="arender-iframe"
-  src="" <!-- Add Arender url here -->
+<iframe bind:this={iframeRef} class="iframe" class:hidden={!arenderIsDisplayed} title="integrated-arender"
+  id="arender-iframe" src="" <!-- Add Arender url here -->
   allow="microphone"
-></iframe>
+  ></iframe>
 
 <style>
   ...
@@ -213,9 +195,9 @@ You can use the ARender component in your Vue application as follows:
 
 You can use the ARender component in your Svelte application as follows:
 
-```html
+```html title="+page.svelte"
 <script>
-    import Arender from "$components/Arender.svelte";
+  import Arender from "$components/Arender.svelte";
 </script>
 
 <Arender bind:iframeRef />
@@ -243,75 +225,83 @@ You can use the ARender component in your Svelte application as follows:
     You can modify the iframe source dynamically by updating the src attribute.
   </li>
 </ol>
+</TabItem>
 
-        To integrate with pure CSS, without using a specific framework, create the following script file:
+<TabItem value="javascript" label="Javascript">
+To integrate with pure CSS, without using a specific framework, create the following script file:
 
-```javascript
-    document.addEventListener('DOMContentLoaded', function () {
-    // Iframe creation
-    const iframe = document.createElement('iframe');
-    iframe.title = 'integrated-arender';
-    iframe.id = 'arender-iframe';
-    iframe.allow = 'microphone';
+```javascript title="index.js"
+document.addEventListener('DOMContentLoaded', function () {
+  // Iframe creation
+  const iframe = document.createElement('iframe');
+  iframe.title = 'integrated-arender';
+  iframe.id = 'arender-iframe';
+  iframe.allow = 'microphone';
 
-    // Variables for the URL and the iframe states
-    let arenderUrl = '';
-    let arenderIsDisplayed = true;
+  // Variables for the URL and the iframe states
+  let arenderUrl = '';
+  let arenderIsDisplayed = true;
 
-    // Add attributes to iframe
-    function updateIframe() {
-      iframe.src = arenderUrl;
-      iframe.className = arenderIsDisplayed ? 'iframe' : 'hidden';
+  // Add attributes to iframe
+  function updateIframe() {
+    iframe.src = arenderUrl;
+    iframe.className = arenderIsDisplayed ? 'iframe' : 'hidden';
+  }
+  // Add the iframe to the HTML body
+  document.body.appendChild(iframe);
 
-    // Add the iframe to the HTML body
-    document.body.appendChild(iframe);
-
-    // Function to update the HTML after an url change in the iframe
-    function setARenderUrl(newUrl) {
-      arenderUrl = newUrl;
-      updateIframe();
-
-    // Display / hide iframe
-    function toggleArenderVisibility() {
-      arenderIsDisplayed = !arenderIsDisplayed;
-      updateIframe();
-
-    // Initial update to manage the display of the iframe and the url
+  // Function to update the HTML after an url change in the iframe
+  function setARenderUrl(newUrl) {
+    arenderUrl = newUrl;
     updateIframe();
+  }
+  // Display / hide iframe
+  function toggleArenderVisibility() {
+    arenderIsDisplayed = !arenderIsDisplayed;
+    updateIframe();
+  }
+  // Initial update to manage the display of the iframe and the url
+  updateIframe();
 
-    // Add ARender URL
-    setARenderUrl(''); // <= Add ARender URL here
+  // Add ARender URL
+  setARenderUrl(''); // <= Add ARender URL here
 
-    // Listen to the button click
-    const toggleButton = document.getElementById('toggleButton');
-    toggleButton.addEventListener('click', function() {
-      toggleArenderVisibility();
-    });
+  // Listen to the button click
+  const toggleButton = document.getElementById('toggleButton');
+  toggleButton.addEventListener('click', function () {
+    toggleArenderVisibility();
   });
+});
 ```
 
 This script waits for the HTML document's DOM to load, creates an iframe element with the necessary parameters, and adds the element to the DOM.
 
 Then add the script to the HTML file of your choice :
 
-```html
+```html title="index.html"
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="style.css" />
-    </head>
-    <body>
-        <button id="toggleButton">Afficher / Masquer l'iframe</button>
 
-        <script src="./index.js"></script>
-    </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <button id="toggleButton">Afficher / Masquer l'iframe</button>
+
+  <script src="./index.js"></script>
+</body>
+
 </html>
 ```
-
 In this example, a button has been added to dynamically show/hide the iframe. (It will only work once the CSS is added in the next section.)
+</TabItem>
+</Tabs>
+
+
 
 In this example, a 'hidden' class has been added to the iframe when we want to hide it (for example, by setting its width to 0px).
 
@@ -327,18 +317,26 @@ Here is an example of commented CSS:
 
 ```css
 iframe {
-  position: fixed; /* ARender will remain displayed even if you scroll in your application */
+  position: fixed;
+  /* ARender will remain displayed even if you scroll in your application */
   top: 0;
   right: 0;
-  width: 60%; /* 60% of screen width */
-  transition: width 0.2s ease-in-out; /* Facultative transition when displaying d'ARender */
-  height: 100%; /* Takes all screen height */
-  border: none; /* Remove iframe borders */
-  border-left: 1px solid var(--ar-color-gray-700); /* Add a customized border on the left side of the iframe to separate it from the rest of the application */
+  width: 60%;
+  /* 60% of screen width */
+  transition: width 0.2s ease-in-out;
+  /* Facultative transition when displaying d'ARender */
+  height: 100%;
+  /* Takes all screen height */
+  border: none;
+  /* Remove iframe borders */
+  border-left: 1px solid var(--ar-color-gray-700);
+  /* Add a customized border on the left side of the iframe to separate it from the rest of the application */
 
   &.hidden {
-    width: 0px; /* Visualy hides ARender. ARender stays open to avoid reloading each time. */
-    transition: width 0.2s ease-in-out; /* Facultative transition when hiding d'ARender */
-
-
+    width: 0px;
+    /* Visualy hides ARender. ARender stays open to avoid reloading each time. */
+    transition: width 0.2s ease-in-out;
+    /* Facultative transition when hiding d'ARender */
+  }
+}
 ```

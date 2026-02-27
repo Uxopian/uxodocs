@@ -8,7 +8,7 @@ content_hash: 90d366a3f807d28ecefe14c7bc357f86113414869465c3f0b1dd500eac7617b6
 ---
 
 The test jar «
-arondor-arender-rendition-tester-**{VERSION-NUMBER}**-jar-with-dependencies.jar
+arondor-arender-rendition-tester-{{version}}-jar-with-dependencies.jar
 », allow the user to launch some functional test on rendition server
 with following options **as admin**:
 
@@ -71,7 +71,7 @@ $> java -jar arondor-arender-rendition-tester-{VERSION-NUMBER}.jar -d http://ren
 
 ### Statistics
 
-- `[Image_IM]()${width}_0`: renditions of pages of width ${width} (px)
+- `[Image_IM]()$&#123;width&#125;_0`: renditions of pages of width $&#123;width&#125; (px)
 - Image: renditions of all pages
 - Image_PageContents: extraction of page textual content
 - Fetch_DocumentPageLayout: extraction of document layout

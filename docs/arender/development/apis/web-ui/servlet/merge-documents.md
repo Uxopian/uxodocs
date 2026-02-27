@@ -37,7 +37,10 @@ The servlet returns the UUID of the merged document and its number of
 pages.
 
 ```javascript
-{"uuid":"b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0","nbPages":"32"}
+{
+  "uuid": "b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0",
+  "nbPages": "32"
+}
 ```
 
 Here the UUID is: b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0.

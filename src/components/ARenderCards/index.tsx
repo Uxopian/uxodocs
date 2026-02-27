@@ -8,7 +8,7 @@ const ARenderCardsList = [
         title: "What is ARender ?",
         icon: "💡",
         description: "Discover ARender and its capabilities",
-        link: "/docs/arender/what-is-arender/introduction",
+        link: "/docs/arender/what-is-arender/overview",
         color: "#B56BFF",
     },
     {
@@ -22,7 +22,7 @@ const ARenderCardsList = [
         title: "Learn",
         icon: "📚",
         description: "Learn how to use ARender through guides and tutorials",
-        link: "/docs/arender/learn/architecture/ecm-architecture",
+        link: "/docs/arender/learn/architecture/overview",
         color: "#735EFC",
     },
 ];
@@ -36,7 +36,7 @@ const GuidesList = [
                 icon: "⚙️",
                 title: "Configurations",
                 description: "Configure ARender to meet your needs",
-                link: "/docs/arender/guides/configurations/web-ui/connectors/default",
+                link: "/docs/arender/guides/configurations/rendition/service-broker/",
             },
             {
                 icon: "💻",
@@ -104,7 +104,7 @@ const GuidesList = [
                 icon: "🧩",
                 title: "Framework",
                 description: "ARender development framework",
-                link: "/docs/arender/development/framework/addAHighlightNotification",
+                link: "/docs/arender/development/framework/overview",
             },
             {
                 icon: "📡",

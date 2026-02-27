@@ -19,7 +19,7 @@ Some load balancers interpret session cookies differently. While many accept sta
 
 You can now control how the session cookie is formatted using the following JVM properties:
 
-```cfg
+```properties
 # Sets the route identifier (e.g., the instance ID or node name) appended to the session ID
 com.uxopian.arender.session.jvm.route
 # Defines the separator character between the session ID and route

@@ -22,8 +22,7 @@ This file will override the basic configuration file.
 The _application.properties_ at modules/RenditionEngine file with the default mime types,
 to modify to add/remove the desired mime types:
 
-```cfg
-
+```properties
 # List of mime types that does not need conversion to be rendered
 arender.format.nativeMimeTypes=application/pdf,image/tiff,video/mp4
 # List of mime types handled by the mail extractor
@@ -55,16 +54,11 @@ to modify to add/remove the desired mime types to the right converter:
 
 ```yaml
 app:
-    factoriesBeanNames:
-        imageFactory: "image/webp,image/png,image/jpeg,image/gif,image/x-ms-bmp,image/x-bmp,image/x-portable-bitmap,image/vnd.adobe.photoshop,image/x-eps,application/postscript,application/dicom,application/pcx,application/x-pcx,image/pcx,image/x-pc-paintbrush,image/x-pcx,zz-application/zz-winassoc-pcx,image/jp2,image/heif,image/wmf"
-        imageIOFactory: "image/tiff"
-        htmlFactory: "text/html"
-        genericConvertOffice:
-            "${mime.type.msoffice.word},${mime.type.msoffice.rtf},${mime.type.libreoffice.text},
-            ${mime.type.msoffice.excel},${mime.type.libreoffice.sheet},
-            ${mime.type.msoffice.powerpoint},${mime.type.libreoffice.presentation},
-            ${mime.type.msoffice.visio},${mime.type.libreoffice.graphics},
-            ${mime.type.msoffice.project}"
-        pdfboxTextFactory: "text/plain"
-        videoConversionFactory: "video/mp4,audio/x-wav,audio/mp3,audio/mpeg,audio/x-mpeg,video/quicktime,video/3gpp,video/x-flv,video/mpeg,video/x-msvideo,video/x-matroska,video/x-ms-asf,audio/x-aiff,audio/mp4,video/gif,video/mp2p"
+  factoriesBeanNames:
+    imageFactory: "image/webp,image/png,image/jpeg,image/gif,image/x-ms-bmp,image/x-bmp,image/x-portable-bitmap,image/vnd.adobe.photoshop,image/x-eps,application/postscript,application/dicom,application/pcx,application/x-pcx,image/pcx,image/x-pc-paintbrush,image/x-pcx,zz-application/zz-winassoc-pcx,image/jp2,image/heif,image/wmf"
+    imageIOFactory: "image/tiff"
+    htmlFactory: "text/html"
+    genericConvertOffice: "${mime.type.msoffice.word},${mime.type.msoffice.rtf},${mime.type.libreoffice.text},${mime.type.msoffice.excel},${mime.type.libreoffice.sheet},${mime.type.msoffice.powerpoint},${mime.type.libreoffice.presentation},${mime.type.msoffice.visio},${mime.type.libreoffice.graphics},${mime.type.msoffice.project}"
+    pdfboxTextFactory: "text/plain"
+    videoConversionFactory: "video/mp4,audio/x-wav,audio/mp3,audio/mpeg,audio/x-mpeg,video/quicktime,video/3gpp,video/x-flv,video/mpeg,video/x-msvideo,video/x-matroska,video/x-ms-asf,audio/x-aiff,audio/mp4,video/gif,video/mp2p"
 ```

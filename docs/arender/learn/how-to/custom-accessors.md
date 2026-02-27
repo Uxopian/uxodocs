@@ -54,7 +54,7 @@ parser in the file arender-custom-server.properties contained in the configurati
 - In the file _configurations/arender-custom-server.properties_, add your bean Id
   to the list:
 
-```cfg
+```properties
 arender.server.url.parsers.beanNames=customUrlParser,DefaultURLParser,DocumentIdURLParser,FileattachmentURLParser,ExternalBeanURLParser,AlterContentParser,FallbackURLParser
 ```
 

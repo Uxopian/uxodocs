@@ -29,7 +29,7 @@ interface is ready.
 
 This property can be set in the profile file:
 
-```cfg
+```properties
 arenderjs.startupScript=scripts/myarenderscript.js
 ```
 

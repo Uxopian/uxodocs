@@ -61,12 +61,10 @@ Open the below file:
 - arondor-arender-hmi-filenet-.war\WEB-INF\classes\arender-server-custom-filenet.properties
   And add the below content (change with the value matching your context):
 
-```cfg
+```properties
 # Default authentication method is jaasObjectStoreProvider. To activate connect through a technical account use loginPasswordObjectStoreProvider and set the right login and password below
 arender.server.filenet.authentication.method=loginPasswordObjectStoreProvider
 # Example of URL for jaasObjectStoreProvider: iiop://localhost:2809/FileNet/Engine and for loginPasswordObjectStoreProvider : http://localhost:9080/wsi/FNCEWS40MTOM/
-
-```properties
 arender.server.filenet.ce.url=http://localhost:9080/wsi/FNCEWS40MTOM/
 arender.server.filenet.ce.login=loginToChange
 arender.server.filenet.ce.password=passwordToChange

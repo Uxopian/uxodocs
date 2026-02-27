@@ -7,6 +7,9 @@ last_update:
 content_hash: 9bee2992ecff2287f45c94df7dd4672b03ac7fd2cf354dc8597bdbf10a0d5e24
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## By Environment Variables
 
 All yaml properties can be overridden by environment variables by following the next rules:
@@ -16,24 +19,32 @@ All yaml properties can be overridden by environment variables by following the 
 - use **"\_"** to associate an object
 - use **"[n]"** to set a list element (with **n** as index)
 
+<Tabs>
+<TabItem value="yaml" label="YAML Configuration">
 ```yaml
 nurse:
-    samplesDirectory: ../../samples/
+  samplesDirectory: ../../samples/
     components:
-        - functionality: TKC_MailConversion
-          factoryName: "mailFactory"
-          samplePath: "test.msg"
-          docIdStr: "m41lS4mpl3"
+      - functionality: TKC_MailConversion
+        factoryName: "mailFactory"
+        samplePath: "test.msg"
+        docIdStr: "m41lS4mpl3"
 ```
+</TabItem>
 
+<TabItem value="environment" label="Environment Variables">
 ```yaml
-environment:
+  environment:
     - "DCV_NURSE_SAMPLES.DIRECTORY=../../samples/"
     - "DCV_NURSE_COMPONENTS[0]_FUNCTIONALITY=TKC_MailConversion"
     - "DCV_NURSE_COMPONENTS[0]_FACTORY.NAME=mailFactory"
     - "DCV_NURSE_COMPONENTS[0]_SAMPLE.PATH=test.msg"
     - "DCV_NURSE_COMPONENTS[0]_DOC.ID.STR=m41lS4mpl3"
 ```
+</TabItem>
+</Tabs>
+
+
 
 ## By volumes
 
@@ -45,7 +56,7 @@ Configuration files location:
 - /arender/config/application.yaml
 - /arender/config/application-\*.yaml
 
-**{service-name}**: container name without "arender" prefix
+**&#123;service-name&#125;**: container name without "arender" prefix
 
 ## PDFOwl: a document renderer alternative
 
@@ -134,7 +145,7 @@ volumes:
 
 Some properties are available with default values :
 
-```cfg
+```properties
 # PdfOwl binary path
 pdfowl.path=pdfowl
 # Timeout for pdfowl commands execution in milliseconds

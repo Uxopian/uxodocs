@@ -14,22 +14,21 @@ It is possible to add redact reasons. These reasons will be directly displayed o
 Change the value to the values you want.
 
 ```xml
-    <bean id="availableRedactReasons" class="java.util.ArrayList">
-		<constructor-arg>
-			<list>
-				<bean
-					class="com.arondor.viewer.annotation.common.RedactReason">
-					<property name="symbolicName" value="(b)(1)" />
-					<property name="displayName">
-						<map>
-							<entry key="fr" value="Informations classées pour protéger la sécurité nationale." />
-							<entry key="en" value="Information that is classified to protect national security." />
-						</map>
-					</property>
-				</bean>
-			</list>
-		</constructor-arg>
-	</bean>
+<bean id="availableRedactReasons" class="java.util.ArrayList">
+  <constructor-arg>
+    <list>
+      <bean class="com.arondor.viewer.annotation.common.RedactReason">
+        <property name="symbolicName" value="(b)(1)" />
+        <property name="displayName">
+          <map>
+            <entry key="fr" value="Informations classées pour protéger la sécurité nationale." />
+            <entry key="en" value="Information that is classified to protect national security." />
+          </map>
+        </property>
+      </bean>
+    </list>
+  </constructor-arg>
+</bean>
 ```
 
 ## Default value
@@ -38,7 +37,7 @@ You can add one or more default reasons with the following property. The default
 
 If there are several default reasons, it should be comma-separated values (ex:(b)(1),(b)(2)).
 
-```cfg
+```properties
 arender.server.annotations.default.redact.reason=(b)(1)
 ```
 

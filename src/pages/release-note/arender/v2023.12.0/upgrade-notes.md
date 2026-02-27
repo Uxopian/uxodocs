@@ -102,7 +102,7 @@ The following configuration properties have been added to the server side of the
 
 \{\{< tag type="code" title="WEB-INF/classes/arender-server-default.properties" >\}\}
 
-```cfg
+```properties
 # Configure a limit on the number of bytes that can be buffered (in bytes)
 arender.server.rendition.rest.max.in.memory.size=8000000
 # The maximum number of connections before starting pending acquisition on existing ones

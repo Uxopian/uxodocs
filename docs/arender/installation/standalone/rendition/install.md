@@ -20,14 +20,14 @@ valid JDK or JRE (see [Requirement](/docs/arender/installation/standalone/rendit
 
 Use the provided credentials (contact arender-sales@arondor.com for access) to download the Rendition installation JAR:
 
-https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/micro/services/rendition-engine-installer//rendition-engine-installer--rendition.jar
+https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/micro/services/rendition-engine-installer/{{version}}/rendition-engine-installer-{{version}}-rendition.jar
 
 ### Installation process
 
 Run the following command to start the installation:
 
 ```bash
-$> java -jar rendition-engine-installer--rendition.jar
+$> java -jar rendition-engine-installer-{{version}}-rendition.jar
 ```
 
 Below is an example of the installation steps on Windows:
@@ -41,7 +41,8 @@ Below is an example of the installation steps on Windows:
 ![image](/img/arender/installer-jar-arender-2.png)
 
 - Completion screen:
-  ![image](/img/arender/installer-jar-arender-3.png)
+
+![image](/img/arender/installer-jar-arender-3.png)
 
 Installed software, except LibreOffice, will be located in the **_third_party_** software folder:
 
@@ -79,7 +80,7 @@ As example, for a silent installation, set **arender.silent.install=true** in **
 For an installation in a silent mode, an option must be passed as a parameter when launching the installation with the jar.
 
 ```bash
-$> java -jar ARender-rendition-installer.jar -options install-rendition.properties
+$> java -jar rendition-engine-installer-{{version}}-rendition.jar -options install-rendition.properties
 ```
 
 ### Zip Packaging Installation

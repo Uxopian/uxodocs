@@ -14,7 +14,7 @@ If you need to deactivate this behaviour you need to use true redact, i.e. confi
 
 - Activate the fetch of redaction before the image generation:
 
-```cfg title="~/configurations/arender-custom-server.properties"
+```properties title="~/configurations/arender-custom-server.properties"
 arender.server.process.annotations.rendition=true
 ```
 
@@ -26,13 +26,13 @@ ARender offers the possibility to hide the content of any type of document via t
 
 To activate the redact panel, add the following property. By default, it is disabled.
 
-```cfg title="configurations/arender-custom-client.properties"
+```properties title="configurations/arender-custom-client.properties"
 redactexplorer.enabled=true
 ```
 
 This panel will give you access to the different redact buttons. By default, four redaction classic creation buttons are available.
 
-```cfg title="configurations/arender-custom-client.properties"
+```properties title="configurations/arender-custom-client.properties"
 redactexplorer.redact=true
 redactexplorer.redactZone=true
 redactexplorer.redactPageContent=true
@@ -46,7 +46,7 @@ The fourth allows you to redact the whole page.
 
 Two buttons of redactions advanced creation are available.
 
-```cfg
+```properties
 redactexplorer.manualInput=true
 redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
@@ -61,7 +61,7 @@ It is possible to select reasons to apply on redactions.
 
 By default the "With reason" radio button is selected.
 
-```cfg title="configurations/arender-custom-client.properties"
+```properties title="configurations/arender-custom-client.properties"
 # If true, the radio button "With reason" is selected
 redactexplorer.redact.with.reasons=true
 ```
@@ -83,7 +83,7 @@ To test please:
 
 Advanced redact panel offers two buttons, manual input and rules.
 
-```cfg
+```properties
 redactexplorer.manualInput=true
 redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
@@ -124,35 +124,32 @@ If you want to refine your selection, you can open the results panel:
 It is also possible to add your own buttons. In the file _arender-custom-integration.xml_ add the information of the button.
 
 ```xml title="configurations/arender-custom-integration.xml"
-<bean id="addRedact"
-	class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
-         <constructor-arg value="addRedact" />
-         <constructor-arg>
-             <ref bean="labels#addRedact" />
-         </constructor-arg>
-         <constructor-arg value="standardButton icon-square toppanelButton"/>
-         <property name="enabled" value="${redactexplorer.redactZone}" />
-         <property name="buttonGroup" value="topPanel" />
-         <property name="inactiveButtonHandler">
-             <ref bean="quitAnnotationCreationAction" />
-         </property>
-         <property name="buttonHandler">
-             <ref bean="redactZoneCreationAction" />
-         </property>
+<bean id="addRedact" class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
+  <constructor-arg value="addRedact" />
+  <constructor-arg>
+    <ref bean="labels#addRedact" />
+  </constructor-arg>
+  <constructor-arg value="standardButton icon-square toppanelButton"/>
+  <property name="enabled" value="${redactexplorer.redactZone}" />
+  <property name="buttonGroup" value="topPanel" />
+  <property name="inactiveButtonHandler">
+    <ref bean="quitAnnotationCreationAction" />
+  </property>
+  <property name="buttonHandler">
+    <ref bean="redactZoneCreationAction" />
+  </property>
 </bean>
 ```
 
 Then add the bean id of your button to the list named “redactButtons”. If it doesn’t exist, create it.
 
 ```xml title="configurations/arender-custom-integration.xml"
-<bean id="redactExplorerView"
-	class="com.arondor.viewer.client.documentnavigator.redact.RedactExplorerView"
-	scope="prototype">
-    <property name="redactButtons">
-        <list>
-        	<ref bean="addRedact" />
-        </list>
-    </property>
+<bean id="redactExplorerView" class="com.arondor.viewer.client.documentnavigator.redact.RedactExplorerView" scope="prototype">
+  <property name="redactButtons">
+    <list>
+      <ref bean="addRedact" />
+    </list>
+  </property>
 </bean>
 ```
 
@@ -164,7 +161,7 @@ The redaction model has evolved in ARender version 2023. To facilitate the conve
 
 The new annotation accessor takes the bean name of another annotation accessor as a parameter. You can modify this bean name as follows:
 
-```cfg title="configurations/arender-custom-server.properties"
+```properties title="configurations/arender-custom-server.properties"
 arender.server.wrapper.source.annotation.accessor=myCustomAnnotationAccessorBeanName
 ```
 
@@ -194,6 +191,6 @@ redactConverterAnnotationAccessor().setConvert(false);
 
 And the property:
 
-```cfg title="Code Example"
+```properties title="Code Example"
 arender.server.wrapper.source.convert=false
 ```

@@ -134,7 +134,7 @@ pixel comparison calculation.
 
 The default fuzz value is 3, and is configurable with the following property:
 
-```cfg
+```properties
 # Setup the default image comparison tolerance value. Value between 0 and 100. Value in percentage.
 visualization.image.comparison.default.fuzz=3
 ```
@@ -144,7 +144,7 @@ that are not considered different are colorless (lowlight color).
 
 The default colors are configurable with the following properties :
 
-```cfg
+```properties
 # Setup the default image comparison highlight color. Highlight for the pixels difference
 visualization.image.comparison.default.highlight.color=#FF0000
 
@@ -173,7 +173,7 @@ http://<arender_host>/ARender/arendergwt/downloadServlet/mergedWithCompareResult
 By default, it is not possible to switch documents with a vertical scroll during a document comparison.
 It is possible to change this behavior and allow document switching with vertical scrolling with the following configuration :
 
-```cfg
+```properties
 # Allow the vertical scrolling to change document while in multiview
 visualization.multiView.allow.scroll.document.change=true
 ```

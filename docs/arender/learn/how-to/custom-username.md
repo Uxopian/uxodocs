@@ -20,11 +20,11 @@ _DisplayNameProvider_.
 
 ```java
 public interface DisplayNameProvider
+{
+  String fetchDisplayName(String originalCreatorName);
 
-    String fetchDisplayName(String originalCreatorName);
-
-    List<String> fetchDisplayNames(List<String> originalCreatorNames);
-
+  List<String> fetchDisplayNames(List<String> originalCreatorNames);
+}
 ```
 
 Those two methods needs to be implemented (one of them being a list
@@ -36,53 +36,61 @@ packaging) which allows to prefix all usernames by _arender_.
 
 ```java
 public class DefaultPrefixerDisplayNameProvider implements DisplayNameProvider
+{
+  private String prefix = "arender";
 
-    private String prefix = "arender";
+  private String separator = "-";
 
-    private String separator = "-";
+  @Override
+  public String fetchDisplayName(String originalCreatorName)
+  {
+    return getPrefixedString(originalCreatorName);
+  }
 
-    @Override
-    public String fetchDisplayName(String originalCreatorName)
+  @Override
+  public List<String> fetchDisplayNames(List<String> originalCreatorNames)
+  {
+    List<String> prefixed = new ArrayList<String>();
+    
+    for (String originalCreatorName:originalCreatorNames)
+    {
+      prefixed.add(getPrefixedString(originalCreatorName));
+      return prefixed;
+    }
+  }
+  
+  private String getPrefixedString(String originalCreatorName)
+  {
+    if (Strings.isNullOrEmpty(originalCreatorName))
+    {
+      return prefix;
+    }
+    else
+    {
+      return prefix + separator + originalCreatorName;
+    }
+  }
+  
+  public String getPrefix()
+  {
+    return prefix;
+  }
 
-        return getPrefixedString(originalCreatorName);
+  public void setPrefix(String prefix)
+  {
+    this.prefix = prefix;
+  }
 
-    @Override
-    public List<String> fetchDisplayNames(List<String> originalCreatorNames)
+  public String getSeparator()
+  {
+    return separator;
+  }
 
-        List<String> prefixed = new ArrayList<String>();
-        for (String originalCreatorName: originalCreatorNames)
-
-            prefixed.add(getPrefixedString(originalCreatorName));
-
-        return prefixed;
-
-    private String getPrefixedString(String originalCreatorName)
-
-        if (Strings.isNullOrEmpty(originalCreatorName))
-
-            return prefix;
-
-        else
-
-            return prefix + separator + originalCreatorName;
-
-
-    public String getPrefix()
-
-        return prefix;
-
-    public void setPrefix(String prefix)
-
-        this.prefix = prefix;
-
-    public String getSeparator()
-
-        return separator;
-
-    public void setSeparator(String separator)
-
-        this.separator = separator;
-
+  public void setSeparator(String separator)
+  {
+    this.separator = separator;
+  }
+}
 ```
 
 The last remaining step is required to indicate to ARender which display
@@ -98,6 +106,6 @@ names provider it should use. This is done in the following files:
 - Example of property setup (modifications to do in
   _configurations/arender-custom-server.properties_):
 
-```cfg
+```properties
 arender.server.displayName.provider=myCustomNameProvider
 ```

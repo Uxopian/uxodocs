@@ -30,7 +30,7 @@ Note: If you do not have the necessary credential for ARender artifactory, pleas
 
 In our example, we will be using Docker Compose so we can have the whole stack up and running.
 
-```cfg
+```yml
 version: "3.7"
 
 services:

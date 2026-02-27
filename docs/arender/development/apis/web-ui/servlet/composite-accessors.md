@@ -40,23 +40,23 @@ the content of the Json provided for this example:
 
 ```json
 {
-   "title": "test_Container",
-   "references": [{
-       "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/cdsinternationalprivacypolicy.pdf"
-   }, {
-       "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/programme_de_stabilite_2012-2016.pdf"
-   }, {
-       "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/Pearson_-_Coder_Proprement_-_2009.pdf"
-   }, {
-       "title": "container_two",
-       "references": [{
-           "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/cdsinternationalprivacypolicy.pdf"
-       }, {
-           "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/programme_de_stabilite_2012-2016.pdf"
-       }, {
-           "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/Pearson_-_Coder_Proprement_-_2009.pdf"
-       }]
-   }]
+  "title": "test_Container",
+  "references": [{
+    "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/cdsinternationalprivacypolicy.pdf"
+  }, {
+    "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/programme_de_stabilite_2012-2016.pdf"
+  }, {
+    "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/Pearson_-_Coder_Proprement_-_2009.pdf"
+  }, {
+    "title": "container_two",
+    "references": [{
+      "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/cdsinternationalprivacypolicy.pdf"
+    }, {
+      "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/programme_de_stabilite_2012-2016.pdf"
+    }, {
+      "queryUrl": "loadingQuery?url=http:\/\/arender.arondor.com\/pdf\/pdf\/Pearson_-_Coder_Proprement_-_2009.pdf"
+    }]
+  }]
 }
 ```
 

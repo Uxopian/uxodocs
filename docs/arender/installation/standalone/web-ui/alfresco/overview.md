@@ -31,7 +31,7 @@ By default, ARender is configured to communicate with a local Alfresco using CMI
 
 * To configure the **CMIS connection** (editor recommendation) with a remote Alfresco, add the below property:
 
-```cfg title="configurations/arender-custom-server.properties"
+```properties title="configurations/arender-custom-server.properties"
 arender.server.alfresco.atom.pub.url=http://alfrescoHost/alfresco/api/-default-/cmis/versions/1.1/atom
 ```
 
@@ -41,7 +41,7 @@ Authentication will be done using an **Alfresco ticket**.
 
 * To configure the **SOAP connection** (editor recommendation) with a remote Alfresco, add the below properties:
 
-```cfg title="configurations/arender-custom-server.properties"
+```properties title="configurations/arender-custom-server.properties"
 arender.server.alfresco.use.soap.ws=true
 arender.server.alfresco.soap.ws.url=http://alfrescoHost/alfresco/cmisws/cmis?wsdl
 arender.server.alfresco.user=userNameValue
@@ -53,7 +53,7 @@ arender.server.alfresco.password=passwordValue
 The context path is the path that’s used by applications (for example, Alfresco Share, SOLR, SharePoint, and others).
 If you want to deploy to a context path that isn’t */alfresco*, it needs to be specified with the following property:
 
-```cfg
+```properties
 arender.server.alfresco.context=my-context-path
 ```
 

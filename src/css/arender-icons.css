@@ -1010,3 +1010,13 @@
 .glyph span {
   align-self: center;
 }
+
+.logo {
+  height: 22px;
+  width: 22px;
+  margin-right: 10px;
+}
+
+.logo-name {
+  margin-bottom: 5px;
+}

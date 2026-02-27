@@ -75,8 +75,8 @@ This function takes 6 input parameters:
 
 ```javascript
 getARenderJS()
-    .getSearchJSAPI()
-    .askAdvancedSearchText("arender", false, false, false, "AllDocuments", "WithAnnotations", null);
+  .getSearchJSAPI()
+  .askAdvancedSearchText("arender", false, false, false, "AllDocuments", "WithAnnotations", null);
 ```
 
 In this example:
@@ -100,14 +100,14 @@ To perform a search with this regex, you would run the search as follows, making
 
 ```javascript
 getARenderJS()
-    .getSearchJSAPI()
-    .askAdvancedSearchText(
-        "\b\w{16,}\b",
-        false,
-        false,
-        true,
-        "AllDocuments",
-        "WithAnnotations",
-        null
-    );
+  .getSearchJSAPI()
+  .askAdvancedSearchText(
+    "\b\w{16,}\b",
+    false,
+    false,
+    true,
+    "AllDocuments",
+    "WithAnnotations",
+    null
+  );
 ```

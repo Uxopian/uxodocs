@@ -16,7 +16,7 @@ No architectural or configuration changes.
 This enhancement adds two new algorithms to handle the distribution of workload from UI (HMI) to Rendition. This selection occurs when the UI needs to select a Rendition server for a new document being opened. Only the available Rendition servers can be selected, i.e. servers that have successfully replied in the last second to the requests of UI server.
 The configuration value at UI is:
 
-```cfg
+```properties
 arender.server.rendition.weather.distribution.strategy
 ```
 
@@ -51,6 +51,6 @@ This setting can be changed using the option **_disk.free.space.threshold_** in 
 This value is a floating number and expressed in GigaBytes, default is 1.
 Example:
 
-```cfg
+```properties
 disk.free.space.threshold=2
 ```

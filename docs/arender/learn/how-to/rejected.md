@@ -13,7 +13,7 @@ Since version 4.8.0, it is possible to configure the rendition server to display
 
 To activate the functionality, you will have to make a modification in the _application.properties_ file in the _document-service-broker_ microservice.
 
-```cfg
+```properties
 rejected.document.enabled=true
 ```
 
@@ -21,7 +21,7 @@ rejected.document.enabled=true
 
 To modify the default image, you will have to make a modification in the _application.properties_ file in the _document-service-broker_ microservice.
 
-```cfg
+```properties
 rejected.document.path={path_to_the_file}
 ```
 
@@ -31,7 +31,7 @@ rejected.document.path={path_to_the_file}
 
 To modify the title of the document, you will have to make a modification in the _application.properties_ file in the _document-service-broker_ microservice.
 
-```cfg
+```properties
 rejected.document.title=Custom title
 ```
 

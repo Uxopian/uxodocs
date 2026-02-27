@@ -21,7 +21,7 @@ It is possible to check or uncheck the layers you want to display.
 
 By default, the layer explorer is activated.
 
-```cfg
+```properties
 layer.explorer.enabled=true
 ```
 

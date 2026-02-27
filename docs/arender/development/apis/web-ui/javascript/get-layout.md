@@ -17,16 +17,15 @@ content_hash: b1ac03708e7a7c6fc1bf234698bcea9d7788aaccfaf680ad83360205c901d371
 
 ```js
 // Retrieve a document layout
-getARenderJS().getDocumentLayout().getShallowDocumentLayout(getARenderJS().getMasterDocumentId(), function(layout) {
-            // Check if layout is a document container
-            if (layout.isDocumentContainer()) {
-                var children = layout.getChildren();
-                for (var i=0; i<children.length; i++)
-
-                    var child = children[i];
-                    // Print child document ID
-                    console.info("child id = " + child.getDocumentId());
-
-
-        });
+getARenderJS().getDocumentLayout().getShallowDocumentLayout(getARenderJS().getMasterDocumentId(), function (layout) {
+  // Check if layout is a document container
+  if (layout.isDocumentContainer()) {
+    var children = layout.getChildren();
+    for (var i = 0; i < children.length; i++) {
+      var child = children[i];
+      // Print child document ID
+      console.info("child id = " + child.getDocumentId());
+    }
+  }
+});
 ```

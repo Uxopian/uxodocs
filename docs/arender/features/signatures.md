@@ -12,14 +12,14 @@ To enable the Signatures tab, the following property must be enabled :
 
 Before 4.6.0, the configuration is done in the document-service-broker (RenditionEngine)
 
-```cfg
+```yml
 services-broker:
   signaturePDF: true
 ```
 
 Since 4.6.0, the configuration is done in the document-text-handler service (PDFBoxEngine)
 
-```cfg
+```properties
 pdf.signatures.enable=true
 ```
 
@@ -67,7 +67,7 @@ Different types of errors are reported to the signature panel :
   It is possible to configure a list of valid certificates.
   To do this, place the desired certificates in a folder defined by the PUBLIC_CERT property for the document-text-handler service, whose default value is ../defaultPathPublicCert:
 
-```cfg
+```properties
 PUBLIC_CERT=../defaultPathPublicCert
 ```
 

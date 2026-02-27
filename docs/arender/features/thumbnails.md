@@ -32,11 +32,11 @@ For those who desire control over their thumbnail view, ARender provides a dynam
 
 To use this feature, you can enable it via a simple configuration setting.
 
-```cfg
+```properties
 ui.legacy.enabled=false
 ```
 
-```cfg
+```properties
 ui.legacy.enabled=false
 ```
 
@@ -53,11 +53,11 @@ new document. This default value can be changed to any number between 1 and 4.
 
 To use this feature, you can configure it via a simple configuration setting.
 
-```cfg
+```properties
 thumbexplorer.columns=1
 ```
 
-```cfg
+```properties
 thumbexplorer.columns=1
 ```
 
@@ -68,11 +68,11 @@ options including "Create anchor at this page". It is possible to disable this o
 
 To disable this feature, use the following configuration parameter:
 
-```cfg
+```properties
 thumbexplorer.contextualMenu.createPageAnchor=false
 ```
 
-```cfg
+```properties
 thumbexplorer.contextualMenu.createPageAnchor=false
 ```
 

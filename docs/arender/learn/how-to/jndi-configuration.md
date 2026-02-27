@@ -28,14 +28,14 @@ server.
 ## Apache Tomcat JNDI configuration
 
 - Create a property file (example:
-  _customer-&lt;integration_type&gt;.properties_, with
-  &lt;integration_type&gt; being the type of your current integration ;
+  `customer-<integration_type>.properties`, with
+  `<integration_type>` being the type of your current integration ;
   vanilla,filenet,alfresco) and save it in the folder of your choice
   (Example: _C:\\Dev\\apache-tomcat-8.5.13\\customConfiguration_).
 - Edit this file with the wanted specific configuration (available
   properties are in arender-server.properties):
 
-    ```cfg
+    ```properties
     arender.server.rendition.hosts=http://localhost:8761/
     ```
 
@@ -44,11 +44,11 @@ server.
 - Edit this file to add an environment variable
   **propertiesFileLocation**. Its value is the path of the folder
   containing the property file
-  _customer-&lt;integration_type&gt;.properties_ defined above. Example:
+  `customer-<integration_type>.properties` defined above. Example:
 
 ```xml
 <Context>
-    <Environment name="propertiesFileLocation" value="C:\Dev\apache-tomcat-8.5.13\customConfiguration" type="java.lang.String" override="false"/>
+  <Environment name="propertiesFileLocation" value="C:\Dev\apache-tomcat-8.5.13\customConfiguration" type="java.lang.String" override="false"/>
 </Context>
 ```
 
@@ -58,26 +58,24 @@ server.
 
 - Override web.xml configuration
 
-    ```XML
+    ```xml
     <!-- Comment the below configuration -->
     <!--
-    	<resource-ref>
-    	<res-ref-name>propertiesFileLocation</res-ref-name>
-    	<res-type>java.lang.String</res-type>
+      <resource-ref>
+      <res-ref-name>propertiesFileLocation</res-ref-name>
+      <res-type>java.lang.String</res-type>
     </resource-ref>
     -->
     ```
 
 - Override default JNDI context
 
-    ```XML
+    ```xml
     <!-- Comment the below configuration -->
-    <!--<jee:jndi-lookup id="propertiesFileLocation" jndi-name="java:comp/env/propertiesFileLocation"
-                 expected-type="java.lang.String" default-value="#{systemProperties['user.home']}/ARenderConfiguration/"/>-->
+    <!--<jee:jndi-lookup id="propertiesFileLocation" jndi-name="java:comp/env/propertiesFileLocation" expected-type="java.lang.String" default-value="#{systemProperties['user.home']}/ARenderConfiguration/"/>-->
 
     <!--Add the below Wildfly configuration -->
-    <jee:jndi-lookup id="propertiesFileLocation" jndi-name="java:global/propertiesFileLocation"
-                     expected-type="java.lang.String" default-value="#{systemProperties['user.home']}/ARenderConfiguration/"/>
+    <jee:jndi-lookup id="propertiesFileLocation" jndi-name="java:global/propertiesFileLocation" expected-type="java.lang.String" default-value="#{systemProperties['user.home']}/ARenderConfiguration/"/>
     ```
 
 - Create a property file (example: _customer-&lt;integration_type&gt;.properties_) and save it in the
@@ -86,7 +84,7 @@ server.
       properties are in arender-server.properties):
       `customer-&lt;integration_type&gt;.properties`
 
-    ```cfg
+    ```properties
         arender.server.rendition.hosts=http://rendition-server:8761/`
     ```
 
@@ -94,14 +92,14 @@ server.
   under the _configuration_ folder)
     - Edit this file to add a binding **propertiesFileLocation**. Its
       value is the path of the folder containing the property file
-      _customer-&lt;integration_type&gt;.properties_ defined above. Example:
+      `customer-<integration_type>.properties` defined above. Example:
 
     ```xml
     <subsystem xmlns="urn:jboss:domain:naming:2.0">
-        <bindings>
-            <simple name="java:global/propertiesFileLocation" value="C:\Dev\customConfiguration\" type="java.lang.String"/>
-        </bindings>
-        <remote-naming/>
+      <bindings>
+        <simple name="java:global/propertiesFileLocation" value="C:\Dev\customConfiguration\" type="java.lang.String"/>
+      </bindings>
+      <remote-naming/>
     </subsystem>
     ```
 
@@ -110,12 +108,12 @@ server.
 ## Websphere JNDI configuration
 
 - Create a property file (example:
-  _customer-&lt;integration_type&gt;.properties_) and save it in the
+  `customer-<integration_type>.properties`) and save it in the
   folder of your choice (Example: _C:\\Dev\\apache-tomcat-8.5.13\\customConfiguration_).
 - Edit this file with the wanted specific configuration (available
   properties are in arender-server.properties):
 
-```cfg
+```properties
 arender.server.rendition.hosts=http://rendition-server:8761/
 ```
 
@@ -138,7 +136,7 @@ arender.server.rendition.hosts=http://rendition-server:8761/
     > cell/node/**nodename**/servers/**serverName**/propertiesFileLocation
 
     String value: Its value is the path of the folder containing the
-    property file _customer-&lt;integration_type&gt;.properties_ defined above.
+    property file `customer-<integration_type>.properties` defined above.
 
 ![image](/img/arender/Websphere_JNDI_Naming_set_property.png)
 

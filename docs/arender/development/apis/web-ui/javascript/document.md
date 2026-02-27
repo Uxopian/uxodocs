@@ -105,10 +105,10 @@ content_hash: 5fd080578272f1923cb599a09c66ae16ddff3e7d780a294764c51bc362e00333
 ```js
 // Loads the PDF reference document
 getARenderJS().loadDocument(
-    "loadingQuery?url=http://www.arender.fr/pdf/pdf/PDFReference15_v5.pdf",
-    function (id) {
-        getARenderJS().openDocument(id);
-    }
+  "loadingQuery?url=http://www.arender.fr/pdf/pdf/PDFReference15_v5.pdf",
+  function (id) {
+    getARenderJS().openDocument(id);
+  }
 );
 // Move to page 24 (note that page index is starting at 0. So page 1 has index 0)
 getARenderJS().askChangePage("Index", 23);

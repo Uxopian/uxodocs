@@ -12,7 +12,7 @@ The document builder mode allows you to create a new document, alter or delete t
 
 To active it, add the following property:
 
-```cfg
+```properties
 documentbuilder.enabled=true
 ```
 

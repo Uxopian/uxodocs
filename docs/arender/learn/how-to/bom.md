@@ -23,29 +23,27 @@ There are a total of 3 BOMs available: the web-ui, the rendition and the root wh
 is the parent pom and which therefore contains the libraries common to the web-ui and to the
 rendition.
 
-```cfg
+```xml
 <dependency>
-	<groupId>com.arondor.arender</groupId>
-	<artifactId>arender-bom-root</artifactId>
-	<version>${arender.version}</version>
+  <groupId>com.arondor.arender</groupId>
+  <artifactId>arender-bom-root</artifactId>
+  <version>${arender.version}</version>
 </dependency>
 
 <dependency>
-	<groupId>com.arondor.arender</groupId>
-	<artifactId>arender-bom-web-ui</artifactId>
-	<version>{arender.version}</version>
+  <groupId>com.arondor.arender</groupId>
+  <artifactId>arender-bom-web-ui</artifactId>
+  <version>{arender.version}</version>
 </dependency>
 
 <dependency>
-	<groupId>com.arondor.arender</groupId>
-	<artifactId>arender-bom-rendition</artifactId>
-	<version>{arender.version}</version>
+  <groupId>com.arondor.arender</groupId>
+  <artifactId>arender-bom-rendition</artifactId>
+  <version>{arender.version}</version>
 </dependency>
 ```
 
 ### Example
-
-```cfg
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -86,21 +84,6 @@ rendition.
   </dependencies>
 
 </project>
-```
-
-```
-
-
-```
-
-```
-
-
-```
-
-```
-
-
 ```
 
 We can see here the import of the BOM in the dependencyManagement and the use

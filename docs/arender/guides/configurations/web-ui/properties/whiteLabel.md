@@ -20,7 +20,7 @@ A property allows removing references to 'ARender'. Removed references are in th
 
 Apply following property to remove those references :
 
-```cfg
+```properties
 # Remove any references of ARender in the application
 arender.white.labeling=true
 ```
@@ -37,7 +37,7 @@ At document loading or saving, an 'ARender' text is visible at the center of the
 
 This text is configurable with the following property :
 
-```cfg
+```properties
 # Display the label when document starts to open
 startup.loading.label=Just-Loading
 ```

@@ -21,24 +21,23 @@ The lasso feature is available since version 4.5. The principle is to register f
 ```js
 var arenderjs;
 
-function arenderjs_init(arenderjs_)
-
+function arenderjs_init(arenderjs_) {
   arenderjs = arenderjs_
-  arenderjs.registerNotifyLassoSelectedTextEvent(function(text, lassoID){
-    armt_onSubmitNotifyLassoSelectedTextEvent(text,lassoID);
+  arenderjs.registerNotifyLassoSelectedTextEvent(function (text, lassoID) {
+    armt_onSubmitNotifyLassoSelectedTextEvent(text, lassoID);
   });
+}
 
-function armt_onSubmitNotifyLassoSelectedTextEvent(text,lassoID)
-
+function armt_onSubmitNotifyLassoSelectedTextEvent(text, lassoID) {
   var elem = document.getElementById(lassoID);
   elem.innerHTML = text;
+}
 
-function armt_activatingLasso(lassoID)
-
+function armt_activatingLasso(lassoID) {
   arenderjs.askActivateLassoMode(lassoID);
+}
 
-function armt_deactivatingLasso()
-
+function armt_deactivatingLasso() {
   arenderjs.askDeactivateLassoMode();
-
+}
 ```

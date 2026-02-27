@@ -26,8 +26,8 @@ The following functions allow to alter the received notification event caught by
 
 ```javascript
 getARenderJS().registerNotifyLogEvent(function (event, level, message) {
-    getARenderJS().setLogEventMessage(event, "Error: " + message);
-    getARenderJS().setLogEventLevel(event, "SEVERE");
-    getARenderJS().setLogEventDisplay(event, true);
+  getARenderJS().setLogEventMessage(event, "Error: " + message);
+  getARenderJS().setLogEventLevel(event, "SEVERE");
+  getARenderJS().setLogEventDisplay(event, true);
 });
 ```
