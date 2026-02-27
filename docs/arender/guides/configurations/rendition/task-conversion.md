@@ -67,7 +67,7 @@ To activate this feature, configure it as follows:
 
 :::info[application-security.yaml]
 
-```y
+```yml
 app:
   factoriesBeanNames:
     imageFactory: "image/webp,image/gif,image/x-ms-bmp,image/x-bmp,image/x-portable-bitmap,image/vnd.adobe.photoshop,image/x-eps,application/postscript,application/dicom,application/pcx,application/x-pcx,image/pcx,image/x-pc-paintbrush,image/x-pcx,zz-application/zz-winassoc-pcx,image/jp2,image/heif,image/wmf"
