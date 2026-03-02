@@ -17,7 +17,7 @@ More information here: https://www.ibm.com/docs/en/was-nd/8.5.5?topic=authentica
 ## Retrieve the ARender Web-UI archive
 
 Using the username and password beforehand provided,
-you can retrieve the navigator plugin [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-navigator-plugin/{{version}}/arondor-arender-navigator-plugin-{{version}}.jar)
+you can retrieve the navigator plugin [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-navigator-plugin/{{version}}/arondor-arender-navigator-plugin-{{version}}.jar)
 
 ## ARender and IBM Content Navigator (or IBM Content Manager)
 
@@ -51,7 +51,9 @@ Then import this key in ARender, like below:
 
 Since ICN version 3.0.6, if you change of user on the same session then you will get an error message when opening a document with the new user which will look like this:
 
+```
 Error 500: com.ibm.websphere.servlet.session.UnauthorizedSessionRequestException: SESN0008E: A user authenticated as user:localhost:389/CN=userB,CN=Users,DC=ircem,DC=dev has attempted to access a session owned by user:localhost:389/CN=userA,CN=Users,DC=ircem,DC=dev
+```
 
 The session of the user userA was not invalidated when he disconnected, which will cause the error when opening a document by user userB. There is a property to add in a WebSphere console which will make it possible to invalidate a session on which an unauthorized request is made. This session invalidation will allow the recovery of the correct username by ARender.
 

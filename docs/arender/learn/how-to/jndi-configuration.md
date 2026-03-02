@@ -82,10 +82,10 @@ server.
   folder of your choice (Example: _C:\\Dev\\apache-tomcat-8.5.13\\customConfiguration_).
     - Edit this file with the wanted specific configuration (available
       properties are in arender-server.properties):
-      `customer-&lt;integration_type&gt;.properties`
+      `customer-<integration_type>.properties`
 
     ```properties
-        arender.server.rendition.hosts=http://rendition-server:8761/`
+    arender.server.rendition.hosts=http://rendition-server:8761/`
     ```
 
 - Open the Wildfly configuration file **standalone.xml** (located

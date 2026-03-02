@@ -8,13 +8,8 @@ content_hash: de344947ba7bf0d130ceeb8082def7d13f481039d1f29e6878baaac6c577dd18
 ---
 
 In some cases, it may be necessary to restart one or both part of
-ARender. Modifications on the configuration files will require a restart
+ARender. Modifications on the configuration files will require a restart for changes to apply. A restart can also be tried in case of unexpected errors. ARender is a stateless service a restart is able to fix any application freeze.
 
-```javascript
-for changes to apply. A restart can also be tried in case of unexpected
-errors. ARender is a stateless service a restart is able to fix any
-application freeze.
-```
 
 ## Rendition server
 

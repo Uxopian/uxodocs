@@ -87,7 +87,7 @@ Connections are still configurable with new properties located in the applicatio
 
 The mail configuration properties have actually moved to application.properties of Document Service Broker
 
-How to configure mime type has changed, for more information see [there](../../../learn/how-to/addmimetypes.md).
+How to configure mime type has changed, for more information see [there](../../../learn/how-to/addmimetypes).
 
 ### Properties in application.yaml file
 

@@ -60,15 +60,15 @@ To provide a concrete example, suppose you need a custom label for a custom butt
 
 These **.properties** files are to be placed whether in _&lt;HOME_DIR&gt;/ARenderCustomLabels/_ or in \*arondor-arender-hmi-spring-boot-{{version}}.jar\BOOT-INF\classes\labels\*.
 
-```cfg
+```properties title="CustomLabels_en.properties"
 hello=Hello World
 ```
 
-```cfg
+```properties title="CustomLabels_es.properties"
 hello=Hola Mundo
 ```
 
-```cfg
+```properties title="CustomLabels_fr.properties"
 hello=Bonjour le monde
 ```
 

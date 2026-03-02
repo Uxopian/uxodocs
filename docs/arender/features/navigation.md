@@ -20,10 +20,7 @@ ARender provides many easy ways to navigate a document:
 
 You can type the number of the page you want to display ( included from
 1 to the total number of pages of your document) in the text area made
-
-```javascript
-for it and then press « Enter » or « Tab »
-```
+for it and then press « Enter » or « Tab ».
 
 ### Use the mouse cursor/vertical scrollbar
 

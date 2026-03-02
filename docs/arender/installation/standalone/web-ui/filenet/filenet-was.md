@@ -21,7 +21,7 @@ in an environment with:
 ## Retrieve the ARender HMI EAR archive for FileNet
 
 Using the username and password beforehand provided,
-you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-filenet-ear//arondor-arender-hmi-filenet-ear-.ear).
+you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-filenet-ear/{{version}}/arondor-arender-hmi-filenet-ear-{{version}}.ear).
 
 ## WebSphere requirements
 
@@ -123,13 +123,12 @@ IHS acts as a **reverse proxy and load balancer**, dispatching incoming requests
 
 #### Objective: Generate node-specific session cookies
 
-Each WebSphere node must append a custom suffix to the SESSION cookie to uniquely identify itself: `&lt;sessionId&gt;:&lt;cloneId&gt;`
+Each WebSphere node must append a custom suffix to the SESSION cookie to uniquely identify itself: `<sessionId>:<cloneId>`
 
 Examples:
 
-- For `node1`: **`&#123;cookieValue&#125;:cloneId1`**
-
-- For `node2`: **`&#123;cookieValue&#125;:cloneId2`**
+- For `node1`: **`{cookieValue}:cloneId1`**
+- For `node2`: **`{cookieValue}:cloneId2`**
 
 #### JVM Configuration Parameters
 

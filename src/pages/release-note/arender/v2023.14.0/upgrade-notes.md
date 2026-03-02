@@ -41,8 +41,8 @@ The Docker images for Alfresco and FileNet in version 2023.14.0 are missing thei
 
 To restore proper functioning, manually add the requred connector JAR to the container:
 
-- Alfresco connector, download [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-cmis/2023.14.0/arondor-arender-cmis-2023.14.0-jar-with-dependencies.jar).
-- FileNet connector, download [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-filenet-ce/2023.14.0/arondor-arender-filenet-ce-2023.14.0-jar-with-dependencies.jar).
+- Alfresco connector, download [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-cmis/2023.14.0/arondor-arender-cmis-2023.14.0-jar-with-dependencies.jar).
+- FileNet connector, download [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-filenet-ce/2023.14.0/arondor-arender-filenet-ce-2023.14.0-jar-with-dependencies.jar).
 
 Mount the JAR into the container at the following path **/home/arender/lib**
 

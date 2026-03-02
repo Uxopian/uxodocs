@@ -39,7 +39,6 @@ ARender integration tests have been conducted with the following versions:
 - Svelte : version 5.19.0
 
 <p>- Create a component called ARender.tsx or ARender.jsx and insert the iframe as shown in the code below. The component can then be instantiated wherever you need it using the tag: `<ARender />`</p>
-
 <p>- In React, you can use a <b>reference</b> to interact with the iframe using the <b>ref</b> parameter, instead of using an ID query.</p>
 <p>- You can also style the iframe by adding the <b>classname</b> parameter.</p> <p>- Finally, the URL associated with the iframe through the <b>src</b> parameter can be made dynamic, allowing it to be modified dynamically.</p>
 
@@ -47,7 +46,6 @@ ARender integration tests have been conducted with the following versions:
 <Tabs>
 <TabItem value="react" label="ReactJS">
 <p>- Create a component called ARender.tsx or ARender.jsx and insert the iframe as shown in the code below. The component can then be instantiated wherever you need it using the tag: `<ARender />`</p>
-
 <p>- In React, you can use a <b>reference</b> to interact with the iframe using the <b>ref</b> parameter, instead of using an ID query.</p>
 <p>- You can also style the iframe by adding the <b>classname</b> parameter.</p> <p>- Finally, the URL associated with the iframe through the <b>src</b> parameter can be made dynamic, allowing it to be modified dynamically.</p>
 
@@ -210,12 +208,10 @@ You can use the ARender component in your Svelte application as follows:
     <strong>- Dynamic iframe visibility: </strong> 
     The arenderIsDisplayed prop controls whether the iframe is shown or hidden.
   </li>
-
   <li>
     <strong> - Direct iframe reference: </strong> 
     The iframeRef prop binds the iframe element, allowing direct interaction.
   </li>
-
   <li>
     <strong> - Custom styling: </strong> 
     The iframe can be styled using CSS classes.

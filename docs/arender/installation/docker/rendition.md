@@ -52,7 +52,6 @@ Configuration files location:
 
 - /arender/config/application.properties
 - /arender/config/application-\*.properties
-
 - /arender/config/application.yaml
 - /arender/config/application-\*.yaml
 
@@ -138,7 +137,6 @@ services:
 
 volumes:
   arender-tmp:
-
 ```
 
 ## Configurations

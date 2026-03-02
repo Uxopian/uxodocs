@@ -34,7 +34,7 @@ docs/install/install-mfiles/application.properties
 
 Using the username and password previously provided (contact arender-sales@arondor.com if you want access),
 you can recover the version of the web application used in WAR format
-**[here](https://artifactory.arondor.cloud:443/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi//arondor-arender-hmi-.war)**.
+**[here](https://artifactory.arondor.cloud:443/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi/{{version}}/arondor-arender-hmi-{{version}}.war)**.
 
 Use the Tomcat9 server. You just need to deploy your war (_arondor-arender-hmi-.war_ into and to **rename it** _arondor-arender-mfiles.war_), now place it there :
 
@@ -66,6 +66,7 @@ You need to edit different values of the _arender-server.properties_ file depend
   docs/install/install-mfiles/ARenderApp.zip
 
 ![mfiles](/img/arender/mfiles/mfiles-03.png)
+
 _( M-Files Admin -> choose your safe -> right clic -> Applications -> Install )_
 
 - Log out of the vault and log back in to ensure changes are accounted for

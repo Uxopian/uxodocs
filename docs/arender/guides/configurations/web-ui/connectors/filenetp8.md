@@ -177,17 +177,11 @@ _excludedCustomProperties_ property
 </property>
 ```
 
-If the following error appears: \*No LoginModules configured
-
-```javascript
-for FilenetP8WSI*, an additional configuration is required:
-```
+If the following error appears: *No LoginModules configured for FilenetP8WSI*, an additional configuration is required:
 
 - Save the file [jaas.conf.WebSphere](/docs/jadocumentation/as.conf.WebSphere) in a folder on the WAS server
 - Add the following parameter to ARender's JVM:
-
     `-Djava.security.auth.login.config=[Path_to_jaas_file.conf.WebSphere]`
-
     **How to:**
     - Navigate to the menu _Server_ and select the related server.
     - open _Java and Process Management_ and click on _Process Definition_.
@@ -567,7 +561,7 @@ The servlet _updateDocumentMetadataServlet_ is dedicated to updating Filenet doc
 Here is an example of the POST call, where _&#123;documentId&#125;_ is to be replaced by the documentId of the targeted document :
 
 ```properties
-`http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}`
+http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}
 ```
 
 Then, the body of the request will accept a JSON structure defining each metadata name to modify and the associated value. The _propertyKey_ correspond to the _symbolicName_ and _displayName_ properties of Filenet. The _propertyValue_ is the value that the metadata will take.

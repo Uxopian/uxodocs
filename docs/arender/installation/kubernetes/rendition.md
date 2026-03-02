@@ -50,12 +50,12 @@ By default, given rights are:
 
 ```yaml
 rules:
-    - apiGroups: ["*"]
-      resources:
-          - "nodes"
-      verbs:
-          - "get"
-          - "list"
+  - apiGroups: ["*"]
+    resources:
+      - "nodes"
+    verbs:
+      - "get"
+      - "list"
 ```
 
 ### Document converter
