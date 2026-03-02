@@ -31,26 +31,19 @@ If you like, please follow the instructions [here](https://www.ibm.com/docs/en/w
 ## Deployment of the EAR in IBM WebSphere
 
 - Open a **WebSphere console** at [https://serveur_websphere:9043/ibm/console](https://serveur_websphere:9043/ibm/console)
-
 - Go in "Applications" tab, then click on "**WebSphere enterprise applications**"
-
 - To launch installation, click on "**Install**"
   ![filenet](/img/arender/filenet/filenet-02.png)
-
 - Choose the EAR path to deploy and click on "**Next**"
   ![filenet](/img/arender/filenet/filenet-03.png)
-
 - To accept default parameters, click on "**Next**"
   ![filenet](/img/arender/filenet/filenet-05.png)
   ![filenet](/img/arender/filenet/filenet-06.png)
-
 - Select webserver(s) and/or server(s) of the Workplace, then click on "**Next**"
   ![filenet](/img/arender/filenet/filenet-07.png)
-
 - To accept the parameters by default (virtual host: default_host), click on "**Next**"
   ![filenet](/img/arender/filenet/filenet-08.png)
   ![filenet](/img/arender/filenet/filenet-09.png)
-
 - In recap window, click on "**Finish**" to begin the installation with these parameters after checking them
   ![filenet](/img/arender/filenet/filenet-10.png)
 
@@ -61,13 +54,10 @@ If you like, please follow the instructions [here](https://www.ibm.com/docs/en/w
 Websphere must be configured in parent-last which means it has to load its libraries after ARender.
 
 - In the application list click on ARender 2023.0.X for FileNet 5.x
-
 - Click on "Manage Modules"
   ![filenet](/img/arender/filenet/filenet-13.png)
-
 - Click on ARender module
   ![filenet](/img/arender/filenet/filenet-11.png)
-
 - Select in the drop down list « Class loader order »: « Classes loaded with local class loaded first (parent last) »
   ![filenet](/img/arender/filenet/filenet-14.png)
 - Click on "OK" and save the modifications
@@ -92,9 +82,7 @@ This section will guide you to implement a robust **load balancing** architectur
 ### 🎯 Goals of the Implementation
 
 - Efficiently distribute incoming HTTP requests between multiple WebSphere nodes (ARender HMI)
-
 - Ensure session persistence (session stickiness) across requests.
-
 - Enable configurable session cookie suffixes to support affinity routing.
 
 ---
@@ -114,7 +102,6 @@ IHS acts as a **reverse proxy and load balancer**, dispatching incoming requests
 👉 IHS extracts the **suffix** from the session cookie (after a separator `:`), and matches it against the `CloneID` values defined in the `plugin-cfg.xml` file.
 
 - If a match is found, the request is routed to the corresponding node (session affinity).
-
 - If no match is found, the request falls back to the behavior of case 1\.
 
 ---
@@ -173,11 +160,8 @@ In the above example, cloneId for node1 is node1
 The IHS configuration involves four main elements:
 
 1. **VirtualHostGroup** – defines listening addresses.
-
 2. **ServerCluster** – lists the backend WebSphere nodes.
-
 3. **UriGroup** – defines which URL patterns are managed.
-
 4. **Route** – links the above components.
 
 #### Example configuration:
@@ -200,9 +184,7 @@ The IHS configuration involves four main elements:
 #### Explanation:
 
 - All URLs matching `/ARender/*` are routed to either `node1` or `node2`.
-
 - The `SESSION` cookie is used for session stickiness (affinity).
-
 - Internal communications occur via ports `9080` and `9081` on `localhost`.
 
 ---
@@ -212,7 +194,5 @@ The IHS configuration involves four main elements:
 With this configuration:
 
 - Each user session is consistently routed to the appropriate HMI node, based on the cookie suffix.
-
 - Sessions remain stable and uninterrupted in a clustered environment.
-
 - The system is extensible and supports future scalability.

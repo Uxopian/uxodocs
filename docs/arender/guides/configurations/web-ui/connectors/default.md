@@ -25,7 +25,7 @@ Here are some examples:
 
 - Open a document using a specific connector providing a user id and a security token
 
-    `http://{ARENDER_SERVER}/ARender.html?bean=myConnector&amp;user=123456&amp;token=9GISU9SG4Z`
+    `http://{ARENDER_SERVER}/ARender.html?bean=myConnector&user=123456&token=9GISU9SG4Z`
 
 ### Configure authorized URLs
 

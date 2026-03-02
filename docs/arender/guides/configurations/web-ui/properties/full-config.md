@@ -149,11 +149,12 @@ content_hash: 9ba6deca8c2884eaec3649e5d24620f7d2507b9e6303deb9309ab868a10cf4a1
 
 ## arender
 
-| property                   | Description                                                                                  | type    | default |
-| -------------------------- | -------------------------------------------------------------------------------------------- | ------- | ------- |
-| arender.web.socket.enabled | Enables web socket and try to initiate the web socket if the browser web socket is available | boolean | true    |
-| arender.pollLastVersion    | Enables ARender version check                                                                | boolean | true    |
-| arender.white.labeling     | Remove any reference of ARender in the application                                           | boolean | false   |
+| property                       | Description                                                                                  | type    | default |
+| ------------------------------ | -------------------------------------------------------------------------------------------- | ------- | ------- |
+| arender.web.socket.enabled     | Enables web socket and try to initiate the web socket if the browser web socket is available | boolean | true    |
+| arender.pollLastVersion        | Enables ARender version check                                                                | boolean | true    |
+| arender.white.labeling         | Remove any reference of ARender in the application                                           | boolean | false   |
+| arender.data.analytics.enabled | Enables data analytics                                                                       | boolean | true    |
 
 ## arenderjs
 

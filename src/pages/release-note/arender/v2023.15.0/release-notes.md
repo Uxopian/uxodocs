@@ -29,7 +29,7 @@ signatures, images, or blank areas. (AR-17701)
 
 To avoid any disrupion in the user interface, this feature is disabled by default, more information see the property
 **topPanel.docLink.enableZoneSelection** described in the documentation
-[here](/features/hyperlink#document-linking).
+[here](/docs/arender/features/hyperlink/#document-linking).
 ![Create hyperlink from zone](pathname:///img/arender/annotations/ZonaldocLink.gif)
 
 ## Developer / Integrator Perspective
@@ -38,12 +38,12 @@ To avoid any disrupion in the user interface, this feature is disabled by defaul
 New configuration option added to the weather polling strategy to allow round-robin distribution of load across multiple
 Rendition nodes. (AR-17736)
 
-- See the related documentation [here](/guides/configurations/web-ui/server/rendition-host#rendition-load-document-balancing).
+- See the related documentation [here](/docs/arender/guides/configurations/web-ui/server/rendition-host/#rendition-load-document-balancing).
 
 **Mixpanel instrumentation improvements**  
 ARender now tracks detailed analytics like Time to First View, Viewing Duration, and Page Count across document open/close events. (AR-17787)
 
-- See the related documentation [here](/learn/product-analytics/_index).
+- See the related documentation [here](/docs/arender/learn/product-analytics/).
 
 **Docker packaging fixes**  
 Missing connectors in Alfresco/FileNet images have been resolved. (AR-17825)

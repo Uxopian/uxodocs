@@ -34,7 +34,7 @@ Each component is installed and managed independently — which means :
 
 👉 _Recommended for on-premise legacy setups._
 
-<a href="../standalone/rendition/requirements" class="btn-link">Classic installation guide</a>
+<a href="/docs/arender/installation/standalone/rendition/requirements" class="btn-link">Classic installation guide</a>
 
 ---
 
@@ -60,7 +60,7 @@ In Docker mode, ARender is packaged into lightweight containers:
 
 👉 _Good for local testing, small deployments, or environments without cluster infrastructure._
 
-<a href="../docker/overview" class="btn-link">Docker deployment guide</a>
+<a href="/docs/arender/installation/docker/overview" class="btn-link">Docker deployment guide</a>
 
 ---
 
@@ -80,7 +80,7 @@ Kubernetes mode deploys ARender within a container orchestrator — ideal for pr
 
 👉 _Recommended for scalable, resilient deployments in production or cloud environments._
 
-<a href="../kubernetes/overview" class="btn-link">Kubernetes deployment guide</a>
+<a href="/docs/arender/installation/kubernetes/overview" class="btn-link">Kubernetes deployment guide</a>
 
 ---
 

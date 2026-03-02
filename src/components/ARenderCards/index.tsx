@@ -42,13 +42,13 @@ const GuidesList = [
                 icon: "💻",
                 title: "Exploitation",
                 description: "Operating and managing your platform",
-                link: "/docs/arender/guides/exploitation/",
+                link: "/docs/arender/guides/exploitation/logs",
             },
             {
                 icon: "🔄",
                 title: "Operation",
                 description: "Day-to-day operations and maintenance",
-                link: "/docs/arender/guides/operation/",
+                link: "/docs/arender/guides/operation/backup-restore",
             },
             {
                 icon: "🔼",

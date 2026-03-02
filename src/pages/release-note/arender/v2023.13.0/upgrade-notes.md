@@ -28,7 +28,7 @@ com.uxopian.arender.session.jvm.route.separator
 com.uxopian.arender.session.jvm.base64
 ```
 
-Documentation can be found [here](/installation/standalone/web-ui/filenet/filenet-was/#-load-balancing-and-session-management-for-arender-on-ibm-websphere)
+Documentation can be found [here](/docs/arender/installation/standalone/web-ui/filenet/filenet-was/#-load-balancing-and-session-management-for-arender-on-ibm-websphere)
 
 **Note:**
 

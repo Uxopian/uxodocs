@@ -8,7 +8,7 @@ content_hash: 07377e998957dd412de5888b1ab29ccbd686c95223d0c8aaf34905a91c8cf872
 ---
 
 ARender is a secure web viewer allowing you to view and annotate 
-[many different document formats](./file-format-support) on any device than runs a 
+[many different document formats](/docs/arender/what-is-arender/file-format-support) on any device than runs a 
 Web Browser.
 
 ![img](pathname:///img/arender/ARender-Version5.png)

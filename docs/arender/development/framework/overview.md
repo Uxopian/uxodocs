@@ -58,7 +58,7 @@ However, <b>ARender can be added <ins>to all types of JavaScript based applicati
 
 ## Prerequisites
 - Before embarking on framework integration, ensure that you have a front-end application using **React, Angular, Vue, Svelte, or plain JavaScript**.
-- <i class="ti-hand-point-right"></i> [The ARender installation](../../../installation/overview) <i class="ti-hand-point-left" ></i> must have been completed.
+- <i class="ti-hand-point-right"></i> [The ARender installation](/docs/arender/installation/overview) <i class="ti-hand-point-left" ></i> must have been completed.
 - You must have implemented one of the solutions detailed below to avoid CORS-type errors when communicating between the host application and ARender.
 
 ## Avoid CORS-type errors
@@ -144,7 +144,7 @@ This is, of course, a **very bad practice in a production environment**, but it 
 
 It is possible to keep different domains for the host application and ARender by using the window.postMessage method, which allows secure cross-domain communication.
 
-To do so, you must add <i class="ti-hand-point-right"></i> <ins>[the initialization script](../../../guides/configurations/web-ui/properties/full-config#arenderjs)</ins> <i class="ti-hand-point-left" ></i> on the ARender side :
+To do so, you must add <i class="ti-hand-point-right"></i> <ins>[the initialization script](/docs/arender/guides/configurations/web-ui/properties/full-config#arenderjs)</ins> <i class="ti-hand-point-left" ></i> on the ARender side :
 
 
 ```javascript

@@ -41,7 +41,7 @@ Properties are listed and commented in the file **configurations/arender-custom-
 
 To trigger the use of this specific profile, add to the URL the parameter _props_ and the name of the profile (without its extension):
 
-`http://localhost:8080/?url=../samples/arender.pdf&amp;props=newProfile`
+`http://localhost:8080/?url=../samples/arender.pdf&props=newProfile`
 
 #### Docker
 
@@ -54,4 +54,4 @@ To trigger the use of this specific profile, add to the URL the parameter _props
 
 To trigger the use of this specific profile, add to the URL the parameter _props_ and the name of the profile (without its extension):
 
-`http://localhost:8080/?url=../samples/arender.pdf&amp;props=newProfile`
+`http://localhost:8080/?url=../samples/arender.pdf&props=newProfile`

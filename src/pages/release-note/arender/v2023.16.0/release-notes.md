@@ -50,7 +50,7 @@ Related requests:
 **Improved Web-UI Documentation**  
 The default Hazelcast configuration file path is now clearly documented.
 More information in the following link:
-[Configuration](/installation/standalone/web-ui/configuration/#configure-cache-sharing-between-arender-web-uis)
+[Configuration](/docs/arender/installation/standalone/web-ui/configuration/#configure-cache-sharing-between-arender-web-uis)
 
 ## Developer / Integrator Perspective
 
