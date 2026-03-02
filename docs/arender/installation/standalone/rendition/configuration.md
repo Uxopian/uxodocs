@@ -7,6 +7,9 @@ last_update:
 content_hash: f5dcff922ec855dd74545a17ffd17ed587db45e64ee94d763b8663eb74798cda
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## Antivirus Settings
 
 Ensure that the antivirus does not scan the ARender Rendition folder and sub-folders below.
@@ -39,9 +42,9 @@ For comprehensive Hazelcast details, refer to [Hazelcast documentation](https://
 
 The configuration file (hazelcast.yaml) is located within the _RenditionEngine_ resources.
 
-The path to find the configuration is _modules/RenditionEngine/rendition-engine-micro-service-2023.16.0.jar/BOOT-INF/classes/hazelcast.yaml_.
+The path to find the configuration is _modules/RenditionEngine/rendition-engine-micro-service-{{version}}.jar/BOOT-INF/classes/hazelcast.yaml_.
 
-```cfg
+```yml
 hazelcast:
   map:
     documentAccessors:
@@ -91,7 +94,7 @@ using:
 
 #### Configuration
 
-```cfg
+```propertiespertiesperties
 default.document.path.startup.clear=true
 ```
 
@@ -101,7 +104,7 @@ The default behavior is the deletion of all folders created **more than a day ag
 
 Adjust this value by modifying the configuration below:
 
-```cfg
+```yml
 temp:
   files:
     folder: ../../tmp/
@@ -153,7 +156,7 @@ Allows access to the following endpoints :
 ### Customizing Hazelcast Configuration
 
 To customize the Hazelcast configuration, create your own _hazelcast.yaml_ file and copy the configuration from the
-file _ARender-Rendition-\modules\RenditionEngine\rendition-engine-micro-service-2023.16.0.jar\BOOT-INF\classes\hazelcast.yaml_.
+file _ARender-Rendition-\modules\RenditionEngine\rendition-engine-micro-service-{{version}}.jar\BOOT-INF\classes\hazelcast.yaml_.
 
 For each upgrade of ARender, please read the release note carefully to take into account potential changes to the initial configuration.
 
@@ -163,7 +166,7 @@ Add the following argument to the list of JVM arguments: **-Dhazelcast.config=pa
 
 If the path specified is _hazelcast.yaml_ then the file should be placed into _ARender-Rendition-\modules\RenditionEngine_.
 
-```cfg
+```bat
 set ARENDER_BROKER_JVM_ARGS=-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false -Dloader.path="client_libs/" -Dfile.encoding=UTF-8 -Dhazelcast.config=hazelcast.yaml
 ```
 
@@ -202,30 +205,40 @@ For using Hazelcast with multiple Rendition instances and a shared directory, th
 
 Each microservice needs to specify the location of the shared cache directory in the application.yaml file.
 
-```cfg
+<Tabs>
+<TabItem value="document-service-broker" label="document-service-broker">
+```yml
 temp:
   files:
     folder: ../../tmp/
 ```
+</TabItem>
 
-```cfg
+<TabItem value="document-renderer" label="document-renderer">
+```yml
 shared-files:
   sharedPath: ../../tmp/
 ```
+</TabItem>
 
-```cfg
+<TabItem value="document-text-handler" label="document-text-handler">
+```yml
 shared-files:
   sharedPath: ../../tmp/
 ```
+</TabItem>
 
-```cfg
+<TabItem value="document-converter" label="document-converter">
+```yml
 tmp:
   dir:
     doc: ../../tmp/
-
 shared-files:
   sharedPath: ../../tmp/
 ```
+</TabItem>
+</Tabs>
+
 
 ## Load balancer
 
@@ -239,7 +252,7 @@ This configuration is **possible only when the cache is shared** across multiple
 If a Load Balancer is present between the Web-UI and Renditions, specify the Load Balancer's host in the Web-UI server
 configuration instead of listing individual Rendition hosts.
 
-```cfg
+```properties
 arender.server.rendition.hosts=LOAD_BALANCER_HOST
 ```
 
@@ -261,7 +274,7 @@ Proper NFS configuration is crucial for synchronizing different nodes. Two prima
 - **Asynchronous Writing** (default): This option is set by default.
 - **Local Read Cache**: Options for NFS should include the below configuration to ensure client synchronization:
 
-```cfg
+```properties
 sync,noac,lookupcache=none
 ```
 
@@ -295,7 +308,7 @@ To activate DirectOffice, it must be configured to be associated with the desire
 - Edit **application-security.yml**
 - Add the following content:
 
-```cfg
+```yml
 mimetype:
   support:
     msoffice: "${mime.type.msoffice.publisher},${mime.type.msoffice.visio},${mime.type.msoffice.rtf},${mime.type.msoffice.project}"
@@ -314,7 +327,7 @@ as well to keep Office up to date.
 
 **Scripted installation**
 
-- Download and unzip [AromsCheck](/docs/AromsCheck.zip)
+- Download and unzip [AromsCheck](https://docs.arender.io/docs/AromsCheck.zip)
 - Run **runCheck.bat** for automatic setup.
 
 **Manual installation**
@@ -322,11 +335,11 @@ as well to keep Office up to date.
 Skip this manual installation if previous scripted installation was a success.
 
 - Download and install the below softwares
-    - .Net 4.5: [Download](<[https://www.microsoft.com/en-us/download/details.aspx?id=30653](https://www.microsoft.com/en-us/download/details.aspx?id=30653).md>)
+    - .Net 4.5: [Download](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 
-    - Microsoft Visual C++ redistributable 2010: [Download](<[https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632](https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632).md>)
+    - Microsoft Visual C++ redistributable 2010: [Download](https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632)
 
-    - Microsoft Visual C++ redistributable 2008: [Download](<[https://www.microsoft.com/en-us/download/details.aspx?id=15336](https://www.microsoft.com/en-us/download/details.aspx?id=15336).md>)
+    - Microsoft Visual C++ redistributable 2008: [Download](https://www.microsoft.com/en-us/download/details.aspx?id=15336)
 
 ---
 
@@ -384,7 +397,7 @@ rendering requests through sub-processes, allowing errors to be handled without 
 - Open or create the **application.properties** file,
 - Add the following property:
 
-```cfg
+```properties
 micro-services.pdf-renderer=PDFOwl
 ```
 
@@ -398,7 +411,7 @@ To update these properties:
 - Open or create the **application.properties** file,
 - Add the property and its value.
 
-```cfg
+```properties
 # PdfOwl binary path
 pdfowl.path=pdfowl
 # Timeout for pdfowl commands execution in milliseconds
@@ -423,7 +436,7 @@ Since 2023.7.0, it's disabled by default.
 
 To enable PDF Portfolio feature, set the following property to `true`.
 
-```cfg
+```properties
 arender.server.document.pdf.portfolio.enabled=true
 ```
 
@@ -433,7 +446,7 @@ Since 2023.7.0, it's disabled by default.
 
 To enable PDF with attachments feature, set the following property to `true`.
 
-```cfg
+```properties
 arender.server.document.pdf.attachments.enabled=true
 ```
 
@@ -451,7 +464,7 @@ Since version 2023.12.0, a new endpoint has been available to search for text wi
 
 To change the timeout, set the following property to your desire:
 
-```cfg
+```properties
 # Set PDF search streamed timeout in milliseconds
 pdf.search.stream.timeout=500
 ```
@@ -462,7 +475,7 @@ pdf.search.stream.timeout=500
 
 The property `emltopdf.resize.embedded.image.enabled` is a Boolean configuration setting that controls whether embedded images within the body of an email are automatically resized during the html-to-PDF conversion process.
 
-```cfg title="modules/RenditionEngine/application.properties"
+```properties title="modules/RenditionEngine/application.properties"
 emltopdf.resize.embedded.image.enabled=false
 ```
 

@@ -31,7 +31,7 @@ Docker Mode is **not suitable** for:
 - Auto-restart policies or rolling updates
 
 If you need HA or scalability, see:  
-ðŸ‘‰ [Kubernetes Deployment](../kubernetes/)
+👉 [Kubernetes Deployment](../kubernetes/overview)
 
 ---
 
@@ -39,11 +39,11 @@ If you need HA or scalability, see:
 
 ARender Docker images are OCI-compliant and compatible with the following environments:
 
-| Platform                             | Status        |
-|--------------------------------------|---------------|
-| **Docker Engine**                    | âœ”ï¸ Supported  |
-| **Docker Desktop (Windows / macOS)** | âœ”ï¸ Supported  |
-| **containerd**                       | âœ”ï¸ Supported  |
+| Platform                             | Status         |
+|--------------------------------------|----------------|
+| **Docker Engine**                    | ✔️ Supported  |
+| **Docker Desktop (Windows / macOS)** | ✔️ Supported  |
+| **containerd**                       | ✔️ Supported  |
 
 > Docker is the **primary QA validation platform** for container deployments.
 
@@ -58,7 +58,7 @@ Requirements for a deployment with one container per ARender service on a single
 | Component  | Requirement                                                                               |
 |------------|-------------------------------------------------------------------------------------------|
 | **CPU**    | 4+ vCPUs                                                                                  |
-| **RAM**    | 8â€“16 GB                                                                                   |
+| **RAM**    | 8-16 GB                                                                                   |
 | **Disk**   | The maximum between 20Go and a storage where a full day of temporary files can be stored  |
 | **OS**     | Any OS supporting Docker Engine                                                           |
 
@@ -99,18 +99,18 @@ Below is the list of all ARender images available on the registry.
 
 | Component        | Repository                        | Version Tag Pattern | Description                                                                                                    |
 |------------------|-----------------------------------|---------------------|----------------------------------------------------------------------------------------------------------------|
-| **Broker**       | `arender-document-service-broker` | `2023.17.0`          | Entry-point service that receives requests from the HMI or batch jobs and dispatches them to internal services |
-| **Renderer**     | `arender-document-renderer`       | `2023.17.0`          | Generates page images                                                                                          |
-| **Text Handler** | `arender-document-text-handler`   | `2023.17.0`          | Extracts text and its coordinates                                                                              |
-| **Converter**    | `arender-document-converter`      | `2023.17.0`          | Converts non-PDF/non-MP4 documents into PDF or MP4                                                             |
+| **Broker**       | `arender-document-service-broker` | `{{version}}`          | Entry-point service that receives requests from the HMI or batch jobs and dispatches them to internal services |
+| **Renderer**     | `arender-document-renderer`       | `{{version}}`          | Generates page images                                                                                          |
+| **Text Handler** | `arender-document-text-handler`   | `{{version}}`          | Extracts text and its coordinates                                                                              |
+| **Converter**    | `arender-document-converter`      | `{{version}}`          | Converts non-PDF/non-MP4 documents into PDF or MP4                                                             |
 
 ### Web UI Images
 
 | Variant             | Repository              | Version Tag Pattern       | Description                                |
 |---------------------|-------------------------|---------------------------|--------------------------------------------|
-| **Default Web UI**  | `arender-ui-springboot` | `2023.17.0`                | Standard GWT UI                            |
-| **Alfresco Web UI** | `arender-ui-springboot` | `2023.17.0-alfresco`       | Standard GWT UI with Alfresco connector    |
-| **FileNet Web UI**  | `arender-ui-springboot` | `2023.17.0-filenet`        | Standard GWT UI with IBM FileNet connector |
+| **Default Web UI**  | `arender-ui-springboot` | `{{version}}`                | Standard GWT UI                            |
+| **Alfresco Web UI** | `arender-ui-springboot` | `{{version}}-alfresco`       | Standard GWT UI with Alfresco connector    |
+| **FileNet Web UI**  | `arender-ui-springboot` | `{{version}}-filenet`        | Standard GWT UI with IBM FileNet connector |
 
 > All Web-UI variants rely on the same base runtime.
 
@@ -135,9 +135,72 @@ ARender provides a ready-to-use `docker-compose.yml` that includes:
 - Text Handler
 - Converter
 
-Download:
+```yml title="docker-compose.yml"
+services:
+  ui:
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:${VERSION}
+    container_name: ui
+    environment:
+      - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://dsb-service:8761/"
+    ports:
+      - 8080:8080
 
-ðŸ‘‰ [Download docker-compose.yml](/docs/docker/docker-compose.yml)
+  service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:${VERSION}
+    container_name: dsb-service
+    environment:
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DCV-SERVICE=19999"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DRN-SERVICE=9091"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DTH-SERVICE=8899"
+    ports:
+      - 8761:8761
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer:${VERSION}
+    container_name: drn-service
+    environment:
+      - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=drn-service"
+      - "DRN_EUREKA_INSTANCE_HOSTNAME=dsb-service"
+      - "DRN_EUREKA_SERVER_PORT=8761"
+    ports:
+      - 9091:9091
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:${VERSION}
+    container_name: dth-service
+    environment:
+      - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dth-service"
+      - "DTH_EUREKA_INSTANCE_HOSTNAME=dsb-service"
+      - "DTH_EUREKA_SERVER_PORT=8761"
+    ports:
+      - 8899:8899
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:${VERSION}
+    container_name: dcv-service
+    environment:
+      - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dcv-service"
+      - "DCV_APP_EUREKA_HOSTNAME=dsb-service"
+      - "DCV_APP_EUREKA_PORT=8761"
+    ports:
+      - 19999:19999
+    volumes:
+      - arender-tmp:/arender/tmp
+
+# Shared temporary folder
+volumes:
+  arender-tmp:
+```
+
+```properties title=".env"
+VERSION={{version}}
+```
 
 Run:
 

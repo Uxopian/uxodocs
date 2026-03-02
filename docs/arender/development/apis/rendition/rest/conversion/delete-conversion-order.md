@@ -13,7 +13,7 @@ This API allows to delete a conversion order previously requested.
 Endpoint:
 
 ```bash
-DELETE /conversions/&lt;ConversionOrderId&gt;
+DELETE /conversions/<ConversionOrderId>
 ```
 
 Resource path:

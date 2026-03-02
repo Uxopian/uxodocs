@@ -21,7 +21,7 @@ content_hash: fed89f409c4593617062afd37c2780e0daed5afd2372702a8ce9f9e38604c38a
 
 | Component                       | Files                                                                   |
 | ------------------------------- | ----------------------------------------------------------------------- |
-| arender-ui                      | /usr/local/tomcat/logs/localhost.&#123;year-month-day&#125;.log, stdout |
+| arender-ui                      | /usr/local/tomcat/logs/localhost&#123;year-month-day&#125;.log, stdout  |
 | arender-document-service-broker | /arender/logs/arender-server.log                                        |
 | arender-document-renderer       | /arender/logs/document-renderer/arender-jnipdf.log                      |
 | arender-document-text-handler   | /arender/logs/document-text-handler/arender-pdfbox.log                  |

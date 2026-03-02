@@ -13,7 +13,7 @@ If the Rendition is installed on a server that **does not have access to Interne
 
 - Add a proxy for WKHTMLTOPDF configuration. Create a file named **application.properties** in the TaskConversion module containing the below property (adapt the proxy host if needed) (compatible with version 4.3.8 and higher):
 
-```cfg title="application.properties located in ARender-Rendition-2023.17.0\modules\TaskConversion"
+```properties title="application.properties located in ARender-Rendition-{{version}}\modules\TaskConversion"
 tools.wkhtmltopdf.options=--disable-javascript,--quiet,--encoding,UTF-8,--load-error-handling,ignore,--disable-external-links,--disable-internal-links,--disable-local-file-access,--proxy,localhost
 ```
 
@@ -27,7 +27,7 @@ Note this can impact the render of the HTML in ARender:
 
 The default properties in the TaskConversion service looks like this: 
 
-```cfg title="application.properties located in ARender-Rendition-2023.17.0\modules\TaskConversion"
+```properties title="application.properties located in ARender-Rendition-{{version}}\modules\TaskConversion"
 tools.wkhtmltopdf.options=--disable-javascript,--quiet,--encoding,UTF-8,--load-error-handling,ignore,--disable-external-links,--disable-internal-links,--disable-local-file-access
 # Disable iframe URL as a safety measure
 tools.wkhtmltopdf.iframe.disabled=true
@@ -41,7 +41,7 @@ It is possible to change the language of these labels. For now, two languages â€
 
 The default property in the TaskConversion service looks like this: 
 
-```cfg title="application.properties located in ARender-Rendition-2023.17.0\modules\TaskConversion"
+```properties title="application.properties located in ARender-Rendition-{{version}}\modules\TaskConversion"
 # Configure the information fields language. Possible values are : "FR", "EN".
 vcard.label.language=EN
 ```
@@ -50,7 +50,7 @@ vcard.label.language=EN
 
 Properties are available to configure the rendering of images generated from TIFFs.
 
-:::note application.properties located in ARender-Rendition-2023.17.0\modules\TaskConversion
+:::note application.properties located in ARender-Rendition-{{version}}\modules\TaskConversion
 
 | Description                                                                                                             | Parameter Key                     | Default value | Type    |
 | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------- | ------- |
@@ -67,7 +67,7 @@ To activate this feature, configure it as follows:
 
 :::info[application-security.yaml]
 
-```cfg
+```yml
 app:
   factoriesBeanNames:
     imageFactory: "image/webp,image/gif,image/x-ms-bmp,image/x-bmp,image/x-portable-bitmap,image/vnd.adobe.photoshop,image/x-eps,application/postscript,application/dicom,application/pcx,application/x-pcx,image/pcx,image/x-pc-paintbrush,image/x-pcx,zz-application/zz-winassoc-pcx,image/jp2,image/heif,image/wmf"

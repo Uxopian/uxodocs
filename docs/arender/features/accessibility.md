@@ -40,7 +40,7 @@ It is possible to set the display time of toasters.
 
 Modifying the default value by the value _0_ allows access to the toaster elements with the tabulation.
 
-```cfg title="configurations/arender-custom-client.properties"
+```properties title="configurations/arender-custom-client.properties"
 toaster.toast.timeout=0
 ```
 

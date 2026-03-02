@@ -64,9 +64,9 @@ To have this behavior, you must replace the buttonHandler property. Annotations 
 
 Here is an example of a _buttonHandler_ property that activates repeat mode when the button is clicked:
 
-```cfg
+```xml
 <property name="buttonHandler">
-	<ref bean="highlightCircleCreationRepeatableAction" />
+  <ref bean="highlightCircleCreationRepeatableAction" />
 </property>
 ```
 
@@ -74,52 +74,50 @@ Bean references for button actions can be found in the file named events-configu
 
 ##### Example of a standard annotation button
 
-```cfg
-<bean id="addHighlightCircleAnnotationButton"
-    class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
-    <constructor-arg value="addHighlightCircleAnnotationButton" />
-    <property name="name" value="Circle" />
-    <property name="supportDoubleClick" value="${topPanel.annotationMenu.circle.repeat}" />
-    <property name="enabled" value="${topPanel.annotationMenu.circle}" />
-    <property name="className" value="standardButton icon-add-circle toppanelButton" />
-    <property name="buttonGroup" value="topPanel" />
-    <property name="buttonTitle">
-        <ref bean="labels#addCircleAnnotation" />
-    </property>
-    <property name="visibilityForTopPanel">
-        <ref bean="topPanelVisibilityMode" />
-    </property>
-    <property name="doubleClickButtonHandler">
-        <ref bean="highlightCircleCreationRepeatableAction" />
-    </property>
-    <property name="inactiveButtonHandler">
-        <ref bean="quitAnnotationCreationAction" />
-    </property>
-    <property name="buttonHandler">
-        <ref bean="highlightCircleCreationAction" />
-    </property>
+```xml
+<bean id="addHighlightCircleAnnotationButton" class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
+  <constructor-arg value="addHighlightCircleAnnotationButton" />
+  <property name="name" value="Circle" />
+  <property name="supportDoubleClick" value="${topPanel.annotationMenu.circle.repeat}" />
+  <property name="enabled" value="${topPanel.annotationMenu.circle}" />
+  <property name="className" value="standardButton icon-add-circle toppanelButton" />
+  <property name="buttonGroup" value="topPanel" />
+  <property name="buttonTitle">
+    <ref bean="labels#addCircleAnnotation" />
+  </property>
+  <property name="visibilityForTopPanel">
+    <ref bean="topPanelVisibilityMode" />
+  </property>
+  <property name="doubleClickButtonHandler">
+    <ref bean="highlightCircleCreationRepeatableAction" />
+  </property>
+  <property name="inactiveButtonHandler">
+    <ref bean="quitAnnotationCreationAction" />
+  </property>
+  <property name="buttonHandler">
+    <ref bean="highlightCircleCreationAction" />
+  </property>
 </bean>
 ```
 
 ##### Example of annotation button activating repeat mode with one-click
 
-```cfg
- <bean id="addHighlightCircleAnnotationRepeatButton"
-    class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
-    <constructor-arg value="addHighlightCircleAnnotationRepeatButton" />
-    <property name="enabled" value="${topPanel.annotationMenu.circle.repeat}" />
-    <property name="active" value="false" />
-    <property name="className" value="standardButton icon-add-circle toppanelButton" />
-    <property name="buttonGroup" value="topPanel" />
-    <property name="buttonTitle">
-        <ref bean="labels#addCircleAnnotation" />
-    </property>
-    <property name="visibilityForTopPanel">
-        <ref bean="topPanelVisibilityMode" />
-    </property>
-    <property name="buttonHandler">
-        <ref bean="highlightCircleCreationRepeatableAction" />
-    </property>
+```xml
+<bean id="addHighlightCircleAnnotationRepeatButton" class="com.arondor.viewer.client.toppanel.presenter.ActivableButtonPresenter">
+  <constructor-arg value="addHighlightCircleAnnotationRepeatButton" />
+  <property name="enabled" value="${topPanel.annotationMenu.circle.repeat}" />
+  <property name="active" value="false" />
+  <property name="className" value="standardButton icon-add-circle toppanelButton" />
+  <property name="buttonGroup" value="topPanel" />
+  <property name="buttonTitle">
+    <ref bean="labels#addCircleAnnotation" />
+  </property>
+  <property name="visibilityForTopPanel">
+    <ref bean="topPanelVisibilityMode" />
+  </property>
+  <property name="buttonHandler">
+    <ref bean="highlightCircleCreationRepeatableAction" />
+  </property>
 </bean>
 ```
 
@@ -135,33 +133,31 @@ Where &#123;Key&#125; corresponding to a alphabetic or numeric key on the keyboa
 
 For buttons (Using the ButtonPresenter class) and activable buttons (Using the ActivableButtonPresenter class), add the following property in the desired bean:
 
-```cfg
+```xml
 <property name="shortcut">
-    <bean
-        class="com.arondor.viewer.client.documentcontent.shortcuts.KeyboardShortCut"
-        scope="prototype">
-        <property name="ctrl" value="true" />
-        <property name="key" value="KEY_TO_USE" />
-        <property name="enabled" value="IS_ENABLED" />
-    </bean>
+  <bean class="com.arondor.viewer.client.documentcontent.shortcuts.KeyboardShortCut" scope="prototype">
+    <property name="ctrl" value="true" />
+    <property name="key" value="KEY_TO_USE" />
+    <property name="enabled" value="IS_ENABLED" />
+  </bean>
 </property>
 ```
 
 Property to add in the _shortcut_ bean to activate the CTRL key:
 
-```cfg
+```xml
 <property name="ctrl" value="true" />
 ```
 
 Property to add in the _shortcut_ bean to activate the SHIFT key:
 
-```cfg
+```xml
 <property name="shift" value="true" />
 ```
 
 Property to add in the _shortcut_ bean to activate the ALT key:
 
-```cfg
+```xml
 <property name="alt" value="true" />
 ```
 
@@ -177,71 +173,62 @@ A button is a simple button that will return to the initial visual state after c
 
 ###### Sub menu item
 
-```cfg
-<bean id="printButton"
-    class="com.arondor.viewer.client.widgets.DropdownMenuItem">
-    <constructor-arg value="printButton"/>
-    <property name="enabled" value="#{ !${isMobile} and ${topPanel.print}}"/>
-    <property name="className" value="standardButton icon-print toppanelButton" />
-    <property name="buttonTitle">
-        <ref bean="labels#printDocument" />
-    </property>
-    <property name="shortCut" value="CTRL + ${shortCut.print.key}" />
-    <property name="buttonHandler">
-        <bean
-            class="com.arondor.viewer.client.toppanel.behavior.document.DocumentPrintHandler">
-            <constructor-arg>
-                <bean
-                    class="com.arondor.viewer.client.events.print.ShowPrintDialogBoxEvent" />
-            </constructor-arg>
-        </bean>
-    </property>
+```xml
+<bean id="printButton" class="com.arondor.viewer.client.widgets.DropdownMenuItem">
+  <constructor-arg value="printButton"/>
+  <property name="enabled" value="#{ !${isMobile} and ${topPanel.print}}"/>
+  <property name="className" value="standardButton icon-print toppanelButton" />
+  <property name="buttonTitle">
+    <ref bean="labels#printDocument" />
+  </property>
+  <property name="shortCut" value="CTRL + ${shortCut.print.key}" />
+  <property name="buttonHandler">
+    <bean class="com.arondor.viewer.client.toppanel.behavior.document.DocumentPrintHandler">
+      <constructor-arg>
+        <bean class="com.arondor.viewer.client.events.print.ShowPrintDialogBoxEvent" />
+      </constructor-arg>
+    </bean>
+  </property>
 </bean>
 ```
 
 ###### Button
 
-```cfg
-<bean id="printButton"
-    class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter">
-    <constructor-arg value="printButton"/>
-    <property name="enabled" value="#{ !${isMobile} and ${topPanel.print}}"/>
-    <property name="className" value="standardButton icon-print toppanelButton" />
-    <property name="buttonTitle">
-        <ref bean="labels#printDocument" />
-    </property>
-    <property name="buttonHandler">
-        <bean
-            class="com.arondor.viewer.client.toppanel.behavior.document.DocumentPrintHandler">
-            <constructor-arg>
-                <bean
-                    class="com.arondor.viewer.client.events.print.ShowPrintDialogBoxEvent" />
-            </constructor-arg>
-        </bean>
-    </property>
+```xml
+<bean id="printButton" class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter">
+  <constructor-arg value="printButton"/>
+  <property name="enabled" value="#{ !${isMobile} and ${topPanel.print}}"/>
+  <property name="className" value="standardButton icon-print toppanelButton" />
+  <property name="buttonTitle">
+    <ref bean="labels#printDocument" />
+  </property>
+  <property name="buttonHandler">
+    <bean class="com.arondor.viewer.client.toppanel.behavior.document.DocumentPrintHandler">
+      <constructor-arg>
+        <bean class="com.arondor.viewer.client.events.print.ShowPrintDialogBoxEvent" />
+      </constructor-arg>
+    </bean>
+  </property>
 </bean>
 ```
 
 ###### Activable button
 
-```cfg
-<bean id="printButton"
-    class="com.arondor.viewer.client.widgets.ActivableButtonPresenter">
-    <constructor-arg value="printButton"/>
-    <property name="enabled" value="#{ !${isMobile} and ${topPanel.print}}"/>
-    <property name="className" value="standardButton icon-print toppanelButton" />
-    <property name="buttonTitle">
-        <ref bean="labels#printDocument" />
-    </property>
-    <property name="buttonHandler">
-        <bean
-            class="com.arondor.viewer.client.toppanel.behavior.document.DocumentPrintHandler">
-            <constructor-arg>
-                <bean
-                    class="com.arondor.viewer.client.events.print.ShowPrintDialogBoxEvent" />
-            </constructor-arg>
-        </bean>
-    </property>
+```xml
+<bean id="printButton" class="com.arondor.viewer.client.widgets.ActivableButtonPresenter">
+  <constructor-arg value="printButton"/>
+  <property name="enabled" value="#{ !${isMobile} and ${topPanel.print}}"/>
+  <property name="className" value="standardButton icon-print toppanelButton" />
+  <property name="buttonTitle">
+    <ref bean="labels#printDocument" />
+  </property>
+  <property name="buttonHandler">
+    <bean class="com.arondor.viewer.client.toppanel.behavior.document.DocumentPrintHandler">
+      <constructor-arg>
+        <bean class="com.arondor.viewer.client.events.print.ShowPrintDialogBoxEvent" />
+      </constructor-arg>
+    </bean>
+  </property>
 </bean>
 ```
 
@@ -268,21 +255,21 @@ The search button corresponds to the bean with the id _searchSection_. This bean
 Location of the use of the id:
 ![image](/img/arender/toppanel/toppanel-search-1.png)
 
-```cfg
+```properties
 topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,searchSection,moreButton
 ```
 
 Removing the id by redefining the property:
 ![image](/img/arender/toppanel/toppanel-search-3.png)
 
-```cfg
+```properties
 topPanel.section.right.buttons.beanNames=documentBuilderButton,fullscreenButton,moreButton
 ```
 
 Then, you will have to redefine a property with the bean id _searchBox_:
 ![image](/img/arender/toppanel/toppanel-search-2.png)
 
-```cfg
+```properties
 topPanel.section.right.buttons.beanNames=searchBox,documentBuilderButton,fullscreenButton,moreButton
 ```
 
@@ -337,7 +324,7 @@ The toppanel icons have been changed. Icons are made with custom font.
 
 The background, icon and hover colors in the toppanel can be changed between light color and dark color with a property:
 
-```cfg
+```properties
 preference.color.mode=DARK
 ```
 

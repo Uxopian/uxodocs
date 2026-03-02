@@ -36,8 +36,11 @@ curl -X GET 'http://<arender_host>/ARender/arendergwt/mergeDocumentsServlet?url=
 The servlet returns the UUID of the merged document and its number of
 pages.
 
-```javascript
-{"uuid":"b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0","nbPages":"32"}
+```json
+{
+  "uuid": "b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0",
+  "nbPages": "32"
+}
 ```
 
 Here the UUID is: b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0.
@@ -47,8 +50,8 @@ The number of pages is 32.
 One the request executed, the merged document is in ARender cache and
 viewable through the URL below:
 
-> `http://&#123;arender_host&#125;/ARender/?uuid=b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0`
+> `http://{arender_host}/ARender/?uuid=b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0`
 
 Even downloadable through:
 
-> `http://&#123;arender_host&#125;/ARender/arendergwt/downloadServlet?uuid=b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0&amp;title=DocumentTitle&amp;type=INITIAL`
+> `http://{arender_host}/ARender/arendergwt/downloadServlet?uuid=b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0&amp;title=DocumentTitle&amp;type=INITIAL`

@@ -42,17 +42,15 @@ Different type of search is configurable in order to apply it on different area 
 
 ```xml
 <property name="searchOptions">
-	<bean
-		class="com.arondor.viewer.client.api.search.SearchOptions">
-		<property name="searchText" value="your_text_to_be_search" />
-		<property name="accentSensitive" value="false" />
-		<property name="caseSensitive" value="false" />
-		<property name="regex" value="true" />
-		<property name="searchAction">
-			<value
-				type="com.arondor.viewer.client.api.search.SearchAction">CURRENT_PAGE</value>
-		</property>
-	</bean>
+  <bean class="com.arondor.viewer.client.api.search.SearchOptions">
+    <property name="searchText" value="your_text_to_be_search" />
+    <property name="accentSensitive" value="false" />
+    <property name="caseSensitive" value="false" />
+    <property name="regex" value="true" />
+    <property name="searchAction">
+      <value type="com.arondor.viewer.client.api.search.SearchAction">CURRENT_PAGE</value>
+    </property>
+  </bean>
 </property>
 ```
 
@@ -61,10 +59,10 @@ When the _SELECTED_PAGES_ option is used, the _pageSelection_ property must be a
 ```xml
 <!--ONLY FOR THE SEARCH ACTION *SELECTED_PAGES* -->
 <property name ="pageSelection">
-	<list>
-		<value>your_page_number_here</value>
-		<value>another page number..</value>
-	</list>
+  <list>
+    <value>your_page_number_here</value>
+    <value>another page number..</value>
+  </list>
 </property>
 ```
 
@@ -81,22 +79,20 @@ Annotations compatible with this feature are strikethrough, underline, underline
 An annotation will need to have the opacity and background color set in order to be constructed. The background color only takes on the value of hexadecimal.
 
 ```xml
-    <property name="annotationTemplate">
-        <bean
-            class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
-            <property name="name" value="" />
-            <property name="annotationType">
-                <value
-                    type="com.arondor.viewer.annotation.common.AnnotationType">Underline</value>
-            </property>
-            <property name="annotationStyle">
-                <bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
-                    <property name="backgroundColor" value="#ff0000" />
-                    <property name="opacity" value="0.8f" />
-                </bean>
-            </property>
-        </bean>
+<property name="annotationTemplate">
+  <bean class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
+    <property name="name" value="" />
+    <property name="annotationType">
+      <value type="com.arondor.viewer.annotation.common.AnnotationType">Underline</value>
     </property>
+    <property name="annotationStyle">
+      <bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
+        <property name="backgroundColor" value="#ff0000" />
+        <property name="opacity" value="0.8f" />
+      </bean>
+    </property>
+  </bean>
+</property>
 ```
 
 ### Complete rule
@@ -104,42 +100,41 @@ An annotation will need to have the opacity and background color set in order to
 Here is an example _bean_ of a complete rule combining the three main parts. The example allows underlining in red each word 'document' of the current page.
 
 ```xml
-<bean id="annotationCreationRuleExample"
-	class="com.arondor.viewer.client.api.annotation.AnnotationCreationRule">
-	<!-- Rule details -->
-	<property name="ruleId" value="annotationCreationRuleExample" />
-	<property name="ruleName" value="Example of annotation creation rule" />
-	<!-- Search details -->
-	<property name="searchOptions">
-		<bean
-			class="com.arondor.viewer.client.api.search.SearchOptions">
-			<property name="searchText" value="document" />
-			<property name="accentSensitive" value="false" />
-			<property name="caseSensitive" value="false" />
-			<property name="regex" value="true" />
-			<property name="searchAction">
-				<value
-					type="com.arondor.viewer.client.api.search.SearchAction">CURRENT_PAGE</value>
-			</property>
-		</bean>
-	</property>
-	<!-- Annotation details -->
-	<property name="annotationTemplate">
-		<bean
-			class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
-			<property name="name" value="" />
-			<property name="annotationType">
-				<value
-					type="com.arondor.viewer.annotation.common.AnnotationType">Underline</value>
-			</property>
-			<property name="annotationStyle">
-				<bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
-					<property name="backgroundColor" value="#ff0000" />
-					<property name="opacity" value="0.8f" />
-				</bean>
-			</property>
-		</bean>
-	</property>
+<bean id="annotationCreationRuleExample" class="com.arondor.viewer.client.api.annotation.AnnotationCreationRule">
+  <!-- Rule details -->
+  <property name="ruleId" value="annotationCreationRuleExample" />
+  <property name="ruleName" value="Example of annotation creation rule" />
+  <!-- Search details -->
+  <property name="searchOptions">
+    <bean
+      class="com.arondor.viewer.client.api.search.SearchOptions">
+      <property name="searchText" value="document" />
+      <property name="accentSensitive" value="false" />
+      <property name="caseSensitive" value="false" />
+      <property name="regex" value="true" />
+      <property name="searchAction">
+        <value
+          type="com.arondor.viewer.client.api.search.SearchAction">CURRENT_PAGE</value>
+      </property>
+    </bean>
+  </property>
+  <!-- Annotation details -->
+  <property name="annotationTemplate">
+    <bean
+      class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
+      <property name="name" value="" />
+      <property name="annotationType">
+        <value
+          type="com.arondor.viewer.annotation.common.AnnotationType">Underline</value>
+      </property>
+      <property name="annotationStyle">
+        <bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
+          <property name="backgroundColor" value="#ff0000" />
+          <property name="opacity" value="0.8f" />
+        </bean>
+      </property>
+    </bean>
+  </property>
 </bean>
 ```
 
@@ -151,12 +146,12 @@ Custom rules are only known to ARender from the rule catalog which lists the dif
 
 ```xml
 <bean id="annotationCreationRuleCatalog"
-	class="com.arondor.viewer.client.api.annotation.AnnotationCreationRuleCatalog">
-	<property name="annotationCreationRules">
-		<list>
-			<ref bean="annotationCreationRuleExample" />
-		</list>
-	</property>
+  class="com.arondor.viewer.client.api.annotation.AnnotationCreationRuleCatalog">
+  <property name="annotationCreationRules">
+    <list>
+      <ref bean="annotationCreationRuleExample" />
+    </list>
+  </property>
 </bean>
 ```
 
@@ -182,41 +177,41 @@ The following example will allow you to define a rule allowing to cross out the 
 
 ```xml
 <bean id="redactRuleExample"
-	class="com.arondor.viewer.client.api.annotation.AnnotationCreationRule">
-	<!-- Rule details -->
-	<property name="ruleId" value="redactRuleExample" />
-	<property name="ruleName" value="Example of annotation creation rule for redact" />
-	<!-- Search details -->
-	<property name="searchOptions">
-		<bean
-			class="com.arondor.viewer.client.api.search.SearchOptions">
-			<property name="searchText" value="view" />
-			<property name="accentSensitive" value="false" />
-			<property name="caseSensitive" value="false" />
-			<property name="regex" value="true" />
-			<property name="searchAction">
-				<value
-					type="com.arondor.viewer.client.api.search.SearchAction">CURRENT_PAGE</value>
-			</property>
-		</bean>
-	</property>
-	<!-- Annotation details -->
-	<property name="annotationTemplate">
-		<bean
-			class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
-			<property name="name" value="" />
-			<property name="annotationType">
-				<value
-					type="com.arondor.viewer.annotation.common.AnnotationType">RedactText</value>
-			</property>
-			<property name="annotationStyle">
-				<bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
-					<property name="backgroundColor" value="#000000" />
-					<property name="opacity" value="1.0f" />
-				</bean>
-			</property>
-		</bean>
-	</property>
+  class="com.arondor.viewer.client.api.annotation.AnnotationCreationRule">
+  <!-- Rule details -->
+  <property name="ruleId" value="redactRuleExample" />
+  <property name="ruleName" value="Example of annotation creation rule for redact" />
+  <!-- Search details -->
+  <property name="searchOptions">
+    <bean
+      class="com.arondor.viewer.client.api.search.SearchOptions">
+      <property name="searchText" value="view" />
+      <property name="accentSensitive" value="false" />
+      <property name="caseSensitive" value="false" />
+      <property name="regex" value="true" />
+      <property name="searchAction">
+        <value
+          type="com.arondor.viewer.client.api.search.SearchAction">CURRENT_PAGE</value>
+      </property>
+    </bean>
+  </property>
+  <!-- Annotation details -->
+  <property name="annotationTemplate">
+    <bean
+      class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
+      <property name="name" value="" />
+      <property name="annotationType">
+        <value
+          type="com.arondor.viewer.annotation.common.AnnotationType">RedactText</value>
+      </property>
+      <property name="annotationStyle">
+        <bean class="com.arondor.viewer.client.api.annotation.AnnotationStyle">
+          <property name="backgroundColor" value="#000000" />
+          <property name="opacity" value="1.0f" />
+        </bean>
+      </property>
+    </bean>
+  </property>
 </bean>
 ```
 
@@ -224,13 +219,13 @@ The following example will allow you to define a rule allowing to cross out the 
 
 ```xml
 <bean id="annotationCreationRuleCatalog"
-	class="com.arondor.viewer.client.api.annotation.AnnotationCreationRuleCatalog">
-	<property name="annotationCreationRules">
-		<list>
-			<ref bean="annotationCreationRuleExample" />
-			<ref bean="redactRuleExample" />
-		</list>
-	</property>
+  class="com.arondor.viewer.client.api.annotation.AnnotationCreationRuleCatalog">
+  <property name="annotationCreationRules">
+    <list>
+      <ref bean="annotationCreationRuleExample" />
+      <ref bean="redactRuleExample" />
+    </list>
+  </property>
 </bean>
 ```
 
@@ -240,26 +235,26 @@ First, we create the custom button definition:
 
 ```xml
 <bean id="customButtonToRedactSomething"
-	class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter">
-	<constructor-arg value="customButton"/>
-	<constructor-arg value="Custom Button" />
-	<constructor-arg value="standardButton"/>
-	<property name="enabled" value="true" />
-	<property name="buttonHandler">
-		<bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
-			<property name="jsCode">
-				<value>
-					$wnd.getARenderJS().createAnnotationByRulesWithRuleId(["redactRuleExample"]);
-				</value>
-			</property>
-		</bean>
-	</property>
+  class="com.arondor.viewer.client.toppanel.presenter.ButtonPresenter">
+  <constructor-arg value="customButton"/>
+  <constructor-arg value="Custom Button" />
+  <constructor-arg value="standardButton"/>
+  <property name="enabled" value="true" />
+  <property name="buttonHandler">
+    <bean class="com.arondor.viewer.client.jsapi.toppanel.JSCallButtonHandler">
+      <property name="jsCode">
+        <value>
+          $wnd.getARenderJS().createAnnotationByRulesWithRuleId(["redactRuleExample"]);
+        </value>
+      </property>
+    </bean>
+  </property>
 </bean>
 ```
 
 Then we must add the bean identifier customButtonToRedactSomething to the list of annotation buttons like below :
 
-```cfg
+```properties
 topPanel.annotation.buttons.beanNames=addStickyNoteAnnotationButton,addFreeTextAnnotationButton,customButtonToRedactSomething
 ```
 

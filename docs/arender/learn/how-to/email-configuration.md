@@ -12,7 +12,7 @@ content_hash: 11526b9ba38a080c863849435a413fd984ec3ffce323580fc769aed72c02ab00
 It is possible to configure a date format for emails. The following configuration will format the date
 _2022-01-24T04:54:42-05_ which will give the result _Mon 24 Jan 2022 04:54:42 -0500_
 
-```cfg
+```properties
 emltopdf.config.format.date=EEE d MMM yyyy HH:mm:ss ZZ
 ```
 
@@ -20,7 +20,7 @@ emltopdf.config.format.date=EEE d MMM yyyy HH:mm:ss ZZ
 
 The date is configurable according to the user's time zone. By default, the date is formatted according to the UTC time zone.
 
-```cfg
+```properties
 default.url.parser.use.timeZone.for.ids=true
 ```
 
@@ -29,13 +29,10 @@ default.url.parser.use.timeZone.for.ids=true
 Non-Latin characters in subject and attachment names may not be displayed correctly.
 To enable proper rendering, you must configure the _document-converter_ rendering module as follows :
 
-```cfg
 ```properties
 emltopdf.encode.header.with.body.encoding=true
 emltopdf.config.filter.special.characters.regex=
 emltopdf.config.filter.replacement.character=
-```
-
 ```
 
 
@@ -46,7 +43,7 @@ the user which will be used to determine the correct encoding to apply.
 
 
 
-``` cfg
+```properties
 default.url.parser.use.locale.for.ids=true
 ```
 
@@ -55,7 +52,7 @@ default.url.parser.use.locale.for.ids=true
 It is possible configure the header rendering language for emails.
 By default, the header is rendered in French. The possible values are : "FR", "EN".
 
-```cfg
+```properties
 # Configure the header rendering language. Possible values are : "FR", "EN".
 emltopdf.config.header.language=FR
 ```

@@ -7,6 +7,9 @@ last_update:
 content_hash: 9bee2992ecff2287f45c94df7dd4672b03ac7fd2cf354dc8597bdbf10a0d5e24
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## By Environment Variables
 
 All yaml properties can be overridden by environment variables by following the next rules:
@@ -16,24 +19,32 @@ All yaml properties can be overridden by environment variables by following the 
 - use **"\_"** to associate an object
 - use **"[n]"** to set a list element (with **n** as index)
 
+<Tabs>
+<TabItem value="yaml" label="YAML Configuration">
 ```yaml
 nurse:
-    samplesDirectory: ../../samples/
+  samplesDirectory: ../../samples/
     components:
-        - functionality: TKC_MailConversion
-          factoryName: "mailFactory"
-          samplePath: "test.msg"
-          docIdStr: "m41lS4mpl3"
+      - functionality: TKC_MailConversion
+        factoryName: "mailFactory"
+        samplePath: "test.msg"
+        docIdStr: "m41lS4mpl3"
 ```
+</TabItem>
 
+<TabItem value="environment" label="Environment Variables">
 ```yaml
-environment:
+  environment:
     - "DCV_NURSE_SAMPLES.DIRECTORY=../../samples/"
     - "DCV_NURSE_COMPONENTS[0]_FUNCTIONALITY=TKC_MailConversion"
     - "DCV_NURSE_COMPONENTS[0]_FACTORY.NAME=mailFactory"
     - "DCV_NURSE_COMPONENTS[0]_SAMPLE.PATH=test.msg"
     - "DCV_NURSE_COMPONENTS[0]_DOC.ID.STR=m41lS4mpl3"
 ```
+</TabItem>
+</Tabs>
+
+
 
 ## By volumes
 
@@ -63,7 +74,7 @@ rendering requests through sub-processes, allowing errors to be handled without 
 
 ### Docker image
 
-The docker image name with the tag is artifactory.arondor.cloud:5001/document-renderer-pdfowl:
+The docker image name with the tag is `artifactory.arondor.cloud:5001/document-renderer-pdfowl:{{version}}`
 
 Example of using this image with docker compose :
 
@@ -72,14 +83,14 @@ version: "3.7"
 
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
     ports:
       - 8080:8080
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
@@ -91,7 +102,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:{{version}}
     hostname: drn-service
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
@@ -104,7 +115,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:{{version}}
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -115,7 +126,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:{{version}}
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
@@ -134,7 +145,7 @@ volumes:
 
 Some properties are available with default values :
 
-```cfg
+```properties
 # PdfOwl binary path
 pdfowl.path=pdfowl
 # Timeout for pdfowl commands execution in milliseconds

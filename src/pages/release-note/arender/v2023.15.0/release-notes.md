@@ -4,7 +4,7 @@ description: Minor release introducing major stability fixes, enhancements to hy
 date: "2025-10-31"
 ---
 
-> **Upgrade note:** See [v2023.15.0](./upgrade-notes) for detailed instructions.
+> **Upgrade note:** See [v2023.15.0](../upgrade-notes) for detailed instructions.
 
 ## Overview
 

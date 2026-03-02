@@ -43,8 +43,8 @@ curl -X GET 'http://localhost:8761/documents/b64_bm9yZS92SDMtMS0xMTh1735080237/l
 
 The following example show a DocumentLayout for a PDF of wo pages.
 
-```bash
-
+```json
+{
   "type": "com.arondor.viewer.client.api.document.DocumentPageLayout",
   "documentId": {
     "id": "b64_N2U5MzY0MmQtYTQ4YS00MzBlLThiYWYtMjhhMjdlNGZlMDQz"
@@ -52,20 +52,20 @@ The following example show a DocumentLayout for a PDF of wo pages.
   "documentTitle": null,
   "mimeType": "application/pdf",
   "pageDimensionsList": [
-
+    {
       "width": 595,
       "height": 841,
       "rotation": 0,
       "dpi": 72,
       "pageLayers": null
     },
-
+    {
       "width": 595,
       "height": 841,
       "rotation": 0,
       "dpi": 72,
       "pageLayers": null
-
+    }
   ]
-
+}
 ```

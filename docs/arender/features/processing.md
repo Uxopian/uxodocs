@@ -12,7 +12,7 @@ To improve the visibility of elements on certain documents, it is possible to ma
 
 The buttons to display the sliders individually can be activated with the following properties :
 
-```cfg
+```properties
 #Activate the brightness slider
 topPanel.imageProcessMenu.brightness.enabled=true
 #Activate the contrast slider
@@ -29,7 +29,7 @@ Image processing can be applied in three different ways :
 - All pages of the current document
 - All pages of all opened documents
 
-```cfg
+```properties
 # Set how image processing is applied : CURRENT_PAGE, ALL_PAGES, ALL_DOCUMENTS
 topPanel.imageProcessMenu.process.mode=ALL_DOCUMENTS
 ```

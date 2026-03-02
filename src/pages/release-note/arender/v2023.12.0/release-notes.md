@@ -4,7 +4,7 @@ description: Minor release fixing issue with annotation with transparent color w
 date: "2025-07-28"
 ---
 
-> **Upgrade note:** See [v2023.12.0](./upgrade-notes) for detailed instructions.
+> **Upgrade note:** See [v2023.12.0](../upgrade-notes) for detailed instructions.
 
 ## Overview
 

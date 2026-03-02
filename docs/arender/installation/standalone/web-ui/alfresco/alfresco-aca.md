@@ -64,7 +64,7 @@ As the module is preview and not publicly available you need to add it manually.
     $> git checkout v1.10.1
     ```
 
-2. Download ARender ACA extension sources [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arender-for-alfresco-ADF-plugin/2023.16.0/arender-for-alfresco-ADF-plugin-2023.16.0.zip) and unzip the archive content.
+2. Download ARender ACA extension sources [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arender-for-alfresco-ADF-plugin/{{version}}/arender-for-alfresco-ADF-plugin-{{version}}.zip) and unzip the archive content.
 
 3. Create a library project.
 
@@ -76,60 +76,60 @@ As the module is preview and not publicly available you need to add it manually.
 
 5. Add ARender lib to the compiler config.
 
-```yaml
-
-  "compilerOptions": &#123;
+```json
+{
+  "compilerOptions": {
     // [...]
-    "paths": &#123;
+    "paths": {
     // [...]
       "@arondor/arender-viewer": ["dist/@arondor/arender-viewer"],
       "@arondor/arender-viewer/*": ["dist/@arondor/arender-viewer/*"]
-
-
-
+    }
+  }
+}
 ```
 
 For versions 2.0 and above, refer to the version 2.0 installation
 
 6. Add ARender assets to the app and replace project infos.
 
-```yml
-
+```json
+{
   "projects": {
-    "app": &#123;
-      "architect": &#123;
+    "app": {
+      "architect": {
         //[...]
-        "build": &#123;
+        "build": {
           //[...]
-          "options": &#123;
+          "options": {
             //[...]
             "assets": [
               //[...]
-
+              {
                 "glob": "arender.plugin.json",
                 "input": "node_modules/@arondor/arender-viewer/assets",
                 "output": "./assets/plugins"
-              &#125;,
-
+              },
+              {
                 "glob": "arender.plugin.json",
                 "input": "projects/arondor-arender-viewer/assets",
                 "output": "./assets/plugins"
-              &#125;,
-
+              },
+              {
                 "glob": "**/*",
                 "input": "node_modules/@arondor/arender-viewer/assets",
                 "output": "./assets/arender-viewer"
-              &#125;,
-
+              },
+              {
                 "glob": "**/*",
                 "input": "projects/arondor-arender-viewer/assets",
                 "output": "./assets/arender-viewer"
-
+              }
             ]
-
-
-
-    &#125;,
+          }
+        }
+      }
+    },
     //[...]
     "arondor-arender-viewer": {
       "root": "projects/arondor-arender-viewer",
@@ -142,19 +142,19 @@ For versions 2.0 and above, refer to the version 2.0 installation
           "options": {
             "tsConfig": "projects/arondor-arender-viewer/tsconfig.lib.json",
             "project": "projects/arondor-arender-viewer/ng-package.json"
-
-        &#125;,
+          }
+        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
-          "options": &#123;
+          "options": {
             "main": "projects/arondor-arender-viewer/src/test.ts",
             "tsConfig": "projects/arondor-arender-viewer/tsconfig.spec.json",
             "karmaConfig": "projects/arondor-arender-viewer/karma.conf.js"
-
-        &#125;,
-        "lint": &#123;
+          }
+        },
+        "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
-          "options": &#123;
+          "options": {
             "tsConfig": [
               "projects/arondor-arender-viewer/tsconfig.lib.json",
               "projects/arondor-arender-viewer/tsconfig.spec.json"
@@ -162,47 +162,47 @@ For versions 2.0 and above, refer to the version 2.0 installation
             "exclude": [
               "**/node_modules/**"
             ]
-
-
-
-
-
-
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 7. Add ARender extension description.
 
-```yml
-
+```json
+{
   "$references": [
     "arender.plugin.json",
     ...
   ],
-
+}
 ```
 
 8. Import ARender extension.
 
 ```ts
-import { ArenderExtensionModule &#125; from '@arondor/arender-viewer';
+import { ArenderExtensionModule } from '@arondor/arender-viewer';
 
 @NgModule({
   imports: [ArenderExtensionModule, ... ]
-&#125;)
+})
 ```
 
 9. Add ARender ACA extension to the package build scripts.
 
-```yml
-
+```json
+{
   "scripts": {
     //[...]
     "build:arender-extension": "npx rimraf dist/@arondor/arender-viewer && ng build arondor-arender-viewer && cpr projects/arondor-arender-viewer/ngi.json dist/@arondor/arender-viewer/ngi.json && cpr projects/arondor-arender-viewer/assets dist/@arondor/arender-viewer/assets",
     "build.arender": "npm run build:arender-extension",
     "build.extensions": "npm run build.shared && npm run build.aos && npm run build.arender",
     //[...]
-
-
+  }
+}
 ```
 
 For versions 2.0 and above, refer to the version 2.0 installation
@@ -211,15 +211,15 @@ For versions 2.0 and above, refer to the version 2.0 installation
 
 #### ARender server config
 
-```yml
-
+```json
+{
   "arender": {
-    "host": "{protocol&#125;//{hostname}:{port}/arender/",
+    "host": "{protocol}//{hostname}:{port}/arender/",
     "onPromise": true,
     "documentbuilder": true
   },
   //[...]
-
+}
 ```
 
 Description:
@@ -232,12 +232,12 @@ Description:
 
 Modify features.viewer.content.fileExtension list.
 
-```yml
-
+```json
+{
   //[...]
   "features": {
-    "viewer": &#123;
-      "content": [&#123;
+    "viewer": {
+      "content": [{
         "id": "app.arender.viewer",
         "fileExtension": [
           "docx", "docm", "dotx", "dotm", "doc", "dot",
@@ -255,11 +255,11 @@ Modify features.viewer.content.fileExtension list.
           "png", "gif", "webp", "bmp"
           // <- Add your extensions here or/and remove element from the list above ^
         ],
-      &#125;]
-    &#125;,
+      }]
+    },
     // [...]
-
-
+  }
+}
 ```
 
 ### Build and run
@@ -286,23 +286,23 @@ For versions 2.0 and above, the following additional changes must be done :
 
 1. The ARender lib in the compiler configuration are placed in tsconfig.base.json and not in tsconfig.json
 
-```yaml
-
+```json
+{
   "compilerOptions": {
     // [...]
     "paths": {
     // [...]
       "@arondor/arender-viewer": ["dist/@arondor/arender-viewer"],
       "@arondor/arender-viewer/*": ["dist/@arondor/arender-viewer/*"]
-
-
-
+    }
+  }
+}
 ```
 
 2. Add ARender ACA extension to the package build scripts.
 
-```yml
-
+```json
+{
   "scripts": {
     //[...]
     "build:arender-extension": "npx rimraf dist/@arondor/arender-viewer && ng build arondor-arender-viewer && cpr projects/arondor-arender-viewer/ngi.json dist/@arondor/arender-viewer/ngi.json && cpr projects/arondor-arender-viewer/assets dist/@arondor/arender-viewer/assets",
@@ -310,8 +310,8 @@ For versions 2.0 and above, the following additional changes must be done :
     "build.extensions": "npm run build.shared && npm run build.aos && npm run build.arender",
     "build": "npm run validate-config && npm run build.extensions && npm run build.app -- --prod",
     //[...]
-
-
+  }
+}
 ```
 
 3. Execute the command to build the app and have the generated folder (/dist/app) to place in your tomcat server in the "webapps" folder.

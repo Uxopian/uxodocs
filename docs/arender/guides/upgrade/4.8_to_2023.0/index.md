@@ -28,8 +28,8 @@ Spring Boot deployment.
 Before starting the migration of ARender's UI component, ensure you meet the following prerequisites:
 
 * Basic knowledge of Spring Boot.
-* The ARender UI version 2023 binary should be downloaded and ready to deploy. You can download it [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-spring-boot-package/2023.16.0/arondor-arender-hmi-spring-boot-package-2023.16.0.zip).
-* The ARender Rendition version 2023 binary should be downloaded and ready to install. You can download it [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/micro/services/rendition-engine-installer/2023.16.0/rendition-engine-installer-2023.16.0-rendition.jar).
+* The ARender UI version 2023 binary should be downloaded and ready to deploy. You can download it [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-spring-boot-package/{{version}}/arondor-arender-hmi-spring-boot-package-{{version}}.zip).
+* The ARender Rendition version 2023 binary should be downloaded and ready to install. You can download it [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/micro/services/rendition-engine-installer/{{version}}/rendition-engine-installer-{{version}}-rendition.jar).
 * Specific configurations from your ARender deployment in Version 4.
 
 ## Migrating from Version 4 to Version 2023 of ARender

@@ -36,8 +36,7 @@ version of it in case a conversion is needed on the rendition side.
 
 ```java
 client.loadDocumentAccessor(original);
-DocumentAccessor accessorConverted = client.getDocumentAccessor(original.getUUID(),
-        DocumentAccessorSelector.RENDERED);
+DocumentAccessor accessorConverted = client.getDocumentAccessor(original.getUUID(), DocumentAccessorSelector.RENDERED);
 ```
 
 ## Obtaining the number of pages
@@ -46,14 +45,14 @@ DocumentAccessor accessorConverted = client.getDocumentAccessor(original.getUUID
 DocumentLayout layout = client.getDocumentLayout(accessorConverted.getUUID());
 int nbPages = -1;
 if (layout instanceof DocumentPageLayout)
-
+{
     nbPages = ((DocumentPageLayout) layout).getPageCount();
-
+}
 else
-
+{
     // send error
     throw ...
-
+}
 ```
 
 ## Setup the annotation style for stamps
@@ -74,9 +73,9 @@ styleMap.put("borderColor", annotationStyle.getBorderColor() + "");
 styleMap.put("backgroundColor", annotationStyle.getBackgroundColor() + "");
 String newAppearance = "";
 for (String key: styleMap.keySet())
-
-    newAppearance += key + ":" + styleMap.get(key) + ";";
-
+{
+  newAppearance += key + ":" + styleMap.get(key) + ";";
+}
 // the appearance for the ARender stamp is now built
 ```
 
@@ -84,20 +83,20 @@ for (String key: styleMap.keySet())
 
 ```java
 // now we prepare the list of stamps to send the rendition server
-List&lt;Annotation&gt; stamps = new ArrayList&lt;Annotation&gt;();
+List<Annotation> stamps = new ArrayList<Annotation>();
 for (int i = 0; i < nbPages; i++)
+{
+  StampElemType annotation = new StampElemType();
+  annotation.setDocumentId(DocumentIdFactory.getInstance().generate());
+  annotation.setContents("WATERMARK");
+  annotation.setRotation(0);
+  annotation.setPosition(new PageRelativePosition(0, 100, 400, 400));
 
-    StampElemType annotation = new StampElemType();
-    annotation.setDocumentId(DocumentIdFactory.getInstance().generate());
-    annotation.setContents("WATERMARK");
-    annotation.setRotation(0);
-    annotation.setPosition(new PageRelativePosition(0, 100, 400, 400));
+  annotation.setAppearance(newAppearance);
 
-    annotation.setAppearance(newAppearance);
-
-    annotation.setPage(i);
-    stamps.add(annotation);
-
+  annotation.setPage(i);
+  stamps.add(annotation);
+}
 ```
 
 ## Creation of the conversion task
@@ -107,7 +106,7 @@ AlterContentDescriptionWithAnnotations alterContent = new AlterContentDescriptio
 // set annotations
 alterContent.setAnnotations(stamps);
 // set documentId
-List&lt;DocumentId&gt; sourceDocumentIdList = new ArrayList&lt;DocumentId&gt;();
+List<DocumentId> sourceDocumentIdList = new ArrayList<DocumentId>();
 sourceDocumentIdList.add(accessorConverted.getUUID());
 DocumentId renderedDoc = client.alterDocumentContent(sourceDocumentIdList, alterContent);
 ```
@@ -115,8 +114,7 @@ DocumentId renderedDoc = client.alterDocumentContent(sourceDocumentIdList, alter
 ## Fetch of the resulting document
 
 ```java
-DocumentAccessor accessorFinalDocument = client.getDocumentAccessor(renderedDoc,
-        DocumentAccessorSelector.RENDERED);
+DocumentAccessor accessorFinalDocument = client.getDocumentAccessor(renderedDoc, DocumentAccessorSelector.RENDERED);
 ```
 
 The binary data of the resulting document is in:

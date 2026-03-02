@@ -48,8 +48,8 @@ curl -X 'GET' \
 
 Response sample:
 
-```bash
-
+```json
+{
   "comparisonOrderId": {
     "id": "string"
   },
@@ -65,5 +65,5 @@ Response sample:
   "queuedTime": 0,
   "rightDocumentId": "string",
   "targetDocumentId": "string"
-
+}
 ```

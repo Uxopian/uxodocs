@@ -4,7 +4,7 @@ description: Minor release improving signed-PDF rendering, long Base64 URL handl
 date: "2025-06-27"
 ---
 
-> **Upgrade note:** See [v2023.11.0](./upgrade-notes) for detailed instructions.
+> **Upgrade note:** See [v2023.11.0](../upgrade-notes) for detailed instructions.
 
 ## Overview
 

@@ -23,84 +23,67 @@ There are a total of 3 BOMs available: the web-ui, the rendition and the root wh
 is the parent pom and which therefore contains the libraries common to the web-ui and to the
 rendition.
 
-```cfg
+```xml
 <dependency>
-	<groupId>com.arondor.arender</groupId>
-	<artifactId>arender-bom-root</artifactId>
-	<version>${arender.version}</version>
+  <groupId>com.arondor.arender</groupId>
+  <artifactId>arender-bom-root</artifactId>
+  <version>${arender.version}</version>
 </dependency>
 
 <dependency>
-	<groupId>com.arondor.arender</groupId>
-	<artifactId>arender-bom-web-ui</artifactId>
-	<version>{arender.version}</version>
+  <groupId>com.arondor.arender</groupId>
+  <artifactId>arender-bom-web-ui</artifactId>
+  <version>{arender.version}</version>
 </dependency>
 
 <dependency>
-	<groupId>com.arondor.arender</groupId>
-	<artifactId>arender-bom-rendition</artifactId>
-	<version>{arender.version}</version>
+  <groupId>com.arondor.arender</groupId>
+  <artifactId>arender-bom-rendition</artifactId>
+  <version>{arender.version}</version>
 </dependency>
 ```
 
 ### Example
 
-```cfg
-
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  &lt;modelVersion&gt;4.0.0</modelVersion>
-  &lt;parent&gt;
-    &lt;groupId&gt;com.arondor.test</groupId>
-    &lt;artifactId&gt;my-parent-pom</artifactId>
-    &lt;version&gt;0.0.1-SNAPSHOT</version>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.arondor.test</groupId>
+    <artifactId>my-parent-pom</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  &lt;artifactId&gt;custom-arender-connector</artifactId>
-  &lt;packaging&gt;jar</packaging>
+  <artifactId>custom-arender-connector</artifactId>
+  <packaging>jar</packaging>
 
-  &lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;com.arondor.arender</groupId>
-        &lt;artifactId&gt;arender-bom-web-ui</artifactId>
-        &lt;version&gt;${arender.version}</version>
-        &lt;type&gt;pom</type>
-        &lt;scope&gt;import</scope>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.arondor.arender</groupId>
+        <artifactId>arender-bom-web-ui</artifactId>
+        <version>${arender.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
 
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.security</groupId>
-      &lt;artifactId&gt;spring-security-oauth2-client</artifactId>
-      &lt;scope&gt;provided</scope>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-oauth2-client</artifactId>
+      <scope>provided</scope>
     </dependency>
 
-    &lt;dependency&gt;
-      &lt;groupId&gt;javax.servlet</groupId>
-      &lt;artifactId&gt;javax.servlet-api</artifactId>
-      &lt;scope&gt;provided</scope>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
 </project>
-```
-
-```
-
-
-```
-
-```
-
-
-```
-
-```
-
-
 ```
 
 We can see here the import of the BOM in the dependencyManagement and the use

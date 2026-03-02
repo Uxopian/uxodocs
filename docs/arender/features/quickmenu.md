@@ -13,7 +13,7 @@ This menu is positioned below the text and will allow you to perform actions on 
 
 This menu can be disabled with the following configuration :
 
-```cfg
+```properties
 # Activates ARender quick contextual menu when text is selected
 quick.contextual.menu.enabled=false
 ```
@@ -35,7 +35,7 @@ The quickmenu supports the following annotations:
 
 Each button is enabled by default. You can individually disable buttons with the following configurations:
 
-```cfg
+```properties
 # Enables a textual highlight annotation creation option for the quick contextual menu
 quick.contextual.menu.hasHighlightText=false
 
@@ -60,7 +60,7 @@ quick.contextual.menu.hasRedactText=false
 A button to copy selected text is enabled by default.
 This button can be deactivated with the following configuration:
 
-```cfg
+```properties
 # Enables a copy selected text option for the quick contextual menu
 quick.contextual.menu.hasCopyText=false
 ```

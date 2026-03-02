@@ -14,13 +14,11 @@ You can since ARender 4.0.1 send directly each log fragment to the disk
 
 Alter, corresponding to your need, the following properties in:
 
-```cfg
+```properties
 #activate/deactivate the use of the disk based logger
 arender.server.perf.logger.use=true
 
 #configure elastic search connection
-
-```properties
 arender.server.perf.es.host=localhost
 arender.server.perf.es.port=9200
 arender.server.perf.es.protocol=http
@@ -35,15 +33,15 @@ arender.server.perf.es.use=false
 YAML properties can be added to the rendition micro service in order to
 obtain the same behavior as the ARender Web-UI war:
 
-```yaml
+```yml
 aop:
-    active: false
-    activateLogger: true
-    activateEs: false
-    esHost: localhost
-    esPort: 9200
-    esIndexName: arender-rendition-performance
-    esProtocol: http
+  active: false
+  activateLogger: true
+  activateEs: false
+  esHost: localhost
+  esPort: 9200
+  esIndexName: arender-rendition-performance
+  esProtocol: http
 ```
 
 You will have to alter those values to the desired target in order to
@@ -62,11 +60,11 @@ activate the backup of documents which caused issues to ARender.
 
 Here are the existing parameters:
 
-```yaml
+```yml
 aop:
-    rejectedDocs: false
-    nbDaysKept: 1
-    rejectedPath: "rejected/"
+  rejectedDocs: false
+  nbDaysKept: 1
+  rejectedPath: "rejected/"
 ```
 
 The property "rejectedDocs" activates the mechanism. The property

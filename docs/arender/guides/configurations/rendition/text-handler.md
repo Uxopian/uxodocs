@@ -13,7 +13,7 @@ ARender supports the display and verification of digital signatures in PDF files
 This feature is disabled by default, but can be enabled in the settings.
 Once enabled, signature information becomes visible, and trusted certificates can be configured to verify the authenticity of signatures in documents.
 
-**application.properties situé dans ARender-Rendition-2023.17.0\modules\PDFBoxEngine**
+**application.properties situé dans ARender-Rendition-{{version}}\modules\PDFBoxEngine**
 
 | Description                                                                                                  | Parameter Key                  | Default value            | Type    |
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------ | ------------------------ | ------- |

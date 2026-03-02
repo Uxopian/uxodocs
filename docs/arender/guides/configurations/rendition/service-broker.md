@@ -48,7 +48,7 @@ When the rendition server starts, folders and files in the temporary files folde
 This deletion will not be automatic if the default path *../../tmp* has been modified.
 In this case, the following configuration needs to be done.
 
-```cfg title="/modules/rendition-engine/application.properties"
+```properties title="/modules/rendition-engine/application.properties"
 default.document.path.startup.clear=true
 ```
 
@@ -60,7 +60,7 @@ the request is rejected and a 503 response is returned.
 
 By default, the available space threshold is 1GB, a value that can be configured via properties:
 
-```cfg
+```properties
 # Disk free space threshold (in GB)
 disk.free.space.threshold=2
 ```

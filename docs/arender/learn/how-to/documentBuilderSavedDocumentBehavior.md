@@ -16,7 +16,7 @@ Be sure to read before the chapter : [Web-UI configuration guide](/docs/arender/
 Moreover, in order to save new document with ARender you need to
 activate the documentBuilder functionality as below:
 
-```cfg
+```properties
 documentbuilder.enabled=true
 ```
 
@@ -27,7 +27,7 @@ document.
 
 Below, the properties to modify:
 
-```cfg
+```properties
 documentbuilder.save.behavior=UPDATE_NO_DOCUMENT
 ```
 
@@ -42,7 +42,7 @@ the CSP.
 
 UPDATE_NO_DOCUMENT: no action on the CSP side.
 
-```cfg
+```properties
 documentbuilder.save.download=true
 ```
 
@@ -57,7 +57,7 @@ document save.
 
 Below, the properties to modify:
 
-```cfg
+```properties
 documentbuilder.button.legacySave.enabled=true
 ```
 
@@ -65,7 +65,7 @@ Role: get back to the legacy behavior of pre 3.1.4 ARender versions (see [Tutori
 
 Possible values: true/false.
 
-```cfg
+```properties
 documentbuilder.button.download.enabled=true
 ```
 
@@ -74,7 +74,7 @@ client side.
 
 Possible values: true/false.
 
-```cfg
+```properties
 documentbuilder.button.createFirst.enabled=true
 ```
 
@@ -83,7 +83,7 @@ corresponding to the built document.
 
 Possible values: true/false.
 
-```cfg
+```properties
 documentbuilder.button.updateFirst.enabled=true
 ```
 

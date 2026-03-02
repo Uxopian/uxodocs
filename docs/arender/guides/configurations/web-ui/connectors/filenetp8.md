@@ -23,19 +23,19 @@ Some examples:
 
 - To open a document stored in FileNet P8, try:
 
-    `http://&#123;arender_server&#125;/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1`
+    `http://{arender_server}/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1`
 
 - To open simultaneously two documents with the mixedObjects syntax:
 
-    `http://&#123;arender_serveur&#125;/ARender.html?ids=doc:{345A81-KT7SK95747S-5IS8-8SK0},doc:&#123;F64A9342-6114-4A5C-A5E1-589A2FFB159F&#125;&amp;objectStoreName=OS1&amp;objectType=mixedObjects`
+    `http://{arender_serveur}/ARender.html?ids=doc:{345A81-KT7SK95747S-5IS8-8SK0},doc:{F64A9342-6114-4A5C-A5E1-589A2FFB159F}&amp;objectStoreName=OS1&amp;objectType=mixedObjects`
 
 - To open simultaneously two documents and a folder:
 
-    `http://&#123;arender_serveur&#125;/ARender.html?objectStoreName=OS1&amp;ids=doc:{3DBE573A-1AC9-4B08-8CB1-8F9495619954},doc:&#123;F64A9342-6114-4A5C-A5E1-589A2FFB159F&#125;,folder:{55714817-BDAC-4C8A-9EFB-963E4620A4E4}&amp;objectType=mixedObjects`
+    `http://{arender_serveur}/ARender.html?objectStoreName=OS1&amp;ids=doc:{3DBE573A-1AC9-4B08-8CB1-8F9495619954},doc:{F64A9342-6114-4A5C-A5E1-589A2FFB159F},folder:{55714817-BDAC-4C8A-9EFB-963E4620A4E4}&amp;objectType=mixedObjects`
 
 - To open a specific content element:
 
-    `http://&#123;arender_serveur&#125;/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1&amp;contentElement=2`
+    `http://{arender_serveur}/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1&amp;contentElement=2`
 
 The mixedObjects syntax is: **ids=[ [ “doc” | “folder” ] “:” [ Id du document ou Folder ] [ “,"] ]+**
 
@@ -53,12 +53,10 @@ protocol:
 | --------------------- | --------------------------------------------- |
 | content_engine_server | URI of Content Engine using the IIOP protocol |
 
-```cfg
-
 
 ```properties
 arender.server.filenet.authentication.method=jaasObjectStoreProvider
-arender.server.filenet.ce.url=iiop://&#123;content_engine_server&#125;:2809/FileNet/Engine
+arender.server.filenet.ce.url=iiop://{content_engine_server}:2809/FileNet/Engine
 ```
 
 ### Technical account
@@ -69,34 +67,36 @@ Using a technical account to connect to FileNet Content Platform Engine requires
 
 Comment the security-constraint and security-role pre-configured.
 
-```XML
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<web-fragment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd" id="WebAppFragment_ID" version="3.0">
-    <name>web_fragment_ecm</name>
-    <!--security-constraint>
-        <web-resource-collection>
-            <web-resource-name>action</web-resource-name>
-            <description>Define the container secured resource</description>
-            <url-pattern>/ArondorViewer.jsp</url-pattern>
-            <url-pattern>/ARender.jsp</url-pattern>
-            <url-pattern>/ARender.html</url-pattern>
-            <url-pattern>/DownloadDocumentWithAnnotations.jsp</url-pattern>
-            <url-pattern>/arendergwt/*</url-pattern>
-            <url-pattern>/openExternalDocument.jsp</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>All Authenticated</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <description>User data constraints</description>
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
+<web-fragment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd" id="WebAppFragment_ID" version="3.0">
+  <name>web_fragment_ecm</name>
+  <!--security-constraint>
+    <web-resource-collection>
+      <web-resource-name>action</web-resource-name>
+      <description>Define the container secured resource</description>
+      <url-pattern>/ArondorViewer.jsp</url-pattern>
+      <url-pattern>/ARender.jsp</url-pattern>
+      <url-pattern>/ARender.html</url-pattern>
+      <url-pattern>/DownloadDocumentWithAnnotations.jsp</url-pattern>
+      <url-pattern>/arendergwt/*</url-pattern>
+      <url-pattern>/openExternalDocument.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>All Authenticated</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <description>User data constraints</description>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
 
-    <security-role>
-        <description>All Authenticated</description>
-        <role-name>All Authenticated</role-name>
-    </security-role-->
+  <security-role>
+    <description>All Authenticated</description>
+    <role-name>All Authenticated</role-name>
+  </security-role-->
 </web-fragment>
 ```
 
@@ -105,9 +105,8 @@ Comment the security-constraint and security-role pre-configured.
 Modify the bean having the id urlFilter (by default configured with JAASUserFilter class), by the one below:
 
 ```XML
-<bean id="urlFilter"
-          class="com.arondor.viewer.server.security.RequestParameterAuthenticationFilter">
-    <property name="authenticationManager" ref="authenticationManager" />
+<bean id="urlFilter" class="com.arondor.viewer.server.security.RequestParameterAuthenticationFilter">
+  <property name="authenticationManager" ref="authenticationManager" />
 </bean>
 ```
 
@@ -119,14 +118,12 @@ Modify the bean having the id urlFilter (by default configured with JAASUserFilt
 | p8_identifiant        | Username of technical account                            |
 | p8_password           | Password of technical account                            |
 
-```cfg
-
 
 ```properties
 arender.server.filenet.authentication.method=loginPasswordObjectStoreProvider
-arender.server.filenet.ce.url=http://&#123;content_engine_server&#125;/wsi/FNCEWS40MTOM/
-arender.server.filenet.ce.login=&#123;p8_identifiant&#125;
-arender.server.filenet.ce.password=&#123;p8_password&#125;
+arender.server.filenet.ce.url=http://{content_engine_server}/wsi/FNCEWS40MTOM/
+arender.server.filenet.ce.login={p8_identifiant}
+arender.server.filenet.ce.password={p8_password}
 ```
 
 ## Configuration the annotation format to be saved in FileNet
@@ -139,15 +136,14 @@ Default configuration, nothing to do here.
 
 Simply add the line below to the following file:
 
-```cfg
-    arender.server.default.annotation.accessor=xfdfAnnotationAccessor
+```properties
+arender.server.default.annotation.accessor=xfdfAnnotationAccessor
 ```
 
 ## Metadata fetching
 
-```XML
-<bean id="documentPropertiesConfiguration"
-    class="com.arondor.viewer.filenetce.config.DocumentPropertiesConfiguration">
+```xml
+<bean id="documentPropertiesConfiguration" class="com.arondor.viewer.filenetce.config.DocumentPropertiesConfiguration">
 </bean>
 ```
 
@@ -156,14 +152,14 @@ Simply add the line below to the following file:
 By default, no system metadata is fetched. In order to force it, you
 need to add/edit _includedSystemProperties_ property.
 
-```XML
+```xml
 <property name="includedSystemProperties">
-    <list>
-        <value>DateCreated</value>
-        <value>DateLastModified</value>
-        <value>Creator</value>
-        <value>LastModifier</value>
-    </list>
+  <list>
+    <value>DateCreated</value>
+    <value>DateLastModified</value>
+    <value>Creator</value>
+    <value>LastModifier</value>
+  </list>
 </property>
 ```
 
@@ -173,11 +169,11 @@ By default, all custom metadata are fetched and displayed. In order to
 force exclusion of some ones, you need to add/edit
 _excludedCustomProperties_ property
 
-```XML
+```xml
 <property name="excludedCustomProperties">
-    <list>
-        <value>FactureRef</value>
-    </list>
+  <list>
+    <value>FactureRef</value>
+  </list>
 </property>
 ```
 
@@ -205,7 +201,7 @@ In order to define which document types have to be opened within ARender, you ne
 to edit the configuration file content-redir.properties (for Workplace XT,
 in folder: _C:\Program Files\FileNet\Config\WebClient_) as follows:
 
-```cfg
+```properties
 {mimeType}=/../ARender/ARender.html?{JSP_QUERY_STRING}
 ```
 
@@ -280,7 +276,7 @@ For each input Document Builder FileNet document :
 
 In order to propagate a unique property by its SymbolicName, you can add those in the following ARender Web-UI property, in a comma separated list.
 
-```cfg
+```properties
 arender.server.filenet.document.builder.update.first.document.properties.advanced.updater.propagation.symbolic.names
 ```
 
@@ -288,7 +284,7 @@ arender.server.filenet.document.builder.update.first.document.properties.advance
 
 In order to activate this feature you will have to edit the following ARender Web-UI property :
 
-```cfg
+```properties
 arender.server.filenet.document.builder.update.first.document.properties.copy.bean.name
 ```
 
@@ -299,12 +295,9 @@ If you want to have the same behavior as well when updating a document content (
 add the following bean to the configuration :
 
 ```xml
-
-    <bean id="filenetDocumentUpdaterNewVersion"
-          class="com.arondor.viewer.filenetce.helper.impl.FileNetDocumentUpdaterNewVersion">
-        <property name="fileNetPropertiesUpdater"
-                  ref="${arender.server.filenet.document.builder.update.first.document.properties.copy.bean.name}"/>
-    </bean>
+<bean id="filenetDocumentUpdaterNewVersion" class="com.arondor.viewer.filenetce.helper.impl.FileNetDocumentUpdaterNewVersion">
+  <property name="fileNetPropertiesUpdater" ref="${arender.server.filenet.document.builder.update.first.document.properties.copy.bean.name}"/>
+</bean>
 ```
 
 By default, this bean does not possess a _fileNetPropertiesUpdater_
@@ -316,7 +309,7 @@ With this configuration, the bean will follow the same behavior as the one confi
 In order to disable the creation or update of documents from some specific FileNet ObjectStores,
 we added a configuration so that you can list (separated by commas) theirs IDs :
 
-```cfg
+```properties
 arender.server.filenet.document.builder.unauthorized.object.store.ids=
 ```
 
@@ -330,7 +323,7 @@ By default, this list is shipped empty, to keep legacy behavior.
 It is possible to disable the DocumentBuilder feature for checkout/archived documents via the activation of the below
 property:
 
-```cfg
+```properties
 arender.server.filenet.document.builder.disabled.for.checkout.and.archived.documents=true
 ```
 
@@ -340,20 +333,20 @@ You can configure the watermark display depending on user group and/or Filenet d
 
 To activate the watermark depending on groups and/or document classes, you need to add this property :
 
-```cfg
+```properties
 arender.server.watermark.display.provider=fileNetDisplayWatermarkProvider
 ```
 
 To display watermark to all user in certain groups :
 
-```cfg
+```properties
 #Comma-separated values that indicates which FileNet groups should have the watermark defined in arender.watermark.bean.name
 arender.server.watermark.filenet.group.with=
 ```
 
 To not display watermark to all user in certain groups :
 
-```cfg
+```properties
 #Comma-separated values that indicates which FileNet groups should not have the watermark defined in arender.watermark.bean.name
 arender.server.watermark.filenet.group.without=
 ```
@@ -362,14 +355,14 @@ Both properties can not be used together
 
 To display watermark depending on Filenet document class (From 4.1.0 to 4.2.x) :
 
-```cfg
+```properties
 #Comma-separated values that indicates which FileNet document classes should have the watermark defined in arender.watermark.bean.name
 arender.server.watermark.filenet.document.class.with=
 ```
 
 To display watermark depending on Filenet document class (Since 4.3.0) :
 
-```cfg
+```properties
 #Comma-separated values that indicate which FileNet document classes should have the watermark defined in arender.watermark.bean.name
 arender.server.watermark.filenet.document.class=
 ```
@@ -380,33 +373,25 @@ To define a watermark depending on Filenet DocumentClass and/or user group, you 
 By default:
 
 ```xml
-<bean id="fileNetWatermarkUsageDefinition"
-    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
-    scope="singleton">
-    <property name="displayWatermarkBeanName" value="${arender.watermark.bean.name}"/>
-    <property name="filenetDocumentClass" ref="fileNetDocumentClassList"/>
-    <property name="ldapGroupWithWatermark" ref="ldapGroup"/>
-    <property name="ldapGroupWithoutWatermark" ref="ldapGroupException"/>
+<bean id="fileNetWatermarkUsageDefinition" class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition" scope="singleton">
+  <property name="displayWatermarkBeanName" value="${arender.watermark.bean.name}"/>
+  <property name="filenetDocumentClass" ref="fileNetDocumentClassList"/>
+  <property name="ldapGroupWithWatermark" ref="ldapGroup"/>
+  <property name="ldapGroupWithoutWatermark" ref="ldapGroupException"/>
 </bean>
 
 <!-- List of FileNet DocumentClass will be affected by the watermark usage definition-->
-<bean id="fileNetDocumentClassList"
-  class="org.springframework.util.StringUtils"
-  factory-method="commaDelimitedListToStringArray">
+<bean id="fileNetDocumentClassList" class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToStringArray">
   <constructor-arg value="${arender.server.watermark.filenet.document.class}"/>
 </bean>
 
 <!-- List of LDAP group that will have the watermark-->
-<bean id="ldapGroup"
-  class="org.springframework.util.StringUtils"
-  factory-method="commaDelimitedListToStringArray">
+<bean id="ldapGroup" class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToStringArray">
   <constructor-arg value="${arender.server.watermark.filenet.group.with}"/>
 </bean>
 
 <!-- List of LDAP group that will not have the watermark-->
-<bean id="ldapGroupException"
-  class="org.springframework.util.StringUtils"
-  factory-method="commaDelimitedListToStringArray">
+<bean id="ldapGroupException" class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToStringArray">
   <constructor-arg value="${arender.server.watermark.filenet.group.without}"/>
 </bean>
 ```
@@ -416,27 +401,21 @@ By default:
 You can create a new simple watermark usage definition :
 
 ```xml
-<bean id="newWatermarkDefinition"
-    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
-    scope="singleton">
-    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
+<bean id="newWatermarkDefinition" class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition" scope="singleton">
+  <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
 </bean>
 ```
 
 You can create a new watermark usage definition by filtering with LDAP group :
 
 ```xml
-<bean id="newWatermarkDefinition"
-    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
-    scope="singleton">
-    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
-    <property name="ldapGroupWithWatermark" ref="ldapGroupExample"/>
+<bean id="newWatermarkDefinition" class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition" scope="singleton">
+  <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
+  <property name="ldapGroupWithWatermark" ref="ldapGroupExample"/>
 </bean>
 
 <!-- List of LDAP group that will have the watermark-->
-<bean id="ldapGroupExample"
-  class="org.springframework.util.StringUtils"
-  factory-method="commaDelimitedListToStringArray">
+<bean id="ldapGroupExample" class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToStringArray">
   <constructor-arg value="myGroup"/>
 </bean>
 ```
@@ -444,17 +423,13 @@ You can create a new watermark usage definition by filtering with LDAP group :
 You can create a new watermark usage definition to display watermark for every user except those that are defined here :
 
 ```xml
-<bean id="newWatermarkDefinition"
-    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
-    scope="singleton">
-    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
-    <property name="ldapGroupWithoutWatermark" ref="ldapGroupExample"/>
+<bean id="newWatermarkDefinition" class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition" scope="singleton">
+  <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
+  <property name="ldapGroupWithoutWatermark" ref="ldapGroupExample"/>
 </bean>
 
 <!-- List of LDAP group that will have the watermark-->
-<bean id="ldapGroupExample"
-  class="org.springframework.util.StringUtils"
-  factory-method="commaDelimitedListToStringArray">
+<bean id="ldapGroupExample" class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToStringArray">
   <constructor-arg value="myGroup"/>
 </bean>
 ```
@@ -462,17 +437,13 @@ You can create a new watermark usage definition to display watermark for every u
 You can create a new watermark usage definition depending on FileNet documentClass :
 
 ```xml
-<bean id="newWatermarkDefinition"
-    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
-    scope="singleton">
-    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
-    <property name="filenetDocumentClass" ref="fileNetDocumentClassList"/>
+<bean id="newWatermarkDefinition" class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition" scope="singleton">
+  <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
+  <property name="filenetDocumentClass" ref="fileNetDocumentClassList"/>
 </bean>
 
 <!-- List of FileNet DocumentClass will be affected by the watermark usage definition-->
-<bean id="fileNetDocumentClassList"
-  class="org.springframework.util.StringUtils"
-  factory-method="commaDelimitedListToStringArray">
+<bean id="fileNetDocumentClassList" class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToStringArray">
   <constructor-arg value="${arender.server.watermark.filenet.document.class}"/>
 </bean>
 ```
@@ -480,25 +451,19 @@ You can create a new watermark usage definition depending on FileNet documentCla
 Of course, you can mix them to achieve advanced configuration :
 
 ```xml
-<bean id="newWatermarkDefinition"
-    class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition"
-    scope="singleton">
-    <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
-    <property name="filenetDocumentClass" ref="fileNetDocumentClassList"/>
-    <property name="ldapGroupWithWatermark" ref="ldapGroupExample"/>
+<bean id="newWatermarkDefinition" class="com.arondor.viewer.filenetce.annotation.FileNetWatermarkUsageDefinition" scope="singleton">
+  <property name="displayWatermarkBeanName" value="myWatermarkBean"/>
+  <property name="filenetDocumentClass" ref="fileNetDocumentClassList"/>
+  <property name="ldapGroupWithWatermark" ref="ldapGroupExample"/>
 </bean>
 
 <!-- List of FileNet DocumentClass will be affected by the watermark usage definition-->
-<bean id="fileNetDocumentClassList"
-  class="org.springframework.util.StringUtils"
-  factory-method="commaDelimitedListToStringArray">
+<bean id="fileNetDocumentClassList" class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToStringArray">
   <constructor-arg value="${arender.server.watermark.filenet.document.class}"/>
 </bean>
 
 <!-- List of LDAP group that will have the watermark-->
-<bean id="ldapGroupExample"
-  class="org.springframework.util.StringUtils"
-  factory-method="commaDelimitedListToStringArray">
+<bean id="ldapGroupExample" class="org.springframework.util.StringUtils" factory-method="commaDelimitedListToStringArray">
   <constructor-arg value="myLDAPGroup"/>
 </bean>
 ```
@@ -514,18 +479,14 @@ Following line is mandatory to be set :
 Then you need to add all watermark usages to the watermark provider :
 
 ```xml
-
-<!-- EXAMPLE -->
-
-<bean id="fileNetDisplayWatermarkProvider"
-    class="com.arondor.viewer.filenetce.annotation.FileNetDisplayWatermarkProvider"
-    scope="singleton">
-    <property name="fileNetWatermarkDocument" >
-      <list>
-        <ref bean="fileNetWatermarkUsageDefinition"/>
-        <ref bean="newWatermarkDefinition"/>
-      </list>
-    </property>
+<!-- Example -->
+<bean id="fileNetDisplayWatermarkProvider" class="com.arondor.viewer.filenetce.annotation.FileNetDisplayWatermarkProvider" scope="singleton">
+  <property name="fileNetWatermarkDocument">
+    <list>
+      <ref bean="fileNetWatermarkUsageDefinition"/>
+      <ref bean="newWatermarkDefinition"/>
+    </list>
+  </property>
 </bean>
 ```
 
@@ -556,56 +517,46 @@ From the **alterdocumentcontent-configuration.xml** file configuration, you can 
 file and modify the **contentUpdateBehavior** property as it :
 
 ```xml
-<bean id="saveActionUpdateFirst"
-	class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeAction">
-	<property name="enabled"
-		value="${documentbuilder.button.updateFirst.enabled}" />
-	<property name="availability">
-		<bean
-			class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeActionAvailability$IsEnabledAndNotRoot" />
-	</property>
-	<property name="buttonTitle">
-		<ref bean="labels#documentBuilderUpdateFirstDocument" />
-	</property>
-	<property name="className" value="pictreeButton saveDocumentUpdateFirstButton" />
-	<property name="event">
-		<bean
-			class="com.arondor.viewer.client.events.documentbuilder.DocumentBuilderSaveDocumentEvent">
-			<property name="freezeDocument" value="${documentbuilder.save.freeze}" />
-			<property name="downloadDocument" value="${documentbuilder.save.download}" />
-			<property name="deleteDocument" value="${documentbuilder.save.delete}" />
-			<property name="contentUpdateBehavior">
-				<value
-					type="com.arondor.viewer.client.api.document.altercontent.AlterContentDescription$ContentUpdateBehavior">UPDATE_FIRST_DOCUMENT_PDFA</value>
-			</property>
-		</bean>
-	</property>
+<bean id="saveActionUpdateFirst" class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeAction">
+  <property name="enabled" value="${documentbuilder.button.updateFirst.enabled}" />
+  <property name="availability">
+    <bean class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeActionAvailability$IsEnabledAndNotRoot" />
+  </property>
+  <property name="buttonTitle">
+    <ref bean="labels#documentBuilderUpdateFirstDocument" />
+  </property>
+  <property name="className" value="pictreeButton saveDocumentUpdateFirstButton" />
+  <property name="event">
+    <bean class="com.arondor.viewer.client.events.documentbuilder.DocumentBuilderSaveDocumentEvent">
+      <property name="freezeDocument" value="${documentbuilder.save.freeze}" />
+      <property name="downloadDocument" value="${documentbuilder.save.download}" />
+      <property name="deleteDocument" value="${documentbuilder.save.delete}" />
+      <property name="contentUpdateBehavior">
+        <value type="com.arondor.viewer.client.api.document.altercontent.AlterContentDescription$ContentUpdateBehavior">UPDATE_FIRST_DOCUMENT_PDFA</value>
+      </property>
+    </bean>
+  </property>
 </bean>
 
-<bean id="saveActionCreateFirst"
-	class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeAction">
-	<property name="enabled"
-		value="${documentbuilder.button.createFirst.enabled}" />
-	<property name="availability">
-		<bean
-			class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeActionAvailability$IsEnabledAndNotRoot" />
-	</property>
-	<property name="buttonTitle">
-		<ref bean="labels#documentBuilderCreateFirstDocument" />
-	</property>
-	<property name="className" value="pictreeButton saveDocumentCreateFirstButton" />
-	<property name="event">
-		<bean
-			class="com.arondor.viewer.client.events.documentbuilder.DocumentBuilderSaveDocumentEvent">
-			<property name="freezeDocument" value="${documentbuilder.save.freeze}" />
-			<property name="downloadDocument" value="${documentbuilder.save.download}" />
-			<property name="deleteDocument" value="${documentbuilder.save.delete}" />
-			<property name="contentUpdateBehavior">
-				<value
-					type="com.arondor.viewer.client.api.document.altercontent.AlterContentDescription$ContentUpdateBehavior">CREATE_NEW_FIRST_DOCUMENT_PDFA</value>
-			</property>
-		</bean>
-	</property>
+<bean id="saveActionCreateFirst" class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeAction">
+  <property name="enabled" value="${documentbuilder.button.createFirst.enabled}" />
+  <property name="availability">
+    <bean class="com.arondor.viewer.client.pictree.presenter.nodeaction.TreeNodeActionAvailability$IsEnabledAndNotRoot" />
+  </property>
+  <property name="buttonTitle">
+    <ref bean="labels#documentBuilderCreateFirstDocument" />
+  </property>
+  <property name="className" value="pictreeButton saveDocumentCreateFirstButton" />
+  <property name="event">
+    <bean class="com.arondor.viewer.client.events.documentbuilder.DocumentBuilderSaveDocumentEvent">
+      <property name="freezeDocument" value="${documentbuilder.save.freeze}" />
+      <property name="downloadDocument" value="${documentbuilder.save.download}" />
+      <property name="deleteDocument" value="${documentbuilder.save.delete}" />
+      <property name="contentUpdateBehavior">
+        <value type="com.arondor.viewer.client.api.document.altercontent.AlterContentDescription$ContentUpdateBehavior">CREATE_NEW_FIRST_DOCUMENT_PDFA</value>
+      </property>
+    </bean>
+  </property>
 </bean>
 ```
 
@@ -615,23 +566,23 @@ The servlet _updateDocumentMetadataServlet_ is dedicated to updating Filenet doc
 
 Here is an example of the POST call, where _&#123;documentId&#125;_ is to be replaced by the documentId of the targeted document :
 
-```cfg
-`http://&#123;HOST_ARENDER&#125;/arendergwt/updateDocumentMetadataServlet?uuid=&#123;documentId&#125;`
+```properties
+`http://{HOST_ARENDER}/arendergwt/updateDocumentMetadataServlet?uuid={documentId}`
 ```
 
 Then, the body of the request will accept a JSON structure defining each metadata name to modify and the associated value. The _propertyKey_ correspond to the _symbolicName_ and _displayName_ properties of Filenet. The _propertyValue_ is the value that the metadata will take.
 
-```cfg
-
+```yml
+{
   "propertyKey1" : "propertyValue1",
   "propertyKey2" : "propertyValue2"
-
+}
 ```
 
 ## Set a default document title
 
 The following property allows to configure a default title to the document that does not have one.
 
-```cfg
+```properties
 arender.server.default.filenet.document.name="default name"
 ```

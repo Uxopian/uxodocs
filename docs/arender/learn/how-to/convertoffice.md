@@ -21,18 +21,18 @@ sufficient to add this to the pom.xml file:
 
 ```xml
 <dependency>
-       <groupId>com.arondor.arender</groupId>
-       <artifactId>arondor-arender-common</artifactId>
-       <version>ARender_version</version>
-       <type>jar</type>
-       <scope>compile</scope>
+  <groupId>com.arondor.arender</groupId>
+  <artifactId>arondor-arender-common</artifactId>
+  <version>ARender_version</version>
+  <type>jar</type>
+  <scope>compile</scope>
 </dependency>
 <dependency>
-       <groupId>com.arondor.arender</groupId>
-       <artifactId>arender-rendition-rest-client</artifactId>
-       <version>ARender_version</version>
-       <type>jar</type>
-       <scope>compile</scope>
+  <groupId>com.arondor.arender</groupId>
+  <artifactId>arender-rendition-rest-client</artifactId>
+  <version>ARender_version</version>
+  <type>jar</type>
+  <scope>compile</scope>
 </dependency>
 ```
 

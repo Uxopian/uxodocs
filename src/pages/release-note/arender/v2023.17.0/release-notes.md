@@ -10,7 +10,7 @@ _build:
   list: never
 ---
 
-> **Upgrade note:** See [v2023.17.0](/releases/upgrade-notes/v2023.17.0/) for detailed instructions.
+> **Upgrade note:** See [v2023.17.0](../upgrade-notes) for detailed instructions.
 
 ## Overview
 ARender 2023.17.0 is a minor release focused on FileNet stability, performance improvements to reduce the number of 

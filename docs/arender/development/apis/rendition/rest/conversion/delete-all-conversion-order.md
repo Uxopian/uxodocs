@@ -9,10 +9,10 @@ content_hash: a0d9e4ecaca08fe665c4633f4d6d541a37552ec83e83e9b3a7eb184f4663f0d6
 This API allows you to delete all conversion orders previously requested.
 The call to this API must be authenticated. The credentials are available in the _application.yaml_ configuration file of the document-service-broker.
 
-```yaml
+```yml
 run-mode:
-    username: username
-    password: password
+  username: username
+  password: password
 ```
 
 ## API technical description

@@ -34,7 +34,7 @@ currently displayed in the right area is downloaded.
 
 For the sticky note, it is possible to display the creation date or the last modification date on the downloaded document.
 
-```cfg
+```properties
 annotation.date.display.creationDate=true
 ```
 

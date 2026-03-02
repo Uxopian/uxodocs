@@ -68,7 +68,7 @@ toppanel which is disabled by default.
 
 To activate the button, add the following property to the _configurations/arender-custom-client.properties_ configuration file :
 
-```cfg
+```properties
 # Activate the copy all text of the document button
 topPanel.copy.document.text=true
 ```

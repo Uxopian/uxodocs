@@ -23,17 +23,17 @@ content_hash: 8faeda45758c07f7497f2b15a5bf0e3e87eae00f12aac61761ba7edd10118a8e
  * @param {boolean} isFromDocumentParsing - True if the added annotation came from parsing of the document
  */
 getARenderJS()
-    .getAnnotationJSAPI()
-    .registerNotifyAnnotationAddedEvent(function (documentId, annotation, isFromDocumentParsing) {
-        console.log(
-            "Annotation added. DocumentId " +
-                documentId +
-                " annotation: " +
-                annotation +
-                " isFromDocumentParsing: " +
-                isFromDocumentParsing
-        );
-    });
+  .getAnnotationJSAPI()
+  .registerNotifyAnnotationAddedEvent(function (documentId, annotation, isFromDocumentParsing) {
+    console.log(
+      "Annotation added. DocumentId " +
+      documentId +
+      " annotation: " +
+      annotation +
+      " isFromDocumentParsing: " +
+      isFromDocumentParsing
+    );
+  });
 ```
 
 ### Register to deleted annotation event
@@ -45,15 +45,15 @@ getARenderJS()
     | registerNotifyAnnotationDeletedEvent(callback) | Register a callback function that will be called when an annotation is deleted. |
 
 ```js
- /*
- * Register to deleted annotation event
- *
- * @param {string} documentId - ID of the document
- * @param {string} annotation - The json of the deleted annotation from the document
- */
-getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationDeletedEvent(function(documentId, annotation) &#123;
+/*
+* Register to deleted annotation event
+*
+* @param {string} documentId - ID of the document
+* @param {string} annotation - The json of the deleted annotation from the document
+*/
+getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationDeletedEvent(function (documentId, annotation) {
   console.log("Annotation deleted. DocumentId " + documentId + " annotation: " + annotation);
-&#125;);
+});
 ```
 
 ### Register to updated annotation event
@@ -65,15 +65,15 @@ getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationDeletedEvent(functio
     | registerNotifyAnnotationUpdatedEvent(callback) | Register a callback function that will be called when an annotation is updated. |
 
 ```js
- /*
- * Register to updated annotation event
- *
- * @param {string} documentId - ID of the document
- * @param {string} annotation - Updated annotation from the document
- */
-getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationUpdatedEvent(function(documentId, annotation) &#123;
+/*
+* Register to updated annotation event
+*
+* @param {string} documentId - ID of the document
+* @param {string} annotation - Updated annotation from the document
+*/
+getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationUpdatedEvent(function (documentId, annotation) {
   console.log("Annotation updated. DocumentId " + documentId + " annotation: " + annotation);
-&#125;);
+});
 ```
 
 ### Register to Page rotated event
@@ -93,17 +93,17 @@ getARenderJS().getAnnotationJSAPI().registerNotifyAnnotationUpdatedEvent(functio
  * @param {integer} rotation - Rotation of the page in degree
  */
 getARenderJS()
-    .getRotateJSAPI()
-    .registerNotifyPageRotatedEvent(function (documentId, pageNumber, rotation) {
-        console.log(
-            "Page rotated. DocumentId: " +
-                documentId +
-                " pageNumber: " +
-                pageNumber +
-                " rotation: " +
-                rotation
-        );
-    });
+  .getRotateJSAPI()
+  .registerNotifyPageRotatedEvent(function (documentId, pageNumber, rotation) {
+    console.log(
+      "Page rotated. DocumentId: " +
+      documentId +
+      " pageNumber: " +
+      pageNumber +
+      " rotation: " +
+      rotation
+    );
+  });
 ```
 
 ### Intercept Hyperlinks
@@ -116,27 +116,26 @@ called each time that an hyperlink is clicked.
 ```javascript
 var annotationjs;
 
-function arenderjs_init(ajs)
-
+function arenderjs_init(ajs) {
   ajs.onAnnotationModuleReady(
-    function(annotjs){
-      annotationjs=annotjs;
+    function (annotjs) {
+      annotationjs = annotjs;
       annotjs.registerFollowLinkHandler(followLink);
       console.log(annotationjs.getDestinationTypes());
       console.log(annotationjs.getActionTypes());
-
+    }
   );
+}
 
-function followLink(docId, pageNumber, destination, action)
-
+function followLink(docId, pageNumber, destination, action) {
   console.log([
     "docId=" + docId,
     "pageNumber=" + pageNumber,
     "dest=" + destination, "action=" + action
   ].join());
-  console.log(annotationjs.getPropertyFromDestination(destination,"PAGE_TARGET"));
-  console.log(annotationjs.getPropertyFromAction(action,"GOTO"));
-
+  console.log(annotationjs.getPropertyFromDestination(destination, "PAGE_TARGET"));
+  console.log(annotationjs.getPropertyFromAction(action, "GOTO"));
+}
 ```
 
 In this example, you can also observe how to visualize all existing properties in hyperlinks.
@@ -197,8 +196,8 @@ var color = "#FF0000";
 var opacity = 0.4;
 
 getARenderJS()
-    .getAnnotationJSAPI()
-    .addAnnotation(documentId, type, x, y, w, h, page, color, opacity);
+  .getAnnotationJSAPI()
+  .addAnnotation(documentId, type, x, y, w, h, page, color, opacity);
 ```
 
 ### DocLink mode functions
@@ -219,24 +218,24 @@ getARenderJS()
 * Register to a selected text in docLink mode
 *
 */
-getARenderJS().getAnnotationJSAPI().registerDocLinkTextSelectionEvent(function() {
- console.log("Some text is selected");
+getARenderJS().getAnnotationJSAPI().registerDocLinkTextSelectionEvent(function () {
+  console.log("Some text is selected");
 });
 
 /*
 * Register to a state change in docLink mode
 *
 */
-getARenderJS().getAnnotationJSAPI().registerDocLinkStateChange(function() {
- console.log("Action in docLink has occurred");
+getARenderJS().getAnnotationJSAPI().registerDocLinkStateChange(function () {
+  console.log("Action in docLink has occurred");
 });
 
 /*
 * Register to closing multi-view event
 *
 */
-getARenderJS().getAnnotationJSAPI().registerCloseMultiView(function() {
- console.log("Multi-view has been closed");
+getARenderJS().getAnnotationJSAPI().registerCloseMultiView(function () {
+  console.log("Multi-view has been closed");
 });
 
 /*
@@ -256,9 +255,6 @@ getARenderJS().getAnnotationJSAPI().getAvailableDocLinkDocumentId();
 *
 * @param {integer} pageNumber -Tthe page to create the target docLink
 */
-```javascript
 var pageNumber = 3; // This value is corresponding to the 4th page
 getARenderJS().getAnnotationJSAPI().createDocLink(pageNumber);
-```
-
 ```

@@ -3,7 +3,7 @@ title: ARender v2023.11.0 – Upgrade Notes
 date: "2025-06-27"
 ---
 
-> **Release note:** See [v2023.11.0](./release-notes).
+> **Release note:** See [v2023.11.0](../release-notes).
 
 ## From version 2023.10.0
 

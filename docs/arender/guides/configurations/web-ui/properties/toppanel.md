@@ -37,7 +37,7 @@ content_hash: 59af685869442cc051e92bbb736329c88174ab717ba1c65fcf6eed0745d93e43
 | ------------------------------------------------------------ | -------------- | ------------- | ------- |
 | Display a dialog box allowing to choose the type of printing | topPanel.print | true          | Boolean |
 
-```cfg
+```properties
 # Hide the print button
 topPanel.print=false
 ```

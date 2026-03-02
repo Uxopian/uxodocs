@@ -17,15 +17,15 @@ content_hash: a84fcb8108ed5afb1a26cf12f68d5d440e948036bf703d862ab3b6a25c41b654
 ```js
 // Subscribe a function to the errors
 getARenderJS().registerNotifyLoadingErrorEvent(function (documentId, message) {
-    console.log("error: " + message);
+  console.log("error: " + message);
 });
 // Loads the PDF reference document
 // If an error occurs I am notified on the function defined before!
 getARenderJS().loadDocument(
-    "loadingQuery?url=http://www.arender.fr/pdf/pdf/PDFReference15_v5.pdf",
-    function (id) {
-        getARenderJS().openDocument(id);
-    }
+  "loadingQuery?url=http://www.arender.fr/pdf/pdf/PDFReference15_v5.pdf",
+  function (id) {
+    getARenderJS().openDocument(id);
+  }
 );
 ```
 
@@ -40,7 +40,7 @@ getARenderJS().loadDocument(
 ```javascript
 // Subscribe a function to the loading. When asynchronous modules are loaded I am notified
 getARenderJS().registerAllAsyncModulesStartedEvent(function () {
-    console.log("modules are loaded");
+  console.log("modules are loaded");
 });
 ```
 
@@ -57,7 +57,7 @@ getARenderJS().registerAllAsyncModulesStartedEvent(function () {
 getARenderJS().registerNotifyPageChangeEvent(
   function(currentPage, pageCount, documentId) {
     console.log("page " + currentPage + " change requested for document " + documentId)
-
+  }
 );
 ```
 
@@ -74,14 +74,13 @@ getARenderJS().registerNotifyPageChangeEvent(
 These functions allow you to prepare a plugin opening event in order to enrich its launch in a contextualized way from ARender.
 
 ```javascript
-function arenderjs_init(ajs)
-
-    // this line prepare an URL such as http://plumeURL/?To=toto@tutu.com
-    ajs.preparePluginEvent("To","toto@tutu.com","plume");
-    // Here, we clear all stored values for this plugin,
-    // can be useful if called from a "clear" button
-    ajs.clearPluginEvent("plume");
-
+function arenderjs_init(ajs) {
+  // this line prepare an URL such as http://plumeURL/?To=toto@tutu.com
+  ajs.preparePluginEvent("To", "toto@tutu.com", "plume");
+  // Here, we clear all stored values for this plugin,
+  // can be useful if called from a "clear" button
+  ajs.clearPluginEvent("plume");
+}
 ```
 
 ## Interact with anchor

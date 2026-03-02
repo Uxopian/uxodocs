@@ -46,20 +46,20 @@ curl -X 'GET' \
 
 Response sample:
 
-```bash
-
+```json
+{
   "leftDocumentId": "string",
   "rightDocumentId": "string",
   "textChanges": [
-
+    {
       "changeType": "DELETE",
       "fragments": [
-
+        {
           "endOfLine": true,
           "pageNumber": 0,
           "text": "string",
           "type": "DELETE"
-
+        }
       ],
       "left": {
         "clickableDestination": {
@@ -70,7 +70,7 @@ Response sample:
             "w": 0,
             "x": 0,
             "y": 0
-
+          }
         },
         "font": "string",
         "fontSize": 0,
@@ -98,7 +98,7 @@ Response sample:
             "w": 0,
             "x": 0,
             "y": 0
-
+          }
         },
         "font": "string",
         "fontSize": 0,
@@ -116,8 +116,8 @@ Response sample:
         "rightToLeftText": true,
         "startTime": 0,
         "text": "string"
-
-
+      }
+    }
   ]
-
+}
 ```

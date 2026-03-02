@@ -51,7 +51,7 @@ It then asks you to select the desired option:
 
 Hyperlinks are visible in the hyperlink explorer. By default, it is enabled.
 
-```cfg
+```properties
 hyperlinkexplorer.enabled=true
 ```
 
@@ -113,7 +113,7 @@ It also be blue when activated. To deactivate it, simply click on it again.
 The _docLink_ feature enables the creation of hyperlinks between documents.
 It can be activated using a dedicated property in the configuration file.
 
-```cfg
+```properties
 topPanel.docLink=true
 ```
 
@@ -123,13 +123,13 @@ Once activated, a dedicated button appears in the top panel.
 
 It is also possible to automatically enable the feature when the document is loaded using the following property:
 
-```cfg
+```properties
 topPanel.docLink.activateOnStartup=true
 ```
 
 Since version 2023.15.0, you can choose whether the 'Blue Frame' button creates a hyperlink from selected text or from a selected area using the following property:
 
-```cfg
+```properties
 # If true, the 'blueZone' hyperlink is activated otherwise it is 'blueFrame' hyperlink which is activated
 topPanel.docLink.enableZoneSelection=false
 ```

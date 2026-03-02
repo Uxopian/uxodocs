@@ -8,7 +8,7 @@ content_hash: 90d366a3f807d28ecefe14c7bc357f86113414869465c3f0b1dd500eac7617b6
 ---
 
 The test jar «
-arondor-arender-rendition-tester-**&#123;VERSION-NUMBER&#125;**-jar-with-dependencies.jar
+arondor-arender-rendition-tester-{{version}}-jar-with-dependencies.jar
 », allow the user to launch some functional test on rendition server
 with following options **as admin**:
 
