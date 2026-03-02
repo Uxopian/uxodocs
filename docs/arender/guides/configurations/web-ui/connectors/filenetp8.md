@@ -23,19 +23,19 @@ Some examples:
 
 - To open a document stored in FileNet P8, try:
 
-    `http://{arender_server}/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1`
+    `http://{arender_server}/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&objectStoreName=OS1`
 
 - To open simultaneously two documents with the mixedObjects syntax:
 
-    `http://{arender_serveur}/ARender.html?ids=doc:{345A81-KT7SK95747S-5IS8-8SK0},doc:{F64A9342-6114-4A5C-A5E1-589A2FFB159F}&amp;objectStoreName=OS1&amp;objectType=mixedObjects`
+    `http://{arender_serveur}/ARender.html?ids=doc:{345A81-KT7SK95747S-5IS8-8SK0},doc:{F64A9342-6114-4A5C-A5E1-589A2FFB159F}&objectStoreName=OS1&objectType=mixedObjects`
 
 - To open simultaneously two documents and a folder:
 
-    `http://{arender_serveur}/ARender.html?objectStoreName=OS1&amp;ids=doc:{3DBE573A-1AC9-4B08-8CB1-8F9495619954},doc:{F64A9342-6114-4A5C-A5E1-589A2FFB159F},folder:{55714817-BDAC-4C8A-9EFB-963E4620A4E4}&amp;objectType=mixedObjects`
+    `http://{arender_serveur}/ARender.html?objectStoreName=OS1&ids=doc:{3DBE573A-1AC9-4B08-8CB1-8F9495619954},doc:{F64A9342-6114-4A5C-A5E1-589A2FFB159F},folder:{55714817-BDAC-4C8A-9EFB-963E4620A4E4}&objectType=mixedObjects`
 
 - To open a specific content element:
 
-    `http://{arender_serveur}/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&amp;objectStoreName=OS1&amp;contentElement=2`
+    `http://{arender_serveur}/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&objectStoreName=OS1&contentElement=2`
 
 The mixedObjects syntax is: **ids=[ [ “doc” | “folder” ] “:” [ Id du document ou Folder ] [ “,"] ]+**
 
@@ -179,7 +179,7 @@ _excludedCustomProperties_ property
 
 If the following error appears: *No LoginModules configured for FilenetP8WSI*, an additional configuration is required:
 
-- Save the file [jaas.conf.WebSphere](/docs/jadocumentation/as.conf.WebSphere) in a folder on the WAS server
+- Save the file [jaas.conf.WebSphere](https://docs.arender.io/docs/jaas.conf.WebSphere) in a folder on the WAS server
 - Add the following parameter to ARender's JVM:
     `-Djava.security.auth.login.config=[Path_to_jaas_file.conf.WebSphere]`
     **How to:**

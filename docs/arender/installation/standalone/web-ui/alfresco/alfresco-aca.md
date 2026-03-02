@@ -27,21 +27,21 @@ With ARender UI container, change the context with `CONTEXT_PATH=/arender` in th
 version: "3"
 
 services:
-    aca:
-        image: alfresco-content-app:AR-11007
-        environment:
-            # ACA host
-            - ADF_PUBLIC_HOST=http://localhost
-            # ARender host with /arender as context path
-            - ARENDER_HOST=http://localhost:8080
-            # alfresco content repository host
-            - ALFRESCO_HOST=http://localhost:8080
-            # alfresco host for oauth
-            - ALFRESCO_OAUTH_HOST=http://localhost:8080
-            # list of extensions that opens with arender as preview (separator ',')
-            - ARENDER_EXTENSIONS=pdf,docx,docm,dotx,dotm,doc,dot,rtf,odt,ott,xlsx,xlsm,xls,xlt,xml,csv,ods,ots,pptx,pptm,ppt,pps,odp,otp,vsdx,msg,eml,html,htm,txt,dwg,dxf,tif,tiff,dcm,mda,ica,mmr,mca,jpg,jpeg,jpe,jfif,jp2,jpf,jpx,j2k,j2c,jpc,png,gif,webp,bmp,mp4,zip
-        ports:
-            - 80:8080
+  aca:
+    image: alfresco-content-app:AR-11007
+    environment:
+      # ACA host
+      - ADF_PUBLIC_HOST=http://localhost
+      # ARender host with /arender as context path
+      - ARENDER_HOST=http://localhost:8080
+      # alfresco content repository host
+      - ALFRESCO_HOST=http://localhost:8080
+      # alfresco host for oauth
+      - ALFRESCO_OAUTH_HOST=http://localhost:8080
+      # list of extensions that opens with arender as preview (separator ',')
+      - ARENDER_EXTENSIONS=pdf,docx,docm,dotx,dotm,doc,dot,rtf,odt,ott,xlsx,xlsm,xls,xlt,xml,csv,ods,ots,pptx,pptm,ppt,pps,odp,otp,vsdx,msg,eml,html,htm,txt,dwg,dxf,tif,tiff,dcm,mda,ica,mmr,mca,jpg,jpeg,jpe,jfif,jp2,jpf,jpx,j2k,j2c,jpc,png,gif,webp,bmp,mp4,zip
+    ports:
+      - 80:8080
 ```
 
 ## Add ARender to your Alfresco Content App

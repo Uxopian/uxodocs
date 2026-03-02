@@ -61,25 +61,15 @@ The session of the user userA was not invalidated when he disconnected, which wi
 
 - Go to your websphere console then in the menu go to _servers -> server types -> websphere application servers_.
 - Select the server on which you want to make the modification. In our example, we choose _serverICN_
-
 ![filenet](/img/arender/documentation/filenet/userSession/servers.png)
-
 - In _Container settings_ go to _Session management_.
-
 ![filenet](/img/arender/documentation/filenet/userSession/specific_serve.png)
-
 - In _Additional properties_, click on _custom properties_.
-
 ![filenet](/img/arender/documentation/filenet/userSession/session_management.png)
-
 - Click on _New..._ to add the property.
-
 ![filenet](/img/arender/documentation/filenet/userSession/custom_properties.png)
-
 - Add the property _InvalidateOnUnauthorizedSessionRequestException_ with the value _true_ so that it is applied.
-
 ![filenet](/img/arender/documentation/filenet/userSession/new_property.png)
-
 - You must then click on _Ok_ then _save_. Restart your Filenet services to take this property into account.
 
 ### Integration of the arender plugin for FileNet

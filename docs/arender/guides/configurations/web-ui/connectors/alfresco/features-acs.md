@@ -174,7 +174,7 @@ arender.server.alfresco.show.metadatas=true
 
 To specify which metadata will be displayed in the thumbnail, their names will need to be set in the _arender.server.alfresco.included.metadatas_ property
 
-They should match the name of the properties located in the _properties_ field when calling the Alfresco metadata retrieval URL *http://127.0.0.1:8080/alfresco/service/api/metadata?nodeRef=XXX&amp;shortQNames*
+They should match the name of the properties located in the _properties_ field when calling the Alfresco metadata retrieval URL *http://127.0.0.1:8080/alfresco/service/api/metadata?nodeRef=XXX&shortQNames*
 
 Multiple properties can be displayed separated by a comma, so to display the creation date of a document and its version type, the property is :
 

@@ -85,4 +85,4 @@ For proper functioning of the Product Analytics, ensure that the URL https://api
 users machine.
 
 To disable Product Analytics, set the property **arender.data.analytics.enabled** to false in the configuration settings
-(More information [here](../../guides/configurations/web-ui/properties/full-config#contextualmenu)).
+(More information [here](/docs/arender/guides/configurations/web-ui/properties/full-config#arender)).

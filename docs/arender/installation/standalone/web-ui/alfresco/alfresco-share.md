@@ -29,8 +29,8 @@ Add the following lines to the _\{alfresco_tomcat\}/shared/classes/alfresco/web-
 
 ```xml
 <config evaluator="string-compare" condition="Arender">
-        <url>`http://{arender_serveur}:{arender_port}/{arender_contexte}</url>`
-        <!-- exemple: <url>http://192.168.1.8:8080/ARenderHMI</url> -->
+  <url>`http://{arender_serveur}:{arender_port}/{arender_contexte}</url>`
+  <!-- exemple: <url>http://192.168.1.8:8080/ARenderHMI</url> -->
 </config>
 ```
 

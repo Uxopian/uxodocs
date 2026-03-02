@@ -14,12 +14,12 @@ import TabItem from '@theme/TabItem';
 
 :::note
 To install on **IBM FileNet systems**, you can skip this page and directly go to: 
-[ARender installation on IBM FileNet](filenet/).
+[ARender installation on IBM FileNet](/docs/arender/installation/standalone/web-ui/filenet/filenet-was).
 :::
 
 :::warning
 Since ARender 2023.0.0, the deployment of ARender UI has changed. Please check the detailed upgrade documentation 
-[here](../../../guides/upgrade/4.8_to_2023.0/index).
+[here](/docs/arender/guides/upgrade/4.8_to_2023.0).
 :::
 
 ## Prerequisites
@@ -37,7 +37,7 @@ Since ARender 2023.0.0, the deployment of ARender UI has changed. Please check t
 | Software                        | Requirement                                                                                                                                                                                                                                                                                                                    |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Java Runtime                    | JRE 1.8 64 bits Minimum, OpenJDK 11 advised. Oracle JDK are supported, JRE IBM J9 and java 17 are not supported.                                                                                                                                                                                                               |
-| ARender Rendition up & running  | The Rendition health page should be green, see [the related documentation](../../rendition/verification). If it is not the case, please install the Rendition following [the related documentation](../../rendition/install). |
+| ARender Rendition up & running  | The Rendition health page should be green, see [the related documentation](/docs/arender/installation/standalone/rendition/verification). If it is not the case, please install the Rendition following [the related documentation](/docs/arender/installation/standalone/rendition/install). |
 
 ## Installation
 
@@ -81,9 +81,9 @@ You may have encountered the below error notification.
 
 It may mean that:
 * Either the local Rendition is not installed/started
-  * In that case please go back to the following documentation [the Rendition installation documentation](../../rendition/install).
+  * In that case please go back to the following documentation [the Rendition installation documentation](/docs/arender/installation/standalone/rendition/install).
 * Either the Rendition is installed on another server
-  * In that case, please check to the documentation about **arender.server.rendition.hosts** property here: [ARender Web-UI configuration](configuration).
+  * In that case, please check to the documentation about **arender.server.rendition.hosts** property here: [ARender Web-UI configuration](/docs/arender/installation/standalone/web-ui/configuration).
 
 ## Install ARender Web-UI as a service
 

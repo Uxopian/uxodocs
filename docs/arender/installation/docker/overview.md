@@ -31,7 +31,7 @@ Docker Mode is **not suitable** for:
 - Auto-restart policies or rolling updates
 
 If you need HA or scalability, see:  
-👉 [Kubernetes Deployment](../kubernetes/overview)
+👉 [Kubernetes Deployment](/docs/arender/installation/kubernetes/overview/)
 
 ---
 

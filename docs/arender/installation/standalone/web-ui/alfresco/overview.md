@@ -12,7 +12,7 @@ This page details the configuration of ARender for the ECM Alfresco
 :::note
 To continue on this page, ARender standalone must have been correctly configured.
 
-If not yet, then head to this link [here](../standalone).
+If not yet, then head to this link [here](/docs/arender/installation/standalone/web-ui/standalone).
 :::
 
 ## Connector 
@@ -78,4 +78,4 @@ You can now start the alfresco server and try to open a file with a link formed 
 http://{arender_serveur}:{arender_port}/ARenderHMI/?nodeRef={nodeRef}&user={user}&alf_ticket={ticket}&versionLabel={version}
 ```
 
-More information about Alfresco connector [here](../../../../guides/configurations/web-ui/connectors/alfresco/features-acs).
+More information about Alfresco connector [here](/docs/arender/guides/configurations/web-ui/connectors/alfresco/features-acs).
