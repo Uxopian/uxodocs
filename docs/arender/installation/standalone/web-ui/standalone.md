@@ -46,7 +46,7 @@ Since ARender 2023.0.0, the deployment of ARender UI has changed. Please check t
 * Using the username and password beforehand provided (contact arender-sales@arondor.com if you want an access)
 * Download the zip file:
 
-[Download ARender Web-UI](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-spring-boot-package/{{version}}/arondor-arender-hmi-spring-boot-package-{{version}}.zip)
+[Download ARender Web-UI](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-spring-boot-package/{{version}}/arondor-arender-hmi-spring-boot-package-{{version}}.zip)
 
 * Extract the zip content in the folder of your choice. (Let's call it *[Web-UI-folder]*)
 >The zip file contain web-ui service installation script but also removal and startup scripts

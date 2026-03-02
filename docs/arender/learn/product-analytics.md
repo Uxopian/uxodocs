@@ -41,40 +41,31 @@ Here are the specific metrics tracked by the Product Analytics feature:
 
 * **Opening documents**: Tracks the opening of a document. It includes information on MIME type, the number of 
   documents opened, the total page count and also the time taken to open the document.
-
 * **Closing documents**: Tracks the closing of a document. It includes information on the total page count, 
   the time spent viewing the document and the number of pages viewed.
 
 #### Annotations
 
 * **Annotation CRUD**: Tracks the number of annotations created, updated, and deleted, along with their types.
-
 * **Repeat annotation mode**: Tracks the usage of any repeat annotation feature.
 
 #### Navigation and Interaction
 
 * **Lasso**: Tracks usage of the lasso feature.
-
 * **Text search**: Tracks the usage of the text search feature.
-
 * **Page rotation**: Tracks the usage of the rotation feature.
-
 * **Document zoom**: Tracks the usage of the zoom feature.
-
 * **Fullscreen mode**: Tracks the usage of the fullscreen feature.
 
 #### Document Manipulation
 
 * **Document builder**: Tracks the usage of the DocumentBuilder feature.
-
 * **Document comparison**: Tracks the usage of the Comparison feature.
 
 #### Export and Output
 
 * **PDF printing**: Tracks the usage of the Print feature.
-
 * **Document download**: Tracks the usage of the download feature.
-
 * **Image filtering**: Tracks the usage of the Image filter feature.
 
 ### Safe and Purposeful Data Collection
@@ -82,9 +73,7 @@ Here are the specific metrics tracked by the Product Analytics feature:
 The analytics collected are solely for improving the user experience. This data is reviewed by the Uxopian team to:
 
 * Understand how features are being utilized.
-
 * Identify pain points or underused functionalities.
-
 * Prioritize future updates and improvements.
 
 This feature is designed with user safety and privacy in mind, ensuring that no sensitive document data is ever exposed.

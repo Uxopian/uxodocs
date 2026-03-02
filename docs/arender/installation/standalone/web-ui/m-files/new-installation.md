@@ -34,7 +34,7 @@ docs/install/install-mfiles/application.properties
 
 Using the username and password previously provided (contact arender-sales@arondor.com if you want access),
 you can recover the version of the web application used in WAR format
-**[here](https://artifactory.arondor.cloud:443/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi//arondor-arender-hmi-.war)**.
+**[here](https://artifactory.arondor.cloud:443/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi/{{version}}/arondor-arender-hmi-{{version}}.war)**.
 
 Use the Tomcat9 server. You just need to deploy your war (_arondor-arender-hmi-.war_ into and to **rename it** _arondor-arender-mfiles.war_), now place it there :
 
@@ -63,11 +63,11 @@ To install ARender on M-Files vault, follow the steps below:
 - Right click on the desired vault and select **Applications**
 - Click **Install...**
 - Select the previously downloaded **VAF_MFF_ArenderConnector_22.12.3.mfappx** file
-- Click **Yes** if this window shows up
+- Click **Yes** if this window shows up <br/>
   ![mfiles](/img/arender/mfiles/mfiles-app-popup.png)
 - The application is now installed
 - Click **Close**
-- Click **Yes** if this window shows up
+- Click **Yes** if this window shows up <br/>
   ![mfiles](/img/arender/mfiles/mfiles-app-popup.png)
 
 Now that we have installed ARender on M-Files vault, we can start configuring the application.
@@ -77,12 +77,12 @@ Now that we have installed ARender on M-Files vault, we can start configuring th
 VAF_MFF_ArenderConnector uses a JSON configuration file. You can manage it through the graphic interface within the M-Files Admin client.
 
 - Run M-Files Admin client
-- Click on the arrow next to your vault
+- Click on the arrow next to your vault <br/>
   ![mfiles](/img/arender/mfiles/mfiles-07.png)
 - Click on **Configurations** for your vault
 - Select **Other Applications** then select **VAF_MFF_ArenderConnector**. The dashboard appears
 - Click on **Configuration** tab
-- Fill in every configuration properties. When clicking the **i** icon, you will get a help showing up.
+- Fill in every configuration properties. When clicking the **i** icon, you will get a help showing up. <br/>
   ![mfiles](/img/arender/mfiles/mfiles-app-configuration.png)
 - Once you have configured, click **Save**
 

@@ -48,7 +48,7 @@ parser in the file arender-custom-server.properties contained in the configurati
 - In the file _configurations/arender-custom-server-integration.xml _, define the bean:
 
 ```xml
-        <bean id="customUrlParser" class="com.arondor.viewer.CustomURLParser" />
+<bean id="customUrlParser" class="com.arondor.viewer.CustomURLParser" />
 ```
 
 - In the file _configurations/arender-custom-server.properties_, add your bean Id

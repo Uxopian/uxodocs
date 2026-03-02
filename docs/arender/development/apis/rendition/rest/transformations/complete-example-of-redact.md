@@ -81,7 +81,12 @@ The result tells us the position of the desired text:
 Now, we know that the position of the text corresponds to:
 
 ```json
-{"x":42.52,"y":245.07303,"w":55.264004,"h":12.0}
+{
+  "x": 42.52,
+  "y": 245.07303,
+  "w": 55.264004,
+  "h": 12.0
+}
 ```
 
 Let's apply these coordinates to the annotation creation template:
@@ -133,7 +138,7 @@ curl -X 'POST' \
           ]
         }
       ],
-	    "documentTitle": "MyDocument"
+      "documentTitle": "MyDocument"
     }
   ]
 }'
@@ -308,7 +313,7 @@ curl -X 'POST' \
           ]
         }
       ],
-	    "documentTitle": "MyDocument"
+      "documentTitle": "MyDocument"
     }
   ]
 }'

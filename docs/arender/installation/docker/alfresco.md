@@ -23,7 +23,7 @@ Add the ARender plugin in Alfresco share container and Alfresco content reposito
 If needed, some resources about ARender for Alfresco are available below:
 
 - [See Alfresco documentation](/docs/arender/guides/configurations/web-ui/connectors/alfresco/features-share)
-- [Download Alfresco plugin](https://artifactory.arondor.cloud/artifactory/webapp/#/artifacts/browse/tree/General/arondor-release/com/arondor/arender/arender-for-alfresco-share-plugin/{{version}}/arender-for-alfresco-share-plugin-{{version}}.jar)
+- [Download Alfresco plugin](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arender-for-alfresco-share-plugin/{{version}}/arender-for-alfresco-share-plugin-{{version}}.jar)
 
 The share plugin must be /tomcat/shared/lib. Insure these paths are listed in shared.lib property in Alfresco component's **catalina.properties**.
 

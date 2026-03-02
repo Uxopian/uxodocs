@@ -8,14 +8,14 @@ last_update:
 content_hash: 0843f170d3a4f26454bb48da8340416153298e525ec18203653e5d8a00dcf6e0
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Overview
 
-With the transition from traditional Websphere-based deployments to Spring Boot, the application now leverages OAuth2
-
-```javascript
-for authentication. Previously, WebSphere only managed user authentication via JAAS, which integrated seamlessly with FileNet's Java API.
+With the transition from traditional Websphere-based deployments to Spring Boot, the application now leverages OAuth2 for authentication. Previously, WebSphere only managed user authentication via JAAS, which integrated seamlessly with FileNet's Java API.
 The modernization effort aims to enhance security with modern OAuth2 identity providers, and maintain the same capabilities for interacting with FileNet Content Manager.
-```
+
 
 The key challenge addressed here is ensuring OAuth2 tokens can be validated on the FileNet side when using FileNet Java API for
 operations such as document retrieval or metadata access.
@@ -98,12 +98,18 @@ Now that we have setup the ARender application we can then:
 - Start the Keycloak server
 - Start the ARender application.
 
-In Linux, run the following script
-
+<Tabs>
+<TabItem value="linux" label="Linux">
 ```bash
 ./ARenderConsole.sh
 ```
+</TabItem>
 
-In Windows, run the ARenderConsole.bat
+<TabItem value="windows" label="Windows">
+```bash
+Run ARenderConsole.bat
+```
+</TabItem>
+</Tabs>
 
 There are also some scripts for the service mode aswell.

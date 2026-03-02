@@ -28,7 +28,7 @@ in an environment with:
 ## Retrieve the ARender HMI WAR for FileNet
 
 Using the username and password beforehand provided,
-you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-filenet//arondor-arender-hmi-filenet-.war).
+you can retrieve the web application in EAR format [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-filenet/{{version}}/arondor-arender-hmi-filenet-{{version}}.war).
 
 ## Configuration of ARender HMI WAR for FileNet
 

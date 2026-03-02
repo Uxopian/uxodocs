@@ -20,7 +20,7 @@ valid JDK or JRE (see [Requirement](/docs/arender/installation/standalone/rendit
 
 Use the provided credentials (contact arender-sales@arondor.com for access) to download the Rendition installation JAR:
 
-https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/micro/services/rendition-engine-installer/{{version}}/rendition-engine-installer-{{version}}-rendition.jar
+https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/micro/services/rendition-engine-installer/{{version}}/rendition-engine-installer-{{version}}-rendition.jar
 
 ### Installation process
 

@@ -28,8 +28,8 @@ Spring Boot deployment.
 Before starting the migration of ARender's UI component, ensure you meet the following prerequisites:
 
 * Basic knowledge of Spring Boot.
-* The ARender UI version 2023 binary should be downloaded and ready to deploy. You can download it [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/arondor-arender-hmi-spring-boot-package/{{version}}/arondor-arender-hmi-spring-boot-package-{{version}}.zip).
-* The ARender Rendition version 2023 binary should be downloaded and ready to install. You can download it [here](https://artifactory.arondor.cloud/artifactory/arondor-all/com/arondor/arender/micro/services/rendition-engine-installer/{{version}}/rendition-engine-installer-{{version}}-rendition.jar).
+* The ARender UI version 2023 binary should be downloaded and ready to deploy. You can download it [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/arondor-arender-hmi-spring-boot-package/{{version}}/arondor-arender-hmi-spring-boot-package-{{version}}.zip).
+* The ARender Rendition version 2023 binary should be downloaded and ready to install. You can download it [here](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/micro/services/rendition-engine-installer/{{version}}/rendition-engine-installer-{{version}}-rendition.jar).
 * Specific configurations from your ARender deployment in Version 4.
 
 ## Migrating from Version 4 to Version 2023 of ARender
@@ -80,7 +80,7 @@ $> ./removeService.sh
 
 * **Configure ARender Rendition Version 2023**: After transferring the properties, you can configure ARender Rendition 
   Version 2023 according to your specific needs using the documentation 
-  [here](../../../installation/standalone/rendition/Configuration).
+  [here](../../../installation/standalone/rendition/configuration).
 
 ### Migrating ARender UI Version 4 to Version 2023
 
@@ -98,7 +98,7 @@ installation to Version 2023:
   UI Version 4 is deployed. This will ensure a smooth transition to Version 2023.
 
 * **Install ARender WEB-UI Version 2023**: Follow the detailed installation instructions for ARender UI Version 2023 in the 
-  official documentation, available [here](../../../installation/standalone/web-ui/standalone/index). 
+  official documentation, available [here](../../../installation/standalone/web-ui/standalone). 
   This documentation will guide you through the Version 2023 installation process.
 
 * **Transfer Properties**: Once ARender UI Version 2023 is installed, you will need to transfer the properties and 

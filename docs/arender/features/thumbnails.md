@@ -6,6 +6,9 @@ last_update:
 content_hash: fdd03b360e33ed1e7d7143e40fb4a85a4c8e46ab34fdfde206da614688cbc76d
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## Introduction
 
 The Thumbnail View in ARender offers a condensed visual representation of the document, providing users with
@@ -32,13 +35,20 @@ For those who desire control over their thumbnail view, ARender provides a dynam
 
 To use this feature, you can enable it via a simple configuration setting.
 
-```properties
+<Tabs>
+<TabItem value="hmi-jar" label="ARender Web-UI Spring Boot">
+```properties title="arender-custom-client.properties (located in configurations/)"
 ui.legacy.enabled=false
 ```
+</TabItem>
 
-```properties
+<TabItem value="hmi-war" label="ARender HMI WAR">
+```properties title="arender.properties (located in WEB-INF/classes/)"
 ui.legacy.enabled=false
 ```
+</TabItem>
+</Tabs>
+
 
 ![image](/img/arender/documentation/features/thumbnails/thumbnail-reactjs-slider.gif)
 
@@ -46,20 +56,23 @@ ui.legacy.enabled=false
 
 After enabling the previously mentioned "Adjusted thumbnail display structure" feature,
 thumbnails are displayed by default in 2 columns when ARender loads and when loading each
-
-```javascript
 new document. This default value can be changed to any number between 1 and 4.
-```
 
 To use this feature, you can configure it via a simple configuration setting.
 
-```properties
+<Tabs>
+<TabItem value="hmi-jar" label="ARender Web-UI Spring Boot">
+```properties title="arender-custom-client.properties (located in configurations/)"
 thumbexplorer.columns=1
 ```
+</TabItem>
 
-```properties
+<TabItem value="hmi-war" label="ARender HMI WAR">
+```properties title="arender.properties (located in WEB-INF/classes/)"
 thumbexplorer.columns=1
 ```
+</TabItem>
+</Tabs>
 
 ## Disabling the Anchor Creation Option (v2023.4.0 and later)
 
@@ -68,13 +81,19 @@ options including "Create anchor at this page". It is possible to disable this o
 
 To disable this feature, use the following configuration parameter:
 
-```properties
+<Tabs>
+<TabItem value="hmi-jar" label="ARender Web-UI Spring Boot">
+```properties title="arender-custom-client.properties (located in configurations/)"
 thumbexplorer.contextualMenu.createPageAnchor=false
 ```
+</TabItem>
 
-```properties
+<TabItem value="hmi-war" label="ARender HMI WAR">
+```properties title="arender.properties (located in WEB-INF/classes/)"
 thumbexplorer.contextualMenu.createPageAnchor=false
 ```
+</TabItem>
+</Tabs>
 
 By default, the configuration parameter is set to `true`, the "Create anchor at this page" option is enabled.
 

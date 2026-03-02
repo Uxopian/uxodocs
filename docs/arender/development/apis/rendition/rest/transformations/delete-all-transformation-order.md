@@ -11,8 +11,8 @@ The call to this API must be authenticated. The credentials are available in the
 
 ```yaml
 run-mode:
-    username: username
-    password: password
+  username: username
+  password: password
 ```
 
 ## API technical description
