@@ -135,9 +135,72 @@ ARender provides a ready-to-use `docker-compose.yml` that includes:
 - Text Handler
 - Converter
 
-Download:
+```yml title="docker-compose.yml"
+services:
+  ui:
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:${VERSION}
+    container_name: ui
+    environment:
+      - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://dsb-service:8761/"
+    ports:
+      - 8080:8080
 
-👉 [Download docker-compose.yml](/docs/docker/docker-compose.yml)
+  service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:${VERSION}
+    container_name: dsb-service
+    environment:
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DCV-SERVICE=19999"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DRN-SERVICE=9091"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DTH-SERVICE=8899"
+    ports:
+      - 8761:8761
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer:${VERSION}
+    container_name: drn-service
+    environment:
+      - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=drn-service"
+      - "DRN_EUREKA_INSTANCE_HOSTNAME=dsb-service"
+      - "DRN_EUREKA_SERVER_PORT=8761"
+    ports:
+      - 9091:9091
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:${VERSION}
+    container_name: dth-service
+    environment:
+      - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dth-service"
+      - "DTH_EUREKA_INSTANCE_HOSTNAME=dsb-service"
+      - "DTH_EUREKA_SERVER_PORT=8761"
+    ports:
+      - 8899:8899
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:${VERSION}
+    container_name: dcv-service
+    environment:
+      - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=dcv-service"
+      - "DCV_APP_EUREKA_HOSTNAME=dsb-service"
+      - "DCV_APP_EUREKA_PORT=8761"
+    ports:
+      - 19999:19999
+    volumes:
+      - arender-tmp:/arender/tmp
+
+# Shared temporary folder
+volumes:
+  arender-tmp:
+```
+
+```properties title=".env"
+VERSION={{version}}
+```
 
 Run:
 

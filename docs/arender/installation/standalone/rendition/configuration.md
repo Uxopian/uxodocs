@@ -327,7 +327,7 @@ as well to keep Office up to date.
 
 **Scripted installation**
 
-- Download and unzip [AromsCheck](/docs/AromsCheck.zip)
+- Download and unzip [AromsCheck](https://docs.arender.io/docs/AromsCheck.zip)
 - Run **runCheck.bat** for automatic setup.
 
 **Manual installation**
