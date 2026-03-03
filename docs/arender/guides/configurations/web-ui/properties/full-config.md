@@ -372,6 +372,7 @@ content_hash: 9ba6deca8c2884eaec3649e5d24620f7d2507b9e6303deb9309ab868a10cf4a1
 | print.waterMarkActive             | Activate the watermarking feature from the print menu                    | boolean | false        |
 | print.usePDFPrint                 | Print using a PDF instead of a set of images, lowers total download size | boolean | true         |
 | print.allDocumentsByDefault       | Print by default all documents                                           | boolean | false        |
+| print.includeRotations            | Add print option with page rotation                                      | boolean | false        |
 
 ## redactexplorer
 
