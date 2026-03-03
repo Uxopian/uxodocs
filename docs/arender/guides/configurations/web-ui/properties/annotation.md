@@ -153,7 +153,6 @@ content_hash: 5cec2145fbcf65a53fea27ec02709642ac308546cbc366628f0ac3a5968450fd
 
 ## Comment explorer
 
-|  
 | Description | Parameter Key | Default value | Type |
 | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------- | ------- |
 | The order in which comments appear in the exploration panel | annotation.comment.explorer.sortByIncrementDate | false | Boolean |
@@ -169,6 +168,9 @@ content_hash: 5cec2145fbcf65a53fea27ec02709642ac308546cbc366628f0ac3a5968450fd
 | Allow the display of the date | annotation.comment.explorer.show.date | true | Boolean |
 | Display only the initials of the creator name | annotation.comment.explorer.creator.name.initial.only | false | Boolean |
 | Enable to display only one annotation per page | annotation.comment.explorer.show.one.annotation.only | false | Boolean |
+| Enables the annotation types filter by list on startup       | annotation.comment.explorer.filter.types.enabled              | false         | Boolean |
+| List of annotation types selected on startup (comma-separated). Possible values are: **Circle, Freetext, Highlight, ImageStamp, Polygon, Polyline, Sound, Square, Stamp, Strikeout, Text, Underline** | annotation.comment.explorer.filter.types                    |               | String  |
+
 
 ## Comments and sticky notes field text
 

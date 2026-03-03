@@ -1,12 +1,20 @@
 [
   {
+    "version": "v2023.18.0",
+    "title": "ARender v2023.18.0 – Release Notes",
+    "date": "2026-02-27",
+    "description": "Major PDFOwl rendition upgrade, new JavaScript audit hooks, FileNet multi-objectStore support, video time display, and several annotation and printing fixes.",
+    "slug": "/release-note/arender/v2023.18.0/release-notes",
+    "hasUpgradeNotes": true,
+    "latest": true
+  },
+  {
     "version": "v2023.17.0",
     "title": "ARender v2023.17.0 – Release Notes",
     "date": "2026-01-30",
     "description": "Stability and performance improvements for FileNet, scrolling/thumbnails, and conversion quality, plus multiple UI fixes.",
     "slug": "/release-note/arender/v2023.17.0/release-notes",
-    "hasUpgradeNotes": true,
-    "latest": true
+    "hasUpgradeNotes": true
   },
   {
     "version": "v2023.16.0",

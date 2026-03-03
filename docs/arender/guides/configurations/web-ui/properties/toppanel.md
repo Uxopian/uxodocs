@@ -20,6 +20,7 @@ content_hash: 59af685869442cc051e92bbb736329c88174ab717ba1c65fcf6eed0745d93e43
 | Download current document in native format (only not PDF document)      | topPanel.documentMenu.download                  | true             | Boolean |
 | Download all visualized documents                                       | topPanel.documentMenu.downloadAll               | true             | Boolean |
 | Download current document with its annotations                          | topPanel.documentMenu.downloadAnnotation        | true             | Boolean |
+| Download current document with its rotations                            | topPanel.documentMenu.downloadRotation          | false            | Boolean |
 | Download annotations in CSV format                                      | topPanel.documentMenu.downloadCSVAnnotation     | false            | Boolean |
 | Download document with FDF annotations                                  | topPanel.documentMenu.downloadWithFDFAnnotation | false            | Boolean |
 | Download annotations in XFDF format                                     | topPanel.documentMenu.downloadXFDFAnnotations   | false            | Boolean |
@@ -36,6 +37,7 @@ content_hash: 59af685869442cc051e92bbb736329c88174ab717ba1c65fcf6eed0745d93e43
 | Description                                                  | Parameter Key  | Default value | Type    |
 | ------------------------------------------------------------ | -------------- | ------------- | ------- |
 | Display a dialog box allowing to choose the type of printing | topPanel.print | true          | Boolean |
+
 
 ```properties
 # Hide the print button

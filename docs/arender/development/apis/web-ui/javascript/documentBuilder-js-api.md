@@ -61,3 +61,20 @@ function armt_onNotifyAlterDocumentContentEvent(arenderjs_, obj) {
   console.log("Notify: docId = " + docId);
 }
 ```
+
+### Send documentBuilder save event
+
+- Object: getARenderJS().getDocumentBuilder()
+
+    | Function                                               | Description                                           | Arguments |
+    | ------------------------------------------------------ | ----------------------------------------------------- | --------- |
+    | saveCustomDocument()                                   | Trigger the custom save process with default values   |           |
+    | saveCustomDocument(download, delete, freeze, behavior) | Trigger the custom save process with specific options | **download:** Activates the local download builder button.<br/> **delete:** Delete the documents from the document builder view.<br/> **freeze:** Disable the documents from the document builder view.<br/> **behavior:** Sets the document builder save behavior:<br/> **UPDATE_NO_DOCUMENT**,<br/> **CREATE_NEW_FIRST_DOCUMENT**,<br/> **UPDATE_FIRST_DOCUMENT**,<br/> **UPDATE_ALL_DOCUMENT** |
+
+#### Example
+
+```javascript title="scripts/example.js"
+function arenderjs_init(arenderjs_)
+{
+  arenderjs_.getDocumentBuilder().saveCustomDocument(false,true,false,"UPDATE_NO_DOCUMENT");
+}

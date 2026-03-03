@@ -37,7 +37,53 @@ Some examples:
 
     `http://{arender_serveur}/ARender.html?id={345A81-KT7SK95747S-5IS8-8SK0}&objectStoreName=OS1&contentElement=2`
 
-The mixedObjects syntax is: **ids=[ [ “doc” | “folder” ] “:” [ Id du document ou Folder ] [ “,"] ]+**
+:::info
+The `MIXEDOBJECTS` syntax is: **ids=[ [ "doc" | "vsDoc" | "folder" ] ":" [ document or folder Id ] [ ":" osQualifier ":" osValue ] [ "," ] ]+**
+
+The `vsDoc` type is the equivalent of `vsId` in the `ids` syntax: it resolves to the latest version of a VersionSeries.
+:::
+
+## Opening documents from multiple ObjectStores
+
+The `MIXEDOBJECTS` mode supports opening documents, VersionSeries (`vsDoc`), and folders originating from different ObjectStores in a single session. Each entry in the `ids` parameter can specify its own ObjectStore using the extended syntax:
+
+`[docType]:[docId]:[osQualifier]:[osValue]`
+
+| Element     | Values                                | Description                                          |
+| ----------- | ------------------------------------- | ---------------------------------------------------- |
+| docType     | `doc`, `vsDoc`, `folder`              | Type of the object to open                           |
+| docId       | FileNet GUID                          | ID of the document version, VersionSeries, or folder |
+| osQualifier | `objectStoreName` or `objectStoreId`  | How to identify the target ObjectStore               |
+| osValue     | ObjectStore name or ID                | Value corresponding to the chosen qualifier          |
+
+**Two VersionSeries documents from the same ObjectStore:**
+
+`http://{arender_server}/?objectType=MIXEDOBJECTS&ids=vsDoc:{379C1500-6935-CF3D-87EC-9AEDC8200000}:objectStoreName:OS1,vsDoc:{2265E573-78CD-CD55-87A2-9AEF71800000}:objectStoreName:OS1`
+
+**Two VersionSeries documents from different ObjectStores:**
+
+`http://{arender_server}/?objectType=MIXEDOBJECTS&ids=vsDoc:{379C1500-6935-CF3D-87EC-9AEDC8200000}:objectStoreName:OS1,vsDoc:{9F8845A6-AAA8-C664-86C8-9C3265200000}:objectStoreName:OS2`
+
+**A document version and a VersionSeries document from different ObjectStores:**
+
+`http://{arender_server}/?objectType=MIXEDOBJECTS&ids=doc:{AA34332F-8675-C6C6-84BD-9A4A6A200000}:objectStoreName:OS1,vsDoc:{9F8845A6-AAA8-C664-86C8-9C3265200000}:objectStoreName:OS2`
+
+**Two document versions from different ObjectStores:**
+
+`http://{arender_server}/?objectType=MIXEDOBJECTS&ids=doc:{D169EAAA-8445-C398-85FA-9C3265200000}:objectStoreName:OS2,doc:{AA34332F-8675-C6C6-84BD-9A4A6A200000}:objectStoreName:OS1`
+
+**Two folders from different ObjectStores:**
+
+`http://{arender_server}/?objectType=MIXEDOBJECTS&ids=folder:{72438E31-A2B4-CAEC-8627-9A4A61E00000}:objectStoreName:OS1,folder:{38481FFE-9A6B-C452-8756-9C3265000000}:objectStoreName:OS2`
+
+**A document version and a folder from different ObjectStores:**
+
+`http://{arender_server}/?objectType=MIXEDOBJECTS&ids=doc:{D169EAAA-8445-C398-85FA-9C3265200000}:objectStoreName:OS2,folder:{72438E31-A2B4-CAEC-8627-9A4A61E00000}:objectStoreName:OS1`
+
+**A VersionSeries document and a folder from different ObjectStores:**
+
+`http://{arender_server}/?objectType=MIXEDOBJECTS&ids=vsDoc:{9F8845A6-AAA8-C664-86C8-9C3265200000}:objectStoreName:OS2,folder:{72438E31-A2B4-CAEC-8627-9A4A61E00000}:objectStoreName:OS1`
+
 
 ## Document access
 
