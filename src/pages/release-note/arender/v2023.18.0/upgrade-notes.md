@@ -18,12 +18,12 @@ _build:
 * **Spring Boot Profiles for External Connectors**: To prevent configuration conflicts when using external connector JARs, a dedicated profile has been introduced (application-integrator.properties / application-integrator.yml). This ensures that custom configuration properties correctly take precedence over default `application.yml` or `application.properties` settings.
 
 * **Download/Print document with rotation**: Additional properties have been added to allow downloading or printing the PDF document with page rotation.
-* `topPanel.documentMenu.downloadRotation=false`: Enable or disable the download PDF with rotation button
-* `print.includeRotations=false`: Enable or disable the print PDF with rotation option.
+  * `topPanel.documentMenu.downloadRotation=false`: Enable or disable the download PDF with rotation button
+  * `print.includeRotations=false`: Enable or disable the print PDF with rotation option.
 
 * **Default annotation filter**: Additional properties have been added to allow setting the default annotation filter applied.
-* `annotation.comment.explorer.filter.types.enabled=false`: Enable or disable the use of default annotation filter.
-* `annotation.comment.explorer.filter.types=`: Set the default annotation filter by types.
+  * `annotation.comment.explorer.filter.types.enabled=false`: Enable or disable the use of default annotation filter.
+  * `annotation.comment.explorer.filter.types=`: Set the default annotation filter by types.
 
 ### Deprecated and Deleted Properties
 
