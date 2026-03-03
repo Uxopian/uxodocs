@@ -65,6 +65,9 @@ The table below enumerates specific configuration related to thumbs.
 | Enable to display only one annotation per page                                                             | annotation.comment.explorer.show.one.annotation.only          | false         | Boolean |
 | Display target icon when annotation is other than numbered sticky note, otherwise the annotation type icon | annotation.comment.display.target.enabled                     | false         | Boolean |
 | Enable to enter in edition mode when clicking on a comment zone                                            | comment.edit.annotation.onselection.enabled                   | true          | Boolean |
+| Enables the annotation types filter by list on startup       | annotation.comment.explorer.filter.types.enabled              | false         | Boolean |
+| List of annotation types selected on startup (comma-separated). Possible values are: **Circle, Freetext, Highlight, ImageStamp, Polygon, Polyline, Sound, Square, Stamp, Strikeout, Text, Underline** | annotation.comment.explorer.filter.types                    |               | String  |
+
 
 ## Bookmark explorer
 
