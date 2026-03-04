@@ -2,7 +2,7 @@ name: Version from branches → Build → Deploy
 
 on:
   push:
-    branches: [ staging, 'test-*' ]
+    branches: [ staging, 'fast2-*', 'arender-*', 'flowerdocs-*', 'uxopian-ai-*' ]
   workflow_dispatch:
 
 permissions:
