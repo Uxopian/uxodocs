@@ -47,8 +47,8 @@ Each version is stored in a dedicated Git branch, keeping the main repository li
 
 **Branch Naming Convention:**
 ```
-dev-<product>-v<version>   # Development branch
-test-<product>-v<version>  # Staging/version branch
+dev-<product>-v<version>      # Development branch
+<product>-v<version>          # Staging/version branch
 ```
 
 **Main Branches:**
@@ -56,16 +56,16 @@ test-<product>-v<version>  # Staging/version branch
 - `master` - Production branch (manual deployment only)
 
 **Examples:**
-- `dev-fast2-v2025.2.0` → `test-fast2-v2025.2.0`
-- `dev-flowerdocs-v2` → `test-flowerdocs-v2`
-- `dev-arender-v2023.14.0` → `test-arender-v2023.14.0`
+- `dev-fast2-v2025.2.0` → `fast2-v2025.2.0`
+- `dev-flowerdocs-v2` → `flowerdocs-v2`
+- `dev-arender-v2023.14.0` → `arender-v2023.14.0`
 
 ### How It Works
 
 1. **Development**: Work on `dev-<product>-v<version>` branch with only one product in `docs/<product>/`
-2. **Testing**: Rename to `test-<product>-v<version>` when ready for staging
-3. **Version Branches**: Each release lives in its own `test-*` branch
-4. **CI/CD**: Pipeline fetches all `test-*` branches, extracts docs, and builds complete site
+2. **Testing**: Rename to `<product>-v<version>` when ready for staging
+3. **Version Branches**: Each release lives in its own `<product>-v*` branch
+4. **CI/CD**: Pipeline fetches all `<product>-v*` branches, extracts docs, and builds complete site
 5. **Production**: Manual workflow dispatch from `master` branch
 
 ---
@@ -106,7 +106,7 @@ npm run build
 ## 🚀 CI/CD Pipeline
 
 **File:** `.github/workflows/sync-deploy.yml`  
-**Trigger:** Push to `staging` or `test-*` branches
+**Trigger:** Push to `staging` or `<product>-v*` branches
 
 ### Process
 
@@ -122,7 +122,7 @@ npm run build
    # Cache current version
    rsync -a "docs/${product}/" ".cache_${product}_current/"
    
-   # For each test-<product>-v* branch:
+   # For each <product>-v* branch:
    #   1. Extract docs from branch
    #   2. Replace current docs
    #   3. Create Docusaurus snapshot
@@ -200,8 +200,8 @@ When ready for deployment:
 
 ```bash
 # Rename branch to trigger CI/CD
-git branch -m test-fast2-v2025.2.0
-git push origin test-fast2-v2025.2.0
+git branch -m fast2-v2025.2.0
+git push origin fast2-v2025.2.0
 git push origin :dev-fast2-v2025.2.0  # Delete old branch
 
 # CI/CD will automatically build and deploy to staging
@@ -220,10 +220,10 @@ git push origin staging
 ### 3. Updating Existing Version
 
 ```bash
-git checkout test-fast2-v2025.2.0
+git checkout fast2-v2025.2.0
 # Make changes to docs/fast2/
 git commit -m "Fix typo"
-git push origin test-fast2-v2025.2.0
+git push origin fast2-v2025.2.0
 # CI/CD rebuilds staging automatically
 ```
 

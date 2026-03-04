@@ -60,7 +60,7 @@ jobs:
           # On nettoie uniquement les dossiers de versions éphémères créés par docusaurus
           rm -rf versioned_docs versioned_sidebars
 
-      - name: Generate Docusaurus versions from test-<product>-v* branches
+      - name: Generate Docusaurus versions from <product>-v* branches
         shell: bash
         run: |
           set -euo pipefail
@@ -76,14 +76,14 @@ jobs:
             rm -rf ".cache_${product}_current" && mkdir -p ".cache_${product}_current"
             rsync -a "docs/${product}/" ".cache_${product}_current/"
 
-            # Liste des branches versionnées pour ce produit (test-product-v*)
+            # Liste des branches versionnées pour ce produit (product-v*)
             mapfile -t branches < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin \
-              | grep "origin/test-${product}-v" | sed 's#^origin/##' | sort -V)
+              | grep "origin/${product}-v" | sed 's#^origin/##' | sort -V)
 
             echo "DEBUG: Branches found for ${product}: ${branches[*]}"
 
             for br in "${branches[@]}"; do
-              ver="${br##test-${product}-}"   # ex: v1, v2
+              ver="${br##${product}-}"   # ex: v1, v2
 
               echo "-> snapshot ${product} ${ver} from ${br}"
 
