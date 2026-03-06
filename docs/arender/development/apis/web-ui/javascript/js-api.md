@@ -1,9 +1,9 @@
 ---
 title: Get started with the javascript API
 last_update:
-  date: '2026-01-29T10:50:12.660Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: c3977078731402bc049cd5ec634362d0153e51fcb6e6f4f3fcdb06ba24d3f3c8
+content_hash: 1624c220a6d0299d5165276c6ea7ae63caffa1d68a3c40f8f22a18f3c51efa29
 ---
 
 ## Configuring a custom JavaScript file

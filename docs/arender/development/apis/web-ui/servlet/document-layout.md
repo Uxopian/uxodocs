@@ -1,9 +1,9 @@
 ---
 title: Document layout
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 3161503a122bfb6e1212119649bef4a88964cc3cbd6a39fb3945dcf39d72e0df
+content_hash: ac021e78c09b5bd555f58cdfc2513354223e131a7ad056d722418117a863b1a4
 ---
 
 A document layout describe the structure of a document.

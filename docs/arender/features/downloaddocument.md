@@ -1,9 +1,9 @@
 ---
 title: Download a document
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: f0dfeeb8ad111c61de3f0ca8d17c88e8ac2dc8e8a91229bb0334a5d27dcc74a2
+content_hash: f855dc24347f5fff422c9dd7400b3b05e697ab8e00d497f3dcec940d255852f6
 ---
 
 ## Download a file as PDF

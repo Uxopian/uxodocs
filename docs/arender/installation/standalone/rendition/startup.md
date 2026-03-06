@@ -2,9 +2,9 @@
 title: Start up
 sidebar_position: 4
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: e89e623ab303e4297a1620c83fb90f937dee55dca8d8ac264bba2913e00312e0
+content_hash: 9639c0b1d66dcdd426280084f41b254c97101f9b0dfcc96a9e74f4f5d4996af9
 ---
 
 ## Manual launch

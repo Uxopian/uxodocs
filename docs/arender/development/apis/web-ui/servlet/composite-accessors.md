@@ -1,9 +1,9 @@
 ---
 title: Composite documents
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 72681c126c1dac756a2580d09bce807dd47cd1680021154a0fd56e5dee32224f
+content_hash: d9a67a1573b98345d50d2b4012b44593c7789b7bb65b68240f6413fa279505ea
 ---
 
 A composite document is a reference file of documents.

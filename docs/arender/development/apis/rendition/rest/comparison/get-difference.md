@@ -1,9 +1,9 @@
 ---
 title: GET differences
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: e2497baf8ad89d653797628000e1e037c0017e70307ba681258ca03186c3cf64
+content_hash: 8b66666383837db4dffe7bb78f186bba325bbe18b3e3522c981309028f0411ff
 ---
 
 This API allows you to request a textual comparison and retrieve a DocumentCompareResult.

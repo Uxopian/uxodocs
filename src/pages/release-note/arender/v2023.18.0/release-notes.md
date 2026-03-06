@@ -57,7 +57,7 @@ Two new properties allow setting which annotation types are pre-selected in the 
 
 The filter is applied immediately on document open, without requiring any user interaction.
 Related issues: [AR-16077](https://arondor.atlassian.net/browse/AR-16077)
-More information: [Annotation properties](/guides/configurations/web-ui/properties/annotation/)
+More information: [Annotation properties](/docs/arender/guides/configurations/web-ui/properties/annotation/)
 
 **Missing Excel macro-enabled file type icons**
 Added missing SVG icons for XLSM (Excel macro-enabled workbook) and XLTM (Excel macro-enabled template) file types. These were previously generating 404 errors in browser monitoring tools.

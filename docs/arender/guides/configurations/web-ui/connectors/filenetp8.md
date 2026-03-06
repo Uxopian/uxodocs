@@ -2,9 +2,9 @@
 title: FileNet connector
 sidebar_position: 4
 last_update:
-  date: '2026-02-05T13:50:19.106Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: f54e8a600c766837dd9960af2b9d3c3e20fd04e46054a1ebc947569ce76c3494
+content_hash: d9f640bcc2d221a06274517f37b8c9e392262ed499b2d8a3326e39550ae10d08
 ---
 
 ## ARender for IBM FileNet

@@ -2,9 +2,9 @@
 title: Custom display name
 sidebar_position: 11
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 4c42af2ad354a2cb16b968f0dd73821a5a3075330f98488f9d4d9a711d27a211
+content_hash: 834884b68ed82b8b6865f7006ca22dcb5a0095b9fcfa70536add939d6ba2c01d
 ---
 
 ARender allows to customize display names.

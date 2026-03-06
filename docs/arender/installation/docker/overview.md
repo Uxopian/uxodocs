@@ -1,10 +1,10 @@
 ---
 title: "Installation"
 last_update:
-  date: '2026-02-17T10:47:49.798Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: e9327f53e9414eb2447c79e2313af41f8e4b5acbe5f747b02c6239d0bbd63052
+content_hash: d3c10c8d1991dea0fffaeb0468dd8ffe9b96b166d5d7f6993d2d5f9017f1d968
 ---
 
 ARender can be deployed in **Docker Mode**, where each component of the platform is packaged into lightweight OCI-compliant containers.  

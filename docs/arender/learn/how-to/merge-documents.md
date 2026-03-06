@@ -2,9 +2,9 @@
 title: Merge documents
 sidebar_position: 18
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 9f70c64f01433ca3467f22dafd87ad424aaa344b8615a355e2d3aac7368c3517
+content_hash: 80b1cf4ecae1e17a77af74c966a6db3719f5324e602cef31a6487ccaff191a66
 ---
 
 ARender provides a way to generate a fusion of multiple documents into

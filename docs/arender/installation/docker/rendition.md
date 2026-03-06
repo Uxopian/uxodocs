@@ -2,9 +2,9 @@
 title: Rendition stack
 sidebar_position: 2
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 9bee2992ecff2287f45c94df7dd4672b03ac7fd2cf354dc8597bdbf10a0d5e24
+content_hash: f88c0470134397bc8ac1964575a4c88eba0be2d4b8436c8ab096e1a4e4ad6d07
 ---
 
 import Tabs from '@theme/Tabs';

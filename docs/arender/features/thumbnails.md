@@ -1,9 +1,9 @@
 ---
 title: Thumbnails
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: fdd03b360e33ed1e7d7143e40fb4a85a4c8e46ab34fdfde206da614688cbc76d
+content_hash: 1c30b6e16bfd2c98ca29bedb5101e6f2d23f70fb7a2bd56dfe6af70d380c19ad
 ---
 
 import Tabs from '@theme/Tabs';
