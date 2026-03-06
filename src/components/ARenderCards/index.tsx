@@ -98,7 +98,7 @@ const GuidesList = [
                 icon: "🔌",
                 title: "Connector",
                 description: "Connect ARender to your systems",
-                link: "/docs/arender/development/connector/documentAccessorInterface",
+                link: "/docs/arender/development/connector/overview",
             },
             {
                 icon: "🧩",
