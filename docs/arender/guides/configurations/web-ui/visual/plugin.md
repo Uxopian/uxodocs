@@ -2,9 +2,9 @@
 title: Plugins
 sidebar_position: 2
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 98b35afacbf6b509d4c5c6c4e1a099588201023dc3526c5498c99e78d59f1833
+content_hash: 0091da8ea8781a570fa81cbad0e6538c20da92a579096db44efb26cdead61e65
 ---
 
 import Tabs from '@theme/Tabs';

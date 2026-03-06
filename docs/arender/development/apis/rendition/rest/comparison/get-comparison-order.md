@@ -1,9 +1,9 @@
 ---
 title: GET a comparison order
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: fbf2727ccb1676ea5df22a3a2874f63600fc99cbe7eee1ddd3d7064228649f63
+content_hash: 8fe62697db3d0330ae4017817e9ba5edc9303eade2327f24a219a343c31e4580
 ---
 
 This API allows you to retrieve a comparison order previously requested.

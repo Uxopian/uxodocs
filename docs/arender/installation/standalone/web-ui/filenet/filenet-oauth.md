@@ -3,9 +3,9 @@ title: Installation ARender Spring Boot with OAuth2
 sidebar_position: 2
 description: Deployment guide for IBM Filenet with ARender Spring Boot and OAuth2
 last_update:
-  date: '2026-02-05T13:50:19.106Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 0843f170d3a4f26454bb48da8340416153298e525ec18203653e5d8a00dcf6e0
+content_hash: 1b07cae9a886bd6319f505a7c4b4b58bf2967ae97984567a70d92383581b1ec9
 ---
 
 import Tabs from '@theme/Tabs';

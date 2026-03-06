@@ -1,10 +1,10 @@
 ---
 title: Overview
 last_update:
-  date: '2026-02-17T10:47:49.798Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 64d31480fa83a01c3c8c6e8383bd3a66b35ce1862f094265737815af30162921
+content_hash: 4a9d7cc687ec85818b3d63ad172fc3ef72c141eb95204fe52451a300f8eac110
 ---
 ARender can be deployed using **three distinct architectures**. Each has its own trade-offs and prerequisites.  
 Choose the mode that best fits your infrastructure, operational constraints, and scale requirements.

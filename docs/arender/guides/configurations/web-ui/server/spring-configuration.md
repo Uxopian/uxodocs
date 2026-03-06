@@ -1,8 +1,9 @@
 ---
 title: "ARender Web-UI - Spring Boot Configuration"
 last_update:
-  date: '2026-02-27T10:47:49.798Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
+content_hash: 2a5fc5271f7b20cf7a86f1e86e0ced527cbbaaf6fb01151d9a0afb9107a282e9
 ---
 
 ## Overview

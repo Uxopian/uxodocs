@@ -1,9 +1,9 @@
 ---
 title: Document layout
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: b1ac03708e7a7c6fc1bf234698bcea9d7788aaccfaf680ad83360205c901d371
+content_hash: aeb100e40ef32177a42ec8d97ad2e1ca20b119190703200c942b7815067afe62
 ---
 
 ### Retrieve document layout

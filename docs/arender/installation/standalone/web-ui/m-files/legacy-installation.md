@@ -2,9 +2,9 @@
 title: Legacy installation
 sidebar_position: 1
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 6889c9d38870102435a00731192f9af67e4c2bc8806745d918dd01b76c0fa5ff
+content_hash: c1eaf0048d84821e22ed4dcbd8ba92115a5d6abc3072a3e5c93afbc8789301ab
 ---
 
 Here we present the Web-UI installation in M-Files.

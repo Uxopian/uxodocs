@@ -2,9 +2,9 @@
 title: Restart
 sidebar_position: 3
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: de344947ba7bf0d130ceeb8082def7d13f481039d1f29e6878baaac6c577dd18
+content_hash: 409fec4332b80d6624eab9077e9255271fd8dea5629f5c74c8eb925ad518cc68
 ---
 
 In some cases, it may be necessary to restart one or both part of

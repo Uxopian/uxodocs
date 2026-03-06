@@ -2,9 +2,9 @@
 title: Alfresco
 sidebar_position: 4
 last_update:
-  date: '2026-02-05T13:50:19.106Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: fd8ec301d4e3d728715c3e62e327a08568701e84d30e862d2a1c99071a18cd32
+content_hash: 5847305e00cff2205ef0f1ae318fbda2e8c74405208f2ddc1d4e1fb70f67836f
 ---
 
 ## ARender UI for Alfresco

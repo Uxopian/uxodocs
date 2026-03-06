@@ -3,9 +3,9 @@ title: Installation in Apache Tomcat
 sidebar_position: 3
 description: Deployment guide for IBM Filenet in Apache Tomcat application server
 last_update:
-  date: '2026-02-05T13:50:19.106Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 06ed4fb0d83ed247fc628d8721f9d58116062b0d13ed44f87997a75cda3f50e7
+content_hash: 20b47ec4a7c234ab5cfef0e408f3953046c8bc5834e7c41b92de97e0dec8a8d7
 ---
 
 Below the deployment of ARender HMI for FileNet in **Apache Tomcat**.

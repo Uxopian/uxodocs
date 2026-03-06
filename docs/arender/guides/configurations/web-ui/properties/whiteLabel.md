@@ -2,9 +2,9 @@
 title: White label
 sidebar_position: 13
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 99db7f653e06f86290b933177df1042ef2ac73ca2dfd065286f929b807b7bb9b
+content_hash: 8d74d14b65ec47fc2eaf9a4d113624a87b8b87d4a522c4fe444b563360c9459c
 ---
 
 ## Introduction

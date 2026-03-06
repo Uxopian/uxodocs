@@ -1,9 +1,9 @@
 ---
 title: Layers (OCG's)
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 480d65c9c0281edc363d28f813bfaec953415776b63122a150b153382b386ad2
+content_hash: 360027008b4ab7437016dd2b969061fdd43c680142a85ff8c874667e5a245b27
 ---
 
 ## Description

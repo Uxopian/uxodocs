@@ -1,9 +1,9 @@
 ---
 title: Accessibility
 last_update:
-  date: '2026-01-29T10:50:12.660Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 0d2d9b1ff6c472c6aab6deb9981dfc89c3a135d8defa3f06c68b4fe562e0f0b2
+content_hash: 8d4a360bf2b5315f208c38deace3567b5ecd1272f8c67c2467ed9bb5d467ce9a
 ---
 
 Since version 4.5, ARender has a better support for visually impaired users.

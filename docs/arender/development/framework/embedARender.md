@@ -1,9 +1,9 @@
 ---
 title: Embed ARender in an application
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-06T18:23:33.786Z'
   author: CI/CD Bot
-content_hash: 90bc1a4bee7bd6d47b9df1b61c78b3c63b48ef10a0a7bad7b8fb642e4de235af
+content_hash: a86d5fa9933959201e4b4f1d5305197a86c08f961a68d2ac0de918c24d07f964
 ---
 
 import Tabs from '@theme/Tabs';
