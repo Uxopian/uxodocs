@@ -6,7 +6,7 @@ import remarkVariables from "./scripts/remark-variables.mjs";
 // Update these when releasing a new version. They are injected into all
 // markdown files at build time via the remarkVariables script,
 // replacing {{version}} placeholders.
-const arenderVersion = "2023.18.0";
+const arenderVersion = "2026.0.0";
 
 
 const getPdfFileName = (
