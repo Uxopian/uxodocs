@@ -1,10 +1,10 @@
 ---
 title: Standalone
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-09T13:58:30.248Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: c7561bdd590c094d7c86ed427c8d121e53ae3df7191374c4880a0cfe2114879f
+content_hash: 2de7ed6809cfd3c9e7e1c6724693c5dc5d7aefc5158752b45621d0201eb6252d
 ---
 
 Below a standalone installation of the ARender Web-UI.
@@ -18,8 +18,8 @@ To install on **IBM FileNet systems**, you can skip this page and directly go to
 :::
 
 :::warning
-Since ARender 2023.0.0, the deployment of ARender UI has changed. Please check the detailed upgrade documentation 
-[here](/docs/arender/guides/upgrade/4.8_to_2023.0).
+Since ARender 2026.0.0, the deployment of ARender UI has changed. Please check the detailed upgrade documentation 
+[here](/docs/arender/guides/upgrade/2023.x_to_2026.x/web-ui).
 :::
 
 ## Prerequisites
