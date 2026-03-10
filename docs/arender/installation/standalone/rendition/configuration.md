@@ -2,9 +2,9 @@
 title: Configuration
 sidebar_position: 3
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-10T12:51:36.773Z'
   author: CI/CD Bot
-content_hash: 99fcac7924930f4babc8e22a4e4741b8d35c2da51e81607c1fb5af1b999f7efc
+content_hash: 349006eaa08c27ed82346ae8af2e22df552d894cbc1b97dc20c2ec6bf0c904e0
 ---
 
 import Tabs from '@theme/Tabs';
@@ -381,9 +381,9 @@ To configure Microsoft Office document rendering:
 
 ### Description
 
-We have introduced **PDFOwl** as an alternative to the standard **JNIPdfEngine** for document rendering.
+**PDFOwl** is the default document renderer since v2026.0.0, replacing **JNIPdfEngine**.
 
-This feature supports images, layouts, and layers rendering, but does not yet include image filter handling or SVG functionality.
+PDFOwl supports images, layouts, and layers rendering and image filter handling.
 
 In the existing document-renderer setup, errors within the native library can cause **the entire application to crash**,
 as these issues occur at a low level and cannot be intercepted at the application level.
@@ -393,9 +393,9 @@ rendering requests through sub-processes, allowing errors to be handled without 
 
 ### Setup
 
-- Navigate to: **modules\RenditionEngine**,
-- Open or create the **application.properties** file,
-- Add the following property:
+Since v2026.0.0, PDFOwl is enabled by default (`micro-services.pdf-renderer=PDFOwl`). No additional setup is required.
+
+For earlier versions, or to explicitly configure it, navigate to **modules\RenditionEngine**, open or create the **application.properties** file, and add:
 
 ```properties
 micro-services.pdf-renderer=PDFOwl

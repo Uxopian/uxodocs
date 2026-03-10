@@ -1,10 +1,10 @@
 ---
 title: Architecture in M-Files
-sidebar_position: 5
+sidebar_position: 6
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-10T12:51:36.773Z'
   author: CI/CD Bot
-content_hash: 866b9eb5fbd61fdb6bb36ab54d145bc63f645816986bef561b94a85af11a5916
+content_hash: c04c0cf5a7391605a30b1d2cb2bca5421eeff7f01a6036b497ca8649b783e53c
 ---
 
 ![image](/img/arender/diagrams/ARender-Architecture-M-Files.png)

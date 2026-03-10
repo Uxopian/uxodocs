@@ -1,10 +1,10 @@
 ---
 title: Standalone
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-10T12:51:36.773Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: c7561bdd590c094d7c86ed427c8d121e53ae3df7191374c4880a0cfe2114879f
+content_hash: d645bdbcc2a63ca81febd91c3a27ec1a1a24bde20887691f7a5e70cd82186b1f
 ---
 
 Below a standalone installation of the ARender Web-UI.
@@ -18,8 +18,10 @@ To install on **IBM FileNet systems**, you can skip this page and directly go to
 :::
 
 :::warning
-Since ARender 2023.0.0, the deployment of ARender UI has changed. Please check the detailed upgrade documentation 
+Since ARender 2023.0.0, the deployment of ARender UI has changed. Please check the detailed upgrade documentation
 [here](/docs/arender/guides/upgrade/4.8_to_2023.0).
+
+Since ARender 2026.0.0, the technical stack has been updated to JDK 21+, Spring Boot 4, and WAR deployment has been removed. Please check the [v2026.0.0 release notes](/release-note/arender/2026.0.0) for details.
 :::
 
 ## Prerequisites
@@ -36,7 +38,7 @@ Since ARender 2023.0.0, the deployment of ARender UI has changed. Please check t
 
 | Software                        | Requirement                                                                                                                                                                                                                                                                                                                    |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Java Runtime                    | JRE 1.8 64 bits Minimum, OpenJDK 11 advised. Oracle JDK are supported, JRE IBM J9 and java 17 are not supported.                                                                                                                                                                                                               |
+| Java Runtime                    | JDK 21 64 bits minimum, JDK 25 (LTS) recommended. Eclipse Temurin or OpenJDK distributions are supported.                                                                                                                                                                                                               |
 | ARender Rendition up & running  | The Rendition health page should be green, see [the related documentation](/docs/arender/installation/standalone/rendition/verification). If it is not the case, please install the Rendition following [the related documentation](/docs/arender/installation/standalone/rendition/install). |
 
 ## Installation

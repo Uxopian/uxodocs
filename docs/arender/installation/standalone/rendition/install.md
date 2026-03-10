@@ -2,13 +2,15 @@
 title: Installation
 sidebar_position: 2
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-10T12:51:36.773Z'
   author: CI/CD Bot
-content_hash: 951a0002aacba4e8fc98f02e49d119093a95d1522edbfd68ab95d7d0be48420d
+content_hash: 6552697793870ef6fb823ea62f1392b2688e35025993671ee98e01bd95b0b57b
 ---
 
 If upgrading from version 4.8 to version 2023.0, please refer to the detailed upgrade documentation
 [here](/docs/arender/guides/upgrade/4.8_to_2023.0/rendition).
+
+If upgrading from version 2023.x to version 2026.0, please refer to the [v2026.0.0 release notes](/release-note/arender/v2026.0.0) for details on stack changes including JDK 21+, Spring Boot 4, and PDFOwl as the default renderer.
 
 ## Installer Setup
 

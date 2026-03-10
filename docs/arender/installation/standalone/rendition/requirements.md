@@ -2,9 +2,9 @@
 title: Requirements
 sidebar_position: 1
 last_update:
-  date: '2026-02-17T10:47:49.798Z'
+  date: '2026-03-10T12:51:36.773Z'
   author: CI/CD Bot
-content_hash: d83146bcf5e0a3d7ff66daa7c76c1d19b86b09948645b39a03dff0e19a606d95
+content_hash: ddfdc8ad3be856c9c16733ecbd0a5e276fe4c09bb5edefb1b635dadf563c2baf
 ---
 
 ARender Rendition runs on a wide range of enterprise environments.  
@@ -15,17 +15,17 @@ Other platforms may work but are not part of the default QA matrix.
 
 ## 1. Java Requirements (Mandatory)
 
-ARender Rendition requires **Java 11**.
+ARender Rendition requires **Java 21** or later. **JDK 25 (LTS)** is recommended.
 
-| Component                    | Requirement                                            |
-|------------------------------|--------------------------------------------------------|
-| **Java Version**             | **JDK 11 (LTS)**                                       |
-| **Recommended Distribution** | Eclipse Temurin 11                                     |
-| **Architecture**             | x86_64                                                 |
-| **Notes**                    | Java 17+ are not supported in the 2023.x release line. |
+| Component                    | Requirement                                                        |
+|------------------------------|--------------------------------------------------------------------|
+| **Java Version**             | **JDK 21+ (JDK 25 LTS recommended)**                              |
+| **Recommended Distribution** | Eclipse Temurin 25                                                 |
+| **Architecture**             | x86_64                                                             |
+| **Notes**                    | JDK 21 is the minimum supported version for the 2026.x release line. |
 
-Download:  
-https://adoptium.net/temurin/releases?version=11
+Download:
+https://adoptium.net/temurin/releases?version=25
 
 ---
 
@@ -35,12 +35,12 @@ The following systems are supported for standalone Rendition deployment:
 
 | Operating System               | Type    | Vendor Support End   | Status       |
 |--------------------------------|---------|----------------------|--------------|
-| **Windows Server 2022**        | Windows | Oct 14, 2031         | âœ”ï¸ Supported |
-| **Red Hat Enterprise Linux 9** | Linux   | ~2032                | âœ”ï¸ Supported |
-| **Ubuntu 22.04 LTS**           | Linux   | Apr 2027 (ESM 2032)  | âœ”ï¸ Supported |
-| **Amazon Linux 2023**          | Linux   | Mar 2026             | âœ”ï¸ Supported |
+| **Windows Server 2022**        | Windows | Oct 14, 2031         | ✔️ Supported |
+| **Red Hat Enterprise Linux 9** | Linux   | ~2032                | ✔️ Supported |
+| **Ubuntu 22.04 LTS**           | Linux   | Apr 2027 (ESM 2032)  | ✔️ Supported |
+| **Amazon Linux 2023**          | Linux   | Mar 2026             | ✔️ Supported |
 
-> Primary QA validation is performed on the **Docker Ubuntu jammy 22.04 base image**.
+> Primary QA validation is performed on the **Docker Ubuntu Noble 24.04 base image**.
 
 ---
 
