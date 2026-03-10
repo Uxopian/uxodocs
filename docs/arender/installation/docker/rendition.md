@@ -2,9 +2,9 @@
 title: Rendition stack
 sidebar_position: 2
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-10T12:51:36.773Z'
   author: CI/CD Bot
-content_hash: f88c0470134397bc8ac1964575a4c88eba0be2d4b8436c8ab096e1a4e4ad6d07
+content_hash: ee6446cc1834875ad05e3e02472084ce464fe5ef2efd93d95780a70c9db659c9
 ---
 
 import Tabs from '@theme/Tabs';
@@ -61,9 +61,9 @@ Configuration files location:
 
 ### Description
 
-The 2023.1.0 version has introduced a new docker image as an alternative of the usual **document-renderer**, named **document-renderer-pdfowl**.
+The 2023.1.0 version introduced a new docker image as an alternative to the usual **document-renderer**, named **document-renderer-pdfowl**.
 
-This feature is currently in an experimental, early-access phase. It supports images, layouts, and layers rendering, but does not yet include image filter handling or SVG functionality.
+Since v2026.0.0, **PDFOwl is the default renderer** and is production-ready. It supports images, layouts, layers rendering and image filter handling.
 
 In the existing document-renderer setup, errors within the native library can cause the entire application to crash,
 as these issues occur at a low level and cannot be intercepted at the application level.

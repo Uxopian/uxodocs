@@ -1,10 +1,10 @@
 ---
 title: Docker architecture
-sidebar_position: 7
+sidebar_position: 8
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-10T12:51:36.773Z'
   author: CI/CD Bot
-content_hash: d021966d24d3c80468529801599a6300818f4c8836025788e347fd9ea3e6247a
+content_hash: 0f5b8e8e6beca632fd63b5ba166ec8e2312a0ecf28d8c376abe3f7245d543716
 ---
 
 ![img](/img/arender/diagrams/ARender-Architecture-Docker.png)

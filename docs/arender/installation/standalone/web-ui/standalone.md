@@ -1,10 +1,10 @@
 ---
 title: Standalone
 last_update:
-  date: '2026-03-09T13:58:30.248Z'
+  date: '2026-03-10T12:51:36.773Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 2de7ed6809cfd3c9e7e1c6724693c5dc5d7aefc5158752b45621d0201eb6252d
+content_hash: d645bdbcc2a63ca81febd91c3a27ec1a1a24bde20887691f7a5e70cd82186b1f
 ---
 
 Below a standalone installation of the ARender Web-UI.
@@ -36,7 +36,7 @@ Since ARender 2026.0.0, the deployment of ARender UI has changed. Please check t
 
 | Software                        | Requirement                                                                                                                                                                                                                                                                                                                    |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Java Runtime                    | JRE 1.8 64 bits Minimum, OpenJDK 11 advised. Oracle JDK are supported, JRE IBM J9 and java 17 are not supported.                                                                                                                                                                                                               |
+| Java Runtime                    | JDK 21 64 bits minimum, JDK 25 (LTS) recommended. Eclipse Temurin or OpenJDK distributions are supported.                                                                                                                                                                                                               |
 | ARender Rendition up & running  | The Rendition health page should be green, see [the related documentation](/docs/arender/installation/standalone/rendition/verification). If it is not the case, please install the Rendition following [the related documentation](/docs/arender/installation/standalone/rendition/install). |
 
 ## Installation

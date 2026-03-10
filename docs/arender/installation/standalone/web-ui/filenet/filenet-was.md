@@ -3,10 +3,20 @@ title: Installation in IBM Websphere (recommended)
 sidebar_position: 1
 description: Deployment guide for IBM Filenet in IBM WebSphere application server
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-10T12:51:36.773Z'
   author: CI/CD Bot
-content_hash: 413b68120ba6290a427af227b6ab4232aac3cf798fc87343c7086ba7e3a594e9
+content_hash: 272c3c4326ca193c0a7a2a55e22234908fe2d3dd8f3910a481f56f726f21bab7
 ---
+
+:::warning
+This deployment model (EAR on IBM WebSphere) applies to **ARender v2023.x only**. Starting with v2026.0.0, WAR/EAR deployments have been removed.
+
+ARender v2026.0.0 offers two ECM integration models:
+- **Legacy model**: ARender Web-UI (Spring Boot) with JAR connectors loaded in the same JVM.
+- **New REST connector model** (introduced in v2026.0.0): A standalone REST connector application that runs independently. The ARender Rendition backend calls this independent application to retrieve documents and metadata from the ECM.
+
+See the [connector configuration](/docs/arender/guides/configurations/web-ui/connectors/filenetp8) documentation for details.
+:::
 
 Below the deployment of ARender HMI for FileNet in **IBM WebSphere application server**.
 
