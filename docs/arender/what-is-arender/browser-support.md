@@ -2,12 +2,12 @@
 title: Browser support
 sidebar_position: 7
 last_update:
-  date: '2026-02-06T15:28:58.661Z'
+  date: '2026-03-10T13:29:00.190Z'
   author: CI/CD Bot
-content_hash: 86302fcf9a9aaf7c823d8a38f04f0e0bfbea7d31e7d5b37a9bbc36d330b7152b
+content_hash: 30b56ed6b5ec04c3e7c17c150bded7bb4b233e78df32112bd0f7279439f168ee
 ---
 
-| Browser | ARender v5                                                               |
+| Browser | ARender                                                                  |
 | ------- | ------------------------------------------------------------------------ |
 | ![Chrome icon](/img/arender/icons/chrome-logo.png) Google Chrome | Supported                                                                |
 | ![Firefox icon](/img/arender/icons/firefox-logo.png) Mozilla Firefox | Supported                                                                |
