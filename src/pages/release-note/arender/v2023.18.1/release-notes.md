@@ -25,11 +25,11 @@ ARender 2023.18.1 is a **patch release** on top of v2023.18.0 that addresses two
 
 ## User Perspective
 
-**Arrow annotation comments now saved correctly**
+**Arrow annotation comments now saved correctly**<br/>
 Fixed a regression where comments associated with arrow annotations were silently lost when saving. An internal method (`clearDistance`) was incorrectly clearing comment data during the annotation save process.
 Related issues: [AR-18121](https://arondor.atlassian.net/browse/AR-18121)
 
-**No more ghost broken-image icon on arrow creation**
+**No more ghost broken-image icon on arrow creation**<br/>
 Creating an arrow annotation no longer displays a brief ghost broken-image icon. The placeholder widget is now hidden by default, eliminating the visual artifact.
 Related issues: [AR-18205](https://arondor.atlassian.net/browse/AR-18205)
 
