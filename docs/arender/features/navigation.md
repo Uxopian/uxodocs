@@ -1,9 +1,9 @@
 ---
 title: Navigation
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: 4f320974a55891a6af17c7d2056497c758e6aceec7344fb8a057c3242830fbb6
+content_hash: 577b86ce5f2ef7d502980b6689ce5755706a104040d2965278256574b93cebf7
 ---
 
 ## Navigate in a document

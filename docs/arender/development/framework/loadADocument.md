@@ -1,9 +1,9 @@
 ---
 title: Load a document
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: fc811370e89e0e3e914ee27775588eaa341e0ea891672e74ec237091f3710d3c
+content_hash: 55af8728e953f8693515381f29953440eb03a18d3787e52f7edaff1658992fc6
 ---
 
 import Tabs from '@theme/Tabs';

@@ -2,9 +2,9 @@
 title: Hyperlinks
 sidebar_position: 6
 last_update:
-  date: '2026-02-05T13:50:19.106Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: 8032495954d7dd0531febec8ab7d61331cb8aa64bb584d66456c77ad2e0f0cd1
+content_hash: 8a94b6fc3955000d9e2241aee6a2397ef5885c9ea05f600eb9b5abdd4a6e11f2
 ---
 
 ## General

@@ -1,9 +1,9 @@
 ---
 title: Document builder
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: 85c56d7a6e33d41e4405db514a1244f18a93ff3e337b41ab99f462e251184517
+content_hash: feb2b6fc5ec576d17c1169df6eb8a4f78f14c711b7b4743a273be2914e2ca5bf
 ---
 
 ### Interacting with the documentBuilder

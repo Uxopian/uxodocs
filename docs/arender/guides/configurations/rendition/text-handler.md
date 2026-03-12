@@ -1,10 +1,10 @@
 ---
 title: "Text handler"
 last_update:
-  date: '2026-02-17T10:47:49.798Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
 sidebar_position: 3
-content_hash: b06861a0f1dfe9594120d53bd4b21d82dbeff9217eb66ff770eb78946da66594
+content_hash: fbc16591f830baefff3f48ede278d0e431ffe3933e57e778f67ec442897bc50f
 ---
 
 ## Digital signature management

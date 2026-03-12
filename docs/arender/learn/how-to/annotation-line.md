@@ -2,9 +2,9 @@
 title: Custom annotation
 sidebar_position: 10
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: a149a75896a94e9120c7421b4259dd2589acaab4453a2b1ae200c5aa775fc7e9
+content_hash: 07fa5e768ada4b9dcf6e4b053ceb01d40e3f38c5b563c978e0e0ab1e8a9d9903
 ---
 
 import Tabs from '@theme/Tabs';

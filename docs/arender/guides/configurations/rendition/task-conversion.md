@@ -1,10 +1,10 @@
 ---
 title: "Task Conversion"
 last_update:
-  date: '2026-02-17T10:47:49.798Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
 sidebar_position: 2
-content_hash: 7b1559f0f77ce50eb3eeb95158dc4de7e7ed111caaf3f05a26c688b7ed20bb90
+content_hash: 900edb36ea5f5a72c0a6cb954c8a01a2780f91fc785b494da814d3d33ea3e878
 ---
 
 ## Rendition without internet Access and mails with external images
