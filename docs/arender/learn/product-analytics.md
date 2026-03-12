@@ -1,10 +1,10 @@
 ---
 title: "Product Analytics"
 last_update:
-  date: '2026-02-05T16:03:58.461Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
 sidebar_position: 3
-content_hash: b20071b9a8b95e18bb4f5252ef882d8ebae1678e67631b779f49b1b8429167e3
+content_hash: 3fb9f8e1460333e1c00f4bb60e450c2b020cc4faecaf4bb8227c625c927a73b5
 ---
 
 ## What is Product Analytics in ARender?

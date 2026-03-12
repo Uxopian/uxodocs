@@ -1,9 +1,9 @@
 ---
 title: Perform a search
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: f4af785c3d6787ab749ef761794ea28889e963a8af7290f7c36cf56577714753
+content_hash: a5a7dea7e4c2f1b2971b3bd8fae9eccf5dc6aa98bb8d3c9a0ed059fee4b5ab80
 ---
 
 import Tabs from '@theme/Tabs';

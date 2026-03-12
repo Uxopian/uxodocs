@@ -1,10 +1,10 @@
 ---
 title: Standalone
 last_update:
-  date: '2026-02-05T16:03:58.461Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: d1acacc523d2f851988c16b7eaaa98f1444671e231e9e67deb55f2c59b30cae0
+content_hash: c7561bdd590c094d7c86ed427c8d121e53ae3df7191374c4880a0cfe2114879f
 ---
 
 Below a standalone installation of the ARender Web-UI.

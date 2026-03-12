@@ -1,9 +1,9 @@
 ---
 title: Add a highlight notification
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: 5eee8901c79baac234c1e07bf8f11e1be157e9caf8060827587ccec28f9b1675
+content_hash: 713e4fea174cc166fe8db64676e1054a984d3636c4a447a1218bb2e6b38c0b2a
 ---
 
 import Tabs from '@theme/Tabs';

@@ -2,9 +2,9 @@
 title: Add new image/video mime types
 sidebar_position: 2
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: ad906f670e90fd4ea678758824fd24d534453e71c220def2e2c1063309b83be8
+content_hash: 8f1ddcf92e102261c13848e30d2370a0a12a608e0600ffc3365717fc8cfa4a98
 ---
 
 If your rendition server does not possess all the mime types that you

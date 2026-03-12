@@ -1,9 +1,9 @@
 ---
 title: Annotations
 last_update:
-  date: '2026-02-05T13:50:19.106Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: 8faeda45758c07f7497f2b15a5bf0e3e87eae00f12aac61761ba7edd10118a8e
+content_hash: b2c6ba8e1a9f18dbed722e061934b1ac38ba3009451d64f80a13113d7eee1726
 ---
 
 ### Register to added annotation event

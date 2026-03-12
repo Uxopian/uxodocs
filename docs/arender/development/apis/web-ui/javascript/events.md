@@ -1,9 +1,9 @@
 ---
 title: Events
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: a84fcb8108ed5afb1a26cf12f68d5d440e948036bf703d862ab3b6a25c41b654
+content_hash: 28cb1857565ac933319dbbe836bb6ccc6625a9f48263ecd62d7fba45517c14ab
 ---
 
 ## Register to error events while loading documents

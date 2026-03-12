@@ -2,9 +2,9 @@
 title: Properties
 sidebar_position: 9
 last_update:
-  date: '2026-02-17T10:47:49.798Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: 9ba6deca8c2884eaec3649e5d24620f7d2507b9e6303deb9309ab868a10cf4a1
+content_hash: c1a86905e386cb0d01e91e398a7ed10897a5026fb470c5cc82633bfe65d030f5
 ---
 
 ## about

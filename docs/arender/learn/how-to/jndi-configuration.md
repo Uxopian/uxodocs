@@ -2,9 +2,9 @@
 title: JNDI Configuration for ARender Web-UI
 sidebar_position: 17
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: ee5d99c8a515a38df9b4c7b4eff3dff281e8d21d1c7deca0415588b6fc9086e8
+content_hash: 61c7773deb2cb40b5f530838a380a46b32bf52059b92553d57a3b7edcdb1e3a5
 ---
 
 JNDI configuration is only compatible for ARender for FileNet in WebSphere. Other deployment compatibility will come later.

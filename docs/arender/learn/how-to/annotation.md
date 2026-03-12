@@ -2,9 +2,9 @@
 title: Annotations
 sidebar_position: 4
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: 00200a0556e2eadbcf67706ba59ef23e5180c02535b33167cc33ed87b6532e57
+content_hash: 30ab91cd544aea588c13ccf32ab207eac80c0907d8992622c146eb6ee8916213
 ---
 
 ## Annotation creation policy configuration

@@ -2,9 +2,9 @@
 title: Create a custom document accessor
 sidebar_position: 7
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: bc4b6090eeb3eb00059ca722a8e1d60ca1ea1c62688516e0beaf14517e97e032
+content_hash: 2483a1b31edea7a01d033cf4ac5adb5ff660cdaa85bf9dd8cc5fa8dfe036d4e0
 ---
 
 Depending the kind of service you want to use, we might already have

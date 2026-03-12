@@ -1,10 +1,10 @@
 ---
 title: "PDFOwl Renderer"
 last_update:
-  date: '2026-02-17T10:47:49.798Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
 sidebar_position: 2
-content_hash: f3bfb94f3bd597540e66aa16c8d71dd380ee35aa7425a7ce53f4ffc26cec2a9a
+content_hash: e1d04447650e6b07e9e12a97f78aa0b10ff0b66daf982d2928d7bd6f50a8aea3
 ---
 
 ## PDFOwl PDF Rendering

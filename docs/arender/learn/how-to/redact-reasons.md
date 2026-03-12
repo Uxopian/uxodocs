@@ -2,9 +2,9 @@
 title: Redact reasons
 sidebar_position: 22
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
-content_hash: f496c1263cc9925928ac332a3d6cb93e65aa9c158e98cc8cddcae875271cb467
+content_hash: 884c7efd439cfdd2be17bcd05fa5b087c84f7f5fbf6f609f5ca8e210d2e4d7d3
 ---
 
 ## Add reason

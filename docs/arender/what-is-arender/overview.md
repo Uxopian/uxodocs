@@ -1,10 +1,10 @@
 ---
 title: "What is ARender ?"
 last_update:
-  date: '2026-02-05T16:03:58.461Z'
+  date: '2026-03-12T20:43:52.809Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 07377e998957dd412de5888b1ab29ccbd686c95223d0c8aaf34905a91c8cf872
+content_hash: ca1bb24ade7245c87f63eee93764c59bbc4cf8962ae3d2abbae6e33eaedfaea2
 ---
 
 ARender is a secure web viewer allowing you to view and annotate 
