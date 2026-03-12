@@ -2,13 +2,13 @@
 title: Installation
 sidebar_position: 2
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-09T14:02:41.880Z'
   author: CI/CD Bot
-content_hash: 951a0002aacba4e8fc98f02e49d119093a95d1522edbfd68ab95d7d0be48420d
+content_hash: f2cde19e7c4c385bcba1592e0b284828f4a331a32e981a4b9441c2bbceb2f319
 ---
 
-If upgrading from version 4.8 to version 2023.0, please refer to the detailed upgrade documentation
-[here](/docs/arender/guides/upgrade/4.8_to_2023.0/rendition).
+If upgrading from version 2023 to version 2026, please refer to the detailed upgrade documentation
+[here](/docs/arender/guides/upgrade/2023.x_to_2026.x/rendition).
 
 ## Installer Setup
 
