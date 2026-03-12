@@ -30,14 +30,14 @@ The REST connector model works exclusively with the **ReactJS frontend**. The le
 | Aspect | Legacy (JAR) | REST (Microservice) |
 |--------|-------------|---------------------|
 | **Frontend** | GWT HMI | ReactJS |
-| **Deployment** | JAR in HMI classpath | Independent Spring Boot application |
+| **Deployment** | JAR in HMI classpath | Independent Spring Boot application (Alfresco/FileNet provided REST Connector) or specific to the target programmation language used |
 | **Interface** | Java `DocumentAccessor` / `AnnotationAccessor` | REST endpoints (`/documents`, `/annotations`) |
 | **Language** | Java only | Any language capable of serving HTTP |
 | **Routing** | URL parser chain (`beanNames` property) | `X-Provider-ID` header + Rendition registry |
 | **Coupling** | Tightly coupled to HMI runtime | Loosely coupled, network boundary |
 | **Scaling** | Scales with HMI | Scales independently |
 | **Debugging** | Requires repackaging and redeploying JAR | Standard application debugging |
-| **Configuration** | Spring XML beans + properties file | Spring Boot `application.properties` / `application.yml` |
+| **Configuration** | Spring XML beans + properties file | Spring Boot `application.properties` / `application.yml` (Alfresco/FileNet provided REST Connector) or specific to the target programmation language used |
 
 ```mermaid
 graph LR

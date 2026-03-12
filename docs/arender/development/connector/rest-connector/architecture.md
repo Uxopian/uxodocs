@@ -18,7 +18,7 @@ graph TD
     Frontend -->|"POST /connector/documents"| Rendition[Rendition Engine]
     Rendition -->|"GET /documents?params"| Connector[REST Connector]
     Connector -->|Fetches content| ECM[ECM Backend]
-    Rendition -->|Stores document| DFS[Document File Storage]
+    Rendition -->|Stores document| File System[NFS]
 ```
 
 ### Components
@@ -27,7 +27,7 @@ graph TD
 
 2. **ReactJS Frontend** — The ARender viewer. When opening a document through a REST connector, it sends a `POST /connector/documents` request to the Rendition Engine with the ECM-specific parameters.
 
-3. **Rendition Engine** — Routes connector requests to the appropriate REST connector based on the `X-Provider-ID` header or based on configuration. It stores fetched documents in the file system and handles annotation position transformations.
+3. **Rendition Engine** — Routes connector requests to the appropriate REST connector based on the `X-Provider-ID` header or based on configuration. It stores fetched documents in the file system (i.e NFS) and handles annotation position transformations.
 
 4. **REST Connector** — An independent REST application (Spring Boot for the provided FileNet and Alfresco REST Connector) implementing the [Provider API](provider-api.md). Each connector runs on its own port (e.g., FileNet on 8787, Alfresco on 8788).
 
