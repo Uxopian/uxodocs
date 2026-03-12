@@ -18,8 +18,14 @@ to Version 2026 of ARender.
 
 ## Introduction
 The 2026 version of ARender will introduce significant changes aimed at modernizing the technical stack and improving maintainability and scalability.
-These changes mainly include an upgrade from Spring Boot 2 to Spring Boot 3, a migration of the Java Development Kit from JDK 8 to JDK 21, the removal of
+These changes mainly include an upgrade from Spring Boot 2 to Spring Boot 4, a migration of the Java Development Kit from JDK 8 to JDK 25, the removal of
 WAR-based packaging, and the addition of connector support exposed as a web service.
+
+### JDK Requirements
+
+ARender 2026 is compiled with **JDK 17** due to GWT (Google Web Toolkit) compilation constraints. However, ARender is fully qualified and tested at runtime with **JDK 25**.
+
+**JDK 25 is the recommended JDK for deploying ARender in production.**
 
 ## Prerequisites
 Before starting the migration of ARender's UI component, ensure you meet the following prerequisites:
@@ -67,12 +73,12 @@ $> ./removeService.sh
 
 
 * **Install Rendition Version 2026**: Follow the detailed installation instructions in the official documentation, 
-  available [here](/docs/arender/installation/standalone/rendition). This documentation will guide you 
+  available [here](/docs/arender/installation/standalone/rendition/install). This documentation will guide you 
   through the Version 2026 installation process.
 
 * **Transfer Properties**: Once ARender Rendition Version 2026 is installed, you will need to transfer the properties and 
   configurations from your current Version 2023 installation to the new one. To do this, refer to the list of property 
-  changes listed [here](/docs/arender/guides/upgrade/2023_to_2026/rendition). Ensure that all necessary 
+  changes listed [here](/docs/arender/guides/upgrade/2023.x_to_2026.x/rendition). Ensure that all necessary 
   configurations are correctly migrated to Version 2026.
 
 * **Configure ARender Rendition Version 2026**: After transferring the properties, you can configure ARender Rendition 
@@ -93,7 +99,7 @@ installation to Version 2026:
 
 * **Transfer Properties**: Once ARender UI Version 2026 is installed, you will need to transfer the properties and 
   configurations from your current Version 2023 installation to the new one. To do this, refer to the list of property 
-  changes listed [here](/docs/arender/guides/upgrade/2023_to_2026/web-ui) to ensure that all necessary 
+  changes listed [here](/docs/arender/guides/upgrade/2023.x_to_2026.x/web-ui) to ensure that all necessary 
   configurations are correctly migrated to Version 2026.
 
 * **Configuring ARender UI Version 2026**: After transferring the properties, you can customize ARender UI Version 2026 
