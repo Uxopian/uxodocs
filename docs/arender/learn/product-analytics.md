@@ -1,10 +1,10 @@
 ---
 title: "Product Analytics"
 last_update:
-  date: '2026-03-12T20:43:52.809Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
 sidebar_position: 3
-content_hash: 3fb9f8e1460333e1c00f4bb60e450c2b020cc4faecaf4bb8227c625c927a73b5
+content_hash: 6a68c234af33011116edea91454a30f4c99e49a1e94d5f30dbca9344bd2450ad
 ---
 
 ## What is Product Analytics in ARender?
@@ -85,4 +85,4 @@ For proper functioning of the Product Analytics, ensure that the URL https://api
 users machine.
 
 To disable Product Analytics, set the property **arender.data.analytics.enabled** to false in the configuration settings
-(More information [here](/docs/arender/guides/configurations/web-ui/properties/full-config#arender)).
+(More information [here](../../guides/configurations/web-ui/properties/full-config#arender)).

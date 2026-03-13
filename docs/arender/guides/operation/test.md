@@ -2,9 +2,9 @@
 title: Behaviour testing
 sidebar_position: 4
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
-content_hash: b4784778759dc7c524fda92d60e0031f5bee2d4cceb028d70608f80546d2a83c
+content_hash: 92f6435eb4ee347cf035f501cbfa6fa960cab57484f96bfc2712c17274a4dd6a
 ---
 
 This chapter is meant to check if ARender is working as expected. The
@@ -13,7 +13,7 @@ well as continuously to supervise.
 
 ## Rendition server
 
-The easiest way to validate ARender Rendition installation is to check the health page, [see post installation documentation](/docs/arender/installation/standalone/rendition/verification).
+The easiest way to validate ARender Rendition installation is to check the health page, [see post installation documentation](../../../installation/standalone/rendition/verification).
 
 ## Presentation server
 

@@ -2,9 +2,9 @@
 title: Presentation server
 sidebar_position: 3
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
-content_hash: 8607ab158ebd41c996c2de907dbcbc2118b443cbb6666086aa59497ecfa12b71
+content_hash: 551886f500e078cab9e57c639a8f469ec67e543ddfc5183bba39fd9ebeb32531
 ---
 
 ## Configuration
@@ -18,9 +18,12 @@ All properties can be set with environment variables by following the next rules
 - any ARender profile properties must be prefixed by `"ARENDER_"`
 - any ARender server properties must be prefixed by `"ARENDERSRV_"`
 
-preference.color.mode -> ARENDER_COLOR_PREFERENCE
+Examples:
 
+```
+preference.color.mode -> ARENDER_COLOR_PREFERENCE
 arender.server.rendition.hosts -> ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS
+```
 
 ### By volumes
 
@@ -32,8 +35,8 @@ arender.server.rendition.hosts -> ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS
 
 See documentation:
 
-- [Profile](/docs/arender/guides/configurations/web-ui/visual/profile)
-- [ARender front configuration properties list](/docs/arender/guides/configurations/web-ui/properties/full-config)
+- [Profile](../../../guides/configurations/web-ui/visual/profile)
+- [ARender front configuration properties list](../../../guides/configurations/web-ui/properties/full-config)
 
 #### Server
 

@@ -2,9 +2,9 @@
 title: Configuration
 sidebar_position: 3
 last_update:
-  date: '2026-03-12T20:43:52.809Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
-content_hash: 99fcac7924930f4babc8e22a4e4741b8d35c2da51e81607c1fb5af1b999f7efc
+content_hash: b2d558ae2c0f99924f50cb4b2adc4632b32c3c821a6656b830f4c2a4851e7b7b
 ---
 
 import Tabs from '@theme/Tabs';
@@ -94,7 +94,7 @@ using:
 
 #### Configuration
 
-```propertiespertiesperties
+```properties
 default.document.path.startup.clear=true
 ```
 
@@ -112,7 +112,6 @@ temp:
       expiration:
         time: 1
         unit: DAYS
-
 ```
 
 | Property | Description                                                                     |
@@ -183,7 +182,7 @@ Make sure the auto-detection property is disabled (this is the default setting).
 Specify each Rendition host in the Web-UI server configuration. The distribution will be managed based on the health of
 the Renditions.
 
-Configuration details can be found on the dedicated [page](/docs/arender/installation/standalone/web-ui/configuration).
+Configuration details can be found on the dedicated [page](../../web-ui/configuration).
 
 #### For Shared Cache Directories Among Several Renditions {#SharedCache}
 
@@ -260,7 +259,7 @@ arender.server.rendition.hosts=LOAD_BALANCER_HOST
 
 If there’s no Load Balancer, specify each Rendition host in the Web-UI server configuration. The distribution will be managed according to the Renditions' health.
 
-Detailed configuration can be found on the dedicated [page](/docs/arender/installation/standalone/web-ui/configuration).
+Detailed configuration can be found on the dedicated [page](../../web-ui/configuration).
 
 ## Network File System (NFS) Configuration
 

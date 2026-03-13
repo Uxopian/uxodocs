@@ -2,16 +2,16 @@
 title: Save recomposed document
 sidebar_position: 24
 last_update:
-  date: '2026-03-12T20:43:52.809Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
-content_hash: 9fb9074151f9d853ec6fc0a871b47e12846078c730cadc34bbf35f689af7accf
+content_hash: 9496c572093b7a543a31538616af38162c1a81dadeed9599a1ec1034c69ab1b1
 ---
 
 ## Prerequisite
 
 Below you will find a configuration with properties modification.
 
-Be sure to read before the chapter : [Web-UI configuration guide](/docs/arender/installation/standalone/web-ui/configuration).
+Be sure to read before the chapter : [Web-UI configuration guide](../../../installation/standalone/web-ui/configuration).
 
 Moreover, in order to save new document with ARender you need to
 activate the documentBuilder functionality as below:
