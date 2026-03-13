@@ -1,10 +1,10 @@
 ---
 title: Overview
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 4a9d7cc687ec85818b3d63ad172fc3ef72c141eb95204fe52451a300f8eac110
+content_hash: 8fab02927ba578153e80e4fbfc6f0ac948daf58f6665f2011e39ecb892ee14d3
 ---
 ARender can be deployed using **three distinct architectures**. Each has its own trade-offs and prerequisites.  
 Choose the mode that best fits your infrastructure, operational constraints, and scale requirements.
@@ -34,7 +34,7 @@ Each component is installed and managed independently — which means :
 
 👉 _Recommended for on-premise legacy setups._
 
-<a href="/docs/arender/installation/standalone/rendition/requirements" class="btn-link">Classic installation guide</a>
+<a href="../standalone/rendition/requirements" class="btn-link">Classic installation guide</a>
 
 ---
 
@@ -60,7 +60,7 @@ In Docker mode, ARender is packaged into lightweight containers:
 
 👉 _Good for local testing, small deployments, or environments without cluster infrastructure._
 
-<a href="/docs/arender/installation/docker/overview" class="btn-link">Docker deployment guide</a>
+<a href="../docker/overview" class="btn-link">Docker deployment guide</a>
 
 ---
 
@@ -80,7 +80,7 @@ Kubernetes mode deploys ARender within a container orchestrator — ideal for pr
 
 👉 _Recommended for scalable, resilient deployments in production or cloud environments._
 
-<a href="/docs/arender/installation/kubernetes/overview" class="btn-link">Kubernetes deployment guide</a>
+<a href="../kubernetes/overview" class="btn-link">Kubernetes deployment guide</a>
 
 ---
 

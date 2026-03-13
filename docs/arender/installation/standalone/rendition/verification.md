@@ -2,9 +2,9 @@
 title: Check
 sidebar_position: 5
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: 6d247cded22ccc4cafccd503d77357e04f11c4faba78888a04778a05828e0008
+content_hash: 52c02ec3962ae49a41cc6754cde94d71ab403448d55104d2e57459414ec4d131
 ---
 
 Once the server is starting, you can check the URL
@@ -20,4 +20,4 @@ It may happen that not all services appear when rendition does not
 still completely started, in this case you have to wait a few minutes.
 
 If some services or features are incomplete or not started,
-thank you kindly check [the prerequisites of the rendition](/docs/arender/installation/standalone/rendition/requirements/).
+thank you kindly check [the prerequisites of the rendition](../requirements/).

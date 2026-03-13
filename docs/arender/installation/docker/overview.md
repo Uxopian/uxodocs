@@ -1,10 +1,10 @@
 ---
 title: "Installation"
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: d3c10c8d1991dea0fffaeb0468dd8ffe9b96b166d5d7f6993d2d5f9017f1d968
+content_hash: d3d07bc60a3a840095e70294adad20c9cb7b6e35acf06538a042b0f12dd6575f
 ---
 
 ARender can be deployed in **Docker Mode**, where each component of the platform is packaged into lightweight OCI-compliant containers.  
@@ -31,7 +31,7 @@ Docker Mode is **not suitable** for:
 - Auto-restart policies or rolling updates
 
 If you need HA or scalability, see:  
-👉 [Kubernetes Deployment](/docs/arender/installation/kubernetes/overview/)
+👉 [Kubernetes Deployment](../../kubernetes/overview/)
 
 ---
 

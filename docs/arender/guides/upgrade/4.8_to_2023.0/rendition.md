@@ -1,9 +1,9 @@
 ---
 title: Rendition changes
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: f0c9470a97aa196e336e492d5d81faf33aafea24b4a6041811a2c7d404e2e6df
+content_hash: f0e1a75edf88e4048d71e610b0d636b3667be987d3a691a202f4f30c688df1db
 ---
 
 ## Document Service Broker (RenditionEngine module)
@@ -87,7 +87,7 @@ Connections are still configurable with new properties located in the applicatio
 
 The mail configuration properties have actually moved to application.properties of Document Service Broker
 
-How to configure mime type has changed, for more information see [there](/docs/arender/learn/how-to/addmimetypes).
+How to configure mime type has changed, for more information see [there](../../../../learn/how-to/addmimetypes).
 
 ### Properties in application.yaml file
 

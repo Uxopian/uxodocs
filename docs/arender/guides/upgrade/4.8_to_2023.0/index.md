@@ -2,10 +2,10 @@
 sidebar_position: 1
 title: "Overview"
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
 icon: mdi-database-arrow-right-outline
-content_hash: 769b17a31201f16f00291086ddd5c4b31e45dcf132d2d867e8c840d17b852e3e
+content_hash: 454e094ee6f9b38c811b57c128d461d532872d8a2acaa40c0ba5302190844fe6
 ---
 
 import Tabs from '@theme/Tabs';
@@ -70,17 +70,17 @@ $> ./removeService.sh
 
 
 * **Install Rendition Version 2023**: Follow the detailed installation instructions in the official documentation, 
-  available [here](/docs/arender/installation/standalone/rendition/install). This documentation will guide you 
+  available [here](../../../installation/standalone/rendition/install). This documentation will guide you 
   through the Version 2023 installation process.
 
 * **Transfer Properties**: Once ARender Rendition Version 2023 is installed, you will need to transfer the properties and 
   configurations from your current Version 4 installation to the new one. To do this, refer to the list of property 
-  changes listed [here](/docs/arender/guides/upgrade/4.8_to_2023.0/rendition). Ensure that all necessary 
+  changes listed [here](rendition). Ensure that all necessary 
   configurations are correctly migrated to Version 2023.
 
 * **Configure ARender Rendition Version 2023**: After transferring the properties, you can configure ARender Rendition 
   Version 2023 according to your specific needs using the documentation 
-  [here](/docs/arender/installation/standalone/rendition/configuration).
+  [here](../../../installation/standalone/rendition/configuration).
 
 ### Migrating ARender UI Version 4 to Version 2023
 
@@ -98,14 +98,14 @@ installation to Version 2023:
   UI Version 4 is deployed. This will ensure a smooth transition to Version 2023.
 
 * **Install ARender WEB-UI Version 2023**: Follow the detailed installation instructions for ARender UI Version 2023 in the 
-  official documentation, available [here](/docs/arender/installation/standalone/web-ui/standalone). 
+  official documentation, available [here](../../../installation/standalone/web-ui/standalone). 
   This documentation will guide you through the Version 2023 installation process.
 
 * **Transfer Properties**: Once ARender UI Version 2023 is installed, you will need to transfer the properties and 
   configurations from your current Version 4 installation to the new one. To do this, refer to the list of property 
-  changes listed [here](/docs/arender/guides/upgrade/4.8_to_2023.0/web-ui) to ensure that all necessary 
+  changes listed [here](web-ui) to ensure that all necessary 
   configurations are correctly migrated to Version 2023.
 
 * **Configuring ARender UI Version 2023**: After transferring the properties, you can customize ARender UI Version 2023 
   according to your specific requirements by following the documentation available
-  [here](/docs/arender/installation/standalone/web-ui/configuration).
+  [here](../../../installation/standalone/web-ui/configuration).

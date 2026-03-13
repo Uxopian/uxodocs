@@ -2,9 +2,9 @@
 title: Introduction
 sidebar_position: 2
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: d70ffe34421b52ade454a84e861f0408e8f2e00850a32f4e06d174a86441a2b5
+content_hash: 07572963b204b50ca79af486c0bc079b49baba8ba2dbeb1968c27dd260b6e4dd
 ---
 
 ### How does ARender work
@@ -21,7 +21,7 @@ ARender is built on two components:
 - **ARender Rendition**: backend Java Server: serves the renditions of documents and many other services using a REST
   API to the Web-UI server.
 
-More information in the [architecture chapter](/docs/arender/learn/architecture/ecm-architecture).
+More information in the [architecture chapter](../../learn/architecture/ecm-architecture).
 
 ### How does the rendering of a document in ARender work
 
@@ -73,13 +73,13 @@ integrations include:
 - [FlowerDocs](https://flowerdocs.com/).
 
 We also support various other Document Management Systems (DMS), and you can find the complete list of existing
-connectors [here](/docs/arender/what-is-arender/integrations)
+connectors [here](../integrations)
 
 #### Tailor-Made solutions for your unique requirements:
 
 If your preferred DMS is not on the list or if you have specific requirements, ARender provides the flexibility to
 create your custom connector. Visit our dedicated documentation for detailed guidance on creating your personalized
-connector: [documentation](/docs/arender/development/framework/loadADocument).
+connector: [documentation](../../development/framework/loadADocument).
 
 Empower your document management strategy with ARender’s versatile integrations and customizable solutions. Enhance
 collaboration, streamline workflows, and optimize your document-centric processes effortlessly.
