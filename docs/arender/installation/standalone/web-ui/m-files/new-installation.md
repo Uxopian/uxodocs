@@ -2,9 +2,9 @@
 title: New installation
 sidebar_position: 2
 last_update:
-  date: '2026-03-12T20:43:52.809Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
-content_hash: 21889e6ee0165b04b16acaa950bea616c1468ff4e747bf4630ec793b98ae98ac
+content_hash: 789d3e6c36e1c05e3a9a99e79857e33f0c909b9b74e068bf77f11ccd8b85837e
 ---
 
 Here we present the Web-UI installation in M-Files.
@@ -16,7 +16,7 @@ in an environment with:
 - M-Files
 - A Tomcat9 server
 - ARender Web-UI version
-- Have a Functional Rendering. So just follow this **[documentation](/docs/arender/installation/standalone/rendition/install)**.
+- Have a Functional Rendering. So just follow this **[documentation](../../../rendition/install)**.
 
 ## Steps to Configure the Rendition
 

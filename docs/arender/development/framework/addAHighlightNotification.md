@@ -1,17 +1,17 @@
 ---
 title: Add a highlight notification
 last_update:
-  date: '2026-03-12T20:43:52.809Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
-content_hash: 713e4fea174cc166fe8db64676e1054a984d3636c4a447a1218bb2e6b38c0b2a
+content_hash: 157c8d020d7cdca2b787d6cfd680544805085b1f7f7265c5e794316df3966d32
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The JavaScript API allows you to set up subscriptions to receive events during various actions on ARender (e.g., adding/removing notifications, rotating a page, or clicking on a hyperlink). This information is accessible <i class="ti-hand-point-right" /> <ins>[in the documentation](/docs/arender/development/apis/web-ui/javascript/annotation-js-api)</ins> <i class="ti-hand-point-left" ></i>
+The JavaScript API allows you to set up subscriptions to receive events during various actions on ARender (e.g., adding/removing notifications, rotating a page, or clicking on a hyperlink). This information is accessible <i class="ti-hand-point-right" /> <ins>[in the documentation](../../apis/web-ui/javascript/annotation-js-api)</ins> <i class="ti-hand-point-left" ></i>
 
-It is also possible to create highlight-type annotations directly from the host application, without doing so manually in ARender, using the **addAnnotation** function of the JavaScript API by following <i class="ti-hand-point-right" /> <ins>[these guidelines](/docs/arender/development/apis/web-ui/javascript/annotation-js-api#create-an-highlight-annotation)</ins> <i class="ti-hand-point-left" ></i>.
+It is also possible to create highlight-type annotations directly from the host application, without doing so manually in ARender, using the **addAnnotation** function of the JavaScript API by following <i class="ti-hand-point-right" /> <ins>[these guidelines](../../apis/web-ui/javascript/annotation-js-api#create-an-highlight-annotation)</ins> <i class="ti-hand-point-left" ></i>.
 
 To use this function from an application other than ARender, simply replace the window object in the documentation with the appropriate object based on the framework being used.
 

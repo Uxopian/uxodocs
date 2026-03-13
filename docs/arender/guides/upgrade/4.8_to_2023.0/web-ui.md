@@ -1,9 +1,9 @@
 ---
 title: Web-UI changes
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
-content_hash: 174ecf234238861da9f3a0dad247c194cb6fa3b5f7e3a61754f0af19a41e6fde
+content_hash: ddc48996c25b5c9486d4e6afeb3622764b86c6b0d606b717ce98c8e61b527306
 ---
 
 ## Properties
@@ -49,11 +49,11 @@ content_hash: 174ecf234238861da9f3a0dad247c194cb6fa3b5f7e3a61754f0af19a41e6fde
 | --------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | topPanel.section.file.buttons.beanNames | topPanel.section.left.buttons.beanNames                                                     | The list of widgets to define (XML bean names) for the left section of the toppanel                               |
 | topPanel.annotation.buttons.beanNames   | toolbar.annotation.buttons.beanNames                                                        | The list of widgets to define (XML bean names) for the annotation toolbar                                         |
-| topPanel.obfuscate                      | redactexplorer.redact                                                                       | Activate the redact text annotation button ([documentation](/docs/arender/features/redact)                        |
-| topPanel.obfuscateZone                  | redactexplorer.redactZone                                                                   | Activate the redact annotation zone button ([documentation](/docs/arender/features/redact)                        |
+| topPanel.obfuscate                      | redactexplorer.redact                                                                       | Activate the redact text annotation button ([documentation](../../../../features/redact)                        |
+| topPanel.obfuscateZone                  | redactexplorer.redactZone                                                                   | Activate the redact annotation zone button ([documentation](../../../../features/redact)                        |
 | toolbar.lockedObfuscate                 | toolbar.redact.locked                                                                       | All redact annotations will become locked once saved, and can no longer be edited                                 |
 | annotation.canHideObfuscate             | annotation.can.hide.redact                                                                  | All redact annotations can be hidden using the regular hide annotations button                                    |
-| topPanel.imageProcessMenu               | topPanel.imageProcessMenu.brightness.enabled and topPanel.imageProcessMenu.contrast.enabled | Activate the brightness slider / Activate the contrast slider ([documentation](/docs/arender/features/processing) |
+| topPanel.imageProcessMenu               | topPanel.imageProcessMenu.brightness.enabled and topPanel.imageProcessMenu.contrast.enabled | Activate the brightness slider / Activate the contrast slider ([documentation](../../../../features/processing) |
 
 ### Server properties changes (arender-server-custom-vanilla.properties)
 

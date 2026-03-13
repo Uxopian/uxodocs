@@ -2,9 +2,9 @@
 title: Configuration
 sidebar_position: 2
 last_update:
-  date: '2026-03-12T20:43:52.809Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
-content_hash: df4fad8b34e1535558d4f6768376d852089262cf058e0fc44bc39c816036b16e
+content_hash: c9aaa0eda453b596a58ace617d988382f3db644251f80d8bde40e0532d512698
 ---
 
 ## Configuration files of ARender Web-UI
@@ -13,7 +13,7 @@ content_hash: df4fad8b34e1535558d4f6768376d852089262cf058e0fc44bc39c816036b16e
 
 | File name                             | Details                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| arender-custom-client.properties      | Custom **ARender client properties** file. Available properties are listed inside. Uncomment and modify the properties value to use. More information here: [Profile](/docs/arender/guides/configurations/web-ui/visual/profile)                                                                        |
+| arender-custom-client.properties      | Custom **ARender client properties** file. Available properties are listed inside. Uncomment and modify the properties value to use. More information here: [Profile](../../../../guides/configurations/web-ui/visual/profile)                                                                        |
 | arender-custom-server.properties      | Custom **ARender server properties** file. Available properties are listed inside. Uncomment and modify the properties value to use.                                                                                                                                                                    |
 | arender-custom-integration.xml        | Custom **Spring Bean XML** file. Add your custom XML **client configuration** in this file.                                                                                                                                                                                                             |
 | arender-custom-server-integration.xml | Custom **Spring Bean XML** file. Add your custom XML **server configuration** in this file.                                                                                                                                                                                                             |

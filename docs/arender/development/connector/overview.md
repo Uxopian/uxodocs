@@ -1,10 +1,10 @@
 ---
 title: Overview
 last_update:
-  date: '2026-03-12T22:01:46.067Z'
+  date: '2026-03-13T09:40:04.584Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 2ed2dc0feadd826ecf13ffab71aa08b31dda820e6fe9761e610a7d0344b75554
+content_hash: c1379f24675fbd82d0b5c5735ca33cf178a548ed01276b94745b9cd8cca238f4
 ---
 
 import Tabs from '@theme/Tabs';
@@ -42,7 +42,7 @@ As shown in the above diagram, the connector will have to be deployed in N3 WEB-
 ## Part 1: How ARender operates with a connector?
 ARender serves as a document rendering tool, capable of integration with various Document Management Systems (DMS) 
 through custom connectors (refer to 
-[the list of existing connectors](/docs/arender/what-is-arender/integrations).
+[the list of existing connectors](../../../what-is-arender/integrations)).
 
 A connector empowers ARender to connect with a specific DMS for document retrieval and display. The process unfolds as 
 follows:
@@ -127,7 +127,7 @@ InputStream getInputStream() throws IOException;
 
 The implementation of this interface should define the service call for retrieving the document.
 
-* Example inline implementation: [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-hmi/arender-sample-hmi-connector/src/main/java/com/arondor/arender/sample/connector/documentaccessors/SampleDocumentAccessor.java).
+* Example inline implementation: [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/src/main/java/com/arondor/arender/sample/connector/documentaccessors/SampleDocumentAccessor.java).
 
 #### URLParser
 Subsequently, the retrieval of necessary information for DocumentAccessor to retrieve the document must be obtained from
@@ -149,20 +149,20 @@ DocumentId parse(DocumentService documentService, ServletContext application, Ht
 ```
 The implementation of this method should return the ID of the document to be displayed in the context of ARender.
 
-* Example inline implementation: [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-hmi/arender-sample-hmi-connector/src/main/java/com/arondor/arender/sample/connector/urlparsers/SampleURLParser.java).
+* Example inline implementation: [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/src/main/java/com/arondor/arender/sample/connector/urlparsers/SampleURLParser.java).
 
 ## Part 3: ARender configuration
 * Build the JAR package via Maven,
 
-```warning
+:::warning
 The JAR file should incorporate the essential dependencies required for the connector to seamlessly integrate with the 
 Document Management System (GED).
 
 Similarly, the pom.xml file needs to include the necessary ARender dependencies to ensure the product functions 
 correctly with the specified version.
 For an online example, please check
-[this page](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-hmi/arender-sample-hmi-connector/pom.xml#L19)
-```
+[this page](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/pom.xml#L19)
+:::
 
 ```bash
 $> mvn clean install
@@ -177,17 +177,15 @@ $> mvn clean install
 <bean id="sampleURLParser" class="com.arondor.arender.sample.connector.urlparsers.SampleURLParser" scope="prototype">
 </bean>
 ```
-* Add the new connector, **sampleUrlParser**, in the list of connectors by updating the **configurations/arender-custom-server.properties** 
-  file like below:
+* Add the new connector, **sampleUrlParser**, in the list of connectors by updating the **configurations/arender-custom-server.properties** file like below:
   
-```cfg
+```properties
 arender.server.url.parsers.beanNames=sampleUrlParser,DefaultURLParser,DocumentIdURLParser,FileattachmentURLParser,ExternalBeanURLParser,AlterContentParser,FallbackURLParser
 ```
 </TabItem>
 
 <TabItem value="docker" label="Docker">
-* Configure the use of the new URLParser developed as a bean by creating a file named 
-  **arender-custom-server-integration.xml**, with the content below:
+* Configure the use of the new URLParser developed as a bean by creating a file named **arender-custom-server-integration.xml**, with the content below:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans default-lazy-init="true" default-autowire="no"
@@ -200,8 +198,7 @@ arender.server.url.parsers.beanNames=sampleUrlParser,DefaultURLParser,DocumentId
   </bean>
 </beans>
 ```
-* Add the new connector, **sampleUrlParser**, in the list of connectors by creating a file named 
-  **arender-custom-server.properties**, with the content below:
+* Add the new connector, **sampleUrlParser**, in the list of connectors by creating a file named **arender-custom-server.properties**, with the content below:
 ```properties
 arender.server.url.parsers.beanNames=sampleUrlParser,DefaultURLParser,DocumentIdURLParser,FileattachmentURLParser,ExternalBeanURLParser,AlterContentParser,FallbackURLParser
 ```
@@ -231,7 +228,7 @@ To test, follow these steps:
 
 ### Debugging
 
-Refer to [this dedicated ARender logs page](/docs/arender/guides/exploitation/logs) for debugging information.
+Refer to [this dedicated ARender logs page](../../../guides/exploitation/logs) for debugging information.
 
 ## Going further - Annotation management
 Without specific configuration, ARender will store annotations on the ARender WEB-UI server's file system. This is not 
@@ -249,7 +246,7 @@ Therefore, you have two options:
 
 #### Part 5.1: Create a new SerializedAnnotationContent class
 
-An online sample is available [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-hmi/arender-sample-hmi-connector/src/main/java/com/arondor/arender/sample/connector/annotationaccessors/SampleSerializedAnnotationContent.java).
+An online sample is available [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/src/main/java/com/arondor/arender/sample/connector/annotationaccessors/SampleSerializedAnnotationContent.java).
 
 When creating your own annotation connector, you need to define how to retrieve and update annotations. To do this, 
 ARender provides an API that defines two methods to implement: **get()** and **update(..)**.
@@ -330,7 +327,7 @@ public void update(InputStream inputStream)
 
 #### Part 5.2: Create a new SerializedAnnotationContentAccessor class
 
-An online sample is available [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-hmi/arender-sample-hmi-connector/src/main/java/com/arondor/arender/sample/connector/annotationaccessors/SampleSerializedAnnotationContentAccessor.java).
+An online sample is available [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/src/main/java/com/arondor/arender/sample/connector/annotationaccessors/SampleSerializedAnnotationContentAccessor.java).
 
 Note that you need to use the class defined above (SampleSerializedAnnotationContent) in the implementation, as 
 detailed below:
@@ -363,15 +360,15 @@ public class SampleSerializedAnnotationContentAccessor implements SerializedAnno
 ### Part 6: ARender configuration
 * Build the JAR package via Maven.
 
-```warning
+:::warning
 The JAR file should incorporate the essential dependencies required for the connector to seamlessly integrate with the
 Document Management System (GED).
 
 Similarly, the pom.xml file needs to include the necessary ARender dependencies to ensure the product functions
 correctly with the specified version.
 For an online example, please check
-[this page](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-hmi/arender-sample-hmi-connector/pom.xml#L19)
-```
+[this page](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/pom.xml#L19)
+:::
 
 ```bash
 $> mvn clean install
@@ -422,4 +419,4 @@ To test, follow these steps:
   * **The annotation should be displayed on the document after saving or refreshing the page**.
 
 #### Debugging
-Refer to [this dedicated ARender logs page](/docs/arender/guides/exploitation/logs) for debugging information.
+Refer to [this dedicated ARender logs page](../../../guides/exploitation/logs) for debugging information.

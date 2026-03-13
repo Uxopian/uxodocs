@@ -20,4 +20,4 @@ It may happen that not all services appear when rendition does not
 still completely started, in this case you have to wait a few minutes.
 
 If some services or features are incomplete or not started,
-thank you kindly check [the prerequisites of the rendition](/docs/arender/installation/standalone/rendition/requirements/).
+thank you kindly check [the prerequisites of the rendition](../requirements/).
