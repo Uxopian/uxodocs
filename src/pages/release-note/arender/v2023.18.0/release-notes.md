@@ -10,6 +10,8 @@ _build:
   list: never
 ---
 
+import DocLink from '@site/src/components/DocLink';
+
 > **Upgrade note:** See [v2023.18.0](../upgrade-notes) for detailed instructions.
 
 ## Overview
@@ -41,7 +43,7 @@ Printing or downloading a document after rotating pages no longer requires the "
 
 Note: these properties require that page rotation saving is already enabled via the pre-existing `visualization.rotation.save.enabled=true` property.
 Related issues: [AR-17468](https://arondor.atlassian.net/browse/AR-17468)
-More information: [Top panel configuration](/docs/arender/guides/configurations/web-ui/properties/toppanel/)
+More information: <DocLink version="v2023.18.0" product="arender" to="guides/configurations/web-ui/properties/toppanel/">Top panel configuration</DocLink>
 
 > ⚠️ **Do not enable this feature in production yet.**
 > The current implementation requires end users to choose whether to include rotations — both an extra download button appears in the UI for downloads, and a checkbox must be checked for printing. This is not the intended final experience. A follow-up improvement is planned for the next release: when `topPanel.documentMenu.downloadRotation=true` is set, the standard "Download as PDF" action will automatically include saved rotations without any extra button; when `print.includeRotations=true` is set, printing will automatically include saved rotations without any checkbox. We recommend waiting for that release before exposing this behaviour to end users.
@@ -57,7 +59,7 @@ Two new properties allow setting which annotation types are pre-selected in the 
 
 The filter is applied immediately on document open, without requiring any user interaction.
 Related issues: [AR-16077](https://arondor.atlassian.net/browse/AR-16077)
-More information: [Annotation properties](/docs/arender/guides/configurations/web-ui/properties/annotation/)
+More information: <DocLink version="v2023.18.0" product="arender" to="guides/configurations/web-ui/properties/annotation/">Annotation properties</DocLink>
 
 **Missing Excel macro-enabled file type icons**
 Added missing SVG icons for XLSM (Excel macro-enabled workbook) and XLTM (Excel macro-enabled template) file types. These were previously generating 404 errors in browser monitoring tools.
@@ -76,22 +78,22 @@ Integrators using DocBuilder mode can now trigger the document save programmatic
 
 This enables external buttons or workflows to initiate the save action without user intervention.
 Related issues: [AR-15793](https://arondor.atlassian.net/browse/AR-15793)
-More information: [DocBuilder JavaScript API](/docs/arender/development/apis/web-ui/javascript/documentbuilder-js-api/)
+More information: <DocLink version="v2023.18.0" product="arender" to="development/apis/web-ui/javascript/documentbuilder-js-api/">DocBuilder JavaScript API</DocLink>
 
 **JavaScript hooks for print and download events**
 New JS API hooks allow integrators to be notified when a user prints or downloads a document (including via the JS API, DocBuilder buttons, or error-state downloads). This enables integration with audit trail systems to meet regulatory compliance requirements.
 Related issues: [AR-18119](https://arondor.atlassian.net/browse/AR-18119)
-More information: [Print JavaScript API](/docs/arender/development/apis/web-ui/javascript/print-js-api/), [Download JavaScript API](/docs/arender/development/apis/web-ui/javascript/download-js-api/)
+More information: <DocLink version="v2023.18.0" product="arender" to="development/apis/web-ui/javascript/print-js-api/">Print JavaScript API</DocLink>, <DocLink version="v2023.18.0" product="arender" to="development/apis/web-ui/javascript/download-js-api/">Download JavaScript API</DocLink>
 
 **Integrator profile for configuration override**
 A dedicated Spring active profile (`integrator`) is now provided for custom connector integrators. By setting `spring.profiles.active=integrator` (or `spring.profiles.include=integrator`), integrators can override ARender and Spring Boot default configuration without risk of property file conflicts.
 Related issues: [AR-18126](https://arondor.atlassian.net/browse/AR-18126)
-More information: [Spring configuration](/docs/arender/guides/configurations/web-ui/server/spring-configuration/)
+More information: <DocLink version="v2023.18.0" product="arender" to="guides/configurations/web-ui/server/spring-configuration/">Spring configuration</DocLink>
 
 **FileNet multi-objectStore document support via VSID**
 The FileNet parser now natively handles opening multiple documents using their VSIDs even when those documents reside in different objectStores, simplifying multi-document workflows in FileNet environments.
 Related issues: [AR-17170](https://arondor.atlassian.net/browse/AR-17170)
-More information: [FileNet P8 connector](/docs/arender/guides/configurations/web-ui/connectors/filenetp8/)
+More information: <DocLink version="v2023.18.0" product="arender" to="guides/configurations/web-ui/connectors/filenetp8/">FileNet P8 connector</DocLink>
 
 ## Exploitation Perspective
 
