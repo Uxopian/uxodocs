@@ -1,9 +1,9 @@
 ---
 title: Redact
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: 12acc28991cbbd3192e6b5a70b5a6d33cb0f571165863272a2939f205b88c150
+content_hash: 7ab0ff5bb7efcb2f5e9fe493b3d5c7f4191e532a1a137b4756313debacbf23c8
 ---
 
 ## Activate true redaction
@@ -14,11 +14,11 @@ If you need to deactivate this behaviour you need to use true redact, i.e. confi
 
 - Activate the fetch of redaction before the image generation:
 
-```properties title="~/configurations/arender-custom-server.properties"
+```properties title="configurations/arender-custom-server.properties"
 arender.server.process.annotations.rendition=true
 ```
 
-- Implement the **AuthenticationServiceProvider** interface. Example available on [GitHub](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-hmi/arender-sample-hmi-connector/src/main/java/com/arondor/arender/sample/connector/authentication/service/CustomAuthenticationServiceProvider.java)
+- Implement the **AuthenticationServiceProvider** interface. Example available on [GitHub](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/src/main/java/com/arondor/arender/sample/connector/authentication/service/CustomAuthenticationServiceProvider.java)
 
 ## Default behaviour
 
@@ -46,7 +46,7 @@ The fourth allows you to redact the whole page.
 
 Two buttons of redactions advanced creation are available.
 
-```properties
+```properties title="configurations/arender-custom-client.properties"
 redactexplorer.manualInput=true
 redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
@@ -66,7 +66,7 @@ By default the "With reason" radio button is selected.
 redactexplorer.redact.with.reasons=true
 ```
 
-The reasons are defined in the configuration files, it is possible to modify them as well as the default reasons as explained in [the dedicated documentation](/docs/arender/learn/how-to/redact-reasons)
+The reasons are defined in the configuration files, it is possible to modify them as well as the default reasons as explained in [the dedicated documentation](../../learn/how-to/redact-reasons)
 
 :::warning
 By default, only **admin user** can save redacts
@@ -83,7 +83,7 @@ To test please:
 
 Advanced redact panel offers two buttons, manual input and rules.
 
-```properties
+```properties title="configurations/arender-custom-client.properties"
 redactexplorer.manualInput=true
 redactexplorer.rules=true
 redactexplorer.redact.with.reasons=true
@@ -108,7 +108,7 @@ If you want to refine your selection, you can open the results panel:
 ### Rules
 
 The rules option allows you to select one or more rules and apply them.
-These rules are defined in the configuration files as explained in the [dedicated documentation](/docs/arender/learn/how-to/annotation-creation-rule)
+These rules are defined in the configuration files as explained in the [dedicated documentation](../../learn/how-to/annotation-creation-rule)
 
 Once the rules are selected, trigger the search. It will show a preview of the results in the document.
 If you want to refine your selection, you can open the results panel:

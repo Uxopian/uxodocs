@@ -2,9 +2,9 @@
 title: Installation in Share
 sidebar_position: 2
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: 7e7e153dd5fdd921c6b6771b6f5dab6450589e141c73aaa2a428b2da9a6ab96d
+content_hash: 065670caeae21e2a89eb656c4b2b6bc5e1e6a19c3b2df57fbb04349a2a9d9176
 ---
 
 We present here the continuation of the installation of the Web-UI, in the Share module of Alfresco.
@@ -42,4 +42,4 @@ You can now start the alfresco server and try to open a file stored in it.
 
 ![alfresco](/img/arender/alfresco/alfresco-04.png)
 
-You have finished the quick installation of ARender for Alfresco Share. To go further, go to the page here : **[Advanced configuration](/docs/arender/guides/configurations/web-ui/connectors/alfresco/features-share)**
+You have finished the quick installation of ARender for Alfresco Share. To go further, go to the page here : **[Advanced configuration](../../../../../guides/configurations/web-ui/connectors/alfresco/features-share)**

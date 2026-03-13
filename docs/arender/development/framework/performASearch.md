@@ -1,15 +1,15 @@
 ---
 title: Perform a search
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: a5a7dea7e4c2f1b2971b3bd8fae9eccf5dc6aa98bb8d3c9a0ed059fee4b5ab80
+content_hash: 6dc81246447fb8ec3210b7e9f1b610ca07f5e9ce483f55fac350b88201e9eb1d
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The JavaScript API functions <i class="ti-hand-point-right" /> <ins>[described here](/docs/arender/development/apis/web-ui/javascript/search-js-api)</ins> <i class="ti-hand-point-left" ></i> allow you to launch a textual search on an open document, to highlight and position yourself on specific text elements on the ARender viewer.
+The JavaScript API functions <i class="ti-hand-point-right" /> <ins>[described here](../../apis/web-ui/javascript/search-js-api)</ins> <i class="ti-hand-point-left" ></i> allow you to launch a textual search on an open document, to highlight and position yourself on specific text elements on the ARender viewer.
 
 To use them from an application other than ARender, simply make the call from the iframe's `window` object. The code to access this object will vary slightly depending on the framework used. Below is an example of a simple search for the term "ARender." To navigate to the next result, you can call the same function again. For more information on simple search and advanced search usage, refer to the documentation mentioned above.
 

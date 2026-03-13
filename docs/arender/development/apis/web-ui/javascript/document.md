@@ -1,9 +1,9 @@
 ---
 title: Opening a document
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: c57e1eefe2758b734aefa7897be06fec23b20d9b1007b6408ee38ca02a2631ac
+content_hash: 4bf2d366cfe4d06fcd896a14ebb782c35a157b5f98c0f3f2288b953a908ac8f9
 ---
 
 ## Opening documents
@@ -122,4 +122,4 @@ In the example above, **loadDocument** returns an ID (in the form of a string st
 
 ## Multiple document opening
 
-ARender provides the possibility to open several documents by loading a list of documents which will be provided via JSON in order to define the tree structure. All the technical details can be found [here](/docs/arender/learn/how-to/composite-accessors)
+ARender provides the possibility to open several documents by loading a list of documents which will be provided via JSON in order to define the tree structure. All the technical details can be found [here](../../../../../learn/how-to/composite-accessors)
