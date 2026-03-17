@@ -1,0 +1,455 @@
+/* ========================================
+   ARENDER DOCS - SCOPED STYLES
+   Complete port of the standalone ARender Docusaurus theme.
+   Applied only to ARender doc pages
+   (identified by .plugin-id-arender on <html>).
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ================================================================
+   LIGHT THEME VARIABLES
+   ================================================================ */
+
+.plugin-id-arender {
+    /* Primary palette - deep professional blue */
+    --ifm-color-primary: #1e40af;
+    --ifm-color-primary-dark: #1e3a8a;
+    --ifm-color-primary-darker: #1a3380;
+    --ifm-color-primary-darkest: #172e6e;
+    --ifm-color-primary-light: #2563eb;
+    --ifm-color-primary-lighter: #3b82f6;
+    --ifm-color-primary-lightest: #60a5fa;
+
+    /* Typography */
+    --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, sans-serif;
+    --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', 'Cascadia Code',
+        Consolas, monospace;
+    --ifm-font-size-base: 16px;
+    --ifm-line-height-base: 1.7;
+    --ifm-heading-font-weight: 600;
+
+    /* Code */
+    --ifm-code-font-size: 90%;
+    --ifm-code-padding-vertical: 0.1rem;
+    --ifm-code-padding-horizontal: 0.375rem;
+    --ifm-code-border-radius: 3px;
+    --docusaurus-highlighted-code-line-bg: rgba(30, 64, 175, 0.08);
+    --prism-background-color: #f8fafc;
+
+    /* Layout */
+    --ifm-global-radius: 6px;
+    --ifm-global-shadow-lw: 0 1px 3px rgba(0, 0, 0, 0.06);
+
+    /* Surfaces and borders */
+    --ar-surface: #f8fafc;
+    --ar-border: #e2e8f0;
+    --ar-text-secondary: #64748b;
+
+    /* Table */
+    --ifm-table-border-color: var(--ar-border);
+    --ifm-table-head-background: var(--ar-surface);
+    --ifm-table-stripe-background: #fafbfc;
+
+    /* Sidebar */
+    --doc-sidebar-width: 300px;
+
+    /* No secondary nav */
+    --uxo-secondary-nav-height: 0px;
+}
+
+/* ================================================================
+   DARK THEME VARIABLES
+   ================================================================ */
+
+.plugin-id-arender[data-theme='dark'] {
+    --ifm-color-primary: #60a5fa;
+    --ifm-color-primary-dark: #3b82f6;
+    --ifm-color-primary-darker: #2563eb;
+    --ifm-color-primary-darkest: #1d4ed8;
+    --ifm-color-primary-light: #93bbfd;
+    --ifm-color-primary-lighter: #bfdbfe;
+    --ifm-color-primary-lightest: #dbeafe;
+
+    --docusaurus-highlighted-code-line-bg: rgba(96, 165, 250, 0.12);
+    --prism-background-color: #242526;
+
+    --ar-surface: #242526;
+    --ar-border: #3a3a3c;
+    --ar-text-secondary: #a1a1aa;
+
+    --ifm-table-border-color: var(--ar-border);
+    --ifm-table-head-background: #2a2a2c;
+    --ifm-table-stripe-background: #222224;
+}
+
+/* ================================================================
+   FORCE FONTS (some Infima rules bypass CSS variables)
+   ================================================================ */
+
+.plugin-id-arender body,
+.plugin-id-arender p,
+.plugin-id-arender li,
+.plugin-id-arender td,
+.plugin-id-arender th,
+.plugin-id-arender label,
+.plugin-id-arender input,
+.plugin-id-arender textarea,
+.plugin-id-arender select,
+.plugin-id-arender button,
+.plugin-id-arender .navbar,
+.plugin-id-arender .menu__link,
+.plugin-id-arender .breadcrumbs__link,
+.plugin-id-arender .pagination-nav__sublabel,
+.plugin-id-arender .pagination-nav__label,
+.plugin-id-arender .table-of-contents__link,
+.plugin-id-arender .markdown,
+.plugin-id-arender .theme-admonition,
+.plugin-id-arender h1,
+.plugin-id-arender h2,
+.plugin-id-arender h3,
+.plugin-id-arender h4,
+.plugin-id-arender h5,
+.plugin-id-arender h6 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, sans-serif !important;
+}
+
+.plugin-id-arender code,
+.plugin-id-arender pre,
+.plugin-id-arender .prism-code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code',
+        Consolas, monospace !important;
+}
+
+/* ================================================================
+   GLOBAL TYPOGRAPHY
+   ================================================================ */
+
+.plugin-id-arender h1 {
+    font-weight: 700 !important;
+    line-height: 1.25;
+}
+
+.plugin-id-arender h2 {
+    line-height: 1.3;
+}
+
+.plugin-id-arender h3,
+.plugin-id-arender h4 {
+    line-height: 1.35;
+}
+
+.plugin-id-arender .markdown p {
+    margin-bottom: 1rem;
+}
+
+/* ================================================================
+   INLINE CODE
+   ================================================================ */
+
+.plugin-id-arender code {
+    background-color: #f1f5f9;
+    border: none;
+}
+
+.plugin-id-arender[data-theme='dark'] code {
+    background-color: #2d2d2f;
+}
+
+/* ================================================================
+   CODE BLOCKS
+   ================================================================ */
+
+.plugin-id-arender .prism-code {
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.plugin-id-arender div[class^='codeBlockContainer'],
+.plugin-id-arender div[class*=' codeBlockContainer'] {
+    border: 1px solid var(--ar-border);
+    border-radius: var(--ifm-global-radius);
+    box-shadow: none;
+}
+
+.plugin-id-arender div[class^='codeBlockTitle'],
+.plugin-id-arender div[class*=' codeBlockTitle'] {
+    border-bottom: 1px solid var(--ar-border);
+    background-color: var(--ar-surface);
+    font-family: var(--ifm-font-family-base);
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+/* ================================================================
+   TABLES
+   ================================================================ */
+
+.plugin-id-arender table {
+    display: table;
+    width: 100%;
+    font-size: 0.9375rem;
+}
+
+.plugin-id-arender table th {
+    font-weight: 600;
+    text-align: left;
+}
+
+.plugin-id-arender table th,
+.plugin-id-arender table td {
+    padding: 10px 14px;
+    border-color: var(--ifm-table-border-color);
+}
+
+.plugin-id-arender .markdown > table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ================================================================
+   ADMONITIONS
+   ================================================================ */
+
+.plugin-id-arender .admonition {
+    border-radius: var(--ifm-global-radius);
+    border-width: 0;
+    border-left-width: 3px;
+    border-left-style: solid;
+    box-shadow: none;
+    font-size: 0.9375rem;
+}
+
+.plugin-id-arender .admonition-note {
+    --ifm-alert-background-color: #f9fafb;
+    --ifm-alert-border-color: #6b7280;
+}
+
+.plugin-id-arender .admonition-tip {
+    --ifm-alert-background-color: #f0fdf4;
+    --ifm-alert-border-color: #059669;
+}
+
+.plugin-id-arender .admonition-info {
+    --ifm-alert-background-color: #eff6ff;
+    --ifm-alert-border-color: #2563eb;
+}
+
+.plugin-id-arender .admonition-caution,
+.plugin-id-arender .admonition-warning {
+    --ifm-alert-background-color: #fffbeb;
+    --ifm-alert-border-color: #d97706;
+}
+
+.plugin-id-arender .admonition-danger {
+    --ifm-alert-background-color: #fef2f2;
+    --ifm-alert-border-color: #dc2626;
+}
+
+.plugin-id-arender[data-theme='dark'] .admonition-note {
+    --ifm-alert-background-color: #1f2023;
+}
+
+.plugin-id-arender[data-theme='dark'] .admonition-tip {
+    --ifm-alert-background-color: #0f1f17;
+}
+
+.plugin-id-arender[data-theme='dark'] .admonition-info {
+    --ifm-alert-background-color: #111827;
+}
+
+.plugin-id-arender[data-theme='dark'] .admonition-caution,
+.plugin-id-arender[data-theme='dark'] .admonition-warning {
+    --ifm-alert-background-color: #1c1708;
+}
+
+.plugin-id-arender[data-theme='dark'] .admonition-danger {
+    --ifm-alert-background-color: #1f1011;
+}
+
+/* ================================================================
+   SIDEBAR
+   ================================================================ */
+
+.plugin-id-arender .menu__list-item--collapsed .menu__link--sublist,
+.plugin-id-arender .menu__link--sublist {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.plugin-id-arender .menu__link {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+.plugin-id-arender .menu__link--active:not(.menu__link--sublist) {
+    font-weight: 500;
+}
+
+.plugin-id-arender .menu__list > .menu__list-item {
+    margin-top: 4px;
+}
+
+/* ================================================================
+   TOC (TABLE OF CONTENTS - RIGHT SIDEBAR)
+   ================================================================ */
+
+.plugin-id-arender .table-of-contents__link {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+}
+
+.plugin-id-arender .table-of-contents__link--active {
+    font-weight: 500;
+}
+
+/* ================================================================
+   PAGINATION (PREV/NEXT)
+   ================================================================ */
+
+.plugin-id-arender .pagination-nav__link {
+    border-color: var(--ar-border);
+    border-radius: var(--ifm-global-radius);
+    transition: border-color 0.15s ease;
+}
+
+.plugin-id-arender .pagination-nav__link:hover {
+    border-color: var(--ifm-color-primary);
+}
+
+.plugin-id-arender .pagination-nav__sublabel {
+    font-size: 0.75rem;
+    color: var(--ar-text-secondary);
+}
+
+/* ================================================================
+   BREADCRUMBS
+   ================================================================ */
+
+.plugin-id-arender .breadcrumbs__link {
+    font-size: 0.8125rem;
+}
+
+/* ================================================================
+   MERMAID DIAGRAMS
+   ================================================================ */
+
+.plugin-id-arender .docusaurus-mermaid-container {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.plugin-id-arender .docusaurus-mermaid-container svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ================================================================
+   RESPONSIVE ADJUSTMENTS
+   ================================================================ */
+
+@media (max-width: 768px) {
+    .plugin-id-arender h1 {
+        font-size: 1.75rem !important;
+    }
+
+    .plugin-id-arender h2 {
+        font-size: 1.3rem;
+    }
+
+    .plugin-id-arender h3 {
+        font-size: 1.1rem;
+    }
+
+    .plugin-id-arender pre {
+        white-space: pre;
+        overflow-x: auto;
+    }
+
+    .plugin-id-arender table th,
+    .plugin-id-arender table td {
+        padding: 8px 10px;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .plugin-id-arender {
+        --ifm-font-size-base: 15px;
+    }
+}
+
+/* ================================================================
+   PRINT STYLES
+   ================================================================ */
+
+@media print {
+    .plugin-id-arender .navbar,
+    .plugin-id-arender .footer,
+    .plugin-id-arender .pagination-nav,
+    .plugin-id-arender .table-of-contents,
+    .plugin-id-arender .theme-doc-sidebar-container {
+        display: none !important;
+    }
+
+    .plugin-id-arender .markdown {
+        max-width: 100%;
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+
+    .plugin-id-arender a[href]::after {
+        content: ' (' attr(href) ')';
+        font-size: 0.8em;
+        color: #666;
+    }
+}
+
+/* ================================================================
+   UXODOCS LAYOUT OVERRIDES
+   ================================================================ */
+
+/* Hide secondary nav (redundant with sidebar) */
+.plugin-id-arender .secondary-nav--arender {
+    display: none;
+}
+
+/* Restore default centered layout (uxodocs forces full-width) */
+.plugin-id-arender .container {
+    min-width: unset;
+    padding: unset;
+}
+
+/* Reset sidebar/TOC sticky offsets (no secondary nav) */
+.plugin-id-arender .theme-doc-sidebar-container,
+.plugin-id-arender aside[class*="docSidebarContainer"] {
+    top: var(--ifm-navbar-height) !important;
+    max-height: calc(100vh - var(--ifm-navbar-height)) !important;
+}
+
+.plugin-id-arender [class*="sidebar_"],
+.plugin-id-arender .sidebar_njMd {
+    padding-top: 0 !important;
+    top: var(--ifm-navbar-height) !important;
+}
+
+.plugin-id-arender .theme-doc-toc-desktop {
+    top: calc(var(--ifm-navbar-height) + 1rem) !important;
+    max-height: calc(100vh - var(--ifm-navbar-height) - 2rem) !important;
+}
+
+/* Prevent secondary nav JS from hiding sidebar items */
+.plugin-id-arender .uxo-hidden-by-filter {
+    opacity: 1 !important;
+    max-height: none !important;
+    margin: unset !important;
+    padding: unset !important;
+    overflow: visible !important;
+    display: list-item !important;
+}
