@@ -159,7 +159,7 @@ The CMIS connector supports the ARender Document Builder feature, which allows s
 
 ## Related pages
 
-- [Connectors concept](/docs/arender/concepts/connectors)
-- [CMIS integration guide](/docs/arender/guides/integration/cmis)
-- [Embed the viewer](/docs/arender/guides/integration/embed-viewer)
-- [Annotations concept](/docs/arender/concepts/annotations)
+- [Connectors concept](../../concepts/connectors.md)
+- [CMIS integration guide](./cmis.md)
+- [Embed the viewer](./embed-viewer.md)
+- [Annotations concept](../../concepts/annotations.md)

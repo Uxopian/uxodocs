@@ -148,5 +148,5 @@ Once you switch to JDBC storage, file-based annotations are no longer read. The 
 
 ## Related pages
 
-- [Annotations concept](/docs/arender/concepts/annotations)
-- [Redaction guide](/docs/arender/guides/features/redaction)
+- [Annotations concept](../../concepts/annotations.md)
+- [Redaction guide](../features/redaction.md)

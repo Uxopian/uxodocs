@@ -16,7 +16,7 @@ ARender stores annotations as XFDF files on the local filesystem by default. Eac
 
 Use this guide when you are deploying a single ARender UI instance and need a simple, zero-dependency annotation storage, or when you want to understand the default behavior before switching to a different backend. File-based storage is appropriate for development, single-node production deployments, and cases where annotation data lives on a shared network volume.
 
-For multi-instance deployments where all UI nodes must share the same annotation set, consider [JDBC annotation storage](/docs/arender/guides/annotations/annotation-storage-jdbc) or [REST annotation storage](/docs/arender/guides/annotations/annotation-storage-rest) instead.
+For multi-instance deployments where all UI nodes must share the same annotation set, consider [JDBC annotation storage](./annotation-storage-jdbc.md) or [REST annotation storage](./annotation-storage-rest.md) instead.
 
 ## How it works
 
@@ -147,7 +147,7 @@ The `FileSerializedContentAccessor` does not apply any locking across process bo
 
 ## Related pages
 
-- [Annotations concept](/docs/arender/concepts/annotations)
-- [JDBC annotation storage](/docs/arender/guides/annotations/annotation-storage-jdbc)
-- [REST annotation storage](/docs/arender/guides/annotations/annotation-storage-rest)
-- [Redaction guide](/docs/arender/guides/features/redaction)
+- [Annotations concept](../../concepts/annotations.md)
+- [JDBC annotation storage](./annotation-storage-jdbc.md)
+- [REST annotation storage](./annotation-storage-rest.md)
+- [Redaction guide](../features/redaction.md)

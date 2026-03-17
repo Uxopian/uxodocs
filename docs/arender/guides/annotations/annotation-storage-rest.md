@@ -16,7 +16,7 @@ The REST annotation connector delegates all annotation operations to an external
 
 Use this guide when you need to integrate ARender annotations into an existing backend system, when you want to apply custom business logic (access control, audit logging, workflow triggers) during annotation operations, or when you are deploying ARender in a multi-instance setup and want a single authoritative annotation store that is not a relational database.
 
-For simpler deployments with no existing backend, [XFDF file storage](/docs/arender/guides/annotations/annotation-storage-xfdf) or [JDBC storage](/docs/arender/guides/annotations/annotation-storage-jdbc) require less infrastructure.
+For simpler deployments with no existing backend, [XFDF file storage](./annotation-storage-xfdf.md) or [JDBC storage](./annotation-storage-jdbc.md) require less infrastructure.
 
 ## How it works
 
@@ -175,7 +175,7 @@ volumes:
 
 ## Related pages
 
-- [Annotations concept](/docs/arender/concepts/annotations)
-- [XFDF file annotation storage](/docs/arender/guides/annotations/annotation-storage-xfdf)
-- [JDBC annotation storage](/docs/arender/guides/annotations/annotation-storage-jdbc)
-- [Redaction guide](/docs/arender/guides/features/redaction)
+- [Annotations concept](../../concepts/annotations.md)
+- [XFDF file annotation storage](./annotation-storage-xfdf.md)
+- [JDBC annotation storage](./annotation-storage-jdbc.md)
+- [Redaction guide](../features/redaction.md)

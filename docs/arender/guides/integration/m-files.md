@@ -138,6 +138,6 @@ Key configuration fields include the ARender Web-UI URL, authentication paramete
 
 ## Related pages
 
-- [Connectors concept](/docs/arender/concepts/connectors)
-- [Embed the viewer](/docs/arender/guides/integration/embed-viewer)
-- [Annotations concept](/docs/arender/concepts/annotations)
+- [Connectors concept](../../concepts/connectors.md)
+- [Embed the viewer](./embed-viewer.md)
+- [Annotations concept](../../concepts/annotations.md)

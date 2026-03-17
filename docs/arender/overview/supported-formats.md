@@ -49,7 +49,7 @@ Conversion engine: ImageMagick (all image formats). TIFF is rendered natively.
 | MSG (Outlook) | .msg | application/vnd.ms-outlook |
 | EML | .eml | message/rfc822, application/mbox |
 
-Conversion engine: wkhtmltopdf. See [Email conversion](/docs/arender/guides/features/email-conversion) for configuration.
+Conversion engine: wkhtmltopdf. See [Email conversion](../guides/features/email-conversion.md) for configuration.
 
 ## HTML
 
@@ -95,7 +95,7 @@ Conversion engine: wkhtmltopdf.
 | Microsoft Project | .mpp | application/vnd.ms-project |
 | Microsoft Publisher | .pub | application/x-mspublisher, application/vnd.ms-publisher |
 
-Conversion engine: LibreOffice (default, free), DirectOffice (paid add-on), or MS Office/AROMS (licensed, Windows-only). See [Office conversion](/docs/arender/guides/features/office-conversion).
+Conversion engine: LibreOffice (default, free), DirectOffice (paid add-on), or MS Office/AROMS (licensed, Windows-only). See [Office conversion](../guides/features/office-conversion.md).
 
 ## Text
 
@@ -188,7 +188,7 @@ Conversion engine: dedicated XFA flattener.
 
 ## Related pages
 
-- [Rendition pipeline](/docs/arender/concepts/rendition-pipeline)
-- [Office conversion](/docs/arender/guides/features/office-conversion)
-- [Email conversion](/docs/arender/guides/features/email-conversion)
-- [Microservices architecture](/docs/arender/architecture/microservices)
+- [Rendition pipeline](../concepts/rendition-pipeline.md)
+- [Office conversion](../guides/features/office-conversion.md)
+- [Email conversion](../guides/features/email-conversion.md)
+- [Microservices architecture](../architecture/microservices.md)

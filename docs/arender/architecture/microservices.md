@@ -398,7 +398,7 @@ If the shared volume is unavailable or not mounted consistently across container
 
 ## Related pages
 
-- [System architecture](/docs/arender/overview/architecture)
-- [Docker Compose deployment](/docs/arender/deployment/docker-compose)
-- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm)
-- [Monitoring and observability](/docs/arender/operations/monitoring)
+- [System architecture](../overview/architecture.md)
+- [Docker Compose deployment](../deployment/docker-compose.md)
+- [Kubernetes Helm deployment](../deployment/kubernetes-helm.md)
+- [Monitoring and observability](../operations/monitoring.md)

@@ -99,7 +99,7 @@ The `${VAR:default}` syntax provides a fallback value when the variable is not s
 
 ## Related pages
 
-- [Configuration system](/docs/arender/deployment/configuration-system): full precedence hierarchy and override strategy
-- [Environment variables](/docs/arender/deployment/environment-variables): naming conventions and per-service prefixes
-- [Docker Compose deployment](/docs/arender/deployment/docker-compose): container-based deployment
-- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm): Helm chart configuration
+- [Configuration system](./configuration-system.md): full precedence hierarchy and override strategy
+- [Environment variables](./environment-variables.md): naming conventions and per-service prefixes
+- [Docker Compose deployment](./docker-compose.md): container-based deployment
+- [Kubernetes Helm deployment](./kubernetes-helm.md): Helm chart configuration

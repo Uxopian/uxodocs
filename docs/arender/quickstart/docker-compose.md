@@ -118,6 +118,6 @@ docker compose down -v
 
 ## Next steps
 
-- [Open your first document](/docs/arender/quickstart/first-document)
-- [Docker Compose deployment guide](/docs/arender/deployment/docker-compose) for production configuration
-- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm)
+- [Open your first document](./first-document.md)
+- [Docker Compose deployment guide](../deployment/docker-compose.md) for production configuration
+- [Kubernetes Helm deployment](../deployment/kubernetes-helm.md)

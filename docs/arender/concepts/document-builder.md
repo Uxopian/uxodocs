@@ -97,6 +97,6 @@ arender.documentbuilder.download.document=false
 
 ## Related pages
 
-- [Annotations](/docs/arender/concepts/annotations)
-- [Documents and IDs](/docs/arender/concepts/documents-and-ids)
-- [Broker REST API](/docs/arender/reference/rest-api/broker-api)
+- [Annotations](./annotations.md)
+- [Documents and IDs](./documents-and-ids.md)
+- [Broker REST API](../reference/rest-api/broker-api.md)

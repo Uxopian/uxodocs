@@ -82,7 +82,7 @@ ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT-.I.D=arende
 Each uppercase letter in the original camelCase key is represented as `.<letter>` in the environment variable name.
 
 :::note
-When in doubt about a specific property, check the broker Swagger UI at `http://{broker-host}:8761/swagger-ui/index.html` or refer to the [Rendition properties](/docs/arender/reference/rendition-properties) for exact property names.
+When in doubt about a specific property, check the broker Swagger UI at `http://{broker-host}:8761/swagger-ui/index.html` or refer to the [Rendition properties](../reference/rendition-properties.md) for exact property names.
 :::
 
 ---
@@ -307,6 +307,6 @@ rendition:
 
 ## Related pages
 
-- [Rendition properties](/docs/arender/reference/rendition-properties)
-- [Docker Compose deployment](/docs/arender/deployment/docker-compose)
-- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm)
+- [Rendition properties](../reference/rendition-properties.md)
+- [Docker Compose deployment](./docker-compose.md)
+- [Kubernetes Helm deployment](./kubernetes-helm.md)

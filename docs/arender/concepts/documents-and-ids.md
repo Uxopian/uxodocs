@@ -144,6 +144,6 @@ In both cases, child documents have hierarchical `DocumentId` values derived fro
 
 ## Related pages
 
-- [Connectors](/docs/arender/concepts/connectors): how connectors produce `DocumentAccessor` instances
-- [Caching](/docs/arender/concepts/caching): how `DocumentId` values are used as cache keys
-- [Security model](/docs/arender/concepts/security-model): how the `user` parameter interacts with authentication
+- [Connectors](./connectors.md): how connectors produce `DocumentAccessor` instances
+- [Caching](./caching.md): how `DocumentId` values are used as cache keys
+- [Security model](./security-model.md): how the `user` parameter interacts with authentication

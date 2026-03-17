@@ -117,5 +117,5 @@ These are rendered directly without a conversion step.
 
 ## Next steps
 
-- [Microservices architecture](/docs/arender/architecture/microservices)
-- [REST API reference](/docs/arender/reference/rest-api/broker-api)
+- [Microservices architecture](../architecture/microservices.md)
+- [REST API reference](../reference/rest-api/broker-api.md)

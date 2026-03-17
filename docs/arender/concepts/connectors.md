@@ -39,12 +39,12 @@ These connectors are developed and supported by Uxopian. Each has a dedicated in
 
 | Connector | ECM | Type | Guide |
 |-----------|-----|------|-------|
-| CMIS | Any CMIS-compliant system (incl. Alfresco) | Repository | [CMIS](/docs/arender/guides/integration/cmis) |
-| Alfresco Share plugin | Alfresco Share | UI plugin | [Alfresco](/docs/arender/guides/integration/alfresco) |
-| IBM FileNet CE | IBM FileNet P8 | Repository | [FileNet](/docs/arender/guides/integration/ibm-filenet) |
-| IBM Content Navigator plugin | IBM Content Navigator | UI plugin | [ICN](/docs/arender/guides/integration/ibm-content-navigator) |
-| IBM Content Manager | IBM CM 8.1+ | Repository | [Content Manager](/docs/arender/guides/integration/ibm-content-manager) |
-| M-Files | M-Files | Repository + VAF | [M-Files](/docs/arender/guides/integration/m-files) |
+| CMIS | Any CMIS-compliant system (incl. Alfresco) | Repository | [CMIS](../guides/integration/cmis.md) |
+| Alfresco Share plugin | Alfresco Share | UI plugin | [Alfresco](../guides/integration/alfresco.md) |
+| IBM FileNet CE | IBM FileNet P8 | Repository | [FileNet](../guides/integration/ibm-filenet.md) |
+| IBM Content Navigator plugin | IBM Content Navigator | UI plugin | [ICN](../guides/integration/ibm-content-navigator.md) |
+| IBM Content Manager | IBM CM 8.1+ | Repository | [Content Manager](../guides/integration/ibm-content-manager.md) |
+| M-Files | M-Files | Repository + VAF | [M-Files](../guides/integration/m-files.md) |
 
 ### Partner-maintained connectors
 
@@ -82,36 +82,18 @@ Each connector is configured via Spring properties or XML beans. Common patterns
 - Annotation format conversion settings
 - Role-based access control (CMIS connector supports permission mapping)
 
-See the individual connector guides under [Integration guides](/docs/arender/guides/integration/alfresco) for setup instructions.
+See the individual connector guides under [Integration guides](../guides/integration/alfresco.md) for setup instructions.
 
 ## DocumentAccessor interface
 
-The `DocumentAccessor` interface is the core abstraction:
-
-```java
-public interface DocumentAccessor extends Serializable {
-    InputStream getInputStream();
-    byte[] toByteArray();
-    String getPath();
-    String getMimeType();
-    DocumentId getDocumentId();
-    AnnotationAccessor getAnnotationAccessor();
-}
-```
-
-Specialized interfaces extend this base:
-
-- `DocumentAccessorHasFileName`: provides file path
-- `DocumentAccessorHasContext`: carries metadata context
-- `DocumentAccessorHasUserRole`: role-based access
-- `DocumentAccessorHasPartialContent`: streaming/chunked loading
-- `DocumentAccessorHasUpdateContent`: mutable documents
+All connectors implement the `DocumentAccessor` interface, which provides the document content stream, metadata, and optional annotation storage. For the full interface definition and how to implement it, see [Custom connector development](../custom-connector/custom-connector.md).
 
 ## Next steps
 
-- [Alfresco integration guide](/docs/arender/guides/integration/alfresco)
-- [CMIS integration guide](/docs/arender/guides/integration/cmis)
-- [IBM FileNet integration guide](/docs/arender/guides/integration/ibm-filenet)
-- [IBM Content Navigator integration guide](/docs/arender/guides/integration/ibm-content-navigator)
-- [IBM Content Manager integration guide](/docs/arender/guides/integration/ibm-content-manager)
-- [M-Files integration guide](/docs/arender/guides/integration/m-files)
+- [Custom connector development](../custom-connector/custom-connector.md)
+- [Alfresco integration guide](../guides/integration/alfresco.md)
+- [CMIS integration guide](../guides/integration/cmis.md)
+- [IBM FileNet integration guide](../guides/integration/ibm-filenet.md)
+- [IBM Content Navigator integration guide](../guides/integration/ibm-content-navigator.md)
+- [IBM Content Manager integration guide](../guides/integration/ibm-content-manager.md)
+- [M-Files integration guide](../guides/integration/m-files.md)

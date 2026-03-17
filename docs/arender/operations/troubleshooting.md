@@ -12,7 +12,7 @@ content_hash: 7342c575a86f89677e2b150f266ffe7c325fbd8a6bc034f126f36baf278cd8c0
 
 This guide covers the most common problems encountered when deploying and operating ARender. Issues are organized by symptom. For each issue you will find the symptoms to look for, the most likely causes, steps to diagnose, and how to resolve it.
 
-For metrics-based diagnosis, see [Monitoring and observability](/docs/arender/operations/monitoring).
+For metrics-based diagnosis, see [Monitoring and observability](./monitoring.md).
 
 ---
 
@@ -491,10 +491,10 @@ ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD=secret
 
 ## Related pages
 
-- [Monitoring and observability](/docs/arender/operations/monitoring)
-- [Docker Compose deployment](/docs/arender/deployment/docker-compose)
-- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm)
-- [Spring Boot standalone deployment](/docs/arender/deployment/spring-boot)
-- [JDBC annotation storage](/docs/arender/guides/annotations/annotation-storage-jdbc)
-- [Alfresco integration](/docs/arender/guides/integration/alfresco)
-- [IBM FileNet integration](/docs/arender/guides/integration/ibm-filenet)
+- [Monitoring and observability](./monitoring.md)
+- [Docker Compose deployment](../deployment/docker-compose.md)
+- [Kubernetes Helm deployment](../deployment/kubernetes-helm.md)
+- [Spring Boot standalone deployment](../deployment/spring-boot.md)
+- [JDBC annotation storage](../guides/annotations/annotation-storage-jdbc.md)
+- [Alfresco integration](../guides/integration/alfresco.md)
+- [IBM FileNet integration](../guides/integration/ibm-filenet.md)

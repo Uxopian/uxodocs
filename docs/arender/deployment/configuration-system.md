@@ -130,7 +130,7 @@ broker:
                 create: false
 ```
 
-For simple key-value overrides, use environment variables instead. See [Environment variables](/docs/arender/deployment/environment-variables).
+For simple key-value overrides, use environment variables instead. See [Environment variables](./environment-variables.md).
 
 ## The configurations/ folder
 
@@ -187,7 +187,7 @@ These files are loaded via Spring's `@PropertySource` and XML import mechanisms 
 
 ## Related pages
 
-- [Environment variables](/docs/arender/deployment/environment-variables): naming conventions and per-service prefixes
-- [Spring Boot standalone deployment](/docs/arender/deployment/spring-boot): full standalone setup guide
-- [Docker Compose deployment](/docs/arender/deployment/docker-compose): container-based deployment
-- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm): Helm chart configuration
+- [Environment variables](./environment-variables.md): naming conventions and per-service prefixes
+- [Spring Boot standalone deployment](./spring-boot.md): full standalone setup guide
+- [Docker Compose deployment](./docker-compose.md): container-based deployment
+- [Kubernetes Helm deployment](./kubernetes-helm.md): Helm chart configuration

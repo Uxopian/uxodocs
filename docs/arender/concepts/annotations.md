@@ -137,7 +137,7 @@ redact.deleteText=true
 
 ## Next steps
 
-- [JDBC annotation storage guide](/docs/arender/guides/annotations/annotation-storage-jdbc)
-- [Annotation types reference](/docs/arender/reference/annotation-types)
-- [Redaction guide](/docs/arender/guides/features/redaction)
-- [Document builder](/docs/arender/concepts/document-builder)
+- [JDBC annotation storage guide](../guides/annotations/annotation-storage-jdbc.md)
+- [Annotation types reference](../reference/annotation-types.md)
+- [Redaction guide](../guides/features/redaction.md)
+- [Document builder](./document-builder.md)

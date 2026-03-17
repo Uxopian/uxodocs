@@ -26,7 +26,7 @@ The converter, renderer, and text handler expose an additional `shutdown` endpoi
 management.endpoints.web.exposure.include=prometheus,metrics,health,shutdown
 ```
 
-These defaults and all metrics export settings (Prometheus, Elasticsearch, Datadog, CloudWatch) are documented in the [Rendition properties — Shared metrics settings](/docs/arender/reference/rendition-properties#shared-metrics-settings).
+These defaults and all metrics export settings (Prometheus, Elasticsearch, Datadog, CloudWatch) are documented in the [Rendition properties — Shared metrics settings](../reference/rendition-properties.md#shared-metrics-settings).
 
 ### Available endpoints
 
@@ -482,7 +482,7 @@ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.volu
 
 ## Related pages
 
-- [Rendition properties](/docs/arender/reference/rendition-properties)
-- [Microservices architecture](/docs/arender/architecture/microservices)
-- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm)
-- [Docker Compose deployment](/docs/arender/deployment/docker-compose)
+- [Rendition properties](../reference/rendition-properties.md)
+- [Microservices architecture](../architecture/microservices.md)
+- [Kubernetes Helm deployment](../deployment/kubernetes-helm.md)
+- [Docker Compose deployment](../deployment/docker-compose.md)

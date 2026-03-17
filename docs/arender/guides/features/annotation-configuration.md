@@ -14,7 +14,7 @@ This page covers annotation behavior, per-type defaults, stamp templates, securi
 
 ## Annotation creation policy
 
-These server-side properties control what annotation features are available. Set them in `arender-custom-server.properties`. See also the [Rendition properties — Annotations](/docs/arender/reference/rendition-properties#annotations) for default values.
+These server-side properties control what annotation features are available. Set them in `arender-custom-server.properties`. See also the [Rendition properties — Annotations](../../reference/rendition-properties.md#annotations) for default values.
 
 | Property | Description | Type |
 |----------|-------------|------|

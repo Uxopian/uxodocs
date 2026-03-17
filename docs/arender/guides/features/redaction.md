@@ -146,5 +146,5 @@ This button is only shown to users who have the redact permission on the documen
 
 ## Related pages
 
-- [Annotations concept](/docs/arender/concepts/annotations)
-- [JDBC annotation storage guide](/docs/arender/guides/annotations/annotation-storage-jdbc)
+- [Annotations concept](../../concepts/annotations.md)
+- [JDBC annotation storage guide](../annotations/annotation-storage-jdbc.md)

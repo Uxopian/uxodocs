@@ -16,7 +16,7 @@ The ARender IBM Content Navigator (ICN) plugin replaces the ICN built-in documen
 
 - IBM Content Navigator 2.0.3 or later
 - An ARender viewer deployment reachable from the ICN server (HTTP or HTTPS)
-- The FileNet connector configured on the ARender viewer if your ICN desktops use P8 repositories (see [IBM FileNet integration](/docs/arender/guides/integration/ibm-filenet))
+- The FileNet connector configured on the ARender viewer if your ICN desktops use P8 repositories (see [IBM FileNet integration](./ibm-filenet.md))
 - The ICN plugin JAR: `arondor-arender-navigator-plugin-2026.0.0.jar`
 - The `navigator-api` and `json4j` libraries from your ICN installation (required at ICN deploy time; they are provided-scope in the plugin)
 
@@ -141,7 +141,7 @@ services:
       - 8080:8080
 ```
 
-For Content Manager desktops, configure the CM connector instead (see [IBM Content Manager integration](/docs/arender/guides/integration/ibm-content-manager)).
+For Content Manager desktops, configure the CM connector instead (see [IBM Content Manager integration](./ibm-content-manager.md)).
 
 ## Plugin actions
 
@@ -194,7 +194,7 @@ https://arender.example.com/ARender.html?ids=...&visualization.multiView.doCompa
 
 ## Related pages
 
-- [Connectors concept](/docs/arender/concepts/connectors)
-- [IBM FileNet integration](/docs/arender/guides/integration/ibm-filenet)
-- [IBM Content Manager integration](/docs/arender/guides/integration/ibm-content-manager)
-- [Embed the viewer](/docs/arender/guides/integration/embed-viewer)
+- [Connectors concept](../../concepts/connectors.md)
+- [IBM FileNet integration](./ibm-filenet.md)
+- [IBM Content Manager integration](./ibm-content-manager.md)
+- [Embed the viewer](./embed-viewer.md)

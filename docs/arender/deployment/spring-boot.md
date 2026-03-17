@@ -10,7 +10,7 @@ content_hash: 82a4cf8b357a8024280b10d3773b55072b36c5b61d7d48418c6efea365e752c2
 
 # Spring Boot standalone deployment
 
-ARender can run directly on a host without Docker. The distribution ships two packages: a viewer UI package and a rendition installer. For production, [Docker Compose](/docs/arender/deployment/docker-compose) or [Kubernetes Helm](/docs/arender/deployment/kubernetes-helm) are the recommended approaches.
+ARender can run directly on a host without Docker. The distribution ships two packages: a viewer UI package and a rendition installer. For production, [Docker Compose](./docker-compose.md) or [Kubernetes Helm](./kubernetes-helm.md) are the recommended approaches.
 
 ## Two packages to download
 
@@ -213,8 +213,8 @@ spring.security.oauth2.resourceserver.jwt.issuer-uri=https://keycloak.example.co
 
 ## Related pages
 
-- [Docker Compose deployment](/docs/arender/deployment/docker-compose): recommended for most deployments
-- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm): recommended for production
-- [Environment variables](/docs/arender/deployment/environment-variables): naming convention for configuration overrides
-- [Rendition properties](/docs/arender/reference/rendition-properties): all service properties
-- [Monitoring and observability](/docs/arender/operations/monitoring): health endpoints and metrics
+- [Docker Compose deployment](./docker-compose.md): recommended for most deployments
+- [Kubernetes Helm deployment](./kubernetes-helm.md): recommended for production
+- [Environment variables](./environment-variables.md): naming convention for configuration overrides
+- [Rendition properties](../reference/rendition-properties.md): all service properties
+- [Monitoring and observability](../operations/monitoring.md): health endpoints and metrics

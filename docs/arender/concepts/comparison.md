@@ -53,7 +53,7 @@ In the viewer UI, comparison opens a side-by-side view of the two documents. Dif
 
 ## Default configuration
 
-These properties configure comparison defaults on the broker. See also the [Rendition properties — Comparison defaults](/docs/arender/reference/rendition-properties#comparison-defaults) for the full property table.
+These properties configure comparison defaults on the broker. See also the [Rendition properties — Comparison defaults](../reference/rendition-properties.md#comparison-defaults) for the full property table.
 
 ```properties
 comparison.default.value.highlight.color=FF0000
@@ -63,6 +63,6 @@ comparison.default.value.fuzz=3
 
 ## Related pages
 
-- [Comparison guide](/docs/arender/guides/features/comparison)
-- [Rendition pipeline](/docs/arender/concepts/rendition-pipeline)
-- [Broker REST API](/docs/arender/reference/rest-api/broker-api)
+- [Comparison guide](../guides/features/comparison.md)
+- [Rendition pipeline](./rendition-pipeline.md)
+- [Broker REST API](../reference/rest-api/broker-api.md)

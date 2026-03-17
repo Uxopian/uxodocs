@@ -18,15 +18,15 @@ The ARender viewer (HMI) has two distinct categories of configuration properties
 | **Defaults file** | `arender-default.properties` (inside the HMI JAR) | `arender-server-default.properties` (inside the HMI JAR) |
 | **Override file** | `configurations/arender-custom-client.properties` | `configurations/arender-custom-server.properties` |
 | **Where it runs** | Sent to the browser (GWT client) | Stays on the Spring Boot server |
-| **Can be profile-scoped** | Yes, via [visual profiles](/docs/arender/guides/features/visual-profiles) (`?props=profileName`) | No |
+| **Can be profile-scoped** | Yes, via [visual profiles](../guides/features/visual-profiles.md) (`?props=profileName`) | No |
 
-For the full precedence hierarchy and file placement, see [Configuration system](/docs/arender/deployment/configuration-system).
+For the full precedence hierarchy and file placement, see [Configuration system](../deployment/configuration-system.md).
 
 ---
 
 ## Part 1 — Client-side properties
 
-These properties control the viewer UI. Override them in `configurations/arender-custom-client.properties` or via a [visual profile](/docs/arender/guides/features/visual-profiles).
+These properties control the viewer UI. Override them in `configurations/arender-custom-client.properties` or via a [visual profile](../guides/features/visual-profiles.md).
 
 ### Global display
 
@@ -601,7 +601,7 @@ These properties control the Spring Boot backend. Override them in `configuratio
 
 ## Related pages
 
-- [JavaScript API reference](/docs/arender/reference/javascript-api)
-- [Document builder](/docs/arender/concepts/document-builder)
-- [Annotations](/docs/arender/concepts/annotations)
-- [Docker Compose deployment](/docs/arender/deployment/docker-compose)
+- [JavaScript API reference](./javascript-api.md)
+- [Document builder](../concepts/document-builder.md)
+- [Annotations](../concepts/annotations.md)
+- [Docker Compose deployment](../deployment/docker-compose.md)

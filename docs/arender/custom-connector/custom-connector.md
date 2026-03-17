@@ -3,16 +3,28 @@ title: Custom connector development
 last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
-slug: /extending/custom-connector
+slug: /custom-connector/custom-connector
 sidebar_position: 1
 content_hash: e78f2f970c07554d63a0fc9dbd3c9dc10eb96c3b9dc95c738f3c42f36c73934a
 ---
 
 # Custom connector development
 
+For an overview of connectors and the list of built-in ones, see [Connectors](../concepts/connectors.md).
+
 This guide explains how to build a custom connector JAR that integrates ARender with a document source not covered by the built-in connectors. A connector consists of two components: a **URL parser** that extracts request parameters, and a **document accessor** that provides the document content.
 
-## Architecture overview
+## When to build a custom connector
+
+Build a custom connector when your document source is not covered by the [built-in connectors](../concepts/connectors.md#available-connectors). Typical cases include in-house document repositories, proprietary ECM systems, or third-party APIs without an existing integration.
+
+## Prerequisites
+
+- **Java 25+** and **Maven** for building the connector JAR
+- **ARender rendition API** (`arondor-arender-rendition-api`) as a dependency
+- Basic familiarity with **Spring** bean configuration (XML or auto-configuration)
+
+## How the URL parser chain works
 
 When a user opens a document in ARender, the viewer's `ServletDocumentService` iterates over a chain of `DocumentServiceURLParser` beans. Each parser inspects the incoming HTTP request and decides whether it can handle the URL parameters. The first parser that returns `true` from `canParse()` is used to load the document.
 

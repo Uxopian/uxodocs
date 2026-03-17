@@ -48,7 +48,7 @@ conversion:
       ms: 120000
 ```
 
-See the [Document converter reference](/docs/arender/reference/rendition-properties#document-converter) for all converter properties including LibreOffice, DirectOffice, and ImageMagick settings.
+See the [Document converter reference](../../reference/rendition-properties.md#document-converter) for all converter properties including LibreOffice, DirectOffice, and ImageMagick settings.
 
 ## DirectOffice (paid add-on)
 

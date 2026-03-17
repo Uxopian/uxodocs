@@ -14,9 +14,9 @@ ARender is a web application that runs at a fixed URL. To embed it in another ap
 
 ## Prerequisites
 
-- ARender is running and accessible from the browser (see [Docker Compose deployment](/docs/arender/deployment/docker-compose))
+- ARender is running and accessible from the browser (see [Docker Compose deployment](../../deployment/docker-compose.md))
 - The document URL or path is reachable by the ARender service broker
-- If the document comes from an external URL, that URL prefix is listed in `authorized.urls` on the broker (see [Open your first document](/docs/arender/quickstart/first-document))
+- If the document comes from an external URL, that URL prefix is listed in `authorized.urls` on the broker (see [Open your first document](../../quickstart/first-document.md))
 
 ## Basic iframe embed
 
@@ -119,8 +119,8 @@ This approach keeps the document URL out of the browser's address bar and avoids
 
 ## Related pages
 
-- [Open your first document](/docs/arender/quickstart/first-document)
-- [Docker Compose deployment](/docs/arender/deployment/docker-compose)
-- [Alfresco integration guide](/docs/arender/guides/integration/alfresco)
-- [IBM FileNet integration guide](/docs/arender/guides/integration/ibm-filenet)
-- [Broker REST API reference](/docs/arender/reference/rest-api/broker-api)
+- [Open your first document](../../quickstart/first-document.md)
+- [Docker Compose deployment](../../deployment/docker-compose.md)
+- [Alfresco integration guide](./alfresco.md)
+- [IBM FileNet integration guide](./ibm-filenet.md)
+- [Broker REST API reference](../../reference/rest-api/broker-api.md)

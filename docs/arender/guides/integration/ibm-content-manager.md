@@ -274,7 +274,7 @@ The document title in the viewer is set to the CM item name (`CMBItem.getName()`
 
 ## Related pages
 
-- [Connectors concept](/docs/arender/concepts/connectors)
-- [IBM FileNet integration](/docs/arender/guides/integration/ibm-filenet)
-- [IBM Content Navigator integration](/docs/arender/guides/integration/ibm-content-navigator)
-- [Annotations concept](/docs/arender/concepts/annotations)
+- [Connectors concept](../../concepts/connectors.md)
+- [IBM FileNet integration](./ibm-filenet.md)
+- [IBM Content Navigator integration](./ibm-content-navigator.md)
+- [Annotations concept](../../concepts/annotations.md)

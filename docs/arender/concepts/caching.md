@@ -153,6 +153,6 @@ If multiple users open the same document, the self-contained `DocumentId` genera
 
 ## Related pages
 
-- [Documents and document IDs](/docs/arender/concepts/documents-and-ids): how `DocumentId` values are generated and used as cache keys
-- [Security model](/docs/arender/concepts/security-model): how Hazelcast-backed sessions support OAuth2 in multi-instance deployments
-- [System architecture](/docs/arender/overview/architecture): how the viewer and broker interact
+- [Documents and document IDs](./documents-and-ids.md): how `DocumentId` values are generated and used as cache keys
+- [Security model](./security-model.md): how Hazelcast-backed sessions support OAuth2 in multi-instance deployments
+- [System architecture](../overview/architecture.md): how the viewer and broker interact

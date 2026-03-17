@@ -42,7 +42,7 @@ ARender renders over 100 document formats natively or via conversion:
 - Plain text, RTF, vCard
 - XPS
 
-See [Supported formats](/docs/arender/overview/supported-formats) for the complete matrix.
+See [Supported formats](./supported-formats.md) for the complete matrix.
 
 ## Architecture at a glance
 
@@ -61,11 +61,11 @@ graph LR
 
 The **viewer** handles the user interface, security, and connector integration. The **service broker** orchestrates backend microservices for conversion, rendering, and text extraction. All services share a temporary file volume.
 
-See [System architecture](/docs/arender/overview/architecture) for details.
+See [System architecture](./architecture.md) for details.
 
 ## Next steps
 
-- [Docker Compose quickstart](/docs/arender/quickstart/docker-compose): get ARender running locally in minutes
-- [Core concepts](/docs/arender/concepts/connectors): understand connectors, annotations, and the rendition pipeline
-- [Deployment](/docs/arender/deployment/docker-compose): deploy ARender for production
-- [REST API reference](/docs/arender/reference/rest-api/broker-api): integrate programmatically
+- [Docker Compose quickstart](../quickstart/docker-compose.md): get ARender running locally in minutes
+- [Core concepts](../concepts/connectors.md): understand connectors, annotations, and the rendition pipeline
+- [Deployment](../deployment/docker-compose.md): deploy ARender for production
+- [REST API reference](../reference/rest-api/broker-api.md): integrate programmatically

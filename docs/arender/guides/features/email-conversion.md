@@ -111,7 +111,7 @@ If the email body references external images (hosted URLs), `wkhtmltopdf` must b
 
 ## Property reference
 
-The table below summarizes the properties covered on this page. For the full list of email conversion properties across all services, see the [Rendition properties — Email conversion](/docs/arender/reference/rendition-properties#email-conversion).
+The table below summarizes the properties covered on this page. For the full list of email conversion properties across all services, see the [Rendition properties — Email conversion](../../reference/rendition-properties.md#email-conversion).
 
 | Property | Default | Service | Description |
 |---|---|---|---|

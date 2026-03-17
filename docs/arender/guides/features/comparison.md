@@ -12,7 +12,7 @@ content_hash: 8fc7e708148b49293b8ad545aa2b95e1c611cd31586665120d3d31776222e9e4
 
 ARender supports two comparison modes: text comparison and image comparison. Text comparison highlights added and deleted text fragments between two documents displayed side by side. Image comparison overlays two pages as a single image and highlights pixel-level differences.
 
-This guide describes how to use both modes. For the conceptual model, see the [comparison concept page](/docs/arender/concepts/comparison).
+This guide describes how to use both modes. For the conceptual model, see the [comparison concept page](../../concepts/comparison.md).
 
 ## Prerequisites
 
@@ -134,5 +134,5 @@ This is useful when ARender is embedded in a workflow where the integration laye
 
 ## Related pages
 
-- [Annotations concept](/docs/arender/concepts/annotations)
-- [Redaction guide](/docs/arender/guides/features/redaction)
+- [Annotations concept](../../concepts/annotations.md)
+- [Redaction guide](./redaction.md)

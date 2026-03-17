@@ -87,7 +87,7 @@ volumes:
 
 ## Environment variable conventions
 
-All YAML configuration properties can be overridden via environment variables. Each service uses a dedicated prefix (`ARENDERSRV_`, `DSB_`, `DCV_`, `DRN_`, `DTH_`). See [Environment variables](/docs/arender/deployment/environment-variables) for the full naming convention with examples.
+All YAML configuration properties can be overridden via environment variables. Each service uses a dedicated prefix (`ARENDERSRV_`, `DSB_`, `DCV_`, `DRN_`, `DTH_`). See [Environment variables](./environment-variables.md) for the full naming convention with examples.
 
 ## OAuth2 authentication
 
@@ -129,5 +129,5 @@ Add health checks to detect service failures:
 
 ## Next steps
 
-- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm) for orchestrated deployments
-- [REST API reference](/docs/arender/reference/rest-api/broker-api)
+- [Kubernetes Helm deployment](./kubernetes-helm.md) for orchestrated deployments
+- [REST API reference](../reference/rest-api/broker-api.md)

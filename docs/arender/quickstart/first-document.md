@@ -10,7 +10,7 @@ content_hash: ed17b593757d07ab46bdf3e13710b9dab0a6de10b6d325121bcd99b11718342b
 
 # Open your first document
 
-This guide assumes you have ARender running via [Docker Compose quickstart](/docs/arender/quickstart/docker-compose).
+This guide assumes you have ARender running via [Docker Compose quickstart](./docker-compose.md).
 
 ## Open the default document
 
@@ -84,7 +84,7 @@ Get text positions for a page:
 curl http://localhost:8761/documents/{documentId}/pages/0/text/position
 ```
 
-See the [REST API reference](/docs/arender/reference/rest-api/broker-api) for the complete endpoint list with response examples.
+See the [REST API reference](../reference/rest-api/broker-api.md) for the complete endpoint list with response examples.
 
 ## Viewer features
 
@@ -99,7 +99,7 @@ Once a document is open, you can:
 
 ## Next steps
 
-- [Connectors concept](/docs/arender/concepts/connectors): connect to a document repository
-- [Annotations concept](/docs/arender/concepts/annotations): understand the annotation model
-- [Document builder](/docs/arender/concepts/document-builder): assemble pages from multiple documents
-- [Embed the viewer](/docs/arender/guides/integration/embed-viewer) in your application
+- [Connectors concept](../concepts/connectors.md): connect to a document repository
+- [Annotations concept](../concepts/annotations.md): understand the annotation model
+- [Document builder](../concepts/document-builder.md): assemble pages from multiple documents
+- [Embed the viewer](../guides/integration/embed-viewer.md) in your application
