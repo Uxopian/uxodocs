@@ -1,0 +1,220 @@
+---
+title: Spring Boot standalone deployment
+last_update:
+  date: '2026-03-17T14:31:35.329Z'
+  author: CI/CD Bot
+slug: /deployment/spring-boot
+sidebar_position: 3
+content_hash: 82a4cf8b357a8024280b10d3773b55072b36c5b61d7d48418c6efea365e752c2
+---
+
+# Spring Boot standalone deployment
+
+ARender can run directly on a host without Docker. The distribution ships two packages: a viewer UI package and a rendition installer. For production, [Docker Compose](/docs/arender/deployment/docker-compose) or [Kubernetes Helm](/docs/arender/deployment/kubernetes-helm) are the recommended approaches.
+
+## Two packages to download
+
+| Package | Contents |
+|---------|----------|
+| `arondor-arender-hmi-spring-boot-package-<version>.zip` | Viewer UI: a Spring Boot JAR, startup scripts, configuration files, and a `lib/` directory for connector JARs |
+| `rendition-engine-installer-<version>-rendition.jar` | Rendition installer: extracts the service broker and all rendition microservices (converter, renderer, text handler) into a self-contained directory |
+
+## Prerequisites
+
+- Java 25 installed on the host (verify with `java -version`)
+- LibreOffice installed if Office document conversion is needed
+- ImageMagick 7 installed if image conversion is needed
+- `ffmpeg` installed if video conversion is needed
+- `wkhtmltopdf` installed if HTML/email conversion is needed
+
+## Step 1: Install the rendition
+
+Run the installer JAR. It extracts the full rendition stack into the current directory:
+
+```bash
+java -jar rendition-engine-installer-<version>-rendition.jar
+```
+
+This creates the following structure:
+
+```
+ARender-Rendition-<version>/
+  ARenderConsole.bat          # start script (Windows)
+  ARenderConsole.sh           # start script (Linux)
+  setenv.bat / setenv.sh      # JVM memory and arguments
+  custom_setenv.bat / .sh     # user overrides
+  versions.json               # third-party tool versions
+  modules/
+    RenditionEngine/           # service broker JAR + client_libs/
+    TaskConversion/            # converter JAR + DirectOffice, AROMS2PDF
+    PDFOwl/                    # renderer JAR + native PDFOwl library
+    PDFBoxEngine/              # fallback PDF renderer JAR
+    JNIPdfEngine/              # legacy JNI renderer (deprecated)
+    fonts/                     # shared font directory
+    tmp/                       # shared temporary directory
+  samples/                     # sample documents for testing
+  third_party/                 # LibreOffice, ImageMagick, FFmpeg, wkhtmltopdf
+```
+
+The installer also downloads and installs third-party tools (LibreOffice, ImageMagick, FFmpeg, wkhtmltopdf) into `third_party/` based on the versions listed in `versions.json`. On Windows, an `update.bat` script handles this; on Linux, use `update.sh`.
+
+## Step 2: Configure memory and JVM arguments
+
+Edit `setenv.bat` (Windows) or `setenv.sh` (Linux) to adjust memory allocations:
+
+```bash
+export ARENDER_DFS_MEMORY=512m
+export ARENDER_PDFBOX_MEMORY=4096m
+export ARENDER_JNIRENDERER_MEMORY=512m
+export ARENDER_CONVERSION_MEMORY=1024m
+export ARENDER_BROKER_MEMORY=512m
+```
+
+JVM arguments are also set in this file. The defaults include:
+
+```bash
+export ARENDER_BROKER_JVM_ARGS="-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false -Dloader.path=client_libs/ -Dfile.encoding=UTF-8"
+```
+
+For custom overrides, use `custom_setenv.bat` or `custom_setenv.sh` instead of editing `setenv` directly. These files are not overwritten during updates.
+
+## Step 3: Start the rendition
+
+```bash
+# Linux
+./ARenderConsole.sh
+
+# Windows
+ARenderConsole.bat
+```
+
+The script sources the environment, clears the `tmp/` directory, and starts the rendition engine JAR (`modules/RenditionEngine/rendition-engine-micro-service-<version>.jar`). The rendition engine is the service broker: it discovers and orchestrates all other microservices in the `modules/` directory.
+
+Wait for the log line `Started RenditionEngineApplication` on port 8761.
+
+## Step 4: Extract the viewer UI
+
+Unzip the viewer UI package:
+
+```bash
+unzip arondor-arender-hmi-spring-boot-package-<version>.zip
+```
+
+This creates:
+
+```
+arondor-arender-hmi-spring-boot-package-<version>/
+  ARenderConsole.bat / .sh       # start script
+  arondor-arender-hmi-spring-boot-<version>.jar
+  configurations/
+    arender-custom-client.properties    # viewer UI overrides
+    arender-custom-server.properties    # server-side overrides
+    arender-custom-integration.xml      # Spring XML overrides
+    arender-custom-server-integration.xml
+  lib/                                  # connector JARs (e.g. CMIS, FileNet)
+  public/                               # static web resources
+```
+
+## Step 5: Configure the viewer
+
+Edit `configurations/arender-custom-server.properties` to point the viewer to the rendition broker:
+
+```properties
+arender.server.rendition.hosts=http://localhost:8761/
+```
+
+If the rendition runs on a different host, replace `localhost` with its hostname or IP.
+
+To add a connector (e.g., CMIS for Alfresco), place the connector JAR in `lib/`:
+
+```
+lib/arondor-arender-cmis-<version>-jar-with-dependencies.jar
+```
+
+## Step 6: Start the viewer
+
+```bash
+# Linux
+./ARenderConsole.sh
+
+# Windows
+ARenderConsole.bat
+```
+
+The script finds the Spring Boot JAR and runs `java -jar` on it. The viewer is accessible at `http://localhost:8080`.
+
+## Verify the deployment
+
+Open a browser to `http://localhost:8080`. To test with a sample document:
+
+```
+http://localhost:8080/?url=file:///path/to/ARender-Rendition-<version>/samples/arender.pdf
+```
+
+Check the rendition health:
+
+```bash
+curl http://localhost:8761/actuator/health
+```
+
+A healthy response returns `{"status":"UP"}`.
+
+## Installing as a system service
+
+Both packages include scripts to install ARender as a system service.
+
+### Windows
+
+The UI package includes `ARenderHMIService.exe` and `ARenderHMIService.xml` for Windows Service Wrapper:
+
+```batch
+ARenderHMIService-install.bat
+ARenderHMIService-start.bat
+```
+
+The rendition package includes equivalent `installAsService.bat` and `startService.bat`.
+
+### Linux
+
+```bash
+# Viewer UI
+./ARenderHMIService-install.sh
+
+# Rendition
+./installAsService.sh
+```
+
+These scripts create systemd units. Start and enable with:
+
+```bash
+systemctl enable arender-hmi arender-rendition
+systemctl start arender-rendition
+# Wait for the broker to be ready, then:
+systemctl start arender-hmi
+```
+
+## OAuth2 authentication
+
+OAuth2 is supported in Spring Boot standalone mode. Add the following to `configurations/arender-custom-server.properties`:
+
+```properties
+arender.server.oauth2.enabled=true
+spring.security.oauth2.client.registration.arender.client-id=arender-client
+spring.security.oauth2.client.registration.arender.client-secret=your-secret
+spring.security.oauth2.client.registration.arender.provider=keycloak
+spring.security.oauth2.client.registration.arender.authorization-grant-type=authorization_code
+spring.security.oauth2.client.registration.arender.scope=openid
+spring.security.oauth2.client.provider.keycloak.authorization-uri=https://keycloak.example.com/realms/arender/protocol/openid-connect/auth
+spring.security.oauth2.client.provider.keycloak.token-uri=https://keycloak.example.com/realms/arender/protocol/openid-connect/token
+spring.security.oauth2.client.provider.keycloak.jwk-set-uri=https://keycloak.example.com/realms/arender/protocol/openid-connect/certs
+spring.security.oauth2.client.provider.keycloak.user-name-attribute=preferred_username
+spring.security.oauth2.resourceserver.jwt.issuer-uri=https://keycloak.example.com/realms/arender
+```
+
+## Related pages
+
+- [Docker Compose deployment](/docs/arender/deployment/docker-compose): recommended for most deployments
+- [Kubernetes Helm deployment](/docs/arender/deployment/kubernetes-helm): recommended for production
+- [Environment variables](/docs/arender/deployment/environment-variables): naming convention for configuration overrides
+- [Rendition properties](/docs/arender/reference/rendition-properties): all service properties
+- [Monitoring and observability](/docs/arender/operations/monitoring): health endpoints and metrics
