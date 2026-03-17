@@ -7,8 +7,10 @@ last_update:
 content_hash: 6552697793870ef6fb823ea62f1392b2688e35025993671ee98e01bd95b0b57b
 ---
 
-If upgrading from version 4.8 to version 2023.0, please refer to the detailed upgrade documentation
-[here](/docs/arender/guides/upgrade/4.8_to_2023.0/rendition).
+If upgrading from version 2023 to version 2026, please refer to the detailed upgrade documentation
+[here](/docs/arender/guides/upgrade/2023.x_to_2026.x/rendition).
+
+If upgrading from version 2023.x to version 2026.0, please refer to the [v2026.0.0 release notes](/release-note/arender/v2026.0.0) for details on stack changes including JDK 21+, Spring Boot 4, and PDFOwl as the default renderer.
 
 If upgrading from version 2023.x to version 2026.0, please refer to the [v2026.0.0 release notes](/release-note/arender/v2026.0.0) for details on stack changes including JDK 21+, Spring Boot 4, and PDFOwl as the default renderer.
 

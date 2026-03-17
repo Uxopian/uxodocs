@@ -73,6 +73,7 @@ const config: Config = {
                 id: "arender",
                 path: "docs/arender",
                 routeBasePath: "docs/arender",
+                numberPrefixParser: false,
                 sidebarPath: require.resolve("./sidebars_arender.ts"),
                 lastVersion: "current",
                 versions: { current: { label: `v${arenderVersion}` } },

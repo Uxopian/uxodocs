@@ -1,4 +1,8 @@
 {
     "label": "Connector",
-    "link": null
+    "position": 4,
+    "link": {
+        "type": "doc",
+        "id": "development/connector/overview"
+    }
 }
