@@ -7,6 +7,7 @@ slug: /guides/integration/ibm-content-navigator
 sidebar_position: 5
 content_hash: 2c5e86cfeaec8c54e229393c72343660b555237c575bfab4be29db18d51ff51c
 ---
+import ARenderDownloads from '@site/src/components/ARenderDownloads';
 
 # IBM Content Navigator integration
 
@@ -19,6 +20,8 @@ The ARender IBM Content Navigator (ICN) plugin replaces the ICN built-in documen
 - The FileNet connector configured on the ARender viewer if your ICN desktops use P8 repositories (see [IBM FileNet integration](./ibm-filenet.md))
 - The ICN plugin JAR: `arondor-arender-navigator-plugin-2026.0.0.jar`
 - The `navigator-api` and `json4j` libraries from your ICN installation (required at ICN deploy time; they are provided-scope in the plugin)
+
+<ARenderDownloads version="2026.0.0" filter={["plugin-filenet"]} />
 
 :::note
 The ICN plugin JAR does not bundle the ICN API. It must be deployed inside the ICN application server where the ICN API is already present on the classpath.
@@ -135,11 +138,13 @@ services:
       - "ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD=loginPasswordObjectStoreProvider"
       - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN=svc-arender"
       - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD=secret"
-    volumes:
-      - ./lib/jace.jar:/home/arender/lib/jace.jar
     ports:
       - 8080:8080
 ```
+
+:::info
+This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose deployment](/docs/arender/deployment/docker-compose) for the complete configuration.
+:::
 
 For Content Manager desktops, configure the CM connector instead (see [IBM Content Manager integration](./ibm-content-manager.md)).
 

@@ -100,6 +100,10 @@ services:
       - 8080:8080
 ```
 
+:::info
+This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose deployment](/docs/arender/deployment/docker-compose) for the complete configuration.
+:::
+
 ## Step 3: Install the VAF application on M-Files
 
 1. Open the **M-Files Admin** console.

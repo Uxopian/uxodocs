@@ -7,6 +7,7 @@ slug: /guides/integration/alfresco
 sidebar_position: 2
 content_hash: 0d61fe48ddba64f80becc6eb6a16038cf9b62cdc9e5941b16f8cb623a0a079cb
 ---
+import ARenderDownloads from '@site/src/components/ARenderDownloads';
 
 # Alfresco integration
 
@@ -23,6 +24,8 @@ Both components are required for the full integration. The Share plugin builds t
 - Alfresco Content Services 5.x or later with CMIS 1.1 enabled (AtomPub endpoint active)
 - Alfresco Share 5.x or later (for the Share plugin)
 - Network connectivity from the ARender viewer host to the Alfresco CMIS endpoint
+
+<ARenderDownloads version="2026.0.0" filter={["plugin-alfresco"]} />
 
 ## Architecture
 
@@ -54,6 +57,10 @@ services:
 ```
 
 The `-alfresco` image variant includes the CMIS connector JAR pre-packaged, so no volume mount is needed for the connector.
+
+:::info
+This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose deployment](/docs/arender/deployment/docker-compose) for the complete configuration.
+:::
 
 ## Step 2: Configure the CMIS connector
 

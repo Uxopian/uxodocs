@@ -7,22 +7,16 @@ slug: /guides/integration/ibm-filenet
 sidebar_position: 3
 content_hash: 3e3012aab97638d699c75e1cedc945a39bcd12c75666947b4881a249c21d99ec
 ---
-
 # IBM FileNet integration
 
-The FileNet connector integrates ARender with IBM FileNet Content Engine (P8). It fetches documents from a FileNet object store using the JACE API (the native Java Content Engine client library) and stores annotations natively using the FileNet P8 annotation model.
+The FileNet connector integrates ARender with IBM FileNet Content Engine (P8). It fetches documents from a FileNet object store and stores annotations natively using the FileNet P8 annotation model. The connector is packaged as a fat JAR (`arondor-arender-filenet-ce-<version>-jar-with-dependencies.jar`) that includes all required dependencies — including the FileNet Java API (JACE).
 
 ## Prerequisites
 
-- ARender viewer with the FileNet connector JAR on its classpath
+- A working ARender deployment (see [Docker Compose deployment](/docs/arender/deployment/docker-compose))
 - IBM FileNet Content Engine 5.2 or later
-- The JACE client library (`jace.jar`) and its dependencies from your FileNet installation, placed on the viewer classpath
-- Network connectivity from the ARender viewer host to the FileNet Content Engine endpoint
+- Network connectivity from the ARender viewer host to the FileNet Content Engine HTTP endpoint (WSI/MTOM)
 - A valid FileNet object store
-
-:::note
-The FileNet JACE library is not redistributed by ARender. You must obtain it from your FileNet installation and add it to the viewer's classpath alongside the connector JAR.
-:::
 
 ## Architecture
 
@@ -30,15 +24,17 @@ The FileNet JACE library is not redistributed by ARender. You must obtain it fro
 flowchart LR
   Browser --> Viewer["ARender viewer"]
   Viewer --> Connector["FileNet connector"]
-  Connector --> CE["Content Engine"]
+  Connector -- "HTTP WSI/MTOM" --> CE["Content Engine"]
   CE --> Store["Object store"]
 ```
 
 The viewer receives a request containing FileNet object store and document identifiers. The connector establishes a connection to the Content Engine, fetches the document content, and returns it to the rendition pipeline. Annotations are read and written via the FileNet P8 annotation API.
 
-## Step 1: Deploy the FileNet connector
+## Step 1: Deploy and configure the FileNet connector
 
-Place the connector JAR and the JACE dependencies in the viewer's lib directory:
+A dedicated `-filenet` Docker image variant includes the connector JAR (with JACE bundled) pre-packaged, so no volume mount is needed.
+
+### Docker Compose
 
 ```yaml
 # docker-compose.yml excerpt
@@ -47,30 +43,27 @@ services:
     image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0-filenet
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
-      - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL=iiop://filenet-ce:2809/FileNet/Engine"
-      - "ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD=jaasObjectStoreProvider"
-    volumes:
-      - ./lib/jace.jar:/home/arender/lib/jace.jar
+      - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL=http://filenet-ce:9080/wsi/FNCEWS40MTOM/"
+      - "ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD=loginPasswordObjectStoreProvider"
+      - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN=svc-arender"
+      - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD=secret"
     ports:
       - 8080:8080
 ```
 
-## Step 2: Configure the Content Engine connection
+:::info
+This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose deployment](/docs/arender/deployment/docker-compose) for the complete configuration.
+:::
 
-The connector supports three authentication modes, selected via `arender.server.filenet.authentication.method`.
+### Kubernetes (Helm)
 
-### JAAS authentication (default)
+Use an init container or a custom Docker image that includes the connector JAR in `/home/arender/lib/`. The Helm chart's `extraVolumes` and `extraVolumeMounts` can be used to inject the JAR at deployment time.
 
-Used when ARender runs inside a Java EE container that already has a FileNet JAAS login module configured. The connector delegates authentication to the container.
+### Authentication modes
 
-```
-ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD=jaasObjectStoreProvider
-ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL=iiop://filenet-ce:2809/FileNet/Engine
-```
+The connector supports two authentication modes, selected via `arender.server.filenet.authentication.method`.
 
-The IIOP URL format is typical for WebSphere deployments.
-
-### Login/password authentication (technical account)
+#### Login/password authentication (technical account)
 
 All users access FileNet through a shared service account. Use the HTTP MTOM endpoint:
 
@@ -81,9 +74,9 @@ ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN=svc-arender
 ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD=secret
 ```
 
-### OAuth2 authentication
+#### OAuth2 authentication
 
-Pass an OAuth2 token to FileNet using a prefix. This mode is used when ARender is behind an OAuth2-secured gateway:
+Pass an OAuth2 token to FileNet. This mode is used when ARender is behind an OAuth2-secured gateway:
 
 ```
 ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD=oauth2ObjectStoreProvider
@@ -91,7 +84,7 @@ ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL=http://filenet-ce:9080/wsi/FNCEWS40MTOM
 ARENDERSRV_ARENDER_SERVER_SECURITY_OAUTH2_PREFIX=Bearer
 ```
 
-## Step 3: Configure annotation storage
+## Step 2: Configure annotation storage
 
 The connector offers two annotation storage modes.
 
@@ -119,10 +112,10 @@ Use this mode if you need XFDF format compatibility with other tools or if nativ
 
 | Environment variable | Property | Default | Description |
 |----------------------|----------|---------|-------------|
-| `ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD` | `arender.server.filenet.authentication.method` | `jaasObjectStoreProvider` | Authentication mode: `jaasObjectStoreProvider`, `loginPasswordObjectStoreProvider`, or `oauth2ObjectStoreProvider` |
-| `ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL` | `arender.server.filenet.ce.url` | `iiop://localhost:2809/FileNet/Engine` | Content Engine endpoint URL |
-| `ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN` | `arender.server.filenet.ce.login` | `login` | Service account login (login/password mode only) |
-| `ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD` | `arender.server.filenet.ce.password` | `password` | Service account password (login/password mode only) |
+| `ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD` | `arender.server.filenet.authentication.method` | `jaasObjectStoreProvider` | Authentication mode: `loginPasswordObjectStoreProvider` or `oauth2ObjectStoreProvider` |
+| `ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL` | `arender.server.filenet.ce.url` | `http://localhost:9080/wsi/FNCEWS40MTOM/` | Content Engine HTTP endpoint URL |
+| `ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN` | `arender.server.filenet.ce.login` | (empty) | Service account login (login/password mode only) |
+| `ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD` | `arender.server.filenet.ce.password` | (empty) | Service account password (login/password mode only) |
 | `ARENDERSRV_ARENDER_SERVER_SECURITY_OAUTH2_PREFIX` | `arender.server.security.oauth2.prefix` | (empty) | Token prefix for OAuth2 mode (e.g. `Bearer`) |
 | `ARENDERSRV_ARENDER_SERVER_FILENET_KEEP_XML_ATTRIBUTES_AS_DOCUMENT_PROPERTIES` | `arender.server.filenet.keep.xml.attributes.as.document.properties` | `false` | Expose XML attributes as document properties in the viewer |
 | `ARENDERSRV_ARENDER_SERVER_ANNOTATIONS_FILENET_CAN_CREATE` | `arender.server.annotations.filenet.can.create` | `true` | Allow users to create annotations on FileNet documents |
@@ -186,9 +179,9 @@ The connector can display watermarks based on FileNet group membership or docume
 
 ## Troubleshooting
 
-**Connection refused on startup.** Verify the CE URL is reachable from the viewer container. For IIOP connections, port 2809 must be open. For HTTP connections, check that the WSI MTOM endpoint is active on the FileNet application server.
+**Connection refused on startup.** Verify the Content Engine HTTP endpoint URL is reachable from the viewer container. The WSI MTOM endpoint is typically at `http://<host>:9080/wsi/FNCEWS40MTOM/`.
 
-**Authentication failure with JAAS mode.** JAAS mode requires the JVM to have the FileNet JAAS login configuration available. This is typically configured in `login.properties` or via a JAAS config file. In a Spring Boot container, JAAS is not automatically available: use `loginPasswordObjectStoreProvider` or `oauth2ObjectStoreProvider` instead.
+**Authentication failure.** Verify the credentials are correct. For `loginPasswordObjectStoreProvider`, check that the service account has access to the target object store. For `oauth2ObjectStoreProvider`, ensure the OAuth2 token prefix matches the expected format.
 
 **Document opens but annotations do not load.** Check that the annotation accessor bean is correctly set. The default is `fileNetAnnotationAccessor`. If you previously used `xfdfFileNetAnnotationAccessor`, verify that the property is set consistently.
 
@@ -197,5 +190,6 @@ The connector can display watermarks based on FileNet group membership or docume
 ## Related pages
 
 - [Connectors concept](../../concepts/connectors.md)
+- [IBM Content Navigator integration](./ibm-content-navigator.mdx)
 - [Embed the viewer](./embed-viewer.md)
 - [Annotations concept](../../concepts/annotations.md)

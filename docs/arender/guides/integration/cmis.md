@@ -57,6 +57,10 @@ services:
       - 8080:8080
 ```
 
+:::info
+This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose deployment](/docs/arender/deployment/docker-compose) for the complete configuration.
+:::
+
 ## Step 2: Configure the CMIS connection
 
 The connector bean `cmisConnection` is configured via properties. All properties are prefixed `arender.server.alfresco.` because the CMIS connector was originally developed against Alfresco; the property names apply to any CMIS repository.
