@@ -24,21 +24,21 @@ The viewer is a Spring Boot application (port 8080) that serves a GWT-compiled J
 - Annotation creation, editing, and storage
 - Communication with the rendition backend
 
-The viewer connects to the service broker using the `ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS` property.
+The viewer connects to the service broker using the property `arender.server.rendition.hosts` (environment variable: `ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS` in Docker environments).
 
 ### Service broker
 
 The service broker (port 8761) is the main backend entry point. It:
 
 - Exposes the rendition REST API
-- Routes requests to converter, renderer, and text handler microservices
+- Routes requests to Document Converter, Document Renderer, and Document Text Handler microservices
 - Manages asynchronous conversion and comparison jobs
 - Discovers microservices via static configuration (Docker Compose) or Kubernetes DNS (Kubeprovider)
 - Stores document metadata and conversion orders in Hazelcast (when clustered)
 
-### Document converter
+### Document Converter
 
-The converter (port 19999) transforms documents into PDF or other target formats:
+The Document Converter (port 19999) transforms documents into PDF or other target formats:
 
 - Office files (including RTF) via LibreOffice (headless), MS Office (AROMS2PDF), or DirectOffice
 - HTML and email (EML) via wkhtmltopdf
@@ -49,9 +49,9 @@ The converter (port 19999) transforms documents into PDF or other target formats
 - AFP via dedicated converter
 - PDF flattening for form-based PDFs
 
-### Document renderer
+### Document Renderer
 
-The renderer (port 9091) generates page images from PDFs:
+The Document Renderer (port 9091) resolves the document layout and generates page images from PDFs:
 
 - PDFOwl rendering engine (default)
 - JNI-based native rendering (deprecated)
@@ -59,9 +59,9 @@ The renderer (port 9091) generates page images from PDFs:
 - Supports image filters: brightness, contrast, invert, crop
 - Layer (OCG) activation for complex PDFs
 
-### Document text handler
+### Document Text Handler
 
-The text handler (port 8899) uses PDFBox for:
+The Document Text Handler (port 8899) uses PDFBox for:
 
 - Text extraction with character-level positions
 - Full-text search
@@ -84,13 +84,13 @@ graph TB
         SB -->|REST| DT[Text Handler :8899]
     end
     subgraph Storage
-        DC --- TMP[/arender/tmp shared volume/]
+        DC --- TMP["/arender/tmp shared volume"]
         DR --- TMP
         DT --- TMP
         SB --- TMP
     end
     subgraph "Document Sources"
-        V -->|Connector| ECM[FileNet / Alfresco / CMIS]
+        V -->|Connector| ECM[FileNet / Alfresco]
     end
 ```
 
@@ -106,7 +106,7 @@ All backend microservices share a ReadWriteMany volume at `/arender/tmp` for exc
 | Viewer | 8080 | Frontend UI and connector integration |
 | Service Broker | 8761 | REST API gateway and orchestration |
 | Document Converter | 19999 | Format conversion |
-| Document Renderer | 9091 | PDF-to-image rendering |
+| Document Renderer | 9091 | Document layout resolution and PDF-to-image rendering |
 | Text Handler | 8899 | Text extraction, search, signatures |
 | Hazelcast | 5701 | Distributed cache (when clustered) |
 

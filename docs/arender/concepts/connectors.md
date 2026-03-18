@@ -21,7 +21,7 @@ When a user opens a document, the viewer delegates retrieval to a connector. The
 3. Returns a `DocumentAccessor` that provides the document content stream
 4. Optionally provides an `AnnotationAccessor` for annotation storage in the external system
 
-Connectors are loaded as Spring Boot auto-configured beans. Each connector JAR includes a `META-INF/spring.factories` file that registers its configuration class.
+Connectors are loaded as Spring Boot auto-configured beans.
 
 ## Connector types
 

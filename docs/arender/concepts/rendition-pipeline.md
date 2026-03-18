@@ -29,7 +29,12 @@ sequenceDiagram
     B->>FS: Store original document
     B->>C: Convert to PDF (if needed)
     C->>FS: Store converted PDF
-    B-->>V: Return document layout (page count, dimensions)
+
+    V->>B: Get Document Layout (blocking)
+    B->>R: Resolve document layout
+    R->>FS: Read PDF from shared storage
+    R-->>B: Return layout (page count, dimensions)
+    B-->>V: Return document layout
 
     Note over V,T: Per-page requests (async, on demand)
 

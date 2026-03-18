@@ -79,7 +79,7 @@ public interface DocumentAccessor extends Serializable {
 }
 ```
 
-At minimum, implement `getInputStream()`, `getMimeType()`, and `getDocumentId()`.
+At minimum, implement `getInputStream()`, `getMimeType()`, `getDocumentId()`, `getDocumentTitle()`, and `setDocumentTitle()`.
 
 ### Specialized accessor interfaces
 
@@ -88,7 +88,7 @@ Extend the base `DocumentAccessor` to add capabilities:
 | Interface | Purpose |
 |-----------|---------|
 | `DocumentAccessorHasFileName` | Provide a download filename different from the document title |
-| `DocumentAccessorHasContext` | Carry additional metadata context |
+| `DocumentAccessorHasContext` | Provide the name of the UI profile property file to use (e.g., returns `role-user` for `role-user.properties`) |
 | `DocumentAccessorHasUserRole` | Expose user roles for role-based access control |
 | `DocumentAccessorHasPartialContent` | Support streaming / chunked loading |
 | `DocumentAccessorHasUpdateContent` | Allow document content modification |
@@ -97,7 +97,7 @@ Extend the base `DocumentAccessor` to add capabilities:
 
 ### 1. Create a Maven project
 
-Set up a Maven module with the ARender rendition API as a dependency:
+Set up a Maven module with the ARender rendition API as a dependency. For a complete example, see the [sample connector on GitHub](https://github.com/arondor-connectors/sample-connectors/).
 
 ```xml
 <dependencies>
@@ -110,7 +110,7 @@ Set up a Maven module with the ARender rendition API as a dependency:
 </dependencies>
 ```
 
-Use `provided` scope because the HMI application already includes the API at runtime.
+Use `provided` scope because the HMI application already includes the API at runtime. Refer to the [sample connector POM](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/pom.xml) for a complete list of dependencies.
 
 Package the connector as a fat JAR using the `maven-assembly-plugin`:
 
@@ -328,19 +328,14 @@ Mount the JAR into the container at `/home/arender/lib/`:
 ```yaml
 services:
   arender-ui:
-    image: docker.arender.io/arender-ui:2026.0.0
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0
     volumes:
       - ./custom-connector-jar-with-dependencies.jar:/home/arender/lib/custom-connector-jar-with-dependencies.jar
 ```
 
-**Spring Boot deployment:**
+**Standalone deployment:**
 
-Place the JAR in the `lib/` directory alongside the ARender HMI Spring Boot application, then include it on the classpath:
-
-```bash
-java -cp "arondor-arender-hmi-springboot.jar:lib/*" \
-     org.springframework.boot.loader.launch.PropertiesLauncher
-```
+Place the JAR in the `lib/` directory alongside the ARender HMI Spring Boot application.
 
 ## URL parser chain
 
@@ -357,41 +352,12 @@ Built-in parsers:
 | `AlterContentParser` | Modifies document content on the fly |
 | `FallbackURLParser` | Catch-all that returns an error page when no parser matches |
 
-## Spring Boot auto-configuration (alternative)
-
-Instead of XML bean definitions, you can use Spring Boot auto-configuration. Create a `META-INF/spring.factories` file in your connector JAR:
-
-```
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.example.connector.CustomConnectorAutoConfiguration
-```
-
-Then define the configuration class:
-
-```java
-package com.example.connector;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-public class CustomConnectorAutoConfiguration {
-
-    @Bean
-    public CustomURLParser customUrlParser() {
-        return new CustomURLParser();
-    }
-}
-```
-
-With auto-configuration, the bean is registered automatically when the JAR is on the classpath. You still need to add the bean name to the `arender.server.url.parsers.beanNames` property.
-
 ## Testing
 
 Open the ARender viewer with your custom URL parameter to verify the connector:
 
 ```
-https://arender-host:8080/arender/?customDocRef=12345
+https://localhost:8080/?customDocRef=12345
 ```
 
 Check the ARender HMI logs for parser chain execution. Enable debug logging for your connector package:

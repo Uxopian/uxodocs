@@ -23,7 +23,7 @@ ARender is a document viewing, annotation, and rendition platform built by Uxopi
 
 ARender handles two primary workloads:
 
-**Viewing and collaboration.** Users open documents from connected repositories (Alfresco, IBM FileNet, CMIS, and others), view them in a browser, and collaborate using XFDF-standard annotations. The viewer supports multi-format rendering, full-text search, bookmarks, hyperlinks, digital signature validation, document comparison, redaction, and a document builder for page-level assembly.
+**Viewing and collaboration.** Users open documents from connected repositories (Alfresco, IBM FileNet, and others), view them in a browser, and collaborate using XFDF-standard annotations. The viewer supports multi-format rendering, full-text search, bookmarks, hyperlinks, digital signature validation, document comparison, redaction, and a document builder for page-level assembly.
 
 **Backend rendition services.** A set of microservices converts documents to viewable formats, renders pages as images, extracts text, and exposes these operations through a REST API. These services can run independently of the viewer for headless processing.
 
@@ -55,11 +55,11 @@ graph LR
     Broker --> Converter["Document Converter"]
     Broker --> Renderer["Document Renderer"]
     Broker --> TextHandler["Text Handler"]
-    Viewer --> Connector["Connector (FileNet, Alfresco, CMIS...)"]
+    Viewer --> Connector["Connector (FileNet, Alfresco...)"]
     Connector --> ECM["Document Repository"]
 ```
 
-The **viewer** handles the user interface, security, and connector integration. The **service broker** orchestrates backend microservices for conversion, rendering, and text extraction. All services share a temporary file volume.
+The **viewer** handles the user interface, security, and connector integration. The **service broker** orchestrates backend microservices for conversion, rendering, and text extraction. All backend rendition microservices share a temporary file volume (`/arender/tmp`).
 
 See [System architecture](./architecture.md) for details.
 

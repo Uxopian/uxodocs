@@ -38,24 +38,24 @@ The document builder is controllable through the ARender JavaScript API:
 
 ```javascript
 // Open, toggle, or close the panel
-arender.documentBuilder.open();
-arender.documentBuilder.toggle();
-arender.documentBuilder.close();
+getARenderJS().getDocumentBuilder().open();
+getARenderJS().getDocumentBuilder().toggle();
+getARenderJS().getDocumentBuilder().close();
 
 // Reset the current assembly
-arender.documentBuilder.reset();
+getARenderJS().getDocumentBuilder().reset();
 
 // Save the first output document
-arender.documentBuilder.saveFirstDocument(download, delete, freeze, behavior);
+getARenderJS().getDocumentBuilder().saveFirstDocument(download, delete, freeze, behavior);
 
 // Save all output documents
-arender.documentBuilder.saveAllDocuments(handler, download, delete, freeze, behavior);
+getARenderJS().getDocumentBuilder().saveAllDocuments(handler, download, delete, freeze, behavior);
 
 // Create an empty document in the builder
-arender.documentBuilder.createEmptyDocument();
+getARenderJS().getDocumentBuilder().createEmptyDocument();
 
 // Create a document from JSON content
-arender.documentBuilder.createCustomDocument(jsonContent, options);
+getARenderJS().getDocumentBuilder().createCustomDocument(jsonContent, options);
 ```
 
 Parameters for `saveFirstDocument` and `saveAllDocuments`:
@@ -73,16 +73,16 @@ Register callbacks to react to builder events:
 
 ```javascript
 // Fires after save completes, receives the result document ID
-arender.documentBuilder.registerNotifyAlterDocumentContentEvent(callback);
+getARenderJS().getDocumentBuilder().registerNotifyAlterDocumentContentEvent(callback);
 
 // Fires before submission to the server (intercept/modify)
-arender.documentBuilder.registerSubmitAlterDocumentContentEvent(callback);
+getARenderJS().getDocumentBuilder().registerSubmitAlterDocumentContentEvent(callback);
 
 // Fires when the builder panel opens
-arender.documentBuilder.registerDocumentBuilderOpeningEvent(callback);
+getARenderJS().getDocumentBuilder().registerDocumentBuilderOpeningEvent(callback);
 
 // Fires on custom document save
-arender.documentBuilder.registerDocumentBuilderSaveCustomEvent(callback);
+getARenderJS().getDocumentBuilder().registerDocumentBuilderSaveCustomEvent(callback);
 ```
 
 ## Configuration

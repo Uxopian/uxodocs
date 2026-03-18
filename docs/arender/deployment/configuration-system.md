@@ -10,7 +10,7 @@ content_hash: 149b59bb0dd0fe7865e90d136719e7f46780042e747f77593bf2c94fedc6a555
 
 # Configuration system
 
-ARender is built on Spring Boot. All services follow the Spring Boot externalized configuration model, extended with a dedicated `integrator` profile for safe customization. This page describes how configuration sources are resolved and how to override properties at each layer.
+ARender is built on Spring Boot. All services follow the Spring Boot externalized configuration model. This page describes how configuration sources are resolved and how to override properties at each layer.
 
 ## Precedence hierarchy
 
@@ -22,34 +22,13 @@ Spring Boot applies configuration sources in a defined order. Higher sources ove
 |----------|--------|----------|
 | 1 | Internal `application.yml` | Inside the ARender JAR |
 | 2 | Internal `application.properties` | Inside the ARender JAR |
-| 3 | Internal `application-integrator.yml` | Inside a connector fat JAR |
-| 4 | Internal `application-integrator.properties` | Inside a connector fat JAR |
-| 5 | External `application.yml` | Next to the JAR or mounted volume |
-| 6 | External `application.properties` | Next to the JAR or mounted volume |
-| 7 | External `application-integrator.yml` | Next to the JAR or mounted volume |
-| 8 | External `application-integrator.properties` | Next to the JAR or mounted volume |
-| 9 | Environment variables | OS env, Docker `environment:`, Kubernetes ConfigMap |
-| 10 | JVM system properties | `-D` flags passed to `java` |
-| 11 | Command-line arguments | `--property=value` passed after the JAR |
+| 3 | External `application.yml` | Next to the JAR or mounted volume |
+| 4 | External `application.properties` | Next to the JAR or mounted volume |
+| 5 | Environment variables | OS env, Docker `environment:`, Kubernetes ConfigMap |
+| 6 | JVM system properties | `-D` flags passed to `java` |
+| 7 | Command-line arguments | `--property=value` passed after the JAR |
 
-A property defined at level 11 always wins over the same property defined at level 1.
-
-## Integrator profile strategy
-
-ARender activates a built-in Spring profile named `integrator`:
-
-```properties
-spring.profiles.include=integrator
-spring.profiles.active=integrator
-```
-
-This means Spring Boot automatically loads `application-integrator.properties` and `application-integrator.yml` from the classpath and from external locations. The integrator profile:
-
-- Loads **in addition** to the base `application.properties`/`application.yml`.
-- Overrides only the properties you explicitly redefine.
-- Preserves all internal defaults for properties you do not touch.
-
-Use `application-integrator.properties` (or its YAML variant) as your primary override file. This avoids conflicts caused by multiple `application.properties` files on the classpath.
+A property defined at level 7 always wins over the same property defined at level 1.
 
 ## .properties vs .yml precedence
 
@@ -74,19 +53,6 @@ Effective value: `http://broker-b:8761/` — the `.properties` file wins because
 
 This rule applies at every level of the hierarchy: internal base config, internal integrator config, external base config, and external integrator config.
 
-## Connector fat JAR internal properties
-
-Each connector is packaged as a fat JAR (classifier `-jar-with-dependencies`). A connector can embed its own default configuration by including one of:
-
-```
-application-integrator.properties
-application-integrator.yml
-```
-
-at the root of its JAR. Because the `integrator` profile is active, Spring loads these files automatically. They sit at priority levels 3-4 in the hierarchy: above ARender internal defaults but below any external configuration file.
-
-This allows a connector to ship sensible defaults that an integrator can still override by placing an external `application-integrator.properties` alongside the main ARender JAR.
-
 ## External configuration locations
 
 ### Spring Boot standalone
@@ -95,7 +61,7 @@ Place override files next to the ARender JAR:
 
 ```
 arondor-arender-hmi-springboot-<version>.jar
-application-integrator.properties          # or .yml
+application.properties          # or .yml
 ```
 
 Spring Boot detects and loads these files at startup without any additional flags.
@@ -109,7 +75,7 @@ services:
   ui:
     image: artifactory.arondor.cloud:5001/arender-ui-springboot
     volumes:
-      - ./application-integrator.properties:/home/arender/application-integrator.properties
+      - ./application.properties:/home/arender/application.properties
 ```
 
 The container working directory is `/home/arender/`, so Spring Boot picks up the file automatically.
@@ -161,17 +127,13 @@ These files are loaded via Spring's `@PropertySource` and XML import mechanisms 
 
 ```
             ┌─────────────────────────────────┐
-            │  11. Command-line arguments      │  ← highest priority
+            │  7. Command-line arguments       │  ← highest priority
             ├─────────────────────────────────┤
-            │  10. JVM -D system properties    │
+            │  6. JVM -D system properties     │
             ├─────────────────────────────────┤
-            │   9. Environment variables       │
+            │  5. Environment variables        │
             ├─────────────────────────────────┤
-            │  7-8. External integrator config │
-            ├─────────────────────────────────┤
-            │  5-6. External base config       │
-            ├─────────────────────────────────┤
-            │  3-4. Connector JAR integrator   │
+            │  3-4. External config files      │
             ├─────────────────────────────────┤
             │  1-2. ARender JAR base config    │  ← lowest priority
             └─────────────────────────────────┘
@@ -180,10 +142,8 @@ These files are loaded via Spring's `@PropertySource` and XML import mechanisms 
 ## Practical guidelines
 
 - **Do not edit files inside the ARender JAR.** Use external files or environment variables.
-- **Use `application-integrator.properties`** for property overrides. It is the safest approach because it cannot collide with internal `application.properties`.
 - **Use environment variables** for deployment-specific values (hostnames, ports, credentials). They sit above file-based configuration in the hierarchy.
 - **Use JVM `-D` flags** sparingly, typically for debugging or one-off test runs.
-- **Connector defaults** belong inside the connector fat JAR. Integrator overrides belong in external files or environment variables.
 
 ## Related pages
 

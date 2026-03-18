@@ -45,16 +45,19 @@ Three generators are available, configured as the Spring bean named `documentIdG
 | `EncryptedPerishableSelfContainedDocumentIdGenerator` | `bXX_` | Encrypts parameters with DES/CBC. Supports a configurable time-to-live. |
 | `UUIDDocumentIdGenerator` | (none) | Generates a random UUID. Parameters are not recoverable from the ID. |
 
-To use the encrypted generator with a 1-hour TTL, configure it as a Spring bean:
+To configure the ID generator, use application properties:
 
-```xml
-<bean id="documentIdGenerator"
-      class="com.arondor.viewer.common.document.id.EncryptedPerishableSelfContainedDocumentIdGenerator">
-    <property name="encryptionKey" value="yourkey8"/>
-    <property name="ivParameter" value="youriv08"/>
-    <property name="addEndOfLifeTimestamp" value="true"/>
-    <property name="timeToLiveMilliseconds" value="3600000"/>
-</bean>
+```properties
+# document id bean names: documentIdGenerator (Base64) or encryptedDocumentIdGenerator (encrypted)
+arender.documentid.generator.beanName=documentIdGenerator
+
+# adds a time to live token to ARender documentId to make it perish, only available in encrypted id
+arender.documentid.encrypted.ttl.add=false
+# attempt to revert the time to live token from an existing encrypted id
+arender.documentid.encrypted.ttl.revert=false
+
+# specifies the time to live duration in milliseconds, default is one hour
+arender.documentid.encrypted.ttl.duration.ms=3600000
 ```
 
 The encrypted generator embeds an `eolTimestamp` parameter in the ID. When the ID is decoded after the TTL has elapsed, the system rejects it with an `IllegalArgumentException`. This prevents replay of stale document links.
@@ -81,7 +84,7 @@ Specialized sub-interfaces add capabilities:
 | Interface | Added capability |
 |-----------|-----------------|
 | `DocumentAccessorHasFileName` | Provides the original file name |
-| `DocumentAccessorHasContext` | Carries connector-specific metadata |
+| `DocumentAccessorHasContext` | Provides the name of the UI profile property file to use (e.g., returns `role-user` for `role-user.properties`) |
 | `DocumentAccessorHasUserRole` | Exposes the user's role for access control |
 | `DocumentAccessorHasPartialContent` | Supports chunked or range-based loading |
 | `DocumentAccessorHasUpdateContent` | Supports writing back modified document content |
@@ -111,6 +114,10 @@ When multiple URLs are provided, the viewer creates a `DocumentContainer` with e
 ```
 
 Without a `title` parameter, the container title defaults to "Multiple URLs".
+
+:::info
+Even though ARender handles URL parameter documents, the rendition service has a safeguard that only authorizes whitelisted domain/host URLs. By default, no domain is authorized.
+:::
 
 ### Opening a document by pre-generated ID
 

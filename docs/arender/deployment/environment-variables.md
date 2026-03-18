@@ -32,6 +32,10 @@ Each service uses a prefix. All environment variable names must be uppercase.
 | Service | Container image | Prefix |
 |---------|----------------|--------|
 | Viewer | `arender-ui-springboot` | `ARENDERSRV_` |
+
+:::warning
+Native Spring Boot properties (e.g., `spring.security.oauth2.*`) must **not** be prefixed with `ARENDERSRV_`, otherwise they won't be taken into account or not properly used/detected at the right time. Only ARender-specific properties (e.g., `arender.server.*`) use the `ARENDERSRV_` prefix.
+:::
 | Service broker | `arender-document-service-broker` | `DSB_` |
 | Document converter | `arender-document-converter` | `DCV_` |
 | Document renderer | `arender-document-renderer-pdfowl` | `DRN_` |
@@ -76,10 +80,10 @@ ARENDERSRV_ARENDER_SERVER_OAUTH2_ENABLED=true
 The property `spring.security.oauth2.client.registration.arender.client-id` becomes:
 
 ```
-ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT-.I.D=arender-client
+SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT_ID=arender-client
 ```
 
-Each uppercase letter in the original camelCase key is represented as `.<letter>` in the environment variable name.
+Note that native Spring Boot properties like `spring.security.*` do not use the `ARENDERSRV_` prefix.
 
 :::note
 When in doubt about a specific property, check the broker Swagger UI at `http://{broker-host}:8761/swagger-ui/index.html` or refer to the [Rendition properties](../reference/rendition-properties.md) for exact property names.
@@ -171,11 +175,11 @@ document-converter:
 ui:
   environment:
     - "ARENDERSRV_ARENDER_SERVER_OAUTH2_ENABLED=true"
-    - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT-.I.D=arender-client"
-    - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT-.SECRET=your-secret"
-    - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_PROVIDER=keycloak"
-    - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_AUTHORIZATION-.GRANT-.TYPE=authorization_code"
-    - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_SCOPE=openid"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT_ID=arender-client"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT_SECRET=your-secret"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_PROVIDER=keycloak"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_AUTHORIZATION_GRANT_TYPE=authorization_code"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_SCOPE=openid"
 ```
 
 ---

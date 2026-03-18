@@ -10,26 +10,7 @@ content_hash: 7f80488ed8e91cf1e7ee9fc17c2af50d48c880fcda62a0efd8ab190f85f9b573
 
 # Annotations
 
-ARender uses the XFDF (XML Forms Data Format) standard from Adobe for its annotation model. Annotations are markup elements that users place on document pages: highlights, comments, stamps, redactions, and more.
-
-## Annotation model
-
-All annotations share a common set of attributes:
-
-| Attribute | Description |
-|-----------|-------------|
-| `name` | Unique annotation identifier |
-| `page` | Page number (0-based) |
-| `rect` | Bounding rectangle coordinates |
-| `color` | Display color |
-| `title` | Creator name |
-| `date` | Last modification date |
-| `creationdate` | Creation timestamp |
-| `opacity` | Transparency (0.0 to 1.0) |
-| `subject` | Annotation category label |
-| `flags` | Visibility and behavior flags |
-| `document-id` | Parent document identifier |
-| `last-modifier` | Last user who modified the annotation |
+ARender uses the XFDF (XML Forms Data Format) standard from Adobe for its annotation model. Annotations are markup elements that users place on document pages: sticky notes, highlights, comments, stamps, links, redactions, and more.
 
 ## Annotation storage
 
@@ -46,26 +27,6 @@ The default storage location is `~/ARenderAnnotations/` and is configured via:
 ```properties
 arender.server.annotations.xfdf.localstorage.default.path=/path/to/annotations/
 ```
-
-## Annotation creation policy
-
-The `AnnotationCreationPolicy` is a configuration object returned per document by the `AnnotationAccessor`. It defines what the current user is allowed to do with annotations on that document. Each annotation connector provides its own policy.
-
-Key fields:
-
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `canCreateAnnotations` | boolean | true | Master flag: whether the user can create any annotations |
-| `textAnnotationsSupportHtml` | boolean | true | Whether text annotations allow HTML content styling |
-| `textAnnotationsSupportReply` | boolean | true | Whether users can reply to text annotations |
-| `textAnnotationsSupportStatus` | boolean | true | Whether text annotations support status tracking |
-| `textAnnotationsCommentSupportReply` | boolean | true | Whether comment threads support replies |
-| `annotationsSupportSecurity` | boolean | false | Whether annotations can have security levels |
-| `availableSecurityLevels` | List | null | Available security classification levels |
-| `annotationTemplateCatalog` | AnnotationTemplateCatalog | null | Pre-defined annotation templates available on this document |
-| `annotationCreationRuleCatalog` | AnnotationCreationRuleCatalog | null | Rules governing annotation creation |
-| `availableRedactReasons` | List | null | Pre-defined redaction reasons |
-| `defaultRedactReasons` | List | null | Default redaction reasons to suggest |
 
 ## Annotation permissions
 

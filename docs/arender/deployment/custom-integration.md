@@ -32,70 +32,10 @@ The loading sequence is:
 3. `arender-custom-server-integration.xml` is imported into the server-side context.
 4. Beans defined in these files override any bean with the same `id` from the internal context.
 
-## Externalizing the XML file location
-
-By default the two files are read from the `configurations/` directory next to the JAR. You can relocate them using environment variables:
-
-| Environment variable | Controls the path of |
-|----------------------|----------------------|
-| `customXmlClientPath` | `arender-custom-integration.xml` (client side) |
-| `customXmlServerPath` | `arender-custom-server-integration.xml` (server side) |
-
-The value must be a Spring resource path. Use the `file:` prefix to point to an absolute filesystem path.
-
-**Example** -- externalize the server-side file:
-
-```properties
-customXmlServerPath=file:/opt/config/arender-server-configuration.xml
-```
-
-### Docker
-
-Pass the variable through the `environment` section and mount the file:
-
-```yaml
-services:
-  ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot
-    environment:
-      customXmlServerPath: "file:/home/arender/custom/arender-server-configuration.xml"
-      customXmlClientPath: "file:/home/arender/custom/arender-custom-integration.xml"
-    volumes:
-      - ./custom/arender-server-configuration.xml:/home/arender/custom/arender-server-configuration.xml
-      - ./custom/arender-custom-integration.xml:/home/arender/custom/arender-custom-integration.xml
-```
-
-### Kubernetes (Helm)
-
-Set the variables in `values.yaml` under the `env` block of the relevant service, and mount the files via a ConfigMap or Secret volume.
-
-## Using environment variables inside XML beans
-
-Spring's property placeholder resolution works inside custom integration XML. You can reference environment variables (or properties from `application-integrator.properties`) with the `${...}` syntax:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-boot-2.0.xsd">
-
-    <bean id="exampleBean" class="com.example.MyCustomProvider">
-        <property name="endpoint" value="${MY_CUSTOM_ENDPOINT:http://localhost:8080}" />
-        <property name="timeout" value="${MY_CUSTOM_TIMEOUT:30000}" />
-    </bean>
-
-</beans>
-```
-
-The `${VAR:default}` syntax provides a fallback value when the variable is not set. This lets you keep a single XML file across environments and vary behavior through environment variables alone.
-
 ## Practical guidelines
 
 - **Always use the custom integration files** for bean overrides instead of editing internal ARender XML. This guarantees a clean upgrade path.
-- **Prefer environment variables** for values that change between environments (URLs, credentials, timeouts). Define the bean structure in the XML and inject values via `${...}` placeholders.
 - **Keep one file per scope.** Put client-side beans in `arender-custom-integration.xml` and server-side beans in `arender-custom-server-integration.xml`. Mixing scopes causes beans to load in the wrong context.
-- **Externalize the file path** with `customXmlClientPath` / `customXmlServerPath` when your deployment model does not allow writing to the `configurations/` directory (common in containerized setups).
 
 ## Related pages
 

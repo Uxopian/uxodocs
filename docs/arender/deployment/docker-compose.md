@@ -26,6 +26,14 @@ ARender requires five containers:
 
 All ARender images are available from `artifactory.arondor.cloud:5001`.
 
+## Prerequisites
+
+Log in to the ARender Docker registry before pulling images:
+
+```bash
+docker login artifactory.arondor.cloud:5001
+```
+
 ## Service discovery
 
 In Docker Compose, the broker discovers microservices via static configuration. Each microservice is configured with environment variables that set its hostname and port (using the legacy `eureka.instance.*` property namespace). The broker polls each service's health endpoint to track availability. No Eureka server is involved.
@@ -97,21 +105,21 @@ To enable OAuth2 with a provider like Keycloak:
   ui:
     environment:
       - "ARENDERSRV_ARENDER_SERVER_OAUTH2_ENABLED=true"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT-.I.D=arender-client"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT-.SECRET=your-secret"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_PROVIDER=keycloak"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_AUTHORIZATION-.GRANT-.TYPE=authorization_code"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_SCOPE=openid"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_AUTHORIZATION-.U.R.I=https://keycloak.example.com/realms/arender/protocol/openid-connect/auth"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN-.U.R.I=https://keycloak.example.com/realms/arender/protocol/openid-connect/token"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_J.W.K-.SET-.U.R.I=https://keycloak.example.com/realms/arender/protocol/openid-connect/certs"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_USER-.NAME-.ATTRIBUTE=preferred_username"
-      - "ARENDERSRV_SPRING_SECURITY_OAUTH2_RESOURCESERVER_J.W.T_ISSUER-.U.R.I=https://keycloak.example.com/realms/arender"
+      - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT_ID=arender-client"
+      - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT_SECRET=your-secret"
+      - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_PROVIDER=keycloak"
+      - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_AUTHORIZATION_GRANT_TYPE=authorization_code"
+      - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_SCOPE=openid"
+      - "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_AUTHORIZATION_URI=https://keycloak.example.com/realms/arender/protocol/openid-connect/auth"
+      - "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN_URI=https://keycloak.example.com/realms/arender/protocol/openid-connect/token"
+      - "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_JWK_SET_URI=https://keycloak.example.com/realms/arender/protocol/openid-connect/certs"
+      - "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_USER_NAME_ATTRIBUTE=preferred_username"
+      - "SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=https://keycloak.example.com/realms/arender"
 ```
 
 ## Shared volume
 
-The `arender-tmp` volume must be accessible by all backend services (broker, converter, renderer, text handler). In multi-host deployments, use a network filesystem (NFS, GlusterFS, or equivalent).
+The `arender-tmp` volume must be accessible by all backend services (broker, converter, renderer, text handler).
 
 ## Health checks
 

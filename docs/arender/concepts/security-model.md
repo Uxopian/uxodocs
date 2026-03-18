@@ -1,5 +1,5 @@
 ---
-title: Security model
+title: Security
 last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
@@ -8,7 +8,7 @@ sidebar_position: 8
 content_hash: cffa2ca357f87f227bd2d26762f3203597f74ba632a964acbfb9f8862e59e5c9
 ---
 
-# Security model
+# Security
 
 ARender's viewer (the HMI) uses Spring Security with two mutually exclusive authentication modes: a default pre-authenticated mode for embedded integrations, and an OAuth2/OIDC mode for standalone deployments that need identity provider integration.
 

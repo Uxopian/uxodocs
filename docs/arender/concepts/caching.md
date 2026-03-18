@@ -10,7 +10,12 @@ content_hash: eb388b0edf4807a022f029f197eb0e0dc2d9418349a38fbb528ed63a353f5366
 
 # Caching
 
-ARender uses Hazelcast as a distributed in-memory data store. Both the viewer (HMI) and the service broker maintain Hazelcast instances that cache document accessors, routing tables, conversion state, and HTTP sessions. Caching reduces redundant document fetches and enables horizontal scaling of viewer and broker instances.
+ARender uses Hazelcast as a distributed in-memory data store. The viewer (HMI) and the service broker each maintain their own Hazelcast instance with different caching responsibilities:
+
+- **HMI Hazelcast**: document accessors, routing tables, HTTP sessions
+- **Rendition Hazelcast**: document accessors, conversion / transformation / comparison states
+
+Caching reduces redundant document fetches and enables horizontal scaling of viewer and broker instances.
 
 ## What gets cached
 
