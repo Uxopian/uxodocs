@@ -158,7 +158,7 @@ arender.jsapi.registerAnnotationsSavedEvent(function(success, created, updated, 
 
 ## Namespace: `arender.documentBuilder`
 
-Controls the document builder panel. For a complete description of the document builder feature, data model, and save behaviors, see [Document builder](../concepts/document-builder.md).
+Controls the document builder panel. For a complete description of the document builder feature, data model, and save behaviors, see [Document builder](../guides/features/document-builder.md).
 
 | Method | Description |
 |--------|-------------|
@@ -404,7 +404,7 @@ Callbacks:
 
 ## Related pages
 
-- [Document builder](../concepts/document-builder.md)
+- [Document builder](../guides/features/document-builder.md)
 - [Annotations](../concepts/annotations.md)
 - [Documents and IDs](../concepts/documents-and-ids.md)
 - [Viewer configuration](./viewer-configuration.md)

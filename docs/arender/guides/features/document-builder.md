@@ -1,12 +1,13 @@
 ---
 title: Document builder
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-18T00:00:00.000Z'
   author: CI/CD Bot
-slug: /concepts/document-builder
-sidebar_position: 7
-content_hash: b798125cf5a23b9ca4cc0c73b2dfcbebbce199239db12c116fb00b2ff38675cb
+slug: /guides/features/document-builder
+sidebar_position: 5
 ---
+
+# Document builder
 
 The document builder lets users assemble pages from one or more open documents into new output documents. Pages can be reordered, removed, or combined across documents using drag-and-drop in a dedicated panel.
 
@@ -97,6 +98,7 @@ arender.documentbuilder.download.document=false
 
 ## Related pages
 
-- [Annotations](./annotations.md)
-- [Documents and IDs](./documents-and-ids.md)
-- [Broker REST API](../reference/rest-api/broker-api.md)
+- [Annotations](../../concepts/annotations.md)
+- [Documents and IDs](../../concepts/documents-and-ids.md)
+- [JavaScript API reference](../../reference/javascript-api.md)
+- [Broker REST API](../../reference/rest-api/broker-api.md)

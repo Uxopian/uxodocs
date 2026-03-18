@@ -10,9 +10,7 @@ content_hash: 8fc7e708148b49293b8ad545aa2b95e1c611cd31586665120d3d31776222e9e4
 
 # Document comparison
 
-ARender supports two comparison modes: text comparison and image comparison. Text comparison highlights added and deleted text fragments between two documents displayed side by side. Image comparison overlays two pages as a single image and highlights pixel-level differences.
-
-This guide describes how to use both modes. For the conceptual model, see the [comparison concept page](../../concepts/comparison.md).
+ARender can compare two documents and produce a visual diff that highlights what changed between them. Two comparison modes are available: text comparison for textual documents and image comparison for non-textual content.
 
 ## Prerequisites
 
@@ -87,6 +85,31 @@ Click the submit button. ARender calls the `compareImages` service on the broker
 
 The composite image is displayed in the panel. You can adjust the fuzz value or colors and re-submit to fine-tune the comparison.
 
+## REST API
+
+Comparison is an asynchronous operation exposed via the broker REST API.
+
+### Async order pattern
+
+1. Submit a comparison request: `POST /comparisons`
+2. Receive an order ID immediately
+3. Poll for completion: `GET /comparisons/{orderId}`
+4. The response includes a state: `QUEUED`, `PROCESSING`, `PROCESSED`, or `FAILED`
+
+An optional `timeoutMs` query parameter enables long-polling: the server holds the connection until the comparison finishes or the timeout expires.
+
+Once the state is `PROCESSED`, the response contains the document ID of the result document. This document is a regular ARender document that you can view, download, or process further.
+
+### Request parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `leftDocumentId` | string | ID of the first document |
+| `rightDocumentId` | string | ID of the second document |
+| `highlightColor` | string | Hex color for additions/changes (without `#`). Default: `FF0000` |
+| `lowlightColor` | string | Hex color for context regions. Default: empty (transparent) |
+| `fuzz` | int | Pixel comparison tolerance, 0 to 100. Default: `3` |
+
 ## Configuration reference
 
 ### Multi-view and text comparison
@@ -132,7 +155,21 @@ This is useful when ARender is embedded in a workflow where the integration laye
 
 **Synchronized scroll causes incorrect alignment**: if document page heights differ significantly, synchronized scroll may not align changes correctly. Disable it via `visualization.multiView.synchronized=false` or the toggle in the UI.
 
+### Broker-side defaults
+
+These properties configure comparison defaults on the broker:
+
+```properties
+comparison.default.value.highlight.color=FF0000
+comparison.default.value.lowlight.color=
+comparison.default.value.fuzz=3
+```
+
+See also the [Rendition properties — Comparison defaults](../../reference/rendition-properties.md#comparison-defaults) for the full property table.
+
 ## Related pages
 
 - [Annotations concept](../../concepts/annotations.md)
+- [Rendition pipeline](../../concepts/rendition-pipeline.md)
+- [Broker REST API](../../reference/rest-api/broker-api.md)
 - [Redaction guide](./redaction.md)

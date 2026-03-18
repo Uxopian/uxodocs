@@ -31,33 +31,6 @@ All annotations share a common set of attributes:
 | `document-id` | Parent document identifier |
 | `last-modifier` | Last user who modified the annotation |
 
-## Annotation types
-
-ARender supports the following annotation types, organized by category:
-
-**Shapes**
-- Circle, Square, Line, Polygon, Polyline
-
-**Markup**
-- Highlight, Underline, Strikeout
-
-**Drawing**
-- Ink (freehand), Freetext
-
-**Stamps and images**
-- Stamp, Image stamp
-
-**Attachments**
-- Sound
-
-**Redaction**
-- Redact (permanently removes content)
-
-**Links**
-- Link, Rich text
-
-Each type extends `TextualAnnotation` or `PopupTextualAnnotation`, which adds popup comment support.
-
 ## Annotation storage
 
 Annotations are stored separately from the document content. ARender supports multiple storage backends via annotation connectors:
@@ -103,41 +76,10 @@ The annotation system supports per-annotation access control:
 
 These are enforced by the `AnnotationAccessor` implementation in each connector.
 
-## Annotation operations
-
-The `AnnotationService` interface provides CRUD operations:
-
-```java
-public interface AnnotationService {
-    AnnotationCreationPolicy getAnnotationCreationPolicy(DocumentId documentId);
-    void createAnnotations(DocumentId documentId, List<Annotation> annotations);
-    void updateAnnotations(DocumentId documentId, List<Annotation> annotations);
-    List<Annotation> getAnnotations(DocumentId documentId);
-    void deleteAnnotations(DocumentId documentId, List<AnnotationId> ids);
-}
-```
-
-## Configuration
-
-Key annotation properties:
-
-```properties
-# Enable annotation creation
-arender.server.annotations.can.create=true
-
-# Enable HTML content in annotations (freetext, sticky notes)
-arender.server.annotations.text.html.support=true
-
-# Show creation date in annotation display
-annotation.date.display.creationDate=true
-
-# Delete text under redaction annotations on export
-redact.deleteText=true
-```
-
 ## Next steps
 
 - [JDBC annotation storage guide](../guides/annotations/annotation-storage-jdbc.md)
 - [Annotation types reference](../reference/annotation-types.md)
+- [Annotation configuration guide](../guides/features/annotation-configuration.md)
 - [Redaction guide](../guides/features/redaction.md)
-- [Document builder](./document-builder.md)
+- [Document builder](../guides/features/document-builder.md)

@@ -101,5 +101,5 @@ Once a document is open, you can:
 
 - [Connectors concept](../concepts/connectors.md): connect to a document repository
 - [Annotations concept](../concepts/annotations.md): understand the annotation model
-- [Document builder](../concepts/document-builder.md): assemble pages from multiple documents
+- [Document builder](../guides/features/document-builder.md): assemble pages from multiple documents
 - [Embed the viewer](../guides/integration/embed-viewer.md) in your application
