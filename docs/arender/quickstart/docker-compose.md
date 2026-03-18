@@ -18,6 +18,14 @@ Get ARender running locally using Docker Compose. This guide takes about 5 minut
 - At least 8 GB of available RAM
 - Access to the Uxopian Docker registry (`artifactory.arondor.cloud:5001`)
 
+Log in to the ARender Docker registry:
+
+```bash
+docker login artifactory.arondor.cloud:5001
+```
+
+You will be prompted for your Artifactory credentials. Contact your ARender administrator if you do not have an account.
+
 ## Start the services
 
 Create a `docker-compose.yml` file:

@@ -5,95 +5,40 @@ last_update:
   author: CI/CD Bot
 slug: /concepts/connectors
 sidebar_position: 2
-content_hash: 7bbe07ff2d2950494986ae41aca74a23d30a9a02c807bad16b190989b74fe958
 ---
 
 # Connectors
 
-A connector is a pluggable JAR that integrates ARender with a document source. Connectors implement the `DocumentAccessor` interface to fetch documents from external repositories and make them available to the viewer.
+A connector is a `DocumentAccessor` provider. In the [DocumentId / DocumentAccessor](./documents-and-ids.md) key-value model, the connector is what produces the **value**: it knows how to reach an external document source and return a `DocumentAccessor` from it.
 
-## How connectors work
+## What a connector does
 
 When a user opens a document, the viewer delegates retrieval to a connector. The connector:
 
-1. Receives a document identifier (URL parameters, repository-specific ID)
-2. Connects to the external system using its native API
-3. Returns a `DocumentAccessor` that provides the document content stream
-4. Optionally provides an `AnnotationAccessor` for annotation storage in the external system
+1. **Parses** the incoming request through a `DocumentServiceURLParser` (the `canParse` / `parse` contract)
+2. **Connects** to the external system using its native API (CMIS, FileNet P8 CE, HTTP, etc.)
+3. **Returns** a `DocumentAccessor` that provides the document content stream, MIME type, and metadata
+4. Optionally **provides** an `AnnotationAccessor` so that annotations are stored back into the same external system
 
-Connectors are loaded as Spring Boot auto-configured beans.
+Connectors are loaded as Spring Boot auto-configured beans. Adding a connector to a deployment means placing its JAR on the viewer's classpath.
 
-## Connector types
+## Annotation connectors
 
-ARender has two kinds of connectors:
+Annotation storage follows the same connector model. Each `AnnotationAccessor` implementation connects to a storage backend — a SQL database (JDBC), an HTTP endpoint (REST), the local filesystem (XFDF), or a repository-native store (FileNet, CMIS). The viewer picks the annotation connector that matches its configuration.
 
-**Repository connectors** connect directly to a document management system to fetch document content.
-
-**UI plugin connectors** integrate with the user interface of an ECM platform. They do not fetch documents directly. Instead, they bridge the ECM's UI and ARender by generating the correct URL so that the document opens in the ARender viewer. The actual document retrieval then happens through a repository connector.
-
-## Available connectors
-
-### Uxopian-maintained connectors
-
-These connectors are developed and supported by Uxopian. Each has a dedicated integration guide.
-
-| Connector | ECM | Type | Guide |
-|-----------|-----|------|-------|
-| CMIS | Any CMIS-compliant system (incl. Alfresco) | Repository | [CMIS](../guides/integration/cmis.md) |
-| Alfresco Share plugin | Alfresco Share | UI plugin | [Alfresco](../guides/integration/alfresco.md) |
-| IBM FileNet CE | IBM FileNet P8 | Repository | [FileNet](../guides/integration/ibm-filenet.md) |
-| IBM Content Navigator plugin | IBM Content Navigator | UI plugin | [ICN](../guides/integration/ibm-content-navigator.md) |
-| IBM Content Manager | IBM CM 8.1+ | Repository | [Content Manager](../guides/integration/ibm-content-manager.md) |
-| M-Files | M-Files | Repository + VAF | [M-Files](../guides/integration/m-files.md) |
-
-### Partner-maintained connectors
-
-These connectors are developed and supported by integration partners. Contact the partner for documentation and support.
-
-| ECM | Partner |
-|-----|---------|
-| Hyland Nuxeo | [Hyland](https://www.hyland.com/) |
-| Alfresco Process Services | [Hyland](https://www.hyland.com/) |
-| OpenText Documentum | [OpenText](https://www.opentext.com/) |
-| Tessi Docubase / Data Content | [Tessi](https://www.tessi.eu/) |
-| Extedo EXTEDOpulse / esubmanager | [Extedo](https://www.extedo.com/) |
-| Salesforce | [Salesforce](https://www.salesforce.com/) |
-
-### Annotation storage connectors
-
-| Connector | Storage | Format |
-|-----------|---------|--------|
-| JDBC | SQL database (SQL Server, HSQLDB) | XFDF via JDBC |
-| REST | HTTP endpoint | XFDF via REST |
-| FileNet | FileNet database via native P8 API | Native FileNet annotation objects containing XFDF content |
-| CMIS (Alfresco) | Alfresco folders via CMIS | XFDF files stored as CMIS documents |
-| XFDF | Local filesystem | Native XFDF files |
+See [Annotations](./annotations.md) for the annotation model.
 
 ## Connector packaging
 
-Connectors are packaged as fat JARs using the `maven-assembly-plugin` with the `-jar-with-dependencies` classifier. To add a connector to an ARender deployment, place its JAR in the viewer's classpath (typically `/home/arender/lib/`).
+Connectors are packaged as fat JARs (using the `-jar-with-dependencies` classifier). To add a connector to an ARender deployment, place its JAR in the viewer's classpath (typically `/home/arender/lib/`).
 
-## Configuration
+## Connectors vs. UI plugins
 
-Each connector is configured via Spring properties or XML beans. Common patterns:
+UI plugins (Alfresco Share plugin, IBM Content Navigator plugin) are **not** connectors. They are modules installed in the ECM's own interface that open documents in ARender by generating the correct viewer URL. The actual document retrieval still goes through a repository connector (e.g., CMIS, FileNet). See the [integration catalog](../guides/integration/index.md) for the full picture.
 
-- Connection URL and credentials for the external system
-- Document metadata mapping
-- Annotation format conversion settings
-- Role-based access control (CMIS connector supports permission mapping)
+## Related pages
 
-See the individual connector guides under [Integration guides](../guides/integration/alfresco.md) for setup instructions.
-
-## DocumentAccessor interface
-
-All connectors implement the `DocumentAccessor` interface, which provides the document content stream, metadata, and optional annotation storage. For the full interface definition and how to implement it, see [Custom connector development](../custom-connector/custom-connector.md).
-
-## Next steps
-
-- [Custom connector development](../custom-connector/custom-connector.md)
-- [Alfresco integration guide](../guides/integration/alfresco.md)
-- [CMIS integration guide](../guides/integration/cmis.md)
-- [IBM FileNet integration guide](../guides/integration/ibm-filenet.md)
-- [IBM Content Navigator integration guide](../guides/integration/ibm-content-navigator.md)
-- [IBM Content Manager integration guide](../guides/integration/ibm-content-manager.md)
-- [M-Files integration guide](../guides/integration/m-files.md)
+- [Integration catalog](../guides/integration/index.md): available connectors, UI plugins, and partner integrations
+- [Custom connector development](../custom-connector/custom-connector.md): build your own connector
+- [Documents and document IDs](./documents-and-ids.md): the DocumentId / DocumentAccessor model
+- [Annotations](./annotations.md): the annotation model and storage

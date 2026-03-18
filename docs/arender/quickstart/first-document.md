@@ -99,6 +99,7 @@ Once a document is open, you can:
 
 ## Next steps
 
+- [Opening documents](../guides/features/opening-documents.md): all URL parameters and multi-document opening
 - [Connectors concept](../concepts/connectors.md): connect to a document repository
 - [Annotations concept](../concepts/annotations.md): understand the annotation model
 - [Document builder](../guides/features/document-builder.md): assemble pages from multiple documents

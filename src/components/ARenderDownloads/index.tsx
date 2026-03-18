@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 interface DownloadItem {
+    id: string;
     title: string;
     description: string;
     fileType: 'JAR' | 'ZIP' | 'EAR' | 'WAR';
@@ -11,15 +12,18 @@ interface DownloadItem {
 
 interface ARenderDownloadsProps {
     version: string;
+    filter?: string[];
 }
 
 const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
-    version
+    version,
+    filter
 }) => {
     const baseUrl = "https://artifactory.arondor.cloud/artifactory/arondor-release";
 
     const downloadItems: DownloadItem[] = [
         {
+            id: "rendition",
             title: "ARender Rendition",
             description: "ARender backend application installer",
             fileType: "JAR",
@@ -27,6 +31,7 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
             fileName: `rendition-engine-installer-${version}-rendition.jar`
         },
         {
+            id: "web-ui",
             title: "ARender Web-UI",
             description: "ARender frontend application (Spring Boot)",
             fileType: "ZIP",
@@ -34,13 +39,15 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
             fileName: `arondor-arender-hmi-spring-boot-package-${version}.zip`
         },
         {
-            title: "ARender HMI FileNet 5.x",
-            description: "J2EE EAR application for FileNet",
-            fileType: "EAR",
-            artifactPath: "com/arondor/arender/arondor-arender-hmi-filenet-ear",
-            fileName: `arondor-arender-hmi-filenet-ear-${version}.ear`
+            id: "connector-filenet",
+            title: "ARender FileNet Connector",
+            description: "FileNet Content Engine connector (fat JAR with dependencies)",
+            fileType: "JAR",
+            artifactPath: "com/arondor/arender/arondor-arender-filenet-ce",
+            fileName: `arondor-arender-filenet-ce-${version}-jar-with-dependencies.jar`
         },
         {
+            id: "hmi-cm",
             title: "ARender HMI Content Manager 8.1",
             description: "J2EE WAR application for FileNet",
             fileType: "WAR",
@@ -48,6 +55,7 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
             fileName: `arondor-arender-hmi-cm-${version}.war`
         },
         {
+            id: "plugin-filenet",
             title: "ARender Plugin for FileNet",
             description: "IBM Content Navigator plugin",
             fileType: "JAR",
@@ -55,6 +63,7 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
             fileName: `arondor-arender-navigator-plugin-${version}.jar`
         },
         {
+            id: "plugin-alfresco",
             title: "ARender Plugin for Alfresco",
             description: "Alfresco Share plugin",
             fileType: "JAR",
@@ -62,6 +71,7 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
             fileName: `arender-for-alfresco-share-plugin-${version}.jar`
         },
         {
+            id: "plugin-alfresco-adf",
             title: "ARender Plugin for Alfresco ADF",
             description: "Alfresco ADF plugin base for integration in ADF",
             fileType: "ZIP",
@@ -69,6 +79,7 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
             fileName: `arender-for-alfresco-ADF-plugin-${version}.zip`
         },
         {
+            id: "client-api",
             title: "ARender API",
             description: "ARender Client API",
             fileType: "JAR",
@@ -76,6 +87,7 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
             fileName: `arondor-arender-client-api-${version}-javadoc.jar`
         },
         {
+            id: "rendition-api",
             title: "ARender API",
             description: "ARender Rendition API",
             fileType: "JAR",
@@ -84,9 +96,12 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
         }
     ];
 
+    const filteredItems = filter
+        ? downloadItems.filter(item => filter.includes(item.id))
+        : downloadItems;
+
     const getDownloadUrl = (item: DownloadItem) => {
-        const itemVersion = version;
-        return `${baseUrl}/${item.artifactPath}/${itemVersion}/${item.fileName}`;
+        return `${baseUrl}/${item.artifactPath}/${version}/${item.fileName}`;
     };
 
     const getSha256Url = (item: DownloadItem) => {
@@ -95,9 +110,9 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
 
     return (
         <div className={styles.downloadsSection}>
-            <h2 className={styles.downloadsTitle}>Downloads</h2>
+            {!filter && <h2 className={styles.downloadsTitle}>Downloads</h2>}
 
-            {downloadItems.map((item, index) => (
+            {filteredItems.map((item, index) => (
                 <React.Fragment key={index}>
                     <div className={styles.downloadItem}>
                         <div className={styles.downloadInfo}>
@@ -123,7 +138,7 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
                             </a>
                         </div>
                     </div>
-                    {index < downloadItems.length - 1 && <hr className={styles.divider} />}
+                    {index < filteredItems.length - 1 && <hr className={styles.divider} />}
                 </React.Fragment>
             ))}
 

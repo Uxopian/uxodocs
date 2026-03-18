@@ -130,6 +130,7 @@ Both modes disable CSRF protection, frame options headers, XSS protection header
 
 ## Related pages
 
-- [Documents and document IDs](./documents-and-ids.md): how the `user` parameter is encoded in document IDs
+- [Documents and document IDs](./documents-and-ids.md): the DocumentId / DocumentAccessor model
+- [Opening documents](../guides/features/opening-documents.md): how the `user` parameter is passed via URL
 - [Caching](./caching.md): how Hazelcast is used for session sharing and document caching
 - [System architecture](../overview/architecture.md): where the viewer sits in the overall system

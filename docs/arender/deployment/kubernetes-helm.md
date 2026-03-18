@@ -18,6 +18,7 @@ ARender provides Helm charts for deploying to Kubernetes. The chart creates depl
 - Helm 3.x
 - A storage class supporting ReadWriteMany (for the shared tmp volume)
 - Access to the Uxopian Helm repository
+- Docker registry authentication: run `docker login artifactory.arondor.cloud:5001` and create a Kubernetes image pull secret (see [Installation](#installation))
 
 ## Chart structure
 
@@ -27,6 +28,32 @@ The `arender` parent chart (v0.4.0) contains two sub-charts:
 - **viewer**: deploys the UI application
 
 Each sub-chart can also be installed standalone.
+
+## Registry authentication
+
+ARender images are hosted on a private registry. Authenticate before pulling images:
+
+```bash
+docker login artifactory.arondor.cloud:5001
+```
+
+For Kubernetes, create an image pull secret so that nodes can pull the images:
+
+```bash
+kubectl create secret docker-registry arender-registry \
+  --docker-server=artifactory.arondor.cloud:5001 \
+  --docker-username=<your-username> \
+  --docker-password=<your-password> \
+  --namespace arender
+```
+
+Then reference it in your Helm values:
+
+```yaml
+global:
+  imagePullSecrets:
+    - name: arender-registry
+```
 
 ## Installation
 

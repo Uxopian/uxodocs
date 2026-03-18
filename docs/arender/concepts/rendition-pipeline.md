@@ -16,13 +16,13 @@ The rendition pipeline is the set of backend operations that transform a source 
 
 When a user opens a document, the viewer and broker coordinate through multiple asynchronous calls. The process is not a single sequential chain: the layout is resolved first, and then page images and text are fetched independently, per page, on demand.
 
+#### Document loading and layout resolution
+
 ```mermaid
 sequenceDiagram
     participant V as Viewer
     participant B as Service Broker
     participant C as Converter
-    participant R as Renderer
-    participant T as Text Handler
     participant FS as Shared Storage
 
     V->>B: Load document
@@ -31,23 +31,30 @@ sequenceDiagram
     C->>FS: Store converted PDF
 
     V->>B: Get Document Layout (blocking)
-    B->>R: Resolve document layout
-    R->>FS: Read PDF from shared storage
-    R-->>B: Return layout (page count, dimensions)
-    B-->>V: Return document layout
+    B->>FS: Read PDF
+    B-->>V: Return layout (page count, dimensions)
+```
 
-    Note over V,T: Per-page requests (async, on demand)
+#### Per-page rendering (async, on demand)
+
+```mermaid
+sequenceDiagram
+    participant V as Viewer
+    participant B as Service Broker
+    participant R as Renderer
+    participant T as Text Handler
+    participant FS as Shared Storage
 
     V->>B: Get page image (page N)
     B->>R: Render page N
-    R->>FS: Read PDF from shared storage
-    R-->>B: Return page image (PNG/SVG)
+    R->>FS: Read PDF
+    R-->>B: Page image (PNG/SVG)
     B-->>V: Return image
 
     V->>B: Get page text (page N)
     B->>T: Extract text for page N
-    T->>FS: Read PDF from shared storage
-    T-->>B: Return text positions
+    T->>FS: Read PDF
+    T-->>B: Text positions
     B-->>V: Return text
 ```
 
