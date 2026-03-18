@@ -444,6 +444,17 @@
     max-height: calc(100vh - var(--ifm-navbar-height) - 2rem) !important;
 }
 
+/* Center content and add breathing room */
+.plugin-id-arender [class*="docMainContainer"] {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.plugin-id-arender .markdown {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 /* Prevent secondary nav JS from hiding sidebar items */
 .plugin-id-arender .uxo-hidden-by-filter {
     opacity: 1 !important;
