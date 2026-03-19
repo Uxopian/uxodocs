@@ -1,10 +1,10 @@
 ---
 title: "Deploy with Docker + ARender"
 last_update:
-  date: '2026-02-16T16:29:56.656Z'
+  date: '2026-03-19T10:42:08.897Z'
   author: CI/CD Bot
 sidebar_position: 3
-content_hash: ea82d9838ef6f657aa2794c0fa0d0f0824e147c1238b151824c9d71ae021a0a6
+content_hash: fe355f8f0e1b59cbbbb84464bc21d9f1a844ba13dc1b5c12a2724753a6fa551c
 ---
 # 📚 Complete Guide: Uxopian AI Deployment & ARender Integration
 
@@ -23,7 +23,7 @@ The Starter Kit provides a ready-to-use stack containing the AI service, an Open
 ### 🔹 Step 1: Download and Structure
 
 :::tip[Download]
-**[uxopian-ai_docker_example_arender.zip](./uxopian-ai_docker_example_arender.zip)**
+**<a href={require('./uxopian-ai_docker_example_arender.zip').default}>uxopian-ai_docker_example_arender.zip</a>**
 :::
 
 
@@ -54,7 +54,7 @@ Once extracted, you should have the following directory structure:
 Pull the required images from the registry configured in your `uxopian-ai-stack.yml`:
 
 ```bash
-docker pull artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft1-rc3-full
+docker pull artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft2-full
 # Note: The OpenSearch and ARender images will be pulled automatically by the compose file.
 ```
 
@@ -119,7 +119,7 @@ Use this method for deployment on a standard server (VM Linux/Windows) without D
 ### 🔹 Step 1: Installation
 
 :::tip[Download]
-**ai-standalone-2026.0.0-ft1-rc3-complete-package.zip**
+**ai-standalone-2026.0.0-ft2-complete-package.zip**
 
 _Contact your Uxopian representative for access to this package._
 :::
@@ -128,7 +128,7 @@ _Contact your Uxopian representative for access to this package._
 Unzip the archive:
 
 ```bash
-unzip ai-standalone-2026.0.0-ft1-rc3-complete-package.zip
+unzip ai-standalone-2026.0.0-ft2-complete-package.zip
 cd ai-standalone
 
 ```
