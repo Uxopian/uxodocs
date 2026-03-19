@@ -49,7 +49,7 @@ kubectl create secret docker-registry arender-registry \
 
 Then reference it in your Helm values:
 
-```yaml
+```yaml title="values.yaml"
 global:
   imagePullSecrets:
     - name: arender-registry
@@ -78,7 +78,7 @@ helm install arender arender/arender \
 
 ### Global
 
-```yaml
+```yaml title="values.yaml"
 global:
   imagePullSecrets: []
   arenderVersion: "2026.0.0"
@@ -88,7 +88,7 @@ The `arenderVersion` sets the image tag for all ARender containers.
 
 ### Rendition services
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   broker:
     replicaCount: 1
@@ -132,7 +132,7 @@ rendition:
 
 Resources are not set by default. Set them according to your workload:
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   broker:
     resources:
@@ -170,7 +170,7 @@ rendition:
 
 ### Viewer
 
-```yaml
+```yaml title="values.yaml"
 viewer:
   replicaCount: 1
   autoscale:
@@ -188,7 +188,7 @@ viewer:
 
 ### Storage
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   sharedTmpFolder:
     create: true
@@ -201,7 +201,7 @@ rendition:
 
 ### Logging
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   logging:
     default:
@@ -221,7 +221,7 @@ rendition:
 
 ### Ingress
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   broker:
     ingress:
@@ -271,7 +271,7 @@ All services have configurable liveness and readiness probes:
 
 When `PROVIDER_ENVIRONMENT` is set to `KUBERNETES`, the broker needs RBAC permissions to discover microservices via Kubernetes API:
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   broker:
     rbac:
@@ -289,7 +289,7 @@ rendition:
 
 Each service supports injecting additional configuration via `config.file.extraConfig`:
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   broker:
     config:

@@ -191,4 +191,4 @@ Conversion engine: dedicated XFA flattener.
 - [Rendition pipeline](../concepts/rendition-pipeline.md)
 - [Office conversion](../guides/features/office-conversion.md)
 - [Email conversion](../guides/features/email-conversion.md)
-- [Microservices architecture](../architecture/microservices.md)
+- [System architecture](./architecture.md)

@@ -29,7 +29,7 @@ Create one table before starting ARender. The table stores the full XFDF content
 
 **Standard schema (recommended)**
 
-```sql
+```sql title="schema.sql"
 CREATE TABLE ANNOTATIONS (
     ANNO_ID    varchar(max) NULL,
     DOC_ID     varchar(max) NULL,
@@ -43,7 +43,7 @@ For SQL Server, use `varchar(max)` and `varbinary(max)` for the CONTENT column. 
 
 A versioned variant tracks annotation history per document and user. Use the table name `VANNOTATIONS`:
 
-```sql
+```sql title="schema.sql"
 CREATE TABLE VANNOTATIONS (
     ANNO_ID       varchar(max) NULL,
     DOC_ID        varchar(max) NULL,
@@ -61,7 +61,7 @@ The versioned accessor is available but its class (`VersionnedDocumentAnnotation
 
 Set the following properties in your `application.properties` or as environment variables on the UI container:
 
-```properties
+```properties title="application.properties"
 # JDBC driver class name
 # SQL Server: com.microsoft.sqlserver.jdbc.SQLServerDriver
 # HSQLDB: org.hsqldb.jdbc.JDBCDriver
@@ -91,7 +91,7 @@ In `arender-server-custom-jdbc.properties`, override the same three properties. 
 
 If you use a JNDI data source defined in the application server, declare it in `arender-jndi-context.xml`:
 
-```xml
+```xml title="arender-jndi-context.xml"
 <jee:jndi-lookup id="dataSourceReferenceJNDI"
                  jndi-name="jdbc/dataSourceReference"
                  expected-type="javax.sql.DataSource"

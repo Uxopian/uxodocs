@@ -86,7 +86,7 @@ Edit `arender-server.properties` to match your M-Files vault configuration. This
 
 For Docker-based deployments, mount the connector JAR and configuration files as volumes:
 
-```yaml
+```yaml title="docker-compose.yml"
 # docker-compose.yml excerpt
 services:
   ui:

@@ -8,6 +8,8 @@ sidebar_position: 3
 content_hash: 82a4cf8b357a8024280b10d3773b55072b36c5b61d7d48418c6efea365e752c2
 ---
 import ARenderDownloads from '@site/src/components/ARenderDownloads';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Spring Boot standalone deployment
 
@@ -122,7 +124,7 @@ arondor-arender-hmi-spring-boot-package-<version>/
 
 Edit `configurations/arender-custom-server.properties` to point the viewer to the rendition broker:
 
-```properties
+```properties title="arender-custom-server.properties"
 arender.server.rendition.hosts=http://localhost:8761/
 ```
 
@@ -166,28 +168,47 @@ A healthy response returns `{"status":"UP"}`.
 
 Both packages include scripts to install ARender as a system service.
 
-### Windows
+ARender Web-UI:
 
-The UI package includes `ARenderHMIService.exe` and `ARenderHMIService.xml` for Windows Service Wrapper:
+<Tabs>
+<TabItem value="linux" label="Linux">
+
+```bash
+./ARenderHMIService-install.sh
+```
+
+</TabItem>
+<TabItem value="windows" label="Windows">
 
 ```batch
 ARenderHMIService-install.bat
 ARenderHMIService-start.bat
 ```
 
-The rendition package includes equivalent `installAsService.bat` and `startService.bat`.
+</TabItem>
+</Tabs>
 
-### Linux
+ARender Rendition:
+
+<Tabs>
+<TabItem value="linux" label="Linux">
 
 ```bash
-# Viewer UI
-./ARenderHMIService-install.sh
-
-# Rendition
 ./installAsService.sh
 ```
 
-These scripts create systemd units. Start and enable with:
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+```batch
+installAsService.bat
+startService.bat
+```
+
+</TabItem>
+</Tabs>
+
+On Linux, these scripts create systemd units. Start and enable with:
 
 ```bash
 systemctl enable arender-hmi arender-rendition
@@ -200,7 +221,7 @@ systemctl start arender-hmi
 
 OAuth2 is supported in Spring Boot standalone mode. Add the following to `configurations/arender-custom-server.properties`:
 
-```properties
+```properties title="arender-custom-server.properties"
 arender.server.oauth2.enabled=true
 spring.security.oauth2.client.registration.arender.client-id=arender-client
 spring.security.oauth2.client.registration.arender.client-secret=your-secret

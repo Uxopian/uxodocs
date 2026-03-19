@@ -166,7 +166,7 @@ You can override annotation creation defaults per type in `events-configuration.
 
 Example -- a blue-bordered rectangle with zero fill opacity:
 
-```xml
+```xml title="events-configuration.xml"
 <bean id="SquareCreationAction"
   class="com.arondor.viewer.client.toppanel.behavior.annotation.CreateAnnotationButtonHandler">
   <constructor-arg>
@@ -271,7 +271,7 @@ Stamp templates are defined in `annotation-template-catalog.xml`. Two types are 
 | `borderStyle` | Integer | `0` = no border, `1` = with border |
 | `rotation` | Integer | Rotation in degrees |
 
-```xml
+```xml title="annotation-template-catalog.xml"
 <bean class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
   <property name="name" value="Urgent" />
   <property name="annotationType">
@@ -302,7 +302,7 @@ Stamp templates are defined in `annotation-template-catalog.xml`. Two types are 
 | `defaultPosition.h` | Integer | Height in pixels |
 | `rotation` | Integer | Rotation in degrees |
 
-```xml
+```xml title="annotation-template-catalog.xml"
 <bean class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
   <property name="name" value="Logo" />
   <property name="annotationType">

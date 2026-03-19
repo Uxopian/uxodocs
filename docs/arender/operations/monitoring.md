@@ -188,8 +188,7 @@ ARender supports exporting metrics to four external systems. Each is disabled by
 
 Enable the Prometheus scrape endpoint as described above, then configure your Prometheus server to scrape each service:
 
-```yaml
-# prometheus.yml
+```yaml title="prometheus.yml"
 scrape_configs:
   - job_name: 'arender-broker'
     metrics_path: '/actuator/prometheus'
@@ -256,7 +255,7 @@ The Helm chart configures HTTP probes for all services:
 
 These values are configurable per service in `values.yaml`:
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   broker:
     deployment:
@@ -272,7 +271,7 @@ rendition:
 
 Custom liveness and readiness paths can be set:
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   broker:
     deployment:
@@ -306,7 +305,7 @@ ARender uses Logback for logging. There are two logging configurations: one for 
 
 In the Helm chart, the logging ConfigMap generates a Logback configuration that routes log levels to stdout/stderr and optionally to rolling files:
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   logging:
     default:
@@ -354,7 +353,7 @@ logger name: com.arondor.arender.micro.services.rendition.jobs.MicroServiceHealt
 
 To persist logs across pod restarts, enable log persistence in the Helm chart:
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   logging:
     persistance:
@@ -368,7 +367,7 @@ rendition:
 
 To change a service's log level without restarting, mount a custom logback.xml via the Helm chart:
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   broker:
     logging:
@@ -483,6 +482,6 @@ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.volu
 ## Related pages
 
 - [Rendition properties](../reference/rendition-properties.md)
-- [Microservices architecture](../architecture/microservices.md)
+- [System architecture](../overview/architecture.md)
 - [Kubernetes Helm deployment](../deployment/kubernetes-helm.md)
 - [Docker Compose deployment](../deployment/docker-compose.md)

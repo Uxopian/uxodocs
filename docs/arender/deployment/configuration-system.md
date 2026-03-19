@@ -36,16 +36,14 @@ When both formats exist at the same location, `.properties` takes precedence ove
 
 **Example:** both files define the same property:
 
-`application.yml`:
-```yaml
+```yaml title="application.yml"
 arender:
   server:
     rendition:
       hosts: http://broker-a:8761/
 ```
 
-`application.properties`:
-```properties
+```properties title="application.properties"
 arender.server.rendition.hosts=http://broker-b:8761/
 ```
 
@@ -70,7 +68,7 @@ Spring Boot detects and loads these files at startup without any additional flag
 
 Mount override files into the container at `/home/arender/`:
 
-```yaml
+```yaml title="docker-compose.yml"
 services:
   ui:
     image: artifactory.arondor.cloud:5001/arender-ui-springboot
@@ -84,7 +82,7 @@ The container working directory is `/home/arender/`, so Spring Boot picks up the
 
 Use the `config.file.extraConfig` field in `values.yaml` to inject raw YAML into the generated `application.yml` ConfigMap:
 
-```yaml
+```yaml title="values.yaml"
 broker:
   config:
     file:

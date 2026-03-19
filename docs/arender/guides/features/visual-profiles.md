@@ -40,7 +40,7 @@ Multiple documents can be opened with different profiles by varying the `props` 
 
 Create a file named after the profile, for example `readOnly.properties`. Add only the properties you want to override:
 
-```properties
+```properties title="readOnly.properties"
 # Hide annotation toolbar
 toolbar.annotation.buttons.beanNames=
 
@@ -62,8 +62,7 @@ Any property present in `arender-default.properties` can be overridden in a prof
 
 Mount the profile file into `/home/arender/ARenderConfiguration/` inside the web-ui container:
 
-```yaml
-# docker-compose.yml
+```yaml title="docker-compose.yml"
 services:
   arender-ui:
     image: arender-ui:latest

@@ -30,19 +30,17 @@ You will be prompted for your Artifactory credentials. Contact your ARender admi
 
 Create a `docker-compose.yml` file:
 
-```yaml
-version: "3.7"
-
+```yaml title="docker-compose.yml"
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
     ports:
       - 8080:8080
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:2026.0.0
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
@@ -53,7 +51,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter
+    image: artifactory.arondor.cloud:5001/arender-document-converter:2026.0.0
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
@@ -62,7 +60,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl
+    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:2026.0.0
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
       - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -71,7 +69,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:2026.0.0
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"

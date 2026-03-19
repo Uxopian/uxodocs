@@ -40,19 +40,17 @@ In Docker Compose, the broker discovers microservices via static configuration. 
 
 ## Full configuration
 
-```yaml
-version: "3.7"
-
+```yaml title="docker-compose.yml"
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
     ports:
       - 8080:8080
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:2026.0.0
     ports:
       - 8761:8761
     environment:
@@ -63,7 +61,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter
+    image: artifactory.arondor.cloud:5001/arender-document-converter:2026.0.0
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
@@ -72,7 +70,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl
+    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:2026.0.0
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
       - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -81,7 +79,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:2026.0.0
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -121,19 +119,6 @@ To enable OAuth2 with a provider like Keycloak:
 
 The `arender-tmp` volume must be accessible by all backend services (broker, converter, renderer, text handler).
 
-## Health checks
-
-Add health checks to detect service failures:
-
-```yaml
-  service-broker:
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8761/health/records"]
-      interval: 15s
-      timeout: 5s
-      retries: 3
-      start_period: 60s
-```
 
 ## Next steps
 

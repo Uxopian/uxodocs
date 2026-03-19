@@ -99,7 +99,7 @@ Extend the base `DocumentAccessor` to add capabilities:
 
 Set up a Maven module with the ARender rendition API as a dependency. For a complete example, see the [sample connector on GitHub](https://github.com/arondor-connectors/sample-connectors/).
 
-```xml
+```xml title="pom.xml"
 <dependencies>
     <dependency>
         <groupId>com.arondor.arender</groupId>
@@ -114,7 +114,7 @@ Use `provided` scope because the HMI application already includes the API at run
 
 Package the connector as a fat JAR using the `maven-assembly-plugin`:
 
-```xml
+```xml title="pom.xml"
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-assembly-plugin</artifactId>
@@ -139,7 +139,7 @@ Package the connector as a fat JAR using the `maven-assembly-plugin`:
 
 Create a class that implements `DocumentAccessor`. This example fetches a document from a hypothetical REST API:
 
-```java
+```java title="CustomDocumentAccessor.java"
 package com.example.connector;
 
 import java.io.*;
@@ -245,7 +245,7 @@ public class CustomDocumentAccessor implements DocumentAccessor {
 
 Create a `DocumentServiceURLParser` that detects when the URL contains your custom parameters and creates the accessor:
 
-```java
+```java title="CustomURLParser.java"
 package com.example.connector;
 
 import java.util.ArrayList;
@@ -302,7 +302,7 @@ public class CustomURLParser implements DocumentServiceURLParser {
 
 Define the URL parser as a Spring bean in `configurations/arender-custom-server-integration.xml`:
 
-```xml
+```xml title="arender-custom-server-integration.xml"
 <bean id="customUrlParser"
       class="com.example.connector.CustomURLParser" />
 ```
@@ -311,7 +311,7 @@ Define the URL parser as a Spring bean in `configurations/arender-custom-server-
 
 In `configurations/arender-custom-server.properties`, prepend your parser bean name to the URL parser chain:
 
-```properties
+```properties title="arender-custom-server.properties"
 arender.server.url.parsers.beanNames=customUrlParser,DefaultURLParser,DocumentIdURLParser,FileattachmentURLParser,ExternalBeanURLParser,AlterContentParser,FallbackURLParser
 ```
 
@@ -325,7 +325,7 @@ Copy the fat JAR (`*-jar-with-dependencies.jar`) to the ARender HMI classpath:
 
 Mount the JAR into the container at `/home/arender/lib/`:
 
-```yaml
+```yaml title="docker-compose.yml"
 services:
   arender-ui:
     image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0

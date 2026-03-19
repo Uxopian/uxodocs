@@ -51,7 +51,7 @@ The connector maintains two connection pools:
 
 Place the connector JAR and the CM client libraries in the viewer's lib directory:
 
-```yaml
+```yaml title="docker-compose.yml"
 # docker-compose.yml excerpt
 services:
   ui:
@@ -84,7 +84,7 @@ The CM SDK requires three INI configuration files that describe the server conne
 
 Specifies the CM server RMI endpoint:
 
-```ini
+```ini title="cmbclient.ini"
 RemoteHost=cm-library-server
 RemotePort=1919
 ```
@@ -93,7 +93,7 @@ RemotePort=1919
 
 Specifies the CM datastore and database connection details:
 
-```ini
+```ini title="cmbicmsrvs.ini"
 ICMSERVER=ICMNLSDB
 ICMSERVERREPTYPE=DB2
 ICMSCHEMA=ICMADMIN
@@ -114,7 +114,7 @@ ICMJNDIREF=
 
 Contains the Base64-encoded credentials for the CM datastore (format: `datastore=(base64(login;password))`):
 
-```ini
+```ini title="cmbicmenv.ini"
 icmnlsdb=(base64encodedcredentials=)
 ```
 

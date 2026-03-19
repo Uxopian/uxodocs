@@ -38,7 +38,7 @@ Copy the contents of `secure-mode-properties/modules/` into the corresponding `m
 
 The RenditionEngine `application-https.yaml` expects a PKCS12 keystore. Place your keystore file at the location referenced in the configuration and update the values to match your certificate:
 
-```yaml
+```yaml title="application-https.yaml"
 server:
   ssl:
     key-store: keystore.p12
@@ -68,7 +68,7 @@ SPRING_PROFILES_ACTIVE=https
 
 On the Web UI side, two properties are required in `arender-custom-server.properties` (or the equivalent Spring Boot configuration):
 
-```properties
+```properties title="arender-custom-server.properties"
 arender.server.rendition.hosts=https://<RENDITION_HOSTNAME>:<RENDITION_PORT>/
 arender.rest.ssl.custom.use=true
 ```
@@ -91,7 +91,7 @@ keytool -importcert -alias arender-rendition \
 
 When running with Docker Compose, pass the HTTPS profile and mount the keystore into the rendition containers:
 
-```yaml
+```yaml title="docker-compose.yml"
 services:
   rendition-engine:
     environment:
@@ -104,7 +104,7 @@ Apply the same pattern to every rendition microservice container (document-conve
 
 On the Web UI container, set the properties via environment variables:
 
-```yaml
+```yaml title="docker-compose.yml"
 services:
   web-ui:
     environment:

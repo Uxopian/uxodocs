@@ -43,7 +43,7 @@ CMIS connections are cached for up to two hours by session ticket or service acc
 
 Add the connector JAR to the viewer:
 
-```yaml
+```yaml title="docker-compose.yml"
 # docker-compose.yml excerpt
 services:
   ui:

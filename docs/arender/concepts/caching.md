@@ -61,7 +61,7 @@ Each component (viewer, broker) reads its Hazelcast configuration from a `hazelc
 
 A typical viewer configuration:
 
-```yaml
+```yaml title="hazelcast.yaml"
 hazelcast:
   map:
     documentAccessorsHMI:

@@ -86,7 +86,7 @@ To change the port, set `server.port` in its `application.properties`.
 
 Set the following properties in `application.properties` or as environment variables on the UI container:
 
-```properties
+```properties title="application.properties"
 # Base URL of the annotation service (trailing slash required)
 annotation.rest.backend.uri=http://annotation-service:7777/annotation/
 
@@ -107,7 +107,7 @@ The `saasAnnotationAccessor` bean is provided by the REST annotation connector J
 
 Declare a `RestAnnotationAccessor` bean in `arender-editor-specific-integration.xml`:
 
-```xml
+```xml title="arender-editor-specific-integration.xml"
 <bean id="myRestAnnotationAccessor"
       class="com.arondor.arender.annotation.rest.RestAnnotationAccessor"
       scope="prototype">
@@ -118,7 +118,7 @@ Declare a `RestAnnotationAccessor` bean in `arender-editor-specific-integration.
 
 Then point the wrapper accessor at it in `arender-server-custom.properties`:
 
-```properties
+```properties title="arender-server-custom.properties"
 annotation.rest.backend.uri=http://annotation-service:7777/annotation/
 arender.server.wrapper.source.annotation.accessor=myRestAnnotationAccessor
 ```
@@ -144,7 +144,7 @@ arender.server.wrapper.source.annotation.accessor=myRestAnnotationAccessor
 
 ## Docker Compose example
 
-```yaml
+```yaml title="docker-compose.yml"
 services:
   arender-ui:
     image: arender-ui:2026.0.0

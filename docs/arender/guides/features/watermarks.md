@@ -43,7 +43,7 @@ Restart the ARender web application. Watermarks will appear on every page.
 
 You can define your own watermark by declaring a Spring bean in `arender-custom-server-integration.xml`. The bean controls the text content, style, and position.
 
-```xml
+```xml title="arender-custom-server-integration.xml"
 <bean id="myWatermark" class="com.arondor.viewer.client.api.annotation.templates.AnnotationTemplate">
   <property name="name" value="MY_WATERMARK" />
   <property name="annotationType">

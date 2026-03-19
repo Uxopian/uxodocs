@@ -97,7 +97,7 @@ In a Docker Compose file, set environment variables under the `environment` key 
 
 ### Minimal working configuration
 
-```yaml
+```yaml title="docker-compose.yml"
 services:
   ui:
     image: artifactory.arondor.cloud:5001/arender-ui-springboot
@@ -201,7 +201,7 @@ Two charts are available:
 
 Each service in the `rendition` chart accepts an `environment` map under its key:
 
-```yaml
+```yaml title="values.yaml"
 # helm/rendition/values.yaml (excerpt)
 broker:
   environment:
@@ -220,7 +220,7 @@ handler:
 
 The viewer chart uses a flat `environment` map:
 
-```yaml
+```yaml title="values.yaml"
 # helm/viewer/values.yaml (excerpt)
 environment:
   ARENDERSRV_ARENDER_SERVER_OAUTH2_ENABLED: "true"
@@ -230,7 +230,7 @@ environment:
 
 The broker discovers rendition services using DNS names resolved from Kubernetes service names. The ConfigMap template (`configmap-broker.yaml`) generates the following structure automatically based on chart values:
 
-```yaml
+```yaml title="configmap-broker.yaml"
 kubeprovider:
   kubeHosts:
     {release-name}-converter.{namespace}.svc.cluster.local: 19999
@@ -249,7 +249,7 @@ The broker `PROVIDER_ENVIRONMENT` variable controls how service addresses are re
 
 Use `envFrom` to mount a Kubernetes Secret as environment variables:
 
-```yaml
+```yaml title="values.yaml"
 broker:
   envFrom:
     - secretRef:
@@ -258,7 +258,7 @@ broker:
 
 The Secret would contain values such as:
 
-```yaml
+```yaml title="arender-broker-secrets.yaml"
 apiVersion: v1
 kind: Secret
 metadata:
@@ -271,7 +271,7 @@ stringData:
 
 The `config.file.extraConfig` field in each service's values appends raw YAML to the generated `application.yml` ConfigMap:
 
-```yaml
+```yaml title="values.yaml"
 broker:
   config:
     file:
@@ -289,7 +289,7 @@ This is useful for multi-line or complex properties that are awkward to express 
 
 The viewer chart provides a dedicated `rendition.hosts` list that generates the `ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS` variable automatically:
 
-```yaml
+```yaml title="values.yaml"
 rendition:
   hosts:
     - http://arender-broker.arender.svc.cluster.local:8761/

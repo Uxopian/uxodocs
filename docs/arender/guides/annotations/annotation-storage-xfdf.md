@@ -36,7 +36,7 @@ When no file exists for a document, ARender returns an empty annotation set and 
 
 Set the storage path in `application.properties` or as an environment variable on the UI container:
 
-```properties
+```properties title="application.properties"
 arender.server.annotations.xfdf.localstorage.default.path=/data/annotations/
 ```
 
@@ -52,7 +52,7 @@ If the property is not set, the default path is `~/ARenderAnnotations/` (the hom
 
 The `arender.xml` configuration file wires the `xfdfAnnotationAccessor` bean directly. Override the path in `arender-server-custom.properties`:
 
-```properties
+```properties title="arender-server-custom.properties"
 arender.server.annotations.xfdf.localstorage.default.path=/opt/arender/annotations/
 ```
 
@@ -92,7 +92,7 @@ Because each UI instance reads and writes annotation files directly, all instanc
 
 **Docker Compose example:**
 
-```yaml
+```yaml title="docker-compose.yml"
 services:
   arender-ui:
     image: arender-ui:2026.0.0
