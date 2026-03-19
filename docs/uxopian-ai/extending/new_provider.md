@@ -248,7 +248,7 @@ Add the JAR to the `/app/provider/` directory in your Docker image.
 
 ```dockerfile
 # Start from the specific version of Uxopian-ai
-FROM artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft2-full
+FROM artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft2
 
 # Copy your custom provider Fat JAR into the provider directory
 COPY ./target/custom-fakellm-provider-1.0.jar /app/provider/

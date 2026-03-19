@@ -214,7 +214,7 @@ You must use the **Gateway Service** base image (different from the core AI imag
 
 ```dockerfile
 # Start from the Gateway Service image
-FROM artifactory.arondor.cloud:5001/uxopian-ai/gateway-service:2026.0.0-ft2-full
+FROM artifactory.arondor.cloud:5001/uxopian-ai/gateway-service:2026.0.0-ft2
 
 # Copy your custom Auth Provider Fat JAR into the provider directory
 COPY ./target/my-custom-auth-provider-1.0-SNAPSHOT.jar /app/provider/
