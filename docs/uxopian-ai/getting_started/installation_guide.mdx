@@ -1,10 +1,10 @@
 ---
 title: "Deploy with Docker"
 last_update:
-  date: '2026-02-16T16:29:56.656Z'
+  date: '2026-03-19T10:42:08.897Z'
   author: CI/CD Bot
 sidebar_position: 2
-content_hash: f2a6ae1d46017e20f5eb47c1369afd0665a4715072d2c8cb190dd9a0ffe0d4f1
+content_hash: 137d24f68c209319ca9993facbaf8a89a7b7b361fa82a7076d85fe4afcac79b8
 ---
 
 # 📚 Guide: Uxopian AI Service Deployment
@@ -24,7 +24,7 @@ The Starter Kit provides a ready-to-use stack containing the AI service and an O
 ### 🔹 Step 1: Download and Structure
 
 :::tip[Download]
-**[uxopian-ai_docker_example.zip](./uxopian-ai_docker_example.zip)**
+**<a href={require('./uxopian-ai_docker_example.zip').default}>uxopian-ai_docker_example.zip</a>**
 :::
 
 Once extracted, you should have the following directory structure:
@@ -50,7 +50,7 @@ Once extracted, you should have the following directory structure:
 Pull the required images from the registry configured in your `uxopian-ai-stack.yml`:
 
 ```bash
-docker pull artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft1-rc3
+docker pull artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft2
 # Note: The OpenSearch image is public and will be pulled automatically by the compose file.
 ```
 
@@ -110,7 +110,7 @@ Use this method for deployment on a standard server (VM Linux/Windows) without D
 ### 🔹 Step 1: Installation
 
 :::tip[Download]
-**ai-standalone-2026.0.0-ft1-rc3-complete-package.zip**
+**ai-standalone-2026.0.0-ft2-complete-package.zip**
 
 _Contact your Uxopian representative for access to this package._
 :::
@@ -118,7 +118,7 @@ _Contact your Uxopian representative for access to this package._
 Unzip the archive:
 
 ```bash
-unzip ai-standalone-2026.0.0-ft1-rc3-complete-package.zip
+unzip ai-standalone-2026.0.0-ft2-complete-package.zip
 cd ai-standalone
 
 ```

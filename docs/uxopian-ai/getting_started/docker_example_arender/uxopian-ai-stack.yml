@@ -108,8 +108,8 @@ services:
       start_period: 20s
 
   uxopian-ai-standalone:
-    image: artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft1-rc3-full
-    # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft1-rc3-full
+    image: artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft2-full
+    # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft2-full
     container_name: uxopian-ai-standalone-service
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
@@ -132,8 +132,8 @@ services:
         condition: service_healthy
 
   #xopian-ai-gateway:
-  # image: artifactory.arondor.cloud:5001/gateway:2026.0.0-ft1-rc3-full
-  # # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft1-rc3-full
+  # image: artifactory.arondor.cloud:5001/gateway:2026.0.0-ft2-full
+  # # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft2-full
   # container_name: uxopian-ai-gateway-service
   # environment:
   #   - JAVA_OPTS=-Xmx768m -Xms512m
