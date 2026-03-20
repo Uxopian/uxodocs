@@ -39,6 +39,6 @@ UI plugins (Alfresco Share plugin, IBM Content Navigator plugin) are **not** con
 ## Related pages
 
 - [Integration catalog](../guides/integration/index.md): available connectors, UI plugins, and partner integrations
-- [Custom connector development](../custom-connector/custom-connector.md): build your own connector
+- [Custom connector development](../guides/integration/custom-connector.md): build your own connector
 - [Documents and document IDs](./documents-and-ids.md): the DocumentId / DocumentAccessor model
 - [Annotations](./annotations.md): the annotation model and storage

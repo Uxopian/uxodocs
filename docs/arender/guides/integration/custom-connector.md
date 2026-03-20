@@ -3,20 +3,20 @@ title: Custom connector development
 last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
-slug: /custom-connector/custom-connector
-sidebar_position: 1
+slug: /guides/integration/custom-connector
+sidebar_position: 10
 content_hash: e78f2f970c07554d63a0fc9dbd3c9dc10eb96c3b9dc95c738f3c42f36c73934a
 ---
 
 # Custom connector development
 
-For an overview of what a connector is, see [Connectors concept](../concepts/connectors.md). For the list of built-in connectors, see the [integration catalog](../guides/integration/index.md).
+For an overview of what a connector is, see [Connectors concept](../../concepts/connectors.md). For the list of built-in connectors, see the [integration catalog](./index.md).
 
 This guide explains how to build a custom connector JAR that integrates ARender with a document source not covered by the built-in connectors. A connector consists of two components: a **URL parser** that extracts request parameters, and a **document accessor** that provides the document content.
 
 ## When to build a custom connector
 
-Build a custom connector when your document source is not covered by the [built-in connectors](../guides/integration/index.md#repository-connectors). Typical cases include in-house document repositories, proprietary ECM systems, or third-party APIs without an existing integration.
+Build a custom connector when your document source is not covered by the [built-in connectors](./index.md#repository-connectors). Typical cases include in-house document repositories, proprietary ECM systems, or third-party APIs without an existing integration.
 
 ## Prerequisites
 

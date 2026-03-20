@@ -61,4 +61,4 @@ See [Annotations concept](../../concepts/annotations.md) for the annotation mode
 ## Other integration options
 
 - [Embed the viewer](./embed-viewer.md) in your application via iframe
-- [Custom connector development](../../custom-connector/custom-connector.md): build your own connector
+- [Custom connector development](./custom-connector.md): build your own connector
