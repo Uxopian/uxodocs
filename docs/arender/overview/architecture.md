@@ -118,7 +118,7 @@ The converter transforms non-native formats into PDF or MP4 before the broker ro
 | Text files, vCard | Internal renderer | PDF |
 | Video/audio (MOV, MKV, AVI, WAV, MP3, etc.) | FFmpeg | MP4 |
 | AFP | cpmcopy | PDF |
-| XFA forms | PDFFormsFlattener | PDF (flattened) |
+| XFA forms | Built-in PDF flattener | PDF (flattened) |
 
 The Docker image for the converter ships with all required tools pre-installed. A self-test mechanism (the "nurse") converts sample files at startup to verify that tools are operational.
 
