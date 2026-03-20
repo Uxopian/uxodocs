@@ -146,6 +146,6 @@ These files are loaded via Spring's `@PropertySource` and XML import mechanisms.
 ## Related pages
 
 - [Environment variables](./environment-variables.md): naming conventions and per-service prefixes
-- [Spring Boot standalone deployment](./spring-boot.mdx): full standalone setup guide
-- [Docker Compose deployment](./docker-compose.md): container-based deployment
-- [Kubernetes Helm deployment](./kubernetes-helm.md): Helm chart configuration
+- [Spring Boot standalone](./spring-boot.mdx): full standalone setup guide
+- [Docker Compose](./docker-compose.md): container-based deployment
+- [Kubernetes Helm](./kubernetes-helm.md): Helm chart configuration

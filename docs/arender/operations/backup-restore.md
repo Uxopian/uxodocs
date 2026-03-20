@@ -231,6 +231,6 @@ The rendition cache rebuilds automatically on first document access. No separate
 
 - [XFDF file annotation storage](../guides/annotations/annotation-storage-xfdf.md)
 - [JDBC annotation storage](../guides/annotations/annotation-storage-jdbc.md)
-- [Docker Compose deployment](../deployment/docker-compose.md)
-- [Kubernetes Helm deployment](../deployment/kubernetes-helm.md)
+- [Docker Compose](../deployment/docker-compose.md)
+- [Kubernetes Helm](../deployment/kubernetes-helm.md)
 - [Monitoring and observability](./monitoring.md)

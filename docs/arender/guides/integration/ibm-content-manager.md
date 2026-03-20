@@ -73,7 +73,7 @@ services:
 ```
 
 :::info
-This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose deployment](/docs/arender/deployment/docker-compose) for the complete configuration.
+This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose](/docs/arender/deployment/docker-compose) for the complete configuration.
 :::
 
 ## Step 2: Configure the CM INI files

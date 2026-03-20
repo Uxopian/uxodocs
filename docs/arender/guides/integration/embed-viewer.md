@@ -14,7 +14,7 @@ ARender is a web application that runs at a fixed URL. To embed it in another ap
 
 ## Prerequisites
 
-- ARender is running and accessible from the browser (see [Docker Compose deployment](../../deployment/docker-compose.md))
+- ARender is running and accessible from the browser (see [Docker Compose](../../deployment/docker-compose.md))
 - The document URL or path is reachable by the ARender service broker
 - If the document comes from an external URL, that URL prefix is listed in `authorized.urls` on the broker (see [Open your first document](../../quickstart/first-document.md))
 
@@ -120,7 +120,7 @@ This approach keeps the document URL out of the browser's address bar and avoids
 ## Related pages
 
 - [Open your first document](../../quickstart/first-document.md)
-- [Docker Compose deployment](../../deployment/docker-compose.md)
+- [Docker Compose](../../deployment/docker-compose.md)
 - [Alfresco integration guide](./alfresco.mdx)
 - [IBM FileNet integration guide](./ibm-filenet.mdx)
 - [Broker REST API reference](../../reference/rest-api/broker-api.md)

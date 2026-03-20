@@ -312,5 +312,5 @@ rendition:
 ## Related pages
 
 - [Rendition properties](../reference/rendition-properties.md)
-- [Docker Compose deployment](./docker-compose.md)
-- [Kubernetes Helm deployment](./kubernetes-helm.md)
+- [Docker Compose](./docker-compose.md)
+- [Kubernetes Helm](./kubernetes-helm.md)

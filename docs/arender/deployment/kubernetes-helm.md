@@ -309,5 +309,5 @@ helm upgrade arender arender/arender \
 
 ## Next steps
 
-- [Docker Compose deployment](./docker-compose.md)
+- [Docker Compose](./docker-compose.md)
 - [REST API reference](../reference/rest-api/broker-api.md)

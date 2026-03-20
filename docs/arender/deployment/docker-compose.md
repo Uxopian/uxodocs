@@ -1,5 +1,5 @@
 ---
-title: Docker Compose deployment
+title: Docker Compose
 last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
@@ -8,7 +8,7 @@ sidebar_position: 1
 content_hash: 518444f924bbca651353d3ad4870055e254c9a2e029603f56b69ca9b094e89f2
 ---
 
-# Docker Compose deployment
+# Docker Compose
 
 This guide covers deploying ARender with Docker Compose for production or staging environments.
 
@@ -122,5 +122,5 @@ The `arender-tmp` volume must be accessible by all backend services (broker, con
 
 ## Next steps
 
-- [Kubernetes Helm deployment](./kubernetes-helm.md) for orchestrated deployments
+- [Kubernetes Helm](./kubernetes-helm.md) for orchestrated deployments
 - [REST API reference](../reference/rest-api/broker-api.md)

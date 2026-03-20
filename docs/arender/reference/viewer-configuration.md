@@ -604,4 +604,4 @@ These properties control the Spring Boot backend. Override them in `configuratio
 - [JavaScript API reference](./javascript-api.md)
 - [Document builder](../guides/features/document-builder.md)
 - [Annotations](../concepts/annotations.md)
-- [Docker Compose deployment](../deployment/docker-compose.md)
+- [Docker Compose](../deployment/docker-compose.md)

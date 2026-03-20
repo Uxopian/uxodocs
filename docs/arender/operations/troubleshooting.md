@@ -492,9 +492,9 @@ ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD=secret
 ## Related pages
 
 - [Monitoring and observability](./monitoring.md)
-- [Docker Compose deployment](../deployment/docker-compose.md)
-- [Kubernetes Helm deployment](../deployment/kubernetes-helm.md)
-- [Spring Boot standalone deployment](../deployment/spring-boot.mdx)
+- [Docker Compose](../deployment/docker-compose.md)
+- [Kubernetes Helm](../deployment/kubernetes-helm.md)
+- [Spring Boot standalone](../deployment/spring-boot.mdx)
 - [JDBC annotation storage](../guides/annotations/annotation-storage-jdbc.md)
 - [Alfresco integration](../guides/integration/alfresco.mdx)
 - [IBM FileNet integration](../guides/integration/ibm-filenet.mdx)

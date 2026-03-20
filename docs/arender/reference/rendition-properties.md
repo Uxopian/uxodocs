@@ -366,5 +366,5 @@ Additional control properties:
 ## Related pages
 
 - [Environment variables](../deployment/environment-variables.md)
-- [Docker Compose deployment](../deployment/docker-compose.md)
-- [Kubernetes Helm deployment](../deployment/kubernetes-helm.md)
+- [Docker Compose](../deployment/docker-compose.md)
+- [Kubernetes Helm](../deployment/kubernetes-helm.md)

@@ -41,5 +41,5 @@ The loading sequence is:
 
 - [Configuration system](./configuration-system.md): full precedence hierarchy and override strategy
 - [Environment variables](./environment-variables.md): naming conventions and per-service prefixes
-- [Docker Compose deployment](./docker-compose.md): container-based deployment
-- [Kubernetes Helm deployment](./kubernetes-helm.md): Helm chart configuration
+- [Docker Compose](./docker-compose.md): container-based deployment
+- [Kubernetes Helm](./kubernetes-helm.md): Helm chart configuration
