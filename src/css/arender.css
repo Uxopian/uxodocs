@@ -206,9 +206,15 @@
 }
 
 .plugin-id-arender .markdown > table {
-    display: block;
+    display: table;
+    table-layout: fixed;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+}
+
+.plugin-id-arender table td code,
+.plugin-id-arender table th code {
+    word-break: break-all;
 }
 
 /* ================================================================
