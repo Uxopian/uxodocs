@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Helm deployment
+title: Kubernetes Helm
 last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
@@ -8,7 +8,7 @@ sidebar_position: 2
 content_hash: 989fbec2f7c95c3a7575acdec4a4882b4141ee3c06debc112696199c82166b14
 ---
 
-# Kubernetes Helm deployment
+# Kubernetes Helm
 
 ARender provides Helm charts for deploying to Kubernetes. The chart creates deployments for all ARender services, with support for autoscaling, persistent storage, ingress, and Hazelcast clustering.
 

@@ -23,6 +23,10 @@ b64_dXJsPWh0dHA6Ly9leGFtcGxlLmNvbS9zYW1wbGUucGRm
 
 You will see these IDs in viewer URLs and in broker logs. Different [ID generators](../guides/features/document-id-generators.md) produce different formats (encrypted, UUID-based), but from a consumer's perspective the ID is always an opaque string.
 
+:::info
+When opening documents by URL, the rendition service only authorizes whitelisted domains. By default, no domain is authorized. See [Opening documents](../guides/features/opening-documents.md) for configuration.
+:::
+
 ### Hierarchical IDs
 
 When multiple documents are opened together as a container, each child document receives a `DocumentId` formed from the parent ID followed by `/` and a numeric index:

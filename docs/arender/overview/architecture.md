@@ -54,8 +54,8 @@ The viewer connects to the service broker using the property `arender.server.ren
 |---------|-------------|---------|
 | Viewer | 8080 | Frontend UI and connector integration |
 | Service Broker | 8761 | REST API gateway and orchestration |
-| Document Converter | 19999 | Format conversion |
-| Document Renderer | 9091 | Document layout resolution and PDF-to-image rendering |
+| Document converter | 19999 | Format conversion |
+| Document renderer | 9091 | Document layout resolution and PDF-to-image rendering |
 | Text Handler | 8899 | Text extraction, search, signatures |
 | Hazelcast | 5701 | Distributed cache (when clustered) |
 
@@ -131,7 +131,7 @@ For configuration properties, see [Rendition configuration](../reference/renditi
 **Port:** 9091
 **Image:** `arender-document-renderer-pdfowl`
 
-The renderer generates page images from PDF files. It is the only service that produces visual page content for the viewer.
+The renderer resolves document layout (page count, dimensions) and generates page images from PDF files. It is the only service that produces visual page content for the viewer.
 
 ### PDFOwl rendering engine
 

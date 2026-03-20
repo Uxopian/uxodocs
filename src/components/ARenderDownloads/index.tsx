@@ -141,15 +141,6 @@ const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
                     {index < filteredItems.length - 1 && <hr className={styles.divider} />}
                 </React.Fragment>
             ))}
-
-            <div className={styles.otherVersions}>
-                <a
-                    href="/releases?product=arender"
-                    className={styles.otherVersionsLink}
-                >
-                    Other versions
-                </a>
-            </div>
         </div>
     );
 };

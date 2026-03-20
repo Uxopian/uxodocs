@@ -49,7 +49,7 @@ arender.server.rendition.hosts=http://broker-b:8761/
 
 Effective value: `http://broker-b:8761/` — the `.properties` file wins because it has higher precedence than `.yml` at the same location.
 
-This rule applies at every level of the hierarchy: internal base config, internal integrator config, external base config, and external integrator config.
+This rule applies at every level of the configuration hierarchy.
 
 ## External configuration locations
 
@@ -119,7 +119,7 @@ arondor-arender-hmi-spring-boot-package-<version>/
 | `arender-custom-integration.xml` | Replaces or extends Spring beans on the client side using XML configuration. |
 | `arender-custom-server-integration.xml` | Replaces or extends Spring beans on the server side. |
 
-These files are loaded via Spring's `@PropertySource` and XML import mechanisms and are separate from the `application-integrator.properties` profile-based override. Both approaches can be used together.
+These files are loaded via Spring's `@PropertySource` and XML import mechanisms.
 
 ## Resolution diagram
 
@@ -146,6 +146,6 @@ These files are loaded via Spring's `@PropertySource` and XML import mechanisms 
 ## Related pages
 
 - [Environment variables](./environment-variables.md): naming conventions and per-service prefixes
-- [Spring Boot standalone deployment](./spring-boot.md): full standalone setup guide
+- [Spring Boot standalone deployment](./spring-boot.mdx): full standalone setup guide
 - [Docker Compose deployment](./docker-compose.md): container-based deployment
 - [Kubernetes Helm deployment](./kubernetes-helm.md): Helm chart configuration

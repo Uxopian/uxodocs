@@ -150,12 +150,12 @@
    INLINE CODE
    ================================================================ */
 
-.plugin-id-arender code {
+.plugin-id-arender code:not(pre code) {
     background-color: #f1f5f9;
     border: none;
 }
 
-.plugin-id-arender[data-theme='dark'] code {
+.plugin-id-arender[data-theme='dark'] code:not(pre code) {
     background-color: #2d2d2f;
 }
 

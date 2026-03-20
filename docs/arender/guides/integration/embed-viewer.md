@@ -121,6 +121,6 @@ This approach keeps the document URL out of the browser's address bar and avoids
 
 - [Open your first document](../../quickstart/first-document.md)
 - [Docker Compose deployment](../../deployment/docker-compose.md)
-- [Alfresco integration guide](./alfresco.md)
-- [IBM FileNet integration guide](./ibm-filenet.md)
+- [Alfresco integration guide](./alfresco.mdx)
+- [IBM FileNet integration guide](./ibm-filenet.mdx)
 - [Broker REST API reference](../../reference/rest-api/broker-api.md)

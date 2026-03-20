@@ -91,7 +91,7 @@ hazelcast:
 
 A typical broker configuration:
 
-```yaml
+```yaml title="hazelcast.yaml"
 hazelcast:
   map:
     documentAccessors:

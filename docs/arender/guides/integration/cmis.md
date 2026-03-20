@@ -12,7 +12,7 @@ content_hash: 1d8ed6293782250c219a1882cffe551517edb4cbd1eed79aefa5243e2a74b457
 
 The CMIS connector integrates ARender with any CMIS-compliant content repository using the Apache Chemistry OpenCMIS client library. It supports the AtomPub binding and is tested primarily against Alfresco Content Services, but it works with any repository that exposes a standard CMIS 1.0 or 1.1 AtomPub endpoint.
 
-For Alfresco-specific integration (Share plugin, Alfresco site roles, ADF/ACA), see the [Alfresco integration guide](./alfresco.md). This page covers generic CMIS configuration and non-Alfresco use cases.
+For Alfresco-specific integration (Share plugin, Alfresco site roles, ADF/ACA), see the [Alfresco integration guide](./alfresco.mdx). This page covers generic CMIS configuration and non-Alfresco use cases.
 
 ## Prerequisites
 
@@ -186,6 +186,6 @@ Browser binding is not supported. WebServices (SOAP) binding is available for Al
 ## Related pages
 
 - [Connectors concept](../../concepts/connectors.md)
-- [Alfresco integration guide](./alfresco.md)
+- [Alfresco integration guide](./alfresco.mdx)
 - [Embed the viewer](./embed-viewer.md)
 - [Annotations concept](../../concepts/annotations.md)
