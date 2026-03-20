@@ -20,7 +20,7 @@ The ARender viewer (HMI) has two distinct categories of configuration properties
 | **Where it runs** | Sent to the browser (GWT client) | Stays on the Spring Boot server |
 | **Can be profile-scoped** | Yes, via [visual profiles](../guides/features/visual-profiles.md) (`?props=profileName`) | No |
 
-For the full precedence hierarchy and file placement, see [Configuration system](../deployment/configuration-system.md).
+For the full precedence hierarchy and file placement, see [Configuration system](../installation/configuration-system.md).
 
 ---
 
@@ -604,4 +604,4 @@ These properties control the Spring Boot backend. Override them in `configuratio
 - [JavaScript API reference](./javascript-api.md)
 - [Document builder](../guides/features/document-builder.md)
 - [Annotations](../concepts/annotations.md)
-- [Docker Compose](../deployment/docker-compose.md)
+- [Docker Compose](../installation/docker-compose.md)

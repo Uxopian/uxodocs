@@ -10,7 +10,7 @@ content_hash: 20aa8bb42c6144bb03055879874c51627ce2fab079acee92b0af422815b8725b
 
 # Rendition configuration
 
-All ARender rendition services are Spring Boot applications. Properties can be set in `application.properties`, `application.yml`, or overridden via environment variables. See [Environment variables](../deployment/environment-variables.md) for the naming convention.
+All ARender rendition services are Spring Boot applications. Properties can be set in `application.properties`, `application.yml`, or overridden via environment variables. See [Environment variables](../installation/environment-variables.md) for the naming convention.
 
 Properties shown here are the defaults from the source. Omitting a property leaves the default in effect.
 
@@ -365,6 +365,6 @@ Additional control properties:
 
 ## Related pages
 
-- [Environment variables](../deployment/environment-variables.md)
-- [Docker Compose](../deployment/docker-compose.md)
-- [Kubernetes Helm](../deployment/kubernetes-helm.md)
+- [Environment variables](../installation/environment-variables.md)
+- [Docker Compose](../installation/docker-compose.md)
+- [Kubernetes Helm](../installation/kubernetes-helm.md)

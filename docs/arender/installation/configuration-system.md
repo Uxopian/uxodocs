@@ -3,7 +3,7 @@ title: Configuration system
 last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
-slug: /deployment/configuration-system
+slug: /installation/configuration-system
 sidebar_position: 4
 content_hash: 149b59bb0dd0fe7865e90d136719e7f46780042e747f77593bf2c94fedc6a555
 ---

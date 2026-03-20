@@ -3,7 +3,7 @@ title: Docker Compose
 last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
-slug: /deployment/docker-compose
+slug: /installation/docker-compose
 sidebar_position: 1
 content_hash: 518444f924bbca651353d3ad4870055e254c9a2e029603f56b69ca9b094e89f2
 ---

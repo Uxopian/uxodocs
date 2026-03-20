@@ -3,7 +3,7 @@ title: Environment variables
 last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
-slug: /deployment/environment-variables
+slug: /installation/environment-variables
 sidebar_position: 5
 content_hash: 9230a7e6aa24decacf34eb5481491c1c7c307f38ed57a32c1be5d2c3a7449176
 ---

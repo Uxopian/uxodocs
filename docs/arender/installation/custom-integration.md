@@ -3,7 +3,7 @@ title: Custom integration files
 last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
-slug: /deployment/custom-integration
+slug: /installation/custom-integration
 sidebar_position: 6
 content_hash: dacb93d27ade8d2979a7b7611d7f9a758172b3d573ba7a1aaf81730be6904dee
 ---

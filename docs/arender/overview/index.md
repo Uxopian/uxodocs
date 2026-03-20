@@ -67,5 +67,5 @@ See [System architecture](./architecture.md) for details.
 
 - [Docker Compose quickstart](../quickstart/docker-compose.md): get ARender running locally in minutes
 - [Core concepts](../concepts/connectors.md): understand connectors, annotations, and the rendition pipeline
-- [Deployment](../deployment/docker-compose.md): deploy ARender for production
+- [Installation](../installation/docker-compose.md): install ARender for production
 - [REST API reference](../reference/rest-api/broker-api.md): integrate programmatically
