@@ -95,7 +95,7 @@ Conversion engine: wkhtmltopdf.
 | Microsoft Project | .mpp | application/vnd.ms-project |
 | Microsoft Publisher | .pub | application/x-mspublisher, application/vnd.ms-publisher |
 
-Conversion engine: LibreOffice (default, free), DirectOffice (paid add-on), or MS Office/AROMS (licensed, Windows-only). See [Office conversion](../guides/features/office-conversion.md).
+Conversion engine: LibreOffice (default, free), DirectOffice (paid add-on), or MS Office/AROMS (licensed, Windows-only). See [Office conversion](../guides/features/office-conversion.mdx).
 
 ## Text
 
@@ -189,6 +189,6 @@ Conversion engine: dedicated XFA flattener.
 ## Related pages
 
 - [Rendition pipeline](../concepts/rendition-pipeline.md)
-- [Office conversion](../guides/features/office-conversion.md)
+- [Office conversion](../guides/features/office-conversion.mdx)
 - [Email conversion](../guides/features/email-conversion.md)
 - [System architecture](./architecture.md)

@@ -169,6 +169,17 @@ document-converter:
     - "DCV_SOFFICE_CONVERSION_TIMEOUT=300"
 ```
 
+**Activate DirectOffice for Word, Excel, and PowerPoint:**
+
+```yaml
+document-converter:
+  environment:
+    - "DCV_MIMETYPE_SUPPORT_DIRECTOFFICE=<word,excel,powerpoint MIME types>"
+    - "DCV_MIMETYPE_SUPPORT_LIBREOFFICE=<remaining formats: RTF, ODF, Visio, Project>"
+```
+
+See the [Office conversion guide](../guides/features/office-conversion.mdx#directoffice-paid-add-on) for the full list of MIME types.
+
 **Enable OAuth2 on the viewer:**
 
 ```yaml

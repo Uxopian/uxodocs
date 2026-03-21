@@ -7,6 +7,8 @@ slug: /guides/features/office-conversion
 sidebar_position: 1
 content_hash: 9eb80900ea7ae98b32ba915aa786bd25881a2548a2b9c58ef77e4039f76e1647
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Office conversion
 
@@ -54,19 +56,66 @@ See the [Document converter reference](../../reference/rendition-properties.md#d
 
 DirectOffice is a commercial conversion engine sold as an add-on. It provides faster, higher-fidelity conversion of Microsoft Office formats (Word, Excel, PowerPoint). For OpenDocument and other formats, it delegates to LibreOffice.
 
+**Why choose DirectOffice?**
+
+- **Pros:** Fast, high-quality conversion of MS Office formats. Quick issue resolution through Uxopian support. Ideal for businesses seeking consistent quality and reliable technical support.
+- **Cons:** Paid add-on. Delegates OpenDocument formats (ODT, ODS, ODP) to LibreOffice.
+
 ### Activating DirectOffice
 
-Edit `application-security.yml` in the `modules/TaskConversion` directory. Route the desired MS Office MIME types to DirectOffice while keeping LibreOffice for the rest:
+<Tabs>
+<TabItem value="docker" label="Docker Compose" default>
+
+DirectOffice is **pre-installed** in the `arender-document-converter` Docker image — no binary setup is needed.
+
+Add environment variables to the `document-converter` service in your `docker-compose.yml`:
+
+```yaml title="docker-compose.yml"
+document-converter:
+  image: artifactory.arondor.cloud:5001/arender-document-converter
+  environment:
+    # ... existing eureka vars ...
+    # Activate DirectOffice for Word, Excel, PowerPoint
+    - "DCV_MIMETYPE_SUPPORT_DIRECTOFFICE=application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-word.document.macroEnabled.12,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-word.template.macroEnabled.12,application/msexcel,application/vnd.ms-excel,application/x-ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroEnabled.12,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.ms-excel.template.macroEnabled.12,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint.presentation.macroEnabled.12,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.ms-powerpoint.template.macroEnabled.12"
+    # Keep LibreOffice for remaining formats (RTF, ODF, Visio, Project)
+    - "DCV_MIMETYPE_SUPPORT_LIBREOFFICE=text/rtf,application/vnd.oasis.opendocument.text,application/vnd.oasis.opendocument.spreadsheet,application/vnd.oasis.opendocument.presentation,application/visio,application/x-visio,application/vnd.visio,application/vnd.ms-visio,application/visio.drawing,application/vsd,application/x-vsd,image/x-vsd,zz-application/zz-winassoc-vsd,application/vnd.oasis.opendocument.graphics,application/vnd.ms-project"
+```
+
+The `DCV_` prefix is stripped at runtime, and underscores become dots. So `DCV_MIMETYPE_SUPPORT_DIRECTOFFICE` maps to the Spring property `mimetype.support.directoffice`. See [Environment variables](../../installation/environment-variables.md) for the full naming convention.
+
+</TabItem>
+<TabItem value="standalone" label="Standalone">
+
+Edit `application-security.yml` in the `modules/TaskConversion` directory. Move the desired MS Office MIME types from `libreoffice` to `directoffice`, and keep LibreOffice for the remaining formats:
 
 ```yaml title="modules/TaskConversion/application-security.yml"
 mimetype:
   support:
-    msoffice: "${mime.type.msoffice.publisher},${mime.type.msoffice.visio},${mime.type.msoffice.rtf},${mime.type.msoffice.project}"
-    libreoffice: "${mime.type.libreoffice.text},${mime.type.libreoffice.sheet},${mime.type.libreoffice.presentation},${mime.type.libreoffice.graphics}"
+    # Word, Excel, PowerPoint → DirectOffice
     directoffice: "${mime.type.msoffice.word},${mime.type.msoffice.excel},${mime.type.msoffice.powerpoint}"
+    # OpenDocument formats → LibreOffice
+    libreoffice: "${mime.type.libreoffice.text},${mime.type.libreoffice.sheet},${mime.type.libreoffice.presentation},${mime.type.libreoffice.graphics}"
+    # Visio, Publisher, Project, RTF → MS Office (or LibreOffice if AROMS is not available)
+    msoffice: "${mime.type.msoffice.publisher},${mime.type.msoffice.visio},${mime.type.msoffice.rtf},${mime.type.msoffice.project}"
 ```
 
 In this example, Word, Excel, and PowerPoint documents go through DirectOffice. Visio, Publisher, Project, and RTF remain on MS Office/LibreOffice. OpenDocument formats stay on LibreOffice.
+
+</TabItem>
+</Tabs>
+
+### DirectOffice configuration reference
+
+| Property | Default | Docker env var | Description |
+|---|---|---|---|
+| `rendition.directoffice.path` | `directoffice` | `DCV_RENDITION_DIRECTOFFICE_PATH` | Path to the DirectOffice executable |
+| `soffice.conversion.timeout` | `120` | `DCV_SOFFICE_CONVERSION_TIMEOUT` | Conversion timeout in seconds (shared with LibreOffice) |
+| `mimetype.support.directoffice` | `""` (empty) | `DCV_MIMETYPE_SUPPORT_DIRECTOFFICE` | Comma-separated MIME types routed to DirectOffice |
+
+### Known limitations
+
+- Diacritics in document file names are automatically stripped before conversion (transparent to end users).
+- Formats like Visio, Publisher, and Project should remain with LibreOffice or MS Office — DirectOffice does not handle them.
 
 ## Microsoft Office / AROMS
 
@@ -138,6 +187,10 @@ mime:
 ```
 
 The `mimetype.support` block then assigns groups of MIME types to a conversion backend (`libreoffice`, `directoffice`, or `msoffice`). Adjust these mappings to control which backend handles which formats.
+
+:::info Conversion priority order
+When a MIME type is listed under multiple backends, the converter tries them in this order: **MS Office (AROMS, Windows only)** → **LibreOffice** → **DirectOffice**. To activate DirectOffice for a format, you must move that format's MIME types from `libreoffice` to `directoffice`. If the same MIME type appears under both `libreoffice` and `directoffice`, LibreOffice takes priority.
+:::
 
 ### Factory routing
 
