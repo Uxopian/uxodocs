@@ -4,7 +4,7 @@ last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
 slug: /guides/features/redaction
-sidebar_position: 5
+sidebar_position: 9
 content_hash: ddc83e34e1c05a4af44ae838aca1b339a96ed890c17010a6211ad290aa13b98e
 ---
 

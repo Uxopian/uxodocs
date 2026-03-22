@@ -4,7 +4,7 @@ last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
 slug: /guides/features/white-labeling
-sidebar_position: 8
+sidebar_position: 12
 content_hash: 10e7c162ac6c59a8707a72b8cb0357cb01cd1cd85a433473f87b19dbdd17b5e9
 ---
 

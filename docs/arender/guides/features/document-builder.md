@@ -4,7 +4,7 @@ last_update:
   date: '2026-03-18T00:00:00.000Z'
   author: CI/CD Bot
 slug: /guides/features/document-builder
-sidebar_position: 5
+sidebar_position: 8
 ---
 
 # Document builder

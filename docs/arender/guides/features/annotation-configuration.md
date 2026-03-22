@@ -4,7 +4,7 @@ last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
 slug: /guides/features/annotation-configuration
-sidebar_position: 3
+sidebar_position: 6
 content_hash: ec5c40a70526ac76c441a8b73ff50c30c5a0ed1d181554a9f60207e4a8dd8299
 ---
 

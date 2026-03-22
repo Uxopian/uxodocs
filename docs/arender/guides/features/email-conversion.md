@@ -4,7 +4,7 @@ last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
 slug: /guides/features/email-conversion
-sidebar_position: 2
+sidebar_position: 4
 content_hash: 307490b1bfed3f0229c20d2c45dd8f3bf9f445e99c2a2dec7841fd3a20b91a70
 ---
 

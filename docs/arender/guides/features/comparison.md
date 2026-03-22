@@ -4,7 +4,7 @@ last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
 slug: /guides/features/comparison
-sidebar_position: 4
+sidebar_position: 7
 content_hash: 8fc7e708148b49293b8ad545aa2b95e1c611cd31586665120d3d31776222e9e4
 ---
 

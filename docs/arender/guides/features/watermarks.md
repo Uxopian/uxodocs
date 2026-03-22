@@ -4,7 +4,7 @@ last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
 slug: /guides/features/watermarks
-sidebar_position: 6
+sidebar_position: 10
 content_hash: bb4c94bfc57ac57b1fa97105927ab6fc14100a44565ab82eb537be228c87f4e5
 ---
 

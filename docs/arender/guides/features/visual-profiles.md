@@ -4,7 +4,7 @@ last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
 slug: /guides/features/visual-profiles
-sidebar_position: 7
+sidebar_position: 11
 content_hash: 40e9df981a893514fcc1f211a0b408d0466e8d53c6ffae4d3abb8d15f5cedbf1
 ---
 

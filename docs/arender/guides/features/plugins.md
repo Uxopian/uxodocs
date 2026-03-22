@@ -4,7 +4,7 @@ last_update:
   date: '2026-03-17T14:31:35.329Z'
   author: CI/CD Bot
 slug: /guides/features/plugins
-sidebar_position: 10
+sidebar_position: 14
 content_hash: 346451479b766a8f19c6c435641a80c52fca0c87720c7bd6c6ada104a6f5ebf8
 ---
 
