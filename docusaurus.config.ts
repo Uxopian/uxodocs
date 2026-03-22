@@ -84,6 +84,20 @@ const config: Config = {
         [
             "@docusaurus/plugin-content-docs",
             {
+                id: "arender-react",
+                path: "docs/arender-react",
+                routeBasePath: "docs/arender-react",
+                numberPrefixParser: false,
+                sidebarPath: require.resolve("./sidebars_arender_react.ts"),
+                lastVersion: "current",
+                versions: { current: { label: `v${arenderVersion}` } },
+                showLastUpdateTime: true,
+                remarkPlugins: [[remarkVariables, { variables: { version: arenderVersion } }]],
+            },
+        ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
                 id: "fast2",
                 path: "docs/fast2",
                 routeBasePath: "docs/fast2",

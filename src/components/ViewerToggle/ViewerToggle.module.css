@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    margin: 0.75rem 0.75rem 0;
+    border: 1px solid var(--ifm-color-primary);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.segment {
+    flex: 1;
+    padding: 0.35rem 0.75rem;
+    border: none;
+    background: transparent;
+    color: var(--ifm-color-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-align: center;
+}
+
+.segment:hover:not(.active) {
+    background: var(--ifm-color-primary-lightest, rgba(var(--ifm-color-primary-rgb, 58, 111, 216), 0.08));
+}
+
+.active {
+    background: var(--ifm-color-primary);
+    color: #fff;
+    cursor: default;
+}
