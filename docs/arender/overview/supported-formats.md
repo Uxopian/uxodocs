@@ -158,7 +158,7 @@ DWG R13  (AC1012) — AutoCAD Release 13
 DWG R11/12 (AC1009) — AutoCAD Release 11/12
 ```
 
-Conversion engine: dedicated AutoCAD converter.
+Conversion engine: CADConverter (paid add-on). See [AutoCAD conversion](../guides/features/cad-conversion.mdx).
 
 ## AFP
 
