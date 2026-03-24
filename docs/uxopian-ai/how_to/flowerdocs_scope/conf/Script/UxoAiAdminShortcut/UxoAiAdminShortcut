@@ -1,0 +1,79 @@
+(function () {
+  "use strict";
+
+  const NEW_APP_CONFIG = {
+    id: "uxo-ai-app-link",
+    url: `${GATEWAY_ENDPOINT}/admin`,
+    title: "Uxopian-ai",
+    description: "Uxopian-ai administration pannel",
+    iconClass: "fas fa-robot",
+    target: "_blank",
+    allowedRoles: ["ADMIN", "SYSTEM_ADMIN"],
+  };
+
+  const TARGET_CONTAINER_SELECTOR = "#app-list .dropdown-menu .slimscroll";
+
+  function hasUserPermission() {
+    try {
+      const userProfiles = JSAPI.get().getUserAPI().getUserProfiles();
+
+      return NEW_APP_CONFIG.allowedRoles.some((role) =>
+        userProfiles.includes(role)
+      );
+    } catch (e) {
+      console.error("Failed to check JSAPI permissions:", e);
+      return false;
+    }
+  }
+
+  function waitForElement(selector) {
+    return new Promise((resolve) => {
+      if (document.querySelector(selector)) {
+        return resolve(document.querySelector(selector));
+      }
+
+      const observer = new MutationObserver((mutations) => {
+        if (document.querySelector(selector)) {
+          observer.disconnect();
+          resolve(document.querySelector(selector));
+        }
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    });
+  }
+
+  function addCustomOption(container) {
+    if (document.getElementById(NEW_APP_CONFIG.id)) return;
+
+    const link = document.createElement("a");
+    link.className = "dropdown-item notify-item";
+    link.href = NEW_APP_CONFIG.url;
+    link.target = NEW_APP_CONFIG.target;
+    link.id = NEW_APP_CONFIG.id;
+
+    link.innerHTML = `
+            <div class="notify-icon" style="background-color: var(--primary);">
+                <i class="${NEW_APP_CONFIG.iconClass}"></i>
+            </div>
+            <div class="notify-details">
+                <i class="external-link float-right fas fa-up-right-from-square mt-1"></i>
+                <div class="m-0">${NEW_APP_CONFIG.title}</div>
+                <div class="small text-muted">${NEW_APP_CONFIG.description}</div>
+            </div>
+        `;
+
+    container.appendChild(link);
+  }
+
+  if (!hasUserPermission()) {
+    return;
+  }
+
+  waitForElement(TARGET_CONTAINER_SELECTOR).then((container) => {
+    addCustomOption(container);
+  });
+})();

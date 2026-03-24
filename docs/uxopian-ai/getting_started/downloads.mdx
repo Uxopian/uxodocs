@@ -1,0 +1,61 @@
+---
+title: Downloads
+sidebar_label: Downloads
+sidebar_position: 5
+last_update:
+  date: '2026-03-24T12:58:17.027Z'
+  author: CI/CD Bot
+content_hash: downloads-2026-03-24
+---
+
+Downloadable example packages for Uxopian AI. Each package is a ZIP archive containing Docker Compose files and configuration templates.
+
+## Available packages
+
+### Docker Compose quickstart
+
+A minimal stack: OpenSearch, uxopian-ai, and uxopian-gateway with `DevProvider` for local development.
+
+:::tip[Download]
+**<a href={require('./uxopian-ai_docker_example.zip').default} download="uxopian-ai_docker_example.zip">uxopian-ai_docker_example.zip</a>**
+:::
+
+Contents:
+- `uxopian-ai-stack.yml`: Docker Compose file
+- `gateway-application.yaml`: Gateway configuration with DevProvider
+- `config/`: All required YAML configuration files for uxopian-ai
+
+See [Quickstart with Docker Compose](./quickstart.mdx) for step-by-step instructions.
+
+### Docker Compose with ARender
+
+Full stack including ARender services (UI, DSB, renderer, text handler, converter), uxopian-ai, and uxopian-gateway. Includes ARender configuration files for the AI top-panel integration.
+
+:::tip[Download]
+**<a href={require('./uxopian-ai_docker_example_arender.zip').default} download="uxopian-ai_docker_example_arender.zip">uxopian-ai_docker_example_arender.zip</a>**
+:::
+
+Contents:
+- `uxopian-ai-stack.yml`: Docker Compose file with ARender services
+- `gateway-application.yaml`: Gateway configuration
+- `config/`: uxopian-ai configuration files
+- `arender/configurations/`: ARender plugin and top-panel configuration files
+
+See [Quickstart with ARender](./quickstart_arender.mdx) for step-by-step instructions.
+
+### FlowerDocs scope files
+
+Static scope files for embedding the Uxopian AI chat panel in FlowerDocs. These files are installed in the FlowerDocs scope Maven build, not deployed as a Docker stack.
+
+:::tip[Download]
+**<a href={require('../how_to/uxopian-ai_flowerdocs_scope.zip').default} download="uxopian-ai_flowerdocs_scope.zip">uxopian-ai_flowerdocs_scope.zip</a>**
+:::
+
+See [Quickstart with FlowerDocs](./quickstart_flowerdocs.mdx) for step-by-step instructions, or [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) for the production-ready setup.
+
+## Related pages
+
+- [Quickstart with Docker Compose](./quickstart.mdx)
+- [Quickstart with ARender](./quickstart_arender.mdx)
+- [Quickstart with FlowerDocs](./quickstart_flowerdocs.mdx)
+- [Registry access](./registry_access.md)

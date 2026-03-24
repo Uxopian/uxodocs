@@ -1,0 +1,105 @@
+---
+title: Configure FlowerDocs scope files
+sidebar_label: FlowerDocs scope files
+sidebar_position: 4
+last_update:
+  date: '2026-03-24T12:58:17.027Z'
+  author: CI/CD Bot
+content_hash: configure-flowerdocs-scope-2026-03-24
+---
+
+FlowerDocs scope files inject the Uxopian AI chat panel and keyboard shortcuts into the FlowerDocs UI. This guide explains each scope file and how to customize them.
+
+## Download the scope files
+
+:::tip[Download]
+**<a href={require('./uxopian-ai_flowerdocs_scope.zip').default} download="uxopian-ai_flowerdocs_scope.zip">uxopian-ai_flowerdocs_scope.zip</a>**
+:::
+
+Extract the ZIP. The directory structure is:
+
+```
+conf/
+  Route/
+    Gateway.xml                 # Route pointing to the uxopian-gateway
+  Script/
+    OpenChatShortcut.xml        # Keyboard shortcut: open chat panel
+    UxoAiAdminShortcut.xml      # Keyboard shortcut: open admin UI
+    const.xml                   # Constants (gateway URL, tenant)
+    openChat.xml                # openChat() helper function
+    refreshToken.xml            # Token refresh helper
+    translate.xml               # Translation helper
+    uxoai-utils.xml             # Utility functions
+    web-comp.xml                # Web component loader
+    OpenChatShortcut/           # Script implementation files
+    UxoAiAdminShortcut/
+    consts/
+    openChat/
+    refreshToken/
+    translate/
+    uxoai-utils/
+    web-comp/
+```
+
+## Scope file descriptions
+
+### Gateway.xml (Route)
+
+Defines a FlowerDocs route that proxies requests through the uxopian-gateway:
+
+```xml
+<ns2:tags name="Path">
+    <ns2:value>/gateway/**</ns2:value>
+</ns2:tags>
+<ns2:tags name="URL">
+    <ns2:value>http://gateway-service:8085</ns2:value>
+</ns2:tags>
+```
+
+Update the `URL` value to match the hostname and port of your `uxopian-gateway` as seen from the FlowerDocs server.
+
+### web-comp.xml (Script)
+
+Loads the Uxopian AI web component bundles into the FlowerDocs page. The bundles are fetched from the gateway's `/api/web-components/` endpoints. If you change the gateway URL, update the constants in `consts/` to match.
+
+### const.xml / consts/ (Script)
+
+Contains constants used by other scripts: the gateway base URL, tenant configuration, and endpoint paths. Update the gateway URL constant to match your deployment before importing the scope files.
+
+### openChat.xml / openChat/ (Script)
+
+Implements the `openChat()` function that creates a chat panel. Other scripts call this function when a user triggers a chat action.
+
+### OpenChatShortcut.xml (Script)
+
+Registers a keyboard shortcut that calls `openChat()`. Update the shortcut key combination if it conflicts with existing FlowerDocs shortcuts.
+
+### UxoAiAdminShortcut.xml (Script)
+
+Registers a keyboard shortcut that opens the Uxopian AI admin panel.
+
+### refreshToken.xml (Script)
+
+Handles session token refresh for `FlowerDocsProvider`. This keeps the chat panel authenticated when the FlowerDocs session is renewed.
+
+### translate.xml (Script)
+
+Helper script for the translation workflow.
+
+## Installation
+
+Copy the `conf/` directory contents into the FlowerDocs scope Maven module. The exact target directory depends on your FlowerDocs project structure. In a standard FlowerDocs Maven build, scope files go into the scope resources directory that gets imported during the build.
+
+After importing, rebuild and redeploy the FlowerDocs application.
+
+## Customization
+
+Before importing, update these files:
+
+1. `conf/Route/Gateway.xml`: set the `URL` tag to your gateway's URL.
+2. `conf/Script/consts/`: update the gateway URL constant.
+
+## Related pages
+
+- [Integrate with FlowerDocs](./integrate_with_flowerdocs.mdx)
+- [Authentication and gateway](../understanding/authentication.md)
