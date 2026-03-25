@@ -82,7 +82,16 @@ function clean(dir) {
 function copyTo(srcPath, destDir, relPath) {
     const dest = join(destDir, relPath);
     mkdirSync(dirname(dest), { recursive: true });
-    copyFileSync(srcPath, dest);
+    const ext = extname(relPath);
+    if (MD_EXTENSIONS.has(ext)) {
+        // Normalize line endings to LF for markdown files.
+        // On Windows, git checkout may produce CRLF locally (core.autocrlf),
+        // which breaks Docusaurus heading anchor generation.
+        const content = readFileSync(srcPath, "utf8").replace(/\r\n/g, "\n");
+        writeFileSync(dest, content, "utf8");
+    } else {
+        copyFileSync(srcPath, dest);
+    }
 }
 
 // --- Main ---
