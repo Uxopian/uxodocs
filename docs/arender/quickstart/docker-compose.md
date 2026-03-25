@@ -34,14 +34,14 @@ Create a `docker-compose.yml` file:
 ```yaml title="docker-compose.yml"
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
     ports:
       - 8080:8080
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:2026.0.0
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
@@ -52,7 +52,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter:2026.0.0
+    image: artifactory.arondor.cloud:5001/arender-document-converter:{{version}}
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
@@ -61,7 +61,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:2026.0.0
+    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:{{version}}
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
       - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -70,7 +70,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler:2026.0.0
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:{{version}}
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"

@@ -329,7 +329,7 @@ Mount the JAR into the container at `/home/arender/lib/`:
 ```yaml title="docker-compose.yml"
 services:
   arender-ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}
     volumes:
       - ./custom-connector-jar-with-dependencies.jar:/home/arender/lib/custom-connector-jar-with-dependencies.jar
 ```

@@ -49,7 +49,7 @@ The CMIS connector is packaged as a fat JAR. Place it in the viewer's lib direct
 # docker-compose.yml excerpt
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0-alfresco
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}-alfresco
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
       - "ARENDERSRV_ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"

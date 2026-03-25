@@ -41,7 +41,7 @@ A dedicated `-filenet` Docker image variant includes the connector JAR (with JAC
 # docker-compose.yml excerpt
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0-filenet
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}-filenet
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
       - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL=http://filenet-ce:9080/wsi/FNCEWS40MTOM/"

@@ -169,7 +169,7 @@ docker compose logs ui | grep -i "filenet\|jace\|authentication"
 ```
 
 **Resolution:**
-- Ensure the connector-specific image variant is used (e.g. `arender-ui-springboot:2026.0.0-alfresco` or `arender-ui-springboot:2026.0.0-filenet`).
+- Ensure the connector-specific image variant is used (e.g. `arender-ui-springboot:{{version}}-alfresco` or `arender-ui-springboot:{{version}}-filenet`).
 - Verify the connector endpoint property points to the correct host: `ARENDERSRV_ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL` or `ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL`.
 - For FileNet in a Spring Boot container, switch from JAAS to `loginPasswordObjectStoreProvider`.
 
