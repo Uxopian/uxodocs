@@ -1,11 +1,11 @@
 ---
 title: Rendition configuration
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /reference/rendition-properties
 sidebar_position: 6
-content_hash: 20aa8bb42c6144bb03055879874c51627ce2fab079acee92b0af422815b8725b
+content_hash: 6541c23f7ee92868fc087d6655333546f714cf4738ac40a4f4b44814b8f00c44
 ---
 
 # Rendition configuration
@@ -78,19 +78,6 @@ The broker communicates with rendition services over HTTP using a reactive clien
 | `rejected.document.path` | `../../samples/rejected.pdf` | Path to the fallback document |
 | `rejected.document.title` | `Conversion problem` | Title shown for the fallback document |
 
-### Annotations
-
-| Property | Default | Description |
-|----------|---------|-------------|
-| `arender.server.annotations.xfdf.localstorage.default.path` | `~/ARenderAnnotations/` | Default path for local XFDF annotation storage |
-| `arender.server.annotations.can.create` | `true` | Allow annotation creation |
-| `arender.server.annotations.text.html.support` | `true` | Allow HTML in text annotations |
-| `arender.server.annotations.text.reply.support` | `true` | Allow replies to text annotations |
-| `arender.server.annotations.text.status.support` | `true` | Allow status markers on text annotations |
-| `arender.server.annotations.text.security.support` | `false` | Enable security level on annotations |
-| `arender.server.annotations.text.comment.reply.support` | `true` | Allow replies to comment annotations |
-| `arender.external.annotation.accessor.factory.bean.name` | `annotationAccessorFactory` | Spring bean name for the annotation accessor factory |
-
 ### PDF features
 
 | Property | Default | Description |
@@ -120,6 +107,29 @@ The broker communicates with rendition services over HTTP using a reactive clien
 | `arender.format.nativeMimeTypes` | `application/pdf,image/tiff,video/mp4,...` | MIME types that do not need conversion |
 | `arender.format.documentExtractorBeanNames.mailExtractor` | `application/mbox,...` | MIME types handled by the mail extractor |
 | `arender.format.documentExtractorBeanNames.archiveExtractor` | `application/zip,...` | MIME types handled by the archive extractor |
+| `arender.format.conversionTargetMimeTypes.application-pdf` | _(long MIME type list)_ | MIME types to convert to PDF (Office, images, HTML, text, etc.) |
+| `arender.format.conversionTargetMimeTypes.video-mp4` | `audio/x-wav,video/quicktime,...` | MIME types to convert to MP4 video |
+
+### Microservice memory and JVM
+
+These properties control memory allocation and JVM arguments for each sub-process launched by the broker in standalone mode. They can also be set via environment variables (uppercase, underscore-separated).
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `arender.conversion.memory` | `1024m` | Heap size for the document converter sub-process |
+| `arender.conversion.jvm.args` | `-Djava.net.preferIPv4Stack=true -Dfile.encoding=UTF-8` | JVM arguments for the converter |
+| `arender.jnirenderer.memory` | `1024m` | Heap size for the JNI renderer sub-process |
+| `arender.jnirenderer.jvm.args` | `-Djava.net.preferIPv4Stack=true -Djava.library.path=./lib/ -Dfile.encoding=UTF-8` | JVM arguments for the JNI renderer |
+| `arender.pdfbox.memory` | `1024m` | Heap size for the text handler sub-process |
+| `arender.pdfbox.jvm.args` | `-Djava.net.preferIPv4Stack=true -Dfile.encoding=UTF-8` | JVM arguments for the text handler |
+| `arender.dfs.memory` | `1024m` | Heap size for the file storage sub-process |
+| `arender.dfs.jvm.args` | `-Djava.net.preferIPv4Stack=true -Dfile.encoding=UTF-8` | JVM arguments for the file storage |
+
+### Annotation accessor
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `arender.external.annotation.accessor.factory.bean.name` | `annotationAccessorFactory` | Bean name for the external annotation accessor factory |
 
 ### Docker/Kubernetes runtime mode
 
@@ -212,21 +222,35 @@ The document converter (`arender-document-converter`) runs on port 19999.
 | `tools.pdf.flattener.path` | `PDFFormsFlattener` | PDF form flattener executable path |
 | `tools.pdf.flattener.timeout` | `60` | Timeout for PDF flattening (seconds) |
 
-### Annotation rendering
-
-| Property | Default | Description |
-|----------|---------|-------------|
-| `redact.deleteText` | `true` | When burning redactions: delete the underlying text |
-| `stickyNote.printHeader` | `true` | Include header in printed sticky notes |
-| `annotation.date.display.creationDate` | `true` | Show creation date (true) or last-modified date (false) |
-| `annotation.textual.unicode.font.path` | _(empty)_ | Font for rendering annotation text content |
-
 ### Fonts
 
 | Property | Default | Description |
 |----------|---------|-------------|
 | `document.font.path` | `../fonts/` | Fallback font directory for embedded-font substitution |
 | `document.font.allowed.extensions` | `ttf,otf` | Allowed font file extensions |
+| `annotation.textual.unicode.font.path` | _(empty)_ | Font path for annotation textual content drawing |
+
+### Annotation rendering
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `annotation.date.display.creationDate` | `true` | Display creation date on annotations; `false` displays last modified date |
+| `stickyNote.printHeader` | `true` | Print the header on sticky note annotations |
+| `redact.deleteText` | `true` | Remove text in redacted areas; `false` keeps text searchable/selectable |
+
+### vCard conversion
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `vcard.label.language` | `EN` | Language for vCard information fields. Values: `FR`, `EN` |
+
+### PDF quality evaluation
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `document.evaluate.image.quality.enabled` | `false` | Enable image quality comparison between source and converted PDF/A |
+| `document.comparison.pixel.color.distance.enabled` | `true` | Use pixel color distance for comparison; `false` uses exact pixel equality |
+| `document.comparison.pixel.threshold` | `0.5` | Image quality tolerance threshold (0–1, where 1 = 100% equal) |
 
 ### AFP conversion
 
@@ -236,6 +260,11 @@ The document converter (`arender-document-converter`) runs on port 19999.
 | `arender.afp.conversion.timeout.ms` | `120000` | AFP conversion timeout (ms) |
 | `arender.afp.old.profile.path` | _(empty)_ | Profile path for older AFP format |
 | `arender.afp.new.profile.path` | _(empty)_ | Profile path for newer AFP format |
+| `arender.afp.old.profile.directory.path` | _(empty)_ | Profile directory path for older AFP format |
+| `arender.afp.new.profile.directory.path` | _(empty)_ | Profile directory path for newer AFP format |
+| `arender.afp.profile.directory.path` | _(empty)_ | Profile directory path for identifying AFP format |
+| `arender.afp.font.entries.directory.path` | _(empty)_ | Font directory for generated font entries file |
+| `arender.afp.log.directory.path` | _(empty)_ | Log directory for conversion logs |
 
 ### Email conversion
 
@@ -245,6 +274,13 @@ The document converter (`arender-document-converter`) runs on port 19999.
 | `emltopdf.config.format.date` | `EEE d MMM yyyy HH:mm:ss Z` | Date format for email headers |
 | `emltopdf.config.time.zone` | _(empty)_ | Timezone for email dates. Empty uses the system timezone |
 | `emltopdf.encode.header.with.body.encoding` | `false` | Encode header with body encoding |
+| `emltopdf.config.filter.special.characters.regex` | `[^A-zÀ-ú0-9\\s\\-\\.]` | Regex for characters to filter from filenames. Set empty to disable |
+| `emltopdf.config.filter.replacement.character` | `_` | Replacement character for filtered characters |
+| `emltopdf.resize.embedded.image.enabled` | `false` | Resize oversized embedded images to fit page width |
+| `emltopdf.custom.mail.title` | `Email` | Title label for converted email documents |
+| `emltopdf.custom.mail.title.separator` | `:` | Separator between title label and subject |
+| `emltopdf.custom.mail.attachment.header` | `Mail body` | Header label for the mail body attachment |
+| `emltopdf.custom.mail.display.subject.in.title` | `true` | Display the email subject in the document title |
 
 ---
 
