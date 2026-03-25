@@ -55,6 +55,62 @@ The viewer backend communicates with the rendition service broker over REST. Doc
 
 ---
 
+## Viewer
+
+**Port:** 8080
+**Image:** `arender-ui-springboot`
+
+The viewer is a single Spring Boot application that runs both the frontend and the backend.
+
+### Frontend (browser)
+
+The UI is compiled from Java to JavaScript using **GWT (Google Web Toolkit)**. The compiled bundle (`arendergwt.nocache.js`) runs entirely in the browser and handles:
+
+- Document page display and navigation
+- Annotations: creation, editing, rendering (XFDF model)
+- Toolbar: zoom, rotation, search, print, download, document builder
+- Thumbnail explorer, bookmark panel, advanced search
+- Multi-view and document comparison
+
+The frontend communicates with the viewer backend over HTTP (GWT RPC) and WebSocket.
+
+### Backend (server)
+
+The Spring Boot process serves the compiled JavaScript assets and handles all server-side operations:
+
+- **Document loading** — Routes incoming requests through a chain of `DocumentServiceURLParser` implementations to identify the document source and create a `DocumentAccessor`
+- **Connector hosting** — Document connectors (Alfresco, FileNet, CMIS, etc.) are Java JARs loaded on the classpath. Each connector is a Spring auto-configured bean discovered at startup
+- **Annotation storage** — Bridges to `AnnotationAccessor` implementations (XFDF local, JDBC, REST) for reading and writing annotations
+- **Image serving** — An async servlet (`ImageServlet`) fetches page images from the rendition backend and streams them to the browser. Falls back to synchronous mode for compatibility
+- **Session management** — HTTP sessions track per-user document state via `PerSessionDocumentMap`
+- **Authentication** — Supports URL-parameter authentication (default) or OAuth2/OIDC (via `arender.server.oauth2.enabled=true`)
+- **WebSocket** — Endpoint at `/ws/arenderws` pushes loading progress and document change notifications to connected clients
+
+### Configuration
+
+The viewer loads two property files:
+
+| File | Scope | Description |
+|------|-------|-------------|
+| `arender-default.properties` | Client-side | UI layout, toolbar buttons, annotation defaults, zoom, shortcuts. Sent to the browser (GWT) |
+| `arender-server-default.properties` | Server-side | Rendition connection, caching, authentication, annotation storage, watermarks. Stays on the server |
+
+Both can be overridden in `configurations/arender-custom-client.properties` and `configurations/arender-custom-server.properties`. Client-side properties also support [visual profiles](../guides/features/visual-profiles.md).
+
+For the full property reference, see [Viewer configuration](../reference/viewer-configuration.md).
+
+### Clustering
+
+When running multiple viewer replicas, Hazelcast provides:
+
+- Distributed document accessor cache
+- HTTP session replication (required for OAuth2)
+- Routing table synchronization
+
+Enable Hazelcast sessions with `arender.server.session.hazelcast.enabled=true`.
+
+---
+
 ## Service broker
 
 **Port:** 8761
