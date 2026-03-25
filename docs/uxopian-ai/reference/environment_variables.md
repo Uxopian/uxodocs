@@ -119,4 +119,4 @@ In the gateway `gateway-application.yaml`, the URIs for backend services are har
 - [Configuration file reference](./configuration.md)
 - [Plugin system](../understanding/plugin_system.md)
 - [LLM providers](../understanding/llm_providers.md)
-- [Quickstart with Docker Compose](../getting_started/quickstart.md)
+- [Quickstart with Docker Compose](../getting_started/quickstart.mdx)

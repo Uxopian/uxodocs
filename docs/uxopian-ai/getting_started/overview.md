@@ -14,11 +14,11 @@ Uxopian AI is a framework for embedding AI assistants inside legacy enterprise a
 
 | Audience | Entry point |
 |---|---|
-| System administrator deploying the stack | [Quickstart with Docker Compose](./quickstart.md) |
+| System administrator deploying the stack | [Quickstart with Docker Compose](./quickstart.mdx) |
 | Integration developer embedding the chat UI | [Embed in a web application](../how_to/embed_in_web_application.md) |
 | Solution architect evaluating the system | [System architecture](../understanding/architecture.md) |
-| ARender integrator | [Integrate with ARender](../how_to/integrate_with_arender.md) |
-| FlowerDocs integrator | [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.md) |
+| ARender integrator | [Integrate with ARender](../how_to/integrate_with_arender.mdx) |
+| FlowerDocs integrator | [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) |
 | Prompt or assistant developer | [Prompts and templating](../understanding/prompts_and_templating.md) |
 
 ## System components
@@ -82,8 +82,8 @@ See [LLM providers](../understanding/llm_providers.md) for configuration details
 Three integration paths are available:
 
 - **Generic web application**: load the JavaScript and CSS bundles from the gateway's `/api/web-components/chat/script` and `/api/web-components/chat/style` endpoints, call `window.createChat()`. See [Embed in a web application](../how_to/embed_in_web_application.md).
-- **ARender document viewer**: adds an AI menu to the ARender top panel. Documents are accessed via the ARender DSB API. See [Integrate with ARender](../how_to/integrate_with_arender.md).
-- **FlowerDocs ECM**: embeds the chat panel via FlowerDocs scope files. Uses `FlowerDocsProvider` in the gateway. See [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.md).
+- **ARender document viewer**: adds an AI menu to the ARender top panel. Documents are accessed via the ARender DSB API. See [Integrate with ARender](../how_to/integrate_with_arender.mdx).
+- **FlowerDocs ECM**: embeds the chat panel via FlowerDocs scope files. Uses `FlowerDocsProvider` in the gateway. See [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx).
 
 ## Extension mechanisms
 
@@ -105,6 +105,6 @@ Three integration paths are available:
 
 ## Next steps
 
-1. Follow [Quickstart with Docker Compose](./quickstart.md) to run a local stack.
+1. Follow [Quickstart with Docker Compose](./quickstart.mdx) to run a local stack.
 2. Read [System architecture](../understanding/architecture.md) for the full component diagram and request flow.
 3. Read [Authentication and gateway](../understanding/authentication.md) before any deployment.

@@ -101,4 +101,4 @@ A custom `AuthProvider` can be implemented in the gateway by writing a Spring be
 
 - [System architecture](./architecture.md)
 - [Multi-tenancy](./multi_tenancy.md)
-- [Quickstart with Docker Compose](../getting_started/quickstart.md)
+- [Quickstart with Docker Compose](../getting_started/quickstart.mdx)

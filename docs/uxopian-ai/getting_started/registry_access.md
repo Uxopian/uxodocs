@@ -102,5 +102,5 @@ The current release version is `2026.0.0-ft2`. The Docker Compose examples use `
 
 ## Related pages
 
-- [Quickstart with Docker Compose](./quickstart.md)
-- [Downloads](./downloads.md)
+- [Quickstart with Docker Compose](./quickstart.mdx)
+- [Downloads](./downloads.mdx)

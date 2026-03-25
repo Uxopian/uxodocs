@@ -92,4 +92,4 @@ A typical LLM search session calls `getTaskClassAndTagClassesDescriptions` first
 - [Plugin system](./plugin_system.md)
 - [Write and deploy custom tools](../extending/custom_tools.md)
 - [LLM providers](./llm_providers.md)
-- [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.md)
+- [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx)

@@ -152,4 +152,4 @@ Content types: `text`, `prompt`, `goal`, `image`.
 
 - [Embed in a web application](../how_to/embed_in_web_application.md)
 - [Conversations and requests](./conversations_and_requests.md)
-- [Integrate with ARender](../how_to/integrate_with_arender.md)
+- [Integrate with ARender](../how_to/integrate_with_arender.mdx)
