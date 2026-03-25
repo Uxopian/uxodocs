@@ -1,6 +1,6 @@
 ---
 viewer: modern
-slug: /framework-wrappers
+slug: /reference/framework-wrappers
 title: Framework wrappers
 last_update:
   date: '2026-03-23T10:20:59.293Z'

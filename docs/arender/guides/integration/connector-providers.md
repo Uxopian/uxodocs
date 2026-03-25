@@ -1,6 +1,6 @@
 ---
 viewer: modern
-slug: /connector-providers
+slug: /guides/integration/connector-providers
 title: Connector providers
 last_update:
   date: '2026-03-24T08:07:20.846Z'

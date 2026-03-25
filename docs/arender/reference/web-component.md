@@ -1,6 +1,6 @@
 ---
 viewer: modern
-slug: /web-component
+slug: /reference/web-component
 title: Web Component
 last_update:
   date: '2026-03-24T08:07:20.846Z'

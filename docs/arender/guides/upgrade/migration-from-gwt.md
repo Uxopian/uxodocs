@@ -1,6 +1,6 @@
 ---
 viewer: modern
-slug: /migration-from-gwt
+slug: /guides/upgrade/migration-from-gwt
 title: Migration from GWT
 last_update:
   date: '2026-03-24T08:07:20.846Z'
