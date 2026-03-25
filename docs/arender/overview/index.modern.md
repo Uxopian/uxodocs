@@ -55,7 +55,7 @@ graph LR
     Broker --> TextHandler["Text Handler"]
 ```
 
-The frontend viewer differs depending on your deployment: the Classic viewer is a standalone Spring Boot application, while the [Modern Viewer](/docs/arender-modern/overview/modern-viewer) is an npm package embedded as a Web Component in your application.
+The [Modern Viewer](./modern-viewer.md) is an npm package embedded as a Web Component in your application. It connects to the rendition backend to display and annotate documents.
 
 See [System architecture](./architecture.md) for details.
 

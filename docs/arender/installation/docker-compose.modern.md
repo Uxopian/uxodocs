@@ -10,7 +10,7 @@ content_hash: 90a489bf30a620da7d51ec3a655175b02b8bc8a3e966d7a75021fa0edf84e38e
 
 # Docker Compose
 
-This guide covers deploying the ARender rendition backend with Docker Compose. The backend is shared by both the Classic and Modern viewers.
+This guide covers deploying the ARender rendition backend with Docker Compose.
 
 ## Backend services
 

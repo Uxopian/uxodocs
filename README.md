@@ -558,12 +558,13 @@ The prebuild script reads every file in `docs/arender/` and decides where to cop
 
 | Condition | Classic tree | Modern tree |
 |-----------|:-----------:|:----------:|
-| No `viewer:` frontmatter | Yes | Yes |
+| `mypage.md` alone (no `viewer:` frontmatter) | Yes | Yes |
 | `viewer: classic` in frontmatter | Yes | No |
 | `viewer: modern` in frontmatter | No | Yes |
-| `mypage.classic.md` exists next to `mypage.md` | `mypage.classic.md` replaces `mypage.md` | `mypage.md` (base version) |
-| `mypage.modern.md` exists next to `mypage.md` | `mypage.md` (base version) | `mypage.modern.md` replaces `mypage.md` |
+| `mypage.classic.md` + `mypage.modern.md` pair | `mypage.classic.md` (renamed to `mypage.md`) | `mypage.modern.md` (renamed to `mypage.md`) |
 | Non-markdown files (`_category_.json`, images) | Yes | Yes |
+
+**Convention**: a `.md` file is **shared** (both viewers). When a page needs viewer-specific content, create a `.classic.md` + `.modern.md` pair — there should be no base `.md` alongside them. This keeps the distinction clear: shared files have no suffix, viewer-specific files always come in pairs.
 
 ### Docusaurus configuration
 
@@ -590,7 +591,7 @@ viewer: classic
 ---
 ```
 
-**Create a Classic variant of a shared page** — create `mypage.classic.md` next to `mypage.md`. The Classic tree gets the `.classic.md` version, Modern gets the base `.md`.
+**Create viewer-specific versions of a page** — create `mypage.classic.md` and `mypage.modern.md` (no base `mypage.md`). Each tree gets its own version. The content should not reference the other viewer.
 
 **Run the prebuild** — the script runs automatically with `npm start` and `npm run build`, but you can trigger it manually:
 ```bash

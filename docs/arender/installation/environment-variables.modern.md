@@ -32,9 +32,6 @@ Each service uses a prefix. All environment variable names must be uppercase.
 | Document renderer | `arender-document-renderer-pdfowl` | `DRN_` |
 | Document text handler | `arender-document-text-handler` | `DTH_` |
 
-:::tip
-The Classic viewer uses the `ARENDERSRV_` prefix for its Spring Boot properties. See the Classic viewer documentation for details.
-:::
 
 ### Property-to-variable mapping rules
 
