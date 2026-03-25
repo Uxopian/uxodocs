@@ -31,30 +31,6 @@
       }
     ]
   },
-  "arender-classic": {
-    "current": [
-      {
-        "label": "Quickstart",
-        "href": "/docs/arender-classic/quickstart/docker-compose"
-      },
-      {
-        "label": "Concepts",
-        "href": "/docs/arender-classic/concepts/caching-hmi"
-      },
-      {
-        "label": "Guides",
-        "href": "/docs/arender-classic/guides/features/annotation-configuration"
-      },
-      {
-        "label": "Installation",
-        "href": "/docs/arender-classic/installation/custom-integration"
-      },
-      {
-        "label": "Reference",
-        "href": "/docs/arender-classic/reference/javascript-api"
-      }
-    ]
-  },
   "arender-modern": {
     "current": [
       {
@@ -80,37 +56,6 @@
       {
         "label": "Reference",
         "href": "/docs/arender-modern/reference/annotation-types"
-      }
-    ]
-  },
-  "arender-modern-src": {
-    "current": []
-  },
-  "arender-shared": {
-    "current": [
-      {
-        "label": "Overview",
-        "href": "/docs/arender-shared/overview/"
-      },
-      {
-        "label": "Core concepts",
-        "href": "/docs/arender-shared/concepts/documents-and-ids"
-      },
-      {
-        "label": "Installation",
-        "href": "/docs/arender-shared/installation/docker-compose"
-      },
-      {
-        "label": "Guides",
-        "href": "/docs/arender-shared/guides/annotations/annotation-storage-jdbc"
-      },
-      {
-        "label": "Operations",
-        "href": "/docs/arender-shared/operations/backup-restore"
-      },
-      {
-        "label": "Reference",
-        "href": "/docs/arender-shared/reference/annotation-types"
       }
     ]
   },
