@@ -64,7 +64,7 @@ The viewer is a single Spring Boot application that runs both the frontend and t
 
 ### Frontend (browser)
 
-The UI is compiled from Java to JavaScript using **GWT (Google Web Toolkit)**. The compiled bundle (`arendergwt.nocache.js`) runs entirely in the browser and handles:
+The UI is compiled from Java to JavaScript using **GWT (Google Web Toolkit)**. The compiled JavaScript runs entirely in the browser and handles:
 
 - Document page display and navigation
 - Annotations: creation, editing, rendering (XFDF model)
@@ -78,11 +78,11 @@ The frontend communicates with the viewer backend over HTTP (GWT RPC) and WebSoc
 
 The Spring Boot process serves the compiled JavaScript assets and handles all server-side operations:
 
-- **Document loading** — Routes incoming requests through a chain of `DocumentServiceURLParser` implementations to identify the document source and create a `DocumentAccessor`
+- **Document loading** — Routes incoming requests to identify the document source and load its content
 - **Connector hosting** — Document connectors (Alfresco, FileNet, CMIS, etc.) are Java JARs loaded on the classpath. Each connector is a Spring auto-configured bean discovered at startup
-- **Annotation storage** — Bridges to `AnnotationAccessor` implementations (XFDF local, JDBC, REST) for reading and writing annotations
-- **Image serving** — An async servlet (`ImageServlet`) fetches page images from the rendition backend and streams them to the browser. Falls back to synchronous mode for compatibility
-- **Session management** — HTTP sessions track per-user document state via `PerSessionDocumentMap`
+- **Annotation storage** — Reads and writes annotations to the configured storage backend (XFDF local, JDBC, REST)
+- **Image serving** — An async servlet fetches page images from the rendition backend and streams them to the browser
+- **Session management** — HTTP sessions track per-user document state
 - **Authentication** — Supports URL-parameter authentication (default) or OAuth2/OIDC (via `arender.server.oauth2.enabled=true`)
 - **WebSocket** — Endpoint at `/ws/arenderws` pushes loading progress and document change notifications to connected clients
 
@@ -145,7 +145,7 @@ All other supported types trigger a conversion step first. The mapping from sour
 
 ### Health monitoring
 
-The broker polls each registered microservice on a fixed schedule using `MicroServiceHealthCheckJob`. The job calls the service's health check URL, reads a health record, and marks the instance as UP or DOWN in the internal `MicroServiceHolder`.
+The broker polls each registered microservice on a fixed schedule, calls its health endpoint, reads a health record, and marks the instance as UP or DOWN.
 
 For configuration properties, see [Rendition configuration](../reference/rendition-properties.md#service-broker).
 
@@ -225,7 +225,7 @@ The broker discovers microservices using one of two mechanisms depending on the 
 
 ### Kubeprovider (Docker Compose)
 
-In Docker Compose, the broker maps service hostnames to ports using the `kubeprovider.kubeHosts` configuration. Each microservice declares its hostname through environment variables. The broker's `KubernetesProvider` pings each configured host at startup, retrieves its metadata via `GET /metadata`, and caches the resolved instance. It retries every second until all expected hosts are reachable.
+In Docker Compose, the broker maps service hostnames to ports using the `kubeprovider.kubeHosts` configuration. Each microservice declares its hostname through environment variables. The broker pings each configured host at startup, retrieves its metadata via `GET /metadata`, and caches the resolved instance. It retries every second until all expected hosts are reachable.
 
 ```mermaid
 sequenceDiagram
@@ -233,7 +233,7 @@ sequenceDiagram
     participant SB as Broker
     SB->>DC: GET /metadata
     DC-->>SB: name, instanceId, hostName
-    SB->>SB: Store in KubernetesProvider map
+    SB->>SB: Store in service registry
     loop Every health.check.poll.interval seconds
         SB->>DC: GET /healthCheckUrl
         DC-->>SB: 200 OK
@@ -275,7 +275,7 @@ kubeprovider:
     arender-rendition-renderer.arender.svc.cluster.local: 9091
 ```
 
-The `KubernetesProvider` resolves these DNS names through standard Kubernetes service resolution. No Eureka server is required.
+The broker resolves these DNS names through standard Kubernetes service resolution. No Eureka server is required.
 
 ---
 

@@ -20,7 +20,7 @@ Redaction is a two-phase process:
 
 ### 1. Marking
 
-A user places **redaction annotations** (`RedactElemType`) on the document. At this stage, a redaction is just an annotation — it is stored in the annotation layer via the `AnnotationAccessor`, it can be moved, resized, or deleted, and it does not alter the document content in any way.
+A user places **redaction annotations** on the document. At this stage, a redaction is just an annotation — it is stored in the annotation layer, it can be moved, resized, or deleted, and it does not alter the document content in any way.
 
 Redaction annotations carry properties specific to their role:
 
@@ -39,7 +39,7 @@ When the user triggers a redacted export (via the document builder), ARender pro
 - The underlying text is **removed from the PDF content stream** — it is no longer selectable, searchable, or extractable
 - The original document remains untouched
 
-This is handled by the `PDFRedaction` engine in the document converter service, which parses the PDF content stream token by token and replaces text that falls within redaction rectangles with spacing adjustments.
+This is handled by the redaction engine in the document converter service, which parses the PDF content stream token by token and replaces text that falls within redaction rectangles with spacing adjustments.
 
 **Marking is reversible. Burning is not.** Once a redacted document is exported, the original content under the redaction cannot be recovered from the output.
 
@@ -71,7 +71,7 @@ The authorization logic can be customized on the broker side by providing a cust
 | **Storage** | Annotation layer (XFDF) | Annotation layer (XFDF) — same |
 | **Effect on document** | Visual overlay only | Can permanently alter the document content on export |
 | **Rendering** | Always shown as-is | Gated by `AuthenticationServiceProvider` — may be burned into the rendition for non-authorized users |
-| **Content stream** | Not involved | `PDFRedaction` engine removes text from PDF content streams |
+| **Content stream** | Not involved | The redaction engine removes text from PDF content streams |
 | **Reversibility** | Always reversible (just delete the annotation) | Reversible while marking; **irreversible** after burning |
 
 ## Related pages

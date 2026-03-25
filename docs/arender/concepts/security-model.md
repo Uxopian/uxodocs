@@ -25,7 +25,7 @@ When set to `false` (the default), the viewer uses pre-authenticated security. W
 
 ### Pre-authenticated mode (default)
 
-In this mode, ARender trusts the identity provided by the calling system. A `RequestParameterAuthenticationFilter` extracts the username from URL parameters and creates a session for it.
+In this mode, ARender trusts the identity provided by the calling system. A filter extracts the username from URL parameters and creates a session for it.
 
 The filter looks for a username in this order:
 
@@ -76,7 +76,7 @@ The viewer creates a `JwtDecoder` from the issuer URI automatically. JWT tokens 
 
 ## Token lifecycle
 
-When OAuth2 is enabled, a `TokenFilter` runs on every non-static request to check token expiration. The filter handles two token types:
+When OAuth2 is enabled, a filter runs on every non-static request to check token expiration. It handles two token types:
 
 - **OAuth2 login tokens**: the filter loads the authorized client and checks the access token's expiration time.
 - **JWT bearer tokens**: the filter reads the expiration claim from the JWT directly.
@@ -116,7 +116,7 @@ In pre-authenticated mode, the chain:
 1. Permits static resources and health/weather endpoints without authentication
 2. Requires authentication for all other requests
 3. Returns HTTP 403 for unauthenticated requests (no login redirect)
-4. Runs the `RequestParameterAuthenticationFilter` to extract user identity
+4. Runs a filter to extract user identity from URL parameters
 
 In OAuth2 mode, the chain:
 
@@ -125,7 +125,7 @@ In OAuth2 mode, the chain:
 3. Redirects unauthenticated browser requests to the OAuth2 provider login page
 4. Validates JWT bearer tokens on API requests
 5. Runs a `ForwardedHeaderFilter` to support reverse proxy setups (X-Forwarded headers)
-6. Runs the `TokenFilter` to check token expiration
+6. Runs a filter to check token expiration
 
 Both modes disable CSRF protection, frame options headers, XSS protection headers, and cache control headers. CSRF is disabled because the viewer is typically loaded in cross-origin contexts. Frame options are disabled to allow iframe embedding.
 

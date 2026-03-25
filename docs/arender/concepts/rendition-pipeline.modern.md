@@ -115,8 +115,6 @@ Long-running operations use an asynchronous order pattern:
 
 All microservices mount the same volume at `/arender/tmp`. Documents are stored with filenames derived from their `DocumentId` for traceability. Each format variant of a document has a distinct file entry.
 
-This architecture decision (ADR-0002) replaced the earlier binary INITIAL/RENDERED model to support multi-format storage.
-
 ## Native formats
 
 Some formats bypass conversion entirely:

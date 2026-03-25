@@ -283,14 +283,14 @@ rendition:
 
 ### Internal health monitoring
 
-The broker runs a `MicroServiceHealthCheckJob` for each registered microservice. This is separate from Kubernetes probes. The broker pings each service's health endpoint and tracks their status internally:
+The broker runs an internal health check for each registered microservice. This is separate from Kubernetes probes. The broker pings each service's health endpoint and tracks their status internally:
 
 ```mermaid
 graph LR
     SB[Broker] -->|GET healthCheckUrl| DC[Converter]
     SB -->|GET healthCheckUrl| DR[Renderer]
     SB -->|GET healthCheckUrl| DT[Text Handler]
-    SB -->|Updates| MH[MicroServiceHolder: UP/DOWN per instance]
+    SB -->|Updates| MH[Service registry: UP/DOWN per instance]
 ```
 
 If a service is detected as DOWN and `health.check.restart.enabled=true` (standalone mode), the broker sends a POST to `/actuator/shutdown` and restarts the process.

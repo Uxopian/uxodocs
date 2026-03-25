@@ -83,7 +83,7 @@ All other supported types trigger a conversion step first. The mapping from sour
 
 ### Health monitoring
 
-The broker polls each registered microservice on a fixed schedule using `MicroServiceHealthCheckJob`. The job calls the service's health check URL, reads a health record, and marks the instance as UP or DOWN in the internal `MicroServiceHolder`.
+The broker polls each registered microservice on a fixed schedule, calls its health endpoint, reads a health record, and marks the instance as UP or DOWN.
 
 For configuration properties, see [Rendition configuration](../reference/rendition-properties.md#service-broker).
 
@@ -163,7 +163,7 @@ The broker discovers microservices using one of two mechanisms depending on the 
 
 ### Kubeprovider (Docker Compose)
 
-In Docker Compose, the broker maps service hostnames to ports using the `kubeprovider.kubeHosts` configuration. Each microservice declares its hostname through environment variables. The broker's `KubernetesProvider` pings each configured host at startup, retrieves its metadata via `GET /metadata`, and caches the resolved instance. It retries every second until all expected hosts are reachable.
+In Docker Compose, the broker maps service hostnames to ports using the `kubeprovider.kubeHosts` configuration. Each microservice declares its hostname through environment variables. The broker pings each configured host at startup, retrieves its metadata via `GET /metadata`, and caches the resolved instance. It retries every second until all expected hosts are reachable.
 
 ```mermaid
 sequenceDiagram
@@ -171,7 +171,7 @@ sequenceDiagram
     participant SB as Broker
     SB->>DC: GET /metadata
     DC-->>SB: name, instanceId, hostName
-    SB->>SB: Store in KubernetesProvider map
+    SB->>SB: Store in service registry
     loop Every health.check.poll.interval seconds
         SB->>DC: GET /healthCheckUrl
         DC-->>SB: 200 OK
@@ -213,7 +213,7 @@ kubeprovider:
     arender-rendition-renderer.arender.svc.cluster.local: 9091
 ```
 
-The `KubernetesProvider` resolves these DNS names through standard Kubernetes service resolution. No Eureka server is required.
+The broker resolves these DNS names through standard Kubernetes service resolution. No Eureka server is required.
 
 ---
 
