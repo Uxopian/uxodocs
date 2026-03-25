@@ -16,11 +16,13 @@ ARender consists of a frontend viewer and a set of backend rendition microservic
 
 ```mermaid
 graph TB
-    subgraph Frontend
-        C[Viewer]
+    subgraph "Viewer (port 8080)"
+        Browser["Browser — GWT compiled JavaScript"]
+        VB["Viewer backend — Spring Boot"]
+        Browser -->|HTTP| VB
     end
-    subgraph Backend
-        C -->|REST| SB[Service Broker :8761]
+    subgraph "Rendition backend"
+        VB -->|REST| SB[Service Broker :8761]
         SB -->|REST| DC[Converter :19999]
         SB -->|REST| DR[Renderer :9091]
         SB -->|REST| DT[Text Handler :8899]
@@ -33,13 +35,18 @@ graph TB
     end
 ```
 
-The viewer is a standalone Spring Boot application (port 8080) with document connectors bundled as JARs. It connects to the backend services described below.
+The viewer is a standalone Spring Boot application (port 8080) that serves two roles:
+
+- **Frontend (browser)** — a JavaScript UI compiled from Java sources with GWT (Google Web Toolkit). The compiled JS runs in the browser and handles all user interaction: page display, annotations, toolbar, search, navigation, etc.
+- **Viewer backend (server)** — a Spring Boot process that serves the compiled JS, manages HTTP sessions, handles authentication (OAuth2), routes requests to the rendition backend, and hosts document connectors as JARs on its classpath.
+
+The viewer backend communicates with the rendition service broker over REST. Document connectors (Alfresco, FileNet, CMIS, etc.) are Java JARs loaded in the viewer backend's classpath — they implement `DocumentAccessor` to fetch document content from external repositories.
 
 ## Ports
 
 | Service | Default port | Purpose |
 |---------|-------------|---------|
-| Viewer | 8080 | Frontend UI and connector integration |
+| Viewer (frontend + backend) | 8080 | GWT UI, session management, connectors |
 | Service Broker | 8761 | REST API gateway and orchestration |
 | Document converter | 19999 | Format conversion |
 | Document renderer | 9091 | PDF-to-image rendering |

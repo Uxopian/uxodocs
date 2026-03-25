@@ -56,7 +56,7 @@ graph LR
     Broker --> TextHandler["Text Handler"]
 ```
 
-The viewer is a standalone Spring Boot application with document connectors bundled as JARs. It connects to the rendition backend to display and annotate documents.
+The viewer is a standalone Spring Boot application that serves a GWT-compiled JavaScript frontend to the browser and hosts document connectors as JARs on its classpath. It connects to the rendition backend to display and annotate documents.
 
 See [System architecture](./architecture.md) for details.
 
