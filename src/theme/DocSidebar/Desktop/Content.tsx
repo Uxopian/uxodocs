@@ -11,6 +11,9 @@ export default function ContentWrapper(props: Props): React.ReactElement {
     const { pathname } = useLocation();
     const isARender = pathname.startsWith("/docs/arender");
 
+    // The parent of this component is a flex column (the sidebar).
+    // We render the toggle as a separate flex item that won't shrink,
+    // then the Content (menu nav) takes the remaining space and scrolls.
     return (
         <>
             {isARender && <ViewerToggle />}

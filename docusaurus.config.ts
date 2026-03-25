@@ -71,7 +71,7 @@ const config: Config = {
             "@docusaurus/plugin-content-docs",
             {
                 id: "arender",
-                path: "docs/arender",
+                path: ".generated/arender-classic",
                 routeBasePath: "docs/arender",
                 numberPrefixParser: false,
                 sidebarPath: require.resolve("./sidebars_arender.ts"),
@@ -84,11 +84,11 @@ const config: Config = {
         [
             "@docusaurus/plugin-content-docs",
             {
-                id: "arender-react",
-                path: "docs/arender-react",
-                routeBasePath: "docs/arender-react",
+                id: "arender-modern",
+                path: ".generated/arender-modern",
+                routeBasePath: "docs/arender-modern",
                 numberPrefixParser: false,
-                sidebarPath: require.resolve("./sidebars_arender_react.ts"),
+                sidebarPath: require.resolve("./sidebars_arender_modern.ts"),
                 lastVersion: "current",
                 versions: { current: { label: `v${arenderVersion}` } },
                 showLastUpdateTime: true,

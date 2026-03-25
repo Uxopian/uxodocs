@@ -35,8 +35,8 @@ export default function SecondaryNav(): React.ReactElement | null {
         }
     }
 
-    // For CSS class and color, treat arender-react as arender
-    const cssProduct = product === "arender-react" ? "arender" : product;
+    // For CSS class and color, treat arender-modern as arender
+    const cssProduct = product === "arender-modern" ? "arender" : product;
 
     // ALWAYS set product colors, even if SecondaryNav won't be displayed
     // This ensures navbar active states get the correct background color
@@ -88,8 +88,9 @@ export default function SecondaryNav(): React.ReactElement | null {
     }, [cssProduct]);
 
     // Ne pas afficher la secondary navbar sur les pages de release notes
+    // ni sur les pages arender-modern (le ViewerToggle dans la sidebar suffit)
     // (but product colors are still set via the useEffect above)
-    if (pathname.includes("/release-note/") || pathname.includes("/releases")) {
+    if (pathname.includes("/release-note/") || pathname.includes("/releases") || product === "arender-modern") {
         return null;
     }
 

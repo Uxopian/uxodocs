@@ -445,6 +445,10 @@
     top: var(--ifm-navbar-height) !important;
 }
 
+[class*="plugin-id-arender"] [class*="sidebarViewport"] {
+    overflow-x: hidden !important;
+}
+
 [class*="plugin-id-arender"] .theme-doc-toc-desktop {
     top: calc(var(--ifm-navbar-height) + 1rem) !important;
     max-height: calc(100vh - var(--ifm-navbar-height) - 2rem) !important;

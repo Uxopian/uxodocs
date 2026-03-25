@@ -171,7 +171,7 @@ export default function DocsVersionDropdownNavbarItem({
 
 	const isProductActive = activeDocContext.activeVersion !== undefined;
 	const pathname = useHistorySelector((history) => history.location.pathname);
-	const isProductInPath = pathname.includes(`/docs/${docsPluginId}/`);
+	const isProductInPath = pathname.startsWith(`/docs/${docsPluginId}/`) || pathname.startsWith(`/docs/${docsPluginId}-`);
 	const isTrulyActive = isProductActive || isProductInPath;
 
 	// Ne plus court-circuiter pour un seul item - on affiche toujours le dropdown

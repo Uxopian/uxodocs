@@ -2,28 +2,115 @@
   "arender": {
     "current": [
       {
-        "label": "What is ARender",
-        "href": "/docs/arender/what-is-arender/overview"
+        "label": "Overview",
+        "href": "/docs/arender/overview/"
+      },
+      {
+        "label": "Core concepts",
+        "href": "/docs/arender/concepts/documents-and-ids"
+      },
+      {
+        "label": "Quickstart",
+        "href": "/docs/arender/quickstart/docker-compose"
       },
       {
         "label": "Installation",
-        "href": "/docs/arender/installation/overview"
-      },
-      {
-        "label": "Learn",
-        "href": "/docs/arender/learn/product-analytics"
+        "href": "/docs/arender/installation/docker-compose"
       },
       {
         "label": "Guides",
-        "href": "/docs/arender/guides/configurations/rendition/service-broker"
+        "href": "/docs/arender/guides/annotations/annotation-storage-jdbc"
       },
       {
-        "label": "Features",
-        "href": "/docs/arender/features/accessibility"
+        "label": "Operations",
+        "href": "/docs/arender/operations/backup-restore"
       },
       {
-        "label": "Development",
-        "href": "/docs/arender/development/apis/rendition/rest/admin/version"
+        "label": "Reference",
+        "href": "/docs/arender/reference/annotation-types"
+      }
+    ]
+  },
+  "arender-classic": {
+    "current": [
+      {
+        "label": "Quickstart",
+        "href": "/docs/arender-classic/quickstart/docker-compose"
+      },
+      {
+        "label": "Concepts",
+        "href": "/docs/arender-classic/concepts/caching-hmi"
+      },
+      {
+        "label": "Guides",
+        "href": "/docs/arender-classic/guides/features/annotation-configuration"
+      },
+      {
+        "label": "Installation",
+        "href": "/docs/arender-classic/installation/custom-integration"
+      },
+      {
+        "label": "Reference",
+        "href": "/docs/arender-classic/reference/javascript-api"
+      }
+    ]
+  },
+  "arender-modern": {
+    "current": [
+      {
+        "label": "Overview",
+        "href": "/docs/arender-modern/overview/"
+      },
+      {
+        "label": "Core concepts",
+        "href": "/docs/arender-modern/concepts/documents-and-ids"
+      },
+      {
+        "label": "Installation",
+        "href": "/docs/arender-modern/installation/docker-compose"
+      },
+      {
+        "label": "Guides",
+        "href": "/docs/arender-modern/guides/annotations/annotation-storage-jdbc"
+      },
+      {
+        "label": "Operations",
+        "href": "/docs/arender-modern/operations/backup-restore"
+      },
+      {
+        "label": "Reference",
+        "href": "/docs/arender-modern/reference/annotation-types"
+      }
+    ]
+  },
+  "arender-modern-src": {
+    "current": []
+  },
+  "arender-shared": {
+    "current": [
+      {
+        "label": "Overview",
+        "href": "/docs/arender-shared/overview/"
+      },
+      {
+        "label": "Core concepts",
+        "href": "/docs/arender-shared/concepts/documents-and-ids"
+      },
+      {
+        "label": "Installation",
+        "href": "/docs/arender-shared/installation/docker-compose"
+      },
+      {
+        "label": "Guides",
+        "href": "/docs/arender-shared/guides/annotations/annotation-storage-jdbc"
+      },
+      {
+        "label": "Operations",
+        "href": "/docs/arender-shared/operations/backup-restore"
+      },
+      {
+        "label": "Reference",
+        "href": "/docs/arender-shared/reference/annotation-types"
       }
     ]
   },
@@ -83,14 +170,11 @@
       }
     ]
   },
-  "arender-react": {
-    "current": []
-  },
   "uxopian-ai": {
     "current": [
       {
         "label": "Getting Started",
-        "href": "/docs/uxopian-ai/getting_started/quickstart"
+        "href": "/docs/uxopian-ai/getting_started/installation_guide_arender"
       },
       {
         "label": "Understanding Uxopian-ai",
@@ -98,15 +182,15 @@
       },
       {
         "label": "How-To Guides",
-        "href": "/docs/uxopian-ai/how_to/managing_prompts_goals"
+        "href": "/docs/uxopian-ai/how_to/api_usage"
       },
       {
         "label": "Extending Uxopian-ai",
-        "href": "/docs/uxopian-ai/extending/custom_helpers"
+        "href": "/docs/uxopian-ai/extending/advanced_helpers"
       },
       {
         "label": "Reference",
-        "href": "/docs/uxopian-ai/reference/config_files"
+        "href": "/docs/uxopian-ai/reference/api"
       },
       {
         "label": "Admin Panel",
