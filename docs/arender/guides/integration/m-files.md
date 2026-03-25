@@ -102,7 +102,7 @@ services:
 ```
 
 :::info
-This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose](/docs/arender/installation/docker-compose) for the complete configuration.
+This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose](../../installation/docker-compose.md) for the complete configuration.
 :::
 
 ## Step 3: Install the VAF application on M-Files

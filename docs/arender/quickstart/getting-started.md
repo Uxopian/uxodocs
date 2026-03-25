@@ -63,7 +63,7 @@ Verify the backend is healthy:
 http://localhost:8761/health/records
 ```
 
-For a complete backend setup guide, see [Docker Compose installation](/docs/arender-modern/installation/docker-compose).
+For a complete backend setup guide, see [Docker Compose installation](../installation/docker-compose.md).
 
 ## Step 2 — Install the npm package
 

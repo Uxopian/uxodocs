@@ -13,7 +13,7 @@ content_hash: ac1fbc17a230905cd25267ebf15f03815e57c11fb4b9b33c6f566abc4c7f9582
 
 The React UI is embedded in your host application and communicates with the ARender rendition backend over REST. Configuration involves two aspects: connecting to the backend, and handling cross-origin requests.
 
-Backend rendition configuration (broker, converter, renderer) is documented in [Configuration system](/docs/arender-modern/installation/configuration-system) and [Environment variables](/docs/arender-modern/installation/environment-variables).
+Backend rendition configuration (broker, converter, renderer) is documented in [Configuration system](./configuration-system.md) and [Environment variables](./environment-variables.md).
 
 ## Connecting to the rendition backend
 

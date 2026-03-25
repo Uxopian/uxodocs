@@ -15,7 +15,7 @@ The Modern Viewer loads documents from external repositories through **providers
 
 This decoupled model means connectors have their own lifecycle, scaling, and release cadence — independent of the viewer and of each other.
 
-For general connector concepts, see [Connectors](/docs/arender-modern/concepts/connectors).
+For general connector concepts, see [Connectors](../../concepts/connectors.md).
 
 ## Architecture
 
