@@ -62,34 +62,49 @@ Deploy the backend services with a provider:
 ```yaml
 services:
   service-broker:
-    image: docker-arender.arondor.com/document-service-broker:{{version}}
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
     ports:
       - "8761:8761"
     environment:
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-TEXT-HANDLER=8899"
       # Register the Alfresco provider
-      REGISTRY_PROVIDER_ALFRESCO_URL: http://alfresco-provider:8788
+      - "REGISTRY_PROVIDER_ALFRESCO_URL=http://alfresco-provider:8788"
     volumes:
       - arender-tmp:/arender/tmp
 
   alfresco-provider:
-    image: docker-arender.arondor.com/arender-alfresco-provider:{{version}}
+    image: artifactory.arondor.cloud:5001/arender-alfresco-provider:{{version}}
     ports:
       - "8788:8788"
     environment:
-      ARENDER_SERVER_ALFRESCO_ATOMPUBURL: http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom
+      - "ARENDER_SERVER_ALFRESCO_ATOMPUBURL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
 
-  document-renderer:
-    image: docker-arender.arondor.com/document-renderer:{{version}}
+  document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:{{version}}
+    environment:
+      - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
+      - "DCV_APP_EUREKA_HOSTNAME=service-broker"
+      - "DCV_APP_EUREKA_PORT=8761"
     volumes:
       - arender-tmp:/arender/tmp
 
-  document-converter:
-    image: docker-arender.arondor.com/document-converter:{{version}}
+  document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:{{version}}
+    environment:
+      - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
+      - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
+      - "DRN_EUREKA_SERVER_PORT=8761"
     volumes:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: docker-arender.arondor.com/document-text-handler:{{version}}
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:{{version}}
+    environment:
+      - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
+      - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
+      - "DTH_EUREKA_SERVER_PORT=8761"
     volumes:
       - arender-tmp:/arender/tmp
 

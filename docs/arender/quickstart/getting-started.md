@@ -25,27 +25,41 @@ If you don't already have a rendition backend running, start one with Docker Com
 ```yaml
 services:
   service-broker:
-    image: docker-arender.arondor.com/document-service-broker:{{version}}
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
     ports:
       - "8761:8761"
     environment:
-      # Allow documents loaded from these URLs
-      DSB_AUTHORIZED_URLS: https://www.uxopian.com/
-    volumes:
-      - arender-tmp:/arender/tmp
-
-  document-renderer:
-    image: docker-arender.arondor.com/document-renderer:{{version}}
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-TEXT-HANDLER=8899"
+      - "DSB_AUTHORIZED_URLS=https://www.uxopian.com/"
     volumes:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: docker-arender.arondor.com/document-converter:{{version}}
+    image: artifactory.arondor.cloud:5001/arender-document-converter:{{version}}
+    environment:
+      - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
+      - "DCV_APP_EUREKA_HOSTNAME=service-broker"
+      - "DCV_APP_EUREKA_PORT=8761"
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:{{version}}
+    environment:
+      - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
+      - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
+      - "DRN_EUREKA_SERVER_PORT=8761"
     volumes:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: docker-arender.arondor.com/document-text-handler:{{version}}
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:{{version}}
+    environment:
+      - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
+      - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
+      - "DTH_EUREKA_SERVER_PORT=8761"
     volumes:
       - arender-tmp:/arender/tmp
 
