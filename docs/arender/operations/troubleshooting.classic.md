@@ -1,4 +1,5 @@
 ---
+viewer: classic
 title: Troubleshooting
 slug: /operations/troubleshooting
 sidebar_position: 2
@@ -129,9 +130,48 @@ docker compose logs ui | grep -i "error\|refused\|timeout"
 ```
 
 **Resolution:**
-- Verify that the viewer is configured to reach the broker: `arender.server.rendition.hosts=http://service-broker:8761/` (or `http://localhost:8761/` in standalone mode).
+- Verify `ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/` (Docker Compose) or `arender.server.rendition.hosts=http://localhost:8761/` (standalone).
 - Confirm all rendition services are healthy (see [Service does not start](#service-does-not-start)).
 - Check firewall rules between the viewer UI host and the broker host.
+
+---
+
+### Viewer shows an error when loading a document from a connector
+
+**Symptoms:** The viewer returns an error such as "Could not load document" or "Connection refused". The document URL includes parameters from a third-party system (Alfresco, FileNet, or similar).
+
+**Possible causes (Alfresco / CMIS):**
+- The CMIS AtomPub endpoint is unreachable from the viewer container.
+- The `alf_ticket` in the URL has expired.
+- The CMIS connector is not on the classpath (wrong image variant).
+
+**Diagnosis:**
+```bash
+# Verify CMIS endpoint reachability
+curl http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom
+
+# Check viewer UI logs for authentication errors
+docker compose logs ui | grep -i "cmis\|authentication\|401"
+```
+
+**Possible causes (FileNet):**
+- The Content Engine URL (`iiop://` or `http://wsi/FNCEWS40MTOM/`) is unreachable.
+- JAAS authentication mode is configured but the JVM has no FileNet JAAS login module. Use `loginPasswordObjectStoreProvider` instead.
+- The JACE library (`jace.jar`) is not on the viewer classpath.
+
+**Diagnosis:**
+```bash
+# Verify CE endpoint reachability
+curl http://filenet-ce:9080/wsi/FNCEWS40MTOM/
+
+# Check for authentication errors in viewer logs
+docker compose logs ui | grep -i "filenet\|jace\|authentication"
+```
+
+**Resolution:**
+- Ensure the connector-specific image variant is used (e.g. `arender-ui-springboot:2026.0.0-alfresco` or `arender-ui-springboot:2026.0.0-filenet`).
+- Verify the connector endpoint property points to the correct host: `ARENDERSRV_ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL` or `ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL`.
+- For FileNet in a Spring Boot container, switch from JAAS to `loginPasswordObjectStoreProvider`.
 
 ---
 
@@ -401,6 +441,37 @@ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.volu
 
 ---
 
+## Security and authentication issues
+
+### FileNet layout call blocks for a long time
+
+**Symptoms:** Documents connected via the FileNet connector are slow to display. The first call takes 30+ seconds. Logs show the layout call waiting.
+
+**Cause:** The `arender.server.legacy.layout.enabled=true` setting forces a synchronous layout call to propagate the FileNet authentication context across threads. This is required for FileNet but may appear as a hang on slow CE connections.
+
+**Resolution:**
+- This behavior is expected and cannot be disabled for FileNet. Optimize the FileNet Content Engine connection latency instead.
+- Do not set `arender.server.legacy.layout.enabled=false` for FileNet deployments: it will break authentication context propagation.
+
+---
+
+### FileNet authentication failure with JAAS mode
+
+**Symptoms:** The FileNet connector logs authentication errors on startup. Documents fail to load with an `authentication failure` error.
+
+**Cause:** JAAS mode (`jaasObjectStoreProvider`) requires the JVM to have a FileNet JAAS login module configured. This is typically available in WebSphere deployments but not in standalone Spring Boot.
+
+**Resolution:**
+Switch to login/password authentication:
+```
+ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD=loginPasswordObjectStoreProvider
+ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL=http://filenet-ce:9080/wsi/FNCEWS40MTOM/
+ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN=svc-arender
+ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD=secret
+```
+
+---
+
 ## Diagnostic commands reference
 
 | What to check | Command |
@@ -420,3 +491,4 @@ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.volu
 - [Monitoring and observability](./monitoring.md)
 - [Docker Compose](../installation/docker-compose.md)
 - [Kubernetes Helm](../installation/kubernetes-helm.md)
+- [JDBC annotation storage](../guides/annotations/annotation-storage-jdbc.md)

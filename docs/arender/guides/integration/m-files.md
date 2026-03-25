@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: M-Files
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /guides/integration/m-files
 sidebar_position: 7
-content_hash: 0b5768431a0747ede378d7dcbb2f1ec35ec70262c6d45603a17aa16d610db396
+content_hash: 245f1bf92df22c3f83ee99e240bee3944b91858ecb846209da9c337585fe6a4e
 ---
 
 # M-Files integration
@@ -22,8 +23,8 @@ The integration requires three components:
 
 - ARender Web-UI (Spring Boot) and Rendition Engine deployed and operational
 - M-Files server with REST API enabled
-- The M-Files connector JAR (`arondor-arender-mfiles-connector-<version>.jar`)
-- The VAF application package (`VAF_MFF_ArenderConnector_<version>.mfappx`)
+- The M-Files connector JAR (`arondor-arender-mfiles-connector-{{version}}.jar`)
+- The VAF application package (`VAF_MFF_ArenderConnector_{{version}}.mfappx`)
 - Windows Server environment (M-Files requires Windows)
 - Network connectivity from the ARender hosts to the M-Files REST API endpoint
 
@@ -49,14 +50,14 @@ flowchart LR
 Place the M-Files connector JAR in the Rendition Engine client libraries directory:
 
 ```
-rendition-engine-package-<version>/modules/RenditionEngine/client_libs/
-  └─ arondor-arender-mfiles-connector-<version>.jar
+rendition-engine-package-{{version}}/modules/RenditionEngine/client_libs/
+  └─ arondor-arender-mfiles-connector-{{version}}.jar
 ```
 
 Add the following property to the Rendition Engine `application.properties` to authorize the M-Files REST API URL:
 
 ```properties
-# rendition-engine-package-<version>/modules/RenditionEngine/application.properties
+# rendition-engine-package-{{version}}/modules/RenditionEngine/application.properties
 authorized.urls=http://<m-files-server>/REST/
 ```
 
@@ -68,7 +69,7 @@ Deploy the ARender Web-UI WAR and add the M-Files connector JAR to its classpath
 
 ```
 <webapp-root>/WEB-INF/lib/
-  └─ arondor-arender-mfiles-connector-<version>.jar
+  └─ arondor-arender-mfiles-connector-{{version}}.jar
 ```
 
 Place the following configuration files under the Web-UI classes directory:
@@ -108,7 +109,7 @@ This excerpt shows only the `ui` service configuration. The full rendition stack
 
 1. Open the **M-Files Admin** console.
 2. Right-click the target vault and select **Applications**.
-3. Click **Install...** and select the `VAF_MFF_ArenderConnector_<version>.mfappx` file.
+3. Click **Install...** and select the `VAF_MFF_ArenderConnector_{{version}}.mfappx` file.
 4. Confirm installation when prompted.
 5. Click **Close** after installation completes.
 
@@ -143,5 +144,4 @@ Key configuration fields include the ARender Web-UI URL, authentication paramete
 ## Related pages
 
 - [Connectors concept](../../concepts/connectors.md)
-- [Embed the viewer](./embed-viewer.md)
 - [Annotations concept](../../concepts/annotations.md)

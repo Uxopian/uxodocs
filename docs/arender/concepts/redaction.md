@@ -1,14 +1,18 @@
 ---
 title: Redaction
+last_update:
+  date: '2026-03-23T10:20:59.293Z'
+  author: CI/CD Bot
 slug: /concepts/redaction
 sidebar_position: 6
+content_hash: d9d3a94d27c0f9e82eb542019a7a6449f662287b161a7bbe2830201c0ea5a5e1
 ---
 
 # Redaction
 
 Redaction in ARender is a mechanism for permanently removing sensitive content from documents. Although redaction annotations look similar to other annotations in the XFDF layer, they are architecturally distinct: they interact with the document rendering pipeline, PDF content streams, and an authorization gate that other annotation types do not touch.
 
-This page covers the conceptual model. For configuration and UI options, see the [redaction guide](../guides/features/redaction.md).
+This page covers the conceptual model.
 
 ## Two phases: marking and burning
 
@@ -43,53 +47,22 @@ This is handled by the `PDFRedaction` engine in the document converter service, 
 
 ARender introduces an authorization layer that determines **what a user sees when redaction annotations exist** on a document — even before any burning occurs.
 
-When the UI requests a document rendition, the service broker checks `AuthenticationServiceProvider.isAuthorized()`:
+When the viewer requests a document rendition, the service broker checks whether the current user is authorized to view the original content:
 
-```java
-public interface AuthenticationServiceProvider {
-    boolean isAuthorized(DocumentService documentService, DocumentId documentId);
-}
-```
-
-The result controls which version of the document the user receives:
-
-| `isAuthorized()` returns | User sees |
-|--------------------------|-----------|
-| `true` | The original document — redaction annotations are visible as overlays but the content beneath them is fully readable |
-| `false` | A redacted rendition — redaction annotations are burned on-the-fly into the rendered pages, and the content beneath is hidden |
+| Authorization result | User sees |
+|----------------------|-----------|
+| **Authorized** | The original document — redaction annotations are visible as overlays but the content beneath them is fully readable |
+| **Not authorized** | A redacted rendition — redaction annotations are burned on-the-fly into the rendered pages, and the content beneath is hidden |
 
 This means that **non-authorized users cannot see through redaction annotations**, even before an explicit export. The redaction is enforced at the rendering level.
 
-### Default implementation
+### Default behavior
 
-The built-in `DefaultAuthenticationServiceProvider` authorizes users whose username matches one of three admin roles: `admin`, `administrator`, or `p8admin`.
+By default, only users with an admin username (`admin`, `administrator`, or `p8admin`) are authorized to view the original content beneath redaction annotations.
 
-```java
-public class DefaultAuthenticationServiceProvider implements AuthenticationServiceProvider {
-    public boolean isAuthorized(DocumentService documentService, DocumentId documentId) {
-        UserContext userContext = UserContextHolder.getUserContext();
-        if (userContext != null) {
-            return "admin".equalsIgnoreCase(userContext.getUsername())
-                || "administrator".equalsIgnoreCase(userContext.getUsername())
-                || "p8admin".equalsIgnoreCase(userContext.getUsername());
-        }
-        return false;
-    }
-}
-```
+### Custom authorization
 
-### Custom implementations
-
-Connectors can provide their own `AuthenticationServiceProvider` to implement document-level or role-based authorization logic. The provider is registered as a Spring bean referenced by the `AuthenticationServiceFactory`:
-
-```xml
-<bean id="authenticationServiceFactory"
-      class="com.arondor.viewer.common.document.authentication.service.AuthenticationServiceFactory">
-    <property name="authenticationServiceProviderBeanName" value="myCustomAuthProvider" />
-</bean>
-```
-
-For example, a CMIS connector might check whether the current user has a specific ACL permission on the document rather than relying on username matching.
+The authorization logic can be customized on the broker side by providing a custom `AuthenticationServiceProvider` as a Spring bean.
 
 ## How redaction differs from other annotations
 
@@ -104,6 +77,3 @@ For example, a CMIS connector might check whether the current user has a specifi
 ## Related pages
 
 - [Annotations](./annotations.md) — the annotation model that redaction builds on
-- [Redaction guide](../guides/features/redaction.md) — configuration, UI options, and redaction reasons
-- [Document builder](../guides/features/document-builder.md) — the export mechanism used to burn redactions
-- [Security model](./security-model.md) — authentication and authorization concepts

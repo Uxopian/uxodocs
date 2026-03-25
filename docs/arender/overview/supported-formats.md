@@ -1,11 +1,11 @@
 ---
 title: Supported formats
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /overview/supported-formats
 sidebar_position: 3
-content_hash: f9026585524c8b9b3612be57627ba9679fcd6409e008dd3e1372a66fae9e1a14
+content_hash: 6e6cd97f99132aa3ccf437677cf7e0c15229c0be5357880c5b87a7e3f968e723
 ---
 
 # Supported formats

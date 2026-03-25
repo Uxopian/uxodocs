@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Custom integration files
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /installation/custom-integration
 sidebar_position: 6
-content_hash: dacb93d27ade8d2979a7b7611d7f9a758172b3d573ba7a1aaf81730be6904dee
+content_hash: ec5e55638e692cab22142f69d5b4a298dd8407ab5dd4668cc6f92073b9cd62a5
 ---
 
 # Custom integration files

@@ -1,26 +1,48 @@
 ---
 title: Connectors
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-24T08:07:20.846Z'
   author: CI/CD Bot
 slug: /concepts/connectors
 sidebar_position: 2
+content_hash: 24febedbd2f51009f33dfe1a7d5851fe8b6d273c3b0544bd0f844f4c5bbecc1f
 ---
 
 # Connectors
 
-A connector is a `DocumentAccessor` provider. In the [DocumentId / DocumentAccessor](./documents-and-ids.md) key-value model, the connector is what produces the **value**: it knows how to reach an external document source and return a `DocumentAccessor` from it.
+A connector is what bridges ARender with an external document repository. It is responsible for retrieving document content from an external system and making it available to the viewer.
 
-## What a connector does
+ARender supports two connector models depending on the viewer architecture in use: the **Classic** model (Java JARs loaded in the viewer) and the **Modern** model (standalone REST microservices called providers).
 
-When a user opens a document, the viewer delegates retrieval to a connector. The connector:
+## Classic connector model
 
-1. **Parses** the incoming request through a `DocumentServiceURLParser` (the `canParse` / `parse` contract)
-2. **Connects** to the external system using its native API (CMIS, FileNet P8 CE, HTTP, etc.)
-3. **Returns** a `DocumentAccessor` that provides the document content stream, MIME type, and metadata
-4. Optionally **provides** an `AnnotationAccessor` so that annotations are stored back into the same external system
+In the Classic viewer, connectors are Java JARs bundled directly in the viewer's classpath.
 
-Connectors are loaded as Spring Boot auto-configured beans. Adding a connector to a deployment means placing its JAR on the viewer's classpath.
+A Classic connector:
+
+1. **Implements** `DocumentAccessor` to provide document content, MIME type, and metadata to the viewer.
+2. **Exposes** a `DocumentServiceURLParser` that parses the incoming request (via the `canParse` / `parse` contract) to determine whether this connector handles the given URL.
+3. **Connects** to the external system using its native API (CMIS, FileNet P8 CE, HTTP, etc.) and returns a `DocumentAccessor`.
+4. Optionally **provides** an `AnnotationAccessor` so that annotations are stored back into the same external system.
+
+Connectors are loaded as Spring Boot auto-configured beans. Adding a connector to a deployment means placing its JAR on the viewer's classpath (typically `/home/arender/lib/`).
+
+Connectors are packaged as fat JARs using the `-jar-with-dependencies` classifier, which bundles the connector code together with its third-party dependencies.
+
+## Modern connector model (Providers)
+
+In the Modern viewer, connectors are standalone REST microservices called **providers**. Each provider runs as its own Docker container, independent of the viewer.
+
+A Modern provider:
+
+1. **Runs** as a separate service that exposes a REST API for document retrieval.
+2. **Receives** requests from the service broker, which routes them based on the `X-Provider-ID` header.
+3. **Returns** document content via REST resources (`ProviderFile` / `ProviderFolder`).
+4. The **service broker** creates `DocumentAccessor` instances internally from the provider response, so the rest of the pipeline works the same way.
+
+This model decouples connectors from the viewer, allowing each provider to be deployed, scaled, and updated independently.
+
+See [Connector providers](/docs/arender-modern/connector-providers) for deployment details.
 
 ## Annotation connectors
 
@@ -28,17 +50,12 @@ Annotation storage follows the same connector model. Each `AnnotationAccessor` i
 
 See [Annotations](./annotations.md) for the annotation model.
 
-## Connector packaging
-
-Connectors are packaged as fat JARs (using the `-jar-with-dependencies` classifier). To add a connector to an ARender deployment, place its JAR in the viewer's classpath (typically `/home/arender/lib/`).
-
 ## Connectors vs. UI plugins
 
 UI plugins (Alfresco Share plugin, IBM Content Navigator plugin) are **not** connectors. They are modules installed in the ECM's own interface that open documents in ARender by generating the correct viewer URL. The actual document retrieval still goes through a repository connector (e.g., CMIS, FileNet). See the [integration catalog](../guides/integration/index.md) for the full picture.
 
 ## Related pages
 
-- [Integration catalog](../guides/integration/index.md): available connectors, UI plugins, and partner integrations
-- [Custom connector development](../guides/integration/custom-connector.md): build your own connector
+- [Connector providers](/docs/arender-modern/connector-providers): Modern provider deployment
 - [Documents and document IDs](./documents-and-ids.md): the DocumentId / DocumentAccessor model
 - [Annotations](./annotations.md): the annotation model and storage

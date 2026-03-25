@@ -1,37 +1,21 @@
 ---
 title: Integration
+last_update:
+  date: '2026-03-24T08:07:20.846Z'
+  author: CI/CD Bot
 slug: /guides/integration
 sidebar_position: 0
+content_hash: c0d437e387b2344c45c475dc9ae391d10393f341c3b07c26c8d5ad5d2d590343
 ---
 
-# Integrations and connectors catalog
+# Integrations overview
 
-ARender integrates with document management systems through two mechanisms:
+ARender integrates with document management systems through two mechanisms, depending on the viewer in use:
 
-- **Repository connectors** fetch documents from an external system and produce a `DocumentAccessor`. They are part of ARender.
-- **UI plugins** are installed in the ECM's own interface and open documents in ARender by generating the correct viewer URL. They are part of the ECM, not ARender — the actual document retrieval goes through a repository connector.
+- **Classic viewer** — repository connectors are Java JARs loaded on the viewer's classpath. Each connector implements `DocumentAccessor` and fetches documents using the ECM's native API (CMIS, FileNet P8 CE, HTTP, etc.). See the Classic viewer documentation for the full connector catalog and configuration guides.
+- **Modern Viewer** — connectors are standalone REST microservices called **providers**. Each provider runs as its own container and exposes a REST API. See [Connector providers](/docs/arender-modern/connector-providers) for details.
 
-For what a connector is at the conceptual level, see [Connectors concept](../../concepts/connectors.md).
-
-## Repository connectors
-
-These connectors are developed and supported by Uxopian.
-
-| Connector | ECM | Guide |
-|-----------|-----|-------|
-| CMIS | Any CMIS-compliant system (incl. Alfresco) | [CMIS guide](./cmis.md) |
-| IBM FileNet CE | IBM FileNet P8 | [FileNet guide](./ibm-filenet.mdx) |
-| IBM Content Manager | IBM CM 8.1+ | [Content Manager guide](./ibm-content-manager.md) |
-| M-Files | M-Files | [M-Files guide](./m-files.md) |
-
-## ECM UI plugins
-
-These plugins are installed in the ECM's interface. They are **not** connectors — they generate ARender URLs and rely on a repository connector for document retrieval.
-
-| Plugin | ECM | Uses connector | Guide |
-|--------|-----|----------------|-------|
-| Alfresco Share plugin | Alfresco Share | CMIS | [Alfresco guide](./alfresco.mdx) |
-| IBM Content Navigator plugin | IBM Content Navigator | FileNet CE | [ICN guide](./ibm-content-navigator.mdx) |
+For the conceptual model behind both approaches, see [Connectors concept](../../concepts/connectors.md).
 
 ## Partner-maintained integrations
 
@@ -45,20 +29,3 @@ These integrations are developed and supported by partners. Contact the partner 
 | Tessi Docubase / Data Content | [Tessi](https://www.tessi.eu/) |
 | Extedo EXTEDOpulse / esubmanager | [Extedo](https://www.extedo.com/) |
 | Salesforce | [Salesforce](https://www.salesforce.com/) |
-
-## Annotation storage
-
-| Connector | Storage | Format |
-|-----------|---------|--------|
-| JDBC | SQL database (SQL Server, HSQLDB) | XFDF via JDBC |
-| REST | HTTP endpoint | XFDF via REST |
-| FileNet | FileNet database via native P8 API | Native FileNet annotation objects containing XFDF content |
-| CMIS (Alfresco) | Alfresco folders via CMIS | XFDF files stored as CMIS documents |
-| XFDF | Local filesystem | Native XFDF files |
-
-See [Annotations concept](../../concepts/annotations.md) for the annotation model and storage details.
-
-## Other integration options
-
-- [Embed the viewer](./embed-viewer.md) in your application via iframe
-- [Custom connector development](./custom-connector.md): build your own connector

@@ -1,15 +1,21 @@
 ---
+viewer: modern
+slug: /connector-providers
 title: Connector providers
+last_update:
+  date: '2026-03-24T08:07:20.846Z'
+  author: CI/CD Bot
 sidebar_position: 6
+content_hash: b2eda8f4f097879ad4c5b991a98d213ca6734fd0c3bcca9b44d8f0da6362649a
 ---
 
 # Connector providers
 
-The React UI uses a different connector model than the GWT viewer. Instead of Java JARs bundled into the viewer, connectors are standalone REST microservices called **providers**. Each provider runs as its own Docker container and communicates with the service broker over HTTP.
+The Modern Viewer loads documents from external repositories through **providers** — standalone REST microservices that run as their own Docker containers. Each provider communicates with the service broker over HTTP and handles document retrieval from a specific repository type.
 
 This decoupled model means connectors have their own lifecycle, scaling, and release cadence — independent of the viewer and of each other.
 
-For general connector concepts, see [Connectors](/docs/arender/concepts/connectors/).
+For general connector concepts, see [Connectors](/docs/arender-modern/concepts/connectors).
 
 ## Architecture
 
@@ -46,9 +52,8 @@ ARender v2026 ships the following provider images:
 
 | Provider | Docker image | Default port | Repository type |
 |----------|-------------|-------------|----------------|
-| Alfresco | `alfresco-provider` | 8788 | Alfresco via CMIS |
-| FileNet | `filenet-provider` | — | IBM FileNet Content Engine |
-| Sample | `sample-provider` | — | Test documents (for development) |
+| Alfresco | `arender-alfresco-provider` | 8788 | Alfresco via CMIS |
+| FileNet | `arender-filenet-provider` | 8787 | IBM FileNet Content Engine |
 
 ## Docker Compose example
 
@@ -67,7 +72,7 @@ services:
       - arender-tmp:/arender/tmp
 
   alfresco-provider:
-    image: docker-arender.arondor.com/alfresco-provider:{{version}}
+    image: docker-arender.arondor.com/arender-alfresco-provider:{{version}}
     ports:
       - "8788:8788"
     environment:
@@ -103,19 +108,31 @@ The broker needs to know each provider's URL. Configure this with Spring Boot pr
 registry.provider.alfresco.url=http://alfresco-provider:8788
 
 # Register a provider named "filenet"
-registry.provider.filenet.url=http://filenet-provider:8080
+registry.provider.filenet.url=http://filenet-provider:8787
 ```
 
 Or as environment variables:
 
 ```bash
 REGISTRY_PROVIDER_ALFRESCO_URL=http://alfresco-provider:8788
-REGISTRY_PROVIDER_FILENET_URL=http://filenet-provider:8080
+REGISTRY_PROVIDER_FILENET_URL=http://filenet-provider:8787
 ```
 
 ## How `X-Provider-ID` works
 
 The `X-Provider-ID` HTTP header tells the broker which provider should handle the request. The React UI sets this header based on the document source. The broker uses it to look up the provider URL in its registry and route the request.
+
+## FileNet provider configuration
+
+The FileNet provider connects to an IBM FileNet Content Engine. Configure it with the following environment variables:
+
+```bash
+ARENDER_SERVER_FILENET_CE_URL=https://filenet-engine:9443/wsi/FNCEWS40MTOM/
+ARENDER_SERVER_FILENET_CE_LOGIN=p8admin
+ARENDER_SERVER_FILENET_CE_PASSWORD=secret
+```
+
+The default port is `8787`.
 
 ## Document model
 

@@ -1,15 +1,16 @@
 ---
+viewer: classic
 title: IBM FileNet integration
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /guides/integration/ibm-filenet
 sidebar_position: 3
-content_hash: 3e3012aab97638d699c75e1cedc945a39bcd12c75666947b4881a249c21d99ec
+content_hash: 5a4c7852e7bee58cc46df312286089babd4ac13a717ea03a13df6938101c6e76
 ---
 # IBM FileNet integration
 
-The FileNet connector integrates ARender with IBM FileNet Content Engine (P8). It fetches documents from a FileNet object store and stores annotations natively using the FileNet P8 annotation model. The connector is packaged as a fat JAR (`arondor-arender-filenet-ce-<version>-jar-with-dependencies.jar`) that includes all required dependencies — including the FileNet Java API (JACE).
+The FileNet connector integrates ARender with IBM FileNet Content Engine (P8). It fetches documents from a FileNet object store and stores annotations natively using the FileNet P8 annotation model. The connector is packaged as a fat JAR (`arondor-arender-filenet-ce-{{version}}-jar-with-dependencies.jar`) that includes all required dependencies — including the FileNet Java API (JACE).
 
 ## Prerequisites
 
@@ -191,5 +192,4 @@ The connector can display watermarks based on FileNet group membership or docume
 
 - [Connectors concept](../../concepts/connectors.md)
 - [IBM Content Navigator integration](./ibm-content-navigator.mdx)
-- [Embed the viewer](./embed-viewer.md)
 - [Annotations concept](../../concepts/annotations.md)

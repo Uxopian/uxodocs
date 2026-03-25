@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Watermarks
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /guides/features/watermarks
 sidebar_position: 10
-content_hash: bb4c94bfc57ac57b1fa97105927ab6fc14100a44565ab82eb537be228c87f4e5
+content_hash: c1fd32d11761cf67d9f8602642332e838e5a543dda3635465441b43a76010ba8
 ---
 
 # Watermarks
@@ -24,20 +25,14 @@ Viewed by $USERNAME$ at $TIMESTAMP$
 
 ### Enabling the default watermark
 
-Add these properties to the ARender server configuration (`arender-server-custom-vanilla.properties`):
+Enable watermarking in the server configuration (`arender-custom-server.properties`):
 
 ```properties
-# Watermark provider type
-arender.server.watermark.display.provider=activableDisplayWatermarkProvider
-
-# Activate watermark on startup (applies to viewing and downloads)
 arender.watermark.activate.on.startup=true
-
-# Required when using watermarks or redactions — enables annotation rendition processing
 arender.server.process.annotations.rendition=true
 ```
 
-Restart the ARender web application. Watermarks will appear on every page.
+Restart the ARender web application. For the full list of watermark properties, see [Viewer configuration — Watermark](../../reference/viewer-configuration.md#watermark).
 
 ## Custom watermark
 
@@ -86,13 +81,7 @@ You can define your own watermark by declaring a Spring bean in `arender-custom-
 
 ### Activating a custom watermark
 
-Point the server configuration to your bean ID in `arender-custom-server.properties`:
-
-```properties
-arender.watermark.bean.name=myWatermark
-```
-
-Restart the ARender web application.
+Set `arender.watermark.bean.name=myWatermark` in `arender-custom-server.properties` and restart the web application. See [Viewer configuration — Watermark](../../reference/viewer-configuration.md#watermark) for all available properties.
 
 ## Programmatic watermark creation (REST client)
 

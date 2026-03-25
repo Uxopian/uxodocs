@@ -1,4 +1,5 @@
 ---
+viewer: classic
 title: Environment variables
 slug: /installation/environment-variables
 sidebar_position: 5
@@ -27,13 +28,14 @@ Each service uses a prefix. All environment variable names must be uppercase.
 
 | Service | Container image | Prefix |
 |---------|----------------|--------|
+| Viewer | `arender-ui-springboot` | `ARENDERSRV_` |
 | Service broker | `arender-document-service-broker` | `DSB_` |
 | Document converter | `arender-document-converter` | `DCV_` |
 | Document renderer | `arender-document-renderer-pdfowl` | `DRN_` |
 | Document text handler | `arender-document-text-handler` | `DTH_` |
 
-:::tip
-The Classic viewer uses the `ARENDERSRV_` prefix for its Spring Boot properties. See the Classic viewer documentation for details.
+:::warning
+Native Spring Boot properties (e.g., `spring.security.oauth2.*`) must **not** be prefixed with `ARENDERSRV_`, otherwise they won't be taken into account or not properly used/detected at the right time. Only ARender-specific properties (e.g., `arender.server.*`) use the `ARENDERSRV_` prefix.
 :::
 
 ### Property-to-variable mapping rules
@@ -64,11 +66,21 @@ The `.MAP` and `.NAME` notation reflects that `map` and `name` contain uppercase
 
 **Example: simple property override**
 
-The broker property `arender.server.document.pdf.portfolio.enabled` becomes:
+The property `arender.server.oauth2.enabled` on the viewer becomes:
 
 ```
-DSB_ARENDER_SERVER_DOCUMENT_PDF_PORTFOLIO_ENABLED=true
+ARENDERSRV_ARENDER_SERVER_OAUTH2_ENABLED=true
 ```
+
+**Example: property with a camelCase segment**
+
+The property `spring.security.oauth2.client.registration.arender.client-id` becomes:
+
+```
+SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT_ID=arender-client
+```
+
+Note that native Spring Boot properties like `spring.security.*` do not use the `ARENDERSRV_` prefix.
 
 :::note
 When in doubt about a specific property, check the broker Swagger UI at `http://{broker-host}:8761/swagger-ui/index.html` or refer to the [Rendition properties](../reference/rendition-properties.md) for exact property names.
@@ -84,6 +96,11 @@ In a Docker Compose file, set environment variables under the `environment` key 
 
 ```yaml title="docker-compose.yml"
 services:
+  ui:
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot
+    environment:
+      - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
+
   service-broker:
     image: artifactory.arondor.cloud:5001/arender-document-service-broker
     environment:
@@ -160,6 +177,19 @@ document-converter:
 
 See the [Office conversion guide](../guides/features/office-conversion.mdx#directoffice-paid-add-on) for the full list of MIME types.
 
+**Enable OAuth2 on the viewer:**
+
+```yaml
+ui:
+  environment:
+    - "ARENDERSRV_ARENDER_SERVER_OAUTH2_ENABLED=true"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT_ID=arender-client"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_CLIENT_SECRET=your-secret"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_PROVIDER=keycloak"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_AUTHORIZATION_GRANT_TYPE=authorization_code"
+    - "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_ARENDER_SCOPE=openid"
+```
+
 ---
 
 ## Kubernetes (Helm)
@@ -168,9 +198,12 @@ The ARender Helm charts support environment variable injection at two levels: a 
 
 ### Helm chart structure
 
+Two charts are available:
+
 | Chart | Path | Purpose |
 |-------|------|---------|
 | `rendition` | `helm/rendition/` | Deploys broker, converter, renderer, and text handler |
+| `viewer` | `helm/viewer/` | Deploys the viewer |
 
 ### Passing environment variables via values.yaml
 
@@ -191,6 +224,14 @@ renderer:
 
 handler:
   environment: {}
+```
+
+The viewer chart uses a flat `environment` map:
+
+```yaml title="values.yaml"
+# helm/viewer/values.yaml (excerpt)
+environment:
+  ARENDERSRV_ARENDER_SERVER_OAUTH2_ENABLED: "true"
 ```
 
 ### Broker service discovery in Kubernetes
@@ -251,6 +292,16 @@ broker:
 ```
 
 This is useful for multi-line or complex properties that are awkward to express as a single environment variable.
+
+### Viewer rendition hosts
+
+The viewer chart provides a dedicated `rendition.hosts` list that generates the `ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS` variable automatically:
+
+```yaml title="values.yaml"
+rendition:
+  hosts:
+    - http://arender-broker.arender.svc.cluster.local:8761/
+```
 
 ---
 

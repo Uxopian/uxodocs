@@ -1,4 +1,5 @@
 ---
+viewer: classic
 title: Configuration system
 slug: /installation/configuration-system
 sidebar_position: 4
@@ -51,10 +52,10 @@ This rule applies at every level of the configuration hierarchy.
 
 ### Spring Boot standalone
 
-Place override files next to the ARender service JAR:
+Place override files next to the ARender JAR:
 
 ```
-arender-document-service-broker-{{version}}.jar
+arondor-arender-hmi-springboot-{{version}}.jar
 application.properties          # or .yml
 ```
 
@@ -66,13 +67,13 @@ Mount override files into the container at `/home/arender/`:
 
 ```yaml title="docker-compose.yml"
 services:
-  service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker
+  ui:
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot
     volumes:
       - ./application.properties:/home/arender/application.properties
 ```
 
-The container working directory is `/home/arender/`, so Spring Boot picks up the file automatically. The same approach works for all ARender service containers.
+The container working directory is `/home/arender/`, so Spring Boot picks up the file automatically.
 
 ### Kubernetes (Helm)
 
@@ -91,6 +92,31 @@ broker:
 ```
 
 For simple key-value overrides, use environment variables instead. See [Environment variables](./environment-variables.md).
+
+## The configurations/ folder
+
+The Spring Boot standalone package extracts a `configurations/` directory alongside the JAR:
+
+```
+arondor-arender-hmi-spring-boot-package-{{version}}/
+  arondor-arender-hmi-spring-boot-{{version}}.jar
+  configurations/
+    arender-custom-client.properties         # viewer UI behavior overrides
+    arender-custom-server.properties         # server-side overrides (broker URL, OAuth2, etc.)
+    arender-custom-integration.xml           # Spring XML bean overrides (client side)
+    arender-custom-server-integration.xml    # Spring XML bean overrides (server side)
+  lib/                                       # connector JARs
+  public/                                    # static web resources
+```
+
+| File | Purpose |
+|------|---------|
+| `arender-custom-server.properties` | Primary file for server-side property overrides such as `arender.server.rendition.hosts`, OAuth2 settings, and feature flags. |
+| `arender-custom-client.properties` | Controls viewer UI behavior: toolbar layout, default zoom, annotation permissions. |
+| `arender-custom-integration.xml` | Replaces or extends Spring beans on the client side using XML configuration. |
+| `arender-custom-server-integration.xml` | Replaces or extends Spring beans on the server side. |
+
+These files are loaded via Spring's `@PropertySource` and XML import mechanisms.
 
 ## Resolution diagram
 

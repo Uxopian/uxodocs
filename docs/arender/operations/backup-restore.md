@@ -1,11 +1,7 @@
 ---
 title: Backup and restore
-last_update:
-  date: '2026-03-17T14:31:35.329Z'
-  author: CI/CD Bot
 slug: /operations/backup-restore
 sidebar_position: 3
-content_hash: 37b2085450bae8acd02a5d1edfa7961af28e4d915346a6bbe0154ac4248b87e6
 ---
 
 # Backup and restore
@@ -19,9 +15,9 @@ Before designing a backup strategy, identify which data matters in your deployme
 | Data | Location | Criticality | Notes |
 |------|----------|-------------|-------|
 | Rendition cache (tmp) | Shared volume (`/arender/tmp` or `../../tmp/`) | Low | Rebuilt automatically on next document open |
-| Web-UI configuration | `application.properties`, `application.yml`, custom Spring profiles | High | Required to restore UI behavior |
+| Viewer configuration | `application.properties`, `application.yml`, custom Spring profiles | High | Required to restore viewer behavior |
 | Broker configuration | `application.properties`, `hazelcast.yaml`, custom JVM arguments | High | Required to restore rendition behavior |
-| Annotation files (XFDF) | Path set by `arender.server.annotations.xfdf.localstorage.default.path` (default `~/ARenderAnnotations/`) | Critical | User-created annotations are irreplaceable |
+| Annotation files | Configured annotation storage path (filesystem, database, or REST service) | Critical | User-created annotations are irreplaceable |
 | Annotation database (JDBC) | SQL database table `ANNOTATIONS` or `VANNOTATIONS` | Critical | User-created annotations are irreplaceable |
 | OAuth2 / security configuration | Environment variables or properties files with client secrets, issuer URIs | High | Required for authentication to work after restore |
 | Helm values file | `my-values.yaml` or equivalent | High | Single source of truth for Kubernetes deployments |
@@ -37,15 +33,13 @@ The rendition cache holds converted and rendered document pages on the shared te
 
 If you want to preserve the cache to avoid a cold-start performance hit after a migration, copy the entire shared tmp directory. On restore, mount it at the same path.
 
-## Web-UI configuration backup
+## Viewer configuration backup
 
-The Web-UI reads its configuration from Spring Boot property files and environment variables. Back up the following:
+The viewer reads its configuration from property files and environment variables. Back up the following:
 
 - `application.properties` or `application.yml` (custom overrides)
 - Spring profiles (`application-{profile}.properties`)
-- Custom Hazelcast configuration (`hazelcast.yaml`) if modified from defaults
 - OAuth2 client credentials and provider settings
-- Connector-specific properties (Alfresco, FileNet, CMIS connection strings)
 
 In a Docker deployment, these are typically injected as environment variables in `docker-compose.yml`. Back up the Compose file itself.
 
@@ -79,7 +73,7 @@ Annotations are the most critical data to protect. ARender supports three storag
 
 ### XFDF file storage
 
-Annotations are stored as `.xml` files in the directory configured by `arender.server.annotations.xfdf.localstorage.default.path`. Each file corresponds to one document.
+Annotations are stored as `.xml` files in the configured annotation directory. Each file corresponds to one document.
 
 **Backup**:
 
@@ -229,8 +223,6 @@ The rendition cache rebuilds automatically on first document access. No separate
 
 ## Related pages
 
-- [XFDF file annotation storage](../guides/annotations/annotation-storage-xfdf.md)
-- [JDBC annotation storage](../guides/annotations/annotation-storage-jdbc.md)
 - [Docker Compose](../installation/docker-compose.md)
 - [Kubernetes Helm](../installation/kubernetes-helm.md)
 - [Monitoring and observability](./monitoring.md)

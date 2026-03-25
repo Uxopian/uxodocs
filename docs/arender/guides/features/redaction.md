@@ -1,7 +1,8 @@
 ---
 title: Redaction
+viewer: classic
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:21:09.989Z'
   author: CI/CD Bot
 slug: /guides/features/redaction
 sidebar_position: 9

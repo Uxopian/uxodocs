@@ -1,7 +1,11 @@
 ---
 title: Document ID generators
+last_update:
+  date: '2026-03-23T10:20:59.293Z'
+  author: CI/CD Bot
 slug: /guides/features/document-id-generators
 sidebar_position: 2
+content_hash: 9b2120f7203060d484bfbda91f07c2d053e372e6328efd3694b2f04c185456e6
 ---
 
 # Document ID generators
@@ -52,4 +56,4 @@ arender.documentid.encrypted.ttl.duration.ms=3600000
 
 - [Documents and document IDs](../../concepts/documents-and-ids.md): the DocumentId / DocumentAccessor mental model
 - [Opening documents](./opening-documents.md): how document IDs are used in viewer URLs
-- [Caching](../../concepts/caching.md): how DocumentId values are used as cache keys
+- [Rendition caching](../../concepts/caching.md): how DocumentId values are used as cache keys

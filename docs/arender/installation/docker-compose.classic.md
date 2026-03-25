@@ -1,4 +1,5 @@
 ---
+viewer: classic
 title: Docker Compose
 last_update:
   date: '2026-03-24T08:07:20.846Z'
@@ -10,14 +11,15 @@ content_hash: 90a489bf30a620da7d51ec3a655175b02b8bc8a3e966d7a75021fa0edf84e38e
 
 # Docker Compose
 
-This guide covers deploying the ARender rendition backend with Docker Compose. The backend is shared by both the Classic and Modern viewers.
+This guide covers deploying ARender with Docker Compose, including the Classic viewer and all rendition backend services.
 
-## Backend services
+## Services
 
-The rendition backend requires four containers:
+A full Classic deployment requires five containers:
 
 | Service | Image | Port | Purpose |
 |---------|-------|------|---------|
+| ui | arender-ui-springboot | 8080 | Classic viewer UI |
 | service-broker | arender-document-service-broker | 8761 | REST API gateway and orchestration |
 | document-converter | arender-document-converter | 19999 | Format conversion |
 | document-renderer | arender-document-renderer-pdfowl | 9091 | Page rendering |
@@ -37,10 +39,17 @@ docker login artifactory.arondor.cloud:5001
 
 In Docker Compose, the broker discovers microservices via static configuration. Each microservice is configured with environment variables that set its hostname and port (using the legacy `eureka.instance.*` property namespace). The broker polls each service's health endpoint to track availability. No Eureka server is involved.
 
-## Backend configuration
+## Full configuration
 
 ```yaml title="docker-compose.yml"
 services:
+  ui:
+    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}
+    ports:
+      - 8080:8080
+    environment:
+      - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
+
   service-broker:
     image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
     ports:
@@ -83,11 +92,11 @@ volumes:
   arender-tmp:
 ```
 
-This configuration deploys the rendition backend. The Modern Viewer is an npm package embedded in your host application — no additional container is needed.
+The `ui` service runs the Classic viewer on port 8080. It connects to the service broker via `ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS`. The rendition backend services share a temporary volume for document processing.
 
 ## Environment variable conventions
 
-All YAML configuration properties can be overridden via environment variables. Each service uses a dedicated prefix (`DSB_`, `DCV_`, `DRN_`, `DTH_`). See [Environment variables](./environment-variables.md) for the full naming convention with examples.
+All YAML configuration properties can be overridden via environment variables. Each service uses a dedicated prefix (`ARENDERSRV_` for the viewer, `DSB_`, `DCV_`, `DRN_`, `DTH_` for backend services). See [Environment variables](./environment-variables.md) for the full naming convention with examples.
 
 ## Shared volume
 

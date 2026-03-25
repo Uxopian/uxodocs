@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Alfresco integration
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /guides/integration/alfresco
 sidebar_position: 2
-content_hash: 0d61fe48ddba64f80becc6eb6a16038cf9b62cdc9e5941b16f8cb623a0a079cb
+content_hash: e3d7ed42d25eae699ea1a2660734ce4ed5f43e3d28e3de175ef37394b8a33bef
 ---
 import ARenderDownloads from '@site/src/components/ARenderDownloads';
 
@@ -121,14 +122,14 @@ The Share plugin is distributed as an AMP file. Install it using the Alfresco Mo
 
 ```bash
 java -jar alfresco-mmt.jar install \
-  arender-for-alfresco-share-plugin-<version>.amp \
+  arender-for-alfresco-share-plugin-{{version}}.amp \
   alfresco-share.war -force
 ```
 
 After installation, configure the plugin to point to your ARender viewer URL. The plugin builds the iframe URL in this form:
 
 ```
-http://<arender-host>:8080/?nodeRef=<nodeRef>&user=<username>&alf_ticket=<ticket>&versionLabel=<version>
+http://<arender-host>:8080/?nodeRef=<nodeRef>&user=<username>&alf_ticket=<ticket>&versionLabel={{version}}
 ```
 
 The Share plugin replaces the default Alfresco Share document preview component with an ARender iframe for all supported document types.
@@ -167,6 +168,4 @@ The CMIS connector supports the ARender Document Builder feature, which allows s
 ## Related pages
 
 - [Connectors concept](../../concepts/connectors.md)
-- [CMIS integration guide](./cmis.md)
-- [Embed the viewer](./embed-viewer.md)
 - [Annotations concept](../../concepts/annotations.md)

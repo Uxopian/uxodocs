@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Open your first document
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /quickstart/first-document
 sidebar_position: 2
-content_hash: ed17b593757d07ab46bdf3e13710b9dab0a6de10b6d325121bcd99b11718342b
+content_hash: 1bf370e7d79c6fc46fe4924aa018b4ddca22570b9144d1e928a398a124067aed
 ---
 
 # Open your first document

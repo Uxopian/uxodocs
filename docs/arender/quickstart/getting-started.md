@@ -1,6 +1,12 @@
 ---
+viewer: modern
+slug: /getting-started
 title: Getting started
+last_update:
+  date: '2026-03-24T08:07:20.846Z'
+  author: CI/CD Bot
 sidebar_position: 2
+content_hash: de6e90602ed3383a58e06b75b82072e4c8e9b05ed63fa8d58d0b32ba95006b97
 ---
 
 # Getting started with the React UI
@@ -57,7 +63,7 @@ Verify the backend is healthy:
 http://localhost:8761/health/records
 ```
 
-For a complete backend setup guide, see [Docker Compose installation](/docs/arender/installation/docker-compose/).
+For a complete backend setup guide, see [Docker Compose installation](/docs/arender-modern/installation/docker-compose).
 
 ## Step 2 — Install the npm package
 
@@ -87,7 +93,7 @@ Add the `<arender-element>` Web Component to your page or component:
 </style>
 ```
 
-If you use a framework, see [Framework wrappers](./framework-wrappers.md) for React, Angular, Vue, and Svelte components.
+If you use a framework, see [Framework wrappers](../reference/framework-wrappers.md) for React, Angular, Vue, and Svelte components.
 
 ## Step 4 — Open a document
 
@@ -106,7 +112,7 @@ await viewer.ARender.openDocument('some-document-id');
 
 ## CORS considerations
 
-Since the React UI runs inside your host application, API calls to the rendition backend are cross-origin unless you set up a reverse proxy. See [CORS and reverse proxy](./configuration.md#cors-and-reverse-proxy) for solutions.
+Since the React UI runs inside your host application, API calls to the rendition backend are cross-origin unless you set up a reverse proxy. See [CORS and reverse proxy](../installation/configuration.md#cors-and-reverse-proxy) for solutions.
 
 ## Sample documents
 
@@ -118,7 +124,7 @@ These public URLs can be used for testing (requires `DSB_AUTHORIZED_URLS` to inc
 
 ## Next steps
 
-- [Web Component](./web-component.md) — HTML attributes, JavaScript API, styling
-- [Framework wrappers](./framework-wrappers.md) — React, Angular, Vue, Svelte integration
-- [Configuration](./configuration.md) — CORS setup, reverse proxy, backend connection
-- [Connector providers](./connector-providers.md) — Load documents from Alfresco, FileNet, or custom repositories
+- [Web Component](../reference/web-component.md) — HTML attributes, JavaScript API, styling
+- [Framework wrappers](../reference/framework-wrappers.md) — React, Angular, Vue, Svelte integration
+- [Configuration](../installation/configuration.md) — CORS setup, reverse proxy, backend connection
+- [Connector providers](../guides/integration/connector-providers.md) — Load documents from Alfresco, FileNet, or custom repositories

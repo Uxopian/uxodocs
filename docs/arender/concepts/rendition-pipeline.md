@@ -1,11 +1,11 @@
 ---
 title: Rendition pipeline
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /concepts/rendition-pipeline
 sidebar_position: 4
-content_hash: dc3a1c5fa44cf3535572c6a97922460ae01d1cbf7d5bfe1015989cc61844e349
+content_hash: 0d95caa613f9e5cbc1884df837f278ccd5bc1e0abf1491378c02122aa396bd7c
 ---
 
 # Rendition pipeline
@@ -20,47 +20,47 @@ When a user opens a document, the viewer and broker coordinate through multiple 
 
 ```mermaid
 sequenceDiagram
-    participant V as Viewer
+    participant C as Client
     participant B as Service Broker
-    participant C as Converter
+    participant Co as Converter
     participant FS as Shared Storage
 
-    V->>B: Load document
+    C->>B: Load document
     B->>FS: Store original document
-    B->>C: Convert to PDF (if needed)
-    C->>FS: Store converted PDF
+    B->>Co: Convert to PDF (if needed)
+    Co->>FS: Store converted PDF
 
-    V->>B: Get Document Layout (blocking)
+    C->>B: Get Document Layout (blocking)
     B->>FS: Read PDF
-    B-->>V: Return layout (page count, dimensions)
+    B-->>C: Return layout (page count, dimensions)
 ```
 
 #### Per-page rendering (async, on demand)
 
 ```mermaid
 sequenceDiagram
-    participant V as Viewer
+    participant C as Client
     participant B as Service Broker
     participant R as Renderer
     participant T as Text Handler
     participant FS as Shared Storage
 
-    V->>B: Get page image (page N)
+    C->>B: Get page image (page N)
     B->>R: Render page N
     R->>FS: Read PDF
     R-->>B: Page image (PNG/SVG)
-    B-->>V: Return image
+    B-->>C: Return image
 
-    V->>B: Get page text (page N)
+    C->>B: Get page text (page N)
     B->>T: Extract text for page N
     T->>FS: Read PDF
     T-->>B: Text positions
-    B-->>V: Return text
+    B-->>C: Return text
 ```
 
 ### 1. Document loading
 
-The viewer fetches the document through a connector and forwards it to the service broker. The broker stores the original file in the shared temporary volume (`/arender/tmp`).
+The document is loaded into the service broker — either through a Classic viewer connector, a Modern Viewer provider, or directly by URL. The broker stores the original file in the shared temporary volume (`/arender/tmp`).
 
 ### 2. Format conversion
 

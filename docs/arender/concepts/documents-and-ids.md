@@ -1,10 +1,11 @@
 ---
 title: Documents and document IDs
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-24T08:07:20.846Z'
   author: CI/CD Bot
 slug: /concepts/documents-and-ids
 sidebar_position: 1
+content_hash: 7d2d1377b56312e9094040a2135f3d88ed008e839a348648db607fe677f0ad73
 ---
 
 # Documents and document IDs
@@ -40,35 +41,20 @@ This hierarchy allows the broker and caching layer to manage document groups as 
 
 ## DocumentAccessor
 
-A `DocumentAccessor` is the runtime object behind a DocumentId. It provides access to document content, metadata, and annotations. Connectors produce `DocumentAccessor` instances; the viewer and service broker consume them.
+A `DocumentAccessor` is the broker's internal runtime object behind a DocumentId. It provides access to document content, metadata, and annotations. You can think of it as the loaded, ready-to-use representation of a document inside the broker.
 
-```java
-public interface DocumentAccessor extends Serializable {
-    DocumentId getDocumentId();
-    InputStream getInputStream() throws IOException;
-    byte[] toByteArray() throws IOException;
-    String getPath() throws IOException;
-    String getMimeType() throws IOException;
-    String getDocumentTitle();
-    AnnotationAccessor getAnnotationAccessor() throws AnnotationsNotSupportedException;
-    DocumentMetadata getDocumentMetadata();
-}
-```
+How a `DocumentAccessor` gets created depends on the connector model:
 
-Specialized sub-interfaces add capabilities. These are particularly relevant when building connectors:
+- **Classic viewer** — connectors (Java JARs) produce `DocumentAccessor` instances directly, implementing the `DocumentServiceURLParser` and `DocumentAccessor` interfaces.
+- **Modern Viewer** — [providers](/docs/arender-modern/connector-providers) return document content via REST. The broker creates the `DocumentAccessor` internally from the provider response.
+- **By URL** — the broker fetches the document from the URL and creates the `DocumentAccessor` itself.
 
-| Interface | Added capability |
-|-----------|-----------------|
-| `DocumentAccessorHasFileName` | Provides the original file name |
-| `DocumentAccessorHasContext` | Provides the name of the UI profile property file to use (e.g., returns `role-user` for `role-user.properties`) |
-| `DocumentAccessorHasUserRole` | Exposes the user's role for access control |
-| `DocumentAccessorHasPartialContent` | Supports chunked or range-based loading |
-| `DocumentAccessorHasUpdateContent` | Supports writing back modified document content |
+Regardless of how the `DocumentAccessor` is created, the rest of the rendition pipeline treats it identically: the broker resolves the layout, delegates conversion, rendering, and text extraction using the same `DocumentId` as cache key.
 
 ## Related pages
 
 - [Opening documents](../guides/features/opening-documents.md): URL parameters and multi-document opening
 - [Document ID generators](../guides/features/document-id-generators.md): configuring Base64, encrypted, and UUID generators
-- [Connectors](./connectors.md): how connectors produce `DocumentAccessor` instances
-- [Caching](./caching.md): how `DocumentId` values are used as cache keys
-- [Security model](./security-model.md): how user identity interacts with authentication
+- [Connectors](./connectors.md): how Classic connectors produce `DocumentAccessor` instances
+- [Connector providers](/docs/arender-modern/connector-providers): how Modern Viewer providers load documents via REST
+- [Rendition caching](./caching.md): how `DocumentId` values are used as cache keys

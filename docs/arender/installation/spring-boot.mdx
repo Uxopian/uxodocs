@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Spring Boot standalone
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /installation/spring-boot
 sidebar_position: 3
-content_hash: 82a4cf8b357a8024280b10d3773b55072b36c5b61d7d48418c6efea365e752c2
+content_hash: 96f94de34c796e923ba533d51caf4b7a027308ca8ccddd2e13268627422146e8
 ---
 import ARenderDownloads from '@site/src/components/ARenderDownloads';
 import Tabs from '@theme/Tabs';
@@ -19,8 +20,8 @@ ARender can run directly on a host without Docker. The distribution ships two pa
 
 | Package | Contents |
 |---------|----------|
-| `arondor-arender-hmi-spring-boot-package-<version>.zip` | Viewer UI: a Spring Boot JAR, startup scripts, configuration files, and a `lib/` directory for connector JARs |
-| `rendition-engine-installer-<version>-rendition.jar` | Rendition installer: extracts the service broker and all rendition microservices (converter, renderer, text handler) into a self-contained directory |
+| `arondor-arender-hmi-spring-boot-package-{{version}}.zip` | Viewer UI: a Spring Boot JAR, startup scripts, configuration files, and a `lib/` directory for connector JARs |
+| `rendition-engine-installer-{{version}}-rendition.jar` | Rendition installer: extracts the service broker and all rendition microservices (converter, renderer, text handler) into a self-contained directory |
 
 <ARenderDownloads version="2026.0.0" filter={["rendition", "web-ui"]} />
 
@@ -37,13 +38,13 @@ ARender can run directly on a host without Docker. The distribution ships two pa
 Run the installer JAR. It extracts the full rendition stack into the current directory:
 
 ```bash
-java -jar rendition-engine-installer-<version>-rendition.jar
+java -jar rendition-engine-installer-{{version}}-rendition.jar
 ```
 
 This creates the following structure:
 
 ```
-ARender-Rendition-<version>/
+ARender-Rendition-{{version}}/
   ARenderConsole.bat          # start script (Windows)
   ARenderConsole.sh           # start script (Linux)
   setenv.bat / setenv.sh      # JVM memory and arguments
@@ -93,7 +94,7 @@ For custom overrides, use `custom_setenv.bat` or `custom_setenv.sh` instead of e
 ARenderConsole.bat
 ```
 
-The script sources the environment, clears the `tmp/` directory, and starts the rendition engine JAR (`modules/RenditionEngine/rendition-engine-micro-service-<version>.jar`). The rendition engine is the service broker: it discovers and orchestrates all other microservices in the `modules/` directory.
+The script sources the environment, clears the `tmp/` directory, and starts the rendition engine JAR (`modules/RenditionEngine/rendition-engine-micro-service-{{version}}.jar`). The rendition engine is the service broker: it discovers and orchestrates all other microservices in the `modules/` directory.
 
 Wait for the log line `Started RenditionEngineApplication` on port 8761.
 
@@ -102,15 +103,15 @@ Wait for the log line `Started RenditionEngineApplication` on port 8761.
 Unzip the viewer UI package:
 
 ```bash
-unzip arondor-arender-hmi-spring-boot-package-<version>.zip
+unzip arondor-arender-hmi-spring-boot-package-{{version}}.zip
 ```
 
 This creates:
 
 ```
-arondor-arender-hmi-spring-boot-package-<version>/
+arondor-arender-hmi-spring-boot-package-{{version}}/
   ARenderConsole.bat / .sh       # start script
-  arondor-arender-hmi-spring-boot-<version>.jar
+  arondor-arender-hmi-spring-boot-{{version}}.jar
   configurations/
     arender-custom-client.properties    # viewer UI overrides
     arender-custom-server.properties    # server-side overrides
@@ -133,7 +134,7 @@ If the rendition runs on a different host, replace `localhost` with its hostname
 To add a connector (e.g., CMIS for Alfresco), place the connector JAR in `lib/`:
 
 ```
-lib/arondor-arender-cmis-<version>-jar-with-dependencies.jar
+lib/arondor-arender-cmis-{{version}}-jar-with-dependencies.jar
 ```
 
 ## Step 6: Start the viewer
@@ -153,7 +154,7 @@ The script finds the Spring Boot JAR and runs `java -jar` on it. The viewer is a
 Open a browser to `http://localhost:8080`. To test with a sample document:
 
 ```
-http://localhost:8080/?url=file:///path/to/ARender-Rendition-<version>/samples/arender.pdf
+http://localhost:8080/?url=file:///path/to/ARender-Rendition-{{version}}/samples/arender.pdf
 ```
 
 Check the rendition health:

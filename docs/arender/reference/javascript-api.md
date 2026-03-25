@@ -1,4 +1,5 @@
 ---
+viewer: classic
 title: JavaScript API
 last_update:
   date: '2026-03-17T14:31:35.329Z'

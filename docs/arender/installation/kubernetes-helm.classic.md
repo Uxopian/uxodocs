@@ -1,4 +1,5 @@
 ---
+viewer: classic
 title: Kubernetes Helm
 last_update:
   date: '2026-03-23T10:20:59.293Z'
@@ -22,7 +23,12 @@ ARender provides Helm charts for deploying to Kubernetes. The chart creates depl
 
 ## Chart structure
 
-The `arender` parent chart (v0.4.0) contains a **rendition** sub-chart that deploys the service broker, converter, renderer, and text handler.
+The `arender` parent chart (v0.4.0) contains two sub-charts:
+
+- **rendition**: deploys the service broker, converter, renderer, and text handler
+- **viewer**: deploys the UI application
+
+Each sub-chart can also be installed standalone.
 
 ## Registry authentication
 
@@ -163,6 +169,24 @@ rendition:
         memory: 1024Mi
 ```
 
+### Viewer
+
+```yaml title="values.yaml"
+viewer:
+  replicaCount: 1
+  autoscale:
+    enabled: false
+    maxReplicas: 1
+    cpuLimit: 80
+  image:
+    repository: artifactory.arondor.cloud:5001/arender-ui-springboot
+  rendition:
+    hosts: []    # List of rendition broker URLs
+  profiles:
+    - name: arender
+      content: ""
+```
+
 ### Storage
 
 ```yaml title="values.yaml"
@@ -207,12 +231,21 @@ rendition:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       className: nginx
 
+viewer:
+  ingress:
+    enabled: false
+    annotations: {}
+    hosts:
+      - host: arender.example.com
+        paths: []
+    tls: []
 ```
 
 ## Services and ports
 
 | Deployment | Service port | Service type |
 |-----------|-------------|--------------|
+| Viewer | 80 | ClusterIP |
 | Broker | 8761 | ClusterIP |
 | Converter | 19999 | ClusterIP |
 | Renderer | 9091 | ClusterIP |
@@ -233,6 +266,7 @@ All services have configurable liveness and readiness probes:
 | Converter | 30s | 60s | 15s |
 | Renderer | 30s | 60s | 15s |
 | Text Handler | 30s | 60s | 15s |
+| Viewer | 30s | 60s | 30s/60s |
 
 ## Broker RBAC
 

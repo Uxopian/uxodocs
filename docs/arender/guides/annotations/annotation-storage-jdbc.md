@@ -1,11 +1,8 @@
 ---
+viewer: classic
 title: JDBC annotation storage
-last_update:
-  date: '2026-03-17T14:31:35.329Z'
-  author: CI/CD Bot
 slug: /guides/annotations/annotation-storage-jdbc
-sidebar_position: 1
-content_hash: 88d125c254293ce0a7f5b6bb8ad02d286699bc302dd1db145ea16ebc3548edf6
+sidebar_position: 2
 ---
 
 # JDBC annotation storage
@@ -21,7 +18,7 @@ Use this guide when you need annotations to be stored in a shared relational dat
 - ARender UI deployed and able to reach the service broker
 - A supported SQL database: SQL Server or HSQLDB (SQLite is used in tests only and is not recommended for production)
 - JDBC driver JAR available on the classpath or in the application server
-- The `jdbc-annotations` connector JAR included in your UI package (it is bundled in the `jdbc-hmi-war` package)
+- The `jdbc-annotations` module on the classpath
 
 ## Database schema
 
@@ -54,51 +51,6 @@ CREATE TABLE VANNOTATIONS (
 ```
 
 The versioned accessor is available but its class (`VersionnedDocumentAnnotationAccessorJDBC`) is not the default. Use the standard schema unless you have a specific versioning requirement.
-
-## Configuration
-
-### Spring Boot (Docker or standalone)
-
-Set the following properties in your `application.properties` or as environment variables on the UI container:
-
-```properties title="application.properties"
-# JDBC driver class name
-# SQL Server: com.microsoft.sqlserver.jdbc.SQLServerDriver
-# HSQLDB: org.hsqldb.jdbc.JDBCDriver
-arender.server.jdbc.driver.class.name=com.microsoft.sqlserver.jdbc.SQLServerDriver
-
-# JDBC connection URL
-# SQL Server example:
-arender.server.jdbc.url=jdbc:sqlserver://db.example.com:1433;databaseName=ARenderDB
-
-# Credentials
-arender.server.jdbc.login=arender_user
-arender.server.jdbc.password=secret
-```
-
-Environment variable equivalents (using the `ARENDERSRV_` prefix for the UI container):
-
-```
-ARENDERSRV_ARENDER_SERVER_JDBC_DRIVER_CLASS_NAME=com.microsoft.sqlserver.jdbc.SQLServerDriver
-ARENDERSRV_ARENDER_SERVER_JDBC_URL=jdbc:sqlserver://db.example.com:1433;databaseName=ARenderDB
-ARENDERSRV_ARENDER_SERVER_JDBC_LOGIN=arender_user
-ARENDERSRV_ARENDER_SERVER_JDBC_PASSWORD=secret
-```
-
-### Spring XML (legacy WAR deployment)
-
-In `arender-server-custom-jdbc.properties`, override the same three properties. The `arender-editor-specific-integration.xml` file in the JDBC package wires the `JDBCAnnotationContentAccessor` bean to the data source. No additional XML changes are required for the default setup.
-
-If you use a JNDI data source defined in the application server, declare it in `arender-jndi-context.xml`:
-
-```xml title="arender-jndi-context.xml"
-<jee:jndi-lookup id="dataSourceReferenceJNDI"
-                 jndi-name="jdbc/dataSourceReference"
-                 expected-type="javax.sql.DataSource"
-                 default-ref="fallBackDataSourceReference"/>
-```
-
-The `fallBackDataSourceReference` bean falls back to the `arender.server.jdbc.*` properties if the JNDI lookup fails.
 
 ## Configuration properties reference
 
@@ -149,4 +101,3 @@ Once you switch to JDBC storage, file-based annotations are no longer read. The 
 ## Related pages
 
 - [Annotations concept](../../concepts/annotations.md)
-- [Redaction guide](../features/redaction.md)

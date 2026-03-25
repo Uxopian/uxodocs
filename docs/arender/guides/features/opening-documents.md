@@ -1,14 +1,18 @@
 ---
 title: Opening documents
+last_update:
+  date: '2026-03-23T10:20:59.293Z'
+  author: CI/CD Bot
 slug: /guides/features/opening-documents
 sidebar_position: 1
+content_hash: 6439c29efff645395083e7e42b3adb92cef070610bb74d07ebdaab0764321357
 ---
 
 # Opening documents
 
 ARender accepts documents through URL parameters on the main viewer page. This page covers all the ways to open documents in the viewer.
 
-For a quick hands-on introduction, see [Open your first document](../../quickstart/first-document.md).
+For a quick hands-on introduction, see the quickstart guide for your viewer.
 
 ## Opening a document by URL
 
@@ -19,7 +23,7 @@ https://your-arender-host/?url=https://example.com/contract.pdf
 ```
 
 :::info
-The rendition service has a safeguard that only authorizes whitelisted domain/host URLs. By default, no domain is authorized. See the [quickstart](../../quickstart/first-document.md) for how to configure `authorized.urls`.
+The rendition service has a safeguard that only authorizes whitelisted domain/host URLs. By default, no domain is authorized. See the broker environment variable `DSB_AUTHORIZED_URLS`.
 :::
 
 ## Opening a document by pre-generated ID
@@ -68,10 +72,7 @@ In the default (non-OAuth2) security mode, the `user` parameter sets the identit
 
 If the `uuid` parameter contains an embedded `user` key (produced by a self-contained ID generator), the viewer extracts the username from the encoded parameters instead.
 
-See the [security model](../../concepts/security-model.md) for details on how user identity is handled in each authentication mode.
-
 ## Related pages
 
 - [Documents and document IDs](../../concepts/documents-and-ids.md): the DocumentId / DocumentAccessor mental model
 - [Document ID generators](./document-id-generators.md): how IDs are generated and configured
-- [Security model](../../concepts/security-model.md): authentication modes and user identity

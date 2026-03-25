@@ -1,11 +1,11 @@
 ---
 title: Annotations
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-24T08:07:20.846Z'
   author: CI/CD Bot
 slug: /concepts/annotations
 sidebar_position: 5
-content_hash: 7f80488ed8e91cf1e7ee9fc17c2af50d48c880fcda62a0efd8ab190f85f9b573
+content_hash: 0ae1070c54eb880c924528c337b8f4969e947d8cf6d850341dc48abb0c2f9fec
 ---
 
 # Annotations
@@ -58,56 +58,6 @@ Annotations fall into three broad categories:
 
 Each type carries its own set of properties (color, opacity, position, contents, etc.). See the [annotation types reference](../reference/annotation-types.md) for a complete list with property details.
 
-## AnnotationAccessor
-
-Just as a [`DocumentAccessor`](./documents-and-ids.md#documentaccessor) provides access to a document's content, an `AnnotationAccessor` provides CRUD access to a document's annotations. Every `DocumentAccessor` owns exactly one `AnnotationAccessor` (obtained via `getAnnotationAccessor()`), forming a 1:1 relationship.
-
-The `AnnotationAccessor` interface defines four operations:
-
-```java
-public interface AnnotationAccessor extends AnnotationCreationPolicyProvider {
-    void create(List<Annotation> annotations);
-    void update(List<Annotation> annotations);
-    List<Annotation> get();
-    void delete(List<Annotation> annotations);
-}
-```
-
-Each connector provides its own implementation — JDBC, REST, CMIS, FileNet, or filesystem-based — translating these calls into backend-specific operations. From the viewer's perspective, annotation storage is fully abstracted behind this interface.
-
-### AnnotationPageAccessor
-
-`AnnotationPageAccessor` extends `AnnotationAccessor` with page-range-scoped operations:
-
-```java
-public interface AnnotationPageAccessor extends AnnotationAccessor {
-    List<Annotation> get(PagesRange range);
-    List<Annotation> updateAnnotations(
-        List<Annotation> created,
-        List<Annotation> updated,
-        List<Annotation> deleted,
-        PagesRange range);
-}
-```
-
-This enables **lazy loading**: the viewer fetches annotations only for the pages currently visible, rather than loading the entire annotation set at once. For documents with many pages and dense annotations, this significantly reduces initial load time.
-
-## Annotation permissions
-
-Permissions operate at two levels:
-
-**Per-annotation flags** — Each annotation carries access-control metadata:
-- `canModify`: whether the current user can edit this annotation
-- `canDelete`: whether the current user can remove this annotation
-- `locked`: whether the annotation is protected from deletion
-- `readOnly`: whether the annotation is protected from modifications
-
-These flags are evaluated by the viewer to enable or disable editing controls.
-
-**Global creation policy** — Each `AnnotationAccessor` implements `getAnnotationCreationPolicy()`, which returns an `AnnotationCreationPolicy` describing what types of annotations the current user is allowed to create for this document. This is how a connector can enforce rules like "this user may view annotations but not create new ones."
-
-For configuration details, see [annotation configuration](../guides/features/annotation-configuration.md).
-
 ## Redaction
 
 Redaction annotations look like regular annotations in the XFDF layer, but they are architecturally distinct: they interact with document rendering, content streams, and authorization in ways that other annotation types do not. For this reason, redaction is covered in its own concept page.
@@ -118,9 +68,4 @@ See [Redaction](./redaction.md) for the full conceptual model.
 
 - [Documents and document IDs](./documents-and-ids.md) — the `DocumentAccessor` / `DocumentId` model that annotations build on
 - [Annotation types reference](../reference/annotation-types.md) — complete list of annotation types and their properties
-- [Annotation configuration](../guides/features/annotation-configuration.md) — toolbar, permissions, and behavior settings
-- [JDBC storage guide](../guides/annotations/annotation-storage-jdbc.md) — storing annotations in a SQL database
-- [REST storage guide](../guides/annotations/annotation-storage-rest.md) — storing annotations via an HTTP API
-- [XFDF storage guide](../guides/annotations/annotation-storage-xfdf.md) — storing annotations as XFDF files on disk
 - [Redaction](./redaction.md) — the redaction conceptual model: marking, burning, and authorization
-- [Redaction guide](../guides/features/redaction.md) — redaction workflow and configuration

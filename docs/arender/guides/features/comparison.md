@@ -1,4 +1,5 @@
 ---
+viewer: classic
 title: Document comparison
 last_update:
   date: '2026-03-17T14:31:35.329Z'
@@ -112,25 +113,7 @@ Once the state is `PROCESSED`, the response contains the document ID of the resu
 
 ## Configuration reference
 
-### Multi-view and text comparison
-
-| Property | Default | Description |
-|----------|---------|-------------|
-| `visualization.multiView.enabled` | `true` | Enable multi-view mode |
-| `visualization.multiView.direction` | `vertical` | Split direction: `vertical` or `horizontal` |
-| `visualization.multiView.doComparison` | `false` | Automatically start text comparison when two documents open |
-| `visualization.multiView.synchronized` | `true` | Synchronize scrolling between the two views |
-| `visualization.multiView.focusOnClick` | `false` | Require a click to switch annotation focus between views |
-| `topPanel.documentMenu.download.with.compare` | `true` | Show the download-with-comparison button |
-
-### Image comparison
-
-| Property | Default | Description |
-|----------|---------|-------------|
-| `visualization.image.comparison.enabled` | `true` | Enable image comparison |
-| `visualization.image.comparison.default.highlight.color` | `#FF0000` | Default highlight color for differing pixels |
-| `visualization.image.comparison.default.lowlight.color` | `none` | Default lowlight color for common pixels (`none` = transparent) |
-| `visualization.image.comparison.default.fuzz` | `3` | Default fuzz tolerance (0 to 100) |
+For the full list of multi-view and comparison properties, see [Viewer configuration — Multi-view and comparison](../../reference/viewer-configuration.md#multi-view-and-comparison).
 
 ## Automatic comparison on load
 
@@ -165,7 +148,7 @@ comparison.default.value.lowlight.color=
 comparison.default.value.fuzz=3
 ```
 
-See also the [Rendition properties — Comparison defaults](../../reference/rendition-properties.md#comparison-defaults) for the full property table.
+See also [Rendition properties](../../reference/rendition-properties.md) for broker-side comparison configuration.
 
 ## Related pages
 

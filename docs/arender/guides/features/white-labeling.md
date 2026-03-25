@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: White-labeling
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /guides/features/white-labeling
 sidebar_position: 12
-content_hash: 10e7c162ac6c59a8707a72b8cb0357cb01cd1cd85a433473f87b19dbdd17b5e9
+content_hash: ab08dc4b0a993e67f21fc49937dccd6fcd7ee16eb52956078aa4677e43b44073
 ---
 
 # White-labeling

@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Plugins
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /guides/features/plugins
 sidebar_position: 14
-content_hash: 346451479b766a8f19c6c435641a80c52fca0c87720c7bd6c6ada104a6f5ebf8
+content_hash: 5b6c34275f29f3a4e1f191e426bc6bef33182175751c8f9d601ef1284d9617c2
 ---
 
 # Plugins

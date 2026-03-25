@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Servlet API
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /reference/rest-api/servlet-api
 sidebar_position: 2
-content_hash: 7e96100e5306ac3388f6d3576e2d4ed14634ca9d0ded4f7a335d669af16b936d
+content_hash: d86b75abd49397a0c9bf33a1b5290c0e3e9140c532013e87620e0c9c4367d90d
 ---
 
 # Servlet API Reference

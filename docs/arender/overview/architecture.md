@@ -1,11 +1,11 @@
 ---
 title: System architecture
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-24T08:07:20.846Z'
   author: CI/CD Bot
 slug: /overview/architecture
 sidebar_position: 2
-content_hash: 1b3e93c9b05d397182a76b833c15b858aae6c5fae4df37f6994f196ed15d5863
+content_hash: 3e5c3b6b7a280bb91784afd1d537ccc39ef52bbbeaf50a63d252e85932414f39
 ---
 
 # System architecture
@@ -17,10 +17,10 @@ ARender consists of a frontend viewer and a set of backend rendition microservic
 ```mermaid
 graph TB
     subgraph Frontend
-        B[Browser] --> V[Viewer :8080]
+        C[Viewer]
     end
     subgraph Backend
-        V -->|REST| SB[Service Broker :8761]
+        C -->|REST| SB[Service Broker :8761]
         SB -->|REST| DC[Converter :19999]
         SB -->|REST| DR[Renderer :9091]
         SB -->|REST| DT[Text Handler :8899]
@@ -31,33 +31,26 @@ graph TB
         DT --- TMP
         SB --- TMP
     end
-    subgraph "Document Sources"
-        V -->|Connector| ECM[FileNet / Alfresco]
-    end
 ```
 
-### Viewer
+The frontend viewer differs depending on your deployment:
+- **Classic viewer** — a standalone Spring Boot application (port 8080) with document connectors bundled as JARs
+- **[Modern Viewer](/docs/arender-modern/overview/modern-viewer)** — an npm package embedded as a Web Component, with document connectors deployed as separate provider microservices
 
-The viewer is a Spring Boot application (port 8080) that serves a GWT-compiled JavaScript frontend. It handles:
-
-- Document display in the browser
-- User authentication (OAuth2/OIDC or pre-authenticated mode)
-- Connector-based document loading from external repositories
-- Annotation creation, editing, and storage
-- Communication with the rendition backend
-
-The viewer connects to the service broker using the property `arender.server.rendition.hosts` (environment variable: `ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS` in Docker environments).
+Both viewers connect to the same backend services described below.
 
 ## Ports
 
-| Service | Default port | Purpose |
-|---------|-------------|---------|
-| Viewer | 8080 | Frontend UI and connector integration |
-| Service Broker | 8761 | REST API gateway and orchestration |
-| Document converter | 19999 | Format conversion |
-| Document renderer | 9091 | Document layout resolution and PDF-to-image rendering |
-| Text Handler | 8899 | Text extraction, search, signatures |
-| Hazelcast | 5701 | Distributed cache (when clustered) |
+| Service | Default port | Purpose | Notes |
+|---------|-------------|---------|-------|
+| Classic Viewer | 8080 | Frontend UI and connector integration | Classic only |
+| Service Broker | 8761 | REST API gateway and orchestration | |
+| Document converter | 19999 | Format conversion | |
+| Document renderer | 9091 | PDF-to-image rendering | |
+| Text Handler | 8899 | Text extraction, search, signatures | |
+| Alfresco Provider | 8788 | Alfresco document loading | Modern only |
+| FileNet Provider | 8787 | FileNet document loading | Modern only |
+| Hazelcast | 5701 | Distributed cache (when clustered) | |
 
 ---
 
@@ -235,27 +228,27 @@ All communication between services is over HTTP (REST). There is no message queu
 
 ```mermaid
 sequenceDiagram
-    participant V as Viewer
+    participant C as Client
     participant SB as Broker
     participant DC as Converter
     participant DR as Renderer
     participant DT as Text Handler
 
-    V->>SB: Load document (URL or stream)
+    C->>SB: Load document (URL or stream)
     SB->>SB: Detect MIME type
     alt Conversion needed
         SB->>DC: Convert (file reference on /arender/tmp)
         DC->>DC: Write converted PDF to /arender/tmp
         DC-->>SB: Converted file reference
     end
-    V->>SB: Request page image
+    C->>SB: Request page image
     SB->>DR: Render page (PDF path, page number, resolution)
     DR-->>SB: PNG image bytes
-    SB-->>V: Page image
-    V->>SB: Request text or search
+    SB-->>C: Page image
+    C->>SB: Request text or search
     SB->>DT: Extract text or search (PDF path, page range)
     DT-->>SB: Text positions or search results
-    SB-->>V: Results
+    SB-->>C: Results
 ```
 
 The broker selects a service instance from its internal `MicroServiceMap` for each request. In clustered deployments with multiple replicas per service, it picks an available instance from the pool maintained by the health check job.
@@ -279,12 +272,12 @@ If the shared volume is unavailable or not mounted consistently across container
 
 When running multiple replicas, ARender uses Hazelcast for:
 
-- Distributed session storage (viewer)
 - Document accessor caching (broker)
 - Conversion and transformation order sharing (broker)
-- Routing table synchronization (viewer)
+- Distributed session storage (Classic viewer)
+- Routing table synchronization (Classic viewer)
 
-Hazelcast discovery uses Kubernetes service DNS in Helm deployments and multicast in Docker Compose. See [Caching](../concepts/caching.md) for configuration details.
+Hazelcast discovery uses Kubernetes service DNS in Helm deployments and multicast in Docker Compose. See [Rendition caching](../concepts/caching.md) for configuration details.
 
 ---
 

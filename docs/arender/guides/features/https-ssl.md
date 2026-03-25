@@ -1,11 +1,7 @@
 ---
 title: HTTPS and SSL
-last_update:
-  date: '2026-03-17T14:31:35.329Z'
-  author: CI/CD Bot
 slug: /guides/features/https-ssl
 sidebar_position: 13
-content_hash: 95dacb19bf0b4fd40352d42c3070dfe6d735121346295e7481d1d0fbe1ee7e19
 ---
 
 # HTTPS and SSL
@@ -64,21 +60,16 @@ Or set the environment variable:
 SPRING_PROFILES_ACTIVE=https
 ```
 
-## Web UI configuration
+## Viewer configuration
 
-On the Web UI side, two properties are required in `arender-custom-server.properties` (or the equivalent Spring Boot configuration):
-
-```properties title="arender-custom-server.properties"
-arender.server.rendition.hosts=https://<RENDITION_HOSTNAME>:<RENDITION_PORT>/
-arender.rest.ssl.custom.use=true
-```
+The viewer must be configured to connect to the rendition backend over HTTPS:
 
 | Property                              | Description                                                                                  |
 | ------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `arender.server.rendition.hosts`      | Base URL of the rendition engine. Must start with `https://` when SSL is enabled.            |
 | `arender.rest.ssl.custom.use`         | Set to `true` to enable the custom SSL context on the REST client that contacts rendition.   |
 
-When `arender.rest.ssl.custom.use=true`, the Web UI REST client trusts the certificate presented by the rendition services. If your certificate is self-signed or issued by a private CA, you may also need to add the CA certificate to the JVM trust store:
+When `arender.rest.ssl.custom.use=true`, the viewer REST client trusts the certificate presented by the rendition services. If your certificate is self-signed or issued by a private CA, you may also need to add the CA certificate to the JVM trust store:
 
 ```bash
 keytool -importcert -alias arender-rendition \
@@ -102,15 +93,7 @@ services:
 
 Apply the same pattern to every rendition microservice container (document-converter, document-renderer, document-text-handler, document-file-storage).
 
-On the Web UI container, set the properties via environment variables:
-
-```yaml title="docker-compose.yml"
-services:
-  web-ui:
-    environment:
-      ARENDER_SERVER_RENDITION_HOSTS: https://rendition-engine:8761/
-      ARENDER_REST_SSL_CUSTOM_USE: "true"
-```
+On the viewer side, configure the rendition host URL to use `https://` and enable the custom SSL REST client. Refer to the [Environment variables](../../installation/environment-variables.md) page for the appropriate prefix for your viewer deployment.
 
 ## Generating a self-signed keystore
 

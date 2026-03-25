@@ -1,6 +1,12 @@
 ---
+viewer: modern
+slug: /migration-from-gwt
 title: Migration from GWT
+last_update:
+  date: '2026-03-24T08:07:20.846Z'
+  author: CI/CD Bot
 sidebar_position: 7
+content_hash: 28c253236b6596dd0128971d71396d02c8ce96f508d0fb26bd26dccbed51bdc5
 ---
 
 # Migration from GWT
@@ -11,11 +17,11 @@ This page maps GWT viewer concepts to their React UI equivalents. Use it as a re
 
 | GWT viewer | React UI | Notes |
 |------------|----------|-------|
-| Standalone application (`arender-ui-springboot`) | npm package embedded as Web Component | See [Getting started](./getting-started.md) |
-| `<iframe>` embed | `<arender-element>` Web Component | See [Web Component](./web-component.md) |
-| `window.arender.jsapi` | `window.ARender` / `element.ARender` | See [Web Component — JavaScript API](./web-component.md#javascript-api) |
-| `.properties` files | HTML attributes, JavaScript API | See [Configuration](./configuration.md) |
-| Connector JARs (bundled in viewer) | Provider microservices (separate containers) | See [Connector providers](./connector-providers.md) |
+| Standalone application (`arender-ui-springboot`) | npm package embedded as Web Component | See [Getting started](../../quickstart/getting-started.md) |
+| `<iframe>` embed | `<arender-element>` Web Component | See [Web Component](../../reference/web-component.md) |
+| `window.arender.jsapi` | `window.ARender` / `element.ARender` | See [Web Component — JavaScript API](../../reference/web-component.md#javascript-api) |
+| `.properties` files | HTML attributes, JavaScript API | See [Configuration](../../installation/configuration.md) |
+| Connector JARs (bundled in viewer) | Provider microservices (separate containers) | See [Connector providers](../integration/connector-providers.md) |
 | Visual profiles | Not yet available | — |
 | Plugins | Not yet available | — |
 | XML bean configuration | Not applicable | React UI has no Spring context in the frontend |
@@ -44,7 +50,7 @@ You do not need to change your backend deployment when switching viewers.
 - **JavaScript API:** `arender.jsapi.*` namespace becomes `window.ARender.*` (2 methods: `openDocument`, `openDocumentByUrl`)
 - **Configuration:** `.properties` files become HTML attributes and JavaScript calls
 - **Connector model:** Java JARs in the viewer classpath become standalone provider microservices
-- **Network:** The host application must proxy or allow cross-origin requests to the broker (see [CORS and reverse proxy](./configuration.md#cors-and-reverse-proxy))
+- **Network:** The host application must proxy or allow cross-origin requests to the broker (see [CORS and reverse proxy](../../installation/configuration.md#cors-and-reverse-proxy))
 
 ## Migration checklist
 
@@ -54,4 +60,4 @@ You do not need to change your backend deployment when switching viewers.
 4. Update JavaScript integrations to use the `window.ARender` / `element.ARender` API
 5. If using repository connectors (Alfresco, FileNet), deploy the corresponding provider microservice and register it in the broker
 6. Test core workflows: viewing, annotation, search, redaction
-7. Verify features you depend on are available in the React UI (see [feature comparison](./index.md#feature-comparison))
+7. Verify features you depend on are available in the React UI (see [key capabilities](../../overview/modern-viewer.md#key-capabilities))

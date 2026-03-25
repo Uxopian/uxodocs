@@ -111,16 +111,4 @@ If the email body references external images (hosted URLs), `wkhtmltopdf` must b
 
 ## Property reference
 
-The table below summarizes the properties covered on this page. For the full list of email conversion properties across all services, see the [Rendition properties — Email conversion](../../reference/rendition-properties.md#email-conversion).
-
-| Property | Default | Service | Description |
-|---|---|---|---|
-| `emltopdf.config.format.date` | `EEE d MMM yyyy HH:mm:ss Z` | Rendition engine | Date format pattern (Java `SimpleDateFormat`) |
-| `emltopdf.config.time.zone` | _(empty)_ | Rendition engine | Timezone for date formatting. Empty uses system default |
-| `emltopdf.config.header.language` | `FR` | Rendition engine | Header label language: `FR` or `EN` |
-| `emltopdf.encode.header.with.body.encoding` | `false` | Rendition engine | Use body encoding for header fields |
-| `emltopdf.config.filter.special.characters.regex` | `[^A-zÀ-ú0-9\\s\\-\\.]` | Rendition engine | Regex for characters to filter from filenames. Set empty to disable |
-| `emltopdf.config.filter.replacement.character` | `_` | Rendition engine | Replacement character for filtered characters |
-| `emltopdf.resize.embedded.image.enabled` | `false` | Rendition engine | Resize oversized embedded images to fit page width |
-| `default.url.parser.use.timeZone.for.ids` | `false` | Web UI | Use email timezone for date rendering |
-| `default.url.parser.use.locale.for.ids` | `false` | Web UI | Pass user locale for encoding detection |
+See [Rendition properties — Email conversion](../../reference/rendition-properties.md#email-conversion) for the full list of email conversion properties.

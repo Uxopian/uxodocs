@@ -1,10 +1,12 @@
 ---
+viewer: classic
 title: Document builder
 last_update:
-  date: '2026-03-18T00:00:00.000Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /guides/features/document-builder
 sidebar_position: 8
+content_hash: 86a548fffb5359f714b80831b63ac19fe99172158597383fcea79676e63cf263
 ---
 
 # Document builder
@@ -87,14 +89,7 @@ getARenderJS().getDocumentBuilder().registerDocumentBuilderSaveCustomEvent(callb
 
 ## Configuration
 
-Default builder behavior is configured through `DocumentBuilderJSAPIConfiguration`:
-
-```properties
-arender.documentbuilder.content.update.behavior=UPDATE_FIRST_DOCUMENT
-arender.documentbuilder.delete.document=false
-arender.documentbuilder.freeze.document=false
-arender.documentbuilder.download.document=false
-```
+For the full list of document builder properties, see [Viewer configuration — Document builder](../../reference/viewer-configuration.md#document-builder).
 
 ## Related pages
 

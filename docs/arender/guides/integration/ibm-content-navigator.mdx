@@ -1,205 +1,99 @@
 ---
+viewer: classic
 title: IBM Content Navigator integration
-last_update:
-  date: '2026-03-17T14:31:35.329Z'
-  author: CI/CD Bot
 slug: /guides/integration/ibm-content-navigator
 sidebar_position: 5
-content_hash: 2c5e86cfeaec8c54e229393c72343660b555237c575bfab4be29db18d51ff51c
 ---
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
 
 # IBM Content Navigator integration
 
-The ARender IBM Content Navigator (ICN) plugin replaces the ICN built-in document viewer with ARender. It is a UI plugin connector: it does not fetch documents directly, but intercepts ICN viewer launch requests and redirects them to the ARender viewer. The actual document retrieval then happens through the FileNet connector (for P8 repositories) or the CM connector (for Content Manager repositories), depending on the ICN desktop configuration.
+The ARender IBM Content Navigator (ICN) plugin replaces the built-in ICN document viewer with ARender. It intercepts viewer launch requests in ICN and redirects them to the ARender viewer. Document retrieval is handled by the FileNet connector (for P8 repositories) or the CM connector (for Content Manager repositories), depending on the ICN desktop configuration.
+
+:::warning
+Cross-domain SSO is not supported. The ARender viewer and ICN must be on the same DNS domain (e.g. `arender.company.com` and `icn.company.com` — not `arender.companyA.com` and `icn.companyB.com`).
+:::
 
 ## Prerequisites
 
 - IBM Content Navigator 2.0.3 or later
-- An ARender viewer deployment reachable from the ICN server (HTTP or HTTPS)
+- An ARender viewer deployed and reachable from the ICN server
 - The FileNet connector configured on the ARender viewer if your ICN desktops use P8 repositories (see [IBM FileNet integration](./ibm-filenet.mdx))
-- The ICN plugin JAR: `arondor-arender-navigator-plugin-2026.0.0.jar`
-- The `navigator-api` and `json4j` libraries from your ICN installation (required at ICN deploy time; they are provided-scope in the plugin)
+- The ICN plugin JAR: `arondor-arender-navigator-plugin-{{version}}.jar`
 
-<ARenderDownloads version="2026.0.0" filter={["plugin-filenet"]} />
+## Step 1: Configure LTPA key sharing (SSO)
 
-:::note
-The ICN plugin JAR does not bundle the ICN API. It must be deployed inside the ICN application server where the ICN API is already present on the classpath.
-:::
+ARender and ICN must share LTPA credentials for single sign-on. Export the LTPA key from the Content Platform Engine (CPE) WebSphere server and import it into the ARender application server.
 
-## Architecture
+1. On the **CPE WebSphere** admin console, navigate to **Security > Global Security > Authentication > LTPA**.
+2. Enter a password and a file path, then click **Export keys**.
+3. Copy the exported LTPA key file to the ARender server.
+4. On the **ARender WebSphere** admin console (or application server), navigate to the same LTPA configuration path.
+5. Enter the same password and the key file location, then click **Import keys**.
+6. Save the configuration and restart both servers.
 
-```mermaid
-flowchart LR
-  Browser --> ICN["Content Navigator"]
-  ICN --> Plugin["ARender plugin"]
-  Plugin -- "HTTP redirect" --> Viewer["ARender viewer"]
-  Viewer --> FN["FileNet connector"]
-  Viewer --> CM["CM connector"]
-  FN --> FNCE["FileNet CE"]
-  CM --> CMLS["Content Manager"]
-```
+## Step 2: Configure session invalidation (ICN 3.0.6+)
 
-When a user opens a document in ICN, the plugin intercepts the viewer launch. For single-document viewing, the `ARenderPluginViewerDef` redirects through `ARenderPluginViewerService`. For multi-document or folder viewing (including Document Builder and Compare actions), the `ARenderPluginService` constructs the ARender URL with multiple object IDs and performs the redirect via a client-side JavaScript call.
+For ICN version 3.0.6 and later, configure WebSphere to invalidate sessions when users change:
 
-## Step 1: Deploy the ICN plugin
+1. In the WebSphere admin console, navigate to **Servers > Server Types > WebSphere Application Servers**.
+2. Select the ICN application server.
+3. Go to **Container Settings > Session Management > Additional Properties > Custom Properties**.
+4. Add a new property:
+   - **Name**: `InvalidateOnUnauthorizedSessionRequestException`
+   - **Value**: `true`
+5. Save and restart the FileNet services.
 
-Copy the plugin JAR to the ICN plugin directory. The exact location depends on your ICN deployment. In a WebSphere-based ICN installation, this is typically the `plugins` folder under the ICN data directory:
-
-```
-cp arondor-arender-navigator-plugin-2026.0.0.jar /opt/IBM/ECMClient/data/plugins/
-```
-
-The JAR manifest declares the plugin entry point:
-
-```
-Plugin-Class: com.arondor.viewer.navigatorplugin.ARenderPlugin
-```
-
-After copying the JAR, restart the ICN application server.
-
-## Step 2: Register the plugin in ICN
+## Step 3: Register the plugin in ICN
 
 1. Log in to the ICN administration console.
 2. Navigate to **Plug-ins**.
-3. Click **New Plug-in** and enter the full path to the JAR file.
-4. Click **Load** and then **Save**.
+3. Click **New Plug-in** and enter the path to the `arondor-arender-navigator-plugin-{{version}}.jar` file.
+4. Click **Load**, then **Save**.
 
-The plugin registers the following components with ICN:
+## Step 4: Configure the plugin
 
-- **Viewer**: `ARenderPluginViewer`, replaces the ICN viewer for supported MIME types
-- **Services**: `ARenderPluginViewerService` (single-document redirect) and `ARenderPluginService` (multi-document/folder URL builder)
-- **Actions**: Open in ARender, Merge documents (Document Builder), Compare documents
+After loading the plugin, a configuration pane appears in the ICN admin console under the plugin entry.
 
-## Step 3: Configure the plugin
+| Field | Description | Default |
+|-------|-------------|---------|
+| **ARender context root** | URL or context path of the ARender viewer. Use a relative path (e.g. `/ARender`) for same-server deployments or an absolute URL (e.g. `https://arender.example.com`) for external deployments. | `/ARender` |
+| **Unauthorized desktops for Document Builder** | Comma-separated ICN desktop IDs where the Document Builder action is disabled. | (empty) |
+| **Watermark on download** | Comma-separated `desktopId=watermarkBeanName` pairs. Applied when a user downloads a document from the listed desktop. | (empty) |
+| **Watermark on print** | Comma-separated `desktopId=watermarkBeanName` pairs. Applied when a user prints from the listed desktop. | (empty) |
 
-After loading the plugin, a configuration pane is available in the ICN administration console under the plugin entry.
+The default watermark bean names (`downloadWatermark`, `printWatermark`) are defined in `annotationtemplate-catalog.xml` in the ARender viewer configuration.
 
-| Field | Description |
-|-------|-------------|
-| **ARender context root** | URL or context path of the ARender viewer. If a relative path is provided (e.g. `/ARender`), ICN prepends the server base URL. If an absolute URL is provided (e.g. `https://arender.example.com`), it is used directly. Default: `/ARender`. |
-| **Unauthorized desktops for Document Builder** | Comma-separated list of ICN desktop IDs where the Document Builder action is disabled. Users on these desktops see ARender in read-only mode. |
-| **Watermark on download** | Comma-separated `desktopId=watermarkBeanName` pairs. When a user downloads a document from a listed desktop, ARender applies the named watermark bean. |
-| **Watermark on print** | Comma-separated `desktopId=watermarkBeanName` pairs. When a user prints from a listed desktop, ARender applies the named watermark bean. |
-
-Example configuration stored by ICN (JSON):
-
-```json
-{
-  "arenderContextRoot": "https://arender.example.com",
-  "arenderUnauthorizedDesktops": "readonly-desktop,archive-desktop",
-  "arenderWatermarkOnDownload": "confidential-desktop=customWatermark",
-  "arenderWatermarkOnPrint": "confidential-desktop=customWatermark"
-}
-```
-
-## Step 4: Assign the viewer to ICN desktops
+## Step 5: Assign the viewer to ICN desktops
 
 1. In the ICN administration console, navigate to **Desktops**.
-2. Select the desktop you want to configure.
-3. Under the **Viewer Maps** tab, add a viewer map entry:
-   - Set the viewer to **ARenderPluginViewer**.
-   - Select the MIME types you want ARender to handle (PDF, Office documents, images, email, etc.).
-4. Save and apply the desktop configuration.
+2. Select the desktop to configure.
+3. Under the **Viewer Map** tab, add a viewer map entry and set the viewer to **ARender**.
+4. Select the MIME types you want ARender to handle.
+5. Save the desktop configuration.
 
-### Supported MIME types
+## Advanced features: Compare and Document Builder
 
-The plugin registers viewer support for the following content types by default:
+To enable the Compare and Document Builder actions in the ICN context menu:
 
-- `application/pdf`
-- `image/png`, `image/jpeg`, `image/gif`, `image/tiff`
-- `message/rfc822`, `application/vnd.ms-outlook`
-- `text/html`, `text/rtf`
-- `application/zip`, `application/x-zip`
-- `application/msword`, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`
-- `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
-- `application/vnd.ms-excel`, `application/x-ms-excel`
-- `application/vnd.ms-powerpoint`, `application/vnd.openxmlformats-officedocument.presentationml.presentation`
-- `application/vnd.oasis.opendocument.text`, `application/vnd.oasis.opendocument.spreadsheet`, `application/vnd.oasis.opendocument.presentation`
+1. In the ICN admin console, go to **Administration > Menus**.
+2. Find **Default document context menu** and click **Copy** to create a new menu.
+3. Add the **Compare documents** and/or **Merge documents** actions to the new menu.
+4. Assign this menu to the desired desktop under **Document context menu**.
 
-### Supported server types
-
-The plugin supports the following ICN repository server types: `p8` (FileNet P8), `cm` (IBM Content Manager), `od` (IBM Content Manager OnDemand).
-
-## Step 5: Configure the ARender viewer
-
-The ICN plugin redirects document opens to the ARender viewer. The ARender viewer must be configured with the appropriate repository connector for your ICN server type.
-
-For FileNet P8 desktops, configure the FileNet connector on the ARender viewer:
-
-```yaml title="docker-compose.yml"
-# docker-compose.yml excerpt
-services:
-  ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:2026.0.0-filenet
-    environment:
-      - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
-      - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL=http://filenet-ce:9080/wsi/FNCEWS40MTOM/"
-      - "ARENDERSRV_ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD=loginPasswordObjectStoreProvider"
-      - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_LOGIN=svc-arender"
-      - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_PASSWORD=secret"
-    ports:
-      - 8080:8080
-```
-
-:::info
-This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose](/docs/arender/installation/docker-compose) for the complete configuration.
-:::
-
-For Content Manager desktops, configure the CM connector instead (see [IBM Content Manager integration](./ibm-content-manager.md)).
-
-## Plugin actions
-
-### Open in ARender
-
-The default action opens one or more selected documents (or folders) in a new ARender browser window. The plugin collects the FileNet object IDs (which ICN provides in `classId,objectStoreId,objectId` format), strips the class and object store parts, and constructs an ARender URL of the form:
-
-```
-https://arender.example.com/ARender.html?ids=doc:{guid1},doc:{guid2}&objectStoreId={storeId}&objectType=mixedObjects
-```
-
-### Merge documents (Document Builder)
-
-The Merge action opens a reorder dialog before launching ARender. Documents marked as reserved (checked out) or archived cannot be merged and will display an error. When confirmed, ARender opens with Document Builder activated:
-
-```
-https://arender.example.com/ARender.html?ids=...&documentbuilder.enabled=true&documentbuilder.activateOnStartup=true
-```
-
-### Compare documents
-
-The Compare action requires exactly two documents. Selecting one or more than two documents displays an error. When two documents are selected, ARender opens in comparison mode:
-
-```
-https://arender.example.com/ARender.html?ids=...&visualization.multiView.doComparison=true
-```
-
-## Configuration reference
-
-| ICN plugin field | Key in JSON config | Default | Description |
-|------------------|--------------------|---------|-------------|
-| ARender context root | `arenderContextRoot` | `/ARender` | Absolute URL or context path of the ARender viewer. Do not include a trailing slash. |
-| Unauthorized desktops for Document Builder | `arenderUnauthorizedDesktops` | (empty) | Comma-separated ICN desktop IDs where Document Builder is forcibly disabled. |
-| Watermark on download | `arenderWatermarkOnDownload` | (empty) | `desktopId=watermarkBeanName` pairs (comma-separated) applied when downloading. |
-| Watermark on print | `arenderWatermarkOnPrint` | (empty) | `desktopId=watermarkBeanName` pairs (comma-separated) applied when printing. |
+**Usage:**
+- **Compare**: select exactly two documents and choose **Compare documents** from the context menu.
+- **Document Builder / Merge**: select one or more documents and choose **Merge documents**. The Document Builder interface opens in ARender.
 
 ## Troubleshooting
 
-**ARender viewer does not open when clicking a document in ICN.** Verify that the viewer map for the desktop includes `ARenderPluginViewer` and that the MIME type of the document matches a registered content type. Check the ICN server logs for errors from `ARenderPluginViewerService`.
+**ARender viewer does not open when clicking a document in ICN.** Verify that the viewer map for the desktop includes the ARender viewer and that the MIME type of the document matches a registered type. Check the ICN server logs for errors.
 
-**ARender opens but shows an error fetching the document.** The ICN plugin only redirects; it does not fetch documents. The error originates from the ARender viewer's repository connector. Confirm that the FileNet or CM connector is correctly configured on the ARender viewer and that the viewer can reach the Content Engine or CM server.
+**ARender opens but shows an error fetching the document.** The ICN plugin only redirects — it does not fetch documents. The error comes from the ARender viewer's repository connector. Confirm that the FileNet or CM connector is correctly configured and that the viewer can reach the Content Engine or CM server.
 
-**Document Builder is not available on a specific desktop.** Check the **Unauthorized desktops** field in the plugin configuration. If the desktop ID appears there, Document Builder is disabled by design. Remove it from the list to re-enable it.
+**Document Builder is not available on a specific desktop.** Check the **Unauthorized desktops** field in the plugin configuration. If the desktop ID appears there, Document Builder is disabled by design.
 
-**The ARender context root points to the wrong server.** If the context root is a relative path (e.g. `/ARender`), the plugin prepends the ICN server base URL. To point to an external ARender deployment, use a full absolute URL (e.g. `https://arender.example.com`).
-
-**Watermarks are not applied on download or print.** Verify that the `desktopId=watermarkBeanName` format is correct (no spaces around `=` or `,`). The desktop ID must match the ICN desktop identifier exactly. The watermark bean must be declared in the ARender viewer's Spring configuration.
-
-**Compare action fails with "Only one document selected".** The Compare action requires exactly two documents. Selecting a folder also triggers an error. Only document items support comparison.
+**SSO does not work (authentication errors).** Verify that the LTPA key was exported and imported with the same password. Both servers must be on the same DNS domain. Check that the session invalidation property is set for ICN 3.0.6+.
 
 ## Related pages
 
-- [Connectors concept](../../concepts/connectors.md)
 - [IBM FileNet integration](./ibm-filenet.mdx)
-- [IBM Content Manager integration](./ibm-content-manager.md)
-- [Embed the viewer](./embed-viewer.md)

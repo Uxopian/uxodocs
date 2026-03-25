@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Embed the viewer
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /guides/integration/embed-viewer
 sidebar_position: 1
-content_hash: 81463eb4d0ef3e2b28f71322f4406a70c8d8b33593bcdbf1cab7b28c60f80f8d
+content_hash: 103038b030577aad48e725e8d127fcf7b7b5b20974e697718ac08bc3e91cfbbc
 ---
 
 # Embed the viewer

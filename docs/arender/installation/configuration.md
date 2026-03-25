@@ -1,13 +1,19 @@
 ---
+viewer: modern
+slug: /configuration
 title: Configuration
+last_update:
+  date: '2026-03-24T08:07:20.846Z'
+  author: CI/CD Bot
 sidebar_position: 5
+content_hash: ac1fbc17a230905cd25267ebf15f03815e57c11fb4b9b33c6f566abc4c7f9582
 ---
 
 # React UI configuration
 
 The React UI is embedded in your host application and communicates with the ARender rendition backend over REST. Configuration involves two aspects: connecting to the backend, and handling cross-origin requests.
 
-Backend rendition configuration (broker, converter, renderer) is unchanged from the GWT viewer — see [Configuration system](/docs/arender/installation/configuration-system/) and [Environment variables](/docs/arender/installation/environment-variables/).
+Backend rendition configuration (broker, converter, renderer) is documented in [Configuration system](/docs/arender-modern/installation/configuration-system) and [Environment variables](/docs/arender-modern/installation/environment-variables).
 
 ## Connecting to the rendition backend
 

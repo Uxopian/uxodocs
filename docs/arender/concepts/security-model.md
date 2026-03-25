@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Security
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-03-23T10:20:59.293Z'
   author: CI/CD Bot
 slug: /concepts/security-model
 sidebar_position: 8
-content_hash: cffa2ca357f87f227bd2d26762f3203597f74ba632a964acbfb9f8862e59e5c9
+content_hash: 3fa6c9f98c692fe0be7de194f7aed3cbd076f6bc9db1c1c36f77e88e1b1447a0
 ---
 
 # Security
@@ -132,5 +133,5 @@ Both modes disable CSRF protection, frame options headers, XSS protection header
 
 - [Documents and document IDs](./documents-and-ids.md): the DocumentId / DocumentAccessor model
 - [Opening documents](../guides/features/opening-documents.md): how the `user` parameter is passed via URL
-- [Caching](./caching.md): how Hazelcast is used for session sharing and document caching
+- [Rendition caching](./caching.md): how Hazelcast is used for session sharing and document caching
 - [System architecture](../overview/architecture.md): where the viewer sits in the overall system
