@@ -473,3 +473,162 @@
     overflow: visible !important;
     display: list-item !important;
 }
+
+/* ================================================================
+   ARENDER RELEASE NOTES (src/pages)
+   Apply the same typography and styles as docs pages.
+   Pages in src/pages/ don't have the plugin-id-arender class,
+   so we use a wrapper class added in the MDX.
+   ================================================================ */
+
+.arender-release-notes {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, sans-serif;
+    --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, sans-serif;
+    --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', 'Cascadia Code',
+        Consolas, monospace;
+    --ifm-color-primary: #1e40af;
+    --ifm-color-primary-dark: #1e3a8a;
+    --ifm-color-primary-light: #2563eb;
+    --ifm-color-primary-lighter: #3b82f6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+.arender-release-notes h1 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: none;
+}
+
+.arender-release-notes h2 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.arender-release-notes h3 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ifm-color-primary);
+}
+
+.arender-release-notes h4 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.3rem;
+    color: #1e293b;
+}
+
+[data-theme='dark'] .arender-release-notes h4 {
+    color: #e2e8f0;
+}
+
+.arender-release-notes p {
+    margin-bottom: 1rem;
+    color: #334155;
+}
+
+[data-theme='dark'] .arender-release-notes p {
+    color: #cbd5e1;
+}
+
+.arender-release-notes hr {
+    margin: 2.5rem 0;
+    border: none;
+    border-top: 1px solid #e2e8f0;
+}
+
+[data-theme='dark'] .arender-release-notes hr,
+[data-theme='dark'] .arender-release-notes h2 {
+    border-color: #334155;
+}
+
+.arender-release-notes code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+}
+
+.arender-release-notes code:not(pre code) {
+    background-color: #f1f5f9;
+    border: none;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.875em;
+}
+
+[data-theme='dark'] .arender-release-notes code:not(pre code) {
+    background-color: #2d2d2f;
+}
+
+.arender-release-notes table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.arender-release-notes table th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    text-align: left;
+}
+
+[data-theme='dark'] .arender-release-notes table th {
+    background-color: #1e293b;
+}
+
+.arender-release-notes table th,
+.arender-release-notes table td {
+    padding: 0.6rem 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+[data-theme='dark'] .arender-release-notes table th,
+[data-theme='dark'] .arender-release-notes table td {
+    border-color: #334155;
+}
+
+.arender-release-notes a:not([class]) {
+    color: var(--ifm-color-primary);
+    text-decoration: none;
+}
+
+.arender-release-notes a:not([class]):hover {
+    text-decoration: underline;
+}
+
+.arender-release-notes ul,
+.arender-release-notes ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+.arender-release-notes li {
+    margin-bottom: 0.4rem;
+}
+
+/* Tighten download component spacing inside release notes */
+.arender-release-notes [class*="downloadsSection"] {
+    margin-top: 1rem;
+}
+
+.arender-release-notes [class*="divider"] {
+    margin: 0;
+}
