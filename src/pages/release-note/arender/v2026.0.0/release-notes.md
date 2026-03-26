@@ -162,9 +162,15 @@ This section is for teams adopting the new React-based viewer. If you only use t
 
 ### React UI
 
-`New` — ARender now ships a React-based viewer as an npm package (`arender-ui`). It registers an `<arender-element>` Web Component that embeds directly into your web application. The viewer supports document viewing from FileNet and Alfresco, annotations, search, redaction, and document assembly.
+`New` — ARender now ships a React-based viewer as an npm package. Embed it in any web application as a Web Component:
 
-See the [Modern Viewer overview](/docs/arender-modern/overview/modern-viewer) to get started.
+```html
+<arender-element></arender-element>
+```
+
+This first release covers document viewing (all formats including AutoCAD), annotations (zone highlight, freetext), full-text search, download, and print. More features will be added in upcoming releases — see the [feature availability table](/docs/arender-modern/overview/modern-viewer#feature-availability) for details.
+
+**[Try it now → Getting started guide](/docs/arender-modern/quickstart/getting-started)**
 
 ### REST connector architecture
 

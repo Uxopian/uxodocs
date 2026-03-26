@@ -9,19 +9,27 @@ sidebar_position: 0
 
 The ARender Modern Viewer is a React-based document viewer distributed as an npm package (`arender-ui`). It registers an `<arender-element>` Web Component that you embed directly into your web application. No iframe, no standalone server needed — the viewer lives inside your page as a native HTML element.
 
-## Key capabilities
+## Feature availability
 
-- **Document viewing** — render PDFs, images, Office documents, emails, and more
-- **Annotations** — sticky notes, highlights, freehand drawing, stamps, arrows, and other annotation types
-- **Search** — full-text search within documents with hit highlighting
-- **Redaction** — permanently redact sensitive content from documents
-- **Thumbnails** — page thumbnail navigation panel
-- **Print / Download** — print documents or download the original or annotated version
-- **Text selection** — select and copy text from rendered documents
-- **Video playback** — play video files directly in the viewer
-- **Internationalization** — ships with 15 languages out of the box
-- **Web Component** — `<arender-element>` works in any web application, regardless of framework
-- **Framework wrappers** — ready-made wrappers for React, Angular, Vue, and Svelte
+| Feature | Status |
+|---------|--------|
+| Document viewing (all formats including AutoCAD) | Available |
+| Annotations (zone highlight, freetext) | Available |
+| Annotation auto-save | Available |
+| Full-text search (improved performance) | Available |
+| Download (native format and PDF) | Available |
+| Print | Available |
+| Internationalization (15 languages) | Available |
+| Web Component and framework wrappers (React, Angular, Vue, Svelte) | Available |
+| Full annotation types (text highlight, rectangle, stamp, arrow, polyline, ink, sticky note...) | Coming soon |
+| Document comparison (text and image) | Coming soon |
+| Split, merge, page manipulation (document builder) | Coming soon |
+| Redaction | Coming soon |
+| Bookmarks creation / deletion | Coming soon |
+| Multi-view (horizontal split) | Coming soon |
+
+| Download as PDF with annotations | Coming soon |
+| Print with annotations | Coming soon |
 
 ## Architecture overview
 
