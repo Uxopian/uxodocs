@@ -114,7 +114,6 @@ const config: Config = {
                 lastVersion: "current",
                 versions: { current: { label: "v2026.0.0" } },
                 showLastUpdateTime: true,
-                exclude: ["**/_partials/**"],
             },
         ],
         [
