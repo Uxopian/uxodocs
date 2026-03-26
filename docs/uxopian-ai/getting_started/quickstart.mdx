@@ -8,8 +8,6 @@ last_update:
 content_hash: quickstart-2026-03-24
 ---
 
-import LlmEnv from './_partials/_llm_env.md';
-
 This guide walks through running a local Uxopian AI stack with Docker Compose. The result is a working deployment with OpenSearch, uxopian-ai, and uxopian-gateway, accessible at `http://localhost:8085`.
 
 :::warning Development stack only
@@ -63,7 +61,12 @@ config/
 
 Create a `.env` file in the same directory as `uxopian-ai-stack.yml`. Set at least one LLM API key:
 
-<LlmEnv />
+```bash
+OPENAI_API_KEY=sk-your-openai-key
+# ANTHROPIC_API_KEY=your-key
+# AZURE_OPENAI_API_KEY=your-key
+# GEMINI_API_KEY=your-gemini-key
+```
 
 If you want to configure all provider options, copy `config/llm-clients-config.yml.example` to `config/llm-clients-config.yml` and edit it. The minimal `llm-clients-config.yml` is pre-configured for OpenAI.
 
