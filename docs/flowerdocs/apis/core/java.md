@@ -28,7 +28,7 @@ To use the Java client in a Maven project, start by adding the following depende
 <dependency>
     <groupId>com.flower.docs</groupId>
     <artifactId>flower-docs-starter-client</artifactId>
-    <version>2025.3.0</version>
+    <version>{{version}}</version>
 </dependency>
 ```
 
