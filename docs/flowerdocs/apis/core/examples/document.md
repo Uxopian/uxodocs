@@ -1,7 +1,7 @@
 ---
 title: Handling a document
-description: "Create, modify, delete your documents"
 sidebar_position: 6
+description: Create, modify, delete your documents
 date: "2001-03-30T13:20:01+02:00"
 last_update:
   date: '2026-01-26T14:16:25.927Z'
@@ -14,6 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The `Document` service exhibits all the operations available around `DOCUMENT` type components.
 
+
 # Document recovery
 
 The examples below show how to retrieve documents using the various operations of `get`.
@@ -23,19 +24,16 @@ The examples below show how to retrieve documents using the various operations o
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/documents/{ids} HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-ids: identifier of the documents to be retrieved
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: identifier of the documents to be retrieved
+curl -X GET "<CORE_HOST>/rest/documents/<IDS>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -43,10 +41,10 @@ Content-Type: application/json
 private DocumentService service;
 
 public List<Document> get() throws FunctionalException, TechnicalException
-
+{
 	List<Id> ids = Lists.newArrayList(new Id("documentId"));
 	return service.get(ids);
-
+}
 ```
 
   </TabItem>
@@ -59,20 +57,17 @@ This service allows you to retrieve a specific version of a document:
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/documents/{documentId}/versions/{versionId} HTTP/1.1
-
--- Paramètres d'URL
-core: FlowerDocs Core host
-documentId: identifier of the document to be retrieved
-versionId: identifier of the version to be retrieved
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <DOCUMENT_ID>: identifier of the document to be retrieved
+# <VERSION_ID>: identifier of the version to be retrieved
+curl -X GET "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/versions/<VERSION_ID>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -80,12 +75,12 @@ Content-Type: application/json
 private VersionService service;
 
 public Document getVersion() throws FunctionalException, TechnicalException
-
+{
 	Id documentId = new Id("documentId"));
 	Id versionId = new Id("versionId"));
 
 	return service.getVersion(documentId, versionId);
-
+}
 ```
 
   </TabItem>
@@ -101,21 +96,17 @@ This service retrieves the files associated with the document whose identifier i
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/documents/{id}/files?includeContent={includeContent} HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-id: document identifier
-includeContent: true or false for content retrieval
-
--- Headers --
-token: {{token}}
-includeContent: {{inclut le contenu}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <ID>: document identifier
+# <INCLUDE_CONTENT>: true or false for content retrieval
+curl -X GET "<CORE_HOST>/rest/documents/<ID>/files?includeContent=<INCLUDE_CONTENT>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -123,10 +114,10 @@ Content-Type: application/json
 private DocumentService service;
 
 public List<DocumentFile> get() throws FunctionalException, TechnicalException
-
+{
 	Boolean includeContent = false;
 	return service.getFiles(new Id("documentId"), includeContent);
-
+}
 ```
 
   </TabItem>
@@ -139,29 +130,25 @@ The examples below show how to create documents using the following operation.
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/documents/ HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
-
--- Body (json) --
-[
-
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+curl -X POST "<CORE_HOST>/rest/documents/" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '[
+    {
         "data": {
             "classId": "Document"
         },
-        "category": "DOCUMENT”,
+        "category": "DOCUMENT",
         "name": "D1"
-
-]
+    }
+]'
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -169,7 +156,7 @@ Content-Type: application/json
 private DocumentService service;
 
 public List<Document> create() throws FunctionalException, TechnicalException
-
+{
 	List<Document> documents = new ArrayList();
 	Document document = new Document();
 	document.setId(new Id("testId"));
@@ -183,7 +170,7 @@ public List<Document> create() throws FunctionalException, TechnicalException
     document.setTags(tags);
 	documents.add(document);
 	return service.create(documents);
-
+}
 ```
 
   </TabItem>
@@ -193,6 +180,29 @@ public List<Document> create() throws FunctionalException, TechnicalException
 
 The examples below show how to create a document with its content using the following operation.
 
+<Tabs>
+  <TabItem value="rest" label="REST">
+
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+curl -X POST "<CORE_HOST>/rest/documents/unique" \
+  -H "token: <TOKEN>" \
+  -F "file=@/path/to/file" \
+  -F 'document=[
+    {
+        "data": {
+            "classId": "Document"
+        },
+        "category": "DOCUMENT",
+        "name": "D1"
+    }
+];type=application/json'
+```
+
+  </TabItem>
+</Tabs>
+
 # Document modification
 
 The examples below show how to update documents.
@@ -200,6 +210,30 @@ The examples below show how to update documents.
 ## Document modification with content replacement
 
 This operation allows to modify the data of a document (class identifier, document name, ACL, etc.) as well as modifying its content in the same call.
+
+<Tabs>
+  <TabItem value="rest" label="REST">
+
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <ID>: document identifier
+curl -X POST "<CORE_HOST>/rest/documents/<ID>/unique" \
+  -H "token: <TOKEN>" \
+  -F "file=@/path/to/file" \
+  -F 'document=[
+    {
+        "data": {
+            "classId": "Document"
+        },
+        "category": "DOCUMENT",
+        "name": "D1"
+    }
+];type=application/json'
+```
+
+  </TabItem>
+</Tabs>
 
 ## Data modification
 
@@ -212,36 +246,32 @@ This service operates on a cancel and replace basis, so all the contents and tag
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/documents/{id} HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-id: document identifier
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
-
--- Body (json) --
-[
-
-    	"files": [
-
-	    		"id": "98c1f765-7595-46c3-8f4a-b75bd7c25ff7",
-	    		"size": 0
-
-	    ],
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <ID>: document identifier
+curl -X POST "<CORE_HOST>/rest/documents/<ID>" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '[
+    {
+        "files": [
+            {
+                "id": "98c1f765-7595-46c3-8f4a-b75bd7c25ff7",
+                "size": 0
+            }
+        ],
         "data": {
             "classId": "Document"
         },
-        "category": "DOCUMENT”,
+        "category": "DOCUMENT",
         "name": "D2"
-
-]
+    }
+]'
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -249,13 +279,13 @@ Content-Type: application/json
 private DocumentService service;
 
 public List<Document> update(Document document) throws FunctionalException, TechnicalException
-
+{
 	List<Document> documents = new ArrayList();
     tags.getTags().add(new Tag(Arrays.asList("Contract"), "B_TypeDocument", false));
     document.setTags(tags);
 	documents.add(document);
 	return service.update(documents);
-
+}
 ```
 
   </TabItem>
@@ -270,22 +300,18 @@ This operation adds content to a document
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/documents/{id}/files?replace={replace} HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-replace: true or false to replace content
-
--- Headers --
-token: {{token}}
-Content-Type: multipart/form-data
-
--- Body (form-data) --
-file (type file): file to import
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <ID>: document identifier
+# <REPLACE>: true or false to replace content
+curl -X POST "<CORE_HOST>/rest/documents/<ID>/files?replace=<REPLACE>" \
+  -H "token: <TOKEN>" \
+  -F "file=@/path/to/file"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -293,14 +319,14 @@ file (type file): file to import
 private DocumentService service;
 
 public List<Document> addContent(Document document) throws FunctionalException, TechnicalException
-
+{
 	List<DocumentFile> files = new ArrayList<DocumentFile>();
 	DocumentFile file = new DocumentFile();
     file.setId(new Id("MyFile"));
     file.setContent(new DataHandler(new FileDataSource(File.createTempFile("/tmp", ".txt"))));
 	files.add(file);
 	return service.addFiles(new Id("sampleDoc"), files, false);
-
+}
 ```
 
   </TabItem>
@@ -313,19 +339,14 @@ This operation allows you to rename a file associated with a document:
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-POST /core/rest/documents/{id}/files/{fileId}/name HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-id: document identifier
-fileId : file identifier
-
--- Headers --
-token: {{token}}
-
--- Body (form-data) --
-New file name
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <ID>: document identifier
+# <FILE_ID>: file identifier
+curl -X POST "<CORE_HOST>/rest/documents/<ID>/files/<FILE_ID>/name" \
+  -H "token: <TOKEN>" \
+  -d "<NEW_FILE_NAME>"
 ```
 
   </TabItem>
@@ -333,7 +354,7 @@ New file name
 
 # Search document
 
-The search operations all work on the same model as described [here](../examples/search).
+The search operations all work on the same model as described [here](./search).
 
 # Document deletion
 
@@ -346,19 +367,16 @@ This operation allows to delete the document and its associated files.
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-DELETE {{core}}/rest/documents/{ids} HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-ids: identifiers of documents to be deleted
-
--- Header --
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: identifiers of documents to be deleted
+curl -X DELETE "<CORE_HOST>/rest/documents/<IDS>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -366,10 +384,10 @@ Content-Type: application/json
 private DocumentService service;
 
 public void delete() throws FunctionalException, TechnicalException
-
+{
 	List<Id> ids = Lists.newArrayList(new Id("sample_doc"));
 	service.delete(ids);
-
+}
 ```
 
   </TabItem>
@@ -382,20 +400,17 @@ This operation allows you to delete a file.
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-DELETE /rest/documents/{documentId}/files/{fileId} HTTP/1.1
-
--- URL parameters --
-Host: {{core}}
-documentId: document identifier
-fileId: content identifier to be deleted
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <DOCUMENT_ID>: document identifier
+# <FILE_ID>: content identifier to be deleted
+curl -X DELETE "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/files/<FILE_ID>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -403,10 +418,10 @@ Content-Type: application/json
 private DocumentService service;
 
 public void delete() throws FunctionalException, TechnicalException
-
+{
 	List<Id> fileIds = Lists.newArrayList(new Id("sample_doc"));
 	service.deleteFiles(documentId, fileIds);
-
+}
 ```
 
   </TabItem>
@@ -423,21 +438,18 @@ This service retrieves the content associated with the file whose identifier is 
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/documents/{documentId}/files/{fileId}/content?includeObfuscations={includeObfuscations} HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-documentId: document identifier
-fileId: content identifier
-includeObfuscations: true or false to include obfuscations
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <DOCUMENT_ID>: document identifier
+# <FILE_ID>: content identifier
+# <INCLUDE_OBFUSCATIONS>: true or false to include obfuscations
+curl -X GET "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/files/<FILE_ID>/content?includeObfuscations=<INCLUDE_OBFUSCATIONS>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -445,10 +457,10 @@ Content-Type: application/json
 private DocumentService service;
 
 public List<DocumentFile> get() throws FunctionalException, TechnicalException
-
+{
 	Boolean includeContent = false;
 	return service.getFile(new Id("documentId"), new Id("fileId"), includeContent);
-
+}
 ```
 
   </TabItem>
@@ -461,33 +473,29 @@ This service indexes the content passed in parameter and associated with the fil
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/documents/{documentId}/files/{fileId}/content/index HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-documentId: document identifier
-fileId: content identifier
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
-
--- Body (text) --
-document content
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <DOCUMENT_ID>: document identifier
+# <FILE_ID>: content identifier
+curl -X POST "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/files/<FILE_ID>/content/index" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d "document content"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
-@Autowired
+	@Autowired
 	private DocumentContentService service;
 
 	public Id addContent() throws FunctionalException, TechnicalException
-
+	{
 		return service.index(new Id("documentId"), new Id("fileId"), "File contents");
-
+	}
 ```
 
   </TabItem>
@@ -500,33 +508,32 @@ This service removes the indexing of content associated with a document.
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-DELETE {{core}}/rest/documents/{documentId}/files/{fileId}/content/index HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-documentId: document identifier
-fileId: content identifier
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <DOCUMENT_ID>: document identifier
+# <FILE_ID>: content identifier
+curl -X DELETE "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/files/<FILE_ID>/content/index" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
-@Autowired
+	@Autowired
 	private DocumentContentService service;
 
 	public void removeContent() throws FunctionalException, TechnicalException
-
+	{
 		service.deindex(new Id("documentId"), new Id("fileId"));
-
+	}
 ```
 
   </TabItem>
 </Tabs>
 
+:::warning
 This service removes indexing from all files associated with the document.
+:::

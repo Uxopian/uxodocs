@@ -1,7 +1,7 @@
 ---
 title: Handling a task
-description: "Create, retrieve, modify, delete, respond to and assign your tasks"
 sidebar_position: 10
+description: Create, retrieve, modify, delete, respond to and assign your tasks
 date: "2001-04-29T13:30:01+02:00"
 last_update:
   date: '2026-01-26T14:16:25.927Z'
@@ -21,30 +21,26 @@ The examples below show how to retrieve tasks from an ID list.
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/tasks/{ids} HTTP/1.1
-
--- URL parameters --
-core : host
-ids: identifier of the documents to be retrieved
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: identifier of the documents to be retrieved
+curl -X GET "<CORE_HOST>/rest/tasks/<IDS>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-    private TaskService taskService;
+private TaskService taskService;
 
-    public List<Task> get() throws TechnicalException, FunctionalException
-
-        List<Id> ids = Lists.newArrayList(new Id("taskId"));
-        return taskService.get(ids);
-
+public List<Task> get() throws TechnicalException, FunctionalException
+{
+    List<Id> ids = Lists.newArrayList(new Id("taskId"));
+    return taskService.get(ids);
+}
 ```
 
   </TabItem>
@@ -57,86 +53,81 @@ The examples below show how to create a to-do list using the following operation
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/tasks/ HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
-
--- Body (json) --
-[
-
-	"workflow": "Inform",
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+curl -X POST "<CORE_HOST>/rest/tasks/" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '[
+  {
+    "workflow": "Inform",
     "assignee": "fadmin",
     "category": "TASK",
     "data": {
-		"classId": "GEC_Step3_CourrierLu",
-		"owner": "clm",
-		"ACL": "ACL_TASK"
+      "classId": "GEC_Step3_CourrierLu",
+      "owner": "clm",
+      "ACL": "ACL_TASK"
     },
-	"name": "3-Courrier lu",
+    "name": "3-Courrier lu",
     "tags": [
-
-			"value": [
-				"Jean"
-			],
-			"name": "PrenomClient",
-			"readOnly": false
-		},
-
-			"value": [
-				"123456"
-			],
-			"name": "RefClient",
-			"readOnly": false
-		},
-
-			"value": [
-				"DUPONT"
-			],
-			"name": "NomClient",
-			"readOnly": false
-
+      {
+        "value": [
+          "Jean"
+        ],
+        "name": "PrenomClient",
+        "readOnly": false
+      },
+      {
+        "value": [
+          "123456"
+        ],
+        "name": "RefClient",
+        "readOnly": false
+      },
+      {
+        "value": [
+          "DUPONT"
+        ],
+        "name": "NomClient",
+        "readOnly": false
+      }
     ],
     "attachments": [
-
-			"componentIds": [
-				"c46de78c-92d4-45ef-b262-8395aa76a4a8"
-			],
-			"id": "Courrier",
-			"category": "DOCUMENT",
-			"order": 0
-
-	]
-
-]
+      {
+        "componentIds": [
+          "c46de78c-92d4-45ef-b262-8395aa76a4a8"
+        ],
+        "id": "Courrier",
+        "category": "DOCUMENT",
+        "order": 0
+      }
+    ]
+  }
+]'
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-    private TaskService taskService;
+private TaskService taskService;
 
-    public List<Task> create() throws FunctionalException, TechnicalException
+public List<Task> create() throws FunctionalException, TechnicalException
+{
+    Task task = new Task();
+    task.setAssignee("user_responsable");
+    task.getData().setACL(new Id("acl-creation"));
+    task.getData().setClassId(new Id("leaveRequest_creation"));
+    task.getData().setOwner("jna");
+    task.setName("Leave request");
+    task.setTags(new Tags());
+    task.getTags().getTags().add(TagBuilder.name("RefClient").value("TT2587496").build());
+    task.getTags().getTags().add(TagBuilder.name("LeaveDuration").value("5").build());
 
-        Task task = new Task();
-        task.setAssignee("user_responsable");
-        task.getData().setACL(new Id("acl-creation"));
-        task.getData().setClassId(new Id(“leaveRequest_creation"));
-        task.getData().setOwner("jna");
-        task.setName("Leave request");
-        task.setTags(new Tags());
-        task.getTags().getTags().add(TagBuilder.name("RefClient").value("TT2587496").build());
-        task.getTags().getTags().add(TagBuilder.name(“LeaveDuration").value("5").build());
-
-        return taskService.create(Arrays.asList(task));
-
+    return taskService.create(Arrays.asList(task));
+}
 ```
 
   </TabItem>
@@ -153,78 +144,73 @@ This service operates on a cancel and replace basis, so all tag values must be s
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/tasks/{ids} HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-ids: identifiers of tasks to be updated
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
-
--- Body (json) --
-[
-
-	"workflow": "Inform",
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: identifiers of tasks to be updated
+curl -X POST "<CORE_HOST>/rest/tasks/<IDS>" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '[
+  {
+    "workflow": "Inform",
     "assignee": "fadmin",
     "category": "TASK",
     "data": {
-		"classId": "GEC_Step3_CourrierLu",
-		"owner": "clm",
-		"ACL": "ACL_TASK"
+      "classId": "GEC_Step3_CourrierLu",
+      "owner": "clm",
+      "ACL": "ACL_TASK"
     },
     "name": "3-Courrier lu",
     "tags": [
-
-			"value": [
-				"Jean"
-			],
-			"name": "PrenomClient",
-			"readOnly": false
-		},
-
-			"value": [
-				"123456"
-			],
-			"name": "RefClient",
-			"readOnly": false
-		},
-
-			"value": [
-				"DUPONT"
-			],
-			"name": "NomClient",
-			"readOnly": false
-
+      {
+        "value": [
+          "Jean"
+        ],
+        "name": "PrenomClient",
+        "readOnly": false
+      },
+      {
+        "value": [
+          "123456"
+        ],
+        "name": "RefClient",
+        "readOnly": false
+      },
+      {
+        "value": [
+          "DUPONT"
+        ],
+        "name": "NomClient",
+        "readOnly": false
+      }
     ],
     "attachments": [
-
-			"componentIds": [
-				"c46de78c-92d4-45ef-b262-8395aa76a4a8"
-			],
-			"id": "Courrier",
-			"category": "DOCUMENT",
-			"order": 0
-
-	]
-
-]
+      {
+        "componentIds": [
+          "c46de78c-92d4-45ef-b262-8395aa76a4a8"
+        ],
+        "id": "Courrier",
+        "category": "DOCUMENT",
+        "order": 0
+      }
+    ]
+  }
+]'
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-    private TaskService taskService;
+private TaskService taskService;
 
-    public List<Task> update(Task task) throws FunctionalException, TechnicalException
-
-        task.getTags().getTags().add(new Tag(Arrays.asList("DUPONT"), “NameClient", false));
-        return taskService.update(Arrays.asList(task));
-
+public List<Task> update(Task task) throws FunctionalException, TechnicalException
+{
+    task.getTags().getTags().add(new Tag(Arrays.asList("DUPONT"), "NameClient", false));
+    return taskService.update(Arrays.asList(task));
+}
 ```
 
   </TabItem>
@@ -232,7 +218,7 @@ Content-Type: application/json
 
 # Job search
 
-The search operations all work on the same model as described [here](/docs/flowerdocs/apis/core/examples/search).
+The search operations all work on the same model as described [here](./search).
 
 # Task deletion
 
@@ -241,29 +227,26 @@ The examples below show how to delete a to-do list from an ID list.
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-DELETE {{core}}/rest/tasks/{ids} HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: identifiers of tasks to be deleted
+curl -X DELETE "<CORE_HOST>/rest/tasks/<IDS>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-    private TaskService taskService;
+private TaskService taskService;
 
-    public void delete() throws FunctionalException, TechnicalException
-
-        List<Id> ids = Lists.newArrayList(new Id("taskId"));
-        taskService.delete(ids);
-
+public void delete() throws FunctionalException, TechnicalException
+{
+    List<Id> ids = Lists.newArrayList(new Id("taskId"));
+    taskService.delete(ids);
+}
 ```
 
   </TabItem>
@@ -272,96 +255,85 @@ Content-Type: application/json
 # Application of an answer
 
 ## Simple answer
-
 The examples below show how to apply a simple answer to a list of tasks from a list of identifiers.
 
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-PUT {{core}}/rest/tasks/{ids}/answer HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-ids: task identifiers on which to apply the response
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
-
--- Body (json) --
-
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: task identifiers on which to apply the response
+curl -X PUT "<CORE_HOST>/rest/tasks/<IDS>/answer" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
   "id": "Decline"
-
+}'
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-    private TaskService taskService;
+private TaskService taskService;
 
-    public void answer() throws FunctionalException, TechnicalException
-
-        Answer answer = new Answer();
-        answer.setId(new Id("Decline"));
-        taskService.answer(Lists.newArrayList(new Id("taskId")), answer);
-
+public void answer() throws FunctionalException, TechnicalException
+{
+    Answer answer = new Answer();
+    answer.setId(new Id("Decline"));
+    taskService.answer(Lists.newArrayList(new Id("taskId")), answer);
+}
 ```
 
   </TabItem>
 </Tabs>
 
-## Answer with reason
 
+## Answer with reason
 The examples below show how to retrieve tasks from an ID list.
 
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-PUT {{core}}/rest/tasks/{ids}/answer HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-ids: task identifiers on which to apply the response
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
-
--- Body (json) --
-
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: task identifiers on which to apply the response
+curl -X PUT "<CORE_HOST>/rest/tasks/<IDS>/answer" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
   "id": "Decline",
-   "type": "com.flower.docs.domain.taskclass.ReasonedAnswer",
-   "tags": [
-
-        "name": "Remark"
-        "value": [
-          "The receipt is not up to date."
-        ]
-
-    ]
-
+  "type": "com.flower.docs.domain.taskclass.ReasonedAnswer",
+  "tags": [
+    {
+      "name": "Remark",
+      "value": [
+        "The receipt is not up to date."
+      ]
+    }
+  ]
+}'
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-    private TaskService taskService;
+private TaskService taskService;
 
-    public void answer() throws FunctionalException, TechnicalException
-
-        ReasonedAnswer answer = new ReasonedAnswer();
-        answer.setId(new Id("Decline"));
-        answer.setTags(null);
-        answer.setTags(new Tags());
-        answer.getTags().getTags().add(TagBuilder.name("Remark").value("The justification is not up to date.").build());
-        taskService.answer(Lists.newArrayList(new Id("taskId")), answer);
-
+public void answer() throws FunctionalException, TechnicalException
+{
+    ReasonedAnswer answer = new ReasonedAnswer();
+    answer.setId(new Id("Decline"));
+    answer.setTags(null);
+    answer.setTags(new Tags());
+    answer.getTags().getTags().add(TagBuilder.name("Remark").value("The justification is not up to date.").build());
+    taskService.answer(Lists.newArrayList(new Id("taskId")), answer);
+}
 ```
 
   </TabItem>
@@ -374,31 +346,27 @@ The examples below show how to assign a task list to a user from an ID list.
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-PUT {{core}}/rest/tasks/{ids}/assignee/{username} HTTP/1.1
-
--- URL parameters --
-core: FlowerDocs Core host
-ids: task identifiers on which to apply the response
-username: assigned user identifier
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: task identifiers on which to apply the response
+# <USERNAME>: assigned user identifier
+curl -X PUT "<CORE_HOST>/rest/tasks/<IDS>/assignee/<USERNAME>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-    private TaskService taskService;
+private TaskService taskService;
 
-    public void assign() throws FunctionalException, TechnicalException
-
-        List<Id> ids = Lists.newArrayList(new Id("taskId"));
-        taskService.assign(ids, "jna");
-
+public void assign() throws FunctionalException, TechnicalException
+{
+    List<Id> ids = Lists.newArrayList(new Id("taskId"));
+    taskService.assign(ids, "jna");
+}
 ```
 
   </TabItem>
