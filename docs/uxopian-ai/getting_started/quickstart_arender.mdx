@@ -8,8 +8,6 @@ last_update:
 content_hash: quickstart-arender-2026-03-24
 ---
 
-import LlmEnv from './_partials/_llm_env.md';
-
 This guide deploys a full Uxopian AI stack alongside an ARender document viewer using Docker Compose. The result is a working local environment where ARender's top panel includes an AI menu connected to uxopian-ai.
 
 :::warning Development stack only
@@ -64,7 +62,12 @@ arender/
 
 The ZIP generation script injects a pre-configured `.env` with image versions into the archive. Open it and add at least one LLM API key:
 
-<LlmEnv />
+```bash
+OPENAI_API_KEY=sk-your-openai-key
+# ANTHROPIC_API_KEY=your-key
+# AZURE_OPENAI_API_KEY=your-key
+# GEMINI_API_KEY=your-gemini-key
+```
 
 To override the gateway URL if the stack is not running on localhost:
 
