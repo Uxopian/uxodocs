@@ -3,7 +3,7 @@ version: "3.7"
 services:
   # ── OpenSearch ──────────────────────────────────────────────────────────────
   opensearch:
-    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.0.0}
+    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.3.2}
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opensearch-node1

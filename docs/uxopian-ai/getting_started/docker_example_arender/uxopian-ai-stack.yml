@@ -76,7 +76,7 @@ services:
 
   # ── OpenSearch ───────────────────────────────────────────────────────────────
   opensearch-node1:
-    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.0.0}
+    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.3.2}
     container_name: opensearch-node1
     environment:
       - cluster.name=opensearch-cluster

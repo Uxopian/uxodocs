@@ -3,9 +3,9 @@ title: Tools
 sidebar_label: Tools
 sidebar_position: 7
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-03-26T16:37:56.929Z'
   author: CI/CD Bot
-content_hash: ae2bc51ed880a961521da4ebc5cd06e2c31fb5c835848f594d4741ace2f2a5d5
+content_hash: fcdea77a1c92e427558e8dd4f14dc6add93d0aea68f57f718724953d2e7800bd
 ---
 
 Tools are Java methods that the LLM can call during a conversation. When the LLM decides to use a tool, it emits a tool call request; uxopian-ai executes the corresponding method and returns the result to the LLM, which then incorporates it into its response.
