@@ -1,7 +1,7 @@
 ---
 title: Purging caches
-description: Purge your scope's caches
 sidebar_position: 1
+description: Purge your scope's caches
 date: "2001-01-29T12:20:01+01:58"
 last_update:
   date: '2026-01-26T14:16:25.927Z'
@@ -14,11 +14,11 @@ import TabItem from '@theme/TabItem';
 
 The CacheService service lets you perform getAll, clear and clearAll operations on your scope's caches.
 
-- `getAll` allows you to retrieve all caches in the scope.
+* `getAll` allows you to retrieve all caches in the scope.
 
-- `clearAll` purges all your scope's caches.
+* `clearAll` purges all your scope's caches.
 
-- `clear` allows you to purge a list of caches defined by their name.
+* `clear` allows you to purge a list of caches defined by their name.
 
 # Cache retrieval
 
@@ -26,6 +26,34 @@ The following examples show how to retrieve the list of all FlowerDocs scope cac
 
 <br/>
 GET ALL:
+<Tabs>
+  <TabItem value="rest" label="REST">
+
+```bash
+# <CORE_HOST>  FlowerDocs Core base URL
+# <TOKEN>      authentication token
+
+curl -X GET "<CORE_HOST>/rest/caches" \
+  -H "token: <TOKEN>"
+```
+
+  </TabItem>
+
+  <TabItem value="java" label="JAVA">
+
+```java
+@Autowired
+private CacheService cacheService;
+
+public String[] getAll() throws FunctionalException, TechnicalException
+{
+	List<String> cacheNames = cacheService.getAll();
+	return cacheNames.toArray(new String[] {});
+}
+```
+
+  </TabItem>
+</Tabs>
 
 # Cache purge
 
@@ -37,18 +65,16 @@ CLEAR ALL:
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-DELETE {{core}}/rest/caches HTTP/1.1
+```bash
+# <CORE_HOST>  FlowerDocs Core base URL
+# <TOKEN>      authentication token
 
--- URL parameters --
-core: FlowerDocs Core host
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X DELETE "<CORE_HOST>/rest/caches" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -59,9 +85,9 @@ import com.flower.docs.security.authorities.RoleEvaluator;
 private CacheService cacheService;
 
 public void clearAll() throws FunctionalException, TechnicalException
-
+{
 	cacheService.clearAll();
-
+}
 ```
 
   </TabItem>
@@ -73,19 +99,17 @@ CLEAR:
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-DELETE {{core}}/rest/caches/{names} HTTP/1.1
+```bash
+# <CORE_HOST>  FlowerDocs Core base URL
+# <TOKEN>      authentication token
+# <NAMES>      name of caches to be purged
 
--- URL parameters --
-core: FlowerDocs Core host
-names: name of caches to be purged
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X DELETE "<CORE_HOST>/rest/caches/<NAMES>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -93,10 +117,10 @@ Content-Type: application/json
 private CacheService cacheService;
 
 public void clear() throws FunctionalException, TechnicalException
-
-        List<String> cachesToClear = Lists.newArrayList("GEC-user", "GEC-DocumentClass");
-        cacheService.clear(cachesToClear);
-
+{
+    List<String> cachesToClear = Lists.newArrayList("GEC-user", "GEC-DocumentClass");
+    cacheService.clear(cachesToClear);
+}
 ```
 
   </TabItem>

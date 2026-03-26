@@ -1,7 +1,7 @@
 ---
 title: Encrypting a character string
-description: Encrypt your passwords and sensitive data
 sidebar_position: 5
+description: Encrypt your passwords and sensitive data
 date: "2001-03-30T13:20:01+02:00"
 last_update:
   date: '2026-01-26T14:16:25.927Z'
@@ -14,6 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The `Encryption` service displays the encryption operation of `character strings`.
 
+
 # Data Encryption
 
 The examples below show how to secure a character string using the `post` operation.
@@ -21,19 +22,19 @@ The examples below show how to secure a character string using the `post` operat
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/encrypt/ HTTP/1.1
+```bash
+# <CORE_HOST>  FlowerDocs Core base URL
+# <TOKEN>      authentication token
+# <MESSAGE>    character string to be encrypted, enclosed in double quotes
 
--- URL parameters --
-core: FlowerDocs Core host
-message: character string to be encrypted, enclosed in double quotes
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X POST "<CORE_HOST>/rest/encrypt/" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '"<MESSAGE>"'
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -42,9 +43,9 @@ private StringEncryptor encryptor;
 
 @PostMapping
 public String encrypt()
-
+{
 	return encryptor.encrypt("password");
-
+}
 ```
 
   </TabItem>

@@ -14,32 +14,29 @@ import TabItem from '@theme/TabItem';
 
 The `VersionService` service displays the following operations:
 
-- `promote`: to create a version of a document
-- `getVersions`: to retrieve document versions
-- `revert`: to restore a version of a document
-- `deleteVersion`: to delete a version of a document
-- `deleteVersions`: to delete all versions of a document
+* `promote`: to create a version of a document
+* `getVersions`: to retrieve document versions
+* `revert`: to restore a version of a document
+* `deleteVersion`: to delete a version of a document
+* `deleteVersions`: to delete all versions of a document
 
 # Creating a version
 
 The example below shows how to create a version of a document.
 <br/>
 <Tabs>
-<TabItem value="rest" label="REST">
+  <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/documents/{documentId}/versions HTTP/1.1
+```bash
+# <CORE_HOST>     FlowerDocs Core base URL
+# <TOKEN>         authentication token
+# <DOCUMENT_ID>   document identifier
+# <LABEL>         version name
 
--- URL parameters --
-core: FlowerDocs Core host
-documentId: document identifier
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
-
--- Body(raw) --
-label: version name
+curl -X POST "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/versions" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '"<LABEL>"'
 ```
 
   </TabItem>
@@ -50,11 +47,11 @@ label: version name
 private VersionService<Document> versionService;
 
 public Document promote() throws TechnicalException, FunctionalException
-
+{
 	Id id = new Id("documentId");
 	String label = "Version_1";
 	return versionService.promote(id, label);
-
+}
 ```
 
   </TabItem>
@@ -65,18 +62,15 @@ public Document promote() throws TechnicalException, FunctionalException
 The example below shows how to recover versions of a document.
 <br/>
 <Tabs>
-<TabItem value="rest" label="REST">
+  <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/documents/{documentId}/versions HTTP/1.1
+```bash
+# <CORE_HOST>     FlowerDocs Core base URL
+# <TOKEN>         authentication token
+# <DOCUMENT_ID>   document identifier
 
--- URL parameters --
-core: FlowerDocs Core host
-documentId: document identifier
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X GET "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/versions" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
@@ -87,10 +81,10 @@ Content-Type: application/json
 private VersionService<Document> versionService;
 
 public VersionSeries getVersions() throws TechnicalException, FunctionalException
-
+{
 	Id id = new Id("documentId");
 	return versionService.getVersions(id);
-
+}
 ```
 
   </TabItem>
@@ -101,19 +95,16 @@ public VersionSeries getVersions() throws TechnicalException, FunctionalExceptio
 The example below shows how to restore a version of a document.
 <br/>
 <Tabs>
-<TabItem value="rest" label="REST">
+  <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/documents/{documentId}/versions/{versionId}/revert HTTP/1.1
+```bash
+# <CORE_HOST>     FlowerDocs Core base URL
+# <TOKEN>         authentication token
+# <DOCUMENT_ID>   document identifier
+# <VERSION_ID>    document version identifier
 
--- URL parameters --
-core: FlowerDocs Core host
-documentId: document identifier
-versionId: document version identifier
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X POST "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/versions/<VERSION_ID>/revert" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
@@ -124,11 +115,11 @@ Content-Type: application/json
 private VersionService<Document> versionService;
 
 public Document revert() throws TechnicalException, FunctionalException
-
+{
 	Id documentId = new Id("documentId");
 	Id versionId = new Id("versionId");
 	id versionId = new Id("versionId");
-
+}
 ```
 
   </TabItem>
@@ -141,19 +132,16 @@ public Document revert() throws TechnicalException, FunctionalException
 The example below shows how to delete a version of a document.
 <br/>
 <Tabs>
-<TabItem value="rest" label="REST">
+  <TabItem value="rest" label="REST">
 
-```http
-DELETE {{core}}/rest/documents/{documentId}/versions/{versionId} HTTP/1.1
+```bash
+# <CORE_HOST>     FlowerDocs Core base URL
+# <TOKEN>         authentication token
+# <DOCUMENT_ID>   document identifier
+# <VERSION_ID>    document version identifier
 
--- URL parameters --
-core: FlowerDocs Core host
-documentId: document identifier
-versionId: document version identifier
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X DELETE "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/versions/<VERSION_ID>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
@@ -164,11 +152,11 @@ Content-Type: application/json
 private VersionService<Document> versionService;
 
 public void deleteVersion() throws TechnicalException, FunctionalException
-
+{
 	Id documentId = new Id("documentId");
 	Id versionId = new Id("versionId");
 	return versionService.deleteVersion(documentId, versionId);
-
+}
 ```
 
   </TabItem>
@@ -179,18 +167,15 @@ public void deleteVersion() throws TechnicalException, FunctionalException
 The example below shows how to delete all versions of a document.
 <br/>
 <Tabs>
-<TabItem value="rest" label="REST">
+  <TabItem value="rest" label="REST">
 
-```http
-DELETE {{core}}/rest/documents/{documentId}/versions HTTP/1.1
+```bash
+# <CORE_HOST>     FlowerDocs Core base URL
+# <TOKEN>         authentication token
+# <DOCUMENT_ID>   document identifier
 
--- URL parameters --
-core: FlowerDocs Core host
-documentId: document identifier
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X DELETE "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/versions" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
@@ -201,10 +186,10 @@ Content-Type: application/json
 private VersionService<Document> versionService;
 
 public void deleteVersion() throws TechnicalException, FunctionalException
-
+{
 	Id documentId = new Id("documentId");
 	return versionService.deleteVersions(documentId);
-
+}
 ```
 
   </TabItem>

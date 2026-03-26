@@ -1,7 +1,7 @@
 ---
 title: Handling a virtual folder
-description: "Create, retrieve, modify, delete and search your virtual folders"
-sidebar_position: 14
+sidebar_position: 12
+description: Create, retrieve, modify, delete and search your virtual folders
 date: "2001-04-29T13:30:01+01:00"
 last_update:
   date: '2026-01-26T14:16:25.927Z'
@@ -21,30 +21,26 @@ The examples below show how to retrieve virtual folders from a list of identifie
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/virtualFolder/{ids} HTTP/1.1
-
--- URL parameters --
-ids: list of virtual folder identifiers to be retrieved
-
--- Headers --
-core: FlowerDocs Core host
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: list of virtual folder identifiers to be retrieved
+curl -X GET "<CORE_HOST>/rest/virtualFolder/<IDS>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-    private VirtualFolderService vfService;
+private VirtualFolderService vfService;
 
-    public List<VirtualFolder> get() throws TechnicalException, FunctionalException
-
-        List<Id> ids = Lists.newArrayList(new Id("123654"));
-        return vfService.get(ids);
-
+public List<VirtualFolder> get() throws TechnicalException, FunctionalException
+{
+    List<Id> ids = Lists.newArrayList(new Id("123654"));
+    return vfService.get(ids);
+}
 ```
 
   </TabItem>
@@ -57,17 +53,14 @@ The examples below show how to create a list of virtual folders.
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/virtualFolder/ HTTP/1.1
-
--- Headers --
-core: FlowerDocs Core host
-token: {{token}}
-Content-Type: application/json
-
--- Body (json) --
-[
-
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+curl -X POST "<CORE_HOST>/rest/virtualFolder/" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '[
+  {
     "category": "VIRTUAL_FOLDER",
     "data": {
       "ACL": "acl-dossierclient",
@@ -76,50 +69,50 @@ Content-Type: application/json
     },
     "name": "123654 - DOE Jules",
     "tags": [
-
+      {
         "name": "RefClient",
         "readOnly": false,
         "value": [
           "123654"
         ]
       },
-
+      {
         "name": "PrenomClient",
         "readOnly": false,
         "value": [
           "Jules"
         ]
       },
-
+      {
         "name": "NomClient",
         "readOnly": false,
         "value": [
           "DOE"
         ]
-
+      }
     ]
-
-]
+  }
+]'
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-    private VirtualFolderService vfService;
+private VirtualFolderService vfService;
 
-    public List<VirtualFolder> create() throws FunctionalException, TechnicalException
-
-        VirtualFolder vF = ComponentBuilder.component(Category.VIRTUAL_FOLDER).name("123654 - Doe Jules")
-                .classId(new Id("DossierClient")).acl("acl-dossierclient").build();
-        vF.getData().setOwner("jna");
-        vF.setTags(new Tags());
-        vF.getTags().getTags().add(TagBuilder.name("RefClient").value("123654").build());
-        vF.getTags().getTags().add(TagBuilder.name("NomClient").value("DOE").build());
-        vF.getTags().getTags().add(TagBuilder.name("DureeConge").value("Jules").build());
-        return vfService.create(Arrays.asList(vF));
-
+public List<VirtualFolder> create() throws FunctionalException, TechnicalException
+{
+    VirtualFolder vF = ComponentBuilder.component(Category.VIRTUAL_FOLDER).name("123654 - Doe Jules")
+            .classId(new Id("DossierClient")).acl("acl-dossierclient").build();
+    vF.getData().setOwner("jna");
+    vF.setTags(new Tags());
+    vF.getTags().getTags().add(TagBuilder.name("RefClient").value("123654").build());
+    vF.getTags().getTags().add(TagBuilder.name("NomClient").value("DOE").build());
+    vF.getTags().getTags().add(TagBuilder.name("DureeConge").value("Jules").build());
+    return vfService.create(Arrays.asList(vF));
+}
 ```
 
   </TabItem>
@@ -136,20 +129,15 @@ This service operates on a cancel and replace basis, so all tag values must be s
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/virtualFolder/{ids} HTTP/1.1
-
--- URL parameters --
-ids: list of virtual folder identifiers to be updated
-
--- Headers --
-core: FlowerDocs Core host
-token: {{token}}
-Content-Type: application/json
-
--- Body (json) --
-[
-
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: list of virtual folder identifiers to be updated
+curl -X POST "<CORE_HOST>/rest/virtualFolder/<IDS>" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '[
+  {
     "category": "VIRTUAL_FOLDER",
     "data": {
       "ACL": "acl-dossierclient",
@@ -158,48 +146,48 @@ Content-Type: application/json
     },
     "name": "123654 - DOE Marc",
     "tags": [
-
+      {
         "name": "RefClient",
         "readOnly": false,
         "value": [
           "123654"
         ]
       },
-
+      {
         "name": "PrenomClient",
         "readOnly": false,
         "value": [
           "Marc"
         ]
       },
-
+      {
         "name": "NomClient",
         "readOnly": false,
         "value": [
           "DOE"
         ]
-
+      }
     ]
-
-]
+  }
+]'
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-	private VirtualFolderService vfService;
+private VirtualFolderService vfService;
 
-	public List<VirtualFolder> update(VirtualFolder vF) throws FunctionalException, TechnicalException
-
-		//ComponentBuilder.component(Category.VIRTUAL_FOLDER).name("123654 - Doe Marc").classId(new Id("DossierClient")).build();
-      vF.setName("123654 - Doe Marc");
-      vF.getData().setACL(new Id("acl-dossierclient"));
-      vF.getData().setClassId(new Id("DossierClient"));
-      ComponentHelper.setTagValue(vF, "NomClient", "Marc");
-      return vfService.update(Arrays.asList(vF));
-
+public List<VirtualFolder> update(VirtualFolder vF) throws FunctionalException, TechnicalException
+{
+	//ComponentBuilder.component(Category.VIRTUAL_FOLDER).name("123654 - Doe Marc").classId(new Id("DossierClient")).build();
+  vF.setName("123654 - Doe Marc");
+  vF.getData().setACL(new Id("acl-dossierclient"));
+  vF.getData().setClassId(new Id("DossierClient"));
+  ComponentHelper.setTagValue(vF, "NomClient", "Marc");
+  return vfService.update(Arrays.asList(vF));
+}
 ```
 
   </TabItem>
@@ -207,7 +195,7 @@ Content-Type: application/json
 
 # Recherche de virtual folder
 
-The search operations all work on the same model as described [here](/docs/flowerdocs/apis/core/examples/search).
+The search operations all work on the same model as described [here](./search).
 
 # Virtual folder deletion
 
@@ -216,30 +204,26 @@ The examples below show how to delete a list of virtual folders from a list of i
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-DELETE {{core}}/rest/virtualFolder/{ids} HTTP/1.1
-
--- URL parameters --
-ids: list of virtual folder identifiers to be deleted
-
--- Headers --
-core: FlowerDocs Core host
-token: {{token}}
-Content-Type: application/json
+```bash
+# <CORE_HOST>: FlowerDocs Core base URL
+# <TOKEN>: authentication token
+# <IDS>: list of virtual folder identifiers to be deleted
+curl -X DELETE "<CORE_HOST>/rest/virtualFolder/<IDS>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
   <TabItem value="java" label="Java">
 
-```Java
+```java
 @Autowired
-	private VirtualFolderService vfService;
+private VirtualFolderService vfService;
 
-	public void delete() throws FunctionalException, TechnicalException
-
-        List<Id> ids = Lists.newArrayList(new Id("123654"));
-        vfService.delete(ids);
-
+public void delete() throws FunctionalException, TechnicalException
+{
+    List<Id> ids = Lists.newArrayList(new Id("123654"));
+    vfService.delete(ids);
+}
 ```
 
   </TabItem>
