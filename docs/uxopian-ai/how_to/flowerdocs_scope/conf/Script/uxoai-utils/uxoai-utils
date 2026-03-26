@@ -1,0 +1,47 @@
+function getComponentContext() {
+  var flowerId = JSAPI.get().getLastComponentFormAPI().getComponent().getId();
+  var arenderId = arenderJSAPI.getCurrentDocumentId();
+  return InputBuilder.textAsSystem(`
+    /* Contextual Data */
+    {
+      flowerdocId: {
+        value: "${flowerId}",
+        description: "The ID of the Flowerdoc document"
+      },
+      arenderDocId: {
+        value: "${arenderId}",
+        description: "The ID of the Arender document (BASE64 encoded)"
+      }
+    }
+  `);
+}
+
+function openChatWindow(requestPayload) {
+  fetch(GATEWAY_ENDPOINT)
+    .then(() =>
+      createChat({
+        endpoint: UXO_AI_ENDPOINT,
+        wsEndpoint: WS_UXO_AI_ENDPOINT,
+        request: requestPayload,
+      }),
+    )
+    .catch((error) => console.error("Failed to open chat:", error));
+}
+
+function registerHeaderAction({ label, icon, onExecute }) {
+  var jsapi = JSAPI.get();
+  jsapi.getLabelsAPI().setLabels([label]);
+  jsapi.registerForComponentChange((api) => {
+    var resolvedLabel = jsapi.getLabelsAPI().getLabel(label.name);
+    var headerActions = api.getActions().getHeaderActions();
+    var actionItem = jsapi
+      .getActionFactoryAPI()
+      .buildMenu(
+        `ai-action-${label.name}`,
+        resolvedLabel,
+        icon || "fa-solid fa-robot",
+        onExecute,
+      );
+    headerActions.add(actionItem);
+  });
+}

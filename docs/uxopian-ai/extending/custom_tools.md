@@ -1,231 +1,173 @@
 ---
-title: "Creating Custom Tools"
+title: Write and deploy custom tools
+sidebar_label: Custom tools
+sidebar_position: 1
 last_update:
-  date: '2026-02-16T16:29:56.656Z'
+  date: '2026-03-24T12:58:17.027Z'
   author: CI/CD Bot
-sidebar_position: 3
-content_hash: a861915616130722d8811ab281c4946326c5c4cf5e8da0900c87829e7554dc8d
----
-# How to Create Custom Prompt Tools
-
-## Tools
-
-Tools are custom Java services that empower the LLM to perform actions or retrieve information autonomously. Unlike **Helpers** (which inject data into the prompt before generation), **Tools** are _Function Calling_ capabilities that the AI can decide to execute during the conversation.
-
+content_hash: 7087fd61b611bac9aba79d7d9de4ff0b2c6fcaaceae282ef4b8c08513cac7c56
 ---
 
-## Overview
+A custom tool is a Java method that the LLM can call during a conversation. Tools give the LLM the ability to perform actions: query a database, call an external API, read a file. This guide explains how to write a tool, package it, and deploy it.
 
-Uxopian-ai uses **LangChain4j** to manage Tools. By creating a custom Tool, you provide the LLM with a set of methods (functions) described in natural language. The LLM analyzes the user's request and determines if and when to call your Java methods.
+## How a custom tool fits in the system
 
-### Common Use Cases
+```mermaid
+flowchart LR
+    LLM["LLM Provider"]
+    TE["ToolExecutor"]
+    PluginsDir["plugins/<br/>my-tool.jar"]
+    IL["IntegrationLoader<br/>(startup scan)"]
+    MyTool["MyToolService<br/>@ToolService"]
 
-- **Action Execution**: Sending emails, creating Jira tickets, updating a database.
-- **Dynamic Queries**: Searching an SQL database based on natural language criteria.
-- **Complex Calculations**: Performing mathematical operations that LLMs struggle with.
+    IL -->|"Scans JAR on startup"| PluginsDir
+    IL -->|"Registers bean"| MyTool
+    TE -->|"Collects @ToolService beans<br/>on ContextRefreshedEvent"| MyTool
+    LLM -->|"Tool call request"| TE
+    TE -->|"Invokes @Tool method"| MyTool
+    MyTool -.->|"Result"| TE
+    TE -.->|"ToolExecutionResultMessage"| LLM
+```
 
----
+*Figure: A custom tool JAR is scanned at startup, registered by IntegrationLoader, and invoked by ToolExecutor on LLM tool call requests.*
 
 ## Prerequisites
 
-Before starting, ensure your development environment is configured properly.
+- Java 21
+- Maven with access to the Uxopian AI BOM or individual dependency coordinates
+- The uxopian-ai `model` and `common` modules available as dependencies (or use the shaded JAR approach)
 
-- **Maven Settings**: Configure your `.m2/settings.xml` to access the `com.uxopian.ai` libraries.
-- **Java Development Kit (JDK)**: Ensure you are using a compatible JDK version (**Java 21+ recommended**).
+## Steps
 
----
+### 1. Create a Maven project
 
-## Step 1: Project Configuration
+Create a standard Maven project. Add the required dependencies: the LangChain4J `agent.tool` annotations and the uxopian-ai tool annotations. The key annotations come from:
 
-Create a new Maven project. You need to import the **Uxopian annotation** dependency (to mark the service) and the **langchain4j-core** dependency (to define the tool methods).
-
-Add the following to your `pom.xml`:
+- `dev.langchain4j:langchain4j-core`: provides `@Tool` and `@P`
+- `com.uxopian.ai:annotation`: provides `@ToolService` (groupId `com.uxopian.ai`, artifactId `annotation`)
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>my-custom-tool</artifactId>
-
-    <properties>
-        <langchain4j.version>1.11.0</langchain4j.version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.uxopian.ai</groupId>
-            <artifactId>annotation</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-core</artifactId>
-            <version>${langchain4j.version}</version>
-        </dependency>
-    </dependencies>
-</project>
+<dependency>
+    <groupId>dev.langchain4j</groupId>
+    <artifactId>langchain4j-core</artifactId>
+    <version>1.11.0</version>
+</dependency>
+<dependency>
+    <groupId>com.uxopian.ai</groupId>
+    <artifactId>annotation</artifactId>
+    <version>${uxopian-ai.version}</version>
+</dependency>
 ```
 
----
+The `annotation` artifact is published to the Arondor Artifactory registry (`artifactory.arondor.cloud`). See [Registry access](../getting_started/registry_access.md) for repository configuration. Set `${uxopian-ai.version}` to the Uxopian AI release version you are targeting.
 
-## Step 2: Implement the Service
-
-The **Uxopian-ai Tool Loader** scans for classes annotated with `@ToolService`. These classes must also be standard Spring beans (annotated with `@Component` or `@Service`).
-
-### 1. The Tool Class
-
-You must use the `@Tool` annotation from LangChain4j on the methods you want to expose to the AI. The text inside `@Tool("...")` is crucial: it is the description the LLM reads to understand what the tool does.
+### 2. Write the tool class
 
 ```java
-package com.mycompany.uxopian.tools;
-
-import org.springframework.stereotype.Service;
-import com.uxopian.ai.model.annotation.tool.ToolService;
+import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
+import com.uxopian.ai.model.annotation.tool.ToolService;
+import org.springframework.stereotype.Service;
 
-@Service("bookingTool") // Standard Spring annotation
-@ToolService // Marks this as a Tool for Uxopian-ai scanning
-public class BookingTool {
+@Service
+@ToolService
+public class MyCustomTool {
 
-    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(BookingTool.class);
+    @Tool("Search the internal knowledge base for articles matching a topic. "
+        + "Returns a list of article titles and summaries.")
+    public List<String> searchKnowledgeBase(
+            @P("The topic to search for") String topic,
+            @P("Maximum number of results") int maxResults) {
 
-    /**
-     * The description inside @Tool is what the LLM sees.
-     * Be descriptive about what the method does and what the parameters represent.
-     */
-    @Tool("Checks the availability of a meeting room for a specific date")
-    public boolean checkAvailability(String roomName, String date) {
-        // Logic to check database or external API
-        logger.info("Checking availability for {} on {}", roomName, date);
-        return true;
-    }
-
-    @Tool("Books a meeting room if available")
-    public String bookRoom(String roomName, String date, String organizer) {
-        return "Room " + roomName + " successfully booked for " + organizer + " on " + date;
+        // Your implementation here
+        return List.of("Article about " + topic);
     }
 }
 ```
 
-### 2. Internal Dependencies (Optional)
+Rules for tool methods:
+- The method must be `public`.
+- The `@Tool` annotation value is the description sent to the LLM. Write it clearly: the LLM uses this description to decide when to call the tool.
+- Each parameter annotated with `@P` gets a description. The LLM uses these to construct the arguments.
+- The return type must be serializable. Strings and lists of simple objects work well. The result is converted to a string before being returned to the LLM.
+- Tool execution is synchronous. Long-running operations will block the request thread.
 
-The `ToolServiceLoader` also scans and registers internal beans found in your JAR. If your Tool relies on a repository or a helper class, simply annotate them with `@Component` or `@Service` (without `@ToolService`), and they will be injected automatically.
+### 3. Package as a shaded JAR
 
-```java
-@Component
-public class InternalDatabaseConnector {
-    // This bean is not exposed to the LLM, but can be Autowired into BookingTool
-}
-```
-
----
-
-## Step 3: Building the Artifact (Fat JAR)
-
-Just like Helpers, Tools must be packaged as a **Fat JAR (Uber JAR)** to include all specific dependencies (e.g., database drivers, specific HTTP clients) that are not part of the core platform.
-
-When building your Fat JAR, you **must exclude `langchain4j-core`** (and other platform-provided libraries) to avoid classpath conflicts at runtime.
-
-### Maven Shade Plugin Example
+The plugin JAR must be self-contained (all dependencies included). Use the Maven Shade plugin:
 
 ```xml
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <version>3.5.0</version>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>shade</goal>
-                    </goals>
-                    <configuration>
-                        <artifactSet>
-                            <excludes>
-                                <exclude>dev.langchain4j:langchain4j-core</exclude>
-                            </excludes>
-                        </artifactSet>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-shade-plugin</artifactId>
+    <version>3.5.0</version>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>shade</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
 ```
 
-> ⚠️ **Dependency Conflicts**
-> Be careful not to include `langchain4j-core` or Spring framework JARs in your final artifact if they are already provided by the platform, unless you specifically need to override them (which is **not recommended**).
+Build the shaded JAR:
 
----
-
-## Step 4: Deployment
-
-Uxopian-ai scans a specific directory for tools, typically configured as `tools/`.
-
-### Docker Deployment (Recommended)
-
-Add your compiled JAR to the `tools/` directory in your custom Docker image.
-
-**Dockerfile example:**
-
-```dockerfile
-# Start from the specific version of Uxopian-ai
-FROM artifactory.arondor.cloud:5001/uxopian-ai:v2026.0.0-ft1-rc2-full
-
-# Copy your custom Tool Fat JAR into the tools directory
-COPY ./target/my-custom-tool-1.0-SNAPSHOT.jar /app/tools/
+```bash
+mvn clean package
 ```
 
----
+The output JAR is in `target/my-custom-tool-1.0.0.jar` (or similar).
 
-## Step 5: Usage
+### 4. Deploy the JAR
 
-Unlike Helpers, you do **not** call Tools explicitly in your prompt (e.g., no `[[${...}]]`).
+Copy the shaded JAR to the `plugins/` directory on the uxopian-ai host. In Docker Compose deployments, mount the directory:
 
-1. **Enable the Tool**: In the Uxopian-ai configuration (or Assistant setup), ensure your new Tool is selected/enabled for the conversation context.
-2. **Prompting**: Simply ask the LLM to perform the task.
-
-### Example Scenario
-
-**User says:**
-
-> "Can you book the 'Red Room' for me for tomorrow?"
-
-**LLM process:**
-
-1. The LLM reads the `@Tool` description: _"Books a meeting room if available"_.
-2. It extracts the parameters:
-
-   - `roomName = "Red Room"`
-   - `date = "2025-10-20"`
-   - `organizer = "User"`
-
-3. It executes the Java method `bookRoom(...)` server-side.
-4. It receives the returned `String`.
-
-**LLM response:**
-
-> "I have successfully booked the Red Room for you for tomorrow."
-
----
-
-## Best Practices for Descriptions
-
-The quality of your Tool depends directly on the quality of your `@Tool` annotation descriptions.
-
-**Bad:**
-
-```java
-@Tool("Get data")
+```yaml
+services:
+  uxopian-ai:
+    volumes:
+      - ./plugins:/app/plugins
 ```
 
-**Good:**
+Then copy the JAR:
 
-```java
-@Tool("Retrieves the current stock price for a given ticker symbol (e.g., AAPL)")
+```bash
+cp target/my-custom-tool-1.0.0.jar ./plugins/
 ```
+
+### 5. Restart uxopian-ai
+
+Plugins are scanned at startup. Restart the container to load the new plugin:
+
+```bash
+docker compose restart uxopian-ai
+```
+
+Check the logs to confirm the tool was registered:
+
+```bash
+docker compose logs uxopian-ai | grep "Registered"
+```
+
+You should see a line indicating the number of tool methods registered.
+
+### 6. Verify the tool is available
+
+The LLM will use tools when they are relevant to the user's request. To confirm the tool is loaded, check the admin UI statistics or send a request that explicitly asks the LLM to use the tool.
+
+## Important constraints
+
+- Shaded JARs must not include Spring Boot's own classes. Only include classes needed by the tool.
+- If a bean name collides with an already-registered bean, `IntegrationLoader` logs a warning and skips the duplicate.
+- Tools can be disabled globally with `TOOLS_ENABLED=false`.
+- The LLM only calls tools if the model configured for the conversation has `functionCallSupported: true`.
+- Prompts with `reasoningDisabled: true` do not receive tool specifications.
+
+## Related pages
+
+- [Tools](../understanding/tools.md)
+- [Plugin system](../understanding/plugin_system.md)
+- [Write custom service helpers](./custom_service_helpers.md)
+- [LLM providers](../understanding/llm_providers.md)

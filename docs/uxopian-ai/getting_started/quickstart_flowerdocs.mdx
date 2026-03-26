@@ -1,0 +1,103 @@
+---
+title: Quickstart with FlowerDocs
+sidebar_label: Quickstart with FlowerDocs
+sidebar_position: 3
+last_update:
+  date: '2026-03-24T00:00:00.000Z'
+  author: CI/CD Bot
+content_hash: quickstart-flowerdocs-2026-03-24
+---
+
+This guide adds the Uxopian AI chat panel to a running FlowerDocs deployment. The result is a FlowerDocs instance where users can open an AI chat panel via keyboard shortcut, with document context provided by the FlowerDocs tools.
+
+:::warning Development configuration
+This quickstart connects to uxopian-ai running with `DevProvider` (authentication disabled). Before going to production, switch the gateway to `FlowerDocsProvider` so FlowerDocs session tokens are validated. See [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) for the production-ready setup.
+:::
+
+## Prerequisites
+
+- A running Uxopian AI stack. See [Quickstart with Docker Compose](./quickstart.mdx).
+- A FlowerDocs deployment with a Maven-based scope build.
+- The Uxopian AI gateway URL reachable from the FlowerDocs server.
+
+## Step flow
+
+```mermaid
+flowchart LR
+    A["Download<br/>scope files"] --> B["Install scope files<br/>(see FlowerDocs docs)"]
+    B --> C["Log in to FlowerDocs"]
+    C --> D["Open chat panel<br/>(keyboard shortcut)"]
+```
+
+*Figure: Steps from scope file download to a working AI chat panel in FlowerDocs.*
+
+## Steps
+
+### 1. Download the scope files
+
+:::tip[Download]
+**<a href={require('../how_to/uxopian-ai_flowerdocs_scope.zip').default} download="uxopian-ai_flowerdocs_scope.zip">uxopian-ai_flowerdocs_scope.zip</a>**
+:::
+
+The archive contains:
+
+```
+conf/
+  Route/
+    Gateway.xml             # Route definition pointing to uxopian-gateway
+  Script/
+    consts/                 # Constants including the gateway URL
+    openChat/               # openChat() helper function
+    refreshToken/           # Token refresh helper
+    web-comp/               # Web component loader
+    OpenChatShortcut/       # Keyboard shortcut implementation
+    UxoAiAdminShortcut/     # Admin UI shortcut implementation
+    translate/              # Translation helper
+    uxoai-utils/            # Utility functions
+    *.xml                   # Scope file descriptors
+```
+
+### 2. Install the scope files into FlowerDocs
+
+The scope files are installed via the FlowerDocs CLM service. Refer to your FlowerDocs documentation for the scope installation procedure.
+
+### 3. Verify
+
+1. Log in to FlowerDocs.
+2. Use the keyboard shortcut assigned to `OpenChatShortcut`.
+3. The Uxopian AI chat panel should appear embedded in the FlowerDocs UI.
+4. Type a question and verify a response is returned from uxopian-ai.
+
+If the chat panel does not appear, check the uxopian-ai logs:
+
+```bash
+docker compose -f uxopian-ai-stack.yml logs uxopian-ai
+```
+
+## Architecture in this stack
+
+```mermaid
+flowchart LR
+    User["User (browser)"]
+    FD["FlowerDocs UI"]
+    GW["uxopian-gateway<br/>(port 8085)"]
+    AI["uxopian-ai"]
+    FDAPI["FlowerDocs API"]
+    LLM["LLM Provider"]
+
+    User -->|"Keyboard shortcut"| FD
+    FD -->|"openChat() via /gateway/**"| GW
+    GW -->|"proxy"| AI
+    AI -->|"Tool calls"| FDAPI
+    AI --> LLM
+    LLM -.->|"Response streamed"| FD
+```
+
+*Figure: Chat panel traffic flow from FlowerDocs through the gateway to uxopian-ai.*
+
+## Related pages
+
+- [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) — production setup with `FlowerDocsProvider`
+- [Configure FlowerDocs scope files](../how_to/configure_flowerdocs_scope.mdx) — customize buttons and shortcuts
+- [Quickstart with Docker Compose](./quickstart.mdx) — start the uxopian-ai stack
+- [Prompts and templating](../understanding/prompts_and_templating.md)

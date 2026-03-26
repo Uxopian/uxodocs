@@ -1,168 +1,137 @@
 ---
-title: "Quick Start"
-last_update:
-  date: '2026-03-19T10:42:08.897Z'
-  author: CI/CD Bot
+title: Quickstart with Docker Compose
+sidebar_label: Quickstart
 sidebar_position: 1
-content_hash: 1075716b4cc08cc7794de222c0b615d3587a426d4f93d7c6967cc79603fdaa9e
+last_update:
+  date: '2026-03-24T00:00:00.000Z'
+  author: CI/CD Bot
+content_hash: quickstart-2026-03-24
 ---
-# Quick Start: Your First AI Exchange in 5 Minutes
 
-This guide gets you from zero to a working AI response as fast as possible using the Docker Starter Kit.
+import LlmEnv from './_partials/_llm_env.md';
 
----
+This guide walks through running a local Uxopian AI stack with Docker Compose. The result is a working deployment with OpenSearch, uxopian-ai, and uxopian-gateway, accessible at `http://localhost:8085`.
+
+:::warning Development stack only
+This quickstart uses `DevProvider` in the gateway and the `dev` Spring profile on `uxopian-ai`. Authentication is disabled. Do not use this configuration in a production or publicly accessible environment.
+:::
 
 ## Prerequisites
 
-- **Docker** and **Docker Compose** installed.
-- An **OpenAI API Key** (or any supported LLM provider key).
+- Docker and Docker Compose installed
+- Access to a Uxopian AI Docker registry (Cloudsmith public or Arondor Artifactory). See [Registry access](./registry_access.md).
+- At least one LLM provider API key (e.g., OpenAI, Anthropic, Gemini)
 
----
+## Step flow
 
-## Step 1: Download the Starter Kit
+```mermaid
+flowchart LR
+    A["Download ZIP"] --> B["Edit .env<br/>(API keys)"]
+    B --> C["docker compose up -d"]
+    C --> D["Wait for health checks"]
+    D --> E["Open http://localhost:8085"]
+    E --> F["Access admin UI"]
+```
+
+*Figure: Steps from download to a running stack.*
+
+## Steps
+
+### 1. Download the example package
 
 :::tip[Download]
-**<a href={require('./uxopian-ai_docker_example.zip').default}>uxopian-ai_docker_example.zip</a>**
+**<a href={require('./uxopian-ai_docker_example.zip').default} download="uxopian-ai_docker_example.zip">uxopian-ai_docker_example.zip</a>**
 :::
 
+Extract the ZIP. The archive contains:
 
-Extract the archive. You should have the following structure:
-
-```text
-.
-├── config/
-│   ├── application.yml
-│   ├── goals.yml
-│   ├── llm-clients-config.yml
-│   ├── llm-clients-config.yml.example
-│   ├── mcp-server.yml
-│   ├── metrics.yml
-│   ├── opensearch.yml
-│   └── prompts.yml
-├── gateway-application.yaml
-└── uxopian-ai-stack.yml
+```
+uxopian-ai-stack.yml        # Docker Compose file
+gateway-application.yaml    # Gateway configuration
+config/
+  application.yml           # uxopian-ai base config
+  opensearch.yml            # OpenSearch connection
+  llm-clients-config.yml    # LLM provider configurations (minimal)
+  llm-clients-config.yml.example  # Full example with all providers
+  prompts.yml               # Default prompt definitions
+  goals.yml                 # Goal group definitions (empty by default)
+  metrics.yml               # Micrometer metrics configuration
+  mcp-server.yml            # MCP server config (disabled by default)
 ```
 
----
+### 2. Configure LLM API keys
 
-## Step 2: Configure Your API Key
+Create a `.env` file in the same directory as `uxopian-ai-stack.yml`. Set at least one LLM API key:
 
-The LLM configuration uses environment variables. The simplest approach is to set your API key in the `uxopian-ai-stack.yml` file by adding it to the `environment` section of the `uxopian-ai-standalone` service:
+<LlmEnv />
 
-```yaml
-environment:
-  - OPENAI_API_KEY=sk-YOUR_OPENAI_API_KEY_HERE
-```
+If you want to configure all provider options, copy `config/llm-clients-config.yml.example` to `config/llm-clients-config.yml` and edit it. The minimal `llm-clients-config.yml` is pre-configured for OpenAI.
 
-Alternatively, you can replace `${OPENAI_API_KEY:}` directly in `config/llm-clients-config.yml` with your key.
+### 3. Log in to the registry
 
-:::tip[Other Providers]
-You can use any supported provider (Azure, Anthropic, Gemini, Mistral, Ollama...). See [Configuration Files](../reference/config_files.md) for the full reference.
-:::
+**Cloudsmith (public preview):** no login required. The compose file includes the Cloudsmith image lines as comments — see [Registry access](./registry_access.md) to switch.
 
-
----
-
-## Step 3: Start the Stack
-
-Start all services:
+**Artifactory (enterprise):**
 
 ```bash
-docker-compose -f uxopian-ai-stack.yml up -d
+docker login artifactory.arondor.cloud:5001
 ```
 
-:::note[Docker Images]
-The compose file references images from `artifactory.arondor.cloud:5001/`. If your registry differs, update the `image:` fields in `uxopian-ai-stack.yml` accordingly.
-:::
+See [Registry access](./registry_access.md) for credentials and for instructions on switching to the Cloudsmith registry.
 
+### 4. Start the stack
 
-Wait a few seconds for OpenSearch to initialize. You can check the health:
+```bash
+docker compose -f uxopian-ai-stack.yml up -d
+```
+
+This starts three containers: `opensearch`, `uxopian-ai`, and `uxopian-gateway`. The `uxopian-ai` service waits for OpenSearch to pass its health check before starting.
+
+### 5. Verify the stack is healthy
+
+```bash
+docker compose -f uxopian-ai-stack.yml ps
+```
+
+All three containers should show `healthy` or `running`. You can also check the gateway health endpoint:
 
 ```bash
 curl http://localhost:8085/actuator/health
 ```
 
-:::info[Port Mapping]
-The starter kit maps the service to **port 8085** on the host (`8085:8080`). All API calls from your machine go to `localhost:8085`.
-:::
+Expected response:
 
-
-:::note[Why No Gateway?]
-The starter kit runs in **development mode** (`SPRING_PROFILES_ACTIVE=dev`), which lets you call the AI service directly without a BFF Gateway. The service automatically fills in default values for missing authentication headers. In production, a [BFF Gateway](../understanding/security.md) sits in front of the service and handles authentication, role injection, and tenant isolation.
-:::
-
-
----
-
-## Step 4: Create a Prompt
-
-Tell the AI what to do by creating your first prompt:
-
-```bash
-curl -X POST "http://localhost:8085/api/v1/admin/prompts" \
-  -H "Content-Type: application/json" \
-  -H "X-User-TenantId: quickstart" \
-  -H "X-User-Id: admin" \
-  -H "X-User-Roles: admin" \
-  -d '{
-    "id": "helloAI",
-    "role": "system",
-    "content": "You are a helpful assistant. Answer concisely.",
-    "defaultLlmProvider": "openai",
-    "defaultLlmModel": "gpt-5.1"
-  }'
+```json
+{"status":"UP"}
 ```
 
-:::note
-The starter kit already includes pre-defined prompts in `config/prompts.yml` (e.g., `summarizeDocumentText`, `translate`). You can use them directly or create new ones via the API.
-:::
+### 6. Access the application
 
+Open `http://localhost:8085` in your browser. The gateway is listening on port 8085.
 
----
+To access the admin UI, open the admin element page. The default development identity (`User-development`, tenant `Tenant-development`) is injected automatically by `DevProvider` when no credentials are provided.
 
-## Step 5: Create a Conversation and Send a Message
+## Configuration notes
 
-First, create a conversation:
+The gateway configuration (`gateway-application.yaml`) routes all traffic to `uxopian-ai:8080` using `DevProvider`. The admin API routes (`/api/v1/admin/**`) are marked public in this example.
 
-```bash
-curl -X POST "http://localhost:8085/api/v1/conversations" \
-  -H "Content-Type: application/json" \
-  -H "X-User-TenantId: quickstart" \
-  -H "X-User-Id: demo-user"
-```
+The `uxopian-ai` container is not exposed to the host. All browser traffic goes through port 8085 on the gateway.
 
-Copy the `id` from the response, then send your first message:
+## Stopping the stack
 
 ```bash
-curl -X POST "http://localhost:8085/api/v1/requests?conversation=YOUR_CONVERSATION_ID" \
-  -H "Content-Type: application/json" \
-  -H "X-User-TenantId: quickstart" \
-  -H "X-User-Id: demo-user" \
-  -d '{
-    "inputs": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "text",
-            "value": "What is the capital of France?"
-          }
-        ]
-      }
-    ]
-  }'
+docker compose -f uxopian-ai-stack.yml down
 ```
 
-You should receive a JSON response with the AI's answer.
+To also remove the OpenSearch data volume:
 
----
+```bash
+docker compose -f uxopian-ai-stack.yml down -v
+```
 
-## What's Next?
+## Next steps
 
-You've just completed your first AI exchange with uxopian-ai. Here's where to go from here:
-
-- **Understand the system**: Read [Core Concepts](../understanding/concepts.md) to learn about Prompts, Goals, and Conversations.
-- **Manage prompts**: Learn how to [manage prompts and goals](../how_to/managing_prompts_goals.md) with the API and the admin UI.
-- **Explore the Admin Panel**: See your usage stats in the [Dashboard](../admin/dashboard.md).
-- **Go deeper**: Discover the [Templating Engine](../understanding/templating.md) to build dynamic, context-aware prompts.
-- **Understand security**: Learn how the [BFF Gateway](../understanding/security.md) handles authentication in production and why this starter kit can skip it.
+- [Embed the chat interface in a web application](../how_to/embed_in_web_application.md)
+- [Configure LLM providers](../how_to/configure_llm_providers.md)
+- [Authentication and gateway](../understanding/authentication.md) — understand the security model before going to production
+- [Write prompts](../extending/writing_prompts.md)

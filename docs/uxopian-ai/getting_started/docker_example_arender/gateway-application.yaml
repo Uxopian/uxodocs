@@ -4,36 +4,25 @@ app:
   routes:
     - id: uxopian-ai
       uri: http://uxopian-ai-standalone-service:8080
-      path: /**
-      rewritePath: /?(?<segment>.*), /$\{segment}
+      prefix: /uxopian-ai/
+      path: /uxopian-ai/**
+      rewritePath: /uxopian-ai/?(?<segment>.*), /uxopian-ai/$\{segment}
       provider: DevProvider
       security:
-        - path: /.well-known/**
-          public: true
-        - path: /assets/**
-          public: true
-        - path: /v3/**
-          public: true
-        - path: /swagger-ui/**
-          public: true
-        - path: /actuator/health
-          public: true
-        - path: /admin/**
-          #roles: [ "ADMIN" ]
-          public: true
-        - path: /api/v1/admin/**
-          #roles: [ "ADMIN" ]
-          public: true
-        - path: /swagger-ui/index.html
+        - path: /**
           public: true
 
     - id: uxopian-ai-ws
-      uri: ws://uxopian-ai-standalone:8080
-      path: /ws/**
-      prefix: /ws/
+      uri: ws://uxopian-ai-standalone-service:8080
+      path: /uxopian-ai/ws/**
+      prefix: /uxopian-ai/ws/
       security:
         - path: /**
           public: true
 
 server:
   port: 8085
+
+logging:
+  level:
+    com.uxopian: DEBUG

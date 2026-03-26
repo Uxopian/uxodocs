@@ -6,10 +6,9 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- xml imported by ARender, please add any plugins you wish to import in this file -->
-	
-	<import resource="plume.xml"/> 
+
+	<import resource="plume.xml"/>
 	<import resource="html-plugin.xml"/>
 	<import resource="toppanel-arender-ai-configuration.xml"/>
-	
-</beans>
 
+</beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:Document versionLabel="" currentVersion="true" category="DOCUMENT" name="Gateway"
+              xmlns="http://flower.com/docs/domain/common" xmlns:ns2="http://flower.com/docs/domain/component"
+              xmlns:ns3="http://flower.com/docs/domain/document"
+>
+    <id>Gateway</id>
+    <ns2:data>
+        <owner>system</owner>
+        <creationDate>2017-10-03 21:26:40.152 +0000</creationDate>
+        <lastUpdateDate>2025-06-05 09:19:59.283 +0000</lastUpdateDate>
+        <ACL>acl-admin</ACL>
+        <ns2:classId>Route</ns2:classId>
+        <ns2:status>NEW</ns2:status>
+        <ns2:version>0</ns2:version>
+    </ns2:data>
+    <ns2:Tags>
+        <ns2:tags name="Path" readOnly="false">
+            <ns2:value>/gateway/**</ns2:value>
+        </ns2:tags>
+        <ns2:tags name="URL" readOnly="false">
+            <ns2:value>http://gateway-service:8085</ns2:value>
+        </ns2:tags>
+    </ns2:Tags>
+    <ns2:versionSeriesId>Gateway</ns2:versionSeriesId>
+</ns3:Document>

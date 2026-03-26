@@ -87,27 +87,27 @@
     "current": [
       {
         "label": "Getting Started",
-        "href": "/docs/uxopian-ai/getting_started/quickstart"
+        "href": "/docs/uxopian-ai/getting_started/overview"
       },
       {
-        "label": "Understanding Uxopian-ai",
+        "label": "Understanding Uxopian AI",
         "href": "/docs/uxopian-ai/understanding/architecture"
       },
       {
-        "label": "How-To Guides",
-        "href": "/docs/uxopian-ai/how_to/managing_prompts_goals"
+        "label": "How To Guides",
+        "href": "/docs/uxopian-ai/how_to/embed_in_web_application"
       },
       {
-        "label": "Extending Uxopian-ai",
-        "href": "/docs/uxopian-ai/extending/custom_helpers"
+        "label": "Extending Uxopian AI",
+        "href": "/docs/uxopian-ai/extending/custom_tools"
       },
       {
         "label": "Reference",
-        "href": "/docs/uxopian-ai/reference/config_files"
+        "href": "/docs/uxopian-ai/reference/configuration"
       },
       {
         "label": "Admin Panel",
-        "href": "/docs/uxopian-ai/admin/dashboard"
+        "href": "/docs/uxopian-ai/admin/admin_panel_overview"
       }
     ]
   }

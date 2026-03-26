@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:Document versionLabel="" currentVersion="true" category="DOCUMENT" name="refreshToken"
+    xmlns="http://flower.com/docs/domain/common" xmlns:ns2="http://flower.com/docs/domain/component"
+    xmlns:ns4="http://flower.com/docs/domain/file"
+    xmlns:ns3="http://flower.com/docs/domain/document"
+    xmlns:ns6="http://flower.com/docs/domain/folder"
+    xmlns:ns20="http://flower.com/docs/domain/virtualfolderclass"
+    xmlns:ns5="http://flower.com/docs/domain/acl"
+    xmlns:ns8="http://flower.com/docs/domain/taskclass"
+    xmlns:ns7="http://flower.com/docs/domain/task"
+    xmlns:ns13="http://flower.com/docs/domain/delegation"
+    xmlns:ns24="http://flower.com/docs/domain/report" xmlns:ns9="http://flower.com/docs/domain/i18n"
+    xmlns:ns12="http://flower.com/docs/domain/search"
+    xmlns:ns23="http://flower.com/docs/domain/documentclass"
+    xmlns:ns11="http://flower.com/docs/domain/reservation"
+    xmlns:ns22="http://flower.com/docs/domain/folderclass"
+    xmlns:ns10="http://flower.com/docs/domain/virtualFolder"
+    xmlns:ns21="http://flower.com/docs/domain/security"
+    xmlns:ns17="http://flower.com/docs/domain/notification"
+    xmlns:ns16="http://flower.com/docs/domain/workflow"
+    xmlns:ns15="http://flower.com/docs/domain/fact" xmlns:ns14="http://flower.com/docs/domain/scope"
+    xmlns:ns19="http://flower.com/docs/domain/componentclass"
+    xmlns:ns18="http://flower.com/docs/domain/tagclass">
+    <id>refreshToken</id>
+    <ns2:data>
+        <owner>system</owner>
+        <creationDate>2017-06-09 15:01:50.480 +0200</creationDate>
+        <lastUpdateDate>2025-05-16 14:34:28.866 +0200</lastUpdateDate>
+        <ACL>acl-readonly</ACL>
+        <ns2:classId>Script</ns2:classId>
+        <ns2:status>NEW</ns2:status>
+        <ns2:version>0</ns2:version>
+    </ns2:data>
+    <ns2:Tags>
+        <ns2:tags name="RegistrationOrder" readOnly="false">
+            <ns2:value>0</ns2:value>
+        </ns2:tags>
+    </ns2:Tags>
+    <ns2:versionSeriesId>refreshToken</ns2:versionSeriesId>
+    <ns3:files size="0">
+        <id>refreshToken</id>
+        <ns4:Name>refreshToken</ns4:Name>
+    </ns3:files>
+</ns3:Document>

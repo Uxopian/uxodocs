@@ -3,7 +3,7 @@ app:
     provider-header: X-Provider-ID
   routes:
     - id: uxopian-ai
-      uri: http://uxopian-ai-standalone-service:8080
+      uri: http://uxopian-ai:8080
       path: /**
       rewritePath: /?(?<segment>.*), /$\{segment}
       provider: DevProvider
@@ -28,7 +28,7 @@ app:
           public: true
 
     - id: uxopian-ai-ws
-      uri: ws://uxopian-ai-standalone:8080
+      uri: ws://uxopian-ai:8080
       path: /ws/**
       prefix: /ws/
       security:

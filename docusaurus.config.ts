@@ -114,6 +114,7 @@ const config: Config = {
                 lastVersion: "current",
                 versions: { current: { label: "v2026.0.0" } },
                 showLastUpdateTime: true,
+                exclude: ["**/_partials/**"],
             },
         ],
         [
@@ -275,6 +276,7 @@ const config: Config = {
         prism: {
             theme: prismThemes.github,
             darkTheme: prismThemes.dracula,
+            additionalLanguages: ["java"],
         },
     } satisfies Preset.ThemeConfig,
 

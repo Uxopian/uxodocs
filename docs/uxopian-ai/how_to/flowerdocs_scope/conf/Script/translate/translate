@@ -1,0 +1,19 @@
+registerHeaderAction({
+  icon: "fa fa-file-alt",
+  label: {
+    name: "translate",
+    FR: "Traduire",
+    EN: "Translate",
+  },
+  onExecute: () => {
+    openChatWindow({
+      inputs: [
+        getComponentContext(),
+        InputBuilder.promptAsUser("translate", {
+          documentId: arenderJSAPI.getCurrentDocumentId(),
+          language: getLocale(),
+        }),
+      ],
+    });
+  },
+});

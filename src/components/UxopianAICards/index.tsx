@@ -1,285 +1,207 @@
 import React from "react";
 import Link from "@docusaurus/Link";
-import styles from "./styles.module.css";
+import styles from "../FlowerDocsCards/styles.module.css";
 import UXopianFeed from "../FlowerDocsCards/UXopianFeed";
 
+const TopCardsList = [
+    {
+        title: "Getting Started",
+        icon: "🚀",
+        description: "Deploy the full stack in minutes with Docker Compose",
+        link: "/docs/uxopian-ai/getting_started/overview",
+        color: "#e17055",
+    },
+    {
+        title: "Understanding Uxopian AI",
+        icon: "🧠",
+        description: "Architecture, components, authentication, and key concepts",
+        link: "/docs/uxopian-ai/understanding/architecture",
+        color: "#6c5ce7",
+    },
+    {
+        title: "Admin Panel",
+        icon: "📊",
+        description: "Monitor usage, manage prompts and LLM providers",
+        link: "/docs/uxopian-ai/admin/admin_panel_overview",
+        color: "#00b894",
+    },
+];
+
+const SectionsList = [
+    {
+        title: "How To Guides",
+        description: "Step-by-step guides for common tasks",
+        items: [
+            {
+                icon: "🌐",
+                title: "Embed in a web application",
+                description: "Add the chat panel to any web page",
+                link: "/docs/uxopian-ai/how_to/embed_in_web_application",
+            },
+            {
+                icon: "🤖",
+                title: "Integrate with ARender",
+                description: "AI menu in the ARender document viewer",
+                link: "/docs/uxopian-ai/how_to/integrate_with_arender",
+            },
+            {
+                icon: "🌸",
+                title: "Integrate with FlowerDocs",
+                description: "Chat panel via FlowerDocs scope files",
+                link: "/docs/uxopian-ai/how_to/integrate_with_flowerdocs",
+            },
+            {
+                icon: "⚙️",
+                title: "Configure LLM providers",
+                description: "OpenAI, Anthropic, Azure, Bedrock and more",
+                link: "/docs/uxopian-ai/how_to/configure_llm_providers",
+            },
+        ],
+        color: "#0984e3",
+    },
+    {
+        title: "Extending Uxopian AI",
+        description: "Customize and extend the platform",
+        items: [
+            {
+                icon: "✍️",
+                title: "Write prompts",
+                description: "Author Thymeleaf prompt templates",
+                link: "/docs/uxopian-ai/extending/writing_prompts",
+            },
+            {
+                icon: "🔧",
+                title: "Custom tools",
+                description: "Give the LLM new capabilities via plugins",
+                link: "/docs/uxopian-ai/extending/custom_tools",
+            },
+            {
+                icon: "🧩",
+                title: "Custom service helpers",
+                description: "Inject your own data into prompt templates",
+                link: "/docs/uxopian-ai/extending/custom_service_helpers",
+            },
+        ],
+        color: "#e17055",
+    },
+];
+
+const IntegrationsList = [
+    {
+        title: "ARender",
+        icon: "📄",
+        description: "AI menu in the ARender document viewer top panel",
+        link: "/docs/uxopian-ai/how_to/integrate_with_arender",
+    },
+    {
+        title: "FlowerDocs",
+        icon: "🌸",
+        description: "Chat panel embedded via FlowerDocs scope files",
+        link: "/docs/uxopian-ai/how_to/integrate_with_flowerdocs",
+    },
+    {
+        title: "Web application",
+        icon: "🌐",
+        description: "Embed the chat panel in any web application",
+        link: "/docs/uxopian-ai/how_to/embed_in_web_application",
+    },
+];
+
+function TopCard({ title, icon, description, link, color }) {
+    return (
+        <div className={styles.card}>
+            <div className={styles.cardHeader}>
+                <div className={styles.icon} style={{ color }}>
+                    {icon}
+                </div>
+                <h3 className={styles.cardTitle}>{title}</h3>
+                <div className={styles.underline} style={{ backgroundColor: color }}></div>
+            </div>
+            <p className={styles.cardDescription}>{description}</p>
+            <Link className={styles.cardLink} to={link} style={{ color }}>
+                Discover →
+            </Link>
+        </div>
+    );
+}
+
+function SectionCard({ title, description, items, color }) {
+    return (
+        <div className={styles.guidesCard}>
+            <div className={styles.cardHeader}>
+                <h3 className={styles.cardTitle}>{title}</h3>
+                <div className={styles.underline} style={{ backgroundColor: color }}></div>
+            </div>
+            <p className={styles.cardDescription}>{description}</p>
+            <div className={styles.itemsList}>
+                {items.map((item, idx) => (
+                    <Link key={idx} to={item.link} className={styles.guideItem}>
+                        <div className={styles.guideIcon} style={{ color }}>
+                            {item.icon}
+                        </div>
+                        <div className={styles.guideContent}>
+                            <h4 className={styles.guideTitle}>{item.title}</h4>
+                            <p className={styles.guideDescription}>{item.description}</p>
+                        </div>
+                    </Link>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function IntegrationCard({ title, icon, description, link }) {
+    return (
+        <Link to={link} className={styles.connectorCard}>
+            <div className={styles.connectorIcon} style={{ fontSize: "2rem" }}>
+                {icon}
+            </div>
+            <h4 className={styles.connectorTitle}>{title}</h4>
+            <p className={styles.connectorDescription}>{description}</p>
+        </Link>
+    );
+}
+
 export default function UxopianAICards() {
+    React.useEffect(() => {
+        if (typeof document !== "undefined") {
+            document.body.classList.add("uxo-product-homepage");
+            return () => {
+                document.body.classList.remove("uxo-product-homepage");
+            };
+        }
+    }, []);
+
     return (
         <section className={styles.documentationSection}>
             <div className="container">
                 <div className={styles.layoutWrapper}>
                     <div className={styles.leftColumn}>
-                        <h1 className={styles.mainTitle}>
-                            🚀 Welcome to <strong>uxopian-ai</strong>
-                        </h1>
+                        <div className={styles.cardsGrid}>
+                            {TopCardsList.map((props, idx) => (
+                                <TopCard key={idx} {...props} />
+                            ))}
+                        </div>
 
-                        <p className={styles.intro}>
-                            <strong>uxopian-ai</strong> is a complete, standalone framework designed
-                            to accelerate and simplify the integration of powerful AI features into
-                            any enterprise application.
-                        </p>
+                        <div className={styles.guidesGrid}>
+                            {SectionsList.map((props, idx) => (
+                                <SectionCard key={idx} {...props} />
+                            ))}
+                        </div>
 
-                        <p className={styles.highlight}>
-                            Built on a solid foundation of <strong>Java 21 LTS</strong> and{" "}
-                            <strong>Spring 3.5</strong>, it goes far beyond a simple library by
-                            providing a full suite of tools — from backend services to frontend
-                            components — to create sophisticated, reliable, and scalable AI
-                            solutions.
-                        </p>
-
-                        <hr className={styles.divider} />
-
-                        <h2 className={styles.sectionTitle}>
-                            ✨ The uxopian-ai Advantage: <em>More Than Just a Library</em>
-                        </h2>
-
-                        <p className={styles.sectionContent}>
-                            While <strong>uxopian-ai</strong> uses the excellent{" "}
-                            <strong>Langchain4j</strong> library as its core for LLM interactions,
-                            it builds a complete enterprise-ready ecosystem around it. Here's the
-                            added value:
-                        </p>
-
-                        <ul className={styles.featureList}>
-                            <li>
-                                ✅ <strong>Standalone Service, Not Just Code</strong> — A
-                                pre-packaged, deployable service that saves you months of
-                                development and infrastructure setup.
-                            </li>
-                            <li>
-                                ✅ <strong>Ready-to-Use UI Components</strong> — Instantly integrate
-                                AI with web-components (IIFE compiled, scoped CSS), plus
-                                plug-and-play integration scripts.
-                            </li>
-                            <li>
-                                ✅ <strong>Advanced Orchestration Engine</strong> — The unique{" "}
-                                <strong>Goal</strong> system enables dynamic prompt selection based
-                                on context — no need to build this from scratch.
-                            </li>
-                            <li>
-                                ✅ <strong>Complete Conversation Management</strong> — Persistent
-                                conversations with cost tracking, response regeneration, and user
-                                feedback support.
-                            </li>
-                            <li>
-                                ✅ <strong>Data-Driven Insights</strong> — A comprehensive admin
-                                panel to monitor ROI, token usage, and adoption trends.
-                            </li>
-                        </ul>
-
-                        <hr className={styles.divider} />
-
-                        <h2 className={styles.sectionTitle}>🔍 Key Features at a Glance</h2>
-
-                        <h3 className={styles.subSectionTitle}>
-                            ⚙️ Effortless & Scalable Integration
-                        </h3>
-                        <ul className={styles.featureList}>
-                            <li>
-                                <strong>Standalone Service</strong>: Deployable via Docker or as a
-                                Java 21 application.
-                            </li>
-                            <li>
-                                <strong>Multi-Tenant Architecture</strong>: Designed for internal
-                                deployments with clear logical separation and distinct tenant
-                                management.
-                            </li>
-                            <li>
-                                <strong>Web-Component UI</strong>: Lightweight, embeddable
-                                components for any web app.
-                            </li>
-                            <li>
-                                <strong>Rich REST API</strong>: Fully documented (Swagger) for
-                                seamless integration.
-                            </li>
-                        </ul>
-
-                        <h3 className={styles.subSectionTitle}>
-                            📊 Powerful Admin & Analytics
-                        </h3>
-                        <ul className={styles.featureList}>
-                            <li>
-                                <strong>Granular Token Monitoring</strong>: Visualize input and
-                                output token consumption globally, by specific users, or per
-                                conversation.
-                            </li>
-                            <li>
-                                <strong>ROI & Efficiency Tracking</strong>: View the number of
-                                times a prompt is used and estimate the total time saved.
-                            </li>
-                            <li>
-                                <strong>Usage Trends</strong>: Analyze activity over time, monitor
-                                LLM model distribution, and track advanced feature adoption.
-                            </li>
-                        </ul>
-
-                        <h3 className={styles.subSectionTitle}>🧠 Intelligent Orchestration</h3>
-                        <ul className={styles.featureList}>
-                            <li>
-                                <strong>Goal System</strong>: Define context-aware workflows using
-                                filters and priorities.
-                            </li>
-                            <li>
-                                <strong>Templating Engine</strong>: Dynamic data injection, custom
-                                Java services, and conditional logic with Thymeleaf.
-                            </li>
-                            <li>
-                                <strong>Template Helpers</strong>: Add your own Java functions to
-                                enrich prompts.
-                            </li>
-                        </ul>
-
-                        <h3 className={styles.subSectionTitle}>🤖 Robust LLM Interaction</h3>
-                        <ul className={styles.featureList}>
-                            <li>
-                                <strong>Broad Support</strong>: Compatible with many LLM providers
-                                out-of-the-box.
-                            </li>
-                            <li>
-                                <strong>Custom Connectors</strong>: Add private or fine-tuned models
-                                easily.
-                            </li>
-                            <li>
-                                <strong>Advanced Features</strong>: Native support for{" "}
-                                <strong>function calling</strong>, multi-modal requests (text +
-                                image), and streaming/non-streaming responses.
-                            </li>
-                            <li>
-                                <strong>MCP Server Client</strong>: Acts as a client for Model
-                                Context Protocol (MCP) servers.
-                            </li>
-                        </ul>
-
-                        <h3 className={styles.subSectionTitle}>
-                            💬 Complete Conversation Management
-                        </h3>
-                        <ul className={styles.featureList}>
-                            <li>
-                                <strong>Persistent History</strong>: Conversations and messages are
-                                stored with full context.
-                            </li>
-                            <li>
-                                <strong>Feedback Loop</strong>: Gather specific user feedback
-                                (Good/Bad/Neutral) on responses to improve prompt quality.
-                            </li>
-                            <li>
-                                <strong>Rich UX</strong>: Regenerate, copy, and manage conversation
-                                content easily.
-                            </li>
-                        </ul>
-
-                        <hr className={styles.divider} />
-
-                        <h2 className={styles.sectionTitle}>📖 Reading Paths</h2>
-                        <p className={styles.sectionContent}>
-                            Choose the path that matches your role:
-                        </p>
-
-                        <h3 className={styles.subSectionTitle}>New to uxopian-ai?</h3>
-                        <ol className={styles.featureList}>
-                            <li>
-                                <Link to="/docs/uxopian-ai/getting_started/quickstart">
-                                    <strong>Quick Start</strong>
-                                </Link>{" "}
-                                — Your first AI exchange in 5 minutes.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/understanding/concepts">
-                                    <strong>Core Concepts</strong>
-                                </Link>{" "}
-                                — Understand Prompts, Goals, and Conversations.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/understanding/architecture">
-                                    <strong>Architecture Overview</strong>
-                                </Link>{" "}
-                                — See how the components fit together.
-                            </li>
-                        </ol>
-
-                        <h3 className={styles.subSectionTitle}>Operator / DevOps?</h3>
-                        <ol className={styles.featureList}>
-                            <li>
-                                <Link to="/docs/uxopian-ai/getting_started/installation_guide">
-                                    <strong>Deploy with Docker</strong>
-                                </Link>{" "}
-                                — Set up the full stack.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/reference/config_files">
-                                    <strong>Configuration Files</strong>
-                                </Link>{" "}
-                                — YAML reference for all config files.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/reference/env_variables">
-                                    <strong>Environment Variables</strong>
-                                </Link>{" "}
-                                — Quick reference for Docker deployments.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/how_to/backup_recovery">
-                                    <strong>Backup and Recovery</strong>
-                                </Link>{" "}
-                                — Protect your data.
-                            </li>
-                        </ol>
-
-                        <h3 className={styles.subSectionTitle}>Integrator?</h3>
-                        <ol className={styles.featureList}>
-                            <li>
-                                <Link to="/docs/uxopian-ai/understanding/architecture">
-                                    <strong>Architecture Overview</strong>
-                                </Link>{" "}
-                                — Understand the BFF pattern.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/how_to/integrate_web_page">
-                                    <strong>Embedding in a Web Page</strong>
-                                </Link>{" "}
-                                — Add AI to any web app.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/how_to/integrate_arender">
-                                    <strong>Integrating with ARender</strong>
-                                </Link>{" "}
-                                — Add AI buttons in ARender.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/how_to/integrate_flowerdocs">
-                                    <strong>Integrating with FlowerDocs</strong>
-                                </Link>{" "}
-                                — Add AI features in FlowerDocs.
-                            </li>
-                        </ol>
-
-                        <h3 className={styles.subSectionTitle}>Java Developer?</h3>
-                        <ol className={styles.featureList}>
-                            <li>
-                                <Link to="/docs/uxopian-ai/understanding/concepts">
-                                    <strong>Core Concepts</strong>
-                                </Link>{" "}
-                                — Understand the domain model.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/understanding/templating">
-                                    <strong>The Templating Engine</strong>
-                                </Link>{" "}
-                                — Master dynamic prompt authoring.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/extending/custom_helpers">
-                                    <strong>Creating Custom Helpers</strong>
-                                </Link>{" "}
-                                — Inject your own data into prompts.
-                            </li>
-                            <li>
-                                <Link to="/docs/uxopian-ai/extending/custom_tools">
-                                    <strong>Creating Custom Tools</strong>
-                                </Link>{" "}
-                                — Give the LLM the ability to take actions.
-                            </li>
-                        </ol>
+                        <div className={styles.connectorsSection}>
+                            <div className={styles.connectorsSectionHeader}>
+                                <h2 className={styles.connectorsTitle}>Integrations</h2>
+                                <p className={styles.connectorsSubtitle}>
+                                    Connect Uxopian AI to your applications
+                                </p>
+                            </div>
+                            <div className={styles.connectorsGrid}>
+                                {IntegrationsList.map((props, idx) => (
+                                    <IntegrationCard key={idx} {...props} />
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                     <aside className={styles.rightColumn} aria-label="UXopian blog preview">
