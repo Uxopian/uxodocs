@@ -36,5 +36,6 @@ See [Annotations](./annotations.md) for the annotation model.
 ## Related pages
 
 - [Connector providers](../guides/integration/connector-providers.md): provider deployment
+- [Provider API reference](../reference/rest-api/provider-api.md): REST endpoint contract for providers
 - [Documents and document IDs](./documents-and-ids.md): the DocumentId / DocumentAccessor model
 - [Annotations](./annotations.md): the annotation model and storage

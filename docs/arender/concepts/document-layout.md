@@ -63,4 +63,4 @@ The broker caches layouts per document ID. Cached entries are evicted when the d
 
 - [Architecture overview](../overview/architecture.md)
 - [Rendition pipeline](./rendition-pipeline.md)
-- [Broker REST API](../reference/rest-api/broker-api.md)
+- [Broker API](../reference/rest-api/broker-api.md)

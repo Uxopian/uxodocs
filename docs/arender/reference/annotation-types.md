@@ -12,7 +12,7 @@ content_hash: 65295f0bd62aa9652481daf2f1d30e7e3202ae6604c7192b4ee0e16c5fa8b056
 
 ARender stores and exchanges annotations in XFDF format, following the Adobe XFDF specification. Each annotation type maps to a Java class in the `annotation-api` module and to a specific XFDF element name.
 
-For the REST endpoints used to read and write annotations, see the [Broker REST API](./rest-api/broker-api.md#annotation-operations).
+For the REST endpoints used to read and write annotations, see the [Broker API](./rest-api/broker-api.md#annotation-operations).
 
 ## Common properties
 
@@ -470,5 +470,5 @@ Rules in `annotationCreationRuleCatalog` let users trigger automated annotation 
 
 ## Related pages
 
-- [Broker REST API: annotation operations](./rest-api/broker-api.md#annotation-operations)
+- [Broker API: annotation operations](./rest-api/broker-api.md#annotation-operations)
 - [Rendition properties](./rendition-properties.md#annotations)

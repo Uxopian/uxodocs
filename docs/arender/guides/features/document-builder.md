@@ -96,4 +96,4 @@ For the full list of document builder properties, see [Viewer configuration — 
 - [Annotations](../../concepts/annotations.md)
 - [Documents and IDs](../../concepts/documents-and-ids.md)
 - [JavaScript API reference](../../reference/javascript-api.md)
-- [Broker REST API](../../reference/rest-api/broker-api.md)
+- [Broker API](../../reference/rest-api/broker-api.md)

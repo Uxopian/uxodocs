@@ -40,7 +40,7 @@ The viewer is a standalone Spring Boot application (port 8080) that serves two r
 - **Frontend (browser)** — a JavaScript UI compiled from Java sources with GWT (Google Web Toolkit). The compiled JS runs in the browser and handles all user interaction: page display, annotations, toolbar, search, navigation, etc.
 - **Viewer backend (server)** — a Spring Boot process that serves the compiled JS, manages HTTP sessions, handles authentication (OAuth2), routes requests to the rendition backend, and hosts document connectors as JARs on its classpath.
 
-The viewer backend communicates with the rendition service broker over REST. Document connectors (Alfresco, FileNet, CMIS, etc.) are Java JARs loaded in the viewer backend's classpath — they implement `DocumentAccessor` to fetch document content from external repositories.
+The viewer backend communicates with the rendition service broker over REST. Document connectors (Alfresco, FileNet, etc.) are Java JARs loaded in the viewer backend's classpath — they implement `DocumentAccessor` to fetch document content from external repositories.
 
 ## Ports
 
@@ -79,7 +79,7 @@ The frontend communicates with the viewer backend over HTTP (GWT RPC) and WebSoc
 The Spring Boot process serves the compiled JavaScript assets and handles all server-side operations:
 
 - **Document loading** — Routes incoming requests to identify the document source and load its content
-- **Connector hosting** — Document connectors (Alfresco, FileNet, CMIS, etc.) are Java JARs loaded on the classpath. Each connector is a Spring auto-configured bean discovered at startup
+- **Connector hosting** — Document connectors (Alfresco, FileNet, etc.) are Java JARs loaded on the classpath. Each connector is a Spring auto-configured bean discovered at startup
 - **Annotation storage** — Reads and writes annotations to the configured storage backend (XFDF local, JDBC, REST)
 - **Image serving** — An async servlet fetches page images from the rendition backend and streams them to the browser
 - **Session management** — HTTP sessions track per-user document state

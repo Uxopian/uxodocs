@@ -20,6 +20,22 @@ For general connector concepts, see [Connectors](../../concepts/connectors.md).
 ## Architecture
 
 ```mermaid
+graph TD
+    ECM_UI[ECM User Interface] -->|Opens ARender URL| Browser
+    Browser -->|Loads viewer| Frontend[React UI]
+    Frontend -->|"POST /connector/documents"| Broker[Service Broker]
+    Broker -->|"GET /documents?params"| Provider[Provider Microservice]
+    Provider -->|Fetches content| ECM[ECM Backend]
+    Broker -->|Stores document| DFS[Shared Storage]
+```
+
+:::info
+Only the React UI (Modern Viewer) uses REST connector providers. The Classic GWT viewer uses JAR-based connectors loaded on its classpath.
+:::
+
+### Document opening flow
+
+```mermaid
 sequenceDiagram
     participant Host as Host application
     participant React as React UI (Web Component)
@@ -137,6 +153,16 @@ REGISTRY_PROVIDER_FILENET_URL=http://filenet-provider:8787
 
 The `X-Provider-ID` HTTP header tells the broker which provider should handle the request. The React UI sets this header based on the document source. The broker uses it to look up the provider URL in its registry and route the request.
 
+### Provider selection
+
+When the broker receives a `POST /connector/documents` request, it resolves the provider in this order:
+
+1. **`X-Provider-ID` header** — If present, the broker looks up the provider by name in its registry.
+2. **`connector.defaultRegistry`** — If the header is absent, the broker falls back to the default provider configured in `connector.defaultRegistry`.
+3. **Error** — If neither is available, the request fails.
+
+For the full list of connector registry properties, see [Rendition properties — Connector registry](../../reference/rendition-properties.md#connector-registry).
+
 ## FileNet provider configuration
 
 The FileNet provider connects to an IBM FileNet Content Engine. Configure it with the following environment variables:
@@ -156,6 +182,44 @@ Providers return one of two structures:
 - **`ProviderFile`** — A single document with a name and a map of parameters. The broker receives the binary content in the response body.
 - **`ProviderFolder`** — A folder containing nested `ProviderFile` and `ProviderFolder` entries. The broker converts this into a `DocumentContainer` hierarchy, fetching each file individually.
 
+For the full data model specification, see [Provider API — Data model](../../reference/rest-api/provider-api.md#data-model).
+
+### Composite documents
+
+When a provider returns a `ProviderFolder` (JSON response with `Content-Type: application/json`), the broker processes it recursively:
+
+1. The broker parses the folder structure.
+2. For each `ProviderFile` in the folder, the broker calls `GET /documents` again with that file's `parameters`.
+3. Each file is stored independently on the shared volume.
+4. The broker creates a `DocumentContainer` hierarchy so the viewer displays all files as a single multi-document.
+
+```json
+{
+  "type": "folder",
+  "name": "Case Documents",
+  "parameters": {},
+  "contents": [
+    {
+      "type": "file",
+      "name": "contract.pdf",
+      "parameters": { "id": "DOC001", "objectStoreName": "OS1" }
+    },
+    {
+      "type": "folder",
+      "name": "Attachments",
+      "parameters": {},
+      "contents": [
+        {
+          "type": "file",
+          "name": "annex.pdf",
+          "parameters": { "id": "DOC002", "objectStoreName": "OS1" }
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Annotations through providers
 
 Providers can also handle annotation storage. The broker proxies annotation CRUD operations to the provider:
@@ -170,9 +234,39 @@ Providers can also handle annotation storage. The broker proxies annotation CRUD
 
 If your provider does not implement annotation endpoints, annotations fall back to the broker's default storage (XFDF files or JDBC, depending on your backend configuration).
 
+For the full broker-side endpoint specification, see [Broker API — Connector operations](../../reference/rest-api/broker-api.md#connector-operations).
+
+### Annotation flow
+
+```mermaid
+sequenceDiagram
+    participant React as React UI
+    participant Broker as Service Broker
+    participant Provider as Provider Microservice
+
+    React->>Broker: GET /documents/{docId}/annotations/ids
+    Broker->>Provider: GET /annotations/ids?params
+    Provider-->>Broker: List of annotation IDs
+    Broker-->>React: List of annotation IDs
+
+    React->>Broker: GET /documents/{docId}/annotations/{id}
+    Broker->>Provider: GET /annotations/{id}?params
+    Provider-->>Broker: Annotation
+    Note over Broker: Transform annotation positions<br/>(composite documents)
+    Broker-->>React: Annotation
+
+    React->>Broker: POST /documents/{docId}/annotations
+    Note over Broker: Transform annotation positions
+    Broker->>Provider: POST /annotations?params
+    Provider-->>Broker: Created annotation
+    Broker-->>React: Annotation
+```
+
+For annotation operations, the broker retrieves the cached provider name and original URL parameters, then forwards the request to the provider. When the document has a composite layout, the broker applies annotation position transformations before returning or forwarding annotations.
+
 ## Building a custom provider
 
-A provider is a Spring Boot application that implements REST endpoints matching the provider API contract. See the `sample-provider` source code for a reference implementation.
+A provider is a Spring Boot application that implements REST endpoints matching the [Provider API](../../reference/rest-api/provider-api.md) contract. The `rest-provider-api` library provides shared Java types (`ProviderDocument`, `ProviderFile`, `ProviderFolder`).
 
 At minimum, implement:
 
@@ -180,6 +274,6 @@ At minimum, implement:
 GET /documents?<your-parameters>
 ```
 
-Return the document binary as the response body, with appropriate `Content-Type` and `Content-Disposition` headers.
+Return the document binary as the response body, with appropriate `Content-Type` and `Content-Disposition` headers. For annotation support, implement the annotation endpoints listed above.
 
-For annotation support, implement the annotation endpoints listed above.
+See the [Provider API reference](../../reference/rest-api/provider-api.md) for the full endpoint specification with request/response details and status codes.

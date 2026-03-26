@@ -11,54 +11,79 @@ content_hash: d86b75abd49397a0c9bf33a1b5290c0e3e9140c532013e87620e0c9c4367d90d
 
 # Servlet API Reference
 
-The ARender Web UI exposes a set of HTTP servlet endpoints under the `/arendergwt/` path. These endpoints provide programmatic access to document operations, annotation export, printing, monitoring, and session management.
+The ARender Web UI exposes a set of HTTP servlet endpoints for document operations, annotation export, printing, monitoring, and session management.
 
-All URLs in this reference use the base path `http://<arender_host>/arendergwt/`. Replace `<arender_host>` with your ARender HMI host and port.
+**Base URL:** `http://<arender_host>/arendergwt/`
+
+Replace `<arender_host>` with your ARender HMI host and port.
 
 ---
 
-## Document Operations
+## Document operations
 
-### Upload / Load a Document
+### Upload document by reference
 
-Upload a document by reference (GET) or by file content (POST).
+`GET` `/arendergwt/uploadServlet`
 
-**Servlet:** `uploadServlet`
+Load a document into ARender by passing its connector-level document ID. The server fetches the document and makes it available for viewing.
 
-#### Upload by Reference
+#### Parameters
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/uploadServlet` |
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID to upload |
 
-**Query Parameters:**
+#### Response
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID to upload |
+Returns the new UUID created from the document ID. The document is downloaded to the server and made available in ARender.
 
-**Response:** Returns the new UUID created from the document ID. The document is downloaded to the server and made available in ARender.
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Document uploaded successfully |
+| 400 | Missing or invalid `uuid` parameter |
+| 500 | Internal server error during document retrieval |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/uploadServlet?uuid=docUUID'
 ```
 
-#### Upload by File Content
+#### Example response
 
-| | |
-|---|---|
-| **Method** | `POST` |
-| **Path** | `/arendergwt/uploadServlet` |
-| **Content-Type** | `multipart/form-data` |
+```
+b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0
+```
 
-**Form Parameters:**
+---
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `file` | Yes | The file to upload |
+### Upload document by file
 
-**Response:** Returns the new UUID assigned to the uploaded document.
+`POST` `/arendergwt/uploadServlet`
+
+Upload a file directly to ARender via multipart form data. The server stores the file and returns a UUID for subsequent operations.
+
+#### Parameters
+
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `file` | body | file | Yes | The file to upload (`multipart/form-data`) |
+
+#### Response
+
+Returns the new UUID assigned to the uploaded document.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | File uploaded successfully |
+| 400 | Missing file in request body |
+| 500 | Internal server error during file processing |
+
+#### Example request
 
 ```bash
 curl -X POST -H "Content-Type: multipart/form-data" \
@@ -66,133 +91,190 @@ curl -X POST -H "Content-Type: multipart/form-data" \
   "http://<arender_host>/arendergwt/uploadServlet"
 ```
 
+#### Example response
+
+```
+b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0
+```
+
 ---
 
-### Download a Document
+### Download document
 
-Download a document in its original format, as PDF, or as a ZIP archive.
+`GET` `/arendergwt/downloadServlet`
 
-**Servlet:** `downloadServlet`
+Download a document in its original format, as a rendered PDF, or as a ZIP archive.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/downloadServlet` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID |
+| `sourceId` | query | string | No | Initial document ID (useful if the document ID has been transformed) |
+| `title` | query | string | No | Title of the downloaded file |
+| `type` | query | string | No | Download type: `INITIAL` (original format, no annotations), `RENDERED` (PDF, MP4, or TIFF), `COMPRESSED` (ZIP) |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID |
-| `sourceId` | No | Initial document ID (useful if the document ID has been transformed) |
-| `title` | No | Title of the downloaded file |
-| `type` | No | Download type: `INITIAL` (original format, no annotations), `RENDERED` (PDF, MP4, or TIFF), `COMPRESSED` (ZIP) |
+#### Response
 
-**Response:** The document file in the requested format, renamed according to the `title` parameter.
+The document file in the requested format, with the filename set according to the `title` parameter.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Document returned successfully |
+| 400 | Missing or invalid parameters |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/downloadServlet?uuid=docUUID&title=DocumentTitle&type=INITIAL'
 ```
 
+#### Example response
+
+Binary file content in the requested format.
+
 ---
 
-### Download Document as Base64
+### Download document as Base64
 
-Download a document encoded in base64.
+`GET` `/arendergwt/downloadBase64EncodedDocument`
 
-**Servlet:** `downloadBase64EncodedDocument`
+Download a document encoded in base64. The content must be decoded before use.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/downloadBase64EncodedDocument` |
+#### Parameters
 
-**Response:** The document content encoded in base64. The content must be decoded before use.
+None.
+
+#### Response
+
+The document content encoded as a base64 string.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Base64-encoded content returned |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/downloadBase64EncodedDocument'
 ```
 
+#### Example response
+
+```
+JVBERi0xLjQKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwov...
+```
+
 ---
 
-### Download Document with Annotations
+### Download document with annotations
 
-Download a PDF document with annotations burned in or as editable FDF annotations.
+`GET` `/arendergwt/downloadDocumentWithAnnotations`
 
-**Servlet:** `downloadDocumentWithAnnotations`
+Download a PDF document with annotations either burned into the page content or embedded as editable FDF annotation objects.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/downloadDocumentWithAnnotations` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `operationName` | query | string | Yes | `renderAnnotations` (annotations flattened onto the PDF) or `renderFDFAnnotations` (annotations as editable FDF objects) |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `operationName` | Yes | `renderAnnotations` (annotations flattened onto the PDF) or `renderFDFAnnotations` (annotations as editable FDF objects) |
+#### Response
 
-**Response:** A PDF file with annotations applied.
+A PDF file with annotations applied according to the specified operation.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Annotated PDF returned |
+| 400 | Missing or invalid `operationName` |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/downloadDocumentWithAnnotations?operationName=renderAnnotations'
 ```
 
+#### Example response
+
+Binary PDF content with annotations.
+
 ---
 
-### Download Comparison Results
+### Download comparison results
 
-Download the result of comparing two documents, with differences highlighted.
+`GET` `/arendergwt/downloadServlet/mergedWithCompareResult`
 
-**Servlet:** `downloadDocumentWithCompareResultsServlet`
+Download the result of comparing two documents. Common text is highlighted in green and differing text is highlighted in red.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/downloadServlet/mergedWithCompareResult` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `left` | query | string | Yes | UUID of the first document |
+| `right` | query | string | Yes | UUID of the second document |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `left` | Yes | UUID of the first document |
-| `right` | Yes | UUID of the second document |
+#### Response
 
-**Response:** A document where common text is highlighted in green and differing text is highlighted in red.
+A document where common text is highlighted in green and differing text is highlighted in red.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Comparison document returned |
+| 400 | Missing `left` or `right` parameter |
+| 404 | One or both documents not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/downloadServlet/mergedWithCompareResult?left=doc1UUID&right=doc2UUID'
 ```
 
+#### Example response
+
+Binary document content with highlighted differences.
+
 ---
 
-### Merge Documents
+### Merge documents
 
-Merge multiple documents into a single PDF.
+`POST` `/arendergwt/mergeDocumentsServlet`
 
-**Servlet:** `mergeDocumentsServlet`
+Merge multiple documents into a single PDF. Also accepts `GET` requests with query parameters.
 
-| | |
-|---|---|
-| **Method** | `POST` or `GET` |
-| **Path** | `/arendergwt/mergeDocumentsServlet` |
+#### Parameters
 
-**Query/Form Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `url` | query/body | string | Yes (repeatable) | URL or connector reference for each document to merge. Repeat this parameter for each document. |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `url` | Yes (repeatable) | URL or connector reference for each document to merge |
+#### Response
 
-**Response:** JSON containing the UUID and page count of the merged document.
+JSON containing the UUID and page count of the merged document. The merged document can then be viewed at `http://<arender_host>/?uuid=<merged_uuid>`.
 
-```json
-{
-  "uuid": "b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0",
-  "nbPages": "32"
-}
-```
+#### Errors
 
-**Examples:**
+| Status | Description |
+|--------|-------------|
+| 200 | Documents merged successfully |
+| 400 | Missing or invalid `url` parameters |
+| 500 | Internal server error during merge |
+
+#### Example request
 
 ```bash
 # POST
@@ -203,35 +285,61 @@ curl --data "url=../../samples/arender.pdf&url=../../samples/fw4.pdf" \
 curl -X GET 'http://<arender_host>/arendergwt/mergeDocumentsServlet?url=../../samples/arender.pdf&url=../../samples/fw4.pdf'
 ```
 
-The merged document can then be viewed at:
+#### Example response
 
-```
-http://<arender_host>/?uuid=<merged_uuid>
+```json
+{
+  "uuid": "b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0",
+  "nbPages": "32"
+}
 ```
 
 ---
 
-### Composite Documents (Folder Structure)
+### Create composite document
 
-Create or retrieve composite (folder) documents from a JSON structure describing nested document references. This is useful for building virtual folder trees that exceed URL length limits.
+`POST` `/arendergwt/compositeAccessorServlet`
 
-**Servlet:** `compositeAccessorServlet`
+Create a composite (folder) document from a JSON structure describing nested document references. This is useful for building virtual folder trees that exceed URL length limits.
 
-#### Create a Composite Document
+:::note
+This endpoint requires sticky sessions if a load balancer is in front of the ARender HMI servers.
+:::
 
-| | |
-|---|---|
-| **Method** | `POST` |
-| **Path** | `/arendergwt/compositeAccessorServlet` |
-| **Content-Type** | `application/json` |
+#### Parameters
 
-**Request Body:** A JSON object describing the folder structure:
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| Request body | body | JSON | Yes | A JSON object describing the folder structure (see below) |
+
+The request body uses `Content-Type: application/json` and contains:
 
 - `title` (optional) -- folder or document title
 - `queryUrl` (optional) -- a valid `loadingQuery?<params>` string (makes this node a document)
 - `references` (optional) -- array of child nodes (makes this node a folder)
 
 `queryUrl` and `references` are mutually exclusive; `queryUrl` takes precedence.
+
+#### Response
+
+The ARender document ID of the created composite document.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Composite document created |
+| 400 | Invalid JSON structure |
+| 500 | Internal server error |
+
+#### Example request
+
+```bash
+curl -X POST http://<arender_host>/arendergwt/compositeAccessorServlet \
+  -d @composite.json --header "Content-Type: application/json"
+```
+
+With `composite.json`:
 
 ```json
 {
@@ -249,55 +357,81 @@ Create or retrieve composite (folder) documents from a JSON structure describing
 }
 ```
 
-**Response:** The ARender document ID of the created composite document.
+#### Example response
 
-```bash
-curl -X POST http://<arender_host>/arendergwt/compositeAccessorServlet \
-  -d @composite.json --header "Content-Type: application/json"
+```
+b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0
 ```
 
-:::note
-This endpoint requires sticky sessions if a load balancer is in front of the ARender HMI servers.
-:::
+---
 
-#### Retrieve a Composite Document
+### Retrieve composite document
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/compositeAccessorServlet` |
+`GET` `/arendergwt/compositeAccessorServlet`
 
-**Query Parameters:**
+Retrieve or initialize a composite document container. Returns a new document ID that can be used with the PUT endpoint to incrementally add documents.
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `containerTitleComposite` | No | Composite document title (defaults to `"Document container"`) |
+#### Parameters
 
-**Response:** A new document ID that can be used in subsequent requests.
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `containerTitleComposite` | query | string | No | Composite document title (defaults to `"Document container"`) |
+
+#### Response
+
+A new document ID that can be used in subsequent requests.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Composite container created |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/compositeAccessorServlet?containerTitleComposite=myTitle'
 ```
 
-#### Add a Document to a Composite (Incremental Build)
+#### Example response
 
-| | |
-|---|---|
-| **Method** | `PUT` |
-| **Path** | `/arendergwt/compositeAccessorServlet` |
+```
+b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0
+```
 
-Use PUT to incrementally add documents to a composite container created via GET, then finalize it.
+---
 
-**Query Parameters:**
+### Add document to composite
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `documentIdComposite` | Yes | The document ID of the composite container (returned by GET) |
-| `final` | No | If present, finalizes the container (loads it into the session and invalidates the cache entry). If absent, adds the parsed document URL to the container's children. |
-| `containerTitleComposite` | No | Title for the child document being added |
-| `mimeTypeComposite` | No | MIME type hint for the child document |
+`PUT` `/arendergwt/compositeAccessorServlet`
 
-**Response:** The composite document ID.
+Incrementally add documents to a composite container created via GET, then finalize it.
+
+#### Parameters
+
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `documentIdComposite` | query | string | Yes | The document ID of the composite container (returned by GET) |
+| `final` | query | string | No | If present, finalizes the container (loads it into the session and invalidates the cache entry). If absent, adds the parsed document URL to the container's children. |
+| `containerTitleComposite` | query | string | No | Title for the child document being added |
+| `mimeTypeComposite` | query | string | No | MIME type hint for the child document |
+| Request body | body | string | No | URL-encoded document URL to add |
+
+#### Response
+
+The composite document ID.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Document added or container finalized |
+| 400 | Missing `documentIdComposite` parameter |
+| 404 | Composite container not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 # Add a document to the container
@@ -308,26 +442,29 @@ curl -X PUT 'http://<arender_host>/arendergwt/compositeAccessorServlet?documentI
 curl -X PUT 'http://<arender_host>/arendergwt/compositeAccessorServlet?documentIdComposite=compositeUUID&final=done'
 ```
 
+#### Example response
+
+```
+b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0
+```
+
 ---
 
-### Prepare External Document Opening
+### Prepare external document opening
+
+`GET` `/arendergwt/openExternalDocument`
 
 Generate an encoded UUID from URL parameters, suitable for opening a document via a connector.
 
-**Servlet:** `openExternalDocument`
+#### Parameters
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/openExternalDocument` |
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `url` | query | string | Yes | The document URL |
 
-**Query Parameters:**
+#### Response
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `url` | Yes | The document URL |
-
-**Response:** An encoded UUID (base64 or encrypted, depending on configuration).
+An encoded UUID (base64 or encrypted, depending on configuration).
 
 The encoding mode is controlled by the property:
 
@@ -336,57 +473,101 @@ arender.documentid.generator.beanName=documentIdGenerator
 # Use encryptedDocumentIdGenerator for encrypted UUIDs
 ```
 
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Encoded UUID returned |
+| 400 | Missing `url` parameter |
+| 500 | Internal server error |
+
+#### Example request
+
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/openExternalDocument?url=docURL'
 ```
 
+#### Example response
+
+```
+b64_NWNjODk3MmQtMjJhOC00YzM3LWE4YjItNjZiMTkzOGFkMzU0
+```
+
 ---
 
-### Evict Document from Cache
+### Evict document from cache
 
-Remove a document from both memory cache and filesystem cache.
+`GET` `/arendergwt/evictDocument`
 
-**Servlet:** `evictDocument`
+Remove a document from both memory cache and filesystem cache. The document is no longer accessible on the server after eviction.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/evictDocument` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID to evict |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID to evict |
+#### Response
 
-**Response:** The document is removed from all caches and is no longer accessible on the server.
+The document is removed from all caches.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Document evicted successfully |
+| 400 | Missing `uuid` parameter |
+| 404 | Document not found in cache |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/evictDocument?uuid=doc1UUID'
 ```
 
+#### Example response
+
+```
+OK
+```
+
 ---
 
-## Document Structure and Content
+## Document structure
 
-### Document Layout
+### Get document layout
+
+`GET` `/arendergwt/documentLayout`
 
 Retrieve the structure of a document as JSON, including page dimensions, MIME type, and title.
 
-**Servlet:** `documentLayout`
+#### Parameters
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/documentLayout` |
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID |
 
-**Query Parameters:**
+#### Response
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID |
+JSON describing the document structure with page dimensions, MIME type, and document title.
 
-**Response:** JSON describing the document structure.
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Layout returned successfully |
+| 400 | Missing `uuid` parameter |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
+
+```bash
+curl -X GET 'http://<arender_host>/arendergwt/documentLayout?uuid=doc1UUID'
+```
+
+#### Example response
 
 ```json
 {
@@ -406,30 +587,40 @@ Retrieve the structure of a document as JSON, including page dimensions, MIME ty
 }
 ```
 
-```bash
-curl -X GET 'http://<arender_host>/arendergwt/documentLayout?uuid=doc1UUID'
-```
-
 ---
 
-### Flat Document Layout
+### Get flat document layout
+
+`GET` `/arendergwt/flatDocumentLayout`
 
 Retrieve a flat list of all pages across child documents, without preserving the tree structure.
 
-**Servlet:** `flatDocumentLayout`
+#### Parameters
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/flatDocumentLayout` |
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID |
 
-**Query Parameters:**
+#### Response
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID |
+A JSON array of page identifiers.
 
-**Response:** A JSON array of page identifiers.
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Flat layout returned successfully |
+| 400 | Missing `uuid` parameter |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
+
+```bash
+curl -X GET 'http://<arender_host>/arendergwt/flatDocumentLayout?uuid=docuuid'
+```
+
+#### Example response
 
 ```json
 [
@@ -439,31 +630,41 @@ Retrieve a flat list of all pages across child documents, without preserving the
 ]
 ```
 
-```bash
-curl -X GET 'http://<arender_host>/arendergwt/flatDocumentLayout?uuid=docuuid'
-```
-
 ---
 
-### Page Content
+### Get page content
 
-Retrieve the text content and layout information for a specific page.
+`GET` `/arendergwt/pageContent`
 
-**Servlet:** `pageContent`
+Retrieve the text content and layout information for a specific page, including text positions, fonts, sizes, and hyperlink information.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/pageContent` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID |
+| `pagePosition` | query | integer | Yes | Page number (zero-based) |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID |
-| `pagePosition` | Yes | Page number (zero-based) |
+#### Response
 
-**Response:** JSON with text positions, fonts, sizes, and hyperlink information.
+JSON with text positions, fonts, sizes, and hyperlink information for the specified page.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Page content returned |
+| 400 | Missing or invalid parameters |
+| 404 | Document or page not found |
+| 500 | Internal server error |
+
+#### Example request
+
+```bash
+curl -X GET 'http://<arender_host>/arendergwt/pageContent?uuid=docuuid&pagePosition=3'
+```
+
+#### Example response
 
 ```json
 {
@@ -485,126 +686,124 @@ Retrieve the text content and layout information for a specific page.
 }
 ```
 
-```bash
-curl -X GET 'http://<arender_host>/arendergwt/pageContent?uuid=docuuid&pagePosition=3'
-```
-
 ---
 
-## Page Imaging
+## Page imaging
 
-### Get Page Image
+### Get page image
 
-Retrieve a rendered image of a specific document page.
+`GET` `/arendergwt/imageServlet`
 
-**Servlet:** `imageServlet`
+Retrieve a rendered image of a specific document page at the requested resolution.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/imageServlet` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID |
+| `pagePosition` | query | integer | Yes | Page number |
+| `desc` | query | integer | Yes | Image size in pixels |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID |
-| `pagePosition` | Yes | Page number |
-| `desc` | Yes | Image size in pixels |
+#### Response
 
-**Response:** The page rendered as an image.
+The page rendered as an image (binary content).
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Page image returned |
+| 400 | Missing or invalid parameters |
+| 404 | Document or page not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/imageServlet?uuid=docUUID&pagePosition=0&desc=1024'
 ```
 
+#### Example response
+
+Binary image content (PNG/JPEG).
+
 ---
 
-### Crop Page Image
+### Crop page image
 
-Retrieve a cropped region of a document page as an image.
+`GET` `/arendergwt/cropImageServlet`
 
-**Servlet:** `cropImageServlet`
+Retrieve a cropped region of a document page as an image with descriptive text for saving.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/cropImageServlet` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID |
+| `locale` | query | string | Yes | Language of the text |
+| `pagePosition` | query | integer | Yes | Page number |
+| `desc` | query | string | Yes | Crop settings (size, position, color, etc.) |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID |
-| `locale` | Yes | Language of the text |
-| `pagePosition` | Yes | Page number |
-| `desc` | Yes | Crop settings (size, position, color, etc.) |
+#### Response
 
-**Response:** An image of the cropped region with descriptive text for saving.
+An image of the cropped region.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Cropped image returned |
+| 400 | Missing or invalid parameters |
+| 404 | Document or page not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/cropImageServlet?uuid=docUUID&locale=en&pagePosition=0&desc=size'
 ```
 
+#### Example response
+
+Binary image content.
+
 ---
 
-## Annotation Export
+## Annotation export
 
-### XFDF / FDF Annotation Export and Import
+### Download XFDF/FDF annotations
 
-Download or upload annotations in XFDF or FDF format.
+`GET` `/arendergwt/servletXFDFAnnotations`
 
-**Servlet:** `servletXFDFAnnotations`
+Download annotations for a document in XFDF or FDF format.
 
-#### Download XFDF/FDF
+#### Parameters
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/servletXFDFAnnotations` |
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID |
+| `type` | query | string | No | File type: `XFDF` (default) or `FDF` |
 
-**Query Parameters:**
+#### Response
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID |
-| `type` | No | File type: `XFDF` (default) or `FDF` |
+The annotation file in the requested format.
 
-**Response:** The annotation file in the requested format.
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Annotation file returned |
+| 400 | Missing `uuid` parameter |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/servletXFDFAnnotations?uuid=docUUID&type=XFDF'
 ```
 
-#### Upload XFDF
-
-| | |
-|---|---|
-| **Method** | `POST` |
-| **Path** | `/arendergwt/servletXFDFAnnotations` |
-| **Content-Type** | `multipart/form-data` |
-
-**Query Parameters:**
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID to apply annotations to |
-
-**Form Parameters:**
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `file` | Yes | The XFDF or FDF file to upload |
-
-If the uploaded file is in FDF format, it will be converted to XFDF automatically.
-
-```bash
-curl -X POST -H "Content-Type: multipart/form-data" \
-  -F "file=@annotations.xfdf" \
-  "http://<arender_host>/arendergwt/servletXFDFAnnotations?uuid=docUUID"
-```
-
-**Example XFDF file:**
+#### Example response
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -626,150 +825,265 @@ curl -X POST -H "Content-Type: multipart/form-data" \
 
 ---
 
+### Upload XFDF annotations
+
+`POST` `/arendergwt/servletXFDFAnnotations`
+
+Upload annotations in XFDF or FDF format to apply to a document. If the uploaded file is in FDF format, it will be converted to XFDF automatically.
+
+#### Parameters
+
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID to apply annotations to |
+| `file` | body | file | Yes | The XFDF or FDF file to upload (`multipart/form-data`) |
+
+#### Response
+
+Annotations are applied to the specified document.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Annotations uploaded successfully |
+| 400 | Missing `uuid` or file |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
+
+```bash
+curl -X POST -H "Content-Type: multipart/form-data" \
+  -F "file=@annotations.xfdf" \
+  "http://<arender_host>/arendergwt/servletXFDFAnnotations?uuid=docUUID"
+```
+
+#### Example response
+
+```
+OK
+```
+
+---
+
 ## Printing
 
-### Print Document
+### Print document
 
-Display an HTML print-preview page for selected document pages.
+`GET` `/arendergwt/printServlet`
 
-**Servlet:** `printServlet`
+Display an HTML print-preview page for selected document pages, with a confirmation dialog for the user.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/printServlet` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID |
+| `desc` | query | string | Yes | Image description for the pages to print |
+| `pages` | query | string | Yes | Page numbers to print (comma-separated) |
+| `imagePrintStyle` | query | string | No | Image style for the printed pages |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID |
-| `desc` | Yes | Image description for the pages to print |
-| `pages` | Yes | Page numbers to print |
-| `imagePrintStyle` | No | Image style for the printed pages |
+#### Response
 
-**Response:** An HTML page with a print preview and confirmation dialog.
+An HTML page with a print preview and confirmation dialog.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Print preview page returned |
+| 400 | Missing or invalid parameters |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/printServlet?uuid=docUUID&desc=description&pages=1,2,3&imagePrintStyle=style'
 ```
 
+#### Example response
+
+HTML content with print preview.
+
 ---
 
-### Print Pages
+### Print pages
+
+`GET` `/arendergwt/printPage`
 
 Render specific document pages as an HTML file suitable for browser printing.
 
-**Servlet:** `printPage`
+#### Parameters
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/printPage` |
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID |
+| `nbPages` | query | integer | Yes | Number of pages to print |
+| `renditionPrintWidth` | query | integer | Yes | Image width in the rendition (pixels) |
+| `browserPrintWidth` | query | integer | Yes | Image width displayed in the browser (pixels) |
+| `page` | query | string | Yes | Page numbers to print (comma-separated) |
 
-**Query Parameters:**
+#### Response
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID |
-| `nbPages` | Yes | Number of pages to print |
-| `renditionPrintWidth` | Yes | Image width in the rendition (pixels) |
-| `browserPrintWidth` | Yes | Image width displayed in the browser (pixels) |
-| `page` | Yes | Page numbers to print |
+An HTML file containing the rendered pages ready for printing.
 
-**Response:** An HTML file containing the rendered pages ready for printing.
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Print-ready HTML returned |
+| 400 | Missing or invalid parameters |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/printPage?uuid=docUUID&nbPages=3&renditionPrintWidth=800&browserPrintWidth=600&page=1,2,3'
 ```
 
+#### Example response
+
+HTML content with rendered pages.
+
 ---
 
-## Monitoring and Administration
+## Monitoring and administration
 
-### Version
+### Get version
 
-Retrieve the deployed ARender version.
+`GET` `/arendergwt/version`
 
-**Servlet:** `VersionServlet`
+Retrieve the deployed ARender version string.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/version` |
+#### Parameters
 
-**Response:** The ARender version in plain text.
+None.
+
+#### Response
+
+The ARender version in plain text.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Version returned |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/version'
 ```
 
+#### Example response
+
+```
+4.12.0.0
+```
+
 ---
 
-### Health Records
+### Get health records
 
-Display server health and service availability status.
+`GET` `/arendergwt/health/records`
 
-**Servlet:** `healthRecordsServlet`
+Display server health and service availability status. Returns an HTML page listing each service with its port, state, and availability.
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/health/records` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `check` | query | string | No | `SELF` (return the HTML page even if no service is available) or `RENDITION` (return an error if no service is available) |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `check` | No | `SELF` (return the HTML page even if no service is available) or `RENDITION` (return an error if no service is available) |
+#### Response
 
-**Response:** An HTML page listing each service with its port, state, and availability.
+An HTML page listing each service with its port, state, and availability.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Health records page returned |
+| 503 | No rendition service available (when `check=RENDITION`) |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/health/records?check=SELF'
 ```
 
+#### Example response
+
+HTML content with service status table.
+
 ---
 
-### Prometheus Metrics
+### Get Prometheus metrics
+
+`GET` `/arendergwt/prometheus`
 
 Expose Prometheus-compatible metrics for monitoring.
 
-**Servlet:** `prometheusMetricsServlet`
+#### Parameters
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/prometheus` |
+None.
 
-**Response:** Prometheus metrics in standard exposition format.
+#### Response
+
+Prometheus metrics in standard exposition format.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Metrics returned |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/prometheus'
 ```
 
+#### Example response
+
+```
+# HELP arender_documents_loaded Total documents loaded
+# TYPE arender_documents_loaded counter
+arender_documents_loaded 142
+```
+
 ---
 
-### Server Performance (Weather)
+### Get server performance
 
-Retrieve performance data for all connected rendition servers, or register a new server.
+`GET` `/arendergwt/weather`
 
-**Servlet:** `weatherServlet`
+Retrieve performance data for all connected rendition servers.
 
-#### Get Server Performance
+#### Parameters
 
-| | |
-|---|---|
-| **Method** | `GET` |
-| **Path** | `/arendergwt/weather` |
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `format` | query | string | No | Response format. If empty or `HTML`, returns an HTML page. Any other value (e.g., `JSON`) returns JSON. |
 
-**Query Parameters:**
+#### Response
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `format` | No | Response format. If empty or `HTML`, returns an HTML page. Any other value returns JSON. |
+Server performance data in the requested format.
 
-**Response:** Server performance data in the requested format.
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Performance data returned |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 # HTML format
@@ -779,73 +1093,146 @@ curl -X GET 'http://<arender_host>/arendergwt/weather'
 curl -X GET 'http://<arender_host>/arendergwt/weather?format=JSON'
 ```
 
-#### Set Rendition Targets (Replace All)
+#### Example response
 
-| | |
-|---|---|
-| **Method** | `POST` |
-| **Path** | `/arendergwt/weather` |
+HTML or JSON content with server performance metrics.
 
-**Request Body:** A JSON-like list of rendition server addresses. Replaces the entire target list.
+---
+
+### Set rendition targets
+
+`POST` `/arendergwt/weather`
+
+Replace the entire list of rendition server targets with a new set of addresses.
+
+#### Parameters
+
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| Request body | body | string | Yes | A JSON-like list of rendition server addresses |
+
+#### Response
+
+The rendition target list is replaced.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Targets replaced successfully |
+| 400 | Invalid request body |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X POST -d "{[http://rendition-host:1990]}" \
   'http://<arender_host>/arendergwt/weather'
 ```
 
-#### Add Rendition Targets
+#### Example response
 
-| | |
-|---|---|
-| **Method** | `PUT` |
-| **Path** | `/arendergwt/weather` |
+```
+OK
+```
 
-**Request Body:** A JSON-like list of rendition server addresses. Adds to the existing target list without replacing.
+---
+
+### Add rendition targets
+
+`PUT` `/arendergwt/weather`
+
+Add rendition server addresses to the existing target list without replacing it.
+
+#### Parameters
+
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| Request body | body | string | Yes | A JSON-like list of rendition server addresses to add |
+
+#### Response
+
+The new addresses are added to the existing target list.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Targets added successfully |
+| 400 | Invalid request body |
+| 500 | Internal server error |
+
+#### Example request
 
 ```bash
 curl -X PUT -d "{[http://new-rendition-host:1990]}" \
   'http://<arender_host>/arendergwt/weather'
 ```
 
+#### Example response
+
+```
+OK
+```
+
 ---
 
-## Session Management
+## Session management
 
-### Destroy Session
+### Destroy session
 
-Destroy the current user session and clear all associated ARender state.
+`GET` `/arendergwt/destroySession`
 
-**Servlet:** `destroySession`
+Destroy the current user session and clear all associated ARender state. Accepts any HTTP method (`GET`, `POST`, etc.).
 
-| | |
-|---|---|
-| **Method** | Any (`GET`, `POST`, etc.) |
-| **Path** | `/arendergwt/destroySession` |
+#### Parameters
 
-**Response:** The session is destroyed, clearing the following information:
+None.
+
+#### Response
+
+The session is destroyed, clearing the following information:
 
 - `user`
 - `userAgent`
 - `versionUserAgent`
 
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Session destroyed |
+| 500 | Internal server error |
+
+#### Example request
+
 ```bash
 curl -X GET 'http://<arender_host>/arendergwt/destroySession'
 ```
 
+#### Example response
+
+```
+OK
+```
+
 ---
 
-### Token Validation
+### Validate token
 
-Validate an authentication token sent as a cookie or POST attribute.
+`POST` `/arendergwt/validateToken`
 
-**Servlet:** `tokenValidatorServlet`
+Validate an authentication token sent as a cookie or POST attribute. The token must be named `token`.
 
-| | |
-|---|---|
-| **Method** | `POST` |
-| **Path** | `/arendergwt/validateToken` |
+#### Parameters
 
-The token must be named `token` and can be sent as a cookie or a POST parameter.
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `token` | cookie/body | string | Yes | The authentication token to validate |
+
+#### Response
+
+Validation result from the configured `TokenValidator` implementation.
 
 The validator class is configured via the property:
 
@@ -855,39 +1242,73 @@ arender.server.json.load.token.validator=com.example.MyTokenValidator
 
 The custom class must implement the `TokenValidator` interface and its `validate` method. The default validator (`NoopTokenValidator`) only checks that the token is not null.
 
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Token is valid |
+| 400 | Token is missing or null |
+| 403 | Token validation failed |
+| 500 | Internal server error |
+
+#### Example request
+
+```bash
+curl -X POST 'http://<arender_host>/arendergwt/validateToken' \
+  -d "token=myAuthToken"
+```
+
+#### Example response
+
+```
+Valid
+```
+
 ---
 
-## Connector-Specific Endpoints
+## Connector-specific endpoints
 
-### FileNet Metadata Update
+### Update FileNet document metadata
 
-Update IBM FileNet document metadata.
+`POST` `/arendergwt/updateDocumentMetadataServlet`
 
-**Servlet:** `updateDocumentMetadataServlet`
+Update IBM FileNet document metadata. The `propertyKey` corresponds to the FileNet `symbolicName` or `displayName`.
 
-| | |
-|---|---|
-| **Method** | `POST` |
-| **Path** | `/arendergwt/updateDocumentMetadataServlet` |
-| **Content-Type** | `application/json` |
+#### Parameters
 
-**Query Parameters:**
+| Name | In | Type | Required | Description |
+|------|-----|------|----------|-------------|
+| `uuid` | query | string | Yes | Document ID of the target FileNet document |
+| Request body | body | JSON | Yes | JSON mapping of metadata property names to values |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `uuid` | Yes | Document ID of the target FileNet document |
+The request uses `Content-Type: application/json`.
 
-**Request Body:** JSON mapping of metadata property names to values. The `propertyKey` corresponds to the FileNet `symbolicName` or `displayName`.
+#### Response
+
+Metadata is updated on the FileNet document.
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Metadata updated successfully |
+| 400 | Invalid JSON or missing `uuid` |
+| 404 | Document not found |
+| 500 | Internal server error |
+
+#### Example request
+
+```bash
+curl -X POST 'http://<arender_host>/arendergwt/updateDocumentMetadataServlet?uuid=docUUID' \
+  -H "Content-Type: application/json" \
+  -d '{"DocumentTitle": "Updated Title", "Status": "Approved"}'
+```
+
+#### Example response
 
 ```json
 {
   "propertyKey1": "propertyValue1",
   "propertyKey2": "propertyValue2"
 }
-```
-
-```bash
-curl -X POST 'http://<arender_host>/arendergwt/updateDocumentMetadataServlet?uuid=docUUID' \
-  -H "Content-Type: application/json" \
-  -d '{"DocumentTitle": "Updated Title", "Status": "Approved"}'
 ```

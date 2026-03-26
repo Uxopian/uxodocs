@@ -124,4 +124,4 @@ This approach keeps the document URL out of the browser's address bar and avoids
 - [Docker Compose](../../installation/docker-compose.md)
 - [Alfresco integration guide](./alfresco.mdx)
 - [IBM FileNet integration guide](./ibm-filenet.mdx)
-- [Broker REST API reference](../../reference/rest-api/broker-api.md)
+- [Broker API reference](../../reference/rest-api/broker-api.md)

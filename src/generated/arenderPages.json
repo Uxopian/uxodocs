@@ -53,6 +53,7 @@
     "/reference/javascript-api",
     "/reference/rendition-properties",
     "/reference/rest-api/broker-api",
+    "/reference/rest-api/provider-api",
     "/reference/rest-api/servlet-api",
     "/reference/viewer-configuration"
   ],
@@ -91,6 +92,7 @@
     "/reference/framework-wrappers",
     "/reference/rendition-properties",
     "/reference/rest-api/broker-api",
+    "/reference/rest-api/provider-api",
     "/reference/web-component"
   ]
 }

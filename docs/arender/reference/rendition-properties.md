@@ -131,6 +131,31 @@ These properties control memory allocation and JVM arguments for each sub-proces
 |----------|---------|-------------|
 | `arender.external.annotation.accessor.factory.bean.name` | `annotationAccessorFactory` | Bean name for the external annotation accessor factory |
 
+### Connector registry
+
+These properties configure REST connector providers used by the Modern Viewer.
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `connector.defaultRegistry` | — | Default provider name when `X-Provider-ID` header is absent |
+| `connector.registries.<name>.baseUrl` | — | Base URL of the provider microservice |
+| `connector.registries.<name>.whitelistedParams` | — | Comma-separated parameter names used for document ID generation and request filtering |
+
+The `whitelistedParams` property serves two purposes:
+
+1. **Document ID generation** — Only whitelisted parameters are used to generate the internal `DocumentId`. Two requests with the same whitelisted parameter values are treated as the same document (cache hit).
+2. **Security filtering** — Only whitelisted parameters are forwarded to the provider. Other parameters from the original request are filtered out.
+
+**Environment variable equivalents:**
+
+```bash
+CONNECTOR_DEFAULT_REGISTRY=filenet
+CONNECTOR_REGISTRIES_FILENET_BASE_URL=http://filenet-provider:8787
+CONNECTOR_REGISTRIES_FILENET_WHITELISTED_PARAMS=objectStoreName,id,vsId,objectType,contentElement
+CONNECTOR_REGISTRIES_ALFRESCO_BASE_URL=http://alfresco-provider:8788
+CONNECTOR_REGISTRIES_ALFRESCO_WHITELISTED_PARAMS=nodeRef,alf_ticket,user,versionLabel
+```
+
 ### Docker/Kubernetes runtime mode
 
 | Property | Default (Docker) | Description |

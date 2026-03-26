@@ -27,7 +27,7 @@ This page maps GWT viewer concepts to their React UI equivalents. Use it as a re
 | XML bean configuration | Not applicable | React UI has no Spring context in the frontend |
 | `ARender.html` customization | CSS variables | Light DOM, standard CSS applies |
 | `arender-custom-js.js` | `window.ARender` API | — |
-| `/arendergwt/` servlet endpoints | Broker REST API directly | No viewer-side servlet layer |
+| `/arendergwt/` servlet endpoints | Broker API directly | No viewer-side servlet layer |
 | Server-side annotation storage config | Same (backend is shared) | XFDF, JDBC, or REST storage |
 | Rendition properties | Same (backend is shared) | Broker and rendition services are unchanged |
 

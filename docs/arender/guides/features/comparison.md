@@ -154,5 +154,5 @@ See also [Rendition properties](../../reference/rendition-properties.md) for bro
 
 - [Annotations concept](../../concepts/annotations.md)
 - [Rendition pipeline](../../concepts/rendition-pipeline.md)
-- [Broker REST API](../../reference/rest-api/broker-api.md)
+- [Broker API](../../reference/rest-api/broker-api.md)
 - [Redaction guide](./redaction.md)

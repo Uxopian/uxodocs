@@ -409,4 +409,4 @@ Callbacks:
 - [Annotations](../concepts/annotations.md)
 - [Documents and IDs](../concepts/documents-and-ids.md)
 - [Viewer configuration](./viewer-configuration.md)
-- [Broker REST API](./rest-api/broker-api.md)
+- [Broker API](./rest-api/broker-api.md)
