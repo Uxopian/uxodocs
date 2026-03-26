@@ -9,7 +9,7 @@ content_hash: b486597f9b5b3a1cc9e2e3a1c19f1471a89c6842956f89dc4a74d95be3f577d3
 ---
 
 :::info
-This section describes the prerequisites for the **FlowerDocs GUI**, **FlowerDocs Core** and applications.
+This section describes the prerequisites for the **FlowerDocs GUI**, **FlowerDocs Core** and **ARender HMI** applications.
 :::
 
 # Prerequisites
@@ -30,7 +30,7 @@ Installing a FlowerDocs platform requires Linux servers. FlowerDocs is supported
 
 Java Runtime 11 must be installed to run FlowerDocs.
 
-This documentation does not cover the installation of the ARender rendition server (version {{arenderVersion}}). It must therefore be installed beforehand and be accessible via HTTP or HTTPS protocol from **FlowerDocs GUI**, **FlowerDocs Core** and (version {{arenderVersion}}).
+This documentation does not cover the installation of the ARender rendition server (version {{arenderVersion}}). It must therefore be installed beforehand and be accessible via HTTP or HTTPS protocol from **FlowerDocs GUI**, **FlowerDocs Core** and **ARender HMI** (version {{arenderVersion}}).
 
 ### OpenSearch and Redis
 
@@ -43,7 +43,7 @@ The architecture depends on the estimated load, but it is recommended to have at
 
 | Component                    | vCPU | RAM  | Note                                                                                                |
 | ---------------------------- | ---- | ---- | --------------------------------------------------------------------------------------------------- |
-| **FlowerDocs**               | 2    | 4 Go | The **FlowerDocs GUI**, **FlowerDocs Core** and applications must be installed on separate servers. |
+| **FlowerDocs**               | 2    | 4 Go | The **FlowerDocs GUI**, **FlowerDocs Core** and **ARender HMI** applications must be installed on separate servers. |
 | **ARender Rendition Server** | 4    | 8 Go | Rendition server sizing is strongly linked to the typology and number of documents viewed.          |
 
 The sizing of a FlowerDocs platform needs to be carefully considered in order to achieve the best possible performance.
@@ -53,7 +53,7 @@ We recommend isolating each component on separate machines:
 
 - **FlowerDocs Core**
 - **FlowerDocs GUI**
--
+- **ARender HMI**
 - ARender Rendition
 - Redis
 - OpenSearch
@@ -80,9 +80,9 @@ Applications can be configured via the following files:
 | ------------------- | ---------------------------------- |
 | **FlowerDocs Core** | `core.properties`                  |
 | **FlowerDocs GUI**  | `gui.properties`                   |
-|                     | `arender-custom-server.properties` |
+| **ARender HMI**     | `arender-custom-server.properties` |
 
-The FlowerDocs ARender connector `flower-docs-arender-hmi-{{version}}.jar` is also required for the application to be able to retrieve documents stored in FlowerDocs.
+The FlowerDocs ARender connector `flower-docs-arender-hmi-{{version}}.jar` is also required for the ARender HMI application to be able to retrieve documents stored in FlowerDocs.
 
 :::info
 The necessary configuration is described on the dedicated page [here](/docs/flowerdocs/install/config/arender-hmi-config).

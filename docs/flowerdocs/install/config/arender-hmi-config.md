@@ -8,19 +8,19 @@ last_update:
 content_hash: 56becb6c8e60067c0badac30a9851280ff63238ae8523d13ea6d56b6f79e64a7
 ---
 
-This section describes the various configurations for the application, needed in the application's `arender-custom-server.properties` file.
+This section describes the various configurations for the **ARender HMI** application, needed in the application's `arender-custom-server.properties` file.
 
 # General
 
 | Propriété                      | Description                                                      |
 | ------------------------------ | ---------------------------------------------------------------- |
 | arender.server.rendition.hosts | Addresses of the various ARender renditions separated by a `,`.  |
-| token.key                      | Token shared between **FlowerDocs Core**, **FlowerDocs GUI** and |
+| token.key                      | Token shared between **FlowerDocs Core**, **FlowerDocs GUI** and **ARender HMI** |
 | ws.url                         | **FlowerDocs Core** WebServices access URL                       |
 
 # Logging
 
-In order to configure logging for and the FlowerDocs ARender connector, it is necessary to create a `configurations` folder next to the application containing the following `logback.xml` file:
+In order to configure logging for ARender HMI and the FlowerDocs ARender connector, it is necessary to create a `configurations` folder next to the ARender HMI application containing the following `logback.xml` file:
 
 :::note[logback.xml ]
 
