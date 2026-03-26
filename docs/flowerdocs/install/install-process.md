@@ -9,7 +9,7 @@ content_hash: 29282d4a2cf16e7978721269e8b5a714444e03cd812d1cc87ca2326536b0071b
 ---
 
 :::info
-This section describes how to install the **FlowerDocs GUI**, **FlowerDocs Core** and applications.
+This section describes how to install the **FlowerDocs GUI**, **FlowerDocs Core** and **ARender HMI** applications.
 :::
 
 In the rest of this page, `${APP_HOME}` corresponds to the folder in which each application will be deployed.
@@ -19,17 +19,9 @@ In the rest of this page, `${APP_HOME}` corresponds to the folder in which each 
 # **FlowerDocs GUI**
 
 - After completing the downloads mentioned in the prerequisites, place the `flower-docs-gui-webapp-{{version}}.jar` application in the `${APP_HOME}` folder.
-- Add `application.properties` file with the following properties:
-
-```javascript
-spring.task.execution.pool.core-size=16
-spring.task.execution.pool.max-size=16
-spring.task.execution.thread-name-prefix=flowerdocs-async-
-```
-
 - Add the `gui.properties` configuration file to `${APP_HOME}`.
 
-#
+# **ARender HMI**
 
 - After completing the downloads mentioned in the prerequisites, place the `arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar` application in the `${APP_HOME}` folder.
 - Create the folders `${APP_HOME}/configurations` and `${APP_HOME}/lib`.
