@@ -3,9 +3,9 @@ title: Uxopian AI overview
 sidebar_label: Overview
 sidebar_position: 0
 last_update:
-  date: '2026-03-24T00:00:00.000Z'
+  date: '2026-03-26T16:37:56.929Z'
   author: CI/CD Bot
-content_hash: overview-getting-started-2026-03-24
+content_hash: 4cfc0a0d29a234bc1ab7bc8954fa296ddc8d8dc60ca563d59ce3e623f3a2c188
 ---
 
 Uxopian AI is a framework for embedding AI assistants inside legacy enterprise applications. It is designed for content management and document-centric systems. It does not replace the host application. It adds a conversational interface, connects to multiple LLM providers, and exposes tools the LLM can call to operate on enterprise data.

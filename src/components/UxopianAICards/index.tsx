@@ -19,6 +19,13 @@ const TopCardsList = [
         color: "#6c5ce7",
     },
     {
+        title: "Installation",
+        icon: "🛠️",
+        description: "Kubernetes, Docker Compose, and bare JAR deployment guides",
+        link: "/docs/uxopian-ai/installation/requirements",
+        color: "#fdcb6e",
+    },
+    {
         title: "Admin Panel",
         icon: "📊",
         description: "Monitor usage, manage prompts and LLM providers",
@@ -175,6 +182,14 @@ export default function UxopianAICards() {
     return (
         <section className={styles.documentationSection}>
             <div className="container">
+                <h1 className={styles.mainTitle}>Ship AI in production, this quarter.</h1>
+                <p className={styles.subtitle}>
+                    Uxopian AI is a framework for embedding AI assistants inside legacy enterprise
+                    applications. It is designed for content management and document-centric systems.
+                    It does not replace the host application — it adds a conversational interface,
+                    connects to multiple LLM providers, and exposes tools the LLM can call to
+                    operate on enterprise data.
+                </p>
                 <div className={styles.layoutWrapper}>
                     <div className={styles.leftColumn}>
                         <div className={styles.cardsGrid}>

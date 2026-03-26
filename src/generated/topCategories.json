@@ -90,6 +90,10 @@
         "href": "/docs/uxopian-ai/getting_started/overview"
       },
       {
+        "label": "Installation",
+        "href": "/docs/uxopian-ai/installation/requirements"
+      },
+      {
         "label": "Understanding Uxopian AI",
         "href": "/docs/uxopian-ai/understanding/architecture"
       },

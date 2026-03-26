@@ -3,9 +3,9 @@ title: Authentication and gateway
 sidebar_label: Authentication
 sidebar_position: 2
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-03-26T16:37:56.929Z'
   author: CI/CD Bot
-content_hash: abb7fccd1d61adfab64c976f6b1a3364b4968e2005c366ab86a6a2234950ccca
+content_hash: a2652454edf48c137469828ae80a8f10456a4898b6b3a3ef4562e74ebeb0f738
 ---
 
 Authentication in Uxopian AI is handled entirely by `uxopian-gateway`. The backend (`uxopian-ai`) does not perform authentication itself. It receives identity information through HTTP headers that the gateway injects after a successful authentication check.
