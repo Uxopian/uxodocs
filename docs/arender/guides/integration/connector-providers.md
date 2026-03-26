@@ -17,50 +17,41 @@ This decoupled model means connectors have their own lifecycle, scaling, and rel
 
 For general connector concepts, see [Connectors](../../concepts/connectors.md).
 
-## Architecture
+## Document opening flow
 
-```mermaid
-graph TD
-    ECM_UI[ECM User Interface] -->|Opens ARender URL| Browser
-    Browser -->|Loads viewer| Frontend[React UI]
-    Frontend -->|"POST /connector/documents"| Broker[Service Broker]
-    Broker -->|"GET /documents?params"| Provider[Provider Microservice]
-    Provider -->|Fetches content| ECM[ECM Backend]
-    Broker -->|Stores document| DFS[Shared Storage]
-```
+For the overall system architecture (gateway/BFF, broker, rendition services), see [System architecture](../../overview/architecture.md).
 
-:::info
-Only the React UI (Modern Viewer) uses REST connector providers. The Classic GWT viewer uses JAR-based connectors loaded on its classpath.
-:::
-
-### Document opening flow
+When loading a document from a repository, the flow involves the gateway, broker, and a provider microservice:
 
 ```mermaid
 sequenceDiagram
-    participant Host as Host application
-    participant React as React UI (Web Component)
+    participant React as React UI
+    participant GW as Gateway / BFF
     participant Broker as Service Broker
     participant Provider as Provider microservice
     participant Repo as Document Repository
 
-    Host->>React: Embed viewer
-    React->>Broker: POST /connector/documents<br/>X-Provider-ID: alfresco
-    Broker->>Provider: POST /documents?nodeRef=...
+    React->>GW: POST /connector/documents
+    GW->>GW: Inject X-Provider-ID header
+    GW->>Broker: POST /connector/documents<br/>X-Provider-ID: alfresco
+    Broker->>Provider: GET /documents?nodeRef=...
     Provider->>Repo: Fetch document binary
     Repo-->>Provider: Binary content
     Provider-->>Broker: Document content + metadata
     Note over Broker: Cache DocumentAccessor<br/>Generate DocumentId
-    Broker-->>React: DocumentId
-    React->>Broker: GET /documents/{id}/pages/...
+    Broker-->>GW: DocumentId
+    GW-->>React: DocumentId
+    React->>GW: GET /documents/{id}/pages/...
+    GW->>Broker: GET /documents/{id}/pages/...
     Note over Broker: Render pages using<br/>cached document
 ```
 
-1. The host application embeds the React UI as an `<arender-element>` Web Component.
-2. The React UI sends a `POST /connector/documents` request to the broker, including an `X-Provider-ID` header that identifies which provider to use.
-3. The broker looks up the provider's URL in its registry and forwards the request with the original query parameters and headers.
+1. The React UI sends a `POST /connector/documents` request to the gateway/BFF.
+2. The gateway injects the `X-Provider-ID` header (e.g., `alfresco`, `filenet`) and forwards the request to the broker.
+3. The broker looks up the provider's URL in its registry and forwards the request with the whitelisted query parameters.
 4. The provider fetches the document from the repository and returns the binary content (or a JSON folder structure for composite documents).
-5. The broker caches the document, generates a `DocumentId`, and returns it to the React UI.
-6. Subsequent page rendering requests use the cached document through the standard rendition pipeline.
+5. The broker caches the document, generates a `DocumentId`, and returns it through the gateway to the React UI.
+6. Subsequent page rendering requests follow the same path through the gateway.
 
 ## Available providers
 
@@ -151,7 +142,7 @@ REGISTRY_PROVIDER_FILENET_URL=http://filenet-provider:8787
 
 ## How `X-Provider-ID` works
 
-The `X-Provider-ID` HTTP header tells the broker which provider should handle the request. The React UI sets this header based on the document source. The broker uses it to look up the provider URL in its registry and route the request.
+The `X-Provider-ID` HTTP header tells the broker which provider should handle the request. The gateway/BFF is responsible for injecting this header before forwarding requests to the broker. The broker uses it to look up the provider URL in its registry and route the request.
 
 ### Provider selection
 

@@ -31,16 +31,22 @@ The Modern Viewer runs entirely in the browser as a Web Component embedded in yo
 graph LR
     Browser --> HostApp["Host application"]
     HostApp -->|"&lt;arender-element&gt;"| ReactUI["React UI<br/>(Web Component)"]
-    ReactUI --> Broker["Service Broker :8761"]
+    ReactUI --> GW["Gateway / BFF"]
+    GW --> Broker["Service Broker :8761"]
     Broker --> Provider["Provider microservice"]
     Provider --> Repo["Document Repository"]
 ```
 
 - **Host application** — your web application, built with any technology
 - **React UI** — the `<arender-element>` Web Component, bundled into your app via npm
+- **Reverse proxy / BFF** — sits between the viewer and the broker. At minimum, a reverse proxy (Nginx) routes API calls and solves CORS. When using connector providers, it also injects the `X-Provider-ID` header. When OAuth2 is enabled on the rendition backend, a full BFF handles token management on behalf of the viewer. If your environment already has a BFF or API gateway, you can reuse it.
 - **Service Broker** — the ARender backend that orchestrates rendition (conversion, rendering, text extraction)
 - **Provider** — an optional microservice that loads documents from a repository (Alfresco, FileNet, or a custom source)
 - **Document Repository** — the system where your documents are stored
+
+:::note
+ARender does not yet ship a built-in BFF component — this is planned for an upcoming release. In the meantime, use your own reverse proxy or BFF.
+:::
 
 ## Deployment model
 

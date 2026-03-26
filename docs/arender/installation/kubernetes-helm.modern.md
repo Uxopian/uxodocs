@@ -10,7 +10,82 @@ content_hash: f457ca89ab310ba4c931afa654e139c39edc22123423f0d85ef4fa51678fdaac
 
 # Kubernetes Helm
 
-ARender provides Helm charts for deploying to Kubernetes. The chart creates deployments for all ARender services, with support for autoscaling, persistent storage, ingress, and Hazelcast clustering.
+This guide covers deploying the full ARender stack on Kubernetes: the React UI in your host application and the rendition backend via Helm charts.
+
+## React UI
+
+The React UI is an npm package embedded in your host application — it is not deployed as a Kubernetes workload.
+
+### Install the package
+
+```bash
+npm install arender-ui
+```
+
+### Embed the viewer
+
+Add the `<arender-element>` Web Component to your page:
+
+```html
+<arender-element></arender-element>
+```
+
+See [Web Component reference](../reference/web-component.md) for attributes, JavaScript API, and framework wrappers.
+
+### Set up the Ingress
+
+In Kubernetes, the Ingress controller acts as the reverse proxy between the React UI and the broker. Configure routes to forward API calls to the broker service:
+
+```yaml title="ingress.yaml"
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: arender-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: your-app.example.com
+      http:
+        paths:
+          - path: /documents(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: arender-rendition-broker
+                port:
+                  number: 8761
+          - path: /annotation(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: arender-rendition-broker
+                port:
+                  number: 8761
+          - path: /connector/documents
+            pathType: Exact
+            backend:
+              service:
+                name: arender-rendition-broker
+                port:
+                  number: 8761
+```
+
+This Ingress is the minimal setup. Depending on your needs, this layer can also:
+
+- **Inject `X-Provider-ID`** — required when using [connector providers](../guides/integration/connector-providers.md) (Alfresco, FileNet)
+- **Handle OAuth2 tokens** — when OAuth2 is enabled on the rendition backend, a full BFF (Backend For Frontend) manages tokens on behalf of the viewer
+
+:::note
+ARender does not yet ship a built-in BFF — this is planned for an upcoming release. In the meantime, use your own Ingress annotations, middleware, or BFF.
+:::
+
+See [Configuration](./configuration.md) for more details on CORS and reverse proxy options.
+
+## Rendition backend
+
+The Helm chart deploys all rendition backend services with support for autoscaling, persistent storage, ingress, and Hazelcast clustering.
 
 ## Prerequisites
 

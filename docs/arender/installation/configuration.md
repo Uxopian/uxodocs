@@ -36,6 +36,10 @@ The React UI uses three API route prefixes:
 
 Since the React UI runs inside your host application, API calls to the rendition backend are cross-origin by default. The recommended solution is a reverse proxy that makes the broker appear as same-origin.
 
+:::tip Local development
+During local development, most bundlers (Vite, webpack) provide a built-in dev server proxy that handles this automatically. For example, Vite's `server.proxy` configuration forwards `/documents`, `/annotation`, and `/connector/documents` to the broker URL defined in your environment variables. No external reverse proxy is needed in this case.
+:::
+
 ### Nginx reverse proxy (recommended)
 
 ```nginx
@@ -59,11 +63,17 @@ server {
 
     location /connector/documents {
         proxy_pass http://service-broker:8761/connector/documents;
+        # If using connector providers, inject the provider header:
+        # proxy_set_header X-Provider-ID alfresco;
     }
 }
 ```
 
 With this setup, the React UI makes same-origin requests to `/documents/*`, `/annotation/*`, and `/connector/documents`, which Nginx forwards to the broker.
+
+:::tip
+If you use [connector providers](../guides/integration/connector-providers.md) (Alfresco, FileNet), your reverse proxy must also inject the `X-Provider-ID` header on `/connector/documents` requests. If OAuth2 is enabled on the rendition backend, consider using a full BFF (Backend For Frontend) to handle token management. See [System architecture](../overview/architecture.md) for details.
+:::
 
 ### Alternative approaches
 

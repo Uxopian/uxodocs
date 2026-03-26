@@ -17,13 +17,19 @@ ARender consists of a frontend viewer and a set of backend rendition microservic
 ```mermaid
 graph TB
     subgraph Frontend
-        C[Viewer]
+        C[React UI]
+    end
+    subgraph Gateway
+        GW[Gateway / BFF]
     end
     subgraph Backend
-        C -->|REST| SB[Service Broker :8761]
+        GW -->|REST| SB[Service Broker :8761]
         SB -->|REST| DC[Converter :19999]
         SB -->|REST| DR[Renderer :9091]
         SB -->|REST| DT[Text Handler :8899]
+    end
+    subgraph Providers
+        SB -->|REST| P[Provider Microservices]
     end
     subgraph Storage
         DC --- TMP["/arender/tmp shared volume"]
@@ -31,9 +37,18 @@ graph TB
         DT --- TMP
         SB --- TMP
     end
+    C -->|REST| GW
 ```
 
-The viewer is an npm package embedded as a [Web Component](../reference/web-component.md), with document connectors deployed as separate provider microservices. It connects to the backend services described below.
+The viewer is an npm package embedded as a [Web Component](../reference/web-component.md). It does not communicate directly with the backend — a **reverse proxy or BFF** (Backend For Frontend) sits between the viewer and the service broker. The complexity of this layer depends on your deployment:
+
+- **Reverse proxy only** (simplest) — an Nginx or similar proxy that routes API calls to the broker, solving CORS by making the broker appear same-origin. Sufficient when documents are loaded by URL or direct upload.
+- **Reverse proxy + provider routing** — the proxy also injects the `X-Provider-ID` header to route document loading requests to the correct [connector provider](../guides/integration/connector-providers.md) (Alfresco, FileNet, etc.).
+- **Full BFF** — a backend layer that additionally handles OAuth2 token management on behalf of the viewer. This is the primary use case for a BFF: when OAuth2 is enabled on the rendition backend, the BFF acquires and forwards tokens so the browser-based viewer never handles them directly.
+
+:::note
+ARender does not yet ship a built-in BFF component — this is planned for an upcoming release. In the meantime, use your own reverse proxy or BFF (Nginx, Envoy, a custom backend, etc.). See [Configuration](../installation/configuration.md) for an Nginx example.
+:::
 
 ## Ports
 
@@ -54,11 +69,12 @@ The viewer is an npm package embedded as a [Web Component](../reference/web-comp
 **Port:** 8761
 **Image:** `arender-document-service-broker`
 
-The broker is the sole entry point for all rendition operations. The viewer connects exclusively to the broker. No other rendition service is exposed to the viewer directly.
+The broker is the sole entry point for all rendition operations. The viewer reaches the broker through the gateway/BFF. No other rendition service is exposed externally.
 
 ### Responsibilities
 
-- Receives document load requests from the viewer
+- Receives document load requests from the viewer (through the gateway/BFF)
+- Routes connector requests to provider microservices based on the `X-Provider-ID` header
 - Resolves MIME types and selects the appropriate processing pipeline
 - Delegates format conversion to the converter when the document is not natively renderable
 - Delegates image generation to the renderer
@@ -157,6 +173,35 @@ For configuration properties, see [Rendition configuration](../reference/renditi
 
 ---
 
+## Provider microservices
+
+**Default ports:** 8787 (FileNet), 8788 (Alfresco)
+**Images:** `arender-filenet-provider`, `arender-alfresco-provider`
+
+Providers are standalone REST microservices that load documents from external repositories on behalf of the broker. Each provider implements the [Provider API](../reference/rest-api/provider-api.md) contract.
+
+### How providers work
+
+1. The gateway/BFF injects an `X-Provider-ID` header identifying which provider to use.
+2. The broker looks up the provider URL in its registry and forwards the request.
+3. The provider fetches the document from the repository and returns it to the broker.
+4. The broker caches the document and proceeds with the standard rendition pipeline.
+
+Providers also handle annotation storage when the repository supports it. The broker proxies annotation CRUD operations to the provider transparently.
+
+### Available providers
+
+| Provider | Image | Default port | Repository |
+|----------|-------|-------------|------------|
+| FileNet | `arender-filenet-provider` | 8787 | IBM FileNet Content Engine |
+| Alfresco | `arender-alfresco-provider` | 8788 | Alfresco via CMIS |
+
+Providers are optional — if your application uploads documents directly to the broker API, no provider is needed.
+
+For deployment details, see [Connector providers](../guides/integration/connector-providers.md). For the full API contract, see [Provider API](../reference/rest-api/provider-api.md). For broker-side configuration, see [Rendition properties — Connector registry](../reference/rendition-properties.md#connector-registry).
+
+---
+
 ## Service discovery
 
 The broker discovers microservices using one of two mechanisms depending on the deployment model.
@@ -223,30 +268,41 @@ All communication between services is over HTTP (REST). There is no message queu
 
 ```mermaid
 sequenceDiagram
-    participant C as Client
+    participant UI as React UI
+    participant GW as Gateway / BFF
     participant SB as Broker
+    participant P as Provider
     participant DC as Converter
     participant DR as Renderer
     participant DT as Text Handler
 
-    C->>SB: Load document (URL or stream)
-    SB->>SB: Detect MIME type
+    UI->>GW: POST /connector/documents
+    GW->>SB: POST /connector/documents (+ X-Provider-ID)
+    SB->>P: GET /documents?params
+    P-->>SB: Document binary
+    SB->>SB: Store + detect MIME type
     alt Conversion needed
         SB->>DC: Convert (file reference on /arender/tmp)
         DC->>DC: Write converted PDF to /arender/tmp
         DC-->>SB: Converted file reference
     end
-    C->>SB: Request page image
+    SB-->>GW: DocumentId
+    GW-->>UI: DocumentId
+    UI->>GW: Request page image
+    GW->>SB: GET /documents/{id}/pages/{page}/image
     SB->>DR: Render page (PDF path, page number, resolution)
     DR-->>SB: PNG image bytes
-    SB-->>C: Page image
-    C->>SB: Request text or search
+    SB-->>GW: Page image
+    GW-->>UI: Page image
+    UI->>GW: Request text or search
+    GW->>SB: GET /documents/{id}/search
     SB->>DT: Extract text or search (PDF path, page range)
     DT-->>SB: Text positions or search results
-    SB-->>C: Results
+    SB-->>GW: Results
+    GW-->>UI: Results
 ```
 
-The broker selects a service instance from its internal `MicroServiceMap` for each request. In clustered deployments with multiple replicas per service, it picks an available instance from the pool maintained by the health check job.
+The gateway/BFF forwards all viewer requests to the broker. The broker selects a service instance from its internal `MicroServiceMap` for each request. In clustered deployments with multiple replicas per service, it picks an available instance from the pool maintained by the health check job.
 
 ---
 
