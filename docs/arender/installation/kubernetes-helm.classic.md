@@ -60,7 +60,7 @@ global:
 
 ```bash
 # Add the Helm repository
-helm repo add arender https://artifactory.arondor.cloud/helm
+helm repo add arondor https://artifactory.arondor.cloud/artifactory/ARenderHelmVirtual --username <your_user> --password <your_password>
 helm repo update
 
 # Install with default values
