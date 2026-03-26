@@ -35,13 +35,6 @@ graph TB
     end
 ```
 
-The viewer is a standalone Spring Boot application (port 8080) that serves two roles:
-
-- **Frontend (browser)** — a JavaScript UI compiled from Java sources with GWT (Google Web Toolkit). The compiled JS runs in the browser and handles all user interaction: page display, annotations, toolbar, search, navigation, etc.
-- **Viewer backend (server)** — a Spring Boot process that serves the compiled JS, manages HTTP sessions, handles authentication (OAuth2), routes requests to the rendition backend, and hosts document connectors as JARs on its classpath.
-
-The viewer backend communicates with the rendition service broker over REST. Document connectors (Alfresco, FileNet, etc.) are Java JARs loaded in the viewer backend's classpath — they implement `DocumentAccessor` to fetch document content from external repositories.
-
 ## Ports
 
 | Service | Default port | Purpose |
@@ -49,7 +42,7 @@ The viewer backend communicates with the rendition service broker over REST. Doc
 | Viewer (frontend + backend) | 8080 | GWT UI, session management, connectors |
 | Document Service Broker | 8761 | REST API gateway and orchestration |
 | Document Converter | 19999 | Format conversion |
-| Document Renderer | 9091 | PDF-to-image rendering |
+| Document Renderer | 9091 | Document layout resolution and PDF-to-image rendering |
 | Document Text Handler | 8899 | Text extraction, search, signatures |
 | Hazelcast | 5701 | Distributed cache (when clustered) |
 
@@ -83,7 +76,7 @@ The Spring Boot process serves the compiled JavaScript assets and handles all se
 - **Annotation storage** — Reads and writes annotations to the configured storage backend (XFDF local, JDBC, REST)
 - **Image serving** — An async servlet fetches page images from the rendition backend and streams them to the browser
 - **Session management** — HTTP sessions track per-user document state
-- **Authentication** — Supports URL-parameter authentication (default) or OAuth2/OIDC (via `arender.server.oauth2.enabled=true`)
+- **Authentication** — Supports URL-parameter authentication (default) or OAuth2/OIDC. See [Viewer configuration](../reference/viewer-configuration.md#authentication-and-security) for details.
 - **WebSocket** — Endpoint at `/ws/arenderws` pushes loading progress and document change notifications to connected clients
 
 ### Configuration
@@ -98,16 +91,6 @@ The viewer loads two property files:
 Both can be overridden in `configurations/arender-custom-client.properties` and `configurations/arender-custom-server.properties`. Client-side properties also support [visual profiles](../guides/features/visual-profiles.md).
 
 For the full property reference, see [Viewer configuration](../reference/viewer-configuration.md).
-
-### Clustering
-
-When running multiple viewer replicas, Hazelcast provides:
-
-- Distributed document accessor cache
-- HTTP session replication (required for OAuth2)
-- Routing table synchronization
-
-Enable Hazelcast sessions with `arender.server.session.hazelcast.enabled=true`.
 
 ---
 
@@ -141,7 +124,7 @@ video/mp4
 application/vnd.ms-xpsdocument
 ```
 
-All other supported types trigger a conversion step first. The mapping from source MIME type to conversion target is configured in the broker's `application.properties` under `arender.format.conversionTargetMimeTypes.*`.
+All other supported types trigger a conversion step first. The conversion target per MIME type is configurable. See [Rendition configuration](../reference/rendition-properties.md#format-routing) for details.
 
 ### Health monitoring
 
@@ -225,7 +208,7 @@ The broker discovers microservices using one of two mechanisms depending on the 
 
 ### Kubeprovider (Docker Compose)
 
-In Docker Compose, the broker maps service hostnames to ports using the `kubeprovider.kubeHosts` configuration. Each microservice declares its hostname through environment variables. The broker pings each configured host at startup, retrieves its metadata via `GET /metadata`, and caches the resolved instance. It retries every second until all expected hosts are reachable.
+In Docker Compose, the broker maps service hostnames to ports through configuration. Each microservice declares its hostname through environment variables. The broker pings each configured host at startup, retrieves its metadata via `GET /metadata`, and caches the resolved instance. It retries every second until all expected hosts are reachable.
 
 ```mermaid
 sequenceDiagram
@@ -308,7 +291,7 @@ sequenceDiagram
     SB-->>C: Results
 ```
 
-The broker selects a service instance from its internal `MicroServiceMap` for each request. In clustered deployments with multiple replicas per service, it picks an available instance from the pool maintained by the health check job.
+The broker selects a service instance from its internal registry for each request. In clustered deployments with multiple replicas per service, it picks an available instance from the pool maintained by the health check job.
 
 ---
 
@@ -334,7 +317,7 @@ When running multiple replicas, ARender uses Hazelcast for:
 - Distributed session storage (viewer)
 - Routing table synchronization (viewer)
 
-Hazelcast discovery uses Kubernetes service DNS in Helm deployments and multicast in Docker Compose. See [Rendition caching](../concepts/caching.md) for configuration details.
+Hazelcast discovery uses Kubernetes service DNS in Helm deployments and multicast in Docker Compose. Viewer clustering requires additional configuration — see [Viewer configuration](../reference/viewer-configuration.md#caching-and-routing) and [Rendition caching](../concepts/caching.md) for details.
 
 ---
 

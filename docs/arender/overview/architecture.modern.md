@@ -56,7 +56,7 @@ ARender does not yet ship a built-in BFF component — this is planned for an up
 |---------|-------------|---------|
 | Document Service Broker | 8761 | REST API gateway and orchestration |
 | Document Converter | 19999 | Format conversion |
-| Document Renderer | 9091 | PDF-to-image rendering |
+| Document Renderer | 9091 | Document layout resolution and PDF-to-image rendering |
 | Document Text Handler | 8899 | Text extraction, search, signatures |
 | Alfresco Provider | 8788 | Alfresco document loading |
 | FileNet Provider | 8787 | FileNet document loading |
@@ -95,7 +95,7 @@ video/mp4
 application/vnd.ms-xpsdocument
 ```
 
-All other supported types trigger a conversion step first. The mapping from source MIME type to conversion target is configured in the broker's `application.properties` under `arender.format.conversionTargetMimeTypes.*`.
+All other supported types trigger a conversion step first. The conversion target per MIME type is configurable. See [Rendition configuration](../reference/rendition-properties.md#format-routing) for details.
 
 ### Health monitoring
 
@@ -208,7 +208,7 @@ The broker discovers microservices using one of two mechanisms depending on the 
 
 ### Kubeprovider (Docker Compose)
 
-In Docker Compose, the broker maps service hostnames to ports using the `kubeprovider.kubeHosts` configuration. Each microservice declares its hostname through environment variables. The broker pings each configured host at startup, retrieves its metadata via `GET /metadata`, and caches the resolved instance. It retries every second until all expected hosts are reachable.
+In Docker Compose, the broker maps service hostnames to ports through configuration. Each microservice declares its hostname through environment variables. The broker pings each configured host at startup, retrieves its metadata via `GET /metadata`, and caches the resolved instance. It retries every second until all expected hosts are reachable.
 
 ```mermaid
 sequenceDiagram
@@ -302,7 +302,7 @@ sequenceDiagram
     GW-->>UI: Results
 ```
 
-The gateway/BFF forwards all viewer requests to the broker. The broker selects a service instance from its internal `MicroServiceMap` for each request. In clustered deployments with multiple replicas per service, it picks an available instance from the pool maintained by the health check job.
+The gateway/BFF forwards all viewer requests to the broker. The broker selects a service instance from its internal registry for each request. In clustered deployments with multiple replicas per service, it picks an available instance from the pool maintained by the health check job.
 
 ---
 
