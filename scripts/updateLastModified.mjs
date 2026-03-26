@@ -179,8 +179,13 @@ async function getMarkdownFiles(dir) {
             const fullPath = path.join(currentDir, entry.name);
 
             if (entry.isDirectory()) {
+                // Skip _partials directories (and any other _ prefixed dirs)
+                // Docusaurus MDX partial files must not contain front matter
+                if (entry.name.startsWith('_')) continue;
                 await scan(fullPath);
             } else if (entry.isFile() && /\.mdx?$/.test(entry.name)) {
+                // Also skip partial files whose name starts with _
+                if (entry.name.startsWith('_')) continue;
                 files.push(fullPath);
             }
         }
