@@ -20,10 +20,10 @@ A full Classic deployment requires five containers:
 | Service | Image | Port | Purpose |
 |---------|-------|------|---------|
 | ui | arender-ui-springboot | 8080 | Classic viewer UI |
-| service-broker | arender-document-service-broker | 8761 | REST API gateway and orchestration |
-| document-converter | arender-document-converter | 19999 | Format conversion |
-| document-renderer | arender-document-renderer-pdfowl | 9091 | Page rendering |
-| document-text-handler | arender-document-text-handler | 8899 | Text extraction |
+| Document Service Broker | arender-document-service-broker | 8761 | REST API gateway and orchestration |
+| Document Converter | arender-document-converter | 19999 | Format conversion |
+| Document Renderer | arender-document-renderer-pdfowl | 9091 | Page rendering |
+| Document Text Handler | arender-document-text-handler | 8899 | Text extraction |
 
 All images are available from `artifactory.arondor.cloud:5001`.
 

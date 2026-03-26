@@ -16,7 +16,7 @@ ARender is a web application that runs at a fixed URL. To embed it in another ap
 ## Prerequisites
 
 - ARender is running and accessible from the browser (see [Docker Compose](../../installation/docker-compose.md))
-- The document URL or path is reachable by the ARender service broker
+- The document URL or path is reachable by the ARender Document Service Broker
 - If the document comes from an external URL, that URL prefix is listed in `authorized.urls` on the broker (see [Open your first document](../../quickstart/first-document.md))
 
 ## Basic iframe embed

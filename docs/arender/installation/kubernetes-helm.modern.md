@@ -97,7 +97,7 @@ The Helm chart deploys all rendition backend services with support for autoscali
 
 ## Chart structure
 
-The `arender` parent chart (v0.4.0) contains a **rendition** sub-chart that deploys the service broker, converter, renderer, and text handler.
+The `arender` parent chart (v0.4.0) contains a **rendition** sub-chart that deploys the Document Service Broker, converter, renderer, and text handler.
 
 ## Registry authentication
 
@@ -288,10 +288,10 @@ rendition:
 
 | Deployment | Service port | Service type |
 |-----------|-------------|--------------|
-| Broker | 8761 | ClusterIP |
-| Converter | 19999 | ClusterIP |
-| Renderer | 9091 | ClusterIP |
-| Text Handler | 8899 | ClusterIP |
+| Document Service Broker | 8761 | ClusterIP |
+| Document Converter | 19999 | ClusterIP |
+| Document Renderer | 9091 | ClusterIP |
+| Document Text Handler | 8899 | ClusterIP |
 | Hazelcast | 5701 | ClusterIP |
 
 ## Hazelcast clustering
@@ -304,10 +304,10 @@ All services have configurable liveness and readiness probes:
 
 | Service | Liveness delay | Readiness delay | Period |
 |---------|---------------|-----------------|--------|
-| Broker | 30s | 60s | 15s |
-| Converter | 30s | 60s | 15s |
-| Renderer | 30s | 60s | 15s |
-| Text Handler | 30s | 60s | 15s |
+| Document Service Broker | 30s | 60s | 15s |
+| Document Converter | 30s | 60s | 15s |
+| Document Renderer | 30s | 60s | 15s |
+| Document Text Handler | 30s | 60s | 15s |
 
 ## Broker RBAC
 

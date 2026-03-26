@@ -6,7 +6,7 @@ sidebar_position: 3
 
 # Provider API
 
-The Provider API defines the REST contract that every connector provider must implement. The service broker calls these endpoints to fetch documents and manage annotations on behalf of the viewer.
+The Provider API defines the REST contract that every connector provider must implement. The Document Service Broker calls these endpoints to fetch documents and manage annotations on behalf of the viewer.
 
 For the broker-side endpoints that consume this API, see [Broker API - Connector operations](./broker-api.md#connector-operations).
 

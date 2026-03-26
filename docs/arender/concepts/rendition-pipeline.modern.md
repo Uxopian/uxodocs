@@ -21,7 +21,7 @@ When a user opens a document, the viewer and broker coordinate through multiple 
 ```mermaid
 sequenceDiagram
     participant C as Client
-    participant B as Service Broker
+    participant B as Broker
     participant Co as Converter
     participant FS as Shared Storage
 
@@ -40,7 +40,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant C as Client
-    participant B as Service Broker
+    participant B as Broker
     participant R as Renderer
     participant T as Text Handler
     participant FS as Shared Storage
@@ -60,11 +60,11 @@ sequenceDiagram
 
 ### 1. Document loading
 
-The document is loaded into the service broker — either through a provider or directly by URL. The broker stores the original file in the shared temporary volume (`/arender/tmp`).
+The document is loaded into the Document Service Broker — either through a provider or directly by URL. The broker stores the original file in the shared temporary volume (`/arender/tmp`).
 
 ### 2. Format conversion
 
-If the document is not a native format (PDF, TIFF, or supported image), the broker sends it to the document converter for transformation to PDF. The converter selects the appropriate engine:
+If the document is not a native format (PDF, TIFF, or supported image), the broker sends it to the Document Converter for transformation to PDF. The converter selects the appropriate engine:
 
 | Source format | Conversion engine |
 |--------------|-------------------|
@@ -85,7 +85,7 @@ Once conversion completes (or immediately for native formats), the broker builds
 
 ### 4. Page rendering (on demand)
 
-When the viewer needs to display a specific page, it requests the page image from the broker. The document renderer reads the PDF and produces the image. PDFOwl is the default rendering engine.
+When the viewer needs to display a specific page, it requests the page image from the broker. The Document Renderer reads the PDF and produces the image. PDFOwl is the default rendering engine.
 
 - **PDFOwl**: pool-based rendering engine (default)
 - **JNI renderer**: legacy native library (deprecated)
@@ -94,7 +94,7 @@ Rendering parameters include width, rotation, crop box, layer visibility, and im
 
 ### 5. Text extraction (on demand)
 
-When the viewer needs text for a specific page (for search highlighting, text selection, or copy), it requests text positions from the broker. The text handler (PDFBox) extracts:
+When the viewer needs text for a specific page (for search highlighting, text selection, or copy), it requests text positions from the broker. The Document Text Handler (PDFBox) extracts:
 
 - Character-level text positions for search result highlighting
 - Full-text content for search indexing

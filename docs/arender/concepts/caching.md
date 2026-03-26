@@ -10,11 +10,11 @@ content_hash: 23f0b94293f5696f84079dc03c95ee23f813b751c5687e96d49f27bf0d8427dc
 
 # Caching
 
-ARender uses Hazelcast as a distributed in-memory data store on the service broker. Caching reduces redundant document fetches and enables horizontal scaling of broker instances.
+ARender uses Hazelcast as a distributed in-memory data store on the Document Service Broker. Caching reduces redundant document fetches and enables horizontal scaling of broker instances.
 
 ## What gets cached
 
-The service broker uses Hazelcast maps to store:
+The Document Service Broker uses Hazelcast maps to store:
 
 | Map name | Content | Default idle timeout |
 |----------|---------|---------------------|
@@ -77,7 +77,7 @@ hazelcast:
 
 **`network.join.auto-detection: false`** disables Hazelcast's automatic cluster discovery. In Docker or Kubernetes deployments, you typically configure explicit member discovery instead, using TCP/IP member lists or the Kubernetes discovery plugin.
 
-## Broker clustering
+## Document Service Broker clustering
 
 Multiple broker instances can form a Hazelcast cluster to share their document accessor cache and conversion order state. This is particularly relevant when the broker is scaled horizontally. Configure TCP/IP join with the addresses of all broker instances, or use the Hazelcast Kubernetes discovery plugin in Kubernetes environments.
 

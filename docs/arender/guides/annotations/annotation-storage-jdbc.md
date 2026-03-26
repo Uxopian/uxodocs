@@ -15,7 +15,7 @@ Use this guide when you need annotations to be stored in a shared relational dat
 
 ## Prerequisites
 
-- ARender UI deployed and able to reach the service broker
+- ARender UI deployed and able to reach the Document Service Broker
 - A supported SQL database: SQL Server or HSQLDB (SQLite is used in tests only and is not recommended for production)
 - JDBC driver JAR available on the classpath or in the application server
 - The `jdbc-annotations` module on the classpath

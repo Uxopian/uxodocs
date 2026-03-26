@@ -23,10 +23,10 @@ graph TB
         GW[Gateway / BFF]
     end
     subgraph Backend
-        GW -->|REST| SB[Service Broker :8761]
-        SB -->|REST| DC[Converter :19999]
-        SB -->|REST| DR[Renderer :9091]
-        SB -->|REST| DT[Text Handler :8899]
+        GW -->|REST| SB[Document Service Broker :8761]
+        SB -->|REST| DC[Document Converter :19999]
+        SB -->|REST| DR[Document Renderer :9091]
+        SB -->|REST| DT[Document Text Handler :8899]
     end
     subgraph Providers
         SB -->|REST| P[Provider Microservices]
@@ -54,17 +54,17 @@ ARender does not yet ship a built-in BFF component — this is planned for an up
 
 | Service | Default port | Purpose |
 |---------|-------------|---------|
-| Service Broker | 8761 | REST API gateway and orchestration |
-| Document converter | 19999 | Format conversion |
-| Document renderer | 9091 | PDF-to-image rendering |
-| Text Handler | 8899 | Text extraction, search, signatures |
+| Document Service Broker | 8761 | REST API gateway and orchestration |
+| Document Converter | 19999 | Format conversion |
+| Document Renderer | 9091 | PDF-to-image rendering |
+| Document Text Handler | 8899 | Text extraction, search, signatures |
 | Alfresco Provider | 8788 | Alfresco document loading |
 | FileNet Provider | 8787 | FileNet document loading |
 | Hazelcast | 5701 | Distributed cache (when clustered) |
 
 ---
 
-## Service broker
+## Document Service Broker
 
 **Port:** 8761
 **Image:** `arender-document-service-broker`
@@ -105,7 +105,7 @@ For configuration properties, see [Rendition configuration](../reference/renditi
 
 ---
 
-## Document converter
+## Document Converter
 
 **Port:** 19999
 **Image:** `arender-document-converter`
@@ -130,7 +130,7 @@ For configuration properties, see [Rendition configuration](../reference/renditi
 
 ---
 
-## Document renderer
+## Document Renderer
 
 **Port:** 9091
 **Image:** `arender-document-renderer-pdfowl`
@@ -212,8 +212,8 @@ In Docker Compose, the broker maps service hostnames to ports using the `kubepro
 
 ```mermaid
 sequenceDiagram
-    participant DC as Converter
-    participant SB as Broker
+    participant DC as Document Converter
+    participant SB as Document Service Broker
     SB->>DC: GET /metadata
     DC-->>SB: name, instanceId, hostName
     SB->>SB: Store in service registry
@@ -270,11 +270,11 @@ All communication between services is over HTTP (REST). There is no message queu
 sequenceDiagram
     participant UI as React UI
     participant GW as Gateway / BFF
-    participant SB as Broker
+    participant SB as Document Service Broker
     participant P as Provider
-    participant DC as Converter
-    participant DR as Renderer
-    participant DT as Text Handler
+    participant DC as Document Converter
+    participant DR as Document Renderer
+    participant DT as Document Text Handler
 
     UI->>GW: POST /connector/documents
     GW->>SB: POST /connector/documents (+ X-Provider-ID)

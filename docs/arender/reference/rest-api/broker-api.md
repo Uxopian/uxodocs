@@ -10,7 +10,7 @@ content_hash: 74a824487b9afc1553ad7fe7c4d2411379f3e748505f9806ad648d79270d995c
 
 # Broker API
 
-The service broker exposes the main REST API for document operations.
+The Document Service Broker exposes the main REST API for document operations.
 
 The interactive Swagger UI is available at:
 

@@ -40,7 +40,7 @@ graph LR
     Browser --> HostApp["Host application"]
     HostApp -->|"&lt;arender-element&gt;"| ReactUI["React UI<br/>(Web Component)"]
     ReactUI --> GW["Gateway / BFF"]
-    GW --> Broker["Service Broker :8761"]
+    GW --> Broker["Document Service Broker :8761"]
     Broker --> Provider["Provider microservice"]
     Provider --> Repo["Document Repository"]
 ```
@@ -48,7 +48,7 @@ graph LR
 - **Host application** — your web application, built with any technology
 - **React UI** — the `<arender-element>` Web Component, bundled into your app via npm
 - **Reverse proxy / BFF** — sits between the viewer and the broker. At minimum, a reverse proxy (Nginx) routes API calls and solves CORS. When using connector providers, it also injects the `X-Provider-ID` header. When OAuth2 is enabled on the rendition backend, a full BFF handles token management on behalf of the viewer. If your environment already has a BFF or API gateway, you can reuse it.
-- **Service Broker** — the ARender backend that orchestrates rendition (conversion, rendering, text extraction)
+- **Document Service Broker** — the ARender backend that orchestrates rendition (conversion, rendering, text extraction)
 - **Provider** — an optional microservice that loads documents from a repository (Alfresco, FileNet, or a custom source)
 - **Document Repository** — the system where your documents are stored
 

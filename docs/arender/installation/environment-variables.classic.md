@@ -29,10 +29,10 @@ Each service uses a prefix. All environment variable names must be uppercase.
 | Service | Container image | Prefix |
 |---------|----------------|--------|
 | Viewer | `arender-ui-springboot` | `ARENDERSRV_` |
-| Service broker | `arender-document-service-broker` | `DSB_` |
-| Document converter | `arender-document-converter` | `DCV_` |
-| Document renderer | `arender-document-renderer-pdfowl` | `DRN_` |
-| Document text handler | `arender-document-text-handler` | `DTH_` |
+| Document Service Broker | `arender-document-service-broker` | `DSB_` |
+| Document Converter | `arender-document-converter` | `DCV_` |
+| Document Renderer | `arender-document-renderer-pdfowl` | `DRN_` |
+| Document Text Handler | `arender-document-text-handler` | `DTH_` |
 
 :::warning
 Native Spring Boot properties (e.g., `spring.security.oauth2.*`) must **not** be prefixed with `ARENDERSRV_`, otherwise they won't be taken into account or not properly used/detected at the right time. Only ARender-specific properties (e.g., `arender.server.*`) use the `ARENDERSRV_` prefix.

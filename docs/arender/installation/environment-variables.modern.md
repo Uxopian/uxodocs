@@ -27,10 +27,10 @@ Each service uses a prefix. All environment variable names must be uppercase.
 
 | Service | Container image | Prefix |
 |---------|----------------|--------|
-| Service broker | `arender-document-service-broker` | `DSB_` |
-| Document converter | `arender-document-converter` | `DCV_` |
-| Document renderer | `arender-document-renderer-pdfowl` | `DRN_` |
-| Document text handler | `arender-document-text-handler` | `DTH_` |
+| Document Service Broker | `arender-document-service-broker` | `DSB_` |
+| Document Converter | `arender-document-converter` | `DCV_` |
+| Document Renderer | `arender-document-renderer-pdfowl` | `DRN_` |
+| Document Text Handler | `arender-document-text-handler` | `DTH_` |
 
 
 ### Property-to-variable mapping rules

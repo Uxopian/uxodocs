@@ -11,7 +11,7 @@ content_hash: b2eda8f4f097879ad4c5b991a98d213ca6734fd0c3bcca9b44d8f0da6362649a
 
 # Connector providers
 
-The Modern Viewer loads documents from external repositories through **providers** — standalone REST microservices that run as their own Docker containers. Each provider communicates with the service broker over HTTP and handles document retrieval from a specific repository type.
+The Modern Viewer loads documents from external repositories through **providers** — standalone REST microservices that run as their own Docker containers. Each provider communicates with the Document Service Broker over HTTP and handles document retrieval from a specific repository type.
 
 This decoupled model means connectors have their own lifecycle, scaling, and release cadence — independent of the viewer and of each other.
 

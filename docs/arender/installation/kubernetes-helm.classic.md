@@ -25,7 +25,7 @@ ARender provides Helm charts for deploying to Kubernetes. The chart creates depl
 
 The `arender` parent chart (v0.4.0) contains two sub-charts:
 
-- **rendition**: deploys the service broker, converter, renderer, and text handler
+- **rendition**: deploys the Document Service Broker, converter, renderer, and text handler
 - **viewer**: deploys the UI application
 
 Each sub-chart can also be installed standalone.
@@ -246,10 +246,10 @@ viewer:
 | Deployment | Service port | Service type |
 |-----------|-------------|--------------|
 | Viewer | 80 | ClusterIP |
-| Broker | 8761 | ClusterIP |
-| Converter | 19999 | ClusterIP |
-| Renderer | 9091 | ClusterIP |
-| Text Handler | 8899 | ClusterIP |
+| Document Service Broker | 8761 | ClusterIP |
+| Document Converter | 19999 | ClusterIP |
+| Document Renderer | 9091 | ClusterIP |
+| Document Text Handler | 8899 | ClusterIP |
 | Hazelcast | 5701 | ClusterIP |
 
 ## Hazelcast clustering
@@ -262,10 +262,10 @@ All services have configurable liveness and readiness probes:
 
 | Service | Liveness delay | Readiness delay | Period |
 |---------|---------------|-----------------|--------|
-| Broker | 30s | 60s | 15s |
-| Converter | 30s | 60s | 15s |
-| Renderer | 30s | 60s | 15s |
-| Text Handler | 30s | 60s | 15s |
+| Document Service Broker | 30s | 60s | 15s |
+| Document Converter | 30s | 60s | 15s |
+| Document Renderer | 30s | 60s | 15s |
+| Document Text Handler | 30s | 60s | 15s |
 | Viewer | 30s | 60s | 30s/60s |
 
 ## Broker RBAC

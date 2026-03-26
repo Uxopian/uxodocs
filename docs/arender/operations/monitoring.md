@@ -14,13 +14,13 @@ ARender exposes metrics, health endpoints, and structured logs across all rendit
 
 ## Actuator endpoints
 
-All rendition services expose Spring Boot Actuator endpoints. The broker exposes three endpoints by default:
+All rendition services expose Spring Boot Actuator endpoints. The Document Service Broker exposes three endpoints by default:
 
 ```properties
 management.endpoints.web.exposure.include=prometheus,metrics,health
 ```
 
-The converter, renderer, and text handler expose an additional `shutdown` endpoint used by the broker's health check loop to restart failed services in standalone mode:
+The Document Converter, Document Renderer, and Document Text Handler expose an additional `shutdown` endpoint used by the broker's health check loop to restart failed services in standalone mode:
 
 ```properties
 management.endpoints.web.exposure.include=prometheus,metrics,health,shutdown
@@ -58,10 +58,10 @@ ARender uses Micrometer for metrics collection. Each service tags its metrics wi
 
 | Service | Host tag |
 |---|---|
-| Broker | `arender-broker` |
-| Converter | `arender-taskconversion` |
-| Renderer | `arender-jni` |
-| Text handler | `arender-pdfbox` |
+| Document Service Broker | `arender-broker` |
+| Document Converter | `arender-taskconversion` |
+| Document Renderer | `arender-jni` |
+| Document Text Handler | `arender-pdfbox` |
 
 All services share the same application tag:
 
@@ -248,10 +248,10 @@ The Helm chart configures HTTP probes for all services:
 
 | Service | Liveness path | Readiness path | Liveness delay | Readiness delay | Period |
 |---|---|---|---|---|---|
-| Broker | `/swagger-ui/index.html` | `/health/readiness` | 30s | 60s | 15s |
-| Converter | `/actuator/health` | `/health/readiness` | 30s | 60s | 15s |
-| Renderer | `/actuator/health` | `/health/readiness` | 30s | 60s | 15s |
-| Text handler | `/actuator/health` | `/health/readiness` | 30s | 60s | 15s |
+| Document Service Broker | `/swagger-ui/index.html` | `/health/readiness` | 30s | 60s | 15s |
+| Document Converter | `/actuator/health` | `/health/readiness` | 30s | 60s | 15s |
+| Document Renderer | `/actuator/health` | `/health/readiness` | 30s | 60s | 15s |
+| Document Text Handler | `/actuator/health` | `/health/readiness` | 30s | 60s | 15s |
 
 These values are configurable per service in `values.yaml`:
 
@@ -326,10 +326,10 @@ When file logging is enabled, each service writes to `/arender/logs/`:
 
 | Service | Log file | Additional log files |
 |---|---|---|
-| Broker | `arender-broker.log` | `arender-perf.log`, `arender-health.log` |
-| Converter | `arender-converter.log` | |
-| Renderer | `arender-renderer.log` | |
-| Text handler | `arender-handler.log` | |
+| Document Service Broker | `arender-broker.log` | `arender-perf.log`, `arender-health.log` |
+| Document Converter | `arender-converter.log` | |
+| Document Renderer | `arender-renderer.log` | |
+| Document Text Handler | `arender-handler.log` | |
 
 All log files use a `FixedWindowRollingPolicy` with a max size of 2 MB per file (Helm) or 50 MB (Docker image default), compressed with ZIP, up to 50 archived files.
 

@@ -34,7 +34,7 @@ Pass a `uuid` parameter containing a previously generated `DocumentId`:
 https://your-arender-host/?uuid=b64_dXJsPWh0dHA6Ly9leGFtcGxlLmNvbS9zYW1wbGUucGRm
 ```
 
-This is the typical pattern when an external system (a connector, an ECM plugin, or a backend call) has already loaded the document and registered it with the service broker. The viewer looks up the existing `DocumentAccessor` from the cache rather than fetching the document again.
+This is the typical pattern when an external system (a connector, an ECM plugin, or a backend call) has already loaded the document and registered it with the Document Service Broker. The viewer looks up the existing `DocumentAccessor` from the cache rather than fetching the document again.
 
 ## Multi-document opening
 

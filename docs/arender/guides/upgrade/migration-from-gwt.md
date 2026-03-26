@@ -35,8 +35,8 @@ This page maps GWT viewer concepts to their React UI equivalents. Use it as a re
 
 The entire backend stack is shared between both viewers:
 
-- **Service broker** — same image, same configuration
-- **Document converter, renderer, text handler** — unchanged
+- **Document Service Broker** — same image, same configuration
+- **Document Converter, Document Renderer, Document Text Handler** — unchanged
 - **Annotation storage** — XFDF files, JDBC, or REST, configured on the backend
 - **Rendition properties** — all document processing settings
 - **Licensing** — same license file

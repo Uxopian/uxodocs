@@ -10,11 +10,11 @@ content_hash: 7d2d1377b56312e9094040a2135f3d88ed008e839a348648db607fe677f0ad73
 
 # Documents and document IDs
 
-Every document in ARender is identified by a **DocumentId** and accessed through a **DocumentAccessor**. Think of it as a key-value pair: the DocumentId is the key, the DocumentAccessor is the value. This pair is the foundation of how ARender identifies and accesses documents across the viewer, service broker, connectors, and caching layer.
+Every document in ARender is identified by a **DocumentId** and accessed through a **DocumentAccessor**. Think of it as a key-value pair: the DocumentId is the key, the DocumentAccessor is the value. This pair is the foundation of how ARender identifies and accesses documents across the viewer, Document Service Broker, connectors, and caching layer.
 
 ## DocumentId
 
-A `DocumentId` is a string-valued handle that uniquely identifies a document within the system. The viewer, service broker, and caching layer all use `DocumentId` as the common key.
+A `DocumentId` is a string-valued handle that uniquely identifies a document within the system. The viewer, the broker, and caching layer all use `DocumentId` as the common key.
 
 The internal string representation is opaque to most consumers. By default ARender uses a Base64 encoding that produces IDs prefixed with `b64_`:
 

@@ -35,7 +35,7 @@ Set to `horizontal` for a side-by-side horizontal layout.
 
 ### Step 2: Trigger the comparison
 
-Click the comparison button in the top panel. ARender sends both document IDs to the service broker, which performs a text diff and returns a `DocumentCompareResult` containing a list of `TextChange` objects. Each `TextChange` has a position on the left document, a position on the right document, and a change type: `ADD`, `DELETE`, or `EQUAL`.
+Click the comparison button in the top panel. ARender sends both document IDs to the Document Service Broker, which performs a text diff and returns a `DocumentCompareResult` containing a list of `TextChange` objects. Each `TextChange` has a position on the left document, a position on the right document, and a change type: `ADD`, `DELETE`, or `EQUAL`.
 
 ### Step 3: Review results
 

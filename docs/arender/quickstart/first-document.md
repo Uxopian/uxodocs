@@ -26,7 +26,7 @@ authorized.paths=../../samples/,../samples/,../../tmp/,../tmp
 authorized.urls=
 ```
 
-To allow an external URL, set the `authorized.urls` property on the service broker. As an environment variable:
+To allow an external URL, set the `authorized.urls` property on the Document Service Broker. As an environment variable:
 
 ```yaml
   service-broker:

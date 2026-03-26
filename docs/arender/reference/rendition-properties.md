@@ -16,9 +16,9 @@ Properties shown here are the defaults from the source. Omitting a property leav
 
 ---
 
-## Service broker
+## Document Service Broker
 
-The service broker (`arender-document-service-broker`) runs on port 8761 and acts as the main orchestrator.
+The Document Service Broker (`arender-document-service-broker`) runs on port 8761 and acts as the main orchestrator.
 
 ### Network
 
@@ -167,9 +167,9 @@ CONNECTOR_REGISTRIES_ALFRESCO_WHITELISTED_PARAMS=nodeRef,alf_ticket,user,version
 
 ---
 
-## Document converter
+## Document Converter
 
-The document converter (`arender-document-converter`) runs on port 19999.
+The Document Converter (`arender-document-converter`) runs on port 19999.
 
 ### Temporary files
 
@@ -309,9 +309,9 @@ The document converter (`arender-document-converter`) runs on port 19999.
 
 ---
 
-## Document renderer (PDFOwl)
+## Document Renderer (PDFOwl)
 
-The document renderer (`arender-document-renderer-pdfowl`) runs on port 9091.
+The Document Renderer (`arender-document-renderer-pdfowl`) runs on port 9091.
 
 ### Network
 
@@ -339,9 +339,9 @@ The document renderer (`arender-document-renderer-pdfowl`) runs on port 9091.
 
 ---
 
-## Document text handler
+## Document Text Handler
 
-The document text handler (`arender-document-text-handler`) handles text extraction and comparison.
+The Document Text Handler (`arender-document-text-handler`) handles text extraction and comparison.
 
 ### PDF text and signatures
 

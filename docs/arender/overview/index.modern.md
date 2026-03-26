@@ -45,14 +45,14 @@ See [Supported formats](./supported-formats.md) for the complete matrix.
 
 ## Architecture at a glance
 
-ARender runs as a set of Docker containers. A **viewer** connects to the **service broker**, which orchestrates backend microservices for conversion, rendering, and text extraction. All rendition services share a temporary file volume (`/arender/tmp`).
+ARender runs as a set of Docker containers. A **viewer** connects to the **Document Service Broker**, which orchestrates backend microservices for conversion, rendering, and text extraction. All rendition services share a temporary file volume (`/arender/tmp`).
 
 ```mermaid
 graph LR
-    Client["Viewer"] --> Broker["Service Broker"]
+    Client["Viewer"] --> Broker["Document Service Broker"]
     Broker --> Converter["Document Converter"]
     Broker --> Renderer["Document Renderer"]
-    Broker --> TextHandler["Text Handler"]
+    Broker --> TextHandler["Document Text Handler"]
 ```
 
 The [Modern Viewer](./modern-viewer.md) is an npm package embedded as a Web Component in your application. It connects to the rendition backend to display and annotate documents.

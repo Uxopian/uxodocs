@@ -19,9 +19,9 @@ Connectors are standalone REST microservices called **providers**. Each provider
 A provider:
 
 1. **Runs** as a separate service that exposes a REST API for document retrieval.
-2. **Receives** requests from the service broker, which routes them based on the `X-Provider-ID` header.
+2. **Receives** requests from the Document Service Broker, which routes them based on the `X-Provider-ID` header.
 3. **Returns** document content via REST resources (`ProviderFile` / `ProviderFolder`).
-4. The **service broker** creates `DocumentAccessor` instances internally from the provider response, so the rest of the pipeline works the same way.
+4. The **broker** creates `DocumentAccessor` instances internally from the provider response, so the rest of the pipeline works the same way.
 
 This model decouples connectors from the viewer, allowing each provider to be deployed, scaled, and updated independently.
 

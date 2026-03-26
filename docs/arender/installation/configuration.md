@@ -17,7 +17,7 @@ Backend rendition configuration (broker, converter, renderer) is documented in [
 
 ## Connecting to the rendition backend
 
-The React UI makes REST API calls to the service broker for document operations. The broker URL is determined by how you set up the connection in your host application:
+The React UI makes REST API calls to the Document Service Broker for document operations. The broker URL is determined by how you set up the connection in your host application:
 
 - **Reverse proxy (recommended):** Your application server proxies `/documents`, `/annotation`, and `/connector/documents` routes to the broker. The React UI calls these as relative URLs — no cross-origin issues.
 - **Direct connection:** The React UI calls the broker URL directly. Requires CORS configuration.
@@ -97,5 +97,5 @@ DSB_AUTHORIZED_URLS=https://www.uxopian.com/,https://your-docs-server.example.co
 
 | Component | Default port | Description |
 |-----------|-------------|-------------|
-| Service Broker | 8761 | Backend orchestrator |
+| Document Service Broker | 8761 | Backend orchestrator |
 | Alfresco Provider | 8788 | Alfresco connector microservice |

@@ -10,7 +10,7 @@ content_hash: b25a6dff9ab4909318f44a62b3a59d763dd00811ea3019b57bb9a34dd1d2c4cb
 
 # Classic viewer caching
 
-The Classic viewer (HMI) runs its own Hazelcast instance, separate from the broker's Hazelcast cluster. It stores document accessors, routing tables, and HTTP sessions. This page covers the viewer-side caching; for broker-side caching shared by both viewers, see [Caching](./caching.md).
+The Classic viewer (HMI) runs its own Hazelcast instance, separate from the Document Service Broker's Hazelcast cluster. It stores document accessors, routing tables, and HTTP sessions. This page covers the viewer-side caching; for broker-side caching shared by both viewers, see [Caching](./caching.md).
 
 ## What gets cached
 
@@ -22,7 +22,7 @@ The Classic viewer uses Hazelcast maps to store:
 | `directDocumentMap` | Directly uploaded or URL-loaded document accessors | 3600 seconds |
 | `spring:session:sessions` | HTTP session data (when Hazelcast sessions are enabled) | Managed by Spring Session |
 | `spring:oauth2:oauth2Authorized` | OAuth2 authorized client tokens (when OAuth2 is enabled) | No idle expiry |
-| `documentRouteTable` | Mapping from `DocumentId` to the service broker instance that holds the document | No idle expiry |
+| `documentRouteTable` | Mapping from `DocumentId` to the Document Service Broker instance that holds the document | No idle expiry |
 
 ## How it works
 
@@ -30,7 +30,7 @@ When a user opens a document in the Classic viewer:
 
 1. The viewer checks `documentAccessorsHMI` for an existing `DocumentAccessor` matching the `DocumentId`.
 2. If absent, the connector fetches the document and the accessor is stored in the cache.
-3. The viewer sends the document to the service broker for rendition.
+3. The viewer sends the document to the broker for rendition.
 4. The `documentRouteTable` records which broker instance owns the document, so subsequent requests go to the same broker.
 
 ## Hazelcast configuration

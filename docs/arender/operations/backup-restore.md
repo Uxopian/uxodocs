@@ -57,7 +57,7 @@ kubectl get secret -n arender -o yaml > arender-secrets-backup.yaml
 
 ## Broker and rendition service configuration
 
-The service broker and rendition microservices read configuration from:
+The Document Service Broker and rendition microservices read configuration from:
 
 - `application.properties` in each module directory (`modules/RenditionEngine/`, `modules/TaskConversion/`, etc.)
 - `hazelcast.yaml` for cache clustering
@@ -208,7 +208,7 @@ To restore a complete ARender deployment from backup:
 2. **Restore configuration**: apply Helm values, Compose files, ConfigMaps, and Secrets from backup.
 3. **Restore annotation data**: restore XFDF files to the correct volume or restore the annotation database from dump.
 4. **Deploy ARender**: run `helm install` or `docker compose up -d` with the backed-up configuration.
-5. **Verify**: open a document that had existing annotations and confirm they appear. Check the service broker health endpoint to confirm all microservices registered.
+5. **Verify**: open a document that had existing annotations and confirm they appear. Check the broker health endpoint to confirm all microservices registered.
 
 The rendition cache rebuilds automatically on first document access. No separate restore step is needed for it.
 

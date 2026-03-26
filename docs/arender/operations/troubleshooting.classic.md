@@ -45,7 +45,7 @@ java -jar arender-document-service-broker-{{version}}.jar 2>&1 | head -50
 
 ---
 
-### Broker starts but rendition services do not register
+### Document Service Broker starts but rendition services do not register
 
 **Symptoms:** The broker starts successfully. When loading a document, the viewer returns an error. Broker logs contain: `Found 0 instance of document-converter` (or `document-renderer`, `document-text-handler`).
 
@@ -71,15 +71,15 @@ curl http://localhost:8899/actuator/health
 ```
 
 **Resolution:**
-- In Docker Compose: verify that `DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999` (and the equivalent for renderer and text handler) are set on the broker service.
+- In Docker Compose: verify that `DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999` (and the equivalent for the Document Renderer and Document Text Handler) are set on the broker service.
 - In standalone mode: set `kubeprovider.kube.hosts.document-converter=19999` and `kubeprovider.useLocalhost=true` in the broker's `application.properties`.
 - Wait for services to finish their startup sequence before checking. The broker pings services every 5 seconds by default (`health.check.poll.interval=5`).
 
 ---
 
-### Service fails to connect to the broker
+### Service fails to connect to the Document Service Broker
 
-**Symptoms:** Converter, renderer, or text handler logs contain messages about failing to connect to the broker or health check timeout.
+**Symptoms:** Document Converter, renderer, or text handler logs contain messages about failing to connect to the broker or health check timeout.
 
 **Possible causes:**
 - The broker hostname configured in the rendition service does not resolve or is unreachable.
@@ -113,7 +113,7 @@ docker compose exec document-converter curl http://service-broker:8761/actuator/
 
 **Possible causes:**
 - The viewer UI cannot reach the broker. The `arender.server.rendition.hosts` property points to a wrong address.
-- The broker is up but no rendition services are registered (see [Broker starts but rendition services do not register](#broker-starts-but-rendition-services-do-not-register)).
+- The broker is up but no rendition services are registered (see [Document Service Broker starts but rendition services do not register](#document-service-broker-starts-but-rendition-services-do-not-register)).
 - A network proxy or firewall blocks requests between the viewer UI and the broker.
 - The document format is not supported or the format detection fails.
 

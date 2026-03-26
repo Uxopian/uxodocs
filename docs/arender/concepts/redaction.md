@@ -39,7 +39,7 @@ When the user triggers a redacted export (via the document builder), ARender pro
 - The underlying text is **removed from the PDF content stream** — it is no longer selectable, searchable, or extractable
 - The original document remains untouched
 
-This is handled by the redaction engine in the document converter service, which parses the PDF content stream token by token and replaces text that falls within redaction rectangles with spacing adjustments.
+This is handled by the redaction engine in the Document Converter, which parses the PDF content stream token by token and replaces text that falls within redaction rectangles with spacing adjustments.
 
 **Marking is reversible. Burning is not.** Once a redacted document is exported, the original content under the redaction cannot be recovered from the output.
 
@@ -47,7 +47,7 @@ This is handled by the redaction engine in the document converter service, which
 
 ARender introduces an authorization layer that determines **what a user sees when redaction annotations exist** on a document — even before any burning occurs.
 
-When the viewer requests a document rendition, the service broker checks whether the current user is authorized to view the original content:
+When the viewer requests a document rendition, the Document Service Broker checks whether the current user is authorized to view the original content:
 
 | Authorization result | User sees |
 |----------------------|-----------|
