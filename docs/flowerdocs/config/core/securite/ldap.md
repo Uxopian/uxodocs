@@ -43,8 +43,8 @@ The information to be configured is as follows:
 | `URL`                       | URL                                        | Directory access url                                                  |
 | `User`                      | User                                       | User to connect to the directory                                      |
 | `Password`                  | Password                                   | Password for directory user                                           |
-| `BaseDN`                    | User Base DN                                | DN configured in the directory for user search                        |
-| `GroupBaseDN`               | Group Base DN                                | DN configured in the directory for group search                        |
+| `BaseDN`                    | User Base DN                                | DN configured in the directory for user searches                        |
+| `GroupBaseDN`               | Group Base DN                                | DN configured in the directory for group searches                        |
 | `IdAttribute`               | Attribute for identifier                   | Directory attribute used to store the user identifier                 |
 | `GroupIdAttribute`          | Attribute for group identifier             | Directory attribute used to store the group identifier                |
 | `DisplayNameAttribute`      | Display name attribute                     | Directory attribute used to store the user's display name             |
