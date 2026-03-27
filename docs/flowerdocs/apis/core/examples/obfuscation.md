@@ -1,7 +1,7 @@
 ---
 title: Obfuscating content
 description: Obfuscate sensitive data within documents
-sidebar_position: 15
+sidebar_position: 22
 date: "2018-04-02T12:20:01+02:00"
 last_update:
   date: '2026-01-26T14:16:25.927Z'
@@ -12,6 +12,10 @@ content_hash: 4a4e0bc5ebf1b30e208998479359970c84ef27ffb6cb36bd6351948854348a0b
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+:::warning
+This feature is in beta.
+:::
+
 The `ObfuscationService` service exposes a `create` operation. All parts of the document content corresponding to the search defined in the call will be automatically obfuscated.
 
 # Search for areas to obfuscate
@@ -19,12 +23,12 @@ The `ObfuscationService` service exposes a `create` operation. All parts of the 
 The research model used in the call for proposals is as follows:
 
 ```json
-
+{
   "accentSensitive": true,
   "caseSensitive": true,
   "regex": true,
   "text": "string"
-
+}
 ```
 
 The `text` is the value or pattern you are looking for. The default value is a pattern. To find the exact value and not a pattern, the value `regex` must be set to `false`.
@@ -36,49 +40,41 @@ The `accentSensitive` and `caseSensitive` parameters indicate that the search sh
 The examples below show how to obfuscate a value (in the example: "Demo") and a reason (here hides IBANs in the document).
 
 <Tabs>
-  <TabItem value="case-sensitive-value" label="Case sensitive value">
+  <TabItem value="case_sensitive_value" label="Case sensitive value">
 
-```http
-POST {{core}}/rest/documents/{{documentId}}/obfuscations HTTP/1.1
+```bash
+# <CORE_HOST>    FlowerDocs Core base URL
+# <TOKEN>        authentication token
+# <DOCUMENT_ID>  identifier of the document to be obfuscated
 
---URL parameters
-core: FlowerDocs Core host
-documentId: identifier of the document to be obfuscated
-
---Headers
-token: {{token}}
-Content-Type: application/json
-
---Body (json)
-
+curl -X POST "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/obfuscations" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
   "accentSensitive": true,
   "caseSensitive": false,
   "regex": false,
   "text": "Demo"
-
+}'
 ```
 
   </TabItem>
   <TabItem value="reason" label="Reason">
 
-```http
-POST {{core}}/rest/documents/{{documentId}}/obfuscations HTTP/1.1
+```bash
+# <CORE_HOST>    FlowerDocs Core base URL
+# <TOKEN>        authentication token
+# <DOCUMENT_ID>  identifier of the document to be obfuscated
 
--- URL parameters
-core: FlowerDocs Core host
-documentId: identifier of the document to be obfuscated
-
---Headers
-token: {{token}}
-Content-Type: application/json
-
---Body (json)
-
+curl -X POST "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/obfuscations" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
   "accentSensitive": false,
   "caseSensitive": false,
   "regex": true,
   "text": "IBAN : (.{4}-){3}.{4}"
-
+}'
 ```
 
   </TabItem>

@@ -1,0 +1,25 @@
+(function () {
+    var jsUrl = GATEWAY_ENDPOINT + '/api/web-components/chat/script';
+    var cssUrl = GATEWAY_ENDPOINT + '/api/web-components/chat/style';
+
+    function loadAssets(jsUrl, cssUrl) {
+        if (!document.querySelector('link[href="' + cssUrl + '"]')) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = cssUrl;
+            document.head.appendChild(link);
+        }
+        var existing = document.querySelector('script[src="' + jsUrl + '"]');
+        if (existing) return Promise.resolve();
+        return new Promise(function (resolve, reject) {
+            var script = document.createElement('script');
+            script.src = jsUrl;
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+
+    loadAssets(jsUrl, cssUrl);
+})();

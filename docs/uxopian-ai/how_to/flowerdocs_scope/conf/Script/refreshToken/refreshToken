@@ -1,0 +1,7 @@
+JSAPI.get().registerForComponentChange(function (
+  componentFormAPI,
+  component,
+  phase
+) {
+  fetch(GATEWAY_ENDPOINT);
+});

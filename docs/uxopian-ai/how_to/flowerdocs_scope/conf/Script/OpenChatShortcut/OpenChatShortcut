@@ -1,0 +1,20 @@
+(function () {
+  "use strict";
+  MenuShortcutsAPI.get().registerForLoad(function (api) {
+    api.addCircled(
+      "openChat",
+      "fas fa-robot",
+      "flat-red",
+      "Chat",
+      "Open chat",
+      function () {
+        fetch(GATEWAY_ENDPOINT).then(() =>
+          createChat({
+            endpoint: UXO_AI_ENDPOINT,
+            wsEndpoint: WS_UXO_AI_ENDPOINT,
+          })
+        );
+      }
+    );
+  });
+})();

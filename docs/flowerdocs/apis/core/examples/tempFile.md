@@ -14,9 +14,9 @@ import TabItem from '@theme/TabItem';
 
 The `TempFileService` service exposes the following operations:
 
-- `create`: to create a temporary file
-- `getContent`: to retrieve a temporary file
-- `delete`: to delete a temporary file
+* `create`: to create a temporary file
+* `getContent`: to retrieve a temporary file
+* `delete`: to delete a temporary file
 
 # Creating a temporary file
 
@@ -27,19 +27,17 @@ CREATE:
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-POST {{core}}/rest/files/tmp HTTP/1.1
+```bash
+# <CORE_HOST>  FlowerDocs Core base URL
+# <TOKEN>      authentication token
 
--- URL parameters --
-core: FlowerDocs Core host
-file: temporary file to create
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X POST "<CORE_HOST>/rest/files/tmp" \
+  -H "token: <TOKEN>" \
+  -F "file=@/path/to/file"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -47,12 +45,12 @@ Content-Type: application/json
 private TempFileService tempFileService;
 
 public DocumentFile create() throws TechnicalException, FunctionalException
-
+{
 	DocumentFile file = new DocumentFile();
     file.setId(new Id("MyFile"));
     file.setContent(new DataHandler(new FileDataSource(File.createTempFile("/tmp", ".txt"))));
 	return tempFileService.create(file);
-
+}
 ```
 
   </TabItem>
@@ -67,19 +65,17 @@ GET CONTENT:
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-GET {{core}}/rest/files/tmp/{id} HTTP/1.1
+```bash
+# <CORE_HOST>  FlowerDocs Core base URL
+# <TOKEN>      authentication token
+# <FILE_ID>    identifier of the temporary file
 
--- URL parameters --
-core: FlowerDocs Core host
-id: id of the temporary file
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X GET "<CORE_HOST>/rest/files/tmp/<FILE_ID>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -87,10 +83,10 @@ Content-Type: application/json
 private TempFileService tempFileService;
 
 public DocumentFile get() throws TechnicalException, FunctionalException
-
+{
 	Id id = new Id("MyFile");
 	return tempFileService.get(id);
-
+}
 ```
 
   </TabItem>
@@ -105,19 +101,17 @@ DELETE :
 <Tabs>
   <TabItem value="rest" label="REST">
 
-```http
-DELETE {{core}}/rest/files/tmp/{id} HTTP/1.1
+```bash
+# <CORE_HOST>  FlowerDocs Core base URL
+# <TOKEN>      authentication token
+# <FILE_ID>    identifier of the temporary file
 
--- URL parameters --
-core: FlowerDocs Core host
-id: id of the temporary file
-
--- Headers --
-token: {{token}}
-Content-Type: application/json
+curl -X DELETE "<CORE_HOST>/rest/files/tmp/<FILE_ID>" \
+  -H "token: <TOKEN>"
 ```
 
   </TabItem>
+
   <TabItem value="java" label="JAVA">
 
 ```java
@@ -125,10 +119,10 @@ Content-Type: application/json
 private TempFileService tempFileService;
 
 public void delete() throws TechnicalException, FunctionalException
-
+{
 	Id id = new Id("MyFile");
 	return tempFileService.delete(id);
-
+}
 ```
 
   </TabItem>

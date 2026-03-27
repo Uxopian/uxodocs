@@ -32,7 +32,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 		&lt;dependency&gt;
 			&lt;groupId&gt;com.flower.docs</groupId>
 			&lt;artifactId&gt;flower-docs-starter-client</artifactId>
-			&lt;version&gt;2025.3.0</version>
+			&lt;version&gt;{{version}}</version>
 		</dependency>
 	</dependencies>
 

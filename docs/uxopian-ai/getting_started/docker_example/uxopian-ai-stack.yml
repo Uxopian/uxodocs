@@ -1,10 +1,9 @@
 version: "3.7"
 
 services:
-  # --- Uxopian AI Infrastructure ---
-  uxopian-ai-opensearch-node1:
-    image: opensearchproject/opensearch:2.12.0
-    container_name: uxopian-ai-opensearch-node1
+  # ── OpenSearch ──────────────────────────────────────────────────────────────
+  opensearch:
+    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.3.2}
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opensearch-node1
@@ -20,11 +19,8 @@ services:
       nofile:
         soft: 65536
         hard: 65536
-    ports:
-      - "9200:9200"
-      - "9600:9600"
     volumes:
-      - opensearch-data1:/usr/share/opensearch/data
+      - opensearch-data:/usr/share/opensearch/data
     networks:
       - uxopian-ai-net
     healthcheck:
@@ -35,45 +31,57 @@ services:
       retries: 5
       start_period: 20s
 
-  uxopian-ai-standalone:
-    image: artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft2
-    # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft2
-    container_name: uxopian-ai-standalone-service
+  # ── Uxopian AI ──────────────────────────────────────────────────────────────
+  # Not exposed to the host. All browser traffic goes through the gateway.
+  uxopian-ai:
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft2}
+    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft2}
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
-      - OPENSEARCH_HOST=uxopian-ai-opensearch-node1
+      - OPENSEARCH_HOST=opensearch
       - OPENSEARCH_PORT=9200
       - OPENSEARCH_FORCE_REFRESH_INDEX=false
-      - APP_BASE_URL=http://localhost:8085
+      - APP_BASE_URL=${APP_BASE_URL:-http://localhost:8085}
       - UXOPIAN_AI_PORT=8080
-        # DEV ONLY : used to disable authentication
-      - SPRING_PROFILES_ACTIVE=dev
-    ports:
-      - "8085:8080"
+      # LLM API keys — loaded from .env, set at least one before starting
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    expose:
+      - "8080"
     volumes:
       - ./config:/app/config
     networks:
       - uxopian-ai-net
     depends_on:
-      uxopian-ai-opensearch-node1:
+      opensearch:
         condition: service_healthy
 
-  #xopian-ai-gateway:
-  # image: artifactory.arondor.cloud:5001/gateway:2026.0.0-ft2
-  # # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft2
-  # container_name: uxopian-ai-gateway-service
-  # environment:
-  #   - JAVA_OPTS=-Xmx768m -Xms512m
-  # networks:
-  #   - uxopian-ai-net
-  # ports:
-  #   - "8085:8085"
-  # volumes:
-  #   - ./gateway-application.yaml:/app/application.yaml
+  # ── Gateway ─────────────────────────────────────────────────────────────────
+  # The gateway is the only service exposed to the host (port 8085).
+  # DevProvider reads identity from request headers — suitable for local development.
+  # Replace with FlowerDocsProvider or Fast2Provider for production.
+  uxopian-gateway:
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft2}
+    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft2}
+    ports:
+      - "8085:8085"
+    volumes:
+      - ./gateway-application.yaml:/app/application.yaml
+    networks:
+      - uxopian-ai-net
+    depends_on:
+      - uxopian-ai
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8085/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
 
 volumes:
-  arender-tmp:
-  opensearch-data1:
+  opensearch-data:
 
 networks:
   uxopian-ai-net:

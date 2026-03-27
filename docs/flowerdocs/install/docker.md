@@ -17,7 +17,7 @@ For configuration of OpenSearch, Redis and OpenLDAP applications, please refer t
 ## Prerequisites
 
 - If you are external to Arondor/Uxopian, please contact FlowerDocs support to obtain the Docker images.
-- Get the `flower-templates-2025.3.0-package.zip` package.
+- Get the `flower-templates-{{version}}-package.zip` package.
 - Unzip the package
 
 In the `docker` folder, a `.env` file is present. It may be hidden, depending on your system. This file defines the variables used in Docker Compose files.
@@ -45,10 +45,10 @@ The rest of this documentation allows you to start up a FlowerDocs application w
 
 **FlowerDocs Core** must be started.
 
-- Open the ``flower-templates-2025.3.0-package` folder.
+- Open the ``flower-templates-{{version}}-package` folder.
 - Run the following command, adapting the value of the `ldapPassword` variable:
 
-`docker run --volume=${PWD}\default-scope:/clm/default-scope --network=flowerdocs-net artifactory.arondor.cloud:5001/flower-docs-clm:2025.3.0 delete create --template=default-scope --scope=DEFAULT --password=yourPassword --ws.url=http://flower-docs-core:8081/core/services --data.dir=/clm/ --ldap.type=OPENLDAP --ldap.baseDN="dc=flowerdocs,dc=com" --ldap.user="cn=admin,dc=flowerdocs,dc=com" --ldap.url=ldap://openldap-flowerdocs:389 --ldap.password=changeme --ldap.attributes.id=CN --ldap.attributes.search=displayName --ldap.attributes.displayName=displayName --ldap.attributes.members=uniqueMember`
+`docker run --volume=${PWD}\default-scope:/clm/default-scope --network=flowerdocs-net artifactory.arondor.cloud:5001/flower-docs-clm:{{version}} delete create --template=default-scope --scope=DEFAULT --password=yourPassword --ws.url=http://flower-docs-core:8081/core/services --data.dir=/clm/ --ldap.type=OPENLDAP --ldap.baseDN="dc=flowerdocs,dc=com" --ldap.user="cn=admin,dc=flowerdocs,dc=com" --ldap.url=ldap://openldap-flowerdocs:389 --ldap.password=changeme --ldap.attributes.id=CN --ldap.attributes.search=displayName --ldap.attributes.displayName=displayName --ldap.attributes.members=uniqueMember`
 
 ## Access
 

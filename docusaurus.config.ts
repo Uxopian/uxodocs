@@ -8,6 +8,12 @@ import remarkVariables from "./scripts/remark-variables.mjs";
 // replacing {{version}} placeholders.
 const arenderVersion = "2023.18.0";
 
+const flowerDocsVersion = "2025.4.0";
+const flowerDocsArenderVersion = "2023.17.0";
+const flowerDocsOSVersion = "1.3.19";
+const flowerDocsRedisVersion = "6.2.12";
+const flowerDocsCompanionVersion = "2025.3.2";
+
 
 const getPdfFileName = (
     siteConfig: any,
@@ -57,6 +63,10 @@ const config: Config = {
         ],
     ],
 
+	customFields: {
+	    flowerDocsCompanionVersion,
+	},
+
     plugins: [
         [
             "@docusaurus/plugin-content-docs",
@@ -94,14 +104,15 @@ const config: Config = {
         ],
         [
             "@docusaurus/plugin-content-docs",
-            {
+			{
                 id: "flowerdocs",
                 path: "docs/flowerdocs",
                 routeBasePath: "docs/flowerdocs",
                 sidebarPath: require.resolve("./sidebars_flowerdocs.ts"),
                 lastVersion: "current",
-                versions: { current: { label: "v2025.4.0" } },
+                versions: { current: { label: `v${flowerDocsVersion}` } },
                 showLastUpdateTime: true,
+                remarkPlugins: [[remarkVariables, { variables: { version: flowerDocsVersion, arenderVersion: flowerDocsArenderVersion, osVersion: flowerDocsOSVersion } }]],
             },
         ],
         [
@@ -275,6 +286,7 @@ const config: Config = {
         prism: {
             theme: prismThemes.github,
             darkTheme: prismThemes.dracula,
+            additionalLanguages: ["java"],
         },
     } satisfies Preset.ThemeConfig,
 
