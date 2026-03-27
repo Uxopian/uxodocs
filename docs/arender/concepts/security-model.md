@@ -17,7 +17,7 @@ ARender's viewer (the HMI) uses Spring Security with two mutually exclusive auth
 
 The authentication mode is controlled by a single property:
 
-```properties
+```properties title="application.properties"
 arender.server.oauth2.enabled=false
 ```
 
@@ -59,7 +59,7 @@ OAuth2 configuration uses standard Spring Security OAuth2 Client and Resource Se
 
 ### Client registration (for browser login)
 
-```properties
+```properties title="application.properties"
 spring.security.oauth2.client.registration.my-provider.client-id=arender-viewer
 spring.security.oauth2.client.registration.my-provider.client-secret=your-secret
 spring.security.oauth2.client.registration.my-provider.scope=openid,profile,email
@@ -68,7 +68,7 @@ spring.security.oauth2.client.provider.my-provider.issuer-uri=https://idp.exampl
 
 ### Resource server (for JWT validation)
 
-```properties
+```properties title="application.properties"
 spring.security.oauth2.resourceserver.jwt.issuer-uri=https://idp.example.com/realms/your-realm
 ```
 
@@ -89,11 +89,13 @@ In a multi-instance deployment with OAuth2, all viewer instances must share sess
 
 Session sharing is controlled by:
 
-```properties
+```properties title="application.properties"
 arender.server.session.hazelcast.enabled=true
 ```
 
 This is enabled by default. When active, the viewer stores HTTP sessions in a Hazelcast distributed map (`spring:session:sessions`) instead of the servlet container's native session store.
+- When enabled, Hazelcast creates a `SESSION` cookie.
+- When disabled, the servlet container creates a `JSESSION` cookie.
 
 In addition to HTTP sessions, OAuth2 authorized client data is stored in a Hazelcast map (`spring:oauth2:oauth2Authorized`) so that token state is shared across instances.
 

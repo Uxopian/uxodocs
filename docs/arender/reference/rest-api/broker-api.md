@@ -60,7 +60,7 @@ Returns the assigned document ID.
 |--------|-------------|
 | 200 | Document uploaded successfully |
 | 400 | Bad request (invalid parameters or unsupported format) |
-| 500 | Internal server error |
+| 409 | Conflict — a document with the same ID is already registered (binary upload only) |
 
 #### Example request
 
@@ -80,36 +80,40 @@ curl -X POST http://localhost:8761/documents \
 
 ---
 
-### Upload a document and get its layout
+### Upload a document layout
 
 `POST` `/documents/layout`
 
-Uploads a document and returns its layout in a single call. The request body is the raw file bytes. The response format is the same as [Get document layout](#get-document-layout).
+Registers a document in the broker from a pre-computed `DocumentLayout` object, without uploading the actual file. This is useful when the layout is already known and rendition can be bypassed entirely. The `documentId` field inside the body must be set.
+
+#### Request body
+
+A `DocumentLayout` JSON object. The `documentId` field is required.
 
 #### Parameters
 
 | Name | In | Type | Required | Description |
 |------|----|------|----------|-------------|
-| `Content-Type` | header | string | Yes | Must be `application/octet-stream` |
+| `Content-Type` | header | string | Yes | Must be `application/json` |
 
 #### Response
 
-Returns document layout including page dimensions. See [Get document layout](#get-document-layout) for the full response schema.
+Empty body on success.
 
 #### Errors
 
 | Status | Description |
 |--------|-------------|
-| 200 | Document uploaded and layout returned |
-| 400 | Bad request (invalid or unsupported format) |
-| 500 | Internal server error |
+| 200 | Layout registered successfully |
+| 400 | Bad request — body is null or `documentId` is missing |
+| 409 | Conflict — a document with the same ID is already registered |
 
 #### Example request
 
 ```bash
 curl -X POST http://localhost:8761/documents/layout \
-  -H "Content-Type: application/octet-stream" \
-  --data-binary @my-document.pdf
+  -H "Content-Type: application/json" \
+  -d '{"documentId": {"id": "my-doc-id"}, "pageCount": 2, "pages": [...]}'
 ```
 
 ---
@@ -199,7 +203,7 @@ Returns the raw document content as a binary stream.
 | Name | In | Type | Required | Description |
 |------|----|------|----------|-------------|
 | `documentId` | path | string | Yes | The document ID |
-| `format` | query | string | No | Requested format (e.g. `pdf` to get the converted version) |
+| `format` | query | string | No | Requested format. Plain format (e.g. `pdf`) waits for conversion and returns the converted file. Special values: `rendered` (equivalent to `pdf`) and `compressed` (returns a ZIP archive of the document). Omit to get the original file. |
 
 #### Response
 
@@ -278,9 +282,7 @@ Returns `200 OK` with no body.
 
 | Status | Description |
 |--------|-------------|
-| 200 | Document deleted |
-| 404 | Document not found |
-| 500 | Internal server error |
+| 200 | Document evicted, or document was not found (idempotent) |
 
 #### Example request
 

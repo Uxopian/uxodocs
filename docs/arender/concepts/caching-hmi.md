@@ -1,6 +1,6 @@
 ---
 viewer: classic
-title: Classic viewer caching
+title: Viewer caching
 last_update:
   date: '2026-03-24T08:07:20.846Z'
   author: CI/CD Bot
@@ -8,13 +8,13 @@ sidebar_position: 10
 content_hash: b25a6dff9ab4909318f44a62b3a59d763dd00811ea3019b57bb9a34dd1d2c4cb
 ---
 
-# Classic viewer caching
+# Viewer caching
 
-The Classic viewer (HMI) runs its own Hazelcast instance, separate from the Document Service Broker's Hazelcast cluster. It stores document accessors, routing tables, and HTTP sessions. This page covers the viewer-side caching; for broker-side caching shared by both viewers, see [Caching](./caching.md).
+The viewer (HMI) runs its own Hazelcast instance, separate from the Document Service Broker's Hazelcast cluster. It stores document accessors, routing tables, and HTTP sessions. This page covers the viewer-side caching; for broker-side caching shared by both viewers, see [Caching](./caching.md).
 
 ## What gets cached
 
-The Classic viewer uses Hazelcast maps to store:
+The viewer uses Hazelcast maps to store:
 
 | Map name | Content | Default idle timeout |
 |----------|---------|---------------------|
@@ -26,7 +26,7 @@ The Classic viewer uses Hazelcast maps to store:
 
 ## How it works
 
-When a user opens a document in the Classic viewer:
+When a user opens a document in the viewer:
 
 1. The viewer checks `documentAccessorsHMI` for an existing `DocumentAccessor` matching the `DocumentId`.
 2. If absent, the connector fetches the document and the accessor is stored in the cache.
@@ -35,7 +35,7 @@ When a user opens a document in the Classic viewer:
 
 ## Hazelcast configuration
 
-The Classic viewer reads its Hazelcast configuration from a `hazelcast.yaml` file:
+The viewer reads its Hazelcast configuration from a `hazelcast.yaml` file:
 
 ```yaml title="hazelcast.yaml"
 hazelcast:
@@ -67,7 +67,7 @@ hazelcast:
 
 ## Viewer clustering
 
-When running multiple Classic viewer instances behind a load balancer, enable Hazelcast member discovery so all instances form a cluster. This shares HTTP sessions and document accessor caches across instances, allowing any instance to serve any user. Configure TCP/IP join with the addresses of all viewer instances, or use the Hazelcast Kubernetes discovery plugin in Kubernetes environments.
+When running multiple viewer instances behind a load balancer, enable Hazelcast member discovery so all instances form a cluster. This shares HTTP sessions and document accessor caches across instances, allowing any instance to serve any user. Configure TCP/IP join with the addresses of all viewer instances, or use the Hazelcast Kubernetes discovery plugin in Kubernetes environments.
 
 The viewer and broker Hazelcast clusters are separate. They run on different ports (the viewer defaults to 5702, the broker uses the Hazelcast default) and do not join each other. The viewer communicates with the broker through REST/HTTP, not through Hazelcast.
 

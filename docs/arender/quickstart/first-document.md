@@ -50,7 +50,7 @@ http://localhost:8080/?url=../../samples/my-document.pdf
 
 ## Use the REST API
 
-You can load documents programmatically through the broker REST API (exposed via nginx on port 8761).
+You can load documents programmatically through the broker REST API (exposed on port 8761).
 
 Upload a document (the broker accepts raw binary content):
 
