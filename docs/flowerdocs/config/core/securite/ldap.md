@@ -43,13 +43,18 @@ The information to be configured is as follows:
 | `URL`                       | URL                                        | Directory access url                                                  |
 | `User`                      | User                                       | User to connect to the directory                                      |
 | `Password`                  | Password                                   | Password for directory user                                           |
-| `BaseDN`                    | Base DN                                    | DN configured in the directory                                        |
+| `BaseDN`                    | User Base DN                                | DN configured in the directory for user search                        |
+| `GroupBaseDN`               | Group Base DN                                | DN configured in the directory for group search                        |
 | `IdAttribute`               | Attribute for identifier                   | Directory attribute used to store the user identifier                 |
 | `GroupIdAttribute`          | Attribute for group identifier             | Directory attribute used to store the group identifier                |
 | `DisplayNameAttribute`      | Display name attribute                     | Directory attribute used to store the user's display name             |
 | `SearchAttribute`           | Search attribute                           | Directory attribute used to search for users/groups                   |
 | `MembersAttribute`          | Members                                    | Directory attribute used to store group members                       |
 | `EnableLowerCaseOfUserName` | Enable evaluation of lower case identifier | Enables you to force the resolution of user identifiers in lower case |
+
+:::info
+If `GroupBaseDN` is left blank, `BaseDN` will also be used for group searches as a fallback.
+:::
 
 ## Default directory definition
 
