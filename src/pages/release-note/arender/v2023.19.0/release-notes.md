@@ -10,6 +10,8 @@ _build:
   list: never
 ---
 
+import DocLink from '@site/src/components/DocLink';
+
 > **Upgrade note:** See [v2023.19.0](../upgrade-notes) for detailed instructions.
 
 ## Overview
@@ -39,9 +41,9 @@ Mobile users no longer need to manually switch to text selection mode. Text sele
 Related issues: AR-16665
 
 **Streamlined rotation on download and print**
-The separate "Download with rotations" button and the print checkbox introduced in 2023.18.0 have been removed. Instead, when rotation saving is enabled ([`visualization.rotation.save.enabled=true`](/docs/arender/guides/configurations/web-ui/properties/vizualisation/)), two properties now control whether the standard download and print actions transparently include saved rotations:
-- [`topPanel.documentMenu.downloadPDF.includeRotations=true`](/docs/arender/guides/configurations/web-ui/properties/toppanel/) — the standard "Download as PDF" action includes saved rotations (default: `false`)
-- [`print.includeRotations=true`](/docs/arender/guides/configurations/web-ui/properties/print/) — printing includes saved rotations (default: `false`)
+The separate "Download with rotations" button and the print checkbox introduced in 2023.18.0 have been removed. Instead, when rotation saving is enabled (<DocLink version="v2023.19.0" product="arender" to="guides/configurations/web-ui/properties/vizualisation/"><code>visualization.rotation.save.enabled=true</code></DocLink>), two properties now control whether the standard download and print actions transparently include saved rotations:
+- <DocLink version="v2023.19.0" product="arender" to="guides/configurations/web-ui/properties/toppanel/"><code>topPanel.documentMenu.downloadPDF.includeRotations=true</code></DocLink> — the standard "Download as PDF" action includes saved rotations (default: `false`)
+- <DocLink version="v2023.19.0" product="arender" to="guides/configurations/web-ui/properties/print/"><code>print.includeRotations=true</code></DocLink> — printing includes saved rotations (default: `false`)
 
 When enabled, no extra button or checkbox is presented to the user — rotations are applied automatically.
 Related issues: AR-18187
@@ -79,12 +81,12 @@ Related issues: AR-18094
 **JavaScript API: first page rendered event**
 A new JS API event fires when the first page of a document finishes rendering, allowing integrators to measure perceived load time independently of full document loading. This enables more accurate performance monitoring and user-experience metrics.
 Related issues: AR-17877
-More information: [Document JavaScript API](/docs/arender/development/apis/web-ui/javascript/document/)
+More information: <DocLink version="v2023.19.0" product="arender" to="development/apis/web-ui/javascript/document/">Document JavaScript API</DocLink>
 
 **JavaScript API: all document layouts resolved event**
 A new JS API event fires when all `DocumentLayout` objects have been resolved for every document in the session, including child documents such as ZIP entries or email attachments. This is useful for integrators who need to perform actions only after the complete document structure is known.
 Related issues: AR-18225
-More information: [Document layout JavaScript API](/docs/arender/development/apis/web-ui/javascript/get-layout/)
+More information: <DocLink version="v2023.19.0" product="arender" to="development/apis/web-ui/javascript/get-layout/">Document layout JavaScript API</DocLink>
 
 ## Exploitation Perspective
 
@@ -153,7 +155,7 @@ Fixed an issue where the HMI did not failover to a secondary rendition server wh
 Related issues: AR-18168
 
 **Configurable conversion coordination timeout**
-The internal conversion coordination timeout in the rendition broker is now configurable via `arender.conversion.timeout.ms`, aligned with the [`arender.server.rendition.rest.read.timeout`](/docs/arender/guides/configurations/web-ui/server/rest-client/) property. Previously, this was hardcoded to 120 seconds, causing heavy document conversions to fail even when the HTTP timeout was extended.
+The internal conversion coordination timeout in the rendition broker is now configurable via `arender.conversion.timeout.ms`, aligned with the <DocLink version="v2023.19.0" product="arender" to="guides/configurations/web-ui/server/rest-client/"><code>arender.server.rendition.rest.read.timeout</code></DocLink> property. Previously, this was hardcoded to 120 seconds, causing heavy document conversions to fail even when the HTTP timeout was extended.
 Related issues: AR-18170
 
 **Improved Office document rendering on Linux**
