@@ -2,9 +2,9 @@
 title: Visualization
 sidebar_position: 12
 last_update:
-  date: '2026-01-29T16:00:59.573Z'
+  date: '2026-03-11T15:43:04.034Z'
   author: CI/CD Bot
-content_hash: 6b45f7fce9eb18b2537dd3ea8dbadd3a924aacad8ae1466eed58f79e0454c913
+content_hash: 0d40a2486f8dbbe5538d8d164f697552a89260e574049c0ff94ecc2cdd77f807
 ---
 
 ## General
@@ -58,15 +58,16 @@ content_hash: 6b45f7fce9eb18b2537dd3ea8dbadd3a924aacad8ae1466eed58f79e0454c913
 
 ## Multiview
 
-| Description                                     | Key parameter                            | Default value | Type    |
-| ----------------------------------------------- | ---------------------------------------- | ------------- | ------- |
-| Activate multiview                              | visualization.multiview.enabled          | true          | Boolean |
-| Multiview orientation:vertical , horizontal     | visualization.multiview.direction        | vertical      | String  |
-| Activate document compare                       | visualization.multiview.doComparison     | false         | Boolean |
-| Display multiview on startup                    | visualization.multiview.showOnStart      | false         | Boolean |
-| Synchronized multiview scroll                   | visualization.multiview.synchronized     | true          | Boolean |
-| Activate the focus of the document by click     | visualization.multiview.focusOnClick     | false         | Boolean |
-| Configure the time to hide the multiview header | visualization.multiview.header.timeoutMs | 5000          | Long    |
+| Description                                     | Key parameter                                     | Default value | Type    |
+| ----------------------------------------------- | ------------------------------------------------- | ------------- | ------- |
+| Activate multiview                              | visualization.multiview.enabled                   | true          | Boolean |
+| Multiview orientation:vertical , horizontal     | visualization.multiview.direction                 | vertical      | String  |
+| Activate document compare                       | visualization.multiview.doComparison              | false         | Boolean |
+| Display multiview on startup                    | visualization.multiview.showOnStart               | false         | Boolean |
+| Synchronized multiview scroll                   | visualization.multiview.synchronized              | true          | Boolean |
+| Activate the focus of the document by click     | visualization.multiview.focusOnClick              | false         | Boolean |
+| Configure the time to hide the multiview header | visualization.multiview.header.timeoutMs          | 5000          | Long    |
+| Enable zoom synchronization on compare mode     | visualization.multiview.compare.zoom.synchronized | false         | Boolean |
 
 ## Notifications
 

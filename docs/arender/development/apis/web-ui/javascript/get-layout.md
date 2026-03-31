@@ -29,3 +29,15 @@ getARenderJS().getDocumentLayout().getShallowDocumentLayout(getARenderJS().getMa
   }
 });
 ```
+
+### Get document layouts resolution time
+
+| Function                                                               | Description                                               | Arguments                                    |
+| ---------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------------------- |
+| registerAllDocumentLayoutsResolved(documentLayoutsResolvedTimeHandler) | Register a hook to inform document layouts resolving time |  **callback:** the callback function to call |
+
+```js
+getARenderJS().getDocumentLayout().registerAllDocumentLayoutsResolved(function (documentId, time) {
+  console.error("DocumentId = "+ documentId +" time = "+ time)
+});
+```

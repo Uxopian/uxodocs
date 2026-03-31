@@ -122,4 +122,18 @@ In the example above, **loadDocument** returns an ID (in the form of a string st
 
 ## Multiple document opening
 
-ARender provides the possibility to open several documents by loading a list of documents which will be provided via JSON in order to define the tree structure. All the technical details can be found [here](../../../../../learn/how-to/composite-accessors)
+ARender provides the possibility to open several documents by loading a list of documents which will be provided via JSON in order to define the tree structure. All the technical details can be found [here](/docs/arender/learn/how-to/composite-accessors)
+
+## Get opening document time
+
+- Object: getARenderJS()
+
+| Function                                              | Description                                       | Arguments                                   |
+| ----------------------------------------------------- | ------------------------------------------------- | ------------------------------------------- |
+| registerFirstPageLoaded(notifyFirstPageLoadedHandler) | Register a hook to get the first page loaded time | **callback:** the callback function to call |
+
+```js
+getARenderJS().registerFirstPageLoaded(function(documentId, time) {
+  console.error("DocumentId = " + documentId + ", time = " + time);
+});
+```
