@@ -73,7 +73,7 @@ The Spring Boot process serves the compiled JavaScript assets and handles all se
 
 - **Document loading** — Routes incoming requests to identify the document source and load its content
 - **Connector hosting** — Document connectors (Alfresco, FileNet, etc.) are Java JARs loaded on the classpath. Each connector is a Spring auto-configured bean discovered at startup
-- **Annotation storage** — Reads and writes annotations to the configured storage backend (XFDF local, JDBC, REST)
+- **Annotation storage** — Reads and writes annotations to the configured storage backend
 - **Image serving** — An async servlet fetches page images from the rendition backend and streams them to the browser
 - **Session management** — HTTP sessions track per-user document state
 - **Authentication** — Supports URL-parameter authentication (default) or OAuth2/OIDC. See [Viewer configuration](../reference/viewer-configuration.md#authentication-and-security) for details.
@@ -146,9 +146,9 @@ The converter transforms non-native formats into PDF or MP4 before the broker ro
 | Input category | Tool used | Output |
 |---|---|---|
 | Office (DOC, DOCX, XLS, XLSX, PPT, PPTX, ODP, ODT, ODS, VSD, PUB, RTF) | LibreOffice (headless), DirectOffice, or MS Office (AROMS2PDF) | PDF |
-| HTML, EML body | wkhtmltopdf | PDF |
+| HTML, EML body, vCard | wkhtmltopdf | PDF |
 | Images (PNG, JPEG, BMP, WEBP, GIF, SVG, PCX, HEIF, WMF, etc.) | ImageMagick | PDF |
-| Text files, vCard | Internal renderer | PDF |
+| Text files | Internal renderer | PDF |
 | Video/audio (MOV, MKV, AVI, WAV, MP3, etc.) | FFmpeg | MP4 |
 | AFP | cpmcopy | PDF |
 | XFA forms | Built-in PDF flattener | PDF (flattened) |
@@ -175,7 +175,6 @@ The default renderer uses PDFOwl, a native binary process managed by the Spring 
 - Renders PDF pages to PNG or SVG at configurable resolution
 - Applies image filters: brightness, contrast, inversion, cropping
 - Activates and deactivates OCG layers (Optional Content Groups) for complex PDFs
-- Performs image comparison between source and converted PDFs (used for PDF/A quality validation)
 
 For configuration properties, see [Rendition configuration](../reference/rendition-properties.md#document-renderer-pdfowl).
 
@@ -212,8 +211,8 @@ In Docker Compose, the broker maps service hostnames to ports through configurat
 
 ```mermaid
 sequenceDiagram
-    participant DC as Document Converter
     participant SB as Document Service Broker
+    participant DC as Document Converter
     SB->>DC: GET /metadata
     DC-->>SB: name, instanceId, hostName
     SB->>SB: Store in service registry
@@ -312,8 +311,8 @@ If the shared volume is unavailable or not mounted consistently across container
 
 When running multiple replicas, ARender uses Hazelcast for:
 
-- Document accessor caching (broker)
-- Conversion and transformation order sharing (broker)
+- Document accessor caching (broker, viewer)
+- Conversion, comparison and transformation order sharing (broker)
 - Distributed session storage (viewer)
 - Routing table synchronization (viewer)
 

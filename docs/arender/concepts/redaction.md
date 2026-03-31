@@ -34,7 +34,7 @@ Redaction annotations carry properties specific to their role:
 
 ### 2. Burning
 
-When the user triggers a redacted export (via the document builder), ARender produces a **new document** where:
+When the user triggers a redacted export, ARender produces a **new document** where:
 
 - The redaction rectangles are permanently drawn as opaque shapes
 - The underlying text is **removed from the PDF content stream** — it is no longer selectable, searchable, or extractable
@@ -48,7 +48,7 @@ This is handled by the redaction engine in the Document Converter, which parses 
 
 ARender introduces an authorization layer that determines **what a user sees when redaction annotations exist** on a document — even before any burning occurs.
 
-When the viewer requests a document rendition, the Document Service Broker checks whether the current user is authorized to view the original content:
+The document is rendered according to the user authorization:
 
 | Authorization result | User sees |
 |----------------------|-----------|
@@ -61,17 +61,13 @@ This means that **non-authorized users cannot see through redaction annotations*
 
 By default, only users with an admin username (`admin`, `administrator`, or `p8admin`) are authorized to view the original content beneath redaction annotations.
 
-### Custom authorization
-
-The authorization logic can be customized on the broker side by providing a custom `AuthenticationServiceProvider` as a Spring bean.
-
 ## How redaction differs from other annotations
 
 | Aspect | Regular annotations | Redaction annotations |
 |--------|--------------------|-----------------------|
 | **Storage** | Annotation layer (XFDF) | Annotation layer (XFDF) — same |
 | **Effect on document** | Visual overlay only | Can permanently alter the document content on export |
-| **Rendering** | Always shown as-is | Gated by `AuthenticationServiceProvider` — may be burned into the rendition for non-authorized users |
+| **Rendering** | Always shown as-is | Burned into the rendition for non-authorized users |
 | **Content stream** | Not involved | The redaction engine removes text from PDF content streams |
 | **Reversibility** | Always reversible (just delete the annotation) | Reversible while marking; **irreversible** after burning |
 

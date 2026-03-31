@@ -81,11 +81,11 @@ The converted PDF is stored in the shared volume.
 
 ### 3. Layout resolution
 
-Once conversion completes (or immediately for native formats), the broker builds the document layout: page count, page dimensions (width, height), rotation, and DPI. This layout is returned to the viewer so it can render the initial page structure.
+Once conversion completes (or immediately for native formats), the renderer builds the document layout: page count, page dimensions (width, height), rotation, and DPI. This layout is returned to the viewer so it can render the initial page structure.
 
 ### 4. Page rendering (on demand)
 
-When the viewer needs to display a specific page, it requests the page image from the broker. The Document Renderer reads the PDF and produces the image. PDFOwl is the default rendering engine.
+When the viewer needs to display a specific page, it requests the page image from the broker. The Document Renderer reads the PDF and produces the image.
 
 - **PDFOwl**: pool-based rendering engine (default)
 - **JNI renderer**: legacy native library (deprecated)

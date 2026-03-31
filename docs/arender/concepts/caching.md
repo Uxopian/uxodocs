@@ -67,6 +67,10 @@ hazelcast:
           enabled: true
         HEALTH_CHECK:
           enabled: true
+        WAN:
+          enabled: true
+        DATA:
+          enabled: true
 ```
 
 ### Key configuration parameters

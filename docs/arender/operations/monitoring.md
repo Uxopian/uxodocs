@@ -126,33 +126,33 @@ arender.endpoint.metrics.export.compare.enabled=true
 
 The full list of toggleable endpoints:
 
-| Property suffix | Operation |
+| Property | Operation |
 |---|---|
-| `has.document` | Document existence check |
-| `bookmarks` | Bookmark extraction |
-| `document.layout` | Document layout retrieval |
-| `load.document.content` | Document content loading |
-| `get.file.chunk` | File chunk retrieval |
-| `text.position` | Text position extraction |
-| `document.annotation` | Annotation retrieval |
-| `transformation` | Transformation orders |
-| `document.metadata` | Metadata retrieval |
-| `image` | Page image rendering |
-| `page.contents` | Page content retrieval |
-| `search` | Text search |
-| `advanced.search` | Advanced text search |
-| `load.document` | Document loading |
-| `evict` | Cache eviction |
-| `annotation` | Annotation operations |
-| `compare` | Document comparison |
-| `named.destination` | Named destination extraction |
-| `weather` | System weather/status |
-| `readiness` | Readiness check |
-| `signature` | Signature verification |
-| `printable.pdf` | Printable PDF generation |
-| `convert` | Format conversion |
-| `health.record` | Health record retrieval |
-| `document.xfa.check` | XFA form detection |
+| `arender.endpoint.metrics.export.has.document.enabled` | Document existence check |
+| `arender.endpoint.metrics.export.bookmarks.enabled` | Bookmark extraction |
+| `arender.endpoint.metrics.export.document.layout.enabled` | Document layout retrieval |
+| `arender.endpoint.metrics.export.load.document.content.enabled` | Document content loading |
+| `arender.endpoint.metrics.export.get.file.chunk.enabled` | File chunk retrieval |
+| `arender.endpoint.metrics.export.text.position.enabled` | Text position extraction |
+| `arender.endpoint.metrics.export.document.annotation.enabled` | Annotation retrieval |
+| `arender.endpoint.metrics.export.transformation.enabled` | Transformation orders |
+| `arender.endpoint.metrics.export.document.metadata.enabled` | Metadata retrieval |
+| `arender.endpoint.metrics.export.image.enabled` | Page image rendering |
+| `arender.endpoint.metrics.export.page.contents.enabled` | Page content retrieval |
+| `arender.endpoint.metrics.export.search.enabled` | Text search |
+| `arender.endpoint.metrics.export.advanced.search.enabled` | Advanced text search |
+| `arender.endpoint.metrics.export.load.document.enabled` | Document loading |
+| `arender.endpoint.metrics.export.evict.enabled` | Cache eviction |
+| `arender.endpoint.metrics.export.annotation.enabled` | Annotation operations |
+| `arender.endpoint.metrics.export.compare.enabled` | Document comparison |
+| `arender.endpoint.metrics.export.named.destination` | Named destination extraction |
+| `arender.endpoint.metrics.export.weather.enabled` | System weather/status |
+| `arender.endpoint.metrics.export.readiness.enabled` | Readiness check |
+| `arender.endpoint.metrics.export.signature.enabled` | Signature verification |
+| `arender.endpoint.metrics.export.printable.pdf.enabled` | Printable PDF generation |
+| `arender.endpoint.metrics.export.convert.enabled` | Format conversion |
+| `arender.endpoint.metrics.export.health.record.enabled` | Health record retrieval |
+| `arender.endpoint.metrics.export.document.xfa.check.enabled` | XFA form detection |
 
 ### Metric tags
 
@@ -290,7 +290,6 @@ graph LR
     SB[Broker] -->|GET healthCheckUrl| DC[Converter]
     SB -->|GET healthCheckUrl| DR[Renderer]
     SB -->|GET healthCheckUrl| DT[Text Handler]
-    SB -->|Updates| MH[Service registry: UP/DOWN per instance]
 ```
 
 If a service is detected as DOWN and `health.check.restart.enabled=true` (standalone mode), the broker sends a POST to `/actuator/shutdown` and restarts the process.

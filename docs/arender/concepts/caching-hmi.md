@@ -2,38 +2,116 @@
 viewer: classic
 title: Viewer caching
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-03-31T00:00:00.000Z'
   author: CI/CD Bot
+slug: /concepts/caching-hmi
 sidebar_position: 10
 content_hash: b25a6dff9ab4909318f44a62b3a59d763dd00811ea3019b57bb9a34dd1d2c4cb
 ---
 
 # Viewer caching
 
-The viewer (HMI) runs its own Hazelcast instance, separate from the Document Service Broker's Hazelcast cluster. It stores document accessors, routing tables, and HTTP sessions. This page covers the viewer-side caching; for broker-side caching shared by both viewers, see [Caching](./caching.md).
+The viewer (HMI) maintains its own document cache, separate from the Document Service Broker's cache. It stores document accessors and routing tables. Two cache strategies are available: **EhCache** (default, local) and **Hazelcast** (distributed, for multi-instance deployments).
+
+## Cache strategy
+
+Select the strategy with the following property in `arender-server.properties`:
+
+```properties
+# Valid values: ehCacheStrategy, hazelCastStrategy
+arender.server.cache.strategy=ehCacheStrategy
+```
+
+`ehCacheStrategy` is the default. Use `hazelCastStrategy` only when running multiple viewer instances behind a load balancer.
 
 ## What gets cached
 
-The viewer uses Hazelcast maps to store:
+Both strategies cache the same data:
+
+| Cache name | Content | Default idle timeout |
+|------------|---------|---------------------|
+| `documentAccessorMap` / `documentAccessorsHMI` | `DocumentAccessor` objects loaded by connectors, keyed by `DocumentId` | 3600 seconds |
+| `directDocumentMap` | Directly uploaded or URL-loaded document accessors | 3600 seconds |
+
+When a user opens a document:
+
+1. The viewer checks the document accessor cache for an existing entry matching the `DocumentId`.
+2. If absent, the connector fetches the document and the accessor is stored in the cache.
+3. The viewer forwards the document to the broker for rendition.
+4. The `documentRouteTable` records which broker instance holds the document, so subsequent page requests go to the same broker.
+
+## EhCache strategy (default)
+
+EhCache runs entirely within the viewer's JVM. It is the correct choice for single-instance deployments and requires no external infrastructure.
+
+The viewer loads its EhCache configuration from `ehcache.xml` on the classpath. The default configuration is:
+
+```xml title="ehcache.xml"
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns='http://www.ehcache.org/v3'
+	xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core.xsd">
+
+  <cache
+		alias="documentAccessorMap">
+		<key-type>com.arondor.viewer.client.api.document.DocumentId</key-type>
+		<value-type>com.arondor.viewer.rendition.api.document.DocumentAccessor</value-type>
+		<expiry>
+			<tti unit="seconds">3600</tti>
+		</expiry>
+		<resources>
+			<heap unit="entries">10000</heap>
+		</resources>
+	</cache>
+	
+	<cache
+		alias="directDocumentMap">
+		<key-type>com.arondor.viewer.client.api.document.DocumentId</key-type>
+		<value-type>com.arondor.viewer.rendition.api.document.Document</value-type>
+		<expiry>
+			<tti unit="seconds">3600</tti>
+		</expiry>
+		<resources>
+			<heap unit="entries">5000</heap>
+		</resources>
+	</cache>
+	
+	<cache
+		alias="configurationContextMap">
+		<key-type>com.arondor.viewer.client.api.configuration.ConfigurationContext</key-type>
+		<value-type>com.arondor.common.reflection.model.config.ObjectConfigurationMap</value-type>
+		<expiry>
+			<tti unit="seconds">3600</tti>
+		</expiry>
+		<resources>
+			<heap unit="entries">10</heap>
+		</resources>
+	</cache>
+
+</config>
+```
+
+To override the defaults, provide a custom `ehcache.xml` and place it on the classpath (for example, mount it into the container at `/home/arender/config/`).
+
+:::note
+EhCache does not support distributed locking. It is local to the JVM and cannot be shared across viewer instances. If you need clustering, use `hazelCastStrategy` instead.
+:::
+
+## Hazelcast strategy
+
+The Hazelcast strategy replaces the EhCache maps with Hazelcast distributed maps. All viewer instances in the cluster share the same cache, which allows any instance to serve any user without a sticky session requirement.
+
+:::info
+Hazelcast distributes cached objects across the cluster by serializing them. All `DocumentAccessor` implementations stored in the cache must therefore implement `java.io.Serializable`. Custom connector implementations that do not serialize will cause runtime errors when Hazelcast attempts to replicate entries to other members.
+:::
+
+In addition to the document accessor caches, Hazelcast also stores:
 
 | Map name | Content | Default idle timeout |
 |----------|---------|---------------------|
-| `documentAccessorsHMI` | `DocumentAccessor` objects loaded by connectors, keyed by `DocumentId` | 3600 seconds |
-| `directDocumentMap` | Directly uploaded or URL-loaded document accessors | 3600 seconds |
 | `spring:session:sessions` | HTTP session data (when Hazelcast sessions are enabled) | Managed by Spring Session |
 | `spring:oauth2:oauth2Authorized` | OAuth2 authorized client tokens (when OAuth2 is enabled) | No idle expiry |
-| `documentRouteTable` | Mapping from `DocumentId` to the Document Service Broker instance that holds the document | No idle expiry |
-
-## How it works
-
-When a user opens a document in the viewer:
-
-1. The viewer checks `documentAccessorsHMI` for an existing `DocumentAccessor` matching the `DocumentId`.
-2. If absent, the connector fetches the document and the accessor is stored in the cache.
-3. The viewer sends the document to the broker for rendition.
-4. The `documentRouteTable` records which broker instance owns the document, so subsequent requests go to the same broker.
-
-## Hazelcast configuration
+| `documentRouteTable` | Mapping from `DocumentId` to the broker instance that holds the document | No idle expiry |
 
 The viewer reads its Hazelcast configuration from a `hazelcast.yaml` file:
 
@@ -50,6 +128,10 @@ hazelcast:
       eviction:
         eviction-policy: NONE
         max-size-policy: PER_NODE
+    spring:oauth2:oauth2Authorized:
+      eviction:
+        eviction-policy: NONE
+        max-size-policy: PER_NODE
   network:
     port:
       port: 5702
@@ -63,13 +145,33 @@ hazelcast:
           enabled: true
         HEALTH_CHECK:
           enabled: true
+        WAN:
+          enabled: true
+        DATA:
+          enabled: true
+
 ```
 
-## Viewer clustering
+To point the viewer at a custom Hazelcast configuration file, set:
 
-When running multiple viewer instances behind a load balancer, enable Hazelcast member discovery so all instances form a cluster. This shares HTTP sessions and document accessor caches across instances, allowing any instance to serve any user. Configure TCP/IP join with the addresses of all viewer instances, or use the Hazelcast Kubernetes discovery plugin in Kubernetes environments.
+```properties
+arender.server.cache.hazelCast.config.path=/path/to/hazelcast.yaml
+```
 
-The viewer and broker Hazelcast clusters are separate. They run on different ports (the viewer defaults to 5702, the broker uses the Hazelcast default) and do not join each other. The viewer communicates with the broker through REST/HTTP, not through Hazelcast.
+### Viewer clustering
+
+When running multiple viewer instances behind a load balancer, enable Hazelcast member discovery so all instances form a cluster and share the document accessor cache. Configure TCP/IP join with the addresses of all viewer instances, or use the Hazelcast Kubernetes discovery plugin in Kubernetes environments.
+
+The viewer and broker Hazelcast clusters are separate. They run on different ports (the viewer defaults to `5702`) and do not join each other. The viewer communicates with the broker through REST/HTTP, not through Hazelcast.
+
+## Comparison
+
+| | EhCache (default) | Hazelcast |
+|---|---|---|
+| **Scope** | Local JVM only | Distributed across viewer instances |
+| **Infrastructure** | None required | Hazelcast cluster |
+| **Distributed locking** | No | Yes |
+| **Use case** | Single instance | Multiple instances behind a load balancer |
 
 ## Related pages
 

@@ -30,7 +30,7 @@ When opening documents by URL, the rendition service only authorizes whitelisted
 
 ### Hierarchical IDs
 
-When multiple documents are opened together as a container, each child document receives a `DocumentId` formed from the parent ID followed by `/` and a numeric index:
+When opening an archive document, each child document receives a `DocumentId` formed from the parent ID followed by `/` and a numeric index:
 
 ```
 b64_<parent-parameters>/0
@@ -41,14 +41,14 @@ This hierarchy allows the broker and caching layer to manage document groups as 
 
 ## DocumentAccessor
 
-A `DocumentAccessor` is the broker's internal runtime object behind a DocumentId. It provides access to document content, metadata, and annotations. You can think of it as the loaded, ready-to-use representation of a document inside the broker.
+A `DocumentAccessor` is  used both in the Viewer Server side (and connector) and in the Rendition as a document representation in order to access the document content, metadata and annotations.
 
 How a `DocumentAccessor` gets created depends on how the document is loaded:
 
 - **Via a connector** — connectors (Java JARs) produce `DocumentAccessor` instances directly, implementing the `DocumentServiceURLParser` and `DocumentAccessor` interfaces.
 - **By URL** — the broker fetches the document from the URL and creates the `DocumentAccessor` itself.
 
-Regardless of how the `DocumentAccessor` is created, the rest of the rendition pipeline treats it identically: the broker resolves the layout, delegates conversion, rendering, and text extraction using the same `DocumentId` as cache key.
+Regardless of how the `DocumentAccessor` is created, the rest of the rendition pipeline treats it identically: the broker delegates the layout, conversion, rendering, and text extraction using the same `DocumentId` as cache key.
 
 ## Related pages
 

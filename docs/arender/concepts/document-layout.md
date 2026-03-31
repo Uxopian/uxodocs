@@ -53,11 +53,7 @@ The response includes the fully qualified Java type, the document ID, title, MIM
 
 ## Document containers
 
-When ARender opens a container (a CMIS folder or a multi-part email), the layout uses a `DocumentContainer` variant. Each child document has its own layout, and the container groups them under a single document ID with a tree structure visible in the viewer sidebar.
-
-## Caching
-
-The broker caches layouts per document ID. Cached entries are evicted when the document is deleted. On the viewer side, a `DocumentLayoutCache` avoids redundant fetch calls during a session.
+When ARender opens a container (a folder or multi-documents), the layout uses a `DocumentContainer` variant. Each child document has its own layout, and the container groups them under a single document ID with a tree structure visible in the viewer sidebar.
 
 ## Related pages
 
