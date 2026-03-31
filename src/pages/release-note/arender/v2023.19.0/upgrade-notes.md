@@ -30,9 +30,13 @@ The dedicated "Download with rotations" button and the print-with-rotations chec
 
 ### New Properties
 
+* **`topPanel.documentMenu.downloadPDF.includeRotations`** (default: `false`): When set to `true`, the standard "Download as PDF" action includes saved page rotations transparently, with no extra button shown to the user. Requires `visualization.rotation.save.enabled=true`.
+
+* **`visualization.multiView.compare.zoom.synchronized`** (default: `false`): When set to `true`, zooming in one document panel automatically synchronizes the zoom level in the other panel during a document comparison. See [Document comparison](/docs/arender/features/documentcompare#synchronized-zoom-between-documents).
+
 * **`arender.conversion.timeout.ms`**: Configures the internal conversion coordination timeout in the rendition broker. Previously hardcoded to 120 seconds, heavy document conversions would time out even when the HTTP read timeout ([`arender.server.rendition.rest.read.timeout`](/docs/arender/guides/configurations/web-ui/server/rest-client/)) was extended. This value should be aligned with `arender.server.rendition.rest.read.timeout`.
 
-* **`topPanel.documentMenu.downloadPDF.includeRotations`** (default: `false`): When set to `true`, the standard "Download as PDF" action includes saved page rotations transparently, with no extra button shown to the user. Requires `visualization.rotation.save.enabled=true`.
+* **`arender.documentid.encrypted.ttl.revert`** (default: `false`): When set to `true`, validates the TTL timestamp when decoding an encrypted document ID, rejecting IDs that have expired. Requires `arender.documentid.generator.beanName=encryptedDocumentIdGenerator` and `arender.documentid.encrypted.ttl.add=true`. See [Document ID generators](/docs/arender/guides/configurations/web-ui/server/document-id-generators).
 
 ### No Deprecated or Deleted Properties Beyond the Above
 
