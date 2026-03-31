@@ -74,7 +74,8 @@ This timeout defaults to the value of `rest.client.read.timeout` (falling back t
 
 - **`arender.conversion.timeout.ms`** (this property, milliseconds) — broker coordination layer
 - **[`arender.server.rendition.rest.read.timeout`](/docs/arender/guides/configurations/web-ui/server/rest-client/)** (milliseconds) — HMI HTTP read timeout
-- **[`html.conversion.timeout`, `soffice.conversion.timeout`, `msoffice.conversion.timeout`](/docs/arender/guides/configurations/rendition/task-conversion#conversion-timeouts)** (seconds) — per-format converter timeouts in the TaskConversion module
+- **[`conversion.job.timeout.ms`](/docs/arender/guides/configurations/rendition/task-conversion#conversion-timeouts)** (milliseconds) — global job-queue timeout for all conversion factories in the TaskConversion module
+- **[`html.conversion.timeout`, `soffice.conversion.timeout`, `msoffice.conversion.timeout`, `video.conversion.timeout`](/docs/arender/guides/configurations/rendition/task-conversion#conversion-timeouts)** (seconds) — per-format converter timeouts in the TaskConversion module
 :::
 
 ## Checking disk space
