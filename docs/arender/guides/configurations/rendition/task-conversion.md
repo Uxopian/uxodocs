@@ -7,6 +7,25 @@ sidebar_position: 2
 content_hash: 900edb36ea5f5a72c0a6cb954c8a01a2780f91fc785b494da814d3d33ea3e878
 ---
 
+## Conversion timeouts
+
+The following properties control how long each conversion type is allowed to run before being aborted. All values are in **seconds**.
+
+:::note application.properties located in ARender-Rendition-{{version}}\modules\TaskConversion
+
+| Description                                  | Parameter Key              | Default value | Type    |
+| -------------------------------------------- | -------------------------- | ------------- | ------- |
+| Timeout for HTML to PDF conversion           | html.conversion.timeout    | 120           | Integer |
+| Timeout for video format conversion          | video.conversion.timeout   | 300           | Integer |
+| Timeout for LibreOffice to PDF conversion    | soffice.conversion.timeout | 120           | Integer |
+| Timeout for MS Office to PDF conversion      | msoffice.conversion.timeout | 120          | Integer |
+
+:::
+
+:::info
+When tuning for heavy documents, these converter-side timeouts must be raised alongside the broker's [`arender.conversion.timeout.ms`](/docs/arender/guides/configurations/rendition/service-broker#conversion-coordination-timeout) property (in milliseconds) and the HMI's [`arender.server.rendition.rest.read.timeout`](/docs/arender/guides/configurations/web-ui/server/rest-client/) so all three layers share a consistent ceiling.
+:::
+
 ## Rendition without internet Access and mails with external images
 
 If the Rendition is installed on a server that **does not have access to Internet** and if **mails with external images** needs to be viewed, please apply the below configuration:
