@@ -16,7 +16,7 @@ This section describes the various FlowerDocs Core configurations to be defined 
 | --------------------- | ---------------------------------------------------------------- |
 | system.admin.username | System account identifier                                        |
 | system.admin.password | System account password, can be encrypted with a secret          |
-| token.key             | Token shared between **FlowerDocs Core**, **FlowerDocs GUI** and |
+| token.key             | Token shared between **FlowerDocs Core**, **FlowerDocs GUI** and **ARender HMI** |
 | secret                | Secret used to encode password _(optional)_                      |
 | core.context          | Application context                                              |
 

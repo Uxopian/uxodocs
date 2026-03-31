@@ -19,21 +19,21 @@ To manually launch the FlowerDocs GUI, FlowerDocs Core and ARender HMI applicati
 <TabItem value="GUI" label="GUI">
 
 ```bash
-./flower-docs-gui-webapp-2025.3.0.jar 
+./flower-docs-gui-webapp-{{version}}.jar 
 ```
 
 </TabItem>
 <TabItem value="Core" label="Core">
 
 ```bash
-./flower-docs-core-webapp-2025.3.0.jar
+./flower-docs-core-webapp-{{version}}.jar
 ```
 
 </TabItem>
 <TabItem value="ARender HMI" label="ARender HMI">
 
 ```bash
-./arondor-arender-hmi-spring-boot-2023.14.0.jar
+./arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
 ```
 
 </TabItem>
@@ -45,7 +45,7 @@ To manually launch the FlowerDocs GUI, FlowerDocs Core and ARender HMI applicati
 
 FlowerDocs applications can be installed simply as a Linux service `init.d` or `systemd`.
 
-In this section, it is assumed that the JARs `flower-docs-gui-webapp-2025.3.0.jar`, `flower-docs-core-webapp-2025.3.0.jar` and `arondor-arender-hmi-spring-boot-2023.14.0.jar` are placed in the `/opt/flowerdocs` folder. This folder is also used as a configuration directory.
+In this section, it is assumed that the JARs `flower-docs-gui-webapp-{{version}}.jar`, `flower-docs-core-webapp-{{version}}.jar` and `arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar` are placed in the `/opt/flowerdocs` folder. This folder is also used as a configuration directory.
 
 ### Service init.d
 
@@ -55,24 +55,24 @@ To install FlowerDocs applications as an `init.d`  service, simply create a symb
 <TabItem value="GUI" label="GUI">
 
 ```bash
-chmod +x /opt/flowerdocs/flower-docs-gui-webapp-2025.3.0.jar
-ln -s /opt/flowerdocs/flower-docs-gui-webapp-2025.3.0.jar /etc/init.d/gui
+chmod +x /opt/flowerdocs/flower-docs-gui-webapp-{{version}}.jar
+ln -s /opt/flowerdocs/flower-docs-gui-webapp-{{version}}.jar /etc/init.d/gui
 ```
 
 </TabItem>
 <TabItem value="Core" label="Core">
 
 ```bash
-chmod +x /opt/flowerdocs/flower-docs-core-webapp-2025.3.0.jar
-ln -s /opt/flowerdocs/flower-docs-core-webapp-2025.3.0.jar /etc/init.d/core
+chmod +x /opt/flowerdocs/flower-docs-core-webapp-{{version}}.jar
+ln -s /opt/flowerdocs/flower-docs-core-webapp-{{version}}.jar /etc/init.d/core
 ```
 
 </TabItem>
 <TabItem value="ARender HMI" label="ARender HMI">
 
 ```bash
-chmod +x /opt/flowerdocs/arondor-arender-hmi-spring-boot-2023.14.0.jar
-ln -s /opt/flowerdocs/arondor-arender-hmi-spring-boot-2023.14.0.jar /etc/init.d/arender-hmi
+chmod +x /opt/flowerdocs/arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
+ln -s /opt/flowerdocs/arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar /etc/init.d/arender-hmi
 ```
 
 </TabItem>
@@ -127,7 +127,7 @@ After=syslog.target
 
 [Service]
 User=flowerdocs
-ExecStart=/opt/flowerdocs/flower-docs-gui-webapp-2025.3.0.jar
+ExecStart=/opt/flowerdocs/flower-docs-gui-webapp-{{version}}.jar
 SuccessExitStatus=143
 
 [Install]
@@ -144,7 +144,7 @@ After=syslog.target
 
 [Service]
 User=flowerdocs
-ExecStart=/opt/flowerdocs/flower-docs-core-webapp-2025.3.0.jar
+ExecStart=/opt/flowerdocs/flower-docs-core-webapp-{{version}}.jar
 SuccessExitStatus=143
 
 [Install]
@@ -161,7 +161,7 @@ After=syslog.target
 
 [Service]
 User=flowerdocs
-ExecStart=/opt/flowerdocs/arondor-arender-hmi-spring-boot-2023.14.0.jar
+ExecStart=/opt/flowerdocs/arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
 SuccessExitStatus=143
 
 [Install]

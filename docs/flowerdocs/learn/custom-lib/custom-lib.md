@@ -46,7 +46,7 @@ In this module, we will need the following two dependencies:
 		&lt;dependency&gt;
 			&lt;groupId&gt;com.flower.docs.core</groupId>
 			&lt;artifactId&gt;flower-docs-services</artifactId>
-			&lt;version&gt;2025.3.0</version>
+			&lt;version&gt;{{version}}</version>
 		</dependency>
 	</dependencies>
 </project>

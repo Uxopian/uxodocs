@@ -16,7 +16,7 @@ This section describes the various FlowerDocs GUI configurations to be defined i
 | --------------------------- | ---------------------------------------------------------------- |
 | system.admin.username       | System admin username                                            |
 | system.admin.password       | System account password, can be encrypted with a secret          |
-| token.key                   | Token shared between **FlowerDocs Core**, **FlowerDocs GUI** and |
+| token.key                   | Token shared between **FlowerDocs Core**, **FlowerDocs GUI** and **ARender HMI**|
 | secret                      | Secret used to encode password _(optional)_                      |
 | gui.context                 | Application context                                              |
 | gui.password.change.enabled | Enables password modification on login page                      |

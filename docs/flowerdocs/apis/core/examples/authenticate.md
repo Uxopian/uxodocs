@@ -14,39 +14,33 @@ import TabItem from '@theme/TabItem';
 The `authentication` service generates a user token for a given scope.
 
 # Example
-
 The example below shows how to generate a user token.
 <Tabs>
-<TabItem value="authentication-rest" label="Authentication - REST">
+  <TabItem value="authentication___rest" label="Authentication - REST">
 
-```http
-POST {{core}}/rest/authentication HTTP/1.1
+```bash
+# <CORE_HOST>  FlowerDocs Core base URL
 
--- URL parameters --
-core: FlowerDocs Core host
-
--- Headers --
-Content-Type: application/json
-
--- Body (json) --
-
-    "password": "pwd",
-    "scope”: "TEST",
-    "user": "user"
-
+curl -X POST "<CORE_HOST>/rest/authentication" \
+  -H "Content-Type: application/json" \
+  -d '{
+  "password": "pwd",
+  "scope": "TEST",
+  "user": "user"
+}'
 ```
 
   </TabItem>
-  <TabItem value="authentication-java" label="Authentication - Java">
+  <TabItem value="authentication___java" label="Authentication - Java">
 
-```Java
+```java
 @Autowired
-    private Authenticator authenticator;
+private Authenticator authenticator;
 
-    public void authenticateToScope(String scopeId) throws TechnicalException, FunctionalException
-
-        authenticator.authenticate(scopeId);
-
+public void authenticateToScope(String scopeId) throws TechnicalException, FunctionalException
+{
+    authenticator.authenticate(scopeId);
+}
 ```
 
   </TabItem>

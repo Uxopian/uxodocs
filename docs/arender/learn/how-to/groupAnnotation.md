@@ -2,9 +2,9 @@
 title: Group annotations
 sidebar_position: 14
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: af3eac01f529e776ee13c05f62812bbbc95415f7ebd1ef8904c0c8d8b3d605f6
+content_hash: 65c665a380a864ff5f2424faa81e90e87e08b868e81a5e54efb30fc756945a6d
 ---
 
 The assignment of a group to an annotation is done with the use of the _Security_ property which makes it possible to store the group name of the annotation.
@@ -106,7 +106,7 @@ private Map<String, String> buildLocalizedDisplayNames(String fr, String en)
 
 ## Keep the notion of private annotation
 
-The notion of private annotation is compatible with the notion of an annotation group. We must keep the definition of _property name = "symbolicName" value = "private"_. The description of private annotations can be found in the section _Annotation securities configuration_ in the page [Annotation](/docs/arender/learn/how-to/annotation)
+The notion of private annotation is compatible with the notion of an annotation group. We must keep the definition of _property name = "symbolicName" value = "private"_. The description of private annotations can be found in the section _Annotation securities configuration_ in the page [Annotation](../annotation)
 
 Example of configuration of the bean that will populate the annotation group list with the _Private_ choice:
 

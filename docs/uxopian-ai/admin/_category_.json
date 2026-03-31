@@ -1,4 +1,5 @@
 {
-    "label": "Admin Panel",
-    "position": 6
+  "label": "Admin Panel",
+  "position": 7,
+  "collapsed": false
 }

@@ -1,21 +1,20 @@
-version: "3.7"
-
 services:
-  # --- ARender Core Services ---
+  # ── ARender UI ───────────────────────────────────────────────────────────────
   ui:
     image: artifactory.arondor.cloud:5001/arender-ui-springboot:2023.16.0
     container_name: ui
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://dsb-service:8761/"
-      - "UXOPIAN_AI_HOST=http://localhost:8085"
+      - "UXOPIAN_AI_HOST=${UXOPIAN_AI_HOST:-http://localhost:8085/uxopian-ai}"
     volumes:
       - ./arender/configurations:/home/arender/configurations/
       - ./arender/public:/home/arender/public/
     ports:
-      - 8080:8080
+      - "8080:8080"
     networks:
       - uxopian-ai-net
 
+  # ── ARender Document Service Broker ─────────────────────────────────────────
   service-broker:
     image: artifactory.arondor.cloud:5001/arender-document-service-broker:2023.16.0
     container_name: dsb-service
@@ -23,14 +22,14 @@ services:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DCV-SERVICE=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DRN-SERVICE=9091"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DTH-SERVICE=8899"
-      - "DSB_KUBEPROVIDER_KUBE.HOSTS_AI-SERVICE=8080"
     ports:
-      - 8761:8761
+      - "8761:8761"
     volumes:
       - arender-tmp:/arender/tmp
     networks:
       - uxopian-ai-net
 
+  # ── ARender Document Renderer ────────────────────────────────────────────────
   document-renderer:
     image: artifactory.arondor.cloud:5001/arender-document-renderer:2023.16.0
     container_name: drn-service
@@ -39,12 +38,13 @@ services:
       - "DRN_EUREKA_INSTANCE_HOSTNAME=dsb-service"
       - "DRN_EUREKA_SERVER_PORT=8761"
     ports:
-      - 9091:9091
+      - "9091:9091"
     volumes:
       - arender-tmp:/arender/tmp
     networks:
       - uxopian-ai-net
 
+  # ── ARender Document Text Handler ───────────────────────────────────────────
   document-text-handler:
     image: artifactory.arondor.cloud:5001/arender-document-text-handler:2023.16.0
     container_name: dth-service
@@ -53,12 +53,13 @@ services:
       - "DTH_EUREKA_INSTANCE_HOSTNAME=dsb-service"
       - "DTH_EUREKA_SERVER_PORT=8761"
     ports:
-      - 8899:8899
+      - "8899:8899"
     volumes:
       - arender-tmp:/arender/tmp
     networks:
       - uxopian-ai-net
 
+  # ── ARender Document Converter ──────────────────────────────────────────────
   document-converter:
     image: artifactory.arondor.cloud:5001/arender-document-converter:2023.16.0
     container_name: dcv-service
@@ -67,16 +68,16 @@ services:
       - "DCV_APP_EUREKA_HOSTNAME=dsb-service"
       - "DCV_APP_EUREKA_PORT=8761"
     ports:
-      - 19999:19999
+      - "19999:19999"
     volumes:
       - arender-tmp:/arender/tmp
     networks:
       - uxopian-ai-net
 
-  # --- Uxopian AI Infrastructure ---
-  uxopian-ai-opensearch-node1:
-    image: opensearchproject/opensearch:2.12.0
-    container_name: uxopian-ai-opensearch-node1
+  # ── OpenSearch ───────────────────────────────────────────────────────────────
+  opensearch-node1:
+    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.3.2}
+    container_name: opensearch-node1
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opensearch-node1
@@ -97,52 +98,62 @@ services:
       - "9600:9600"
     volumes:
       - opensearch-data1:/usr/share/opensearch/data
+      - ./custom-opensearch.yml:/usr/share/opensearch/config/opensearch.yml
     networks:
       - uxopian-ai-net
     healthcheck:
-      test:
-        ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 20s
 
+  # ── Gateway ──────────────────────────────────────────────────────────────────
+  # The gateway is the only service exposed to the host (port 8085).
+  # DevProvider reads identity from request headers — suitable for local development only.
+  gateway:
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft2}
+    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft2}
+    container_name: gateway-service
+    environment:
+      - JAVA_OPTS=-Xmx256m -Xms128m
+    volumes:
+      - ./gateway-application.yaml:/app/application.yaml
+    ports:
+      - "8085:8085"
+    networks:
+      - uxopian-ai-net
+
+  # ── Uxopian AI ───────────────────────────────────────────────────────────────
+  # Served at /uxopian-ai/ through the gateway. Not exposed directly to the host.
   uxopian-ai-standalone:
-    image: artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft1-rc3-full
-    # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft1-rc3-full
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft2}
+    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft2}
     container_name: uxopian-ai-standalone-service
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
-      - OPENSEARCH_HOST=uxopian-ai-opensearch-node1
+      - OPENSEARCH_HOST=opensearch-node1
       - OPENSEARCH_PORT=9200
       - OPENSEARCH_FORCE_REFRESH_INDEX=false
       - RENDITION_BASE_URL=http://dsb-service:8761
-      - APP_BASE_URL=http://localhost:8085
+      - APP_BASE_URL=${UXOPIAN_AI_HOST:-http://localhost:8085/uxopian-ai}
+      - CONTEXT_PATH=/uxopian-ai
       - UXOPIAN_AI_PORT=8080
-        # DEV ONLY : used to disable authentication
       - SPRING_PROFILES_ACTIVE=dev
-    ports:
-      - "8085:8080"
+      # LLM API keys — loaded from .env, set at least one before starting
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
     volumes:
       - ./config:/app/config
     networks:
       - uxopian-ai-net
     depends_on:
-      uxopian-ai-opensearch-node1:
+      opensearch-node1:
         condition: service_healthy
-
-  #xopian-ai-gateway:
-  # image: artifactory.arondor.cloud:5001/gateway:2026.0.0-ft1-rc3-full
-  # # image: docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft1-rc3-full
-  # container_name: uxopian-ai-gateway-service
-  # environment:
-  #   - JAVA_OPTS=-Xmx768m -Xms512m
-  # networks:
-  #   - uxopian-ai-net
-  # ports:
-  #   - "8085:8085"
-  # volumes:
-  #   - ./gateway-application.yaml:/app/application.yaml
+      gateway:
+        condition: service_started
 
 volumes:
   arender-tmp:
@@ -150,3 +161,4 @@ volumes:
 
 networks:
   uxopian-ai-net:
+    driver: bridge

@@ -1,178 +1,114 @@
 ---
-title: "Architecture Overview"
-last_update:
-  date: '2026-02-16T16:29:56.656Z'
-  author: CI/CD Bot
+title: System architecture
+sidebar_label: Architecture
 sidebar_position: 1
-content_hash: ef73814807c3e41a351acff54b41ddefabc8180c154495ae352ff99a3ee0db20
+last_update:
+  date: '2026-03-24T12:58:17.027Z'
+  author: CI/CD Bot
+content_hash: 627ac9d001ab37c3bad05c5a89fb9d783400e9ef4ef07a8ed53a60b3d8e84124
 ---
-This section provides insight into the framework's design, covering both the high-level components and the software-level interactions.
 
----
+Uxopian AI consists of two services that must always be deployed together: `uxopian-ai` and `uxopian-gateway`. All browser traffic enters through the gateway. The `uxopian-ai` service is never exposed directly.
 
-## Component Architecture
-
-This section provides insight into the framework's design, covering both the high-level components and the software-level interactions, specifically highlighting the security integration via the BFF pattern.
-
-The **uxopian-ai** framework is designed as a backend microservice that sits behind a security gateway. It is composed of several key components working in concert.
+## Component diagram
 
 ```mermaid
 graph TD
-    subgraph "Client Environment"
-        Client[Client Application: e.g. ARender, FlowerDocs]
-    end
+    Browser["Browser or host app"]
+    GW["uxopian-gateway<br/>(Spring Cloud Gateway, port 8085)"]
+    Auth["AuthProvider<br/>(DevProvider / FlowerDocsProvider / Fast2Provider)"]
+    HZ["Hazelcast 5.x<br/>session cache"]
+    AI["uxopian-ai<br/>(Spring WebFlux, port 8080)"]
+    AF["AuthFilter<br/>reads identity headers"]
+    Core["Core services<br/>(Conversations, Requests, Prompts, Goals)"]
+    LLM["LLM connector<br/>(LangChain4J)"]
+    Tools["ToolExecutor<br/>+ IntegrationLoader"]
+    Plugins["plugins/<br/>shaded JARs"]
+    OS["OpenSearch 3.x"]
+    LLMEXT["External LLM provider<br/>(OpenAI, Anthropic, etc.)"]
+    WS["WebSocket handler<br/>(/ws/{userId})"]
 
-    subgraph "Security Layer"
-        BFF[BFF / Gateway: Handles Auth & Header Injection]
-    end
-
-    subgraph "uxopian-ai Service"
-        Service[ai-standalone: Spring Boot Application]
-    end
-
-    subgraph "External & Dependent Services"
-        OpenSearch[(OpenSearch)]
-        Rendition[ARender Rendition Service]
-        Qdrant[(Qdrant: Vector Database)]
-        LLM[External LLM Providers: OpenAI, Azure, etc.]
-    end
-
-    Client -- REST API Request --> BFF
-    BFF -- Proxies Request (Adds X-User headers) --> Service
-
-    Service -- Stores & Retrieves Data --> OpenSearch
-    Service -- Fetches document content: e.g. documentService.extractTextualContent --> Rendition
-    Service -- (Optional) RAG/Vector Search --> Qdrant
-    Service -- Sends Prompts --> LLM
-
-    LLM -- Returns Completions --> Service
-
-    Service -- API Response --> BFF
-    BFF -- Proxies Response --> Client
+    Browser -->|"HTTPS"| GW
+    GW --> Auth
+    Auth -.-> HZ
+    GW -->|"X-User-Id, X-User-TenantId, X-User-Roles headers"| AI
+    AI --> AF
+    AF --> Core
+    Core --> LLM
+    Core --> OS
+    Core --> WS
+    LLM --> Tools
+    LLM --> LLMEXT
+    Tools --> Plugins
+    Plugins -.->|"Loaded at startup"| Tools
 ```
 
-### Component Descriptions
+*Figure: Full component diagram showing the two-service model, authentication flow, and plugin system.*
 
-**Client Application**
-User-facing application (e.g., **ARender**, **FlowerDocs**) that initiates requests.
-It never communicates directly with **uxopian-ai**.
+## Components
 
-**BFF / Gateway (Security Layer)**
-Entry point for all traffic. The Gateway is a **standalone, independently deployed service** built on **Spring Cloud Gateway** (reactive) with a pluggable auth provider system. Responsible for:
+### uxopian-gateway
 
-- **Authenticating** the user via a pluggable provider (OAuth2, JWT, LDAP, or the `DevProvider` for development)
-- **Enriching** requests with identity headers (`X-User-TenantId`, `X-User-Id`, `X-User-Roles`, `X-User-Token`)
-- **Enforcing** role-based access control (e.g., admin-only paths)
-- **Proxying** the request to the backend service
+Handles all inbound traffic from browsers. Performs authentication by delegating to the configured `AuthProvider`. On success, forwards the request to `uxopian-ai` with three identity headers: `X-User-Id`, `X-User-TenantId`, and `X-User-Roles`. The original `Authorization` token is forwarded as `X-User-Token` for integrations that need it (such as the FlowerDocs plugin calling back into FlowerDocs APIs).
 
-The Gateway processes each request through a filter pipeline: `DefaultProviderHeaderFilter` (route matching) → `AuthFilter` (authentication + header injection) → Spring Cloud Gateway (routing). See [Security Model](security.md) for the full pipeline details and provider reference.
+Static assets (`/assets/**`) and the WebSocket endpoint (`/ws/**`) can be configured as public in the gateway route security rules.
 
-**uxopian-ai Service**
-The core of the framework. This standalone Java application:
+### uxopian-ai
 
-- Exposes the REST API (consumed by the BFF)
-- Manages conversations and messages per Tenant ID
-- Resolves Goals and Prompts via the templating engine
-- Connects to external LLM providers using the `llm-clients` module
+The core application. Built on Spring WebFlux (reactive). Modules:
 
-**OpenSearch**
-Primary data store for:
+| Module | Role |
+|---|---|
+| `rest` | REST controllers, `AuthFilter`, Spring Security |
+| `core` | Business logic: conversations, requests, prompts, goals, `IntegrationLoader` |
+| `connector/llm` | LLM provider abstraction, `ToolExecutor`, `LlmClientLoader` |
+| `connector/opensearch` | OpenSearch client, `IndexNamingStrategy`, tenant-scoped repositories |
+| `connector/hazelcast` | Distributed session cache (used by gateway) |
+| `templating` | Thymeleaf prompt rendering engine, `PromptService`, `GoalService` |
+| `web-socket` | WebSocket handler for real-time streaming |
+| `web-components` | React frontend compiled and served as static assets |
+| `integrations/*` + `tools/*` | Plugin JARs loaded at runtime |
 
-- Conversations
-- Messages
-- Prompts
-- Goals
+### AuthFilter
 
-**ARender Rendition Service**
-External service used to fetch document content (e.g., extracting text).
+`OncePerRequestFilter` that runs on every request inside uxopian-ai. Reads identity from the four forwarded headers (`X-User-Id`, `X-User-TenantId`, `X-User-Roles`, `X-User-Token`). Builds an `AuthenticatedUser` and opens an `AiContext` scope for the duration of the request. If `SPRING_PROFILES_ACTIVE=dev` is active, it injects fallback defaults (`User-development`, `Tenant-development`) when headers are missing.
 
-**Qdrant**
-Optional vector database enabling RAG (Retrieval-Augmented Generation).
+### OpenSearch
 
-**External LLM Providers**
-Third-party services (OpenAI, Azure, etc.) handling natural language processing.
+All persistent data is stored in OpenSearch. Each piece of data is stored in a tenant-scoped index. The `IndexNamingStrategy` service generates index names in the format `{sanitized-tenant-id}-uxopian-ai-{base-name}`.
 
----
+### Plugin system
 
-## Software Architecture (Request Flow)
+Integration JARs are placed in the `plugins/` directory (configurable via `plugins.root.path`, defaults to `plugins/`). `IntegrationLoader` uses ClassGraph to scan JARs at startup. Registration order: internal `@Service`/`@Component` beans, then `@HelperService` beans, then `@ToolService` beans. Adding or removing a plugin requires an application restart.
 
-To understand how the components interact, here is the lifecycle of a typical API call: sending a message that triggers a Goal.
+### WebSocket
 
-The request flow emphasizes the role of the **BFF** in establishing the security context before the service logic executes.
+`ClientActionSocketHandler` at `/ws/{userId}` provides real-time streaming of LLM responses to the browser. The web component connects via `window.connectWebSocket(wsEndpoint, userId)`. The WebSocket endpoint is separate from the HTTP API.
 
-### Sequence Diagram: Executing a Goal
+## Data and control flow
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant BFF as BFF / Gateway
-    participant Service as uxopian-ai Service
-    participant OS as OpenSearch
-    participant LLM as External LLM
+A typical chat request follows this path:
 
-    Client->>+BFF: POST /api/v1/requests?conversation={id}
-    Note right of Client: { inputs: [ { type: "goal", value: "compare", payload: {...} } ] }
+1. Browser calls `POST /api/v1/requests` through the gateway.
+2. Gateway authenticates via `AuthProvider`, injects identity headers, forwards request.
+3. `AuthFilter` in uxopian-ai reads headers, builds `AuthenticatedUser`, opens `AiContext`.
+4. `SecureRequestService` resolves the conversation, loads applicable prompts and goals.
+5. `PromptService` renders each prompt template with Thymeleaf. ServiceHelpers (e.g., `documentService`) are called during rendering.
+6. LLM connector calls the configured provider via LangChain4J.
+7. If the LLM requests tool execution, `ToolExecutor` invokes the registered `@Tool` method.
+8. The response is streamed back to the browser over WebSocket and also returned in the HTTP response.
+9. The request (inputs, answer, token counts, model metadata) is stored in OpenSearch.
 
-    Note over BFF: Authenticate User
-    BFF->>BFF: Inject Headers (X-User-TenantId, X-User-Id...)
+## Important constraints
 
-    BFF->>+Service: Forward Request (with Auth Headers)
+- `uxopian-ai` must never be exposed directly to the public internet or browsers. The gateway is the sole entry point.
+- The `dev` Spring profile disables authentication in `uxopian-ai`. Use it only on a local machine.
+- Adding or removing plugins requires a restart. There is no hot-reload for plugins.
+- The WebSocket endpoint and `/assets/**` are typically served as public routes in the gateway configuration to avoid authentication for static resources and streaming connections.
 
-    Service->>Service: Identify message type (Goal > PromptId > Content)
-    Note over Service: Goal detected in input. Resolving...
+## Related pages
 
-    Service->>+OS: Find Goal named "compare"
-    OS-->>-Service: Return matching Goal definitions
-
-    Service->>Service: Evaluate Goal filters vs. payload
-    Note over Service: Filter matches => selects promptId: "detailedComparison"
-
-    Service->>+OS: Get Prompt by ID "detailedComparison"
-    OS-->>-Service: Return Prompt template
-
-    Service->>+OS: Get recent conversation messages
-    OS-->>-Service: Return context history
-
-    Service->>Service: Render final prompt with Thymeleaf
-
-    Service->>+LLM: Send rendered prompt
-    LLM-->>-Service: Return LLM-generated response
-
-    Service->>+OS: Persist user message and LLM response
-    OS-->>-Service: Confirm storage
-
-    Service-->>-BFF: Return response
-    BFF-->>-Client: Forward response
-```
-
-## Workflow Steps
-
-1. **Client Request**
-   Client sends a request to the BFF (e.g., `POST /api/v1/requests`) with a goal input such as `"compare"`.
-
-2. **Authentication & Injection**
-   The BFF authenticates, then injects `X-User-TenantId`, `X-User-Id`, etc.
-
-3. **Context Establishment**
-   uxopian-ai reads the headers to derive the security context.
-
-4. **Goal Resolution**
-   The service queries OpenSearch for Goals matching `"compare"` in the tenant.
-
-5. **Filter Evaluation**
-   SpEL filters narrow the choice to a specific `promptId` (e.g., `"detailedComparison"`).
-
-6. **Prompt & Context Retrieval**
-   The Prompt definition and conversation history are loaded.
-
-7. **Template Rendering**
-   Thymeleaf produces the final LLM prompt, optionally pulling external content.
-
-8. **LLM Interaction**
-   The prompt is sent to the configured LLM provider.
-
-9. **Persistence**
-   User message and LLM response are saved in OpenSearch.
-
-10. **Response**
-    The final response is returned through the BFF to the client.
+- [Authentication and gateway](./authentication.md)
+- [Multi-tenancy](./multi_tenancy.md)
+- [Plugin system](./plugin_system.md)
+- [LLM providers](./llm_providers.md)

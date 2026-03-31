@@ -11,5 +11,5 @@ content_hash: 73bf32deab24f48589bff4b5fa26aa0acfcd6ada968ce3fb502443a64a803483
 
 To use FlowerDocs injection tasks within Fast2, it is necessary to add the FlowerDocs connnector to Fast2 libraries:
 
-- add library `flower-docs-fast2p8-connector-2025.3.0-bundle.jar` in the folder _lib_ of the installation directory
+- add library `flower-docs-fast2p8-connector-{{version}}-bundle.jar` in the folder _lib_ of the installation directory
 - restart Fast2

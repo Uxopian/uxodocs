@@ -3,9 +3,9 @@ title: Installation in Apache Tomcat
 sidebar_position: 3
 description: Deployment guide for IBM Filenet in Apache Tomcat application server
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: 20b47ec4a7c234ab5cfef0e408f3953046c8bc5834e7c41b92de97e0dec8a8d7
+content_hash: 2934eb410a7e314ead142eebe59d04474a72fbea3935a39cc233d428d61f6989
 ---
 
 Below the deployment of ARender HMI for FileNet in **Apache Tomcat**.
@@ -15,7 +15,7 @@ The consequences will be that:
 
 - Documents/Annotations/Metadata will be fetched with the technical account,
 - Annotations will have the name of the technical account.
-  If the need is to propagate the authentication you can either use WebSphere as Application server (see the documentation [here](/docs/arender/installation/standalone/web-ui/filenet/filenet-was).
+  If the need is to propagate the authentication you can either use WebSphere as Application server (see the documentation [here](../filenet-was)).
 
 In our example, we are deploying the presentation server
 in an environment with:

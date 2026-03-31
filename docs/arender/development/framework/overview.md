@@ -2,9 +2,9 @@
 title: Overview
 sidebar_position: 1
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-13T11:59:21.642Z'
   author: CI/CD Bot
-content_hash: 45578d9fc8899cab31ccd1ca68cd68c8eb371c8f7e7de11c1785610d6e0a5ae2
+content_hash: 29b4119c85a0181b97a96979832442a9cea107aa27a20c9d949f3666d15616b3
 ---
 
 import Tabs from '@theme/Tabs';
@@ -18,48 +18,48 @@ This tutorial details the integration of ARender as well as the use of some basi
 **React, Angular, Vuejs, Svelte** and pure **JavaScript**.
 
 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-    <div style={{display: 'flex', alignItems: 'center'}}>
-      <img
-        src="/img/arender/icons/react-logo.png"
-        alt="React logo"
-        style={{height: '22px', width: '22px', marginRight: '10px'}} />
-      <p style={{marginBottom: '5px'}}>React</p>
-    </div>
-    <div style={{display: 'flex', alignItems: 'center'}}>
-      <img
-        src="/img/arender/icons/angular-logo.png"
-        alt="Angular logo"
-        style={{height: '22px', width: '22px', marginRight: '10px'}} />
-      <p style={{marginBottom: '5px'}}>Angular</p>
-    </div>
-    <div style={{display: 'flex', alignItems: 'center'}}>
-      <img
-        src="/img/arender/icons/vue_logo.png"
-        alt="Vue.js logo"
-        style={{height: '22px', width: '22px', marginRight: '10px'}} />
-      <p style={{marginBottom: '5px'}}>Vue.js</p>
-    </div>
-    <div style={{display: 'flex', alignItems: 'center'}}>
-      <img
-        src="/img/arender/icons/svelte-logo.png"
-        alt="Svelte logo"
-        style={{height: '22px', width: '22px', marginRight: '10px'}} />
-      <p style={{marginBottom: '5px'}}>Svelte</p>
-    </div>
-    <div style={{display: 'flex', alignItems: 'center'}}>
-      <img
-        src="/img/arender/icons/javascript-logo.png"
-        alt="JavaScript logo"
-        style={{height: '22px', width: '22px', marginRight: '10px'}} />
-      <p style={{marginBottom: '5px'}}>JavaScript</p>
-    </div>
+  <div style={{display: 'flex', alignItems: 'center'}}>
+    <img
+      src="/img/arender/icons/react-logo.png"
+      alt="React logo"
+      style={{height: '22px', width: '22px', marginRight: '10px'}} />
+    <p style={{marginBottom: '5px'}}>React</p>
   </div>
+  <div style={{display: 'flex', alignItems: 'center'}}>
+    <img
+      src="/img/arender/icons/angular-logo.png"
+      alt="Angular logo"
+      style={{height: '22px', width: '22px', marginRight: '10px'}} />
+    <p style={{marginBottom: '5px'}}>Angular</p>
+  </div>
+  <div style={{display: 'flex', alignItems: 'center'}}>
+    <img
+      src="/img/arender/icons/vue_logo.png"
+      alt="Vue.js logo"
+      style={{height: '22px', width: '22px', marginRight: '10px'}} />
+    <p style={{marginBottom: '5px'}}>Vue.js</p>
+  </div>
+  <div style={{display: 'flex', alignItems: 'center'}}>
+    <img
+      src="/img/arender/icons/svelte-logo.png"
+      alt="Svelte logo"
+      style={{height: '22px', width: '22px', marginRight: '10px'}} />
+    <p style={{marginBottom: '5px'}}>Svelte</p>
+  </div>
+  <div style={{display: 'flex', alignItems: 'center'}}>
+    <img
+      src="/img/arender/icons/javascript-logo.png"
+      alt="JavaScript logo"
+      style={{height: '22px', width: '22px', marginRight: '10px'}} />
+    <p style={{marginBottom: '5px'}}>JavaScript</p>
+  </div>
+</div>
 
 However, <b>ARender can be added <ins>to all types of JavaScript based applications</ins></b>, not only the frameworks shown here.
 
 ## Prerequisites
 - Before embarking on framework integration, ensure that you have a front-end application using **React, Angular, Vue, Svelte, or plain JavaScript**.
-- <i class="ti-hand-point-right"></i> [The ARender installation](/docs/arender/installation/overview) <i class="ti-hand-point-left" ></i> must have been completed.
+- <i class="ti-hand-point-right"></i> [The ARender installation](../../../installation/overview) <i class="ti-hand-point-left" ></i> must have been completed.
 - You must have implemented one of the solutions detailed below to avoid CORS-type errors when communicating between the host application and ARender.
 
 ## Avoid CORS-type errors
@@ -145,7 +145,7 @@ This is, of course, a **very bad practice in a production environment**, but it 
 
 It is possible to keep different domains for the host application and ARender by using the window.postMessage method, which allows secure cross-domain communication.
 
-To do so, you must add <i class="ti-hand-point-right"></i> <ins>[the initialization script](/docs/arender/guides/configurations/web-ui/properties/full-config#arenderjs)</ins> <i class="ti-hand-point-left" ></i> on the ARender side :
+To do so, you must add <i class="ti-hand-point-right"></i> <ins>[the initialization script](../../../guides/configurations/web-ui/properties/full-config#arenderjs)</ins> <i class="ti-hand-point-left" ></i> on the ARender side :
 
 
 ```javascript

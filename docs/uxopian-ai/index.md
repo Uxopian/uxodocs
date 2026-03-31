@@ -1,21 +1,14 @@
 ---
 title: Uxopian AI
-description: >-
-    Complete, standalone framework designed to accelerate and simplify the
-    integration of powerful AI features into any enterprise application
-sidebar_position: 1
-sidebar_class_name: hidden-index-link
 hide_table_of_contents: true
-hide_title: true
+sidebar_class_name: hidden-index-link
 last_update:
-    date: "2025-12-15T09:44:45.737Z"
-    author: CI/CD Bot
-content_hash: b417290e4fc2bf968a899828eb33ee748c4bfb8d93ca54f3b982000228ab5caa
+  date: '2026-03-26T16:37:56.929Z'
+  author: CI/CD Bot
+content_hash: 6a6aa39264c6110b305cfde57cde70af873a94a6f0bffae47280a0798ab65bd1
 ---
 
 import UxopianAICards from '@site/src/components/UxopianAICards';
 import PDFDownloadButton from '@site/src/components/PDFDownloadButton';
 
 <UxopianAICards />
-
-<PDFDownloadButton productId="uxopian-ai" />
