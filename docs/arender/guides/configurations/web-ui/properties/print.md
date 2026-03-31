@@ -18,3 +18,4 @@ content_hash: 54ebaac7ec5d92f03961d0b9ec97b8de66dd38460f7edb2ce1fc238c9299c5e0
 | Force the print of annotations (cannot be unchecked) | print.forcePrintAnnotations      | false         | Boolean |
 | Print using a PDF instead of a set of images         | print.usePDFPrint                | true          | Boolean |
 | Print by default all documents                       | print.allDocumentsByDefault      | false         | Boolean |
+| Include saved page rotations when printing           | print.includeRotations           | false         | Boolean |
