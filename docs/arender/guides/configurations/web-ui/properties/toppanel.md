@@ -2,35 +2,35 @@
 title: Menu bar
 sidebar_position: 7
 last_update:
-  date: '2026-03-06T18:23:33.786Z'
+  date: '2026-03-12T14:56:16.233Z'
   author: CI/CD Bot
-content_hash: aaf810f399775612b591dbab1c08f942a2a575d84f05fd538ee03e306123ab5b
+content_hash: 0a2899444c672d14ed036ce60104b5cd1107dcce588b60e75bed14e55e4bc1c8
 ---
 
 ## Document menu
 
-| Description                                                             | Parameter Key                                   | Default value    | Type    |
-| ----------------------------------------------------------------------- | ----------------------------------------------- | ---------------- | ------- |
-| Activate the document sub-menu                                          | topPanel.documentMenu                           | true             | Boolean |
-| Upload a document from local disk                                       | topPanel.documentMenu.upload                    | true             | Boolean |
-| Upload a document from a remote URL                                     | topPanel.documentMenu.url                       | true             | Boolean |
-| Allow to use "enter" to validate the input URL from the URL button      | topPanel.documentMenu.url.open.using.enter      | true             | Boolean |
-| Upload XFDF annotations from local                                      | topPanel.documentMenu.xfdfUpload                | false            | Boolean |
-| Download current document in PDF                                        | topPanel.documentMenu.downloadPDF               | true             | Boolean |
-| Download current document in native format (only not PDF document)      | topPanel.documentMenu.download                  | true             | Boolean |
-| Download all visualized documents                                       | topPanel.documentMenu.downloadAll               | true             | Boolean |
-| Download current document with its annotations                          | topPanel.documentMenu.downloadAnnotation        | true             | Boolean |
-| Download current document with its rotations                            | topPanel.documentMenu.downloadRotation          | false            | Boolean |
-| Download annotations in CSV format                                      | topPanel.documentMenu.downloadCSVAnnotation     | false            | Boolean |
-| Download document with FDF annotations                                  | topPanel.documentMenu.downloadWithFDFAnnotation | false            | Boolean |
-| Download annotations in XFDF format                                     | topPanel.documentMenu.downloadXFDFAnnotations   | false            | Boolean |
-| Activate the top panel download composite document button               | topPanel.documentMenu.download.root             | true             | Boolean |
-| The default behavior for download : DOWNLOAD_SOURCE or DOWNLOAD_NON_PDF | topPanel.documentMenu.download.behavior         | DOWNLOAD_NON_PDF | String  |
-| Download all current documents as original format in a ZIP              | topPanel.documentMenu.downloadAllSources        | true             | Boolean |
-| Download the current document as FDF                                    | topPanel.documentMenu.downloadFDFAnnotations    | false            | Boolean |
-| Download the compared documents side by side with compare result on it  | topPanel.documentMenu.download.with.compare     | true             | Boolean |
-| Activate the download sub-menu (Since version 2023.15.0)                | topPanel.downloadMenu.enabled                   | true             | Boolean |
-| Activate the import sub-menu (Since version 2023.15.0)                  | topPanel.importMenu.enabled                     | true             | Boolean |
+| Description                                                             | Parameter Key                                      | Default value    | Type    |
+| ----------------------------------------------------------------------- | -------------------------------------------------- | ---------------- | ------- |
+| Activate the document sub-menu                                          | topPanel.documentMenu                              | true             | Boolean |
+| Upload a document from local disk                                       | topPanel.documentMenu.upload                       | true             | Boolean |
+| Upload a document from a remote URL                                     | topPanel.documentMenu.url                          | true             | Boolean |
+| Allow to use "enter" to validate the input URL from the URL button      | topPanel.documentMenu.url.open.using.enter         | true             | Boolean |
+| Upload XFDF annotations from local                                      | topPanel.documentMenu.xfdfUpload                   | false            | Boolean |
+| Download current document in PDF                                        | topPanel.documentMenu.downloadPDF                  | true             | Boolean |
+| Include rotations when downloading document as PDF                      | topPanel.documentMenu.downloadPDF.includeRotations | false            | Boolean |
+| Download current document in native format (only not PDF document)      | topPanel.documentMenu.download                     | true             | Boolean |
+| Download all visualized documents                                       | topPanel.documentMenu.downloadAll                  | true             | Boolean |
+| Download current document with its annotations                          | topPanel.documentMenu.downloadAnnotation           | true             | Boolean |
+| Download annotations in CSV format                                      | topPanel.documentMenu.downloadCSVAnnotation        | false            | Boolean |
+| Download document with FDF annotations                                  | topPanel.documentMenu.downloadWithFDFAnnotation    | false            | Boolean |
+| Download annotations in XFDF format                                     | topPanel.documentMenu.downloadXFDFAnnotations      | false            | Boolean |
+| Activate the top panel download composite document button               | topPanel.documentMenu.download.root                | true             | Boolean |
+| The default behavior for download : DOWNLOAD_SOURCE or DOWNLOAD_NON_PDF | topPanel.documentMenu.download.behavior            | DOWNLOAD_NON_PDF | String  |
+| Download all current documents as original format in a ZIP              | topPanel.documentMenu.downloadAllSources           | true             | Boolean |
+| Download the current document as FDF                                    | topPanel.documentMenu.downloadFDFAnnotations       | false            | Boolean |
+| Download the compared documents side by side with compare result on it  | topPanel.documentMenu.download.with.compare        | true             | Boolean |
+| Activate the download sub-menu (Since version 2023.15.0)                | topPanel.downloadMenu.enabled                      | true             | Boolean |
+| Activate the import sub-menu (Since version 2023.15.0)                  | topPanel.importMenu.enabled                        | true             | Boolean |
 
 ## Print menu
 

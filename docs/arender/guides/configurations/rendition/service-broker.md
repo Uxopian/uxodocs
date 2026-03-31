@@ -52,6 +52,32 @@ In this case, the following configuration needs to be done.
 default.document.path.startup.clear=true
 ```
 
+## Conversion coordination timeout
+
+When the broker forwards a conversion request to a rendition microservice, it waits internally for the conversion to complete before returning the result. By default this wait is capped at **120 seconds** (aligned with the HTTP read timeout).
+
+For heavy documents such as large XLSX spreadsheets or long DOCX files, conversion can exceed 2 minutes. When the timeout expires the broker throws:
+
+```
+java.lang.IllegalStateException: Despair waiting for rendition of [documentId]
+```
+
+Use the following property in the broker's `application.properties` to raise the limit:
+
+```properties title="/modules/rendition-engine/application.properties"
+# Maximum time to wait for a document conversion to complete (in milliseconds)
+arender.conversion.timeout.ms=300000
+```
+
+:::info
+This timeout defaults to the value of `rest.client.read.timeout` (falling back to `120000` if unset). When tuning for heavy documents, all timeout layers must be raised consistently:
+
+- **`arender.conversion.timeout.ms`** (this property, milliseconds) — broker coordination layer
+- **[`arender.server.rendition.rest.read.timeout`](/docs/arender/guides/configurations/web-ui/server/rest-client/)** (milliseconds) — HMI HTTP read timeout
+- **[`conversion.job.timeout.ms`](/docs/arender/guides/configurations/rendition/task-conversion#conversion-timeouts)** (milliseconds) — global job-queue timeout for all conversion factories in the TaskConversion module
+- **[`html.conversion.timeout`, `soffice.conversion.timeout`, `msoffice.conversion.timeout`, `video.conversion.timeout`](/docs/arender/guides/configurations/rendition/task-conversion#conversion-timeouts)** (seconds) — per-format converter timeouts in the TaskConversion module
+:::
+
 ## Checking disk space
 
 Since version 2023.14.0, a disk space availability check has been added.

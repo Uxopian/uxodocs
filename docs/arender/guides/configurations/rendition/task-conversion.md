@@ -7,6 +7,29 @@ sidebar_position: 2
 content_hash: 900edb36ea5f5a72c0a6cb954c8a01a2780f91fc785b494da814d3d33ea3e878
 ---
 
+## Conversion timeouts
+
+The TaskConversion module exposes two levels of timeout:
+
+- **Per-format timeouts** (in **seconds**): control how long the underlying conversion tool (LibreOffice, wkhtmltopdf, ffmpeg, …) is allowed to run.
+- **`conversion.job.timeout.ms`** (in **milliseconds**): a global job-queue timeout applied to all conversion factories. If a conversion job is not picked up and completed within this duration, it is aborted.
+
+:::note application.properties or application.yml located in ARender-Rendition-{{version}}\modules\TaskConversion
+
+| Description                                                  | Parameter Key                | Default value | Unit         | Type    |
+| ------------------------------------------------------------ | ---------------------------- | ------------- | ------------ | ------- |
+| Global job-queue timeout for all conversion factories        | conversion.job.timeout.ms    | 120000        | milliseconds | Long    |
+| Timeout for HTML to PDF conversion                           | html.conversion.timeout      | 120           | seconds      | Integer |
+| Timeout for video format conversion                          | video.conversion.timeout     | 300           | seconds      | Integer |
+| Timeout for LibreOffice to PDF conversion                    | soffice.conversion.timeout   | 120           | seconds      | Integer |
+| Timeout for MS Office to PDF conversion                      | msoffice.conversion.timeout  | 120           | seconds      | Integer |
+
+:::
+
+:::info
+When tuning for heavy documents, these converter-side timeouts must be raised alongside the broker's [`arender.conversion.timeout.ms`](/docs/arender/guides/configurations/rendition/service-broker#conversion-coordination-timeout) property (in milliseconds) and the HMI's [`arender.server.rendition.rest.read.timeout`](/docs/arender/guides/configurations/web-ui/server/rest-client/) so all layers share a consistent ceiling.
+:::
+
 ## Rendition without internet Access and mails with external images
 
 If the Rendition is installed on a server that **does not have access to Internet** and if **mails with external images** needs to be viewed, please apply the below configuration:

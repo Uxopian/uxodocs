@@ -1,12 +1,20 @@
 [
   {
+    "version": "v2023.19.0",
+    "title": "ARender v2023.19.0 – Release Notes",
+    "date": "2026-03-31",
+    "description": "AcroForm fillable fields comparison, mobile text selection by default, automatic rotation on download/print, new JS API events, and numerous annotation, redaction, and rendering fixes.",
+    "slug": "/release-note/arender/v2023.19.0/release-notes",
+    "hasUpgradeNotes": true,
+    "latest": true
+  },
+  {
     "version": "v2023.18.1",
     "title": "ARender v2023.18.1 – Release Notes",
     "date": "2026-03-10",
     "description": "Patch release with two annotation fixes: arrow annotation comments not saved, and ghost broken-image icon on arrow creation.",
     "slug": "/release-note/arender/v2023.18.1/release-notes",
-    "hasUpgradeNotes": true,
-    "latest": true
+    "hasUpgradeNotes": true
   },
   {
     "version": "v2023.18.0",
