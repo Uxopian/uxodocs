@@ -48,7 +48,7 @@ No other properties were deleted or deprecated in this release.
 
 ### Technical Changes and Security
 
-* **Security dependencies upgraded**: Embedded dependencies have been upgraded to address known vulnerabilities in both the rendition and UI components. Upgrading all ARender components together is recommended. (AR-18122, AR-18223)
+* **Security dependencies upgraded**: Embedded dependencies have been upgraded to address known vulnerabilities in both the rendition and UI components. Upgrading all ARender components together is recommended.
 * **Aroms upgraded to 4.1.0**: The Aroms rendering engine has been upgraded to version 4.1.0. This improves layout generation performance for certain Office documents and introduces a timeout mechanism to prevent excessive processing time. No configuration change is required.
 
 ## 💻 API
