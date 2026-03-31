@@ -10,9 +10,17 @@ content_hash: c0d437e387b2344c45c475dc9ae391d10393f341c3b07c26c8d5ad5d2d590343
 
 # Integrations overview
 
-ARender integrates with document management systems through standalone REST microservices called **providers**. Each provider runs as its own container and exposes a REST API. See [Connector providers](./connector-providers.md) for details.
+ARender integrates with document management systems through standalone REST microservices called providers. Each provider runs as its own container and exposes a REST API. See [Connector providers](./connector-providers.md) for details.
 
 For the conceptual model, see [Connectors concept](../../concepts/connectors.md).
+
+## ARender-maintained integrations
+
+| ECM | Guide |
+|-----|-------|
+| Alfresco Content Services | [Alfresco integration](./alfresco.md) |
+| IBM FileNet P8 | [IBM FileNet integration](./filenet.md) |
+| Any (custom provider) | [Custom provider development](./custom-provider.md) |
 
 ## Partner-maintained integrations
 

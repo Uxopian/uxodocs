@@ -1,11 +1,12 @@
 ---
-viewer: classic
 title: Environment variables
 slug: /installation/environment-variables
 sidebar_position: 5
+last_update:
+  date: '2026-03-27T00:00:00.000Z'
+  author: CI/CD Bot
+content_hash: TBD
 ---
-
-# Environment variables
 
 ARender services are Spring Boot applications. Any Spring Boot property can be overridden via an environment variable using a per-service prefix.
 

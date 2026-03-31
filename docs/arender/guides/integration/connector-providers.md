@@ -9,6 +9,9 @@ sidebar_position: 6
 content_hash: b2eda8f4f097879ad4c5b991a98d213ca6734fd0c3bcca9b44d8f0da6362649a
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Connector providers
 
 The Modern Viewer loads documents from external repositories through **providers** — standalone REST microservices that run as their own Docker containers. Each provider communicates with the Document Service Broker over HTTP and handles document retrieval from a specific repository type.
@@ -66,6 +69,9 @@ ARender v2026 ships the following provider images:
 
 Deploy the backend services with a provider:
 
+<Tabs groupId="provider">
+  <TabItem value="alfresco" label="Alfresco">
+
 ```yaml
 services:
   service-broker:
@@ -76,7 +82,6 @@ services:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-TEXT-HANDLER=8899"
-      # Register the Alfresco provider
       - "REGISTRY_PROVIDER_ALFRESCO_URL=http://alfresco-provider:8788"
     volumes:
       - arender-tmp:/arender/tmp
@@ -119,26 +124,100 @@ volumes:
   arender-tmp:
 ```
 
+  </TabItem>
+  <TabItem value="filenet" label="FileNet">
+
+```yaml
+services:
+  service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
+    ports:
+      - "8761:8761"
+    environment:
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-TEXT-HANDLER=8899"
+      - "REGISTRY_PROVIDER_FILENET_URL=http://filenet-provider:8787"
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  filenet-provider:
+    image: artifactory.arondor.cloud:5001/arender-filenet-provider:{{version}}
+    ports:
+      - "8787:8787"
+    environment:
+      - "ARENDER_SERVER_FILENET_CE_URL=https://filenet-engine:9443/wsi/FNCEWS40MTOM/"
+      - "ARENDER_SERVER_FILENET_CE_LOGIN=p8admin"
+      - "ARENDER_SERVER_FILENET_CE_PASSWORD=secret"
+
+  document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:{{version}}
+    environment:
+      - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
+      - "DCV_APP_EUREKA_HOSTNAME=service-broker"
+      - "DCV_APP_EUREKA_PORT=8761"
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:{{version}}
+    environment:
+      - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
+      - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
+      - "DRN_EUREKA_SERVER_PORT=8761"
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:{{version}}
+    environment:
+      - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
+      - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
+      - "DTH_EUREKA_SERVER_PORT=8761"
+    volumes:
+      - arender-tmp:/arender/tmp
+
+volumes:
+  arender-tmp:
+```
+
+  </TabItem>
+</Tabs>
+
 The React UI itself is embedded in your host application via the npm package — it does not appear in this Docker Compose file.
 
 ## Broker registry configuration
 
-The broker needs to know each provider's URL. Configure this with Spring Boot properties:
+The broker needs to know each provider's URL.
 
-```properties
-# Register a provider named "alfresco" at the given URL
+<Tabs groupId="provider">
+  <TabItem value="alfresco" label="Alfresco">
+
+```properties title="application.properties"
 registry.provider.alfresco.url=http://alfresco-provider:8788
-
-# Register a provider named "filenet"
-registry.provider.filenet.url=http://filenet-provider:8787
 ```
 
-Or as environment variables:
+Or as an environment variable:
 
 ```bash
 REGISTRY_PROVIDER_ALFRESCO_URL=http://alfresco-provider:8788
+```
+
+  </TabItem>
+  <TabItem value="filenet" label="FileNet">
+
+```properties title="application.properties"
+registry.provider.filenet.url=http://filenet-provider:8787
+```
+
+Or as an environment variable:
+
+```bash
 REGISTRY_PROVIDER_FILENET_URL=http://filenet-provider:8787
 ```
+
+  </TabItem>
+</Tabs>
 
 ## How `X-Provider-ID` works
 
@@ -154,9 +233,21 @@ When the broker receives a `POST /connector/documents` request, it resolves the 
 
 For the full list of connector registry properties, see [Rendition properties — Connector registry](../../reference/rendition-properties.md#connector-registry).
 
-## FileNet provider configuration
+## Provider configuration
 
-The FileNet provider connects to an IBM FileNet Content Engine. Configure it with the following environment variables:
+<Tabs groupId="provider">
+  <TabItem value="alfresco" label="Alfresco">
+
+The Alfresco provider connects to Alfresco Content Services via the CMIS 1.1 AtomPub endpoint. The default port is `8788`.
+
+```bash
+ARENDER_SERVER_ALFRESCO_ATOMPUBURL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom
+```
+
+  </TabItem>
+  <TabItem value="filenet" label="FileNet">
+
+The FileNet provider connects to an IBM FileNet Content Engine. The default port is `8787`.
 
 ```bash
 ARENDER_SERVER_FILENET_CE_URL=https://filenet-engine:9443/wsi/FNCEWS40MTOM/
@@ -164,7 +255,8 @@ ARENDER_SERVER_FILENET_CE_LOGIN=p8admin
 ARENDER_SERVER_FILENET_CE_PASSWORD=secret
 ```
 
-The default port is `8787`.
+  </TabItem>
+</Tabs>
 
 ## Document model
 

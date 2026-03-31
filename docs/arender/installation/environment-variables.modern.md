@@ -2,9 +2,11 @@
 title: Environment variables
 slug: /installation/environment-variables
 sidebar_position: 5
+last_update:
+  date: '2026-03-27T00:00:00.000Z'
+  author: CI/CD Bot
+content_hash: TBD
 ---
-
-# Environment variables
 
 ARender services are Spring Boot applications. Any Spring Boot property can be overridden via an environment variable using a per-service prefix.
 
@@ -32,6 +34,11 @@ Each service uses a prefix. All environment variable names must be uppercase.
 | Document Renderer | `arender-document-renderer-pdfowl` | `DRN_` |
 | Document Text Handler | `arender-document-text-handler` | `DTH_` |
 
+:::warning
+Native Spring Boot properties (e.g., `spring.security.oauth2.*`) must not be prefixed with a service-specific prefix such as `DSB_`. Only ARender-specific properties (e.g., `arender.server.*`) use the service prefix. Prefixing native Spring Boot properties will prevent them from being picked up or applied correctly.
+:::
+
+> **Note:** The Modern viewer deployment has no viewer UI container (`arender-ui-springboot`). The `ARENDERSRV_` prefix used in Classic deployments does not apply to the Modern stack. Provider services (e.g., `alfresco-provider`, `filenet-provider`) use their own environment variables without an ARender-specific prefix, as documented in the [Provider services](#provider-services) section below.
 
 ### Property-to-variable mapping rules
 
@@ -248,6 +255,51 @@ broker:
 ```
 
 This is useful for multi-line or complex properties that are awkward to express as a single environment variable.
+
+---
+
+## Provider services
+
+In the Modern viewer architecture, connector providers run as separate Docker containers alongside the rendition backend. Providers are standard Spring Boot applications. Their properties are set directly as environment variables without an ARender-specific prefix.
+
+### Alfresco provider
+
+| Environment variable | Property | Default | Description |
+|---|---|---|---|
+| `SERVER_PORT` | `server.port` | `8788` | HTTP port |
+| `ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL` | `arender.server.alfresco.atom.pub.url` | `http://localhost:8080/alfresco/api/-default-/cmis/versions/1.1/atom` | CMIS 1.1 AtomPub endpoint URL |
+
+### FileNet provider
+
+| Environment variable | Property | Default | Description |
+|---|---|---|---|
+| `SERVER_PORT` | `server.port` | `8787` | HTTP port |
+| `ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD` | `arender.server.filenet.authentication.method` | `oauth2ObjectStoreProvider` | Authentication mode: `loginPasswordObjectStoreProvider`, `oauth2ObjectStoreProvider`, or `jaasObjectStoreProvider` |
+| `ARENDER_SERVER_FILENET_CE_URL` | `arender.server.filenet.ce.url` | `http://localhost:9080/wsi/FNCEWS40MTOM/` | Content Engine WSI/MTOM endpoint URL |
+| `ARENDER_SERVER_FILENET_CE_LOGIN` | `arender.server.filenet.ce.login` | `p8admin` | Service account login (login/password mode) |
+| `ARENDER_SERVER_FILENET_CE_PASSWORD` | `arender.server.filenet.ce.password` | `filenet` | Service account password (login/password mode) |
+| `ARENDER_SERVER_FILENET_SECURITY_OAUTH2_PREFIX` | `arender.server.filenet.security.oauth2.prefix` | (empty) | Token prefix for OAuth2 mode |
+| `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` | `spring.security.oauth2.resourceserver.jwt.issuer-uri` | — | JWT issuer URI (OAuth2 mode only) |
+
+### Broker connector registry
+
+The broker uses its own environment variables to register providers:
+
+| Environment variable | Description |
+|---|---|
+| `CONNECTOR_DEFAULT_REGISTRY` | Default provider name when no `X-Provider-ID` header is present |
+| `CONNECTOR_REGISTRIES_<NAME>_BASE_URL` | Base URL of the named provider |
+| `CONNECTOR_REGISTRIES_<NAME>_WHITELISTED_PARAMS` | Comma-separated parameter names forwarded to the provider |
+
+**Example:**
+
+```bash
+CONNECTOR_DEFAULT_REGISTRY=filenet
+CONNECTOR_REGISTRIES_FILENET_BASE_URL=http://filenet-provider:8787
+CONNECTOR_REGISTRIES_FILENET_WHITELISTED_PARAMS=objectStoreName,objectStoreId,objectType,id,vsId,contentElement
+CONNECTOR_REGISTRIES_ALFRESCO_BASE_URL=http://alfresco-provider:8788
+CONNECTOR_REGISTRIES_ALFRESCO_WHITELISTED_PARAMS=nodeRef,alf_ticket,user,versionLabel,docs,folder
+```
 
 ---
 
