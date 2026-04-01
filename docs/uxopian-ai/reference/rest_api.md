@@ -181,6 +181,7 @@ The OpenAPI spec is at `/v3/api-docs`. Both paths are served as public in the de
 
 ## Related pages
 
+- [Admin panel overview](../admin/admin_panel_overview.md)
 - [Conversations and requests](../understanding/conversations_and_requests.md)
 - [Prompts and templating](../understanding/prompts_and_templating.md)
 - [Authentication and gateway](../understanding/authentication.md)
