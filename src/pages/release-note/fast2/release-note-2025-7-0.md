@@ -7,7 +7,6 @@ date: 2025-11-07
 # To modify
 version: "2025.7.0"
 major_version: "2025"
-latest: true #delete this line if it's not the latest version for this major version
 description: "Summary of the changes in version 2025.7.0 of Fast2."
 ---
 
