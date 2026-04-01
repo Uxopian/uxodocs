@@ -94,24 +94,26 @@ Goal groups can be created, updated, and deleted via the Admin API without resta
 
 ```bash
 # List goal groups for the current tenant
-GET /api/v1/admin/goals
+curl https://your-gateway/api/v1/admin/goals
 
 # Create a goal group
-POST /api/v1/admin/goals
-Content-Type: application/json
-{
+curl -X POST https://your-gateway/api/v1/admin/goals \
+  -H "Content-Type: application/json" \
+  -d '{
   "id": "my-workflow",
   "goals": [
     { "promptId": "basePrompt", "filter": "true", "index": 1 },
     { "promptId": "arenderContext", "filter": "true", "index": 10 }
   ]
-}
+}'
 
 # Update a goal group
-PUT /api/v1/admin/goals/{id}
+curl -X PUT https://your-gateway/api/v1/admin/goals/{id} \
+  -H "Content-Type: application/json" \
+  -d '{ ... }'
 
 # Delete a goal group
-DELETE /api/v1/admin/goals/{id}
+curl -X DELETE https://your-gateway/api/v1/admin/goals/{id}
 ```
 
 Changes are persisted in OpenSearch and take effect immediately for the tenant.
