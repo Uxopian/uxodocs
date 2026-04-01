@@ -74,7 +74,9 @@ The `roles` field requires that the authenticated user's role list (from `X-User
 
 ## Related pages
 
-- [Managing LLM providers in the admin UI](./managing_llm_providers.md)
-- [Managing prompts in the admin UI](./managing_prompts.md)
+- [Dashboard](./dashboard.md)
+- [Managing LLM providers](./managing_llm_providers.md)
+- [Managing prompts](./managing_prompts.md)
+- [Managing users](./managing_users.md)
 - [Monitoring statistics](./monitoring_statistics.md)
 - [REST API summary](../reference/rest_api.md)

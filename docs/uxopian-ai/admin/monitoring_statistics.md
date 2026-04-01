@@ -23,31 +23,66 @@ The dashboard shows aggregated totals:
 
 Fetched from `GET /api/v1/admin/stats/global`.
 
-### Time series
+### Time interval selector
 
-Activity over time, aggregated by interval (hour, day, week, month). Shows request counts over the selected period.
+A toolbar at the top of the statistics page lets you select the time granularity. The selected interval applies to all charts on the page.
 
-Fetched from `GET /api/v1/admin/stats/timeseries?interval=DAY`.
+| Button | Interval | Description |
+|---|---|---|
+| Day | `DAY` | Daily buckets (default) |
+| Week | `WEEK` | Weekly buckets |
+| Month | `MONTH` | Monthly buckets |
+| Year | `YEAR` | Yearly buckets |
+| All | none | All-time aggregation, no interval filter |
 
-Supported intervals: `HOUR`, `DAY`, `WEEK`, `MONTH`.
+### Activity charts
+
+Two area/line charts show activity over the selected interval:
+
+- **Requests**: request volume over time.
+- **Tokens**: token usage (input + output) over time.
+
+Fetched from `GET /api/v1/admin/stats/timeseries?interval={interval}`.
 
 ### LLM distribution
 
-A breakdown of which LLM models were used for requests, shown as counts per model name.
+A chart showing which LLM models were used for requests, with counts per provider. The interval selector applies to this chart as well.
 
-Fetched from `GET /api/v1/admin/stats/llm-distribution`.
+Fetched from `GET /api/v1/admin/stats/llm-distribution?interval={interval}`.
+
+### Top prompts by time saved
+
+Ranks the top 5 prompts by cumulative time saved (displayed in hours). This helps identify which prompts deliver the most value.
+
+Fetched from `GET /api/v1/admin/stats/top-prompts-time-saved?interval={interval}`.
 
 ### Feature adoption
 
-Shows which features are used (e.g., tool calls, prompt types, goal usage).
+Shows adoption rates for advanced capabilities:
+
+| Feature | Description |
+|---|---|
+| Multimodal | Percentage of requests using image inputs |
+| Function calling | Percentage of requests using tool calling |
 
 Fetched from `GET /api/v1/admin/stats/feature-adoption`.
 
-### Top prompts
+```mermaid
+graph TD
+    A[Statistics page] --> B[Time interval selector<br/>Day / Week / Month / Year / All]
+    B --> C[Stats overview cards]
+    B --> D[Activity charts<br/>Requests / Tokens]
+    B --> E[LLM distribution chart]
+    B --> F[Top 5 prompts by time saved]
+    B --> G[Feature adoption rates]
+    A --> H[Export PDF]
+```
 
-Lists the most frequently used prompts by request count.
+*Figure: Statistics page layout and data flow.*
 
-Fetched from `GET /api/v1/admin/stats/top-prompts`.
+## PDF export
+
+Click the "Export PDF" button at the top of the statistics page to download the current dashboard view as a PDF file. The export includes all visible charts and summary cards.
 
 ## Metrics export to OpenSearch
 
@@ -75,7 +110,19 @@ Three actuator endpoints are exposed over HTTP:
 
 The health endpoint is public in the default gateway configuration. Other actuator endpoints should be protected in production.
 
+## REST API endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/v1/admin/stats/global` | Global aggregated statistics |
+| `GET` | `/api/v1/admin/stats/timeseries?interval={interval}` | Activity time series |
+| `GET` | `/api/v1/admin/stats/llm-distribution?interval={interval}` | LLM model usage distribution |
+| `GET` | `/api/v1/admin/stats/top-prompts-time-saved?interval={interval}` | Top 5 prompts by time saved |
+| `GET` | `/api/v1/admin/stats/feature-adoption` | Feature adoption rates |
+
 ## Related pages
 
 - [Admin panel overview](./admin_panel_overview.md)
-- [Configuration file reference](../reference/configuration.md)
+- [Monitoring (installation)](../installation/monitoring.md)
+- [Configuration file reference (metrics.yml)](../reference/configuration.md#metricsyml)
+- [Environment variables reference](../reference/environment_variables.md)
