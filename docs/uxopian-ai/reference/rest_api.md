@@ -42,7 +42,7 @@ All endpoints use the base path `/api/v1`. Requests go through the gateway; repl
   "conversation": "optional-conversation-id",
   "inputs": [
     {
-      "role": "USER",
+      "role": "user",
       "content": [
         { "type": "text", "value": "Hello" },
         { "type": "prompt", "value": "promptId", "payload": { "key": "value" } },

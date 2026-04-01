@@ -64,7 +64,7 @@ The REST endpoint is `POST /api/v1/requests`. The request body follows the `Requ
   "conversation": "conv-id-or-null",
   "inputs": [
     {
-      "role": "USER",
+      "role": "user",
       "content": [
         { "type": "prompt", "value": "arenderContext", "payload": { "documentId": "doc-123" } },
         { "type": "text", "value": "Summarize this document." }
