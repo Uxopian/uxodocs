@@ -114,4 +114,5 @@ After a request completes, users can attach feedback by calling `PUT /api/v1/req
 - [Web components](./web_components.md)
 - [Prompts and templating](./prompts_and_templating.md)
 - [Goals](./goals.md)
+- [Managing users in the admin UI](../admin/managing_users.md)
 - [Embed in a web application](../how_to/embed_in_web_application.md)

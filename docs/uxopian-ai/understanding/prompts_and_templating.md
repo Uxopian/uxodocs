@@ -124,5 +124,6 @@ Prompts can also be created or updated at runtime via the Admin API (`/api/v1/ad
 
 - [Goals](./goals.md)
 - [Write prompts](../extending/writing_prompts.md)
+- [Managing prompts in the admin UI](../admin/managing_prompts.md)
 - [Custom service helpers](../extending/custom_service_helpers.md)
 - [Configuration file reference](../reference/configuration.md)

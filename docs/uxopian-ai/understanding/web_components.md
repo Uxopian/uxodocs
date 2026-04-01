@@ -151,5 +151,6 @@ Content types: `text`, `prompt`, `goal`, `image`.
 ## Related pages
 
 - [Embed in a web application](../how_to/embed_in_web_application.md)
+- [Admin panel overview](../admin/admin_panel_overview.md)
 - [Conversations and requests](./conversations_and_requests.md)
 - [Integrate with ARender](../how_to/integrate_with_arender.mdx)
