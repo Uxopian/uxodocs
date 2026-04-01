@@ -15,7 +15,7 @@ The aim of this module is to give you the keys to getting to grips with and usin
 # Access
 
 Swagger UI is available from **FlowerDocs Core** at `/swagger-ui/index.html`.
-For example, for an online demonstration, Swagger UI is available [here](https://flowerdocs.com/core/swagger-ui/index.html).
+For example, for an online demonstration, Swagger UI is available [here](https://www.demo.flowerdocs.cloud/flower-docs-ws/swagger-ui/index.html).
 
 # Authentication
 
