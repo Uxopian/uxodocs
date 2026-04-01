@@ -60,4 +60,28 @@ A list of jobs is supplied to the CLM to indicate the instructions to be execute
 <clm> job1 job2
 ```
 
+## Atomic jobs
+
+Atomic jobs operate on a single type of data. They are the building blocks of all CLM operations.
+
+**Example:** Import tag classes only
+
+```properties
+<clm> tag-class-import --scope=HR
+```
+
+The full list of atomic jobs is available in the in the [CLM](/docs/flowerdocs/install/clm/jobs) page.
+
+## Composite jobs
+
+Composite jobs group several atomic jobs together for common use cases, making it easier to perform broad operations with a single command.
+
+**Example:** `export-model` exports all model-related data (tag categories, tag classes, document classes, folder classes, task classes, workflows, virtual folder classes and ACLs) in one go, instead of running each atomic export individually.
+
+```properties
+<clm> export-model --scope=HR --template=hr-backup
+```
+
+Composite jobs are listed alongside their atomic counterparts in the [CLM](/docs/flowerdocs/install/clm/jobs) page.
+
 The various possible jobs are listed in the following sections.

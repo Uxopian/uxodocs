@@ -31,7 +31,8 @@ The tags referenced by this class are used to configure the subscription:
 | `Asynchronous`      | _boolean_    | Determines whether the OperationHandler should be executed asynchronously or not                                                                             |
 | `RegistrationOrder` | _integer_    | Scheduling different subscriptions to the same operation                                                                                                     |
 | `StopOnException`   | _boolean_    | Determines whether operation execution should be stopped in the event of an exception (_only if synchronous_)                                                |
-| `Authorization`     | _string_     | basic authorization string to be supplied to the hook (generated online using [blitter](https://www.blitter.se/utils/basic-authentication-header-generator/) |
+| `Authorization`     | _string_     | Static authorization string sent in the `Authorization` HTTP header of hook requests. Typically BASIC auth, generated using [blitter](https://www.blitter.se/utils/basic-authentication-header-generator/) (_Hook only_) |
+| `InjectToken`       | _boolean_    | When `true`, FlowerDocs generates a JWT token for the current user and sends it in the `token` HTTP header. Takes precedence over `Authorization` if both are set (_Hook only_) |
 
   </TabItem>
 </Tabs>

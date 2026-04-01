@@ -103,13 +103,17 @@ There are also more specific export jobs.
 | export-config      | Export configuration files                                                   |
 | export-model       | Export component classes, tags, categories and workflow                      |
 | export-content     | Export content (documents, folders, virtual folders and tasks)               |
-| export-scope       | Export scope.xml file (which manages ACLs, display names, scope teams, etc.) |
+| export-scope       | Export scope.xml file (which manages ACLs, display names, scope teams, etc.) — composite job, equivalent to running `scope-export` |
 | export-annotations | Export document's annotations                                                |
 
 The `export` or `export-config` jobs do not get annotations. Only the `export-annotations` job export it.
 Before version 2025.2.0, annotations were exported by `export-config` job.
 
-# Job list
+:::note
+The jobs listed above (`export-config`, `export-model`, `export-content`, `export-scope`, `export-annotations`) are composite jobs that group one or more atomic operations for convenience. The atomic operations they rely on (e.g. `scope-export`) are also available individually and are listed in the job list below.
+:::
+
+# Job list {#job-list}
 
 Only some of the operations can be carried out. Below is a complete list of possible operations:
 
