@@ -1,10 +1,18 @@
 [
   {
+    "version": "2025.8.3",
+    "majorVersion": "2025",
+    "date": "2026-04-01",
+    "description": "Summary of the changes in version 2025.8.3 of Fast2.",
+    "latest": true,
+    "slug": "release-note-2025-8-3"
+  },
+  {
     "version": "2025.8.2",
     "majorVersion": "2025",
     "date": "2026-01-13",
     "description": "Summary of the changes in version 2025.8.2 of Fast2.",
-    "latest": true,
+    "latest": false,
     "slug": "release-note-2025-8-2"
   },
   {
@@ -28,7 +36,7 @@
     "majorVersion": "2025",
     "date": "2025-11-07",
     "description": "Summary of the changes in version 2025.7.0 of Fast2.",
-    "latest": true,
+    "latest": false,
     "slug": "release-note-2025-7-0"
   },
   {
