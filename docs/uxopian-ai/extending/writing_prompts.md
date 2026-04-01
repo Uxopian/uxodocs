@@ -146,25 +146,27 @@ Prompts can be created, updated, and deleted via the Admin API without restartin
 
 ```bash
 # List all prompts for the current tenant
-GET /api/v1/admin/prompts
+curl https://your-gateway/api/v1/admin/prompts
 
 # Create a new prompt
-POST /api/v1/admin/prompts
-Content-Type: application/json
-{
+curl -X POST https://your-gateway/api/v1/admin/prompts \
+  -H "Content-Type: application/json" \
+  -d '{
   "id": "myNewPrompt",
   "role": "USER",
   "content": "Please explain: [[${question}]]",
   "requiresMultiModalModel": false,
   "requiresFunctionCallingModel": false,
   "reasoningDisabled": false
-}
+}'
 
 # Update a prompt
-PUT /api/v1/admin/prompts/{id}
+curl -X PUT https://your-gateway/api/v1/admin/prompts/{id} \
+  -H "Content-Type: application/json" \
+  -d '{ ... }'
 
 # Delete a prompt
-DELETE /api/v1/admin/prompts/{id}
+curl -X DELETE https://your-gateway/api/v1/admin/prompts/{id}
 ```
 
 Changes made via the API are persisted in OpenSearch and take effect immediately for the tenant. They survive application restarts.
@@ -180,6 +182,7 @@ Changes made via the API are persisted in OpenSearch and take effect immediately
 ## Related pages
 
 - [Prompts and templating](../understanding/prompts_and_templating.md)
+- [Managing prompts in the admin UI](../admin/managing_prompts.md)
 - [Goals](../understanding/goals.md)
 - [Write goals](./writing_goals.md)
 - [Custom service helpers](./custom_service_helpers.md)

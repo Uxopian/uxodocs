@@ -104,11 +104,12 @@ llm:
 
 ### Provider-specific extras
 
-| Provider | Extra keys |
-|---|---|
-| `azure` | `deploymentName` |
-| `bedrock` | `accessKey`, `secretKey`, `region` |
-| `nu-extract` | `modelId` |
+| Provider | Extra keys | Description |
+|---|---|---|
+| `bedrock` | `AwsRegion`, `AwsAccessKey`, `AwsSessionToken` | AWS credentials and region |
+| `nu-extract` | `modelId` | Model ID override (defaults to `modelName` if absent) |
+
+Azure OpenAI (`azure-openai`) does not use extras. The `modelName` field is passed as the deployment name.
 
 ### Tenant overrides
 
@@ -265,3 +266,6 @@ Gateway (uxopian-gateway) configuration.
 - [Multi-tenancy](../understanding/multi_tenancy.md)
 - [LLM providers](../understanding/llm_providers.md)
 - [Prompts and templating](../understanding/prompts_and_templating.md)
+- [Managing LLM providers in the admin UI](../admin/managing_llm_providers.md)
+- [Managing prompts in the admin UI](../admin/managing_prompts.md)
+- [Monitoring statistics](../admin/monitoring_statistics.md)
