@@ -153,7 +153,7 @@ curl -X POST https://your-gateway/api/v1/admin/prompts \
   -H "Content-Type: application/json" \
   -d '{
   "id": "myNewPrompt",
-  "role": "USER",
+  "role": "user",
   "content": "Please explain: [[${question}]]",
   "requiresMultiModalModel": false,
   "requiresFunctionCallingModel": false,
