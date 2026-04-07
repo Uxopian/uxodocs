@@ -31,9 +31,9 @@ sequenceDiagram
     participant Provider as Provider microservice
     participant Repo as Document Repository
 
-    React->>GW: POST /connector/documents
+    React->>GW: POST /registry/documents
     GW->>GW: Inject X-Provider-ID header
-    GW->>Broker: POST /connector/documents<br/>X-Provider-ID: alfresco
+    GW->>Broker: POST /registry/documents<br/>X-Provider-ID: alfresco
     Broker->>Provider: GET /documents?nodeRef=...
     Provider->>Repo: Fetch document binary
     Repo-->>Provider: Binary content
@@ -46,7 +46,7 @@ sequenceDiagram
     Note over Broker: Render pages using<br/>cached document
 ```
 
-1. The React UI sends a `POST /connector/documents` request to the gateway/BFF.
+1. The React UI sends a `POST /registry/documents` request to the gateway/BFF.
 2. The gateway injects the `X-Provider-ID` header (e.g., `alfresco`, `filenet`) and forwards the request to the broker.
 3. The broker looks up the provider's URL in its registry and forwards the request with the whitelisted query parameters.
 4. The provider fetches the document from the repository and returns the binary content (or a JSON folder structure for composite documents).
@@ -146,7 +146,7 @@ The `X-Provider-ID` HTTP header tells the broker which provider should handle th
 
 ### Provider selection
 
-When the broker receives a `POST /connector/documents` request, it resolves the provider in this order:
+When the broker receives a `POST /registry/documents` request, it resolves the provider in this order:
 
 1. **`X-Provider-ID` header** — If present, the broker looks up the provider by name in its registry.
 2. **`connector.defaultRegistry`** — If the header is absent, the broker falls back to the default provider configured in `connector.defaultRegistry`.

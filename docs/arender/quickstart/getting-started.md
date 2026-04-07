@@ -142,7 +142,7 @@ export default defineConfig({
         target: 'http://localhost:8761',
         changeOrigin: true,
       },
-      '/connector/documents': {
+      '/registry/documents': {
         target: 'http://localhost:8761',
         changeOrigin: true,
       },

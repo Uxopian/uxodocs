@@ -2206,7 +2206,7 @@ These endpoints are used by the React UI to open documents through REST connecto
 
 ### Open document through provider
 
-`POST` `/connector/documents`
+`POST` `/registry/documents`
 
 Opens a document through a registered REST connector provider. The broker resolves the provider from the `X-Provider-ID` header, forwards the request parameters to the provider's `GET /documents` endpoint, caches the result, and returns a `DocumentId`.
 
@@ -2243,7 +2243,7 @@ Returns a `DocumentId` object.
 #### Example request
 
 ```bash
-curl -X POST "http://broker:8761/connector/documents" \
+curl -X POST "http://broker:8761/registry/documents" \
   -H "X-Provider-ID: filenet" \
   -d "id=DOC123&objectStoreName=OS1"
 ```
@@ -2262,13 +2262,13 @@ curl -X POST "http://broker:8761/connector/documents" \
 
 `GET` `/documents/{documentId}/annotations/ids`
 
-Retrieves the list of annotation identifiers for a document opened via `POST /connector/documents`. The broker proxies the request to the provider's `GET /annotations/ids` endpoint.
+Retrieves the list of annotation identifiers for a document opened via `POST /registry/documents`. The broker proxies the request to the provider's `GET /annotations/ids` endpoint.
 
 #### Parameters
 
 | Name | In | Type | Required | Description |
 |------|----|------|----------|-------------|
-| `documentId` | path | string | Yes | Internal document ID returned by `POST /connector/documents` |
+| `documentId` | path | string | Yes | Internal document ID returned by `POST /registry/documents` |
 
 #### Response
 
@@ -2518,7 +2518,7 @@ curl -X DELETE http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZ
 ---
 
 :::note
-These annotation endpoints only apply to documents opened via `POST /connector/documents`. For documents opened via `POST /documents`, use the [annotation endpoints](#annotation-operations) documented above.
+These annotation endpoints only apply to documents opened via `POST /registry/documents`. For documents opened via `POST /documents`, use the [annotation endpoints](#annotation-operations) documented above.
 :::
 
 ---

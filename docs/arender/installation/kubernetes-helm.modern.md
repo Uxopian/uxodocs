@@ -63,7 +63,7 @@ spec:
                 name: arender-rendition-broker
                 port:
                   number: 8761
-          - path: /connector/documents
+          - path: /registry/documents
             pathType: Exact
             backend:
               service:

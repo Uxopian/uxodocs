@@ -276,8 +276,8 @@ sequenceDiagram
     participant DR as Document Renderer
     participant DT as Document Text Handler
 
-    UI->>GW: POST /connector/documents
-    GW->>SB: POST /connector/documents (+ X-Provider-ID)
+    UI->>GW: POST /registry/documents
+    GW->>SB: POST /registry/documents (+ X-Provider-ID)
     SB->>P: GET /documents?params
     P-->>SB: Document binary
     SB->>SB: Store + detect MIME type

@@ -19,7 +19,7 @@ Backend rendition configuration (broker, converter, renderer) is documented in [
 
 The React UI makes REST API calls to the Document Service Broker for document operations. The broker URL is determined by how you set up the connection in your host application:
 
-- **Reverse proxy (recommended):** Your application server proxies `/documents`, `/annotation`, and `/connector/documents` routes to the broker. The React UI calls these as relative URLs — no cross-origin issues.
+- **Reverse proxy (recommended):** Your application server proxies `/documents`, `/annotation`, and `/registry/documents` routes to the broker. The React UI calls these as relative URLs — no cross-origin issues.
 - **Direct connection:** The React UI calls the broker URL directly. Requires CORS configuration.
 
 ### API routes
@@ -30,14 +30,14 @@ The React UI uses three API route prefixes:
 |-------|---------|
 | `/documents/*` | Document rendering, page images, text extraction |
 | `/annotation/*` | Annotation CRUD operations |
-| `/connector/documents` | Load documents through connector providers |
+| `/registry/documents` | Load documents through connector providers |
 
 ## CORS and reverse proxy
 
 Since the React UI runs inside your host application, API calls to the rendition backend are cross-origin by default. The recommended solution is a reverse proxy that makes the broker appear as same-origin.
 
 :::tip Local development
-During local development, most bundlers (Vite, webpack) provide a built-in dev server proxy that handles this automatically. For example, Vite's `server.proxy` configuration forwards `/documents`, `/annotation`, and `/connector/documents` to the broker URL defined in your environment variables. No external reverse proxy is needed in this case.
+During local development, most bundlers (Vite, webpack) provide a built-in dev server proxy that handles this automatically. For example, Vite's `server.proxy` configuration forwards `/documents`, `/annotation`, and `/registry/documents` to the broker URL defined in your environment variables. No external reverse proxy is needed in this case.
 :::
 
 ### Nginx reverse proxy (recommended)
@@ -61,18 +61,18 @@ server {
         proxy_pass http://service-broker:8761/annotation;
     }
 
-    location /connector/documents {
-        proxy_pass http://service-broker:8761/connector/documents;
+    location /registry/documents {
+        proxy_pass http://service-broker:8761/registry/documents;
         # If using connector providers, inject the provider header:
         # proxy_set_header X-Provider-ID alfresco;
     }
 }
 ```
 
-With this setup, the React UI makes same-origin requests to `/documents/*`, `/annotation/*`, and `/connector/documents`, which Nginx forwards to the broker.
+With this setup, the React UI makes same-origin requests to `/documents/*`, `/annotation/*`, and `/registry/documents`, which Nginx forwards to the broker.
 
 :::tip
-If you use [connector providers](../guides/integration/connector-providers.md) (Alfresco, FileNet), your reverse proxy must also inject the `X-Provider-ID` header on `/connector/documents` requests. If OAuth2 is enabled on the rendition backend, consider using a full BFF (Backend For Frontend) to handle token management. See [System architecture](../overview/architecture.md) for details.
+If you use [connector providers](../guides/integration/connector-providers.md) (Alfresco, FileNet), your reverse proxy must also inject the `X-Provider-ID` header on `/registry/documents` requests. If OAuth2 is enabled on the rendition backend, consider using a full BFF (Backend For Frontend) to handle token management. See [System architecture](../overview/architecture.md) for details.
 :::
 
 ### Alternative approaches

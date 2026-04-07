@@ -53,8 +53,8 @@ server {
         proxy_pass http://service-broker:8761/annotation;
     }
 
-    location /connector/documents {
-        proxy_pass http://service-broker:8761/connector/documents;
+    location /registry/documents {
+        proxy_pass http://service-broker:8761/registry/documents;
     }
 }
 ```
@@ -163,7 +163,7 @@ services:
       - "ARENDER_SERVER_ALFRESCO_ATOMPUBURL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
 ```
 
-Your reverse proxy must also inject the `X-Provider-ID` header on `/connector/documents` requests. See [Connector providers](../guides/integration/connector-providers.md) for the full deployment guide and available providers.
+Your reverse proxy must also inject the `X-Provider-ID` header on `/registry/documents` requests. See [Connector providers](../guides/integration/connector-providers.md) for the full deployment guide and available providers.
 
 ## Environment variable conventions
 
