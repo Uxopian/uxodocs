@@ -153,7 +153,7 @@ services:
     environment:
       # ... existing env vars ...
       # Register the Alfresco provider
-      - "REGISTRY_PROVIDER_ALFRESCO_URL=http://alfresco-provider:8788"
+      - "REGISTRY_PROVIDERS_ALFRESCO_BASE_URL=http://alfresco-provider:8788"
 
   alfresco-provider:
     image: artifactory.arondor.cloud:5001/arender-alfresco-provider:{{version}}

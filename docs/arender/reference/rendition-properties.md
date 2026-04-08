@@ -137,9 +137,9 @@ These properties configure REST connector providers used by the Modern Viewer.
 
 | Property | Default | Description |
 |----------|---------|-------------|
-| `connector.defaultRegistry` | — | Default provider name when `X-Provider-ID` header is absent |
-| `connector.registries.<name>.baseUrl` | — | Base URL of the provider microservice |
-| `connector.registries.<name>.whitelistedParams` | — | Comma-separated parameter names used for document ID generation and request filtering |
+| `registry.defaultProvider` | — | Default provider name when `X-Provider-ID` header is absent |
+| `registry.providers.<name>.baseUrl` | — | Base URL of the provider microservice |
+| `registry.providers.<name>.whitelistedParams` | — | Comma-separated parameter names used for document ID generation and request filtering |
 
 The `whitelistedParams` property serves two purposes:
 
@@ -149,11 +149,11 @@ The `whitelistedParams` property serves two purposes:
 **Environment variable equivalents:**
 
 ```bash
-CONNECTOR_DEFAULT_REGISTRY=filenet
-CONNECTOR_REGISTRIES_FILENET_BASE_URL=http://filenet-provider:8787
-CONNECTOR_REGISTRIES_FILENET_WHITELISTED_PARAMS=objectStoreName,id,vsId,objectType,contentElement
-CONNECTOR_REGISTRIES_ALFRESCO_BASE_URL=http://alfresco-provider:8788
-CONNECTOR_REGISTRIES_ALFRESCO_WHITELISTED_PARAMS=nodeRef,alf_ticket,user,versionLabel
+REGISTRY_DEFAULT_PROVIDER=filenet
+REGISTRY_PROVIDERS_FILENET_BASE_URL=http://filenet-provider:8787
+REGISTRY_PROVIDERS_FILENET_WHITELISTED_PARAMS=objectStoreName,id,vsId,objectType,contentElement
+REGISTRY_PROVIDERS_ALFRESCO_BASE_URL=http://alfresco-provider:8788
+REGISTRY_PROVIDERS_ALFRESCO_WHITELISTED_PARAMS=nodeRef,alf_ticket,user,versionLabel
 ```
 
 ### Docker/Kubernetes runtime mode
