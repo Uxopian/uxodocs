@@ -19,6 +19,20 @@ This guide explains how to build a custom connector JAR that integrates ARender 
 
 Build a custom connector when your document source is not covered by the [built-in connectors](./index.md). Typical cases include in-house document repositories, proprietary ECM systems, or third-party APIs without an existing integration.
 
+## Architecture
+
+A connector is deployed inside the ARender WEB-UI (N3). It bridges the browser request to your ECM backend (N4) and returns the document to the ARender Rendition engine (N5).
+
+![ARender connector architecture](/img/arender/diagrams/ARender-Architecture-With-Connector.png)
+
+| Node | Role |
+|------|------|
+| **N1: ECM UI** | Lets the user select which document to open in ARender |
+| **N2: Browser** | Opens the ARender frame using the URL provided by N1 |
+| **N3: ARender WEB-UI** | Spring Boot module that hosts the connector |
+| **N4: ECM Backend** | API the connector calls to fetch documents, annotations, and metadata |
+| **N5: ARender Rendition** | Spring Boot module that generates images and extracts text |
+
 ## Prerequisites
 
 - **Java 25+** and **Maven** for building the connector JAR
@@ -112,6 +126,44 @@ Set up a Maven module with the ARender rendition API as a dependency. For a comp
 ```
 
 Use `provided` scope because the HMI application already includes the API at runtime. Refer to the [sample connector POM](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/pom.xml) for a complete list of dependencies.
+
+To access Arondor's Artifactory repository, add the following to your `~/.m2/settings.xml`:
+
+```xml title="~/.m2/settings.xml"
+<servers>
+  <server>
+    <id>arondor</id>
+    <username>YOUR_LOGIN</username>
+    <password>YOUR_PASSWORD</password>
+  </server>
+</servers>
+
+<profiles>
+  <profile>
+    <id>artifactory</id>
+    <repositories>
+      <repository>
+        <snapshots />
+        <id>arondor</id>
+        <url>https://artifactory.arondor.cloud/artifactory/arondor-all/</url>
+      </repository>
+    </repositories>
+    <pluginRepositories>
+      <pluginRepository>
+        <snapshots />
+        <id>arondor</id>
+        <url>https://artifactory.arondor.cloud/artifactory/arondor-all/</url>
+      </pluginRepository>
+    </pluginRepositories>
+  </profile>
+</profiles>
+
+<activeProfiles>
+  <activeProfile>artifactory</activeProfile>
+</activeProfiles>
+```
+
+If you don't have repository credentials, contact us at arender-sales@arondor.com.
 
 Package the connector as a fat JAR using the `maven-assembly-plugin`:
 
@@ -332,6 +384,8 @@ services:
     image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}
     volumes:
       - ./custom-connector-jar-with-dependencies.jar:/home/arender/lib/custom-connector-jar-with-dependencies.jar
+      - ./arender-custom-server-integration.xml:/home/arender/configurations/arender-custom-server-integration.xml
+      - ./arender-custom-server.properties:/home/arender/configurations/arender-custom-server.properties
 ```
 
 **Standalone deployment:**
@@ -366,3 +420,105 @@ Check the ARender HMI logs for parser chain execution. Enable debug logging for 
 ```properties
 logging.level.com.example.connector=DEBUG
 ```
+
+## Annotation connector
+
+By default, ARender stores annotations on the WEB-UI server's filesystem. For production use, you should store annotations alongside the documents in your ECM. This requires implementing two interfaces.
+
+### SerializedAnnotationContent
+
+This interface defines how to retrieve and update annotations for a single document. Implement `get()` to return the annotation stream, and `update()` to persist changes.
+
+```java title="CustomSerializedAnnotationContent.java"
+public class CustomSerializedAnnotationContent implements SerializedAnnotationContent {
+
+    private static final Logger LOGGER = Logger.getLogger(CustomSerializedAnnotationContent.class);
+    private final DocumentId documentId;
+
+    public CustomSerializedAnnotationContent(DocumentId documentId) {
+        this.documentId = documentId;
+    }
+
+    @Override
+    public InputStream get() throws InvalidAnnotationFormatException {
+        if (documentId == null) {
+            throw new IllegalArgumentException("Invalid null documentId provided!");
+        }
+        // Call your ECM API to fetch annotations for documentId
+        return null;
+    }
+
+    @Override
+    public void update(InputStream inputStream)
+            throws InvalidAnnotationFormatException, AnnotationCredentialsException, AnnotationNotAvailableException {
+        if (get() == null) {
+            // Call your ECM API to create annotations
+        } else {
+            // Call your ECM API to update annotations
+        }
+    }
+}
+```
+
+An online sample is available [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/src/main/java/com/arondor/arender/sample/connector/annotationaccessors/SampleSerializedAnnotationContent.java).
+
+### SerializedAnnotationContentAccessor
+
+This interface provides `SerializedAnnotationContent` instances to the ARender engine:
+
+```java title="CustomSerializedAnnotationContentAccessor.java"
+public class CustomSerializedAnnotationContentAccessor implements SerializedAnnotationContentAccessor {
+
+    private static final Logger LOGGER = Logger.getLogger(CustomSerializedAnnotationContentAccessor.class);
+
+    @Override
+    public Collection<SerializedAnnotationContent> getAll(DocumentId documentId)
+            throws AnnotationsNotSupportedException, InvalidAnnotationFormatException {
+        LOGGER.debug("getAll annotations for documentId: " + documentId);
+        List<SerializedAnnotationContent> annotations = new ArrayList<>();
+        annotations.add(new CustomSerializedAnnotationContent(documentId));
+        return annotations;
+    }
+
+    @Override
+    public SerializedAnnotationContent getForModification(DocumentId documentId, Annotation annotation)
+            throws AnnotationsNotSupportedException, InvalidAnnotationFormatException {
+        LOGGER.debug("get annotations for documentId: " + documentId);
+        return new CustomSerializedAnnotationContent(documentId);
+    }
+}
+```
+
+An online sample is available [here](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/src/main/java/com/arondor/arender/sample/connector/annotationaccessors/SampleSerializedAnnotationContentAccessor.java).
+
+### Wiring the annotation accessor
+
+Register the accessor as a Spring bean in `configurations/arender-custom-server-integration.xml`:
+
+```xml title="arender-custom-server-integration.xml"
+<bean id="customAnnotationAccessor" class="com.arondor.viewer.xfdf.annotation.XFDFAnnotationAccessor" scope="prototype">
+    <property name="contentAccessor">
+        <bean class="com.example.connector.CustomSerializedAnnotationContentAccessor" />
+    </property>
+    <property name="annotationCreationPolicy">
+        <bean class="com.arondor.viewer.client.api.annotation.AnnotationCreationPolicy">
+            <property name="canCreateAnnotations" value="${arender.server.annotations.can.create}" />
+            <property name="textAnnotationsSupportHtml" value="${arender.server.annotations.text.html.support}" />
+            <property name="textAnnotationsSupportReply" value="${arender.server.annotations.text.reply.support}" />
+            <property name="textAnnotationsSupportStatus" value="${arender.server.annotations.text.status.support}" />
+            <property name="textAnnotationsCommentSupportReply" value="${arender.server.annotations.text.comment.reply.support}" />
+            <property name="annotationsSupportSecurity" value="${arender.server.annotations.text.security.support}" />
+            <property name="availableSecurityLevels" ref="availableSecurityLevels" />
+            <property name="annotationTemplateCatalog" ref="annotationTemplateCatalog" />
+        </bean>
+    </property>
+</bean>
+```
+
+Activate it in `configurations/arender-custom-server.properties`:
+
+```properties title="arender-custom-server.properties"
+arender.server.default.annotation.accessor=customAnnotationAccessor
+```
+
+Restart ARender, open a document, add an annotation, and save. The annotation should be persisted via your connector and reappear after a page refresh.
