@@ -54,7 +54,7 @@ const GuidesList = [
                 icon: "🔼",
                 title: "Upgrade",
                 description: "Upgrading your ARender installation",
-                link: "guides/upgrade/4.8_to_2023.0/rendition",
+                link: "guides/upgrade/2023-to-2026",
             },
         ],
         color: "#0984e3",
@@ -98,7 +98,7 @@ const GuidesList = [
                 icon: "🔌",
                 title: "Connector",
                 description: "Connect ARender to your systems",
-                link: "development/connector/overview",
+                link: "guides/integration/custom-connector",
             },
             {
                 icon: "🧩",

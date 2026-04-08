@@ -1,0 +1,205 @@
+---
+title: Office conversion
+last_update:
+  date: '2026-03-17T14:31:35.329Z'
+  author: CI/CD Bot
+slug: /guides/features/office-conversion
+sidebar_position: 3
+content_hash: 9eb80900ea7ae98b32ba915aa786bd25881a2548a2b9c58ef77e4039f76e1647
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Office conversion
+
+ARender converts Office documents (Word, Excel, PowerPoint, Visio, Project, Publisher, and OpenDocument formats) to PDF before rendering. The conversion is handled by the `document-converter` (TaskConversion) microservice, which delegates to one of three backends: LibreOffice, DirectOffice, or Microsoft Office (AROMS).
+
+## Backends overview
+
+| Backend | License | Platform | Default | Notes |
+|---|---|---|---|---|
+| **LibreOffice** | Free (open-source) | Linux, Windows | Yes | Ships with ARender Docker images. Broad format support. |
+| **DirectOffice** | Paid add-on | Linux, Windows | No | Higher fidelity for MS Office formats. Falls back to LibreOffice for ODF formats. |
+| **Microsoft Office (AROMS)** | MS Office license required | Windows only | No | Best fidelity for complex Office documents. Requires .NET 4.5 and desktop folders. |
+
+## LibreOffice (default)
+
+LibreOffice is the default conversion backend. No additional configuration is needed after a standard ARender installation.
+
+By default, all Office MIME types are routed to LibreOffice via the `genericConvertOffice` factory in the `document-converter` configuration:
+
+```yaml title="document-converter application.yaml"
+mimetype:
+  support:
+    libreoffice: "${mime.type.msoffice.word},${mime.type.msoffice.rtf},${mime.type.libreoffice.text},${mime.type.msoffice.excel},${mime.type.libreoffice.sheet},${mime.type.msoffice.powerpoint},${mime.type.libreoffice.presentation},${mime.type.msoffice.visio},${mime.type.libreoffice.graphics},${mime.type.msoffice.project}"
+    directoffice: ""
+```
+
+### LibreOffice headless options
+
+LibreOffice runs in headless mode inside the container. If you need to tune its behavior, you can override properties in the TaskConversion `application.properties` file.
+
+### Conversion timeout
+
+The default conversion timeout is 120 seconds. To change it:
+
+```yaml title="document-converter application.yaml"
+conversion:
+  job:
+    timeout:
+      ms: 120000
+```
+
+See the [Document converter reference](../../reference/rendition-properties.md#document-converter) for all converter properties including LibreOffice, DirectOffice, and ImageMagick settings.
+
+## DirectOffice (paid add-on)
+
+DirectOffice is a commercial conversion engine sold as an add-on. It provides faster, higher-fidelity conversion of Microsoft Office formats (Word, Excel, PowerPoint). For OpenDocument and other formats, it delegates to LibreOffice.
+
+**Why choose DirectOffice?**
+
+- **Pros:** Fast, high-quality conversion of MS Office formats. Quick issue resolution through Uxopian support. Ideal for businesses seeking consistent quality and reliable technical support.
+- **Cons:** Paid add-on. Delegates OpenDocument formats (ODT, ODS, ODP) to LibreOffice.
+
+### Activating DirectOffice
+
+<Tabs>
+<TabItem value="docker" label="Docker Compose" default>
+
+DirectOffice is **pre-installed** in the `arender-document-converter` Docker image — no binary setup is needed.
+
+Add environment variables to the `document-converter` service in your `docker-compose.yml`:
+
+```yaml title="docker-compose.yml"
+document-converter:
+  image: artifactory.arondor.cloud:5001/arender-document-converter
+  environment:
+    # ... existing eureka vars ...
+    # Activate DirectOffice for Word, Excel, PowerPoint
+    - "DCV_MIMETYPE_SUPPORT_DIRECTOFFICE=application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-word.document.macroEnabled.12,application/vnd.openxmlformats-officedocument.wordprocessingml.template,application/vnd.ms-word.template.macroEnabled.12,application/msexcel,application/vnd.ms-excel,application/x-ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroEnabled.12,application/vnd.openxmlformats-officedocument.spreadsheetml.template,application/vnd.ms-excel.template.macroEnabled.12,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint.presentation.macroEnabled.12,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.ms-powerpoint.template.macroEnabled.12"
+    # Keep LibreOffice for remaining formats (RTF, ODF, Visio, Project)
+    - "DCV_MIMETYPE_SUPPORT_LIBREOFFICE=text/rtf,application/vnd.oasis.opendocument.text,application/vnd.oasis.opendocument.spreadsheet,application/vnd.oasis.opendocument.presentation,application/visio,application/x-visio,application/vnd.visio,application/vnd.ms-visio,application/visio.drawing,application/vsd,application/x-vsd,image/x-vsd,zz-application/zz-winassoc-vsd,application/vnd.oasis.opendocument.graphics,application/vnd.ms-project"
+```
+
+The `DCV_` prefix is stripped at runtime, and underscores become dots. So `DCV_MIMETYPE_SUPPORT_DIRECTOFFICE` maps to the Spring property `mimetype.support.directoffice`. See [Environment variables](../../installation/environment-variables.md) for the full naming convention.
+
+</TabItem>
+<TabItem value="standalone" label="Standalone">
+
+Edit `application-security.yml` in the `modules/TaskConversion` directory. Move the desired MS Office MIME types from `libreoffice` to `directoffice`, and keep LibreOffice for the remaining formats:
+
+```yaml title="modules/TaskConversion/application-security.yml"
+mimetype:
+  support:
+    # Word, Excel, PowerPoint → DirectOffice
+    directoffice: "${mime.type.msoffice.word},${mime.type.msoffice.excel},${mime.type.msoffice.powerpoint}"
+    # OpenDocument formats → LibreOffice
+    libreoffice: "${mime.type.libreoffice.text},${mime.type.libreoffice.sheet},${mime.type.libreoffice.presentation},${mime.type.libreoffice.graphics}"
+    # Visio, Publisher, Project, RTF → MS Office (or LibreOffice if AROMS is not available)
+    msoffice: "${mime.type.msoffice.publisher},${mime.type.msoffice.visio},${mime.type.msoffice.rtf},${mime.type.msoffice.project}"
+```
+
+In this example, Word, Excel, and PowerPoint documents go through DirectOffice. Visio, Publisher, Project, and RTF remain on MS Office/LibreOffice. OpenDocument formats stay on LibreOffice.
+
+</TabItem>
+</Tabs>
+
+### DirectOffice configuration reference
+
+| Property | Default | Docker env var | Description |
+|---|---|---|---|
+| `rendition.directoffice.path` | `directoffice` | `DCV_RENDITION_DIRECTOFFICE_PATH` | Path to the DirectOffice executable |
+| `soffice.conversion.timeout` | `120` | `DCV_SOFFICE_CONVERSION_TIMEOUT` | Conversion timeout in seconds (shared with LibreOffice) |
+| `mimetype.support.directoffice` | `""` (empty) | `DCV_MIMETYPE_SUPPORT_DIRECTOFFICE` | Comma-separated MIME types routed to DirectOffice |
+
+### Known limitations
+
+- Diacritics in document file names are automatically stripped before conversion (transparent to end users).
+- Formats like Visio, Publisher, and Project should remain with LibreOffice or MS Office — DirectOffice does not handle them.
+
+## Microsoft Office / AROMS
+
+AROMS (ARender Office Microsoft Service) uses a local Microsoft Office installation to convert documents. This provides the highest fidelity for complex Office files but requires a Windows server with a licensed copy of Microsoft Office.
+
+### Supported versions
+
+Microsoft Office 2013 and later. Office 365 is supported if the server has internet access. Keep Office up to date.
+
+### Prerequisites
+
+**Required software:**
+
+- .NET Framework 4.5 ([download](https://www.microsoft.com/en-us/download/details.aspx?id=30653))
+- Microsoft Visual C++ Redistributable 2010 ([download](https://www.microsoft.com/en-US/Download/confirmation.aspx?id=14632))
+- Microsoft Visual C++ Redistributable 2008 ([download](https://www.microsoft.com/en-us/download/details.aspx?id=15336))
+
+**Scripted installation:** Download and unzip [AromsCheck](https://docs.arender.io/docs/AromsCheck.zip), then run `runCheck.bat` for automatic setup. If the scripted install succeeds, skip manual installation of the prerequisites above.
+
+### Windows system configuration
+
+Create the following directories (required for Office to run as a service):
+
+```
+C:\Windows\System32\config\systemprofile\Desktop
+C:\Windows\SysWOW64\config\systemprofile\Desktop
+```
+
+**Important:**
+
+- Run the Rendition service with a local account. Ensure that account can open Microsoft Office without any pop-ups, as pop-ups block rendering.
+- For Excel conversion, open Excel under the service account at least once. A default printer must be configured (for example, an XPS output printer). Without a printer, Excel cannot handle page setup during conversion.
+- Do not set a forwarded remote-session printer as the default. It disconnects when the session ends, breaking conversions.
+
+### AROMS configuration
+
+Edit `aroms.properties` in `modules/TaskConversion/aroms2pdf`:
+
+| Property | Default | Description |
+|---|---|---|
+| `PDF/A` | `false` | Generate PDF/A output. |
+| `processAutoKill` | `false` | Kill stale MS Office processes on AROMS start. |
+| `TimeoutS` | `120` | Maximum conversion time in seconds before abort. |
+| `AromsHost` | `http://localhost:8000/` | URL where AROMS is exposed. |
+| `LockFields` | `false` | Disable auto-update of variable fields (e.g., date fields). |
+| `IgnorePrintAreas` | `true` | Ignore print areas to avoid printing empty lines. |
+| `FitSheetOnOnePage` | `true` | Fit the spreadsheet on a single PDF page instead of splitting. |
+
+## MIME type routing
+
+ARender uses MIME type placeholders to group related formats. These are defined in the `document-converter` `application.yaml`:
+
+```yaml title="document-converter application.yaml (excerpt)"
+mime:
+  type:
+    msoffice:
+      word: "application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,..."
+      excel: "application/msexcel,application/vnd.ms-excel,application/x-ms-excel,..."
+      powerpoint: "application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,..."
+      project: "application/vnd.ms-project"
+      visio: "application/visio,application/x-visio,application/vnd.visio,..."
+      publisher: "application/x-mspublisher,application/vnd.ms-publisher"
+      rtf: "text/rtf"
+    libreoffice:
+      text: "application/vnd.oasis.opendocument.text"
+      sheet: "application/vnd.oasis.opendocument.spreadsheet"
+      presentation: "application/vnd.oasis.opendocument.presentation"
+      graphics: "application/vnd.oasis.opendocument.graphics"
+```
+
+The `mimetype.support` block then assigns groups of MIME types to a conversion backend (`libreoffice`, `directoffice`, or `msoffice`). Adjust these mappings to control which backend handles which formats.
+
+:::info Conversion priority order
+When a MIME type is listed under multiple backends, the converter tries them in this order: **MS Office (AROMS, Windows only)** → **LibreOffice** → **DirectOffice**. To activate DirectOffice for a format, you must move that format's MIME types from `libreoffice` to `directoffice`. If the same MIME type appears under both `libreoffice` and `directoffice`, LibreOffice takes priority.
+:::
+
+### Factory routing
+
+The `app.factoriesBeanNames.genericConvertOffice` property in `application-security.yaml` lists all MIME types handled by the office conversion factory. This is separate from the backend selection above, which determines *which* backend the factory uses for a given type.
+
+```yaml title="modules/TaskConversion/application-security.yaml"
+app:
+  factoriesBeanNames:
+    genericConvertOffice: "${mime.type.msoffice.word},${mime.type.msoffice.rtf},${mime.type.libreoffice.text},${mime.type.msoffice.excel},${mime.type.libreoffice.sheet},${mime.type.msoffice.powerpoint},${mime.type.libreoffice.presentation},${mime.type.msoffice.visio},${mime.type.libreoffice.graphics},${mime.type.msoffice.project}"
+```
+
+To add or remove MIME types from office conversion, edit this list. For example, to add Publisher support, append `${mime.type.msoffice.publisher}` to the list.

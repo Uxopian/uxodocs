@@ -2,28 +2,60 @@
   "arender": {
     "current": [
       {
-        "label": "What is ARender",
-        "href": "/docs/arender/what-is-arender/overview"
+        "label": "Overview",
+        "href": "/docs/arender/overview/"
+      },
+      {
+        "label": "Core concepts",
+        "href": "/docs/arender/concepts/documents-and-ids"
+      },
+      {
+        "label": "Quickstart",
+        "href": "/docs/arender/quickstart/docker-compose"
       },
       {
         "label": "Installation",
-        "href": "/docs/arender/installation/overview"
-      },
-      {
-        "label": "Learn",
-        "href": "/docs/arender/learn/product-analytics"
+        "href": "/docs/arender/installation/docker-compose"
       },
       {
         "label": "Guides",
-        "href": "/docs/arender/guides/configurations/rendition/service-broker"
+        "href": "/docs/arender/guides/annotations/annotation-storage-jdbc"
       },
       {
-        "label": "Features",
-        "href": "/docs/arender/features/accessibility"
+        "label": "Operations",
+        "href": "/docs/arender/operations/backup-restore"
       },
       {
-        "label": "Development",
-        "href": "/docs/arender/development/apis/rendition/rest/admin/version"
+        "label": "Reference",
+        "href": "/docs/arender/reference/annotation-types"
+      }
+    ]
+  },
+  "arender-modern": {
+    "current": [
+      {
+        "label": "Overview",
+        "href": "/docs/arender-modern/overview/"
+      },
+      {
+        "label": "Core concepts",
+        "href": "/docs/arender-modern/concepts/documents-and-ids"
+      },
+      {
+        "label": "Installation",
+        "href": "/docs/arender-modern/installation/docker-compose"
+      },
+      {
+        "label": "Guides",
+        "href": "/docs/arender-modern/guides/annotations/annotation-storage-jdbc"
+      },
+      {
+        "label": "Operations",
+        "href": "/docs/arender-modern/operations/backup-restore"
+      },
+      {
+        "label": "Reference",
+        "href": "/docs/arender-modern/reference/annotation-types"
       }
     ]
   },
@@ -103,11 +135,11 @@
       },
       {
         "label": "Extending Uxopian AI",
-        "href": "/docs/uxopian-ai/extending/custom_tools"
+        "href": "/docs/uxopian-ai/extending/advanced_helpers"
       },
       {
         "label": "Reference",
-        "href": "/docs/uxopian-ai/reference/configuration"
+        "href": "/docs/uxopian-ai/reference/api"
       },
       {
         "label": "Admin Panel",
