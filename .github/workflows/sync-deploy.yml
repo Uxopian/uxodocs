@@ -60,6 +60,9 @@ jobs:
           # On nettoie uniquement les dossiers de versions éphémères créés par docusaurus
           rm -rf versioned_docs versioned_sidebars
 
+      - name: Build ARender Classic/Modern doc trees
+        run: node ./scripts/build-arender-docs.mjs
+
       - name: Generate Docusaurus versions from <product>-v* branches
         shell: bash
         run: |
