@@ -130,12 +130,12 @@
         "href": "/docs/uxopian-ai/understanding/architecture"
       },
       {
-        "label": "How To Guides",
+        "label": "How-To Guides",
         "href": "/docs/uxopian-ai/how_to/embed_in_web_application"
       },
       {
         "label": "Extending Uxopian AI",
-        "href": "/docs/uxopian-ai/extending/advanced_helpers"
+        "href": "/docs/uxopian-ai/extending/custom_tools"
       },
       {
         "label": "Reference",
