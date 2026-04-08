@@ -21,7 +21,6 @@ A provider:
 1. **Runs** as a separate service that exposes a REST API for document retrieval.
 2. **Receives** requests from the Document Service Broker, which routes them based on the `X-Provider-ID` header.
 3. **Returns** document content via REST resources (`ProviderFile` / `ProviderFolder`).
-4. The **broker** creates `DocumentAccessor` instances internally from the provider response, so the rest of the pipeline works the same way.
 
 This model decouples connectors from the viewer, allowing each provider to be deployed, scaled, and updated independently.
 
@@ -29,7 +28,7 @@ See [Connector providers](../guides/integration/connector-providers.md) for depl
 
 ## Annotation connectors
 
-Annotation storage follows the same connector model. Each `AnnotationAccessor` implementation connects to a storage backend — a SQL database (JDBC), an HTTP endpoint (REST), the local filesystem (XFDF), or a repository-native store. The viewer picks the annotation connector that matches its configuration.
+Annotation storage is handled by the broker, which proxies annotation CRUD operations to the provider when the repository supports it. The annotation backend (JDBC, XFDF, REST, or repository-native) is configured on the broker side.
 
 See [Annotations](./annotations.md) for the annotation model.
 

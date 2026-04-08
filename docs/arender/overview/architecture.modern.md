@@ -40,7 +40,7 @@ graph TB
     C -->|REST| GW
 ```
 
-The viewer is an npm package embedded as a [Web Component](../reference/web-component.md). It does not communicate directly with the backend — a **reverse proxy or BFF** (Backend For Frontend) sits between the viewer and the service broker. The complexity of this layer depends on your deployment:
+The viewer is an npm package embedded as a [Web Component](../reference/web-component.md). It does not communicate directly with the backend — a **reverse proxy or BFF** (Backend For Frontend) sits between the viewer and the service broker. Choose the gateway configuration that matches your use case. Start with the simplest option and add layers only when your requirements demand it:
 
 - **Reverse proxy only** (simplest) — an Nginx or similar proxy that routes API calls to the broker, solving CORS by making the broker appear same-origin. Sufficient when documents are loaded by URL or direct upload.
 - **Reverse proxy + provider routing** — the proxy also injects the `X-Provider-ID` header to route document loading requests to the correct [connector provider](../guides/integration/connector-providers.md) (Alfresco, FileNet, etc.).

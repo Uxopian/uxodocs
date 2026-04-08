@@ -140,6 +140,10 @@ These files are loaded via Spring's `@PropertySource` and XML import mechanisms.
 - **Use environment variables** for deployment-specific values (hostnames, ports, credentials). They sit above file-based configuration in the hierarchy.
 - **Use JVM `-D` flags** sparingly, typically for debugging or one-off test runs.
 
+## Integrator profile
+
+ARender ships a dedicated Spring profile for integrators, which provides additional configuration entry points. This profile is not included in 2026.0.0 — it is planned for 2026.1.0.
+
 ## Related pages
 
 - [Environment variables](./environment-variables.md): naming conventions and per-service prefixes

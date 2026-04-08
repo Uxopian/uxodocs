@@ -65,3 +65,7 @@ See [System architecture](./architecture.md) for details.
 - [Core concepts](../concepts/connectors.md): understand connectors, annotations, and the rendition pipeline
 - [Installation](../installation/docker-compose.md): install ARender for production
 - [REST API reference](../reference/rest-api/broker-api.md): integrate programmatically
+
+:::tip Modern Viewer available
+A React-based version of the ARender Viewer is now available, designed for web-native integration. If you are starting a new project or evaluating ARender, see the [Modern Viewer documentation](./modern-viewer.md).
+:::
