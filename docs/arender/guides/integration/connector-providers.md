@@ -77,7 +77,7 @@ services:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-TEXT-HANDLER=8899"
       # Register the Alfresco provider
-      - "REGISTRY_PROVIDER_ALFRESCO_URL=http://alfresco-provider:8788"
+      - "REGISTRY_PROVIDERS_ALFRESCO_BASE_URL=http://alfresco-provider:8788"
     volumes:
       - arender-tmp:/arender/tmp
 
@@ -127,17 +127,17 @@ The broker needs to know each provider's URL. Configure this with Spring Boot pr
 
 ```properties
 # Register a provider named "alfresco" at the given URL
-registry.provider.alfresco.url=http://alfresco-provider:8788
+registry.providers.alfresco.base-url=http://alfresco-provider:8788
 
 # Register a provider named "filenet"
-registry.provider.filenet.url=http://filenet-provider:8787
+registry.providers.filenet.base-url=http://filenet-provider:8787
 ```
 
 Or as environment variables:
 
 ```bash
-REGISTRY_PROVIDER_ALFRESCO_URL=http://alfresco-provider:8788
-REGISTRY_PROVIDER_FILENET_URL=http://filenet-provider:8787
+REGISTRY_PROVIDERS_ALFRESCO_BASE_URL=http://alfresco-provider:8788
+REGISTRY_PROVIDERS_FILENET_BASE_URL=http://filenet-provider:8787
 ```
 
 ## How `X-Provider-ID` works
@@ -149,7 +149,7 @@ The `X-Provider-ID` HTTP header tells the broker which provider should handle th
 When the broker receives a `POST /registry/documents` request, it resolves the provider in this order:
 
 1. **`X-Provider-ID` header** — If present, the broker looks up the provider by name in its registry.
-2. **`connector.defaultRegistry`** — If the header is absent, the broker falls back to the default provider configured in `connector.defaultRegistry`.
+2. **`registry.defaultProvider`** — If the header is absent, the broker falls back to the default provider configured in `registry.defaultProvider`.
 3. **Error** — If neither is available, the request fails.
 
 For the full list of connector registry properties, see [Rendition properties — Connector registry](../../reference/rendition-properties.md#connector-registry).
