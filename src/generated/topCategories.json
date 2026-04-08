@@ -19,43 +19,15 @@
       },
       {
         "label": "Guides",
-        "href": "/docs/arender/guides/annotations/annotation-storage-jdbc"
+        "href": "/docs/arender/guides/annotations/annotation-storage-xfdf"
       },
       {
         "label": "Operations",
-        "href": "/docs/arender/operations/backup-restore"
+        "href": "/docs/arender/operations/monitoring"
       },
       {
         "label": "Reference",
-        "href": "/docs/arender/reference/annotation-types"
-      }
-    ]
-  },
-  "arender-modern": {
-    "current": [
-      {
-        "label": "Overview",
-        "href": "/docs/arender-modern/overview/"
-      },
-      {
-        "label": "Core concepts",
-        "href": "/docs/arender-modern/concepts/documents-and-ids"
-      },
-      {
-        "label": "Installation",
-        "href": "/docs/arender-modern/installation/docker-compose"
-      },
-      {
-        "label": "Guides",
-        "href": "/docs/arender-modern/guides/annotations/annotation-storage-jdbc"
-      },
-      {
-        "label": "Operations",
-        "href": "/docs/arender-modern/operations/backup-restore"
-      },
-      {
-        "label": "Reference",
-        "href": "/docs/arender-modern/reference/annotation-types"
+        "href": "/docs/arender/reference/javascript-api"
       }
     ]
   },
@@ -130,7 +102,7 @@
         "href": "/docs/uxopian-ai/understanding/architecture"
       },
       {
-        "label": "How-To Guides",
+        "label": "How To Guides",
         "href": "/docs/uxopian-ai/how_to/embed_in_web_application"
       },
       {
@@ -139,11 +111,43 @@
       },
       {
         "label": "Reference",
-        "href": "/docs/uxopian-ai/reference/api"
+        "href": "/docs/uxopian-ai/reference/configuration"
       },
       {
         "label": "Admin Panel",
         "href": "/docs/uxopian-ai/admin/admin_panel_overview"
+      }
+    ]
+  },
+  "arender-modern": {
+    "current": [
+      {
+        "label": "Overview",
+        "href": "/docs/arender-modern/overview/"
+      },
+      {
+        "label": "Core concepts",
+        "href": "/docs/arender-modern/concepts/documents-and-ids"
+      },
+      {
+        "label": "Quickstart",
+        "href": "/docs/arender-modern/quickstart/getting-started"
+      },
+      {
+        "label": "Installation",
+        "href": "/docs/arender-modern/installation/docker-compose"
+      },
+      {
+        "label": "Guides",
+        "href": "/docs/arender-modern/guides/configurations/web-ui/server/document-id-generators"
+      },
+      {
+        "label": "Operations",
+        "href": "/docs/arender-modern/operations/monitoring"
+      },
+      {
+        "label": "Reference",
+        "href": "/docs/arender-modern/reference/web-component"
       }
     ]
   }
