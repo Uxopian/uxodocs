@@ -12,11 +12,13 @@ import ViewerToggle from "@site/src/components/ViewerToggle/ViewerToggle";
 const DocSidebarMobileSecondaryMenu = ({ sidebar, path }) => {
     const mobileSidebar = useNavbarMobileSidebar();
     const { pathname } = useLocation();
-    const isARender = pathname.startsWith("/docs/arender");
+    // Show the viewer toggle only for current (2026+) — not on old versioned pages.
+    const isARenderCurrent =
+        pathname.startsWith("/docs/arender") && !/^\/docs\/arender\/v\d/.test(pathname);
 
     return (
         <>
-            {isARender && <ViewerToggle />}
+            {isARenderCurrent && <ViewerToggle />}
             <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, "menu__list")}>
                 <DocSidebarItems
                     items={sidebar}

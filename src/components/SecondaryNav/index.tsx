@@ -96,7 +96,9 @@ export default function SecondaryNav(): React.ReactElement | null {
 
     // Get categories for the detected product and version
     const productCategories = (product && categoriesMap[product]) || {};
-    const items: Cat[] = productCategories[version] || productCategories['current'] || [];
+    // Don't fall back to 'current' nav for explicitly versioned URLs — those pages
+    // have their own structure and 'current' links would point to wrong paths.
+    const items: Cat[] = productCategories[version] ?? (version === 'current' ? productCategories['current'] : []) ?? [];
 
     if (!items || items.length === 0) return null;
     useSyncSidebarToCategory(items, pathname); // Re-enabled sidebar filtering
