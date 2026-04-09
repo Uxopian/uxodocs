@@ -39,11 +39,17 @@ This is the typical pattern when an external system (a connector, an ECM plugin,
 
 ## Multi-document opening
 
+There are two modes for displaying multiple documents simultaneously.
+
 ### Pre-built DocumentContainer
 
 A connector or backend code can programmatically create a `DocumentContainer`, populate its children with `DocumentReference` objects, and register it with the document service. The viewer then receives a single `uuid` pointing to the container.
 
 In both cases, child documents have [hierarchical DocumentId values](../../concepts/documents-and-ids.md#hierarchical-ids) derived from the container's root ID.
+
+### Multiple URL parameters
+
+Not supported yet.
 
 
 ## Related pages

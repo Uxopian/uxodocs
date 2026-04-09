@@ -30,7 +30,7 @@ When opening documents by URL, the rendition service only authorizes whitelisted
 
 ### Hierarchical IDs
 
-When multiple documents are opened together as a container, each child document's DocumentId is created by appending a `/` and a numeric index :
+When composite documents like Zips or mails (documents containing other documents) are opened, each child document's DocumentId is created by appending a `/` and a numeric index :
 
 ```
 b64_<parent-parameters>/0
