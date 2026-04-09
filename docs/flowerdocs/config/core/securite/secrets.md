@@ -46,8 +46,8 @@ This recommendation also applies to components developed around the FlowerDocs e
 
 The secret for each application can be defined in different ways:
 
-- as an environment variable: the name is `secret` and the value is `,&lt;secret&gt;`, the machine must be rebooted to take effect
-- as a property of the JVM by adding: `--secret=&lt;secret&gt;` when running the application
+- as an environment variable: the name is `secret` and the value is `,<secret>`, the machine must be rebooted to take effect
+- as a property of the JVM by adding: `--secret=<secret>` when running the application
 - in the `core.properties` and `gui.properties` files (_not recommended_)
 
 The secret declared in system variables takes precedence over the one defined in the properties file.

@@ -17,14 +17,14 @@ Objects [`com.flower.docs.domain.tagclass.ConditionalAllowedValue`](#javadoc-com
 
 Conditions can relate to the tags of a component or a search form. _They consist of an identifier, an operator and a value._
 
-To identify the tag to which the condition applies, you need to use a character string of the type `${tags.&lt;tag_id&gt;}` where `&lt;tag_id&gt;` is the tag identifier.
+To identify the tag to which the condition applies, you need to use a character string of the type `${tags.<tag_id>}` where `<tag_id>` is the tag identifier.
 
 For tags, the operators `==` or `!=` can be used to indicate the presence or non-presence of a value, respectively.
 
 Typically, the different types of conditions supported for tags are as follows:
 
-- `${tags.&lt;tag_id&gt;}==X`: Existing tag containing (at least) the value _X_
-- `${tags.&lt;tag_id&gt;}!=X`: Tag does not exist or does not contain the value indicated by _X_
+- `${tags.<tag_id>}==X`: Existing tag containing (at least) the value _X_
+- `${tags.<tag_id>}!=X`: Tag does not exist or does not contain the value indicated by _X_
 
 :::info
 These conditions apply only to tags displayed in the indexing or search form.

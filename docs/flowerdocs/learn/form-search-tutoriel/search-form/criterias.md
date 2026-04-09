@@ -33,7 +33,7 @@ The advanced search can be configured to display, by default, criteria that the 
 
 <br/>
 
-Between the ` tags&lt;list&gt;` and `</list>` add your search criteria.
+Between the ` tags<list>` and `</list>` add your search criteria.
 
 Place the criterion definition at the beginning of the XML body. The `NomAdherentCriterion` search criterion is defined as follows:
 

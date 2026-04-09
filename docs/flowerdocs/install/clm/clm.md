@@ -34,7 +34,7 @@ To interact with FlowerDocs, you need to define the URL for accessing web servic
 java -jar flower-docs-clm-{{version}}-bundle.jar --ws.url=http://<server>:<port>/<context>/services	--password=<password>
 ```
 
-_The default user name is `system`, which can be changed by adding the `--USER=&lt;user&gt;` parameter._
+_The default user name is `system`, which can be changed by adding the `--USER=<user>` parameter._
 
  <br/>
 
@@ -49,7 +49,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar update --ws.url=http://<server>
 ```
 
 :::info
-**Note:** In the following sections `&lt;clm&gt;` is the command to run CLM from the command line.
+**Note:** In the following sections `<clm>` is the command to run CLM from the command line.
 :::
 
 # Jobs

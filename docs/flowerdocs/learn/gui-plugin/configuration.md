@@ -22,7 +22,7 @@ Using your favorite browser, open the FlowerDocs admin console, then:
 
 # Plugin access
 
-Now that your GUI plugin has been configured, you can access the `/count` endpoint through the GUI via the URL: `&lt;gui&gt;/plugins/&lt;scope&gt;/my-plugin/count`.
+Now that your GUI plugin has been configured, you can access the `/count` endpoint through the GUI via the URL: `<gui>/plugins/<scope>/my-plugin/count`.
 
 You can also test the return of the implemented service with different users to observe that the number of documents found depends on the logged-in user.
 

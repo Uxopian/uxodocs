@@ -75,7 +75,7 @@ Link a search form to a user team via:
 - the administration console: in the `Security > Teams > Properties` section, add a `Search form ` property
 
 <br/> 
-This property has the following value: `&lt;identifiant&gt;(&lt;language&gt;=&lt;label&gt;,&lt;language2&gt;=&lt;label2&gt;)` for example `template_id(fr=Label de formulaire,en=form label)`
+This property has the following value: `<identifiant>(<language>=<label>,<language2>=<label2>)` for example `template_id(fr=Label de formulaire,en=form label)`
 
 <br/>
 :::info

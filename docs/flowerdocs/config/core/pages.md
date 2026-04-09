@@ -27,7 +27,7 @@ A page is considered `private` if it has an ACL in its definition.
 In this case, only authenticated users can access it, and the configured ACL is evaluated to determine whether the user is authorized to consult it.
 
 <br/>
-Private pages can be accessed through a browser at the following URL: `/gui/private/&lt;scope&gt;/pages/&lt;page&gt;`.
+Private pages can be accessed through a browser at the following URL: `/gui/private/<scope>/pages/<page>`.
 
 # Public page
 
@@ -41,4 +41,4 @@ The token supplied initiates authentication with a technical user. The user iden
 Security policies can therefore be defined taking into account this public access to authorise or not actions on components.
 
 <br/>
-Public pages can be accessed through a browser at the following URL: `/gui/public/&lt;scope&gt;/pages/&lt;page&gt;`.
+Public pages can be accessed through a browser at the following URL: `/gui/public/<scope>/pages/<page>`.

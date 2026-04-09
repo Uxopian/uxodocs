@@ -152,4 +152,4 @@ For this, the password is not mandatory, but is a global parameter for the Flowe
 
 Users and groups can only be created at the root of the directory access node.
 
-**Example:** For Microsoft Active Directory: `&lt;domaine&gt;/<base DN>`
+**Example:** For Microsoft Active Directory: `<domaine>/<base DN>`

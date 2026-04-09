@@ -97,7 +97,7 @@ The function parameters are:
 In the case of a search-based assignment, the `tasks` parameter is built from the search results. They do not include tags that are not present in the associated SearchResult object, and are therefore dependent on the search form.
 :::
 
-A filter type is provided by default through the REST web service `./plugins/rest/profiles/&lt;profiles&gt;/users/`. This web service lets you search for users belonging to one or more teams.
+A filter type is provided by default through the REST web service `./plugins/rest/profiles/<profiles>/users/`. This web service lets you search for users belonging to one or more teams.
 
 **Example**: selection of users from the `LEGAL` and `ADMIN` teams:
 

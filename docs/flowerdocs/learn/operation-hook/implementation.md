@@ -22,43 +22,41 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	&lt;modelVersion&gt;4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    &lt;groupId&gt;com.flower.docs.samples</groupId>
-    &lt;artifactId&gt;modify-operation-hook</artifactId>
-    &lt;version&gt;0.0.1-SNAPSHOT</version>
+	<groupId>com.flower.docs.samples</groupId>
+	<artifactId>modify-operation-hook</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 
-	&lt;dependencies&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;com.flower.docs</groupId>
-			&lt;artifactId&gt;flower-docs-starter-client</artifactId>
-			&lt;version&gt;{{version}}</version>
+	<dependencies>
+		<dependency>
+			<groupId>com.flower.docs</groupId>
+			<artifactId>flower-docs-starter-client</artifactId>
+			<version>{{version}}</version>
 		</dependency>
 	</dependencies>
 
-	&lt;build&gt;
-		&lt;plugins&gt;
-			&lt;plugin&gt;
-				&lt;groupId&gt;org.springframework.boot</groupId>
-				&lt;artifactId&gt;spring-boot-maven-plugin</artifactId>
-				&lt;version&gt;2.7.18</version>
-				&lt;executions&gt;
-					&lt;execution&gt;
-						&lt;goals&gt;
-							&lt;goal&gt;repackage</goal>
-							&lt;goal&gt;build-info</goal>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.7.18</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+							<goal>build-info</goal>
 						</goals>
 					</execution>
 				</executions>
-				&lt;configuration&gt;
-					&lt;executable&gt;true</executable>
+				<configuration>
+					<executable>true</executable>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 </project>
-```
-
 ```
 
 # Spring Boot application
@@ -67,105 +65,83 @@ This Spring Boot application is based on the [Spring Boot starter](/docs/flowerd
 
 * To start with, we need a _main class_ Spring Boot annotated with the `@SpringBootApplication` annotation:
 
-
+```java
 package com.flower.samples;
 
-```javascript
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-```
 
-```javascript
 import com.flower.docs.FlowerDocsClient;
 import com.flower.docs.SecurityMode;
-```
 
 @SpringBootApplication
 @FlowerDocsClient(security = SecurityMode.USER)
 public class ModifyHookApplication
-
-```json
-
+{
     public static void main(String[] args)
-
+    {
         SpringApplication.run(ModifyHookApplication.class, args);
-
-
+    }
+}
 ```
 
 - Then add the `application.properties` file to your project's `src/main/resources` directory to configure the application:
 
 ```properties
-spring.application.name=modify-hook
-server.port=7777
-server.servlet.context-path=/modify
+spring.application.name=modify-hook        // 1
+server.port=7777                            // 2
+server.servlet.context-path=/modify        // 3
+
+ws.url=http://localhost:8081/core/services  // 5
+
+internal.realm.users[0].id=<user>          // 7
+internal.realm.users[0].password=<password> // 8
 ```
 
-ws.url=http://localhost:8081/core/services
-
-```properties
-internal.realm.users[0].id=<user>
-internal.realm.users[0].password=<password>
-```
-
-    1 Spring Boot application name
-
-    2 Port used to expose WEB application
-
-    3 Application path. The application can be accessed via the basic URL _http://localhost:7777/modify_
-
-    5 URL for accessing the web services exposed by FlowerDocs Core.
-
-    7 User identifier for accessing the `OperationHook`.
-
-    8 User password for accessing the `OperationHook`
+1. Spring Boot application name
+2. Port used to expose WEB application
+3. Application path. The application can be accessed via the basic URL _http://localhost:7777/modify_
+5. URL for accessing the web services exposed by FlowerDocs Core.
+7. User identifier for accessing the `OperationHook`.
+8. User password for accessing the `OperationHook`
 
 # Hook development
 
 Now we move on to `Operation Hook`! To implement your first hook, create a `ModifyOperationHook` class such as:
 
+```java
 package com.flower.samples;
 
-```javascript
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController;     // 13
 import org.terracotta.statistics.Time;
-```
 
-```javascript
 import com.flower.docs.domain.component.Component;
 import com.flower.docs.domain.exception.FunctionalException;
 import com.flower.docs.domain.exception.TechnicalException;
 import com.flower.docs.operation.api.DefaultComponentOperationContext;
 import com.flower.docs.operation.api.OperationContext;
 import com.flower.docs.operation.api.OperationHook;
-```
 
 @RestController
-public class ModifyOperationHook extends OperationHook
-
-```json
-
+public class ModifyOperationHook extends OperationHook   // 14
+{
     @Override
-    public void process(OperationContext context) throws TechnicalException, FunctionalException
-
-        if (context instanceof DefaultComponentOperationContext)
-
+    public void process(OperationContext context) throws TechnicalException, FunctionalException   // 17
+    {
+        if (context instanceof DefaultComponentOperationContext)   // 17
+        {
             DefaultComponentOperationContext componentContext = (DefaultComponentOperationContext) context;
             for (Component component : componentContext.getComponents())
-
-                component.setName(component.getName() + "_" + Time.absoluteTime());
-
-
-
-
+            {
+                component.setName(component.getName() + "_" + Time.absoluteTime());   // 24
+            }
+        }
+    }
+}
 ```
 
-13 The `@RestController` annotation defines the hook as a REST web service exposed on `/`
-
-14 The `ModifyOperationHook` class extends the `OperationHook` class, making it easier to implement a hook using the Spring Boot framework
-
-17 The `process` method must be implemented to define the behavior following the execution of an operation within FlowerDocs Core
-
-17 The`OperationHook` reacts only to `DefaultComponentOperationContext` class contexts
-
-24 Each component of the operating context is renamed using the current date
+13. The `@RestController` annotation defines the hook as a REST web service exposed on `/`
+14. The `ModifyOperationHook` class extends the `OperationHook` class, making it easier to implement a hook using the Spring Boot framework
+17. The `process` method must be implemented to define the behavior following the execution of an operation within FlowerDocs Core
+17. The `OperationHook` reacts only to `DefaultComponentOperationContext` class contexts
+24. Each component of the operating context is renamed using the current date

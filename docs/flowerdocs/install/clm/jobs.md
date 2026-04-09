@@ -93,7 +93,7 @@ __Parameters:__
 
 By default, the scope will be exported to a `data` folder in the runtime directory.
 
-To change the directory where the export will be stored, add the ` --data.dir=&lt;chemin&gt;` parameter to the command `&lt;clm&gt;`
+To change the directory where the export will be stored, add the ` --data.dir=<chemin>` parameter to the command `<clm>`
 
 <br/>
 There are also more specific export jobs.

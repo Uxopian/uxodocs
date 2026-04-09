@@ -41,7 +41,7 @@ These additional accounts can be set in the `core.properties` and `gui.propertie
 
 ```properties
 internal.realm.users[0].id=client1
-internal.realm.users[0].password=&lt;password&gt;
+internal.realm.users[0].password=<password>
 internal.realm.users[0].profiles=ADMIN,ALL_USERS,LEGAL,BUSINESS,MARKETING,ACCOUNTING
 ```
 
