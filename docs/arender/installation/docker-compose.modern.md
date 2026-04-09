@@ -94,9 +94,15 @@ Update your Vite proxy target from the demo URL to `http://localhost:8761` to co
 
 ## Step 2 — Set up the reverse proxy
 
-Replace the Vite dev proxy from Getting Started with Nginx. Nginx routes the three ARender API prefixes to the broker, making them appear same-origin to the browser.
+The React viewer runs in the browser and calls the ARender broker's REST API. Since they run on different ports, browsers block these requests as cross-origin (CORS). A reverse proxy makes the three ARender API routes appear same-origin to the browser.
 
-```nginx
+This step adds Nginx to your Docker Compose stack. It assumes your application also runs as a Docker Compose service. If that is not your case, see [Advanced configuration → Proxy setup](./configuration.md#proxy-setup).
+
+### Create the Nginx configuration file
+
+Create an `nginx.conf` file at the root of your project:
+
+```nginx title="nginx.conf"
 server {
     listen 80;
     server_name your-app.example.com;
@@ -122,6 +128,28 @@ server {
     }
 }
 ```
+
+Replace `your-app` with the name of your application's Docker Compose service and `your-app.example.com` with your domain.
+
+### Add Nginx to docker-compose.yml
+
+Add an `nginx` service to your `docker-compose.yml` and mount the configuration file:
+
+```yaml title="docker-compose.yml"
+services:
+  # ... existing services ...
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - service-broker
+```
+
+If you configured a Vite dev proxy in [Getting Started](../quickstart/getting-started.md), you can remove it from `vite.config.ts` — Nginx handles routing in this deployment.
 
 :::tip
 If OAuth2 is enabled on the rendition backend, use a BFF instead of a plain reverse proxy. See [Advanced configuration](./configuration.md#authentication-and-bff).
