@@ -10,69 +10,25 @@ content_hash: 90a489bf30a620da7d51ec3a655175b02b8bc8a3e966d7a75021fa0edf84e38e
 
 # Docker Compose
 
-This guide covers deploying the full ARender stack with Docker Compose: the React UI in your host application and the rendition backend as Docker containers.
+This guide deploys the full ARender stack with Docker Compose: the rendition backend as Docker containers and Nginx as the reverse proxy between your application and the backend.
 
-## React UI
+This guide assumes the React viewer is already integrated. If not, follow [Getting Started](../quickstart/getting-started.md) first.
 
-The React UI is an npm package embedded in your host application — it is not a Docker container.
 
-### Install the package
+## Prerequisites
+
+- Docker and Docker Compose installed
+- Access to the ARender Docker registry (credentials provided by Uxopian)
+
+Log in to the ARender Docker registry. Docker will use these credentials to pull the ARender images when you start the stack in Step 4:
 
 ```bash
-npm install arender-ui
+docker login artifactory.arondor.cloud:5001
 ```
 
-### Embed the viewer
+## Step 1 — Set up the rendition backend
 
-Add the `<arender-element>` Web Component to your page:
-
-```html
-<arender-element></arender-element>
-```
-
-See [Web Component reference](../reference/web-component.md) for attributes, JavaScript API, and framework wrappers (React, Angular, Vue, Svelte).
-
-### Set up the reverse proxy
-
-The React UI calls the broker REST API for all document operations. Since the UI runs in the browser and the broker is a separate service, a reverse proxy is needed to avoid CORS issues.
-
-```nginx
-server {
-    listen 80;
-    server_name your-app.example.com;
-
-    location / {
-        proxy_pass http://your-app:3000;
-    }
-
-    location /documents {
-        proxy_pass http://service-broker:8761/documents;
-    }
-
-    location /annotation {
-        proxy_pass http://service-broker:8761/annotation;
-    }
-
-    location /registry/documents {
-        proxy_pass http://service-broker:8761/registry/documents;
-    }
-}
-```
-
-This reverse proxy is the minimal setup. Depending on your needs, this layer can also:
-
-- **Inject `X-Provider-ID`** — required when using [connector providers](../guides/integration/connector-providers.md) (Alfresco, FileNet)
-- **Handle OAuth2 tokens** — when OAuth2 is enabled on the rendition backend, a full BFF (Backend For Frontend) manages tokens on behalf of the viewer
-
-:::note
-ARender does not yet ship a built-in BFF — this is planned for an upcoming release. In the meantime, use your own reverse proxy or BFF.
-:::
-
-See [Configuration](./configuration.md) for more details on CORS and reverse proxy options.
-
-## Backend services
-
-The rendition backend requires four containers:
+The rendition backend is made up of four Docker images:
 
 | Service | Image | Port | Purpose |
 |---------|-------|------|---------|
@@ -81,21 +37,8 @@ The rendition backend requires four containers:
 | Document Renderer | arender-document-renderer-pdfowl | 9091 | Page rendering |
 | Document Text Handler | arender-document-text-handler | 8899 | Text extraction |
 
-All images are available from `artifactory.arondor.cloud:5001`.
 
-## Prerequisites
-
-Log in to the ARender Docker registry before pulling images:
-
-```bash
-docker login artifactory.arondor.cloud:5001
-```
-
-## Service discovery
-
-In Docker Compose, the broker discovers microservices via static configuration. Each microservice is configured with environment variables that set its hostname and port (using the legacy `eureka.instance.*` property namespace). The broker polls each service's health endpoint to track availability. No Eureka server is involved.
-
-## Backend configuration
+Create a `docker-compose.yml` file with the following content, replacing `{{version}}` with the ARender version to deploy (e.g. `2026.0.0`). Each microservice registers its hostname and port via environment variables so the broker can discover them automatically.
 
 ```yaml title="docker-compose.yml"
 services:
@@ -141,9 +84,83 @@ volumes:
   arender-tmp:
 ```
 
-This configuration deploys the rendition backend. The Modern Viewer is an npm package embedded in your host application — no additional container is needed.
+:::note
+The `arender-tmp` volume must be accessible by all backend services. Documents are stored on this volume during processing. See [System architecture](../overview/architecture.md#shared-volume-constraints) for details.
+:::
 
-## Adding a connector provider
+:::tip Coming from Getting Started?
+Update your Vite proxy target from the demo URL to `http://localhost:8761` to connect to this backend.
+:::
+
+## Step 2 — Set up the reverse proxy
+
+Replace the Vite dev proxy from Getting Started with Nginx. Nginx routes the three ARender API prefixes to the broker, making them appear same-origin to the browser.
+
+```nginx
+server {
+    listen 80;
+    server_name your-app.example.com;
+
+    # Your application
+    location / {
+        proxy_pass http://your-app:3000;
+    }
+
+    # ARender API routes
+    location /documents {
+        proxy_pass http://service-broker:8761/documents;
+    }
+
+    location /annotation {
+        proxy_pass http://service-broker:8761/annotation;
+    }
+
+    location /registry/documents {
+        proxy_pass http://service-broker:8761/registry/documents;
+        # If using connector providers, inject the provider header:
+        # proxy_set_header X-Provider-ID alfresco;
+    }
+}
+```
+
+:::tip
+If OAuth2 is enabled on the rendition backend, use a BFF instead of a plain reverse proxy. See [Advanced configuration](./configuration.md#authentication-and-bff).
+:::
+
+## Step 3 — Configure authorized document sources
+
+When loading documents by URL (via `openDocumentByUrl`), the broker must authorize the source domain. Add `DSB_AUTHORIZED_URLS` to the broker service in your `docker-compose.yml`:
+
+```yaml
+service-broker:
+  environment:
+    # ... existing env vars ...
+    - "DSB_AUTHORIZED_URLS=https://your-docs-server.example.com/"
+```
+
+Multiple origins are comma-separated:
+
+```yaml
+- "DSB_AUTHORIZED_URLS=https://docs.example.com/,https://storage.example.com/"
+```
+
+## Step 4 — Start the stack
+
+Run the following command. Docker Compose pulls the ARender images from the registry (using the credentials from the login step) and starts all four containers:
+
+```bash
+docker-compose up -d
+```
+
+Check that all containers are running:
+
+```bash
+docker-compose ps
+```
+
+Then open [http://localhost:8761/health/records](http://localhost:8761/health/records) — all services should show as UP.
+
+## Optional — Connector providers
 
 To load documents from an external repository (Alfresco, FileNet), add a provider service and register it on the broker:
 
@@ -163,18 +180,15 @@ services:
       - "ARENDER_SERVER_ALFRESCO_ATOMPUBURL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
 ```
 
-Your reverse proxy must also inject the `X-Provider-ID` header on `/registry/documents` requests. See [Connector providers](../guides/integration/connector-providers.md) for the full deployment guide and available providers.
+Your Nginx configuration must also inject the `X-Provider-ID` header on `/registry/documents` requests. See [Connector providers](../guides/integration/connector-providers.md) for the full deployment guide and available providers.
 
 ## Environment variable conventions
 
 All YAML configuration properties can be overridden via environment variables. Each service uses a dedicated prefix (`DSB_`, `DCV_`, `DRN_`, `DTH_`). See [Environment variables](./environment-variables.md) for the full naming convention with examples.
 
-## Shared volume
-
-The `arender-tmp` volume must be accessible by all backend services (broker, converter, renderer, text handler). Documents are stored on this volume during processing. See [System architecture](../overview/architecture.md#shared-volume-constraints) for details.
-
 ## Next steps
 
-- [Kubernetes Helm](./kubernetes-helm.md) for orchestrated deployments
-- [Configuration system](./configuration-system.md) for property overrides
+- [Advanced configuration](./configuration.md) — OAuth2, BFF, and edge cases
+- [Configuration system](./configuration-system.md) — property overrides
 - [REST API reference](../reference/rest-api/broker-api.md)
+

@@ -1,7 +1,7 @@
 ---
 viewer: modern
 slug: /installation/configuration
-title: Configuration
+title: Advanced configuration
 last_update:
   date: '2026-03-24T08:07:20.846Z'
   author: CI/CD Bot
@@ -9,22 +9,15 @@ sidebar_position: 5
 content_hash: ac1fbc17a230905cd25267ebf15f03815e57c11fb4b9b33c6f566abc4c7f9582
 ---
 
-# React UI configuration
+# Advanced configuration
 
-The React UI is embedded in your host application and communicates with the ARender rendition backend over REST. Configuration involves two aspects: connecting to the backend, and handling cross-origin requests.
+This page covers topics that apply after completing a [Docker Compose](./docker-compose.md) or [Kubernetes Helm](./kubernetes-helm.md) installation: local development proxy, OAuth2 authentication, and BFF setup.
 
 Backend rendition configuration (broker, converter, renderer) is documented in [Configuration system](./configuration-system.md) and [Environment variables](./environment-variables.md).
 
-## Connecting to the rendition backend
+## API routes reference
 
-The React UI makes REST API calls to the Document Service Broker for document operations. The broker URL is determined by how you set up the connection in your host application:
-
-- **Reverse proxy (recommended):** Your application server proxies `/documents`, `/annotation`, and `/registry/documents` routes to the broker. The React UI calls these as relative URLs — no cross-origin issues.
-- **Direct connection:** The React UI calls the broker URL directly. Requires CORS configuration.
-
-### API routes
-
-The React UI uses three API route prefixes:
+The viewer uses three API route prefixes, all proxied to the Document Service Broker:
 
 | Route | Purpose |
 |-------|---------|
@@ -32,68 +25,65 @@ The React UI uses three API route prefixes:
 | `/annotation/*` | Annotation CRUD operations |
 | `/registry/documents` | Load documents through connector providers |
 
-## CORS and reverse proxy
+## Local development proxy
 
-Since the React UI runs inside your host application, API calls to the rendition backend are cross-origin by default. The recommended solution is a reverse proxy that makes the broker appear as same-origin.
+The viewer runs in the browser and calls the broker's REST API. Since they typically run on different ports or domains, browsers block these requests as cross-origin (CORS). A proxy solves this by forwarding the viewer's API calls to the broker server-side, so the browser only ever sees one origin.
 
-:::tip Local development
-During local development, most bundlers (Vite, webpack) provide a built-in dev server proxy that handles this automatically. For example, Vite's `server.proxy` configuration forwards `/documents`, `/annotation`, and `/registry/documents` to the broker URL defined in your environment variables. No external reverse proxy is needed in this case.
-:::
+In production, a reverse proxy (Nginx or Ingress) handles this — see the [Docker Compose](./docker-compose.md#step-2--set-up-the-reverse-proxy) or [Kubernetes Helm](./kubernetes-helm.md#step-3--configure-ingress) guides. For local development, use your bundler's built-in proxy instead.
 
-### Nginx reverse proxy (recommended)
+### Vite
 
-```nginx
-server {
-    listen 80;
-    server_name your-app.example.com;
+Most bundlers include a built-in dev server proxy. Use it instead of setting up a reverse proxy locally.
 
-    # Your application
-    location / {
-        proxy_pass http://your-app:3000;
-    }
+**Vite example** (`vite.config.ts`):
 
-    # Proxy ARender API calls to the broker
-    location /documents {
-        proxy_pass http://service-broker:8761/documents;
-    }
-
-    location /annotation {
-        proxy_pass http://service-broker:8761/annotation;
-    }
-
-    location /registry/documents {
-        proxy_pass http://service-broker:8761/registry/documents;
-        # If using connector providers, inject the provider header:
-        # proxy_set_header X-Provider-ID alfresco;
-    }
+```ts
+export default {
+  server: {
+    proxy: {
+      '/documents': { target: 'http://localhost:8761', changeOrigin: true },
+      '/annotation': { target: 'http://localhost:8761', changeOrigin: true },
+      '/registry/documents': { target: 'http://localhost:8761', changeOrigin: true },
+    },
+  },
 }
 ```
 
-With this setup, the React UI makes same-origin requests to `/documents/*`, `/annotation/*`, and `/registry/documents`, which Nginx forwards to the broker.
+Vite forwards matching requests to the broker. The browser only sees `localhost`, so no CORS issue arises.
 
-:::tip
-If you use [connector providers](../guides/integration/connector-providers.md) (Alfresco, FileNet), your reverse proxy must also inject the `X-Provider-ID` header on `/registry/documents` requests. If OAuth2 is enabled on the rendition backend, consider using a full BFF (Backend For Frontend) to handle token management. See [System architecture](../overview/architecture.md) for details.
+### Same origin via existing infrastructure
+
+If your organization already routes the ARender API paths (`/documents`, `/annotation`, `/registry/documents`) to the broker under the same domain as your application — through an existing reverse proxy, load balancer, or API gateway — the browser sees all requests as same-origin and no additional configuration is needed.
+
+## Authentication and BFF
+
+A reverse proxy (Nginx or Ingress) is sufficient for most deployments. If you also enable **OAuth2 on the rendition backend**, the React viewer — running in the browser — cannot securely store or refresh tokens. In this case, you need a **Backend For Frontend (BFF)**: a server-side component that manages OAuth2 tokens on behalf of the browser.
+
+### How a BFF works with ARender
+
+The BFF sits between the browser and the broker:
+
+1. It handles the OAuth2 flow (authorization code grant, token refresh).
+2. It stores tokens server-side — tokens are never exposed to the browser.
+3. It proxies the three ARender API routes, injecting `Authorization: Bearer <token>` on each request to the broker.
+
+From the viewer's perspective, it calls the BFF exactly as it would call the broker — no change is needed in how you configure the `rendition` attribute on `<arender-element>`.
+
+### Routes to proxy through the BFF
+
+| Route | Purpose |
+|-------|---------|
+| `/documents/*` | Document rendering |
+| `/annotation/*` | Annotation CRUD |
+| `/registry/documents` | Connector providers |
+
+If you use [connector providers](../guides/integration/connector-providers.md), the BFF must also inject the `X-Provider-ID` header on `/registry/documents` requests.
+
+:::note
+ARender does not yet ship a built-in BFF — this is planned for an upcoming release. In the meantime, implement your own using your preferred stack (Node.js, Spring Boot, etc.) or use an existing OAuth2 proxy such as [OAuth2 Proxy](https://oauth2-proxy.github.io/oauth2-proxy/).
 :::
 
-### Alternative approaches
-
-| Approach | Use case | Trade-offs |
-|----------|----------|------------|
-| Nginx reverse proxy | Production | Same-origin, no CORS issues |
-| Serve assets from same origin | Simple deployments | Couples frontend to backend |
-| CORS browser extension | Local development only | Not for production |
-
-## Backend configuration
-
-### Authorized URLs
-
-When loading documents by URL (via `openDocumentByUrl`), the broker must authorize the document source. Configure allowed URL prefixes:
-
-```bash
-DSB_AUTHORIZED_URLS=https://www.uxopian.com/,https://your-docs-server.example.com/
-```
-
-### Port summary
+## Port reference
 
 | Component | Default port | Description |
 |-----------|-------------|-------------|

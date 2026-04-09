@@ -35,29 +35,29 @@ Each service uses a prefix. All environment variable names must be uppercase.
 
 ### Property-to-variable mapping rules
 
-1. Write the full property path in uppercase.
-2. A capital letter in the property key must be preceded by `.` in the environment variable name.
-3. Use `_` to separate nested YAML keys.
-4. Use `[n]` to set a list element at index `n`.
+1. Start from the Spring property path (dot-separated), for example: `eureka.instance.metadataMap.hostName`.
+2. Split any camelCase segment by inserting a literal `.` before each internal capital letter (e.g., `metadataMap` → `metadata.Map`, `hostName` → `host.Name`).
+3. Convert the whole name to UPPERCASE.
+4. Replace the original dot separators between property levels with `_` (underscore).
+5. Use `[n]` to select a list element at index `n`.
 
 **Example: nested YAML property**
 
 ```yaml
 eureka:
   instance:
-    metadata:
-      map:
-        host:
-          name: document-converter
+    metadataMap:
+      hostName: document-converter
 ```
 
-Becomes:
+Transformation steps:
 
-```
-DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter
-```
+- Split camelCase: `eureka_instance_metadataMap_hostName`
+- Level separator → underscore: `eureka_instance_metadata.Map_host.Name`
+- Uppercase : `EUREKA_INSTANCE_METADATA.MAP_HOST.NAME`
+- Add service prefix: `DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter`
 
-The `.MAP` and `.NAME` notation reflects that `map` and `name` contain uppercase letters when written as `metadataMap` and `hostName` in Spring internals. Follow this pattern for any camelCase property key segment.
+Note: The `.MAP` and `.NAME` fragments come from splitting camelCase boundaries (for example `metadataMap` and `hostName`) and should be handled the same way for any camelCase segment.
 
 **Example: simple property override**
 

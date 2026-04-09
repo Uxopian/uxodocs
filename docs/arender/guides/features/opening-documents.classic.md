@@ -1,4 +1,5 @@
 ---
+viewer: classic
 title: Opening documents
 last_update:
   date: '2026-03-23T10:20:59.293Z'

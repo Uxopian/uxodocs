@@ -10,31 +10,96 @@ content_hash: f457ca89ab310ba4c931afa654e139c39edc22123423f0d85ef4fa51678fdaac
 
 # Kubernetes Helm
 
-This guide covers deploying the full ARender stack on Kubernetes: the React UI in your host application and the rendition backend via Helm charts.
+This guide deploys the full ARender stack on Kubernetes: the rendition backend via Helm chart and an Ingress controller as the reverse proxy between your application and the backend.
 
-## React UI
+This guide assumes the React viewer is already integrated. If not, follow [Getting Started](../quickstart/getting-started.md) first.
 
-The React UI is an npm package embedded in your host application — it is not deployed as a Kubernetes workload.
+## Prerequisites
 
-### Install the package
+- Kubernetes 1.24+
+- Helm 3.x
+- A storage class supporting ReadWriteMany (for the shared tmp volume)
+- Access to the Uxopian Helm repository
+- An Ingress controller (e.g. Nginx Ingress) deployed in your cluster
+
+The `arender` Helm chart (v0.4.0) contains a **rendition** sub-chart that deploys the Document Service Broker, converter, renderer, and text handler with support for autoscaling, persistent storage, and Hazelcast clustering.
+
+## Step 1 — Authenticate with the registry
+
+ARender images are hosted on a private registry. In Kubernetes, each cluster node pulls images independently — they cannot use your local Docker credentials. You need to store the credentials as a Kubernetes secret so the nodes can authenticate when pulling images.
+
+First, verify your credentials work locally:
 
 ```bash
-npm install arender-ui
+docker login artifactory.arondor.cloud:5001
 ```
 
-### Embed the viewer
+Then store those credentials as a Kubernetes secret in the cluster:
 
-Add the `<arender-element>` Web Component to your page:
-
-```html
-<arender-element></arender-element>
+```bash
+kubectl create secret docker-registry arender-registry \
+  --docker-server=artifactory.arondor.cloud:5001 \
+  --docker-username=<your-username> \
+  --docker-password=<your-password> \
+  --namespace arender
 ```
 
-See [Web Component reference](../reference/web-component.md) for attributes, JavaScript API, and framework wrappers.
+Finally, reference the secret in your Helm values so the chart uses it when pulling images:
 
-### Set up the Ingress
+```yaml title="values.yaml"
+global:
+  imagePullSecrets:
+    - name: arender-registry
+```
 
-In Kubernetes, the Ingress controller acts as the reverse proxy between the React UI and the broker. Configure routes to forward API calls to the broker service:
+## Step 2 — Install the Helm chart
+
+A Helm chart is a package that describes a Kubernetes deployment. Installing it is the equivalent of running `docker-compose up` — it pulls the images and starts all the pods.
+
+First, add the ARender Helm repository (similar to adding an npm or Maven registry) and fetch the latest chart index:
+
+```bash
+helm repo add arondor https://artifactory.arondor.cloud/artifactory/ARenderHelmVirtual --username <your_user> --password <your_password>
+helm repo update
+```
+
+Create a `values.yaml` file to set the ARender version and any other configuration (see [Configuration reference](#configuration-reference)):
+
+```yaml title="values.yaml"
+global:
+  arenderVersion: "2026.0.0"
+```
+
+Then install the chart. Use the default values for a quick test, or pass your `values.yaml` for a production deployment:
+
+```bash
+# Quick start — install with default values
+helm install arender arondor/arender \
+  --namespace arender \
+  --create-namespace
+
+# Production — install with your values.yaml
+helm install arender arondor/arender \
+  --namespace arender \
+  --create-namespace \
+  -f my-values.yaml
+```
+
+## Step 3 — Configure Ingress
+
+The Ingress controller routes viewer API traffic to the broker — it serves the same role as Nginx in a Docker Compose deployment. Enable it in your Helm values:
+
+```yaml title="values.yaml"
+rendition:
+  broker:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      className: nginx
+```
+
+If you prefer to manage the Ingress resource manually:
 
 ```yaml title="ingress.yaml"
 apiVersion: networking.k8s.io/v1
@@ -72,79 +137,54 @@ spec:
                   number: 8761
 ```
 
-This Ingress is the minimal setup. Depending on your needs, this layer can also:
-
-- **Inject `X-Provider-ID`** — required when using [connector providers](../guides/integration/connector-providers.md) (Alfresco, FileNet)
-- **Handle OAuth2 tokens** — when OAuth2 is enabled on the rendition backend, a full BFF (Backend For Frontend) manages tokens on behalf of the viewer
+:::tip
+If OAuth2 is enabled on the rendition backend, use a BFF instead of a plain Ingress. See [Advanced configuration](./configuration.md#authentication-and-bff).
+:::
 
 :::note
 ARender does not yet ship a built-in BFF — this is planned for an upcoming release. In the meantime, use your own Ingress annotations, middleware, or BFF.
 :::
 
-See [Configuration](./configuration.md) for more details on CORS and reverse proxy options.
+## Step 4 — Configure authorized document sources
 
-## Rendition backend
-
-The Helm chart deploys all rendition backend services with support for autoscaling, persistent storage, ingress, and Hazelcast clustering.
-
-## Prerequisites
-
-- Kubernetes 1.24+
-- Helm 3.x
-- A storage class supporting ReadWriteMany (for the shared tmp volume)
-- Access to the Uxopian Helm repository
-- Docker registry authentication: run `docker login artifactory.arondor.cloud:5001` and create a Kubernetes image pull secret (see [Installation](#installation))
-
-## Chart structure
-
-The `arender` parent chart (v0.4.0) contains a **rendition** sub-chart that deploys the Document Service Broker, converter, renderer, and text handler.
-
-## Registry authentication
-
-ARender images are hosted on a private registry. Authenticate before pulling images:
-
-```bash
-docker login artifactory.arondor.cloud:5001
-```
-
-For Kubernetes, create an image pull secret so that nodes can pull the images:
-
-```bash
-kubectl create secret docker-registry arender-registry \
-  --docker-server=artifactory.arondor.cloud:5001 \
-  --docker-username=<your-username> \
-  --docker-password=<your-password> \
-  --namespace arender
-```
-
-Then reference it in your Helm values:
+When loading documents by URL (via `openDocumentByUrl`), the broker must authorize the source domain. Add it via `extraConfig` in your Helm values:
 
 ```yaml title="values.yaml"
-global:
-  imagePullSecrets:
-    - name: arender-registry
+rendition:
+  broker:
+    config:
+      file:
+        extraConfig: |
+          authorized.urls=https://your-docs-server.example.com/
 ```
 
-## Installation
+Multiple origins are comma-separated:
+
+```yaml
+authorized.urls=https://docs.example.com/,https://storage.example.com/
+```
+
+## Step 5 — Verify
+
+Check that all pods are running:
 
 ```bash
-# Add the Helm repository
-helm repo add arondor https://artifactory.arondor.cloud/artifactory/ARenderHelmVirtual --username <your_user> --password <your_password>
-helm repo update
-
-# Install with default values
-helm install arender arondor/arender \
-  --namespace arender \
-  --create-namespace
-
-# Install with custom values
-helm install arender arondor/arender \
-  --namespace arender \
-  --create-namespace \
-  -f my-values.yaml
+kubectl get pods -n arender
 ```
 
-## Key configuration values
+Then verify the broker health endpoint through your Ingress:
+
+```bash
+curl https://your-app.example.com/documents/health/records
+```
+
+All services should show as UP.
+
+:::tip Coming from Getting Started?
+Update your Vite proxy target from the demo URL to your Ingress hostname (e.g. `https://your-app.example.com`) to connect to this backend.
+:::
+
+## Configuration reference
 
 ### Global
 
@@ -170,7 +210,7 @@ rendition:
       repository: artifactory.arondor.cloud:5001/arender-document-service-broker
       pullPolicy: IfNotPresent
     environment:
-      PROVIDER_ENVIRONMENT: LOCAL    # LOCAL or KUBERNETES (requires cluster RBAC)
+      PROVIDER_ENVIRONMENT: LOCAL
 
   converter:
     replicaCount: 1
@@ -281,7 +321,20 @@ rendition:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       className: nginx
+```
 
+### Extra configuration
+
+Each service supports injecting additional Spring properties via `config.file.extraConfig`:
+
+```yaml title="values.yaml"
+rendition:
+  broker:
+    config:
+      file:
+        extraConfig: |
+          # Additional Spring properties here
+          authorized.urls=https://example.com/
 ```
 
 ## Services and ports
@@ -309,38 +362,6 @@ All services have configurable liveness and readiness probes:
 | Document Renderer | 30s | 60s | 15s |
 | Document Text Handler | 30s | 60s | 15s |
 
-## Broker RBAC
-
-When `PROVIDER_ENVIRONMENT` is set to `KUBERNETES`, the broker needs RBAC permissions to discover microservices via Kubernetes API:
-
-```yaml title="values.yaml"
-rendition:
-  broker:
-    rbac:
-      create: true
-      role:
-        rules:
-          - apiGroups: ["*"]
-            resources: ["nodes"]
-            verbs: ["get", "list"]
-    serviceAccount:
-      create: true
-```
-
-## Extra configuration
-
-Each service supports injecting additional configuration via `config.file.extraConfig`:
-
-```yaml title="values.yaml"
-rendition:
-  broker:
-    config:
-      file:
-        extraConfig: |
-          # Additional Spring properties here
-          authorized.urls=https://example.com/
-```
-
 ## Upgrade
 
 ```bash
@@ -351,5 +372,6 @@ helm upgrade arender arondor/arender \
 
 ## Next steps
 
-- [Docker Compose](./docker-compose.md)
+- [Advanced configuration](./configuration.md) — OAuth2, BFF, and edge cases
+- [Docker Compose](./docker-compose.md) for single-server deployments
 - [REST API reference](../reference/rest-api/broker-api.md)
