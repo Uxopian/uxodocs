@@ -11,7 +11,18 @@ content_hash: de6e90602ed3383a58e06b75b82072e4c8e9b05ed63fa8d58d0b32ba95006b97
 
 # Getting started with the React UI
 
+This guide walks you through integrating the ARender viewer into your own application — step by step, from setting up registry access to displaying your first document in the browser.
+
 The ARender viewer is distributed as the `arender-ui` npm package. It registers an `<arender-element>` Web Component that integrates into any framework — React, Angular, Vue, Svelte, or plain HTML. The viewer communicates with the ARender rendition backend over REST.
+
+**Don't have a project yet?** You can create a fresh React application to follow along:
+
+```bash
+npm create vite@latest my-app -- --template react-ts
+cd my-app
+```
+
+Then continue with the steps below.
 
 ## Prerequisites
 
@@ -39,15 +50,11 @@ import TabItem from '@theme/TabItem';
 
 ## Step 2 — Install the ARender package
 
-In your existing project, install the `arender-ui` package:
+Open a terminal at the root of your project and install the `arender-ui` package:
 
 ```bash
 npm install arender-ui --registry https://npm.cloudsmith.io/uxopian/release/
 ```
-
-:::tip Starting from scratch?
-If you don't have a project yet, you can bootstrap one with Vite: `npm create vite@latest my-app -- --template react-ts`
-:::
 
 ## Step 3 — Configure the dev server proxy
 
@@ -90,7 +97,11 @@ To connect to your own backend instead of the demo, change each `target` to your
 
 ## Step 4 — Embed the viewer
 
+The `<arender-element>` is a Web Component — a standard HTML element you can drop into any template or JSX just like a `<video>` or `<input>`. It encapsulates the entire ARender viewer: no JavaScript instantiation required to display it. You configure it through HTML attributes.
+
 ### Web Component attributes
+
+The table below lists the attributes you can set directly on the element:
 
 | Attribute | Required | Description |
 |-----------|----------|-------------|
@@ -99,26 +110,13 @@ To connect to your own backend instead of the demo, change each `target` to your
 | `uuid` | No | ID of the document to open on startup (alternative to `url`). |
 
 Set `url` or `uuid` directly as HTML attributes to open a document on startup — no JavaScript needed.
-To load a different document at runtime, use the [JavaScript API](#step-5--load-a-document-dynamically).
+To load a different document at runtime, use the [JavaScript API](#step-6--load-a-document-dynamically).
 
 
 <Tabs>
-<TabItem value="html" label="HTML">
-
-```html title="index.html"
-<arender-element
-  rendition="/"
-  url="https://www.uxopian.com/hubfs/PDFReference15_v5.pdf"
-  style="display: block; width: 100%; height: 100vh"
-></arender-element>
-
-<script type="module">
-  import('arender-ui')
-</script>
-```
-
-</TabItem>
 <TabItem value="react" label="React">
+
+Copy the following into your `src/App.tsx` file, replacing its entire contents:
 
 ```tsx title="src/App.tsx"
 import { useEffect } from 'react'
@@ -159,6 +157,8 @@ export default App
 </TabItem>
 <TabItem value="vue" label="Vue">
 
+Copy the following into your `src/App.vue` file, replacing its entire contents:
+
 ```html title="App.vue"
 <script setup lang="ts">
 import { onMounted } from 'vue'
@@ -187,6 +187,8 @@ vue({ template: { compilerOptions: { isCustomElement: (tag) => tag === 'arender-
 </TabItem>
 <TabItem value="svelte" label="Svelte">
 
+Copy the following into your `src/App.svelte` file, replacing its entire contents:
+
 ```html title="App.svelte"
 <script lang="ts">
   import { onMount } from 'svelte'
@@ -204,6 +206,8 @@ vue({ template: { compilerOptions: { isCustomElement: (tag) => tag === 'arender-
 
 </TabItem>
 <TabItem value="angular" label="Angular">
+
+Copy the following into your `src/app/app.component.ts` file, replacing its entire contents:
 
 ```ts title="app.component.ts"
 import { Component, AfterViewInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
@@ -228,6 +232,23 @@ export class AppComponent implements AfterViewInit {
 ```
 
 </TabItem>
+<TabItem value="html" label="HTML">
+
+Add the following to your `index.html` file, just before the closing `</body>` tag:
+
+```html title="index.html"
+<arender-element
+  rendition="/"
+  url="https://www.uxopian.com/hubfs/PDFReference15_v5.pdf"
+  style="display: block; width: 100%; height: 100vh"
+></arender-element>
+
+<script type="module">
+  import('arender-ui')
+</script>
+```
+
+</TabItem>
 </Tabs>
 
 :::note Loading strategy
@@ -240,119 +261,200 @@ import 'arender-ui'
 ```
 :::
 
-Start your dev server (`npm run dev` for Vite) and open the local URL in your browser — you should see the ARender viewer displaying a PDF document.
+## Step 5 — Start the dev server
 
-## Step 5 — Load a document dynamically
+With the viewer embedded, start your development server and open it in your browser.
+
+If you created a fresh Vite project (as shown in the introduction), run:
+
+```bash
+npm run dev
+```
+
+Vite will print a local URL — usually `http://localhost:5173`. Open it in your browser and you should see the ARender viewer loading the sample PDF.
+
+If you use a different package manager, the equivalent command is:
+
+| Package manager | Command |
+|-----------------|---------|
+| yarn | `yarn dev` |
+| pnpm | `pnpm dev` |
+| bun | `bun dev` |
+
+If your project uses a different framework or bundler (Create React App, Angular CLI, etc.), use your usual start command (`npm start`, `ng serve`, etc.).
+
+:::tip
+If the viewer loads but no document appears, double-check the proxy configuration in Step 3 — the `/documents`, `/registry/documents`, and `/annotation` paths must all be proxied to the rendition backend.
+:::
+
+## Step 6 — Load a document dynamically
 
 To change the displayed document at runtime, use `window.ARender`. Calls made before the viewer finishes mounting are queued automatically — no need to wait for any event.
 
 <Tabs>
-<TabItem value="html" label="HTML">
-
-```html
-<arender-element rendition="/" style="display: block; width: 100%; height: 100vh"></arender-element>
-
-<button id="load-btn">Load document</button>
-
-<script type="module">
-  import('arender-ui')
-
-  document.getElementById('load-btn').addEventListener('click', () => {
-    window.ARender.openDocumentByUrl('https://www.uxopian.com/hubfs/PDFReference15_v5.pdf')
-  })
-</script>
-```
-
-</TabItem>
 <TabItem value="react" label="React">
 
-```tsx
-function DocumentSwitcher() {
-  const documents = [
-    { label: 'PDF Reference', url: 'https://www.uxopian.com/hubfs/PDFReference15_v5.pdf' },
-    { label: 'Image', url: 'https://www.uxopian.com/hubfs/example_image_comparison_unmodified.jpg' },
-  ]
+Replace your `src/App.tsx` with the following complete file:
+
+```tsx title="src/App.tsx"
+import { useEffect } from 'react'
+import type { ARenderHTMLElement } from 'arender-ui'
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'arender-element': React.HTMLAttributes<HTMLElement> & {
+        rendition?: string
+        url?: string
+        uuid?: string
+      }
+    }
+  }
+}
+declare global {
+  interface Window { ARender: ARenderHTMLElement }
+}
+
+function App() {
+  useEffect(() => { import('arender-ui') }, [])
 
   return (
-    <div>
-      {documents.map((doc) => (
-        <button key={doc.url} onClick={() => window.ARender.openDocumentByUrl(doc.url)}>
-          {doc.label}
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <div>
+        <button onClick={() => window.ARender.openDocumentByUrl('https://www.uxopian.com/hubfs/ARender-Mail_viewer_use_case.msg')}>
+          Change document
         </button>
-      ))}
+      </div>
+      <arender-element
+        rendition="/"
+        url="https://www.uxopian.com/hubfs/PDFReference15_v5.pdf"
+        style={{ flex: 1 }}
+      />
     </div>
   )
 }
+
+export default App
 ```
 
 </TabItem>
 <TabItem value="vue" label="Vue">
 
-```html
-<script setup lang="ts">
-const documents = [
-  { label: 'PDF Reference', url: 'https://www.uxopian.com/hubfs/PDFReference15_v5.pdf' },
-  { label: 'Image', url: 'https://www.uxopian.com/hubfs/example_image_comparison_unmodified.jpg' },
-]
+Replace your `src/App.vue` with the following complete file:
 
-function loadDocument(url: string) {
-  window.ARender.openDocumentByUrl(url)
+```html title="App.vue"
+<script setup lang="ts">
+import { onMounted } from 'vue'
+
+onMounted(() => { import('arender-ui') })
+
+function changeDocument() {
+  window.ARender.openDocumentByUrl('https://www.uxopian.com/hubfs/ARender-Mail_viewer_use_case.msg')
 }
 </script>
 
 <template>
-  <button v-for="doc in documents" :key="doc.url" @click="loadDocument(doc.url)">
-    {{ doc.label }}
-  </button>
+  <div style="display: flex; flex-direction: column; height: 100vh">
+    <div>
+      <button @click="changeDocument">Change document</button>
+    </div>
+    <arender-element
+      rendition="/"
+      url="https://www.uxopian.com/hubfs/PDFReference15_v5.pdf"
+      style="flex: 1"
+    />
+  </div>
 </template>
 ```
 
 </TabItem>
 <TabItem value="svelte" label="Svelte">
 
-```html
-<script lang="ts">
-  const documents = [
-    { label: 'PDF Reference', url: 'https://www.uxopian.com/hubfs/PDFReference15_v5.pdf' },
-    { label: 'Image', url: 'https://www.uxopian.com/hubfs/example_image_comparison_unmodified.jpg' },
-  ]
+Replace your `src/App.svelte` with the following complete file:
 
-  function loadDocument(url: string) {
-    window.ARender.openDocumentByUrl(url)
+```html title="App.svelte"
+<script lang="ts">
+  import { onMount } from 'svelte'
+
+  onMount(() => { import('arender-ui') })
+
+  function changeDocument() {
+    window.ARender.openDocumentByUrl('https://www.uxopian.com/hubfs/ARender-Mail_viewer_use_case.msg')
   }
 </script>
 
-{#each documents as doc}
-  <button on:click={() => loadDocument(doc.url)}>{doc.label}</button>
-{/each}
+<div style="display: flex; flex-direction: column; height: 100vh">
+  <div>
+    <button on:click={changeDocument}>Change document</button>
+  </div>
+  <arender-element
+    rendition="/"
+    url="https://www.uxopian.com/hubfs/PDFReference15_v5.pdf"
+    style="flex: 1; display: block"
+  ></arender-element>
+</div>
 ```
 
 </TabItem>
 <TabItem value="angular" label="Angular">
 
-```ts
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+Replace your `src/app/app.component.ts` with the following complete file:
+
+```ts title="app.component.ts"
+import { Component, AfterViewInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 @Component({
-  selector: 'app-document-switcher',
+  selector: 'app-root',
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <button *ngFor="let doc of documents" (click)="loadDocument(doc.url)">
-      {{ doc.label }}
-    </button>
+    <div style="display: flex; flex-direction: column; height: 100vh">
+      <div>
+        <button (click)="changeDocument()">Change document</button>
+      </div>
+      <arender-element
+        rendition="/"
+        url="https://www.uxopian.com/hubfs/PDFReference15_v5.pdf"
+        style="display: block; flex: 1"
+      ></arender-element>
+    </div>
   `,
 })
-export class DocumentSwitcherComponent {
-  documents = [
-    { label: 'PDF Reference', url: 'https://www.uxopian.com/hubfs/PDFReference15_v5.pdf' },
-    { label: 'Image', url: 'https://www.uxopian.com/hubfs/example_image_comparison_unmodified.jpg' },
-  ]
+export class AppComponent implements AfterViewInit {
+  ngAfterViewInit() {
+    import('arender-ui')
+  }
 
-  loadDocument(url: string) {
-    window.ARender.openDocumentByUrl(url)
+  changeDocument() {
+    window.ARender.openDocumentByUrl('https://www.uxopian.com/hubfs/ARender-Mail_viewer_use_case.msg')
   }
 }
+```
+
+</TabItem>
+<TabItem value="html" label="HTML">
+
+Add the following to your `index.html`, just before the closing `</body>` tag:
+
+```html
+<div style="display: flex; flex-direction: column; height: 100vh">
+  <div>
+    <button id="change-btn">Change document</button>
+  </div>
+  <arender-element
+    rendition="/"
+    url="https://www.uxopian.com/hubfs/PDFReference15_v5.pdf"
+    style="display: block; flex: 1"
+  ></arender-element>
+</div>
+
+<script type="module">
+  import('arender-ui')
+
+  document.getElementById('change-btn').addEventListener('click', () => {
+    window.ARender.openDocumentByUrl('https://www.uxopian.com/hubfs/ARender-Mail_viewer_use_case.msg')
+  })
+</script>
 ```
 
 </TabItem>
