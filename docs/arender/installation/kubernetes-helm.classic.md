@@ -100,9 +100,6 @@ rendition:
     image:
       repository: artifactory.arondor.cloud:5001/arender-document-service-broker
       pullPolicy: IfNotPresent
-    environment:
-      PROVIDER_ENVIRONMENT: LOCAL
-
   converter:
     replicaCount: 1
     autoscale:
