@@ -27,43 +27,41 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	&lt;modelVersion&gt;4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    &lt;groupId&gt;com.flower.docs.samples</groupId>
-    &lt;artifactId&gt;secured-gui-plugin</artifactId>
-    &lt;version&gt;0.0.1-SNAPSHOT</version>
+    <groupId>com.flower.docs.samples</groupId>
+    <artifactId>secured-gui-plugin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
-	&lt;dependencies&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;com.flower.docs</groupId>
-			&lt;artifactId&gt;flower-docs-starter-client</artifactId>
-			&lt;version&gt;{{version}}</version>
+	<dependencies>
+		<dependency>
+			<groupId>com.flower.docs</groupId>
+			<artifactId>flower-docs-starter-client</artifactId>
+			<version>{{version}}</version>
 		</dependency>
 	</dependencies>
 
-	&lt;build&gt;
-		&lt;plugins&gt;
-			&lt;plugin&gt;
-				&lt;groupId&gt;org.springframework.boot</groupId>
-				&lt;artifactId&gt;spring-boot-maven-plugin</artifactId>
-				&lt;version&gt;2.7.18</version>
-				&lt;executions&gt;
-					&lt;execution&gt;
-						&lt;goals&gt;
-							&lt;goal&gt;repackage</goal>
-							&lt;goal&gt;build-info</goal>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.7.18</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+							<goal>build-info</goal>
 						</goals>
 					</execution>
 				</executions>
-				&lt;configuration&gt;
-					&lt;executable&gt;true</executable>
+				<configuration>
+					<executable>true</executable>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 </project>
-```
-
 ```
 
 ## Spring Boot application
@@ -84,12 +82,12 @@ import com.flower.docs.SecurityMode;
 @SpringBootApplication
 @FlowerDocsClient(security = SecurityMode.TOKEN)
 public class SecuredGUIPlugin
-
+{
 	public static void main(String[] args)
-
+	{
 		SpringApplication.run(SecuredGUIPlugin.class, args);
-
-
+	}
+}
 ```
 
 Here, the `@FlowerDocsClient` annotation automatically configures:
@@ -102,15 +100,11 @@ To configure the application, this `application.properties` file in the `src/mai
 
 ## Configuration
 
-```bash
-
 ```properties
 spring.application.name=secured-gui-plugin
 server.port=2802
 server.servlet.context-path=/secured
 ws.url=http://localhost:8081/core/services
-```
-
 ```
 :::info
 The other configuration options offered by the Spring Boot framework can also be used.
@@ -137,16 +131,16 @@ import com.flower.docs.service.api.document.DocumentService;
 
 @RestController
 public class FlowerRestController
-
+{
 	@Autowired
 	private DocumentService documentService;
 
 	@GetMapping("/count")
 	public String count() throws TechnicalException, FunctionalException
-
+	{
 		return "documents: " + documentService.search(new SearchRequest()).getFound();
-
-
+	}
+}
 ```
 
 Here, the `documentService` document management service is used to determine the total number of documents.

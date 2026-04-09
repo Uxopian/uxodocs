@@ -37,7 +37,7 @@ POST /_reindex?wait_for_completion=false
 
 ```
 
-**Note:** In this request, `&lt;scope&gt;` is the identifier of the FlowerDocs scope in lower case.
+**Note:** In this request, `<scope>` is the identifier of the FlowerDocs scope in lower case.
 
 The response returned by OpenSearch is of the type:
 

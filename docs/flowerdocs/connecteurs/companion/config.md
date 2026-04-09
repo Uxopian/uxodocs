@@ -39,4 +39,4 @@ To update the entire configuration, simply click on the `Save` button shown in t
 
 # Configuration test
 
-To validate the configuration items, click on the Login button. If the message `User &lt;nom&gt; is connected.` is displayed, the configuration is operational. Otherwise, the displayed error explains the invalid parameter(s) to the user.
+To validate the configuration items, click on the Login button. If the message `User <nom> is connected.` is displayed, the configuration is operational. Otherwise, the displayed error explains the invalid parameter(s) to the user.

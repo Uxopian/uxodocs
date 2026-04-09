@@ -27,7 +27,7 @@ To do this:
 
 <br/>
 
-_Note: The `Value` field respects a format: `&lt;identifiant&gt;(&lt;langue&gt;=<libellé>,&lt;langue2&gt;=<libellé2>)`. The identifier is the id and the label is its name in the given language._
+_Note: The `Value` field respects a format: `<identifiant>(<langue>=<libellé>,<langue2>=<libellé2>)`. The identifier is the id and the label is its name in the given language._
 
 <br/>
 

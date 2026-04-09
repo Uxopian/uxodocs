@@ -40,7 +40,7 @@ Only keep the users you need, and change their passwords to avoid using default 
 
 To change a user's password:
 
-- run command: ``$`OPENSEARCH_HOME`/plugins/opensearch-security/tools/hash.sh -p &lt;new_password&gt;``
+- run command: ``$`OPENSEARCH_HOME`/plugins/opensearch-security/tools/hash.sh -p <new_password>``
 - Replace the password hash in the ``$`OPENSEARCH_HOME`/plugins/opensearch-security/securityconfig/internal_users.yml`` file for the desired user.
 - in order for the changes to take effect, run the ``$`OPENSEARCH_HOME`/plugins/opensearch-security/tools/securityadmin.sh`` script
 

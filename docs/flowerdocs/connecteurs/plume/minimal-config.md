@@ -25,7 +25,7 @@ In addition, the `flower.url` property must be filled in with the URL of FlowerD
 
 ```properties
 flower.enabled=true
-flower.url=http://&lt;host&gt;:&lt;port&gt;/<Core path>/services
+flower.url=http://<host>:<port>/<Core path>/services
 ```
 
 ## SMTP
@@ -43,7 +43,7 @@ smtp.parameters.socketFactory.class=javax.net.ssl.SSLSocketFactory
 smtp.parameters.starttls.enable=true
 ```
 
-You can add parameters to the SMTP connector by adding properties `smtp.parameters.&lt;name&gt;=&lt;value&gt;`.
+You can add parameters to the SMTP connector by adding properties `smtp.parameters.<name>=<value>`.
 
 # HMI activation
 

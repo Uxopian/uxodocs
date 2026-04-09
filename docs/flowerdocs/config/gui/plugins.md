@@ -31,7 +31,7 @@ A plugin can be configured through a `Route` class document with `Path` and `URL
 
 The configuration of these plugins is described in the _Administration > Configuration > Plugins_ section of the administration console.
 
-By defining a plugin with the `/my-route/**` path and the `https://flowerdocs.com/my-plugin` for scope `&lt;scope&gt;`, request is executed on `/plugins/&lt;scope&gt;/my-route/test` and redirected to `https://flowerdocs.com/my-plugin/test` URL.
+By defining a plugin with the `/my-route/**` path and the `https://flowerdocs.com/my-plugin` for scope `<scope>`, request is executed on `/plugins/<scope>/my-route/test` and redirected to `https://flowerdocs.com/my-plugin/test` URL.
 
 ## Global plugin
 
@@ -52,7 +52,7 @@ zuul.routes.myplugin.path=/plugins/sample/**
 zuul.routes.myplugin.url=http://localhost:3006/sample
 ```
 
-With this example, requests issued on `&lt;gui&gt;/plugins/sample` are redirected to `http://localhost:3006/sample`.
+With this example, requests issued on `<gui>/plugins/sample` are redirected to `http://localhost:3006/sample`.
 
 <br/>
 

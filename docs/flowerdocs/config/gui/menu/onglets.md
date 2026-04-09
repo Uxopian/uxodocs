@@ -14,7 +14,7 @@ content_hash: 93b0ac7d2f2e639da295bfd634f3b5314da4b45416a85b3303d295c087f17b57
 
 To enhance integration with other information system applications, FlowerDocs lets you add URL-based tabs to the graphical user interface.
 
-To add a new tab of this type, simply add the following property to the relevant user profile: `tab.url=&lt;label&gt;(<URL>,&lt;icon&gt;)`
+To add a new tab of this type, simply add the following property to the relevant user profile: `tab.url=<label>(<URL>,<icon>)`
 
 :::info
 Configure an icon and tab name by setting a property such as: `Viewer(https://arender.io,fa fa-map)`
@@ -136,8 +136,8 @@ For native tabs, the name can take on the following values:
 _Please note: All tabs to be displayed must be defined in advance._
 
 <br/>
-**Example:** The following example displays the tabs in the following order Administration, URL tab "https://flowerdocs.com/documentation", Virtual folder tab "root", Folder tab "Arondor-2020".
+**Example:** The following example displays the tabs in the following order Administration, URL tab "https://doc.uxopian.com/", Virtual folder tab "root", Folder tab "Arondor-2020".
 
 The last three tabs must first be defined in the properties `tab.url`, `tab.virtualfolder` and `tab.folder`:
 
-`NATIVE(ADMIN);URL(https://flowerdocs.com/documentation);VIRTUALFOLDER(root);FOLDER(Arondor-2020);`
+`NATIVE(ADMIN);URL(https://doc.uxopian.com/);VIRTUALFOLDER(root);FOLDER(Arondor-2020);`
