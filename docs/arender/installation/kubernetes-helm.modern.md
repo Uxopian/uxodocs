@@ -359,8 +359,6 @@ All services have configurable liveness and readiness probes:
 | Document Renderer | 30s | 60s | 15s |
 | Document Text Handler | 30s | 60s | 15s |
 
-<<<<<<< HEAD
-=======
 ## Extra configuration
 
 Each service supports injecting additional configuration via `config.file.extraConfig`:
@@ -375,7 +373,6 @@ rendition:
           authorized.urls=https://example.com/
 ```
 
->>>>>>> staging
 ## Upgrade
 
 ```bash
