@@ -209,9 +209,6 @@ rendition:
     image:
       repository: artifactory.arondor.cloud:5001/arender-document-service-broker
       pullPolicy: IfNotPresent
-    environment:
-      PROVIDER_ENVIRONMENT: LOCAL
-
   converter:
     replicaCount: 1
     autoscale:
@@ -362,6 +359,23 @@ All services have configurable liveness and readiness probes:
 | Document Renderer | 30s | 60s | 15s |
 | Document Text Handler | 30s | 60s | 15s |
 
+<<<<<<< HEAD
+=======
+## Extra configuration
+
+Each service supports injecting additional configuration via `config.file.extraConfig`:
+
+```yaml title="values.yaml"
+rendition:
+  broker:
+    config:
+      file:
+        extraConfig: |
+          # Additional Spring properties here
+          authorized.urls=https://example.com/
+```
+
+>>>>>>> staging
 ## Upgrade
 
 ```bash

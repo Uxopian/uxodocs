@@ -100,9 +100,6 @@ rendition:
     image:
       repository: artifactory.arondor.cloud:5001/arender-document-service-broker
       pullPolicy: IfNotPresent
-    environment:
-      PROVIDER_ENVIRONMENT: LOCAL    # LOCAL or KUBERNETES (requires cluster RBAC)
-
   converter:
     replicaCount: 1
     autoscale:
@@ -267,24 +264,6 @@ All services have configurable liveness and readiness probes:
 | Document Renderer | 30s | 60s | 15s |
 | Document Text Handler | 30s | 60s | 15s |
 | Viewer | 30s | 60s | 30s/60s |
-
-## Broker RBAC
-
-When `PROVIDER_ENVIRONMENT` is set to `KUBERNETES`, the broker needs RBAC permissions to discover microservices via Kubernetes API:
-
-```yaml title="values.yaml"
-rendition:
-  broker:
-    rbac:
-      create: true
-      role:
-        rules:
-          - apiGroups: ["*"]
-            resources: ["nodes"]
-            verbs: ["get", "list"]
-    serviceAccount:
-      create: true
-```
 
 ## Extra configuration
 
