@@ -38,7 +38,7 @@ The rendition backend is made up of four Docker images:
 | Document Text Handler | arender-document-text-handler | 8899 | Text extraction |
 
 
-Create a `docker-compose.yml` file with the following content, replacing `{{version}}` with the ARender version to deploy (e.g. `2026.0.0`). Each microservice registers its hostname and port via environment variables so the broker can discover them automatically.
+Create a `docker-compose.yml` file with the following content. Each microservice registers its hostname and port via environment variables so the broker can discover them automatically.
 
 ```yaml title="docker-compose.yml"
 services:
@@ -96,7 +96,7 @@ Update your Vite proxy target from the demo URL to `http://localhost:8761` to co
 
 The React viewer runs in the browser and calls the ARender broker's REST API. Since they run on different ports, browsers block these requests as cross-origin (CORS). A reverse proxy makes the three ARender API routes appear same-origin to the browser.
 
-This step adds Nginx to your Docker Compose stack. It assumes your application also runs as a Docker Compose service. If that is not your case, see [Advanced configuration → Proxy setup](./configuration.md#proxy-setup).
+This step adds Nginx to your Docker Compose stack. The configuration below assumes your app's dev server runs on the host machine on port `5173` (Vite's default). Adjust the port if you use a different bundler or framework. For other setups, see [Advanced configuration → Proxy setup](./configuration.md#proxy-setup).
 
 ### Create the Nginx configuration file
 
@@ -105,11 +105,11 @@ Create an `nginx.conf` file at the root of your project:
 ```nginx title="nginx.conf"
 server {
     listen 80;
-    server_name your-app.example.com;
+    server_name localhost;
 
-    # Your application
+    # Your application (dev server running on the host)
     location / {
-        proxy_pass http://your-app:3000;
+        proxy_pass http://host.docker.internal:5173;
     }
 
     # ARender API routes
@@ -129,7 +129,7 @@ server {
 }
 ```
 
-Replace `your-app` with the name of your application's Docker Compose service and `your-app.example.com` with your domain.
+`host.docker.internal` is the hostname Docker Desktop provides to reach the host machine from within a container. Replace `5173` if your dev server runs on a different port. For a production deployment, replace `localhost` with your domain name.
 
 ### Add Nginx to docker-compose.yml
 
@@ -149,7 +149,20 @@ services:
       - service-broker
 ```
 
-If you configured a Vite dev proxy in [Getting Started](../quickstart/getting-started.md), you can remove it from `vite.config.ts` — Nginx handles routing in this deployment.
+If you configured a dev proxy in [Getting Started](../quickstart/getting-started.md), remove it from your bundler config — Nginx now handles routing.
+
+If your app uses Vite, also add `allowedHosts` so that Nginx can reach the dev server:
+
+```ts title="vite.config.ts"
+export default defineConfig({
+  server: {
+    allowedHosts: ['host.docker.internal'],
+  },
+  // ...
+})
+```
+
+For other bundlers (webpack-dev-server, Angular CLI, etc.), refer to their equivalent host restriction settings.
 
 :::tip
 If OAuth2 is enabled on the rendition backend, use a BFF instead of a plain reverse proxy. See [Advanced configuration](./configuration.md#authentication-and-bff).
@@ -171,6 +184,7 @@ Multiple origins are comma-separated:
 ```yaml
 - "DSB_AUTHORIZED_URLS=https://docs.example.com/,https://storage.example.com/"
 ```
+
 
 ## Step 4 — Start the stack
 
@@ -205,7 +219,7 @@ services:
     ports:
       - 8788:8788
     environment:
-      - "ARENDER_SERVER_ALFRESCO_ATOMPUBURL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
+      - "ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
 ```
 
 Your Nginx configuration must also inject the `X-Provider-ID` header on `/registry/documents` requests. See [Connector providers](../guides/integration/connector-providers.md) for the full deployment guide and available providers.

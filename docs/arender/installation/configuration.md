@@ -101,8 +101,6 @@ server {
 }
 ```
 
-The `/etc/nginx/conf.d/` path applies to Ubuntu, Debian, and CentOS. On macOS (Homebrew), use `/usr/local/etc/nginx/servers/` or `/opt/homebrew/etc/nginx/servers/` instead.
-
 Replace `your-app.example.com` with your domain and `localhost:3000` with the port your application runs on.
 
 **Validate and reload Nginx:**
@@ -149,3 +147,4 @@ ARender does not yet ship a built-in BFF — this is planned for an upcoming rel
 |-----------|-------------|-------------|
 | Document Service Broker | 8761 | Backend orchestrator |
 | Alfresco Provider | 8788 | Alfresco connector microservice |
+| FileNet Provider | 8787 | FileNet connector microservice |

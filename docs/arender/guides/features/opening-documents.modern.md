@@ -52,6 +52,24 @@ In both cases, child documents have [hierarchical DocumentId values](../../conce
 Not supported yet.
 
 
+## Opening a document at runtime
+
+To open or change a document after the page has loaded, use the JavaScript API instead of URL parameters:
+
+```javascript
+window.ARender.openDocumentByUrl('https://example.com/contract.pdf');
+```
+
+This is the typical pattern when the document to display depends on a user action (clicking a row in a table, selecting a file, etc.). Calls made before the viewer finishes mounting are queued automatically — no need to wait for any event.
+
+You can also open a document by its pre-generated ARender ID:
+
+```javascript
+window.ARender.openDocument('b64_dXJsPWh0dHA6Ly9leGFtcGxlLmNvbS9zYW1wbGUucGRm');
+```
+
+See [Web Component → JavaScript API](../../reference/web-component.md#javascript-api) for the full API reference.
+
 ## Related pages
 
 - [Documents and document IDs](../../concepts/documents-and-ids.md): the DocumentId / DocumentAccessor mental model

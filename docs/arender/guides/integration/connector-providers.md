@@ -86,7 +86,7 @@ services:
     ports:
       - "8788:8788"
     environment:
-      - "ARENDER_SERVER_ALFRESCO_ATOMPUBURL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
+      - "ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
 
   document-converter:
     image: artifactory.arondor.cloud:5001/arender-document-converter:{{version}}

@@ -30,11 +30,11 @@ When opening documents by URL, the rendition service only authorizes whitelisted
 
 ### Hierarchical IDs
 
-When opening an archive document, each child document receives a `DocumentId` formed from the parent ID followed by `/` and a numeric index:
+When composite documents like Zips or mails (documents containing other documents) are opened, each child document's DocumentId is created by appending a `/` and a numeric index :
 
 ```
 b64_<parent-parameters>/0
-b64_<parent-parameters>/1
+b64_<parent-parameters>/1/3/1
 ```
 
 This hierarchy allows the broker and caching layer to manage document groups as a unit — for example, evicting all children when the parent container expires.
