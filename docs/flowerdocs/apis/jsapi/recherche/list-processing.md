@@ -13,7 +13,8 @@ Serial processing allows users to navigate through a list of documents or tasks 
 
 # Activation
 
-Serial processing sessions are configured using the JS API. The following example enables serial processing unconditionally:
+Serial processing sessions are configured using the JS API.
+The following example enables serial processing unconditionally:
 
 ```javascript
 JSAPI.get()
@@ -23,9 +24,11 @@ JSAPI.get()
     });
 ```
 
+By default, the session uses the query from the originating search or virtual folder.
+
 # Customizing the session query
 
-By default, the session uses the query from the originating search or virtual folder. The JS API allows you to override it — for example, to restrict the session to components sharing a specific tag value:
+The JS API allows you to override the session query : for example, to restrict the session to components sharing a specific tag value:
 
 ```javascript
 JSAPI.get()
@@ -43,6 +46,46 @@ JSAPI.get()
         session.setRequest(request);
         callback.enable(session);
     });
+```
+
+# Enable/Disable the serial processing
+
+You can then choose to enable or disable it for each menu or search.
+
+```javascript
+JSAPI.get().batchSession().registerBuilder(function(session, callback){
+  	var newSession = activateBatchSession (session);
+	callback.enable(newSession);
+});
+
+function activateBatchSession (session) {
+	var place = session.getPlace();
+	var placeId = place.getId();
+	var template = place.getTemplate();
+
+	if (placeId == 'AllTasksTab') {
+		session.setEnabled(false);
+		return session;
+	} else if (placeId == '' && template == 'documentAllTagSearch'){
+		return session;
+	} else if( placeId == 'CollectiveTab') {
+		session.setRequest(constructMailRequest (session));
+		return session;
+	}
+	return null;
+}
+
+function constructMailRequest (session) {
+	var request = session.getRequest();
+	var filter = new AndClause();
+	var classCriterion = new Criterion();
+	classCriterion.setName('TypeCourrier');
+	classCriterion.setOperator("EQUALS_TO");
+	classCriterion.addValue(session.getComponentSource().getTagValue("TypeCourrier"));
+	filter.addCriterion(classCriterion);
+	request.addFilterClause(filter);
+	return request;
+}
 ```
 
 # Session API reference
