@@ -37,7 +37,6 @@ Choose the solution that matches your context:
 | Docker Compose deployment | [Nginx in Docker Compose](./docker-compose.md#step-2--set-up-the-reverse-proxy) |
 | OAuth2 enabled on the backend | [BFF](#authentication-and-bff) |
 | Existing reverse proxy or load balancer | [Same origin via existing infrastructure](#same-origin-via-existing-infrastructure) |
-| Non-dockerized production app | [Nginx on the host server](#nginx-on-the-host-server) |
 
 ### Vite
 
@@ -62,55 +61,6 @@ Vite forwards matching requests to the broker. The browser only sees `localhost`
 ### Same origin via existing infrastructure
 
 If your organization already routes the ARender API paths (`/documents`, `/annotation`, `/registry/documents`) to the broker under the same domain as your application — through an existing reverse proxy, load balancer, or API gateway — the browser sees all requests as same-origin and no additional configuration is needed.
-
-### Nginx on the host server
-
-If your application runs directly on a server (not in Docker), install Nginx on that server and configure it as a reverse proxy. The ARender broker still runs in Docker and exposes port `8761` on the host via the `ports:` mapping in `docker-compose.yml`.
-
-**Install Nginx** (Ubuntu/Debian):
-
-```bash
-sudo apt update && sudo apt install nginx
-```
-
-For other operating systems, follow the [official Nginx installation guide](https://nginx.org/en/docs/install.html).
-
-**Create a configuration file:**
-
-```nginx title="/etc/nginx/conf.d/arender.conf"
-server {
-    listen 80;
-    server_name your-app.example.com;
-
-    location / {
-        proxy_pass http://localhost:3000;
-    }
-
-    location /documents {
-        proxy_pass http://localhost:8761/documents;
-    }
-
-    location /annotation {
-        proxy_pass http://localhost:8761/annotation;
-    }
-
-    location /registry/documents {
-        proxy_pass http://localhost:8761/registry/documents;
-    }
-}
-```
-
-Replace `your-app.example.com` with your domain and `localhost:3000` with the port your application runs on.
-
-**Validate and reload Nginx:**
-
-```bash
-nginx -t && nginx -s reload
-```
-
-`nginx -t` checks the configuration file for syntax errors. `nginx -s reload` applies the new configuration without interrupting active connections.
-
-If you use an API gateway (AWS ALB, Cloudflare, Kong, etc.) instead of Nginx, apply the same routing rules — forward the three ARender prefixes to the broker's address — using your gateway's configuration syntax.
 
 ## Authentication and BFF
 
