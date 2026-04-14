@@ -22,7 +22,9 @@ A document layout is a list of page dimensions. Each entry contains:
 | `dpi` | int | Resolution in dots per inch |
 | `pageLayers` | list | Optional layer names for documents that support layers (PDF, AutoCAD) |
 
+:::info
 Pages are indexed from 0.
+:::
 
 ## REST endpoint
 

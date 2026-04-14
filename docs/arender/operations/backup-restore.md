@@ -224,5 +224,4 @@ The rendition cache rebuilds automatically on first document access. No separate
 ## Related pages
 
 - [Docker Compose](../installation/docker-compose.md)
-- [Kubernetes Helm](../installation/kubernetes-helm.md)
 - [Monitoring and observability](./monitoring.md)

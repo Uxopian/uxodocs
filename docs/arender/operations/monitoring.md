@@ -482,5 +482,4 @@ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.volu
 
 - [Rendition properties](../reference/rendition-properties.md)
 - [System architecture](../overview/architecture.md)
-- [Kubernetes Helm](../installation/kubernetes-helm.md)
 - [Docker Compose](../installation/docker-compose.md)

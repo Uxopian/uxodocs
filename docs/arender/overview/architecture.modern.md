@@ -333,5 +333,4 @@ Hazelcast discovery uses Kubernetes service DNS in Helm deployments and multicas
 ## Next steps
 
 - [Docker Compose](../installation/docker-compose.md)
-- [Kubernetes Helm](../installation/kubernetes-helm.md)
 - [Monitoring and observability](../operations/monitoring.md)

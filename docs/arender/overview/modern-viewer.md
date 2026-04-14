@@ -27,7 +27,6 @@ The ARender Modern Viewer is a React-based document viewer distributed as an npm
 | Redaction | Coming soon |
 | Bookmarks creation / deletion | Coming soon |
 | Multi-view (horizontal split) | Coming soon |
-
 | Download as PDF with annotations | Coming soon |
 | Print with annotations | Coming soon |
 
@@ -47,7 +46,7 @@ graph LR
 
 - **Host application** — your web application, built with any technology
 - **React UI** — the `<arender-element>` Web Component, bundled into your app via npm
-- **Reverse proxy / BFF** — sits between the viewer and the broker. At minimum, a reverse proxy (Nginx) routes API calls and solves CORS. When using connector providers, it also injects the `X-Provider-ID` header. When OAuth2 is enabled on the rendition backend, a full BFF handles token management on behalf of the viewer. If your environment already has a BFF or API gateway, you can reuse it.
+- **Reverse proxy / Backend For Frontend (BFF)** — sits between the viewer and the broker. At minimum, a reverse proxy (Nginx) routes API calls and solves CORS. When using connector providers, it also injects the `X-Provider-ID` header. When OAuth2 is enabled on the rendition backend, a full BFF handles token management on behalf of the viewer. If your environment already has a BFF or API gateway, you can reuse it.
 - **Document Service Broker** — the ARender backend that orchestrates rendition (conversion, rendering, text extraction)
 - **Provider** — an optional microservice that loads documents from a repository (Alfresco, FileNet, or a custom source)
 - **Document Repository** — the system where your documents are stored
@@ -71,7 +70,6 @@ If your host application supplies documents directly (for example, by uploading 
 
 - [Getting started](../quickstart/getting-started.md) — install, embed, and open your first document
 - [Web Component](../reference/web-component.md) — HTML attributes, JavaScript API, styling
-- [Framework wrappers](../reference/framework-wrappers.md) — React, Angular, Vue, Svelte integration
 - [Configuration](../installation/configuration.md) — CORS setup, reverse proxy, backend connection
 - [Connector providers](../guides/integration/connector-providers.md) — load documents from Alfresco, FileNet, or custom repositories
 - [Migrating from the Classic viewer](../guides/upgrade/migration-from-gwt.md) — concept mapping and checklist
