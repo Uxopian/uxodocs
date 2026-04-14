@@ -88,10 +88,6 @@ volumes:
 The `arender-tmp` volume must be accessible by all backend services. Documents are stored on this volume during processing. See [System architecture](../overview/architecture.md#shared-volume-constraints) for details.
 :::
 
-:::tip Coming from Getting Started?
-Update your Vite proxy target from the demo URL to `http://localhost:8761` to connect to this backend.
-:::
-
 ## Step 2 — Set up the reverse proxy
 
 The React viewer runs in the browser and calls the ARender broker's REST API. Since they run on different ports, browsers block these requests as cross-origin (CORS). A reverse proxy makes the three ARender API routes appear same-origin to the browser.
@@ -150,6 +146,8 @@ services:
 ```
 
 If you configured a dev proxy in [Getting Started](../quickstart/getting-started.md), remove it from your bundler config — Nginx now handles routing.
+
+Once Nginx is running, open your app at `http://localhost` — not `http://localhost:5173`. The viewer uses relative API paths, so if you open Vite directly the requests go to Vite instead of Nginx and never reach the broker.
 
 If your app uses Vite, also add `allowedHosts` so that Nginx can reach the dev server:
 

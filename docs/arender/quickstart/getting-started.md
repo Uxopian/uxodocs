@@ -58,11 +58,14 @@ npm install arender-ui --registry https://npm.cloudsmith.io/uxopian/release/
 
 ## Step 3 — Configure the dev server proxy
 
-The viewer needs to reach the rendition backend. In development, Vite's built-in proxy handles this automatically — no external reverse proxy needed.
+The viewer needs to reach the rendition backend. In development, your dev server's built-in proxy handles this — no external reverse proxy needed.
 
 :::note
 Uxopian provides a shared demo rendition backend at `https://rendition.arender.2026.uxopian.com` — available to all, no credentials or installation required. This lets you test the viewer right away. Deploying your own backend is covered in the [Installation](../installation/docker-compose.md) section.
 :::
+
+<Tabs>
+<TabItem value="vite" label="Vite (React / Vue / Svelte)">
 
 Add the following proxy configuration to `vite.config.ts`:
 
@@ -91,8 +94,39 @@ export default defineConfig({
 })
 ```
 
+</TabItem>
+<TabItem value="angular" label="Angular CLI">
+
+Create a `proxy.conf.json` file at the root of your project:
+
+```json title="proxy.conf.json"
+{
+  "/documents":          { "target": "https://rendition.arender.2026.uxopian.com", "changeOrigin": true },
+  "/registry/documents": { "target": "https://rendition.arender.2026.uxopian.com", "changeOrigin": true },
+  "/annotation":         { "target": "https://rendition.arender.2026.uxopian.com", "changeOrigin": true }
+}
+```
+
+Then reference it in `angular.json` under `serve.options`:
+
+```json title="angular.json"
+"serve": {
+  "options": {
+    "proxyConfig": "proxy.conf.json"
+  },
+  ...
+}
+```
+
+Restart `ng serve` — the proxy is active immediately.
+
+</TabItem>
+</Tabs>
+
 :::tip
-To connect to your own backend instead of the demo, change each `target` to your backend URL (e.g. `http://localhost:8761` for Docker Compose). In production, replace the Vite proxy with a reverse proxy (Nginx, Ingress) or a BFF. See [Docker Compose](../installation/docker-compose.md) or [Kubernetes](../installation/kubernetes-helm.md) for deployment guides.
+To connect to your own backend instead of the demo, change each `target` to your backend URL (e.g. `http://localhost:8761` for Docker Compose). In production, replace the dev proxy with a reverse proxy (Nginx, Ingress) or a BFF. See [Docker Compose](../installation/docker-compose.md) or [Kubernetes](../installation/kubernetes-helm.md) for deployment guides.
+
+For other frameworks (Next.js, Nuxt, CRA, webpack…), configure your dev server proxy to forward `/documents`, `/registry/documents`, and `/annotation` to the rendition backend. Refer to your framework's documentation.
 :::
 
 ## Step 4 — Embed the viewer
@@ -105,7 +139,7 @@ The table below lists the attributes you can set directly on the element:
 
 | Attribute | Required | Description |
 |-----------|----------|-------------|
-| `rendition` | Yes | URL of the ARender rendition backend. Use `/` when proxied (see Step 3). |
+| `rendition` | Yes | URL of the ARender rendition backend. Use `/` when proxied with Vite, or `http://localhost:4200/` with Angular CLI (see Step 3). |
 | `url` | No | URL of the document to open on startup. |
 | `uuid` | No | ID of the document to open on startup (alternative to `url`). |
 
@@ -218,7 +252,7 @@ import { Component, AfterViewInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <arender-element
-      rendition="/"
+      rendition="http://localhost:4200/"
       url="https://www.uxopian.com/hubfs/PDFReference15_v5.pdf"
       style="display: block; width: 100%; height: 100vh"
     ></arender-element>
@@ -230,6 +264,10 @@ export class AppComponent implements AfterViewInit {
   }
 }
 ```
+
+:::note
+Angular CLI requires an absolute URL for `rendition` — a relative `/` is not resolved correctly by the dev server. In production, replace `http://localhost:4200/` with your actual backend URL.
+:::
 
 </TabItem>
 <TabItem value="html" label="HTML">
@@ -276,12 +314,11 @@ Vite will print a local URL — usually `http://localhost:5173`. Open it in your
 If you use a different package manager, the equivalent command is:
 
 | Package manager | Command |
-|-----------------|---------|
 | yarn | `yarn dev` |
 | pnpm | `pnpm dev` |
 | bun | `bun dev` |
 
-If your project uses a different framework or bundler (Create React App, Angular CLI, etc.), use your usual start command (`npm start`, `ng serve`, etc.).
+For other frameworks, use your usual start command (e.g. `npm start` for CRA).
 
 :::tip
 If the viewer loads but no document appears, double-check the proxy configuration in Step 3 — the `/documents`, `/registry/documents`, and `/annotation` paths must all be proxied to the rendition backend.
@@ -413,7 +450,7 @@ import { Component, AfterViewInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
         <button (click)="changeDocument()">Change document</button>
       </div>
       <arender-element
-        rendition="/"
+        rendition="http://localhost:4200/"
         url="https://www.uxopian.com/hubfs/PDFReference15_v5.pdf"
         style="display: block; flex: 1"
       ></arender-element>
