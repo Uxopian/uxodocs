@@ -11,7 +11,7 @@ content_hash: ac1fbc17a230905cd25267ebf15f03815e57c11fb4b9b33c6f566abc4c7f9582
 
 # Advanced configuration
 
-This page covers proxy setup, OAuth2 authentication, and BFF configuration. Proxy setup is required for all deployments — local development and production alike. OAuth2 and BFF topics apply after completing a [Docker Compose](./docker-compose.md) or [Kubernetes Helm](./kubernetes-helm.md) installation.
+This page covers proxy setup, OAuth2 authentication, and BFF configuration. Proxy setup is required for all deployments — local development and production alike. OAuth2 and BFF topics apply after completing a [Docker Compose](./docker-compose.md) installation.
 
 Backend rendition configuration (broker, converter, renderer) is documented in [Configuration system](./configuration-system.md) and [Environment variables](./environment-variables.md).
 
@@ -35,7 +35,6 @@ Choose the solution that matches your context:
 |---------|----------|
 | Local development with Vite | [Vite dev proxy](#vite) |
 | Docker Compose deployment | [Nginx in Docker Compose](./docker-compose.md#step-2--set-up-the-reverse-proxy) |
-| Kubernetes deployment | [Ingress](./kubernetes-helm.md#step-3--configure-ingress) |
 | OAuth2 enabled on the backend | [BFF](#authentication-and-bff) |
 | Existing reverse proxy or load balancer | [Same origin via existing infrastructure](#same-origin-via-existing-infrastructure) |
 | Non-dockerized production app | [Nginx on the host server](#nginx-on-the-host-server) |

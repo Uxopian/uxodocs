@@ -79,7 +79,6 @@
     "/installation/docker-compose",
     "/installation/environment-variables",
     "/installation",
-    "/installation/kubernetes-helm",
     "/operations/backup-restore",
     "/operations/monitoring",
     "/operations/troubleshooting",

@@ -428,4 +428,3 @@ Additional control properties:
 
 - [Environment variables](../installation/environment-variables.md)
 - [Docker Compose](../installation/docker-compose.md)
-- [Kubernetes Helm](../installation/kubernetes-helm.md)

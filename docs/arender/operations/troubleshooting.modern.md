@@ -419,4 +419,3 @@ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.volu
 
 - [Monitoring and observability](./monitoring.md)
 - [Docker Compose](../installation/docker-compose.md)
-- [Kubernetes Helm](../installation/kubernetes-helm.md)

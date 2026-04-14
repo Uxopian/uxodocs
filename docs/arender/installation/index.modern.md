@@ -16,14 +16,7 @@ These guides assume the React viewer is already embedded in your application. If
 
 ## Choose your deployment path
 
-| | [Docker Compose](./docker-compose.md) | [Kubernetes Helm](./kubernetes-helm.md) |
-|--|--|--|
-| **Best for** | Single-server deployments, simpler setups | Teams already running Kubernetes; need auto-scaling or high availability |
-| **Prerequisites** | Docker and Docker Compose | Kubernetes 1.24+, Helm 3.x |
-| **Reverse proxy** | Nginx | Ingress controller |
-| **Scaling** | Manual | Autoscaling supported |
-
-Both paths result in the same running ARender stack. Choose based on your existing infrastructure.
+The [Docker Compose](./docker-compose.md) guide covers single-server deployments with Nginx as a reverse proxy.
 
 ## What each guide covers
 
@@ -39,4 +32,3 @@ For OAuth2 and BFF authentication, see [Advanced configuration](./configuration.
 ## Next steps
 
 - [Docker Compose](./docker-compose.md) — single-server deployment with Nginx
-- [Kubernetes Helm](./kubernetes-helm.md) — Kubernetes deployment with Ingress and autoscaling

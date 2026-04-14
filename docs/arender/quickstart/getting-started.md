@@ -95,7 +95,7 @@ export default defineConfig({
 ```
 
 </TabItem>
-<TabItem value="angular" label="Angular CLI">
+<TabItem value="angular" label="Angular">
 
 Create a `proxy.conf.json` file at the root of your project:
 
@@ -124,7 +124,7 @@ Restart `ng serve` — the proxy is active immediately.
 </Tabs>
 
 :::tip
-To connect to your own backend instead of the demo, change each `target` to your backend URL (e.g. `http://localhost:8761` for Docker Compose). In production, replace the dev proxy with a reverse proxy (Nginx, Ingress) or a BFF. See [Docker Compose](../installation/docker-compose.md) or [Kubernetes](../installation/kubernetes-helm.md) for deployment guides.
+To connect to your own backend instead of the demo, change each `target` to your backend URL (e.g. `http://localhost:8761` for Docker Compose). In production, replace the dev proxy with a reverse proxy (Nginx, Ingress) or a BFF. See [Docker Compose](../installation/docker-compose.md) for deployment guides.
 
 For other frameworks (Next.js, Nuxt, CRA, webpack…), configure your dev server proxy to forward `/documents`, `/registry/documents`, and `/annotation` to the rendition backend. Refer to your framework's documentation.
 :::
@@ -139,7 +139,7 @@ The table below lists the attributes you can set directly on the element:
 
 | Attribute | Required | Description |
 |-----------|----------|-------------|
-| `rendition` | Yes | URL of the ARender rendition backend. Use `/` when proxied with Vite, or `http://localhost:4200/` with Angular CLI (see Step 3). |
+| `rendition` | Yes | URL of the ARender rendition backend. Use `/` when proxied with Vite, or `http://localhost:4200/` with Angular (see Step 3). |
 | `url` | No | URL of the document to open on startup. |
 | `uuid` | No | ID of the document to open on startup (alternative to `url`). |
 
@@ -266,7 +266,7 @@ export class AppComponent implements AfterViewInit {
 ```
 
 :::note
-Angular CLI requires an absolute URL for `rendition` — a relative `/` is not resolved correctly by the dev server. In production, replace `http://localhost:4200/` with your actual backend URL.
+Angular requires an absolute URL for `rendition` — a relative `/` is not resolved correctly by the dev server. In production, replace `http://localhost:4200/` with your actual backend URL.
 :::
 
 </TabItem>
@@ -507,7 +507,7 @@ These public URLs can be used for testing (the demo rendition already authorizes
 
 ## Next steps
 
-- [Docker Compose](../installation/docker-compose.md) or [Kubernetes Helm](../installation/kubernetes-helm.md) — deploy the rendition backend on your own infrastructure
+- [Docker Compose](../installation/docker-compose.md) — deploy the rendition backend on your own infrastructure
 - [Configuration](../installation/configuration.md) — reverse proxy, authentication, and BFF
 - [Feature availability](../overview/modern-viewer.md#feature-availability) — what's available now and what's coming
 - [Web Component](../reference/web-component.md) — HTML attributes, JavaScript API, styling

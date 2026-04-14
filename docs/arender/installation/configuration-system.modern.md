@@ -118,4 +118,3 @@ For simple key-value overrides, use environment variables instead. See [Environm
 
 - [Environment variables](./environment-variables.md): naming conventions and per-service prefixes
 - [Docker Compose](./docker-compose.md): container-based deployment
-- [Kubernetes Helm](./kubernetes-helm.md): Helm chart configuration

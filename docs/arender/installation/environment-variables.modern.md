@@ -267,4 +267,3 @@ This is useful for multi-line or complex properties that are awkward to express 
 
 - [Rendition properties](../reference/rendition-properties.md)
 - [Docker Compose](./docker-compose.md)
-- [Kubernetes Helm](./kubernetes-helm.md)
