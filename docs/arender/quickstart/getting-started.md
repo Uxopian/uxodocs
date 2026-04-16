@@ -314,6 +314,7 @@ Vite will print a local URL — usually `http://localhost:5173`. Open it in your
 If you use a different package manager, the equivalent command is:
 
 | Package manager | Command |
+|-----------------|-----------|
 | yarn | `yarn dev` |
 | pnpm | `pnpm dev` |
 | bun | `bun dev` |
