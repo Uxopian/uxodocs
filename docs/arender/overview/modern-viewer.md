@@ -14,14 +14,12 @@ The ARender Modern Viewer is a React-based document viewer distributed as an npm
 | Feature | Status |
 |---------|--------|
 | Document viewing (all formats including AutoCAD) | Available |
-| Annotations (zone highlight, freetext) | Available |
-| Annotation auto-save | Available |
 | Full-text search (improved performance) | Available |
 | Download (native format and PDF) | Available |
 | Print | Available |
 | Internationalization (15 languages) | Available |
-| Web Component and framework wrappers (React, Angular, Vue, Svelte) | Available |
-| Full annotation types (text highlight, rectangle, stamp, arrow, polyline, ink, sticky note...) | Coming soon |
+| Web Component | Available |
+| Full annotation types (zone highlight, freetext, text highlight, rectangle, stamp, arrow, ink, sticky note...) | Coming soon |
 | Document comparison (text and image) | Coming soon |
 | Split, merge, page manipulation (document builder) | Coming soon |
 | Redaction | Coming soon |
