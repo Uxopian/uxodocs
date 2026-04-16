@@ -636,7 +636,7 @@ llm:
           apiSecret: ${MY_PROVIDER_API_KEY:}
           endpointUrl: https://api.my-provider.com/v1
           temperature: 0.7
-          timeout: 60s
+          timeout: 60
           maxRetries: 3
           extras:
             customParam: some-value

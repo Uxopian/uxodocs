@@ -35,7 +35,7 @@ llm:
         globalConf:
           apiSecret: ${OPENAI_API_KEY:}
           temperature: 1
-          timeout: 60s
+          timeout: 60
           maxRetries: 3
         llModelConfs:
           - llmModelConfName: gpt5
@@ -59,7 +59,7 @@ llm:
         globalConf:
           apiSecret: ${OPENAI_API_KEY:}
           temperature: 1
-          timeout: 60s
+          timeout: 60
           maxRetries: 3
         llModelConfs:
           - llmModelConfName: gpt5
@@ -74,7 +74,7 @@ llm:
           endpointUrl: https://api.anthropic.com/v1/
           temperature: 0.7
           maxRetries: 3
-          timeout: 60s
+          timeout: 60
         llModelConfs:
           - llmModelConfName: claude-sonnet
             modelName: claude-sonnet-4-20250514
@@ -94,7 +94,7 @@ Azure requires an endpoint URL. The `modelName` field is used as the deployment 
     endpointUrl: https://your-resource.openai.azure.com/
     temperature: 0.7
     maxRetries: 3
-    timeout: 60s
+    timeout: 60
   llModelConfs:
     - llmModelConfName: azure-gpt4o
       modelName: your-deployment-name
@@ -110,7 +110,7 @@ Bedrock uses access/secret key pairs rather than an API key:
 - provider: bedrock
   defaultLlmModelConfName: bedrock-claude
   globalConf:
-    timeout: 60s
+    timeout: 60
     maxRetries: 3
     extras:
       accessKey: ${BEDROCK_AWS_ACCESS_KEY:}
@@ -134,7 +134,7 @@ Ollama requires only an endpoint URL:
     endpointUrl: http://localhost:11434
     temperature: 0.7
     maxRetries: 3
-    timeout: 60s
+    timeout: 60
   llModelConfs:
     - llmModelConfName: llama3
       modelName: llama3
