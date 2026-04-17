@@ -144,6 +144,10 @@ ARender v2026.0.0 introduces a new **REST-based provider model** as an alternati
 * **Web UI**: The WAR-based deployment is no longer available. ARender UI must be deployed as a Spring Boot application. See the <DocLink version="v2026.0.0" product="arender" to="guides/upgrade/2023-to-2026">Web UI migration guide</DocLink>.
 * **Helm Charts**: Updated to use PDFOwl Docker images and Spring Boot-based HMI images.
 
+### javax.* Compatibility
+
+Despite the Spring Boot 4 migration (which moves from `javax.*` to `jakarta.*` namespaces), **existing JAR-based connectors using `javax.*` imports do not require any changes**. A `javax.*` → `jakarta.*` bridge is included, so connectors continue to work without modification.
+
 
 
 ## 💻 API
