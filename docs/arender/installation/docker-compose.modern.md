@@ -200,7 +200,7 @@ docker-compose ps
 
 Then open [http://localhost:8761/health/records](http://localhost:8761/health/records) — all services should show as UP.
 
-## Optional — Connector providers
+## Optional — Providers
 
 To load documents from an external repository (Alfresco, FileNet), add a provider service and register it on the broker:
 

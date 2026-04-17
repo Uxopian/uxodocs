@@ -512,4 +512,4 @@ These public URLs can be used for testing (the demo rendition already authorizes
 - [Configuration](../installation/configuration.md) — reverse proxy, authentication, and BFF
 - [Feature availability](../overview/modern-viewer.md#feature-availability) — what's available now and what's coming
 - [Web Component](../reference/web-component.md) — HTML attributes, JavaScript API, styling
-- [Connector providers](../guides/integration/providers.md) — load documents from Alfresco, FileNet, or custom repositories
+- [Providers](../guides/integration/providers.md) — load documents from Alfresco, FileNet, or custom repositories

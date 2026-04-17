@@ -175,7 +175,7 @@ Providers can also handle annotation storage. The broker proxies annotation CRUD
 
 If your provider does not implement annotation endpoints, annotations fall back to the broker's default storage (XFDF files or JDBC, depending on your backend configuration).
 
-For the full broker-side endpoint specification, see [Broker API — Provider operations](../../reference/rest-api/broker-api.md#connector-operations).
+For the full broker-side endpoint specification, see [Broker API — Provider operations](../../reference/rest-api/broker-api.md#provider-operations).
 
 ### Annotation flow
 

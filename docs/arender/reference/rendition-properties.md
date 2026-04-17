@@ -129,17 +129,17 @@ These properties control memory allocation and JVM arguments for each sub-proces
 |----------|---------|-------------|
 | `arender.external.annotation.accessor.factory.bean.name` | `annotationAccessorFactory` | Bean name for the external annotation accessor factory |
 
-### Connector registry
+### Provider registry
 
-These properties configure REST connector providers used by the Modern Viewer.
+These properties configure REST providers used by the Modern Viewer.
 
 | Property | Default | Description |
 |----------|---------|-------------|
-| `registry.defaultProvider` | — | Default provider name when `X-Provider-ID` header is absent |
-| `registry.providers.<name>.baseUrl` | — | Base URL of the provider microservice |
-| `registry.providers.<name>.whitelistedParams` | — | Comma-separated parameter names used for document ID generation and request filtering |
+| `registry.default-provider` | — | Default provider name when `X-Provider-ID` header is absent |
+| `registry.providers.<name>.base-url` | — | Base URL of the provider microservice |
+| `registry.providers.<name>.whitelisted-params` | — | Comma-separated parameter names used for document ID generation and request filtering |
 
-The `whitelistedParams` property serves two purposes:
+The `whitelisted-params` property serves two purposes:
 
 1. **Document ID generation** — Only whitelisted parameters are used to generate the internal `DocumentId`. Two requests with the same whitelisted parameter values are treated as the same document (cache hit).
 2. **Security filtering** — Only whitelisted parameters are forwarded to the provider. Other parameters from the original request are filtered out.

@@ -287,18 +287,18 @@ The broker uses its own environment variables to register providers:
 
 | Environment variable | Description |
 |---|---|
-| `CONNECTOR_DEFAULT_REGISTRY` | Default provider name when no `X-Provider-ID` header is present |
-| `CONNECTOR_REGISTRIES_<NAME>_BASE_URL` | Base URL of the named provider |
-| `CONNECTOR_REGISTRIES_<NAME>_WHITELISTED_PARAMS` | Comma-separated parameter names forwarded to the provider |
+| `REGISTRY_DEFAULT_PROVIDER` | Default provider name when no `X-Provider-ID` header is present |
+| `REGISTRY_PROVIDERS_<NAME>_BASE_URL` | Base URL of the named provider |
+| `REGISTRY_PROVIDERS_<NAME>_WHITELISTED_PARAMS` | Comma-separated parameter names forwarded to the provider |
 
 **Example:**
 
 ```bash
-CONNECTOR_DEFAULT_REGISTRY=filenet
-CONNECTOR_REGISTRIES_FILENET_BASE_URL=http://filenet-provider:8787
-CONNECTOR_REGISTRIES_FILENET_WHITELISTED_PARAMS=objectStoreName,objectStoreId,objectType,id,vsId,contentElement
-CONNECTOR_REGISTRIES_ALFRESCO_BASE_URL=http://alfresco-provider:8788
-CONNECTOR_REGISTRIES_ALFRESCO_WHITELISTED_PARAMS=nodeRef,alf_ticket,user,versionLabel,docs,folder
+REGISTRY_DEFAULT_PROVIDER=filenet
+REGISTRY_PROVIDERS_FILENET_BASE_URL=http://filenet-provider:8787
+REGISTRY_PROVIDERS_FILENET_WHITELISTED_PARAMS=objectStoreName,objectStoreId,objectType,id,vsId,contentElement
+REGISTRY_PROVIDERS_ALFRESCO_BASE_URL=http://alfresco-provider:8788
+REGISTRY_PROVIDERS_ALFRESCO_WHITELISTED_PARAMS=nodeRef,alf_ticket,user,versionLabel,docs,folder
 ```
 
 ---

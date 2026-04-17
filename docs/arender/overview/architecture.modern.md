@@ -198,7 +198,7 @@ Providers also handle annotation storage when the repository supports it. The br
 
 Providers are optional — if your application uploads documents directly to the broker API, no provider is needed.
 
-For deployment details, see [Providers](../guides/integration/providers.md). For the full API contract, see [Provider API](../reference/rest-api/provider-api.md). For broker-side configuration, see [Rendition properties — Provider registry](../reference/rendition-properties.md#connector-registry).
+For deployment details, see [Providers](../guides/integration/providers.md). For the full API contract, see [Provider API](../reference/rest-api/provider-api.md). For broker-side configuration, see [Rendition properties — Provider registry](../reference/rendition-properties.md#provider-registry).
 
 ---
 

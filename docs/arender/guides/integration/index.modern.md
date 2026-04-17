@@ -12,7 +12,7 @@ content_hash: 3703a62a120447881e5fdab06478247df631746b313832252a6c317a0da0d1bc
 
 ARender integrates with document management systems through standalone REST microservices called **providers**. Each provider runs as its own container and exposes a REST API. See [Providers](./providers.md) for details.
 
-For the conceptual model, see [Connectors concept](../../concepts/connectors.md).
+For the conceptual model, see [Providers concept](../../concepts/connectors.md).
 
 ## ARender-maintained integrations
 

@@ -2198,9 +2198,9 @@ curl -X POST http://localhost:8761/accessor/load \
 
 ---
 
-## Connector operations
+## Provider operations
 
-These endpoints are used by the React UI to open documents through REST connector providers and manage annotations on provider-loaded documents. For the provider-side API contract, see [Provider API](./provider-api.md).
+These endpoints are used by the React UI to open documents through REST providers and manage annotations on provider-loaded documents. For the provider-side API contract, see [Provider API](./provider-api.md).
 
 ---
 
@@ -2208,16 +2208,16 @@ These endpoints are used by the React UI to open documents through REST connecto
 
 `POST` `/registry/documents`
 
-Opens a document through a registered REST connector provider. The broker resolves the provider from the `X-Provider-ID` header, forwards the request parameters to the provider's `GET /documents` endpoint, caches the result, and returns a `DocumentId`.
+Opens a document through a registered REST provider. The broker resolves the provider from the `X-Provider-ID` header, forwards the request parameters to the provider's `GET /documents` endpoint, caches the result, and returns a `DocumentId`.
 
 #### Parameters
 
 | Name | In | Type | Required | Description |
 |------|----|------|----------|-------------|
-| `X-Provider-ID` | header | string | No | Provider name (e.g., `filenet`, `alfresco`). If omitted, the broker uses the `connector.defaultRegistry` configuration value |
-| `Content-Type` | header | string | Yes | Must be `application/x-www-form-urlencoded` |
+| `X-Provider-ID` | header | string | No | Provider name (e.g., `filenet`, `alfresco`). If omitted, the broker uses the `registry.default-provider` configuration value |
+| `Content-Type` | header | string | Yes | Must be `application/octet-stream` (or the actual document mime type) or `application/json` for composite document |
 
-**Request body:** Form-encoded parameters specific to the connector (e.g., `id=DOC123&objectStoreName=OS1` for FileNet).
+**Request body:** Form-encoded parameters specific to the provider (e.g., `id=DOC123&objectStoreName=OS1` for FileNet).
 
 #### Response
 
@@ -2235,7 +2235,7 @@ Returns a `DocumentId` object.
 |--------|-------------|
 | 200 | Document opened |
 | 400 | Bad request (missing or invalid parameters) |
-| 403 | Access denied by the connector provider |
+| 403 | Access denied by the provider |
 | 404 | Document not found in the provider |
 | 500 | Internal server error |
 | 502 | Provider unreachable |
@@ -2258,7 +2258,7 @@ curl -X POST "http://broker:8761/registry/documents" \
 
 ---
 
-### List annotation IDs (connector)
+### List annotation IDs
 
 `GET` `/documents/{documentId}/annotations/ids`
 
@@ -2286,7 +2286,7 @@ JSON array of annotation ID objects.
 | Status | Description |
 |--------|-------------|
 | 200 | Annotation IDs returned |
-| 403 | Access denied by the connector provider |
+| 403 | Access denied by the provider |
 | 404 | Document not found |
 | 500 | Internal server error |
 | 502 | Provider unreachable |
@@ -2308,7 +2308,7 @@ curl http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGI
 
 ---
 
-### Get annotation (connector)
+### Get annotation
 
 `GET` `/documents/{documentId}/annotations/{annotationId}`
 
@@ -2339,7 +2339,7 @@ Annotation object.
 | Status | Description |
 |--------|-------------|
 | 200 | Annotation returned |
-| 403 | Access denied by the connector provider |
+| 403 | Access denied by the provider |
 | 404 | Document or annotation not found |
 | 500 | Internal server error |
 | 502 | Provider unreachable |
@@ -2363,7 +2363,7 @@ curl http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGI
 
 ---
 
-### Create annotation (connector)
+### Create annotation
 
 `POST` `/documents/{documentId}/annotations`
 
@@ -2396,7 +2396,7 @@ The created annotation object.
 |--------|-------------|
 | 200 | Annotation created |
 | 400 | Bad request (invalid annotation data) |
-| 403 | Access denied by the connector provider |
+| 403 | Access denied by the provider |
 | 404 | Document not found |
 | 500 | Internal server error |
 | 502 | Provider unreachable |
@@ -2422,7 +2422,7 @@ curl -X POST http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWY
 
 ---
 
-### Update annotation (connector)
+### Update annotation
 
 `PUT` `/documents/{documentId}/annotations/{annotationId}`
 
@@ -2456,7 +2456,7 @@ The updated annotation object.
 |--------|-------------|
 | 200 | Annotation updated |
 | 400 | Bad request (invalid annotation data) |
-| 403 | Access denied by the connector provider |
+| 403 | Access denied by the provider |
 | 404 | Document or annotation not found |
 | 500 | Internal server error |
 | 502 | Provider unreachable |
@@ -2482,7 +2482,7 @@ curl -X PUT http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYt
 
 ---
 
-### Delete annotation (connector)
+### Delete annotation
 
 `DELETE` `/documents/{documentId}/annotations/{annotationId}`
 
@@ -2504,7 +2504,7 @@ Returns `200 OK` with no body.
 | Status | Description |
 |--------|-------------|
 | 200 | Annotation deleted |
-| 403 | Access denied by the connector provider |
+| 403 | Access denied by the provider |
 | 404 | Document or annotation not found |
 | 500 | Internal server error |
 | 502 | Provider unreachable |
