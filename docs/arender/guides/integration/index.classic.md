@@ -14,6 +14,15 @@ ARender integrates with document management systems through repository connector
 
 For the conceptual model, see [Connectors concept](../../concepts/connectors.md).
 
+## ARender-maintained integrations
+
+| ECM | Guide |
+|-----|-------|
+| Alfresco Content Services | [Alfresco integration](./alfresco.md) |
+| IBM FileNet P8 | [IBM FileNet integration](./filenet.md) |
+| IBM Content Navigator | [IBM Content Navigator integration](./ibm-content-navigator.mdx) |
+| Any (custom connector) | [Custom connector development](./custom-connector.md) |
+
 ## Partner-maintained integrations
 
 These integrations are developed and supported by partners. Contact the partner for documentation and support.

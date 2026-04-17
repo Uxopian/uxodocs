@@ -1,5 +1,6 @@
 ---
 title: What is ARender
+slug: /overview/
 last_update:
   date: '2026-03-24T08:18:54.600Z'
   author: CI/CD Bot

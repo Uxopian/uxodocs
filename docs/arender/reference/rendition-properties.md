@@ -8,8 +8,6 @@ sidebar_position: 6
 content_hash: 6541c23f7ee92868fc087d6655333546f714cf4738ac40a4f4b44814b8f00c44
 ---
 
-# Rendition configuration
-
 All ARender rendition services are Spring Boot applications. Properties can be set in `application.properties`, `application.yml`, or overridden via environment variables. See [Environment variables](../installation/environment-variables.md) for the naming convention.
 
 Properties shown here are the defaults from the source. Omitting a property leaves the default in effect.
