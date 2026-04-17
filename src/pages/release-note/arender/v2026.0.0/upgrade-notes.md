@@ -100,17 +100,17 @@ This is a **major LTS release** that modernizes the entire ARender technical sta
 **Important:** Hazelcast 4.x and 5.x instances are not compatible and cannot coexist in the same cluster. Running two instances of `arender-document-service-broker` with different Hazelcast versions will cause conflicts and prevent the instances from starting correctly. You must either **stop the entire ARender stack** before upgrading and restart it, or perform a **blue-green deployment** ensuring that the blue and green `arender-document-service-broker` instances do not communicate with each other.
 :::
 * **WAR packaging removed**: ARender UI is now exclusively packaged as a Spring Boot application. Deployment to external application servers (Tomcat WAR) is no longer supported.
-* **PDFOwl as default renderer**: The default PDF renderer has changed from JNIPdfEngine to PDFOwl. Using version 1.14-26
+* **PDFOwl as default renderer**: The default PDF renderer has changed from JNIPdfEngine to PDFOwl. Using version 1.24-26
 
 ### Breaking Changes
 
 * **WAR and EAR packaging removed**
 ARender UI is now exclusively a Spring Boot application. WAR and EAR artifacts are no longer produced. If you currently deploy ARender inside an application server (Tomcat, WebSphere), you must switch to running the Spring Boot JAR directly with `java -jar`.
 * **Executable JAR no longer supported**: With Spring Boot 4, JARs must be run using `java -jar <jar-name>.jar` instead of executing the JAR directly.
-* **Third-Party tools upgraded**: LibreOffice from 7.x to 26.x and FFmpeg from 4.x to 8.x.
+* **Third-Party tools upgraded (Docker)**: LibreOffice from 7.x to 26.x and FFmpeg from 4.x to 8.x.
 * **WAR deployment removed**: ARender UI can no longer be deployed as a WAR file to an external application server. It must be deployed as a standalone Spring Boot application.
 
-### Third-Party Tool Upgrades
+### Third-Party Tool Upgrades (Docker)
 
 * **LibreOffice**: Version **26.2.1.2**.
 * **FFmpeg**: Version **8.0.1**.
@@ -142,7 +142,7 @@ ARender v2026.0.0 introduces a new **REST-based provider model** as an alternati
 ### Deployment Changes
 
 * **Web UI**: The WAR-based deployment is no longer available. ARender UI must be deployed as a Spring Boot application. See the <DocLink version="v2026.0.0" product="arender" to="guides/upgrade/2023-to-2026">Web UI migration guide</DocLink>.
-* **Helm Charts**: Updated to use PDFOwl Docker images and Spring Boot-based HMI images. Skaffold has been removed.
+* **Helm Charts**: Updated to use PDFOwl Docker images and Spring Boot-based HMI images.
 
 
 
@@ -152,4 +152,4 @@ ARender v2026.0.0 introduces a new **REST-based provider model** as an alternati
 
 * **REST Provider API**: A new REST API contract allows integrators to build custom document provider as independent microservices. The API includes endpoints for document retrieval (`GET /documents`), and full annotation CRUD (`GET/POST/PUT/DELETE /annotations`). See the <DocLink version="v2026.0.0" product="arender-modern" to="guides/integration/connector-providers">Provider API reference</DocLink>.
 
-* **Rendition Provider API**: The Rendition Engine exposes new endpoints for the frontend to interact with REST providers, including `POST /registry/documents` for opening documents through a provider and annotation management endpoints with automatic position transformation for composite documents. See the <DocLink version="v2026.0.0" product="arender-modern" to="reference/rest-api/broker-api/#connector-operations">Rendition API reference</DocLink>.
+* **Rendition Provider API**: The Rendition Engine exposes new endpoints for the frontend to interact with REST providers: `POST /registry/documents` to open documents through a provider, and dedicated annotation management endpoints that apply automatic position transformation for composite documents. See the <DocLink version="v2026.0.0" product="arender-modern" to="reference/rest-api/broker-api/#connector-operations">Rendition API reference</DocLink>.
