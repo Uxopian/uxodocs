@@ -1,5 +1,5 @@
 ---
-viewer: modern
+viewer: horizon
 slug: /guides/integration/providers
 title: Providers
 last_update:
@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 # Overview
 
-The Modern Viewer loads documents from external repositories through **providers** — standalone REST microservices that run as their own Docker containers. Each provider communicates with the Document Service Broker over HTTP and handles document retrieval from a specific repository type.
+ARender Horizon loads documents from external repositories through **providers** — standalone REST microservices that run as their own Docker containers. Each provider communicates with the Document Service Broker over HTTP and handles document retrieval from a specific repository type.
 
 This decoupled model means providers have their own lifecycle, scaling, and release cadence — independent of the viewer and of each other.
 

@@ -131,7 +131,7 @@ These properties control memory allocation and JVM arguments for each sub-proces
 
 ### Provider registry
 
-These properties configure REST providers used by the Modern Viewer.
+These properties configure REST providers used by ARender Horizon.
 
 | Property | Default | Description |
 |----------|---------|-------------|

@@ -1,5 +1,5 @@
 ---
-viewer: modern
+viewer: horizon
 slug: /reference/web-component
 title: Web Component
 last_update:

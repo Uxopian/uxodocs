@@ -94,11 +94,11 @@ const config: Config = {
         [
             "@docusaurus/plugin-content-docs",
             {
-                id: "arender-modern",
-                path: ".generated/arender-modern",
-                routeBasePath: "docs/arender-modern",
+                id: "arender-horizon",
+                path: ".generated/arender-horizon",
+                routeBasePath: "docs/arender-horizon",
                 numberPrefixParser: false,
-                sidebarPath: require.resolve("./sidebars_arender_modern.ts"),
+                sidebarPath: require.resolve("./sidebars_arender_horizon.ts"),
                 lastVersion: "current",
                 versions: { current: { label: `v${arenderVersion}` } },
                 showLastUpdateTime: true,

@@ -170,7 +170,7 @@ ARender Horizon ships with a new REST-based connector architecture (named Provid
 
 This first release focuses on document viewing across all supported formats, with full-text search, download, and print.
 
-Annotations and additional features are coming fast — see the <DocLink version="v2026.0.0" product="arender-modern" to="overview/modern-viewer#feature-availability">feature availability table</DocLink> for the current status.
+Annotations and additional features are coming fast — see the <DocLink version="v2026.0.0" product="arender-horizon" to="overview/horizon#feature-availability">feature availability table</DocLink> for the current status.
 
 If you only use ARender Classic (GWT viewer) today, you can skip this section.
 
@@ -182,7 +182,7 @@ If you only use ARender Classic (GWT viewer) today, you can skip this section.
 <arender-element></arender-element>
 ```
 
-**Try it now → <DocLink version="v2026.0.0" product="arender-modern" to="quickstart/getting-started">Getting started guide</DocLink>**
+**Try it now → <DocLink version="v2026.0.0" product="arender-horizon" to="quickstart/getting-started">Getting started guide</DocLink>**
 
 ### REST connector architecture
 
@@ -199,7 +199,7 @@ Two providers are shipped out of the box: **FileNet** and **Alfresco**, packaged
 
 The service broker routes requests to the appropriate provider via the `X-Provider-ID` header. A `rendition-provider-api` module provides shared types for Java-based providers.
 
-See the <DocLink version="v2026.0.0" product="arender-modern" to="guides/integration/providers">Connector providers guide</DocLink> and <DocLink version="v2026.0.0" product="arender-modern" to="reference/rest-api/provider-api">Provider API reference</DocLink>.
+See the <DocLink version="v2026.0.0" product="arender-horizon" to="guides/integration/providers">Providers guide</DocLink> and <DocLink version="v2026.0.0" product="arender-horizon" to="reference/rest-api/provider-api">Provider API reference</DocLink>.
 
 :::tip Build a custom connector with AI
 Ask an AI assistant to scaffold your provider:

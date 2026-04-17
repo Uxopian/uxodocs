@@ -60,8 +60,8 @@ The viewer is a standalone Spring Boot application that serves a GWT-compiled Ja
 
 See [System architecture](./architecture.md) for details.
 
-:::tip Modern Viewer available
-A React-based version of the ARender Viewer is now available, designed for web-native integration. If you are starting a new project or evaluating ARender, see the [Modern Viewer documentation](/docs/arender-modern/overview/modern-viewer).
+:::tip ARender Horizon available
+A React-based version of the ARender Viewer is now available, designed for web-native integration. If you are starting a new project or evaluating ARender, see the [ARender Horizon documentation](/docs/arender-horizon/overview/horizon).
 :::
 
 ## Next steps

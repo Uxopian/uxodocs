@@ -1,7 +1,7 @@
 ---
-viewer: modern
-slug: /overview/modern-viewer
-title: Modern Viewer
+viewer: horizon
+slug: /overview/horizon
+title: ARender Horizon
 last_update:
   date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
@@ -9,9 +9,9 @@ sidebar_position: 0
 content_hash: e6d741014a428d54129afc04ca09d854f036f12aaa6996a2b7fff9daae7374ad
 ---
 
-# Modern Viewer
+# ARender Horizon
 
-The ARender Modern Viewer is a React-based document viewer distributed as an npm package (`arender-ui`). It registers an `<arender-element>` Web Component that you embed directly into your web application. No iframe, no standalone server needed — the viewer lives inside your page as a native HTML element.
+ARender Horizon is a React-based document viewer distributed as an npm package (`arender-ui`). It registers an `<arender-element>` Web Component that you embed directly into your web application. No iframe, no standalone server needed — the viewer lives inside your page as a native HTML element.
 
 ## Feature availability
 
@@ -34,7 +34,7 @@ The ARender Modern Viewer is a React-based document viewer distributed as an npm
 
 ## Architecture overview
 
-The Modern Viewer runs entirely in the browser as a Web Component embedded in your host application. It communicates with the ARender backend over REST.
+ARender Horizon runs entirely in the browser as a Web Component embedded in your host application. It communicates with the ARender backend over REST.
 
 ```mermaid
 graph LR
@@ -59,7 +59,7 @@ ARender does not yet ship a built-in BFF component — this is planned for an up
 
 ## Deployment model
 
-The Modern Viewer is an **npm package** that you install and bundle into your own application. There is no separate viewer server to deploy.
+ARender Horizon is an **npm package** that you install and bundle into your own application. There is no separate viewer server to deploy.
 
 The **backend** is a set of Docker containers:
 

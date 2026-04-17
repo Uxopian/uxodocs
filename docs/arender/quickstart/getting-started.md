@@ -1,5 +1,5 @@
 ---
-viewer: modern
+viewer: horizon
 slug: /quickstart/getting-started
 title: Getting started
 last_update:
@@ -510,6 +510,6 @@ These public URLs can be used for testing (the demo rendition already authorizes
 
 - [Docker Compose](../installation/docker-compose.md) — deploy the rendition backend on your own infrastructure
 - [Configuration](../installation/configuration.md) — reverse proxy, authentication, and BFF
-- [Feature availability](../overview/modern-viewer.md#feature-availability) — what's available now and what's coming
+- [Feature availability](../overview/horizon.md#feature-availability) — what's available now and what's coming
 - [Web Component](../reference/web-component.md) — HTML attributes, JavaScript API, styling
 - [Providers](../guides/integration/providers.md) — load documents from Alfresco, FileNet, or custom repositories

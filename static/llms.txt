@@ -9,7 +9,7 @@ ARender is typically integrated with ECM platforms (IBM FileNet, Alfresco, M-Fil
 - [Architecture overview](https://doc.uxopian.com/docs/arender/overview/architecture): System components, Rendition Engine, Eureka discovery, Hazelcast caching
 - [Docker Compose quickstart](https://doc.uxopian.com/docs/arender/quickstart/docker-compose): Run ARender Classic in Docker in 5 minutes
 - [Spring Boot installation](https://doc.uxopian.com/docs/arender/installation/spring-boot): Standalone deployment without Docker
-- [ARender Horizon getting started](https://doc.uxopian.com/docs/arender-modern/quickstart/getting-started): Run ARender Horizon with React
+- [ARender Horizon getting started](https://doc.uxopian.com/docs/arender-horizon/quickstart/getting-started): Run ARender Horizon with React
 
 ## Configuration
 
@@ -24,8 +24,8 @@ ARender is typically integrated with ECM platforms (IBM FileNet, Alfresco, M-Fil
 - [Annotation types reference](https://doc.uxopian.com/docs/arender/reference/annotation-types): All annotation types and their properties
 - [Broker API reference](https://doc.uxopian.com/docs/arender/reference/rest-api/broker-api): REST API for the Rendition Engine
 - [JavaScript API](https://doc.uxopian.com/docs/arender/reference/javascript-api): Client-side API for ARender Classic
-- [Connector providers guide](https://doc.uxopian.com/docs/arender-modern/guides/integration/connector-providers): Build custom document connectors (REST architecture)
-- [Provider API reference](https://doc.uxopian.com/docs/arender-modern/reference/rest-api/provider-api): REST API contract for custom connectors
+- [Connector providers guide](https://doc.uxopian.com/docs/arender-horizon/guides/integration/connector-providers): Build custom document connectors (REST architecture)
+- [Provider API reference](https://doc.uxopian.com/docs/arender-horizon/reference/rest-api/provider-api): REST API contract for custom connectors
 
 ## Upgrade and migration
 
