@@ -1,0 +1,43 @@
+# ARender
+
+> ARender is a document viewing and annotation platform that renders 400+ document formats (PDF, Office, CAD, email, images, video) in the browser. It is deployed as a set of microservices: a Rendition Engine backend and a viewer frontend. Two viewers are available: **ARender Classic** (GWT-based, production-proven since 2010) and **ARender Horizon** (React-based, new in v2026). Both share the same Rendition Engine — same rendering quality, same format support, same annotation backend.
+
+ARender is typically integrated with ECM platforms (IBM FileNet, Alfresco, M-Files) or embedded in custom applications via JavaScript API or Web Component.
+
+## Getting started
+
+- [Architecture overview](https://doc.uxopian.com/docs/arender/overview/architecture): System components, Rendition Engine, Eureka discovery, Hazelcast caching
+- [Docker Compose quickstart](https://doc.uxopian.com/docs/arender/quickstart/docker-compose): Run ARender Classic in Docker in 5 minutes
+- [Spring Boot installation](https://doc.uxopian.com/docs/arender/installation/spring-boot): Standalone deployment without Docker
+- [ARender Horizon getting started](https://doc.uxopian.com/docs/arender-modern/quickstart/getting-started): Run ARender Horizon with React
+
+## Configuration
+
+- [Rendition properties reference](https://doc.uxopian.com/docs/arender/reference/rendition-properties): All backend configuration properties (PDFOwl, conversion, caching, security)
+- [Viewer configuration reference](https://doc.uxopian.com/docs/arender/reference/viewer-configuration): All frontend UI properties (toolbar, panels, annotations, features)
+- [Configuration system](https://doc.uxopian.com/docs/arender/installation/configuration-system): Property loading, Spring profiles, precedence rules
+- [Environment variables](https://doc.uxopian.com/docs/arender/installation/environment-variables): Docker and Kubernetes environment variable mapping
+- [Rendition caching](https://doc.uxopian.com/docs/arender/concepts/rendition-caching): Hazelcast cluster and session configuration
+
+## Integration and development
+
+- [Annotation types reference](https://doc.uxopian.com/docs/arender/reference/annotation-types): All annotation types and their properties
+- [Broker API reference](https://doc.uxopian.com/docs/arender/reference/rest-api/broker-api): REST API for the Rendition Engine
+- [JavaScript API](https://doc.uxopian.com/docs/arender/reference/javascript-api): Client-side API for ARender Classic
+- [Connector providers guide](https://doc.uxopian.com/docs/arender-modern/guides/integration/connector-providers): Build custom document connectors (REST architecture)
+- [Provider API reference](https://doc.uxopian.com/docs/arender-modern/reference/rest-api/provider-api): REST API contract for custom connectors
+
+## Upgrade and migration
+
+- [Upgrade guide 2023 to 2026](https://doc.uxopian.com/docs/arender/guides/upgrade/2023-to-2026): Step-by-step migration from v2023.x to v2026
+- [Release notes v2026.0.0](https://doc.uxopian.com/release-note/arender/v2026.0.0/release-notes): What's new in the latest major version
+- [Upgrade notes v2026.0.0](https://doc.uxopian.com/release-note/arender/v2026.0.0/upgrade-notes): Property renaming tables, breaking changes, deleted properties
+
+## Optional
+
+- [Docker Compose full guide](https://doc.uxopian.com/docs/arender/installation/docker-compose): Advanced Docker deployment with all options
+- [Kubernetes Helm](https://doc.uxopian.com/docs/arender/installation/kubernetes-helm): Helm chart deployment
+- [Annotation storage](https://doc.uxopian.com/docs/arender/guides/annotations): Annotation persistence configuration
+- [Rendition pipeline](https://doc.uxopian.com/docs/arender/concepts/rendition-pipeline): How documents are processed internally
+- [Backup and restore](https://doc.uxopian.com/docs/arender/operations/backup-restore): Data backup procedures
+- [Troubleshooting](https://doc.uxopian.com/docs/arender/operations/troubleshooting): Common issues and solutions
