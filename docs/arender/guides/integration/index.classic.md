@@ -1,11 +1,11 @@
 ---
 title: Integration
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/integration
 sidebar_position: 0
-content_hash: c0d437e387b2344c45c475dc9ae391d10393f341c3b07c26c8d5ad5d2d590343
+content_hash: 7a9bc417974285decd75a2f66f5c65a08e262f75cb8b0b5617d36dd5fdaa3193
 ---
 
 # Integrations overview

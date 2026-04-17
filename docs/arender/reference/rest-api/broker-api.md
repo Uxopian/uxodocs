@@ -1,11 +1,11 @@
 ---
 title: Broker API
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /reference/rest-api/broker-api
 sidebar_position: 1
-content_hash: 74a824487b9afc1553ad7fe7c4d2411379f3e748505f9806ad648d79270d995c
+content_hash: 844fb8f47537c8b0f79355b7082f6466f4c0fdc22f2ec83c14ac12ec4374e0f3
 ---
 
 # Broker API

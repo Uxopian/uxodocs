@@ -4,9 +4,9 @@ sidebar_position: 6
 description: "Adapt, enhance, control..."
 date: "2010-12-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 1b3b9e208235a9c12961f1bb87a7242cfde4e6de18ef62d6a3767157f11c0f36
+content_hash: 5d7ae8be6367cc78fe8fddd5fd2fc804b2763b949b333d7a8813bcccc38e3948
 ---
 
 # Principle

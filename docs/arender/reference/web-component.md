@@ -3,10 +3,10 @@ viewer: modern
 slug: /reference/web-component
 title: Web Component
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 sidebar_position: 3
-content_hash: 59def1bdbf176d9b0eee692e9d7293e2cebc3f7b82da6f656e58e4795d78d936
+content_hash: e8183dd6b0edd0c5a0b7316bf243b42384f6b1524e13b1d3be9ef86547722db7
 ---
 
 # Web Component

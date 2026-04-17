@@ -2,11 +2,11 @@
 viewer: classic
 title: M-Files
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/integration/m-files
 sidebar_position: 7
-content_hash: 245f1bf92df22c3f83ee99e240bee3944b91858ecb846209da9c337585fe6a4e
+content_hash: 8a1c9aa5f9e943a08eae5c226561e0fd9f287e64a68be8735b66be9a22fb6b45
 ---
 
 # M-Files integration

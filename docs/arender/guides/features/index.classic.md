@@ -1,7 +1,11 @@
 ---
 viewer: classic
 title: User guide
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 slug: /guides/features
+content_hash: 55e21079b0e374d257f3c8bf0a6405fac088846dfc6bd28b6de72d1ea872b32b
 ---
 
 # User guide

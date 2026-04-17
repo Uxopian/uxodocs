@@ -3,10 +3,10 @@ viewer: modern
 slug: /guides/integration/providers
 title: Providers
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: b2eda8f4f097879ad4c5b991a98d213ca6734fd0c3bcca9b44d8f0da6362649a
+content_hash: 4e3dba2a6d875bb796f42ef83ec96344ef6afb505db26372c9a48a9c7933d97f
 ---
 
 import Tabs from '@theme/Tabs';

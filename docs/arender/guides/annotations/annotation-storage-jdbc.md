@@ -1,8 +1,12 @@
 ---
 viewer: classic
 title: JDBC annotation storage
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 slug: /guides/annotations/annotation-storage-jdbc
 sidebar_position: 2
+content_hash: 4016412122583257fc737f3a1f7870b0bb42ba0b517adc9ac1e4721dc7aa211b
 ---
 
 # JDBC annotation storage

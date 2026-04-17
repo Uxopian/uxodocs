@@ -1,11 +1,11 @@
 ---
 title: Rendition caching
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/rendition-caching
 sidebar_position: 9
-content_hash: 23f0b94293f5696f84079dc03c95ee23f813b751c5687e96d49f27bf0d8427dc
+content_hash: 4df0f3bb9e892d3c475244281aad481d1d345ddd2684975613edf31766159229
 ---
 
 # Caching

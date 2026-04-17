@@ -2,11 +2,11 @@
 viewer: classic
 title: Kubernetes Helm
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /installation/kubernetes-helm
 sidebar_position: 2
-content_hash: f457ca89ab310ba4c931afa654e139c39edc22123423f0d85ef4fa51678fdaac
+content_hash: 10055d992107a75014a7f20727220ad02a9264b770ca74165453a33a5353b9d0
 ---
 
 # Kubernetes Helm

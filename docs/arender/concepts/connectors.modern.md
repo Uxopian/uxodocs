@@ -1,11 +1,11 @@
 ---
 title: Providers
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/connectors
 sidebar_position: 2
-content_hash: 24febedbd2f51009f33dfe1a7d5851fe8b6d273c3b0544bd0f844f4c5bbecc1f
+content_hash: 8ae67e1307e05c414c9fc7e88a780a5a9b57be8f6b4e7ee2143dc9a5c8680699
 ---
 
 # Providers

@@ -1,11 +1,11 @@
 ---
 title: Connectors
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/connectors
 sidebar_position: 2
-content_hash: 24febedbd2f51009f33dfe1a7d5851fe8b6d273c3b0544bd0f844f4c5bbecc1f
+content_hash: d616dc7df8d1ca9fa810fcae50bf772088936092d326e406a032863bc72da002
 ---
 
 # Connectors

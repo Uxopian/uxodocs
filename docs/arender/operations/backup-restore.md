@@ -1,7 +1,11 @@
 ---
 title: Backup and restore
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 slug: /operations/backup-restore
 sidebar_position: 3
+content_hash: ad01d4eccb6aa47d1ee75e6313a7cb5fb5ef5ab7f854a8a80accdb545882a022
 ---
 
 # Backup and restore

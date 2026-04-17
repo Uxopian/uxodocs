@@ -2,11 +2,11 @@
 viewer: classic
 title: Docker Compose quickstart
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /quickstart/docker-compose
 sidebar_position: 1
-content_hash: c0301bd31c51cbcc570c0773b7d73a8c06f60ebaa01de1377d9080b67b53bd95
+content_hash: a2c0f9778d5bfcce35f668d1e0af38c3a26ad1a3e1612011e721c98097737925
 ---
 
 # Docker Compose quickstart

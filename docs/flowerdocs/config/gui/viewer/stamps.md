@@ -4,9 +4,9 @@ sidebar_position: 4
 description: Collaborate on documents using annotations.
 date: "2005-08-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 672932647e6b71085606d753b4c0728858f5d40746c9ec7d3b266c285c0fd5c5
+content_hash: f94a706cb6dee2b3413211931ecf5b11ed594a5c6cfc536e47a687a515b2aea8
 ---
 
 import Tabs from '@theme/Tabs';

@@ -3,9 +3,9 @@ title: Configuration file reference
 sidebar_label: Configuration files
 sidebar_position: 1
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: b24698a0b57c1cabcfdc09cb0f315b714d8d67725adea88f1a18e16db594a6a7
+content_hash: 39d2bac61af3054c32076734e1da064d2d15e5009ab39b4e0ac141ce2b9d84f7
 ---
 
 All configuration files for uxopian-ai are placed in the `./config/` directory on the host, mounted to `/app/config` inside the container. The application imports them at startup via `application.yaml`. This page documents every configuration key in every file.

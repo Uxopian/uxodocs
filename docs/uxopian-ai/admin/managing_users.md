@@ -3,9 +3,9 @@ title: Managing users
 sidebar_label: Users
 sidebar_position: 5
 last_update:
-  date: '2026-04-01T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: admin-managing-users-2026-04-01
+content_hash: 60ec4582f15dd831ecd59a1dd20ec28a8ee132d9d498dce4d462ed801df3ffc5
 ---
 
 The users section of the admin panel provides a read-only view of all users for the current tenant. Administrators can browse user activity, view conversation history, and inspect individual LLM requests.

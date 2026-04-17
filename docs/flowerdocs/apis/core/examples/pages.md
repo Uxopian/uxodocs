@@ -4,9 +4,9 @@ sidebar_position: 32
 description: Recover the HTML code of your pages
 date: "2018-04-02T12:20:01+01:58"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: d20981032d0035b6e99682da620741972c549ca6220e6db5d0c0ba8ec65016fd
+content_hash: a09553f37fbe99b0d3f4fe3af19c1411d3b4b353f2826335b27b08cb58e1efc3
 ---
 
 import Tabs from '@theme/Tabs';

@@ -2,11 +2,11 @@
 viewer: classic
 title: Watermarks
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/features/watermarks
 sidebar_position: 10
-content_hash: c1fd32d11761cf67d9f8602642332e838e5a543dda3635465441b43a76010ba8
+content_hash: 70b800f3d830a4a56c535d32009a8f9a563ca92c6055216e3b11e8a383e1a78a
 ---
 
 # Watermarks

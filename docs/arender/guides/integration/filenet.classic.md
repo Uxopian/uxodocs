@@ -1,11 +1,11 @@
 ---
 title: IBM FileNet integration
-slug: /guides/integration/ibm-filenet
+slug: /guides/integration/filenet
 sidebar_position: 3
 last_update:
-  date: '2026-03-27T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: TBD
+content_hash: 501c8635bd7b43e9adb280e26602ae4046446991a380ed76a9942ee7d36b14ed
 ---
 
 ARender integrates with IBM FileNet Content Engine (P8) through a connector JAR bundled on the `arender-ui-springboot` classpath. The connector connects to the Content Engine using the WSI/MTOM HTTP protocol and stores annotations natively in the FileNet P8 annotation model.
@@ -65,7 +65,7 @@ services:
 ```
 
 :::note
-This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose](../../installation/docker-compose.classic.md) for the complete configuration.
+This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose](../../installation/docker-compose.md) for the complete configuration.
 :::
 
 ### Kubernetes (Helm)

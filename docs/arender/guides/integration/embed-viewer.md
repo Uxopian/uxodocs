@@ -2,11 +2,11 @@
 viewer: classic
 title: Embed the viewer
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/integration/embed-viewer
 sidebar_position: 1
-content_hash: 103038b030577aad48e725e8d127fcf7b7b5b20974e697718ac08bc3e91cfbbc
+content_hash: 4a3f42efc5ba14c45874bce0d790efa4c0553c35046eb59b1ce33d369521b34a
 ---
 
 # Embed the viewer
@@ -122,6 +122,6 @@ This approach keeps the document URL out of the browser's address bar and avoids
 
 - [Open your first document](../../quickstart/first-document.md)
 - [Docker Compose](../../installation/docker-compose.md)
-- [Alfresco integration guide](./alfresco.mdx)
-- [IBM FileNet integration guide](./ibm-filenet.mdx)
+- [Alfresco integration guide](./alfresco.md)
+- [IBM FileNet integration guide](./filenet.md)
 - [Broker API reference](../../reference/rest-api/broker-api.md)

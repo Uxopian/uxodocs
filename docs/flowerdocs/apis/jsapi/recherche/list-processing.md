@@ -4,9 +4,9 @@ sidebar_position: 5
 description: Activate and configure serial processing sessions
 date: "2005-04-28T13:20:01+02:00"
 last_update:
-  date: '2026-04-01T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: d4b6ec0b6c2de84157743ef234ee90134650dd6563cc18264894438e4c1f824e
+content_hash: 9fd7df1f2c5c1509250934f32ebb048c03545ded4c634234e5061aeb1a7e31e4
 ---
 
 Serial processing allows users to navigate through a list of documents or tasks one by one without returning to the search results. For a full description of the feature and its availability rules, see the [Serial processing concept page](/docs/flowerdocs/concepts/serial-processing).

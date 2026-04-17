@@ -1,11 +1,11 @@
 ---
 title: Documents and document IDs
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/documents-and-ids
 sidebar_position: 1
-content_hash: 7d2d1377b56312e9094040a2135f3d88ed008e839a348648db607fe677f0ad73
+content_hash: 5627b82c3e6501fe0f9d30ae578007b7335e3b9715966a1b93817aac48c05fe3
 ---
 
 # Documents and document IDs

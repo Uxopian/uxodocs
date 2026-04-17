@@ -1,11 +1,11 @@
 ---
 title: Integration
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/integration
 sidebar_position: 0
-content_hash: c0d437e387b2344c45c475dc9ae391d10393f341c3b07c26c8d5ad5d2d590343
+content_hash: 3703a62a120447881e5fdab06478247df631746b313832252a6c317a0da0d1bc
 ---
 
 # Integrations overview
@@ -20,7 +20,6 @@ For the conceptual model, see [Connectors concept](../../concepts/connectors.md)
 |-----|-------|
 | Alfresco Content Services | [Alfresco integration](./alfresco.md) |
 | IBM FileNet P8 | [IBM FileNet integration](./filenet.md) |
-| Any (custom provider) | [Custom provider development](./custom-provider.md) |
 
 ## Partner-maintained integrations
 

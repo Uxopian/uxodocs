@@ -1,7 +1,11 @@
 ---
 title: HTTPS and SSL
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 slug: /guides/features/https-ssl
 sidebar_position: 13
+content_hash: b9a8081023e5efd07bda6670c7e153df18566f55b7ab7940e2ef1f3908095e4e
 ---
 
 # HTTPS and SSL

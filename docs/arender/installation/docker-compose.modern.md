@@ -1,11 +1,11 @@
 ---
 title: Docker Compose
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /installation/docker-compose
 sidebar_position: 1
-content_hash: 90a489bf30a620da7d51ec3a655175b02b8bc8a3e966d7a75021fa0edf84e38e
+content_hash: 7fbbc3b6324e9adadb54e87e8451cb0f955010b836efb687f0e843c9682379ed
 ---
 
 # Docker Compose

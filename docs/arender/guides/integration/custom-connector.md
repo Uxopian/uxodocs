@@ -1,11 +1,12 @@
 ---
+viewer: classic
 title: Custom connector development
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/integration/custom-connector
 sidebar_position: 10
-content_hash: 9cda0e3b7753c4327473524c869978890015d9125c60e50ce1ae33bd1e4a074a
+content_hash: fc4f17e0ad0d220f6b95c8e03536cfcb8652caf92fc859fd34902d5e526b3096
 ---
 
 # Custom connector development

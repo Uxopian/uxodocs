@@ -1,8 +1,12 @@
 ---
 title: Export search results as CSV
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Export search results to a CSV file
 sidebar_position: 26
 date: "2018-04-02T12:20:01+01:59"
+content_hash: eac2bf6e0b438ea74ccf0eb2a60158de9800012d0ef6e3141632984fdd1a2505
 ---
 
 import Tabs from '@theme/Tabs';

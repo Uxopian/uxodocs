@@ -1,11 +1,11 @@
 ---
 title: IBM FileNet integration
-slug: /guides/integration/ibm-filenet
+slug: /guides/integration/filenet
 sidebar_position: 3
 last_update:
-  date: '2026-03-27T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: TBD
+content_hash: e2a8628f6bfea2b9a459dd329b4a078849308a5f2599ccb231c4e4f62ee274fa
 ---
 
 ARender integrates with IBM FileNet Content Engine (P8) through the `filenet-provider` microservice. The provider is a standalone Spring Boot application that connects to the Content Engine using either a login/password service account, OAuth2 token forwarding, or JAAS, and exposes the ARender provider REST contract to the Document Service Broker.
@@ -78,8 +78,6 @@ services:
       - "REGISTRY_DEFAULT_PROVIDER=filenet"
     # ... rendition services omitted for brevity
 ```
-
-For Kubernetes, deploy the provider as a separate Deployment. See [Kubernetes / Helm](../../installation/kubernetes-helm.md) for the full pattern.
 
 ## 4. Configuration
 

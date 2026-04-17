@@ -4,9 +4,9 @@ sidebar_position: 4
 description: To consume REST web services.
 date: "2004-03-29T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 001aa0462ce4c132d400d2e18b597d70e4c14fb3467594fd3f7b0b869243887c
+content_hash: 82d2250ec2143e52fe4d8f5b1a2b0860c9f06588a0bdf85950e8be1171ae3721
 ---
 
 # Base URL

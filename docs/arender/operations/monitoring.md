@@ -1,11 +1,11 @@
 ---
 title: Monitoring and observability
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /operations/monitoring
 sidebar_position: 1
-content_hash: 6bb1b2eaf540c706f738256375ec88cf3b0a6a4c8177ef90c195dfd83df68338
+content_hash: 981060df3f372aca9bda0ec016ff444dfc9bce9241e3708ed53cd0afe3110974
 ---
 
 # Monitoring and observability

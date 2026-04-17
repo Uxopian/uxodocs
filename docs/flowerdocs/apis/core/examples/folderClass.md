@@ -1,8 +1,12 @@
 ---
 title: Handling folder classes
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Create, retrieve, modify, delete your folder classes
 sidebar_position: 15
 date: "2001-04-29T13:30:01+01:02"
+content_hash: a02600989f079972ca12a122088e9c242a0d4cb75bd3a350ae552022818183bd
 ---
 
 import Tabs from '@theme/Tabs';

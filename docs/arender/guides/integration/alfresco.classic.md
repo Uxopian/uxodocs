@@ -3,9 +3,9 @@ title: Alfresco integration
 slug: /guides/integration/alfresco
 sidebar_position: 2
 last_update:
-  date: '2026-03-27T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: TBD
+content_hash: 0052ae21d7e39b54edb592a6f8e44835933a4ecceab5937898403ed7360c2119
 ---
 
 ARender integrates with Alfresco Content Services (ACS) through two components: a CMIS repository connector deployed inside the ARender viewer, and an Alfresco Share plugin that replaces the default document preview with an ARender iframe.
@@ -61,7 +61,7 @@ services:
 ```
 
 :::note
-This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose](../../installation/docker-compose.classic.md) for the complete configuration.
+This excerpt shows only the `ui` service configuration. The full rendition stack (service-broker, converter, renderer, text-handler) is also required. See [Docker Compose](../../installation/docker-compose.md) for the complete configuration.
 :::
 
 To deploy a custom JAR variant, place the fat JAR in `/home/arender/lib/` inside the container and use a base `arender-ui-springboot` image.

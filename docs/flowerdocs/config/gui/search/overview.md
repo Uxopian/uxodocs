@@ -3,9 +3,9 @@ title: Getting started
 sidebar_position: 1
 date: "2004-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-02-17T14:41:59.174Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 8474e9d020c3fb1fb55a409d30a63faf1b46aceb910fa32cbaf48f85d5fedf76
+content_hash: dd84baaf9628e3049f10f796750e63f527d21c07c92f99ca0d7e04a1cc2875c8
 ---
 
 :::info

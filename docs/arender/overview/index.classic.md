@@ -2,10 +2,10 @@
 title: What is ARender
 slug: /overview/
 last_update:
-  date: '2026-03-24T08:18:54.600Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 201a48a8ed5a4f215a51ef74422ac29dd3dec4111a55b63cbf23b91c68547cdb
+content_hash: 9aab1de08787b2c445dcdba2ea81376938805c22ff733f3409fa28cf45a7361e
 ---
 
 # What is ARender

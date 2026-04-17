@@ -3,9 +3,9 @@ title: Bare archive
 sidebar_label: Bare archive
 sidebar_position: 4
 last_update:
-  date: '2026-03-26T16:37:56.929Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 0a57f87392dd47da33995d50ee8028f53f6bde2d2dd3c38f844fd4eb9b4b6365
+content_hash: f84d501253ae2b7d3bc65001e392edb7db3dcfb659dc88ba31eb9f468fdc6913
 ---
 
 Running uxopian-ai and uxopian-gateway without Docker or Kubernetes, from their complete package ZIPs. Suitable for environments where a container runtime is not available.

@@ -1,8 +1,12 @@
 ---
 title: Dashlet preferences
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Manage user dashlet preferences
 sidebar_position: 25
 date: "2018-04-02T12:20:01+01:59"
+content_hash: ed4446fa52bddc05c69c1132cea38d6d66b388930666c83fbbdac4aa96ddbbe5
 ---
 
 import Tabs from '@theme/Tabs';

@@ -4,9 +4,9 @@ sidebar_position: 5
 description: To keep secrets secret
 date: "2019-06-03T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: b5b36dd6e9ed99082753e689f269b598b71c7a1a780a7b942f4a85029e5451ea
+content_hash: 4fe83cbab1485bbc0e7783cdb50e9babc10d73fe84478d9765077a5b9322fd61
 ---
 
 import Tabs from '@theme/Tabs';

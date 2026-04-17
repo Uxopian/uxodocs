@@ -1,11 +1,11 @@
 ---
 title: Document layout
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/document-layout
 sidebar_position: 3
-content_hash: 98365aa8491ae536c20e3eaab5c9216c72e89927c4cc7fa7dfe06ba0a3adfd43
+content_hash: 496a4274ffcaf5190c0aea691e0f6e67cdeca598cba5376ae3fae9147ba8598c
 ---
 
 ARender computes a layout for every document it opens. The layout describes the number of pages, their dimensions, rotation, resolution, and optional layers. The viewer uses the layout to render scrollbars, thumbnails, and page navigation before any page image is fetched.

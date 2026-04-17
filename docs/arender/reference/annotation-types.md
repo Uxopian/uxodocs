@@ -1,11 +1,11 @@
 ---
 title: Annotation types
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /reference/annotation-types
 sidebar_position: 4
-content_hash: 65295f0bd62aa9652481daf2f1d30e7e3202ae6604c7192b4ee0e16c5fa8b056
+content_hash: dee768a195928b0d761916f77c0da3be2ea2f62d25dce9469d9941e8ab7fa3b1
 ---
 
 # Annotation types

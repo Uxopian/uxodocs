@@ -3,10 +3,10 @@ viewer: modern
 slug: /installation/configuration
 title: Advanced configuration
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 sidebar_position: 5
-content_hash: ac1fbc17a230905cd25267ebf15f03815e57c11fb4b9b33c6f566abc4c7f9582
+content_hash: 15e799ff792f5c8f6818b1c2c4cbd84def2ed28bc427c78f1622badc847f3d23
 ---
 
 # Advanced configuration
@@ -84,7 +84,7 @@ From the viewer's perspective, it calls the BFF exactly as it would call the bro
 | `/annotation/*` | Annotation CRUD |
 | `/registry/documents` | Connector providers |
 
-If you use [connector providers](../guides/integration/connector-providers.md), the BFF must also inject the `X-Provider-ID` header on `/registry/documents` requests.
+If you use [providers](../guides/integration/providers.md), the BFF must also inject the `X-Provider-ID` header on `/registry/documents` requests.
 
 :::note
 ARender does not yet ship a built-in BFF — this is planned for an upcoming release. In the meantime, implement your own using your preferred stack (Node.js, Spring Boot, etc.) or use an existing OAuth2 proxy such as [OAuth2 Proxy](https://oauth2-proxy.github.io/oauth2-proxy/).

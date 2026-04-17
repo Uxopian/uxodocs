@@ -1,11 +1,11 @@
 ---
 title: System architecture
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /overview/architecture
 sidebar_position: 2
-content_hash: 3e5c3b6b7a280bb91784afd1d537ccc39ef52bbbeaf50a63d252e85932414f39
+content_hash: 5c2710e03f12143ef7d0b6104e314bd892a84b49ff57bcd94ef4aab27cf8437d
 ---
 
 # System architecture

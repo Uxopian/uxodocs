@@ -2,11 +2,11 @@
 viewer: classic
 title: Viewer configuration
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /reference/viewer-configuration
 sidebar_position: 5
-content_hash: 0d1cbf071ba66233d6692d6d99f8c0f156b3c89cb543a55f68b1d9af259fefa8
+content_hash: d52497a31dde287199c210dcddfb6da90ec85c4c3dac355959e931e3b82c3f5f
 ---
 
 # Viewer configuration

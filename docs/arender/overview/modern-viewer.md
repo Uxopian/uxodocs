@@ -2,7 +2,11 @@
 viewer: modern
 slug: /overview/modern-viewer
 title: Modern Viewer
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 sidebar_position: 0
+content_hash: e6d741014a428d54129afc04ca09d854f036f12aaa6996a2b7fff9daae7374ad
 ---
 
 # Modern Viewer
@@ -69,5 +73,5 @@ If your host application supplies documents directly (for example, by uploading 
 - [Getting started](../quickstart/getting-started.md) — install, embed, and open your first document
 - [Web Component](../reference/web-component.md) — HTML attributes, JavaScript API, styling
 - [Configuration](../installation/configuration.md) — CORS setup, reverse proxy, backend connection
-- [Connector providers](../guides/integration/connector-providers.md) — load documents from Alfresco, FileNet, or custom repositories
+- [Connector providers](../guides/integration/providers.md) — load documents from Alfresco, FileNet, or custom repositories
 - [Migrating from the Classic viewer](../guides/upgrade/migration-from-gwt.md) — concept mapping and checklist

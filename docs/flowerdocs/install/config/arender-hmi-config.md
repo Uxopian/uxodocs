@@ -3,9 +3,9 @@ title: ARender HMI Configuration
 sidebar_position: 2
 date: "2000-03-31T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 56becb6c8e60067c0badac30a9851280ff63238ae8523d13ea6d56b6f79e64a7
+content_hash: 1ef1dd3589a62845758445dce68e8e39ae63414ef0485f6fb31f417d287a0cc4
 ---
 
 This section describes the various configurations for the **ARender HMI** application, needed in the application's `arender-custom-server.properties` file.

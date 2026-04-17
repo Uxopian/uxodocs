@@ -1,8 +1,12 @@
 ---
 title: Handling facts (audit trail)
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Create, retrieve and search audit trail events
 sidebar_position: 20
 date: "2001-04-29T13:30:01+01:00"
+content_hash: 5769b085fec5244494ec3e4dbb20952484650326ab8bc24416eec238b260c136
 ---
 
 import Tabs from '@theme/Tabs';

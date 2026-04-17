@@ -1,7 +1,11 @@
 ---
 title: Configuration system
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 slug: /installation/configuration-system
 sidebar_position: 4
+content_hash: f176bc00ac482b68db6f6d0dd2e89069fd6d791c8cd4f08375fc5f53dc67b8c2
 ---
 
 # Configuration system

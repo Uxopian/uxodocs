@@ -3,9 +3,9 @@ title: Alfresco integration
 slug: /guides/integration/alfresco
 sidebar_position: 2
 last_update:
-  date: '2026-03-27T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: TBD
+content_hash: 0343eef9c0af95140dd97e13cbfa83b788432cca8fcabbe1b643dbb6e2be34ee
 ---
 
 ARender integrates with Alfresco Content Services (ACS) through the `alfresco-provider` microservice. The provider is a standalone Spring Boot application that connects to Alfresco via the CMIS AtomPub protocol and exposes the ARender provider REST contract to the Document Service Broker.
@@ -71,8 +71,6 @@ services:
       - "REGISTRY_DEFAULT_PROVIDER=alfresco"
     # ... rendition services omitted for brevity
 ```
-
-For Kubernetes, deploy the provider as a separate Deployment. Configure the broker to reach it by service DNS name. See [Kubernetes / Helm](../../installation/kubernetes-helm.md) for the full configuration pattern.
 
 ## 4. Configuration
 

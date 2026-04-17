@@ -2,11 +2,11 @@
 viewer: classic
 title: JavaScript API
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /reference/javascript-api
 sidebar_position: 3
-content_hash: 1afbaa6a88ab8d0eb860bec30cce24a2debb3098be9f4effe44d6521dc000fdc
+content_hash: fd8b068e826b430212fd2e3f76524d3358d3d8aef175382809e5dbec97c390c8
 ---
 
 # JavaScript API

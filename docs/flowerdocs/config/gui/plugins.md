@@ -4,9 +4,9 @@ sidebar_position: 14
 description: Integrate customized WEB applications within the GUI.
 date: "2012-04-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 5d4480b9370d9a570c6bef984c090f9c682094f6affdf0ce8fade418ea70a5f0
+content_hash: 906b422d2728f0960ca94c4d30ac894e25bf543d00dbdc82b9140b6148b4d3ca
 ---
 
 # What is a GUI plugin?

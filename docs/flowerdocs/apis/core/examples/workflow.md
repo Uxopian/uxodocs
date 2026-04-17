@@ -1,8 +1,12 @@
 ---
 title: Handling workflows
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Create, retrieve, modify, delete your workflows
 sidebar_position: 35
 date: "2018-04-03T12:20:01+01:57"
+content_hash: 17bd04765e6f4633553ce330e77ceaa9f292b801b3fff6daa2059bfccd147e1f
 ---
 
 import Tabs from '@theme/Tabs';

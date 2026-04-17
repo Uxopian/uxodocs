@@ -3,9 +3,9 @@ title: Admin panel overview
 sidebar_label: Overview
 sidebar_position: 1
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 0eff1330b8f65e5a666984e685260156197630f163f5347c0b30d5f3e84ec863
+content_hash: 08b294484588744f061874d232f3de3c5cd8653226342900860ea42294444a47
 ---
 
 The admin panel is the `<admin-element>` web component embedded in the Uxopian AI interface. It provides a UI for managing LLM providers, prompts, users, and viewing usage statistics. All operations are performed per-tenant via the Admin REST API.

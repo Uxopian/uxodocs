@@ -1,6 +1,10 @@
 ---
 title: Features
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 slug: /guides/features
+content_hash: 33b51fb7ece85dabc26868a4f547972551240db523e56c061807207b58d904a6
 ---
 
 # Features

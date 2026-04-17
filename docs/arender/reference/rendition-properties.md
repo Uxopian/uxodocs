@@ -1,11 +1,11 @@
 ---
 title: Rendition configuration
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /reference/rendition-properties
 sidebar_position: 6
-content_hash: 6541c23f7ee92868fc087d6655333546f714cf4738ac40a4f4b44814b8f00c44
+content_hash: 039a7363442578f36638049d0007ae15ea518ef964389edd8b03769a13f7e98c
 ---
 
 All ARender rendition services are Spring Boot applications. Properties can be set in `application.properties`, `application.yml`, or overridden via environment variables. See [Environment variables](../installation/environment-variables.md) for the naming convention.
