@@ -9,6 +9,8 @@ _build:
   list: never
 ---
 
+import DocLink from '@site/src/components/DocLink';
+
 > **Release note:** See [v2026.0.0](../release-notes).
 
 ## ⚙️ Customization and Configuration
@@ -17,15 +19,12 @@ _build:
 
 * **JWT / OAuth2 Security** (Rendition Engine): New properties enable JWT-based authentication via OAuth2 bearer tokens.
   * `arender.security.enabled`: Enables the use of JWT as OAuth 2.0 bearer token.
-  * `keycloak.base-url`: The Keycloak base URL.
-  * `keycloak.realm`: The ARender realm name on Keycloak.
-  * `keycloak.realm-url`: The ARender realm URL on Keycloak.
   * `spring.security.oauth2.resourceserver.jwt.issuer-uri`: Specifies the URI of the trusted JWT issuer.
 
-* **REST Connector Registry** (Rendition Engine): New properties for configuring REST-based document connectors as independent microservices.
-  * `connector.default-registry`: Specifies the default registry to use if none of the defined registries match.
-  * `connector.registries.<name>.base-url`: Defines the base URL of the provider application (e.g., FileNet, Alfresco).
-  * `connector.registries.<name>.whitelisted-params`: Defines the query parameters authorized to build the document ID.
+* **REST Registry Providers** (Rendition Engine): New properties for configuring REST-based document connectors as independent microservices.
+  * `registry.default-provider`: Specifies the default registry to use if none of the defined registries match.
+  * `registry.providers.<name>.base-url`: Defines the base URL of the provider application (e.g., FileNet, Alfresco).
+  * `registry.providers.<name>.whitelisted-params`: Defines the query parameters authorized to build the document ID.
 
 ### Renamed Properties
 
@@ -69,7 +68,7 @@ Extensive property renaming has been applied across all Rendition modules (Rendi
 | `rest.client.read.timeout` | `rest.client.read-timeout` | The maximum time to read a response through the network (in milliseconds) |
 | `rest.client.write.timeout` | `rest.client.write-timeout` | The maximum time to write a request through the network (in milliseconds) |
 
-> For the complete list of renamed properties per module, refer to the [migration documentation](/docs/arender/guides/upgrade/2023.x_to_2026.x/rendition).
+> For the complete list of renamed properties per module, refer to the <DocLink version="v2026.0.0" product="arender" to="guides/upgrade/2023-to-2026">migration documentation</DocLink>.
 
 ### Modified Properties
 
@@ -96,19 +95,24 @@ This is a **major LTS release** that modernizes the entire ARender technical sta
 * **JDK 8 → JDK 21+**: All modules now require Java 21 at minimum. **JDK 25 is the recommended runtime** as the latest LTS release.
 * **Jackson 2 → Jackson 3**: The JSON serialization framework has been updated across all modules.
 * **PDFBox 2 → PDFBox 3**: The PDF processing library has been migrated to version 3.
-* **Hazelcast 4 → Hazelcast 5.5.0**: Session management has been upgraded. **Important:** Hazelcast 4.x and 5.x instances are not compatible and cannot coexist in the same cluster. Running two instances of `arender-document-service-broker` with different Hazelcast versions will cause conflicts and prevent the instances from starting correctly. You must either **stop the entire ARender stack** before upgrading and restart it, or perform a **blue-green deployment** ensuring that the blue and green `arender-document-service-broker` instances do not communicate with each other.
+* **Hazelcast 4 → Hazelcast 5.5.0**: Session management has been upgraded. 
+:::warning
+**Important:** Hazelcast 4.x and 5.x instances are not compatible and cannot coexist in the same cluster. Running two instances of `arender-document-service-broker` with different Hazelcast versions will cause conflicts and prevent the instances from starting correctly. You must either **stop the entire ARender stack** before upgrading and restart it, or perform a **blue-green deployment** ensuring that the blue and green `arender-document-service-broker` instances do not communicate with each other.
+:::
 * **WAR packaging removed**: ARender UI is now exclusively packaged as a Spring Boot application. Deployment to external application servers (Tomcat WAR) is no longer supported.
-* **PDFOwl as default renderer**: The default PDF renderer has changed from JNIPdfEngine to PDFOwl.
+* **PDFOwl as default renderer**: The default PDF renderer has changed from JNIPdfEngine to PDFOwl. Using version 1.24-26
 
 ### Breaking Changes
 
+* **WAR and EAR packaging removed**
+ARender UI is now exclusively a Spring Boot application. WAR and EAR artifacts are no longer produced. If you currently deploy ARender inside an application server (Tomcat, WebSphere), you must switch to running the Spring Boot JAR directly with `java -jar`.
 * **Executable JAR no longer supported**: With Spring Boot 4, JARs must be run using `java -jar <jar-name>.jar` instead of executing the JAR directly.
-* **ImageMagick 6 removed**: Only ImageMagick 7 is supported going forward.
+* **Third-Party tools upgraded (Docker)**: LibreOffice from 7.x to 26.x and FFmpeg from 4.x to 8.x.
 * **WAR deployment removed**: ARender UI can no longer be deployed as a WAR file to an external application server. It must be deployed as a standalone Spring Boot application.
 
-### Third-Party Tool Upgrades
+### Third-Party Tool Upgrades (Docker)
 
-* **LibreOffice**: Upgraded to version **26.2.1.2**.
+* **LibreOffice**: Version **26.2.1.2**.
 * **FFmpeg**: Version **8.0.1**.
 * **ImageMagick**: Version **7.1.2-15**.
 * **common-mime**: Version **3.0.0**.
@@ -124,21 +128,21 @@ This is a **major LTS release** that modernizes the entire ARender technical sta
 
 ## 🔧 Integrator Section
 
-### REST Connector (New Architecture)
+### REST Provider (New Architecture)
 
-ARender v2026.0.0 introduces a new **REST-based connector model** as an alternative to the legacy JAR-based connectors:
+ARender v2026.0.0 introduces a new **REST-based provider model** as an alternative to the legacy JAR-based connectors:
 
-* **Independent microservices**: Connectors are now standalone Spring Boot applications for FileNet and Alfresco that communicate via REST endpoints (`/documents`, `/annotations`), instead of being deployed as JARs alongside the UI.
+* **Independent microservices**: Providers are now standalone Spring Boot applications for FileNet and Alfresco that communicate via REST endpoints (`/documents`, `/annotations`), instead of being deployed as JARs alongside the UI.
 * **Language-agnostic**: Any language capable of serving HTTP can implement a connector by following the Provider API contract.
-* **Provider routing**: The Rendition Engine routes requests to the appropriate connector using the `X-Provider-ID` HTTP header or the `connector.default-registry` configuration.
+* **Provider routing**: The Rendition Engine routes requests to the appropriate provider using the `X-Provider-ID` HTTP header or the `registry.default-provider` configuration.
 
-> For detailed architecture, API contracts, and configuration, refer to the [REST Connector documentation](/docs/arender/development/connector/rest-connector/architecture).
+> For detailed architecture, API contracts, and configuration, refer to the <DocLink version="v2026.0.0" product="arender-horizon" to="guides/integration/providers">REST Connector documentation</DocLink>.
 
 
 ### Deployment Changes
 
-* **Web UI**: The WAR-based deployment is no longer available. ARender UI must be deployed as a Spring Boot application. See the [Web UI migration guide](/docs/arender/guides/upgrade/2023.x_to_2026.x/web-ui).
-* **Helm Charts**: Updated to use PDFOwl Docker images and Spring Boot-based HMI images. Skaffold has been removed.
+* **Web UI**: The WAR-based deployment is no longer available. ARender UI must be deployed as a Spring Boot application. See the <DocLink version="v2026.0.0" product="arender" to="guides/upgrade/2023-to-2026">Web UI migration guide</DocLink>.
+* **Helm Charts**: Updated to use PDFOwl Docker images and Spring Boot-based HMI images.
 
 
 
@@ -146,6 +150,6 @@ ARender v2026.0.0 introduces a new **REST-based connector model** as an alternat
 
 ### New Functionality
 
-* **REST Connector Provider API**: A new REST API contract allows integrators to build custom document connectors as independent microservices. The API includes endpoints for document retrieval (`GET /documents`), and full annotation CRUD (`GET/POST/PUT/DELETE /annotations`). See the [Provider API reference](/docs/arender/development/connector/rest-connector/provider-api).
+* **REST Provider API**: A new REST API contract allows integrators to build custom document provider as independent microservices. The API includes endpoints for document retrieval (`GET /documents`), and full annotation CRUD (`GET/POST/PUT/DELETE /annotations`). See the <DocLink version="v2026.0.0" product="arender-horizon" to="guides/integration/providers">Provider API reference</DocLink>.
 
-* **Rendition Connector API**: The Rendition Engine exposes new endpoints for the frontend to interact with REST connectors, including `POST /connector/documents` for opening documents through a connector and annotation management endpoints with automatic position transformation for composite documents. See the [Rendition API reference](/docs/arender/development/connector/rest-connector/rendition-api).
+* **Rendition Provider API**: The Rendition Engine exposes new endpoints for the frontend to interact with REST providers: `POST /registry/documents` to open documents through a provider, and dedicated annotation management endpoints that apply automatic position transformation for composite documents. See the <DocLink version="v2026.0.0" product="arender-horizon" to="reference/rest-api/broker-api/#provider-operations">Rendition API reference</DocLink>.
