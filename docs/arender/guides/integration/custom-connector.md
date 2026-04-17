@@ -122,6 +122,31 @@ Set up a Maven module with the ARender rendition API as a dependency. For a comp
         <version>${arender.version}</version>
         <scope>provided</scope>
     </dependency>
+    <dependency>
+        <groupId>com.arondor.arender</groupId>
+        <artifactId>arondor-arender-hmi-server</artifactId>
+        <version>${arender.version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.arondor.arender</groupId>
+        <artifactId>arondor-arender-common</artifactId>
+        <version>${arender.version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <!-- Required for the annotation connector (SerializedAnnotationContent) -->
+    <dependency>
+        <groupId>com.arondor.arender</groupId>
+        <artifactId>arondor-arender-xfdf-annotation</artifactId>
+        <version>${arender.version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.0.1</version>
+        <scope>provided</scope>
+    </dependency>
 </dependencies>
 ```
 
@@ -192,43 +217,47 @@ Package the connector as a fat JAR using the `maven-assembly-plugin`:
 
 Create a class that implements `DocumentAccessor`. This example fetches a document from a hypothetical REST API:
 
-```java title="CustomDocumentAccessor.java"
-package com.example.connector;
+```java title="SampleDocumentAccessor.java"
+package com.arondor.arender.sample.connector.documentaccessors;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.arondor.viewer.annotation.exceptions.AnnotationsNotSupportedException;
 import com.arondor.viewer.client.api.document.DocumentId;
 import com.arondor.viewer.client.api.document.metadata.DocumentMetadata;
 import com.arondor.viewer.rendition.api.annotation.AnnotationAccessor;
+import com.arondor.viewer.rendition.api.document.BinaryDocumentAccessor;
 import com.arondor.viewer.rendition.api.document.DocumentAccessor;
+import org.apache.log4j.Logger;
 
-public class CustomDocumentAccessor implements DocumentAccessor {
+public class SampleDocumentAccessor implements DocumentAccessor {
 
+    private static final Logger LOGGER = Logger.getLogger(SampleDocumentAccessor.class);
     private static final long serialVersionUID = 1L;
 
     private final DocumentId documentId;
-    private final String endpoint;
+    private final String urlParameterValue;
     private String documentTitle;
+    private AnnotationAccessor annotationAccessor;
+    private final DocumentMetadata documentMetadata = new DocumentMetadata();
 
-    public CustomDocumentAccessor(DocumentId documentId, String endpoint) {
+    public SampleDocumentAccessor(String urlParameterValue, DocumentId documentId) {
         this.documentId = documentId;
-        this.endpoint = endpoint;
+        this.urlParameterValue = urlParameterValue;
     }
 
     @Override
     public InputStream getInputStream() throws IOException {
-        HttpURLConnection conn =
-                (HttpURLConnection) new URL(endpoint).openConnection();
-        conn.setRequestMethod("GET");
-        return conn.getInputStream();
+        // TODO: replace by a call to your service to download the document
+        String remoteDocument = "https://demo.arender.io/docs/demo/" + urlParameterValue;
+        URL url = new URL(remoteDocument);
+        return url.openStream();
     }
 
     @Override
     public String getMimeType() throws IOException {
-        return "application/pdf";
+        return null;
     }
 
     @Override
@@ -236,14 +265,13 @@ public class CustomDocumentAccessor implements DocumentAccessor {
         return documentId;
     }
 
-    @Override
     public DocumentId getUUID() {
         return documentId;
     }
 
     @Override
     public String getDocumentTitle() {
-        return documentTitle;
+        return urlParameterValue;
     }
 
     @Override
@@ -272,24 +300,24 @@ public class CustomDocumentAccessor implements DocumentAccessor {
     @Override
     public AnnotationAccessor getAnnotationAccessor()
             throws AnnotationsNotSupportedException {
-        throw new AnnotationsNotSupportedException();
+        return annotationAccessor;
     }
 
     @Override
-    public void setAnnotationAccessor(AnnotationAccessor accessor)
+    public void setAnnotationAccessor(AnnotationAccessor annotationAccessor)
             throws AnnotationsNotSupportedException {
-        throw new AnnotationsNotSupportedException();
+        this.annotationAccessor = annotationAccessor;
     }
 
     @Override
     public DocumentAccessor asSerializableDocumentAccessor()
             throws IOException {
-        return this;
+        return new BinaryDocumentAccessor(this);
     }
 
     @Override
     public DocumentMetadata getDocumentMetadata() {
-        return null;
+        return documentMetadata;
     }
 }
 ```
@@ -298,53 +326,52 @@ public class CustomDocumentAccessor implements DocumentAccessor {
 
 Create a `DocumentServiceURLParser` that detects when the URL contains your custom parameters and creates the accessor:
 
-```java title="CustomURLParser.java"
-package com.example.connector;
+```java title="SampleURLParser.java"
+package com.arondor.arender.sample.connector.urlparsers;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.arondor.arender.sample.connector.documentaccessors.SampleDocumentAccessor;
+import com.arondor.viewer.client.api.document.*;
+import com.arondor.viewer.client.api.document.id.DocumentIdParameter;
+import com.arondor.viewer.common.document.id.DocumentIdFactory;
+import com.arondor.viewer.common.document.id.URLDocumentIdParameter;
+import com.arondor.viewer.rendition.api.DocumentServiceURLParser;
+import com.arondor.viewer.rendition.api.document.DocumentAccessor;
+import com.arondor.viewer.rendition.api.document.DocumentService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.arondor.viewer.client.api.document.*;
-import com.arondor.viewer.rendition.api.DocumentServiceURLParser;
-import com.arondor.viewer.rendition.api.document.DocumentService;
+public class SampleURLParser implements DocumentServiceURLParser {
 
-public class CustomURLParser implements DocumentServiceURLParser {
-
-    private static final String PARAM_DOC_REF = "customDocRef";
+    private static final Logger LOGGER = Logger.getLogger(SampleURLParser.class);
+    private static final String MY_URL_REQUEST_PARAMETER = "myURLParam";
 
     @Override
     public boolean canParse(DocumentService documentService,
-                            ServletContext application,
-                            HttpServletRequest request) {
-        return request.getParameter(PARAM_DOC_REF) != null;
+                            ServletContext servletContext,
+                            HttpServletRequest httpServletRequest) {
+        String myURLParam = httpServletRequest.getParameter(MY_URL_REQUEST_PARAMETER);
+        return myURLParam != null && !myURLParam.isEmpty();
     }
 
     @Override
     public DocumentId parse(DocumentService documentService,
-                            ServletContext application,
-                            HttpServletRequest request)
-            throws DocumentNotAvailableException {
+                            ServletContext servletContext,
+                            HttpServletRequest httpServletRequest)
+            throws DocumentNotAvailableException, DocumentFormatNotSupportedException {
 
-        String docRef = request.getParameter(PARAM_DOC_REF);
+        String urlParameterValue = httpServletRequest.getParameter(MY_URL_REQUEST_PARAMETER);
+        LOGGER.info("Simple document detected with parameter: " + urlParameterValue);
 
-        // Generate a unique DocumentId from the parameters
         List<DocumentIdParameter> parameters = new ArrayList<>();
-        parameters.add(new URLDocumentIdParameter(PARAM_DOC_REF, docRef));
-        DocumentId documentId =
-                DocumentIdFactory.getInstance().generate(parameters);
+        parameters.add(new URLDocumentIdParameter(MY_URL_REQUEST_PARAMETER, urlParameterValue));
+        DocumentId documentId = DocumentIdFactory.getInstance().generate(parameters);
 
-        // Build the endpoint URL for your backend
-        String endpoint = "https://my-repository.example.com/api/docs/"
-                + docRef;
-
-        // Create and register the accessor
-        CustomDocumentAccessor accessor =
-                new CustomDocumentAccessor(documentId, endpoint);
-        accessor.setDocumentTitle("Document " + docRef);
-        documentService.loadDocumentAccessor(accessor);
+        DocumentAccessor documentAccessor = new SampleDocumentAccessor(urlParameterValue, documentId);
+        documentService.loadDocumentAccessor(documentAccessor);
 
         return documentId;
     }
@@ -356,8 +383,9 @@ public class CustomURLParser implements DocumentServiceURLParser {
 Define the URL parser as a Spring bean in `configurations/arender-custom-server-integration.xml`:
 
 ```xml title="arender-custom-server-integration.xml"
-<bean id="customUrlParser"
-      class="com.example.connector.CustomURLParser" />
+<bean id="sampleURLParser"
+      class="com.arondor.arender.sample.connector.urlparsers.SampleURLParser"
+      scope="prototype" />
 ```
 
 ### 5. Add the parser to the chain
@@ -365,7 +393,7 @@ Define the URL parser as a Spring bean in `configurations/arender-custom-server-
 In `configurations/arender-custom-server.properties`, prepend your parser bean name to the URL parser chain:
 
 ```properties title="arender-custom-server.properties"
-arender.server.url.parsers.beanNames=customUrlParser,DefaultURLParser,DocumentIdURLParser,FileattachmentURLParser,ExternalBeanURLParser,AlterContentParser,FallbackURLParser
+arender.server.url.parsers.beanNames=sampleURLParser,DefaultURLParser,DocumentIdURLParser,FileattachmentURLParser,ExternalBeanURLParser,AlterContentParser,FallbackURLParser
 ```
 
 The chain is evaluated left to right. Place your parser before `DefaultURLParser` so it is checked first. The `FallbackURLParser` should always remain last.
@@ -412,13 +440,13 @@ Built-in parsers:
 Open the ARender viewer with your custom URL parameter to verify the connector:
 
 ```
-https://localhost:8080/?customDocRef=12345
+https://localhost:8080/?myURLParam=pdf-reference-doc-base.pdf
 ```
 
 Check the ARender HMI logs for parser chain execution. Enable debug logging for your connector package:
 
 ```properties
-logging.level.com.example.connector=DEBUG
+logging.level.com.arondor.arender.sample.connector=DEBUG
 ```
 
 ## Annotation connector
@@ -429,22 +457,37 @@ By default, ARender stores annotations on the WEB-UI server's filesystem. For pr
 
 This interface defines how to retrieve and update annotations for a single document. Implement `get()` to return the annotation stream, and `update()` to persist changes.
 
-```java title="CustomSerializedAnnotationContent.java"
-public class CustomSerializedAnnotationContent implements SerializedAnnotationContent {
+```java title="SampleSerializedAnnotationContent.java"
+package com.arondor.arender.sample.connector.annotationaccessors;
 
-    private static final Logger LOGGER = Logger.getLogger(CustomSerializedAnnotationContent.class);
+import com.arondor.viewer.annotation.exceptions.AnnotationCredentialsException;
+import com.arondor.viewer.annotation.exceptions.AnnotationNotAvailableException;
+import com.arondor.viewer.annotation.exceptions.InvalidAnnotationFormatException;
+import com.arondor.viewer.client.api.document.DocumentId;
+import com.arondor.viewer.xfdf.annotation.SerializedAnnotationContent;
+import org.apache.log4j.Logger;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+public class SampleSerializedAnnotationContent implements SerializedAnnotationContent {
+
+    private static final Logger LOGGER = Logger.getLogger(SampleSerializedAnnotationContent.class);
     private final DocumentId documentId;
 
-    public CustomSerializedAnnotationContent(DocumentId documentId) {
+    public SampleSerializedAnnotationContent(DocumentId documentId) {
         this.documentId = documentId;
     }
 
     @Override
     public InputStream get() throws InvalidAnnotationFormatException {
-        if (documentId == null) {
-            throw new IllegalArgumentException("Invalid null documentId provided!");
+        try {
+            // TODO: replace by a call to your API to fetch annotations for documentId
+            return new FileInputStream("");
+        } catch (FileNotFoundException e) {
+            LOGGER.error("Could not get annotation for documentId " + documentId, e);
         }
-        // Call your ECM API to fetch annotations for documentId
         return null;
     }
 
@@ -452,9 +495,9 @@ public class CustomSerializedAnnotationContent implements SerializedAnnotationCo
     public void update(InputStream inputStream)
             throws InvalidAnnotationFormatException, AnnotationCredentialsException, AnnotationNotAvailableException {
         if (get() == null) {
-            // Call your ECM API to create annotations
+            // call your API to create annotations in your repository
         } else {
-            // Call your ECM API to update annotations
+            // call your API to update annotations in your repository
         }
     }
 }
@@ -466,17 +509,31 @@ An online sample is available [here](https://github.com/arondor-connectors/sampl
 
 This interface provides `SerializedAnnotationContent` instances to the ARender engine:
 
-```java title="CustomSerializedAnnotationContentAccessor.java"
-public class CustomSerializedAnnotationContentAccessor implements SerializedAnnotationContentAccessor {
+```java title="SampleSerializedAnnotationContentAccessor.java"
+package com.arondor.arender.sample.connector.annotationaccessors;
 
-    private static final Logger LOGGER = Logger.getLogger(CustomSerializedAnnotationContentAccessor.class);
+import com.arondor.viewer.annotation.api.Annotation;
+import com.arondor.viewer.annotation.exceptions.AnnotationsNotSupportedException;
+import com.arondor.viewer.annotation.exceptions.InvalidAnnotationFormatException;
+import com.arondor.viewer.client.api.document.DocumentId;
+import com.arondor.viewer.xfdf.annotation.SerializedAnnotationContent;
+import com.arondor.viewer.xfdf.annotation.SerializedAnnotationContentAccessor;
+import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class SampleSerializedAnnotationContentAccessor implements SerializedAnnotationContentAccessor {
+
+    private static final Logger LOGGER = Logger.getLogger(SampleSerializedAnnotationContentAccessor.class);
 
     @Override
     public Collection<SerializedAnnotationContent> getAll(DocumentId documentId)
             throws AnnotationsNotSupportedException, InvalidAnnotationFormatException {
         LOGGER.debug("getAll annotations for documentId: " + documentId);
-        List<SerializedAnnotationContent> annotations = new ArrayList<>();
-        annotations.add(new CustomSerializedAnnotationContent(documentId));
+        List<SerializedAnnotationContent> annotations = new ArrayList<SerializedAnnotationContent>();
+        annotations.add(new SampleSerializedAnnotationContent(documentId));
         return annotations;
     }
 
@@ -484,7 +541,7 @@ public class CustomSerializedAnnotationContentAccessor implements SerializedAnno
     public SerializedAnnotationContent getForModification(DocumentId documentId, Annotation annotation)
             throws AnnotationsNotSupportedException, InvalidAnnotationFormatException {
         LOGGER.debug("get annotations for documentId: " + documentId);
-        return new CustomSerializedAnnotationContent(documentId);
+        return new SampleSerializedAnnotationContent(documentId);
     }
 }
 ```
@@ -498,7 +555,7 @@ Register the accessor as a Spring bean in `configurations/arender-custom-server-
 ```xml title="arender-custom-server-integration.xml"
 <bean id="customAnnotationAccessor" class="com.arondor.viewer.xfdf.annotation.XFDFAnnotationAccessor" scope="prototype">
     <property name="contentAccessor">
-        <bean class="com.example.connector.CustomSerializedAnnotationContentAccessor" />
+        <bean class="com.arondor.arender.sample.connector.annotationaccessors.SampleSerializedAnnotationContentAccessor" />
     </property>
     <property name="annotationCreationPolicy">
         <bean class="com.arondor.viewer.client.api.annotation.AnnotationCreationPolicy">
