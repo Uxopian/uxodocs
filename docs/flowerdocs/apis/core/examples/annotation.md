@@ -4,9 +4,9 @@ sidebar_position: 7
 description: Create, modify, delete your annotations
 date: "2001-03-30T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 32b88fada4a3aa27f7c9aef2fd5afbd49366b4f9e8646619d95c1bfb1d9db021
+content_hash: 7aec1e32d29546f0955c22ff55aebb5b0ad2e0683d56e886bc141a10a59618a1
 ---
 
 import Tabs from '@theme/Tabs';

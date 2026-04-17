@@ -1,8 +1,12 @@
 ---
 title: Handling delegations
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Create, modify, delete delegations
 sidebar_position: 25
 date: "2001-03-30T13:20:01+02:00"
+content_hash: f43b07e89e487cc0683a7fa274acb9bc980f5cdd6ba6872db7f3515b5c60eb37
 ---
 
 import Tabs from '@theme/Tabs';

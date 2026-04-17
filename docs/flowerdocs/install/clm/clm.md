@@ -3,9 +3,9 @@ title: Command Line Manager (CLM)
 sidebar_position: 2
 date: "2004-03-21T13:20:01+02:00"
 last_update:
-  date: '2026-01-29T08:27:50.243Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: c3c1402ce43fe8c011da574a83c7500977c1ea338d8d2776e41c7961d9de9b98
+content_hash: bc3b797803620022ee8b104465d741f9353fadc6849e9952655f4607f9b89553
 ---
 
 This tool lets you interact with FlowerDocs from the command line. It offers a range of features:
@@ -34,7 +34,7 @@ To interact with FlowerDocs, you need to define the URL for accessing web servic
 java -jar flower-docs-clm-{{version}}-bundle.jar --ws.url=http://<server>:<port>/<context>/services	--password=<password>
 ```
 
-_The default user name is `system`, which can be changed by adding the `--USER=&lt;user&gt;` parameter._
+_The default user name is `system`, which can be changed by adding the `--USER=<user>` parameter._
 
  <br/>
 
@@ -49,7 +49,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar update --ws.url=http://<server>
 ```
 
 :::info
-**Note:** In the following sections `&lt;clm&gt;` is the command to run CLM from the command line.
+**Note:** In the following sections `<clm>` is the command to run CLM from the command line.
 :::
 
 # Jobs
@@ -59,5 +59,29 @@ A list of jobs is supplied to the CLM to indicate the instructions to be execute
 ```properties
 <clm> job1 job2
 ```
+
+## Atomic jobs
+
+Atomic jobs operate on a single type of data. They are the building blocks of all CLM operations.
+
+**Example:** Import tag classes only
+
+```properties
+<clm> tag-class-import --scope=HR
+```
+
+The full list of atomic jobs is available in the in the [CLM](/docs/flowerdocs/install/clm/jobs) page.
+
+## Composite jobs
+
+Composite jobs group several atomic jobs together for common use cases, making it easier to perform broad operations with a single command.
+
+**Example:** `export-model` exports all model-related data (tag categories, tag classes, document classes, folder classes, task classes, workflows, virtual folder classes and ACLs) in one go, instead of running each atomic export individually.
+
+```properties
+<clm> export-model --scope=HR --template=hr-backup
+```
+
+Composite jobs are listed alongside their atomic counterparts in the [CLM](/docs/flowerdocs/install/clm/jobs) page.
 
 The various possible jobs are listed in the following sections.

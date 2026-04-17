@@ -3,9 +3,9 @@ title: Environment variables reference
 sidebar_label: Environment variables
 sidebar_position: 2
 last_update:
-  date: '2026-03-26T16:37:56.929Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 0e85e014ce17c1048f76dcaa799bb0da8a7d34efbb5eb4a7a09fb9a57d63a878
+content_hash: 22c03587d001444092ab23a953dfa5ce436989a7c4bcfce30eff493a28da7d33
 ---
 
 All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variables marked with a default are optional; variables with no default are required when the feature is used.

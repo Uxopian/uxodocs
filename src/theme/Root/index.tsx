@@ -5,7 +5,6 @@ import {
     useSearchResultsDecorator,
     useHeadingLinkCopy,
 } from "./hooks";
-
 /**
  * Root component that wraps the entire Docusaurus site
  * Provides global hooks for search enhancement and URL-based features

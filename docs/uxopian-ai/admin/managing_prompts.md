@@ -3,9 +3,9 @@ title: Managing prompts in the admin UI
 sidebar_label: Prompts
 sidebar_position: 3
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 04142ca83bd343156d92bc74c313438b0b19ab55aef5d267f4cf9bf8ac39128b
+content_hash: 62906814cb8445300e16538360feacee70a995e4498729d2ba25ee4d032ed3ec
 ---
 
 The prompts section of the admin panel lets you view, create, edit, and delete prompt definitions for the current tenant. Changes take effect immediately without restarting the application.

@@ -3,9 +3,9 @@ title: Conversations and requests
 sidebar_label: Conversations and requests
 sidebar_position: 4
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 4bff23af6449250eaa634a2b68d71df693a7814c3cfcec456b182b3658d0e915
+content_hash: 98a3779dc7aa31e75528282a071ecd313d101b9e38b7e706fc82d53db3b77385
 ---
 
 Conversations and requests are the two core runtime objects in Uxopian AI. A conversation is a chat session. A request is a single LLM round-trip within that conversation.

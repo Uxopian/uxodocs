@@ -8,6 +8,9 @@
 .docusaurus
 .cache-loader
 
+# Generated ARender doc trees (built from docs/arender/ source)
+.generated/
+
 # Versioning automatique - Généré dynamiquement depuis les branches/tags
 versioned_docs/
 versioned_sidebars/

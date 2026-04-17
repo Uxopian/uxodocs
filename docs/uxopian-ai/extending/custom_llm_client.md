@@ -3,9 +3,9 @@ title: Write a custom LLM client
 sidebar_label: Custom LLM client
 sidebar_position: 4
 last_update:
-  date: '2026-04-01T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: custom-llm-client-2026-04-01
+content_hash: 0abbc4cacc6f237f66663f12d1a2eca2da7d66601d25ebddfaf1aa50792dc460
 ---
 
 An LLM client is a Java class that wraps a language model API into the Uxopian AI provider system. Each client implements the `ModelProvider` interface and is registered as a Spring bean. At runtime, `LlmClientLoader` discovers it automatically from the classpath or from a plugin JAR in the `llm-clients/` directory.

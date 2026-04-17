@@ -6,7 +6,7 @@ import remarkVariables from "./scripts/remark-variables.mjs";
 // Update these when releasing a new version. They are injected into all
 // markdown files at build time via the remarkVariables script,
 // replacing {{version}} placeholders.
-const arenderVersion = "2023.19.0";
+const arenderVersion = "2026.0.0";
 
 const flowerDocsVersion = "2025.4.0";
 const flowerDocsArenderVersion = "2023.17.0";
@@ -81,9 +81,24 @@ const config: Config = {
             "@docusaurus/plugin-content-docs",
             {
                 id: "arender",
-                path: "docs/arender",
+                path: ".generated/arender-classic",
                 routeBasePath: "docs/arender",
+                numberPrefixParser: false,
                 sidebarPath: require.resolve("./sidebars_arender.ts"),
+                lastVersion: "current",
+                versions: { current: { label: `v${arenderVersion}` } },
+                showLastUpdateTime: true,
+                remarkPlugins: [[remarkVariables, { variables: { version: arenderVersion } }]],
+            },
+        ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "arender-horizon",
+                path: ".generated/arender-horizon",
+                routeBasePath: "docs/arender-horizon",
+                numberPrefixParser: false,
+                sidebarPath: require.resolve("./sidebars_arender_horizon.ts"),
                 lastVersion: "current",
                 versions: { current: { label: `v${arenderVersion}` } },
                 showLastUpdateTime: true,

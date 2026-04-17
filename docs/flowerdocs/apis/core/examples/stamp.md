@@ -1,8 +1,12 @@
 ---
 title: Stamp preferences
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Manage user stamp preferences
 sidebar_position: 30
 date: "2018-04-02T12:20:01+01:59"
+content_hash: 3af087f417efcbdf3ca222dfa727254a315f2d9a9f8ab515892d17e7345d554a
 ---
 
 import Tabs from '@theme/Tabs';

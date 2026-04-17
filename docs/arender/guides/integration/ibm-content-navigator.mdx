@@ -1,0 +1,103 @@
+---
+viewer: classic
+title: IBM Content Navigator integration
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
+slug: /guides/integration/ibm-content-navigator
+sidebar_position: 5
+content_hash: 4cb57604d3c63fe7cf1c11f4d3fffdaec509998707a80c84f8075aa9070b109c
+---
+
+# IBM Content Navigator integration
+
+The ARender IBM Content Navigator (ICN) plugin replaces the built-in ICN document viewer with ARender. It intercepts viewer launch requests in ICN and redirects them to the ARender viewer. Document retrieval is handled by the FileNet connector (for P8 repositories) or the CM connector (for Content Manager repositories), depending on the ICN desktop configuration.
+
+:::warning
+Cross-domain SSO is not supported. The ARender viewer and ICN must be on the same DNS domain (e.g. `arender.company.com` and `icn.company.com` — not `arender.companyA.com` and `icn.companyB.com`).
+:::
+
+## Prerequisites
+
+- IBM Content Navigator 2.0.3 or later
+- An ARender viewer deployed and reachable from the ICN server
+- The FileNet connector configured on the ARender viewer if your ICN desktops use P8 repositories (see [IBM FileNet integration](./filenet))
+- The ICN plugin JAR: `arondor-arender-navigator-plugin-{{version}}.jar`
+
+## Step 1: Configure LTPA key sharing (SSO)
+
+ARender and ICN must share LTPA credentials for single sign-on. Export the LTPA key from the Content Platform Engine (CPE) WebSphere server and import it into the ARender application server.
+
+1. On the **CPE WebSphere** admin console, navigate to **Security > Global Security > Authentication > LTPA**.
+2. Enter a password and a file path, then click **Export keys**.
+3. Copy the exported LTPA key file to the ARender server.
+4. On the **ARender WebSphere** admin console (or application server), navigate to the same LTPA configuration path.
+5. Enter the same password and the key file location, then click **Import keys**.
+6. Save the configuration and restart both servers.
+
+## Step 2: Configure session invalidation (ICN 3.0.6+)
+
+For ICN version 3.0.6 and later, configure WebSphere to invalidate sessions when users change:
+
+1. In the WebSphere admin console, navigate to **Servers > Server Types > WebSphere Application Servers**.
+2. Select the ICN application server.
+3. Go to **Container Settings > Session Management > Additional Properties > Custom Properties**.
+4. Add a new property:
+   - **Name**: `InvalidateOnUnauthorizedSessionRequestException`
+   - **Value**: `true`
+5. Save and restart the FileNet services.
+
+## Step 3: Register the plugin in ICN
+
+1. Log in to the ICN administration console.
+2. Navigate to **Plug-ins**.
+3. Click **New Plug-in** and enter the path to the `arondor-arender-navigator-plugin-{{version}}.jar` file.
+4. Click **Load**, then **Save**.
+
+## Step 4: Configure the plugin
+
+After loading the plugin, a configuration pane appears in the ICN admin console under the plugin entry.
+
+| Field | Description | Default |
+|-------|-------------|---------|
+| **ARender context root** | URL or context path of the ARender viewer. Use a relative path (e.g. `/ARender`) for same-server deployments or an absolute URL (e.g. `https://arender.example.com`) for external deployments. | `/ARender` |
+| **Unauthorized desktops for Document Builder** | Comma-separated ICN desktop IDs where the Document Builder action is disabled. | (empty) |
+| **Watermark on download** | Comma-separated `desktopId=watermarkBeanName` pairs. Applied when a user downloads a document from the listed desktop. | (empty) |
+| **Watermark on print** | Comma-separated `desktopId=watermarkBeanName` pairs. Applied when a user prints from the listed desktop. | (empty) |
+
+The default watermark bean names (`downloadWatermark`, `printWatermark`) are defined in `annotationtemplate-catalog.xml` in the ARender viewer configuration.
+
+## Step 5: Assign the viewer to ICN desktops
+
+1. In the ICN administration console, navigate to **Desktops**.
+2. Select the desktop to configure.
+3. Under the **Viewer Map** tab, add a viewer map entry and set the viewer to **ARender**.
+4. Select the MIME types you want ARender to handle.
+5. Save the desktop configuration.
+
+## Advanced features: Compare and Document Builder
+
+To enable the Compare and Document Builder actions in the ICN context menu:
+
+1. In the ICN admin console, go to **Administration > Menus**.
+2. Find **Default document context menu** and click **Copy** to create a new menu.
+3. Add the **Compare documents** and/or **Merge documents** actions to the new menu.
+4. Assign this menu to the desired desktop under **Document context menu**.
+
+**Usage:**
+- **Compare**: select exactly two documents and choose **Compare documents** from the context menu.
+- **Document Builder / Merge**: select one or more documents and choose **Merge documents**. The Document Builder interface opens in ARender.
+
+## Troubleshooting
+
+**ARender viewer does not open when clicking a document in ICN.** Verify that the viewer map for the desktop includes the ARender viewer and that the MIME type of the document matches a registered type. Check the ICN server logs for errors.
+
+**ARender opens but shows an error fetching the document.** The ICN plugin only redirects — it does not fetch documents. The error comes from the ARender viewer's repository connector. Confirm that the FileNet or CM connector is correctly configured and that the viewer can reach the Content Engine or CM server.
+
+**Document Builder is not available on a specific desktop.** Check the **Unauthorized desktops** field in the plugin configuration. If the desktop ID appears there, Document Builder is disabled by design.
+
+**SSO does not work (authentication errors).** Verify that the LTPA key was exported and imported with the same password. Both servers must be on the same DNS domain. Check that the session invalidation property is set for ICN 3.0.6+.
+
+## Related pages
+
+- [IBM FileNet integration](./filenet)

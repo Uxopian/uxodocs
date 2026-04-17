@@ -5,9 +5,9 @@ description: Show ad-hoc HTML pages.
 date: "2020-02-02"
 custom_edit_url: null
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 455dab75320b6b7af4ccd4414fbc574edbe5f30694ba22b4b0693246df77ec6d
+content_hash: 139c1ca36eb419fe075eb4d7b84bcc18272d51911a584701c4f1ab1aad2f6e59
 ---
 
 # Principle
@@ -27,7 +27,7 @@ A page is considered `private` if it has an ACL in its definition.
 In this case, only authenticated users can access it, and the configured ACL is evaluated to determine whether the user is authorized to consult it.
 
 <br/>
-Private pages can be accessed through a browser at the following URL: `/gui/private/&lt;scope&gt;/pages/&lt;page&gt;`.
+Private pages can be accessed through a browser at the following URL: `/gui/private/<scope>/pages/<page>`.
 
 # Public page
 
@@ -41,4 +41,4 @@ The token supplied initiates authentication with a technical user. The user iden
 Security policies can therefore be defined taking into account this public access to authorise or not actions on components.
 
 <br/>
-Public pages can be accessed through a browser at the following URL: `/gui/public/&lt;scope&gt;/pages/&lt;page&gt;`.
+Public pages can be accessed through a browser at the following URL: `/gui/public/<scope>/pages/<page>`.

@@ -1,0 +1,58 @@
+---
+title: Documents and document IDs
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
+slug: /concepts/documents-and-ids
+sidebar_position: 1
+content_hash: bb09ad3bf2755e3725f307fcc6d0cb6b2d8bec9f4cc26f60a7e969630ef5fb8c
+---
+
+# Documents and document IDs
+
+Every document in ARender is identified by a **DocumentId** and accessed through a **DocumentAccessor**. Think of it as a key-value pair: the DocumentId is the key, the DocumentAccessor is the value. This pair is the foundation of how ARender identifies and accesses documents across the viewer, Document Service Broker, connectors, and caching layer.
+
+## DocumentId
+
+A `DocumentId` is a string-valued handle that uniquely identifies a document within the system. The viewer, the broker, and caching layer all use `DocumentId` as the common key.
+
+The internal string representation is opaque to most consumers. By default ARender uses a Base64 encoding that produces IDs prefixed with `b64_`:
+
+```
+b64_dXJsPWh0dHA6Ly9leGFtcGxlLmNvbS9zYW1wbGUucGRm
+```
+
+You will see these IDs in viewer URLs and in broker logs. Different [ID generators](../guides/features/document-id-generators.md) produce different formats (encrypted, UUID-based), but from a consumer's perspective the ID is always an opaque string.
+
+:::info
+When opening documents by URL, the rendition service only authorizes whitelisted domains. By default, no domain is authorized. See [Opening documents](../guides/features/opening-documents.md) for configuration.
+:::
+
+### Hierarchical IDs
+
+When composite documents like Zips or mails (documents containing other documents) are opened, each child document's DocumentId is created by appending a `/` and a numeric index :
+
+```
+b64_<parent-parameters>/0
+b64_<parent-parameters>/1/3/1
+```
+
+This hierarchy allows the broker and caching layer to manage document groups as a unit — for example, evicting all children when the parent container expires.
+
+## DocumentAccessor
+
+A `DocumentAccessor` is  used both in the Viewer Server side (and connector) and in the Rendition as a document representation in order to access the document content, metadata and annotations.
+
+How a `DocumentAccessor` gets created depends on how the document is loaded:
+
+- **Via a connector** — connectors (Java JARs) produce `DocumentAccessor` instances directly, implementing the `DocumentServiceURLParser` and `DocumentAccessor` interfaces.
+- **By URL** — the broker fetches the document from the URL and creates the `DocumentAccessor` itself.
+
+Regardless of how the `DocumentAccessor` is created, the rest of the rendition pipeline treats it identically: the broker delegates the layout, conversion, rendering, and text extraction using the same `DocumentId` as cache key.
+
+## Related pages
+
+- [Opening documents](../guides/features/opening-documents.md): URL parameters and multi-document opening
+- [Document ID generators](../guides/features/document-id-generators.md): configuring Base64, encrypted, and UUID generators
+- [Connectors](./connectors.md): how connectors produce `DocumentAccessor` instances
+- [Rendition caching](./caching.md): how `DocumentId` values are used as cache keys

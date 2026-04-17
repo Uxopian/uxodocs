@@ -3,9 +3,9 @@ title: Customised library
 description: Develop a Java library to override a Core behavior.
 date: "2020-02-01T12:20:01+02:00"
 last_update:
-  date: '2026-02-05T13:50:19.106Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 9946f1271512fdbea76f6c080705240aabe656c5634bf14c532813fa24bf8964
+content_hash: 7f17ab5bc7a278778543d95fc5b3ac78a51b88985f236156b7573f5e0fe18983
 ---
 
 import Tabs from '@theme/Tabs';
@@ -33,25 +33,23 @@ In this module, we will need the following two dependencies:
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	&lt;modelVersion&gt;4.0.0</modelVersion>
-    &lt;groupId&gt;com.flower.docs.samples</groupId>
-	&lt;artifactId&gt;flower-docs-lib-sample</artifactId>
-    &lt;version&gt;0.0.1-SNAPSHOT</version>
-	&lt;dependencies&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.boot</groupId>
-			&lt;artifactId&gt;spring-boot-starter-web</artifactId>
-			&lt;version&gt;2.7.18</version>
+	<modelVersion>4.0.0</modelVersion>
+    <groupId>com.flower.docs.samples</groupId>
+	<artifactId>flower-docs-lib-sample</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>2.7.18</version>
 		</dependency>
-		&lt;dependency&gt;
-			&lt;groupId&gt;com.flower.docs.core</groupId>
-			&lt;artifactId&gt;flower-docs-services</artifactId>
-			&lt;version&gt;{{version}}</version>
+		<dependency>
+			<groupId>com.flower.docs.core</groupId>
+			<artifactId>flower-docs-services</artifactId>
+			<version>{{version}}</version>
 		</dependency>
 	</dependencies>
 </project>
-```
-
 ```
 
   </TabItem>
@@ -76,14 +74,14 @@ import com.flower.docs.security.token.JWTTokenHelper;
 import com.google.common.collect.Lists;
 
 public class CustomTokenHelper extends JWTTokenHelper
-
+{
     @Override
     public Token generate(AuthenticatedUser user, long validityTime)
-
+    {
         user.getAttributes().add(new IdentityAttribute("custom", Lists.newArrayList("value")));
         return super.generate(user, validityTime);
-
-
+    }
+}
 ```
 
   </TabItem>
@@ -106,14 +104,14 @@ import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class SampleLibAutoConfiguration
-
+{
     @Bean
     @Primary
     CustomTokenHelper customTokenHelpder()
-
+    {
         return new CustomTokenHelper();
-
-
+    }
+}
 ```
 
   </TabItem>

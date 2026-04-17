@@ -4,9 +4,9 @@ sidebar_position: 14
 description: Integrate customized WEB applications within the GUI.
 date: "2012-04-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 5d4480b9370d9a570c6bef984c090f9c682094f6affdf0ce8fade418ea70a5f0
+content_hash: 906b422d2728f0960ca94c4d30ac894e25bf543d00dbdc82b9140b6148b4d3ca
 ---
 
 # What is a GUI plugin?
@@ -31,7 +31,7 @@ A plugin can be configured through a `Route` class document with `Path` and `URL
 
 The configuration of these plugins is described in the _Administration > Configuration > Plugins_ section of the administration console.
 
-By defining a plugin with the `/my-route/**` path and the `https://flowerdocs.com/my-plugin` for scope `&lt;scope&gt;`, request is executed on `/plugins/&lt;scope&gt;/my-route/test` and redirected to `https://flowerdocs.com/my-plugin/test` URL.
+By defining a plugin with the `/my-route/**` path and the `https://flowerdocs.com/my-plugin` for scope `<scope>`, request is executed on `/plugins/<scope>/my-route/test` and redirected to `https://flowerdocs.com/my-plugin/test` URL.
 
 ## Global plugin
 
@@ -52,7 +52,7 @@ zuul.routes.myplugin.path=/plugins/sample/**
 zuul.routes.myplugin.url=http://localhost:3006/sample
 ```
 
-With this example, requests issued on `&lt;gui&gt;/plugins/sample` are redirected to `http://localhost:3006/sample`.
+With this example, requests issued on `<gui>/plugins/sample` are redirected to `http://localhost:3006/sample`.
 
 <br/>
 

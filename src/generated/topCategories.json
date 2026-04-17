@@ -2,28 +2,32 @@
   "arender": {
     "current": [
       {
-        "label": "What is ARender",
-        "href": "/docs/arender/what-is-arender/overview"
+        "label": "Overview",
+        "href": "/docs/arender/overview/"
+      },
+      {
+        "label": "Core concepts",
+        "href": "/docs/arender/concepts/documents-and-ids"
+      },
+      {
+        "label": "Quickstart",
+        "href": "/docs/arender/quickstart/docker-compose"
       },
       {
         "label": "Installation",
-        "href": "/docs/arender/installation/overview"
-      },
-      {
-        "label": "Learn",
-        "href": "/docs/arender/learn/product-analytics"
+        "href": "/docs/arender/installation/docker-compose"
       },
       {
         "label": "Guides",
-        "href": "/docs/arender/guides/configurations/rendition/service-broker"
+        "href": "/docs/arender/guides/annotations/annotation-storage-xfdf"
       },
       {
-        "label": "Features",
-        "href": "/docs/arender/features/accessibility"
+        "label": "Operations",
+        "href": "/docs/arender/operations/monitoring"
       },
       {
-        "label": "Development",
-        "href": "/docs/arender/development/apis/rendition/rest/admin/version"
+        "label": "Reference",
+        "href": "/docs/arender/reference/javascript-api"
       }
     ]
   },
@@ -112,6 +116,38 @@
       {
         "label": "Admin Panel",
         "href": "/docs/uxopian-ai/admin/admin_panel_overview"
+      }
+    ]
+  },
+  "arender-modern": {
+    "current": [
+      {
+        "label": "Overview",
+        "href": "/docs/arender-modern/overview/"
+      },
+      {
+        "label": "Core concepts",
+        "href": "/docs/arender-modern/concepts/documents-and-ids"
+      },
+      {
+        "label": "Quickstart",
+        "href": "/docs/arender-modern/quickstart/getting-started"
+      },
+      {
+        "label": "Installation",
+        "href": "/docs/arender-modern/installation/"
+      },
+      {
+        "label": "Guides",
+        "href": "/docs/arender-modern/guides/features/opening-documents"
+      },
+      {
+        "label": "Operations",
+        "href": "/docs/arender-modern/operations/monitoring"
+      },
+      {
+        "label": "Reference",
+        "href": "/docs/arender-modern/reference/web-component"
       }
     ]
   }

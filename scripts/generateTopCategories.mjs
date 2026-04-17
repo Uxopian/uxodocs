@@ -135,7 +135,24 @@ async function extractCategoryInfo(filePath) {
     return { label: null, position: 999 };
 }
 
-async function scanProductCategories(productPath, productName, versionSlug = null) {
+// Products that use pre-built generated trees instead of raw docs/.
+// build-arender-docs.mjs filters viewer-specific files into these dirs
+// before generateTopCategories.mjs runs, so they contain only the
+// correct files for each viewer (no *.classic.md / viewer:horizon leakage).
+const GENERATED_PRODUCTS = {
+    'arender': {
+        scanDir: path.join(process.cwd(), '.generated', 'arender-classic'),
+        routePrefix: '/docs/arender',
+    },
+    'arender-horizon': {
+        scanDir: path.join(process.cwd(), '.generated', 'arender-horizon'),
+        routePrefix: '/docs/arender-horizon',
+    },
+};
+
+// hrefPrefix: when set, paths are computed relative to productPath and
+// prefixed with this string instead of the default `/docs/${productName}` logic.
+async function scanProductCategories(productPath, productName, versionSlug = null, hrefPrefix = null) {
     const entries = await fs.readdir(productPath, { withFileTypes: true });
     const categories = entries.filter((e) => e.isDirectory()).map((e) => e.name);
     const outItems = [];
@@ -175,24 +192,29 @@ async function scanProductCategories(productPath, productName, versionSlug = nul
         }
 
         // Build href with version slug if provided
-        let href = versionSlug
-            ? `/docs/${productName}/${versionSlug}/${c}/`
-            : `/docs/${productName}/${c}/`;
+        const catBase = hrefPrefix !== null ? hrefPrefix : `/docs/${productName}`;
+        let href = versionSlug ? `${catBase}/${versionSlug}/${c}/` : `${catBase}/${c}/`;
 
         const hasIndex = await exists(indexMd) || await exists(indexMdx) || await exists(underscoreIndex);
 
         if (!hasIndex) {
             const firstMd = await findFirstMarkdown(catPath);
             if (firstMd) {
-                // For versioned docs, we need to adjust the relative path calculation
-                const baseDir = versionSlug
-                    ? path.join(process.cwd(), `${productName}_versioned_docs`, `version-${versionSlug}`)
-                    : docsDir;
-                const rel = path.relative(baseDir, firstMd).split(path.sep).join('/');
+                let rel, hrefBase;
+                if (hrefPrefix !== null) {
+                    // Scanning a generated dir: paths are relative to productPath
+                    rel = path.relative(productPath, firstMd).split(path.sep).join('/');
+                    hrefBase = hrefPrefix;
+                } else if (versionSlug) {
+                    const baseDir = path.join(process.cwd(), `${productName}_versioned_docs`, `version-${versionSlug}`);
+                    rel = path.relative(baseDir, firstMd).split(path.sep).join('/');
+                    hrefBase = `/docs/${productName}/${versionSlug}`;
+                } else {
+                    rel = path.relative(docsDir, firstMd).split(path.sep).join('/');
+                    hrefBase = '/docs';
+                }
                 const noExt = rel.replace(/\.(md|mdx)$/i, '');
-                href = versionSlug
-                    ? `/docs/${productName}/${versionSlug}/${noExt}`
-                    : `/docs/${noExt}`;
+                href = `${hrefBase}/${noExt}`;
             }
         }
 
@@ -210,15 +232,31 @@ async function build() {
 
     // Scan current versions from docs/
     const products = await fs.readdir(docsDir, { withFileTypes: true });
+    const scannedProducts = new Set();
     for (const p of products) {
         if (!p.isDirectory()) continue;
         const productName = p.name;
-        const productPath = path.join(docsDir, productName);
+        const override = GENERATED_PRODUCTS[productName];
 
-        // Initialize product with nested structure
-        result[productName] = {
-            current: await scanProductCategories(productPath, productName)
-        };
+        if (override && (await exists(override.scanDir))) {
+            result[productName] = {
+                current: await scanProductCategories(override.scanDir, productName, null, override.routePrefix)
+            };
+        } else {
+            result[productName] = {
+                current: await scanProductCategories(path.join(docsDir, productName), productName)
+            };
+        }
+        scannedProducts.add(productName);
+    }
+
+    // Add products that live only in generated dirs (e.g. arender-horizon has no docs/ folder)
+    for (const [productName, override] of Object.entries(GENERATED_PRODUCTS)) {
+        if (!scannedProducts.has(productName) && (await exists(override.scanDir))) {
+            result[productName] = {
+                current: await scanProductCategories(override.scanDir, productName, null, override.routePrefix)
+            };
+        }
     }
 
     // Scan versioned content from {pluginId}_versioned_docs/version-{version}/

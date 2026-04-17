@@ -3,9 +3,9 @@ title: Minimum configuration
 sidebar_position: 3
 date: "2001-03-28T14:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 9e14904fbd7cc531368dad5a35f35a5629d1803f9b9bfc263a15a23370dcd67f
+content_hash: ec685656c67ff55306986a6eb9be8fed63fb8943e60e71a4e94ca6ca4cb94488
 ---
 
 :::info
@@ -25,7 +25,7 @@ In addition, the `flower.url` property must be filled in with the URL of FlowerD
 
 ```properties
 flower.enabled=true
-flower.url=http://&lt;host&gt;:&lt;port&gt;/<Core path>/services
+flower.url=http://<host>:<port>/<Core path>/services
 ```
 
 ## SMTP
@@ -43,7 +43,7 @@ smtp.parameters.socketFactory.class=javax.net.ssl.SSLSocketFactory
 smtp.parameters.starttls.enable=true
 ```
 
-You can add parameters to the SMTP connector by adding properties `smtp.parameters.&lt;name&gt;=&lt;value&gt;`.
+You can add parameters to the SMTP connector by adding properties `smtp.parameters.<name>=<value>`.
 
 # HMI activation
 

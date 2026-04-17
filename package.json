@@ -5,7 +5,8 @@
     "scripts": {
         "docusaurus": "docusaurus",
         "start": "docusaurus start",
-        "prebuild": "node ./scripts/generateDockerExampleZips.mjs && node ./scripts/updateLastModified.mjs && node ./scripts/generateSecondaryNav.mjs && node ./scripts/generateTopCategories.mjs",
+        "prebuild": "node ./scripts/build-arender-docs.mjs && node ./scripts/generateDockerExampleZips.mjs && node ./scripts/updateLastModified.mjs && node ./scripts/generateSecondaryNav.mjs && node ./scripts/generateTopCategories.mjs",
+        "prestart": "node ./scripts/build-arender-docs.mjs",
         "update:lastModified": "node ./scripts/updateLastModified.mjs",
         "generate:topCategories": "node ./scripts/generateTopCategories.mjs",
         "generate:releases": "node ./scripts/generateFast2Releases.mjs && node ./scripts/generateFlowerDocsReleases.mjs && node ./scripts/generateARenderReleases.mjs && node ./scripts/generateUxopianAiReleases.mjs",

@@ -4,9 +4,9 @@ sidebar_position: 17
 description: Create, get, modify and delete your task classes
 date: "2001-04-29T13:30:01+01:02"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: d33b6e88c1d249d1f3762aceb44d11eac9480721d2f297b76e86d73c48fc82fc
+content_hash: f009a537e99426d7ba3e35cbc00e62c7428889592fdf4e8dcc8f432c822b7e55
 ---
 
 import Tabs from '@theme/Tabs';

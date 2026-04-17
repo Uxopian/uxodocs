@@ -1,0 +1,190 @@
+---
+title: AutoCAD conversion
+last_update:
+  date: '2026-03-23T10:20:59.293Z'
+  author: CI/CD Bot
+sidebar_position: 5
+slug: /guides/features/cad-conversion
+content_hash: d2042ae5734c8c6ca3ae323c6263924e6d57886384ef628e4f27b862f21f47af
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AutoCAD conversion
+
+ARender can convert AutoCAD and related CAD files (DWG, DXF, DWF, DGN, IFC) to PDF for viewing. This requires **CADConverter**, a paid add-on sold separately.
+
+CADConverter is a command-line tool that runs on Windows and Linux. See [Supported formats — AutoCAD](../../overview/supported-formats.md#autocad) for the full list of supported formats and DWG versions.
+
+## Prerequisites
+
+1. **Obtain CADConverter** — contact ARender Support via your Jira account to request a quote. You will receive a download link for `ftk_cadconverter_202X.Y-windows.zip` or `ftk_cadconverter_202X.Y-linux.zip`.
+
+2. **Obtain a license file:**
+   - Unzip the package. It contains the `CADConverter` executable and a `getmachineid` utility.
+   - Run `getmachineid` (Windows: `getmachineid.exe`, Linux: `./getmachineid`).
+   - Send the displayed Machine ID to ARender Support.
+   - Place the received `CADConverter.lic` file **in the same folder** as the CADConverter executable.
+
+3. **Add CADConverter to the system PATH** so it can be invoked from anywhere, or use an absolute path in the factory configuration.
+
+## Configuring ARender
+
+CADConverter is not bundled with ARender — it must be installed separately and registered in the rendition configuration. The setup involves three changes:
+
+1. **Factory bean** — declare a `dwgFactory` in the `document-converter` (TaskConversion) module
+2. **Factory registration** — map `drawing/dwg` to `dwgFactory` in the converter's `factoriesBeanNames`
+3. **Broker MIME type** — add `drawing/dwg` to the broker's `conversionTargetMimeTypes` so it routes DWG files to the converter
+
+<Tabs>
+<TabItem value="docker" label="Docker Compose" default>
+
+**Step 1 — Mount CADConverter and the factory config into `document-converter`:**
+
+```yaml title="docker-compose.yml"
+document-converter:
+  image: artifactory.arondor.cloud:5001/arender-document-converter
+  volumes:
+    - /path/to/cadconverter:/opt/CadConverter
+    - ./factories_custom.xml:/opt/arender/modules/TaskConversion/factories_custom.xml
+  environment:
+    # Register dwgFactory for the drawing/dwg MIME type
+    - "DCV_APP_FACTORIESBEANNAMES_DWGFACTORY=drawing/dwg"
+```
+
+Make sure the `CADConverter` binary and `CADConverter.lic` are both inside the mounted folder.
+
+**Step 2 — Create the factory configuration file:**
+
+```xml title="factories_custom.xml"
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dwgFactory"
+          class="com.arondor.rendition.generic.document.GenericExternalToolDocumentConversion">
+        <property name="customToolCommandLine"
+                  value="/opt/CadConverter/CADConverter %i %o 4692" />
+        <property name="forcedExtension" value=".dwg" />
+    </bean>
+</beans>
+```
+
+`%i` is replaced by the input file path, `%o` by the output file path, and `4692` is the resolution parameter.
+
+**Step 3 — Register the DWG MIME type on the broker:**
+
+Add `drawing/dwg` to the broker's conversion target list. The simplest approach is an environment variable on the `document-service-broker` service:
+
+```yaml title="docker-compose.yml"
+document-service-broker:
+  image: artifactory.arondor.cloud:5001/arender-document-service-broker
+  environment:
+    # Append drawing/dwg to the default conversionTargetMimeTypes list.
+    # Copy the full default value from the broker's application.properties
+    # and append ,drawing/dwg at the end.
+    - "DSB_ARENDER_FORMAT_CONVERSIONTARGETMIMETYPES_APPLICATION-PDF=text/rtf,application/msword,...,text/x-vcard,drawing/dwg"
+```
+
+</TabItem>
+<TabItem value="standalone" label="Standalone">
+
+**Step 1 — Configure the AutoCAD factory:**
+
+Edit or create `factories_custom.xml` in the `modules/TaskConversion` directory:
+
+<Tabs>
+<TabItem value="linux-standalone" label="Linux" default>
+
+```xml title="modules/TaskConversion/factories_custom.xml"
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dwgFactory"
+          class="com.arondor.rendition.generic.document.GenericExternalToolDocumentConversion">
+        <property name="customToolCommandLine"
+                  value="/opt/CadConverter/CADConverter %i %o 4692" />
+        <property name="forcedExtension" value=".dwg" />
+    </bean>
+</beans>
+```
+
+</TabItem>
+<TabItem value="windows-standalone" label="Windows">
+
+```xml title="modules\TaskConversion\factories_custom.xml"
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dwgFactory"
+          class="com.arondor.rendition.generic.document.GenericExternalToolDocumentConversion">
+        <property name="customToolCommandLine"
+                  value="cmd /c CADConverter.exe %i %o 4692" />
+        <property name="forcedExtension" value=".dwg" />
+    </bean>
+</beans>
+```
+
+</TabItem>
+</Tabs>
+
+`%i` is replaced by the input file path, `%o` by the output file path, and `4692` is the resolution parameter.
+
+**Step 2 — Register the factory in the converter:**
+
+Edit the `application.yaml` (or `application-security.yml` if present) in `modules/TaskConversion`. Add `dwgFactory` to the `factoriesBeanNames` map:
+
+```yaml title="modules/TaskConversion/application.yaml (excerpt)"
+app:
+  factoriesBeanNames:
+    # ... existing factories ...
+    dwgFactory: "drawing/dwg"
+```
+
+**Step 3 — Register the MIME type on the broker:**
+
+Edit `application.properties` in `modules/RenditionEngine`. Append `drawing/dwg` to the existing `conversionTargetMimeTypes` list:
+
+```properties title="modules/RenditionEngine/application.properties"
+arender.format.conversionTargetMimeTypes.application-pdf=text/rtf,application/msword,...,text/x-vcard,drawing/dwg
+```
+
+Keep all existing MIME types intact — only append `,drawing/dwg` at the end.
+
+</TabItem>
+</Tabs>
+
+## Fonts setup
+
+CADConverter ships with a `fonts` folder containing SHX fonts. It automatically looks for fonts there, and on Windows also in `C:\Windows\Fonts`.
+
+To add custom font directories, set the `ACAD` environment variable:
+
+<Tabs>
+<TabItem value="linux-fonts" label="Linux" default>
+
+```bash
+export ACAD=/path/to/fonts1:/path/to/fonts2
+```
+
+</TabItem>
+<TabItem value="windows-fonts" label="Windows">
+
+```batch
+set ACAD=C:\path\to\fonts1;C:\path\to\fonts2
+```
+
+</TabItem>
+</Tabs>
+
+## Restart and verify
+
+Restart the rendition services after making configuration changes. Then open a `.dwg` file in ARender to confirm it converts and displays correctly.

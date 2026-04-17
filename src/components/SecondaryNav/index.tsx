@@ -35,6 +35,9 @@ export default function SecondaryNav(): React.ReactElement | null {
         }
     }
 
+    // For CSS class and color, treat arender-horizon as arender
+    const cssProduct = product === "arender-horizon" ? "arender" : product;
+
     // ALWAYS set product colors, even if SecondaryNav won't be displayed
     // This ensures navbar active states get the correct background color
     React.useEffect(() => {
@@ -44,8 +47,8 @@ export default function SecondaryNav(): React.ReactElement | null {
         Array.from(root.classList)
             .filter((c) => c.startsWith(prefix))
             .forEach((c) => root.classList.remove(c));
-        if (product) {
-            root.classList.add(`${prefix}${product}`);
+        if (cssProduct) {
+            root.classList.add(`${prefix}${cssProduct}`);
             try {
                 const tokenMap: Record<string, string> = {
                     flowerdocs: "--uxo-purple-500",
@@ -53,7 +56,7 @@ export default function SecondaryNav(): React.ReactElement | null {
                     arender: "--uxo-blue-1",
                     "uxopian-ai": "--uxo-sunset-2",
                 };
-                const primaryToken = tokenMap[product] || "--uxo-purple-500";
+                const primaryToken = tokenMap[cssProduct] || "--uxo-purple-500";
                 const computed = getComputedStyle(document.documentElement)
                     .getPropertyValue(primaryToken)
                     .trim();
@@ -74,7 +77,7 @@ export default function SecondaryNav(): React.ReactElement | null {
             }
         }
         return () => {
-            if (product) root.classList.remove(`${prefix}${product}`);
+            if (cssProduct) root.classList.remove(`${prefix}${cssProduct}`);
             try {
                 document.documentElement.style.removeProperty("--ifm-color-primary");
                 document.documentElement.style.removeProperty("--ifm-color-primary-dark");
@@ -82,17 +85,20 @@ export default function SecondaryNav(): React.ReactElement | null {
                 // ignore
             }
         };
-    }, [product]);
+    }, [cssProduct]);
 
     // Ne pas afficher la secondary navbar sur les pages de release notes
+    // ni sur les pages arender-horizon (le ViewerToggle dans la sidebar suffit)
     // (but product colors are still set via the useEffect above)
-    if (pathname.includes("/release-note/") || pathname.includes("/releases")) {
+    if (pathname.includes("/release-note/") || pathname.includes("/releases") || product === "arender-horizon") {
         return null;
     }
 
     // Get categories for the detected product and version
     const productCategories = (product && categoriesMap[product]) || {};
-    const items: Cat[] = productCategories[version] || productCategories['current'] || [];
+    // Don't fall back to 'current' nav for explicitly versioned URLs — those pages
+    // have their own structure and 'current' links would point to wrong paths.
+    const items: Cat[] = productCategories[version] ?? (version === 'current' ? productCategories['current'] : []) ?? [];
 
     if (!items || items.length === 0) return null;
     useSyncSidebarToCategory(items, pathname); // Re-enabled sidebar filtering

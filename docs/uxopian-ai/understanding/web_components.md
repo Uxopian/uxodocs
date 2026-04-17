@@ -3,9 +3,9 @@ title: Web components
 sidebar_label: Web components
 sidebar_position: 9
 last_update:
-  date: '2026-03-26T16:37:56.929Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 079c9a9252d90c3a1d5cd0adeabbb679268cf70121d805a013d54f13aaabda97
+content_hash: e518584a6b106f65728f53b667d0f9a98f50d6e631861c7126e06dfc4c99de6d
 ---
 
 Uxopian AI ships two standard HTML custom elements: `<chat-element>` and `<admin-element>`. They are built with React 19 and wrapped using `@r2wc/react-to-web-component`. They are self-contained and require no build step on the consuming application side.

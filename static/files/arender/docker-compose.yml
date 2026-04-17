@@ -1,0 +1,52 @@
+# ARender Rendition Backend - Docker Compose
+# Documentation: https://doc.uxopian.com/docs/arender/installation/docker-compose
+#
+# Usage:
+#   docker login artifactory.arondor.cloud:5001
+#   docker-compose up -d
+#
+# Verify:
+#   http://localhost:8761/health/records
+
+services:
+  service-broker:
+    image: artifactory.arondor.cloud:5001/arender-document-service-broker:${ARENDER_VERSION:-2026.0.0}
+    ports:
+      - "8761:8761"
+    environment:
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
+      - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-TEXT-HANDLER=8899"
+      - "DSB_AUTHORIZED_URLS=https://www.uxopian.com/"
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-converter:
+    image: artifactory.arondor.cloud:5001/arender-document-converter:${ARENDER_VERSION:-2026.0.0}
+    environment:
+      - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
+      - "DCV_APP_EUREKA_HOSTNAME=service-broker"
+      - "DCV_APP_EUREKA_PORT=8761"
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-renderer:
+    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:${ARENDER_VERSION:-2026.0.0}
+    environment:
+      - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
+      - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
+      - "DRN_EUREKA_SERVER_PORT=8761"
+    volumes:
+      - arender-tmp:/arender/tmp
+
+  document-text-handler:
+    image: artifactory.arondor.cloud:5001/arender-document-text-handler:${ARENDER_VERSION:-2026.0.0}
+    environment:
+      - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
+      - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
+      - "DTH_EUREKA_SERVER_PORT=8761"
+    volumes:
+      - arender-tmp:/arender/tmp
+
+volumes:
+  arender-tmp:

@@ -3,9 +3,9 @@ title: Write and deploy a custom connection provider
 sidebar_label: Custom connection provider
 sidebar_position: 5
 last_update:
-  date: '2026-04-01T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: custom-connection-provider-v1
+content_hash: 07fc6f5c7abcbe3413fd81d2ecd741ba49c33428b5fb6d6f06d129fbb1499d0d
 ---
 
 A connection provider is a Java class that authenticates incoming requests in the Uxopian Gateway (BFF). Each provider extracts user identity from the request (JWT, headers, cookies, OAuth token) and returns an `AuthenticatedUser` that the gateway forwards to uxopian-ai as enriched headers. Use this when the three built-in providers (FlowerDocsProvider, Fast2Provider, DevProvider) do not cover your authentication system.

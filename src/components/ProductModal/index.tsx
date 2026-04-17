@@ -11,7 +11,7 @@ const ProductList = [
         logo: "/img/arender/arender_logo_white.png",
         description:
             "High-performance document viewer to display and annotate all types of documents",
-        link: "/docs/arender",
+        link: "/docs/arender/overview",
         color: "#4A8FEF",
         gradient: "linear-gradient(135deg, #4A8FEF, #3A7EE5)",
     },

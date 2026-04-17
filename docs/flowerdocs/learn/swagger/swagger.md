@@ -3,9 +3,9 @@ title: Swagger UI
 description: Test and consume REST web services.
 date: "2000-02-01T12:20:01+02:00"
 last_update:
-  date: '2026-01-13T09:15:17.464Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 75bd4f6a282e1e87e6703d29717ebb9b072ce19b97fe337d6298a04ed3835e26
+content_hash: 76323bb54d54e804f91aa527175bebd7067be7f8d106570007dbf8d73d564200
 ---
 
 # Goal
@@ -15,7 +15,7 @@ The aim of this module is to give you the keys to getting to grips with and usin
 # Access
 
 Swagger UI is available from **FlowerDocs Core** at `/swagger-ui/index.html`.
-For example, for an online demonstration, Swagger UI is available [here](https://flowerdocs.com/core/swagger-ui/index.html).
+For example, for an online demonstration, Swagger UI is available [here](https://www.demo.flowerdocs.cloud/flower-docs-ws/swagger-ui/index.html).
 
 # Authentication
 

@@ -4,9 +4,9 @@ sidebar_position: 6
 description: "Adapt, enhance, control..."
 date: "2010-12-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 1b3b9e208235a9c12961f1bb87a7242cfde4e6de18ef62d6a3767157f11c0f36
+content_hash: 5d7ae8be6367cc78fe8fddd5fd2fc804b2763b949b333d7a8813bcccc38e3948
 ---
 
 # Principle
@@ -31,11 +31,39 @@ From the configured URL, it should be possible to send a POST to `{{hook URL}}/{
 
 # Security
 
-It is recommended to secure the `OperationHook` deployed. To do this, FlowerDocs allows you to configure a character string supplied during REST calls in an `Authorization` HTTP header.
+Two authentication modes are available to secure an `OperationHook`. They are configured directly in the operation subscription.
 
-Typically, BASIC authentication can be used to secure an `OperationHook`. For FlowerDocs to provide the authentication defined, the subscription must be updated with the authorisation string to be provided.
+## Authorization mode
 
-This character string can be generated online using [blitter](https://www.blitter.se/utils/basic-authentication-header-generator/).\_
+FlowerDocs sends a static character string in the `Authorization` HTTP header with each POST request to the hook. The hook is responsible for validating this header.
+
+Typically, BASIC authentication can be used. The authorization string can be generated online using [blitter](https://www.blitter.se/utils/basic-authentication-header-generator/), then set in the `Authorization` tag of the subscription.
+
+```
+Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
+```
+
+## InjectToken mode
+
+When `InjectToken` is set to `true` in the subscription, FlowerDocs dynamically generates a JWT token representing the **current user** who triggered the operation, and sends it in the `token` HTTP header:
+
+```
+token: <JWT>
+```
+
+The token contains the user's identity (ID, profiles, groups, scope), which allows the hook to make FlowerDocs API calls on behalf of that user.
+
+This mode is typically used together with the FlowerDocs Spring Boot starter, which handles token validation automatically:
+
+```java
+@SpringBootApplication
+@FlowerDocsClient(security = SecurityMode.USER)
+public class MyHookApplication { ... }
+```
+
+:::note
+If both `InjectToken` and `Authorization` are configured on the same subscription, `InjectToken` takes precedence. If neither is configured, no authentication header is sent.
+:::
 
 # Error management
 

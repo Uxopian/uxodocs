@@ -14,6 +14,7 @@ This guide will help you set up your workstation and manage documentation for AR
 4. [Testing in Staging](#testing-in-staging)
 5. [Deploying to Production](#deploying-to-production)
 6. [Tips and Tricks](#tips-and-tricks)
+7. [ARender Classic/Modern Viewer Architecture](#arender-classicmodern-viewer-architecture)
 
 ---
 
@@ -535,6 +536,82 @@ If you encounter issues:
 3. Pull latest changes: `git pull origin staging`
 4. Ask the team in your communication channel
 5. Contact the original developer for technical issues
+
+---
+
+## ARender Classic/Modern Viewer Architecture
+
+ARender has two viewer implementations: **Classic** (GWT-based) and **Modern** (React-based). The documentation is maintained as a **single source** but published as two separate doc trees, so that each viewer only shows pages relevant to it.
+
+### How it works
+
+```
+docs/arender/          ← Single source (committed)
+        │
+        ├── prebuild script (build-arender-docs.mjs)
+        │
+        ├──→ .generated/arender-classic/    ← Classic tree (gitignored)
+        └──→ .generated/arender-modern/     ← Modern tree (gitignored)
+```
+
+The prebuild script reads every file in `docs/arender/` and decides where to copy it based on these rules:
+
+| Condition | Classic tree | Modern tree |
+|-----------|:-----------:|:----------:|
+| `mypage.md` alone (no `viewer:` frontmatter) | Yes | Yes |
+| `viewer: classic` in frontmatter | Yes | No |
+| `viewer: modern` in frontmatter | No | Yes |
+| `mypage.classic.md` + `mypage.modern.md` pair | `mypage.classic.md` (renamed to `mypage.md`) | `mypage.modern.md` (renamed to `mypage.md`) |
+| Non-markdown files (`_category_.json`, images) | Yes | Yes |
+
+**Convention**: a `.md` file is **shared** (both viewers). When a page needs viewer-specific content, create a `.classic.md` + `.modern.md` pair — there should be no base `.md` alongside them. This keeps the distinction clear: shared files have no suffix, viewer-specific files always come in pairs.
+
+### Docusaurus configuration
+
+Two separate Docusaurus `docs` plugin instances are declared in `docusaurus.config.ts`:
+
+| Plugin ID | Source path | Route | Sidebar |
+|-----------|------------|-------|---------|
+| `arender` | `.generated/arender-classic` | `/docs/arender` | `sidebars_arender.ts` |
+| `arender-modern` | `.generated/arender-modern` | `/docs/arender-modern` | `sidebars_arender_modern.ts` |
+
+### ViewerToggle component
+
+A toggle switch in the sidebar (`src/components/ViewerToggle/`) lets users switch between Classic and Modern. It uses a manifest file (`src/generated/arenderPages.json`) to check if the current page exists in the other tree. If not, it falls back to `/overview`. Switching triggers a **full page load** (not SPA navigation) to avoid state issues between the two plugin instances.
+
+### Common tasks
+
+**Add a new shared page** — just create it in `docs/arender/`. It will appear in both trees automatically.
+
+**Add a Classic-only page** — add `viewer: classic` in the frontmatter:
+```yaml
+---
+title: My Classic-only page
+viewer: classic
+---
+```
+
+**Create viewer-specific versions of a page** — create `mypage.classic.md` and `mypage.modern.md` (no base `mypage.md`). Each tree gets its own version. The content should not reference the other viewer.
+
+**Run the prebuild** — the script runs automatically with `npm start` and `npm run build`, but you can trigger it manually:
+```bash
+npm run prebuild
+```
+
+**Check the generated output** — look in `.generated/arender-classic/` and `.generated/arender-modern/` after a prebuild.
+
+### Key files
+
+| File | Purpose |
+|------|---------|
+| `scripts/build-arender-docs.mjs` | Prebuild script: filters source → two trees + manifest |
+| `docusaurus.config.ts` | Plugin declarations for both trees |
+| `src/components/ViewerToggle/` | Classic/Modern toggle component |
+| `src/generated/arenderPages.json` | Route manifest for the toggle |
+| `src/theme/DocSidebar/Desktop/Content.tsx` | Injects ViewerToggle into sidebar |
+| `src/theme/NavbarItem/DocsVersionDropdownNavbarItem.tsx` | Custom navbar active state for both trees |
+| `static/docs/arender/index.html` | Landing page redirect → `/docs/arender/overview` |
+| `static/docs/arender-modern/index.html` | Landing page redirect → `/docs/arender-modern/overview` |
 
 ---
 

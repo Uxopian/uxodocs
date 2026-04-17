@@ -1,8 +1,12 @@
 ---
 title: Group management
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Create, retrieve, modify, search for and delete groups
 sidebar_position: 36
 date: "2018-05-02T12:20:01+02:00"
+content_hash: 22ff3f181c3d0c8b348708b0087b4f7fd9d02ec33272d5f93b68d5c31ccdc84b
 ---
 
 import Tabs from '@theme/Tabs';

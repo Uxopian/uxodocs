@@ -3,9 +3,9 @@ title: Criteria
 sidebar_position: 2
 date: "2020-03-03T09:20:01+02:00"
 last_update:
-  date: '2026-01-29T08:27:50.243Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 3b100a177bd7b8e53372b07ce6284c6e530b38318a09bf833d63bc2a1c2a50ad
+content_hash: e4111d8220749d66283786afcd80ab12673bfc6c773481a0bbb2d3c1c3e651ec
 ---
 
 :::info
@@ -33,7 +33,7 @@ The advanced search can be configured to display, by default, criteria that the 
 
 <br/>
 
-Between the ` tags&lt;list&gt;` and `</list>` add your search criteria.
+Between the ` tags<list>` and `</list>` add your search criteria.
 
 Place the criterion definition at the beginning of the XML body. The `NomAdherentCriterion` search criterion is defined as follows:
 

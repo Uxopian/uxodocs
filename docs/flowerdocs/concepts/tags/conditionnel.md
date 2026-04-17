@@ -4,9 +4,9 @@ sidebar_position: 4
 description: Condition the lists associated with your tags according to context.
 date: "2018-03-07T13:22:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 2b1e4eef8679d29599de55977777f7e225598dae754bc2d4fbe6c0ff46db529c
+content_hash: 570cdf64ea92de9f00ca613d249e2f676d91b25464e4c15b0c0f0ab7dd3333c4
 ---
 
 The `CONDITIONAL` type is used to define conditions on the various choices (or sets of choices) offered to the user in indexing or search forms.
@@ -17,14 +17,14 @@ Objects [`com.flower.docs.domain.tagclass.ConditionalAllowedValue`](#javadoc-com
 
 Conditions can relate to the tags of a component or a search form. _They consist of an identifier, an operator and a value._
 
-To identify the tag to which the condition applies, you need to use a character string of the type `${tags.&lt;tag_id&gt;}` where `&lt;tag_id&gt;` is the tag identifier.
+To identify the tag to which the condition applies, you need to use a character string of the type `${tags.<tag_id>}` where `<tag_id>` is the tag identifier.
 
 For tags, the operators `==` or `!=` can be used to indicate the presence or non-presence of a value, respectively.
 
 Typically, the different types of conditions supported for tags are as follows:
 
-- `${tags.&lt;tag_id&gt;}==X`: Existing tag containing (at least) the value _X_
-- `${tags.&lt;tag_id&gt;}!=X`: Tag does not exist or does not contain the value indicated by _X_
+- `${tags.<tag_id>}==X`: Existing tag containing (at least) the value _X_
+- `${tags.<tag_id>}!=X`: Tag does not exist or does not contain the value indicated by _X_
 
 :::info
 These conditions apply only to tags displayed in the indexing or search form.

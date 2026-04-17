@@ -4,9 +4,9 @@ sidebar_position: 4
 description: Customize the presentation of search results.
 date: "2005-04-28T13:20:01+02:00"
 last_update:
-  date: '2026-02-17T14:41:59.174Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: bc8a98740c0ee64a97c686a35bf3f82212d51eca142eb7ded6fad060fa27c2b7
+content_hash: ee7a1c3e9b1230707a64449492e33a44fe99974f52c57dacbe87bc307002167c
 ---
 
 # Hiding columns
@@ -32,54 +32,19 @@ FlowerDocs supports two display modes for search results:
 - **Tabular** -- classic table format
 - **Thumbnail** -- ARender generates a thumbnail of the component
 
+Three configurations are possible depending on whether you want to offer a choice to the user or force a specific mode.
+
 ## Tabular and thumbnails (switcher)
 
-The default display lets the user switch between tabular and thumbnail modes. Tabular is shown first by default.
+Use `SwitcherSearchResponsePresenterProvider` to let the user switch between tabular and thumbnail modes.
 
-To default to thumbnails, set `tableByDefault` to `false`:
+:::warning
+**Both tabs are always present**, this provider does not support disabling one of them.
+If you need only one mode, see [Tabular only](#tabular-only) or [Thumbnail only](#thumbnail-only).
+:::
+By default, tabular is shown first. To show thumbnails first, set `tableByDefault` to `false`.
 
-```xml
-<property name="responsePresenterProvider">
-	<bean class="com.flower.docs.gui.client.search.response.SwitcherSearchResponsePresenterProvider">
-		<property name="tableByDefault" value="false" />
-	</bean>
-</property>
-```
-
-To configure thumbnail card content, add the `cardPresenter` property:
-
-```xml
-<property name="cardPresenter">
-	<bean class="com.flower.docs.gui.client.search.response.CardSearchResponsePresenterProvider">
-		<property name="titleTemplate">
-			<list>
-				<bean class="com.flower.docs.domain.i18n.I18NLabel">
-					<property name="language" value="EN" />
-					<property name="value" value="${name}" />
-				</bean>
-				<bean class="com.flower.docs.domain.i18n.I18NLabel">
-					<property name="language" value="FR" />
-					<property name="value" value="${name}" />
-				</bean>
-			</list>
-		</property>
-		<property name="headingTemplate">
-			<list>
-				<bean class="com.flower.docs.domain.i18n.I18NLabel">
-					<property name="language" value="EN" />
-					<property name="value" value="Added ${creationDate}, by ${owner}" />
-				</bean>
-				<bean class="com.flower.docs.domain.i18n.I18NLabel">
-					<property name="language" value="FR" />
-					<property name="value" value="AjoutÃ© le ${creationDate}, par ${owner}" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-</property>
-```
-
-The `CardSearchResponsePresenterProvider` supports three template properties. Each uses `${fieldName}` placeholders that are replaced with actual values from the search results:
+To configure the card content, add the `cardPresenter` property **inside** the `SwitcherSearchResponsePresenterProvider` bean. The `CardSearchResponsePresenterProvider` supports three template properties where `${fieldName}` placeholders are replaced with values from the search results:
 
 | Property | Description |
 |----------|-------------|
@@ -87,9 +52,46 @@ The `CardSearchResponsePresenterProvider` supports three template properties. Ea
 | `headingTemplate` | Subtitle displayed below the title |
 | `contentTemplate` | Body content of the card |
 
+```xml
+<property name="responsePresenterProvider">
+	<bean class="com.flower.docs.gui.client.search.response.SwitcherSearchResponsePresenterProvider">
+		<!-- Set to false to show thumbnails first -->
+		<property name="tableByDefault" value="true" />
+		<property name="cardPresenter">
+			<bean class="com.flower.docs.gui.client.search.response.CardSearchResponsePresenterProvider">
+				<property name="titleTemplate">
+					<list>
+						<bean class="com.flower.docs.domain.i18n.I18NLabel">
+							<property name="language" value="EN" />
+							<property name="value" value="${name}" />
+						</bean>
+						<bean class="com.flower.docs.domain.i18n.I18NLabel">
+							<property name="language" value="FR" />
+							<property name="value" value="${name}" />
+						</bean>
+					</list>
+				</property>
+				<property name="headingTemplate">
+					<list>
+						<bean class="com.flower.docs.domain.i18n.I18NLabel">
+							<property name="language" value="EN" />
+							<property name="value" value="Added ${creationDate}, by ${owner}" />
+						</bean>
+						<bean class="com.flower.docs.domain.i18n.I18NLabel">
+							<property name="language" value="FR" />
+							<property name="value" value="Ajouté le ${creationDate}, par ${owner}" />
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+</property>
+```
+
 ## Tabular only
 
-Force tabular-only display:
+Use `TableSearchResponsePresenterProvider` directly to force tabular-only display. No mode switcher is shown.
 
 ```xml
 <property name="responsePresenterProvider">
@@ -99,7 +101,7 @@ Force tabular-only display:
 
 ## Thumbnail only
 
-Use `CardSearchResponsePresenterProvider` directly as the `responsePresenterProvider`. It supports the same `titleTemplate`, `headingTemplate`, and `contentTemplate` properties as described above.
+Use `CardSearchResponsePresenterProvider` directly to force thumbnail-only display. No mode switcher is shown. It supports the same `titleTemplate`, `headingTemplate`, and `contentTemplate` properties as described above.
 
 ```xml
 <property name="responsePresenterProvider">

@@ -3,9 +3,9 @@ title: Write prompts
 sidebar_label: Write prompts
 sidebar_position: 2
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 977da560f9ba049cc9133a9d1201614aee31ec7869e3d4afb3dcba16f46696d4
+content_hash: b26ab85cb97ab26d394785bfc583a54b692667dafa2df613ade0a32ed25d4fb8
 ---
 
 This guide explains how to define prompts in `prompts.yml`, use Thymeleaf expressions to inject dynamic content, call ServiceHelpers, and manage prompts at runtime via the Admin API.

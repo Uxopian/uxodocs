@@ -3,9 +3,9 @@ title: Monitoring statistics
 sidebar_label: Statistics
 sidebar_position: 4
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: bb86521a14acb8939d840d2f1e6e3dc3de1ef744d59020470860c8e1cc5014c1
+content_hash: ed92d6108e6a1b0d1c1d411fd29d8fe4434e386b6ec74458cdc9584aeace3c08
 ---
 
 The statistics section of the admin panel displays usage metrics for the current tenant. Data is read from OpenSearch via the Stats API (`/api/v1/admin/stats`).

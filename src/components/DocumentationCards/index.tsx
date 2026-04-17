@@ -7,7 +7,7 @@ const DocumentationList = [
         title: "ARender",
         icon: "📄",
         description: "Secure and collaborative document viewing solution",
-        link: "/docs/arender",
+        link: "/docs/arender/overview",
         color: "#e74c3c",
     },
     {

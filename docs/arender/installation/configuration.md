@@ -1,0 +1,99 @@
+---
+viewer: horizon
+slug: /installation/configuration
+title: Advanced configuration
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
+sidebar_position: 5
+content_hash: 15e799ff792f5c8f6818b1c2c4cbd84def2ed28bc427c78f1622badc847f3d23
+---
+
+# Advanced configuration
+
+This page covers proxy setup, OAuth2 authentication, and BFF configuration. Proxy setup is required for all deployments — local development and production alike. OAuth2 and BFF topics apply after completing a [Docker Compose](./docker-compose.md) installation.
+
+Backend rendition configuration (broker, converter, renderer) is documented in [Configuration system](./configuration-system.md) and [Environment variables](./environment-variables.md).
+
+## API routes reference
+
+The viewer uses three API route prefixes, all proxied to the Document Service Broker:
+
+| Route | Purpose |
+|-------|---------|
+| `/documents/*` | Document rendering, page images, text extraction |
+| `/annotation/*` | Annotation CRUD operations |
+| `/registry/documents` | Load documents through connector providers |
+
+## Proxy setup
+
+The viewer runs in the browser and calls the broker's REST API. Since they typically run on different ports or domains, browsers block these requests as cross-origin (CORS). A proxy solves this by forwarding the viewer's API calls to the broker server-side, so the browser only ever sees one origin.
+
+Choose the solution that matches your context:
+
+| Context | Solution |
+|---------|----------|
+| Local development with Vite | [Vite dev proxy](#vite) |
+| Docker Compose deployment | [Nginx in Docker Compose](./docker-compose.md#step-2--set-up-the-reverse-proxy) |
+| OAuth2 enabled on the backend | [BFF](#authentication-and-bff) |
+| Existing reverse proxy or load balancer | [Same origin via existing infrastructure](#same-origin-via-existing-infrastructure) |
+
+### Vite
+
+Most bundlers include a built-in dev server proxy. Use it instead of setting up a reverse proxy locally.
+
+Add the following `server.proxy` block to your `vite.config.ts`. If the file already has other configuration (plugins, build options, etc.), merge the `server` key into the existing `export default`:
+
+```ts
+export default {
+  server: {
+    proxy: {
+      '/documents': { target: 'http://localhost:8761', changeOrigin: true },
+      '/annotation': { target: 'http://localhost:8761', changeOrigin: true },
+      '/registry/documents': { target: 'http://localhost:8761', changeOrigin: true },
+    },
+  },
+}
+```
+
+Vite forwards matching requests to the broker. The browser only sees `localhost`, so no CORS issue arises.
+
+### Same origin via existing infrastructure
+
+If your organization already routes the ARender API paths (`/documents`, `/annotation`, `/registry/documents`) to the broker under the same domain as your application — through an existing reverse proxy, load balancer, or API gateway — the browser sees all requests as same-origin and no additional configuration is needed.
+
+## Authentication and BFF
+
+A reverse proxy (Nginx or Ingress) is sufficient for most deployments. If you also enable **OAuth2 on the rendition backend**, the React viewer — running in the browser — cannot securely store or refresh tokens. In this case, you need a **Backend For Frontend (BFF)**: a server-side component that manages OAuth2 tokens on behalf of the browser.
+
+### How a BFF works with ARender
+
+The BFF sits between the browser and the broker:
+
+1. It handles the OAuth2 flow (authorization code grant, token refresh).
+2. It stores tokens server-side — tokens are never exposed to the browser.
+3. It proxies the three ARender API routes, injecting `Authorization: Bearer <token>` on each request to the broker.
+
+From the viewer's perspective, it calls the BFF exactly as it would call the broker — no change is needed in how you configure the `rendition` attribute on `<arender-element>`.
+
+### Routes to proxy through the BFF
+
+| Route | Purpose |
+|-------|---------|
+| `/documents/*` | Document rendering |
+| `/annotation/*` | Annotation CRUD |
+| `/registry/documents` | Connector providers |
+
+If you use [providers](../guides/integration/providers.md), the BFF must also inject the `X-Provider-ID` header on `/registry/documents` requests.
+
+:::note
+ARender does not yet ship a built-in BFF — this is planned for an upcoming release. In the meantime, implement your own using your preferred stack (Node.js, Spring Boot, etc.) or use an existing OAuth2 proxy such as [OAuth2 Proxy](https://oauth2-proxy.github.io/oauth2-proxy/).
+:::
+
+## Port reference
+
+| Component | Default port | Description |
+|-----------|-------------|-------------|
+| Document Service Broker | 8761 | Backend orchestrator |
+| Alfresco Provider | 8788 | Alfresco connector microservice |
+| FileNet Provider | 8787 | FileNet connector microservice |

@@ -3,9 +3,9 @@ title: Managing LLM providers in the admin UI
 sidebar_label: LLM providers
 sidebar_position: 2
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 2b18ec018165500098f987a0f8f7c7ea679b9157b1e9b1e999ec821b192d7309
+content_hash: a418638b64c0d011763514deb4f544c951cf58f93c33e39da51713389e6c960f
 ---
 
 The LLM providers section of the admin panel lets you add, edit, and delete LLM provider configurations for the current tenant without restarting the application.

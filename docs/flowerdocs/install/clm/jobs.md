@@ -3,9 +3,9 @@ title: Standard jobs
 sidebar_position: 3
 date: "2004-03-21T13:21:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: e8e51dd0dfd6e7ef2e082e4d22482c0f82c5fd92fe6f0b10ea3c41b351c6e10b
+content_hash: 5a3ce92f0e084b9ceb9112d5d625e2503e1c33b819d2a2dccb931d0ccea8c8d7
 ---
 
 # Create
@@ -93,7 +93,7 @@ __Parameters:__
 
 By default, the scope will be exported to a `data` folder in the runtime directory.
 
-To change the directory where the export will be stored, add the ` --data.dir=&lt;chemin&gt;` parameter to the command `&lt;clm&gt;`
+To change the directory where the export will be stored, add the ` --data.dir=<chemin>` parameter to the command `<clm>`
 
 <br/>
 There are also more specific export jobs.
@@ -103,13 +103,17 @@ There are also more specific export jobs.
 | export-config      | Export configuration files                                                   |
 | export-model       | Export component classes, tags, categories and workflow                      |
 | export-content     | Export content (documents, folders, virtual folders and tasks)               |
-| export-scope       | Export scope.xml file (which manages ACLs, display names, scope teams, etc.) |
+| export-scope       | Export scope.xml file (which manages ACLs, display names, scope teams, etc.) — composite job, equivalent to running `scope-export` |
 | export-annotations | Export document's annotations                                                |
 
 The `export` or `export-config` jobs do not get annotations. Only the `export-annotations` job export it.
 Before version 2025.2.0, annotations were exported by `export-config` job.
 
-# Job list
+:::note
+The jobs listed above (`export-config`, `export-model`, `export-content`, `export-scope`, `export-annotations`) are composite jobs that group one or more atomic operations for convenience. The atomic operations they rely on (e.g. `scope-export`) are also available individually and are listed in the job list below.
+:::
+
+# Job list {#job-list}
 
 Only some of the operations can be carried out. Below is a complete list of possible operations:
 

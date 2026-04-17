@@ -1,8 +1,12 @@
 ---
 title: Stored searches
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Create, retrieve, modify, delete your stored searches
 sidebar_position: 21
 date: "2018-04-01T12:20:01+01:57"
+content_hash: 47470d531b928b47c8c926f6186dba96147cf25dad7bf03ffb3b6b0afc5dc02a
 ---
 
 import Tabs from '@theme/Tabs';
