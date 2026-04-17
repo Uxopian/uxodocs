@@ -1,11 +1,11 @@
 ---
 title: Rendition pipeline
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/rendition-pipeline
 sidebar_position: 4
-content_hash: 0d95caa613f9e5cbc1884df837f278ccd5bc1e0abf1491378c02122aa396bd7c
+content_hash: ac1379317a1a699ca860484f6f49fad351b986d62d9892c965a2ba35db24a447
 ---
 
 # Rendition pipeline

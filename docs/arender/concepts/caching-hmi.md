@@ -2,11 +2,11 @@
 viewer: classic
 title: Viewer caching
 last_update:
-  date: '2026-03-31T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/caching-hmi
 sidebar_position: 10
-content_hash: b25a6dff9ab4909318f44a62b3a59d763dd00811ea3019b57bb9a34dd1d2c4cb
+content_hash: 3e12c02b8485be48ffcf1a89005fbc1dfc330fa2eb81e550c8e7c907fc836683
 ---
 
 # Viewer caching

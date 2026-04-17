@@ -3,9 +3,9 @@ title: Write goals
 sidebar_label: Write goals
 sidebar_position: 4
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: c99dae77a8836b13f2ebb3f6f3e9ffa616acdf0e37a345871f3fcdea24a556cf
+content_hash: 49de522b9f1edfdd856b4b1ca3ac49bb1ac08b24c65d490a5500bf8689fa5490
 ---
 
 Goals compose multiple prompts into named workflows. This guide explains how to define goal groups in `goals.yml`, write filter expressions, and manage goals at runtime.

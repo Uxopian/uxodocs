@@ -1,8 +1,12 @@
 ---
 viewer: classic
 title: Annotation configuration
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 slug: /guides/features/annotation-configuration
 sidebar_position: 6
+content_hash: e49f42e36cc8c208e752b8438806eac2efa10118dd7b0337cbee51a8a5b3fa80
 ---
 
 # Annotation configuration

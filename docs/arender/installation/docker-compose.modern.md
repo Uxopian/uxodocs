@@ -1,11 +1,11 @@
 ---
 title: Docker Compose
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /installation/docker-compose
 sidebar_position: 1
-content_hash: 90a489bf30a620da7d51ec3a655175b02b8bc8a3e966d7a75021fa0edf84e38e
+content_hash: 7fbbc3b6324e9adadb54e87e8451cb0f955010b836efb687f0e843c9682379ed
 ---
 
 # Docker Compose
@@ -119,7 +119,7 @@ server {
 
     location /registry/documents {
         proxy_pass http://service-broker:8761/registry/documents;
-        # If using connector providers, inject the provider header:
+        # If using providers, inject the provider header:
         # proxy_set_header X-Provider-ID alfresco;
     }
 }
@@ -200,7 +200,7 @@ docker-compose ps
 
 Then open [http://localhost:8761/health/records](http://localhost:8761/health/records) — all services should show as UP.
 
-## Optional — Connector providers
+## Optional — Providers
 
 To load documents from an external repository (Alfresco, FileNet), add a provider service and register it on the broker:
 
@@ -220,7 +220,7 @@ services:
       - "ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
 ```
 
-Your Nginx configuration must also inject the `X-Provider-ID` header on `/registry/documents` requests. See [Connector providers](../guides/integration/connector-providers.md) for the full deployment guide and available providers.
+Your Nginx configuration must also inject the `X-Provider-ID` header on `/registry/documents` requests. See [Providers](../guides/integration/providers.md) for the full deployment guide and available providers.
 
 ## Environment variable conventions
 

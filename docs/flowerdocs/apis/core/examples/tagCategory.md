@@ -1,8 +1,12 @@
 ---
 title: Manipulating a tag category
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Create, retrieve, modify, delete your tag categories
 sidebar_position: 13
 date: "2001-04-29T13:30:01+01:02"
+content_hash: d49b18890d744524aa7048799758bfc5e2c23936fcb3ebe24dce4083dd4cb30e
 ---
 
 import Tabs from '@theme/Tabs';

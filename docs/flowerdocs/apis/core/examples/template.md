@@ -4,9 +4,9 @@ sidebar_position: 31
 description: Enrich an HTML or MS Word template with tag values
 date: "2018-04-02T12:20:01+01:59"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: c289acea0ac6ccbdff8b02d1a99efa56eeb19e0881249aa11a7d384bb30e4512
+content_hash: dbc7a8825bb7e8653913361cbe78ea62855cb577ca9de64b798930bc2197b964
 ---
 
 import Tabs from '@theme/Tabs';

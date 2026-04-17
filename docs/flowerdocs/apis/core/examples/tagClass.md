@@ -4,9 +4,9 @@ sidebar_position: 18
 description: Create, retrieve, modify, delete your tag classes
 date: "2001-04-29T13:30:01+01:02"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 679bf14fe3aff4d698ea863e1a4e62f1cb61e11b66f15c50df0c760d215591c8
+content_hash: fa1574c25594f3ab71b44359564e5fb27050e8c9ce5fd1babf81167a48b2e510
 ---
 
 import Tabs from '@theme/Tabs';

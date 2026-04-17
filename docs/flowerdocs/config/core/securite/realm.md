@@ -4,9 +4,9 @@ sidebar_position: 4
 description: Define internal users
 date: "2019-06-02T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T13:36:00.326Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 9a0716c8399c50b5f605293a014c450f06335ea6fb06fb58b0a9d58feea59a01
+content_hash: a3d6cf2baacb92831962d8470f19057ff36af68818ab0b2e9836eba4f83e6442
 ---
 
 :::info

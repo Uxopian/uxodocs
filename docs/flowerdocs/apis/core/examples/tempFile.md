@@ -4,9 +4,9 @@ description: "Create, modify, delete temporary files"
 sidebar_position: 9
 date: "2001-04-15T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 367d5284d5df1909947383e9980bc3b526849add48b8da831c57fb2d13f0c12f
+content_hash: d1d80cf002a48ae32072acfe90d88cfa0496762789d9ead51ebf49c637f22145
 ---
 
 import Tabs from '@theme/Tabs';

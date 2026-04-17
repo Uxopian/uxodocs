@@ -4,9 +4,9 @@ sidebar_position: 39
 description: Generate and validate your tokens
 date: "2018-06-21T09:40:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 1d3a7f4b375d5c46e3cc75dcbbba52f8c6b6891d70398c5dcad2e2ba7f2e7612
+content_hash: 41f8b5424d2f2c86ea1d04401eb6c6195d17525dd4a7bad4cc8bb247f26bece7
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,8 +1,12 @@
 ---
 title: Handling a folder
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Create, retrieve, modify, delete and search your folders, manage children
 sidebar_position: 11
 date: "2001-04-29T13:30:01+01:00"
+content_hash: 2fb9db51b959b6ce27afc606fedeaa22b10e713f733c66481c98e0cbe12de8d2
 ---
 
 import Tabs from '@theme/Tabs';

@@ -3,10 +3,10 @@ viewer: modern
 slug: /quickstart/getting-started
 title: Getting started
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 sidebar_position: 2
-content_hash: de6e90602ed3383a58e06b75b82072e4c8e9b05ed63fa8d58d0b32ba95006b97
+content_hash: da284353a48fd4318c0c9e6fb7a54d0dfea9fec9417c424033aca159e4da782f
 ---
 
 # Getting started with the React UI
@@ -512,4 +512,4 @@ These public URLs can be used for testing (the demo rendition already authorizes
 - [Configuration](../installation/configuration.md) — reverse proxy, authentication, and BFF
 - [Feature availability](../overview/modern-viewer.md#feature-availability) — what's available now and what's coming
 - [Web Component](../reference/web-component.md) — HTML attributes, JavaScript API, styling
-- [Connector providers](../guides/integration/connector-providers.md) — load documents from Alfresco, FileNet, or custom repositories
+- [Providers](../guides/integration/providers.md) — load documents from Alfresco, FileNet, or custom repositories

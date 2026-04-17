@@ -1,8 +1,12 @@
 ---
 viewer: classic
 title: XFDF file annotation storage
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 slug: /guides/annotations/annotation-storage-xfdf
 sidebar_position: 1
+content_hash: f478e1f9f8750da03ace957ea74de21acbab682579d4dcad92a26122055feaba
 ---
 
 # XFDF file annotation storage

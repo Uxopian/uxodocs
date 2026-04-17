@@ -2,11 +2,11 @@
 viewer: classic
 title: Document builder
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/features/document-builder
 sidebar_position: 8
-content_hash: 86a548fffb5359f714b80831b63ac19fe99172158597383fcea79676e63cf263
+content_hash: ef7dadf98186aaf0c4797a1c4b838af5b5e0ccb00f0773561d577fdefbdf4f7d
 ---
 
 # Document builder

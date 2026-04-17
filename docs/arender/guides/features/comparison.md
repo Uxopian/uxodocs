@@ -2,11 +2,11 @@
 viewer: classic
 title: Document comparison
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/features/comparison
 sidebar_position: 7
-content_hash: 8fc7e708148b49293b8ad545aa2b95e1c611cd31586665120d3d31776222e9e4
+content_hash: c5f0e2af47aa8d66d6e8ea048177a9d2a00c47188c8f8b877610bb8b9208f0ca
 ---
 
 # Document comparison

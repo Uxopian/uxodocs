@@ -1,16 +1,16 @@
 ---
 title: Documents and document IDs
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/documents-and-ids
 sidebar_position: 1
-content_hash: 7d2d1377b56312e9094040a2135f3d88ed008e839a348648db607fe677f0ad73
+content_hash: 5627b82c3e6501fe0f9d30ae578007b7335e3b9715966a1b93817aac48c05fe3
 ---
 
 # Documents and document IDs
 
-Every document in ARender is identified by a **DocumentId** and accessed through a **DocumentAccessor**. Think of it as a key-value pair: the DocumentId is the key, the DocumentAccessor is the value. This pair is the foundation of how ARender identifies and accesses documents across the viewer, Document Service Broker, connectors, and caching layer.
+Every document in ARender is identified by a **DocumentId** and accessed through a **DocumentAccessor**. Think of it as a key-value pair: the DocumentId is the key, the DocumentAccessor is the value. This pair is the foundation of how ARender identifies and accesses documents across the viewer, Document Service Broker, providers, and caching layer.
 
 ## DocumentId
 
@@ -45,7 +45,7 @@ A `DocumentAccessor` is the broker's internal runtime object behind a DocumentId
 
 How a `DocumentAccessor` gets created depends on how the document is loaded:
 
-- **Via a provider** — [providers](../guides/integration/connector-providers.md) return document content via REST. The broker creates the `DocumentAccessor` internally from the provider response.
+- **Via a provider** — [providers](../guides/integration/providers.md) return document content via REST. The broker creates the `DocumentAccessor` internally from the provider response.
 - **By URL** — the broker fetches the document from the URL and creates the `DocumentAccessor` itself.
 
 Regardless of how the `DocumentAccessor` is created, the rest of the rendition pipeline treats it identically: the broker resolves the layout, delegates conversion, rendering, and text extraction using the same `DocumentId` as cache key.
@@ -54,5 +54,5 @@ Regardless of how the `DocumentAccessor` is created, the rest of the rendition p
 
 - [Opening documents](../guides/features/opening-documents.md): URL parameters and multi-document opening
 - [Document ID generators](../guides/features/document-id-generators.md): configuring Base64, encrypted, and UUID generators
-- [Connector providers](../guides/integration/connector-providers.md): how providers load documents via REST
+- [Providers](../guides/integration/providers.md): how providers load documents via REST
 - [Rendition caching](./caching.md): how `DocumentId` values are used as cache keys

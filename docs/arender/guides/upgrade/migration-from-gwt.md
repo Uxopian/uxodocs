@@ -3,10 +3,10 @@ viewer: modern
 slug: /guides/upgrade/migration-from-gwt
 title: Migration from GWT
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 sidebar_position: 7
-content_hash: 28c253236b6596dd0128971d71396d02c8ce96f508d0fb26bd26dccbed51bdc5
+content_hash: f2276defaa63f3c301d9a922cf4a553ac48ad0924e8c788d974df28bf3e012e9
 ---
 
 # Migration from GWT
@@ -21,7 +21,7 @@ This page maps GWT viewer concepts to their React UI equivalents. Use it as a re
 | `<iframe>` embed | `<arender-element>` Web Component | See [Web Component](../../reference/web-component.md) |
 | `window.arender.jsapi` | `window.ARender` / `element.ARender` | See [Web Component — JavaScript API](../../reference/web-component.md#javascript-api) |
 | `.properties` files | HTML attributes, JavaScript API | See [Configuration](../../installation/configuration.md) |
-| Connector JARs (bundled in viewer) | Provider microservices (separate containers) | See [Connector providers](../integration/connector-providers.md) |
+| Connector JARs (bundled in viewer) | Provider microservices (separate containers) | See [Providers](../integration/providers.md) |
 | Visual profiles | Not yet available | — |
 | Plugins | Not yet available | — |
 | XML bean configuration | Not applicable | React UI has no Spring context in the frontend |

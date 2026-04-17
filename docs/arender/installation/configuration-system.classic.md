@@ -1,8 +1,12 @@
 ---
 viewer: classic
 title: Configuration system
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 slug: /installation/configuration-system
 sidebar_position: 4
+content_hash: bdfab6964ccf948e0fbdc2407eb6ef9dc782fd44dca41cb628ba80b53d555c12
 ---
 
 # Configuration system

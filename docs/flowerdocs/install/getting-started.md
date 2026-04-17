@@ -3,9 +3,9 @@ title: Before getting started
 sidebar_position: 1
 date: "2000-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-02-09T08:47:07.542Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 4a49bb5e3ebace5631f0af1ff97465aa34b10a692e01506c7d6eeeaf747064b2
+content_hash: 1693370eb861f44439a10118e9b2d0b1366f96d834f428188dcb47dd28d6c620
 ---
 
 # Presentation layer

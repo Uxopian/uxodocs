@@ -1,10 +1,11 @@
 ---
 title: What is ARender
+slug: /overview/
 last_update:
-  date: '2026-03-24T08:18:54.600Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 sidebar_position: 1
-content_hash: 201a48a8ed5a4f215a51ef74422ac29dd3dec4111a55b63cbf23b91c68547cdb
+content_hash: 1e14c9f618e9ddd0464df556f351c17adda7c2ca69b9dcc576d5f5335296befd
 ---
 
 # What is ARender
@@ -61,6 +62,6 @@ See [System architecture](./architecture.md) for details.
 
 ## Next steps
 
-- [Core concepts](../concepts/connectors.md): understand connectors, annotations, and the rendition pipeline
+- [Core concepts](../concepts/connectors.md): understand providers, annotations, and the rendition pipeline
 - [Installation](../installation/docker-compose.md): install ARender for production
 - [REST API reference](../reference/rest-api/broker-api.md): integrate programmatically

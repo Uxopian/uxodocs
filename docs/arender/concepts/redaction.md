@@ -2,11 +2,11 @@
 viewer: classic
 title: Redaction
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/redaction
 sidebar_position: 6
-content_hash: d9d3a94d27c0f9e82eb542019a7a6449f662287b161a7bbe2830201c0ea5a5e1
+content_hash: 86f0bf60f11d040d0101e7cf698296acc7e96db4c80b5006919501b675563b5f
 ---
 
 # Redaction

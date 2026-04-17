@@ -3,9 +3,9 @@ title: Core Configuration
 sidebar_position: 3
 date: "2000-03-31T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T15:40:22.642Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: ef5bab607a698d5a68aaa777dc7c0a6df2f768f00349b7329067d330aefdc125
+content_hash: f51d5da6b342612ec68b8cdf08c8101e1c27b67a7a38815b217b513e47c71796
 ---
 
 This section describes the various FlowerDocs Core configurations to be defined in the application's `core.properties` file.

@@ -3,9 +3,9 @@ title: Prompts and templating
 sidebar_label: Prompts and templating
 sidebar_position: 5
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 5249994844bcf21b6fe64e6f366d56b6087b1d82239f67bb81befe71054c81ad
+content_hash: 0ac4bee73d362881c71807ff58480888957470faad6f6c0a3b9f17e1646d5b0d
 ---
 
 A prompt is a named, reusable message template. Prompts are rendered by a Thymeleaf engine at request time, which allows them to call ServiceHelper methods to inject dynamic content, such as extracting text from a document.

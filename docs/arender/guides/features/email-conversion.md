@@ -1,11 +1,11 @@
 ---
 title: Email conversion
 last_update:
-  date: '2026-03-17T14:31:35.329Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/features/email-conversion
 sidebar_position: 4
-content_hash: 307490b1bfed3f0229c20d2c45dd8f3bf9f445e99c2a2dec7841fd3a20b91a70
+content_hash: 9d56d4d82da4df71638672ec9450a5a2498e0e70d8ba125be4fd00ee9b1bdf7f
 ---
 
 # Email conversion

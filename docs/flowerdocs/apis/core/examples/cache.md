@@ -4,9 +4,9 @@ sidebar_position: 1
 description: Purge your scope's caches
 date: "2001-01-29T12:20:01+01:58"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 987ff1a43ad3fe939f65d68098a28e0c1183b8d8b886740b51481fa3ea34e8a8
+content_hash: 1f8a67e3411b31401a87008b7559926a6861db6543f7f6548b186b608eb6b242
 ---
 
 import Tabs from '@theme/Tabs';

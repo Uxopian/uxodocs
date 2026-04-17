@@ -3,9 +3,9 @@ title: Configuration
 sidebar_position: 3
 date: "2003-03-28T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 334897828370c2bee58f937fc7ff991ea6da35974ff75bdecfdf1af7be08c54a
+content_hash: 2a4570dc9dc281298f7d04a342d07b5013146740eaeb42beb41cba19f2a4c292
 ---
 
 # Configuration modification

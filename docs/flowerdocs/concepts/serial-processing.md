@@ -1,7 +1,11 @@
 ---
 title: Serial processing
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 sidebar_position: 11
 date: "2026-04-01"
+content_hash: 7cf4dacebe5a13dff8ef4221cb77537d209673245843292a64ab6f949b797547
 ---
 
 # Serial processing

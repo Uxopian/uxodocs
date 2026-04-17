@@ -136,7 +136,7 @@ ARender v2026.0.0 introduces a new **REST-based provider model** as an alternati
 * **Language-agnostic**: Any language capable of serving HTTP can implement a connector by following the Provider API contract.
 * **Provider routing**: The Rendition Engine routes requests to the appropriate provider using the `X-Provider-ID` HTTP header or the `registry.default-provider` configuration.
 
-> For detailed architecture, API contracts, and configuration, refer to the <DocLink version="v2026.0.0" product="arender-modern" to="guides/integration/connector-providers">REST Connector documentation</DocLink>.
+> For detailed architecture, API contracts, and configuration, refer to the <DocLink version="v2026.0.0" product="arender-modern" to="guides/integration/providers">REST Connector documentation</DocLink>.
 
 
 ### Deployment Changes
@@ -150,6 +150,6 @@ ARender v2026.0.0 introduces a new **REST-based provider model** as an alternati
 
 ### New Functionality
 
-* **REST Provider API**: A new REST API contract allows integrators to build custom document provider as independent microservices. The API includes endpoints for document retrieval (`GET /documents`), and full annotation CRUD (`GET/POST/PUT/DELETE /annotations`). See the <DocLink version="v2026.0.0" product="arender-modern" to="guides/integration/connector-providers">Provider API reference</DocLink>.
+* **REST Provider API**: A new REST API contract allows integrators to build custom document provider as independent microservices. The API includes endpoints for document retrieval (`GET /documents`), and full annotation CRUD (`GET/POST/PUT/DELETE /annotations`). See the <DocLink version="v2026.0.0" product="arender-modern" to="guides/integration/providers">Provider API reference</DocLink>.
 
-* **Rendition Provider API**: The Rendition Engine exposes new endpoints for the frontend to interact with REST providers: `POST /registry/documents` to open documents through a provider, and dedicated annotation management endpoints that apply automatic position transformation for composite documents. See the <DocLink version="v2026.0.0" product="arender-modern" to="reference/rest-api/broker-api/#connector-operations">Rendition API reference</DocLink>.
+* **Rendition Provider API**: The Rendition Engine exposes new endpoints for the frontend to interact with REST providers: `POST /registry/documents` to open documents through a provider, and dedicated annotation management endpoints that apply automatic position transformation for composite documents. See the <DocLink version="v2026.0.0" product="arender-modern" to="reference/rest-api/broker-api/#provider-operations">Rendition API reference</DocLink>.

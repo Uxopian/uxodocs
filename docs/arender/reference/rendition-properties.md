@@ -1,14 +1,12 @@
 ---
 title: Rendition configuration
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /reference/rendition-properties
 sidebar_position: 6
-content_hash: 6541c23f7ee92868fc087d6655333546f714cf4738ac40a4f4b44814b8f00c44
+content_hash: 039a7363442578f36638049d0007ae15ea518ef964389edd8b03769a13f7e98c
 ---
-
-# Rendition configuration
 
 All ARender rendition services are Spring Boot applications. Properties can be set in `application.properties`, `application.yml`, or overridden via environment variables. See [Environment variables](../installation/environment-variables.md) for the naming convention.
 
@@ -131,17 +129,17 @@ These properties control memory allocation and JVM arguments for each sub-proces
 |----------|---------|-------------|
 | `arender.external.annotation.accessor.factory.bean.name` | `annotationAccessorFactory` | Bean name for the external annotation accessor factory |
 
-### Connector registry
+### Provider registry
 
-These properties configure REST connector providers used by the Modern Viewer.
+These properties configure REST providers used by the Modern Viewer.
 
 | Property | Default | Description |
 |----------|---------|-------------|
-| `registry.defaultProvider` | — | Default provider name when `X-Provider-ID` header is absent |
-| `registry.providers.<name>.baseUrl` | — | Base URL of the provider microservice |
-| `registry.providers.<name>.whitelistedParams` | — | Comma-separated parameter names used for document ID generation and request filtering |
+| `registry.default-provider` | — | Default provider name when `X-Provider-ID` header is absent |
+| `registry.providers.<name>.base-url` | — | Base URL of the provider microservice |
+| `registry.providers.<name>.whitelisted-params` | — | Comma-separated parameter names used for document ID generation and request filtering |
 
-The `whitelistedParams` property serves two purposes:
+The `whitelisted-params` property serves two purposes:
 
 1. **Document ID generation** — Only whitelisted parameters are used to generate the internal `DocumentId`. Two requests with the same whitelisted parameter values are treated as the same document (cache hit).
 2. **Security filtering** — Only whitelisted parameters are forwarded to the provider. Other parameters from the original request are filtered out.

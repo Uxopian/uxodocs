@@ -3,9 +3,9 @@ title: Monitoring
 sidebar_label: Monitoring
 sidebar_position: 5
 last_update:
-    date: "2026-03-26T16:37:56.929Z"
-    author: CI/CD Bot
-content_hash: 08741d407d7322f4830ee53506f5079d68527410b3c24b93ca02f83c46dc21d6
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
+content_hash: 2dc369c1bc4c47c9a7c1610ed582d35d9ecc16b029a19cc54c146e43bf7bdebe
 ---
 
 uxopian-ai exposes Spring Boot Actuator endpoints for health checks and metrics export. Metrics are collected by Micrometer and can be exported directly to OpenSearch.

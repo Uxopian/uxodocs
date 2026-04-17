@@ -1,8 +1,12 @@
 ---
 title: Favorite preferences
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Manage user favorite components
 sidebar_position: 27
 date: "2018-04-02T12:20:01+01:59"
+content_hash: f50017982833760c15ea55dacda7b837fd9fb709114e312f55880e29b7925f23
 ---
 
 import Tabs from '@theme/Tabs';

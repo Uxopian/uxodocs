@@ -3,9 +3,9 @@ title: LLM providers
 sidebar_label: LLM providers
 sidebar_position: 8
 last_update:
-    date: "2026-03-24T12:58:17.027Z"
-    author: CI/CD Bot
-content_hash: c26c2a5db9cb1791d18a523c6349605d53b8af0ff7bd63066a9fddad52bc6e76
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
+content_hash: 0029a63ed1544dc24fa016a25c89c0fbf6a495c64abbf72180ed63077d398b23
 ---
 
 Uxopian AI supports nine LLM providers. Provider configurations are loaded from `llm-clients-config.yml` at startup into OpenSearch, then managed at runtime via the Admin API.

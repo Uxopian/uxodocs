@@ -4,9 +4,9 @@ sidebar_position: 12
 description: Create, retrieve, modify, delete and search your virtual folders
 date: "2001-04-29T13:30:01+01:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: b8009a16cf6212149b0b8a371a54d3131c0ff808fa95cbef26435360f0e09fe8
+content_hash: 8de0a2549385539409576a4b637553e51585927e83a2977790ed69ead2ca7fd5
 ---
 
 import Tabs from '@theme/Tabs';

@@ -4,9 +4,9 @@ description: "Create, restore, delete document versions"
 sidebar_position: 8
 date: "2001-03-30T13:20:02+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 08c4129136b4c91d90425187530bf82ae36587ae83b14057b61471ecbf791694
+content_hash: b6589584bd1998f8e8354c3ffa0562987e813a2469f63e224215e8a63f42d94a
 ---
 
 import Tabs from '@theme/Tabs';

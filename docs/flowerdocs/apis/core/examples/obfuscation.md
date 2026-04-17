@@ -4,9 +4,9 @@ description: Obfuscate sensitive data within documents
 sidebar_position: 22
 date: "2018-04-02T12:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 4a4e0bc5ebf1b30e208998479359970c84ef27ffb6cb36bd6351948854348a0b
+content_hash: 7b76513b3ec16783ee444f4ec3235e2ed221c584a561d6992116ac94f760fe60
 ---
 
 import Tabs from '@theme/Tabs';

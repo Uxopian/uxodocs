@@ -4,9 +4,9 @@ sidebar_position: 5
 description: Encrypt your passwords and sensitive data
 date: "2001-03-30T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: c8f68dc80b6975c330eff0bfc1a48f85e53bfc1b4c2cab1396d10c98d741674b
+content_hash: 355e0e98d22e15c9473f622240bde1c23110141590301cac338bcca286c83ef1
 ---
 
 import Tabs from '@theme/Tabs';

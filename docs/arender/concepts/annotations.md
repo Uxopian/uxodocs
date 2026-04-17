@@ -1,11 +1,11 @@
 ---
 title: Annotations
 last_update:
-  date: '2026-03-24T08:07:20.846Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/annotations
 sidebar_position: 5
-content_hash: 0ae1070c54eb880c924528c337b8f4969e947d8cf6d850341dc48abb0c2f9fec
+content_hash: c9e4af86326a774e230e411f15dfbbcdf513aa34f90206c37d018f4cb996bc98
 ---
 
 # Annotations

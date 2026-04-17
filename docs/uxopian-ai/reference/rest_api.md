@@ -3,9 +3,9 @@ title: REST API summary
 sidebar_label: REST API
 sidebar_position: 3
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 015cef5dc6ef77399b5d5bae1eeb1c48137e8e541cd22891921d29d4afe9fa22
+content_hash: 1516a5054eaabf3c2a3a679a6b061abf661991d6020f6a8584a6903e220abf91
 ---
 
 Summary of all REST API endpoints exposed by `uxopian-ai`. All endpoints are accessible via the gateway at the configured base path. An interactive API explorer (Swagger UI) is available at `/swagger-ui/index.html`.

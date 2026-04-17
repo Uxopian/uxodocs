@@ -1,11 +1,11 @@
 ---
 title: Document ID generators
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/features/document-id-generators
 sidebar_position: 2
-content_hash: 9b2120f7203060d484bfbda91f07c2d053e372e6328efd3694b2f04c185456e6
+content_hash: 1e96bf9bac64cb548e7c60b975996a9b071bb6705cb4453c33b60f9e1acfa5a0
 ---
 
 # Document ID generators

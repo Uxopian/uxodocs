@@ -4,9 +4,9 @@ sidebar_position: 6
 description: Create, modify, delete your documents
 date: "2001-03-30T13:20:01+02:00"
 last_update:
-  date: '2026-01-26T14:16:25.927Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: 1cc514d8eef0d6c85707b53fb21c6bf40c8285fe2d25ba1badf3f550aa15df08
+content_hash: 1a02708ed4ae620d0f93bf8724b00e2a5cebf3ff6acab2037fe30460636e9e15
 ---
 
 import Tabs from '@theme/Tabs';

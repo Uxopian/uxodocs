@@ -2,11 +2,11 @@
 viewer: classic
 title: Security
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /concepts/security-model
 sidebar_position: 8
-content_hash: 3fa6c9f98c692fe0be7de194f7aed3cbd076f6bc9db1c1c36f77e88e1b1447a0
+content_hash: 1525cbe0baef7f2824f1c72fd3b314745e2a5feb16c9ade8a693c30e68b21f29
 ---
 
 # Security

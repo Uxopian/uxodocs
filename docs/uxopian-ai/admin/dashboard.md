@@ -3,9 +3,9 @@ title: Dashboard
 sidebar_label: Dashboard
 sidebar_position: 2
 last_update:
-  date: '2026-04-01T00:00:00.000Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
-content_hash: admin-dashboard-2026-04-01
+content_hash: 1ba1159addef4b04acd195eb1db77ccfda36ac232b9d3a5036b72c6b2723c679
 ---
 
 The dashboard is the landing page of the admin panel (route `/`). It gives administrators a summary of tenant activity and direct access to each management section.

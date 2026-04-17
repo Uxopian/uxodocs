@@ -1,8 +1,12 @@
 ---
 title: Handling document classes
+last_update:
+  date: '2026-04-17T14:38:23.664Z'
+  author: CI/CD Bot
 description: Create, retrieve, modify, delete your document classes
 sidebar_position: 14
 date: "2001-04-29T13:30:01+01:02"
+content_hash: d770bf8e5b86648529b2ad985902049f40537974ad25e500b7001fd3c850665d
 ---
 
 import Tabs from '@theme/Tabs';

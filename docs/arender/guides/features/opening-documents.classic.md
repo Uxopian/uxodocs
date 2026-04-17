@@ -2,11 +2,11 @@
 viewer: classic
 title: Opening documents
 last_update:
-  date: '2026-03-23T10:20:59.293Z'
+  date: '2026-04-17T14:38:23.664Z'
   author: CI/CD Bot
 slug: /guides/features/opening-documents
 sidebar_position: 1
-content_hash: 6439c29efff645395083e7e42b3adb92cef070610bb74d07ebdaab0764321357
+content_hash: 9899b20eabb8bf5768b9b14b6cf66594ea4015ab5e23b621ae42ab574b1f5ed4
 ---
 
 # Opening documents

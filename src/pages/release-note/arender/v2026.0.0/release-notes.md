@@ -183,7 +183,7 @@ Two providers are shipped out of the box: **FileNet** and **Alfresco**, packaged
 
 The service broker routes requests to the appropriate provider via the `X-Provider-ID` header. A `rendition-provider-api` module provides shared types for Java-based providers.
 
-See the [Connector providers guide](/docs/arender-modern/guides/integration/connector-providers) and [Provider API reference](/docs/arender-modern/reference/rest-api/provider-api).
+See the [Connector providers guide](/docs/arender-modern/guides/integration/providers) and [Provider API reference](/docs/arender-modern/reference/rest-api/provider-api).
 
 ### FileNet provider secured with OAuth2
 
