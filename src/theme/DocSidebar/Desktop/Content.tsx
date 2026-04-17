@@ -11,7 +11,7 @@ export default function ContentWrapper(props: Props): React.ReactElement {
     const { pathname } = useLocation();
     // Show the viewer toggle only for the current (2026+) version.
     // Old versioned pages (/docs/arender/v4/..., /docs/arender/v2023.x/...) have
-    // no modern viewer — the toggle is meaningless there.
+    // no Horizon viewer — the toggle is meaningless there.
     const isARenderCurrent =
         pathname.startsWith("/docs/arender") && !/^\/docs\/arender\/v\d/.test(pathname);
 

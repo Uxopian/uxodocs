@@ -4,14 +4,14 @@
  * Reads from a single source directory (docs/arender/) and generates two
  * filtered output trees:
  *   - .generated/arender-classic/  → Classic viewer (shared + classic + classic overrides)
- *   - .generated/arender-modern/   → Modern viewer (shared + modern)
+ *   - .generated/arender-horizon/   → ARender Horizon (shared + horizon)
  *
  * Filtering rules:
  *   - Files with `viewer: classic` frontmatter → Classic only
- *   - Files with `viewer: modern` frontmatter  → Modern only
+ *   - Files with `viewer: horizon` frontmatter  → Horizon only
  *   - Files without `viewer:` frontmatter      → Both trees
  *   - `*.classic.md` files → Classic only (renamed to drop .classic suffix, overrides base file)
- *   - `*.modern.md` files  → Modern only (renamed to drop .modern suffix, overrides base file)
+ *   - `*.horizon.md` files  → Horizon only (renamed to drop .horizon suffix, overrides base file)
  *   - Non-markdown files (_category_.json, images) → Both trees
  */
 
@@ -24,19 +24,19 @@ const root = resolve(__dirname, "..");
 
 const SOURCE = resolve(root, "docs/arender");
 const OUT_CLASSIC = resolve(root, ".generated/arender-classic");
-const OUT_MODERN = resolve(root, ".generated/arender-modern");
+const OUT_HORIZON = resolve(root, ".generated/arender-horizon");
 
 const MD_EXTENSIONS = new Set([".md", ".mdx"]);
 
 /**
  * Extract the `viewer:` value from markdown frontmatter.
- * Returns "classic", "modern", or null (shared).
+ * Returns "classic", "horizon", or null (shared).
  */
 function getViewer(filePath) {
     const content = readFileSync(filePath, "utf8");
     const fmMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
     if (!fmMatch) return null;
-    const viewerMatch = fmMatch[1].match(/^viewer:\s*(classic|modern)\s*\r?$/m);
+    const viewerMatch = fmMatch[1].match(/^viewer:\s*(classic|horizon)\s*\r?$/m);
     return viewerMatch ? viewerMatch[1] : null;
 }
 
@@ -50,10 +50,10 @@ function getRoutePath(relPath) {
 }
 
 /**
- * Check if a file is a viewer-specific override (*.classic.md or *.modern.md).
+ * Check if a file is a viewer-specific override (*.classic.md or *.horizon.md).
  */
 function parseOverride(fileName) {
-    const match = fileName.match(/^(.+)\.(classic|modern)(\.mdx?$)/);
+    const match = fileName.match(/^(.+)\.(classic|horizon)(\.mdx?$)/);
     if (match) return { base: match[1] + match[3], viewer: match[2] };
     return null;
 }
@@ -112,9 +112,9 @@ for (const { rel } of allFiles) {
 }
 
 // Build both trees and collect slugs for the viewer toggle manifest
-const slugsByTree = { classic: [], modern: [] };
+const slugsByTree = { classic: [], horizon: [] };
 
-for (const [target, outDir] of [["classic", OUT_CLASSIC], ["modern", OUT_MODERN]]) {
+for (const [target, outDir] of [["classic", OUT_CLASSIC], ["horizon", OUT_HORIZON]]) {
     console.log(`[arender-docs] Building ${target} tree → ${relative(root, outDir)}/`);
     clean(outDir);
 
@@ -123,11 +123,11 @@ for (const [target, outDir] of [["classic", OUT_CLASSIC], ["modern", OUT_MODERN]
         const fileName = basename(rel);
         const isMarkdown = MD_EXTENSIONS.has(ext);
 
-        // 1. Handle override files (*.classic.md / *.modern.md)
+        // 1. Handle override files (*.classic.md / *.horizon.md)
         const override = parseOverride(fileName);
         if (override) {
             if (override.viewer === target) {
-                // Copy with renamed filename (drop .classic/.modern suffix)
+                // Copy with renamed filename (drop .classic/.horizon suffix)
                 const renamedRel = join(dirname(rel), override.base);
                 copyTo(full, outDir, renamedRel);
                 slugsByTree[target].push(getRoutePath(renamedRel));
@@ -162,6 +162,6 @@ for (const [target, outDir] of [["classic", OUT_CLASSIC], ["modern", OUT_MODERN]
 const manifestPath = resolve(root, "src/generated/arenderPages.json");
 mkdirSync(dirname(manifestPath), { recursive: true });
 writeFileSync(manifestPath, JSON.stringify(slugsByTree, null, 2));
-console.log(`[arender-docs] Wrote viewer toggle manifest (${slugsByTree.classic.length} classic, ${slugsByTree.modern.length} modern slugs).`);
+console.log(`[arender-docs] Wrote viewer toggle manifest (${slugsByTree.classic.length} classic, ${slugsByTree.horizon.length} horizon slugs).`);
 
 console.log("[arender-docs] Done.");

@@ -56,7 +56,7 @@ graph LR
     Broker --> TextHandler["Document Text Handler"]
 ```
 
-The [Modern Viewer](./modern-viewer.md) is an npm package embedded as a Web Component in your application. It connects to the rendition backend to display and annotate documents.
+[ARender Horizon](./horizon.md) is an npm package embedded as a Web Component in your application. It connects to the rendition backend to display and annotate documents.
 
 See [System architecture](./architecture.md) for details.
 

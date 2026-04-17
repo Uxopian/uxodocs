@@ -4,27 +4,27 @@ import styles from "./ViewerToggle.module.css";
 import arenderPages from "../../generated/arenderPages.json";
 
 const CLASSIC_PREFIX = "/docs/arender";
-const MODERN_PREFIX = "/docs/arender-modern";
+const HORIZON_PREFIX = "/docs/arender-horizon";
 
 // Build lookup sets of route paths for each tree
 const classicPaths = new Set(
     (arenderPages.classic || []).map((s: string) => s.replace(/\/$/, ""))
 );
-const modernPaths = new Set(
-    (arenderPages.modern || []).map((s: string) => s.replace(/\/$/, ""))
+const horizonPaths = new Set(
+    (arenderPages.horizon || []).map((s: string) => s.replace(/\/$/, ""))
 );
 
 export default function ViewerToggle(): React.ReactElement {
     const { pathname } = useLocation();
 
-    const isModern = pathname.startsWith(MODERN_PREFIX + "/") || pathname === MODERN_PREFIX;
+    const isHorizon = pathname.startsWith(HORIZON_PREFIX + "/") || pathname === HORIZON_PREFIX;
 
-    const handleSwitch = (target: "classic" | "modern") => {
-        if ((target === "modern") === isModern) return;
+    const handleSwitch = (target: "classic" | "horizon") => {
+        if ((target === "horizon") === isHorizon) return;
 
-        const fromPrefix = isModern ? MODERN_PREFIX : CLASSIC_PREFIX;
-        const toPrefix = target === "modern" ? MODERN_PREFIX : CLASSIC_PREFIX;
-        const targetPaths = target === "modern" ? modernPaths : classicPaths;
+        const fromPrefix = isHorizon ? HORIZON_PREFIX : CLASSIC_PREFIX;
+        const toPrefix = target === "horizon" ? HORIZON_PREFIX : CLASSIC_PREFIX;
+        const targetPaths = target === "horizon" ? horizonPaths : classicPaths;
 
         // Extract sub-path after the prefix, e.g. "/overview/architecture"
         const subPath = pathname.slice(fromPrefix.length).replace(/\/$/, "");
@@ -45,18 +45,18 @@ export default function ViewerToggle(): React.ReactElement {
     return (
         <div className={styles.container}>
             <button
-                className={`${styles.segment} ${!isModern ? styles.active : ""}`}
+                className={`${styles.segment} ${!isHorizon ? styles.active : ""}`}
                 onClick={() => handleSwitch("classic")}
-                aria-pressed={!isModern}
+                aria-pressed={!isHorizon}
             >
                 Classic
             </button>
             <button
-                className={`${styles.segment} ${isModern ? styles.active : ""}`}
-                onClick={() => handleSwitch("modern")}
-                aria-pressed={isModern}
+                className={`${styles.segment} ${isHorizon ? styles.active : ""}`}
+                onClick={() => handleSwitch("horizon")}
+                aria-pressed={isHorizon}
             >
-                Modern
+                Horizon
             </button>
         </div>
     );

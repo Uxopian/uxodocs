@@ -1,5 +1,5 @@
 ---
-viewer: modern
+viewer: horizon
 slug: /installation
 title: Installation overview
 last_update:

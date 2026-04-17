@@ -1,5 +1,5 @@
 ---
-viewer: modern
+viewer: horizon
 slug: /guides/upgrade/migration-from-gwt
 title: Migration from GWT
 last_update:
@@ -60,4 +60,4 @@ You do not need to change your backend deployment when switching viewers.
 4. Update JavaScript integrations to use the `window.ARender` / `element.ARender` API
 5. If using repository connectors (Alfresco, FileNet), deploy the corresponding provider microservice and register it in the broker
 6. Test core workflows: viewing, annotation, search, redaction
-7. Verify features you depend on are available in the React UI (see [key capabilities](../../overview/modern-viewer.md#key-capabilities))
+7. Verify features you depend on are available in the React UI (see [key capabilities](../../overview/horizon.md#key-capabilities))

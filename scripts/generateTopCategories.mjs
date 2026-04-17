@@ -138,15 +138,15 @@ async function extractCategoryInfo(filePath) {
 // Products that use pre-built generated trees instead of raw docs/.
 // build-arender-docs.mjs filters viewer-specific files into these dirs
 // before generateTopCategories.mjs runs, so they contain only the
-// correct files for each viewer (no *.classic.md / viewer:modern leakage).
+// correct files for each viewer (no *.classic.md / viewer:horizon leakage).
 const GENERATED_PRODUCTS = {
     'arender': {
         scanDir: path.join(process.cwd(), '.generated', 'arender-classic'),
         routePrefix: '/docs/arender',
     },
-    'arender-modern': {
-        scanDir: path.join(process.cwd(), '.generated', 'arender-modern'),
-        routePrefix: '/docs/arender-modern',
+    'arender-horizon': {
+        scanDir: path.join(process.cwd(), '.generated', 'arender-horizon'),
+        routePrefix: '/docs/arender-horizon',
     },
 };
 
@@ -250,7 +250,7 @@ async function build() {
         scannedProducts.add(productName);
     }
 
-    // Add products that live only in generated dirs (e.g. arender-modern has no docs/ folder)
+    // Add products that live only in generated dirs (e.g. arender-horizon has no docs/ folder)
     for (const [productName, override] of Object.entries(GENERATED_PRODUCTS)) {
         if (!scannedProducts.has(productName) && (await exists(override.scanDir))) {
             result[productName] = {

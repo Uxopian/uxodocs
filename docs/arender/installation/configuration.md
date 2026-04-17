@@ -1,5 +1,5 @@
 ---
-viewer: modern
+viewer: horizon
 slug: /installation/configuration
 title: Advanced configuration
 last_update:

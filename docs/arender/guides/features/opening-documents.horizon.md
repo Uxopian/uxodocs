@@ -1,5 +1,5 @@
 ---
-viewer: modern
+viewer: horizon
 title: Opening documents
 last_update:
   date: '2026-04-17T14:38:23.664Z'
