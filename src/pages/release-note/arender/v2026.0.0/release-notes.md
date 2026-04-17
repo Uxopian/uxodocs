@@ -125,19 +125,6 @@ Security dependencies have been upgraded across all components — backend, fron
 
 ### Developer notes
 
-#### Annotation API compatible with JDK 25
-
-`Changed` — If you use the annotation API in custom code, note that `javax.xml.bind` imports have been replaced by their Jakarta equivalents (`jakarta.xml.bind`). Update your imports accordingly. See the <DocLink version="v2026.0.0" product="arender" to="reference/annotation-types">annotation types reference</DocLink>.
-
-:::tip Migrate your code with AI
-Paste your custom annotation code into an AI assistant with:
-
-```
-Read https://doc.uxopian.com/llms.txt then migrate the following Java code
-from javax.xml.bind to jakarta.xml.bind for ARender v2026
-```
-:::
-
 #### REST API documented in Swagger
 
 `New` — The new REST API endpoints introduced with the connector architecture are now listed in the Swagger documentation, making it easier for integrators to discover and test them. See the <DocLink version="v2026.0.0" product="arender" to="reference/rest-api/broker-api">Broker API reference</DocLink>.
