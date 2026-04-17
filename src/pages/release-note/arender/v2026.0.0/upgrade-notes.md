@@ -104,13 +104,15 @@ This is a **major LTS release** that modernizes the entire ARender technical sta
 
 ### Breaking Changes
 
+* **WAR and EAR packaging removed**
+ARender UI is now exclusively a Spring Boot application. WAR and EAR artifacts are no longer produced. If you currently deploy ARender inside an application server (Tomcat, WebSphere), you must switch to running the Spring Boot JAR directly with `java -jar`.
 * **Executable JAR no longer supported**: With Spring Boot 4, JARs must be run using `java -jar <jar-name>.jar` instead of executing the JAR directly.
-* **ImageMagick 6 removed**: Only ImageMagick 7 is supported going forward.
+* **Third-Party tools upgraded**: LibreOffice from 7.x to 26.x and FFmpeg from 4.x to 8.x.
 * **WAR deployment removed**: ARender UI can no longer be deployed as a WAR file to an external application server. It must be deployed as a standalone Spring Boot application.
 
 ### Third-Party Tool Upgrades
 
-* **LibreOffice**: Upgraded to version **26.2.1.2**.
+* **LibreOffice**: Version **26.2.1.2**.
 * **FFmpeg**: Version **8.0.1**.
 * **ImageMagick**: Version **7.1.2-15**.
 * **common-mime**: Version **3.0.0**.
