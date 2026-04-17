@@ -119,7 +119,7 @@ server {
 
     location /registry/documents {
         proxy_pass http://service-broker:8761/registry/documents;
-        # If using connector providers, inject the provider header:
+        # If using providers, inject the provider header:
         # proxy_set_header X-Provider-ID alfresco;
     }
 }
@@ -220,7 +220,7 @@ services:
       - "ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
 ```
 
-Your Nginx configuration must also inject the `X-Provider-ID` header on `/registry/documents` requests. See [Connector providers](../guides/integration/connector-providers.md) for the full deployment guide and available providers.
+Your Nginx configuration must also inject the `X-Provider-ID` header on `/registry/documents` requests. See [Providers](../guides/integration/providers.md) for the full deployment guide and available providers.
 
 ## Environment variable conventions
 

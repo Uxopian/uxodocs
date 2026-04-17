@@ -43,7 +43,7 @@ graph TB
 The viewer is an npm package embedded as a [Web Component](../reference/web-component.md). It does not communicate directly with the backend — a **reverse proxy or BFF** (Backend For Frontend) sits between the viewer and the service broker. Choose the gateway configuration that matches your use case. Start with the simplest option and add layers only when your requirements demand it:
 
 - **Reverse proxy only** (simplest) — an Nginx or similar proxy that routes API calls to the broker, solving CORS by making the broker appear same-origin. Sufficient when documents are loaded by URL or direct upload.
-- **Reverse proxy + provider routing** — the proxy also injects the `X-Provider-ID` header to route document loading requests to the correct [connector provider](../guides/integration/connector-providers.md) (Alfresco, FileNet, etc.).
+- **Reverse proxy + provider routing** — the proxy also injects the `X-Provider-ID` header to route document loading requests to the correct [provider](../guides/integration/providers.md) (Alfresco, FileNet, etc.).
 - **Full BFF** — a backend layer that additionally handles OAuth2 token management on behalf of the viewer. This is the primary use case for a BFF: when OAuth2 is enabled on the rendition backend, the BFF acquires and forwards tokens so the browser-based viewer never handles them directly.
 
 :::note
@@ -74,7 +74,7 @@ The broker is the sole entry point for all rendition operations. The viewer reac
 ### Responsibilities
 
 - Receives document load requests from the viewer (through the gateway/BFF)
-- Routes connector requests to provider microservices based on the `X-Provider-ID` header
+- Routes requests to provider microservices based on the `X-Provider-ID` header
 - Resolves MIME types and selects the appropriate processing pipeline
 - Delegates format conversion to the converter when the document is not natively renderable
 - Delegates image generation to the renderer
@@ -198,7 +198,7 @@ Providers also handle annotation storage when the repository supports it. The br
 
 Providers are optional — if your application uploads documents directly to the broker API, no provider is needed.
 
-For deployment details, see [Connector providers](../guides/integration/connector-providers.md). For the full API contract, see [Provider API](../reference/rest-api/provider-api.md). For broker-side configuration, see [Rendition properties — Connector registry](../reference/rendition-properties.md#connector-registry).
+For deployment details, see [Providers](../guides/integration/providers.md). For the full API contract, see [Provider API](../reference/rest-api/provider-api.md). For broker-side configuration, see [Rendition properties — Provider registry](../reference/rendition-properties.md#connector-registry).
 
 ---
 

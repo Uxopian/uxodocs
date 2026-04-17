@@ -16,9 +16,9 @@ import TabItem from '@theme/TabItem';
 
 The Modern Viewer loads documents from external repositories through **providers** — standalone REST microservices that run as their own Docker containers. Each provider communicates with the Document Service Broker over HTTP and handles document retrieval from a specific repository type.
 
-This decoupled model means connectors have their own lifecycle, scaling, and release cadence — independent of the viewer and of each other.
+This decoupled model means providers have their own lifecycle, scaling, and release cadence — independent of the viewer and of each other.
 
-For general connector concepts, see [Connectors](../../concepts/connectors.md).
+For general concepts, see [Providers](../../concepts/connectors.md).
 
 ## Document opening flow
 
@@ -113,7 +113,7 @@ When the broker receives a `POST /registry/documents` request, it resolves the p
 2. **`registry.default-provider`** — If the header is absent, the broker falls back to the default provider configured in `registry.default-provider`.
 3. **Error** — If neither is available, the request fails.
 
-For the full list of connector registry properties, see [Rendition properties — Connector registry](../../reference/rendition-properties.md#connector-registry).
+For the full list of provider registry properties, see [Rendition properties — Provider registry](../../reference/rendition-properties.md#connector-registry).
 
 
 ## Document model
@@ -175,7 +175,7 @@ Providers can also handle annotation storage. The broker proxies annotation CRUD
 
 If your provider does not implement annotation endpoints, annotations fall back to the broker's default storage (XFDF files or JDBC, depending on your backend configuration).
 
-For the full broker-side endpoint specification, see [Broker API — Connector operations](../../reference/rest-api/broker-api.md#connector-operations).
+For the full broker-side endpoint specification, see [Broker API — Provider operations](../../reference/rest-api/broker-api.md#connector-operations).
 
 ### Annotation flow
 

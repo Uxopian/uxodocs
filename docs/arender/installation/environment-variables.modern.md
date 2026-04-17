@@ -256,7 +256,7 @@ This is useful for multi-line or complex properties that are awkward to express 
 
 ## Provider services
 
-In the Modern viewer architecture, connector providers run as separate Docker containers alongside the rendition backend. Providers are standard Spring Boot applications. Their properties are set directly as environment variables without an ARender-specific prefix.
+In the Modern viewer architecture, providers run as separate Docker containers alongside the rendition backend. Providers are standard Spring Boot applications. Their properties are set directly as environment variables without an ARender-specific prefix.
 
 ### Alfresco provider
 
@@ -277,7 +277,7 @@ In the Modern viewer architecture, connector providers run as separate Docker co
 | `ARENDER_SERVER_FILENET_SECURITY_OAUTH2_PREFIX` | `arender.server.filenet.security.oauth2.prefix` | (empty) | Token prefix for OAuth2 mode |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` | `spring.security.oauth2.resourceserver.jwt.issuer-uri` | — | JWT issuer URI (OAuth2 mode only) |
 
-### Broker connector registry
+### Broker provider registry
 
 The broker uses its own environment variables to register providers:
 

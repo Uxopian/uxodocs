@@ -62,6 +62,6 @@ See [System architecture](./architecture.md) for details.
 
 ## Next steps
 
-- [Core concepts](../concepts/connectors.md): understand connectors, annotations, and the rendition pipeline
+- [Core concepts](../concepts/connectors.md): understand providers, annotations, and the rendition pipeline
 - [Installation](../installation/docker-compose.md): install ARender for production
 - [REST API reference](../reference/rest-api/broker-api.md): integrate programmatically
