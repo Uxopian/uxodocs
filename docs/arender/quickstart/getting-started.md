@@ -36,7 +36,7 @@ import TabItem from '@theme/TabItem';
 Open a terminal at the root of your project and install the `arender-ui` package:
 
 ```bash
-npm install arender-ui@{{version}} --registry=https://npm.cloudsmith.io/uxopian/react-ui/
+npm install arender-ui@{{version}} --registry=https://npm.cloudsmith.io/uxopian/arender-horizon
 ```
 
 ## Step 2 — Configure the dev server proxy
