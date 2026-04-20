@@ -37,7 +37,7 @@ In the `docker` folder, a `.env` file is present. It may be hidden, depending on
 
 For use in a non-development environment, `token.key` and `system.admin.password` must be changed. More details are available [here](/docs/flowerdocs/config/core/securite/ldap).
 
-# Déploiement de scope
+# Deploy the scope
 
 The rest of this documentation allows you to start up a FlowerDocs application with a scope that includes the minimal technical model.
 
