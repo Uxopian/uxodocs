@@ -118,6 +118,12 @@ jobs:
                     echo "   -> using sidebars_arender_current.ts from ${br}"
                     git show "origin/${br}:sidebars_arender_current.ts" > sidebars_arender_current.ts
                 fi
+
+                # Regenerate .generated/arender-classic/ from this branch's
+                # docs/arender/ before snapshotting. Without this step,
+                # docs:version:arender captures the .generated/arender-classic/
+                # built from staging — not the branch's content.
+                node ./scripts/build-arender-docs.mjs
               fi
 
               # crée le snapshot de version pour le plugin correspondant

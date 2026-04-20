@@ -420,8 +420,10 @@
    UXODOCS LAYOUT OVERRIDES
    ================================================================ */
 
-/* Hide secondary nav (redundant with sidebar) */
-[class*="plugin-id-arender"] .secondary-nav--arender {
+/* Hide secondary nav on the v2026 (current) ARender doc layout — redundant with
+   the sidebar there. Older versioned docs (v2023.x) still rely on the secondary
+   nav to surface their top-level categories. */
+[class*="plugin-id-arender"][class*="docs-version-current"] .secondary-nav--arender {
     display: none;
 }
 
@@ -464,8 +466,19 @@
     margin: 0 auto;
 }
 
-/* Prevent secondary nav JS from hiding sidebar items */
-[class*="plugin-id-arender"] .uxo-hidden-by-filter {
+/* The 800px reading width is right for prose, but pages using ARenderCards
+   (the documentation home on legacy versions like v2023.x) need full width
+   for the cards/feed grid to fit more than one column. */
+[class*="plugin-id-arender"] .markdown:has([class*="documentationSection"]) {
+    max-width: none;
+    margin: 0;
+}
+
+/* On the v2026 (current) ARender layout the secondary nav is hidden, so we
+   undo its sidebar-filtering side effect to keep all top-level items visible.
+   Versioned docs (v2023.x) still use the secondary nav and rely on this
+   filtering to scope the sidebar to the active category. */
+[class*="plugin-id-arender"][class*="docs-version-current"] .uxo-hidden-by-filter {
     opacity: 1 !important;
     max-height: none !important;
     margin: unset !important;
