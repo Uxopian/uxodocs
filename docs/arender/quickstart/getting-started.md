@@ -11,7 +11,7 @@ content_hash: da284353a48fd4318c0c9e6fb7a54d0dfea9fec9417c424033aca159e4da782f
 
 # Getting started with the React UI
 
-This guide walks you through integrating the ARender viewer into your own application — step by step, from setting up registry access to displaying your first document in the browser.
+This guide walks you through integrating the ARender viewer into your own application — step by step, from installation to displaying your first document in the browser.
 
 The ARender viewer is distributed as the `arender-ui` npm package. It registers an `<arender-element>` Web Component that integrates into any framework — React, Angular, Vue, Svelte, or plain HTML. The viewer communicates with the ARender rendition backend over REST.
 
@@ -26,37 +26,20 @@ Then continue with the steps below.
 
 ## Prerequisites
 
-- Access to the ARender npm registry on Cloudsmith (credentials provided by Uxopian)
 - Node.js 20+ and a package manager (npm or yarn)
-
-## Step 1 — Configure access to the ARender registry
-
-ARender packages are hosted on a private Cloudsmith registry. Create a `.npmrc` file at the root of your project with your token:
-
-```ini title=".npmrc"
-//npm.cloudsmith.io/uxopian/release/:_authToken=your_token_here
-```
-
-Replace `your_token_here` with the token provided by Uxopian.
-
-Then add `.npmrc` to your `.gitignore` to avoid committing the token:
-
-```bash title=".gitignore"
-.npmrc
-```
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Step 2 — Install the ARender package
+## Step 1 — Install the ARender package
 
 Open a terminal at the root of your project and install the `arender-ui` package:
 
 ```bash
-npm install arender-ui --registry https://npm.cloudsmith.io/uxopian/release/
+npm install arender-ui@{{version}} --registry=https://npm.cloudsmith.io/uxopian/react-ui/
 ```
 
-## Step 3 — Configure the dev server proxy
+## Step 2 — Configure the dev server proxy
 
 The viewer needs to reach the rendition backend. In development, your dev server's built-in proxy handles this — no external reverse proxy needed.
 
@@ -129,7 +112,7 @@ To connect to your own backend instead of the demo, change each `target` to your
 For other frameworks (Next.js, Nuxt, CRA, webpack…), configure your dev server proxy to forward `/documents`, `/registry/documents`, and `/annotation` to the rendition backend. Refer to your framework's documentation.
 :::
 
-## Step 4 — Embed the viewer
+## Step 3 — Embed the viewer
 
 The `<arender-element>` is a Web Component — a standard HTML element you can drop into any template or JSX just like a `<video>` or `<input>`. It encapsulates the entire ARender viewer: no JavaScript instantiation required to display it. You configure it through HTML attributes.
 
@@ -144,7 +127,7 @@ The table below lists the attributes you can set directly on the element:
 | `uuid` | No | ID of the document to open on startup (alternative to `url`). |
 
 Set `url` or `uuid` directly as HTML attributes to open a document on startup — no JavaScript needed.
-To load a different document at runtime, use the [JavaScript API](#step-6--load-a-document-dynamically).
+To load a different document at runtime, use the [JavaScript API](#step-5--load-a-document-dynamically).
 
 
 <Tabs>
@@ -299,7 +282,7 @@ import 'arender-ui'
 ```
 :::
 
-## Step 5 — Start the dev server
+## Step 4 — Start the dev server
 
 With the viewer embedded, start your development server and open it in your browser.
 
@@ -325,7 +308,7 @@ For other frameworks, use your usual start command (e.g. `npm start` for CRA).
 If the viewer loads but no document appears, double-check the proxy configuration in Step 3 — the `/documents`, `/registry/documents`, and `/annotation` paths must all be proxied to the rendition backend.
 :::
 
-## Step 6 — Load a document dynamically
+## Step 5 — Load a document dynamically
 
 To change the displayed document at runtime, use `window.ARender`. Calls made before the viewer finishes mounting are queued automatically — no need to wait for any event.
 
