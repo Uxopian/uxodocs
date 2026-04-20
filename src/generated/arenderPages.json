@@ -57,7 +57,7 @@
     "/reference/rest-api/servlet-api",
     "/reference/viewer-configuration"
   ],
-  "modern": [
+  "horizon": [
     "/concepts/annotations",
     "/concepts/caching",
     "/concepts/connectors",
@@ -85,8 +85,8 @@
     "/operations/monitoring",
     "/operations/troubleshooting",
     "/overview/architecture",
+    "/overview/horizon",
     "/overview",
-    "/overview/modern-viewer",
     "/overview/supported-formats",
     "/quickstart/getting-started",
     "/reference/annotation-types",
