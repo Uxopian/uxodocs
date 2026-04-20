@@ -56,17 +56,6 @@ LibreOffice, ImageMagick, and FFmpeg have all been upgraded to new major version
 
 The legacy image-based redaction feature and its `redact.flattenText` property have been removed. The modern text-preserving redaction remains fully supported.
 
-:::info Migrate with AI
-Use your preferred AI assistant with ARender's context file to get personalized migration help. Open [Claude](https://claude.ai), [ChatGPT](https://chatgpt.com), or any AI assistant and paste:
-
-```
-Read https://doc.uxopian.com/llms.txt then help me migrate
-my ARender configuration from v2023 to v2026
-```
-
-Then paste your current `application.properties` or `application.yaml`. The AI will use our documentation to map your properties to their v2026 equivalents.
-:::
-
 ---
 
 ## ARender Classic (GWT)
@@ -188,14 +177,6 @@ The service broker routes requests to the appropriate provider via the `X-Provid
 
 See the <DocLink version="v2026.0.0" product="arender-horizon" to="guides/integration/providers">Providers guide</DocLink> and <DocLink version="v2026.0.0" product="arender-horizon" to="reference/rest-api/provider-api">Provider API reference</DocLink>.
 
-:::tip Build a custom connector with AI
-Ask an AI assistant to scaffold your provider:
-
-```
-Read https://doc.uxopian.com/llms.txt then help me build a custom
-REST document provider for ARender Horizon that connects to my DMS
-```
-:::
 
 ### OAuth2 / JWT security for Rendition
 
