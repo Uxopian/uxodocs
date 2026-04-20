@@ -1,3 +1,4 @@
+import * as fs from "fs";
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
@@ -7,6 +8,44 @@ import remarkVariables from "./scripts/remark-variables.mjs";
 // markdown files at build time via the remarkVariables script,
 // replacing {{version}} placeholders.
 const arenderVersion = "2026.0.0";
+
+// Suppress the "unmaintained" banner only on the LTS — the highest snapshot
+// major strictly below `current`. We allow at most two maintained majors in
+// parallel: `current` (auto, no banner) + LTS. Older majors fall back to the
+// default banner. The function is also gated on snapshot presence so the
+// Docusaurus loop doesn't crash referencing a version whose directory
+// hasn't been created yet (it's built one-by-one in CI).
+//
+// Zero maintenance: shipping v2023.20.0 → CI snapshots it → next build
+// auto-promotes it as LTS. Shipping v2027 (bump arenderVersion + add the
+// arender-v2026.X.Y branch) → v2026 auto-promoted as LTS, v2023 demoted to
+// the default "unmaintained" banner (EOL).
+function arenderVersionOverrides(): Record<string, { banner?: "none" }> {
+    const versionedDir = "arender_versioned_docs";
+    if (!fs.existsSync(versionedDir)) return {};
+
+    const currentMajor = parseInt(arenderVersion.split(".")[0], 10);
+
+    const byMajor: Record<number, { name: string; minor: number; patch: number }[]> = {};
+    for (const entry of fs.readdirSync(versionedDir)) {
+        const m = entry.match(/^version-v(\d+)\.(\d+)\.(\d+)$/);
+        if (!m) continue;
+        const major = parseInt(m[1], 10);
+        if (major >= currentMajor) continue;
+        (byMajor[major] ||= []).push({
+            name: entry.replace(/^version-/, ""),
+            minor: parseInt(m[2], 10),
+            patch: parseInt(m[3], 10),
+        });
+    }
+
+    const legacyMajors = Object.keys(byMajor).map(Number).sort((a, b) => b - a);
+    if (legacyMajors.length === 0) return {};
+
+    const ltsMajor = legacyMajors[0];
+    const list = byMajor[ltsMajor].sort((a, b) => b.minor - a.minor || b.patch - a.patch);
+    return { [list[0].name]: { banner: "none" } };
+}
 
 const flowerDocsVersion = "2025.4.0";
 const flowerDocsArenderVersion = "2023.17.0";
@@ -86,7 +125,10 @@ const config: Config = {
                 numberPrefixParser: false,
                 sidebarPath: require.resolve("./sidebars_arender.ts"),
                 lastVersion: "current",
-                versions: { current: { label: `v${arenderVersion}` } },
+                versions: {
+                    current: { label: `v${arenderVersion}` },
+                    ...arenderVersionOverrides(),
+                },
                 showLastUpdateTime: true,
                 remarkPlugins: [[remarkVariables, { variables: { version: arenderVersion } }]],
             },
