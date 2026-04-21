@@ -67,7 +67,7 @@ Create a `values-ai.yaml` overriding the defaults for your environment:
 image:
   registry: artifactory.arondor.cloud:5001
   repository: uxopian-ai
-  tag: "2026.0.0-ft2"
+  tag: "2026.0.0-ft3"
 
 appConfig:
   openSearch:
@@ -133,7 +133,7 @@ Create a `values-gateway.yaml`. The most important section is `files.application
 ```yaml
 image:
   repository: artifactory.arondor.cloud:5001/uxopian-gateway
-  tag: "2026.0.0-ft2"
+  tag: "2026.0.0-ft3"
 
 hazelcast:
   enabled: true
@@ -247,7 +247,7 @@ Expected response:
 
 | Path | Description |
 |---|---|
-| `image.tag` | Image version — use `2026.0.0-ft2` |
+| `image.tag` | Image version — use `2026.0.0-ft3` |
 | `appConfig.openSearch.host` | OpenSearch service hostname |
 | `appConfig.openSearch.port` | OpenSearch port (default `9200`) |
 | `appConfig.externalUrls.appBaseUrl` | Public URL of the application (used in generated links) |
@@ -265,7 +265,7 @@ Expected response:
 
 | Path | Description |
 |---|---|
-| `image.tag` | Image version — use `2026.0.0-ft2` |
+| `image.tag` | Image version — use `2026.0.0-ft3` |
 | `hazelcast.javaOpts` | JVM flags (default `-Xmx256m -Xms256m`) |
 | `hazelcast.clusterName` | Hazelcast cluster name — keep distinct from ai-standalone |
 | `files.application.yaml` | Full gateway config: routes, providers, security rules |

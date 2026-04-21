@@ -37,8 +37,8 @@ flowchart TD
 Releases publish a self-contained ZIP named `ai-standalone-<version>-complete-package.zip`:
 
 ```text
-ai-standalone-2026.0.0-ft2/
-  ai-standalone-2026.0.0-ft2.jar   ← Spring Boot fat JAR
+ai-standalone-2026.0.0-ft3/
+  ai-standalone-2026.0.0-ft3.jar   ← Spring Boot fat JAR
   application.yaml                  ← Spring config (imports ./config/* files)
   config/
     application.yml
@@ -51,17 +51,17 @@ ai-standalone-2026.0.0-ft2/
     hazelcast.yml
     mcp-server.yml
   plugins/
-    flowerdocs-2026.0.0-ft2.jar     ← FlowerDocs integration
-    arender-2026.0.0-ft2.jar        ← ARender integration
-    files-2026.0.0-ft2.jar          ← File tools integration
+    flowerdocs-2026.0.0-ft3.jar     ← FlowerDocs integration
+    arender-2026.0.0-ft3.jar        ← ARender integration
+    files-2026.0.0-ft3.jar          ← File tools integration
   llm-clients/
-    llm-clients-2026.0.0-ft2.jar
+    llm-clients-2026.0.0-ft3.jar
 ```
 
 The `plugins/` directory is scanned at runtime by `IntegrationLoader`. Only the JARs present at startup are activated. Remove plugin JARs for integrations you do not use.
 
 :::tip[Download]
-**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.0.0-ft2/ai-standalone-2026.0.0-ft2-complete-package.zip" download="ai-standalone-2026.0.0-ft2-complete-package.zip">ai-standalone-2026.0.0-ft2-complete-package.zip</a>**
+**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.0.0-ft3/ai-standalone-2026.0.0-ft3-complete-package.zip" download="ai-standalone-2026.0.0-ft3-complete-package.zip">ai-standalone-2026.0.0-ft3-complete-package.zip</a>**
 :::
 
 ### Configure LLM provider
@@ -106,7 +106,7 @@ LLM_CONTEXT_SIZE=10
 From the extraction directory:
 
 ```bash
-java -Xmx768m -Xms512m -jar ai-standalone-2026.0.0-ft2.jar
+java -Xmx768m -Xms512m -jar ai-standalone-2026.0.0-ft3.jar
 ```
 
 The service starts on port `8080` by default. Override with `UXOPIAN_AI_PORT`.
@@ -130,7 +130,7 @@ provider/
 Providers are scanned from the `provider/` directory at runtime by `AuthProviderLoader`. Remove provider JARs that are not needed.
 
 :::tip[Download]
-**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/gateway/standalone/2026.0.0-ft2/standalone-2026.0.0-ft2-complete-package.zip" download="standalone-2026.0.0-ft2-complete-package.zip">standalone-2026.0.0-ft2-complete-package.zip</a>**
+**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/gateway/standalone/2026.0.0-ft3/standalone-2026.0.0-ft3-complete-package.zip" download="standalone-2026.0.0-ft3-complete-package.zip">standalone-2026.0.0-ft3-complete-package.zip</a>**
 :::
 
 ### Configure routes
