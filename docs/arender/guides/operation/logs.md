@@ -118,6 +118,51 @@ Now, after going through the log4j.properties translator, we get the following r
 </configuration>
 ```
 
+## Custom external logback fragment (Web-UI)
+
+Instead of replacing the entire logback configuration, you can include an external logback fragment into the default Web-UI configuration. This allows you to add custom appenders, loggers, or override log levels without having to maintain a full logback file.
+
+Add the following property in the `arender-custom-server.properties` file located in the `configurations` folder :
+
+```properties
+arender.logs.custom.config=/path/to/custom-logback-fragment.xml
+```
+
+The fragment file is included via the Logback `<include>` mechanism. It can contain any valid logback configuration elements such as `<appender>`, `<logger>`, or `<root>` overrides.
+
+**Example fragment** — adding a file appender for a specific package:
+
+```xml title="custom-logback-fragment.xml"
+<included>
+    <appender name="CUSTOM_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/var/log/arender/custom.log</file>
+        <encoder>
+            <pattern>%d{ISO8601} %p [%t] %c:%L - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>/var/log/arender/custom.%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>50MB</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <logger name="com.arondor.viewer" level="DEBUG">
+        <appender-ref ref="CUSTOM_FILE" />
+    </logger>
+</included>
+```
+
+:::info
+The fragment file must use the `<included>` root element instead of `<configuration>`. This is required by the Logback [file include mechanism](https://logback.qos.ch/manual/configuration.html#fileInclude).
+:::
+
+:::note
+If the property is left empty or the file does not exist, the include is silently skipped thanks to the `optional="true"` attribute in the default logback configuration.
+:::
+
 ## Location of log files
 
 The location of the output log file for the presentation server (Web-UI) is in &lt;TOMCAT_PATH&gt;/bin
