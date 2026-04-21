@@ -85,6 +85,18 @@ plugins:
     enabled-tags: alfresco,files
 ```
 
+**Legacy base URL (Web Scripts):**
+
+Some Alfresco operations (redaction, document updates) use the legacy Web Script API (`/alfresco/s/…`) instead of the REST v1 API. The connector auto-derives this URL from `ALFRESCO_BASE_URL`:
+
+| `ALFRESCO_BASE_URL` | Derived `legacyBaseUrl` |
+|---|---|
+| `https://host/alfresco-api` | `https://host/alfresco` |
+| `https://host/alfresco/api` | `https://host/alfresco/s` |
+| `https://host/custom` | `https://host/custom/s` |
+
+Set `ALFRESCO_LEGACY_BASE_URL` explicitly only if the auto-derivation does not match your deployment.
+
 > `flowerdocs` and `alfresco` are incompatible backends — both expose document search and retrieval operations for different ECM systems. Use exactly one per deployment.
 
 **Gateway provider** (uxopian-gateway, UXOAI-104): loaded at startup from the `/provider` directory next to the BFF JAR. Intercepts `/alfresco/**` requests and injects `X-User-Id`, `X-User-Roles`, `X-User-TenantId`, `X-User-Token`.

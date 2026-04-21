@@ -3,9 +3,9 @@ title: Configuration file reference
 sidebar_label: Configuration files
 sidebar_position: 1
 last_update:
-  date: '2026-04-17T14:38:23.664Z'
+  date: '2026-04-21T08:21:12.539Z'
   author: CI/CD Bot
-content_hash: 39d2bac61af3054c32076734e1da064d2d15e5009ab39b4e0ac141ce2b9d84f7
+content_hash: bf85bb722f3fb7c7c4e313457d08423523b82fd3324e92f12d86c0c3cce4203c
 ---
 
 All configuration files for uxopian-ai are placed in the `./config/` directory on the host, mounted to `/app/config` inside the container. The application imports them at startup via `application.yaml`. This page documents every configuration key in every file.
@@ -20,6 +20,8 @@ Controls the base URL, server port, Spring profiles, and tool settings.
 | `server.port` | `UXOPIAN_AI_PORT` | `8080` | HTTP port uxopian-ai listens on |
 | `server.servlet.context-path` | `CONTEXT_PATH` | (empty) | Optional servlet context path prefix |
 | `tools.enabled` | `TOOLS_ENABLED` | `true` | Set to `false` to disable all tool execution |
+| `plugins.root.path` | `PLUGINS_ROOT_PATH` | `plugins/` | Directory scanned at startup for plugin JARs |
+| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Comma-separated whitelist of `@ToolService` tag values registered at startup (see [Plugin system](../understanding/plugin_system.md#filtering-tools-by-tag)). Empty list = all tools registered. |
 | `spring.profiles.active` | `SPRING_PROFILES_ACTIVE` | (empty) | Active Spring profiles. Add `dev` to disable auth. |
 
 Example:
@@ -226,9 +228,33 @@ Hazelcast cluster configuration. Used by the gateway for session caching.
 | `hazelcast.kubernetes.service-dns` | `HAZELCAST_KUBERNETES_SERVICE_DNS` | `ai-standalone-headless` | Kubernetes headless service DNS name |
 | `hazelcast.kubernetes.namespace` | `HAZELCAST_KUBERNETES_NAMESPACE` | `default` | Kubernetes namespace for discovery |
 
+## alfresco
+
+Configuration for the Alfresco plugin (loaded only when `plugins.tools.enabled-tags` contains `alfresco`).
+
+| Key | Env variable | Default | Description |
+|---|---|---|---|
+| `alfresco.base-url` | `ALFRESCO_BASE_URL` | (empty) | Alfresco REST API v1 base URL. Required when the plugin is enabled. |
+| `alfresco.legacy-base-url` | `ALFRESCO_LEGACY_BASE_URL` | (auto-derived) | Base URL for Alfresco legacy Web Script endpoints (`/alfresco/s/…`). Auto-derived from `base-url` when not set: if `base-url` contains `/alfresco-api`, it is replaced with `/alfresco`; if `base-url` ends with `/api`, the suffix becomes `/s`; otherwise `/s` is appended. Override only if the auto-derivation does not match your deployment layout. |
+| `alfresco.cmm-enabled` | `ALFRESCO_CMM_ENABLED` | `false` | Enable Alfresco Custom Content Model lookup. When disabled, the LLM sees only the fallback `cm:*` system properties. |
+| `alfresco.common-system-properties` | — | `cm:name`, `cm:title`, `cm:description`, `cm:created`, `cm:modified`, `cm:creator`, `cm:modifier` | List of system properties (name, label, description, indexable, allowed values) surfaced to the LLM when CMM is disabled. Override if your tenant uses a different default schema. |
+
+Example:
+
+```yaml
+alfresco:
+  base-url: ${ALFRESCO_BASE_URL:}
+  # legacy-base-url is auto-derived from base-url — set only if the derivation is wrong
+  # legacy-base-url: ${ALFRESCO_LEGACY_BASE_URL:}
+  cmm-enabled: ${ALFRESCO_CMM_ENABLED:false}
+  # common-system-properties: (defaults shipped with the plugin)
+```
+
+See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deployment steps.
+
 ## mcp-server.yml
 
-MCP (Model Context Protocol) configuration. All MCP configuration is commented out by default. MCP support is experimental.
+MCP (Model Context Protocol) boot-time configuration. Starting with 2026.0.0-ft3, MCP connections are typically managed through the admin UI ([Managing MCP servers](../admin/managing_mcp_servers.md)) rather than this file; the shipped `mcp-server.yml` is commented out.
 
 ```yaml
 # mcp:
@@ -236,13 +262,13 @@ MCP (Model Context Protocol) configuration. All MCP configuration is commented o
 #     name: uxopian-ai-mcp-server
 #     log-requests: true
 #   sse:
-#   url: ${MCP_SSE_URL:http://localhost:8081/uxopian/ai/sse}
+#     url: ${MCP_SSE_URL:http://localhost:8081/uxopian/ai/sse}
 ```
 
 | Key | Env variable | Description |
 |---|---|---|
-| `mcp.sse.url` | `MCP_SSE_URL` | SSE endpoint URL for MCP server |
-| `mcp.client.name` | — | MCP client name |
+| `mcp.sse.url` | `MCP_SSE_URL` | Legacy boot-time MCP SSE endpoint URL. Prefer the admin UI for runtime management. |
+| `mcp.client.name` | — | MCP client name presented to the server. |
 
 ## gateway-application.yaml
 
