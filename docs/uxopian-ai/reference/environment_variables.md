@@ -58,6 +58,7 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | Variable | Default | Description |
 |---|---|---|
 | `PLUGINS_ROOT_PATH` | `plugins/` | Path to the directory containing plugin JARs |
+| `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Comma-separated whitelist of `@ToolService(tags=…)` values. Controls which tool sets are registered at startup. Empty list = all tools registered. Untagged `@ToolService` beans are always registered. **Do not combine `flowerdocs` and `alfresco`** — they both expose document operations for different ECM backends; loading both will expose conflicting tool suites to the LLM. Use exactly one: `flowerdocs,files` (default), `alfresco,files`, or `files` if no ECM backend is needed. |
 
 ### Integration connectors
 
@@ -65,6 +66,8 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 |---|---|---|
 | `RENDITION_BASE_URL` | (empty) | ARender DSB base URL. Required if the ARender plugin is deployed. |
 | `FD_WS_URL` | (empty) | FlowerDocs core web service URL (e.g. `http://<flowerdocs-endpoint>/core/`). Required if the FlowerDocs plugin is deployed. |
+| `ALFRESCO_BASE_URL` | (empty) | Alfresco repository base URL. Required if the Alfresco plugin is deployed (via `PLUGINS_TOOLS_ENABLED_TAGS=alfresco,…`). |
+| `ALFRESCO_CMM_ENABLED` | `false` | Enable Alfresco Custom Content Model lookup. When disabled, the LLM sees only the built-in `cm:*` system properties. |
 
 ### Prompts and goals
 
@@ -79,11 +82,13 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 |---|---|---|
 | `app.security.secret-key` | (dev default) | AES/GCM encryption key for stored API secrets. Set a unique value in production. |
 
-### MCP (experimental)
+### MCP (Model Context Protocol)
+
+Since 2026.0.0-ft3, MCP servers are registered from the admin UI — see [Managing MCP servers](../admin/managing_mcp_servers.md). The environment variable below is retained only for the legacy single-server boot-time configuration and is disabled by default.
 
 | Variable | Default | Description |
 |---|---|---|
-| `MCP_SSE_URL` | (empty) | SSE endpoint URL for an external MCP server. MCP is disabled when not set. |
+| `MCP_SSE_URL` | (empty) | Legacy boot-time MCP SSE endpoint URL, read only when the commented block in `mcp-server.yml` is re-enabled. For runtime management, prefer the admin UI. |
 
 ### Hazelcast
 

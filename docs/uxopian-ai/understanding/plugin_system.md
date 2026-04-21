@@ -49,18 +49,61 @@ If a bean name conflicts with an already-registered bean, `IntegrationLoader` lo
 
 ## Shipped plugins
 
-| Plugin | JAR location | Content |
-|---|---|---|
-| ARender connector | `integrations/arender/connector` | `RenditionService`, `OcrDocumentParser` interface |
-| ARender helper | `integrations/arender/helper` | `DocumentService` (`@HelperService(name="documentService")`) |
-| FlowerDocs connector | `integrations/flowerdocs/connector` | FlowerDocs API client services |
-| FlowerDocs helper | `integrations/flowerdocs/helper` | `FlowerDocsServiceHelper`, `DocumentSummarizer`, `TagHelper` |
-| FlowerDocs tool | `integrations/flowerdocs/tool` | `FlowerDocsSearchService`, `FlowerDocsRedactService` (`@ToolService`) |
-| Files tool | `tools/files` | Generic file utilities tool |
+Starting with 2026.0.0-ft3, each integration is packaged as a single shaded JAR per domain — `connector` and `helper` classes are shaded into the `tool` (or, for integrations without a tool, directly into the helper JAR). The distribution ZIP unpacks one JAR per integration into `plugins/`.
 
-## Disabling tools
+| Plugin | Source module | Content | Tool tag |
+|---|---|---|---|
+| ARender | `integrations/arender/{connector,helper}` | `RenditionService`, `OcrDocumentParser` interface, `DocumentService` (`@HelperService(name="documentService")`) | — |
+| FlowerDocs | `integrations/flowerdocs/{connector,helper,tool}` | FlowerDocs API client, `FlowerDocsServiceHelper`, `DocumentSummarizer`, `TagHelper`, `FlowerDocsSearchService`, `FlowerDocsDocumentService`, `FlowerDocsRedactService` | `flowerdocs` |
+| Alfresco | `integrations/alfresco/{connector,helper,tool}` | `AlfrescoWebClient`, `AlfrescoSearchService`, `AlfrescoDocumentService`, `AlfrescoModelService`, `AlfrescoHelper`, `AlfrescoSearchToolService`, `AlfrescoDocumentToolService`, `AlfrescoMetadataToolService` | `alfresco` |
+| Files tool | `tools/files` | Generic file utilities tool | `files` |
 
-All tools can be disabled globally by setting `tools.enabled=false` (or `TOOLS_ENABLED=false`). This prevents `ToolExecutor` from collecting any `@ToolService` beans and sends no tool specifications to the LLM.
+## Filtering tools by tag
+
+In 2026.0.0-ft3, `@ToolService` accepts a `tags` attribute (`String[]`, default `{}`). The `plugins.tools.enabled-tags` property (env `PLUGINS_TOOLS_ENABLED_TAGS`) is a comma-separated whitelist used by `IntegrationLoader` to decide which tool sets to register:
+
+| Whitelist state | Behaviour |
+|---|---|
+| Empty list | All `@ToolService` beans are registered regardless of their tags (backward compatible). |
+| Non-empty list | A `@ToolService` is registered only if at least one of its tags matches the whitelist. |
+| `@ToolService` with no tags | Always registered, regardless of whitelist. This keeps custom in-house tools from being filtered out accidentally. |
+
+The default value shipped in `application.yaml` is `flowerdocs,files`, so Alfresco tools are present in `plugins/` but not registered unless you opt in.
+
+### Choosing a document management backend
+
+`flowerdocs` and `alfresco` are two separate tool suites that both expose document search, retrieval, and metadata operations — but for different ECM backends and with incompatible query APIs. Loading both simultaneously is not recommended: the LLM would see two distinct sets of tools for the same operations and may call either one unpredictably.
+
+Pick **exactly one** backend per deployment:
+
+| Deployment target | `PLUGINS_TOOLS_ENABLED_TAGS` |
+|---|---|
+| FlowerDocs (default) | `flowerdocs,files` |
+| Alfresco | `alfresco,files` |
+| No ECM backend | `files` |
+
+```yaml
+# FlowerDocs (default — no change needed)
+plugins:
+  tools:
+    enabled-tags: flowerdocs,files
+
+# Alfresco
+plugins:
+  tools:
+    enabled-tags: alfresco,files
+
+# No ECM backend
+plugins:
+  tools:
+    enabled-tags: files
+```
+
+For Spring Boot tests that use classpath component scan, add `@TestPropertySource(properties = "plugins.tools.enabled-tags=...")` and rely on `ToolServiceTagFilter` (a `BeanDefinitionRegistryPostProcessor`) to strip non-matching beans from the registry.
+
+## Disabling tools globally
+
+To disable tool execution entirely, set `tools.enabled=false` (or `TOOLS_ENABLED=false`). `ToolExecutor` then skips initialization and sends no tool specifications to the LLM. This setting is independent of the tag whitelist: `tools.enabled=false` wins regardless of `enabled-tags`.
 
 ## Adding and removing plugins
 
