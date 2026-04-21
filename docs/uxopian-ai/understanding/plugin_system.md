@@ -3,9 +3,9 @@ title: Plugin system
 sidebar_label: Plugin system
 sidebar_position: 10
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-04-21T08:21:12.539Z'
   author: CI/CD Bot
-content_hash: 4ac6236d33c49c7f5305d8c386e17a6ea158efdef27f916a26fdaae1e12c5b2c
+content_hash: 121de5445a99c591a9f0c967bd42670a6deeb857b22ed9eedbe05df42fe7ba16
 ---
 
 Uxopian AI extends its capabilities through plugins. A plugin is a shaded JAR placed in the `plugins/` directory. At startup, `IntegrationLoader` scans all JARs in that directory and registers their Spring beans in the application context.
