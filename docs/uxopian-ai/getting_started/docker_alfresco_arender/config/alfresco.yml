@@ -1,0 +1,5 @@
+alfresco:
+  base-url: ${ALFRESCO_BASE_URL:http://share:8080/share/proxy/alfresco-api}
+  # CMM (Content Model Management) API requires admin permissions and is not proxied by Share.
+  # Enable only if the Alfresco repository CMM endpoint is directly accessible with elevated credentials.
+  cmm-enabled: ${ALFRESCO_CMM_ENABLED:false}
