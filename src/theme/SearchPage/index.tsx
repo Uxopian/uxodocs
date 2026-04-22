@@ -114,7 +114,15 @@ function SearchPageContent() {
         useSearchQuery();
     const [searchQuery, setSearchQuery] = useState(searchValue);
     const [searchResults, setSearchResults] = useState<any[]>();
-    const [selectedProduct, setSelectedProduct] = useState<string>("all");
+    const [selectedProduct, setSelectedProduct] = useState<string>(() => {
+        if (typeof window !== "undefined") {
+            const product = new URLSearchParams(window.location.search).get("product");
+            if (product === "all" || PRODUCT_KEYS.includes(product as (typeof PRODUCT_KEYS)[number])) {
+                return product;
+            }
+        }
+        return "all";
+    });
     const versionUrl = `${baseUrl}${searchVersion}`;
 
     const pageTitle = useMemo(
@@ -150,6 +158,18 @@ function SearchPageContent() {
 
     const handleSearchInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
+    }, []);
+
+    const handleProductChange = useCallback((product: string) => {
+        setSelectedProduct(product);
+        const params = new URLSearchParams(window.location.search);
+        if (product === "all") {
+            params.delete("product");
+        } else {
+            params.set("product", product);
+        }
+        const qs = params.toString();
+        window.history.pushState(null, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
     }, []);
 
     useEffect(() => {
@@ -252,7 +272,7 @@ function SearchPageContent() {
                     <div className={styles.productFilters}>
                         <button
                             className={`${styles.productFilterButton} ${selectedProduct === "all" ? styles.productFilterButtonActive : ""}`}
-                            onClick={() => setSelectedProduct("all")}
+                            onClick={() => handleProductChange("all")}
                             title="All Products"
                         >
                             <div className={styles.productFilterIcon}>
@@ -279,7 +299,7 @@ function SearchPageContent() {
                                 <button
                                     key={productKey}
                                     className={`${styles.productFilterButton} ${selectedProduct === productKey ? styles.productFilterButtonActive : ""}`}
-                                    onClick={() => setSelectedProduct(productKey)}
+                                    onClick={() => handleProductChange(productKey)}
                                     style={
                                         {
                                             "--product-color": config.bgColor,
