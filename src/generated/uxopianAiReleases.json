@@ -1,10 +1,18 @@
 [
   {
+    "version": "2026.0.0-ft3",
+    "majorVersion": "2026",
+    "date": "2026-04-21",
+    "description": "Alfresco integration, Spring Boot 4 / Jackson 3 upgrade, MCP server admin UI, redesigned UX, and automatic conversation titles.",
+    "latest": true,
+    "slug": "release-note-2026.0.0-ft3"
+  },
+  {
     "version": "2026.0.0-ft2",
     "majorVersion": "2026",
     "date": "2026-02-01",
     "description": "Dynamic LLM provider management, standalone Gateway service, expanded statistics API, prompt tester, and admin UI improvements.",
-    "latest": true,
+    "latest": false,
     "slug": "release-note-2026.0.0-ft2"
   },
   {

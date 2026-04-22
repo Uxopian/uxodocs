@@ -3,9 +3,9 @@ title: Tools
 sidebar_label: Tools
 sidebar_position: 7
 last_update:
-  date: '2026-03-26T16:37:56.929Z'
+  date: '2026-04-21T08:21:12.539Z'
   author: CI/CD Bot
-content_hash: fcdea77a1c92e427558e8dd4f14dc6add93d0aea68f57f718724953d2e7800bd
+content_hash: 2f00217348cc8683c73dabbd603fd5af4d0c6c885b9a6bbc37403d84686b783f
 ---
 
 Tools are Java methods that the LLM can call during a conversation. When the LLM decides to use a tool, it emits a tool call request; uxopian-ai executes the corresponding method and returns the result to the LLM, which then incorporates it into its response.
@@ -30,11 +30,11 @@ sequenceDiagram
 
 ## Annotations
 
-Tools are defined using three annotations from LangChain4J:
+Tools are defined using three annotations — `@ToolService` is provided by uxopian-ai, `@Tool` and `@P` come from LangChain4J:
 
 | Annotation | Target | Purpose |
 |---|---|---|
-| `@ToolService` | Class | Marks the bean as a tool provider. `IntegrationLoader` uses this to register it. |
+| `@ToolService(tags = {...})` | Class | Marks the bean as a tool provider. `IntegrationLoader` uses this to register it. The optional `tags` array drives the tool whitelist — see [Filtering tools by tag](#filtering-tools-by-tag). |
 | `@Tool` | Method | Marks a method as callable by the LLM. The annotation value is the description sent to the LLM. |
 | `@P` | Parameter | Describes a parameter. The description is sent to the LLM so it knows what value to provide. |
 
@@ -42,7 +42,7 @@ Example:
 
 ```java
 @Service
-@ToolService
+@ToolService(tags = "alfresco")
 public class MySearchService {
 
     @Tool("Search for documents matching a query string. Returns a list of document titles.")
@@ -59,6 +59,17 @@ public class MySearchService {
 `ToolExecutor` collects all beans annotated with `@ToolService` at `ContextRefreshedEvent`. For each bean, it scans public methods annotated with `@Tool` and registers them by name. The tool name defaults to the method name; it can be overridden with `@Tool(name = "...")`.
 
 If tools are disabled via `tools.enabled=false` (or `TOOLS_ENABLED=false`), the `ToolExecutor` skips initialization and no tools are available.
+
+## Filtering tools by tag
+
+In 2026.0.0-ft3, `@ToolService.tags()` + `plugins.tools.enabled-tags` control which tool sets are registered at startup. This lets a single distribution ZIP ship several integrations (Alfresco, FlowerDocs, Files) while the deployer picks which ones the LLM actually sees.
+
+- Default value in the shipped `application.yaml`: `flowerdocs,files` — Alfresco tools are *not* registered unless you opt in.
+- Empty list = every `@ToolService` is registered.
+- A `@ToolService` without any tag is *always* registered (backward compatible for custom in-tree tools).
+- Multi-tagged tools are registered when *any* of their tags matches the whitelist.
+
+See [Plugin system — Filtering tools by tag](./plugin_system.md#filtering-tools-by-tag) for the full mechanism and test-time usage.
 
 ## Function-calling model requirement
 
@@ -83,9 +94,43 @@ The `flowerdocs/tool` plugin ships several tools that the LLM can use to search 
 
 A typical LLM search session calls `getTaskClassAndTagClassesDescriptions` first, then builds criteria, wraps them in clauses, and calls `searchDocuments`.
 
+## Built-in tools: Alfresco
+
+Added in 2026.0.0-ft3 (tag `alfresco`). The `integrations/alfresco/tool` plugin ships three `@ToolService` beans covering 13 AFTS-backed tools:
+
+### Search (`AlfrescoSearchToolService`)
+
+| Tool name | Description |
+|---|---|
+| `getAlfrescoDataModel` | Step 0 prerequisite: returns the tenant's light data model (common system properties + optional CMM custom types/aspects) |
+| `buildAlfrescoTypeFilter` | AFTS fragment to filter on node type (e.g. `cm:content`, `acme:invoice`) |
+| `buildAlfrescoPropertyContainsFilter` | AFTS fragment for partial text match on a property |
+| `buildAlfrescoPropertyEqualsFilter` | AFTS fragment for exact property match |
+| `buildAlfrescoDateRangeFilter` | AFTS fragment for date ranges |
+| `buildAlfrescoFullTextFilter` | AFTS fragment for full-text content search |
+| `combineAlfrescoFilters` | Combines multiple AFTS fragments with AND or OR |
+| `buildAlfrescoSort` | Builds a sort specification (property + direction) |
+| `searchAlfrescoNodes` | Executes the assembled AFTS query |
+
+### Documents (`AlfrescoDocumentToolService`)
+
+| Tool name | Description |
+|---|---|
+| `getAlfrescoDocumentIdsByName` | Looks up document node IDs by name |
+| `getAlfrescoDocumentContent` | Returns the textual content of a document |
+| `listAlfrescoFolderContents` | Lists files in an Alfresco folder |
+
+### Metadata (`AlfrescoMetadataToolService`)
+
+| Tool name | Description |
+|---|---|
+| `getAlfrescoDocumentProperties` | Returns all metadata properties of a node |
+
+A typical Alfresco search session calls `getAlfrescoDataModel` first to learn the correct qualified names, builds filters, optionally adds a sort, and finishes with `searchAlfrescoNodes`. See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deployment steps.
+
 ## Tools and MCP
 
-`ToolExecutor` also supports the Model Context Protocol (MCP) via a Server-Sent Events endpoint. When `mcp.sse.url` and `mcp.client.name` are set, the executor connects to an external MCP server at startup and registers its tools alongside local tools. MCP support is currently experimental and all related configuration in the shipped `mcp-server.yml` is commented out.
+`ToolExecutor` also exposes tools provided by external Model Context Protocol (MCP) servers. Starting with 2026.0.0-ft3, MCP connections are managed through the admin UI rather than through `mcp-server.yml`: administrators register MCP endpoints from the *MCP Servers* panel, connections are isolated per tenant when authenticated, and identical unauthenticated connections are pooled and shared across tenants. Tools discovered from an enabled MCP server are registered alongside local tools and are callable in the same way. See [Managing MCP servers in the admin UI](../admin/managing_mcp_servers.md).
 
 ## Related pages
 
@@ -93,3 +138,5 @@ A typical LLM search session calls `getTaskClassAndTagClassesDescriptions` first
 - [Write and deploy custom tools](../extending/custom_tools.md)
 - [LLM providers](./llm_providers.md)
 - [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx)
+- [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx)
+- [Managing MCP servers in the admin UI](../admin/managing_mcp_servers.md)

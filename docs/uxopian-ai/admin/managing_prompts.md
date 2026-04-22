@@ -3,9 +3,9 @@ title: Managing prompts in the admin UI
 sidebar_label: Prompts
 sidebar_position: 3
 last_update:
-  date: '2026-04-17T14:38:23.664Z'
+  date: '2026-04-21T08:21:12.539Z'
   author: CI/CD Bot
-content_hash: 62906814cb8445300e16538360feacee70a995e4498729d2ba25ee4d032ed3ec
+content_hash: bf0295fe905e6e8b5242eecf8d8723b1f8adc50c60c20d0fd1e2b4301fb58b63
 ---
 
 The prompts section of the admin panel lets you view, create, edit, and delete prompt definitions for the current tenant. Changes take effect immediately without restarting the application.
@@ -13,6 +13,8 @@ The prompts section of the admin panel lets you view, create, edit, and delete p
 ## Navigate to prompts
 
 In the admin panel, click "Prompts" in the navigation. The page lists all prompts available for the current tenant, including globals and tenant-specific overrides.
+
+Since 2026.0.0-ft3, the prompts list uses a **stale-while-revalidate** cache: when you revisit the page, the previously loaded prompts are rendered immediately while a silent background request refreshes the list. A loading indicator is only shown on the first visit when no cached data is available.
 
 ## Create a prompt
 

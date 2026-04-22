@@ -1,0 +1,2 @@
+FROM docker.io/alfresco/alfresco-content-repository-community:25.3.0
+COPY --from=module src/main/resources/custom/repo-webscripts/ /usr/local/tomcat/webapps/alfresco/WEB-INF/classes/alfresco/extension/templates/webscripts/

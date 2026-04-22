@@ -1,0 +1,346 @@
+<alfresco-config>
+
+   <!-- Global config section -->
+   <config replace="true">
+      <flags>
+         <client-debug>false</client-debug>
+         <client-debug-autologging>false</client-debug-autologging>
+      </flags>
+   </config>
+
+   <config evaluator="string-compare" condition="WebFramework">
+      <web-framework>
+         <autowire>
+            <mode>production</mode>
+         </autowire>
+         <module-deployment>
+            <mode>manual</mode>
+            <enable-auto-deploy-modules>true</enable-auto-deploy-modules>
+         </module-deployment>
+      </web-framework>
+   </config>
+
+   <!--
+      CSRF policy — allows uxopian-ai backend to call Share proxy endpoints
+      without a CSRF token (server-to-server calls using the user's JSESSIONID).
+   -->
+   <config evaluator="string-compare" condition="CSRFPolicy" replace="true">
+      <properties>
+         <token>Alfresco-CSRFToken</token>
+         <referer>http://localhost:8080/share/.*</referer>
+         <origin>http://localhost:8080</origin>
+      </properties>
+
+      <client>
+         <cookie>{token}</cookie>
+         <header>{token}</header>
+         <parameter>{token}</parameter>
+      </client>
+
+      <filter>
+
+         <!-- Allow uxopian-ai backend POST/PUT/DELETE through the alfresco-api proxy -->
+         <rule>
+            <request>
+               <method>POST|PUT|DELETE</method>
+               <path>/proxy/alfresco-api/.*</path>
+            </request>
+         </rule>
+
+         <!-- Allow uxopian-ai backend to update MLText properties via form processor -->
+         <rule>
+            <request>
+               <method>POST</method>
+               <path>/proxy/alfresco/api/node/workspace/SpacesStore/.*/formprocessor</path>
+            </request>
+         </rule>
+
+         <rule>
+            <request>
+               <path>/proxy/alfresco/remoteadm/.*</path>
+            </request>
+            <action name="throwError">
+               <param name="message">It is not allowed to access this url from your browser</param>
+            </action>
+         </rule>
+
+         <rule>
+            <request>
+               <method>POST</method>
+               <path>/proxy/alfresco/api/publishing/channels/.+</path>
+            </request>
+            <action name="assertReferer">
+               <param name="referer">{referer}</param>
+            </action>
+            <action name="assertOrigin">
+               <param name="origin">{origin}</param>
+            </action>
+         </rule>
+
+         <rule>
+            <request>
+               <method>POST</method>
+               <path>
+                  /page/caches/dependency/clear|/page/index|/page/surfBugStatus|/page/modules/deploy|/page/modules/module|/page/api/javascript/debugger|/page/console
+               </path>
+            </request>
+            <action name="assertReferer">
+               <param name="referer">{referer}</param>
+            </action>
+            <action name="assertOrigin">
+               <param name="origin">{origin}</param>
+            </action>
+         </rule>
+
+         <rule>
+            <request>
+               <method>POST</method>
+               <path>
+                  /page/dologin(\?.+)?|/page/site/[^/]+/start-workflow|/page/start-workflow|/page/context/[^/]+/start-workflow
+               </path>
+            </request>
+            <action name="assertReferer">
+               <param name="referer">{referer}</param>
+            </action>
+            <action name="assertOrigin">
+               <param name="origin">{origin}</param>
+            </action>
+         </rule>
+
+         <rule>
+            <request>
+               <method>POST</method>
+               <path>/page/dologout(\?.+)?</path>
+            </request>
+            <action name="assertReferer">
+               <param name="referer">{referer}</param>
+            </action>
+            <action name="assertOrigin">
+               <param name="origin">{origin}</param>
+            </action>
+            <action name="clearToken">
+               <param name="session">{token}</param>
+               <param name="cookie">{token}</param>
+            </action>
+         </rule>
+
+         <rule>
+            <request>
+               <session>
+                  <attribute name="_alf_USER_ID">.+</attribute>
+                  <attribute name="{token}" />
+               </session>
+            </request>
+            <action name="generateToken">
+               <param name="session">{token}</param>
+               <param name="cookie">{token}</param>
+            </action>
+         </rule>
+
+         <rule>
+            <request>
+               <method>GET</method>
+               <path>/page/.*</path>
+               <session>
+                  <attribute name="_alf_USER_ID">.+</attribute>
+                  <attribute name="{token}">.+</attribute>
+               </session>
+            </request>
+            <action name="generateToken">
+               <param name="session">{token}</param>
+               <param name="cookie">{token}</param>
+            </action>
+         </rule>
+
+         <rule>
+            <request>
+               <method>POST</method>
+               <header name="Content-Type">multipart/.+</header>
+               <session>
+                  <attribute name="_alf_USER_ID">.+</attribute>
+               </session>
+            </request>
+            <action name="assertToken">
+               <param name="session">{token}</param>
+               <param name="parameter">{token}</param>
+            </action>
+            <action name="assertReferer">
+               <param name="referer">{referer}</param>
+            </action>
+            <action name="assertOrigin">
+               <param name="origin">{origin}</param>
+            </action>
+         </rule>
+
+         <rule>
+            <request>
+               <method>POST|PUT|DELETE</method>
+               <session>
+                  <attribute name="_alf_USER_ID">.+</attribute>
+               </session>
+            </request>
+            <action name="assertToken">
+               <param name="session">{token}</param>
+               <param name="header">{token}</param>
+            </action>
+            <action name="assertReferer">
+               <param name="referer">{referer}</param>
+            </action>
+            <action name="assertOrigin">
+               <param name="origin">{origin}</param>
+            </action>
+         </rule>
+      </filter>
+
+   </config>
+
+   <config evaluator="string-compare" condition="Replication">
+      <share-urls>
+      </share-urls>
+   </config>
+
+   <config evaluator="string-compare" condition="DocumentLibrary" replace="true">
+      <tree>
+         <evaluate-child-folders>false</evaluate-child-folders>
+         <maximum-folder-count>1000</maximum-folder-count>
+         <timeout>7000</timeout>
+      </tree>
+      <aspects>
+         <visible>
+            <aspect name="cm:generalclassifiable" />
+            <aspect name="cm:complianceable" />
+            <aspect name="cm:dublincore" />
+            <aspect name="cm:effectivity" />
+            <aspect name="cm:summarizable" />
+            <aspect name="cm:versionable" />
+            <aspect name="cm:templatable" />
+            <aspect name="cm:emailed" />
+            <aspect name="emailserver:aliasable" />
+            <aspect name="cm:taggable" />
+            <aspect name="app:inlineeditable" />
+            <aspect name="cm:geographic" />
+            <aspect name="exif:exif" />
+            <aspect name="audio:audio" />
+            <aspect name="cm:indexControl" />
+            <aspect name="dp:restrictable" />
+            <aspect name="smf:customConfigSmartFolder" />
+            <aspect name="smf:systemConfigSmartFolder" />
+         </visible>
+         <addable></addable>
+         <removeable></removeable>
+      </aspects>
+      <types>
+         <type name="cm:content">
+            <subtype name="smf:smartFolderTemplate" />
+         </type>
+         <type name="cm:folder"></type>
+         <type name="trx:transferTarget">
+            <subtype name="trx:fileTransferTarget" />
+         </type>
+      </types>
+      <repository-url>http://alfresco:8080/alfresco</repository-url>
+      <google-docs>
+         <enabled>false</enabled>
+         <creatable-types>
+            <creatable type="doc">application/vnd.openxmlformats-officedocument.wordprocessingml.document</creatable>
+            <creatable type="xls">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</creatable>
+            <creatable type="ppt">application/vnd.ms-powerpoint</creatable>
+         </creatable-types>
+      </google-docs>
+      <file-upload>
+         <adobe-flash-enabled>true</adobe-flash-enabled>
+      </file-upload>
+   </config>
+
+   <config evaluator="string-compare" condition="DocLibActions">
+      <actionGroups>
+         <actionGroup id="document-browse">
+         </actionGroup>
+      </actionGroups>
+   </config>
+
+   <config evaluator="string-compare" condition="GlobalFolder">
+      <siteTree>
+         <container type="cm:folder">
+            <rootLabel>location.path.documents</rootLabel>
+            <uri>slingshot/doclib/treenode/site/{site}/{container}{path}?children={evaluateChildFoldersSite}&amp;max={maximumFolderCountSite}</uri>
+         </container>
+      </siteTree>
+   </config>
+
+   <config evaluator="string-compare" condition="RepositoryLibrary" replace="true">
+      <root-node>alfresco://company/home</root-node>
+      <tree>
+         <evaluate-child-folders>false</evaluate-child-folders>
+         <maximum-folder-count>500</maximum-folder-count>
+      </tree>
+      <visible>true</visible>
+   </config>
+
+   <config evaluator="string-compare" condition="KerberosDisabled" replace="true">
+      <kerberos>
+         <password>secret</password>
+         <realm>ALFRESCO.ORG</realm>
+         <endpoint-spn>HTTP/repository.server.com@ALFRESCO.ORG</endpoint-spn>
+         <config-entry>ShareHTTP</config-entry>
+         <stripUserNameSuffix>true</stripUserNameSuffix>
+      </kerberos>
+   </config>
+
+   <config evaluator="string-compare" condition="Remote">
+      <remote>
+         <endpoint>
+            <id>alfresco-noauth</id>
+            <name>Alfresco - unauthenticated access</name>
+            <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://alfresco:8080/alfresco/s</endpoint-url>
+            <identity>none</identity>
+         </endpoint>
+         <endpoint>
+            <id>alfresco</id>
+            <name>Alfresco - user access</name>
+            <description>Access to Alfresco Repository WebScripts that require user authentication</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://alfresco:8080/alfresco/s</endpoint-url>
+            <identity>user</identity>
+         </endpoint>
+         <endpoint>
+            <id>alfresco-feed</id>
+            <name>Alfresco Feed</name>
+            <description>Alfresco Feed - supports basic HTTP authentication via the EndPointProxyServlet</description>
+            <connector-id>http</connector-id>
+            <endpoint-url>http://alfresco:8080/alfresco/s</endpoint-url>
+            <basic-auth>true</basic-auth>
+            <identity>user</identity>
+         </endpoint>
+         <endpoint>
+            <id>alfresco-api</id>
+            <parent-id>alfresco</parent-id>
+            <name>Alfresco Public API - user access</name>
+            <description>Access to Alfresco Repository Public API that require user authentication.</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://alfresco:8080/alfresco/api</endpoint-url>
+            <identity>user</identity>
+         </endpoint>
+      </remote>
+   </config>
+
+   <config evaluator="string-compare" condition="Users" replace="true">
+      <users>
+         <username-min-length>2</username-min-length>
+         <password-min-length>8</password-min-length>
+         <show-authorization-status>true</show-authorization-status>
+      </users>
+      <enable-external-users-panel>false</enable-external-users-panel>
+   </config>
+
+   <!-- ARender viewer URL -->
+   <config evaluator="string-compare" condition="Arender"><url>http://localhost:1789</url></config>
+
+   <!-- Uxopian AI gateway URL (baked into the Share image at build time) -->
+   <config evaluator="string-compare" condition="UxopianAI"><host>http://localhost:8085/share/uxopian-ai</host></config>
+
+   <!-- Uxopian AI Document Library actions -->
+   <config evaluator="string-compare" condition="DocLibActions"><actions><action id="uxopian-ai-chat" type="javascript" label="Chat IA"><param name="function">onUxopianAiChat</param></action><action id="uxopian-ai-summarize-text" type="javascript" label="Summarize (text)"><param name="function">onUxopianAiSummarizeText</param></action><action id="uxopian-ai-summarize-markdown" type="javascript" label="Summarize (Markdown)"><param name="function">onUxopianAiSummarizeMarkdown</param></action><action id="uxopian-ai-translate-fr" type="javascript" label="Translate (French)"><param name="function">onUxopianAiTranslateFr</param></action><action id="uxopian-ai-translate-en" type="javascript" label="Translate (English)"><param name="function">onUxopianAiTranslateEn</param></action><action id="uxopian-ai-comparison" type="javascript" label="Generic comparison"><param name="function">onUxopianAiComparison</param></action><action id="uxopian-ai-detailed-comparison" type="javascript" label="Detailed comparison"><param name="function">onUxopianAiDetailedComparison</param></action><action id="uxopian-ai-extract-invoice" type="javascript" label="Extract invoice number"><param name="function">onUxopianAiExtractInvoice</param></action></actions><actionGroups><actionGroup id="document-browse"><action index="400" id="uxopian-ai-chat"/><action index="401" id="uxopian-ai-summarize-text"/><action index="402" id="uxopian-ai-summarize-markdown"/><action index="403" id="uxopian-ai-translate-fr"/><action index="404" id="uxopian-ai-translate-en"/><action index="405" id="uxopian-ai-comparison"/><action index="406" id="uxopian-ai-detailed-comparison"/><action index="407" id="uxopian-ai-extract-invoice"/></actionGroup><actionGroup id="document-details"><action index="400" id="uxopian-ai-chat"/><action index="401" id="uxopian-ai-summarize-text"/><action index="402" id="uxopian-ai-summarize-markdown"/><action index="403" id="uxopian-ai-translate-fr"/><action index="404" id="uxopian-ai-translate-en"/><action index="405" id="uxopian-ai-comparison"/><action index="406" id="uxopian-ai-detailed-comparison"/><action index="407" id="uxopian-ai-extract-invoice"/></actionGroup></actionGroups></config>
+</alfresco-config>

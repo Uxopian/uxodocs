@@ -1,0 +1,86 @@
+llm:
+  default:
+    model: ${LLM_DEFAULT_MODEL:gpt-4o}
+    provider: ${LLM_DEFAULT_PROVIDER:openai}
+    base-prompt: ${LLM_DEFAULT_PROMPT:basePrompt}
+
+  context: ${LLM_CONTEXT_SIZE:10}
+  debug:
+    enabled: ${LLM_DEBUG:false}
+
+  provider:
+    globals:
+
+      # ── OpenAI ────────────────────────────────────────────────────
+      - provider: openai
+        defaultLlmModelConfName: gpt4o
+        globalConf:
+          apiSecret: ${OPENAI_API_KEY:REMPLACER_PAR_VOTRE_CLE}
+          temperature: 1
+          timeout: 60
+          maxRetries: 3
+        llModelConfs:
+          - llmModelConfName: gpt4o
+            modelName: gpt-4o
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt4o-mini
+            modelName: gpt-4o-mini
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: gpt5
+            modelName: gpt-5.1
+            multiModalSupported: true
+            functionCallSupported: true
+
+      # ── Anthropic (Claude) ────────────────────────────────────────
+      - provider: anthropic
+        defaultLlmModelConfName: claude-sonnet
+        globalConf:
+          apiSecret: ${ANTHROPIC_API_KEY:REMPLACER_PAR_VOTRE_CLE}
+          endpointUrl: https://api.anthropic.com/v1/
+          temperature: 0.7
+          maxRetries: 3
+          timeout: 60
+        llModelConfs:
+          - llmModelConfName: claude-sonnet
+            modelName: claude-sonnet-4-20250514
+            multiModalSupported: true
+            functionCallSupported: true
+          - llmModelConfName: claude-haiku
+            modelName: claude-haiku-4-20250514
+            multiModalSupported: true
+            functionCallSupported: true
+
+      # ── Azure OpenAI ───────────────────────────────────────────────
+      - provider: azure
+        defaultLlmModelConfName: azure-gpt4o
+        globalConf:
+          apiSecret: ${AZURE_OPENAI_API_KEY:REMPLACER_PAR_VOTRE_CLE}
+          endpointUrl: https://your-resource.openai.azure.com/
+          temperature: 0.7
+          maxRetries: 3
+          timeout: 60
+          extras:
+            deploymentName: your-deployment-name
+        llModelConfs:
+          - llmModelConfName: azure-gpt4o
+            modelName: gpt-4o
+            multiModalSupported: true
+            functionCallSupported: true
+
+      # ── Ollama (Local — aucune clé requise) ───────────────────────
+      - provider: ollama
+        defaultLlmModelConfName: llama3
+        globalConf:
+          endpointUrl: http://localhost:11434
+          temperature: 0.7
+          maxRetries: 3
+          timeout: 60
+        llModelConfs:
+          - llmModelConfName: llama3
+            modelName: llama3
+            multiModalSupported: false
+            functionCallSupported: true
+
+    tenants: []

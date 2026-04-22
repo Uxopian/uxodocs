@@ -13,6 +13,11 @@ import TabItem from '@theme/TabItem';
 
 Two Helm charts cover the full deployment: `ai-standalone` for the AI backend and `gateway-service` for the routing and authentication layer.
 
+:::tip Download the charts
+<a href="/docs/helm/component-ai.zip" download>component-ai.zip</a> — AI backend chart<br/>
+<a href="/docs/helm/gateway-service.zip" download>gateway-service.zip</a> — Gateway chart
+:::
+
 ```mermaid
 flowchart TD
     A[Create target namespace] --> B[Create image pull secret regcred]
@@ -67,7 +72,7 @@ Create a `values-ai.yaml` overriding the defaults for your environment:
 image:
   registry: artifactory.arondor.cloud:5001
   repository: uxopian-ai
-  tag: "2026.0.0-ft2"
+  tag: "2026.0.0-ft3"
 
 appConfig:
   openSearch:
@@ -133,7 +138,7 @@ Create a `values-gateway.yaml`. The most important section is `files.application
 ```yaml
 image:
   repository: artifactory.arondor.cloud:5001/uxopian-gateway
-  tag: "2026.0.0-ft2"
+  tag: "2026.0.0-ft3"
 
 hazelcast:
   enabled: true
@@ -210,6 +215,41 @@ helm install gateway-service ./gateway-service \
   --namespace <your-namespace>
 ```
 
+## Embedded config files
+
+The chart mounts a ConfigMap at `/app/config/` containing four YAML files. You can override any of them inline under `files` in your `values-ai.yaml`.
+
+The most common override is switching the ECM integration. `flowerdocs` and `alfresco` are mutually exclusive — enable one or the other:
+
+<Tabs>
+  <TabItem value="flowerdocs" label="FlowerDocs (default)">
+
+```yaml
+files:
+  application.yml: |+
+    plugins:
+      tools:
+        enabled-tags: flowerdocs,files
+```
+
+  </TabItem>
+  <TabItem value="alfresco" label="Alfresco">
+
+```yaml
+files:
+  application.yml: |+
+    plugins:
+      tools:
+        enabled-tags: alfresco,files
+```
+
+  </TabItem>
+</Tabs>
+
+Alternatively, set the environment variable `PLUGINS_TOOLS_ENABLED_TAGS` directly instead of overriding the file.
+
+You can also override `hazelcast.yml`, `llm-clients-config.yml`, and `prompts.yml` the same way — paste the full file content under the corresponding key.
+
 ## Hazelcast clustering
 
 Both services discover cluster peers through a Kubernetes headless service. The headless service (`<name>-headless`) and the required RBAC resources (ServiceAccount, ClusterRole, ClusterRoleBinding) are created automatically by the charts.
@@ -247,25 +287,32 @@ Expected response:
 
 | Path | Description |
 |---|---|
-| `image.tag` | Image version — use `2026.0.0-ft2` |
+| `image.tag` | Image version — use `2026.0.0-ft3` |
 | `appConfig.openSearch.host` | OpenSearch service hostname |
 | `appConfig.openSearch.port` | OpenSearch port (default `9200`) |
+| `appConfig.openSearch.forceRefresh` | Force index refresh after writes (default `false`, enable only for debug) |
 | `appConfig.externalUrls.appBaseUrl` | Public URL of the application (used in generated links) |
 | `appConfig.externalUrls.renditionBaseUrl` | ARender DSB URL (ARender integration only) |
 | `appConfig.externalUrls.flowerDocsWsUrl` | FlowerDocs core web service URL (FlowerDocs integration only) |
 | `appConfig.contextPath` | Servlet context path, must match gateway route prefix |
 | `appConfig.llm.defaultProvider` | Default LLM provider (`openai`, `anthropic`, `gemini`, etc.) |
 | `appConfig.llm.defaultModel` | Default model name |
+| `appConfig.llm.defaultPrompt` | ID of the default system prompt (default `basePrompt`) |
+| `appConfig.llm.contextSize` | Number of conversation turns kept in context (default `10`) |
 | `appConfig.javaOpts` | JVM flags (default `-Xmx768m -Xms512m`) |
-| `existingSecret` | Name of the K8s secret holding LLM API keys |
+| `existingSecret` | Name of the K8s secret holding LLM API keys (default `ai-standalone-secrets`) |
 | `hazelcast.enabled` | Enable K8s-based Hazelcast peer discovery |
+| `files.application.yml` | Override the embedded `application.yml` (plugins, context path, etc.) |
+| `files.hazelcast.yml` | Override the embedded `hazelcast.yml` (cluster name, discovery) |
+| `files.llm-clients-config.yml` | Override the embedded LLM provider configuration |
+| `files.prompts.yml` | Override the embedded prompt definitions |
 
   </TabItem>
   <TabItem value="gateway" label="gateway-service">
 
 | Path | Description |
 |---|---|
-| `image.tag` | Image version — use `2026.0.0-ft2` |
+| `image.tag` | Image version — use `2026.0.0-ft3` |
 | `hazelcast.javaOpts` | JVM flags (default `-Xmx256m -Xms256m`) |
 | `hazelcast.clusterName` | Hazelcast cluster name — keep distinct from ai-standalone |
 | `files.application.yaml` | Full gateway config: routes, providers, security rules |

@@ -3,9 +3,9 @@ title: Conversations and requests
 sidebar_label: Conversations and requests
 sidebar_position: 4
 last_update:
-  date: '2026-04-17T14:38:23.664Z'
+  date: '2026-04-21T08:21:12.539Z'
   author: CI/CD Bot
-content_hash: 98a3779dc7aa31e75528282a071ecd313d101b9e38b7e706fc82d53db3b77385
+content_hash: 6db3f62457cfdce0d490cd2bbeeb40c1e4a251420b8eb1e98c36f610bb3822f7
 ---
 
 Conversations and requests are the two core runtime objects in Uxopian AI. A conversation is a chat session. A request is a single LLM round-trip within that conversation.
@@ -31,6 +31,14 @@ graph TD
 A conversation is a container for a series of requests. It stores metadata: title, userId, tenantId, the LLM provider and model used, and timestamps. Conversations are stored in the `conversations` OpenSearch index.
 
 Creating a conversation is done implicitly when the first request is sent: the web component calls `createChat()`, which creates a conversation then submits the first request. Conversations can also be created explicitly via `POST /api/v1/conversations`.
+
+### Automatic title generation
+
+Starting with 2026.0.0-ft3, uxopian-ai asks the LLM to generate a meaningful conversation title when the first request of a new conversation (or the first request sent to a freshly created conversation) is processed. The title is produced through LangChain4J's structured-output feature: the same request returns both the user-facing answer and a short title used to label the conversation in the sidebar.
+
+- Title-generation traffic is tracked as a **hidden request** attached to the same conversation: it counts in cost and token statistics but is not displayed to the end user in the conversation history.
+- The feature relies on `ResponseFormat` support in the LLM request pipeline, so the configured default model must support structured output. Models that don't are silently skipped and the conversation keeps its default (first-message-derived) title.
+- Titles are stored on the `Conversation` object and can be overridden manually via `PUT /api/v1/conversations/{id}`.
 
 ## Request
 
