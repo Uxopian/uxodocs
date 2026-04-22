@@ -17,33 +17,33 @@ This release introduces a **native Alfresco integration**, a **full Spring Boot 
 
 ---
 
-## Highlights
+## 🌟 Highlights
 
-### Alfresco integration
+### 🗂️ Alfresco integration
 
 Xopia can now be embedded directly in **Alfresco Share** and **Alfresco Digital Workspace** without requiring ARender. The integration ships as a loadable plugin JAR and exposes 13 LLM-callable tools covering AFTS-based search, document content retrieval, folder listing, and metadata access.
 
-### Spring Boot 4 / Jackson 3 upgrade
+### ⚡ Spring Boot 4 / Jackson 3 upgrade
 
 The entire backend has been migrated to **Spring Boot 4 / Spring Framework 7 / Jackson 3**. Gson has been removed from the classpath. The `spring-boot-properties-migrator` has been dropped. The frontend toolchain has been updated to **Vite 8 / Node 24**.
 
-### MCP server administration
+### 🛠️ MCP server administration
 
 Administrators can now register **Model Context Protocol (MCP) servers** from the admin panel, either platform-wide or per-tenant. Authenticated connections are isolated by tenant; identical unauthenticated connections share a pooled client. Config changes propagate across cluster nodes via Hazelcast.
 
-### Redesigned admin UI
+### 🎨 Redesigned admin UI
 
 The home page, statistics page, prompts page, and LLM provider pages have been redesigned with new design tokens, a navbar replacing the previous FloatingNav, and new chart components.
 
-### Automatic conversation titles
+### 💬 Automatic conversation titles
 
 On the first request of a new conversation, the LLM now generates a meaningful title using LangChain4j structured output.
 
 ---
 
-## New features
+## ✨ New features
 
-### Alfresco integration (UXOAI-90, UXOAI-106)
+### 🗂️ Alfresco integration (UXOAI-90, UXOAI-106)
 
 Three `@ToolService` beans tagged `alfresco` are available to the LLM:
 
@@ -103,7 +103,7 @@ Set `ALFRESCO_LEGACY_BASE_URL` explicitly only if the auto-derivation does not m
 
 See [Integrate with Alfresco](/docs/uxopian-ai/how_to/integrate_with_alfresco).
 
-### MCP server administration (UXOAI-112)
+### 🛠️ MCP server administration (UXOAI-112)
 
 - New admin UI to register MCP endpoints platform-wide or per-tenant.
 - Authenticated connections isolated per tenant; unauthenticated identical connections share a pooled client (`SharedMcpClient`).
@@ -113,25 +113,25 @@ See [Integrate with Alfresco](/docs/uxopian-ai/how_to/integrate_with_alfresco).
 
 See [Managing MCP servers](/docs/uxopian-ai/admin/managing_mcp_servers).
 
-### Automatic conversation titles (UXOAI-98)
+### 💬 Automatic conversation titles (UXOAI-98)
 
 - On the first request of a new conversation, the LLM generates a title via LangChain4j structured output.
 - Title generation is tracked as a hidden request (visible in cost stats, not counted in user request totals).
 - Requires the configured default model to support structured output (`ResponseFormat`). Models that do not are silently skipped.
 
-### Extra-parameter descriptors for LLM providers (UXOAI-94, UXOAI-122)
+### ⚙️ Extra-parameter descriptors for LLM providers (UXOAI-94, UXOAI-122)
 
 - Provider implementations (Bedrock, NuExtract) now expose typed extra-param descriptors (`ExtraParamDescriptor`).
 - The admin UI renders the appropriate form controls automatically.
 - Per-key merge between global provider extras and per-tenant overrides (UXOAI-122): an empty extras map no longer discards global provider settings.
 
-### Stale-While-Revalidate for the admin prompt list (UXOAI-115)
+### ⚡ Stale-While-Revalidate for the admin prompt list (UXOAI-115)
 
 Previously loaded prompts are rendered immediately on revisit; a silent background request refreshes the list.
 
 ---
 
-## Platform & infrastructure
+## 🏗️ Platform & infrastructure
 
 - **Spring Boot 4 / Spring Framework 7 / Jackson 3** (UXOAI-86) — Gson removed, `spring-boot-properties-migrator` dropped, OpenSearch TLS strategy fixed, case-insensitive enum deserialization added.
 - **Frontend toolchain** (UXOAI-99) — Vite 8 / Node 24.
@@ -143,7 +143,7 @@ Previously loaded prompts are rendered immediately on revisit; a silent backgrou
 
 ---
 
-## CI / DevEx
+## 🧪 CI / DevEx
 
 - Tekton PaC PR-validation pipeline (UXOAI-89).
 - Hazelcast cluster IT + plugin-classloader IT (UXOAI-143).
@@ -153,7 +153,7 @@ Previously loaded prompts are rendered immediately on revisit; a silent backgrou
 
 ---
 
-## Bug fixes
+## 🐛 Bug fixes
 
 - NPE in `DocumentService.parseDocumentWithOcr` when `pageDimensionsList` is null (UXOAI-83).
 - Role selector not displaying correctly in prompt config (UXOAI-96).
@@ -169,7 +169,7 @@ Previously loaded prompts are rendered immediately on revisit; a silent backgrou
 
 ---
 
-## Migration notes
+## 🔄 Migration notes
 
 ### From v2026.0.0-ft2
 
