@@ -685,7 +685,7 @@ Copy all the original JARs except the one you want to replace, then add your cus
 
 ```bash
 # Copy built-in JARs from the image
-docker create --name tmp artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft2
+docker create --name tmp artifactory.arondor.cloud:5001/uxopian-ai:2026.0.0-ft3
 docker cp tmp:/app/llm-clients/ ./my-llm-clients/
 docker rm tmp
 

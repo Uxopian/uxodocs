@@ -1,0 +1,7 @@
+opensearch:
+  host: ${OPENSEARCH_HOST:localhost}
+  port: ${OPENSEARCH_PORT:9200}
+  scheme: ${OPENSEARCH_SCHEME:http}
+  username: ${OPENSEARCH_USERNAME:}
+  password: ${OPENSEARCH_PASSWORD:}
+  force-refresh-index: ${OPENSEARCH_FORCE_REFRESH_INDEX:false}

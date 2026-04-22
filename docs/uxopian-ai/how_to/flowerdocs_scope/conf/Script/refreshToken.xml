@@ -33,7 +33,7 @@
     </ns2:data>
     <ns2:Tags>
         <ns2:tags name="RegistrationOrder" readOnly="false">
-            <ns2:value>0</ns2:value>
+            <ns2:value>2</ns2:value>
         </ns2:tags>
     </ns2:Tags>
     <ns2:versionSeriesId>refreshToken</ns2:versionSeriesId>

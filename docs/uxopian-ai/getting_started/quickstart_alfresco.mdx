@@ -1,0 +1,148 @@
+---
+title: Quickstart with Alfresco + ARender
+sidebar_label: Quickstart with Alfresco + ARender
+sidebar_position: 4
+---
+
+This guide starts a full Alfresco + ARender + Uxopian AI stack using Docker Compose. The result is an Alfresco Share instance where users can trigger AI actions (chat, summarize, translate, compare) from the Document Library context menu.
+
+:::warning Development stack only
+This quickstart runs with the `dev` Spring profile. The gateway uses `AlfrescoProvider` to validate Alfresco Share sessions, but uxopian-ai itself has no authentication. Do not use this configuration in production. See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for the production-ready setup.
+:::
+
+## Prerequisites
+
+- Docker and Docker Compose installed
+- Access to the Arondor Artifactory registry (`artifactory.arondor.cloud:5001`). See [Registry access](./registry_access.md).
+- At least one LLM provider API key
+
+## Step flow
+
+```mermaid
+flowchart LR
+    A["Download ZIP\n+ alfresco-arender-files"] --> B["Set LLM key\n(.env)"]
+    B --> C["docker login\n(Artifactory)"]
+    C --> D["docker compose build"]
+    D --> E["docker compose up -d"]
+    E --> F["AI actions in\nAlfresco Share"]
+```
+
+*Figure: Steps from download to AI actions available in the Document Library.*
+
+## Steps
+
+### 1. Download the packages
+
+:::tip[Download — Docker Compose stack]
+**<a href={require('./uxopian-ai_docker_alfresco_arender.zip').default} download="uxopian-ai_docker_alfresco_arender.zip">uxopian-ai_docker_alfresco_arender.zip</a>**
+:::
+
+:::tip[Download — Alfresco integration files]
+**<a href={require('./alfresco-arender-files.zip').default} download="alfresco-arender-files.zip">alfresco-arender-files.zip</a>**
+:::
+
+Extract both archives into separate folders so the directory layout looks like:
+
+```
+<your-workspace>/
+  uxopian-ai/
+    alfresco-arender-files/      ← extracted from alfresco-arender-files.zip
+      src/main/resources/custom/
+        plugins/
+        repo-webscripts/
+        share-resources/
+        share-webscripts/
+      web-components-output/
+  ops/
+    docker/
+      docker_alfresco_arender/   ← extracted from uxopian-ai_docker_alfresco_arender.zip
+        docker-compose.yml
+        Dockerfile.alfresco-repository
+        Dockerfile.alfresco-share
+        gateway-application.yaml
+        share-config-custom.xml
+        arender-custom-server.properties
+        custom-opensearch.yml
+        .env
+        config/
+```
+
+The `docker-compose.yml` references `../../../uxopian-ai/alfresco-arender-files` as a relative build context, which resolves correctly from this layout. The first archive is the Compose stack; the second contains the pre-compiled JARs and web assets used to build the custom Alfresco and Share images.
+
+### 2. Set an LLM API key
+
+Open `.env` and add at least one key:
+
+```bash
+OPENAI_API_KEY=sk-your-openai-key
+# ANTHROPIC_API_KEY=your-key
+# AZURE_OPENAI_API_KEY=your-key
+```
+
+Then open `config/llm-clients-config.yml` and confirm `llm.default.provider` matches your key.
+
+### 3. Log in to the registry
+
+```bash
+docker login artifactory.arondor.cloud:5001
+```
+
+See [Registry access](./registry_access.md) for credentials.
+
+### 4. Build the custom images
+
+The `alfresco` and `share` services are built locally from the downloaded integration files. The `uxopian-ai` and `gateway` images are pulled directly from the registry.
+
+```bash
+docker compose build
+```
+
+### 5. Start the stack
+
+```bash
+docker compose up -d
+```
+
+Alfresco takes 1–2 minutes to pass its health check; Share starts after. Follow uxopian-ai logs if needed:
+
+```bash
+docker compose logs -f uxopian-ai
+```
+
+### 6. Verify
+
+1. Open Alfresco Share at `http://localhost:8080/share`.
+2. Log in as `admin` / `admin`.
+3. Navigate to the Document Library and right-click a document.
+4. The AI actions appear in the context menu: **Chat IA**, **Summarize**, **Translate**, **Comparison**, **Extract invoice number**.
+5. Click an action to open the Uxopian AI chat panel with the document in context.
+
+If the actions do not appear, check the uxopian-ai logs:
+
+```bash
+docker compose logs uxopian-ai
+```
+
+## Architecture in this stack
+
+```mermaid
+flowchart LR
+    Browser -->|":8080/share"| Share["Alfresco Share"]
+    Share -->|"Repo API"| Repo["Alfresco Repo"]
+    Share -->|"ARender frame"| ARender["ARender UI"]
+    Share -->|"AI actions\n/share/uxopian-ai/"| GW["Gateway\n(port 8085)"]
+    GW -->|"validates JSESSIONID\nAlfrescoProvider"| UX["Uxopian AI"]
+    UX -->|"Share proxy"| Share
+    UX --> OS["OpenSearch"]
+    UX --> LLM["LLM Provider"]
+```
+
+*Figure: AI action calls pass through the gateway, which validates the Alfresco session. Uxopian AI reads documents via the Share proxy using the user's own session.*
+
+## Related pages
+
+- [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) — production setup with full authentication
+- [Registry access](./registry_access.md)
+- [Quickstart with ARender](./quickstart_arender.mdx)
+- [Quickstart with Docker Compose](./quickstart.mdx)
+- [Prompts and templating](../understanding/prompts_and_templating.md)

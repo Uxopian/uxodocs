@@ -293,7 +293,7 @@ cp target/my-auth-provider-1.0.0.jar ./provider/
 Alternatively, build a custom Docker image:
 
 ```dockerfile
-FROM artifactory.arondor.cloud:5001/uxopian-gateway:2026.0.0-ft2
+FROM artifactory.arondor.cloud:5001/uxopian-gateway:2026.0.0-ft3
 
 COPY ./target/my-auth-provider-1.0.0.jar /app/provider/
 ```

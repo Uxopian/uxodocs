@@ -1,0 +1,5 @@
+goals:
+  backup:
+    path: ${GOALS_BACKUP_PATH:./goals/}
+  tenants: []
+  globals: []

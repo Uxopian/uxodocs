@@ -3,9 +3,9 @@ title: Environment variables reference
 sidebar_label: Environment variables
 sidebar_position: 2
 last_update:
-  date: '2026-04-17T14:38:23.664Z'
+  date: '2026-04-21T08:21:12.539Z'
   author: CI/CD Bot
-content_hash: 22c03587d001444092ab23a953dfa5ce436989a7c4bcfce30eff493a28da7d33
+content_hash: cfc0dbfb98d9fd2d9a64a09e58960bd92dd0db01aeb9a3daa658c804299fdc52
 ---
 
 All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variables marked with a default are optional; variables with no default are required when the feature is used.
@@ -58,6 +58,7 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | Variable | Default | Description |
 |---|---|---|
 | `PLUGINS_ROOT_PATH` | `plugins/` | Path to the directory containing plugin JARs |
+| `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Comma-separated whitelist of `@ToolService(tags=…)` values. Controls which tool sets are registered at startup. Empty list = all tools registered. Untagged `@ToolService` beans are always registered. **Do not combine `flowerdocs` and `alfresco`** — they both expose document operations for different ECM backends; loading both will expose conflicting tool suites to the LLM. Use exactly one: `flowerdocs,files` (default), `alfresco,files`, or `files` if no ECM backend is needed. |
 
 ### Integration connectors
 
@@ -65,6 +66,9 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 |---|---|---|
 | `RENDITION_BASE_URL` | (empty) | ARender DSB base URL. Required if the ARender plugin is deployed. |
 | `FD_WS_URL` | (empty) | FlowerDocs core web service URL (e.g. `http://<flowerdocs-endpoint>/core/`). Required if the FlowerDocs plugin is deployed. |
+| `ALFRESCO_BASE_URL` | (empty) | Alfresco REST API v1 base URL. Required if the Alfresco plugin is deployed (via `PLUGINS_TOOLS_ENABLED_TAGS=alfresco,…`). |
+| `ALFRESCO_LEGACY_BASE_URL` | (auto-derived) | Base URL for Alfresco legacy Web Script endpoints. Auto-derived from `ALFRESCO_BASE_URL` when not set (e.g., `https://host/alfresco-api` → `https://host/alfresco`; `https://host/alfresco/api` → `https://host/alfresco/s`). Set explicitly only if the auto-derivation does not match your deployment. |
+| `ALFRESCO_CMM_ENABLED` | `false` | Enable Alfresco Custom Content Model lookup. When disabled, the LLM sees only the built-in `cm:*` system properties. |
 
 ### Prompts and goals
 
@@ -79,11 +83,13 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 |---|---|---|
 | `app.security.secret-key` | (dev default) | AES/GCM encryption key for stored API secrets. Set a unique value in production. |
 
-### MCP (experimental)
+### MCP (Model Context Protocol)
+
+Since 2026.0.0-ft3, MCP servers are registered from the admin UI — see [Managing MCP servers](../admin/managing_mcp_servers.md). The environment variable below is retained only for the legacy single-server boot-time configuration and is disabled by default.
 
 | Variable | Default | Description |
 |---|---|---|
-| `MCP_SSE_URL` | (empty) | SSE endpoint URL for an external MCP server. MCP is disabled when not set. |
+| `MCP_SSE_URL` | (empty) | Legacy boot-time MCP SSE endpoint URL, read only when the commented block in `mcp-server.yml` is re-enabled. For runtime management, prefer the admin UI. |
 
 ### Hazelcast
 
@@ -100,7 +106,7 @@ The gateway is configured primarily via the mounted `gateway-application.yaml` f
 | Variable | Default | Description |
 |---|---|---|
 | `REGISTRY` | `artifactory.arondor.cloud:5001` | Docker registry host for Artifactory-based image pull. Not used when switching to Cloudsmith images (see [Registry access](../getting_started/registry_access.md)). |
-| `UXOPIAN_VERSION` | `2026.0.0-ft2` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
+| `UXOPIAN_VERSION` | `2026.0.0-ft3` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
 
 In the gateway `gateway-application.yaml`, the URIs for backend services are hardcoded Docker Compose service names (e.g., `http://uxopian-ai:8080`).
 

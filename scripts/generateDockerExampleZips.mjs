@@ -28,14 +28,44 @@ GEMINI_API_KEY=
 APP_BASE_URL=http://localhost:8085
 `;
 
+const ENV_CONTENT_ALFRESCO = `# Uxopian AI + Alfresco + ARender — generated at build time, do not edit manually
+
+UXOPIAN_VERSION=${uxopianVersion}
+OPENSEARCH_VERSION=${opensearchVersion}
+REGISTRY=${registry}
+
+# Public URL of the gateway — must be reachable from the browser
+# Default works when running on localhost. Adjust for remote deployments.
+UXOPIAN_AI_PUBLIC_URL=http://localhost:8085
+
+# Alfresco admin credentials — default works for this dev stack
+ALFRESCO_ADMIN_USER=admin
+ALFRESCO_ADMIN_PASSWORD=admin
+
+# Alfresco default tenant ID
+ALFRESCO_DEFAULT_TENANT_ID=Tenant-development
+
+# LLM API keys — set at least one before starting
+OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+AZURE_OPENAI_API_KEY=
+`;
+
 const dockerZips = [
     {
         sourceDir: "docker_example",
         outputZip: "uxopian-ai_docker_example.zip",
+        envContent: ENV_CONTENT,
     },
     {
         sourceDir: "docker_example_arender",
         outputZip: "uxopian-ai_docker_example_arender.zip",
+        envContent: ENV_CONTENT,
+    },
+    {
+        sourceDir: "docker_alfresco_arender",
+        outputZip: "uxopian-ai_docker_alfresco_arender.zip",
+        envContent: ENV_CONTENT_ALFRESCO,
     },
 ];
 
@@ -59,7 +89,7 @@ with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED) as zf:
             zf.write(abs_path, os.path.relpath(abs_path, source))
 `;
 
-for (const { sourceDir, outputZip } of dockerZips) {
+for (const { sourceDir, outputZip, envContent } of dockerZips) {
     const sourcePath = resolve(gettingStartedDir, sourceDir);
     const outputPath = resolve(gettingStartedDir, outputZip);
     const envPath = resolve(sourcePath, ".env");
@@ -70,7 +100,7 @@ for (const { sourceDir, outputZip } of dockerZips) {
     }
 
     // Inject .env with current versions before zipping
-    writeFileSync(envPath, ENV_CONTENT, "utf-8");
+    writeFileSync(envPath, envContent, "utf-8");
 
     try {
         execFileSync("python3", ["-c", pythonScript, sourcePath, outputPath]);

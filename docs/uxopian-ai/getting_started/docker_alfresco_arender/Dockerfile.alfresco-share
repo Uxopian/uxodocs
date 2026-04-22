@@ -1,0 +1,13 @@
+FROM docker.io/alfresco/alfresco-share:25.3.0
+ARG UXOPIAN_AI_HOST=http://localhost:8085/share/uxopian-ai
+COPY --from=module src/main/resources/custom/plugins/arender-for-alfresco-share-plugin-2023.16.0.jar /usr/local/tomcat/shared/lib/
+RUN sed -i 's|shared.loader=${catalina.base}/shared/classes|shared.loader=${catalina.base}/shared/classes,${catalina.base}/shared/lib/*.jar|' /usr/local/tomcat/conf/catalina.properties
+COPY --from=module src/main/resources/custom/share-resources/uxopian-ai/uxopian-ai-chat.js /usr/local/tomcat/webapps/share/uxopian-ai/uxopian-ai-chat.js
+COPY --from=webcomponents chat/uxopian-ai-chat-web-components.js /usr/local/tomcat/webapps/share/uxopian-ai/components/chat/uxopian-ai-chat-web-components.js
+COPY --from=webcomponents chat/uxopian-ai-web-components.css /usr/local/tomcat/webapps/share/uxopian-ai/components/chat/uxopian-ai-web-components.css
+RUN sed -i "s|UXOPIAN_AI_HOST_PLACEHOLDER|${UXOPIAN_AI_HOST}|g" \
+    /usr/local/tomcat/webapps/share/uxopian-ai/uxopian-ai-chat.js
+COPY --from=module src/main/resources/custom/share-webscripts/ /usr/local/tomcat/shared/classes/alfresco/web-extension/site-webscripts/
+COPY share-config-custom.xml /usr/local/tomcat/shared/classes/alfresco/web-extension/share-config-custom.xml
+RUN sed -i "s|http://localhost:8085/share/uxopian-ai|${UXOPIAN_AI_HOST}|g" \
+    /usr/local/tomcat/shared/classes/alfresco/web-extension/share-config-custom.xml

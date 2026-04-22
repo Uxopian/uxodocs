@@ -4,7 +4,7 @@ title: "Uxopian AI release notes - 2026.0.0-ft2"
 date: 2026-02-01
 version: "2026.0.0-ft2"
 major_version: "2026"
-latest: true
+latest: false
 description: "Dynamic LLM provider management, standalone Gateway service, expanded statistics API, prompt tester, and admin UI improvements."
 ---
 

@@ -1,0 +1,100 @@
+uxopian-ai-uri: &UXOPIAN_AI_URI http://uxopian-ai:8080
+
+security-rules: &UXOPIAN_AI_SECURITY
+  - path: /.well-known/**
+    public: true
+  - path: /assets/**
+    public: true
+  - path: /v3/**
+    public: true
+  - path: /swagger-ui/**
+    public: true
+  - path: /actuator/health
+    public: true
+  - path: /admin/**
+    roles: ["ADMIN"]
+  - path: /api/**
+    roles: ["ADMIN"]
+  - path: /prompt/**
+    roles: ["ADMIN"]
+  - path: /goal/**
+    roles: ["ADMIN"]
+  - path: /prompt-statistics
+    roles: ["ADMIN"]
+
+admin-security-rules: &UXOPIAN_AI_ADMIN_SECURITY
+  - path: /admin/**
+    roles: ["ADMIN"]
+
+api-security-rules: &UXOPIAN_AI_API_SECURITY
+  - path: /api/web-components/**
+    public: true
+  - path: /api/**
+    roles: ["ADMIN"]
+
+app:
+  gateway:
+    provider-header: X-Provider-ID
+  routes:
+    - id: uxopian-ai
+      uri: *UXOPIAN_AI_URI
+      prefix: /share/uxopian-ai/
+      path: /share/uxopian-ai/**
+      rewritePath: "/share/uxopian-ai/(.*), /$1"
+      provider: AlfrescoProvider
+      security: *UXOPIAN_AI_SECURITY
+
+    - id: uxopian-ai-ws
+      uri: ws://uxopian-ai:8080
+      path: /share/uxopian-ai/ws/**
+      prefix: /share/uxopian-ai/ws/
+      rewritePath: "/share/uxopian-ai/(.*), /$1"
+      security:
+        - path: /**
+          public: true
+
+    - id: uxopian-ai-admin
+      uri: *UXOPIAN_AI_URI
+      path: /admin/**
+      provider: AlfrescoProvider
+      security: *UXOPIAN_AI_ADMIN_SECURITY
+
+    - id: uxopian-ai-admin-assets
+      uri: *UXOPIAN_AI_URI
+      path: /assets/**
+      security:
+        - path: /assets/**
+          public: true
+
+    - id: uxopian-ai-favicon
+      uri: *UXOPIAN_AI_URI
+      path: /uxopian-ico.png
+      security:
+        - path: /uxopian-ico.png
+          public: true
+
+    - id: uxopian-ai-well-known
+      uri: *UXOPIAN_AI_URI
+      path: /.well-known/**
+      security:
+        - path: /.well-known/**
+          public: true
+
+    - id: uxopian-ai-admin-api
+      uri: *UXOPIAN_AI_URI
+      path: /api/**
+      provider: AlfrescoProvider
+      security: *UXOPIAN_AI_API_SECURITY
+
+alfresco:
+  share:
+    url: http://share:8080
+  tenant:
+    id: ${ALFRESCO_DEFAULT_TENANT_ID:alfresco}
+
+server:
+  port: 8085
+
+logging:
+  level:
+    com.uxopian: DEBUG
