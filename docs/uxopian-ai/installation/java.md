@@ -14,7 +14,7 @@ Running uxopian-ai and uxopian-gateway without Docker or Kubernetes, from their 
 flowchart TD
     A[Download uxopian-ai ZIP] --> B[Extract and configure config/]
     C[Download uxopian-gateway ZIP] --> D[Write application.yaml with routes]
-    B --> E[Create .env with API keys]
+    B --> E[Edit config/ YAML files]
     E --> F[Start uxopian-ai<br/>java -jar ai-standalone.jar]
     D --> G[Start uxopian-gateway<br/>java -jar standalone.jar]
     F --> H[Verify /actuator/health]
@@ -77,28 +77,34 @@ llm:
   context: 10
 
 openai:
-  api-key: ${OPENAI_API_KEY:}
+  api-key: sk-your-key
   model-name: gpt-4.1
   timeout: 120s
 ```
 
-### Environment variables
+### Configure YAML files
 
-Create a `.env` file in the extraction directory (same level as the JAR). The `spring-dotenv` library loads it automatically at startup:
+Edit the files in `config/` directly — `.env` files are not supported in bare archive deployments.
 
-```bash
-OPENAI_API_KEY=sk-your-key
-# ANTHROPIC_API_KEY=your-key
-# GEMINI_API_KEY=your-key
+**`config/opensearch.yml`** — OpenSearch connection:
 
-OPENSEARCH_HOST=localhost
-OPENSEARCH_PORT=9200
-APP_BASE_URL=https://your-domain.example.com
-CONTEXT_PATH=/gui/gateway/uxopian-ai
-LLM_DEFAULT_PROVIDER=openai
-LLM_DEFAULT_MODEL=gpt-4.1
-LLM_DEFAULT_PROMPT=basePrompt
-LLM_CONTEXT_SIZE=10
+```yaml
+opensearch:
+  host: localhost
+  port: 9200
+  scheme: http
+```
+
+**`config/application.yml`** — application URL and context path:
+
+```yaml
+app:
+  base-url: https://your-domain.example.com
+
+server:
+  servlet:
+    context-path: /gui/gateway/uxopian-ai
+  port: 8080
 ```
 
 ### Start
@@ -181,24 +187,24 @@ java -Xmx256m -Xms256m \
 
 ---
 
-## Environment variables reference (uxopian-ai)
+## Configuration reference (uxopian-ai)
 
-| Variable | Description |
-|---|---|
-| `OPENSEARCH_HOST` | OpenSearch hostname |
-| `OPENSEARCH_PORT` | OpenSearch port (default `9200`) |
-| `APP_BASE_URL` | Public URL of the application |
-| `CONTEXT_PATH` | Servlet context path (must match gateway prefix) |
-| `LLM_DEFAULT_PROVIDER` | Default LLM provider (`openai`, `anthropic`, `gemini`, ...) |
-| `LLM_DEFAULT_MODEL` | Default model name |
-| `LLM_DEFAULT_PROMPT` | Default prompt id (`basePrompt`) |
-| `LLM_CONTEXT_SIZE` | Number of conversation turns kept in context |
-| `OPENAI_API_KEY` | OpenAI API key |
-| `ANTHROPIC_API_KEY` | Anthropic API key |
-| `GEMINI_API_KEY` | Google Gemini API key |
-| `AZURE_OPENAI_API_KEY` | Azure OpenAI API key |
-| `UXOPIAN_AI_PORT` | HTTP port override (default `8080`) |
-| `PLUGINS_ROOT_PATH` | Path to the plugins directory (default `plugins/`) |
+| Setting | YAML property | File |
+|---|---|---|
+| OpenSearch hostname | `opensearch.host` | `config/opensearch.yml` |
+| OpenSearch port | `opensearch.port` | `config/opensearch.yml` |
+| Public URL | `app.base-url` | `config/application.yml` |
+| Context path | `server.servlet.context-path` | `config/application.yml` |
+| HTTP port | `server.port` | `config/application.yml` |
+| Default LLM provider | `llm.default.provider` | `config/llm-clients-config.yml` |
+| Default model | `llm.default.model` | `config/llm-clients-config.yml` |
+| Default prompt | `llm.default.base-prompt` | `config/llm-clients-config.yml` |
+| Conversation context size | `llm.context` | `config/llm-clients-config.yml` |
+| OpenAI API key | `openai.api-key` | `config/llm-clients-config.yml` |
+| Anthropic API key | `anthropic.api-key` | `config/llm-clients-config.yml` |
+| Google Gemini API key | `gemini.api-key` | `config/llm-clients-config.yml` |
+| Azure OpenAI API key | `azure.openai.api-key` | `config/llm-clients-config.yml` |
+| Plugins directory path | `PLUGINS_ROOT_PATH` env var | system environment |
 
 ## Verify
 
