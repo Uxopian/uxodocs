@@ -272,28 +272,30 @@ This option works without network changes but binds the config to a specific IP.
 
 In a FlowerDocs deployment, three URL contexts coexist:
 
-```
-User's browser
-    │
-    │  (public URL) http://my-server:8085
-    ▼
-uxopian-gateway:8085  ──────────────────────────────────────────────────────────
-    │ (Docker service name)    │ (Docker service name)
-    │ http://uxopian-ai:8080   │ ws://uxopian-ai:8080
-    ▼                          ▼
-uxopian-ai:8080
-    │ (Docker service name, or external network)
-    │ FD_WS_URL=http://flowerdocs-core:8080/core/
-    ▼
-FlowerDocs Core
+```mermaid
+flowchart TD
+    Browser["User's browser"]
 
-FlowerDocs GUI (browser)
-    │ window.location.origin + /plugins/<scope>/gateway/uxopian-ai
-    ▼ (request passes through FlowerDocs Zuul, then to gateway public URL)
-uxopian-gateway:8085
+    subgraph public ["Public URLs — resolved by browser"]
+        FDGUI["FlowerDocs GUI<br/>(Zuul inside)"]
+        GW["uxopian-gateway<br/>http://my-server:8085"]
+    end
+
+    subgraph docker ["Docker network — resolved by Docker DNS"]
+        AI["uxopian-ai:8080"]
+        FDCore["flowerdocs-core:8080"]
+        OS["opensearch:9200"]
+    end
+
+    Browser -->|"GATEWAY_ENDPOINT<br/>/gui/plugins/&lt;scope&gt;/gateway/**<br/>session ping via Zuul"| FDGUI
+    Browser -->|"UXO_AI_ENDPOINT<br/>/gui/gateway/**<br/>LLM calls — SSE streaming"| GW
+    FDGUI -->|"Zuul route /gateway/**"| GW
+    GW -->|"http://uxopian-ai:8080<br/>ws://uxopian-ai:8080"| AI
+    AI -->|"FD_WS_URL<br/>http://flowerdocs-core:8080/core/"| FDCore
+    AI -->|"OPENSEARCH_HOST"| OS
 ```
 
-The FlowerDocs scope `consts/` file derives `GATEWAY_ENDPOINT` from `window.location.origin`, so it automatically uses the public URL the browser sees. No action needed there. What requires attention is `FD_WS_URL` — it must use the FlowerDocs Core service name (or external network IP), never `localhost`.
+What requires attention is `FD_WS_URL` — it must use the Docker service name (`flowerdocs-core`), never `localhost`. The `GATEWAY_ENDPOINT` and `UXO_AI_ENDPOINT` in the FlowerDocs scope `consts/` are derived from `window.location.origin` and resolve automatically to the public URL the browser sees.
 
 ### Checking service name resolution
 

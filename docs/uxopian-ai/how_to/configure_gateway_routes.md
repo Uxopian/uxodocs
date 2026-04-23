@@ -38,19 +38,19 @@ app:
 
 ## How the three fields work together
 
-```
-Browser / Zuul proxy sends:  GET /incoming/api/v1/requests
-                                      │
-                              ┌───────▼────────────────────────┐
-                              │ path: /incoming/**             │  ← (1) route activates
-                              │ prefix: /incoming/             │  ← (2) /assets/** becomes
-                              │                                │       /incoming/assets/**
-                              │                                │       for security checks
-                              │ rewritePath:                   │  ← (3) path sent to backend
-                              │  /incoming/* → /backend/$seg  │       becomes /backend/api/v1/requests
-                              └────────────────────────────────┘
-                                          │
-                              Backend receives: GET /backend/api/v1/requests
+```mermaid
+flowchart LR
+    IN["GET /incoming/api/v1/requests"]
+
+    subgraph gw ["uxopian-gateway"]
+        P["(1) path: /incoming/**<br/>→ route activates"]
+        PX["(2) prefix: /incoming/<br/>→ security rule /assets/**<br/>becomes /incoming/assets/**<br/>checked against incoming path"]
+        RW["(3) rewritePath<br/>/incoming/** → /backend/**<br/>→ path sent to backend"]
+    end
+
+    OUT["Backend receives:<br/>GET /backend/api/v1/requests"]
+
+    IN --> P --> PX --> RW --> OUT
 ```
 
 **Execution order in the pipeline:**
