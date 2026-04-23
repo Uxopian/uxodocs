@@ -102,7 +102,7 @@ llm:
 
 ### Supported provider identifiers
 
-`openai`, `anthropic`, `azure`, `bedrock`, `gemini`, `mistral`, `huggingface`, `ollama`, `nu-extract`
+`openai`, `anthropic`, `azure-openai`, `bedrock`, `gemini`, `mistral-ai`, `huggingface`, `ollama`, `nu-extract`
 
 ### Provider-specific extras
 
@@ -278,13 +278,19 @@ Gateway (uxopian-gateway) configuration.
 |---|---|
 | `server.port` | Gateway listening port (default: `8085`) |
 | `app.gateway.provider-header` | Header carrying the provider ID for multi-provider setups |
-| `app.routes[].id` | Route identifier |
+| `app.routes[].id` | Route identifier (used in logs) |
 | `app.routes[].uri` | Backend service URI (e.g., `http://uxopian-ai:8080`) |
-| `app.routes[].path` | Path pattern to match |
+| `app.routes[].path` | Ant path pattern — incoming requests must match this to activate the route |
+| `app.routes[].prefix` | Base prefix prepended to all security rule paths for matching against incoming requests |
+| `app.routes[].rewritePath` | Comma-separated `regex, replacement` — rewrites the request path **before** forwarding to the backend. Uses Java named capture groups (`(?<name>...)`), referenced as `$\{name}` in the replacement. |
 | `app.routes[].provider` | AuthProvider bean name (e.g., `DevProvider`, `FlowerDocsProvider`, `Fast2Provider`) |
-| `app.routes[].security[].path` | Path pattern for security rule |
+| `app.routes[].security[].path` | Path pattern for security rule (relative — combined with `prefix` at startup) |
 | `app.routes[].security[].public` | If `true`, no authentication required for this path |
 | `app.routes[].security[].roles` | List of required roles for this path |
+
+YAML anchors (`&ANCHOR` / `*alias`) can be used to share URI and security rule definitions across multiple routes. Define anchors at the root level (before `app:`).
+
+See [Configure gateway routes](../how_to/configure_gateway_routes.md) for a step-by-step guide to deriving `path`, `prefix`, and `rewritePath` values, debug logging instructions, and a full FlowerDocs example.
 
 ## Related pages
 

@@ -10,8 +10,8 @@ content_hash: 82b2d47980ef8e0227c7c501660223199492f18f0cdfd0cf259b01c7046b0d74
 
 This guide adds the Uxopian AI chat panel to a running FlowerDocs deployment. The result is a FlowerDocs instance where users can open an AI chat panel via keyboard shortcut, with document context provided by the FlowerDocs tools.
 
-:::warning Development configuration
-This quickstart connects to uxopian-ai running with `DevProvider` (authentication disabled). Before going to production, switch the gateway to `FlowerDocsProvider` so FlowerDocs session tokens are validated. See [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) for the production-ready setup.
+:::warning Development configuration only
+This quickstart uses `DevProvider` (authentication disabled) and is intended to validate the scope file installation quickly. **It is not suitable for production.** For a production deployment — with `FlowerDocsProvider`, token validation, and a proper LLM check before UI integration — follow the phased [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) guide instead.
 :::
 
 ## Prerequisites
