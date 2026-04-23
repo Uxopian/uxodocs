@@ -184,6 +184,7 @@ No changes to the portal's build system are required. The chat panel is injected
 
 ## Related pages
 
+- [Configure gateway routes](./configure_gateway_routes.md) — `path`, `prefix`, `rewritePath`, debug logging
 - [Web components](../understanding/web_components.md)
 - [Conversations and requests](../understanding/conversations_and_requests.md)
 - [Authentication and gateway](../understanding/authentication.md)

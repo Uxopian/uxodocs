@@ -128,7 +128,7 @@ The `loggers` endpoint allows changing log levels at runtime without a restart:
 curl http://localhost:8080/gui/gateway/uxopian-ai/actuator/loggers
 
 # Set a specific logger to DEBUG
-curl -X POST http://localhost:8080/gui/gateway/uxopian-ai/actuator/loggers/com.uxopian \
+curl -X POST http://localhost:8080/gui/gateway/uxopian-ai/actuator/loggers/com.uxopian.ai \
   -H 'Content-Type: application/json' \
   -d '{"configuredLevel":"DEBUG"}'
 ```

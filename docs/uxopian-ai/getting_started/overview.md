@@ -18,8 +18,10 @@ Uxopian AI is a framework for embedding AI assistants inside legacy enterprise a
 | Integration developer embedding the chat UI | [Embed in a web application](../how_to/embed_in_web_application.md) |
 | Solution architect evaluating the system | [System architecture](../understanding/architecture.md) |
 | ARender integrator | [Integrate with ARender](../how_to/integrate_with_arender.mdx) |
+| Alfresco integrator | [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) |
 | FlowerDocs integrator | [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) |
 | Prompt or assistant developer | [Prompts and templating](../understanding/prompts_and_templating.md) |
+| Gateway / route configuration | [Configure gateway routes](../how_to/configure_gateway_routes.md) |
 
 ## System components
 
@@ -67,10 +69,10 @@ Nine providers are supported out of the box:
 |---|---|
 | OpenAI | `openai` |
 | Anthropic | `anthropic` |
-| Azure OpenAI | `azure` |
+| Azure OpenAI | `azure-openai` |
 | AWS Bedrock | `bedrock` |
 | Google Gemini | `gemini` |
-| Mistral AI | `mistral` |
+| Mistral AI | `mistral-ai` |
 | HuggingFace | `huggingface` |
 | Ollama | `ollama` |
 | NuExtract | `nu-extract` |
