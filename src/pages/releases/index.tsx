@@ -89,6 +89,8 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
             majorVersion: note.majorVersion,
             hasUpgradeNotes: note.hasUpgradeNotes,
             latest: note.latest,
+			deprecation:
+				note.majorVersion === "2" ? "⚠️ v2.8 and older is not supported anymore" : undefined,
         }),
         readMoreLink: (note: any) => `/release-note/flowerdocs/${note.slug}/release-notes`,
         upgradeLink: (note: any) => `/release-note/flowerdocs/${note.slug}/upgrade-notes`,
