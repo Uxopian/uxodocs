@@ -273,29 +273,32 @@ This option works without network changes but binds the config to a specific IP.
 In a FlowerDocs deployment, three URL contexts coexist:
 
 ```mermaid
-flowchart TD
-    Browser["User's browser"]
+flowchart LR
+    Browser["Browser"]
 
-    subgraph public ["Public URLs — resolved by browser"]
-        FDGUI["FlowerDocs GUI<br/>(Zuul inside)"]
-        GW["uxopian-gateway<br/>http://my-server:8085"]
+    subgraph pub ["Public — browser-resolved"]
+        FDGUI["FlowerDocs GUI<br/>(Zuul)"]
+        GW["uxopian-gateway"]
     end
 
-    subgraph docker ["Docker network — resolved by Docker DNS"]
-        AI["uxopian-ai:8080"]
-        FDCore["flowerdocs-core:8080"]
-        OS["opensearch:9200"]
+    subgraph dock ["Docker network — Docker DNS"]
+        AI["uxopian-ai"]
+        FDCore["flowerdocs-core"]
+        OS["opensearch"]
     end
 
-    Browser -->|"GATEWAY_ENDPOINT<br/>/gui/plugins/&lt;scope&gt;/gateway/**<br/>session ping via Zuul"| FDGUI
-    Browser -->|"UXO_AI_ENDPOINT<br/>/gui/gateway/**<br/>LLM calls — SSE streaming"| GW
-    FDGUI -->|"Zuul route /gateway/**"| GW
-    GW -->|"http://uxopian-ai:8080<br/>ws://uxopian-ai:8080"| AI
-    AI -->|"FD_WS_URL<br/>http://flowerdocs-core:8080/core/"| FDCore
+    Browser -->|"GATEWAY_ENDPOINT<br/>session ping"| FDGUI
+    Browser -->|"UXO_AI_ENDPOINT<br/>LLM calls / SSE"| GW
+    FDGUI -->|"Zuul /gateway/**"| GW
+    GW -->|"service name"| AI
+    AI -->|"FD_WS_URL"| FDCore
     AI -->|"OPENSEARCH_HOST"| OS
 ```
 
-What requires attention is `FD_WS_URL` — it must use the Docker service name (`flowerdocs-core`), never `localhost`. The `GATEWAY_ENDPOINT` and `UXO_AI_ENDPOINT` in the FlowerDocs scope `consts/` are derived from `window.location.origin` and resolve automatically to the public URL the browser sees.
+Three URL contexts:
+- **`GATEWAY_ENDPOINT`** (`/gui/plugins/<scope>/gateway/**`) — goes through FlowerDocs Zuul for the session warm-up ping.
+- **`UXO_AI_ENDPOINT`** (`/gui/gateway/**`) — goes directly to uxopian-gateway for all LLM calls and SSE streaming.
+- **`FD_WS_URL`** — container-to-container, must use the Docker service name (`flowerdocs-core`), never `localhost`.
 
 ### Checking service name resolution
 
