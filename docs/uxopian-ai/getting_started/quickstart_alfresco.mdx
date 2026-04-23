@@ -20,11 +20,11 @@ This quickstart runs with the `dev` Spring profile. The gateway uses `AlfrescoPr
 
 ```mermaid
 flowchart LR
-    A["Download ZIP\n+ alfresco-arender-files"] --> B["Set LLM key\n(.env)"]
-    B --> C["docker login\n(Artifactory)"]
+    A["Download ZIP<br/>+ alfresco-arender-files"] --> B["Set LLM key<br/>(.env)"]
+    B --> C["docker login<br/>(Artifactory)"]
     C --> D["docker compose build"]
     D --> E["docker compose up -d"]
-    E --> F["AI actions in\nAlfresco Share"]
+    E --> F["AI actions in<br/>Alfresco Share"]
 ```
 
 *Figure: Steps from download to AI actions available in the Document Library.*
@@ -130,8 +130,8 @@ flowchart LR
     Browser -->|":8080/share"| Share["Alfresco Share"]
     Share -->|"Repo API"| Repo["Alfresco Repo"]
     Share -->|"ARender frame"| ARender["ARender UI"]
-    Share -->|"AI actions\n/share/uxopian-ai/"| GW["Gateway\n(port 8085)"]
-    GW -->|"validates JSESSIONID\nAlfrescoProvider"| UX["Uxopian AI"]
+    Share -->|"AI actions<br/>/share/uxopian-ai/"| GW["Gateway<br/>(port 8085)"]
+    GW -->|"validates JSESSIONID<br/>AlfrescoProvider"| UX["Uxopian AI"]
     UX -->|"Share proxy"| Share
     UX --> OS["OpenSearch"]
     UX --> LLM["LLM Provider"]
