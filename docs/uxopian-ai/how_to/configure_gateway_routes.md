@@ -240,7 +240,7 @@ server:
 
 logging:
   level:
-    com.uxopian: DEBUG
+    com.uxopian.ai: DEBUG
 ```
 
 ### Why two routes?
@@ -285,7 +285,7 @@ Enable debug logging to trace route matching and path rewriting:
 ```yaml
 logging:
   level:
-    com.uxopian: DEBUG
+    com.uxopian.ai: DEBUG
 ```
 
 With DEBUG enabled, the gateway logs:
