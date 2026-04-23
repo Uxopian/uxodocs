@@ -254,21 +254,15 @@ const GATEWAY_ENDPOINT = window.location.origin + '/gui'
 
 A browser request to `GET /gui/plugins/GEC/gateway/uxopian-ai/api/v1/requests` flows through FlowerDocs:
 
-```
-Browser
-  └─ GET /gui/plugins/GEC/gateway/uxopian-ai/api/v1/requests
-       │
-       ▼ FlowerDocs Zuul (Route: /gateway/** → http://gateway:8085)
-       │  strips /gui/plugins/GEC/gateway
-       │
-       └─ GET http://gateway:8085/uxopian-ai/api/v1/requests
-              │
-              ▼ uxopian-gateway (route: uxopian-ai-zuul)
-              │  rewritePath: /uxopian-ai/api/v1/requests
-              │           →   /gui/gateway/uxopian-ai/api/v1/requests
-              │
-              └─ GET http://ai-standalone-service:8080/gui/gateway/uxopian-ai/api/v1/requests
-                     (context-path: /gui/gateway/uxopian-ai)
+```mermaid
+flowchart TD
+    Browser["Browser<br/>GET /gui/plugins/GEC/gateway/uxopian-ai/api/v1/requests"]
+    Zuul["FlowerDocs Zuul<br/>Route: /gateway/** → http://gateway:8085<br/>strips /gui/plugins/GEC prefix"]
+    GW["uxopian-gateway<br/>route: uxopian-ai-zuul<br/>receives: /uxopian-ai/api/v1/requests"]
+    RW["rewritePath<br/>/uxopian-ai/** → /gui/gateway/uxopian-ai/**"]
+    AI["uxopian-ai<br/>GET /gui/gateway/uxopian-ai/api/v1/requests<br/>context-path: /gui/gateway/uxopian-ai"]
+
+    Browser --> Zuul --> GW --> RW --> AI
 ```
 
 The `uxopian-ai-direct` route handles requests that arrive at the canonical path directly (admin access, health checks from monitoring, etc.) without going through Zuul.
