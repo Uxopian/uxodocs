@@ -42,7 +42,7 @@ llm:
               globalConf:
                   apiSecret: ${OPENAI_API_KEY:}
                   temperature: 1
-                  timeout: 60s
+                  timeout: 60
                   maxRetries: 3
               llModelConfs:
                   - llmModelConfName: gpt5

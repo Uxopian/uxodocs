@@ -23,7 +23,7 @@ llm:
         globalConf:
           apiSecret: ${OPENAI_API_KEY:}
           temperature: 1
-          timeout: 60s
+          timeout: 60
           maxRetries: 3
         llModelConfs:
           - llmModelConfName: gpt5
@@ -79,7 +79,7 @@ llm:
           endpointUrl: https://api.anthropic.com/v1/
           temperature: 0.7
           maxRetries: 3
-          timeout: 60s
+          timeout: 60
         llModelConfs:
           - llmModelConfName: claude-sonnet
             modelName: claude-sonnet-4-20250514
@@ -102,7 +102,7 @@ llm:
           endpointUrl: https://your-resource.openai.azure.com/
           temperature: 0.7
           maxRetries: 3
-          timeout: 60s
+          timeout: 60
           extras:
             deploymentName: your-deployment-name
         llModelConfs:
@@ -115,7 +115,7 @@ llm:
       - provider: bedrock
         defaultLlmModelConfName: bedrock-claude
         globalConf:
-          timeout: 60s
+          timeout: 60
           maxRetries: 3
           extras:
             accessKey: ${BEDROCK_AWS_ACCESS_KEY:none}
@@ -138,7 +138,7 @@ llm:
           apiSecret: ${GEMINI_API_KEY:none}
           temperature: 0.7
           maxRetries: 3
-          timeout: 60s
+          timeout: 60
         llModelConfs:
           - llmModelConfName: gemini-pro
             modelName: gemini-2.5-pro
@@ -159,7 +159,7 @@ llm:
         globalConf:
           apiSecret: ${HUGGINGFACE_API_KEY:none}
           temperature: 0.7
-          timeout: 60s
+          timeout: 60
         llModelConfs:
           - llmModelConfName: mistral-7b
             modelName: mistralai/Mistral-7B-Instruct-v0.3
@@ -178,7 +178,7 @@ llm:
           endpointUrl: https://api.mistral.ai/v1/
           temperature: 0.7
           maxRetries: 3
-          timeout: 60s
+          timeout: 60
         llModelConfs:
           - llmModelConfName: mistral-large
             modelName: mistral-large-latest
@@ -196,7 +196,7 @@ llm:
           endpointUrl: http://localhost:11434
           temperature: 0.7
           maxRetries: 3
-          timeout: 60s
+          timeout: 60
         llModelConfs:
           - llmModelConfName: llama3
             modelName: llama3
@@ -209,7 +209,7 @@ llm:
         globalConf:
           apiSecret: ${NUEXTRACT_API_KEY:}
           endpointUrl: https://nuextract.ai/api/projects/
-          timeout: 60s
+          timeout: 60
         llModelConfs:
           - llmModelConfName: nu-extract-report
             modelName: nu-extract-accident-report
