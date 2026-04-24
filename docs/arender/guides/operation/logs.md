@@ -118,15 +118,34 @@ Now, after going through the log4j.properties translator, we get the following r
 </configuration>
 ```
 
-## Custom external logback fragment (Web-UI)
+## Custom logback configuration (Web-UI — Spring Boot only)
 
-Instead of replacing the entire logback configuration, you can include an external logback fragment into the default Web-UI configuration. This allows you to add custom appenders, loggers, or override log levels without having to maintain a full logback file.
+:::info
+This feature is only available when the Web-UI is deployed as a **Spring Boot jar**. It is not supported when deployed as a WAR on Tomcat.
+:::
 
-Add the following property in the `arender-custom-server.properties` file located in the `configurations` folder :
+Instead of replacing the entire logback configuration, the Spring Boot Web-UI exposes two properties to customize logging without maintaining a full logback file.
+
+### Log output directory
+
+By default, log files are written to the current working directory. To write them to a specific directory, add the following property in the `arender-custom-server.properties` file located in the `configurations` folder:
 
 ```properties
-arender.logs.custom.config=/path/to/custom-logback-fragment.xml
+arender.logging.path=/var/log/arender
 ```
+
+### Custom logback fragment
+
+To include a custom logback fragment, set the name of the fragment file:
+
+```properties
+arender.logging.fragment.name=custom-logback-fragment.xml
+```
+
+The fragment is resolved from the **classpath**. It must therefore be placed in one of the following locations:
+
+- Directly as a file in the `configurations/` directory of the deployment folder (this directory is on the classpath of the Spring Boot jar)
+- Bundled inside a JAR placed in the `lib/` directory of the deployment folder
 
 The fragment file is included via the Logback `<include>` mechanism. It can contain any valid logback configuration elements such as `<appender>`, `<logger>`, or `<root>` overrides.
 
@@ -159,9 +178,26 @@ The fragment file is included via the Logback `<include>` mechanism. It can cont
 The fragment file must use the `<included>` root element instead of `<configuration>`. This is required by the Logback [file include mechanism](https://logback.qos.ch/manual/configuration.html#fileInclude).
 :::
 
-:::note
-If the property is left empty or the file does not exist, the include is silently skipped thanks to the `optional="true"` attribute in the default logback configuration.
+:::warning
+Do not set `arender.logging.fragment.name` to an empty value. If the property is absent, the default value `custom-logback-fragment.xml` is used and silently skipped if not found on the classpath. Setting it explicitly to an empty string may cause unexpected Logback behaviour.
 :::
+
+### Docker configuration
+
+When deploying with Docker, both properties can be set as environment variables using Spring Boot's relaxed binding convention (dots replaced by underscores, uppercased):
+
+| Property | Environment variable |
+| :--- | :--- |
+| `arender.logging.path` | `ARENDER_LOGGING_PATH` |
+| `arender.logging.fragment.name` | `ARENDER_LOGGING_FRAGMENT_NAME` |
+
+```yaml title="docker-compose.yml"
+services:
+  arender-ui:
+    environment:
+      - ARENDER_LOGGING_PATH=/var/log/arender
+      - ARENDER_LOGGING_FRAGMENT_NAME=custom-logback-fragment.xml
+```
 
 ## Location of log files
 
@@ -182,7 +218,7 @@ For rendition log files, you can find them in the following locations:
 
 | Service       |                               Path                                |                                    Detail |
 | :------------ | :---------------------------------------------------------------: | ----------------------------------------: |
-| Web-UI Server | arondor-arender-hmi-spring-boot-{{version}}.jar\BOOT-INF\classes\logback.xml | Logs dedicated to the presentation server |
+| Web-UI Server | arondor-arender-hmi-spring-boot-{{version}}.jar\BOOT-INF\classes\logback-spring.xml | Logs dedicated to the presentation server |
 
 ### Rendition
 
