@@ -8,7 +8,7 @@ date: 2026-04-28
 version: "2025.9.0"
 major_version: "2025" 
 latest : true #delete this line if it's not the latest version for this major version
-description: "Summary of the changes in version 2025.8.3 of Fast2." 
+description: "Summary of the changes in version 2025.0.0 of Fast2." 
 ---
 
 ## **What's new?**
