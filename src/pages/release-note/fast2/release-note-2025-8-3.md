@@ -7,7 +7,6 @@ date: 2026-04-01
 # To modify
 version: "2025.8.3"
 major_version: "2025" 
-latest : true #delete this line if it's not the latest version for this major version
 description: "Summary of the changes in version 2025.8.3 of Fast2." 
 ---
 
@@ -71,8 +70,6 @@ _Discover the details below..._
 ---
 
 ## 🧑💻 Support Tickets Included in this Release
-
-*Issues fixed in this released version were not submitted by support tickets.*
 
 | Support Tickets | Solved by | Summary                                                   |
 | --------------- | --------- | --------------------------------------------------------- |
