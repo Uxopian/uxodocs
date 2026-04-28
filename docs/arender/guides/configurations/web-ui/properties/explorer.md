@@ -17,8 +17,18 @@ By default, the document navigator is opened on the thumb explorer. The user can
 | Width of search navigator (in pixels)                              | documentnavigator.search.width        | 400           | Integer |
 | Width of annotations navigator (in pixels)                         | documentnavigator.annotation.width    | 400           | Integer |
 | Time before splitter ears disappear (Deprecated in v.4.7.0, in ms) | documentnavigator.ears.hideTimerDelay | 100           | Integer |
-| Position of the splitter on opening (Default, Reduced, Expanded)   | documentnavigator.initialWidth        | Default       | String  |
+| Position of the document navigator on opening. Accepted values: `Default`, `Collapsed`, `Expanded`, `Hidden`, `Reduced` (deprecated) | documentnavigator.initialWidth        | Default       | String  |
 | Sets up the ratio to be applied to the document navigator          | documentnavigator.expand.reduce.ratio | 70            | Integer |
+
+### `documentnavigator.initialWidth` values
+
+| Value | Tab bar | Content panel | Note |
+| --------- | ----------- | ------------- | ---- |
+| `Hidden` | Not visible | Not visible | Formerly `Reduced` |
+| `Collapsed` | Visible (52px) | Not visible | New value |
+| `Default` | Visible | Open (255px) | |
+| `Expanded` | Visible | Open (70% of screen) | |
+| `Reduced` | Not visible | Not visible | Deprecated — alias for `Hidden`. Logs a deprecation warning. |
 
 ## Thumb explorer
 

@@ -283,7 +283,7 @@ content_hash: 5304c287cc5d91e3c940c6475bfda507b055ca1ecbbf80c0e49c27868c269cb6
 | documentnavigator.search.width        | Sets up the width (in pixel) of the advanced search in the document navigator (left tabs of ARender) | integer | 400     |
 | documentnavigator.annotation.width    | Sets up the width (in pixel) of the annotation in the document navigator (left tabs of ARender)      | integer | 400     |
 | documentnavigator.ears.hideTimerDelay | Sets up the time (in ms) to auto hide the arrow for maximizing or reducing the document navigator    | integer | 100     |
-| documentnavigator.initialWidth        | Sets up the default position of the document navigator tabs: Default, Reduced or Expanded            | String  | Default |
+| documentnavigator.initialWidth        | Sets up the default position of the document navigator tabs: `Default`, `Collapsed`, `Expanded`, `Hidden`, `Reduced` (deprecated alias for `Hidden`) | String  | Default |
 | documentnavigator.expand.reduce.ratio | Default value set up to 70. The document navigator will take 70 percent of the screen.               | integer | 70      |
 
 ## error
