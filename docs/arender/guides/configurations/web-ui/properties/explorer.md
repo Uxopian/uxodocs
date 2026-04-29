@@ -28,7 +28,7 @@ By default, the document navigator is opened on the thumb explorer. The user can
 | `Collapsed` | Visible (52px) | Not visible | New value |
 | `Default` | Visible | Open (255px) | |
 | `Expanded` | Visible | Open (70% of screen) | |
-| `Reduced` | Not visible | Not visible | Deprecated — alias for `Hidden`. Logs a deprecation warning. |
+| `Reduced` | Not visible | Not visible | Deprecated — alias for `Hidden`. Use `Hidden` in new configurations. |
 
 ## Thumb explorer
 

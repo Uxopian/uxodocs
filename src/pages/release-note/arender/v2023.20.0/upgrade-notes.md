@@ -19,7 +19,7 @@ import DocLink from '@site/src/components/DocLink';
 
 :::warning[Deprecation]
 
-The `Reduced` value of `documentnavigator.initialWidth` is now deprecated and kept only as an alias for the new canonical value `Hidden`. Using `Reduced` still works but logs a deprecation warning at startup.
+The `Reduced` value of `documentnavigator.initialWidth` is now deprecated and kept only as an alias for the new canonical value `Hidden`. Using `Reduced` still works, but it should be replaced with `Hidden` since it may be removed in a future release.
 
 :::
 
@@ -31,7 +31,7 @@ The `Reduced` value of `documentnavigator.initialWidth` is now deprecated and ke
 | `Expanded` | Visible | Open (70% of screen) | Unchanged |
 | `Reduced` | Not visible | Not visible | Deprecated alias for `Hidden` |
 
-**Action required:** Replace `documentnavigator.initialWidth=Reduced` with `documentnavigator.initialWidth=Hidden` in your configuration to silence the deprecation warning. See <DocLink version="v2023.20.0" product="arender" to="guides/configurations/web-ui/properties/explorer">Document navigator</DocLink>.
+**Action required:** Replace `documentnavigator.initialWidth=Reduced` with `documentnavigator.initialWidth=Hidden` in your configuration to align with the new canonical value. See <DocLink version="v2023.20.0" product="arender" to="guides/configurations/web-ui/properties/explorer">Document navigator</DocLink>.
 
 ### New Properties
 
