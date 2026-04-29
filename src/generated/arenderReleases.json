@@ -1,12 +1,20 @@
 [
   {
+    "version": "v2023.20.0",
+    "title": "ARender v2023.20.0 – Release Notes",
+    "date": "2026-04-29",
+    "description": "New collapsed state for the document navigator, customizable log configuration, scroll performance with many annotations, faster DirectOffice conversion, PDFOwl 1.24-26 upgrade, and numerous rendering, redaction, and annotation fixes.",
+    "slug": "/release-note/arender/v2023.20.0/release-notes",
+    "hasUpgradeNotes": false,
+    "latest": true
+  },
+  {
     "version": "v2023.19.0",
     "title": "ARender v2023.19.0 – Release Notes",
     "date": "2026-03-31",
     "description": "AcroForm fillable fields comparison, mobile text selection by default, automatic rotation on download/print, new JS API events, and numerous annotation, redaction, and rendering fixes.",
     "slug": "/release-note/arender/v2023.19.0/release-notes",
-    "hasUpgradeNotes": true,
-    "latest": true
+    "hasUpgradeNotes": true
   },
   {
     "version": "v2023.18.1",
