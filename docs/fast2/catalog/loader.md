@@ -83,6 +83,12 @@ This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco RE
 
 ## AwsInjector <small> - Injector into AWS S3 buckets </small> {#AwsInjector data-toc-label="AwsInjector"}
 
+:::note
+
+v2026.0.0 fixes a thread leak where an AWS client was created on every call instead of being reused. Deployments processing large volumes over long campaigns could accumulate thousands of idle threads (`instance-profile-credentials-refresh`). The connection is now cached per configuration.
+
+:::
+
 Fast2 proposes this task to load your documents, metadata and more within designated S3 buckets. Both client- and server-side encryption are supported (v1.6 of AWS encyption SDK). This loader relies on v1.11.848 of AWS Java SDK. The uploaded file will be title according to the `name` metadata of the processed document.
 
 <b>Mandatory settings</b>
@@ -119,7 +125,7 @@ Use this task to write punnet and document related data into a CSV. You can spec
 | Key                            | Type          | Description                                                                                                                                                                                                                                                              | Default value |
 | ------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | Close output file at each line | `Boolean`     | Close CSV file after each punnet processed. This option can come useful to prevent too many files opened errors when each punnet created a dedicated CSV file.                                                                                                           |
-| New column headers             | `String list` | The new column names to use for the document metadata. If no set, the column headers will be populated from the names of the document metadata. By default, the data 'punnetId' and 'documentId' will be appended to the existing data.                                  |
+| New column headers             | `String list` | Definitive, ordered list of CSV column headers. When set, overrides headers auto-discovered from punnet or document metadata and guarantees column ordering. If not set, column headers are populated from document metadata names (with `punnetId` and `documentId` appended). |
 | Upload punnet data             | `Boolean`     | For each document add the punnet data to wich it was attached to                                                                                                                                                                                                         | `true `       |
 | CSV separator                  | `String`      | The separator used between columns in the resulting CSV file.                                                                                                                                                                                                            | `, `          |
 | Write all in the same CSV file | `Boolean`     | Merge metadata of all punnets in a single output CSV file. The missing columns headers will be added on the fly, although it is wiser to list them all in the 'New column headers' field. If set to false, any existing CSV file with the same name will be overwritten. | `true `       |
@@ -195,6 +201,12 @@ Use this task to inject documents and data into a FileNet P8 3.5
 
 ## FileNetInjector <small> - Injector for FileNet </small> {#FileNetInjector data-toc-label="FileNetInjector"}
 
+:::note
+
+v2026.0.0 fixes a bug where multi-version documents belonging to different document classes would incorrectly validate metadata values against the choiceList of the previously processed class, causing injection to fail. Each document version now resolves choiceList values against its own document class.
+
+:::
+
 Use this task to inject documents and data into a FileNet. If all documents have the same UUID for the VersionSeries data provided in the task configuration, then the FileNet versionable object will be created based on the 'MajorVersionNumber' and 'MinorVersionNumber' properties. 'Custom objects' and 'Referential Containment Relationship' are supported. If a document is injected with a folder having a FileNet compatible ID, then the folder will be created with this UUID, if not existing already.
 
 <b>Mandatory settings</b>
@@ -266,6 +278,12 @@ Use this task to inject documents and data into a FileNet. If all documents have
 
 Allows to load a component (document, task, folder or virtual folder) into Flower. Can load facts, document content and annotations
 
+:::note
+
+As of v2026.0.0, the EclipseLink libraries required for annotation extraction (`org.eclipse.persistence.antlr`, `core`, `moxy`, `asm`) are bundled in the Fast2 distribution by default. Manual installation of these JARs in the `libs/` folder is no longer necessary.
+
+:::
+
 <b>Mandatory settings</b>
 
 | Key                            | Type                                                                     | Description                                                                   |
@@ -282,6 +300,26 @@ Allows to load a component (document, task, folder or virtual folder) into Flowe
 | Load document file content | `Boolean` |                         | `false `      |
 | Load component facts       | `Boolean` |                         | `false `      |
 | Mode update                | `Boolean` | Does not update content | `false `      |
+
+## FlowerDocsDelete <small> - Delete a FlowerDocs object </small> {#FlowerDocsDelete data-toc-label="FlowerDocsDelete"}
+
+Delete a FlowerDocs object (document, task, folder, or virtual folder). On success, sets `Deletion_Status=true` on the punnet dataset.
+
+<b>Mandatory settings</b>
+
+| Key                            | Type                                                                     | Description                                                              |
+| ------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Connection                     | [FlowerDocsConnectionProvider](credentials#FlowerDocsConnectionProvider) |                                                                          |
+| Category                       | Pattern                                                                  | Object type: `DOCUMENT`, `TASK`, `FOLDER`, or `VIRTUAL_FOLDER`           |
+| Id to delete                   | Pattern                                                                  | FlowerDocs ID of the object to delete                                    |
+
+<b>Optional settings</b>
+
+| Key          | Type      | Description                                                                        | Default value |
+| ------------ | --------- | ---------------------------------------------------------------------------------- | ------------- |
+| Hard delete  | `Boolean` | `false` moves the object to trash. `true` permanently deletes it.                  | `false `      |
+
+---
 
 ## MailSender <small> - Email sender task </small> {#MailSender data-toc-label="MailSender"}
 

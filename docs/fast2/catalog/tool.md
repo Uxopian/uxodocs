@@ -427,3 +427,20 @@ As the thread is asleep for a defined time, all tasks are slowed down.
 | Key        | Type      | Description     | Default value |
 | ---------- | --------- | --------------- | ------------- |
 | Sleep time | `Integer` | In milliseconds | `500 `        |
+
+## TriggerCampaign <small> - Trigger a campaign from a running map </small> {#TriggerCampaign data-toc-label="TriggerCampaign"}
+
+Triggers the execution of another campaign from within a running map. The target map and campaign name can be resolved from pattern expressions evaluated on the first punnet in the batch.
+
+When security is enabled, the worker authentication token is automatically used — no manual token configuration is required.
+
+Pattern-resolvable fields (broker endpoint, map id, campaign name) are resolved on the first punnet. Pattern expressions referencing punnet or document data are not supported for other parameters.
+
+<b>Optional settings</b>
+
+| Key                         | Type      | Description                                                                                                                                | Default value |
+| --------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| Broker endpoint             | Pattern   | URL of the Fast2 broker to trigger the campaign on                                                                                         |               |
+| Map id                      | Pattern   | ID or name of the map to trigger                                                                                                           |               |
+| Campaign name               | Pattern   | Name of the campaign to create or resume                                                                                                   |               |
+| Trigger on last punnet only | `Boolean` | When enabled, defers the campaign trigger until all punnets in the current batch have been processed. Resolved fields use the first punnet. | `false `      |
