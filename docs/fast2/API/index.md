@@ -64,7 +64,7 @@ Endpoint for managing authentications
 
 ### changePassword
 
-`POST /auth/change-password`
+`POST /api/auth/change-password`
 
 **Request Body**
 
@@ -95,7 +95,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/auth/change-password' \
+curl -X POST 'http://localhost:1789/api/auth/change-password' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -107,7 +107,7 @@ curl -X POST 'http://localhost:1789/auth/change-password' \
 
 ### isAuthenticated
 
-`GET /auth/is-authenticated`
+`GET /api/auth/is-authenticated`
 
 **Responses**
 
@@ -118,13 +118,13 @@ curl -X POST 'http://localhost:1789/auth/change-password' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/auth/is-authenticated' \
+curl -X GET 'http://localhost:1789/api/auth/is-authenticated' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getLockTimeDuration
 
-`GET /auth/lock-time-duration`
+`GET /api/auth/lock-time-duration`
 
 **Responses**
 
@@ -135,13 +135,13 @@ curl -X GET 'http://localhost:1789/auth/is-authenticated' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/auth/lock-time-duration' \
+curl -X GET 'http://localhost:1789/api/auth/lock-time-duration' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### authenticate
 
-`POST /auth/login`
+`POST /api/auth/login`
 
 **Request Body**
 
@@ -170,7 +170,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/auth/login' \
+curl -X POST 'http://localhost:1789/api/auth/login' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -181,7 +181,7 @@ curl -X POST 'http://localhost:1789/auth/login' \
 
 ### getMaxFailedAttempts
 
-`GET /auth/max-failed-attempts`
+`GET /api/auth/max-failed-attempts`
 
 **Responses**
 
@@ -192,13 +192,13 @@ curl -X POST 'http://localhost:1789/auth/login' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/auth/max-failed-attempts' \
+curl -X GET 'http://localhost:1789/api/auth/max-failed-attempts' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getPublicKey
 
-`GET /auth/public-key`
+`GET /api/auth/public-key`
 
 **Responses**
 
@@ -209,13 +209,13 @@ curl -X GET 'http://localhost:1789/auth/max-failed-attempts' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/auth/public-key' \
+curl -X GET 'http://localhost:1789/api/auth/public-key' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### refreshToken
 
-`POST /auth/refresh-token`
+`POST /api/auth/refresh-token`
 
 **Responses**
 
@@ -226,13 +226,13 @@ curl -X GET 'http://localhost:1789/auth/public-key' \
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/auth/refresh-token' \
+curl -X POST 'http://localhost:1789/api/auth/refresh-token' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getRemainingAttempts
 
-`GET /auth/remaining-attempts`
+`GET /api/auth/remaining-attempts`
 
 **Parameters**
 
@@ -249,13 +249,13 @@ curl -X POST 'http://localhost:1789/auth/refresh-token' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/auth/remaining-attempts' \
+curl -X GET 'http://localhost:1789/api/auth/remaining-attempts' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getRemainingLockTime
 
-`GET /auth/remaining-lock-time`
+`GET /api/auth/remaining-lock-time`
 
 **Parameters**
 
@@ -272,13 +272,13 @@ curl -X GET 'http://localhost:1789/auth/remaining-attempts' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/auth/remaining-lock-time' \
+curl -X GET 'http://localhost:1789/api/auth/remaining-lock-time' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### resetPassword
 
-`POST /auth/reset-password`
+`POST /api/auth/reset-password`
 
 **Request Body**
 
@@ -309,7 +309,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/auth/reset-password' \
+curl -X POST 'http://localhost:1789/api/auth/reset-password' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -327,7 +327,7 @@ Endpoint for broker-worker communication
 
 ### Delete any content set in broker files directory
 
-`DELETE /broker/contents`
+`DELETE /api/broker/contents`
 
 **Parameters**
 
@@ -344,13 +344,13 @@ Endpoint for broker-worker communication
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/broker/contents' \
+curl -X DELETE 'http://localhost:1789/api/broker/contents' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Download any content set in broker files directory
 
-`GET /broker/contents`
+`GET /api/broker/contents`
 
 **Parameters**
 
@@ -367,13 +367,13 @@ curl -X DELETE 'http://localhost:1789/broker/contents' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/broker/contents' \
+curl -X GET 'http://localhost:1789/api/broker/contents' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Download logs produced by the broker
 
-`GET /broker/download-broker-logs`
+`GET /api/broker/download-broker-logs`
 
 **Responses**
 
@@ -384,7 +384,7 @@ curl -X GET 'http://localhost:1789/broker/contents' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/broker/download-broker-logs' \
+curl -X GET 'http://localhost:1789/api/broker/download-broker-logs' \
   -H 'Authorization: Bearer <token>' \
 ```
 
@@ -396,7 +396,7 @@ Endpoint for managing campaigns
 
 ### Delete campaigns by names
 
-`DELETE /campaigns/delete-by-names`
+`DELETE /api/campaigns/delete-by-names`
 
 Deletes campaigns that match the list of specified campaign names and map version. Returns a multi-status response indicating the success or failure of deleting each campaign
 
@@ -418,13 +418,13 @@ Deletes campaigns that match the list of specified campaign names and map versio
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/campaigns/delete-by-names' \
+curl -X DELETE 'http://localhost:1789/api/campaigns/delete-by-names' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Delete campaigns by pattern
 
-`DELETE /campaigns/delete-by-pattern`
+`DELETE /api/campaigns/delete-by-pattern`
 
 Deletes campaigns that match the specified name pattern and map version. If no name pattern is provided, all campaigns will be selected. Returns a multi-status response indicating the success or failure of deleting each campaign
 
@@ -446,13 +446,13 @@ Deletes campaigns that match the specified name pattern and map version. If no n
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/campaigns/delete-by-pattern' \
+curl -X DELETE 'http://localhost:1789/api/campaigns/delete-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Download campaign exceptions
 
-`GET /campaigns/download-exceptions`
+`GET /api/campaigns/download-exceptions`
 
 Downloads all exceptions thrown during a specific campaign
 
@@ -474,13 +474,13 @@ Downloads all exceptions thrown during a specific campaign
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/download-exceptions' \
+curl -X GET 'http://localhost:1789/api/campaigns/download-exceptions' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get campaigns dto information by names
 
-`GET /campaigns/dto/search-by-names`
+`GET /api/campaigns/dto/search-by-names`
 
 Retrieves campaigns that match the list of specified campaign names, map version and map id
 
@@ -504,13 +504,13 @@ Retrieves campaigns that match the list of specified campaign names, map version
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/dto/search-by-names' \
+curl -X GET 'http://localhost:1789/api/campaigns/dto/search-by-names' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get campaigns dto information by pattern
 
-`GET /campaigns/dto/search-by-pattern`
+`GET /api/campaigns/dto/search-by-pattern`
 
 Retrieves a list of campaigns dto that match the specified name pattern, map version and map id. If no name pattern is provided, all campaigns will be selected
 
@@ -535,13 +535,13 @@ Retrieves a list of campaigns dto that match the specified name pattern, map ver
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/dto/search-by-pattern' \
+curl -X GET 'http://localhost:1789/api/campaigns/dto/search-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get campaign dto information
 
-`GET /campaigns/dto/{campaign}`
+`GET /api/campaigns/dto/{campaign}`
 
 Retrieves a campaign dto from its name
 
@@ -563,13 +563,13 @@ Retrieves a campaign dto from its name
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/dto/<campaign>' \
+curl -X GET 'http://localhost:1789/api/campaigns/dto/<campaign>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get campaigns information by name
 
-`GET /campaigns/search-by-names`
+`GET /api/campaigns/search-by-names`
 
 Retrieves campaigns that match the list of specified campaign names, map version and map id
 
@@ -593,13 +593,13 @@ Retrieves campaigns that match the list of specified campaign names, map version
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/search-by-names' \
+curl -X GET 'http://localhost:1789/api/campaigns/search-by-names' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get campaigns information by pattern
 
-`GET /campaigns/search-by-pattern`
+`GET /api/campaigns/search-by-pattern`
 
 Retrieves campaigns that match the specified name pattern, map version and map id. If no name pattern is provided, all campaigns will be selected
 
@@ -623,13 +623,13 @@ Retrieves campaigns that match the specified name pattern, map version and map i
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/search-by-pattern' \
+curl -X GET 'http://localhost:1789/api/campaigns/search-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Stop campaigns by names
 
-`POST /campaigns/stop-by-names`
+`POST /api/campaigns/stop-by-names`
 
 Stops campaigns that match the specified list of campaign names and map version. Returns a multi-status response indicating the success or failure of stopping each campaign
 
@@ -651,13 +651,13 @@ Stops campaigns that match the specified list of campaign names and map version.
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/campaigns/stop-by-names' \
+curl -X POST 'http://localhost:1789/api/campaigns/stop-by-names' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Stop campaigns by pattern
 
-`POST /campaigns/stop-by-pattern`
+`POST /api/campaigns/stop-by-pattern`
 
 Stops campaigns that match the specified name pattern and map version. If no name pattern is provided, all campaigns will be selected. Returns a multi-status response indicating the success or failure of stopping each campaign
 
@@ -679,13 +679,13 @@ Stops campaigns that match the specified name pattern and map version. If no nam
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/campaigns/stop-by-pattern' \
+curl -X POST 'http://localhost:1789/api/campaigns/stop-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Delete a campaign
 
-`DELETE /campaigns/{campaign}`
+`DELETE /api/campaigns/{campaign}`
 
 Deletes a campaign from its name
 
@@ -707,13 +707,13 @@ Deletes a campaign from its name
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/campaigns/<campaign>' \
+curl -X DELETE 'http://localhost:1789/api/campaigns/<campaign>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### deleteCampaignParameter
 
-`DELETE /campaigns/{campaign}/parameter/{campaignParameter}`
+`DELETE /api/campaigns/{campaign}/parameter/{campaignParameter}`
 
 **Parameters**
 
@@ -731,13 +731,13 @@ curl -X DELETE 'http://localhost:1789/campaigns/<campaign>' \
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/campaigns/<campaign>/parameter/<campaignParameter>' \
+curl -X DELETE 'http://localhost:1789/api/campaigns/<campaign>/parameter/<campaignParameter>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### deleteAllCampaignParameters
 
-`DELETE /campaigns/{campaign}/parameters`
+`DELETE /api/campaigns/{campaign}/parameters`
 
 **Parameters**
 
@@ -754,13 +754,13 @@ curl -X DELETE 'http://localhost:1789/campaigns/<campaign>/parameter/<campaignPa
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/campaigns/<campaign>/parameters' \
+curl -X DELETE 'http://localhost:1789/api/campaigns/<campaign>/parameters' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getCampaignParameters
 
-`GET /campaigns/{campaign}/parameters`
+`GET /api/campaigns/{campaign}/parameters`
 
 **Parameters**
 
@@ -777,13 +777,13 @@ curl -X DELETE 'http://localhost:1789/campaigns/<campaign>/parameters' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/<campaign>/parameters' \
+curl -X GET 'http://localhost:1789/api/campaigns/<campaign>/parameters' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### createCampaignParameters
 
-`POST /campaigns/{campaign}/parameters`
+`POST /api/campaigns/{campaign}/parameters`
 
 **Parameters**
 
@@ -817,7 +817,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/campaigns/<campaign>/parameters' \
+curl -X POST 'http://localhost:1789/api/campaigns/<campaign>/parameters' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -827,7 +827,7 @@ curl -X POST 'http://localhost:1789/campaigns/<campaign>/parameters' \
 
 ### Resume a campaign
 
-`POST /campaigns/{campaign}/resume`
+`POST /api/campaigns/{campaign}/resume`
 
 Resumes a campaign from its name. Only stopped campaigns can be resumed
 
@@ -849,13 +849,13 @@ Resumes a campaign from its name. Only stopped campaigns can be resumed
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/campaigns/<campaign>/resume' \
+curl -X POST 'http://localhost:1789/api/campaigns/<campaign>/resume' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Retry punnets
 
-`POST /campaigns/{campaign}/retry-punnets`
+`POST /api/campaigns/{campaign}/retry-punnets`
 
 Retry punnets in any step for a specific campaign. You can filter the punnets to retry by status and metadata values
 
@@ -879,13 +879,13 @@ Retry punnets in any step for a specific campaign. You can filter the punnets to
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/campaigns/<campaign>/retry-punnets' \
+curl -X POST 'http://localhost:1789/api/campaigns/<campaign>/retry-punnets' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Start a campaign
 
-`POST /campaigns/{campaign}/start`
+`POST /api/campaigns/{campaign}/start`
 
 Starts a campaign from its name and a map id. Can be a new campaign or a rerun
 
@@ -909,13 +909,13 @@ Starts a campaign from its name and a map id. Can be a new campaign or a rerun
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/campaigns/<campaign>/start' \
+curl -X POST 'http://localhost:1789/api/campaigns/<campaign>/start' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get campaign stats
 
-`GET /campaigns/{campaign}/stats`
+`GET /api/campaigns/{campaign}/stats`
 
 Retrieves stats of specified campaign
 
@@ -937,13 +937,13 @@ Retrieves stats of specified campaign
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/<campaign>/stats' \
+curl -X GET 'http://localhost:1789/api/campaigns/<campaign>/stats' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get campaign status
 
-`GET /campaigns/{campaign}/status`
+`GET /api/campaigns/{campaign}/status`
 
 Retrieves status of specified campaign
 
@@ -965,13 +965,13 @@ Retrieves status of specified campaign
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/<campaign>/status' \
+curl -X GET 'http://localhost:1789/api/campaigns/<campaign>/status' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Download step result
 
-`GET /campaigns/{campaign}/step/{stepId}/download-result`
+`GET /api/campaigns/{campaign}/step/{stepId}/download-result`
 
 Downloads step result for a specific campaign. You can filter the punnets to download by status and metadata values
 
@@ -995,13 +995,13 @@ Downloads step result for a specific campaign. You can filter the punnets to dow
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/campaigns/<campaign>/step/<stepId>/download-result' \
+curl -X GET 'http://localhost:1789/api/campaigns/<campaign>/step/<stepId>/download-result' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Pause a step
 
-`POST /campaigns/{campaign}/step/{stepId}/pause`
+`POST /api/campaigns/{campaign}/step/{stepId}/pause`
 
 Pause a step by providing the campaign name, map ID, and step ID. These parameters define the exact context of the task to pause.
 
@@ -1025,13 +1025,13 @@ Pause a step by providing the campaign name, map ID, and step ID. These paramete
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/campaigns/<campaign>/step/<stepId>/pause' \
+curl -X POST 'http://localhost:1789/api/campaigns/<campaign>/step/<stepId>/pause' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Resume a step
 
-`POST /campaigns/{campaign}/step/{stepId}/resume`
+`POST /api/campaigns/{campaign}/step/{stepId}/resume`
 
 Resume a step by providing the campaign name, map ID, and step ID. These parameters define the exact context of the task to resume.
 
@@ -1055,13 +1055,13 @@ Resume a step by providing the campaign name, map ID, and step ID. These paramet
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/campaigns/<campaign>/step/<stepId>/resume' \
+curl -X POST 'http://localhost:1789/api/campaigns/<campaign>/step/<stepId>/resume' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Stop a campaign
 
-`POST /campaigns/{campaign}/stop`
+`POST /api/campaigns/{campaign}/stop`
 
 Stop a campaign from its name
 
@@ -1083,7 +1083,7 @@ Stop a campaign from its name
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/campaigns/<campaign>/stop' \
+curl -X POST 'http://localhost:1789/api/campaigns/<campaign>/stop' \
   -H 'Authorization: Bearer <token>' \
 ```
 
@@ -1095,7 +1095,7 @@ Endpoint to retrieve catalog tasks
 
 ### getCatalog
 
-`GET /catalog`
+`GET /api/catalog`
 
 **Parameters**
 
@@ -1114,13 +1114,13 @@ Endpoint to retrieve catalog tasks
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/catalog' \
+curl -X GET 'http://localhost:1789/api/catalog' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getCatalogDto
 
-`GET /catalog/dto`
+`GET /api/catalog/dto`
 
 **Parameters**
 
@@ -1139,7 +1139,7 @@ curl -X GET 'http://localhost:1789/catalog' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/catalog/dto' \
+curl -X GET 'http://localhost:1789/api/catalog/dto' \
   -H 'Authorization: Bearer <token>' \
 ```
 
@@ -1151,7 +1151,7 @@ Endpoint for managing emails
 
 ### createEmail
 
-`POST /emails`
+`POST /api/emails`
 
 **Request Body**
 
@@ -1182,7 +1182,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/emails' \
+curl -X POST 'http://localhost:1789/api/emails' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -1194,7 +1194,7 @@ curl -X POST 'http://localhost:1789/emails' \
 
 ### updateEmail
 
-`PUT /emails`
+`PUT /api/emails`
 
 **Request Body**
 
@@ -1225,7 +1225,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X PUT 'http://localhost:1789/emails' \
+curl -X PUT 'http://localhost:1789/api/emails' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -1237,7 +1237,7 @@ curl -X PUT 'http://localhost:1789/emails' \
 
 ### deleteEmails_byNames
 
-`DELETE /emails/delete-by-names`
+`DELETE /api/emails/delete-by-names`
 
 **Parameters**
 
@@ -1276,7 +1276,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/emails/delete-by-names' \
+curl -X DELETE 'http://localhost:1789/api/emails/delete-by-names' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -1289,7 +1289,7 @@ curl -X DELETE 'http://localhost:1789/emails/delete-by-names' \
 
 ### deleteEmails_byPattern
 
-`DELETE /emails/delete-by-pattern`
+`DELETE /api/emails/delete-by-pattern`
 
 **Parameters**
 
@@ -1328,7 +1328,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/emails/delete-by-pattern' \
+curl -X DELETE 'http://localhost:1789/api/emails/delete-by-pattern' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -1341,7 +1341,7 @@ curl -X DELETE 'http://localhost:1789/emails/delete-by-pattern' \
 
 ### getEmailsByNames
 
-`GET /emails/search-by-names`
+`GET /api/emails/search-by-names`
 
 **Parameters**
 
@@ -1359,13 +1359,13 @@ curl -X DELETE 'http://localhost:1789/emails/delete-by-pattern' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/emails/search-by-names' \
+curl -X GET 'http://localhost:1789/api/emails/search-by-names' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getEmails
 
-`GET /emails/search-by-pattern`
+`GET /api/emails/search-by-pattern`
 
 **Parameters**
 
@@ -1383,13 +1383,13 @@ curl -X GET 'http://localhost:1789/emails/search-by-names' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/emails/search-by-pattern' \
+curl -X GET 'http://localhost:1789/api/emails/search-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### deleteEmail
 
-`DELETE /emails/{email}`
+`DELETE /api/emails/{email}`
 
 **Parameters**
 
@@ -1406,13 +1406,13 @@ curl -X GET 'http://localhost:1789/emails/search-by-pattern' \
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/emails/<email>' \
+curl -X DELETE 'http://localhost:1789/api/emails/<email>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getEmail
 
-`GET /emails/{email}`
+`GET /api/emails/{email}`
 
 **Parameters**
 
@@ -1429,7 +1429,7 @@ curl -X DELETE 'http://localhost:1789/emails/<email>' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/emails/<email>' \
+curl -X GET 'http://localhost:1789/api/emails/<email>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
@@ -1441,7 +1441,7 @@ Endpoint for managing jobs
 
 ### Create a job
 
-`POST /jobs`
+`POST /api/jobs`
 
 Creates a new job for a map with its cron expression
 
@@ -1492,7 +1492,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/jobs' \
+curl -X POST 'http://localhost:1789/api/jobs' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -1514,7 +1514,7 @@ curl -X POST 'http://localhost:1789/jobs' \
 
 ### Update a job
 
-`PUT /jobs`
+`PUT /api/jobs`
 
 Updates a job. The job must have a name and an Id are required
 
@@ -1566,7 +1566,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X PUT 'http://localhost:1789/jobs' \
+curl -X PUT 'http://localhost:1789/api/jobs' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -1588,7 +1588,7 @@ curl -X PUT 'http://localhost:1789/jobs' \
 
 ### Delete jobs by name
 
-`DELETE /jobs/delete-by-name`
+`DELETE /api/jobs/delete-by-name`
 
 Deletes jobs that match the list of specified job names. Returns a multi-status response indicating the success or failure of deleting each job
 
@@ -1609,13 +1609,13 @@ Deletes jobs that match the list of specified job names. Returns a multi-status 
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/jobs/delete-by-name' \
+curl -X DELETE 'http://localhost:1789/api/jobs/delete-by-name' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Delete jobs by pattern
 
-`DELETE /jobs/delete-by-pattern`
+`DELETE /api/jobs/delete-by-pattern`
 
 Deletes jobs that match the specified name pattern. If no name pattern is provided, all jobs will be selected. Returns a multi-status response indicating the success or failure of deleting each job
 
@@ -1636,13 +1636,13 @@ Deletes jobs that match the specified name pattern. If no name pattern is provid
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/jobs/delete-by-pattern' \
+curl -X DELETE 'http://localhost:1789/api/jobs/delete-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get jobs by name
 
-`GET /jobs/search-by-names`
+`GET /api/jobs/search-by-names`
 
 Retrieves jobs that match the list of specified job names
 
@@ -1664,13 +1664,13 @@ Retrieves jobs that match the list of specified job names
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/jobs/search-by-names' \
+curl -X GET 'http://localhost:1789/api/jobs/search-by-names' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get jobs by pattern
 
-`GET /jobs/search-by-pattern`
+`GET /api/jobs/search-by-pattern`
 
 Retrieves jobs that match the specified name pattern. If no name pattern is provided, all jobs will be selected
 
@@ -1692,13 +1692,13 @@ Retrieves jobs that match the specified name pattern. If no name pattern is prov
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/jobs/search-by-pattern' \
+curl -X GET 'http://localhost:1789/api/jobs/search-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### isCronValidFromString
 
-`GET /jobs/validateCron`
+`GET /api/jobs/validateCron`
 
 **Parameters**
 
@@ -1715,13 +1715,13 @@ curl -X GET 'http://localhost:1789/jobs/search-by-pattern' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/jobs/validateCron' \
+curl -X GET 'http://localhost:1789/api/jobs/validateCron' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Delete a job
 
-`DELETE /jobs/{jobName}`
+`DELETE /api/jobs/{jobName}`
 
 Deletes a job from its name
 
@@ -1743,13 +1743,13 @@ Deletes a job from its name
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/jobs/<jobName>' \
+curl -X DELETE 'http://localhost:1789/api/jobs/<jobName>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get job from name
 
-`GET /jobs/{jobName}`
+`GET /api/jobs/{jobName}`
 
 Retrieves a job from its name
 
@@ -1771,7 +1771,7 @@ Retrieves a job from its name
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/jobs/<jobName>' \
+curl -X GET 'http://localhost:1789/api/jobs/<jobName>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
@@ -1783,7 +1783,7 @@ Endpoint for managing maps
 
 ### Create a map
 
-`POST /maps`
+`POST /api/maps`
 
 Creates a new map with an id and a unique name
 
@@ -1803,7 +1803,7 @@ Content-Type: `application/json`
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/maps' \
+curl -X POST 'http://localhost:1789/api/maps' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '"string"'
@@ -1811,7 +1811,7 @@ curl -X POST 'http://localhost:1789/maps' \
 
 ### Save a map
 
-`PUT /maps`
+`PUT /api/maps`
 
 Saves a whole map including step configurations
 
@@ -1832,7 +1832,7 @@ Content-Type: `application/json`
 **cURL example**
 
 ```bash
-curl -X PUT 'http://localhost:1789/maps' \
+curl -X PUT 'http://localhost:1789/api/maps' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '"string"'
@@ -1840,7 +1840,7 @@ curl -X PUT 'http://localhost:1789/maps' \
 
 ### Delete maps by Ids
 
-`DELETE /maps/delete-by-ids`
+`DELETE /api/maps/delete-by-ids`
 
 Deletes maps that match the list of specified map Ids
 
@@ -1861,13 +1861,13 @@ Deletes maps that match the list of specified map Ids
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/maps/delete-by-ids' \
+curl -X DELETE 'http://localhost:1789/api/maps/delete-by-ids' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Delete maps by pattern
 
-`DELETE /maps/delete-by-pattern`
+`DELETE /api/maps/delete-by-pattern`
 
 Deletes maps that match the specified name pattern. If no name pattern is provided, all maps will be selected
 
@@ -1888,13 +1888,13 @@ Deletes maps that match the specified name pattern. If no name pattern is provid
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/maps/delete-by-pattern' \
+curl -X DELETE 'http://localhost:1789/api/maps/delete-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Delete maps by version
 
-`DELETE /maps/delete-by-version`
+`DELETE /api/maps/delete-by-version`
 
 Deletes maps summary that match the specified map version Ids
 
@@ -1937,7 +1937,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/maps/delete-by-version' \
+curl -X DELETE 'http://localhost:1789/api/maps/delete-by-version' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -1948,9 +1948,46 @@ curl -X DELETE 'http://localhost:1789/maps/delete-by-version' \
 }'
 ```
 
+### downloadMaps
+
+`POST /api/maps/download`
+
+Downloads multiple maps at once as a ZIP archive.
+
+**Request Body**
+
+Content-Type: `application/json`
+
+| Field    | Type          | Required | Description              |
+| -------- | ------------- | :------: | ------------------------ |
+| `mapIds` | array[string] |   yes    | List of map IDs to download |
+
+Body format:
+
+```json
+["mapId1", "mapId2"]
+```
+
+**Responses**
+
+| Status | Content-Type     | Schema | Description                        |
+| -----: | ---------------- | ------ | ---------------------------------- |
+|    200 | application/zip  | binary | ZIP archive containing map files   |
+
+**cURL example**
+
+```bash
+curl -X POST 'http://localhost:1789/api/maps/download' \
+  -H 'Authorization: Bearer <token>' \
+  -H 'Content-Type: application/json' \
+  -d '["mapId1", "mapId2"]'
+```
+
+---
+
 ### Download map
 
-`GET /maps/download/{mapId}`
+`GET /api/maps/download/{mapId}`
 
 Downloads map file from provided map id
 
@@ -1971,13 +2008,13 @@ Downloads map file from provided map id
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/maps/download/<mapId>' \
+curl -X GET 'http://localhost:1789/api/maps/download/<mapId>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Assert map name availability
 
-`GET /maps/name-availability`
+`GET /api/maps/name-availability`
 
 Checks that provided map name is available
 
@@ -1998,13 +2035,13 @@ Checks that provided map name is available
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/maps/name-availability' \
+curl -X GET 'http://localhost:1789/api/maps/name-availability' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get maps by Ids
 
-`GET /maps/search-by-ids`
+`GET /api/maps/search-by-ids`
 
 Retrieves maps that match the list of specified map Ids
 
@@ -2026,13 +2063,13 @@ Retrieves maps that match the list of specified map Ids
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/maps/search-by-ids' \
+curl -X GET 'http://localhost:1789/api/maps/search-by-ids' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get maps by pattern
 
-`GET /maps/search-by-pattern`
+`GET /api/maps/search-by-pattern`
 
 Retrieves maps that match the specified name pattern. If no name pattern is provided, all maps will be selected
 
@@ -2054,13 +2091,13 @@ Retrieves maps that match the specified name pattern. If no name pattern is prov
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/maps/search-by-pattern' \
+curl -X GET 'http://localhost:1789/api/maps/search-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get maps by version Id
 
-`GET /maps/search-by-version`
+`GET /api/maps/search-by-version`
 
 Retrieves maps summary that match the list of specified map Ids
 
@@ -2083,13 +2120,13 @@ Retrieves maps summary that match the list of specified map Ids
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/maps/search-by-version' \
+curl -X GET 'http://localhost:1789/api/maps/search-by-version' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get maps summaries by Id
 
-`GET /maps/summary/search-by-ids`
+`GET /api/maps/summary/search-by-ids`
 
 Retrieves maps summaries that match the list of specified map Ids
 
@@ -2111,13 +2148,13 @@ Retrieves maps summaries that match the list of specified map Ids
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/maps/summary/search-by-ids' \
+curl -X GET 'http://localhost:1789/api/maps/summary/search-by-ids' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get maps summaries by pattern
 
-`GET /maps/summary/search-by-pattern`
+`GET /api/maps/summary/search-by-pattern`
 
 Retrieves maps summaries that match the specified name pattern. If no name pattern is provided, all maps will be selected
 
@@ -2139,13 +2176,13 @@ Retrieves maps summaries that match the specified name pattern. If no name patte
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/maps/summary/search-by-pattern' \
+curl -X GET 'http://localhost:1789/api/maps/summary/search-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Upload a map
 
-`POST /maps/upload/{mapName}`
+`POST /api/maps/upload/{mapName}`
 
 Created a new map from file and associates it with the given map name
 
@@ -2183,7 +2220,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/maps/upload/<mapName>' \
+curl -X POST 'http://localhost:1789/api/maps/upload/<mapName>' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: multipart/form-data' \
   -d '{
@@ -2193,7 +2230,7 @@ curl -X POST 'http://localhost:1789/maps/upload/<mapName>' \
 
 ### Delete a map from its Id
 
-`DELETE /maps/{mapId}`
+`DELETE /api/maps/{mapId}`
 
 Deletes one map from provided map Id
 
@@ -2215,13 +2252,13 @@ Deletes one map from provided map Id
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/maps/<mapId>' \
+curl -X DELETE 'http://localhost:1789/api/maps/<mapId>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get a map from its id
 
-`GET /maps/{mapId}`
+`GET /api/maps/{mapId}`
 
 Retrieves one map from its map Id
 
@@ -2243,7 +2280,7 @@ Retrieves one map from its map Id
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/maps/<mapId>' \
+curl -X GET 'http://localhost:1789/api/maps/<mapId>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
@@ -2255,7 +2292,7 @@ Endpoint to retrieve punnets
 
 ### Get index mapping campaign
 
-`GET /punnets/mapping`
+`GET /api/punnets/mapping`
 
 Retrieves all field mappings (structure of documents) for the OpenSearch index related to the specified campaign
 
@@ -2276,13 +2313,13 @@ Retrieves all field mappings (structure of documents) for the OpenSearch index r
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/punnets/mapping' \
+curl -X GET 'http://localhost:1789/api/punnets/mapping' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get all punnet contexts
 
-`GET /punnets/punnet-contexts`
+`GET /api/punnets/punnet-contexts`
 
 Retrieves all punnet contexts from a campaign and a stepId. You can filter results by punnet metadata
 
@@ -2305,13 +2342,13 @@ Retrieves all punnet contexts from a campaign and a stepId. You can filter resul
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/punnets/punnet-contexts' \
+curl -X GET 'http://localhost:1789/api/punnets/punnet-contexts' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get values of a metadata
 
-`GET /punnets/values`
+`GET /api/punnets/values`
 
 Retrieves all values of a given metadata
 
@@ -2335,13 +2372,13 @@ Retrieves all values of a given metadata
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/punnets/values' \
+curl -X GET 'http://localhost:1789/api/punnets/values' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get punnet context from its id
 
-`GET /punnets/{punnetContextId}`
+`GET /api/punnets/{punnetContextId}`
 
 Retrieves PunnetContext information from its PunnetContextId
 
@@ -2363,13 +2400,13 @@ Retrieves PunnetContext information from its PunnetContextId
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/punnets/<punnetContextId>' \
+curl -X GET 'http://localhost:1789/api/punnets/<punnetContextId>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get punnet exception
 
-`GET /punnets/{punnetContextId}/exception`
+`GET /api/punnets/{punnetContextId}/exception`
 
 Retrieves exception of any punnet from its PunnetContextId
 
@@ -2391,13 +2428,13 @@ Retrieves exception of any punnet from its PunnetContextId
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/punnets/<punnetContextId>/exception' \
+curl -X GET 'http://localhost:1789/api/punnets/<punnetContextId>/exception' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get next punnets
 
-`GET /punnets/{punnetContextId}/history/next`
+`GET /api/punnets/{punnetContextId}/history/next`
 
 Retrieves next PunnetContext information from a PunnetContextId. Finding several punnets comes from a duplication of punnets in the map. Can be empty if punnet context does not have any next punnet context
 
@@ -2418,13 +2455,13 @@ Retrieves next PunnetContext information from a PunnetContextId. Finding several
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/punnets/<punnetContextId>/history/next' \
+curl -X GET 'http://localhost:1789/api/punnets/<punnetContextId>/history/next' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get previous punnet
 
-`GET /punnets/{punnetContextId}/history/previous`
+`GET /api/punnets/{punnetContextId}/history/previous`
 
 Retrieves previous PunnetContext information from a PunnetContextId. Unlike the next route, it is only possible to find a single punnet context. Can be null if punnet context does not have any previous punnet context
 
@@ -2445,13 +2482,13 @@ Retrieves previous PunnetContext information from a PunnetContextId. Unlike the 
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/punnets/<punnetContextId>/history/previous' \
+curl -X GET 'http://localhost:1789/api/punnets/<punnetContextId>/history/previous' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get punnet logs
 
-`GET /punnets/{punnetContextId}/logs`
+`GET /api/punnets/{punnetContextId}/logs`
 
 Retrieves logs of any punnet from its PunnetContextId
 
@@ -2472,13 +2509,13 @@ Retrieves logs of any punnet from its PunnetContextId
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/punnets/<punnetContextId>/logs' \
+curl -X GET 'http://localhost:1789/api/punnets/<punnetContextId>/logs' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get punnet as xml
 
-`GET /punnets/{punnetContextId}/xml`
+`GET /api/punnets/{punnetContextId}/xml`
 
 Retrieves a punnet from its PunnetContextId and prints it as an XML file
 
@@ -2500,7 +2537,7 @@ Retrieves a punnet from its PunnetContextId and prints it as an XML file
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/punnets/<punnetContextId>/xml' \
+curl -X GET 'http://localhost:1789/api/punnets/<punnetContextId>/xml' \
   -H 'Authorization: Bearer <token>' \
 ```
 
@@ -2512,7 +2549,7 @@ Endpoint for managing queues
 
 ### getQueues
 
-`GET /queues`
+`GET /api/queues`
 
 **Parameters**
 
@@ -2529,13 +2566,13 @@ Endpoint for managing queues
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/queues' \
+curl -X GET 'http://localhost:1789/api/queues' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### createQueue
 
-`POST /queues`
+`POST /api/queues`
 
 **Request Body**
 
@@ -2566,7 +2603,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/queues' \
+curl -X POST 'http://localhost:1789/api/queues' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -2578,7 +2615,7 @@ curl -X POST 'http://localhost:1789/queues' \
 
 ### updateQueue
 
-`PUT /queues`
+`PUT /api/queues`
 
 **Request Body**
 
@@ -2609,7 +2646,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X PUT 'http://localhost:1789/queues' \
+curl -X PUT 'http://localhost:1789/api/queues' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -2621,7 +2658,7 @@ curl -X PUT 'http://localhost:1789/queues' \
 
 ### deleteQueues_byIds
 
-`DELETE /queues/delete-by-ids`
+`DELETE /api/queues/delete-by-ids`
 
 **Parameters**
 
@@ -2638,13 +2675,13 @@ curl -X PUT 'http://localhost:1789/queues' \
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/queues/delete-by-ids' \
+curl -X DELETE 'http://localhost:1789/api/queues/delete-by-ids' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### deleteQueues_byPattern
 
-`DELETE /queues/delete-by-pattern`
+`DELETE /api/queues/delete-by-pattern`
 
 **Parameters**
 
@@ -2661,13 +2698,13 @@ curl -X DELETE 'http://localhost:1789/queues/delete-by-ids' \
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/queues/delete-by-pattern' \
+curl -X DELETE 'http://localhost:1789/api/queues/delete-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### deleteQueue
 
-`DELETE /queues/{queueId}`
+`DELETE /api/queues/{queueId}`
 
 **Parameters**
 
@@ -2684,13 +2721,13 @@ curl -X DELETE 'http://localhost:1789/queues/delete-by-pattern' \
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/queues/<queueId>' \
+curl -X DELETE 'http://localhost:1789/api/queues/<queueId>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getQueue
 
-`GET /queues/{queueId}`
+`GET /api/queues/{queueId}`
 
 **Parameters**
 
@@ -2707,7 +2744,7 @@ curl -X DELETE 'http://localhost:1789/queues/<queueId>' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/queues/<queueId>' \
+curl -X GET 'http://localhost:1789/api/queues/<queueId>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
@@ -2719,7 +2756,7 @@ Endpoint for managing shared objects
 
 ### Delete shared objects by names
 
-`DELETE /shared-objects/delete-by-names`
+`DELETE /api/shared-objects/delete-by-names`
 
 Deletes shared objects that match the list of specified shared objects names. Returns a multi-status response indicating the success or failure of deleting each shared objects
 
@@ -2762,7 +2799,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/shared-objects/delete-by-names' \
+curl -X DELETE 'http://localhost:1789/api/shared-objects/delete-by-names' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -2775,7 +2812,7 @@ curl -X DELETE 'http://localhost:1789/shared-objects/delete-by-names' \
 
 ### Delete shared objects by pattern
 
-`DELETE /shared-objects/delete-by-pattern`
+`DELETE /api/shared-objects/delete-by-pattern`
 
 Deletes shared objects that match the specified name pattern. If no name pattern is provided, all shared objects will be selected. Returns a multi-status response indicating the success or failure of deleting each shared object
 
@@ -2818,7 +2855,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/shared-objects/delete-by-pattern' \
+curl -X DELETE 'http://localhost:1789/api/shared-objects/delete-by-pattern' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -2831,7 +2868,7 @@ curl -X DELETE 'http://localhost:1789/shared-objects/delete-by-pattern' \
 
 ### Get shared objects by names
 
-`GET /shared-objects/search-by-names`
+`GET /api/shared-objects/search-by-names`
 
 Retrieves shared objects that match the list of specified shared object names
 
@@ -2854,13 +2891,13 @@ Retrieves shared objects that match the list of specified shared object names
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/shared-objects/search-by-names' \
+curl -X GET 'http://localhost:1789/api/shared-objects/search-by-names' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get shared objects by pattern
 
-`GET /shared-objects/search-by-pattern`
+`GET /api/shared-objects/search-by-pattern`
 
 Retrieves shared objects that match the specified name pattern. If no name pattern is provided, all shared objects will be selected
 
@@ -2883,13 +2920,13 @@ Retrieves shared objects that match the specified name pattern. If no name patte
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/shared-objects/search-by-pattern' \
+curl -X GET 'http://localhost:1789/api/shared-objects/search-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Delete a shared object
 
-`DELETE /shared-objects/{sharedObjectName}`
+`DELETE /api/shared-objects/{sharedObjectName}`
 
 Deletes a shared object from its name
 
@@ -2911,13 +2948,13 @@ Deletes a shared object from its name
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/shared-objects/<sharedObjectName>' \
+curl -X DELETE 'http://localhost:1789/api/shared-objects/<sharedObjectName>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get specific shared object
 
-`GET /shared-objects/{sharedObjectName}`
+`GET /api/shared-objects/{sharedObjectName}`
 
 Retrieve one shared object configuration from its name
 
@@ -2939,13 +2976,13 @@ Retrieve one shared object configuration from its name
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/shared-objects/<sharedObjectName>' \
+curl -X GET 'http://localhost:1789/api/shared-objects/<sharedObjectName>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Create a shared object
 
-`POST /shared-objects/{sharedObjectName}`
+`POST /api/shared-objects/{sharedObjectName}`
 
 Creates a shared object from its object configuration and a provided name
 
@@ -3002,7 +3039,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/shared-objects/<sharedObjectName>' \
+curl -X POST 'http://localhost:1789/api/shared-objects/<sharedObjectName>' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -3024,7 +3061,7 @@ curl -X POST 'http://localhost:1789/shared-objects/<sharedObjectName>' \
 
 ### Update a shared object
 
-`PUT /shared-objects/{sharedObjectName}`
+`PUT /api/shared-objects/{sharedObjectName}`
 
 Updates the configuration or the name of a shared object
 
@@ -3081,7 +3118,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X PUT 'http://localhost:1789/shared-objects/<sharedObjectName>' \
+curl -X PUT 'http://localhost:1789/api/shared-objects/<sharedObjectName>' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -3109,7 +3146,7 @@ Endpoint for managing users
 
 ### Delete all users
 
-`DELETE /users`
+`DELETE /api/users`
 
 Deletes all users
 
@@ -3132,7 +3169,7 @@ Content-Type: `application/json`
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/users' \
+curl -X DELETE 'http://localhost:1789/api/users' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '[
@@ -3142,7 +3179,7 @@ curl -X DELETE 'http://localhost:1789/users' \
 
 ### Get number of users per role
 
-`GET /users/count-by-role`
+`GET /api/users/count-by-role`
 
 Retrieves the number of users for each role
 
@@ -3155,13 +3192,13 @@ Retrieves the number of users for each role
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/users/count-by-role' \
+curl -X GET 'http://localhost:1789/api/users/count-by-role' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Check if user exists
 
-`GET /users/does-user-exist/{userEmail}`
+`GET /api/users/does-user-exist/{userEmail}`
 
 Checks if a user with the given email exists
 
@@ -3180,13 +3217,13 @@ Checks if a user with the given email exists
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/users/does-user-exist/<userEmail>' \
+curl -X GET 'http://localhost:1789/api/users/does-user-exist/<userEmail>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Update current user
 
-`PATCH /users/me`
+`PATCH /api/users/me`
 
 Updates information of the currently authenticated user
 
@@ -3219,7 +3256,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X PATCH 'http://localhost:1789/users/me' \
+curl -X PATCH 'http://localhost:1789/api/users/me' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -3231,7 +3268,7 @@ curl -X PATCH 'http://localhost:1789/users/me' \
 
 ### Create a user or an admin
 
-`POST /users/register`
+`POST /api/users/register`
 
 Creates a user from its password, firstname, lastname and email. You cannot create super admin with this endpoint
 
@@ -3271,7 +3308,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/users/register' \
+curl -X POST 'http://localhost:1789/api/users/register' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -3285,7 +3322,7 @@ curl -X POST 'http://localhost:1789/users/register' \
 
 ### Create a super admin
 
-`POST /users/register-super-admin`
+`POST /api/users/register-super-admin`
 
 Creates a user from its password, firstname, lastname and email
 
@@ -3325,7 +3362,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/users/register-super-admin' \
+curl -X POST 'http://localhost:1789/api/users/register-super-admin' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -3339,7 +3376,7 @@ curl -X POST 'http://localhost:1789/users/register-super-admin' \
 
 ### Register a worker
 
-`POST /users/register-worker`
+`POST /api/users/register-worker`
 
 Creates a worker as member to allow broker communication
 
@@ -3385,7 +3422,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/users/register-worker' \
+curl -X POST 'http://localhost:1789/api/users/register-worker' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -3399,7 +3436,7 @@ curl -X POST 'http://localhost:1789/users/register-worker' \
 
 ### getUsersByPattern
 
-`GET /users/search-by-pattern`
+`GET /api/users/search-by-pattern`
 
 **Parameters**
 
@@ -3417,13 +3454,13 @@ curl -X POST 'http://localhost:1789/users/register-worker' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/users/search-by-pattern' \
+curl -X GET 'http://localhost:1789/api/users/search-by-pattern' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Check admin existence
 
-`GET /users/super-admin-exists`
+`GET /api/users/super-admin-exists`
 
 Checks if super admin is registered
 
@@ -3436,13 +3473,13 @@ Checks if super admin is registered
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/users/super-admin-exists' \
+curl -X GET 'http://localhost:1789/api/users/super-admin-exists' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Delete a user
 
-`DELETE /users/{userEmail}`
+`DELETE /api/users/{userEmail}`
 
 Deletes a user from its email
 
@@ -3461,13 +3498,13 @@ Deletes a user from its email
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/users/<userEmail>' \
+curl -X DELETE 'http://localhost:1789/api/users/<userEmail>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Get a user
 
-`GET /users/{userEmail}`
+`GET /api/users/{userEmail}`
 
 Retrieves user information from its email
 
@@ -3486,13 +3523,13 @@ Retrieves user information from its email
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/users/<userEmail>' \
+curl -X GET 'http://localhost:1789/api/users/<userEmail>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### Update another user
 
-`PATCH /users/{userEmail}`
+`PATCH /api/users/{userEmail}`
 
 Admin updates any user's information
 
@@ -3531,7 +3568,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X PATCH 'http://localhost:1789/users/<userEmail>' \
+curl -X PATCH 'http://localhost:1789/api/users/<userEmail>' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -3549,7 +3586,7 @@ API for managing workers
 
 ### deleteWorkers
 
-`DELETE /workers`
+`DELETE /api/workers`
 
 **Parameters**
 
@@ -3566,13 +3603,13 @@ API for managing workers
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/workers' \
+curl -X DELETE 'http://localhost:1789/api/workers' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getWorkers
 
-`GET /workers`
+`GET /api/workers`
 
 **Parameters**
 
@@ -3590,13 +3627,13 @@ curl -X DELETE 'http://localhost:1789/workers' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/workers' \
+curl -X GET 'http://localhost:1789/api/workers' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### spawnWorker
 
-`POST /workers`
+`POST /api/workers`
 
 **Responses**
 
@@ -3607,13 +3644,13 @@ curl -X GET 'http://localhost:1789/workers' \
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/workers' \
+curl -X POST 'http://localhost:1789/api/workers' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getLibraries
 
-`GET /workers/libraries`
+`GET /api/workers/libraries`
 
 **Parameters**
 
@@ -3630,13 +3667,13 @@ curl -X POST 'http://localhost:1789/workers' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/workers/libraries' \
+curl -X GET 'http://localhost:1789/api/workers/libraries' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getLibraryVersions
 
-`GET /workers/library-versions/{libraryName}`
+`GET /api/workers/library-versions/{libraryName}`
 
 **Parameters**
 
@@ -3653,13 +3690,41 @@ curl -X GET 'http://localhost:1789/workers/libraries' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/workers/library-versions/<libraryName>' \
+curl -X GET 'http://localhost:1789/api/workers/library-versions/<libraryName>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
+### generateWorkerToken
+
+`POST /api/workers/generate-token`
+
+Generates a JWT authentication token for an external worker. **Requires administrator privileges.**
+
+**Parameters**
+
+| Name       | In    | Required | Type   | Description                               |
+| ---------- | ----- | :------: | ------ | ----------------------------------------- |
+| `workerId` | query |   yes    | string | Unique identifier to assign to the worker |
+
+**Responses**
+
+| Status | Content-Type | Schema | Description                    |
+| -----: | ------------ | ------ | ------------------------------ |
+|    200 | text/plain   | string | JWT token for the worker       |
+|    403 | —            | —      | Forbidden — administrator only |
+
+**cURL example**
+
+```bash
+curl -X POST 'http://localhost:1789/api/workers/generate-token?workerId=my-worker' \
+  -H 'Authorization: Bearer <token>'
+```
+
+---
+
 ### restartWorkers
 
-`POST /workers/restart`
+`POST /api/workers/restart`
 
 **Parameters**
 
@@ -3676,13 +3741,13 @@ curl -X GET 'http://localhost:1789/workers/library-versions/<libraryName>' \
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/workers/restart' \
+curl -X POST 'http://localhost:1789/api/workers/restart' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### restartWorkerById
 
-`POST /workers/restart/{workerId}`
+`POST /api/workers/restart/{workerId}`
 
 **Parameters**
 
@@ -3699,13 +3764,13 @@ curl -X POST 'http://localhost:1789/workers/restart' \
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/workers/restart/<workerId>' \
+curl -X POST 'http://localhost:1789/api/workers/restart/<workerId>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### uploadLibrary
 
-`POST /workers/upload-library`
+`POST /api/workers/upload-library`
 
 **Request Body**
 
@@ -3732,7 +3797,7 @@ Body format:
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/workers/upload-library' \
+curl -X POST 'http://localhost:1789/api/workers/upload-library' \
   -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: multipart/form-data' \
   -d '{
@@ -3742,7 +3807,7 @@ curl -X POST 'http://localhost:1789/workers/upload-library' \
 
 ### deleteWorkerById
 
-`DELETE /workers/{workerId}`
+`DELETE /api/workers/{workerId}`
 
 **Parameters**
 
@@ -3759,13 +3824,13 @@ curl -X POST 'http://localhost:1789/workers/upload-library' \
 **cURL example**
 
 ```bash
-curl -X DELETE 'http://localhost:1789/workers/<workerId>' \
+curl -X DELETE 'http://localhost:1789/api/workers/<workerId>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getWorkerById
 
-`GET /workers/{workerId}`
+`GET /api/workers/{workerId}`
 
 **Parameters**
 
@@ -3782,13 +3847,13 @@ curl -X DELETE 'http://localhost:1789/workers/<workerId>' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/workers/<workerId>' \
+curl -X GET 'http://localhost:1789/api/workers/<workerId>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
 ### getWorkerLogs
 
-`GET /workers/{workerId}/logs`
+`GET /api/workers/{workerId}/logs`
 
 **Parameters**
 
@@ -3806,6 +3871,6 @@ curl -X GET 'http://localhost:1789/workers/<workerId>' \
 **cURL example**
 
 ```bash
-curl -X GET 'http://localhost:1789/workers/<workerId>/logs' \
+curl -X GET 'http://localhost:1789/api/workers/<workerId>/logs' \
   -H 'Authorization: Bearer <token>' \
 ```
