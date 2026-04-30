@@ -193,6 +193,7 @@ Delete the content of your document within your file system. It will retrieve th
 | Maximum number of tries for deletion | `Integer` | Thrown an exception if the file has not been deleted after this number of tries                                                                                               | `10 `         |
 | Delete content entry                 | `Boolean` | Erase the URL entry from the document, in the punnet.                                                                                                                         | `true `       |
 | Exception when file does not exist   | `Boolean` | Throw an exception if file does not exist. Otherwise, silent fail                                                                                                             | `true `       |
+| Delete annotation contents           | `Boolean` | When enabled, annotation content files are also deleted from the filesystem and removed from the punnet's annotation set. The `Delete content entry` parameter applies to annotation entries as well when this is enabled. | `false `      |
 
 ## EmbeddedDbQuery <small> - Query the embedded OpenSearch database </small> {#EmbeddedDbQuery data-toc-label="EmbeddedDbQuery"}
 
@@ -259,6 +260,12 @@ This class allow you to connect to your mail box and select mails to delete. You
 ## RenameDocumentProperties <small> - Rename multiple document properties </small> {#RenameDocumentProperties data-toc-label="RenameDocumentProperties"}
 
 Dive into the punnet to rename one or more properties carried by the document.
+
+:::note
+
+Multivalued properties are now correctly handled: all values are transferred to the target property. Previously only the first value was copied. Existing single-valued configurations are unaffected.
+
+:::
 
 <b>Mandatory settings</b>
 

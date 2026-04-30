@@ -8,6 +8,36 @@ content_hash: 426d771b5e9a2259996589fa02703f7cb17766398c4d608a5d7dc224cee73000
 
 # Helper
 
+## UxopianAIRequest <small> - AI Query Task </small> {#UxopianAIRequest data-toc-label="UxopianAIRequest"}
+
+Submits document data to the Uxopian AI gateway and stores the model's response in a document metadata field.
+
+Requires the Uxopian AI connection properties to be configured in `application.properties`:
+
+```properties
+uxopian.ai.protocol=http
+uxopian.ai.host=localhost
+uxopian.ai.port=8080
+uxopian.ai.basePath=/
+```
+
+<b>Mandatory settings</b>
+
+| Key                 | Type                        | Description                                                        |
+| ------------------- | --------------------------- | ------------------------------------------------------------------ |
+| Query               | `String`                    | Unique identifier of the prompt template to use                    |
+| Connection settings | Fast2ConnectionProvider     | Fast2 connection provider for broker authentication                |
+
+<b>Optional settings</b>
+
+| Key                      | Type          | Description                                                               | Default value  |
+| ------------------------ | ------------- | ------------------------------------------------------------------------- | -------------- |
+| Response metadata key    | `String`      | Metadata key where the AI response is stored on the document              | `aiResponse `  |
+| Metadata to inject       | `String list` | List of document metadata names included in the prompt context            |                |
+| Preload to ARender       | `Boolean`     | Pushes document content to ARender before querying the AI gateway         |                |
+
+---
+
 ## DctmConfiguration <small> - Module for customized Documentum configuration </small> {#DctmConfiguration data-toc-label="DctmConfiguration"}
 
 <b>Optional settings</b>

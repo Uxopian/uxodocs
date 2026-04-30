@@ -83,6 +83,12 @@ This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco RE
 
 ## AwsInjector <small> - Injector into AWS S3 buckets </small> {#AwsInjector data-toc-label="AwsInjector"}
 
+:::note
+
+v2026.0.0 fixes a thread leak where an AWS client was created on every call instead of being reused. Deployments processing large volumes over long campaigns could accumulate thousands of idle threads (`instance-profile-credentials-refresh`). The connection is now cached per configuration.
+
+:::
+
 Fast2 proposes this task to load your documents, metadata and more within designated S3 buckets. Both client- and server-side encryption are supported (v1.6 of AWS encyption SDK). This loader relies on v1.11.848 of AWS Java SDK. The uploaded file will be title according to the `name` metadata of the processed document.
 
 <b>Mandatory settings</b>
@@ -215,6 +221,12 @@ Use this task to inject documents and data into a FileNet P8 3.5
 
 ## FileNetInjector <small> - Injector for FileNet </small> {#FileNetInjector data-toc-label="FileNetInjector"}
 
+:::note
+
+v2026.0.0 fixes a bug where multi-version documents belonging to different document classes would incorrectly validate metadata values against the choiceList of the previously processed class, causing injection to fail. Each document version now resolves choiceList values against its own document class.
+
+:::
+
 Use this task to inject documents and data into a FileNet. If all documents have the same UUID for the VersionSeries data provided in the task configuration, then the FileNet versionable object will be created based on the 'MajorVersionNumber' and 'MinorVersionNumber' properties. 'Custom objects' and 'Referential Containment Relationship' are supported. If a document is injected with a folder having a FileNet compatible ID, then the folder will be created with this UUID, if not existing already.
 
 <b>Mandatory settings</b>
@@ -286,6 +298,12 @@ Use this task to inject documents and data into a FileNet. If all documents have
 
 Allows to load a component (document, task, folder or virtual folder) into Flower. Can load facts, document content and annotations
 
+:::note
+
+As of v2026.0.0, the EclipseLink libraries required for annotation extraction (`org.eclipse.persistence.antlr`, `core`, `moxy`, `asm`) are bundled in the Fast2 distribution by default. Manual installation of these JARs in the `libs/` folder is no longer necessary.
+
+:::
+
 <b>Mandatory settings</b>
 
 | Key                            | Type                                                                     | Description                                                                   |
@@ -302,6 +320,26 @@ Allows to load a component (document, task, folder or virtual folder) into Flowe
 | Load document file content | `Boolean` |                         | `false `      |
 | Load component facts       | `Boolean` |                         | `false `      |
 | Mode update                | `Boolean` | Does not update content | `false `      |
+
+## FlowerDocsDelete <small> - Delete a FlowerDocs object </small> {#FlowerDocsDelete data-toc-label="FlowerDocsDelete"}
+
+Delete a FlowerDocs object (document, task, folder, or virtual folder). On success, sets `Deletion_Status=true` on the punnet dataset.
+
+<b>Mandatory settings</b>
+
+| Key                            | Type                                                                     | Description                                                              |
+| ------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Connection                     | [FlowerDocsConnectionProvider](credentials#FlowerDocsConnectionProvider) |                                                                          |
+| Category                       | Pattern                                                                  | Object type: `DOCUMENT`, `TASK`, `FOLDER`, or `VIRTUAL_FOLDER`           |
+| Id to delete                   | Pattern                                                                  | FlowerDocs ID of the object to delete                                    |
+
+<b>Optional settings</b>
+
+| Key          | Type      | Description                                                                        | Default value |
+| ------------ | --------- | ---------------------------------------------------------------------------------- | ------------- |
+| Hard delete  | `Boolean` | `false` moves the object to trash. `true` permanently deletes it.                  | `false `      |
+
+---
 
 ## MailSender <small> - Email sender task </small> {#MailSender data-toc-label="MailSender"}
 

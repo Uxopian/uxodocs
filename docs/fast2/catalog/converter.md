@@ -274,10 +274,17 @@ This class allow you to unzip the content of archive files. Multiple mime types 
 
 This class allow you to convert emails to a PDF format. Formats supported are application/msword, rfc822 and outlook.
 
+:::note
+
+The default language for auto-generated section headers has changed from **FR** to **EN** in v2026.0.0. Existing configurations not setting this parameter explicitly will now produce English headers (e.g. "Attachments" instead of "Pièces jointes").
+
+:::
+
 <b>Optional settings</b>
 
 | Key                                       | Type                 | Description                                                                                                                                                                                | Default value |
 | ----------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| Language                                  | `String`             | Language used for auto-generated email section headers (e.g. "Attachments" / "Pièces jointes"). Supported values: `EN`, `FR`.                                                             | `EN `         |
 | rtf tags list                             | `String list`        | For mapimessageparser, if provided, can allow to override the list of rtf tags to filter out                                                                                               |
 | Process annotation contents               | `Boolean`            | If annotations are asked to be migrated, you can filter here to process their content(s) or only their metadata                                                                            | `false `      |
 | Scan recursive content                    | `Boolean`            | Only convert terminal contents and not container ones                                                                                                                                      | `false `      |
@@ -673,6 +680,12 @@ This task uses the IText library to convert content of TIFF documents into PDF f
 
 ## Tiff2PdfBox <small> - Convert TIFF to PDF </small> {#Tiff2PdfBox data-toc-label="Tiff2PdfBox"}
 
+:::note
+
+v2026.0.0 fixes a memory leak where the `RandomAccessInterface` used to read TIFF files was not closed after processing, causing memory to accumulate over long campaigns.
+
+:::
+
 This task converts TIFF images into PDF documents using the Apache PDFBox lib
 
 <b>Optional settings</b>
@@ -685,7 +698,36 @@ This task converts TIFF images into PDF documents using the Apache PDFBox lib
 | Unsupported producers                   | `String list` | List of unsupported tiff software producers                                                                   |
 | Default DPI used for PDF transformation | `Integer`     |                                                                                                               | `200 `        |
 
+## HtmlToPdfConverter <small> - Convert HTML to PDF </small> {#HtmlToPdfConverter data-toc-label="HtmlToPdfConverter"}
+
+Converts HTML content to PDF. The converter recursively processes HTML sub-contents: each eligible sub-content (`text/html`) is individually converted to PDF. Non-HTML sub-contents are attached as-is to the converted PDF parent. Errors on individual sub-contents are logged without failing the whole document.
+
+<b>Mandatory settings</b>
+
+| Key                | Type     | Description                                    |
+| ------------------ | -------- | ---------------------------------------------- |
+| Destination folder | `String` | Target file path for the locally-created files |
+
+<b>Optional settings</b>
+
+| Key                                       | Type          | Description                                                                                                                                                                                | Default value |
+| ----------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| Process annotation contents               | `Boolean`     | If annotations are asked to be migrated, you can filter here to process their content(s) or only their metadata                                                                            | `false `      |
+| Scan recursive content                    | `Boolean`     | Only convert terminal contents and not container ones                                                                                                                                      | `false `      |
+| Supported mime-types                      | `String list` | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
+| Throw conversion exceptions               | `Boolean`     | If Fast2 performs document conversion, it can either fail silently or pop an error when the action has not been properly completed                                                         | `true `       |
+| Mime-type : Check document before content | `Boolean`     | You can assume the file extension is accurate, or ask Fast2 to check the content encoding to identify more precisely the document mime-type. By default, Fast2 will check at content level | `false `      |
+| Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
+
+---
+
 ## WkHtmlToPdfConverter <small> - Converter from Html To PDF </small> {#WkHtmlToPdfConverter data-toc-label="WkHtmlToPdfConverter"}
+
+:::warning Deprecated
+
+`WkHtmlToPdfConverter` is deprecated. Use [HtmlToPdfConverter](#HtmlToPdfConverter) instead.
+
+:::
 
 This task will be used to convert HTML content into a PDF document. Fast2 embeds the wkhtmltopdf command-line utility in order to carry out this conversion.
 
