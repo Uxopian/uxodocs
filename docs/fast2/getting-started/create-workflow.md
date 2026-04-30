@@ -211,7 +211,43 @@ Now, imagine that you want to rename your campaign with the name _newCampaignNam
 
 At this moment you have two series of campaigns related to your map _Production_.
 
-## Map versioning
+## Campaign parameters
+
+Maps can declare named parameters that campaigns can override at runtime. This allows a single map to be reused across different environments or contexts without modifying the map itself.
+
+### Define parameters in a map
+
+Parameters are declared in the **Design Place**, in the map parameters panel. Each parameter has:
+
+- a **name** — used to reference the parameter value in task configuration fields via the `${paramName}` pattern syntax
+- an optional **default value** — if omitted, the parameter becomes mandatory and any campaign must provide a value before it can start
+
+Parameters not declared in the map definition are rejected at validation time. Renaming or deleting a parameter in the map removes it from all campaigns that were overriding it.
+
+### Override parameters for a campaign
+
+In the **Run Place**, a parameters panel is available before starting a campaign. For each parameter declared in the map:
+
+- if a **default value** exists, it is pre-filled and can be overridden
+- if **no default value** is set, the field is empty and mandatory — the campaign cannot start until a value is provided
+
+Each campaign stores its own override values independently. Running the same map as multiple campaigns allows each one to use different parameter values.
+
+:::warning
+
+Parameters are resolved at the punnet level. Pattern expressions referencing punnet or document data (e.g. `${document.metadata.someField}`) are **not** supported in parameter values — only static values or other map parameters can be used.
+
+:::
+
+### Use parameters in task configuration
+
+Once declared, a parameter can be injected into any task configuration field that supports the pattern syntax:
+
+```
+${paramName}
+```
+
+For example, a parameter named `targetFolder` declared with default value `/archive` can be referenced in a loader task's destination field as `${targetFolder}`. Each campaign can then override this value independently at runtime.
 
 ### Benefits of versioning
 
