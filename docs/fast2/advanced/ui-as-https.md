@@ -146,3 +146,30 @@ If everything is configured correctly, you will no longer see SSL errors, and th
 If you encounter SSL errors such as "PKIX path building failed" or "SSLHandshakeException", it is usually because the Java environment does not trust the certificate. You can resolve this by ensuring that the certificate is correctly imported into the Java keystore (`cacerts`), as described in step 3.
 
 If using a self-signed certificate, you may need to manually add it to the list of trusted certificates in all client environments.
+
+---
+
+## Remote Access via VPN or Proxy
+
+By default, Fast2 enforces strict Content Security Policies (CSP) that only allow the application to be reached from `localhost`. If Fast2 is deployed on a server and accessed from a different machine — via a VPN, a reverse proxy, or a public URL — those external origins must be explicitly whitelisted.
+
+Add the following property to `application.properties`:
+
+```properties
+# Whitelist of external URLs allowed to communicate with the application.
+# Required when accessing Fast2 via VPN, proxy, or a public URL.
+# Format: space-separated URLs. Protocol (http/https) and port are mandatory.
+security.csp.allowed-urls=https://vpn.company.com:1789 https://vpn.company.com:1791
+```
+
+:::tip
+
+If multiple origins need access, separate them with a space. Both the protocol and port must be specified explicitly — `https://vpn.company.com` without a port will not match `https://vpn.company.com:1789`.
+
+:::
+
+:::note
+
+This property was introduced in v2026.0.0 to replace the previously hard-coded CSP restrictions that blocked remote access.
+
+:::
