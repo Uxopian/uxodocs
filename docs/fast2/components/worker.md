@@ -60,7 +60,7 @@ Keep in mind that this property is designed for workers started from the binary 
 ```ini
 ...
 # Broker embedded worker max memory
-broker.embeddedworker.max.memory=1G
+broker.embedded.worker.max.memory=1G
 ```
 
 ### Queues management
@@ -84,6 +84,51 @@ In case serveral workers are required for specific queues and tasks, there might
 # Disable auto-launch of embedded worker
 broker.embedded.worker.autostart=false
 ```
+
+## <i class="fas fa-key"></i> Worker authentication
+
+Starting from v2026.0.0, external workers authenticate with the broker exclusively via a **JWT token**. The embedded worker handles this automatically.
+
+For any worker started outside the broker process, the token must be provisioned once by an administrator and set as an environment variable before starting the worker.
+
+### Generate a token
+
+From an administrator account, call the broker API:
+
+```bash
+curl -X POST 'http://localhost:1789/api/workers/generate-token?workerId=<my-worker-id>' \
+  -H 'Authorization: Bearer <admin-token>'
+```
+
+The returned token string is the value to set as `WORKER_AUTH_TOKEN`.
+
+### Start the worker with the token
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs groupId="operating-system">
+<TabItem value="linux" label="Linux" default>
+
+```sh
+export WORKER_AUTH_TOKEN="<token>"
+./startup-worker.sh
+```
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+```cmd
+set WORKER_AUTH_TOKEN=<token>
+startup-worker.bat
+```
+
+</TabItem>
+</Tabs>
+
+Worker registrations are persisted in the database. Tokens only need to be provisioned once per worker ID.
+
+---
 
 ## <i class="fas fa-bolt"></i> Advanced use
 
@@ -129,7 +174,7 @@ broker.host=localhost
 # Fast2 2.8.0 configuration
 
 # Remote broker url to use by the worker
-broker.url=http://localhost:1789/broker
+broker.url=http://localhost:1789/api/broker
 
 # Port exposed by Broker
 server.port=1789
