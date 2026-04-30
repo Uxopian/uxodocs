@@ -31,6 +31,25 @@ If the campaign are involving a couple of millions of documents, increasing this
 
 <br />
 
+## <i class="fas fa-database"></i> OpenSearch configuration
+
+The broker communicates with the embedded OpenSearch instance. The following optional property controls how long the broker retries connecting to OpenSearch before giving up:
+
+```ini title="/config/application.properties"
+# Timeout in seconds before the broker stops retrying to connect to OpenSearch
+opensearch.reconnection.timeout=60
+```
+
+The broker continues operating during OpenSearch downtime and resumes normal operations automatically once connectivity is restored.
+
+:::note
+
+If you are upgrading from a previous version, the package `com.fast2.esbroker` has been renamed to `com.fast2.broker`. The Maven artifact `fast2-broker-es` has been renamed to `fast2-broker-core`. Update any custom code, Spring XML configurations, or logging properties referencing the old package name.
+
+:::
+
+---
+
 ## <i class="fas fa-laptop"></i> Configure the UI port
 
 The UI port is also subject to configuration.
