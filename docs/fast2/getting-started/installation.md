@@ -19,7 +19,7 @@ The installation of Fast2 requires a few environment specifications to run prope
 | RAM       | 8GB+                   | We highly recommend having at least 8GB. <br /><br />When switching to production environments, 16GB or 32GB will be required since more documents will be handled at once, and heavy tasks (_e.g._ conversion, extraction) might get short on resources.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Processor | 8 CPUs                 | Processor capabilities need to be aligned with migration requirements, such as data mapping, content conversion and heavy I/O.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | Storage   | 500GB+                 | Although the contents dealt by Fast2 will be temporarily stored (and deleted afterwards if asked), the server needs enough storage for the files/contents alongside the database tracking all the migration information. <br /><br />For production environments, we strongly recommend **500GB or more** to handle large-scale migrations and prevent storage-related issues. While 128GB may work for development or testing, it is insufficient for production workloads and can lead to increased technical operations during migrations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Java      | JDK-11                 | Any provider will fit (Oracle, [OpenJDK](https://developers.redhat.com/products/openjdk/download), etc). If you have multiple JDK/JRE already installed, specify the correct one in the `./config/env.properties` file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Java      | JDK-21+                | Java 21 is the minimum required version. Java 25 is recommended for new installations. Any provider will fit (Oracle, [OpenJDK](https://developers.redhat.com/products/openjdk/download), Microsoft Build of OpenJDK, etc). If you have multiple JDK/JRE already installed, specify the correct one in the `./config/env.properties` file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | OS        | Windows&nbsp;7+, Linux | All versions of Windows 7+ are supported. <br/><br/>All common distros of Linux are supported (Ubuntu, RedHat, CentOS, etc)<br /><br />Power architecture are supported as well (except the ones running in AIX), but only Java parts will work seamlessly whereas third-party software (_e.g._ imagemagick, libreoffice, etc) might not, as they have not all have been developed for such platforms. <br/><br/> Although the broker will not run correctly on an Windows 2003, a worker can still run on it, remotely, and communicate with a broker installed on a more recent version. |
 | Bandwidth | 1GB                    | The more calls, payloads, and contents Fast2 will have to deal with, the bigger the network bandwidth must be to reduce latency. If 250-500MB might do for lower environments, we recommend 1GB for Production environments.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
@@ -27,17 +27,18 @@ While setting up the production server for Fast2, make sure to scale the Fast2 m
 
 :::warning
 
-    If you decide to go for a custom Elasticsearch database, make sure to confirm the compatibility with your environment at [Elasticsearch Support Matrix](https://www.elastic.co/fr/support/matrix).
+    Fast2 v2026.0.0 embeds **OpenSearch 3.5.0**. If you are upgrading from a previous version, a data migration step is required before starting the new broker. See the [migration guide](migration-v2026.md#step-1--opensearch-data-migration) for the full procedure.
 
 :::
 
 ## Fast2 packages
 
-The Fast2 distribution you need depends on your target environment. It exists three way to deploy a Fast2 :
+The Fast2 distribution you need depends on your target environment. It exists four ways to deploy a Fast2 :
 
 &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-file-zipper"></i> On premise: regular package, as an all-in-one zip file<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-aws"></i> AWS: Standard AMIs<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-docker"></i> K8S: Docker Images
+&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-docker"></i> Docker: Official broker and worker images<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<i class="fab fa-docker"></i> K8S: Docker Images on Kubernetes
 
 Each distribution ships the following
 
@@ -95,18 +96,20 @@ All commands below are to be run under the Fast2 install path (where the Zip has
 
     Administrator rights might be required since Fast2 will handle some port communications.
 
+    The startup scripts automatically detect the **Microsoft Build of OpenJDK** via the Windows registry. If you have it installed alongside other JDKs, no manual configuration is needed.
+
 </TabItem>
 <TabItem value="linux" label="Linux">
 
     The following Linux installation steps work for most of Unix-based sytems.
-    Elasticsearch cannot be started from root user, you will need to create a secondary user to start the database binary alongside your Fast2 process.
+    OpenSearch cannot be started from root user, you will need to create a secondary user to start the database binary alongside your Fast2 process.
 
-    Once connected as the latter user, start Elasticsearch via its binaries.
+    Once connected as the latter user, start OpenSearch via its binaries.
 
-    Then, since you started Elasticsearch manually, disable the command triggering Fast2 to start the embedded Elasticsearch, from the `config/application.properties` file :
+    Then, since you started OpenSearch manually, disable the command triggering Fast2 to start the embedded OpenSearch, from the `config/application.properties` file :
 
     ```log
-    broker.elasticsearch.embedded.enabled=false
+    broker.opensearch.embedded.enabled=false
     ```
 
     You can now properly execute the following script:
@@ -342,3 +345,35 @@ And then, to install the worker as a service :
 ```cmd
 C:\path-to-fast2\service\windows> Fast2_worker_service.exe install
 ```
+
+## Docker deployment
+
+Fast2 v2026.0.0 provides official Docker images for both the broker and the worker.
+
+### Start the broker
+
+```sh
+docker run -d \
+  --name fast2-broker \
+  -p 1789:1789 \
+  -p 1790:1790 \
+  fast2-broker:2026.0.0
+```
+
+### Start a worker
+
+```sh
+docker run -d \
+  --name fast2-worker \
+  -e BROKER_HOST=<broker-host> \
+  -e WORKER_AUTH_TOKEN=<token> \
+  fast2-worker:2026.0.0
+```
+
+The `WORKER_AUTH_TOKEN` must be generated beforehand from an administrator account. See the [migration guide](migration-v2026.md#external-worker-authentication) for the provisioning procedure.
+
+:::tip
+
+    For multi-worker or production setups, use Docker Compose or Kubernetes to manage the broker, worker, and OpenSearch containers together.
+
+:::
