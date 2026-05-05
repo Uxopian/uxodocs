@@ -5,7 +5,7 @@ date: "2026-04-30"
 weight: -202320
 aliases:
   - /release/2023.20/
-description: "New collapsed state for the document navigator, customizable log configuration, scroll performance with many annotations, faster DirectOffice conversion, PDFOwl 1.24-26 upgrade, and numerous rendering, redaction, and annotation fixes."
+description: "New collapsed state for the document navigator, customizable log configuration, faster DirectOffice conversion, PDFOwl 1.24-26 upgrade, and numerous rendering, redaction, and annotation fixes."
 _build:
   list: never
 ---
@@ -74,14 +74,6 @@ The release also introduces a **new `Collapsed` value for the document navigator
 
 ## Bug fixes
 
-#### Scroll performance on heavily annotated documents
-
-`Fixed` — Scrolling through documents with many pages and many annotations no longer freezes the browser. The annotation lookup performed on every scroll event has been optimised so that scroll cost is no longer proportional to the total number of annotations in the document.
-
-#### `annotation.loadPerPage` now works for non-XFDF connectors
-
-`Fixed` — The `annotation.loadPerPage=true` configuration, recommended for documents with very large annotation sets, previously failed for any connector other than XFDF because per-page annotation access was not implemented. It now works for all connectors that expose annotations.
-
 #### Comments on arrow annotations preserved across mixed text and numbers
 
 `Fixed` — Comments containing both text and numbers on arrow annotations no longer lose their text after validation, and numbers are no longer displayed in inches.
@@ -114,10 +106,6 @@ The release also introduces a **new `Collapsed` value for the document navigator
 
 `Fixed` — Reloading the same plain-text (`.txt`) document no longer causes the displayed page count to alternate between two values. The page count is now stable across loads.
 
-#### Recovery when a cached document is missing on disk
-
-`Fixed` — When the rendition cache references a converted file that is no longer present in the file system but the source file is still available, the document is now re-rendered transparently instead of failing to open.
-
 #### Blank table pages with DirectOffice
 
 `Fixed` — DirectOffice no longer produces extra empty pages with blank tables when rendering certain Word documents.
@@ -145,7 +133,6 @@ The release also introduces a **new `Collapsed` value for the document navigator
 | Summary | Issue Type | Key | Linked Issues |
 |---------|------------|-----|---------------|
 | [Mend] Upgrade Spring version | Dev W/O UX | AR-18337 | |
-| [HMI] Scroll freeze with many annotations + loadPerPage broken for non-XFDF connectors | Issue | AR-18297 | TMAPR-6803 |
 | Comments associated with arrow annotation does not work properly | Issue | AR-18239 | TMAPR-6698 |
 | Modifying the zoom causes a negative zoom when another document is opened when using FlowerDocs | Issue | AR-17888 | |
 | Error when server sends an unexpected error | Issue | AR-17702 | TMAPR-6397 |
@@ -161,7 +148,6 @@ The release also introduces a **new `Collapsed` value for the document navigator
 | PDFOwl - Issue with Document View Loading While Navigating a PDF Portfolio | Issue | AR-17358 | |
 | PDF document won't open with PDFOWL | Issue | AR-17631 | TMAPR-6320 |
 | The number of pages changes every time a document is loaded | Issue | AR-18270 | |
-| Handle missing rendered document | Issue | AR-18292 | |
 | Incorrect display of EML document subject | Issue | AR-17503 | |
 | Encoding issue for accented character | Issue | AR-15441 | TMAPR-5218 |
 | The height of the highlighted text is very high | Issue | AR-17424 | TMAPR-6177 |
