@@ -1,0 +1,298 @@
+---
+title: Integrate with FileNet
+last_update:
+  date: '2026-05-05T07:51:29.095Z'
+  author: CI/CD Bot
+sidebar_label: Integrate with FileNet
+sidebar_position: 8
+content_hash: 4e21e4a2eaa6eb933f6f51cac0e4836b6e2d33f894ce65ccb907d7357413fb87
+---
+
+This guide covers how to install and configure the Uxopian AI plugin for IBM Content Navigator (ICN). The plugin adds an **"Ouvrir dans Uxopian"** context menu action on P8 documents and injects an AI Chat button into the ICN toolbar.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    ICN["IBM Content Navigator<br/>(browser)"]
+    PLUGIN["UxopianProxyService<br/>(ICN plugin / WebSphere)"]
+    GW["uxopian-gateway<br/>(IcnJwtProvider)"]
+    AI["uxopian-ai"]
+    LLM["LLM Provider"]
+
+    ICN -->|"invokePluginService (AJAX)"| PLUGIN
+    PLUGIN -->|"RS256 JWT<br/>X-Provider-ID: IcnJwtProvider"| GW
+    GW --> AI
+    AI --> LLM
+    ICN -->|"Bearer token<br/>(web components)"| GW
+```
+
+*Figure: The ICN plugin signs a JWT with a private key stored in WebSphere, then forwards requests to the Uxopian AI gateway. The browser also loads the chat web components directly from the gateway using the same token.*
+
+The plugin exposes two operations:
+
+| Operation (`op=`) | Purpose |
+|---|---|
+| `token` | Returns a signed RS256 JWT for the current ICN user — used by the browser to authenticate web component asset requests |
+| *(none)* | Proxies all other requests to the gateway backend (`icn.plugin.bff.url`) with the JWT attached |
+
+## Prerequisites
+
+| Requirement | Details |
+|---|---|
+| IBM FileNet P8 + IBM Content Navigator | Version 3.0+ |
+| WebSphere Application Server | Hosts ICN |
+| Java 8 (JDK) | Required only to rebuild from source |
+| Maven 3.6+ | Required only to rebuild from source |
+| Uxopian AI + gateway | Deployed and reachable from WebSphere |
+
+## Plugin source files
+
+Download the plugin source package to deploy a prebuilt JAR or rebuild it for your environment.
+
+:::tip[Download]
+**<a href={require('./uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>**
+:::
+
+Contents:
+
+| File | Purpose |
+|---|---|
+| `pom.xml` | Maven build descriptor |
+| `navigatorAPI.jar` | IBM FileNet Navigator API (local dependency, provided by IBM) |
+| `icn-plugin.p12` | Default PKCS12 keystore — **replace before production** |
+| `src/main/java/com/uxopian/icn/UxopianPlugin.java` | Plugin entry point — registers actions and services |
+| `src/main/java/com/uxopian/icn/UxopianAction.java` | Context menu action for P8 documents |
+| `src/main/java/com/uxopian/icn/UxopianFeature.java` | ICN feature panel (AI Chat tab) |
+| `src/main/java/com/uxopian/icn/UxopianProxyService.java` | Servlet — JWT signing and request proxy |
+| `src/main/java/com/uxopian/icn/jwt/JwtSigner.java` | RS256 JWT generation (30 s TTL) |
+| `src/main/java/com/uxopian/icn/jwt/KeystoreLoader.java` | PKCS12/JKS keystore loader with WebSphere IBMJCE fallback |
+| `src/main/resources/com/uxopian/icn/WebContent/actionHandler.js` | Dojo module — token fetch, web component injection, toolbar button |
+| `src/main/resources/com/uxopian/icn/WebContent/icon.svg` | Chat button icon |
+| `src/main/resources/com/uxopian/icn/icn-plugin.p12` | Keystore bundled inside the JAR (fallback when no external path is set) |
+| `src/main/resources/com/uxopian/icn/icn-plugin.jks` | JKS version of the keystore for IBM Java 8 compatibility |
+
+## Phase 1 — Build the plugin JAR
+
+Skip this phase if you are deploying the prebuilt JAR included in the ZIP.
+
+### 1.1 Set the target host
+
+Open `pom.xml` and update the two Maven properties:
+
+```xml title="pom.xml"
+<properties>
+    <!-- URL of the Uxopian AI gateway (frontend-facing) -->
+    <uxopian.ai.host>https://your-gateway-host/gui/gateway/uxopian-ai-filenet</uxopian.ai.host>
+    <!-- ICN context path — change if ICN is deployed under a different path -->
+    <uxopian.icn.context.path>/navigator</uxopian.icn.context.path>
+</properties>
+```
+
+`uxopian.ai.host` is injected into `actionHandler.js` at compile time via Maven resource filtering (delimiter `@`). The browser uses this URL to load the chat web component assets.
+
+### 1.2 Run the build
+
+```bash
+mvn clean package
+```
+
+The output JAR is `target/uxopian-icn-plugin.jar`.
+
+:::note[navigatorAPI.jar is a local dependency]
+`navigatorAPI.jar` is declared as a `system`-scoped dependency in `pom.xml` and must be present at `./navigatorAPI.jar` relative to the project root. The IBM Navigator API JAR can be found in your ICN installation at `NavigatorApplication.ear/navigator.war/WEB-INF/lib/`.
+:::
+
+---
+
+## Phase 2 — Deploy the plugin in ICN
+
+### 2.1 Copy the JAR
+
+Copy `uxopian-icn-plugin.jar` to a directory accessible by WebSphere, for example:
+
+```bash
+/opt/IBM/ICN/plugins/uxopian-icn-plugin.jar
+```
+
+### 2.2 Configure WebSphere system properties
+
+Set these JVM custom properties in the WebSphere administration console under **Application servers → \<server\> → Java and Process Management → Process definition → Java Virtual Machine → Custom properties**:
+
+| Property | Default | Description |
+|---|---|---|
+| `icn.plugin.bff.url` | `http://localhost:8085/gui/gateway/uxopian-ai-filenet-icn` | Gateway backend URL as seen from WebSphere |
+| `icn.plugin.keystore.path` | `icn-plugin.p12` | Path to the PKCS12 keystore file. If relative, it is resolved against the WebSphere process working directory; an absolute path is safer. If unset, the plugin falls back to the keystore bundled inside the JAR. |
+| `icn.plugin.keystore.alias` | `icn-plugin` | Alias of the key pair inside the keystore |
+| `icn.plugin.keystore.password` | `changeit` | Keystore password |
+
+:::warning[Change the keystore and password before production]
+The default `icn-plugin.p12` bundled in the JAR uses the password `changeit`. Generate a new key pair for each environment and set `icn.plugin.keystore.path` to an external file.
+:::
+
+### 2.3 Register the plugin in ICN Admin Console
+
+1. Open the ICN Administration Console.
+2. Navigate to **Plug-ins**.
+3. Click **New Plug-in**.
+4. Set the JAR file path to the location from step 2.1.
+5. Click **Load**.
+6. Confirm that the plugin name **Uxopian Plugin** and version **1.0.0** are displayed.
+7. Save the configuration and restart ICN.
+
+---
+
+## Phase 3 — Configure the gateway
+
+### 3.1 Register the IcnJwtProvider public key
+
+The gateway's `IcnJwtProvider` validates incoming JWTs using the plugin's public key. Retrieve the public key from the running plugin:
+
+```bash
+curl http://<websphere-host>:<icn-port>/navigator/jaxrs/UxopianPlugin/UxopianProxyService?op=public-key
+```
+
+The endpoint returns a PEM-encoded RSA public key. Register it in the gateway provider configuration.
+
+### 3.2 Declare the gateway route
+
+Add a route in `gateway-application.yaml` for the FileNet integration:
+
+```yaml title="gateway-application.yaml"
+app:
+  routes:
+    - id: uxopian-ai-filenet
+      uri: http://uxopian-ai:8080
+      path: /gui/gateway/uxopian-ai-filenet/**
+      prefix: /gui/gateway/uxopian-ai-filenet/
+      provider: IcnJwtProvider
+      security:
+        - path: /api/web-components/**
+          public: true
+        - path: /.well-known/**
+          public: true
+        - path: /assets/**
+          public: true
+        - path: /actuator/health
+          public: true
+```
+
+The `path` value here must match `uxopian.ai.host` from `pom.xml` (or the value of `icn.plugin.bff.url` for the backend route). Adjust if your gateway uses a different path prefix.
+
+### 3.3 Verify connectivity
+
+From WebSphere, confirm the gateway is reachable:
+
+```bash
+curl http://<gateway-host>:<port>/actuator/health
+```
+
+Expected: `{"status":"UP"}`
+
+---
+
+## Phase 4 — Validate
+
+### 4.1 Fetch a token from the plugin service
+
+From a browser that is logged into ICN, or using a tool that can forward the ICN session, call:
+
+```
+GET /navigator/jaxrs/UxopianPlugin/UxopianProxyService?op=token
+```
+
+Expected: `{"token":"eyJ..."}`
+
+### 4.2 Test the gateway route with the token
+
+```bash
+curl -H "Authorization: Bearer <token>" \
+  http://<gateway-host>:<port>/gui/gateway/uxopian-ai-filenet/api/v1/prompts
+```
+
+Expected: HTTP 200 with a list of prompts.
+
+### 4.3 Test the context menu action in ICN
+
+1. Log in to IBM Content Navigator.
+2. Browse to a P8 document in the Document Library.
+3. Right-click the document — **Ouvrir dans Uxopian** should appear in the context menu.
+4. Click the action — the Uxopian AI chat panel should open.
+5. Verify the **AI Chat** toolbar button (chat icon) appears in the ICN navigation bar.
+
+### Checkpoint — Integration is working
+
+| Check | Expected |
+|---|---|
+| `GET ?op=token` | `{"token":"eyJ..."}` |
+| `GET /api/v1/prompts` with token | HTTP 200 |
+| ICN context menu | "Ouvrir dans Uxopian" action visible on P8 documents |
+| ICN toolbar | AI Chat button injected |
+| Chat panel | Opens and returns LLM responses |
+
+---
+
+## Modifying the plugin
+
+### Changing the Uxopian AI host at runtime
+
+The gateway URL baked into `actionHandler.js` at build time (`@uxopian.ai.host@`) is a compile-time setting. To change it without rebuilding, update `uxopian.ai.host` in `pom.xml` and rebuild with `mvn clean package`.
+
+If you need a fully runtime-configurable host, modify `UxopianProxyService.java` to expose the host as a JVM system property and serve it to the frontend via an additional `op=config` endpoint.
+
+### Replacing the keystore
+
+Generate a new RSA key pair and PKCS12 keystore:
+
+```bash
+keytool -genkeypair -alias icn-plugin -keyalg RSA -keysize 2048 \
+  -validity 3650 -storetype PKCS12 \
+  -keystore /opt/IBM/ICN/keys/icn-plugin.p12 \
+  -storepass <your-password>
+```
+
+Then set `icn.plugin.keystore.path`, `icn.plugin.keystore.alias`, and `icn.plugin.keystore.password` as WebSphere JVM custom properties and re-register the new public key with the gateway (Phase 3.1).
+
+### Customizing the frontend behavior
+
+`actionHandler.js` is a standard Dojo AMD module. It controls:
+- Token fetching (`fetchToken`)
+- CSS and JS asset injection for the web components
+- The `openChat` function (invoked by the context menu action and toolbar button)
+- The `buildChatRequest` function (constructs the initial chat payload)
+
+After editing, rebuild the JAR with `mvn clean package` to re-embed the updated file.
+
+---
+
+## Configuration reference
+
+| JVM property | Default | Description |
+|---|---|---|
+| `icn.plugin.bff.url` | `http://localhost:8085/gui/gateway/uxopian-ai-filenet-icn` | Uxopian AI gateway backend URL (server-side proxy target) |
+| `icn.plugin.keystore.path` | `icn-plugin.p12` | PKCS12 keystore path. Relative paths resolve against the WebSphere JVM working directory. Falls back to the JAR-embedded keystore if the file does not exist. |
+| `icn.plugin.keystore.alias` | `icn-plugin` | Key alias in the keystore |
+| `icn.plugin.keystore.password` | `changeit` | Keystore password |
+
+| Maven property | Default | Description |
+|---|---|---|
+| `uxopian.ai.host` | `https://iris.qa.dev.uxopian.com/gui/gateway/uxopian-ai-filenet` | Frontend-facing gateway URL — baked into `actionHandler.js` at build time |
+| `uxopian.icn.context.path` | `/navigator` | ICN servlet context path — used to construct the token endpoint URL |
+
+## Common issues
+
+| Symptom | Cause | Solution |
+|---|---|---|
+| Context menu action missing | Plugin not loaded | Check ICN Admin Console plug-in list; confirm the JAR path is correct and ICN restarted |
+| `op=token` returns `{"error":"..."}` | Keystore not found or wrong alias/password | Set `icn.plugin.keystore.path` to an absolute path; verify alias and password in WebSphere JVM custom properties |
+| Web component assets fail to load (403/401) | `uxopian.ai.host` points to wrong URL or gateway route is not public for assets | Confirm `uxopian.ai.host` matches the gateway route; set `/api/web-components/**` to `public: true` |
+| JWT rejected by gateway | Public key not registered with `IcnJwtProvider` | Re-fetch the public key from `?op=public-key` and update the gateway provider config |
+| Chat panel blank after opening | `icn.plugin.bff.url` unreachable from WebSphere | Test connectivity from WebSphere to the gateway; check firewall rules |
+| IBM Java 8 keystore error | IBM JCE provider does not support PKCS12 by default | The plugin automatically falls back to the `.jks` keystore; ensure `icn-plugin.jks` is present alongside `icn-plugin.p12` |
+
+## Related pages
+
+- [Configure gateway routes](./configure_gateway_routes.md) — `path`, `prefix`, `rewritePath`, debug logging
+- [Authentication and gateway](../understanding/authentication.md)
+- [Web components](../understanding/web_components.md)
+- [Downloads](../getting_started/downloads.mdx)
