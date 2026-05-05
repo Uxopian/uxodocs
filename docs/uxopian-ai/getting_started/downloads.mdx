@@ -3,9 +3,9 @@ title: Downloads
 sidebar_label: Downloads
 sidebar_position: 5
 last_update:
-  date: '2026-05-05T07:51:29.095Z'
+  date: '2026-05-05T15:22:26.459Z'
   author: CI/CD Bot
-content_hash: d1985408f70c83ea611bf715f85c533ba83fc163ade7e0fcb91da87c787a73f9
+content_hash: deac5ea9ded34fe1f30bd699ee181c968fe6a22a34dc800fd5c5aba91997ddca
 ---
 
 Downloadable example packages for Uxopian AI. Each package is a ZIP archive containing Docker Compose files and configuration templates.
@@ -55,13 +55,17 @@ See [Quickstart with FlowerDocs](./quickstart_flowerdocs.mdx) for step-by-step i
 
 ### FileNet ICN plugin
 
-Source package for the IBM Content Navigator (ICN) plugin. Contains the Maven project, Java sources, keystore files, and the `navigatorAPI.jar` local dependency required for compilation.
+Prebuilt JAR ready to deploy in ICN, or source package to rebuild for your environment.
 
-:::tip[Download]
-**<a href={require('../how_to/uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>**
+:::tip[Prebuilt JAR]
+**<a href="/files/uxopian-ai/uxopian-icn-plugin.jar" download="uxopian-icn-plugin.jar">uxopian-icn-plugin.jar</a>** — ready to deploy, no build required
 :::
 
-Contents:
+:::tip[Source package]
+**<a href={require('../how_to/uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven project to rebuild for your environment
+:::
+
+Source package contents:
 - `pom.xml`: Maven build descriptor
 - `navigatorAPI.jar`: IBM FileNet Navigator API (local dependency)
 - `icn-plugin.p12`: Default PKCS12 keystore — replace before production

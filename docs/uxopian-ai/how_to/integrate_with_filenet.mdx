@@ -1,11 +1,11 @@
 ---
 title: Integrate with FileNet
 last_update:
-  date: '2026-05-05T07:51:29.095Z'
+  date: '2026-05-05T15:22:26.459Z'
   author: CI/CD Bot
 sidebar_label: Integrate with FileNet
 sidebar_position: 8
-content_hash: 4e21e4a2eaa6eb933f6f51cac0e4836b6e2d33f894ce65ccb907d7357413fb87
+content_hash: 58aa0efc6737f9fdb081b956e9739c4e5cb5f5d5bd8543facc3e29150c166fa7
 ---
 
 This guide covers how to install and configure the Uxopian AI plugin for IBM Content Navigator (ICN). The plugin adds an **"Ouvrir dans Uxopian"** context menu action on P8 documents and injects an AI Chat button into the ICN toolbar.
@@ -46,12 +46,14 @@ The plugin exposes two operations:
 | Maven 3.6+ | Required only to rebuild from source |
 | Uxopian AI + gateway | Deployed and reachable from WebSphere |
 
-## Plugin source files
+## Plugin downloads
 
-Download the plugin source package to deploy a prebuilt JAR or rebuild it for your environment.
+:::tip[Prebuilt JAR]
+**<a href="/files/uxopian-ai/uxopian-icn-plugin.jar" download="uxopian-icn-plugin.jar">uxopian-icn-plugin.jar</a>** — ready to deploy, no build required
+:::
 
-:::tip[Download]
-**<a href={require('./uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>**
+:::tip[Source package]
+**<a href={require('./uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven project to rebuild for your environment
 :::
 
 Contents:
@@ -259,7 +261,7 @@ Then set `icn.plugin.keystore.path`, `icn.plugin.keystore.alias`, and `icn.plugi
 - Token fetching (`fetchToken`)
 - CSS and JS asset injection for the web components
 - The `openChat` function (invoked by the context menu action and toolbar button)
-- The `buildChatRequest` function (constructs the initial chat payload)
+- The `buildChatRequest` function (constructs the initial chat payload; takes no parameters)
 
 After editing, rebuild the JAR with `mvn clean package` to re-embed the updated file.
 
