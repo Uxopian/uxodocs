@@ -1,5 +1,14 @@
 [
   {
+    "version": "v2026.0.0",
+    "title": "ARender v2026.0.0 – Release Notes",
+    "date": "2026-04-17",
+    "description": "Major version: Spring Boot 4, Java 25, Jackson 3, PDFOwl default renderer, OAuth2 Rendition security, new React UI with REST connector architecture for FileNet and Alfresco.",
+    "slug": "/release-note/arender/v2026.0.0/release-notes",
+    "hasUpgradeNotes": true,
+    "latest": true
+  },
+  {
     "version": "v2023.20.0",
     "title": "ARender v2023.20.0 – Release Notes",
     "date": "2026-05-06",
