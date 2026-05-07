@@ -1,7 +1,7 @@
 ---
 title: Integrate with FileNet
 last_update:
-  date: '2026-05-05T15:22:26.459Z'
+  date: '2026-05-07T17:00:00.000Z'
   author: CI/CD Bot
 sidebar_label: Integrate with FileNet
 sidebar_position: 8
@@ -29,11 +29,12 @@ flowchart LR
 
 *Figure: The ICN plugin signs a JWT with a private key stored in WebSphere, then forwards requests to the Uxopian AI gateway. The browser also loads the chat web components directly from the gateway using the same token.*
 
-The plugin exposes two operations:
+The plugin exposes three operations:
 
 | Operation (`op=`) | Purpose |
 |---|---|
-| `token` | Returns a signed RS256 JWT for the current ICN user — used by the browser to authenticate web component asset requests |
+| `token` | Returns a signed RS256 JWT (no roles) for the current ICN user — used by the browser to authenticate web component asset requests |
+| `admin-token` | Returns a signed RS256 JWT with `ADMIN` role — used by the **Admin IA** toolbar button to create a gateway session before opening the admin panel |
 | *(none)* | Proxies all other requests to the gateway backend (`icn.plugin.bff.url`) with the JWT attached |
 
 ## Prerequisites
@@ -165,17 +166,28 @@ app:
   routes:
     - id: uxopian-ai-filenet
       uri: http://uxopian-ai:8080
-      path: /gui/gateway/uxopian-ai-filenet/**
-      prefix: /gui/gateway/uxopian-ai-filenet/
-      provider: IcnJwtProvider
+      path: /**/uxopian-ai-filenet/**
+      prefix: /**/uxopian-ai-filenet/
+      provider: FileNetProvider
+      rewritePath: ^(.*)/uxopian-ai-filenet/?(?<segment>.*), /gui/gateway/uxopian-ai/$\{segment}
       security:
-        - path: /api/web-components/**
+        - path: "/**/api/web-components/**"
           public: true
-        - path: /.well-known/**
+        - path: "/actuator/health"
           public: true
-        - path: /assets/**
+        - path: "/**/api/v1/admin/**"
+          roles: [ "ADMIN" ]
+        - path: "/**/prompt/**"
+          roles: [ "ADMIN" ]
+        - path: "/**/goal/**"
+          roles: [ "ADMIN" ]
+        - path: "/**/prompt-statistics"
+          roles: [ "ADMIN" ]
+        - path: "/**/admin/**"
           public: true
-        - path: /actuator/health
+        - path: "/**/v3/**"
+          public: true
+        - path: "/**/swagger-ui/**"
           public: true
 ```
 
@@ -214,23 +226,27 @@ curl -H "Authorization: Bearer <token>" \
 
 Expected: HTTP 200 with a list of prompts.
 
-### 4.3 Test the context menu action in ICN
+### 4.3 Test the context menu action and toolbar buttons in ICN
 
 1. Log in to IBM Content Navigator.
 2. Browse to a P8 document in the Document Library.
 3. Right-click the document — **Ouvrir dans Uxopian** should appear in the context menu.
 4. Click the action — the Uxopian AI chat panel should open.
-5. Verify the **AI Chat** toolbar button (chat icon) appears in the ICN navigation bar.
+5. Verify the **AI Chat** toolbar button (chat bubble icon) appears in the ICN navigation bar.
+6. Verify the **Admin IA** toolbar button (gear icon) appears next to the AI Chat button.
+7. Click **Admin IA** — the browser should open a new tab on the gateway admin panel, authenticated automatically.
 
 ### Checkpoint — Integration is working
 
 | Check | Expected |
 |---|---|
 | `GET ?op=token` | `{"token":"eyJ..."}` |
+| `GET ?op=admin-token` | `{"token":"eyJ..."}` (JWT with `"roles":["ADMIN"]`) |
 | `GET /api/v1/prompts` with token | HTTP 200 |
 | ICN context menu | "Ouvrir dans Uxopian" action visible on P8 documents |
-| ICN toolbar | AI Chat button injected |
+| ICN toolbar | AI Chat button and Admin IA button injected |
 | Chat panel | Opens and returns LLM responses |
+| Admin IA button | Opens admin panel in new tab, authenticated via `GATEWAY_SESSION` cookie |
 
 ---
 
@@ -258,10 +274,11 @@ Then set `icn.plugin.keystore.path`, `icn.plugin.keystore.alias`, and `icn.plugi
 ### Customizing the frontend behavior
 
 `actionHandler.js` is a standard Dojo AMD module. It controls:
-- Token fetching (`fetchToken`)
+- Token fetching (`fetchToken` for chat, `fetchAdminToken` for admin)
 - CSS and JS asset injection for the web components
-- The `openChat` function (invoked by the context menu action and toolbar button)
-- The `buildChatRequest` function (constructs the initial chat payload; takes no parameters)
+- The `openChat` function (invoked by the context menu action and the AI Chat toolbar button)
+- The `buildChatRequest` function (constructs the initial chat payload)
+- The `openAdmin` function (invoked by the **Admin IA** toolbar button) — fetches an `admin-token`, then opens `GET /auth/login?providerId=FileNetProvider&token=…&redirect=/admin/` in a new tab so the gateway sets the `GATEWAY_SESSION` cookie in a first-party context before redirecting to the admin panel
 
 After editing, rebuild the JAR with `mvn clean package` to re-embed the updated file.
 
