@@ -31,22 +31,19 @@ Four concrete scenarios where this pattern pays off.
 
 ## 3. The contract
 
-Four broker endpoints cover almost every rendering-service integration. Each link below jumps to the full parameter table in the reference.
+Five broker endpoints cover almost every rendering-service integration. Each link below jumps to the full parameter table in the reference.
 
 | Step | Method & path | Reference |
 |---|---|---|
 | Upload a document | `POST /documents` | [Upload a document](../../reference/rest-api/broker-api.md#upload-a-document) |
+| Get the document layout (page count, children, conversion-done signal) | `GET /documents/{id}/layout` | [Get document layout](../../reference/rest-api/broker-api.md#get-document-layout) |
 | Fetch a page as PNG | `GET /documents/{id}/pages/{n}/image?pageImageDescription=IM_{width}_{rotation}` | [Get page image](../../reference/rest-api/broker-api.md#get-page-image) |
 | Fetch the document as PDF | `GET /documents/{id}/file?format=pdf` | [Get document file](../../reference/rest-api/broker-api.md#get-document-file) |
 | Delete when done | `DELETE /documents/{id}` | [Delete a document](../../reference/rest-api/broker-api.md#delete-a-document) |
 
-For very large documents where the synchronous PDF call would risk timing out, queue the conversion asynchronously and poll for completion.
+`GET /documents/{id}/layout` is the integrator's compass. The response tells you how many pages the document has (the length of `pageDimensionsList`), so you know how many `pages/{n}/image` calls to make. For composite containers (EML, MSG, ZIP), it also exposes the children with their own document IDs. Call `/layout` again on each child to walk the tree before fetching their page images. A 200 response with usable data is also the simplest signal that the server-side conversion is complete; if `/layout` still returns a transient or empty state, the converter has not finished yet.
 
-| Step | Method & path | Reference |
-|---|---|---|
-| Queue a conversion | `POST /conversions` (body: `{"documentId":{"id":"..."},"format":"pdf"}`) | [Queue a conversion](../../reference/rest-api/broker-api.md#queue-a-conversion) |
-| Poll until done | `GET /conversions/{orderId}` until `currentState=PROCESSED` | [Poll conversion status](../../reference/rest-api/broker-api.md#poll-conversion-status) |
-| Retrieve the result | `GET /documents/{id}/file?format=pdf` (after PROCESSED) | [Get document file](../../reference/rest-api/broker-api.md#get-document-file) |
+Conversion to PDF starts automatically on upload. There is no `POST /conversions` to call from the integration side. To observe conversion progress explicitly, fetch [Get document conversions](../../reference/rest-api/broker-api.md#get-document-conversions) to list the order IDs and [Poll conversion status](../../reference/rest-api/broker-api.md#poll-conversion-status) to watch state. In practice, calling `GET /documents/{id}/layout` and waiting for a successful response is enough for most integrations.
 
 **Default broker port:** `8761` (self-hosted). The hosted demo broker used in the quickstart below runs at `https://rendition.arender.2026.uxopian.com`. The interactive Swagger UI is at [https://rendition.arender.2026.uxopian.com/swagger-ui/index.html](https://rendition.arender.2026.uxopian.com/swagger-ui/index.html) if you want to try requests in your browser before writing code.
 
@@ -72,7 +69,17 @@ echo "Document ID: $DOC_ID"
 
 The broker returns a JSON body `{"id": "b64_..."}`. Capture the `id`. Every subsequent call needs it. See [Upload a document](../../reference/rest-api/broker-api.md#upload-a-document) for optional parameters (assign your own ID, set a title, upload by URL instead of binary).
 
-### 4.2 Fetch page 0 as a PNG
+### 4.2 Get the document layout
+
+```bash
+curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/layout"
+```
+
+Returns JSON with `mimeType` and `pageDimensionsList`. The length of `pageDimensionsList` is the page count, which bounds your page-image loop. For composite containers (EML, MSG, ZIP), the response surfaces children with their own document IDs. Recurse with `/layout` on each child before fetching their page images. A successful response also confirms server-side conversion is complete. See [Get document layout](../../reference/rest-api/broker-api.md#get-document-layout).
+
+### 4.3 Fetch page 0 as a PNG
+
+Use the page count from §4.2 to decide which pages to fetch. The quickstart below fetches page 0 only.
 
 ```bash
 curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/pages/0/image?pageImageDescription=IM_800_0" \
@@ -81,7 +88,7 @@ curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/pages/0/image
 
 Page numbering is **0-based**. The `pageImageDescription` parameter encodes width and rotation: `IM_800_0` means 800 pixels wide, no rotation. Repeat with `pages/1`, `pages/2`, … for additional pages. Optional contrast/brightness/invert filters are documented in [Get page image](../../reference/rest-api/broker-api.md#get-page-image).
 
-### 4.3 Fetch the whole document as PDF
+### 4.4 Fetch the whole document as PDF
 
 ```bash
 curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/file?format=pdf" \
@@ -90,7 +97,7 @@ curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/file?format=p
 
 One call, multi-page PDF returned as binary. The call is synchronous. It waits for the converter and returns the converted file. See [Get document file](../../reference/rest-api/broker-api.md#get-document-file).
 
-### 4.4 Clean up
+### 4.5 Clean up
 
 ```bash
 curl -X DELETE "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID"
@@ -98,7 +105,7 @@ curl -X DELETE "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID"
 
 The broker holds documents in memory and on local cache until they are deleted or evicted. Long-running integrations should delete each document after its outputs are stored host-side. See [Delete a document](../../reference/rest-api/broker-api.md#delete-a-document).
 
-That's the complete loop. Wire those four calls into your host system's rendition hook and you have a working integration.
+That's the complete loop. Wire those five calls into your host system's rendition hook and you have a working integration.
 
 ## 5. Integration shape
 
@@ -144,7 +151,7 @@ This guide does not cover host-side mechanisms. The rendition hooks differ from 
 
 `GET /documents/{id}/file?format=pdf` returns the document as a multi-page PDF in a single call. The call is synchronous. The broker waits for the converter to finish and streams the result back. This is the right path for the vast majority of integrations.
 
-For very large documents that risk timing out the synchronous HTTP call, queue the conversion and poll instead. `POST /conversions` with body `{"documentId": {"id": "..."}, "format": "pdf"}` returns a `conversionOrderId`. Poll `GET /conversions/{orderId}` until `currentState` is `PROCESSED`, then retrieve the converted PDF with the same `GET /documents/{id}/file?format=pdf` call. See [Queue a conversion](../../reference/rest-api/broker-api.md#queue-a-conversion) and [Poll conversion status](../../reference/rest-api/broker-api.md#poll-conversion-status).
+Conversion to PDF starts automatically when the document is uploaded. For very large documents you may want to observe the conversion to decide when to call `GET /documents/{id}/file?format=pdf`. Use [Get document conversions](../../reference/rest-api/broker-api.md#get-document-conversions) to retrieve the `conversionOrderId`, then [Poll conversion status](../../reference/rest-api/broker-api.md#poll-conversion-status) to watch its state. Alternatively, calling [Get document layout](../../reference/rest-api/broker-api.md#get-document-layout) and waiting for a successful response is enough for most integrations.
 
 ## 7. When this pattern fits (and when it doesn't)
 
