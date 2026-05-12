@@ -4,39 +4,103 @@ slug: /guides/integration/rendering-service
 sidebar_position: 20
 ---
 
-ARender's rendition pipeline can be called directly from another application — without involving the ARender viewer — to generate page images and PDF copies of documents on demand. This guide describes the pattern and the contract ARender exposes for that use case.
+ARender's rendition pipeline can be called directly from another application (without involving the ARender viewer) to generate page images and PDF copies of documents on demand. This page describes the pattern, walks through a 5-minute integration, and points to the exact API sections you'll need.
 
 ## 1. Overview
 
-A host system (an ECM, a DMS, an archival pipeline, or any business application that manages documents) calls the ARender broker REST API and receives one of two canonical outputs:
+A **host system** (an ECM, a DMS, an archival pipeline, or any business application that manages documents) calls the **broker**. The broker is the Document Service Broker, the front-door REST API of the ARender rendition stack. It returns one of two outputs:
 
-- **Page images**, used to populate the host's own thumbnails and previews.
+- **Page images** (PNG), used to populate the host's own thumbnails and previews.
 - **Full PDF documents**, used for long-term archival, normalization, or distribution.
 
-Both outputs come from the same pipeline that powers the ARender viewer. The host system stores and serves them through its own mechanisms; ARender stays in the role of a server-side rendering service.
+Both outputs come from the same pipeline that powers the ARender viewer. The host stores and serves them through its own mechanisms. ARender stays in the role of a server-side rendering service.
+
+> **Rendition.** Any rendered representation of a source document: a thumbnail, a preview image, or a PDF copy. The word is used heavily in the ECM world and below.
 
 ## 2. Why call ARender as a rendering service
 
-- **Visual consistency** between the renditions surfaced by the host system and the ARender viewer. Users see the same document the same way, regardless of where they encounter it.
-- **One pipeline for live viewing and archive.** The same parsers, fonts, and rendering rules apply to the interactive viewer and to the archived PDF.
-- **Coverage of non-trivial formats.** Emails (multipart, embedded attachments), Office documents, CAD files, and other complex formats are handled by ARender's established converters.
-- **Stable rendition policy.** Annotation visibility, watermarks, redactions, and any organization-wide rendering rules are applied consistently to every output.
+Four concrete scenarios where this pattern pays off.
 
-## 3. What ARender exposes
+**Mismatched previews today.** Your ECM already generates thumbnails for folder views and search results, typically via a built-in converter such as LibreOffice headless. For complex formats (`.eml`, `.msg`, AutoCAD, multi-sheet Excel), those built-in thumbnails diverge from what the ARender viewer shows full-screen. A `.eml` thumbnail might show raw MIME headers while the viewer shows the rendered email body with inline images. Routing the ECM's thumbnail generation through ARender unifies both surfaces so users see the same document the same way wherever they encounter it.
 
-The broker offers two stable outputs for this pattern.
+**One pipeline for live viewing and archive.** If you also archive a PDF copy of each ingested document, generating that copy through the same converter that drives the viewer means a single rendering policy to qualify, monitor, and version. No separate archival pipeline to keep in sync.
 
-### Page images
+**Complex formats without owning a converter.** Office, CAD, emails (multipart with embedded attachments), and other non-trivial formats are handled by ARender's existing pipeline. The host can route just those formats and leave the rest to its native renderer.
 
-Upload a document, receive a document identifier, request a page image at a chosen width — receive a PNG. Iterate for additional pages.
+**Org-wide rendition rules applied consistently.** Watermarks, redactions, annotation visibility, font substitutions, and other server-side rules are applied uniformly to every output of the pipeline: live page images, archived PDFs, and any future rendition surface.
 
-### PDF documents
+## 3. The contract
 
-Upload a document, receive a document identifier, request the PDF representation of the document — receive a single multi-page PDF. ARender supports PDF/A-1, PDF/A-2, and PDF/A-3 profiles for long-term archival; the active profile is set in the converter configuration.
+Four broker endpoints cover almost every rendering-service integration. Each link below jumps to the full parameter table in the reference.
 
-The exact endpoints, parameters, and return shapes are described in the [Broker API reference](../../reference/rest-api/broker-api.md).
+| Step | Method & path | Reference |
+|---|---|---|
+| Upload a document | `POST /documents` | [Upload a document](../../reference/rest-api/broker-api.md#upload-a-document) |
+| Fetch a page as PNG | `GET /documents/{id}/pages/{n}/image?pageImageDescription=IM_{width}_{rotation}` | [Get page image](../../reference/rest-api/broker-api.md#get-page-image) |
+| Fetch the document as PDF | `GET /documents/{id}/file?format=pdf` | [Get document file](../../reference/rest-api/broker-api.md#get-document-file) |
+| Delete when done | `DELETE /documents/{id}` | [Delete a document](../../reference/rest-api/broker-api.md#delete-a-document) |
 
-## 4. Integration shape
+For very large documents where the synchronous PDF call would risk timing out, queue the conversion asynchronously and poll for completion.
+
+| Step | Method & path | Reference |
+|---|---|---|
+| Queue a conversion | `POST /conversions` (body: `{"documentId":{"id":"..."},"format":"pdf"}`) | [Queue a conversion](../../reference/rest-api/broker-api.md#queue-a-conversion) |
+| Poll until done | `GET /conversions/{orderId}` until `currentState=PROCESSED` | [Poll conversion status](../../reference/rest-api/broker-api.md#poll-conversion-status) |
+| Retrieve the result | `GET /documents/{id}/file?format=pdf` (after PROCESSED) | [Get document file](../../reference/rest-api/broker-api.md#get-document-file) |
+
+**Default broker port:** `8761` (self-hosted). The hosted demo broker used in the quickstart below runs at `https://rendition.arender.2026.uxopian.com`. The interactive Swagger UI is at [https://rendition.arender.2026.uxopian.com/swagger-ui/index.html](https://rendition.arender.2026.uxopian.com/swagger-ui/index.html) if you want to try requests in your browser before writing code.
+
+## 4. Quickstart: five-minute walkthrough
+
+The shortest path from "I have a document file" to "I have a thumbnail and a PDF rendition." Examples assume a POSIX shell (Linux, macOS, or Git Bash on Windows).
+
+:::tip Try it live
+The commands below run against our hosted demo broker at `https://rendition.arender.2026.uxopian.com`. No setup. Paste them in your terminal. To explore the full API interactively, open the [Swagger UI](https://rendition.arender.2026.uxopian.com/swagger-ui/index.html).
+
+For a self-hosted broker, swap the base URL for `http://your-broker-host:8761` and add auth headers if your deployment requires them.
+:::
+
+### 4.1 Upload the document
+
+```bash
+DOC_ID=$(curl -s -X POST https://rendition.arender.2026.uxopian.com/documents \
+  -H "Content-Type: application/octet-stream" \
+  --data-binary @my-document.pdf \
+  | jq -r '.id')
+echo "Document ID: $DOC_ID"
+```
+
+The broker returns a JSON body `{"id": "b64_..."}`. Capture the `id`. Every subsequent call needs it. See [Upload a document](../../reference/rest-api/broker-api.md#upload-a-document) for optional parameters (assign your own ID, set a title, upload by URL instead of binary).
+
+### 4.2 Fetch page 0 as a PNG
+
+```bash
+curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/pages/0/image?pageImageDescription=IM_800_0" \
+  --output page0.png
+```
+
+Page numbering is **0-based**. The `pageImageDescription` parameter encodes width and rotation: `IM_800_0` means 800 pixels wide, no rotation. Repeat with `pages/1`, `pages/2`, … for additional pages. Optional contrast/brightness/invert filters are documented in [Get page image](../../reference/rest-api/broker-api.md#get-page-image).
+
+### 4.3 Fetch the whole document as PDF
+
+```bash
+curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/file?format=pdf" \
+  --output document.pdf
+```
+
+One call, multi-page PDF returned as binary. The call is synchronous. It waits for the converter and returns the converted file. See [Get document file](../../reference/rest-api/broker-api.md#get-document-file).
+
+### 4.4 Clean up
+
+```bash
+curl -X DELETE "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID"
+```
+
+The broker holds documents in memory and on local cache until they are deleted or evicted. Long-running integrations should delete each document after its outputs are stored host-side. See [Delete a document](../../reference/rest-api/broker-api.md#delete-a-document).
+
+That's the complete loop. Wire those four calls into your host system's rendition hook and you have a working integration.
+
+## 5. Integration shape
 
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
@@ -58,52 +122,64 @@ flowchart LR
 
 *Figure: Generic call flow between a host system and ARender as a rendering service.*
 
-From the host's side, the integration follows four steps:
+On the host side, the integration follows four steps:
 
-1. **Detect** that a document needs a rendition — for example a newly ingested file, an updated version, or a scheduled archival job.
-2. **Call** the ARender broker to upload the document and fetch the desired output.
-3. **Store** the output in the host's native mechanism — a rendition slot, an archive store, a derived-document repository.
+1. **Detect** that a document needs a rendition: a newly ingested file, an updated version, or a scheduled archival job.
+2. **Call** the broker to upload the document and fetch the desired output.
+3. **Store** the output in the host's native rendition slot, archive store, or derived-document repository.
 4. **Serve** the output through the host's existing UI and workflows.
 
-Most content systems offer a rendition pipeline, a custom transformer slot, an archival hook, or a post-processing step. The integration logic lives there and stays under the customer's control. This guide does not document host-side mechanisms; consult the host system's own documentation for the appropriate extension point.
+This guide does not cover host-side mechanisms. The rendition hooks differ from one product to the next. Consult your host system's documentation for its native extension point (see [§8](#8-example-host-hooks) for entry points in common ECMs).
 
-## 5. Outputs
+## 6. Outputs in detail
 
-### 5.1 Page images
+### 6.1 Page images
 
-- The broker returns PNG. If the host stores its renditions in another image format (JPEG, WebP), the conversion happens in the integration layer.
-- Each rendition target is one broker call. Multiple sizes (a small thumbnail and a larger preview) require multiple calls, each with a different target width.
-- Multi-page documents: one call per page. Most host systems only display the first page in their native preview, so a typical integration calls the broker for page zero only.
+- The broker returns **PNG**. If your host stores thumbnails as JPEG or WebP, convert in the integration layer.
+- Each call returns one page at one size. Multiple sizes (small thumbnail and larger preview) require multiple calls with different `pageImageDescription` widths.
+- Most host systems display only the first page in their native preview, so a typical integration calls page 0 only.
+- The `pageImageDescription` format also supports rotation and image filters (contrast, brightness, invert). See the parameter table on [Get page image](../../reference/rest-api/broker-api.md#get-page-image).
 
-### 5.2 PDF documents
+### 6.2 PDF
 
-- One broker call returns a complete multi-page PDF.
-- The PDF is generated from the same conversion pipeline as the one feeding the viewer. The organization has a single reference rendition for live viewing and for archive.
-- For long-term archival, ARender can produce PDFs conformant to PDF/A-1, PDF/A-2, and PDF/A-3. The selected profile is set in the converter configuration; this page does not duplicate that reference.
-- Trade-off versus page images: the PDF preserves the document structure (selectable text, indexing, accessibility), while page images preserve only the exact visual rendition.
+`GET /documents/{id}/file?format=pdf` returns the document as a multi-page PDF in a single call. The call is synchronous. The broker waits for the converter to finish and streams the result back. This is the right path for the vast majority of integrations.
 
-## 6. When this pattern fits — and when it doesn't
+For very large documents that risk timing out the synchronous HTTP call, queue the conversion and poll instead. `POST /conversions` with body `{"documentId": {"id": "..."}, "format": "pdf"}` returns a `conversionOrderId`. Poll `GET /conversions/{orderId}` until `currentState` is `PROCESSED`, then retrieve the converted PDF with the same `GET /documents/{id}/file?format=pdf` call. See [Queue a conversion](../../reference/rest-api/broker-api.md#queue-a-conversion) and [Poll conversion status](../../reference/rest-api/broker-api.md#poll-conversion-status).
+
+## 7. When this pattern fits (and when it doesn't)
 
 ### Fits
 
-- **Thumbnails and previews** for formats where the host's native rendition differs from the ARender viewer — typically emails, Office documents, CAD files, and other complex formats.
-- **Long-term archival** that needs PDF/A conformance for legal or regulatory retention.
-- **Normalized storage** across heterogeneous source formats — every archived document becomes a uniform PDF regardless of its origin.
+- **Thumbnails and previews** for formats where the host's native rendition differs from what the ARender viewer shows: typically emails, Office documents, CAD files, and other complex formats.
+- **Long-term archival** as a normalized PDF, served from a single conversion pipeline.
+- **Normalized storage** across heterogeneous source formats: every archived document becomes a uniform PDF regardless of its origin.
 - **Distribution, printing, or external signing** from a stable, format-independent binary.
 
 ### Doesn't fit
 
-- **Native PDFs as page images** — the host already produces a thumbnail visually identical to what the viewer shows, so the additional roundtrip brings no benefit.
-- **Very high throughput without host-side caching** — the broker recomputes outputs unless the host stores them; the integration must rely on the host's own rendition store to absorb load.
-- **Host systems without a rendition or post-processing extension point** — without a native slot to plug into, the integration becomes an out-of-band workflow with its own lifecycle to manage.
+- **Documents that are already PDF**, used as their own thumbnail. The host's native PDF preview is already pixel-faithful to the source, so routing it through ARender adds a roundtrip without changing the visual.
+- **Very high throughput without host-side caching.** The broker recomputes outputs unless they are stored downstream. The integration must rely on the host's rendition store to absorb load.
+- **Host systems without a rendition or post-processing extension point.** With no native slot to plug into, the integration becomes an out-of-band workflow with its own lifecycle to manage.
 
-## 7. Example host systems
+## 8. Example host hooks
 
-This pattern applies to most enterprise content systems. An ECM with a custom transformer slot — such as Alfresco Content Services through its Transform pipeline or IBM FileNet through its rendition framework — can route specific source formats to ARender for thumbnails and previews. An archival or records management pipeline can call the same service to produce a normalized PDF/A copy alongside the original document. The integration code is the customer's responsibility; the contract on ARender's side is the broker REST API.
+The integration code lives on the host side. Common entry points:
 
-## 8. Related references
+- **Alfresco Content Services.** A custom rendition definition routed through the Transform Service. Configure a transform that POSTs the source to the broker and stores the response as a rendition of the source node. Consult Alfresco's *Custom transforms and renditions* documentation for the current configuration shape (it has changed between major ACS versions).
+- **IBM FileNet P8.** A rendition engine extension that produces a rendition object linked to the source document. Consult IBM's *Rendition Engine* documentation for the extension SPI.
+- **Generic archival pipeline.** A step that, after ingestion, calls the broker and writes the returned PDF alongside the original. Trigger from a workflow engine (Camunda, Airflow, etc.) or a message queue listener.
 
-- [Broker API reference](../../reference/rest-api/broker-api.md) — the exact endpoints and parameters used by the integration.
-- [Rendition pipeline](/concepts/rendition-pipeline) — what happens server-side once a document reaches ARender.
-- [Office conversion](../features/office-conversion.mdx) — converter configuration, including PDF/A profile selection.
-- [Providers](./providers.md) — the inverse integration pattern, where ARender fetches documents from a host system to render them in its own viewer.
+In every case the integration code is the customer's (or partner's) responsibility. ARender's contract is the broker REST API documented above.
+
+## 9. Glossary
+
+- **Rendition.** Any rendered representation of a source document: a thumbnail, a preview image, or a PDF copy.
+- **Broker.** The Document Service Broker, the REST front door of ARender's rendition stack (default port `8761`). All integration calls described on this page go to the broker.
+- **Host system.** The application that owns the document and the user experience: an ECM (Alfresco, FileNet, …), a DMS, an archival or records management platform, a business application with attached files.
+
+## 10. Related references
+
+- [Broker API reference](../../reference/rest-api/broker-api.md). The full endpoint catalog, including all parameters referenced on this page.
+- [Rendition pipeline](../../concepts/rendition-pipeline.md). What happens server-side once a document reaches ARender.
+- [Office conversion](../features/office-conversion.mdx). Converter configuration and backend selection (LibreOffice, DirectOffice, AROMS).
+- [Connectors / Providers](../../concepts/connectors.md). The inverse integration pattern, where ARender fetches documents from a host system to render them in its own viewer.
