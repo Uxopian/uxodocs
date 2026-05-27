@@ -104,6 +104,25 @@ Fast2 proposes this task to load your documents, metadata and more within design
 | ARN key               | `String`  | Key used for client-side encryption, before loading the document into S3. <br/> <p> Ex/ arn:aws:kms::111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</p>    |
 | Update only           | `Boolean` | Only changing metadata, content is left as is                                                                                                                               | `false `      |
 
+## AzureBlobInjector <small> - Injector into Azure Blob Storage containers </small> {#AzureBlobInjector data-toc-label="AzureBlobInjector"}
+
+Fast2 proposes this task to load your documents, metadata and more within designated Azure Blob Storage containers. This loader relies on Azure Storage Blob SDK v12.25.0. The uploaded file will be titled according to the `name` metadata of the processed document.
+
+<b>Mandatory settings</b>
+
+| Key                            | Type                                                            | Description                                                                                                                                                          | Default value    |
+| ------------------------------ | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| Azure Blob Storage credentials | [AzureConnectionProvider](credentials#AzureConnectionProvider) | Must have appropriate permissions to create containers and upload blobs.                                                                                             |                  |
+| Destination container          | `String`                                                        | The name of the container where the documents will be migrated to. This field supports pattern resolution (using punnet, document or campaign metadata). <br/> <p> Ex/ `${documentType}`</p> | `fast2-default ` |
+
+<b>Optional settings</b>
+
+| Key                | Type      | Description                                                                                                                                                                                                                  | Default value |
+| ------------------ | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| Dry run            | `Boolean` | Simulates an injection, performs document integrity controls, but does not load the document into Azure Blob Storage.                                                                                                        | `false `      |
+| Destination folder | `String`  | The parent folder of the documents to inject. Supports pattern resolution. Leave empty for storing at the root of the container. If the document has the `azure_destination_folder` metadata, that value takes priority.    |               |
+| Destination name   | `String`  | The name/path of the blob file to inject. Supports pattern resolution. Leave empty to use the document's `name` metadata. If the document has the `azure_destination_name` metadata, that value takes priority. <br/> <p> Ex/ `${documentType}_${documentId}`</p> | |
+
 ## CSVWriter <small> - CSV file writer </small> {#CSVWriter data-toc-label="CSVWriter"}
 
 Use this task to write punnet and document related data into a CSV. You can specify the name of such file as well as the path where your want Fast2 to create and populate it.

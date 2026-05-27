@@ -78,6 +78,23 @@ This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco RE
 | Alfresco connection provider | [AlfrescoRESTConnectionProvider](credentials#AlfrescoRESTConnectionProvider) |                                                |                  |
 | AFTS query                   | `String`                                                                     | Query used to retrieve all sites from Alfresco | TYPE:\"st:site\" |
 
+## AzureBlobContentSource <small> - Extract content from Azure Blob Storage container </small> {#AzureBlobContentSource data-toc-label="AzureBlobContentSource"}
+
+<b>Mandatory settings</b>
+
+| Key                      | Type                                                            | Description                                                                              |
+| ------------------------ | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Azure access credentials | [AzureConnectionProvider](credentials#AzureConnectionProvider) | Credentials of the user (must have been granted appropriate Azure Blob Storage permissions). |
+
+<b>Optional settings</b>
+
+| Key                             | Type      | Description                                                                                                                                                                                                     | Default value         |
+| ------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| Content path (Azure Blob name)  | `String`  | Path leading to Azure Blob object corresponding to the content you intend to extract from the container. To use this options, you must enable the content extraction option. <br/> <p> Ex/ `${contentPath}`</p> |                       |
+| Container name                  | `String`  | Name of the Azure Blob container where the content is stored.                                                                                                                                                   | `${azure_container} ` |
+| Process blob objects as punnets | `Boolean` |                                                                                                                                                                                                                 |                       |
+| Extract contents                | `Boolean` | All existing contents of documents will be replaced by the newly found contents, retrieved from the Azure Blob container. If the blob objects are parsed as punnets, then the contents will be attached based on the 'Content path' input field. | |
+
 ## CMContentExtractor <small> - Basic content extractor from Content Manager </small> {#CMContentExtractor data-toc-label="CMContentExtractor"}
 
 This class is dedicated to the extraction of content for the Content Manager solution. You'll have the possiblity to extract annotations, custom properties or even logs.

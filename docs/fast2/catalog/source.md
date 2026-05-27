@@ -90,6 +90,35 @@ Through an SQL query, this alfresco extractor will use the CMIS technology to fe
 
 
 
+## AzureBlobSource <small> - Complete extractor module from Azure Blob Storage </small> {#AzureBlobSource data-toc-label="AzureBlobSource"}
+
+This Azure Blob extractor performs from a list of sources the extraction of your document content. Many options (suffix, prefix...) exist to optimally specify the documents you want to take into account
+
+<b>Mandatory settings</b>
+
+|Key      | Type    | Description | 
+| - | - | - |
+ | Azure connection provider | [AzureConnectionProvider](credentials.md#AzureConnectionProvider) | Must have appropriate Azure Blob Storage permissions | 
+ | Source containers | `String list` | Containers where folders are stored | 
+
+
+<b>Optional settings</b>
+
+|Key      | Type    | Description |  Default value |
+| - | - | - | - |
+ | Source folders | `String list` | Folders in the Azure Blob container(s) containing the files to migrate | 
+ | Azure start-after blob name | `String` | Absolute path of Azure Blob object to start after | 
+ | Azure prefix | `String` | Blob will be extracted if its name has such prefix | 
+ | Azure suffix | `String` | Blob will be extracted if its name has such suffix | 
+ | Process files as list of punnets | `Boolean` | The expected format is a CSV file (1 row for headers, next rows for 1 punnet each), but the `.csv` extension is not mandatory. Only single-documents punnets will be created (ex/ not working for multiversions documents). Multivalue data will be concatenated to one whole String value. The first line of the file will be considered as CSV header line. | 
+ | CSV separator | `String` | Separator between each value. This option will be ignored if 'Process files as list of punnets' is disabled. | `, ` | 
+ | Default column title | `String` | Default value used for untitled columns. Will be incremented with a number if many. Will only be used if the replace empty titles option is enabled. | `Untitled ` | 
+ | Replace empty titles | `Boolean` | If enabled, any empty title in the CSV file will be replaced by the default value. If several titles miss, the default title will be suffixed with an incremental index. | 
+ | Defined headers | `String list` | Force define headers for the CSVs to parse. When headers are set, the first line of the file will not be considered as CSV header line. | 
+ | Name of the column to be used as DocumentId | `String` | | 
+
+
+
 ## BlankSource <small> - Empty punnet generator </small> {#BlankSource data-toc-label="BlankSource"}
 
 This source builds a punnet list containing one or more empty documents. Each document will only contain its identifier : documentId. This punnet can then be enriched by other steps in the processing chain.
