@@ -155,7 +155,7 @@ const config: Config = {
                 routeBasePath: "docs/fast2",
                 sidebarPath: require.resolve("./sidebars_fast2.ts"),
                 lastVersion: "current",
-                versions: { current: { label: "v2025.8.2" } },
+                versions: { current: { label: "v2025.9.0" } },
                 showLastUpdateTime: true,
             },
         ],
