@@ -52,6 +52,19 @@ From a URI and giving a username with password, this class allow you to access a
 | URL to connect to Alfresco | `String` |             |
 | Username                   | `String` |             |
 
+## AzureConnectionProvider <small> - Azure Blob Storage connection credentials </small> {#AzureConnectionProvider data-toc-label="AzureConnectionProvider"}
+
+Connection to Azure Blob Storage can be established using either a connection string or account name with account key. The connection string is the recommended approach as it contains all necessary authentication information.
+
+<b>Optional settings</b>
+
+| Key               | Type     | Description                                                                                                                                                                                                                                   | Default value       |
+| ----------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| Connection string | `String` | Azure Storage connection string. Mandatory unless 'Account Name' and 'Account Key' are provided. <br/> <p> Ex/ `DefaultEndpointsProtocol=https;AccountName=mystorageaccount;AccountKey=mykey;EndpointSuffix=core.windows.net`</p>            |                     |
+| Account name      | `String` | Azure Storage account name. Mandatory if connection string is not provided.                                                                                                                                                                   |                     |
+| Account key       | `String` | Azure Storage account key. Mandatory if connection string is not provided.                                                                                                                                                                    |                     |
+| Endpoint suffix   | `String` | Azure Storage endpoint suffix. <br/> <p> Ex/ `core.windows.net`, `core.cloudapi.de`</p>                                                                                                                                                     | `core.windows.net ` |
+
 ## CMConnectionProvider <small> - Connection provider for Content Manager solution </small> {#CMConnectionProvider data-toc-label="CMConnectionProvider"}
 
 The CM connection provider will help you to manage a pool of connections. For performance reasons, it is sometimes desirable to limit the number of connections created by the pool.The connection pool will allow you to specify the maximum number of connections that should exist at one time, whether in use or in the pool.Once this maximum value is reached, an error may be thrown or you may optionally wait for an existing connection to be freed

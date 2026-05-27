@@ -268,9 +268,10 @@ Dive into the punnet to rename one or more properties carried by the document.
 
 <b>Optional settings</b>
 
-| Key                                     | Type      | Description                                                                 | Default value |
-| --------------------------------------- | --------- | --------------------------------------------------------------------------- | ------------- |
-| Exception when property rename conflict | `Boolean` | Throws an exception if the target property exists, otherwise fails silently | `true `       |
+| Key                                     | Type      | Description                                                                            | Default value |
+| --------------------------------------- | --------- | -------------------------------------------------------------------------------------- | ------------- |
+| Exception when property rename conflict | `Boolean` | Throws an exception if the target property exists, otherwise fails silently            | `true `       |
+| Exception when property is missing      | `Boolean` | Throws an exception if the property to rename does not exist on the document           | `true `       |
 
 ## UpdateSharedObject <small> - Update a shared object value from its name </small> {#UpdateSharedObject data-toc-label="UpdateSharedObject"}
 
