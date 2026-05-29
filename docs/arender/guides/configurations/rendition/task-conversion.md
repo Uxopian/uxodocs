@@ -54,7 +54,24 @@ The default properties in the TaskConversion service looks like this:
 tools.wkhtmltopdf.options=--disable-javascript,--quiet,--encoding,UTF-8,--load-error-handling,ignore,--disable-external-links,--disable-internal-links,--disable-local-file-access
 # Disable iframe URL as a safety measure
 tools.wkhtmltopdf.iframe.disabled=true
+# Clear external resource URLs (img, input[type=image]) from the HTML before conversion
+tools.wkhtmltopdf.external.resource.urls.cleared=false
 ```
+
+### Clearing external image URLs before conversion
+
+When a mail (or any HTML document) references images through external URLs (`http://`, `https://`, `ftp://`, `file://` or protocol-relative `//`), wkhtmltopdf attempts to fetch them during the conversion. On environments where these URLs cannot be resolved (no Internet access, restrictive firewall, unreachable hosts, …), wkhtmltopdf will retry each request before giving up, which can cause the conversion to take a very long time and eventually time out.
+
+The property `tools.wkhtmltopdf.external.resource.urls.cleared` can be enabled to pre-process the HTML and empty the `src` attribute of `img` and `input[type=image]` elements that point to an external URL, **before** handing the document to wkhtmltopdf. The page layout and the surrounding structure are preserved (only the external image references are blanked out), so the resulting PDF keeps the original positioning of the content.
+
+```properties title="application.properties located in ARender-Rendition-{{version}}\modules\TaskConversion"
+# Enable clearing of external resource URLs prior to wkhtmltopdf conversion
+tools.wkhtmltopdf.external.resource.urls.cleared=true
+```
+
+:::note
+Embedded images (e.g. `data:` URIs encoded in base64) and images referenced through relative paths are **not** affected by this option — they will still be rendered normally.
+:::
 
 ## Visit card labels language
 
