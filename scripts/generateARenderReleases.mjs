@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Script de génération des données de release notes ARender
- * Lit les fichiers release-notes.md et génère un JSON avec les métadonnées
+ * ARender release notes data generation script
+ * Reads release-notes.md files and generates a JSON with the metadata
  */
 
 import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
@@ -38,15 +38,15 @@ function extractFrontmatter(content) {
 }
 
 function extractDescription(content) {
-    // Retirer le frontmatter
+    // Remove the frontmatter
     const withoutFrontmatter = content.replace(/^---\n[\s\S]*?\n---\n/, '');
 
-    // Chercher le premier paragraphe non vide
+    // Find the first non-empty paragraph
     const lines = withoutFrontmatter.split('\n');
     for (const line of lines) {
         const trimmed = line.trim();
         if (trimmed && !trimmed.startsWith('#') && !trimmed.startsWith(':::')) {
-            // Limiter à 150 caractères
+            // Limit to 150 characters
             return trimmed.length > 150 ? trimmed.substring(0, 150) + '...' : trimmed;
         }
     }
@@ -72,17 +72,17 @@ function compareVersions(a, b) {
 
     if (!vA || !vB) return 0;
 
-    // Trier par année décroissante, puis par major décroissant, puis par minor décroissant
+    // Sort by year descending, then by major descending, then by minor descending
     if (vA.year !== vB.year) return vB.year - vA.year;
     if (vA.major !== vB.major) return vB.major - vA.major;
     return vB.minor - vA.minor;
 }
 
 function main() {
-    console.log('🔍 Recherche des release notes ARender...');
+    console.log('🔍 Looking for ARender release notes...');
 
     if (!existsSync(RELEASE_NOTES_DIR)) {
-        console.error(`❌ Le répertoire ${RELEASE_NOTES_DIR} n'existe pas`);
+        console.error(`❌ The directory ${RELEASE_NOTES_DIR} does not exist`);
         process.exit(1);
     }
 
@@ -90,7 +90,7 @@ function main() {
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name);
 
-    console.log(`📁 Trouvé ${versionDirs.length} dossiers de version`);
+    console.log(`📁 Found ${versionDirs.length} version directories`);
 
     const releases = [];
 
@@ -99,7 +99,7 @@ function main() {
         const upgradeNotesPath = join(RELEASE_NOTES_DIR, versionDir, 'upgrade-notes.md');
 
         if (!existsSync(releaseNotesPath)) {
-            console.warn(`⚠️  Pas de release-notes.md pour ${versionDir}`);
+            console.warn(`⚠️  No release-notes.md for ${versionDir}`);
             continue;
         }
 
@@ -107,7 +107,7 @@ function main() {
         const frontmatter = extractFrontmatter(content);
 
         if (!frontmatter) {
-            console.warn(`⚠️  Pas de frontmatter pour ${versionDir}`);
+            console.warn(`⚠️  No frontmatter for ${versionDir}`);
             continue;
         }
 
@@ -124,25 +124,32 @@ function main() {
         console.log(`✅ ${versionDir} - ${release.title}`);
     }
 
-    // Trier les releases par version (décroissant)
+    // Sort releases by version (descending)
     releases.sort(compareVersions);
 
-    // Ajouter le flag "latest" à la première version
-    if (releases.length > 0) {
-        releases[0].latest = true;
+    // Flag "latest": one version per year (v2023.x → latest ; v2026.x → latest ; etc.)
+    // The list is sorted by year descending then major/minor descending, so the first
+    // occurrence of each year is the most recent version for that year.
+    const seenYears = new Set();
+    for (const release of releases) {
+        const parsed = parseVersion(release.version);
+        if (parsed && !seenYears.has(parsed.year)) {
+            release.latest = true;
+            seenYears.add(parsed.year);
+        }
     }
 
-    // Écrire le fichier JSON
+    // Write the JSON file
     const outputDir = dirname(OUTPUT_FILE);
     if (!existsSync(outputDir)) {
-        console.log(`📁 Création du répertoire ${outputDir}`);
+        console.log(`📁 Creating directory ${outputDir}`);
         mkdirSync(outputDir, { recursive: true });
     }
 
     writeFileSync(OUTPUT_FILE, JSON.stringify(releases, null, 2), 'utf-8');
 
-    console.log(`\n✅ Généré ${releases.length} releases dans ${OUTPUT_FILE}`);
-    console.log(`📝 Versions : ${releases.map(r => r.version).join(', ')}`);
+    console.log(`\n✅ Generated ${releases.length} releases in ${OUTPUT_FILE}`);
+    console.log(`📝 Versions: ${releases.map(r => r.version).join(', ')}`);
 }
 
 main();

@@ -9,13 +9,21 @@
     "latest": true
   },
   {
-    "version": "v2023.20.0",
-    "title": "ARender v2023.20.0 – Release Notes",
-    "date": "2026-05-06",
-    "description": "New collapsed state for the document navigator, customizable log configuration, scroll performance with many annotations, faster DirectOffice conversion, PDFOwl 1.24-26 upgrade, and numerous rendering, redaction, and annotation fixes.",
-    "slug": "/release-note/arender/v2023.20.0/release-notes",
+    "version": "v2023.21.0",
+    "title": "ARender v2023.21.0 – Release Notes",
+    "date": "2026-05-29",
+    "description": "Email rendering fixes for S/MIME signed messages, embedded images and hyperlinks, PDF hyperlink navigation to named and cross-document destinations, more robust text search, and a security upgrade.",
+    "slug": "/release-note/arender/v2023.21.0/release-notes",
     "hasUpgradeNotes": true,
     "latest": true
+  },
+  {
+    "version": "v2023.20.0",
+    "title": "ARender v2023.20.0 – Release Notes",
+    "date": "2026-04-30",
+    "description": "New collapsed state for the document navigator, customizable log configuration, faster DirectOffice conversion, PDFOwl 1.24-26 upgrade, and numerous rendering, redaction, and annotation fixes.",
+    "slug": "/release-note/arender/v2023.20.0/release-notes",
+    "hasUpgradeNotes": true
   },
   {
     "version": "v2023.19.0",
