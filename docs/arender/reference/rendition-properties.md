@@ -293,7 +293,7 @@ The Document Converter (`arender-document-converter`) runs on port 19999.
 
 | Property | Default | Description |
 |----------|---------|-------------|
-| `emltopdf.config.header.language` | `FR` | Language for email header rendering. Values: `FR`, `EN` |
+| `emltopdf.config.header.language` | `FR` | Language for email header rendering. Values: `FR`, `EN`, `DE` |
 | `emltopdf.config.format.date` | `EEE d MMM yyyy HH:mm:ss Z` | Date format for email headers |
 | `emltopdf.config.time.zone` | _(empty)_ | Timezone for email dates. Empty uses the system timezone |
 | `emltopdf.encode.header.with.body.encoding` | `false` | Encode header with body encoding |
