@@ -127,9 +127,16 @@ function main() {
     // Trier les releases par version (décroissant)
     releases.sort(compareVersions);
 
-    // Ajouter le flag "latest" à la première version
-    if (releases.length > 0) {
-        releases[0].latest = true;
+    // Marquer "latest" : une version par année (v2023.x → latest ; v2026.x → latest ; etc.)
+    // La liste est triée par année décroissante puis major/minor décroissants : la première
+    // occurrence de chaque année est donc la version la plus récente de cette année.
+    const seenYears = new Set();
+    for (const release of releases) {
+        const parsed = parseVersion(release.version);
+        if (parsed && !seenYears.has(parsed.year)) {
+            release.latest = true;
+            seenYears.add(parsed.year);
+        }
     }
 
     // Écrire le fichier JSON
