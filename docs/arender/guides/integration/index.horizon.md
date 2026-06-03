@@ -20,6 +20,7 @@ For the conceptual model, see [Providers concept](../../concepts/connectors.md).
 |-----|-------|
 | Alfresco Content Services | [Alfresco integration](./alfresco.md) |
 | IBM FileNet P8 | [IBM FileNet integration](./filenet.md) |
+| M-Files | [M-Files integration](./m-files.md) |
 
 ## Partner-maintained integrations
 
