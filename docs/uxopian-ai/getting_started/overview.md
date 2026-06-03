@@ -16,6 +16,7 @@ Uxopian AI is a framework for embedding AI assistants inside legacy enterprise a
 |---|---|
 | System administrator deploying the stack | [Quickstart with Docker Compose](./quickstart.mdx) |
 | Integration developer embedding the chat UI | [Embed in a web application](../how_to/embed_in_web_application.md) |
+| Integration developer embedding the context-aware panel | [Embed Quick Prompt](../how_to/embed_quick_prompt.mdx) |
 | Solution architect evaluating the system | [System architecture](../understanding/architecture.md) |
 | ARender integrator | [Integrate with ARender](../how_to/integrate_with_arender.mdx) |
 | Alfresco integrator | [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) |
@@ -84,6 +85,7 @@ See [LLM providers](../understanding/llm_providers.md) for configuration details
 Three integration paths are available:
 
 - **Generic web application**: load the JavaScript and CSS bundles from the gateway's `/api/web-components/chat/script` and `/api/web-components/chat/style` endpoints, call `window.createChat()`. See [Embed in a web application](../how_to/embed_in_web_application.md).
+- **Quick Prompt context-aware panel**: embed the [Quick Prompt](../understanding/quick_prompt.md) panel, which follows the user's navigation and offers context-relevant prompts. See [Embed Quick Prompt](../how_to/embed_quick_prompt.mdx).
 - **ARender document viewer**: adds an AI menu to the ARender top panel. Documents are accessed via the ARender DSB API. See [Integrate with ARender](../how_to/integrate_with_arender.mdx).
 - **FlowerDocs ECM**: embeds the chat panel via FlowerDocs scope files. Uses `FlowerDocsProvider` in the gateway. See [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx).
 
@@ -103,6 +105,7 @@ Three integration paths are available:
 | Request | A single LLM round-trip: inputs, rendered prompt, response, token usage. |
 | Prompt | A named Thymeleaf template defining a role and content. |
 | Goal | A named group of ordered prompt references with optional filters. |
+| Script | Admin-managed front-end JavaScript, security-scanned and served to authenticated users. |
 | Plugin | A shaded JAR in `plugins/` loaded at startup by `IntegrationLoader`. |
 
 ## Next steps

@@ -10,6 +10,10 @@ content_hash: 1ba1159addef4b04acd195eb1db77ccfda36ac232b9d3a5036b72c6b2723c679
 
 The dashboard is the landing page of the admin panel (route `/`). It gives administrators a summary of tenant activity and direct access to each management section.
 
+![The admin dashboard with summary cards, activity charts, and LLM usage distribution](../images/dashboard.png)
+
+*Figure: the dashboard — summary cards, weekly activity, and LLM usage distribution.*
+
 ## Stats cards
 
 Four cards are displayed at the top with sparkline charts:

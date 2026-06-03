@@ -26,6 +26,10 @@ Use the search field at the top to filter users by ID.
 
 Data is fetched from `GET /api/v1/admin/users/statistics`.
 
+![The Users list with per-user conversation, token, and request counts](../images/users-list.png)
+
+*Figure: the Users list — per-user conversation count, input/output tokens, and request count, with sortable columns.*
+
 Click a row to open the user detail page.
 
 ## User detail page

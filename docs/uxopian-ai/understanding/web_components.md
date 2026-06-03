@@ -8,7 +8,7 @@ last_update:
 content_hash: e518584a6b106f65728f53b667d0f9a98f50d6e631861c7126e06dfc4c99de6d
 ---
 
-Uxopian AI ships two standard HTML custom elements: `<chat-element>` and `<admin-element>`. They are built with React 19 and wrapped using `@r2wc/react-to-web-component`. They are self-contained and require no build step on the consuming application side.
+Uxopian AI ships standard HTML custom elements: `<chat-element>` and `<admin-element>`, plus the `quick-prompt-element` / `qp-toggle-button` pair introduced in 2026.0.0-ft4. They are built with React 19 and wrapped using `@r2wc/react-to-web-component`. They are self-contained and require no build step on the consuming application side.
 
 ## How the bundle is served
 
@@ -36,6 +36,8 @@ The served endpoints are:
 | Chat CSS | `/api/web-components/chat/style` |
 | Admin JavaScript | `/api/web-components/admin/script` |
 | Admin CSS | `/api/web-components/admin/style` |
+| Quick Prompt JavaScript | `/api/web-components/quick-prompt/script` |
+| Quick Prompt CSS | `/api/web-components/quick-prompt/style` |
 
 To load the chat component, add these tags to the host application:
 
@@ -71,9 +73,23 @@ The admin interface custom element. Registered as `<admin-element>`. Uses React 
 | `/users/:id` | User detail |
 | `/statistics` | Usage statistics and charts |
 
+## quick-prompt-element
+
+The context-aware [Quick Prompt](./quick_prompt.md) panel, registered as `quick-prompt-element`, with a companion `qp-toggle-button`. Introduced in 2026.0.0-ft4 and served from its own bundle (`/api/web-components/quick-prompt/script` + `/style`).
+
+Unlike the chat and admin elements, Quick Prompt is driven through a JavaScript **integration handle** rather than HTML attributes. The bundle exposes:
+
+| Global | Purpose |
+|---|---|
+| `window.createQuickPromptIntegration({ endpoint, target?, onClose? })` | Creates the panel and returns the integration handle (`setTenant`, `setUser`, `setRoutes`, `setDocument`, `setTask`, `setFolder`, `setInjected`, `setCallbacks`, `getContext`, `destroy`) |
+| `window.createQuickPrompt({ endpoint, target?, onClose? })` | Lower-level helper that only mounts the element |
+| `window.uxopian.mapComponent(obj, fields)` | Helper to remap a host object's fields onto the Quick Prompt context shape |
+
+See [Embed Quick Prompt](../how_to/embed_quick_prompt.mdx) for the full integration workflow.
+
 ## Global window API
 
-The bundle exposes these functions on the `window` object:
+The chat bundle exposes these functions on the `window` object:
 
 ### `window.openChat(params)`
 
@@ -151,6 +167,8 @@ Content types: `text`, `prompt`, `goal`, `image`.
 ## Related pages
 
 - [Embed in a web application](../how_to/embed_in_web_application.md)
+- [Quick Prompt](./quick_prompt.md)
+- [Embed Quick Prompt](../how_to/embed_quick_prompt.mdx)
 - [Admin panel overview](../admin/admin_panel_overview.md)
 - [Conversations and requests](./conversations_and_requests.md)
 - [Integrate with ARender](../how_to/integrate_with_arender.mdx)

@@ -50,9 +50,11 @@ The admin panel uses React Router with the following routes:
 |---|---|---|
 | `/` | Dashboard | Summary statistics |
 | `/prompts` | Prompts | List, create, edit, and delete prompts |
-| `/prompts/:id` | Prompt detail | Edit prompt content, flags, and model overrides |
+| `/prompts/:id` | Prompt detail | Edit prompt content, flags, model overrides, and Quick Prompt display settings |
 | `/llm-providers` | LLM providers | List, create, edit, and delete LLM provider configurations |
 | `/llm-providers/:id` | Provider detail | Edit provider credentials, endpoint, temperature, and model list |
+| `/scripts` | Scripts | List, create, and manage admin-managed scripts |
+| `/scripts/:id` | Script detail | Edit, scan, and publish a script |
 | `/users` | Users | View user list with conversation counts |
 | `/users/:id` | User detail | View a user's conversation history |
 | `/statistics` | Statistics | Usage charts: time series, LLM distribution, feature adoption |
@@ -77,6 +79,7 @@ The `roles` field requires that the authenticated user's role list (from `X-User
 - [Dashboard](./dashboard.md)
 - [Managing LLM providers](./managing_llm_providers.md)
 - [Managing prompts](./managing_prompts.md)
+- [Managing scripts](./managing_scripts.md)
 - [Managing users](./managing_users.md)
 - [Monitoring statistics](./monitoring_statistics.md)
 - [REST API summary](../reference/rest_api.md)
