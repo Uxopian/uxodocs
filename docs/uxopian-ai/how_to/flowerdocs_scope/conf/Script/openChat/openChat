@@ -1,13 +1,15 @@
-registerHeaderAction({
-  icon: "fa fa-file-alt",
-  label: {
-    name: "openChat",
-    FR: "Commencer une discussion",
-    EN: "Start a conversation",
-  },
-  onExecute: () => {
-    openChatWindow({
-      inputs: [getComponentContext()],
-    });
-  },
-});
+(function () {
+  createAIAction({
+    label: {
+      name: "openChat",
+      FR: "Ouvrir une discussion",
+      EN: "Open a chat",
+    },
+
+    onExecute: () => {
+      return openChatComp({
+        inputs: [contextualInput()],
+      });
+    },
+  });
+})();
