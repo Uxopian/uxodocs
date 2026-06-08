@@ -3,9 +3,9 @@ title: Admin panel overview
 sidebar_label: Overview
 sidebar_position: 1
 last_update:
-  date: '2026-04-17T14:38:23.664Z'
+  date: '2026-06-08T13:36:22.304Z'
   author: CI/CD Bot
-content_hash: 08b294484588744f061874d232f3de3c5cd8653226342900860ea42294444a47
+content_hash: 4fbd78261b4f43dd9ac3a2a2337cb15de1c4292c00c87054a1c09975d6dca098
 ---
 
 The admin panel is the `<admin-element>` web component embedded in the Uxopian AI interface. It provides a UI for managing LLM providers, prompts, users, and viewing usage statistics. All operations are performed per-tenant via the Admin REST API.
@@ -31,13 +31,13 @@ The `<admin-element>` custom element accepts the following attributes:
 | Attribute | Type | Description |
 |---|---|---|
 | `basePath` | string | Base path for React Router routing inside the element |
-| `apiEndpoint` | string | Base URL for the uxopian-ai Admin REST API (e.g., `https://your-gateway/api/v1`) |
+| `apiEndpoint` | string | Base URL of the gateway/DNS host serving uxopian-ai, **without** the `/api/v1` suffix (e.g., `https://your-gateway`). The component appends `/api/v1` itself. |
 | `getAccessToken` | function | Optional callback function that returns the current access token |
 
 Add the element to the page after loading the script:
 
 ```html
-<admin-element apiendpoint="https://your-gateway/api/v1"></admin-element>
+<admin-element apiendpoint="https://your-gateway"></admin-element>
 ```
 
 In the default Docker Compose quickstart, the admin UI is accessible via the gateway at `http://localhost:8085`.

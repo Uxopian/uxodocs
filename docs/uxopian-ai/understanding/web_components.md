@@ -3,9 +3,9 @@ title: Web components
 sidebar_label: Web components
 sidebar_position: 9
 last_update:
-  date: '2026-04-17T14:38:23.664Z'
+  date: '2026-06-08T13:36:22.304Z'
   author: CI/CD Bot
-content_hash: e518584a6b106f65728f53b667d0f9a98f50d6e631861c7126e06dfc4c99de6d
+content_hash: 96e9f130a9b5290f98a46281817f68aa3638309d8a25a756262f5b666d4c75b6
 ---
 
 Uxopian AI ships standard HTML custom elements: `<chat-element>` and `<admin-element>`, plus the `quick-prompt-element` / `qp-toggle-button` pair introduced in 2026.0.0-ft4. They are built with React 19 and wrapped using `@r2wc/react-to-web-component`. They are self-contained and require no build step on the consuming application side.
@@ -52,7 +52,7 @@ The chat interface custom element. Registered as `<chat-element>`. Accepts these
 
 | Attribute | Type | Description |
 |---|---|---|
-| `endpoint` | string | Base URL for the uxopian-ai REST API (e.g., `https://gateway-host/api/v1`) |
+| `endpoint` | string | Gateway origin as reachable from the browser (e.g., `https://gateway-host`). The component appends `/api/v1` itself — do **not** include it. |
 | `wsendpoint` | string | WebSocket base URL (e.g., `wss://gateway-host/ws`) |
 | `conversationid` | string | Conversation ID to open (for `openChat`) |
 | `request` | string | JSON-serialized `Request` object (for `createChat`) |
@@ -97,7 +97,7 @@ Reopens an existing conversation.
 
 ```javascript
 window.openChat({
-  endpoint: 'https://gateway/api/v1',
+  endpoint: 'https://gateway',
   wsEndpoint: 'wss://gateway/ws',
   conversationId: 'existing-conv-id'
 });
@@ -109,7 +109,7 @@ Creates a new conversation, optionally with an initial request.
 
 ```javascript
 window.createChat({
-  endpoint: 'https://gateway/api/v1',
+  endpoint: 'https://gateway',
   wsEndpoint: 'wss://gateway/ws',
   promptId: 'arenderContext',         // optional: pre-load a prompt
   request: requestObject              // optional: send an initial request

@@ -3,9 +3,9 @@ title: Embed the chat interface in a web application
 sidebar_label: Embed in a web app
 sidebar_position: 1
 last_update:
-  date: '2026-03-24T12:58:17.027Z'
+  date: '2026-06-08T13:36:22.304Z'
   author: CI/CD Bot
-content_hash: c6b1e48c974a417f22a7be2b8ba59119561627d4f5287440664954abdcb6b79e
+content_hash: 4d87d939099bc87cb3cd18e8f87004f515cc9c8bb877212a85a68009d5d9ef0b
 ---
 
 This guide explains how to embed the Uxopian AI chat interface in any web application. No build step is required on the consuming application side.
@@ -76,7 +76,7 @@ const request = new window.RequestBuilder()
   .build();
 
 window.createChat({
-  endpoint: 'https://your-gateway/api/v1',
+  endpoint: 'https://your-gateway',
   wsEndpoint: 'wss://your-gateway/ws',
   request: request
 });
@@ -106,7 +106,7 @@ const request = new window.RequestBuilder()
   .build();
 
 window.createChat({
-  endpoint: 'https://your-gateway/api/v1',
+  endpoint: 'https://your-gateway',
   wsEndpoint: 'wss://your-gateway/ws',
   request: request
 });
@@ -116,7 +116,7 @@ window.createChat({
 
 ```javascript
 window.openChat({
-  endpoint: 'https://your-gateway/api/v1',
+  endpoint: 'https://your-gateway',
   wsEndpoint: 'wss://your-gateway/ws',
   conversationId: 'existing-conversation-id'
 });
@@ -136,7 +136,7 @@ The `<chat-element>` custom element is created by the `window.createChat()` and 
 
 | Attribute | Required | Description |
 |---|---|---|
-| `endpoint` | yes | Base URL for the uxopian-ai REST API, as reachable from the browser via the gateway (e.g., `https://your-gateway/api/v1`) |
+| `endpoint` | yes | Gateway origin as reachable from the browser (e.g., `https://your-gateway`). The component appends `/api/v1` itself — do **not** include it. |
 | `wsendpoint` | no | WebSocket base URL (e.g., `wss://your-gateway`). If omitted, the component falls back to `endpoint` for the WebSocket connection |
 | `request` | no | JSON-serialized request object passed to `window.createChat()`. Encodes the initial message, prompt reference, and payload |
 
