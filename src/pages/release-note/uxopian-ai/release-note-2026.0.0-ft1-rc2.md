@@ -81,4 +81,4 @@ These integrations were achieved seamlessly using standard **JavaScript scripts*
 
 ---
 
-> Ready to start? Check out the [Quick Start](/docs/uxopian-ai/getting_started/quickstart) or the full [Installation Guide](/docs/uxopian-ai/getting_started/installation_guide) to deploy your first instance.
+> Ready to start? Check out the [Quick Start](/docs/uxopian-ai/getting_started/quickstart) or the full [Installation Guide](/docs/uxopian-ai/installation/docker) to deploy your first instance.

@@ -402,7 +402,7 @@ The status code points directly to the layer that failed:
 
 A 504 means a proxy (Traefik, nginx, Zuul) gave up waiting for an upstream response. Most common causes:
 
-**Streaming request going through Zuul.** Check the request URL in the Network tab. If it contains `/plugins/<scope>/gateway/`, the request is going through Zuul. Zuul is HTTP/1.1 and buffers responses — SSE streaming is impossible and will time out. `UXO_AI_ENDPOINT` must bypass Zuul. See [Configure FlowerDocs scope files — Why two endpoints?](./configure_flowerdocs_scope.mdx#why-two-endpoints) and fix by:
+**Streaming request going through Zuul.** Check the request URL in the Network tab. If it contains `/plugins/<scope>/gateway/`, the request is going through Zuul. Zuul is HTTP/1.1 and buffers responses — SSE streaming is impossible and will time out. `UXO_AI_ENDPOINT` must bypass Zuul. See [Configure FlowerDocs scope files — Why two endpoints?](./configure_flowerdocs_scope.mdx#what-goes-through-zuul-vs-direct) and fix by:
 - Setting up Traefik priority routing (recommended), or
 - Overriding `UXO_AI_ENDPOINT` and `WS_UXO_AI_ENDPOINT` to a direct gateway URL.
 
