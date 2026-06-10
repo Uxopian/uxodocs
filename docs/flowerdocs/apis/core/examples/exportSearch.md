@@ -12,7 +12,7 @@ content_hash: eac2bf6e0b438ea74ccf0eb2a60158de9800012d0ef6e3141632984fdd1a2505
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The export search service allows exporting search results to a CSV file. The operation can be performed synchronously or asynchronously.
+The export search service exports search results to a CSV file. The export runs asynchronously: the request submits a job and returns immediately; the generated file is then retrieved through the job endpoints described below. There is no limit on the number of exported results.
 
 # Export via POST
 
@@ -49,7 +49,6 @@ The following query parameters can be used:
 
 |Name|Description|Default|
 |------|-----------|-------|
-|`isAsync`|Run as an asynchronous job|`false`|
 |`locale`|Locale for date and number formatting|server default|
 
 # Export via GET
@@ -73,7 +72,7 @@ curl -X GET "<CORE_HOST>/rest/<CATEGORY>/search/csv?searchRequest=<SEARCH_JSON>"
 
 # Asynchronous job management
 
-When using `isAsync=true`, the CSV export is generated in the background. Use the following endpoints to track job progress.
+The CSV export is generated in the background as a job. Use the following endpoints to track its progress and retrieve the result.
 
 ## Check job status
 

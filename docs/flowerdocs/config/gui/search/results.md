@@ -113,4 +113,4 @@ Use `CardSearchResponsePresenterProvider` directly to force thumbnail-only displ
 
 # Export
 
-Search results can be exported as a CSV file. The export is limited to the first 200 results for performance.
+Search results can be exported as a CSV file. The export runs asynchronously in the background, so large result sets can be exported without a row limit.
