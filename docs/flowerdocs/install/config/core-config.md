@@ -31,18 +31,18 @@ This section describes the various FlowerDocs Core configurations to be defined 
 
 | Property    | Description                                                  |
 | ----------- | ------------------------------------------------------------ |
-| es.nodes    | Addresses of the various OpenSearch nodes separated by a `,` |
-| es.cluster  | OpenSearch cluster name                                      |
-| es.username | User name _(optional)_                                       |
-| es.password | User password _(optional)_                                   |
+| opensearch.uris     | Addresses of the various OpenSearch nodes separated by a `,` |
+| es.cluster          | OpenSearch cluster name                                      |
+| opensearch.username | User name _(optional)_                                       |
+| opensearch.password | User password _(optional)_                                   |
 
 # Redis
 
 | Property          | Description                                         |
 | ----------------- | --------------------------------------------------- |
 | redis.enabled     | Enables Redis, a prerequisite for high availability |
-| spring.redis.host | Host name Redis                                     |
-| spring.redis.port | Redis listening port                                |
+| spring.data.redis.host | Host name Redis                                |
+| spring.data.redis.port | Redis listening port                           |
 
 # ARender
 
@@ -51,3 +51,24 @@ This section describes the various FlowerDocs Core configurations to be defined 
 | arender.rendition.nodes | Address of the ARender rendition or a Load Balancer |
 
 It is not recommended to modify ARender properties by setting parameters in the `core.properties` file. Properties that are not defined in the documentation are not qualified by FlowerDocs: the correct operation of the application is therefore not guaranteed with these modifications.
+
+# Connection pools and timeouts
+
+The connection pools and timeouts of the main infrastructure components are configurable. Defaults are tuned for a typical load; adjust them per environment.
+
+| Property | Description |
+| --- | --- |
+| `opensearch.max.conn.total` / `opensearch.max.conn.per.route` | OpenSearch HTTP connection pool size (default `200`) |
+| `opensearch.connect.timeout` / `opensearch.socket.timeout` | OpenSearch connect / read timeout (default `5000` / `60000` ms) |
+| `s3.connection.timeout` / `s3.socket.timeout` / `s3.max.connections` | S3 (AWS SDK v2) timeouts and pool (default `30000` / `100000` ms, `150`) |
+| `ldap.connect.timeout` / `ldap.read.timeout` / `ldap.pool.maxsize` | LDAP connect / read timeout and connection pool |
+| `rest.oh.connect.timeout` / `rest.oh.read.timeout` | REST OperationHandler callback timeouts (default `5000` / `30000` ms) |
+| `rest.oh.pool.max.total` / `rest.oh.pool.max.per.route` | REST OperationHandler client pool (default `200` / `100`) |
+
+# Security headers
+
+The GUI sends a Content-Security-Policy and browser security headers. Override these only if you embed FlowerDocs, serve assets from a custom CDN, or run a companion application on a non-default port: `content.security.policy`, `content.security.policy.directives`, `hsts.max.age`, `referrer.policy`, `permissions.policy`, `cross.origin.opener.policy`, `cross.origin.resource.policy`.
+
+# Actuator
+
+Actuator exposure is limited to `health,info,status`, and detailed health requires `SYSTEM_ADMIN` (`management.endpoints.web.exposure.include=health,info,status`, `management.endpoint.health.roles=SYSTEM_ADMIN`). The health endpoint does not reflect OpenSearch availability. `server.forward-headers-strategy=native` is required behind a reverse proxy.

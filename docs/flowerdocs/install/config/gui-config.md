@@ -23,7 +23,7 @@ This section describes the various FlowerDocs GUI configurations to be defined i
 | gui.client.arender.url      | ARender HMI URL                                                  |
 | scope.edit                  | Allow to select the target scope on the login page               |
 | gui.session.timeout         | User session validity time in seconds                            |
-| ws.url                      | **FlowerDocs Core** WebServices URL                              |
+| ws.url                      | **FlowerDocs Core** REST URL (e.g. `http://localhost:8081/core/rest`) |
 
 # Logging
 
