@@ -46,7 +46,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.7.18</version>
+				<version>4.0.6</version>
 				<executions>
 					<execution>
 						<goals>

@@ -41,7 +41,7 @@ In this module, we will need the following two dependencies:
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.7.18</version>
+			<version>4.0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.flower.docs.core</groupId>
@@ -144,9 +144,9 @@ All JARs included in this directory will be added to the JVM classpath.
 
 All you need to do is copy the library into this directory with the same user as the one with whom the service is launched (or who has read rights on the file).
 
-## Executable JAR
+## Standalone JAR
 
-When the Core is started as an executable JAR with a command such as `java -jar`, the custom library must be manually added to the JVM classpath.
+When the Core is started with `java -jar`, the custom library must be manually added to the JVM classpath.
 To do this, use the `-cp` parameter.
 
 # Test
