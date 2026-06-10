@@ -139,8 +139,7 @@ curl -X POST "<CORE_HOST>/rest/virtualfolderclass" \
       "value": 0,
       "unit": "MONTH"
     },
-    "category": "VIRTUAL_FOLDER",
-    "active": false
+    "category": "VIRTUAL_FOLDER"
 }]'
 ```
 
@@ -276,8 +275,7 @@ curl -X POST "<CORE_HOST>/rest/virtualfolderclass/<IDS>" \
       "value": 0,
       "unit": "MONTH"
     },
-    "category": "VIRTUAL_FOLDER",
-    "active": false
+    "category": "VIRTUAL_FOLDER"
 }]'
 ```
 
