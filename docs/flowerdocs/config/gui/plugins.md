@@ -11,7 +11,7 @@ content_hash: 906b422d2728f0960ca94c4d30ac894e25bf543d00dbdc82b9140b6148b4d3ca
 
 # What is a GUI plugin?
 
-A plugin can be used to redirect an HTTP stream received by **FlowerDocs GUI** to another URL. To achieve this, **FlowerDocs GUI** includes a `reverse proxy` module based on Netflix's Zuul open source product. A plugin is exposed under the `/plugins/` path according to the routes defined.
+A plugin can be used to redirect an HTTP stream received by **FlowerDocs GUI** to another URL. To achieve this, **FlowerDocs GUI** includes a `reverse proxy` module based on Spring Cloud Gateway. A plugin is exposed under the `/plugins/` path according to the routes defined.
 
 A GUI plugin is configured using two types of information:
 
@@ -33,30 +33,14 @@ The configuration of these plugins is described in the _Administration > Configu
 
 By defining a plugin with the `/my-route/**` path and the `https://flowerdocs.com/my-plugin` for scope `<scope>`, request is executed on `/plugins/<scope>/my-route/test` and redirected to `https://flowerdocs.com/my-plugin/test` URL.
 
-## Global plugin
+## Timeouts
 
-A global plugin can be accessed from any scope. It must be configured through the `gui.properties` property file.
-To define a new global plugin, it is necessary to define the corresponding route as:
-
-```properties
-zuul.routes.<plugin-id>.path=<plugin path>
-zuul.routes.<plugin-id>.url=<external plugin URL>
-```
-
-<br/>
-
-**Example:** Defining a plugin named _myplugin_
+The timeout on plugin calls is configured in the `gui.properties` file (values in milliseconds):
 
 ```properties
-zuul.routes.myplugin.path=/plugins/sample/**
-zuul.routes.myplugin.url=http://localhost:3006/sample
+spring.cloud.gateway.httpclient.connect-timeout=60000
+spring.cloud.gateway.httpclient.response-timeout=120000
 ```
-
-With this example, requests issued on `<gui>/plugins/sample` are redirected to `http://localhost:3006/sample`.
-
-<br/>
-
-_The timeout on plugins can be configured using the `zuul.host.connect-timeout-millis` and `zuul.host.socket-timeout-millis` properties._
 
 # Default plugins
 
