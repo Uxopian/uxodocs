@@ -8,7 +8,7 @@ last_update:
 content_hash: f4b333e5df6bf16e5286583d18e8dd775a5712478be1d65ec5deb14be1327b4b
 ---
 
-The objects manipulated through the interface and APIs are [components](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/component/Component.html). Each component is classified according to business or technical criteria using a [component class](/docs/flowerdocs/concepts/classes/getting-started).
+The objects manipulated through the interface and APIs are components. Each component is classified according to business or technical criteria using a [component class](/docs/flowerdocs/concepts/classes/getting-started).
 
 :::info
 Find out more about the different component categories:

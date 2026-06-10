@@ -45,7 +45,7 @@ In order to provide information on the context in which a fact took place, sever
 | getCreationDate()                  | Action completion date recovery     |
 | setCreationDate(Date date)         | Action completion date modification |
 
-The actions (see [`com.flower.docs.domain.fact.Action`](#javadoc-com-flower-docs-domain-fact-Action)) supported for facts are:
+The actions (see `com.flower.docs.domain.fact.Action`) supported for facts are:
 
 - `CREATE`: Component creation
 - `UPDATE`: Component update
@@ -57,7 +57,7 @@ The actions (see [`com.flower.docs.domain.fact.Action`](#javadoc-com-flower-docs
 
 ## Additional fields
 
-In addition to information natively stored in the facts, additional fields can be stored (or simply displayed) using [`com.flower.docs.domain.common.ResultField`](#javadoc-com-flower-docs-domain-common-ResultField).
+In addition to information natively stored in the facts, additional fields can be stored (or simply displayed) using `com.flower.docs.domain.common.ResultField`.
 
 | Functions                              | Description                    |
 | -------------------------------------- | ------------------------------ |

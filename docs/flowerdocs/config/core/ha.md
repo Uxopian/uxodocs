@@ -31,7 +31,7 @@ Depending on the architecture chosen, the configuration for accessing Redis need
 
 ## Simple
 
-This communication mode allows the use of a single Redis instance. This can be configured by specifying the `spring.redis.host` and `spring.redis.port` properties.
+This communication mode allows the use of a single Redis instance. This can be configured by specifying the `spring.data.redis.host` and `spring.data.redis.port` properties.
 
 <br/>
 __Note:__ *This type of configuration is not recommended for a production environment.*
@@ -39,7 +39,7 @@ __Note:__ *This type of configuration is not recommended for a production enviro
 ## Sentinel
 
 The [Redis Sentinel](https://redis.io/topics/sentinel) mode enables Redis to be set up in high-availability mode.
-This mode is activated by entering the name of the Redis master via the `spring.redis.sentinel.master` property, and the set of Redis nodes via `spring.redis.sentinel.nodes` (list of _host:port_ separated by commas).
+This mode is activated by entering the name of the Redis master via the `spring.data.redis.sentinel.master` property, and the set of Redis nodes via `spring.data.redis.sentinel.nodes` (list of _host:port_ separated by commas).
 
 ## Configuration
 
@@ -47,10 +47,10 @@ The properties listed below are used to configure communication with Redis.
 
 | Property              | Description                 |
 | --------------------- | --------------------------- |
-| spring.redis.password | Password                    |
-| spring.redis.timeout  | Timeout for Redis exchanges |
-| spring.redis.database | Redis database index        |
-| spring.redis.timeout  | Maximum connection time     |
+| spring.data.redis.password | Password                    |
+| spring.data.redis.timeout  | Timeout for Redis exchanges |
+| spring.data.redis.database | Redis database index        |
+| spring.data.redis.timeout  | Maximum connection time     |
 
 :::info
 

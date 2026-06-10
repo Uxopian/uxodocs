@@ -27,11 +27,11 @@ The decision table is stored as the content of the document used to configure su
 The conditions and actions defined must be Java code that can be compiled within **FlowerDocs Core**'s JVM.
 To facilitate their development, an object accessible through the variable `util` is made available whose exposed methods are listed [here](/docs/flowerdocs/config/core/appendices/context-util).
 
-In order to contextualize decision-making, the `context` and `component` variables are provided when evaluating a decision table. They can therefore be used in conditions or actions. The `context` variable contains a [`com.flower.docs.operation.api.OperationContext`](#javadoc-com-flower-docs-operation-api-OperationContext) object storing the operation execution context.
+In order to contextualize decision-making, the `context` and `component` variables are provided when evaluating a decision table. They can therefore be used in conditions or actions. The `context` variable contains a `com.flower.docs.operation.api.OperationContext` object storing the operation execution context.
 <br/>
 It is possible to retrieve the component before the action using the `getOld()` method available on the `UpdateComponentOperationContext` or `TaskOperationContext` type `context` variable.
 <br/>
-The `component` variable contains the component (see [`com.flower.docs.domain.component.Component`](#javadoc-com-flower-docs-domain-component-Component)) concerned by the operation (if available).
+The `component` variable contains the component (see `com.flower.docs.domain.component.Component`) concerned by the operation (if available).
 
 :::info
 To manually define this operation handler, the `com.flower.docs.core.tsp.operation.DroolsOperationHandler` identifier can be used as the value of the `OperationHandler` tag.

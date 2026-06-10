@@ -10,9 +10,4 @@ content_hash: d375da3e772768bc7ccfd75cc3a2074139a24b0f41f395fa02013fd001266f7b
 
 The DAO API enables the development of FlowerDocs connector to access other data repositories.
 
-<br/>
-*The Javadoc is available online:*
-
-[DAO API](https://documentation.flowerdocs.com/javadocs/dao/index.html)
-
 
