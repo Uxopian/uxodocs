@@ -69,12 +69,14 @@ GET FOR COMPONENT:
 ```bash
 # <CORE_HOST>  FlowerDocs Core base URL
 # <TOKEN>      authentication token
+# category     component category: DOCUMENT, FOLDER, TASK or VIRTUAL_FOLDER
+# id           component identifier
 curl -X POST "<CORE_HOST>/rest/acl/reference" \
   -H "token: <TOKEN>" \
   -H "Content-Type: application/json" \
   -d '{
   "category": "DOCUMENT",
-  "id": "c1ec8407-c1ba-4802-bc03-a99c9cfb5b9e"
+  "id": "myDocumentId"
 }'
 ```
 
@@ -89,7 +91,7 @@ private ACLService service;
 public SecurityObject getForComponentAcl() throws FunctionalException, TechnicalException
 {
 	ComponentReference component = new ComponentReference();
-	component.setId(new Id("c1ec8407-c1ba-4802-bc03-a99c9cfb5b9e"));
+	component.setId(new Id("myDocumentId"));
 	component.setCategory(Category.DOCUMENT);
 	return service.getForComponent(component);
 }
