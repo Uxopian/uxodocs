@@ -12,7 +12,7 @@ content_hash: 7de820c4839e061ece6932908bd8d945ba8c8070904f306c8f5fe16763d6c192
 
 # Principle
 
-This operation manager relies on the [Drools] rules engine (https://www.drools.org/) to execute a decision table.
+This OperationHandler relies on the [Drools](https://www.drools.org/) rules engine to execute a decision table.
 A decision table is a Microsoft Excel file with two types of columns:
 
 - conditions: determines the cases in which to apply a rule

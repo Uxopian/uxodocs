@@ -23,7 +23,7 @@ The tags referenced by this class are used to configure the subscription:
 
 | Tag                 | Type         | Description                                                                                                                                                  |
 | ------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `OperationHandler`  | _string_     | OperationHandler Java class or OperationHook URL                                                                                                             |
+| `OperationHandler`  | _string_     | OperationHandler Java class or `RestOperationHandler` (REST) URL                                                                                             |
 | `ExecutionPhase`    | _choicelist_ | Operation execution phase                                                                                                                                    |
 | `Action`            | _choicelist_ | Operation action                                                                                                                                             |
 | `ObjectType`        | _choicelist_ | Object type to respond to                                                                                                                                    |
