@@ -39,11 +39,3 @@ In order to restrict the access or modifications that can be made to a folder, s
 Some actions are only available if the user has write access to the folder. To do this, it must have the `UPDATE` permission and have reserved the folder (see [Reservation](/docs/flowerdocs/concepts/reservations).
 
 - Attaching the folder to another folder: `ATTACH`
-
-<br/>
-:::info
-To go further, consult the Javadoc:
-
-- [Folder](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/folder/Folder.html)
-- [Folder classes](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/folderclass/FolderClass.html)
-  :::

@@ -71,9 +71,9 @@ The different properties of a criterion :
 
 - `name`: (here equal to `NomClient`) the symbolic name of the tag to be used as a criterion.
 
-- `type`: the type of value to be entered in the field ([Field type](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/search/Types.html)).
+- `type`: the type of value to be entered in the field (Field type).
 
-- `operator`: the default operator displayed in the search ([Operator](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/search/Operators.html)).
+- `operator`: the default operator displayed in the search (Operator).
 
 <br/>
 

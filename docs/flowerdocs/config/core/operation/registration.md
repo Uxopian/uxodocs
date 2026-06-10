@@ -41,7 +41,7 @@ The tags referenced by this class are used to configure the subscription:
 
 ## Filter evaluation
 
-For each operation subscription, execution filters can be defined through a [`com.flower.docs.domain.search.SearchRequest`](#javadoc-com-flower-docs-domain-search-SearchRequest) object. These filters can be used to restrict the contexts in which an operation handler is executed. In this way, a subscription can be limited to components that meet the configured criteria.
+For each operation subscription, execution filters can be defined through a `com.flower.docs.domain.search.SearchRequest` object. These filters can be used to restrict the contexts in which an operation handler is executed. In this way, a subscription can be limited to components that meet the configured criteria.
 
 :::info
 To restrict the triggering of a billing process to invoices, the administrator sets the class filter equal to `Bill`.
@@ -53,7 +53,7 @@ An operation performed on a component exposes the component concerned through it
 
 ## Storage
 
-Filters are stored through a [`com.flower.docs.domain.search.SearchRequest`](#javadoc-com-flower-docs-domain-search-SearchRequest) object. When saved, this object is serialized (XML) and saved as the document file used to define the subscription.
+Filters are stored through a `com.flower.docs.domain.search.SearchRequest` object. When saved, this object is serialized (XML) and saved as the document file used to define the subscription.
 The naming of the file containing the filters is imposed. Its name should be `request`.
 
 ## Special features
