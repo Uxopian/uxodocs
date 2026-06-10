@@ -69,10 +69,13 @@ GET FOR COMPONENT:
 ```bash
 # <CORE_HOST>  FlowerDocs Core base URL
 # <TOKEN>      authentication token
-# <CATEGORY>   component category
-# <IDS>        component identifier
-curl -X GET "<CORE_HOST>/rest/acl/<CATEGORY>/<IDS>" \
-  -H "token: <TOKEN>"
+curl -X POST "<CORE_HOST>/rest/acl/reference" \
+  -H "token: <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+  "category": "DOCUMENT",
+  "id": "c1ec8407-c1ba-4802-bc03-a99c9cfb5b9e"
+}'
 ```
 
   </TabItem>
