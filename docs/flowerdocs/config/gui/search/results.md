@@ -32,6 +32,12 @@ FlowerDocs supports two display modes for search results:
 - **Tabular** -- classic table format
 - **Thumbnail** -- ARender generates a thumbnail of the component
 
+:::info
+The thumbnail (card) display mode is available only for **Document** searches. It is not available for task, folder or virtual-folder searches, which always use the tabular mode.
+:::
+
+The data shown in card (thumbnail) mode is configured independently from the columns shown in tabular mode.
+
 Three configurations are possible depending on whether you want to offer a choice to the user or force a specific mode.
 
 ## Tabular and thumbnails (switcher)
