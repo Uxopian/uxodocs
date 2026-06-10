@@ -24,7 +24,7 @@ In order to restrict access to, or modifications of, a document's content, a num
 
 <br/>
 
-Some actions are only available if the user has write access to the document. To do this, he/she must have the `UPDATE` permission and have reserved the document (see [Reservation](/docs/flowerdocs/concepts/reservations).
+Some actions are only available if the user has write access to the document. To do this, he/she must have the `UPDATE` permission and have reserved the document (see [Reservation](/docs/flowerdocs/concepts/reservations)).
 
 - Attaching the document to a folder: `ATTACH`
 - To delete the document/folder link, the `DETACH` permission is evaluated on the folder, not on the document

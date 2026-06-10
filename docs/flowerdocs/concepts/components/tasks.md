@@ -15,7 +15,7 @@ FlowerDocs can be integrated with any workflow engine on the market.
 In FlowerDocs terms, a workflow is a logical sequence of several classes of tasks where each step corresponds to a type of task (a class of tasks).
 
 <br/>
-__Example:__ ``1. Invoice import`` --> ``2. Accounting validation --> ``3. Overhead validation --> ``4. Payment``
+__Example:__ ``1. Invoice import`` --> ``2. Accounting validation`` --> ``3. Overhead validation`` --> ``4. Payment``
 
 These three stages correspond to three classes of tasks, each of which has two types of response:
 
