@@ -53,7 +53,7 @@ const flowerDocsOSVersion = "3.6.0";
 const flowerDocsRedisVersion = "8.8";
 const flowerDocsJavaVersion = "25";
 const flowerDocsCompanionVersion = "2025.3.2";
-
+const flowerDocsPlumeVersion ="2026.0.0";
 
 const getPdfFileName = (
     siteConfig: any,
@@ -104,7 +104,7 @@ const config: Config = {
     ],
 
 	customFields: {
-	    flowerDocsCompanionVersion,
+	    flowerDocsCompanionVersion, flowerDocsPlumeVersion,
 	},
 
     plugins: [
