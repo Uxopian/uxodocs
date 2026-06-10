@@ -43,7 +43,7 @@ All REST error responses now share a single JSON shape (`code`, `message`, `stat
 
 ## ✨ New features
 
-### 🧭 Quick Prompt (UXOAI-87)
+### 🧭 Quick Prompt
 
 Quick Prompt is a second web component (alongside the existing chat), designed to live inside a host application and stay aware of what the user is doing.
 
@@ -70,7 +70,7 @@ Only prompts that are **enabled** and whose **display condition passes** appear 
 
 > The captured context (current document/task/folder properties, user, tenant) is serialized and sent to the configured LLM as supplementary context. Only expose prompts and context fields that are appropriate for your LLM provider.
 
-### 💬 Interactive choices (UXOAI-183)
+### 💬 Interactive choices
 
 Two new built-in tools let the assistant present interactive options in the chat instead of free text:
 
@@ -81,7 +81,7 @@ These tools are **enabled out of the box** (they are not gated by the tool tag w
 
 See [Tools — Interactive choices](/docs/uxopian-ai/understanding/tools#built-in-tools-interactive-choices).
 
-### 📝 Script management (UXOAI-135)
+### 📝 Script management
 
 A new **Scripts** section in the admin panel lets administrators manage custom front-end integration JavaScript (for example the Quick Prompt connector loaded by a host application) through a governed lifecycle:
 
@@ -94,7 +94,7 @@ Deployed scripts are served to authenticated users at `GET /api/v1/scripts/{id}`
 
 The security scan requires an LLM provider to be configured — see [Upgrade notes](#-upgrade-notes) and [Managing scripts](/docs/uxopian-ai/admin/managing_scripts).
 
-### ✨ Context-variable autocomplete in the prompt editor (UXOAI-187)
+### ✨ Context-variable autocomplete in the prompt editor
 
 While editing a prompt template, typing inside a `[[${ … }]]` expression now suggests:
 
@@ -104,7 +104,7 @@ While editing a prompt template, typing inside a `[[${ … }]]` expression now s
 
 Each suggestion shows its type and a short description.
 
-### 🗂️ Standardized ECM tool names (UXOAI-102)
+### 🗂️ Standardized ECM tool names
 
 The document and metadata tools exposed to the LLM for Alfresco and FlowerDocs now share a **common, ECM-agnostic vocabulary** — for example `getDataModel`, `getDocumentContent`, `getDocumentProperties`, `getDocumentIdsByName`, `updateDocumentProperty`, `prepareRedact`, and `applyObfuscation`. This makes prompts and goals more portable across ECM backends. The tool **tags** used to enable each integration (`alfresco`, `flowerdocs`, `files`) are unchanged. **If you reference tool names explicitly in custom prompts or goals, update them — see [Upgrade notes](#-upgrade-notes).**
 
@@ -112,18 +112,18 @@ The document and metadata tools exposed to the LLM for Alfresco and FlowerDocs n
 
 ## 🏗️ Platform & improvements
 
-- **Structured API error responses** (UXOAI-174) — all errors are now returned as `{ "code", "message", "status" }` JSON with a consistent exception-to-HTTP-status mapping. See [REST API — Error responses](/docs/uxopian-ai/reference/rest_api#error-responses).
-- **Audit fields on all entities** (UXOAI-173) — every stored entity (conversations, prompts, scripts, providers, …) now carries `createdAt`, `createdBy`, `updatedAt`, and `updatedBy`. No reindex is required; existing documents are backfilled on their next save.
-- **Stricter admin response validation** (UXOAI-181) — the admin UI now surfaces a clear error state when an API response does not match the expected shape, instead of silently rendering inconsistent data.
-- **Security / dependency updates** (UXOAI-182) — CVE remediation through dependency upgrades: Spring Boot 4.0.6, Spring Framework 7.0.7, Spring Security 7.0.5, Thymeleaf 3.1.5, Netty 4.2.13.
-- **Docker base image** (UXOAI-197) — `uxopian-base-image` bumped from 1.0.5 to 1.0.6.
+- **Structured API error responses** — all errors are now returned as `{ "code", "message", "status" }` JSON with a consistent exception-to-HTTP-status mapping. See [REST API — Error responses](/docs/uxopian-ai/reference/rest_api#error-responses).
+- **Audit fields on all entities** — every stored entity (conversations, prompts, scripts, providers, …) now carries `createdAt`, `createdBy`, `updatedAt`, and `updatedBy`. No reindex is required; existing documents are backfilled on their next save.
+- **Stricter admin response validation** — the admin UI now surfaces a clear error state when an API response does not match the expected shape, instead of silently rendering inconsistent data.
+- **Security / dependency updates** — CVE remediation through dependency upgrades: Spring Boot 4.0.6, Spring Framework 7.0.7, Spring Security 7.0.5, Thymeleaf 3.1.5, Netty 4.2.13.
+- **Docker base image** — `uxopian-base-image` bumped from 1.0.5 to 1.0.6.
 
 ---
 
 ## 🐛 Bug fixes
 
-- **Multi-turn conversations keep their LLM provider/model** (UXOAI-160) — follow-up messages in a conversation started from a prompt pinned to a non-default provider/model no longer fall back to the system default mid-conversation.
-- **Large FlowerDocs responses no longer fail** (UXOAI-172) — the FlowerDocs client now honours the configured `spring.codec.max-in-memory-size` (20 MB), fixing `DataBufferLimitException` on large search or document responses.
+- **Multi-turn conversations keep their LLM provider/model** — follow-up messages in a conversation started from a prompt pinned to a non-default provider/model no longer fall back to the system default mid-conversation.
+- **Large FlowerDocs responses no longer fail** — the FlowerDocs client now honours the configured `spring.codec.max-in-memory-size` (20 MB), fixing `DataBufferLimitException` on large search or document responses.
 
 ---
 
@@ -139,7 +139,7 @@ The document and metadata tools exposed to the LLM for Alfresco and FlowerDocs n
 
    Any client that read the previous plain-text error body must now parse JSON and read the `message` field (and optionally branch on `code` / `status`). Some responses also changed HTTP status — most notably **creating a duplicate LLM provider now returns `409 Conflict`** (was `400`), and several errors that previously surfaced as `500` are now correctly `404` or `503`. Review status-based client logic. See [REST API — Error responses](/docs/uxopian-ai/reference/rest_api#error-responses).
 
-2. **ECM tool names were standardized (UXOAI-102).** If your custom prompts or goals reference Alfresco/FlowerDocs tool names explicitly, update them. The Alfresco document/metadata tools were de-prefixed — for example `getAlfrescoDataModel` → `getDataModel`, `getAlfrescoDocumentContent` → `getDocumentContent`, `getAlfrescoDocumentProperties` → `getDocumentProperties`, `searchAlfrescoNodes` → `doSearch`, `buildAlfrescoTypeFilter` → `buildTypeFilter` — and the FlowerDocs data-model tool was renamed `getTaskClassAndTagClassesDescriptions` → `getDataModel` (its search executor is `doSearch`). The integration **tags** (`alfresco`, `flowerdocs`, `files`) and `PLUGINS_TOOLS_ENABLED_TAGS` are unchanged. See [Tools](/docs/uxopian-ai/understanding/tools) for the full per-backend tool list.
+2. **ECM tool names were standardized.** If your custom prompts or goals reference Alfresco/FlowerDocs tool names explicitly, update them. The Alfresco document/metadata tools were de-prefixed — for example `getAlfrescoDataModel` → `getDataModel`, `getAlfrescoDocumentContent` → `getDocumentContent`, `getAlfrescoDocumentProperties` → `getDocumentProperties`, `searchAlfrescoNodes` → `doSearch`, `buildAlfrescoTypeFilter` → `buildTypeFilter` — and the FlowerDocs data-model tool was renamed `getTaskClassAndTagClassesDescriptions` → `getDataModel` (its search executor is `doSearch`). The integration **tags** (`alfresco`, `flowerdocs`, `files`) and `PLUGINS_TOOLS_ENABLED_TAGS` are unchanged. See [Tools](/docs/uxopian-ai/understanding/tools) for the full per-backend tool list.
 
 3. **Integration package rename (custom Java code only).** Integration classes moved from `com.uxopian.ai.integration.*` to `com.uxopian.ai.integrations.*` (singular → plural). If you maintain custom integration code compiled against these modules, update the imports. A default standalone install is unaffected.
 
