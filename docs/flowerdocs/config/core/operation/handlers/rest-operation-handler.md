@@ -1,5 +1,5 @@
 ---
-title: Hook
+title: RestOperationHandler
 sidebar_position: 6
 description: "Adapt, enhance, control..."
 date: "2010-12-28T13:20:01+02:00"
@@ -11,7 +11,8 @@ content_hash: 5d7ae8be6367cc78fe8fddd5fd2fc804b2763b949b333d7a8813bcccc38e3948
 
 # Principle
 
-An `OperationHook` is an operation manager exposed as a REST service. An `OperationHook` makes it possible to react to operations carried out on components from a remote WEB service.
+A `RestOperationHandler` is an operation manager exposed as a REST service. A `RestOperationHandler` makes it possible to react to operations carried out on components from a remote WEB service.
+
 
 Depending on the category of component involved in the operation, a POST request is sent to the following endpoints:
 
@@ -24,18 +25,18 @@ It can be developed in any language that can be used to expose WEB services.
 
 The body of requests sent to these endpoints contains an object describing the execution context of the operation, and therefore differs depending on the operation.
 
-# Configuring an OperationHook
+# Configuring an RestOperationHandler
 
-An `OperationHook` can be configured in the same way as a conventional `OperationHandler`. Its name corresponds to the URL used to access the endpoints listed above.
-From the configured URL, it should be possible to send a POST to `{{hook URL}}/{{scope}}/documents/`.
+A `RestOperationHandler` can be configured in the same way as a conventional `OperationHandler`. Its name corresponds to the URL used to access the endpoints listed above.
+From the configured URL, it should be possible to send a POST to `{{RestOperationHandler URL}}/{{scope}}/documents/`.
 
 # Security
 
-Two authentication modes are available to secure an `OperationHook`. They are configured directly in the operation subscription.
+Two authentication modes are available to secure a `RestOperationHandler`. They are configured directly in the operation subscription.
 
 ## Authorization mode
 
-FlowerDocs sends a static character string in the `Authorization` HTTP header with each POST request to the hook. The hook is responsible for validating this header.
+FlowerDocs sends a static character string in the `Authorization` HTTP header with each POST request to the RestOperationHandler, which is responsible for validating this header.
 
 Typically, BASIC authentication can be used. The authorization string can be generated online using [blitter](https://www.blitter.se/utils/basic-authentication-header-generator/), then set in the `Authorization` tag of the subscription.
 
@@ -51,14 +52,14 @@ When `InjectToken` is set to `true` in the subscription, FlowerDocs dynamically 
 token: <JWT>
 ```
 
-The token contains the user's identity (ID, profiles, groups, scope), which allows the hook to make FlowerDocs API calls on behalf of that user.
+The token contains the user's identity (ID, profiles, groups, scope), which allows the RestOperationHandler to make FlowerDocs API calls on behalf of that user.
 
 This mode is typically used together with the FlowerDocs Spring Boot starter, which handles token validation automatically:
 
 ```java
 @SpringBootApplication
 @FlowerDocsClient(security = SecurityMode.USER)
-public class MyHookApplication { ... }
+public class MyRestOperationHandlerApplication { ... }
 ```
 
 :::note
@@ -67,7 +68,7 @@ If both `InjectToken` and `Authorization` are configured on the same subscriptio
 
 # Error management
 
-By default, when running an `OperationHook`, **FlowerDocs Core** logs errors returned by the REST service by parsing the body of the HTTP response.
+By default, when running a `RestOperationHandler`, **FlowerDocs Core** logs errors returned by the REST service by parsing the body of the HTTP response.
 
 To return context-sensitive exceptions, it is necessary to provide the `code` and `message` headers on the HTTP response.
 
@@ -86,7 +87,7 @@ public ResponseEntity<Object> handleCustomException(CodeBasedException ex, WebRe
 
 <br/>
 
-In the case of synchronous `OperationHooks`, personalized error messages can be sent back to the end user.
+In the case of synchronous `RestOperationHandlers`, personalized error messages can be sent back to the end user.
 To do this, use the error code `F00039`:
 
 ```java

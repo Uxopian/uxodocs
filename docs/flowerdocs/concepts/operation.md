@@ -60,7 +60,7 @@ They can be divided into three categories:
 
 - specific: developed specifically and added as libraries to **FlowerDocs Core** (_on-premise only_)
 
-- [hooks](/docs/flowerdocs/config/core/operation/handlers/hook): exposed as REST web services
+- [RestOperationHandler](/docs/flowerdocs/config/core/operation/handlers/rest-operation-handler): exposed as REST web services
 
 <br/>
 To contextualize their execution, an object [`com.flower.docs.operation.api.OperationContext`](#javadoc-com-flower-docs-operation-api-OperationContext) is provided as input. The context can be used to retrieve information concerning the execution of the operation, such as the component concerned or the modifications made.
