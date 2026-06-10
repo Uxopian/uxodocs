@@ -11,7 +11,7 @@ content_hash: 906b422d2728f0960ca94c4d30ac894e25bf543d00dbdc82b9140b6148b4d3ca
 
 # What is a GUI plugin?
 
-A plugin can be used to redirect an HTTP stream received by **FlowerDocs GUI** to another URL. To achieve this, **FlowerDocs GUI** includes a `reverse proxy` module based on Spring Cloud Gateway. A plugin is exposed under the `/plugins/` path according to the routes defined.
+A plugin can be used to redirect an HTTP stream received by FlowerDocs GUI to another URL. To achieve this, FlowerDocs GUI includes a `reverse proxy` module based on Spring Cloud Gateway. A plugin is exposed under the `/plugins/` path according to the routes defined.
 
 A GUI plugin is configured using two types of information:
 
@@ -49,11 +49,9 @@ By default, several plugins are added to consume FlowerDocs resources. They are 
 | Path                | Target URL                | Description                                               |
 | ------------------- | ------------------------- | --------------------------------------------------------- |
 | `/plugins/plume`    | `${gui.client.plume.url}` | Redirects to plume                                        |
-| `/plugins/rest`     | `${core}/rest`            | Redirects to REST services exposed by **FlowerDocs Core** |
-| `/plugins/external` | `${core}/external`        | Redirects to plugins exposed by **FlowerDocs Core**       |
+| `/plugins/rest`     | `${core}/rest`            | Redirects to REST services exposed by FlowerDocs Core |
+| `/plugins/arender`  | `${gui.client.arender.url}` | Redirects to ARender HMI                                |
 
 # Security
 
-To access a plugin via **FlowerDocs GUI**, the client making the request must be authenticated (via the `SESSION`cookie). This authentication is transmitted to the plugin in the form of an HTTP header `token` whose value is the token of the user making the request.
-
-With the Spring MVC framework, this token can be retrieved by adding the following parameter to the input method: `@RequestHeader("token") String token`.
+To access a plugin via FlowerDocs GUI, the client making the request must be authenticated (via the `SESSION`cookie). This authentication is transmitted to the plugin in the form of an HTTP header `token` whose value is the token of the user making the request.
