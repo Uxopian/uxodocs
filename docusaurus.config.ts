@@ -47,10 +47,11 @@ function arenderVersionOverrides(): Record<string, { banner?: "none" }> {
     return { [list[0].name]: { banner: "none" } };
 }
 
-const flowerDocsVersion = "2025.4.0";
-const flowerDocsArenderVersion = "2023.17.0";
-const flowerDocsOSVersion = "1.3.19";
-const flowerDocsRedisVersion = "6.2.12";
+const flowerDocsVersion = "2026.0.0";
+const flowerDocsArenderVersion = "2026.0.1";
+const flowerDocsOSVersion = "3.6.0";
+const flowerDocsRedisVersion = "8.8";
+const flowerDocsJavaVersion = "25";
 const flowerDocsCompanionVersion = "2025.3.2";
 
 
@@ -169,7 +170,7 @@ const config: Config = {
                 lastVersion: "current",
                 versions: { current: { label: `v${flowerDocsVersion}` } },
                 showLastUpdateTime: true,
-                remarkPlugins: [[remarkVariables, { variables: { version: flowerDocsVersion, arenderVersion: flowerDocsArenderVersion, osVersion: flowerDocsOSVersion } }]],
+                remarkPlugins: [[remarkVariables, { variables: { version: flowerDocsVersion, arenderVersion: flowerDocsArenderVersion, osVersion: flowerDocsOSVersion, redisVersion: flowerDocsRedisVersion, javaVersion: flowerDocsJavaVersion } }]],
             },
         ],
         [

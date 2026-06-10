@@ -28,7 +28,7 @@ Default port : 8080. It can be overridden using the `server.port` property in th
 
 ## **FlowerDocs Core**
 
-**FlowerDocs Core** is the **ECM engine**. It is a Java Web application based on [Spring Boot](https://spring.io/projects/spring-boot). It can be used to manage very large quantities of documents (add, delete, update documents, search, dynamic folders, etc.). It exposes **SOAP** and **REST** Web Services that are consumed by the various clients:
+**FlowerDocs Core** is the **ECM engine**. It is a Java Web application based on [Spring Boot](https://spring.io/projects/spring-boot). It can be used to manage very large quantities of documents (add, delete, update documents, search, dynamic folders, etc.). It exposes **REST** Web Services that are consumed by the various clients:
 
 - the native Web Interface **FlowerDocs GUI**
 - third-party applications

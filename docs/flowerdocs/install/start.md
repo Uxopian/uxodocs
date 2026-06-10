@@ -19,21 +19,21 @@ To manually launch the FlowerDocs GUI, FlowerDocs Core and ARender HMI applicati
 <TabItem value="GUI" label="GUI">
 
 ```bash
-./flower-docs-gui-webapp-{{version}}.jar 
+java -jar flower-docs-gui-webapp-{{version}}.jar
 ```
 
 </TabItem>
 <TabItem value="Core" label="Core">
 
 ```bash
-./flower-docs-core-webapp-{{version}}.jar
+java -jar flower-docs-core-webapp-{{version}}.jar
 ```
 
 </TabItem>
 <TabItem value="ARender HMI" label="ARender HMI">
 
 ```bash
-./arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
+java -jar arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
 ```
 
 </TabItem>
@@ -127,7 +127,7 @@ After=syslog.target
 
 [Service]
 User=flowerdocs
-ExecStart=/opt/flowerdocs/flower-docs-gui-webapp-{{version}}.jar
+ExecStart=/usr/bin/java -jar /opt/flowerdocs/flower-docs-gui-webapp-{{version}}.jar
 SuccessExitStatus=143
 
 [Install]
@@ -144,7 +144,7 @@ After=syslog.target
 
 [Service]
 User=flowerdocs
-ExecStart=/opt/flowerdocs/flower-docs-core-webapp-{{version}}.jar
+ExecStart=/usr/bin/java -jar /opt/flowerdocs/flower-docs-core-webapp-{{version}}.jar
 SuccessExitStatus=143
 
 [Install]
@@ -161,7 +161,8 @@ After=syslog.target
 
 [Service]
 User=flowerdocs
-ExecStart=/opt/flowerdocs/arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
+WorkingDirectory=/opt/ARender
+ExecStart=/usr/bin/java -jar /opt/flowerdocs/arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
 SuccessExitStatus=143
 
 [Install]
