@@ -8,6 +8,10 @@ last_update:
 content_hash: d56eb66be215c74b80aa5379b1e301f64caa118cc9a09df27dbc826ee25ab289
 ---
 
+:::warning OpenSearch {{osVersion}}
+FlowerDocs {{version}} runs on **OpenSearch {{osVersion}}**. Migrating existing data from OpenSearch 1.x to {{osVersion}} is **mandatory**. The automated migration tooling is not yet available; this section will document it once released.
+:::
+
 When upgrading FlowerDocs from version 2.5 and lower to version 2.6 and its minor versions, it is necessary to migrate the data. The indexing engine used in FlowerDocs 2.6.0 is OpenSearch, a fork of Elasticsearch version 7.10.2. Elasticsearch's internal data model has been overhauled following version 6.0 by removing support for types in indexes. A migration with rewriting is therefore necessary to carry out this version upgrade.
 
 <br/>
