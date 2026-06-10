@@ -10,9 +10,3 @@ content_hash: cff039094ce7c5534bfc65c7ab99ba62006ca24699270f7189ac21b66d445f37
 
 **FlowerDocs Core** exhibits a set of services to facilitate integration with third-party applications.
 These services can be consumed in various ways, which are described in the following sections.
-
-<br/>
-
-_The javadoc is available online:_
-
-[Core API](https://documentation.flowerdocs.com/javadocs/service/index.html)
