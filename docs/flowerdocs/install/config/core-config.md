@@ -32,7 +32,6 @@ This section describes the various FlowerDocs Core configurations to be defined 
 | Property    | Description                                                  |
 | ----------- | ------------------------------------------------------------ |
 | opensearch.uris     | Addresses of the various OpenSearch nodes separated by a `,` |
-| opensearch.cluster  | OpenSearch cluster name (default `flowerdocs`)               |
 | opensearch.username | User name _(optional)_                                       |
 | opensearch.password | User password _(optional)_                                   |
 
