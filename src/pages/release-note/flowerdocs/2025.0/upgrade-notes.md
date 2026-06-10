@@ -18,7 +18,7 @@ The FlowerDocs \- ARender connector is deployed outside the application, making 
 ## From a version prior to 2.6
 
 You will need to upgrade to version 2.7 before upgrading to 2025.0. Previous versions are based on an Elasticsearch 5.2 engine and require data to be migrated to the new OpenSearch engine.
-Documentation to follow : [here](/documentation/install/opensearch/12-es-migrate)
+Documentation to follow : [here](/docs/flowerdocs/install/opensearch/os-migrate)
 
 # Architecture
 

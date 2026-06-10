@@ -12,9 +12,9 @@ content_hash: 05c91c12ff27131b716e6989871ed19752360f881b7824e253a3c1541e3cdc85
 
 ## Principle
 
-The [Operation API](https://flowerdocs.com/javadocs/operation/index.html) reacts to the execution of operations within **FlowerDocs Core**. An **operation** is an action performed by a user on a component.
+The Operation API reacts to the execution of operations within **FlowerDocs Core**. An **operation** is an action performed by a user on a component.
 
-The **operations managers** (or [`com.flower.docs.operation.api.OperationHandler`](#javadoc-com-flower-docs-operation-api-OperationHandler)) are called when an operation is executed to react to it and apply specific processing. They can be called before (_pre-processing_) or after (_post-processing_) the execution of the operation.
+The **operations managers** (or `com.flower.docs.operation.api.OperationHandler`) are called when an operation is executed to react to it and apply specific processing. They can be called before (_pre-processing_) or after (_post-processing_) the execution of the operation.
 
 <br/>
 The execution of an *operation* can be divided into three phases:
@@ -59,4 +59,4 @@ They can be divided into two categories:
 - [RestOperationHandler](/docs/flowerdocs/config/core/operation/handlers/rest-operation-handler): exposed as REST web services
 
 <br/>
-To contextualize their execution, an object [`com.flower.docs.operation.api.OperationContext`](#javadoc-com-flower-docs-operation-api-OperationContext) is provided as input. The context can be used to retrieve information concerning the execution of the operation, such as the component concerned or the modifications made.
+To contextualize their execution, an object `com.flower.docs.operation.api.OperationContext` is provided as input. The context can be used to retrieve information concerning the execution of the operation, such as the component concerned or the modifications made.

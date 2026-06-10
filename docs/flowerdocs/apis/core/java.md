@@ -80,7 +80,7 @@ _These properties can either be passed in the Spring `application.properties` co
 
 ## Token generation
 
-A user token can also be dynamically generated using the `AuthenticationService` service, which exposes the [login](https://documentation.flowerdocs.com/javadocs/service/com/flower/docs/service/api/security/AuthenticationService.html) method :
+A user token can also be dynamically generated using the `AuthenticationService` service, which exposes the login method :
 
 ```java
 @Autowired
