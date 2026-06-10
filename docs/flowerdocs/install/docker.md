@@ -45,7 +45,7 @@ The rest of this documentation allows you to start up a FlowerDocs application w
 
 **FlowerDocs Core** must be started.
 
-- Open the ``flower-templates-{{version}}-package` folder.
+- Open the `flower-templates-{{version}}-package` folder.
 - Run the following command, adapting the value of the `ldapPassword` variable:
 
 `docker run --volume=${PWD}\default-scope:/clm/default-scope --network=flowerdocs-net artifactory.arondor.cloud:5001/flower-docs-clm:{{version}} delete create --template=default-scope --scope=DEFAULT --password=yourPassword --ws.url=http://flower-docs-core:8081/core/rest --data.dir=/clm/ --ldap.type=OPENLDAP --ldap.baseDN="dc=flowerdocs,dc=com" --ldap.user="cn=admin,dc=flowerdocs,dc=com" --ldap.url=ldap://openldap-flowerdocs:389 --ldap.password=changeme --ldap.attributes.id=CN --ldap.attributes.search=displayName --ldap.attributes.displayName=displayName --ldap.attributes.members=uniqueMember`

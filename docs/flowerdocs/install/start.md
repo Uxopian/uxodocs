@@ -43,75 +43,9 @@ java -jar arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
 
 ## Linux
 
-FlowerDocs applications can be installed simply as a Linux service `init.d` or `systemd`.
+FlowerDocs applications are installed as a Linux `systemd` service. Only `systemd`-based services are tested and supported.
 
 In this section, it is assumed that the JARs `flower-docs-gui-webapp-{{version}}.jar`, `flower-docs-core-webapp-{{version}}.jar` and `arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar` are placed in the `/opt/flowerdocs` folder. This folder is also used as a configuration directory.
-
-### Service init.d
-
-To install FlowerDocs applications as an `init.d`  service, simply create a symbolic link in the `/etc/init.d` directory: 
-
-<Tabs>
-<TabItem value="GUI" label="GUI">
-
-```bash
-chmod +x /opt/flowerdocs/flower-docs-gui-webapp-{{version}}.jar
-ln -s /opt/flowerdocs/flower-docs-gui-webapp-{{version}}.jar /etc/init.d/gui
-```
-
-</TabItem>
-<TabItem value="Core" label="Core">
-
-```bash
-chmod +x /opt/flowerdocs/flower-docs-core-webapp-{{version}}.jar
-ln -s /opt/flowerdocs/flower-docs-core-webapp-{{version}}.jar /etc/init.d/core
-```
-
-</TabItem>
-<TabItem value="ARender HMI" label="ARender HMI">
-
-```bash
-chmod +x /opt/flowerdocs/arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
-ln -s /opt/flowerdocs/arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar /etc/init.d/arender-hmi
-```
-
-</TabItem>
-</Tabs>
-
-With this type of service, the user to whom the JAR belongs is used to run the application. 
-One log file per application is stored in the `/var/log` directory.
-
-So that the service starts automatically when the system is booted: 
-
-<Tabs>
-<TabItem value="GUI" label="GUI">
-
-```bash
-update-rc.d gui defaults
-```
-
-</TabItem>
-<TabItem value="Core" label="Core">
-
-```bash
-update-rc.d core defaults
-```
-
-</TabItem>
-<TabItem value="ARender HMI" label="ARender HMI">
-
-```bash
-update-rc.d arender-hmi defaults
-```
-
-</TabItem>
-</Tabs> 
-
-If the service is not found, it may be necessary to run the following command:
-
-```bash
-systemctl daemon-reload
-```
 
 ### Service systemd
 
@@ -122,13 +56,14 @@ To install FlowerDocs applications as a `systemd` service, the `gui.service`, `c
 
 ```service
 [Unit]
-Description=FlowerDocs GUI
-After=syslog.target
+Description=flowerdocs-gui
 
 [Service]
+WorkingDirectory=/opt/flowerdocs
+EnvironmentFile=-/opt/flowerdocs/flower-docs-gui-webapp-{{version}}.conf
+ExecStart=/bin/bash -c 'exec java ${JAVA_OPTS} -jar /opt/flowerdocs/flower-docs-gui-webapp-{{version}}.jar ${RUN_ARGS}'
 User=flowerdocs
-ExecStart=/usr/bin/java -jar /opt/flowerdocs/flower-docs-gui-webapp-{{version}}.jar
-SuccessExitStatus=143
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
@@ -139,13 +74,14 @@ WantedBy=multi-user.target
 
 ```service
 [Unit]
-Description=FlowerDocs Core
-After=syslog.target
+Description=flowerdocs-core
 
 [Service]
+WorkingDirectory=/opt/flowerdocs
+EnvironmentFile=-/opt/flowerdocs/flower-docs-core-webapp-{{version}}.conf
+ExecStart=/bin/bash -c 'exec java ${JAVA_OPTS} -jar /opt/flowerdocs/flower-docs-core-webapp-{{version}}.jar ${RUN_ARGS}'
 User=flowerdocs
-ExecStart=/usr/bin/java -jar /opt/flowerdocs/flower-docs-core-webapp-{{version}}.jar
-SuccessExitStatus=143
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
@@ -156,14 +92,13 @@ WantedBy=multi-user.target
 
 ```service
 [Unit]
-Description=ARender HMI
-After=syslog.target
+Description=ARender HMI service
 
 [Service]
 User=flowerdocs
 WorkingDirectory=/opt/ARender
-ExecStart=/usr/bin/java -jar /opt/flowerdocs/arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
-SuccessExitStatus=143
+ExecStart=java -jar /opt/ARender/arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
@@ -171,6 +106,45 @@ WantedBy=multi-user.target
 
 </TabItem>
 </Tabs> 
+
+### Environment file
+
+The `JAVA_OPTS` (JVM options) and `RUN_ARGS` (application arguments) variables referenced in the unit files are defined in the `EnvironmentFile`. This file is placed in the same directory as the JAR, with the same name as the JAR and the `.conf` extension (for example `flower-docs-core-webapp-{{version}}.conf`).
+
+:::warning
+For the **FlowerDocs GUI**, the `--add-opens java.base/java.lang=ALL-UNNAMED` JVM option is required.
+:::
+
+<Tabs>
+<TabItem value="GUI" label="GUI">
+
+```properties
+JAVA_OPTS="-Xmx2g --add-opens java.base/java.lang=ALL-UNNAMED"
+RUN_ARGS=""
+```
+
+</TabItem>
+<TabItem value="Core" label="Core">
+
+```properties
+JAVA_OPTS="-Xmx2g"
+RUN_ARGS=""
+```
+
+</TabItem>
+</Tabs> 
+
+:::info
+`RUN_ARGS` can hold additional application arguments (left empty here). Set `-Xmx` according to the RAM allocated to the component (see [Prerequisites](/docs/flowerdocs/install/prerequisites)).
+:::
+
+### Boot start
+
+After creating or modifying the unit files, reload the `systemd` configuration:
+
+```bash
+systemctl daemon-reload
+```
 
 To have the service started automatically by `systemd`, run the following commands:
 
@@ -199,11 +173,6 @@ systemctl enable arender-hmi.service
 </TabItem>
 </Tabs> 
 
-### JVM configuration
-
-To configure the JVM of the application launched by the Linux service, you need to add a configuration file in the same directory as the JAR. 
-This configuration file must have the same name as the JAR, with the extension `conf`.
-
 ### Commands
 
 To start the services, simply issue the commands: 
@@ -212,21 +181,21 @@ To start the services, simply issue the commands:
 <TabItem value="GUI" label="GUI">
 
 ```bash
-service gui start
+systemctl start gui.service
 ```
 
 </TabItem>
 <TabItem value="Core" label="Core">
 
 ```bash
-service core start
+systemctl start core.service
 ```
 
 </TabItem>
 <TabItem value="ARender HMI" label="ARender HMI">
 
 ```bash
-service arender-hmi start
+systemctl start arender-hmi.service
 ```
 
 </TabItem>
