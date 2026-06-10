@@ -7,19 +7,11 @@ last_update:
   author: CI/CD Bot
 content_hash: 838e7d1674ae22a53988c4284c47644bf4d2253f5efa30cdf72564f9a8baf774
 ---
+import PlumeDownload from '@site/src/components/PlumeDownload';
 
-Two types of packaging are supplied:
+# Install as jar 
 
-- WAR (to be deployed on the same application server as the GUI)
-- Executable JAR
-
-# WAR
-
-When Plume is deployed as a WEB application in a servlet container, a `plume.config.dir` property must be added to the JVM. This property must refer to the directory in which the configuration file `plume.properties` is stored.
-
-The name of the configuration file can be changed by adding the property `spring.config.name` with the file name (without extension) as the value.
-
-# Executable JAR
+First Download the <PlumeDownload/> jar 
 
 Application configuration is based on Spring Boot mechanisms.
 Properties for configuring Plume and its connectors can be provided in a number of ways:

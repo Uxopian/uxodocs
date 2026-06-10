@@ -19,7 +19,7 @@ Default port : 8080. It can be overridden using the `server.port` property in th
 
 ## **ARender HMI**
 
-[ARender HMI](https://arender.io/), developed by [Uxopian](https://www.uxopian.com), is a WEB application integrated into **FlowerDocs GUI** as an `iframe`. It visualizes documents generated via ARender Rendition Server.
+[ARender HMI](https://www.uxopian.com/arender), developed by [Uxopian](https://www.uxopian.com), is a WEB application integrated into **FlowerDocs GUI** as an `iframe`. It visualizes documents generated via ARender Rendition Server.
 
 Default port : 8080. It can be overridden using the `server.port` property in the `application.properties` file.
 
@@ -28,7 +28,7 @@ Default port : 8080. It can be overridden using the `server.port` property in th
 
 ## **FlowerDocs Core**
 
-**FlowerDocs Core** is the **ECM engine**. It is a Java Web application based on [Spring Boot](https://spring.io/projects/spring-boot). It can be used to manage very large quantities of documents (add, delete, update documents, search, dynamic folders, etc.). It exposes **SOAP** and **REST** Web Services that are consumed by the various clients:
+**FlowerDocs Core** is the **ECM engine**. It is a Java Web application based on [Spring Boot](https://spring.io/projects/spring-boot). It can be used to manage very large quantities of documents (add, delete, update documents, search, dynamic folders, etc.). It exposes **REST** Web Services that are consumed by the various clients:
 
 - the native Web Interface **FlowerDocs GUI**
 - third-party applications
@@ -43,7 +43,7 @@ Default port : 8081. It can be overridden using the `server.port` property in th
 
 ## ARender Rendition Server
 
-[ARender Rendition](https://arender.io/), a product developed by [Uxopian](https://www.uxopian.com), is the rendition engine used to generate images corresponding to the various pages of the documents to be visualized.
+[ARender Rendition](https://www.uxopian.com/arender), a product developed by [Uxopian](https://www.uxopian.com), is the rendition engine used to generate images corresponding to the various pages of the documents to be visualized.
 This engine exposes a REST API enabling the various elements required for visualization to be retrieved from the client workstation.
 
 Default port : 8761.
@@ -54,7 +54,7 @@ Default port : 8761.
 
 OpenSearch engine, a standalone Java application, is used to index and search data. It provides a distributed, multi-entity search engine, as well as NoSQL document storage. FlowerDocs uses these features to store document metadata in the NoSQL part and advanced search engine capabilities for queries on documents, tasks and folders.
 
-Communication is via the OpenSearch Transport Protocol, based on a specific TCP-based module.
+Communication is via the OpenSearch REST API over HTTP.
 
 Default port : 9200.
 
