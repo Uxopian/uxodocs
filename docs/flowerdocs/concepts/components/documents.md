@@ -28,10 +28,3 @@ Some actions are only available if the user has write access to the document. To
 
 - Attaching the document to a folder: `ATTACH`
 - To delete the document/folder link, the `DETACH` permission is evaluated on the folder, not on the document
-
-:::info
-To go further, consult the Javadoc:
-
-- [Document](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/document/Document.html)
-- [Document class](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/documentclass/DocumentClass.html)
-  :::
