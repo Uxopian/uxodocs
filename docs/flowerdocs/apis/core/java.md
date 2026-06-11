@@ -12,7 +12,7 @@ content_hash: 7a37399e3c52663316233e84b403403caf2653cf49531cda538438568d5d1a5d
 :::info
 The Java client lets you interact with **FlowerDocs Core** through the web services on display.
 
-This documentation is based on the use of [Maven](https://maven.apache.org/) and [Spring Boot 2.7.18] (https://spring.io/projects/spring-boot).
+This documentation is based on the use of [Maven](https://maven.apache.org/) and [Spring Boot 4.0.6](https://spring.io/projects/spring-boot).
 :::
 
 # Set-up
