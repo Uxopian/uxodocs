@@ -85,7 +85,7 @@ The default algorithm is `SHA-256`. Another algorithm can be used using the `fil
 The CLM can be used to encrypt or decrypt a character string, for example to secure sensitive configuration values such as passwords.
 
 ```properties
-java -jar flower-docs-clm-{{version}}-bundle.jar string-encrypt --password=<string to encrypt>
+java -jar flower-docs-clm-{{version}}-bundle.jar string-encrypt --password=<string to encrypt> --secret=<encryption secret>
 ```
 
 The encrypted value is printed in the CLM log output.
@@ -93,7 +93,7 @@ The encrypted value is printed in the CLM log output.
 To decrypt an encrypted string:
 
 ```properties
-java -jar flower-docs-clm-{{version}}-bundle.jar string-decrypt --password=<encrypted string>
+java -jar flower-docs-clm-{{version}}-bundle.jar string-decrypt --password=<encrypted string> --secret=<encryption secret>
 ```
 
 :::info
