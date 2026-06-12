@@ -38,11 +38,20 @@ The CSV export has been entirely redesigned to meet extraction needs on large da
 
 In practice, users select the results to export from a new dialog box, then can continue working while the export runs in the background. A tracking panel centralizes all ongoing exports and allows users to monitor their progress, cancel an export launched by mistake, or restart if needed. Once an export is complete, a notification in the top bar invites the user to download the generated file. Multiple exports can be launched in parallel, each with a clear status: in progress, completed, or failed.
 
-<!-- TODO: add a GIF or screenshot of the CSV export -->
+<img src="/img/flowerdocs/release-notes/ExportCSV.gif" alt="Export CSV" width="1200" />
+<br /><br />
 
 ### 💻 Improved search
 
 Search has been refined to streamline everyday interactions. The **Enter** key once again triggers a search directly from the form — a shortcut expected by users that had been disabled during accessibility work (WCAG). Field input has also been corrected: spaces are now accepted in date fields and no longer cause search criteria to disappear in text fields. Finally, full-text search now recognizes the **"-"** (hyphen) character as a connector rather than an operator, making it possible to find compound terms such as "Claire-Marie" or "self-service."
+
+**Mouse and keyboard user**
+<img src="/img/flowerdocs/release-notes/UsingEnterToLauchSearch.gif" alt="Using Enter to launch the search" width="1000" />
+<br /><br />
+
+**Keyboard-only user**
+<img src="/img/flowerdocs/release-notes/UsingKeyboardSearch.gif" alt="Using the keyboard on the search" width="1000" />
+<br /><br />
 
 ### 💻 Improved thumbnail display
 
@@ -50,7 +59,8 @@ Thumbnail display has been redesigned to offer a more comfortable and predictabl
 
 Previously, all thumbnails loaded simultaneously, producing a "Christmas tree" effect where images appeared randomly on screen. Thumbnails now load progressively in blocks, with a visual indicator in place of images being loaded. Additionally, thumbnail display is now reserved for document views only: it has been removed from task and folder views, where the thumbnail (first page of the first attached document) was often irrelevant and could cause confusion. Sort order after a search is also corrected to respect descending order by creation date, and a default image now replaces the broken image icon when a thumbnail cannot be generated.
 
-<!-- TODO: add a screenshot of the thumbnail display to remind users of the feature -->
+<img src="/img/flowerdocs/release-notes/Thumbnails.gif" alt="Displays as card" width="1000" />
+<br /><br />
 
 ### 💻 ARender version update to 2026.0.1
 
@@ -66,7 +76,8 @@ For more information, see the ARender release notes.
 
 The FlowerDocs banner now displays the Uxopian Software logo and favicon, along with a new background color to reflect the publisher's visual identity.
 
-<!-- TODO: add a screenshot of the new banner -->
+<img src="/img/flowerdocs/release-notes/BannerLogoUxopian.png" alt="Uxopian logo in the banner" width="600" />
+<br /><br />
 
 ## For integrators
 
