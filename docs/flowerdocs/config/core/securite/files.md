@@ -80,6 +80,26 @@ The default algorithm is `SHA-256`. Another algorithm can be used using the `fil
 
 # Utility
 
+## String encryption
+
+The CLM can be used to encrypt or decrypt a character string, for example to secure sensitive configuration values such as passwords.
+
+```properties
+java -jar flower-docs-clm-{{version}}-bundle.jar string-encrypt --password=<string to encrypt>
+```
+
+The encrypted value is printed in the CLM log output.
+
+To decrypt an encrypted string:
+
+```properties
+java -jar flower-docs-clm-{{version}}-bundle.jar string-decrypt --password=<encrypted string>
+```
+
+:::info
+These commands do not require a `--ws.url`, `--scope`, or authentication parameters.
+:::
+
 ## Directory analysis
 
 By analyzing a directory before encrypting its contents, you can determine the size of the directory to be encrypted and the number of files it contains. The calculation is performed recursively.
