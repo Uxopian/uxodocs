@@ -1,0 +1,190 @@
+/**
+ * qp-connector — [Order 3]
+ *
+ * Wires Quick Prompt into FlowerDocs: maps the current FlowerDocs
+ * component (document, task, folder, or search results) onto the Quick
+ * Prompt context, and exposes window.qpHandleToggle for qp-button.
+ *
+ * Requires:
+ *   - consts     → GATEWAY_ENDPOINT, UXO_AI_ENDPOINT
+ *   - qp-search  → searchCapture, getCategoryFromUrl
+ *   - qp-loader  → the Quick Prompt bundle (window.createQuickPromptIntegration,
+ *                  window.uxopian.mapComponent)
+ */
+
+var ENRICH_MAX = 20;
+var ELEMENT_TAG = 'quick-prompt-element';
+var UUID = '([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})';
+var TOGGLE_TAG = 'qp-toggle-button';
+
+// JSAPI key → QuickPrompt field name.
+var USER_FIELDS     = { id: 'userId', displayNames: 'username', profiles: 'roles', groups: 'groups' };
+var DOCUMENT_FIELDS = { id: 'documentId', name: 'title', classId: 'type' };
+var TASK_FIELDS     = { id: 'taskId', name: 'title', classId: 'taskType', status: 'status', assignee: 'assignee' };
+var FOLDER_FIELDS   = { id: 'folderId', name: 'title' };
+
+function mapComponent(obj, fields) { return window.uxopian.mapComponent(obj, fields); }
+
+// ─── Route resolvers ──────────────────────────────────────────────────────────
+
+async function resolveDocument(params) {
+    try {
+        var components = await new Promise(function (resolve, reject) {
+            JSAPI.get().document().get([params.id], resolve, reject);
+        });
+        var doc = components && components[0];
+        return doc ? mapComponent(doc, DOCUMENT_FIELDS) : null;
+    } catch { return null; }
+}
+
+async function resolveTask(params) {
+    try {
+        var components = await new Promise(function (resolve, reject) {
+            JSAPI.get().task().get([params.id], resolve, reject);
+        });
+        var taskComponent = components && components[0];
+        if (!taskComponent) return null;
+
+        var task = mapComponent(taskComponent, TASK_FIELDS);
+        var attachmentIds = [];
+        try { attachmentIds = taskComponent.getAttachmentIds('Documents') || []; } catch (e) {}
+
+        if (!attachmentIds.length) return { tasks: [task] };
+
+        var attachments = await new Promise(function (resolve, reject) {
+            JSAPI.get().document().get(attachmentIds, resolve, reject);
+        });
+        return {
+            tasks: [task],
+            documents: attachments.map(function (attachment) { return mapComponent(attachment, DOCUMENT_FIELDS); }),
+        };
+    } catch { return null; }
+}
+
+async function resolveFolder(params) {
+    try {
+        var components = await new Promise(function (resolve, reject) {
+            JSAPI.get().document().get([params.id], resolve, reject);
+        });
+        var folderComponent = components && components[0];
+        if (!folderComponent) return null;
+
+        var attachmentIds = [];
+        try { attachmentIds = folderComponent.getAttachmentIds('Documents') || []; } catch (e) {}
+
+        if (!attachmentIds.length) {
+            return { documents: [mapComponent(folderComponent, DOCUMENT_FIELDS)], injected: { viewType: 'folder' } };
+        }
+
+        var children = await new Promise(function (resolve, reject) {
+            JSAPI.get().document().get(attachmentIds, resolve, reject);
+        });
+        return {
+            documents: children.map(function (child) { return mapComponent(child, DOCUMENT_FIELDS); }),
+            injected: { viewType: 'folder' },
+        };
+    } catch { return null; }
+}
+
+// ─── Search context ───────────────────────────────────────────────────────────
+
+async function buildSearchContext(searchResults, category) {
+    if (!searchResults.length) return null;
+
+    var ids = searchResults.map(function (result) { return result.getId(); });
+
+    if (category === 'TASK') {
+        if (searchResults.length > ENRICH_MAX) {
+            return { tasks: searchResults.map(function (result) { return mapComponent(result, TASK_FIELDS); }) };
+        }
+        try {
+            var components = await new Promise(function (resolve, reject) {
+                JSAPI.get().task().get(ids, resolve, reject);
+            });
+            return { tasks: components.map(function (component) { return mapComponent(component, TASK_FIELDS); }) };
+        } catch { return null; }
+    }
+
+    if (category === 'FOLDER' || category === 'VIRTUAL_FOLDER') {
+        var folderApi = category === 'FOLDER' ? JSAPI.get().folder() : JSAPI.get().virtualFolder();
+        if (searchResults.length > ENRICH_MAX) {
+            return { folders: searchResults.map(function (result) { return mapComponent(result, FOLDER_FIELDS); }) };
+        }
+        try {
+            var components = await new Promise(function (resolve, reject) {
+                folderApi.get(ids, resolve, reject);
+            });
+            return { folders: components.map(function (component) { return mapComponent(component, FOLDER_FIELDS); }) };
+        } catch { return null; }
+    }
+
+    if (searchResults.length > ENRICH_MAX) {
+        return { documents: searchResults.map(function (result) { return mapComponent(result, DOCUMENT_FIELDS); }) };
+    }
+    try {
+        var components = await new Promise(function (resolve, reject) {
+            JSAPI.get().document().get(ids, resolve, reject);
+        });
+        return { documents: components.map(function (component) { return mapComponent(component, DOCUMENT_FIELDS); }) };
+    } catch { return null; }
+}
+
+function resolveSearch() {
+    var category = getCategoryFromUrl();
+
+    if (searchCapture.lastResults && searchCapture.lastResults.length && searchCapture.lastCategory === category) {
+        return buildSearchContext(searchCapture.lastResults, category);
+    }
+
+    return new Promise(function (resolve) {
+        var unsubscribe;
+
+        var timeout = setTimeout(function () {
+            unsubscribe();
+            var lastResults = searchCapture.lastResults || [];
+            resolve(lastResults.length ? buildSearchContext(lastResults, category) : null);
+        }, 3000);
+
+        unsubscribe = searchCapture.onResults(function (searchResults) {
+            clearTimeout(timeout);
+            unsubscribe();
+            resolve(buildSearchContext(searchResults, category));
+        });
+    });
+}
+
+// ─── Integration (lazy — initialized on first open) ───────────────────────────
+
+var integration = null;
+
+function handleToggle(open) {
+    var el = document.querySelector(ELEMENT_TAG);
+    if (open) {
+        if (!el) { initIntegration(); } else { el.style.display = ''; }
+    } else if (el) {
+        el.style.display = 'none';
+    }
+    var btn = document.querySelector(TOGGLE_TAG);
+    if (btn) btn.open = open;
+}
+
+async function initIntegration() {
+    if (integration) return;
+    await fetch(GATEWAY_ENDPOINT);
+
+    integration = window.createQuickPromptIntegration({ endpoint: UXO_AI_ENDPOINT, onClose: function () { handleToggle(false); } });
+
+    var userApi = JSAPI.get().getUserAPI();
+    integration.setTenant(userApi.getScope());
+    integration.setUser(mapComponent(userApi.getCurrentUser(), USER_FIELDS));
+    integration.setCallbacks({ onError: function (err) { console.error('[QP] Error:', err); } });
+    integration.setRoutes([
+        { route: new RegExp('documents/[^:/]+:' + UUID, 'i'),    resolve: resolveDocument },
+        { route: new RegExp('tasks/[^:/]+:' + UUID, 'i'),        resolve: resolveTask     },
+        { route: new RegExp('folders/edit:Id=' + UUID, 'i'),     resolve: resolveFolder   },
+        { route: new RegExp('virtualFolders/edit:([^?]+)', 'i'), resolve: resolveFolder   },
+        { route: /Search:%7B/, resolve: resolveSearch, replaceContext: true },
+    ]);
+}
+
+window.qpHandleToggle = handleToggle;

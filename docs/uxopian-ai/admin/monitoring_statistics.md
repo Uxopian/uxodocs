@@ -10,6 +10,10 @@ content_hash: ed92d6108e6a1b0d1c1d411fd29d8fe4434e386b6ec74458cdc9584aeace3c08
 
 The statistics section of the admin panel displays usage metrics for the current tenant. Data is read from OpenSearch via the Stats API (`/api/v1/admin/stats`).
 
+![The statistics page with overview cards, activity charts, LLM distribution, top prompts, and feature adoption](../images/statistics.png)
+
+*Figure: the statistics page — overview cards, daily activity, LLM distribution, top prompts by time saved, and feature adoption.*
+
 ## Available statistics
 
 ### Global stats

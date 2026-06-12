@@ -299,13 +299,17 @@ Extract the ZIP. The archive contains scope files loaded by FlowerDocs in depend
 | Order | File | Role |
 |---|---|---|
 | 0 | `const.xml` / `consts/` | **Required** — gateway URL constants used by all other scripts |
-| 1 | `uxoai-utils.xml` / `uxoai-utils/` | **Required** — shared helper functions (`openChatWindow`, `getComponentContext`, …) |
+| 1 | `uxoai-utils.xml` / `uxoai-utils/` | **Required** — shared helper functions (`createAIAction`, `contextualInput`, `openChatComp`) |
 | 2 | `web-comp.xml` / `web-comp/` | **Required** — loads the JS bundle from the gateway; registers `createChat()` |
 | 2 | `openChat.xml` / `openChat/` | Adds a contextual action button on documents/folders |
 | 2 | `OpenChatShortcut.xml` / `OpenChatShortcut/` | Keyboard shortcut to open a blank chat panel |
 | 2 | `UxoAiAdminShortcut.xml` / `UxoAiAdminShortcut/` | Shortcut to the Uxopian AI admin panel (admins only) |
 | 2 | `refreshToken.xml` / `refreshToken/` | Keeps the gateway session warm on navigation |
 | 2 | `translate.xml` / `translate/` | Adds a translation action using a pre-built prompt |
+| 2 | `qp-search.xml` / `qp-search/` | Quick Prompt — captures search results for context |
+| 3 | `qp-connector.xml` / `qp-connector/` | Quick Prompt — maps FlowerDocs context; exposes `window.qpHandleToggle` |
+| 3 | `qp-loader.xml` / `qp-loader/` | Quick Prompt — loads the Quick Prompt bundle |
+| 4 | `qp-button.xml` / `qp-button/` | Quick Prompt — header toggle button (optional) |
 | — | `Route/Gateway.xml` | Reverse-proxy route: FlowerDocs `/gateway/**` → uxopian-gateway |
 
 :::danger[web-comp is a hard prerequisite for all other scripts]
@@ -398,7 +402,7 @@ The status code points directly to the layer that failed:
 
 A 504 means a proxy (Traefik, nginx, Zuul) gave up waiting for an upstream response. Most common causes:
 
-**Streaming request going through Zuul.** Check the request URL in the Network tab. If it contains `/plugins/<scope>/gateway/`, the request is going through Zuul. Zuul is HTTP/1.1 and buffers responses — SSE streaming is impossible and will time out. `UXO_AI_ENDPOINT` must bypass Zuul. See [Configure FlowerDocs scope files — Why two endpoints?](./configure_flowerdocs_scope.mdx#why-two-endpoints) and fix by:
+**Streaming request going through Zuul.** Check the request URL in the Network tab. If it contains `/plugins/<scope>/gateway/`, the request is going through Zuul. Zuul is HTTP/1.1 and buffers responses — SSE streaming is impossible and will time out. `UXO_AI_ENDPOINT` must bypass Zuul. See [Configure FlowerDocs scope files — Why two endpoints?](./configure_flowerdocs_scope.mdx#what-goes-through-zuul-vs-direct) and fix by:
 - Setting up Traefik priority routing (recommended), or
 - Overriding `UXO_AI_ENDPOINT` and `WS_UXO_AI_ENDPOINT` to a direct gateway URL.
 

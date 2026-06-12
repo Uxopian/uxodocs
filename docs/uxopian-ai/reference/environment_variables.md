@@ -77,6 +77,15 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | `PROMPTS_BACKUP_PATH` | `./prompts/` | Directory for prompt backup files |
 | `GOALS_BACKUP_PATH` | `./goals/` | Directory for goal backup files |
 
+### Script security scan
+
+Used by the admin-managed [scripts](../admin/managing_scripts.md) feature (2026.0.0-ft4). Optional — without a configured provider, scripts can still be created, edited, and force-published, but the security scan is disabled.
+
+| Variable | Default | Description |
+|---|---|---|
+| `SCRIPT_SCAN_LLM_PROVIDER` | (empty) | ID of a configured LLM provider used to run the script security scan. Required to enable scanning. |
+| `SCRIPT_SCAN_LLM_MODEL` | (empty) | Model used for the scan; falls back to the provider's default model when blank. |
+
 ### Security
 
 | Variable | Default | Description |
@@ -106,7 +115,7 @@ The gateway is configured primarily via the mounted `gateway-application.yaml` f
 | Variable | Default | Description |
 |---|---|---|
 | `REGISTRY` | `artifactory.arondor.cloud:5001` | Docker registry host for Artifactory-based image pull. Not used when switching to Cloudsmith images (see [Registry access](../getting_started/registry_access.md)). |
-| `UXOPIAN_VERSION` | `2026.0.0-ft3` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
+| `UXOPIAN_VERSION` | `2026.0.0-ft4` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
 
 In the gateway `gateway-application.yaml`, the URIs for backend services are hardcoded Docker Compose service names (e.g., `http://uxopian-ai:8080`).
 

@@ -1,0 +1,52 @@
+/**
+ * qp-search — [Order 2]
+ *
+ * Captures FlowerDocs search executions and exposes results via
+ * `searchCapture` for the Quick Prompt connector (qp-connector).
+ *
+ * Must be loaded before qp-connector.
+ */
+
+// ─── Config ───────────────────────────────────────────────────────────────────
+var DEBUG = false;
+var SEARCH_TEMPLATES = ['DefaultSearch', 'TaskSearch', 'FolderSearch'];
+// ─────────────────────────────────────────────────────────────────────────────
+
+function getCategoryFromUrl() {
+    try {
+        var json = decodeURIComponent(window.location.hash.replace(/^#Search:/, ''));
+        return JSON.parse(json).c ?? 'DOCUMENT';
+    } catch (e) {
+        return 'DOCUMENT';
+    }
+}
+
+var searchCapture = {
+    lastResults: null,
+    lastCategory: null,
+    listeners: [],
+
+    onResults: function (callback) {
+        this.listeners.push(callback);
+        return function () {
+            var idx = searchCapture.listeners.indexOf(callback);
+            if (idx !== -1) searchCapture.listeners.splice(idx, 1);
+        };
+    },
+};
+
+var searchApi = JSAPI.get().getComponentSearchAPI();
+SEARCH_TEMPLATES.forEach(function (template) {
+    searchApi.registerForExecution(template, function (request, response, callback) {
+        callback.onProcessed(response);
+        var results = response.getResults?.() ?? [];
+        var category = getCategoryFromUrl();
+        searchCapture.lastResults = results;
+        searchCapture.lastCategory = category;
+        if (DEBUG) console.log('[QP] search capture: category=' + category + ' results=' + results.length);
+        for (var i = 0; i < searchCapture.listeners.length; i++) {
+            try { searchCapture.listeners[i](results, category); }
+            catch (e) { console.error('[QP] listener error:', e); }
+        }
+    });
+});

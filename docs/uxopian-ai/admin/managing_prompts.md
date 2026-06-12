@@ -14,6 +14,10 @@ The prompts section of the admin panel lets you view, create, edit, and delete p
 
 In the admin panel, click "Prompts" in the navigation. The page lists all prompts available for the current tenant, including globals and tenant-specific overrides.
 
+![The Prompts list showing each prompt's ID, role, and content excerpt](../images/prompts-list.png)
+
+*Figure: the Prompts list — each prompt shows its ID, role, and a content excerpt.*
+
 Since 2026.0.0-ft3, the prompts list uses a **stale-while-revalidate** cache: when you revisit the page, the previously loaded prompts are rendered immediately while a silent background request refreshes the list. A loading indicator is only shown on the first visit when no cached data is available.
 
 ## Create a prompt
@@ -33,15 +37,17 @@ Since 2026.0.0-ft3, the prompts list uses a **stale-while-revalidate** cache: wh
 
 ## Prompt detail page
 
-Click on a prompt in the list to open its detail page (route `/prompts/:promptId`). The detail page has three tabs: Edit, Test, and Statistics.
+Click on a prompt in the list to open its detail page (route `/prompts/:promptId`). The detail page has four tabs: Edit, Display, Test, and Statistics.
 
 ```mermaid
 graph LR
     A[Prompt list] --> B[Prompt detail]
     B --> C[Edit tab]
+    B --> F[Display Settings tab]
     B --> D[Test tab]
     B --> E[Statistics tab]
     C --> C1[Template editor /<br/>Settings panel]
+    F --> F1[Quick Prompt label /<br/>category / priority /<br/>display condition]
     D --> D1[Variable config /<br/>Execute / Response /<br/>cURL export]
     E --> E1[Usage count / Token cost /<br/>Feedback chart /<br/>PDF export]
 ```
@@ -51,6 +57,8 @@ graph LR
 ### Edit tab
 
 The left pane contains a Thymeleaf template editor with auto-completion. The editor fetches completion metadata from `GET /api/v1/admin/templating/completion`, providing suggestions for available service helpers and variables.
+
+Since 2026.0.0-ft4, the editor also autocompletes the **context variables** available to [Quick Prompt](../understanding/quick_prompt.md) templates. Typing inside a `[[${ … }]]` expression suggests the root variables (`tenant`, `user`, `documents`, `tasks`, `folders`, `injected`, `capabilities`), their object properties after a dot (e.g. `${user.` → `username`, `roles`, …), and array-item attributes (e.g. `${documents[0].` → `title`, `properties`, `tags`, …). Each suggestion shows its type and a short description.
 
 The right pane contains the settings panel:
 
@@ -66,6 +74,32 @@ The right pane contains the settings panel:
 | Disable reasoning | Prevent tool calls during processing |
 
 An unsaved changes badge appears when modifications have not been saved. Use the Reset button to discard changes or Save to apply them immediately.
+
+### Display Settings tab (Quick Prompt)
+
+Since 2026.0.0-ft4, the **Display** tab (titled *Display Settings*) controls whether and how the prompt appears in the [Quick Prompt](../understanding/quick_prompt.md) panel. A prompt is offered in Quick Prompt only when it is **enabled here** and its **display condition** matches the current context.
+
+![The Display Settings tab of a prompt, with label, category, priority, description, and a display-condition editor](../images/prompt-display-settings.png)
+
+*Figure: the Display Settings tab. The display-condition editor validates the expression and provides a test panel with a sample context.*
+
+| Setting | Description |
+|---|---|
+| Enabled | Whether the prompt is offered in Quick Prompt |
+| Label | Short title shown on the prompt card |
+| Category | Free-form category used to group prompt cards. The selector suggests categories already in use across the tenant. |
+| Priority | Ordering of prompt cards (higher priority appears first) |
+| Description | Markdown description shown to the user under the prompt card |
+| Display condition | A JavaScript expression evaluated client-side against the current context; the prompt is shown only when it returns `true` |
+
+Display conditions run in a restricted sandbox (no `eval`, no globals) and may use property access, comparisons, logical operators, and the helpers `includes`, `startsWith`, `endsWith`, `some`, `every`, and `find`. A condition that fails to parse or throws evaluates to `false`, hiding the prompt. For example:
+
+```javascript
+documents.length === 1 && documents[0].type === 'pdf'
+user.roles.includes('REVIEWER')
+```
+
+End users only ever receive the display settings (label, category, priority, description, condition) — never the prompt's template content or LLM configuration.
 
 ### Test tab
 
@@ -113,7 +147,10 @@ On the prompt detail page, click "Delete". A confirmation dialog is displayed. A
 | `GET` | `/api/v1/admin/prompts/{id}/render` | Render a prompt with a payload map |
 | `GET` | `/api/v1/admin/prompts/{id}/statistics` | Get usage statistics for a prompt |
 | `DELETE` | `/api/v1/admin/prompts/{id}` | Delete a prompt |
+| `GET` | `/api/v1/admin/prompts/categories` | List the distinct Quick Prompt categories currently in use (feeds the category selector) |
 | `GET` | `/api/v1/admin/templating/completion` | Get auto-completion metadata for the template editor |
+
+The Quick Prompt panel reads each prompt's display settings (never the template content) via the user-facing endpoint `GET /api/v1/prompts/display`.
 
 ## Related pages
 

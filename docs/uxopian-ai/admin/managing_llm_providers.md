@@ -10,6 +10,10 @@ content_hash: a418638b64c0d011763514deb4f544c951cf58f93c33e39da51713389e6c960f
 
 The LLM providers section of the admin panel lets you add, edit, and delete LLM provider configurations for the current tenant without restarting the application.
 
+![The LLM Providers list showing configured providers, their default model, and model count](../images/llm-providers-list.png)
+
+*Figure: the LLM Providers list — each provider shows its default model and the number of configured models.*
+
 ## Navigate to LLM providers
 
 In the admin panel, click "LLM Providers" in the navigation. The page lists all provider configurations for the current tenant.
@@ -36,7 +40,11 @@ Changes take effect immediately for new requests. Existing in-progress requests 
 
 ## Provider detail page
 
-Click on a provider in the list to open its detail page (route `/llm-providers/:id`). The detail page has three tabs: Configuration, Models, and Test.
+Click on a provider in the list to open its detail page (route `/llm-providers/:id`). The detail page has three tabs: Settings, Models, and Test.
+
+![The LLM provider detail page on the Settings tab, with endpoint, API secret, and capability toggles](../images/llm-provider-detail.png)
+
+*Figure: the provider detail page (Settings tab) — provider id, default model, endpoint, API secret, and capability toggles. The Models tab shows a warning indicator when a model configuration is incomplete or duplicated.*
 
 ```mermaid
 graph LR
