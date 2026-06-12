@@ -84,10 +84,10 @@ The default algorithm is `SHA-256`. Another algorithm can be used using the `fil
 
 By analyzing a directory before encrypting its contents, you can determine the size of the directory to be encrypted and the number of files it contains. The calculation is performed recursively.
 
-The directory is analyzed using the CLM `dir analyze` job, which takes the directory to be analyzed as the `input` parameter.
+The directory is analyzed using the CLM `dir-analyze` job, which takes the directory to be analyzed as the `input` parameter.
 
 ```properties
-java -jar flower-docs-clm-{{version}}-bundle.jar dir analyze --input=<directory to analyze>
+java -jar flower-docs-clm-{{version}}-bundle.jar dir-analyze --input=<directory to analyze>
 ```
 
 :::info
@@ -98,7 +98,7 @@ The optional parameter `--output=<path to report>` is used to create a report at
 
 As the aim is to encrypt the directory so that it can be read by the various instances of **FlowerDocs Core**, a configuration identical to these must be used.
 
-The directory is analyzed using the CLM `dir analyze` job. It requires the following parameters, regardless of the type of encryption used:
+The directory is analyzed using the CLM `dir-analyze` job. It requires the following parameters, regardless of the type of encryption used:
 
 - `input`: the directory to be encrypted
 - `output`: the target directory in which the encrypted copy of the directory provided in `input` parameter will be created
@@ -107,7 +107,7 @@ The directory is analyzed using the CLM `dir analyze` job. It requires the follo
 The command to be executed is as follows:
 
 ```properties
-java -jar flower-docs-clm-{{version}}-bundle.jar dir encrypt --input=<directory to encrypt> --output=<target directory with encrypted data> --conf=<config file path>
+java -jar flower-docs-clm-{{version}}-bundle.jar dir-encrypt --input=<directory to encrypt> --output=<target directory with encrypted data> --conf=<config file path>
 ```
 
 ### Derived key
