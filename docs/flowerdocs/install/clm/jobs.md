@@ -24,7 +24,7 @@ __Parameters:__
 | template  | Template identifier (name of the folder in which it is located) |
 | scope     | Identifier of the scope to be created                           |
 | admin     | Name of the user who owns the new scope                         |
-| ws.url    | The FlowerDocs CORE url. Example : localhost:8081/core/services |
+| ws.url    | The FlowerDocs CORE url. Example : localhost:8081/core/rest |
 | user      | The admin account ID                                            |
 | password  | The password for the admin account                              |
 
@@ -87,7 +87,7 @@ __Parameters:__
 | --------- | ------------------------------------------------------------------------------------ |
 | scope     | Identifier of the scope to be exported                                               |
 | template  | Identifier of the template to be created (name of the folder in which it is located) |
-| ws.url    | The FlowerDocs CORE url. Example : localhost:8081/core/services                      |
+| ws.url    | The FlowerDocs CORE url. Example : localhost:8081/core/rest                      |
 | user      | The admin account ID                                                                 |
 | password  | The password for the admin account                                                   |
 

@@ -124,9 +124,6 @@ LOGGER.info("Found {} documents", response.getFound());
 The configuration of log levels is identical to that of FlowerDocs: [Logs](/docs/flowerdocs/config/exploit/logs)
 :::
 
-# Define protocol
+# Protocol
 
-By default FlowerDocs APIs are using SOAP protocol.
-<br/>
-However it is possible to choose using REST APIs configuring your application.
-Add a property `rest.client.enabled` with value `true` in a _`application.properties`_ file.
+FlowerDocs APIs communicate with **FlowerDocs Core** over REST.

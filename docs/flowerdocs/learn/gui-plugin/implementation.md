@@ -104,7 +104,7 @@ To configure the application, this `application.properties` file in the `src/mai
 spring.application.name=secured-gui-plugin
 server.port=2802
 server.servlet.context-path=/secured
-ws.url=http://localhost:8081/core/services
+ws.url=http://localhost:8081/core/rest
 ```
 :::info
 The other configuration options offered by the Spring Boot framework can also be used.
