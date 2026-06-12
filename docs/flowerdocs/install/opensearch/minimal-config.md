@@ -27,6 +27,6 @@ All properties used to configure **FlowerDocs GUI** must be added to a `core.pro
 This file is loaded when the JVM is started up, so modifications are only taken into account after the application has been restarted.
 
 ```properties
-ws.url=http://<flower host>:<flower port>/<flower context path>/services
+ws.url=http://<flower host>:<flower port>/<flower context path>/rest
 arender.rendition.nodes=http(s)://rendition-host:8761
 ```

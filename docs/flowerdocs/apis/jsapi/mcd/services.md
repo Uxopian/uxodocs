@@ -25,7 +25,7 @@ Like the service layer, a service is provided for each component category:
 - Virtual folder: `JSAPI.get().virtualFolder()`
 - Task: `JSAPI.get().task()`
 
-These services consume the SOAP web services exposed by **FlowerDocs Core**, so their use implies the application of the same consistency and security controls.
+These services consume the REST web services exposed by **FlowerDocs Core**, so their use implies the application of the same consistency and security controls.
 
 <br/>
 Each function exposed by these services accepts two function-type parameters: 

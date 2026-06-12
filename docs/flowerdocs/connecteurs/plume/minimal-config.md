@@ -25,7 +25,7 @@ In addition, the `flower.url` property must be filled in with the URL of FlowerD
 
 ```properties
 flower.enabled=true
-flower.url=http://<host>:<port>/<Core path>/services
+flower.url=http://<host>:<port>/<Core path>/rest
 ```
 
 ## SMTP
