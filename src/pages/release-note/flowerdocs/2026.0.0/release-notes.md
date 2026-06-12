@@ -127,11 +127,11 @@ Environments using Operation Handlers benefit from the most significant gains. T
 
 ### 💻 Anonymous usage data collection (Mixpanel)
 
-FlowerDocs now includes anonymous usage data collection through the Mixpanel platform, enabled by default. The goal: better understand real-world usage to steer product evolution closer to user needs. This collection, limited to anonymous usage data without any personal or sensitive information, is compliant with GDPR and CCPA. It can be disabled by operators or integrators if needed — see the upgrade notes.
+FlowerDocs now includes anonymous usage data collection through the Mixpanel platform, enabled by default. The goal: better understand real-world usage to steer product evolution closer to user needs. This collection, limited to anonymous usage data without any personal or sensitive information, is compliant with GDPR and CCPA. It can be disabled by operators or integrators if needed — see the upgrade notes [here](../upgrade-notes).
 
 From an infrastructure perspective, this feature introduces new outbound network flows from the FlowerDocs platform to Mixpanel servers. Operators must ensure these flows are allowed in their network configuration.
 
-For details on the data collected, see the dedicated documentation.
+For details on the data collected, see the dedicated documentation. [here](docs\flowerdocs\config\exploit\product-analytics)
 
 ### 💻 Production-ready Docker images
 
