@@ -70,7 +70,7 @@ The ARender viewer embedded in FlowerDocs has been updated to version 2026.0.1. 
 - Hooks are now available to track print and download actions from the viewer, enabling these events to be added to an audit trail.
 - Office documents in landscape format are correctly displayed within the viewer.
 
-For more information, see the ARender release notes.
+For more information, see the ARender release notes [here](/release-note/arender/v2026.0.0/release-notes)
 
 ### 💻 New banner visual identity
 
@@ -164,19 +164,15 @@ The Docker images have been hardened to be more secure and more configurable.
 
 ## FlowerDocs eProcess
 
-### Overview
-
-No specific overview for this version.
-
 ### For users
 
-The eProcess-specific export feature, which allowed exporting data and content from a task, has been removed.
+The external access feature has been removed because the feature did not meet users' needs.
 
 Apart from this removal, this version benefits from all the changes and fixes made to FlowerDocs for users.
 
 ### For integrators
 
-The external access feature has been removed as it was not used in production and had security vulnerabilities.
+The eProcess-specific export feature, which allowed exporting data and content from a task, has been removed.
 
 Apart from this removal, this version benefits from all the changes and fixes made to FlowerDocs for integrators.
 
@@ -189,10 +185,6 @@ This version includes the migration to Spring Boot 4 and Spring Framework 6, alo
 - Document template — Data automatically populated from FlowerDocs data is not visible in the viewer. Once the document is downloaded, the data is present.
 
 ## FlowerDocs GEC
-
-### Overview
-
-No specific overview for this version.
 
 ### For users
 
