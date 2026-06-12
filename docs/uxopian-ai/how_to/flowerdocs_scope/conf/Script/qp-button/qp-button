@@ -1,0 +1,46 @@
+/**
+ * qp-button — [Order 4]
+ *
+ * Injects the Quick Prompt toggle button (<qp-toggle-button>) into the
+ * FlowerDocs header bar. Optional — only needed when the built-in header
+ * button is desired.
+ *
+ * Must be loaded after qp-connector (uses window.qpHandleToggle).
+ */
+
+(function () {
+    // ─── Config ───────────────────────────────────────────────────────────────
+    var BUTTON_ID = 'qp-toggle-btn';
+    var TOGGLE_TAG = 'qp-toggle-button';
+    // ─────────────────────────────────────────────────────────────────────────
+
+    function injectButton() {
+        if (document.getElementById(BUTTON_ID)) return;
+        var container = document.querySelector('.d-flex.float-right');
+        if (!container) return;
+
+        var li = document.createElement('li');
+        li.className = 'list-inline-item notification-list';
+        li.id = BUTTON_ID;
+        li.style.cssText = 'display:flex;align-items:center';
+
+        var btn = document.createElement(TOGGLE_TAG);
+        btn.onToggle = function (open) { window.qpHandleToggle && window.qpHandleToggle(open); };
+        li.appendChild(btn);
+
+        var anchor = container.querySelector('a[title="Actualiser"]');
+        var ref = anchor && anchor.closest('li');
+        ref ? container.insertBefore(li, ref) : container.appendChild(li);
+    }
+
+    function waitForHeader() {
+        if (document.querySelector('.d-flex.float-right')) { injectButton(); return; }
+        var observer = new MutationObserver(function () {
+            if (document.querySelector('.d-flex.float-right')) { observer.disconnect(); injectButton(); }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        setTimeout(function () { observer.disconnect(); }, 15000);
+    }
+
+    waitForHeader();
+})();

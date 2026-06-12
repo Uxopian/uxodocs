@@ -75,58 +75,102 @@ See [Plugin system — Filtering tools by tag](./plugin_system.md#filtering-tool
 
 Tools require a model that supports function calling. If a prompt has `requiresFunctionCallingModel: true`, the LLM provider must have a model configured with `functionCallSupported: true`. If `reasoningDisabled: true` is set on a prompt, tool specifications are not sent to the LLM for that request.
 
+## Standardized ECM tool names
+
+Since 2026.0.0-ft4, the document and metadata tools for Alfresco and FlowerDocs share a **common, ECM-agnostic vocabulary**, so the same prompts and goals work against either backend. The Alfresco tools were de-prefixed and the FlowerDocs data-model tool was renamed:
+
+| Operation | Tool name (ft4) | Previous name |
+|---|---|---|
+| Get the tenant data model | `getDataModel` | Alfresco `getAlfrescoDataModel` / FlowerDocs `getTaskClassAndTagClassesDescriptions` |
+| Find document IDs by name | `getDocumentIdsByName` | `getAlfrescoDocumentIdsByName` |
+| Read document content | `getDocumentContent` | `getAlfrescoDocumentContent` / `getFlowerDocsDocumentContent` |
+| Read document properties | `getDocumentProperties` | `getAlfrescoDocumentProperties` |
+| Update a document property | `updateDocumentProperty` | `updateDocumentPropertyById` / `updateDocumentTagValueById` |
+| Execute a search | `doSearch` | Alfresco `searchAlfrescoNodes` / FlowerDocs `searchDocuments` |
+
+The integration **tags** (`alfresco`, `flowerdocs`, `files`) are unchanged. If you reference tool names explicitly in custom prompts or goals, update them.
+
 ## Built-in tools: FlowerDocs
 
-The `flowerdocs/tool` plugin ships several tools that the LLM can use to search and operate on FlowerDocs documents:
+The `flowerdocs/tool` plugin (tag `flowerdocs`) ships tools the LLM can use to search and operate on FlowerDocs documents:
 
 | Tool name | Description |
 |---|---|
-| `getTaskClassAndTagClassesDescriptions` | Step 0 prerequisite: retrieves all document classes and tag classes with their IDs |
+| `getDataModel` | Step 0 prerequisite: retrieves all document classes and tag classes with their programmatic IDs |
 | `buildCriterionString` | Builds a search criterion for a text (String) tag |
 | `buildCriterionNumber` | Builds a search criterion for a numeric (Long) tag |
-| `buildCriterionDate` | Builds a search criterion for a date tag (format: `yyyy-MM-dd HH:mm:ss`) |
+| `buildCriterionDate` | Builds a search criterion for a date tag |
 | `buildCriterionClass` | Builds a criterion to filter by document class |
-| `buildAndClause` | Combines criteria with logical AND into a filter clause |
-| `buildOrClause` | Combines criteria with logical OR into a filter clause |
-| `buildAndClauseFromClauses` | Combines existing filter clauses with AND (for nested logic) |
-| `buildOrClauseFromClauses` | Combines existing filter clauses with OR |
-| `searchDocuments` | Executes the search and returns matching documents |
+| `buildAndClause` / `buildOrClause` | Combine criteria with logical AND / OR into a filter clause |
+| `buildAndClauseFromClauses` / `buildOrClauseFromClauses` | Combine existing filter clauses (nested logic) |
+| `doSearch` | Executes the search and returns matching documents |
+| `getDocumentIdsByName` | Looks up document IDs by name |
+| `getDocumentContent` | Returns the textual content of a document |
+| `getDocumentProperties` | Returns a document's metadata (properties, tags, author) |
+| `updateDocumentProperty` | Updates a tag / metadata value on a document |
+| `previewRevertToPreviousVersion` | Non-destructive preview of a version restore |
+| `revertToPreviousVersion` / `revertToPreviousVersionBatch` | Revert one / many documents to the previous version (user confirmation required) |
+| `revertToVersion` | Revert a document to a specific version label (user confirmation required) |
+| `prepareRedact` / `applyObfuscation` | Prepare and apply a redaction/obfuscation (requires the ARender plugin for rendering) |
 
-A typical LLM search session calls `getTaskClassAndTagClassesDescriptions` first, then builds criteria, wraps them in clauses, and calls `searchDocuments`.
+A typical search session calls `getDataModel` first, then builds criteria, wraps them in clauses, and calls `doSearch`.
 
 ## Built-in tools: Alfresco
 
-Added in 2026.0.0-ft3 (tag `alfresco`). The `integrations/alfresco/tool` plugin ships three `@ToolService` beans covering 13 AFTS-backed tools:
+Added in 2026.0.0-ft3 (tag `alfresco`). The `integrations/alfresco/tool` plugin ships AFTS-backed tools across several `@ToolService` beans:
 
-### Search (`AlfrescoSearchToolService`)
+### Search and filters (`AlfrescoFilterToolService`, `AlfrescoSearchToolService`)
 
 | Tool name | Description |
 |---|---|
-| `getAlfrescoDataModel` | Step 0 prerequisite: returns the tenant's light data model (common system properties + optional CMM custom types/aspects) |
-| `buildAlfrescoTypeFilter` | AFTS fragment to filter on node type (e.g. `cm:content`, `acme:invoice`) |
-| `buildAlfrescoPropertyContainsFilter` | AFTS fragment for partial text match on a property |
-| `buildAlfrescoPropertyEqualsFilter` | AFTS fragment for exact property match |
-| `buildAlfrescoDateRangeFilter` | AFTS fragment for date ranges |
-| `buildAlfrescoFullTextFilter` | AFTS fragment for full-text content search |
-| `combineAlfrescoFilters` | Combines multiple AFTS fragments with AND or OR |
-| `buildAlfrescoSort` | Builds a sort specification (property + direction) |
-| `searchAlfrescoNodes` | Executes the assembled AFTS query |
+| `getDataModel` | Step 0 prerequisite: returns the tenant's light data model (common system properties + optional CMM custom types/aspects) |
+| `buildTypeFilter` | AFTS fragment to filter on node type (e.g. `cm:content`, `acme:invoice`) |
+| `buildPropertyContainsFilter` | AFTS fragment for partial text match on a property |
+| `buildPropertyEqualsFilter` | AFTS fragment for exact property match |
+| `buildDateRangeFilter` | AFTS fragment for date ranges |
+| `buildFullTextFilter` | AFTS fragment for full-text content search |
+| `buildFolderScopedFilter` | Restrict the search to a folder subtree |
+| `buildAndClause` / `buildOrClause` | Combine fragments with logical AND / OR |
+| `buildAndClauseFromClauses` / `buildOrClauseFromClauses` | Combine existing clauses (nested logic) |
+| `doSearch` | Executes the assembled AFTS query |
 
 ### Documents (`AlfrescoDocumentToolService`)
 
 | Tool name | Description |
 |---|---|
-| `getAlfrescoDocumentIdsByName` | Looks up document node IDs by name |
-| `getAlfrescoDocumentContent` | Returns the textual content of a document |
-| `listAlfrescoFolderContents` | Lists files in an Alfresco folder |
+| `getDocumentIdsByName` | Looks up document node IDs by name |
+| `getDocumentContent` | Returns the textual content of a document |
+| `listFolderContents` | Lists files in an Alfresco folder |
 
 ### Metadata (`AlfrescoMetadataToolService`)
 
 | Tool name | Description |
 |---|---|
-| `getAlfrescoDocumentProperties` | Returns all metadata properties of a node |
+| `getDocumentProperties` | Returns all metadata properties of a node |
+| `updateDocumentProperty` | Updates a property value on a node |
 
-A typical Alfresco search session calls `getAlfrescoDataModel` first to learn the correct qualified names, builds filters, optionally adds a sort, and finishes with `searchAlfrescoNodes`. See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deployment steps.
+### Redaction (`AlfrescoRedactService`)
+
+| Tool name | Description |
+|---|---|
+| `prepareRedact` / `applyObfuscation` | Prepare and apply a redaction/obfuscation (requires the ARender plugin for rendering) |
+
+A typical Alfresco search session calls `getDataModel` first to learn the correct qualified names, builds filters, wraps them in clauses, and finishes with `doSearch`. See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deployment steps.
+
+## Built-in tools: Interactive choices
+
+Since 2026.0.0-ft4, two built-in tools let the assistant present **clickable choices** in the chat instead of asking questions in plain text. They are always available — they are **not** gated by `plugins.tools.enabled-tags` — and require no prompt or configuration change.
+
+| Tool name | Description |
+|---|---|
+| `presentChoices` | Presents a question with a list of option buttons (each with a label and optional description). An "Other…" option always lets the user type a free-text answer. |
+| `presentStepsChoices` | Presents a guided multi-step wizard: the user answers a short sequence of questions one at a time; all answers are submitted together at the end. |
+
+When the assistant calls one of these tools, the chat and [Quick Prompt](./quick_prompt.md) components render the options as buttons. The user's selection is sent back as an ordinary follow-up message, so the conversation continues normally. These tools are also used to obtain **explicit confirmation before destructive operations** (such as `revertToVersion` or applying a redaction).
+
+:::note Custom chat UIs
+The assistant emits the choices as a JSON block in its message content; the standard chat and Quick Prompt components parse and render it automatically. A custom UI that displays raw assistant message content should detect and handle this JSON block.
+:::
 
 ## Tools and MCP
 

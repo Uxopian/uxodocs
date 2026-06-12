@@ -16,6 +16,10 @@ This admin UI replaces the legacy single-server boot-time `mcp.sse.url` configur
 
 In the admin panel, click *MCP Servers* in the navigation. The page lists all MCP configurations registered for the current tenant, with a column for each server's `enabled` state and last-known connection status.
 
+![The MCP Servers list showing server name, URL, transport, and enabled status](../images/mcp-servers-list.png)
+
+*Figure: the MCP Servers list — each entry shows its URL, transport type, and enabled/disabled status.*
+
 ## Multi-tenant isolation
 
 - **Connection dedup key** — two configurations share the same underlying `SharedMcpClient` if and only if they are equal on the triple `(url, transportType, headers)`. Any difference in headers — even a non-authentication header like `User-Agent` — produces a separate pool entry.

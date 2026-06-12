@@ -14,6 +14,48 @@ Summary of all REST API endpoints exposed by `uxopian-ai`. All endpoints are acc
 
 All endpoints use the base path `/api/v1`. Requests go through the gateway; replace `https://your-gateway` with your gateway URL.
 
+## Error responses
+
+Since 2026.0.0-ft4, every non-2xx response returns a structured JSON body instead of a plain-text message:
+
+```json
+{
+  "code": "LLM_PROVIDER_NOT_FOUND",
+  "message": "LLM provider 'xyz' not found.",
+  "status": 404
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `code` | string | Stable, machine-readable error code |
+| `message` | string | Human-readable description |
+| `status` | number | HTTP status code (also reflected in the response status line) |
+
+Common error codes and their HTTP status:
+
+| `code` | Status | Raised when |
+|---|---|---|
+| `BAD_REQUEST` | 400 | Malformed or invalid request |
+| `LLM_BAD_REQUEST` | 400 | The LLM rejected the request |
+| `MISSING_TENANT` | 400 | No tenant resolved from the request |
+| `MISSING_USER` | 400 | No user resolved from the request |
+| `UNAUTHORIZED` | 401 | Authentication/authorization failed (e.g. requesting an undeployed script) |
+| `NOT_FOUND` / `FILE_NOT_FOUND` / `RESOURCE_NOT_FOUND` | 404 | Entity, file, or resource not found |
+| `LLM_PROVIDER_NOT_FOUND` | 404 | Referenced LLM provider does not exist |
+| `MCP_SERVER_NOT_FOUND` | 404 | Referenced MCP server does not exist |
+| `NOT_IMPLEMENTED` | 405 | Operation not supported |
+| `CONFLICT` | 409 | Duplicate entity (e.g. creating an LLM provider or script with an existing ID) |
+| `LLM_CAPABILITY_ERROR` | 422 | The selected model lacks a required capability (multimodal, function calling) |
+| `TOOL_CYCLES_EXCEEDED` | 422 | The tool-calling loop exceeded its maximum number of cycles |
+| `SCAN_CONFIGURATION_ERROR` | 422 | The script security scan is not configured |
+| `OPENSEARCH_UNAVAILABLE` | 503 | OpenSearch is unreachable |
+| `INTERNAL_ERROR` | 500 | Unhandled server error |
+
+:::caution Migrating from a previous version
+Clients that previously parsed the plain-text error body must now read the `message` field from the JSON object. Some statuses also changed — notably, **creating a duplicate LLM provider now returns `409 Conflict`** (previously `400`).
+:::
+
 ## User endpoints
 
 ### Requests — `/api/v1/requests`
@@ -21,6 +63,8 @@ All endpoints use the base path `/api/v1`. Requests go through the gateway; repl
 | Method | Path | Description |
 |---|---|---|
 | `POST` | `/api/v1/requests` | Send one or more requests in a conversation. Returns the request with the LLM response. |
+| `POST` | `/api/v1/requests/stream` | Send a request and stream the response (used by the chat and Quick Prompt). |
+| `POST` | `/api/v1/requests/retry/stream` | Retry a request and stream the response. |
 | `GET` | `/api/v1/requests/{requestId}` | Retrieve a request by ID. |
 | `DELETE` | `/api/v1/requests/{requestId}` | Delete a request. |
 | `PUT` | `/api/v1/requests/{requestId}/feedback` | Attach feedback to a request. |
@@ -59,7 +103,7 @@ All endpoints use the base path `/api/v1`. Requests go through the gateway; repl
 | Method | Path | Description |
 |---|---|---|
 | `POST` | `/api/v1/conversations` | Create a new conversation. |
-| `GET` | `/api/v1/conversations` | List conversations for the current user (paginated). |
+| `GET` | `/api/v1/conversations` | List conversations for the current user (paginated). Optional `search` query param filters by title. |
 | `GET` | `/api/v1/conversations/{id}` | Get a conversation by ID. |
 | `DELETE` | `/api/v1/conversations/{id}` | Delete a conversation. |
 
@@ -69,6 +113,7 @@ All endpoints use the base path `/api/v1`. Requests go through the gateway; repl
 |---|---|---|
 | `GET` | `/api/v1/prompts` | List prompts available to the current user. |
 | `GET` | `/api/v1/prompts/{id}` | Get a prompt by ID. |
+| `GET` | `/api/v1/prompts/display` | List the display settings of prompts enabled for Quick Prompt (never exposes template content or LLM configuration). |
 
 ### Files — `/api/v1/files`
 
@@ -76,6 +121,13 @@ All endpoints use the base path `/api/v1`. Requests go through the gateway; repl
 |---|---|---|
 | `POST` | `/api/v1/files` | Upload a file. |
 | `GET` | `/api/v1/files/{id}` | Download a file by ID. |
+
+### Scripts — `/api/v1/scripts`
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/api/v1/scripts/{id}` | Serve a deployed script as `application/javascript` (`401` if never deployed). Supports `ETag` / `304`. |
+| `GET` | `/api/v1/scripts/{id}/draft` | Serve a script's draft content as `application/javascript` (for preview). |
 
 ### Web component config — `/api/v1/webcomponent`
 
@@ -93,10 +145,10 @@ All admin endpoints require the requesting user to have the necessary role if ro
 |---|---|---|
 | `GET` | `/api/v1/admin/llm/providers` | List all available provider type names. |
 | `GET` | `/api/v1/admin/llm/providers/{name}/extra-params` | Get extra parameter descriptors for a provider type. |
-| `GET` | `/api/v1/admin/llm` | List all LLM provider configurations for the current tenant. |
-| `POST` | `/api/v1/admin/llm` | Create a new LLM provider configuration. |
-| `PUT` | `/api/v1/admin/llm/{id}` | Update a provider configuration. |
-| `DELETE` | `/api/v1/admin/llm/{id}` | Delete a provider configuration. |
+| `GET` | `/api/v1/admin/llm/provider-conf` | List all LLM provider configurations for the current tenant. |
+| `POST` | `/api/v1/admin/llm/provider-conf` | Create a new LLM provider configuration. |
+| `PUT` | `/api/v1/admin/llm/provider-conf/{id}` | Update a provider configuration. |
+| `DELETE` | `/api/v1/admin/llm/provider-conf/{id}` | Delete a provider configuration. |
 
 ### Prompts — `/api/v1/admin/prompts`
 
@@ -108,7 +160,32 @@ All admin endpoints require the requesting user to have the necessary role if ro
 | `GET` | `/api/v1/admin/prompts/{id}` | Get a prompt by ID. |
 | `GET` | `/api/v1/admin/prompts/{id}/render` | Render a prompt with a payload (body: `Map<String, Object>`). |
 | `GET` | `/api/v1/admin/prompts/{id}/usages` | Get usage statistics for a prompt. |
+| `GET` | `/api/v1/admin/prompts/categories` | List distinct Quick Prompt categories currently in use. |
 | `DELETE` | `/api/v1/admin/prompts/{id}` | Delete a prompt. |
+
+### Scripts — `/api/v1/admin/scripts`
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/api/v1/admin/scripts` | List all scripts for the current tenant. |
+| `GET` | `/api/v1/admin/scripts/{id}` | Get a script by ID. |
+| `POST` | `/api/v1/admin/scripts` | Create a script (name only). Returns `409` if the name exists. |
+| `PUT` | `/api/v1/admin/scripts/{id}` | Update the draft content. |
+| `POST` | `/api/v1/admin/scripts/{id}/scan` | Run the LLM security scan. |
+| `POST` | `/api/v1/admin/scripts/{id}/publish` | Publish a certified draft. |
+| `POST` | `/api/v1/admin/scripts/{id}/force-publish` | Publish the draft without scanning. |
+| `DELETE` | `/api/v1/admin/scripts/{id}/draft` | Discard the draft. |
+| `DELETE` | `/api/v1/admin/scripts/{id}` | Delete the script (`204 No Content`). |
+
+### MCP servers — `/api/v1/admin/mcp`
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/api/v1/admin/mcp/mcp-conf` | List MCP server configurations for the current tenant. |
+| `GET` | `/api/v1/admin/mcp/mcp-conf/{id}` | Get an MCP server configuration. |
+| `POST` | `/api/v1/admin/mcp/mcp-conf` | Register an MCP server. |
+| `PUT` | `/api/v1/admin/mcp/mcp-conf/{id}` | Update an MCP server configuration. |
+| `GET` | `/api/v1/admin/mcp/mcp-conf/{id}/tools` | List the tools exposed by an MCP server (connection test). |
 
 ### Goals — `/api/v1/admin/goals`
 
@@ -124,8 +201,8 @@ All admin endpoints require the requesting user to have the necessary role if ro
 
 | Method | Path | Description |
 |---|---|---|
-| `GET` | `/api/v1/admin/users` | List users with conversation statistics (paginated). |
-| `GET` | `/api/v1/admin/users/{userId}` | Get details for a specific user. |
+| `GET` | `/api/v1/admin/users/statistics` | List users with conversation, token, and request statistics. |
+| `GET` | `/api/v1/admin/users/details?userId={id}` | Get details (stats + conversations) for a specific user. |
 
 ### Conversations (admin) — `/api/v1/admin/conversations`
 
@@ -147,7 +224,7 @@ All admin endpoints require the requesting user to have the necessary role if ro
 | `GET` | `/api/v1/admin/stats/timeseries` | Activity time series. Query param: `interval` (DAY, HOUR, WEEK, MONTH). |
 | `GET` | `/api/v1/admin/stats/llm-distribution` | LLM model usage distribution. |
 | `GET` | `/api/v1/admin/stats/feature-adoption` | Feature adoption statistics. |
-| `GET` | `/api/v1/admin/stats/top-prompts` | Most frequently used prompts. |
+| `GET` | `/api/v1/admin/stats/top-prompts-time-saved` | Top prompts by cumulative time saved. |
 
 ### Templating — `/api/v1/admin/templating`
 
@@ -182,6 +259,7 @@ The OpenAPI spec is at `/v3/api-docs`. Both paths are served as public in the de
 ## Related pages
 
 - [Admin panel overview](../admin/admin_panel_overview.md)
+- [Managing scripts](../admin/managing_scripts.md)
 - [Conversations and requests](../understanding/conversations_and_requests.md)
 - [Prompts and templating](../understanding/prompts_and_templating.md)
 - [Authentication and gateway](../understanding/authentication.md)

@@ -1,0 +1,50 @@
+/**
+ * qp-loader — [Order 3]
+ *
+ * Loads the Quick Prompt web-component bundle (script + style) from the
+ * gateway. The connector (qp-connector) initializes lazily the first time
+ * the panel is toggled open, so the callback below stays empty.
+ *
+ * Requires: consts → GATEWAY_ENDPOINT.
+ */
+
+function loadQuickPrompt(endpointOrUrls, onReady) {
+    var jsUrl, cssUrl;
+
+    if (typeof endpointOrUrls === 'string') {
+        var base = endpointOrUrls.replace(/\/+$/, '');
+        jsUrl = base + '/api/web-components/quick-prompt/script';
+        cssUrl = base + '/api/web-components/quick-prompt/style';
+    } else {
+        jsUrl = endpointOrUrls.js;
+        cssUrl = endpointOrUrls.css;
+    }
+
+    if (cssUrl && !document.querySelector('link[href="' + cssUrl + '"]')) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = cssUrl;
+        document.head.appendChild(link);
+    }
+
+    var existing = document.querySelector('script[src="' + jsUrl + '"]');
+    if (existing) {
+        onReady();
+        return;
+    }
+
+    var script = document.createElement('script');
+    script.src = jsUrl;
+    script.async = true;
+    script.onload = function () { onReady(); };
+    script.onerror = function (err) { console.error('[QuickPrompt] Failed to load script:', jsUrl, err); };
+    document.head.appendChild(script);
+}
+
+try {
+    loadQuickPrompt(GATEWAY_ENDPOINT, function () {
+        // Bundle ready — the connector initializes on first toggle.
+    });
+} catch {
+    // nothing
+}

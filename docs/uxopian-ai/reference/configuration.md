@@ -270,6 +270,26 @@ MCP (Model Context Protocol) boot-time configuration. Starting with 2026.0.0-ft3
 | `mcp.sse.url` | `MCP_SSE_URL` | Legacy boot-time MCP SSE endpoint URL. Prefer the admin UI for runtime management. |
 | `mcp.client.name` | — | MCP client name presented to the server. |
 
+## script-scan.yml
+
+Configuration for the LLM-based security scan applied to admin-managed scripts (see [Managing scripts](../admin/managing_scripts.md)). Added in 2026.0.0-ft4. The file is imported optionally, so its absence is non-fatal; without a configured provider, scripts can still be created, edited, and force-published, but the **Scan & publish** action is unavailable.
+
+| Key | Env variable | Default | Description |
+|---|---|---|---|
+| `script.scan.llm-provider-id` | `SCRIPT_SCAN_LLM_PROVIDER` | (empty) | ID of a configured LLM provider used to run the scan. Required to enable scanning. |
+| `script.scan.llm-model` | `SCRIPT_SCAN_LLM_MODEL` | (empty) | Model used for the scan; falls back to the provider's default model when blank. |
+| `script.scan.prompt` | — | (built-in) | The security-review prompt sent to the model. Override to customize the scan policy. |
+
+Example:
+
+```yaml
+script:
+  scan:
+    llm-provider-id: ${SCRIPT_SCAN_LLM_PROVIDER:}
+    llm-model: ${SCRIPT_SCAN_LLM_MODEL:}
+    # prompt: (built-in security-review prompt; override to customize)
+```
+
 ## gateway-application.yaml
 
 Gateway (uxopian-gateway) configuration.

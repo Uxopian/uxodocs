@@ -4,7 +4,7 @@ title: "Uxopian AI release notes - 2026.0.0-ft3"
 date: 2026-04-21
 version: "2026.0.0-ft3"
 major_version: "2026"
-latest: true
+latest: false
 description: "Alfresco integration, Spring Boot 4 / Jackson 3 upgrade, MCP server admin UI, redesigned UX, and automatic conversation titles."
 ---
 

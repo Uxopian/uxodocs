@@ -1,47 +1,72 @@
-function getComponentContext() {
-  var flowerId = JSAPI.get().getLastComponentFormAPI().getComponent().getId();
-  var arenderId = arenderJSAPI.getCurrentDocumentId();
-  return InputBuilder.textAsSystem(`
-    /* Contextual Data */
-    {
-      flowerdocId: {
-        value: "${flowerId}",
-        description: "The ID of the Flowerdoc document"
-      },
-      arenderDocId: {
-        value: "${arenderId}",
-        description: "The ID of the Arender document (BASE64 encoded)"
-      }
-    }
-  `);
-}
+function createAIAction({ label, onExecute, icon = "fa-solid fa-robot" }) {
+  const jsapi = JSAPI.get();
+  const labelsAPI = jsapi.getLabelsAPI();
+  const actionFactory = jsapi.getActionFactoryAPI();
 
-function openChatWindow(requestPayload) {
-  fetch(GATEWAY_ENDPOINT)
-    .then(() =>
-      createChat({
-        endpoint: UXO_AI_ENDPOINT,
-        wsEndpoint: WS_UXO_AI_ENDPOINT,
-        request: requestPayload,
-      }),
-    )
-    .catch((error) => console.error("Failed to open chat:", error));
-}
-
-function registerHeaderAction({ label, icon, onExecute }) {
-  var jsapi = JSAPI.get();
-  jsapi.getLabelsAPI().setLabels([label]);
-  jsapi.registerForComponentChange((api) => {
-    var resolvedLabel = jsapi.getLabelsAPI().getLabel(label.name);
-    var headerActions = api.getActions().getHeaderActions();
-    var actionItem = jsapi
-      .getActionFactoryAPI()
-      .buildMenu(
-        `ai-action-${label.name}`,
-        resolvedLabel,
-        icon || "fa-solid fa-robot",
-        onExecute,
+  function setPromptLabels() {
+    if (!label || !label.name) {
+      console.error(
+        "The 'label' parameter with a 'name' property is required."
       );
-    headerActions.add(actionItem);
-  });
+      return;
+    }
+    labelsAPI.setLabels([label]);
+  }
+
+  function addAIActionToHeader(actions) {
+    const resolvedLabel = labelsAPI.getLabel(label.name);
+    if (!resolvedLabel) return;
+
+    const aiAction = actionFactory.buildMenu(
+      "ai-action-" + label.name,
+      resolvedLabel,
+      icon,
+      onExecute
+    );
+
+    actions.add(aiAction);
+  }
+
+  function registerActionOnComponentChange() {
+    jsapi.registerForComponentChange((api, results, phase) => {
+      const headerActions = api.getActions().getHeaderActions();
+      addAIActionToHeader(headerActions);
+    });
+  }
+
+  if (typeof onExecute !== "function") {
+    console.error("The 'onExecute' parameter must be a function.");
+    return;
+  }
+
+  setPromptLabels();
+  registerActionOnComponentChange();
+}
+
+function contextualInput() {
+  return InputBuilder.textAsSystem(`
+          /*  additional data */
+          {
+          flowerdocId: {
+            value: ${JSAPI.get()
+              .getLastComponentFormAPI()
+              .getComponent()
+              .getId()},
+            description: "The ID of the Flowerdoc document",
+          },
+          arenderDocId: {
+            value: ${arenderJSAPI.getCurrentDocumentId()},
+            description:
+              "The ID of the Arender document. Do not decode BASE64 value.",
+          }}`);
+}
+
+function openChatComp(request) {
+  fetch(GATEWAY_ENDPOINT).then(() =>
+    createChat({
+      endpoint: UXO_AI_ENDPOINT,
+      wsEndpoint: WS_UXO_AI_ENDPOINT,
+      request: request,
+    })
+  );
 }
