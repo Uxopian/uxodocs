@@ -75,8 +75,8 @@ function generateReleases() {
             }
         }
 
-        // Determine major version (2 or 2025)
-        const majorVersion = version.startsWith('2025') ? '2025' : '2';
+        // Determine major version: year-based versions (2025, 2026, ...) self-classify, older 2.x => "2"
+        const majorVersion = /^20\d\d/.test(version) ? version.split('.')[0] : '2';
 
         // Check if there's an upgrade-notes.md file
         const upgradeNotesPath = path.join(RELEASE_NOTES_DIR, versionDir, 'upgrade-notes.md');

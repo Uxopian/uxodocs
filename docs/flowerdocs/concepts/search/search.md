@@ -75,9 +75,7 @@ The full-text search function is based on the OpenSearch search function, with t
     - Searching for “\{word A\} OR \{word B\}” retrieves documents containing word A, word B or both words, but does not retrieve documents containing neither word.
     - Searching for “\{word A\} AND NOT \{word B\}” retrieves documents containing word A, but not word B.
 
-The following characters must not be used in full-text searches: `+`, `-`, `=`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `~`, `*`, `?`, `:`, `\`, `/`
-
-To find a document containing the name "John-Peter", use the search "John Peter".
+The following characters must not be used in full-text searches: `+`, `=`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `~`, `*`, `?`, `:`, `\`, `/`
 
 :::info
 Full-text search works only on documents whose content has been indexed beforehand. The content is indexed using a [operation subscription](/docs/flowerdocs/config/core/operation/handlers/fulltext).

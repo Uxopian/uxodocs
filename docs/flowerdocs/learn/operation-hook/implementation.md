@@ -92,7 +92,7 @@ spring.application.name=modify-hook        // 1
 server.port=7777                            // 2
 server.servlet.context-path=/modify        // 3
 
-ws.url=http://localhost:8081/core/services  // 5
+ws.url=http://localhost:8081/core/rest  // 5
 
 internal.realm.users[0].id=<user>          // 7
 internal.realm.users[0].password=<password> // 8

@@ -12,32 +12,30 @@ content_hash: 05c91c12ff27131b716e6989871ed19752360f881b7824e253a3c1541e3cdc85
 
 ## Principle
 
-The [Operation API](https://flowerdocs.com/javadocs/operation/index.html) reacts to the execution of operations within **FlowerDocs Core**. A **operation** is an action performed by a user on a component.
+The Operation API reacts to the execution of operations within **FlowerDocs Core**. An **operation** is an action performed by a user on a component.
 
-The **operations managers** (or [`com.flower.docs.operation.api.OperationHandler`](#javadoc-com-flower-docs-operation-api-OperationHandler)) are called when an operation is executed to react to it and apply specific processing. They can be called before (_pre-treatment_) or after (_post-processing_) the execution of the operation.
+The **operations managers** (or `com.flower.docs.operation.api.OperationHandler`) are called when an operation is executed to react to it and apply specific processing. They can be called before (_pre-processing_) or after (_post-processing_) the execution of the operation.
 
 <br/>
 The execution of an *operation* can be divided into three phases:
 
-1 . The **OperationHandler** recorded in the pre-processing phase are called
-
-2. The**Operation** is executed
-
-3. The **OperationHandler** recorded in the pre-processing phase are called
+1. The **OperationHandler** recorded in the pre-processing phase are called
+2. The **Operation** is executed
+3. The **OperationHandler** recorded in the post-processing phase are called
 
 :::info
 The following steps may be interrupted by an exception raised by an operation handler, if this behavior is enabled.
 :::
 
-## Subscription
+## Registration
 
-In order for an operation manager to react to the execution of an operation, it must be subscribed to it. Subscribing to the execution of an operation involves creating a configuration document of class `OperationHandlerRegistration`.
+In order for an operation manager to react to the execution of an operation, it must be registered. Registering an operation manager involves creating a configuration document of class `OperationHandlerRegistration`.
 
-The subscription defines the type of operations to which the manager must react by configuring a (creation, update...) and a .
+The registration defines the type of operations to which the manager must react by configuring a (creation, update...) and a .
 Its (_before_ or _after_) indicates whether the manager should react before or after execution of the operation.
 
 <br/>
-In addition, the subscription determines whether the reaction to the execution of an operation is synchronous or asynchronous (executed in another thread so as not to block the operation performed by the user).
+In addition, the registration determines whether the reaction to the execution of an operation is synchronous or asynchronous (executed in another thread so as not to block the operation performed by the user).
 
 <br/>
 To limit the number of calls, it is possible to define an execution filter that FlowerDocs will resolve to trigger or not the call to the operation manager depending on the context.
@@ -49,18 +47,16 @@ The fields on which filters can be applied depend on the  chosen. Here is an exh
 - **Task class** : identifier, process identifier
 - **Others** : identifier
 
-Via the administration interface, it is possible to select other fields, notably on administration components: they will not be taken into account.
+Via the administration interface, it is possible to select other fields (for example on administration components), but they will not be taken into account.
 
-## Operations Manager
+## OperationHandler
 
-An **operations Manager** (or [`com.flower.docs.operation.api.OperationHandler`](#javadoc-com-flower-docs-operation-api-OperationHandler)) is a code fragment called when an operation is executed.
-They can be divided into three categories:
+An **OperationHandler** is a code fragment called when an operation is executed.
+They can be divided into two categories:
 
-- [native](/docs/flowerdocs/config/core/operation/handlers/drools) : provided natively by **FlowerDocs Core** and executed within its JVM
+- native: provided natively by **FlowerDocs Core** and executed within its JVM, either as a [Drools decision table](/docs/flowerdocs/config/core/operation/handlers/drools) or a [Script](/docs/flowerdocs/config/core/operation/handlers/script) based on GraalJS
 
-- specific: developed specifically and added as libraries to **FlowerDocs Core** (_on-premise only_)
-
-- [hooks](/docs/flowerdocs/config/core/operation/handlers/hook): exposed as REST web services
+- [RestOperationHandler](/docs/flowerdocs/config/core/operation/handlers/rest-operation-handler): exposed as REST web services
 
 <br/>
-To contextualize their execution, an object [`com.flower.docs.operation.api.OperationContext`](#javadoc-com-flower-docs-operation-api-OperationContext) is provided as input. The context can be used to retrieve information concerning the execution of the operation, such as the component concerned or the modifications made.
+To contextualize their execution, an object `com.flower.docs.operation.api.OperationContext` is provided as input. The context can be used to retrieve information concerning the execution of the operation, such as the component concerned or the modifications made.

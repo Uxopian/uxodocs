@@ -24,18 +24,18 @@ FlowerDocs must only be used in HTTPS.
 
 Installing a FlowerDocs platform requires Linux servers. FlowerDocs is supported and qualified on the Amazon Linux 2023 system.
 
-\*Any other Linux system is deemed to be functional if it can install the required version of Java.
+*Any other Linux system is deemed to be functional if it can install the required version of Java.*
 
 ## Application components
 
-Java Runtime 11 must be installed to run FlowerDocs.
+FlowerDocs requires **JDK {{javaVersion}} LTS**.
 
 This documentation does not cover the installation of the ARender rendition server (version {{arenderVersion}}). It must therefore be installed beforehand and be accessible via HTTP or HTTPS protocol from **FlowerDocs GUI**, **FlowerDocs Core** and **ARender HMI** (version {{arenderVersion}}).
 
 ### OpenSearch and Redis
 
 You need to install OpenSearch and Redis, which are prerequisites for FlowerDocs to work properly.
-OpenSearch and Redis versions corresponding to FlowerDocs versions are indicated at the beginning of the release notes.
+FlowerDocs requires **OpenSearch {{osVersion}}** and **Redis {{redisVersion}}**. The exact versions for each FlowerDocs release are also indicated at the beginning of the release notes.
 
 ## Sizing
 
@@ -51,9 +51,9 @@ The most important factors are the number of concurrent users and the number of 
 
 We recommend isolating each component on separate machines:
 
-- **FlowerDocs Core**
-- **FlowerDocs GUI**
-- **ARender HMI**
+- FlowerDocs Core
+- FlowerDocs GUI
+- ARender HMI
 - ARender Rendition
 - Redis
 - OpenSearch

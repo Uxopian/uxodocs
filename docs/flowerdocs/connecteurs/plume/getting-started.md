@@ -7,6 +7,7 @@ last_update:
   author: CI/CD Bot
 content_hash: c9a183462081b6dcdc3a2dd2efbb35887888089de530f8e0b9db04dca343adbd
 ---
+👑 Premium option
 
 Plume is an ARender plugin that lets you write emails from your WEB browser.
 

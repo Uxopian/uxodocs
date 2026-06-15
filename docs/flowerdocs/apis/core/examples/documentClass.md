@@ -142,7 +142,6 @@ curl -X POST "<CORE_HOST>/rest/documentclass" \
             "unit": "MONTH"
         },
         "category": "DOCUMENT",
-        "active": false,
         "technical": false
     }
 ]'
@@ -252,7 +251,6 @@ curl -X POST "<CORE_HOST>/rest/documentclass/<IDS>" \
             "unit": "MONTH"
         },
         "category": "DOCUMENT",
-        "active": false,
         "technical": false
     }
 ]'

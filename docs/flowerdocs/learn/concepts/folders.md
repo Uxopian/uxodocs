@@ -31,11 +31,3 @@ In order to restrict access to, or modifications of, a document's content, a num
 Some actions are only available if the user has write access to the document. To do this, it must have the `UPDATE` permission and have reserved the folder (see [Reservation](/docs/flowerdocs/concepts/reservations).
 
 - Attach the folder to another folder: `ATTACH`
-
-<br/>
-:::info
-To go further, consult the Javadoc:
-
-- [Folder](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/folder/Folder.html)
-- [Folder classes](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/folderclass/FolderClass.html)
-  :::

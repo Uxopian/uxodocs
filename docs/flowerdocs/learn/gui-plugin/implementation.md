@@ -46,7 +46,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.7.18</version>
+				<version>4.0.6</version>
 				<executions>
 					<execution>
 						<goals>
@@ -104,7 +104,7 @@ To configure the application, this `application.properties` file in the `src/mai
 spring.application.name=secured-gui-plugin
 server.port=2802
 server.servlet.context-path=/secured
-ws.url=http://localhost:8081/core/services
+ws.url=http://localhost:8081/core/rest
 ```
 :::info
 The other configuration options offered by the Spring Boot framework can also be used.

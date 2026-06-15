@@ -45,4 +45,4 @@ To facilitate the development of scripts using the objects provided by FlowerDoc
 
 ## Restrictions
 
-For security reasons, a specific class loader is used to execute the scripts in the JVM. Access to certain classes is therefore restricted. This can be disabled using the `secured.classloader.enabled=false` property. If required, certain classes or packages can be defined as secured using the `secured.classloader.whitelist.additional` property.
+For security reasons, a specific class loader is used to execute the scripts in the JVM. Access to certain classes is therefore restricted. If required, certain classes or packages can be defined as secured using the `secured.classloader.whitelist.additional` property.

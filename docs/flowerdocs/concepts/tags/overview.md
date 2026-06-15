@@ -14,7 +14,7 @@ content_hash: 4ac810de8fae5d16cb9f99884dc51389f36639d29c5d82c14e6509f4cb6090f4
 This metadata can be of different types to ensure consistency of the data stored in FlowerDocs.
 
 <br/>
-A [tag class](https://flowerdocs.com/javadocs/domain/com/flower/docs/domain/tagclass/TagClass.html) defines the typology and characteristics of a tag within a scope. 
+A tag class defines the typology and characteristics of a tag within a scope. 
 This tag class applies to all tags associated with components, and is made up of the following elements:
 
 - `id`: technical tag identifier
