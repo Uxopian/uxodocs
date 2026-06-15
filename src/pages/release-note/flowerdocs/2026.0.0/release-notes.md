@@ -105,8 +105,8 @@ The configuration of data displayed in card mode (thumbnails) is now independent
 
 FlowerDocs 2026.0.0 significantly modernizes its technical stack to ensure the security, maintainability, and scalability of the platform:
 
-- **Spring Boot 4 / Spring Framework 6**: major application framework migration
-- **OpenSearch 3.x**: search engine version upgrade
+- **Spring Boot 4 / Spring Framework 7**: major application framework migration
+- **OpenSearch 3.6.0**: search engine version upgrade
 - **AWS SDK 2.x**: S3 storage SDK migration
 - **Plume**: update for Spring Boot 4 compatibility
 - **Zuul replaced by Spring Cloud Gateway** for plugin routing
