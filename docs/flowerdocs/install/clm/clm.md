@@ -31,7 +31,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar
 To interact with FlowerDocs, you need to define the URL for accessing web services, as well as login details:
 
 ```properties
-java -jar flower-docs-clm-{{version}}-bundle.jar --ws.url=http://<server>:<port>/<context>/services	--password=<password>
+java -jar flower-docs-clm-{{version}}-bundle.jar --ws.url=http://<server>:<port>/<context>/rest	--password=<password>
 ```
 
 _The default user name is `system`, which can be changed by adding the `--USER=<user>` parameter._
@@ -45,7 +45,7 @@ The `clm.batch.size=1` parameter sets the batch size for processing jobs in CLM.
 **Usage example :**
 
 ```properties
-java -jar flower-docs-clm-{{version}}-bundle.jar update --ws.url=http://<server>:<port>/<context>/services --clm.batch.size=1 […]
+java -jar flower-docs-clm-{{version}}-bundle.jar update --ws.url=http://<server>:<port>/<context>/rest --clm.batch.size=1 […]
 ```
 
 :::info

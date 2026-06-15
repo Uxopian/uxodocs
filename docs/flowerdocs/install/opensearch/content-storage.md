@@ -42,11 +42,12 @@ s3.region=<region AWS>
 
 **Amazon S3 client configuration**
 
-| Property           | Default value | Description                                                   |
-| ------------------ | ------------- | ------------------------------------------------------------- |
-| s3.max.connections | 100           | Maximum number of open HTTP connections                       |
-| s3.max.error.retry | 2             | Maximum number of retries for replayable requests (error 5xx) |
-| s3.socket.timeout  | 100000        | Waiting time (in ms) for data to be transferred               |
+| Property               | Default value | Description                                                   |
+| ---------------------- | ------------- | ------------------------------------------------------------- |
+| s3.max.connections     | 150           | Maximum number of open HTTP connections                       |
+| s3.connection.timeout  | 30000         | Waiting time (in ms) to establish a connection                |
+| s3.socket.timeout      | 100000        | Waiting time (in ms) for data to be transferred               |
+| s3.max.error.retry     | 2             | Maximum number of retries for replayable requests (error 5xx) |
 
 By default, the file containing the access and secret key pair must be located in the `${USER_HOME}/.aws/credentials` folder, and the `default` profile used.
 

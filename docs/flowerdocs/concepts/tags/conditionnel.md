@@ -11,7 +11,7 @@ content_hash: 570cdf64ea92de9f00ca613d249e2f676d91b25464e4c15b0c0f0ab7dd3333c4
 
 The `CONDITIONAL` type is used to define conditions on the various choices (or sets of choices) offered to the user in indexing or search forms.
 
-Objects [`com.flower.docs.domain.tagclass.ConditionalAllowedValue`](#javadoc-com-flower-docs-domain-tagclass-ConditionalAllowedValue) supporting multiple conditions can be defined for a given choice. In this case, all that's needed is for one condition to be satisfied for the user to be offered a choice.
+Objects `com.flower.docs.domain.tagclass.ConditionalAllowedValue` supporting multiple conditions can be defined for a given choice. In this case, all that's needed is for one condition to be satisfied for the user to be offered a choice.
 
 # Tag conditions
 

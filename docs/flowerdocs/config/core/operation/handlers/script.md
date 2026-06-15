@@ -250,7 +250,3 @@ throw ExceptionBuilder.createTechnicalException(TechnicalErrorCode.T00008);
 :::info
 To manually define this operation handler, the `com.flower.docs.core.tsp.operation.script.ScriptOperationHandler` identifier can be used as the value of the `OperationHandler` tag.
 :::
-
-:::warning
-The legacy identifier `com.flower.docs.bpm.core.operation.ScriptOperationHandler` is **deprecated** since version 2025.0. Use the identifier above instead. When migrating scripts from the legacy handler, replace `equals()` with `==` for string comparisons and `Date.now()` with `String.valueOf(new Date().getTime())`.
-:::

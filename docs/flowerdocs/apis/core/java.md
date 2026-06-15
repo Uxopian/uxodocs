@@ -12,7 +12,7 @@ content_hash: 7a37399e3c52663316233e84b403403caf2653cf49531cda538438568d5d1a5d
 :::info
 The Java client lets you interact with **FlowerDocs Core** through the web services on display.
 
-This documentation is based on the use of [Maven](https://maven.apache.org/) and [Spring Boot 2.7.18] (https://spring.io/projects/spring-boot).
+This documentation is based on the use of [Maven](https://maven.apache.org/) and [Spring Boot 4.0.6](https://spring.io/projects/spring-boot).
 :::
 
 # Set-up
@@ -80,7 +80,7 @@ _These properties can either be passed in the Spring `application.properties` co
 
 ## Token generation
 
-A user token can also be dynamically generated using the `AuthenticationService` service, which exposes the [login](https://documentation.flowerdocs.com/javadocs/service/com/flower/docs/service/api/security/AuthenticationService.html) method :
+A user token can also be dynamically generated using the `AuthenticationService` service, which exposes the login method :
 
 ```java
 @Autowired
@@ -124,9 +124,6 @@ LOGGER.info("Found {} documents", response.getFound());
 The configuration of log levels is identical to that of FlowerDocs: [Logs](/docs/flowerdocs/config/exploit/logs)
 :::
 
-# Define protocol
+# Protocol
 
-By default FlowerDocs APIs are using SOAP protocol.
-<br/>
-However it is possible to choose using REST APIs configuring your application.
-Add a property `rest.client.enabled` with value `true` in a _`application.properties`_ file.
+FlowerDocs APIs communicate with **FlowerDocs Core** over REST.
