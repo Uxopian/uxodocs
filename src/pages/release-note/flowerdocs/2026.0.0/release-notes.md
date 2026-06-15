@@ -203,8 +203,4 @@ This version includes the migration to Spring Boot 4 and Spring Framework 6, alo
 - Document template — Data automatically populated from FlowerDocs data is not visible in the viewer. Once the document is downloaded, the data is present.
 - Copy — Unable to access the copied mail from the success notification.
 
-## Downloads
-
-<!-- TODO: add download links once deliverables are published -->
-
 <FlowerDocsDownloads version="2026.0.0" arenderVersion="2026.0.1" />
