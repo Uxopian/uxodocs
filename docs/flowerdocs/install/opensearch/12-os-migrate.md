@@ -47,10 +47,10 @@ java -Dopensearch.uris=http://<target-os>:9200 \
      --target-scope=FD_MIGRATION_TEST
 ```
 
-That is the whole command for the standard case — everything else has a sensible default.
+That is the whole command for the standard case : everything else has a sensible default.
 
 :::tip Always start with a dry run
-We **highly recommend** running a dry run before launching the real migration. Add `--dry-run=true` to the exact command you intend to use: the tool then connects to both clusters, counts the documents per index and produces the validation report **without writing anything** to the target. This lets you confirm connectivity and credentials, preview the per-scope document counts, and spot orphan documents or out-of-scope indices up front — so the real run holds no surprises. Once the dry-run report looks right, re-run the same command without `--dry-run` to perform the migration.
+We **highly recommend** running a dry run before launching the real migration. Add `--dry-run=true` to the exact command you intend to use: the tool then connects to both clusters, counts the documents per index and produces the validation report **without writing anything** to the target. This lets you confirm connectivity and credentials, preview the per-scope document counts, and spot orphan documents or out-of-scope indices up front, so the real run holds no surprises. Once the dry-run report looks right, re-run the same command without `--dry-run` to perform the migration.
 
 ```bash
 java -Dopensearch.uris=http://<target-os>:9200 \
@@ -90,7 +90,7 @@ We **strongly recommend** running with `--detailed-report=true`. The per-class b
 
 ## Authentication
 
-Authentication is HTTP Basic and is independent on each side — only set what you need.
+Authentication is HTTP Basic and is independent on each side : only set what you need.
 
 | Parameter                              | When to use                       |
 | -------------------------------------- | --------------------------------- |
@@ -114,9 +114,9 @@ Set any of these to `false` or to a specific value only if your environment requ
 
 The tool produces three things:
 
-- **Console log** — live progress (bootstrap, mappings, reindex submissions, polling, validation).
-- **Report file** — `migration-report-<scope>-<timestamp>.txt`, written next to the jar.
-- **Process exit code** — non-zero on any validation issue or task failure.
+- **Console log** : live progress (bootstrap, mappings, reindex submissions, polling, validation).
+- **Report file** : `migration-report-<scope>-<timestamp>.txt`, written next to the jar.
+- **Process exit code** : non-zero on any validation issue or task failure.
 
 # Reading the validation report
 
@@ -168,19 +168,19 @@ How to read it:
 
 | Line                              | Means                                                            |
 | --------------------------------- | ---------------------------------------------------------------- |
-| `loginhistory   tgt=skipped`      | Login history was not opted in — expected, not a failure         |
-| `report   [out-of-scope]`         | An index the tool does not know about — listed for visibility, not migrated |
+| `loginhistory   tgt=skipped`      | Login history was not opted in : expected, not a failure         |
+| `report   [out-of-scope]`         | An index the tool does not know about : listed for visibility, not migrated |
 | `Orphan docs on source: ...`      | Documents whose class no longer exists. Re-run with `--reindex-orphans=true` to migrate them |
-| `count mismatch ( ... delta=3)`   | The target is short of the source by `delta` documents — investigate before continuing |
+| `count mismatch ( ... delta=3)`   | The target is short of the source by `delta` documents : investigate before continuing |
 | `RESULT: N OK, K issue(s)`        | At least one index needs investigation before deeming the migration done |
 
 # Production checklist
 
-1. **Target cluster prep** — add the source `host:port` to `reindex.remote.allowlist` (restart if added).
-2. **Source cluster prep** — make it reachable from the target; pass source credentials if secured.
-3. **Index settings tuning** — `--tune-settings=true` is the default (refresh + replicas disabled during the reindex, restored after). No manual `curl` step is needed.
-4. **Time expectations** — production-scale timing depends heavily on the cluster (shard count, network between source and target, hardware). The dominant cost is the largest single source class — watch it in the live log, and run `--dry-run` first for a count preview before committing.
-5. **Post-migration validation** — open `migration-report-*.txt`, expect `RESULT: SUCCESS`, investigate any `issue(s):` block, then smoke-test the application (log in, search, open a document). If anything fails, drop the target indices and re-run — the tool is idempotent.
+1. **Target cluster prep** : add the source `host:port` to `reindex.remote.allowlist` (restart if added).
+2. **Source cluster prep** : make it reachable from the target; pass source credentials if secured.
+3. **Index settings tuning** : `--tune-settings=true` is the default (refresh + replicas disabled during the reindex, restored after). No manual `curl` step is needed.
+4. **Time expectations** : production-scale timing depends heavily on the cluster (shard count, network between source and target, hardware). The dominant cost is the largest single source class, so watch it in the live log, and run `--dry-run` first for a count preview before committing.
+5. **Post-migration validation** : open `migration-report-*.txt`, expect `RESULT: SUCCESS`, investigate any `issue(s):` block, then smoke-test the application (log in, search, open a document). If anything fails, drop the target indices and re-run, since the tool is idempotent.
 
 # Re-running a migration
 
