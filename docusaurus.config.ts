@@ -258,9 +258,18 @@ const config: Config = {
                 highlightSearchTermsOnTargetPage: true,
             },
         ],
+        require.resolve("docusaurus-plugin-image-zoom"),
     ],
 
     themeConfig: {
+        zoom: {
+            selector: ".markdown img",
+            background: {
+                light: "rgba(245, 246, 248, 0.95)",
+                dark: "rgba(10, 10, 12, 0.95)",
+            },
+            config: { margin: 24 },
+        },
         colorMode: {
             defaultMode: "dark",
             respectPrefersColorScheme: false,
