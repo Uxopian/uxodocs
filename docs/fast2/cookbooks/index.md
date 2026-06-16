@@ -17,3 +17,9 @@ Here are some examples of short use-cases with Fast2, covering APIs management w
 This section will particularly be insightful for custom module development.
 
 You will find here boilerplate code snippets, as well as real-life examples of task configuration for challenges you might take up, one day.
+
+:::tip Cookbooks vs. Playbook
+Cookbooks are **tactical**: each one shows you *how to implement* a specific thing — a task config, a code snippet, an API call. If you are at the keyboard building a pipeline, you are in the right place.
+
+If instead you are still deciding *which approach to take* — which extraction strategy fits a live source, how to run a delta migration, where to deploy Fast2 — that is a **strategy** question, and it lives in the **[Playbook](../playbook/)**. A useful rule of thumb: choose your approach in the Playbook, then build it with the Cookbooks.
+:::
