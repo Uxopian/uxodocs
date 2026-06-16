@@ -42,7 +42,7 @@ At runtime, Fast2 follows a **broker–worker** model. The **broker** is the sin
     light: require('../assets/img/architecture_light.png').default,
     dark: require('../assets/img/architecture_dark.png').default,
   }}
-  style={{width: '100%', maxWidth: '560px', display: 'block', margin: '1.5rem auto'}}
+  style={{width: '100%', maxWidth: '560px', display: 'block', margin: '1.5rem auto', borderRadius: '12px', boxShadow: '0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}}
 />
 
 ## <i className="fas fa-shopping-basket"></i> Fast2 objects
