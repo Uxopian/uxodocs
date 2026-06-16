@@ -15,58 +15,34 @@ import ThemedImage from '@theme/ThemedImage';
 
 # What you need to know before committing to Fast2
 
-## Basic jargon
+## Glossary
 
-**Source**
+Fast2 has its own vocabulary, and these terms come up throughout the documentation. Here is what each one means.
 
-A source is a Fast2 task whose role is to gather the documents or items to migrate. As they are identified, the source converts them into punnets.
-
-**Punnet**
-
-The Punnet is the pivot format which is used for data mapping, content conversions and folder management. This is the migration entity, processed and then forwarded by the workflow tasks.
-
-**Task**
-
-A task is either an extract-, transform- or injection-step that composes a workflow. Each task can be configured to match the user's needs. Once all tasks are completed in the specific order, the migration is over.
-
-**Map**
-
-A workflow (aka _"Map"_) is a succession of tasks, where the output of the ones is the input of the following others. Each task can be considered as a step of the workflow.
-
-**Campaign**
-
-A campaign is the perimeter where a map is executed (once or several times). Different campaigns can either be cumulative or independent.
-
-**Worker**
-
-The Worker is the punnet processor, applying the changes onto the punnet, according to how the tasks have been configured by the user.
-
-They are waiting in silence to do their job. When a punnet needs to be processed by a task, the broker triggers the assigned worker.
-
-If the workload is too important, you can manually add workers to speed up processing.
-
-**Broker**
-
-The broker is the trump card of the migration. It is basically the workflow orchestrator, in charge of database communication, sending punnets to the worker(s) for them to process the operations.
-
-Scheduling, orchestrating or even managing queues : the broker is everywhere.
-
-His first job is to handle the workers. Worker coordination is a key point in terms of performance, knowing that there may be a multitude of them.
-
-In addition, the broker ensures the persistence and traceability of the data carried out by the punnets into the database, where logs, data and errors and more are stored.
+| Term | Definition |
+|------|------------|
+| **Source** | A Fast2 task whose job is to gather the documents or items to migrate. As it identifies them, it converts each one into a *punnet*. |
+| **Punnet** | The pivot format that carries a single migration entity — documents, metadata, content and folders — through the workflow. Everything Fast2 processes travels as a punnet. |
+| **Task** | A single extract, transform or inject step in a workflow. Each task is configured to the user's needs; the migration is complete once every task has run, in order. |
+| **Map** *(workflow)* | An ordered chain of tasks, where the output of one task is the input of the next. Each task is a step of the workflow. |
+| **Campaign** | The execution of a map over a defined perimeter. A campaign can run once or several times, and successive runs can be cumulative or independent. |
+| **Worker** | The punnet processor. It applies a task's configured operations to each punnet when the broker assigns it one. Add workers to raise throughput when the workload is heavy. |
+| **Broker** | The workflow orchestrator. It schedules and coordinates the workers, manages the punnet queues, and persists every punnet's data, logs and errors to the database for full traceability. |
 
 <br />
 <br />
 
 ## Architecture
 
+At runtime, Fast2 follows a **broker–worker** model. The **broker** is the single orchestrator: it loads the map, starts the campaign, and keeps one queue per task that holds the punnets waiting for their next step. **Workers** are separate processes that pull work from the broker over plain HTTP — there is no external message bus to install or operate. A worker acquires a batch of punnets from a task's queue, runs that task on them, and hands the results back; the broker then routes each punnet into the next task's queue, and so a punnet walks the whole map one step at a time. Everything the broker knows — campaigns, per-punnet status, queue settings, logs and errors — is persisted to an **OpenSearch** database, so a campaign survives a restart and can be reopened exactly where it left off. Scaling out is deliberately boring: start more worker processes, and each one registers with the broker through a periodic heartbeat and begins pulling from the same shared queues. Adding workers adds throughput with no change to the map, and if a worker goes silent the broker simply re-queues the work it was holding.
+
 <ThemedImage
-  alt="Fast2 architecture"
+  alt="Fast2 architecture: the broker holds one queue per task and dispatches punnets to workers over HTTP, persisting all state to OpenSearch"
   sources={{
     light: require('../assets/img/architecture_light.png').default,
     dark: require('../assets/img/architecture_dark.png').default,
   }}
-  style={{width: '60%'}}
+  style={{width: '100%', maxWidth: '560px', display: 'block', margin: '1.5rem auto'}}
 />
 
 ## <i className="fas fa-shopping-basket"></i> Fast2 objects
@@ -231,7 +207,7 @@ The punnet will iterate through the follwing lifecycle until the last step is re
 <!-- https://mermaid-js.github.io/mermaid/#/flowchart -->
 
 ```mermaid
-graph TD
+graph LR
     A(Created) --> B(Queued);
     B --> C(Processing);
     C --> D{ };
@@ -310,7 +286,3 @@ Each colored bubble shows a specific metric:
 🟠 Orange (Bottom Center) – Processing speed, in punnets per second
 
 🟢 Green (Right-Center) – Number of successfully processed punnets
-
-### Operating
-
-<!-- todo -->

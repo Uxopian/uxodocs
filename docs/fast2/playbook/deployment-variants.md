@@ -31,7 +31,9 @@ This is maximally private, but Fast2 and the ECM now compete for the same CPU, m
 
 </div>
 <div style={{flex:'1 1 380px',minWidth:'300px',textAlign:'center'}}>
-<img src="/img/fast2-playbook/deployment_on-premise-b.png" alt="Fast2 deployed on the same machine as the source system" style={{width:'100%',maxWidth:'520px',height:'auto'}} />
+<div style={{background:'linear-gradient(135deg,#f0f2f5,#dde2e9)',borderRadius:'12px',padding:'18px',display:'inline-block',width:'100%',maxWidth:'520px'}}>
+<img src="/img/fast2-playbook/deployment_on-premise-b.png" alt="Fast2 deployed on the same machine as the source system" style={{width:'100%',height:'auto',display:'block'}} />
+</div>
 </div>
 </div>
 
@@ -39,7 +41,9 @@ This is maximally private, but Fast2 and the ECM now compete for the same CPU, m
 
 <div style={{display:'flex',gap:'2rem',alignItems:'center',flexWrap:'wrap',margin:'1.5rem 0'}}>
 <div style={{flex:'1 1 380px',minWidth:'300px',textAlign:'center'}}>
-<img src="/img/fast2-playbook/deployment_on-premise-a.png" alt="Fast2 deployed on a secondary machine on the same network as the source ECM" style={{width:'100%',maxWidth:'520px',height:'auto'}} />
+<div style={{background:'linear-gradient(135deg,#f0f2f5,#dde2e9)',borderRadius:'12px',padding:'18px',display:'inline-block',width:'100%',maxWidth:'520px'}}>
+<img src="/img/fast2-playbook/deployment_on-premise-a.png" alt="Fast2 deployed on a secondary machine on the same network as the source ECM" style={{width:'100%',height:'auto',display:'block'}} />
+</div>
 </div>
 <div style={{flex:'1 1 320px',minWidth:'300px'}}>
 
@@ -61,7 +65,9 @@ Best when the source is itself cloud-hosted, or when the customer is comfortable
 
 </div>
 <div style={{flex:'1 1 380px',minWidth:'300px',textAlign:'center'}}>
-<img src="/img/fast2-playbook/deployment_on-cloud.png" alt="Fast2 deployed in the cloud, reaching back to the source and forward to the destination" style={{width:'100%',maxWidth:'520px',height:'auto'}} />
+<div style={{background:'linear-gradient(135deg,#f0f2f5,#dde2e9)',borderRadius:'12px',padding:'18px',display:'inline-block',width:'100%',maxWidth:'520px'}}>
+<img src="/img/fast2-playbook/deployment_on-cloud.png" alt="Fast2 deployed in the cloud, reaching back to the source and forward to the destination" style={{width:'100%',height:'auto',display:'block'}} />
+</div>
 </div>
 </div>
 
@@ -69,7 +75,9 @@ Best when the source is itself cloud-hosted, or when the customer is comfortable
 
 <div style={{display:'flex',gap:'2rem',alignItems:'center',flexWrap:'wrap',margin:'1.5rem 0'}}>
 <div style={{flex:'1 1 380px',minWidth:'300px',textAlign:'center'}}>
-<img src="/img/fast2-playbook/deployment_hybrid.png" alt="Fast2 deployed in a hybrid topology: cloud broker, on-premise workers" style={{width:'100%',maxWidth:'520px',height:'auto'}} />
+<div style={{background:'linear-gradient(135deg,#f0f2f5,#dde2e9)',borderRadius:'12px',padding:'18px',display:'inline-block',width:'100%',maxWidth:'520px'}}>
+<img src="/img/fast2-playbook/deployment_hybrid.png" alt="Fast2 deployed in a hybrid topology: cloud broker, on-premise workers" style={{width:'100%',height:'auto',display:'block'}} />
+</div>
 </div>
 <div style={{flex:'1 1 320px',minWidth:'300px'}}>
 
@@ -91,7 +99,9 @@ The trade-offs are physical: shipping introduces real-world delay, and scalabili
 
 </div>
 <div style={{flex:'1 1 380px',minWidth:'300px',textAlign:'center'}}>
-<img src="/img/fast2-playbook/deployment_aws-snowball.png" alt="Migration via AWS Snowball: data written locally to a physical device, then shipped to AWS" style={{width:'100%',maxWidth:'520px',height:'auto'}} />
+<div style={{background:'linear-gradient(135deg,#f0f2f5,#dde2e9)',borderRadius:'12px',padding:'18px',display:'inline-block',width:'100%',maxWidth:'520px'}}>
+<img src="/img/fast2-playbook/deployment_aws-snowball.png" alt="Migration via AWS Snowball: data written locally to a physical device, then shipped to AWS" style={{width:'100%',height:'auto',display:'block'}} />
+</div>
 </div>
 </div>
 
