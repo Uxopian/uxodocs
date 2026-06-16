@@ -11,7 +11,8 @@ content_hash: c2150ee31aa25b2ec6dbd36c9ce75555adb18bd7916678e58389ff483301bb7d
 ## Account registration
 
 When reaching the Fast2 UI for the first time, you will be prompted to create an account.
-![Registration](../assets/img/authentication/registration_page.png)
+
+<img src={require('../assets/img/authentication/registration_page.png').default} alt="Fast2 account registration page" style={{width:'100%',maxWidth:'600px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />
 
 To create a new account in Fast2, follow these steps:
 
@@ -30,14 +31,15 @@ To create a new account in Fast2, follow these steps:
 
 :::warning
 
-    It is essential to remember your password. Fast2 does not offer password recovery for forgotten passwords.
+It is essential to remember your password. Fast2 does not offer password recovery for forgotten passwords.
 
 :::
 
 ## Login
 
 Once you have registered, you can log in to the Fast2 UI using your email and password.
-![Login](../assets/img/authentication/login_page.png)
+
+<img src={require('../assets/img/authentication/login_page.png').default} alt="Fast2 login page" style={{width:'100%',maxWidth:'600px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />
 
 ## Team management
 
@@ -50,7 +52,8 @@ Fast2 allows you to manage multiple users. **When starting Fast2 for the first t
 ### Navigating to Team Place
 
 To access Team Place: Click on your account avatar in the bottom left corner of the screen and then select **Manage Team** from the popup menu.
-![Navigate to Team Place](../assets/img/authentication/navigateTeamPlace.gif)
+
+<img src={require('../assets/img/authentication/navigateTeamPlace.gif').default} alt="Navigating to Team Place" style={{width:'100%',maxWidth:'720px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />
 
 #### User Access Restrictions
 
@@ -76,7 +79,8 @@ To access Team Place: Click on your account avatar in the bottom left corner of 
 - Email format validation and uniqueness check.
 - Password requirements displayed when focusing on the field.
 - Save button enabled only when all fields are valid.
-  ![Add Member](../assets/img/authentication/addMember.gif)
+
+<img src={require('../assets/img/authentication/addMember.gif').default} alt="Adding a new member" style={{width:'100%',maxWidth:'720px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />
 
 #### Adding a member as Admin
 
@@ -95,7 +99,8 @@ To access Team Place: Click on your account avatar in the bottom left corner of 
     - Member details
     - Warning: `This action cannot be undone`
     - Buttons: **Cancel**, **Delete**
-      ![Delete Member](../assets/img/authentication/deleteMember.gif)
+
+<img src={require('../assets/img/authentication/deleteMember.gif').default} alt="Deleting a member" style={{width:'100%',maxWidth:'720px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />
 
 #### Deleting a member as Admin
 
@@ -112,7 +117,8 @@ To access Team Place: Click on your account avatar in the bottom left corner of 
 3. Confirm in the modal popup:
     - Member details
     - Warning about role change permissions
-      ![Change Role](../assets/img/authentication/changeRole.gif)
+
+<img src={require('../assets/img/authentication/changeRole.gif').default} alt="Changing a member's role" style={{width:'100%',maxWidth:'720px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />
 
 #### Changing role as Admin
 
@@ -125,4 +131,5 @@ To access Team Place: Click on your account avatar in the bottom left corner of 
 - Confirmation popup appears before action.
 - Success notification confirms the password reset.
 - Do not forget to send the new password to the user.
-  ![Reset Password](../assets/img/authentication/resetPassword.gif)
+
+<img src={require('../assets/img/authentication/resetPassword.gif').default} alt="Resetting a member's password" style={{width:'100%',maxWidth:'720px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />
