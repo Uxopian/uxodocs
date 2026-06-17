@@ -53,7 +53,7 @@ See the [Prerequisites](/docs/flowerdocs/install/prerequisites) page for the ful
 
 ## Modified components
 
-* **OpenSearch** 1.x → 3.6.0 — a reindex of the data is **mandatory**. Properties move to `opensearch.*` namespaces (see [Data](#data) and [Configuration](#configuration)).
+* **OpenSearch** 1.x → 3.6.0 : a reindex of the data is **mandatory** (see [FlowerDocs 2026 upgrade](/docs/flowerdocs/install/opensearch/os-migrate)). Properties move to `opensearch.*` namespaces (see [Data](#data) and [Configuration](#configuration)).
 * **ARender** 2023.x → 2026.0.1
 * **Spring stack** — Spring Boot 2.7 → 4, Spring Framework 5.3 → 7, Spring Security 5.7 → 7, Spring Cloud → 5.
 * **Jackson** 2 → 3 and **Servlet** `javax` → `jakarta` — both have an impact on Java integrations (see [API › Behaviour changes](#behaviour-changes-1)).
@@ -182,7 +182,7 @@ The full Core property reference is on the [Core configuration](/docs/flowerdocs
 
 A reindex from OpenSearch 1.x to OpenSearch 3.6.0 is required because the internal engines are not compatible.
 
-We are actively working on it, it will be available in the next version.
+A dedicated migration tool ships with this version. See [FlowerDocs 2026 upgrade](/docs/flowerdocs/install/opensearch/os-migrate) for the full procedure.
 
 ## Additions
 
