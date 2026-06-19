@@ -69,7 +69,7 @@ services:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-TEXT-HANDLER=8899"
       - "REGISTRY_PROVIDERS_MFILES_BASE_URL=http://mfiles-provider:8789"
-      - "REGISTRY_PROVIDERS_MFILES_WHITELISTED_PARAMS=objectType,docId,version,fileId"
+      - "REGISTRY_PROVIDERS_MFILES_WHITELISTED_PARAMS=objectType,docId,versionId,fileId,title"
       - "REGISTRY_DEFAULT_PROVIDER=mfiles"
     # ... rendition services omitted for brevity
 ```
@@ -149,16 +149,16 @@ The following query parameters are used by the provider. The broker forwards all
 |---|---|---|
 | `docId` | Yes | M-Files object ID |
 | `objectType` | No (default `0`) | M-Files object type ID. `0` = Document; custom types use their own ID (see M-Files Admin > Object Types) |
-| `version` | No (default `latest`) | A version number, or `latest`. M-Files versions are 1-based |
-| `fileId` | No | Numeric ID(s) of file(s) inside the object (`Files[].ID`, **not** the `FileGUID`). Pass several as one comma-separated value — `fileId=456,789` — to open several files of the same object as one multi-document |
-| `docTitle` | No | Per-file display name(s), comma-separated and paired by index with `fileId` (e.g. `docTitle=toto.pdf,hello.png`). Sets each file's name/extension so the format is detected reliably. Accepts the alias `title` |
+| `versionId` | No (default `latest`) | A version number, or `latest`. M-Files versions are 1-based |
+| `fileId` | No | Numeric ID(s) of file(s) inside the object (`Files[].ID`, **not** the `FileGUID`). Pass several as repeated parameters — `fileId=456&fileId=789` — to open several files of the same object as one multi-document |
+| `title` | No | Per-file display name(s), passed as repeated parameters and paired by index with `fileId` (e.g. `fileId=456&fileId=789&title=toto.pdf&title=hello.png`). Sets each file's name/extension so the format is detected reliably |
 
 :::note
 `whitelistedParams` controls which parameters form the internal `DocumentId` used for caching. Parameters outside the list are still forwarded to the provider.
 :::
 
 :::warning
-Pass multiple values as a **single comma-separated** parameter (`fileId=456,789`), not as repeated parameters (`fileId=456&fileId=789`). Repeated query keys are collapsed to their last value by the React UI before they reach the broker, so only the last file would open.
+Pass multiple values as **repeated parameters** (`fileId=456&fileId=789`), not as a single comma-separated value (`fileId=456,789`). The broker forwards each multi-valued parameter as repeated query keys, and the provider reads them as a list. A `title` value may itself contain a comma (e.g. `title=report, final.pdf`) — it is never split.
 :::
 
 ### Opening a document
@@ -168,11 +168,11 @@ Every open mode goes through `GET /documents`:
 | Mode | Query parameters | Result |
 |---|---|---|
 | Whole object | `objectType=0&docId=521` | The object's file(s): a single-file object is streamed as-is; a multi-file object is returned as a multi-document |
-| One explicit file | `objectType=0&docId=534&fileId=576&docTitle=v2.pdf` | The selected file, named after `docTitle` |
-| Several explicit files | `objectType=0&docId=534&fileId=576,977&docTitle=v2.pdf,mire.pdf` | A multi-document of the selected files, in the given order |
+| One explicit file | `objectType=0&docId=534&fileId=576&title=v2.pdf` | The selected file, named after `title` |
+| Several explicit files | `objectType=0&docId=534&fileId=576&fileId=977&title=v2.pdf&title=mire.pdf` | A multi-document of the selected files, in the given order |
 
-- `fileId` and `docTitle` are **parallel lists paired by index**, each passed as a single comma-separated value (see the warning above).
-- `docTitle` (alias `title`) is optional but recommended: it sets each file's name and extension so the renderer detects the format reliably. Without it, the format is guessed from the content.
+- `fileId` and `title` are **parallel lists paired by index**, each passed as repeated parameters (see the warning above).
+- `title` is optional but recommended: it sets each file's name and extension so the renderer detects the format reliably. Without it, the format is guessed from the content.
 - The selected files always belong to the **same object** — `docId` is a single value. Showing files from different objects together is handled by the React UI as separate documents, not by this provider.
 
 ### Document model
@@ -180,8 +180,8 @@ Every open mode goes through `GET /documents`:
 An M-Files object can hold one or several files:
 
 - **Single-file object** (`SingleFile: true`) — the provider returns the file binary directly.
-- **Multi-file object** — the provider returns a `ProviderFolder` (JSON) listing each file as a `ProviderFile`, each carrying its own `fileId` and file name (`docTitle`). The broker fetches the files individually and builds a `DocumentContainer` so the viewer shows them as a single multi-document.
-- **Explicit file list** — passing several `fileId` (with matching `docTitle`) opens exactly those files of one object as a multi-document, without the provider inspecting the object first. Example: `?objectType=0&docId=123&fileId=456,789&docTitle=title.pdf,hello.png`.
+- **Multi-file object** — the provider returns a `ProviderFolder` (JSON) listing each file as a `ProviderFile`, each carrying its own `fileId` and file name (`title`). The broker fetches the files individually and builds a `DocumentContainer` so the viewer shows them as a single multi-document.
+- **Explicit file list** — passing several `fileId` (with matching `title`) opens exactly those files of one object as a multi-document, without the provider inspecting the object first. Example: `?objectType=0&docId=123&fileId=456&fileId=789&title=title.pdf&title=hello.png`.
 
 For the data model, see [Providers — Document model](./providers.md#document-model).
 
@@ -202,19 +202,19 @@ After starting the provider, verify the integration:
 1. Check the provider is reachable and can reach M-Files:
 
 ```bash
-curl "http://mfiles-provider:8789/documents?objectType=0&docId=521&version=latest" -o out.bin
+curl "http://mfiles-provider:8789/documents?objectType=0&docId=521&versionId=latest" -o out.bin
 ```
 
 Expected response: the document binary stream with a `Content-Type` header (and a `Content-Disposition` filename for single-file objects). Opening several files of one object returns a JSON folder instead:
 
 ```bash
-curl "http://mfiles-provider:8789/documents?objectType=0&docId=534&fileId=576,977&docTitle=a.pdf,b.pdf"
+curl "http://mfiles-provider:8789/documents?objectType=0&docId=534&fileId=576&fileId=977&title=a.pdf&title=b.pdf"
 ```
 
 2. Optionally test the full broker path:
 
 ```bash
-curl -X POST "http://service-broker:8761/registry/documents?objectType=0&docId=521&version=latest" \
+curl -X POST "http://service-broker:8761/registry/documents?objectType=0&docId=521&versionId=latest" \
   -H "X-Provider-ID: mfiles"
 ```
 
@@ -226,10 +226,10 @@ Expected: a JSON `DocumentId` (e.g. `{"id":"b64_..."}`).
 
 A company stores its documents in an M-Files vault. The Modern viewer is embedded in a web application. When a user opens an M-Files object:
 
-1. The application builds the viewer URL with the `objectType`, `docId`, and `version` parameters.
+1. The application builds the viewer URL with the `objectType`, `docId`, and `versionId` parameters.
 2. The `<arender-element>` component sends the request to the BFF.
 3. The BFF injects `X-Provider-ID: mfiles` and forwards to the broker.
-4. The broker calls `mfiles-provider:8789/documents?objectType=0&docId=521&version=latest`.
+4. The broker calls `mfiles-provider:8789/documents?objectType=0&docId=521&versionId=latest`.
 5. The provider authenticates to M-Files (token or service account), fetches the object's file(s) through the REST API, and returns them.
 6. The broker renders the document and streams pages to the viewer. For a multi-file object, the provider returns a folder and the viewer displays all files as a single multi-document.
 
@@ -240,5 +240,5 @@ A company stores its documents in an M-Files vault. The Modern viewer is embedde
 | Provider returns `400 BAD_REQUEST` (broker reports `500`) when `fileId` is set | `fileId` was given a `FileGUID` instead of the numeric file ID. `fileId` is typed as an integer, so a GUID fails to bind | Use the numeric `Files[].ID` from the object's JSON, e.g. `fileId=576`. For a single-file object, omit `fileId` |
 | `java.nio.channels.ClosedChannelException` / connection errors in the provider | `arender.server.mfiles.web-url` is wrong or M-Files is unreachable from the provider container | Check the startup log line `M-Files provider initialized with web-url=...`. Verify the URL ends with `/REST/` and is reachable: `curl <web-url>objects/0/<docId>/latest -H "X-Authentication: <token>"` |
 | `M-Files error HTTP 401` | The token expired/is invalid, or the service account lacks access to the vault | Provide a valid long-lived token, or verify the service account credentials and vault permissions |
-| `M-Files error HTTP 404` or "object has no files" | Wrong `objectType`, unknown `docId`, or an invalid `version` | Confirm `objectType` (0 = Document), the object ID, and use `version=latest` — M-Files versions are 1-based, so `version=0` is not valid |
-| Document opens but the file name/format is wrong when using `fileId` | A `fileId` fetch with no matching `docTitle` returns the binary without a file name, so the format is detected from content | Pass `docTitle` next to each `fileId` (e.g. `fileId=456&docTitle=toto.pdf`) so the provider sets the name/extension, or omit `fileId` to use the object's own file names |
+| `M-Files error HTTP 404` or "object has no files" | Wrong `objectType`, unknown `docId`, or an invalid `versionId` | Confirm `objectType` (0 = Document), the object ID, and use `versionId=latest` — M-Files versions are 1-based, so `versionId=0` is not valid |
+| Document opens but the file name/format is wrong when using `fileId` | A `fileId` fetch with no matching `title` returns the binary without a file name, so the format is detected from content | Pass `title` next to each `fileId` (e.g. `fileId=456&title=toto.pdf`) so the provider sets the name/extension, or omit `fileId` to use the object's own file names |
