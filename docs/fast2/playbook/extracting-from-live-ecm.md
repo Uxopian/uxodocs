@@ -131,6 +131,24 @@ For dump-bound extraction (Snapshot & Drip against a staging zone) throughput is
 
 A defensible back-of-envelope: 100M documents at 50 docs/sec/thread is about 23 days on a single thread, about 6 days on a 4-thread campaign, or roughly 2 days on 16 threads. Multiply by your own caution factor, typically 1.5x to 2x, for retries, business-day-only windows, and reconciliation overhead. Equisoft's published insurance-migration baseline of 1 to 3 years end-to-end covers the whole programme. Most of that range is design, validation, dual-run, and cutover. Extraction is one workstream.
 
+### From the field: what these rates look like in practice
+
+The per-thread anchor above is for sizing arithmetic. What sponsors actually want is the shape of real campaigns, measured as **aggregate end-to-end throughput**: the whole pipeline, across however many threads and workers it was running, not per thread.
+
+:::warning Before you quote any of these numbers
+**Read them as ceilings under specific conditions, not promises.** Every figure below is hostage to the environment around Fast2: the Fast2 server's own sizing (cores, RAM, worker count), how aggressively the flow was tuned, the source system's availability and DB optimisation (indexes on the scan predicate, resource-governor caps), the destination's resistance to sustained write load, and the network linking them. The same map can run at 8 or 150 docs/sec depending on what it does and what it runs against. Profile your own source before you commit to a date.
+
+**Mind what a "document" counts as.** These rates count documents as the Fast2 UI reports them. A document the UI tallies as 1/sec may carry ~100 versions behind it, each with its own metadata set, folder references, content blob, and security/ACL details, all of which Fast2 still has to read, map, and write. A counter reading 150 docs/sec can therefore represent far more underlying objects actually moved. When you compare these figures against another tool's numbers or against your own targets, make sure both sides are counting the same thing.
+:::
+
+| Speed | Unit | Workload & context |
+|---|---|---|
+| **~8** | docs/sec | Flow with heavy datamapping and content conversion. Every document is transformed and re-rendered in flight, so conversion CPU, not extraction, sets the pace. |
+| **~70** | docs/sec | Standard, non-optimised workflow: straight metadata-plus-blob, no conversion, no special tuning. A reasonable default to quote before you have profiled the source. |
+| **~150** | docs/sec (sustained) | Campaign tuned and horizontally scaled to take full advantage of Fast2's two-stage, queue-routed architecture: **~3.8M documents in a single 7-hour working day**. The upper end of what we have measured. |
+| **~150** | docs/sec (peak) | On-premise FileNet to FileNet-on-Cloud. Same mark as the tuned ceiling: past ~150 docs/sec Fast2 is rarely the constraint. The source database, the destination's tolerance for sustained writes, or the network gives way first, so the rate eases back from the peak as the run goes on. |
+| **~3.1M** | docs/day (~1.1 TB/day) | Sustained daily rate on a large insurance-carrier FileNet ECM consolidation: ~290M documents, ~96 TB, migrated to 99.77% completion across the estate. |
+
 ---
 
 ## Hand-off to Part 2
