@@ -9,6 +9,15 @@
     "latest": true
   },
   {
+    "version": "2025.5.0",
+    "majorVersion": "2025",
+    "date": "2026-06-30",
+    "description": "FlowerDocs 2025.5.0 is a minor release that includes bug fixes reported by users and integration partners. It also includes the restoration of the Enter key to trigger a search and the update of the ARender viewer to version 2023.21.0.",
+    "hasUpgradeNotes": true,
+    "slug": "2025.5.0",
+    "latest": false
+  },
+  {
     "version": "2025.4.0",
     "majorVersion": "2025",
     "date": "2026-02-25",
