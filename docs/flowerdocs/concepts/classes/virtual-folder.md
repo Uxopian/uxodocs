@@ -27,6 +27,10 @@ The special feature of file searches is the ability to aggregate results accordi
 
 If the search defined in the folder contains an aggregation, the components brought up by the search will be grouped together in the form of `Bucket`. Aggregations can also be nested to create `buckets` based on multiple criteria.
 
+:::info
+You can only aggregate using tags of type `STRING` or `CHOICELIST`.
+:::
+
 It is recommended not to aggregate more than 3 levels.
 
 When the tree structure of a virtual folder is in `View` mode, we recommend not exceeding 100 documents displayed in ARender.

@@ -152,12 +152,6 @@ const ConnectorsList = [
         description: "Writing emails from FlowerDocs",
         link: "/docs/flowerdocs/connecteurs/plume/getting-started",
     },
-    {
-        title: "Fast2",
-        logo: "/img/flowerdocs/documentation/fast2.png",
-        description: "ETL Documentary",
-        link: "/docs/flowerdocs/connecteurs/fast2/getting-started",
-    },
 ];
 
 function ConnectorCard({ title, logo, description, link }) {
