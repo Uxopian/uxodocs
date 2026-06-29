@@ -12,7 +12,7 @@ content_hash: 74879b07826c2f0ee5d4eab59c87b9a074164c9da98e524a96e83ae675beec5c
 
 The Playbook is the **strategy** layer of the Fast2 documentation. It is about the decisions you make *before* you configure a single task: which extraction strategy fits a live source, how you catch the target up to a moving source, and where you deploy Fast2 relative to the systems it connects. These are architecture and methodology choices, anchored in real field experience and real migration failures.
 
-:::tip Playbook vs. Cookbooks — which one do I need?
+:::tip Playbook vs. Cookbooks: which one do I need?
 Fast2 has two hands-on sections, and they answer two different questions.
 
 | | **Playbook** (this section) | **[Cookbooks](../cookbooks/)** |
@@ -20,7 +20,7 @@ Fast2 has two hands-on sections, and they answer two different questions.
 | **Question it answers** | *Which approach should I choose?* | *How do I implement this?* |
 | **Altitude** | Strategy & architecture | Tactics & recipes |
 | **Unit** | A methodology, a decision matrix, a trade-off | A task config, a code snippet, an API call |
-| **When you read it** | Before the project — during design and scoping | During the project — at the keyboard |
+| **When you read it** | Before the project, during design and scoping | During the project, at the keyboard |
 | **Example** | "Clone & Sweep vs. Snapshot & Drip for a live 800M-document FileNet source" | "Read content and metadata from S3 into a punnet" |
 
 A cookbook tells you how to cook one dish. The playbook tells you how to plan the menu for 500 guests, with dietary constraints and a two-hour service window. You will usually start in the Playbook to choose your approach, then drop into the Cookbooks to build it.
@@ -28,10 +28,10 @@ A cookbook tells you how to cook one dish. The playbook tells you how to plan th
 
 ## What's in here
 
-- **[Extracting From a Live ECM](./extracting-from-live-ecm.md)** — the three bulk-extraction methodologies (Clone & Sweep, Snapshot & Drip, Live Trickle), with a decision matrix, throttling controls, and a defensible sizing baseline. Part 1 of the migration series.
-- **[Delta Migration](./delta-migration.md)** — how the target catches up to a source that never stops: the four delta-capture mechanisms, layered reconciliation, cutover patterns, and the sign-off ritual. Part 2 of the migration series.
-- **[Deployment Variants](./deployment-variants.md)** — where to run Fast2 relative to the source and target: on-premise, cloud, hybrid, and AWS Snowball, with the access-control / performance / debugging trade-offs of each.
-- **[Content Integrity](./content-integrity.md)** — proving no content was corrupted or lost in transit: the three content-validation strategies (size, retrieved hash, computed hash), their trade-offs, and how Fast2 isolates, logs and retries mismatching assets.
-- **[Metadata Integrity](./metadata-integrity.md)** — preserving original creation/modification/retention dates and creator/owner identity in the destination, instead of having them overwritten by the migration run.
+- **[Extracting From a Live ECM](./extracting-from-live-ecm.md)**: the three bulk-extraction methodologies (Clone & Sweep, Snapshot & Drip, Live Trickle), with a decision matrix, throttling controls, and a defensible sizing baseline. Part 1 of the migration series.
+- **[Delta Migration](./delta-migration.md)**: how the target catches up to a source that never stops. The four delta-capture mechanisms, layered reconciliation, cutover patterns, and the sign-off ritual. Part 2 of the migration series.
+- **[Deployment Variants](./deployment-variants.md)**: where to run Fast2 relative to the source and target, from on-premise to cloud, hybrid, and AWS Snowball, with the access-control, performance, and debugging trade-offs of each.
+- **[Content Integrity](./content-integrity.md)**: proving no content was corrupted or lost in transit. The three content-validation strategies (size, retrieved hash, computed hash), their trade-offs, and how Fast2 isolates, logs and retries mismatching assets.
+- **[Metadata Integrity](./metadata-integrity.md)**: preserving original creation, modification, and retention dates plus creator/owner identity in the destination, instead of letting the migration run overwrite them.
 
 These articles are written from the field. They name real projects and real failures, because the point of a playbook is to help you avoid repeating them.
