@@ -6,13 +6,13 @@ sidebar_position: 5
 
 # Preserving Metadata & System Fields
 
-In many migrations — especially those driven by legal or audit requirements — the **original metadata must be preserved** in the destination: creation dates, retention dates, modification dates, and the identity of the original creator/owner. The risk is that a naive migration overwrites these with the migration date and the migration service account.
+In a lot of migrations, and especially the ones driven by legal or audit requirements, the **original metadata has to survive the move**: creation dates, retention dates, modification dates, and who originally created or owned the document. Get it wrong and a naive migration stamps everything with today's date and whatever service account ran the job. That's exactly what an auditor doesn't want to find.
 
 This playbook explains how Fast2 keeps original values intact, and what the destination system and the project team must provide for it to work. It is written to be **system-agnostic**: "source system" and "destination system" stand for whatever you migrate from and to.
 
 :::tip TL;DR
 - Fast2 **passes source values through unchanged** unless a mapping step is intentionally configured to transform them.
-- **Dates** are preserved as-is when both systems share the same format and timezone — no conversion needed.
+- **Dates** carry over untouched when both systems share the same format and timezone. No conversion needed.
 - **Creator / owner / modifier** are set by *referencing* identities (“profiles”) that must already exist in the destination.
 - **Read-only / system fields** are typically *settable-once-at-creation*: Fast2 sets them at document creation through the destination's official API, using credentials with sufficient permissions.
 - A built-in **migration-asset tracking system** lets you verify the state of any asset at any step; UAT and business validation remain essential.
@@ -20,7 +20,7 @@ This playbook explains how Fast2 keeps original values intact, and what the dest
 
 ## Keeping source values unchanged
 
-If the format of the expected value in the destination is the same as the source (ex/ same date format, numbers stored under *integer* or *String* or *Decimal* data) Fast2 can keep these values and will not update those unless stated otherwise (like, adding a property mapping step updating not only the name — so it fits the expected nomenclature of the destination — but also the value). This would be an “intentional” migration step added during the workflow design phase.
+If the format of the expected value in the destination is the same as the source (ex/ same date format, numbers stored under *integer* or *String* or *Decimal* data) Fast2 can keep these values and will not update those unless stated otherwise (like, adding a property mapping step updating not only the name, so it fits the expected nomenclature of the destination, but also the value). This would be an “intentional” migration step added during the workflow design phase.
 
 ## Tracking and validation
 
@@ -40,10 +40,10 @@ As for the *read-only* values, usually they are just settable-only-once-at-creat
 
 ## In practice
 
-Three conditions make read-only field preservation succeed: the **destination must expose** the field at creation time through its API, the migration account must hold **sufficient permissions** to set it, and any referenced identities (creators, owners) must **already exist** in the destination. Confirm these three points early — ideally during the discovery / PoC phase — because they are properties of the destination system, not of Fast2 itself.
+Read-only field preservation works when three things line up: the **destination exposes** the field at creation time through its API, the migration account has **enough permission** to set it, and any creators or owners you reference **already exist** on the destination side. Pin these down early, during discovery or the PoC. They're properties of the destination system, not of Fast2, so finding out late tends to be expensive.
 
 :::info Related
 - [Transformation tasks](../catalog/transformer.md) for property mapping
 - [Credentials](../catalog/credentials.md) for configuring the migration account
-- [Content Integrity](./content-integrity.md) — the companion content-validation playbook
+- [Content Integrity](./content-integrity.md): the companion content-validation playbook
 :::
