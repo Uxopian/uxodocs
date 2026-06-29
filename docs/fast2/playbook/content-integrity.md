@@ -6,15 +6,15 @@ sidebar_position: 4
 
 # Proving Nothing Was Lost: Reconciliation & Checksum Validation
 
-When migrating large volumes of content, a recurring requirement is to **verify that no content has been corrupted or lost in transit** — and to be able to prove it. This playbook describes the reconciliation methodology available with Fast2, the trade-offs between the different content-validation strategies, and how mismatching assets are isolated, logged and retried.
+Migrate a few billion documents and sooner or later someone asks the uncomfortable question: how do you actually *know* nothing was corrupted or lost on the way over? This page is about how Fast2 answers it. It walks through the reconciliation methodology, the trade-offs between the content-validation strategies, and what Fast2 does with an asset that fails the check.
 
 It is written to be **system-agnostic**: "source system" and "destination system" stand for whatever you migrate from and to.
 
 :::tip TL;DR
 - Reconciliation in Fast2 means **comparing a property of the source content against the same property of the destination content** after upload.
 - There are three strategies, from cheapest to most thorough: **(1)** compare the content **size**, **(2)** compare a **hash retrieved** from each system's metadata, **(3)** have Fast2 **calculate the hash** itself on both ends and compare.
-- Whatever the strategy, a mismatch routes the asset into a dedicated **workflow sub-branch** — quarantine, human-in-the-loop comparison, delete & retry, CSV logging of mismatching IDs.
-- All of it is configured as **sequential tasks at workflow-design time** — nothing bespoke.
+- Whatever the strategy, a mismatch routes the asset into a dedicated **workflow sub-branch**: quarantine, a human-in-the-loop comparison, delete and retry, or just logging the bad IDs to a CSV.
+- All of it is **sequential tasks you wire at workflow-design time**. No bespoke code.
 - **Content checksums are meaningless if the binary is converted in transit** (image → PDF, HTML → image): the bytes change by design, so the hashes will never match.
 :::
 
@@ -137,7 +137,7 @@ As for the content, there would be several ways to validate the content (ex/ PDF
 </table>
 
 :::tip The task behind strategy 3
-Strategy 3 is powered by the [**HashSignTask**](../catalog/tool.md#HashSignTask) (*Compute content hash*) from the catalog. It computes the hash of a content (default `SHA-256`), stores it as metadata, and can directly compare the freshly computed hash against a previously stored value — failing the document when they differ.
+Strategy 3 is powered by the [**HashSignTask**](../catalog/tool.md#HashSignTask) (*Compute content hash*) from the catalog. It computes the hash of a content (default `SHA-256`), stores it as metadata, and can compare that fresh hash against a previously stored one, failing the document when the two don't match.
 :::
 
 ## Handling mismatches
@@ -154,10 +154,10 @@ These post-checksum operations can be done altogether with Fast2, via sequential
 
 ## In practice
 
-Pick the lightest strategy that satisfies your integrity requirement: size comparison costs almost nothing but is the weakest signal; calculating the hash on both ends with Fast2 is the strongest, but reads every content twice. Most projects validate the bulk with a cheap strategy and reserve full hashing for the assets that matter most — or run a 100% hash pass when the compliance bar requires it, accepting the extra I/O.
+Pick the lightest strategy that still satisfies your integrity requirement. Size comparison costs almost nothing, but it's the weakest signal. Hashing on both ends with Fast2 is the strongest, and it reads every content twice. Plenty of projects split the difference: a cheap check across the bulk, full hashing kept for the assets that actually matter. When the compliance bar demands 100% hashing, you do it and you accept the extra I/O.
 
 :::info Related
-- [HashSignTask — Compute content hash](../catalog/tool.md#HashSignTask)
-- [Delta Migration](./delta-migration.md) — reconciliation as part of a catch-up phase
+- [HashSignTask (Compute content hash)](../catalog/tool.md#HashSignTask)
+- [Delta Migration](./delta-migration.md): reconciliation as part of a catch-up phase
 - [Patterns](../advanced/patterns.md) & [Drools](../advanced/drools.md) for conditional routing of mismatches
 :::
