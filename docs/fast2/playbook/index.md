@@ -31,5 +31,7 @@ A cookbook tells you how to cook one dish. The playbook tells you how to plan th
 - **[Extracting From a Live ECM](./extracting-from-live-ecm.md)** — the three bulk-extraction methodologies (Clone & Sweep, Snapshot & Drip, Live Trickle), with a decision matrix, throttling controls, and a defensible sizing baseline. Part 1 of the migration series.
 - **[Delta Migration](./delta-migration.md)** — how the target catches up to a source that never stops: the four delta-capture mechanisms, layered reconciliation, cutover patterns, and the sign-off ritual. Part 2 of the migration series.
 - **[Deployment Variants](./deployment-variants.md)** — where to run Fast2 relative to the source and target: on-premise, cloud, hybrid, and AWS Snowball, with the access-control / performance / debugging trade-offs of each.
+- **[Content Integrity](./content-integrity.md)** — proving no content was corrupted or lost in transit: the three content-validation strategies (size, retrieved hash, computed hash), their trade-offs, and how Fast2 isolates, logs and retries mismatching assets.
+- **[Metadata Integrity](./metadata-integrity.md)** — preserving original creation/modification/retention dates and creator/owner identity in the destination, instead of having them overwritten by the migration run.
 
 These articles are written from the field. They name real projects and real failures, because the point of a playbook is to help you avoid repeating them.
