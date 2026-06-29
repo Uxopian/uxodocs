@@ -52,7 +52,7 @@ const flowerDocsArenderVersion = "2026.0.1";
 const flowerDocsOSVersion = "3.6.0";
 const flowerDocsRedisVersion = "8.8";
 const flowerDocsJavaVersion = "25";
-const flowerDocsCompanionVersion = "2025.3.2";
+const flowerDocsCompanionVersion = "2026.0.0";
 const flowerDocsPlumeVersion ="2026.0.0";
 
 const getPdfFileName = (
