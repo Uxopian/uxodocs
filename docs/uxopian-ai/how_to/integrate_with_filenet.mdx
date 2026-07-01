@@ -8,7 +8,7 @@ sidebar_position: 8
 content_hash: 58aa0efc6737f9fdb081b956e9739c4e5cb5f5d5bd8543facc3e29150c166fa7
 ---
 
-This guide covers how to install and configure the Uxopian AI plugin for IBM Content Navigator (ICN). The plugin adds an **"Ouvrir dans Uxopian"** context menu action on P8 documents and injects an AI Chat button into the ICN toolbar.
+This guide covers how to configure the FileNet connector in `uxopian-ai` and install the Uxopian AI plugin for IBM Content Navigator (ICN). The plugin adds an **"Ouvrir dans Uxopian"** context menu action on P8 documents and injects an AI Chat button into the ICN toolbar.
 
 ## Architecture
 
@@ -16,18 +16,20 @@ This guide covers how to install and configure the Uxopian AI plugin for IBM Con
 flowchart LR
     ICN["IBM Content Navigator<br/>(browser)"]
     PLUGIN["UxopianProxyService<br/>(ICN plugin / WebSphere)"]
-    GW["uxopian-gateway<br/>(IcnJwtProvider)"]
-    AI["uxopian-ai"]
+    GW["uxopian-gateway<br/>(FileNetProvider)"]
+    AI["uxopian-ai<br/>(FileNet connector)"]
+    CE["FileNet Content Engine<br/>(CE Web Services)"]
     LLM["LLM Provider"]
 
     ICN -->|"invokePluginService (AJAX)"| PLUGIN
-    PLUGIN -->|"RS256 JWT<br/>X-Provider-ID: IcnJwtProvider"| GW
+    PLUGIN -->|"RS256 JWT<br/>providerId=FileNetProvider"| GW
     GW --> AI
+    AI -->|"CE Web Services (SOAP)"| CE
     AI --> LLM
     ICN -->|"Bearer token<br/>(web components)"| GW
 ```
 
-*Figure: The ICN plugin signs a JWT with a private key stored in WebSphere, then forwards requests to the Uxopian AI gateway. The browser also loads the chat web components directly from the gateway using the same token.*
+*Figure: The ICN plugin signs a JWT with a private key stored in WebSphere, then forwards requests to the Uxopian AI gateway, which validates the JWT via `FileNetProvider`. The browser also loads the chat web components directly from the gateway using the same token. Independently, `uxopian-ai` connects to the FileNet Content Engine directly (CE Web Services) to run searches and read/write documents — this connection is configured in [Phase 0](#phase-0--configure-the-filenet-connector-in-uxopian-ai) and does not go through the ICN plugin.*
 
 The plugin exposes three operations:
 
@@ -45,7 +47,104 @@ The plugin exposes three operations:
 | WebSphere Application Server | Hosts ICN |
 | Java 8 (JDK) | Required only to rebuild from source |
 | Maven 3.6+ | Required only to rebuild from source |
-| Uxopian AI + gateway | Deployed and reachable from WebSphere |
+| Uxopian AI + gateway | Deployed and reachable from WebSphere, with the FileNet connector configured — see [Phase 0](#phase-0--configure-the-filenet-connector-in-uxopian-ai) |
+| Access to the Arondor Artifactory | Required only when building `uxopian-ai` from source — provides the proprietary IBM CE Java API jars (`jace`, `p8cel10n`) |
+
+---
+
+## Phase 0 — Configure the FileNet connector in uxopian-ai
+
+Before installing the ICN plugin, `uxopian-ai` itself must be able to reach the FileNet Content Engine. This is independent of the ICN plugin — it's the backend connector that runs searches and reads/writes documents.
+
+### 0.1 IBM CE Java API dependencies
+
+The `filenet` integration module depends on two proprietary IBM Content Engine Java API artifacts:
+
+```xml title="uxopian-ai/pom.xml"
+<filenet.version>5.5.6</filenet.version>
+```
+
+```xml title="uxopian-ai/integrations/filenet/connector/pom.xml"
+<dependency>
+    <groupId>com.filenet</groupId>
+    <artifactId>jace</artifactId>
+    <version>${filenet.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.filenet</groupId>
+    <artifactId>p8cel10n</artifactId>
+    <version>${filenet.version}</version>
+</dependency>
+```
+
+These are not on Maven Central. The root `pom.xml` already declares the Arondor Artifactory repositories (`arondor-release` / `arondor-snapshot` at `artifactory.arondor.cloud`), where these jars are published — no manual `mvn install:install-file` step is needed as long as the build machine has network access and credentials for that Artifactory.
+
+### 0.2 Enable the FileNet tools
+
+FileNet tools are **disabled by default** — gated by the tool tag whitelist. Enable them before starting uxopian-ai:
+
+```yaml title="config/application.yml"
+plugins:
+  tools:
+    enabled-tags: filenet,flowerdocs,files,interaction
+```
+
+Or via environment variable:
+
+```bash
+PLUGINS_TOOLS_ENABLED_TAGS=filenet,flowerdocs,files,interaction
+```
+
+:::warning[Default value excludes FileNet]
+The default is `flowerdocs,files,interaction`. If you do not override it, FileNet tools will not be registered and the LLM will not have access to FileNet, even if the plugin JAR is present.
+:::
+
+### 0.3 Configure the FileNet connection
+
+Set the Content Engine connection and the properties surfaced to the LLM:
+
+```yaml title="config/application.yml"
+filenet:
+  ce-api-url: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/
+  repository-id: <object-store-symbolic-name>
+  username: <service-account>
+  password: ${FILENET_PASSWORD:}
+  # Optional — overrides the built-in defaults (DocumentTitle, DateCreated, DateLastModified,
+  # Creator, LastModifier, MajorVersionNumber, MimeType)
+  common-system-properties:
+    - name: DocumentTitle
+      title: Document Title
+      dataType: "xs:string"
+      multiValued: false
+    - name: DateCreated
+      title: Date Created
+      dataType: "xs:dateTime"
+      multiValued: false
+  # Optional — properties the LLM is allowed to write via setDocumentProperty
+  writable-properties:
+    - name: DocumentTitle
+      title: Document Title
+      dataType: "xs:string"
+      multiValued: false
+```
+
+`ce-api-url` is the Content Engine Web Services (CEWS) endpoint, reachable from `uxopian-ai` — not the ICN/WebSphere host. `repository-id` is the object store's symbolic name (not its GUID).
+
+### Checkpoint 0 — Connector is up
+
+Check uxopian-ai startup logs for confirmation:
+
+```
+Initializing FileNet CE client. CEWS: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/, object store: <repository-id>
+```
+
+| Check | Expected |
+|---|---|
+| uxopian-ai logs | `FileNetSearchToolService`, `FileNetFilterToolService`, `FileNetDocumentToolService`, `FileNetRedactTool` registered |
+| Admin UI tool list | The four FileNet tool services appear, tagged `filenet` |
+| A search request | Returns results without a CE connection error |
+
+---
 
 ## Plugin downloads
 
@@ -66,7 +165,7 @@ Contents:
 | `icn-plugin.p12` | Default PKCS12 keystore — **replace before production** |
 | `src/main/java/com/uxopian/icn/UxopianPlugin.java` | Plugin entry point — registers actions and services |
 | `src/main/java/com/uxopian/icn/UxopianAction.java` | Context menu action for P8 documents |
-| `src/main/java/com/uxopian/icn/UxopianFeature.java` | ICN feature panel (AI Chat tab) |
+| `src/main/java/com/uxopian/icn/UxopianFeature.java` | ICN feature panel (AI Chat tab) — defined but currently **not registered** in `UxopianPlugin`; the chat is opened only via the context menu action and the toolbar button below |
 | `src/main/java/com/uxopian/icn/UxopianProxyService.java` | Servlet — JWT signing and request proxy |
 | `src/main/java/com/uxopian/icn/jwt/JwtSigner.java` | RS256 JWT generation (30 s TTL) |
 | `src/main/java/com/uxopian/icn/jwt/KeystoreLoader.java` | PKCS12/JKS keystore loader with WebSphere IBMJCE fallback |
@@ -147,21 +246,38 @@ The default `icn-plugin.p12` bundled in the JAR uses the password `changeit`. Ge
 
 ## Phase 3 — Configure the gateway
 
-### 3.1 Register the IcnJwtProvider public key
+### 3.1 Register the plugin's public key with FileNetProvider
 
-The gateway's `IcnJwtProvider` validates incoming JWTs using the plugin's public key. Retrieve the public key from the running plugin:
+The gateway's `FileNetProvider` validates incoming JWTs using a **statically configured** public key — it does not fetch it dynamically. Retrieve the public key from the running plugin:
 
 ```bash
 curl http://<websphere-host>:<icn-port>/navigator/jaxrs/UxopianPlugin/UxopianProxyService?op=public-key
 ```
 
-The endpoint returns a PEM-encoded RSA public key. Register it in the gateway provider configuration.
+The endpoint returns a PEM-encoded RSA public key. Set it (as a PEM string or a path to a file containing it) in the gateway's configuration, alongside the other `FileNetProvider` JWT properties:
+
+```yaml title="application.yml (uxopian-gateway)"
+filenet:
+  jwt:
+    public-key: |
+      -----BEGIN PUBLIC KEY-----
+      ...
+      -----END PUBLIC KEY-----
+    # public-key: /path/to/icn-plugin-public-key.pem   # a file path also works
+    issuer: icn-plugin              # default: icn-plugin — must match the plugin's JWT issuer
+    tenant-id: filenet               # default: filenet
+    clock-skew-seconds: 300          # default: 300
+```
+
+:::warning[Re-register the key whenever the keystore changes]
+If you replace the plugin's keystore ([Modifying the plugin](#replacing-the-keystore)), the public key changes too. Re-fetch it from `?op=public-key` and update `filenet.jwt.public-key` on the gateway, then restart the gateway.
+:::
 
 ### 3.2 Declare the gateway route
 
-Add a route in `gateway-application.yaml` for the FileNet integration:
+Add a route in the gateway's `application.yml` for the FileNet integration:
 
-```yaml title="gateway-application.yaml"
+```yaml title="application.yml (uxopian-gateway)"
 app:
   routes:
     - id: uxopian-ai-filenet
@@ -278,7 +394,7 @@ Then set `icn.plugin.keystore.path`, `icn.plugin.keystore.alias`, and `icn.plugi
 - CSS and JS asset injection for the web components
 - The `openChat` function (invoked by the context menu action and the AI Chat toolbar button)
 - The `buildChatRequest` function (constructs the initial chat payload)
-- The `openAdmin` function (invoked by the **Admin IA** toolbar button) — fetches an `admin-token`, then opens `GET /auth/login?providerId=FileNetProvider&token=…&redirect=/admin/` in a new tab so the gateway sets the `GATEWAY_SESSION` cookie in a first-party context before redirecting to the admin panel
+- The `openAdmin` function (invoked by the **Admin IA** toolbar button) — fetches an `admin-token`, then opens `GET <gateway-base>/auth/login?providerId=FileNetProvider&token=…&redirect=/admin/` in a new tab so the gateway sets the `GATEWAY_SESSION` cookie in a first-party context before redirecting to the admin panel. `<gateway-base>` is derived at runtime from `uxopian.ai.host` by replacing its last path segment — with the default `uxopian.ai.host`, the resulting URL is `https://iris.qa.dev.uxopian.com/gui/gateway/auth/login?...`, matching the gateway's `app.gateway.login-path` (default `/gui/gateway/auth/login`).
 
 After editing, rebuild the JAR with `mvn clean package` to re-embed the updated file.
 
@@ -298,14 +414,70 @@ After editing, rebuild the JAR with `mvn clean package` to re-embed the updated 
 | `uxopian.ai.host` | `https://iris.qa.dev.uxopian.com/gui/gateway/uxopian-ai-filenet` | Frontend-facing gateway URL — baked into `actionHandler.js` at build time |
 | `uxopian.icn.context.path` | `/navigator` | ICN servlet context path — used to construct the token endpoint URL |
 
+| FileNet connector property (uxopian-ai) | Env variable | Default | Description |
+|---|---|---|---|
+| `filenet.ce-api-url` | — | (empty) | Content Engine Web Services (CEWS) endpoint. Required. |
+| `filenet.repository-id` | — | (empty) | Object store symbolic name. Required. |
+| `filenet.username` / `filenet.password` | `FILENET_PASSWORD` for the password | (empty) | FileNet service account credentials used for every CE call. |
+| `filenet.common-system-properties` | — | `DocumentTitle`, `DateCreated`, `DateLastModified`, `Creator`, `LastModifier`, `MajorVersionNumber`, `MimeType` | Properties surfaced to the LLM as the default data model. |
+| `filenet.writable-properties` | — | (empty) | Properties the LLM is allowed to update via `setDocumentProperty`. |
+| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files,interaction` | Must include `filenet` to register the FileNet tools. |
+
+| FileNetProvider JWT property (uxopian-gateway) | Default | Description |
+|---|---|---|
+| `filenet.jwt.public-key` | — | PEM string or file path. RSA public key used to validate JWTs from the ICN plugin. Required. |
+| `filenet.jwt.issuer` | `icn-plugin` | Expected JWT issuer. |
+| `filenet.jwt.tenant-id` | `filenet` | Tenant assigned to authenticated ICN users. |
+| `filenet.jwt.clock-skew-seconds` | `300` | Allowed clock skew when validating token expiry. |
+
+## Tools exposed to the LLM
+
+Once `filenet` is added to `plugins.tools.enabled-tags` ([Phase 0.2](#02-enable-the-filenet-tools)), the plugin registers the following tools, all tagged `filenet`:
+
+### Search and filtering (`FileNetSearchToolService`, `FileNetFilterToolService`)
+
+| Tool | Purpose |
+|---|---|
+| `getDataModel` | Returns the common system properties and document classes available for filtering |
+| `buildClassFilter` | Builds an `ISCLASS()` CE SQL condition on document type |
+| `buildPropertyContainsFilter` | Builds a `LIKE` condition for partial text match |
+| `buildPropertyEqualsFilter` | Builds an exact-match condition on a property or status |
+| `buildDateRangeFilter` | Builds a date range condition on `DateCreated`/`DateLastModified` |
+| `buildFullTextFilter` | Builds a `CONTAINS()` full-text condition |
+| `buildFolderScopedFilter` | Scopes the search to a folder |
+| `buildAndClause` / `buildOrClause` | Combine two raw conditions with AND/OR |
+| `buildAndClauseFromClauses` / `buildOrClauseFromClauses` | Combine existing filter clauses with AND/OR |
+| `searchDocuments` | Executes the assembled CE SQL query |
+
+### Documents (`FileNetDocumentToolService`)
+
+| Tool | Purpose |
+|---|---|
+| `readDocumentText` | Reads the full OCR text of a document (via ARender) across all pages |
+| `getDocumentMetadata` | Returns all metadata properties (system + custom class) of a document |
+| `listFolderContents` | Lists documents in a folder (unfiltered, max 50) |
+| `setDocumentProperty` | Updates a metadata property — only for properties listed in `filenet.writable-properties` |
+
+### Redaction (`FileNetRedactTool`)
+
+| Tool | Purpose |
+|---|---|
+| `prepareRedact` | Fetches the document, uploads it to ARender, and extracts text elements to redact |
+| `applyObfuscation` | Runs the redaction pipeline and saves the result as a new version in FileNet |
+
+The `FileNetHelper` bean (bridging FileNet documents to ARender for OCR) is always active — it is not gated by `plugins.tools.enabled-tags`.
+
 ## Common issues
 
 | Symptom | Cause | Solution |
 |---|---|---|
+| FileNet tools absent from admin tool list | Tag whitelist excludes `filenet` | Set `PLUGINS_TOOLS_ENABLED_TAGS` to include `filenet` and restart uxopian-ai (Phase 0.2) |
+| `Initializing FileNet CE client` never logged, or CE connection error | `filenet.ce-api-url` / `filenet.repository-id` missing or wrong | Verify the CEWS endpoint is reachable from uxopian-ai and the object store symbolic name is correct (Phase 0.3) |
+| Build fails resolving `com.filenet:jace` / `com.filenet:p8cel10n` | No access to the Arondor Artifactory | Confirm network access and credentials for `artifactory.arondor.cloud` (Phase 0.1) |
 | Context menu action missing | Plugin not loaded | Check ICN Admin Console plug-in list; confirm the JAR path is correct and ICN restarted |
 | `op=token` returns `{"error":"..."}` | Keystore not found or wrong alias/password | Set `icn.plugin.keystore.path` to an absolute path; verify alias and password in WebSphere JVM custom properties |
 | Web component assets fail to load (403/401) | `uxopian.ai.host` points to wrong URL or gateway route is not public for assets | Confirm `uxopian.ai.host` matches the gateway route; set `/api/web-components/**` to `public: true` |
-| JWT rejected by gateway | Public key not registered with `IcnJwtProvider` | Re-fetch the public key from `?op=public-key` and update the gateway provider config |
+| JWT rejected by gateway | Public key not configured, or wrong `issuer`/`tenant-id`, on `FileNetProvider` | Re-fetch the public key from `?op=public-key` and set `filenet.jwt.public-key` on the gateway (Phase 3.1) |
 | Chat panel blank after opening | `icn.plugin.bff.url` unreachable from WebSphere | Test connectivity from WebSphere to the gateway; check firewall rules |
 | IBM Java 8 keystore error | IBM JCE provider does not support PKCS12 by default | The plugin automatically falls back to the `.jks` keystore; ensure `icn-plugin.jks` is present alongside `icn-plugin.p12` |
 

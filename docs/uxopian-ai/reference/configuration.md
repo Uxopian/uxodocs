@@ -252,6 +252,39 @@ alfresco:
 
 See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deployment steps.
 
+## filenet
+
+Configuration for the FileNet plugin (loaded only when `plugins.tools.enabled-tags` contains `filenet`).
+
+| Key | Env variable | Default | Description |
+|---|---|---|---|
+| `filenet.ce-api-url` | — | (empty) | Content Engine Web Services (CEWS) endpoint, e.g. `http://<ce-host>:<port>/wsi/FNCEWS40MTOM/`. Required when the plugin is enabled. |
+| `filenet.repository-id` | — | (empty) | Object store symbolic name (not its GUID). Required when the plugin is enabled. |
+| `filenet.username` | — | (empty) | Service account used to authenticate every CE call. |
+| `filenet.password` | `FILENET_PASSWORD` | (empty) | Password for the service account. |
+| `filenet.common-system-properties` | — | `DocumentTitle`, `DateCreated`, `DateLastModified`, `Creator`, `LastModifier`, `MajorVersionNumber`, `MimeType` | List of properties (name, title, dataType, multiValued, allowedValues) surfaced to the LLM as the searchable/readable data model. Override if your object store uses a different default schema. |
+| `filenet.writable-properties` | — | (empty) | List of properties (same structure as above) the LLM is allowed to update via `setDocumentProperty`. Empty by default — no property is writable until explicitly listed. |
+
+Example:
+
+```yaml
+filenet:
+  ce-api-url: ${FILENET_CE_API_URL:}
+  repository-id: ${FILENET_REPOSITORY_ID:}
+  username: ${FILENET_USERNAME:}
+  password: ${FILENET_PASSWORD:}
+  # common-system-properties: (defaults shipped with the plugin)
+  # writable-properties:
+  #   - name: DocumentTitle
+  #     title: Document Title
+  #     dataType: "xs:string"
+  #     multiValued: false
+```
+
+The IBM Content Engine Java API dependencies (`com.filenet:jace`, `com.filenet:p8cel10n`) required to build this plugin are proprietary and resolved from the Arondor Artifactory, not Maven Central.
+
+See [Integrate with FileNet](../how_to/integrate_with_filenet.mdx) for deployment steps, including the ICN plugin and the gateway's `FileNetProvider` JWT settings.
+
 ## mcp-server.yml
 
 MCP (Model Context Protocol) boot-time configuration. Starting with 2026.0.0-ft3, MCP connections are typically managed through the admin UI ([Managing MCP servers](../admin/managing_mcp_servers.md)) rather than this file; the shipped `mcp-server.yml` is commented out.
