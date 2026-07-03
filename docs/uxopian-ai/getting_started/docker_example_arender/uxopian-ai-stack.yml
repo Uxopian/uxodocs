@@ -112,8 +112,9 @@ services:
   # The gateway is the only service exposed to the host (port 8085).
   # DevProvider reads identity from request headers — suitable for local development only.
   gateway:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft3}
-    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft3}
+    # uxopian-gateway has not shipped a 2026.0.0-ft4 tag yet — pinned separately from UXOPIAN_VERSION.
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${GATEWAY_VERSION:-2026.0.0-ft3}
+    # image: docker.uxopian.com/preview/uxopian-gateway:${GATEWAY_VERSION:-2026.0.0-ft3}
     container_name: gateway-service
     environment:
       - JAVA_OPTS=-Xmx256m -Xms128m
@@ -127,8 +128,8 @@ services:
   # ── Uxopian AI ───────────────────────────────────────────────────────────────
   # Served at /uxopian-ai/ through the gateway. Not exposed directly to the host.
   uxopian-ai-standalone:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
-    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft4}
+    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft4}
     container_name: uxopian-ai-standalone-service
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m

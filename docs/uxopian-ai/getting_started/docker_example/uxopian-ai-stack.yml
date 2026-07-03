@@ -32,17 +32,21 @@ services:
       start_period: 20s
 
   # ── Uxopian AI ──────────────────────────────────────────────────────────────
-  # Not exposed to the host. All browser traffic goes through the gateway.
+  # Not exposed to the host. All browser traffic goes through the gateway, under /uxopian-ai/.
   uxopian-ai:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
-    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft4}
+    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft4}
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
       - OPENSEARCH_HOST=opensearch
       - OPENSEARCH_PORT=9200
       - OPENSEARCH_FORCE_REFRESH_INDEX=false
-      - APP_BASE_URL=${APP_BASE_URL:-http://localhost:8085}
+      - APP_BASE_URL=${APP_BASE_URL:-http://localhost:8085/uxopian-ai}
+      - CONTEXT_PATH=/uxopian-ai
       - UXOPIAN_AI_PORT=8080
+      # DEV ONLY: injects a default User-development / Tenant-development identity
+      # when DevProvider forwards no X-User-* headers. See Authentication and gateway.
+      - SPRING_PROFILES_ACTIVE=dev
       # LLM API keys — loaded from .env, set at least one before starting
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
@@ -63,8 +67,9 @@ services:
   # DevProvider reads identity from request headers — suitable for local development.
   # Replace with FlowerDocsProvider or Fast2Provider for production.
   uxopian-gateway:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft3}
-    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft3}
+    # uxopian-gateway has not shipped a 2026.0.0-ft4 tag yet — pinned separately from UXOPIAN_VERSION.
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${GATEWAY_VERSION:-2026.0.0-ft3}
+    # image: docker.uxopian.com/preview/uxopian-gateway:${GATEWAY_VERSION:-2026.0.0-ft3}
     ports:
       - "8085:8085"
     volumes:

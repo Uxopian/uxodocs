@@ -63,7 +63,7 @@ prompts:
     - id: translate
       role: USER
       content: |
-        You are an expert translator. Translate the following document to [[${language != null} ? ${language} : 'english']]:
+        You are an expert translator. Translate the following document to [# th:if="${targetLanguage != null}"][[${targetLanguage}]][/][# th:unless="${targetLanguage != null}"]english[/]:
 
         [[${documentService.extractTextualContent(documentId)}]]
       reasoningDisabled: true
@@ -73,7 +73,7 @@ prompts:
     - id: genericComparison
       role: SYSTEM
       content: |
-        You have to respond in [[${language != null} ? ${language} : 'english']]
+        You have to respond in [# th:if="${targetLanguage != null}"][[${targetLanguage}]][/][# th:unless="${targetLanguage != null}"]english[/]
         Compare the following two documents and highlight the key differences:
 
         Document A:

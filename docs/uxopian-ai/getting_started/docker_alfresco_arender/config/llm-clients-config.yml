@@ -53,7 +53,7 @@ llm:
             functionCallSupported: true
 
       # ── Azure OpenAI ───────────────────────────────────────────────
-      - provider: azure
+      - provider: azure-openai
         defaultLlmModelConfName: azure-gpt4o
         globalConf:
           apiSecret: ${AZURE_OPENAI_API_KEY:REMPLACER_PAR_VOTRE_CLE}

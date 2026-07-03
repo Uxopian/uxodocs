@@ -112,7 +112,7 @@ services:
         module: ../../../uxopian-ai/alfresco-arender-files
         webcomponents: ../../../uxopian-ai/alfresco-arender-files/web-components-output
       args:
-        UXOPIAN_AI_HOST: "${UXOPIAN_AI_PUBLIC_URL:-http://localhost:8085}"
+        UXOPIAN_AI_HOST: "${UXOPIAN_AI_PUBLIC_URL:-http://localhost:8085/share/uxopian-ai}"
     image: alfresco-share-arender:25.3.0
     container_name: alfresco-share
     mem_limit: 1g
@@ -238,7 +238,7 @@ services:
 
   # ── ARender UI ───────────────────────────────────────────────────────────────
   arender-ui:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/arender-ui-uxopian:2023.16.0
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/arender-ui-springboot:2023.16.0-alfresco
     container_name: arender-ui
     mem_limit: 2g
     environment:
@@ -246,7 +246,7 @@ services:
       ARENDERSRV_ARENDER_SERVER_ALFRESCO_USER: "${ALFRESCO_ADMIN_USER:-admin}"
       ARENDERSRV_ARENDER_SERVER_ALFRESCO_PASSWORD: "${ALFRESCO_ADMIN_PASSWORD:-admin}"
       ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS: "http://service-broker:8761/"
-      UXOPIAN_AI_HOST: "${UXOPIAN_AI_PUBLIC_URL:-http://localhost:8085}"
+      UXOPIAN_AI_HOST: "${UXOPIAN_AI_PUBLIC_URL:-http://localhost:8085/share/uxopian-ai}"
     ports:
       - "1789:8080"
     volumes:
@@ -340,7 +340,7 @@ services:
 
   # ── OpenSearch ───────────────────────────────────────────────────────────────
   uxopian-ai-opensearch:
-    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-2.12.0}
+    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.3.2}
     container_name: uxopian-ai-opensearch
     environment:
       - cluster.name=opensearch-cluster
@@ -376,7 +376,7 @@ services:
   # Pre-built image pulled from the registry — no local build needed.
   # Not exposed directly — accessed through the gateway at /share/uxopian-ai/
   uxopian-ai:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft4}
     container_name: uxopian-ai
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
@@ -384,11 +384,18 @@ services:
       - OPENSEARCH_PORT=9200
       - OPENSEARCH_FORCE_REFRESH_INDEX=false
       - RENDITION_BASE_URL=http://service-broker:8761
-      - APP_BASE_URL=${UXOPIAN_AI_PUBLIC_URL:-http://localhost:8085}
+      - APP_BASE_URL=${UXOPIAN_AI_PUBLIC_URL:-http://localhost:8085/share/uxopian-ai}
       - UXOPIAN_AI_PORT=8080
       - ALFRESCO_BASE_URL=${ALFRESCO_BASE_URL:-http://share:8080/share/proxy/alfresco-api}
       - ALFRESCO_DEFAULT_TENANT_ID=${ALFRESCO_DEFAULT_TENANT_ID:-Tenant-development}
+      # Default excludes alfresco (flowerdocs,files,interaction) — without this, the LLM never
+      # gets Alfresco tools, even though the plugin JAR is present.
+      - PLUGINS_TOOLS_ENABLED_TAGS=alfresco,files,interaction
       - SPRING_PROFILES_ACTIVE=dev
+      # The gateway already applies CORS for browser-facing traffic (see gateway-application.yaml).
+      # Disable uxopian-ai's own dev-profile CORS handling to avoid duplicate Access-Control-* headers,
+      # which browsers reject outright.
+      - APP_CORS_ENABLED=false
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
       - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY:-}
@@ -405,8 +412,10 @@ services:
   # ── Gateway ──────────────────────────────────────────────────────────────────
   # Pre-built image pulled from the registry — no local build needed.
   # Exposes uxopian-ai at /share/uxopian-ai/ — validates Alfresco Share sessions.
+  # Pinned separately from UXOPIAN_VERSION: uxopian-gateway has not shipped a
+  # 2026.0.0-ft4 tag yet, so it stays on the latest available release.
   gateway-service:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft3}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${GATEWAY_VERSION:-2026.0.0-ft3}
     container_name: gateway-service
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m

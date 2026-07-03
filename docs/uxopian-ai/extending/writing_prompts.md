@@ -82,9 +82,25 @@ A payload variable `documentId` passed in the request:
 
 ### Conditional expressions
 
+:::warning[Don't use an inline ternary with a colon]
+`prompts.yml` is bound through Spring Boot's `@ConfigurationProperties`, which resolves `${...}` as a **property placeholder** before Thymeleaf ever sees the string — this happens once, at startup, and the resolved (or corrupted) text is what gets stored and reused for every request. A colon anywhere inside a single `${...}` block (as in `${cond ? a : b}`, or the older `${cond} ? ${a} : 'b'` form) is parsed by Spring as `${propertyKey:defaultValue}` and silently replaced with the default value, breaking the expression before Thymeleaf runs. Avoid ternaries with a `:` in prompt content — use the block conditional below instead.
+:::
+
+Use Thymeleaf's block conditional (`th:if`/`th:unless`), which needs no colon:
+
 ```
-[[${language != null} ? ${language} : 'english']]
+[# th:if="${targetLanguage != null}"][[${targetLanguage}]][/][# th:unless="${targetLanguage != null}"]english[/]
 ```
+
+The framework validates that every variable referenced in the template is present in the request payload — even the one only used in the `th:unless` branch. Always include the key in `payload`, using `null` when you want the default:
+
+```json
+{ "payload": { "targetLanguage": null } }
+```
+
+:::warning[Avoid variable names that collide with real config/env properties]
+A bare `${name}` in `prompts.yml` is *also* resolved by the same Spring placeholder mechanism if `name` happens to match a real Spring property or OS environment variable — it silently returns that unrelated value instead of staying a template placeholder. For example, `${language}` resolves against the container's `LANGUAGE` locale environment variable (typically `en_US:en` on Linux), not your request payload. Pick payload variable names unlikely to collide with real properties or env vars (e.g. `targetLanguage` rather than `language`).
+:::
 
 ### Iteration
 
@@ -115,7 +131,7 @@ Variables are passed in the `payload` map of the request content item:
   "value": "myPrompt",
   "payload": {
     "documentId": "doc-abc-123",
-    "language": "french"
+    "targetLanguage": "french"
   }
 }
 ```

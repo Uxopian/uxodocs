@@ -37,8 +37,8 @@ flowchart TD
 Releases publish a self-contained ZIP named `ai-standalone-<version>-complete-package.zip`:
 
 ```text
-ai-standalone-2026.0.0-ft3/
-  ai-standalone-2026.0.0-ft3.jar   ← Spring Boot fat JAR
+ai-standalone-2026.0.0-ft4/
+  ai-standalone-2026.0.0-ft4.jar   ← Spring Boot fat JAR
   application.yaml                  ← Spring config (imports ./config/* files)
   config/
     application.yml
@@ -51,17 +51,19 @@ ai-standalone-2026.0.0-ft3/
     hazelcast.yml
     mcp-server.yml
   plugins/
-    flowerdocs-2026.0.0-ft3.jar     ← FlowerDocs integration
-    arender-2026.0.0-ft3.jar        ← ARender integration
-    files-2026.0.0-ft3.jar          ← File tools integration
+    alfresco-2026.0.0-ft4.jar       ← Alfresco integration
+    flowerdocs-2026.0.0-ft4.jar     ← FlowerDocs integration
+    arender-2026.0.0-ft4.jar        ← ARender integration
+    files-2026.0.0-ft4.jar          ← File tools integration
+    interaction-2026.0.0-ft4.jar    ← Interaction tools (clickable choices, etc.)
   llm-clients/
-    llm-clients-2026.0.0-ft3.jar
+    llm-clients-2026.0.0-ft4.jar
 ```
 
 The `plugins/` directory is scanned at runtime by `IntegrationLoader`. Only the JARs present at startup are activated. Remove plugin JARs for integrations you do not use.
 
 :::tip[Download]
-**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.0.0-ft3/ai-standalone-2026.0.0-ft3-complete-package.zip" download="ai-standalone-2026.0.0-ft3-complete-package.zip">ai-standalone-2026.0.0-ft3-complete-package.zip</a>**
+**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.0.0-ft4/ai-standalone-2026.0.0-ft4-complete-package.zip" download="ai-standalone-2026.0.0-ft4-complete-package.zip">ai-standalone-2026.0.0-ft4-complete-package.zip</a>**
 :::
 
 ### Configure LLM provider
@@ -112,7 +114,7 @@ server:
 From the extraction directory:
 
 ```bash
-java -Xmx768m -Xms512m -jar ai-standalone-2026.0.0-ft3.jar
+java -Xmx768m -Xms512m -jar ai-standalone-2026.0.0-ft4.jar
 ```
 
 The service starts on port `8080` by default. Override with `UXOPIAN_AI_PORT`.

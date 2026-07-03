@@ -163,7 +163,7 @@ try {
                             type: 'PROMPT',
                             value: 'genericComparison',
                             payload: {
-                                language: 'french',
+                                targetLanguage: 'french',
                                 leftDocumentId: layout.getChildren()[0].getDocumentId(),
                                 rightDocumentId: layout.getChildren()[1].getDocumentId()
                             }
@@ -205,7 +205,7 @@ try {
                     type: 'PROMPT',
                     value: 'translate',
                     payload: {
-                        language: 'french',
+                        targetLanguage: 'french',
                         documentId: $wnd.getARenderJS().getCurrentDocumentId()
                     }
                 }]
@@ -243,7 +243,7 @@ try {
                     type: 'PROMPT',
                     value: 'translate',
                     payload: {
-                        language: 'english',
+                        targetLanguage: 'english',
                         documentId: $wnd.getARenderJS().getCurrentDocumentId()
                     }
                 }]

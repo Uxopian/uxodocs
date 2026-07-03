@@ -4,8 +4,9 @@ app:
   routes:
     - id: uxopian-ai
       uri: http://uxopian-ai:8080
-      path: /**
-      rewritePath: /?(?<segment>.*), /$\{segment}
+      prefix: /uxopian-ai/
+      path: /uxopian-ai/**
+      rewritePath: /uxopian-ai/?(?<segment>.*), /uxopian-ai/$\{segment}
       provider: DevProvider
       security:
         - path: /.well-known/**
@@ -29,8 +30,8 @@ app:
 
     - id: uxopian-ai-ws
       uri: ws://uxopian-ai:8080
-      path: /ws/**
-      prefix: /ws/
+      path: /uxopian-ai/ws/**
+      prefix: /uxopian-ai/ws/
       security:
         - path: /**
           public: true

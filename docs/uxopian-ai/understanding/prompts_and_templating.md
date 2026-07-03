@@ -47,9 +47,12 @@ Prompt templates use Thymeleaf TEXT mode. Variable expressions use double bracke
 | Usage | Syntax |
 |---|---|
 | Variable expression | `[[${variable}]]` |
-| Conditional expression | `[[${condition ? 'yes' : 'no'}]]` |
+| Conditional / null-safe expression | `[# th:if="${variable != null}"][[${variable}]][/][# th:unless="${variable != null}"]default[/]` |
 | Iteration | `[# th:each="item : ${list}"]...[/]` |
-| Null-safe expression | `[[${variable != null} ? ${variable} : 'default']]` |
+
+:::warning[Avoid `${cond ? a : b}` ternaries in prompts.yml]
+`prompts.yml` content is resolved as a Spring Boot config placeholder (`${...}`) before Thymeleaf ever runs. A colon inside a single `${...}` block is parsed as `${key:default}` and silently replaced, breaking any inline ternary. Use the block conditional above instead — it has no colon. See [Write prompts](../extending/writing_prompts.md#conditional-expressions) for the full explanation, including a naming gotcha for variables that collide with real config/env properties.
+:::
 
 ## ServiceHelper calls
 

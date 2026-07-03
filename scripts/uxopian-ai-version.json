@@ -1,5 +1,6 @@
 {
-    "uxopianVersion": "2026.0.0-ft2",
+    "uxopianVersion": "2026.0.0-ft4",
+    "gatewayVersion": "2026.0.0-ft3",
     "opensearchVersion": "3.3.2",
     "registry": "artifactory.arondor.cloud:5001"
 }

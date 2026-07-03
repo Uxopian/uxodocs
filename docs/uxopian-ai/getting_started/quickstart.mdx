@@ -110,13 +110,11 @@ Expected response:
 
 ### 6. Access the application
 
-Open `http://localhost:8085` in your browser. The gateway is listening on port 8085.
-
-To access the admin UI, open the admin element page. The default development identity (`User-development`, tenant `Tenant-development`) is injected automatically by `DevProvider` when no credentials are provided.
+uxopian-ai is served under the `/uxopian-ai/` prefix — open `http://localhost:8085/uxopian-ai/admin` in your browser for the admin UI. The default development identity (`User-development`, tenant `Tenant-development`) is injected automatically by `DevProvider` when no credentials are provided.
 
 ## Configuration notes
 
-The gateway configuration (`gateway-application.yaml`) routes all traffic to `uxopian-ai:8080` using `DevProvider`. The admin API routes (`/api/v1/admin/**`) are marked public in this example.
+The gateway configuration (`gateway-application.yaml`) routes `/uxopian-ai/**` to `uxopian-ai:8080` using `DevProvider`, rewriting the path so it still reaches uxopian-ai at `/uxopian-ai/...` — this matches `CONTEXT_PATH=/uxopian-ai` set on the `uxopian-ai` service. The admin API routes (`/api/v1/admin/**`) are marked public in this example.
 
 The `uxopian-ai` container is not exposed to the host. All browser traffic goes through port 8085 on the gateway.
 

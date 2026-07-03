@@ -34,23 +34,71 @@ prompts:
         **What you can do:**
         - Search documents by name, content, type, metadata, or date range
         - Browse folders and list their contents
-        - Read the full text of any document (via OCR)
-        - Retrieve document metadata and properties
+        - Read the full text of any document (via ARender OCR)
+        - Retrieve and update document metadata and properties
 
         **Search workflow:**
-        - For simple name searches, use `getAlfrescoDocumentIdsByName` directly.
-        - For advanced searches (by type, metadata, date, full-text content), first call `getAlfrescoDataModel` to discover the correct type and property names for this tenant, then build your query step by step with the `buildAlfresco*` tools, and finally execute it with `searchAlfrescoNodes`.
-        - To browse a folder, use `listAlfrescoFolderContents` with the folder path (e.g. `Shared`, `Sites/my-site/documentLibrary`). Never pass a folder name to `getAlfrescoDocumentIdsByName` — that tool searches by filename only.
+        - For simple name searches, use `getDocumentIdsByName` directly.
+        - For advanced searches (by type, metadata, date, full-text content), first call `getDataModel` to discover the correct type and property names for this tenant, then build your query step by step with the `build*Filter` tools, combine them with `buildAndClause` / `buildOrClause`, and finally execute it with `searchDocuments`.
+        - To browse a folder, use `listFolderContents` with the folder path (e.g. `Shared`, `Sites/my-site/documentLibrary`). Never pass a folder name to `getDocumentIdsByName` — that tool searches by filename only.
         - When a search returns multiple results, present them to the user and let them choose before proceeding.
-
-        **CRITICAL: Only use Alfresco tools** (prefixed with `getAlfresco*`, `listAlfresco*`, `searchAlfresco*`, `buildAlfresco*`, `combineAlfresco*`). Never call FlowerDocs tools or any other integration tools — they will fail in this context.
 
         Be concise, precise, and professional. Only use information from the repository — do not invent data.
       reasoningDisabled: false
       requiresMultiModalModel: false
       requiresFunctionCallingModel: true
 
-  tenants:
-    - tenantId: tenant-development
-      mergeStrategy: OVERWRITE
-      prompts: []
+    - id: summarizeDocumentText
+      role: USER
+      content: |
+        Summarize the following document in a plain text format:
+
+        [[${documentService.extractTextualContent(alfrescoService.getARenderIdFromAlfrescoId(alfrescoNodeId).id)}]]
+      reasoningDisabled: false
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: summarizeDocumentMarkdown
+      role: USER
+      content: |
+        Summarize the following document. Use Markdown formatting with headings, bullet points, and emphasis.
+        Make it scannable and well-structured.
+
+        Document content:
+        [[${documentService.extractTextualContent(alfrescoService.getARenderIdFromAlfrescoId(alfrescoNodeId).id)}]]
+      reasoningDisabled: false
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: translateToFrench
+      role: USER
+      content: |
+        You are an expert translator. Translate the following document to french:
+
+        [[${documentService.extractTextualContent(alfrescoService.getARenderIdFromAlfrescoId(alfrescoNodeId).id)}]]
+      reasoningDisabled: true
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: translateToEnglish
+      role: USER
+      content: |
+        You are an expert translator. Translate the following document to english:
+
+        [[${documentService.extractTextualContent(alfrescoService.getARenderIdFromAlfrescoId(alfrescoNodeId).id)}]]
+      reasoningDisabled: true
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+    - id: extractInvoiceNumber
+      role: USER
+      content: |
+        Extract the invoice number from the following document. Reply with only the invoice number, or state clearly if none is found.
+
+        Document content:
+        [[${documentService.extractTextualContent(alfrescoService.getARenderIdFromAlfrescoId(alfrescoNodeId).id)}]]
+      reasoningDisabled: true
+      requiresMultiModalModel: false
+      requiresFunctionCallingModel: false
+
+  tenants: []

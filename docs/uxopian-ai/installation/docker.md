@@ -54,8 +54,8 @@ services:
       start_period: 20s
 
   uxopian-ai:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
-    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft4}
+    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft4}
     depends_on:
       opensearch:
         condition: service_healthy
@@ -74,8 +74,9 @@ services:
       - ./config:/app/config:ro
 
   uxopian-gateway:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft3}
-    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft3}
+    # uxopian-gateway has not shipped a 2026.0.0-ft4 tag yet — pinned separately from UXOPIAN_VERSION.
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${GATEWAY_VERSION:-2026.0.0-ft3}
+    # image: docker.uxopian.com/preview/uxopian-gateway:${GATEWAY_VERSION:-2026.0.0-ft3}
     depends_on:
       - uxopian-ai
     ports:

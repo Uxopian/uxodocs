@@ -28,7 +28,7 @@ flowchart LR
 
 *Figure: Authentication flow and data path between Alfresco, the gateway, uxopian-ai, and the Alfresco REST API.*
 
-The gateway's `AlfrescoProvider` validates the caller's Alfresco session and forwards the user identity. Inside uxopian-ai, `AlfrescoWebClient` reuses the user's token as a `JSESSIONID` cookie on every outbound call, so all Alfresco ACLs are enforced on the user's own credentials.
+The gateway's `AlfrescoProvider` validates the caller's Alfresco session (it looks up the session's `JSESSIONID` against Alfresco's `/people/-me-` endpoint). Once validated, the gateway's `AuthFilter` — shared by all providers, not Alfresco-specific — enriches the request with the `X-User-Id`, `X-User-Roles`, `X-User-TenantId`, and `X-User-Token` headers before forwarding it to uxopian-ai. Inside uxopian-ai, `AlfrescoWebClient` reuses `X-User-Token` as a `JSESSIONID` cookie on every outbound call, so all Alfresco ACLs are enforced on the user's own credentials.
 
 ## Integration roadmap
 
@@ -83,7 +83,7 @@ PLUGINS_TOOLS_ENABLED_TAGS=alfresco,files
 ```
 
 :::warning[Default value excludes Alfresco]
-The default is `flowerdocs,files`. If you do not override it, Alfresco tools will not be registered and the LLM will not have access to Alfresco, even if the plugin JAR is present.
+The default is `flowerdocs,files,interaction`. If you do not override it, Alfresco tools will not be registered and the LLM will not have access to Alfresco, even if the plugin JAR is present.
 :::
 
 :::info[Docker deployments — read this first]
@@ -147,7 +147,7 @@ Initializing Alfresco WebClient. Target: http://alfresco:8080
 |---|---|
 | `GET /actuator/health` on gateway | `{"status":"UP"}` |
 | Alfresco repository API reachable from uxopian-ai | HTTP 200 |
-| uxopian-ai logs | Three Alfresco tool services registered: `AlfrescoSearchToolService`, `AlfrescoDocumentToolService`, `AlfrescoMetadataToolService` |
+| uxopian-ai logs | Five Alfresco tool services registered: `AlfrescoFilterToolService`, `AlfrescoSearchToolService`, `AlfrescoDocumentToolService`, `AlfrescoMetadataToolService`, `AlfrescoRedactService` |
 
 ---
 
@@ -162,8 +162,9 @@ app:
   routes:
     - id: uxopian-ai
       uri: http://uxopian-ai:8080
-      path: /gui/gateway/uxopian-ai/**
-      prefix: /gui/gateway/uxopian-ai/
+      path: /uxopian-ai/**
+      prefix: /uxopian-ai/
+      rewritePath: /uxopian-ai/?(?<segment>.*), /uxopian-ai/$\{segment}
       provider: AlfrescoProvider
       security:
         - path: /.well-known/**
@@ -182,7 +183,11 @@ app:
           roles: ["ADMIN"]
 ```
 
-If your deployment routes requests through a proxy that changes the path prefix before reaching the gateway, use `rewritePath` to normalize the path. See [Configure gateway routes](./configure_gateway_routes.md) for a step-by-step guide.
+`rewritePath` strips the gateway-facing prefix before forwarding to uxopian-ai — required whenever the route `path`/`prefix` don't match uxopian-ai's own paths verbatim. See [Configure gateway routes](./configure_gateway_routes.md) for a step-by-step guide on deriving it.
+
+:::info[Embedding in Alfresco Share — a different prefix]
+When the chat panel is embedded inside Alfresco Share (Phase 5), the prefix is typically `/share/uxopian-ai/` instead, and the route is usually split into several entries (a dedicated WebSocket route, a separate `/admin/**` route, static assets, etc.) rather than the single consolidated route shown above. See the `gateway-application.yaml` in the [Quickstart with Alfresco + ARender](../getting_started/quickstart_alfresco.mdx) package for a complete, working example of that layout.
+:::
 
 :::warning[The provider name must match exactly]
 `AlfrescoProvider` must be the exact Spring bean name of the provider registered from the JAR in `/provider`. Check gateway startup logs for `Registered provider: AlfrescoProvider`. A typo or missing JAR causes all requests to fail at authentication with no clear error.
@@ -223,13 +228,13 @@ Log in to Alfresco Share and retrieve a session token. Then test the gateway:
 
 ```bash
 curl -H "Cookie: JSESSIONID=<your-alfresco-session>" \
-  http://<gateway-host>:<port>/gui/gateway/uxopian-ai/api/v1/prompts
+  http://<gateway-host>:<port>/uxopian-ai/api/v1/prompts
 ```
 
 Expected: HTTP 200 with a list of prompts.
 
 :::tip[Test interface — Swagger UI]
-The Swagger UI at `/gui/gateway/uxopian-ai/swagger-ui/index.html` lets you test endpoints interactively without writing curl commands. Use the `Authorize` button to pass your Alfresco session.
+The Swagger UI at `/uxopian-ai/swagger-ui/index.html` lets you test endpoints interactively without writing curl commands. Use the `Authorize` button to pass your Alfresco session.
 :::
 
 ### Checkpoint 3 — Authentication works
@@ -248,14 +253,14 @@ Validate the full chain before touching Alfresco Share or ADW configuration.
 
 ### 4.1 Open the admin UI
 
-The admin UI is available at `http://<gateway-host>:<port>/gui/gateway/uxopian-ai/admin`. Verify:
+The admin UI is available at `http://<gateway-host>:<port>/uxopian-ai/admin`. Verify:
 - The LLM provider is listed as active
-- `AlfrescoSearchToolService`, `AlfrescoDocumentToolService`, `AlfrescoMetadataToolService` appear in the tools list
+- `AlfrescoFilterToolService`, `AlfrescoSearchToolService`, `AlfrescoDocumentToolService`, `AlfrescoMetadataToolService`, `AlfrescoRedactService` appear in the tools list
 
 ### 4.2 Send a test request
 
 ```bash
-curl -X POST http://<gateway-host>:<port>/gui/gateway/uxopian-ai/api/v1/requests \
+curl -X POST http://<gateway-host>:<port>/uxopian-ai/api/v1/requests \
   -H "Cookie: JSESSIONID=<your-alfresco-session>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -278,7 +283,7 @@ Ask the LLM to discover the Alfresco data model — this confirms the tool chain
 ]}]}'
 ```
 
-The LLM should call `getAlfrescoDataModel` and return available types. If the tool fails:
+The LLM should call `getDataModel` and return available types. If the tool fails:
 - Verify `ALFRESCO_BASE_URL` is reachable from uxopian-ai (Phase 2)
 - Verify CORS is configured (Phase 3.2)
 - Check that `X-User-Token` is forwarded by the gateway (visible in uxopian-ai DEBUG logs)
@@ -288,8 +293,8 @@ The LLM should call `getAlfrescoDataModel` and return available types. If the to
 | Check | Expected |
 |---|---|
 | POST `/api/v1/requests` with text message | LLM response |
-| `getAlfrescoDataModel` tool call triggered | Alfresco types listed in response |
-| Admin UI tool list | Three Alfresco tool services visible |
+| `getDataModel` tool call triggered | Alfresco types listed in response |
+| Admin UI tool list | Five Alfresco tool services visible |
 
 ---
 
@@ -320,41 +325,58 @@ See the [Quickstart with Alfresco + ARender](../getting_started/quickstart_alfre
 | Key | Env variable | Default | Description |
 |---|---|---|---|
 | `alfresco.base-url` | `ALFRESCO_BASE_URL` | (empty) | Alfresco repository base URL. Required when the plugin is enabled. |
-| `alfresco.cmm-enabled` | `ALFRESCO_CMM_ENABLED` | `false` | Enable custom content model lookup. When enabled, `getAlfrescoDataModel` surfaces custom types and aspects. |
+| `alfresco.legacy-base-url` | `ALFRESCO_LEGACY_BASE_URL` | derived from `base-url` | Base URL for legacy Alfresco webscript endpoints not yet migrated to the REST API v1. Auto-derived from `base-url` (e.g. `.../alfresco-api` → `.../alfresco`) — only set explicitly if your deployment's webscript path doesn't follow that convention. |
+| `alfresco.cmm-enabled` | `ALFRESCO_CMM_ENABLED` | `false` | Enable custom content model lookup. When enabled, `getDataModel` surfaces custom types and aspects. |
 | `alfresco.common-system-properties` | — | `cm:name`, `cm:title`, … | Fallback properties when CMM is disabled. |
-| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Must include `alfresco` to register the Alfresco tools. |
+| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files,interaction` | Must include `alfresco` to register the Alfresco tools. |
 
 ## Tools exposed to the LLM
 
-The plugin registers 13 tools in three groups, all tagged `alfresco`.
+The plugin registers 19 tools across five services, all tagged `alfresco`.
+
+### Filters (`AlfrescoFilterToolService`)
+
+| Tool | Purpose |
+|---|---|
+| `getDataModel` | Returns the tenant data model — types, properties, aspects (prerequisite for building type/property filters) |
+| `buildTypeFilter` | Builds an AFTS filter fragment matching an exact node type |
+| `buildPropertyContainsFilter` | Builds an AFTS filter fragment for partial text match on a property |
+| `buildPropertyEqualsFilter` | Builds an AFTS filter fragment for exact property value match |
+| `buildDateRangeFilter` | Builds an AFTS filter fragment for a date range |
+| `buildFullTextFilter` | Builds an AFTS filter fragment for full-text content search |
+| `buildFolderScopedFilter` | Scopes a search to a specific folder |
+| `buildAndClause` | Combines AFTS fragments into a single clause with AND |
+| `buildOrClause` | Combines AFTS fragments into a single clause with OR |
+| `buildAndClauseFromClauses` | Combines existing filter clauses into a global AND (nested logic) |
+| `buildOrClauseFromClauses` | Combines existing filter clauses into a global OR (nested logic) |
 
 ### Search (`AlfrescoSearchToolService`)
 
 | Tool | Purpose |
 |---|---|
-| `getAlfrescoDataModel` | Returns the tenant data model (prerequisite for all searches) |
-| `buildAlfrescoTypeFilter` | Builds AFTS filter on node type |
-| `buildAlfrescoPropertyContainsFilter` | Builds AFTS filter for partial text match |
-| `buildAlfrescoPropertyEqualsFilter` | Builds AFTS filter for exact property match |
-| `buildAlfrescoDateRangeFilter` | Builds AFTS filter for date ranges |
-| `buildAlfrescoFullTextFilter` | Builds AFTS full-text search filter |
-| `combineAlfrescoFilters` | Combines AFTS fragments with AND/OR |
-| `buildAlfrescoSort` | Builds sort specification |
-| `searchAlfrescoNodes` | Executes the assembled AFTS query |
+| `searchDocuments` | Executes the assembled filter clause(s) against the repository and returns matching documents (supports sorting and pagination via the filter clause) |
 
 ### Documents (`AlfrescoDocumentToolService`)
 
 | Tool | Purpose |
 |---|---|
-| `getAlfrescoDocumentIdsByName` | Looks up node IDs by document name |
-| `getAlfrescoDocumentContent` | Fetches document text content |
-| `listAlfrescoFolderContents` | Lists files in a folder |
+| `getDocumentIdsByName` | Looks up node IDs by document name |
+| `getDocumentContent` | Fetches document text content (via ARender OCR) |
+| `listFolderContents` | Lists files in a folder, unfiltered |
 
 ### Metadata (`AlfrescoMetadataToolService`)
 
 | Tool | Purpose |
 |---|---|
-| `getAlfrescoDocumentProperties` | Returns all metadata properties of a node |
+| `getDocumentProperties` | Returns all metadata properties of a node |
+| `updateDocumentProperty` | Updates the value of a metadata property on a node |
+
+### Redaction (`AlfrescoRedactService`)
+
+| Tool | Purpose |
+|---|---|
+| `prepareRedact` | Extracts the text elements of a document as candidates for redaction |
+| `applyObfuscation` | Applies the requested obfuscations and saves the redacted document back to Alfresco (destructive — asks for confirmation) |
 
 ## Common issues
 

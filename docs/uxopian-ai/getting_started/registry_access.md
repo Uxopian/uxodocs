@@ -32,8 +32,8 @@ docker login docker.uxopian.com
 ### Pull an image
 
 ```bash
-docker pull docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft3
-docker pull docker.uxopian.com/preview/uxopian-gateway:2026.0.0-ft3
+docker pull docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft4
+docker pull docker.uxopian.com/preview/uxopian-gateway:2026.0.0-ft4
 ```
 
 ### Use Cloudsmith images in Docker Compose
@@ -42,9 +42,9 @@ The Docker Compose examples include commented-out image lines for the Cloudsmith
 
 ```yaml
 # Comment out the Artifactory line:
-# image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
+# image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft4}
 # Uncomment the Cloudsmith line:
-image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
+image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft4}
 ```
 
 Repeat for `uxopian-gateway`. The `REGISTRY` variable does not apply to Cloudsmith images because the image path includes the `/preview/` repository segment.
@@ -80,7 +80,7 @@ echo "$REGISTRY_PASSWORD" | docker login artifactory.arondor.cloud:5001 \
 ### Verify access
 
 ```bash
-docker pull artifactory.arondor.cloud:5001/uxopian-gateway:2026.0.0-ft3
+docker pull artifactory.arondor.cloud:5001/uxopian-gateway:2026.0.0-ft4
 ```
 
 If the pull succeeds, your credentials are correct.
@@ -98,7 +98,7 @@ The Docker Compose examples use `${REGISTRY:-artifactory.arondor.cloud:5001}` as
 
 ## Current version
 
-The current release version is `2026.0.0-ft3`. The Docker Compose examples use `${UXOPIAN_VERSION:-2026.0.0-ft3}` as the version variable.
+The current release version is `2026.0.0-ft4`. The Docker Compose examples use `${UXOPIAN_VERSION:-2026.0.0-ft4}` as the version variable.
 
 ## Related pages
 

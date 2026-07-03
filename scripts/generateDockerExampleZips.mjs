@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const gettingStartedDir = resolve(__dirname, "../docs/uxopian-ai/getting_started");
 
 // Single source of truth for image versions
-const { uxopianVersion, opensearchVersion, registry } = JSON.parse(
+const { uxopianVersion, gatewayVersion, opensearchVersion, registry } = JSON.parse(
     readFileSync(resolve(__dirname, "./uxopian-ai-version.json"), "utf-8")
 );
 
@@ -15,6 +15,8 @@ const ENV_CONTENT = `# Uxopian AI — generated at build time, do not edit manua
 # To use a different registry, override REGISTRY below.
 
 UXOPIAN_VERSION=${uxopianVersion}
+# uxopian-gateway has not shipped a ${uxopianVersion} tag yet — pinned separately.
+GATEWAY_VERSION=${gatewayVersion}
 OPENSEARCH_VERSION=${opensearchVersion}
 REGISTRY=${registry}
 
@@ -25,18 +27,20 @@ AZURE_OPENAI_API_KEY=
 GEMINI_API_KEY=
 
 # Gateway public URL (update if not running on localhost)
-APP_BASE_URL=http://localhost:8085
+APP_BASE_URL=http://localhost:8085/uxopian-ai
 `;
 
 const ENV_CONTENT_ALFRESCO = `# Uxopian AI + Alfresco + ARender — generated at build time, do not edit manually
 
 UXOPIAN_VERSION=${uxopianVersion}
+# uxopian-gateway has not shipped a ${uxopianVersion} tag yet — pinned separately.
+GATEWAY_VERSION=${gatewayVersion}
 OPENSEARCH_VERSION=${opensearchVersion}
 REGISTRY=${registry}
 
 # Public URL of the gateway — must be reachable from the browser
 # Default works when running on localhost. Adjust for remote deployments.
-UXOPIAN_AI_PUBLIC_URL=http://localhost:8085
+UXOPIAN_AI_PUBLIC_URL=http://localhost:8085/share/uxopian-ai
 
 # Alfresco admin credentials — default works for this dev stack
 ALFRESCO_ADMIN_USER=admin
