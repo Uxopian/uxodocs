@@ -103,6 +103,17 @@ All CMIS connector properties are set on the `ui` service via environment variab
 | `ARENDERSRV_ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL` | `arender.server.alfresco.atom.pub.url` | `http://localhost:8080/alfresco/api/-default-/cmis/versions/1.1/atom` | CMIS AtomPub endpoint URL |
 | `ARENDERSRV_ARENDER_SERVER_ALFRESCO_CONTEXT` | `arender.server.alfresco.context` | `alfresco` | Alfresco context path |
 
+### Rendition handling
+
+By default, the connector reuses a PDF rendition already produced by Alfresco when one is available: it queries the document's CMIS renditions, and if a rendition of kind `pdf` exists it serves that rendition to ARender instead of the source file. When no PDF rendition exists, the connector falls back to the document's native content.
+
+Set `arender.server.alfresco.renditions.enabled=false` to disable this behavior. The connector then ignores Alfresco renditions entirely and always serves the document's native (original) content stream, so ARender renders every document from its source, even when a PDF rendition already exists in the repository or is created during the session.
+
+| Environment variable | Property | Default | Description |
+|---|---|---|---|
+| `ARENDERSRV_ARENDER_SERVER_ALFRESCO_RENDITIONS_ENABLED` | `arender.server.alfresco.renditions.enabled` | `true` | When `true`, serve an existing Alfresco PDF rendition if one is available, and fall back to the native content otherwise. When `false`, always serve the native content and never use Alfresco renditions |
+
+
 ### Authentication
 
 By default, the connector authenticates using the `alf_ticket` URL parameter (user-delegated). To use a technical service account instead, set `user` and `password`. When a service account is configured, all access to Alfresco uses that account regardless of the user's own ticket.

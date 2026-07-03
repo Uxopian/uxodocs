@@ -60,13 +60,13 @@ default.url.parser.use.locale.for.ids=true
 
 ## Header language
 
-The rendered email header labels (From, To, Subject, Date, etc.) default to French. To switch to English:
+The rendered email header labels (From, To, Subject, Date, etc.) default to French. To switch to English or German:
 
 ```properties
 emltopdf.config.header.language=EN
 ```
 
-Supported values: `FR`, `EN`.
+Supported values: `FR`, `EN`, `DE`.
 
 ## HTML embedded image resizing
 
