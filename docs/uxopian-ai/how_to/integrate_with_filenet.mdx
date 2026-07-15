@@ -116,6 +116,7 @@ filenet:
       title: Document Title
       dataType: "xs:string"
       multiValued: false
+      # allowedValues and usageHint are also accepted here — see below
     - name: DateCreated
       title: Date Created
       dataType: "xs:dateTime"
@@ -129,6 +130,8 @@ filenet:
 ```
 
 `ce-api-url` is the Content Engine Web Services (CEWS) endpoint, reachable from `uxopian-ai` — not the ICN/WebSphere host. `repository-id` is the object store's symbolic name (not its GUID).
+
+Each entry under `common-system-properties` and `writable-properties` also accepts two optional fields not shown above: `allowedValues` (a list restricting the values the LLM may pass to `buildPropertyEqualsFilter`) and `usageHint` (free text describing when/how to use the property, surfaced to the LLM via `getDataModel`).
 
 ### Checkpoint 0 — Connector is up
 
@@ -455,7 +458,7 @@ Once `filenet` is added to `plugins.tools.enabled-tags` ([Phase 0.2](#02-enable-
 |---|---|
 | `readDocumentText` | Reads the full OCR text of a document (via ARender) across all pages |
 | `getDocumentMetadata` | Returns all metadata properties (system + custom class) of a document |
-| `listFolderContents` | Lists documents in a folder (unfiltered, max 50) |
+| `fileNetListFolderContents` | Lists documents in a folder (unfiltered, max 50) |
 | `setDocumentProperty` | Updates a metadata property — only for properties listed in `filenet.writable-properties` |
 
 ### Redaction (`FileNetRedactTool`)
