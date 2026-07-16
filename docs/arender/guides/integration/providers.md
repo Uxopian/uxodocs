@@ -64,6 +64,7 @@ ARender v2026 ships the following provider images:
 |----------|-------------|-------------|----------------|
 | Alfresco | `arender-alfresco-provider` | 8788 | Alfresco via CMIS |
 | FileNet | `arender-filenet-provider` | 8787 | IBM FileNet Content Engine |
+| M-Files | `arender-mfiles-provider` | 8789 | M-Files via Web Service REST API |
 
 
 ## Broker registry configuration
@@ -95,6 +96,19 @@ Or as an environment variable:
 
 ```bash
 REGISTRY_PROVIDER_FILENET_URL=http://filenet-provider:8787
+```
+
+  </TabItem>
+  <TabItem value="mfiles" label="M-Files">
+
+```properties title="application.properties"
+registry.providers.mfiles.base-url=http://mfiles-provider:8789
+```
+
+Or as an environment variable:
+
+```bash
+REGISTRY_PROVIDERS_MFILES_BASE_URL=http://mfiles-provider:8789
 ```
 
   </TabItem>
