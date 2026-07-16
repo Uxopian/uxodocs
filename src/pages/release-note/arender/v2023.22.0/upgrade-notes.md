@@ -19,7 +19,7 @@ No properties were changed or deprecated in this release.
 
 ### New Properties
 
-* **`annotation.compensate.jni.page.normalization`** (default: `false`): When set to `true`, ARender compensates for the page normalization applied by the **JNIRenderer** microservice so that whole-page and zone redactions cover the full area of pages larger than A4 instead of being clipped to A4 dimensions. Set in the `application.properties` of the `arender-document-converter` module (TaskConversion).
+* **`annotation.compensate.jni.page.normalization`** (default: `false`): When set to `true`, ARender compensates for the page normalization applied by the **JNIRenderer** microservice so that annotations burned into pages larger than A4 are positioned and sized against the true page dimensions instead of being clipped to A4. This affects **every kind of annotation** (redactions, highlights, stamps, notes, drawings, …); redactions are the most critical case because a clipped redaction leaves confidential content exposed. Set in the `application.properties` of the `arender-document-converter` module (TaskConversion).
 
   :::warning
   JNIRenderer is the **default renderer** on the 2023.x line, so customers who redact documents that mix page sizes and have not switched to PDFOwl must set `annotation.compensate.jni.page.normalization=true` for the whole-page/zone redaction fix to take effect. See the [Redaction](#redaction) section below.
