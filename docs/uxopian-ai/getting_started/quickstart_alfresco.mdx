@@ -116,6 +116,7 @@ docker compose logs -f uxopian-ai
 3. Navigate to the Document Library and right-click a document.
 4. The AI actions appear in the context menu: **Chat IA**, **Summarize**, **Translate**, **Comparison**, **Extract invoice number**.
 5. Click an action to open the Uxopian AI chat panel with the document in context.
+6. Optionally open the admin dashboard from the user menu (top-right) → **Uxopian AI Admin page**, served at `http://localhost:8080/share/uxopian-ai/admin/`. It lists prompts, LLM providers, users, and usage statistics. Like the chat, it is reached same-origin through Traefik — it only works because `UXOPIAN_AI_PUBLIC_URL` points at `:8080` (see the architecture note below).
 
 If the actions do not appear, check the uxopian-ai logs:
 
@@ -123,21 +124,32 @@ If the actions do not appear, check the uxopian-ai logs:
 docker compose logs uxopian-ai
 ```
 
+If the actions appear and the chat panel opens, but sending a message fails silently (nothing renders, or the browser console shows a CORS error on `.../api/v1/conversations`), see [Keep the gateway same-origin with Share](#architecture-in-this-stack) above — `UXOPIAN_AI_PUBLIC_URL` in `.env` was likely changed to point at the gateway's own `:8085`.
+
+:::note[Chat replies must stay conversational]
+The Alfresco Share chat renders each assistant message as plain markdown. The bundled `config/prompts.yml` therefore instructs the assistant (in `basePrompt` and `alfrescoAssistant`) to **always answer in natural prose and never emit raw JSON or structured "choices" objects** — otherwise the model can return a machine-readable choice block that the Share chat shows as raw JSON instead of a readable answer. Keep those instructions if you customise the prompts.
+:::
+
 ## Architecture in this stack
 
 ```mermaid
 flowchart LR
-    Browser -->|":8080/share"| Share["Alfresco Share"]
+    Browser -->|":8080/share"| Proxy["Traefik<br/>(port 8080)"]
+    Proxy -->|"/share/uxopian-ai/**<br/>(except static assets)"| GW["Gateway<br/>(internal :8085)"]
+    Proxy -->|"everything else<br/>under /share"| Share["Alfresco Share"]
     Share -->|"Repo API"| Repo["Alfresco Repo"]
     Share -->|"ARender frame"| ARender["ARender UI"]
-    Share -->|"AI actions<br/>/share/uxopian-ai/"| GW["Gateway<br/>(port 8085)"]
     GW -->|"validates JSESSIONID<br/>AlfrescoProvider"| UX["Uxopian AI"]
     UX -->|"Share proxy"| Share
     UX --> OS["OpenSearch"]
     UX --> LLM["LLM Provider"]
 ```
 
-*Figure: AI action calls pass through the gateway, which validates the Alfresco session. Uxopian AI reads documents via the Share proxy using the user's own session.*
+*Figure: The browser only ever talks to Traefik on :8080. Traefik forwards AI action calls to the gateway (which validates the Alfresco session) and everything else to Share. The gateway is never exposed to the browser on its own port.*
+
+:::warning[Keep the gateway same-origin with Share]
+`UXOPIAN_AI_PUBLIC_URL` must stay `http://localhost:8080/share/uxopian-ai` — the same host and port as Share, not the gateway's own `:8085`. `uxopian-ai` and the gateway both echo the request's `Origin` back in `Access-Control-Allow-Origin`, and stacked across a real cross-origin call the duplicate header gets rejected outright by the browser (chat opens, but every message silently fails with a CORS error in the console). Same-origin requests never go through that check, which is why the stack routes the gateway through Traefik on `:8080` instead of exposing `:8085` directly. If you fork this Compose file, keep that Traefik routing — don't "simplify" it by pointing the browser straight at the gateway's port.
+:::
 
 ## Related pages
 

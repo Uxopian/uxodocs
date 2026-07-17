@@ -414,6 +414,20 @@ services:
   # Exposes uxopian-ai at /share/uxopian-ai/ — validates Alfresco Share sessions.
   # Pinned separately from UXOPIAN_VERSION: uxopian-gateway has not shipped a
   # 2026.0.0-ft4 tag yet, so it stays on the latest available release.
+  # Routed through Traefik on the SAME origin as Share (8080), not exposed on its
+  # own port to the browser. uxopian-ai and the gateway both echo the request's
+  # Origin back in Access-Control-Allow-Origin, and the two layers stack into a
+  # duplicate header that Chrome/Firefox reject outright on a cross-origin call.
+  # Same-origin requests never trigger the browser's CORS check, so serving
+  # everything from :8080 sidesteps the bug instead of relying on a CORS fix in
+  # either service.
+  # The Traefik rule below deliberately excludes /share/uxopian-ai/components/**
+  # and /share/uxopian-ai/uxopian-ai-chat.js: those are static JS/CSS baked into
+  # the Share image itself (see Dockerfile.alfresco-share) and served by Share's
+  # own Tomcat under the same path prefix — routing them to the gateway 404s and
+  # silently breaks the chat widget (no console error, the menu item just never
+  # appears). Everything else under /share/uxopian-ai/ (api, ws, admin, swagger)
+  # is proxied to the gateway.
   gateway-service:
     image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${GATEWAY_VERSION:-2026.0.0-ft3}
     container_name: gateway-service
@@ -425,6 +439,11 @@ services:
       - "8085:8085"
     volumes:
       - ./gateway-application.yaml:/app/application.yaml
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gateway.rule=PathPrefix(`/share/uxopian-ai`) && !PathPrefix(`/share/uxopian-ai/components`) && !Path(`/share/uxopian-ai/uxopian-ai-chat.js`)"
+      - "traefik.http.routers.gateway.priority=100"
+      - "traefik.http.services.gateway.loadbalancer.server.port=8085"
 
 volumes:
   alfresco-data:

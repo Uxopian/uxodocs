@@ -38,9 +38,12 @@ GATEWAY_VERSION=${gatewayVersion}
 OPENSEARCH_VERSION=${opensearchVersion}
 REGISTRY=${registry}
 
-# Public URL of the gateway — must be reachable from the browser
-# Default works when running on localhost. Adjust for remote deployments.
-UXOPIAN_AI_PUBLIC_URL=http://localhost:8085/share/uxopian-ai
+# Public URL of the gateway — must be reachable from the browser, and must be
+# same-origin with Alfresco Share (the gateway is routed through Traefik on
+# :8080 alongside Share; :8085 is not exposed to the browser). Default works
+# when running on localhost. Adjust for remote deployments, keeping the same
+# host:port Share is served from.
+UXOPIAN_AI_PUBLIC_URL=http://localhost:8080/share/uxopian-ai
 
 # Alfresco admin credentials — default works for this dev stack
 ALFRESCO_ADMIN_USER=admin
