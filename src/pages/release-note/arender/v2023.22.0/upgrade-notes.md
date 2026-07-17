@@ -1,7 +1,7 @@
 ---
 title: "ARender v2023.22.0 – Upgrade Notes"
 draft: false
-date: "2026-07-15"
+date: "2026-07-17"
 weight: -202322
 _build:
   list: never
@@ -19,11 +19,7 @@ No properties were changed or deprecated in this release.
 
 ### New Properties
 
-* **`annotation.compensate.jni.page.normalization`** (default: `false`): When set to `true`, ARender compensates for the page normalization applied by the **JNIRenderer** microservice so that annotations burned into pages larger than A4 are positioned and sized against the true page dimensions instead of being clipped to A4. This affects **every kind of annotation** (redactions, highlights, stamps, notes, drawings, …); redactions are the most critical case because a clipped redaction leaves confidential content exposed. Set in the `application.properties` of the `arender-document-converter` module (TaskConversion).
-
-  :::warning
-  JNIRenderer is the **default renderer** on the 2023.x line, so customers who redact documents that mix page sizes and have not switched to PDFOwl must set `annotation.compensate.jni.page.normalization=true` for the whole-page/zone redaction fix to take effect. See the [Redaction](#redaction) section below.
-  :::
+* **`annotation.compensate.jni.page.normalization`** (default: `false`): When set to `true`, ARender compensates for the page normalization applied by the **JNIRenderer** microservice so that annotations burned into pages larger than A4 are positioned and sized against the true page dimensions instead of being clipped to A4. This affects **every kind of annotation** (redactions, highlights, stamps, notes, drawings, …); redactions are the most critical case because a clipped redaction leaves confidential content exposed. See the [Redaction](#redaction) section below.
 
 ### Deleted Properties
 
@@ -42,12 +38,16 @@ No properties were deleted in this release.
 This release fixes two redaction defects that could leave content exposed in previously published documents:
 
 * On scanned or image-only PDFs, a redaction now physically removes the underlying page image instead of painting a black box over it. Documents previously redacted this way keep the original image embedded and the content can be recovered.
-* On documents that mix page sizes, a whole-page or zone redaction on a page larger than A4 is no longer clipped to A4 dimensions and now covers the full page area. This defect only occurs with the **JNIRenderer** microservice; documents rendered with **PDFOwl** are not affected. Because JNIRenderer is the default renderer on the 2023.x line, applying this fix requires setting `annotation.compensate.jni.page.normalization=true`. This compensation must **not** be enabled when using PDFOwl, as it would misplace redactions (see [New Properties](#new-properties)).
+* On documents that mix page sizes, a whole-page or zone redaction on a page larger than A4 is no longer clipped to A4 dimensions and now covers the full page area. This defect only occurs with the **JNIRenderer** microservice; documents rendered with **PDFOwl** are not affected. Because JNIRenderer is the default renderer on the 2023.x line, applying this fix requires setting `annotation.compensate.jni.page.normalization=true` (see [New Properties](#new-properties)).
 
 **Action required:**
 
 * Documents that were redacted and published with an affected version should be re-redacted and re-published with v2023.22.0 to guarantee the content is actually removed.
-* If you use the JNIRenderer microservice (the 2023.x default) and redact documents that mix page sizes, set `annotation.compensate.jni.page.normalization=true` on `arender-document-converter` (TaskConversion) so whole-page and zone redactions cover pages larger than A4. Do **not** enable it when using PDFOwl — the converter cannot detect the renderer, and the compensation would misplace redactions.
+* If you use the JNIRenderer microservice (the 2023.x default) and redact documents that mix page sizes, set `annotation.compensate.jni.page.normalization=true` on `arender-document-converter` (TaskConversion) so whole-page and zone redactions cover pages larger than A4.
+
+  :::warning
+  This compensation must **not** be enabled when using PDFOwl, as it would misplace redactions.
+  :::
 
 ## 💻 Behavior Changes
 

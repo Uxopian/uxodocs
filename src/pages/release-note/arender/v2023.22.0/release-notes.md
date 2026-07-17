@@ -1,7 +1,7 @@
 ---
 title: "ARender v2023.22.0 - Release Notes"
 draft: false
-date: "2026-07-15"
+date: "2026-07-17"
 weight: -202322
 aliases:
   - /release/2023.22/
