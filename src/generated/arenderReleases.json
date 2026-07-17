@@ -17,13 +17,21 @@
     "hasUpgradeNotes": true
   },
   {
+    "version": "v2023.22.0",
+    "title": "ARender v2023.22.0 - Release Notes",
+    "date": "2026-07-15",
+    "description": "Redaction fixes for scanned and large pages, annotation loading and interaction fixes, watermark positioning, EML conversion robustness, URL document-id handling, and a security upgrade.",
+    "slug": "/release-note/arender/v2023.22.0/release-notes",
+    "hasUpgradeNotes": true,
+    "latest": true
+  },
+  {
     "version": "v2023.21.0",
     "title": "ARender v2023.21.0 – Release Notes",
     "date": "2026-05-29",
     "description": "Email rendering fixes for S/MIME signed messages, embedded images and hyperlinks, PDF hyperlink navigation to named and cross-document destinations, more robust text search, and a security upgrade.",
     "slug": "/release-note/arender/v2023.21.0/release-notes",
-    "hasUpgradeNotes": true,
-    "latest": true
+    "hasUpgradeNotes": true
   },
   {
     "version": "v2023.20.0",
