@@ -73,6 +73,25 @@ tools.wkhtmltopdf.external.resource.urls.cleared=true
 Embedded images (e.g. `data:` URIs encoded in base64) and images referenced through relative paths are **not** affected by this option — they will still be rendered normally.
 :::
 
+## Compensate JNI page normalization for annotations
+
+When the **JNI PDF renderer** (`JNIPdfEngine`) is used, pages that are significantly larger than A4 are normalized to A4 dimensions for display, so that every page appears at the same size in the viewer. This display normalization also affects the geometry of any annotation placed on such a page: the annotation is positioned and sized against the normalized A4 dimensions instead of the true page dimensions. When the annotation is later burned into the downloaded document, it is applied to the true (larger) page and ends up mispositioned and undersized. This affects **every kind of annotation** (redactions, highlights, stamps, notes, drawings, …).
+
+The property `annotation.compensate.jni.page.normalization` can be enabled to rescale the annotation geometry from the normalized dimensions back to the true page dimensions before burning, so the burned annotations match what is displayed in the viewer.
+
+```properties title="application.properties located in ARender-Rendition-{{version}}\modules\TaskConversion"
+# Compensate the JNI renderer page normalization when burning page-relative annotations
+annotation.compensate.jni.page.normalization=true
+```
+
+:::warning
+Redactions are especially sensitive: a redaction is meant to permanently remove the underlying text or image from the burned document. If a redaction is mispositioned or undersized, part of the page that was supposed to be redacted is left exposed, and the confidential content underneath can still be read or extracted from the downloaded file. When using the JNI PDF renderer, enable this property so that redactions are burned over the correct area of the true page.
+:::
+
+:::note
+This property is only relevant when the **JNI PDF renderer** (`JNIPdfEngine`) is enabled on the service broker (`DSB_MICRO-SERVICES_PDF-RENDERER=JNIPdfEngine`). With the default PDFOwl renderer the page dimensions are not normalized, so this compensation is not needed. The property is disabled (`false`) by default.
+:::
+
 ## Visit card labels language
 
 VCF format is supported since the version 2023.6.0. Some information, such as address, phone or email are preceded by the type,
