@@ -23,13 +23,13 @@ flowchart LR
 
     ICN -->|"invokePluginService (AJAX)"| PLUGIN
     PLUGIN -->|"RS256 JWT<br/>providerId=FileNetProvider"| GW
-    GW --> AI
-    AI -->|"CE Web Services (SOAP)"| CE
+    GW -->|"X-User-Token<br/>(same JWT)"| AI
+    AI -->|"OpenTokenCredentials(user, token)<br/>per-caller impersonation"| CE
     AI --> LLM
     ICN -->|"Bearer token<br/>(web components)"| GW
 ```
 
-*Figure: The ICN plugin signs a JWT with a private key stored in WebSphere, then forwards requests to the Uxopian AI gateway, which validates the JWT via `FileNetProvider`. The browser also loads the chat web components directly from the gateway using the same token. Independently, `uxopian-ai` connects to the FileNet Content Engine directly (CE Web Services) to run searches and read/write documents — this connection is configured in [Phase 0](#phase-0--configure-the-filenet-connector-in-uxopian-ai) and does not go through the ICN plugin.*
+*Figure: The ICN plugin signs an RS256 JWT (issuer `icn-plugin`) identifying the ICN user, then forwards requests to the Uxopian AI gateway, which validates the JWT via `FileNetProvider` and forwards the raw token to `uxopian-ai` (header `X-User-Token`) together with the resolved user id. The browser also loads the chat web components directly from the gateway using the same token. `uxopian-ai` reuses that same identity for every call to the Content Engine: it wraps the caller's user id and token in an `OpenTokenCredentials` and executes the call via `Credentials.doAs(...)`, so FileNet sees and audits the real end user — not a shared service account. This requires the Content Platform Engine to trust that token, configured once via ACCE ([Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine-acce)).*
 
 The plugin exposes three operations:
 
@@ -44,10 +44,12 @@ The plugin exposes three operations:
 | Requirement | Details |
 |---|---|
 | IBM FileNet P8 + IBM Content Navigator | Version 3.0+ |
+| FileNet Content Engine | **5.5.9 or later** — required for `OpenTokenCredentials` (bearer-token authentication), used for per-caller impersonation — see [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine-acce) |
 | WebSphere Application Server | Hosts ICN |
 | Java 8 (JDK) | Required only to rebuild from source |
 | Maven 3.6+ | Required only to rebuild from source |
 | Uxopian AI + gateway | Deployed and reachable from WebSphere, with the FileNet connector configured — see [Phase 0](#phase-0--configure-the-filenet-connector-in-uxopian-ai) |
+| ACCE access to the P8 domain | Required to register the OIDC trust that lets the Content Platform Engine authenticate callers as themselves — see [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine-acce) |
 | Access to the Arondor Artifactory | Required only when building `uxopian-ai` from source — provides the proprietary IBM CE Java API jars (`jace`, `p8cel10n`) |
 
 ---
@@ -61,8 +63,10 @@ Before installing the ICN plugin, `uxopian-ai` itself must be able to reach the 
 The `filenet` integration module depends on two proprietary IBM Content Engine Java API artifacts:
 
 ```xml title="uxopian-ai/pom.xml"
-<filenet.version>5.5.6</filenet.version>
+<filenet.version>5.6.0</filenet.version>
 ```
+
+This must resolve to a Content Engine Java API version matching your CE server, and to **5.5.9 or later** — earlier versions do not implement `OpenTokenCredentials`, which the connector now requires (see [0.3](#03-configure-the-filenet-connection)).
 
 ```xml title="uxopian-ai/integrations/filenet/connector/pom.xml"
 <dependency>
@@ -107,8 +111,7 @@ Set the Content Engine connection and the properties surfaced to the LLM:
 filenet:
   ce-api-url: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/
   repository-id: <object-store-symbolic-name>
-  username: <service-account>
-  password: ${FILENET_PASSWORD:}
+  oidc-realm: ${FILENET_OIDC_REALM:}
   # Optional — overrides the built-in defaults (DocumentTitle, DateCreated, DateLastModified,
   # Creator, LastModifier, MajorVersionNumber, MimeType)
   common-system-properties:
@@ -133,6 +136,25 @@ filenet:
 
 Each entry under `common-system-properties` and `writable-properties` also accepts two optional fields not shown above: `allowedValues` (a list restricting the values the LLM may pass to `buildPropertyEqualsFilter`) and `usageHint` (free text describing when/how to use the property, surfaced to the LLM via `getDataModel`).
 
+:::info[No shared service account]
+Every FileNet call is authenticated as the **current caller**, not a shared service account. For each request, `FileNetCeClient` reads the authenticated user (id + token) from `AiContext` — populated from the JWT the gateway forwards as `X-User-Token` — and wraps them in an `OpenTokenCredentials(userId, token, oidcRealm)`, then runs the Content Engine call via `Credentials.doAs(...)`. FileNet therefore logs and authorizes every operation against the real end user. `oidc-realm` is the name of the OIDC/OAuth provider trust registered on the Content Platform Engine that lets it accept this token — see [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine-acce). It must match that realm name exactly, and there is no fallback: if the caller has no identity or token in `AiContext`, the call fails rather than silently using a shared account.
+:::
+
+### 0.4 Configure OIDC trust on the Content Platform Engine (ACCE)
+
+Per-caller impersonation only works if the Content Platform Engine trusts the JWT issued by the ICN plugin. This trust is registered once per environment, directly on the P8 domain — it is infrastructure configuration, not something set in `uxopian-ai` or the ICN plugin:
+
+1. Open ACCE (Administration Console for Content Platform Engine) and connect to the P8 domain hosting the target object store.
+2. Register an OIDC/OAuth identity provider trust (the exact menu path depends on your CE release — consult IBM's FileNet P8 documentation for your version) using:
+   - the same RSA **public key** exposed by the ICN plugin at `?op=public-key` ([Phase 3.1](#31-register-the-plugins-public-key-with-filenetprovider))
+   - the same **issuer** as the plugin's JWTs (the `icn.plugin.jwt.issuer` JVM property, default `icn-plugin`)
+3. Name the provider/realm — this is the value to set in `filenet.oidc-realm` / `FILENET_OIDC_REALM`.
+4. Confirm that the identities carried by the JWT (the ICN user id) resolve to valid users in the P8 domain's directory — CE authorizes and audits calls against this identity directly, so it must already exist there.
+
+:::warning[Re-register whenever the plugin's keystore changes]
+If the ICN plugin's keystore is replaced ([Modifying the plugin](#replacing-the-keystore)), the public key changes. Update both the gateway's `filenet.jwt.public-key` ([Phase 3.1](#31-register-the-plugins-public-key-with-filenetprovider)) and the OIDC trust registered in ACCE, or impersonation will start failing with `E_NOT_AUTHENTICATED`.
+:::
+
 ### Checkpoint 0 — Connector is up
 
 Check uxopian-ai startup logs for confirmation:
@@ -145,7 +167,7 @@ Initializing FileNet CE client. CEWS: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/,
 |---|---|
 | uxopian-ai logs | `FileNetSearchToolService`, `FileNetFilterToolService`, `FileNetDocumentToolService`, `FileNetRedactTool` registered |
 | Admin UI tool list | The four FileNet tool services appear, tagged `filenet` |
-| A search request | Returns results without a CE connection error |
+| A search request, made as a real ICN user | Returns results without a CE connection error, and FileNet's own audit trail attributes the call to that user (not a shared account) |
 
 ---
 
@@ -170,7 +192,7 @@ Contents:
 | `src/main/java/com/uxopian/icn/UxopianAction.java` | Context menu action for P8 documents |
 | `src/main/java/com/uxopian/icn/UxopianFeature.java` | ICN feature panel (AI Chat tab) — defined but currently **not registered** in `UxopianPlugin`; the chat is opened only via the context menu action and the toolbar button below |
 | `src/main/java/com/uxopian/icn/UxopianProxyService.java` | Servlet — JWT signing and request proxy |
-| `src/main/java/com/uxopian/icn/jwt/JwtSigner.java` | RS256 JWT generation (30 s TTL) |
+| `src/main/java/com/uxopian/icn/jwt/JwtSigner.java` | RS256 JWT generation (300 s TTL — long enough to survive the full round trip through the gateway and into a FileNet CE call) |
 | `src/main/java/com/uxopian/icn/jwt/KeystoreLoader.java` | PKCS12/JKS keystore loader with WebSphere IBMJCE fallback |
 | `src/main/resources/com/uxopian/icn/WebContent/actionHandler.js` | Dojo module — token fetch, web component injection, toolbar button |
 | `src/main/resources/com/uxopian/icn/WebContent/icon.svg` | Chat button icon |
@@ -421,7 +443,7 @@ After editing, rebuild the JAR with `mvn clean package` to re-embed the updated 
 |---|---|---|---|
 | `filenet.ce-api-url` | — | (empty) | Content Engine Web Services (CEWS) endpoint. Required. |
 | `filenet.repository-id` | — | (empty) | Object store symbolic name. Required. |
-| `filenet.username` / `filenet.password` | `FILENET_PASSWORD` for the password | (empty) | FileNet service account credentials used for every CE call. |
+| `filenet.oidc-realm` | `FILENET_OIDC_REALM` | (empty) | Name of the OIDC/OAuth provider trust registered on the Content Platform Engine via ACCE ([Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine-acce)). Used to build a per-caller `OpenTokenCredentials` — every CE call is authenticated as the current end user, not a shared account. Required. |
 | `filenet.common-system-properties` | — | `DocumentTitle`, `DateCreated`, `DateLastModified`, `Creator`, `LastModifier`, `MajorVersionNumber`, `MimeType` | Properties surfaced to the LLM as the default data model. |
 | `filenet.writable-properties` | — | (empty) | Properties the LLM is allowed to update via `setDocumentProperty`. |
 | `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files,interaction` | Must include `filenet` to register the FileNet tools. |
@@ -477,6 +499,9 @@ The `FileNetHelper` bean (bridging FileNet documents to ARender for OCR) is alwa
 | FileNet tools absent from admin tool list | Tag whitelist excludes `filenet` | Set `PLUGINS_TOOLS_ENABLED_TAGS` to include `filenet` and restart uxopian-ai (Phase 0.2) |
 | `Initializing FileNet CE client` never logged, or CE connection error | `filenet.ce-api-url` / `filenet.repository-id` missing or wrong | Verify the CEWS endpoint is reachable from uxopian-ai and the object store symbolic name is correct (Phase 0.3) |
 | Build fails resolving `com.filenet:jace` / `com.filenet:p8cel10n` | No access to the Arondor Artifactory | Confirm network access and credentials for `artifactory.arondor.cloud` (Phase 0.1) |
+| `Cannot impersonate caller against FileNet: missing user identity or token` | The current request has no authenticated user or token in `AiContext` | Confirm the gateway route is not `public: true` for this path, and that the ICN plugin's JWT reaches uxopian-ai unmodified as `X-User-Token` |
+| `E_NOT_AUTHENTICATED` from FileNet on every call | The Content Platform Engine does not trust the caller's JWT, or `filenet.oidc-realm` does not match the realm registered in ACCE | Confirm the OIDC provider trust in ACCE uses the same public key and issuer as the ICN plugin, and that `filenet.oidc-realm` matches its realm name exactly (Phase 0.4) — also check CE is 5.5.9+ |
+| `E_NOT_AUTHENTICATED` for one specific user only | The JWT's user id does not resolve to a valid CE user in the P8 domain directory | Confirm the ICN user exists (and is spelled identically) in the P8 domain's directory configuration |
 | Context menu action missing | Plugin not loaded | Check ICN Admin Console plug-in list; confirm the JAR path is correct and ICN restarted |
 | `op=token` returns `{"error":"..."}` | Keystore not found or wrong alias/password | Set `icn.plugin.keystore.path` to an absolute path; verify alias and password in WebSphere JVM custom properties |
 | Web component assets fail to load (403/401) | `uxopian.ai.host` points to wrong URL or gateway route is not public for assets | Confirm `uxopian.ai.host` matches the gateway route; set `/api/web-components/**` to `public: true` |

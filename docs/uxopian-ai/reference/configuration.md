@@ -260,8 +260,7 @@ Configuration for the FileNet plugin (loaded only when `plugins.tools.enabled-ta
 |---|---|---|---|
 | `filenet.ce-api-url` | — | (empty) | Content Engine Web Services (CEWS) endpoint, e.g. `http://<ce-host>:<port>/wsi/FNCEWS40MTOM/`. Required when the plugin is enabled. |
 | `filenet.repository-id` | — | (empty) | Object store symbolic name (not its GUID). Required when the plugin is enabled. |
-| `filenet.username` | — | (empty) | Service account used to authenticate every CE call. |
-| `filenet.password` | `FILENET_PASSWORD` | (empty) | Password for the service account. |
+| `filenet.oidc-realm` | `FILENET_OIDC_REALM` | (empty) | Name of the OIDC/OAuth provider trust registered on the Content Platform Engine via ACCE. Every CE call is authenticated as the current caller (via `OpenTokenCredentials`), not a shared service account — see [Integrate with FileNet](../how_to/integrate_with_filenet.mdx#04-configure-oidc-trust-on-the-content-platform-engine-acce). Required. |
 | `filenet.common-system-properties` | — | `DocumentTitle`, `DateCreated`, `DateLastModified`, `Creator`, `LastModifier`, `MajorVersionNumber`, `MimeType` | List of properties (name, title, dataType, multiValued, allowedValues) surfaced to the LLM as the searchable/readable data model. Override if your object store uses a different default schema. |
 | `filenet.writable-properties` | — | (empty) | List of properties (same structure as above) the LLM is allowed to update via `setDocumentProperty`. Empty by default — no property is writable until explicitly listed. |
 
@@ -271,8 +270,7 @@ Example:
 filenet:
   ce-api-url: ${FILENET_CE_API_URL:}
   repository-id: ${FILENET_REPOSITORY_ID:}
-  username: ${FILENET_USERNAME:}
-  password: ${FILENET_PASSWORD:}
+  oidc-realm: ${FILENET_OIDC_REALM:}
   # common-system-properties: (defaults shipped with the plugin)
   # writable-properties:
   #   - name: DocumentTitle
