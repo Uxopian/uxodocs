@@ -140,6 +140,12 @@ function GuidesCard({ title, description, items, color }) {
 
 const ConnectorsList = [
     {
+        title: "MCP Server",
+        icon: "🤖",
+        description: "Drive FlowerDocs administration from an AI assistant",
+        link: "/docs/flowerdocs/connecteurs/mcp/getting-started",
+    },
+    {
         title: "FlowerDocs Companion",
         logo: "/img/flowerdocs/documentation/microsoft.png",
         description:
@@ -154,13 +160,17 @@ const ConnectorsList = [
     },
 ];
 
-function ConnectorCard({ title, logo, description, link }) {
-    const logoUrl = useBaseUrl(logo);
+function ConnectorCard({ title, logo, icon, description, link }) {
+    const logoUrl = useBaseUrl(logo || "");
 
     return (
         <Link to={link} className={styles.connectorCard}>
             <div className={styles.connectorIcon}>
-                <img src={logoUrl} alt={`${title} logo`} />
+                {logo ? (
+                    <img src={logoUrl} alt={`${title} logo`} />
+                ) : (
+                    <span style={{ fontSize: "2.5rem", lineHeight: 1 }}>{icon}</span>
+                )}
             </div>
             <h4 className={styles.connectorTitle}>{title}</h4>
             <p className={styles.connectorDescription}>{description}</p>
