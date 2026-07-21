@@ -28,7 +28,6 @@ conf/
     OpenChatShortcut.xml        # [Order 2] Keyboard shortcut: open chat panel
     UxoAiAdminShortcut.xml      # [Order 2] Keyboard shortcut: open admin UI
     openChat.xml                # [Order 2] openChat() helper function
-    refreshToken.xml            # [Order 2] Token refresh helper
     translate.xml               # [Order 2] Translation helper
     web-comp.xml                # [Order 2] Web component loader — REQUIRED
     qp-search.xml               # [Order 2] Quick Prompt — search capture
@@ -39,7 +38,6 @@ conf/
     UxoAiAdminShortcut/
     consts/
     openChat/
-    refreshToken/
     translate/
     uxoai-utils/
     web-comp/
@@ -61,7 +59,6 @@ flowchart TD
     openChat["openChat"]
     shortcut["OpenChatShortcut"]
     adminShortcut["UxoAiAdminShortcut"]
-    refresh["refreshToken"]
     translate["translate"]
 
     qpSearch["qp-search — Order 2<br/>searchCapture<br/>getCategoryFromUrl"]
@@ -73,7 +70,6 @@ flowchart TD
     consts --> webcomp
     consts --> shortcut
     consts --> adminShortcut
-    consts --> refresh
     utils --> openChat
     utils --> translate
     webcomp --> openChat
@@ -224,10 +220,6 @@ Use this when the user wants a free-form conversation not tied to a specific doc
 ### UxoAiAdminShortcut.xml / UxoAiAdminShortcut/
 
 Adds an entry in the FlowerDocs application switcher menu pointing to the Uxopian AI admin panel (`GATEWAY_ENDPOINT/admin`). The entry is only injected for users with the `ADMIN` or `SYSTEM_ADMIN` profile.
-
-### refreshToken.xml / refreshToken/
-
-Registers a `registerForComponentChange` listener that pings `GATEWAY_ENDPOINT` on every component navigation. This keeps the gateway session cache warm and prevents the `FlowerDocsProvider` from evicting the session between navigations.
 
 ### translate.xml / translate/
 
