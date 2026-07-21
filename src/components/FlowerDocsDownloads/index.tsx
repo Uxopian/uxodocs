@@ -23,63 +23,63 @@ const FlowerDocsDownloads: React.FC<FlowerDocsDownloadsProps> = ({
     const downloadItems: DownloadItem[] = [
         {
             title: "FlowerDocs GUI",
-            description: "Interface graphique",
+            description: "Graphical interface",
             fileType: "JAR",
             artifactPath: "com/flower/docs/gui/flower-docs-gui-webapp",
             fileName: `flower-docs-gui-webapp-${version}.jar`
         },
         {
             title: "FlowerDocs Core",
-            description: "Coeur de l'application exposant des web services",
+            description: "Application core exposing web services",
             fileType: "JAR",
             artifactPath: "com/flower/docs/core/flower-docs-core-webapp",
             fileName: `flower-docs-core-webapp-${version}.jar`
         },
         {
             title: "FlowerDocs CLM",
-            description: "Interagir avec FlowerDocs en ligne de commandes",
+            description: "Interact with FlowerDocs via the command line",
             fileType: "JAR",
             artifactPath: "com/flower/docs/core/flower-docs-clm",
             fileName: `flower-docs-clm-${version}-bundle.jar`
         },
         {
             title: "FlowerDocs default template",
-            description: "Template par défaut de FlowerDocs",
+            description: "Default FlowerDocs template",
             fileType: "ZIP",
             artifactPath: "com/flower/docs/flower-templates",
             fileName: `flower-templates-${version}-package.zip`
         },
         {
-            title: "Connecteur ARender FlowerDocs",
-            description: "Connecteur ARender pour FlowerDocs",
+            title: "ARender FlowerDocs Connector",
+            description: "ARender connector for FlowerDocs",
             fileType: "JAR",
             artifactPath: "com/flower/docs/arender/flower-docs-arender-hmi",
             fileName: `flower-docs-arender-hmi-${version}.jar`
         },
         {
             title: "ARender HMI",
-            description: "Interface graphique de la visionneuse",
+            description: "Viewer graphical interface",
             fileType: "JAR",
             artifactPath: "com/arondor/arender/arondor-arender-hmi-spring-boot",
             fileName: `arondor-arender-hmi-spring-boot-${arenderVersion}.jar`
         },
         {
             title: "ARender Rendition Server",
-            description: "Moteur de rendition de la visionneuse",
+            description: "Viewer rendition engine",
             fileType: "ZIP",
             artifactPath: "com/arondor/arender/micro/services/rendition-engine-package",
             fileName: `rendition-engine-package-${arenderVersion}.zip`
         },
         {
-            title: "Solution GEC",
-            description: "Gestion Electronique de Courriers",
+            title: "FlowerDocs GEC",
+            description: "Electronic Mail Management",
             fileType: "ZIP",
             artifactPath: "com/arondor/flower/gec/flower-gec-packaging",
             fileName: `flower-gec-packaging-${version}-package-client.zip`
         },
         {
-            title: "Solution eProcess",
-            description: "Automatisation de processus métier",
+            title: "FlowerDocs eProcess",
+            description: "Business process automation",
             fileType: "ZIP",
             artifactPath: "com/arondor/flower/env/e-enveloppe-packaging",
             fileName: `e-enveloppe-packaging-${version}-package-client.zip`
@@ -87,7 +87,7 @@ const FlowerDocsDownloads: React.FC<FlowerDocsDownloadsProps> = ({
     ];
 
     const getDownloadUrl = (item: DownloadItem) => {
-        const itemVersion = item.title.includes("ARender") && !item.title.includes("Connecteur")
+        const itemVersion = item.title.includes("ARender") && !item.title.includes("Connector")
             ? arenderVersion
             : version;
         return `${baseUrl}/${item.artifactPath}/${itemVersion}/${item.fileName}`;
