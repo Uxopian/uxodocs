@@ -90,3 +90,5 @@ No specific changes have been made to this version. It benefits from all the fix
 ### Overview
 
 No specific changes have been made to this version. It benefits from all the fixes and improvements made to FlowerDocs.
+
+<FlowerDocsDownloads version="2025.5.0" arenderVersion="2023.21.0" />
