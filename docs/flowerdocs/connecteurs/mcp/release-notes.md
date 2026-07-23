@@ -15,7 +15,7 @@ import FlowerDocsMcpDownload from '@site/src/components/FlowerDocsMcpDownload';
 
 The FlowerDocs MCP Server gives access to FlowerDocs configuration, creating tag, document, folder or task classes, adjusting a workflow, updating a GUI configuration directly through XML files, without going through the admin GUI or requiring custom development. An MCP-compatible AI assistant (Claude Desktop, Claude Code, or any other compatible client) acts as the interface for driving this configuration in natural language. This first version covers full administration (tag/document/folder/task classes, virtual folder classes, ACLs, scopes, workflows), technical documents (scripts, GUI configurations, operation handlers, CSS, routes), configuration components (profile tabs and other technical virtual folder / folder instances), and cache visibility.
 
-This is its first release note. The server has its own release train, independent from FlowerDocs. It will move at its own pace, including between two FlowerDocs releases, so you can expect update notes here more frequently than for FlowerDocs itself.
+This is its first release note. The server has its own fast-track release train, independent from FlowerDocs, and may be updated between FlowerDocs releases.
 
 For installation and configuration, see the [MCP Server documentation](../getting-started).
 

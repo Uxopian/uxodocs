@@ -6,7 +6,7 @@ date: "2026-07-21T09:00:00+02:00"
 
 # FlowerDocs MCP Server
 
-The FlowerDocs MCP server exposes FlowerDocs **administration and configuration management** as tools that an AI assistant can call, using the [Model Context Protocol](https://modelcontextprotocol.io). Connect it to Claude Desktop or Claude Code and drive FlowerDocs in natural language: create tag classes, edit GUI configurations, manage scripts and operation handlers, purge caches, and more.
+The FlowerDocs MCP server exposes FlowerDocs **administration and configuration management** as tools that an AI assistant can call, using the [Model Context Protocol](https://modelcontextprotocol.io). Connect any MCP-compatible assistant (Claude Desktop, Claude Code, Cursor, VS Code, and others) and drive FlowerDocs in natural language: create tag classes, edit GUI configurations, manage scripts and operation handlers, purge caches, and more.
 
 It runs as a standalone service alongside your FlowerDocs Core and GUI, and speaks the Model Context Protocol over the Streamable HTTP transport.
 
