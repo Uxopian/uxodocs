@@ -71,6 +71,20 @@ Best when the source is already cloud-hosted, or when the customer is fine openi
 </div>
 </div>
 
+### Cloud-hosted, not SaaS
+
+:::warning[Fast2 in the cloud is a dedicated instance, not a multi-tenant SaaS]
+
+Running Fast2 in the cloud means a **dedicated instance you stand up for the migration**, not a multi-tenant, always-on service that Uxopian hosts for you. That is a deliberate design choice, not a missing feature:
+
+- **A migration is a bounded project, not a permanent service.** It runs for the length of the engagement and then stops. The 24/7 high-availability, auto-respawn, shared-infrastructure model of a true SaaS is the wrong fit, technically and commercially, for a workload that is transient by nature.
+- **Throughput depends on proximity to the data.** A dedicated instance placed next to the source and target, for example inside the customer's own cloud tenant, moves content faster than routing it through a remote, shared platform.
+- **The content stays under the customer's control.** The documents being migrated are the customer's own sensitive data. Keeping Fast2 inside the customer's environment keeps data residency, isolation, and contractual constraints in the customer's hands rather than a third party's.
+
+So "cloud" here gives you the best of both: the elasticity and reach of the cloud (fast to stand up, reachable from anywhere, sized to the migration volume) without the mismatch of a permanent shared SaaS.
+
+:::
+
 ## Option 3: Hybrid
 
 <div style={{display:'flex',gap:'2rem',alignItems:'center',flexWrap:'wrap',margin:'1.5rem 0'}}>
