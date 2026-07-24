@@ -48,7 +48,7 @@ The ARender viewer embedded in FlowerDocs has also been updated to version 2026.
 * Downloading several documents with identical names into a single archive no longer causes an error.  
 * PDF versions of emails can now also display headers in German, in addition to French and English.
 
-For more information, see the ARender release notes [here](https://doc.uxopian.com/release-note/arender/v2026.0.0/release-notes/).
+For more information, see the ARender release notes [here](https://doc.uxopian.com/release-note/arender/v2026.1.0/release-notes/).
 
 ## **For integrators**
 
@@ -74,7 +74,7 @@ The migration tool for upgrading from 2025 to 2026 is now functional in AWS envi
 
 The update to ARender 2026.1.0 also reduces resource consumption on the rendition server, thanks to the default deactivation of a Spring Security observation mechanism that had become unnecessarily costly since the migration to Spring Boot 4\. This same ARender update also includes its own set of security fixes and Docker image updates following the continuous analysis of its third-party dependencies.
 
-For more information, see the ARender release notes here.
+For more information, see the ARender release notes [here](https://doc.uxopian.com/release-note/arender/v2026.1.0/release-notes/).
 
 ## **Bug fixes**
 
