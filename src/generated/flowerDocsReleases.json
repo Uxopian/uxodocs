@@ -1,12 +1,21 @@
 [
   {
+    "version": "2026.1.0",
+    "majorVersion": "2026",
+    "date": "2026-07-24",
+    "description": "FlowerDocs 2026.1.0 is a consolidation release improving reliability of search, CSV export, column management, virtual folder display in ARender, and document versioning.",
+    "hasUpgradeNotes": false,
+    "slug": "2026.1.0",
+    "latest": true
+  },
+  {
     "version": "2026.0.0",
     "majorVersion": "2026",
     "date": "2026-06-15",
     "description": "Version 2026.0.0 is a major release that significantly modernizes FlowerDocs' technical foundations with the migration to Spring Boot 4, Spring Framework 6, and OpenSearch 3. It also brings new featur",
     "hasUpgradeNotes": true,
     "slug": "2026.0.0",
-    "latest": true
+    "latest": false
   },
   {
     "version": "2025.5.0",
@@ -15,7 +24,7 @@
     "description": "FlowerDocs 2025.5.0 is a minor release that includes bug fixes reported by users and integration partners. It also includes the restoration of the Enter key to trigger a search and the update of the ARender viewer to version 2023.21.0.",
     "hasUpgradeNotes": true,
     "slug": "2025.5.0",
-    "latest": false
+    "latest": true
   },
   {
     "version": "2025.4.0",
