@@ -159,7 +159,7 @@ Documents added from Companion in GEC solutions can now be indexed immediately: 
 
 #### **💻 History**
 
-In FlowerDocs GEC: the `classid` technical field is now consistently set on tasks created during mail copying or routing, ensuring the custom icon for GEC task classes displays reliably in the history. No impact on users. 
+In FlowerDocs GEC: the `classid` technical field is now set on the facts created when a mail is copied or routed, ensuring the custom icon for GEC task classes displays reliably in the history. No impact on users. 
 
 #### ⚙️ **Customization banner**
 
