@@ -1,13 +1,14 @@
 ---
 title: Upgrade Notes 2026.0.0
 description: Upgrade Notes 2026.0.0
+toc_max_heading_level: 4
 ---
 
 # Upgrade notes 2026.0.0
 
-# Version upgrade
+## Version upgrade
 
-## Upgrading from 2025.x.x
+### Upgrading from 2025.x.x
 
 Direct upgrade is supported, you will need to follow the plan :
 
@@ -17,7 +18,7 @@ Direct upgrade is supported, you will need to follow the plan :
 4. Update systemd services if use them (see [Launch](/docs/flowerdocs/install/start))
 5. Start all applications with their prerequisites
 
-## Upgrading from versions 2.7.x and 2.8.x
+### Upgrading from versions 2.7.x and 2.8.x
 
 Upgrades from versions 2.7 or 2.8 to 2026.0.0 must follow the follow plan:
 
@@ -27,7 +28,7 @@ Upgrades from versions 2.7 or 2.8 to 2026.0.0 must follow the follow plan:
 4. Update systemd services if use them (see [Launch](/docs/flowerdocs/install/start))
 5. Start all applications with their prerequisites
 
-# Prerequisite
+## Prerequisite
 
 See the [Prerequisites](/docs/flowerdocs/install/prerequisites) page for the full requirements.
 
@@ -41,9 +42,9 @@ See the [Prerequisites](/docs/flowerdocs/install/prerequisites) page for the ful
 | Operating system locale | UTF-8 was enforced applicatively | UTF-8 (the application now fails to start if `file.encoding` is not UTF-8) |
 | FlowerDocs Starter Client base | SpringBoot 2.7.18 | Spring Boot 4.0.6 |
 
-# Architecture
+## Architecture
 
-## Removed components
+### Removed components
 
 * **SOAP web services :** The `/services` endpoint, all WSDL/XSD descriptors, `flower-docs-ws-api` and `flower-docs-ws-client` modules are removed. Any third-party integration consuming `/services/*.wsdl` must migrate to the [REST API](/docs/flowerdocs/apis/core/intro). This includes **Companion**. Existing versions of Companion does not work with 2026 versions. A new version based on REST API will be released soon.
 * **Apache CXF** — the SOAP engine, removed together with the SOAP web services.
@@ -51,7 +52,7 @@ See the [Prerequisites](/docs/flowerdocs/install/prerequisites) page for the ful
 * Spring Boot self-executable JAR layout : Spring Boot 4 does not support this feature anymore. The jar must be explicitly launched with `java -jar`. systemd examples in the [documentation](/docs/flowerdocs/install/start) have been updated to reflect this change.
 * Deprecated **FlowerDocs.jsp** redirect has been removed.
 
-## Modified components
+### Modified components
 
 * **OpenSearch** 1.x → 3.6.0 : a reindex of the data is **mandatory** (see [FlowerDocs 2026 upgrade](/docs/flowerdocs/install/opensearch/os-migrate)). Properties move to `opensearch.*` namespaces (see [Data](#data) and [Configuration](#configuration)).
 * **ARender** 2023.x → 2026.0.1
@@ -60,27 +61,27 @@ See the [Prerequisites](/docs/flowerdocs/install/prerequisites) page for the ful
 * **AWS SDK** v1 → v2
 * **Redis** connection properties move to the `spring.data.redis.*` namespace (see [Configuration](#configuration)).
 
-## Added components
+### Added components
 
 * MixPanel library has been introduced into FlowerDocs GUI. It is enabled by default but can be disabled if needed.
 
-## Deprecated components
+### Deprecated components
 
 * OperationHook has been renamed to RestOperationHandler for naming uniformity. FlowerDocs handle both for the moment. OperationHook will be removed on next major release. We recommend to migrate OperationHook to [RestOperationHandler](/docs/flowerdocs/config/core/operation/handlers/rest-operation-handler)
 
-# Customisation and configuration
+## Customisation and configuration
 
-## Configuration {#configuration}
+### Configuration {#configuration}
 
 The full Core property reference is on the [Core configuration](/docs/flowerdocs/install/config/core-config) page.
 
-### Configuration properties to remove
+#### Configuration properties to remove
 
 * All `zuul.*` properties
 * JVM Param `-Xverify:none` — removed in JDK 25 and rejected at startup.
 * JVM Param `-Dflower.docs.core.addon=classpath:flower-docs-services-drools.xml` — the standalone Drools services add-on file no longer exists
 
-### Replaced configuration properties
+#### Replaced configuration properties
 
 | Removed | Replacement |
 | :---- | :---- |
@@ -95,40 +96,38 @@ The full Core property reference is on the [Core configuration](/docs/flowerdocs
 
 *Some other properties may have changed due to the Spring major upgrade.*
 
-## Product
-
-### Technical changes
+### Product
 
 #### Security
 
 * Improvements to FlowerDocs security have been made by upgrading library versions and internal behaviours. This proactive approach ensures better protection against vulnerabilities.
 
-### Behaviour changes
+#### Behaviour changes
 
-#### Performance
+##### Performance
 
 * Cache management has been improved for user and groups to enhance performance and synchronization with LDAP.
 * 2026.0.0 ships explicit pool and timeout settings tuned to better handle workload. Several **defaults changed** versus 2025. Adding timeout avoids hanging thread if resource is not available.
 
-#### Functional
+##### Functional
 
 * Creating or updating a component with two tags of the same name is now rejected with the functional error `F00040` (previously the duplicate was silently removed).
 
-#### Exploitation
+##### Exploitation
 
 * `FileEncodingForcer` — replaced by a UTF-8 verification at startup; the application fails fast if the JVM is not running in UTF-8.
 * Security headers have been hardened (see [Security headers](/docs/flowerdocs/install/config/core-config#security-headers)). If you need customisation about them, feel free to ask the support team.
 * **Production-ready Docker images** : the Docker images have been hardened to be more secure and more configurable.
 * CLM CLI commands renamed (space-separated → hyphenated) to uniformize naming: `string encrypt` → `string-encrypt`, `string decrypt` → `string-decrypt`, `dir analyze` → `dir-analyze`, `dir encrypt` → `dir-encrypt`. The directory commands are documented in [directory encryption](/docs/flowerdocs/config/core/securite/files).
 
-### Delete
+#### Delete
 
 * **Legacy Camunda `ScriptOperationHandler` class-name remap removed**. The 2025 transitional fallback that silently rewrote `com.flower.docs.bpm.core.operation.ScriptOperationHandler` to `com.flower.docs.core.tsp.operation.script.ScriptOperationHandler` is gone. Update any remaining `handler` tags or they will fail at handler resolution (see [Script handler](/docs/flowerdocs/config/core/operation/handlers/script)).
 * Custom cookie serializer for handling SameSite cookie attribute has been deleted as SpringBoot now handles it correctly. You can remove `gui.custom.cookie.serializer.enabled` safely.
 
-## API
+### API
 
-### Behaviour changes {#behaviour-changes-1}
+#### Behaviour changes {#behaviour-changes-1}
 
 * FlowerDocs Starter Client now communicates using REST instead of SOAP with FlowerDocs Core.
 * FlowerDocs Starter Client now uses a dedicated `FlowerDocsObjectMapper` instead of the one provided by SpringBoot. It allows us to provide our own Mixins to have a correct communication between all applications in the FlowerDocs ecosystem.
@@ -143,20 +142,18 @@ The full Core property reference is on the [Core configuration](/docs/flowerdocs
 * Full text search now supports the `-` character.
 * After using the rename endpoint, if the previous file had an extension, it will be restored on the new name.
 
-### Additions
+#### Additions
 
 * `POST /core/rest/acl/reference` — added (FD-17803), see [Managing ACLs](/docs/flowerdocs/apis/core/examples/acl); it **replaces** the now-removed `GET /core/rest/acl/{category}/{id}` route.
 * `POST /core/rest/reservation/reserve`, `POST /core/rest/reservation/release` and `POST /core/rest/reservation`, which replace the per-category endpoints for more flexibility (see [Reserve components](/docs/flowerdocs/apis/core/examples/reservation)).
 * Annotation endpoints now support only JSON. Previously you could provide XML and JSON based on the `Content-Type` / `Accept` HTTP headers.
 
-### Removals
-
-#### Libraries
+#### Removed libraries
 
 * `flower-docs-ws-client` and `flower-docs-ws-api`, used for SOAP only.
 * `flower-docs-demo-center`, which was only used internally.
 
-#### Endpoints
+#### Removed endpoints
 
 * All SOAP endpoints. Need to be replaced by their REST alternative.
 * `PingRestController` (Java \+ endpoint), should use `/core/actuator/status`.
@@ -167,24 +164,24 @@ The full Core property reference is on the [Core configuration](/docs/flowerdocs
 * CSV export endpoints `?async=false` has been removed as we can now handle > 10,000 results, it does not make sense.
 * The cross-category search endpoint exposed under the CSV Export has been removed (it should never have existed).
 
-#### Methods
+#### Removed methods
 
 * `ComponentClassDAO.setActive(...)`, `ComponentClassDAO.getAllVersions(...)`
 
-#### Miscellaneous
+#### Other removals
 
 * Error code `T01789`
 * `InternalFeatures.ES_TYPE`
 
-# Data {#data}
+## Data {#data}
 
-## Required data migration
+### Required data migration
 
 A reindex from OpenSearch 1.x to OpenSearch 3.6.0 is required because the internal engines are not compatible.
 
 A dedicated migration tool ships with this version. See [FlowerDocs 2026 upgrade](/docs/flowerdocs/install/opensearch/os-migrate) for the full procedure.
 
-## Additions
+### Additions
 
 To prepare future evolutions about retention :
 
@@ -192,7 +189,7 @@ To prepare future evolutions about retention :
 * ComponentData has now `operationalRetentionPeriod`, `legalRetentionPeriod` and `retentionType` attributes.
 * New enum RetentionType : Automatic / Manual.
 
-## Removals
+### Removals
 
 * Properties that are no longer used, stored on domain objects coming from a previous FlowerDocs version, have been removed:
   * `Scope.organisationalUnit`
@@ -203,7 +200,9 @@ To prepare future evolutions about retention :
   * `Task.processId`
   * `Task.files`
 
-# FlowerDocs GEC
+## FlowerDocs GEC
+
+### Modified configuration documents
 
 The configuration `gec-creationShortcuts.js` has been modified to drop the trailing slash in REST calls in accordance with Spring Boot 4 specifications which no longer tolerate trailing slashes for endpoints that do not end with one.
 
@@ -213,14 +212,20 @@ The following templates have been modified :
 * `ForInformationMailTemplateConfiguration.html`
 * `AssignationMailTemplateConfiguration.html`.
 
+### Deployment
+
 Deployment documentation included in the client package has been updated with new installation prerequisites for this version.
 
-# FlowerDocs e-Process
+## FlowerDocs e-Process
+
+### Modified configuration documents
 
 The following templates have been modified :
 
 * `BodyTemplate.html`
 * `EnvAssignationMailTemplate.html`
+
+### Removals
 
 Two features have been deleted
 
@@ -230,14 +235,13 @@ Two features have been deleted
     * `export.answer.enable`
     * `export.scope.enable`
     * `export.file.path.enable`
-
-
-
 * The external access. This induced removal  of :
   * `SOL_CompteExterne` tag
   * `EnvAccountCreation` process
   * `Associated ACL_ENV_Account` security
   * `ENV_MesEnveloppesExternes` virtual folder class
+
+### Deployment
 
 Deployment documentation included in the client package has been updated with new installation prerequisites for this version.
 
