@@ -55,12 +55,42 @@ It is not recommended to modify ARender properties by setting parameters in the 
 
 The connection pools and timeouts of the main infrastructure components are configurable. Defaults are tuned for a typical load; adjust them per environment.
 
+## OpenSearch
+
 | Property | Description |
 | --- | --- |
-| `opensearch.pool.max.total` / `opensearch.pool.max.per.route` | OpenSearch HTTP connection pool size (default `200`) |
-| `opensearch.connect.timeout` / `opensearch.socket.timeout` | OpenSearch connect / read timeout (default `5000` / `60000` ms) |
-| `rest.oh.connect.timeout` / `rest.oh.read.timeout` | REST OperationHandler callback timeouts (default `5000` / `30000` ms) |
-| `rest.oh.pool.max.total` / `rest.oh.pool.max.per.route` | REST OperationHandler client pool (default `200` / `100`) |
+| `opensearch.pool.max.total` / `opensearch.pool.max.per.route` | HTTP connection pool size (default `200`) |
+| `opensearch.connect.timeout` / `opensearch.socket.timeout` | Connect and read timeouts (default `5000` / `60000` ms) |
+
+## REST OperationHandler
+
+| Property | Description |
+| --- | --- |
+| `rest.oh.pool.max.total` / `rest.oh.pool.max.per.route` | Client pool size (default `200` / `100`) |
+| `rest.oh.connect.timeout` / `rest.oh.read.timeout` | Callback connect and read timeouts (default `5000` / `30000` ms) |
+
+## ARender rendition
+
+The pool Core uses to reach the ARender rendition service.
+
+| Property | Description |
+| --- | --- |
+| `arender.server.rendition.rest.max.connections` | Pool size, beyond which requests wait for a free connection (default `200`) |
+| `arender.server.rendition.rest.pending.acquire.timeout` / `arender.server.rendition.rest.pending.acquire.max.count` | How long a request waits for a pooled connection, and how many may wait (default `120000` ms / `-1`, no limit) |
+| `arender.server.rendition.rest.max.idle.time` / `arender.server.rendition.rest.max.life.time` | Close a connection after it has been idle, or after it has existed, for this long (default `-1` for both, meaning never) |
+| `arender.server.rendition.rest.read.timeout` / `arender.server.rendition.rest.write.timeout` | Read and write timeouts (default `120000` ms) |
+| `arender.server.rendition.rest.max.in.memory.size` | Maximum number of bytes buffered in memory (default `8000000`) |
+
+:::warning Set `max.idle.time` below any idle timeout on the network path
+If Core reaches the rendition service through a load balancer, a reverse proxy or a firewall, that component will close idle connections without telling either side. With `max.idle.time` left at `-1` the pool never recycles, so it hands out connections the other end has already dropped. The symptom is a request that stalls for exactly the idle-timeout duration and then succeeds on retry, and under sustained load the pool fills with dead connections.
+
+Set `max.idle.time` below the shortest idle timeout on the path. For a 60 second load balancer timeout, `arender.server.rendition.rest.max.idle.time=30000` with `arender.server.rendition.rest.max.life.time=300000` is a sound starting point.
+:::
+
+Two points worth knowing:
+
+- The ARender HMI has its own pool with the same defaults, configured in ARender's own files. If the viewer and thumbnails traverse the same load balancer, set `arender.server.rendition.rest.max.idle.time` there too.
+- Do not confuse this namespace with `rest.client.*`, which configures the rendition broker's outgoing calls to its microservices and belongs on the broker, not on Core.
 
 # Security headers
 
