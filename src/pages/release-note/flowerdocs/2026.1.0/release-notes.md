@@ -84,6 +84,8 @@ For more information, see the ARender release notes [here](/release-note/arender
 | **Users** |  |
 | CSV Export — Column headers corresponding to native technical tags are now correctly translated when the interface language is set to French. |  |
 | CSV Export — A column added via a filter clause is now correctly included in the exported file. |  |
+| CSV Export — The exported file is now correctly recognised as a CSV file when the search contains a multi-valued criterion. |  |
+| CSV Export — The exported file now contains only the columns displayed in the interface. |  |
 | Columns — The "Assign To" tag is no longer incorrectly displayed as a default column, in line with the defined configuration. |  |
 | Interface — Icon alignment for instance title actions has been fixed. | FD-17037 / TMAFLW-1066 |
 | Search — A search containing only a quick-search criterion can now be saved, and a saved search of this type can now be edited. | FD-18286 / FD-15446 / TMAFLW-261 |
@@ -98,6 +100,7 @@ For more information, see the ARender release notes [here](/release-note/arender
 | **Operators** |  |
 | Administration — A warning message is now added to the logs when FlowerDocs is used over HTTP. |  |
 | Versioning — For document classes configured with manual versioning, adding new content now correctly removes the old file from storage (S3 or file system).  |  |
+| Documents — File handles and connections are no longer leaked when reading document content. |  |
 
 ## **Known issues**
 
