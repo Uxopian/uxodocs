@@ -9,7 +9,7 @@ import FlowerDocsMcpDownload from '@site/src/components/FlowerDocsMcpDownload';
 
 # FlowerDocs MCP Server Release Notes
 
-## 2026.1.0-ft0
+## 2026.1.0-ft1
 
 ### 💡 Overview
 
@@ -23,7 +23,7 @@ For installation and configuration, see the [MCP Server documentation](../gettin
 
 | | |
 |---|---|
-| Server version | 2026.1.0-ft0 |
+| Server version | 2026.1.0-ft1 |
 | Compatible FlowerDocs versions | 2026.0.0 and later versions of the 2026 line |
 | MCP protocol revision | 2025-11-25 (latest; earlier revisions down to 2024-11-05 negotiated for compatibility) |
 | Transport | Streamable HTTP (`/mcp`) |
@@ -73,4 +73,4 @@ At startup, the server checks that FlowerDocs Core is reachable and keeps retryi
 
 None known at this release.
 
-<FlowerDocsMcpDownload version="2026.1.0-ft0" />
+<FlowerDocsMcpDownload version="2026.1.0-ft1" />
