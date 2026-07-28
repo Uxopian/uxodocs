@@ -122,7 +122,7 @@ Documents added from Companion in eProcess solutions can now be indexed immediat
 
 #### **💻 History**
 
-In the solution templates: the `classid` technical field is now consistently set on tasks during unassignment, ensuring the task class's custom icon displays reliably in the history. No impact on users. 
+In eProcess: the `classid` technical field is now set on the facts created when a task is answered, cancelled or adjourned, ensuring the task class's custom icon displays reliably in the history. No impact on users. 
 
 #### ⚙️ **Customization banner**
 
