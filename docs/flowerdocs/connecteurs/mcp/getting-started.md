@@ -4,6 +4,9 @@ sidebar_position: 1
 date: "2026-07-21T09:00:00+02:00"
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # FlowerDocs MCP Server
 
 The FlowerDocs MCP server exposes FlowerDocs **administration and configuration management** as tools that an AI assistant can call, using the [Model Context Protocol](https://modelcontextprotocol.io). Connect any MCP-compatible assistant (Claude Desktop, Claude Code, Cursor, VS Code, and others) and drive FlowerDocs in natural language: create tag classes, edit GUI configurations, manage scripts and operation handlers, purge caches, and more.
@@ -11,7 +14,7 @@ The FlowerDocs MCP server exposes FlowerDocs **administration and configuration 
 It runs as a standalone service alongside your FlowerDocs Core and GUI, and speaks the Model Context Protocol over the Streamable HTTP transport.
 
 :::info It is an administration tool
-Every tool runs under real FlowerDocs user credentials, and the whole server is gated by a shared access key. It is meant for administrators and integrators. See [Authentication](../install#authentication). Do not expose it openly on the internet.
+Every tool runs under real FlowerDocs user credentials, and the whole server is gated by a shared access key. It is meant for administrators and integrators. See [Authentication](./install.md#authentication). Do not expose it openly on the internet.
 :::
 
 ## Prerequisites
@@ -23,9 +26,10 @@ Every tool runs under real FlowerDocs user credentials, and the whole server is 
 
 ## Connect your AI client
 
-Once the server is running (see [Installation](../install)), the MCP endpoint is available at `http://localhost:8086/flowerdocs-mcp/mcp`. Point your client at it and add the required headers.
+Once the server is running (see [Installation](./install.md)), the MCP endpoint is available at `http://localhost:8086/flowerdocs-mcp/mcp`. Declare two servers in your client configuration: **`flowerdocs`**, which performs the changes, and **`uxodocs`**, which gives the assistant this documentation so it gets them right (see [Documentation MCP](./documentation-mcp.md)).
 
-### Claude Desktop
+<Tabs>
+<TabItem value="desktop" label="Claude Desktop" default>
 
 Edit `claude_desktop_config.json` (**Windows**: `%APPDATA%\Claude\`, **Mac**: `~/Library/Application Support/Claude/`):
 
@@ -41,14 +45,19 @@ Edit `claude_desktop_config.json` (**Windows**: `%APPDATA%\Claude\`, **Mac**: `~
         "--header", "X-FlowerDocs-Password: ENC(yourEncryptedPassword)",
         "--header", "X-FlowerDocs-Scope: FD"
       ]
+    },
+    "uxodocs": {
+      "command": "mcp-remote",
+      "args": ["https://gitmcp.io/Uxopian/uxodocs"]
     }
   }
 }
 ```
 
-`mcp-remote` bridges URL-based MCP servers for Claude Desktop; install it with `npm install -g mcp-remote`. Restart Claude Desktop; **flowerdocs** appears as a connected server.
+`mcp-remote` bridges URL-based MCP servers for Claude Desktop; install it with `npm install -g mcp-remote`. Restart Claude Desktop; both servers appear as connected.
 
-### Claude Code
+</TabItem>
+<TabItem value="code" label="Claude Code">
 
 Add to `.mcp.json` in your project (or `~/.claude/.mcp.json`):
 
@@ -64,14 +73,19 @@ Add to `.mcp.json` in your project (or `~/.claude/.mcp.json`):
         "X-FlowerDocs-Password": "ENC(yourEncryptedPassword)",
         "X-FlowerDocs-Scope": "FD"
       }
+    },
+    "uxodocs": {
+      "type": "url",
+      "url": "https://gitmcp.io/Uxopian/uxodocs"
     }
   }
 }
 ```
 
-Launch Claude Code; the server connects automatically.
+Launch Claude Code; both servers connect automatically.
 
-### Other MCP clients
+</TabItem>
+<TabItem value="other" label="Cursor and others">
 
 Any MCP-compatible client works, since the server speaks the standard Streamable HTTP transport. Point the client at the same URL and pass the same four headers. For example, in Cursor (`.cursor/mcp.json`):
 
@@ -86,12 +100,20 @@ Any MCP-compatible client works, since the server speaks the standard Streamable
         "X-FlowerDocs-Password": "ENC(yourEncryptedPassword)",
         "X-FlowerDocs-Scope": "FD"
       }
+    },
+    "uxodocs": {
+      "url": "https://gitmcp.io/Uxopian/uxodocs"
     }
   }
 }
 ```
 
-The same applies to other MCP-capable assistants (VS Code, Cline, and similar). To browse and call the tools interactively without an assistant, use the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), selecting the **Streamable HTTP** transport and the URL above.
+The same applies to other MCP-capable assistants (VS Code, Cline, and similar).
+
+</TabItem>
+</Tabs>
+
+To browse and call the tools interactively without an assistant, use the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), selecting the **Streamable HTTP** transport and the URL above.
 
 ## Try it out
 
@@ -122,6 +144,8 @@ The tools are grouped into families:
 
 Each tool is advertised with `readOnly` / `destructive` hints, so a client such as Claude Desktop groups read-only tools apart from a **Write / delete tools** group and can ask for confirmation before running the destructive ones.
 
-## Pair it with the documentation
+## Why the second server matters
 
-Tool descriptions are intentionally minimal to keep the token budget small. For the assistant to produce correct XML, script APIs or operation-handler configurations, give it access to this FlowerDocs documentation through a companion MCP server (a filesystem or GitHub MCP pointed at the docs). The assistant then combines both: it discovers a field schema with `technicaldoc_describe`, reads the matching documentation page, and writes the document with `technicaldoc_create`.
+Tool descriptions are intentionally minimal: `technicaldoc_describe` tells the assistant that a GUI configuration holds XML, not which XML FlowerDocs expects. The **uxodocs** entry closes that gap, so the assistant reads the reference page before writing the document instead of guessing its structure.
+
+See [Documentation MCP](./documentation-mcp.md) for what that changes in practice.
