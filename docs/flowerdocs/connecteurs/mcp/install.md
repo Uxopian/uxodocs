@@ -10,7 +10,7 @@ The MCP server is a standalone Spring Boot service. It ships as a JAR and a Dock
 
 ## Get the server
 
-- **JAR**: the latest `flower-docs-mcp-server.jar`, available from the [release notes](../release-notes).
+- **JAR**: the latest `flower-docs-mcp-server.jar`, available from the [release notes](./release-notes.md).
 - **Docker**: the delivered `flower-docs-mcp-server` image (exposes port `8086`, with a built-in `HEALTHCHECK`).
 
 ## Configure it
@@ -89,5 +89,5 @@ curl -X POST http://localhost:8086/flowerdocs-mcp/encrypt \
 A Swagger UI is served at `/flowerdocs-mcp/swagger-ui/index.html`: enter the access key and the value to encrypt, and copy the `ENC(...)` result.
 
 :::warning Bootstrapping the access key
-`/encrypt` is itself gated by the access key, so you cannot use it to encrypt the access key the first time. Produce that first `ENC(...)` value out-of-band. See [Encrypting a character string](../../../apis/core/examples/stringEncryptor) or the [CLM documentation](../../../install/clm/clm).
+`/encrypt` is itself gated by the access key, so you cannot use it to encrypt the access key the first time. Produce that first `ENC(...)` value out-of-band. See [Encrypting a character string](../../apis/core/examples/stringEncryptor.md) or the [CLM documentation](../../install/clm/clm.md).
 :::

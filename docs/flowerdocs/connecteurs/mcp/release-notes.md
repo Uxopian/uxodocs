@@ -1,6 +1,6 @@
 ---
 title: Release Notes
-sidebar_position: 3
+sidebar_position: 4
 description: "First release of the FlowerDocs MCP Server: 26 tools for administration, configuration components and technical documents, per-user authentication, and an independent release train."
 date: "2026-07-21T09:00:00+02:00"
 ---
@@ -17,7 +17,7 @@ The FlowerDocs MCP Server gives access to FlowerDocs configuration, creating tag
 
 This is its first release note. The server has its own fast-track release train, independent from FlowerDocs, and may be updated between FlowerDocs releases.
 
-For installation and configuration, see the [MCP Server documentation](../getting-started).
+For installation and configuration, see the [MCP Server documentation](./getting-started.md).
 
 ### 🔌 Compatibility
 
