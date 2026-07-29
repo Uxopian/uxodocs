@@ -1,17 +1,21 @@
-# ARender
+# Uxopian Documentation
+
+> Unified documentation for the Uxopian/Arondor product suite: **ARender** (document viewing and annotation), **Fast2** (ECM content and metadata migration engine), **FlowerDocs** (enterprise content management platform), and **Uxopian AI** (framework for embedding AI assistants in enterprise applications). Each product is versioned and deployed independently; the sections below index the highest-signal pages per product.
+
+## ARender
 
 > ARender is a document viewing and annotation platform that renders 400+ document formats (PDF, Office, CAD, email, images, video) in the browser. It is deployed as a set of microservices: a Rendition Engine backend and a viewer frontend. Two viewers are available: **ARender Classic** (GWT-based, production-proven since 2010) and **ARender Horizon** (React-based, new in v2026). Both share the same Rendition Engine — same rendering quality, same format support, same annotation backend.
 
 ARender is typically integrated with ECM platforms (IBM FileNet, Alfresco, M-Files) or embedded in custom applications via JavaScript API or Web Component.
 
-## Getting started
+### Getting started
 
 - [Architecture overview](https://doc.uxopian.com/docs/arender/overview/architecture): System components, Rendition Engine, Eureka discovery, Hazelcast caching
 - [Docker Compose quickstart](https://doc.uxopian.com/docs/arender/quickstart/docker-compose): Run ARender Classic in Docker in 5 minutes
 - [Spring Boot installation](https://doc.uxopian.com/docs/arender/installation/spring-boot): Standalone deployment without Docker
 - [ARender Horizon getting started](https://doc.uxopian.com/docs/arender-horizon/quickstart/getting-started): Run ARender Horizon with React
 
-## Configuration
+### Configuration
 
 - [Rendition properties reference](https://doc.uxopian.com/docs/arender/reference/rendition-properties): All backend configuration properties (PDFOwl, conversion, caching, security)
 - [Viewer configuration reference](https://doc.uxopian.com/docs/arender/reference/viewer-configuration): All frontend UI properties (toolbar, panels, annotations, features)
@@ -19,7 +23,7 @@ ARender is typically integrated with ECM platforms (IBM FileNet, Alfresco, M-Fil
 - [Environment variables](https://doc.uxopian.com/docs/arender/installation/environment-variables): Docker and Kubernetes environment variable mapping
 - [Rendition caching](https://doc.uxopian.com/docs/arender/concepts/rendition-caching): Hazelcast cluster and session configuration
 
-## Integration and development
+### Integration and development
 
 - [Annotation types reference](https://doc.uxopian.com/docs/arender/reference/annotation-types): All annotation types and their properties
 - [Broker API reference](https://doc.uxopian.com/docs/arender/reference/rest-api/broker-api): REST API for the Rendition Engine
@@ -27,13 +31,12 @@ ARender is typically integrated with ECM platforms (IBM FileNet, Alfresco, M-Fil
 - [Connector providers guide](https://doc.uxopian.com/docs/arender-horizon/guides/integration/connector-providers): Build custom document connectors (REST architecture)
 - [Provider API reference](https://doc.uxopian.com/docs/arender-horizon/reference/rest-api/provider-api): REST API contract for custom connectors
 
-## Upgrade and migration
+### Upgrade and migration
 
 - [Upgrade guide 2023 to 2026](https://doc.uxopian.com/docs/arender/guides/upgrade/2023-to-2026): Step-by-step migration from v2023.x to v2026
-- [Release notes v2026.0.0](https://doc.uxopian.com/release-note/arender/v2026.0.0/release-notes): What's new in the latest major version
-- [Upgrade notes v2026.0.0](https://doc.uxopian.com/release-note/arender/v2026.0.0/upgrade-notes): Property renaming tables, breaking changes, deleted properties
+- [All releases](https://doc.uxopian.com/releases/?product=arender): Full version history. Each version listed has its own release notes (what's new) and upgrade notes (breaking changes, required actions)
 
-## Optional
+### Optional
 
 - [Docker Compose full guide](https://doc.uxopian.com/docs/arender/installation/docker-compose): Advanced Docker deployment with all options
 - [Kubernetes Helm](https://doc.uxopian.com/docs/arender/installation/kubernetes-helm): Helm chart deployment
@@ -41,3 +44,121 @@ ARender is typically integrated with ECM platforms (IBM FileNet, Alfresco, M-Fil
 - [Rendition pipeline](https://doc.uxopian.com/docs/arender/concepts/rendition-pipeline): How documents are processed internally
 - [Backup and restore](https://doc.uxopian.com/docs/arender/operations/backup-restore): Data backup procedures
 - [Troubleshooting](https://doc.uxopian.com/docs/arender/operations/troubleshooting): Common issues and solutions
+
+## Fast2
+
+> Fast2 is a data and content migration engine for moving documents, metadata, and folders between systems (ECM platforms, file systems, cloud storage) at scale. Migrations run as **workflows** ("maps") made of chained **tasks**, executed by a **broker-worker** architecture: a single broker orchestrates each campaign and persists all state, while one or more **workers** pull batches of "punnets" — the pivot format carrying documents, datasets, content, and folders — from per-task queues and process them in parallel over plain HTTP.
+
+### Getting started
+
+- [Overall concepts](https://doc.uxopian.com/docs/fast2/getting-started/overall-concepts): Glossary and architecture — source, punnet, task, map, campaign, broker, worker
+- [Installation guide](https://doc.uxopian.com/docs/fast2/getting-started/installation): System requirements and setup
+- [Authentication](https://doc.uxopian.com/docs/fast2/getting-started/authentication): Securing access to the broker and API
+- [Create a workflow](https://doc.uxopian.com/docs/fast2/getting-started/create-workflow): Building your first map and campaign
+
+### Configuration
+
+- [Catalog reference](https://doc.uxopian.com/docs/fast2/catalog): All available task types — sources, transformers, loaders, converters, tools, credentials, content sources
+- [Broker](https://doc.uxopian.com/docs/fast2/components/broker): Orchestrator configuration, queues, persistence
+- [Worker](https://doc.uxopian.com/docs/fast2/components/worker): Worker process configuration and scaling
+- [Database](https://doc.uxopian.com/docs/fast2/components/database): OpenSearch-backed state and traceability store
+
+### Integration and development
+
+- [API documentation](https://doc.uxopian.com/docs/fast2/API): REST API reference — campaigns, jobs, maps, workers, punnets, broker
+- [Custom module development](https://doc.uxopian.com/docs/fast2/advanced/custom-module): Building custom catalog tasks
+- [Drools integration](https://doc.uxopian.com/docs/fast2/advanced/drools): Rules engine for conditional processing
+- [JavaScript scripting](https://doc.uxopian.com/docs/fast2/advanced/javascript): Scripting inside tasks
+- [Cookbooks](https://doc.uxopian.com/docs/fast2/cookbooks): Worked examples — content, document, dataset and punnet basics, CSV/JDBC sources, S3 upload
+
+### Upgrade and migration
+
+- [All releases](https://doc.uxopian.com/releases/?product=fast2): Full version history. Each version listed has its own release notes (what's new) and upgrade notes (breaking changes, required actions)
+- [Playbook: delta migration](https://doc.uxopian.com/docs/fast2/playbook/delta-migration): Incremental migration strategy
+- [Playbook: extracting from a live ECM](https://doc.uxopian.com/docs/fast2/playbook/extracting-from-live-ecm): Migrating without downtime
+
+### Optional
+
+- [Scheduler](https://doc.uxopian.com/docs/fast2/advanced/scheduler): Cron-based campaign scheduling
+- [Shared objects](https://doc.uxopian.com/docs/fast2/advanced/shared-objects): Cross-task shared state
+- [Optimization](https://doc.uxopian.com/docs/fast2/advanced/optimization): Throughput and performance tuning
+- [Playbook: content and metadata integrity](https://doc.uxopian.com/docs/fast2/playbook/content-integrity): Verifying migrated data
+- [Dashboards](https://doc.uxopian.com/docs/fast2/components/dashboards): Campaign monitoring UI
+
+## FlowerDocs
+
+> FlowerDocs is an ECM (Enterprise Content Management) platform for managing, indexing, searching, and delivering large volumes of documents and their metadata. **FlowerDocs Core** (Java/Spring Boot, REST APIs, OpenSearch-backed metadata index) handles business logic and persistence; **FlowerDocs GUI** is the web front end, embedding the ARender viewer as **ARender HMI**; Redis provides caching and asynchronous processing.
+
+### Getting started
+
+- [Prerequisites](https://doc.uxopian.com/docs/flowerdocs/install/prerequisites): OS, sizing, JDK, OpenSearch and Redis version requirements
+- [Install process](https://doc.uxopian.com/docs/flowerdocs/install/install-process): Step-by-step installation of Core, GUI, and ARender HMI
+- [Docker installation](https://doc.uxopian.com/docs/flowerdocs/install/docker): Running FlowerDocs in Docker
+- [Concepts overview](https://doc.uxopian.com/docs/flowerdocs/concepts/getting-started): Data model principles — reusability, administration
+
+### Configuration
+
+- [Core configuration](https://doc.uxopian.com/docs/flowerdocs/install/config/core-config): `core.properties` reference
+- [GUI configuration](https://doc.uxopian.com/docs/flowerdocs/install/config/gui-config): `gui.properties` reference
+- [ARender HMI configuration](https://doc.uxopian.com/docs/flowerdocs/install/config/arender-hmi-config): Connecting the viewer to FlowerDocs
+- [OpenSearch installation](https://doc.uxopian.com/docs/flowerdocs/install/opensearch/install): Minimal config and content storage setup
+
+### Integration and development
+
+- [Core REST API](https://doc.uxopian.com/docs/flowerdocs/apis/core/rest): Full REST API reference for FlowerDocs Core
+- [JavaScript API](https://doc.uxopian.com/docs/flowerdocs/apis/jsapi/getting-started): Client-side scripting inside the GUI
+- [GUI plugins](https://doc.uxopian.com/docs/flowerdocs/apis/plugins/getting-started): Extending the GUI with custom plugins
+- [Fast2 connector](https://doc.uxopian.com/docs/flowerdocs/connecteurs/fast2/getting-started): Migrating content into FlowerDocs with Fast2
+- [MCP connector](https://doc.uxopian.com/docs/flowerdocs/connecteurs/mcp/getting-started): Model Context Protocol server for FlowerDocs
+
+### Upgrade and migration
+
+- [Upgrade guide](https://doc.uxopian.com/docs/flowerdocs/install/upgrade): General upgrade procedure
+- [All releases](https://doc.uxopian.com/releases/?product=flowerdocs): Full version history. Each version listed has its own release notes (what's new) and upgrade notes (breaking changes, required actions)
+- [OpenSearch upgrade](https://doc.uxopian.com/docs/flowerdocs/install/opensearch/11-os-upgrade): Migrating the OpenSearch cluster
+
+### Optional
+
+- [Security concepts](https://doc.uxopian.com/docs/flowerdocs/concepts/securite/authentification): Authentication and authorization model
+- [Tag reference](https://doc.uxopian.com/docs/flowerdocs/concepts/classes/tag-reference): Metadata tag types
+- [Companion connector](https://doc.uxopian.com/docs/flowerdocs/connecteurs/companion/getting-started): Desktop companion app integration
+
+## Uxopian AI
+
+> Uxopian AI is a framework for embedding AI assistants inside legacy enterprise applications. It does not replace the host application — it adds a conversational interface, connects to multiple LLM providers (OpenAI, Anthropic, Azure OpenAI, AWS Bedrock, Gemini, Mistral, HuggingFace, Ollama, NuExtract), and exposes tools the LLM can call to operate on enterprise data. It is built as `uxopian-ai` (Spring Boot/WebFlux business logic) behind `uxopian-gateway` (Spring Cloud Gateway, the only public entry point), backed by OpenSearch and Hazelcast.
+
+### Getting started
+
+- [Overview](https://doc.uxopian.com/docs/uxopian-ai/getting_started/overview): System components, supported LLM providers, integration paths
+- [Quickstart with Docker Compose](https://doc.uxopian.com/docs/uxopian-ai/getting_started/quickstart): Run a local stack
+- [Quickstart with ARender](https://doc.uxopian.com/docs/uxopian-ai/getting_started/quickstart_arender): Add an AI menu to the ARender viewer
+- [Quickstart with FlowerDocs](https://doc.uxopian.com/docs/uxopian-ai/getting_started/quickstart_flowerdocs): Embed the chat panel in FlowerDocs
+
+### Configuration
+
+- [Configuration reference](https://doc.uxopian.com/docs/uxopian-ai/reference/configuration): All configuration properties
+- [Environment variables](https://doc.uxopian.com/docs/uxopian-ai/reference/environment_variables): Docker and Kubernetes environment variable mapping
+- [Configure LLM providers](https://doc.uxopian.com/docs/uxopian-ai/how_to/configure_llm_providers): Setting up provider credentials and routing
+- [Configure gateway routes](https://doc.uxopian.com/docs/uxopian-ai/how_to/configure_gateway_routes): Reverse proxy and authentication routing
+
+### Integration and development
+
+- [REST API reference](https://doc.uxopian.com/docs/uxopian-ai/reference/rest_api): Full API for conversations, requests, and admin operations
+- [Embed in a web application](https://doc.uxopian.com/docs/uxopian-ai/how_to/embed_in_web_application): Generic JS/CSS chat widget integration
+- [Embed Quick Prompt](https://doc.uxopian.com/docs/uxopian-ai/how_to/embed_quick_prompt): Context-aware prompt panel
+- [Integrate with ARender](https://doc.uxopian.com/docs/uxopian-ai/how_to/integrate_with_arender): Document viewer AI menu via the DSB API
+- [Integrate with FlowerDocs](https://doc.uxopian.com/docs/uxopian-ai/how_to/integrate_with_flowerdocs): `FlowerDocsProvider` gateway integration
+- [Custom tool plugins](https://doc.uxopian.com/docs/uxopian-ai/extending/custom_tools): Writing `@ToolService` classes the LLM can call
+- [Custom LLM provider](https://doc.uxopian.com/docs/uxopian-ai/extending/custom_llm_provider): Adding a new model provider
+
+### Upgrade and migration
+
+- [System architecture](https://doc.uxopian.com/docs/uxopian-ai/understanding/architecture): Full component diagram and request flow
+- [All releases](https://doc.uxopian.com/releases/?product=uxopian-ai): Full version history. Each version listed has its own release notes (what's new) and upgrade notes (breaking changes, required actions)
+
+### Optional
+
+- [Admin panel overview](https://doc.uxopian.com/docs/uxopian-ai/admin/admin_panel_overview): Managing the deployment via the admin UI
+- [Managing MCP servers](https://doc.uxopian.com/docs/uxopian-ai/admin/managing_mcp_servers): Connecting external tool servers
+- [Multi-tenancy](https://doc.uxopian.com/docs/uxopian-ai/understanding/multi_tenancy): Tenant isolation model
+- [Kubernetes installation](https://doc.uxopian.com/docs/uxopian-ai/installation/kubernetes): Helm-based deployment
