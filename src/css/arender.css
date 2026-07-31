@@ -420,10 +420,13 @@
    UXODOCS LAYOUT OVERRIDES
    ================================================================ */
 
-/* Hide secondary nav on the v2026 (current) ARender doc layout — redundant with
-   the sidebar there. Older versioned docs (v2023.x) still rely on the secondary
-   nav to surface their top-level categories. */
-[class*="plugin-id-arender"][class*="docs-version-current"] .secondary-nav--arender {
+/* Hide the secondary nav on the modern ARender doc layout: the current version
+   AND every v2026+ snapshot, where it is redundant with the vertical sidebar.
+   Only the legacy versioned docs (v4, v2023.x) still rely on the secondary nav
+   to surface their top-level categories, so we exclude those explicitly rather
+   than gating on docs-version-current (which drops off a version the moment a
+   newer one is released). */
+[class*="plugin-id-arender"]:not([class*="docs-version-v4"]):not([class*="docs-version-v2023"]) .secondary-nav--arender {
     display: none;
 }
 
@@ -474,11 +477,12 @@
     margin: 0;
 }
 
-/* On the v2026 (current) ARender layout the secondary nav is hidden, so we
-   undo its sidebar-filtering side effect to keep all top-level items visible.
-   Versioned docs (v2023.x) still use the secondary nav and rely on this
-   filtering to scope the sidebar to the active category. */
-[class*="plugin-id-arender"][class*="docs-version-current"] .uxo-hidden-by-filter {
+/* On the modern ARender layout (current + all v2026+ snapshots) the secondary
+   nav is hidden, so we undo its sidebar-filtering side effect to keep all
+   top-level items visible. Only legacy versioned docs (v4, v2023.x) still use
+   the secondary nav and rely on this filtering to scope the sidebar to the
+   active category. */
+[class*="plugin-id-arender"]:not([class*="docs-version-v4"]):not([class*="docs-version-v2023"]) .uxo-hidden-by-filter {
     opacity: 1 !important;
     max-height: none !important;
     margin: unset !important;
