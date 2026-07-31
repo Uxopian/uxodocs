@@ -55,8 +55,8 @@ The `results` object is an array of `LookupResult` objects exposing the methods:
 
 | Functions  | Description                                        |
 | ---------- | -------------------------------------------------- |
-| getKey()   | Retrieves the key of a result (i.e. symbolic name) |
-| getValue() | Retrieves the value or label of a result           |
+| `getKey()` | Retrieves the key of a result (i.e. symbolic name) |
+| `getValue()` | Retrieves the value or label of a result           |
 
 In this example, we execute the `LookupPlugin` whose identifier is `SampleLookup` with the tag name and value as parameters. By reacting to the modification of its value, it is then possible to modify the list of proposed values according to the user's input.
 

@@ -45,14 +45,14 @@ Component classes contain information used by the Core or graphical user interfa
 
 | Functions                 | Description                                                                                   |
 | ------------------------- | --------------------------------------------------------------------------------------------- |
-| getId()                   | Component class identifier retrieval                                                          |
-| getLocalizedDisplayName() | Retrieval of the internationalized class name according to the current user's language        |
-| getLocalizedDescription() | Retrieval of the internationalized class description according to the current user's language |
-| getTagReferences()        | Retrieval of tag references carried by the component class                                    |
+| `getId()`                 | Component class identifier retrieval                                                          |
+| `getLocalizedDisplayName()` | Retrieval of the internationalized class name according to the current user's language        |
+| `getLocalizedDescription()` | Retrieval of the internationalized class description according to the current user's language |
+| `getTagReferences()`      | Retrieval of tag references carried by the component class                                    |
 
 <!--- Does not work actually
-|getDisplayNames()                                      | Retrieval of class names                                                                             |        
-|getDescriptions()                                      | Retrieval of class descriptions                                                                     |        
+|`getDisplayNames()`                                      | Retrieval of class names                                                                             |        
+|`getDescriptions()`                                      | Retrieval of class descriptions                                                                     |        
 
 For the functions ``getDisplayNames()`` and ``getDescriptions()``, the returns are in the form of the label I18N 
 -->
@@ -65,12 +65,12 @@ From a component class, the `getTagReferences()` function exhibits tag reference
 
 | Functions                 | Description                                                                                       |
 | ------------------------- | ------------------------------------------------------------------------------------------------- |
-| getTagName()              | Retrieval of the tag reference name                                                               |
-| getLocalizedDescription() | Retrieval of the internationalized reference description according to the current user's language |
-| getPattern()              | Retrieval of the tag reference pattern                                                            |
-| getDefaultValue()         | Retrieval of the default tag reference value                                                      |
-| getOrder()                | Retrieval of the position of the tag reference                                                    |
-| isMandatory()             | Determines whether the tag is mandatory                                                           |
-| isMultivalued()           | Determines whether the tag is multivalued                                                         |
-| isReadonly()              | Determines whether the tag is read-only                                                           |
-| isTechnical()             | Determines whether the tag is technical                                                           |
+| `getTagName()`            | Retrieval of the tag reference name                                                               |
+| `getLocalizedDescription()` | Retrieval of the internationalized reference description according to the current user's language |
+| `getPattern()`            | Retrieval of the tag reference pattern                                                            |
+| `getDefaultValue()`       | Retrieval of the default tag reference value                                                      |
+| `getOrder()`              | Retrieval of the position of the tag reference                                                    |
+| `isMandatory()`           | Determines whether the tag is mandatory                                                           |
+| `isMultivalued()`         | Determines whether the tag is multivalued                                                         |
+| `isReadonly()`            | Determines whether the tag is read-only                                                           |
+| `isTechnical()`           | Determines whether the tag is technical                                                           |

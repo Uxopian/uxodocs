@@ -24,11 +24,11 @@ The following functions are available on shortcut containers.
 
 | Function                                                                                             | Description                                                   |
 | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| addCircled(String id, String icon, String color, String name, String description, Callback callback) | Adds a shortcut with a circle type icon and hover description |
-| addIconized(String id, String icon, String color, String name, Callback callback)                    | Adds a shortcut with an icon (FontAwesome)                    |
-| add(String id, Element element, String name, Callback callback)                                      | Adds a shortcut with a DOM element as icon                    |
-| remove(String id)                                                                                    | Deletes a shortcut using its identifier                       |
-| getIds()                                                                                             | Recovers shortcut identifiers                                 |
+| `addCircled(String id, String icon, String color, String name, String description, Callback callback)` | Adds a shortcut with a circle type icon and hover description |
+| `addIconized(String id, String icon, String color, String name, Callback callback)`                    | Adds a shortcut with an icon (FontAwesome)                    |
+| `add(String id, Element element, String name, Callback callback)`                                      | Adds a shortcut with a DOM element as icon                    |
+| `remove(String id)`                                                                                    | Deletes a shortcut using its identifier                       |
+| `getIds()`                                                                                             | Recovers shortcut identifiers                                 |
 
 ## Examples
 
@@ -60,9 +60,9 @@ Additional functions are provided for manipulating a contextual menu:
 
 | Function                                                                     | Description                                                                 |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| add(String groupId, String id, String icon, String label, Callback callback) | Adds a shortcut icon to the context menu and to a group in the table header |
-| getSelected()                                                                | Retrieves selected components                                               |
-| getCategory()                                                                | Retrieves the category of selected components                               |
+| `add(String groupId, String id, String icon, String label, Callback callback)` | Adds a shortcut icon to the context menu and to a group in the table header |
+| `getSelected()`                                                                | Retrieves selected components                                               |
+| `getCategory()`                                                                | Retrieves the category of selected components                               |
 
 By using the `add` function, you can group actions according to need, using the same group identifier.
 

@@ -25,10 +25,10 @@ The object on which a fact took place can be identified from the object type and
 
 | Functions                  | Description                    |
 | -------------------------- | ------------------------------ |
-| getObjectType()            | Object type retrieval          |
-| setObjectType(String type) | Modification object type       |
-| getObjectId()              | Object identifier retrieval    |
-| setObjectId(String id)     | Object identifier modification |
+| `getObjectType()`            | Object type retrieval          |
+| `setObjectType(String type)` | Modification object type       |
+| `getObjectId()`              | Object identifier retrieval    |
+| `setObjectId(String id)`     | Object identifier modification |
 
 ## Context
 
@@ -36,14 +36,14 @@ In order to provide information on the context in which a fact took place, sever
 
 | Functions                          | Description                         |
 | ---------------------------------- | ----------------------------------- |
-| getUser()                          | User recovery                       |
-| setUser(String user)               | User Modification                   |
-| getAction()                        | Action performed recovery           |
-| setAction(String action)           | Action performed modification       |
-| getDescription()                   | Description retrieval               |
-| setDescription(String description) | Description modification            |
-| getCreationDate()                  | Action completion date recovery     |
-| setCreationDate(Date date)         | Action completion date modification |
+| `getUser()`                          | User recovery                       |
+| `setUser(String user)`               | User Modification                   |
+| `getAction()`                        | Action performed recovery           |
+| `setAction(String action)`           | Action performed modification       |
+| `getDescription()`                   | Description retrieval               |
+| `setDescription(String description)` | Description modification            |
+| `getCreationDate()`                  | Action completion date recovery     |
+| `setCreationDate(Date date)`         | Action completion date modification |
 
 The actions (see `com.flower.docs.domain.fact.Action`) supported for facts are:
 
@@ -61,10 +61,10 @@ In addition to information natively stored in the facts, additional fields can b
 
 | Functions                              | Description                    |
 | -------------------------------------- | ------------------------------ |
-| getUpdatedFields()                     | Fact fields recovery           |
-| setUpdatedFields(ResultField[] fields) | Fact fields modification       |
-| addUpdatedField(ResultField fields)    | Add a field to the fact        |
-| addUpdatedFields(ResultField[] fields) | Add several fields to the fact |
+| `getUpdatedFields()`                     | Fact fields recovery           |
+| `setUpdatedFields(ResultField[] fields)` | Fact fields modification       |
+| `addUpdatedField(ResultField fields)`    | Add a field to the fact        |
+| `addUpdatedFields(ResultField[] fields)` | Add several fields to the fact |
 
 ```javascript
 var fact = new Fact();
@@ -82,8 +82,8 @@ To add new facts, it is first necessary to obtain a fact instance with one of th
 
 | Functions                     | Description                      |
 | ----------------------------- | -------------------------------- |
-| new Fact(Component component) | Creating a fact from a component |
-| new Fact()                    | Creating an empty fact           |
+| `new Fact(Component component)` | Creating a fact from a component |
+| `new Fact()`                    | Creating an empty fact           |
 
 To modify a component's history, you need to subscribe to the history opening feature:
 

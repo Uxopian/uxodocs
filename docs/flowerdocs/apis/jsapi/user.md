@@ -38,11 +38,11 @@ JSAPI.get()
 
 | Functions                                 | Description                                       |
 | ----------------------------------------- | ------------------------------------------------- |
-| getScope()                                | Retrieve the scope to which the user is connected |
-| getCurrentUser()                          | Current user recovery                             |
-| getUser(String id, UserCallback closure)  | Recovering a user by identifier                   |
-| addAttribute(String name,String[] values) | Add attribute for logged-in user                  |
-| removeAttribute(String name)              | Delete attribute values for logged-in user        |
+| `getScope()`                                | Retrieve the scope to which the user is connected |
+| `getCurrentUser()`                          | Current user recovery                             |
+| `getUser(String id, UserCallback closure)`  | Recovering a user by identifier                   |
+| `addAttribute(String name,String[] values)` | Add attribute for logged-in user                  |
+| `removeAttribute(String name)`              | Delete attribute values for logged-in user        |
 
 # User information
 
@@ -50,15 +50,15 @@ The functions listed below can be called on a user object.
 
 | Functions                       | Description                                  |
 | ------------------------------- | -------------------------------------------- |
-| getId()                         | User recovery                                |
-| getDisplayNames()               | User label recovery                          |
-| getFirstName()                  | User first name recovery                     |
-| getLastName()                   | User last name retrieval                     |
-| getProfiles()                   | Retrieve the teams to which the user belongs |
-| getGroups()                     | Retrieve groups to which the user belongs    |
-| getMail()                       | Retrieve user email address                  |
-| getAttributeValue(String name)  | Retrieve the value of a user attribute       |
-| getAttributeValues(String name) | Retrieve user attribute values               |
+| `getId()`                         | User recovery                                |
+| `getDisplayNames()`               | User label recovery                          |
+| `getFirstName()`                  | User first name recovery                     |
+| `getLastName()`                   | User last name retrieval                     |
+| `getProfiles()`                   | Retrieve the teams to which the user belongs |
+| `getGroups()`                     | Retrieve groups to which the user belongs    |
+| `getMail()`                       | Retrieve user email address                  |
+| `getAttributeValue(String name)`  | Retrieve the value of a user attribute       |
+| `getAttributeValues(String name)` | Retrieve user attribute values               |
 
 The token is no longer reassembled when users are retrieved by **FlowerDocs GUI**, to prevent it being used by a malicious individual.
 <br/>

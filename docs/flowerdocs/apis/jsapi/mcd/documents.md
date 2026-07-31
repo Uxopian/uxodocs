@@ -23,13 +23,13 @@ From a `Document` object, the `getDocumentFiles()` function reveals an array of 
 
 | Functions                        | Description                       |
 | -------------------------------- | --------------------------------- |
-| getId()                          | File identifier recovery          |
-| setId(String id)                 | File identifier definition        |
-| getName()                        | File name retrieval               |
-| setName(String name)             | File name definition              |
-| getFormatCode()                  | File format retrieval             |
-| setFormatCode(String formatCode) | File format definition            |
-| getCreationDate()                | Retrieving the file creation date |
+| `getId()`                        | File identifier recovery          |
+| `setId(String id)`               | File identifier definition        |
+| `getName()`                      | File name retrieval               |
+| `setName(String name)`           | File name definition              |
+| `getFormatCode()`                | File format retrieval             |
+| `setFormatCode(String formatCode)` | File format definition            |
+| `getCreationDate()`              | Retrieving the file creation date |
 
 <Tabs>
   <TabItem value="list-files-in-a-document" label="List files in a document">
@@ -108,6 +108,6 @@ If version management (or _versioning_) is enabled for a document, information a
 
 | Functions            | Description                                            |
 | -------------------- | ------------------------------------------------------ |
-| getVersionSeriesId() | Retrieving the VersionSeries identifier                |
-| getVersionLabel()    | Retrieving the label of the current version            |
-| isCurrentVersion()   | Determines whether the document is the current version |
+| `getVersionSeriesId()` | Retrieving the VersionSeries identifier                |
+| `getVersionLabel()`  | Retrieving the label of the current version            |
+| `isCurrentVersion()` | Determines whether the document is the current version |

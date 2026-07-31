@@ -17,8 +17,8 @@ A folder's children can be components of any category, but only documents and su
 
 | Functions                                                                    | Description                     |
 | ---------------------------------------------------------------------------- | ------------------------------- |
-| addChildren(String folderId, ComponentReference[] children, boolean replace) | Adding children to a folder     |
-| deleteChildren(String folderId, ComponentReference[] children)               | Deleting children from a folder |
+| `addChildren(String folderId, ComponentReference[] children, boolean replace)` | Adding children to a folder     |
+| `deleteChildren(String folderId, ComponentReference[] children)`             | Deleting children from a folder |
 
 # Adding content
 

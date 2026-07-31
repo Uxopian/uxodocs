@@ -42,8 +42,8 @@ To propagate common tag values from one or more components to a target component
 
 | Functions                                  | Description                                                          |
 | ------------------------------------------ | -------------------------------------------------------------------- |
-| predict(sourceComponent, targetComponent)  | Propagate common tags from a component to a target component         |
-| predict(sourceComponents, targetComponent) | Propagate common tags from a set of components to a target component |
+| `predict(sourceComponent, targetComponent)`  | Propagate common tags from a component to a target component         |
+| `predict(sourceComponents, targetComponent)` | Propagate common tags from a set of components to a target component |
 
 **Example:** Creating a task from two documents
 

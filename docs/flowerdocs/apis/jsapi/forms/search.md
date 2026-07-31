@@ -49,8 +49,8 @@ A search form has two action containers available through the following function
 
 | Function           | Description                                             |
 | ------------------ | ------------------------------------------------------- |
-| getHeaderActions() | Retrieves the action container above the search results |
-| getFooterActions() | Retrieves the action container below the search results |
+| `getHeaderActions()` | Retrieves the action container above the search results |
+| `getFooterActions()` | Retrieves the action container below the search results |
 
 The example below illustrates how to add an action to the container below the results table.
 

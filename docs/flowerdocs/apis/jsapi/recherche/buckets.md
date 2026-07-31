@@ -79,17 +79,17 @@ The JS API lets you modify buckets resolved by **FlowerDocs Core** by exhibiting
 
 | Function                          | Description                                                                     |
 | --------------------------------- | ------------------------------------------------------------------------------- |
-| getName()                         | Returns the name                                                                |
-| setName(name)                     | Modifies the name                                                               |
-| getCount()                        | Returns the number of components contained in the bucket (sum of child buckets) |
-| setCount(long count)              | Modifies the number of components contained in the bucket                       |
-| getLevel()                        | Returns bucket level                                                            |
-| hasChildren()                     | Determines whether the bucket contains child buckets                            |
-| getChildren()                     | Retrieves child buckets                                                         |
-| hasParent()                       | Determines whether the bucket has a bucket parent                               |
-| getParents()                      | Retrieves parent buckets (all parent levels)                                    |
-| getRequest()                      | Retrieves the request executed to determine the bucket's contents               |
-| setRequest(SearchRequest request) | Modifies the request executed to determine the bucket's contents                |
+| `getName()`                         | Returns the name                                                                |
+| `setName(name)`                     | Modifies the name                                                               |
+| `getCount()`                        | Returns the number of components contained in the bucket (sum of child buckets) |
+| `setCount(long count)`              | Modifies the number of components contained in the bucket                       |
+| `getLevel()`                        | Returns bucket level                                                            |
+| `hasChildren()`                     | Determines whether the bucket contains child buckets                            |
+| `getChildren()`                     | Retrieves child buckets                                                         |
+| `hasParent()`                       | Determines whether the bucket has a bucket parent                               |
+| `getParents()`                      | Retrieves parent buckets (all parent levels)                                    |
+| `getRequest()`                      | Retrieves the request executed to determine the bucket's contents               |
+| `setRequest(SearchRequest request)` | Modifies the request executed to determine the bucket's contents                |
 
 :::info
 Children and parents buckets are provided for information only. Modifications to these are not taken into account.

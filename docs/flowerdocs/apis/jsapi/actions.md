@@ -39,9 +39,9 @@ Several functions are available for this purpose:
 
 | Function           | Description                                                         |
 | ------------------ | ------------------------------------------------------------------- |
-| getHeaderActions() | Retrieves action container from header                              |
-| getTaskActions()   | Retrieves action container for task creation                        |
-| getFooterActions() | Retrieves the footer action container (validation, cancellation...) |
+| `getHeaderActions()` | Retrieves action container from header                              |
+| `getTaskActions()`   | Retrieves action container for task creation                        |
+| `getFooterActions()` | Retrieves the footer action container (validation, cancellation...) |
 
 ## Go to an action
 
@@ -71,16 +71,16 @@ Once an action has been retrieved, you can interact with it using the functions 
 
 | Functions                              | Description                                       |
 | -------------------------------------- | ------------------------------------------------- |
-| setEnabled(boolean enabled)            | Activates or deactivates the action               |
-| isEnabled()                            | Determines whether the action is activated or not |
-| setTemporaryDisabled(boolean disabled) | Temporarily disables an action (for buttons only) |
-| getId()                                | Retrieves action identifier                       |
-| execute()                              | Executes action programmatically                  |
+| `setEnabled(boolean enabled)`            | Activates or deactivates the action               |
+| `isEnabled()`                            | Determines whether the action is activated or not |
+| `setTemporaryDisabled(boolean disabled)` | Temporarily disables an action (for buttons only) |
+| `getId()`                                | Retrieves action identifier                       |
+| `execute()`                              | Executes action programmatically                  |
 
 <!---
-|getStyle()                                  | Retrieves the action’s styles (HTML attribute ``class``)                       |
-|setStyle(String style)                      | Defines action style                                                   		  |
-|addStyle(String style)                      | Adds style to the action                                                       |
+|`getStyle()`                                  | Retrieves the action’s styles (HTML attribute ``class``)                       |
+|`setStyle(String style)`                      | Defines action style                                                   		  |
+|`addStyle(String style)`                      | Adds style to the action                                                       |
 -->
 
 **Example:** Disabling the action `Cancel` of a component

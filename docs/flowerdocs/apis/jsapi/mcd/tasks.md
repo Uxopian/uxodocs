@@ -179,7 +179,7 @@ JSAPI.get()
 
 | Functions                          | Description                                    |
 | ---------------------------------- | ---------------------------------------------- |
-| getWorkflow()                      | Determine task processing identifier           |
-| setWorkflow(String workflow)       | Define task processing identifier              |
-| getParticipants()                  | Identify the identities involved in processing |
-| addParticipant(String participant) | Adding a participant to a task                 |
+| `getWorkflow()`                    | Determine task processing identifier           |
+| `setWorkflow(String workflow)`     | Define task processing identifier              |
+| `getParticipants()`                | Identify the identities involved in processing |
+| `addParticipant(String participant)` | Adding a participant to a task                 |

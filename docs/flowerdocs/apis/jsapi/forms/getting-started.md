@@ -20,11 +20,11 @@ If this is the component class, use `Class`.
 
 | Function                                             | Description                                       |
 | ---------------------------------------------------- | ------------------------------------------------- |
-| hasField(String fieldName)                           | Determines whether the field exists in the form   |
-| setObjectValue(String fieldName, Object fieldValue)  | Modifies the value of a field                     |
-| getObjectValue(String fieldName)                     | Retrieves the value of a field                    |
-| suggest(String fieldName, LookupResult suggestions)  | Displays a list of suggestions for a STRING field |
-| setDescription(String fieldName, String description) | Modifies the value of a field description         |
+| `hasField(String fieldName)`                           | Determines whether the field exists in the form   |
+| `setObjectValue(String fieldName, Object fieldValue)`  | Modifies the value of a field                     |
+| `getObjectValue(String fieldName)`                     | Retrieves the value of a field                    |
+| `suggest(String fieldName, LookupResult suggestions)`  | Displays a list of suggestions for a STRING field |
+| `setDescription(String fieldName, String description)` | Modifies the value of a field description         |
 
 **Some examples:**
 
@@ -78,8 +78,8 @@ formAPI.suggest("MailObject", suggestions);
 
 | Function               								                     | Description                                             |
 |----------------------------------------------------------------------------|---------------------------------------------------------|
-|getAllowedValues(String fieldName)          						         | Retrieves all permitted values for a CHOICELIST field   |
-|setAllowedValues(String fieldName, AllowedValueDefinition[] allowedValues)  | Modifies the allowed values for a CHOICELIST field      |
+|`getAllowedValues(String fieldName)`          						         | Retrieves all permitted values for a CHOICELIST field   |
+|`setAllowedValues(String fieldName, AllowedValueDefinition[] allowedValues)`  | Modifies the allowed values for a CHOICELIST field      |
 
 ```javascript
 function buildAllowedValue(symbolicName, label) {
@@ -111,10 +111,10 @@ Several functions can be used to change the status of a field within a form. The
 
 | Function                               		    | Description                                                                    |
 |---------------------------------------------------|--------------------------------------------------------------------------------|
-|setReadOnly(String fieldName, boolean isReadOnly)	| Defines whether the field is read-only or not                                  |
-|getTagValidity(String fieldName)					| Retrieves the validity of a field                                              |
-|setValid(String fieldName, boolean valid)          | Modifies the validity of a field If the parameter ``valid`` is <br/> ``false`` then the form submission cannot be validated |
-|setVisible(String fieldName, boolean isVisible)    | Defines whether the field is visible or hidden                                 |
+|`setReadOnly(String fieldName, boolean isReadOnly)`	| Defines whether the field is read-only or not                                  |
+|`getTagValidity(String fieldName)`					| Retrieves the validity of a field                                              |
+|`setValid(String fieldName, boolean valid)`          | Modifies the validity of a field If the parameter ``valid`` is <br/> ``false`` then the form submission cannot be validated |
+|`setVisible(String fieldName, boolean isVisible)`    | Defines whether the field is visible or hidden                                 |
 
 
 __Example:__ Changing the visibility of a field in an indexing form
@@ -162,8 +162,8 @@ The following functions are also available to find out the status of the current
 
 | Function                    | Description                                                                                                                 |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| getInvalidType(String type) | Retrieves validity from the name of a form part: `FIELDS` for invalid fields or `CONTENT` for invalid content / attachments |
-| getInvalidTypes()           | Retrieves names of invalid parts of the form                                                                                |
+| `getInvalidType(String type)` | Retrieves validity from the name of a form part: `FIELDS` for invalid fields or `CONTENT` for invalid content / attachments |
+| `getInvalidTypes()`           | Retrieves names of invalid parts of the form                                                                                |
 
 # List form fields
 

@@ -60,6 +60,6 @@ The following functions are available for modifying or retrieving existing label
 
 | Function                                                                | Description                                                                                                                                 |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| getLabel(String labelName)                                              | Retrieves the value of a label                                                                                                              |
-| getLabelWithParams(String labelName, Object... params)                  | Retrieves the value of a label with input parameters                                                                                        |
-| getLabelWithPlural(String labelName, int pluralCount, Object... params) | Retrieves the value of a label with input parameters, taking the application of plural or not with the value of the parameter `pluralCount` |
+| `getLabel(String labelName)`                                            | Retrieves the value of a label                                                                                                              |
+| `getLabelWithParams(String labelName, Object... params)`                | Retrieves the value of a label with input parameters                                                                                        |
+| `getLabelWithPlural(String labelName, int pluralCount, Object... params)` | Retrieves the value of a label with input parameters, taking the application of plural or not with the value of the parameter `pluralCount` |

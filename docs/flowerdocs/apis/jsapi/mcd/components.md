@@ -37,22 +37,22 @@ Depending on the information, the following functions are available to access or
 
 | Functions                | Description                                    |
 | ------------------------ | ---------------------------------------------- |
-| getId()                  | Component identifier retrieval                 |
-| setId(String id)         | Definition of component identifier             |
-| getName()                | Component name retrieval                       |
-| setName(String name)     | Component name definition                      |
-| setClassId(String name)  | Component class definition                     |
-| getClassId()             | Component class identifier retrieval           |
-| String getCategory()     | Category recovery                              |
-| getACL()                 | Retrieving the ACL referenced by the component |
-| setACL(String aclId)     | Definition of the ACL to be applied            |
-| getStatus()              | Component status retrieval                     |
-| setStatus(String status) | Component status definition (see Javadoc)      |
-| getVersion()             | Component version retrieval                    |
-| setVersion(long version) | Component version definition                   |
-| getCreationDate()        | Retrieving the component creation date         |
-| getLastUpdateDate()      | Retrieving the component update date           |
-| getOwner()               | Component owner retrieval                      |
+| `getId()`                | Component identifier retrieval                 |
+| `setId(String id)`       | Definition of component identifier             |
+| `getName()`              | Component name retrieval                       |
+| `setName(String name)`   | Component name definition                      |
+| `setClassId(String name)` | Component class definition                     |
+| `getClassId()`           | Component class identifier retrieval           |
+| `String getCategory()`   | Category recovery                              |
+| `getACL()`               | Retrieving the ACL referenced by the component |
+| `setACL(String aclId)`   | Definition of the ACL to be applied            |
+| `getStatus()`            | Component status retrieval                     |
+| `setStatus(String status)` | Component status definition (see Javadoc)      |
+| `getVersion()`           | Component version retrieval                    |
+| `setVersion(long version)` | Component version definition                   |
+| `getCreationDate()`      | Retrieving the component creation date         |
+| `getLastUpdateDate()`    | Retrieving the component update date           |
+| `getOwner()`             | Component owner retrieval                      |
 
 # Tags management
 

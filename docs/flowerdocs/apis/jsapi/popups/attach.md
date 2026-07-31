@@ -27,10 +27,10 @@ Properties that can be modified on other popup types can also be modified on thi
 
 | Property                                 | Description                                                                                   |
 | ---------------------------------------- | --------------------------------------------------------------------------------------------- |
-| setRapidSearchVisible(boolean visible)   | Quick search visibility                                                                       |
-| setSearchTemplate(String searchTemplate) | Defining the search form used for advanced search                                             |
-| attach(Folder folder)                    | Attaches the current component to a folder                                                    |
-| getActions()                             | Allows to retrieve the corresponding ActionSetAPI, to manipulate the various actions present. |
+| `setRapidSearchVisible(boolean visible)` | Quick search visibility                                                                       |
+| `setSearchTemplate(String searchTemplate)` | Defining the search form used for advanced search                                             |
+| `attach(Folder folder)`                  | Attaches the current component to a folder                                                    |
+| `getActions()`                           | Allows to retrieve the corresponding ActionSetAPI, to manipulate the various actions present. |
 
 The actions available via the `getActions()` method are:
 

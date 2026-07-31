@@ -19,35 +19,35 @@ To search for components via the JS API, use the `search` function for the vario
 
 | Function                                   | Description                                          |
 | ------------------------------------------ | ---------------------------------------------------- |
-| addSelect(String field)                    | Adds a field to be remounted                         |
-| addFilterClause(FilterClause filterClause) | Adds an additional criterion                         |
-| getFilters()                               | Retrieves an array containing all `FilterClause`     |
-| addOrderClause(OrderClause orderClause)    | Adds a field on which to sort search results         |
-| setMax(int max)                            | Defines the maximum number of results to be returned |
-| getMax()                                   | Retrieves the maximum number of results to return    |
-| setStart(int start)                        | Defines the start of the search page                 |
-| getStart()                                 | Retrieves the start of the search page               |
+| `addSelect(String field)`                    | Adds a field to be remounted                         |
+| `addFilterClause(FilterClause filterClause)` | Adds an additional criterion                         |
+| `getFilters()`                               | Retrieves an array containing all `FilterClause`     |
+| `addOrderClause(OrderClause orderClause)`    | Adds a field on which to sort search results         |
+| `setMax(int max)`                            | Defines the maximum number of results to be returned |
+| `getMax()`                                   | Retrieves the maximum number of results to return    |
+| `setStart(int start)`                        | Defines the start of the search page                 |
+| `getStart()`                                 | Retrieves the start of the search page               |
 
 - `AndClause`
 
 | Function                          | Description                                                  |
 | --------------------------------- | ------------------------------------------------------------ |
-| addCriterion(Criterion criterion) | Add a search criterion                                       |
-| getCriteria()                     | Retrieves an array containing all the criteria of the clause |
+| `addCriterion(Criterion criterion)` | Add a search criterion                                       |
+| `getCriteria()`                     | Retrieves an array containing all the criteria of the clause |
 
 - `Criterion`
 
 | Function                    | Description                                                                                                                                                              |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| getName()                   | Retrieves the name of the criterion                                                                                                                                      |
-| setName(String name)        | Defines the name of the criterion                                                                                                                                        |
-| getOperator()               | Retrieves the criterion operator                                                                                                                                         |
-| setOperator(String operator | Defines the criterion operator. Possible values are : `EQUALS_TO` `CONTAINS`, `LESS_THAN`, `GREATER_THAN`, `STARTS_WITH`, `ENDS_WITH`, `DISPLAY`, `DIFFERENT`, `BETWEEN` |
-| getType()                   | Retrieves the criterion type                                                                                                                                             |
-| setType(String type)        | Defines the criterion type. Possible values are : `STRING`, `TIMESTAMP`, `BOOLEAN`, `INTEGER`, `CURRENCY`                                                                |
-| getValues()                 | Retrieves criterion values                                                                                                                                               |
-| addValue(String value)      | Adds a value to the criterion                                                                                                                                            |
-| addValues(String[] values)  | Adds an array of values to the criterion                                                                                                                                 |
+| `getName()`                   | Retrieves the name of the criterion                                                                                                                                      |
+| `setName(String name)`        | Defines the name of the criterion                                                                                                                                        |
+| `getOperator()`               | Retrieves the criterion operator                                                                                                                                         |
+| `setOperator(String operator)` | Defines the criterion operator. Possible values are : `EQUALS_TO` `CONTAINS`, `LESS_THAN`, `GREATER_THAN`, `STARTS_WITH`, `ENDS_WITH`, `DISPLAY`, `DIFFERENT`, `BETWEEN` |
+| `getType()`                   | Retrieves the criterion type                                                                                                                                             |
+| `setType(String type)`        | Defines the criterion type. Possible values are : `STRING`, `TIMESTAMP`, `BOOLEAN`, `INTEGER`, `CURRENCY`                                                                |
+| `getValues()`                 | Retrieves criterion values                                                                                                                                               |
+| `addValue(String value)`      | Adds a value to the criterion                                                                                                                                            |
+| `addValues(String[] values)`  | Adds an array of values to the criterion                                                                                                                                 |
 
 :::info
 The `EQUALS_TO` and `DIFFERENT` operators are case-sensitive (differentiate between upper and lower case).
@@ -59,9 +59,9 @@ The `EQUALS_TO` and `DIFFERENT` operators are case-sensitive (differentiate betw
 
 | Function                          | Description                                                                        |
 | --------------------------------- | ---------------------------------------------------------------------------------- |
-| setName(String name)              | Defines the name of the criterion                                                  |
-| setType(String type)              | Defines the type of field: `STRING`, `TIMESTAMP`, `BOOLEAN`, `INTEGER`, `CURRENCY` |
-| setAscending(boolean isAscending) | Defines whether sorting is ascending or descending                                 |
+| `setName(String name)`              | Defines the name of the criterion                                                  |
+| `setType(String type)`              | Defines the type of field: `STRING`, `TIMESTAMP`, `BOOLEAN`, `INTEGER`, `CURRENCY` |
+| `setAscending(boolean isAscending)` | Defines whether sorting is ascending or descending                                 |
 
 Building a query :
 

@@ -16,13 +16,13 @@ The functions available on the cards are as follows:
 
 | Function                   | Description                                           |
 | -------------------------- | ----------------------------------------------------- |
-| setTitle(String title)     | Modifies card title                                   |
-| setHeading(String heading) | Modifies card description                             |
-| getActions()               | Recovers the card's action container                  |
-| getStyle()                 | Retrieves the card's CSS class                        |
-| addStyle(String style)     | Adds the CSS class to the card                        |
-| setStyle(String style)     | Replaces the card's CSS classes with the one provided |
-| asElement()                | Retrieves the card as a DOM element                   |
+| `setTitle(String title)`     | Modifies card title                                   |
+| `setHeading(String heading)` | Modifies card description                             |
+| `getActions()`               | Recovers the card's action container                  |
+| `getStyle()`                 | Retrieves the card's CSS class                        |
+| `addStyle(String style)`     | Adds the CSS class to the card                        |
+| `setStyle(String style)`     | Replaces the card's CSS classes with the one provided |
+| `asElement()`                | Retrieves the card as a DOM element                   |
 
 ## Container cards
 
@@ -30,16 +30,16 @@ Container cards are large cards into which content can be added. The functions a
 
 | Function                      | Description                                           |
 | ----------------------------- | ----------------------------------------------------- |
-| setTitle(String title)        | Modifies card title                                   |
-| setCaption(String caption)    | Modifies card description                             |
-| setIcon(String icon)          | Modifies card icon                                    |
-| addCard(Card card)            | Add a card to this one                                |
-| setContent(Component content) | Allows to add a DOM element to the card               |
-| setVisible(boolean isVisible) | Allows to hide or show the card                       |
-| setReduced(boolean isReduced) | Allows to reduce the card (only the title is visible) |
-| getStyle()                    | Retrieves the card's CSS class                        |
-| addStyle(String style)        | Adds the CSS class to the card                        |
-| setStyle(String style)        | Replaces the card's CSS classes with the one provided |
+| `setTitle(String title)`        | Modifies card title                                   |
+| `setCaption(String caption)`    | Modifies card description                             |
+| `setIcon(String icon)`          | Modifies card icon                                    |
+| `addCard(Card card)`            | Add a card to this one                                |
+| `setContent(Component content)` | Allows to add a DOM element to the card               |
+| `setVisible(boolean isVisible)` | Allows to hide or show the card                       |
+| `setReduced(boolean isReduced)` | Allows to reduce the card (only the title is visible) |
+| `getStyle()`                    | Retrieves the card's CSS class                        |
+| `addStyle(String style)`        | Adds the CSS class to the card                        |
+| `setStyle(String style)`        | Replaces the card's CSS classes with the one provided |
 
 # Recording
 
