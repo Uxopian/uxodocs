@@ -12,13 +12,18 @@ import ViewerToggle from "@site/src/components/ViewerToggle/ViewerToggle";
 const DocSidebarMobileSecondaryMenu = ({ sidebar, path }) => {
     const mobileSidebar = useNavbarMobileSidebar();
     const { pathname } = useLocation();
-    // Show the viewer toggle only for current (2026+) — not on old versioned pages.
-    const isARenderCurrent =
-        pathname.startsWith("/docs/arender") && !/^\/docs\/arender\/v\d/.test(pathname);
+    // Show the viewer toggle on the modern ARender layout: the current version
+    // and every v2026+ snapshot. Only the legacy versioned pages (v4, v2023.x)
+    // have no Horizon viewer, so we exclude those explicitly rather than gating
+    // on "no version segment" (which would drop off a v2026.x page as soon as a
+    // newer version ships).
+    const isARenderModernLayout =
+        pathname.startsWith("/docs/arender") &&
+        !/^\/docs\/arender\/v(4|2023)\b/.test(pathname);
 
     return (
         <>
-            {isARenderCurrent && <ViewerToggle />}
+            {isARenderModernLayout && <ViewerToggle />}
             <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, "menu__list")}>
                 <DocSidebarItems
                     items={sidebar}
