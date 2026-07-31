@@ -38,7 +38,7 @@ window.ARender.openDocument(`url=${encodeURIComponent(docUrl)}`);
 The rendition service has a safeguard that only authorizes whitelisted domain/host URLs. By default, no domain is authorized. See the broker environment variable `DSB_AUTHORIZED_URLS`.
 :::
 
-Skipping `encodeURIComponent` happens to work as long as the URL has no query string of its own. As soon as it has one — a pre-signed URL, for instance — its `&` and `=` are read as parameter separators and the request is silently corrupted. Encode every value: see [Web Component → Encoding is the caller's responsibility](../../reference/web-component.md#encoding-is-the-callers-responsibility).
+Skipping `encodeURIComponent` happens to work as long as the URL has no query string of its own. As soon as it has one — a pre-signed URL, for instance — its `&` and `=` are read as parameter separators and the request is silently corrupted. Encode every value: see [Web Component → Encoding URL](../../reference/web-component.md#encoding-url).
 
 ## Opening a document from a repository
 
