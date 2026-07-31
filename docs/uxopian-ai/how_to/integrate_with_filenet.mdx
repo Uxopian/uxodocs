@@ -342,11 +342,14 @@ If you replace the plugin's keystore ([Modifying the plugin](#replacing-the-keys
 
 ### 3.2 Declare the gateway route
 
-Add a route in the gateway's `application.yml` for the FileNet integration:
+Add a route in the gateway's `application.yml` for the FileNet integration. **It must be declared
+before** any route matching `/gui/gateway/uxopian-ai/**` (the default FlowerDocs route, present in
+every deployment) — see the warning below for why:
 
 ```yaml title="application.yml (uxopian-gateway)"
 app:
   routes:
+    # uxopian-ai-filenet MUST come first — see warning below.
     - id: uxopian-ai-filenet
       uri: http://uxopian-ai:8080
       path: /gui/gateway/uxopian-ai/filenet/**
@@ -372,19 +375,43 @@ app:
           public: true
         - path: "/**/swagger-ui/**"
           public: true
+
+    # Already present in every deployment (not something you add for FileNet) — shown here
+    # only to illustrate why declaration order matters, see warning below.
+    - id: uxopian-ai
+      uri: http://uxopian-ai:8080
+      prefix: /gui/gateway/uxopian-ai/
+      path: /gui/gateway/uxopian-ai/**
+      provider: FlowerDocsProvider
 ```
 
 The `path` value here must match the **Uxopian AI Host URL** configured on the plugin ([2.4](#24-configure-the-uxopian-ai-host)) (or the value of `icn.plugin.bff.url` for the backend route).
+
+:::danger[Route declaration order matters — FileNet's route must come first]
+`/gui/gateway/uxopian-ai/filenet/**` is a sub-path of the default FlowerDocs route's own pattern
+(`/gui/gateway/uxopian-ai/**`). The gateway matches routes **in declaration order** and stops at
+the first match — so if `uxopian-ai` is declared first, it silently wins for every FileNet
+request too, injecting `FlowerDocsProvider` instead of `FileNetProvider`. Symptoms are confusing
+because most of the flow still appears to work: the login exchange succeeds and a session cookie
+is set, but it's stored keyed by `FileNetProvider`; the very next request then fails to resolve
+it under the wrong provider key and 401s with `Authentication token is missing`, even though a
+valid session cookie was sent. This is exactly the failure mode if `AI Admin` opens the right URL
+but the admin panel itself 401s. Verify the actual provider being used for a request by checking
+the gateway's own DEBUG logs for `DefaultProviderHeaderFilter` — it logs which route and provider
+matched.
+:::
 
 :::warning[If the gateway sits behind an ingress, `/gui/gateway/uxopian-ai/filenet` must be routed there too]
 This path is a sub-path of `/gui/gateway/uxopian-ai`, so most ingresses already routing that
 prefix (for the default FlowerDocs route) cover it automatically. But an ingress with a rule
 matching `/gui/gateway/uxopian-ai` **exactly** (not as a shared prefix covering sub-paths) will
-NOT match `/gui/gateway/uxopian-ai/filenet/...` — path-prefix matching is path-element aware, so
-a rule for `/gui/gateway/uxopian-ai` does not cover `/gui/gateway/uxopian-ai-filenet` either, if
-you're still on an older gateway version using that non-fixed path. Verify with a plain
-`curl -I <host>/gui/gateway/auth/login` (expect a gateway response, not a 404 from some other
-backend) before assuming the ICN plugin's admin/chat flows will work end-to-end.
+NOT match `/gui/gateway/uxopian-ai/filenet/...`, and `/gui/gateway/auth/login` (the login-exchange
+endpoint the **AI Admin** button needs) is a *sibling* of `/gui/gateway/uxopian-ai`, not a child
+of it — so it needs its own ingress coverage regardless of how the FileNet route itself is
+configured. The safest single ingress rule is a prefix on `/gui/gateway` (not
+`/gui/gateway/uxopian-ai`), covering both. Verify with a plain `curl -I <host>/gui/gateway/auth/login`
+(expect a gateway response, not a 404 from some other backend) before assuming the ICN plugin's
+admin/chat flows will work end-to-end.
 :::
 
 ### 3.3 Verify connectivity
@@ -473,8 +500,8 @@ Then set `icn.plugin.keystore.path`, `icn.plugin.keystore.alias`, and `icn.plugi
 - Token fetching (`fetchToken` for chat, `fetchAdminToken` for admin)
 - CSS and JS asset injection for the web components
 - The `openChat` function (invoked by the context menu action and the AI Chat toolbar button)
-- The `buildChatRequest` function (constructs the initial chat payload)
-- The `openAdmin` function (invoked by the **AI Admin** toolbar button) — resolves the host via `fetchUxopianHost()` (rejecting with an explicit error if unconfigured), fetches an `admin-token`, then opens `GET <gateway-base>/auth/login?providerId=FileNetProvider&token=…&redirect=/admin/` in a new tab so the gateway sets the `GATEWAY_SESSION` cookie in a first-party context before redirecting to the admin panel. `<gateway-base>` is derived by replacing the configured host's last path segment, matching the gateway's `app.gateway.login-path` (default `/gui/gateway/auth/login`).
+- The `buildChatRequest` function — builds the initial chat payload (`{ inputs: [] }`, no predefined system prompt; add one here if your deployment wants the chat to open with a fixed assistant persona — see [Common issues](#common-issues) for what's required if you do)
+- The `openAdmin` function (invoked by the **AI Admin** toolbar button) — resolves the host via `fetchUxopianHost()` (rejecting with an explicit error if unconfigured), fetches an `admin-token`, then opens `GET <login-url>?providerId=FileNetProvider&token=…&redirect=<admin-path>` in a new tab so the gateway sets the `GATEWAY_SESSION` cookie in a first-party context before redirecting to the admin panel. `<login-url>` is derived by anchoring on the gateway's fixed `/gui/gateway/` base and replacing everything after it with `auth/login` (matching `app.gateway.login-path`, default `/gui/gateway/auth/login`) — **not** by trimming a fixed number of trailing segments off the configured host, since that count varies (compare `.../uxopian-ai/filenet` here to a different provider's route depth).
 
 After editing, rebuild the JAR with `mvn clean package` to re-embed the updated file.
 
@@ -569,8 +596,10 @@ The `FileNetHelper` bean (bridging FileNet documents to ARender for OCR) is alwa
 | Web component assets fail to load (403/401) | The configured Uxopian AI Host URL points to the wrong gateway, or the gateway route is not public for assets | Confirm the plugin's **Uxopian AI Host URL** ([2.4](#24-configure-the-uxopian-ai-host)) matches the gateway route; set `/api/web-components/**` to `public: true` |
 | JWT rejected by gateway | Public key not configured, or wrong `issuer`/`tenant-id`, on `FileNetProvider` | Re-fetch the public key from `?op=public-key` and set `filenet.jwt.public-key` on the gateway (Phase 3.1) |
 | Chat panel blank after opening | `icn.plugin.bff.url` unreachable from WebSphere | Test connectivity from WebSphere to the gateway; check firewall rules |
-| `AI Admin` opens a 404 at `.../gui/gateway/auth/login?providerId=FileNetProvider&token=...` (or the chat/prompt calls 404 while other gateway routes on the same host work fine) | The gateway sits behind an ingress whose rule for `/gui/gateway/uxopian-ai` doesn't cover `/gui/gateway/uxopian-ai/filenet` as a sub-path — a broader catch-all rule (e.g. a bare `/gui`) is intercepting the request first and routing it to the wrong backend entirely | Confirm the ingress rule for `/gui/gateway/uxopian-ai` uses a prefix `pathType` broad enough to include `/filenet` sub-paths and points at the gateway service; test with `curl -I <host>/gui/gateway/auth/login` |
+| `AI Admin` opens a 404 at `.../gui/gateway/auth/login?providerId=FileNetProvider&token=...` (or the chat/prompt calls 404 while other gateway routes on the same host work fine) | The gateway sits behind an ingress whose rule for `/gui/gateway/uxopian-ai` doesn't cover `/gui/gateway/auth/login` (a sibling path, not a sub-path) or `/gui/gateway/uxopian-ai/filenet` — a broader catch-all rule (e.g. a bare `/gui`) is intercepting the request first and routing it to the wrong backend entirely | Use a single ingress rule on the broader `/gui/gateway` prefix rather than `/gui/gateway/uxopian-ai` specifically (Phase 3.2); test with `curl -I <host>/gui/gateway/auth/login` |
+| `AI Admin` opens the correct URL and the redirect chain completes, but the final admin page 401s with `Authentication token is missing` in the gateway's logs, even though a `GATEWAY_SESSION` cookie was set | `uxopian-ai-filenet` is declared **after** `uxopian-ai` in the routes list — the broader `/gui/gateway/uxopian-ai/**` pattern shadows it, so the request gets `FlowerDocsProvider` injected instead of `FileNetProvider`, and the session (stored under the `FileNetProvider` key) can't be resolved under the wrong provider | Move `uxopian-ai-filenet` (and its `-ws` counterpart) before `uxopian-ai` in the routes list (Phase 3.2) |
 | IBM Java 8 keystore error | IBM JCE provider does not support PKCS12 by default | The plugin automatically falls back to the `.jks` keystore; ensure `icn-plugin.jks` is present alongside `icn-plugin.p12` |
+| Chat fails immediately with `System prompt with id <name> not found`, even for a plain message | `buildChatRequest()` in `actionHandler.js` was customized to reference a system prompt (`type: "PROMPT"`) that doesn't exist for this tenant yet — by default the plugin sends no system prompt (`{ inputs: [] }`) | Either remove the `PROMPT` entry from `buildChatRequest()` (see [Customizing the frontend behavior](#customizing-the-frontend-behavior)), or create a prompt with that exact id via the Admin UI / `POST /api/v1/admin/prompts` for this tenant |
 
 ## Related pages
 
