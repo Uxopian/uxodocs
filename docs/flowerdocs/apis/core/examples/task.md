@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The `Task` service exposes all the operations available around `TASK` type components.
 
-# Task recovery
+## Task recovery
 
 The examples below show how to retrieve tasks from an ID list.
 
@@ -46,7 +46,7 @@ public List<Task> get() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Task creation
+## Task creation
 
 The examples below show how to create a to-do list using the following operation.
 
@@ -133,7 +133,7 @@ public List<Task> create() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Task modification
+## Task modification
 
 This operation updates a task's tags and data (class identifier, task name, ACL, etc.).
 
@@ -216,11 +216,11 @@ public List<Task> update(Task task) throws FunctionalException, TechnicalExcepti
   </TabItem>
 </Tabs>
 
-# Job search
+## Job search
 
 The search operations all work on the same model as described [here](./search).
 
-# Task deletion
+## Task deletion
 
 The examples below show how to delete a to-do list from an ID list.
 
@@ -252,9 +252,9 @@ public void delete() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Application of an answer
+## Application of an answer
 
-## Simple answer
+### Simple answer
 The examples below show how to apply a simple answer to a list of tasks from a list of identifiers.
 
 <Tabs>
@@ -291,7 +291,7 @@ public void answer() throws FunctionalException, TechnicalException
 </Tabs>
 
 
-## Answer with reason
+### Answer with reason
 The examples below show how to retrieve tasks from an ID list.
 
 <Tabs>
@@ -339,7 +339,7 @@ public void answer() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Task assignment
+## Task assignment
 
 The examples below show how to assign a task list to a user from an ID list.
 

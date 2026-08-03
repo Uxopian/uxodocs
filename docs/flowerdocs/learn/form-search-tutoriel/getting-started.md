@@ -8,7 +8,7 @@ last_update:
 content_hash: d4deb7325576effa68bb0225b4895e5bf851973089292cb3f2313d3b1b1617e2
 ---
 
-# Goals
+## Goals
 
 The aim of searches is to provide business users with tools tailored to their needs. All the essential information will be at your fingertips.
 
@@ -16,7 +16,7 @@ The aim of searches is to provide business users with tools tailored to their ne
 
 In this tutorial, we will create an example of a **Client folder search**. This will simply display client folders with their reference, surname and first name.
 
-# Definitions
+## Definitions
 
 Search forms are pre-configured search templates, which are then made available to end users.
 

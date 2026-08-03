@@ -8,14 +8,14 @@ last_update:
 content_hash: 18da9c042238218ecc714e7103de8954f277ef82952fef747ebe854dba6e13cf
 ---
 
-# Document content
+## Document content
 
 A document is a component in its own right, with the distinctive feature of having one or more contents. It is therefore a component with a set of tags (or metadata) and a set of content (or files).
 
 <br/>
 These contents can be viewed in the  [ARender](https://arender.io/) document viewer.
 
-# Document permissions
+## Document permissions
 
 In order to restrict access to, or modifications of, a document's content, a number of permissions are available to control possible operations:
 

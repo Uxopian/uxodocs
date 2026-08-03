@@ -18,7 +18,7 @@ This feature is in beta.
 
 The `ObfuscationService` service exposes a `create` operation. All parts of the document content corresponding to the search defined in the call will be automatically obfuscated.
 
-# Search for areas to obfuscate
+## Search for areas to obfuscate
 
 The research model used in the call for proposals is as follows:
 
@@ -35,7 +35,7 @@ The `text` is the value or pattern you are looking for. The default value is a p
 <br/>
 The `accentSensitive` and `caseSensitive` parameters indicate that the search should be accent-sensitive and case-sensitive respectively.
 
-# Example
+## Example
 
 The examples below show how to obfuscate a value (in the example: "Demo") and a reason (here hides IBANs in the document).
 

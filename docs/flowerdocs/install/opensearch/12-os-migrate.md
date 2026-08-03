@@ -12,7 +12,7 @@ content_hash: d56eb66be215c74b80aa5379b1e301f64caa118cc9a09df27dbc826ee25ab289
 FlowerDocs {{version}} runs on **OpenSearch {{osVersion}}**. Existing installations run on OpenSearch 1.x, and the document shape changed between the two versions, so the new application cannot read the old data as-is. Migrating your data to OpenSearch {{osVersion}} is therefore **mandatory** before upgrading.
 :::
 
-# Overview
+## Overview
 
 FlowerDocs {{version}} ships a dedicated migration tool that reindexes data from an OpenSearch 1.x cluster (FlowerDocs 2025) to an OpenSearch {{osVersion}} cluster (FlowerDocs {{version}}). It is a one-shot, per-scope tool that:
 
@@ -21,20 +21,20 @@ FlowerDocs {{version}} ships a dedicated migration tool that reindexes data from
 - transforms the documents to the new shape expected by FlowerDocs {{version}},
 - validates that nothing was lost and produces a shareable report.
 
-# Prerequisites
+## Prerequisites
 
-## Target cluster
+### Target cluster
 
 - The OpenSearch {{osVersion}} target cluster is provisioned and reachable.
 - The source `host:port` is added to the target's `reindex.remote.allowlist` (a restart is required if you add it).
 
-## Source cluster
+### Source cluster
 
 - The source OpenSearch 1.x cluster is reachable **from the target cluster** (firewall / security group).
 - If the source has security enabled, the source credentials are available (see [Authentication](#authentication)).
 - Indices that are split across multiple shards on the source migrate faster, with no action required on the tool side.
 
-# Running a migration
+## Running a migration
 
 The standard migration is a single command. The target cluster URL is passed with `--target`, the source cluster and scope with their own parameters:
 
@@ -64,7 +64,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar \
 
 :::
 
-## Required parameters
+### Required parameters
 
 | Parameter   | Meaning                                |
 | ----------- | -------------------------------------- |
@@ -72,7 +72,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar \
 | `--source`  | Source cluster URL (the OpenSearch 1.x cluster) |
 | `--scope`   | Source scope id (case-sensitive)       |
 
-## Common parameters
+### Common parameters
 
 | Parameter                | Default            | Purpose                                   |
 | ------------------------ | ------------------ | ----------------------------------------- |
@@ -86,7 +86,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar \
 The report always includes a **per-class breakdown** (source-versus-target counts for each document, folder, virtual folder and task class) and a **per-objectType breakdown** for facts. This makes it easy to pinpoint exactly which class or objectType shrank or grew, instead of only seeing per-index totals.
 :::
 
-## Targeted runs
+### Targeted runs
 
 For a partial migration, or to retry a single index without re-running everything, restrict the scope of a run:
 
@@ -108,7 +108,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar \
 A `--classid` run is a partial migration : the whole-index counts in the validation report cannot match a single class, so the report is informational only and does not gate the exit code. Use it to top up one class, then re-run the full migration to get an authoritative `RESULT:` line.
 :::
 
-## Authentication
+### Authentication
 
 Authentication is HTTP Basic and is independent on each side : only set what you need.
 
@@ -117,7 +117,7 @@ Authentication is HTTP Basic and is independent on each side : only set what you
 | `--source-username` / `--source-password` | The source cluster has security enabled |
 | `--target-username` / `--target-password` | The target cluster has security enabled |
 
-## Performance & safety parameters
+### Performance & safety parameters
 
 These are all enabled (or default to the cluster default) so that the standard run is safe and fast without manual cluster intervention.
 
@@ -130,7 +130,7 @@ These are all enabled (or default to the cluster default) so that the standard r
 
 Set any of these to `false` or to a specific value only if your environment requires it. In particular, override with `--tune-settings=false` only if the target was prepared externally and you do not want the tool to touch its settings. No manual `curl` step is needed for the standard run.
 
-## Remote source topologies
+### Remote source topologies
 
 :::info Mostly an Amazon OpenSearch Service (AWS) concern
 The parameters in this section matter chiefly when migrating between Amazon OpenSearch Service (AOS) domains over a private network, where the host the target dereferences is not the one the tool can reach. `--source-external` is AWS-specific. If both clusters are self-managed and reachable from the host running the tool, you need none of this : skip ahead to [Output](#output).
@@ -143,7 +143,7 @@ The reindex pulls data through the target cluster's `_reindex` remote feature, s
 | `--dns-source`     | = `--source`| A DNS-reachable source URL used by the tool for its own direct calls (health checks, mappings, counts, class-id and orphan lookups, validation). Set it when the host in `--source` is the one the target dereferences but is not routable from the host running the tool. This is a general private-network concern, not tied to any one provider. |
 | `--source-external`| `false`     | Adds `"external": true` to the remote block, a flag specific to Amazon OpenSearch Service. Set it to `true` only when the **target** is an AOS domain and the **source** is a self-managed cluster. A self-managed to self-managed migration never needs it. |
 
-### Example: Amazon OpenSearch Service, VPC to VPC
+#### Example: Amazon OpenSearch Service, VPC to VPC
 
 For an AOS to AOS migration over a VPC, `--source` is the **PrivateLink connection endpoint** the target domain dereferences internally, while the tool reaches the source through the source domain's own `vpc-*` endpoint:
 
@@ -158,7 +158,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar \
 
 Leave `--source-external` unset for AOS to AOS : the external flag is only for self-managed sources. See the AWS [remote reindex documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/remote-reindex.html) for the underlying mechanism.
 
-# Output
+## Output
 
 The tool produces three things:
 
@@ -166,9 +166,9 @@ The tool produces three things:
 - **Report file** : `migration-report-<scope>-<timestamp>.txt`, written next to the jar.
 - **Process exit code** : non-zero on any validation issue or task failure.
 
-# Reading the validation report
+## Reading the validation report
 
-## Clean run
+### Clean run
 
 A successful migration ends with a `RESULT: SUCCESS` line. Every in-scope index matches on counts, aliases and the document-shape (ACL flatten) spot-check. The per-class and per-objectType breakdowns let you confirm the match class by class.
 
@@ -204,7 +204,7 @@ RESULT: SUCCESS — all 18 in-scope indices match (counts + aliases + acl-flatte
 
 It is safe to point the application at the target.
 
-## Needs attention
+### Needs attention
 
 When at least one index does not match, the report ends with `RESULT: N OK, K issue(s):` and the exit code is non-zero. Read the bottom lines first:
 
@@ -240,7 +240,7 @@ How to read it:
 | `count mismatch ( ... delta=3)`   | The target is short of the source by `delta` documents : investigate before continuing |
 | `RESULT: N OK, K issue(s)`        | At least one index needs investigation before deeming the migration done |
 
-# Production checklist
+## Production checklist
 
 1. **Target cluster prep** : add the source `host:port` to `reindex.remote.allowlist` (restart if added).
 2. **Source cluster prep** : make it reachable from the target; pass source credentials if secured.
@@ -248,7 +248,7 @@ How to read it:
 4. **Time expectations** : production-scale timing depends heavily on the cluster (shard count, network between source and target, hardware). The dominant cost is the largest single source class, so watch it in the live log, and run `--dry-run` first for a count preview before committing.
 5. **Post-migration validation** : open `migration-report-*.txt`, expect `RESULT: SUCCESS`, investigate any `issue(s):` block, then smoke-test the application (log in, search, open a document). If anything fails, drop the target indices and re-run, since the tool is idempotent.
 
-# Re-running a migration
+## Re-running a migration
 
 Re-running the same command on an already-migrated scope is a safe no-op:
 

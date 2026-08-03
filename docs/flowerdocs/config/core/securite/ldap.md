@@ -9,7 +9,7 @@ last_update:
 content_hash: e86c071e88e1354007722d8ed7401aa3a67bbac9aec3bf30792c71dec9f5fc0e
 ---
 
-# Directory configuration
+## Directory configuration
 
 This section describes the configuration of the company directory.
 
@@ -20,7 +20,7 @@ An administrator account must be set up to perform the following actions:
 - authentication
 - etc.
 
-## Directory type
+### Directory type
 
 To configure access to the company directory, you need to identify the type of access required:
 
@@ -28,7 +28,7 @@ To configure access to the company directory, you need to identify the type of a
 - `ad`: Microsoft Active Directory
 - `ad-ds`: Microsoft ADLDS
 
-## Directory definition by scope
+### Directory definition by scope
 
 This section covers the configuration of a scope-specific directory. <b>This is the most flexible configuration mode.</b>
 
@@ -56,7 +56,7 @@ The information to be configured is as follows:
 If `GroupBaseDN` is left blank, `BaseDN` will also be used for group searches as a fallback.
 :::
 
-## Default directory definition
+### Default directory definition
 
 This section covers the configuration of a default directory for a FlowerDocs instance.
 
@@ -112,9 +112,9 @@ Other attributes used for user mapping can be defined:
 | ldap.attr.password     | Attribute used to retrieve a user's password   |
 | ldap.attr.search       | Attribute used for research                    |
 
-### Configuration examples
+#### Configuration examples
 
-#### ADLDS
+##### ADLDS
 
 ```properties
 ldap.bind.url=ldap://ldap.company.com:389
@@ -126,7 +126,7 @@ ldap.attr.id=CN
 ldap.attr.display.name=displayName
 ```
 
-#### OpenLDAP
+##### OpenLDAP
 
 OpenLDAP requires that the base DN used
 
@@ -140,7 +140,7 @@ ldap.bind.password=okidoki
 ldap.attr.display.name=displayName
 ```
 
-# Directory administration
+## Directory administration
 
 From the administration interface, users can be created with a default password.
 For this, the password is not mandatory, but is a global parameter for the FlowerDocs instance.

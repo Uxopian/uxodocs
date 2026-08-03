@@ -9,7 +9,7 @@ last_update:
 content_hash: 00aaef202521133366e99144fd6532a5ce25b049a5dd15f13ecac18fb037f1e8
 ---
 
-# Principle
+## Principle
 
 This operation manager is used to index the content of text documents.
 This processing is necessary to use full-text searches based on the `content` criterion.
@@ -20,7 +20,7 @@ This operation can be activated on the `CREATE` and `ADD_CONTENT` actions.
 To manually define this operation handler, the `com.flower.docs.core.tsp.operation.fulltext.FullTextOperationHandler` identifier must be used as the value of the `OperationHandler` tag.
 :::
 
-# Using an external library
+## Using an external library
 
 It is possible to call an external hook for indexing content using a library other than ARender Rendition, which is the one used internally by FlowerDocs. To do this, you can add the URL of the external hook and the specific mime types on which it will be called.
 <br/>

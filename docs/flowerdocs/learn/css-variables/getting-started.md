@@ -8,18 +8,18 @@ last_update:
 content_hash: b21256127fb12078bb200bba89c8bd45b710cf9d8c23958070e8bfe5f6488a58
 ---
 
-# Goal
+## Goal
 
 The aim of this module is to provide the keys to using the predefined FlowerDocs CSS variables. These variables make it easier to customise FlowerDocs colours.
 
 <br/>
 To improve the accessibility of FlowerDocs and meet [RGAA](https://design.numerique.gouv.fr/accessibilite-numerique/rgaa/) requirements, the colours of the FlowerDocs interface have changed. On the [following page](/docs/flowerdocs/learn/css-variables/old-version), you will learn how to use FlowerDocs variables to revert to the theme prior to these changes.
 
-# FlowerDocs versions concerned
+## FlowerDocs versions concerned
 
 From 2.6.0.
 
-# Use of variables
+## Use of variables
 
 CSS variables are defined as follows:
 
@@ -46,7 +46,7 @@ Once a variable has been defined, it can be used with the `var()` function as fo
 color: var(--<nom-de-la-variable>)
 ```
 
-# A full example
+## A full example
 
 ```css
 body{

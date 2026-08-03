@@ -15,7 +15,7 @@ The FlowerDocs data model allows you to define three types of digital tags:
 - decimal numbers `FLOAT`
 - amounts `CURRENCY`
 
-# Integer
+## Integer
 
 This type is used to enter an integer number.
 
@@ -32,7 +32,7 @@ This type is used to enter an integer number.
 
 :::
 
-# Decimal
+## Decimal
 
 This type is used to enter a decimal number.
 
@@ -49,7 +49,7 @@ This type is used to enter a decimal number.
 
 :::
 
-# Amount
+## Amount
 
 This type allows you to enter a decimal number with only 2 decimals stored and displayed.
 

@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The `TagCategoryService` service exposes all the operations available around `TagCategory` type components.
 
-# Retrieving tag categories
+## Retrieving tag categories
 
 The examples below show how to retrieve all tag categories.
 
@@ -74,7 +74,7 @@ public List<TagCategory> get() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Tag category creation
+## Tag category creation
 
 The examples below show how to create a tag category.
 
@@ -139,7 +139,7 @@ public List<TagCategory> create() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Modifying tag categories
+## Modifying tag categories
 
 This operation updates the data of a tag category.
 
@@ -202,7 +202,7 @@ public List<TagCategory> update(TagCategory tc) throws FunctionalException, Tech
   </TabItem>
 </Tabs>
 
-# Tag category deletion
+## Tag category deletion
 
 This operation deletes a list of tag categories from a list of identifiers.
 

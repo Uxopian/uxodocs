@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The `VirtualFolderClass` service exposes all the operations available around the `VirtualFolderClass` type components.
 
-# Retrieving virtual folder classes
+## Retrieving virtual folder classes
 
 The examples below show how to retrieve all virtual folder classes.
 
@@ -45,7 +45,7 @@ public List<VirtualFolderClass> getAll() throws FunctionalException, TechnicalEx
   </TabItem>
 </Tabs>
 
-# Virtual folder class creation
+## Virtual folder class creation
 
 The examples below show how to create ACLs using the operation of create.
 
@@ -175,7 +175,7 @@ public List<VirtualFolderClass> create() throws FunctionalException, TechnicalEx
   </TabItem>
 </Tabs>
 
-# Virtual folder class modification
+## Virtual folder class modification
 
 This operation updates the data of a virtual folder class: tags and search
 
@@ -311,7 +311,7 @@ public void update() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Virtual folder class search
+## Virtual folder class search
 
 The example below shows how to retrieve a virtual folder class from a list of identifiers.
 
@@ -344,7 +344,7 @@ public List<VirtualFolderClass> get() throws FunctionalException, TechnicalExcep
   </TabItem>
 </Tabs>
 
-# Virtual folder class deletion
+## Virtual folder class deletion
 
 This operation deletes a list of virtual folder classes from a list of identifiers.
 

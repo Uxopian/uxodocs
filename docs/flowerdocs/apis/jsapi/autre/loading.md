@@ -12,8 +12,8 @@ To notify the user of ongoing processing during JavaScript execution, the loadin
 
 | Function           | Description                |
 | ------------------ | -------------------------- |
-| showLoadingPanel() | Displays the loading panel |
-| hideLoadingPanel() | Hide loading panel         |
+| `showLoadingPanel()` | Displays the loading panel |
+| `hideLoadingPanel()` | Hide loading panel         |
 
 \_example of loading panel display for 3 seconds\_\_
 

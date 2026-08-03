@@ -32,9 +32,9 @@ By default, these actions are only visible once the search has been executed. To
 <property name="enableActionsIfDirty" value="false" />
 ```
 
-# Types of action
+## Types of action
 
-## Component creation
+### Component creation
 
 An action can be added to allow users to create a component from a search form.
 This type of action pre-indexes the component to be created based on the search criteria.
@@ -70,7 +70,7 @@ For example, if a user searches for a document in the `Invoice` class with a `st
 
 :::
 
-## Screen change
+### Screen change
 
 `GoToPlaceActionPresenter` type actions are used to switch screens.
 
@@ -107,7 +107,7 @@ For example, if a user searches for a document in the `Invoice` class with a `st
 
 :::
 
-# Activation
+## Activation
 
 Control when an action is available with the ``enablingStrategy`` property. Built-in strategies:
 

@@ -12,12 +12,12 @@ content_hash: f66912135ed0771e642b1749a04347daef0344183324d25da7ad2f528f411dc9
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Principle
+## Principle
 
 The `SelectComponentPlugin` makes it easy for users to select a component corresponding to a set of criteria.
 The criteria defined are used to execute a component search, the results of which are displayed in a selection popup.
 
-# Use
+## Use
 
 | Key              | Type     | Description                                         |
 | ---------------- | -------- | --------------------------------------------------- |
@@ -66,7 +66,7 @@ new SelectComponentPlugin({
   </TabItem>
 </Tabs>
 
-# Model selection
+## Model selection
 
 Based on the `SelectComponentPlugin` plugin, the `SelectTemplatePlugin` plugin offers users a library of document templates.
 By defining the type of model to be proposed, users can select the model to be used from the library.

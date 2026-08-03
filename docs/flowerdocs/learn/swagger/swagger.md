@@ -8,16 +8,16 @@ last_update:
 content_hash: 76323bb54d54e804f91aa527175bebd7067be7f8d106570007dbf8d73d564200
 ---
 
-# Goal
+## Goal
 
 The aim of this module is to give you the keys to getting to grips with and using Swagger UI to consume the REST web services exposed by **FlowerDocs Core**.
 
-# Access
+## Access
 
 Swagger UI is available from **FlowerDocs Core** at `/swagger-ui/index.html`.
 For example, for an online demonstration, Swagger UI is available [here](https://www.demo.flowerdocs.cloud/flower-docs-ws/swagger-ui/index.html).
 
-# Authentication
+## Authentication
 
 The services exposed by **FlowerDocs Core** require the client to be authenticated, so it is necessary to provide a token for requests executed from Swagger UI.
 
@@ -42,7 +42,7 @@ Then, to authenticate future requests:
 
 Future requests will provide **FlowerDocs Core** with the defined token to authenticate them.
 
-# My first request
+## My first request
 
 In this section, we will test our first request using Swagger UI.
 This request will search for all documents whose name contains the letter `a`.

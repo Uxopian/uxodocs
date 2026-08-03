@@ -13,7 +13,7 @@ The `CONDITIONAL` type is used to define conditions on the various choices (or s
 
 Objects `com.flower.docs.domain.tagclass.ConditionalAllowedValue` supporting multiple conditions can be defined for a given choice. In this case, all that's needed is for one condition to be satisfied for the user to be offered a choice.
 
-# Tag conditions
+## Tag conditions
 
 Conditions can relate to the tags of a component or a search form. _They consist of an identifier, an operator and a value._
 

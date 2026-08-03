@@ -14,9 +14,9 @@ import TabItem from '@theme/TabItem';
 
 The `DocumentClassService` service exhibits all available operations around `DocumentClass` type components.
 
-# Retrieving document classes
+## Retrieving document classes
 
-## Retrieving all document classes
+### Retrieving all document classes
 
 The examples below show how to retrieve all document classes.
 
@@ -46,7 +46,7 @@ public List<DocumentClass> getAllDocumentClass() throws FunctionalException, Tec
   </TabItem>
 </Tabs>
 
-## Retrieving a defined list of document classes
+### Retrieving a defined list of document classes
 
 The examples below show how to retrieve a list of document classes from their identifiers.
 
@@ -79,7 +79,7 @@ public List<DocumentClass> getDocumentClasses() throws FunctionalException, Tech
   </TabItem>
 </Tabs>
 
-# Creating document classes
+## Creating document classes
 
 The examples below show how to create a document class.
 
@@ -198,7 +198,7 @@ public void createDocumentClasses() throws FunctionalException, TechnicalExcepti
   </TabItem>
 </Tabs>
 
-# Updating document classes
+## Updating document classes
 
 The examples below show how to update a document class.
 
@@ -284,7 +284,7 @@ public List<DocumentClass> updatedocClass(DocumentClass docClass) throws Functio
 When using the REST service, unset fields will be cleared: you must send the entire document class, not just the fields to modify.
 :::
 
-# Deleting document classes
+## Deleting document classes
 
 The examples below show how to delete a list of document classes.
 

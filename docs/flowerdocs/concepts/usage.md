@@ -12,7 +12,7 @@ content_hash: 61bc2738b43adf68aa515c4422b821d3b068fc55800fe13c30f761521b687ffb
 Discover these concepts in a simple case study: the **Supplier invoice management**
 :::
 
-# Scenario
+## Scenario
 
 A supplier invoice management solution digitally manages the processing of invoices issued by suppliers.
 
@@ -23,9 +23,9 @@ Invoices can be consulted by two departments within the company:
 - accounting department: in order to process invoices, a list of invoices to be processed will be presented to users
 - the purchasing department: in order to be able to negotiate future orders, users will be able to consult all invoices issued by a given supplier
 
-# Solution
+## Solution
 
-## Document management
+### Document management
 
 These invoices have a number of features in common:
 
@@ -48,13 +48,13 @@ We choose a single document class _SupplierInvoice_ referencing tag classes:
 
 _The invoice label will be used to fill in the document name_
 
-## Treatment
+### Treatment
 
 In order to notify the accounting department of the arrival of an invoice to be processed, we'll trigger the processing of an invoice processing task when a document of class _SupplierInvoice_. We therefore define the task class _ProcessingInvoice_ with the following features:
 
-### Processing stage tags
+#### Processing stage tags
 
-### Attachment
+#### Attachment
 
 So that the accounting department can process the invoice based on the information (and file) in the received invoice, we add an attachment to the task class :
 
@@ -62,13 +62,13 @@ So that the accounting department can process the invoice based on the informati
 - class : _SupplierInvoice_
 - mandatory : _Yes_
 
-### Replies
+#### Replies
 
 The invoices we receive are always perfect, so we add just one answer _Confirm_ giving the accounting department only the option of validating the invoice received.
 
-## Consultation
+### Consultation
 
-## Validation
+### Validation
 
 :::info
 This type of design can be applied to _(all)_ your use cases for electronic document management.

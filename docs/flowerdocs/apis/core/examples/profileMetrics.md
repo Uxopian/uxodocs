@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The profile metrics service allows tracking login history and user activity per profile.
 
-# Get login history
+## Get login history
 
 Retrieve the login history for a specific profile within a date range.
 
@@ -34,7 +34,7 @@ curl -X GET "<CORE_HOST>/rest/metrics/profiles/<PROFILE>?start=<START>&end=<END>
   </TabItem>
 </Tabs>
 
-# Count unique users
+## Count unique users
 
 Retrieve the count of unique users who logged in for a specific profile within a date range.
 
@@ -54,7 +54,7 @@ curl -X GET "<CORE_HOST>/rest/metrics/profiles/<PROFILE>/count?start=<START>&end
   </TabItem>
 </Tabs>
 
-# Store login record
+## Store login record
 
 Record a login event for metrics tracking.
 
@@ -71,7 +71,7 @@ curl -X POST "<CORE_HOST>/rest/metrics/profiles" \
   </TabItem>
 </Tabs>
 
-# Clear history
+## Clear history
 
 Delete login history records within a date range.
 

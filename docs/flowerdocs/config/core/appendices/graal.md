@@ -13,13 +13,13 @@ content_hash: 619b427d9bc3f1a3aa9bebb29343f5bc4b71ec71b5186259778af37251f62654
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Principle
+## Principle
 
 The [Graal](https://www.graalvm.org/latest/reference-manual/js/) engine is used to execute scripts within the JVM. JavaScript syntax and Java classes loaded into the JVM can be used to add specific logic to a process.
 
 No additional Javascript module is provided.
 
-## Instantiate an object
+### Instantiate an object
 
 In order to instantiate an object or call a static method of a Java class, the full class name must be specified or a reference to the class must be obtained.
 
@@ -43,6 +43,6 @@ var document = new Document();
 
 To facilitate the development of scripts using the objects provided by FlowerDocs, certain classes can be directly named without using their full name or a reference.
 
-## Restrictions
+### Restrictions
 
 For security reasons, a specific class loader is used to execute the scripts in the JVM. Access to certain classes is therefore restricted. If required, certain classes or packages can be defined as secured using the `secured.classloader.whitelist.additional` property.

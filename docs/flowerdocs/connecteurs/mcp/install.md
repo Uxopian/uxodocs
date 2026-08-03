@@ -4,16 +4,16 @@ sidebar_position: 2
 date: "2026-07-21T09:00:00+02:00"
 ---
 
-# Installation
+## Installation
 
 The MCP server is a standalone Spring Boot service. It ships as a JAR and a Docker image. Whichever you use, the configuration keys are the same.
 
-## Get the server
+### Get the server
 
 - **JAR**: the latest `flower-docs-mcp-server.jar`, available from the [release notes](./release-notes.md).
 - **Docker**: the delivered `flower-docs-mcp-server` image (exposes port `8086`, with a built-in `HEALTHCHECK`).
 
-## Configure it
+### Configure it
 
 Drop an `application.properties` **next to the JAR**.
 
@@ -33,7 +33,7 @@ mcp.access.key=<your-mcp-access-key>
 
 Any property can also be set via an environment variable (`WS_URL=...`, `MCP_ACCESS_KEY=...`) or a command-line argument (`--ws.url=...`).
 
-## Start it
+### Start it
 
 ```bash
 java -jar flower-docs-mcp-server.jar
@@ -41,7 +41,7 @@ java -jar flower-docs-mcp-server.jar
 
 The MCP endpoint is then available at `http://localhost:8086/flowerdocs-mcp/mcp`.
 
-## Health check
+### Health check
 
 `GET /flowerdocs-mcp/actuator/status` returns a bare `UP` / `DOWN` (no health details). It reports **DOWN** when FlowerDocs Core or GUI is unreachable, by probing their own `/actuator/status`. Use it for the container healthcheck and load-balancer / monitoring probes:
 
@@ -49,11 +49,11 @@ The MCP endpoint is then available at `http://localhost:8086/flowerdocs-mcp/mcp`
 curl http://localhost:8086/flowerdocs-mcp/actuator/status   # UP when core and gui are reachable
 ```
 
-## Authentication
+### Authentication
 
 Each client authenticates via HTTP headers. There is no shared service account; every user provides their own credentials.
 
-### Required headers
+#### Required headers
 
 | Header | Description |
 |--------|-------------|
@@ -62,7 +62,7 @@ Each client authenticates via HTTP headers. There is no shared service account; 
 | `X-FlowerDocs-Password` | FlowerDocs password, which **must** be `ENC(...)` (plaintext is rejected) |
 | `X-FlowerDocs-Scope` | FlowerDocs scope / tenant ID (e.g. `FD`) |
 
-### Shared access key
+#### Shared access key
 
 The access key is a **second factor that gates the whole server**, independent of who the user is. Even a valid FlowerDocs user cannot reach the MCP without it. Exposing the endpoint does not, on its own, grant access to your FlowerDocs data.
 
@@ -70,11 +70,11 @@ It is a single shared value. You configure it server-side as `mcp.access.key` an
 
 Every request to the MCP endpoint and to `/encrypt` must carry the `X-FlowerDocs-Access-Key` header. It **must** be `ENC(...)`; plaintext is rejected, the same policy as passwords. So the key is never stored in clear in a client's configuration. The server decrypts the header and compares it to its configured key in constant time. A mismatch returns `403`. The server also refuses to start unless both `secret` and `mcp.access.key` are set, so a deployment can never come up unprotected.
 
-### Encrypted passwords
+#### Encrypted passwords
 
 Passwords must be sent as `ENC(...)`. An `ENC(...)` value can only be decrypted by the key that produced it, so the MCP's `secret` must match whatever encrypted the value.
 
-### Producing `ENC(...)` values
+#### Producing `ENC(...)` values
 
 Once the server is up, use its own `/encrypt` endpoint. It holds the same `secret` and returns a value already wrapped as `ENC(...)`:
 

@@ -8,15 +8,15 @@ last_update:
 content_hash: 536d3d4cb57298ee91a947c073e6b6c5f7fe5d3a5114aed08012288cf69ede30
 ---
 
-# Goal
+## Goal
 
 In this section, we will look at how to use the plugin configured in the previous step.
 
-# Prerequisites
+## Prerequisites
 
 To use `TemplateAttachmentPlugin`, you need to have completed the steps in the previous section.
 
-# Choice of document template
+## Choice of document template
 
 First of all, you need to have a `GEC_Step2_ToBeProcessed` task assigned to you. If it does not already have a document attached to the `Response` attachment, then you will see the following icon appear in the area provided for the attachment:
 
@@ -24,7 +24,7 @@ First of all, you need to have a `GEC_Step2_ToBeProcessed` task assigned to you.
 
 You will then have a choice of templates. Select the template that meets your needs, then confirm your choice.
 
-# Modifying a document in Microsoft Word
+## Modifying a document in Microsoft Word
 
 When you validate the desired document template, a new folder is created in FlowerDocs. The content of this is a file in Word format generated according to the selected template.
 

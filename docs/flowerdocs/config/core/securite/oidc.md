@@ -12,7 +12,7 @@ content_hash: 4df192cc8d1aa05e2c41436d74669f5fdd5f4fede9e3fdfa1a6569c22f9d9fc1
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Concept
+## Concept
 
 [OpenID Connect](https://openid.net/connect/) is a protocol for delegating the authentication of an application to a third-party application called an _Identity Provider_ (IDP).
 Based on the OAuth 2 protocol and its [authorisation code](https://tools.ietf.org/html/rfc6749,#section-1.3.1), OpenId Connect is used by **FlowerDocs GUI** to provide its users with a **S**ingle **S**ign **O**n.
@@ -22,14 +22,14 @@ Once authenticated at the _Identity Provider_, the user is redirected to a redir
 
 Based on this authorization code, **FlowerDocs GUI** initializes the user's HTTP session after retrieving the `id_token` and `access_token` from the _Identity Provider_. A user token specific to FlowerDocs is then generated.
 
-# Prerequisites
+## Prerequisites
 
 **1.** **FlowerDocs Core** 's secret key must be shared with **FlowerDocs GUI** in order to use this mechanism.
 Sharing the secret key is necessary so that **FlowerDocs GUI** can initialize the user session by generating a valid user token ( `token.key` property in the _gui.properties_ file).
 
 **2.** Authorization of the removal URL in the _Identity Provider_
 
-# Configuration
+## Configuration
 
 An _Identity Provider_ OpenId Connect can be configured via the FlowerDocs administration console.
 This configuration is stored inthe `OAuthClientConfiguration` class technical documents. The various parameters to be entered are stored in tags.
@@ -75,7 +75,7 @@ This configuration is stored inthe `OAuthClientConfiguration` class technical do
 
 :::
 
-## Access account
+### Access account
 
 Most _Identity Providers_ require authentication to start the authentication process.
 To configure the account used by FlowerDocs to contact the _Identity Provider_, it is necessary to value the tags:
@@ -83,7 +83,7 @@ To configure the account used by FlowerDocs to contact the _Identity Provider_, 
 - `ClientId`: the identifier representing the client application (or _Relying party_): **FlowerDocs GUI**
 - `ClientSecret`: the password associated with the identifier
 
-## Link to FlowerDocs
+### Link to FlowerDocs
 
 - `RedirectUriTemplate`: template used to generate the parameter `redirect_uri` (value must be set to _`baseUrl`/login/oauth2/code/\{registrationId\}_)
 - `Scope`: OAuth 2.0 scopes (at least _openid_ and _email_)
@@ -93,7 +93,7 @@ To configure the account used by FlowerDocs to contact the _Identity Provider_, 
 - `Icon`: Font Awesome icon to display on login page
 - `MemberOfAttribute`: Attribute name for providing groups
 
-## Endpoints
+### Endpoints
 
 The various endpoints required by the OpenId Connect protocol must be configured using the following tags:
 
@@ -104,7 +104,7 @@ The various endpoints required by the OpenId Connect protocol must be configured
 
 _For more details, see specifications_ [OpenId Connect](https://openid.net/specs/openid-connect-core-1_0.html)
 
-## Examples
+### Examples
 
 <Tabs>
   <TabItem value="google" label="Google">
@@ -222,7 +222,7 @@ _For more details, see specifications_ [OpenId Connect](https://openid.net/specs
   </TabItem>
 </Tabs>
 
-# Automatic connection
+## Automatic connection
 
 To authenticate a user automatically using this authentication mechanism, you can add the parameter `sso=auto` to the URL.
 

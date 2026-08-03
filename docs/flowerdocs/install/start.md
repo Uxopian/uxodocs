@@ -11,7 +11,7 @@ content_hash: d2b6767d41c337a7fa02325fbafed8dd0991a42d738c197e99991a9d4000593f
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Manual launch
+## Manual launch
 
 To manually launch the FlowerDocs GUI, FlowerDocs Core and ARender HMI applications, simply issue the following commands:
 
@@ -39,15 +39,15 @@ java -jar arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar
 </TabItem>
 </Tabs> 
 
-# Installation in service
+## Installation in service
 
-## Linux
+### Linux
 
 FlowerDocs applications are installed as a Linux `systemd` service. Only `systemd`-based services are tested and supported.
 
 In this section, it is assumed that the JARs `flower-docs-gui-webapp-{{version}}.jar`, `flower-docs-core-webapp-{{version}}.jar` and `arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar` are placed in the `/opt/flowerdocs` folder. This folder is also used as a configuration directory.
 
-### Service systemd
+#### Service systemd
 
 To install FlowerDocs applications as a `systemd` service, the `gui.service`, `core.service` and `arender-hmi.service` scripts must be created in the `/etc/systemd/system` directory such as :
 
@@ -107,7 +107,7 @@ WantedBy=multi-user.target
 </TabItem>
 </Tabs> 
 
-### Environment file
+#### Environment file
 
 The `JAVA_OPTS` (JVM options) and `RUN_ARGS` (application arguments) variables referenced in the unit files are defined in the `EnvironmentFile`. This file is placed in the same directory as the JAR, with the same name as the JAR and the `.conf` extension (for example `flower-docs-core-webapp-{{version}}.conf`).
 
@@ -138,7 +138,7 @@ RUN_ARGS=""
 `RUN_ARGS` can hold additional application arguments (left empty here). Set `-Xmx` according to the RAM allocated to the component (see [Prerequisites](/docs/flowerdocs/install/prerequisites)).
 :::
 
-### Boot start
+#### Boot start
 
 After creating or modifying the unit files, reload the `systemd` configuration:
 
@@ -173,7 +173,7 @@ systemctl enable arender-hmi.service
 </TabItem>
 </Tabs> 
 
-### Commands
+#### Commands
 
 To start the services, simply issue the commands: 
 

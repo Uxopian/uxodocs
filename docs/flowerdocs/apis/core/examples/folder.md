@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The `Folder` service exposes all the operations available around `FOLDER` type components.
 
-# Folder retrieval
+## Folder retrieval
 
 The examples below show how to retrieve folders from a list of identifiers.
 
@@ -46,7 +46,7 @@ public List<Folder> get() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Folder creation
+## Folder creation
 
 The examples below show how to create a list of folders.
 
@@ -110,7 +110,7 @@ public List<Folder> create() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Folder modification
+## Folder modification
 
 This operation updates the data in a folder: tags and data (class identifier, ACL, owner, etc.).
 
@@ -177,11 +177,11 @@ public List<Folder> update(Folder folder) throws FunctionalException, TechnicalE
   </TabItem>
 </Tabs>
 
-# Folder search
+## Folder search
 
 The search operations all work on the same model as described [here](./search).
 
-# Folder deletion
+## Folder deletion
 
 The examples below show how to delete a list of folders from a list of identifiers.
 
@@ -213,11 +213,11 @@ public void delete() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Managing children
+## Managing children
 
 Folders can contain children (documents, tasks, or other folders). The following operations allow managing the children of a folder.
 
-## Adding children
+### Adding children
 
 This operation adds children to a folder without removing existing ones.
 
@@ -263,7 +263,7 @@ public void addChildren() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-## Replacing children
+### Replacing children
 
 This operation replaces all existing children with the provided list.
 
@@ -313,7 +313,7 @@ public void replaceChildren() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-## Removing children
+### Removing children
 
 This operation removes specific children from a folder.
 

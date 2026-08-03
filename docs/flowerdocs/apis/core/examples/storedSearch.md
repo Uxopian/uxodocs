@@ -14,9 +14,9 @@ import TabItem from '@theme/TabItem';
 
 The `StoredSearchService` service exhibits all available operations around `StoredSearch` type components.
 
-# Retrieval
+## Retrieval
 
-## Retrieving all stored searches
+### Retrieving all stored searches
 
 The examples below show how to retrieve all stored searches of a scope.
 
@@ -46,7 +46,7 @@ public List<StoredSearch> getAllStoredSearch() throws FunctionalException, Techn
   </TabItem>
 </Tabs>
 
-## Retrieving a defined list
+### Retrieving a defined list
 
 The examples below show how to retrieve a list of stored searches from their identifiers.
 
@@ -78,7 +78,7 @@ public List<StoredSearch> getStoredSearch() throws FunctionalException, Technica
   </TabItem>
 </Tabs>
 
-# Creation
+## Creation
 
 The examples below show how to create a stored search.
 
@@ -190,7 +190,7 @@ public List<StoredSearch> createStoredSearch() throws FunctionalException, Techn
   </TabItem>
 </Tabs>
 
-# Update
+## Update
 
 The examples below show how to update a stored search.
 
@@ -284,7 +284,7 @@ public List<StoredSearch> updateStoredSearch(StoredSearch search) throws Functio
 When using the REST service, unset fields will be cleared: you must send the entire stored search, not just the fields to modify.
 :::
 
-# Deletion
+## Deletion
 
 The examples below show how to delete a list of stored searches.
 

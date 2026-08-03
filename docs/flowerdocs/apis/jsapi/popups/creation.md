@@ -35,7 +35,7 @@ popup.show();
 
 &nbsp;
 
-# File selector
+## File selector
 
 In the case of document creation, it is also possible to display a popup without a file selector. This instantiates a blank document with no content.
 

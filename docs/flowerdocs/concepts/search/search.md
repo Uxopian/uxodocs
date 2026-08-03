@@ -9,7 +9,7 @@ last_update:
 content_hash: cceb50b4be9b90723e0c4f2b042123a80969075850d5f9ebfa52e84b71dfd947
 ---
 
-# Searches
+## Searches
 
 FlowerDocs' search capabilities make the most of the document base, while maintaining the ergonomics required by end-users.
 
@@ -34,7 +34,7 @@ Searches can be saved and shared between FlowerDocs users.
 
 Searches return a maximum of 10,000 results; an error occurs when paging after this limit. This limit is the same using user interface and web services.
 
-# Keyword search
+## Keyword search
 
 In a search form, it is possible to configure a keyword search. This allows launching a search on several tags and data simultaneously. The search uses a **contains** operator: entering `A` returns all components where at least one of the configured tags (name, tags, etc.) contains `A`.
 
@@ -58,7 +58,7 @@ Searching for `contract insurance` returns:
 Keyword search configuration is described in the [search form documentation](/docs/flowerdocs/config/gui/search/configure#keyword-search).
 :::
 
-# Full-text search
+## Full-text search
 
 With FlowerDocs, it is possible to configure a full-text search. This allows a user to search on the content of a document rather than on its metadata.
 

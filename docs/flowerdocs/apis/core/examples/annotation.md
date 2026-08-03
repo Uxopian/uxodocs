@@ -15,11 +15,11 @@ import TabItem from '@theme/TabItem';
 The `Annotation` service exhibits all the operations available around a document annotations.
 
 
-# Annotations recovery
+## Annotations recovery
 
 The examples below show how to retrieve annotations using the various operations of `get`.
 
-## All annotations recovery
+### All annotations recovery
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -54,9 +54,9 @@ public List<Annotation> get() throws FunctionalException, TechnicalException
 
 This functionnality is not implemented yet -->
 
-# Annotation creation
+## Annotation creation
 
-## From a json
+### From a json
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -138,7 +138,7 @@ public void create() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-## From xml
+### From xml
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -160,7 +160,7 @@ curl -X POST "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/annotations" \
   </TabItem>
 </Tabs>
 
-# Annotation modification
+## Annotation modification
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -240,11 +240,11 @@ public void update() throws FunctionalException, TechnicalException
 </Tabs>
 
 
-# Annotation deletion
+## Annotation deletion
 
 The examples below show how to delete annotations.
 
-## Part of annotations deletion
+### Part of annotations deletion
 
 This operation allows to delete some of the annotations of a document
 
@@ -280,7 +280,7 @@ public void delete() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-## All annotations deletion
+### All annotations deletion
 
 This operation allows to delete all the annotations of a document.
 

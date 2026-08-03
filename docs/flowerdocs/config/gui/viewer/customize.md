@@ -9,7 +9,7 @@ last_update:
 content_hash: c9fcd7d768276b6581ce624f728639d1dcf1820c2b6d35bc5320135f816e78a6
 ---
 
-# Introduction
+## Introduction
 
 FlowerDocs natively embeds ARender.
 ARender can be configured using a number of parameters, not all of which have been qualified within FlowerDocs.
@@ -17,7 +17,7 @@ You can find below the list of customisations that have been tested and validate
 
 You can follow this documentation page to learn how to use these customisations [here](./arender-config)
 
-## Annotation styles
+### Annotation styles
 
 | Sticky note                            |                                             |
 | :------------------------------------- | :------------------------------------------ |
@@ -59,7 +59,7 @@ You can follow this documentation page to learn how to use these customisations 
 
 <br/>
 
-## Toaster management
+### Toaster management
 
 | Parameter                | Description                | Default Value |
 | :----------------------- | :------------------------- | :------------ |

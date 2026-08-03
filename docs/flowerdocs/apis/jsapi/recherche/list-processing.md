@@ -11,7 +11,7 @@ content_hash: 9fd7df1f2c5c1509250934f32ebb048c03545ded4c634234e5061aeb1a7e31e4
 
 Serial processing allows users to navigate through a list of documents or tasks one by one without returning to the search results. For a full description of the feature and its availability rules, see the [Serial processing concept page](/docs/flowerdocs/concepts/serial-processing).
 
-# Activation
+## Activation
 
 Serial processing sessions are configured using the JS API.
 The following example enables serial processing unconditionally:
@@ -26,7 +26,7 @@ JSAPI.get()
 
 By default, the session uses the query from the originating search or virtual folder.
 
-# Customizing the session query
+## Customizing the session query
 
 The JS API allows you to override the session query : for example, to restrict the session to components sharing a specific tag value:
 
@@ -48,7 +48,7 @@ JSAPI.get()
     });
 ```
 
-# Enable/Disable the serial processing
+## Enable/Disable the serial processing
 
 You can then choose to enable or disable it for each menu or search.
 
@@ -88,7 +88,7 @@ function constructMailRequest (session) {
 }
 ```
 
-# Session API reference
+## Session API reference
 
 The JS API exposes the following methods on the session object:
 

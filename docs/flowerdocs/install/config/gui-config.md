@@ -10,7 +10,7 @@ content_hash: 7955344c60611e5a8b9352df2c2e49f69cb59558fead0af3a6c15f2b9f7bca5b
 
 This section describes the various FlowerDocs GUI configurations to be defined in the application's `gui.properties` file.
 
-# General
+## General
 
 | Property                    | Description                                                      |
 | --------------------------- | ---------------------------------------------------------------- |
@@ -25,14 +25,14 @@ This section describes the various FlowerDocs GUI configurations to be defined i
 | gui.session.timeout         | User session validity time in seconds                            |
 | ws.url                      | **FlowerDocs Core** REST URL (e.g. `http://localhost:8081/core/rest`) |
 
-# Logging
+## Logging
 
 | Property           | Description                                 |
 | ------------------ | ------------------------------------------- |
 | logging.file.name  | Log file path and name                      |
 | logging.level.root | Log level: `WARN`, `ERROR`, `INFO`, `DEBUG` |
 
-# Redis
+## Redis
 
 | Property    | Description                                       |
 | ----------- | ------------------------------------------------- |

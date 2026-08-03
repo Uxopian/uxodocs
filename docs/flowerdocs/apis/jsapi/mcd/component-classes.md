@@ -14,7 +14,7 @@ The [component classes](/docs/flowerdocs/concepts/classes/getting-started) defin
 Thanks to the JS API, they can be manipulated by scripts to access a scope's data model.
 :::
 
-# Retrieving a component class
+## Retrieving a component class
 
 Each category of component class can be manipulated using the JS API through a specific object.
 An instance of this object can be retrieved using the following functions:
@@ -39,25 +39,25 @@ JSAPI.get().documentClass().get(["Document"],
 );
 ```
 
-# Component class information
+## Component class information
 
 Component classes contain information used by the Core or graphical user interface. They can be retrieved using the following functions:
 
 | Functions                 | Description                                                                                   |
 | ------------------------- | --------------------------------------------------------------------------------------------- |
-| getId()                   | Component class identifier retrieval                                                          |
-| getLocalizedDisplayName() | Retrieval of the internationalized class name according to the current user's language        |
-| getLocalizedDescription() | Retrieval of the internationalized class description according to the current user's language |
-| getTagReferences()        | Retrieval of tag references carried by the component class                                    |
+| `getId()`                 | Component class identifier retrieval                                                          |
+| `getLocalizedDisplayName()` | Retrieval of the internationalized class name according to the current user's language        |
+| `getLocalizedDescription()` | Retrieval of the internationalized class description according to the current user's language |
+| `getTagReferences()`      | Retrieval of tag references carried by the component class                                    |
 
 <!--- Does not work actually
-|getDisplayNames()                                      | Retrieval of class names                                                                             |        
-|getDescriptions()                                      | Retrieval of class descriptions                                                                     |        
+|`getDisplayNames()`                                      | Retrieval of class names                                                                             |        
+|`getDescriptions()`                                      | Retrieval of class descriptions                                                                     |        
 
 For the functions ``getDisplayNames()`` and ``getDescriptions()``, the returns are in the form of the label I18N 
 -->
 
-# Access to tag references
+## Access to tag references
 
 Each component class has a list of [tag references](/docs/flowerdocs/concepts/classes/tag-reference). These references can be used to associate [tag classes](/docs/flowerdocs/concepts/tags/overview) to a component typology.
 
@@ -65,12 +65,12 @@ From a component class, the `getTagReferences()` function exhibits tag reference
 
 | Functions                 | Description                                                                                       |
 | ------------------------- | ------------------------------------------------------------------------------------------------- |
-| getTagName()              | Retrieval of the tag reference name                                                               |
-| getLocalizedDescription() | Retrieval of the internationalized reference description according to the current user's language |
-| getPattern()              | Retrieval of the tag reference pattern                                                            |
-| getDefaultValue()         | Retrieval of the default tag reference value                                                      |
-| getOrder()                | Retrieval of the position of the tag reference                                                    |
-| isMandatory()             | Determines whether the tag is mandatory                                                           |
-| isMultivalued()           | Determines whether the tag is multivalued                                                         |
-| isReadonly()              | Determines whether the tag is read-only                                                           |
-| isTechnical()             | Determines whether the tag is technical                                                           |
+| `getTagName()`            | Retrieval of the tag reference name                                                               |
+| `getLocalizedDescription()` | Retrieval of the internationalized reference description according to the current user's language |
+| `getPattern()`            | Retrieval of the tag reference pattern                                                            |
+| `getDefaultValue()`       | Retrieval of the default tag reference value                                                      |
+| `getOrder()`              | Retrieval of the position of the tag reference                                                    |
+| `isMandatory()`           | Determines whether the tag is mandatory                                                           |
+| `isMultivalued()`         | Determines whether the tag is multivalued                                                         |
+| `isReadonly()`            | Determines whether the tag is read-only                                                           |
+| `isTechnical()`           | Determines whether the tag is technical                                                           |

@@ -9,7 +9,7 @@ last_update:
 content_hash: 72d648ccdea0da2de973845b38a332daaed0aab9ac2c490f1f9eb3fde86d5724
 ---
 
-# User token
+## User token
 
 A FlowerDocs client, such as **FlowerDocs GUI**, requires authentication to communicate with **FlowerDocs Core**.
 This authentication is submitted in the form of a _JWT_ token.

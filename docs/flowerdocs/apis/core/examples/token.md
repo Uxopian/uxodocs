@@ -15,11 +15,11 @@ import TabItem from '@theme/TabItem';
 The `token` service can be used to generate a token for specific documents, or to extend the life of a token.
 
 
-# Token generation
+## Token generation
 
 The examples below show how to generate user tokens.
 
-## Generate a token with a specific lifetime
+### Generate a token with a specific lifetime
 
 The example below shows how to generate a token with a configurable lifetime for the authenticated user.
 
@@ -51,7 +51,7 @@ public String generateToken(long validityTime) throws FunctionalException, Techn
   </TabItem>
 </Tabs>
 
-## Generate a new token
+### Generate a new token
 
 The example below generates a new token for the authenticated user.
 
@@ -86,7 +86,7 @@ public String generateToken() throws FunctionalException, TechnicalException
 Token generation endpoints ending with `/token` are deprecated since version 2025.2.0 because they do not return an expiration date.
 :::
 
-## Generate a token to access documents
+### Generate a token to access documents
 
 The example below generates a new token for the authenticated user to access a list of specific documents.
 
@@ -120,7 +120,7 @@ public String generateForDocuments(List<id> ids, boolean readOnly) throws Functi
 </Tabs>
 
 
-# Token validation
+## Token validation
 
 The example below shows how to validate a token.
 

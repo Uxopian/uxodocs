@@ -8,7 +8,7 @@ last_update:
 content_hash: 8501ad020ecbc8d1cdb67ae819632798406e069b1934a554a8fef26489271e54
 ---
 
-# Link to a search form
+## Link to a search form
 
 Search-based widgets can be coupled with a search form.
 So by clicking on the widget title, the user will be redirected to the search form defined with pre-filled criteria if they are displayed or authorized.

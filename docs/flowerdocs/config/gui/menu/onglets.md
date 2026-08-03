@@ -8,9 +8,9 @@ last_update:
 content_hash: 9a620c7dc02fd89e59b2324e3eb86e55b3c6443a0b2290b65e178295b360d9d3
 ---
 
-# The different types of tabs
+## The different types of tabs
 
-## URL-based tabs
+### URL-based tabs
 
 To enhance integration with other information system applications, FlowerDocs lets you add URL-based tabs to the graphical user interface.
 
@@ -20,7 +20,7 @@ To add a new tab of this type, simply add the following property to the relevant
 Configure an icon and tab name by setting a property such as: `Viewer(https://arender.io,fa fa-map)`
 :::
 
-## Folder-based tabs
+### Folder-based tabs
 
 FlowerDocs lets you define new tabs based on folders (physical or virtual).
 
@@ -42,7 +42,7 @@ _The security of these tabs is ensured by the ACL carried by the folder._
 Configure an icon and the name of the internationalized tab by setting a property such as: `MyTab(icon=fa fa-thermometer-2,fr=Dossier,en=Folder)`
 :::
 
-## Search-based tabs
+### Search-based tabs
 
 Search-based tabs allow you to dynamically define tabs corresponding to a physical or virtual folder.
 After configuring a search for a user team, users see the folders found displayed as a tab.
@@ -99,7 +99,7 @@ The search mentioned above must be defined in a `GUIConfiguration` class documen
 
 :::
 
-# Tab order
+## Tab order
 
 The order of all tabs can be redefined for each team. To define the order of a team's tabs, add the `tabs.order` property.
 

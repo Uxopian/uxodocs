@@ -11,7 +11,7 @@ content_hash: 6c661572a3d7a5a3593695429aa9d48c4756cb6e3b88a3711507ea0d1f46e33e
 To upgrade OpenSearch, you need to install a new OpenSearch cluster in the target version.
 Next, the following procedure describes how to push data from one OpenSearch cluster to another after creating your scope from the CLM.
 
-# Launch of re-indexing
+## Launch of re-indexing
 
 In this section, we will ask OpenSearch to populate an index from another remote index.
 
@@ -45,7 +45,7 @@ The response returned by OpenSearch is of the type:
 "task": "<nodeId>:<taskId>"
 ```
 
-# Re-indexing status
+## Re-indexing status
 
 As the re-indexing task is asynchronous, it is possible to know its status:
 

@@ -7,7 +7,7 @@ last_update:
 content_hash: 4bc39a5bffc85591e7583e02b53144b6c519620a2eeffedf61d91ebbdfa2d986
 ---
 
-# Starting a session based on the context
+## Starting a session based on the context
 
 We will restrict the start of processing sessions. We want only tasks opened from buckets `In process` and `To be processed` of a virtual folder to trigger a processing session.
 
@@ -47,7 +47,7 @@ if(place.getPlaceType().startsWith('Browse') && (aggregation.indexOf('ENCOURS') 
 
 :::
 
-# To go further: manipulate the processing session
+## To go further: manipulate the processing session
 
 We now want to force the session to open only those tasks for which the priority entered is the same as that of the task at the origin of the session.
 To do this, the user could modify the application search to include this search criterion.

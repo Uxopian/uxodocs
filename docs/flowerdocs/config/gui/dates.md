@@ -8,7 +8,7 @@ last_update:
 content_hash: d5234d1833165ee9df37ca9b394e6e65e5d2869b7ae14d2a4c919f25df8a4d1a
 ---
 
-# Global configuration
+## Global configuration
 
 Within the FlowerDocs GUI, several date formats can be defined:
 
@@ -23,6 +23,6 @@ For more information on the different formats supported, please consult [this](h
 
 In a form, to obtain dates of the type 01/12/2016, the `gui.date.form=dd/MM/yyyy` property must be defined. This type of date makes it easier to enter dates manually without using the DatePicker object.
 
-# Date format configuration by tag class or tag reference
+## Date format configuration by tag class or tag reference
 
 In a `Date` tag class or a `Date` tag reference, it is possible to use a custom date format from [supported date formats](/docs/flowerdocs/concepts/tags/date). Format internationalization is managed by the application.

@@ -7,15 +7,15 @@ last_update:
 content_hash: 82119d0768679b0423d78ce5367a8a629158136cd22189d02a7d3bcea88d1fc4
 ---
 
-# Set up
+## Set up
 
-## Creation of a document containing the logo
+### Creation of a document containing the logo
 
 For our example, we wi'll use a logo that will be contained within the application. To do this, create a document in the FlowerDocs application and add the logo to the document content.
 
 For the rest of the tutorial, you will keep the ID of the document you have created.
 
-## Add customized logo from FlowerDocs administration
+### Add customized logo from FlowerDocs administration
 
 The graphical user interface can be configured from the FlowerDocs admin console. Add an XML configuration file containing the `appInfo` bean, which will allow us to override several properties, including our logo.
 

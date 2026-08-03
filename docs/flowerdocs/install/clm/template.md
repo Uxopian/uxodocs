@@ -8,7 +8,7 @@ last_update:
 content_hash: 677d6317dc199835fbbf74253a34581e95fe08eb3e56f5c6053b0fdf7129ffe1
 ---
 
-# Scope import
+## Scope import
 
 The import of a scope is based on a template that serves as a model for the creation of a new scope. This notion of template allows you to initialize different scopes based on the same template.
 
@@ -50,7 +50,7 @@ In configuration XML files for `OperationHandlerRegistration`, `Script`, and `Te
 
 This way, referenced files will be correctly interpreted and displayed on the UI.
 
-# Create scope with default template
+## Create scope with default template
 
 The default FlowerDocs template can be downloaded from the [downloads](/docs/flowerdocs/install/getting-started) page.
 It can then be used as a basis for creating a customized scope.

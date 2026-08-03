@@ -7,7 +7,7 @@ last_update:
 content_hash: a706b7411e2dd2eacf325421ad647b21cea98085d11bf0e2e37b5fb70e4c6eaa
 ---
 
-# Hiding tabs
+## Hiding tabs
 
 The following CSS property hides the element to which it is applied:
 
@@ -44,7 +44,7 @@ The idea is to add style to the opening of FlowerDocs. To do this, we will add t
 
 ```
 
-# Depending on profile
+## Depending on profile
 
 We need to know the profile(s) of the current user to know which tabs will be visible to them. To do this, we are going to use the FlowerDocs JS API:
 

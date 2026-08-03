@@ -8,7 +8,7 @@ last_update:
 content_hash: 7e18d9ce37b4d6d446d963a543fd2c81aab7b0f76fb37386ff2f9f65d3e23f8e
 ---
 
-# Creation shortcuts
+## Creation shortcuts
 
 The `Create` button in the menu bar facilitates access to the creation of a component of a given class.
 

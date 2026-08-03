@@ -9,7 +9,7 @@ last_update:
 content_hash: bf1ad4e30188685c6f0443ccf894f2cb799c7dcf21bdb25a45fda66a038e0533
 ---
 
-# Goal
+## Goal
 
 In this module, you will learn how to configure FlowerDocs in two different ways so that you can use your own logo within the application.
 
@@ -18,6 +18,6 @@ The logo must meet these requirements:
 - size: 1000x325 pixels
 - format: jpg, png, gif, webp
 
-# Before getting started
+## Before getting started
 
 This tutorial is based on the [graphical user interface configuration](/docs/flowerdocs/config/gui/getting-started).

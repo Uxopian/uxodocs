@@ -8,11 +8,11 @@ last_update:
 content_hash: 7355da3cc3b61cd6cef462ca04d51e306d4d136769276065cf91ce4c9ba63e8f
 ---
 
-# Goals
+## Goals
 
 In this module, you will configure an example of a processing session that can be started from certain virtual folder aggregations. This example allows you to manipulate the processing session so that only tasks with the same priority are opened.
 
-# Before getting started
+## Before getting started
 
 This tutorial is based on the configuration of a processing session via the [FlowerDocs JS API](/docs/flowerdocs/apis/jsapi/recherche/list-processing)
 

@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 Facts represent audit trail events recorded on components (documents, folders, tasks, virtual folders). Each fact captures an action performed by a user on a component.
 
-# Retrieving facts
+## Retrieving facts
 
 The examples below show how to retrieve facts for a document. The same pattern applies to folders (`/rest/folders`), tasks (`/rest/tasks`) and virtual folders (`/rest/virtualFolders`).
 
@@ -55,7 +55,7 @@ The same endpoint pattern is available for all component types:
 * Virtual folders: `GET /rest/virtualFolders/<ID>/facts`
 :::
 
-# Creating a fact
+## Creating a fact
 
 The examples below show how to create a fact for a document.
 
@@ -97,7 +97,7 @@ public Fact createFact() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Searching for facts
+## Searching for facts
 
 Facts can be searched using a `SearchRequest` object, which allows filtering by component, user, action, date range, etc.
 

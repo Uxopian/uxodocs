@@ -12,7 +12,7 @@ content_hash: f623968f1e6615e64bdb0dace79ceb3490b5dfbcf67f87bd42a3c0453eb1cd66
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Overview
+## Overview
 
 Two utility objects are available in operation handler scripts. They serve different purposes:
 
@@ -29,7 +29,7 @@ Two utility objects are available in operation handler scripts. They serve diffe
 Since `RuleContextUtil` extends `RuleUtil`, calling static methods through the `util` instance (e.g., `util.setTagValue(...)`) also works in GraalJS. However, the recommended convention is to use `RuleUtil` for static calls and `util` for instance calls, to make the intent clear.
 :::
 
-# Access to services
+## Access to services
 
 
 This object exposes methods for accessing and interacting with the services exposed by **FlowerDocs Core**:
@@ -76,7 +76,7 @@ This object exposes methods for accessing and interacting with the services expo
   </TabItem>
 </Tabs>
 
-# Component persistence
+## Component persistence
 
 The following methods can be used to persist or transform a component:
 
@@ -106,7 +106,7 @@ The following methods can be used to persist or transform a component:
   </TabItem>
 </Tabs>
 
-# RuleUtil - Static helpers
+## RuleUtil - Static helpers
 
 `RuleUtil` methods are **static**: they operate on objects already in memory without making service calls. Use them to read or modify tag values, class identifiers, and statuses on the `component` variable.
 
@@ -150,7 +150,7 @@ The following methods can be used to persist or transform a component:
   </TabItem>
 </Tabs>
 
-# Usage examples
+## Usage examples
 
 **Reading tags and calling services**
 

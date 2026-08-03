@@ -18,7 +18,7 @@ A task class is used to define the task model to be created. Its special feature
 - expected attachments
   :::
 
-# Attachments
+## Attachments
 
 When processing a task, it may be necessary for the user to add one or more components.
 
@@ -43,7 +43,7 @@ To describe an attachment, you can define :
 - a description that will be displayed when the mouse hovers over the attachment
 - a summary displayed under the name of the component added as an attachment
 
-# Summary
+## Summary
 
 The summary can be configured, by scope language, to display the tags of the attached component (example: `${Priority} Created by ${owner}`)
 
@@ -51,7 +51,7 @@ By default, the summary displays the component creation date.
 
 To go even further, you can use the JS API to define your own summary. A dedicated section [here](/docs/flowerdocs/apis/jsapi/forms/task-attachment#summary).
 
-# Answers
+## Answers
 
 Responses are used to steer tasks in a direction suggested by a workflow.
 Each answer has the following attributes:
@@ -60,7 +60,7 @@ Each answer has the following attributes:
 - an internationalized name
 - an internationalized confirmation message
 
-## Answers with reason
+### Answers with reason
 
 You can define a patterned response as follows:
 

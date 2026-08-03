@@ -13,7 +13,7 @@ content_hash: c8b9809bca70ec331e5870cc6dfa9e86b5333bc0950f8152d2ae90e0cd5d107e
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Subscription
+## Subscription
 
 An operation subscription is a `OperationHandlerRegistration` class technical document.
 The tags referenced by this class are used to configure the subscription:
@@ -37,9 +37,9 @@ The tags referenced by this class are used to configure the subscription:
   </TabItem>
 </Tabs>
 
-# Filters
+## Filters
 
-## Filter evaluation
+### Filter evaluation
 
 For each operation subscription, execution filters can be defined through a `com.flower.docs.domain.search.SearchRequest` object. These filters can be used to restrict the contexts in which an operation handler is executed. In this way, a subscription can be limited to components that meet the configured criteria.
 
@@ -51,29 +51,29 @@ Filters are evaluated according to the context in which an operation is performe
 
 An operation performed on a component exposes the component concerned through its context. In this way, its data (tags, owner, class, etc.) can be used to evaluate the defined filters. Whereas when a search is run, filters are evaluated on its criteria.
 
-## Storage
+### Storage
 
 Filters are stored through a `com.flower.docs.domain.search.SearchRequest` object. When saved, this object is serialized (XML) and saved as the document file used to define the subscription.
 The naming of the file containing the filters is imposed. Its name should be `request`.
 
-## Special features
+### Special features
 
 Some operations allow the use of specific criteria.
 
-### Assignment
+#### Assignment
 
 The `Id` criterion corresponds to the identifier of the user to whom the task has been assigned.
 Whereas the `criterion assigned to` corresponds to the user to whom the task was assigned before the operation.
 
-### Task response
+#### Task response
 
 The `Id` criterion corresponds to the identifier of the user to whom the task has been assigned.
 
-### Folder contents
+#### Folder contents
 
 When performing an operation on the contents of a folder (addition or deletion), the `Id` criterion corresponds to the class identifier of the component added to or deleted from the folder.
 
-### Search
+#### Search
 
 During a search, subscription filters can be used to react to the execution of specific searches. The filters are then compared with the search criteria.
 

@@ -26,9 +26,9 @@ A number of functions are available for this purpose.
 
 | Function           | Description                                                          |
 | ------------------ | -------------------------------------------------------------------- |
-| getHeaderActions() | Retrieves action container from header                               |
-| getTaskActions()   | Retrieves task action container                                      |
-| getFooterActions() | Retrieves action container from footer (validation, cancellation...) |
+| `getHeaderActions()` | Retrieves action container from header                               |
+| `getTaskActions()` | Retrieves task action container                                      |
+| `getFooterActions()` | Retrieves action container from footer (validation, cancellation...) |
 
 Section [Actions](/docs/flowerdocs/apis/jsapi/actions) documents the functions available for interacting with the various actions’ containers and the actions retrieved from these 3 containers.
 

@@ -14,13 +14,13 @@ import TabItem from '@theme/TabItem';
 
 Search queries enable you to search for components stored in FlowerDocs according to various criteria. These search queries are composed as follows:
 
-# The different clauses
+## The different clauses
 
-## Select clause
+### Select clause
 
 Use ``selectClause`` to define the fields to be brought up. It consists of a list of ``fields`` values.
 
-## Clauses Filter
+### Clauses Filter
 
 Use ``filterClauses`` to define filters to be applied to the search. A ``filterClause`` is composed as follows:
 
@@ -33,7 +33,7 @@ There are two types of Filter clause for this purpose:
 - ``AndClause`` : Clause **AND**, a logical AND operator is applied between its criteria and sub-clauses
 - ``OrClause`` : Clause **OR**, a logical OR operator is applied between its criteria and sub-clauses
 
-## Clauses Order
+### Clauses Order
 
 The ``orderClauses`` allow you to define the order in which results will be returned. They are composed as follows:
 
@@ -41,7 +41,7 @@ The ``orderClauses`` allow you to define the order in which results will be retu
 - ``type``: type of criterion
 - ``ascending``: sorting in ascending or descending order
 
-# Pagination of results
+## Pagination of results
 
 - ``start`` : Defines the start of the search page
 - ``max`` : Defines the maximum number of results to be returned
@@ -50,7 +50,7 @@ The ``orderClauses`` allow you to define the order in which results will be retu
 Searches return a maximum of 10,000 results; an error occurs when paging after this limit.
 :::
 
-# Examples
+## Examples
 
 The examples below show how to search for a document with a name containing the `invoice` string.
 
@@ -107,7 +107,7 @@ In search criteria, the ``CONTAINS`` operator is not case-sensitive (does not di
 So the above example will retrieve documents whose name contains: "invoice", but also "INVOICE", "Invoice" ...
 :::
 
-# Select clause and ordering
+## Select clause and ordering
 
 This example shows how to select specific fields and sort results. Here we search for documents of class `Invoice`, returning only the name, class ID, and creation date, sorted by most recent first.
 
@@ -174,7 +174,7 @@ public void search() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Multiple criteria (AND)
+## Multiple criteria (AND)
 
 When a filter clause contains multiple criteria, they are combined with an AND operator. This example searches for documents of class `Invoice` whose `B_ClientName` tag contains "Dupont".
 
@@ -234,7 +234,7 @@ public void search() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Date range search (BETWEEN)
+## Date range search (BETWEEN)
 
 Use the ``BETWEEN`` operator with the ``TIMESTAMP`` type to search within a date range. The values are epoch timestamps in milliseconds. This example finds documents created during the year 2024.
 
@@ -293,7 +293,7 @@ public void search() throws FunctionalException, TechnicalException, ParseExcept
   </TabItem>
 </Tabs>
 
-# OR logic
+## OR logic
 
 To search for documents matching one condition OR another, use an ``OrClause``. The ``type`` field must be set explicitly to indicate OR logic. This example finds documents whose class is either `Invoice` or `Contract`.
 
@@ -366,7 +366,7 @@ public void search() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Combined AND + OR
+## Combined AND + OR
 
 Multiple ``filterClauses`` at the root level are combined with AND. This example searches for `Invoice` documents created in 2024, where the client name is either "Dupont" or "Martin". The first filter clause handles the AND conditions (class + date), while the second uses an OR clause for the client names.
 
@@ -464,7 +464,7 @@ public void search() throws FunctionalException, TechnicalException, ParseExcept
   </TabItem>
 </Tabs>
 
-# Searching other component types
+## Searching other component types
 
 The same search model applies to folders, tasks, and virtual folders — only the endpoint changes.
 

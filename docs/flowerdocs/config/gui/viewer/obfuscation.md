@@ -12,7 +12,7 @@ content_hash: cec193f4f1784d28d22f566070f0bdca027a6a68791627e5956088779b987b5a
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Principle
+## Principle
 
 Obfuscation is used to hide data within the content of a document. This feature leverages the annotation mechanism of the ARender viewer to:
 
@@ -21,15 +21,15 @@ Obfuscation is used to hide data within the content of a document. This feature 
 
 This feature is particularly useful in contexts where documents contain sensitive data. This data can be hidden from certain users, depending on their document permissions.
 
-# Data obfuscation
+## Data obfuscation
 
 This section describes how to initiate the obfuscation process.
 
-## Security
+### Security
 
 The obfuscation feature can be used if the user has the `OBFUSCATE` permission on the document, in addition to the `CREATE_ANNOTATION` permission.
 
-## From the graphical user interface
+### From the graphical user interface
 
 From the document viewer, obfuscation can be performed by selecting:
 
@@ -42,7 +42,7 @@ The document viewer's advanced search also allows you to obfuscate any results f
 When downloaded, the document is converted to PDF with masking annotations if the user does not have the `OBFUSCATE` permission.
 :::
 
-## REST API
+### REST API
 
 String obfuscation can be automated using a REST web service.
 This web service allows you to define:
@@ -73,9 +73,9 @@ Content-Type: application/json
   </TabItem>
 </Tabs>
 
-# Access to document content
+## Access to document content
 
-## Access concerned
+### Access concerned
 
 Obfuscation management is handled cross-functionally by **FlowerDocs Core**. All access points to the content of a document with obfuscations provide the content, taking into account the obfuscations and their security:
 
@@ -88,7 +88,7 @@ If content data is obfuscated for a user, a PDF version is generated on the fly 
 
 The obfuscation process involves no modification of the stored content.
 
-## Content generation with obfuscation
+### Content generation with obfuscation
 
 In certain situations, it is necessary to have access to the contents of a document with all the obfuscations, even if the user has the right to see the obfuscated data.
 To achieve this, the REST web service for accessing document content can be used to specify whether obfuscations are to be included.

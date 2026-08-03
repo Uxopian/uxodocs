@@ -23,7 +23,7 @@ These three stages correspond to three classes of tasks, each of which has two t
 - Refuse
   :::
 
-# Attachments
+## Attachments
 
 When processing a task, it may be necessary for the user to add one or more components.
 These documents are called task attachments and are globally defined by task class.
@@ -36,14 +36,14 @@ In order to perform actions on attachments, the following permissions may be req
 
 **Note:** These actions are not possible if the attachment definition is read-only.
 
-# Answers
+## Answers
 
 When a user has finished filling in the necessary information for a task, they can select an answer from among those proposed.
 These answers enable a workflow to move in one of the proposed directions.
 
 To apply a response to a task, the `APPLY_ANSWER` permission is required.
 
-# Assignment
+## Assignment
 
 To edit a task, the user must:
 
@@ -53,7 +53,7 @@ To edit a task, the user must:
 In order to assign a user to process a task, several means are available.
 From a technical point of view, all you need to do is fill in the task's `assignee` field with the identifier of the user, group or team to which the task is assigned.
 
-## Appropriation
+### Appropriation
 
 Appropriating a task means assigning it to oneself.
 A task cannot be appropriated if it has not been assigned to a user, or to one of the logged-in user's teams.
@@ -61,7 +61,7 @@ This type of assignment requires the `APPROPRIATE` permission.
 
 It is also possible to assign a task to yourself that has already been assigned to another user if you have the `APPROPRIATE_ALREADY_ASSIGNED` permission.
 
-## Assignment
+### Assignment
 
 Assigning a task to a user consists in assigning a task from user A to user B.
 This type of assignment can be made even if the task is already assigned to another user.

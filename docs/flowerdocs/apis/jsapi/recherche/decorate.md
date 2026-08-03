@@ -9,7 +9,7 @@ last_update:
 content_hash: 60facccf533f8f7b123af0926acf74980c4d0eccdc9ce8deaccc4d5ea94204ac
 ---
 
-# Date format search results
+## Date format search results
 
 The date format can be adapted to suit your needs, depending on tags and results.
 To do this, simply define the JS function `getSearchResultDateFormat` to return the desired date format.
@@ -30,7 +30,7 @@ function getSearchResultDateFormat(tagClassId, result){
 
 ```
 
-# Decorate your search results
+## Decorate your search results
 
 You can decorate your search results: modifying the displayed value of a given field.
 To do this, simply define a decorator for the tag to be decorated.
@@ -47,7 +47,7 @@ function decorate(fieldName){
 decorate("Personal number");
 ```
 
-# Formatting tag values
+## Formatting tag values
 
 To display a tag, FlowerDocs formats its values:
 

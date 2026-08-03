@@ -7,11 +7,11 @@ last_update:
 content_hash: 78e77e80680dc4ae0a3ceb8e8d355548d653753ca3832e318e2ae0261ba9b1c4
 ---
 
-# Goals
+## Goals
 
 This module enables you to configure the plugin for viewing attachment metadata.
 
-# Before getting started
+## Before getting started
 
 This tutorial is based on the configuration of attachment plugins via the [FlowerDocs JS API](/docs/flowerdocs/apis/plugins/attachment)
 

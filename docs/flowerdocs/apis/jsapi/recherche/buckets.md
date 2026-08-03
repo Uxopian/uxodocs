@@ -9,11 +9,11 @@ last_update:
 content_hash: 3f8a89b4506cc1cbe71c0b34a03d3f1a56743841e7f7808a91d9d708490ff0e8
 ---
 
-# "Managing buckets"
+## "Managing buckets"
 
 The buckets (or aggregated results) of a search can be organised using the JS API.
 
-## Subscription
+### Subscription
 
 The first step, before being able to manipulate these buckets, is to subscribe to buckets retrieval from **FlowerDocs Core**:
 
@@ -73,29 +73,29 @@ function getBucketIndex(bucket){
 Deleting or adding buckets is not supported. The total number of buckets determined must be equal to that determined by **FlowerDocs Core**.
 :::
 
-## Bucket modification
+### Bucket modification
 
 The JS API lets you modify buckets resolved by **FlowerDocs Core** by exhibiting the following methods:
 
 | Function                          | Description                                                                     |
 | --------------------------------- | ------------------------------------------------------------------------------- |
-| getName()                         | Returns the name                                                                |
-| setName(name)                     | Modifies the name                                                               |
-| getCount()                        | Returns the number of components contained in the bucket (sum of child buckets) |
-| setCount(long count)              | Modifies the number of components contained in the bucket                       |
-| getLevel()                        | Returns bucket level                                                            |
-| hasChildren()                     | Determines whether the bucket contains child buckets                            |
-| getChildren()                     | Retrieves child buckets                                                         |
-| hasParent()                       | Determines whether the bucket has a bucket parent                               |
-| getParents()                      | Retrieves parent buckets (all parent levels)                                    |
-| getRequest()                      | Retrieves the request executed to determine the bucket's contents               |
-| setRequest(SearchRequest request) | Modifies the request executed to determine the bucket's contents                |
+| `getName()`                         | Returns the name                                                                |
+| `setName(name)`                     | Modifies the name                                                               |
+| `getCount()`                        | Returns the number of components contained in the bucket (sum of child buckets) |
+| `setCount(long count)`              | Modifies the number of components contained in the bucket                       |
+| `getLevel()`                        | Returns bucket level                                                            |
+| `hasChildren()`                     | Determines whether the bucket contains child buckets                            |
+| `getChildren()`                     | Retrieves child buckets                                                         |
+| `hasParent()`                       | Determines whether the bucket has a bucket parent                               |
+| `getParents()`                      | Retrieves parent buckets (all parent levels)                                    |
+| `getRequest()`                      | Retrieves the request executed to determine the bucket's contents               |
+| `setRequest(SearchRequest request)` | Modifies the request executed to determine the bucket's contents                |
 
 :::info
 Children and parents buckets are provided for information only. Modifications to these are not taken into account.
 :::
 
-## Hiding a bucket
+### Hiding a bucket
 
 The `setSkipDisplay(boolean skip)` function is also exhibited on the `Bucket` object, enabling a bucket to be hidden and only its children displayed.
 
@@ -120,7 +120,7 @@ bucketAPI.register(function(buckets, callback){
 
 :::
 
-# Recovery of buckets after resolution
+## Recovery of buckets after resolution
 
 The buckets of a search can be recovered after resolution as follows:
 

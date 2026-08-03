@@ -13,7 +13,7 @@ content_hash: 712bda49ba18526d1b606cbe65813b70a0faef2be9c241c322b8f21b267b221c
 Several mechanisms can be used to authenticate users (or clients).
 :::
 
-# Company directory
+## Company directory
 
 FlowerDocs natively supports the LDAPv2 protocol for user authentication:
 
@@ -27,12 +27,12 @@ Qualified directories are:
 - OpenLDAP
 - Apache Directory Server
 
-# OpenID Connect
+## OpenID Connect
 
 To integrate FlowerDocs with an existing authentication system shared across the information system, FlowerDocs supports the OpenID Connect protocol.
 This protocol is used to authenticate a user to **FlowerDocs GUI**.
 
-# Token
+## Token
 
 The **FlowerDocs Core** APIs enable user tokens to be generated. The token generated can then be re-used to authenticate requests made to **FlowerDocs Core** or to open **FlowerDocs GUI**.
 
