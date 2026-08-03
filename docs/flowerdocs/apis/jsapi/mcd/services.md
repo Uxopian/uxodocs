@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 This section describes how to consume services exposed by FlowerDocs directly from the JS API.
 :::
 
-# Access to a component service
+## Access to a component service
 
 Like the service layer, a service is provided for each component category:
 
@@ -34,7 +34,7 @@ Each function exposed by these services accepts two function-type parameters:
 * `errorCallback`: an optional callback executed in the event of an error
 
 
-# Creating components
+## Creating components
 
 After instantiating a [component] object (documentation/apis/jsapi/mcd/components.md) and initialized it, it can be created in FlowerDocs using the appropriate service.
 Component services expose the function `create(components, successCallback, errorCallback)`.
@@ -59,7 +59,7 @@ JSAPI.get().folder().create([folder], function (created) {
   </TabItem>
 </Tabs>
 
-# Recovering components
+## Recovering components
 
 A component service is used to retrieve stored components from the services exposed by **FlowerDocs Core**.
 The first parameter `ids` to be supplied is an array of component identifiers to be retrieved.
@@ -103,7 +103,7 @@ JSAPI.get()
     );
 ```
 
-# Find components
+## Find components
 
 Components can be searched using component services and a [SearchRequest](/docs/flowerdocs/apis/jsapi/recherche/mco) supplied as a parameter to the function `search(request, successCallback, errorCallback)`.
 
@@ -126,7 +126,7 @@ JSAPI.get()
   </TabItem>
 </Tabs>
 
-# Updating components
+## Updating components
 
 Just as component services can be used to create components, they can also be used to update components.
 To do this, the `update(components, successCallback, errorCallback)` function is exposed. It is used in the same way as the create function.
@@ -150,7 +150,7 @@ JSAPI.get()
   </TabItem>
 </Tabs>
 
-# Delete components
+## Delete components
 
 To physically (or permanently) remove components, the `doDelete(ids, successCallback, errorCallback)` function is available.
 The first parameter `ids` to be supplied is an array of the identifiers of the components to be removed.

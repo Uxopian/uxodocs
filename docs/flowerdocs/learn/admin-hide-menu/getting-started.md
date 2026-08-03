@@ -10,11 +10,11 @@ last_update:
 content_hash: 09c08a69748601fd4ad87fbefa50220a746a4db53767f51aef13c4d2733c881d
 ---
 
-# Goal
+## Goal
 
 In this module, we will look at how to hide tabs or submenus depending on the current user's profile.
 
-# Before getting started
+## Before getting started
 
 This tutorial is based on [retrieving the teams to which the current user belongs via the FlowerDocs JS API](/docs/flowerdocs/apis/jsapi/actions).
 

@@ -11,9 +11,9 @@ last_update:
 content_hash: ccc2bdaba00aaa0d6094aa6be0d359419e5ca78bc24c659411918e006f20876e
 ---
 
-# Encryption
+## Encryption
 
-## Concept
+### Concept
 
 When encryption is enabled, the files handled by FlowerDocs are protected in the event of an attacker accessing the file system.
 Files are thus rendered unreadable, and you need the secret key to decrypt them.
@@ -30,18 +30,18 @@ The encryption/decryption performed by S3 is transparent to FlowerDocs.
 
 With S3, the `file.encrypt.enabled=true` property must not be present in the `core.properties` configuration file.
 
-## Key management
+### Key management
 
 Key security is one of the main issues when using encryption.
 The same secret key is used for each FlowerDocs platform. This key must therefore be configured for each instance of **FlowerDocs Core**. Different management strategies are possible:
 
-### Derived key
+#### Derived key
 
 The secret key used for encryption can be derived from a character string (`file.encrypt.passphrase`).
 Key derivation is performed using the `PBKDF2` algorithm, the `HMAC` function using the `SHA-256` hash function and 65536 iterations.
 The default key size is 256bits. Its size can be increased or reduced using the `file.encrypt.key-length` property (size in bits).
 
-### Keystore
+#### Keystore
 
 The secret key used for encryption can be stored in a keystore (or _keystore_) in [PKCS12] format (https://tools.ietf.org/html/rfc7292).
 To use a keystore, you need to configure it using the following properties:
@@ -52,7 +52,7 @@ To use a keystore, you need to configure it using the following properties:
 The keystore can hold several keys. To identify the one to be used, you need to enter the `file.encrypt.key.alias` and
 `file.encrypt.key.password` properties. These properties respectively define the alias and password of the key entered when registering in the keystore.
 
-## Algorithm
+### Algorithm
 
 The default algorithm is `AES/CBC/PKCS5Padding`. Another algorithm can be used using the `file.encrypt.algorithm` property.
 
@@ -60,7 +60,7 @@ The algorithm used should only be changed after careful analysis, to maintain an
 
 For example, the _DES_ algorithm is not recommended.
 
-## File system encryption
+### File system encryption
 
 The CLM command-line utility encrypts unencrypted files stored on file systems using the same information as for the **FlowerDocs Core** instances used:
 
@@ -70,7 +70,7 @@ The CLM command-line utility encrypts unencrypted files stored on file systems u
 
 For more details, see the section below dedicated to its use.
 
-# Integrity
+## Integrity
 
 To ensure the integrity of files stored through web services exposed by **FlowerDocs Core**, a fingerprinting mechanism is activated by default.
 
@@ -78,9 +78,9 @@ When copying to the file system, the _hash_ of each file is calculated using the
 
 The default algorithm is `SHA-256`. Another algorithm can be used using the `file.hash.algorithm` property and one of the values supported by the JVM (see MessageDigest).
 
-# Utility
+## Utility
 
-## String encryption
+### String encryption
 
 The CLM can be used to encrypt or decrypt a character string, for example to secure sensitive configuration values such as passwords.
 
@@ -100,7 +100,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar string-decrypt --password=<encr
 These commands do not require a `--ws.url`, `--scope`, or authentication parameters.
 :::
 
-## Directory analysis
+### Directory analysis
 
 By analyzing a directory before encrypting its contents, you can determine the size of the directory to be encrypted and the number of files it contains. The calculation is performed recursively.
 
@@ -114,7 +114,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar dir-analyze --input=<directory 
 The optional parameter `--output=<path to report>` is used to create a report at the end of the analysis.
 :::
 
-## Directory encryption
+### Directory encryption
 
 As the aim is to encrypt the directory so that it can be read by the various instances of **FlowerDocs Core**, a configuration identical to these must be used.
 
@@ -130,7 +130,7 @@ The command to be executed is as follows:
 java -jar flower-docs-clm-{{version}}-bundle.jar dir-encrypt --input=<directory to encrypt> --output=<target directory with encrypted data> --conf=<config file path>
 ```
 
-### Derived key
+#### Derived key
 
 In order to encrypt a directory using a derived key, the parameter to be supplied is `conf` with the value of the path to a configuration file containing the information mentioned in the [Derived key](/docs/flowerdocs/config/core/securite/files#derived-key) section and enable encryption:
 
@@ -142,7 +142,7 @@ file.encrypt.enabled=true
 file.encrypt.passphrase=MyDerivedKey
 ```
 
-### Keystore
+#### Keystore
 
 In order to encrypt a directory using a keystore strategy, the parameter to be supplied is `conf` with the value of the path to a configuration file containing the information mentioned in the [Keystore](/docs/flowerdocs/config/core/securite/files#keystore) section and enable encryption:
 

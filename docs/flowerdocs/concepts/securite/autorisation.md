@@ -20,9 +20,9 @@ Within the application, we define two types of security objects:
 
 These security objects are used to authorise (or prohibit) an identity to perform an action.
 
-# Security objects
+## Security objects
 
-## Access control list (ACL)
+### Access control list (ACL)
 
 An access control list contains one or more access control entries (`ACE`).
 
@@ -38,7 +38,7 @@ If the user does not belong to any identity defined in the ACL referenced by a c
 Component classes carry an ACL which is applied by default when a component of this class is created. This ACL can be modified later via integration.
 :::
 
-### Order of access control inputs (ACE)
+#### Order of access control inputs (ACE)
 
 The order in which `ACE` are defined is important, as it corresponds to the order in which they are evaluated. The first entry corresponds to the user, one of his groups, one of his teams or **\***, will be the one used to evaluate the various user permissions for a component.
 
@@ -55,7 +55,7 @@ It is preferable to add the name of all groups/profiles as an entity.
 
 - It is recommended not to exceed 1000 ACL on a scope.
 
-## ACL Proxy
+### ACL Proxy
 
 This feature is in beta. For any integration requirements using ACl's proxies, please contact the FlowerDocs team to help you find the best solution for your needs.
 
@@ -102,7 +102,7 @@ Three types of conditions are supported by the application:
 Like ACLs, if none of the rules is satisfied, the user is considered to have no access rights to the component.
 :::
 
-# Security object Association
+## Security object Association
 
 A security object is associated with an object through its `ACL` field. This field contains only the ACL identifier. In this way, an ACL can be defined on several components, providing the possibility of managing security policies common to sets of components.
 

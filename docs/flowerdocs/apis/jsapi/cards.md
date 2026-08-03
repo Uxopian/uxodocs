@@ -8,9 +8,9 @@ last_update:
 content_hash: 5a3aa98c11f2e1ac304362188530cff4cd417e6e6be3d8270c70a2c418acd282
 ---
 
-# Available Objects
+## Available Objects
 
-## Card
+### Card
 
 The functions available on the cards are as follows:
 
@@ -24,7 +24,7 @@ The functions available on the cards are as follows:
 | `setStyle(String style)`     | Replaces the card's CSS classes with the one provided |
 | `asElement()`                | Retrieves the card as a DOM element                   |
 
-## Container cards
+### Container cards
 
 Container cards are large cards into which content can be added. The functions available are as follows:
 
@@ -41,12 +41,12 @@ Container cards are large cards into which content can be added. The functions a
 | `addStyle(String style)`        | Adds the CSS class to the card                        |
 | `setStyle(String style)`        | Replaces the card's CSS classes with the one provided |
 
-# Recording
+## Recording
 
 To access the cards, you need to register when you add them. There are two types of cards for which the JS API can register,
 cards of attachments and search results.
 
-## Search result
+### Search result
 
 Subscription to the addition of a search result card is performed using the `cardAPI` object:
 
@@ -83,9 +83,9 @@ cardAPI.registerForComponent(function(card component){
 });
 ```
 
-## Attachment
+### Attachment
 
-### Loading
+#### Loading
 
 For each attachment definition, you can subscribe to the loading of the corresponding card through a subscription mechanism using the `cardAPI` object:
 
@@ -146,7 +146,7 @@ In order to display the previously programmatically added attachment in the view
 formAPI.fireEvent(new AttachmentsLoadedEvent(formApi.getComponent()));
 ```
 
-### Changes
+#### Changes
 
 To react to changes made by users to attachments, you can subscribe to changes on the `card` object:
 
@@ -156,7 +156,7 @@ card.registerForChange(function (attachment) {
 });
 ```
 
-### Actions
+#### Actions
 
 Cards with attachments of type `DOCUMENT` have a set of native actions.
 

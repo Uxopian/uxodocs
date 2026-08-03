@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The favorite preferences service allows managing favorite components (documents, folders, tasks, virtual folders) for users.
 
-# Get favorites for current user
+## Get favorites for current user
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -29,7 +29,7 @@ curl -X GET "<CORE_HOST>/rest/preferences/favorites" \
   </TabItem>
 </Tabs>
 
-# Get favorites for specific authorities
+## Get favorites for specific authorities
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -45,7 +45,7 @@ curl -X GET "<CORE_HOST>/rest/preferences/favorites/users/<AUTHORITIES>" \
   </TabItem>
 </Tabs>
 
-# Add a favorite
+## Add a favorite
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -65,7 +65,7 @@ curl -X PUT "<CORE_HOST>/rest/preferences/favorites" \
   </TabItem>
 </Tabs>
 
-# Remove a favorite by reference
+## Remove a favorite by reference
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -82,7 +82,7 @@ curl -X DELETE "<CORE_HOST>/rest/preferences/favorites/reference/<CATEGORY>/<ID>
   </TabItem>
 </Tabs>
 
-# Delete favorites by ID
+## Delete favorites by ID
 
 <Tabs>
   <TabItem value="rest" label="REST">

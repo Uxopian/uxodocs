@@ -14,9 +14,9 @@ This documentation describes the various connectors available for Plume. At the 
 
 The sender of the e-mail is indicated by the `email.from` property, with a default value of `plume@arondor.com`.
 
-# Connectors
+## Connectors
 
-## FlowerDocs
+### FlowerDocs
 
 The FlowerDocs connector lets you store emails written with Plume in FlowerDocs.
 To activate it, add the `flower.enabled=true` property.
@@ -28,7 +28,7 @@ flower.enabled=true
 flower.url=http://<host>:<port>/<Core path>/rest
 ```
 
-## SMTP
+### SMTP
 
 The SMTP connector allows you to send an e-mail written in Plume using the SMTP protocol.
 To activate this connector, add the property `smtp.enabled=true`
@@ -45,7 +45,7 @@ smtp.parameters.starttls.enable=true
 
 You can add parameters to the SMTP connector by adding properties `smtp.parameters.<name>=<value>`.
 
-# HMI activation
+## HMI activation
 
 To activate Plume in ARender, you need to :
 

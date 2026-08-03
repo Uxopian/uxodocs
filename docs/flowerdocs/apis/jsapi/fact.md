@@ -15,11 +15,11 @@ The history allows to display the modifications made to a component since its cr
 
 A fact allows you to trace an action performed on a component and thus provide a component history.
 
-# Factual information
+## Factual information
 
 The facts are made up of several pieces of information that allow us to identify the precise action performed and its context.
 
-## Object identification
+### Object identification
 
 The object on which a fact took place can be identified from the object type and its identifier.
 
@@ -30,7 +30,7 @@ The object on which a fact took place can be identified from the object type and
 | `getObjectId()`              | Object identifier retrieval    |
 | `setObjectId(String id)`     | Object identifier modification |
 
-## Context
+### Context
 
 In order to provide information on the context in which a fact took place, several types of information are available:
 
@@ -55,7 +55,7 @@ The actions (see `com.flower.docs.domain.fact.Action`) supported for facts are:
 - `DELETE_CONTENT`: Deleting an attachment to tasks, deleting content for documents and deleting components to a folder
 - `REVERT`: Restores a version of a document
 
-## Additional fields
+### Additional fields
 
 In addition to information natively stored in the facts, additional fields can be stored (or simply displayed) using `com.flower.docs.domain.common.ResultField`.
 
@@ -74,7 +74,7 @@ field.setValue("1234");
 fact.addUpdatedField(field);
 ```
 
-# Add facts
+## Add facts
 
 In certain business contexts, it may be necessary to build your own facts. To do this, several functions are available for this purpose:
 

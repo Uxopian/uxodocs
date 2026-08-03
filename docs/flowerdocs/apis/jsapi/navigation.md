@@ -17,7 +17,7 @@ The fact that this placeholder is carried by the URL means that users can :
 - navigate through browser history (Previous and Next buttons)
   :::
 
-# Navigation
+## Navigation
 
 To control these functions via the JS API, a navigation API is provided:
 
@@ -56,7 +56,7 @@ navigationJSAPI.registerForPlaceChange(function (placeToken, callback) {
 });
 ```
 
-# Current place
+## Current place
 
 Thanks to the Navigation API, it is also possible to retrieve the current place and its characteristics using the `getWherePlace()` method.
 

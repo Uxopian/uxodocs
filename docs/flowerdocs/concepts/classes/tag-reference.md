@@ -26,7 +26,7 @@ On creation, the default value is set if the tag is non-mandatory and not presen
 On the GUI side, the default value is set when the component creation form is opened.
 :::
 
-# Default value
+## Default value
 
 Default values are only valid at creation: if the tag value is empty, the default value will not be set.
 

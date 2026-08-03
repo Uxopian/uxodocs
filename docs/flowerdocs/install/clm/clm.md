@@ -20,7 +20,7 @@ __Download:__
 
 **Note:** In this section, the extraction file is referred to as `${CLM_HOME}`
 
-# Execution
+## Execution
 
 The CLM is an executable JAR and can be run with a command like:
 
@@ -52,7 +52,7 @@ java -jar flower-docs-clm-{{version}}-bundle.jar update --ws.url=http://<server>
 **Note:** In the following sections `<clm>` is the command to run CLM from the command line.
 :::
 
-# Jobs
+## Jobs
 
 A list of jobs is supplied to the CLM to indicate the instructions to be executed. These jobs are supplied after the CLM execution command:
 
@@ -60,7 +60,7 @@ A list of jobs is supplied to the CLM to indicate the instructions to be execute
 <clm> job1 job2
 ```
 
-## Atomic jobs
+### Atomic jobs
 
 Atomic jobs operate on a single type of data. They are the building blocks of all CLM operations.
 
@@ -72,7 +72,7 @@ Atomic jobs operate on a single type of data. They are the building blocks of al
 
 The full list of atomic jobs is available in the in the [CLM](/docs/flowerdocs/install/clm/jobs) page.
 
-## Composite jobs
+### Composite jobs
 
 Composite jobs group several atomic jobs together for common use cases, making it easier to perform broad operations with a single command.
 

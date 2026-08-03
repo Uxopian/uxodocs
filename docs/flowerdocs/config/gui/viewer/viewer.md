@@ -10,13 +10,13 @@ last_update:
 content_hash: f11489af16e92578513e34cdddc79d743f359f9735a984dcf25f5e1b4c2be3a0
 ---
 
-# Profile override
+## Profile override
 
-## Global
+### Global
 
 It is possible to override the ARender profile (and its parameters) by defining the property: `gui.client.arender.profile`. The value of this property will be added to the URL calling ARender.
 
-## By scope
+### By scope
 
 In the context of a shared FlowerDocs platform, it is possible to have different parameter requirements for each scope. In order to override the ARender profile per scope, a `GUIConfiguration` document must be created, containing the following `arenderConfig` bean:
 

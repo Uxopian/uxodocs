@@ -11,15 +11,15 @@ content_hash: 7601711952cfa50aa37836c54655419fcf79e9dd99d26ce0b48f1e3a156d84b2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Principle
+## Principle
 
 FlowerDocs generates Microsoft Word documents in DOCX format from a template.
 This template is also a Microsoft Word document in DOCX format that can contain custom properties (_see below_).
 The properties supplied as input to the generator, and included in the template, are modified when the document is generated to take account of the values supplied.
 
-# Properties
+## Properties
 
-## Defining a new property
+### Defining a new property
 
 Before a property can be used in a document, it must first be defined at the document level:
 
@@ -30,7 +30,7 @@ Before a property can be used in a document, it must first be defined at the doc
     - Value: enter a default value
 - Click on _Add_
 
-## Using a property
+### Using a property
 
 To use a property, it must be added to the body of the document. To do this:
 
@@ -39,7 +39,7 @@ To use a property, it must be added to the body of the document. To do this:
 - Enter `DOCPROPERTY <Nom de la variable>`
 - Press `F9`
 
-## Other actions
+### Other actions
 
 | Shortcuts      | Description                                    |
 | -------------- | ---------------------------------------------- |
@@ -47,7 +47,7 @@ To use a property, it must be added to the body of the document. To do this:
 | `Shift` + `F9` | Enter/exit edit mode for the selected property |
 | `F9`           | Update selected property                       |
 
-# Adhoc use
+## Adhoc use
 
 <Tabs>
   <TabItem value="http" label="HTTP">

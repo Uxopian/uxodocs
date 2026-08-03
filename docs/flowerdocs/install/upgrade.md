@@ -10,7 +10,7 @@ content_hash: 6280bd15823640ff4e4fdd6d93cee3b6c48dc299b7741a870fe543b2dde1a521
 
 This section describes the actions to be taken after an application upgrade.
 
-# Label cache
+## Label cache
 
 The labels used by the application are stored in a cache in Redis, which is not purged using the cache purge available to administrators within the application.
 

@@ -9,7 +9,7 @@ content_hash: 838e7d1674ae22a53988c4284c47644bf4d2253f5efa30cdf72564f9a8baf774
 ---
 import PlumeDownload from '@site/src/components/PlumeDownload';
 
-# Install as jar 
+## Install as jar 
 
 First Download the <PlumeDownload/> jar 
 

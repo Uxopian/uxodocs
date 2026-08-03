@@ -16,7 +16,7 @@ The `ScopeService` service displays the following operations:
 
 * `get`: to retrieve information from a scope
 
-# Scope fetch
+## Scope fetch
 
 The example below shows how to retrieve information from a scope.
 

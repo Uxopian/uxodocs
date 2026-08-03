@@ -14,7 +14,7 @@ The [component classes](/docs/flowerdocs/concepts/classes/getting-started) defin
 Thanks to the JS API, they can be manipulated by scripts to access a scope's data model.
 :::
 
-# Retrieving a component class
+## Retrieving a component class
 
 Each category of component class can be manipulated using the JS API through a specific object.
 An instance of this object can be retrieved using the following functions:
@@ -39,7 +39,7 @@ JSAPI.get().documentClass().get(["Document"],
 );
 ```
 
-# Component class information
+## Component class information
 
 Component classes contain information used by the Core or graphical user interface. They can be retrieved using the following functions:
 
@@ -57,7 +57,7 @@ Component classes contain information used by the Core or graphical user interfa
 For the functions ``getDisplayNames()`` and ``getDescriptions()``, the returns are in the form of the label I18N 
 -->
 
-# Access to tag references
+## Access to tag references
 
 Each component class has a list of [tag references](/docs/flowerdocs/concepts/classes/tag-reference). These references can be used to associate [tag classes](/docs/flowerdocs/concepts/tags/overview) to a component typology.
 

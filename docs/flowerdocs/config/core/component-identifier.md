@@ -8,7 +8,7 @@ last_update:
 content_hash: 966fb2fe825f437753a1fcc37c57726c682e8fe6a330ddf84c5cd1b8087f5445
 ---
 
-# Component identifiers
+## Component identifiers
 
 By default, component identifiers are generated in UUID (2^128) format when they are created.
 

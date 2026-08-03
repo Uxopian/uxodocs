@@ -8,7 +8,7 @@ last_update:
 content_hash: 5a3ce92f0e084b9ceb9112d5d625e2503e1c33b819d2a2dccb931d0ccea8c8d7
 ---
 
-# Create
+## Create
 
 The CLM can be used to create a scope from a [template](/docs/flowerdocs/install/clm/template) using the `create` job.
 
@@ -28,7 +28,7 @@ __Parameters:__
 | user      | The admin account ID                                            |
 | password  | The password for the admin account                              |
 
-# Delete
+## Delete
 
 To delete a scope, you can use the `delete` job, such as:
 
@@ -36,7 +36,7 @@ To delete a scope, you can use the `delete` job, such as:
 <clm> delete --scope=<scope>
 ```
 
-# Reset
+## Reset
 
 Jobs can be merged; resetting a scope can be done using the `delete` and `create` jobs:
 
@@ -44,7 +44,7 @@ Jobs can be merged; resetting a scope can be done using the `delete` and `create
 <clm> delete create --template=<template> --scope=<scope>
 ```
 
-# Update
+## Update
 
 The `update` job is used to update an existing scope.
 
@@ -72,7 +72,7 @@ There are also more specific update jobs. These allow you to update only a certa
 | update-content | Updating content (documents, folders, virtual folders and tasks)             |
 | update-scope   | Update scope.xml file (which manages ACLs, display names, scope teams, etc.) |
 
-# Export
+## Export
 
 A scope can be exported using the `export` job. This job creates a template from an existing scope.
 
@@ -113,7 +113,7 @@ Before version 2025.2.0, annotations were exported by `export-config` job.
 The jobs listed above (`export-config`, `export-model`, `export-content`, `export-scope`, `export-annotations`) are composite jobs that group one or more atomic operations for convenience. The atomic operations they rely on (e.g. `scope-export`) are also available individually and are listed in the job list below.
 :::
 
-# Job list {#job-list}
+## Job list {#job-list}
 
 Only some of the operations can be carried out. Below is a complete list of possible operations:
 

@@ -12,7 +12,7 @@ Using the client file as an example, we can test the setting up of a practical e
 
 <br/>
 
-# The client reference
+## The client reference
 
 In this example, the client reference is the pivot tag used to make the link between a client file and its contents.
 To begin, create a string `ClientReference` tag class.
@@ -28,7 +28,7 @@ To do this, follow the steps below:
 
 Congratulations! You have created the `ClientReference` tag class, which will be used to classify a client's documents within the same folder.
 
-# The client folder
+## The client folder
 
 To create instances of client folders, you need to create the virtual folder class `ClientFolder` referencing the `ClientReference` tag class.
 
@@ -45,7 +45,7 @@ To do this, follow the steps below:
 - Add a search criterion with the `ClientReference` identifier as its name, the `EQUALS_TO` operator and the variable `${tags.ReferenceClient}` as its value,
 - Finally, click `Create`.
 
-# Client documents
+## Client documents
 
 In order to create instances of client documents, it is necessary to create the `ClientDocument` document class .
 

@@ -9,7 +9,7 @@ last_update:
 content_hash: 909c3b6c8c9b4d38a0d75073aaa2c43bcccd38269aa5e0d280e9603272c674bd
 ---
 
-# Introduction
+## Introduction
 
 The graphical user interface is configured using XML files.
 These XML files are stored in FlowerDocs as `GUIConfiguration` class documents.
@@ -33,7 +33,7 @@ These files must be in Spring Beans format. The various XML fragments described 
 
 To make editing these configuration files easier, they can be modified directly from the administration console.
 
-# Instance description
+## Instance description
 
 The following properties are used to define the deployed instance, and must be added to the `gui.properties` file:
 

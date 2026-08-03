@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
 The `Encryption` service displays the encryption operation of `character strings`.
 
 
-# Data Encryption
+## Data Encryption
 
 The examples below show how to secure a character string using the `post` operation.
 

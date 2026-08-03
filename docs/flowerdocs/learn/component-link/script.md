@@ -8,7 +8,7 @@ last_update:
 content_hash: 2283c40bec714e517c667fe13479599b97860b39dbf676e56eef0b232c387b8d
 ---
 
-# Script
+## Script
 
 To use the component link plugin, add the following script to your scope.
 
@@ -47,7 +47,7 @@ var plugin = new LinkFreeListPlugin({
 plugin.bind();
 ```
 
-# Results
+## Results
 
 - To begin with, create a job offer with a department and a position for our applicant to apply for.
 

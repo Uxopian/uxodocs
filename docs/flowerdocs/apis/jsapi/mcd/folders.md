@@ -20,7 +20,7 @@ A folder's children can be components of any category, but only documents and su
 | `addChildren(String folderId, ComponentReference[] children, boolean replace)` | Adding children to a folder     |
 | `deleteChildren(String folderId, ComponentReference[] children)`             | Deleting children from a folder |
 
-# Adding content
+## Adding content
 
 To add a component to a folder, it must be referenced as a child of the folder using a `ComponentReference` object.
 From this reference, the `addChildren(id, childReferences, replace, successCallback)` function revealed by the `JSAPI.get().folder()` service can be used.
@@ -41,7 +41,7 @@ JSAPI.get()
   </TabItem>
 </Tabs>
 
-# Deleting content
+## Deleting content
 
 A component can be deleted from a folder so that it is no longer referenced as one of its children, using the `deleteChildren(folderId, childReferences, successCallback) function`
 

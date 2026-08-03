@@ -21,8 +21,8 @@ The `UserService` service exposes the following operations:
 * `search`: to search for users
 * `delete`: to delete a user
 
-# Creation et modification d'un user
-## Model
+## Creation et modification d'un user
+### Model
 The model used by `create` and `update` calls looks like this:
 ```json
 {
@@ -58,7 +58,7 @@ Here is the description associated with the call data set:
 * `attributes`: list of additional attributes
 * `credentialsExpired`: if the user's credentials have expired.
 
-## Example
+### Example
 The examples below show how to create and modify a user.
 <Tabs>
   <TabItem value="create___rest" label="Create - REST">
@@ -143,8 +143,8 @@ public void update() throws TechnicalException, FunctionalException
 
   </TabItem>
 </Tabs>
-# Recovery of one or more users
-## Model
+## Recovery of one or more users
+### Model
 The parameters to be entered are :
 
 |Name|Description|
@@ -152,7 +152,7 @@ The parameters to be entered are :
 |`ids`|Unique identifiers of users to be tracked (separated by commas)|
 |`resolveAuthorities`|Determines whether profiles and groups are to be remounted|
 
-## Example
+### Example
 The example below shows how to retrieve users.
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -184,11 +184,11 @@ public List<User> get() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Search for one or more user(s)
-## Model
+## Search for one or more user(s)
+### Model
 The parameter to be entered is `search`, and corresponds to the searched value. The search can be based on the user's surname, first name, the name to be displayed (`displayName`) or the user's ID, either fully or partially filled in.
 
-## Example
+### Example
 The examples below show how to create and modify a user.
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -218,8 +218,8 @@ public List<User> search() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Changing a user's password
-## Model
+## Changing a user's password
+### Model
 The parameters to be entered are :
 
 |Name|Description|
@@ -227,7 +227,7 @@ The parameters to be entered are :
 |`id`|The user's unique identifier|
 |`newPassword`|The user's new password|
 
-## Example
+### Example
 The example below shows how to change a user's password.
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -262,11 +262,11 @@ public void changePassword() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Delete a user
-## Model
+## Delete a user
+### Model
 The parameter to be entered is `id`, the unique identifier of the user to be deleted.
 
-## Example
+### Example
 The example below shows how to delete a user.
 <Tabs>
   <TabItem value="rest" label="REST">

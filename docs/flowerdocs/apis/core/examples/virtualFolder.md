@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The `VirtualFolder` service exposes all the operations available around the `VirtualFolder` type components.
 
-# Virtual folder recovery
+## Virtual folder recovery
 
 The examples below show how to retrieve virtual folders from a list of identifiers.
 
@@ -46,7 +46,7 @@ public List<VirtualFolder> get() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Virtual folder creation
+## Virtual folder creation
 
 The examples below show how to create a list of virtual folders.
 
@@ -118,7 +118,7 @@ public List<VirtualFolder> create() throws FunctionalException, TechnicalExcepti
   </TabItem>
 </Tabs>
 
-# Virtual folder modification
+## Virtual folder modification
 
 This operation updates the data in a virtual folder: tags and data (class identifier, ACL, owner, etc.).
 
@@ -193,11 +193,11 @@ public List<VirtualFolder> update(VirtualFolder vF) throws FunctionalException, 
   </TabItem>
 </Tabs>
 
-# Recherche de virtual folder
+## Recherche de virtual folder
 
 The search operations all work on the same model as described [here](./search).
 
-# Virtual folder deletion
+## Virtual folder deletion
 
 The examples below show how to delete a list of virtual folders from a list of identifiers.
 

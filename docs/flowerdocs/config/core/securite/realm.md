@@ -15,7 +15,7 @@ FlowerDocs-specific users can be defined in **FlowerDocs Core**. These users can
 
 <br/>
 
-# System user
+## System user
 
 The `system` user is the account used by the various FlowerDocs applications. This information can be configured using the `system.admin.username` and `system.admin.password` parameters.
 
@@ -29,7 +29,7 @@ This account is used by:
 
 _For each of these applications, we recommend configuring the account used (a different one for each application)._
 
-# Other users
+## Other users
 
 **FlowerDocs Core** allows you to define additional accounts and their information:
 

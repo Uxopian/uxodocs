@@ -14,7 +14,7 @@ A JS API can be used to obtain information about users:
 JSAPI.get().getUserAPI();
 ```
 
-# Get a user object
+## Get a user object
 
 Two methods are available to obtain a user object:
 
@@ -44,7 +44,7 @@ JSAPI.get()
 | `addAttribute(String name,String[] values)` | Add attribute for logged-in user                  |
 | `removeAttribute(String name)`              | Delete attribute values for logged-in user        |
 
-# User information
+## User information
 
 The functions listed below can be called on a user object.
 
@@ -65,7 +65,7 @@ The token is no longer reassembled when users are retrieved by **FlowerDocs GUI*
 It is still possible to retrieve the user's token when retrieving users via **FlowerDocs GUI** by configuration. To do this, the following property must be added to the `gui.properties` file:
 `user.expose-token=true`
 
-# Assignee Provider
+## Assignee Provider
 
 An `Assignee Provider` provides the GUI with a callback that is executed when a user searches for a user to assign a task to. By default, all users will be remoted.
 

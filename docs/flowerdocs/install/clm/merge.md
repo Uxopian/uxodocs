@@ -20,7 +20,7 @@ The `force` parameter is used to determine the behaviour to adopt in the event o
 The order followed is the order passed as input to the CLM.
 :::
 
-# Execution
+## Execution
 
 The CLM offers the option of merging several scopes.
 
@@ -37,7 +37,7 @@ __Parameters:__
 | modules   | Yes       | Names of templates to be merged, separated by commas       |
 | force     | No        | true or false _(default: false)_                           |
 
-# Merge rules
+## Merge rules
 
 Generally speaking, merge follows the following rules:
 
@@ -46,7 +46,7 @@ Generally speaking, merge follows the following rules:
     - Some sub-elements are merged (see detailed rules below)
     - Other properties are either ignored or overwritten if defined, depending on the value of the `force` parameter.
 
-## Scope
+### Scope
 
 Merge of data in the `scope.xml` file.
 
@@ -55,69 +55,69 @@ The merge is performed as follows:
 - If a profile is present in several modules, the list of identities and properties is merged
 - 2 properties with the same name but different values are seen as different objects
 
-## ACLs
+### ACLs
 
 - The list of entries is merged
 - In the case of proxy ACLs: the list of proxy ACLs is merged. If a proxy ACL is present in several modules, it is ignored or overwritten depending on the value of the `force` parameter
 
-## Component classes
+### Component classes
 
 - The list of tag references and tag categories are merged
 - If a tag reference is present for the same class in several modules, it is ignored or overwritten depending on the value of the `force` parameter
 
-### Task classes
+#### Task classes
 
 - The list of attachments and replies are merged
 - If an attachment is present for a class in several modules, it is ignored or overwritten depending on the value of the `force` parameter
 - If a response is present for a class in several modules, it is ignored or overwritten depending on the value of the `force` parameter
 
-### Folder classes
+#### Folder classes
 
 - The list of attachments is merged
 - If an attachment is present for a class in several modules, it is ignored or overwritten depending on the value of the `force` parameter
 
-### Virtual folder classes
+#### Virtual folder classes
 
 - The search list is merged
 - If a search is present for a class in several modules, it is ignored or overwritten depending on the value of the `force` parameter
 
-## Tag classes
+### Tag classes
 
 - If a "Choice list" tag class is present in several modules, the lists of values are merged
 - Conditional value lists are not merged.
 
-## Components
+### Components
 
 - The tag list is merged
 - If a tag is present for the same component in several modules, its value is ignored or overwritten depending on the value of the `force` parameter
 
-### Documents
+#### Documents
 
 - If a document is present in several modules, its content is ignored or overwritten depending on the value of the `force` parameter
 
-### Folders
+#### Folders
 
 - If a folder is present in several modules, the list of attachments is merged
 
-### Tasks
+#### Tasks
 
 - If a task is present in several modules, the lists of attachments and participants are merged
 
-## Tag categories
+### Tag categories
 
 - If a profile is present in several modules, the list of identities and properties is merged
 
-## Process
+### Process
 
 - If a process is present in several modules, the list of classes is merged
 - Other process properties, such as the first step, are ignored or overwritten depending on the value of the `force` parameter
 
-## Facts
+### Facts
 
 - The list of facts is merged
 - If a fact is present in several modules, it is ignored or overwritten depending on the value of the `force` parameter
 
-# Example
+## Example
 
 The GEC scope contains a `MailToBeProcessed` task class with an `Incoming mail` attachment. The icon property is set to `icon_A`.
 
@@ -135,7 +135,7 @@ If the `force` parameter is `false`, the icon will be set to `icon_A`
 
 If the `force` parameter is `true`, the icon will be set to `icon_B`
 
-# Summary
+## Summary
 
 | Item                   | Overloaded / ignored properties                                                                | Merged sub-elements                |
 | ---------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------- |

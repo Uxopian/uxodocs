@@ -13,7 +13,7 @@ content_hash: cd8230c818799e131b89443f5dcc28aad201136cc0165104cba9f1caec32202a
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Principle
+## Principle
 
 A component's history is made up of a set of facts. Each fact logs an action performed by a user on a component and stores the following information:
 
@@ -28,7 +28,7 @@ A component's history is made up of a set of facts. Each fact logs an action per
 | `objectId`     | no        | Object identifier in question                         |
 | `objectType`   | no        | Object type in question                               |
 
-# Technical facts
+## Technical facts
 
 Technical facts are generated automatically by **FlowerDocs Core** when a historical operation is executed. For each component category, fact logging for a given action can be enabled or disabled.
 
@@ -94,7 +94,7 @@ fact.registrations.virtual.folder=create,update,delete
 fact.registrations.task=create,update,delete,answer,assign,add_content,delete_content
 ```
 
-# Business facts
+## Business facts
 
 A business fact is generated programmatically to record a particular state or action for a component.
 This generation must be configured or developed specifically for the situations concerned thanks to:
@@ -139,7 +139,7 @@ util.createFact(builder.build());
   </TabItem>
 </Tabs>
 
-# Custom Facts
+## Custom Facts
 
 A custom fact is created outside the product's native historical logs. It can be used by integrators to trace specific actions based on their needs. It can be:
 
@@ -160,7 +160,7 @@ builder.action('CREATE').description(userDisplayName + ' created the document.')
 util.createFact(builder.build());
 ```
 
-# History configuration
+## History configuration
 
 FlowerDocs provides a document class `FactFieldsConfiguration` that lets you simply define the tags to be historised on generated facts.
 

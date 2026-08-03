@@ -9,13 +9,13 @@ last_update:
 content_hash: 655c6a1745d349a57f9ec51bd7804dd2c79bdc3813b7039f5f9f9254897c07e6
 ---
 
-# Component-related actions
+## Component-related actions
 
-## Customized actions
+### Customized actions
 
 Customized action(s) can be added to components.
 
-### URL-based actions
+#### URL-based actions
 
 An action consists of:
 
@@ -84,7 +84,7 @@ For this action to be available, it must be defined in the dedicated action cata
 </bean>
 ```
 
-### JavaScript function-based actions
+#### JavaScript function-based actions
 
 This type of action executes a JavaScript function.
 To use this type of action, the following configuration is required:
@@ -134,7 +134,7 @@ function exportToCRM(category, phase, componentIds) {
 </bean>
 ```
 
-### Activity-based actions
+#### Activity-based actions
 
 This type of action opens different screens in a popup:
 
@@ -151,7 +151,7 @@ The popup can be customized as follows:
 
 The button title is defined by passing it as a parameter to the action.
 
-#### Creation with verification screen
+##### Creation with verification screen
 
 The creation place with verification will be built using a search template identifier and the component category below:
 
@@ -211,7 +211,7 @@ The creation place with verification will be built using a search template ident
 </bean>
 ```
 
-#### Component modification screen
+##### Component modification screen
 
 A component editing place allows you to view its metadata. All these places are built in the same way, with the component identifier and the `supportVisualization` property (except for folders).
 
@@ -344,9 +344,9 @@ _Folder_
 </bean>
 ```
 
-## Context-dependent configuration
+### Context-dependent configuration
 
-### Context definition
+#### Context definition
 
 The component form has several customizable action containers:
 
@@ -361,7 +361,7 @@ The default configuration of a container can be modified by defining a Spring Be
 
 **Example:** In the case of modifying actions when modifying a *Document*component type, the name of the bean to be defined is `headerActionsDocumentModify``.
 
-### Add a custom action
+#### Add a custom action
 
 To add a custom action to an action container, you need to:
 
@@ -396,7 +396,7 @@ scope="prototype">
 </bean>
 ```
 
-### Task activation
+#### Task activation
 
 A new type of graphical widget lets you add actions to create tasks from a component: `taskActions`.
 
@@ -430,7 +430,7 @@ In the example below, the `Move` and `Copy` task classes have been defined:
 </bean>
 ```
 
-### Activation
+#### Activation
 
 Actions can have an activation strategy that defines the criteria by which an action is activated or deactivated.
 Some actions have one by default, such as those for creating tasks, while others do not.
@@ -439,7 +439,7 @@ Various strategies are provided natively.
 
 <br/>
 
-#### Permission-related
+##### Permission-related
 
 - Permission-based: `ComponentPermissionEnablingStrategy` to **only**activate an action \*\*\*\* if the logged-in user has permission on the component
 
@@ -454,7 +454,7 @@ Various strategies are provided natively.
 ```
 
 <br/>	
-#### Tag-based
+##### Tag-based
 
 The `TagBasedEnablingStrategy` strategy can be used to restrict the activation of an action based on a component's tags.
 
@@ -512,7 +512,7 @@ The `EmptyTagEnablingStrategy` strategy can be used to **only**activate an actio
 </bean>
 ```
 
-#### Based on several `EnablingStrategy`
+##### Based on several `EnablingStrategy`
 
 The `EnablingStrategyWrapper` strategy to compose a complex strategy based on several criteria.
 
@@ -571,7 +571,7 @@ class="com.flower.docs.gui.client.component.action.ComponentPermissionEnablingSt
 </bean>
 ```
 
-#### According to tags dates
+##### According to tags dates
 
 The `DateTagEnablingStrategy` strategy is used to activate an action only if the component has a Date tag whose value matches the defined rule.
 To activate this action, use the following configuration:
@@ -599,7 +599,7 @@ greater than the current date.
 </bean>
 ```
 
-### Redirection
+#### Redirection
 
 Depending on the action or action container, a redirection can be configured. This defines which screen the user will be redirected to after executing an action.
 

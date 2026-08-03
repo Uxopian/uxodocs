@@ -7,7 +7,7 @@ last_update:
 content_hash: 65582bcad8909e5bb94f13a98e4d5ba8967646ce9dd99933fdcc23367b932852
 ---
 
-# Subscription
+## Subscription
 
 In order for the`OperationHook` to be notified each time a document is created, a subscription must be defined:
 
@@ -28,7 +28,7 @@ In the subscription creation form, fill in the following fields:
 
 Finally, confirm the creation of the subscription.
 
-# Validation
+## Validation
 
 In order to test that the`OperationHook` implemented is operational:
 

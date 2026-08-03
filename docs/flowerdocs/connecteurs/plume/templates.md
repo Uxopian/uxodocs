@@ -11,7 +11,7 @@ content_hash: f23e8a4e8c99a7af90f0bc20ad9f4467ba1d0eb6882cfde9c2d53a8e5cdd73bf
 These templates are determined from a document search using the `Template` class (this class can be modified using the `flower.template.class` property).
 The templates must therefore be accessible to Plume users.
 
-# Filters
+## Filters
 
 The models available to a user can be filtered according to different filters.
 
@@ -24,11 +24,11 @@ It is also possible to define filters on tags carried by models. For example, if
 var filters = { source: ["flower"], TemplateType: ["Custom"] };
 ```
 
-# Model types
+## Model types
 
 Depending on the type of template, different functions must be called to initialize the Plume plugin.
 
-## Email body
+### Email body
 
 The first type of template concerns the body of the email to be written.
 
@@ -36,7 +36,7 @@ The first type of template concerns the body of the email to be written.
 context.getTemplatesComponent().initTemplates(filters);
 ```
 
-## Signature
+### Signature
 
 The second type of template concerns the signature of the user writing the email.
 
@@ -44,7 +44,7 @@ The second type of template concerns the signature of the user writing the email
 context.initSignature(filters);
 ```
 
-# Variables
+## Variables
 
 The notion of variable can be used within templates to pre-fill them and thus facilitate the writing of an email.
 

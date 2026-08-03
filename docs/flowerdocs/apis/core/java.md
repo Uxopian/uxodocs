@@ -15,9 +15,9 @@ The Java client lets you interact with **FlowerDocs Core** through the web servi
 This documentation is based on the use of [Maven](https://maven.apache.org/) and [Spring Boot 4.0.6](https://spring.io/projects/spring-boot).
 :::
 
-# Set-up
+## Set-up
 
-## Maven
+### Maven
 
 The libraries required for this Java client are published in the [Artifactory Arondor](https://artifactory.arondor.cloud/artifactory/arondor-release).
 If you are extern to Arondor, please ask the FlowerDocs support to get the mentioned librairies.
@@ -34,7 +34,7 @@ To use the Java client in a Maven project, start by adding the following depende
 
 This dependency draws the necessary dependencies to start a FlowerDocs client project.
 
-## Spring Boot application
+### Spring Boot application
 
 To define your Spring Boot application as a FlowerDocs client, add the `@FlowerDocsClient` annotation to the main class as :
 
@@ -52,11 +52,11 @@ public class SampleClient
 
 This annotation is used to initialize the configuration required to initialize a FlowerDocs client. For the client to start up, the `ws.url` property must be defined in the _application.properties_ file with the URL for access to the web services displayed by FlowerDocs.
 
-# Authentification
+## Authentification
 
 Calls to **FlowerDocs Core** require requests to be authenticated. A request can be authenticated by providing a FlowerDocs-specific user token.
 
-## Service account
+### Service account
 
 The development of an application that interacts with FlowerDocs generally requires the use of a service account used to perform operations with **FlowerDocs Core**.
 
@@ -78,7 +78,7 @@ flower.password=<mot de passe>
 
 _These properties can either be passed in the Spring `application.properties` configuration file or as JVM properties._
 
-## Token generation
+### Token generation
 
 A user token can also be dynamically generated using the `AuthenticationService` service, which exposes the login method :
 
@@ -90,9 +90,9 @@ ContextHelper.setScope(new Id("GEC"));
 Token token = service.login("user","password");
 ```
 
-# Development
+## Development
 
-## Access to services
+### Access to services
 
 Access to FlowerDocs services is based on the Spring context. To retrieve a service instance, simply use the [@Autowired] annotation (https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/annotation/Autowired.html).
 
@@ -103,7 +103,7 @@ For example, to access the document management service :
 private DocumentService documentService;
 ```
 
-## Log management
+### Log management
 
 FlowerDocs APIs are based on the log framework abstraction layer [SLF4J](https://www.slf4j.org/). This framework abstracts from the logging framework used. The default implementation is [Logback](https://logback.qos.ch/).
 
@@ -124,6 +124,6 @@ LOGGER.info("Found {} documents", response.getFound());
 The configuration of log levels is identical to that of FlowerDocs: [Logs](/docs/flowerdocs/config/exploit/logs)
 :::
 
-# Protocol
+## Protocol
 
 FlowerDocs APIs communicate with **FlowerDocs Core** over REST.

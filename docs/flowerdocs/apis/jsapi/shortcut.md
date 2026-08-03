@@ -18,7 +18,7 @@ There are two ways of accessing these APIs:
 - `get()`: access the loaded shortcut container at any time
 - `registerForLoad(function(api){});` : subscribe to the loading of a shortcut container
 
-# General
+## General
 
 The following functions are available on shortcut containers.
 
@@ -30,7 +30,7 @@ The following functions are available on shortcut containers.
 | `remove(String id)`                                                                                    | Deletes a shortcut using its identifier                       |
 | `getIds()`                                                                                             | Recovers shortcut identifiers                                 |
 
-## Examples
+### Examples
 
 To subscribe to the loading of these shortcut menus, the following functions will be used:
 
@@ -54,7 +54,7 @@ MenuShortcutsAPI.get().registerForLoad(function (api) {
 });
 ```
 
-# Contextual menu
+## Contextual menu
 
 Additional functions are provided for manipulating a contextual menu:
 

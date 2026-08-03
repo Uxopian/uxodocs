@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The feature flags service allows retrieving the status of available features in the platform.
 
-# Get all features
+## Get all features
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -29,7 +29,7 @@ curl -X GET "<CORE_HOST>/rest/features" \
   </TabItem>
 </Tabs>
 
-# Get a specific feature
+## Get a specific feature
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -45,7 +45,7 @@ curl -X GET "<CORE_HOST>/rest/features/<NAME>" \
   </TabItem>
 </Tabs>
 
-# Get internal features
+## Get internal features
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -60,7 +60,7 @@ curl -X GET "<CORE_HOST>/rest/features/internal" \
   </TabItem>
 </Tabs>
 
-# Get custom features
+## Get custom features
 
 <Tabs>
   <TabItem value="rest" label="REST">

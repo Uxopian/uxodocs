@@ -9,7 +9,7 @@ last_update:
 content_hash: 78fc26a45845074654d1199588f503ed178315e6f63479c92b195366d3c2435f
 ---
 
-# Stored searches
+## Stored searches
 
 :::info
 It is possible to save a configured search from the user interface.
@@ -21,7 +21,7 @@ Once a search has been saved, the user can retrieve it in the tab `Stored search
 <br/>
 FlowerDocs lets you save a search with empty criteria, for example, to keep criteria in memory.
 
-# Shared searches
+## Shared searches
 
 :::info
 A user can share a saved search with other collaborators.

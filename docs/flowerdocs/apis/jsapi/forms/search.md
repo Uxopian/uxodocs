@@ -8,9 +8,9 @@ last_update:
 content_hash: 7eac023144b3da7d7578f8c72b93b12e294b0368dbacd2de8dd0267b832a6a8c
 ---
 
-# Subscription
+## Subscription
 
-## Form
+### Form
 
 A search form allows users to enter criteria to access stored components. In order to interact with this type of form, it is necessary to subscribe to its opening:
 
@@ -23,7 +23,7 @@ JSAPI.get().registerForSearchOpen(function (searchFormAPI, id) {
 **Note :** In the case of a form from the search screen, the `id` variable corresponds to the identifier of the form _template_.
 <br/> In the case of a search form from a virtual folder, the `id` variable corresponds to the virtual folder identifier.
 
-## Criteria
+### Criteria
 
 If you wish to react to a change in the value of a specific search criterion, subscribe as follows:
 
@@ -43,7 +43,7 @@ If this is the component class, use `classid`.
 
 _The functions available for interacting with the criteria are available in the [following section](/docs/flowerdocs/apis/jsapi/recherche/mco)._
 
-# Actions
+## Actions
 
 A search form has two action containers available through the following functions:
 

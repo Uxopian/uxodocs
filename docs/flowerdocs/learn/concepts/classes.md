@@ -8,12 +8,12 @@ last_update:
 content_hash: 4b4c2cb8f291846b7c3ea1df6864f00815bd55426d65c201b7947bd293f68bc5
 ---
 
-# What is it for?
+## What is it for?
 
 A class defines a type or family of objects.
 This notion facilitates the design of FlowerDocs-based solutions by defining a typology of objects that can be reused in a FlowerDocs scope.
 
-# Tag classes
+## Tag classes
 
 `Tags` are metadata that can be defined on a component. They can be used to characterize the product and find it more easily, thanks to filters on these tags.
 
@@ -39,7 +39,7 @@ FlowerDocs offers several types of values for a tag:
 Add tags to your components by [referencing a tag class](/docs/flowerdocs/concepts/classes/tag-reference) at component class level.
 :::
 
-# Component classes
+## Component classes
 
 A component class defines the common characteristics of a logical set of components. These sets are characterized by [tags](/docs/flowerdocs/concepts/tags/overview) (or metadata), security, business or technical rules that are specific to them.
 
@@ -57,7 +57,7 @@ A component class defines a type of component:
 
 _Depending on the category of the component class, specifications can be added._
 
-# Linking a tag to a component
+## Linking a tag to a component
 
 When a tag is referenced on a component class, it can then be characterized with the following parameters:
 

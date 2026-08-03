@@ -10,7 +10,7 @@ content_hash: d30b79e90002ca70c4d17c615cf7fada036392c1071ae9b002400756de72b698
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Enabling creation
+## Enabling creation
 
 When selecting a component to link, the user can be prompted to create a new component.
 To enable this, the `creation` option accepts indexing phases during which the user can create a new component.
@@ -34,7 +34,7 @@ plugin.bind();
   </TabItem>
 </Tabs>
 
-# Reacting to the selection
+## Reacting to the selection
 
 When selecting a component offered by this plugin, it may be necessary to react to it in order to access information on the selected component.
 This information can be used to replicate information about the component being indexed, or to propose additional actions to the user.
@@ -62,7 +62,7 @@ plugin.bind();
 </Tabs>
 
 <!--
-# Filters
+## Filters
 
 Imagine that human resources receives documents that need to be filed manually and linked to an application received.
 To make it easier to index these documents, they have two tags, `RH_OfferLink` and `RH_ApplicationLink`. The first allows you to reference the job offer at document level. The second is the linked application.

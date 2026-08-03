@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
 The `Reservation` service exhibits all the operations available around various components reservation.
 
 
-# Component reservation
+## Component reservation
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -38,7 +38,7 @@ curl -X POST "<CORE_HOST>/rest/reservation/reserve" \
   </TabItem>
 </Tabs>
 
-# Component release
+## Component release
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -61,7 +61,7 @@ curl -X POST "<CORE_HOST>/rest/reservation/release" \
   </TabItem>
 </Tabs>
 
-# Reservation recovery
+## Reservation recovery
 
 <Tabs>
   <TabItem value="rest" label="REST">

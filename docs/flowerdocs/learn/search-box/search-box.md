@@ -8,19 +8,19 @@ last_update:
 content_hash: 3fb8d3446aff232139e2794380de90095f82b219c32c08d3b75cc1bf720ad9ef
 ---
 
-# Goal
+## Goal
 
 ![Search box](/img/flowerdocs/documentation/learn/searchbox.png)
 
 The `SearchBoxPlugin` plugin makes life easier for users by adding a search bar that can be accessed at any time.
 This search bar can display results from different searches.
 
-# An example in practice
+## An example in practice
 
 In this module, we will configure this plugin to search for a client's folder.
 To do this, we will use the `ClientFolder` virtual folder class with a _USER_ `Accounting` tag.
 
-# Set up
+## Set up
 
 In order to display the client folders that match the value entered, we will define a search that finds every virtual folder whose name contains the value entered in the search bar.
 For each result, we customize the display:

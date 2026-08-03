@@ -9,7 +9,7 @@ content_hash: 3c81c85e93a1a404b9a4246fd3d4896159f6790e4d415c325a567e868cc46737
 ---
 import FlowerDocsCompanionDownload from '@site/src/components/FlowerDocsCompanionDownload';
 
-# Install FlowerDocs Companion
+## Install FlowerDocs Companion
 
 
 - Download the <FlowerDocsCompanionDownload /> installer
@@ -19,6 +19,6 @@ import FlowerDocsCompanionDownload from '@site/src/components/FlowerDocsCompanio
 
 Companion FlowerDocs is installed. A FlowerDocs ribbon is now available in all Microsoft software.
 
-# Uninstall
+## Uninstall
 
 Uninstalling FlowerDocs Companion follows the same procedure as uninstalling a Windows program.

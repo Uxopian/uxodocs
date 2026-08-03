@@ -7,7 +7,7 @@ last_update:
 content_hash: 2291fdad2cf649627dadf4fe6b5c0c7b0864c915bcdba3a63167ab9e82486893
 ---
 
-# Add the property to the application's gui.properties file
+## Add the property to the application's gui.properties file
 
 In the gui.properties file, add the property `gui.client.app.logo` with the value of the path to the chosen logo.
 

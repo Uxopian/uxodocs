@@ -20,7 +20,7 @@ The CacheService service lets you perform getAll, clear and clearAll operations 
 
 * `clear` allows you to purge a list of caches defined by their name.
 
-# Cache retrieval
+## Cache retrieval
 
 The following examples show how to retrieve the list of all FlowerDocs scope caches.
 
@@ -55,7 +55,7 @@ public String[] getAll() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Cache purge
+## Cache purge
 
 The examples below show how to purge FlowerDocs scope caches using the various operations of clear.
 

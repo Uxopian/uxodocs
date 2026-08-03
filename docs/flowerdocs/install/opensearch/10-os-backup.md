@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 The backup & restoration procedure described below is based on the Opensearch [snapshot](https://docs.opensearch.org/3.6/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/) mechanism.
 
-# Output directory
+## Output directory
 
 Set the directory where snapshots will be saved,
 add to the ``$`OPENSEARCH_HOME`/config/opensearch.yml`` file in the "Paths" section:
@@ -69,7 +69,7 @@ This command lists all nodes where verification has been successful.
 
 <br/>
 
-# Snapshot generation
+## Snapshot generation
 
 A directory can contain several snapshots for a single cluster. A snapshot is identified by a unique name within a cluster.
 The following command creates the `my-snapshot` snapshot in the directory created previously:
@@ -131,7 +131,7 @@ DELETE /_snapshot/my-snapshots-repository/my-snapshot
 </Tabs>
 
 
-# Restoration
+## Restoration
 
 A snapshot can be restored with the following command:
 
@@ -151,12 +151,12 @@ However, it is possible to restore only certain indexes with the following comma
 
 An index can only be restored if it is closed. If the index does not exist in the cluster, it is created when the snapshot is restored.
 
-## Changing index parameters during restoration
+### Changing index parameters during restoration
 
 During restoration, it is possible to modify certain index parameters.
 In the example below, the `index_1` index is restored with 3 replicas and a default refresh interval of 1s:
 
-## Restoration to a different cluster
+### Restoration to a different cluster
 
 A snapshot is not cluster-specific. A snapshot from cluster A can be restored to another cluster B.
 
@@ -164,9 +164,9 @@ Save the directory containing the snapshot in cluster B and start the restore pr
 
 Pay attention to cluster capacity. The number of indexes available on the cluster must be equal to or greater than the number of indexes in the snapshot. If the cluster is smaller, it is possible to change the index parameters during restoration, for example by reducing the number of replicas.
 
-# Snapshot management
+## Snapshot management
 
-## Snapshot status
+### Snapshot status
 
 - The list of running snapshots can be viewed with the command:
 
@@ -207,11 +207,11 @@ GET /_snapshot/my-snapshots-repository/my-snapshot/_status
 </Tabs>
 
 
-## Progression
+### Progression
 
 The `GET /_snapshot/my-snapshots-repository/my-snapshot/_status` command is used to view snapshot information before the snapshot is stopped. This makes it possible to view snapshot information while the snapshot is running, unlike the `GET /_snapshot/my-snapshots-repository/my-snapshot` command, which waits until the snapshot has finished before displaying the information.
 
-## Stop
+### Stop
 
 If a snapshot has been executed by mistake, or if the execution is abnormally long, it can be stopped using a delete snapshot operation. The operation will then stop the snapshot before deleting it.
 

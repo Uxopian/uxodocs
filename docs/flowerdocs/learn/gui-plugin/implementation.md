@@ -8,19 +8,19 @@ last_update:
 content_hash: ffbdbd5c0e63a62c316e459d123aecfc371198c0bbebf2c41304ff344ea26413
 ---
 
-# Goal
+## Goal
 
 The aim of this training module is to lay the foundations for the development of a secured [GUI plugin](configuration).
 This plugin can be consumed from and through **FlowerDocs GUI**. It will expose a service consuming the services exposed by **FlowerDocs Core**.
 
-# Prerequisites
+## Prerequisites
 
 This tutorial is based on Maven and requires the use of the Arondor Artifactory in which the FlowerDocs libraries are implemented.
 If you are extern to Arondor, please ask the FlowerDocs support to get the mentioned librairies.
 
-# Set up
+## Set up
 
-## Project creation
+### Project creation
 
 Using your favorite IDE, start by creating a new Maven project with the following POM:
 
@@ -64,7 +64,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 </project>
 ```
 
-## Spring Boot application
+### Spring Boot application
 
 This Spring Boot application is based on the [Spring Boot starter](/docs/flowerdocs/apis/core/java) provided by FlowerDocs.
 
@@ -98,7 +98,7 @@ Here, the `@FlowerDocsClient` annotation automatically configures:
 <br/>
 To configure the application, this `application.properties` file in the `src/main/resources` directory of your project.
 
-## Configuration
+### Configuration
 
 ```properties
 spring.application.name=secured-gui-plugin
@@ -112,7 +112,7 @@ This makes it possible to outsource application configuration.
 :::
 
 
-## Web service development
+### Web service development
 
 In this example, the web service will count the number of documents accessible by the logged-in user.
 The web service will be implemented using the `@RestController` Spring annotation.

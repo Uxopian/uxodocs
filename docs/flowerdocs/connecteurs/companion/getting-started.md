@@ -14,22 +14,22 @@ Buttons are then provided to enable users to inject documents directly from the 
 
 <br/>
 
-# Plugin for Microsoft Word
+## Plugin for Microsoft Word
 
 - Saving the current document in FlowerDocs in Word format
 - Saving the current document in FlowerDocs in PDF format
 
-# Plugin for Microsoft Outlook
+## Plugin for Microsoft Outlook
 
 - Saving email with its attachments within FlowerDocs (MSG format)
 - Saving an email attachment in FlowerDocs
 
-# Plugin for Microsoft Excel
+## Plugin for Microsoft Excel
 
 - Saving the binder in FlowerDocs in Excel format
 - Saving the binder in FlowerDocs in PDF format
 
-# Plugin for Microsoft PowerPoint
+## Plugin for Microsoft PowerPoint
 
 - Saving the slideshow in FlowerDocs in PowerPoint format
 - Saving the slideshow in FlowerDocs in PDF format

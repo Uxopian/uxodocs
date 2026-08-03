@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The stamp preferences service allows managing stamps (signature images or annotations) for users.
 
-# Get stamps for current user
+## Get stamps for current user
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -29,7 +29,7 @@ curl -X GET "<CORE_HOST>/rest/preferences/stamps" \
   </TabItem>
 </Tabs>
 
-# Get stamps for specific authorities
+## Get stamps for specific authorities
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -45,7 +45,7 @@ curl -X GET "<CORE_HOST>/rest/preferences/stamps/users/<AUTHORITIES>" \
   </TabItem>
 </Tabs>
 
-# Create a stamp
+## Create a stamp
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -66,7 +66,7 @@ curl -X POST "<CORE_HOST>/rest/preferences/stamps" \
   </TabItem>
 </Tabs>
 
-# Update a stamp
+## Update a stamp
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -88,7 +88,7 @@ curl -X POST "<CORE_HOST>/rest/preferences/stamps/<ID>" \
   </TabItem>
 </Tabs>
 
-# Delete stamps
+## Delete stamps
 
 <Tabs>
   <TabItem value="rest" label="REST">

@@ -30,7 +30,7 @@ popup = JSAPI.get()
 
 <br/>
 
-# Search configuration
+## Search configuration
 
 Once the popup has been built, you can access or modify the various parameters using the following functions:
 

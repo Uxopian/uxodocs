@@ -19,13 +19,13 @@ Find out more about the different component categories:
 - [Tasks](/docs/flowerdocs/concepts/components/virtual-folders)
   :::
 
-# Component classes
+## Component classes
 
 A component class defines the common characteristics of a logical set of components. These sets are characterized by their own tags (or metadata), security, and business or technical rules.
 
 This section defines the notion of component class, used to characterize the components (documents, folders, tasks, etc.) handled within the application. In this way, every component refers to a class of components via its identifier.
 
-# Linking a tag to a component
+## Linking a tag to a component
 
 When a tag is referenced on a component class, it can then be characterized with the following parameters:
 
@@ -38,7 +38,7 @@ When a tag is referenced on a component class, it can then be characterized with
 - Display order
 - A description to display a tooltip
 
-## In practice
+### In practice
 
 Each FlowerDocs user can create one or more components according to their needs, for example:
 

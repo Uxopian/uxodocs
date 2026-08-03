@@ -13,7 +13,7 @@ Forms are the basis of the screens presented in the graphical user interface.
 This section lists how to acquire a `formAPI` object for interacting with a form, and the associated functions.
 :::
 
-# Simple fields
+## Simple fields
 
 **Note:** In this section, the variable `fieldName` corresponds, in the case of a tag, to the value of its identifier.
 If this is the component class, use `Class`.
@@ -73,7 +73,7 @@ formAPI.suggest("MailObject", suggestions);
 
 ```
 
-# Choice lists
+## Choice lists
 
 
 | Function               								                     | Description                                             |
@@ -102,7 +102,7 @@ formAPI.setAllowedValues("BillType", restrictedAllowedValues);
 
 ```
 
-# Field status
+## Field status
 
 Several functions can be used to change the status of a field within a form. They are used with the parameters:
 
@@ -123,7 +123,7 @@ __Example:__ Changing the visibility of a field in an indexing form
 formAPI.setVisible("BillType", false);
 ```
 
-## Form validity change subscription
+### Form validity change subscription
 
 Various functions allow you to subscribe to changes in the validity of a form, depending on your needs:
 
@@ -165,11 +165,11 @@ The following functions are also available to find out the status of the current
 | `getInvalidType(String type)` | Retrieves validity from the name of a form part: `FIELDS` for invalid fields or `CONTENT` for invalid content / attachments |
 | `getInvalidTypes()`           | Retrieves names of invalid parts of the form                                                                                |
 
-# List form fields
+## List form fields
 
 The `formAPI.getFields()` function on a form retrieves the list of field identifiers present in the form.
 
-# Value change
+## Value change
 
 To provide your users with interactive forms, it is possible to subscribe to changes in the value of a field in order to modify its status or modify another field.
 

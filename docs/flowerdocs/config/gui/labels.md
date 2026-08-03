@@ -17,7 +17,7 @@ These native labels can be defined using:
 - property files
 - the JS API (see [documentation](/docs/flowerdocs/apis/jsapi/labels)
 
-# Defining labels
+## Defining labels
 
 The graphical user interface supports French and English natively. Native labels can be overwritten or new languages added.
 Labels can be defined using property files located in a folder called `labels` in the configuration directory.
@@ -44,7 +44,7 @@ home=Dashboard
   </TabItem>
 </Tabs>
 
-# Determining the locale
+## Determining the locale
 
 The user's locale is used to determine the language of the labels to be used. This locale is determined by the locale defined in the browser.
 It can also be overridden by adding the `locale` parameter to the GUI URL (for example: https://www.demo.flowerdocs.cloud/flower-docs-gui?locale=EN).

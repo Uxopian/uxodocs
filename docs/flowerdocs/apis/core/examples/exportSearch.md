@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The export search service exports search results to a CSV file. The export runs asynchronously: the request submits a job and returns immediately with the job identifier; the generated file is then retrieved through the job endpoints described below. There is no limit on the number of exported results.
 
-# Export via POST
+## Export via POST
 
 The examples below show how to export search results using a POST request with a `SearchRequest` body.
 
@@ -51,7 +51,7 @@ The following query parameters can be used:
 |------|-----------|-------|
 |`locale`|Locale for date and number formatting|server default|
 
-# Export via GET
+## Export via GET
 
 Alternatively, the search request can be passed as a URL-encoded JSON parameter.
 
@@ -70,11 +70,11 @@ curl -X GET "<CORE_HOST>/rest/<CATEGORY>/search/csv?searchRequest=<SEARCH_JSON>"
   </TabItem>
 </Tabs>
 
-# Asynchronous job management
+## Asynchronous job management
 
 The CSV export is generated in the background as a job. Use the following endpoints to track its progress and retrieve the result.
 
-## Check job status
+### Check job status
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -91,7 +91,7 @@ curl -X GET "<CORE_HOST>/rest/<CATEGORY>/search/job/status?jobId=<JOBID>" \
   </TabItem>
 </Tabs>
 
-## Get job result
+### Get job result
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -108,7 +108,7 @@ curl -X GET "<CORE_HOST>/rest/<CATEGORY>/search/job?jobId=<JOBID>" \
   </TabItem>
 </Tabs>
 
-## Get job error
+### Get job error
 
 <Tabs>
   <TabItem value="rest" label="REST">

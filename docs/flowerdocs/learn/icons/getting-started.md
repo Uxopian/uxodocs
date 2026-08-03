@@ -8,12 +8,12 @@ last_update:
 content_hash: dc66e9bffb72f86e369f593a4fd38c4e4187d1f2334759ad497dfd41473f63fe
 ---
 
-# Goal
+## Goal
 
 In this module, we will focus on the notion of stacked icons in order to use more distinctive icons for actions.
 When you have finished this module, you will be able to create custom icons from several icons in the application.
 
-# Before getting started
+## Before getting started
 
 This tutorial is based on [adding actions via the FlowerDocs JS API](/docs/flowerdocs/apis/jsapi/actions).
 

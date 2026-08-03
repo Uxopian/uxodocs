@@ -8,25 +8,25 @@ last_update:
 content_hash: 1693370eb861f44439a10118e9b2d0b1366f96d834f428188dcb47dd28d6c620
 ---
 
-# Presentation layer
+## Presentation layer
 
-## **FlowerDocs GUI**
+### **FlowerDocs GUI**
 
 **FlowerDocs GUI** is a WEB application providing the presentation layer integrating the ARender viewer interface.
 It is based on [Spring Boot](https://spring.io/projects/spring-boot) and WEB technologies (HTML, JavaScript...).
 
 Default port : 8080. It can be overridden using the `server.port` property in the `gui.properties` file.
 
-## **ARender HMI**
+### **ARender HMI**
 
 [ARender HMI](https://www.uxopian.com/arender), developed by [Uxopian](https://www.uxopian.com), is a WEB application integrated into **FlowerDocs GUI** as an `iframe`. It visualizes documents generated via ARender Rendition Server.
 
 Default port : 8080. It can be overridden using the `server.port` property in the `application.properties` file.
 
 
-# Service layer
+## Service layer
 
-## **FlowerDocs Core**
+### **FlowerDocs Core**
 
 **FlowerDocs Core** is the **ECM engine**. It is a Java Web application based on [Spring Boot](https://spring.io/projects/spring-boot). It can be used to manage very large quantities of documents (add, delete, update documents, search, dynamic folders, etc.). It exposes **REST** Web Services that are consumed by the various clients:
 
@@ -41,16 +41,16 @@ Integration with a corporate directory (LDAP(s)-type) is required to access info
 
 Default port : 8081. It can be overridden using the `server.port` property in the `core.properties` file.
 
-## ARender Rendition Server
+### ARender Rendition Server
 
 [ARender Rendition](https://www.uxopian.com/arender), a product developed by [Uxopian](https://www.uxopian.com), is the rendition engine used to generate images corresponding to the various pages of the documents to be visualized.
 This engine exposes a REST API enabling the various elements required for visualization to be retrieved from the client workstation.
 
 Default port : 8761.
 
-# Data
+## Data
 
-## OpenSearch
+### OpenSearch
 
 OpenSearch engine, a standalone Java application, is used to index and search data. It provides a distributed, multi-entity search engine, as well as NoSQL document storage. FlowerDocs uses these features to store document metadata in the NoSQL part and advanced search engine capabilities for queries on documents, tasks and folders.
 
@@ -58,7 +58,7 @@ Communication is via the OpenSearch REST API over HTTP.
 
 Default port : 9200.
 
-## Content storage
+### Content storage
 
 The **contents** of the documents (PDF, Microsoft Office Word, etc.) managed by FlowerDocs are not stored in OpenSearch but on a dedicated storage space which can be :
 
@@ -69,7 +69,7 @@ The **contents** of the documents (PDF, Microsoft Office Word, etc.) managed by 
 
 ![Architecture example](/img/flowerdocs/documentation/fd-architecture.png)
 
-## Redis
+### Redis
 
 Redis is an in-memory database used mainly as a message broker.
 With FlowerDocs, it is used to manage certain caches as well as for its OperationHandler asynchronous processing queue mechanism.

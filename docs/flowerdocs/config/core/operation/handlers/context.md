@@ -9,12 +9,12 @@ last_update:
 content_hash: 88a72f7cc37b22b2f6af25f61132b126b7729fcbdd1b7a79358613e457523165
 ---
 
-# Principle
+## Principle
 
 When an operation is executed, the context in which it was performed is provided as input, and its type differs according to the original action. The variable `context` contains an object inherited from `com.flower.docs.operation.api.OperationContext`.
 <br/>
 
-# Action context definition
+## Action context definition
 
 Depending on the action to which the operation is subscribed, the operation context changes:
 <br/>

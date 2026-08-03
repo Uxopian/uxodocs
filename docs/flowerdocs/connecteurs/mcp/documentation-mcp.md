@@ -5,7 +5,7 @@ date: "2026-07-29T21:30:00+02:00"
 description: "Pair the FlowerDocs MCP server with the uxodocs documentation MCP so the assistant writes configurations that are actually correct."
 ---
 
-# Pair the MCP server with the documentation
+## Pair the MCP server with the documentation
 
 The FlowerDocs MCP server lets an assistant **act** on your instance: create a tag class, write a GUI configuration, deploy a script. It does not teach the assistant **how FlowerDocs is configured**.
 
@@ -15,7 +15,7 @@ That knowledge lives in this documentation. Expose it as a second, read-only MCP
 Two MCP servers: **`flowerdocs`** (holds your credentials, performs the changes) and **`uxodocs`** (read-only, provides the knowledge).
 :::
 
-## Why it is a real gain
+### Why it is a real gain
 
 `technicaldoc_describe` returns a **field schema**, not a grammar. For a GUI configuration it says there is a `fileContent` field holding XML. It does not say which beans, which attributes, or which values FlowerDocs expects inside.
 
@@ -23,7 +23,7 @@ Without the documentation, the assistant fills that gap from memory. FlowerDocs 
 
 With the documentation MCP, it reads the reference page instead of guessing, and a configuration rejected by Core leads to a correction rather than a blind retry.
 
-## How it works
+### How it works
 
 Asking *"create a search form for invoices with the InvoiceNumber and InvoiceDate fields"* triggers three steps:
 
@@ -33,7 +33,7 @@ Asking *"create a search form for invoices with the InvoiceNumber and InvoiceDat
 
 The same pattern applies to scripts, operation handlers, CSS, routes and templates.
 
-## Set it up with GitMCP
+### Set it up with GitMCP
 
 [GitMCP](https://gitmcp.io) serves a public GitHub repository as a read-only MCP server. This documentation lives in the public [Uxopian/uxodocs](https://github.com/Uxopian/uxodocs) repository, so a single URL exposes it:
 

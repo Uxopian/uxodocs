@@ -12,7 +12,7 @@ content_hash: 1cb01a568e008f4ebc18a0602a0c95aeafbac6ce099773c6fbb35b75cdd5abe9
 This documentation is based on the `${FD_HOME}` folder, which contains the application configuration files.
 :::
 
-# **FlowerDocs Core**
+## **FlowerDocs Core**
 
 All properties used to configure **FlowerDocs Core** must be added to a `core.properties` file located in the `${FD_HOME}` directory.  
 This file is loaded when the JVM is started up, so modifications are only taken into account after the application server has been restarted.
@@ -21,7 +21,7 @@ This file is loaded when the JVM is started up, so modifications are only taken 
 file.dir=C:\\FlowerDocs\\Files\\
 ```
 
-# **FlowerDocs GUI**
+## **FlowerDocs GUI**
 
 All properties used to configure **FlowerDocs GUI** must be added to a `core.properties` file located in the `${FD_HOME}` directory.  
 This file is loaded when the JVM is started up, so modifications are only taken into account after the application has been restarted.

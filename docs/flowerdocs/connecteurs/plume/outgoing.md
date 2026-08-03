@@ -8,7 +8,7 @@ last_update:
 content_hash: 43a2f0c498d4aa5d6fba50b402393cf40259778a4322612f9e1597e90aae0cd2
 ---
 
-# Indexing outgoing mail
+## Indexing outgoing mail
 
 Emails written in Plume can be stored in FlowerDocs. To do this, it may be necessary to index them to be able to find them again.
 

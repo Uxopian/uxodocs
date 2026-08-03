@@ -11,7 +11,7 @@ content_hash: dd7cbfc5dee20f359c4bd072f4407c0e3d9bcd68ddd522ba54927bf770d6288c
 
 To search for components via the JS API, use the `search` function for the various service APIs **[here](../mcd/services)**.
 
-# Queries, filters and criteria
+## Queries, filters and criteria
 
 **Objects :**
 
@@ -53,7 +53,7 @@ To search for components via the JS API, use the `search` function for the vario
 The `EQUALS_TO` and `DIFFERENT` operators are case-sensitive (differentiate between upper and lower case).
 :::
 
-# Sorting
+## Sorting
 
 - `OrderClause`
 

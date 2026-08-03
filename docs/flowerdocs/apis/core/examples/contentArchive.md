@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The content archive service allows downloading the contents of documents, folders or virtual folders as a ZIP archive. The operation can be performed synchronously or asynchronously depending on the volume of data.
 
-# Archive document contents
+## Archive document contents
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -41,7 +41,7 @@ The following query parameters can be used:
 |`flatten`|Flatten the directory structure|`true`|
 |`name`|Name of the output archive file|auto-generated|
 
-# Archive folder contents
+## Archive folder contents
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -57,7 +57,7 @@ curl -X GET "<CORE_HOST>/rest/folders/<ID>/content/archive/" \
   </TabItem>
 </Tabs>
 
-# Archive virtual folder contents
+## Archive virtual folder contents
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -73,11 +73,11 @@ curl -X GET "<CORE_HOST>/rest/virtualFolders/<ID>/content/archive/" \
   </TabItem>
 </Tabs>
 
-# Asynchronous job management
+## Asynchronous job management
 
 When using `isAsync=true`, the archive is generated in the background. The following endpoints allow tracking the job progress.
 
-## Check job status
+### Check job status
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -93,7 +93,7 @@ curl -X GET "<CORE_HOST>/rest/documents/<IDS>/content/archive/job/status/" \
   </TabItem>
 </Tabs>
 
-## Get job result
+### Get job result
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -109,7 +109,7 @@ curl -X GET "<CORE_HOST>/rest/documents/<IDS>/content/archive/job/" \
   </TabItem>
 </Tabs>
 
-## Get job error
+### Get job error
 
 <Tabs>
   <TabItem value="rest" label="REST">

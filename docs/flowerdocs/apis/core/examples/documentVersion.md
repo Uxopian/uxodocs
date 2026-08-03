@@ -20,7 +20,7 @@ The `VersionService` service displays the following operations:
 * `deleteVersion`: to delete a version of a document
 * `deleteVersions`: to delete all versions of a document
 
-# Creating a version
+## Creating a version
 
 The example below shows how to create a version of a document.
 <br/>
@@ -57,7 +57,7 @@ public Document promote() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Versions recovery
+## Versions recovery
 
 The example below shows how to recover versions of a document.
 <br/>
@@ -90,7 +90,7 @@ public VersionSeries getVersions() throws TechnicalException, FunctionalExceptio
   </TabItem>
 </Tabs>
 
-# Restoring a version
+## Restoring a version
 
 The example below shows how to restore a version of a document.
 <br/>
@@ -125,9 +125,9 @@ public Document revert() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Version deletion
+## Version deletion
 
-## Deleting a version
+### Deleting a version
 
 The example below shows how to delete a version of a document.
 <br/>
@@ -162,7 +162,7 @@ public void deleteVersion() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-## All versions deletion
+### All versions deletion
 
 The example below shows how to delete all versions of a document.
 <br/>

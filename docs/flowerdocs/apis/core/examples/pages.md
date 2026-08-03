@@ -18,7 +18,7 @@ The PageService service lets you perform `showPublicPage` and `showPrivatePage` 
 
 * `showPrivatePage` retrieves the HTML content of a private page.
 
-# Examples
+## Examples
 
 The following examples show how to retrieve a public or private page from your scope.
 

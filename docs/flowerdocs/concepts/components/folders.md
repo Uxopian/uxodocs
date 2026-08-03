@@ -13,14 +13,14 @@ content_hash: dead65d5bdff07906631e722865e58cce4624ad3c52c92f84016f681a7c130a3
 Organize your documents by folder for easy retrieval.
 :::
 
-# Content
+## Content
 
 A folder is a component with children. These children can be [documents](/docs/flowerdocs/concepts/components/documents) or other folders.
 
 <br/>
 Constraints can be defined at folder class level to restrict the children that can be added to a folder. To do this, it is possible to reference the authorised component classes.
 
-# Adding components
+## Adding components
 
 Via the interface, when the folder defines children, an `Add` button is used to select the component category to be created.
 
@@ -28,7 +28,7 @@ When indexing, it is possible to select the component class. All tags in common 
 
 **Note:** If there is only one component class, this is automatically selected.
 
-# Permissions
+## Permissions
 
 In order to restrict the access or modifications that can be made to a folder, several permissions are available to control the operations that can be carried out:
 

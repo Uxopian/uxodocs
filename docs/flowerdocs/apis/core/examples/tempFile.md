@@ -18,7 +18,7 @@ The `TempFileService` service exposes the following operations:
 * `getContent`: to retrieve a temporary file
 * `delete`: to delete a temporary file
 
-# Creating a temporary file
+## Creating a temporary file
 
 The following examples show how to create a temporary file.
 
@@ -56,7 +56,7 @@ public DocumentFile create() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Recovering a temporary file
+## Recovering a temporary file
 
 The following examples show how to recover a temporary file.
 
@@ -92,7 +92,7 @@ public DocumentFile get() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Deleting a temporary file
+## Deleting a temporary file
 
 The following examples show how to delete a temporary file.
 

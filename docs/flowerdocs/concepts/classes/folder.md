@@ -19,7 +19,7 @@ A folder class defines the folder model to be created. Its specificity is the no
 
 <br />
 
-# Children
+## Children
 
 The folder class defines which child classes it is authorised to contain.
 As many as possible can be defined. If you need to contain all the classes of a component type, for example, all the documents, you can add a child with the identifier `*` as follows:

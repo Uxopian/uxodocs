@@ -15,7 +15,7 @@ If you are extern to Arondor, please ask the FlowerDocs support to get the menti
 When you have completed this training module, you will be able to develop a secure [`OperationHook`](/docs/flowerdocs/concepts/operation) to respond to the creation of documents and rename them automatically.
 :::
 
-# Project creation
+## Project creation
 
 Using your favorite IDE, start by creating a new Maven project with the following POM:
 
@@ -59,7 +59,7 @@ Using your favorite IDE, start by creating a new Maven project with the followin
 </project>
 ```
 
-# Spring Boot application
+## Spring Boot application
 
 This Spring Boot application is based on the [Spring Boot starter](/docs/flowerdocs/apis/core/java) provided by FlowerDocs.
 
@@ -105,7 +105,7 @@ internal.realm.users[0].password=<password> // 8
 7. User identifier for accessing the `OperationHook`.
 8. User password for accessing the `OperationHook`
 
-# Hook development
+## Hook development
 
 Now we move on to `Operation Hook`! To implement your first hook, create a `ModifyOperationHook` class such as:
 

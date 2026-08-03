@@ -9,7 +9,7 @@ last_update:
 content_hash: 82d2250ec2143e52fe4d8f5b1a2b0860c9f06588a0bdf85950e8be1171ae3721
 ---
 
-# Base URL
+## Base URL
 
 All REST endpoints are served under:
 
@@ -17,7 +17,7 @@ All REST endpoints are served under:
 {host.core}/rest/
 ```
 
-# Authentication
+## Authentication
 
 Every request must include a `token` header. Obtain a token by authenticating via:
 
@@ -28,7 +28,7 @@ Content-Type: application/json
 
 See the [authentication example](./authenticate) for details.
 
-# Common patterns
+## Common patterns
 
 The REST API follows a consistent CRUD pattern across all resource types:
 
@@ -41,21 +41,21 @@ The REST API follows a consistent CRUD pattern across all resource types:
 
 Where `{ids}` is one or more identifiers separated by commas.
 
-# Content type
+## Content type
 
 All request and response bodies use `application/json`, except for file upload endpoints which use `multipart/form-data`.
 
-# Batch operations
+## Batch operations
 
 Most endpoints accept arrays, allowing you to create, update, or delete multiple items in a single request.
 
-# Important note on updates
+## Important note on updates
 
 :::warning
 REST updates operate on a **cancel and replace** basis: unset fields will be cleared. You must send the entire object, not just the fields to modify. It is recommended to first retrieve the resource, make changes, and then call the update endpoint.
 :::
 
-# Swagger documentation
+## Swagger documentation
 
 Documentation for this API is provided through _Swagger_ exhibited by **FlowerDocs Core** under the path `{host.core}/swagger-ui/index.html`.
 You can also find the _Swagger_ in our online demo environment [here](https://www.demo.flowerdocs.cloud/flower-docs-ws/swagger-ui/index.html).
