@@ -36,7 +36,7 @@ import TabItem from '@theme/TabItem';
 Open a terminal at the root of your project and install the `arender-ui` package:
 
 ```bash
-npm install arender-ui@{{version}} --registry=https://npm.cloudsmith.io/uxopian/arender-horizon
+npm install arender-ui@{{version}} --registry=https://npm.cloudsmith.io/uxopian/uxopian-public
 ```
 
 ## Step 2 — Configure the dev server proxy
@@ -68,10 +68,6 @@ export default defineConfig({
         target: 'https://rendition.arender.2026.uxopian.com',
         changeOrigin: true,
       },
-      '/annotation': {
-        target: 'https://rendition.arender.2026.uxopian.com',
-        changeOrigin: true,
-      },
     },
   },
 })
@@ -85,8 +81,7 @@ Create a `proxy.conf.json` file at the root of your project:
 ```json title="proxy.conf.json"
 {
   "/documents":          { "target": "https://rendition.arender.2026.uxopian.com", "changeOrigin": true },
-  "/registry/documents": { "target": "https://rendition.arender.2026.uxopian.com", "changeOrigin": true },
-  "/annotation":         { "target": "https://rendition.arender.2026.uxopian.com", "changeOrigin": true }
+  "/registry/documents": { "target": "https://rendition.arender.2026.uxopian.com", "changeOrigin": true }
 }
 ```
 
@@ -109,7 +104,7 @@ Restart `ng serve` — the proxy is active immediately.
 :::tip
 To connect to your own backend instead of the demo, change each `target` to your backend URL (e.g. `http://localhost:8761` for Docker Compose). In production, replace the dev proxy with a reverse proxy (Nginx, Ingress) or a BFF. See [Docker Compose](../installation/docker-compose.md) for deployment guides.
 
-For other frameworks (Next.js, Nuxt, CRA, webpack…), configure your dev server proxy to forward `/documents`, `/registry/documents`, and `/annotation` to the rendition backend. Refer to your framework's documentation.
+For other frameworks (Next.js, Nuxt, CRA, webpack…), configure your dev server proxy to forward `/documents` and `/registry/documents` to the rendition backend. Annotation requests are served under `/documents/{documentId}/annotations`, so they are covered by the `/documents` prefix. Refer to your framework's documentation.
 :::
 
 ## Step 3 — Embed the viewer
@@ -305,7 +300,7 @@ If you use a different package manager, the equivalent command is:
 For other frameworks, use your usual start command (e.g. `npm start` for CRA).
 
 :::tip
-If the viewer loads but no document appears, double-check the proxy configuration in Step 3 — the `/documents`, `/registry/documents`, and `/annotation` paths must all be proxied to the rendition backend.
+If the viewer loads but no document appears, double-check the proxy configuration in Step 3 — the `/documents` and `/registry/documents` paths must both be proxied to the rendition backend.
 :::
 
 ## Step 5 — Load a document dynamically

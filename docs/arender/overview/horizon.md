@@ -23,6 +23,7 @@ ARender Horizon is a React-based document viewer distributed as an npm package (
 | Print | Available |
 | Internationalization (15 languages) | Available |
 | Web Component | Available |
+| Comment annotation | Available |
 | Full annotation types (zone highlight, freetext, text highlight, rectangle, stamp, arrow, ink, sticky note...) | Coming soon |
 | Document comparison (text and image) | Coming soon |
 | Split, merge, page manipulation (document builder) | Coming soon |

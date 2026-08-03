@@ -113,10 +113,6 @@ server {
         proxy_pass http://service-broker:8761/documents;
     }
 
-    location /annotation {
-        proxy_pass http://service-broker:8761/annotation;
-    }
-
     location /registry/documents {
         proxy_pass http://service-broker:8761/registry/documents;
         # If using providers, inject the provider header:
