@@ -16,7 +16,7 @@ The `filenet-provider` runs as a Docker container alongside the ARender renditio
 
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
-%% Modern viewer FileNet integration
+%% ARender Horizon FileNet integration
 flowchart LR
   classDef client fill:#4A90D9,color:#fff
   classDef arender fill:#27AE60,color:#fff
@@ -38,7 +38,7 @@ flowchart LR
   CE --> Store
 ```
 
-*Figure: Request flow from the Modern viewer to FileNet through the provider.*
+*Figure: Request flow from ARender Horizon to FileNet through the provider.*
 
 ## 2. Prerequisites
 
@@ -162,6 +162,14 @@ The broker forwards the following query parameters to the provider. They must be
 | `objectId` | No | Additional object identifiers (list) |
 | `contentElement` | No | Index of the content element to open when a document has multiple content elements |
 
+The host application passes these parameters to the viewer as a single query string, which reaches the provider untouched:
+
+```javascript
+window.ARender.openDocument('objectStoreName=OS1&id=93DFA526-1B2C-4D3E-8F90-ABCDEF123456');
+```
+
+Parameters are grouped by key and each key keeps its own order, so lists (`ids`, `vsIds`, `objectId`) stay paired by index end to end. See [Web Component → Parameter contract](../../reference/web-component.md#parameter-contract) for the encoding rules, and note that `uuid` is reserved by the viewer — never use it as a FileNet parameter name.
+
 ### Annotation access
 
 The provider exposes annotation CRUD endpoints:
@@ -188,13 +196,19 @@ Expected: a WSDL or service description response from the CE MTOM endpoint.
 
 2. Check provider logs on startup. A successful connection produces log output indicating the CE connection was established.
 
-3. Load a document through the Modern viewer. Confirm the document renders and that no connection errors appear in the provider logs.
+3. Load a document through ARender Horizon:
+
+```javascript
+window.ARender.openDocument('objectStoreName=<objectStoreName>&id=<documentGuid>');
+```
+
+Confirm the document renders and that no connection errors appear in the provider logs.
 
 ## 6. Sample use case
 
-A financial institution uses IBM FileNet to store client contracts. The Modern viewer is embedded in a React application using `react-arender-ui`. When a case worker opens a contract:
+A financial institution uses IBM FileNet to store client contracts. ARender Horizon is embedded in a React application through the `<arender-element>` Web Component. When a case worker opens a contract:
 
-1. The React application authenticates the user via OAuth2 and obtains a JWT.
+1. The React application authenticates the user via OAuth2, obtains a JWT, and calls `window.ARender.openDocument('objectStoreName=OS1&id=…')`.
 2. The `X-Provider-ID: filenet` header is injected by the BFF along with the JWT as a Bearer token.
 3. The broker routes the request to `filenet-provider:8787`.
 4. The provider validates the JWT (OAuth2 resource server), extracts the principal and token, and authenticates to FileNet using the `FileNetP8WSI` JAAS stanza.
@@ -208,5 +222,5 @@ A financial institution uses IBM FileNet to store client contracts. The Modern v
 | `Connection refused` on CE URL | The CE WSI/MTOM endpoint is unreachable from the provider container | Verify network connectivity: `curl <ce-url>` from inside the provider container |
 | Authentication failure with `loginPasswordObjectStoreProvider` | Incorrect credentials or the service account lacks access to the object store | Verify credentials and that the account has the required FileNet roles |
 | JWT validation failure with `oauth2ObjectStoreProvider` | The `spring.security.oauth2.resourceserver.jwt.issuer-uri` does not match the token's issuer | Confirm the issuer URI matches the token's `iss` claim exactly |
-| `IllegalStateException` on document request | Missing `objectStoreName` or `objectStoreId` in request | Ensure the BFF passes the required parameters and they are whitelisted in the broker |
+| `IllegalStateException` on document request | Missing `objectStoreName` or `objectStoreId` in request | Check the query string passed to `openDocument()`, ensure the BFF forwards it unchanged, and that the parameters are whitelisted in the broker |
 | Provider starts but documents return 404 | The `objectType` parameter does not match the FileNet object | Confirm `objectType` is set correctly (`DOCUMENT`, `FOLDER`, etc.) |

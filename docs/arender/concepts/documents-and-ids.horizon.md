@@ -22,7 +22,11 @@ The internal string representation is opaque to most consumers. By default ARend
 b64_dXJsPWh0dHA6Ly9leGFtcGxlLmNvbS9zYW1wbGUucGRm
 ```
 
-You will see these IDs in viewer URLs and in broker logs. Different [ID generators](../guides/features/document-id-generators.md) produce different formats (encrypted, UUID-based), but from a consumer's perspective the ID is always an opaque string.
+You will see these IDs in broker logs, and in the `uuid` parameter the viewer accepts for an already-resolved document. Different [ID generators](../guides/features/document-id-generators.md) produce different formats (encrypted, UUID-based), but from a consumer's perspective the ID is always an opaque string.
+
+:::note
+`uuid` is the only parameter name the viewer interprets itself: passed alone, its value is treated as a `DocumentId` and no repository call is made. A repository must therefore never use `uuid` as one of its own parameter names. See [Opening documents](../guides/features/opening-documents.md#opening-a-document-by-pre-generated-id).
+:::
 
 :::info
 When opening documents by URL, the rendition service only authorizes whitelisted domains. By default, no domain is authorized. See [Opening documents](../guides/features/opening-documents.md) for configuration.
@@ -52,7 +56,7 @@ Regardless of how the `DocumentAccessor` is created, the rest of the rendition p
 
 ## Related pages
 
-- [Opening documents](../guides/features/opening-documents.md): URL parameters and multi-document opening
+- [Opening documents](../guides/features/opening-documents.md): the `openDocument` parameter contract and multi-document opening
 - [Document ID generators](../guides/features/document-id-generators.md): configuring Base64, encrypted, and UUID generators
 - [Providers](../guides/integration/providers.md): how providers load documents via REST
 - [Rendition caching](./caching.md): how `DocumentId` values are used as cache keys

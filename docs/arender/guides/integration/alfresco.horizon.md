@@ -16,7 +16,7 @@ The `alfresco-provider` runs as a Docker container alongside the ARender renditi
 
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
-%% Modern viewer Alfresco integration
+%% ARender Horizon Alfresco integration
 flowchart LR
   classDef client fill:#4A90D9,color:#fff
   classDef arender fill:#27AE60,color:#fff
@@ -36,7 +36,7 @@ flowchart LR
   Provider -- "CMIS 1.1 AtomPub" --> Alfresco
 ```
 
-*Figure: Request flow from the Modern viewer to Alfresco through the provider.*
+*Figure: Request flow from ARender Horizon to Alfresco through the provider.*
 
 ## 2. Prerequisites
 
@@ -106,6 +106,14 @@ The following query parameters are used by the provider. The broker forwards all
 | `docs` | Yes (multi-document) | Comma-separated list of `nodeRef;versionLabel` pairs |
 | `folder` | No | When set with `nodeRef`, opens the nodeRef as a folder and returns its children |
 
+The host application passes these parameters to the viewer as a single query string, which reaches the provider untouched:
+
+```javascript
+window.ARender.openDocument('nodeRef=4aa144a5-a0b1-4c2d-8e3f-1234567890ab&user=admin&alf_ticket=TICKET_xxx&versionLabel=1.0');
+```
+
+See [Web Component → Parameter contract](../../reference/web-component.md#parameter-contract) for the encoding rules, and note that `uuid` is reserved by the viewer — never use it as an Alfresco parameter name.
+
 :::note
 `whitelistedParams` controls which parameters form the internal `DocumentId` used for caching. Parameters outside the list are still forwarded to the provider. Do not add `alf_ticket` to `whitelistedParams`: it is a short-lived per-user token, and including it in the cache key causes every request with a new ticket to miss the cache, forcing unnecessary re-rendition of the same document.
 :::
@@ -142,14 +150,20 @@ curl http://alfresco-provider:8788/documents?nodeRef=<nodeRef>&alf_ticket=<ticke
 
 Expected response: document binary stream with `Content-Disposition` and `Content-Type` headers.
 
-2. Open the ARender Modern viewer and load a document from Alfresco. Check that the document renders without error.
+2. Open ARender Horizon and load a document from Alfresco:
+
+```javascript
+window.ARender.openDocument('nodeRef=<nodeRef>&user=<user>&alf_ticket=<ticket>');
+```
+
+Check that the document renders without error.
 
 ## 6. Sample use case
 
-A legal department uses Alfresco to manage contract documents. The Modern viewer is embedded in an Angular application using `angular-arender-ui`. When a user opens a contract from the Alfresco document library:
+A legal department uses Alfresco to manage contract documents. ARender Horizon is embedded in an Angular application through the `<arender-element>` Web Component. When a user opens a contract from the Alfresco document library:
 
 1. The Angular application retrieves the user's Alfresco ticket from the session.
-2. The application builds the viewer URL with `nodeRef`, `alf_ticket`, and `user` parameters.
+2. The application calls `window.ARender.openDocument('nodeRef=…&user=admin&alf_ticket=…')`.
 3. The `<arender-element>` component sends the request to the BFF.
 4. The BFF injects `X-Provider-ID: alfresco` and forwards to the broker.
 5. The broker calls `alfresco-provider:8788/documents?nodeRef=...&alf_ticket=...&user=...`.
@@ -159,6 +173,7 @@ A legal department uses Alfresco to manage contract documents. The Modern viewer
 
 | Error | Cause | Solution |
 |---|---|---|
-| `Cannot view document, missing info in query parameters` | `nodeRef`, `alf_ticket`, or `user` is absent from the request | Verify that the BFF forwards all required parameters in the request. The broker forwards all incoming parameters to the provider; the issue is in the BFF or the client not sending the required parameters |
+| `Cannot view document, missing info in query parameters` | `nodeRef`, `alf_ticket`, or `user` is absent from the request | Check the query string passed to `openDocument()` first, then that the BFF forwards it unchanged. The broker forwards all incoming parameters to the provider, so a missing parameter comes from the client or the BFF |
+| Opaque `500` with a null `alf_ticket` in the provider logs | A parameter the provider cannot interpret reached it — typically a value whose separators were not encoded, so `alf_ticket` was parsed as part of the previous value | URL-encode every value before concatenating it into the query string. See [Web Component → Parameter contract](../../reference/web-component.md#parameter-contract) |
 | `Connection refused` on CMIS call | The `arender.server.alfresco.atom.pub.url` is unreachable from the provider container | Check network connectivity: `curl <atom-pub-url>` from inside the provider container |
 | `IllegalStateException: NOT IMPLEMENTED` | The request mode (DOCUMENT, FOLDER, MULTIDOCUMENT) could not be determined | Ensure `nodeRef` is present for single document mode, or `docs` for multi-document mode |

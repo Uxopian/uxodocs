@@ -16,7 +16,7 @@ The `mfiles-provider` runs as a Docker container alongside the ARender rendition
 
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
-%% Modern viewer M-Files integration
+%% ARender Horizon M-Files integration
 flowchart LR
   classDef client fill:#4A90D9,color:#fff
   classDef arender fill:#27AE60,color:#fff
@@ -36,7 +36,7 @@ flowchart LR
   Provider -- "HTTP REST (X-Authentication)" --> MFiles
 ```
 
-*Figure: Request flow from the Modern viewer to M-Files through the provider.*
+*Figure: Request flow from ARender Horizon to M-Files through the provider.*
 
 ## 2. Prerequisites
 
@@ -163,13 +163,21 @@ Pass multiple values as **repeated parameters** (`fileId=456&fileId=789`), not a
 
 ### Opening a document
 
-Every open mode goes through `GET /documents`:
+Every open mode goes through `GET /documents`, with the same query string the host application passes to the viewer:
 
 | Mode | Query parameters | Result |
 |---|---|---|
 | Whole object | `objectType=0&docId=521` | The object's file(s): a single-file object is streamed as-is; a multi-file object is returned as a multi-document |
 | One explicit file | `objectType=0&docId=534&fileId=576&title=v2.pdf` | The selected file, named after `title` |
 | Several explicit files | `objectType=0&docId=534&fileId=576&fileId=977&title=v2.pdf&title=mire.pdf` | A multi-document of the selected files, in the given order |
+
+From the host application, that last mode reads:
+
+```javascript
+window.ARender.openDocument('objectType=0&docId=534&fileId=576&fileId=977&title=v2.pdf&title=mire.pdf');
+```
+
+The viewer forwards the string verbatim — it never reorders or re-encodes parameters — so the pairing below survives all the way to the provider. See [Web Component → Parameter contract](../../reference/web-component.md#parameter-contract) for the encoding rules, and note that `uuid` is reserved by the viewer: never use it as an M-Files parameter name.
 
 - `fileId` and `title` are **parallel lists paired by index**, each passed as repeated parameters (see the warning above).
 - `title` is optional but recommended: it sets each file's name and extension so the renderer detects the format reliably. Without it, the format is guessed from the content.
@@ -220,13 +228,19 @@ curl -X POST "http://service-broker:8761/registry/documents?objectType=0&docId=5
 
 Expected: a JSON `DocumentId` (e.g. `{"id":"b64_..."}`).
 
-3. Open the ARender Modern viewer and load a document from M-Files. Check that the document renders without error.
+3. Open ARender Horizon and load a document from M-Files:
+
+```javascript
+window.ARender.openDocument('objectType=0&docId=<docId>&versionId=latest');
+```
+
+Check that the document renders without error.
 
 ## 6. Sample use case
 
-A company stores its documents in an M-Files vault. The Modern viewer is embedded in a web application. When a user opens an M-Files object:
+A company stores its documents in an M-Files vault. ARender Horizon is embedded in a web application through the `<arender-element>` Web Component. When a user opens an M-Files object:
 
-1. The application builds the viewer URL with the `objectType`, `docId`, and `versionId` parameters.
+1. The application calls `window.ARender.openDocument('objectType=0&docId=521&versionId=latest')`.
 2. The `<arender-element>` component sends the request to the BFF.
 3. The BFF injects `X-Provider-ID: mfiles` and forwards to the broker.
 4. The broker calls `mfiles-provider:8789/documents?objectType=0&docId=521&versionId=latest`.
