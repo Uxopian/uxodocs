@@ -17,13 +17,14 @@ Backend rendition configuration (broker, converter, renderer) is documented in [
 
 ## API routes reference
 
-The viewer uses three API route prefixes, all proxied to the Document Service Broker:
+The viewer uses two API route prefixes, both proxied to the Document Service Broker:
 
 | Route | Purpose |
 |-------|---------|
-| `/documents/*` | Document rendering, page images, text extraction |
-| `/annotation/*` | Annotation CRUD operations |
+| `/documents/*` | Document rendering, page images, text extraction, annotation CRUD |
 | `/registry/documents` | Load documents through connector providers |
+
+Annotation operations are addressed under the document they belong to — `/documents/{documentId}/annotations` for the collection, `/documents/{documentId}/annotations/{annotationId}` for a single annotation — so no separate annotation route needs to be proxied.
 
 ## Proxy setup
 
@@ -49,7 +50,6 @@ export default {
   server: {
     proxy: {
       '/documents': { target: 'http://localhost:8761', changeOrigin: true },
-      '/annotation': { target: 'http://localhost:8761', changeOrigin: true },
       '/registry/documents': { target: 'http://localhost:8761', changeOrigin: true },
     },
   },
@@ -60,7 +60,7 @@ Vite forwards matching requests to the broker. The browser only sees `localhost`
 
 ### Same origin via existing infrastructure
 
-If your organization already routes the ARender API paths (`/documents`, `/annotation`, `/registry/documents`) to the broker under the same domain as your application — through an existing reverse proxy, load balancer, or API gateway — the browser sees all requests as same-origin and no additional configuration is needed.
+If your organization already routes the ARender API paths (`/documents`, `/registry/documents`) to the broker under the same domain as your application — through an existing reverse proxy, load balancer, or API gateway — the browser sees all requests as same-origin and no additional configuration is needed.
 
 ## Authentication and BFF
 
@@ -72,7 +72,7 @@ The BFF sits between the browser and the broker:
 
 1. It handles the OAuth2 flow (authorization code grant, token refresh).
 2. It stores tokens server-side — tokens are never exposed to the browser.
-3. It proxies the three ARender API routes, injecting `Authorization: Bearer <token>` on each request to the broker.
+3. It proxies the ARender API routes, injecting `Authorization: Bearer <token>` on each request to the broker.
 
 From the viewer's perspective, it calls the BFF exactly as it would call the broker — no change is needed in how you configure the `rendition` attribute on `<arender-element>`.
 
@@ -80,8 +80,7 @@ From the viewer's perspective, it calls the BFF exactly as it would call the bro
 
 | Route | Purpose |
 |-------|---------|
-| `/documents/*` | Document rendering |
-| `/annotation/*` | Annotation CRUD |
+| `/documents/*` | Document rendering, annotation CRUD |
 | `/registry/documents` | Connector providers |
 
 If you use [providers](../guides/integration/providers.md), the BFF must also inject the `X-Provider-ID` header on `/registry/documents` requests.
