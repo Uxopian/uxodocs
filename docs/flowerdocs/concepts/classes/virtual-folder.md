@@ -23,7 +23,7 @@ Virtual folders of the same class share the same search list, so they all have t
 
 The special feature of file searches is the ability to aggregate results according to a specific criterion, and the variability of searches.
 
-# Aggregation
+## Aggregation
 
 If the search defined in the folder contains an aggregation, the components brought up by the search will be grouped together in the form of `Bucket`. Aggregations can also be nested to create `buckets` based on multiple criteria.
 
@@ -35,7 +35,7 @@ It is recommended not to aggregate more than 3 levels.
 
 When the tree structure of a virtual folder is in `View` mode, we recommend not exceeding 100 documents displayed in ARender.
 
-# Research variabilization
+## Research variabilization
 
 In searches for a class of virtual folders, the defined criteria can be either fixed values or variables. It works in the same way as conditional tags for [variable resolution](/docs/flowerdocs/concepts/tags/conditionnel).
 

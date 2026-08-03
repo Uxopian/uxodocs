@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The unlock account service allows an administrator to unlock a user account that has been locked due to too many failed login attempts.
 
-# Unlock an account
+## Unlock an account
 
 <Tabs>
   <TabItem value="rest" label="REST">

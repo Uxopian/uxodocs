@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The `ProfileUserRestController` service displays the following operations:
 * `search`: to search for user profiles
-# Search user profile
+## Search user profile
 The example below shows how to perform a user profile search.
 <br/>
 SEARCH:

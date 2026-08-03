@@ -14,7 +14,7 @@ A JS API can be used to obtain information about users:
 JSAPI.get().getUserAPI();
 ```
 
-# Get a user object
+## Get a user object
 
 Two methods are available to obtain a user object:
 
@@ -38,34 +38,34 @@ JSAPI.get()
 
 | Functions                                 | Description                                       |
 | ----------------------------------------- | ------------------------------------------------- |
-| getScope()                                | Retrieve the scope to which the user is connected |
-| getCurrentUser()                          | Current user recovery                             |
-| getUser(String id, UserCallback closure)  | Recovering a user by identifier                   |
-| addAttribute(String name,String[] values) | Add attribute for logged-in user                  |
-| removeAttribute(String name)              | Delete attribute values for logged-in user        |
+| `getScope()`                                | Retrieve the scope to which the user is connected |
+| `getCurrentUser()`                          | Current user recovery                             |
+| `getUser(String id, UserCallback closure)`  | Recovering a user by identifier                   |
+| `addAttribute(String name,String[] values)` | Add attribute for logged-in user                  |
+| `removeAttribute(String name)`              | Delete attribute values for logged-in user        |
 
-# User information
+## User information
 
 The functions listed below can be called on a user object.
 
 | Functions                       | Description                                  |
 | ------------------------------- | -------------------------------------------- |
-| getId()                         | User recovery                                |
-| getDisplayNames()               | User label recovery                          |
-| getFirstName()                  | User first name recovery                     |
-| getLastName()                   | User last name retrieval                     |
-| getProfiles()                   | Retrieve the teams to which the user belongs |
-| getGroups()                     | Retrieve groups to which the user belongs    |
-| getMail()                       | Retrieve user email address                  |
-| getAttributeValue(String name)  | Retrieve the value of a user attribute       |
-| getAttributeValues(String name) | Retrieve user attribute values               |
+| `getId()`                         | User recovery                                |
+| `getDisplayNames()`               | User label recovery                          |
+| `getFirstName()`                  | User first name recovery                     |
+| `getLastName()`                   | User last name retrieval                     |
+| `getProfiles()`                   | Retrieve the teams to which the user belongs |
+| `getGroups()`                     | Retrieve groups to which the user belongs    |
+| `getMail()`                       | Retrieve user email address                  |
+| `getAttributeValue(String name)`  | Retrieve the value of a user attribute       |
+| `getAttributeValues(String name)` | Retrieve user attribute values               |
 
 The token is no longer reassembled when users are retrieved by **FlowerDocs GUI**, to prevent it being used by a malicious individual.
 <br/>
 It is still possible to retrieve the user's token when retrieving users via **FlowerDocs GUI** by configuration. To do this, the following property must be added to the `gui.properties` file:
 `user.expose-token=true`
 
-# Assignee Provider
+## Assignee Provider
 
 An `Assignee Provider` provides the GUI with a callback that is executed when a user searches for a user to assign a task to. By default, all users will be remoted.
 

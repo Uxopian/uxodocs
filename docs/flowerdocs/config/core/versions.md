@@ -14,7 +14,7 @@ The FlowerDocs platform manages the lifecycle of documents from creation to dest
 Several features are implemented to ensure this lifecycle management.
 :::
 
-# Reservations
+## Reservations
 
 A reservation allows you to temporarily give write access to a component in the graphical user interface in order to avoid concurrent modifications.
 
@@ -31,9 +31,9 @@ From the graphical user interface, the current user's reservations can be consul
 
 GET /rest/session/reservations
 
-# Version management
+## Version management
 
-## A version
+### A version
 
 During the life of a document, various changes may be made to its tags or content. A version of a document is the image of a document at a given moment. It contains both the tags and the content of a document.
 
@@ -44,23 +44,23 @@ To track the different versions, each version has:
 - A unique identifier
 - A label
 
-## Version tracking
+### Version tracking
 
 Document version tracking allows you to view and manage the different versions of a document.
 
-### Creating a version
+#### Creating a version
 
 Creating a version involves saving the current state of a document. Creating a version can also be seen as promoting the document as a version.
 
-### Restoring a version
+#### Restoring a version
 
 Restoring a version allows you to return to a version of a document. The document, with its tags and content, is then in the same state as when the version was created.
 
-### Comparing two versions
+#### Comparing two versions
 
 You can compare two versions of a document using the document viewer. ARender provides a textual comparison, highlighting differences to make it easier to identify text additions, modifications or deletions.
 
-## Tracking modes
+### Tracking modes
 
 Document version tracking is configured using a version tracking mode for each document class.
 Several modes are available to control how document versions are managed:
@@ -73,13 +73,13 @@ Several modes are available to control how document versions are managed:
 
 This mode is defined by document class to configure how versions are managed.
 
-## Version label
+### Version label
 
 By default, the `NumberedVersionLabelStrategy` strategy is used for each automatic version creation. It automatically defines the label of a new version as a minor version, incremented with each new version.
 
 From the document version consultation popup, you can manually create document versions. This action is accessible only if manual or automatic tracking is enabled and the user has permission to update content. [Different strategies](/docs/flowerdocs/apis/jsapi/version) are therefore available for naming versions.
 
-## Storage
+### Storage
 
 Document versions are stored and retained until the document is permanently deleted.
 
@@ -87,8 +87,8 @@ A purge policy can be defined to reduce the volume of stored data.
 
 <!--# Status
 
-## Draft
+### Draft
 
-## Live
+### Live
 
-## Closed-->
+### Closed-->

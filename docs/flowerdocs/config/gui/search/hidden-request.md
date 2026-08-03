@@ -71,7 +71,7 @@ The `ComponentSearchPresenter` object accepts a `hiddenRequest` property with a 
 	</bean>
 ```
 
-# Sorting
+## Sorting
 
 The default sort order of results is configured using the `orderClauses` property on the `SearchRequest` object. Each `OrderClause` defines a field name and a sort direction.
 
@@ -88,7 +88,7 @@ The default sort order of results is configured using the `orderClauses` propert
 
 Multiple sort clauses can be combined. They are applied in order of declaration.
 
-# Aggregation
+## Aggregation
 
 An aggregation groups search results by field values, displaying them as a tree structure. When a bucket is selected, the search is filtered to match that bucket's criteria.
 
@@ -111,7 +111,7 @@ Aggregations are configured using the `aggregation` property on the `SearchReque
 </property>
 ```
 
-# Hidden columns
+## Hidden columns
 
 To retrieve tag values via the `selectClause` without displaying them as visible columns, use the `hiddenColumns` property on the `ComponentSearchPresenter`. See [Search results](/docs/flowerdocs/config/gui/search/results) for details.
 

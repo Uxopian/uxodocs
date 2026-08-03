@@ -8,7 +8,7 @@ last_update:
 content_hash: 5715fc1c292c11006e83af7415cd8f1933c095eafc56da4a2a28128802dbc860
 ---
 
-# Permissions
+## Permissions
 
 It is possible to determine whether the current user has got a permission:
 
@@ -28,7 +28,7 @@ ACLHelper.isGranted(component.getACL(), "CREATE", function (granted) {
 });
 ```
 
-# Identifier extraction
+## Identifier extraction
 
 To extract identifiers from an array of components, you can use the following function:
 
@@ -36,14 +36,14 @@ To extract identifiers from an array of components, you can use the following fu
 Ids.from(components);
 ```
 
-# Tag Propagation
+## Tag Propagation
 
 To propagate common tag values from one or more components to a target component, the following functions are available:
 
 | Functions                                  | Description                                                          |
 | ------------------------------------------ | -------------------------------------------------------------------- |
-| predict(sourceComponent, targetComponent)  | Propagate common tags from a component to a target component         |
-| predict(sourceComponents, targetComponent) | Propagate common tags from a set of components to a target component |
+| `predict(sourceComponent, targetComponent)`  | Propagate common tags from a component to a target component         |
+| `predict(sourceComponents, targetComponent)` | Propagate common tags from a set of components to a target component |
 
 **Example:** Creating a task from two documents
 
@@ -65,7 +65,7 @@ ContextualMenuAPI.get().registerForLoad(function(api){
 });
 ```
 
-# Version comparison
+## Version comparison
 
 The `compareVersion('x.y.z')` function compares the input version with the deployed version:
 

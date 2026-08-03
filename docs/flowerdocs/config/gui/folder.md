@@ -8,7 +8,7 @@ last_update:
 content_hash: 6e9e8894adbcae0daeda857d7cd00c12a96cdfbd171d3adb17983dfe08e1f1a7
 ---
 
-# Folder contents
+## Folder contents
 
 The `folderSearchCatalog` bean is used to modify the display of data for documents, folders and virtual folders contained in a folder. It is made up of 3 properties:
 

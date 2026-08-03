@@ -12,24 +12,24 @@ content_hash: 84f3ed1fff5cd4cfc48bbc72ae739418f5ba84ba329f23d1f73f704a4f32dcfc
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Handling files
+## Handling files
 
 In addition to the tags associated with a [document](../.././../concepts/components/documents), files can be associated with it.
 The JS API enables them to be manipulated through various consultation or modification functions.
 
-## File access
+### File access
 
 From a `Document` object, the `getDocumentFiles()` function reveals an array of `DocumentFile` objects from which the following functions can be used:
 
 | Functions                        | Description                       |
 | -------------------------------- | --------------------------------- |
-| getId()                          | File identifier recovery          |
-| setId(String id)                 | File identifier definition        |
-| getName()                        | File name retrieval               |
-| setName(String name)             | File name definition              |
-| getFormatCode()                  | File format retrieval             |
-| setFormatCode(String formatCode) | File format definition            |
-| getCreationDate()                | Retrieving the file creation date |
+| `getId()`                        | File identifier recovery          |
+| `setId(String id)`               | File identifier definition        |
+| `getName()`                      | File name retrieval               |
+| `setName(String name)`           | File name definition              |
+| `getFormatCode()`                | File format retrieval             |
+| `setFormatCode(String formatCode)` | File format definition            |
+| `getCreationDate()`              | Retrieving the file creation date |
 
 <Tabs>
   <TabItem value="list-files-in-a-document" label="List files in a document">
@@ -59,7 +59,7 @@ JSAPI.get()
 
 File identifiers can also be retrieved from a document using the `getFiles()` function.
 
-## Files modification
+### Files modification
 
 The list of files in a `Document` object can be initialised or modified using the JS API.
 To achieve this, the functions `addFile(tempFileId)` or `setFiles(tempFileIds)` can be used.
@@ -102,12 +102,12 @@ uploadTextFile('Some text content', (tempFileId)=>{
   </TabItem>
 </Tabs>
 
-# Versioning
+## Versioning
 
 If version management (or _versioning_) is enabled for a document, information about its different versions can be consulted using the following functions:
 
 | Functions            | Description                                            |
 | -------------------- | ------------------------------------------------------ |
-| getVersionSeriesId() | Retrieving the VersionSeries identifier                |
-| getVersionLabel()    | Retrieving the label of the current version            |
-| isCurrentVersion()   | Determines whether the document is the current version |
+| `getVersionSeriesId()` | Retrieving the VersionSeries identifier                |
+| `getVersionLabel()`  | Retrieving the label of the current version            |
+| `isCurrentVersion()` | Determines whether the document is the current version |

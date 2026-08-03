@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The dashlet preferences service allows managing dashboard widgets (dashlets) for users.
 
-# Get dashlets for current user
+## Get dashlets for current user
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -29,7 +29,7 @@ curl -X GET "<CORE_HOST>/rest/preferences/dashlets" \
   </TabItem>
 </Tabs>
 
-# Get dashlets for specific authorities
+## Get dashlets for specific authorities
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -45,7 +45,7 @@ curl -X GET "<CORE_HOST>/rest/preferences/dashlets/users/<AUTHORITIES>" \
   </TabItem>
 </Tabs>
 
-# Create a dashlet
+## Create a dashlet
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -69,7 +69,7 @@ curl -X POST "<CORE_HOST>/rest/preferences/dashlets" \
   </TabItem>
 </Tabs>
 
-# Update a dashlet
+## Update a dashlet
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -94,7 +94,7 @@ curl -X POST "<CORE_HOST>/rest/preferences/dashlets/<ID>" \
   </TabItem>
 </Tabs>
 
-# Delete dashlets
+## Delete dashlets
 
 <Tabs>
   <TabItem value="rest" label="REST">

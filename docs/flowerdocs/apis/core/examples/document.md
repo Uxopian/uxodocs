@@ -15,11 +15,11 @@ import TabItem from '@theme/TabItem';
 The `Document` service exhibits all the operations available around `DOCUMENT` type components.
 
 
-# Document recovery
+## Document recovery
 
 The examples below show how to retrieve documents using the various operations of `get`.
 
-## Document recovery
+### Document recovery
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -50,7 +50,7 @@ public List<Document> get() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-## Version recovery
+### Version recovery
 
 This service allows you to retrieve a specific version of a document:
 
@@ -86,7 +86,7 @@ public Document getVersion() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-## Retrieving associated files
+### Retrieving associated files
 
 This service retrieves the files associated with the document whose identifier is passed as input:
 
@@ -123,7 +123,7 @@ public List<DocumentFile> get() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Document creation
+## Document creation
 
 The examples below show how to create documents using the following operation.
 
@@ -176,7 +176,7 @@ public List<Document> create() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Document creation with a content
+## Document creation with a content
 
 The examples below show how to create a document with its content using the following operation.
 
@@ -203,11 +203,11 @@ curl -X POST "<CORE_HOST>/rest/documents/unique" \
   </TabItem>
 </Tabs>
 
-# Document modification
+## Document modification
 
 The examples below show how to update documents.
 
-## Document modification with content replacement
+### Document modification with content replacement
 
 This operation allows to modify the data of a document (class identifier, document name, ACL, etc.) as well as modifying its content in the same call.
 
@@ -235,7 +235,7 @@ curl -X POST "<CORE_HOST>/rest/documents/<ID>/unique" \
   </TabItem>
 </Tabs>
 
-## Data modification
+### Data modification
 
 This operation updates a document's tags and data (class identifier, document name, ACL, etc.) but also its content.
 
@@ -291,7 +291,7 @@ public List<Document> update(Document document) throws FunctionalException, Tech
   </TabItem>
 </Tabs>
 
-## Add file
+### Add file
 
 This operation adds content to a document
 
@@ -332,7 +332,7 @@ public List<Document> addContent(Document document) throws FunctionalException, 
   </TabItem>
 </Tabs>
 
-## Rename file
+### Rename file
 
 This operation allows you to rename a file associated with a document:
 
@@ -352,15 +352,15 @@ curl -X POST "<CORE_HOST>/rest/documents/<ID>/files/<FILE_ID>/name" \
   </TabItem>
 </Tabs>
 
-# Search document
+## Search document
 
 The search operations all work on the same model as described [here](./search).
 
-# Document deletion
+## Document deletion
 
 The examples below show how to delete documents.
 
-## Document deletion
+### Document deletion
 
 This operation allows to delete the document and its associated files.
 
@@ -393,7 +393,7 @@ public void delete() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-## File deletion
+### File deletion
 
 This operation allows you to delete a file.
 
@@ -427,9 +427,9 @@ public void delete() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Content
+## Content
 
-## Content recovery
+### Content recovery
 
 This service retrieves the content associated with the file whose identifier is passed as input:
 
@@ -466,7 +466,7 @@ public List<DocumentFile> get() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-## Index document content
+### Index document content
 
 This service indexes the content passed in parameter and associated with the file identifier.
 
@@ -501,7 +501,7 @@ curl -X POST "<CORE_HOST>/rest/documents/<DOCUMENT_ID>/files/<FILE_ID>/content/i
   </TabItem>
 </Tabs>
 
-## Remove content indexing from a document
+### Remove content indexing from a document
 
 This service removes the indexing of content associated with a document.
 

@@ -12,7 +12,7 @@ content_hash: f94a706cb6dee2b3413211931ecf5b11ed594a5c6cfc536e47a687a515b2aea8
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Principle
+## Principle
 
 Stamp templates are used to define the stamps a user can create. They can be of two types:
 
@@ -24,14 +24,14 @@ A stamp template is stored as a catalogue in a document of class `UserPreference
 - `UserPreferenceType` with `STAMP` value
 - `User` with the value of the identity to which the stamp template is shared
 
-# By user
+## By user
 
 Users create their own stamp templates via their preferences _(accessible by clicking on their avatar)_.
 New stamp templates are stored and can be accessed after refreshing the viewer in the annotations menu.
 
 The `User` tag is filled in with the identifier of the user creating the template. Only this user can access the template.
 
-# By team
+## By team
 
 Administrators set up stamp templates that are accessible to a team of users. The _Configuration > Stamps_ section in the administration console lets them add the XML configuration needed to create stamp templates.
 

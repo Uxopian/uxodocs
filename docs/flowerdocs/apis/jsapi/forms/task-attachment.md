@@ -8,7 +8,7 @@ last_update:
 content_hash: 9854a19b638a46e618bdcf30a1bce7b82e59347c655a5fbcc8fe52928a2355ef
 ---
 
-# Document as attachment without indexing
+## Document as attachment without indexing
 
 It is possible to use the old mode of document creation as an attachment without an indexing form by defining a strategy to activate the *Legacy*mode.
 
@@ -23,7 +23,7 @@ LegacyDocumentAttachmentCreationStrategy.registerStrategy(function(task,attachme
 });
 ```
 
-# Summary
+## Summary
 
 Attachment summaries can be overloaded using the `TaskAttachmentSynopsisHelper` API.
 

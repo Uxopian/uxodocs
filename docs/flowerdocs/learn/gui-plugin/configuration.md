@@ -9,7 +9,7 @@ last_update:
 content_hash: e0688055e732d55158cfb8d7ce0b38b6fe10d9112321cec19b1aff56792ddfb1
 ---
 
-# Plugin configuration
+## Plugin configuration
 
 Using your favorite browser, open the FlowerDocs admin console, then:
 
@@ -20,7 +20,7 @@ Using your favorite browser, open the FlowerDocs admin console, then:
     - Path: `/my-plugin/**`
     - URL: `http://localhost:2802/secured`
 
-# Plugin access
+## Plugin access
 
 Now that your GUI plugin has been configured, you can access the `/count` endpoint through the GUI via the URL: `<gui>/plugins/<scope>/my-plugin/count`.
 

@@ -10,7 +10,7 @@ last_update:
 content_hash: 139c1ca36eb419fe075eb4d7b84bcc18272d51911a584701c4f1ab1aad2f6e59
 ---
 
-# Principle
+## Principle
 
 Pages allow you to expose HTML pages to your users. They are configured by scope and can be used, for example, to collect information such as documents, or simply to make information available.
 
@@ -21,7 +21,7 @@ This concept requires two types of configuration:
 - a [template](/docs/flowerdocs/config/core/templates/html)
 - a page
 
-# Private page
+## Private page
 
 A page is considered `private` if it has an ACL in its definition.
 In this case, only authenticated users can access it, and the configured ACL is evaluated to determine whether the user is authorized to consult it.
@@ -29,7 +29,7 @@ In this case, only authenticated users can access it, and the configured ACL is 
 <br/>
 Private pages can be accessed through a browser at the following URL: `/gui/private/<scope>/pages/<page>`.
 
-# Public page
+## Public page
 
 A page is considered `public` if its definition does not reference an ACL.
 In this case, access is public and a user can access it without being authenticated.

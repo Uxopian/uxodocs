@@ -12,7 +12,7 @@ content_hash: dd84baaf9628e3049f10f796750e63f527d21c07c92f99ca0d7e04a1cc2875c8
 Search forms are pre-configured templates made available to end users.
 :::
 
-# Presentation
+## Presentation
 
 A search form allows you to fully configure a search screen.
 These are associated with scope teams to personalize the display presented to the user.
@@ -51,7 +51,7 @@ __Example:__ A basic ``AgentSearch`` search form with the title Agent file searc
 
 <br/>
 
-# Define access
+## Define access
 
 Link a search form to a user team via:
 

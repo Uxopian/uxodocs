@@ -26,7 +26,7 @@ The ACLService service displays various operations you can perform on ACLs:
 
 * `deleteById` deletes ACLs based on their identifiers.
 
-# ACL recovery
+## ACL recovery
 
 The examples below show how to retrieve ACLs using the various operations of `get`.
 
@@ -132,7 +132,7 @@ public List<SecurityObject> get() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# ACL creation
+## ACL creation
 
 The examples below show how to create ACLs using the operation of `create`.
 
@@ -180,7 +180,7 @@ public List<SecurityObject> create() throws FunctionalException, TechnicalExcept
   </TabItem>
 </Tabs>
 
-# ACL modification
+## ACL modification
 
 The examples below show how to update ACLs using the operation of`update`.
 
@@ -230,7 +230,7 @@ public List<SecurityObject> update() throws FunctionalException, TechnicalExcept
   </TabItem>
 </Tabs>
 
-# Deleting ACL
+## Deleting ACL
 
 The examples below show how to delete ACLs using the operation of `delete`.
 

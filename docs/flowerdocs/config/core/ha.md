@@ -8,7 +8,7 @@ last_update:
 content_hash: bab45d295eba3935ca621e94f4de63b4086d96b109d2689c8cd5dbf4a06cd397
 ---
 
-# Activation
+## Activation
 
 A FlowerDocs stack made up of several instances requires certain data to be synchronized in order to function at both the **FlowerDocs Core** and **FlowerDocs GUI** levels.
 To achieve this, FlowerDocs uses the [Redis] key-value database (https://redis.io/) to manage:
@@ -25,23 +25,23 @@ This database offers high performance as the data is stored in memory.
 To activate this connector, you need to add the `redis.enabled=true` property.
 :::
 
-# Access
+## Access
 
 Depending on the architecture chosen, the configuration for accessing Redis needs to be adapted.
 
-## Simple
+### Simple
 
 This communication mode allows the use of a single Redis instance. This can be configured by specifying the `spring.data.redis.host` and `spring.data.redis.port` properties.
 
 <br/>
 __Note:__ *This type of configuration is not recommended for a production environment.*
 
-## Sentinel
+### Sentinel
 
 The [Redis Sentinel](https://redis.io/topics/sentinel) mode enables Redis to be set up in high-availability mode.
 This mode is activated by entering the name of the Redis master via the `spring.data.redis.sentinel.master` property, and the set of Redis nodes via `spring.data.redis.sentinel.nodes` (list of _host:port_ separated by commas).
 
-## Configuration
+### Configuration
 
 The properties listed below are used to configure communication with Redis.
 

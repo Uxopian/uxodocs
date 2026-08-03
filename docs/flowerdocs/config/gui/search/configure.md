@@ -8,9 +8,9 @@ last_update:
 content_hash: ac8ae3fa4bfd699f1e9d732e1aff8728ac872c97ad6e75718ec99b4564965915
 ---
 
-# Quick reference
+## Quick reference
 
-## ComponentSearchPresenter
+### ComponentSearchPresenter
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -27,7 +27,7 @@ content_hash: ac8ae3fa4bfd699f1e9d732e1aff8728ac872c97ad6e75718ec99b4564965915
 | `enableIfInvalid` | `boolean` | Allow search when form is invalid (default: `false`) |
 | `emptyResultsMessages` | `List<I18NLabel>` | Custom message when no results are found |
 
-## KeywordCriteriaPresenter
+### KeywordCriteriaPresenter
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -36,7 +36,7 @@ content_hash: ac8ae3fa4bfd699f1e9d732e1aff8728ac872c97ad6e75718ec99b4564965915
 | `showSearchButton` | `boolean` | Show a dedicated search button (default: `false`) |
 | `searchButtonTitle` | `List<I18NLabel>` | Custom label for the search button |
 
-## AdvancedCriteriaPresenter
+### AdvancedCriteriaPresenter
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -54,7 +54,7 @@ content_hash: ac8ae3fa4bfd699f1e9d732e1aff8728ac872c97ad6e75718ec99b4564965915
 | `classCriterionPresenter` | Bean | Custom class selector |
 
 
-# Category selector
+## Category selector
 
 Each search targets a component category (documents, folders, etc.). A category selector is available by default. To hide it, use `FakeCategorySelectorPresenter` to set the category directly:
 
@@ -69,7 +69,7 @@ Each search targets a component category (documents, folders, etc.). A category 
 ```
 
 
-# Keyword search
+## Keyword search
 
 Enable keyword search:
 
@@ -104,7 +104,7 @@ Show a dedicated search button:
 
 The button label can be customized with the `searchButtonTitle` property using I18N labels.
 
-# Advanced search
+## Advanced search
 
 Enable advanced search:
 
@@ -162,7 +162,7 @@ When using a search criterion on a `CONDITIONAL` tag, if the tag on which it dep
 :::
 
 
-## Free criteria
+### Free criteria
 
 
 By default, all tag classes defined as **searchable** can be added as search criteria.
@@ -192,7 +192,7 @@ To restrict the scope of your searches, you can:
 </property>
 ```
 
-## Fixed criteria
+### Fixed criteria
 
 Fixed criteria are pre-configured fields displayed by default. The user fills them in before running the search.
 
@@ -208,7 +208,7 @@ The configurable properties are:
 | `forceMonovalued` | `boolean` | Force the user to select only one value for a normally multivalued criterion (default: `false`) |
 | `mandatory` | `boolean` | Make the field mandatory before the search can be executed (default: `false`) |
 
-### Criterion types and operators
+#### Criterion types and operators
 
 Each criterion must declare a `type` and an `operator`. The available operators depend on the type:
 
@@ -224,7 +224,7 @@ Each criterion must declare a `type` and an `operator`. The available operators 
 For choice list tags and conditional tags, the available operators are `EQUALS_TO` and `DIFFERENT`.
 :::
 
-### Examples
+#### Examples
 
 Only `name`, `type`, and `operator` change between criterion types -- see the types table above for valid combinations.
 
@@ -291,7 +291,7 @@ __Mandatory criterion__ with hidden operator selector:
 </bean>
 ```
 
-### Assigning criteria to the advanced search
+#### Assigning criteria to the advanced search
 
 To assign fixed criteria to an advanced search:
 
@@ -326,7 +326,7 @@ Disable unique criteria enforcement entirely:
 <property name="activateUniqueCriteria" value="false" />
 ```
 
-# Class selector
+## Class selector
 
 Customize the class selector with a
 ``ComponentClassCriterionSelectorPresenter`` bean. It supports the same properties as filter criteria:
@@ -371,11 +371,11 @@ Assign a class criterion to an advanced search with the `classCriterionPresenter
 </property>
 ```
 
-# Filters
+## Filters
 
 When an aggregation is defined for the [hidden request](/docs/flowerdocs/config/gui/search/hidden-request) of the search form, results are displayed in a tree structure. When a bucket is selected, the search is run using the criteria corresponding to the bucket.
 
-# Technical data
+## Technical data
 
 Technical information positioned by FlowerDocs can also be used as a search criterion or filter:
 
@@ -393,7 +393,7 @@ Technical information positioned by FlowerDocs can also be used as a search crit
 To be able to search this data, you need to define a `.com.flower.docs.gui.client.search.SearchableFieldCatalog` type `dataCriteriaCatalog` bean.
 :::
 
-# Validation
+## Validation
 
 Control whether the search button is active when the form is invalid with the `enableIfInvalid` property:
 
@@ -404,7 +404,7 @@ Control whether the search button is active when the form is invalid with the `e
 <property name="enableIfInvalid" value="true" />
 ```
 
-# Empty results message
+## Empty results message
 
 Display a custom message when the search returns no results with the `emptyResultsMessages` property:
 
@@ -423,11 +423,11 @@ Display a custom message when the search returns no results with the `emptyResul
 </property>
 ```
 
-# Advanced configuration of virtual folders
+## Advanced configuration of virtual folders
 
 Filters can be configured within a virtual folder and the search used can be overloaded to add or hide columns in the list of results.
 
-## Tab
+### Tab
 
 Follow the naming convention for the search bean:
 
@@ -512,7 +512,7 @@ Follow the naming convention for the search bean:
 	</bean>
 ```
 
-## Indexation
+### Indexation
 
 Virtual folder search forms in indexation mode follow the same pattern as tabs, with a `{Phase}` suffix:
 

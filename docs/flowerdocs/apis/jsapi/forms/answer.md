@@ -12,10 +12,10 @@ The functions available on reasoned answers API are:
 
 | Function                                                    | Description                                                 |
 | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| getPopup()                                                  | Retrieves response popup                                    |
-| registerForFieldChange(String fieldName, function callback) | Allows subscription to field modification in response popup |
-| getReasonedAnswerId()                                       | Retrieves action identifier                                 |
-| getTasks()                                                  | Retrieves the list of tasks associated with the response    |
+| `getPopup()`                                                  | Retrieves response popup                                    |
+| `registerForFieldChange(String fieldName, function callback)` | Allows subscription to field modification in response popup |
+| `getReasonedAnswerId()`                                       | Retrieves action identifier                                 |
+| `getTasks()`                                                  | Retrieves the list of tasks associated with the response    |
 
 **Examples:**
 

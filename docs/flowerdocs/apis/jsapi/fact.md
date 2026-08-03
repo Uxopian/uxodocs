@@ -15,35 +15,35 @@ The history allows to display the modifications made to a component since its cr
 
 A fact allows you to trace an action performed on a component and thus provide a component history.
 
-# Factual information
+## Factual information
 
 The facts are made up of several pieces of information that allow us to identify the precise action performed and its context.
 
-## Object identification
+### Object identification
 
 The object on which a fact took place can be identified from the object type and its identifier.
 
 | Functions                  | Description                    |
 | -------------------------- | ------------------------------ |
-| getObjectType()            | Object type retrieval          |
-| setObjectType(String type) | Modification object type       |
-| getObjectId()              | Object identifier retrieval    |
-| setObjectId(String id)     | Object identifier modification |
+| `getObjectType()`            | Object type retrieval          |
+| `setObjectType(String type)` | Modification object type       |
+| `getObjectId()`              | Object identifier retrieval    |
+| `setObjectId(String id)`     | Object identifier modification |
 
-## Context
+### Context
 
 In order to provide information on the context in which a fact took place, several types of information are available:
 
 | Functions                          | Description                         |
 | ---------------------------------- | ----------------------------------- |
-| getUser()                          | User recovery                       |
-| setUser(String user)               | User Modification                   |
-| getAction()                        | Action performed recovery           |
-| setAction(String action)           | Action performed modification       |
-| getDescription()                   | Description retrieval               |
-| setDescription(String description) | Description modification            |
-| getCreationDate()                  | Action completion date recovery     |
-| setCreationDate(Date date)         | Action completion date modification |
+| `getUser()`                          | User recovery                       |
+| `setUser(String user)`               | User Modification                   |
+| `getAction()`                        | Action performed recovery           |
+| `setAction(String action)`           | Action performed modification       |
+| `getDescription()`                   | Description retrieval               |
+| `setDescription(String description)` | Description modification            |
+| `getCreationDate()`                  | Action completion date recovery     |
+| `setCreationDate(Date date)`         | Action completion date modification |
 
 The actions (see `com.flower.docs.domain.fact.Action`) supported for facts are:
 
@@ -55,16 +55,16 @@ The actions (see `com.flower.docs.domain.fact.Action`) supported for facts are:
 - `DELETE_CONTENT`: Deleting an attachment to tasks, deleting content for documents and deleting components to a folder
 - `REVERT`: Restores a version of a document
 
-## Additional fields
+### Additional fields
 
 In addition to information natively stored in the facts, additional fields can be stored (or simply displayed) using `com.flower.docs.domain.common.ResultField`.
 
 | Functions                              | Description                    |
 | -------------------------------------- | ------------------------------ |
-| getUpdatedFields()                     | Fact fields recovery           |
-| setUpdatedFields(ResultField[] fields) | Fact fields modification       |
-| addUpdatedField(ResultField fields)    | Add a field to the fact        |
-| addUpdatedFields(ResultField[] fields) | Add several fields to the fact |
+| `getUpdatedFields()`                     | Fact fields recovery           |
+| `setUpdatedFields(ResultField[] fields)` | Fact fields modification       |
+| `addUpdatedField(ResultField fields)`    | Add a field to the fact        |
+| `addUpdatedFields(ResultField[] fields)` | Add several fields to the fact |
 
 ```javascript
 var fact = new Fact();
@@ -74,7 +74,7 @@ field.setValue("1234");
 fact.addUpdatedField(field);
 ```
 
-# Add facts
+## Add facts
 
 In certain business contexts, it may be necessary to build your own facts. To do this, several functions are available for this purpose:
 
@@ -82,8 +82,8 @@ To add new facts, it is first necessary to obtain a fact instance with one of th
 
 | Functions                     | Description                      |
 | ----------------------------- | -------------------------------- |
-| new Fact(Component component) | Creating a fact from a component |
-| new Fact()                    | Creating an empty fact           |
+| `new Fact(Component component)` | Creating a fact from a component |
+| `new Fact()`                    | Creating an empty fact           |
 
 To modify a component's history, you need to subscribe to the history opening feature:
 

@@ -18,9 +18,9 @@ The `FolderClassService` service exhibits all available operations around `Folde
 This refers to physical folders, not virtual folders.
 :::
 
-# Retrieving folder classes
+## Retrieving folder classes
 
-## Retrieving all folder classes
+### Retrieving all folder classes
 
 The examples below show how to retrieve the list of all folder classes present on the scope.
 
@@ -50,7 +50,7 @@ public List<FolderClass> getAllFolderClass() throws FunctionalException, Technic
   </TabItem>
 </Tabs>
 
-## Retrieving a defined list of folder classes
+### Retrieving a defined list of folder classes
 
 The examples below show how to retrieve a list of folder classes from their identifiers.
 
@@ -83,7 +83,7 @@ public List<FolderClass> getFolderClasses() throws FunctionalException, Technica
   </TabItem>
 </Tabs>
 
-# Creating folder classes
+## Creating folder classes
 
 The examples below show how to create a folder class.
 
@@ -167,7 +167,7 @@ public void createFolderClasses() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Updating folder classes
+## Updating folder classes
 
 The examples below show how to update a folder class.
 
@@ -250,7 +250,7 @@ public List<FolderClass> updateFolderClasses(FolderClass folderClass) throws Fun
 When using the REST service, unset fields will be cleared: you must send the entire folder class, not just the fields to modify.
 :::
 
-# Deleting folder classes
+## Deleting folder classes
 
 The examples below show how to delete a list of folder classes.
 

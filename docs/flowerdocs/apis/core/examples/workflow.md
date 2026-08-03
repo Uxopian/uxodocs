@@ -15,9 +15,9 @@ import TabItem from '@theme/TabItem';
 The `WorkflowService` service exhibits all available operations around `Workflows`.
 
 
-# Retrieving workflows
+## Retrieving workflows
 
-## Retrieving all workflows
+### Retrieving all workflows
 
 The examples below show how to retrieve all workflows present on the scope.
 
@@ -47,7 +47,7 @@ public List<Workflow> getAllWorkflow() throws FunctionalException, TechnicalExce
   </TabItem>
 </Tabs>
 
-## Retrieving a defined list of workflows
+### Retrieving a defined list of workflows
 
 The examples below show how to retrieve a list of workflows from their identifiers.
 
@@ -80,7 +80,7 @@ public List<Workflow> getWorkflow() throws FunctionalException, TechnicalExcepti
   </TabItem>
 </Tabs>
 
-# Creating workflows
+## Creating workflows
 
 The examples below show how to create a workflow.
 
@@ -135,7 +135,7 @@ public void createWorkflow() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Updating workflows
+## Updating workflows
 
 The examples below show how to update a workflow.
 
@@ -187,7 +187,7 @@ public List<Workflow> updateWorkflow(Workflow wkf) throws FunctionalException, T
 When using the REST service, unset fields will be cleared: you must send the entire workflow, not just the fields to modify.
 :::
 
-# Deleting workflows
+## Deleting workflows
 
 The examples below show how to delete a list of workflows.
 

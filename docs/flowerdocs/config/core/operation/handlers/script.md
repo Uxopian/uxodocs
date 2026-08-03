@@ -13,16 +13,16 @@ content_hash: 7551598729d89b54b5c30a646eb3edb119d294d9a25bcb24236d502c631f399f
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Principle
+## Principle
 
 This operation manager allows you to react to the execution of an operation by executing a JavaScript script.
 The JavaScript script is executed using the [Graal](/docs/flowerdocs/config/core/appendices/graal) engine embedded in the FlowerDocs Core JVM.
 
 The script is stored as the content (attached `.js` file) of the `OperationHandlerRegistration` document used to configure the [subscription](/docs/flowerdocs/config/core/operation/registration).
 
-# Variables
+## Variables
 
-## Context-related
+### Context-related
 
 The following variables are injected into the script depending on the type of operation:
 
@@ -37,7 +37,7 @@ The following variables are injected into the script depending on the type of op
 
 In **BEFORE** phase scripts, modifications to the `component` object are applied to the operation before it executes. In **AFTER** phase scripts, the component reflects its state after the operation completed.
 
-## Utilities
+### Utilities
 
 Two utility objects are available — they serve different purposes:
 
@@ -51,7 +51,7 @@ The full method reference for both objects is documented [here](/docs/flowerdocs
 Since `util` is an instance of a class that extends `RuleUtil`, calling static methods through `util` (e.g., `util.setTagValue(...)`) also works. However, the recommended convention is `RuleUtil.method()` for static helpers and `util.method()` for service calls.
 :::
 
-## Pre-imported classes
+### Pre-imported classes
 
 To simplify script development, the following classes are available by their short name without needing a full package reference:
 
@@ -129,9 +129,9 @@ To simplify script development, the following classes are available by their sho
   </TabItem>
 </Tabs>
 
-# Examples
+## Examples
 
-## Creating a folder when creating a document
+### Creating a folder when creating a document
 
 **AFTER / CREATE / DOCUMENT**
 
@@ -142,7 +142,7 @@ util.getFolderService().create(Lists.newArrayList(folder));
 util.getFolderService().addChildren(folder.getId(), Lists.newArrayList(ReferenceBuilder.from(component)), false);
 ```
 
-## Creating an audit fact
+### Creating an audit fact
 
 **AFTER / CREATE / DOCUMENT — Record a business fact for traceability**
 
@@ -154,7 +154,7 @@ builder.action("CREATE").description("Processing has been started.");
 util.createFact(builder.build());
 ```
 
-## Workflow state machine (task class transitions)
+### Workflow state machine (task class transitions)
 
 **BEFORE / ANSWER / TASK — Change task class based on the answer given**
 
@@ -191,7 +191,7 @@ function changeClassOnAnswer(appliedAnswer, expectedAnswer, classToApply) {
 }
 ```
 
-## Search and conditionally create a virtual folder
+### Search and conditionally create a virtual folder
 
 **AFTER / CREATE / DOCUMENT — Create a business folder if it does not already exist**
 
@@ -217,7 +217,7 @@ if (response.getFound() == 0) {
 }
 ```
 
-## Modifying tags and ACLs
+### Modifying tags and ACLs
 
 **BEFORE / ANSWER / TASK — Update tags and ACL on workflow step transition**
 
@@ -233,7 +233,7 @@ if (classId == "Step0_Creation" && answerId === "Initiate") {
 }
 ```
 
-## Throwing exceptions
+### Throwing exceptions
 
 A BEFORE-phase script can prevent the operation from executing by throwing an exception. This only works when `StopOnException` is set to `true` in the registration.
 

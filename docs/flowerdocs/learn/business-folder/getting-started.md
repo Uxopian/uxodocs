@@ -8,7 +8,7 @@ last_update:
 content_hash: 2f4378ae346305f312cdc44640940532dc026ff2ab763c1d30366166cc63b34a
 ---
 
-# Goals
+## Goals
 
 When you have completed this training module, you will be able to:
 
@@ -21,7 +21,7 @@ When you have completed this training module, you will be able to:
 * Mode switcher (with explanation of sheets according to mode).
 -->
 
-# Definition
+## Definition
 
 A virtual folder is a folder for which the content (or children) is resolved dynamically. There is no physical link between the virtual file and its children.
 
@@ -32,6 +32,6 @@ These children are determined by one or more searches defined at the class level
 <br/>
 Thus two `ClientFolder` class virtual folders can have different contents by adding a `ClientReference` criterion with the `${tags.ClientReference}` value. When a virtual folder is displayed, the `${tags.ClientReference}` variable is replaced by the value of the virtual folder's `ClientReference` tag.
 
-# Prerequisites
+## Prerequisites
 
 For this tutorial, a scope with the `learn` module is recommended.

@@ -9,7 +9,7 @@ last_update:
 content_hash: 9234b06aa7370518da953683873604866d0828b1777a41e0fa871a4ee84ed9b4
 ---
 
-# Permissions
+## Permissions
 
 The following permissions are allowed for all components :
 
@@ -22,7 +22,7 @@ The following permissions are allowed for all components :
 | `READ_HISTORY`      | Access to history      |
 | `READ_TASK_HISTORY` | Access to task history |
 
-## Document-specific permissions:
+### Document-specific permissions:
 
 | Permission           | Description                                                     |
 | -------------------- | --------------------------------------------------------------- |
@@ -56,7 +56,7 @@ To be authorized to obfuscate documents, a user must have the `CREATE_ANNOTATION
 All users are allowed to rotate pages. Rotation are automatically save to be accessible for other users.
 :::
 
-## Task-specific permissions:
+### Task-specific permissions:
 
 | Permission                     | Description                          |
 | ------------------------------ | ------------------------------------ |
@@ -68,17 +68,17 @@ All users are allowed to rotate pages. Rotation are automatically save to be acc
 | `DELETE_CONTENT`               | Delete attachments                   |
 | `READ_CONTENT`                 | View attachments                     |
 
-## Virtual folder-specific permissions:
+### Virtual folder-specific permissions:
 
 | Permission         | Description                                       |
 | ------------------ | ------------------------------------------------- |
 | `DOWNLOAD_CONTENT` | Access to zip export including folder's documents |
 
-# Identities
+## Identities
 
 For FlowerDocs, an identity is either a user, a group or a team. The team concept has been introduced to centralise and pool the management of authorisations common to one or more identities.
 
-# ACL Proxy
+## ACL Proxy
 
 This feature is in beta. For any integration requirements using ACl's proxies, please contact the FlowerDocs team to help you find the best solution for your needs.
 
@@ -112,11 +112,11 @@ For an `Invoice` document class, the following proxy could be used:
                              |____1:1_______| * aclId : Id
 ```
 
-## Default setting
+### Default setting
 
 Defining an unconditional entry in a proxy allows you to define which ACL should be evaluated to create a component from **FlowerDocs GUI**.
 
-# Roles
+## Roles
 
 Roles give access to FlowerDocs features through the team concept.
 

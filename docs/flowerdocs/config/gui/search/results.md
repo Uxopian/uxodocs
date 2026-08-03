@@ -9,7 +9,7 @@ last_update:
 content_hash: ee7a1c3e9b1230707a64449492e33a44fe99974f52c57dacbe87bc307002167c
 ---
 
-# Hiding columns
+## Hiding columns
 
 Hide columns in the results table with the ``hiddenColumns`` property:
 
@@ -25,7 +25,7 @@ Hide columns in the results table with the ``hiddenColumns`` property:
 
 
 
-# Display modes
+## Display modes
 
 FlowerDocs supports two display modes for search results:
 
@@ -40,7 +40,7 @@ The data shown in card (thumbnail) mode is configured independently from the col
 
 Three configurations are possible depending on whether you want to offer a choice to the user or force a specific mode.
 
-## Tabular and thumbnails (switcher)
+### Tabular and thumbnails (switcher)
 
 Use `SwitcherSearchResponsePresenterProvider` to let the user switch between tabular and thumbnail modes.
 
@@ -95,7 +95,7 @@ To configure the card content, add the `cardPresenter` property **inside** the `
 </property>
 ```
 
-## Tabular only
+### Tabular only
 
 Use `TableSearchResponsePresenterProvider` directly to force tabular-only display. No mode switcher is shown.
 
@@ -105,7 +105,7 @@ Use `TableSearchResponsePresenterProvider` directly to force tabular-only displa
 </property>
 ```
 
-## Thumbnail only
+### Thumbnail only
 
 Use `CardSearchResponsePresenterProvider` directly to force thumbnail-only display. No mode switcher is shown. It supports the same `titleTemplate`, `headingTemplate`, and `contentTemplate` properties as described above.
 
@@ -117,6 +117,6 @@ Use `CardSearchResponsePresenterProvider` directly to force thumbnail-only displ
 </property>
 ```
 
-# Export
+## Export
 
 Search results can be exported as a CSV file. The export runs asynchronously in the background, so large result sets can be exported without a row limit.

@@ -30,14 +30,14 @@ popup = JSAPI.get()
 
 <br/>
 
-# Search configuration
+## Search configuration
 
 Once the popup has been built, you can access or modify the various parameters using the following functions:
 
 | Function                                | Description                                                                                     |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| getHiddenRequest()                      | Retrieving the hidden query from the search form                                                |
-| setHiddenRequest(SearchRequest request) | Update of the search form's hidden query                                                        |
-| getHiddenColumns()                      | Retrieving the list of hidden columns from the search form                                      |
-| setHiddenColumns(String[] columns)      | Update the list of hidden columns in the search form                                            |
-| setOpenOnCategoryClick(boolean open)    | Activate/deactivate component opening when category icon is clicked. <br/> _Enabled by default_ |
+| `getHiddenRequest()`                    | Retrieving the hidden query from the search form                                                |
+| `setHiddenRequest(SearchRequest request)` | Update of the search form's hidden query                                                        |
+| `getHiddenColumns()`                    | Retrieving the list of hidden columns from the search form                                      |
+| `setHiddenColumns(String[] columns)`    | Update the list of hidden columns in the search form                                            |
+| `setOpenOnCategoryClick(boolean open)`  | Activate/deactivate component opening when category icon is clicked. <br/> _Enabled by default_ |

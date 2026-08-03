@@ -14,7 +14,7 @@ The FlowerDocs data model allows you to define textual tags:
 - character strings `STRING`
 - text fields `TEXT`
 
-# Character strings
+## Character strings
 
 This type allows free input of a character string.
 With this type of tag, you can add a regular expression to the `pattern` attribute to validate the user's input.
@@ -33,7 +33,7 @@ With this type of tag, you can add a regular expression to the `pattern` attribu
 
 :::
 
-# Text
+## Text
 
 This type allows free input in a text zone.
 

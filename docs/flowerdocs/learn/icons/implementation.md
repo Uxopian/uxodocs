@@ -7,17 +7,17 @@ last_update:
 content_hash: 7e05864c682e1286041257f8323ed2135efc036f79f316412249b0698af35183
 ---
 
-# Goal
+## Goal
 
 For this training module, we want to add a button to the document header menu so that you can write an email to return the document.
 
-# Prerequisites
+## Prerequisites
 
 We will use FontAwesome's [envelope](https://fontawesome.com/icons/envelope-open-text?s=solid) and [pen](https://fontawesome.com/icons/pen?s=solid) icons stacked on top of each other for our action
 
-# Set up
+## Set up
 
-## Creating the stacked icon
+### Creating the stacked icon
 
 Use the following line to combine the two selected icons:
 
@@ -25,7 +25,7 @@ Use the following line to combine the two selected icons:
 stacked(fa fa-envelope-open-text,fa fa-pen)
 ```
 
-## Adding a button to the header containing our icon
+### Adding a button to the header containing our icon
 
 Create a script from the **Administration > Display > Scripts** menu and add the following content:
 
@@ -49,7 +49,7 @@ JSAPI.get().registerForComponentChange(function(componentFormAPI, component, pha
 You get a new action with an icon like this: 
 ![](/img/flowerdocs/documentation/learn/stacked-icons0.png)
 
-## Adapting the size of icons
+### Adapting the size of icons
 
 We now want to reduce the size of the pen in relation to the envelope. To do this, we are going to modify our stacked icon by specifying the size of the different icons:
 
@@ -64,7 +64,7 @@ Different sizes are provided by FontAwesome and documented [here](https://fontaw
 All we need to do now is position the pen in the top right-hand corner.
 ![](/img/flowerdocs/documentation/learn/stacked-icons1.png)
 
-## Relative positioning of icons
+### Relative positioning of icons
 
 We are going to add a detail to our stacked icon concerning the positioning of the pen:
 
@@ -75,7 +75,7 @@ stacked(fa fa-envelope-open-text fa-lg,fa fa-pen fa-sm align-text-top ml-0.5)
 We obtain the expected result:
 ![](/img/flowerdocs/documentation/learn/stacked-icons2.png)
 
-## Bonus: a touch of color
+### Bonus: a touch of color
 
 Different colours can be set for each icon:
 

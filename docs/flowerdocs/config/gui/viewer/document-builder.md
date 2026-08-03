@@ -9,7 +9,7 @@ last_update:
 content_hash: 07257411fb11b61e53f2f43ca0ef57b366cc494338c08eb904cd87926cfa3a7b
 ---
 
-# Principle
+## Principle
 
 FlowerDocs, through <a href='https://docs.arender.io/features/documentbuilder/'>the ARender viewer</a>, offers a document composition function that allows users to <b>redefine document content</b> : <br/><br/>
 

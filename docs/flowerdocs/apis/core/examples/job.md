@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The job management service allows monitoring and managing background processing jobs (waiting, processing, errors).
 
-# List waiting jobs
+## List waiting jobs
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -29,7 +29,7 @@ curl -X GET "<CORE_HOST>/rest/jobs/waiting" \
   </TabItem>
 </Tabs>
 
-## Count waiting jobs
+### Count waiting jobs
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -44,7 +44,7 @@ curl -X GET "<CORE_HOST>/rest/jobs/waiting/count" \
   </TabItem>
 </Tabs>
 
-# List processing jobs
+## List processing jobs
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -59,7 +59,7 @@ curl -X GET "<CORE_HOST>/rest/jobs/processing" \
   </TabItem>
 </Tabs>
 
-## Count processing jobs
+### Count processing jobs
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -74,7 +74,7 @@ curl -X GET "<CORE_HOST>/rest/jobs/processing/count" \
   </TabItem>
 </Tabs>
 
-# List error jobs
+## List error jobs
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -89,7 +89,7 @@ curl -X GET "<CORE_HOST>/rest/jobs/errors" \
   </TabItem>
 </Tabs>
 
-## Count error jobs
+### Count error jobs
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -104,7 +104,7 @@ curl -X GET "<CORE_HOST>/rest/jobs/errors/count" \
   </TabItem>
 </Tabs>
 
-# Retry a job
+## Retry a job
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -120,7 +120,7 @@ curl -X POST "<CORE_HOST>/rest/jobs/retry/<ID>" \
   </TabItem>
 </Tabs>
 
-# Clear error queue
+## Clear error queue
 
 :::warning
 This operation permanently removes all jobs in the error queue. This action cannot be undone.

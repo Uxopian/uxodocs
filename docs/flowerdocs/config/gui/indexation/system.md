@@ -9,7 +9,7 @@ last_update:
 content_hash: 8d3b4ddc60f9bebdf1fdaaaa20967daa4836f1273e1a9ce1377d0bd609c61b05
 ---
 
-# System metadata
+## System metadata
 
 :::info
 System metadata is the metadata natively present on all components (name, class, creation date, etc.).
@@ -27,7 +27,7 @@ These associations must be added to the following object:
 </bean>
 ```
 
-## Field definition
+### Field definition
 
 To define a configuration, you need to create a new `ComponentPropertiesConfiguration` bean and assign it field definitions (`FieldDefinition`) to define a particular metadata.
 
@@ -73,7 +73,7 @@ They can also be set manually:
 </bean>
 ```
 
-## Configuration
+### Configuration
 
 In order to associate field definitions with a context, they must be grouped together in a `ComponentPropertiesConfiguration` object:
 

@@ -7,7 +7,7 @@ last_update:
 content_hash: 7597bb1d0d6070b24f01cc31e71d2f5ac2856c25c43a23fe81483f3480e21ab5
 ---
 
-# Visual change
+## Visual change
 
 To meet [RGAA] requirements (https://design.numerique.gouv.fr/accessibilite-numerique/rgaa/), the colors of the FlowerDocs interface have changed.
 

@@ -13,7 +13,7 @@ content_hash: b39bed82f4e7843a854baa0607c4b162b517a369bbcd64254394ebc94c19df8d
 Each component category has its own icon in **FlowerDocs GUI**. For tasks, the icon can be defined by class, to provide a different icon for each user step.
 :::
 
-# Icon Resolver
+## Icon Resolver
 
 In certain situations, it may be necessary to define an icon based on a component's tags.
 To do this, you can define an _Icon Resolver_ to define the icon to be applied to a component.
@@ -21,7 +21,7 @@ _multiple Icon Resolvers can be defined, in which case the first one to respond 
 
 _Icon Resolvers_ are used to resolve a component's icon when it is displayed in **FlowerDocs GUI**.
 
-# Recording
+## Recording
 
 An _Icon Resolver_ can be registered using the function `registerComponentIconResolver(resolver,tags)` exposed by `JSAPI.get().getHelperFactory()`.
 The `resolver` parameter corresponds to a function accepting two parameters:

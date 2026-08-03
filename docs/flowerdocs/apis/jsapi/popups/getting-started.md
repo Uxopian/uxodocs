@@ -33,18 +33,18 @@ The following functions are available to modify the various common attributes of
 
 | Function                                      | Description                                                       |
 | --------------------------------------------- | ----------------------------------------------------------------- |
-| setIcon(String iconStyle)                     | Popup icon definition                                             |
-| setTitle(String title)                        | Popup Title definition                                            |
-| setDescription(String description)            | Popup description definition                                      |
-| addStyle(String style)                        | Adding a style to the popup                                       |
-| setContent(Element content)                   | Overwrites existing popup body content                            |
-| addContent(Element element)                   | Adding an element to the popup body                               |
-| clearContent()                                | Overwrites popup body content                                     |
-| setClosable()                                 | Enables the possibility of closing the popup with the popup cross |
-| addCloseHandler(CloseCallback callback)       | Add a callback on popup closure                                   |
-| show()                                        | Popup opening                                                     |
-| close()                                       | Popup closing                                                     |
-| setAutoCloseOnEnter(boolean autoCloseOnEnter) | Popup closing by pressing Enter                                   |
+| `setIcon(String iconStyle)`                   | Popup icon definition                                             |
+| `setTitle(String title)`                      | Popup Title definition                                            |
+| `setDescription(String description)`          | Popup description definition                                      |
+| `addStyle(String style)`                      | Adding a style to the popup                                       |
+| `setContent(Element content)`                 | Overwrites existing popup body content                            |
+| `addContent(Element element)`                 | Adding an element to the popup body                               |
+| `clearContent()`                              | Overwrites popup body content                                     |
+| `setClosable()`                               | Enables the possibility of closing the popup with the popup cross |
+| `addCloseHandler(CloseCallback callback)`     | Add a callback on popup closure                                   |
+| `show()`                                      | Popup opening                                                     |
+| `close()`                                     | Popup closing                                                     |
+| `setAutoCloseOnEnter(boolean autoCloseOnEnter)` | Popup closing by pressing Enter                                   |
 
 <!---
  |setScrollable()                                        | Activates scroll on popup body                                      |

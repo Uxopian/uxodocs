@@ -16,12 +16,12 @@ In the rest of this page, `${APP_HOME}` corresponds to the folder in which each 
 
 <br/>
  
-# **FlowerDocs GUI**
+## **FlowerDocs GUI**
 
 - After completing the downloads mentioned in the prerequisites, place the `flower-docs-gui-webapp-{{version}}.jar` application in the `${APP_HOME}` folder.
 - Add the `gui.properties` configuration file to `${APP_HOME}`.
 
-# **ARender HMI**
+## **ARender HMI**
 
 - After completing the downloads mentioned in the prerequisites, place the `arondor-arender-hmi-spring-boot-{{arenderVersion}}.jar` application in the `${APP_HOME}` folder.
 - Create the folders `${APP_HOME}/configurations` and `${APP_HOME}/lib`.
@@ -32,7 +32,7 @@ For high availability, it is necessary to activate session affinity on each HMI.
 
 Please note that Hazelcast in ARenderHMI with FlowerDocs is not functional and should not be activated.
 
-# **FlowerDocs Core**
+## **FlowerDocs Core**
 
 - After completing the downloads mentioned in the prerequisites, place the `flower-docs-core-webapp-{{version}}.jar` application in the `${APP_HOME}` folder.
 - Add the `core.properties` configuration file to `${APP_HOME}`.

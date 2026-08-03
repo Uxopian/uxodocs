@@ -12,7 +12,7 @@ content_hash: 5049aef733894f10d7757ca5897e0d09d273093471af1d50310f051d221cfdeb
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Principle
+## Principle
 
 Attachment plugins allow an action to be added to the configured attachment insert. This action allows to attach a component to the task, enabling it to be viewed in the viewer.
 
@@ -47,7 +47,7 @@ The following options are common to the various attachment plugins:
 | `postProcessor` | Function | Function called after attaching the attachment                                      |
 | `canAttach`     | Function | Function defining when the action must be present                                   |
 
-# SearchAttachmentPlugin
+## SearchAttachmentPlugin
 
 The plugin `SearchAttachmentPlugin` adds a search action to an attachment insert. This action opens a popup allowing you to select, from the results of a search, a component to be added as a task attachment.
 
@@ -93,7 +93,7 @@ new SearchAttachmentPlugin({
   </TabItem>
 </Tabs>
 
-# TemplateAttachmentPlugin
+## TemplateAttachmentPlugin
 
 The plugin `TemplateAttachmentPlugin` adds an action for attaching a document generated from a Microsft Word template. By default, the plugin opens the template in FlowerDocs Companion, if installed on the user workstation. If this is not the case, or if download mode is enabled, then the generated document is downloaded.
 
@@ -102,7 +102,7 @@ The plugin `TemplateAttachmentPlugin` adds an action for attaching a document ge
 | `downloadMode` | Boolean  | Indicates whether the created document should be downloaded |
 | `instanciator` | Function | Function for programmatically indexing the component        |
 
-# MetadataVisualizationAttachmentPlugin
+## MetadataVisualizationAttachmentPlugin
 
 This plugin allows you to view the data in the attachment without changing its location. The data to be visualized is opened in an OffMenu.
 

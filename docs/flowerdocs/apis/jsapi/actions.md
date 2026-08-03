@@ -14,7 +14,7 @@ Several types of actions are available:
 - Icon: based on the icon font supported by FlowerDocs [Font Awesome 6.5.2](https://fontawesome.com/icons?d=gallery&m=free)
 - DOM: HTML element
 
-# Actions’ container
+## Actions’ container
 
 Actions are grouped into actions’ containers from which the actions can be accessed to.
 To access an action, it is therefore necessary to identify which container is concerned.
@@ -31,7 +31,7 @@ console.log("Container actions: " + container.getIds());
 
 All FlowerDocs actions’ containers are accessible via the API JS. This allows them to be manipulated. For example, you can add, delete, deactivate, hide or modify actions in this container.
 
-## In a form
+### In a form
 
 The object `componentFormAPI.getActions()` is used to interact with the actions of a form presenting a document, folder...
 
@@ -39,11 +39,11 @@ Several functions are available for this purpose:
 
 | Function           | Description                                                         |
 | ------------------ | ------------------------------------------------------------------- |
-| getHeaderActions() | Retrieves action container from header                              |
-| getTaskActions()   | Retrieves action container for task creation                        |
-| getFooterActions() | Retrieves the footer action container (validation, cancellation...) |
+| `getHeaderActions()` | Retrieves action container from header                              |
+| `getTaskActions()`   | Retrieves action container for task creation                        |
+| `getFooterActions()` | Retrieves the footer action container (validation, cancellation...) |
 
-## Go to an action
+### Go to an action
 
 From an action container `container`, there are several ways to access an action.
 
@@ -63,24 +63,24 @@ container.registerForAdd(function (action) {});
 Any customization of existing actions must be carried out in the `registerForAdd` to ensure that the action is loaded onto the form.
 :::
 
-# Actions
+## Actions
 
-## Available functions
+### Available functions
 
 Once an action has been retrieved, you can interact with it using the functions provided:
 
 | Functions                              | Description                                       |
 | -------------------------------------- | ------------------------------------------------- |
-| setEnabled(boolean enabled)            | Activates or deactivates the action               |
-| isEnabled()                            | Determines whether the action is activated or not |
-| setTemporaryDisabled(boolean disabled) | Temporarily disables an action (for buttons only) |
-| getId()                                | Retrieves action identifier                       |
-| execute()                              | Executes action programmatically                  |
+| `setEnabled(boolean enabled)`            | Activates or deactivates the action               |
+| `isEnabled()`                            | Determines whether the action is activated or not |
+| `setTemporaryDisabled(boolean disabled)` | Temporarily disables an action (for buttons only) |
+| `getId()`                                | Retrieves action identifier                       |
+| `execute()`                              | Executes action programmatically                  |
 
 <!---
-|getStyle()                                  | Retrieves the action’s styles (HTML attribute ``class``)                       |
-|setStyle(String style)                      | Defines action style                                                   		  |
-|addStyle(String style)                      | Adds style to the action                                                       |
+|`getStyle()`                                  | Retrieves the action’s styles (HTML attribute ``class``)                       |
+|`setStyle(String style)`                      | Defines action style                                                   		  |
+|`addStyle(String style)`                      | Adds style to the action                                                       |
 -->
 
 **Example:** Disabling the action `Cancel` of a component
@@ -93,7 +93,7 @@ formAPI.getActions().getFooterActions().registerForAdd(function(action){
 });
 ```
 
-## Interactions with component actions
+### Interactions with component actions
 
 The execution of an action can be reacted at within a component indexing form.
 
@@ -159,11 +159,11 @@ actions.registerForActionConfirmation("footer", “Refuse", function(value, exec
 });
 ```
 
-# Build an action
+## Build an action
 
 Customized actions can be created thanks to API `ActionFactoryAPI`
 
-## Button action
+### Button action
 
 Two types of button action can be created:
 
@@ -193,7 +193,7 @@ JSAPI.get().registerForFolderChildrenLoaded(function(api, phase, component) {
 });
 ```
 
-## Icon action
+### Icon action
 
 This type of action is based on the FontAwesome font, offering a wide choice of icons through CSS styles.
 
@@ -211,7 +211,7 @@ cardAPI.registerForAttachment(function(card, task, definition, component){
 });
 ```
 
-## Menu action
+### Menu action
 
 This type of action is based on the FontAwesome font, offering a wide choice of icons through CSS styles and a label.
 
@@ -226,7 +226,7 @@ var action = actionAPI.buildMenu("myAction", “My menu", "fa fa-user", function
 actionSet.add(action)
 ```
 
-## Responsive action
+### Responsive action
 
 This type of action combines both an icon-type action and a menu-type action.
 
@@ -266,7 +266,7 @@ JSAPI.get().registerForComponentChange( function(formAPI, component, phase) {
 
 **Note:** _this type of action can only be used for `headerActions` of a component indexing form._
 
-## DOM action
+### DOM action
 
 This fifth type of action also has the `name` and `label` properties. The last property is a DOM element `element`.
 It is possible to interact with this DOM element using classic DOM events such as _onclick_, _onmouseover_, ...

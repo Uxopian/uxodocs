@@ -11,12 +11,12 @@ content_hash: 3c6d9826daf3cc3e08972f134089252f35b7d4ffa3dcfae19d7b43401dce8f87
 
 The FlowerDocs data model allows you to define tags of type `DATE`.
 
-# Stored value
+## Stored value
 
 The stored value of a `DATE` tag is the timestamp associated with the date.
 This timestamp corresponds to the number of milliseconds elapsed since 1st January 1970 UTC. In the case of a date prior to this reference date, the number of milliseconds is negative.
 
-# Display format
+## Display format
 
 Although the value of a `DATE` tag is stored as a timestamp, it can be displayed in different ways.
 

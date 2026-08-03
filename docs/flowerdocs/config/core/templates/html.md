@@ -10,7 +10,7 @@ last_update:
 content_hash: 153284d501568820c7e97be52255cece0faff3e95b7cb16408cee2b8ed980c25
 ---
 
-# Principle
+## Principle
 
 An HTML template is a document with an HTML file. This file is used by the [Thymeleaf] template engine (https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html) to generate a new HTML file from a set of variables (or context).
 It allows you to generate documents based on the same template, using HTML.
@@ -21,11 +21,11 @@ Use these HTML templates to:
 - Add [private or public pages](/docs/flowerdocs/config/core/pages)
   :::
 
-# Syntax
+## Syntax
 
 _This section does not cover all the possibilities offered by the [Thymeleaf] engine (https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)#using-texts) but is intended to provide an initial overview._
 
-## Texts
+### Texts
 
 The `th:text` attribute defines the textual value of an HTML tag. It can thus be used with a context variable to display its value:
 
@@ -37,7 +37,7 @@ When the HTML file is generated, the text of the `span` tag is replaced by that 
 
 With the `th:text` attribute, the generated text is escaped. If variables contain HTML (e.g. for hypertext links), it is necessary to use the `th:utext` attribute, which does not escape the generated text.
 
-## Conditions
+### Conditions
 
 The `th:if` attribute conditions the addition of the tag to which it is added. This attribute can be used, for example, to define conditional text blocks:
 
@@ -45,7 +45,7 @@ The `th:if` attribute conditions the addition of the tag to which it is added. T
 <p th:if="${customerAge > 18}">...</p>
 ```
 
-# Configuration
+## Configuration
 
 These templates can be defined directly from the admin console in the `Templates > HTML` section.
 They are stored as `Template` class technical documents with the `TemplateType` tag whose value is `HTML`.

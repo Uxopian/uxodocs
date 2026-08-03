@@ -12,7 +12,7 @@ content_hash: 42fbfb1be27a92a3dac2c1f529c32ce8f405ddef5ffe2aa803a71c21f3d550cb
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Handling attachments
+## Handling attachments
 
 To contextualize task processing, components can be attached to a task. This is the notion of an attachment.
 Task attachments can be manipulated using the JS API.
@@ -49,7 +49,7 @@ Based on the same principle, the following function retrieves existing attachmen
 
 - `getAttachmentIds(attachmentId)` to retrieve the component identifiers linked to this attachment.
 
-# Responding to tasks
+## Responding to tasks
 
 The notion of task responses enables users to make decisions about task processing.
 For each decision taken, a specific behavior can thus be added to take account of this decision and apply the appropriate treatment.
@@ -72,9 +72,9 @@ taskAPI.answer([id], new Answer("Validate"), function () {
   </TabItem>
 </Tabs>
 
-# How to assign tasks
+## How to assign tasks
 
-## Assigning tasks
+### Assigning tasks
 
 A task must be assigned to a user in order to be processed. FlowerDocs provides several assignment mechanisms, including the JS API.
 The `assign(ids, userId)` function lets you assign one or more tasks to a user using :
@@ -98,7 +98,7 @@ JSAPI.get()
 
 The user to whom a task is assigned can be retrieved using the `getAssignee()` function exposed on the `Task` object.
 
-## Responding to an assignment
+### Responding to an assignment
 
 Assigning a task to a user may in some cases require actions to be taken in the graphical user interface.
 To achieve this, the JS API provides hooks that allow you to react to the launch of the assignment process with a native GUI action:
@@ -175,11 +175,11 @@ JSAPI.get()
   </TabItem>
 </Tabs>
 
-# Process information
+## Process information
 
 | Functions                          | Description                                    |
 | ---------------------------------- | ---------------------------------------------- |
-| getWorkflow()                      | Determine task processing identifier           |
-| setWorkflow(String workflow)       | Define task processing identifier              |
-| getParticipants()                  | Identify the identities involved in processing |
-| addParticipant(String participant) | Adding a participant to a task                 |
+| `getWorkflow()`                    | Determine task processing identifier           |
+| `setWorkflow(String workflow)`     | Define task processing identifier              |
+| `getParticipants()`                | Identify the identities involved in processing |
+| `addParticipant(String participant)` | Adding a participant to a task                 |

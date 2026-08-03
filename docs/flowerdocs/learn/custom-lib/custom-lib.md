@@ -11,15 +11,15 @@ content_hash: 7f17ab5bc7a278778543d95fc5b3ac78a51b88985f236156b7573f5e0fe18983
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Goal
+## Goal
 
 In this module, we will develop a Java library enabling us to override a native **FlowerDocs Core** behavior: user token generation during authentication.
 
 In fact, we are going to add to each user token a custom attribute named `custom`.
 
-# Library development
+## Library development
 
-## Maven project
+### Maven project
 
 To start developing the custom library, first open your favorite IDE, then create a new Maven project from the following POM.
 In this module, we will need the following two dependencies:
@@ -56,7 +56,7 @@ In this module, we will need the following two dependencies:
 </Tabs>
 
 
-## Token generator
+### Token generator
 
 In this module, we want to add a `custom` attribute to users authenticating to FlowerDocs.
 To do this, we will override the `JWTTokenHelper` token generator used by **FlowerDocs Core** by default.
@@ -87,7 +87,7 @@ public class CustomTokenHelper extends JWTTokenHelper
   </TabItem>
 </Tabs>
 
-## Auto-configuration
+### Auto-configuration
 
 In order for the library to define the previously added token generator, we are going to use Spring Boot's [Auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-auto-configuration) mechanism.
 Our configuration class will automatically instantiate a `CustomTokenHelper` object and supply it to the Spring Beans context.
@@ -131,25 +131,25 @@ com.flower.samples.SampleLibAutoConfiguration
   </TabItem>
 </Tabs>
 
-## Compilation
+### Compilation
 
 To compile the library, use your IDE with the `clean` and `install` goals or run the `mvn clean install` command at the root of your project.
 
-# Modification of the classpath
+## Modification of the classpath
 
-## Linux service
+### Linux service
 
 When the Core is started as a Linux service (as shown [here](/docs/flowerdocs/install/start) ), the `libs` folder is added to the JVM classpath launched by the service.
 All JARs included in this directory will be added to the JVM classpath.
 
 All you need to do is copy the library into this directory with the same user as the one with whom the service is launched (or who has read rights on the file).
 
-## Standalone JAR
+### Standalone JAR
 
 When the Core is started with `java -jar`, the custom library must be manually added to the JVM classpath.
 To do this, use the `-cp` parameter.
 
-# Test
+## Test
 
 - Generate a token (e.g. using Swagger `/core/swagger-ui/index.html`) using the:
     - Scope

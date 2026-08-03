@@ -14,11 +14,11 @@ import TabItem from '@theme/TabItem';
 
 The `Delegations` service exhibits all available operations around delegations.
 
-# Retrieving delegations
+## Retrieving delegations
 
 The examples below show how to retrieve delegations using the various `get` operations:
 
-## Retrieval by identifier
+### Retrieval by identifier
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -49,7 +49,7 @@ public List<Delegation> getDelegation() throws TechnicalException, FunctionalExc
   </TabItem>
 </Tabs>
 
-## Retrieval by delegate
+### Retrieval by delegate
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -80,7 +80,7 @@ public List<Delegation> getDelegationByDelegate() throws TechnicalException, Fun
   </TabItem>
 </Tabs>
 
-## Retrieval by delegator
+### Retrieval by delegator
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -111,7 +111,7 @@ public List<Delegation> getDelegationByDelegator() throws TechnicalException, Fu
   </TabItem>
 </Tabs>
 
-# Creating delegations
+## Creating delegations
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -167,7 +167,7 @@ public List<Delegation> createDelegation() throws TechnicalException, Functional
   </TabItem>
 </Tabs>
 
-# Updating delegations
+## Updating delegations
 
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -221,7 +221,7 @@ public List<Delegation> updateDelegation(Delegation del) throws TechnicalExcepti
 When using the REST service, unset fields will be cleared: you must send the entire delegation object, not just the fields to modify.
 :::
 
-# Deleting delegations
+## Deleting delegations
 
 <Tabs>
   <TabItem value="rest" label="REST">

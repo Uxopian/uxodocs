@@ -22,7 +22,7 @@ For integration with larger volumes, please contact the FlowerDocs team.
 Also, FlowerDocs only displays a maximum of 100 items in the list, even if it contains more.
 Simply refine the selection to display items not displayed by default.
 
-# List of choices
+## List of choices
 
 A choice list tag allows you to restrict the possible values of a tag to defined choices.
 
@@ -49,7 +49,7 @@ A choice list tag allows you to restrict the possible values of a tag to defined
 
 :::
 
-# Icon list
+## Icon list
 
 An icon list tag is an extension of a list of choices for which an icon can be defined.
 
@@ -77,7 +77,7 @@ This icon must be defined with the appropriate CSS class using the library avail
 
 If two icons are to be placed side by side, an icon of the following type can be used: `stacked(fas fa-exclamation red,fas fa-flag red)`.
 
-# Free list
+## Free list
 
 A free list tag is an extension of a choice list without validation. This type of list can be used to value a tag with values that are not known to FlowerDocs.
 

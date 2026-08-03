@@ -11,13 +11,13 @@ content_hash: 282aee6a4206ffe08b92b2b74617fac2632db0f75a0893f62a69b15aa5af92cd
 
 This section describes how to configure the download of search results in CSV format.
 
-# Presentation
+## Presentation
 
 Users can download this list in CSV format from the search results. All tags used for the search, including technical tags that are not visible, are exported to the file.
 
 For `USER` tags, the user identifiers are exported.
 
-# Configuration
+## Configuration
 
 The following configurations are possible and can be set in the `core.properties` file:
 

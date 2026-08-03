@@ -8,17 +8,17 @@ last_update:
 content_hash: df12171bb38862d9e70b85175212fd6dda4ad82acf1d51fc3a6b86929cdbafe6
 ---
 
-# Goal
+## Goal
 
 This section explains how to configure the plugin and implement it on a scope integrating the GEC module.  
 We want to apply it to the `Response` attachment of the `GEC_Step2_ToBeProcessed` tasks. Here we want a new document to be created directly from a Word template and associated with the `Response` attachment.
 
-# Prerequisites
+## Prerequisites
 
 You need a FlowerDocs environment with a scope that includes the GEC module.  
 Check that `TemplateAttachmentPlugin` is present on the scope. It can be found in the administration, in the **Display > Scripts**tab.
 
-# Configuration
+## Configuration
 
 The plugin must be configured for a specific element before it can be used.
 To do this, follow these steps:

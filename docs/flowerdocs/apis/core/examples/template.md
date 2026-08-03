@@ -12,12 +12,12 @@ content_hash: dbc7a8825bb7e8653913361cbe78ea62855cb577ca9de64b798930bc2197b964
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# HTML template
+## HTML template
 The `HTML` service shows the following operation:
 
 * `getProcessedTemplate`: to download an enriched template with tag values
 
-## Model
+### Model
 The template used by the `getProcessedTemplate` call looks like this:
 ```json
 {
@@ -26,10 +26,10 @@ The template used by the `getProcessedTemplate` call looks like this:
 ```
 This is a set of key/value pairs, the tag identifier and its value.
 
-## Reply
+### Reply
 The reply is a text composed of the HTML template, with the tag identifiers replaced by their values.
 
-## Example
+### Example
 The examples below show how to obtain an HTML template by enriching it with tag values.
 
 <Tabs>
@@ -90,13 +90,13 @@ private Map<String, Object> createTagMap()
 </Tabs>
 
 
-# MS Word template
+## MS Word template
 The `MSOffice` service shows the following operations:
 
 * `downloadFromTags`: to download a template enriched with tag values
 * `storeFromTags`: to create a temporary file in FLowerDocs from an enriched template
 
-## Model
+### Model
 The model used by the `downloadFromTags` and `storeFromTags` calls looks like this:
 ```json
 [
@@ -115,11 +115,11 @@ Here is the description associated with the call data set:
 * `readOnly` :
 * `value`: list of tag values
 
-## Reply
+### Reply
 The `downloadFromTags` call returns the file in docx format with the replaced tag values.
 The `storeFromTags` call returns the identifier of the temporary file created in FlowerDocs. This identifier can then be used to create a document.
 
-## Examples - Download
+### Examples - Download
 The examples below show how to download an MSWord template and enrich it with tag values.
 
 <Tabs>
@@ -201,7 +201,7 @@ private String determineName(List<Tag> tags, InMemoryFile generated)
   </TabItem>
 </Tabs>
 
-## Examples - Temporary file
+### Examples - Temporary file
 The examples below show how to create a temporary MSWord template file, enriching it with tag values.
 
 <Tabs>

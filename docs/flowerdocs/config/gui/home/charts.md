@@ -13,7 +13,7 @@ On the home page, graphs defined by searches can be displayed. The chart type is
 - one level of aggregation: donut
 - two levels of aggregation: histogram
 
-# Donut
+## Donut
 
 **Example: Donut of my mails according to their status**
 
@@ -121,7 +121,7 @@ To redirect the user when clicking on a series, override the `handleDonutClick(s
 
 ```
 
-# Histogram
+## Histogram
 
 With this type of graph, the first level of aggregation is used to display vertical columns. The second level defines the series.
 

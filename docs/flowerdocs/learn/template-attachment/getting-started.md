@@ -9,7 +9,7 @@ last_update:
 content_hash: 2a0d3728362e50cf258931e4043b4f51363b77ab178814f8668d2528a7882a0d
 ---
 
-# Goal
+## Goal
 
 This module explains how to configure the plugin for generating a document from a template. We will then look at how to use it to generate an attachment from a template in FlowerDocs. We will also see how this attachment can be edited directly in Word.  
 When you have finished this module, you will be able to:
@@ -17,6 +17,6 @@ When you have finished this module, you will be able to:
 - configure the creation of documents from a template,
 - use this system to create context-specific attachments.
 
-# Before getting started
+## Before getting started
 
 This tutorial requires the use of the GEC scope, as well as the FlowerDocs JavaScript API. It is based on the [TemplateAttachmentPlugin](/docs/flowerdocs/apis/plugins/attachment#TemplateAttachmentPlugin).

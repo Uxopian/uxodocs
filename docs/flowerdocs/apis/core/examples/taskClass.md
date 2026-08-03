@@ -14,9 +14,9 @@ import TabItem from '@theme/TabItem';
 
 The `TaskClassService` service exposes all operations available around `TaskClass` type components.
 
-# Retrieving task classes
+## Retrieving task classes
 
-## Retrieve all task classes
+### Retrieve all task classes
 
 The examples below show how to retrieve all task classes.
 
@@ -46,7 +46,7 @@ public List<TaskClass> getAll() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-## Retrieve a defined list of task classes
+### Retrieve a defined list of task classes
 
 The examples below show how to retrieve a list of task classes from their identifiers.
 
@@ -79,7 +79,7 @@ public List<TaskClass> getTaskClasses() throws FunctionalException, TechnicalExc
   </TabItem>
 </Tabs>
 
-# Creating task classes
+## Creating task classes
 
 The examples below show how to create a task class.
 
@@ -193,7 +193,7 @@ public void createTaskClasses() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Modifying task classes
+## Modifying task classes
 
 The examples below show how to modify a task class.
 
@@ -302,7 +302,7 @@ public List<TaskClass> updatetaskClass(TaskClass taskClass) throws FunctionalExc
 If you use the REST service, any information that has not been filled in will be emptied: you need to send the entire task class, not just the information to be modified.
 :::
 
-# Deleting task classes
+## Deleting task classes
 
 The examples below show how to delete a list of task classes.
 

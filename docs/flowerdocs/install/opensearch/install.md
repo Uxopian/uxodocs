@@ -11,13 +11,13 @@ content_hash: 2e44dff4bfd6439bcd6f6b918eba0fa64a007e74ad929dc3b75cc75ce7245350
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# OpenSearch installation
+## OpenSearch installation
 
-## Installation procedure
+### Installation procedure
 
 There are several ways to install OpenSearch, explained step by step in the [official documentation](https://docs.opensearch.org/3.6/install-and-configure/install-opensearch/index/).
 
-## Configuration
+### Configuration
 
 To configure your OpenSearch instance, edit the `${OPENSEARCH_HOME}/config/opensearch.yml` file as follows:
 
@@ -32,7 +32,7 @@ To configure your OpenSearch instance, edit the `${OPENSEARCH_HOME}/config/opens
 
 <br/>
 
-### Security
+#### Security
 
 OpenSearch internal users are defined in the ``${OPENSEARCH_HOME}/plugins/opensearch-security/securityconfig/internal_users.yml`` file.
 
@@ -47,13 +47,13 @@ To change a user's password:
 <br/>
 For more information on securing an OpenSearch instance, official documentation is available [here](https://docs.opensearch.org/3.6/security/).
 
-### Start
+#### Start
 
-#### Manuel
+##### Manuel
 
 Finally, start OpenSearch by going to the ``${OPENSEARCH_HOME}/bin`` folder and running the `opensearch` script.
 
-#### Service
+##### Service
 
 To install OpenSearch as a `systemd` service, the following file must be created in the /etc/systemd/system directory as follows:
 
@@ -126,6 +126,6 @@ systemctl enable opensearch.service
 </Tabs>
 
 
-### Validation
+#### Validation
 
 To check that OpenSearch is working properly, go to http://localhost:9200/.

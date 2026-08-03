@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The `TagClassService` service exposes all the operations available around `TagClass` type components.
 
-# Retrieving tag classes
+## Retrieving tag classes
 
 The examples below show how to retrieve all tag classes.
 
@@ -44,7 +44,7 @@ public List<TagClass> getAll() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Tag class creation
+## Tag class creation
 
 The examples below show how to create a tag class.
 
@@ -111,7 +111,7 @@ public List<TagClass> create() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Modifying tag classes
+## Modifying tag classes
 
 This operation updates the data of a tag class
 
@@ -176,7 +176,7 @@ public List<TagClass> update(TagClass tc) throws FunctionalException, TechnicalE
   </TabItem>
 </Tabs>
 
-# Tag class search
+## Tag class search
 
 The example below shows how to retrieve a tag class from a list of identifiers.
 
@@ -208,7 +208,7 @@ public List<TagClass> get() throws FunctionalException, TechnicalException
   </TabItem>
 </Tabs>
 
-# Tag class deletion
+## Tag class deletion
 
 This operation deletes a list of tag classes from a list of identifiers.
 

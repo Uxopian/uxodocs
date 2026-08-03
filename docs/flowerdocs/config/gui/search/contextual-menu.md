@@ -17,7 +17,7 @@ These actions are also added to the header of the search results table.
 
 To disable a native action, you can add the `menu.contextual.${category}.hidden.actions` property where `${category}` is the component category concerned. If you want to disable the `Download` action in the default document contextual menu, add the `menu.contextual.document.hidden.actions=DOWNLOAD_CONTENT` property.
 
-# Determining the Spring bean identifier
+## Determining the Spring bean identifier
 
 To further customize the contextual menu, you can define the actions it contains.
 
@@ -32,7 +32,7 @@ Here are some examples of keys to use depending on the context:
 - `contextualMenuDefaultsearchDocument`: to define the contextual menu of a specific `DefaultSearch` search form
 - `contextualMenuDossierAgentDocument`: to define the context menu for documents contained in an `agentfolder` virtual folder
 
-# Determining the Spring bean identifier
+## Determining the Spring bean identifier
 
 Depending on the component category, use the Java class indicated:
 
@@ -49,7 +49,7 @@ class="com.flower.docs.gui.client.search.document.DocumentContextualMenuPresente
 </bean>
 ```
 
-# Defining customized actions
+## Defining customized actions
 
 To define actions, it is necessary to:
 

@@ -9,7 +9,7 @@ last_update:
 content_hash: 5d7ae8be6367cc78fe8fddd5fd2fc804b2763b949b333d7a8813bcccc38e3948
 ---
 
-# Principle
+## Principle
 
 A `RestOperationHandler` is an operation manager exposed as a REST service. A `RestOperationHandler` makes it possible to react to operations carried out on components from a remote WEB service.
 
@@ -25,16 +25,16 @@ It can be developed in any language that can be used to expose WEB services.
 
 The body of requests sent to these endpoints contains an object describing the execution context of the operation, and therefore differs depending on the operation.
 
-# Configuring an RestOperationHandler
+## Configuring an RestOperationHandler
 
 A `RestOperationHandler` can be configured in the same way as a conventional `OperationHandler`. Its name corresponds to the URL used to access the endpoints listed above.
 From the configured URL, it should be possible to send a POST to `{{RestOperationHandler URL}}/{{scope}}/documents/`.
 
-# Security
+## Security
 
 Two authentication modes are available to secure a `RestOperationHandler`. They are configured directly in the operation subscription.
 
-## Authorization mode
+### Authorization mode
 
 FlowerDocs sends a static character string in the `Authorization` HTTP header with each POST request to the RestOperationHandler, which is responsible for validating this header.
 
@@ -44,7 +44,7 @@ Typically, BASIC authentication can be used. The authorization string can be gen
 Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 ```
 
-## InjectToken mode
+### InjectToken mode
 
 When `InjectToken` is set to `true` in the subscription, FlowerDocs dynamically generates a JWT token representing the **current user** who triggered the operation, and sends it in the `token` HTTP header:
 
@@ -66,7 +66,7 @@ public class MyRestOperationHandlerApplication { ... }
 If both `InjectToken` and `Authorization` are configured on the same subscription, `InjectToken` takes precedence. If neither is configured, no authentication header is sent.
 :::
 
-# Error management
+## Error management
 
 By default, when running a `RestOperationHandler`, **FlowerDocs Core** logs errors returned by the REST service by parsing the body of the HTTP response.
 

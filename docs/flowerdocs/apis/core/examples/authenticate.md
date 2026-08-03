@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 The `authentication` service generates a user token for a given scope.
 
-# Example
+## Example
 The example below shows how to generate a user token.
 <Tabs>
   <TabItem value="authentication___rest" label="Authentication - REST">

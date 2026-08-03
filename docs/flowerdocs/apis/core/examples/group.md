@@ -20,8 +20,8 @@ The `GroupService` service exposes the following operations:
 * `search`: to search for groups
 * `delete`: to delete a group
 
-# Retrieving groups
-## Model
+## Retrieving groups
+### Model
 The parameters to be entered are:
 
 |Name|Description|
@@ -29,7 +29,7 @@ The parameters to be entered are:
 |`names`|Unique identifiers of groups to be retrieved (separated by commas)|
 |`resolveAuthorities`|Determines whether profiles and groups are to be resolved|
 
-## Example
+### Example
 The example below shows how to retrieve groups.
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -61,11 +61,11 @@ public List<Group> get() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Searching for groups
-## Model
+## Searching for groups
+### Model
 The parameter to be entered is `name`, and corresponds to the searched value. The search can be based on the group name, either fully or partially filled in.
 
-## Example
+### Example
 The example below shows how to search for groups.
 <Tabs>
   <TabItem value="rest" label="REST">
@@ -95,8 +95,8 @@ public List<Group> search() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Creating and modifying a group
-## Model
+## Creating and modifying a group
+### Model
 The model used by `create` and `update` calls looks like this:
 ```json
 {
@@ -130,7 +130,7 @@ Here is the description associated with the call data set:
 * `members`: list of user identifiers belonging to this group
 * `attributes`: list of additional attributes
 
-## Example
+### Example
 The examples below show how to create and modify a group.
 <Tabs>
   <TabItem value="create - rest" label="Create - REST">
@@ -215,11 +215,11 @@ public void update() throws TechnicalException, FunctionalException
   </TabItem>
 </Tabs>
 
-# Deleting a group
-## Model
+## Deleting a group
+### Model
 The parameter to be entered is `name`, the unique identifier of the group to be deleted.
 
-## Example
+### Example
 The example below shows how to delete a group.
 <Tabs>
   <TabItem value="rest" label="REST">

@@ -10,7 +10,7 @@ last_update:
 content_hash: 7de820c4839e061ece6932908bd8d945ba8c8070904f306c8f5fe16763d6c192
 ---
 
-# Principle
+## Principle
 
 This OperationHandler relies on the [Drools](https://www.drools.org/) rules engine to execute a decision table.
 A decision table is a Microsoft Excel file with two types of columns:
@@ -22,7 +22,7 @@ For each defined rule (or line), the defined actions are executed if all conditi
 
 The decision table is stored as the content of the document used to configure subscription to the execution of an operation.
 
-# Conditions & Actions
+## Conditions & Actions
 
 The conditions and actions defined must be Java code that can be compiled within **FlowerDocs Core**'s JVM.
 To facilitate their development, an object accessible through the variable `util` is made available whose exposed methods are listed [here](/docs/flowerdocs/config/core/appendices/context-util).

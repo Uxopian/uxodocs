@@ -12,7 +12,7 @@ A lookup involves retrieving data from a third-party or other repository, and bu
 
 This functionality is based on the notion of plug-ins, which can be used to execute different types of calls/queries (database, web services, etc.).
 
-# Lookup plugins
+## Lookup plugins
 
 **Example :**
 
@@ -33,11 +33,11 @@ var lookupAPI = JSAPI.get().getLookupAPI();
 lookupAPI.register("lookupId", lookupPlugin);
 ```
 
-# Using a lookup
+## Using a lookup
 
 Lookups stored in the application can be used in a variety of ways, depending on your needs.
 
-## Dynamic call
+### Dynamic call
 
 Here's the code for executing a lookup:
 
@@ -55,8 +55,8 @@ The `results` object is an array of `LookupResult` objects exposing the methods:
 
 | Functions  | Description                                        |
 | ---------- | -------------------------------------------------- |
-| getKey()   | Retrieves the key of a result (i.e. symbolic name) |
-| getValue() | Retrieves the value or label of a result           |
+| `getKey()` | Retrieves the key of a result (i.e. symbolic name) |
+| `getValue()` | Retrieves the value or label of a result           |
 
 In this example, we execute the `LookupPlugin` whose identifier is `SampleLookup` with the tag name and value as parameters. By reacting to the modification of its value, it is then possible to modify the list of proposed values according to the user's input.
 
@@ -101,7 +101,7 @@ function buildAllowedValue(symbolicName, label) {
 
 ```
 
-## Link with a tag
+### Link with a tag
 
 This JS API also provides the ability to automatically link a tag from the return of a `LookupPlugin`.
 This can be done using the `function bindFieldOnLookup(String tagName, String lookupId)` where :
