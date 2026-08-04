@@ -3,9 +3,9 @@ title: Configuration file reference
 sidebar_label: Configuration files
 sidebar_position: 1
 last_update:
-  date: '2026-04-21T08:21:12.539Z'
+  date: '2026-08-04T06:50:53.969Z'
   author: CI/CD Bot
-content_hash: bf85bb722f3fb7c7c4e313457d08423523b82fd3324e92f12d86c0c3cce4203c
+content_hash: c10a745118309819f672f03d9b80cbde57030f8a0e7fa33c14141ed7e4cab1c2
 ---
 
 All configuration files for uxopian-ai are placed in the `./config/` directory on the host, mounted to `/app/config` inside the container. The application imports them at startup via `application.yaml`. This page documents every configuration key in every file.
@@ -256,11 +256,12 @@ See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deploym
 
 Configuration for the FileNet plugin (loaded only when `plugins.tools.enabled-tags` contains `filenet`).
 
+There is no object store setting: the object store is the tenant, resolved per request by the ICN plugin and carried in its JWT — see [How the tenant is resolved](../how_to/integrate_with_filenet.mdx#how-the-tenant-is-resolved).
+
 | Key | Env variable | Default | Description |
 |---|---|---|---|
 | `filenet.ce-api-url` | — | (empty) | Content Engine Web Services (CEWS) endpoint, e.g. `http://<ce-host>:<port>/wsi/FNCEWS40MTOM/`. Required when the plugin is enabled. |
-| `filenet.repository-id` | — | (empty) | Object store symbolic name (not its GUID). Required when the plugin is enabled. |
-| `filenet.oidc-realm` | `FILENET_OIDC_REALM` | (empty) | Name of the OIDC/OAuth provider trust registered on the Content Platform Engine via ACCE. Every CE call is authenticated as the current caller (via `OpenTokenCredentials`), not a shared service account — see [Integrate with FileNet](../how_to/integrate_with_filenet.mdx#04-configure-oidc-trust-on-the-content-platform-engine-acce). Required. |
+| `filenet.oidc-realm` | `FILENET_OIDC_REALM` | (empty) | Name of the OIDC/OAuth provider trust registered on the Content Platform Engine via ACCE. Every CE call is authenticated as the current caller (via `OpenTokenCredentials`), not a shared service account — see [Integrate with FileNet](../how_to/integrate_with_filenet.mdx#04-configure-oidc-trust-on-the-content-platform-engine). Required. |
 | `filenet.common-system-properties` | — | `DocumentTitle`, `DateCreated`, `DateLastModified`, `Creator`, `LastModifier`, `MajorVersionNumber`, `MimeType` | List of properties (name, title, dataType, multiValued, allowedValues) surfaced to the LLM as the searchable/readable data model. Override if your object store uses a different default schema. |
 | `filenet.writable-properties` | — | (empty) | List of properties (same structure as above) the LLM is allowed to update via `setDocumentProperty`. Empty by default — no property is writable until explicitly listed. |
 
@@ -269,7 +270,6 @@ Example:
 ```yaml
 filenet:
   ce-api-url: ${FILENET_CE_API_URL:}
-  repository-id: ${FILENET_REPOSITORY_ID:}
   oidc-realm: ${FILENET_OIDC_REALM:}
   # common-system-properties: (defaults shipped with the plugin)
   # writable-properties:

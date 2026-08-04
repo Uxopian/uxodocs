@@ -3,9 +3,9 @@ title: Tools
 sidebar_label: Tools
 sidebar_position: 7
 last_update:
-  date: '2026-04-21T08:21:12.539Z'
+  date: '2026-08-04T06:49:05.239Z'
   author: CI/CD Bot
-content_hash: 2f00217348cc8683c73dabbd603fd5af4d0c6c885b9a6bbc37403d84686b783f
+content_hash: 66c4e474e620a959157055eedc2a292542ca1664d439a33527bd78fe0635fd13
 ---
 
 Tools are Java methods that the LLM can call during a conversation. When the LLM decides to use a tool, it emits a tool call request; uxopian-ai executes the corresponding method and returns the result to the LLM, which then incorporates it into its response.
@@ -157,6 +157,42 @@ Added in 2026.0.0-ft3 (tag `alfresco`). The `integrations/alfresco/tool` plugin 
 
 A typical Alfresco search session calls `getDataModel` first to learn the correct qualified names, builds filters, wraps them in clauses, and finishes with `doSearch`. See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deployment steps.
 
+## Built-in tools: FileNet
+
+The `filenet` plugin (tag `filenet`) ships CE-SQL-backed tools across several `@ToolService` beans:
+
+### Search and filtering (`FileNetSearchToolService`, `FileNetFilterToolService`)
+
+| Tool name | Description |
+|---|---|
+| `getDataModel` | Returns the common system properties and document classes available for filtering |
+| `buildClassFilter` | Builds an `ISCLASS()` CE SQL condition on document type |
+| `buildPropertyContainsFilter` | Builds a `LIKE` condition for partial text match |
+| `buildPropertyEqualsFilter` | Builds an exact-match condition on a property or status |
+| `buildDateRangeFilter` | Builds a date range condition on `DateCreated`/`DateLastModified` |
+| `buildFullTextFilter` | Builds a `CONTAINS()` full-text condition |
+| `buildFolderScopedFilter` | Scopes the search to a folder |
+| `buildAndClause` / `buildOrClause` | Combine two raw conditions with AND/OR |
+| `buildAndClauseFromClauses` / `buildOrClauseFromClauses` | Combine existing filter clauses with AND/OR |
+| `searchDocuments` | Executes the assembled CE SQL query |
+
+### Documents (`FileNetDocumentToolService`)
+
+| Tool name | Description |
+|---|---|
+| `readDocumentText` | Reads the full OCR text of a document (via ARender) across all pages |
+| `getDocumentMetadata` | Returns all metadata properties (system + custom class) of a document |
+| `fileNetListFolderContents` | Lists documents in a folder (unfiltered, max 50) |
+| `setDocumentProperty` | Updates a metadata property — only for properties listed in `filenet.writable-properties` |
+
+### Redaction (`FileNetRedactTool`)
+
+| Tool name | Description |
+|---|---|
+| `prepareRedact` / `applyObfuscation` | Prepare and apply a redaction/obfuscation (requires the ARender plugin for rendering) |
+
+A typical search session calls `getDataModel` first, then builds criteria, wraps them in clauses, and calls `searchDocuments`. The `FileNetHelper` bean (bridging documents to ARender for OCR) is always active, not gated by `plugins.tools.enabled-tags`. See [Integrate with FileNet](../how_to/integrate_with_filenet.mdx) for deployment steps.
+
 ## Built-in tools: Interactive choices
 
 Since 2026.0.0-ft4, two built-in tools let the assistant present **clickable choices** in the chat instead of asking questions in plain text. They are always available — they are **not** gated by `plugins.tools.enabled-tags` — and require no prompt or configuration change.
@@ -183,4 +219,5 @@ The assistant emits the choices as a JSON block in its message content; the stan
 - [LLM providers](./llm_providers.md)
 - [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx)
 - [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx)
+- [Integrate with FileNet](../how_to/integrate_with_filenet.mdx)
 - [Managing MCP servers in the admin UI](../admin/managing_mcp_servers.md)

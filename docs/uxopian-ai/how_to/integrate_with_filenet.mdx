@@ -1,11 +1,11 @@
 ---
 title: Integrate with FileNet
 last_update:
-  date: '2026-07-30T08:21:49.629Z'
+  date: '2026-08-04T06:49:05.239Z'
   author: CI/CD Bot
 sidebar_label: Integrate with FileNet
 sidebar_position: 8
-content_hash: af3ed57a1b8042bc9d724742db91364957127b68cbef3b9ee102eeec3005a391
+content_hash: 82d273848cdaaa6e7a10f1504c8309a885ef4826545a2f184d4916ad38d7a8ff
 ---
 
 This guide covers how to configure the FileNet connector in `uxopian-ai` and install the Uxopian AI plugin for IBM Content Navigator (ICN). The plugin adds an **"Open in Uxopian"** context menu action on P8 documents and injects an AI Chat button into the ICN toolbar.
@@ -29,29 +29,9 @@ flowchart LR
     ICN -->|"Bearer token<br/>(web components)"| GW
 ```
 
-*Figure: The ICN plugin signs an RS256 JWT (issuer `icn-plugin`) identifying the ICN user, then forwards requests to the Uxopian AI gateway, which validates the JWT via `FileNetProvider` and forwards the raw token to `uxopian-ai` (header `X-User-Token`) together with the resolved user id. The browser also loads the chat web components directly from the gateway using the same token. `uxopian-ai` reuses that same identity for every call to the Content Engine: it wraps the caller's user id and token in an `OpenTokenCredentials` and executes the call via `Credentials.doAs(...)`, so FileNet sees and audits the real end user — not a shared service account. This requires the Content Platform Engine to trust that token: it does so by pointing its native OpenID Connect client at the gateway's own dynamic JWKS/discovery endpoints, configured once via the `FNCMCluster` CR ([Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine)).*
+*Figure: The ICN plugin signs a JWT identifying the ICN user; the gateway validates it via `FileNetProvider` and forwards it to `uxopian-ai`, which reuses that same identity for every Content Engine call — so FileNet audits the real end user, not a shared service account (see [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine) for how the Content Engine comes to trust that token).*
 
-The plugin exposes four operations:
-
-| Operation (`op=`) | Purpose |
-|---|---|
-| `token` | Returns a signed RS256 JWT (no roles) for the current ICN user — used by the browser to authenticate web component asset requests |
-| `admin-token` | Returns a signed RS256 JWT with `ADMIN` role — used by the **AI Admin** toolbar button to create a gateway session before opening the admin panel |
-| `config` | Returns the plugin's configured **Uxopian AI Host URL** (read server-side via `PluginServiceCallbacks.loadConfiguration()`) — used by `actionHandler.js` at runtime (see [2.4](#24-configure-the-uxopian-ai-host)) |
-| *(none)* | Proxies all other requests to the gateway backend (`icn.plugin.bff.url`) with the JWT attached |
-
-## Prerequisites
-
-| Requirement | Details |
-|---|---|
-| IBM FileNet P8 + IBM Content Navigator | Version 3.0+ |
-| FileNet Content Engine | **5.5.9 or later** — required for `OpenTokenCredentials` (bearer-token authentication), used for per-caller impersonation — see [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine) |
-| WebSphere Application Server | Hosts ICN |
-| Java 8 (JDK) | Required only to rebuild from source |
-| Maven 3.6+ | Required only to rebuild from source |
-| Uxopian AI + gateway | Deployed and reachable from WebSphere, with the FileNet connector configured — see [Phase 0](#phase-0--configure-the-filenet-connector-in-uxopian-ai) |
-| Access to the CPE's WebSphere/Liberty admin console and the `FNCMCluster` CR (Kubernetes) | Required to register the OIDC discovery trust that lets the Content Platform Engine authenticate callers as themselves — see [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine) |
-| Access to the Arondor Artifactory | Required only when building `uxopian-ai` from source — provides the proprietary IBM CE Java API jars (`jace`, `p8cel10n`) |
+Requires IBM FileNet P8 + ICN 3.0+, Content Engine **5.5.9 or later** (needed for the `OpenTokenCredentials` bearer-token authentication used for per-caller impersonation), and access to the CPE's Liberty configuration to register OIDC trust ([Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine)). Building from source additionally needs Java 8, Maven 3.6+, and access to the Arondor Artifactory.
 
 ---
 
@@ -61,28 +41,7 @@ Before installing the ICN plugin, `uxopian-ai` itself must be able to reach the 
 
 ### 0.1 IBM CE Java API dependencies
 
-The `filenet` integration module depends on two proprietary IBM Content Engine Java API artifacts:
-
-```xml title="uxopian-ai/pom.xml"
-<filenet.version>5.6.0</filenet.version>
-```
-
-This must resolve to a Content Engine Java API version matching your CE server, and to **5.5.9 or later** — earlier versions do not implement `OpenTokenCredentials`, which the connector now requires (see [0.3](#03-configure-the-filenet-connection)).
-
-```xml title="uxopian-ai/integrations/filenet/connector/pom.xml"
-<dependency>
-    <groupId>com.filenet</groupId>
-    <artifactId>jace</artifactId>
-    <version>${filenet.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.filenet</groupId>
-    <artifactId>p8cel10n</artifactId>
-    <version>${filenet.version}</version>
-</dependency>
-```
-
-These are not on Maven Central. The root `pom.xml` already declares the Arondor Artifactory repositories (`arondor-release` / `arondor-snapshot` at `artifactory.arondor.cloud`), where these jars are published — no manual `mvn install:install-file` step is needed as long as the build machine has network access and credentials for that Artifactory.
+The `filenet` module depends on two proprietary IBM Content Engine Java API artifacts (`jace`, `p8cel10n`), versioned via the single `filenet.version` property in `uxopian-ai/pom.xml`. Set it to match your CE server's version, and to **5.5.9 or later** (required for `OpenTokenCredentials`, see [0.3](#03-configure-the-filenet-connection)). These jars aren't on Maven Central — the root `pom.xml` already declares the Arondor Artifactory repositories where they're published, so no manual `install:install-file` step is needed as long as the build machine has network access and credentials for `artifactory.arondor.cloud`.
 
 ### 0.2 Enable the FileNet tools
 
@@ -111,7 +70,6 @@ Set the Content Engine connection and the properties surfaced to the LLM:
 ```yaml title="config/application.yml"
 filenet:
   ce-api-url: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/
-  repository-id: <object-store-symbolic-name>
   oidc-realm: ${FILENET_OIDC_REALM:}
   # Optional — overrides the built-in defaults (DocumentTitle, DateCreated, DateLastModified,
   # Creator, LastModifier, MajorVersionNumber, MimeType)
@@ -133,64 +91,99 @@ filenet:
       multiValued: false
 ```
 
-`ce-api-url` is the Content Engine Web Services (CEWS) endpoint, reachable from `uxopian-ai` — not the ICN/WebSphere host. `repository-id` is the object store's symbolic name (not its GUID).
+`ce-api-url` is the CEWS endpoint reachable from `uxopian-ai` (not the ICN/WebSphere host). Each property entry also accepts `allowedValues` and `usageHint` (both optional, not shown above) to constrain and document the property for the LLM.
 
-Each entry under `common-system-properties` and `writable-properties` also accepts two optional fields not shown above: `allowedValues` (a list restricting the values the LLM may pass to `buildPropertyEqualsFilter`) and `usageHint` (free text describing when/how to use the property, surfaced to the LLM via `getDataModel`).
+There is no object store setting: the object store **is** the tenant, resolved per request from the ICN desktop (see [How the tenant is resolved](#how-the-tenant-is-resolved)).
 
 :::info[No shared service account]
-Every FileNet call is authenticated as the **current caller**, not a shared service account. For each request, `FileNetCeClient` reads the authenticated user (id + token) from `AiContext` — populated from the JWT the gateway forwards as `X-User-Token` — and wraps them in an `OpenTokenCredentials(userId, token, oidcRealm)`, then runs the Content Engine call via `Credentials.doAs(...)`. FileNet therefore logs and authorizes every operation against the real end user. `oidc-realm` is the **LDAP realm name** already configured on the CPE (find it in the CPE's WebSphere/Liberty admin console under **Security > Global security > User account repository**, or in its startup logs) — not a name you invent, and not the OIDC issuer identifier configured in [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine). There is no fallback: if the caller has no identity or token in `AiContext`, the call fails rather than silently using a shared account.
+Every FileNet call is authenticated as the **current caller**: `uxopian-ai` wraps the caller's identity in an `OpenTokenCredentials` and runs the Content Engine call via `Credentials.doAs(...)`, so FileNet logs and authorizes against the real end user, with no fallback to a shared account. `oidc-realm` is the **LDAP realm name** already configured on the CPE (find it under **Security > Global security > User account repository** in the CPE's admin console) — not a name you invent, and not the OIDC issuer configured below.
 :::
 
 ### 0.4 Configure OIDC trust on the Content Platform Engine
 
 Per-caller impersonation only works if the Content Platform Engine trusts the JWT issued by the ICN plugin. **This is not configured in ACCE** — ACCE's "Managed User realm" / identity rules feature is for a different thing entirely (email-based self-registration for External Share).
 
-The Content Platform Engine runs on **WebSphere Liberty**, which has a native `openidConnectClient-1.0` feature for exactly this: validating an inbound bearer JWT against an OpenID Connect provider it discovers **dynamically over HTTPS**, instead of a locally pinned certificate. The gateway already acts as that provider — it exposes the ICN plugin's signing key at standard discovery endpoints ([Phase 3](#phase-3--configure-the-gateway) registers the key; the gateway then serves it itself, no separate action needed):
+The Content Platform Engine runs on **WebSphere Liberty**, which has a native `openidConnectClient-1.0` feature for exactly this: validating an inbound bearer JWT against an OpenID Connect provider it discovers **dynamically over HTTPS**, instead of a locally pinned certificate. This is standard Liberty server configuration — it applies the same way regardless of how CPE itself is deployed (VM, container, Kubernetes, or otherwise). The gateway already acts as that provider — it exposes the ICN plugin's signing key at standard discovery endpoints ([Phase 3](#phase-3--configure-the-gateway) registers the key; the gateway then serves it itself, no separate action needed):
 
 - `https://<gateway-host>/.well-known/openid-configuration?issuer=icn-plugin`
 - `https://<gateway-host>/.well-known/jwks.json`
 
 :::warning[Do not use the RelyingParty Interceptor / `jvm_customize_options` for this]
-Older IBM docs and some CPE deployments configure inbound OAuth/OIDC trust via `provider_1.*` JVM custom properties (the "RelyingParty Interceptor"). That mechanism is for **classic WebSphere Application Server (WAS)**, not Liberty — on Liberty, `JWTUsernameHandler` never actually validates a JWT's signature itself, it only cross-checks an ambient `Subject` that nothing populates, so it silently fails with `E_NOT_AUTHENTICATED` regardless of how the properties are set. Use `open_id_connect_providers` below instead.
+Some older CPE guidance configures inbound OAuth/OIDC trust via `provider_1.*` JVM custom properties. That mechanism is for **classic WebSphere Application Server**, not Liberty — on Liberty it silently fails with `E_NOT_AUTHENTICATED` regardless of configuration. Use `openidConnectClient-1.0` below instead.
 :::
 
-#### On a Kubernetes / FNCM-operator deployment
+1. Add a Liberty config snippet (`server.xml`, or a file under `configDropins/overrides/`) declaring the feature, an `authFilter` scoped to Content Engine Web Service calls only, and the `openidConnectClient` itself:
 
-1. Configure the OIDC provider under `shared_configuration.open_id_connect_providers` in the `FNCMCluster` CR:
+   ```xml title="e.g. configDropins/overrides/icn-plugin-oidc.xml"
+   <server>
+     <featureManager>
+       <feature>openidConnectClient-1.0</feature>
+     </featureManager>
 
-   ```yaml
-   shared_configuration:
-     open_id_connect_providers:
-       - provider_name: "icn-plugin"
-         issuer_identifier: "icn-plugin"
-         signature_algorithm: "RS256"
-         discovery_endpoint_url: "https://<gateway-host>/.well-known/openid-configuration?issuer=icn-plugin"
-         inbound_propagation: "supported"
-         user_identifier: "sub"
-         unique_user_identifier: "sub"
-         map_identity_to_registry_user: "true"
-         authn_session_disabled: "true"
-         https_required: "true"
-         client_oidc_secret:
-           cpe: "icn-plugin-oidc-client"
+     <authFilter id="icn-pluginWsiFilter">
+       <requestUrl id="wsiUrl" urlPattern="/wsi/" matchType="contains"/>
+     </authFilter>
+
+     <openidConnectClient id="icn-plugin"
+       authFilterRef="icn-pluginWsiFilter"
+       realmName="icn-plugin"
+       clientId="icn-plugin"
+       clientSecret="not-used-no-live-oauth-flow"
+       audiences="ALL_AUDIENCES"
+       issuerIdentifier="icn-plugin"
+       responseType="code"
+       scope="openid profile email"
+       mapIdentityToRegistryUser="true"
+       authnSessionDisabled="true"
+       inboundPropagation="supported"
+       httpsRequired="true"
+       validationMethod="introspect"
+       signatureAlgorithm="RS256"
+       userIdentifier="sub"
+       uniqueUserIdentifier="sub"
+       discoveryEndpointUrl="https://<gateway-host>/.well-known/openid-configuration?issuer=icn-plugin"/>
+   </server>
    ```
 
-   `client_oidc_secret.cpe` names a Secret with placeholder `client_id`/`client_secret` keys — the field is mandatory for the CR to generate a valid `<openidConnectClient>` element, but no live OAuth authorization-code flow is ever exercised here (only inbound bearer-token propagation), so its actual value is never used.
+   `clientSecret` is mandatory for a valid element but never actually used — only inbound bearer-token propagation happens here, no live OAuth authorization-code flow. Scoping `authFilterRef` to `/wsi/` (Content Engine Web Services) keeps this validation limited to Content Engine API calls — **do not** add a server-wide `webAppSecurity` override alongside this; it isn't needed for token validation and breaks ACCE (see the danger box below).
 
-2. The CPE's Liberty runtime validates the gateway's HTTPS certificate against its **own dedicated truststore** (`trustStoreRef="defaultTrustStore"`, a PKCS12 file provisioned by the FNCM operator) — separate from the JDK's own cacerts. If the gateway's certificate chains up to a public CA not already in that truststore, the discovery fetch fails with `CWWKS1524E`/`CWWKS1525E` (`PKIX path building failed`). Import the missing root into `shared_configuration.trusted_certificate_list` (same CR field, used here for TLS trust rather than JWT-signature trust):
+2. Import the gateway's TLS CA root into the truststore Liberty's SSL config points at (`trustStoreRef`, typically a PKCS12 file — check your SSL config for the exact path; this is separate from the JDK's own cacerts):
 
-   ```yaml
-   shared_configuration:
-     trusted_certificate_list:
-       - "letsencrypt-isrg-root-x1"   # name of a Secret with a tls.crt key holding the CA root
+   ```bash
+   keytool -importcert -trustcacerts -noprompt \
+     -alias gateway-ca -file gateway-ca-root.crt \
+     -keystore <path-to-trustStore.p12> -storetype PKCS12 -storepass <password>
    ```
 
-3. `kubectl apply` the CR — the operator restarts the CPE pod. `open_id_connect_providers` reconciles into a separate ConfigMap (`<cluster-name>-cpe-config`, key `idp-oidc.xml`) on its own schedule, independent of other CR fields — if the pod's config looks stale, check that ConfigMap directly before assuming the operator hasn't picked up the change.
+   If this CA isn't trusted, the discovery fetch fails with `CWWKS1524E`/`CWWKS1525E` (`PKIX path building failed`).
 
-4. Confirm that the identities carried by the JWT (the ICN user id, JWT claim `sub`) resolve to valid users in the P8 domain's directory — CE authorizes and audits calls against this identity directly, so it must already exist there.
+3. Restart CPE, then confirm the JWT's user id (claim `sub`) resolves to a valid user in the P8 domain's directory — CE authorizes and audits against this identity directly.
 
-:::info[No manual re-registration when the plugin's keystore changes]
-Because the CPE fetches the signing key dynamically, rotating the ICN plugin's keystore ([Modifying the plugin](#replacing-the-keystore)) needs no action on the CPE side — only the gateway's static `filenet.jwt.public-key` ([Phase 3.1](#31-register-the-plugins-public-key-with-filenetprovider)) must be updated, since that is what the gateway itself serves back out through the JWKS endpoint.
+:::info[Keystore rotation needs no CPE-side action]
+The CPE fetches the signing key dynamically, so rotating the plugin's keystore only requires updating the gateway's `filenet.jwt.public-key` ([Phase 3.1](#31-register-the-plugins-public-key-with-filenetprovider)) — nothing to redo on the CPE.
+:::
+
+:::danger[Do not add a server-wide webAppSecurity override — it breaks ACCE]
+Some deployment tooling — notably the FNCM Kubernetes operator, which templates `open_id_connect_providers`
+into this same config — automatically adds `<webAppSecurity overrideHttpAuthMethod="CLIENT_CERT"
+allowFailOverToBasicAuth="true"/>` alongside it. This is **not** required for the WSI JWT validation
+above (`authFilterRef` alone scopes which requests get intercepted) — it forces ACCE, which shares
+this same Liberty server and has no FORM-login support in its own `web.xml`, into a plain
+Basic-auth popup instead of its normal login page, with no known config-only fix once it's applied
+(Liberty merges `webAppSecurity` per-attribute, so a later file cannot cleanly undo it). If you are
+hand-configuring `server.xml` directly, simply never add a `webAppSecurity` override and ACCE stays
+unaffected. If your deployment tooling adds it automatically and does not expose a way to suppress
+it, this is a known limitation of that tooling, not of Liberty or the Content Platform Engine itself.
+:::
+
+:::note[On the FNCM operator for Kubernetes]
+If your CPE is deployed via the FNCM Kubernetes operator, the snippet above is expressed instead as
+`shared_configuration.open_id_connect_providers` and `shared_configuration.trusted_certificate_list`
+in the `FNCMCluster` CR, which the operator renders into the equivalent Liberty config on your
+behalf (`kubectl apply`, then the operator restarts the CPE pod — this reconciles into its own
+ConfigMap on a separate schedule from other CR fields, so check it directly if the config looks
+stale). The operator adds the `webAppSecurity` override from the danger box above unconditionally
+whenever `open_id_connect_providers` is set, with no field to opt out.
 :::
 
 ### Checkpoint 0 — Connector is up
@@ -198,7 +191,7 @@ Because the CPE fetches the signing key dynamically, rotating the ICN plugin's k
 Check uxopian-ai startup logs for confirmation:
 
 ```
-Initializing FileNet CE client. CEWS: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/, object store: <repository-id>
+Initializing FileNet CE client. CEWS: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/
 ```
 
 | Check | Expected |
@@ -211,43 +204,21 @@ Initializing FileNet CE client. CEWS: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/,
 
 ## Plugin downloads
 
-:::tip[Prebuilt JAR]
-**<a href="/files/uxopian-ai/uxopian-icn-plugin.jar" download="uxopian-icn-plugin.jar">uxopian-icn-plugin.jar</a>** — ready to deploy, no build required
+:::tip[Download]
+**<a href={require('./uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven source project to build for your environment (does not bundle IBM's proprietary `navigatorAPI.jar`, see [1.1](#11-supply-navigatorapijar))
 :::
 
-:::tip[Source package]
-**<a href={require('./uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven project to rebuild for your environment
-:::
+Only the source is distributed — no prebuilt JAR — so you build and control what's deployed to WebSphere.
 
-:::info[navigatorAPI.jar is not bundled]
-The package contains only the plugin's own sources — it does not include IBM's `navigatorAPI.jar`, which is proprietary and must be sourced from your own ICN installation (see [1.1](#11-supply-navigatorapijar)). It also does not include any internal build tooling (code formatter, import sorter) — just a plain Maven project.
-:::
+### Key integration points
 
-Contents:
-
-| File | Purpose |
-|---|---|
-| `pom.xml` | Maven build descriptor |
-| `icn-plugin.p12` | Default PKCS12 keystore — **replace before production** |
-| `src/main/java/com/uxopian/icn/UxopianPlugin.java` | Plugin entry point — registers actions/services and the configuration screen |
-| `src/main/java/com/uxopian/icn/UxopianAction.java` | Context menu action for P8 documents |
-| `src/main/java/com/uxopian/icn/UxopianProxyService.java` | Servlet — JWT signing and request proxy |
-| `src/main/java/com/uxopian/icn/jwt/JwtSigner.java` | RS256 JWT generation (300 s TTL — long enough to survive the full round trip through the gateway and into a FileNet CE call) |
-| `src/main/java/com/uxopian/icn/jwt/KeystoreLoader.java` | PKCS12/JKS keystore loader with WebSphere IBMJCE fallback |
-| `src/main/resources/com/uxopian/icn/WebContent/actionHandler.js` | Raw startup script (loaded via `getScript()`, eval'd as-is) — token fetch, web component injection, toolbar buttons |
-| `src/main/resources/com/uxopian/icn/WebContent/uxopianPluginDojo/actionHandler.js` | AMD module backing the **context menu action** (`UxopianAction.getActionFunction() = "uxopianPluginDojo/actionHandler"`) — must live under a `WebContent/<dojoModule>/` folder, see the note below |
-| `src/main/resources/com/uxopian/icn/WebContent/uxopianPluginDojo/ConfigurationPane.html` / `.js` | Dojo widget backing the plugin's configuration screen in the ICN Admin Console — lets an administrator set the Uxopian AI host without rebuilding (see [2.4](#24-configure-the-uxopian-ai-host)) |
-| `src/main/resources/com/uxopian/icn/icn-plugin.p12` | Keystore bundled inside the JAR (fallback when no external path is set) |
-| `src/main/resources/com/uxopian/icn/icn-plugin.jks` | JKS version of the keystore for IBM Java 8 compatibility |
-| `src/test/java/**`, `src/test/javascript/**` | JUnit 5/Mockito unit tests (`mvn test`) and Jest tests for `actionHandler.js` (`npm install && npm test`) |
-
-:::info[Any AMD/`require()`-loaded class must live under `WebContent/<dojoModule>/`]
-ICN registers exactly one Dojo module path per plugin: `getDojoModule()`'s value (`uxopianPluginDojo`), mapped to `WebContent/<that value>/` inside the JAR. Anything referenced via a dotted class name — `getConfigurationDijitClass()`, `getActionFunction()`, `getContentClass()` — is resolved through `require()` and **must** physically sit in that subfolder, or the browser 404s on `.../getResource/uxopianPluginDojo/<Class>.js` (and you'll see a Dojo `xhrFailed`/`multipleDefine` error in the console). Only the plain startup script named by `getScript()` (`actionHandler.js`, fetched and `eval`'d directly, not `require()`'d) can live flat at the `WebContent/` root — which is why this plugin keeps two `actionHandler.js` files: the flat one for the IIFE that injects the toolbar buttons, and `uxopianPluginDojo/actionHandler.js` for the tiny AMD module the context menu action actually invokes.
-:::
+- **Configuration screen** — a Dojo widget in the ICN Admin Console lets an administrator set the Uxopian AI host without rebuilding (see [2.4](#24-configure-the-uxopian-ai-host)).
+- **Context menu action** — `UxopianAction` adds **Open in Uxopian** on P8 documents.
+- **Toolbar buttons** — `actionHandler.js` injects the AI Chat and AI Admin buttons and fetches short-lived signed JWTs (`JwtSigner`, 300 s TTL) to authenticate them.
+- **Keystore** — `icn-plugin.p12` (PKCS12) ships as a default, with a `.jks` fallback for IBM Java 8; replace before production (see [Replacing the keystore](#replacing-the-keystore)).
+- **Tests** — `mvn test` (JUnit 5/Mockito) and `npm install && npm test` (Jest, for `actionHandler.js`).
 
 ## Phase 1 — Build the plugin JAR
-
-Skip this phase if you are deploying the prebuilt JAR included in the ZIP.
 
 ### 1.1 Supply navigatorAPI.jar
 
@@ -332,12 +303,56 @@ filenet:
       -----END PUBLIC KEY-----
     # public-key: /path/to/icn-plugin-public-key.pem   # a file path also works
     issuer: icn-plugin              # default: icn-plugin — must match the plugin's JWT issuer
-    tenant-id: filenet               # default: filenet
+    tenant-id: filenet               # default: filenet — fallback only, see below
     clock-skew-seconds: 300          # default: 300
 ```
 
 :::warning[Re-register the key whenever the keystore changes]
-If you replace the plugin's keystore ([Modifying the plugin](#replacing-the-keystore)), the public key changes too. Re-fetch it from `?op=public-key` and update `filenet.jwt.public-key` on the gateway, then restart the gateway.
+If you replace the plugin's keystore ([Replacing the keystore](#replacing-the-keystore)), the public key changes too. Re-fetch it from `?op=public-key` and update `filenet.jwt.public-key` on the gateway, then restart the gateway.
+:::
+
+### How the tenant is resolved
+
+One object store means one tenant. The object store's symbolic name **is** the uxopian-ai tenant id,
+so a single plugin and gateway deployment serves every object store a desktop exposes — there is no
+object store setting on either side, and no route or tenant value to add per object store.
+
+```mermaid
+flowchart LR
+    ICN["ICN plugin<br/>resolves the object store<br/>from the desktop config"]
+    JWT["Signed JWT<br/>tenantId claim"]
+    GW["Gateway<br/>verifies the signature,<br/>reads the claim"]
+    AI["uxopian-ai<br/>X-User-TenantId<br/>tenant-scoped indices"]
+    ICN --> JWT --> GW --> AI
+```
+
+The plugin resolves it server-side, from the desktop configuration:
+
+1. If the request carries a `repositoryId` **that the desktop exposes**, that repository wins. ICN
+   passes it for document-scoped actions.
+2. Otherwise the desktop's **default repository** is used. The navigation bar entry points (chat,
+   admin) are desktop-wide and carry no repository, so this is the normal path for them.
+3. The tenant is that repository's **object store symbolic name**, which is not always the
+   repository id — repository `OSFAST2PS` may map to object store `OS_FAST2_PS`.
+
+Confirm the resolution in the Navigator logs:
+
+```
+Resolved object store 'OS_FAST2_PS' from repository 'OSFAST2PS'
+```
+
+:::info[A forged repositoryId cannot widen the scope]
+`PluginServiceCallbacks.getRepositoryId()` reads a request parameter, so it is client-supplied — but
+the desktop configuration is the authority. An id the desktop does not expose is ignored in favour of
+the default, and the tenant is then signed into the JWT with the plugin's private key. The gateway
+only reads the claim from a token whose signature it has already verified, so it is the plugin, never
+the browser, that asserts the tenant.
+:::
+
+:::warning[Each object store is fully isolated]
+Because the tenant drives data isolation, each object store gets its own OpenSearch indices and its
+own configuration (prompts, agents, LLM providers). Configuration is **not** shared across object
+stores: what you set up while browsing one is invisible from another.
 :::
 
 ### 3.2 Declare the gateway route
@@ -401,16 +416,16 @@ the gateway's own DEBUG logs for `DefaultProviderHeaderFilter` — it logs which
 matched.
 :::
 
-:::warning[If the gateway sits behind an ingress, `/gui/gateway/uxopian-ai/filenet` must be routed there too]
-This path is a sub-path of `/gui/gateway/uxopian-ai`, so most ingresses already routing that
-prefix (for the default FlowerDocs route) cover it automatically. But an ingress with a rule
-matching `/gui/gateway/uxopian-ai` **exactly** (not as a shared prefix covering sub-paths) will
-NOT match `/gui/gateway/uxopian-ai/filenet/...`, and `/gui/gateway/auth/login` (the login-exchange
-endpoint the **AI Admin** button needs) is a *sibling* of `/gui/gateway/uxopian-ai`, not a child
-of it — so it needs its own ingress coverage regardless of how the FileNet route itself is
-configured. The safest single ingress rule is a prefix on `/gui/gateway` (not
-`/gui/gateway/uxopian-ai`), covering both. Verify with a plain `curl -I <host>/gui/gateway/auth/login`
-(expect a gateway response, not a 404 from some other backend) before assuming the ICN plugin's
+:::warning[If a reverse proxy or load balancer sits in front of the gateway, `/gui/gateway/uxopian-ai/filenet` must be routed there too]
+This path is a sub-path of `/gui/gateway/uxopian-ai`, so most proxy rules already routing that
+prefix (for the default FlowerDocs route) cover it automatically. But a rule matching
+`/gui/gateway/uxopian-ai` **exactly** (not as a shared prefix covering sub-paths) will NOT match
+`/gui/gateway/uxopian-ai/filenet/...`, and `/gui/gateway/auth/login` (the login-exchange endpoint
+the **AI Admin** button needs) is a *sibling* of `/gui/gateway/uxopian-ai`, not a child of it — so
+it needs its own coverage regardless of how the FileNet route itself is configured. The safest
+single rule is a prefix on `/gui/gateway` (not `/gui/gateway/uxopian-ai`), covering both. Verify
+with a plain `curl -I <host>/gui/gateway/auth/login` (expect a gateway response, not a 404 from
+some other backend) before assuming the ICN plugin's
 admin/chat flows will work end-to-end.
 :::
 
@@ -457,33 +472,9 @@ Expected: HTTP 200 with a list of prompts.
 6. Verify the **AI Admin** toolbar button (gear icon) appears next to the AI Chat button.
 7. Click **AI Admin** — the browser should open a new tab on the gateway admin panel, authenticated automatically.
 
-### Checkpoint — Integration is working
-
-| Check | Expected |
-|---|---|
-| `GET ?op=token` | `{"token":"eyJ..."}` |
-| `GET ?op=admin-token` | `{"token":"eyJ..."}` (JWT with `"roles":["ADMIN"]`) |
-| `GET /api/v1/prompts` with token | HTTP 200 |
-| ICN context menu | "Open in Uxopian" action visible on P8 documents |
-| ICN toolbar | AI Chat button and AI Admin button injected |
-| Chat panel | Opens and returns LLM responses |
-| AI Admin button | Opens admin panel in new tab, authenticated via `GATEWAY_SESSION` cookie |
-
 ---
 
-## Modifying the plugin
-
-### Changing the Uxopian AI host at runtime
-
-The gateway URL is already runtime-configurable — no rebuild needed. Update **Uxopian AI Host URL** on the plugin's configuration screen in the ICN Admin Console ([2.4](#24-configure-the-uxopian-ai-host)) and save; `actionHandler.js` fetches it from the server (`fetchUxopianHost()`, `op=config`) the first time a chat/admin action runs after a page load, and caches it for the rest of that session.
-
-:::info[Why not read it directly from the desktop model?]
-An earlier version tried `ecm.model.desktop.getPlugin('UxopianPlugin').configuration` — that method doesn't exist on ICN's client-side `Desktop` model (confirmed against `ecm/model/Desktop.js` in `navigator.war`), causing `TypeError: ecm.model.desktop.getPlugin is not a function` at runtime. The plugin configuration set via the Admin Console is only reliably readable **server-side**, via `PluginServiceCallbacks.loadConfiguration()` — hence the `op=config` round trip.
-:::
-
-### Replacing the keystore
-
-Generate a new RSA key pair and PKCS12 keystore:
+## Replacing the keystore
 
 ```bash
 keytool -genkeypair -alias icn-plugin -keyalg RSA -keysize 2048 \
@@ -492,18 +483,7 @@ keytool -genkeypair -alias icn-plugin -keyalg RSA -keysize 2048 \
   -storepass <your-password>
 ```
 
-Then set `icn.plugin.keystore.path`, `icn.plugin.keystore.alias`, and `icn.plugin.keystore.password` as WebSphere JVM custom properties and re-register the new public key with the gateway (Phase 3.1).
-
-### Customizing the frontend behavior
-
-`actionHandler.js` is a standard Dojo AMD module. It controls:
-- Token fetching (`fetchToken` for chat, `fetchAdminToken` for admin)
-- CSS and JS asset injection for the web components
-- The `openChat` function (invoked by the context menu action and the AI Chat toolbar button)
-- The `buildChatRequest` function — builds the initial chat payload (`{ inputs: [] }`, no predefined system prompt; add one here if your deployment wants the chat to open with a fixed assistant persona — see [Common issues](#common-issues) for what's required if you do)
-- The `openAdmin` function (invoked by the **AI Admin** toolbar button) — resolves the host via `fetchUxopianHost()` (rejecting with an explicit error if unconfigured), fetches an `admin-token`, then opens `GET <login-url>?providerId=FileNetProvider&token=…&redirect=<admin-path>` in a new tab so the gateway sets the `GATEWAY_SESSION` cookie in a first-party context before redirecting to the admin panel. `<login-url>` is derived by anchoring on the gateway's fixed `/gui/gateway/` base and replacing everything after it with `auth/login` (matching `app.gateway.login-path`, default `/gui/gateway/auth/login`) — **not** by trimming a fixed number of trailing segments off the configured host, since that count varies (compare `.../uxopian-ai/filenet` here to a different provider's route depth).
-
-After editing, rebuild the JAR with `mvn clean package` to re-embed the updated file.
+Set `icn.plugin.keystore.path`, `.alias`, and `.password` as WebSphere JVM custom properties (Phase 2.2), then re-register the new public key with the gateway (Phase 3.1).
 
 ---
 
@@ -515,10 +495,7 @@ After editing, rebuild the JAR with `mvn clean package` to re-embed the updated 
 | `icn.plugin.keystore.path` | `icn-plugin.p12` | PKCS12 keystore path. Relative paths resolve against the WebSphere JVM working directory. Falls back to the JAR-embedded keystore if the file does not exist. |
 | `icn.plugin.keystore.alias` | `icn-plugin` | Key alias in the keystore |
 | `icn.plugin.keystore.password` | `changeit` | Keystore password |
-
-| Maven property | Default | Description |
-|---|---|---|
-| `uxopian.icn.context.path` | `/navigator` | ICN servlet context path — used to construct the token endpoint URL |
+| `uxopian.icn.context.path` (Maven property) | `/navigator` | ICN servlet context path — used to construct the token endpoint URL |
 
 | ICN plugin configuration (set via ICN Admin Console) | Default | Description |
 |---|---|---|
@@ -527,7 +504,6 @@ After editing, rebuild the JAR with `mvn clean package` to re-embed the updated 
 | FileNet connector property (uxopian-ai) | Env variable | Default | Description |
 |---|---|---|---|
 | `filenet.ce-api-url` | — | (empty) | Content Engine Web Services (CEWS) endpoint. Required. |
-| `filenet.repository-id` | — | (empty) | Object store symbolic name. Required. |
 | `filenet.oidc-realm` | `FILENET_OIDC_REALM` | (empty) | The CPE's existing LDAP realm name (see [0.3](#03-configure-the-filenet-connection)) — not an arbitrary name, and not the `issuer_identifier` configured in [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine). Used to build a per-caller `OpenTokenCredentials` — every CE call is authenticated as the current end user, not a shared account. Required. |
 | `filenet.common-system-properties` | — | `DocumentTitle`, `DateCreated`, `DateLastModified`, `Creator`, `LastModifier`, `MajorVersionNumber`, `MimeType` | Properties surfaced to the LLM as the default data model. |
 | `filenet.writable-properties` | — | (empty) | Properties the LLM is allowed to update via `setDocumentProperty`. |
@@ -537,73 +513,31 @@ After editing, rebuild the JAR with `mvn clean package` to re-embed the updated 
 |---|---|---|
 | `filenet.jwt.public-key` | — | PEM string or file path. RSA public key used to validate JWTs from the ICN plugin. Required. |
 | `filenet.jwt.issuer` | `icn-plugin` | Expected JWT issuer. |
-| `filenet.jwt.tenant-id` | `filenet` | Tenant assigned to authenticated ICN users. |
+| `filenet.jwt.tenant-id` | `filenet` | Fallback tenant, used only for tokens with no `tenantId` claim. Normally the object store from the claim wins — see [How the tenant is resolved](#how-the-tenant-is-resolved). |
 | `filenet.jwt.clock-skew-seconds` | `300` | Allowed clock skew when validating token expiry. |
-
-## Tools exposed to the LLM
-
-Once `filenet` is added to `plugins.tools.enabled-tags` ([Phase 0.2](#02-enable-the-filenet-tools)), the plugin registers the following tools, all tagged `filenet`:
-
-### Search and filtering (`FileNetSearchToolService`, `FileNetFilterToolService`)
-
-| Tool | Purpose |
-|---|---|
-| `getDataModel` | Returns the common system properties and document classes available for filtering |
-| `buildClassFilter` | Builds an `ISCLASS()` CE SQL condition on document type |
-| `buildPropertyContainsFilter` | Builds a `LIKE` condition for partial text match |
-| `buildPropertyEqualsFilter` | Builds an exact-match condition on a property or status |
-| `buildDateRangeFilter` | Builds a date range condition on `DateCreated`/`DateLastModified` |
-| `buildFullTextFilter` | Builds a `CONTAINS()` full-text condition |
-| `buildFolderScopedFilter` | Scopes the search to a folder |
-| `buildAndClause` / `buildOrClause` | Combine two raw conditions with AND/OR |
-| `buildAndClauseFromClauses` / `buildOrClauseFromClauses` | Combine existing filter clauses with AND/OR |
-| `searchDocuments` | Executes the assembled CE SQL query |
-
-### Documents (`FileNetDocumentToolService`)
-
-| Tool | Purpose |
-|---|---|
-| `readDocumentText` | Reads the full OCR text of a document (via ARender) across all pages |
-| `getDocumentMetadata` | Returns all metadata properties (system + custom class) of a document |
-| `fileNetListFolderContents` | Lists documents in a folder (unfiltered, max 50) |
-| `setDocumentProperty` | Updates a metadata property — only for properties listed in `filenet.writable-properties` |
-
-### Redaction (`FileNetRedactTool`)
-
-| Tool | Purpose |
-|---|---|
-| `prepareRedact` | Fetches the document, uploads it to ARender, and extracts text elements to redact |
-| `applyObfuscation` | Runs the redaction pipeline and saves the result as a new version in FileNet |
-
-The `FileNetHelper` bean (bridging FileNet documents to ARender for OCR) is always active — it is not gated by `plugins.tools.enabled-tags`.
 
 ## Common issues
 
 | Symptom | Cause | Solution |
 |---|---|---|
 | FileNet tools absent from admin tool list | Tag whitelist excludes `filenet` | Set `PLUGINS_TOOLS_ENABLED_TAGS` to include `filenet` and restart uxopian-ai (Phase 0.2) |
-| `Initializing FileNet CE client` never logged, or CE connection error | `filenet.ce-api-url` / `filenet.repository-id` missing or wrong | Verify the CEWS endpoint is reachable from uxopian-ai and the object store symbolic name is correct (Phase 0.3) |
-| Build fails resolving `com.filenet:jace` / `com.filenet:p8cel10n` | No access to the Arondor Artifactory | Confirm network access and credentials for `artifactory.arondor.cloud` (Phase 0.1) |
+| `Initializing FileNet CE client` never logged, or CE connection error | `filenet.ce-api-url` missing or wrong | Verify the CEWS endpoint is reachable from uxopian-ai (Phase 0.3) |
+| Data from the wrong object store, or an empty tenant in uxopian-ai | The plugin could not resolve the object store, so it omitted the `tenantId` claim and the gateway fell back to `filenet.jwt.tenant-id` | Check the Navigator logs for `tenant claim omitted` and confirm the desktop has a default repository — see [How the tenant is resolved](#how-the-tenant-is-resolved) |
 | `Cannot impersonate caller against FileNet: missing user identity or token` | The current request has no authenticated user or token in `AiContext` | Confirm the gateway route is not `public: true` for this path, and that the ICN plugin's JWT reaches uxopian-ai unmodified as `X-User-Token` |
-| `E_NOT_AUTHENTICATED` from FileNet on every call | The CPE's `open_id_connect_providers` config doesn't trust the caller's JWT | Confirm `issuer_identifier` matches the ICN plugin's JWT issuer, `discovery_endpoint_url` is reachable from the CPE pod, and `filenet.oidc-realm` is a real LDAP realm name (Phase 0.4) — also check CE is 5.5.9+ |
-| `CWWKS1524E`/`CWWKS1525E` (`PKIX path building failed`) in the CPE's `messages.log` | Liberty's `openidConnectClient` validates the discovery fetch against its **own** dedicated truststore (`trustStoreRef="defaultTrustStore"`), separate from the JDK cacerts — it doesn't yet trust the CA signing the gateway's HTTPS certificate | Import that CA root into `shared_configuration.trusted_certificate_list` (Phase 0.4, step 2) |
-| `CWWKS1739E`/`CWWKS1737E` right after a successful discovery fetch | The discovery/JWKS fetch itself failed (check for `CWWKS1524E` just above it in the log) — with no key obtained, signature validation fails immediately | Fix the underlying discovery failure first; this error is a symptom, not the root cause |
-| `E_NOT_AUTHENTICATED` for one specific user only | The JWT's user id does not resolve to a valid CE user in the P8 domain directory | Confirm the ICN user exists (and is spelled identically) in the P8 domain's directory configuration |
-| Context menu action missing | Plugin not loaded | Check ICN Admin Console plug-in list; confirm the JAR path is correct and ICN restarted |
-| `TypeError: ecm.model.desktop.getPlugin is not a function` in the browser console | Deployed JAR predates the `op=config` fix — an earlier build tried to read the configuration directly off the client-side desktop model, which has no such method | Redeploy the current JAR (rebuild from source, or the prebuilt JAR on this page) |
-| No configuration section on the plugin's admin page, with a 404 on `.../getResource/uxopianPluginDojo/ConfigurationPane.js` (and a Dojo `multipleDefine`/`xhrFailed` error in the console) | An AMD-loaded plugin class isn't under the `WebContent/<dojoModule>/` subfolder ICN expects | Redeploy the current JAR — see the note above the Contents table; confirm with `jar tf uxopian-icn-plugin.jar \| grep WebContent` that `ConfigurationPane.js` and the AMD `actionHandler.js` are under `WebContent/uxopianPluginDojo/`, not flat under `WebContent/` |
-| `op=token` returns `{"error":"..."}` | Keystore not found or wrong alias/password | Set `icn.plugin.keystore.path` to an absolute path; verify alias and password in WebSphere JVM custom properties |
-| Web component assets fail to load (403/401) | The configured Uxopian AI Host URL points to the wrong gateway, or the gateway route is not public for assets | Confirm the plugin's **Uxopian AI Host URL** ([2.4](#24-configure-the-uxopian-ai-host)) matches the gateway route; set `/api/web-components/**` to `public: true` |
+| `E_NOT_AUTHENTICATED` from FileNet | On every call: the CPE's `open_id_connect_providers` config doesn't trust the caller's JWT. For one specific user only: their JWT user id doesn't resolve to a valid CE user in the P8 domain directory | Confirm `issuer_identifier` matches the plugin's JWT issuer, `discovery_endpoint_url` is reachable, and `filenet.oidc-realm` is a real LDAP realm name (Phase 0.4); for a single user, check their directory entry |
+| `CWWKS1524E`/`CWWKS1525E` (`PKIX path building failed`), or `CWWKS1739E`/`CWWKS1737E` right after | Liberty's `openidConnectClient` doesn't yet trust the CA signing the gateway's HTTPS certificate in its own dedicated truststore (separate from the JDK cacerts), so the discovery fetch fails — the second pair of errors is just a symptom of that failed fetch | Import that CA root into `shared_configuration.trusted_certificate_list` (Phase 0.4, step 2) |
+| `op=token` returns `{"error":"..."}`, or IBM Java 8 keystore error | Keystore not found, wrong alias/password, or (Java 8) PKCS12 unsupported | Set `icn.plugin.keystore.path` to an absolute path and verify credentials; the plugin falls back to the bundled `.jks` automatically on Java 8 |
 | JWT rejected by gateway | Public key not configured, or wrong `issuer`/`tenant-id`, on `FileNetProvider` | Re-fetch the public key from `?op=public-key` and set `filenet.jwt.public-key` on the gateway (Phase 3.1) |
-| Chat panel blank after opening | `icn.plugin.bff.url` unreachable from WebSphere | Test connectivity from WebSphere to the gateway; check firewall rules |
-| `AI Admin` opens a 404 at `.../gui/gateway/auth/login?providerId=FileNetProvider&token=...` (or the chat/prompt calls 404 while other gateway routes on the same host work fine) | The gateway sits behind an ingress whose rule for `/gui/gateway/uxopian-ai` doesn't cover `/gui/gateway/auth/login` (a sibling path, not a sub-path) or `/gui/gateway/uxopian-ai/filenet` — a broader catch-all rule (e.g. a bare `/gui`) is intercepting the request first and routing it to the wrong backend entirely | Use a single ingress rule on the broader `/gui/gateway` prefix rather than `/gui/gateway/uxopian-ai` specifically (Phase 3.2); test with `curl -I <host>/gui/gateway/auth/login` |
-| `AI Admin` opens the correct URL and the redirect chain completes, but the final admin page 401s with `Authentication token is missing` in the gateway's logs, even though a `GATEWAY_SESSION` cookie was set | `uxopian-ai-filenet` is declared **after** `uxopian-ai` in the routes list — the broader `/gui/gateway/uxopian-ai/**` pattern shadows it, so the request gets `FlowerDocsProvider` injected instead of `FileNetProvider`, and the session (stored under the `FileNetProvider` key) can't be resolved under the wrong provider | Move `uxopian-ai-filenet` (and its `-ws` counterpart) before `uxopian-ai` in the routes list (Phase 3.2) |
-| IBM Java 8 keystore error | IBM JCE provider does not support PKCS12 by default | The plugin automatically falls back to the `.jks` keystore; ensure `icn-plugin.jks` is present alongside `icn-plugin.p12` |
-| Chat fails immediately with `System prompt with id <name> not found`, even for a plain message | `buildChatRequest()` in `actionHandler.js` was customized to reference a system prompt (`type: "PROMPT"`) that doesn't exist for this tenant yet — by default the plugin sends no system prompt (`{ inputs: [] }`) | Either remove the `PROMPT` entry from `buildChatRequest()` (see [Customizing the frontend behavior](#customizing-the-frontend-behavior)), or create a prompt with that exact id via the Admin UI / `POST /api/v1/admin/prompts` for this tenant |
+| Chat panel blank, or web component assets 401/403 | `icn.plugin.bff.url`/Uxopian AI Host URL wrong, unreachable, or the gateway route isn't public for assets | Verify connectivity from WebSphere to the gateway and that `/api/web-components/**` is `public: true` |
+| `AI Admin` 404s at `.../auth/login...` | The reverse proxy/load balancer in front of the gateway doesn't cover `/gui/gateway/auth/login` — see [3.2](#32-declare-the-gateway-route) | Route the broader `/gui/gateway` prefix there instead |
+| `AI Admin` 401s with `Authentication token is missing` despite a `GATEWAY_SESSION` cookie | Route declaration order — see [3.2](#32-declare-the-gateway-route) | Move `uxopian-ai-filenet` before `uxopian-ai` in the routes list |
+| Chat fails with `System prompt with id <name> not found` | `buildChatRequest()` was customized to reference a prompt that doesn't exist for this tenant (default sends none) | Remove the `PROMPT` entry, or create a prompt with that id for this tenant |
+| ACCE shows a Basic-auth popup instead of its own login page | A `webAppSecurity` override was added alongside the OIDC config (e.g. auto-added by the FNCM Kubernetes operator) — see [0.4](#04-configure-oidc-trust-on-the-content-platform-engine) | If hand-configuring `server.xml`, remove the override — it isn't required. If your deployment tooling adds it unconditionally, this is a limitation of that tooling; the popup remains functional |
 
 ## Related pages
 
 - [Configure gateway routes](./configure_gateway_routes.md) — `path`, `prefix`, `rewritePath`, debug logging
 - [Authentication and gateway](../understanding/authentication.md)
 - [Web components](../understanding/web_components.md)
+- [Tools](../understanding/tools.md)
 - [Downloads](../getting_started/downloads.mdx)

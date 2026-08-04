@@ -3,9 +3,9 @@ title: Downloads
 sidebar_label: Downloads
 sidebar_position: 5
 last_update:
-  date: '2026-05-05T15:22:26.459Z'
+  date: '2026-08-04T06:49:05.239Z'
   author: CI/CD Bot
-content_hash: deac5ea9ded34fe1f30bd699ee181c968fe6a22a34dc800fd5c5aba91997ddca
+content_hash: 3d4736cdda7a526ce28a9a0fe06cdcd51f91945d77ce27a5bb2f0fa21fc5c817
 ---
 
 Downloadable example packages for Uxopian AI. Each package is a ZIP archive containing Docker Compose files and configuration templates.
@@ -55,22 +55,19 @@ See [Quickstart with FlowerDocs](./quickstart_flowerdocs.mdx) for step-by-step i
 
 ### FileNet ICN plugin
 
-Prebuilt JAR ready to deploy in ICN, or source package to rebuild for your environment.
+Source-only — no prebuilt JAR is distributed, so you build and control what's deployed to WebSphere.
 
-:::tip[Prebuilt JAR]
-**<a href="/files/uxopian-ai/uxopian-icn-plugin.jar" download="uxopian-icn-plugin.jar">uxopian-icn-plugin.jar</a>** — ready to deploy, no build required
-:::
-
-:::tip[Source package]
-**<a href={require('../how_to/uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven project to rebuild for your environment
+:::tip[Download]
+**<a href={require('../how_to/uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven project to build for your environment
 :::
 
 Source package contents:
 - `pom.xml`: Maven build descriptor
-- `navigatorAPI.jar`: IBM FileNet Navigator API (local dependency)
 - `icn-plugin.p12`: Default PKCS12 keystore — replace before production
 - `src/`: Java sources for plugin, proxy service, action, feature, and JWT utilities
 - `src/main/resources/com/uxopian/icn/WebContent/actionHandler.js`: Dojo frontend module
+
+`navigatorAPI.jar` (IBM's proprietary Navigator API) is **not** bundled — supply it from your own ICN installation (see [Integrate with FileNet, 1.1](../how_to/integrate_with_filenet.mdx#11-supply-navigatorapijar)).
 
 See [Integrate with FileNet](../how_to/integrate_with_filenet.mdx) for deployment instructions.
 
