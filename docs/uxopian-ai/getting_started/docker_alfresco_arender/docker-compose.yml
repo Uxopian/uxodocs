@@ -340,7 +340,7 @@ services:
 
   # ── OpenSearch ───────────────────────────────────────────────────────────────
   uxopian-ai-opensearch:
-    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-2.12.0}
+    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.6.0}
     container_name: uxopian-ai-opensearch
     environment:
       - cluster.name=opensearch-cluster
