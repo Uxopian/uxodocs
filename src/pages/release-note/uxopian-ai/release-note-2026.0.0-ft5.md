@@ -41,7 +41,7 @@ The gateway can now serve **several tenants of the same provider type** from one
 
 ### 🗃️ FileNet: search, read, and write tools
 
-New tools search, read, and redact/obfuscate FileNet content, and the object store to query is now **resolved dynamically from the current tenant** instead of a fixed configuration property.
+New tools search, read, and redact/obfuscate FileNet content; the object store to query is **resolved dynamically from the current tenant**.
 
 ---
 
@@ -68,7 +68,7 @@ New tools search, read, and redact/obfuscate FileNet content, and the object sto
 
 ### 🗃️ FileNet: search, read, and write tools
 
-New LLM-callable tools: document search (with dedicated builders for class, property-equals, property-contains, date-range, full-text, and folder-scoped filters), folder listing, data-model introspection, document text/metadata read, and redaction/obfuscation. The object store to query is resolved from the current tenant automatically. **`filenet.repository-id` is gone — see [Upgrade notes](#-upgrade-notes).**
+New LLM-callable tools: document search (with dedicated builders for class, property-equals, property-contains, date-range, full-text, and folder-scoped filters), folder listing, data-model introspection, document text/metadata read, and redaction/obfuscation. The object store to query is resolved from the current tenant automatically — there is no static repository-id property to configure.
 
 ### 💬 Interactive client actions over WebSocket
 
@@ -137,25 +137,23 @@ The gateway can now sign every proxied request with a short-lived HS256 JWT (cla
 
 4. **`/actuator/loggers` is gone.** Anything relying on it to tune log levels at runtime in production must switch to a redeploy with the desired level, or another log-level mechanism — only `health` and `info` remain exposed.
 
-5. **FileNet: `filenet.repository-id` (and `FILENET_REPOSITORY_ID`) removed.** The object store is now resolved from the current tenant automatically — drop this setting if you have it configured; it has no effect and isn't read anymore.
+5. **Gateway: CORS is now gateway-configured.** If any client depends on cross-origin requests reaching the gateway, set `app.cors.allowed-origins` explicitly — an unset/empty list means the gateway's own CORS filter allows no cross-origin requests.
 
-6. **Gateway: CORS is now gateway-configured.** If any client depends on cross-origin requests reaching the gateway, set `app.cors.allowed-origins` explicitly — an unset/empty list means the gateway's own CORS filter allows no cross-origin requests.
+6. **Gateway: named provider config is additive.** No action needed unless you want to run multiple instances of the same provider type (for example, two FileNet tenants) — omitting `app.providers` keeps the existing single-instance-per-type behavior.
 
-7. **Gateway: named provider config is additive.** No action needed unless you want to run multiple instances of the same provider type (for example, two FileNet tenants) — omitting `app.providers` keeps the existing single-instance-per-type behavior.
+7. **OpenSearch client bumped to 3.6.0** (from 3.5.0). Verify your OpenSearch server version is compatible before upgrading.
 
-8. **OpenSearch client bumped to 3.6.0** (from 3.5.0). Verify your OpenSearch server version is compatible before upgrading.
+8. **Base image bumped to `uxopian-base-image:1.0.8`**, now served from `artifactory.arondor.cloud:5004` (the `internal-tools` prefix was dropped from the path). Rebuild any derived images against the new base image and registry path.
 
-9. **Base image bumped to `uxopian-base-image:1.0.8`**, now served from `artifactory.arondor.cloud:5004` (the `internal-tools` prefix was dropped from the path). Rebuild any derived images against the new base image and registry path.
+9. **New `ApplicationConf` concept.** No action required unless you call uxopian-ai from more than one application context — in which case, consider setting `X-Application-Id` and configuring per-application defaults and tool whitelists. Note that a Prompt used as a base prompt or as an Application's system prompt can no longer be deleted while referenced.
 
-10. **New `ApplicationConf` concept.** No action required unless you call uxopian-ai from more than one application context — in which case, consider setting `X-Application-Id` and configuring per-application defaults and tool whitelists. Note that a Prompt used as a base prompt or as an Application's system prompt can no longer be deleted while referenced.
+10. **Gateway: `DevProvider` no longer reads `X-User-Id`/`X-User-Roles`/`X-User-Tenant`.** Any local, CI, or demo setup that used those headers to select a test user or tenant through `DevProvider` now always gets the fixed `dev`/`dev`/`ADMIN` identity instead. Switch to `FlowerDocsProvider`/`Fast2Provider` (or a real deployment) if you need to exercise multi-tenant behavior.
 
-11. **Gateway: `DevProvider` no longer reads `X-User-Id`/`X-User-Roles`/`X-User-Tenant`.** Any local, CI, or demo setup that used those headers to select a test user or tenant through `DevProvider` now always gets the fixed `dev`/`dev`/`ADMIN` identity instead. Switch to `FlowerDocsProvider`/`Fast2Provider` (or a real deployment) if you need to exercise multi-tenant behavior.
+11. **Goals removed (action required if you used them).** The Goal concept — `goals.yml`, `/api/v1/admin/goals`, and the `{"type": "goal", ...}` request content item — is gone; there was no runtime consumer left to justify keeping it. If you referenced a goal group, call the underlying [Prompt](/docs/uxopian-ai/understanding/prompts_and_templating) directly instead (`type: prompt`), or move the conditional-selection logic it was doing into an [Application](/docs/uxopian-ai/admin/managing_applications)'s prompt or an [Agentic Plan](/docs/uxopian-ai/understanding/agentic_plans). See [Goals](/docs/uxopian-ai/understanding/goals) for the full mapping.
 
-12. **Goals removed (action required if you used them).** The Goal concept — `goals.yml`, `/api/v1/admin/goals`, and the `{"type": "goal", ...}` request content item — is gone; there was no runtime consumer left to justify keeping it. If you referenced a goal group, call the underlying [Prompt](/docs/uxopian-ai/understanding/prompts_and_templating) directly instead (`type: prompt`), or move the conditional-selection logic it was doing into an [Application](/docs/uxopian-ai/admin/managing_applications)'s prompt or an [Agentic Plan](/docs/uxopian-ai/understanding/agentic_plans). See [Goals](/docs/uxopian-ai/understanding/goals) for the full mapping.
+12. **`plugins.tools.enabled-tags` no longer gates which tools get *registered* at startup (security-relevant).** Since this release, `IntegrationLoader` registers every `@ToolService` in every plugin JAR present under `plugins/`, unconditionally — the tag whitelist plays no part in registration anymore. If you relied on `enabled-tags` to keep Alfresco tool *code* from ever loading, it no longer does that: the code loads regardless. The property still exists, but it now only seeds the default tool-tag whitelist on the [Application](/docs/uxopian-ai/admin/managing_applications) auto-created the first time a connection provider is used — control which tools a caller can actually invoke there instead.
 
-13. **`plugins.tools.enabled-tags` no longer gates which tools get *registered* at startup (security-relevant).** Since this release, `IntegrationLoader` registers every `@ToolService` in every plugin JAR present under `plugins/`, unconditionally — the tag whitelist plays no part in registration anymore. If you relied on `enabled-tags` to keep Alfresco or FileNet tool *code* from ever loading, it no longer does that: the code loads regardless. The property still exists, but it now only seeds the default tool-tag whitelist on the [Application](/docs/uxopian-ai/admin/managing_applications) auto-created the first time a connection provider is used — control which tools a caller can actually invoke there instead.
-
-14. **No migration needed** for the Agentic Plan engine or the FileNet write tools — both are new and opt-in.
+13. **No migration needed** for the Agentic Plan engine or the FileNet integration — both are new and opt-in.
 
 ---
 
