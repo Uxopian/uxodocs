@@ -3,9 +3,9 @@ title: Configure LLM providers
 sidebar_label: Configure LLM providers
 sidebar_position: 7
 last_update:
-  date: '2026-04-21T08:21:12.539Z'
+  date: '2026-08-06T14:32:17.232Z'
   author: CI/CD Bot
-content_hash: 39eecf78fc778c622b5e79349a3db2b20ec6e5fd3d949d2db31be56fbd217386
+content_hash: 01c3bb513c6418465516f5cc831cf2d129e2f21d2a6ade0e6a2740193aaf3e92
 ---
 
 This guide explains how to configure LLM providers in `llm-clients-config.yml`, set the default provider and model, and manage providers at runtime via the Admin API.

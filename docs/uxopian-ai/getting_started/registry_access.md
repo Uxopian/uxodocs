@@ -1,11 +1,11 @@
 ---
 title: Registry access
 sidebar_label: Registry access
-sidebar_position: 4
+sidebar_position: 6
 last_update:
-  date: '2026-03-26T16:37:56.929Z'
+  date: '2026-08-06T14:32:17.232Z'
   author: CI/CD Bot
-content_hash: f7ee16d4199d531ac75dedd8ad47bf0f030462af006b47c8f40379d4ebc935be
+content_hash: ee1e4944ef69aa010456bea3082d9aa803eeccb952cf8c6cd8fd5b7ec28b49b6
 ---
 
 Uxopian AI images are available from two Docker registries: a public preview registry on Cloudsmith and a private enterprise registry on Artifactory. Use the one that matches your access level.
