@@ -1,7 +1,7 @@
 ---
 title: Configure LLM providers
 sidebar_label: Configure LLM providers
-sidebar_position: 6
+sidebar_position: 7
 last_update:
   date: '2026-04-21T08:21:12.539Z'
   author: CI/CD Bot
