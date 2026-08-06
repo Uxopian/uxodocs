@@ -83,7 +83,9 @@ filenet:
       title: Date Created
       dataType: "xs:dateTime"
       multiValued: false
-  # Optional — properties the LLM is allowed to write via setDocumentProperty
+  # Optional — properties intended to be writable by the LLM. Not yet wired to a
+  # callable tool — there is currently no LLM-callable way to update a FileNet
+  # document property, so this list has no effect on tool behavior yet.
   writable-properties:
     - name: DocumentTitle
       title: Document Title
@@ -208,6 +210,10 @@ Initializing FileNet CE client. CEWS: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/
 **<a href={require('./uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven source project to build for your environment (does not bundle IBM's proprietary `navigatorAPI.jar`, see [1.1](#11-supply-navigatorapijar))
 :::
 
+:::danger[This source predates dynamic tenant resolution — do not deploy as-is on ft5]
+`JwtSigner` in this archive signs `sub`/`iss`/`iat`/`exp`/`roles` only — **no `tenantId` claim** — and `UxopianProxyService` never calls anything resolving a repository/object store. Deployed as-is against the current gateway/uxopian-ai (which expect the JWT to carry `tenantId`, see [How the tenant is resolved](#how-the-tenant-is-resolved)), every request falls back to the gateway's static `filenet.jwt.tenant-id`, silently merging every object store the desktop exposes into one tenant instead of isolating them. The plugin needs its per-caller impersonation and tenant-resolution logic (documented above) actually implemented before this archive matches the guide. Do not build and deploy this JAR into a multi-object-store environment expecting isolation until it's updated.
+:::
+
 Only the source is distributed — no prebuilt JAR — so you build and control what's deployed to WebSphere.
 
 ### Key integration points
@@ -309,6 +315,10 @@ filenet:
 
 :::warning[Re-register the key whenever the keystore changes]
 If you replace the plugin's keystore ([Replacing the keystore](#replacing-the-keystore)), the public key changes too. Re-fetch it from `?op=public-key` and update `filenet.jwt.public-key` on the gateway, then restart the gateway.
+:::
+
+:::tip[Serving more than one P8 domain from one gateway]
+The single top-level `filenet:` block above supports exactly one `FileNetProvider` instance. Since 2026.0.0-ft5, the gateway can instead run **several named instances** — e.g. one per P8 domain/CPE — each with its own `public-key`/`issuer`/`tenant-id`, selected per route via `provider: <name>`. See [Configuration reference — Named provider instances](../reference/configuration.md#named-provider-instances-appproviders) (the config keys are the same, without the `jwt.` segment: `public-key`, `issuer`, `tenant-id`, `clock-skew-seconds`).
 :::
 
 ### How the tenant is resolved
@@ -506,7 +516,7 @@ Set `icn.plugin.keystore.path`, `.alias`, and `.password` as WebSphere JVM custo
 | `filenet.ce-api-url` | — | (empty) | Content Engine Web Services (CEWS) endpoint. Required. |
 | `filenet.oidc-realm` | `FILENET_OIDC_REALM` | (empty) | The CPE's existing LDAP realm name (see [0.3](#03-configure-the-filenet-connection)) — not an arbitrary name, and not the `issuer_identifier` configured in [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine). Used to build a per-caller `OpenTokenCredentials` — every CE call is authenticated as the current end user, not a shared account. Required. |
 | `filenet.common-system-properties` | — | `DocumentTitle`, `DateCreated`, `DateLastModified`, `Creator`, `LastModifier`, `MajorVersionNumber`, `MimeType` | Properties surfaced to the LLM as the default data model. |
-| `filenet.writable-properties` | — | (empty) | Properties the LLM is allowed to update via `setDocumentProperty`. |
+| `filenet.writable-properties` | — | (empty) | Properties intended to be writable by the LLM. Configured but not yet wired to a callable tool. |
 | `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files,interaction` | Must include `filenet` to register the FileNet tools. |
 
 | FileNetProvider JWT property (uxopian-gateway) | Default | Description |

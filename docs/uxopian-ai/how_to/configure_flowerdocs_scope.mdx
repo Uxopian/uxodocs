@@ -16,6 +16,10 @@ FlowerDocs scope files inject the Uxopian AI chat panel, the [Quick Prompt](../u
 **<a href={require('./uxopian-ai_flowerdocs_scope.zip').default} download="uxopian-ai_flowerdocs_scope.zip">uxopian-ai_flowerdocs_scope.zip</a>**
 :::
 
+:::warning[This archive needs a refresh]
+This ZIP predates the current script source and still contains the old, non-scoped `GATEWAY_ENDPOINT` endpoint (the exact bug described in [Why WebSocket needs a separate, direct endpoint](#why-websocket-needs-a-separate-direct-endpoint) — it resolves the WebSocket to a route that no longer exists, `/ws/undefined`) and a `qp-connector` route matcher that assumes FlowerDocs component ids are always UUIDs (they aren't). The authoritative, current source is the `uxoai-flowerdocs` package (managed via `uxc`, kind `fd.script`) — re-export this archive from there via CLM before relying on it, or install directly from that package instead of this download.
+:::
+
 Extract the ZIP. The directory structure is:
 
 ```
@@ -350,9 +354,7 @@ See [Embed Quick Prompt — Common issues](./embed_quick_prompt.mdx#common-issue
 
 ## Installation
 
-Copy the `conf/` directory contents into the FlowerDocs scope Maven module. The exact target directory depends on your FlowerDocs project structure. In a standard FlowerDocs Maven build, scope files go into the scope resources directory that gets imported during the build.
-
-After importing, rebuild and redeploy the FlowerDocs application.
+The `conf/` directory is a standard FlowerDocs [scope](/docs/flowerdocs/concepts/scope) overlay — import it the same way you import any other scope content, with the [Command Line Manager (CLM)](/docs/flowerdocs/install/clm/clm) or your project's usual scope-build process. This page only documents what's specific to the AI scripts themselves (the constants, the `RegistrationOrder` dependencies between them, the gateway route) — see [Subscribing to an operation](/docs/flowerdocs/config/core/operation/registration) for how `RegistrationOrder` works in general.
 
 ## Customization checklist
 
