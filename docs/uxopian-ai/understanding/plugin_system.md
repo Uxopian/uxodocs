@@ -68,9 +68,9 @@ Practically: **all tool code is loaded and instantiated regardless of this setti
 
 ### Choosing a document management backend
 
-`flowerdocs` and `alfresco` are two separate tool suites that both expose document search, retrieval, and metadata operations — but for different ECM backends and with incompatible query APIs. Exposing both to the same caller is not recommended: the LLM would see two distinct sets of tools for the same operations and may call either one unpredictably.
+`flowerdocs`, `alfresco`, and `filenet` are three separate tool suites that all expose document search, retrieval, and metadata (and, for FlowerDocs/FileNet, redaction) operations — but for different ECM backends and with incompatible query APIs. Exposing more than one to the same caller is not recommended: the LLM would see overlapping sets of tools for the same operations and may call the wrong one unpredictably.
 
-Pick **exactly one** backend's tools per Application (see [Managing Applications — Permissions](../admin/managing_applications.md#permissions)) — the JARs for both can coexist in `plugins/`; only the exposed set needs to be scoped down.
+Pick **exactly one** backend's tools per Application (see [Managing Applications — Permissions](../admin/managing_applications.md#permissions)) — the JARs for all three can coexist in `plugins/`; only the exposed set needs to be scoped down. For a FileNet/ICN deployment, this means the Application the ICN plugin resolves to (by default, one named `FileNet`, auto-created from `FileNetProvider`) should whitelist the `filenet` tag and *not* `flowerdocs`/`alfresco`.
 
 For Spring Boot tests that use classpath component scan, add `@TestPropertySource(properties = "plugins.tools.enabled-tags=...")` and rely on `ToolServiceTagFilter` (a `BeanDefinitionRegistryPostProcessor`, `tests/tools-tests` only) to strip non-matching beans from the registry — this test-only filter is unrelated to (and stricter than) the production `IntegrationLoader` behavior described above.
 

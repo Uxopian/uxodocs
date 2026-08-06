@@ -58,7 +58,7 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | Variable | Default | Description |
 |---|---|---|
 | `PLUGINS_ROOT_PATH` | `plugins/` | Path to the directory containing plugin JARs |
-| `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Comma-separated whitelist of `@ToolService(tags=…)` values. Controls which tool sets are registered at startup. Empty list = all tools registered. Untagged `@ToolService` beans are always registered. **Do not combine `flowerdocs` and `alfresco`** — they both expose document operations for different ECM backends; loading both will expose conflicting tool suites to the LLM. Use exactly one: `flowerdocs,files` (default), `alfresco,files`, or `files` if no ECM backend is needed. |
+| `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Comma-separated `@ToolService(tags=…)` list. Since 2026.0.0-ft5, this no longer gates which tools get *registered* at startup — every tool in every plugin JAR present in `plugins/` is always registered, regardless of this value. It now only seeds the tool-tag whitelist of the [Application](../admin/managing_applications.md) auto-created the first time a connection provider is used (empty = `allowAllTools`). See [Plugin system — Filtering tools by tag](../understanding/plugin_system.md#filtering-tools-by-tag). **Do not whitelist more than one of `flowerdocs`, `alfresco`, `filenet` on the same Application** — they all expose overlapping document search/read/redact operations for different ECM backends, and exposing more than one confuses the LLM about which to call. Pick exactly one, e.g. `flowerdocs,files` (default), `alfresco,files`, `filenet,files,interaction`, or `files` alone if no ECM backend is needed. |
 
 ### Integration connectors
 

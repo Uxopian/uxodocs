@@ -43,24 +43,18 @@ Before installing the ICN plugin, `uxopian-ai` itself must be able to reach the 
 
 The `filenet` module depends on two proprietary IBM Content Engine Java API artifacts (`jace`, `p8cel10n`), versioned via the single `filenet.version` property in `uxopian-ai/pom.xml`. Set it to match your CE server's version, and to **5.5.9 or later** (required for `OpenTokenCredentials`, see [0.3](#03-configure-the-filenet-connection)). These jars aren't on Maven Central — the root `pom.xml` already declares the Arondor Artifactory repositories where they're published, so no manual `install:install-file` step is needed as long as the build machine has network access and credentials for `artifactory.arondor.cloud`.
 
-### 0.2 Enable the FileNet tools
+### 0.2 Expose the FileNet tools to the right Application
 
-FileNet tools are **disabled by default** — gated by the tool tag whitelist. Enable them before starting uxopian-ai:
+Since 2026.0.0-ft5, `plugins.tools.enabled-tags` no longer gates which tools get *registered* at startup: the four FileNet tool services register automatically as soon as the `filenet` plugin JAR is present in `plugins/` — no startup configuration needed for this part (see [Plugin system — Filtering tools by tag](../understanding/plugin_system.md#filtering-tools-by-tag)).
 
-```yaml title="config/application.yml"
-plugins:
-  tools:
-    enabled-tags: filenet,flowerdocs,files,interaction
-```
+What you do need to configure is which caller is **allowed to use** them — that's controlled per [Application](../admin/managing_applications.md), not by a startup property. The ICN plugin's requests resolve to the Application derived from `FileNetProvider` (named `FileNet`, auto-created on first use, unless you set a different `X-Application-Id`). Open it in the admin UI and, under **Permissions**, whitelist the `filenet` tool tag (add `files`/`interaction` too if you use those tools).
 
-Or via environment variable:
+:::warning[Do not also whitelist `flowerdocs` or `alfresco` on this Application]
+FileNet, FlowerDocs, and Alfresco tools all expose overlapping document search/read/redact operations for different, incompatible backends. Whitelisting more than one ECM connector's tags on the same Application confuses the LLM about which backend to call — see [Choosing a document management backend](../understanding/plugin_system.md#choosing-a-document-management-backend). Keep this Application scoped to `filenet` only.
+:::
 
-```bash
-PLUGINS_TOOLS_ENABLED_TAGS=filenet,flowerdocs,files,interaction
-```
-
-:::warning[Default value excludes FileNet]
-The default is `flowerdocs,files,interaction`. If you do not override it, FileNet tools will not be registered and the LLM will not have access to FileNet, even if the plugin JAR is present.
+:::info[The `enabled-tags` env var still matters once, at auto-creation]
+`PLUGINS_TOOLS_ENABLED_TAGS` (default `flowerdocs,files`) only seeds the *default* Application's tool-tag whitelist the moment it is first auto-created. If you'd rather not depend on that timing, just edit the Application's Permissions directly in the admin UI as above — it always wins over whatever the property seeded.
 :::
 
 ### 0.3 Configure the FileNet connection
@@ -526,7 +520,7 @@ Set `icn.plugin.keystore.path`, `.alias`, and `.password` as WebSphere JVM custo
 
 | Symptom | Cause | Solution |
 |---|---|---|
-| FileNet tools absent from admin tool list | Tag whitelist excludes `filenet` | Set `PLUGINS_TOOLS_ENABLED_TAGS` to include `filenet` and restart uxopian-ai (Phase 0.2) |
+| FileNet tools appear in the admin's global tool list but the LLM never calls them | The Application the request resolves to (`FileNet` by default) does not whitelist the `filenet` tag in its Permissions | Add `filenet` to that Application's tool-tag whitelist, and make sure `flowerdocs`/`alfresco` aren't also whitelisted there (Phase 0.2) |
 | `Initializing FileNet CE client` never logged, or CE connection error | `filenet.ce-api-url` missing or wrong | Verify the CEWS endpoint is reachable from uxopian-ai (Phase 0.3) |
 | Data from the wrong object store, or an empty tenant in uxopian-ai | The plugin could not resolve the object store, so it omitted the `tenantId` claim and the gateway fell back to `filenet.jwt.tenant-id` | Check the Navigator logs for `tenant claim omitted` and confirm the desktop has a default repository — see [How the tenant is resolved](#how-the-tenant-is-resolved) |
 | `Cannot impersonate caller against FileNet: missing user identity or token` | The current request has no authenticated user or token in `AiContext` | Confirm the gateway route is not `public: true` for this path, and that the ICN plugin's JWT reaches uxopian-ai unmodified as `X-User-Token` |
@@ -543,6 +537,7 @@ Set `icn.plugin.keystore.path`, `.alias`, and `.password` as WebSphere JVM custo
 ## Related pages
 
 - [Getting started with FileNet](../getting_started/quickstart_filenet.mdx) — prerequisites and the overall integration path
+- [Managing Applications](../admin/managing_applications.md) — scoping the `filenet` tool tag to the right caller
 - [Configure gateway routes](./configure_gateway_routes.md) — `path`, `prefix`, `rewritePath`, debug logging
 - [Authentication and gateway](../understanding/authentication.md)
 - [Web components](../understanding/web_components.md)
