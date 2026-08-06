@@ -60,7 +60,7 @@ services:
 
   # ── Gateway ─────────────────────────────────────────────────────────────────
   # The gateway is the only service exposed to the host (port 8085).
-  # DevProvider reads identity from request headers — suitable for local development.
+  # DevProvider always injects a fixed dev identity (dev/dev/ADMIN) — suitable for local development.
   # Replace with FlowerDocsProvider or Fast2Provider for production.
   uxopian-gateway:
     image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}

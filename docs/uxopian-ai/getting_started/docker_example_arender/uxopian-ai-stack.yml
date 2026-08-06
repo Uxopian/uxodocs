@@ -110,7 +110,7 @@ services:
 
   # ── Gateway ──────────────────────────────────────────────────────────────────
   # The gateway is the only service exposed to the host (port 8085).
-  # DevProvider reads identity from request headers — suitable for local development only.
+  # DevProvider always injects a fixed dev identity (dev/dev/ADMIN) — suitable for local development only.
   gateway:
     image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}
     # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}
