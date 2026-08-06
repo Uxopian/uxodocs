@@ -13,10 +13,10 @@ Running uxopian-ai and uxopian-gateway without Docker or Kubernetes, from their 
 ```mermaid
 flowchart TD
     A[Download uxopian-ai ZIP] --> B[Extract and configure config/]
-    C[Download uxopian-gateway ZIP] --> D[Write application.yaml with routes]
+    C[Download uxopian-gateway ZIP] --> D[Adapt the shipped application.yml]
     B --> E[Edit config/ YAML files]
-    E --> F[Start uxopian-ai<br/>java -jar ai-standalone.jar]
-    D --> G[Start uxopian-gateway<br/>java -jar standalone.jar]
+    E --> F[Start uxopian-ai<br/>java -jar ai-standalone-&lt;version&gt;.jar]
+    D --> G[Start uxopian-gateway<br/>java -jar bff-standalone-&lt;version&gt;.jar]
     F --> H[Verify /actuator/health]
     G --> H
 ```
@@ -26,7 +26,7 @@ flowchart TD
 ## Prerequisites
 
 - Java 21
-- OpenSearch `3.3.2` reachable on the host network
+- OpenSearch `3.6.0` reachable on the host network
 - LLM provider API key
 - Credentials for `artifactory.arondor.cloud` (or access to the Cloudsmith public channel for preview releases)
 
@@ -52,8 +52,12 @@ ai-standalone-2026.0.0-ft5/
     mcp-server.yml
   plugins/
     flowerdocs-2026.0.0-ft5.jar     ← FlowerDocs integration
+    alfresco-2026.0.0-ft5.jar       ← Alfresco integration
+    filenet-2026.0.0-ft5.jar        ← FileNet integration
     arender-2026.0.0-ft5.jar        ← ARender integration
-    files-2026.0.0-ft5.jar          ← File tools integration
+    files-2026.0.0-ft5.jar          ← File tools
+    interaction-2026.0.0-ft5.jar    ← Interactive choices tools
+    common-2026.0.0-ft5.jar         ← Shared tools (text chunking, etc.)
   llm-clients/
     llm-clients-2026.0.0-ft5.jar
 ```
@@ -123,14 +127,20 @@ The service starts on port `8080` by default. Override with `UXOPIAN_AI_PORT`.
 
 ### Package contents
 
-The gateway ZIP named `standalone-<version>-complete-package.zip` contains the JAR and its authentication provider plugins:
+The gateway ZIP named `standalone-<version>-complete-package.zip` extracts into a versioned root directory containing the JAR, a starter `application.yml`, and its authentication provider plugins:
 
 ```
-standalone.jar                       ← Spring Boot fat JAR
-provider/
-  flowerdocs-provider.jar            ← FlowerDocs JWT auth provider
-  fast2-provider.jar                 ← Fast2 JWT auth provider
-  development-provider.jar           ← Dev mock provider (no real auth)
+uxopian-gateway-<version>/
+  bff-standalone-<version>.jar       ← Spring Boot fat JAR
+  application.yml                    ← Starter config: security defaults, sample routes for
+                                        every backend (FlowerDocs, Alfresco, FileNet) — trim
+                                        it down to the routes you actually need
+  provider/
+    flowerdocs-provider.jar           ← FlowerDocs JWT auth provider
+    fast2-provider.jar                ← Fast2 JWT auth provider
+    alfresco-provider.jar             ← Alfresco JWT auth provider
+    filenet-provider.jar              ← FileNet ICN-signed JWT auth provider
+    development-provider.jar          ← Dev mock provider (no real auth)
 ```
 
 Providers are scanned from the `provider/` directory at runtime by `AuthProviderLoader`. Remove provider JARs that are not needed.
@@ -141,7 +151,7 @@ Providers are scanned from the `provider/` directory at runtime by `AuthProvider
 
 ### Configure routes
 
-The ZIP does not include an `application.yaml`. Create one alongside the JAR to configure routes, backend URL, and security rules:
+The shipped `application.yml` already declares one route per backend integration (FlowerDocs, Alfresco, FileNet), each with matching HTTP and WebSocket entries and the standard security rules pre-filled. Delete the routes for backends you don't use and adjust `uri` to your uxopian-ai host — the shipped file points at `http://ai-standalone-service:8080` (a Kubernetes-style hostname), which won't resolve on a bare-metal host:
 
 ```yaml
 app:
@@ -175,14 +185,14 @@ server:
   port: 8085
 ```
 
-For other authentication providers, replace `FlowerDocsProvider` with the appropriate provider name. See [Authentication and gateway](../understanding/authentication.md).
+For other authentication providers, replace `FlowerDocsProvider` with the appropriate provider name. See [Authentication and gateway](../understanding/authentication.md) and, if you need to serve several tenants of the same provider type, [Configuration reference — named provider instances](../reference/configuration.md#named-provider-instances-appproviders).
 
 ### Start
 
 ```bash
 java -Xmx256m -Xms256m \
-  -jar standalone.jar \
-  --spring.config.location=./application.yaml
+  -jar bff-standalone-<version>.jar \
+  --spring.config.location=./application.yml
 ```
 
 ---

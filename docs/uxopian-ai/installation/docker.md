@@ -39,7 +39,7 @@ A production stack requires the same three services as the quickstart. Use the `
 ```yaml
 services:
   opensearch:
-    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.3.2}
+    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-3.6.0}
     environment:
       - discovery.type=single-node
       - DISABLE_SECURITY_PLUGIN=true
