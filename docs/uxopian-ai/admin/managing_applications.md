@@ -16,6 +16,10 @@ An explicit **`X-Application-Id`** header on the request overrides this provider
 
 In the admin panel, click **Applications** in the navigation. The page lists every Application configured for the current tenant.
 
+![The Applications list showing name, connection provider, and prompt for each Application, including an auto-created "default" one](../images/applications-list.png)
+
+*Figure: The Applications list — `default` was auto-created on first use; `FlowerDocs` was configured explicitly.*
+
 ## Fields
 
 | Field | Description |
@@ -31,6 +35,10 @@ In the admin panel, click **Applications** in the navigation. The page lists eve
 ### Permissions
 
 The Permissions section is the same reusable editor used for agent configurations in [Managing Plans](./managing_plans.md): a whitelist of native tool names, a whitelist of tool tags (or "allow all tools"), a whitelist of MCP servers (or "allow all MCP servers"), a denylist of specific tools (which always wins, even over an allow-all), and — relevant if you use the [Agentic Plan engine](../understanding/agentic_plans.md) — a whitelist of Plans this Application is allowed to invoke as callable tools.
+
+![The FlowerDocs Application's Configuration tab: name, connection provider, description, max tool cycles, prompt, and default provider/model](../images/application-detail.png)
+
+*Figure: An Application's configuration.*
 
 ## Resolution order
 

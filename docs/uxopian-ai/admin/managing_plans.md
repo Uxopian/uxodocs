@@ -10,12 +10,20 @@ The **Plans** section of the admin panel lets you build, run, and monitor [Agent
 
 In the admin panel, click *Plans* in the navigation. The page lists all plans for the current tenant with a search box, and a *New Plan* button.
 
+![The Plans list showing a plan's ID, description, and step count](../images/plans-list.png)
+
+*Figure: The Plans list.*
+
 ## Create a plan
 
 1. Click *New Plan*. This opens the plan editor on the **Flow** tab.
 2. Set the **Plan ID** (immutable once saved) and an optional **Description**.
 3. Click *Add Node* to add a node to the graph, then drag from one node's edge to another to connect them — a connection sets a dependency: the target node waits for the source node to complete.
 4. Select a node to open its configuration panel.
+
+![The Flow tab showing a three-node map-reduce plan: chunk, a fan-out summarize-chunks node, and combine](../images/plan-flow-editor.png)
+
+*Figure: A three-node plan — chunk (Direct tool) → summarize-chunks (Agent, fan-out) → combine (Agent).*
 
 ## Configure a node
 
@@ -35,6 +43,10 @@ Then pick the **node type** — Agent, Sub-plan, or Direct tool — each with it
 - **Sub-plan**: select another plan from this tenant to run as this node's body.
 - **Direct tool**: select a native tool from the dropdown (grouped by tag). Once selected, each of the tool's arguments gets its own source dropdown, listing every value currently available to this node (fan-out item, a connected dependency's output, a persisted output, or a plan input parameter) — the argument is auto-bound automatically when there is exactly one possible source.
 
+![The Node Configuration panel for a fan-out Agent node, showing List Key, Max Parallel Elements, and Output Key](../images/plan-node-config.png)
+
+*Figure: Configuring a fan-out node — `chunks` is the list key, up to 8 elements run in parallel.*
+
 ## Expose a plan as a tool
 
 Click *Tool settings* (top of the Flow tab) to open the tool-exposure panel:
@@ -46,6 +58,10 @@ Click *Tool settings* (top of the Flow tab) to open the tool-exposure panel:
 | Input parameters | Named, typed parameters the caller provides when invoking this plan as a tool. The editor suggests names already referenced inside the plan (a `listKey` or a `DIRECT_TOOL` argument binding) that aren't produced by any node — a likely sign they're meant to come from outside. |
 
 A plan exposed this way is only actually callable by an agent whose configuration explicitly allows it — see [Agentic Plans — exposing a Plan as a tool](../understanding/agentic_plans.md#exposing-a-plan-as-a-tool).
+
+![The tool-exposure modal, with the master switch on, a tool description, and one input parameter](../images/plan-tool-settings.png)
+
+*Figure: Exposing a plan as a tool named for its plan id, taking a `content` parameter.*
 
 ## Run a plan
 
@@ -59,6 +75,10 @@ The **Runs** tab shows, for a saved plan, a selector over its past executions (w
 - A **Pause** button while `Running`, **Resume** while `Paused`, and **Stop** while `Running` or `Paused` — pausing lets in-flight nodes finish before the execution actually stops; resuming continues from where it left off without re-running completed nodes; stopping moves the execution permanently to `Cancelled`, keeping the trace.
 - A visual graph of the plan's nodes, color-coded by their own status (`Pending`, `Running`, `Completed`, `Failed`, `Skipped`, `Unsatisfied`). Selecting a node shows its start/completion time, input/output token counts, error message (if any), full output, and every tool call it made — each expandable to see the exact arguments, result, and (if it failed) error.
 - If the whole execution failed, the failure reason is shown at the top.
+
+![An execution's Runs tab: chunk completed (green), summarize-chunks failed (red) with its error, combine skipped (gray)](../images/plan-run-detail.png)
+
+*Figure: A failed run — each node's status is color-coded, and its own detail panel (not pictured selected here) shows timing, tokens, and errors.*
 
 ## REST API
 
