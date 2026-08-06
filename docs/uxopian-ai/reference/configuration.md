@@ -37,6 +37,18 @@ tools:
   enabled: ${TOOLS_ENABLED:true}
 ```
 
+### Gateway-signed request authentication
+
+Since 2026.0.0-ft5, requests can carry a gateway-issued `X-Gateway-Auth` assertion instead of bare `X-User-*` headers. Verification is inactive until a secret is set (matches the gateway's own opt-in behavior — see [gateway-application.yaml](#gateway-applicationyaml)), but the **official Helm chart makes the secret mandatory** (the chart fails to render without `appConfig.internalAuth.secret`).
+
+| Key | Env variable | Default | Description |
+|---|---|---|---|
+| `internal-auth.jwt.secret` | `INTERNAL_AUTH_JWT_SECRET` | (empty, verification off) | HS256 shared secret, **at least 32 bytes**, must be **byte-for-byte identical** to the gateway's own `internal-auth.jwt.secret`. Generate with `openssl rand -base64 48`. |
+| `internal-auth.jwt.issuer` | `INTERNAL_AUTH_JWT_ISSUER` | `uxopian-gateway-internal` | Expected `iss` claim on the incoming assertion. |
+| `internal-auth.jwt.clock-skew-seconds` | `INTERNAL_AUTH_JWT_CLOCK_SKEW_SECONDS` | `5` | Allowed clock drift when validating the assertion's expiry. |
+
+Rotating the secret requires rolling both services close together — expect `401` responses between the two rollouts until both are running the new value.
+
 ## opensearch.yml
 
 OpenSearch connection settings.
@@ -263,7 +275,7 @@ There is no object store setting: the object store is the tenant, resolved per r
 | `filenet.ce-api-url` | — | (empty) | Content Engine Web Services (CEWS) endpoint, e.g. `http://<ce-host>:<port>/wsi/FNCEWS40MTOM/`. Required when the plugin is enabled. |
 | `filenet.oidc-realm` | `FILENET_OIDC_REALM` | (empty) | Name of the OIDC/OAuth provider trust registered on the Content Platform Engine via ACCE. Every CE call is authenticated as the current caller (via `OpenTokenCredentials`), not a shared service account — see [Integrate with FileNet](../how_to/integrate_with_filenet.mdx#04-configure-oidc-trust-on-the-content-platform-engine). Required. |
 | `filenet.common-system-properties` | — | `DocumentTitle`, `DateCreated`, `DateLastModified`, `Creator`, `LastModifier`, `MajorVersionNumber`, `MimeType` | List of properties (name, title, dataType, multiValued, allowedValues) surfaced to the LLM as the searchable/readable data model. Override if your object store uses a different default schema. |
-| `filenet.writable-properties` | — | (empty) | List of properties (same structure as above) the LLM is allowed to update via `setDocumentProperty`. Empty by default — no property is writable until explicitly listed. |
+| `filenet.writable-properties` | — | (empty) | List of properties (same structure as above) intended to be writable by the LLM. Configured but **not yet wired to a callable tool** — there is currently no LLM-callable way to update a FileNet document property. |
 
 Example:
 
@@ -334,7 +346,7 @@ Gateway (uxopian-gateway) configuration.
 | `app.routes[].path` | Ant path pattern — incoming requests must match this to activate the route |
 | `app.routes[].prefix` | Base prefix prepended to all security rule paths for matching against incoming requests |
 | `app.routes[].rewritePath` | Comma-separated `regex, replacement` — rewrites the request path **before** forwarding to the backend. Uses Java named capture groups (`(?<name>...)`), referenced as `$\{name}` in the replacement. |
-| `app.routes[].provider` | AuthProvider bean name (e.g., `DevProvider`, `FlowerDocsProvider`, `Fast2Provider`) |
+| `app.routes[].provider` | AuthProvider bean name — either a built-in singleton (`DevProvider`, `FlowerDocsProvider`, `Fast2Provider`, `AlfrescoProvider`, `FileNetProvider`) or a name declared under `app.providers` below |
 | `app.routes[].security[].path` | Path pattern for security rule (relative — combined with `prefix` at startup) |
 | `app.routes[].security[].public` | If `true`, no authentication required for this path |
 | `app.routes[].security[].roles` | List of required roles for this path |
@@ -342,6 +354,57 @@ Gateway (uxopian-gateway) configuration.
 YAML anchors (`&ANCHOR` / `*alias`) can be used to share URI and security rule definitions across multiple routes. Define anchors at the root level (before `app:`).
 
 See [Configure gateway routes](../how_to/configure_gateway_routes.md) for a step-by-step guide to deriving `path`, `prefix`, and `rewritePath` values, debug logging instructions, and a full FlowerDocs example.
+
+#### Named provider instances (`app.providers`)
+
+Since 2026.0.0-ft5, a provider type that ships an `AuthProviderFactory` (currently `Fast2Provider`, `AlfrescoProvider`, and `FileNetProvider`) can be instantiated **more than once**, under an operator-chosen name — for example, to serve two separate FileNet tenants from one gateway. Omitting `app.providers` entirely keeps the previous single-instance-per-type behavior; this is purely additive.
+
+| Key | Description |
+|---|---|
+| `app.providers.<name>.type` | One of the provider types above that supports named instances |
+| `app.providers.<name>.config.*` | Arbitrary key/value configuration passed to that provider type's factory (same keys as the type's own dedicated config block) |
+
+```yaml
+app:
+  providers:
+    filenet-tenant-a:
+      type: FileNetProvider
+      config:
+        ce-api-url: http://ce-a:9080/wsi/FNCEWS40MTOM/
+        oidc-realm: tenantARealm
+    filenet-tenant-b:
+      type: FileNetProvider
+      config:
+        ce-api-url: http://ce-b:9080/wsi/FNCEWS40MTOM/
+        oidc-realm: tenantBRealm
+  routes:
+    - id: filenet-a
+      provider: filenet-tenant-a
+      # ...
+    - id: filenet-b
+      provider: filenet-tenant-b
+      # ...
+```
+
+The instance name must not collide with a built-in provider bean name. Failing to declare `type`, referencing a type with no `AuthProviderFactory`, or a factory error at startup all fail fast with a clear message.
+
+#### CORS (`app.cors`)
+
+Since 2026.0.0-ft5, cross-origin access is controlled by the gateway itself.
+
+| Key | Description |
+|---|---|
+| `app.cors.allowed-origins` | List of allowed origins for cross-origin requests. Empty (the default) allows none — set this explicitly if a browser client on a different origin must reach the gateway. |
+
+#### Gateway-signed internal auth (`internal-auth.jwt`)
+
+Since 2026.0.0-ft5, the gateway can sign every proxied request so uxopian-ai no longer has to trust bare `X-User-*` headers from whatever reaches it — see [uxopian-ai's `internal-auth.jwt.secret`](#gateway-signed-request-authentication), which must match exactly.
+
+| Key | Env variable | Default | Description |
+|---|---|---|---|
+| `internal-auth.jwt.secret` | `INTERNAL_AUTH_JWT_SECRET` | (empty, signing off) | HS256 shared secret, **at least 32 bytes**. Signing is simply inactive when unset — no error. |
+| `internal-auth.jwt.issuer` | `INTERNAL_AUTH_JWT_ISSUER` | `uxopian-gateway-internal` | `iss` claim stamped on the issued assertion. |
+| `internal-auth.jwt.ttl-seconds` | `INTERNAL_AUTH_JWT_TTL_SECONDS` | `30` | Assertion lifetime. |
 
 ## Related pages
 

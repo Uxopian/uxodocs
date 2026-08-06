@@ -165,16 +165,14 @@ The `filenet` plugin (tag `filenet`) ships CE-SQL-backed tools across several `@
 
 | Tool name | Description |
 |---|---|
-| `getDataModel` | Returns the common system properties and document classes available for filtering |
-| `buildClassFilter` | Builds an `ISCLASS()` CE SQL condition on document type |
-| `buildPropertyContainsFilter` | Builds a `LIKE` condition for partial text match |
-| `buildPropertyEqualsFilter` | Builds an exact-match condition on a property or status |
-| `buildDateRangeFilter` | Builds a date range condition on `DateCreated`/`DateLastModified` |
-| `buildFullTextFilter` | Builds a `CONTAINS()` full-text condition |
-| `buildFolderScopedFilter` | Scopes the search to a folder |
-| `buildAndClause` / `buildOrClause` | Combine two raw conditions with AND/OR |
-| `buildAndClauseFromClauses` / `buildOrClauseFromClauses` | Combine existing filter clauses with AND/OR |
-| `searchDocuments` | Executes the assembled CE SQL query |
+| `fileNetGetDataModel` | Returns the common system properties and document classes available for filtering |
+| `fileNetBuildClassFilter` | Builds an `ISCLASS()` CE SQL condition on document type |
+| `fileNetBuildPropertyContainsFilter` | Builds a `LIKE` condition for partial text match |
+| `fileNetBuildPropertyEqualsFilter` | Builds an exact-match condition on a property or status |
+| `fileNetBuildDateRangeFilter` | Builds a date range condition on `DateCreated`/`DateLastModified` |
+| `fileNetBuildFullTextFilter` | Builds a `CONTAINS()` full-text condition |
+| `fileNetBuildFolderScopedFilter` | Scopes the search to a folder |
+| `fileNetSearchDocuments` | Executes the assembled CE SQL query |
 
 ### Documents (`FileNetDocumentToolService`)
 
@@ -183,15 +181,16 @@ The `filenet` plugin (tag `filenet`) ships CE-SQL-backed tools across several `@
 | `readDocumentText` | Reads the full OCR text of a document (via ARender) across all pages |
 | `getDocumentMetadata` | Returns all metadata properties (system + custom class) of a document |
 | `fileNetListFolderContents` | Lists documents in a folder (unfiltered, max 50) |
-| `setDocumentProperty` | Updates a metadata property — only for properties listed in `filenet.writable-properties` |
+
+The object store queried by these tools is resolved automatically from the current tenant — there is no `filenet.repository-id` setting to configure. `filenet.writable-properties` is configured but not yet wired to a callable tool; there is currently no LLM-callable way to update a FileNet document property.
 
 ### Redaction (`FileNetRedactTool`)
 
 | Tool name | Description |
 |---|---|
-| `prepareRedact` / `applyObfuscation` | Prepare and apply a redaction/obfuscation (requires the ARender plugin for rendering) |
+| `fileNetPrepareRedact` / `fileNetApplyObfuscation` | Prepare and apply a redaction/obfuscation (requires the ARender plugin for rendering) |
 
-A typical search session calls `getDataModel` first, then builds criteria, wraps them in clauses, and calls `searchDocuments`. The `FileNetHelper` bean (bridging documents to ARender for OCR) is always active, not gated by `plugins.tools.enabled-tags`. See [Integrate with FileNet](../how_to/integrate_with_filenet.mdx) for deployment steps.
+A typical search session calls `fileNetGetDataModel` first, then builds criteria and calls `fileNetSearchDocuments`. The `FileNetHelper` bean (bridging documents to ARender for OCR) is always active, not gated by `plugins.tools.enabled-tags`. See [Integrate with FileNet](../how_to/integrate_with_filenet.mdx) for deployment steps.
 
 ## Built-in tools: Interactive choices
 
@@ -221,3 +220,4 @@ The assistant emits the choices as a JSON block in its message content; the stan
 - [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx)
 - [Integrate with FileNet](../how_to/integrate_with_filenet.mdx)
 - [Managing MCP servers in the admin UI](../admin/managing_mcp_servers.md)
+- [Agentic Plans](./agentic_plans.md) — DIRECT_TOOL nodes call a native tool directly, no LLM in the loop; a Plan can itself be exposed as a callable tool
