@@ -65,6 +65,14 @@ After authentication, the gateway forwards four headers to `uxopian-ai`:
 | `X-User-Roles` | Comma-separated list of user roles |
 | `X-User-Token` | Original credential token (forwarded for integrations that call back into the source system) |
 
+Since 2026.0.0-ft5, `AuthFilter` also reads an optional **`X-Application-Id`** header — not an identity header, but a caller-supplied selector that forces which [Application](../admin/managing_applications.md) (`ApplicationConf`) the request resolves to, overriding the default that is otherwise derived from the connection provider.
+
+## Gateway-signed request authentication
+
+The identity headers above are, by themselves, just headers: anything able to reach `uxopian-ai` directly (bypassing the gateway) could set `X-User-Id`/`X-User-TenantId`/`X-User-Roles` to impersonate any user. Since 2026.0.0-ft5, the gateway can close that gap by **signing** every request it forwards with a short-lived HS256 JWT, carried in a new `X-Gateway-Auth` header, which `uxopian-ai` verifies before trusting the identity headers alongside it.
+
+The assertion carries `sub` (user id), `tenantId`, `roles`, and `provider` as claims, with a default 30-second lifetime. Both sides share one secret — the gateway signs with `internal-auth.jwt.secret`, `uxopian-ai` verifies with the same key under the identical property name — and verification is inactive on either side until its secret is set, so a non-signing deployment keeps working exactly as before. The official Helm charts make the secret **mandatory** on the `uxopian-ai` side (the chart fails to render without it). See [Configuration — gateway-signed request authentication](../reference/configuration.md#gateway-signed-request-authentication) for every key and the exact rotation procedure.
+
 ## AuthFilter in uxopian-ai
 
 `AuthFilter` (`OncePerRequestFilter`) reads these headers on every incoming request. It builds an `AuthenticatedUser` and opens an `AiResourceContext` scope using `AiContext.builder().withUser(authUser).open()`. All downstream services read tenant identity from `AiContext` rather than receiving it as parameters.
