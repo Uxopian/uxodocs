@@ -58,6 +58,8 @@ combine (AGENT, reads chunkSummaries)
 
 `fetch` and `chunk` need no LLM at all; `summarize-chunks` fans out one agent call per chunk in parallel; `combine` synthesizes the per-chunk summaries into one final answer. Splitting the map step (many small, cheap calls) from the reduce step (one call, higher-quality model) is a natural place to use a smaller/cheaper model for the fan-out agent and a stronger one for the final combine.
 
+`ai-standalone` ships two prompts purpose-built for exactly this pattern — `summarizeChunkFacts` (map: extracts key facts from one fragment) and `summarizeCombine` (reduce: merges the fragment summaries in reading order) — reference them by id in `summarize-chunks`'/`combine`'s agent configurations instead of writing your own from scratch.
+
 ## Sub-plans and nesting
 
 A `SUBPLAN` node runs another Plan **in-process**, synchronously, passing it the current merged payload as that sub-plan's input. Nesting is capped at a depth of **5** to prevent runaway recursion (a plan that calls itself, directly or through a cycle of sub-plans, fails once the cap is hit rather than looping forever).

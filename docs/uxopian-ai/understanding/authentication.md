@@ -101,6 +101,10 @@ Some paths bypass authentication in the gateway. The default gateway configurati
 
 Admin API routes (`/api/v1/admin/**`) can be restricted by role using the `roles` field in the gateway security configuration.
 
+## Session-cookie login (`/auth/login`)
+
+Providers that need an explicit login exchange (FileNet's ICN plugin hand-off, for example) POST or GET `app.gateway.login-path` (default `/auth/login`) with a `providerId` and a token to mint a `GATEWAY_SESSION` cookie. Since 2026.0.0-ft5, this endpoint only accepts a `providerId` that's actually declared on one of the gateway's own routes — previously any registered `AuthProvider` bean name worked here, which meant `DevProvider` (a fixed, credential-less identity) could mint a session even on a deployment configured for a real provider. See [Integrate with FileNet](../how_to/integrate_with_filenet.mdx) for a worked example.
+
 ## Custom auth providers
 
 A custom `AuthProvider` can be implemented in the gateway by writing a Spring bean that implements the `AuthProvider` interface (returns `Mono<AuthenticatedUser>`). The gateway configuration references the provider by its Spring bean name.
