@@ -342,19 +342,23 @@ Since 2026.0.0-ft5, a provider type that ships an `AuthProviderFactory` (current
 | `app.providers.<name>.type` | One of the provider types above that supports named instances |
 | `app.providers.<name>.config.*` | Arbitrary key/value configuration passed to that provider type's factory (same keys as the type's own dedicated config block) |
 
+Config keys mirror each provider's own dedicated block, kebab-cased: `public-key` / `issuer` / `tenant-id` / `clock-skew-seconds` for `FileNetProvider`, `share-url` / `tenant-id` / `cache-ttl-minutes` for `AlfrescoProvider`, `public-key-url` / `tenant-id` for `Fast2Provider`. These are the **gateway's** JWT-validation settings — not to be confused with `uxopian-ai`'s own FileNet connector settings (`filenet.ce-api-url`, `filenet.oidc-realm`, configured on the `ai-standalone` side, see [Integrate with FileNet](../how_to/integrate_with_filenet.mdx#03-configure-the-filenet-connection)).
+
 ```yaml
 app:
   providers:
     filenet-tenant-a:
       type: FileNetProvider
       config:
-        ce-api-url: http://ce-a:9080/wsi/FNCEWS40MTOM/
-        oidc-realm: tenantARealm
+        public-key: /path/to/tenant-a-icn-plugin-public-key.pem
+        issuer: icn-plugin
+        tenant-id: tenant-a-fallback
     filenet-tenant-b:
       type: FileNetProvider
       config:
-        ce-api-url: http://ce-b:9080/wsi/FNCEWS40MTOM/
-        oidc-realm: tenantBRealm
+        public-key: /path/to/tenant-b-icn-plugin-public-key.pem
+        issuer: icn-plugin
+        tenant-id: tenant-b-fallback
   routes:
     - id: filenet-a
       provider: filenet-tenant-a
