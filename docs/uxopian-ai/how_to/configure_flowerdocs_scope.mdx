@@ -16,10 +16,6 @@ FlowerDocs scope files inject the Uxopian AI chat panel, the [Quick Prompt](../u
 **<a href={require('./uxopian-ai_flowerdocs_scope.zip').default} download="uxopian-ai_flowerdocs_scope.zip">uxopian-ai_flowerdocs_scope.zip</a>**
 :::
 
-:::warning[This archive needs a refresh]
-This ZIP predates the current script source and still contains the old, non-scoped `GATEWAY_ENDPOINT` endpoint (the exact bug described in [Why WebSocket needs a separate, direct endpoint](#why-websocket-needs-a-separate-direct-endpoint) — it resolves the WebSocket to a route that no longer exists, `/ws/undefined`) and a `qp-connector` route matcher that assumes FlowerDocs component ids are always UUIDs (they aren't). The authoritative, current source is the `uxoai-flowerdocs` package (managed via `uxc`, kind `fd.script`) — re-export this archive from there via CLM before relying on it, or install directly from that package instead of this download.
-:::
-
 Extract the ZIP. The directory structure is:
 
 ```
@@ -112,11 +108,14 @@ const UXO_AI_ENDPOINT = `${BASE_URL}/plugins/${SCOPE}${GATEWAY_PATH}`;
 
 // Direct, browser-reachable address of uxopian-gateway's OWN Ingress, bypassing
 // FlowerDocs' proxy entirely. Optional: only needed for the WebSocket channel.
-// Rendered from the wsGatewayUrl package variable; empty if not configured.
-const WS_GATEWAY_URL_RAW = '{{uxc:wsGatewayUrl}}';
-const WS_UXO_AI_ENDPOINT = WS_GATEWAY_URL_RAW.startsWith('{{')
-  ? ''
-  : `${WS_GATEWAY_URL_RAW}/gui${GATEWAY_PATH}`;
+// Set this to the gateway's public URL by hand before deploying the scope
+// (e.g. https://ai-gateway.<your-domain>) — leave it blank to degrade
+// gracefully: chat/Quick Prompt keep working, only server-to-client push
+// actions stay silent.
+const WS_GATEWAY_URL_RAW = '';
+const WS_UXO_AI_ENDPOINT = WS_GATEWAY_URL_RAW
+  ? `${WS_GATEWAY_URL_RAW}/gui${GATEWAY_PATH}`
+  : '';
 ```
 
 | Constant | Default resolved path | How it reaches the gateway |

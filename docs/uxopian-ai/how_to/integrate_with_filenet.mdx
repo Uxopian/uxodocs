@@ -210,10 +210,6 @@ Initializing FileNet CE client. CEWS: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/
 **<a href={require('./uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven source project to build for your environment (does not bundle IBM's proprietary `navigatorAPI.jar`, see [1.1](#11-supply-navigatorapijar))
 :::
 
-:::danger[This source predates dynamic tenant resolution — do not deploy as-is on ft5]
-`JwtSigner` in this archive signs `sub`/`iss`/`iat`/`exp`/`roles` only — **no `tenantId` claim** — and `UxopianProxyService` never calls anything resolving a repository/object store. Deployed as-is against the current gateway/uxopian-ai (which expect the JWT to carry `tenantId`, see [How the tenant is resolved](#how-the-tenant-is-resolved)), every request falls back to the gateway's static `filenet.jwt.tenant-id`, silently merging every object store the desktop exposes into one tenant instead of isolating them. The plugin needs its per-caller impersonation and tenant-resolution logic (documented above) actually implemented before this archive matches the guide. Do not build and deploy this JAR into a multi-object-store environment expecting isolation until it's updated.
-:::
-
 Only the source is distributed — no prebuilt JAR — so you build and control what's deployed to WebSphere.
 
 ### Key integration points
