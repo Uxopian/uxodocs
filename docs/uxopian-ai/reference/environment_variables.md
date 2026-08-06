@@ -115,7 +115,7 @@ The gateway is configured primarily via the mounted `gateway-application.yaml` f
 | Variable | Default | Description |
 |---|---|---|
 | `REGISTRY` | `artifactory.arondor.cloud:5001` | Docker registry host for Artifactory-based image pull. Not used when switching to Cloudsmith images (see [Registry access](../getting_started/registry_access.md)). |
-| `UXOPIAN_VERSION` | `2026.0.0-ft4` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
+| `UXOPIAN_VERSION` | `2026.0.0-ft5` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
 
 In the gateway `gateway-application.yaml`, the URIs for backend services are hardcoded Docker Compose service names (e.g., `http://uxopian-ai:8080`).
 

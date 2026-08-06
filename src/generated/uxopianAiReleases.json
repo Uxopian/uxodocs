@@ -1,10 +1,18 @@
 [
   {
+    "version": "2026.0.0-ft5",
+    "majorVersion": "2026",
+    "date": "2026-08-04",
+    "description": "Agentic Plan engine, gateway-signed request authentication, prompt versioning, Applications, named multi-tenant gateway providers, and FileNet search/write tools.",
+    "latest": true,
+    "slug": "release-note-2026.0.0-ft5"
+  },
+  {
     "version": "2026.0.0-ft4",
     "majorVersion": "2026",
     "date": "2026-06-03",
     "description": "Quick Prompt context-aware assistant, interactive choices in chat, admin-managed scripts with LLM security scan, prompt-editor context autocomplete, and structured API error responses.",
-    "latest": true,
+    "latest": false,
     "slug": "release-note-2026.0.0-ft4"
   },
   {
