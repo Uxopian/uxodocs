@@ -21,7 +21,7 @@ Controls the base URL, server port, Spring profiles, and tool settings.
 | `server.servlet.context-path` | `CONTEXT_PATH` | (empty) | Optional servlet context path prefix |
 | `tools.enabled` | `TOOLS_ENABLED` | `true` | Set to `false` to disable all tool execution |
 | `plugins.root.path` | `PLUGINS_ROOT_PATH` | `plugins/` | Directory scanned at startup for plugin JARs |
-| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Comma-separated whitelist of `@ToolService` tag values registered at startup (see [Plugin system](../understanding/plugin_system.md#filtering-tools-by-tag)). Empty list = all tools registered. |
+| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Since 2026.0.0-ft5, this no longer gates which tools get *registered* at startup — every `@ToolService` in every plugin JAR present in `plugins/` is always registered. It now only seeds the default tool-tag whitelist on an auto-created [Application](../admin/managing_applications.md) (empty = `allowAllTools`). See [Plugin system](../understanding/plugin_system.md#filtering-tools-by-tag). |
 | `spring.profiles.active` | `SPRING_PROFILES_ACTIVE` | (empty) | Active Spring profiles. Add `dev` to disable auth. |
 
 Example:
@@ -180,40 +180,9 @@ prompts:
 
 ## goals.yml
 
-Goal group definitions.
-
-| Key | Description |
-|---|---|
-| `goals.backup.path` | Directory for goal backups. Env: `GOALS_BACKUP_PATH`. Default: `./goals/` |
-| `goals.globals` | List of global goal groups |
-| `goals.tenants` | List of per-tenant goal group overrides |
-
-### Goal group structure
-
-```yaml
-goals:
-  globals:
-    - id: <group-id>
-      goals:
-        - promptId: <prompt-id>
-          filter: "true"          # Thymeleaf boolean expression
-          index: 1                # Execution order (ascending)
-```
-
-### Tenant override structure
-
-```yaml
-goals:
-  tenants:
-    - tenantId: <tenant-id>
-      mergeStrategy: merge | replace
-      goalGroups:
-        - id: <group-id>
-          goals:
-            - promptId: <prompt-id>
-              filter: "[[${documentType == 'contract'}]]"
-              index: 10
-```
+:::warning[Removed in 2026.0.0-ft5]
+The Goal concept — and `goals.yml` along with it — was removed in 2026.0.0-ft5 (no runtime consumer ever read it). See [Goals](../understanding/goals.md) for what to use instead.
+:::
 
 ## metrics.yml
 
@@ -242,7 +211,7 @@ Hazelcast cluster configuration. Used by the gateway for session caching.
 
 ## alfresco
 
-Configuration for the Alfresco plugin (loaded only when `plugins.tools.enabled-tags` contains `alfresco`).
+Configuration for the Alfresco plugin. Since 2026.0.0-ft5, its tools are always registered when the JAR is present in `plugins/`; whether they're exposed to a given caller is controlled by that caller's [Application](../admin/managing_applications.md) tool/tag whitelist, not by `plugins.tools.enabled-tags`.
 
 | Key | Env variable | Default | Description |
 |---|---|---|---|
@@ -266,7 +235,7 @@ See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deploym
 
 ## filenet
 
-Configuration for the FileNet plugin (loaded only when `plugins.tools.enabled-tags` contains `filenet`).
+Configuration for the FileNet plugin. Since 2026.0.0-ft5, its tools are always registered when the JAR is present in `plugins/`; whether they're exposed to a given caller is controlled by that caller's [Application](../admin/managing_applications.md) tool/tag whitelist, not by `plugins.tools.enabled-tags`.
 
 There is no object store setting: the object store is the tenant, resolved per request by the ICN plugin and carried in its JWT — see [How the tenant is resolved](../how_to/integrate_with_filenet.mdx#how-the-tenant-is-resolved).
 
@@ -355,6 +324,27 @@ YAML anchors (`&ANCHOR` / `*alias`) can be used to share URI and security rule d
 
 See [Configure gateway routes](../how_to/configure_gateway_routes.md) for a step-by-step guide to deriving `path`, `prefix`, and `rewritePath` values, debug logging instructions, and a full FlowerDocs example.
 
+#### The gateway's own endpoints (`app.security`)
+
+`app.routes[].security[]` rules only apply within their own route's path — they never cover paths the gateway serves itself (`/actuator/**`, and nothing else, since routes are the only other traffic). A top-level `app.security` list configures those gateway-owned paths:
+
+| Key | Description |
+|---|---|
+| `app.security[].path` | Path pattern, matched as-is (no route `prefix` involved) |
+| `app.security[].public` | If `true`, no authentication required |
+| `app.security[].roles` | List of required roles |
+
+Without this, `/actuator/health` falls through to "authenticated" by default — which 401s the Kubernetes liveness/readiness probe and crash-loops the pod. The shipped `application.yml` sets:
+
+```yaml
+app:
+  security:
+    - path: "/actuator/health"
+      public: true
+    - path: "/actuator/**"
+      roles: ["ADMIN"]
+```
+
 #### Named provider instances (`app.providers`)
 
 Since 2026.0.0-ft5, a provider type that ships an `AuthProviderFactory` (currently `Fast2Provider`, `AlfrescoProvider`, and `FileNetProvider`) can be instantiated **more than once**, under an operator-chosen name — for example, to serve two separate FileNet tenants from one gateway. Omitting `app.providers` entirely keeps the previous single-instance-per-type behavior; this is purely additive.
@@ -405,6 +395,8 @@ Since 2026.0.0-ft5, the gateway can sign every proxied request so uxopian-ai no 
 | `internal-auth.jwt.secret` | `INTERNAL_AUTH_JWT_SECRET` | (empty, signing off) | HS256 shared secret, **at least 32 bytes**. Signing is simply inactive when unset — no error. |
 | `internal-auth.jwt.issuer` | `INTERNAL_AUTH_JWT_ISSUER` | `uxopian-gateway-internal` | `iss` claim stamped on the issued assertion. |
 | `internal-auth.jwt.ttl-seconds` | `INTERNAL_AUTH_JWT_TTL_SECONDS` | `30` | Assertion lifetime. |
+
+Public paths get signed too, not just authenticated ones: any request the gateway forwards for a path marked `public` in `app.security`/`app.routes[].security[]` still carries a signed `X-Gateway-Auth` assertion when a secret is configured — an anonymous one (no `sub`/`tenantId`, just the `provider` claim). Any `X-Gateway-Auth` the client itself supplied is stripped and replaced first, never appended to.
 
 ## Related pages
 

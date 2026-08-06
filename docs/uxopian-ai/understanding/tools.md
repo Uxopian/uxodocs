@@ -62,12 +62,7 @@ If tools are disabled via `tools.enabled=false` (or `TOOLS_ENABLED=false`), the 
 
 ## Filtering tools by tag
 
-In 2026.0.0-ft3, `@ToolService.tags()` + `plugins.tools.enabled-tags` control which tool sets are registered at startup. This lets a single distribution ZIP ship several integrations (Alfresco, FlowerDocs, Files) while the deployer picks which ones the LLM actually sees.
-
-- Default value in the shipped `application.yaml`: `flowerdocs,files` — Alfresco tools are *not* registered unless you opt in.
-- Empty list = every `@ToolService` is registered.
-- A `@ToolService` without any tag is *always* registered (backward compatible for custom in-tree tools).
-- Multi-tagged tools are registered when *any* of their tags matches the whitelist.
+`@ToolService.tags()` was added in 2026.0.0-ft3. Before 2026.0.0-ft5, `plugins.tools.enabled-tags` used those tags to control which tool sets got *registered* at startup. **Since 2026.0.0-ft5, registration is unconditional: every `@ToolService` in every plugin JAR under `plugins/` is always registered**, regardless of tags or `enabled-tags`. What a given caller actually sees is now controlled per [Application](../admin/managing_applications.md) (its tool/tag whitelist) — `plugins.tools.enabled-tags` only seeds the default whitelist on the Application auto-created the first time a connection provider is used.
 
 See [Plugin system — Filtering tools by tag](./plugin_system.md#filtering-tools-by-tag) for the full mechanism and test-time usage.
 
@@ -106,6 +101,7 @@ The `flowerdocs/tool` plugin (tag `flowerdocs`) ships tools the LLM can use to s
 | `doSearch` | Executes the search and returns matching documents |
 | `getDocumentIdsByName` | Looks up document IDs by name |
 | `getDocumentContent` | Returns the textual content of a document |
+| `extractDocumentText` | Same content as `getDocumentContent`, under a name/description aimed at [Agentic Plans](./agentic_plans.md) `DIRECT_TOOL` nodes — e.g. the first step of a document-summarization plan |
 | `getDocumentProperties` | Returns a document's metadata (properties, tags, author) |
 | `updateDocumentProperty` | Updates a tag / metadata value on a document |
 | `previewRevertToPreviousVersion` | Non-destructive preview of a version restore |

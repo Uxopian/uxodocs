@@ -98,6 +98,15 @@ The gateway can now sign every proxied request with a short-lived HS256 JWT (cla
 - **Smaller admin bundle** — Monaco-based editors (condition/JS/Thymeleaf) are now lazy-loaded, and the Quick Prompt loading asset shrank from ~10 MB to ~183 KB.
 - **Gateway: hardened session-credential binding** — cached sessions are now bound to a credential fingerprint (SHA-256), and route-scoped/global security rule matching is centralized in a single component instead of inline logic.
 - **Gateway: `DevProvider` no longer trusts client headers (UXOAI-250).** It now always returns a fixed development identity (`dev`, tenant `dev`, role `ADMIN`), ignoring `X-User-Id`/`X-User-Roles`/`X-User-Tenant` entirely — previously it trusted those headers with no validation, so any caller could forge an arbitrary user or tenant against a route using `DevProvider`. See [Upgrade notes](#-upgrade-notes) if your local/CI setup relied on picking a tenant this way.
+- **Stop generating** — a chat message being streamed can now be cancelled mid-flight; the partial response already received is kept rather than discarded.
+- **Bookmarkable admin lists** — search term, page, and page size on the Prompts, LLM Providers, MCP Servers, Scripts, Users, and Applications list pages are now synced to the URL, so a link to a filtered/paginated view can be shared or survive back/forward navigation.
+- **Breadcrumb navigation** in the admin UI header on Users, LLM Providers, Prompts, Applications, Scripts, and MCP Servers detail pages.
+- **Prompt search by label, and a Label column** on the Prompts list — search now matches a prompt's translated Quick Prompt label, not just its id or content.
+- **Pagination added to the Scripts and MCP Servers list pages** (previously unpaginated).
+- **Admin shortcut to jump from a chat message to the prompt that produced it.**
+- **Gateway: public paths are signed too** — when `internal-auth.jwt.secret` is set, requests to paths marked `public` still carry a signed `X-Gateway-Auth` assertion (an anonymous one — no `sub`/`tenantId`, just the `provider` claim), not just authenticated requests. A client-supplied `X-Gateway-Auth` header is always stripped and replaced, never trusted through.
+- **Gateway: new top-level `app.security` block** for the gateway's own endpoints (`/actuator/**`), distinct from `app.routes[].security[]` — fixes `/actuator/health` 401ing and crash-looping Kubernetes probes under the default chart values.
+- **Gateway: `/auth/login` restricted to providers declared on a route** — previously accepted any registered `AuthProvider` bean name, so `DevProvider` (a fixed, credential-less identity) could mint a session even on a deployment configured for a real provider.
 - **Dependency updates**: langchain4j 1.11.0 → 1.16.3, Netty 4.2.13 → 4.2.16, OpenSearch client 3.5.0 → 3.6.0 (see [Upgrade notes](#-upgrade-notes)), base image 1.0.6 → 1.0.8 (see [Upgrade notes](#-upgrade-notes)). Frontend dev tooling bumped (ESLint 9→10, TypeScript 5.9→6.0, Vitest 2→4) with no runtime impact.
 - CVE remediation pass ahead of this pre-release.
 
@@ -142,7 +151,11 @@ The gateway can now sign every proxied request with a short-lived HS256 JWT (cla
 
 11. **Gateway: `DevProvider` no longer reads `X-User-Id`/`X-User-Roles`/`X-User-Tenant`.** Any local, CI, or demo setup that used those headers to select a test user or tenant through `DevProvider` now always gets the fixed `dev`/`dev`/`ADMIN` identity instead. Switch to `FlowerDocsProvider`/`Fast2Provider` (or a real deployment) if you need to exercise multi-tenant behavior.
 
-12. **No migration needed** for the Agentic Plan engine or the FileNet write tools — both are new and opt-in.
+12. **Goals removed (action required if you used them).** The Goal concept — `goals.yml`, `/api/v1/admin/goals`, and the `{"type": "goal", ...}` request content item — is gone; there was no runtime consumer left to justify keeping it. If you referenced a goal group, call the underlying [Prompt](/docs/uxopian-ai/understanding/prompts_and_templating) directly instead (`type: prompt`), or move the conditional-selection logic it was doing into an [Application](/docs/uxopian-ai/admin/managing_applications)'s prompt or an [Agentic Plan](/docs/uxopian-ai/understanding/agentic_plans). See [Goals](/docs/uxopian-ai/understanding/goals) for the full mapping.
+
+13. **`plugins.tools.enabled-tags` no longer gates which tools get *registered* at startup (security-relevant).** Since this release, `IntegrationLoader` registers every `@ToolService` in every plugin JAR present under `plugins/`, unconditionally — the tag whitelist plays no part in registration anymore. If you relied on `enabled-tags` to keep Alfresco or FileNet tool *code* from ever loading, it no longer does that: the code loads regardless. The property still exists, but it now only seeds the default tool-tag whitelist on the [Application](/docs/uxopian-ai/admin/managing_applications) auto-created the first time a connection provider is used — control which tools a caller can actually invoke there instead.
+
+14. **No migration needed** for the Agentic Plan engine or the FileNet write tools — both are new and opt-in.
 
 ---
 
