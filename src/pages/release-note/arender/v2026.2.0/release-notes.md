@@ -16,7 +16,7 @@ import DocLink from '@site/src/components/DocLink';
 
 # ARender v2026.2.0 - Release Notes
 
-ARender 2026.2.0 is the second minor release on the 2026 line. It adds a new **M-Files provider** so documents can be viewed and annotated directly from M-Files vaults, continues to expand annotation tooling in **ARender Horizon** (underline annotations and comments panel refinements), and rounds out the release with Classic annotation fixes, Rendition fixes and security hardening.
+ARender 2026.2.0 is the second minor release on the 2026 line. It adds a new **M-Files provider** so documents can be viewed directly from M-Files vaults, continues to expand annotation tooling in **ARender Horizon** (underline annotations and comments panel refinements), and rounds out the release with Classic annotation fixes, Rendition fixes and security hardening.
 
 As in the previous release, the changes below are grouped by viewer: a shared **Security** section, then **ARender Horizon (React)**, **ARender Classic (GWT)**, and finally **Rendition & platform** for everything that applies to both viewers (backend, conversion, integrations).
 
@@ -76,7 +76,7 @@ Backend, conversion and integration changes that apply regardless of the viewer.
 
 #### M-Files provider
 
-`New` - ARender can now view, annotate and retrieve metadata for documents stored in M-Files vaults, through a dedicated M-Files provider available on both ARender Horizon and the Rendition Engine. See the <DocLink version="v2026.2.0" product="arender" to="guides/integration/m-files">M-Files integration guide</DocLink> for setup instructions.
+`New` - ARender can now view and retrieve metadata for documents stored in M-Files vaults, through a dedicated M-Files provider available on both ARender Horizon and the Rendition Engine. Annotation support is not yet handled by the provider and is planned for a future release. See the <DocLink version="v2026.2.0" product="arender" to="guides/integration/m-files">M-Files integration guide</DocLink> for setup instructions.
 
 ### Bug fixes
 
