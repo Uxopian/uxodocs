@@ -39,7 +39,7 @@ Three built-in providers are included:
 
 | Provider | When to use |
 |---|---|
-| `DevProvider` | Local development only. Reads identity from `X-User-Id`, `X-User-Roles`, `X-User-TenantId` request headers with no validation. |
+| `DevProvider` | Local development only. Since 2026.0.0-ft5, always returns a **fixed** identity (`dev`, tenant `dev`, role `ADMIN`) — it no longer reads any client-supplied header, so it can never be used to forge an arbitrary user or tenant (previously it trusted `X-User-Id`/`X-User-Roles`/`X-User-Tenant` with no validation). |
 | `FlowerDocsProvider` | FlowerDocs deployments. Validates FlowerDocs JWTs from `Authorization: Bearer` or `SESSION` cookie. Caches sessions in Hazelcast. |
 | `Fast2Provider` | Fast2 deployments. Validates Fast2 JWT tokens from `Authorization: Bearer`. |
 

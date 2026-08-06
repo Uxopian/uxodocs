@@ -112,7 +112,7 @@ Expected response:
 
 Open `http://localhost:8085` in your browser. The gateway is listening on port 8085.
 
-To access the admin UI, open the admin element page. The default development identity (`User-development`, tenant `Tenant-development`) is injected automatically by `DevProvider` when no credentials are provided.
+To access the admin UI, open the admin element page. Since 2026.0.0-ft5, `DevProvider` always injects a fixed development identity (`dev`, tenant `dev`, role `ADMIN`) regardless of any client-supplied headers — a hardening fix so it can never be used to forge an arbitrary user. There is no way to pick a different tenant through `DevProvider` headers anymore; use `FlowerDocsProvider`/`Fast2Provider` (or a real deployment) to test multi-tenant behavior.
 
 ## Configuration notes
 

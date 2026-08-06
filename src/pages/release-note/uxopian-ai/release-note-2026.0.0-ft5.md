@@ -97,6 +97,7 @@ The gateway can now sign every proxied request with a short-lived HS256 JWT (cla
 - **Metrics instrumentation redesign** — listener-free, bounded-cardinality metrics, still served through the existing `StatsService` (not a Micrometer migration).
 - **Smaller admin bundle** — Monaco-based editors (condition/JS/Thymeleaf) are now lazy-loaded, and the Quick Prompt loading asset shrank from ~10 MB to ~183 KB.
 - **Gateway: hardened session-credential binding** — cached sessions are now bound to a credential fingerprint (SHA-256), and route-scoped/global security rule matching is centralized in a single component instead of inline logic.
+- **Gateway: `DevProvider` no longer trusts client headers (UXOAI-250).** It now always returns a fixed development identity (`dev`, tenant `dev`, role `ADMIN`), ignoring `X-User-Id`/`X-User-Roles`/`X-User-Tenant` entirely — previously it trusted those headers with no validation, so any caller could forge an arbitrary user or tenant against a route using `DevProvider`. See [Upgrade notes](#-upgrade-notes) if your local/CI setup relied on picking a tenant this way.
 - **Dependency updates**: langchain4j 1.11.0 → 1.16.3, Netty 4.2.13 → 4.2.16, OpenSearch client 3.5.0 → 3.6.0 (see [Upgrade notes](#-upgrade-notes)), base image 1.0.6 → 1.0.8 (see [Upgrade notes](#-upgrade-notes)). Frontend dev tooling bumped (ESLint 9→10, TypeScript 5.9→6.0, Vitest 2→4) with no runtime impact.
 - CVE remediation pass ahead of this pre-release.
 
@@ -139,7 +140,9 @@ The gateway can now sign every proxied request with a short-lived HS256 JWT (cla
 
 10. **New `ApplicationConf` concept.** No action required unless you call uxopian-ai from more than one application context — in which case, consider setting `X-Application-Id` and configuring per-application defaults and tool whitelists. Note that a Prompt used as a base prompt or as an Application's system prompt can no longer be deleted while referenced.
 
-11. **No migration needed** for the Agentic Plan engine or the FileNet write tools — both are new and opt-in.
+11. **Gateway: `DevProvider` no longer reads `X-User-Id`/`X-User-Roles`/`X-User-Tenant`.** Any local, CI, or demo setup that used those headers to select a test user or tenant through `DevProvider` now always gets the fixed `dev`/`dev`/`ADMIN` identity instead. Switch to `FlowerDocsProvider`/`Fast2Provider` (or a real deployment) if you need to exercise multi-tenant behavior.
+
+12. **No migration needed** for the Agentic Plan engine or the FileNet write tools — both are new and opt-in.
 
 ---
 
