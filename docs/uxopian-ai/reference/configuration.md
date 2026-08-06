@@ -182,7 +182,7 @@ Micrometer metrics and actuator configuration.
 | `management.elastic.metrics.export.host` | OpenSearch URL for metrics. Default reads from `opensearch.*` properties. |
 | `management.elastic.metrics.export.index` | Index name for metrics (default: `micrometer-metrics`) |
 | `management.elastic.metrics.export.auto-create-index` | Auto-create metrics index (default: `true`) |
-| `management.endpoints.web.exposure.include` | Exposed actuator endpoints. Default: `health,info,loggers` |
+| `management.endpoints.web.exposure.include` | Exposed actuator endpoints. Default: `health,info` — `/actuator/loggers` was removed from exposure in 2026.0.0-ft5, and `management.endpoint.loggers.enabled` is `false` as defense-in-depth. See [Upgrade notes](/release-note/uxopian-ai/release-note-2026.0.0-ft5#-upgrade-notes). |
 | `management.metrics.uxopian-ai.enable` | Enable custom uxopian-ai metrics (default: `true`) |
 | `management.metrics.enable.*` | Standard metric groups disabled by default: `application`, `tomcat`, `logback`, `jvm`, `system`, `http`, `process`, `disk`, `executor` |
 
