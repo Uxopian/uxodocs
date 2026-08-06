@@ -156,7 +156,7 @@ Some older CPE guidance configures inbound OAuth/OIDC trust via `provider_1.*` J
 3. Restart CPE, then confirm the JWT's user id (claim `sub`) resolves to a valid user in the P8 domain's directory — CE authorizes and audits against this identity directly.
 
 :::info[Keystore rotation needs no CPE-side action]
-The CPE fetches the signing key dynamically, so rotating the plugin's keystore only requires updating the gateway's `filenet.jwt.public-key` ([Phase 3.1](#31-register-the-plugins-public-key-with-filenetprovider)) — nothing to redo on the CPE.
+The CPE fetches the signing key dynamically, so rotating the plugin's keystore only requires updating the `public-key` on the gateway's `FileNetProvider` instance ([Phase 3.1](#31-register-the-plugins-public-key-with-filenetprovider)) — nothing to redo on the CPE.
 :::
 
 :::danger[Do not add a server-wide webAppSecurity override — it breaks ACCE]
@@ -288,27 +288,32 @@ The gateway's `FileNetProvider` validates incoming JWTs using a **statically con
 curl http://<websphere-host>:<icn-port>/navigator/jaxrs/UxopianPlugin/UxopianProxyService?op=public-key
 ```
 
-The endpoint returns a PEM-encoded RSA public key. Set it (as a PEM string or a path to a file containing it) in the gateway's configuration, alongside the other `FileNetProvider` JWT properties:
+The endpoint returns a PEM-encoded RSA public key. Register it as a **named instance** of `FileNetProvider` under `app.providers` — this is the standard way to configure `FileNetProvider`, even for a single P8 domain: it costs nothing extra now and means serving a second CPE later is just another entry, not a reconfiguration of the first.
 
 ```yaml title="application.yml (uxopian-gateway)"
-filenet:
-  jwt:
-    public-key: |
-      -----BEGIN PUBLIC KEY-----
-      ...
-      -----END PUBLIC KEY-----
-    # public-key: /path/to/icn-plugin-public-key.pem   # a file path also works
-    issuer: icn-plugin              # default: icn-plugin — must match the plugin's JWT issuer
-    tenant-id: filenet               # default: filenet — fallback only, see below
-    clock-skew-seconds: 300          # default: 300
+app:
+  providers:
+    filenet:
+      type: FileNetProvider      # the provider's @Service bean name
+      config:
+        public-key: |
+          -----BEGIN PUBLIC KEY-----
+          ...
+          -----END PUBLIC KEY-----
+        # public-key: /path/to/icn-plugin-public-key.pem   # a file path also works
+        issuer: icn-plugin              # default: icn-plugin — must match the plugin's JWT issuer
+        tenant-id: filenet               # default: filenet — fallback only, see below
+        clock-skew-seconds: 300          # default: 300
 ```
 
+The route ([3.2](#32-declare-the-gateway-route)) references this instance by the name chosen above — `provider: filenet` — not the bean type `FileNetProvider`.
+
 :::warning[Re-register the key whenever the keystore changes]
-If you replace the plugin's keystore ([Replacing the keystore](#replacing-the-keystore)), the public key changes too. Re-fetch it from `?op=public-key` and update `filenet.jwt.public-key` on the gateway, then restart the gateway.
+If you replace the plugin's keystore ([Replacing the keystore](#replacing-the-keystore)), the public key changes too. Re-fetch it from `?op=public-key` and update this instance's `public-key` on the gateway, then restart the gateway.
 :::
 
-:::tip[Serving more than one P8 domain from one gateway]
-The single top-level `filenet:` block above supports exactly one `FileNetProvider` instance. Since 2026.0.0-ft5, the gateway can instead run **several named instances** — e.g. one per P8 domain/CPE — each with its own `public-key`/`issuer`/`tenant-id`, selected per route via `provider: <name>`. See [Configuration reference — Named provider instances](../reference/configuration.md#named-provider-instances-appproviders) (the config keys are the same, without the `jwt.` segment: `public-key`, `issuer`, `tenant-id`, `clock-skew-seconds`).
+:::tip[Serving a second P8 domain from the same gateway]
+Add another entry under `app.providers` with its own name and `public-key`/`issuer`/`tenant-id` (for example `filenet-tenant-b`), then point a second route at it via `provider: filenet-tenant-b`. See [Configuration reference — Named provider instances](../reference/configuration.md#named-provider-instances-appproviders).
 :::
 
 ### How the tenant is resolved
@@ -369,7 +374,7 @@ app:
       uri: http://uxopian-ai:8080
       path: /gui/gateway/uxopian-ai/filenet/**
       prefix: /gui/gateway/uxopian-ai/filenet/
-      provider: FileNetProvider
+      provider: filenet   # the app.providers instance name from 3.1, not the bean type
       rewritePath: /gui/gateway/uxopian-ai/filenet/?(?<segment>.*), /gui/gateway/uxopian-ai/$\{segment}
       security:
         - path: "/**/api/web-components/**"
@@ -406,9 +411,9 @@ The `path` value here must match the **Uxopian AI Host URL** configured on the p
 `/gui/gateway/uxopian-ai/filenet/**` is a sub-path of the default FlowerDocs route's own pattern
 (`/gui/gateway/uxopian-ai/**`). The gateway matches routes **in declaration order** and stops at
 the first match — so if `uxopian-ai` is declared first, it silently wins for every FileNet
-request too, injecting `FlowerDocsProvider` instead of `FileNetProvider`. Symptoms are confusing
+request too, injecting `FlowerDocsProvider` instead of `filenet`. Symptoms are confusing
 because most of the flow still appears to work: the login exchange succeeds and a session cookie
-is set, but it's stored keyed by `FileNetProvider`; the very next request then fails to resolve
+is set, but it's stored keyed by `filenet`; the very next request then fails to resolve
 it under the wrong provider key and 401s with `Authentication token is missing`, even though a
 valid session cookie was sent. This is exactly the failure mode if `AI Admin` opens the right URL
 but the admin panel itself 401s. Verify the actual provider being used for a request by checking
@@ -507,14 +512,14 @@ Set `icn.plugin.keystore.path`, `.alias`, and `.password` as WebSphere JVM custo
 | `filenet.oidc-realm` | `FILENET_OIDC_REALM` | (empty) | The CPE's existing LDAP realm name (see [0.3](#03-configure-the-filenet-connection)) — not an arbitrary name, and not the `issuer_identifier` configured in [Phase 0.4](#04-configure-oidc-trust-on-the-content-platform-engine). Used to build a per-caller `OpenTokenCredentials` — every CE call is authenticated as the current end user, not a shared account. Required. |
 | `filenet.common-system-properties` | — | `DocumentTitle`, `DateCreated`, `DateLastModified`, `Creator`, `LastModifier`, `MajorVersionNumber`, `MimeType` | Properties surfaced to the LLM as the default data model. |
 | `filenet.writable-properties` | — | (empty) | Properties intended to be writable by the LLM. Configured but not yet wired to a callable tool. |
-| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files,interaction` | Must include `filenet` to register the FileNet tools. |
+| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files,interaction` | Does **not** gate registration since 2026.0.0-ft5; only seeds the tool-tag whitelist of the auto-created default Application (see [0.2](#02-expose-the-filenet-tools-to-the-right-application)). |
 
-| FileNetProvider JWT property (uxopian-gateway) | Default | Description |
+| `FileNetProvider` `app.providers.<name>.config.*` key (uxopian-gateway) | Default | Description |
 |---|---|---|
-| `filenet.jwt.public-key` | — | PEM string or file path. RSA public key used to validate JWTs from the ICN plugin. Required. |
-| `filenet.jwt.issuer` | `icn-plugin` | Expected JWT issuer. |
-| `filenet.jwt.tenant-id` | `filenet` | Fallback tenant, used only for tokens with no `tenantId` claim. Normally the object store from the claim wins — see [How the tenant is resolved](#how-the-tenant-is-resolved). |
-| `filenet.jwt.clock-skew-seconds` | `300` | Allowed clock skew when validating token expiry. |
+| `public-key` | — | PEM string or file path. RSA public key used to validate JWTs from the ICN plugin. Required. |
+| `issuer` | `icn-plugin` | Expected JWT issuer. |
+| `tenant-id` | `filenet` | Fallback tenant, used only for tokens with no `tenantId` claim. Normally the object store from the claim wins — see [How the tenant is resolved](#how-the-tenant-is-resolved). |
+| `clock-skew-seconds` | `300` | Allowed clock skew when validating token expiry. |
 
 ## Common issues
 
@@ -522,12 +527,12 @@ Set `icn.plugin.keystore.path`, `.alias`, and `.password` as WebSphere JVM custo
 |---|---|---|
 | FileNet tools appear in the admin's global tool list but the LLM never calls them | The Application the request resolves to (`FileNet` by default) does not whitelist the `filenet` tag in its Permissions | Add `filenet` to that Application's tool-tag whitelist, and make sure `flowerdocs`/`alfresco` aren't also whitelisted there (Phase 0.2) |
 | `Initializing FileNet CE client` never logged, or CE connection error | `filenet.ce-api-url` missing or wrong | Verify the CEWS endpoint is reachable from uxopian-ai (Phase 0.3) |
-| Data from the wrong object store, or an empty tenant in uxopian-ai | The plugin could not resolve the object store, so it omitted the `tenantId` claim and the gateway fell back to `filenet.jwt.tenant-id` | Check the Navigator logs for `tenant claim omitted` and confirm the desktop has a default repository — see [How the tenant is resolved](#how-the-tenant-is-resolved) |
+| Data from the wrong object store, or an empty tenant in uxopian-ai | The plugin could not resolve the object store, so it omitted the `tenantId` claim and the gateway fell back to the instance's `tenant-id` | Check the Navigator logs for `tenant claim omitted` and confirm the desktop has a default repository — see [How the tenant is resolved](#how-the-tenant-is-resolved) |
 | `Cannot impersonate caller against FileNet: missing user identity or token` | The current request has no authenticated user or token in `AiContext` | Confirm the gateway route is not `public: true` for this path, and that the ICN plugin's JWT reaches uxopian-ai unmodified as `X-User-Token` |
 | `E_NOT_AUTHENTICATED` from FileNet | On every call: the CPE's `open_id_connect_providers` config doesn't trust the caller's JWT. For one specific user only: their JWT user id doesn't resolve to a valid CE user in the P8 domain directory | Confirm `issuer_identifier` matches the plugin's JWT issuer, `discovery_endpoint_url` is reachable, and `filenet.oidc-realm` is a real LDAP realm name (Phase 0.4); for a single user, check their directory entry |
 | `CWWKS1524E`/`CWWKS1525E` (`PKIX path building failed`), or `CWWKS1739E`/`CWWKS1737E` right after | Liberty's `openidConnectClient` doesn't yet trust the CA signing the gateway's HTTPS certificate in its own dedicated truststore (separate from the JDK cacerts), so the discovery fetch fails — the second pair of errors is just a symptom of that failed fetch | Import that CA root into `shared_configuration.trusted_certificate_list` (Phase 0.4, step 2) |
 | `op=token` returns `{"error":"..."}`, or IBM Java 8 keystore error | Keystore not found, wrong alias/password, or (Java 8) PKCS12 unsupported | Set `icn.plugin.keystore.path` to an absolute path and verify credentials; the plugin falls back to the bundled `.jks` automatically on Java 8 |
-| JWT rejected by gateway | Public key not configured, or wrong `issuer`/`tenant-id`, on `FileNetProvider` | Re-fetch the public key from `?op=public-key` and set `filenet.jwt.public-key` on the gateway (Phase 3.1) |
+| JWT rejected by gateway | Public key not configured, or wrong `issuer`/`tenant-id`, on the `FileNetProvider` instance | Re-fetch the public key from `?op=public-key` and set this instance's `public-key` under `app.providers` on the gateway (Phase 3.1) |
 | Chat panel blank, or web component assets 401/403 | `icn.plugin.bff.url`/Uxopian AI Host URL wrong, unreachable, or the gateway route isn't public for assets | Verify connectivity from WebSphere to the gateway and that `/api/web-components/**` is `public: true` |
 | `AI Admin` 404s at `.../auth/login...` | The reverse proxy/load balancer in front of the gateway doesn't cover `/gui/gateway/auth/login` — see [3.2](#32-declare-the-gateway-route) | Route the broader `/gui/gateway` prefix there instead |
 | `AI Admin` 401s with `Authentication token is missing` despite a `GATEWAY_SESSION` cookie | Route declaration order — see [3.2](#32-declare-the-gateway-route) | Move `uxopian-ai-filenet` before `uxopian-ai` in the routes list |
