@@ -37,24 +37,37 @@ Since 2026.0.0-ft3, the prompts list uses a **stale-while-revalidate** cache: wh
 
 ## Prompt detail page
 
-Click on a prompt in the list to open its detail page (route `/prompts/:promptId`). The detail page has four tabs: Edit, Display, Test, and Statistics.
+Click on a prompt in the list to open its detail page (route `/prompts/:promptId`). Since 2026.0.0-ft5, every prompt is a **series of versions** with an explicit draft → publish lifecycle (UXOAI-216) rather than a single flat record: a **Published** version serves live traffic, an optional **Draft** holds in-progress edits, and every previously-published version is kept, browsable, and restorable from **History**.
+
+A mode toggle at the top of the detail page switches between these:
 
 ```mermaid
 graph LR
     A[Prompt list] --> B[Prompt detail]
-    B --> C[Edit tab]
-    B --> F[Display Settings tab]
-    B --> D[Test tab]
-    B --> E[Statistics tab]
-    C --> C1[Template editor /<br/>Settings panel]
-    F --> F1[Quick Prompt label /<br/>category / priority /<br/>display condition]
-    D --> D1[Variable config /<br/>Execute / Response /<br/>cURL export]
-    E --> E1[Usage count / Token cost /<br/>Feedback chart /<br/>PDF export]
+    B --> P[Published mode]
+    B --> D[Draft mode]
+    B --> H["History mode<br/>(only once 2+ versions exist)"]
+    B --> S[Statistics mode]
+    P --> P1[Overview sub-view /<br/>Test sub-view]
+    D --> D1[Edit sub-view /<br/>Display Settings sub-view /<br/>Test sub-view]
+    H --> H1[Version list /<br/>Per-version summary + stats /<br/>Restore]
+    S --> S1[Usage count / Token cost /<br/>Feedback chart / PDF export]
 ```
 
-*Figure: Prompt detail page tab structure.*
+*Figure: Prompt detail page — mode toggle at the top, each mode with its own sub-views.*
 
-### Edit tab
+**Published mode** shows the live version read-only, with **Overview** (a summary of its settings and content) and **Test** sub-views — there is no Edit sub-view here, since a published version can never be edited directly (attempting to update a non-draft version is rejected with `409 Conflict`).
+
+**Draft mode** (also used when creating a new prompt) is where editing actually happens, with **Edit**, **Display**, and **Test** sub-views. Opening Draft mode when no draft exists yet pre-fills the editor with the published version's content — nothing is saved until you act. The toolbar in this mode offers:
+
+- **Save Draft** — persists your edits as the draft (creates one on first save if none existed yet: `POST /api/v1/admin/prompts/{id}/versions`, then `PUT .../versions/{version}` on subsequent saves). The draft is never live; only publishing makes it so.
+- **Publish** — promotes the current draft to Published (`PUT .../versions/{version}` with `draft:false`). The previously-published version becomes an archived entry in History.
+- **Discard** — deletes the draft without publishing, keeping the currently-published version untouched (`DELETE .../versions/{version}`).
+- **Reset** — reverts unsaved edits in the editor back to the last-saved draft (or published content), without calling the API.
+
+An unsaved-changes badge appears while edits haven't been saved as a draft; the Test sub-view is disabled until you save.
+
+### Edit sub-view
 
 The left pane contains a Thymeleaf template editor with auto-completion. The editor fetches completion metadata from `GET /api/v1/admin/templating/completion`, providing suggestions for available service helpers and variables.
 
@@ -73,11 +86,11 @@ The right pane contains the settings panel:
 | Requires function calling | Model must support tool calling |
 | Disable reasoning | Prevent tool calls during processing |
 
-An unsaved changes badge appears when modifications have not been saved. Use the Reset button to discard changes or Save to apply them immediately.
+Use **Save Draft** (see above) to persist changes — nothing here is live until you also **Publish**.
 
-### Display Settings tab (Quick Prompt)
+### Display Settings sub-view (Quick Prompt)
 
-Since 2026.0.0-ft4, the **Display** tab (titled *Display Settings*) controls whether and how the prompt appears in the [Quick Prompt](../understanding/quick_prompt.md) panel. A prompt is offered in Quick Prompt only when it is **enabled here** and its **display condition** matches the current context.
+Since 2026.0.0-ft4, the **Display** sub-view (titled *Display Settings*, available in Draft mode) controls whether and how the prompt appears in the [Quick Prompt](../understanding/quick_prompt.md) panel. A prompt is offered in Quick Prompt only when it is **enabled here** and its **display condition** matches the current context.
 
 ![The Display Settings tab of a prompt, with label, category, priority, description, and a display-condition editor](../images/prompt-display-settings.png)
 
@@ -101,9 +114,9 @@ user.roles.includes('REVIEWER')
 
 End users only ever receive the display settings (label, category, priority, description, condition) — never the prompt's template content or LLM configuration.
 
-### Test tab
+### Test sub-view
 
-The test tab lets you execute a prompt interactively. It is disabled when there are unsaved changes; save first.
+Available in both Published and Draft mode — lets you execute that specific version interactively. It is disabled in Draft mode while there are unsaved changes; save the draft first.
 
 1. The tester auto-detects variables from the template content.
 2. Fill in variable values. For multimodal prompts, upload images directly.
@@ -111,15 +124,21 @@ The test tab lets you execute a prompt interactively. It is disabled when there 
 4. View the response, response time, and token usage.
 5. Use the "Copy cURL" button to generate a reproducible cURL command.
 
-The test calls the render endpoint:
+The test calls the render endpoint, targeting the draft's version number when testing from Draft mode:
 
 ```
-GET /api/v1/admin/prompts/{id}/render
+GET /api/v1/admin/prompts/{id}/render?version={version}
 ```
 
-### Statistics tab
+### History mode
 
-Per-prompt usage analytics for the selected prompt:
+Only shown once a prompt has more than one version. A two-pane view: the left pane lists every version (newest first) with a status badge — **DRAFT**, **ACTIVE** (currently published), or **ARCHIVED** (a version that was published before, then superseded) — and its last-updated date. Selecting a version in the list shows its settings/content summary and its own **per-version statistics** on the right.
+
+For any **ARCHIVED** version, a **Restore this version** button is available. Restoring copies that version's content into a new draft and immediately publishes it (`POST .../versions` with the old content, then `PUT .../versions/{version}` with `draft:false`) — it does not resurrect the old version number, it creates a new one with the old content. A confirmation dialog warns that this overwrites any existing draft.
+
+### Statistics mode
+
+Usage analytics **aggregated across every version** of the prompt (per-version breakdowns live in History instead):
 
 | Metric | Description |
 |---|---|
@@ -131,7 +150,7 @@ Per-prompt usage analytics for the selected prompt:
 
 Use the "Export PDF" button to download the statistics view as a PDF file.
 
-Fetched from `GET /api/v1/admin/prompts/{id}/statistics`.
+Fetched from `GET /api/v1/admin/prompts/{id}/statistics` (aggregate) or `GET /api/v1/admin/prompts/{id}/versions/{version}/statistics` (the per-version figures shown in History).
 
 ## Delete a prompt
 
@@ -141,12 +160,17 @@ On the prompt detail page, click "Delete". A confirmation dialog is displayed. A
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `POST` | `/api/v1/admin/prompts` | Create a new prompt (409 if ID already exists) |
-| `PUT` | `/api/v1/admin/prompts` | Update an existing prompt |
-| `GET` | `/api/v1/admin/prompts/{id}` | Get a prompt by ID |
-| `GET` | `/api/v1/admin/prompts/{id}/render` | Render a prompt with a payload map |
-| `GET` | `/api/v1/admin/prompts/{id}/statistics` | Get usage statistics for a prompt |
-| `DELETE` | `/api/v1/admin/prompts/{id}` | Delete a prompt |
+| `POST` | `/api/v1/admin/prompts` | Create a new prompt — its initial version, v0 (409 if ID already exists) |
+| `GET` | `/api/v1/admin/prompts/{id}` | Get the prompt aggregate: `{ id, versions: [...] }` — every version, not a flat prompt |
+| `GET` | `/api/v1/admin/prompts/{id}/versions` | List every version, ordered |
+| `GET` | `/api/v1/admin/prompts/{id}/versions/{version}` | Get one specific version |
+| `POST` | `/api/v1/admin/prompts/{id}/versions` | Create the draft (409 if a draft already exists) |
+| `PUT` | `/api/v1/admin/prompts/{id}/versions/{version}` | Edit the draft, or publish it with `draft:false` (409 if the target isn't the draft — published versions are read-only) |
+| `DELETE` | `/api/v1/admin/prompts/{id}/versions/{version}` | Discard the draft, keeping published versions intact (409 if not the draft) |
+| `GET` | `/api/v1/admin/prompts/{id}/render` | Render the active version, or a specific one via `?version=` |
+| `GET` | `/api/v1/admin/prompts/{id}/statistics` | Usage statistics aggregated across every version |
+| `GET` | `/api/v1/admin/prompts/{id}/versions/{version}/statistics` | Usage statistics for a single version |
+| `DELETE` | `/api/v1/admin/prompts/{id}` | Delete the prompt and every version |
 | `GET` | `/api/v1/admin/prompts/categories` | List the distinct Quick Prompt categories currently in use (feeds the category selector) |
 | `GET` | `/api/v1/admin/templating/completion` | Get auto-completion metadata for the template editor |
 
