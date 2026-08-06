@@ -327,7 +327,7 @@ See [Configure FlowerDocs scope files](./configure_flowerdocs_scope.mdx) for a d
 Before importing, update two values:
 
 1. **`conf/Route/Gateway.xml`** — set the `URL` tag to the uxopian-gateway URL as seen from the **FlowerDocs server**.
-2. **`conf/Script/consts/`** — verify that `GATEWAY_PATH` matches the route path in `Gateway.xml` and that `GATEWAY_ENDPOINT` resolves to a URL reachable from **user browsers**.
+2. **`conf/Script/consts/`** — verify that `GATEWAY_PATH` matches the route path in `Gateway.xml` and that `UXO_AI_ENDPOINT` resolves to a URL reachable from **user browsers**.
 
 ### 5.3 Install the scope files into FlowerDocs
 
@@ -349,7 +349,7 @@ After importing scope files, restart the FlowerDocs GUI.
 If the panel does not appear, open browser developer tools and check:
 - Network tab: does `/api/web-components/chat/script` return HTTP 200?
 - Console: is `createChat is not defined`? → `web-comp` failed to load.
-- Console: is `GATEWAY_ENDPOINT is not defined`? → `consts` is missing or not loaded.
+- Console: is `UXO_AI_ENDPOINT is not defined`? → `consts` is missing or not loaded.
 
 ---
 
@@ -358,10 +358,11 @@ If the panel does not appear, open browser developer tools and check:
 | Parameter | Where | Description |
 |---|---|---|
 | `provider: FlowerDocsProvider` | `gateway-application.yaml` | Activates FlowerDocs JWT validation |
-| `FD_WS_URL` | uxopian-ai environment | FlowerDocs core web service URL for tool calls |
+| `FD_WS_URL` | uxopian-ai environment | FlowerDocs core **web service** URL for tool calls (unrelated to the browser WebSocket below, despite the name) |
 | `llm.default.provider` | `llm-clients-config.yml` | Must match an entry in `llm.provider.globals` |
-| `Gateway.xml` URL | Scope file | Gateway URL as seen by the **FlowerDocs server** |
-| `consts/GATEWAY_ENDPOINT` | Scope file | Gateway URL as seen by **user browsers** |
+| `Gateway.xml` URL | Scope file | Gateway URL as seen by the **FlowerDocs server** — feeds the scoped, proxied `UXO_AI_ENDPOINT` |
+| `consts/wsGatewayUrl` | Scope file, optional | `uxopian-gateway`'s own public Ingress URL, as seen by **user browsers** — only needed for the WebSocket channel, see [Configure FlowerDocs scope files](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint) |
+| `gateway-service` `ingress.*` | Helm values (`uxopian-gateway`) | Exposes the gateway directly, for the WebSocket channel only |
 
 ## Common issues
 
@@ -374,7 +375,7 @@ If the panel does not appear, open browser developer tools and check:
 | `FD_WS_URL=http://localhost/core/` fails | `localhost` = the container, not the host | Use the FlowerDocs Core Docker service name instead |
 | Chat panel does not appear | `web-comp` not loaded or gateway URL wrong | Check browser console for `createChat is not defined` |
 | Session not found after login | Hazelcast not configured or unreachable | Check Hazelcast configuration in `hazelcast.yml` |
-| Panel opens but no LLM response | WebSocket connection failing | Verify ws/wss protocol matches page protocol |
+| Chat/Quick Prompt answer OK but server→client actions don't fire | `wsGatewayUrl` unset, or the gateway has no direct Ingress | Expected degraded state if unset — see [Why WebSocket needs a separate, direct endpoint](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint); this never worked through FlowerDocs' own proxy on any version |
 
 ## Troubleshooting
 
@@ -399,11 +400,11 @@ The status code points directly to the layer that failed:
 
 #### 504 — proxy timeout
 
-A 504 means a proxy (Traefik, nginx, Zuul) gave up waiting for an upstream response. Most common causes:
+A 504 means a proxy gave up waiting for an upstream response. Most common causes:
 
-**Streaming request going through Zuul.** Check the request URL in the Network tab. If it contains `/plugins/<scope>/gateway/`, the request is going through Zuul. Zuul is HTTP/1.1 and buffers responses — SSE streaming is impossible and will time out. `UXO_AI_ENDPOINT` must bypass Zuul. See [Configure FlowerDocs scope files — Why two endpoints?](./configure_flowerdocs_scope.mdx#what-goes-through-zuul-vs-direct) and fix by:
-- Setting up Traefik priority routing (recommended), or
-- Overriding `UXO_AI_ENDPOINT` and `WS_UXO_AI_ENDPOINT` to a direct gateway URL.
+**Legacy FlowerDocs (Zuul-based proxy) buffering a streaming request.** Check the request URL in the Network tab. If it contains `/plugins/<scope>/gateway/` on a pre-2026 FlowerDocs, the request goes through Zuul, which is HTTP/1.1 and buffers responses — SSE streaming times out. This is a legacy-only issue: FlowerDocs 2026's proxy (Spring Cloud Gateway Server MVC) forwards streaming HTTP responses fine, so `UXO_AI_ENDPOINT` stays on the scoped, proxied path there — do not "fix" this on 2026 by bypassing it.
+
+**A WebSocket request timing out or hanging with no useful status.** This is not a proxy-timeout scenario to fix by tuning timeouts — FlowerDocs' proxy (Zuul or, on 2026, Spring Cloud Gateway Server MVC) **cannot forward a WebSocket upgrade at all**, on any version. See [Configure FlowerDocs scope files — Why WebSocket needs a separate, direct endpoint](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint). The fix is `wsGatewayUrl` pointing at a direct, public Ingress on `uxopian-gateway` itself — never route the WebSocket back through FlowerDocs' `/gateway/**` Route.
 
 **uxopian-ai itself timed out.** The LLM call took longer than the proxy's timeout. Increase the proxy timeout, or reduce the LLM response time by tuning the model (see [LLM response timeout](#llm-response-times-out) below).
 
@@ -437,7 +438,7 @@ The request reaches a server but the path doesn't match any route. Common causes
 
 The gateway rejected the request. Check in order:
 
-1. **Session warm-up ping not fired.** The `fetch(GATEWAY_ENDPOINT)` call in `OpenChatShortcut` must succeed before `createChat()` is called. Open the Network tab and look for a request to `GATEWAY_ENDPOINT` (the Zuul path at `/gui/plugins/<scope>/gateway/uxopian-ai`). If it returned 401, the user's FlowerDocs session was not forwarded correctly.
+1. **Session warm-up ping not fired.** The `fetch(UXO_AI_ENDPOINT)` call in `OpenChatShortcut` must succeed before `createChat()` is called. Open the Network tab and look for a request to `UXO_AI_ENDPOINT` (the scoped, FlowerDocs-proxied path at `/gui/plugins/<scope>/gateway/uxopian-ai`). If it returned 401, the user's FlowerDocs session was not forwarded correctly.
 
 2. **FlowerDocsProvider not loaded.** Check gateway startup logs for `Registered provider: FlowerDocsProvider`. A missing or misspelled provider name causes 401 on every request.
 
@@ -456,9 +457,9 @@ curl -H "Authorization: Bearer <your-flowerdocs-jwt>" \
 
 The browser shows a network error or CORS warning in the console with no HTTP status.
 
-- **Wrong WebSocket protocol.** If the page is served over HTTPS, `WS_UXO_AI_ENDPOINT` must use `wss://`, not `ws://`. Update `consts/` accordingly.
-- **CORS.** Verify the gateway has CORS configured to allow the FlowerDocs origin. Check the browser console for the specific blocked header.
-- **`UXO_AI_ENDPOINT` still going through Zuul.** If `UXO_AI_ENDPOINT` resolves to a path that FlowerDocs GUI intercepts, streaming is blocked (see [504](#504--proxy-timeout) above). Confirm that the Traefik priority 20 route for `/gui/gateway/**` is active.
+- **`wsGatewayUrl` unset or unreachable.** If `WS_UXO_AI_ENDPOINT` is empty, no WebSocket connection is attempted at all — this is the graceful-degradation default, not an error (chat/Quick Prompt still answer over `UXO_AI_ENDPOINT`). If it is set, confirm the direct Ingress on `gateway-service` actually resolves and terminates TLS (`curl -I https://<wsGatewayUrl>/actuator/health`).
+- **CORS on the direct gateway Ingress.** A cross-origin call from the FlowerDocs page's origin to `wsGatewayUrl` needs that origin listed in `gateway-service`'s `cors.allowedOrigins` Helm value — an empty list means no CORS headers at all, not a permissive default. This has no effect on the WebSocket routes themselves (they carry no auth either way) but the browser still enforces CORS on the handshake.
+- **Do not try to fix this by routing through FlowerDocs' proxy.** `UXO_AI_ENDPOINT` (the scoped, FlowerDocs-proxied path) works for REST/SSE on FlowerDocs 2026, but forwarding a WebSocket through it will never work, on any FlowerDocs version — see [504 — proxy timeout](#504--proxy-timeout) above.
 
 ---
 
