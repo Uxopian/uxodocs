@@ -55,7 +55,7 @@ prompts:
 
 | Field | Required | Description |
 |---|---|---|
-| `id` | Yes | Unique identifier. Referenced in requests and goals. |
+| `id` | Yes | Unique identifier. Referenced in requests. |
 | `role` | Yes | `SYSTEM`, `USER`, or `ASSISTANT` |
 | `content` | Yes | Thymeleaf template string |
 | `requiresMultiModalModel` | No | Set to `true` if the prompt includes images |

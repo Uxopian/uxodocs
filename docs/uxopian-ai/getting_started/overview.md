@@ -56,7 +56,7 @@ Spring Cloud Gateway acting as a reverse proxy. The only public entry point. Aut
 
 ### OpenSearch
 
-Primary persistence store. Stores conversations, requests, prompts, goal configurations, LLM provider configurations, and usage metrics. All data is tenant-scoped.
+Primary persistence store. Stores conversations, requests, prompts, LLM provider configurations, and usage metrics. All data is tenant-scoped.
 
 ### Hazelcast
 
@@ -94,7 +94,7 @@ Three integration paths are available:
 - **Custom tool plugins**: write a `@ToolService` class, package as a shaded JAR, drop in `plugins/`. The LLM can then call those methods as tools.
 - **Custom ServiceHelpers**: write a `@HelperService` class, expose it as a named expression object in Thymeleaf prompt templates.
 - **Custom auth providers**: implement the `AuthProvider` interface in the gateway to support any identity system.
-- **Prompt and goal customization**: define per-tenant overrides in `prompts.yml` and `goals.yml`, or manage them live via the Admin API.
+- **Prompt customization**: define global prompts in `prompts.yml`, or manage them live via the Admin API.
 
 ## Key concepts
 
@@ -103,8 +103,7 @@ Three integration paths are available:
 | Tenant | Primary isolation unit. All data is scoped to a tenant ID. |
 | Conversation | A chat session. Contains a sequence of Requests. |
 | Request | A single LLM round-trip: inputs, rendered prompt, response, token usage. |
-| Prompt | A named Thymeleaf template defining a role and content. |
-| Goal | A named group of ordered prompt references with optional filters. |
+| Prompt | A named Thymeleaf template defining a role and content, versioned with a draft → publish lifecycle. |
 | Script | Admin-managed front-end JavaScript, security-scanned and served to authenticated users. |
 | Plugin | A shaded JAR in `plugins/` loaded at startup by `IntegrationLoader`. |
 

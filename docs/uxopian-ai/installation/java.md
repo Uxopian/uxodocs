@@ -45,7 +45,6 @@ ai-standalone-2026.0.0-ft5/
     llm-clients-config.yml          ← LLM provider and model configuration
     llm-clients-config.yml.example
     prompts.yml
-    goals.yml
     opensearch.yml
     metrics.yml
     hazelcast.yml

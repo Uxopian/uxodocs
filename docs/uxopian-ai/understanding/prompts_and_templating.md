@@ -14,7 +14,7 @@ A prompt is a named, reusable message template. Prompts are rendered by a Thymel
 
 A prompt has:
 
-- `id`: unique identifier referenced in requests and goals
+- `id`: unique identifier referenced in requests
 - `role`: `SYSTEM`, `USER`, or `ASSISTANT`
 - `content`: a Thymeleaf template string
 - `requiresMultiModalModel`: if `true`, the request requires a multimodal LLM

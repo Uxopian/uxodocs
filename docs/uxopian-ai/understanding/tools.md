@@ -72,7 +72,7 @@ Tools require a model that supports function calling. If a prompt has `requiresF
 
 ## Standardized ECM tool names
 
-Since 2026.0.0-ft4, the document and metadata tools for Alfresco and FlowerDocs share a **common, ECM-agnostic vocabulary**, so the same prompts and goals work against either backend. The Alfresco tools were de-prefixed and the FlowerDocs data-model tool was renamed:
+Since 2026.0.0-ft4, the document and metadata tools for Alfresco and FlowerDocs share a **common, ECM-agnostic vocabulary**, so the same prompts work against either backend. The Alfresco tools were de-prefixed and the FlowerDocs data-model tool was renamed:
 
 | Operation | Tool name (ft4) | Previous name |
 |---|---|---|
@@ -83,7 +83,7 @@ Since 2026.0.0-ft4, the document and metadata tools for Alfresco and FlowerDocs 
 | Update a document property | `updateDocumentProperty` | `updateDocumentPropertyById` / `updateDocumentTagValueById` |
 | Execute a search | `doSearch` | Alfresco `searchAlfrescoNodes` / FlowerDocs `searchDocuments` |
 
-The integration **tags** (`alfresco`, `flowerdocs`, `files`) are unchanged. If you reference tool names explicitly in custom prompts or goals, update them.
+The integration **tags** (`alfresco`, `flowerdocs`, `files`) are unchanged. If you reference tool names explicitly in custom prompts, update them.
 
 ## Built-in tools: FlowerDocs
 

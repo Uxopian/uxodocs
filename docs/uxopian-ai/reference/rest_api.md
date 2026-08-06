@@ -90,7 +90,6 @@ Clients that previously parsed the plain-text error body must now read the `mess
       "content": [
         { "type": "text", "value": "Hello" },
         { "type": "prompt", "value": "promptId", "payload": { "key": "value" } },
-        { "type": "goal", "value": "goalGroupId", "payload": { "key": "value" } },
         { "type": "image", "value": "<base64>" }
       ]
     }
@@ -152,16 +151,17 @@ All admin endpoints require the requesting user to have the necessary role if ro
 
 ### Prompts — `/api/v1/admin/prompts`
 
+Since 2026.0.0-ft5, a prompt is one document holding a version history with an explicit draft → publish lifecycle — see [Managing prompts](../admin/managing_prompts.md#rest-api-endpoints) for the full versioned surface (`POST/PUT/DELETE .../{id}/versions[/{version}]`). The un-versioned entry points:
+
 | Method | Path | Description |
 |---|---|---|
 | `GET` | `/api/v1/admin/prompts` | List all prompts for the current tenant. |
-| `POST` | `/api/v1/admin/prompts` | Create a new prompt. Returns 409 if a prompt with the same ID exists. |
-| `PUT` | `/api/v1/admin/prompts` | Update an existing prompt. |
-| `GET` | `/api/v1/admin/prompts/{id}` | Get a prompt by ID. |
-| `GET` | `/api/v1/admin/prompts/{id}/render` | Render a prompt with a payload (body: `Map<String, Object>`). |
-| `GET` | `/api/v1/admin/prompts/{id}/usages` | Get usage statistics for a prompt. |
+| `POST` | `/api/v1/admin/prompts` | Create a new prompt (initial version). Returns 409 if a prompt with the same ID exists. |
+| `GET` | `/api/v1/admin/prompts/{id}` | Get the prompt aggregate — `{id, versions: [...]}` — by ID. |
+| `GET` | `/api/v1/admin/prompts/{id}/render` | Render a prompt with a payload (body: `Map<String, Object>`; optional `?version=`). |
+| `GET` | `/api/v1/admin/prompts/{id}/statistics` | Get usage statistics for a prompt, aggregated across all versions. |
 | `GET` | `/api/v1/admin/prompts/categories` | List distinct Quick Prompt categories currently in use. |
-| `DELETE` | `/api/v1/admin/prompts/{id}` | Delete a prompt. |
+| `DELETE` | `/api/v1/admin/prompts/{id}` | Delete a prompt and all of its versions. `409` if it's a base prompt or referenced by an Application. |
 
 ### Scripts — `/api/v1/admin/scripts`
 
@@ -187,15 +187,7 @@ All admin endpoints require the requesting user to have the necessary role if ro
 | `PUT` | `/api/v1/admin/mcp/mcp-conf/{id}` | Update an MCP server configuration. |
 | `GET` | `/api/v1/admin/mcp/mcp-conf/{id}/tools` | List the tools exposed by an MCP server (connection test). |
 
-### Goals — `/api/v1/admin/goals`
-
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/api/v1/admin/goals` | List all goal groups for the current tenant. |
-| `POST` | `/api/v1/admin/goals` | Create a new goal group. |
-| `PUT` | `/api/v1/admin/goals/{id}` | Update a goal group. |
-| `GET` | `/api/v1/admin/goals/{id}` | Get a goal group by ID. |
-| `DELETE` | `/api/v1/admin/goals/{id}` | Delete a goal group. |
+Goals (`/api/v1/admin/goals`) were removed in 2026.0.0-ft5 — see [Goals](../understanding/goals.md).
 
 ### Users — `/api/v1/admin/users`
 

@@ -2,85 +2,25 @@
 title: Goals
 sidebar_label: Goals
 sidebar_position: 6
-last_update:
-  date: '2026-03-24T12:58:17.027Z'
-  author: CI/CD Bot
-content_hash: 311906557f657eb0364f74f0a0bcc26bc78927427b7a0df23cbc6080d2b452e7
 ---
 
-A goal is a named group of ordered prompt references. When a request includes a content item with `type: goal`, the system resolves the named goal group, evaluates each entry's filter expression, and injects the matching prompts into the LLM call.
+:::warning[Removed in 2026.0.0-ft5]
+Goals were removed in 2026.0.0-ft5 — there was no runtime consumer left (no admin UI, nothing resolved a goal at request time), so the concept was dropped entirely along with `goals.yml`, `/api/v1/admin/goals`, and the `type: goal` request content item. This page is kept so existing links don't dead-end; see below for what to use instead.
+:::
 
-## Why goals exist
+A goal used to be a named group of ordered prompt references: a request could include a content item with `type: goal`, and the system would resolve the named group, evaluate each entry's filter expression, and inject the matching prompts into the LLM call.
 
-Prompts cover individual message templates. Goals allow composing multiple prompts into named workflows with conditional logic. For example, a goal named `document-analysis` might inject a base system prompt plus a document-type-specific prompt based on the value of a `documentType` variable.
+## What to use instead
 
-## Goal structure
+- **A single reusable prompt** — if a goal group was really just injecting one prompt (or a fixed prompt plus a conditional one), reference those [Prompts](./prompts_and_templating.md) directly as `type: prompt` content items; there's no need for the extra indirection layer.
+- **[Applications](../admin/managing_applications.md)** — if a goal group was standing in for "the right defaults for this calling surface," an Application's `prompt` field (appended to the base prompt) covers that per-caller scoping without any conditional-filter logic.
+- **[Agentic Plans](./agentic_plans.md)** — if a goal group's conditional prompt selection was really modeling a multi-step decision (pick prompt A or B depending on document type, then do something with the result), a Plan's `AGENT` nodes and dependencies express that explicitly as a graph, rather than as opaque filter expressions evaluated at render time.
 
-A goal group contains an ordered list of entries. Each entry has:
-
-| Field | Description |
-|---|---|
-| `promptId` | ID of the prompt to include |
-| `index` | Execution order (ascending). Lower index runs first. |
-| `filter` | Thymeleaf boolean expression. If the expression evaluates to `true`, the prompt is included. |
-
-Example from `goals.yml`:
-
-```yaml
-goals:
-  globals:
-    - id: document-analysis
-      goals:
-        - promptId: basePrompt
-          filter: "true"
-          index: 1
-        - promptId: arenderContext
-          filter: "true"
-          index: 10
-        - promptId: contractSummary
-          filter: "[[${documentType == 'contract'}]]"
-          index: 20
-```
-
-When a request includes `{ "type": "goal", "value": "document-analysis" }`, the system evaluates each entry's filter with the request payload as context. Entries where the filter evaluates to `true` have their prompts rendered and injected.
-
-## Tenant overrides
-
-Like prompts, goals support per-tenant overrides in `goals.yml`:
-
-```yaml
-goals:
-  globals:
-    - id: analyse
-      goals:
-        - promptId: genericComparison
-          filter: "true"
-          index: 1000
-
-  tenants:
-    - tenantId: tenant-id-1
-      mergeStrategy: merge
-      goalGroups:
-        - id: compare
-          goals:
-            - promptId: detailedComparisonForTenant1
-              filter: "[[${documentType == 'contract'}]]"
-              index: 125
-```
-
-`mergeStrategy: merge` updates matching goal groups for the tenant. `mergeStrategy: replace` replaces the entire tenant goal configuration.
-
-## Runtime management
-
-Goals can be created, updated, and deleted via the Admin API (`/api/v1/admin/goals`) without restarting the application. Changes are persisted in OpenSearch.
-
-## Backup
-
-The backup path is configurable via `goals.backup.path` (or `GOALS_BACKUP_PATH` environment variable). Defaults to `./goals/`.
+None of these is a drop-in replacement for the exact `filter`/`index` merge semantics goal groups had — if your integration called `/api/v1/admin/goals` or sent `{"type": "goal", ...}` content items, that code needs to change to call Prompts (or Plans) directly.
 
 ## Related pages
 
 - [Prompts and templating](./prompts_and_templating.md)
-- [Write goals](../extending/writing_goals.md)
+- [Agentic Plans](./agentic_plans.md)
+- [Managing Applications](../admin/managing_applications.md)
 - [Conversations and requests](./conversations_and_requests.md)
-- [Configuration file reference](../reference/configuration.md)

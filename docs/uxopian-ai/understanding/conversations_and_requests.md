@@ -60,7 +60,6 @@ Each `Input` has a list of `Content` items. The `type` field determines how the 
 |---|---|---|
 | `text` | Free text | Sent to the LLM as literal text |
 | `prompt` | Prompt ID | Resolved to the named prompt template and rendered with Thymeleaf |
-| `goal` | Goal name | Resolved to a named goal group; all matching prompts in the group are rendered and injected |
 | `image` | Base64-encoded image | Sent to the LLM as an image (requires a multimodal model) |
 
 ## Sending a request

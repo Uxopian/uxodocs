@@ -56,7 +56,6 @@ Everything is tenant-scoped:
 | Conversations | `tenant-uxopian-ai-conversations` |
 | Requests | `tenant-uxopian-ai-requests` |
 | Prompts | `tenant-uxopian-ai-prompts` |
-| Goal configurations | `tenant-uxopian-ai-goals` |
 | LLM provider configurations | `tenant-uxopian-ai-llm-providers` |
 | Usage metrics | exported to `micrometer-metrics` index (not tenant-scoped) |
 
@@ -86,11 +85,7 @@ llm:
 
 `prompts.yml` defines global prompts under `prompts.globals`. Tenant-specific overrides are defined under `prompts.tenants`. Each tenant entry specifies a `mergeStrategy` (`merge` or `replace`) and lists the prompts to add or override.
 
-### Goals
-
-`goals.yml` defines global goal groups under `goals.globals`. Tenant-specific overrides follow the same pattern under `goals.tenants`.
-
-Both prompts and goals can also be managed at runtime via the Admin API without restarting the application.
+Prompts can also be managed at runtime via the Admin API without restarting the application.
 
 ## Important constraints
 

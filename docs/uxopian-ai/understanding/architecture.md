@@ -20,7 +20,7 @@ graph TD
     HZ["Hazelcast 5.x<br/>session cache"]
     AI["uxopian-ai<br/>(Spring WebFlux, port 8080)"]
     AF["AuthFilter<br/>reads identity headers"]
-    Core["Core services<br/>(Conversations, Requests, Prompts, Goals)"]
+    Core["Core services<br/>(Conversations, Requests, Prompts)"]
     LLM["LLM connector<br/>(LangChain4J)"]
     Tools["ToolExecutor<br/>+ IntegrationLoader"]
     Plugins["plugins/<br/>shaded JARs"]
@@ -60,11 +60,11 @@ The core application. Built on Spring WebFlux (reactive). Modules:
 | Module | Role |
 |---|---|
 | `rest` | REST controllers, `AuthFilter`, Spring Security |
-| `core` | Business logic: conversations, requests, prompts, goals, `IntegrationLoader` |
+| `core` | Business logic: conversations, requests, prompts, `IntegrationLoader` |
 | `connector/llm` | LLM provider abstraction, `ToolExecutor`, `LlmClientLoader` |
 | `connector/opensearch` | OpenSearch client, `IndexNamingStrategy`, tenant-scoped repositories |
 | `connector/hazelcast` | Distributed session cache (used by gateway) |
-| `templating` | Thymeleaf prompt rendering engine, `PromptService`, `GoalService` |
+| `templating` | Thymeleaf prompt rendering engine, `PromptService` |
 | `web-socket` | WebSocket handler for real-time streaming |
 | `web-components` | React frontend compiled and served as static assets |
 | `integrations/*` + `tools/*` | Plugin JARs loaded at runtime |
@@ -92,7 +92,7 @@ A typical chat request follows this path:
 1. Browser calls `POST /api/v1/requests` through the gateway.
 2. Gateway authenticates via `AuthProvider`, injects identity headers, forwards request.
 3. `AuthFilter` in uxopian-ai reads headers, builds `AuthenticatedUser`, opens `AiContext`.
-4. `SecureRequestService` resolves the conversation, loads applicable prompts and goals.
+4. `SecureRequestService` resolves the conversation, loads applicable prompts.
 5. `PromptService` renders each prompt template with Thymeleaf. ServiceHelpers (e.g., `documentService`) are called during rendering.
 6. LLM connector calls the configured provider via LangChain4J.
 7. If the LLM requests tool execution, `ToolExecutor` invokes the registered `@Tool` method.

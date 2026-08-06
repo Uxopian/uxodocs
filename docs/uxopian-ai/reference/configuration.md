@@ -143,11 +143,13 @@ llm:
 
 Prompt template definitions.
 
+:::note[Since 2026.0.0-ft5]
+The on-disk YAML backup/sync subsystem (`prompts.backup.path`/`PROMPTS_BACKUP_PATH`) and the `prompts.tenants` per-tenant override section were both removed — prompts live only as versioned documents in OpenSearch (see [Managing prompts](../admin/managing_prompts.md)), and base prompts are now seeded once, at tenant creation, from `prompts.globals` below.
+:::
+
 | Key | Description |
 |---|---|
-| `prompts.backup.path` | Directory for prompt backups. Env: `PROMPTS_BACKUP_PATH`. Default: `./prompts/` |
 | `prompts.globals` | List of global prompt definitions (see structure below) |
-| `prompts.tenants` | List of per-tenant prompt overrides |
 
 ### Prompt definition structure
 
@@ -162,20 +164,6 @@ Prompt template definitions.
   reasoningDisabled: false
   defaultLlmProvider: ""       # optional: override provider for this prompt
   defaultLlmModel: ""          # optional: override model for this prompt
-```
-
-### Tenant override structure
-
-```yaml
-prompts:
-  tenants:
-    - tenantId: <tenant-id>
-      mergeStrategy: merge | replace
-      prompts:
-        - id: <prompt-id>
-          role: USER
-          content: |
-            Override content...
 ```
 
 ## goals.yml

@@ -24,7 +24,7 @@ Since 2026.0.0-ft3, the prompts list uses a **stale-while-revalidate** cache: wh
 
 1. Click "Add prompt".
 2. Fill in the required fields:
-   - **ID**: unique identifier. Used in request content items (`type: prompt`, `value: <id>`) and goal group entries.
+   - **ID**: unique identifier. Used in request content items (`type: prompt`, `value: <id>`).
    - **Role**: `SYSTEM`, `USER`, or `ASSISTANT`.
    - **Content**: Thymeleaf template text. Use `[[${variable}]]` for expressions.
 3. Set optional flags:
@@ -154,7 +154,7 @@ Fetched from `GET /api/v1/admin/prompts/{id}/statistics` (aggregate) or `GET /ap
 
 ## Delete a prompt
 
-On the prompt detail page, click "Delete". A confirmation dialog is displayed. Any goal group entries referencing this prompt ID will fail to resolve after deletion. Remove those references from `goals.yml` or via the Admin API.
+On the prompt detail page, click "Delete". A confirmation dialog is displayed. A prompt that is a base prompt, or referenced as an [Application](./managing_applications.md)'s system prompt, cannot be deleted while referenced — the API returns `409 Conflict` naming the Application(s) using it. Remove the reference (or delete the Application) first.
 
 ## REST API endpoints
 

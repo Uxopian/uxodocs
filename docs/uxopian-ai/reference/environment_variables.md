@@ -70,12 +70,9 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | `ALFRESCO_LEGACY_BASE_URL` | (auto-derived) | Base URL for Alfresco legacy Web Script endpoints. Auto-derived from `ALFRESCO_BASE_URL` when not set (e.g., `https://host/alfresco-api` → `https://host/alfresco`; `https://host/alfresco/api` → `https://host/alfresco/s`). Set explicitly only if the auto-derivation does not match your deployment. |
 | `ALFRESCO_CMM_ENABLED` | `false` | Enable Alfresco Custom Content Model lookup. When disabled, the LLM sees only the built-in `cm:*` system properties. |
 
-### Prompts and goals
+### Prompts
 
-| Variable | Default | Description |
-|---|---|---|
-| `PROMPTS_BACKUP_PATH` | `./prompts/` | Directory for prompt backup files |
-| `GOALS_BACKUP_PATH` | `./goals/` | Directory for goal backup files |
+Since 2026.0.0-ft5, prompts live only as versioned documents in OpenSearch — the on-disk YAML backup/sync subsystem (`PROMPTS_BACKUP_PATH` and the `./prompts/` mirror) was removed; it was never read back on startup and duplicated tenant onboarding. Base prompts are now seeded once, at tenant creation. Goals (and their own `GOALS_BACKUP_PATH`) were removed entirely in the same release — see [Goals](../understanding/goals.md).
 
 ### Script security scan
 
