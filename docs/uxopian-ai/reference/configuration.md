@@ -143,8 +143,8 @@ llm:
 
 Prompt template definitions.
 
-:::note[Since 2026.0.0-ft5]
-The on-disk YAML backup/sync subsystem (`prompts.backup.path`/`PROMPTS_BACKUP_PATH`) and the `prompts.tenants` per-tenant override section were both removed — prompts live only as versioned documents in OpenSearch (see [Managing prompts](../admin/managing_prompts.md)), and base prompts are now seeded once, at tenant creation, from `prompts.globals` below.
+:::note
+Prompts live only as versioned documents in OpenSearch (see [Managing prompts](../admin/managing_prompts.md)); base prompts are seeded once, at tenant creation, from `prompts.globals` below.
 :::
 
 | Key | Description |
@@ -165,12 +165,6 @@ The on-disk YAML backup/sync subsystem (`prompts.backup.path`/`PROMPTS_BACKUP_PA
   defaultLlmProvider: ""       # optional: override provider for this prompt
   defaultLlmModel: ""          # optional: override model for this prompt
 ```
-
-## goals.yml
-
-:::warning[Removed in 2026.0.0-ft5]
-The Goal concept — and `goals.yml` along with it — was removed in 2026.0.0-ft5 (no runtime consumer ever read it). See [Goals](../understanding/goals.md) for what to use instead.
-:::
 
 ## metrics.yml
 

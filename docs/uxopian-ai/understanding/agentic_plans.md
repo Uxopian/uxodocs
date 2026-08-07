@@ -85,4 +85,3 @@ See [Managing Plans in the admin UI](../admin/managing_plans.md) for how to buil
 - [Managing Plans in the admin UI](../admin/managing_plans.md)
 - [Tools](./tools.md)
 - [Prompts and templating](./prompts_and_templating.md)
-- [Goals](./goals.md)

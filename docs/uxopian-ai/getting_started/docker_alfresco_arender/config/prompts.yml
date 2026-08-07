@@ -1,7 +1,4 @@
 prompts:
-  backup:
-    path: ${PROMPTS_BACKUP_PATH:./prompts/}
-
   globals:
     - id: basePrompt
       role: SYSTEM
@@ -49,8 +46,3 @@ prompts:
       reasoningDisabled: false
       requiresMultiModalModel: false
       requiresFunctionCallingModel: true
-
-  tenants:
-    - tenantId: tenant-development
-      mergeStrategy: OVERWRITE
-      prompts: []

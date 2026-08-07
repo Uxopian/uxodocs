@@ -187,8 +187,6 @@ Since 2026.0.0-ft5, a prompt is one document holding a version history with an e
 | `PUT` | `/api/v1/admin/mcp/mcp-conf/{id}` | Update an MCP server configuration. |
 | `GET` | `/api/v1/admin/mcp/mcp-conf/{id}/tools` | List the tools exposed by an MCP server (connection test). |
 
-Goals (`/api/v1/admin/goals`) were removed in 2026.0.0-ft5 — see [Goals](../understanding/goals.md).
-
 ### Users — `/api/v1/admin/users`
 
 | Method | Path | Description |
