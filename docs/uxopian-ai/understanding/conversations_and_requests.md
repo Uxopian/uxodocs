@@ -17,7 +17,7 @@ graph TD
     Conv["Conversation<br/>id, title, userId,<br/>tenantId, llmProvider"]
     Req["Request<br/>id, conversationId,<br/>answer, tokenCounts"]
     Input["Input<br/>role (USER/SYSTEM),<br/>list of Content"]
-    Content["Content<br/>type, value,<br/>promptId, payload"]
+    Content["Content<br/>type, value,<br/>promptId, version, payload"]
 
     Conv -->|"contains many"| Req
     Req -->|"has many"| Input
@@ -61,6 +61,8 @@ Each `Input` has a list of `Content` items. The `type` field determines how the 
 | `text` | Free text | Sent to the LLM as literal text |
 | `prompt` | Prompt ID | Resolved to the named prompt template and rendered with Thymeleaf |
 | `image` | Base64-encoded image | Sent to the LLM as an image (requires a multimodal model) |
+
+A `prompt` content item also accepts an optional `version` field (integer). Omitted, the request renders whichever version is currently **published**. Set it explicitly to render any other version instead — including an unpublished **draft** ([Managing prompts](../admin/managing_prompts.md#prompt-detail-page)). That's the actual point of drafting a prompt rather than editing it in place: a caller can exercise the draft through a real conversation, with real context and payloads, before anyone publishes it and makes it the version everyone else gets.
 
 ## Sending a request
 

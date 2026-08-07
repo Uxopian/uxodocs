@@ -67,6 +67,10 @@ graph LR
 
 An unsaved-changes badge appears while edits haven't been saved as a draft; the Test sub-view is disabled until you save.
 
+:::tip[The point of a draft: try it for real before it goes live]
+A draft isn't limited to the admin Test sub-view — any caller can target it directly from a normal conversation request by setting the `version` field on a `type: prompt` content item (see [Conversations and requests](../understanding/conversations_and_requests.md#content-types)) to the draft's version number. That's what the draft → publish separation is actually for: validate the new wording against real conversations, real payloads, and real callers first, with zero risk to the currently published version, then **Publish** once you're satisfied.
+:::
+
 ### Edit sub-view
 
 The left pane contains a Thymeleaf template editor with auto-completion. The editor fetches completion metadata from `GET /api/v1/admin/templating/completion`, providing suggestions for available service helpers and variables.
