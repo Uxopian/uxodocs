@@ -615,6 +615,13 @@ npm run prebuild
 
 ---
 
+## SEO & LLM Files
+
+- **`static/llms.txt`** — LLM-readable index of the site (per the [llms.txt](https://llmstxt.org) convention), served at `/llms.txt`. Hand-edited, committed as-is.
+- **`static/robots.txt`** — generated at build time by `scripts/generate-robots.mjs` (wired into `prebuild`), **not committed** (gitignored). Content depends on `SITE_URL`: disallows indexing on staging, allows it and points to the sitemap on production. Don't edit `static/robots.txt` by hand — it's overwritten on the next build.
+
+---
+
 ## Additional Resources
 
 - [Docusaurus Documentation](https://docusaurus.io/)

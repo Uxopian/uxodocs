@@ -101,6 +101,20 @@ jobs:
 
               rsync -a --delete .tmp_docs/ "docs/${product}/"
 
+              # Freeze THIS branch's own version values (its own
+              # docusaurus.config.ts) into the extracted files, BEFORE the
+              # docs:version snapshot. Without this, the final build (which
+              # runs with master's docusaurus.config.ts) would replace
+              # {{version}}/{{arenderVersion}}/etc. with master's CURRENT
+              # constants in EVERY historical version.
+              if git cat-file -e "origin/${br}:docusaurus.config.ts" 2>/dev/null; then
+                git show "origin/${br}:docusaurus.config.ts" > .tmp_branch_config.ts
+                node scripts/bake-version-vars.mjs --product "$product" --config .tmp_branch_config.ts --docs "docs/${product}"
+                rm -f .tmp_branch_config.ts
+              else
+                echo "   (warning: no docusaurus.config.ts on ${br} -- {{version}} placeholders may leak through)"
+              fi
+
               if [ "$product" == "arender" ]; then
                 if git cat-file -e "origin/${br}:sidebars_arender.ts" 2>/dev/null; then
                     echo "   -> using sidebars_arender.ts from ${br}"

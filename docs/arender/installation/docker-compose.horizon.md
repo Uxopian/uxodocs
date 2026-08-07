@@ -113,10 +113,6 @@ server {
         proxy_pass http://service-broker:8761/documents;
     }
 
-    location /annotation {
-        proxy_pass http://service-broker:8761/annotation;
-    }
-
     location /registry/documents {
         proxy_pass http://service-broker:8761/registry/documents;
         # If using providers, inject the provider header:
@@ -168,7 +164,7 @@ If OAuth2 is enabled on the rendition backend, use a BFF instead of a plain reve
 
 ## Step 3 — Configure authorized document sources
 
-When loading documents by URL (via `openDocumentByUrl`), the broker must authorize the source domain. Add `DSB_AUTHORIZED_URLS` to the broker service in your `docker-compose.yml`:
+When loading documents by URL (via `openDocument()` or the `document` attribute with a `url` parameter), the broker must authorize the source domain. Add `DSB_AUTHORIZED_URLS` to the broker service in your `docker-compose.yml`:
 
 ```yaml
 service-broker:
