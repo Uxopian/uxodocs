@@ -33,6 +33,7 @@ export interface PluginOptions {
     ignoreCssSelectors?: string[];
     jQueryUrl?: string;
     getPdfFileName?: FileNameFunction;
+    docPluginId?: string;
 }
 
 export type PapersaurusPluginOptions = Required<PluginOptions>;

@@ -99,7 +99,37 @@ function generateToc(html, options) {
     }
     return $.html();
 }
-async function generatePdfFiles(outDir, pluginOptions, { siteConfig, plugins }) {
+// Docusaurus runs postBuild for every plugin instance concurrently (Promise.all
+// in executePluginsPostBuild). Each papersaurus instance here launches its own
+// headless Chrome and empties/writes into the SAME outDir/pdfs folder, so running
+// them in parallel both starves each Chrome launch of CPU (hitting puppeteer's
+// default 30s launch timeout under load) and races on the shared pdf output
+// directory. Serialize actual runs across instances.
+//
+// A module-level variable is NOT enough here: Docusaurus loads each plugin
+// instance via jiti with requireCache: false (@docusaurus/utils/moduleUtils.js,
+// "bypass Node.js runtime require cache"), so every instance gets its own fresh
+// copy of this module and its own module scope. globalThis is the one thing
+// that's actually still shared across those fresh loads, within the same
+// process, so the queue lives there instead.
+const GLOBAL_QUEUE_KEY = "__papersaurusPdfGenerationQueue";
+if (!globalThis[GLOBAL_QUEUE_KEY]) {
+    globalThis[GLOBAL_QUEUE_KEY] = Promise.resolve();
+}
+async function generatePdfFiles(outDir, pluginOptions, props) {
+    const previous = globalThis[GLOBAL_QUEUE_KEY];
+    let release;
+    globalThis[GLOBAL_QUEUE_KEY] = new Promise((resolve) => {
+        release = resolve;
+    });
+    await previous;
+    try {
+        await generatePdfFilesInternal(outDir, pluginOptions, props);
+    } finally {
+        release();
+    }
+}
+async function generatePdfFilesInternal(outDir, pluginOptions, { siteConfig, plugins }) {
     console.log(`${pluginLogPrefix}Execute generatePdfFiles...`);
     if (!plugins) {
         throw new Error(`${pluginLogPrefix}No docs plugin found.`);
@@ -134,12 +164,13 @@ async function generatePdfFiles(outDir, pluginOptions, { siteConfig, plugins }) 
             'Did you run "docusaurus build" before?'
         );
     }
-    // Check pdf build directory and clean if requested
+    // Check pdf build directory exists. Don't empty it here: it's shared
+    // across every papersaurus instance (one per product), each writing into
+    // its own subfolder further down (versionBuildDir) — emptying the whole
+    // shared root would delete the other instances' already-generated PDFs.
     const pdfPath = "pdfs";
     const pdfBuildDir = join(docusaurusBuildDir, pdfPath);
     fs.ensureDirSync(pdfBuildDir);
-    console.log(`${pluginLogPrefix}Clean pdf build folder '${pdfBuildDir}'`);
-    fs.emptyDirSync(pdfBuildDir);
     // Start local webserver and host files in docusaurus build folder
     const app = express();
     const httpServer = await app.listen();
@@ -163,9 +194,11 @@ async function generatePdfFiles(outDir, pluginOptions, { siteConfig, plugins }) 
     // Start a puppeteer browser
     const browser = await puppeteer.launch({
         headless: true,
+        timeout: pluginOptions.puppeteerTimeout,
         args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-web-security"],
     });
     const linkToFile = {};
+    const cleanedBuildDirs = new Set();
     // Loop through all found versions
     for (const versionInfo of docPlugin.content.loadedVersions) {
         if (
@@ -202,6 +235,11 @@ async function generatePdfFiles(outDir, pluginOptions, { siteConfig, plugins }) 
                 .join("/");
             const versionBuildDir = join(pdfBuildDir, versionPath, folderName);
             fs.ensureDirSync(versionBuildDir);
+            if (!cleanedBuildDirs.has(versionBuildDir)) {
+                console.log(`${pluginLogPrefix}Clean pdf build folder '${versionBuildDir}'`);
+                fs.emptyDirSync(versionBuildDir);
+                cleanedBuildDirs.add(versionBuildDir);
+            }
             console.log(
                 `${pluginLogPrefix}Start processing sidebar named '${sidebarName}' in version '${versionInfo.label}'`
             );

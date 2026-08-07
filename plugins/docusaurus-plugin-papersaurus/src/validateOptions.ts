@@ -127,7 +127,7 @@ const schema = Joi.object<PapersaurusPluginOptions>({
     author: Joi.string().default("").allow(""),
     footerParser: Joi.object<RegExp>().instance(RegExp),
     keepDebugHtmls: Joi.boolean().default(false),
-    puppeteerTimeout: Joi.number().default(30000),
+    puppeteerTimeout: Joi.number().default(300000),
     sidebarNames: isStringOrArrayOfStrings.default([]),
     versions: isStringOrArrayOfStrings.default([]),
     productVersion: Joi.string().default("").allow(""),
@@ -144,6 +144,7 @@ const schema = Joi.object<PapersaurusPluginOptions>({
     ignoreCssSelectors: isStringOrArrayOfStrings.default([]),
     jQueryUrl: Joi.string().allow("").default("https://code.jquery.com/jquery-3.6.0.min.js"),
     getPdfFileName: Joi.func().default(() => defaultPdfFileNameFunction),
+    docPluginId: Joi.string().optional(),
 });
 
 type ValidateFn = (
