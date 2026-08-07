@@ -190,6 +190,7 @@ const config: Config = {
             {
                 id: "arender-pdf",
                 docPluginId: "arender",
+                versions: ["current"],
                 autoBuildPdfs: false,
                 addDownloadButton: false,
                 keepDebugHtmls: false,
@@ -205,6 +206,7 @@ const config: Config = {
             {
                 id: "fast2-pdf",
                 docPluginId: "fast2",
+                versions: ["current"],
                 autoBuildPdfs: false,
                 addDownloadButton: false,
                 keepDebugHtmls: false,
@@ -220,6 +222,7 @@ const config: Config = {
             {
                 id: "flowerdocs-pdf",
                 docPluginId: "flowerdocs",
+                versions: ["current"],
                 autoBuildPdfs: false,
                 addDownloadButton: false,
                 keepDebugHtmls: false,
@@ -235,6 +238,7 @@ const config: Config = {
             {
                 id: "uxopian-ai-pdf",
                 docPluginId: "uxopian-ai",
+                versions: ["current"],
                 autoBuildPdfs: false,
                 addDownloadButton: false,
                 keepDebugHtmls: false,
