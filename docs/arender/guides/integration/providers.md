@@ -34,9 +34,9 @@ sequenceDiagram
     participant Provider as Provider microservice
     participant Repo as Document Repository
 
-    React->>GW: POST /registry/documents
+    React->>GW: POST /registry/documents?params (verbatim)
     GW->>GW: Inject X-Provider-ID header
-    GW->>Broker: POST /registry/documents<br/>X-Provider-ID: alfresco
+    GW->>Broker: POST /registry/documents?params<br/>X-Provider-ID: alfresco
     Broker->>Provider: GET /documents?nodeRef=...
     Provider->>Repo: Fetch document binary
     Repo-->>Provider: Binary content
@@ -49,12 +49,17 @@ sequenceDiagram
     Note over Broker: Render pages using<br/>cached document
 ```
 
-1. The React UI sends a `POST /registry/documents` request to the gateway/BFF.
+1. The React UI sends a `POST /registry/documents` request to the gateway/BFF, carrying the query string it was given through [`openDocument(params)`](../../reference/web-component.md#parameter-contract) or the `document` attribute. The viewer forwards that string verbatim: values are never decoded, re-encoded or reordered.
 2. The gateway injects the `X-Provider-ID` header (e.g., `alfresco`, `filenet`) and forwards the request to the broker.
 3. The broker looks up the provider's URL in its registry and forwards the request with the whitelisted query parameters.
 4. The provider fetches the document from the repository and returns the binary content (or a JSON folder structure for composite documents).
 5. The broker caches the document, generates a `DocumentId`, and returns it through the gateway to the React UI.
 6. Subsequent page rendering requests follow the same path through the gateway.
+
+
+:::warning `uuid` is a reserved parameter name
+A lone `uuid` parameter tells the viewer the document is already resolved — its value is an ARender `DocumentId`, used as-is, and **no provider call is made**. No provider knows that parameter name, so a repository must never use `uuid` for its own purposes: forwarding it produces an opaque backend error instead of a document.
+:::
 
 ## Available providers
 
@@ -64,6 +69,7 @@ ARender v2026 ships the following provider images:
 |----------|-------------|-------------|----------------|
 | Alfresco | `arender-alfresco-provider` | 8788 | Alfresco via CMIS |
 | FileNet | `arender-filenet-provider` | 8787 | IBM FileNet Content Engine |
+| M-Files | `arender-mfiles-provider` | 8789 | M-Files via Web Service REST API |
 
 
 ## Broker registry configuration
@@ -95,6 +101,19 @@ Or as an environment variable:
 
 ```bash
 REGISTRY_PROVIDER_FILENET_URL=http://filenet-provider:8787
+```
+
+  </TabItem>
+  <TabItem value="mfiles" label="M-Files">
+
+```properties title="application.properties"
+registry.providers.mfiles.base-url=http://mfiles-provider:8789
+```
+
+Or as an environment variable:
+
+```bash
+REGISTRY_PROVIDERS_MFILES_BASE_URL=http://mfiles-provider:8789
 ```
 
   </TabItem>

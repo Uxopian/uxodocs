@@ -1,12 +1,20 @@
 [
   {
+    "version": "v2026.2.0",
+    "title": "ARender v2026.2.0 - Release Notes",
+    "date": "2026-07-31",
+    "description": "Second minor on the 2026 line: a new M-Files provider, underline annotations and comments panel refinements in ARender Horizon, plus Classic annotation fixes, Rendition fixes and security hardening.",
+    "slug": "/release-note/arender/v2026.2.0/release-notes",
+    "hasUpgradeNotes": true,
+    "latest": true
+  },
+  {
     "version": "v2026.1.0",
     "title": "ARender v2026.1.0 - Release Notes",
     "date": "2026-06-26",
     "description": "First minor on the 2026 line: ARender Horizon gains highlight annotations, a comments panel, and a redesigned left panel; plus Classic, Rendition and security fixes.",
     "slug": "/release-note/arender/v2026.1.0/release-notes",
-    "hasUpgradeNotes": true,
-    "latest": true
+    "hasUpgradeNotes": true
   },
   {
     "version": "v2026.0.0",
