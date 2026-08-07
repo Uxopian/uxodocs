@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 const ProductList = [
     {
         title: "ARender",
-        version: "v2026.1.0",
+        version: "v2026.2.0",
         logo: "/img/arender/arender_logo_white.png",
         description:
             "High-performance document viewer to display and annotate all types of documents",
