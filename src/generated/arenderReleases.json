@@ -3,7 +3,7 @@
     "version": "v2026.2.0",
     "title": "ARender v2026.2.0 - Release Notes",
     "date": "2026-07-31",
-    "description": "Second minor on the 2026 line: a new M-Files provider, underline annotations and comments panel refinements in ARender Horizon, plus Classic annotation fixes, Rendition fixes and security hardening.",
+    "description": "Second minor on the 2026 line: a new M-Files provider, underline and circle annotations plus a single document-opening API in ARender Horizon, and Classic annotation fixes, Rendition fixes and security hardening.",
     "slug": "/release-note/arender/v2026.2.0/release-notes",
     "hasUpgradeNotes": true,
     "latest": true
