@@ -44,7 +44,7 @@ npm install arender-ui@{{version}} --registry=https://npm.cloudsmith.io/uxopian/
 The viewer needs to reach the rendition backend. In development, your dev server's built-in proxy handles this — no external reverse proxy needed.
 
 :::note
-Uxopian provides a shared demo rendition backend at `https://rendition.arender.2026.uxopian.com` — available to all, no credentials or installation required. This lets you test the viewer right away. Deploying your own backend is covered in the [Installation](../installation/docker-compose.md) section.
+Uxopian provides a shared demo rendition backend at `https://rendition.demo.arender.uxopian.com` — available to all, no credentials or installation required. This lets you test the viewer right away. Deploying your own backend is covered in the [Installation](../installation/docker-compose.md) section.
 :::
 
 <Tabs>
@@ -61,11 +61,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/documents': {
-        target: 'https://rendition.arender.2026.uxopian.com',
+        target: 'https://rendition.demo.arender.uxopian.com',
         changeOrigin: true,
       },
       '/registry/documents': {
-        target: 'https://rendition.arender.2026.uxopian.com',
+        target: 'https://rendition.demo.arender.uxopian.com',
         changeOrigin: true,
       },
     },
@@ -80,8 +80,8 @@ Create a `proxy.conf.json` file at the root of your project:
 
 ```json title="proxy.conf.json"
 {
-  "/documents":          { "target": "https://rendition.arender.2026.uxopian.com", "changeOrigin": true },
-  "/registry/documents": { "target": "https://rendition.arender.2026.uxopian.com", "changeOrigin": true }
+  "/documents":          { "target": "https://rendition.demo.arender.uxopian.com", "changeOrigin": true },
+  "/registry/documents": { "target": "https://rendition.demo.arender.uxopian.com", "changeOrigin": true }
 }
 ```
 
