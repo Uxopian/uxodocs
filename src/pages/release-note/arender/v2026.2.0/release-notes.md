@@ -5,7 +5,7 @@ date: "2026-07-31"
 weight: -202602
 aliases:
   - /release/2026.2/
-description: "Second minor on the 2026 line: a new M-Files provider, underline annotations and comments panel refinements in ARender Horizon, plus Classic annotation fixes, Rendition fixes and security hardening."
+description: "Second minor on the 2026 line: a new M-Files provider, underline and circle annotations plus a single document-opening API in ARender Horizon, and Classic annotation fixes, Rendition fixes and security hardening."
 _build:
   list: never
 ---
@@ -16,7 +16,7 @@ import DocLink from '@site/src/components/DocLink';
 
 # ARender v2026.2.0 - Release Notes
 
-ARender 2026.2.0 is the second minor release on the 2026 line. It adds a new **M-Files provider** so documents can be viewed directly from M-Files vaults, continues to expand annotation tooling in **ARender Horizon** (underline annotations and comments panel refinements), and rounds out the release with Classic annotation fixes, Rendition fixes and security hardening.
+ARender 2026.2.0 is the second minor release on the 2026 line. It adds a new **M-Files provider** so documents can be viewed directly from M-Files vaults, continues to expand annotation tooling in **ARender Horizon** (underline and circle annotations, comments panel refinements), and unifies how a document is opened in Horizon behind a single API. The release is rounded out with Classic annotation fixes, Rendition fixes and security hardening.
 
 As in the previous release, the changes below are grouped by viewer: a shared **Security** section, then **ARender Horizon (React)**, **ARender Classic (GWT)**, and finally **Rendition & platform** for everything that applies to both viewers (backend, conversion, integrations).
 
@@ -46,9 +46,19 @@ Changes specific to the React viewer (ARender Horizon).
 
 `New` - ARender Horizon can now underline selected text, with a color palette to choose the underline color. This complements the highlight-on-selection tool added in 2026.1.0 and brings Horizon closer to annotation parity with Classic.
 
+#### Circle annotations
+
+`New` - A circle annotation tool is now available in ARender Horizon, so a round area of a page such as a logo or a stamp can be marked out directly in the viewer.
+
 #### Comments panel refinements
 
 `Changed` - The Horizon comments panel introduced in 2026.1.0 gains interactive comment pins on the document page, kept in sync both ways with the comment list: hovering a pin highlights the matching comment and scrolls it into view, and selecting a comment points back to its pin. Comments are also grouped by status (open and closed) so long discussions stay easy to scan.
+
+#### A single way to open a document
+
+`Changed` - ARender Horizon now opens documents through one contract, used by both entry points: `window.ARender.openDocument(params)` in the JavaScript API, and the `document` attribute on the `<arender-element>` Web Component. Both take the same query string of parameters, forwarded to the Rendition backend as-is, so an integration passes only the parameters its repository already expects (`nodeRef`, `objectStoreName`, `objectType`, `url`, `uuid`) without having to know the viewer's own conventions. Opening several documents at once and repeating a parameter now work identically on both entry points.
+
+The earlier entry points are removed: `openDocumentByUrl()`, the `uuid` and `url` attributes on the Web Component, document parameters carried by the `rendition` URL, and document loading from the browser URL. See the <DocLink version="v2026.2.0" product="arender" to="guides/features/opening-documents">opening documents guide</DocLink> for the parameter contract and per-repository examples.
 
 ---
 
@@ -107,8 +117,10 @@ Backend, conversion and integration changes that apply regardless of the viewer.
 | Dependency security update | Both | Security | AR-18522 | |
 | Dependency security update | Both | Security | AR-18561 | |
 | Add underline annotation with color selection | Horizon | Evolution | AR-18450 | |
+| Add circle annotation | Horizon | Evolution | AR-18428 | |
 | Group comments by status in the comments panel | Horizon | Evolution | AR-17923 | |
 | Interactive comment pins synchronized with the comment list | Horizon | Evolution | AR-17930 | |
+| Unify document loading behind a single openDocument(params) API and document attribute | Horizon | Evolution | AR-18575 | |
 | M-Files provider | Both | New feature | AR-18346 | |
 | Annotation selection indicator not displayed for circle and polygon annotations | Classic | Regression | AR-18466 | TMAPR-6864 |
 | Adding an annotation inside another one prevents the document from being displayed | Classic | Bug fix | AR-18477 | TMAPR-6886 |
