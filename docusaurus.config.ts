@@ -255,7 +255,7 @@ const config: Config = {
                 indexDocs: true,
                 indexPages: true,
                 hashed: true,
-                docsRouteBasePath: ["docs/arender"],
+                docsRouteBasePath: ["docs/arender", "docs/fast2", "docs/flowerdocs", "docs/uxopian-ai"],
                 ignoreFiles: [],
                 removeDefaultStopWordFilter: true,
                 explicitSearchResultPath: true,
