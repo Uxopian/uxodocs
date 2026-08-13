@@ -3,9 +3,9 @@ title: Managing prompts in the admin UI
 sidebar_label: Prompts
 sidebar_position: 3
 last_update:
-  date: '2026-04-21T08:21:12.539Z'
+  date: '2026-08-13T13:08:15.927Z'
   author: CI/CD Bot
-content_hash: bf0295fe905e6e8b5242eecf8d8723b1f8adc50c60c20d0fd1e2b4301fb58b63
+content_hash: f875df79eb8069ae8f168b4f700f4fb15eeb712eae89ef8a0540775e658b3765
 ---
 
 The prompts section of the admin panel lets you view, create, edit, and delete prompt definitions for the current tenant. Changes take effect immediately without restarting the application.
@@ -39,7 +39,10 @@ Since 2026.0.0-ft3, the prompts list uses a **stale-while-revalidate** cache: wh
 
 Click on a prompt in the list to open its detail page (route `/prompts/:promptId`). Since 2026.0.0-ft5, every prompt is a **series of versions** with an explicit draft → publish lifecycle (UXOAI-216) rather than a single flat record: a **Published** version serves live traffic, an optional **Draft** holds in-progress edits, and every previously-published version is kept, browsable, and restorable from **History**.
 
-A mode toggle at the top of the detail page switches between these:
+The page has two levels of navigation, and they are two different widgets:
+
+- **Mode** — a segmented control (a pill-shaped group of buttons) in the action bar at the top of the page, next to the Save/Publish toolbar buttons: **Published**, **Draft**, **History** (only rendered once the prompt has more than one version), and **Statistics**. It selects *which version* you are working on. A small dot appears on **Draft** when a draft actually exists.
+- **Sub-views** — tabs in a vertical rail down the left side of the content card, listing what is available *for the selected mode*: **Overview** / **Test** in Published mode, **Edit** / **Display** / **Test** in Draft mode. History and Statistics modes have no sub-views, so the rail disappears entirely for them.
 
 ```mermaid
 graph LR
@@ -48,13 +51,13 @@ graph LR
     B --> D[Draft mode]
     B --> H["History mode<br/>(only once 2+ versions exist)"]
     B --> S[Statistics mode]
-    P --> P1[Overview sub-view /<br/>Test sub-view]
-    D --> D1[Edit sub-view /<br/>Display Settings sub-view /<br/>Test sub-view]
-    H --> H1[Version list /<br/>Per-version summary + stats /<br/>Restore]
-    S --> S1[Usage count / Token cost /<br/>Feedback chart / PDF export]
+    P --> P1["Overview tab /<br/>Test tab"]
+    D --> D1["Edit tab /<br/>Display Settings tab /<br/>Test tab"]
+    H --> H1["No tab rail —<br/>version list + per-version stats + Restore"]
+    S --> S1["No tab rail —<br/>usage count / token cost /<br/>feedback chart / PDF export"]
 ```
 
-*Figure: Prompt detail page — mode toggle at the top, each mode with its own sub-views.*
+*Figure: Prompt detail page — the mode segmented control at the top selects the version; the left tab rail selects the sub-view within that mode.*
 
 **Published mode** shows the live version read-only, with **Overview** (a summary of its settings and content) and **Test** sub-views — there is no Edit sub-view here, since a published version can never be edited directly (attempting to update a non-draft version is rejected with `409 Conflict`).
 
