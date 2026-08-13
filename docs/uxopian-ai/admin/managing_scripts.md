@@ -1,7 +1,11 @@
 ---
 title: Managing scripts in the admin UI
+last_update:
+  date: '2026-08-13T13:08:15.927Z'
+  author: CI/CD Bot
 sidebar_label: Scripts
 sidebar_position: 7
+content_hash: e07cd5398e68891deed89f14a26270539398170c15ae4715e9527255f16a50b0
 ---
 
 The **Scripts** section of the admin panel lets administrators author and deploy custom front-end JavaScript through a governed lifecycle that includes an **LLM-based security scan**. A typical use is the host connector that wires [Quick Prompt](../understanding/quick_prompt.md) into a business application: instead of hand-deploying a static `.js` file, the connector is authored in the admin panel, scanned, and served by uxopian-ai to authenticated users.

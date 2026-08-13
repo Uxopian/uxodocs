@@ -1,7 +1,11 @@
 ---
 title: Agentic Plans
+last_update:
+  date: '2026-08-13T13:08:15.927Z'
+  author: CI/CD Bot
 sidebar_label: Agentic Plans
 sidebar_position: 12
+content_hash: f58ea782194c0aeb8fd2e443c42104d734009628887c7f3ee545d9f3fb7b295f
 ---
 
 A **Plan** is a directed acyclic graph (DAG) of nodes that orchestrates multiple agents and tools into a single multi-step workflow, instead of relying on one agent to juggle everything in its own tool-calling loop. Introduced in 2026.0.0-ft5.

@@ -1,7 +1,11 @@
 ---
 title: Quick Prompt
+last_update:
+  date: '2026-08-13T13:08:15.927Z'
+  author: CI/CD Bot
 sidebar_label: Quick Prompt
 sidebar_position: 11
+content_hash: 394fac950bbd6b873caf7655e21417408fd1fc04c631d9655a7e0ed4c57d5477
 ---
 
 Quick Prompt is a context-aware assistant panel that embeds in a host application alongside — or instead of — the standard chat. Unlike the chat, which the user drives entirely by typing, Quick Prompt **watches the user's navigation**, captures the context of what is on screen (the current document, task, or folder, plus search results), and offers a curated list of prompts relevant to that context.
