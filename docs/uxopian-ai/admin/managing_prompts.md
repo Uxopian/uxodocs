@@ -3,9 +3,9 @@ title: Managing prompts in the admin UI
 sidebar_label: Prompts
 sidebar_position: 3
 last_update:
-  date: '2026-08-13T13:08:15.927Z'
+  date: '2026-08-13T14:08:58.391Z'
   author: CI/CD Bot
-content_hash: f875df79eb8069ae8f168b4f700f4fb15eeb712eae89ef8a0540775e658b3765
+content_hash: 3c235462e68611218f6afc8f852a3667d47624a73016397c28418904de9036cf
 ---
 
 The prompts section of the admin panel lets you view, create, edit, and delete prompt definitions for the current tenant. Changes take effect immediately without restarting the application.
@@ -167,17 +167,19 @@ On the prompt detail page, click "Delete". A confirmation dialog is displayed. A
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `POST` | `/api/v1/admin/prompts` | Create a new prompt — its initial version, v0 (409 if ID already exists) |
+| `GET` | `/api/v1/admin/prompts` | List every prompt for the current tenant (feeds the list page) |
+| `POST` | `/api/v1/admin/prompts` | Create a new prompt — its initial version, v0 (`201`; `409` if the ID already exists) |
 | `GET` | `/api/v1/admin/prompts/{id}` | Get the prompt aggregate: `{ id, versions: [...] }` — every version, not a flat prompt |
 | `GET` | `/api/v1/admin/prompts/{id}/versions` | List every version, ordered |
 | `GET` | `/api/v1/admin/prompts/{id}/versions/{version}` | Get one specific version |
 | `POST` | `/api/v1/admin/prompts/{id}/versions` | Create the draft (409 if a draft already exists) |
 | `PUT` | `/api/v1/admin/prompts/{id}/versions/{version}` | Edit the draft, or publish it with `draft:false` (409 if the target isn't the draft — published versions are read-only) |
 | `DELETE` | `/api/v1/admin/prompts/{id}/versions/{version}` | Discard the draft, keeping published versions intact (409 if not the draft) |
-| `GET` | `/api/v1/admin/prompts/{id}/render` | Render the active version, or a specific one via `?version=` |
+| `GET` | `/api/v1/admin/prompts/{id}/render` | Render the active version, or a specific one via `?version=`. The variable values go in an optional JSON body. |
 | `GET` | `/api/v1/admin/prompts/{id}/statistics` | Usage statistics aggregated across every version |
 | `GET` | `/api/v1/admin/prompts/{id}/versions/{version}/statistics` | Usage statistics for a single version |
-| `DELETE` | `/api/v1/admin/prompts/{id}` | Delete the prompt and every version |
+| `GET` | `/api/v1/admin/prompts/{id}/usage` | Whether the prompt is deletable, and which Applications reference it — what drives the *Used by N apps* label and the disabled Delete button |
+| `DELETE` | `/api/v1/admin/prompts/{id}` | Delete the prompt and every version (`204`) |
 | `GET` | `/api/v1/admin/prompts/categories` | List the distinct Quick Prompt categories currently in use (feeds the category selector) |
 | `GET` | `/api/v1/admin/templating/completion` | Get auto-completion metadata for the template editor |
 
