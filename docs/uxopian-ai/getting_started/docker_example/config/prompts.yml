@@ -1,9 +1,4 @@
 prompts:
-  # Configuration for backing up prompt definitions
-  backup:
-    path: ${PROMPTS_BACKUP_PATH:./prompts/}
-
-  # Global prompts available to all tenants
   globals:
     - id: basePrompt
       role: SYSTEM # This is the main system prompt (persona, rules)
@@ -126,29 +121,3 @@ prompts:
       reasoningDisabled: false
       requiresMultiModalModel: false
       requiresFunctionCallingModel: false
-
-  # Tenant-specific prompt overrides or additions
-  # This list is intentionally empty as requested.
-  tenants: []
-    # --- Example structure for a tenant entry (now removed) ---
-    # - tenantId: FD
-    #   mergeStrategy: merge # Defines how to combine with global prompts
-    #   prompts:
-    #     - id: ragComparison
-    #       role: USER
-    #       content: |
-    #         Compare the following two documents:
-    #         [[${ragService.parseDocumentsWithRag(leftDocumentId, rightDocumentId)}]]
-    #       reasoningDisabled: false
-    #       requiresMultiModalModel: false
-    #       requiresFunctionCallingModel: false
-    #     - id: arenderContext
-    #       role: USER
-    #       content: |
-    #         You must rely on the content of the following document to perform your task.
-    #         Use only the information explicitly present in the document.
-    #         Document content:
-  #         [[${documentService.extractTextualContent(documentId)}]]
-  #       reasoningDisabled: false
-  #       requiresMultiModalModel: false
-  #       requiresFunctionCallingModel: false

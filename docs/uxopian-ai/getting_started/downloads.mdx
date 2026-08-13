@@ -1,11 +1,11 @@
 ---
 title: Downloads
 sidebar_label: Downloads
-sidebar_position: 5
+sidebar_position: 7
 last_update:
-  date: '2026-03-26T16:37:56.929Z'
+  date: '2026-08-06T14:32:17.232Z'
   author: CI/CD Bot
-content_hash: 870dc711eb78d78341ae9d48cc549558c4cc53317a5ef98b92a5a56aaf6042e3
+content_hash: 21a5a7c0b402e9d571c4a1b7399745615964792708bff56cac5d335a57bd417c
 ---
 
 Downloadable example packages for Uxopian AI. Each package is a ZIP archive containing Docker Compose files and configuration templates.
@@ -53,9 +53,28 @@ Static scope files for embedding the Uxopian AI chat panel in FlowerDocs. These 
 
 See [Quickstart with FlowerDocs](./quickstart_flowerdocs.mdx) for step-by-step instructions, or [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) for the production-ready setup.
 
+### FileNet ICN plugin
+
+Source-only — no prebuilt JAR is distributed, so you build and control what's deployed to WebSphere.
+
+:::tip[Download]
+**<a href={require('../how_to/uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven project to build for your environment
+:::
+
+Source package contents:
+- `pom.xml`: Maven build descriptor
+- `icn-plugin.p12`: Default PKCS12 keystore — replace before production
+- `src/`: Java sources for plugin, proxy service, action, feature, and JWT utilities
+- `src/main/resources/com/uxopian/icn/WebContent/actionHandler.js`: Dojo frontend module
+
+`navigatorAPI.jar` (IBM's proprietary Navigator API) is **not** bundled — supply it from your own ICN installation (see [Integrate with FileNet, 1.1](../how_to/integrate_with_filenet.mdx#11-supply-navigatorapijar)).
+
+See [Getting started with FileNet](./quickstart_filenet.mdx) for the integration path, or [Integrate with FileNet](../how_to/integrate_with_filenet.mdx) for deployment instructions.
+
 ## Related pages
 
 - [Quickstart with Docker Compose](./quickstart.mdx)
 - [Quickstart with ARender](./quickstart_arender.mdx)
 - [Quickstart with FlowerDocs](./quickstart_flowerdocs.mdx)
+- [Getting started with FileNet](./quickstart_filenet.mdx)
 - [Registry access](./registry_access.md)

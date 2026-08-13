@@ -55,7 +55,7 @@ prompts:
 
 | Field | Required | Description |
 |---|---|---|
-| `id` | Yes | Unique identifier. Referenced in requests and goals. |
+| `id` | Yes | Unique identifier. Referenced in requests. |
 | `role` | Yes | `SYSTEM`, `USER`, or `ASSISTANT` |
 | `content` | Yes | Thymeleaf template string |
 | `requiresMultiModalModel` | No | Set to `true` if the prompt includes images |
@@ -183,7 +183,5 @@ Changes made via the API are persisted in OpenSearch and take effect immediately
 
 - [Prompts and templating](../understanding/prompts_and_templating.md)
 - [Managing prompts in the admin UI](../admin/managing_prompts.md)
-- [Goals](../understanding/goals.md)
-- [Write goals](./writing_goals.md)
 - [Custom service helpers](./custom_service_helpers.md)
 - [Configuration file reference](../reference/configuration.md)

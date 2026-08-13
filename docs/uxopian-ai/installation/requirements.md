@@ -13,7 +13,7 @@ Uxopian AI consists of two services: **uxopian-ai** (the AI backend) and **uxopi
 ```mermaid
 flowchart TD
     A[Check infrastructure capacity] --> B[Obtain registry credentials]
-    B --> C[Prepare OpenSearch 3.3.2]
+    B --> C[Prepare OpenSearch 3.6.0]
     C --> D[Obtain LLM provider API key]
     D --> E{Choose deployment model}
     E -->|Container runtime available| F[Kubernetes or Docker Compose]
@@ -28,14 +28,14 @@ flowchart TD
 |---|---|---|
 | uxopian-ai | 512 Mi RAM, 0.5 CPU | JVM heap: `-Xmx768m -Xms512m` |
 | uxopian-gateway | 256 Mi RAM | JVM heap: `-Xmx256m -Xms256m` |
-| OpenSearch | 1 Gi RAM (single node) | Version `3.3.2` required |
+| OpenSearch | 1 Gi RAM (single node) | Version `3.6.0` required |
 | Java | 21 | Required for bare JAR deployment only |
 
 For multi-replica deployments, both services use Hazelcast for session state distribution. See [Kubernetes deployment](./kubernetes.mdx) for cluster configuration.
 
 ## OpenSearch
 
-OpenSearch `3.3.2` is the supported version. uxopian-ai connects to OpenSearch on port `9200` by default. The index is created automatically on first startup.
+OpenSearch `3.6.0` is the supported version. uxopian-ai connects to OpenSearch on port `9200` by default. The index is created automatically on first startup.
 
 For production, allocate at least 1 Gi heap to OpenSearch and configure persistent volumes for the data directory.
 

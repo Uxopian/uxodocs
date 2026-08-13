@@ -4,7 +4,7 @@ title: "Uxopian AI release notes - 2026.0.0-ft4"
 date: 2026-06-03
 version: "2026.0.0-ft4"
 major_version: "2026"
-latest: true
+latest: false
 description: "Quick Prompt context-aware assistant, interactive choices in chat, admin-managed scripts with LLM security scan, prompt-editor context autocomplete, and structured API error responses."
 ---
 

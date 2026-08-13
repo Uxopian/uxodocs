@@ -1,14 +1,14 @@
 ---
 title: Quickstart with FlowerDocs
+last_update:
+  date: '2026-08-13T13:08:15.927Z'
+  author: CI/CD Bot
 sidebar_label: Quickstart with FlowerDocs
 sidebar_position: 3
-last_update:
-  date: '2026-03-26T16:37:56.929Z'
-  author: CI/CD Bot
-content_hash: 82b2d47980ef8e0227c7c501660223199492f18f0cdfd0cf259b01c7046b0d74
+content_hash: 70a0d74ab1553fe6c1b960d6e312c451cdefaa13e79428a7d38d83e7fda5e8fa
 ---
 
-This guide adds the Uxopian AI chat panel to a running FlowerDocs deployment. The result is a FlowerDocs instance where users can open an AI chat panel via keyboard shortcut, with document context provided by the FlowerDocs tools.
+This guide adds the Uxopian AI chat panel to a FlowerDocs deployment running locally with Docker Compose. The result is a FlowerDocs instance where users can open an AI chat panel via keyboard shortcut, with document context provided by the FlowerDocs tools.
 
 :::warning Development configuration only
 This quickstart uses `DevProvider` (authentication disabled) and is intended to validate the scope file installation quickly. **It is not suitable for production.** For a production deployment — with `FlowerDocsProvider`, token validation, and a proper LLM check before UI integration — follow the phased [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) guide instead.
@@ -16,52 +16,77 @@ This quickstart uses `DevProvider` (authentication disabled) and is intended to 
 
 ## Prerequisites
 
-- A running Uxopian AI stack. See [Quickstart with Docker Compose](./quickstart.mdx).
-- A FlowerDocs deployment with a Maven-based scope build.
-- The Uxopian AI gateway URL reachable from the FlowerDocs server.
+- **A running FlowerDocs deployment with Docker Compose**, with a scope already created. Follow FlowerDocs' own [Docker installation](/docs/flowerdocs/install/docker) guide if you don't have one yet — this quickstart doesn't repeat it. You'll need the **Docker network name** that stack uses (`flowerdocs-net` in FlowerDocs' documented compose file) and the **scope id** you created (e.g. `DEFAULT`).
+- Docker and Docker Compose.
+- At least one LLM API key (see [Quickstart with Docker Compose](./quickstart.mdx)).
 
 ## Step flow
 
 ```mermaid
 flowchart LR
-    A["Download<br/>scope files"] --> B["Install scope files<br/>(see FlowerDocs docs)"]
-    B --> C["Log in to FlowerDocs"]
-    C --> D["Open chat panel<br/>(keyboard shortcut)"]
+    A["FlowerDocs running<br/>(Docker Compose)"] --> B["Start uxopian-ai stack<br/>on the SAME network"]
+    B --> C["Download scope files"]
+    C --> D["Import via CLM<br/>(update-config)"]
+    D --> E["Log in to FlowerDocs"]
+    E --> F["Open chat panel<br/>(keyboard shortcut)"]
 ```
 
-*Figure: Steps from scope file download to a working AI chat panel in FlowerDocs.*
+*Figure: Steps from a running FlowerDocs to a working AI chat panel.*
 
 ## Steps
 
-### 1. Download the scope files
+### 1. Start the uxopian-ai stack on FlowerDocs' network
+
+Download `uxopian-ai-stack.yml` and `gateway-application.yaml` from [Quickstart with Docker Compose](./quickstart.mdx#steps) — same files, no FlowerDocs-specific variant needed. Two changes to that compose file before starting it:
+
+1. **Join FlowerDocs' own Docker network** instead of creating a new one — replace the `networks:` block at the bottom with the network FlowerDocs is already running on, marked external:
+
+   ```yaml
+   networks:
+     flowerdocs-net: # the network name your FlowerDocs compose stack uses
+       external: true
+   ```
+
+   and point every service's `networks:` list at `flowerdocs-net` instead of `uxopian-ai-net`.
+
+2. **Name the gateway service/container `gateway-service`.** The scope files downloaded in the next step ship a FlowerDocs Route pointing at `http://gateway-service:8085` — the gateway container must resolve under that exact name on the shared network for FlowerDocs' internal proxy to reach it:
+
+   ```yaml
+   services:
+     gateway-service: # renamed from uxopian-gateway
+       container_name: gateway-service
+       # ...unchanged otherwise
+   ```
+
+Then start it:
+
+```bash
+docker compose -f uxopian-ai-stack.yml up -d
+```
+
+### 2. Download the scope files
 
 :::tip[Download]
 **<a href={require('../how_to/uxopian-ai_flowerdocs_scope.zip').default} download="uxopian-ai_flowerdocs_scope.zip">uxopian-ai_flowerdocs_scope.zip</a>**
 :::
 
-The archive contains:
+Extract the ZIP. See [Configure FlowerDocs scope files](../how_to/configure_flowerdocs_scope.mdx) for what each file does; you don't need to edit anything for this quickstart.
 
-```
-conf/
-  Route/
-    Gateway.xml             # Route definition pointing to uxopian-gateway
-  Script/
-    consts/                 # Constants including the gateway URL
-    openChat/               # openChat() helper function
-    refreshToken/           # Token refresh helper
-    web-comp/               # Web component loader
-    OpenChatShortcut/       # Keyboard shortcut implementation
-    UxoAiAdminShortcut/     # Admin UI shortcut implementation
-    translate/              # Translation helper
-    uxoai-utils/            # Utility functions
-    *.xml                   # Scope file descriptors
+### 3. Import the scope files with CLM
+
+Run the same `flower-docs-clm` image your FlowerDocs deployment uses, on its network, targeting your scope (replace `DEFAULT`, the password, and the core URL with your own):
+
+```bash
+docker run --rm --network=flowerdocs-net \
+  --volume="$PWD/conf:/clm/uxopian-ai-scope/conf" \
+  artifactory.arondor.cloud:5001/flower-docs-clm:{{version}} \
+  update-config --template=uxopian-ai-scope --scope=DEFAULT --password=<yourPassword> \
+  --ws.url=http://flower-docs-core:8081/core/rest --data.dir=/clm/
 ```
 
-### 2. Install the scope files into FlowerDocs
+`update-config` only touches configuration components (Routes, Scripts) — it never touches documents, so it's safe to re-run any time you update the scope files. `--ws.url` must end in `/core/rest` (not `/core/services` — an older path that no longer works on the 2026 line).
 
-The scope files are installed via the FlowerDocs CLM service. Refer to your FlowerDocs documentation for the scope installation procedure.
-
-### 3. Verify
+### 4. Verify
 
 1. Log in to FlowerDocs.
 2. Use the keyboard shortcut assigned to `OpenChatShortcut`.
@@ -71,7 +96,7 @@ The scope files are installed via the FlowerDocs CLM service. Refer to your Flow
 If the chat panel does not appear, check the uxopian-ai logs:
 
 ```bash
-docker compose -f uxopian-ai-stack.yml logs uxopian-ai
+docker compose -f uxopian-ai-stack.yml logs uxopian-ai gateway-service
 ```
 
 ## Architecture in this stack
@@ -80,7 +105,7 @@ docker compose -f uxopian-ai-stack.yml logs uxopian-ai
 flowchart LR
     User["User (browser)"]
     FD["FlowerDocs UI"]
-    GW["uxopian-gateway<br/>(port 8085)"]
+    GW["uxopian-gateway<br/>(gateway-service:8085)"]
     AI["uxopian-ai"]
     FDAPI["FlowerDocs API"]
     LLM["LLM Provider"]
@@ -93,11 +118,12 @@ flowchart LR
     LLM -.->|"Response streamed"| FD
 ```
 
-*Figure: Chat panel traffic flow from FlowerDocs through the gateway to uxopian-ai.*
+*Figure: Chat panel traffic flow from FlowerDocs through the gateway to uxopian-ai — both stacks share one Docker network.*
 
 ## Related pages
 
 - [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) — production setup with `FlowerDocsProvider`
 - [Configure FlowerDocs scope files](../how_to/configure_flowerdocs_scope.mdx) — customize buttons and shortcuts
-- [Quickstart with Docker Compose](./quickstart.mdx) — start the uxopian-ai stack
+- [Quickstart with Docker Compose](./quickstart.mdx) — the uxopian-ai stack used here
+- [FlowerDocs Docker installation](/docs/flowerdocs/install/docker)
 - [Prompts and templating](../understanding/prompts_and_templating.md)

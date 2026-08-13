@@ -1,7 +1,11 @@
 ---
 title: Configure gateway routes
+last_update:
+  date: '2026-08-06T14:32:17.232Z'
+  author: CI/CD Bot
 sidebar_label: Gateway routes
-sidebar_position: 7
+sidebar_position: 8
+content_hash: 6251c7c2b298b495871dd65e2a52536233a527485002f66cb53c4576a6553f8a
 ---
 
 import Tabs from '@theme/Tabs';

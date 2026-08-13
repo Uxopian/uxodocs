@@ -58,7 +58,7 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | Variable | Default | Description |
 |---|---|---|
 | `PLUGINS_ROOT_PATH` | `plugins/` | Path to the directory containing plugin JARs |
-| `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Comma-separated whitelist of `@ToolService(tags=…)` values. Controls which tool sets are registered at startup. Empty list = all tools registered. Untagged `@ToolService` beans are always registered. **Do not combine `flowerdocs` and `alfresco`** — they both expose document operations for different ECM backends; loading both will expose conflicting tool suites to the LLM. Use exactly one: `flowerdocs,files` (default), `alfresco,files`, or `files` if no ECM backend is needed. |
+| `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Comma-separated `@ToolService(tags=…)` list. Since 2026.0.0-ft5, this no longer gates which tools get *registered* at startup — every tool in every plugin JAR present in `plugins/` is always registered, regardless of this value. It now only seeds the tool-tag whitelist of the [Application](../admin/managing_applications.md) auto-created the first time a connection provider is used (empty = `allowAllTools`). See [Plugin system — Filtering tools by tag](../understanding/plugin_system.md#filtering-tools-by-tag). **Do not whitelist more than one of `flowerdocs`, `alfresco`, `filenet` on the same Application** — they all expose overlapping document search/read/redact operations for different ECM backends, and exposing more than one confuses the LLM about which to call. Pick exactly one, e.g. `flowerdocs,files` (default), `alfresco,files`, `filenet,files,interaction`, or `files` alone if no ECM backend is needed. |
 
 ### Integration connectors
 
@@ -69,13 +69,6 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | `ALFRESCO_BASE_URL` | (empty) | Alfresco REST API v1 base URL. Required if the Alfresco plugin is deployed (via `PLUGINS_TOOLS_ENABLED_TAGS=alfresco,…`). |
 | `ALFRESCO_LEGACY_BASE_URL` | (auto-derived) | Base URL for Alfresco legacy Web Script endpoints. Auto-derived from `ALFRESCO_BASE_URL` when not set (e.g., `https://host/alfresco-api` → `https://host/alfresco`; `https://host/alfresco/api` → `https://host/alfresco/s`). Set explicitly only if the auto-derivation does not match your deployment. |
 | `ALFRESCO_CMM_ENABLED` | `false` | Enable Alfresco Custom Content Model lookup. When disabled, the LLM sees only the built-in `cm:*` system properties. |
-
-### Prompts and goals
-
-| Variable | Default | Description |
-|---|---|---|
-| `PROMPTS_BACKUP_PATH` | `./prompts/` | Directory for prompt backup files |
-| `GOALS_BACKUP_PATH` | `./goals/` | Directory for goal backup files |
 
 ### Script security scan
 
@@ -115,7 +108,7 @@ The gateway is configured primarily via the mounted `gateway-application.yaml` f
 | Variable | Default | Description |
 |---|---|---|
 | `REGISTRY` | `artifactory.arondor.cloud:5001` | Docker registry host for Artifactory-based image pull. Not used when switching to Cloudsmith images (see [Registry access](../getting_started/registry_access.md)). |
-| `UXOPIAN_VERSION` | `2026.0.0-ft4` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
+| `UXOPIAN_VERSION` | `2026.0.0-ft5` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
 
 In the gateway `gateway-application.yaml`, the URIs for backend services are hardcoded Docker Compose service names (e.g., `http://uxopian-ai:8080`).
 
