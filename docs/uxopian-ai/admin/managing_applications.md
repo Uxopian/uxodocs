@@ -1,10 +1,35 @@
 ---
 title: Managing Applications in the admin UI
+last_update:
+  date: '2026-08-13T13:08:15.927Z'
+  author: CI/CD Bot
 sidebar_label: Applications
 sidebar_position: 9
+content_hash: 6a58b4f4877f38929ad49ace7970b1dc7f97acb54f474a4130bdf92166f1d122
 ---
 
-Since 2026.0.0-ft5, an **Application** (`ApplicationConf`) scopes a set of AI defaults and guardrails — a default LLM provider/model, a system prompt fragment, a maximum number of tool-calling cycles, and a tool/MCP permission whitelist — to one usage surface. This lets a single uxopian-ai deployment serve several integrations (for example, a FlowerDocs scope and a custom internal tool) with different defaults, without the surfaces stepping on each other's configuration.
+Since 2026.0.0-ft5, an **Application** (`ApplicationConf`) scopes a set of AI defaults and guardrails — a default LLM provider/model, a system prompt fragment, a maximum number of tool-calling cycles, and a tool/MCP permission whitelist — to one usage surface. A single uxopian-ai deployment can therefore serve several integrations with different defaults, without the surfaces stepping on each other's configuration.
+
+## Why Applications: one deployment, two surfaces
+
+Consider a deployment used by two very different audiences:
+
+- **FlowerDocs** — end users asking questions about their documents from the FlowerDocs UI. High volume, interactive, and latency-sensitive.
+- **A custom internal tool** — a back-office integration that calls uxopian-ai through its own connection provider to run longer, more autonomous analyses.
+
+They want opposite settings. Without Applications, you either pick one compromise for the whole deployment, repeat the same overrides on every single request, or run a second deployment. With Applications, each surface carries its own configuration:
+
+| | `FlowerDocs` Application | `InternalTool` Application |
+|---|---|---|
+| Default LLM provider / model | A fast, inexpensive model — most turns are simple document questions | A stronger reasoning model, worth its cost on a handful of runs |
+| Prompt | End-user tone, answers grounded in the user's documents | Internal tone, output formatted for the calling system |
+| Max tool cycles | Low — an interactive answer should not spin through dozens of tool round-trips | High — long agentic runs are the point |
+| Permissions | Search and read tools only | Adds the internal MCP server and the Plans the tool is allowed to invoke |
+
+The gain is twofold:
+
+- **No cross-talk.** Raising the internal tool's tool-cycle ceiling, or granting it an MCP server, changes nothing for FlowerDocs users. Each surface has its own blast radius.
+- **No per-request plumbing.** The FlowerDocs UI does not have to send a model name, a prompt, or a tool whitelist on every call — the request arrives through the `FlowerDocsProvider` connection provider and uxopian-ai resolves the matching Application on its own (see below).
 
 ## Every connection provider has a default Application
 
