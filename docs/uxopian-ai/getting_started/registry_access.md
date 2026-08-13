@@ -1,11 +1,11 @@
 ---
 title: Registry access
 sidebar_label: Registry access
-sidebar_position: 4
+sidebar_position: 6
 last_update:
-  date: '2026-03-26T16:37:56.929Z'
+  date: '2026-08-06T14:32:17.232Z'
   author: CI/CD Bot
-content_hash: f7ee16d4199d531ac75dedd8ad47bf0f030462af006b47c8f40379d4ebc935be
+content_hash: ee1e4944ef69aa010456bea3082d9aa803eeccb952cf8c6cd8fd5b7ec28b49b6
 ---
 
 Uxopian AI images are available from two Docker registries: a public preview registry on Cloudsmith and a private enterprise registry on Artifactory. Use the one that matches your access level.
@@ -32,8 +32,8 @@ docker login docker.uxopian.com
 ### Pull an image
 
 ```bash
-docker pull docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft3
-docker pull docker.uxopian.com/preview/uxopian-gateway:2026.0.0-ft3
+docker pull docker.uxopian.com/preview/uxopian-ai:2026.0.0-ft5
+docker pull docker.uxopian.com/preview/uxopian-gateway:2026.0.0-ft5
 ```
 
 ### Use Cloudsmith images in Docker Compose
@@ -42,9 +42,9 @@ The Docker Compose examples include commented-out image lines for the Cloudsmith
 
 ```yaml
 # Comment out the Artifactory line:
-# image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
+# image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft5}
 # Uncomment the Cloudsmith line:
-image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft3}
+image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft5}
 ```
 
 Repeat for `uxopian-gateway`. The `REGISTRY` variable does not apply to Cloudsmith images because the image path includes the `/preview/` repository segment.
@@ -80,7 +80,7 @@ echo "$REGISTRY_PASSWORD" | docker login artifactory.arondor.cloud:5001 \
 ### Verify access
 
 ```bash
-docker pull artifactory.arondor.cloud:5001/uxopian-gateway:2026.0.0-ft3
+docker pull artifactory.arondor.cloud:5001/uxopian-gateway:2026.0.0-ft5
 ```
 
 If the pull succeeds, your credentials are correct.
@@ -98,7 +98,7 @@ The Docker Compose examples use `${REGISTRY:-artifactory.arondor.cloud:5001}` as
 
 ## Current version
 
-The current release version is `2026.0.0-ft3`. The Docker Compose examples use `${UXOPIAN_VERSION:-2026.0.0-ft3}` as the version variable.
+The current release version is `2026.0.0-ft5`. The Docker Compose examples use `${UXOPIAN_VERSION:-2026.0.0-ft5}` as the version variable.
 
 ## Related pages
 

@@ -60,46 +60,19 @@ Starting with 2026.0.0-ft3, each integration is packaged as a single shaded JAR 
 
 ## Filtering tools by tag
 
-In 2026.0.0-ft3, `@ToolService` accepts a `tags` attribute (`String[]`, default `{}`). The `plugins.tools.enabled-tags` property (env `PLUGINS_TOOLS_ENABLED_TAGS`) is a comma-separated whitelist used by `IntegrationLoader` to decide which tool sets to register:
+`@ToolService` accepts a `tags` attribute (`String[]`, default `{}`), added in 2026.0.0-ft3. Before 2026.0.0-ft5, the `plugins.tools.enabled-tags` property (env `PLUGINS_TOOLS_ENABLED_TAGS`) was a whitelist `IntegrationLoader` used to decide which `@ToolService` beans to *register* at startup.
 
-| Whitelist state | Behaviour |
-|---|---|
-| Empty list | All `@ToolService` beans are registered regardless of their tags (backward compatible). |
-| Non-empty list | A `@ToolService` is registered only if at least one of its tags matches the whitelist. |
-| `@ToolService` with no tags | Always registered, regardless of whitelist. This keeps custom in-house tools from being filtered out accidentally. |
+**Since 2026.0.0-ft5, that's no longer true: `IntegrationLoader` registers every `@ToolService` bean it finds in every plugin JAR present in `plugins/`, unconditionally — the tag whitelist plays no part in registration anymore.** `plugins.tools.enabled-tags` still exists, but its role changed: it now only seeds the default tool-tag whitelist on the [Application](../admin/managing_applications.md) auto-created the first time a connection provider is used (an empty list there means that default Application gets `allowAllTools: true` instead). Once that Application exists, editing it in the admin UI — not this property — is what actually controls which registered tools a given caller can see.
 
-The default value shipped in `application.yaml` is `flowerdocs,files`, so Alfresco tools are present in `plugins/` but not registered unless you opt in.
+Practically: **all tool code is loaded and instantiated regardless of this setting**, including Alfresco/FileNet tools, whether or not their tag is listed here. If you need a caller to never see a given tool suite, restrict it on that caller's Application (or a `PLUGINS_ROOT_PATH` without the corresponding plugin JAR at all — the only way to keep the code from loading in the first place).
 
 ### Choosing a document management backend
 
-`flowerdocs` and `alfresco` are two separate tool suites that both expose document search, retrieval, and metadata operations — but for different ECM backends and with incompatible query APIs. Loading both simultaneously is not recommended: the LLM would see two distinct sets of tools for the same operations and may call either one unpredictably.
+`flowerdocs`, `alfresco`, and `filenet` are three separate tool suites that all expose document search, retrieval, and metadata (and, for FlowerDocs/FileNet, redaction) operations — but for different ECM backends and with incompatible query APIs. Exposing more than one to the same caller is not recommended: the LLM would see overlapping sets of tools for the same operations and may call the wrong one unpredictably.
 
-Pick **exactly one** backend per deployment:
+Pick **exactly one** backend's tools per Application (see [Managing Applications — Permissions](../admin/managing_applications.md#permissions)) — the JARs for all three can coexist in `plugins/`; only the exposed set needs to be scoped down. For a FileNet/ICN deployment, this means the Application the ICN plugin resolves to (by default, one named `FileNet`, auto-created from `FileNetProvider`) should whitelist the `filenet` tag and *not* `flowerdocs`/`alfresco`.
 
-| Deployment target | `PLUGINS_TOOLS_ENABLED_TAGS` |
-|---|---|
-| FlowerDocs (default) | `flowerdocs,files` |
-| Alfresco | `alfresco,files` |
-| No ECM backend | `files` |
-
-```yaml
-# FlowerDocs (default — no change needed)
-plugins:
-  tools:
-    enabled-tags: flowerdocs,files
-
-# Alfresco
-plugins:
-  tools:
-    enabled-tags: alfresco,files
-
-# No ECM backend
-plugins:
-  tools:
-    enabled-tags: files
-```
-
-For Spring Boot tests that use classpath component scan, add `@TestPropertySource(properties = "plugins.tools.enabled-tags=...")` and rely on `ToolServiceTagFilter` (a `BeanDefinitionRegistryPostProcessor`) to strip non-matching beans from the registry.
+For Spring Boot tests that use classpath component scan, add `@TestPropertySource(properties = "plugins.tools.enabled-tags=...")` and rely on `ToolServiceTagFilter` (a `BeanDefinitionRegistryPostProcessor`, `tests/tools-tests` only) to strip non-matching beans from the registry — this test-only filter is unrelated to (and stricter than) the production `IntegrationLoader` behavior described above.
 
 ## Disabling tools globally
 

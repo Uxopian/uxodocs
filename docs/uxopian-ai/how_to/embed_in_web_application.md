@@ -148,7 +148,6 @@ Authentication is not configured in the element itself. The gateway handles auth
 |---|---|---|
 | `text` | Free text sent as-is | Not used |
 | `prompt` | Prompt ID (e.g., `arenderContext`) | Variables for Thymeleaf template |
-| `goal` | Goal group name | Variables for Thymeleaf templates in the group |
 | `image` | Base64-encoded image data | Not used |
 
 ## Verification

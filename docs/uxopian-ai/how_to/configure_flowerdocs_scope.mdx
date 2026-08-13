@@ -1,11 +1,11 @@
 ---
 title: Configure FlowerDocs scope files
 sidebar_label: FlowerDocs scope files
-sidebar_position: 5
+sidebar_position: 6
 last_update:
-  date: '2026-04-21T08:21:12.539Z'
+  date: '2026-08-06T14:32:17.232Z'
   author: CI/CD Bot
-content_hash: fe010f0006fc8d0d20a4f5d91838fa11073378d795c68d12a28815cb544c35bb
+content_hash: 565e03946715bb8a5e2cdd08a96f80f76813859b07b6b355e29729bcd5b5c611
 ---
 
 FlowerDocs scope files inject the Uxopian AI chat panel, the [Quick Prompt](../understanding/quick_prompt.md) assistant, and keyboard shortcuts into the FlowerDocs UI. This guide explains each scope file and how to customize them.
@@ -28,7 +28,6 @@ conf/
     OpenChatShortcut.xml        # [Order 2] Keyboard shortcut: open chat panel
     UxoAiAdminShortcut.xml      # [Order 2] Keyboard shortcut: open admin UI
     openChat.xml                # [Order 2] openChat() helper function
-    refreshToken.xml            # [Order 2] Token refresh helper
     translate.xml               # [Order 2] Translation helper
     web-comp.xml                # [Order 2] Web component loader — REQUIRED
     qp-search.xml               # [Order 2] Quick Prompt — search capture
@@ -39,7 +38,6 @@ conf/
     UxoAiAdminShortcut/
     consts/
     openChat/
-    refreshToken/
     translate/
     uxoai-utils/
     web-comp/
@@ -55,13 +53,12 @@ FlowerDocs loads scripts in `RegistrationOrder` sequence. Three scripts are **ma
 
 ```mermaid
 flowchart TD
-    consts["const — Order 0<br/>GATEWAY_ENDPOINT, UXO_AI_ENDPOINT<br/>WS_UXO_AI_ENDPOINT"]
+    consts["const — Order 0<br/>UXO_AI_ENDPOINT (scoped, required)<br/>WS_UXO_AI_ENDPOINT (direct, optional)"]
     utils["uxoai-utils — Order 1<br/>createAIAction()<br/>contextualInput()<br/>openChatComp()"]
     webcomp["web-comp — Order 2<br/>Loads JS bundle + CSS from gateway<br/>Registers createChat() in the page"]
     openChat["openChat"]
     shortcut["OpenChatShortcut"]
     adminShortcut["UxoAiAdminShortcut"]
-    refresh["refreshToken"]
     translate["translate"]
 
     qpSearch["qp-search — Order 2<br/>searchCapture<br/>getCategoryFromUrl"]
@@ -73,7 +70,6 @@ flowchart TD
     consts --> webcomp
     consts --> shortcut
     consts --> adminShortcut
-    consts --> refresh
     utils --> openChat
     utils --> translate
     webcomp --> openChat
@@ -104,72 +100,55 @@ Defines all URL constants used by every other script:
 ```javascript
 const BASE_URL = window.location.origin + '/gui';
 const GATEWAY_PATH = '/gateway/uxopian-ai';
+const SCOPE = JSAPI.get().getUserAPI().getScope();
 
-// Route through FlowerDocs Zuul (session ping only — Zuul cannot stream)
-const GATEWAY_ENDPOINT   = `${BASE_URL}/plugins/${JSAPI.get().getUserAPI().getScope()}${GATEWAY_PATH}`;
+// Through FlowerDocs' own internal proxy (the /gateway/** Route). Used for the JS/CSS
+// bundle, REST calls and SSE streaming — this proxy forwards plain HTTP fine.
+const UXO_AI_ENDPOINT = `${BASE_URL}/plugins/${SCOPE}${GATEWAY_PATH}`;
 
-// Direct route to uxopian-gateway bypassing Zuul (all LLM calls, streaming, WebSocket)
-const UXO_AI_ENDPOINT    = `${BASE_URL}${GATEWAY_PATH}`;
-const WS_UXO_AI_ENDPOINT = `${BASE_URL}${GATEWAY_PATH}`;
+// Direct, browser-reachable address of uxopian-gateway's OWN Ingress, bypassing
+// FlowerDocs' proxy entirely. Optional: only needed for the WebSocket channel.
+// Set this to the gateway's public URL by hand before deploying the scope
+// (e.g. https://ai-gateway.<your-domain>) — leave it blank to degrade
+// gracefully: chat/Quick Prompt keep working, only server-to-client push
+// actions stay silent.
+const WS_GATEWAY_URL_RAW = '';
+const WS_UXO_AI_ENDPOINT = WS_GATEWAY_URL_RAW
+  ? `${WS_GATEWAY_URL_RAW}/gui${GATEWAY_PATH}`
+  : '';
 ```
 
 | Constant | Default resolved path | How it reaches the gateway |
 |---|---|---|
-| `GATEWAY_ENDPOINT` | `/gui/plugins/<scope>/gateway/uxopian-ai` | Through FlowerDocs Zuul |
-| `UXO_AI_ENDPOINT` | `/gui/gateway/uxopian-ai` | Direct (same origin as FlowerDocs) |
-| `WS_UXO_AI_ENDPOINT` | `/gui/gateway/uxopian-ai` | Direct WebSocket (same origin) |
+| `UXO_AI_ENDPOINT` | `/gui/plugins/<scope>/gateway/uxopian-ai` | Through FlowerDocs' internal proxy |
+| `WS_UXO_AI_ENDPOINT` | `<wsGatewayUrl>/gui/gateway/uxopian-ai` | Direct, cross-origin, own Ingress — empty if unset |
 
-#### Session cookie and the same-origin requirement
+#### Why WebSocket needs a separate, direct endpoint
 
-The browser only sends the FlowerDocs session cookie to requests that share the **same origin** (scheme + host + port) as the page. For uxopian-gateway to receive that cookie on direct calls, it must be reachable under the same origin as FlowerDocs.
+FlowerDocs' internal proxy (the one behind the `/gateway/**` Route) forwards plain HTTP requests fine — REST calls and SSE streaming both work through it on FlowerDocs 2026. **It cannot forward a WebSocket upgrade at all**, on any FlowerDocs version:
 
-**Routing via FlowerDocs Zuul** always satisfies this — the request stays on the same origin, and Zuul forwards the cookie automatically. This is `GATEWAY_ENDPOINT`. The drawback is that **Zuul is an HTTP/1.1 buffering proxy and cannot stream SSE responses** — it collects the full response before forwarding it to the browser.
+- **Legacy FlowerDocs (Zuul-based proxy):** Zuul 1 has no WebSocket proxying support.
+- **FlowerDocs 2026 (Spring Cloud Gateway Server MVC):** this proxy variant has no WebSocket support either — it is built on `HandlerFunctions.http()`, a blocking request/response forwarder with no concept of a protocol upgrade. This is an open, unimplemented upstream limitation: [spring-cloud/spring-cloud-gateway#3442](https://github.com/spring-cloud/spring-cloud-gateway/issues/3442).
 
-**Direct routing at the same origin** satisfies the cookie requirement *and* supports streaming. This requires a reverse proxy (Traefik, nginx, Apache) that serves both FlowerDocs and uxopian-gateway under the same hostname, with path-based routing:
+So unlike REST/SSE, the WebSocket channel needs `uxopian-gateway` to be reachable **directly**, on its own address, bypassing FlowerDocs' proxy layer entirely — see `uxopian-gateway/ops/helm/gateway-service`'s `ingress.*` values for exposing it. This is necessarily a **different origin** from the FlowerDocs page (a same-origin reverse-proxy merge is not required and not assumed):
 
-```
-Same hostname: demo.flower.cloud
-  /gui/gateway/**  →  uxopian-gateway   (higher priority, direct, streaming ✓)
-  /gui/**          →  FlowerDocs GUI    (lower priority, Zuul inside)
-```
+- **No cookie is involved.** The gateway's WebSocket routes (`uxopian-ai-ws`, `uxopian-ai-plugin-ws` in `gateway-service`'s `application.yml`) are declared fully public (`security: *secPublicAll`) — no `FlowerDocsProvider` validation happens on them, so there is nothing for a same-origin cookie to carry. The channel is gated only by the (unguessable) conversation id, checked downstream by `uxopian-ai`.
+- **CORS is still required**, because the browser enforces it independently of authentication: list the FlowerDocs GUI's own origin (e.g. `https://fd.<env>.uxopian.com`) in the gateway's `cors.allowedOrigins`. This is a Helm value on `gateway-service`, not on this scope.
 
-The default `UXO_AI_ENDPOINT = ${BASE_URL}${GATEWAY_PATH}` assumes this setup. If the gateway is not exposed at the same origin, override the constants with the direct gateway URL (and configure CORS if cross-origin is unavoidable).
-
-For example, with Traefik, assign a higher priority to the gateway route so it intercepts `/gui/gateway/**` before FlowerDocs GUI handles `/gui/**`:
-
-```yaml
-# gateway-service labels
-- "traefik.http.routers.gateway-service.rule=Host(`demo.flower.cloud`) && PathPrefix(`/gui/gateway`)"
-- "traefik.http.routers.gateway-service.priority=20"   # higher — direct, bypasses Zuul
-
-# flower-docs-gui labels
-- "traefik.http.routers.flower-docs-gui.rule=Host(`demo.flower.cloud`) && PathPrefix(`/gui`)"
-- "traefik.http.routers.flower-docs-gui.priority=10"   # lower — everything else
-```
-
-Any path-based reverse proxy (nginx `location` blocks, Apache `ProxyPass`) achieves the same result.
-
-#### What goes through Zuul vs direct
-
-| Constant | Used for | Streaming needed |
-|---|---|---|
-| `GATEWAY_ENDPOINT` | Session warm-up ping, loading JS bundle + CSS | No — standard HTTP responses |
-| `UXO_AI_ENDPOINT` | All LLM API calls (`/api/v1/requests`) | **Yes — SSE** |
-| `WS_UXO_AI_ENDPOINT` | WebSocket connection | **Yes — persistent connection** |
-
-`GATEWAY_ENDPOINT` is called once at chat open to let `FlowerDocsProvider` validate and cache the session in Hazelcast. All subsequent calls use `UXO_AI_ENDPOINT` / `WS_UXO_AI_ENDPOINT` directly, authenticating from the Hazelcast cache.
+If `wsGatewayUrl` is left unset, `WS_UXO_AI_ENDPOINT` is empty and the chat/Quick Prompt panels degrade gracefully: they keep working over `UXO_AI_ENDPOINT` (REST/SSE), only the server→client action-push channel stays silent.
 
 ```javascript
-fetch(GATEWAY_ENDPOINT)                      // Zuul — session warm-up
-  .then(() => createChat({
-    endpoint:   UXO_AI_ENDPOINT,             // direct — SSE streaming
-    wsEndpoint: WS_UXO_AI_ENDPOINT,          // direct — WebSocket
-  }));
+fetch(UXO_AI_ENDPOINT).then(() =>
+  createChat({
+    endpoint:   UXO_AI_ENDPOINT,       // through FlowerDocs' proxy — REST/SSE
+    wsEndpoint: WS_UXO_AI_ENDPOINT,    // direct, own Ingress — WebSocket (or '' — degrades)
+  })
+);
 ```
 
 #### Required gateway routes
 
-When the gateway receives requests from both paths, two routes are needed in `gateway-application.yaml`: one for the Zuul path (which arrives with a different path prefix than `CONTEXT_PATH`, so `rewritePath` is required) and one for the direct path. See [Configure gateway routes](./configure_gateway_routes.md) for the step-by-step derivation.
+`gateway-service`'s `application.yml` already declares both the scoped, FlowerDocs-proxied routes (`uxopian-ai-plugin`, `uxopian-ai-plugin-ws`) and the direct, unscoped ones (`uxopian-ai`, `uxopian-ai-ws`) — nothing to add there. See [Configure gateway routes](./configure_gateway_routes.md) for how these are derived, and the chart's `ingress.*` values to expose the direct ones publicly.
 
 **Before importing**, update the `GATEWAY_PATH` value in `consts/` to match the route name defined in `Gateway.xml`.
 
@@ -177,7 +156,7 @@ When the gateway receives requests from both paths, two routes are needed in `ga
 
 Provides three shared functions used by `openChat` and `translate`:
 
-- `openChatComp(request)` — performs the session warm-up ping (`GATEWAY_ENDPOINT`), then calls `createChat()` (the function exposed by `web-comp`) with the given request routed through `UXO_AI_ENDPOINT` / `WS_UXO_AI_ENDPOINT`.
+- `openChatComp(request)` — performs a warm-up `fetch(UXO_AI_ENDPOINT)`, then calls `createChat()` (the function exposed by `web-comp`) with the given request routed through `UXO_AI_ENDPOINT` / `WS_UXO_AI_ENDPOINT`.
 - `contextualInput()` — builds a `SYSTEM` role input containing the current FlowerDocs component ID and the ARender document ID (see [Contextual input](#contextual-input) below).
 - `createAIAction({ label, onExecute, icon })` — registers a contextual action in the component header bar, re-evaluated on every component navigation. The menu id is derived from `label.name` (e.g. `ai-action-openChat`), so each action gets a distinct id. `label` carries the action's `name` plus its `FR`/`EN` translations; `icon` defaults to `fa-solid fa-robot`.
 
@@ -186,8 +165,8 @@ Provides three shared functions used by `openChat` and `translate`:
 Fetches the Uxopian AI chat bundle from the gateway and inserts it as a `<script>` and `<link>` tag into the page `<head>`. The bundle registers `createChat()` globally.
 
 The two endpoints it loads:
-- `GATEWAY_ENDPOINT + /api/web-components/chat/script` — the JavaScript bundle
-- `GATEWAY_ENDPOINT + /api/web-components/chat/style` — the companion stylesheet
+- `UXO_AI_ENDPOINT + /api/web-components/chat/script` — the JavaScript bundle
+- `UXO_AI_ENDPOINT + /api/web-components/chat/style` — the companion stylesheet
 
 The script is idempotent: it checks whether the tags already exist before inserting them, so reloading the page or navigating within FlowerDocs will not load the bundle twice.
 
@@ -223,11 +202,7 @@ Use this when the user wants a free-form conversation not tied to a specific doc
 
 ### UxoAiAdminShortcut.xml / UxoAiAdminShortcut/
 
-Adds an entry in the FlowerDocs application switcher menu pointing to the Uxopian AI admin panel (`GATEWAY_ENDPOINT/admin`). The entry is only injected for users with the `ADMIN` or `SYSTEM_ADMIN` profile.
-
-### refreshToken.xml / refreshToken/
-
-Registers a `registerForComponentChange` listener that pings `GATEWAY_ENDPOINT` on every component navigation. This keeps the gateway session cache warm and prevents the `FlowerDocsProvider` from evicting the session between navigations.
+Adds an entry in the FlowerDocs application switcher menu pointing to the Uxopian AI admin panel (`UXO_AI_ENDPOINT/admin`). The entry is only injected for users with the `ADMIN` or `SYSTEM_ADMIN` profile.
 
 ### translate.xml / translate/
 
@@ -340,7 +315,7 @@ The heart of the integration. It:
 
 - maps FlowerDocs components onto the Quick Prompt context shape with `window.uxopian.mapComponent(obj, fields)` (see [Web components](../understanding/web_components.md));
 - declares URL **routes** that resolve the current FlowerDocs screen into context;
-- creates the integration handle lazily — on the first toggle — by pinging `GATEWAY_ENDPOINT` for session warm-up, then calling `window.createQuickPromptIntegration({ endpoint: UXO_AI_ENDPOINT })`;
+- creates the integration handle lazily — on the first toggle — by pinging `UXO_AI_ENDPOINT` for session warm-up, then calling `window.createQuickPromptIntegration({ endpoint: UXO_AI_ENDPOINT, wsEndpoint: WS_UXO_AI_ENDPOINT })`;
 - exposes `window.qpHandleToggle(open)` so `qp-button` (or any custom trigger) can open and close the panel.
 
 The routes map FlowerDocs hash URLs to resolvers:
@@ -357,7 +332,7 @@ The field maps (`DOCUMENT_FIELDS`, `TASK_FIELDS`, `FOLDER_FIELDS`, `USER_FIELDS`
 
 ### qp-loader.xml / qp-loader/ — Order 3
 
-Loads the Quick Prompt bundle (script + stylesheet) from `GATEWAY_ENDPOINT` and is idempotent (it checks for an existing tag before inserting). The bundle registers `window.createQuickPromptIntegration` and `window.uxopian.mapComponent`, both used by the connector. This is the Quick Prompt equivalent of `web-comp` for the chat.
+Loads the Quick Prompt bundle (script + stylesheet) from `UXO_AI_ENDPOINT` and is idempotent (it checks for an existing tag before inserting). The bundle registers `window.createQuickPromptIntegration` and `window.uxopian.mapComponent`, both used by the connector. This is the Quick Prompt equivalent of `web-comp` for the chat.
 
 :::danger[qp-loader is a hard dependency]
 As with `web-comp` for the chat, if `qp-loader` is missing or the bundle fails to load, **the panel never opens and no error appears in the UI** — `window.createQuickPromptIntegration` is simply `undefined` when the connector tries to use it. Verify the bundle returns HTTP 200 in the Network tab.
@@ -378,9 +353,7 @@ See [Embed Quick Prompt — Common issues](./embed_quick_prompt.mdx#common-issue
 
 ## Installation
 
-Copy the `conf/` directory contents into the FlowerDocs scope Maven module. The exact target directory depends on your FlowerDocs project structure. In a standard FlowerDocs Maven build, scope files go into the scope resources directory that gets imported during the build.
-
-After importing, rebuild and redeploy the FlowerDocs application.
+The `conf/` directory is a standard FlowerDocs [scope](/docs/flowerdocs/concepts/scope) overlay — import it the same way you import any other scope content, with the [Command Line Manager (CLM)](/docs/flowerdocs/install/clm/clm) or your project's usual scope-build process. This page only documents what's specific to the AI scripts themselves (the constants, the `RegistrationOrder` dependencies between them, the gateway route) — see [Subscribing to an operation](/docs/flowerdocs/config/core/operation/registration) for how `RegistrationOrder` works in general.
 
 ## Customization checklist
 
@@ -388,7 +361,8 @@ Before importing the scope files into FlowerDocs, update the following:
 
 1. `conf/Route/Gateway.xml` — set the `URL` tag to the URL of your uxopian-gateway as seen by the **FlowerDocs server**.
 2. `conf/Script/consts/` — verify `GATEWAY_PATH` matches the route path defined in `Gateway.xml`.
-3. Confirm that `GATEWAY_ENDPOINT` resolves to a URL reachable from **user browsers** (not just the server), because `web-comp` fetches the JS bundle client-side.
+3. Confirm that `UXO_AI_ENDPOINT` resolves to a URL reachable from **user browsers** (not just the server), because `web-comp` fetches the JS bundle client-side.
+4. **Optional** — if `uxopian-gateway` has its own public Ingress, set `WS_GATEWAY_URL_RAW` in `consts/` (or pass `--var wsGatewayUrl=…` on a client that supports it) to enable the WebSocket action-push channel. See [Why WebSocket needs a separate, direct endpoint](#why-websocket-needs-a-separate-direct-endpoint). Leave it unset otherwise — the chat still works without it.
 
 ## Related pages
 

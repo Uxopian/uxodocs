@@ -3,9 +3,9 @@ title: Tools
 sidebar_label: Tools
 sidebar_position: 7
 last_update:
-  date: '2026-04-21T08:21:12.539Z'
+  date: '2026-08-04T06:49:05.239Z'
   author: CI/CD Bot
-content_hash: 2f00217348cc8683c73dabbd603fd5af4d0c6c885b9a6bbc37403d84686b783f
+content_hash: 66c4e474e620a959157055eedc2a292542ca1664d439a33527bd78fe0635fd13
 ---
 
 Tools are Java methods that the LLM can call during a conversation. When the LLM decides to use a tool, it emits a tool call request; uxopian-ai executes the corresponding method and returns the result to the LLM, which then incorporates it into its response.
@@ -62,12 +62,7 @@ If tools are disabled via `tools.enabled=false` (or `TOOLS_ENABLED=false`), the 
 
 ## Filtering tools by tag
 
-In 2026.0.0-ft3, `@ToolService.tags()` + `plugins.tools.enabled-tags` control which tool sets are registered at startup. This lets a single distribution ZIP ship several integrations (Alfresco, FlowerDocs, Files) while the deployer picks which ones the LLM actually sees.
-
-- Default value in the shipped `application.yaml`: `flowerdocs,files` — Alfresco tools are *not* registered unless you opt in.
-- Empty list = every `@ToolService` is registered.
-- A `@ToolService` without any tag is *always* registered (backward compatible for custom in-tree tools).
-- Multi-tagged tools are registered when *any* of their tags matches the whitelist.
+`@ToolService.tags()` was added in 2026.0.0-ft3. Before 2026.0.0-ft5, `plugins.tools.enabled-tags` used those tags to control which tool sets got *registered* at startup. **Since 2026.0.0-ft5, registration is unconditional: every `@ToolService` in every plugin JAR under `plugins/` is always registered**, regardless of tags or `enabled-tags`. What a given caller actually sees is now controlled per [Application](../admin/managing_applications.md) (its tool/tag whitelist) — `plugins.tools.enabled-tags` only seeds the default whitelist on the Application auto-created the first time a connection provider is used.
 
 See [Plugin system — Filtering tools by tag](./plugin_system.md#filtering-tools-by-tag) for the full mechanism and test-time usage.
 
@@ -77,7 +72,7 @@ Tools require a model that supports function calling. If a prompt has `requiresF
 
 ## Standardized ECM tool names
 
-Since 2026.0.0-ft4, the document and metadata tools for Alfresco and FlowerDocs share a **common, ECM-agnostic vocabulary**, so the same prompts and goals work against either backend. The Alfresco tools were de-prefixed and the FlowerDocs data-model tool was renamed:
+Since 2026.0.0-ft4, the document and metadata tools for Alfresco and FlowerDocs share a **common, ECM-agnostic vocabulary**, so the same prompts work against either backend. The Alfresco tools were de-prefixed and the FlowerDocs data-model tool was renamed:
 
 | Operation | Tool name (ft4) | Previous name |
 |---|---|---|
@@ -88,7 +83,7 @@ Since 2026.0.0-ft4, the document and metadata tools for Alfresco and FlowerDocs 
 | Update a document property | `updateDocumentProperty` | `updateDocumentPropertyById` / `updateDocumentTagValueById` |
 | Execute a search | `doSearch` | Alfresco `searchAlfrescoNodes` / FlowerDocs `searchDocuments` |
 
-The integration **tags** (`alfresco`, `flowerdocs`, `files`) are unchanged. If you reference tool names explicitly in custom prompts or goals, update them.
+The integration **tags** (`alfresco`, `flowerdocs`, `files`) are unchanged. If you reference tool names explicitly in custom prompts, update them.
 
 ## Built-in tools: FlowerDocs
 
@@ -106,6 +101,7 @@ The `flowerdocs/tool` plugin (tag `flowerdocs`) ships tools the LLM can use to s
 | `doSearch` | Executes the search and returns matching documents |
 | `getDocumentIdsByName` | Looks up document IDs by name |
 | `getDocumentContent` | Returns the textual content of a document |
+| `extractDocumentText` | Same content as `getDocumentContent`, under a name/description aimed at [Agentic Plans](./agentic_plans.md) `DIRECT_TOOL` nodes — e.g. the first step of a document-summarization plan |
 | `getDocumentProperties` | Returns a document's metadata (properties, tags, author) |
 | `updateDocumentProperty` | Updates a tag / metadata value on a document |
 | `previewRevertToPreviousVersion` | Non-destructive preview of a version restore |
@@ -157,6 +153,41 @@ Added in 2026.0.0-ft3 (tag `alfresco`). The `integrations/alfresco/tool` plugin 
 
 A typical Alfresco search session calls `getDataModel` first to learn the correct qualified names, builds filters, wraps them in clauses, and finishes with `doSearch`. See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deployment steps.
 
+## Built-in tools: FileNet
+
+The `filenet` plugin (tag `filenet`) ships CE-SQL-backed tools across several `@ToolService` beans:
+
+### Search and filtering (`FileNetSearchToolService`, `FileNetFilterToolService`)
+
+| Tool name | Description |
+|---|---|
+| `fileNetGetDataModel` | Returns the common system properties and document classes available for filtering |
+| `fileNetBuildClassFilter` | Builds an `ISCLASS()` CE SQL condition on document type |
+| `fileNetBuildPropertyContainsFilter` | Builds a `LIKE` condition for partial text match |
+| `fileNetBuildPropertyEqualsFilter` | Builds an exact-match condition on a property or status |
+| `fileNetBuildDateRangeFilter` | Builds a date range condition on `DateCreated`/`DateLastModified` |
+| `fileNetBuildFullTextFilter` | Builds a `CONTAINS()` full-text condition |
+| `fileNetBuildFolderScopedFilter` | Scopes the search to a folder |
+| `fileNetSearchDocuments` | Executes the assembled CE SQL query |
+
+### Documents (`FileNetDocumentToolService`)
+
+| Tool name | Description |
+|---|---|
+| `readDocumentText` | Reads the full OCR text of a document (via ARender) across all pages |
+| `getDocumentMetadata` | Returns all metadata properties (system + custom class) of a document |
+| `fileNetListFolderContents` | Lists documents in a folder (unfiltered, max 50) |
+
+The object store queried by these tools is resolved automatically from the current tenant — there is no `filenet.repository-id` setting to configure. `filenet.writable-properties` is configured but not yet wired to a callable tool; there is currently no LLM-callable way to update a FileNet document property.
+
+### Redaction (`FileNetRedactTool`)
+
+| Tool name | Description |
+|---|---|
+| `fileNetPrepareRedact` / `fileNetApplyObfuscation` | Prepare and apply a redaction/obfuscation (requires the ARender plugin for rendering) |
+
+A typical search session calls `fileNetGetDataModel` first, then builds criteria and calls `fileNetSearchDocuments`. The `FileNetHelper` bean (bridging documents to ARender for OCR) is always active, not gated by `plugins.tools.enabled-tags`. See [Integrate with FileNet](../how_to/integrate_with_filenet.mdx) for deployment steps.
+
 ## Built-in tools: Interactive choices
 
 Since 2026.0.0-ft4, two built-in tools let the assistant present **clickable choices** in the chat instead of asking questions in plain text. They are always available — they are **not** gated by `plugins.tools.enabled-tags` — and require no prompt or configuration change.
@@ -183,4 +214,6 @@ The assistant emits the choices as a JSON block in its message content; the stan
 - [LLM providers](./llm_providers.md)
 - [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx)
 - [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx)
+- [Integrate with FileNet](../how_to/integrate_with_filenet.mdx)
 - [Managing MCP servers in the admin UI](../admin/managing_mcp_servers.md)
+- [Agentic Plans](./agentic_plans.md) — DIRECT_TOOL nodes call a native tool directly, no LLM in the loop; a Plan can itself be exposed as a callable tool

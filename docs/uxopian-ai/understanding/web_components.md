@@ -162,7 +162,7 @@ const textContent = new window.ContentBuilder()
   .build();
 ```
 
-Content types: `text`, `prompt`, `goal`, `image`.
+Content types: `text`, `prompt`, `image`.
 
 ## Related pages
 

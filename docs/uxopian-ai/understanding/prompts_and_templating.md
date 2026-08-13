@@ -14,7 +14,7 @@ A prompt is a named, reusable message template. Prompts are rendered by a Thymel
 
 A prompt has:
 
-- `id`: unique identifier referenced in requests and goals
+- `id`: unique identifier referenced in requests
 - `role`: `SYSTEM`, `USER`, or `ASSISTANT`
 - `content`: a Thymeleaf template string
 - `requiresMultiModalModel`: if `true`, the request requires a multimodal LLM
@@ -116,13 +116,8 @@ prompts:
 
 Prompts can also be created or updated at runtime via the Admin API (`/api/v1/admin/prompts`) without restarting the application.
 
-## Backup
-
-`prompts.yml` can specify a backup path (`prompts.backup.path`). If set, the application writes a backup of current prompts to that path. The environment variable is `PROMPTS_BACKUP_PATH`.
-
 ## Related pages
 
-- [Goals](./goals.md)
 - [Write prompts](../extending/writing_prompts.md)
 - [Managing prompts in the admin UI](../admin/managing_prompts.md)
 - [Custom service helpers](../extending/custom_service_helpers.md)
