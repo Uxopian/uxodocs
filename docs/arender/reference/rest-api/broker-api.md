@@ -24,6 +24,41 @@ The OpenAPI spec is available at `http://{broker-host}:8761/v3/api-docs`.
 
 ---
 
+## Document IDs
+
+`POST /documents` returns an opaque document ID such as `b64_YzQyZDdlNWYtMTgyMi00MDYxLWI0MTctZDBmNDgzOTM4ZGM5`. Every endpoint that takes a `{documentId}` accepts that value as it is returned.
+
+Composite documents (email, MSG, ZIP) also expose their parts. `GET /documents/{documentId}/layout` reports each part with a hierarchical ID, built from the parent ID and the part index separated by a slash:
+
+```
+b64_YzQyZDdlNWYtMTgyMi00MDYxLWI0MTctZDBmNDgzOTM4ZGM5/1
+```
+
+:::warning Replace the slash with `@` in the URL
+`{documentId}` is a single path segment, so a hierarchical ID cannot be sent as reported.
+
+| Level | In the `/layout` response | In the URL |
+|---|---|---|
+| Root document | `b64_YzQy...` | `b64_YzQy...` |
+| Part of the root | `b64_YzQy.../{i}` | `b64_YzQy...@{i}` |
+| Part of that part | `b64_YzQy.../{i}/{j}` | `b64_YzQy...@{i}@{j}` |
+
+Sending the raw slash returns 404, and percent-encoding it as `%2F` returns 400.
+:::
+
+There is no depth limit: a PDF inside a ZIP attached to an email is addressed with one `@` per level. Once rewritten, a part behaves like any other document, so `/layout`, `/pages/{n}/image` and `/file` all apply to it.
+
+Do not compute part indices. There is no shared convention: the first part of an email is `0`, the first entry of a ZIP is `1`.
+
+| Composite type | First part | Following parts |
+|---|---|---|
+| Email, MSG | `0`, the message body | attachments from `1` |
+| ZIP | `1`, the first entry | further entries from `2` |
+
+A ZIP has no part `0` at all. Requesting one returns 404. A folder inside a ZIP also consumes an index of its own, alongside the files. Always take the IDs from the `children` array returned by [Get document layout](#get-document-layout).
+
+---
+
 ## Document operations
 
 ---
@@ -202,12 +237,14 @@ Returns the raw document content as a binary stream.
 
 | Name | In | Type | Required | Description |
 |------|----|------|----------|-------------|
-| `documentId` | path | string | Yes | The document ID |
+| `documentId` | path | string | Yes | The document ID. For a part of a composite document, replace each slash with `@`, see [Document IDs](#document-ids) |
 | `format` | query | string | No | Requested format. Plain format (e.g. `pdf`) waits for conversion and returns the converted file. Special values: `rendered` (equivalent to `pdf`) and `compressed` (returns a ZIP archive of the document). Omit to get the original file. |
 
 #### Response
 
 Binary content with the document's MIME type.
+
+On a composite document (email, MSG, ZIP), `format=pdf` returns every part merged into a single PDF, in the order reported by [Get document layout](#get-document-layout). This is the one output that is available at container level.
 
 #### Errors
 
@@ -328,23 +365,27 @@ curl http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGI
 
 `GET` `/documents/{documentId}/layout`
 
-Returns the document structure: page count, page dimensions, rotation, and DPI per page.
+Returns the document structure. A successful response also means that the server-side conversion of that document is complete.
+
+The response has one of two shapes, identified by its `type` field: a page layout for a document made of pages, or a container for a composite document (email, MSG, ZIP) made of other documents.
 
 #### Parameters
 
 | Name | In | Type | Required | Description |
 |------|----|------|----------|-------------|
-| `documentId` | path | string | Yes | The document ID |
+| `documentId` | path | string | Yes | The document ID. For a part of a composite document, replace each slash with `@`, see [Document IDs](#document-ids) |
 
 #### Response
 
-Returns page dimensions, rotation, and DPI for each page.
+`DocumentPageLayout` for a document made of pages. It carries `pageDimensionsList`, with the width, height, rotation and DPI of each page. The length of that list is the page count.
 
 ```json
 {
+  "type": "com.arondor.viewer.client.api.document.DocumentPageLayout",
   "documentId": {
     "id": "b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGIyNTQ5Nzgw"
   },
+  "documentTitle": null,
   "mimeType": "text/plain",
   "pageDimensionsList": [
     {
@@ -358,35 +399,63 @@ Returns page dimensions, rotation, and DPI for each page.
 }
 ```
 
+`DocumentContainer` for a composite document. It carries `children` instead of `pageDimensionsList`, one entry per part, in order, each with its own document ID, title and MIME type.
+
+An entry in `children` is itself one of two types, and the `type` field tells them apart:
+
+- `DocumentReference` is a stub. It gives you the ID of the part but says nothing about its shape. Call `/layout` on that ID to find out: the answer is a `DocumentPageLayout` for a part made of pages, or a `DocumentContainer` for a part that is composite in turn. A ZIP attached to an email is listed as a `DocumentReference` and resolves to a `DocumentContainer`.
+- `DocumentContainer` is a sub-tree already expanded in place, with its own `children` populated. A folder inside a ZIP is reported this way, so one more level is readable without an extra call.
+
+Do not use `mimeType` in place of that check. It may be `null`, because ZIP entries are not typed until they are converted, and it may contradict the resolved layout: an `.eml` attached to an `.eml` is listed as `message/rfc822`, yet its `/layout` returns a `DocumentPageLayout` in `text/plain`. Call `/layout` on the part to get its resolved type.
+
+There are no page images at container level. [Get page image](#get-page-image) on a container returns 500. Fetch the pages of each part instead, or call [Get document file](#get-document-file) on the container to get every part merged into a single PDF.
+
 #### Errors
 
 | Status | Description |
 |--------|-------------|
 | 200 | Layout returned successfully |
-| 404 | Document not found |
+| 404 | Document not found, or a hierarchical part ID sent with a raw slash instead of `@` |
 | 500 | Internal server error |
 
 #### Example request
 
 ```bash
+# Root document
 curl http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGIyNTQ5Nzgw/layout
+
+# Second part of a composite document
+curl http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGIyNTQ5Nzgw@1/layout
 ```
 
 #### Example response
 
+An email with one attachment. Child `0` is the message body, child `1` is the attachment.
+
 ```json
 {
+  "type": "com.arondor.viewer.client.api.document.DocumentContainer",
   "documentId": {
-    "id": "b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGIyNTQ5Nzgw"
+    "id": "b64_ODA1NGEyNTctYTY0Yy00ZTQ0LTk5YzYtMzhlZDc5ODMwY2U1"
   },
-  "mimeType": "text/plain",
-  "pageDimensionsList": [
+  "documentTitle": null,
+  "mimeType": "message/rfc822",
+  "children": [
     {
-      "width": 1191.0,
-      "height": 842.0,
-      "rotation": 0,
-      "dpi": 72,
-      "pageLayers": null
+      "type": "com.arondor.viewer.client.api.document.DocumentReference",
+      "documentId": {
+        "id": "b64_ODA1NGEyNTctYTY0Yy00ZTQ0LTk5YzYtMzhlZDc5ODMwY2U1/0"
+      },
+      "documentTitle": "Email:Quarterly report",
+      "mimeType": "text/html"
+    },
+    {
+      "type": "com.arondor.viewer.client.api.document.DocumentReference",
+      "documentId": {
+        "id": "b64_ODA1NGEyNTctYTY0Yy00ZTQ0LTk5YzYtMzhlZDc5ODMwY2U1/1"
+      },
+      "documentTitle": "invoice",
+      "mimeType": "application/pdf"
     }
   ]
 }
@@ -404,7 +473,7 @@ Returns a rendered image (PNG) for the specified page.
 
 | Name | In | Type | Required | Description |
 |------|----|------|----------|-------------|
-| `documentId` | path | string | Yes | The document ID |
+| `documentId` | path | string | Yes | The document ID. For a part of a composite document, replace each slash with `@`, see [Document IDs](#document-ids) |
 | `page` | path | integer | Yes | Page number (0-based) |
 | `pageImageDescription` | query | string | No | Image descriptor specifying width, rotation, and optional filters |
 
@@ -446,6 +515,8 @@ Available filter types:
 
 Binary PNG image (`Content-Type: image/png`).
 
+Page images exist only on documents made of pages. A composite document (email, MSG, ZIP) has none of its own: request the pages of each part instead, using the part IDs returned by [Get document layout](#get-document-layout).
+
 #### Errors
 
 | Status | Description |
@@ -453,7 +524,7 @@ Binary PNG image (`Content-Type: image/png`).
 | 200 | Image returned successfully |
 | 400 | Invalid page number or descriptor |
 | 404 | Document not found |
-| 500 | Internal server error |
+| 500 | Internal server error, including a request on a composite document |
 
 #### Example request
 

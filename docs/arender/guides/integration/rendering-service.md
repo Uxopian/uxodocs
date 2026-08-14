@@ -127,48 +127,99 @@ That's the complete loop. Wire those five calls into your host system's renditio
 
 ### 4.6 Composite documents (EML, MSG, ZIP)
 
-An email or an archive is not a page-based document. Its `/layout` returns a container that lists the children instead of page dimensions:
+An email or an archive is not a page-based document. Its `/layout` returns a container that lists its parts instead of page dimensions. Handling one is a tree walk, and it rests on two rules: branch on the `type` field, and rewrite the ID before you put it in a URL.
+
+**The two response shapes.** `/layout` always returns one of two things, told apart by its `type` field:
+
+| `type` ends with | What it is | What you do with it |
+|---|---|---|
+| `DocumentPageLayout` | A document made of pages. `pageDimensionsList` carries the width, height, rotation and DPI of each page, and its length is the page count. | Loop the pages, as in §4.3. |
+| `DocumentContainer` | A composite document. `children` lists its parts, in order. It has no pages of its own, so `pages/{n}/image` on it returns 500. | Walk `children`. |
+
+The rest of this section follows one document all the way down: an email whose body is part `0` and whose attachment is a ZIP holding two PDFs. Its `/layout`:
 
 ```json
 {
   "type": "com.arondor.viewer.client.api.document.DocumentContainer",
+  "documentId": { "id": "b64_MDE0..." },
+  "mimeType": "message/rfc822",
   "children": [
     {
       "type": "com.arondor.viewer.client.api.document.DocumentReference",
-      "documentId": { "id": "b64_ODA1NGEyNTc.../0" },
+      "documentId": { "id": "b64_MDE0.../0" },
       "documentTitle": "Email:Quarterly report",
       "mimeType": "text/html"
     },
     {
       "type": "com.arondor.viewer.client.api.document.DocumentReference",
-      "documentId": { "id": "b64_ODA1NGEyNTc.../1" },
-      "documentTitle": "invoice",
-      "mimeType": "application/pdf"
+      "documentId": { "id": "b64_MDE0.../1" },
+      "documentTitle": "bundle",
+      "mimeType": "application/zip"
     }
-  ],
-  "documentId": { "id": "b64_ODA1NGEyNTc..." },
-  "mimeType": "message/rfc822"
+  ]
 }
 ```
 
-For an email, child `0` is the message body and the following children are the attachments, in order.
+**Walking `children`.** Each entry gives you the ID of one part, plus a title and a MIME type. Branch on the entry's own `type`:
 
-:::warning Child IDs need the `@` delimiter in the URL
-`/layout` reports child IDs with a slash (`b64_.../1`), but the REST path treats the whole document ID as a single segment. Replace that slash with `@` before building the URL: `b64_...@1`. Sending the raw slash returns 404, and percent-encoding it as `%2F` returns 400.
-:::
+- **`DocumentContainer`** — a sub-tree already expanded in place, with its own `children` populated. Recurse into it, no extra call needed. A folder inside a ZIP comes back this way.
+- **`DocumentReference`** — a stub. It does not tell you whether that part has pages or is composite in turn. Call `/layout` on its ID, then apply the two shapes above to the answer.
 
-Each child is then addressed like any other document:
+The second case is the one to get right. Above, the attachment is a plain `DocumentReference` like the message body, and nothing in that response says it is composite. Calling `/layout` on `b64_MDE0.../1` is what reveals it:
 
-```bash
-# Layout of the first attachment
-curl "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID@1/layout"
-
-# Its first page as a PNG
-curl "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID@1/pages/0/image?pageImageDescription=IM_800_0" \
-  --output attachment-page0.png
+```json
+{
+  "type": "com.arondor.viewer.client.api.document.DocumentContainer",
+  "documentId": { "id": "b64_MDE0.../1" },
+  "documentTitle": "bundle",
+  "mimeType": "application/x-zip",
+  "children": [
+    {
+      "type": "com.arondor.viewer.client.api.document.DocumentReference",
+      "documentId": { "id": "b64_MDE0.../1/1" },
+      "documentTitle": "alpha.pdf",
+      "mimeType": null
+    },
+    {
+      "type": "com.arondor.viewer.client.api.document.DocumentReference",
+      "documentId": { "id": "b64_MDE0.../1/2" },
+      "documentTitle": "omega.pdf",
+      "mimeType": null
+    }
+  ]
+}
 ```
 
-A child `/layout` returns a `DocumentPageLayout` with its own `pageDimensionsList`, so the page loop from §4.3 applies unchanged. Calling `pages/{n}/image` on the container itself returns a 500: there is no page to render at that level.
+Same shape, one level down. Calling `/layout` on `b64_MDE0.../1/1` finally returns a `DocumentPageLayout`, and that part is renderable.
+
+Do not use `mimeType` to decide instead. It is `null` for ZIP entries until they are converted, and it can contradict the resolved layout: an `.eml` attached to an `.eml` is listed as `message/rfc822`, yet its `/layout` returns a `DocumentPageLayout` in `text/plain`, the raw message source rendered as text.
+
+Do not compute the indices either, read them from `children`. An email numbers its body `0` and its attachments from `1`, a ZIP starts its entries at `1`, and a folder inside a ZIP consumes an index of its own.
+
+:::warning Rewrite every slash as `@` before you call a part
+This is the step that breaks integrations. `children` reports IDs with slashes, but `{documentId}` is a single segment of the REST path, so an ID cannot be sent as reported.
+
+| Level | As reported in `children` | As sent in the URL |
+|---|---|---|
+| The root document | `b64_MDE0...` | `b64_MDE0...` |
+| A part of it | `b64_MDE0.../1` | `b64_MDE0...@1` |
+| A part of that part | `b64_MDE0.../1/2` | `b64_MDE0...@1@2` |
+
+One `@` per level, with no depth limit. Sending the raw slash returns 404. Percent-encoding it as `%2F` returns 400, because Tomcat rejects encoded slashes. See [Document IDs](../../reference/rest-api/broker-api.md#document-ids) in the reference.
+:::
+
+Once rewritten, a part behaves like any other document, and every endpoint applies to it. Walking an email that carries a ZIP looks like this:
+
+```bash
+# Part 1 of the email is the ZIP. Its layout is a container, so walk its children.
+curl "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID@1/layout"
+
+# Entry 1 of that ZIP is a PDF. Its layout has pages, so render them.
+curl "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID@1@1/pages/0/image?pageImageDescription=IM_800_0" \
+  --output entry-page0.png
+```
+
+The page loop from §4.3 applies unchanged to any part that resolves to a `DocumentPageLayout`. Asking a container for a page image returns 500, at any level.
 
 If you only need one flattened output for the whole email, call `GET /documents/{id}/file?format=pdf` on the container. It returns the body and the attachments merged into a single PDF, which is usually the shortest path for archival.
 
