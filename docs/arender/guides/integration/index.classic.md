@@ -35,3 +35,9 @@ These integrations are developed and supported by partners. Contact the partner 
 | Tessi Docubase / Data Content | [Tessi](https://www.tessi.eu/) |
 | Extedo EXTEDOpulse / esubmanager | [Extedo](https://www.extedo.com/) |
 | Salesforce | [Salesforce](https://www.salesforce.com/) |
+
+## ARender as a rendering service
+
+The inverse pattern: a host system calls ARender's REST API to generate page images and PDFs for its own previews, thumbnails, and archive, without involving the ARender viewer.
+
+See [ARender as a rendering service](./rendering-service.md).
