@@ -37,6 +37,6 @@ These integrations are developed and supported by partners. Contact the partner 
 
 ## ARender as a rendering service
 
-The inverse pattern: a host system calls ARender's REST API to generate page images and PDFs for its own previews, thumbnails, and archive — without involving the ARender viewer.
+The inverse pattern: a host system calls ARender's REST API to generate page images and PDFs for its own previews, thumbnails, and archive, without involving the ARender viewer.
 
 See [ARender as a rendering service](./rendering-service.md).

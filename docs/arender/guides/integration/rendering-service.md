@@ -41,18 +41,23 @@ Five broker endpoints cover almost every rendering-service integration. Each lin
 | Fetch the document as PDF | `GET /documents/{id}/file?format=pdf` | [Get document file](../../reference/rest-api/broker-api.md#get-document-file) |
 | Delete when done | `DELETE /documents/{id}` | [Delete a document](../../reference/rest-api/broker-api.md#delete-a-document) |
 
-`GET /documents/{id}/layout` is the integrator's compass. The response tells you how many pages the document has (the length of `pageDimensionsList`), so you know how many `pages/{n}/image` calls to make. For composite containers (EML, MSG, ZIP), it also exposes the children with their own document IDs. Call `/layout` again on each child to walk the tree before fetching their page images. A 200 response with usable data is also the simplest signal that the server-side conversion is complete; if `/layout` still returns a transient or empty state, the converter has not finished yet.
+`GET /documents/{id}/layout` is the integrator's compass. It answers two questions in one call: is the document ready, and what is inside it. A 200 response with usable data is the simplest signal that the server-side conversion is complete; if `/layout` still returns a transient or empty state, the converter has not finished yet.
+
+The response has two shapes, told apart by its `type` field:
+
+- **`DocumentPageLayout`** for a simple document. It carries `pageDimensionsList`, whose length is the page count, so you know how many `pages/{n}/image` calls to make.
+- **`DocumentContainer`** for a composite document (EML, MSG, ZIP). It carries `children` instead, each with its own document ID, title, and MIME type, and **no** `pageDimensionsList`. Page images are not available at the container level: fetch them per child. See [§4.6](#46-composite-documents-eml-msg-zip) for the walkthrough.
 
 Conversion to PDF starts automatically on upload. There is no `POST /conversions` to call from the integration side. To observe conversion progress explicitly, fetch [Get document conversions](../../reference/rest-api/broker-api.md#get-document-conversions) to list the order IDs and [Poll conversion status](../../reference/rest-api/broker-api.md#poll-conversion-status) to watch state. In practice, calling `GET /documents/{id}/layout` and waiting for a successful response is enough for most integrations.
 
-**Default broker port:** `8761` (self-hosted). The hosted demo broker used in the quickstart below runs at `https://rendition.arender.2026.uxopian.com`. The interactive Swagger UI is at [https://rendition.arender.2026.uxopian.com/swagger-ui/index.html](https://rendition.arender.2026.uxopian.com/swagger-ui/index.html) if you want to try requests in your browser before writing code.
+**Default broker port:** `8761` (self-hosted). The hosted demo broker used in the quickstart below runs at `https://rendition.demo.arender.uxopian.com`. The interactive Swagger UI is at [https://rendition.demo.arender.uxopian.com/swagger-ui/index.html](https://rendition.demo.arender.uxopian.com/swagger-ui/index.html) if you want to try requests in your browser before writing code.
 
 ## 4. Quickstart: five-minute walkthrough
 
 The shortest path from "I have a document file" to "I have a thumbnail and a PDF rendition." Examples assume a POSIX shell (Linux, macOS, or Git Bash on Windows).
 
 :::tip Try it live
-The commands below run against our hosted demo broker at `https://rendition.arender.2026.uxopian.com`. No setup. Paste them in your terminal. To explore the full API interactively, open the [Swagger UI](https://rendition.arender.2026.uxopian.com/swagger-ui/index.html).
+The commands below run against our hosted demo broker at `https://rendition.demo.arender.uxopian.com`. No setup. Paste them in your terminal. To explore the full API interactively, open the [Swagger UI](https://rendition.demo.arender.uxopian.com/swagger-ui/index.html).
 
 For a self-hosted broker, swap the base URL for `http://your-broker-host:8761` and add auth headers if your deployment requires them.
 :::
@@ -60,7 +65,7 @@ For a self-hosted broker, swap the base URL for `http://your-broker-host:8761` a
 ### 4.1 Upload the document
 
 ```bash
-DOC_ID=$(curl -s -X POST https://rendition.arender.2026.uxopian.com/documents \
+DOC_ID=$(curl -s -X POST https://rendition.demo.arender.uxopian.com/documents \
   -H "Content-Type: application/octet-stream" \
   --data-binary @my-document.pdf \
   | jq -r '.id')
@@ -72,26 +77,39 @@ The broker returns a JSON body `{"id": "b64_..."}`. Capture the `id`. Every subs
 ### 4.2 Get the document layout
 
 ```bash
-curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/layout"
+curl "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID/layout"
 ```
 
-Returns JSON with `mimeType` and `pageDimensionsList`. The length of `pageDimensionsList` is the page count, which bounds your page-image loop. For composite containers (EML, MSG, ZIP), the response surfaces children with their own document IDs. Recurse with `/layout` on each child before fetching their page images. A successful response also confirms server-side conversion is complete. See [Get document layout](../../reference/rest-api/broker-api.md#get-document-layout).
+For a simple document, this returns `type: "...DocumentPageLayout"` with `mimeType` and `pageDimensionsList`:
+
+```json
+{
+  "type": "com.arondor.viewer.client.api.document.DocumentPageLayout",
+  "documentId": { "id": "b64_YzQyZDdlNWY..." },
+  "mimeType": "application/pdf",
+  "pageDimensionsList": [
+    { "width": 595.0, "height": 842.0, "rotation": 0, "dpi": 72, "pageLayers": null }
+  ]
+}
+```
+
+The length of `pageDimensionsList` is the page count, which bounds your page-image loop. A successful response also confirms server-side conversion is complete. Composite documents return a different shape, covered in §4.6. See [Get document layout](../../reference/rest-api/broker-api.md#get-document-layout).
 
 ### 4.3 Fetch page 0 as a PNG
 
 Use the page count from §4.2 to decide which pages to fetch. The quickstart below fetches page 0 only.
 
 ```bash
-curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/pages/0/image?pageImageDescription=IM_800_0" \
+curl "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID/pages/0/image?pageImageDescription=IM_800_0" \
   --output page0.png
 ```
 
-Page numbering is **0-based**. The `pageImageDescription` parameter encodes width and rotation: `IM_800_0` means 800 pixels wide, no rotation. Repeat with `pages/1`, `pages/2`, … for additional pages. Optional contrast/brightness/invert filters are documented in [Get page image](../../reference/rest-api/broker-api.md#get-page-image).
+Page numbering is **0-based**. The `pageImageDescription` parameter encodes width and rotation: `IM_800_0` means 800 pixels wide, no rotation. Repeat with `pages/1`, `pages/2`, and so on for additional pages. Optional contrast/brightness/invert filters are documented in [Get page image](../../reference/rest-api/broker-api.md#get-page-image).
 
 ### 4.4 Fetch the whole document as PDF
 
 ```bash
-curl "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID/file?format=pdf" \
+curl "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID/file?format=pdf" \
   --output document.pdf
 ```
 
@@ -100,12 +118,59 @@ One call, multi-page PDF returned as binary. The call is synchronous. It waits f
 ### 4.5 Clean up
 
 ```bash
-curl -X DELETE "https://rendition.arender.2026.uxopian.com/documents/$DOC_ID"
+curl -X DELETE "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID"
 ```
 
 The broker holds documents in memory and on local cache until they are deleted or evicted. Long-running integrations should delete each document after its outputs are stored host-side. See [Delete a document](../../reference/rest-api/broker-api.md#delete-a-document).
 
 That's the complete loop. Wire those five calls into your host system's rendition hook and you have a working integration.
+
+### 4.6 Composite documents (EML, MSG, ZIP)
+
+An email or an archive is not a page-based document. Its `/layout` returns a container that lists the children instead of page dimensions:
+
+```json
+{
+  "type": "com.arondor.viewer.client.api.document.DocumentContainer",
+  "children": [
+    {
+      "type": "com.arondor.viewer.client.api.document.DocumentReference",
+      "documentId": { "id": "b64_ODA1NGEyNTc.../0" },
+      "documentTitle": "Email:Quarterly report",
+      "mimeType": "text/html"
+    },
+    {
+      "type": "com.arondor.viewer.client.api.document.DocumentReference",
+      "documentId": { "id": "b64_ODA1NGEyNTc.../1" },
+      "documentTitle": "invoice",
+      "mimeType": "application/pdf"
+    }
+  ],
+  "documentId": { "id": "b64_ODA1NGEyNTc..." },
+  "mimeType": "message/rfc822"
+}
+```
+
+For an email, child `0` is the message body and the following children are the attachments, in order.
+
+:::warning Child IDs need the `@` delimiter in the URL
+`/layout` reports child IDs with a slash (`b64_.../1`), but the REST path treats the whole document ID as a single segment. Replace that slash with `@` before building the URL: `b64_...@1`. Sending the raw slash returns 404, and percent-encoding it as `%2F` returns 400.
+:::
+
+Each child is then addressed like any other document:
+
+```bash
+# Layout of the first attachment
+curl "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID@1/layout"
+
+# Its first page as a PNG
+curl "https://rendition.demo.arender.uxopian.com/documents/$DOC_ID@1/pages/0/image?pageImageDescription=IM_800_0" \
+  --output attachment-page0.png
+```
+
+A child `/layout` returns a `DocumentPageLayout` with its own `pageDimensionsList`, so the page loop from §4.3 applies unchanged. Calling `pages/{n}/image` on the container itself returns a 500: there is no page to render at that level.
+
+If you only need one flattened output for the whole email, call `GET /documents/{id}/file?format=pdf` on the container. It returns the body and the attachments merged into a single PDF, which is usually the shortest path for archival.
 
 ## 5. Integration shape
 
@@ -182,7 +247,7 @@ In every case the integration code is the customer's (or partner's) responsibili
 
 - **Rendition.** Any rendered representation of a source document: a thumbnail, a preview image, or a PDF copy.
 - **Broker.** The Document Service Broker, the REST front door of ARender's rendition stack (default port `8761`). All integration calls described on this page go to the broker.
-- **Host system.** The application that owns the document and the user experience: an ECM (Alfresco, FileNet, …), a DMS, an archival or records management platform, a business application with attached files.
+- **Host system.** The application that owns the document and the user experience: an ECM (Alfresco, FileNet, and others), a DMS, an archival or records management platform, a business application with attached files.
 
 ## 10. Related references
 
