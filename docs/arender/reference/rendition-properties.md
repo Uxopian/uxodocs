@@ -245,13 +245,19 @@ The Document Converter (`arender-document-converter`) runs on port 19999.
 | `tools.pdf.flattener.path` | `PDFFormsFlattener` | PDF form flattener executable path |
 | `tools.pdf.flattener.timeout` | `60` | Timeout for PDF flattening (seconds) |
 
+### PDF/A conversion
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `pdfa.controller.enabled` | `false` | Enables PDF/A conversion. Set it on the Document Service Broker as well, which exposes the endpoint. With the default, the PDF/A endpoints are not registered and a direct call returns 404, see [Font handling](../concepts/fonts.md#fonts-for-pdfa-output) |
+
 ### Fonts
 
 | Property | Default | Description |
 |----------|---------|-------------|
-| `document.font.path` | `../fonts/` | Fallback font directory for embedded-font substitution |
-| `document.font.allowed.extensions` | `ttf,otf` | Allowed font file extensions |
-| `annotation.textual.unicode.font.path` | _(empty)_ | Font path for annotation textual content drawing |
+| `document.font.path` | `../fonts/` | Directory read by the converter for annotation text and PDF/A output. It does not affect display rendering, see [Font handling](../concepts/fonts.md) |
+| `document.font.allowed.extensions` | `ttf,otf` | Extensions accepted by the PDF/A font scan of `document.font.path`. The annotation scan accepts `.ttf` only |
+| `annotation.textual.unicode.font.path` | _(empty)_ | Path to a single font file, embedded and applied to all HTML-rendered annotation text |
 
 ### Annotation rendering
 
@@ -286,7 +292,7 @@ The Document Converter (`arender-document-converter`) runs on port 19999.
 | `arender.afp.old.profile.directory.path` | _(empty)_ | Profile directory path for older AFP format |
 | `arender.afp.new.profile.directory.path` | _(empty)_ | Profile directory path for newer AFP format |
 | `arender.afp.profile.directory.path` | _(empty)_ | Profile directory path for identifying AFP format |
-| `arender.afp.font.entries.directory.path` | _(empty)_ | Font directory for generated font entries file |
+| `arender.afp.font.entries.directory.path` | _(empty)_ | Directory where the generated `.lst` font entries file is written during AFP format detection. An output directory, not a font directory. Empty writes it to the converter working directory |
 | `arender.afp.log.directory.path` | _(empty)_ | Log directory for conversion logs |
 
 ### Email conversion
