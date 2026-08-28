@@ -1,7 +1,7 @@
 ---
 title: Content Integrity
 sidebar_label: Content Integrity
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Proving Nothing Was Lost: Reconciliation & Checksum Validation
