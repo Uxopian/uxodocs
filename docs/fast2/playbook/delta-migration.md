@@ -11,6 +11,8 @@ content_hash: b7e2be9a329488111b68bdb00ff4d557d5d0aa3ebeff6b092ca3e6ebb7b5bd00
 # Catching the Target Up to the Source: A Fast2 Delta Migration Methodology
 
 > [See Part 1, Extracting From a Live ECM →](./extracting-from-live-ecm.md)
+>
+> [See Part 3, The Migration Ledger →](./migration-ledger.md)
 
 After bulk extraction, the source has not stopped. Catching up is the second half of the job. You have to close the gap without losing a single document, audit entry, or ACL change, and then sign off the cutover against an audit trail a regulator will accept.
 
@@ -20,6 +22,7 @@ After bulk extraction, the source has not stopped. Catching up is the second hal
 - Reconciliation is layered. Manifest plus checksum first, then destination-side duplicate prevention, then statistical sampling, with business validation last. Skip a layer and you'll find out months later.
 - Cutover is a decision you make at the start. Big-bang, phased, parallel run, blue-green: each fits a different situation. Pick before you start.
 - Fast2 ships the moving parts: incremental sources, per-injector duplicate prevention, SQL back-flagging, dashboards. The watermark store, the circuit breaker, and the sign-off ritual are still on you.
+- Delta capture answers *what changed in the source*. It does not answer *what have I already done, and what do I re-run*. That is a separate record, and it gets its own article: [Part 3, The Migration Ledger](./migration-ledger.md).
 :::
 
 ## The moving target problem
@@ -84,7 +87,13 @@ When you own the source schema and no regulator gets in the way, the most reliab
 Fast2 does not ship a productized "Mark as migrated" task. That's the most common misconception about this pattern. What it ships is `SQLStatementTask` (and its `UpdateSQLQueryTask` variant), which executes an arbitrary parameterised UPDATE in the pipeline. You stamp the source on successful ingest. If you need something richer, say a flag plus a retry counter plus an error code, a small custom transformer built against the Maven SDK does the job.
 
 **Use when:** you own the source schema, the source is not a WORM/Centera/regulated archive, and the application team is comfortable with a new column.
-**Avoid when:** the source is regulated (21 CFR Part 11, GxP, SOX-relevant archives where any modification triggers an audit event), or the application team flatly refuses schema changes. Then fall back to watermark plus destination-side reconciliation.
+**Avoid when:** the source is regulated (21 CFR Part 11, GxP, SOX-relevant archives where any modification triggers an audit event), or the application team flatly refuses schema changes.
+
+#### D-bis: shadow flagging, when you can't write to the source
+
+A regulated source and a DBA who says no do not mean falling all the way back to watermarks. They mean moving the flag to your side of the fence. Keep the semantics of D — "give me everything not yet marked migrated" — and hold the mark in your own table, keyed by the source's immutable identifier. No clock skew, no watermark boundary bugs, idempotent re-runs, and not a single write to the source.
+
+What you give up is real but narrow: the source no longer knows it has been migrated, so if the decommissioning plan or a source-side application needs to read that state, only true D delivers it. Everything else you keep. This is the same table that answers "which punnets do I re-run", and it's the subject of [Part 3, The Migration Ledger](./migration-ledger.md).
 
 ## Destination-side reconciliation
 
@@ -93,6 +102,8 @@ Delta capture tells you what should arrive. Reconciliation tells you whether it 
 ### Layer 1: Manifest + checksum
 
 Every Fast2 batch (every punnet) produces a manifest: source object ID, SHA-256 of the binary, byte size, source timestamp, target ID, target timestamp. The target verifies on ingest. At sign-off, the manifest is compared row-by-row against both the source inventory and the target inventory. Three-way match or no sign-off.
+
+The per-punnet manifest is ephemeral, though, and a three-way match across 80M documents is not an exercise you want to run over a pile of batch files. A [migration ledger](./migration-ledger.md) gives the first two sides of that match a permanent home: one row per document, queryable in SQL, so counts per batch stop being a collation exercise. Note the limit, and it matters at audit time: the ledger is a first-party record of what Fast2 believes it did, so the third side still has to be an independent enumeration of the target.
 
 The case study worth knowing is Fast2's own published insurer migration onto Alfresco. MD5 hash validation on every document, combined with counter cross-referencing, produced an auditable completeness report. Watch out for false positives, though. If you transform the binary in transit (PDF/A normalization, image recompression), the source hash won't match the target hash. Compute and store both, or compute on a canonical form.
 
@@ -170,7 +181,7 @@ Here's what Fast2 actually does for you in a delta phase, and what you're still 
 
 **What Fast2 does not ship, and you shouldn't pretend it does:**
 
-- *A built-in watermark or checkpoint store.* The pattern is supported, but the storage and the advance-the-pointer logic are on you. Most projects end up with a small Postgres table or a JSON file in a known path.
+- *A built-in watermark or checkpoint store.* The pattern is supported, but the storage and the advance-the-pointer logic are on you. Most projects end up with a small Postgres table or a JSON file in a known path. Generalise that single pointer to one row per document and you have a migration ledger, which is the more useful shape on any programme that outlives a couple of campaigns. [Part 3 →](./migration-ledger.md)
 - *A productized "Mark as migrated" task.* You build it from `SQLStatementTask` or a custom transformer in about 30 minutes. Not a checkbox.
 - *A circuit breaker for the source.* If your watermark query suddenly returns 100x the expected volume because someone ran a reindex, Fast2 will faithfully try to ingest 100x the expected volume. The volume anomaly check is yours to build around it.
 - *A platform-wide idempotency flag.* Idempotency comes from unique punnet IDs combined with the per-injector duplicate-prevention booleans. It works, but it's a pattern you assemble, not a single switch.
@@ -192,3 +203,9 @@ For regulated industries, add the framework relevant to the estate (GxP, 21 CFR 
 The threshold matters as much as the procedure. "99.5% match" is not a sign-off if the missing 0.5% is the legal archive. Define the threshold per document class, agree it in writing with the business owner before the delta phase begins, and for the regulated classes treat the threshold as zero.
 
 Before any of the design work, settle one question with the business owner: which of the four delta mechanisms is permitted on this source. Everything else in this article follows from that answer.
+
+## Hand-off to Part 3
+
+The four mechanisms tell you what changed. The four reconciliation layers tell you whether it arrived. Neither one tells you, on a Tuesday morning in month four, which of last week's punnets never landed and which of them are safe to replay — and that question arrives on every programme large enough to have this article's problems in the first place. It has its own answer, its own schema, and its own failure modes.
+
+**[Read Part 3: The Migration Ledger →](./migration-ledger.md)**

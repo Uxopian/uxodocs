@@ -10,7 +10,7 @@ content_hash: 7958316fcc923912d0563076f708c8f04f18cc804e8f7d173e7dc7b8035e509e
 
 # Extracting Documents From a Live ECM Without Crashing It: A Fast2 Field Methodology
 
-*Part 1 of 2. This article covers bulk extraction against a source that users are still hitting every minute. [Part 2: Delta Migration Methodology →](./delta-migration.md) covers how the target catches up before cutover.*
+*Part 1 of 3. This article covers bulk extraction against a source that users are still hitting every minute. [Part 2: Delta Migration Methodology →](./delta-migration.md) covers how the target catches up before cutover, and [Part 3: The Migration Ledger →](./migration-ledger.md) covers the record that tells you what's done, what's left, and what to re-run.*
 
 :::tip TL;DR
 Moving the documents is the easy part. Moving them while the source is still serving production traffic is where migrations go sideways. Three methodologies handle it, from safest to riskiest: Clone & Sweep, Snapshot & Drip, and Live Trickle. Pick one before you write a single extraction task. On most engagements I reach for Snapshot & Drip. It gives you a stable read surface, throughput you can predict, and a clean line between history and delta that makes Part 2 tractable. For an API-bound source, plan around 50 to 100 documents per second per extraction thread. That's a field-measured benchmark across FileNet, Documentum, and CMIS sources, and it sits at the same order of magnitude as TSG's published multi-billion-document FileNet case study. Get this wrong and you end up like TSB Bank in 2018: roughly £330M in remediation, the CEO out, and the CIO personally sanctioned by the PRA.
@@ -117,7 +117,9 @@ Two layers around Fast2 are non-negotiable on a live source.
 
 **Reconciliation as a deliverable.** Don't bury reconciliation in a side report. Ship it as a numbered artifact: a manifest of every source ID, target ID, SHA-256 hash, byte count, and extraction timestamp; counts reconciled per business domain; a sampled set of rehydrated documents opened end-to-end in the target. The MAN Energy Solutions Documentum-to-OpenText project on ~2M documents treated audit-compliant traceability as a deliverable instead of a by-product. That's the bar. Fast2's NoSQL backend (Elasticsearch + Kibana on port 1791) hands you the dashboarding for free, so use it.
 
-One more pattern, named only briefly because it really belongs in Part 2: you'll sometimes want to mark documents in the source as migrated, so later delta runs and the eventual decommissioning can tell what's already been processed. Fast2 supports this as a pattern, not a one-click feature. Implementation, rollback, and DBA sign-off are covered in the delta-migration article.
+**Keep programme state out of the source.** This one is a load-surface control, even though it looks like bookkeeping. The moment nobody has written down what has already been migrated, every "how far along are we?" and every "what's left?" turns into another scan of the source's metadata database — the same database you have spent this whole article protecting. Maintain an external inventory instead, one row per source object with its state, and the source gets queried once for inventory and once per document for content. Never again to answer a question you could have answered yourself. On Live Trickle that is the difference between a defensible load profile and an incident.
+
+That inventory is also what makes a later delta phase and the eventual decommissioning tractable, and it is where the "mark documents as migrated" pattern actually belongs. Fast2 supports it as a pattern, not a one-click feature. Schema, atomic claim, lease handling, and the audit caveats are in [Part 3: The Migration Ledger](./migration-ledger.md); the source-side variant, where you write the flag back onto the source object, is in [Part 2](./delta-migration.md#d-source-side-flagging-write-back-to-the-source) with its DBA sign-off and rollback considerations.
 
 ---
 
@@ -156,3 +158,5 @@ The per-thread anchor above is for sizing arithmetic. What sponsors actually wan
 Bulk extraction is half the job, and on a calendar it's usually the shorter half. While Fast2 sweeps through the snapshot, the source ECM keeps producing new documents. Claims filed Monday morning, charts updated Tuesday, contracts uploaded Wednesday. Your target has to catch up to *now* before anyone can cut over. That's the delta migration phase: change-data-capture vs watermark/timestamp vs source-side flagging, dual-run validation, reconciliation under load, and the cutover patterns (big-bang, phased, blue-green) that decide whether a project ends like TSB or like the 1.3B-document IBM-to-Alfresco-on-AWS insurer migration that Fast2 delivered in 22 months.
 
 **[Read Part 2: Delta Migration Methodology →](./delta-migration.md)**
+
+**[Read Part 3: The Migration Ledger →](./migration-ledger.md)**
