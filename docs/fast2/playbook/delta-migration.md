@@ -206,6 +206,6 @@ Before any of the design work, settle one question with the business owner: whic
 
 ## Hand-off to Part 3
 
-The four mechanisms tell you what changed. The four reconciliation layers tell you whether it arrived. Neither one tells you, on a Tuesday morning in month four, which of last week's punnets never landed and which of them are safe to replay — and that question arrives on every programme large enough to have this article's problems in the first place. It has its own answer, its own schema, and its own failure modes.
+The four mechanisms tell you what changed. The four reconciliation layers tell you whether it arrived. Neither one tells you, on a Tuesday morning in month four, which of last week's punnets never landed and which of them are safe to replay — and that question arrives on every programme large enough to have this article's problems in the first place. It has its own answer, and it is a good deal smaller than this one.
 
 **[Read Part 3: The Migration Ledger →](./migration-ledger.md)**
