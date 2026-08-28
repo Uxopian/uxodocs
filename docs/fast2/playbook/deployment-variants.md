@@ -4,7 +4,7 @@ last_update:
   date: '2026-06-16T10:09:13.305Z'
   author: CI/CD Bot
 sidebar_label: Deployment Variants
-sidebar_position: 3
+sidebar_position: 4
 content_hash: e0f8947b653cc2ae381c1409f4b9fe94761d279d324081ff9eb3d5a70e88e212
 ---
 
