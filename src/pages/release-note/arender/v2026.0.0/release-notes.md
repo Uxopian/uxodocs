@@ -28,6 +28,14 @@ See the [v2026.0.0 upgrade notes](../upgrade-notes) for step-by-step migration i
 
 ---
 
+## Performance
+
+ARender v2026.0.0 has been validated under a one-hour load test on the same reference infrastructure as the v2023.19.0 baseline. The Rendition backend sustains **~32,000 documents/hour at 0% errors** on a three-node Kubernetes cluster (8 vCPU / 32 GB RAM per worker), with the document-layout P99 dropping by **77%** (1,656 ms → 377 ms) and global P99 improving by **11%** versus v2023.19.0. The benchmark covers the Rendition backend only; the improvements apply to both ARender Classic and ARender Horizon.
+
+See the <DocLink version="v2026.0.0" product="arender" to="operations/benchmarks/v2026-vs-v2023">ARender 2026 vs 2023 performance comparison</DocLink> for the full breakdown.
+
+---
+
 ## Breaking changes
 
 Review these items before upgrading. See the [upgrade notes](../upgrade-notes) for detailed migration steps.
