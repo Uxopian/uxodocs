@@ -10,14 +10,18 @@ content_hash: b9a8081023e5efd07bda6670c7e153df18566f55b7ab7940e2ef1f3908095e4e
 
 # HTTPS and SSL
 
-ARender supports HTTPS for securing communication between the Web UI and the rendition services. When HTTPS is enabled, all services must use HTTPS -- mixing HTTP and HTTPS across services is not supported.
+ARender supports HTTPS for securing communication between the Web UI and the rendition services. When HTTPS is enabled, all services must use HTTPS. Mixing HTTP and HTTPS across services is not supported. The broker and every client that contacts it (the viewer and the rendition microservices) must be switched to HTTPS together.
 
 ## Overview
 
 Enabling HTTPS requires changes on both sides:
 
-1. **Rendition side**: activate the `https` Spring profile so each microservice binds to HTTPS and advertises its HTTPS URL.
-2. **Web UI side**: point the rendition host to an `https://` URL and enable the custom SSL REST client.
+1. **Rendition side**: provide a keystore so the broker (`RenditionEngine`) serves HTTPS, and switch the other microservices to advertise the broker's `https://` URL.
+2. **Web UI side**: point the rendition host to an `https://` URL and make the viewer JVM **trust** the rendition certificate.
+
+:::note
+Only the broker (`RenditionEngine`) terminates TLS. The other rendition microservices keep serving plain HTTP on their local ports (the broker reaches them over loopback); the `https` profile only switches their *outbound* calls to the broker to `https://`.
+:::
 
 ## Rendition configuration
 
@@ -50,6 +54,10 @@ server:
 
 Replace `keystore.p12` with an absolute path if the file is not in the working directory. The `key-alias` must match the alias used when the certificate was imported into the keystore.
 
+:::warning The certificate must include a SAN
+The certificate's Subject Alternative Name (SAN) must list every hostname and IP that clients use to reach the broker (the host in `arender.server.rendition.hosts` and the broker's discovery hostname). ARender's REST client enforces hostname verification, so a certificate with only a Common Name, or a SAN that does not match the URL, is rejected even after it is trusted.
+:::
+
 ### Step 3: Activate the HTTPS profile
 
 Start each rendition microservice with the `https` Spring profile so the override files are loaded:
@@ -71,16 +79,28 @@ The viewer must be configured to connect to the rendition backend over HTTPS:
 | Property                              | Description                                                                                  |
 | ------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `arender.server.rendition.hosts`      | Base URL of the rendition engine. Must start with `https://` when SSL is enabled.            |
-| `arender.rest.ssl.custom.use`         | Set to `true` to enable the custom SSL context on the REST client that contacts rendition.   |
 
-When `arender.rest.ssl.custom.use=true`, the viewer REST client trusts the certificate presented by the rendition services. If your certificate is self-signed or issued by a private CA, you may also need to add the CA certificate to the JVM trust store:
+The viewer's REST client validates the rendition certificate against the **JVM trust store**; there is no ARender property that configures a custom trust store or skips verification. If the certificate is issued by a trusted CA (public, or a corporate CA already present in the trust store), nothing else is required.
+
+If the certificate is **self-signed or issued by a private CA**, make the viewer JVM trust it in one of two ways. The same applies to every rendition microservice, since they also contact the broker.
+
+**Option 1 Import the certificate into the JRE trust store** (every JVM started from that JRE then trusts it):
 
 ```bash
 keytool -importcert -alias arender-rendition \
-  -file ca-cert.pem \
+  -file rendition.crt \
   -keystore $JAVA_HOME/lib/security/cacerts \
   -storepass changeit -noprompt
 ```
+
+**Option 2 Use a dedicated trust store via JVM arguments**, without modifying the JRE:
+
+```bash
+-Djavax.net.ssl.trustStore=/opt/arender/ssl/truststore.p12
+-Djavax.net.ssl.trustStorePassword=changeit
+```
+
+If the certificate is not trusted, the viewer logs `Could not fetch performance score for address=https://...` followed by an `SSLHandshakeException`, and documents fail to open.
 
 ## Docker deployment
 
@@ -97,16 +117,31 @@ services:
 
 Apply the same pattern to every rendition microservice container (document-converter, document-renderer, document-text-handler, document-file-storage).
 
-On the viewer side, configure the rendition host URL to use `https://` and enable the custom SSL REST client. Refer to the [Environment variables](../../installation/environment-variables.md) page for the appropriate prefix for your viewer deployment.
+On the viewer side, configure the rendition host URL to use `https://` and make each container **trust** the rendition certificate. The simplest way is to mount a trust store and set `JAVA_TOOL_OPTIONS` (the broker also passes it to the microservice JVMs it launches), or import the certificate into the image's `cacerts`:
+
+```yaml
+    environment:
+      JAVA_TOOL_OPTIONS: "-Djavax.net.ssl.trustStore=/opt/arender/ssl/truststore.p12 -Djavax.net.ssl.trustStorePassword=changeit"
+    volumes:
+      - ./ssl:/opt/arender/ssl:ro
+```
+
+Refer to the [Environment variables](../../installation/environment-variables.md) page for the appropriate prefix for your viewer deployment.
 
 ## Generating a self-signed keystore
 
-For development or testing, generate a PKCS12 keystore with `keytool`:
+For development or testing, generate a PKCS12 keystore with `keytool`. The `-ext san=...` is required, otherwise hostname verification rejects the certificate:
 
 ```bash
 keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 \
-  -storetype PKCS12 -keystore keystore.p12 \
-  -validity 365 -storepass <password>
+  -storetype PKCS12 -keystore keystore.p12 -validity 825 \
+  -dname "CN=<broker-host>, O=ARender" \
+  -ext "san=dns:<broker-host>,dns:localhost,ip:127.0.0.1" \
+  -storepass <password> -keypass <password>
+
+# Export the public certificate (PEM) used to configure trust on the clients:
+keytool -exportcert -alias tomcat -keystore keystore.p12 -storetype PKCS12 \
+  -storepass <password> -rfc -file rendition.crt
 ```
 
 For production, use a certificate signed by a trusted CA.

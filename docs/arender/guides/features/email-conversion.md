@@ -82,6 +82,37 @@ Default: `false`.
 Enabling this option adds processing overhead during conversion. The rendition engine must decode each embedded image to determine its dimensions and rewrite the HTML before passing it to `wkhtmltopdf`. For emails with many or large embedded images, this increases conversion time. Enable it only if oversized images are a recurring problem in your document set.
 :::
 
+## Hyperlinks in converted emails
+
+By default, ARender renders email bodies **without clickable hyperlinks**: the link text is still shown, but it is not clickable in the resulting PDF. This is a deliberate security measure.
+
+Link handling is controlled by the shared HTML-to-PDF options, `tools.wkhtmltopdf.options`. Two flags are responsible:
+
+| Flag                        | Effect |
+|-----------------------------|--------|
+| `--disable-external-links ` | Removes clickable links that point to external URLs (`http(s)://…`) |
+| `--disable-internal-links`  | Removes clickable links that point elsewhere inside the same document (anchors) |
+
+Both flags are part of the default value:
+
+```properties
+tools.wkhtmltopdf.options=--disable-javascript,--quiet,--encoding,UTF-8,--load-error-handling,ignore,--disable-external-links,--disable-internal-links,--disable-local-file-access
+```
+
+### Enabling clickable links
+
+Override `tools.wkhtmltopdf.options` on the rendition engine and remove the flag for the link type you want to allow:
+
+- drop `--disable-external-links` to allow external URLs (`http(s)://…`)
+- drop `--disable-internal-links` to allow internal anchors
+- drop both to make every link clickable
+
+For example, to enable all links:
+
+```properties
+tools.wkhtmltopdf.options=--disable-javascript,--quiet,--encoding,UTF-8,--load-error-handling,ignore,--disable-local-file-access
+```
+
 ## Troubleshooting
 
 ### wkhtmltopdf not converting
