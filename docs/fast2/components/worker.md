@@ -76,6 +76,17 @@ In order to have specific worker tied to particular queues, the configuration ne
 # worker.queue.regex=.*
 ```
 
+### Content encryption
+
+The worker can encrypt the punnet contents it stores while a campaign runs. The feature is off by default and is armed per map by a key registered on the broker:
+
+```ini title="./config/application.properties" hl_lines="2"
+# Encrypt punnet contents handled by this worker
+worker.activate.content-encryption=false
+```
+
+Enable it on **every** worker serving the map, and see [Content encryption](../advanced/content-encryption.md) for the key registration and the custom-module caveats.
+
 ### Disabled the embedded worker
 
 In case serveral workers are required for specific queues and tasks, there might be no more need of the embedded worker itself. To make sure not to have it running pointlessly, this worker can be disactivated from the `./config/application.properties` files, as so :
