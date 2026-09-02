@@ -255,7 +255,7 @@ This class is used to access any mailbox from some connection information.
 | Session debugging            | `Boolean`           | Keep logs written for the connection into stdout                                          | `false `      |
 | Number of retries            | `Integer`           | Maximum number of times to retry the connection in case of failure                        | `0 `          |
 | Read and write permissions   | `Boolean`           | Open mail session with read and write permissions. If false, the session is only readable | `false `      |
-| Extended properties map      | `String/String map` | List of additional properties to apply <br/> <p> Ex/ myValue.toAdd = true</p>             |
+| Extended properties map      | `String/String map` | Additional Jakarta Mail session properties, applied on top of the worker's JVM system properties (so an entry here overrides a `-D` flag). This is where mail-session tuning belongs — notably the IMAP fetch size when extraction is slow, see [Performance tuning](../advanced/performance-tuning.md). <br/> <p> Ex/ `mail.imaps.fetchsize = 1048576`</p> |
 | Time between two connections | `Integer`           | Time in milliseconds between each connection attempt                                      | `1000 `       |
 
 ## MailSenderProvider <small> - Email connection provider </small> {#MailSenderProvider data-toc-label="MailSenderProvider"}
