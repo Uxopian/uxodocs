@@ -357,6 +357,10 @@ This class will search for local files to analyze them from a defined path
 
 The MailSource task extracts messages from an e-mail box. Each extracted message will correspond to a punnet, one document per punnet
 
+:::tip
+If extraction is unexpectedly slow — hours for a few dozen messages, with the worker parked in `IMAPInputStream.read` — raise the IMAP fetch size rather than the thread count. See [Performance tuning](../advanced/performance-tuning.md#mailsource-slow-imap-extraction).
+:::
+
 <b>Mandatory settings</b>
 
 |Key      | Type    | Description | 
