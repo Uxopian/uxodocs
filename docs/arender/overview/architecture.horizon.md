@@ -315,6 +315,20 @@ All four rendition services must mount the same volume at `/arender/tmp`. This i
 - In Kubernetes, the PVC must use a `ReadWriteMany` access mode.
 - In Docker Compose, a named volume shared across services satisfies this requirement.
 
+The requirement holds even for a single replica per service: the four services run in separate containers, so they have separate filesystems regardless of how many replicas each one has.
+
+Only the source document and its converted PDF (plus other requested format variants) transit through this volume. Page images and extracted text never touch it — the renderer streams PNG bytes back in the HTTP response body, and the text handler returns JSON. Entries are removed when their cache entry expires, one hour after last access by default.
+
+### Deploying without a ReadWriteMany storage class
+
+Where the platform offers no `ReadWriteMany` storage class, the rendition chart can deploy a kernel NFS server as the shared backend (`sharedTmpFolder.nfsServer.enabled`). A post-install Job then provisions the `PersistentVolume` and the `ReadWriteMany` claim that the four services consume.
+
+:::warning[Check this against the platform's security policy]
+The bundled NFS server runs its `nfsd` container as `privileged`, and the provisioning Job needs a `ClusterRole` allowing it to create `PersistentVolume` objects, which are cluster-scoped. On clusters that forbid either, provision the `PersistentVolume` and `PersistentVolumeClaim` outside the chart and consume the existing claim by name instead — set `sharedTmpFolder.create: false` and `sharedTmpFolder.claimName`. Neither the privileged container nor the `ClusterRole` is then required.
+
+Note that the shared volume always reaches the services through a `PersistentVolumeClaim`. The NFS backend removes the need for a `ReadWriteMany` storage class; it does not remove the claim itself.
+:::
+
 If the shared volume is unavailable or not mounted consistently across containers, document processing will fail with file-not-found errors.
 
 ---
@@ -326,7 +340,7 @@ When running multiple replicas, ARender uses Hazelcast for:
 - Document accessor caching (broker)
 - Conversion and transformation order sharing (broker)
 
-Hazelcast discovery uses Kubernetes service DNS in Helm deployments and multicast in Docker Compose. See [Rendition caching](../concepts/caching.md) for configuration details.
+Hazelcast discovery uses Kubernetes service DNS in Helm deployments and multicast in Docker Compose. Because discovery resolves members through DNS rather than the Kubernetes API, the charts require no RBAC permissions for Hazelcast. See [Rendition caching](../concepts/caching.md) for configuration details.
 
 ---
 
