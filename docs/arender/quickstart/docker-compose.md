@@ -27,6 +27,8 @@ docker login artifactory.arondor.cloud:5001
 
 You will be prompted for your Artifactory credentials. Contact your ARender administrator if you do not have an account.
 
+Docker images are the one channel still served from Artifactory. Installers, Maven libraries and the npm package come from Cloudsmith — see [Repository access](../installation/repository-access.md).
+
 ## Start the services
 
 Create a `docker-compose.yml` file:
