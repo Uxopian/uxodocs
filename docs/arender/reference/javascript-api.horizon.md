@@ -2,11 +2,11 @@
 viewer: horizon
 title: JavaScript API
 last_update:
-  date: '2026-09-16T08:31:47.978Z'
+  date: '2026-09-16T08:47:11.000Z'
   author: CI/CD Bot
 slug: /reference/javascript-api
 sidebar_position: 3
-content_hash: 2e87db57f1649486c83c17d063b48896de531d8965d46ebcd6c9b5a550c3168b
+content_hash: 7dee0349d15dadd5e01a27a9dd893ac66fadb4214b5730db1fd5c19b4b1413f1
 ---
 
 # JavaScript API
@@ -83,11 +83,11 @@ for (const child of layout.children ?? []) {
 }
 ```
 
-## Search
+## Search commands
 
 | Method | Returns | Description |
 |--------|---------|--------------|
-| `search(text)` | `Promise<SearchHandle>` | Searches every document of the open set and displays the first hit. Shows the term in the search bar as if typed there |
+| `search(text)` | `Promise<SearchHandle>` | Searches every document of the open set — not only the one on screen — and displays the first hit. Shows the term in the search bar as if typed there |
 
 `SearchHandle`:
 
@@ -95,11 +95,13 @@ for (const child of layout.children ?? []) {
 |--------|------|--------------|
 | `position` | `number` | 1-based position of the hit on screen, `0` when there is none |
 | `total` | `number` | Hits across every document of the open set |
-| `hasSearchableContent` | `boolean` | `false` with `total: 0` means there was nothing to read (a scan, a video); a different answer from a term simply absent |
+| `hasSearchableContent` | `boolean` | `false` with `total: 0` means there was nothing to read (a scan, a video, a container of them) — a different answer from a term simply absent, which is `total: 0` with `hasSearchableContent: true` |
 | `next()` / `previous()` | `Promise<void>` | Displays the next/previous hit, changing document when it sits in another one |
-| `dispose()` | `void` | Clears the search and retires the handle |
+| `dispose()` | `void` | Clears the search and retires the handle, without changing the displayed page. The same exit verb used everywhere else a handle is handed back — see [Events](#events) |
 
-The search bar and this API are two entry points for the same search: `position`/`total` follow whatever was searched last, from either one. The advanced options of the GWT viewer (case, accent, regex, scope) are not available here.
+The search bar and this API are two entry points for the same search: `position`/`total` follow whatever was searched last, from either one. The advanced options of the GWT viewer (case, accent, regex, scope) are not available here — nothing reads them.
+
+**A handle stops being usable once another search has started** — from here, or typed into the search bar — even before that new search resolves. Calling `next()` or `previous()` on it rejects with `STALE_HANDLE`, and the viewer does not jump back to a hit of the earlier term.
 
 **Example**
 
