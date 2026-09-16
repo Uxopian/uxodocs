@@ -1,11 +1,11 @@
 ---
 title: JavaScript API
 last_update:
-  date: '2026-09-16T13:13:28.000Z'
+  date: '2026-09-16T13:55:50.000Z'
   author: CI/CD Bot
 slug: /reference/javascript-api
 sidebar_position: 3
-content_hash: f19d2960ed71be2e129e4266fdcf70975337a520e27b0bb7d899518f6e81ea55
+content_hash: fd4f5694b5f77b9ff7ef1862c35b6c71ef2c591239fad22ccbacdae494d1e750
 ---
 
 # JavaScript API
@@ -47,6 +47,12 @@ The root object of the API. All sub-APIs are accessible from here.
 | `askChangePage(type, offset, position)` | `type: 'Relative'\|'Index'\|'Absolute'\|'NoChange'`, `offset: number`, `position: PageRelativePosition` | `void` | Navigates to a page |
 | `newPageRelativePosition(x, y, w, h)` | `x, y, w, h: float` | `PageRelativePosition` | Builds a position rectangle for use with `askChangePage` |
 | `getPageForNamedDestination(documentId, destination, handler)` | `documentId: string`, `destination: string`, `handler: function(pageNumber)` | `void` | Resolves a named destination to a page number |
+
+`PageRelativePosition` is itself exported as `arender.pageRelativePosition`, so it can also be constructed directly instead of going through `newPageRelativePosition`:
+
+```javascript
+var position = new arender.pageRelativePosition(0.1, 0.1, 0.5, 0.5);
+```
 
 **Example: load and open a document**
 
@@ -127,6 +133,8 @@ arender.jsapi.loadDocument('/path/to/doc.pdf',
 | `getScreenSplitJSAPI()` | `arender.screenSplitJSAPI` |
 | `getAnnotationJSAPI()` | `arender.annotationJSAPI` (loaded asynchronously) |
 | `onAnnotationModuleReady(callback)` | Calls `callback(annotationJSAPI)` once the annotation module is loaded |
+
+`setAnnotationJSAPI(annotationJSAPI)` also exists but is internal wiring: it is how the async-loaded annotation module registers itself, not something a host page should call.
 
 ### Event callbacks
 
@@ -377,6 +385,8 @@ arender.jsapi.getDocumentLayout().getDocumentLayout(
 | `addDocumentMetadata(metadata, name, value)` | `metadata: DocumentMetadata`, `name, value: string` | Adds a property to a `DocumentMetadata` object, e.g. one obtained from the document builder helpers |
 | `getDocumentMetadataValue(metadata, name)` | `metadata: DocumentMetadata`, `name: string` | Reads a single property value by name, `null` if absent |
 
+`getDocumentMetadataHelper()` / `setDocumentMetadataHelper(helper)` also exist but return/replace an internal native helper with no exposed JS methods of its own — not useful from a host page.
+
 **Example:**
 
 ```javascript
@@ -417,6 +427,7 @@ arender.jsapi.onAnnotationModuleReady(function(annotApi) {
 | Method | Parameters | Description |
 |--------|-----------|-------------|
 | `addAnnotation(documentId, type, x, y, w, h, page, color, opacity)` | see below | Adds an unsaved annotation at the given position |
+| `add(documentId, annotation)` | `documentId: string`, `annotation: Annotation` | Lower-level variant of `addAnnotation`. `Annotation` is a plain Java bean, not exported to JS, so this overload is only reachable from other GWT code, not from a host page |
 | `save()` | — | Saves all dirty (unsaved) annotations |
 | `refresh()` | — | Reloads annotations from the server (unsaved changes are kept) |
 | `hasDirtyAnnotations()` | — | Returns `true` if there are unsaved annotations |
