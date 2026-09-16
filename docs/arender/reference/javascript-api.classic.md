@@ -1,11 +1,11 @@
 ---
 title: JavaScript API
 last_update:
-  date: '2026-09-16T13:55:50.000Z'
+  date: '2026-09-16T08:31:47.978Z'
   author: CI/CD Bot
 slug: /reference/javascript-api
 sidebar_position: 3
-content_hash: fd4f5694b5f77b9ff7ef1862c35b6c71ef2c591239fad22ccbacdae494d1e750
+content_hash: bcc415042bdd902c21fd45a73bd14801976b8bc555a436ca30385a3cdbd550f0
 ---
 
 # JavaScript API
@@ -47,12 +47,6 @@ The root object of the API. All sub-APIs are accessible from here.
 | `askChangePage(type, offset, position)` | `type: 'Relative'\|'Index'\|'Absolute'\|'NoChange'`, `offset: number`, `position: PageRelativePosition` | `void` | Navigates to a page |
 | `newPageRelativePosition(x, y, w, h)` | `x, y, w, h: float` | `PageRelativePosition` | Builds a position rectangle for use with `askChangePage` |
 | `getPageForNamedDestination(documentId, destination, handler)` | `documentId: string`, `destination: string`, `handler: function(pageNumber)` | `void` | Resolves a named destination to a page number |
-
-`PageRelativePosition` is itself exported as `arender.pageRelativePosition`, so it can also be constructed directly instead of going through `newPageRelativePosition`:
-
-```javascript
-var position = new arender.pageRelativePosition(0.1, 0.1, 0.5, 0.5);
-```
 
 **Example: load and open a document**
 
@@ -97,21 +91,7 @@ arender.jsapi.loadDocument('/path/to/doc.pdf',
 | `preparePluginEvent(key, value, pluginName)` | `key, value, pluginName: string` | Queues a parameter for the next plugin open event |
 | `clearPluginEvent(pluginName)` | `pluginName: string` | Clears queued plugin parameters |
 | `openPlugin(pluginName, openInMultiView)` | `pluginName: string`, `openInMultiView: boolean` | Opens a plugin by name |
-| `closePlugin(pluginName)` | `pluginName: string` | Closes a previously opened plugin |
 | `getHtmlPluginName()` | — | Returns the constant `'html-plugin'` |
-
-### Miscellaneous
-
-| Method | Parameters | Description |
-|--------|-----------|-------------|
-| `evictDocument(documentId)` | `documentId: string` | Evicts a document from the server-side document cache |
-| `adaptWindowDimensions()` | — | Call when ARender was initialized with incorrect window dimensions, to adapt/redraw the viewer onto the current dimensions |
-| `getCurrentUserName(callback)` | `callback: function(username)` | Returns the current username once resolved. `setCurrentUserName` is the counterpart called from the server-rendered bootstrap page, not meant to be called by host integrations |
-| `setupArrowScaleDpi(dpi)` | `dpi: int` | Sets the DPI scale factor for arrow annotations. A negative value triggers auto-detection (72 DPI for PDF documents) |
-| `createAnnotationByRuleWithCatalog()` | — | Executes every annotation creation rule available in the annotation creation rules catalog |
-| `createAnnotationByRulesWithRuleId(ruleIds)` | `ruleIds: string[]` | Executes the catalog rules matching the given rule IDs |
-| `askOpenAnchorModal(isFromThumbPresenter, documentId, x, y, w, h, page)` | `isFromThumbPresenter: boolean`, `documentId: string`, `x, y, w, h: float`, `page: int` | Opens the modal to create an anchor annotation. `isFromThumbPresenter` builds it from the selected navigator thumbnail instead of the document view |
-| `getConfiguration(name)` | `name: string` | Reads a client-side configuration property value by name |
 
 ### Sub-API accessors
 
@@ -134,8 +114,6 @@ arender.jsapi.loadDocument('/path/to/doc.pdf',
 | `getAnnotationJSAPI()` | `arender.annotationJSAPI` (loaded asynchronously) |
 | `onAnnotationModuleReady(callback)` | Calls `callback(annotationJSAPI)` once the annotation module is loaded |
 
-`setAnnotationJSAPI(annotationJSAPI)` also exists but is internal wiring: it is how the async-loaded annotation module registers itself, not something a host page should call.
-
 ### Event callbacks
 
 Register callbacks to react to viewer events. All `register*` methods can be called before or after document load.
@@ -143,10 +121,9 @@ Register callbacks to react to viewer events. All `register*` methods can be cal
 | Method | Callback signature | Description |
 |--------|--------------------|-------------|
 | `registerNotifyPageChangeEvent(cb)` | `cb(currentPage, pageCount, documentId)` | Fires when the displayed page changes |
-| `registerFirstPageLoaded(cb)` | `cb(documentId, time)` | Fires once the first page of a document has loaded, with the load time |
 | `registerCurrentDocumentChangeEvent(cb)` | `cb(documentId, title, metadata)` | Fires when the active document changes |
 | `registerNotifyLoadingErrorEvent(cb)` | `cb(documentId, message)` | Fires when a document fails to load |
-| `registerNotifyLogEvent(cb)` | `cb(event, level, message, stackTrace)` | Intercepts all toaster log events. Use `setLogEventMessage`, `setLogEventDisplay`, `setLogEventLevel`, `setLogEventStackTrace` to alter or suppress the event before it is processed |
+| `registerNotifyLogEvent(cb)` | `cb(event, level, message, stackTrace)` | Intercepts all toaster log events |
 | `registerGenericEventListener(cb)` | `cb(eventClassName)` | Fires for every event on the internal bus |
 | `registerAllAsyncModulesStartedEvent(cb)` | `cb()` | Fires when all async modules have finished initializing |
 | `registerPanelLoadedConfigurationEvent(cb)` | `cb()` | Fires when the top-panel configuration is loaded |
@@ -177,16 +154,6 @@ arender.jsapi.registerAnnotationsSavedEvent(function(success, created, updated, 
 });
 ```
 
-**Example: suppress a specific log notification**
-
-```javascript
-arender.jsapi.registerNotifyLogEvent(function(event, level, message, stackTrace) {
-  if (message.indexOf('some noisy warning') !== -1) {
-    arender.jsapi.setLogEventDisplay(event, false);
-  }
-});
-```
-
 ---
 
 ## Namespace: `arender.documentBuilder`
@@ -198,19 +165,13 @@ Controls the document builder panel. For a complete description of the document 
 | `open()` | Opens the document builder panel |
 | `close()` | Closes the document builder panel |
 | `toggle()` | Toggles the document builder panel |
-| `reset()` / `reset(repopulate)` | Resets the current assembly. With `repopulate: true`, the builder is populated again afterwards |
+| `reset()` | Resets the current assembly |
 | `saveFirstDocument(download, delete, freeze, behavior)` | Saves the first output document |
-| `saveAllDocuments(handler, download, delete, freeze, behavior)` | Saves all output documents. Overloads omitting trailing parameters fall back to the panel's own configuration |
-| `saveCustomDocument()` / `saveCustomDocument(download, delete, freeze, behavior)` | Triggers the custom save process for a layout built with `createCustomDocument` |
+| `saveAllDocuments(handler, download, delete, freeze, behavior)` | Saves all output documents |
 | `createEmptyDocument()` | Adds an empty output document slot |
 | `createCustomDocument(jsonContent, options)` | Creates an output document from JSON |
-| `createDocumentFromSelectedThumbs()` | Creates a new document from the thumbnails currently selected in the panel |
-| `deleteSelectedThumbs()` | Deletes the thumbnails currently selected in the panel |
-| `getResultDocumentId(event)` | Extracts the resulting document ID from a `NotifyAlterDocumentContentEvent` |
 
-Callbacks: `registerNotifyAlterDocumentContentEvent`, `registerSubmitAlterDocumentContentEvent`, `registerDocumentBuilderOpeningEvent`, `registerDocumentBuilderSaveCustomEvent`, `registerEditablePictreeNodeEvent` (fires when a node is added to the panel), `registerNotifyDocumentBuilderToggle` (fires when the panel is toggled).
-
-Helper accessors, used from inside `registerNotifyAlterDocumentContentEvent`/`registerSubmitAlterDocumentContentEvent` to read the `AlterContentDescription` payload: `getSubmittedAlterDocumentContentDescription(event)`, `getSubmittedDocumentCount(description)`, `getSubmittedSourceDocumentCount(description)`, `getDocumentMetadata(description, index)`.
+Callbacks: `registerNotifyAlterDocumentContentEvent`, `registerSubmitAlterDocumentContentEvent`, `registerDocumentBuilderOpeningEvent`, `registerDocumentBuilderSaveCustomEvent`.
 
 ---
 
@@ -299,8 +260,6 @@ arender.jsapi.getSearchJSAPI().askAdvancedSearchText(
 | `askShowPrintDialog()` | Opens the print dialog |
 | `askPrintAllDocumentPages()` | Prints all pages without opening a dialog |
 
-Callback: `registerNotifyDocumentPrintEvent(cb)`, signature: `cb(documentId, action, annotationsIncluded, watermarksIncluded)`.
-
 ---
 
 ## Namespace: `arender.downloadDocumentJSAPI`
@@ -318,8 +277,6 @@ Callback: `registerNotifyDocumentPrintEvent(cb)`, signature: `cb(documentId, act
 | `askDownloadWithAnnotations()` | Downloads a copy with annotations overlaid |
 | `askDownloadWithRedact()` | Downloads the document with redactions applied |
 | `askDownloadCompareResultDocument()` | Downloads the comparison result document |
-
-Callback: `registerNotifyDocumentDownloadEvent(cb)`, signature: `cb(documentId, action)`, fired when a download is triggered.
 
 ---
 
@@ -358,10 +315,7 @@ The `layout` object passed to the callback has the following properties:
 | `documentTitle` | string | Human-readable title |
 | `pageDimensions` | array | Array of `{width, height, rotation}` per page |
 | `children` | array | Child layouts (for container documents) |
-| `documentMetadata` | object | The document's `DocumentMetadata`, resolved alongside the layout |
 | `exception` | string | Error message if this child could not be resolved |
-
-Callback: `registerAllDocumentLayoutsResolved(cb)`, signature: `cb(documentId, time)`, fires once every layout of the open set has resolved, with the resolution time.
 
 **Example:**
 
@@ -372,27 +326,6 @@ arender.jsapi.getDocumentLayout().getDocumentLayout(
     console.log(layout.documentTitle, layout.pageDimensions.length, 'pages');
   },
   function(docId, msg) { console.error(msg); }
-);
-```
-
----
-
-## Namespace: `arender.documentMetadata`
-
-| Method | Parameters | Description |
-|--------|-----------|-------------|
-| `getDocumentMetadata(documentId, cb)` | `documentId: string`, `cb: function(metadata)` | Fetches a document's metadata as a JS object |
-| `addDocumentMetadata(metadata, name, value)` | `metadata: DocumentMetadata`, `name, value: string` | Adds a property to a `DocumentMetadata` object, e.g. one obtained from the document builder helpers |
-| `getDocumentMetadataValue(metadata, name)` | `metadata: DocumentMetadata`, `name: string` | Reads a single property value by name, `null` if absent |
-
-`getDocumentMetadataHelper()` / `setDocumentMetadataHelper(helper)` also exist but return/replace an internal native helper with no exposed JS methods of its own — not useful from a host page.
-
-**Example:**
-
-```javascript
-arender.jsapi.getDocumentMetadata().getDocumentMetadata(
-  arender.jsapi.getCurrentDocumentId(),
-  function(metadata) { console.log(metadata); }
 );
 ```
 
@@ -427,7 +360,6 @@ arender.jsapi.onAnnotationModuleReady(function(annotApi) {
 | Method | Parameters | Description |
 |--------|-----------|-------------|
 | `addAnnotation(documentId, type, x, y, w, h, page, color, opacity)` | see below | Adds an unsaved annotation at the given position |
-| `add(documentId, annotation)` | `documentId: string`, `annotation: Annotation` | Lower-level variant of `addAnnotation`. `Annotation` is a plain Java bean, not exported to JS, so this overload is only reachable from other GWT code, not from a host page |
 | `save()` | — | Saves all dirty (unsaved) annotations |
 | `refresh()` | — | Reloads annotations from the server (unsaved changes are kept) |
 | `hasDirtyAnnotations()` | — | Returns `true` if there are unsaved annotations |
@@ -435,8 +367,6 @@ arender.jsapi.onAnnotationModuleReady(function(annotApi) {
 | `getActionTypes()` | — | Returns the available hyperlink action types |
 | `getPropertyFromDestination(dest, prop)` | `dest, prop: string` | Extracts a property from a destination descriptor |
 | `getPropertyFromAction(action, prop)` | `action, prop: string` | Extracts a property from an action descriptor |
-| `getTargetDocLinkDocumentId()` | — | Returns the ID of the document targeted by the doc-link currently being created |
-| `getAvailableDocLinkDocumentId()` | — | Returns the ID of the document available as a doc-link target |
 | `createDocLink(pageNumber)` | `pageNumber: int` | Starts a doc-link creation on the given page |
 
 `addAnnotation` parameters:
