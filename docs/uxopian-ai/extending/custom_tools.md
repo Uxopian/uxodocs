@@ -33,7 +33,7 @@ flowchart LR
 
 ## Prerequisites
 
-- Java 21
+- Java 21 or later (the plugin JAR must target Java 21 bytecode)
 - Maven with access to the Uxopian AI BOM or individual dependency coordinates
 - The uxopian-ai `model` and `common` modules available as dependencies (or use the shaded JAR approach)
 

@@ -38,7 +38,7 @@ flowchart LR
 
 ## Prerequisites
 
-- Java 21
+- Java 21 or later (the provider JAR must target Java 21 bytecode)
 - Maven with access to the Uxopian AI artifact registry (see [Registry access](../getting_started/registry_access.md))
 
 ## Steps

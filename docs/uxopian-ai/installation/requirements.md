@@ -17,7 +17,7 @@ flowchart TD
     C --> D[Obtain LLM provider API key]
     D --> E{Choose deployment model}
     E -->|Container runtime available| F[Kubernetes or Docker Compose]
-    E -->|No container runtime| G[Bare JAR on Java 21]
+    E -->|No container runtime| G[Bare JAR on Java 21+]
 ```
 
 *Figure: Prerequisite checklist before choosing a deployment model.*
@@ -29,9 +29,20 @@ flowchart TD
 | uxopian-ai | 512 Mi RAM, 0.5 CPU | JVM heap: `-Xmx768m -Xms512m` |
 | uxopian-gateway | 256 Mi RAM | JVM heap: `-Xmx256m -Xms256m` |
 | OpenSearch | 1 Gi RAM (single node) | Version `3.6.0` required |
-| Java | 21 | Required for bare JAR deployment only |
+| Java | 21 or later | Required for bare JAR deployment only. Container images ship their own Temurin 25 runtime. |
 
 For multi-replica deployments, both services use Hazelcast for session state distribution. See [Kubernetes deployment](./kubernetes.mdx) for cluster configuration.
+
+## Java runtime
+
+Both services are compiled for Java 21 bytecode, which is the **minimum** supported runtime, not a pinned version. Any later JDK runs them.
+
+| Deployment model | Java on the host | Runtime actually used |
+|---|---|---|
+| Kubernetes / Docker Compose | Not required | Temurin 25 (LTS), embedded in the container images |
+| Bare archive | Required, 21 or later | The JDK installed on the host |
+
+On Java 24 and later, start the JARs with `--enable-native-access=ALL-UNNAMED`. Without it the JVM emits restricted native access warnings for the dependencies that call native code. The container images already apply this flag. See [Bare archive](./java.md).
 
 ## OpenSearch
 
