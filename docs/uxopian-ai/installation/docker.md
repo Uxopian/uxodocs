@@ -32,6 +32,10 @@ flowchart TD
 | Context path | `/` | `/gui/gateway/uxopian-ai` |
 | TLS | None | Handled by reverse proxy |
 
+:::note[No Java needed on the host]
+The `uxopian-ai` and `uxopian-gateway` images embed their own Temurin 25 runtime, already started with `--enable-native-access=ALL-UNNAMED`. No JDK is required on the Docker host. See [Requirements](./requirements.md#java-runtime).
+:::
+
 ## Compose file structure
 
 A production stack requires the same three services as the quickstart. Use the `${VAR:-fallback}` pattern for image versions so the stack works without a `.env` file and stays in sync with the version management script.
