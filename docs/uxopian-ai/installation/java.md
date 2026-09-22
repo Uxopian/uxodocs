@@ -25,7 +25,7 @@ flowchart TD
 
 ## Prerequisites
 
-- Java 21
+- Java 21 or later (Java 25 recommended — it is the runtime embedded in the official container images)
 - OpenSearch `3.6.0` reachable on the host network
 - LLM provider API key
 - Credentials for `artifactory.arondor.cloud` (or access to the Cloudsmith public channel for preview releases)
@@ -115,7 +115,7 @@ server:
 From the extraction directory:
 
 ```bash
-java -Xmx768m -Xms512m -jar ai-standalone-2026.0.0-ft5.jar
+java --enable-native-access=ALL-UNNAMED -Xmx768m -Xms512m -jar ai-standalone-2026.0.0-ft5.jar
 ```
 
 The service starts on port `8080` by default. Override with `UXOPIAN_AI_PORT`.
@@ -189,7 +189,7 @@ For other authentication providers, replace `FlowerDocsProvider` with the approp
 ### Start
 
 ```bash
-java -Xmx256m -Xms256m \
+java --enable-native-access=ALL-UNNAMED -Xmx256m -Xms256m \
   -jar bff-standalone-<version>.jar \
   --spring.config.location=./application.yml
 ```
