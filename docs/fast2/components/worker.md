@@ -342,8 +342,14 @@ To choose one or the other you simply have to modify this property :
 worker.content.factory=<remote|local>
 ```
 
-- Select **remote** to send back documents to the broker.
-- Select **local** (default value) to keep documents processed by the worker from its side
+- Select **remote** to send back documents to the broker. The broker stores them under its own **`broker.files.dir`** folder (see [File storage architecture](#file-storage-architecture) below).
+- Select **local** (default value) to keep documents processed by the worker from its side, under `worker.files.dir` / `worker.files.pattern`.
+
+:::warning[Remote mode: every worker must be remote, the embedded one included]
+`worker.content.factory` is read per worker, and the embedded worker started by the broker reads it from the broker's own `config/application.properties`. In a multi-worker setup, set `worker.content.factory=remote` on **every** worker, embedded one included.
+
+A worker left in `local` mode writes plain file paths into the punnet. Those paths only exist on that worker's machine, so the next task picked up by another worker fails with a file-not-found error such as `Invalid file: /path/on/the/other/machine` (`FileNotFoundException` from `PunnetContentFactoryRemote`).
+:::
 
 ##### Example
 This is an example to understand what happens for both scenarios. Imagine that we are extracting some documents from a Documentum environment and we need to convert tiff files to a pdf format.
@@ -379,14 +385,45 @@ Worker ->> Broker: I'm still available if you need
 
 ##### File storage architecture
 
-By default, documents processed by the worker will be stored under the folder **files/**.
-Then documents will follow a strict hierarchy as mentioned in the property **worker.files.pattern**
+Where the content ends up, and which properties control it, depends entirely on the content factory selected above. The two sets of properties are **not** interchangeable:
+
+| `worker.content.factory` | Content is written by | Location | Configured by |
+| --- | --- | --- | --- |
+| `local` (default) | the worker | `worker.files.dir` + `worker.files.pattern`, resolved on the worker's machine | the worker's `config/application.properties` |
+| `remote` | the broker | `broker.files.dir/<campaign>/<step name>/<documentId or punnetId>`, on the broker's machine | the **broker's** `config/application.properties` — `worker.files.*` is ignored |
+
+###### Local mode: `worker.files.dir` and `worker.files.pattern`
+
+By default, documents processed by a **local** worker are stored under the folder **files/**, relative to the worker's working directory.
+Then documents follow the hierarchy described by the property **worker.files.pattern**:
 
 ```properties
 worker.files.dir=files/
 worker.files.pattern=@{campaign?:'shared'}/@{step?:'shared'}/@{documentId?:punnetId}
 ```
-Values shown above are used by default. Feel free to change it to match your requirements in term of folder organization.
+
+Values shown above are used by default. Feel free to change them to match your requirements in terms of folder organization.
+
+`worker.files.pattern` is a **path template**, not a regular expression: the `@{...}` placeholders are resolved by Fast2 against the punnet and document being written (`@{` is spelled with an `@` so that Spring does not try to resolve it as one of its own `${...}` properties).
+
+###### Remote mode: `broker.files.dir`
+
+In **remote** mode the worker uploads the content to the broker, and the broker decides where it lands. The only property involved is on the **broker** side:
+
+```properties title="./config/application.properties (broker)"
+# Root folder where the broker stores the contents uploaded by remote workers
+broker.files.dir=files/
+```
+
+The default is `files/`, relative to the broker's working directory. Under that root, the layout is **fixed** and cannot be changed:
+
+```
+<broker.files.dir>/<campaign>/<step name>/<documentId or punnetId>
+```
+
+Files are stored without any extension, and the punnet references them through an `f2:///contents?path=...` URL that the broker resolves. `worker.files.dir` and `worker.files.pattern` play **no role** in remote mode, whatever value they hold on the worker or on the broker.
+
+Since all the content of a remote campaign accumulates under `broker.files.dir`, make sure that folder sits on a volume sized for the campaign, or point `broker.files.dir` at one that is.
 
 
 #### Troubleshooting

@@ -45,3 +45,22 @@ server.port=1789
 ```
 
 <!-- Put the same value for these two properties. -->
+
+<br />
+
+## <i class="fas fa-folder-open"></i> Configure the content storage
+
+When workers run with `worker.content.factory=remote`, they upload the contents they produce to the broker, and the broker writes them to disk. The root folder is set on the broker side:
+
+```ini title="/config/application.properties"
+...
+# Root folder where the broker stores the contents uploaded by remote workers
+broker.files.dir=files/
+```
+
+The default is `files/`, relative to the broker's working directory. Below that root the layout is fixed — `<campaign>/<step name>/<documentId or punnetId>` — and the worker-side `worker.files.dir` / `worker.files.pattern` properties do not apply. See [File storage architecture](./worker.md#file-storage-architecture) on the worker page for the full local-vs-remote comparison.
+
+:::warning[Size the volume]
+All the content of every remote campaign accumulates under `broker.files.dir`. Keep it on a volume sized for the campaigns you run, or point it at one that is.
+:::
+
