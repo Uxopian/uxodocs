@@ -83,7 +83,73 @@ arender.jsapi.loadDocument('/path/to/doc.pdf',
 |--------|-----------|-------------|
 | `displayComment(documentId, display)` | `documentId: string`, `display: 'All'\|'Unresolved'\|'Resolved'` | Filters annotation comments shown in the explorer |
 | `askDownloadDocument(documentId, title, suffix)` | `documentId: string`, `title?: string`, `suffix?: string` | Triggers a direct download of a document by ID |
-| `changeConfigurableElement(name, enabled)` | `name: string`, `enabled: boolean` | Toggles a named UI element at runtime |
+
+### Showing and hiding toolbar elements
+
+| Method | Parameters | Description |
+|--------|-----------|-------------|
+| `changeConfigurableElement(name, enabled)` | `name: string`, `enabled: boolean` | Shows (`enabled = true`) or hides (`enabled = false`) a named toolbar element at runtime |
+
+`changeConfigurableElement` is the runtime counterpart of the static `topPanel.*` enable properties documented in [Viewer configuration - Top panel](./viewer-configuration.md#top-panel-toolbar). Where a property such as `topPanel.documentMenu.download=false` hides an element at startup for everyone, `changeConfigurableElement` lets you toggle the same element dynamically. Calling it with `enabled = false` both **hides** the element and **disables** its action; calling it again with `true` restores it.
+
+#### Element names
+
+The `name` argument is the element's **configured bean name** the exact identifiers that appear in the `topPanel.*.beanNames` lists in [Viewer configuration - Top panel](./viewer-configuration.md#top-panel-toolbar). There are two tiers:
+
+- **Menu containers** Hide the whole drop-down menu and everything in it.
+- **Buttons / menu items** Hide a single action, leaving the rest of its menu intact.
+
+| Name | Tier | Element |
+|------|------|---------|
+| `importMenu` | Menu | Import / upload drop-down |
+| `downloadMenu` | Menu | Download drop-down |
+| `imageProcessingMenu` | Menu | Image processing (brightness / contrast) drop-down |
+| `searchMenu` | Menu | Search drop-down |
+| `downloadButton` | Item | "Download" (as displayed) entry |
+| `downloadPdfButton` | Item | "Download as PDF" entry |
+| `downloadAllButton` | Item | "Download all as a single PDF" entry |
+| `downloadAnnotationsButton` | Item | "Download with annotations" entry |
+| `uploadButton` | Item | "Upload file" entry |
+| `printButton` | Button | Print |
+| `fullscreenButton` | Button | Full screen |
+| `cropBoxButton` | Button | Screenshot / crop box |
+| `rotateLeft`, `rotateRight` | Button | Rotate the current page |
+| `firstPageButton`, `previousPageButton`, `nextPageButton`, `lastPageButton` | Button | Page navigation |
+| `docLinkDropdown` | Button | Document-link dropdown |
+| `documentBuilderButton` | Button | Document builder |
+
+:::note
+Toggling a name only affects elements present in the current toolbar configuration. If a button has been removed from its `*.beanNames` list, it is not in the toolbar at all and `changeConfigurableElement` has nothing to act on. The complete, authoritative list of names is the set of bean names in [Viewer configuration - Top panel](./viewer-configuration.md#top-panel-toolbar).
+:::
+
+**Example: hide a whole menu vs. a single entry**
+
+```javascript
+// Hide the entire "Download" drop-down menu
+arender.jsapi.changeConfigurableElement('downloadMenu', false);
+
+// Keep the menu open but hide only the "Download as PDF" entry
+arender.jsapi.changeConfigurableElement('downloadPdfButton', false);
+```
+
+**Example: enforce a per-document export policy**
+
+A common requirement is to prevent downloading or printing certain documents. For example, documents flagged confidential by the source system. Read the flag from the document metadata and toggle the relevant elements when the active document changes:
+
+```javascript
+function applyExportPolicy(metadata) {
+  var confidential = metadata && metadata['arender:confidential'] === 'true';
+  var canExport = !confidential;
+
+  arender.jsapi.changeConfigurableElement('downloadMenu', canExport);
+  arender.jsapi.changeConfigurableElement('printButton', canExport);
+}
+
+arender.jsapi.registerCurrentDocumentChangeEvent(function (docId, title, metadata) {
+  applyExportPolicy(metadata);
+});
+```
+
 
 ### Plugins
 

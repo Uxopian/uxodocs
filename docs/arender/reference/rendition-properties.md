@@ -217,8 +217,20 @@ The Document Converter (`arender-document-converter`) runs on port 19999.
 |----------|---------|-------------|
 | `html.conversion.timeout` | `120` | Timeout for HTML-to-PDF conversion (seconds) |
 | `tools.wkhtmltopdf.path` | `wkhtmltopdf` | wkhtmltopdf executable path |
-| `tools.wkhtmltopdf.options` | `--disable-javascript,...` | wkhtmltopdf command-line options |
+| `tools.wkhtmltopdf.options` | `--disable-javascript,...` | wkhtmltopdf command-line options for HTML/email-to-PDF. Disables JavaScript, hyperlinks, and local file access by default (see note) |
 | `tools.wkhtmltopdf.iframe.disabled` | `true` | Disable iframe URL resolution (security) |
+
+:::note wkhtmltopdf default options
+The shipped default for `tools.wkhtmltopdf.options` is:
+
+```properties
+tools.wkhtmltopdf.options=--disable-javascript,--quiet,--encoding,UTF-8,--load-error-handling,ignore,--disable-external-links,--disable-internal-links,--disable-local-file-access
+```
+
+- `--disable-external-links` / `--disable-internal-links` Render hyperlinks as non-clickable. To make links clickable in converted emails, remove these flags. See [Hyperlinks in converted emails](../guides/features/email-conversion.md#hyperlinks-in-converted-emails).
+- `--disable-local-file-access` Prevents wkhtmltopdf from reading local files referenced by the HTML.
+
+:::
 
 ### Video conversion (FFmpeg)
 
