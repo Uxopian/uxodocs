@@ -62,5 +62,6 @@ The default is `files/`, relative to the broker's working directory. Below that 
 
 :::warning[Size the volume]
 All the content of every remote campaign accumulates under `broker.files.dir`. Keep it on a volume sized for the campaigns you run, or point it at one that is.
+DeleteContent does not clean this folder in remote mode: purge `<broker.files.dir>/<campaign>/` once the campaign is finished.
 :::
 
