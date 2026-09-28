@@ -183,6 +183,10 @@ Easily convert date properties from one format to another.
 
 Delete the content of your document within your file system. It will retrieve the files targeted by the URL of all the document contents in your punnet
 
+:::warning[Remote content factory]
+With `worker.content.factory=remote`, this task deletes the worker's temporary copy of each `f2:///contents?...` content, not the file stored by the broker under `broker.files.dir`. Purge `<broker.files.dir>/<campaign>/` once the campaign is finished. See [Configure the content storage](../components/broker.md#-configure-the-content-storage).
+:::
+
 <b>Optional settings</b>
 
 | Key                                  | Type      | Description                                                                                                                                                                   | Default value |
