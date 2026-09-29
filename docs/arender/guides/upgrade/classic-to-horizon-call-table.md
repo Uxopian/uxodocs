@@ -2,11 +2,11 @@
 viewer: horizon
 title: Classic to Horizon call table
 last_update:
-  date: '2026-09-29T08:59:40.609Z'
+  date: '2026-09-29T09:25:14.249Z'
   author: CI/CD Bot
 slug: /guides/upgrade/classic-to-horizon-call-table
 sidebar_position: 8
-content_hash: 5b616fa88d3d8ca7c2c97f268c605c4ca76ef07a54d56cd6d85ce31f1171f3e4
+content_hash: 1415e6253901288ecc7054fefb2a8c232c4e1bb578b80809fecc4aee6190d1f5
 ---
 
 # Classic to Horizon call table
@@ -21,15 +21,31 @@ For concepts rather than entry points — delivery model, embedding, configurati
 
 Every Classic call has a row. Where there is no Horizon equivalent, the row carries one of three reasons instead of a Horizon call:
 
-- **Dropped** — no Horizon equivalent, and why
+- **Dropped** — no Horizon equivalent, and why; about 30 entry points across the whole table, named by the parent Epic as never carried over regardless of feature
 - **Replaced** — the same intent is reached a different way
-- **Planned (AR-18627)** — carried by a separate ticket, not shipped yet
+- **Planned** — carried by a separate ticket, not shipped yet. Three rows point at [AR-18627](https://arondor.atlassian.net/browse/AR-18627) directly. The rest — 71 entry points, eleven feature areas — are "Part B" of the parent Epic ([AR-18610](https://arondor.atlassian.net/browse/AR-18610)): the API surface of a feature whose own ticket carries the work. Three of those eleven already have a ticket number (hyperlinks: AR-18590, AR-18591 — multi-view, comparison and split screen: AR-18567 — bookmarks and named destinations: AR-18570); the other eight are scoped in the Epic but not yet split into their own tickets
 
 Horizon's own naming follows two rules: a collection takes a namespace (`annotations.*`, and later `bookmarks.*` and `hyperlinks.*`); everything else is flat, with the verb carrying its noun (`getDocumentLayout`, `goToPage`). Events are named `noun.pastVerb` and never share a string with a command. Every handle a command returns exits through `dispose()`.
+
+Two renames in this table are not a straight transposition:
+
+- `evictDocument` → `releaseDocument` — `evict` was a bare verb with no noun, and a Classic word rather than a Horizon one.
+- The whole `register*Event` family → one catalogue and one subscription call, `on('<noun>.<pastVerb>', cb)`, instead of one method per event. Each row below names the specific event its `register*` call maps to.
 
 :::note Page numbers are zero-based on both sides
 The Horizon API counts pages from zero, same as the Classic `"Index"` type and the backend itself — only the viewer's own page indicator in the UI displays one more. Rows carrying a page number are marked **(0-based)** below as a reminder.
 :::
+
+## Initialization
+
+Classic's bootstrap mechanisms are not reproduced, independently of any feature — the parent Epic names them explicitly as never carried over.
+
+| Classic call | Horizon |
+|---|---|
+| `window.ARenderJSAPI()` (global init callback, called once the GWT app has loaded) | **Dropped** — no callback-based bootstrap; a host does not need one, since calls made before the viewer finishes mounting are already queued automatically |
+| `arenderjs.startupScript` property, loaded via `window.ARenderJSAPICallStartupScript(url)` | **Dropped** — no startup script fetched from the server and evaluated |
+| Init hook looked up in the parent window | **Dropped** — no init hook lookup; a host drives the viewer directly through `window.ARender` / `element.ARender` |
+| Host-settable user identity | **Dropped** — a host cannot declare a user's identity to the viewer; see [`getCurrentUserName`](#not-documented-on-the-classic-reference-page) below for the read direction, which is a separate, still-open question |
 
 ## Document loading and navigation
 
@@ -55,34 +71,38 @@ The Horizon API counts pages from zero, same as the Classic `"Index"` type and t
 | `askChangePage("Absolute", offset, position)` (0-based) | **Dropped** — the position rectangle within the page has no equivalent; `goToPage` moves to a page, not a rectangle inside it |
 | `askChangePage("NoChange", ..., position)` | **Dropped** — re-targets a position rectangle without changing page; has no meaning without the rectangle above |
 | `newPageRelativePosition(x, y, w, h)` | **Dropped** — builds the position rectangle for `askChangePage("Absolute", …)` above, which has no equivalent |
-| `getPageForNamedDestination(documentId, destination, handler)` | **Dropped** — named-destination resolution isn't exposed; a future `bookmarks.*` namespace is the planned home for this, not yet shipped |
+| `getPageForNamedDestination(documentId, destination, handler)` | **Planned (AR-18570)** — bookmarks and named destinations, under a future `bookmarks.*` namespace |
 
 ## Hyperlinks
 
+Part B of the parent Epic, tracked under the `hyperlinks.*` namespace planned in AR-18590 and AR-18591.
+
 | Classic call | Horizon |
 |---|---|
-| `enablePDFDocumentHyperlinks(enable)` | **Dropped** — hyperlink visibility isn't exposed from the API yet; planned under a future `hyperlinks.*` namespace |
-| `disallowClickOnHyperlinks(disallow)` | **Dropped** — same, `hyperlinks.*` not yet shipped |
-| `enableInternalPDFDocumentHyperlinks(documentId)` | **Dropped** — same |
-| `disableInternalPDFDocumentHyperlinks(documentId)` | **Dropped** — same |
-| `enableExternalPDFDocumentHyperlinks(documentId)` | **Dropped** — same |
-| `disableExternalPDFDocumentHyperlinks(documentId)` | **Dropped** — same |
-| `notifyHyperlinkTarget(target)` | **Dropped** — hyperlink-target-selection workflow isn't exposed from the API yet |
+| `enablePDFDocumentHyperlinks(enable)` | **Planned (AR-18590, AR-18591)** — under the future `hyperlinks.*` namespace, not yet shipped |
+| `disallowClickOnHyperlinks(disallow)` | **Planned (AR-18590, AR-18591)** — same |
+| `enableInternalPDFDocumentHyperlinks(documentId)` | **Planned (AR-18590, AR-18591)** — same |
+| `disableInternalPDFDocumentHyperlinks(documentId)` | **Planned (AR-18590, AR-18591)** — same |
+| `enableExternalPDFDocumentHyperlinks(documentId)` | **Planned (AR-18590, AR-18591)** — same |
+| `disableExternalPDFDocumentHyperlinks(documentId)` | **Planned (AR-18590, AR-18591)** — same |
+| `notifyHyperlinkTarget(target)` | **Planned (AR-18590, AR-18591)** — same |
 
 ## Text selection (lasso mode)
 
+Part B of the parent Epic, "Lasso text selection" evolution (3 entry points, no ticket number split out yet).
+
 | Classic call | Horizon |
 |---|---|
-| `askActivateLassoMode(lassoId)` | **Dropped** — lasso text selection isn't exposed from the API |
-| `askDeactivateLassoMode()` | **Dropped** — same |
+| `askActivateLassoMode(lassoId)` | **Planned** — Part B, "Lasso text selection" evolution |
+| `askDeactivateLassoMode()` | **Planned** — same |
 
 ## Annotations (save / display) and other top-level calls
 
 | Classic call | Horizon |
 |---|---|
-| `displayComment(documentId, display)` | **Dropped** — the comment-explorer display filter isn't exposed from the API |
+| `displayComment(documentId, display)` | **Planned** — Part B, "Comment display filter" evolution |
 | `askDownloadDocument(documentId, title, suffix)` | **Replaced** — see [Download commands](#download-commands); downloads always target the open document or set, there is no by-id variant |
-| `changeConfigurableElement(name, enabled)` | **Dropped** — runtime UI-element toggling isn't exposed from the API; configure the viewer through its own configuration instead |
+| `changeConfigurableElement(name, enabled)` | **Planned** — Part B, "Configuration surface" evolution. The one Part B item with production callers today: COVEA enables/disables our buttons by jQuery selector on their label, and Generali trims the top panel by configuration |
 
 ## Plugins
 
@@ -99,7 +119,7 @@ Classic groups its API behind per-feature accessor objects. Horizon has no acces
 
 | Classic call | Horizon |
 |---|---|
-| `getDocumentBuilder()` | **Dropped** — document builder isn't exposed from the API |
+| `getDocumentBuilder()` | **Planned** — Part B, "Document builder" evolution (25 entry points, the largest single block, no ticket number split out yet) |
 | `getDocumentLayout()` | **Replaced** — flat `getDocumentLayout(documentId?)` call, no accessor needed |
 | `getDocumentMetadata()` | **Replaced** — flat `getDocumentMetadata(documentId?)` call, no accessor needed |
 | `getZoomJSAPI()` | **Dropped** — zoom isn't exposed from the API |
@@ -109,10 +129,10 @@ Classic groups its API behind per-feature accessor objects. Horizon has no acces
 | `getSearchJSAPI()` | **Replaced** — flat `search(text)` call returning a handle, no accessor needed |
 | `getGenericNotificationJSAPI()` | **Dropped** — the toaster isn't exposed from the API |
 | `getDownloadDocumentJSAPI()` | **Replaced** — flat `download(options)` call, no accessor needed |
-| `getZoomGlassJSAPI()` | **Dropped** — the magnifying-glass overlay isn't exposed from the API |
-| `getThumbnailsJSAPI()` | **Dropped** — the thumbnail sidebar isn't exposed from the API |
-| `getDocumentCompareJSAPI()` | **Dropped** — document comparison isn't exposed from the API |
-| `getScreenSplitJSAPI()` | **Dropped** — split screen isn't exposed from the API |
+| `getZoomGlassJSAPI()` | **Planned** — Part B, "Magnifier" evolution |
+| `getThumbnailsJSAPI()` | **Dropped** — the thumbnail sidebar is never carried over — no integration was found calling it |
+| `getDocumentCompareJSAPI()` | **Planned (AR-18567)** — multi-view, document comparison and split screen |
+| `getScreenSplitJSAPI()` | **Planned (AR-18567)** — same |
 | `getAnnotationJSAPI()` | **Replaced** — flat `annotations.*` namespace, no accessor or async-ready wait needed |
 | `onAnnotationModuleReady(callback)` | **Dropped** — annotations are available immediately, there is no async module to wait for |
 
@@ -132,36 +152,40 @@ Covered above under [Document loading and navigation](#document-loading-and-navi
 | `registerAllAsyncModulesStartedEvent(cb)` | **Dropped** — no equivalent readiness event; `document.firstPageDisplayed` covers the first-render readiness case |
 | `registerPanelLoadedConfigurationEvent(cb)` | **Dropped** — no top-panel configuration concept in Horizon |
 | `registerTopPanelRefreshedEvent(cb)` | **Dropped** — same |
-| `registerHyperlinkDisplayHookEvent(docId, cb)` | **Dropped** — hyperlink display isn't exposed from the API yet, see `hyperlinks.*` above |
-| `registerCommentDisplayHookEvent(docId, cb)` | **Dropped** — no comment-display concept is exposed |
+| `registerHyperlinkDisplayHookEvent(docId, cb)` | **Planned (AR-18590, AR-18591)** — see Hyperlinks above |
+| `registerCommentDisplayHookEvent(docId, cb)` | **Planned** — Part B, "Comment display filter" evolution, alongside `displayComment` below |
 | `registerAnnotationsSavedEvent(cb)` | **Replaced** — `on('annotations.created' \| 'annotations.updated' \| 'annotations.deleted', cb)`; Horizon writes each annotation as it is made, so there is no batched "saved" event |
-| `registerNotifyLassoSelectedTextEvent(cb)` | **Dropped** — lasso text selection isn't exposed from the API |
-| `registerNotifyHyperlinkToggleTargetModeEvent(cb)` | **Dropped** — same hyperlink area, not yet shipped |
-| `registerDisplayLinkHandler(cb)` | **Dropped** — per-link style overrides aren't exposed from the API |
-| `registerExternalBookmarkHandler(cb)` | **Dropped** — bookmark clicks aren't exposed yet, see `bookmarks.*` above |
+| `registerNotifyLassoSelectedTextEvent(cb)` | **Planned** — Part B, "Lasso text selection" evolution |
+| `registerNotifyHyperlinkToggleTargetModeEvent(cb)` | **Planned (AR-18590, AR-18591)** — see Hyperlinks above |
+| `registerDisplayLinkHandler(cb)` | **Planned (AR-18590, AR-18591)** — see Hyperlinks above |
+| `registerExternalBookmarkHandler(cb)` | **Planned (AR-18570)** — bookmarks and named destinations |
 
 ## Namespace: `documentBuilder`
 
+Part B of the parent Epic, "Document builder" evolution — 25 entry points, the largest single block, no ticket number split out yet.
+
 | Classic call | Horizon |
 |---|---|
-| `open()` | **Dropped** — document builder isn't exposed from the API |
-| `close()` | **Dropped** — same |
-| `toggle()` | **Dropped** — same |
-| `reset()` | **Dropped** — same |
-| `saveFirstDocument(download, delete, freeze, behavior)` | **Dropped** — same |
-| `saveAllDocuments(handler, download, delete, freeze, behavior)` | **Dropped** — same |
-| `createEmptyDocument()` | **Dropped** — same |
-| `createCustomDocument(jsonContent, options)` | **Dropped** — same |
-| `registerNotifyAlterDocumentContentEvent(cb)` | **Dropped** — same |
-| `registerSubmitAlterDocumentContentEvent(cb)` | **Dropped** — same |
-| `registerDocumentBuilderOpeningEvent(cb)` | **Dropped** — same |
-| `registerDocumentBuilderSaveCustomEvent(cb)` | **Dropped** — same |
+| `open()` | **Planned** — Part B, "Document builder" evolution |
+| `close()` | **Planned** — same |
+| `toggle()` | **Planned** — same |
+| `reset()` | **Planned** — same |
+| `saveFirstDocument(download, delete, freeze, behavior)` | **Planned** — same |
+| `saveAllDocuments(handler, download, delete, freeze, behavior)` | **Planned** — same |
+| `createEmptyDocument()` | **Planned** — same |
+| `createCustomDocument(jsonContent, options)` | **Planned** — same |
+| `registerNotifyAlterDocumentContentEvent(cb)` | **Planned** — same |
+| `registerSubmitAlterDocumentContentEvent(cb)` | **Planned** — same |
+| `registerDocumentBuilderOpeningEvent(cb)` | **Planned** — same |
+| `registerDocumentBuilderSaveCustomEvent(cb)` | **Planned** — same |
 
 ## Namespace: `zoomJSAPI`
 
+Never carried over — the parent Epic found no integration calling any zoom command; the one caller that drives zoom does it by forwarding keystrokes to the viewer, which is a viewer behavior rather than an integration contract.
+
 | Classic call | Horizon |
 |---|---|
-| `askZoomIn()` | **Dropped** — zoom isn't exposed from the API |
+| `askZoomIn()` | **Dropped** — no integration found calling it; not exposed from the API |
 | `askZoomOut()` | **Dropped** — same |
 | `askZoomFullWidth()` | **Dropped** — same |
 | `askZoomFullHeight()` | **Dropped** — same |
@@ -170,28 +194,34 @@ Covered above under [Document loading and navigation](#document-loading-and-navi
 
 ## Namespace: `zoomGlassJSAPI`
 
+Part B of the parent Epic, "Magnifier" evolution (3 entry points, no ticket number split out yet).
+
 | Classic call | Horizon |
 |---|---|
-| `toggle()` | **Dropped** — the magnifying-glass overlay isn't exposed from the API |
-| `updateZoom(zoom)` | **Dropped** — same |
-| `updatePosition(x, y, w, h)` | **Dropped** — same |
+| `toggle()` | **Planned** — Part B, "Magnifier" evolution |
+| `updateZoom(zoom)` | **Planned** — same |
+| `updatePosition(x, y, w, h)` | **Planned** — same |
 
 ## Namespace: `rotateJSAPI`
 
+Never carried over — no integration was found calling any rotation command.
+
 | Classic call | Horizon |
 |---|---|
-| `askRotateCurrentPageLeft()` | **Dropped** — rotation isn't exposed from the API |
+| `askRotateCurrentPageLeft()` | **Dropped** — no integration found calling it; not exposed from the API |
 | `askRotateCurrentPageRight()` | **Dropped** — same |
 | `askRotateAllPageLeft()` | **Dropped** — same |
 | `askRotateAllPageRight()` | **Dropped** — same |
-| `askRotatePage(pageNumber, documentId, rotation, clockwise)` | **Dropped** — same |
+| `askRotatePage(pageNumber, documentId, rotation, clockwise)` (0-based) | **Dropped** — same |
 | `registerNotifyPageRotatedEvent(cb)` | **Dropped** — same |
 
 ## Namespace: `fullScreenJSAPI`
 
+Never carried over — no integration was found calling either command.
+
 | Classic call | Horizon |
 |---|---|
-| `askOpenFullScreen()` | **Dropped** — full screen isn't exposed from the API |
+| `askOpenFullScreen()` | **Dropped** — not exposed from the API |
 | `askCloseFullScreen()` | **Dropped** — same |
 
 ## Search commands
@@ -200,14 +230,16 @@ Covered above under [Document loading and navigation](#document-loading-and-navi
 |---|---|
 | `askSearchTextNext(text)` | `search(text)`, then `handle.next()` |
 | `askSearchTextPrevious(text)` | `search(text)`, then `handle.previous()` |
-| `askAdvancedSearchText(text, caseSensitive, accentSensitive, regex, scope, annotations, postAction)` | **Dropped** — the advanced options aren't available; `search(text)` always searches the whole open set, case-insensitive. The one production caller of the advanced form used none of its options |
+| `askAdvancedSearchText(text, caseSensitive, accentSensitive, regex, scope, annotations, postAction)` | **Planned** — Part B, "Search options" evolution (its 7 options land on the one `search(text)` command). Today `search(text)` always searches the whole open set, case-insensitive; the one production caller of the advanced form used none of its options |
 | `clearSearchResults()` | `handle.dispose()` |
 
 ## Namespace: `showPrintDialogJSAPI`
 
+Parked pending a support check on real callers, alongside host notifications below — neither has an observed caller today.
+
 | Classic call | Horizon |
 |---|---|
-| `askShowPrintDialog()` | **Dropped** — printing isn't exposed from the API |
+| `askShowPrintDialog()` | **Dropped** — no observed caller; parked pending a support check, not exposed from the API |
 | `askPrintAllDocumentPages()` | **Dropped** — same |
 
 ## Download commands
@@ -224,20 +256,22 @@ Covered above under [Document loading and navigation](#document-loading-and-navi
 | `askDownloadFDFAnnotations()` | **Dropped** — the FDF-annotations-only file isn't exposed from the API |
 | `askDownloadWithAnnotations()` | `download({format: 'pdf', annotations: 'editable'})` |
 | `askDownloadWithRedact()` | `download({format: 'pdf', annotations: 'flatten'})` — redactions are always burned in, never optional |
-| `askDownloadCompareResultDocument()` | **Dropped** — document comparison isn't exposed from the API |
+| `askDownloadCompareResultDocument()` | **Planned (AR-18567)** — multi-view, document comparison and split screen |
 | *(missing-download-right refusal)* | **Planned (AR-18627)** — Horizon has no rights model for downloads today; a refusal for a missing download right isn't implemented yet |
 
 ## Namespace: `genericNotificationJSAPI`
 
 | Classic call | Horizon |
 |---|---|
-| `askNotification(message, type)` | **Dropped** — the viewer's toaster isn't exposed from the API; show the notification in the host's own UI instead |
+| `askNotification(message, type)` | **Dropped** — no observed caller; parked pending a support check, not exposed from the API — show the notification in the host's own UI instead |
 
 ## Namespace: `thumbnailsJSAPI`
 
+Never carried over — no integration was found calling any thumbnail-sidebar command.
+
 | Classic call | Horizon |
 |---|---|
-| `showNavigator()` | **Dropped** — the thumbnail sidebar isn't exposed from the API |
+| `showNavigator()` | **Dropped** — no integration found calling it; not exposed from the API |
 | `hideNavigator()` | **Dropped** — same |
 | `resetNavigator()` | **Dropped** — same |
 | `expandNavigator(width)` | **Dropped** — same |
@@ -253,10 +287,12 @@ Covered above under [Document loading and navigation](#document-loading-and-navi
 
 ## Namespace: `documentCompare`
 
+Part B of the parent Epic, "Multi-view, document comparison and split screen" evolution (AR-18567, 6 entry points).
+
 | Classic call | Horizon |
 |---|---|
-| `doComparisonFromStringUUID(leftId, rightId)` | **Dropped** — document comparison isn't exposed from the API |
-| `closeAllMultiView()` | **Dropped** — split/multi-view isn't exposed from the API |
+| `doComparisonFromStringUUID(leftId, rightId)` | **Planned (AR-18567)** — multi-view, document comparison and split screen |
+| `closeAllMultiView()` | **Planned (AR-18567)** — same |
 
 ## Annotation commands and events
 
@@ -266,25 +302,25 @@ Covered above under [Document loading and navigation](#document-loading-and-navi
 | `save()` | **Dropped** — Horizon writes each annotation as it is made, there is nothing to flush |
 | `refresh()` | `annotations.refresh(documentId?)` |
 | `hasDirtyAnnotations()` | **Dropped** — nothing is batched, so nothing to report. Do not reuse this to gate a "save" action: it would read false almost always |
-| `getDestinationTypes()` | **Dropped** — hyperlink destination types aren't exposed from the API yet, see `hyperlinks.*` above |
-| `getActionTypes()` | **Dropped** — same |
-| `getPropertyFromDestination(dest, prop)` | **Dropped** — same |
-| `getPropertyFromAction(action, prop)` | **Dropped** — same |
-| `createDocLink(pageNumber)` (0-based) | **Dropped** — doc-link creation isn't exposed from the API yet, see `hyperlinks.*` above |
+| `getDestinationTypes()` | **Planned** — Part B, "Doc-links and page anchors" evolution |
+| `getActionTypes()` | **Planned** — same |
+| `getPropertyFromDestination(dest, prop)` | **Planned** — same |
+| `getPropertyFromAction(action, prop)` | **Planned** — same |
+| `createDocLink(pageNumber)` (0-based) | **Planned** — Part B, "Doc-links and page anchors" evolution |
 | `registerNotifyAnnotationAddedEvent(cb)` | `on('annotations.created', cb)` |
 | `registerNotifyAnnotationDeletedEvent(cb)` | `on('annotations.deleted', cb)` |
 | `registerNotifyAnnotationUpdatedEvent(cb)` | `on('annotations.updated', cb)` |
-| `registerFollowLinkHandler(cb)` | **Dropped** — hyperlink-click handling isn't exposed from the API yet |
-| `registerDocLinkTextSelectionEvent(cb)` | **Dropped** — same |
-| `registerDocLinkStateChange(cb)` | **Dropped** — same |
-| `registerCloseMultiView(cb)` | **Dropped** — split/multi-view isn't exposed from the API |
+| `registerFollowLinkHandler(cb)` | **Planned (AR-18590, AR-18591)** — see Hyperlinks above |
+| `registerDocLinkTextSelectionEvent(cb)` | **Planned** — Part B, "Doc-links and page anchors" evolution |
+| `registerDocLinkStateChange(cb)` | **Planned** — same |
+| `registerCloseMultiView(cb)` | **Planned (AR-18567)** — multi-view, document comparison and split screen |
 | *(write failure, no Classic equivalent)* | `on('annotations.writeFailed', cb)` — fires once a retry has given up; there is no Classic call or event for this, a failed write previously had no signal at all |
 
 ## Namespace: `screenSplitJSAPI`
 
 | Classic call | Horizon |
 |---|---|
-| `askOpenAsNewDocument(documentId)` | **Dropped** — split screen isn't exposed from the API |
+| `askOpenAsNewDocument(documentId)` | **Planned (AR-18567)** — multi-view, document comparison and split screen |
 
 ## Not documented on the Classic reference page
 
@@ -292,7 +328,7 @@ The [Classic JavaScript API reference](/docs/arender/reference/javascript-api) d
 
 | Classic call | Horizon |
 |---|---|
-| `getConfiguration()` | **Dropped** — viewer configuration isn't exposed from the API; configure through the HTML attributes and the provider setup instead |
+| `getConfiguration()` | **Planned** — Part B, "Configuration surface" evolution, alongside `changeConfigurableElement` above |
 | `askOpenAnchorModal()` | **Dropped** — no Horizon equivalent |
 | `evictDocument(documentId)` | `releaseDocument(documentId)` — renamed: `evict` was a bare verb with no noun, and a Classic word rather than a Horizon one |
 | `setupArrowScaleDpi()` | **Dropped** — no Horizon equivalent |
