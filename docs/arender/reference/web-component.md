@@ -3,10 +3,10 @@ viewer: horizon
 slug: /reference/web-component
 title: Web Component
 last_update:
-  date: '2026-04-17T14:38:23.664Z'
+  date: '2026-09-29T08:59:40.609Z'
   author: CI/CD Bot
 sidebar_position: 3
-content_hash: e8183dd6b0edd0c5a0b7316bf243b42384f6b1524e13b1d3be9ef86547722db7
+content_hash: 2485083b26a73874e08a708a084ffa7faa234f51f0889b3f6f07cbd1e3e8cb1e
 ---
 
 # Web Component
@@ -65,35 +65,21 @@ The ARender API is exposed in two ways:
 
 Calls made before the viewer finishes mounting are queued automatically — no need to wait for any event.
 
-### Methods
-
-| Method | Returns | Description |
-|--------|---------|-------------|
-| `openDocument(params)` | `Promise<void>` | Open a document from a query string of parameters. See [Parameter contract](#parameter-contract). |
-
-### Examples
+A command the user is not allowed to perform is refused rather than silently ignored: it throws — or rejects, for an asynchronous command — an `ARenderError` carrying a `code`, so a host can branch on it.
 
 ```javascript
-const docUrl = 'https://example.com/document.pdf';
-
-// A document reachable over HTTP
-window.ARender.openDocument(`url=${encodeURIComponent(docUrl)}`);
-
-// Several documents displayed as a single multi-document
-window.ARender.openDocument(`url=${encodeURIComponent(urlA)}&url=${encodeURIComponent(urlB)}`);
-
-// An already-resolved ARender document ID
-window.ARender.openDocument('uuid=b64_dXJsPWh0dHA6Ly9leGFtcGxlLmNvbS9zYW1wbGUucGRm');
-
-// Repository parameters — Alfresco
-window.ARender.openDocument('nodeRef=4aa144a5-a0b1-4c2d-8e3f-1234567890ab&user=admin&alf_ticket=TICKET_xxx&versionLabel=1.0');
-
-// Via the element instance, when several viewers share the page
-const viewer = document.querySelector('arender-element');
-viewer.ARender.openDocument(`url=${encodeURIComponent(docUrl)}`);
+try {
+  await window.ARender.someCommand(/* ... */);
+} catch (error) {
+  if (error.code === 'FORBIDDEN') {
+    // the user is not allowed to perform this command
+  }
+}
 ```
 
-Each call replaces the displayed document: the most recent request wins.
+Horizon has no general rights model today, so for most commands this describes the contract rather than an implemented restriction. Annotation commands are the exception: they are gated by the rights the annotation policy returns, so `FORBIDDEN` is an actual outcome there.
+
+See the [JavaScript API reference](./javascript-api.md) for the full command list, starting with [`openDocument`](./javascript-api.md#opening-a-document).
 
 ## Parameter contract
 
