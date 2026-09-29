@@ -61,7 +61,7 @@ Classic's bootstrap mechanisms are not reproduced, independently of any feature 
 | `closeErrorPopup()` | **Dropped** — no error popup to dismiss; a load failure is reported through the `document.loadFailed` event, not a modal |
 | `getCurrentDocumentId()` | `getCurrentDocumentId()` — same name, same meaning |
 | `getMasterDocumentId()` | `getRootDocumentId()` — renamed |
-| `askChangeDocument("Previous")` | `previousDocument()` — this Classic type is declared but has no working implementation; Horizon adds real "previous document" navigation |
+| `askChangeDocument("Previous")` | `previousDocument()` — same name, same meaning |
 | `askChangeDocument("Next")` | `nextDocument()` |
 | `askChangeDocument("First")` | **Dropped** — no direct call; read the first id from `getDocumentLayout()`'s children and pass it to `goToDocument(id)` |
 | `askChangeDocument("Last")` | **Dropped** — no direct call; read the last id from `getDocumentLayout()`'s children and pass it to `goToDocument(id)` |
