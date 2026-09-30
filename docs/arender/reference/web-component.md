@@ -3,10 +3,10 @@ viewer: horizon
 slug: /reference/web-component
 title: Web Component
 last_update:
-  date: '2026-09-29T08:59:40.609Z'
+  date: '2026-09-30T08:24:29.938Z'
   author: CI/CD Bot
 sidebar_position: 3
-content_hash: 2485083b26a73874e08a708a084ffa7faa234f51f0889b3f6f07cbd1e3e8cb1e
+content_hash: 77df8ff1fdaac3ae706099f826a39963a807f3d36baac8724ea7c5b4662ed0fe
 ---
 
 # Web Component
@@ -65,21 +65,21 @@ The ARender API is exposed in two ways:
 
 Calls made before the viewer finishes mounting are queued automatically — no need to wait for any event.
 
-A command the user is not allowed to perform is refused rather than silently ignored: it throws — or rejects, for an asynchronous command — an `ARenderError` carrying a `code`, so a host can branch on it.
+A command the user is not allowed to perform is refused rather than silently ignored: it rejects with an error whose `code` is `'FORBIDDEN'`, so a host can branch on it. See [JavaScript API reference → Errors](./javascript-api.md#errors) for the full code list and how to narrow a caught error.
 
 ```javascript
 try {
   await window.ARender.someCommand(/* ... */);
 } catch (error) {
-  if (error.code === 'FORBIDDEN') {
+  if (window.ARender.isError(error) && error.code === 'FORBIDDEN') {
     // the user is not allowed to perform this command
   }
 }
 ```
 
-Horizon has no general rights model today, so for most commands this describes the contract rather than an implemented restriction. Annotation commands are the exception: they are gated by the rights the annotation policy returns, so `FORBIDDEN` is an actual outcome there.
+Horizon has no rights model today: `FORBIDDEN` is reserved in the error contract, but nothing raises it yet — every command answers on what the document allows, not on what the user is allowed.
 
-See the [JavaScript API reference](./javascript-api.md) for the full command list, starting with [`openDocument`](./javascript-api.md#opening-a-document).
+See the [JavaScript API reference](./javascript-api.md) for the full command list, starting with [`openDocument`](./javascript-api.md#document-reading-and-navigation).
 
 ## Parameter contract
 

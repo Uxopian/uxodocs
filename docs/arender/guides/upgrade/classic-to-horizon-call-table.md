@@ -2,11 +2,11 @@
 viewer: horizon
 title: Classic to Horizon call table
 last_update:
-  date: '2026-09-29T09:25:14.249Z'
+  date: '2026-09-30T08:24:29.938Z'
   author: CI/CD Bot
 slug: /guides/upgrade/classic-to-horizon-call-table
 sidebar_position: 8
-content_hash: 1415e6253901288ecc7054fefb2a8c232c4e1bb578b80809fecc4aee6190d1f5
+content_hash: 7b247a43b268c59a7b281982f3e677aedda1e5e5b47243699d56e8f763212f90
 ---
 
 # Classic to Horizon call table
@@ -126,7 +126,7 @@ Classic groups its API behind per-feature accessor objects. Horizon has no acces
 | `getRotateJSAPI()` | **Dropped** — rotation isn't exposed from the API |
 | `getPrintJSAPI()` | **Dropped** — printing isn't exposed from the API |
 | `getFullScreenJSAPI()` | **Dropped** — full screen isn't exposed from the API |
-| `getSearchJSAPI()` | **Replaced** — flat `search(text)` call returning a handle, no accessor needed |
+| `getSearchJSAPI()` | **Replaced** — flat `search(text)` call, a `Promise` resolving to a handle, no accessor needed |
 | `getGenericNotificationJSAPI()` | **Dropped** — the toaster isn't exposed from the API |
 | `getDownloadDocumentJSAPI()` | **Replaced** — flat `download(options)` call, no accessor needed |
 | `getZoomGlassJSAPI()` | **Planned** — Part B, "Magnifier" evolution |
@@ -228,8 +228,8 @@ Never carried over — no integration was found calling either command.
 
 | Classic call | Horizon |
 |---|---|
-| `askSearchTextNext(text)` | `search(text)`, then `handle.next()` |
-| `askSearchTextPrevious(text)` | `search(text)`, then `handle.previous()` |
+| `askSearchTextNext(text)` | `await search(text)`, then `handle.next()` — `search` returns a `Promise` |
+| `askSearchTextPrevious(text)` | `await search(text)`, then `handle.previous()` |
 | `askAdvancedSearchText(text, caseSensitive, accentSensitive, regex, scope, annotations, postAction)` | **Planned** — Part B, "Search options" evolution (its 7 options land on the one `search(text)` command). Today `search(text)` always searches the whole open set, case-insensitive; the one production caller of the advanced form used none of its options |
 | `clearSearchResults()` | `handle.dispose()` |
 
@@ -283,7 +283,7 @@ Never carried over — no integration was found calling any thumbnail-sidebar co
 |---|---|
 | `getDocumentLayout(documentId, onLayout, onError)` | `getDocumentLayout(documentId?)` — a synchronous read, no callbacks |
 | `getShallowDocumentLayout(documentId, onLayout, onError)` | **Dropped** — the shallow/stub-children variant has no equivalent; `getDocumentLayout` always returns children already resolved |
-| `layout.documentTitle` (field, not a call) | **Replaced** — read the title from `getDocumentMetadata()`, or from the `document.changed` event payload |
+| `layout.documentTitle` (field, not a call) | **Replaced** — read from the `document.changed` event payload (`{documentId, title}`) |
 
 ## Namespace: `documentCompare`
 
@@ -298,7 +298,7 @@ Part B of the parent Epic, "Multi-view, document comparison and split screen" ev
 
 | Classic call | Horizon |
 |---|---|
-| `addAnnotation(documentId, type, x, y, w, h, page, color, opacity)` (0-based) | `annotations.create({page, type, x, y, width, height, color, opacity})` — one flat object replaces the nine positional arguments |
+| `addAnnotation(documentId, type, x, y, w, h, page, color, opacity)` (0-based) | `annotations.create({page, type, x, y, width, height, color, opacity})` — one flat object replaces the nine positional arguments; `type` is one of `'highlight'`, `'square'`, `'circle'` today |
 | `save()` | **Dropped** — Horizon writes each annotation as it is made, there is nothing to flush |
 | `refresh()` | `annotations.refresh(documentId?)` |
 | `hasDirtyAnnotations()` | **Dropped** — nothing is batched, so nothing to report. Do not reuse this to gate a "save" action: it would read false almost always |
