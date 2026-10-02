@@ -160,7 +160,9 @@ arender.server.cache.hazelCast.config.path=/path/to/hazelcast.yaml
 
 ### Viewer clustering
 
-When running multiple viewer instances behind a load balancer, enable Hazelcast member discovery so all instances form a cluster and share the document accessor cache. Configure TCP/IP join with the addresses of all viewer instances, or use the Hazelcast Kubernetes discovery plugin in Kubernetes environments.
+When running multiple viewer instances behind a load balancer, enable Hazelcast member discovery so all instances form a cluster and share the document accessor cache. Configure TCP/IP join with the addresses of all viewer instances, or use Hazelcast's Kubernetes discovery in Kubernetes environments.
+
+In Kubernetes, the Helm chart configures discovery in **DNS Lookup** mode: it renders a `service-dns` entry pointing at a headless Service created by the chart, so viewer members resolve each other through in-cluster DNS rather than through the Kubernetes API. No RBAC permissions are required. See [Kubernetes discovery mode](/docs/arender/concepts/rendition-caching/#kubernetes-discovery-mode) for the comparison between the two modes.
 
 The viewer and broker Hazelcast clusters are separate. They run on different ports (the viewer defaults to `5702`) and do not join each other. The viewer communicates with the broker through REST/HTTP, not through Hazelcast.
 

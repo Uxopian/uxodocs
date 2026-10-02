@@ -251,7 +251,13 @@ viewer:
 
 ## Hazelcast clustering
 
-Hazelcast is configured for all charts. The service exposes port 5701 for inter-node communication.
+Hazelcast clustering is rendered only when a chart runs **two or more replicas**, or when autoscaling is enabled. Below that threshold the chart creates no Hazelcast ConfigMap and no headless Service, and the member runs isolated with `auto-detection: false` — a single-instance deployment therefore performs no discovery at all.
+
+When clustering is rendered, members discover each other in **DNS Lookup** mode: the chart writes a `service-dns` entry pointing at a headless Service (`clusterIP: None`) that it creates, and members resolve each other through in-cluster DNS. The service exposes port 5701 for inter-node communication (the viewer cluster is separate and defaults to port 5702).
+
+:::info[No Kubernetes API permissions are required]
+Hazelcast discovery uses DNS, not the Kubernetes API. The charts define no `Role`, `ClusterRole` or `RoleBinding` for Hazelcast, and the services run under a plain ServiceAccount. Clusters that restrict access to the Kubernetes API do not need to grant any permission for Hazelcast to work.
+:::
 
 ## Health probes
 
