@@ -1,12 +1,20 @@
 [
   {
+    "version": "v2026.3.0",
+    "title": "ARender v2026.3.0 - Release Notes",
+    "date": "2026-10-02",
+    "description": "Third minor on the 2026 line: an Excel data view, a public JavaScript API and arrow, freehand and strikethrough annotations in ARender Horizon, redaction and PDF engine improvements, and Classic, Rendition and security fixes.",
+    "slug": "/release-note/arender/v2026.3.0/release-notes",
+    "hasUpgradeNotes": false,
+    "latest": true
+  },
+  {
     "version": "v2026.2.0",
     "title": "ARender v2026.2.0 - Release Notes",
     "date": "2026-07-31",
     "description": "Second minor on the 2026 line: a new M-Files provider, underline and circle annotations plus a single document-opening API in ARender Horizon, and Classic annotation fixes, Rendition fixes and security hardening.",
     "slug": "/release-note/arender/v2026.2.0/release-notes",
-    "hasUpgradeNotes": true,
-    "latest": true
+    "hasUpgradeNotes": true
   },
   {
     "version": "v2026.1.0",
