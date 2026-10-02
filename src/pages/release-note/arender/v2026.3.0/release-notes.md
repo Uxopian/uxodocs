@@ -20,6 +20,10 @@ ARender 2026.3.0 is the third minor release on the 2026 line. **ARender Horizon*
 
 As in the previous releases, the changes below are grouped by viewer: a shared **Security** section, then **ARender Horizon (React)**, **ARender Classic (GWT)**, and finally **Rendition** for backend, conversion and integration changes that apply to both viewers.
 
+:::tip Upgrade note
+See the [v2026.3.0 upgrade notes](../upgrade-notes) for step-by-step migration instructions.
+:::
+
 ---
 
 ## Security
