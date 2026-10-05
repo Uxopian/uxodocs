@@ -3,10 +3,10 @@ viewer: horizon
 slug: /guides/upgrade/migration-from-gwt
 title: Migration from GWT
 last_update:
-  date: '2026-04-17T14:38:23.664Z'
+  date: '2026-09-29T08:57:33.869Z'
   author: CI/CD Bot
 sidebar_position: 7
-content_hash: f2276defaa63f3c301d9a922cf4a553ac48ad0924e8c788d974df28bf3e012e9
+content_hash: b15d023733f05f9ace2c4a7c86be2e31fedc3c3e75bb3d581309b5e6ace6efd7
 ---
 
 # Migration from GWT
@@ -31,6 +31,8 @@ This page maps GWT viewer concepts to their React UI equivalents. Use it as a re
 | `/arendergwt/` servlet endpoints | Broker API directly | No viewer-side servlet layer |
 | Server-side annotation storage config | Same (backend is shared) | XFDF, JDBC, or REST storage |
 | Rendition properties | Same (backend is shared) | Broker and rendition services are unchanged |
+
+This table maps concepts. For entry points — what to call instead of each `arender.jsapi` method — see the [Classic to Horizon call table](./classic-to-horizon-call-table.md).
 
 ## What stays the same
 
