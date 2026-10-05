@@ -3,10 +3,10 @@ viewer: horizon
 slug: /reference/web-component
 title: Web Component
 last_update:
-  date: '2026-04-17T14:38:23.664Z'
+  date: '2026-09-30T08:24:29.938Z'
   author: CI/CD Bot
 sidebar_position: 3
-content_hash: e8183dd6b0edd0c5a0b7316bf243b42384f6b1524e13b1d3be9ef86547722db7
+content_hash: 77df8ff1fdaac3ae706099f826a39963a807f3d36baac8724ea7c5b4662ed0fe
 ---
 
 # Web Component
@@ -65,35 +65,21 @@ The ARender API is exposed in two ways:
 
 Calls made before the viewer finishes mounting are queued automatically — no need to wait for any event.
 
-### Methods
-
-| Method | Returns | Description |
-|--------|---------|-------------|
-| `openDocument(params)` | `Promise<void>` | Open a document from a query string of parameters. See [Parameter contract](#parameter-contract). |
-
-### Examples
+A command the user is not allowed to perform is refused rather than silently ignored: it rejects with an error whose `code` is `'FORBIDDEN'`, so a host can branch on it. See [JavaScript API reference → Errors](./javascript-api.md#errors) for the full code list and how to narrow a caught error.
 
 ```javascript
-const docUrl = 'https://example.com/document.pdf';
-
-// A document reachable over HTTP
-window.ARender.openDocument(`url=${encodeURIComponent(docUrl)}`);
-
-// Several documents displayed as a single multi-document
-window.ARender.openDocument(`url=${encodeURIComponent(urlA)}&url=${encodeURIComponent(urlB)}`);
-
-// An already-resolved ARender document ID
-window.ARender.openDocument('uuid=b64_dXJsPWh0dHA6Ly9leGFtcGxlLmNvbS9zYW1wbGUucGRm');
-
-// Repository parameters — Alfresco
-window.ARender.openDocument('nodeRef=4aa144a5-a0b1-4c2d-8e3f-1234567890ab&user=admin&alf_ticket=TICKET_xxx&versionLabel=1.0');
-
-// Via the element instance, when several viewers share the page
-const viewer = document.querySelector('arender-element');
-viewer.ARender.openDocument(`url=${encodeURIComponent(docUrl)}`);
+try {
+  await window.ARender.someCommand(/* ... */);
+} catch (error) {
+  if (window.ARender.isError(error) && error.code === 'FORBIDDEN') {
+    // the user is not allowed to perform this command
+  }
+}
 ```
 
-Each call replaces the displayed document: the most recent request wins.
+Horizon has no rights model today: `FORBIDDEN` is reserved in the error contract, but nothing raises it yet — every command answers on what the document allows, not on what the user is allowed.
+
+See the [JavaScript API reference](./javascript-api.md) for the full command list, starting with [`openDocument`](./javascript-api.md#document-reading-and-navigation).
 
 ## Parameter contract
 
