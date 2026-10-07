@@ -626,3 +626,11 @@ The following property allows to configure a default title to the document that 
 ```properties
 arender.server.default.filenet.document.name="default name"
 ```
+
+## Logging
+
+Since 2023.23.0, the FileNet connector no longer bundles the Log4j 1.x classes. Calls made through the Log4j 1.x API, including those of the IBM FileNet Content Engine client, are redirected to SLF4J by `log4j-over-slf4j` and written by the Web-UI Logback configuration.
+
+:::warning[Action required for custom extensions]
+Custom FileNet extensions that rely on Log4j 1.x appenders or on a `log4j.properties` file must move to the Logback configuration. See [Convert Log4J configuration file to Logback](../../../operation/logs.md#convert-log4j-configuration-file-to-logback).
+:::
