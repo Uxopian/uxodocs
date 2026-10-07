@@ -60,6 +60,7 @@ ARender does not yet ship a built-in BFF component — this is planned for an up
 | Document Text Handler | 8899 | Text extraction, search, signatures |
 | Alfresco Provider | 8788 | Alfresco document loading |
 | FileNet Provider | 8787 | FileNet document loading |
+| M-Files Provider | 8789 | M-Files document loading |
 | Hazelcast | 5701 | Distributed cache (when clustered) |
 
 ---
@@ -175,8 +176,9 @@ For configuration properties, see [Rendition configuration](../reference/renditi
 
 ## Provider microservices
 
-**Default ports:** 8787 (FileNet), 8788 (Alfresco)
-**Images:** `arender-filenet-provider`, `arender-alfresco-provider`
+**Default ports:** 8787 (FileNet), 8788 (Alfresco), 8789 (M-Files)
+
+**Images:** `arender-filenet-provider`, `arender-alfresco-provider`, `arender-mfiles-provider`
 
 Providers are standalone REST microservices that load documents from external repositories on behalf of the broker. Each provider implements the [Provider API](../reference/rest-api/provider-api.md) contract.
 
@@ -195,8 +197,9 @@ Providers also handle annotation storage when the repository supports it. The br
 |----------|-------|-------------|------------|
 | FileNet | `arender-filenet-provider` | 8787 | IBM FileNet Content Engine |
 | Alfresco | `arender-alfresco-provider` | 8788 | Alfresco via CMIS |
+| M-Files | `arender-mfiles-provider` | 8789 | M-Files via Web Service REST API |
 
-Providers are optional — if your application uploads documents directly to the broker API, no provider is needed.
+If your repository exposes the [Provider API](../reference/rest-api/provider-api.md) itself, no provider container is needed: register the repository URL on the broker and the broker calls it directly. If your application uploads documents directly to the broker API, no repository connection is needed at all.
 
 For deployment details, see [Providers](../guides/integration/providers.md). For the full API contract, see [Provider API](../reference/rest-api/provider-api.md). For broker-side configuration, see [Rendition properties — Provider registry](../reference/rendition-properties.md#provider-registry).
 
