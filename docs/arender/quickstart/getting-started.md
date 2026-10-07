@@ -541,4 +541,4 @@ These public URLs can be used for testing (the demo rendition already authorizes
 - [Feature availability](../overview/horizon.md#feature-availability) — what's available now and what's coming
 - [Web Component](../reference/web-component.md) — HTML attributes, JavaScript API, styling
 - [Opening documents](../guides/features/opening-documents.md) — multi-document, repository parameters, encoding rules
-- [Providers](../guides/integration/providers.md) — load documents from Alfresco, FileNet, or custom repositories
+- [Providers](../guides/integration/providers.md) — load documents from Alfresco, FileNet, M-Files, or custom repositories
