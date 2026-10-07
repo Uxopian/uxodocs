@@ -417,8 +417,12 @@ pdfowl.path=pdfowl
 pdfowl.client.watchdog=10000
 # Timeout for idle pdfOwl clients in milliseconds
 pdfowl.client.ttl=30000
-# The memory limit used for a thread to work on a single document
-pdfowl.memlimit.mb=1024
+# Memory ceiling hint for each pdfowl process in MB, capped to 2047. Unset: pdfowl's default
+#pdfowl.memlimit.mb=
+# Enable recycling of pdfowl processes in the pool
+pdfowl.recycling.enable=true
+# Maximum number of idle pdfowl processes kept for reuse
+pdfowl.client.max-idle=16
 ```
 
 ## PDF Configuration
