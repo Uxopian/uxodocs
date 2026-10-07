@@ -14,6 +14,8 @@ import DocLink from '@site/src/components/DocLink';
 
 <div className="arender-release-notes">
 
+> **Upgrade note:** See [v2023.23.0](../upgrade-notes) for detailed instructions.
+
 # ARender v2023.23.0 - Release Notes
 
 ARender 2023.23.0 is a maintenance release on the 2023.x (ARender Classic) line. It extends **redaction integrity**: a redaction now also removes the vector graphics and the interactive form fields under the redacted area, after the image fix of 2023.22.0. It also upgrades the **PDFOwl** engine to fix the slow rendering of large-format pages, and **LibreOffice** on Linux and Docker.
