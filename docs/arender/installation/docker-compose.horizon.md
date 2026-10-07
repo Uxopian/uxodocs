@@ -26,7 +26,7 @@ Log in to the ARender Docker registry. Docker will use these credentials to pull
 docker login artifactory.arondor.cloud:5001
 ```
 
-## Step 1 — Set up the rendition backend
+## Step 1: Set up the rendition backend
 
 The rendition backend is made up of four Docker images:
 
@@ -88,7 +88,7 @@ volumes:
 The `arender-tmp` volume must be accessible by all backend services. Documents are stored on this volume during processing. See [System architecture](../overview/architecture.md#shared-volume-constraints) for details.
 :::
 
-## Step 2 — Set up the reverse proxy
+## Step 2: Set up the reverse proxy
 
 The React viewer runs in the browser and calls the ARender broker's REST API. Since they run on different ports, browsers block these requests as cross-origin (CORS). A reverse proxy makes the three ARender API routes appear same-origin to the browser.
 
@@ -162,7 +162,7 @@ For other bundlers (webpack-dev-server, Angular CLI, etc.), refer to their equiv
 If OAuth2 is enabled on the rendition backend, use a BFF instead of a plain reverse proxy. See [Advanced configuration](./configuration.md#authentication-and-bff).
 :::
 
-## Step 3 — Configure authorized document sources
+## Step 3: Configure authorized document sources
 
 When loading documents by URL (via `openDocument()` or the `document` attribute with a `url` parameter), the broker must authorize the source domain. Add `DSB_AUTHORIZED_URLS` to the broker service in your `docker-compose.yml`:
 
@@ -180,7 +180,7 @@ Multiple origins are comma-separated:
 ```
 
 
-## Step 4 — Start the stack
+## Step 4: Start the stack
 
 Run the following command. Docker Compose pulls the ARender images from the registry (using the credentials from the login step) and starts all four containers:
 
@@ -196,9 +196,11 @@ docker-compose ps
 
 Then open [http://localhost:8761/health/records](http://localhost:8761/health/records) — all services should show as UP.
 
-## Optional — Providers
+## Connect a document repository (optional)
 
-To load documents from an external repository (Alfresco, FileNet), add a provider service and register it on the broker:
+To load documents from an external repository, the broker needs an endpoint that exposes the [Provider API](../reference/rest-api/provider-api.md). If your repository exposes this API itself, register its URL on the broker with `REGISTRY_PROVIDERS_<NAME>_BASE_URL` and skip the provider service.
+
+Otherwise (Alfresco, FileNet, M-Files), add a provider service and register it on the broker:
 
 ```yaml
 services:

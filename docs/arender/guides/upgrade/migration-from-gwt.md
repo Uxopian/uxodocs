@@ -58,10 +58,10 @@ You do not need to change your backend deployment when switching viewers.
 
 ## Migration checklist
 
-1. Install the `arender-ui` npm package (or a framework wrapper) in your host application
+1. Install the `arender-ui` npm package in your host application
 2. Replace `<iframe>` embeds with `<arender-element>` Web Component
 3. Set up a reverse proxy or CORS configuration for the broker API routes
 4. Update JavaScript integrations to use the `window.ARender` / `element.ARender` API, moving the document parameters out of the iframe URL and into `openDocument(params)` — URL-encoding every value
-5. If using repository connectors (Alfresco, FileNet), deploy the corresponding provider microservice and register it in the broker
-6. Test core workflows: viewing, annotation, search, redaction
-7. Verify features you depend on are available in the React UI (see [key capabilities](../../overview/horizon.md#key-capabilities))
+5. If using repository connectors (Alfresco, FileNet, M-Files), deploy the corresponding provider microservice and register it in the broker
+6. Test core workflows: viewing, annotation, search
+7. Verify features you depend on are available in the React UI (see [key capabilities](../../overview/horizon.md#feature-availability))

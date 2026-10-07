@@ -35,7 +35,7 @@ Choose the solution that matches your context:
 | Context | Solution |
 |---------|----------|
 | Local development with Vite | [Vite dev proxy](#vite) |
-| Docker Compose deployment | [Nginx in Docker Compose](./docker-compose.md#step-2--set-up-the-reverse-proxy) |
+| Docker Compose deployment | [Nginx in Docker Compose](./docker-compose.md#step-2-set-up-the-reverse-proxy) |
 | OAuth2 enabled on the backend | [BFF](#authentication-and-bff) |
 | Existing reverse proxy or load balancer | [Same origin via existing infrastructure](#same-origin-via-existing-infrastructure) |
 
@@ -96,3 +96,4 @@ ARender does not yet ship a built-in BFF — this is planned for an upcoming rel
 | Document Service Broker | 8761 | Backend orchestrator |
 | Alfresco Provider | 8788 | Alfresco connector microservice |
 | FileNet Provider | 8787 | FileNet connector microservice |
+| M-Files Provider | 8789 | M-Files connector microservice |
