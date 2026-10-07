@@ -95,7 +95,7 @@ We recommend installing these third parties from the official OS package distrib
 
 | Document Type           | Software                        | Requirement                                                                                                             |
 | ----------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Office Documents        | LibreOffice or Microsoft Office | LibreOffice 5+ (ensure libGL.so.1 for RHEL/CentOS 6). MS Office 2013+ recommended.                                      |
+| Office Documents        | LibreOffice or Microsoft Office | LibreOffice 7.3.5.2 recommended, see [LibreOffice version](#libreoffice-version) (ensure libGL.so.1 for RHEL/CentOS 6). MS Office 2013+ recommended. |
 | Images                  | ImageMagick                     | ImageMagick 7+ (under Windows, validate that the binary named convert.exe is existing, if not, link it from magick.exe) |
 | Mails and HTML          | WKHtmlToPdf                     | wkhtmltopdf 0.12.5+                                                                                                     |
 | Videos, Audios and GIFs | FFmpeg                          | FFmpeg 2.8.15+                                                                                                          |
@@ -108,6 +108,22 @@ Ensure third-party tools are in the server's PATH:
 | ImageMagick | _magick_ (under Windows, validate that the binary named convert.exe is existing, if not, link it from magick.exe) |
 | WKHtmlToPdf | _wkhtmltopdf_                                                                                                     |
 | FFmpeg      | _ffmpeg_ and _ffprobe_                                                                                            |
+
+#### LibreOffice version
+
+The LibreOffice version validated with ARender depends on the platform and on how LibreOffice is installed:
+
+| Platform                                              | LibreOffice version                                              |
+| ----------------------------------------------------- | ---------------------------------------------------------------- |
+| Docker images                                         | 7.3.5.2 (embedded)                                               |
+| Linux RPM-based servers, installer with Internet      | 7.3.5.2 (downloaded by the installer)                            |
+| Red Hat Enterprise Linux 8, installer without Internet | 7.3.4.2 (bundled with the installer): upgrade manually to 7.3.5.2 |
+| Linux Debian-based servers                            | Version of the distribution package (`apt-get install libreoffice`) |
+| Windows                                               | 6.4.5.2 (bundled with the installer)                             |
+
+:::info[Changed in 2023.23.0]
+LibreOffice 7.3.5.2 fixes Word documents that failed to convert with 7.3.4.2. On Linux servers that were installed manually or without Internet access, upgrade LibreOffice to 7.3.5.2 and make sure `soffice` still points to it.
+:::
 
 #### OS Configuration (Linux Only)
 
