@@ -634,3 +634,12 @@ Since 2023.23.0, the FileNet connector no longer bundles the Log4j 1.x classes. 
 :::warning[Action required for custom extensions]
 Custom FileNet extensions that rely on Log4j 1.x appenders or on a `log4j.properties` file must move to the Logback configuration. See [Convert Log4J configuration file to Logback](../../../operation/logs.md#convert-log4j-configuration-file-to-logback).
 :::
+
+## XML parsing security
+
+Since 2023.23.0, the FileNet connector parses XML with DOCTYPE declarations rejected and external entities and DTDs never resolved, to protect against XML External Entity (XXE) attacks. This applies to:
+
+- the `contentContainerXML` request body used to open FileNet documents;
+- the FileNet and ViewOne XML annotations, and the XFDF annotations stored in FileNet.
+
+XML payloads that contain a DOCTYPE declaration are refused. No configuration is required; if an integration sends such a payload, remove the DOCTYPE declaration.
