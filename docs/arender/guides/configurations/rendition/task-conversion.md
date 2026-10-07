@@ -30,6 +30,19 @@ The TaskConversion module exposes two levels of timeout:
 When tuning for heavy documents, these converter-side timeouts must be raised alongside the broker's [`arender.conversion.timeout.ms`](/docs/arender/guides/configurations/rendition/service-broker#conversion-coordination-timeout) property (in milliseconds) and the HMI's [`arender.server.rendition.rest.read.timeout`](/docs/arender/guides/configurations/web-ui/server/rest-client/) so all layers share a consistent ceiling.
 :::
 
+## LibreOffice processes cleanup (Windows)
+
+On Windows, a LibreOffice process (`soffice.exe` / `soffice.bin`) left over by a crash or a forced stop can prevent new conversions and cause a crash loop after a restart. Since 2023.23.0, ARender stops these processes automatically:
+
+- when the TaskConversion service starts;
+- when the Rendition Windows service stops, together with the Microsoft Office and Aroms processes it already cleaned up.
+
+:::warning
+The cleanup stops **every** `soffice.exe` and `soffice.bin` process running on the server, not only the ones started by ARender. Do not use LibreOffice for other purposes on a Windows conversion server.
+:::
+
+No configuration is required. This cleanup does not apply to Linux or Docker deployments.
+
 ## Rendition without internet Access and mails with external images
 
 If the Rendition is installed on a server that **does not have access to Internet** and if **mails with external images** needs to be viewed, please apply the below configuration:
