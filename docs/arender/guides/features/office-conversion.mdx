@@ -52,6 +52,19 @@ conversion:
 
 See the [Document converter reference](../../reference/rendition-properties.md#document-converter) for all converter properties including LibreOffice, DirectOffice, and ImageMagick settings.
 
+### LibreOffice processes cleanup (Windows)
+
+On Windows, a LibreOffice process (`soffice.exe` / `soffice.bin`) left over by a crash or a forced stop can prevent new conversions and cause a crash loop after a restart. ARender stops these processes automatically:
+
+- when the TaskConversion service starts;
+- when the Rendition Windows service stops, together with the Microsoft Office and AROMS processes.
+
+:::warning
+The cleanup stops **every** `soffice.exe` and `soffice.bin` process running on the server, not only the ones started by ARender. Do not use LibreOffice for other purposes on a Windows conversion server.
+:::
+
+No configuration is required. This cleanup does not apply to Linux or Docker deployments.
+
 ## DirectOffice (paid add-on)
 
 DirectOffice is a commercial conversion engine sold as an add-on. It provides faster, higher-fidelity conversion of Microsoft Office formats (Word, Excel, PowerPoint). For OpenDocument and other formats, it delegates to LibreOffice.
@@ -185,6 +198,10 @@ mime:
       presentation: "application/vnd.oasis.opendocument.presentation"
       graphics: "application/vnd.oasis.opendocument.graphics"
 ```
+
+:::note[Excel binary workbooks (.xlsb)]
+`application/vnd.ms-excel.sheet.binary.macroEnabled.12` is part of the default `mime.type.msoffice.excel` list, and of `arender.format.conversionTargetMimeTypes.application-pdf` on the Document Service Broker. If you override either property, add this MIME type to your own list, otherwise `.xlsb` files are not converted.
+:::
 
 The `mimetype.support` block then assigns groups of MIME types to a conversion backend (`libreoffice`, `directoffice`, or `msoffice`). Adjust these mappings to control which backend handles which formats.
 

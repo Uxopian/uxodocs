@@ -127,7 +127,7 @@ quick.contextual.menu.hasRedactText=true
 
 ## Downloading a redacted document
 
-When the user downloads a document with redactions applied, ARender calls the document builder service to produce a new PDF with the redact annotations burned in and the underlying text removed. The download button is controlled by:
+When the user downloads a document with redactions applied, ARender calls the document builder service to produce a new PDF with the redact annotations burned in and the content under them removed: text, images, vector graphics and form fields, while overlapping annotations are cut. See [Redaction concepts](../../concepts/redaction.md) for the full list. The download button is controlled by:
 
 ```properties
 topPanel.documentMenu.downloadWithRedact=true

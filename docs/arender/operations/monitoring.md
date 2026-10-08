@@ -472,7 +472,7 @@ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.volu
 - A document with very high-resolution or many layers exhausts the memory limit.
 
 **Remediation:**
-- Increase the memory limit: `pdfowl.memlimit.mb=2048`
+- If `pdfowl.memlimit.mb` is set, remove it so PDFOwl applies its own default, or raise it (maximum `2047`).
 - Increase the watchdog timeout: `pdfowl.client.watchdog=20000`
 - Scale renderer replicas.
 

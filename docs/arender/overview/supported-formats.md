@@ -83,6 +83,7 @@ Conversion engine: wkhtmltopdf.
 |--------|-----------|-----------|
 | Microsoft Excel | .xls, .xlt, .xla | application/vnd.ms-excel |
 | Microsoft Excel Open XML | .xlsx, .xlsm, .xltx, .xltm | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet |
+| Microsoft Excel Binary Workbook | .xlsb | application/vnd.ms-excel.sheet.binary.macroEnabled.12 |
 | OpenDocument Spreadsheet | .ods | application/vnd.oasis.opendocument.spreadsheet |
 
 ## Office — Other
