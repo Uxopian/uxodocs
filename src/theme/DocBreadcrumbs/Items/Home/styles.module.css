@@ -1,0 +1,37 @@
+.viewerBadge {
+    display: inline-block;
+    padding: 0.1rem 0.6rem;
+    border: 1px solid;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.viewerBadge:hover {
+    text-decoration: none;
+}
+
+.classic {
+    color: #475569;
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.horizon {
+    color: #ffffff;
+    background: var(--ifm-color-primary);
+    border-color: var(--ifm-color-primary);
+}
+
+[data-theme="dark"] .classic {
+    color: #e2e8f0;
+    background: #334155;
+    border-color: #475569;
+}
+
+[data-theme="dark"] .horizon {
+    color: #0b1220;
+}
