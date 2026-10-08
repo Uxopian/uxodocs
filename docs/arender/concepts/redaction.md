@@ -37,10 +37,22 @@ Redaction annotations carry properties specific to their role:
 When the user triggers a redacted export, ARender produces a **new document** where:
 
 - The redaction rectangles are permanently drawn as opaque shapes
-- The underlying text is **removed from the PDF content stream** — it is no longer selectable, searchable, or extractable
+- The content under the redaction rectangles is **removed from the PDF**, not only hidden behind them (see the table below)
 - The original document remains untouched
 
-This is handled by the redaction engine in the Document Converter, which parses the PDF content stream token by token and replaces text that falls within redaction rectangles with spacing adjustments.
+This is handled by the redaction engine in the Document Converter, which parses the PDF content stream token by token and removes the content that falls within redaction rectangles. Text is replaced with spacing adjustments so the layout of the rest of the line is kept.
+
+| Content under the redaction area | Result in the burned PDF |
+|----------------------------------|--------------------------|
+| Text | Removed; no longer selectable, searchable, or extractable |
+| Images, including the page image of scanned or image-only PDFs | Removed |
+| Vector graphics and line art (logos, drawn signatures, shapes) | Removed |
+| Ink, free-text and text-markup annotations | Cut to the area outside the redaction |
+| Interactive form fields (text, multi-line text, list and dropdown) | Removed; the field is no longer interactive |
+
+:::tip
+If documents were redacted and published with an earlier version of ARender, redact and publish them again with the current version.
+:::
 
 **Marking is reversible. Burning is not.** Once a redacted document is exported, the original content under the redaction cannot be recovered from the output.
 
