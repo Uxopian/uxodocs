@@ -1,7 +1,7 @@
 ---
 title: "ARender v2023.23.0 – Upgrade Notes"
 draft: false
-date: "2026-10-02"
+date: "2026-10-08"
 weight: -202323
 _build:
   list: never

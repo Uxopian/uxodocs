@@ -35,7 +35,7 @@
   {
     "version": "v2023.23.0",
     "title": "ARender v2023.23.0 - Release Notes",
-    "date": "2026-10-02",
+    "date": "2026-10-08",
     "description": "Redaction now removes vector graphics and form fields, PDFOwl and LibreOffice upgrades, email, HEIC and copy-paste fixes, Document Builder and annotation fixes, and security upgrades.",
     "slug": "/release-note/arender/v2023.23.0/release-notes",
     "hasUpgradeNotes": true,
@@ -44,7 +44,7 @@
   {
     "version": "v2023.22.0",
     "title": "ARender v2023.22.0 - Release Notes",
-    "date": "2026-07-15",
+    "date": "2026-07-17",
     "description": "Redaction fixes for scanned and large pages, annotation loading and interaction fixes, watermark positioning, EML conversion robustness, URL document-id handling, and a security upgrade.",
     "slug": "/release-note/arender/v2023.22.0/release-notes",
     "hasUpgradeNotes": true

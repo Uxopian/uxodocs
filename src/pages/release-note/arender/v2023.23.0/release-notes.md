@@ -1,7 +1,7 @@
 ---
 title: "ARender v2023.23.0 - Release Notes"
 draft: false
-date: "2026-10-02"
+date: "2026-10-08"
 weight: -202323
 aliases:
   - /release/2023.23/
@@ -48,7 +48,7 @@ The release also fixes several email conversion issues, HEIC photos from recent 
 
 #### PDFOwl memory limit
 
-`Changed` - `pdfowl.memlimit.mb` is now applied when each PDFOwl process starts. Its default changes from `1024` to unset, which lets PDFOwl apply its own default; values above `2047` are capped to `2047` with a warning. A new property, `pdfowl.client.max-idle` (default `16`), sets the maximum number of idle PDFOwl processes kept for reuse. Deployments that relied on the previous 1024 MB default should set the property explicitly.
+`Changed` - `pdfowl.memlimit.mb` is now applied when each PDFOwl process starts. Its default changes from `1024` to unset, which lets PDFOwl apply its own default; values above `2047` are capped to `2047` with a warning. A new property, `pdfowl.client.max-idle` (default `16`), sets the maximum number of idle PDFOwl processes kept for reuse. Leaving `pdfowl.memlimit.mb` unset is recommended: setting it explicitly to `1024` now keeps a lower memory ceiling than the new default.
 
 #### log4j 1.x removed from the FileNet connector
 
