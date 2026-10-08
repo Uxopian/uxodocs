@@ -83,16 +83,16 @@ To test please:
 
 When a document is downloaded or exported with its redactions burned, the content located under each redaction area is removed from the resulting PDF, not only hidden behind a black box:
 
-| Content under the redaction area                                   | Result in the burned PDF                         | Since     |
-| ------------------------------------------------------------------ | ------------------------------------------------ | --------- |
-| Text                                                               | Removed                                          | —         |
-| Images, including the page image of scanned or image-only PDFs     | Removed                                          | 2023.22.0 |
-| Vector graphics and line art (logos, drawn signatures, shapes)     | Removed                                          | 2023.23.0 |
-| Ink, free-text and text-markup annotations                         | Cut to the area outside the redaction            | 2023.23.0 |
-| Interactive form fields (text, multi-line text, list and dropdown) | Removed; the field is no longer interactive      | 2023.23.0 |
+| Content under the redaction area                                   | Result in the burned PDF                    |
+| ------------------------------------------------------------------ | ------------------------------------------- |
+| Text                                                               | Removed                                     |
+| Images, including the page image of scanned or image-only PDFs     | Removed                                     |
+| Vector graphics and line art (logos, drawn signatures, shapes)     | Removed                                     |
+| Ink, free-text and text-markup annotations                         | Cut to the area outside the redaction       |
+| Interactive form fields (text, multi-line text, list and dropdown) | Removed; the field is no longer interactive |
 
-:::warning
-Documents redacted and published with an earlier version may still contain the content listed above for that version, and it can be recovered from the file. Redact and publish these documents again with the current version.
+:::tip
+If documents were redacted and published with an earlier version of ARender, redact and publish them again with the current version.
 :::
 
 :::note
