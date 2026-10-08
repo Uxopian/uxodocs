@@ -105,7 +105,7 @@ The broker communicates with rendition services over HTTP using a reactive clien
 | `arender.format.nativeMimeTypes` | `application/pdf,image/tiff,video/mp4,...` | MIME types that do not need conversion |
 | `arender.format.documentExtractorBeanNames.mailExtractor` | `application/mbox,...` | MIME types handled by the mail extractor |
 | `arender.format.documentExtractorBeanNames.archiveExtractor` | `application/zip,...` | MIME types handled by the archive extractor |
-| `arender.format.conversionTargetMimeTypes.application-pdf` | _(long MIME type list)_ | MIME types to convert to PDF (Office, images, HTML, text, etc.) |
+| `arender.format.conversionTargetMimeTypes.application-pdf` | _(long MIME type list)_ | MIME types to convert to PDF (Office, images, HTML, text, etc.). Includes `.xlsb` (`application/vnd.ms-excel.sheet.binary.macroEnabled.12`): keep it if you override the list |
 | `arender.format.conversionTargetMimeTypes.video-mp4` | `audio/x-wav,video/quicktime,...` | MIME types to convert to MP4 video |
 
 ### Microservice memory and JVM

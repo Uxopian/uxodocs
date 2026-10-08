@@ -186,6 +186,10 @@ mime:
       graphics: "application/vnd.oasis.opendocument.graphics"
 ```
 
+:::note[Excel binary workbooks (.xlsb)]
+`application/vnd.ms-excel.sheet.binary.macroEnabled.12` is part of the default `mime.type.msoffice.excel` list, and of `arender.format.conversionTargetMimeTypes.application-pdf` on the Document Service Broker. If you override either property, add this MIME type to your own list, otherwise `.xlsb` files are not converted.
+:::
+
 The `mimetype.support` block then assigns groups of MIME types to a conversion backend (`libreoffice`, `directoffice`, or `msoffice`). Adjust these mappings to control which backend handles which formats.
 
 :::info Conversion priority order
