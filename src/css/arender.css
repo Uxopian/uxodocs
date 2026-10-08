@@ -443,7 +443,12 @@
     max-height: calc(100vh - var(--ifm-navbar-height)) !important;
 }
 
-[class*="plugin-id-arender"] [class*="sidebar_"],
+/* Match the desktop sidebar CSS-module class (sidebar_<hash>) only as a whole
+   class token. A bare [class*="sidebar_"] also hits Infima's mobile
+   .navbar-sidebar__back / __item / __brand, which pushed the
+   "Back to main menu" button down onto the Classic/Horizon toggle. */
+[class*="plugin-id-arender"] [class^="sidebar_"],
+[class*="plugin-id-arender"] [class*=" sidebar_"],
 [class*="plugin-id-arender"] .sidebar_njMd {
     padding-top: 0 !important;
     top: var(--ifm-navbar-height) !important;

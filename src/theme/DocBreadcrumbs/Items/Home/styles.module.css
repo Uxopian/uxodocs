@@ -1,0 +1,20 @@
+/* Same look for Classic and Horizon, matching the active segment of the
+   sidebar toggle: the label tells the trees apart, not the color. */
+.viewerBadge {
+    display: inline-block;
+    padding: 0.1rem 0.6rem;
+    border: 1px solid var(--ifm-color-primary);
+    border-radius: 999px;
+    color: #ffffff;
+    background: var(--ifm-color-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.viewerBadge:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
