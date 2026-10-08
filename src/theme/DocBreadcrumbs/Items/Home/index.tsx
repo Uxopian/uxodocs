@@ -48,7 +48,7 @@ export default function HomeBreadcrumbItem(): JSX.Element {
             {isARenderModernLayout && (
                 <li className="breadcrumbs__item">
                     <Link
-                        className={`${styles.viewerBadge} ${isHorizon ? styles.horizon : styles.classic}`}
+                        className={styles.viewerBadge}
                         href={homeHref}
                         title={isHorizon ? "You are reading the Horizon viewer documentation" : "You are reading the Classic viewer documentation"}
                     >
