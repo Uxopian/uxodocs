@@ -7,11 +7,14 @@ import MDXContent from "@theme/MDXContent";
 import TOC from "@theme/TOC";
 import ContentVisibility from "@theme/ContentVisibility";
 import EditMetaRow from "@theme/EditMetaRow";
+import Admonition from "@theme/Admonition";
+import Link from "@docusaurus/Link";
 import Fast2DownloadButton from "@site/src/components/Fast2DownloadButton";
 import styles from "./styles.module.css";
 
 const FAST2_RELEASE_PATH = "/release-note/fast2/";
 const ANCHOR_ATTR = "data-fast2-download-anchor";
+const ARENDER_2023_RELEASE_PATH = "/release-note/arender/v2023.";
 
 interface MDXPageProps {
     content: any;
@@ -30,6 +33,9 @@ export default function MDXPage(props: MDXPageProps) {
         typeof permalink === "string" && permalink.startsWith(FAST2_RELEASE_PATH);
     const showDownloadButton =
         isFast2Release && frontMatter?.latest === true && typeof frontMatter?.version === "string";
+
+    const isARender2023Release =
+        typeof permalink === "string" && permalink.startsWith(ARENDER_2023_RELEASE_PATH);
 
     const articleRef = useRef<HTMLElement>(null);
     const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
@@ -75,6 +81,25 @@ export default function MDXPage(props: MDXPageProps) {
                         <div className={clsx("col", !hideTableOfContents && "col--8")}>
                             <ContentVisibility metadata={metadata} />
                             <article ref={articleRef}>
+                                {isARender2023Release && (
+                                    <div className={styles.releaseLifecycleNotice}>
+                                        <Admonition
+                                            type="warning"
+                                            title="ARender 2023 LTS lifecycle"
+                                        >
+                                            Full support ends in Q1 2027 and end of life is Q1
+                                            2028. See the{" "}
+                                            <a href="https://www.uxopian.com/en/releases-lifecycle">
+                                                release lifecycle
+                                            </a>{" "}
+                                            and plan your{" "}
+                                            <Link to="/docs/arender/guides/upgrade/2023-to-2026">
+                                                upgrade to ARender 2026
+                                            </Link>
+                                            .
+                                        </Admonition>
+                                    </div>
+                                )}
                                 <MDXContent>
                                     <MDXPageContent />
                                 </MDXContent>
