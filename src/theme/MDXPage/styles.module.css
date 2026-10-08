@@ -1,3 +1,10 @@
 .mdxPageWrapper {
     justify-content: center;
 }
+
+/* Same width as the .arender-release-notes content column */
+.releaseLifecycleNotice {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}

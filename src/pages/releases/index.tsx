@@ -70,6 +70,9 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
             slug: note.slug,
             hasUpgradeNotes: note.hasUpgradeNotes,
             latest: note.latest,
+            deprecation: note.version.startsWith("v2023.")
+                ? "⚠️ 2023 LTS: full support ends Q1 2027, end of life Q1 2028"
+                : undefined,
         }),
         readMoreLink: (note: any) => note.slug,
         upgradeLink: (note: any) => `/release-note/arender/${note.version}/upgrade-notes`,
