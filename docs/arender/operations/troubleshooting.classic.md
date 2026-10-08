@@ -251,9 +251,9 @@ docker compose logs document-renderer | grep -i "watchdog\|timeout\|memory\|pdfo
 ```
 
 **Resolution:**
-- Increase the memory limit per PDFOwl process:
+- If `pdfowl.memlimit.mb` is set, remove it so PDFOwl applies its own default memory limit, or raise it. Values above `2047` are capped to `2047`:
   ```properties
-  pdfowl.memlimit.mb=2048
+  pdfowl.memlimit.mb=2047
   ```
 - Increase the watchdog timeout:
   ```properties
