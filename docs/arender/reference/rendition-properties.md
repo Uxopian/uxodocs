@@ -105,7 +105,7 @@ The broker communicates with rendition services over HTTP using a reactive clien
 | `arender.format.nativeMimeTypes` | `application/pdf,image/tiff,video/mp4,...` | MIME types that do not need conversion |
 | `arender.format.documentExtractorBeanNames.mailExtractor` | `application/mbox,...` | MIME types handled by the mail extractor |
 | `arender.format.documentExtractorBeanNames.archiveExtractor` | `application/zip,...` | MIME types handled by the archive extractor |
-| `arender.format.conversionTargetMimeTypes.application-pdf` | _(long MIME type list)_ | MIME types to convert to PDF (Office, images, HTML, text, etc.) |
+| `arender.format.conversionTargetMimeTypes.application-pdf` | _(long MIME type list)_ | MIME types to convert to PDF (Office, images, HTML, text, etc.). Includes `.xlsb` (`application/vnd.ms-excel.sheet.binary.macroEnabled.12`): keep it if you override the list |
 | `arender.format.conversionTargetMimeTypes.video-mp4` | `audio/x-wav,video/quicktime,...` | MIME types to convert to MP4 video |
 
 ### Microservice memory and JVM
@@ -331,8 +331,9 @@ The Document Renderer (`arender-document-renderer-pdfowl`) runs on port 9091.
 | `pdfowl.path` | `lib/pdfowl` | Path to the PDFOwl binary |
 | `pdfowl.client.watchdog` | `10000` | Timeout for PDFOwl command execution (ms) |
 | `pdfowl.client.ttl` | `30000` | Idle timeout before closing a PDFOwl client (ms) |
-| `pdfowl.memlimit.mb` | `1024` | Memory limit per rendering thread (MB) |
+| `pdfowl.memlimit.mb` | _(unset)_ | Memory ceiling hint for each PDFOwl process (MB), passed when the process starts. PDFOwl derives its hard limit from it. Unset: PDFOwl applies its own default. Values above `2047` are capped to `2047` with a warning |
 | `pdfowl.recycling.enable` | `true` | Recycle PDFOwl processes in the pool |
+| `pdfowl.client.max-idle` | `16` | Maximum number of idle PDFOwl processes kept for reuse. The oldest idle processes beyond this limit are stopped |
 
 ### Health
 

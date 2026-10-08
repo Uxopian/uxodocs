@@ -188,6 +188,18 @@ The FileNet connector activates when a request contains `objectStoreName` or `ob
 | `arender.server.watermark.filenet.document.class` | (empty) | Comma-separated FileNet document classes that trigger the watermark |
 | `arender.watermark.bean.name` | `customWatermark` | Spring bean ID of the watermark to display |
 
+### Logging
+
+The FileNet connector does not bundle the Log4j 1.x classes. Calls made through the Log4j 1.x API, including those of the IBM FileNet Content Engine client, are redirected to SLF4J by `log4j-over-slf4j` and written by the Web-UI Logback configuration. Set log levels with the standard Spring Boot properties, for example:
+
+```properties
+logging.level.com.arondor.viewer.filenetce=DEBUG
+```
+
+:::warning[Custom extensions]
+Custom FileNet extensions that rely on Log4j 1.x appenders or on a `log4j.properties` file must move to the Logback configuration.
+:::
+
 ## 5. Verification
 
 1. Verify the CE endpoint is reachable from the viewer container:
