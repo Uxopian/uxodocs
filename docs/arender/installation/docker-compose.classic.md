@@ -35,6 +35,8 @@ Log in to the ARender Docker registry before pulling images:
 docker login artifactory.arondor.cloud:5001
 ```
 
+Docker images are the one channel still served from Artifactory. Installers, Maven libraries and the npm package come from Cloudsmith — see [Repository access](./repository-access.md).
+
 ## Service discovery
 
 In Docker Compose, the broker discovers microservices via static configuration. Each microservice is configured with environment variables that set its hostname and port (using the legacy `eureka.instance.*` property namespace). The broker polls each service's health endpoint to track availability. No Eureka server is involved.

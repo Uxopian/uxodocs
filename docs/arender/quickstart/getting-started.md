@@ -39,6 +39,14 @@ Open a terminal at the root of your project and install the `arender-ui` package
 npm install arender-ui@{{version}} --registry=https://npm.cloudsmith.io/uxopian/uxopian-public
 ```
 
+The `arender-ui` package is served from the Uxopian Cloudsmith public registry. To avoid passing `--registry` on every command, set it once in your project's `.npmrc`:
+
+```ini title=".npmrc"
+registry=https://npm.cloudsmith.io/uxopian/uxopian-public
+```
+
+Other artifacts — Maven libraries, installers and Docker images — use different channels, described in [Repository access](../installation/repository-access.md).
+
 ## Step 2 — Configure the dev server proxy
 
 The viewer needs to reach the rendition backend. In development, your dev server's built-in proxy handles this — no external reverse proxy needed.

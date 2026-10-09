@@ -26,6 +26,8 @@ Log in to the ARender Docker registry. Docker will use these credentials to pull
 docker login artifactory.arondor.cloud:5001
 ```
 
+Docker images are the one channel still served from Artifactory. Installers, Maven libraries and the `arender-ui` npm package come from Cloudsmith — see [Repository access](./repository-access.md).
+
 ## Step 1 — Set up the rendition backend
 
 The rendition backend is made up of four Docker images:

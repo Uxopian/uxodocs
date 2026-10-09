@@ -10,16 +10,25 @@ interface DownloadItem {
     fileName: string;
 }
 
+type Registry = "cloudsmith" | "artifactory";
+
 interface ARenderDownloadsProps {
     version: string;
     filter?: string[];
+    registry?: Registry;
 }
+
+const REGISTRY_BASE_URLS: Record<Registry, string> = {
+    cloudsmith: "https://dl.cloudsmith.io/basic/uxopian/release/maven",
+    artifactory: "https://artifactory.arondor.cloud/artifactory/arondor-release"
+};
 
 const ARenderDownloads: React.FC<ARenderDownloadsProps> = ({
     version,
-    filter
+    filter,
+    registry = "cloudsmith"
 }) => {
-    const baseUrl = "https://artifactory.arondor.cloud/artifactory/arondor-release";
+    const baseUrl = REGISTRY_BASE_URLS[registry];
 
     const downloadItems: DownloadItem[] = [
         {

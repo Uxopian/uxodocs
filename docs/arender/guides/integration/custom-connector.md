@@ -152,43 +152,48 @@ Set up a Maven module with the ARender rendition API as a dependency. For a comp
 
 Use `provided` scope because the HMI application already includes the API at runtime. Refer to the [sample connector POM](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/pom.xml) for a complete list of dependencies.
 
-To access Arondor's Artifactory repository, add the following to your `~/.m2/settings.xml`:
+ARender libraries are published to the Uxopian Cloudsmith Maven repositories. Add the following to your `~/.m2/settings.xml`:
 
 ```xml title="~/.m2/settings.xml"
 <servers>
   <server>
-    <id>arondor</id>
-    <username>YOUR_LOGIN</username>
-    <password>YOUR_PASSWORD</password>
+    <id>uxopian-release</id>
+    <username>CLOUDSMITH_ID</username>
+    <password>CLOUDSMITH_TOKEN</password>
+  </server>
+  <server>
+    <id>uxopian-herodevs</id>
+    <username>CLOUDSMITH_ID</username>
+    <password>CLOUDSMITH_TOKEN</password>
   </server>
 </servers>
 
 <profiles>
   <profile>
-    <id>artifactory</id>
+    <id>cloudsmith</id>
     <repositories>
       <repository>
-        <snapshots />
-        <id>arondor</id>
-        <url>https://artifactory.arondor.cloud/artifactory/arondor-all/</url>
+        <id>uxopian-release</id>
+        <url>https://dl.cloudsmith.io/basic/uxopian/release/maven/</url>
+      </repository>
+      <repository>
+        <id>uxopian-herodevs</id>
+        <url>https://dl.cloudsmith.io/basic/uxopian/herodevs-proxy/maven/</url>
       </repository>
     </repositories>
-    <pluginRepositories>
-      <pluginRepository>
-        <snapshots />
-        <id>arondor</id>
-        <url>https://artifactory.arondor.cloud/artifactory/arondor-all/</url>
-      </pluginRepository>
-    </pluginRepositories>
   </profile>
 </profiles>
 
 <activeProfiles>
-  <activeProfile>artifactory</activeProfile>
+  <activeProfile>cloudsmith</activeProfile>
 </activeProfiles>
 ```
 
-If you don't have repository credentials, contact us at arender-sales@arondor.com.
+Replace **CLOUDSMITH_ID** with your Cloudsmith user ID and **CLOUDSMITH_TOKEN** with your Cloudsmith API key. If you do not have Cloudsmith credentials, contact the ARender Support Team at arender-support@uxopian.com.
+
+:::note
+The former Arondor Artifactory Maven repository (`arondor-all`) is still online but is no longer the repository to use. See [Repository access](../../installation/repository-access.md) for the complete `settings.xml`, the other distribution channels and the migration path.
+:::
 
 Package the connector as a fat JAR using the `maven-assembly-plugin`:
 
