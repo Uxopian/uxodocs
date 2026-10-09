@@ -43,6 +43,7 @@ These properties control the viewer UI. Override them in `configurations/arender
 | `arender.pollLastVersion` | `true` | Enables ARender version check |
 | `arender.white.labeling` | `false` | Removes any ARender branding from the application |
 | `arender.data.analytics.enabled` | `true` | Enables data analytics |
+| `arender.data.analytics.token` | _(empty)_ | Mixpanel project token the analytics are sent to. Empty sends them to the Uxopian project |
 | `startup.loading.label` | `ARender` | Label displayed while the document starts to open |
 | `ui.legacy.enabled` | `true` | Enables the legacy GWT UI; set to `false` to use ReactJS components |
 | `notifications.duration` | `500` | Duration (ms) of legacy notifications |
