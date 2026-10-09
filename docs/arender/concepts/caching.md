@@ -79,11 +79,37 @@ hazelcast:
 
 **`eviction-policy: NONE`** means entries are not proactively evicted to make room for new ones. They are only removed when they expire due to idle timeout. If you deploy with limited memory, consider setting an eviction policy (such as `LRU`) and a `max-size-policy` with a concrete entry count.
 
-**`network.join.auto-detection: false`** disables Hazelcast's automatic cluster discovery. In Docker or Kubernetes deployments, you typically configure explicit member discovery instead, using TCP/IP member lists or the Kubernetes discovery plugin.
+**`network.join.auto-detection: false`** disables Hazelcast's automatic cluster discovery. In Docker or Kubernetes deployments, you configure explicit member discovery instead, using TCP/IP member lists or Hazelcast's Kubernetes discovery in DNS Lookup mode.
 
 ## Document Service Broker clustering
 
-Multiple broker instances can form a Hazelcast cluster to share their document accessor cache and conversion order state. This is particularly relevant when the broker is scaled horizontally. Configure TCP/IP join with the addresses of all broker instances, or use the Hazelcast Kubernetes discovery plugin in Kubernetes environments.
+Multiple broker instances can form a Hazelcast cluster to share their document accessor cache and conversion order state. This is particularly relevant when the broker is scaled horizontally. Configure TCP/IP join with the addresses of all broker instances, or use Hazelcast's Kubernetes discovery in Kubernetes environments.
+
+### Kubernetes discovery mode
+
+Hazelcast's Kubernetes discovery offers two modes, and the distinction matters when the cluster enforces restricted RBAC:
+
+| Mode | Configured with | Requires Kubernetes API access |
+|---|---|---|
+| **DNS Lookup** | `service-dns` pointing at a headless Service | No |
+| Kubernetes API | `service-name` and `namespace` | Yes — the pod's ServiceAccount needs read access to endpoints and pods |
+
+The Helm charts use **DNS Lookup**. They render a `service-dns` entry pointing at a headless Service (`clusterIP: None`) created by the chart, so members resolve each other through in-cluster DNS:
+
+```yaml title="hazelcast.yml (rendered by the chart)"
+network:
+  join:
+    multicast:
+      enabled: false
+    kubernetes:
+      enabled: true
+      service-dns: <release>-hazelcast-headless.<namespace>.svc.cluster.local
+      service-port: 5701
+```
+
+:::info[No RBAC permissions are required for Hazelcast]
+Because discovery relies on DNS rather than the Kubernetes API, ARender needs no `Role`, `ClusterRole` or `RoleBinding` for Hazelcast to form a cluster, and no permissions have to be granted on the Kubernetes API. This makes the charts deployable on clusters that restrict API access.
+:::
 
 ## Monitoring
 
