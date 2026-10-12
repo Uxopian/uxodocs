@@ -392,6 +392,10 @@ rendition:
 
 These metrics are the most useful for tracking ARender health and performance in production.
 
+:::tip Validated reference numbers
+For measured P50/P99 latency and error-rate figures from one-hour load tests on each release, see the [Performance benchmarks](./benchmarks/index.md) section. Useful as a comparison point when interpreting your own metrics.
+:::
+
 ### System-level
 
 | What to monitor | How |
