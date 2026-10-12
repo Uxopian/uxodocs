@@ -153,6 +153,8 @@ arender.server.wrapper.source.annotation.accessor=fileNetAnnotationAccessor
 arender.server.wrapper.source.annotation.accessor=xfdfFileNetAnnotationAccessor
 ```
 
+Annotations on FileNet documents can also be stored outside FileNet — in a SQL database, for instance. The same property selects that backend; see [JDBC annotation storage](../annotations/annotation-storage-jdbc.md).
+
 ### URL parameters
 
 The FileNet connector activates when a request contains `objectStoreName` or `objectStoreId`.
