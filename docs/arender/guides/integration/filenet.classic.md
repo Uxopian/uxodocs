@@ -53,7 +53,7 @@ The connector is included in the `-filenet` image variant of the ARender viewer.
 ```yaml title="docker-compose.yml"
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}-filenet
+    image: docker.uxopian.com/release/arender-ui-springboot:{{version}}-filenet
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
       - "ARENDERSRV_ARENDER_SERVER_FILENET_CE_URL=http://filenet-ce:9080/wsi/FNCEWS40MTOM/"

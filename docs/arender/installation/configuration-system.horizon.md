@@ -71,7 +71,7 @@ Mount override files into the container at `/home/arender/`:
 ```yaml title="docker-compose.yml"
 services:
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker
+    image: docker.uxopian.com/release/arender-document-service-broker
     volumes:
       - ./application.properties:/home/arender/application.properties
 ```

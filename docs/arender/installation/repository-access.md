@@ -8,16 +8,16 @@ sidebar_position: 7
 
 ARender artifacts are distributed through several channels, depending on whether you need an installer, a Maven library, the npm package or a Docker image.
 
-**Uxopian Cloudsmith is the current distribution channel for binaries and Maven libraries.** The former Arondor Artifactory Maven repository (`arondor-all`) is still online, but it is no longer the repository to use. If you are upgrading from a version older than 2023.12.0, replace your Artifactory Maven configuration with the Cloudsmith configuration below.
+**Uxopian Cloudsmith is the distribution channel for every ARender artifact** — binaries, Maven libraries, Docker images and the npm package. The former Arondor Artifactory repository is not available outside Uxopian: if you are upgrading from a version older than 2023.12.0, replace your Artifactory configuration with the Cloudsmith configuration below.
 
 | What you need | Channel | Credentials |
 |---|---|---|
 | Installers and application binaries | Cloudsmith `uxopian/release` | Cloudsmith user ID and API key |
 | Maven libraries (connector and API development) | Cloudsmith `uxopian/release` and `uxopian/herodevs-proxy` | Cloudsmith user ID and API key |
+| Docker images | Cloudsmith `uxopian/release` | Cloudsmith user ID and API key |
 | `arender-ui` npm package | Cloudsmith `uxopian/uxopian-public` | None — public registry |
-| Docker images | Artifactory `artifactory.arondor.cloud:5001` | Artifactory credentials |
 
-To request Cloudsmith access, contact the ARender Support Team at arender-support@uxopian.com.
+A single Cloudsmith account covers all of them. To request access, contact the ARender Support Team at arender-support@uxopian.com.
 
 ## Maven libraries
 
@@ -74,7 +74,11 @@ Both repositories require authentication. Add the following to your `settings.xm
 Replace **CLOUDSMITH_ID** with your Cloudsmith user ID and **CLOUDSMITH_TOKEN** with your Cloudsmith API key.
 
 :::note
-Use your Cloudsmith username without the leading `@` — `jane-doe`, not `@jane-doe`, which is rejected with a 401 error. Your email address is accepted as well. The API key is the value starting with `csa_`, not your account password.
+Use your Cloudsmith username without the leading `@` — `jane-doe`, not `@jane-doe`, which is rejected with a 401 error. Your email address is accepted as well. Authenticate with your API key, not your account password.
+:::
+
+:::note
+One API key covers every repository your Cloudsmith account can reach, so the same user ID and key work for `uxopian-release` and `uxopian-herodevs`. If you were issued per-repository entitlement tokens instead of an account API key, set the token matching each repository on its own `<server>`.
 :::
 
 :::note
@@ -88,8 +92,6 @@ Connector and API development that consumes these libraries is covered in the [i
 Installers and packaged applications — the Rendition engine installer, the Spring Boot WEB-UI package, the connector JARs and the API Javadoc — are published to the Cloudsmith `uxopian/release` repository and require the same Cloudsmith credentials as the Maven libraries.
 
 Per-version download links are listed in the release notes of each version, under the **Download** section. See the [ARender release notes](/release-note/arender/).
-
-Artifacts are available from Cloudsmith for 2023.20.0 and every later version. A few artifacts from earlier versions were never published there, so the download links on those release notes still resolve against Artifactory and ask for Artifactory credentials instead.
 
 ## npm package
 
@@ -109,16 +111,33 @@ The same registry also serves `@uxopian/arender-rendition-mcp`. The full integra
 
 ## Docker images
 
-Docker images are **not** distributed through Cloudsmith. They remain on the Arondor Artifactory Docker registry at `artifactory.arondor.cloud:5001`, which requires Artifactory credentials:
+Docker images are published to the Cloudsmith `uxopian/release` repository, served from the `docker.uxopian.com` registry. Authenticate with the same Cloudsmith user ID and API key as the Maven repositories:
 
 ```bash
-docker login artifactory.arondor.cloud:5001
+docker login docker.uxopian.com
 ```
 
-Contact your ARender administrator if you do not have an account. The image list is documented in [Docker Compose](./docker-compose.md).
+Images are then addressed as `docker.uxopian.com/release/<image>:<version>`:
 
-## Legacy Artifactory Maven repository
+```bash
+docker pull docker.uxopian.com/release/arender-ui-springboot:{{version}}
+```
 
-The Arondor Artifactory Maven repository at `https://artifactory.arondor.cloud/artifactory/arondor-all/` predates the Cloudsmith migration. It is still online, so existing builds do not break, but ARender libraries are published to Cloudsmith and new configurations should target Cloudsmith only.
+| Image | Role |
+|---|---|
+| `arender-ui-springboot` | Viewer WEB-UI. The `-alfresco` and `-filenet` tag suffixes ship the matching connector |
+| `arender-document-service-broker` | REST API gateway and orchestration |
+| `arender-document-converter` | Format conversion |
+| `arender-document-renderer-pdfowl` | Page rendering |
+| `arender-document-text-handler` | Text extraction |
+| `arender-alfresco-provider` | Alfresco provider (Horizon) |
+| `arender-filenet-provider` | FileNet provider (Horizon) |
+| `arender-mfiles-provider` | M-Files provider (Horizon) |
 
-If you maintain a build that still resolves against `arondor-all`, migrate it to the Cloudsmith `settings.xml` shown above. Should you need both repositories active during a transition, declare the `artifactory` and `cloudsmith` profiles side by side and list both in `<activeProfiles>`.
+Deployment manifests using these images are covered in [Docker Compose](./docker-compose.md).
+
+## Migrating from Artifactory
+
+Builds and deployments created before the Cloudsmith migration resolve against the Arondor Artifactory repository `arondor-all`, or pull images from `artifactory.arondor.cloud:5001`. Artifactory is internal to Uxopian and is not open to customers or partners, so a configuration still pointing at it cannot retrieve ARender artifacts.
+
+To migrate, replace the `arondor` server and the `artifactory` profile in your `~/.m2/settings.xml` with the Cloudsmith configuration shown above, remove `artifactory` from `<activeProfiles>`, and repoint your image references to `docker.uxopian.com/release/`.

@@ -152,48 +152,7 @@ Set up a Maven module with the ARender rendition API as a dependency. For a comp
 
 Use `provided` scope because the HMI application already includes the API at runtime. Refer to the [sample connector POM](https://github.com/arondor-connectors/sample-connectors/blob/master/arender-sample-v2023/arender-sample-hmi-connector-v2023/pom.xml) for a complete list of dependencies.
 
-ARender libraries are published to the Uxopian Cloudsmith Maven repositories. Add the following to your `~/.m2/settings.xml`:
-
-```xml title="~/.m2/settings.xml"
-<servers>
-  <server>
-    <id>uxopian-release</id>
-    <username>CLOUDSMITH_ID</username>
-    <password>CLOUDSMITH_TOKEN</password>
-  </server>
-  <server>
-    <id>uxopian-herodevs</id>
-    <username>CLOUDSMITH_ID</username>
-    <password>CLOUDSMITH_TOKEN</password>
-  </server>
-</servers>
-
-<profiles>
-  <profile>
-    <id>cloudsmith</id>
-    <repositories>
-      <repository>
-        <id>uxopian-release</id>
-        <url>https://dl.cloudsmith.io/basic/uxopian/release/maven/</url>
-      </repository>
-      <repository>
-        <id>uxopian-herodevs</id>
-        <url>https://dl.cloudsmith.io/basic/uxopian/herodevs-proxy/maven/</url>
-      </repository>
-    </repositories>
-  </profile>
-</profiles>
-
-<activeProfiles>
-  <activeProfile>cloudsmith</activeProfile>
-</activeProfiles>
-```
-
-Replace **CLOUDSMITH_ID** with your Cloudsmith user ID and **CLOUDSMITH_TOKEN** with your Cloudsmith API key. If you do not have Cloudsmith credentials, contact the ARender Support Team at arender-support@uxopian.com.
-
-:::note
-The former Arondor Artifactory Maven repository (`arondor-all`) is still online but is no longer the repository to use. See [Repository access](../../installation/repository-access.md) for the complete `settings.xml`, the other distribution channels and the migration path.
-:::
+ARender libraries are published to the Uxopian Cloudsmith Maven repositories. Declare the `uxopian-release` and `uxopian-herodevs` repositories in your `~/.m2/settings.xml` before building — see [Repository access](../../installation/repository-access.md#maven-libraries) for the configuration and the credentials.
 
 Package the connector as a fat JAR using the `maven-assembly-plugin`:
 
@@ -414,7 +373,7 @@ Mount the JAR into the container at `/home/arender/lib/`:
 ```yaml title="docker-compose.yml"
 services:
   arender-ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}
+    image: docker.uxopian.com/release/arender-ui-springboot:{{version}}
     volumes:
       - ./custom-connector-jar-with-dependencies.jar:/home/arender/lib/custom-connector-jar-with-dependencies.jar
       - ./arender-custom-server-integration.xml:/home/arender/configurations/arender-custom-server-integration.xml

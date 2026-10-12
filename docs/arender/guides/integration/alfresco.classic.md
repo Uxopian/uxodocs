@@ -52,7 +52,7 @@ The CMIS connector is included in the `-alfresco` image variant of the ARender v
 ```yaml title="docker-compose.yml"
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}-alfresco
+    image: docker.uxopian.com/release/arender-ui-springboot:{{version}}-alfresco
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
       - "ARENDERSRV_ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"

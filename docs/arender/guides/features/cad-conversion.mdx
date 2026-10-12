@@ -43,7 +43,7 @@ CADConverter is not bundled with ARender — it must be installed separately and
 
 ```yaml title="docker-compose.yml"
 document-converter:
-  image: artifactory.arondor.cloud:5001/arender-document-converter
+  image: docker.uxopian.com/release/arender-document-converter
   volumes:
     - /path/to/cadconverter:/opt/CadConverter
     - ./factories_custom.xml:/opt/arender/modules/TaskConversion/factories_custom.xml
@@ -80,7 +80,7 @@ Add `drawing/dwg` to the broker's conversion target list. The simplest approach 
 
 ```yaml title="docker-compose.yml"
 document-service-broker:
-  image: artifactory.arondor.cloud:5001/arender-document-service-broker
+  image: docker.uxopian.com/release/arender-document-service-broker
   environment:
     # Append drawing/dwg to the default conversionTargetMimeTypes list.
     # Copy the full default value from the broker's application.properties

@@ -54,14 +54,14 @@ The provider ships as a Docker image. Add it to your Docker Compose stack alongs
 ```yaml title="docker-compose.yml"
 services:
   alfresco-provider:
-    image: artifactory.arondor.cloud:5001/arender-alfresco-provider:{{version}}
+    image: docker.uxopian.com/release/arender-alfresco-provider:{{version}}
     environment:
       - "ARENDER_SERVER_ALFRESCO_ATOM_PUB_URL=http://alfresco:8080/alfresco/api/-default-/cmis/versions/1.1/atom"
     ports:
       - "8788:8788"
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
+    image: docker.uxopian.com/release/arender-document-service-broker:{{version}}
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"

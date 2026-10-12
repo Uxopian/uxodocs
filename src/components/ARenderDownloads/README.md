@@ -33,22 +33,17 @@ import ARenderDownloads from '@site/src/components/ARenderDownloads';
 The ARender version for which to generate the download links.
 Example : `"2023.15.0"`, `"2023.16.0"`, `"2023.17.0"`, etc.
 
-### `registry` (optional)
-Which repository the download links resolve against. Defaults to `"cloudsmith"`, the current
-distribution channel. Use `"artifactory"` only for versions whose artifacts were never published
-to Cloudsmith.
+### `filter` (optional)
+Restricts the list to the given item ids. Use it when a version does not have every artifact
+published.
 
-| Value | Base URL |
-|---|---|
-| `"cloudsmith"` (default) | `https://dl.cloudsmith.io/basic/uxopian/release/maven` |
-| `"artifactory"` | `https://artifactory.arondor.cloud/artifactory/arondor-release` |
+Links resolve against the Cloudsmith `uxopian/release` Maven repository
+(`https://dl.cloudsmith.io/basic/uxopian/release/maven`), which requires credentials, so the
+browser prompts for the Cloudsmith user ID and API key on download.
 
-Both registries require credentials, so the browser prompts for them on download. Cloudsmith
-expects the Cloudsmith username and API key; Artifactory expects the Artifactory user ID and key.
-
-`2023.18.1` is the one version pinned to `"artifactory"`: its rendition installer, FileNet
-connector, Client API and Rendition API are absent from Cloudsmith, while the same artifacts are
-present there from `2023.20.0` onwards.
+`2023.18.1` is the one version with an incomplete set: its rendition installer, FileNet connector,
+Client API and Rendition API are absent from Cloudsmith, so that page filters them out. Every
+version from `2023.20.0` onwards has the full set.
 
 ## Examples
 
@@ -57,9 +52,9 @@ present there from `2023.20.0` onwards.
 <ARenderDownloads version="2023.17.0" />
 ```
 
-### Pinning a version to Artifactory
+### Restricting to the artifacts actually published
 ```jsx
-<ARenderDownloads version="2023.18.1" registry="artifactory" />
+<ARenderDownloads version="2023.18.1" filter={["web-ui", "hmi-cm", "plugin-filenet", "plugin-alfresco", "plugin-alfresco-adf"]} />
 ```
 
 
@@ -90,7 +85,7 @@ Each item includes:
 ```mdx
 | Description                                                       | Binary                                                                                                                                                                                                | SHA-256                                                                                                                                                                                                     |
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ARender Rendition Server installer                                | [Download](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/micro/services/rendition-engine-installer/2023.17.0/rendition-engine-installer-2023.17.0-rendition.jar)  | [SHA-256](https://artifactory.arondor.cloud/artifactory/arondor-release/com/arondor/arender/micro/services/rendition-engine-installer/2023.17.0/rendition-engine-installer-2023.17.0-rendition.jar.sha256)  |
+| ARender Rendition Server installer                                | [Download](https://dl.cloudsmith.io/basic/uxopian/release/maven/com/arondor/arender/micro/services/rendition-engine-installer/2023.17.0/rendition-engine-installer-2023.17.0-rendition.jar)  | [SHA-256](https://dl.cloudsmith.io/basic/uxopian/release/maven/com/arondor/arender/micro/services/rendition-engine-installer/2023.17.0/rendition-engine-installer-2023.17.0-rendition.jar.sha256)  |
 ```
 
 ### After (React)

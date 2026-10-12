@@ -98,33 +98,33 @@ In a Docker Compose file, set environment variables under the `environment` key 
 ```yaml title="docker-compose.yml"
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot
+    image: docker.uxopian.com/release/arender-ui-springboot
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker
+    image: docker.uxopian.com/release/arender-document-service-broker
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-TEXT-HANDLER=8899"
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter
+    image: docker.uxopian.com/release/arender-document-converter
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
       - "DCV_APP_EUREKA_PORT=8761"
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl
+    image: docker.uxopian.com/release/arender-document-renderer-pdfowl
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
       - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
       - "DRN_EUREKA_SERVER_PORT=8761"
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler
+    image: docker.uxopian.com/release/arender-document-text-handler
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"

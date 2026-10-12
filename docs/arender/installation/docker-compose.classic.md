@@ -25,17 +25,17 @@ A full Classic deployment requires five containers:
 | Document Renderer | arender-document-renderer-pdfowl | 9091 | Page rendering |
 | Document Text Handler | arender-document-text-handler | 8899 | Text extraction |
 
-All images are available from `artifactory.arondor.cloud:5001`.
+All images are available from `docker.uxopian.com`.
 
 ## Prerequisites
 
 Log in to the ARender Docker registry before pulling images:
 
 ```bash
-docker login artifactory.arondor.cloud:5001
+docker login docker.uxopian.com
 ```
 
-Docker images are the one channel still served from Artifactory. Installers, Maven libraries and the npm package come from Cloudsmith — see [Repository access](./repository-access.md).
+All ARender artifacts — images, installers, Maven libraries and the npm package — are distributed through Cloudsmith. See [Repository access](./repository-access.md) for the registry, the credentials and the migration from Artifactory.
 
 ## Service discovery
 
@@ -46,14 +46,14 @@ In Docker Compose, the broker discovers microservices via static configuration. 
 ```yaml title="docker-compose.yml"
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}
+    image: docker.uxopian.com/release/arender-ui-springboot:{{version}}
     ports:
       - 8080:8080
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
+    image: docker.uxopian.com/release/arender-document-service-broker:{{version}}
     ports:
       - 8761:8761
     environment:
@@ -64,7 +64,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter:{{version}}
+    image: docker.uxopian.com/release/arender-document-converter:{{version}}
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
@@ -73,7 +73,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:{{version}}
+    image: docker.uxopian.com/release/arender-document-renderer-pdfowl:{{version}}
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
       - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -82,7 +82,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler:{{version}}
+    image: docker.uxopian.com/release/arender-document-text-handler:{{version}}
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"

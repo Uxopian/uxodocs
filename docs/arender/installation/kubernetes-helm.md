@@ -19,7 +19,7 @@ ARender provides Helm charts for deploying to Kubernetes. The chart creates depl
 - Helm 3.x
 - A storage class supporting ReadWriteMany (for the shared tmp volume)
 - Access to the Uxopian Helm repository
-- Docker registry authentication: run `docker login artifactory.arondor.cloud:5001` and create a Kubernetes image pull secret (see [Installation](#installation))
+- Docker registry authentication: run `docker login docker.uxopian.com` and create a Kubernetes image pull secret (see [Installation](#installation))
 
 ## Chart structure
 
@@ -35,14 +35,14 @@ Each sub-chart can also be installed standalone.
 ARender images are hosted on a private registry. Authenticate before pulling images:
 
 ```bash
-docker login artifactory.arondor.cloud:5001
+docker login docker.uxopian.com
 ```
 
 For Kubernetes, create an image pull secret so that nodes can pull the images:
 
 ```bash
 kubectl create secret docker-registry arender-registry \
-  --docker-server=artifactory.arondor.cloud:5001 \
+  --docker-server=docker.uxopian.com \
   --docker-username=<your-username> \
   --docker-password=<your-password> \
   --namespace arender
@@ -60,16 +60,16 @@ global:
 
 ```bash
 # Add the Helm repository
-helm repo add arondor https://artifactory.arondor.cloud/artifactory/ARenderHelmVirtual --username <your_user> --password <your_password>
+helm repo add uxopian https://dl.cloudsmith.io/basic/uxopian/release/helm/charts/ --username <your_user> --password <your_api_key>
 helm repo update
 
 # Install with default values
-helm install arender arender/arender \
+helm install arender uxopian/arender \
   --namespace arender \
   --create-namespace
 
 # Install with custom values
-helm install arender arender/arender \
+helm install arender uxopian/arender \
   --namespace arender \
   --create-namespace \
   -f my-values.yaml
@@ -98,7 +98,7 @@ rendition:
       maxReplicas: 3
       cpuLimit: 80
     image:
-      repository: artifactory.arondor.cloud:5001/arender-document-service-broker
+      repository: docker.uxopian.com/release/arender-document-service-broker
       pullPolicy: IfNotPresent
   converter:
     replicaCount: 1
@@ -107,7 +107,7 @@ rendition:
       maxReplicas: 3
       cpuLimit: 80
     image:
-      repository: artifactory.arondor.cloud:5001/arender-document-converter
+      repository: docker.uxopian.com/release/arender-document-converter
 
   handler:
     replicaCount: 1
@@ -116,7 +116,7 @@ rendition:
       maxReplicas: 3
       cpuLimit: 80
     image:
-      repository: artifactory.arondor.cloud:5001/arender-document-text-handler
+      repository: docker.uxopian.com/release/arender-document-text-handler
 
   renderer:
     replicaCount: 1
@@ -125,7 +125,7 @@ rendition:
       maxReplicas: 3
       cpuLimit: 80
     image:
-      repository: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl
+      repository: docker.uxopian.com/release/arender-document-renderer-pdfowl
 ```
 
 Resources are not set by default. Set them according to your workload:
@@ -176,7 +176,7 @@ viewer:
     maxReplicas: 1
     cpuLimit: 80
   image:
-    repository: artifactory.arondor.cloud:5001/arender-ui-springboot
+    repository: docker.uxopian.com/release/arender-ui-springboot
   rendition:
     hosts: []    # List of rendition broker URLs
   profiles:
@@ -282,7 +282,7 @@ rendition:
 ## Upgrade
 
 ```bash
-helm upgrade arender arender/arender \
+helm upgrade arender uxopian/arender \
   --namespace arender \
   -f my-values.yaml
 ```

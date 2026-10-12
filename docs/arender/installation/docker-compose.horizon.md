@@ -23,10 +23,10 @@ This guide assumes the React viewer is already integrated. If not, follow [Getti
 Log in to the ARender Docker registry. Docker will use these credentials to pull the ARender images when you start the stack in Step 4:
 
 ```bash
-docker login artifactory.arondor.cloud:5001
+docker login docker.uxopian.com
 ```
 
-Docker images are the one channel still served from Artifactory. Installers, Maven libraries and the `arender-ui` npm package come from Cloudsmith — see [Repository access](./repository-access.md).
+All ARender artifacts — images, installers, Maven libraries and the `arender-ui` npm package — are distributed through Cloudsmith. See [Repository access](./repository-access.md) for the registry, the credentials and the migration from Artifactory.
 
 ## Step 1 — Set up the rendition backend
 
@@ -45,7 +45,7 @@ Create a `docker-compose.yml` file with the following content. Each microservice
 ```yaml title="docker-compose.yml"
 services:
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
+    image: docker.uxopian.com/release/arender-document-service-broker:{{version}}
     ports:
       - 8761:8761
     environment:
@@ -56,7 +56,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter:{{version}}
+    image: docker.uxopian.com/release/arender-document-converter:{{version}}
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
@@ -65,7 +65,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:{{version}}
+    image: docker.uxopian.com/release/arender-document-renderer-pdfowl:{{version}}
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
       - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -74,7 +74,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler:{{version}}
+    image: docker.uxopian.com/release/arender-document-text-handler:{{version}}
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -211,7 +211,7 @@ services:
       - "REGISTRY_PROVIDERS_ALFRESCO_BASE_URL=http://alfresco-provider:8788"
 
   alfresco-provider:
-    image: artifactory.arondor.cloud:5001/arender-alfresco-provider:{{version}}
+    image: docker.uxopian.com/release/arender-alfresco-provider:{{version}}
     ports:
       - 8788:8788
     environment:

@@ -17,7 +17,7 @@ The installation guides cover deploying the ARender rendition backend on your ow
 
 These guides assume the React viewer is already embedded in your application. If not, follow [Getting Started](../quickstart/getting-started.md), then return here.
 
-You also need access to the repositories that host the ARender artifacts. [Repository access](./repository-access.md) lists the channels — Cloudsmith for binaries and Maven libraries, Artifactory for Docker images — and how to request credentials.
+You also need access to the Cloudsmith repositories that host the ARender artifacts. [Repository access](./repository-access.md) lists the channels — images, installers, Maven libraries and the npm package — and how to request credentials.
 
 
 ## Choose your deployment path

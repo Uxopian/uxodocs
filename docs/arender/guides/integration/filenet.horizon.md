@@ -58,7 +58,7 @@ The provider ships as a Docker image. Add it to your Docker Compose stack alongs
 ```yaml title="docker-compose.yml"
 services:
   filenet-provider:
-    image: artifactory.arondor.cloud:5001/arender-filenet-provider:{{version}}
+    image: docker.uxopian.com/release/arender-filenet-provider:{{version}}
     environment:
       - "ARENDER_SERVER_FILENET_AUTHENTICATION_METHOD=loginPasswordObjectStoreProvider"
       - "ARENDER_SERVER_FILENET_CE_URL=http://filenet-ce:9080/wsi/FNCEWS40MTOM/"
@@ -68,7 +68,7 @@ services:
       - "8787:8787"
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
+    image: docker.uxopian.com/release/arender-document-service-broker:{{version}}
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"

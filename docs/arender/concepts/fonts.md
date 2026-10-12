@@ -143,7 +143,7 @@ The images have no `modules/` layout and none of them creates a font directory, 
 ```yaml title="docker-compose.yml"
 services:
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter
+    image: docker.uxopian.com/release/arender-document-converter
     volumes:
       - ./fonts:/arender/fonts:ro
     environment:

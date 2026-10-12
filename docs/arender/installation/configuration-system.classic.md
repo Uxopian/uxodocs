@@ -72,7 +72,7 @@ Mount override files into the container at `/home/arender/`:
 ```yaml title="docker-compose.yml"
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot
+    image: docker.uxopian.com/release/arender-ui-springboot
     volumes:
       - ./application.properties:/home/arender/application.properties
 ```

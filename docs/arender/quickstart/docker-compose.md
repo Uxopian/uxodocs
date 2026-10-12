@@ -17,17 +17,15 @@ Get ARender running locally using Docker Compose. This guide takes about 5 minut
 
 - Docker Engine 20.10+ and Docker Compose v2
 - At least 8 GB of available RAM
-- Access to the Uxopian Docker registry (`artifactory.arondor.cloud:5001`)
+- Access to the Uxopian Docker registry (`docker.uxopian.com`)
 
 Log in to the ARender Docker registry:
 
 ```bash
-docker login artifactory.arondor.cloud:5001
+docker login docker.uxopian.com
 ```
 
-You will be prompted for your Artifactory credentials. Contact your ARender administrator if you do not have an account.
-
-Docker images are the one channel still served from Artifactory. Installers, Maven libraries and the npm package come from Cloudsmith — see [Repository access](../installation/repository-access.md).
+You will be prompted for your Cloudsmith user ID and API key. All ARender artifacts — images, installers, Maven libraries and the npm package — are distributed through Cloudsmith; see [Repository access](../installation/repository-access.md) for how to request access.
 
 ## Start the services
 
@@ -36,14 +34,14 @@ Create a `docker-compose.yml` file:
 ```yaml title="docker-compose.yml"
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}
+    image: docker.uxopian.com/release/arender-ui-springboot:{{version}}
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
     ports:
       - 8080:8080
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
+    image: docker.uxopian.com/release/arender-document-service-broker:{{version}}
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
@@ -54,7 +52,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-converter:
-    image: artifactory.arondor.cloud:5001/arender-document-converter:{{version}}
+    image: docker.uxopian.com/release/arender-document-converter:{{version}}
     environment:
       - "DCV_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-converter"
       - "DCV_APP_EUREKA_HOSTNAME=service-broker"
@@ -63,7 +61,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-renderer:
-    image: artifactory.arondor.cloud:5001/arender-document-renderer-pdfowl:{{version}}
+    image: docker.uxopian.com/release/arender-document-renderer-pdfowl:{{version}}
     environment:
       - "DRN_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-renderer"
       - "DRN_EUREKA_INSTANCE_HOSTNAME=service-broker"
@@ -72,7 +70,7 @@ services:
       - arender-tmp:/arender/tmp
 
   document-text-handler:
-    image: artifactory.arondor.cloud:5001/arender-document-text-handler:{{version}}
+    image: docker.uxopian.com/release/arender-document-text-handler:{{version}}
     environment:
       - "DTH_EUREKA_INSTANCE_METADATA.MAP_HOST.NAME=document-text-handler"
       - "DTH_EUREKA_INSTANCE_HOSTNAME=service-broker"

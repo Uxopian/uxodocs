@@ -91,7 +91,7 @@ For Docker-based deployments, mount the connector JAR and configuration files as
 # docker-compose.yml excerpt
 services:
   ui:
-    image: artifactory.arondor.cloud:5001/arender-ui-springboot:{{version}}
+    image: docker.uxopian.com/release/arender-ui-springboot:{{version}}
     environment:
       - "ARENDERSRV_ARENDER_SERVER_RENDITION_HOSTS=http://service-broker:8761/"
     volumes:

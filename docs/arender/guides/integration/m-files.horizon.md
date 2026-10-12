@@ -55,7 +55,7 @@ The provider ships as a Docker image. Add it to your Docker Compose stack alongs
 ```yaml title="docker-compose.yml"
 services:
   mfiles-provider:
-    image: artifactory.arondor.cloud:5001/arender-mfiles-provider:{{version}}
+    image: docker.uxopian.com/release/arender-mfiles-provider:{{version}}
     environment:
       - "ARENDER_SERVER_MFILES_WEB_URL=http://m-files-host/REST/"
       - "ARENDER_SERVER_MFILES_AUTHENTICATION_TOKEN=<m-files-rest-api-token>"
@@ -63,7 +63,7 @@ services:
       - "8789:8789"
 
   service-broker:
-    image: artifactory.arondor.cloud:5001/arender-document-service-broker:{{version}}
+    image: docker.uxopian.com/release/arender-document-service-broker:{{version}}
     environment:
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-CONVERTER=19999"
       - "DSB_KUBEPROVIDER_KUBE.HOSTS_DOCUMENT-RENDERER=9091"
