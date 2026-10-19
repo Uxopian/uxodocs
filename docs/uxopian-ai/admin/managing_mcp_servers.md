@@ -1,11 +1,11 @@
 ---
 title: Managing MCP servers in the admin UI
 last_update:
-  date: '2026-04-21T08:21:12.539Z'
+  date: '2026-10-19T18:21:35.722Z'
   author: CI/CD Bot
 sidebar_label: MCP servers
 sidebar_position: 6
-content_hash: d4f4980db0a72a52169c52c6e7d7f78e19dff30ee1cec5fac7bbf935fd84e9c3
+content_hash: 18280fa4a5d71110e2b995f69bb86caa777cd6b03bd854a43b89877392699964
 ---
 
 The MCP Servers section of the admin panel lets you register, test, and enable [Model Context Protocol](https://modelcontextprotocol.io) servers at runtime, without editing `mcp-server.yml` or restarting the application. Tools exposed by an enabled MCP server are merged with the local tool registry and become callable by the LLM like any other tool.
@@ -34,7 +34,7 @@ In the admin panel, click *MCP Servers* in the navigation. The page lists all MC
 
 | Field | Description |
 |---|---|
-| Name | Human-readable identifier for this configuration (unique per tenant). |
+| Name | Identifier of this configuration, unique per tenant: it is the configuration's ID and cannot change after creation. A name already used is reported while you type. |
 | URL | MCP server endpoint (e.g. `https://mcp.example.com/sse` for SSE). |
 | Transport type | Transport protocol. `SSE` is the default and currently supported value. |
 | Enabled | When off, the configuration is stored but not opened — use it as a draft or to temporarily disconnect without losing settings. |
@@ -78,7 +78,7 @@ Request body schema (`McpConf`):
 
 ```json
 {
-  "name": "openai-mcp",
+  "id": "openai-mcp",
   "url": "https://mcp.example.com/sse",
   "transportType": "SSE",
   "enabled": true,

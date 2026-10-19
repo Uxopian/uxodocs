@@ -1,11 +1,11 @@
 ---
 title: Managing scripts in the admin UI
 last_update:
-  date: '2026-08-13T13:08:15.927Z'
+  date: '2026-10-19T18:21:35.722Z'
   author: CI/CD Bot
 sidebar_label: Scripts
 sidebar_position: 7
-content_hash: e07cd5398e68891deed89f14a26270539398170c15ae4715e9527255f16a50b0
+content_hash: aa64d06bf2b9d59d7bb2919f077f58503e392f97335cf3c4a788140bfae17ab7
 ---
 
 The **Scripts** section of the admin panel lets administrators author and deploy custom front-end JavaScript through a governed lifecycle that includes an **LLM-based security scan**. A typical use is the host connector that wires [Quick Prompt](../understanding/quick_prompt.md) into a business application: instead of hand-deploying a static `.js` file, the connector is authored in the admin panel, scanned, and served by uxopian-ai to authenticated users.
@@ -20,7 +20,7 @@ Scripts are managed per tenant. Changes take effect without restarting the appli
 
 ```mermaid
 flowchart LR
-    Create["Create<br/>(name only)"]
+    Create["Create<br/>(id only)"]
     Draft["Edit draft<br/>content"]
     Scan["Scan & publish"]
     Certified["Certified →<br/>auto-published"]
@@ -46,7 +46,7 @@ A script always has two faces:
 ## Create a script
 
 1. In the admin panel, open **Scripts** and click **New Script**.
-2. Enter a **name**. The name becomes the script's immutable **ID** and may contain only letters, digits, `_`, and `-`. Creation fails with a conflict if the name is already used.
+2. Enter a **name**. The name is the script's **ID**: it is immutable and may contain only letters, digits, `_`, and `-`. A name already used by another script is reported while you type, and Save is refused.
 3. Save. The script is created empty; add its content on the detail page.
 
 ## Edit a script
@@ -115,7 +115,8 @@ To load a deployed script in a host page:
 |---|---|---|
 | `GET` | `/api/v1/admin/scripts` | List scripts with full metadata |
 | `GET` | `/api/v1/admin/scripts/{id}` | Get a script by ID |
-| `POST` | `/api/v1/admin/scripts` | Create a script (name only; `409` if the name exists) |
+| `GET` | `/api/v1/admin/scripts/availability?id={id}` | Whether a new script can take this ID (`true` / `false`) |
+| `POST` | `/api/v1/admin/scripts` | Create a script from its ID only — body `{"id": "my-script"}`; `409` if the ID exists |
 | `PUT` | `/api/v1/admin/scripts/{id}` | Update the draft content |
 | `POST` | `/api/v1/admin/scripts/{id}/scan` | Run the security scan |
 | `POST` | `/api/v1/admin/scripts/{id}/publish` | Publish a certified draft |
