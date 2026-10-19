@@ -32,6 +32,14 @@ The Horizon API counts pages from zero, same as the backend itself — only the 
 | `getDocumentLayout().getDocumentLayout(documentId, onLayout, onError)` | `getDocumentLayout(documentId?)` — synchronous, no callbacks |
 | `getDocumentMetadata().getDocumentMetadata(documentId, handler)` | `getDocumentMetadata(documentId?)` |
 
+## Panels (multi-view)
+
+| Classic call | Horizon |
+|---|---|
+| `getScreenSplitJSAPI().askOpenAsNewDocument(documentId)` | `openView(documentId)` — resolves with the new panel's `viewId` |
+| `getDocumentCompareJSAPI().closeAllMultiView()` | `closeView(viewId)` for every panel but one, read from `getViews()` |
+| `registerCloseMultiView(cb)` | `on('view.closed', cb)` — multi-view has ended when `getViews().length === 1` |
+
 ## Search commands
 
 | Classic call | Horizon |
@@ -55,7 +63,7 @@ The Horizon API counts pages from zero, same as the backend itself — only the 
 
 | Classic call | Horizon |
 |---|---|
-| `annotjs.addAnnotation(documentId, type, x, y, w, h, page, color, opacity)` (0-based) | `annotations.create({page, type, x, y, width, height, color, opacity})` |
+| `annotjs.addAnnotation(documentId, type, x, y, w, h, page, color, opacity)` (0-based) | `annotations.create({documentId, page, type, x, y, width, height, color, opacity})` — `documentId` is optional, and must be displayed in a panel |
 | `annotjs.refresh()` | `annotations.refresh(documentId?)` |
 | `annotjs.registerNotifyAnnotationAddedEvent(cb)` | `on('annotations.created', cb)` |
 | `annotjs.registerNotifyAnnotationUpdatedEvent(cb)` | `on('annotations.updated', cb)` |
