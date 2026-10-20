@@ -15,18 +15,62 @@ This type of popup opens a search form in a popup.
 
 To open a search form in a popup, the following parameters are required as string:
 
-- `category` : Category to be searched
+- `category` : Category to be searched (`DOCUMENT`, `FOLDER`, `VIRTUAL_FOLDER` or `TASK`)
 - `template` : Name of template to be used for search
 
-The `callback` parameter can also be added, but is optional. It allows you to select a component that can, for example, be added as an attachment to a task.
+The `callback` parameter is optional. It makes the popup a selection popup: the components chosen by the user are returned to the callback, for example to add them as attachments to a task. Opening a result from the table is then disabled. Without a callback, the popup is a plain search form.
+
+Two functions build the popup, depending on how many components the user may select:
+
+| Function                                                                         | Selection | Callback                                    |
+| -------------------------------------------------------------------------------- | --------- | ------------------------------------------- |
+| `buildSearchToSelectUnique(String category, String template, Callback callback)`   | One       | `function (component)`: a `ComponentWrapper`  |
+| `buildSearchToSelectMultiple(String category, String template, Callback callback)` | Several   | `function (components)`: a `ComponentWrapper[]` |
+
+Both functions return the popup, which is displayed with `show()`.
+
+## Select one component
+
+The user selects one result and validates: the callback receives the selected component.
 
 ```javascript
-popup = JSAPI.get()
+var popup = JSAPI.get()
     .getPopupAPI()
-    .buildSearch(category, template, function (component) {
+    .buildSearchToSelectUnique(category, template, function (component) {
         console.log("Selected component id=" + component.getId());
     });
+popup.show();
 ```
+
+## Select several components
+
+The results table displays a checkbox on each row. The user checks the results and validates: the callback receives every selected component.
+
+```javascript
+var popup = JSAPI.get()
+    .getPopupAPI()
+    .buildSearchToSelectMultiple(category, template, function (components) {
+        components.forEach(function (component) {
+            console.log("Selected component id=" + component.getId());
+        });
+    });
+popup.show();
+```
+
+The selection is kept while the user moves on to new result pages of the same search, so results checked on several pages are all returned.
+
+:::caution Known issue
+Coming back to a result page already visited shows its results unchecked, and the selection made on that page is not kept. Check those results again before validating.
+:::
+ The checkbox in the table header only selects the results of the current page. Starting a new search, or changing the criteria or the sort, clears the selection.
+
+If the user validates without selecting anything, a warning is displayed and the callback is not called.
+
+## Deprecated function
+
+:::warning
+`buildSearch(String category, String template, Callback callback)` is deprecated and will be removed in the next major release. Use `buildSearchToSelectUnique`, which has the same signature and the same behaviour.
+:::
 
 <br/>
 
