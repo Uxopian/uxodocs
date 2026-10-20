@@ -214,15 +214,72 @@ Each criterion must declare a `type` and an `operator`. The available operators 
 
 | Type | Description | Available operators |
 |------|-------------|-------------------|
-| `STRING` | Text field | `CONTAINS`, `EQUALS_TO`, `STARTS_WITH`, `ENDS_WITH`, `DIFFERENT` |
-| `TIMESTAMP` | Date picker | `BETWEEN` |
+| `STRING` | Text field | `CONTAINS`, `NOT_CONTAINS`, `EQUALS_TO`, `STARTS_WITH`, `ENDS_WITH`, `DIFFERENT`, `EMPTY`, `NOT_EMPTY` |
+| `TIMESTAMP` | Date picker | `BETWEEN`, `EMPTY`, `NOT_EMPTY` |
 | `BOOLEAN` | Checkbox | `EQUALS_TO` |
-| `INTEGER` | Numeric field | `EQUALS_TO`, `LESS_THAN`, `GREATER_THAN`, `DIFFERENT` |
-| `CURRENCY` | Currency field | `EQUALS_TO`, `LESS_THAN`, `GREATER_THAN`, `DIFFERENT` |
+| `INTEGER` | Numeric field | `EQUALS_TO`, `LESS_THAN`, `GREATER_THAN`, `DIFFERENT`, `EMPTY`, `NOT_EMPTY` |
+| `CURRENCY` | Currency field | `EQUALS_TO`, `LESS_THAN`, `GREATER_THAN`, `DIFFERENT`, `EMPTY`, `NOT_EMPTY` |
 
 :::info
-For choice list tags and conditional tags, the available operators are `EQUALS_TO` and `DIFFERENT`.
+For choice list tags and conditional tags, the available operators are `EQUALS_TO`, `DIFFERENT`, `EMPTY` and `NOT_EMPTY`.
 :::
+
+The operators are displayed in the search form with the following labels:
+
+| Operator | Label | Value |
+|----------|-------|-------|
+| `EQUALS_TO` | equals to | Required |
+| `DIFFERENT` | different from | Required |
+| `CONTAINS` | contains | Required |
+| `NOT_CONTAINS` | does not contain | Required |
+| `STARTS_WITH` | starts with | Required |
+| `ENDS_WITH` | ends with | Required |
+| `LESS_THAN` | less than or equal to | Required |
+| `GREATER_THAN` | greater than or equal to | Required |
+| `BETWEEN` | between | Required |
+| `EMPTY` | is empty | None |
+| `NOT_EMPTY` | is not empty | None |
+
+`NOT_CONTAINS` returns the components whose value does not hold the text entered. Components that have no value for the field are returned too.
+
+##### Operators without a value
+
+`EMPTY` and `NOT_EMPTY` take no value: when the user selects one of them, the value field is hidden and replaced by the hint *No value required*, and any value already entered is removed from the criterion.
+
+* `NOT_EMPTY` returns the components that hold a value for the field.
+* `EMPTY` on a tag returns the components whose class declares the tag and which hold no value for it, including components created before the tag was added to their class. A component whose class does not declare the tag is never returned. The classes considered are those of the searched category: a document search only looks at document classes.
+
+##### Content criterion
+
+The `content` criterion searches the text extracted from the document files. It offers `CONTAINS`, `NOT_CONTAINS`, `EQUALS_TO`, `EMPTY` and `NOT_EMPTY`:
+
+| Operator | Returns |
+|----------|---------|
+| `CONTAINS` | Documents whose text holds the value |
+| `NOT_CONTAINS` | Documents whose text does not hold the value, including documents with no indexed text |
+| `EQUALS_TO` | Documents whose text holds the value as an exact phrase |
+| `EMPTY` | Documents with no indexed text: documents without a file, or whose text extraction has not run |
+| `NOT_EMPTY` | Documents with indexed text |
+
+The value is searched as typed, punctuation included: quotes, hyphens, slashes, `@` or `%` are looked for in the text like any other character. Wrapping the value in double quotes does not request an exact phrase: with `CONTAINS`, `"dossier Bidule"` only returns the documents whose text holds the quotes. To search for an exact phrase, select `EQUALS_TO` and type the phrase without quotes.
+
+:::info
+The keyword search does not use operators. It applies the same rule to the content: punctuation and quotes are searched as typed.
+:::
+
+##### Hiding the operators a connector does not support
+
+A custom connector may not support `NOT_CONTAINS`, `EMPTY` and `NOT_EMPTY`. To remove **does not contain**, **is empty** and **is not empty** from every search form (documents, folders, virtual folders and tasks), including the content criterion and the administration search editors, add the following property to the `gui.properties` file:
+
+```properties
+gui.search.operators.restricted=true
+```
+
+The default value is `false`. The property only changes what the interface offers: requests sent through the APIs reach the connector unchanged.
+
+##### Operators in the administration search editors
+
+In the administration screens that edit a search, such as the searches of a virtual folder class or the filters of an operation handler, a criterion on `classid`, on a choice list, free list or conditional tag, or on an identity is stored as a `STRING` criterion. It therefore offers the full `STRING` operator list, and its value can be typed freely, for example `STARTS_WITH` with the beginning of a class identifier. Such a criterion opens on `EQUALS_TO`. The end-user search forms keep the lists above.
 
 #### Examples
 
