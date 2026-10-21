@@ -12,6 +12,10 @@ content_hash: c2150ee31aa25b2ec6dbd36c9ce75555adb18bd7916678e58389ff483301bb7d
 
 When reaching the Fast2 UI for the first time, you will be prompted to create an account.
 
+:::tip[Automated deployments]
+To create this first account without the UI, for example from a CI pipeline or a Kubernetes job, see [Provision Fast2 from a script](../cookbooks/provision-fast2-by-script.md).
+:::
+
 <img src={require('../assets/img/authentication/registration_page.png').default} alt="Fast2 account registration page" style={{width:'100%',maxWidth:'600px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />
 
 To create a new account in Fast2, follow these steps:
@@ -24,7 +28,7 @@ To create a new account in Fast2, follow these steps:
    : **Confirm Password**: Re-enter the same password to confirm it matches.
 
 2. **Review the Password Guidelines**:
-   : **Ensure your password meets the security requirements**: At least 8 characters long and maximum 16 characters long.
+   : **Ensure your password meets the security requirements**: 8 to 20 characters, with at least one uppercase letter, one lowercase letter, one digit and one special character.
 
 3. **Submit Your Information**:
    : Click on the "Creating my account" button to complete the registration.
