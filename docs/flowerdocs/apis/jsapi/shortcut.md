@@ -93,7 +93,7 @@ The contextual menu is rebuilt each time the user changes the selection. The `ap
 - `getSelected()` and `getCategory()` keep returning the selection of that menu, even when they are called later, for example in an asynchronous callback.
 - Once the user has changed the selection and another menu is being built, `add` and `remove` called on this `api` are ignored. An action computed asynchronously for a previous selection is therefore never added to the current menu.
 
-Scripts calling `ContextualMenuAPI.get()` instead of using the `api` received keep their previous behaviour: `getSelected()` returns the selection of the latest menu.
+`ContextualMenuAPI.get().getSelected()` returns the selection of the latest menu: use the `api` received by the callback to work on the selection of the menu it was called for.
 
 ### Hide an action
 
@@ -172,4 +172,4 @@ Hiding an action does not remove the corresponding permission: it only changes w
 
 If the user selects tasks from the same class and these have responses, these responses will be displayed as actions in the `answers` group of the contextual menu.
 
-To hide some or all of these responses, register a callback with `registerForActionDisplayResolution` as shown above. Do not override the `registerToAddAnswersInTaskContextualMenu` function: a script overriding it replaces the product script and no longer receives its changes on upgrade. Scripts overriding it to hide responses should move to `registerForActionDisplayResolution`.
+To hide some or all of these responses, register a callback with `registerForActionDisplayResolution` as shown above. Do not override the `registerToAddAnswersInTaskContextualMenu` function: a script overriding it replaces the product script.
