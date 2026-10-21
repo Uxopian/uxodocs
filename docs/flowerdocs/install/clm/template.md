@@ -75,4 +75,4 @@ To do this, simply add the following parameters to the command line sent to the 
 
 ## Administration role teams
 
-The `scope.xml` file of the default template declares the six administration role teams (`RECOVERYBIN_MANAGER`, `USERS_MANAGER`, `SECURITY_ADMIN`, `DELEGATION_MANAGER`, `TEMPLATE_MANAGER` and `FUNCTIONAL_ADMIN`) with no members. A scope created before these teams existed does not receive them: see [Administration roles](/docs/flowerdocs/concepts/securite/administration-roles#existing-scopes) to add them.
+The `scope.xml` file of the default template declares the six administration role teams (`RECOVERYBIN_MANAGER`, `USERS_MANAGER`, `SECURITY_ADMIN`, `DELEGATION_MANAGER`, `TEMPLATE_MANAGER` and `FUNCTIONAL_ADMIN`) with no members. To add them to a scope that does not declare them, see [Administration roles](/docs/flowerdocs/concepts/securite/administration-roles#adding-the-role-teams-to-a-scope).

@@ -149,9 +149,9 @@ The template also carries the ACLs these roles rely on:
 - `acl-template-administration` on the `Template` class
 - the stamp template rules of the `acl-preferences` proxy
 
-### Existing scopes
+### Adding the role teams to a scope
 
-An existing scope does not receive the role teams. Add the teams you want to use, with these identifiers:
+A scope holds only the role teams its definition declares. Add the teams you want to use, with these identifiers:
 
 - `RECOVERYBIN_MANAGER`
 - `USERS_MANAGER`
