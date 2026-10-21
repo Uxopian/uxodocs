@@ -61,7 +61,7 @@ curl -X POST "$FAST2_URL/api/users/register-super-admin" \
 | -----: | ----------------------------------------------------------------------------------------------------------------------------- |
 |    200 | Created. The response describes the account (no password).                                                                    |
 |    400 | A required field is missing, the role is not `SUPER_ADMIN`, or the password does not meet the policy. The message says which. |
-|    500 | A super admin already exists.                                                                                                 |
+|    409 | A super admin already exists.                                                                                                 |
 
 There is no configuration property to create this account: the request must carry everything. To keep the script safe to re-run, check `super-admin-exists` first and call this endpoint only when it answers `false`.
 
