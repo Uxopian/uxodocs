@@ -49,7 +49,7 @@ Coming from the Classic viewer's `arender.jsapi.*`? See [Migration from Classic]
 
 `goToPage` is bounded by the document on screen, not the whole set: inside a container, each document has its own page numbering.
 
-`goToDocument` refuses with `NOT_FOUND` an identifier outside the open set, and with `UNSUPPORTED` a container that holds no document.
+`goToDocument` refuses with `NOT_FOUND` an identifier outside the open set, with `UNSUPPORTED` a container that holds no document, and with `NOT_READY` a container whose first document is still being converted. A failed document is skipped: a mail whose body could not be converted displays its first attachment.
 
 **Example: walk a container**
 
