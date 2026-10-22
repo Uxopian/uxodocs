@@ -85,15 +85,14 @@ ContextualMenuAPI.get().registerForLoad(function(api){
 	});
 });
 ```
-
 ### Menu built for a selection
 
-The contextual menu is rebuilt each time the user changes the selection. The `api` received by a `registerForLoad` callback is bound to the menu it was called for:
+The contextual menu is rebuilt each time the user changes the selection. The `api` received by a `registerForLoad` callback is bound to the menu it was called for: 
+- `getSelected()` and `getCategory()` return the selection of that specific menu, even when they are called later, for example in an asynchronous callback. 
+- Once the selection changes, another menu is being built, `add` and `remove` on a previous `api` are ignored.  An action computed asynchronously for a previous selection is therefore never added to the current menu.
 
-- `getSelected()` and `getCategory()` keep returning the selection of that menu, even when they are called later, for example in an asynchronous callback.
-- Once the user has changed the selection and another menu is being built, `add` and `remove` called on this `api` are ignored. An action computed asynchronously for a previous selection is therefore never added to the current menu.
+`ContextualMenuAPI.get().getSelected()` returns the selection of the latest menu. Use `api.getSelected()` inside the callback to work on the selection the menu was built for.
 
-`ContextualMenuAPI.get().getSelected()` returns the selection of the latest menu: use the `api` received by the callback to work on the selection of the menu it was called for.
 
 ### Hide an action
 
@@ -110,7 +109,7 @@ The contextual menu is rebuilt each time the user changes the selection. The `ap
 | `getIcon()`           | Icon of the action                  |
 | `getLabel()`          | Label of the action                 |
 
-The decision is given with `callback.onSuccess(value)`:
+The decision is given with the `value` passed in `callback.onSuccess(value)`:
 
 - `false` hides the action
 - any other value, `true` or `undefined`, leaves the decision to FlowerDocs: the action is displayed if the user is allowed to use it
@@ -123,7 +122,6 @@ ContextualMenuAPI.get().registerForActionDisplayResolution(function (api, action
 		callback.onSuccess(undefined);
 		return;
 	}
-
 	// The "Reassign" answer is only displayed for a single task
 	callback.onSuccess(api.getSelected().length == 1);
 });
@@ -167,9 +165,3 @@ ContextualMenuAPI.get().registerForActionDisplayResolution(function (api, action
 :::warning
 Hiding an action does not remove the corresponding permission: it only changes what is displayed. Restrict what a user may do with ACLs.
 :::
-
-### Responses to a task
-
-If the user selects tasks from the same class and these have responses, these responses will be displayed as actions in the `answers` group of the contextual menu.
-
-To hide some or all of these responses, register a callback with `registerForActionDisplayResolution` as shown above. Do not override the `registerToAddAnswersInTaskContextualMenu` function: a script overriding it replaces the product script.
