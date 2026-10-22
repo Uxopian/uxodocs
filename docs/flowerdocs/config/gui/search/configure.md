@@ -244,16 +244,6 @@ For choice list tags and conditional tags, the available operators are `EQUALS_T
 `EMPTY` and `NOT_EMPTY` take no value: when selected, the value field is hidden and replaced by *No value required*, and any value already entered is removed. `EMPTY` returns components whose class declares the tag and which hold no value for it — including components created before the tag was added to their class. A component whose class does not declare the tag is never returned.
 :::
 
-##### Hiding the operators a connector does not support
-
-A custom connector may not support `NOT_CONTAINS`, `EMPTY` and `NOT_EMPTY`. To remove **does not contain**, **is empty** and **is not empty** from every search form (documents, folders, virtual folders and tasks), including the content criterion and the administration search editors, add the following property to the `gui.properties` file:
-
-```properties
-gui.search.operators.restricted=true
-```
-
-The default value is `false`. The property only changes what the interface offers: requests sent through the APIs reach the connector unchanged.
-
 #### Examples
 
 Only `name`, `type`, and `operator` change between criterion types -- see the types table above for valid combinations.

@@ -38,10 +38,4 @@ This section describes the various FlowerDocs GUI configurations to be defined i
 | ----------- | ------------------------------------------------- |
 | redis.nodes | Addresses of the various Redis separated by a `,` |
 
-## Search
-
-| Property                        | Description |
-| ------------------------------- | ----------- |
-| gui.search.operators.restricted | Hides the **does not contain**, **is empty** and **is not empty** operators from every search, for a custom connector that does not support them (default: `false`). See [Criterion types and operators](/docs/flowerdocs/config/gui/search/configure#criterion-types-and-operators) |
-
 It is not recommended to modify Arender properties by setting parameters in the `gui.properties` file. Properties that are not defined in the documentation are not qualified by FlowerDocs: the correct operation of the application is therefore not guaranteed with these modifications.
