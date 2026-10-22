@@ -42,6 +42,10 @@ var popup = JSAPI.get()
 popup.show();
 ```
 
+:::warning
+`buildSearch(String category, String template, Callback callback)` is deprecated and will be removed in the next major release. Use `buildSearchToSelectUnique`, which has the same signature and the same behaviour.
+:::
+
 ## Select several components
 
 The results table displays a checkbox on each row. The user checks the results and validates: the callback receives every selected component.
@@ -65,14 +69,6 @@ Coming back to a result page already visited shows its results unchecked, and th
  The checkbox in the table header only selects the results of the current page. Starting a new search, or changing the criteria or the sort, clears the selection.
 
 If the user validates without selecting anything, a warning is displayed and the callback is not called.
-
-## Deprecated function
-
-:::warning
-`buildSearch(String category, String template, Callback callback)` is deprecated and will be removed in the next major release. Use `buildSearchToSelectUnique`, which has the same signature and the same behaviour.
-:::
-
-<br/>
 
 ## Search configuration
 
