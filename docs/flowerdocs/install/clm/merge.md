@@ -84,8 +84,7 @@ The merge is performed as follows:
 ### Tag classes
 
 - If a "Choice list" (`CHOICELIST`) or [conditional](/docs/flowerdocs/concepts/tags/conditionnel) (`CONDITIONAL`) tag class is present in several modules, the lists of values are merged
-- Values are identified by their `symbolicName`. If a value is present in several modules, it is ignored or overwritten depending on the value of the `force` parameter
-- The merged list keeps the declaration order: the values of the first module come first, followed by the new values of each next module, in module order
+- Values are identified by their `symbolicName`. If a same value is present in several modules, it is ignored or overwritten depending on the value of the `force` parameter
 
 For a `CONDITIONAL` tag class, if a group of values (`ConditionalAllowedValue`) with the same `symbolicName` is present in several modules:
 
