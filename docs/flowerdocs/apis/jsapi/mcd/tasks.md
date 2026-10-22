@@ -73,59 +73,22 @@ taskAPI.answer([id], new Answer("Validate"), function () {
 
 ### Reacting to an answer
 
-The JS API provides hooks that run a function around the application of an answer, whatever the answer:
+The JS API provides two hooks that run a function around the application of an answer, whether triggered from a task form or from `answer(ids, answer)`:
 
-- when a user clicks an answer on a task form, including an answer with reasons once the reasons have been entered
-- when a script calls the `answer(ids, answer)` function described above
+| Function | Description |
+| --- | --- |
+| `registerBeforeAnswer(function)` | Called before the answer is sent to **FlowerDocs Core**: once the task has been saved from a task form, once the tasks have been loaded from `answer(ids, answer)` |
+| `registerAfterAnswer(function)` | Called once **FlowerDocs Core** has applied the answer: before the task form is closed, or before the success callback of `answer(ids, answer)` is called |
 
-<br/>
-An answer hook is a function taking as input the following three parameters (supplied by **FlowerDocs GUI**):
+Each registered function receives:
 
-- `tasks`: a table of `Task` objects the answer is applied to (a single task from a task form)
-- `answer`: the `Answer` object being applied, `getId()` returns its identifier
-- `executor`: an object used to delay the rest of the process and resume it later
+- `tasks`: the tasks the answer is applied to
+- `answer`: the `Answer` object being applied — `getId()` returns its identifier
+- `executor`: controls whether the process continues immediately or waits
 
-| Functions                        | Description                                                                                                                                                                       |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `registerBeforeAnswer(function)` | Calls the function before the answer is sent to **FlowerDocs Core**: once the task has been saved from a task form, once the tasks have been loaded from `answer(ids, answer)` |
-| `registerAfterAnswer(function)`  | Calls the function once **FlowerDocs Core** has applied the answer: before the task form is closed, or before the success callback of `answer(ids, answer)` is called          |
+By default the process continues once the function returns. To delay it, call `executor.hold()`: the process waits until `executor.resume()` is called. While held, a `registerBeforeAnswer` function delays the answer being sent; a `registerAfterAnswer` function keeps the task form open.
 
-<Tabs>
-  <TabItem value="react-before-answer" label="React before answer">
-
-```javascript
-JSAPI.get().task().registerBeforeAnswer(function (tasks, answer, executor) {
-    // Action to be taken before the answer is applied
-});
-```
-
-  </TabItem>
-  <TabItem value="react-after-answer" label="React after answer">
-
-```javascript
-JSAPI.get().task().registerAfterAnswer(function (tasks, answer, executor) {
-    // Action to be taken after the answer is applied
-});
-```
-
-  </TabItem>
-</Tabs>
-
-The hooks are called for every answer of every task class: test `answer.getId()` or the task class (`getClassId()`) to react only to the relevant ones.
-Several functions can be registered on the same hook. They are called in their registration order, each one once the previous one has let the process continue.
-A registered function stays active for the whole user session: register it once, from a script loaded at startup.
-
-#### Delaying the process
-
-The `executor` object works as for the assignment hooks:
-
-- when the function returns without calling `executor.hold()`, the process continues immediately
-- when the function calls `executor.hold()`, the process waits until `executor.resume()` is called, which lets an asynchronous processing finish first
-
-While the process waits:
-
-- in a `registerBeforeAnswer` function, the answer is not sent to **FlowerDocs Core**
-- in a `registerAfterAnswer` function, the task form stays open, or the success callback of `answer(ids, answer)` is not called
+The hooks are called for every answer of every task class: test `answer.getId()` or `getClassId()` to react only to the relevant ones. Several functions can be registered and are called in order. Register them once, from a script loaded at startup.
 
 In the example below, the current user is recorded on the task before the `Validate` answer is sent, and a notification is displayed once the answer has been applied:
 
@@ -168,13 +131,13 @@ JSAPI.get().task().registerAfterAnswer(function (tasks, answer, executor) {
   </TabItem>
 </Tabs>
 
-#### Errors and cancellation
-
-- The `executor` object can only delay the process: an answer hook cannot cancel the answer. To keep users from giving an answer, hide its action instead: in a task form, remove it from `formAPI.getActions().getTaskActions()` (see [Actions](/docs/flowerdocs/apis/jsapi/actions)); in the contextual menu, refuse it with `registerForActionDisplayResolution` on the `answers` group (see [Shortcuts](/docs/flowerdocs/apis/jsapi/shortcut)). Hiding an action does not remove the right to answer through the API.
-- A function that calls `executor.hold()` must call `executor.resume()` on every path, including when its own processing fails. Otherwise the process never ends: the answer is never sent, or the task form never closes, and the loading screen of the task form stays displayed.
-- An error thrown by a function stops the process: the following functions and the answer are not run. Catch the errors inside the function.
-- When **FlowerDocs Core** refuses the answer, the `registerAfterAnswer` functions are not called: the error is displayed to the user from a task form, or passed to the error callback of `answer(ids, answer)`.
-- When an answer is applied asynchronously from a task form (see below), the form is closed before the answer is sent. The `registerAfterAnswer` functions are called once the answer has been applied, and `executor.hold()` no longer delays anything visible to the user.
+:::warning
+- An answer hook cannot cancel an answer — `executor` can only delay it. To prevent users from giving an answer, hide its action instead: in a task form, remove it from `formAPI.getActions().getTaskActions()` (see [Actions](/docs/flowerdocs/apis/jsapi/actions)); in the contextual menu, use `registerForActionDisplayResolution` on the `answers` group (see [Shortcuts](/docs/flowerdocs/apis/jsapi/shortcut)).
+- A function calling `executor.hold()` must call `executor.resume()` on every path, including on error — otherwise the process never ends.
+- An error thrown by a function stops the process: the following functions and the answer are not run. Catch errors inside the function.
+- When **FlowerDocs Core** refuses the answer, `registerAfterAnswer` functions are not called: the error is displayed to the user from a task form, or passed to the error callback of `answer(ids, answer)`.
+- When an answer is applied asynchronously from a task form, the form closes before the answer is sent and `executor.hold()` no longer delays anything visible.
+:::
 
 ### Choosing synchronous or asynchronous execution
 
