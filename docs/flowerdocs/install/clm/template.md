@@ -72,7 +72,3 @@ To do this, simply add the following parameters to the command line sent to the 
 - \--ldap.attributes.search=displayName
 - \--ldap.attributes.displayName=displayName
 - \--ldap.attributes.members=uniqueMember
-
-## Administration role teams
-
-The `scope.xml` file of the default template declares the six administration role teams (`RECOVERYBIN_MANAGER`, `USERS_MANAGER`, `SECURITY_ADMIN`, `DELEGATION_MANAGER`, `TEMPLATE_MANAGER` and `FUNCTIONAL_ADMIN`) with no members. To add them to a scope that does not declare them, see [Administration roles](/docs/flowerdocs/concepts/securite/administration-roles#adding-the-role-teams-to-a-scope).
