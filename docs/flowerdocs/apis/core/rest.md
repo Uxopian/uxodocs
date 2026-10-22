@@ -55,6 +55,11 @@ Most endpoints accept arrays, allowing you to create, update, or delete multiple
 REST updates operate on a **cancel and replace** basis: unset fields will be cleared. You must send the entire object, not just the fields to modify. It is recommended to first retrieve the resource, make changes, and then call the update endpoint.
 :::
 
+## Errors
+
+A refused or failed call returns an error code, in the JSON body and in the `code` response header.
+Refusals caused by an administration role return HTTP 403: see [Administration roles](/docs/flowerdocs/concepts/securite/administration-roles#error-codes).
+
 ## Swagger documentation
 
 Documentation for this API is provided through _Swagger_ exhibited by **FlowerDocs Core** under the path `{host.core}/swagger-ui/index.html`.

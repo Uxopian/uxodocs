@@ -39,59 +39,124 @@ new SearchAttachmentPlugin({
 
 The following options are common to the various attachment plugins:
 
-| Key             | Type     | Description                                                                         |
-| --------------- | -------- | ----------------------------------------------------------------------------------- |
-| `attachmentId`  | String   | Attachment definition identifier                                                    |
-| `title`         | String   | Action title (title of the selection popup in the case of `SearchAttachmentPlugin`) |
-| `icon`          | String   | Action Icon (Icon of the selection popup in the case of `SearchAttachmentPlugin`)   |
-| `postProcessor` | Function | Function called after attaching the attachment                                      |
-| `canAttach`     | Function | Function defining when the action must be present                                   |
+| Key             | Type     | Description                                                                                                                                                                                  |
+| --------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `attachmentId`  | String   | Attachment definition identifier. When set, the action is only added to the card of this attachment. When omitted, the action is added to every attachment card of the task and attaches the component to the attachment whose card was clicked |
+| `classId`       | String   | Task class identifier: when set, the action is only added on tasks of this class                                                                                                            |
+| `workflow`      | String   | Workflow identifier: when set, the action is only added on tasks of this workflow                                                                                                           |
+| `title`         | String   | Action title (title of the selection popup in the case of `SearchAttachmentPlugin`)                                                                                                         |
+| `icon`          | String   | Action Icon (Icon of the selection popup in the case of `SearchAttachmentPlugin`)                                                                                                           |
+| `allowedPhases` | Table    | Task form phases in which the action is available, among `INSERT`, `MODIFY` and `READONLY` (default: `MODIFY`). Not used by `MetadataVisualizationAttachmentPlugin`, which is available in the `MODIFY` phase only |
+| `postProcessor` | Function | Function called after attaching the attachment, with the arguments `(card, formAPI, component)`                                                                                             |
+| `canAttach`     | Function | Function defining when the action must be present, called with the arguments `(card, definition, formAPI)` and returning a boolean                                                          |
+
+The actions of `SearchAttachmentPlugin`, `TemplateAttachmentPlugin` and `CreateHTMLAttachmentPlugin` are only added to an empty attachment card whose definition is not read-only.
+
+Each plugin instance stays on its own attachment: two plugins of the same kind bound to different attachments, through `attachmentId`, each drive the action of their own card only.
 
 ## SearchAttachmentPlugin
 
 The plugin `SearchAttachmentPlugin` adds a search action to an attachment insert. This action opens a popup allowing you to select, from the results of a search, a component to be added as a task attachment.
 
-| Key        | Type   | Description                                                                                     |
-| ---------- | ------ | ----------------------------------------------------------------------------------------------- |
-| `template` | String | Identifier of the search form to be displayed in the selection popup (default: `DefaultSearch`) |
-| `category` | String | Component category to search (default: `DOCUMENT`)                                              |
-| `criteria` | Table  | Search list of criteria                                                                         |
+When the attachment definition is multivalued, the popup allows several components to be selected: all of them are attached to the task at once, and `postProcessor` is called once for each attached component. When the definition is single-valued, a single component can be selected.
+
+| Key               | Type     | Description                                                                                                                       |
+| ----------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `template`               | String   | Identifier of the search form to be displayed in the selection popup (default: `DefaultSearch`)                            |
+| `category`               | String   | Component category to search (default: `DOCUMENT`)                                                                         |
+| `description`            | String   | Description displayed in the selection popup header                                                                        |
+| `criteriaBuilder`        | Function | Function building the list of search criteria from the task context, called with the arguments `(card, task, definition, formAPI)` |
+| `criteria` **deprecated**| Table    | Static list of search criteria. Recommand to use `criteriaBuilder` instead                                                 |
+
+The search executed by the popup is restricted with:
+
+- the class of the attachment definition, when the definition is not open to every class (`*`)
+- the criteria returned by `criteriaBuilder` (or from `criteria` if any remains)
+
+`criteriaBuilder` is called each time the user opens the selection popup from an attachment card, so the criteria reflect the task as it is at that moment. Its arguments are:
+
+| Argument     | Description                                                     |
+| ------------ | --------------------------------------------------------------- |
+| `card`       | Attachment card on which the action was clicked                 |
+| `task`       | Task being displayed                                            |
+| `definition` | Attachment definition of the card                               |
+| `formAPI`    | API of the task form, to read the values being entered          |
+
+The function must return a table of criteria, an empty table when no criterion applies.
 
 <Tabs>
   <TabItem value="basic" label="Basic">
 
+Hides the action when the task is closed, and copies the `Reference` tag of the attached document onto the task: 
+
 ```javascript
 new SearchAttachmentPlugin({
     attachmentId: '<AttachmentId>',
-    title: 'Search for an attachment',
-    postProcessor: function(component){
+    title: 'Search for a document',
+    canAttach: function(card, definition, formAPI) {
+        return formAPI.getComponent().getTagValue('Status') !== 'Closed';
+    },
+    postProcessor: function(card, formAPI, component) {
         console.info('Component has been attached: ', component.getId());
-
-}).bind()
+        formAPI.setObjectValue('Reference', component.getTagValue('Reference'));
+    }
+}).bind();
 ```
 
   </TabItem>
-  <TabItem value="with-criteria" label="With criteria">
+  <TabItem value="with-criteria-builder" label="With dynamic criteria">
+
+The search only returns documents whose `Reference` tag holds the same value as the task:
+
+```javascript
+new SearchAttachmentPlugin({
+    attachmentId: '<AttachmentId>',
+    title: 'Search for a document',    
+    category: 'DOCUMENT',
+    allowedPhases: ['INSERT', 'MODIFY'],
+    criteriaBuilder: function(card, task, definition, formAPI) {
+        var reference = task.getTagValue('Reference');
+        if (!reference) {
+            return [];
+        }
+
+        var criterion = new Criterion();
+        criterion.setName('Reference');
+        criterion.setOperator('EQUALS_TO');
+        criterion.addValue(reference);
+
+        return [criterion];
+    }
+}).bind();
+```
+
+  </TabItem>
+  <TabItem value="with-criteria" label="With static criteria (deprecated)">
+
+The search only returns documents of the `OutgoingMail` class, regardless of the task context:
 
 ```javascript
 var criterion = new Criterion();
-criterion.setName("classid");
-criterion.setOperator("EQUALS_TO");
-criterion.addValue("OutgoingMail");
+criterion.setName('classid');
+criterion.setOperator('EQUALS_TO');
+criterion.addValue('OutgoingMail');
 
 new SearchAttachmentPlugin({
     attachmentId: '<AttachmentId>',
-    title: 'Search for an attachment',
-  	criteria: [criterion],
-  	category: 'DOCUMENT’,
-    postProcessor: function(component){
-        console.info('Component has been attached: ', component.getId());
-
-}).bind()
+    title: 'Search for a document',
+    allowedPhases: ['INSERT', 'MODIFY'],
+    criteria: [criterion],
+    category: 'DOCUMENT'
+}).bind();
 ```
 
   </TabItem>
 </Tabs>
+
+
+:::info
+The plugins are JavaScript scripts deployed in the scope as `Script` documents: `attachmentPlugin.js` declares the classes the plugins extend and must be registered before `searchAttachmentPlugin.js`, itself registered before the scripts instantiating the plugin. The eProcess scopes carrie both scripts and uses `SearchAttachmentPlugin` to attach existing documents to its tasks.
+:::
 
 ## TemplateAttachmentPlugin
 

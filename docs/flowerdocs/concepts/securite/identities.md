@@ -38,11 +38,17 @@ Teams have a list of properties that can be used to configure **FlowerDocs GUI**
 
 ## Roles
 
-The FlowerDocs platform offers several native roles with specific permissions. A role can be assigned to a user by defining a team whose identifier is the role name.
+The FlowerDocs platform offers several native roles with specific permissions. A user holds a role when they are a member of the team whose identifier is the role name, directly, through a group or through another team.
 
-| Name               | Description                                   |
-| ------------------ | --------------------------------------------- |
-| `FUNCTIONAL_ADMIN` | Functional administrator _(data model)_       |
-| `SECURITY_ADMIN`   | Security Administrator _(ACL, identities...)_ |
-| `ADMIN`            | Scope administrator                           |
-| `SYSTEM_ADMIN`     | Platform administrator                        |
+| Name                  | Description                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------------------- |
+| `RECOVERYBIN_MANAGER` | Recovery bin manager _(lists, restores and permanently deletes deleted components)_          |
+| `USERS_MANAGER`       | Users manager _(users, groups, business teams)_                                              |
+| `SECURITY_ADMIN`      | Security manager _(directory service, OAuth, users, groups)_                                 |
+| `DELEGATION_MANAGER`  | Delegation manager _(delegations on behalf of any user)_                                     |
+| `TEMPLATE_MANAGER`    | Template manager _(stamps, email bodies, email signatures)_                                  |
+| `FUNCTIONAL_ADMIN`    | Data model manager _(classes, tag categories, processes, access control lists)_              |
+| `ADMIN`               | Scope administrator, holds every role above                                                  |
+| `SYSTEM_ADMIN`        | Platform administrator, holds `ADMIN` and every role above                                   |
+
+Only `ADMIN` and `SYSTEM_ADMIN` grant these roles. The screens and operations each role opens, and the error codes it returns, are described in [Administration roles](/docs/flowerdocs/concepts/securite/administration-roles).
