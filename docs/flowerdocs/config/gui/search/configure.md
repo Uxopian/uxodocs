@@ -224,47 +224,24 @@ Each criterion must declare a `type` and an `operator`. The available operators 
 For choice list tags and conditional tags, the available operators are `EQUALS_TO`, `DIFFERENT`, `EMPTY` and `NOT_EMPTY`.
 :::
 
-The operators are displayed in the search form with the following labels:
-
-| Operator | Label | Value |
-|----------|-------|-------|
-| `EQUALS_TO` | equals to | Required |
-| `DIFFERENT` | different from | Required |
-| `CONTAINS` | contains | Required |
-| `NOT_CONTAINS` | does not contain | Required |
-| `STARTS_WITH` | starts with | Required |
-| `ENDS_WITH` | ends with | Required |
-| `LESS_THAN` | less than or equal to | Required |
-| `GREATER_THAN` | greater than or equal to | Required |
-| `BETWEEN` | between | Required |
-| `EMPTY` | is empty | None |
-| `NOT_EMPTY` | is not empty | None |
-
-`NOT_CONTAINS` returns the components whose value does not hold the text entered. Components that have no value for the field are returned too.
-
-##### Operators without a value
-
-`EMPTY` and `NOT_EMPTY` take no value: when the user selects one of them, the value field is hidden and replaced by the hint *No value required*, and any value already entered is removed from the criterion.
-
-* `NOT_EMPTY` returns the components that hold a value for the field.
-* `EMPTY` on a tag returns the components whose class declares the tag and which hold no value for it, including components created before the tag was added to their class. A component whose class does not declare the tag is never returned. The classes considered are those of the searched category: a document search only looks at document classes.
-
-##### Content criterion
-
-The `content` criterion searches the text extracted from the document files. It offers `CONTAINS`, `NOT_CONTAINS`, `EQUALS_TO`, `EMPTY` and `NOT_EMPTY`:
+##### Operator descriptions
 
 | Operator | Returns |
 |----------|---------|
-| `CONTAINS` | Documents whose text holds the value |
-| `NOT_CONTAINS` | Documents whose text does not hold the value, including documents with no indexed text |
-| `EQUALS_TO` | Documents whose text holds the value as an exact phrase |
-| `EMPTY` | Documents with no indexed text: documents without a file, or whose text extraction has not run |
-| `NOT_EMPTY` | Documents with indexed text |
-
-The value is searched as typed, punctuation included: quotes, hyphens, slashes, `@` or `%` are looked for in the text like any other character. Wrapping the value in double quotes does not request an exact phrase: with `CONTAINS`, `"dossier Bidule"` only returns the documents whose text holds the quotes. To search for an exact phrase, select `EQUALS_TO` and type the phrase without quotes.
+| `CONTAINS` | Components whose field holds the value |
+| `NOT_CONTAINS` | Components whose field does not hold the value, including those with no value for the field |
+| `EQUALS_TO` | Components whose field value exactly matches the value |
+| `DIFFERENT` | Components whose field value does not match the value |
+| `STARTS_WITH` | Components whose field value starts with the value |
+| `ENDS_WITH` | Components whose field value ends with the value |
+| `LESS_THAN` | Components whose field value is less than or equal to the value |
+| `GREATER_THAN` | Components whose field value is greater than or equal to the value |
+| `BETWEEN` | Components whose field value is between the two given values |
+| `EMPTY` | Components with no value for the field |
+| `NOT_EMPTY` | Components with a value for the field |
 
 :::info
-The keyword search does not use operators. It applies the same rule to the content: punctuation and quotes are searched as typed.
+`EMPTY` and `NOT_EMPTY` take no value: when selected, the value field is hidden and replaced by *No value required*, and any value already entered is removed. `EMPTY` returns components whose class declares the tag and which hold no value for it — including components created before the tag was added to their class. A component whose class does not declare the tag is never returned.
 :::
 
 ##### Hiding the operators a connector does not support
@@ -276,10 +253,6 @@ gui.search.operators.restricted=true
 ```
 
 The default value is `false`. The property only changes what the interface offers: requests sent through the APIs reach the connector unchanged.
-
-##### Operators in the administration search editors
-
-In the administration screens that edit a search, such as the searches of a virtual folder class or the filters of an operation handler, a criterion on `classid`, on a choice list, free list or conditional tag, or on an identity is stored as a `STRING` criterion. It therefore offers the full `STRING` operator list, and its value can be typed freely, for example `STARTS_WITH` with the beginning of a class identifier. Such a criterion opens on `EQUALS_TO`. The end-user search forms keep the lists above.
 
 #### Examples
 
