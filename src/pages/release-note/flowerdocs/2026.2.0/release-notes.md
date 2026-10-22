@@ -38,16 +38,16 @@ FlowerDocs 2026.2.0 introduces six administrative roles that make it possible to
 
 | Role | Label | What the role allows |
 | ----- | ----- | ----- |
-| `TEMPLATE_MANAGER` | Template managers | Manage email templates (body and signatures) and stamps |
+| `TEMPLATE_MANAGER` | TemplateManager | Manage email templates (body and signatures) and stamps |
 | `DELEGATION_MANAGER` | Delegation managers | Create, edit and delete delegations for all users |
-| `RECOVERYBIN_MANAGER` | Recovery bin managers | Restore or permanently delete deleted documents, folders, virtual folders and tasks |
-| `USERS_MANAGER` | Users managers | Manage users, groups and business teams |
-| `SECURITY_ADMIN` | Security managers | Configure the directory and OAuth, manage users and groups |
-| `FUNCTIONAL_ADMIN` | Data model managers | Create and edit component classes, tags and ACLs, edit existing processes, manage email templates and stamps, without being able to delete any element of the data model |
+| `RECOVERYBIN_MANAGER` | RecoverybinManager | Restore or permanently delete deleted documents, folders, virtual folders and tasks |
+| `USERS_MANAGER` | UsersManager | Manage users, groups and business teams |
+| `SECURITY_ADMIN` | Security administrators | Configure the directory and OAuth, manage users and groups |
+| `FUNCTIONAL_ADMIN` | Functional administrators | Create and edit component classes, tags and ACLs, edit existing processes, manage email templates and stamps, without being able to delete any element of the data model |
 
-Roles can be combined, and only an administrator can assign them. They are available by default in new scopes, and integrators can add them to existing scopes. For more information, see the [FlowerDocs documentation](/docs/flowerdocs/).
+Roles can be combined, and only an administrator can assign them. They are available by default in new scopes, and integrators can add them to existing scopes. For more information, see the [administration roles documentation](/docs/flowerdocs/concepts/securite/administration-roles).
 
-<img src="/img/flowerdocs/release-notes/AdminRoles.png" alt="Administration menu as seen by an administrative role" width="1000" />
+<img src="/img/flowerdocs/release-notes/AdminRoles.png" alt="Administrative roles in the Teams screen" width="1000" />
 <br /><br />
 
 #### 💻 New search operators
@@ -62,7 +62,7 @@ These operators are also available on the Content criterion, where "is empty" fi
 
 Finally, the sentence "X results have been found in Y ms" no longer appears below the results table, to free up space on screen.
 
-<img src="/img/flowerdocs/release-notes/SearchNewOperators.gif" alt="New search operators" width="1000" />
+<img src="/img/flowerdocs/release-notes/SearchNewOperators.png" alt="New search operators" width="850" />
 <br /><br />
 
 #### 💻 Content search: the value is searched as typed
@@ -97,13 +97,13 @@ The recovery bin now has its own search service, `POST /{category}/recoverybin/s
 
 #### 👨‍💻 New JavaScript API methods
 
-The JavaScript API has been extended so that the most common customizations no longer require overriding product scripts, and therefore remain compatible with version upgrades. For more information, see the [JavaScript API documentation](/docs/flowerdocs/apis/jsapi/).
+The JavaScript API has been extended so that the most common customizations no longer require overriding product scripts, and therefore remain compatible with version upgrades.
 
-The contextual menu is a good example of this change. Until now, hiding or adding an action required overriding the entire `registerToAddAnswersInTaskContextualMenu` script, at the risk of no longer benefiting from product improvements. With the new `ContextualMenuAPI.registerForActionDisplayResolution` method, integrators can now simply declare the actions to hide or add, without modifying the product script. Existing customizations keep working, but adapting them to this method ensures they continue to benefit from product improvements in future upgrades.
+The contextual menu is a good example of this change. Until now, hiding or adding an action required overriding the entire `registerToAddAnswersInTaskContextualMenu` script, at the risk of no longer benefiting from product improvements. With the new `ContextualMenuAPI.registerForActionDisplayResolution` method, integrators can now simply declare the actions to hide or add, without modifying the product script. Existing customizations keep working, but adapting them to this method ensures they continue to benefit from product improvements in future upgrades. For more information, see the [contextual menu documentation](/docs/flowerdocs/apis/jsapi/shortcut#hide-an-action).
 
-Task answers follow the same principle. The `TaskJsAPI.registerBeforeAnswer` and `registerAfterAnswer` methods make it possible to react to all answers, not only those with a reason, for example to adapt the interface once the answer has been applied.
+Task answers follow the same principle. The `TaskJsAPI.registerBeforeAnswer` and `registerAfterAnswer` methods make it possible to react to all answers, not only those with a reason, for example to adapt the interface once the answer has been applied. For more information, see the [task answers documentation](/docs/flowerdocs/apis/jsapi/mcd/tasks#reacting-to-an-answer).
 
-Finally, the search popup now supports selecting several documents with `buildSearchToSelectMultiple`. The `Popup.buildSearch` method has been deprecated in favor of `buildSearchToSelectUnique`.
+Finally, the search popup now supports selecting several documents with `buildSearchToSelectMultiple`. The `Popup.buildSearch` method has been deprecated in favor of `buildSearchToSelectUnique`. For more information, see the [search popup documentation](/docs/flowerdocs/apis/jsapi/popups/recherche#select-several-components).
 
 #### 💻 New search operators and content search
 
@@ -163,7 +163,7 @@ For more information, see the ARender release notes [here](/release-note/arender
 
 When processing a step, attaching several existing documents used to require repeating the search and the attachment for each of them. When the attachment accepts several documents, the magnifying glass now opens a multi-selection search: users check the documents they need, including across different result pages, and attach them in a single action.
 
-<img src="/img/flowerdocs/release-notes/EProcessMultipleAttachments.gif" alt="Selecting several documents to attach" width="1000" />
+<img src="/img/flowerdocs/release-notes/EProcessMultipleAttachments.webp" alt="Selecting several documents to attach" width="1000" />
 <br /><br />
 
 #### 💻 Clearer wording for English-speaking users
