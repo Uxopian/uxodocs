@@ -1,12 +1,21 @@
 [
   {
+    "version": "2026.2.0",
+    "majorVersion": "2026",
+    "date": "2026-10-23",
+    "description": "Version 2026.2.0 gives business teams more autonomy. Six new administrative roles make it possible to delegate part of the administration to key users without granting them full rights. Search becomes",
+    "hasUpgradeNotes": false,
+    "slug": "2026.2.0",
+    "latest": true
+  },
+  {
     "version": "2026.1.0",
     "majorVersion": "2026",
     "date": "2026-07-28",
     "description": "FlowerDocs 2026.1.0 is a consolidation release improving reliability of search, CSV export, column management, virtual folder display in ARender, and document versioning.",
     "hasUpgradeNotes": true,
     "slug": "2026.1.0",
-    "latest": true
+    "latest": false
   },
   {
     "version": "2026.0.0",
