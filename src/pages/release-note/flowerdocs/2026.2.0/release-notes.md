@@ -1,5 +1,6 @@
 ---
 title: FlowerDocs 2026.2.0 Release notes
+toc_max_heading_level: 4
 description: FlowerDocs 2026.2.0 Release notes
 ---
 
@@ -38,12 +39,12 @@ FlowerDocs 2026.2.0 introduces six administrative roles that make it possible to
 
 | Role | Label | What the role allows |
 | ----- | ----- | ----- |
-| `TEMPLATE_MANAGER` | TemplateManager | Manage email templates (body and signatures) and stamps |
+| `TEMPLATE_MANAGER` | Template managers | Manage email templates (body and signatures) and stamps |
 | `DELEGATION_MANAGER` | Delegation managers | Create, edit and delete delegations for all users |
-| `RECOVERYBIN_MANAGER` | RecoverybinManager | Restore or permanently delete deleted documents, folders, virtual folders and tasks |
-| `USERS_MANAGER` | UsersManager | Manage users, groups and business teams |
-| `SECURITY_ADMIN` | Security administrators | Configure the directory and OAuth, manage users and groups |
-| `FUNCTIONAL_ADMIN` | Functional administrators | Create and edit component classes, tags and ACLs, edit existing processes, manage email templates and stamps, without being able to delete any element of the data model |
+| `RECOVERYBIN_MANAGER` | Recovery bin managers | Restore or permanently delete deleted documents, folders, virtual folders and tasks |
+| `USERS_MANAGER` | Users managers | Manage users, groups and business teams |
+| `SECURITY_ADMIN` | Security managers | Configure the directory and OAuth, manage users and groups |
+| `FUNCTIONAL_ADMIN` | Data model managers | Create and edit component classes, tags and ACLs, edit existing processes, manage email templates and stamps, without being able to delete any element of the data model |
 
 Roles can be combined, and only an administrator can assign them. They are available by default in new scopes, and integrators can add them to existing scopes. For more information, see the [administration roles documentation](/docs/flowerdocs/concepts/securite/administration-roles).
 
@@ -119,7 +120,7 @@ The faster searches for users who belong to many groups come from a change in ho
 
 #### 💻 Security
 
-Following a penetration testing campaign, several security fixes and additional protective measures have been implemented. This version also includes fixes for vulnerabilities identified in third-party dependencies (CVEs). The security certificate is available upon request.
+This version includes several security fixes and additional protective measures, as well as fixes for vulnerabilities identified in third-party dependencies (CVEs).
 #### 💻 ARender update: security
 
 The update to ARender 2026.3.0 brings its own security fixes as well as third-party dependency updates.
@@ -160,7 +161,7 @@ For more information, see the ARender release notes [here](/release-note/arender
 
 When processing a step, attaching several existing documents used to require repeating the search and the attachment for each of them. When the attachment accepts several documents, the magnifying glass now opens a multi-selection search: users check the documents they need, including across different result pages, and attach them in a single action.
 
-<img src="/img/flowerdocs/release-notes/EProcessMultipleAttachments.webp" alt="Selecting several documents to attach" width="1000" />
+<img src="/img/flowerdocs/release-notes/EProcessMultipleAttachments.gif" alt="Selecting several documents to attach" width="1000" />
 <br /><br />
 
 #### 💻 Clearer wording for English-speaking users
