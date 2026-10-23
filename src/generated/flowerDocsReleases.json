@@ -4,7 +4,7 @@
     "majorVersion": "2026",
     "date": "2026-10-23",
     "description": "Version 2026.2.0 gives business teams more autonomy. Six new administrative roles make it possible to delegate part of the administration to key users without granting them full rights. Search becomes",
-    "hasUpgradeNotes": false,
+    "hasUpgradeNotes": true,
     "slug": "2026.2.0",
     "latest": true
   },
