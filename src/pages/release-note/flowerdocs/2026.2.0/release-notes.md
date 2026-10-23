@@ -161,7 +161,7 @@ For more information, see the ARender release notes [here](/release-note/arender
 
 When processing a step, attaching several existing documents used to require repeating the search and the attachment for each of them. When the attachment accepts several documents, the magnifying glass now opens a multi-selection search: users check the documents they need, including across different result pages, and attach them in a single action.
 
-<img src="/img/flowerdocs/release-notes/EProcessMultipleAttachments.webp" alt="Selecting several documents to attach" width="1000" />
+<img src="/img/flowerdocs/release-notes/EProcessMultipleAttachments.gif" alt="Selecting several documents to attach" width="1000" />
 <br /><br />
 
 #### 💻 Clearer wording for English-speaking users
