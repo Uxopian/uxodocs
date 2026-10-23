@@ -89,7 +89,7 @@ For more information, see the ARender release notes [here](/release-note/arender
 
 Administrative role restrictions are not limited to the interface: the API enforces them as well. Any call to an administration resource outside the user's scope is rejected with a 403 error. Integrations that rely on the status code returned by these rejections should be checked, as detailed in the [upgrade notes](../upgrade-notes).
 
-The six roles are declared by default in new scopes. To use them in an existing scope, the scope must be updated with CLM, following the procedure described in the [upgrade notes](../upgrade-notes).
+The six roles are declared by default in new scopes. An existing scope keeps working with `ADMIN` alone; to use the new roles there, add their teams to the scope as described in the [upgrade notes](../upgrade-notes).
 
 #### 💻 Dedicated recovery bin search service
 
@@ -120,9 +120,6 @@ The faster searches for users who belong to many groups come from a change in ho
 #### 💻 Security
 
 Following a penetration testing campaign, several security fixes and additional protective measures have been implemented. This version also includes fixes for vulnerabilities identified in third-party dependencies (CVEs). The security certificate is available upon request.
-
-Operators who use a custom logging configuration should check its compatibility, as described in the [upgrade notes](../upgrade-notes).
-
 #### 💻 ARender update: security
 
 The update to ARender 2026.3.0 brings its own security fixes as well as third-party dependency updates.
