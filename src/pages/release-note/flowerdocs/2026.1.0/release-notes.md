@@ -1,5 +1,6 @@
 ---
 title: FlowerDocs 2026.1.0 Release notes
+toc_max_heading_level: 4
 description: FlowerDocs 2026.1.0 Release notes
 ---
 
