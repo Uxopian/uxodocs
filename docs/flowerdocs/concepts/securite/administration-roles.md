@@ -42,7 +42,7 @@ The administration console only shows the screens the user's roles open.
 1. The scope definition is read-only. The _Clear cache_ button is available.
 2. Without the _Delete_ action. The ACL of an existing class is read-only: it is chosen when the class is created.
 3. Create and update. Deleting an ACL is reserved to `ADMIN`.
-4. Except the accounts, groups and teams that hold or grant an administration role, see [Granting administration](#granting-administration).
+4. Except the accounts, groups and teams that hold or grant an administration role.
 
 ## Rules
 
