@@ -214,14 +214,34 @@ Each criterion must declare a `type` and an `operator`. The available operators 
 
 | Type | Description | Available operators |
 |------|-------------|-------------------|
-| `STRING` | Text field | `CONTAINS`, `EQUALS_TO`, `STARTS_WITH`, `ENDS_WITH`, `DIFFERENT` |
-| `TIMESTAMP` | Date picker | `BETWEEN` |
+| `STRING` | Text field | `CONTAINS`, `NOT_CONTAINS`, `EQUALS_TO`, `STARTS_WITH`, `ENDS_WITH`, `DIFFERENT`, `EMPTY`, `NOT_EMPTY` |
+| `TIMESTAMP` | Date picker | `BETWEEN`, `EMPTY`, `NOT_EMPTY` |
 | `BOOLEAN` | Checkbox | `EQUALS_TO` |
-| `INTEGER` | Numeric field | `EQUALS_TO`, `LESS_THAN`, `GREATER_THAN`, `DIFFERENT` |
-| `CURRENCY` | Currency field | `EQUALS_TO`, `LESS_THAN`, `GREATER_THAN`, `DIFFERENT` |
+| `INTEGER` | Numeric field | `EQUALS_TO`, `LESS_THAN`, `GREATER_THAN`, `DIFFERENT`, `EMPTY`, `NOT_EMPTY` |
+| `CURRENCY` | Currency field | `EQUALS_TO`, `LESS_THAN`, `GREATER_THAN`, `DIFFERENT`, `EMPTY`, `NOT_EMPTY` |
 
 :::info
-For choice list tags and conditional tags, the available operators are `EQUALS_TO` and `DIFFERENT`.
+For choice list tags and conditional tags, the available operators are `EQUALS_TO`, `DIFFERENT`, `EMPTY` and `NOT_EMPTY`.
+:::
+
+##### Operator descriptions
+
+| Operator | Returns |
+|----------|---------|
+| `CONTAINS` | Components whose field holds the value |
+| `NOT_CONTAINS` | Components whose field does not hold the value, including those with no value for the field |
+| `EQUALS_TO` | Components whose field value exactly matches the value |
+| `DIFFERENT` | Components whose field value does not match the value |
+| `STARTS_WITH` | Components whose field value starts with the value |
+| `ENDS_WITH` | Components whose field value ends with the value |
+| `LESS_THAN` | Components whose field value is less than or equal to the value |
+| `GREATER_THAN` | Components whose field value is greater than or equal to the value |
+| `BETWEEN` | Components whose field value is between the two given values |
+| `EMPTY` | Components with no value for the field |
+| `NOT_EMPTY` | Components with a value for the field |
+
+:::info
+`EMPTY` and `NOT_EMPTY` take no value: when selected, the value field is hidden and replaced by *No value required*, and any value already entered is removed. `EMPTY` returns components whose class declares the tag and which hold no value for it — including components created before the tag was added to their class. A component whose class does not declare the tag is never returned.
 :::
 
 #### Examples

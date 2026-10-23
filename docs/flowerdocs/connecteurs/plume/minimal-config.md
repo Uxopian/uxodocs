@@ -9,7 +9,7 @@ content_hash: ec685656c67ff55306986a6eb9be8fed63fb8943e60e71a4e94ca6ca4cb94488
 ---
 
 :::info
-This documentation describes the various connectors available for Plume. At the very least, you need to define one in the `plume.properties` file in the `plume.config.dir` folder entered in the previous section.
+This documentation describes the connectors of Plume. Enable both the FlowerDocs and the SMTP connectors in the `application.properties` file described in the [installation](/docs/flowerdocs/connecteurs/plume/install) section.
 :::
 
 The sender of the e-mail is indicated by the `email.from` property, with a default value of `plume@arondor.com`.
@@ -35,12 +35,10 @@ To activate this connector, add the property `smtp.enabled=true`
 
 ```properties
 smtp.enabled=true
-smtp.host=SSL0.OVH.NET
-smtp.username=no-reply@flowerdocs.com
+smtp.host=smtp.example.com
+smtp.username=no-reply@example.com
 smtp.password=***
-smtp.parameters.socketFactory.port=465
-smtp.parameters.socketFactory.class=javax.net.ssl.SSLSocketFactory
-smtp.parameters.starttls.enable=true
+smtp.parameters.ssl.enable=true
 ```
 
 You can add parameters to the SMTP connector by adding properties `smtp.parameters.<name>=<value>`.
@@ -55,11 +53,8 @@ To activate Plume in ARender, you need to :
 	gui.client.arender.profile=arender&plume.enabled=true
 ```
 
-- Configure Plume as a **FlowerDocs GUI** plugin:
+- Set the address of Plume in **FlowerDocs GUI**:
 
 ```properties
-	plugins.routes.plume.path=/plume/**
-	plugins.routes.plume.url=http://localhost:8080/plume
+	gui.client.plume.url=http://<plume-host>:3006/plume
 ```
-
-For more information on the use of **FlowerDocs GUI** plug-ins, see the documentation [here](/docs/flowerdocs/config/gui/plugins).
