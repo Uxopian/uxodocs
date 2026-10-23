@@ -119,7 +119,7 @@ The faster searches for users who belong to many groups come from a change in ho
 
 #### 💻 Security
 
-Following a penetration testing campaign, several security fixes and additional protective measures have been implemented. This version also includes fixes for vulnerabilities identified in third-party dependencies (CVEs). The security certificate is available upon request.
+This version includes several security fixes and additional protective measures, as well as fixes for vulnerabilities identified in third-party dependencies (CVEs).
 #### 💻 ARender update: security
 
 The update to ARender 2026.3.0 brings its own security fixes as well as third-party dependency updates.
