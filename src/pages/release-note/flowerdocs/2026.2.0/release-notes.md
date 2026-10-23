@@ -38,12 +38,12 @@ FlowerDocs 2026.2.0 introduces six administrative roles that make it possible to
 
 | Role | Label | What the role allows |
 | ----- | ----- | ----- |
-| `TEMPLATE_MANAGER` | TemplateManager | Manage email templates (body and signatures) and stamps |
+| `TEMPLATE_MANAGER` | Template managers | Manage email templates (body and signatures) and stamps |
 | `DELEGATION_MANAGER` | Delegation managers | Create, edit and delete delegations for all users |
-| `RECOVERYBIN_MANAGER` | RecoverybinManager | Restore or permanently delete deleted documents, folders, virtual folders and tasks |
-| `USERS_MANAGER` | UsersManager | Manage users, groups and business teams |
-| `SECURITY_ADMIN` | Security administrators | Configure the directory and OAuth, manage users and groups |
-| `FUNCTIONAL_ADMIN` | Functional administrators | Create and edit component classes, tags and ACLs, edit existing processes, manage email templates and stamps, without being able to delete any element of the data model |
+| `RECOVERYBIN_MANAGER` | Recovery bin managers | Restore or permanently delete deleted documents, folders, virtual folders and tasks |
+| `USERS_MANAGER` | Users managers | Manage users, groups and business teams |
+| `SECURITY_ADMIN` | Security managers | Configure the directory and OAuth, manage users and groups |
+| `FUNCTIONAL_ADMIN` | Data model managers | Create and edit component classes, tags and ACLs, edit existing processes, manage email templates and stamps, without being able to delete any element of the data model |
 
 Roles can be combined, and only an administrator can assign them. They are available by default in new scopes, and integrators can add them to existing scopes. For more information, see the [administration roles documentation](/docs/flowerdocs/concepts/securite/administration-roles).
 
