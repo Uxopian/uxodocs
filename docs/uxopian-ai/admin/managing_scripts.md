@@ -1,14 +1,14 @@
 ---
 title: Managing scripts in the admin UI
 last_update:
-  date: '2026-10-19T18:21:35.722Z'
+  date: '2026-10-25T08:39:17.266Z'
   author: CI/CD Bot
 sidebar_label: Scripts
 sidebar_position: 7
-content_hash: aa64d06bf2b9d59d7bb2919f077f58503e392f97335cf3c4a788140bfae17ab7
+content_hash: ad4dd003b65aaf7461ce66deff8ebe8f2bcf838b72027285867babcb74326717
 ---
 
-The **Scripts** section of the admin panel lets administrators author and deploy custom front-end JavaScript through a governed lifecycle that includes an **LLM-based security scan**. A typical use is the host connector that wires [Quick Prompt](../understanding/quick_prompt.md) into a business application: instead of hand-deploying a static `.js` file, the connector is authored in the admin panel, scanned, and served by uxopian-ai to authenticated users.
+The **Scripts** section of the admin panel lets administrators author and deploy custom front-end JavaScript through a governed lifecycle that includes an **LLM-based security scan**. A typical use is the host connector that wires [Quick Prompt](../understanding/quick_prompt.md) into a business application: instead of hand-deploying a static `.js` file, the connector is authored in the admin panel, scanned, and served by uxopian-ai to authenticated users. The same mechanism carries the quick AI actions of the [IBM Content Navigator plugin](../how_to/integrate_with_filenet.mdx#add-quick-ai-actions) and the AI menu of the [ARender viewer](../how_to/integrate_with_arender.mdx#define-the-ai-menu-as-uxopian-ai-scripts).
 
 Scripts are managed per tenant. Changes take effect without restarting the application.
 

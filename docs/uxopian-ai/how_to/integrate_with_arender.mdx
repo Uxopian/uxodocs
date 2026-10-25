@@ -3,12 +3,14 @@ title: Integrate with ARender
 sidebar_label: Integrate with ARender
 sidebar_position: 2
 last_update:
-  date: '2026-03-26T16:37:56.929Z'
+  date: '2026-10-25T08:39:17.266Z'
   author: CI/CD Bot
-content_hash: a98c65d21638face42d59c0372841fa886faaad5b25616f9539e032bd794c36c
+content_hash: 44015ddd7c4bf19a0492a221054e33cbce3e7d15ad863b5eda2a45ce0c527a30
 ---
 
 This guide walks through the complete integration of Uxopian AI into an ARender deployment. Follow the phases in order. Each phase ends with a validation checkpoint. **Do not move to the next phase until the current one passes** — this avoids context-switching between infrastructure work and UI configuration.
+
+Phase 5 adds the AI menu with ARender XML beans and a JavaScript file deployed next to ARender. With the GWT viewer (`arender-ui-springboot`, or the `flower-docs-arender-hmi` viewer FlowerDocs publishes), the menu can instead be written as Uxopian AI scripts that ARender loads at startup, so that changing it needs no image rebuild and no XML: see [Define the AI menu as Uxopian AI scripts](#define-the-ai-menu-as-uxopian-ai-scripts).
 
 ## Architecture
 
@@ -317,6 +319,154 @@ If the panel does not appear, open browser developer tools:
 
 ---
 
+## Define the AI menu as Uxopian AI scripts
+
+Instead of declaring the AI menu in ARender's XML and deploying a JavaScript file next to ARender, the GWT viewer can take its whole menu from three [scripts](../admin/managing_scripts.md) kept in Uxopian AI. ARender is pointed at them by one JVM system property; after that, an administrator adds, removes or renames an entry from the admin console, publishes, and the next document opening shows it. No image is rebuilt and no ARender XML is touched.
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant AR as ARender viewer<br/>(browser)
+    participant G as uxopian-gateway
+    participant A as uxopian-ai
+    U->>AR: Opens a document
+    AR->>G: GET /api/v1/scripts/arender-core<br/>(arenderjs.startupScript)
+    G->>A: forwards with the caller's identity
+    A-->>AR: arender-core
+    AR->>G: GET arender-config
+    AR->>AR: runs the startup script it had before (chainedStartupScript)
+    AR->>G: GET the chat web component, then arender-buttons
+    AR-->>U: AI menu in the top panel
+    U->>AR: Picks an entry
+    AR->>G: Chat request with a prompt and the ARender document ids
+    G->>A: forwards
+    A-->>U: answer in the chat
+```
+
+*Figure: ARender loads `arender-core` as its startup script; `arender-core` loads the configuration and the menu from Uxopian AI and injects the menu in the top panel.*
+
+:::tip[Download]
+**<a href={require('./uxopian-ai_arender_scripts.zip').default} download="uxopian-ai_arender_scripts.zip">uxopian-ai_arender_scripts.zip</a>** — `arender-config.js`, `arender-core.js`, `arender-buttons.js`
+:::
+
+| Script | Content |
+|---|---|
+| `arender-config` | Constants only: where Uxopian AI is, which startup script to chain, which scripts to load, the accent colour. |
+| `arender-core` | The machinery. Loads `arender-config` from the URL ARender fetched it from, runs the startup script ARender had before, loads the chat web component and the scripts listed in the configuration, injects menus and buttons in the top panel and puts them back whenever ARender redraws it. Offers the helpers below. |
+| `arender-buttons` | The menu itself: one `uxoai.addMenu` call, one line per entry. |
+
+### 1. Publish the three scripts
+
+In the admin panel, open **Scripts** and create `arender-config`, `arender-core` and `arender-buttons` with the content of the archive, then publish them (scan, or force-publish). Do it on every tenant whose users open the viewer.
+
+Edit `arender-config` first:
+
+```javascript
+window.uxoaiConfig = {
+    // uxopian-ai as seen by the browser: absolute, or relative to ARender when both share an origin.
+    host: 'https://your-gateway-host/uxopian-ai',
+    // Startup script ARender had before arender-core, relative to ARender ('' when there is none).
+    chainedStartupScript: '',
+    // Scripts loaded once ARender is ready, in this order.
+    scripts: ['arender-buttons'],
+    // true: load the drafts instead of the published versions, to try a change before publishing.
+    useDrafts: false,
+    accentColor: '#6d28d9'
+};
+```
+
+### 2. Point ARender at `arender-core`
+
+Set the `arenderjs.startupScript` system property on the viewer's JVM:
+
+```yaml
+# ARender Helm chart
+viewer:
+  jvmOpts: "-Xms512m -Xmx512m -Darenderjs.startupScript=https://your-gateway-host/uxopian-ai/api/v1/scripts/arender-core"
+```
+
+```yaml
+# Docker Compose
+ui:
+  image: artifactory.arondor.cloud:5001/arender-ui-springboot:<version>
+  environment:
+    JAVA_OPTS: -Xms512m -Xmx1024m -Darenderjs.startupScript=https://your-gateway-host/uxopian-ai/api/v1/scripts/arender-core
+```
+
+A system property outranks every ARender properties file, the `arender.properties` an integration image embeds included, so it works whatever the image already sets. The URL must end with `/api/v1/scripts/arender-core`: `arender-core` derives from it where to load the other scripts.
+
+:::danger[Publish before you deploy]
+Once the property is set, ARender runs `arender-core` and nothing else. If `arender-core` cannot be fetched (not published on the user's tenant, or a 401), ARender runs no startup script at all — the integration's own script, such as FlowerDocs' menus, included.
+:::
+
+When ARender and the gateway are on different origins, list ARender's origin in the gateway's `app.cors.allowed-origins`; otherwise the chat opens but every request fails with a network error.
+
+### 3. Write the menu
+
+`arender-buttons` declares the menu with the helpers of `arender-core`:
+
+```javascript
+uxoai.addMenu({
+    title: 'Uxopian AI',
+    items: [
+        uxoai.promptItem('Summarize in text format', 'summarizeDocumentText', function (doc) {
+            return { documentId: doc.documentId };
+        }),
+        uxoai.promptItem('Generic comparison', 'genericComparison', function (doc) {
+            return { language: 'french', leftDocumentId: doc.documentIds[0], rightDocumentId: doc.documentIds[1] };
+        }, { icon: 'icon-compare', multiDocument: true }),
+        uxoai.chatItem('Open chat with AI', 'arenderContext', function (doc) {
+            return { documentId: doc.documentId };
+        }, { icon: 'icon-send' })
+    ]
+});
+```
+
+| Helper | Description |
+|---|---|
+| `uxoai.addMenu({ title, icon, items })` | Adds a dropdown to the top panel. Without `icon`, a robot is drawn in the accent colour. |
+| `uxoai.addButton({ title, icon, run })` | Adds a single button to the top panel. |
+| `uxoai.promptItem(label, promptId, payload, options)` | Menu entry that sends the prompt to the chat as the user's message. |
+| `uxoai.chatItem(label, promptId, payload, options)` | Menu entry that opens the chat with the prompt as system context, for a free conversation. |
+| `uxoai.createChat(request)` | Opens the chat with any request, on the configured host. |
+| `uxoai.addStyle(id, css)` | Adds or replaces a `<style>` element. |
+| `uxoai.onReady(callback)` | Runs `callback(arenderjs)` once ARender's JavaScript API is available. |
+
+`payload` receives `{ documentId, documentIds }`: the current document and the documents of the layout (only the current one when a single document is open). `options` takes `icon`, an ARender icon class (`icon-compare`, `icon-text`, `icon-send`, `icon-list-check`, …), and `multiDocument: true` to grey the entry out unless several documents are open.
+
+To change the menu, edit `arender-buttons`, publish, and reopen the document.
+
+### FlowerDocs viewer
+
+The `flower-docs-arender-hmi` viewer already has a startup script, `scripts/menus.js`, that wires ARender into FlowerDocs. Keep it running by naming it in `arender-config`, and go through the FlowerDocs GUI-plugin route of the gateway, which is on the viewer's own origin and where the FlowerDocs GUI adds the user's token:
+
+```javascript
+window.uxoaiConfig = {
+    host: '/gui/plugins/FD/gateway/uxopian-ai',
+    chainedStartupScript: 'scripts/menus.js',
+    scripts: ['arender-buttons'],
+    useDrafts: false,
+    accentColor: '#6d28d9'
+};
+```
+
+```yaml
+viewer:
+  jvmOpts: "-Xms512m -Xmx512m -Darenderjs.startupScript=/gui/plugins/FD/gateway/uxopian-ai/api/v1/scripts/arender-core"
+```
+
+- The direct route `/gui/gateway/uxopian-ai` is not an option from the viewer: the gateway finds no FlowerDocs token for the viewer's session cookie and answers 401. The GUI-plugin route buffers responses, so a chat answer arrives in one block instead of streaming.
+- The scope (`FD` above) is part of the route, and the tenant of a request is the user's scope: publish the scripts on each scope's tenant, with that scope in `host`. A viewer shared by several scopes needs the scripts on all of them.
+
+### Limitations
+
+- ARender's JavaScript API cannot create a top panel button. `arender-core` injects the menu in the DOM of the GWT top panel, with the panel's own CSS classes (`toppanelSection`, `toppanelButton`, `dropDownMenuItem`): check the menu after each ARender upgrade.
+- Injected menus and buttons are not part of ARender's overflow menu on a narrow screen.
+- `GET /api/v1/scripts/{id}` is cached for five minutes (`max-age=300`). `arender-core` loads the other scripts with a timestamp, so a published change shows at the next opening; `arender-core` itself is loaded from the property's URL, so a new version of it takes up to five minutes to reach a browser that already loaded it.
+- ARender 2026.3 does not load Font Awesome: use ARender's `icon-*` classes.
+
+---
+
 ## ARender configuration reference
 
 ### arender-custom-client.properties
@@ -356,6 +506,9 @@ To add a new button, add a `DropdownMenuItemPresenter` bean and reference its ID
 | LLM returns "provider not found" | `llm.default.provider` names a non-existent provider | Align `default.provider` with an entry in `llm.provider.globals` (Phase 3.2) |
 | 401 on all requests | Provider not configured or path mismatch | Check gateway route `path` and provider configuration |
 | CORS errors in browser | Browser blocked cross-origin requests | Serve ARender and gateway on the same origin, or configure CORS |
+| `Could not fetch startup script '…/arender-core', Status=401` | The viewer cannot authenticate on that route | FlowerDocs viewer: use the GUI-plugin route `/gui/plugins/<scope>/gateway/uxopian-ai` (see [FlowerDocs viewer](#flowerdocs-viewer)) |
+| Integration menus gone after setting `arenderjs.startupScript` | `arender-core` not published on the user's tenant, so ARender runs no startup script | Publish the three scripts on that tenant, or remove the property |
+| AI menu absent, `[uxoai]` warning in the console | A script of `arender-config` is not published, or `host` is wrong | Check the script ids and `host` in `arender-config` |
 
 ## Related pages
 
