@@ -13,7 +13,7 @@ toc_max_heading_level: 4
 Direct upgrade is supported, you will need to follow the plan :
 
 1. Apply needed modifications after reading this upgrade notes
-2. Upgrade ARender to 2026.3.0
+2. Upgrade ARender to 2026.3.1
 3. Start all applications with their prerequisites
 
 ### Upgrading from 2026.0.x
@@ -31,7 +31,7 @@ Direct upgrade is **not** supported. Upgrades from 2025.x.x or earlier to 2026.2
 
 ### Modified components
 
-- **ARender** 2026.1.0 → 2026.3.0
+- **ARender** 2026.1.0 → 2026.3.1
 - **Plume** 2026.0.0 → 2026.2.0
 
 ### Deprecated components

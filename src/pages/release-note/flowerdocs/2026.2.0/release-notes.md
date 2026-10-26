@@ -8,7 +8,7 @@ import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
 
 This version requires the following software prerequisites:
 
-- **ARender**: 2026.3.0  
+- **ARender**: 2026.3.1  
 - **Redis**: 8.8  
 - **OpenSearch**: 3.6.0
 
@@ -25,7 +25,7 @@ This version requires the following software prerequisites:
 
 ## Overview
 
-Version 2026.2.0 gives business teams more autonomy. Six new administrative roles make it possible to delegate part of the administration to key users without granting them full rights. Search becomes more precise with three new operators: "does not contain", "is empty" and "is not empty". In eProcess, several existing documents can now be attached to a case file in a single action. This version also makes integration work easier: new JavaScript API methods allow the interface to be customized without overriding product scripts. Finally, this version embeds the ARender 2026.3.0 viewer and includes several security fixes.
+Version 2026.2.0 gives business teams more autonomy. Six new administrative roles make it possible to delegate part of the administration to key users without granting them full rights. Search becomes more precise with three new operators: "does not contain", "is empty" and "is not empty". In eProcess, several existing documents can now be attached to a case file in a single action. This version also makes integration work easier: new JavaScript API methods allow the interface to be customized without overriding product scripts. Finally, this version embeds the ARender 2026.3.1 viewer and includes several security fixes.
 
 ## Upgrade Notes
 
@@ -74,7 +74,7 @@ This change affects the use of quotation marks. Until now, they were used to sea
 
 #### 💻 ARender viewer update
 
-The ARender viewer embedded in FlowerDocs has been updated to version 2026.3.0. This update improves everyday document display and handling:
+The ARender viewer embedded in FlowerDocs has been updated to version 2026.3.1. This update improves everyday document display and handling:
 
 * In the Document Builder, multiple page selection with Ctrl+click works again.  
 * Large-format pages are displayed faster.  
@@ -123,7 +123,7 @@ The faster searches for users who belong to many groups come from a change in ho
 This version includes several security fixes and additional protective measures, as well as fixes for vulnerabilities identified in third-party dependencies (CVEs).
 #### 💻 ARender update: security
 
-The update to ARender 2026.3.0 brings its own security fixes as well as third-party dependency updates.
+The update to ARender 2026.3.1 brings its own security fixes as well as third-party dependency updates.
 
 For more information, see the ARender release notes [here](/release-note/arender/v2026.3.0/release-notes)
 
@@ -210,4 +210,4 @@ No specific changes have been made to GEC. This version benefits from all the ch
 
 *No known issues specific to GEC for this version.*
 
-<FlowerDocsDownloads version="2026.2.0" arenderVersion="2026.3.0" />
+<FlowerDocsDownloads version="2026.2.0" arenderVersion="2026.3.1" />

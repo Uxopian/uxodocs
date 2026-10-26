@@ -48,7 +48,7 @@ function arenderVersionOverrides(): Record<string, { banner?: "none" }> {
 }
 
 const flowerDocsVersion = "2026.2.0";
-const flowerDocsArenderVersion = "2026.3.0";
+const flowerDocsArenderVersion = "2026.3.1";
 const flowerDocsOSVersion = "3.6.0";
 const flowerDocsRedisVersion = "8.8";
 const flowerDocsJavaVersion = "25";
