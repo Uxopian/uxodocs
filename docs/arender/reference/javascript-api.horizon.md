@@ -185,7 +185,7 @@ When the other system writes to a document inside a container, its REST route wr
 | `x`, `y`, `width`, `height` | `number`                                  | Position/size in the page's own coordinate space — see [Coordinates](#coordinates)                                                                                                                                                                                                                                                                                   |
 | `color?`                    | `string`                                  | `#rrggbb`, `rgb()`, `hsl()` or a colour name: `'#ffff00'`, `'rgb(255, 255, 0)'`, `'hsl(60, 100%, 50%)'`, `'yellow'`. An alpha channel is ignored — use `opacity`. Anything else is refused with `UNSUPPORTED`, including `transparent`, `currentcolor`, `oklch()`, `lab()` and `color()`. Defaults to the viewer's own default for that type. Read back as `#rrggbb` |
 | `opacity?`                  | `number`                                  | 0 to 1. Defaults to the viewer's own default for that type                                                                                                                                                                                                                                                                                                           |
-| `contents?`                 | `string`                                  | Text attached to the annotation. On a `square`, it makes a [comment zone](#comments-and-comment-zones), listed in the comments panel                                                                                                                                                                                                                                 |
+| `contents?`                 | `string`                                  | Text attached to the annotation                                                                                                                                                                                                                                                                                                                                      |
 
 `update` takes the same shape minus `type` (immutable once created) and `documentId` (an annotation does not move to another document), every field optional.
 
@@ -234,30 +234,6 @@ await window.ARender.annotations.create({
 });
 const onOther = window.ARender.annotations.get({ documentId: other.documentId });
 ```
-
-### Comments and comment zones
-
-A comment zone is a `square` annotation whose `contents` carries the comment. The same `square` without `contents` is a plain rectangle. The viewer's comment zone tool and `annotations.create` write the same annotation, so a zone a host creates is listed in the comments panel like one the user drew, and is reported by `annotations.created`:
-
-```javascript
-const zoneId = await window.ARender.annotations.create({
-    page: 0,
-    type: "square",
-    x: 72,
-    y: 120,
-    width: 300,
-    height: 80,
-    contents: "Check these figures",
-});
-```
-
-`update` and `delete` act on a comment zone like on any `square`.
-
-The rest of a comment thread is read-only through the API:
-
-- A comment pinned to a point, and every reply, reads back as a `text` annotation. No field tells a reply from the comment it answers.
-- A comment's status (accepted, rejected…) is not exposed.
-- `update` and `delete` refuse a `text` annotation with `UNSUPPORTED`, and `create` cannot place one.
 
 ## Events
 

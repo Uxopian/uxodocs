@@ -19,7 +19,7 @@ Status as of ARender 2026.4.0.
 
 | Area | Available | Coming soon |
 |------|-----------|-------------|
-| Viewing | All formats including AutoCAD, [Excel data view](/release-note/arender/v2026.3.0/release-notes#excel-data-view) (`.xlsx`), full-text search, multi-view (several documents side by side, [driven from the JavaScript API](../reference/javascript-api.md#panels) too), table of contents (the document's outline) | Comparison (text and image) |
+| Viewing | All formats including AutoCAD, [Excel data view](/release-note/arender/v2026.3.0/release-notes#excel-data-view) (`.xlsx`), full-text search, multi-view (several documents side by side), table of contents (the document's outline) | Comparison (text and image) |
 | Annotations | Rectangle, circle, free text, arrow, freehand, highlight, underline, strikethrough | Stamp, link, polyline, measure, bookmarks |
 | Comments | Comment pinned to a point or on a zone, with replies, status and a comments panel | Comment on a text selection |
 | Download and print | Download in original format or as PDF, print | Download as PDF with annotations (flattened or editable), print with annotations |
