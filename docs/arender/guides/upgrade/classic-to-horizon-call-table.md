@@ -38,7 +38,7 @@ The Horizon API counts pages from zero, same as the backend itself — only the 
 |---|---|
 | `getScreenSplitJSAPI().askOpenAsNewDocument(documentId)` | `openView(documentId)` — resolves with the new panel's `viewId` |
 | `getDocumentCompareJSAPI().closeAllMultiView()` | `closeView(viewId)` for every panel but one, read from `getViews()` |
-| `registerCloseMultiView(cb)` | `on('view.closed', cb)` — multi-view has ended when `getViews().length === 1` |
+| `annotjs.registerCloseMultiView(cb)` | `on('view.closed', cb)` — multi-view has ended when `getViews().length === 1` |
 
 ## Search commands
 

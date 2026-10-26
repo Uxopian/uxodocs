@@ -14,9 +14,11 @@ content_hash: 3a45421f2fbd6b28cd0fe7ec03cfb570fa0bc329ccc0eafc3080525722326dfa
 The ARender Horizon API is exposed in two ways:
 
 - **On the window object:** `window.ARender`
-- **On the element instance:** `element.ARender` (useful when multiple viewers are on the same page)
+- **On the element instance:** `element.ARender`, the same object as `window.ARender`
 
-Calls made before the viewer finishes mounting are queued automatically — no need to wait for any event. Only one viewer per page is supported: two `<arender-element>` tags share one API and one state.
+Only one viewer per page is supported: two `<arender-element>` tags share one API and one state.
+
+The API exists as soon as the script has loaded, before the viewer has mounted. `openDocument` can be called straight away: it resolves once the document is displayed. The other commands act on what is open, and refuse with `NOT_READY` until a document is: await `openDocument`, or wait for `document.changed`.
 
 That one viewer can show several panels side by side (multi-view). The API stays one: **the document on screen is the document of the active panel**, for every command and event that mentions it. See [Panels](#panels).
 
@@ -63,7 +65,7 @@ for (const child of layout.children ?? []) {
 
 ## Panels
 
-Multi-view shows several documents of the open set side by side, each in its own panel. Single view is one panel. The user opens a panel from a thumbnail ("Open in a new view") and activates one by clicking in it; a host does the same with these commands.
+Multi-view shows several documents of the open set side by side, each in its own panel. Single view is one panel. The user opens a panel from a thumbnail ("Open in a new view") or from the "+" between two panels ("Add a view here"), and activates one by clicking in it; a host does the same with these commands.
 
 | Method                 | Parameters           | Returns           | Description                                                                                                                                                                                                                                                                       |
 | ---------------------- | -------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -110,7 +112,9 @@ await window.ARender.closeView(viewId); // back to single view
 | `next()` / `previous()` | `Promise<void>` | Displays the next/previous hit, changing document when it sits in another one                                                                                                                        |
 | `dispose()`             | `void`          | Clears the search and retires the handle, without changing the displayed page. The same exit verb used everywhere else a handle is handed back — see [Events](#events)                               |
 
-**A handle stops being usable once another search has started** — from here, or typed into the search bar — even before that new search resolves. Calling `next()` or `previous()` on it rejects with `STALE_HANDLE`, and the viewer does not jump back to a hit of the earlier term.
+The handle is a remote control on the search on screen, not a receipt for one query: `position` and `total` follow whatever was searched last, from here or typed into the search bar. A term typed into the bar does not retire the handle, and `next()`/`previous()` carry on with it.
+
+**Only a newer `search()` call retires a handle, once that call resolves.** A call still in flight, or one that fails, leaves it live. From then on, `next()` and `previous()` on the earlier handle reject with `STALE_HANDLE`, and its `dispose()` does nothing, so it cannot clear the newer search.
 
 **Example**
 
@@ -149,7 +153,7 @@ Resolves once the file has been handed to the browser. A download already runnin
 
 `window.ARender.annotations` covers the annotations of the documents displayed in a panel. An annotation belongs to its document, not to a panel: a command given no document acts on the document on screen, and one given a document acts on it as long as a panel displays it.
 
-Every command writes to the server as it is made — there is no save call and no draft to flush. A command whose write fails rejects with `SERVER_ERROR`. A write the user made in the viewer has no promise to reject: it is reported by the `annotations.writeFailed` event instead.
+Every command writes to the server as it is made — there is no save call and no draft to flush. A command whose write fails rejects with the code of the server's answer, `SERVER_ERROR` in most cases — see [Errors](#errors). A write the user made in the viewer has no promise to reject: it is reported by the `annotations.writeFailed` event instead.
 
 | Method                 | Parameters                                        | Returns           | Description                                                                                                                                                                                                                                                                                                                             |
 | ---------------------- | ------------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -181,9 +185,11 @@ When the other system writes to a document inside a container, its REST route wr
 | `x`, `y`, `width`, `height` | `number`                                  | Position/size in the page's own coordinate space — see [Coordinates](#coordinates)                                                                                                                                                                                                                                                                                   |
 | `color?`                    | `string`                                  | `#rrggbb`, `rgb()`, `hsl()` or a colour name: `'#ffff00'`, `'rgb(255, 255, 0)'`, `'hsl(60, 100%, 50%)'`, `'yellow'`. An alpha channel is ignored — use `opacity`. Anything else is refused with `UNSUPPORTED`, including `transparent`, `currentcolor`, `oklch()`, `lab()` and `color()`. Defaults to the viewer's own default for that type. Read back as `#rrggbb` |
 | `opacity?`                  | `number`                                  | 0 to 1. Defaults to the viewer's own default for that type                                                                                                                                                                                                                                                                                                           |
-| `contents?`                 | `string`                                  | Note shown in the comment panel                                                                                                                                                                                                                                                                                                                                      |
+| `contents?`                 | `string`                                  | Text attached to the annotation. On a `square`, it makes a [comment zone](#comments-and-comment-zones), listed in the comments panel                                                                                                                                                                                                                                 |
 
 `update` takes the same shape minus `type` (immutable once created) and `documentId` (an annotation does not move to another document), every field optional.
+
+`update` and `delete` act on the types `create` can place — `highlight`, `square` and `circle` — and refuse any other with `UNSUPPORTED`. Reading is not restricted.
 
 An `Annotation` read back (from `get()` or an event) adds: `id`, `documentId`, `creator` (`null` unless written by another system), and reads `type` as a plain `string` — wider than `CreatableAnnotationType`, since reading is not restricted.
 
@@ -228,6 +234,30 @@ await window.ARender.annotations.create({
 });
 const onOther = window.ARender.annotations.get({ documentId: other.documentId });
 ```
+
+### Comments and comment zones
+
+A comment zone is a `square` annotation whose `contents` carries the comment. The same `square` without `contents` is a plain rectangle. The viewer's comment zone tool and `annotations.create` write the same annotation, so a zone a host creates is listed in the comments panel like one the user drew, and is reported by `annotations.created`:
+
+```javascript
+const zoneId = await window.ARender.annotations.create({
+    page: 0,
+    type: "square",
+    x: 72,
+    y: 120,
+    width: 300,
+    height: 80,
+    contents: "Check these figures",
+});
+```
+
+`update` and `delete` act on a comment zone like on any `square`.
+
+The rest of a comment thread is read-only through the API:
+
+- A comment pinned to a point, and every reply, reads back as a `text` annotation. No field tells a reply from the comment it answers.
+- A comment's status (accepted, rejected…) is not exposed.
+- `update` and `delete` refuse a `text` annotation with `UNSUPPORTED`, and `create` cannot place one.
 
 ## Events
 
@@ -293,7 +323,9 @@ try {
 | `UNSUPPORTED`  | A value outside what the command accepts — unknown format, unlisted annotation type                                                    |
 | `STALE_HANDLE` | A handle (search, open) another call has since replaced                                                                                |
 | `SERVER_ERROR` | The request failed — the server answered with an error, or could not be reached                                                        |
-| `FORBIDDEN`    | Reserved — nothing raises it yet, since the backend has no authorization model                                                         |
+| `FORBIDDEN`    | The server refused the request (HTTP 401 or 403). No command checks a user's rights on its own yet                                     |
+
+A command that reaches the server takes its code from the server's answer: `NOT_FOUND` on a 404, `FORBIDDEN` on a 401 or 403, `UNSUPPORTED` on a 415 or 422, and `SERVER_ERROR` on any other failure or when the server cannot be reached. This holds for `openDocument`, the annotation writes, `annotations.refresh` and `download`, and `document.loadFailed` carries the same code. `getDocumentMetadata` always rejects with `SERVER_ERROR`.
 
 `isError()` is the only supported way to narrow a caught value (typed `unknown`) down to `code`.
 
