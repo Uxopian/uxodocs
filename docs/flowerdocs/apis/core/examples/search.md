@@ -162,7 +162,7 @@ public void search() throws FunctionalException, TechnicalException
 	FilterClause filter = FilterClauseBuilder.init().criterion(criterion).build();
 	OrderClause order = new OrderClause("creationDate", TIMESTAMP, false);
 	SearchRequest request = SearchRequestBuilder.init()
-		.display("name", "classid", "creationDate")
+		.display(Arrays.asList("name", "classid", "creationDate"))
 		.filter(filter)
 		.order(order)
 		.max(20)
