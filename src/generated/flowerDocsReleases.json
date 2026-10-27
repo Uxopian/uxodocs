@@ -27,6 +27,15 @@
     "latest": false
   },
   {
+    "version": "2025.7.0",
+    "majorVersion": "2025",
+    "date": "2026-10-27",
+    "description": "FlowerDocs 2025.7.0 is a minor release that includes security fixes the update of the ARender viewer to version 2023.23.1.",
+    "hasUpgradeNotes": true,
+    "slug": "2025.6.0",
+    "latest": true
+  },
+  {
     "version": "2025.6.0",
     "majorVersion": "2025",
     "date": "2026-09-11",
