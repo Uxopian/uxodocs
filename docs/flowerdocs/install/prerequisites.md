@@ -28,7 +28,7 @@ Installing a FlowerDocs platform requires Linux servers. FlowerDocs is supported
 
 ### Application components
 
-FlowerDocs requires **JDK {{javaVersion}} LTS**.
+FlowerDocs requires **JDK {{javaVersion}} LTS**, in version **{{javaMinVersion}}** or later.
 
 This documentation does not cover the installation of the ARender rendition server (version {{arenderVersion}}). It must therefore be installed beforehand and be accessible via HTTP or HTTPS protocol from **FlowerDocs GUI**, **FlowerDocs Core** and **ARender HMI** (version {{arenderVersion}}).
 

@@ -52,6 +52,7 @@ const flowerDocsArenderVersion = "2026.3.1";
 const flowerDocsOSVersion = "3.6.0";
 const flowerDocsRedisVersion = "8.8";
 const flowerDocsJavaVersion = "25";
+const flowerDocsJavaMinVersion = "25.0.5+8";
 const flowerDocsCompanionVersion = "2026.0.0";
 const flowerDocsPlumeVersion ="2026.2.0";
 
@@ -170,7 +171,7 @@ const config: Config = {
                 lastVersion: "current",
                 versions: { current: { label: `v${flowerDocsVersion}` } },
                 showLastUpdateTime: true,
-                remarkPlugins: [[remarkVariables, { variables: { version: flowerDocsVersion, arenderVersion: flowerDocsArenderVersion, osVersion: flowerDocsOSVersion, redisVersion: flowerDocsRedisVersion, javaVersion: flowerDocsJavaVersion } }]],
+                remarkPlugins: [[remarkVariables, { variables: { version: flowerDocsVersion, arenderVersion: flowerDocsArenderVersion, osVersion: flowerDocsOSVersion, redisVersion: flowerDocsRedisVersion, javaVersion: flowerDocsJavaVersion, javaMinVersion: flowerDocsJavaMinVersion } }]],
             },
         ],
         [
