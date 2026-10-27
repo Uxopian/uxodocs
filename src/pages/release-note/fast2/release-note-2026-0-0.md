@@ -51,6 +51,7 @@ _Discover the details below..._
 
 ### 🔧 Improvements
 - **Authentication is mandatory**: Every Fast2 instance now requires users to sign in. The `security.authentication.required` property has been removed, along with the option to run without authentication, which no longer worked with multitenancy.
+- **Super admin creation**: The `default.super.admin.*` properties have been removed: a super admin password no longer sits in configuration. A deployment script creates the first super admin with `POST /api/users/register-super-admin`, whose request must give the email, the password and the role `SUPER_ADMIN`. A second call is refused with 409.
 - **Worker registration**: The public worker registration endpoint has been removed. Workers are registered by an administrator and stored in the database.
 - **Worker tokens**: The `/generate-token` endpoint now answers 404 for an unknown worker instead of silently issuing a token, and its request parameter has been renamed to `workerLogin`.
 
@@ -128,6 +129,7 @@ _Discover the details below..._
 - **OpenSearch is migrated in place** from 1.3.15 to 3.5.0 on first start. Back up the data directory before upgrading.
 - **OpenSearch Dashboards is no longer shipped** with the package. It returns as a separately installed sidecar.
 - **Authentication can no longer be disabled.** `security.authentication.required` has been removed and is ignored if still present in `application.properties`. On first start, create the super admin from the registration page or with `POST /api/users/register-super-admin`.
+- **The `default.super.admin.*` properties have been removed.** Scripts that create the super admin must call `POST /api/users/register-super-admin` with `"role": "SUPER_ADMIN"` in the request; a request without it is refused with 400.
 - **The public worker registration endpoint has been removed.** Workers must be declared by an administrator.
 - **`/generate-token` renames its parameter** from `workerLabel` to `workerLogin`, and answers 404 for an unknown worker.
 - **`AlterDocumentProperty` is deprecated.** Use `AlterDocumentProperties`.
