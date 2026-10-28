@@ -110,6 +110,7 @@ _Discover the details below..._
 - **CSV exports**: Headers omit the redundant `doc.` prefix for single-document punnets, columns can be filtered by whitelist or blacklist, and the deprecated "New column headers" parameter has been removed.
 - **FlowerDocs**: A delete task has been added, and the querier can extract `selectClause` fields directly into the punnet dataset.
 - **Converters**: The HTML-to-PDF converter processes child documents, and Eml2Pdf takes the language as a parameter.
+- **LocalSource**: Files are handed to punnets while folders are still being scanned, so the first punnet arrives within milliseconds and large trees no longer run out of memory. The number of scanning threads can be set, and a "Skip JSON parsing" option joins the XML one. Files are no longer returned in any particular order.
 
 ### 🐞 Bug Fixes
 - **Punnet serializer**: No longer produces an inconsistent dataset.
@@ -132,6 +133,7 @@ _Discover the details below..._
 - **The `default.super.admin.*` properties have been removed.** Scripts that create the super admin must call `POST /api/users/register-super-admin` with `"role": "SUPER_ADMIN"` in the request; a request without it is refused with 400.
 - **The public worker registration endpoint has been removed.** Workers must be declared by an administrator.
 - **`/generate-token` renames its parameter** from `workerLabel` to `workerLogin`, and answers 404 for an unknown worker.
+- **LocalSource's deprecated `fileScanner` option has been removed.** Maps that still use it must move their paths to "Files paths"; otherwise the task stops with "No file path provided".
 - **`AlterDocumentProperty` is deprecated.** Use `AlterDocumentProperties`.
 - **`Tiff2PdfIText` has been removed.** Use `Tiff2PdfBox`.
 - **Null property names and values are refused.** Maps relying on the previous `null_value` sentinel must be reviewed.
