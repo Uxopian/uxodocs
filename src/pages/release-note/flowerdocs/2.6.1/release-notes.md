@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software versions as prerequisites:
 
 - **ARender**: 4.8.7
@@ -121,4 +119,3 @@ This version requires the following software versions as prerequisites:
 
 🔴 Le webservices FlowerDocs `job-rest-controller` sont de nouveau exposés
 
-<FlowerDocsDownloads version="2.6.1" />

@@ -97,12 +97,4 @@ The release also corrects watermark positioning, hardens EML-to-PDF conversion, 
 | PDF with a single non-viewable attachment rendered as a container instead of the PDF | Evolution | AR-18418 | |
 | Security dependency upgrades | Security | AR-18419, AR-18443, AR-18462 | |
 
----
-
-## Download
-
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
-
-<ARenderDownloads version="2023.22.0" filter={["rendition", "web-ui", "connector-filenet", "hmi-cm", "plugin-filenet", "plugin-alfresco", "plugin-alfresco-adf", "client-api", "rendition-api"]} />
-
 </div>

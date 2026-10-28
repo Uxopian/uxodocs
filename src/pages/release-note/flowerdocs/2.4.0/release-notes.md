@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 # \{\{% gui %\}\} : Général
 
 - Support de l'affichage pour mobiles amélioré
@@ -110,4 +108,3 @@ import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
 - JPA 2.2
 - FontAwesome 5.6.1
 
-<FlowerDocsDownloads version="2.4.0" />

@@ -3,8 +3,6 @@ title: FlowerDocs 2025.7.0 Release notes
 description: FlowerDocs 2025.7.0 Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software prerequisites:
 
 - **ARender**: 2023.23.1
@@ -63,5 +61,3 @@ No specific changes have been made to this version. It benefits from all the fix
 ### Overview
 
 No specific changes have been made to this version. It benefits from all the fixes and improvements made to FlowerDocs.
-
-<FlowerDocsDownloads version="2025.7.0" arenderVersion="2023.32.0" />

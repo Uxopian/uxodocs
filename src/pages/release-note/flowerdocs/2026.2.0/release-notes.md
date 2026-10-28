@@ -4,8 +4,6 @@ toc_max_heading_level: 4
 description: FlowerDocs 2026.2.0 Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software prerequisites:
 
 - **ARender**: 2026.3.1  
@@ -209,5 +207,3 @@ No specific changes have been made to GEC. This version benefits from all the ch
 ### Known issues
 
 *No known issues specific to GEC for this version.*
-
-<FlowerDocsDownloads version="2026.2.0" arenderVersion="2026.3.1" />

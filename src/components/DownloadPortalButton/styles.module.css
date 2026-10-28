@@ -4,6 +4,31 @@
     margin: 1.5rem auto 2rem;
 }
 
+/* Product colors: --dl-start/--dl-end (rest), --dl-hover-end (hover), --dl-rgb (shadows) */
+.fast2 {
+    --dl-start: #5cb8c7;
+    --dl-end: #4aa5b4;
+    --dl-hover-end: #3a8f9d;
+    --dl-dark-hover-start: #6cc3d2;
+    --dl-rgb: 92, 184, 199;
+}
+
+.arender {
+    --dl-start: #4a8fef;
+    --dl-end: #3a7bd9;
+    --dl-hover-end: #2c66bf;
+    --dl-dark-hover-start: #6aa5f5;
+    --dl-rgb: 74, 143, 239;
+}
+
+.flowerdocs {
+    --dl-start: #d745ff;
+    --dl-end: #bd34e3;
+    --dl-hover-end: #9d22c2;
+    --dl-dark-hover-start: #e070ff;
+    --dl-rgb: 215, 69, 255;
+}
+
 .button {
     display: inline-flex;
     align-items: center;
@@ -15,11 +40,12 @@
     text-decoration: none !important;
     letter-spacing: 0.2px;
     border-radius: 10px;
-    background: linear-gradient(135deg, #5cb8c7, #4aa5b4);
+    background: linear-gradient(135deg, var(--dl-start), var(--dl-end));
     box-shadow:
-        0 6px 16px rgba(92, 184, 199, 0.4),
+        0 6px 16px rgba(var(--dl-rgb), 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.35);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transition:
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
         box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
         background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -41,9 +67,9 @@
 
 .button:hover {
     transform: translateY(-1px);
-    background: linear-gradient(135deg, #4aa5b4, #3a8f9d);
+    background: linear-gradient(135deg, var(--dl-end), var(--dl-hover-end));
     box-shadow:
-        0 10px 22px rgba(92, 184, 199, 0.55),
+        0 10px 22px rgba(var(--dl-rgb), 0.55),
         inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
@@ -52,27 +78,27 @@
 }
 
 .button:focus-visible {
-    outline: 2px solid #5cb8c7;
+    outline: 2px solid var(--dl-start);
     outline-offset: 3px;
 }
 
 .button:active {
     transform: translateY(0);
     box-shadow:
-        0 3px 8px rgba(92, 184, 199, 0.45),
+        0 3px 8px rgba(var(--dl-rgb), 0.45),
         inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 [data-theme="dark"] .button {
     box-shadow:
-        0 6px 18px rgba(92, 184, 199, 0.5),
+        0 6px 18px rgba(var(--dl-rgb), 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 [data-theme="dark"] .button:hover {
-    background: linear-gradient(135deg, #6cc3d2, #4aa5b4);
+    background: linear-gradient(135deg, var(--dl-dark-hover-start), var(--dl-end));
     box-shadow:
-        0 10px 24px rgba(92, 184, 199, 0.65),
+        0 10px 24px rgba(var(--dl-rgb), 0.65),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 

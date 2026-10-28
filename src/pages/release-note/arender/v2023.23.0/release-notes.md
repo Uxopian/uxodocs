@@ -2,6 +2,7 @@
 title: "ARender v2023.23.0 - Release Notes"
 draft: false
 date: "2026-10-08"
+download_version: "2023.23.1"
 weight: -202323
 aliases:
   - /release/2023.23/
@@ -131,13 +132,5 @@ The release also fixes several email conversion issues, HEIC photos from recent 
 | FileNet RetrievalName not updated after merge or split | Regression | AR-18566 | TMAPR-6936 |
 | Circle and rectangle lose their customized color | Bug fix | AR-18634 | TMAPR-6956 |
 | Document statistics corrupted under concurrent load | Bug fix | AR-18568 | TMAPR-6952 |
-
----
-
-## Download
-
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
-
-<ARenderDownloads version="2023.23.0" filter={["rendition", "web-ui", "connector-filenet", "hmi-cm", "plugin-filenet", "plugin-alfresco", "plugin-alfresco-adf", "client-api", "rendition-api"]} />
 
 </div>
