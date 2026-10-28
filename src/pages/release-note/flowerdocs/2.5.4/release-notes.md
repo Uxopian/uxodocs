@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software versions as prerequisites:
 
 - **ARender**: 4.6.18
@@ -231,4 +229,3 @@ Cette version est la dernière version mineure de la 2.5. Elle contient principa
 
 🔴 Correction du client Alfresco pour empêcher des réinitialisations de la connexion
 
-<FlowerDocsDownloads version="2.5.4" />

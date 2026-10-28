@@ -7,7 +7,7 @@ import remarkVariables from "./scripts/remark-variables.mjs";
 // Update these when releasing a new version. They are injected into all
 // markdown files at build time via the remarkVariables script,
 // replacing {{version}} placeholders.
-const arenderVersion = "2026.3.0";
+const arenderVersion = "2026.3.1";
 
 // Suppress the "unmaintained" banner only on the LTS — the highest snapshot
 // major strictly below `current`. We allow at most two maintained majors in
@@ -53,7 +53,6 @@ const flowerDocsOSVersion = "3.6.0";
 const flowerDocsRedisVersion = "8.8";
 const flowerDocsJavaVersion = "25";
 const flowerDocsJavaMinVersion = "25.0.5+8";
-const flowerDocsCompanionVersion = "2026.0.0";
 const flowerDocsPlumeVersion ="2026.2.0";
 
 const getPdfFileName = (
@@ -105,7 +104,7 @@ const config: Config = {
     ],
 
 	customFields: {
-	    flowerDocsCompanionVersion, flowerDocsPlumeVersion,
+	    flowerDocsPlumeVersion,
 	},
 
     plugins: [

@@ -129,12 +129,4 @@ Backend, conversion and integration changes that apply regardless of the viewer.
 | NPE in EML-to-PDF conversion when an embedded image has a mismatched MIME type | Both | Bug fix | AR-18420 | TMAPR-6894 |
 | Document Service Broker image bundles conflicting logging libraries | Both | Bug fix | AR-18560 | TMAPR-6779 |
 
----
-
-## Download
-
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
-
-<ARenderDownloads version="2026.2.0" filter={["rendition", "web-ui", "connector-filenet", "plugin-filenet", "plugin-alfresco", "plugin-alfresco-adf", "client-api", "rendition-api"]} />
-
 </div>

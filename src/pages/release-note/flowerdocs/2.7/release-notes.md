@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software versions as prerequisites:
 
 - **ARender**: 4.8.20
@@ -137,4 +135,3 @@ Poursuite de la mise en conformité avec le RGAA :
 
 📋 FlowerDocs Core now includes ARender version 4.8.20
 
-<FlowerDocsDownloads version="2.7" />

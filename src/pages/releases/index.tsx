@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
+import clsx from "clsx";
 import ProductCarousel3D from "@site/src/components/ProductCarousel3D";
 import overrideStyles from "@site/src/components/ReleasePage.module.css";
 import fast2ReleasesData from "@site/src/generated/fast2Releases.json";
@@ -11,6 +12,7 @@ import fast2Styles from "./fast2.module.css";
 import arenderStyles from "./arender.module.css";
 import flowerDocsStyles from "./flowerdocs.module.css";
 import uxopianAiStyles from "./uxopian-ai.module.css";
+import { getDownloadPortalUrl } from "@site/src/components/DownloadPortalButton";
 
 type Product = "fast2" | "arender" | "flowerdocs" | "uxopian-ai";
 
@@ -51,8 +53,7 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
                 note.majorVersion === "2" ? "⚠️ v2.x-LTS deprecated as of Dec., 2025" : undefined,
         }),
         readMoreLink: (note: any) => `/release-note/fast2/${note.slug}`,
-        downloadLink: (note: any) =>
-            `https://downloads.uxopian.com/?product=fast2&version=${note.version.replace(/^v/, "")}`,
+        downloadLink: (note: any) => getDownloadPortalUrl("fast2", note.version),
         cardColor: "#5CB8C7",
     },
     arender: {
@@ -70,12 +71,15 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
             slug: note.slug,
             hasUpgradeNotes: note.hasUpgradeNotes,
             latest: note.latest,
+            downloadVersion: note.downloadVersion,
             deprecation: note.version.startsWith("v2023.")
                 ? "⚠️ 2023 LTS: full support ends Q1 2027, end of life Q1 2028"
                 : undefined,
         }),
         readMoreLink: (note: any) => note.slug,
         upgradeLink: (note: any) => `/release-note/arender/${note.version}/upgrade-notes`,
+        downloadLink: (note: any) =>
+            getDownloadPortalUrl("arender", note.downloadVersion ?? note.version),
         cardColor: "#4A8FEF",
     },
     flowerdocs: {
@@ -100,6 +104,7 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
         }),
         readMoreLink: (note: any) => `/release-note/flowerdocs/${note.slug}/release-notes`,
         upgradeLink: (note: any) => `/release-note/flowerdocs/${note.slug}/upgrade-notes`,
+        downloadLink: (note: any) => getDownloadPortalUrl("flowerdocs", note.version),
         cardColor: "#D745FF",
     },
     "uxopian-ai": {
@@ -124,7 +129,14 @@ const PRODUCTS_CONFIG: Record<Product, ProductConfig> = {
     },
 };
 
-function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink, downloadLink }: any) {
+function ReleaseNoteCard({
+    note,
+    styles,
+    cardColor,
+    readMoreLink,
+    upgradeLink,
+    downloadLink,
+}: any) {
     const formattedDate = new Date(note.date).toLocaleDateString("fr-FR", {
         year: "numeric",
         month: "long",
@@ -152,6 +164,39 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink, d
     const bg1 = cardColor ? hexToRgba(cardColor, 0.12) : "rgba(74,143,239,0.12)";
     const bg2 = cardColor ? hexToRgba(cardColor, 0.06) : "rgba(58,143,157,0.06)";
 
+    const downloadButton = note.latest && downloadLink && (
+        <a
+            href={downloadLink(note)}
+            className={clsx(styles.downloadButton, styles.downloadButtonHeader)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Download ${note.version}`}
+            style={
+                {
+                    "--card-color": cardColor || "#5CB8C7",
+                } as React.CSSProperties
+            }
+        >
+            <svg
+                className={styles.downloadIcon}
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M12 3v12" />
+                <path d="m7 10 5 5 5-5" />
+                <path d="M5 21h14" />
+            </svg>
+            Download
+        </a>
+    );
+
     return (
         <div
             className={styles.releaseCard}
@@ -171,6 +216,7 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink, d
                         <span className={styles.latestBadge}>Latest</span>
                     )}
                     {note.isLatestV2 && <span className={styles.latestV2Badge}>Latest v2.x</span>}
+                    {downloadButton}
                 </div>
                 <div className={styles.releaseDate}>{formattedDate}</div>
             </div>
@@ -181,10 +227,7 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink, d
                         display: "flex",
                         gap: "0.75rem",
                         flexWrap: "wrap",
-                        justifyContent:
-                            note.hasUpgradeNotes || (note.latest && downloadLink)
-                                ? "space-between"
-                                : "flex-end",
+                        justifyContent: note.hasUpgradeNotes ? "space-between" : "flex-end",
                         alignItems: "center",
                     }}
                 >
@@ -200,38 +243,6 @@ function ReleaseNoteCard({ note, styles, cardColor, readMoreLink, upgradeLink, d
                         >
                             Upgrade Guide
                         </Link>
-                    )}
-                    {note.latest && downloadLink && (
-                        <a
-                            href={downloadLink(note)}
-                            className={styles.downloadButton}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`Download ${note.version}`}
-                            style={
-                                {
-                                    "--card-color": cardColor || "#5CB8C7",
-                                } as React.CSSProperties
-                            }
-                        >
-                            <svg
-                                className={styles.downloadIcon}
-                                width="14"
-                                height="14"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2.4"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path d="M12 3v12" />
-                                <path d="m7 10 5 5 5-5" />
-                                <path d="M5 21h14" />
-                            </svg>
-                            Download
-                        </a>
                     )}
                     <Link
                         to={readMoreLink(note)}
