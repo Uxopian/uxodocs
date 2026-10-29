@@ -14,7 +14,7 @@ description: "Summary of the changes in version 2026.0.0 of Fast2."
 ## **What's new?**
 
 <br />
-Fast2 2026.0.0 is a major release. The user interface has been rewritten in React, the platform moves to Java 21, Spring Boot 4 and OpenSearch 3.5, and Fast2 now ships as Docker images alongside the usual package. Campaigns gain their own parameters, a map can be exposed to several tenants, and the catalog adds AI querying, FlowerDocs deletion and a number of long-standing task fixes.
+Fast2 2026.0.0 is a major release. The user interface has been rewritten in React, the platform moves to Java 21, Spring Boot 4 and OpenSearch 3.5, and Fast2 now ships as Docker images alongside the usual package. One instance can now serve several tenants, each isolated from the others: its maps, campaigns, members and workers are invisible to the rest. An MCP server lets AI assistants such as Claude design maps, run campaigns and diagnose failed punnets through Fast2's own API. Campaigns gain their own parameters, and the catalog adds AI querying, FlowerDocs deletion and a number of long-standing task fixes.
 
 <br />
 
@@ -47,7 +47,8 @@ _Discover the details below..._
 ## 🔐 Authentication & Team Management
 
 ### ✨ New Features
-- **Multitenancy**: A Fast2 instance can serve several tenants, each with its own maps, campaigns and members.
+- **Multitenancy**: A Fast2 instance can serve several tenants, each with its own maps, campaigns, members and workers. Tenants are isolated: a worker and an API token are bound to one tenant, and a user works in one tenant at a time, switching between the tenants they belong to.
+- **API tokens**: Each user can create personal API tokens for scripts and AI assistants. A token acts as its owner in the current tenant, is shown only once, and can be revoked by its owner or by an administrator.
 
 ### 🔧 Improvements
 - **Authentication is mandatory**: Every Fast2 instance now requires users to sign in. The `security.authentication.required` property has been removed, along with the option to run without authentication, which no longer worked with multitenancy.
@@ -65,6 +66,7 @@ _Discover the details below..._
 
 ### ✨ New Features
 - **Docker**: Fast2 is published as Docker images for the broker and the worker, built and pushed by the CI, and the QA and demo environments are built from those images.
+- **MCP server**: Fast2 serves the Model Context Protocol on `/mcp`, so an AI assistant can work with it directly: browse the task catalog and the punnet model, read, write and save maps, start, stop, pause and retry campaigns, read why a punnet failed, and open what it is talking about in the user's Fast2 window. Calls are authenticated like the REST API, with an API token or an access token, and stay within the caller's tenant. It is on by default and can be turned off with `spring.ai.mcp.server.enabled=false`.
 - **Uxopian AI**: An AI Query task is available in the catalog, and Uxopian AI is integrated into the interface as a web component. The task takes a connection provider, so its endpoint is configured like any other.
 
 ### 🔧 Improvements
