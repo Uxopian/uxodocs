@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 # Page d'accueil
 
 - Les widgets basés sur des recherches peuvent désormais afficher plusieurs champs. Pour cela, l'ensemble des champs renseignés dans la `selectClause` de la requête sont concaténés pour chaque résultat ().
@@ -52,4 +50,3 @@ import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
 - Le message du code d'erreur F00039 permet d'afficher son premier paramètre et non plus le deuxième, il n'est donc plus nécessaire de lui fournir un premier paramètre vide ().
 - Un style CSS a été ajouté pour chaque type de menu contextuel afin de les modifier plus facilement en CSS ou JS ().
 
-<FlowerDocsDownloads version="2.3.8" />

@@ -3,8 +3,6 @@ title: FlowerDocs 2025.4.0 Release notes
 description: FlowerDocs 2025.4.0 Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software versions as prerequisites:
 
 - **ARender**: 2023.17.0
@@ -128,4 +126,3 @@ No specific changes have been made to this version. It benefits from the followi
 | **Repository** - When making changes to a value entered in the Reference tag, the cursor will now remain at the location selected by the user. It will no longer automatically return to the end. | [TMAFLW-1007](https://arondor.atlassian.net/browse/TMAFLW-1007) |
 | **Repository** - Calls to the repository from the search form are optimised to avoid an accumulation of searches on virtual folders. | [TMAFLW-1165](https://arondor.atlassian.net/browse/TMAFLW-1165) |
 
-<FlowerDocsDownloads version="2025.4.0" arenderVersion="2023.17.0" />

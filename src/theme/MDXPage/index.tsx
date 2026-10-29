@@ -9,12 +9,38 @@ import ContentVisibility from "@theme/ContentVisibility";
 import EditMetaRow from "@theme/EditMetaRow";
 import Admonition from "@theme/Admonition";
 import Link from "@docusaurus/Link";
-import Fast2DownloadButton from "@site/src/components/Fast2DownloadButton";
+import DownloadPortalButton, {
+    DownloadPortalProduct,
+} from "@site/src/components/DownloadPortalButton";
+import arenderReleasesData from "@site/src/generated/arenderReleases.json";
+import flowerDocsReleasesData from "@site/src/generated/flowerDocsReleases.json";
 import styles from "./styles.module.css";
 
 const FAST2_RELEASE_PATH = "/release-note/fast2/";
 const ANCHOR_ATTR = "data-fast2-download-anchor";
 const ARENDER_2023_RELEASE_PATH = "/release-note/arender/v2023.";
+const RELEASE_NOTES_PATH = /^\/release-note\/(arender|flowerdocs)\/([^/]+)\/release-notes\/?$/;
+
+// ARender / FlowerDocs: the download button follows the "latest" flag of the generated
+// release lists (same source as the /releases cards), so it moves to the new release
+// note on its own. "downloadVersion" covers a patch without its own page (e.g. 2026.3.1).
+function getReleaseDownload(
+    permalink: unknown
+): { product: DownloadPortalProduct; version: string } | null {
+    if (typeof permalink !== "string") return null;
+    const match = permalink.match(RELEASE_NOTES_PATH);
+    if (!match) return null;
+    const [, product, dir] = match;
+    const releases: any[] = product === "arender" ? arenderReleasesData : flowerDocsReleasesData;
+    const release = releases.find((r) =>
+        product === "arender" ? r.version === dir : r.slug === dir
+    );
+    if (!release?.latest) return null;
+    return {
+        product: product as DownloadPortalProduct,
+        version: release.downloadVersion ?? release.version,
+    };
+}
 
 interface MDXPageProps {
     content: any;
@@ -36,6 +62,8 @@ export default function MDXPage(props: MDXPageProps) {
 
     const isARender2023Release =
         typeof permalink === "string" && permalink.startsWith(ARENDER_2023_RELEASE_PATH);
+
+    const releaseDownload = getReleaseDownload(permalink);
 
     const articleRef = useRef<HTMLElement>(null);
     const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
@@ -103,10 +131,19 @@ export default function MDXPage(props: MDXPageProps) {
                                 <MDXContent>
                                     <MDXPageContent />
                                 </MDXContent>
+                                {releaseDownload && (
+                                    <DownloadPortalButton
+                                        product={releaseDownload.product}
+                                        version={releaseDownload.version}
+                                    />
+                                )}
                                 {showDownloadButton &&
                                     portalNode &&
                                     createPortal(
-                                        <Fast2DownloadButton version={frontMatter.version} />,
+                                        <DownloadPortalButton
+                                            product="fast2"
+                                            version={frontMatter.version}
+                                        />,
                                         portalNode
                                     )}
                             </article>

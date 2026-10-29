@@ -155,12 +155,4 @@ The release also introduces a **new `Collapsed` value for the document navigator
 | Upload FDF fails when it contains a stamp | Issue | AR-16844 | |
 | Changing hazelcast service port is not working | Issue | AR-17454 | TMAPR-6172 |
 
----
-
-## Download
-
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
-
-<ARenderDownloads version="2023.20.0" />
-
 </div>

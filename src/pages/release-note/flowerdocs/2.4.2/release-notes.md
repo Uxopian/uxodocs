@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 # Evolutions
 
 - Lors de la création d'un document en tant que pièce jointe de tâche, le formulaire d'indexation du document est affiché (, ).
@@ -143,4 +141,3 @@ import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
 
 - La barre d'annotation ARender est correctement affichée avec Internet Explorer ().
 
-<FlowerDocsDownloads version="2.4.2" />

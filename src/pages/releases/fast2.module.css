@@ -619,3 +619,16 @@
         padding: 2rem 0;
     }
 }
+
+/* Header variant: sits next to the "Latest" badge, same height */
+.downloadButtonHeader {
+    padding: 0.25rem 0.625rem;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    border-radius: 6px;
+}
+
+.downloadButtonHeader .downloadIcon {
+    width: 12px;
+    height: 12px;
+}
