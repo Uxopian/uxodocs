@@ -48,7 +48,6 @@ Before using the API, make sure you have:
 - **Worker API** — API for managing workers
 - **User API** — Endpoint for managing users
 - **Shared Objects API** — Endpoint for managing shared objects
-- **Email API** — Endpoint for managing emails
 - **Map API** — Endpoint for managing maps
 - **Queue API** — Endpoint for managing queues
 - **Punnet API** — Endpoint to retrieve punnets
@@ -1140,296 +1139,6 @@ curl -X GET 'http://localhost:1789/api/catalog' \
 
 ```bash
 curl -X GET 'http://localhost:1789/api/catalog/dto' \
-  -H 'Authorization: Bearer <token>' \
-```
-
----
-
-## Email API
-
-Endpoint for managing emails
-
-### createEmail
-
-`POST /api/emails`
-
-**Request Body**
-
-Content-Type: `application/json`
-
-| Field     | Type    | Required | Description |
-| --------- | ------- | :------: | ----------- |
-| `email`   | string  |    no    |             |
-| `active`  | boolean |    no    |             |
-| `emailId` | object  |    no    |             |
-
-Body format:
-
-```json
-{
-  "email": "string",
-  "active": true,
-  "emailId": {}
-}
-```
-
-**Responses**
-
-| Status | Content-Type     | Schema | Description |
-| -----: | ---------------- | ------ | ----------- |
-|    200 | application/json | object | OK          |
-
-**cURL example**
-
-```bash
-curl -X POST 'http://localhost:1789/api/emails' \
-  -H 'Authorization: Bearer <token>' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "email": "string",
-  "active": true,
-  "emailId": {}
-}'
-```
-
-### updateEmail
-
-`PUT /api/emails`
-
-**Request Body**
-
-Content-Type: `application/json`
-
-| Field     | Type    | Required | Description |
-| --------- | ------- | :------: | ----------- |
-| `email`   | string  |    no    |             |
-| `active`  | boolean |    no    |             |
-| `emailId` | object  |    no    |             |
-
-Body format:
-
-```json
-{
-  "email": "string",
-  "active": true,
-  "emailId": {}
-}
-```
-
-**Responses**
-
-| Status | Content-Type     | Schema | Description |
-| -----: | ---------------- | ------ | ----------- |
-|    200 | application/json | object | OK          |
-
-**cURL example**
-
-```bash
-curl -X PUT 'http://localhost:1789/api/emails' \
-  -H 'Authorization: Bearer <token>' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "email": "string",
-  "active": true,
-  "emailId": {}
-}'
-```
-
-### deleteEmails_byNames
-
-`DELETE /api/emails/delete-by-names`
-
-**Parameters**
-
-| Name     | In    | Required | Type          | Description |
-| -------- | ----- | :------: | ------------- | ----------- |
-| `emails` | query |   yes    | array[string] |             |
-
-**Request Body**
-
-Content-Type: `application/json`
-
-| Field       | Type           | Required | Description |
-| ----------- | -------------- | :------: | ----------- |
-| `from`      | integer(int32) |    no    |             |
-| `size`      | integer(int32) |    no    |             |
-| `orderBy`   | string         |    no    |             |
-| `ascending` | boolean        |    no    |             |
-
-Body format:
-
-```json
-{
-  "from": 0,
-  "size": 0,
-  "orderBy": "string",
-  "ascending": true
-}
-```
-
-**Responses**
-
-| Status | Content-Type     | Schema | Description |
-| -----: | ---------------- | ------ | ----------- |
-|    200 | application/json | object | OK          |
-
-**cURL example**
-
-```bash
-curl -X DELETE 'http://localhost:1789/api/emails/delete-by-names' \
-  -H 'Authorization: Bearer <token>' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "from": 0,
-  "size": 0,
-  "orderBy": "string",
-  "ascending": true
-}'
-```
-
-### deleteEmails_byPattern
-
-`DELETE /api/emails/delete-by-pattern`
-
-**Parameters**
-
-| Name          | In    | Required | Type   | Description |
-| ------------- | ----- | :------: | ------ | ----------- |
-| `namePattern` | query |    no    | string |             |
-
-**Request Body**
-
-Content-Type: `application/json`
-
-| Field       | Type           | Required | Description |
-| ----------- | -------------- | :------: | ----------- |
-| `from`      | integer(int32) |    no    |             |
-| `size`      | integer(int32) |    no    |             |
-| `orderBy`   | string         |    no    |             |
-| `ascending` | boolean        |    no    |             |
-
-Body format:
-
-```json
-{
-  "from": 0,
-  "size": 0,
-  "orderBy": "string",
-  "ascending": true
-}
-```
-
-**Responses**
-
-| Status | Content-Type     | Schema | Description |
-| -----: | ---------------- | ------ | ----------- |
-|    200 | application/json | object | OK          |
-
-**cURL example**
-
-```bash
-curl -X DELETE 'http://localhost:1789/api/emails/delete-by-pattern' \
-  -H 'Authorization: Bearer <token>' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "from": 0,
-  "size": 0,
-  "orderBy": "string",
-  "ascending": true
-}'
-```
-
-### getEmailsByNames
-
-`GET /api/emails/search-by-names`
-
-**Parameters**
-
-| Name             | In    | Required | Type          | Description |
-| ---------------- | ----- | :------: | ------------- | ----------- |
-| `emails`         | query |   yes    | array[string] |             |
-| `paginateParams` | query |   yes    | object        |             |
-
-**Responses**
-
-| Status | Content-Type     | Schema | Description |
-| -----: | ---------------- | ------ | ----------- |
-|    200 | application/json | object | OK          |
-
-**cURL example**
-
-```bash
-curl -X GET 'http://localhost:1789/api/emails/search-by-names' \
-  -H 'Authorization: Bearer <token>' \
-```
-
-### getEmails
-
-`GET /api/emails/search-by-pattern`
-
-**Parameters**
-
-| Name             | In    | Required | Type   | Description |
-| ---------------- | ----- | :------: | ------ | ----------- |
-| `namePattern`    | query |    no    | string |             |
-| `paginateParams` | query |   yes    | object |             |
-
-**Responses**
-
-| Status | Content-Type     | Schema | Description |
-| -----: | ---------------- | ------ | ----------- |
-|    200 | application/json | object | OK          |
-
-**cURL example**
-
-```bash
-curl -X GET 'http://localhost:1789/api/emails/search-by-pattern' \
-  -H 'Authorization: Bearer <token>' \
-```
-
-### deleteEmail
-
-`DELETE /api/emails/{email}`
-
-**Parameters**
-
-| Name    | In   | Required | Type   | Description |
-| ------- | ---- | :------: | ------ | ----------- |
-| `email` | path |   yes    | string |             |
-
-**Responses**
-
-| Status | Content-Type | Schema | Description |
-| -----: | ------------ | ------ | ----------- |
-|    200 | —            | —      | OK          |
-
-**cURL example**
-
-```bash
-curl -X DELETE 'http://localhost:1789/api/emails/<email>' \
-  -H 'Authorization: Bearer <token>' \
-```
-
-### getEmail
-
-`GET /api/emails/{email}`
-
-**Parameters**
-
-| Name    | In   | Required | Type   | Description |
-| ------- | ---- | :------: | ------ | ----------- |
-| `email` | path |   yes    | string |             |
-
-**Responses**
-
-| Status | Content-Type     | Schema | Description |
-| -----: | ---------------- | ------ | ----------- |
-|    200 | application/json | object | OK          |
-
-**cURL example**
-
-```bash
-curl -X GET 'http://localhost:1789/api/emails/<email>' \
   -H 'Authorization: Bearer <token>' \
 ```
 
@@ -3324,113 +3033,51 @@ curl -X POST 'http://localhost:1789/api/users/register' \
 
 `POST /api/users/register-super-admin`
 
-Creates a user from its password, firstname, lastname and email
+Creates the first account of a fresh installation, with the super admin role. This endpoint is public and works only once: as soon as a super admin exists, it is refused. Check `GET /api/users/super-admin-exists` first. See [Provision Fast2 from a script](../cookbooks/provision-fast2-by-script.md).
 
 **Request Body**
 
 Content-Type: `application/json`
 
-| Field       | Type   | Required | Description |
-| ----------- | ------ | :------: | ----------- |
-| `password`  | string |    no    |             |
-| `firstname` | string |    no    |             |
-| `lastname`  | string |    no    |             |
-| `email`     | string |    no    |             |
-| `role`      | string |    no    |             |
+| Field       | Type   | Required | Description                                                                                       |
+| ----------- | ------ | :------: | ------------------------------------------------------------------------------------------------- |
+| `email`     | string |   yes    | The login of the account                                                                          |
+| `password`  | string |   yes    | 8 to 20 characters, with an uppercase letter, a lowercase letter, a digit and a special character |
+| `role`      | string |   yes    | `SUPER_ADMIN`                                                                                     |
+| `firstname` | string |    no    |                                                                                                   |
+| `lastname`  | string |    no    |                                                                                                   |
 
 Body format:
 
 ```json
 {
+  "email": "admin@example.com",
   "password": "string",
   "firstname": "string",
   "lastname": "string",
-  "email": "string",
-  "role": "USER"
+  "role": "SUPER_ADMIN"
 }
 ```
 
 **Responses**
 
-| Status | Content-Type | Schema | Description                                                       |
-| -----: | ------------ | ------ | ----------------------------------------------------------------- |
-|    200 | —            | —      | Successfully created user                                         |
-|    403 | —            | —      | User creation is restricted to a single user in the configuration |
-|    500 | —            | —      | Server failed to create user                                      |
-|    409 | —            | —      | An account with this email already exists                         |
+| Status | Content-Type | Schema | Description                                                                                 |
+| -----: | ------------ | ------ | ------------------------------------------------------------------------------------------- |
+|    200 | —            | —      | Super admin created                                                                         |
+|    400 | —            | —      | A required field is missing, the role is not `SUPER_ADMIN`, or the password breaks the policy |
+|    409 | —            | —      | A super admin already exists                                                                |
 
 **cURL example**
 
 ```bash
 curl -X POST 'http://localhost:1789/api/users/register-super-admin' \
-  -H 'Authorization: Bearer <token>' \
   -H 'Content-Type: application/json' \
   -d '{
-  "password": "string",
-  "firstname": "string",
-  "lastname": "string",
-  "email": "string",
-  "role": "USER"
-}'
-```
-
-### Register a worker
-
-`POST /api/users/register-worker`
-
-Creates a worker as member to allow broker communication
-
-**Parameters**
-
-| Name               | In     | Required | Type   | Description |
-| ------------------ | ------ | :------: | ------ | ----------- |
-| `X-Register-Token` | header |   yes    | string |             |
-
-**Request Body**
-
-Content-Type: `application/json`
-
-| Field       | Type   | Required | Description |
-| ----------- | ------ | :------: | ----------- |
-| `password`  | string |    no    |             |
-| `firstname` | string |    no    |             |
-| `lastname`  | string |    no    |             |
-| `email`     | string |    no    |             |
-| `role`      | string |    no    |             |
-
-Body format:
-
-```json
-{
-  "password": "string",
-  "firstname": "string",
-  "lastname": "string",
-  "email": "string",
-  "role": "USER"
-}
-```
-
-**Responses**
-
-| Status | Content-Type | Schema | Description                                                       |
-| -----: | ------------ | ------ | ----------------------------------------------------------------- |
-|    200 | —            | —      | Successfully created user                                         |
-|    403 | —            | —      | User creation is restricted to a single user in the configuration |
-|    500 | —            | —      | Server failed to create user                                      |
-|    409 | —            | —      | An account with this email already exists                         |
-
-**cURL example**
-
-```bash
-curl -X POST 'http://localhost:1789/api/users/register-worker' \
-  -H 'Authorization: Bearer <token>' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "password": "string",
-  "firstname": "string",
-  "lastname": "string",
-  "email": "string",
-  "role": "USER"
+  "email": "admin@example.com",
+  "password": "<password>",
+  "firstname": "Fast2",
+  "lastname": "Admin",
+  "role": "SUPER_ADMIN"
 }'
 ```
 
@@ -3702,9 +3349,9 @@ Generates a JWT authentication token for an external worker. **Requires administ
 
 **Parameters**
 
-| Name       | In    | Required | Type   | Description                               |
-| ---------- | ----- | :------: | ------ | ----------------------------------------- |
-| `workerId` | query |   yes    | string | Unique identifier to assign to the worker |
+| Name          | In    | Required | Type   | Description                                              |
+| ------------- | ----- | :------: | ------ | -------------------------------------------------------- |
+| `workerLogin` | query |   yes    | string | Login of the worker account the token is issued for |
 
 **Responses**
 
@@ -3712,11 +3359,12 @@ Generates a JWT authentication token for an external worker. **Requires administ
 | -----: | ------------ | ------ | ------------------------------ |
 |    200 | text/plain   | string | JWT token for the worker       |
 |    403 | —            | —      | Forbidden — administrator only |
+|    404 | —            | —      | No worker account has this login |
 
 **cURL example**
 
 ```bash
-curl -X POST 'http://localhost:1789/api/workers/generate-token?workerId=my-worker' \
+curl -X POST 'http://localhost:1789/api/workers/generate-token?workerLogin=worker-default@uxopian.com' \
   -H 'Authorization: Bearer <token>'
 ```
 
