@@ -7,6 +7,9 @@ last_update:
 content_hash: 65419fb004dc37b6e6241b49188139c5ba523aac735c9ab3392ff5d1928e5d30
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # The worker
 
 :::tip
@@ -55,13 +58,7 @@ The default setting is 1GB for this resource:
 WORKER_MAX_MEMORY=1G
 ```
 
-Keep in mind that this property is designed for workers started from the binary `start-worker.sh|.bat`. If you intend to target the embedded worker, go to `./config/application.properties` instead:
-
-```ini
-...
-# Broker embedded worker max memory
-broker.embedded.worker.max.memory=1G
-```
+This setting applies to every worker started from the package, the embedded worker included: the broker starts it with the same `startup-worker` script. The `broker.embeddedworker.max.memory` property of earlier versions is no longer read.
 
 ### Queues management
 
@@ -107,16 +104,13 @@ For any worker started outside the broker process, the token must be provisioned
 From an administrator account, call the broker API:
 
 ```bash
-curl -X POST 'http://localhost:1789/api/workers/generate-token?workerId=<my-worker-id>' \
+curl -X POST 'http://localhost:1789/api/workers/generate-token?workerLogin=worker-default@uxopian.com' \
   -H 'Authorization: Bearer <admin-token>'
 ```
 
 The returned token string is the value to set as `WORKER_AUTH_TOKEN`.
 
 ### Start the worker with the token
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs groupId="operating-system">
 <TabItem value="linux" label="Linux" default>
@@ -137,7 +131,7 @@ startup-worker.bat
 </TabItem>
 </Tabs>
 
-Worker registrations are persisted in the database. Tokens only need to be provisioned once per worker ID.
+The login is the worker account of the tenant the worker will serve, `worker-<tenant>@uxopian.com`; an unknown login is answered with 404. Worker registrations are persisted in the database. A token only needs to be provisioned once per worker account.
 
 ---
 
@@ -160,9 +154,6 @@ Checkout in the official documentation the required Fast2 files and folders to s
 As indicated in the installation section, starting Fast2 will launch an embedded worker, assigned by default to all tasks composing the migration workflow. This worker here will be our worker-D (for “Destination”, or “Default”).
 
 Plug the worker-S onto the Fast2 broker (yes, the workers -- as [illustrated here](../getting-started/overall-concepts.md#architecture) -- manifest themselves to the broker, and not the other way around) : to do so, open the `config/application.properties` of the worker-S :
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs groupId="fast2-version">
 <TabItem value="v2.4-" label="v2.4-">

@@ -329,9 +329,9 @@ Delete a FlowerDocs object (document, task, folder, or virtual folder). On succe
 
 | Key                            | Type                                                                     | Description                                                              |
 | ------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| Connection                     | [FlowerDocsConnectionProvider](credentials#FlowerDocsConnectionProvider) |                                                                          |
-| Category                       | Pattern                                                                  | Object type: `DOCUMENT`, `TASK`, `FOLDER`, or `VIRTUAL_FOLDER`           |
-| Id to delete                   | Pattern                                                                  | FlowerDocs ID of the object to delete                                    |
+| Connection details | [FlowerDocsConnectionProvider](credentials#FlowerDocsConnectionProvider) |                                                                          |
+| Category to delete | Pattern                                                                  | Object type: `DOCUMENT`, `TASK`, `FOLDER`, or `VIRTUAL_FOLDER`           |
+| ID of object to delete | Pattern                                                                  | FlowerDocs ID of the object to delete                                    |
 
 <b>Optional settings</b>
 

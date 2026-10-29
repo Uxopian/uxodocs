@@ -700,26 +700,24 @@ This task converts TIFF images into PDF documents using the Apache PDFBox lib
 
 ## HtmlToPdfConverter <small> - Convert HTML to PDF </small> {#HtmlToPdfConverter data-toc-label="HtmlToPdfConverter"}
 
-Converts HTML content to PDF. The converter recursively processes HTML sub-contents: each eligible sub-content (`text/html`) is individually converted to PDF. Non-HTML sub-contents are attached as-is to the converted PDF parent. Errors on individual sub-contents are logged without failing the whole document.
+Converts HTML content to PDF with the [wkhtmltopdf](https://wkhtmltopdf.org/) command-line utility, which must be installed on the worker. The converter recursively processes HTML sub-contents: each eligible sub-content (`text/html`) is individually converted to PDF. Non-HTML sub-contents are attached as-is to the converted PDF parent. Errors on individual sub-contents are logged without failing the whole document.
 
 <b>Mandatory settings</b>
 
-| Key                | Type     | Description                                    |
-| ------------------ | -------- | ---------------------------------------------- |
-| Destination folder | `String` | Target file path for the locally-created files |
+| Key                          | Type     | Description                                                                                                    |
+| ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| Path to wkhtmltopdf utility  | `String` | `wkhtmltopdf` if it is in the system PATH (default), otherwise the full path to the executable                |
 
 <b>Optional settings</b>
 
-| Key                                       | Type          | Description                                                                                                                                                                                | Default value |
-| ----------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| Process annotation contents               | `Boolean`     | If annotations are asked to be migrated, you can filter here to process their content(s) or only their metadata                                                                            | `false `      |
-| Scan recursive content                    | `Boolean`     | Only convert terminal contents and not container ones                                                                                                                                      | `false `      |
-| Supported mime-types                      | `String list` | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
-| Throw conversion exceptions               | `Boolean`     | If Fast2 performs document conversion, it can either fail silently or pop an error when the action has not been properly completed                                                         | `true `       |
-| Mime-type : Check document before content | `Boolean`     | You can assume the file extension is accurate, or ask Fast2 to check the content encoding to identify more precisely the document mime-type. By default, Fast2 will check at content level | `false `      |
-| Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
+| Key                  | Type          | Description                                                                                                                                       |
+| -------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Conversion option    | `String`      | Command-line options passed to wkhtmltopdf, e.g. `--encoding ISO-8859`                                                                            |
+| Supported mime-types | `String list` | Mime-types of the contents to convert. Default `text/html`                                                                                         |
+| Cleanup HTML first   | `Boolean`     | Run the HTML cleaner before converting, to drop inconsistent charset declarations that make wkhtmltopdf mis-decode a page. Default `false` |
 
 ---
+
 
 ## WkHtmlToPdfConverter <small> - Converter from Html To PDF </small> {#WkHtmlToPdfConverter data-toc-label="WkHtmlToPdfConverter"}
 

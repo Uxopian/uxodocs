@@ -443,4 +443,6 @@ Pattern-resolvable fields (broker endpoint, map id, campaign name) are resolved 
 | Broker endpoint             | Pattern   | URL of the Fast2 broker to trigger the campaign on                                                                                         |               |
 | Map id                      | Pattern   | ID or name of the map to trigger                                                                                                           |               |
 | Campaign name               | Pattern   | Name of the campaign to create or resume                                                                                                   |               |
+| Start as new campaign | `Boolean` | Start the triggered campaign as a new campaign. Default `false`. |  |
+| Resume campaign | `Boolean` | Resume the campaign of the same name; if none exists, it is created. Default `false`. |  |
 | Trigger on last punnet only | `Boolean` | When enabled, defers the campaign trigger until all punnets in the current batch have been processed. Resolved fields use the first punnet. | `false `      |

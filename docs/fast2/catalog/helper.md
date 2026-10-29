@@ -25,16 +25,16 @@ uxopian.ai.basePath=/
 
 | Key                 | Type                        | Description                                                        |
 | ------------------- | --------------------------- | ------------------------------------------------------------------ |
-| Query               | `String`                    | Unique identifier of the prompt template to use                    |
-| Connection settings | Fast2ConnectionProvider     | Fast2 connection provider for broker authentication                |
+| AI Prompt ID | `String`                    | Unique identifier of the prompt template to use                    |
+| Fast2 connection provider | Fast2ConnectionProvider     | Fast2 connection provider for broker authentication                |
 
 <b>Optional settings</b>
 
 | Key                      | Type          | Description                                                               | Default value  |
 | ------------------------ | ------------- | ------------------------------------------------------------------------- | -------------- |
 | Response metadata key    | `String`      | Metadata key where the AI response is stored on the document              | `aiResponse `  |
-| Metadata to inject       | `String list` | List of document metadata names included in the prompt context            |                |
-| Preload to ARender       | `Boolean`     | Pushes document content to ARender before querying the AI gateway         |                |
+| Include metadata | `String list` | List of document metadata names included in the prompt context            |                |
+| Preload content into ARender rendition | `Boolean`     | Pushes document content to ARender before querying the AI gateway         |                |
 
 ---
 

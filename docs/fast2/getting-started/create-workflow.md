@@ -222,7 +222,7 @@ Parameters are declared in the **Design Place**, in the map parameters panel. Ea
 - a **name** — used to reference the parameter value in task configuration fields via the `${paramName}` pattern syntax
 - an optional **default value** — if omitted, the parameter becomes mandatory and any campaign must provide a value before it can start
 
-Parameters not declared in the map definition are rejected at validation time. Renaming or deleting a parameter in the map removes it from all campaigns that were overriding it.
+A campaign cannot start while it overrides a parameter the map does not declare: after renaming or deleting a parameter in the map, remove its old override from the campaigns that set one.
 
 ### Override parameters for a campaign
 

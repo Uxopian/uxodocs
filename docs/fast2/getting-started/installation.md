@@ -19,7 +19,7 @@ The installation of Fast2 requires a few environment specifications to run prope
 | RAM       | 8GB+                   | We highly recommend having at least 8GB. <br /><br />When switching to production environments, 16GB or 32GB will be required since more documents will be handled at once, and heavy tasks (_e.g._ conversion, extraction) might get short on resources.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Processor | 8 CPUs                 | Processor capabilities need to be aligned with migration requirements, such as data mapping, content conversion and heavy I/O.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | Storage   | 500GB+                 | Although the contents dealt by Fast2 will be temporarily stored (and deleted afterwards if asked), the server needs enough storage for the files/contents alongside the database tracking all the migration information. <br /><br />For production environments, we strongly recommend **500GB or more** to handle large-scale migrations and prevent storage-related issues. While 128GB may work for development or testing, it is insufficient for production workloads and can lead to increased technical operations during migrations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Java      | JDK-21+                | Java 21 is the minimum required version. Java 25 is recommended for new installations. Any provider will fit (Oracle, [OpenJDK](https://developers.redhat.com/products/openjdk/download), Microsoft Build of OpenJDK, etc). If you have multiple JDK/JRE already installed, specify the correct one in the `./config/env.properties` file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Java      | JDK-21+                | Java 21 is the minimum required version. Any provider will fit (Oracle, [OpenJDK](https://developers.redhat.com/products/openjdk/download), Microsoft Build of OpenJDK, etc). If you have multiple JDK/JRE already installed, specify the correct one in the `./config/env.properties` file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | OS        | Windows&nbsp;7+, Linux | All versions of Windows 7+ are supported. <br/><br/>All common distros of Linux are supported (Ubuntu, RedHat, CentOS, etc)<br /><br />Power architecture are supported as well (except the ones running in AIX), but only Java parts will work seamlessly whereas third-party software (_e.g._ imagemagick, libreoffice, etc) might not, as they have not all have been developed for such platforms. <br/><br/> Although the broker will not run correctly on an Windows 2003, a worker can still run on it, remotely, and communicate with a broker installed on a more recent version. |
 | Bandwidth | 1GB                    | The more calls, payloads, and contents Fast2 will have to deal with, the bigger the network bandwidth must be to reduce latency. If 250-500MB might do for lower environments, we recommend 1GB for Production environments.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
@@ -348,32 +348,61 @@ C:\path-to-fast2\service\windows> Fast2_worker_service.exe install
 
 ## Docker deployment
 
-Fast2 v2026.0.0 provides official Docker images for both the broker and the worker.
+Fast2 v2026.0.0 is published as two Docker images, `fast2-broker` and `fast2-worker`. Neither contains OpenSearch: run it as its own container, and tell the broker where to find it.
 
-### Start the broker
+```yaml title="compose.yml"
+services:
+  opensearch:
+    image: opensearchproject/opensearch:3.5.0
+    environment:
+      discovery.type: "single-node"
+      OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g"
+      DISABLE_SECURITY_PLUGIN: "true"
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
 
-```sh
-docker run -d \
-  --name fast2-broker \
-  -p 1789:1789 \
-  -p 1790:1790 \
-  fast2-broker:2026.0.0
+  broker:
+    image: docker.uxopian.com/release/fast2-broker:2026.0.0
+    ports:
+      - "1789:1789"
+    environment:
+      - server.host=0.0.0.0
+      - opensearch.host=opensearch
+      - opensearch.port=9200
+      - broker.opensearch.embedded.enabled=false
+      - broker.embedded.worker.autostart=false
+    depends_on:
+      - opensearch
+
+  worker:
+    image: docker.uxopian.com/release/fast2-worker:2026.0.0
+    environment:
+      BROKER_URL: "http://broker:1789/api/broker"
+      WORKER_AUTH_TOKEN: "${WORKER_AUTH_TOKEN}"
+    depends_on:
+      - broker
+
+volumes:
+  opensearch-data:
 ```
 
-### Start a worker
+The worker needs a token, which only the running broker can issue:
 
-```sh
-docker run -d \
-  --name fast2-worker \
-  -e BROKER_HOST=<broker-host> \
-  -e WORKER_AUTH_TOKEN=<token> \
-  fast2-worker:2026.0.0
-```
+1. Start OpenSearch and the broker: `docker compose up -d opensearch broker`.
+2. Create the super admin from `http://localhost:1789`, or by script (see [Provision Fast2 from a script](../cookbooks/provision-fast2-by-script.md)).
+3. Generate a token for the worker account of the `default` tenant, and start the worker with it:
 
-The `WORKER_AUTH_TOKEN` must be generated beforehand from an administrator account. See the [migration guide](migration-v2026.md#external-worker-authentication) for the provisioning procedure.
+    ```sh
+    export WORKER_AUTH_TOKEN=$(curl -s -X POST \
+      'http://localhost:1789/api/workers/generate-token?workerLogin=worker-default@uxopian.com' \
+      -H 'Authorization: Bearer <admin-token>')
+    docker compose up -d worker
+    ```
+
+See [External worker authentication](migration-v2026.md#external-worker-authentication) for the token itself.
 
 :::tip
 
-    For multi-worker or production setups, use Docker Compose or Kubernetes to manage the broker, worker, and OpenSearch containers together.
+    For production, run the same three containers on Kubernetes, and keep the token in a secret.
 
 :::
