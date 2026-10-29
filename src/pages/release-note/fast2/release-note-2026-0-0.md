@@ -14,7 +14,7 @@ description: "Summary of the changes in version 2026.0.0 of Fast2."
 ## **What's new?**
 
 <br />
-Fast2 2026.0.0 is a major release. The user interface has been rewritten in React, the platform moves to Java 21, Spring Boot 4 and OpenSearch 3.5, and Fast2 now ships as Docker images alongside the usual package. Campaigns gain their own parameters, a map can be exposed to several tenants, and the catalog adds AI querying, FlowerDocs deletion and a number of long-standing task fixes.
+Fast2 2026.0.0 is a major release. The user interface has been rewritten in React, the platform moves to Java 21, Spring Boot 4 and OpenSearch 3.5, and Fast2 now ships as Docker images alongside the usual package. One instance can now serve several tenants, each isolated from the others: its maps, campaigns, members and workers are invisible to the rest. An MCP server lets AI assistants such as Claude design maps, run campaigns and diagnose failed punnets through Fast2's own API. Campaigns gain their own parameters, and the catalog adds AI querying, FlowerDocs deletion and a number of long-standing task fixes.
 
 <br />
 
@@ -47,9 +47,12 @@ _Discover the details below..._
 ## 🔐 Authentication & Team Management
 
 ### ✨ New Features
-- **Multitenancy**: A Fast2 instance can serve several tenants, each with its own maps, campaigns and members.
+- **Multitenancy**: A Fast2 instance can serve several tenants, each with its own maps, campaigns, members and workers. Tenants are isolated: a worker and an API token are bound to one tenant, and a user works in one tenant at a time, switching between the tenants they belong to.
+- **API tokens**: Each user can create personal API tokens for scripts and AI assistants. A token acts as its owner in the current tenant, is shown only once, and can be revoked by its owner or by an administrator.
 
 ### 🔧 Improvements
+- **Authentication is mandatory**: Every Fast2 instance now requires users to sign in. The `security.authentication.required` property has been removed, along with the option to run without authentication, which no longer worked with multitenancy.
+- **Super admin creation**: The `default.super.admin.*` properties have been removed: a super admin password no longer sits in configuration. A deployment script creates the first super admin with `POST /api/users/register-super-admin`, whose request must give the email, the password and the role `SUPER_ADMIN`. A second call is refused with 409.
 - **Worker registration**: The public worker registration endpoint has been removed. Workers are registered by an administrator and stored in the database.
 - **Worker tokens**: The `/generate-token` endpoint now answers 404 for an unknown worker instead of silently issuing a token, and its request parameter has been renamed to `workerLogin`.
 
@@ -63,6 +66,7 @@ _Discover the details below..._
 
 ### ✨ New Features
 - **Docker**: Fast2 is published as Docker images for the broker and the worker, built and pushed by the CI, and the QA and demo environments are built from those images.
+- **MCP server**: Fast2 serves the Model Context Protocol on `/mcp`, so an AI assistant can work with it directly: browse the task catalog and the punnet model, read, write and save maps, start, stop, pause and retry campaigns, read why a punnet failed, and open what it is talking about in the user's Fast2 window. Calls are authenticated like the REST API, with an API token or an access token, and stay within the caller's tenant. It is on by default and can be turned off with `spring.ai.mcp.server.enabled=false`.
 - **Uxopian AI**: An AI Query task is available in the catalog, and Uxopian AI is integrated into the interface as a web component. The task takes a connection provider, so its endpoint is configured like any other.
 
 ### 🔧 Improvements
@@ -108,6 +112,7 @@ _Discover the details below..._
 - **CSV exports**: Headers omit the redundant `doc.` prefix for single-document punnets, columns can be filtered by whitelist or blacklist, and the deprecated "New column headers" parameter has been removed.
 - **FlowerDocs**: A delete task has been added, and the querier can extract `selectClause` fields directly into the punnet dataset.
 - **Converters**: The HTML-to-PDF converter processes child documents, and Eml2Pdf takes the language as a parameter.
+- **LocalSource**: Files are handed to punnets while folders are still being scanned, so the first punnet arrives within milliseconds and large trees no longer run out of memory. The number of scanning threads can be set, and a "Skip JSON parsing" option joins the XML one. Files are no longer returned in any particular order.
 
 ### 🐞 Bug Fixes
 - **Punnet serializer**: No longer produces an inconsistent dataset.
@@ -126,8 +131,11 @@ _Discover the details below..._
 - **Java 21 is required.** Earlier JDKs are not supported.
 - **OpenSearch is migrated in place** from 1.3.15 to 3.5.0 on first start. Back up the data directory before upgrading.
 - **OpenSearch Dashboards is no longer shipped** with the package. It returns as a separately installed sidecar.
+- **Authentication can no longer be disabled.** `security.authentication.required` has been removed and is ignored if still present in `application.properties`. On first start, create the super admin from the registration page or with `POST /api/users/register-super-admin`.
+- **The `default.super.admin.*` properties have been removed.** Scripts that create the super admin must call `POST /api/users/register-super-admin` with `"role": "SUPER_ADMIN"` in the request; a request without it is refused with 400.
 - **The public worker registration endpoint has been removed.** Workers must be declared by an administrator.
 - **`/generate-token` renames its parameter** from `workerLabel` to `workerLogin`, and answers 404 for an unknown worker.
+- **LocalSource's deprecated `fileScanner` option has been removed.** Maps that still use it must move their paths to "Files paths"; otherwise the task stops with "No file path provided".
 - **`AlterDocumentProperty` is deprecated.** Use `AlterDocumentProperties`.
 - **`Tiff2PdfIText` has been removed.** Use `Tiff2PdfBox`.
 - **Null property names and values are refused.** Maps relying on the previous `null_value` sentinel must be reviewed.
