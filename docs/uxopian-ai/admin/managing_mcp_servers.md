@@ -18,7 +18,7 @@ In the admin panel, click *MCP Servers* in the navigation. The page lists the MC
 
 ![The MCP Servers list showing server name, URL, transport, and enabled status](../images/mcp-servers-list.png)
 
-*Figure: the MCP Servers list (screenshot taken before the 2026.0.0 redesign) — each entry shows its URL, transport type, and enabled/disabled status.*
+*Figure: the MCP Servers list — each entry shows its URL, transport type, and enabled/disabled status.*
 
 ## Multi-tenant isolation
 

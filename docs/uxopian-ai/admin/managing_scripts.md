@@ -55,7 +55,7 @@ Open a script to reach its detail page, which provides a code editor and the scr
 
 ![The script detail page with the code editor, status badge, and Scan & publish actions](../images/script-detail.png)
 
-*Figure: the script detail page — code editor, status badge, and the Delete / Discard / Save / Scan & publish actions (screenshot taken before the 2026.0.0 redesign, which regrouped the actions in the shared action bar).*
+*Figure: the script detail page — code editor, status badge, and the Delete / Discard / Save / Scan & publish actions.*
 
 | Action | Description |
 |---|---|

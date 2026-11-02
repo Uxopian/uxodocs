@@ -12,7 +12,7 @@ The dashboard is the landing page of the admin panel (route `/`). It greets the 
 
 ![The admin dashboard with summary cards, activity charts, and LLM usage distribution](../images/dashboard.png)
 
-*Figure: the dashboard (screenshot taken before the 2026.0.0 redesign).*
+*Figure: the dashboard.*
 
 ## Greeting
 

@@ -18,7 +18,7 @@ Click a row to open a quick view, use the arrow keys to walk through the list, a
 
 ![The Prompts list showing each prompt's ID, role, and content excerpt](../images/prompts-list.png)
 
-*Figure: the Prompts list (screenshot taken before the 2026.0.0 redesign).*
+*Figure: the Prompts list.*
 
 ## Create a prompt
 
@@ -99,7 +99,7 @@ Since 2026.0.0-ft4, this card controls whether and how the prompt appears in the
 
 ![The Display Settings tab of a prompt, with label, category, priority, description, and a display-condition editor](../images/prompt-display-settings.png)
 
-*Figure: the display settings of a prompt (screenshot taken before the 2026.0.0 redesign). The display-condition editor validates the expression and provides a test panel with a sample context.*
+*Figure: the display settings of a prompt. The display-condition editor validates the expression and provides a test panel with a sample context.*
 
 | Setting | Description |
 |---|---|

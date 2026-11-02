@@ -12,7 +12,7 @@ The LLM providers section of the admin panel lets you add, edit, and delete LLM 
 
 ![The LLM Providers list showing configured providers, their default model, and model count](../images/llm-providers-list.png)
 
-*Figure: the LLM Providers list (screenshot taken before the 2026.0.0 redesign) — each provider shows its default model and the number of configured models.*
+*Figure: the LLM Providers list — each provider shows its default model and the number of configured models.*
 
 ## Navigate to LLM providers
 
@@ -46,7 +46,7 @@ Click on a provider in the list to open its detail page (route `/llm-providers/:
 
 ![The LLM provider detail page, with endpoint, API secret, and capability toggles](../images/llm-provider-detail.png)
 
-*Figure: the provider detail page (screenshot taken before the 2026.0.0 redesign) — provider id, default model, endpoint, API secret, and capability toggles.*
+*Figure: the provider detail page — provider id, default model, endpoint, API secret, and capability toggles.*
 
 ```mermaid
 graph LR

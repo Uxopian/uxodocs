@@ -12,7 +12,7 @@ The statistics section of the admin panel displays usage metrics for the current
 
 ![The statistics page with overview cards, activity charts, LLM distribution, top prompts, and feature adoption](../images/statistics.png)
 
-*Figure: the statistics page — overview cards, daily activity, LLM distribution, top prompts by time saved, and feature adoption (screenshot taken before the 2026.0.0 redesign, which replaced the cards and the interval buttons with the shared design-system components).*
+*Figure: the statistics page — overview cards, daily activity, LLM distribution, top prompts by time saved, and feature adoption.*
 
 ## Available statistics
 

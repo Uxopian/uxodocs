@@ -54,7 +54,7 @@ In the admin panel, click **Usage profiles** in the navigation. The page lists e
 
 ![The Usage profiles list showing name, connection provider, and prompt for each profile, including an auto-created "default" one](../images/applications-list.png)
 
-*Figure: The usage profiles list (screenshot taken before the 2026.0.0 redesign) — `default` was auto-created on first use; `FlowerDocs` was configured explicitly.*
+*Figure: The usage profiles list — `default` was auto-created on first use; `FlowerDocs` was configured explicitly.*
 
 ## Fields
 
@@ -80,7 +80,7 @@ The Permissions section is the same reusable editor used for agent configuration
 
 ![A usage profile's configuration: name, connection provider, description, max tool cycles, prompt, and default provider/model](../images/application-detail.png)
 
-*Figure: A usage profile's configuration (screenshot taken before the 2026.0.0 redesign).*
+*Figure: A usage profile's configuration.*
 
 When the tool whitelist or tags are applied, they cover every kind of tool: Java tools, MCP tools, plans exposed as tools and code tools.
 

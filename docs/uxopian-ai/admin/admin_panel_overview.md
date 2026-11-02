@@ -8,7 +8,7 @@ last_update:
 content_hash: 4fbd78261b4f43dd9ac3a2a2337cb15de1c4292c00c87054a1c09975d6dca098
 ---
 
-The admin panel is the `<admin-element>` web component embedded in the Uxopian AI interface. It provides a UI for managing prompts, LLM providers, MCP servers, usage profiles, scripts, code modules, agents and plans, for browsing users and conversations, and for viewing usage statistics. Since 2026.0.0 it is built on the shared Uxopian design system, like the chat and Quick Prompt components. All operations are performed per-tenant via the Admin REST API.
+The admin panel is the `<admin-element>` web component embedded in the Uxopian AI interface. It provides a UI for managing prompts, LLM providers, MCP servers, usage profiles, scripts, code modules, agents and plans, for browsing users and conversations, and for viewing usage statistics. Since 2026.0.0 it has a redesigned look, shared with the chat and Quick Prompt components. All operations are performed per-tenant via the Admin REST API.
 
 ## Accessing the admin panel
 

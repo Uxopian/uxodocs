@@ -8,7 +8,7 @@ last_update:
 content_hash: 96e9f130a9b5290f98a46281817f68aa3638309d8a25a756262f5b666d4c75b6
 ---
 
-Uxopian AI ships standard HTML custom elements: `<chat-element>` and `<admin-element>`, plus the `quick-prompt-element` / `qp-toggle-button` pair introduced in 2026.0.0-ft4 and the `<viewer-element>` review screen. As of 2026.0.0, the admin console, chat and Quick Prompt are all built on the same shared Uxopian design system, so they share one look and one dark theme. They are built with React 19 and wrapped using `@r2wc/react-to-web-component`. They are self-contained and require no build step on the consuming application side.
+Uxopian AI ships standard HTML custom elements: `<chat-element>` and `<admin-element>`, plus the `quick-prompt-element` / `qp-toggle-button` pair introduced in 2026.0.0-ft4 and the `<viewer-element>` review screen. As of 2026.0.0, the admin console, chat and Quick Prompt share one look and one dark theme. They are built with React 19 and wrapped using `@r2wc/react-to-web-component`. They are self-contained and require no build step on the consuming application side.
 
 ## How the bundle is served
 

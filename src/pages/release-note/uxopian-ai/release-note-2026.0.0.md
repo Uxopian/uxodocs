@@ -43,7 +43,7 @@ Every admin list now answers a page of summaries (`{ collection, total, facets }
 
 ### 🎨 Redesigned admin console
 
-The admin console, Chat, and Quick Prompt move to the shared Uxopian design system: collapsible navigation rail, uniform detail pages, tabs kept in the URL, resizable tables.
+The admin console, Chat, and Quick Prompt get a new common look: collapsible navigation rail, uniform detail pages, tabs kept in the URL, resizable tables.
 
 ### 🔒 Hardened deployment (action required)
 
@@ -149,7 +149,7 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
 
 ## 🏗️ Platform & improvements
 
-- **Redesigned admin console** on the shared design system: collapsible icon rail, one primary action plus a "..." menu (Reset, Discard draft, Delete), tiered detail pages, back-link navigation, KPI tiles, dark-theme fixes. The dashboard greets the signed-in user and shows the tenant. Chat and Quick Prompt share the same kit and mascot.
+- **Redesigned admin console**: collapsible icon rail, one primary action plus a "..." menu (Reset, Discard draft, Delete), tiered detail pages, back-link navigation, KPI tiles, dark-theme fixes. The dashboard greets the signed-in user and shows the tenant. Chat and Quick Prompt share the same look.
 - **Detail-page tab kept in the URL** (`?tab=...`) for Agent, Plan, Usage profile, LLM provider, MCP server, and Prompt pages.
 - **Uniform list pages**: server-side search, filters, and sorting; 25 rows per page; resizable columns whose width, order, and visibility are remembered; double-click a row to edit it.
 - **Prompt tester**: the Test tab stays reachable while the form is dirty, runs the saved version picked in the version selector, and says so. Variable detection now understands Thymeleaf loops, conditions, ternaries, `[# th:...]` elements, and `[(...)]` inlines.
