@@ -113,6 +113,10 @@ In addition to the document accessor caches, Hazelcast also stores:
 | `spring:oauth2:oauth2Authorized` | OAuth2 authorized client tokens (when OAuth2 is enabled) | No idle expiry |
 | `documentRouteTable` | Mapping from `DocumentId` to the broker instance that holds the document | No idle expiry |
 
+:::warning Upgrading a viewer cluster
+All viewer instances of a cluster must run the same Hazelcast minor version. When an ARender upgrade changes it, as 2026.4.0 does (5.5 to 5.7), stop every viewer instance before starting the new version instead of upgrading them one by one. The cache and the HTTP sessions it holds are lost: users reopen their documents. On Kubernetes, see [Kubernetes (Helm) → Upgrade](../installation/kubernetes-helm.md#upgrade).
+:::
+
 The viewer reads its Hazelcast configuration from a `hazelcast.yaml` file:
 
 ```yaml title="hazelcast.yaml"

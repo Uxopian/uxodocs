@@ -44,9 +44,23 @@ The root object of the API. All sub-APIs are accessible from here.
 | `getCurrentDocumentId()` | — | `string` | Returns the ID of the page-level document currently shown in the content area |
 | `getMasterDocumentId()` | — | `string` | Returns the root container document ID |
 | `askChangeDocument(type, documentId)` | `type: 'Previous'\|'Next'\|'First'\|'Last'\|'ByDocumentId'`, `documentId?: string` | `void` | Navigates to another document in the current tree |
-| `askChangePage(type, offset, position)` | `type: 'Relative'\|'Index'\|'Absolute'\|'NoChange'`, `offset: number`, `position: PageRelativePosition` | `void` | Navigates to a page |
-| `newPageRelativePosition(x, y, w, h)` | `x, y, w, h: float` | `PageRelativePosition` | Builds a position rectangle for use with `askChangePage` |
+| `askChangePage(type, offset)` | `type: 'Relative'\|'Index'\|'Absolute'\|'NoChange'`, `offset: number` | `void` | Navigates to the top of a page. `Index` goes to the 0-based page given as `offset`; `Absolute` goes to the first page for a negative `offset` and to the last page otherwise |
+| `askChangePage(type, offset, position)` | `type`, `offset` as above, `position: PageRelativePosition` | `void` | Navigates to a page and centers `position` in the view |
+| `askChangePage(type, offset, position, centerPosition)` | `type`, `offset`, `position` as above, `centerPosition: boolean` | `void` | Navigates to a page. With `centerPosition` set to `false`, `position` is placed at the top of the view, as an internal hyperlink click does. Available since 2026.4.0 |
+| `newPageRelativePosition(x, y, w, h)` | `x, y, w, h: float` | `PageRelativePosition` | Builds a position rectangle for use with `askChangePage`, in page points (1/72 inch) from the top-left corner of the page |
 | `getPageForNamedDestination(documentId, destination, handler)` | `documentId: string`, `destination: string`, `handler: function(pageNumber)` | `void` | Resolves a named destination to a page number |
+
+**Example: go to a position on a page**
+
+Coordinates are page points, not fractions of the page: `y = 421` is the middle of an A4 page, which is 842 points high. A PDF destination counts its top from the bottom of the page, so convert it with `y = pageHeight - top`. A centered change aims at the center of the rectangle: with `w = h = 0`, it aims at `x, y`.
+
+```javascript
+var position = arender.jsapi.newPageRelativePosition(0, 421, 0, 0);
+// Center the middle of the third page in the view
+arender.jsapi.askChangePage('Index', 2, position);
+// Put the middle of the third page at the top of the view
+arender.jsapi.askChangePage('Index', 2, position, false);
+```
 
 **Example: load and open a document**
 

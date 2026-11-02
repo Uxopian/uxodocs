@@ -35,8 +35,7 @@ The metrics tracked by the feature are grouped as follows.
 
 ### Document usage
 
-- **Opening documents** — tracks document opening, including MIME type, the number of documents opened, the total page count, and the time taken to open the document.
-- **Closing documents** — tracks document closing, including the total page count, the time spent viewing the document, and the number of pages viewed.
+- **Consultations** — one event per consultation, from the moment a document opens until the user moves on to another one. It reports the MIME type, the number of documents and pages, the time taken to show the document, the time spent viewing it, the pages viewed, and how many times each feature below was used during the consultation.
 
 ### Annotations
 
@@ -62,6 +61,12 @@ The metrics tracked by the feature are grouped as follows.
 - **Document download** — usage of the download feature.
 - **Image filtering** — usage of the image filter feature.
 
+### Sampling
+
+Since 2026.4.0, a consultation in which the user used at least one feature is always reported. A consultation in which the user only read the document is reported once in ten, drawn at random for each consultation. Each event carries its sampling rate, so the number of consultations can still be estimated.
+
+Entering full screen counts as a single use of the feature, and so does one image filter adjustment.
+
 ## How the data is used
 
 The analytics are reviewed by the Uxopian team solely to improve the user experience:
@@ -76,4 +81,4 @@ No sensitive document data is ever exposed.
 
 For product analytics to function, ensure that the URL `https://api-eu.mixpanel.com` is reachable from the user's machine.
 
-To disable product analytics, set `arender.data.analytics.enabled` to `false`. See [Viewer configuration](../reference/viewer-configuration.md#global-display) for the full list of properties.
+To disable product analytics, set `arender.data.analytics.enabled` to `false`. To send the analytics to your own Mixpanel project instead of the Uxopian one, set `arender.data.analytics.token` to the token of that project. See [Viewer configuration](../reference/viewer-configuration.md#global-display) for the full list of properties.

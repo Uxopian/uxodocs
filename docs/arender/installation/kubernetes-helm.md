@@ -253,6 +253,8 @@ viewer:
 
 Hazelcast is configured for all charts. The service exposes port 5701 for inter-node communication.
 
+Clustering is enabled for the viewer when `viewer.replicaCount` is 2 or more or `viewer.autoscale.enabled` is `true`, and for the Document Service Broker when `rendition.broker.replicaCount` is 2 or more or `rendition.broker.autoscale.enabled` is `true`.
+
 ## Health probes
 
 All services have configurable liveness and readiness probes:
@@ -286,6 +288,24 @@ helm upgrade arender arender/arender \
   --namespace arender \
   -f my-values.yaml
 ```
+
+The deployments use the default `RollingUpdate` strategy: new pods start while the old ones are still running. This is fine as long as both versions embed the same Hazelcast minor version.
+
+:::warning Upgrades that change the Hazelcast minor version
+A Hazelcast member cannot join a cluster of another minor version. ARender 2026.4.0 moves from Hazelcast 5.5 to 5.7, so when clustering is enabled for the viewer or the broker, a rolling upgrade from 2026.3.x leaves the new pods restarting in a loop.
+
+Stop the old pods before upgrading:
+
+```bash
+kubectl get deployments --namespace arender
+kubectl scale deployment <viewer-deployment> <broker-deployment> --replicas=0 --namespace arender
+helm upgrade arender arender/arender \
+  --namespace arender \
+  -f my-values.yaml
+```
+
+`helm upgrade` restores the replica count set in your values. The HTTP sessions and the document cache held in Hazelcast are lost: users reopen their documents.
+:::
 
 ## Next steps
 
