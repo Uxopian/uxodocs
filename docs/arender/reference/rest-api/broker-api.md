@@ -57,6 +57,28 @@ Do not compute part indices. There is no shared convention: the first part of an
 
 A ZIP has no part `0` at all. Requesting one returns 404. A folder inside a ZIP also consumes an index of its own, alongside the files. Always take the IDs from the `children` array returned by [Get document layout](#get-document-layout).
 
+## Error responses
+
+When a call fails because of the document, the response body is an `ExceptionCapsule`:
+
+```json
+{
+  "message": "Document b64_YzQy... is password protected",
+  "exceptionClass": "com.arondor.viewer.client.api.document.DocumentProtectionException",
+  "errorCode": "PASSWORD_PROTECTED"
+}
+```
+
+`errorCode` is only present when the failure classifies the document:
+
+| Status | `errorCode` | Meaning |
+|---|---|---|
+| 422 | `PASSWORD_PROTECTED` | The document is password-protected or encrypted and cannot be opened |
+| 422 | `CORRUPTED` | The document is corrupted, truncated or malformed |
+| 406 | `UNSUPPORTED_FORMAT` | The document format is not supported |
+
+A `422` is final: the same document fails the same way on every call, so clients and retry policies must not retry it. PDF, Office and OpenDocument files, ZIP and 7z archives, and the parts of emails and archives are all checked. An archive is extracted during [Upload a document](#upload-a-document), which still answers `200`: its failure is reported on the first [Get document layout](#get-document-layout) call.
+
 ---
 
 ## Document operations
@@ -416,6 +438,8 @@ There are no page images at container level. [Get page image](#get-page-image) o
 |--------|-------------|
 | 200 | Layout returned successfully |
 | 404 | Document not found, or a hierarchical part ID sent with a raw slash instead of `@` |
+| 406 | Document format not supported |
+| 422 | Document password-protected or corrupted, see [Error responses](#error-responses) |
 | 500 | Internal server error |
 
 #### Example request
@@ -524,6 +548,7 @@ Page images exist only on documents made of pages. A composite document (email, 
 | 200 | Image returned successfully |
 | 400 | Invalid page number or descriptor |
 | 404 | Document not found |
+| 422 | Document password-protected or corrupted, see [Error responses](#error-responses) |
 | 500 | Internal server error, including a request on a composite document |
 
 #### Example request
@@ -585,6 +610,7 @@ Returns text elements with their bounding boxes, font information, and paragraph
 | 200 | Text positions returned |
 | 400 | Invalid page number |
 | 404 | Document not found |
+| 422 | Document password-protected or corrupted, see [Error responses](#error-responses) |
 | 500 | Internal server error |
 
 #### Example request
