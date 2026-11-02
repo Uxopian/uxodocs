@@ -39,10 +39,9 @@ Here are the specific metrics tracked by the Product Analytics feature:
 
 #### Document Usage
 
-* **Opening documents**: Tracks the opening of a document. It includes information on MIME type, the number of 
-  documents opened, the total page count and also the time taken to open the document.
-* **Closing documents**: Tracks the closing of a document. It includes information on the total page count, 
-  the time spent viewing the document and the number of pages viewed.
+* **Consultations**: One event per consultation, from the moment a document opens until the user moves on to another
+  one. It reports the MIME type, the number of documents and pages, the time taken to show the document, the time
+  spent viewing it, the pages viewed, and how many times each feature below was used during the consultation.
 
 #### Annotations
 
@@ -67,6 +66,14 @@ Here are the specific metrics tracked by the Product Analytics feature:
 * **PDF printing**: Tracks the usage of the Print feature.
 * **Document download**: Tracks the usage of the download feature.
 * **Image filtering**: Tracks the usage of the Image filter feature.
+
+#### Sampling
+
+Since 2023.24.0, a consultation in which the user used at least one feature is always reported. A consultation in
+which the user only read the document is reported once in ten, drawn at random for each consultation. Each event
+carries its sampling rate, so the number of consultations can still be estimated.
+
+Entering full screen counts as a single use of the feature, and so does one image filter adjustment.
 
 ### Safe and Purposeful Data Collection
 
