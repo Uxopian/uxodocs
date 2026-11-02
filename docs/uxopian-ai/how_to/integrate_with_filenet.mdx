@@ -8,7 +8,7 @@ sidebar_position: 5
 content_hash: b555f4ae6692ebcc1bc43dad86866e0d695fb10749b598bc8d9ea7dc275c2b8e
 ---
 
-This guide covers how to configure the FileNet connector in `uxopian-ai` and install the Uxopian AI plugin for IBM Content Navigator (ICN). The plugin adds an **"Open in Uxopian"** context menu action on P8 documents and injects an AI Chat button into the ICN toolbar.
+This guide covers how to configure the FileNet connector in `uxopian-ai` and install the Uxopian AI plugin for IBM Content Navigator (ICN). The plugin adds a **Uxopian AI** submenu of quick AI actions to the document and folder menus of every desktop, and injects AI Chat and AI Admin buttons into the ICN toolbar. The quick actions are written as Uxopian AI scripts, so adding or changing one needs neither a plugin rebuild nor an ICN restart (see [Add quick AI actions](#add-quick-ai-actions)).
 
 ## Architecture
 
@@ -208,9 +208,9 @@ Only the source is distributed — no prebuilt JAR — so you build and control 
 
 ### Key integration points
 
-- **Configuration screen** — a Dojo widget in the ICN Admin Console lets an administrator set the Uxopian AI host without rebuilding (see [2.4](#24-configure-the-uxopian-ai-host)).
-- **Context menu action** — `UxopianAction` adds **Open in Uxopian** on P8 documents.
-- **Toolbar buttons** — `actionHandler.js` injects the AI Chat and AI Admin buttons and fetches short-lived signed JWTs (`JwtSigner`, 300 s TTL) to authenticate them.
+- **Configuration screen** — a Dojo widget in the ICN Admin Console lets an administrator set the Uxopian AI host and the scripts that define the quick actions, without rebuilding (see [2.4](#24-configure-the-uxopian-ai-host-and-the-action-scripts)).
+- **Quick action menus** — `actionHandler.js` adds a **Uxopian AI** submenu to the document and folder menus of every desktop and fills it with the actions the configured scripts register (see [Add quick AI actions](#add-quick-ai-actions)). `UxopianAction` remains available for administrators who prefer to place the entry in a menu themselves.
+- **Toolbar buttons** — `actionHandler.js` injects the AI Chat and AI Admin buttons and fetches short-lived signed JWTs (`JwtSigner`, 30 s TTL, a fresh one per request) to authenticate them.
 - **Keystore** — `icn-plugin.p12` (PKCS12) ships as a default, with a `.jks` fallback for IBM Java 8; replace before production (see [Replacing the keystore](#replacing-the-keystore)).
 - **Tests** — `mvn test` (JUnit 5/Mockito) and `npm install && npm test` (Jest, for `actionHandler.js`).
 
@@ -226,7 +226,7 @@ Only the source is distributed — no prebuilt JAR — so you build and control 
 mvn clean package
 ```
 
-The output JAR is `target/uxopian-icn-plugin.jar`. There is nothing to configure at build time — the Uxopian AI gateway host is set after deployment, from the ICN Admin Console (see [2.4](#24-configure-the-uxopian-ai-host)).
+The output JAR is `target/uxopian-icn-plugin.jar`. There is nothing to configure at build time — the Uxopian AI gateway host is set after deployment, from the ICN Admin Console (see [2.4](#24-configure-the-uxopian-ai-host-and-the-action-scripts)).
 
 ---
 
@@ -265,14 +265,15 @@ The default `icn-plugin.p12` bundled in the JAR uses the password `changeit`. Ge
 6. Confirm that the plugin name **Uxopian Plugin** and version **1.0.0** are displayed.
 7. Save the configuration and restart ICN.
 
-### 2.4 Configure the Uxopian AI host
+### 2.4 Configure the Uxopian AI host and the action scripts
 
 The gateway URL is not baked into the JAR — it is set from the ICN Admin Console, via the configuration screen the plugin registers (`UxopianPlugin.getConfigurationDijitClass`):
 
 1. In the ICN Administration Console, open **Plug-ins** and select **Uxopian Plugin**.
 2. Click **Configure**.
 3. Set **Uxopian AI Host URL** to your gateway's frontend-facing URL, for example `https://your-gateway-host/gui/gateway/uxopian-ai/filenet`. This must be an exact match for the fixed path the gateway route below expects — it is not an arbitrary prefix.
-4. Save. No rebuild or restart is required — `actionHandler.js` fetches this value at runtime from `UxopianProxyService` (`op=config`, which reads it server-side via `PluginServiceCallbacks.loadConfiguration()`), the same way it fetches tokens.
+4. Optionally, set **Uxopian AI scripts for the AI actions** to the ids of the Uxopian AI scripts that define the quick actions, comma-separated, for example `icn-actions`. Leave it empty to offer no quick action — see [Add quick AI actions](#add-quick-ai-actions).
+5. Save. No rebuild or restart is required — `actionHandler.js` fetches this value at runtime from `UxopianProxyService` (`op=config`, which reads it server-side via `PluginServiceCallbacks.loadConfiguration()`), the same way it fetches tokens.
 
 There is no built-in default — if this field is left empty, the chat and admin actions fail with a "Uxopian AI Host URL is not configured" error instead of silently pointing at some other environment. This must be set explicitly for every deployment.
 
@@ -405,7 +406,7 @@ app:
       provider: FlowerDocsProvider
 ```
 
-The `path` value here must match the **Uxopian AI Host URL** configured on the plugin ([2.4](#24-configure-the-uxopian-ai-host)) (or the value of `icn.plugin.bff.url` for the backend route).
+The `path` value here must match the **Uxopian AI Host URL** configured on the plugin ([2.4](#24-configure-the-uxopian-ai-host-and-the-action-scripts)) (or the value of `icn.plugin.bff.url` for the backend route).
 
 :::danger[Route declaration order matters — FileNet's route must come first]
 `/gui/gateway/uxopian-ai/filenet/**` is a sub-path of the default FlowerDocs route's own pattern
@@ -467,15 +468,103 @@ curl -H "Authorization: Bearer <token>" \
 
 Expected: HTTP 200 with a list of prompts.
 
-### 4.3 Test the context menu action and toolbar buttons in ICN
+### 4.3 Test the quick actions and toolbar buttons in ICN
 
 1. Log in to IBM Content Navigator.
 2. Browse to a P8 document in the Document Library.
-3. Right-click the document — **Open in Uxopian** should appear in the context menu.
-4. Click the action — the Uxopian AI chat panel should open.
+3. Right-click the document — a **Uxopian AI** submenu should appear at the bottom of the context menu, listing the document actions your scripts register (it is absent when no script is configured, or when no action fits the selection).
+4. Click an action — the Uxopian AI chat panel should open with that action's request.
 5. Verify the **AI Chat** toolbar button (chat bubble icon) appears in the ICN navigation bar.
 6. Verify the **AI Admin** toolbar button (gear icon) appears next to the AI Chat button.
 7. Click **AI Admin** — the browser should open a new tab on the gateway admin panel, authenticated automatically.
+
+---
+
+## Add quick AI actions
+
+A quick action is a JavaScript function, kept in Uxopian AI as a [script](../admin/managing_scripts.md), that the plugin runs when the user picks it in the **Uxopian AI** submenu. The script decides what the action does — typically opening the chat with a prompt and the selected documents — and Uxopian AI keeps it, so administrators change actions from the admin console instead of rebuilding the plugin.
+
+```mermaid
+sequenceDiagram
+    participant U as ICN user
+    participant P as ICN plugin<br/>(actionHandler.js)
+    participant G as uxopian-gateway
+    participant A as uxopian-ai
+    participant CE as FileNet Content Engine
+    U->>P: Opens a document or folder menu
+    P->>G: GET /api/v1/scripts/{id} (revalidated)
+    G->>A: forwards with the caller's identity
+    A-->>P: published script (or 304)
+    P-->>U: Uxopian AI submenu with the fitting actions
+    U->>P: Picks an action
+    P->>G: Chat request with a prompt and the FileNet object ids
+    G->>A: forwards
+    A->>CE: reads the documents as the user
+    A-->>U: answer streamed in the chat
+```
+
+*Figure: The plugin loads the action scripts from Uxopian AI each time a menu opens, then runs the chosen action, which sends a prompt with the selected FileNet object ids; Uxopian AI reads the documents from the Content Engine as the current user.*
+
+### Write the script
+
+Open the admin console from ICN (**AI Admin** button, so it lands on the object store's tenant), go to **Scripts**, create a script — for example `icn-actions` — and publish it. Then list its id in the plugin configuration ([2.4](#24-configure-the-uxopian-ai-host-and-the-action-scripts)). Each action is declared with `UxopianAI.registerAction`:
+
+```javascript
+UxopianAI.registerAction({
+    id: 'summarize',
+    label: 'Summarize',
+    multiDoc: false,
+    folder: false,
+    documents: true,
+    onExecute: function (ctx) {
+        ctx.openChat({
+            inputs: [InputBuilder.promptAsUser('summarizeDocumentMarkdown', { documentId: ctx.items[0].objectId })]
+        });
+    }
+});
+
+UxopianAI.registerAction({
+    id: 'chat-about-folder',
+    label: 'Chat about this folder',
+    folder: true,
+    documents: false,
+    onExecute: function (ctx) {
+        ctx.openChat({
+            inputs: [InputBuilder.textAsSystem('The user is looking at the FileNet folder "' + ctx.folder.name
+                + '" (object id ' + ctx.folder.objectId + '). Use the FileNet tools to list and read its documents.')]
+        });
+    }
+});
+```
+
+| Field | Default | Description |
+|---|---|---|
+| `id` | *(required)* | Unique among the loaded scripts. Registering the same id again replaces the action. |
+| `label` | the `id` | Text shown in the **Uxopian AI** submenu. |
+| `documents` | `true` | Offered in the document menus. Set `false` for a folder-only action. |
+| `multiDoc` | `false` | Also offered on a selection of several documents. Otherwise ICN greys the action out on a multiple selection. |
+| `folder` | `false` | Offered in the folder menus. |
+| `onExecute(ctx)` | *(required)* | Runs when the user picks the action. |
+
+`ctx` gives the action what the user selected:
+
+| Property | Description |
+|---|---|
+| `ctx.items` | The selected documents: `[{ objectId, className, name, mimeType }]`, `objectId` being the FileNet object id (`{GUID}`). Empty for a folder. |
+| `ctx.folder` | The selected folder, `{ objectId, className, name }`, or `null`. |
+| `ctx.openChat(request)` | Opens the chat with a request, built with `InputBuilder.promptAsUser(promptId, payload)` to run a prompt, or `InputBuilder.textAsSystem(text)` to give context to a free conversation. |
+
+The scripts are revalidated each time a menu opens: an edited and republished script, or a change of the **Uxopian AI scripts** field, shows from a later opening without reloading ICN.
+
+### Prompts that read FileNet documents
+
+The tenant of a request from ICN is the **object store** of the desktop's repository (see [How the tenant is resolved](#how-the-tenant-is-resolved)), and its default prompts read documents with `documentService.extractTextualContent`, which only knows ARender document ids. For every prompt a quick action runs with a FileNet object id, publish a version that reads the document through the FileNet connector instead:
+
+```text
+[[${fileNetService.extractTextualContent(documentId)}]]
+```
+
+`fileNetService.extractTextualContent(objectId)` reads the document from the Content Engine as the current user, hands it to ARender and returns its text. The default prompts concerned are `arenderContext`, `summarizeDocumentText`, `summarizeDocumentMarkdown`, `translate`, `genericComparison` and `detailedComparison`; edit them in [Managing prompts](../admin/managing_prompts.md) on each object store's tenant.
 
 ---
 
@@ -504,7 +593,8 @@ Set `icn.plugin.keystore.path`, `.alias`, and `.password` as WebSphere JVM custo
 
 | ICN plugin configuration (set via ICN Admin Console) | Default | Description |
 |---|---|---|
-| Uxopian AI Host URL (`uxopianAiHost`) | *(none — required)* | Frontend-facing gateway URL, fetched at runtime by `actionHandler.js` via `op=config` (`fetchUxopianHost()`). Set from **Plug-ins → Uxopian Plugin → Configure** ([2.4](#24-configure-the-uxopian-ai-host)) — no rebuild needed to change it. Chat/admin actions fail with an explicit error if it's left unset. |
+| Uxopian AI Host URL (`uxopianAiHost`) | *(none — required)* | Frontend-facing gateway URL, fetched at runtime by `actionHandler.js` via `op=config` (`fetchUxopianHost()`). Set from **Plug-ins → Uxopian Plugin → Configure** ([2.4](#24-configure-the-uxopian-ai-host-and-the-action-scripts)) — no rebuild needed to change it. Chat/admin actions fail with an explicit error if it's left unset. |
+| Uxopian AI scripts for the AI actions (`scripts`) | *(empty)* | Comma-separated ids of the Uxopian AI scripts that register the quick actions. Read again at each opening of a menu, so a change applies without restarting ICN. Empty: no **Uxopian AI** submenu. See [Add quick AI actions](#add-quick-ai-actions). |
 
 | FileNet connector property (uxopian-ai) | Env variable | Default | Description |
 |---|---|---|---|
@@ -536,6 +626,9 @@ Set `icn.plugin.keystore.path`, `.alias`, and `.password` as WebSphere JVM custo
 | Chat panel blank, or web component assets 401/403 | `icn.plugin.bff.url`/Uxopian AI Host URL wrong, unreachable, or the gateway route isn't public for assets | Verify connectivity from WebSphere to the gateway and that `/api/web-components/**` is `public: true` |
 | `AI Admin` 404s at `.../auth/login...` | The reverse proxy/load balancer in front of the gateway doesn't cover `/gui/gateway/auth/login` — see [3.2](#32-declare-the-gateway-route) | Route the broader `/gui/gateway` prefix there instead |
 | `AI Admin` 401s with `Authentication token is missing` despite a `GATEWAY_SESSION` cookie | Route declaration order — see [3.2](#32-declare-the-gateway-route) | Move `uxopian-ai-filenet` before `uxopian-ai` in the routes list |
+| A quick action opens the chat with `An unexpected error occurred`, and uxopian-ai logs `Error rendering template` with a 404 on `/documents/{...}/layout` | The prompt the action runs reads the document with `documentService.extractTextualContent`, which only knows ARender ids, not FileNet object ids | Publish a version of that prompt that reads `fileNetService.extractTextualContent(documentId)` on the object store's tenant — see [Prompts that read FileNet documents](#prompts-that-read-filenet-documents) |
+| No **Uxopian AI** submenu in the context menu | The **Uxopian AI scripts** field is empty, a listed script is not published (`401` on `/api/v1/scripts/{id}` in the browser console), or no registered action fits the selection | Set the field ([2.4](#24-configure-the-uxopian-ai-host-and-the-action-scripts)), publish the script, and check its `folder`/`documents`/`multiDoc` flags |
+| An edited script keeps showing its old actions | The script was saved but not published again, or uxopian-ai predates the content-based script ETag, which answered `304` to every revalidation | Publish the script; on such versions, clear the browser cache once |
 | Chat fails with `System prompt with id <name> not found` | `buildChatRequest()` was customized to reference a prompt that doesn't exist for this tenant (default sends none) | Remove the `PROMPT` entry, or create a prompt with that id for this tenant |
 | ACCE shows a Basic-auth popup instead of its own login page | A `webAppSecurity` override was added alongside the OIDC config (e.g. auto-added by the FNCM Kubernetes operator) — see [0.4](#04-configure-oidc-trust-on-the-content-platform-engine) | If hand-configuring `server.xml`, remove the override — it isn't required. If your deployment tooling adds it unconditionally, this is a limitation of that tooling; the popup remains functional |
 

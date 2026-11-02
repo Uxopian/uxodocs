@@ -1,11 +1,11 @@
 ---
 title: Managing Applications in the admin UI
 last_update:
-  date: '2026-08-13T13:08:15.927Z'
+  date: '2026-10-19T18:21:35.722Z'
   author: CI/CD Bot
 sidebar_label: Applications
 sidebar_position: 9
-content_hash: 6a58b4f4877f38929ad49ace7970b1dc7f97acb54f474a4130bdf92166f1d122
+content_hash: 36c559ad73fa5e1d9cd7a68d740084ebdfbf609fb05cb9de603187957d091f3a
 ---
 
 Since 2026.0.0-ft5, an **Application** (`ApplicationConf`) scopes a set of AI defaults and guardrails — a default LLM provider/model, a system prompt fragment, a maximum number of tool-calling cycles, and a tool/MCP permission whitelist — to one usage surface. A single uxopian-ai deployment can therefore serve several integrations with different defaults, without the surfaces stepping on each other's configuration.
@@ -49,7 +49,7 @@ In the admin panel, click **Applications** in the navigation. The page lists eve
 
 | Field | Description |
 |---|---|
-| Name | The Application's name — also becomes its id. Required, and immutable after creation (the id is derived from the name at creation time). |
+| Name | The Application's ID. Required, unique per tenant, and immutable after creation. A name already used by another Application is reported while you type. |
 | Description | Free-form description. |
 | Provider | The connection provider (`ProviderId`, e.g. `FlowerDocsProvider`) this Application is associated with. Required in the editor — Save is disabled until both name and provider are filled in. |
 | Prompt | A Prompt appended to the base prompt for conversations resolved to this Application. Leave unset to use the base prompt alone. |

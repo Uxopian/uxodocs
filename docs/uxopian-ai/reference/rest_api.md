@@ -3,9 +3,9 @@ title: REST API summary
 sidebar_label: REST API
 sidebar_position: 3
 last_update:
-  date: '2026-08-13T14:14:52.477Z'
+  date: '2026-10-19T18:21:35.722Z'
   author: CI/CD Bot
-content_hash: 30c1062d5932dcc1f5812366529e5ec3b1e3aebea4babf1940d0fb6149d1a663
+content_hash: bc47b2e6df16d9be465992d227142ef66e1c105e9dc0cc355ab42fe0ade53964
 ---
 
 Summary of all REST API endpoints exposed by `uxopian-ai`. All endpoints are accessible via the gateway at the configured base path. An interactive API explorer (Swagger UI) is available at `/swagger-ui/index.html`.
@@ -175,6 +175,7 @@ Since 2026.0.0-ft5, a prompt is one document holding a version history with an e
 | Method | Path | Description |
 |---|---|---|
 | `GET` | `/api/v1/admin/prompts` | List all prompts for the current tenant. |
+| `GET` | `/api/v1/admin/prompts/availability?id={id}` | Whether a new prompt can take this ID (`true` / `false`). |
 | `POST` | `/api/v1/admin/prompts` | Create a new prompt with its initial version, v0 (`201`). `409` if a prompt with the same ID exists. |
 | `GET` | `/api/v1/admin/prompts/{id}` | Get the prompt aggregate — `{id, versions: [...]}` — by ID. |
 | `GET` | `/api/v1/admin/prompts/{id}/render` | Render the active version, or the one given by `?version=`. Takes an optional JSON payload in the request body (`Map<String, Object>`). |
@@ -258,7 +259,8 @@ Since 2026.0.0-ft5. See [Agentic Plans](../understanding/agentic_plans.md).
 |---|---|---|
 | `GET` | `/api/v1/admin/scripts` | List all scripts for the current tenant. |
 | `GET` | `/api/v1/admin/scripts/{id}` | Get a script by ID. |
-| `POST` | `/api/v1/admin/scripts` | Create a script (name only). Returns `409` if the name exists. |
+| `GET` | `/api/v1/admin/scripts/availability?id={id}` | Whether a new script can take this ID (`true` / `false`). |
+| `POST` | `/api/v1/admin/scripts` | Create a script from its ID only (`{"id": "my-script"}`). Returns `409` if the ID exists. |
 | `PUT` | `/api/v1/admin/scripts/{id}` | Update the draft content. |
 | `POST` | `/api/v1/admin/scripts/{id}/scan` | Run the LLM security scan. |
 | `POST` | `/api/v1/admin/scripts/{id}/publish` | Publish a certified draft. |
@@ -272,7 +274,8 @@ Since 2026.0.0-ft5. See [Agentic Plans](../understanding/agentic_plans.md).
 |---|---|---|
 | `GET` | `/api/v1/admin/mcp/mcp-conf` | List MCP server configurations for the current tenant. |
 | `GET` | `/api/v1/admin/mcp/mcp-conf/{id}` | Get an MCP server configuration. |
-| `POST` | `/api/v1/admin/mcp/mcp-conf` | Register an MCP server. |
+| `GET` | `/api/v1/admin/mcp/mcp-conf/availability?id={id}` | Whether a new MCP server can take this ID (`true` / `false`). |
+| `POST` | `/api/v1/admin/mcp/mcp-conf` | Register an MCP server under the `id` given in the body. |
 | `PUT` | `/api/v1/admin/mcp/mcp-conf/{id}` | Update an MCP server configuration. |
 | `DELETE` | `/api/v1/admin/mcp/mcp-conf/{id}` | Delete an MCP server configuration (`204`). |
 | `GET` | `/api/v1/admin/mcp/mcp-conf/{id}/tools` | List the tools exposed by an MCP server (connection test). |
