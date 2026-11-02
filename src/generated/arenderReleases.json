@@ -5,7 +5,7 @@
     "date": "2026-11-02",
     "description": "Fourth minor on the 2026 line: multi-view, a table of contents, comment zones and a refreshed interface in ARender Horizon, protected and corrupted document reporting, and Classic, Rendition and security fixes.",
     "slug": "/release-note/arender/v2026.4.0/release-notes",
-    "hasUpgradeNotes": false,
+    "hasUpgradeNotes": true,
     "latest": true
   },
   {
