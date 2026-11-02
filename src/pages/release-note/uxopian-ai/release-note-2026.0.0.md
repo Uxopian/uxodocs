@@ -190,25 +190,16 @@ Every admin list now answers a page of summaries (`{ collection, total, facets }
 
 ## 🐛 Bug fixes
 
-- **Cross-tenant leak fixed in FileNet**: the data-model cache was a single slot shared by all tenants; it is now cached per tenant. Full-text search no longer fails with `FNRCR0040E`.
-- **Prompt categories with a space** (for example "Service Requests") no longer make the prompt lists answer 500 for the whole tenant.
-- **Re-seeding no longer overwrites customised global prompts.**
-- **Chat history of an existing conversation** could never be displayed because the chat called a wrong path; fixed.
-- **`window.openChat`** now reopens the requested conversation, and `window.createChat` no longer exposes the never-working `promptId` (see [Upgrade notes](#-upgrade-notes)).
-- **Stats intervals** are computed in the JVM time zone, so the latest requests are no longer dropped east of UTC. Per-user request and token counts are fixed (chat requests had no creator).
-- **Streamed answer in Quick Prompt** is synced with its own request instead of the previous turn; the panel keeps its style in Picture-in-Picture; the answer bubble no longer overflows.
-- **Document viewer**: filesystem documents render again (ARender answered 415), and an extracted value without `confidence` no longer empties the task queue.
-- **A script created in the admin** can be edited right away instead of staying on "Saving...".
-- **Malformed ids** in paths or queries answer 400 naming the parameter instead of 500.
-- **Plan editor**: two nodes added in the same millisecond no longer share an id, which dropped their edges.
-- **Thymeleaf editor**: typing `[` then accepting "Expression" no longer produces `[[[${variable}]]`.
-- **Permissions editor** keeps individually allowed tools when a tag covering them is added or removed.
-- **Deleting a usage profile's prompt** right after deleting the profile no longer answers 409.
-- **Date criteria** in FlowerDocs tools are read in UTC.
-- **Admin hygiene**: every delete confirms its success, failed list loads show a clear error and retry.
-- **Quick Prompt `priority` hint** now correctly says lower numbers show first.
-- **`presentChoices`** no longer breaks when an option has no description.
-- **The "Reasoning" toggle was removed from the chat composer**, because the backend ignores it.
+- 🔐 **FileNet tenants no longer share a cache**, and full-text search works again.
+- 📂 **Prompt categories with a space** no longer break the prompt lists.
+- 🌱 **Re-seeding** no longer overwrites your customised global prompts.
+- 💬 **Chat**: the history of an existing conversation displays, `openChat` reopens the right conversation, and Quick Prompt shows the answer to the right question.
+- 📈 **Statistics**: the latest requests are no longer dropped, and per-user counts are right.
+- 📄 **Viewer**: filesystem documents render again, and a value without a confidence score no longer empties the queue.
+- ✍️ **Admin editors**: a new script can be edited right away, two plan nodes added at once keep their links, the template editor no longer garbles brackets, and the permissions editor keeps the tools you allowed one by one.
+- 🧹 **Admin polish**: every delete confirms its success, failed lists say so and offer a retry, and malformed ids answer a clear error.
+- 🕒 **FlowerDocs date criteria** are read in UTC.
+- 🧭 **Small fixes**: the Quick Prompt priority hint, choices without a description, and the Reasoning toggle removed from the chat because it had no effect.
 
 ---
 
