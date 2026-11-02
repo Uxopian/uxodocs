@@ -56,6 +56,8 @@ Write JavaScript tools and shared libraries in the admin console and let a plan,
 
 A new **Review** screen and a task queue let reviewers accept, correct or refuse extracted field values next to the source document, with keyboard shortcuts for the speed readers. See [Human-in-the-loop review](/docs/uxopian-ai/how_to/human_in_the_loop_review).
 
+![The Review screen: the source document with a box on each extracted value, and the values to accept, correct or refuse](/img/uxopian-ai/release-notes/v2026.0.0/review-document.png)
+
 ![The Review queue: documents waiting for a human decision, with their status and tags](/img/uxopian-ai/release-notes/v2026.0.0/review-queue.png)
 
 ### 📎 Documents and PDFs as model input
