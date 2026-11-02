@@ -13,37 +13,66 @@ description: "General availability of 2026.0.0: Usage Profiles, code modules, hu
 **Release Date:** October 2026
 **Version:** 2026.0.0
 
-This is the general availability release of the 2026.0.0 line. It builds on 2026.0.0-ft5 and adds **Usage Profiles** (the former Applications), **code modules** (JavaScript tools and libraries run in a sandbox), a **human review screen** with a task queue for validating extracted fields, **documents and PDFs as model input**, **server-side paginated admin APIs**, a reworked **LLM call resolution**, a **redesigned admin console**, and a reworked **NuExtract** provider. It also hardens the deployment: a **mandatory internal auth secret**, a **mandatory Helm NetworkPolicy**, and a strict Content-Security-Policy.
+🎉 **The fasttrack ride is over: 2026.0.0 is the general availability release.** Since 2026.0.0-ft5, your admin console got a fresh new look, your models can read documents and PDFs, humans can review what the AI extracted, and you can write your own tools in JavaScript.
 
-**This release contains several breaking changes. Read the [Upgrade notes](#-upgrade-notes) before upgrading.**
+> ⚠️ **This release contains several breaking changes.** Read the [Upgrade notes](#-upgrade-notes) before upgrading, and plan a transfer of your data: no automatic migration is provided from fasttrack versions.
+
+## 👀 At a glance
+
+| | What's new | In one sentence |
+|---|---|---|
+| 🏷️ | **Usage profiles** | Applications get a new name and a stricter job: one profile per calling surface. |
+| 🧱 | **Code modules** | Write tools and libraries in JavaScript, right in the admin console. |
+| ✅ | **Human review** | Accept, correct or refuse extracted values next to the source document. |
+| 📎 | **Documents and PDFs** | Send files to the model, as upload or as a reference. |
+| 🧬 | **NuExtract** | Extraction with positions, so the review screen can draw boxes on the page. |
+| 🎨 | **New admin console** | Collapsible menu, tabs that stay in the URL, lists that remember your columns. |
+| 📄 | **Paginated admin APIs** | Lists answer pages with search, filters and sorting done server side. |
+| 🔒 | **Hardened deployment** | Mandatory internal secret, Helm NetworkPolicy, strict Content-Security-Policy. |
 
 ---
 
 ## 🌟 Highlights
 
-### 🏷️ Applications become Usage Profiles (action required)
+### 🎨 A console you will want to open
 
-`ApplicationConf` is renamed `UsageProfile`, with no compatibility layer. The REST path, the request header and the OpenSearch index change, and existing Applications are **not** migrated. See [Upgrade notes](#-upgrade-notes).
+The admin console, Chat and Quick Prompt get a new common look: a collapsible menu, one primary action per page, detail pages that keep their tab in the URL, and tables that remember the width, order and visibility of your columns. Double-click a row to edit it. The dashboard now greets you and shows your tenant.
+
+![The Uxopian AI dashboard: requests, tokens, time saved and the most used model, with daily activity charts](/img/uxopian-ai/release-notes/v2026.0.0/dashboard.png)
+
+### 🏷️ Applications become Usage profiles (action required)
+
+A usage profile decides, for one calling surface, which provider, model, system prompt and tools are allowed. It is the former Application with a new name, a new REST path (`/api/v1/admin/usage-profiles`), a new header (`X-Usage-Profile-Id`) and a stricter job. Existing Applications are **not** migrated: re-create them as usage profiles.
+
+![A usage profile: default provider and model, system prompt, tool permissions](/img/uxopian-ai/release-notes/v2026.0.0/application-detail.png)
 
 ### 🧱 Code modules
 
-Write JavaScript tools and shared libraries in the admin console and run them in the `uxopian-code-sandbox`. A module is callable from a plan, an agent, or chat. Opt-in: with no sandbox configured, the feature is off. See [Code modules](/docs/uxopian-ai/how_to/code_modules).
+Write JavaScript tools and shared libraries in the admin console and let a plan, an agent or the chat call them. They run in the `uxopian-code-sandbox`, with a draft and publish lifecycle and a **Test** window. Opt-in: with no sandbox configured, the feature stays off. See [Code modules](/docs/uxopian-ai/how_to/code_modules).
+
+![A published code module in the admin console: JavaScript source, tool settings and publication details](/img/uxopian-ai/release-notes/v2026.0.0/code-module-detail.png)
 
 ### ✅ Human review
 
-A new **Review** screen (`viewer-element`) and a task queue API (`/api/v1/tasks`) let reviewers accept, correct, or refuse extracted field values next to the source document. See [Human-in-the-loop review](/docs/uxopian-ai/how_to/human_in_the_loop_review).
+A new **Review** screen and a task queue let reviewers accept, correct or refuse extracted field values next to the source document, with keyboard shortcuts for the speed readers. See [Human-in-the-loop review](/docs/uxopian-ai/how_to/human_in_the_loop_review).
+
+![The Review queue: documents waiting for a human decision, with their status and tags](/img/uxopian-ai/release-notes/v2026.0.0/review-queue.png)
 
 ### 📎 Documents and PDFs as model input
 
-Requests can carry files, as `multipart/form-data` or as typed file references. PDFs are sent natively to OpenAI, Anthropic, Gemini, Bedrock, and Mistral. The `image` content type is renamed `base64` (action required).
+Requests can carry files, as `multipart/form-data` or as typed file references. PDFs are sent natively to OpenAI, Anthropic, Gemini, Bedrock and Mistral. The `image` content type is renamed `base64` (action required).
+
+### 🧩 Plans you can actually watch
+
+Open a plan run, expand the flow to full screen, and read the output of every step in its panel. Recovery branches (**Runs when**) let a plan carry on after a failure.
+
+![The flow of a plan, expanded to full screen](/img/uxopian-ai/release-notes/v2026.0.0/plan-flow-editor.png)
+
+![The detail of a completed plan run, step by step](/img/uxopian-ai/release-notes/v2026.0.0/plan-run-detail.png)
 
 ### 📄 Paginated admin APIs (action required)
 
-Every admin list now answers a page of summaries (`{ collection, total, facets }`) with server-side search, filters, and sorting instead of a bare array.
-
-### 🎨 Redesigned admin console
-
-The admin console, Chat, and Quick Prompt get a new common look: collapsible navigation rail, uniform detail pages, tabs kept in the URL, resizable tables.
+Every admin list now answers a page of summaries (`{ collection, total, facets }`) with server-side search, filters and sorting, instead of a bare array.
 
 ### 🔒 Hardened deployment (action required)
 
