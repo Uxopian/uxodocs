@@ -227,7 +227,7 @@ The Document Converter (`arender-document-converter`) runs on port 19999.
 | `video.conversion.timeout` | `300` | Timeout for video conversion (seconds) |
 | `rendition.avconv.path` | `ffmpeg` | ffmpeg executable path |
 | `rendition.avprobe.path` | `ffprobe` | ffprobe executable path |
-| `tools.ffmpeg.options` | `-vcodec,h264,...` | ffmpeg command-line options |
+| `tools.ffmpeg.options` | `-vcodec,h264,-acodec,aac,-strict,-2,-pix_fmt,yuv420p,-vf,crop=floor(iw/2)*2:floor(ih/2)*2,-preset,ultrafast,-aac_coder,fast` | ffmpeg command-line options, comma-separated. If you override them, keep `-aac_coder,fast`: without it, audio conversion is two to three times slower with the ffmpeg version shipped in the 2026 converter image |
 
 ### Text-to-PDF
 
