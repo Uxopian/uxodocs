@@ -84,97 +84,91 @@ Every admin list now answers a page of summaries (`{ collection, total, facets }
 
 ## ✨ New features
 
-### 🏷️ Usage Profiles
+### 🏷️ Usage profiles
 
-- `ApplicationConf` is now `UsageProfile`: description, connection provider, system prompt, `defaultLlmProvider`, `defaultLlmModel`, `maxToolCycles`, and the permissions block (tool/MCP/sub-plan whitelist and blacklist, tool tags). The shape is unchanged from the ft5 Application.
-- The admin section is now **Usage profiles**; the REST API is `/api/v1/admin/usage-profiles` and the request header is `X-Usage-Profile-Id`.
-- `maxToolCycles` is now actually enforced (default 10); previously the loop limit was fixed at 10 regardless of the setting. Agents get an equivalent **Max tool cycles** field.
-- A usage profile's prompt **replaces** the default base prompt (`llm.default.base-prompt`) for the call. If the profile prompt is missing or unpublished, the default base prompt is used and a warning is logged.
-- A usage profile requires both a provider and a model in the admin.
+- One profile per calling surface: default provider and model, system prompt, tool permissions, maximum tool cycles.
+- A profile's prompt replaces the default base prompt.
 
-See [Managing usage profiles](/docs/uxopian-ai/admin/managing_applications).
+→ [Managing usage profiles](/docs/uxopian-ai/admin/managing_applications)
 
-### 🎯 LLM call resolution
+### 🎯 Which model answers
 
-- The provider and model of a turn now come from the **turn's prompt** first, then from the **usage profile** of the calling surface. Temperature, `reasoningDisabled`, and the multimodal and function-calling requirements always come from the prompt.
-- The conversation no longer remembers the model: each turn is resolved independently. `Conversation.llmProvider` and `llmModel` remain as "last model used" for display.
-- Prompt `temperature` is a number between 0 and 2, validated at save. The default for a new prompt in the admin is 1 (it was 0, which made some reasoning models answer 400).
-- `POST /api/v1/admin/llm/provider-conf/{id}/test` tests a provider configuration.
-- Agents run on the provider, model, and temperature of their **objective prompt**.
+- The provider and model come from the prompt first, then from the usage profile.
+- Agents run on the provider, model and temperature of their objective prompt.
+- A provider configuration can be tested from the admin.
+
+→ [Configuring LLM providers](/docs/uxopian-ai/how_to/configure_llm_providers)
 
 ### 🧾 Structured output and success criteria
 
-- A prompt version can declare an **output schema** (field **Response format**), either in a simple notation such as `{ "answer": "string: the answer in one sentence" }` or as a JSON Schema. Any conversation running that prompt receives it as the LLM response format.
-- An agent's **success criteria** are now a list. The model gives one verdict per criterion, and the engine derives `SUCCESS`, `UNSATISFIED`, or `FAILURE`. The model no longer self-reports the status. An agent with criteria can therefore end `UNSATISFIED` more strictly than before.
+- A prompt version can declare the shape of the answer it expects.
+- An agent's success criteria are a list, judged one by one.
+
+→ [Writing prompts](/docs/uxopian-ai/extending/writing_prompts)
 
 ### 🧱 Code modules
 
-- A **code module** is a JavaScript library (what it assigns to `exports` is available to modules that import it) and, when it has a `tool` section, a tool callable from a `DIRECT_TOOL` plan node, an agent, or chat (only if `exposeInChat`, and subject to the usage profile's tool permissions).
-- Draft and publish lifecycle: only the published version runs. Edits live in a draft until published; the draft can be discarded. Publication records who and when.
-- A **Test** window in the module page runs the module the way the editor sees it. `log(value)` output appears in the tool-call trace and in the plan run detail. `ai.context()` returns the user, tenant, provider, usage profile, conversation, request, and plan run, never the token.
-- Execution requires `uxopian-code-sandbox`: configure `code-sandbox.url` and `code-sandbox.secret`. Without `code-sandbox.url`, no code tool is offered. Allowed outbound domains are configured on the sandbox side.
-- Deleting a module answers 409 while another module imports it or a plan or agent uses it; `GET /api/v1/admin/code-modules/{id}/usage` lists the users.
-- `GET /api/v1/admin/tools` now lists code tools too; each tool carries a call type `LOCAL` or `CODE`.
+- JavaScript tools and libraries, written and published from the admin console.
+- Callable from plans, agents and chat, and run in the code sandbox.
 
-### ✅ Human review and task queue
+→ [Code modules](/docs/uxopian-ai/how_to/code_modules)
 
-- New **Review** screen served at `<app>/viewer` (web component `viewer-element`, bundle at `/api/web-components/viewer/script`). The admin sidebar has a **Review** entry that opens it in a new tab.
-- Queue with server-side filter, search, sort, paging, status tiles, and CSV export. Keyboard shortcuts for accept, refuse, correct, put back to pending; `?` lists them. The overlay draws one box per evidence on the document.
-- New REST API `/api/v1/tasks`: list, export (CSV), filter counts, create, get, reserve, release, replace payload, complete, and per-task rendition. Reservations default to 900 seconds (`task.reservation-seconds`); payload size is capped by `task.max-payload-bytes` (default 262144).
-- uxopian-ai now relays ARender at `<app>/rendition/` to `rendition.base-url` (`RENDITION_BASE_URL`) behind the same authentication, so the browser no longer needs direct access to ARender.
-- Your gateway routes must let through `/api/v1/tasks/**`, `/viewer/**`, `/rendition/**`, and `/api/web-components/viewer/**`.
-- Task export now streams every matching task: the 10 000-row ceiling is gone, and CSV cells starting with `=`, `+`, `-`, `@`, tab, or carriage return are prefixed with a quote to prevent formula injection.
+### ✅ Human review
+
+- A review screen and a task queue to accept, correct or refuse extracted values.
+- Keyboard shortcuts, status tiles, CSV export.
+
+→ [Human-in-the-loop review](/docs/uxopian-ai/how_to/human_in_the_loop_review)
 
 ### 📎 Documents and files in requests
 
-- Content type `image` is renamed **`base64`** (inline data URL of any file type); a new content type **`document`** carries a typed file reference.
-- `POST /api/v1/requests` and `/requests/stream` accept `multipart/form-data` (JSON in part `request`, each file in its own part). PDFs are sent as-is; other files are rendered to PDF through ARender, otherwise the call answers 422 `UNSUPPORTED_FILE`.
-- A model needs `documentSupported` enabled in its parameters, otherwise the call answers 422 `LLM_CAPABILITY_ERROR` before reaching the provider. Size limits: `llm.document.max-size` (default 20 MB), `maxDocumentSizeMb` per model or provider (422 `DOCUMENT_TOO_LARGE`), and `llm.inline.max-size` (5 MB) for inline base64 (413 `PAYLOAD_TOO_LARGE`).
-- Inline file data is no longer returned inside request JSON; fetch it with `GET /api/v1/requests/{request_id}/inputs/{input}/contents/{content}` (admin twin under `/api/v1/admin/requests/...`).
-- Files sent with a request are stored for retries in a tenant-scoped index and purged nightly after `llm.files.retention` (default 1 day, `0` keeps nothing). Retries now re-send the file.
-- New attachment flag `persist: true` stores the file as received through the filesystem connector (`<root>/<tenant>/<conversation>/<uuid>-<name>`), with no retention. It answers 422 `FILE_STORAGE_UNAVAILABLE` if the filesystem connector is not configured. `DELETE /api/v1/files/filesystem?path=` and `DELETE /api/v1/admin/files/filesystem?path=` delete persisted files.
-- **File connectors**: one concept now covers `filesystem`, `flowerdocs`, `filenet`, `alfresco`, and `request` references. The filesystem connector exists only when `file-connector.filesystem.root` (`FILECONNECTOR_FILESYSTEM_ROOT`) is set; `file-connector.filesystem.allowed-extensions` defaults to `pdf,png,jpg,jpeg,tif,tiff`. A misconfigured root (not a folder, unreadable, or not writable) stops the application at startup.
-- Helm: new `fileConnector.filesystem.existingClaim`, `mountPath` (`/data/documents`), and `allowedExtensions` values.
+- Send PDFs and files to the model, as an upload or as a reference.
+- File connectors for the filesystem, FlowerDocs, FileNet and Alfresco.
+- Keep the files you send, on request.
+
+→ [REST API reference](/docs/uxopian-ai/reference/rest_api)
 
 ### 🔎 Tool calls traced
 
-Every persisted request now carries `toolCalls` (type, name, arguments, result or error, start, end). The admin Conversations view shows a collapsible "Tools used (n)" section, and plan run detail shows the same trace.
+- Every request lists the tools it used, in the conversation view and in the plan run.
+
+→ [Conversations and requests](/docs/uxopian-ai/understanding/conversations_and_requests)
 
 ### 🧬 NuExtract rework
 
-- With a PDF, NuExtract now runs on the NuMind platform (default endpoint `https://bbox.nuextract.ai`). Two modes: **projectless** (the message starts with a JSON template) and **project** (extra `project` set to a NuMind project id starting with `sprj_`).
-- The answer is JSON `{"result": {...}, "localization": {...}}`. The `output` extra selects `values`, `positions`, or `values-and-positions` (default). Positions use `POINTS` or `PAGE_FRACTION` units so the review screen can draw them.
-- Other extras: `rasterizationDPI`, `enableThinking`, `thinkingTokenBudget`, `loopDetection`. A job failure now reports NuMind's reason. Streaming is refused (422). **Breaking, see [Upgrade notes](#-upgrade-notes).**
+- Runs on the NuMind platform, with an extraction project or a JSON template.
+- Returns values, positions, or both, so the review screen can draw them.
+
+→ [Configuring LLM providers](/docs/uxopian-ai/how_to/configure_llm_providers)
 
 ### 🧩 Plans
 
-- New node field **`executionCondition`** (`ON_SUCCESS` default, `ON_UNSATISFIED`, `ON_ERROR`, `ON_ANY`), exposed as a **Runs when** selector, enables recovery branches. A node whose failure is consumed by an `ON_ERROR` or `ON_ANY` branch no longer fails the run.
-- New flow tool `throwIfEmptyString(value)` fails when a value is blank, so a plan can branch on "did the step find something".
-- Run control is a single `POST /api/v1/admin/plan-executions/{id}/signal` endpoint (**breaking**, see [Upgrade notes](#-upgrade-notes)). A resumed run no longer needs a payload.
-- A provider out of quota aborts the whole plan run, and the failed node still records the tokens the provider billed.
+- Recovery branches: a step can run on success, on failure, or whatever happens.
+- A new flow tool stops a plan when a step found nothing.
+- A single signal endpoint to pause, resume or stop a run.
 
-### 🗃️ FileNet
+→ [Agentic plans](/docs/uxopian-ai/understanding/agentic_plans)
 
-- New tools `fileNetFindFolders` (folders whose name contains a text) and `fileNetListSubfolders`. Folder listing and the folder-scoped filter now include subfolders. `fileNetGetDataModel` reports whether full-text search is available. "Contains" filters are case-insensitive.
-- New template helper `fileNetService.extractTextualContent(objectId)`.
-- ICN plugin: a native **Uxopian AI** cascading submenu in document and folder menus, with actions defined as Uxopian AI scripts through `UxopianAI.registerAction(...)`. Redeploy `uxopian-icn-plugin.zip` to get it.
-- The admin console opened from ICN renews its session on its own when it expires, by asking the opener window (requires the matching ICN plugin version).
+### 🗃️ FileNet and ICN
+
+- Find folders by name, list subfolders, and read a document's text from a template.
+- A native **Uxopian AI** submenu in ICN, with actions defined as Uxopian AI scripts.
+
+→ [Integrating with FileNet](/docs/uxopian-ai/how_to/integrate_with_filenet)
 
 ### 🛠️ For plugin authors
 
-- `@ToolService` accepts a **`guidance`** attribute: the distinct guidance texts of the tools allowed to a call are added once to the conversation system message.
-- Destructive tools now ask the model to obtain confirmation through `presentChoices`.
-- `ModelProvider` gains two default methods: `quotaExhaustedMarkers()` and `classifyError(Throwable)`. Override `quotaExhaustedMarkers()` so quota errors map to 402.
-- The published `integration-api` module now has immutable `AiContext` and `AuthenticatedUser`. **Breaking for custom plugins, see [Upgrade notes](#-upgrade-notes).**
+- Tools can add guidance for the model, and ask for confirmation before a destructive action.
+- Providers can tell the platform when a quota is exhausted.
 
-### 🌐 REST API additions
+→ [Custom tools](/docs/uxopian-ai/extending/custom_tools)
 
-- Server-side **pagination, filters, and facets** on admin lists (see [Improvements](#-platform--improvements) and the upgrade note).
-- `GET .../availability?id=<id>` on every creation API tells whether an id is free.
-- `GET /api/v1/users/me` returns `{id, tenantId}` of the authenticated caller.
-- Usage endpoints: `GET .../{id}/usage` for agents, MCP servers, LLM providers, and code modules.
-- Prompt tags: `GET /api/v1/admin/prompts/tags`, `PUT /api/v1/admin/prompts/{id}/tags`.
-- OpenAPI groups are now one per type (Agents, Code modules, Conversations, Files, LLM providers, MCP servers, Plans, Prompts, Requests, Scripts, Statistics, Tasks, Tools, Usage profiles, Users).
+### 🌐 REST API
+
+- Paginated lists with filters and facets, name availability checks, and a `users/me` endpoint.
+- OpenAPI is grouped by type.
+
+→ [REST API reference](/docs/uxopian-ai/reference/rest_api)
 
 ---
 
