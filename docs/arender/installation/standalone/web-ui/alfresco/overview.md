@@ -39,6 +39,12 @@ arender.server.alfresco.atom.pub.url=http://alfrescoHost/alfresco/api/-default-/
 Authentication will be done using an **Alfresco ticket**.
 :::
 
+With this user-delegated authentication (`arender.server.alfresco.user` left empty), the connector asks Alfresco on
+every opening whether the ticket can read the document, even when the document is already in the ARender cache. Since
+2023.24.0, an expired or invalid ticket therefore makes the opening fail, and the user must get a new ticket from
+Alfresco. When a service account is configured with `arender.server.alfresco.user` and
+`arender.server.alfresco.password`, this check is not done.
+
 * To configure the **SOAP connection** (editor recommendation) with a remote Alfresco, add the below properties:
 
 ```properties title="configurations/arender-custom-server.properties"
