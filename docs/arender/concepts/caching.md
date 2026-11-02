@@ -83,7 +83,7 @@ hazelcast:
 
 ## Document Service Broker clustering
 
-Multiple broker instances can form a Hazelcast cluster to share their document accessor cache and conversion order state. This is particularly relevant when the broker is scaled horizontally. Configure TCP/IP join with the addresses of all broker instances, or use the Hazelcast Kubernetes discovery plugin in Kubernetes environments.
+Multiple broker instances can form a Hazelcast cluster to share their document accessor cache and conversion order state. This is particularly relevant when the broker is scaled horizontally. Configure TCP/IP join with the addresses of all broker instances, or use the Hazelcast Kubernetes discovery plugin in Kubernetes environments. All members of a cluster must run the same Hazelcast minor version: when an ARender upgrade changes it, as 2026.4.0 does (5.5 to 5.7), stop every broker instance before starting the new version instead of upgrading them one by one.
 
 ## Monitoring
 
