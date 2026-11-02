@@ -174,20 +174,17 @@ Every admin list now answers a page of summaries (`{ collection, total, facets }
 
 ## 🏗️ Platform & improvements
 
-- **Redesigned admin console**: collapsible icon rail, one primary action plus a "..." menu (Reset, Discard draft, Delete), tiered detail pages, back-link navigation, KPI tiles, dark-theme fixes. The dashboard greets the signed-in user and shows the tenant. Chat and Quick Prompt share the same look.
-- **Detail-page tab kept in the URL** (`?tab=...`) for Agent, Plan, Usage profile, LLM provider, MCP server, and Prompt pages.
-- **Uniform list pages**: server-side search, filters, and sorting; 25 rows per page; resizable columns whose width, order, and visibility are remembered; double-click a row to edit it.
-- **Prompt tester**: the Test tab stays reachable while the form is dirty, runs the saved version picked in the version selector, and says so. Variable detection now understands Thymeleaf loops, conditions, ternaries, `[# th:...]` elements, and `[(...)]` inlines.
-- **Prompt tags** shown and filterable in the prompts list. Tags are shared by all versions of a prompt. Prompt versions now record who created and updated them.
-- **Plan runs**: full-screen flow, shared payload card, step output in the step panel, `?step=<id>` deep link.
-- **Token accounting fixed**: counts now include every completion of a tool-calling loop (previously only the last one), and a node whose agent throws still records billed tokens. Statistics for tool-using conversations rise accordingly; historical data is not recomputed.
-- **Chat history fix**: `llm.context.size` now loads the N most recent exchanges (it loaded the N oldest, so beyond about 10 turns recent turns never reached the model).
-- **Provider error mapping**: a provider out of credit answers `402 LLM_QUOTA_EXCEEDED` (was an opaque 500); a provider rate limit answers `429 LLM_RATE_LIMITED` (was 400); a provider timeout answers `504 LLM_TIMEOUT` (was 500). The message is a fixed text and never echoes the provider payload, which also stops leaking keys or org ids from provider error bodies. Chat and Quick Prompt show that explanation instead of "No response received.".
-- **Streaming endpoint** answers the HTTP status before opening the stream when the request fails early (404 `LLM_PROVIDER_NOT_FOUND`, 402, 422, and so on), instead of a 200 that never closed.
-- **Content-Security-Policy** on the admin console and viewer (`default-src 'self'`, `frame-ancestors 'none'`, no inline script, no eval), plus `X-Frame-Options: DENY`.
-- **Conversation writes throttled**: a conversation is saved only when its provider or model changed or the last activity is older than one minute. Admin "last activity" is accurate to the minute.
-- **Swagger link** in the admin resolves `swaggerEndpoint`, then `apiEndpoint`, then the address the panel is served at.
-- **Script ETag** is now a hash of id and published content, so browsers no longer keep an old script on 304.
+- 🎨 **A redesigned admin console**: collapsible menu, one primary action per page, tabs that stay in the URL.
+- 📋 **Lists that remember you**: server-side search and filters, 25 rows per page, columns you can resize and reorder, double-click to edit.
+- 🧪 **A better prompt tester**: it stays available while you edit, and understands loops and conditions in your templates.
+- 🏷️ **Prompt tags**, shown and filterable in the list, and prompt versions that tell who changed them and when.
+- 🧩 **Easier plan runs**: full-screen flow, shared payload, the output of each step.
+- 📊 **Accurate token counts**: every completion of a tool-calling conversation is now counted, so statistics for those conversations go up.
+- 💬 **Chat memory fixed**: the model now receives the most recent exchanges of a long conversation.
+- 🚦 **Clearer provider errors**: out of credit, rate limit and timeout each get their own explanation in Chat and Quick Prompt, without exposing the provider's message.
+- ⚡ **Faster, quieter chat**: the answer status comes before the stream opens, and conversations are saved at most once a minute.
+- 🔒 **A stricter Content-Security-Policy** on the admin console and the viewer.
+- 🔗 **Swagger link** in the admin, and scripts that refresh as soon as they are published.
 
 ---
 
