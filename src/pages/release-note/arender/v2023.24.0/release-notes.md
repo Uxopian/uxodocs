@@ -14,6 +14,8 @@ import DocLink from '@site/src/components/DocLink';
 
 <div className="arender-release-notes">
 
+> **Upgrade note:** See [v2023.24.0](../upgrade-notes) for detailed instructions.
+
 # ARender v2023.24.0 - Release Notes
 
 ARender 2023.24.0 is a maintenance release on the 2023.x (ARender Classic) line. The JavaScript API can now place a navigation target at the **top of the view**, as an internal hyperlink click does, which helps integrations that handle cross-document links themselves.

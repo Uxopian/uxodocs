@@ -47,7 +47,7 @@
     "date": "2026-11-02",
     "description": "Top-of-view option for page navigation in the JavaScript API, annotation display, signature check and search progress fixes, and security upgrades.",
     "slug": "/release-note/arender/v2023.24.0/release-notes",
-    "hasUpgradeNotes": false,
+    "hasUpgradeNotes": true,
     "latest": true
   },
   {
