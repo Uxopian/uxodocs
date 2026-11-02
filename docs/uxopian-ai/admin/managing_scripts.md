@@ -14,7 +14,7 @@ Scripts are managed per tenant. Changes take effect without restarting the appli
 
 ![The Scripts section of the admin panel listing scripts with their status](../images/scripts-list.png)
 
-*Figure: the Scripts section lists each script with its publication status (here, a force-published script and a draft). The list is paginated and filtered on the server (`search`, `status`); the screenshot was taken before the 2026.0.0 redesign.*
+*Figure: the Scripts section lists each script with its publication status (here, a force-published script and a draft). The list is paginated and filtered on the server (`search`, `status`).*
 
 ## The script lifecycle
 
