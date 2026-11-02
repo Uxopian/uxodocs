@@ -155,6 +155,7 @@ content_hash: 5304c287cc5d91e3c940c6475bfda507b055ca1ecbbf80c0e49c27868c269cb6
 | arender.pollLastVersion        | Enables ARender version check                                                                | boolean | true    |
 | arender.white.labeling         | Remove any reference of ARender in the application                                           | boolean | false   |
 | arender.data.analytics.enabled | Enables data analytics                                                                       | boolean | true    |
+| arender.data.analytics.token   | Mixpanel project token the analytics are sent to. Leave empty to use the Uxopian project     | string  |         |
 
 ## arenderjs
 

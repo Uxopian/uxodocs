@@ -86,3 +86,6 @@ users machine.
 
 To disable Product Analytics, set the property **arender.data.analytics.enabled** to false in the configuration settings
 (More information [here](../../guides/configurations/web-ui/properties/full-config#arender)).
+
+Since 2023.24.0, to send the analytics to your own Mixpanel project instead of the Uxopian one, set the property
+**arender.data.analytics.token** to the token of that project.
