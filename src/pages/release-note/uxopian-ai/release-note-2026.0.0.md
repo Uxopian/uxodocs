@@ -134,7 +134,7 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
 - `@ToolService` accepts a **`guidance`** attribute: the distinct guidance texts of the tools allowed to a call are added once to the conversation system message.
 - Destructive tools now ask the model to obtain confirmation through `presentChoices`.
 - `ModelProvider` gains two default methods: `quotaExhaustedMarkers()` and `classifyError(Throwable)`. Override `quotaExhaustedMarkers()` so quota errors map to 402.
-- The published `integration-api` module has a minimal footprint (`jackson-annotations` only) with immutable `AiContext` and `AuthenticatedUser`. **Breaking for custom plugins, see [Upgrade notes](#-upgrade-notes).**
+- The published `integration-api` module now has immutable `AiContext` and `AuthenticatedUser`. **Breaking for custom plugins, see [Upgrade notes](#-upgrade-notes).**
 
 ### 🌐 REST API additions
 
@@ -158,16 +158,11 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
 - **Token accounting fixed**: counts now include every completion of a tool-calling loop (previously only the last one), and a node whose agent throws still records billed tokens. Statistics for tool-using conversations rise accordingly; historical data is not recomputed.
 - **Chat history fix**: `llm.context.size` now loads the N most recent exchanges (it loaded the N oldest, so beyond about 10 turns recent turns never reached the model).
 - **Provider error mapping**: a provider out of credit answers `402 LLM_QUOTA_EXCEEDED` (was an opaque 500); a provider rate limit answers `429 LLM_RATE_LIMITED` (was 400); a provider timeout answers `504 LLM_TIMEOUT` (was 500). The message is a fixed text and never echoes the provider payload, which also stops leaking keys or org ids from provider error bodies. Chat and Quick Prompt show that explanation instead of "No response received.".
-- **Streaming endpoint** answers the HTTP status before opening the stream when the request fails early (404 `LLM_PROVIDER_NOT_FOUND`, 402, 422, and so on), instead of a 200 that never closed. A stream sink leak is fixed.
+- **Streaming endpoint** answers the HTTP status before opening the stream when the request fails early (404 `LLM_PROVIDER_NOT_FOUND`, 402, 422, and so on), instead of a 200 that never closed.
 - **Content-Security-Policy** on the admin console and viewer (`default-src 'self'`, `frame-ancestors 'none'`, no inline script, no eval), plus `X-Frame-Options: DENY`.
-- **Gateway assertion** (`X-Gateway-Auth`) without an `exp` claim is refused (401). The official gateway always sets it.
 - **Conversation writes throttled**: a conversation is saved only when its provider or model changed or the last activity is older than one minute. Admin "last activity" is accurate to the minute.
-- **Hazelcast**: `hazelcast.multicast.enabled` (`HAZELCAST_MULTICAST_ENABLED`, default `true`) controls multicast in local (non-Kubernetes) mode, and auto-detection is now always disabled.
-- **Prompt migration script** `migrate-prompts-to-versions.sh` (ft4 to ft5 format) now goes through a buffer index with validation and a cluster guard, and keeps audit fields.
 - **Swagger link** in the admin resolves `swaggerEndpoint`, then `apiEndpoint`, then the address the panel is served at.
 - **Script ETag** is now a hash of id and published content, so browsers no longer keep an old script on 304.
-- **Tool guidance and the context preamble** were shortened to reduce tokens.
-- **Dependency and CVE refresh (UXOAI-423)**: Spring Boot 4.0.8, Tomcat 11.0.27, Netty 4.2.19, Jackson 2.21.8 and 3.1.8, Hazelcast 5.7.x, OpenNLP 2.5.12, Parsson 1.1.9, react-router 7.18.4, and base image `uxopian-base-image:1.0.12`, still served from `artifactory.arondor.cloud:5004`.
 
 ---
 
@@ -235,12 +230,11 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
 
 10. **OpenSearch index mappings (action required before the first start).** Mappings are written only when an index is created, so existing indices are not reconciled.
     - **`workspaceId`**: every scopeable entity gets a `workspaceId` keyword field. For each index matching `*-<prefix>-<base>` (bases: `prompt`, `agent_configurations`, `mcp_configurations`, `agent_plans`, `scripts`, `llm_provider_configurations`, `conversations`, `requests`, `plan_executions`), run `PUT .../_mapping` with `{"properties":{"workspaceId":{"type":"keyword"}}}`, then `POST .../_update_by_query?conflicts=proceed` setting `ctx._source.workspaceId='default'` on documents that lack it. If you skip the mapping step, OpenSearch types the field `text` dynamically, and it cannot be retyped.
-    - **`code_modules`** (only if you already ran a pre-release with code modules): map `publishedAt` as `date` and `publishedBy` as `keyword` with `PUT code_modules*/_mapping`.
     - New indices (`usage_profiles`, `tasks`, `request_files`) are created automatically with the tenant indexes.
 
 11. **NuExtract providers must be reconfigured (action required if you use NuExtract).** The legacy `POST {endpointUrl}/{modelId}/extract` call is removed, as are the `modelId` extra and the YAML `model-id` key. Change the provider endpoint to `https://bbox.nuextract.ai`, remove `modelId`, and set the extra `project: sprj_...` (or start your prompt with the JSON template). Expect a different answer shape (`{"result", "localization"}`), no streaming (422), and rewrite prompts built for the legacy flow.
 
-12. **Custom plugins must be recompiled (action required for plugin authors).** The `integration-api` module moved packages (`com.uxopian.ai.model.user`, `model.context`, `common.context`, `model.command`, `model.id`), `AiContext` and `AuthenticatedUser` are immutable (copy methods instead of setters), `AuthenticatedUser.isAdmin()` is removed, and `HostActionDispatcher` is renamed `ClientActionDispatcher`. MCP and code sandbox code moved to Maven modules `connector/codesandbox` and `connector/mcp`. In addition, `SecureRequestService` and `SecureChatService` replace the previous request services, and `ToolExecutor` is split into `ToolCatalog` and `LlmTools`. Rebuild and fix imports.
+12. **Custom plugins must be recompiled (action required for plugin authors).** The `integration-api` module moved packages (`com.uxopian.ai.model.user`, `model.context`, `common.context`, `model.command`, `model.id`), `AiContext` and `AuthenticatedUser` are immutable (copy methods instead of setters), `AuthenticatedUser.isAdmin()` is removed, and `HostActionDispatcher` is renamed `ClientActionDispatcher`. Rebuild your plugins and fix the imports.
 
 13. **Web components: `createChat` and `openChat`.** `window.createChat` now requires `request`, and its `promptId` option is removed (it never worked). To launch a prompt, put a `PROMPT` input in the request. `window.openChat` reopens the conversation you pass through `request`.
 
@@ -248,15 +242,11 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
 
 15. **Tooling that reads OpenAPI:** `/v3/api-docs/Admin` and `/v3/api-docs/User` no longer exist. Use `/v3/api-docs`, or one of the per-type groups (`/v3/api-docs/<group>`). SDK generation, gateway allow-lists, and contract tests that pointed at the old groups need updating.
 
-16. **Hazelcast and iframes.** If your deployment silently relied on Hazelcast auto-detection (for example a Docker network without multicast and without Kubernetes mode), nodes no longer cluster: set `HAZELCAST_MULTICAST_ENABLED=false` for single-node setups, and roll mixed Hazelcast versions (5.6 to 5.7) together. The admin console and viewer can no longer be framed (`frame-ancestors 'none'`); embed through the web components instead.
+16. **Hazelcast and iframes.** If your deployment silently relied on Hazelcast auto-detection (for example a Docker network without multicast and without Kubernetes mode), nodes no longer cluster: set `HAZELCAST_MULTICAST_ENABLED=false` for single-node setups. The admin console and viewer can no longer be framed (`frame-ancestors 'none'`); embed through the web components instead.
 
-17. **Base image bumped to `uxopian-base-image:1.0.12`** (`artifactory.arondor.cloud:5004`). Rebuild derived images.
+17. **Behaviour to expect.** Token totals for tool-using conversations are higher than under ft5 because every completion in a tool loop is now counted (historical data is not recomputed). Stored prompt, agent, and conversation data need no other migration.
 
-18. **Behaviour to expect.** Token totals for tool-using conversations are higher than under ft5 because every completion in a tool loop is now counted (historical data is not recomputed). Stored prompt, agent, and conversation data need no other migration.
-
-19. **Sites migrating from ft4:** use the new `migrate-prompts-to-versions.sh` (buffer index, validation, cluster guard), not the one shipped earlier.
-
-20. **No migration needed** for code modules, the review screen, the filesystem connector, and structured output: all are new and opt-in.
+18. **No migration needed** for code modules, the review screen, the filesystem connector, and structured output: all are new and opt-in.
 
 ---
 

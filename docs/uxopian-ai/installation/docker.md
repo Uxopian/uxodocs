@@ -190,11 +190,10 @@ Hazelcast auto-detection is always off. Outside Kubernetes, nodes find each othe
 
 ## Upgrading from 2026.0.0-ft5
 
-Stop the stack, then do the same data steps as on Kubernetes: drain plan runs, add the `workspaceId` mapping to the nine existing indices, map `publishedAt` and `publishedBy` on `code_modules` if it exists, and recreate your Applications as usage profiles. The commands are in [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5). Also:
+Stop the stack, then do the same data steps as on Kubernetes: drain plan runs, add the `workspaceId` mapping to the nine existing indices, and recreate your Applications as usage profiles. The commands are in [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5). Also:
 
 - add `INTERNAL_AUTH_JWT_SECRET` to uxopian-ai and to the gateway (see above);
 - remove `OPENSEARCH_FORCE_REFRESH_INDEX` and `force-refresh-index` from `config/opensearch.yml`: they no longer do anything;
-- rebuild images derived from `uxopian-base-image` on version `1.0.12`.
 
 ## Docker networking and URL configuration
 

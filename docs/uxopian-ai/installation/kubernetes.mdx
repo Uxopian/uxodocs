@@ -292,10 +292,8 @@ helm install gateway-service ./gateway-service \
    ```
 
    Skipping the mapping step lets OpenSearch type the field `text`, and it cannot be retyped afterwards.
-3. **Map the code module publication fields** if the `code_modules` index already exists: `publishedAt` (`date`) and `publishedBy` (`keyword`) through `PUT code_modules*/_mapping`. Nothing completes the mapping at startup. A module published earlier falls back on its last update date.
-4. **Recreate your Applications as usage profiles.** The `application_configurations` index is no longer read and nothing is migrated. See [Managing usage profiles](../admin/managing_applications.md).
-5. **Remove `appConfig.openSearch.forceRefresh`** from your values (harmless if left, the property no longer does anything), set the internal authentication secret, and list the extra callers of the API in `networkPolicy.allowedClients`.
-6. Roll the Hazelcast members together: mixed 5.6 and 5.7 members should not share a cluster.
+3. **Recreate your Applications as usage profiles.** The `application_configurations` index is no longer read and nothing is migrated. See [Managing usage profiles](../admin/managing_applications.md).
+4. **Remove `appConfig.openSearch.forceRefresh`** from your values (harmless if left, the property no longer does anything), set the internal authentication secret, and list the extra callers of the API in `networkPolicy.allowedClients`.
 
 New indices (`tasks`, `request_files`, `usage_profiles`, `code_modules`) are created with their mapping when a tenant is created.
 
