@@ -34,13 +34,16 @@ services:
   # ── Uxopian AI ──────────────────────────────────────────────────────────────
   # Not exposed to the host. All browser traffic goes through the gateway.
   uxopian-ai:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft5}
-    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft5}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
+    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
       - OPENSEARCH_HOST=opensearch
       - OPENSEARCH_PORT=9200
-      - OPENSEARCH_FORCE_REFRESH_INDEX=false
+      # Shared secret the gateway signs its identity assertion with and uxopian-ai verifies.
+      # Required (32 bytes or more). The default below is for a local demo only: set your own with
+      # `openssl rand -base64 48` in .env for anything else.
+      - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:-dev-only-internal-auth-secret-change-me-0123456789}
       - APP_BASE_URL=${APP_BASE_URL:-http://localhost:8085}
       - UXOPIAN_AI_PORT=8080
       # LLM API keys — loaded from .env, set at least one before starting
@@ -63,8 +66,11 @@ services:
   # DevProvider always injects a fixed dev identity (dev/dev/ADMIN) — suitable for local development.
   # Replace with FlowerDocsProvider or Fast2Provider for production.
   uxopian-gateway:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}
-    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
+    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
+    environment:
+      # Same secret as uxopian-ai: the gateway signs the identity assertion with it.
+      - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:-dev-only-internal-auth-secret-change-me-0123456789}
     ports:
       - "8085:8085"
     volumes:

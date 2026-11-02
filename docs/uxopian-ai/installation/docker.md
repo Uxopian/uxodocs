@@ -58,8 +58,8 @@ services:
       start_period: 20s
 
   uxopian-ai:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft5}
-    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft5}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
+    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
     depends_on:
       opensearch:
         condition: service_healthy
@@ -74,18 +74,20 @@ services:
       - LLM_DEFAULT_PROMPT=basePrompt
       - LLM_CONTEXT_SIZE=10
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:?set it in .env}
     volumes:
       - ./config:/app/config:ro
 
   uxopian-gateway:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}
-    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
+    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
     depends_on:
       - uxopian-ai
     ports:
       - "8085:8085"
     environment:
       - JAVA_OPTS=-Xmx256m -Xms256m
+      - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:?set it in .env}
     volumes:
       - ./gateway-application.yaml:/app/application.yaml:ro
 
@@ -155,6 +157,45 @@ OPENAI_API_KEY=sk-your-key
 
 Set at least one key matching the `LLM_DEFAULT_PROVIDER` configured in the service environment.
 
+### Internal authentication secret
+
+`INTERNAL_AUTH_JWT_SECRET` is **required** on uxopian-ai in every profile, `dev` included: the service refuses to start without it. The gateway signs an `X-Gateway-Auth` assertion with the same secret, and uxopian-ai refuses any request that does not carry a valid one (so a caller that reaches uxopian-ai directly cannot choose its own tenant or roles; the `dev` profile does not verify the assertion but still requires the secret). Use the same value of at least 32 bytes on both services:
+
+```bash
+echo "INTERNAL_AUTH_JWT_SECRET=$(openssl rand -base64 48)" >> .env
+```
+
+`INTERNAL_AUTH_JWT_ISSUER` (default `uxopian-gateway-internal`) must match the issuer the gateway uses. An assertion without an `exp` claim is refused.
+
+## Optional services and folders
+
+| Feature | What to add |
+|---|---|
+| Review screen, ARender rendition | `RENDITION_BASE_URL` pointing at the ARender service. uxopian-ai relays `/rendition/` to it behind the gateway authentication, so the browser no longer needs to reach ARender. See [Human review](../how_to/human_in_the_loop_review.md) |
+| Filesystem connector and `persist` attachments | Mount a writable folder and set `FILECONNECTOR_FILESYSTEM_ROOT` (and optionally `FILECONNECTOR_FILESYSTEM_ALLOWEDEXTENSIONS`, default `pdf,png,jpg,jpeg,tif,tiff`). Each tenant works under `<root>/<tenant>/`. The service stops at startup if the folder is missing, unreadable or not writable by the application user |
+| [Code modules](../how_to/code_modules.md) | Deploy uxopian-code-sandbox and set the `code-sandbox.url` and `code-sandbox.secret` properties (environment variables `CODESANDBOX_URL` and `CODESANDBOX_SECRET`). Empty URL = feature off |
+| Uploaded files kept with a request | `LLM_FILES_RETENTION` (property `llm.files.retention`, default one day, `0` keeps nothing) |
+
+```yaml
+  uxopian-ai:
+    environment:
+      - FILECONNECTOR_FILESYSTEM_ROOT=/data/documents
+    volumes:
+      - ./documents:/data/documents
+```
+
+## Hazelcast on a shared network
+
+Hazelcast auto-detection is always off. Outside Kubernetes, nodes find each other by multicast, which is on by default (`HAZELCAST_MULTICAST_ENABLED=true`). On a single node, or on a Docker network without multicast, set `HAZELCAST_MULTICAST_ENABLED=false`: it also stops a node from trying to join a cluster of another version that happens to run on the same machine. A deployment that silently relied on auto-detection no longer forms a cluster.
+
+## Upgrading from 2026.0.0-ft5
+
+Stop the stack, then do the same data steps as on Kubernetes: drain plan runs, add the `workspaceId` mapping to the nine existing indices, map `publishedAt` and `publishedBy` on `code_modules` if it exists, and recreate your Applications as usage profiles. The commands are in [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5). Also:
+
+- add `INTERNAL_AUTH_JWT_SECRET` to uxopian-ai and to the gateway (see above);
+- remove `OPENSEARCH_FORCE_REFRESH_INDEX` and `force-refresh-index` from `config/opensearch.yml`: they no longer do anything;
+- rebuild images derived from `uxopian-base-image` on version `1.0.12`.
+
 ## Docker networking and URL configuration
 
 This is the most common source of misconfiguration. Containers communicate differently depending on whether the caller is another container or a user's browser.
@@ -195,7 +236,7 @@ The variables listed below split cleanly into the two contexts. Set them accordi
 |---|---|---|
 | `OPENSEARCH_HOST` | uxopian-ai | OpenSearch service name (e.g. `opensearch`) |
 | `FD_WS_URL` | uxopian-ai | FlowerDocs Core service (e.g. `http://flowerdocs-core:8080/core/`) |
-| `RENDITION_BASE_URL` | uxopian-ai | ARender DSB service (e.g. `http://dsb-service:8761`) |
+| `RENDITION_BASE_URL` | uxopian-ai | ARender DSB service (e.g. `http://dsb-service:8761`). Also the target of the `/rendition/` relay |
 | `ALFRESCO_BASE_URL` | uxopian-ai | Alfresco repository (e.g. `http://alfresco:8080`) |
 | `app.routes[].uri` | gateway | uxopian-ai service (e.g. `http://uxopian-ai:8080`) |
 

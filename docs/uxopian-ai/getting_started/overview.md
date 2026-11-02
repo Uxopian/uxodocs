@@ -76,7 +76,7 @@ Nine providers are supported out of the box:
 | Mistral AI | `mistral-ai` |
 | HuggingFace | `huggingface` |
 | Ollama | `ollama` |
-| NuExtract | `nu-extract` |
+| NuExtract (document extraction, no streaming) | `nu-extract` |
 
 See [LLM providers](../understanding/llm_providers.md) for configuration details.
 

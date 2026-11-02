@@ -72,7 +72,7 @@ Create a `values-ai.yaml` overriding the defaults for your environment:
 image:
   registry: artifactory.arondor.cloud:5001
   repository: uxopian-ai
-  tag: "2026.0.0-ft5"
+  tag: "2026.0.0"
 
 appConfig:
   openSearch:
@@ -97,6 +97,66 @@ resources:
     memory: "1Gi"
     cpu: "1000m"
 ```
+
+### Set the internal authentication secret
+
+ai-standalone refuses to start without `INTERNAL_AUTH_JWT_SECRET`, and the chart refuses to render without it. It is the shared secret the gateway signs its `X-Gateway-Auth` identity assertion with and ai-standalone verifies. It must be the same string, at least 32 bytes, on both charts, and the gateway must already sign with it or every request answers `401`.
+
+```bash
+openssl rand -base64 48 > internal-auth.secret
+
+helm upgrade --install ai-standalone ./component-ai \
+  -f values-ai.yaml \
+  --set-file appConfig.internalAuth.secret=internal-auth.secret \
+  --namespace <your-namespace>
+```
+
+With a GitOps tool that has no `--set-file` (ArgoCD), create the Secret yourself and name it instead. It must carry the key `INTERNAL_AUTH_JWT_SECRET`:
+
+```yaml
+appConfig:
+  internalAuth:
+    existingSecret: "uxopian-internal-auth"
+```
+
+An assertion without an `exp` claim is refused with `401`. The official gateway always sets one (30 seconds), so only hand-made tokens are affected.
+
+### Allow the callers of the API port
+
+The ai-standalone chart always renders a `NetworkPolicy`, with no switch to turn it off. The API port accepts only the clients listed in `networkPolicy.allowedClients`, and the Hazelcast port (5701) accepts only the other replicas. Egress is open. By default the only allowed client is the pod labelled `app.kubernetes.io/name: gateway-service` in the release namespace.
+
+Add every other pod that calls the API directly (a FlowerDocs or ICN pod, Prometheus):
+
+```yaml
+networkPolicy:
+  allowedClients:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: gateway-service
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: prometheus
+```
+
+An empty list fails the render, so exposing the port is always explicit. Check that the namespace and labels match your gateway chart. The cluster needs a CNI that enforces NetworkPolicy.
+
+### Mount a document folder (optional)
+
+Two features write or read files from a folder shared with the pod: the filesystem connector (documents the review screen and tools read by path) and request attachments sent with `persist: true`. Both use the same root. Nothing mounted means the filesystem connector does not exist and `persist` is refused with `422 FILE_STORAGE_UNAVAILABLE`.
+
+```yaml
+fileConnector:
+  filesystem:
+    existingClaim: "uxopian-documents"   # an existing PersistentVolumeClaim
+    mountPath: /data/documents
+    allowedExtensions: "pdf,png,jpg,jpeg,tif,tiff"   # empty = this default list
+```
+
+When `existingClaim` is set, the chart mounts the claim at `mountPath` and sets `FILECONNECTOR_FILESYSTEM_ROOT` and `FILECONNECTOR_FILESYSTEM_ALLOWEDEXTENSIONS`. Each tenant works under `<root>/<tenant>/`. Paths with `..`, absolute paths, hidden segments, extensions outside the list and symbolic links that leave the root are refused. The application **fails fast at startup** if the root is not a folder, not readable, or not writable by the application user (it writes a temporary probe file). Make the volume writable for the container user.
+
+### Code sandbox (optional)
+
+[Code modules](../how_to/code_modules.md) run in a separate service, uxopian-code-sandbox. Set the `code-sandbox.url` and `code-sandbox.secret` properties of ai-standalone (as environment variables, Spring maps them to `CODESANDBOX_URL` and `CODESANDBOX_SECRET`). With no URL the feature is off and no code tool is offered. The domains a module may call are configured on the sandbox side.
 
 ### Create the API keys secret
 
@@ -138,7 +198,7 @@ Create a `values-gateway.yaml`. The most important section is `files.application
 ```yaml
 image:
   repository: artifactory.arondor.cloud:5001/uxopian-gateway
-  tag: "2026.0.0-ft5"
+  tag: "2026.0.0"
 
 hazelcast:
   enabled: true
@@ -215,6 +275,30 @@ helm install gateway-service ./gateway-service \
   --namespace <your-namespace>
 ```
 
+## Upgrading from 2026.0.0-ft5
+
+`helm upgrade` is not enough on a cluster that already holds data. Do these steps before the new pods start, in this order.
+
+1. **Drain plan runs.** Plan executions now store their lease in a nested `reservation` object. A run that was `RUNNING` during the upgrade reads back as unreserved and may be picked up a second time by another replica. Pause or let running executions finish first.
+2. **Add the `workspaceId` mapping.** Mappings are written only when an index is created, so existing indices are not reconciled. For each of the nine indices (`prompt`, `agent_configurations`, `mcp_configurations`, `agent_plans`, `scripts`, `llm_provider_configurations`, `conversations`, `requests`, `plan_executions`, matched as `*-<prefix>-<base>`), declare the field, then fill it:
+
+   ```bash
+   curl -X PUT "$OPENSEARCH/<index-pattern>/_mapping" -H 'Content-Type: application/json' \
+     -d '{"properties":{"workspaceId":{"type":"keyword"}}}'
+
+   curl -X POST "$OPENSEARCH/<index-pattern>/_update_by_query?conflicts=proceed" \
+     -H 'Content-Type: application/json' \
+     -d '{"script":{"source":"ctx._source.workspaceId = \"default\""},"query":{"bool":{"must_not":{"exists":{"field":"workspaceId"}}}}}'
+   ```
+
+   Skipping the mapping step lets OpenSearch type the field `text`, and it cannot be retyped afterwards.
+3. **Map the code module publication fields** if the `code_modules` index already exists: `publishedAt` (`date`) and `publishedBy` (`keyword`) through `PUT code_modules*/_mapping`. Nothing completes the mapping at startup. A module published earlier falls back on its last update date.
+4. **Recreate your Applications as usage profiles.** The `application_configurations` index is no longer read and nothing is migrated. See [Managing usage profiles](../admin/managing_applications.md).
+5. **Remove `appConfig.openSearch.forceRefresh`** from your values (harmless if left, the property no longer does anything), set the internal authentication secret, and list the extra callers of the API in `networkPolicy.allowedClients`.
+6. Roll the Hazelcast members together: mixed 5.6 and 5.7 members should not share a cluster.
+
+New indices (`tasks`, `request_files`, `usage_profiles`, `code_modules`) are created with their mapping when a tenant is created.
+
 ## Embedded config files
 
 The chart mounts a ConfigMap at `/app/config/` containing four YAML files. You can override any of them inline under `files` in your `values-ai.yaml`.
@@ -287,14 +371,20 @@ Expected response:
 
 | Path | Description |
 |---|---|
-| `image.tag` | Image version — use `2026.0.0-ft5` |
+| `image.tag` | Image version — use `2026.0.0` |
 | `appConfig.openSearch.host` | OpenSearch service hostname |
 | `appConfig.openSearch.port` | OpenSearch port (default `9200`) |
-| `appConfig.openSearch.forceRefresh` | Force index refresh after writes (default `false`, enable only for debug) |
 | `appConfig.externalUrls.appBaseUrl` | Public URL of the application (used in generated links) |
-| `appConfig.externalUrls.renditionBaseUrl` | ARender DSB URL (ARender integration only) |
+| `appConfig.externalUrls.renditionBaseUrl` | ARender DSB URL (ARender integration only). Also the target of the `/rendition/` relay used by the [review screen](../how_to/human_in_the_loop_review.md) |
 | `appConfig.externalUrls.flowerDocsWsUrl` | FlowerDocs core web service URL (FlowerDocs integration only) |
 | `appConfig.contextPath` | Servlet context path, must match gateway route prefix |
+| `appConfig.internalAuth.secret` | Shared secret with the gateway, 32 bytes minimum. Pass it with `--set-file` |
+| `appConfig.internalAuth.existingSecret` | Name of an existing Secret carrying the key `INTERNAL_AUTH_JWT_SECRET`, instead of `secret` |
+| `appConfig.internalAuth.issuer` | Expected issuer of the assertion (default `uxopian-gateway-internal`) |
+| `networkPolicy.allowedClients` | Pods allowed to reach the API port. Default: the gateway-service pod. Never empty |
+| `fileConnector.filesystem.existingClaim` | PVC holding the documents. Empty = no filesystem connector |
+| `fileConnector.filesystem.mountPath` | Mount point and connector root (default `/data/documents`) |
+| `fileConnector.filesystem.allowedExtensions` | Comma-separated extensions the connector accepts |
 | `appConfig.llm.defaultProvider` | Default LLM provider (`openai`, `anthropic`, `gemini`, etc.) |
 | `appConfig.llm.defaultModel` | Default model name |
 | `appConfig.llm.defaultPrompt` | ID of the default system prompt (default `basePrompt`) |
@@ -312,7 +402,7 @@ Expected response:
 
 | Path | Description |
 |---|---|
-| `image.tag` | Image version — use `2026.0.0-ft5` |
+| `image.tag` | Image version — use `2026.0.0` |
 | `hazelcast.javaOpts` | JVM flags (default `-Xmx256m -Xms256m`) |
 | `hazelcast.clusterName` | Hazelcast cluster name — keep distinct from ai-standalone |
 | `files.application.yaml` | Full gateway config: routes, providers, security rules |
