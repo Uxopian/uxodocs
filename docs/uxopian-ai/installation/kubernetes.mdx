@@ -277,25 +277,10 @@ helm install gateway-service ./gateway-service \
 
 ## Upgrading from 2026.0.0-ft5
 
-`helm upgrade` is not enough on a cluster that already holds data. Do these steps before the new pods start, in this order.
+`helm upgrade` is not enough on a cluster that already holds data.
 
-1. **Drain plan runs.** Plan executions now store their lease in a nested `reservation` object. A run that was `RUNNING` during the upgrade reads back as unreserved and may be picked up a second time by another replica. Pause or let running executions finish first.
-2. **Add the `workspaceId` mapping.** Mappings are written only when an index is created, so existing indices are not reconciled. For each of the nine indices (`prompt`, `agent_configurations`, `mcp_configurations`, `agent_plans`, `scripts`, `llm_provider_configurations`, `conversations`, `requests`, `plan_executions`, matched as `*-<prefix>-<base>`), declare the field, then fill it:
-
-   ```bash
-   curl -X PUT "$OPENSEARCH/<index-pattern>/_mapping" -H 'Content-Type: application/json' \
-     -d '{"properties":{"workspaceId":{"type":"keyword"}}}'
-
-   curl -X POST "$OPENSEARCH/<index-pattern>/_update_by_query?conflicts=proceed" \
-     -H 'Content-Type: application/json' \
-     -d '{"script":{"source":"ctx._source.workspaceId = \"default\""},"query":{"bool":{"must_not":{"exists":{"field":"workspaceId"}}}}}'
-   ```
-
-   Skipping the mapping step lets OpenSearch type the field `text`, and it cannot be retyped afterwards.
-3. **Recreate your Applications as usage profiles.** The `application_configurations` index is no longer read and nothing is migrated. See [Managing usage profiles](../admin/managing_applications.md).
-4. **Remove `appConfig.openSearch.forceRefresh`** from your values (harmless if left, the property no longer does anything), set the internal authentication secret, and list the extra callers of the API in `networkPolicy.allowedClients`.
-
-New indices (`tasks`, `request_files`, `usage_profiles`, `code_modules`) are created with their mapping when a tenant is created.
+1. **Transfer your data.** The OpenSearch data model changed since 2026.0.0-ft5: new fields, new indices, Applications replaced by usage profiles, entities identified by id. No automatic migration is provided between fasttrack versions. Export what you need (prompts, agents, plans, scripts, MCP servers, LLM providers, usage profiles) from the ft5 deployment and re-create it in 2026.0.0, or start on new indices. Existing conversations and requests are not carried over unless you transfer them yourself. Stop or finish running plan runs before you switch.
+2. **Update your values.** Remove `appConfig.openSearch.forceRefresh` (harmless if left, the property no longer does anything), set the internal authentication secret, and list the extra callers of the API in `networkPolicy.allowedClients`.
 
 ## Embedded config files
 

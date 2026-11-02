@@ -137,7 +137,7 @@ java --enable-native-access=ALL-UNNAMED -Xmx768m -Xms512m -jar ai-standalone-202
 
 The service starts on port `8080` by default. Override with `UXOPIAN_AI_PORT`.
 
-When upgrading from 2026.0.0-ft5, follow [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5) for the OpenSearch steps (workspace mapping, code module fields, usage profiles).
+When upgrading from 2026.0.0-ft5, follow [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5) for what to do with your data: no automatic migration is provided, so your data must be transferred.
 
 ---
 

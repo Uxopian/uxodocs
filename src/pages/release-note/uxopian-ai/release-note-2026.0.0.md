@@ -208,7 +208,7 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
    - An agent no longer carries provider, model, or temperature: they come from its objective prompt.
    - A usage profile's prompt now **replaces** the default base prompt rather than being added to it. If you relied on the base prompt's persona or safety rules, copy them into the profile prompt.
 
-4. **Plan execution control changed (action required for scripts).** `POST /api/v1/admin/plan-executions/{id}/pause`, `/resume`, and `/stop` are removed. Use `POST /api/v1/admin/plan-executions/{id}/signal` with body `{ "type": "PAUSE" | "RESUME" | "STOP" }` (400 on a missing or unknown type, 404 for an unknown execution, 409 when the state does not allow it). Plan executions stored by ft5 keep the old reservation fields and read back as unreserved: **drain or pause running plan executions before upgrading**, otherwise a RUNNING execution may be picked up again by another node.
+4. **Plan execution control changed (action required for scripts).** `POST /api/v1/admin/plan-executions/{id}/pause`, `/resume`, and `/stop` are removed. Use `POST /api/v1/admin/plan-executions/{id}/signal` with body `{ "type": "PAUSE" | "RESUME" | "STOP" }` (400 on a missing or unknown type, 404 for an unknown execution, 409 when the state does not allow it).
 
 5. **Admin list endpoints are paginated pages of summaries (action required for REST integrators).**
    - Before: a bare JSON array of full entities.
@@ -217,7 +217,7 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
    - `GET /api/v1/admin/prompts/{id}` now returns `{ id, active, draft, versions: [...summaries], tags, ... }`. `GET /api/v1/admin/prompts/{id}/versions` (list) and `GET /api/v1/admin/prompts/{id}/tags` are removed; `GET /api/v1/admin/prompts/{id}/versions/{version}` still returns one version. In `GET /api/v1/admin/prompts/{id}/usage`, `referencedBy` is replaced by `usedBy` (usage profiles and agents). Request listings (`GET /requests?conversation=`) return summaries without `contextPayload`.
    - The bundled admin UI is updated.
 
-6. **Entities are identified by `id` alone (action required for REST integrators).** Scripts, MCP servers, usage profiles, and code modules lose their redundant `name` field: create with `id` only, read `id` in responses, and sort with `orderBy=id` (`orderBy=name` answers 400). Stored data needs no action.
+6. **Entities are identified by `id` alone (action required for REST integrators).** Scripts, MCP servers, usage profiles, and code modules lose their redundant `name` field: create with `id` only, read `id` in responses, and sort with `orderBy=id` (`orderBy=name` answers 400).
 
 7. **Documents and files in requests (action required for REST integrators).**
    - Content `type: "image"` is rejected: send `"base64"`. No automatic migration of existing data is provided: stored `"image"` contents of existing requests are kept as they are, and older conversations with images may not display those images.
@@ -228,9 +228,7 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
 
 9. **Helm: NetworkPolicy is always rendered (action required on Kubernetes).** The ai-standalone API port accepts only `networkPolicy.allowedClients` (default: pods labelled `app.kubernetes.io/name: gateway-service` in the release namespace); the Hazelcast port (5701) accepts only other replicas; egress is open. There is no switch to disable it, and an empty `allowedClients` fails the render. Add any other direct caller (a FlowerDocs or ICN pod, Prometheus) to `networkPolicy.allowedClients`, check that the labels match your gateway chart, and make sure your CNI enforces NetworkPolicy. Remove `appConfig.openSearch.forceRefresh` from custom values (the property `opensearch.force-refresh-index` and env `OPENSEARCH_FORCE_REFRESH_INDEX` no longer do anything).
 
-10. **OpenSearch index mappings (action required before the first start).** Mappings are written only when an index is created, so existing indices are not reconciled.
-    - **`workspaceId`**: every scopeable entity gets a `workspaceId` keyword field. For each index matching `*-<prefix>-<base>` (bases: `prompt`, `agent_configurations`, `mcp_configurations`, `agent_plans`, `scripts`, `llm_provider_configurations`, `conversations`, `requests`, `plan_executions`), run `PUT .../_mapping` with `{"properties":{"workspaceId":{"type":"keyword"}}}`, then `POST .../_update_by_query?conflicts=proceed` setting `ctx._source.workspaceId='default'` on documents that lack it. If you skip the mapping step, OpenSearch types the field `text` dynamically, and it cannot be retyped.
-    - New indices (`usage_profiles`, `tasks`, `request_files`) are created automatically with the tenant indexes.
+10. **Transfer your data (action required).** The OpenSearch data model changed since ft5: new fields and indices, Applications replaced by usage profiles, entities identified by id. No automatic migration is provided between fasttrack versions. Export what you need (prompts, agents, plans, scripts, MCP servers, LLM providers, usage profiles) from the ft5 deployment and re-create it in 2026.0.0, or start on new indices. Existing conversations and requests are not carried over unless you transfer them yourself.
 
 11. **NuExtract providers must be reconfigured (action required if you use NuExtract).** The legacy `POST {endpointUrl}/{modelId}/extract` call is removed, as are the `modelId` extra and the YAML `model-id` key. Change the provider endpoint to `https://bbox.nuextract.ai`, remove `modelId`, and set the extra `project: sprj_...` (or start your prompt with the JSON template). Expect a different answer shape (`{"result", "localization"}`), no streaming (422), and rewrite prompts built for the legacy flow.
 
@@ -244,7 +242,7 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
 
 16. **Hazelcast and iframes.** If your deployment silently relied on Hazelcast auto-detection (for example a Docker network without multicast and without Kubernetes mode), nodes no longer cluster: set `HAZELCAST_MULTICAST_ENABLED=false` for single-node setups. The admin console and viewer can no longer be framed (`frame-ancestors 'none'`); embed through the web components instead.
 
-17. **Behaviour to expect.** Token totals for tool-using conversations are higher than under ft5 because every completion in a tool loop is now counted (historical data is not recomputed). Stored prompt, agent, and conversation data need no other migration.
+17. **Behaviour to expect.** Token totals for tool-using conversations are higher than under ft5 because every completion in a tool loop is now counted (historical data is not recomputed).
 
 18. **No migration needed** for code modules, the review screen, the filesystem connector, and structured output: all are new and opt-in.
 

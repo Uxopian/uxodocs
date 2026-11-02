@@ -174,17 +174,6 @@ curl -X POST https://your-gateway/api/v1/admin/code-modules \
 curl -X POST https://your-gateway/api/v1/admin/code-modules/countLines/publish
 ```
 
-## Upgrade note
-
-If a `code_modules` index already exists from an earlier build, map the two publication fields once, because nothing completes the mapping at startup:
-
-```bash
-curl -X PUT "$OPENSEARCH/code_modules*/_mapping" -H 'Content-Type: application/json' \
-  -d '{"properties":{"publishedAt":{"type":"date"},"publishedBy":{"type":"keyword"}}}'
-```
-
-A module published before keeps falling back on its last update date.
-
 ## Verification
 
 1. Create a module `echo` with the source `exports.run = function (input) { return input; };`, then publish it.

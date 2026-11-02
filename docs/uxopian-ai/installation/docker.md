@@ -190,7 +190,7 @@ Hazelcast auto-detection is always off. Outside Kubernetes, nodes find each othe
 
 ## Upgrading from 2026.0.0-ft5
 
-Stop the stack, then do the same data steps as on Kubernetes: drain plan runs, add the `workspaceId` mapping to the nine existing indices, and recreate your Applications as usage profiles. The commands are in [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5). Also:
+Stop the stack. The OpenSearch data model changed since 2026.0.0-ft5 and no automatic migration is provided between fasttrack versions: export what you need and re-create it in 2026.0.0, or start on new indices (see [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5)). Also:
 
 - add `INTERNAL_AUTH_JWT_SECRET` to uxopian-ai and to the gateway (see above);
 - remove `OPENSEARCH_FORCE_REFRESH_INDEX` and `force-refresh-index` from `config/opensearch.yml`: they no longer do anything;
