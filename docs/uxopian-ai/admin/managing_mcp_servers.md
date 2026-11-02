@@ -14,11 +14,11 @@ This admin UI replaces the legacy single-server boot-time `mcp.sse.url` configur
 
 ## Navigate to MCP servers
 
-In the admin panel, click *MCP Servers* in the navigation. The page lists all MCP configurations registered for the current tenant, with a column for each server's `enabled` state and last-known connection status.
+In the admin panel, click *MCP Servers* in the navigation. The page lists the MCP configurations registered for the current tenant — paginated, with server-side search and filters (transport, enabled) and sorting — with a column for each server's `enabled` state and last-known connection status, and a *Used by* column naming the usage profiles and agents that expose the server.
 
 ![The MCP Servers list showing server name, URL, transport, and enabled status](../images/mcp-servers-list.png)
 
-*Figure: the MCP Servers list — each entry shows its URL, transport type, and enabled/disabled status.*
+*Figure: the MCP Servers list (screenshot taken before the 2026.0.0 redesign) — each entry shows its URL, transport type, and enabled/disabled status.*
 
 ## Multi-tenant isolation
 
@@ -34,7 +34,7 @@ In the admin panel, click *MCP Servers* in the navigation. The page lists all MC
 
 | Field | Description |
 |---|---|
-| Name | Identifier of this configuration, unique per tenant: it is the configuration's ID and cannot change after creation. A name already used is reported while you type. |
+| Server name | Identifier of this configuration, unique per tenant: it is the configuration's ID (the entity has no separate `name` field since 2026.0.0) and cannot change after creation. A name already used is reported while you type. |
 | URL | MCP server endpoint (e.g. `https://mcp.example.com/sse` for SSE). |
 | Transport type | Transport protocol. `SSE` is the default and currently supported value. |
 | Enabled | When off, the configuration is stored but not opened — use it as a draft or to temporarily disconnect without losing settings. |
@@ -51,7 +51,7 @@ Click a configuration in the list to open its detail page. The editor exposes th
 
 ## Test connection and discover tools
 
-The *Tools* tab lists the tools currently exposed by the MCP server. uxopian-ai calls `GET /api/v1/admin/mcp/mcp-conf/{id}/tools` to perform a live discovery against the server, so this tab reflects the current server state, not a cached snapshot. Use this to:
+The *Tools* card lists the tools currently exposed by the MCP server. It is locked until the configuration is saved. uxopian-ai calls `GET /api/v1/admin/mcp/mcp-conf/{id}/tools` to perform a live discovery against the server, so this tab reflects the current server state, not a cached snapshot. Use this to:
 
 - Verify that credentials and the URL are correct.
 - Confirm which tools will be made available to the LLM.
@@ -59,7 +59,7 @@ The *Tools* tab lists the tools currently exposed by the MCP server. uxopian-ai 
 
 ## Delete
 
-Deleting a configuration closes the MCP client, removes it from the OpenSearch `mcp_configurations` index, and publishes the change across the cluster. Tools exposed by the deleted server are unregistered from the active tool list on all nodes.
+Deleting a configuration (no unsaved-changes prompt appears if you had just edited it) closes the MCP client, removes it from the OpenSearch `mcp_configurations` index, and publishes the change across the cluster. Tools exposed by the deleted server are unregistered from the active tool list on all nodes.
 
 ## REST API
 
@@ -67,7 +67,9 @@ The admin UI is a thin wrapper around `/api/v1/admin/mcp/`. All endpoints requir
 
 | Method | Path | Description |
 |---|---|---|
-| `GET` | `/mcp-conf` | List all MCP configurations for the current tenant |
+| `GET` | `/mcp-conf` | List MCP configurations — a page `{ collection, total, facets }` of summaries. Filters: `search`, `transport`, `enabled`, `workspaceId`; pagination: `offset`, `limit`, `orderBy` (`id`, not `name`), `ascending` |
+| `GET` | `/mcp-conf/availability?id={id}` | `true` when a new configuration can take this ID |
+| `GET` | `/mcp-conf/{id}/usage` | The usage profiles and agents that expose this server |
 | `GET` | `/mcp-conf/{id}` | Fetch a single MCP configuration |
 | `POST` | `/mcp-conf` | Create an MCP configuration |
 | `PUT` | `/mcp-conf/{id}` | Update an existing MCP configuration |

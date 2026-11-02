@@ -21,7 +21,7 @@ Controls the base URL, server port, Spring profiles, and tool settings.
 | `server.servlet.context-path` | `CONTEXT_PATH` | (empty) | Optional servlet context path prefix |
 | `tools.enabled` | `TOOLS_ENABLED` | `true` | Set to `false` to disable all tool execution |
 | `plugins.root.path` | `PLUGINS_ROOT_PATH` | `plugins/` | Directory scanned at startup for plugin JARs |
-| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Since 2026.0.0-ft5, this no longer gates which tools get *registered* at startup — every `@ToolService` in every plugin JAR present in `plugins/` is always registered. It now only seeds the default tool-tag whitelist on an auto-created [Application](../admin/managing_applications.md) (empty = `allowAllTools`). See [Plugin system](../understanding/plugin_system.md#filtering-tools-by-tag). |
+| `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files,interaction` | Since 2026.0.0-ft5, this no longer gates which tools get *registered* at startup — every `@ToolService` in every plugin JAR present in `plugins/` is always registered. It now only seeds the default tool-tag whitelist on an auto-created [usage profile](../admin/managing_applications.md) (empty = `allowAllTools`). See [Plugin system](../understanding/plugin_system.md#filtering-tools-by-tag). |
 | `spring.profiles.active` | `SPRING_PROFILES_ACTIVE` | (empty) | Active Spring profiles. Add `dev` to disable auth. |
 
 Example:
@@ -39,11 +39,17 @@ tools:
 
 ### Gateway-signed request authentication
 
-Since 2026.0.0-ft5, requests can carry a gateway-issued `X-Gateway-Auth` assertion instead of bare `X-User-*` headers. Verification is inactive until a secret is set (matches the gateway's own opt-in behavior — see [gateway-application.yaml](#gateway-applicationyaml)), but the **official Helm chart makes the secret mandatory** (the chart fails to render without `appConfig.internalAuth.secret`).
+Since 2026.0.0-ft5, requests can carry a gateway-issued `X-Gateway-Auth` assertion instead of bare `X-User-*` headers.
+
+:::danger The secret is mandatory since 2026.0.0
+`internal-auth.jwt.secret` is required in **every** profile, `dev` included: `ai-standalone` **refuses to start** without it. Before, a missing secret simply switched verification off and let any caller choose its tenant and roles with bare `X-User-*` headers. Every non-Helm deployment (Docker, plain Java, Compose) must now set `INTERNAL_AUTH_JWT_SECRET` (at least 32 bytes) on `ai-standalone` **and** on the gateway, with the same value. The Helm chart already required it; it also accepts an existing Secret through `appConfig.internalAuth.existingSecret` (the Secret must carry the key `INTERNAL_AUTH_JWT_SECRET`). With the `dev` profile the assertion itself is still not verified.
+:::
+
+An assertion without an `exp` claim is refused (`401`). The official gateway always sets one (30 s lifetime by default), so only hand-made tokens are affected.
 
 | Key | Env variable | Default | Description |
 |---|---|---|---|
-| `internal-auth.jwt.secret` | `INTERNAL_AUTH_JWT_SECRET` | (empty, verification off) | HS256 shared secret, **at least 32 bytes**, must be **byte-for-byte identical** to the gateway's own `internal-auth.jwt.secret`. Generate with `openssl rand -base64 48`. |
+| `internal-auth.jwt.secret` | `INTERNAL_AUTH_JWT_SECRET` | (none — **required**) | HS256 shared secret, **at least 32 bytes**, must be **byte-for-byte identical** to the gateway's own `internal-auth.jwt.secret`. Generate with `openssl rand -base64 48`. |
 | `internal-auth.jwt.issuer` | `INTERNAL_AUTH_JWT_ISSUER` | `uxopian-gateway-internal` | Expected `iss` claim on the incoming assertion. |
 | `internal-auth.jwt.clock-skew-seconds` | `INTERNAL_AUTH_JWT_CLOCK_SKEW_SECONDS` | `5` | Allowed clock drift when validating the assertion's expiry. |
 
@@ -60,7 +66,6 @@ OpenSearch connection settings.
 | `opensearch.scheme` | `OPENSEARCH_SCHEME` | `http` | Connection scheme (`http` or `https`) |
 | `opensearch.username` | `OPENSEARCH_USERNAME` | (empty) | Username for authenticated OpenSearch |
 | `opensearch.password` | `OPENSEARCH_PASSWORD` | (empty) | Password for authenticated OpenSearch |
-| `opensearch.force-refresh-index` | `OPENSEARCH_FORCE_REFRESH_INDEX` | `false` | Force index refresh after each write (slow; for testing only) |
 | `opensearch.index-prefix` | `OPENSEARCH_INDEX_PREFIX` | `uxopian-ai` | Prefix used in index names: `{tenant}-{prefix}-{base}` |
 
 Example:
@@ -72,8 +77,11 @@ opensearch:
   scheme: ${OPENSEARCH_SCHEME:http}
   username: ${OPENSEARCH_USERNAME:}
   password: ${OPENSEARCH_PASSWORD:}
-  force-refresh-index: ${OPENSEARCH_FORCE_REFRESH_INDEX:false}
 ```
+
+:::note Removed in 2026.0.0
+`opensearch.force-refresh-index` (`OPENSEARCH_FORCE_REFRESH_INDEX`) no longer exists. If it is still set in your files or Helm values (`appConfig.openSearch.forceRefresh`), it is harmless but does nothing.
+:::
 
 ## llm-clients-config.yml
 
@@ -83,11 +91,18 @@ LLM provider configurations, default provider/model, and context size.
 
 | Key | Env variable | Default | Description |
 |---|---|---|---|
-| `llm.default.provider` | `LLM_DEFAULT_PROVIDER` | `openai` | Default LLM provider identifier |
-| `llm.default.model` | `LLM_DEFAULT_MODEL` | `gpt-5.1` | Default model name |
-| `llm.default.base-prompt` | `LLM_DEFAULT_PROMPT` | `basePrompt` | Default base prompt ID |
-| `llm.context` | `LLM_CONTEXT_SIZE` | `10` | Number of previous requests included in each LLM call |
+| `llm.default.provider` | `LLM_DEFAULT_PROVIDER` | `openai` | Provider written into the [usage profile](../admin/managing_applications.md) that is auto-created for a connection provider that has none. It is **not** a fallback at call time: a call whose prompt and usage profile name no provider fails. |
+| `llm.default.model` | `LLM_DEFAULT_MODEL` | `gpt-5.1` | Model written into that auto-created usage profile. If these two properties are unset, the profile takes the tenant's first LLM provider configuration and its default model. |
+| `llm.default.base-prompt` | `LLM_DEFAULT_PROMPT` | `basePrompt` | Default base prompt ID. A usage profile's own `prompt` **replaces** it for the calls of that profile (one base prompt per call); a missing or unpublished profile prompt falls back to this one, with a warning. Agents get no base prompt. |
+| `llm.context.size` | `LLM_CONTEXT_SIZE` | `10` | Number of previous requests included in each LLM call |
 | `llm.debug.enabled` | `LLM_DEBUG` | `false` | Enable verbose LLM request/response logging |
+| `llm.inline.max-size` | — | `5MB` | Largest inline `base64` file accepted in a request. Beyond it: `413 PAYLOAD_TOO_LARGE`, nothing is stored. |
+| `llm.document.max-size` | — | `20MB` | Largest file or document sent to a model; it also sets the multipart `max-file-size` (the whole multipart request is capped at 100 MB). A model or provider can lower it with `maxDocumentSizeMb`. Beyond it: `422 DOCUMENT_TOO_LARGE`. |
+| `llm.files.retention` | — | `1d` | How long the files sent with a request (inline contents and attachments converted to PDF) are kept so that a retry can send them again. A nightly job purges older files and marks their contents `expired`. `0` keeps nothing. Files sent with `persist: true` are not concerned. |
+
+The three `llm.inline.max-size`, `llm.document.max-size` and `llm.files.retention` keys have no environment variable of their own in the shipped files; set them in `application.yml`, or through Spring's relaxed binding (`LLM_FILES_RETENTION=2d`).
+
+Whether a model reads documents is a flag on the model itself, `documentSupported` (default `false`), set in the model parameters of the LLM provider in the admin UI.
 
 ### Provider configuration structure
 
@@ -121,9 +136,35 @@ llm:
 | Provider | Extra keys | Description |
 |---|---|---|
 | `bedrock` | `AwsRegion`, `AwsAccessKey`, `AwsSessionToken` | AWS credentials and region |
-| `nu-extract` | `modelId` | Model ID override (defaults to `modelName` if absent) |
+| `nu-extract` | `project`, `output`, `rasterizationDPI`, `enableThinking`, `thinkingTokenBudget`, `loopDetection` | NuExtract runs on the NuMind platform — see [NuExtract](#nuextract) below. |
 
 Azure OpenAI (`azure-openai`) does not use extras. The `modelName` field is passed as the deployment name.
+
+#### NuExtract
+
+Since 2026.0.0, a NuExtract model that receives a PDF runs a structured extraction job on the NuMind platform (endpoint `https://bbox.nuextract.ai`, which is also the default in the shipped example). The legacy call (`https://nuextract.ai/api/projects/`) is removed, together with the `modelId` extra and the `model-id` key: set the endpoint to `https://bbox.nuextract.ai`, drop `modelId`, and either set the `project` extra or start the prompt with the JSON template.
+
+| Extra | Description |
+|---|---|
+| `project` | Id of the NuMind project (starting with `sprj_`); its template and instructions replace the message's. Empty: the message carries the template, as JSON at its very start (e.g. `{"invoiceNumber":"string","total":"number"}`), optionally followed by instructions. |
+| `output` | `values`, `positions` or `values-and-positions` (default). With `positions` alone a localization failure is raised; otherwise the values are returned without positions. |
+| `rasterizationDPI` | Resolution the pages are read at: automatic, or 1 to 600. |
+| `enableThinking` | `true` or `false`: let the model reason before answering. |
+| `thinkingTokenBudget` | Most tokens the model may reason with when thinking is enabled. |
+| `loopDetection` | `true` or `false`: stop the model when it repeats itself. |
+
+```yaml
+nu-extract:
+  api-key: ${NUEXTRACT_API_KEY:}
+  base-url: https://bbox.nuextract.ai
+  model-name: nuextract
+  supported-models:
+    - modelName: nuextract
+      extras:
+        project: sprj_your-numind-project-id
+```
+
+The answer is JSON, `{ "result": { ... }, "localization": { ... } }`. The provider does not stream: `POST /api/v1/requests/stream` with a NuExtract model answers `422`; use `POST /api/v1/requests`. A message without a document only tests the key (this is what the admin "test" does). The model temperature, seed and maximum tokens are sent to the job.
 
 ### Tenant overrides
 
@@ -162,8 +203,8 @@ Prompts live only as versioned documents in OpenSearch (see [Managing prompts](.
   requiresMultiModalModel: false
   requiresFunctionCallingModel: false
   reasoningDisabled: false
-  defaultLlmProvider: ""       # optional: override provider for this prompt
-  defaultLlmModel: ""          # optional: override model for this prompt
+  defaultLlmProvider: ""       # provider that answers this prompt (else the usage profile's)
+  defaultLlmModel: ""          # model that answers this prompt (else the usage profile's)
 ```
 
 ## metrics.yml
@@ -184,16 +225,48 @@ Micrometer metrics and actuator configuration.
 
 Hazelcast cluster configuration. Used by the gateway for session caching.
 
+Since 2026.0.0, Hazelcast **auto-detection is always disabled**: only the explicit mechanisms below (Kubernetes discovery, or multicast when enabled) are used. A deployment that silently relied on auto-detection — for instance a Docker network without multicast and without Kubernetes mode — no longer forms a cluster. Set `HAZELCAST_MULTICAST_ENABLED=false` for single-node or Docker Compose setups on a shared network, so that a node never tries to join the cluster of another `uxopian-ai`.
+
 | Key | Env variable | Default | Description |
 |---|---|---|---|
 | `hazelcast.cluster-name` | — | `uxopian-ai-cluster` | Hazelcast cluster name |
+| `hazelcast.multicast.enabled` | `HAZELCAST_MULTICAST_ENABLED` | `true` | Multicast discovery. Only applies in local (non-Kubernetes) mode. |
 | `hazelcast.kubernetes.enabled` | `HAZELCAST_KUBERNETES_ENABLED` | `false` | Enable Kubernetes service discovery |
 | `hazelcast.kubernetes.service-dns` | `HAZELCAST_KUBERNETES_SERVICE_DNS` | `ai-standalone-headless` | Kubernetes headless service DNS name |
 | `hazelcast.kubernetes.namespace` | `HAZELCAST_KUBERNETES_NAMESPACE` | `default` | Kubernetes namespace for discovery |
 
+## File connector, review tasks and rendition
+
+Properties of `application.yml` (or any file imported by it) for the file connectors, the human review task queue and the ARender relay.
+
+| Key | Env variable | Default | Description |
+|---|---|---|---|
+| `file-connector.filesystem.root` | `FILECONNECTOR_FILESYSTEM_ROOT` | (unset — connector off) | Root folder of the filesystem file connector. Files live under `<root>/<tenant>/`. Absolute paths, `..`, hidden segments, disallowed extensions and symbolic links that leave the root are refused. The application **fails to start** if the root is not a folder, or is not readable and writable by the application user. Without it, `persist: true` is refused with `422 FILE_STORAGE_UNAVAILABLE`. |
+| `file-connector.filesystem.allowed-extensions` | `FILECONNECTOR_FILESYSTEM_ALLOWEDEXTENSIONS` | `pdf,png,jpg,jpeg,tif,tiff` | Extensions the filesystem connector accepts (comma-separated). |
+| `task.reservation-seconds` | — | `900` | How long a reservation on a review [task](./rest_api.md#tasks--apiv1tasks) lasts. |
+| `task.max-payload-bytes` | — | `262144` | Largest task payload (`413` beyond). |
+| `rendition.base-url` | `RENDITION_BASE_URL` | (unset) | ARender base URL. `uxopian-ai` relays it at `<app>/rendition/` behind the same gateway authentication, so the review screen needs no direct browser access to ARender. |
+| `agent.execution.reservation-millis` | — | `60000` | Lease a runner holds on a plan execution before another may take it over. |
+
+With Helm, set `fileConnector.filesystem.existingClaim` (a PersistentVolumeClaim), `mountPath` (default `/data/documents`) and `allowedExtensions`: the chart mounts the claim and sets the two environment variables. Without a claim nothing is mounted and `persist` stays disabled.
+
+## code-sandbox
+
+[Code modules](./rest_api.md#code-modules--apiv1admincode-modules) run JavaScript in a separate **uxopian-code-sandbox** service. The feature is opt-in: with no `code-sandbox.url`, the sandbox is off and no code tool is offered. The domains a module may reach are configured on the sandbox side (`code-sandbox.network.allowed-domains` there), not per module.
+
+| Key | Env variable | Default | Description |
+|---|---|---|---|
+| `code-sandbox.url` | `CODESANDBOX_URL` | (unset — sandbox off) | Base URL of uxopian-code-sandbox. |
+| `code-sandbox.secret` | `CODESANDBOX_SECRET` | (unset) | Shared secret used to call the sandbox. |
+| `code-sandbox.caller-name` | `CODESANDBOX_CALLERNAME` | `uxopian-ai` | Caller name presented to the sandbox. |
+| `code-sandbox.capability-profile` | `CODESANDBOX_CAPABILITYPROFILE` | `uxoai` | Sandbox capability profile the code runs with. |
+| `code-sandbox.max-active-sessions` | `CODESANDBOX_MAXACTIVESESSIONS` | `16` | Executions allowed at once; one more fails immediately, asking to try again later. |
+
+The environment variable names follow Spring's relaxed binding of the property names; the shipped `application.yml` does not declare them.
+
 ## alfresco
 
-Configuration for the Alfresco plugin. Since 2026.0.0-ft5, its tools are always registered when the JAR is present in `plugins/`; whether they're exposed to a given caller is controlled by that caller's [Application](../admin/managing_applications.md) tool/tag whitelist, not by `plugins.tools.enabled-tags`.
+Configuration for the Alfresco plugin. Since 2026.0.0-ft5, its tools are always registered when the JAR is present in `plugins/`; whether they're exposed to a given caller is controlled by that caller's [usage profile](../admin/managing_applications.md) tool/tag whitelist, not by `plugins.tools.enabled-tags`.
 
 | Key | Env variable | Default | Description |
 |---|---|---|---|
@@ -217,7 +290,7 @@ See [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx) for deploym
 
 ## filenet
 
-Configuration for the FileNet plugin. Since 2026.0.0-ft5, its tools are always registered when the JAR is present in `plugins/`; whether they're exposed to a given caller is controlled by that caller's [Application](../admin/managing_applications.md) tool/tag whitelist, not by `plugins.tools.enabled-tags`.
+Configuration for the FileNet plugin. Since 2026.0.0-ft5, its tools are always registered when the JAR is present in `plugins/`; whether they're exposed to a given caller is controlled by that caller's [usage profile](../admin/managing_applications.md) tool/tag whitelist, not by `plugins.tools.enabled-tags`.
 
 There is no object store setting: the object store is the tenant, resolved per request by the ICN plugin and carried in its JWT — see [How the tenant is resolved](../how_to/integrate_with_filenet.mdx#how-the-tenant-is-resolved).
 
@@ -378,7 +451,7 @@ Since 2026.0.0-ft5, the gateway can sign every proxied request so uxopian-ai no 
 
 | Key | Env variable | Default | Description |
 |---|---|---|---|
-| `internal-auth.jwt.secret` | `INTERNAL_AUTH_JWT_SECRET` | (empty, signing off) | HS256 shared secret, **at least 32 bytes**. Signing is simply inactive when unset — no error. |
+| `internal-auth.jwt.secret` | `INTERNAL_AUTH_JWT_SECRET` | (empty, signing off) | HS256 shared secret, **at least 32 bytes**. Signing is simply inactive when unset — no error. Since 2026.0.0 `uxopian-ai` will not start without its own copy of this secret, so set it here too, with the same value. |
 | `internal-auth.jwt.issuer` | `INTERNAL_AUTH_JWT_ISSUER` | `uxopian-gateway-internal` | `iss` claim stamped on the issued assertion. |
 | `internal-auth.jwt.ttl-seconds` | `INTERNAL_AUTH_JWT_TTL_SECONDS` | `30` | Assertion lifetime. |
 

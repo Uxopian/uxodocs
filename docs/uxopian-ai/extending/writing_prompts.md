@@ -61,8 +61,12 @@ prompts:
 | `requiresMultiModalModel` | No | Set to `true` if the prompt includes images |
 | `requiresFunctionCallingModel` | No | Set to `true` if the prompt requires tool calling |
 | `reasoningDisabled` | No | Set to `true` to disable tool calls for this prompt |
-| `defaultLlmProvider` | No | Override the LLM provider for this specific prompt |
-| `defaultLlmModel` | No | Override the LLM model for this specific prompt |
+| `defaultLlmProvider` | No | LLM provider that runs this prompt. When empty, the usage profile of the calling surface decides |
+| `defaultLlmModel` | No | LLM model that runs this prompt. When empty, the usage profile of the calling surface decides |
+
+:::note Which model runs a prompt
+Each turn resolves its provider and model independently: the prompt's own `defaultLlmProvider` and `defaultLlmModel` first, then the `defaultLlmProvider` and `defaultLlmModel` of the usage profile of the calling surface. There is no per-request override and no fallback on `llm.default.*` at call time: a prompt with no provider, on a usage profile with none either, fails with "No LLM provider for this call". See [Configure LLM providers](../how_to/configure_llm_providers.md#which-provider-and-model-runs-a-call).
+:::
 
 ## Thymeleaf syntax
 

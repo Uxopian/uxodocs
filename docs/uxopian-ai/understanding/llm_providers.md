@@ -87,7 +87,7 @@ Each provider is a Spring `@Service` bean. The bean name (shown in the `provider
 | Mistral AI    | `mistral-ai`     | `apiSecret`, `endpointUrl`            |                                                | Yes       |
 | Ollama        | `ollama`         | `endpointUrl`                         |                                                | Yes       |
 | HuggingFace   | `huggingface`    | `apiSecret`                           |                                                | No        |
-| NuExtract     | `nu-extract`     | `apiSecret`, `endpointUrl`            | `modelId`                                      | Yes       |
+| NuExtract     | `nu-extract`     | `apiSecret`, `endpointUrl`            | `project`, `output`, `rasterizationDPI`, `enableThinking`, `thinkingTokenBudget`, `loopDetection` | No (streaming is refused) |
 
 All providers are implemented as LangChain4J wrappers. See [Write a custom LLM client](../extending/custom_llm_client.md) for the full source code of each provider and instructions to create your own.
 
@@ -97,17 +97,23 @@ API keys are encrypted with AES/GCM before being stored in OpenSearch. The encry
 
 ## Default provider and model
 
-The default provider and model used when none is specified per-request:
+The provider and model of a turn are resolved in this order: the prompt of the turn (its `defaultLlmProvider` / `defaultLlmModel`), then the [usage profile](../admin/managing_applications.md#resolution-order) of the calling surface. A request cannot override them: the former `provider`, `model`, `llm_provider` and `llm_model` query parameters are no longer read.
+
+The system-wide properties only seed usage profiles:
 
 - `LLM_DEFAULT_PROVIDER`: provider identifier (default: `openai`)
 - `LLM_DEFAULT_MODEL`: model name (default: `gpt-5.1`)
 - `LLM_DEFAULT_PROMPT`: base prompt ID (default: `basePrompt`)
 
-These can be overridden per-request via query parameters (`provider`, `model`) on the requests endpoint.
+`llm.default.provider` and `llm.default.model` are **not** a fallback at call time any more. They only fill the usage profile that is auto-created the first time a connection provider is used; when they are unset, that profile takes the tenant's first LLM provider configuration and that provider's default model. A call with no provider on its prompt nor on its usage profile fails with an explicit error.
+
+## Documents
+
+A document attached to a conversation (a PDF, or another file rendered to PDF) is only sent to a model flagged **Reads documents** (`documentSupported`, off by default) in the provider's model configuration; otherwise the request is refused with `422 LLM_CAPABILITY_ERROR`. Native PDF input is supported for OpenAI, Anthropic, Gemini, Bedrock and Mistral; the other providers refuse documents. A per-model `maxDocumentSizeMb` and the global `llm.document.max-size` (default 20 MB) bound the size of a document.
 
 ## Context size
 
-`llm.context` (or `LLM_CONTEXT_SIZE`) controls how many previous requests from the conversation are included in each LLM call. Default: `10`.
+`llm.context.size` (or `LLM_CONTEXT_SIZE`) controls how many previous requests from the conversation are included in each LLM call. Default: `10`.
 
 ## Tenant overrides
 

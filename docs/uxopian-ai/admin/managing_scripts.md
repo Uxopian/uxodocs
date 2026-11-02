@@ -14,7 +14,7 @@ Scripts are managed per tenant. Changes take effect without restarting the appli
 
 ![The Scripts section of the admin panel listing scripts with their status](../images/scripts-list.png)
 
-*Figure: the Scripts section lists each script with its publication status (here, a force-published script and a draft).*
+*Figure: the Scripts section lists each script with its publication status (here, a force-published script and a draft). The list is paginated and filtered on the server (`search`, `status`); the screenshot was taken before the 2026.0.0 redesign.*
 
 ## The script lifecycle
 
@@ -55,7 +55,7 @@ Open a script to reach its detail page, which provides a code editor and the scr
 
 ![The script detail page with the code editor, status badge, and Scan & publish actions](../images/script-detail.png)
 
-*Figure: the script detail page — code editor, status badge, and the Delete / Discard / Save / Scan & publish actions.*
+*Figure: the script detail page — code editor, status badge, and the Delete / Discard / Save / Scan & publish actions (screenshot taken before the 2026.0.0 redesign, which regrouped the actions in the shared action bar).*
 
 | Action | Description |
 |---|---|
@@ -99,7 +99,7 @@ A deployed script is served to any authenticated user as `application/javascript
 GET /api/v1/scripts/{id}
 ```
 
-A script that has never been deployed is **not servable** and returns `401 Unauthorized`. A draft can be previewed (for development) via `GET /api/v1/scripts/{id}/draft`.
+The `ETag` is a hash of the script's ID and its deployed content, so a browser picks up a new deployment instead of keeping the old script on `304`. A script that has never been deployed is **not servable** and returns `401 Unauthorized`. A draft can be previewed (for development) via `GET /api/v1/scripts/{id}/draft`.
 
 To load a deployed script in a host page:
 
@@ -113,7 +113,7 @@ To load a deployed script in a host page:
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/api/v1/admin/scripts` | List scripts with full metadata |
+| `GET` | `/api/v1/admin/scripts` | List scripts — a page `{ collection, total, facets }` of summaries (without the code: derived status and line count). Filters: `search`, `status`, `workspaceId`; pagination: `offset`, `limit`, `orderBy` (`id`, not `name`), `ascending` |
 | `GET` | `/api/v1/admin/scripts/{id}` | Get a script by ID |
 | `GET` | `/api/v1/admin/scripts/availability?id={id}` | Whether a new script can take this ID (`true` / `false`) |
 | `POST` | `/api/v1/admin/scripts` | Create a script from its ID only — body `{"id": "my-script"}`; `409` if the ID exists |

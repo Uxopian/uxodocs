@@ -12,7 +12,7 @@ The statistics section of the admin panel displays usage metrics for the current
 
 ![The statistics page with overview cards, activity charts, LLM distribution, top prompts, and feature adoption](../images/statistics.png)
 
-*Figure: the statistics page — overview cards, daily activity, LLM distribution, top prompts by time saved, and feature adoption.*
+*Figure: the statistics page — overview cards, daily activity, LLM distribution, top prompts by time saved, and feature adoption (screenshot taken before the 2026.0.0 redesign, which replaced the cards and the interval buttons with the shared design-system components).*
 
 ## Available statistics
 
@@ -29,9 +29,9 @@ Fetched from `GET /api/v1/admin/stats/global`.
 
 ### Time interval selector
 
-A toolbar at the top of the statistics page lets you select the time granularity. The selected interval applies to all charts on the page.
+A set of tabs at the top of the statistics page lets you select the time granularity. The selected interval applies to all charts on the page.
 
-| Button | Interval | Description |
+| Tab | Interval | Description |
 |---|---|---|
 | Day | `DAY` | Daily buckets (default) |
 | Week | `WEEK` | Weekly buckets |
@@ -45,6 +45,8 @@ Two area/line charts show activity over the selected interval:
 
 - **Requests**: request volume over time.
 - **Tokens**: token usage (input + output) over time.
+
+Since 2026.0.0, the token counts of a request include every completion of its tool-calling loop (up to the configured number of tool cycles), not only the last one, and a plan node whose agent fails still records the tokens the provider billed. Totals are therefore higher than in earlier versions for conversations and plans that use tools; historical data is not recomputed, so figures before and after the upgrade are not comparable. The interval bounds are computed in the server's time zone, so the most recent requests are no longer dropped east of UTC.
 
 Fetched from `GET /api/v1/admin/stats/timeseries?interval={interval}`.
 

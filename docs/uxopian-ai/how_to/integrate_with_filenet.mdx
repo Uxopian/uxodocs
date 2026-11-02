@@ -196,6 +196,18 @@ Initializing FileNet CE client. CEWS: http://<ce-host>:<port>/wsi/FNCEWS40MTOM/
 | Admin UI tool list | The four FileNet tool services appear, tagged `filenet` |
 | A search request, made as a real ICN user | Returns results without a CE connection error, and FileNet's own audit trail attributes the call to that user (not a shared account) |
 
+### FileNet tools reference
+
+Besides search, filter, document and redaction, the FileNet tools include helpers to find where a document lives:
+
+| Tool | Description |
+|---|---|
+| `fileNetFindFolders` | Folders whose name contains a text (case-insensitive). Returns the path and id |
+| `fileNetListSubfolders` | Subfolders under a path, at any depth |
+| `fileNetGetDataModel` | Document classes and properties. It also reports whether full-text search is available on the object store |
+
+Folder listing and the folder-scoped filter use `INSUBFOLDER`, so subfolders are included. "Contains" filters compare `LOWER(property)` with the lowered value, while "equals" stays exact. Full-text search is refused inside an `OR`, and refused with an explanatory message when the object store has no content-based retrieval. The document classes are cached for five minutes per tenant (a single shared slot let the first tenant to warm the cache serve its classes to the others; this is fixed).
+
 ---
 
 ## Plugin downloads
@@ -564,7 +576,21 @@ The tenant of a request from ICN is the **object store** of the desktop's reposi
 [[${fileNetService.extractTextualContent(documentId)}]]
 ```
 
-`fileNetService.extractTextualContent(objectId)` reads the document from the Content Engine as the current user, hands it to ARender and returns its text. The default prompts concerned are `arenderContext`, `summarizeDocumentText`, `summarizeDocumentMarkdown`, `translate`, `genericComparison` and `detailedComparison`; edit them in [Managing prompts](../admin/managing_prompts.md) on each object store's tenant.
+`fileNetService.extractTextualContent(objectId)` reads the document from the Content Engine as the current user, hands it to ARender and returns its text. Before 2026.0.0, calling `documentService.extractTextualContent` on a FileNet id failed with "Error rendering template". The default prompts concerned are `arenderContext`, `summarizeDocumentText`, `summarizeDocumentMarkdown`, `translate`, `genericComparison` and `detailedComparison`; edit them in [Managing prompts](../admin/managing_prompts.md) on each object store's tenant.
+
+---
+
+## Keep the admin console session alive
+
+**AI Admin** opens the admin console in a new tab on a session created from a short-lived ICN token (30 seconds). That session lapses after 30 idle minutes, and every call then answers `401`. The console renews it by itself:
+
+1. On a `401`, the console asks the window that opened it, with `postMessage({ type: "uxopian-ai:session-request" })`.
+2. The ICN plugin answers `{ type: "uxopian-ai:session", loginUrl }`, a ready-to-open login URL built from a fresh token. It answers only requests whose origin is the configured Uxopian AI host, and only to the window that asked.
+3. The console accepts the URL only if it is on its own origin, logs in, and replays the failed request once. Several failing calls at the same time share one renewal.
+
+If the opener window was closed or does not answer within 5 seconds, a message asks you to reopen the console from ICN. A console opened on its own keeps the plain `401`. Renewal needs the plugin build that ships with 2026.0.0: redeploy `uxopian-icn-plugin.zip` when you upgrade.
+
+The contract is generic: any host application that opens the console in a window can implement it by answering `uxopian-ai:session-request` with a login URL on the console's origin.
 
 ---
 
@@ -624,6 +650,7 @@ Set `icn.plugin.keystore.path`, `.alias`, and `.password` as WebSphere JVM custo
 | `op=token` returns `{"error":"..."}`, or IBM Java 8 keystore error | Keystore not found, wrong alias/password, or (Java 8) PKCS12 unsupported | Set `icn.plugin.keystore.path` to an absolute path and verify credentials; the plugin falls back to the bundled `.jks` automatically on Java 8 |
 | JWT rejected by gateway | Public key not configured, or wrong `issuer`/`tenant-id`, on the `FileNetProvider` instance | Re-fetch the public key from `?op=public-key` and set this instance's `public-key` under `app.providers` on the gateway (Phase 3.1) |
 | Chat panel blank, or web component assets 401/403 | `icn.plugin.bff.url`/Uxopian AI Host URL wrong, unreachable, or the gateway route isn't public for assets | Verify connectivity from WebSphere to the gateway and that `/api/web-components/**` is `public: true` |
+| `AI Admin` console starts answering `401` after about 30 idle minutes | The plugin predates session renewal, or the opener tab was closed | Redeploy the 2026.0.0 plugin, and reopen the console from ICN. See [Keep the admin console session alive](#keep-the-admin-console-session-alive) |
 | `AI Admin` 404s at `.../auth/login...` | The reverse proxy/load balancer in front of the gateway doesn't cover `/gui/gateway/auth/login` — see [3.2](#32-declare-the-gateway-route) | Route the broader `/gui/gateway` prefix there instead |
 | `AI Admin` 401s with `Authentication token is missing` despite a `GATEWAY_SESSION` cookie | Route declaration order — see [3.2](#32-declare-the-gateway-route) | Move `uxopian-ai-filenet` before `uxopian-ai` in the routes list |
 | A quick action opens the chat with `An unexpected error occurred`, and uxopian-ai logs `Error rendering template` with a 404 on `/documents/{...}/layout` | The prompt the action runs reads the document with `documentService.extractTextualContent`, which only knows ARender ids, not FileNet object ids | Publish a version of that prompt that reads `fileNetService.extractTextualContent(documentId)` on the object store's tenant — see [Prompts that read FileNet documents](#prompts-that-read-filenet-documents) |

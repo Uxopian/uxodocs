@@ -40,6 +40,16 @@ public interface ModelProvider
     {
         return List.of();
     }
+
+    default List<String> quotaExhaustedMarkers()
+    {
+        return List.of();
+    }
+
+    default ProviderErrorKind classifyError(Throwable throwable)
+    {
+        // QUOTA_EXHAUSTED, INVALID_REQUEST, RATE_LIMIT, TIMEOUT or UNKNOWN
+    }
 }
 ```
 
@@ -48,6 +58,35 @@ public interface ModelProvider
 | `createChatModelInstance` | Yes | Build a synchronous `ChatModel` from configuration |
 | `createStreamingChatModelInstance` | Yes | Build a `StreamingChatModel` for token streaming |
 | `getExtraParamDescriptors` | No | Declare provider-specific parameters shown in the admin UI |
+| `quotaExhaustedMarkers` | No | Texts that, found in the provider's HTTP error body, mean the quota or credit balance is exhausted (see [Quota and error mapping](#quota-and-error-mapping)) |
+| `classifyError` | No | Classify an exception raised by the provider into a `ProviderErrorKind` |
+
+The two error methods are `default` methods, so a client compiled against an earlier release keeps working. Rebuild it against 2026.0.0 as usual to pick them up.
+
+## Quota and error mapping
+
+Uxopian AI turns provider failures into stable REST errors instead of an opaque `500`. A client takes part in that mapping through `classifyError`, whose default implementation returns one of the `ProviderErrorKind` values:
+
+| `ProviderErrorKind` | Chosen when | REST answer |
+|---|---|---|
+| `QUOTA_EXHAUSTED` | The provider answered HTTP `402`, or its error body contains one of `quotaExhaustedMarkers()` | `402` `LLM_QUOTA_EXCEEDED` |
+| `INVALID_REQUEST` | LangChain4J raised an `InvalidRequestException` | `400` `LLM_BAD_REQUEST` |
+| `RATE_LIMIT` | LangChain4J raised a `RateLimitException` | `429` `LLM_RATE_LIMITED` |
+| `TIMEOUT` | A `TimeoutException` is in the cause chain | `504` `LLM_TIMEOUT` |
+| `UNKNOWN` | Anything else | `500` |
+
+The default implementation only recognises an HTTP `402` as an exhausted quota. Many providers answer with another status and put the reason in the body, so a client should override `quotaExhaustedMarkers()` with the texts its provider uses. Markers are matched as case-insensitive substrings of the error body.
+
+```java
+@Override
+public List<String> quotaExhaustedMarkers()
+{
+    // the built-in OpenAI client declares these three
+    return List.of("insufficient_quota", "credit_balance_exhausted", "billing_hard_limit_reached");
+}
+```
+
+The message the caller receives is fixed text ("The AI provider quota or credit balance is exhausted ... Retrying will not help"), never the provider's own error body. That body, which can echo account details, goes to the server log only. Inside a plan, a quota error aborts the whole run instead of failing a single node.
 
 ## AbstractLlmClient base class
 
@@ -440,46 +479,44 @@ public class HuggingFaceClient extends AbstractLlmClient
 
 ### nu-extract (with extra parameters)
 
+The NuExtract client reads a PDF through the NuMind platform. It declares several extras and refuses streaming, because the platform answers in one piece. See [Extract data with NuExtract](../how_to/configure_llm_providers.md#nuextract-document-extraction) for how it is configured and called.
+
 ```java
 @Service("nu-extract")
 public class NuExtractClient extends AbstractLlmClient
 {
-    public static final String EXTRA_MODEL_ID = "modelId";
+    public static final String EXTRA_PROJECT = "project";
+
+    public static final String EXTRA_OUTPUT = "output";
 
     @Override
     public List<ExtraParamDescriptor> getExtraParamDescriptors()
     {
-        return List.of(new ExtraParamDescriptor(EXTRA_MODEL_ID,
-                "Model ID override (defaults to modelName if absent)"));
+        return List.of(
+                new ExtraParamDescriptor(EXTRA_PROJECT,
+                        "With a document: the NuMind project (sprj_...) to extract with. "
+                                + "Empty: the message carries the template"),
+                new ExtraParamDescriptor(EXTRA_OUTPUT,
+                        "With a document: values, positions or values-and-positions (default)"));
+                // ... rasterizationDPI, enableThinking, thinkingTokenBudget, loopDetection
     }
 
     @Override
     public ChatModel createChatModelInstance(LlmModelConf params)
     {
-        String modelId = resolveModelId(params, params.getModelName());
         return new NuExtractChatModel(params.getEndpointUrl(), params.getApiSecret(),
-                params.getModelName(), modelId);
+                params.getModelName(), projectOf(params), outputOf(params), settingsOf(params));
     }
 
     @Override
     public StreamingChatModel createStreamingChatModelInstance(LlmModelConf params)
     {
-        String modelId = resolveModelId(params, params.getModelName());
-        return new NuExtractStreamingChatModel(params.getEndpointUrl(), params.getApiSecret(),
-                params.getModelName(), modelId);
-    }
-
-    private String resolveModelId(LlmModelConf params, String resolvedModelName)
-    {
-        Map<String, String> extras = params.getExtras();
-        if (extras != null && extras.containsKey(EXTRA_MODEL_ID))
-        {
-            return extras.get(EXTRA_MODEL_ID);
-        }
-        return resolvedModelName;
+        throw new LlmCapabilityException("NuExtract answers in one piece: send this request without streaming");
     }
 }
 ```
+
+A client that cannot stream throws `LlmCapabilityException` from `createStreamingChatModelInstance`. The REST API then answers `422` on `POST /api/v1/requests/stream`, and the caller falls back to `POST /api/v1/requests`.
 
 ## Provider parameter support
 
@@ -489,15 +526,15 @@ Each provider uses a different subset of `LlmModelConf` fields:
 |---|---|---|---|---|---|---|---|---|---|
 | `apiSecret` | x | x | x | | x | x | | x | x |
 | `endpointUrl` | opt | x | x | | | x | x | | x |
-| `temperature` | x | x | x | | x | x | x | x | |
+| `temperature` | x | x | x | | x | x | x | x | x |
 | `topP` | x | x | x | | x | x | x | | |
 | `topK` | | x | | | x | | x | | |
-| `maxTokens` | x | x | x | | x | x | x | x | |
+| `maxTokens` | x | x | x | | x | x | x | x | x |
 | `maxRetries` | x | x | x | x | x | x | x | | |
 | `timeout` | x | x | x | | x | x | x | x | |
 | `presencePenalty` | x | | x | | | | | | |
 | `frequencyPenalty` | x | | x | | | | | | |
-| `seed` | | | | | | x | x | | |
+| `seed` | | | | | | x | x | | x |
 | `extras` | | | | x | | | | | x |
 
 ## Write a custom provider

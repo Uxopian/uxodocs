@@ -8,67 +8,47 @@ last_update:
 content_hash: 1ba1159addef4b04acd195eb1db77ccfda36ac232b9d3a5036b72c6b2723c679
 ---
 
-The dashboard is the landing page of the admin panel (route `/`). It gives administrators a summary of tenant activity and direct access to each management section.
+The dashboard is the landing page of the admin panel (route `/`). It greets the signed-in user, shows the tenant, and gives administrators a summary of the tenant's activity over the last week. The other sections are reached from the navigation rail, not from the dashboard.
 
 ![The admin dashboard with summary cards, activity charts, and LLM usage distribution](../images/dashboard.png)
 
-*Figure: the dashboard — summary cards, weekly activity, and LLM usage distribution.*
+*Figure: the dashboard (screenshot taken before the 2026.0.0 redesign).*
 
-## Stats cards
+## Greeting
 
-Four cards are displayed at the top with sparkline charts:
+The page heading reads *Hi* followed by your user ID, with your tenant ID as subtitle. They come from `GET /api/v1/users/me`, which returns the `id` and `tenantId` of the authenticated caller.
 
-| Card | Description |
+## Week at a glance
+
+Four tiles summarize the last week:
+
+| Tile | Description |
 |---|---|
-| Total requests | Number of LLM requests processed |
-| Conversations | Number of distinct conversations |
-| Total tokens | Sum of input and output tokens |
-| Time saved | Cumulative time saved across all prompts (hours) |
+| Requests this week | Number of LLM requests processed, with a sparkline |
+| Tokens this week | Sum of input and output tokens, with a sparkline. Since 2026.0.0 it counts every completion of a tool-calling loop, not only the last one |
+| Time saved this week | Time saved across all prompts, with a sparkline |
+| Most used model | The model that served the most requests |
 
-Data is fetched from `GET /api/v1/admin/stats/global`.
+## Activity and distribution
 
-## Activity charts
+- **Activity**: two charts, *Requests per day* and *Tokens per day*.
+- **Distribution**: the LLM usage breakdown by model, and the top prompts by time saved.
 
-Below the stats cards, two charts show recent activity:
-
-- **Time series**: request volume over recent days.
-- **LLM distribution**: model usage breakdown by provider.
-
-Both charts use the same Stats API endpoints as the full [Statistics](./monitoring_statistics.md) page, with a default `DAY` interval.
+Both sections use the same Stats API endpoints as the full [Statistics](./monitoring_statistics.md) page, with a `WEEK` interval.
 
 ```mermaid
 graph TD
-    A[Dashboard] --> B[Stats cards<br/>Requests / Conversations /<br/>Tokens / Time saved]
-    A --> C[Activity charts<br/>Time series / LLM distribution]
-    A --> D[Feature cards]
-    D --> D1[Prompts]
-    D --> D2[LLM Providers]
-    D --> D3[Users]
-    D --> D4[Statistics]
-    A --> E[Resource links]
-    E --> E1[Documentation site]
-    E --> E2[Swagger UI]
+    A[Dashboard] --> B[Greeting<br/>user and tenant]
+    A --> C[Week tiles<br/>Requests / Tokens / Time saved / Top model]
+    A --> D[Activity<br/>Requests per day / Tokens per day]
+    A --> E[Distribution<br/>LLM usage / Top prompts]
 ```
 
-*Figure: Dashboard layout and navigation targets.*
-
-## Feature cards
-
-A grid of cards links to the admin sections:
-
-| Card | Section | Target route |
-|---|---|---|
-| Prompts | AI | `/prompts` |
-| LLM Providers | AI | `/llm-providers` |
-| Users | Analytics | `/users` |
-| Statistics | Analytics | `/statistics` |
+*Figure: Dashboard layout.*
 
 ## Resource links
 
-Two external links are displayed at the bottom of the feature grid:
-
-- **Documentation**: opens the product documentation site.
-- **Swagger UI**: opens the interactive API explorer at the configured API endpoint (`/swagger-ui/index.html`).
+The **Documentation** and **Swagger UI** links are at the bottom of the navigation rail. Swagger UI opens the interactive API explorer; its address is resolved from the `swaggerEndpoint` attribute of the admin element when set, then from `apiEndpoint`, then from the address the panel is served at. Set `swaggerEndpoint` to aim the link at the gateway Ingress.
 
 ## Related pages
 
