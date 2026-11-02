@@ -225,57 +225,32 @@ Every persisted request now carries `toolCalls` (type, name, arguments, result o
 
 ### From v2026.0.0-ft5
 
-1. **Mandatory internal auth secret (action required for every non-Helm deployment).** `internal-auth.jwt.secret` (env `INTERNAL_AUTH_JWT_SECRET`) is now required in every profile, dev included. Before, an unset secret meant no verification and bare `X-User-*` headers were trusted. Now ai-standalone **refuses to start** without it. It must be at least 32 bytes and identical to the gateway's `internal-auth.jwt.secret`. Add it to your Docker, Java, and compose configurations. The Helm chart already required it since ft5, and also accepts `appConfig.internalAuth.existingSecret` (a Secret carrying key `INTERNAL_AUTH_JWT_SECRET`) as an alternative to `--set-file`.
+No automatic migration is provided between fasttrack versions, so the upgrade is a **new installation plus a transfer of your data**. Here is what to do and what changes for your integrations. The details of every endpoint are in the [REST API reference](/docs/uxopian-ai/reference/rest_api).
 
-2. **Applications are now Usage Profiles (action required).**
-   - Before: `/api/v1/admin/application/application-conf[/{id}]`, header `X-Application-Id`, index `application_configurations`.
-   - After: `/api/v1/admin/usage-profiles[/{id}]` (flat path), header `X-Usage-Profile-Id`, index `usage_profiles`.
-   - **Existing Applications are not migrated.** Re-create them as usage profiles (system prompt, default provider and model, tool whitelist and tags), or let the auto-created default profile be used. Update any gateway configuration, script, or integration that sends `X-Application-Id` or calls the old path. Custom plugin code using `ApplicationConfId` must use `UsageProfileId`.
+#### 🚚 Your data
 
-3. **LLM call resolution changed (action required).**
-   - `llm_provider`, `llm_model`, `temperature`, and `reasoning` query parameters on conversation and request endpoints are **ignored** (not rejected). The web-components `executeRequest(payload, {llm_provider, llm_model})` option is gone. Set the provider and model on the prompt or on the usage profile instead.
-   - There is **no fallback on `llm.default.*` at call time**. A call with no provider on the prompt or the usage profile fails with "No LLM provider for this call". `llm.default.provider` and `llm.default.model` now only fill the usage profile auto-created for a connection provider.
-   - A stored prompt `temperature` outside 0 to 2 is rejected on the next save.
-   - An agent no longer carries provider, model, or temperature: they come from its objective prompt.
-   - A usage profile's prompt now **replaces** the default base prompt rather than being added to it. If you relied on the base prompt's persona or safety rules, copy them into the profile prompt.
+1. **Transfer your data (action required).** The data model changed since ft5: new fields and indices, Applications replaced by usage profiles, entities identified by id. Export what you need (prompts, agents, plans, scripts, MCP servers, LLM providers, usage profiles) from the ft5 deployment and re-create it in 2026.0.0, or start fresh. Existing conversations and requests are not carried over unless you transfer them yourself. Applications become usage profiles: re-create them, or let the default profile be created on first use.
 
-4. **Plan execution control changed (action required for scripts).** `POST /api/v1/admin/plan-executions/{id}/pause`, `/resume`, and `/stop` are removed. Use `POST /api/v1/admin/plan-executions/{id}/signal` with body `{ "type": "PAUSE" | "RESUME" | "STOP" }` (400 on a missing or unknown type, 404 for an unknown execution, 409 when the state does not allow it).
+#### 🛠️ Installation
 
-5. **Admin list endpoints are paginated pages of summaries (action required for REST integrators).**
-   - Before: a bare JSON array of full entities.
-   - After: `{ "collection": [...], "total": n, "facets": {...} }`, items are summaries. Affected: `GET /api/v1/admin/prompts`, `/plans`, `/plan-executions`, `/scripts`, `/agent/agent-conf`, `/mcp/mcp-conf`, `/llm/provider-conf`, `/usage-profiles`, `/code-modules`, `/users/statistics`. Fetch the full entity with `GET .../{id}`.
-   - Parameters: `offset`, `limit` (default 20), `orderBy`, `ascending`. `offset + limit` must stay at or below 10 000 (400 otherwise); an unknown sort column answers 400 listing the valid ones.
-   - `GET /api/v1/admin/prompts/{id}` now returns `{ id, active, draft, versions: [...summaries], tags, ... }`. `GET /api/v1/admin/prompts/{id}/versions` (list) and `GET /api/v1/admin/prompts/{id}/tags` are removed; `GET /api/v1/admin/prompts/{id}/versions/{version}` still returns one version. In `GET /api/v1/admin/prompts/{id}/usage`, `referencedBy` is replaced by `usedBy` (usage profiles and agents). Request listings (`GET /requests?conversation=`) return summaries without `contextPayload`.
-   - The bundled admin UI is updated.
+2. **Internal auth secret (action required).** `INTERNAL_AUTH_JWT_SECRET` is now required in every deployment, dev included: without it, uxopian-ai refuses to start. It must be at least 32 bytes and identical to the gateway's `internal-auth.jwt.secret`. Add it to your Docker, Java and compose configurations. The Helm chart already required it.
+3. **Kubernetes (action required).** The Helm chart always renders a NetworkPolicy: only the gateway can reach the API. Add any other direct caller (FlowerDocs or ICN pod, Prometheus) to `networkPolicy.allowedClients`, and check that your cluster enforces NetworkPolicy. Remove `appConfig.openSearch.forceRefresh` from your values.
+4. **Embedding and clustering.** The admin console and the viewer can no longer be framed in an iframe: embed through the web components. Nodes no longer find each other by Hazelcast auto-detection: on a single node or on a network without multicast, set `HAZELCAST_MULTICAST_ENABLED=false`.
 
-6. **Entities are identified by `id` alone (action required for REST integrators).** Scripts, MCP servers, usage profiles, and code modules lose their redundant `name` field: create with `id` only, read `id` in responses, and sort with `orderBy=id` (`orderBy=name` answers 400).
+#### 🔌 Integrations
 
-7. **Documents and files in requests (action required for REST integrators).**
-   - Content `type: "image"` is rejected: send `"base64"`. No automatic migration of existing data is provided: stored `"image"` contents of existing requests are kept as they are, and older conversations with images may not display those images.
-   - Inline file data is no longer part of request or conversation JSON: read it from `GET /api/v1/requests/{request_id}/inputs/{input}/contents/{content}`.
-   - Sending a document requires `documentSupported` on the model; inline base64 above 5 MB is refused with 413.
-
-8. **Provider error codes changed (action required for retry logic).** Rate limit: `429 LLM_RATE_LIMITED` (was 400 `LLM_BAD_REQUEST` "Token limit exceeded"). Timeout: `504 LLM_TIMEOUT` (was 500). Out of quota or credit: `402 LLM_QUOTA_EXCEEDED` (was 500), and it must not be retried. Streaming clients must handle a non-200 status when the stream opens.
-
-9. **Helm: NetworkPolicy is always rendered (action required on Kubernetes).** The ai-standalone API port accepts only `networkPolicy.allowedClients` (default: pods labelled `app.kubernetes.io/name: gateway-service` in the release namespace); the Hazelcast port (5701) accepts only other replicas; egress is open. There is no switch to disable it, and an empty `allowedClients` fails the render. Add any other direct caller (a FlowerDocs or ICN pod, Prometheus) to `networkPolicy.allowedClients`, check that the labels match your gateway chart, and make sure your CNI enforces NetworkPolicy. Remove `appConfig.openSearch.forceRefresh` from custom values (the property `opensearch.force-refresh-index` and env `OPENSEARCH_FORCE_REFRESH_INDEX` no longer do anything).
-
-10. **Transfer your data (action required).** The OpenSearch data model changed since ft5: new fields and indices, Applications replaced by usage profiles, entities identified by id. No automatic migration is provided between fasttrack versions. Export what you need (prompts, agents, plans, scripts, MCP servers, LLM providers, usage profiles) from the ft5 deployment and re-create it in 2026.0.0, or start on new indices. Existing conversations and requests are not carried over unless you transfer them yourself.
-
-11. **NuExtract providers must be reconfigured (action required if you use NuExtract).** The legacy `POST {endpointUrl}/{modelId}/extract` call is removed, as are the `modelId` extra and the YAML `model-id` key. Change the provider endpoint to `https://bbox.nuextract.ai`, remove `modelId`, and set the extra `project: sprj_...` (or start your prompt with the JSON template). Expect a different answer shape (`{"result", "localization"}`), no streaming (422), and rewrite prompts built for the legacy flow.
-
-12. **Custom plugins must be recompiled (action required for plugin authors).** The `integration-api` module moved packages (`com.uxopian.ai.model.user`, `model.context`, `common.context`, `model.command`, `model.id`), `AiContext` and `AuthenticatedUser` are immutable (copy methods instead of setters), `AuthenticatedUser.isAdmin()` is removed, and `HostActionDispatcher` is renamed `ClientActionDispatcher`. Rebuild your plugins and fix the imports.
-
-13. **Web components: `createChat` and `openChat`.** `window.createChat` now requires `request`, and its `promptId` option is removed (it never worked). To launch a prompt, put a `PROMPT` input in the request. `window.openChat` reopens the conversation you pass through `request`.
-
-14. **Gateway assertions need `exp`.** A hand-made `X-Gateway-Auth` token without an `exp` claim is refused. The official gateway is not affected.
-
-15. **Tooling that reads OpenAPI:** `/v3/api-docs/Admin` and `/v3/api-docs/User` no longer exist. Use `/v3/api-docs`, or one of the per-type groups (`/v3/api-docs/<group>`). SDK generation, gateway allow-lists, and contract tests that pointed at the old groups need updating.
-
-16. **Hazelcast and iframes.** If your deployment silently relied on Hazelcast auto-detection (for example a Docker network without multicast and without Kubernetes mode), nodes no longer cluster: set `HAZELCAST_MULTICAST_ENABLED=false` for single-node setups. The admin console and viewer can no longer be framed (`frame-ancestors 'none'`); embed through the web components instead.
-
-17. **Behaviour to expect.** Token totals for tool-using conversations are higher than under ft5 because every completion in a tool loop is now counted (historical data is not recomputed).
-
-18. **No migration needed** for code modules, the review screen, the filesystem connector, and structured output: all are new and opt-in.
+5. **REST changes (action required for REST integrators).**
+   - Applications are now usage profiles: `/api/v1/admin/usage-profiles` instead of `/api/v1/admin/application/application-conf`, header `X-Usage-Profile-Id` instead of `X-Application-Id`.
+   - Admin lists answer pages `{ collection, total, facets }` of summaries with `offset` and `limit`, instead of a bare array.
+   - Scripts, MCP servers, usage profiles and code modules are identified by `id` alone: the `name` field is gone.
+   - Content type `image` is renamed `base64`, and inline file data is read through a dedicated route instead of being part of the request JSON.
+   - Provider errors: `402` for an exhausted quota (do not retry), `429` for a rate limit, `504` for a timeout.
+   - Plan runs are controlled by a single `POST .../plan-executions/{id}/signal` instead of `/pause`, `/resume` and `/stop`.
+   - OpenAPI groups are now one per type: `/v3/api-docs/Admin` and `/v3/api-docs/User` no longer exist.
+6. **Which model answers (action required).** The provider and model now come from the prompt, then from the usage profile of the calling surface. The `llm_provider`, `llm_model`, `temperature` and `reasoning` query parameters are ignored, and there is no fallback on `llm.default.*` at call time: a call without a provider fails. A usage profile's prompt replaces the default base prompt instead of being added to it.
+7. **Web components.** `window.createChat` now requires `request` and loses `promptId`; to launch a prompt, put a `PROMPT` input in the request.
+8. **NuExtract (action required if you use it).** Point the provider at `https://bbox.nuextract.ai`, remove `modelId`, and set the extra `project: sprj_...` (or start your prompt with a JSON template). The answer shape is now `{"result", "localization"}`, with no streaming.
+9. **Custom plugins (action required for plugin authors).** Rebuild your plugins and fix the imports: the integration API moved packages, `AiContext` and `AuthenticatedUser` are immutable, and `HostActionDispatcher` is now `ClientActionDispatcher`.
 
 ---
 
