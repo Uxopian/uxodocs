@@ -48,8 +48,11 @@ The component has no intrinsic height — you must set a height explicitly (e.g.
 |-----------|----------|-------------|
 | `rendition` | Yes | URL of the ARender rendition backend. Use `/` when proxied via Nginx or Ingress. |
 | `document` | No | Query string of the parameters identifying the document to open on startup. See [Parameter contract](#parameter-contract). |
+| `analytics-token` | No | Mixpanel project token that turns [product analytics](../concepts/product-analytics.md) on. Without it, nothing is reported. |
+| `analytics` | No | `false` switches product analytics off entirely: no request to Mixpanel, and the Mixpanel library is not loaded. Defaults to `true`. |
+| `analytics-host` | No | Address product analytics sends its events to. Defaults to `https://api-eu.mixpanel.com`. |
 
-The `document` attribute is read **once, when the component mounts**. Changing its value afterwards has no effect — to display another document at runtime, call [`openDocument()`](#javascript-api).
+The `document` and `analytics*` attributes are read **once, when the component mounts**. Changing their values afterwards has no effect — to display another document at runtime, call [`openDocument()`](#javascript-api).
 
 Its value follows the same rules as the JavaScript API, encoding included, so build it with `encodeURIComponent` rather than pasting a raw URL. A plain HTML attribute cannot compute its own value: either percent-encode it by hand, or set it from a script before importing `arender-ui`, as shown above.
 
@@ -156,3 +159,4 @@ await viewer.ARender.openDocument('url=' + encodeURIComponent('https://example.c
 
 - [Opening documents](../guides/features/opening-documents.md): every supported way to request a document
 - [Providers](../guides/integration/providers.md): the parameters each repository expects
+- [Product analytics](../concepts/product-analytics.md): what the viewer reports, and how to switch it off

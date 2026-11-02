@@ -1,5 +1,4 @@
 ---
-viewer: classic
 title: Product analytics
 slug: /concepts/product-analytics
 sidebar_position: 7
