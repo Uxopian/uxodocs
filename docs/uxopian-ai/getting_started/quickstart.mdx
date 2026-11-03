@@ -115,6 +115,10 @@ To access the admin UI, open the admin element page. Since 2026.0.0-ft5, `DevPro
 
 ## Configuration notes
 
+**Internal authentication secret.** The compose file sets `INTERNAL_AUTH_JWT_SECRET` on both `uxopian-ai` and `uxopian-gateway`, with a demo default. uxopian-ai refuses to start without it, in every profile. Put your own value (`openssl rand -base64 48`) in `.env` for anything but a local test.
+
+**Usage profile.** The first request of a surface (chat, Quick Prompt) creates a *usage profile* for it, which holds its tool permissions and its default provider and model. `LLM_DEFAULT_PROVIDER` and `LLM_DEFAULT_MODEL` only fill that profile. A prompt that names its own provider and model uses them instead. Edit the profile in the admin console under **Usage profiles**. See [Configure LLM providers](../how_to/configure_llm_providers.md#which-provider-and-model-runs-a-call).
+
 The gateway configuration (`gateway-application.yaml`) routes all traffic to `uxopian-ai:8080` using `DevProvider`. The admin API routes (`/api/v1/admin/**`) are marked public in this example.
 
 The `uxopian-ai` container is not exposed to the host. All browser traffic goes through port 8085 on the gateway.

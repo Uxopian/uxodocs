@@ -62,13 +62,13 @@ If tools are disabled via `tools.enabled=false` (or `TOOLS_ENABLED=false`), the 
 
 ## Filtering tools by tag
 
-`@ToolService.tags()` was added in 2026.0.0-ft3. Before 2026.0.0-ft5, `plugins.tools.enabled-tags` used those tags to control which tool sets got *registered* at startup. **Since 2026.0.0-ft5, registration is unconditional: every `@ToolService` in every plugin JAR under `plugins/` is always registered**, regardless of tags or `enabled-tags`. What a given caller actually sees is now controlled per [Application](../admin/managing_applications.md) (its tool/tag whitelist) — `plugins.tools.enabled-tags` only seeds the default whitelist on the Application auto-created the first time a connection provider is used.
+`@ToolService.tags()` was added in 2026.0.0-ft3. Before 2026.0.0-ft5, `plugins.tools.enabled-tags` used those tags to control which tool sets got *registered* at startup. **Since 2026.0.0-ft5, registration is unconditional: every `@ToolService` in every plugin JAR under `plugins/` is always registered**, regardless of tags or `enabled-tags`. What a given caller actually sees is now controlled per [usage profile](../admin/managing_applications.md) (its tool/tag whitelist; usage profiles were called *Applications* before 2026.0.0) — `plugins.tools.enabled-tags` only seeds the default whitelist on the usage profile auto-created the first time a connection provider is used.
 
 See [Plugin system — Filtering tools by tag](./plugin_system.md#filtering-tools-by-tag) for the full mechanism and test-time usage.
 
 ## Function-calling model requirement
 
-Tools require a model that supports function calling. If a prompt has `requiresFunctionCallingModel: true`, the LLM provider must have a model configured with `functionCallSupported: true`. If `reasoningDisabled: true` is set on a prompt, tool specifications are not sent to the LLM for that request.
+Tools require a model that supports function calling. If a prompt has `requiresFunctionCallingModel: true`, the LLM provider must have a model configured with `functionCallSupported: true`. If `reasoningDisabled: true` is set on a prompt (the *Can use tools* switch of the prompt editor, turned off), tool specifications are not sent to the LLM for that request. An agent ignores this flag: its own tool permissions decide which tools it gets.
 
 ## Standardized ECM tool names
 
@@ -176,7 +176,9 @@ The `filenet` plugin (tag `filenet`) ships CE-SQL-backed tools across several `@
 |---|---|
 | `readDocumentText` | Reads the full OCR text of a document (via ARender) across all pages |
 | `getDocumentMetadata` | Returns all metadata properties (system + custom class) of a document |
-| `fileNetListFolderContents` | Lists documents in a folder (unfiltered, max 50) |
+| `fileNetFindFolders` | Finds folders whose name contains a text (case-insensitive) and returns the path and ID of each. Call it first when the user names a folder without giving its full path |
+| `fileNetListSubfolders` | Lists the folders under a path, at any depth |
+| `fileNetListFolderContents` | Lists documents in a folder and its subfolders (unfiltered, max 50) |
 
 The object store queried by these tools is resolved automatically from the current tenant — there is no `filenet.repository-id` setting to configure. `filenet.writable-properties` is configured but not yet wired to a callable tool; there is currently no LLM-callable way to update a FileNet document property.
 
@@ -197,11 +199,23 @@ Since 2026.0.0-ft4, two built-in tools let the assistant present **clickable cho
 | `presentChoices` | Presents a question with a list of option buttons (each with a label and optional description). An "Other…" option always lets the user type a free-text answer. |
 | `presentStepsChoices` | Presents a guided multi-step wizard: the user answers a short sequence of questions one at a time; all answers are submitted together at the end. |
 
-When the assistant calls one of these tools, the chat and [Quick Prompt](./quick_prompt.md) components render the options as buttons. The user's selection is sent back as an ordinary follow-up message, so the conversation continues normally. These tools are also used to obtain **explicit confirmation before destructive operations** (such as `revertToVersion` or applying a redaction).
+When the assistant calls one of these tools, the chat and [Quick Prompt](./quick_prompt.md) components render the options as buttons. The user's selection is sent back as an ordinary follow-up message, so the conversation continues normally. These tools are also used to obtain **explicit confirmation before destructive operations** (such as `revertToVersion` or applying a redaction): the description of a destructive tool tells the model to ask for confirmation through `presentChoices` (plain text renders no control) and what to do if the user refuses. This is carried by the tool description, not enforced by the server.
 
 :::note Custom chat UIs
 The assistant emits the choices as a JSON block in its message content; the standard chat and Quick Prompt components parse and render it automatically. A custom UI that displays raw assistant message content should detect and handle this JSON block.
 :::
+
+## Built-in tools: Flow control
+
+| Tool name | Description |
+|---|---|
+| `throwIfEmptyString` | Tag `flow`. Returns its `value` argument, or fails when it is blank. Placed in a [plan](./agentic_plans.md) as a `DIRECT_TOOL` node, it lets the plan branch: nodes set to run on success continue with the value, nodes set to run on error take the other path (see [execution condition](./agentic_plans.md#execution-condition-recovery-branches)). |
+
+## Code tools
+
+Besides Java `@Tool` methods and MCP tools, a tool can be written as a **code module** in the admin panel: a JavaScript module, with a published and a draft version, run in an isolated code sandbox. A code module that declares a `tool` section is callable from a `DIRECT_TOOL` plan node, from an agent, and from the chat (only when it is flagged *expose in chat*, and subject to the usage profile's tool permissions and tags). Code tools are listed with the other tools by `GET /api/v1/admin/tools`, each entry carrying a call type, `LOCAL` for a Java tool or `CODE` for a code module. Running them requires the code sandbox: when `code-sandbox.url` is unset, no code tool is offered.
+
+When two tools share a name, the tool is resolved in this order: MCP tool, native `@Tool`, plan exposed as a tool, code module. The name of a code module is checked against all of them when it is created.
 
 ## Tools and MCP
 

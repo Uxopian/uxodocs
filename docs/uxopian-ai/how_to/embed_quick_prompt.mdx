@@ -166,6 +166,7 @@ qp.destroy();      // detaches observers and removes the panel
 | Panel is empty | No enabled prompt, or display condition does not match | Enable prompts and review their display conditions in the admin panel |
 | Script returns 404 | Bundle not available or gateway route not configured | Verify `/api/web-components/quick-prompt/script` is reachable through the gateway |
 | Context not updating | Routes not matched or pushed imperatively | Check the `route` patterns (order matters) or call the `setDocument`/`setTask`/… methods on navigation |
+| The panel shows "The AI provider quota or credit balance is exhausted" instead of an answer | The provider answered `402 LLM_QUOTA_EXCEEDED`. The panel shows the `message` sent by the API | Top up the provider account. Retrying does not help. Network failures and `401` or `502` still read "No response received." |
 | CORS errors in the console | Host on a different origin than the gateway | Configure CORS at the gateway (the built-in permissive CORS is `dev`-profile only) |
 
 ## Related pages

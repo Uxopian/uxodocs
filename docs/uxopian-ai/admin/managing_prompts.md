@@ -12,103 +12,101 @@ The prompts section of the admin panel lets you view, create, edit, and delete p
 
 ## Navigate to prompts
 
-In the admin panel, click "Prompts" in the navigation. The page lists all prompts available for the current tenant, including globals and tenant-specific overrides.
+In the admin panel, click "Prompts" in the navigation. The page lists the prompts available for the current tenant, including globals and tenant-specific overrides. The list is paginated and filtered on the server: the search box and the filters (model, Quick prompt, tags) narrow the list, and columns can be sorted, resized, hidden and reordered (the layout is remembered). A prompt's **tags** are shown under its name and can be used as a filter (several tags match any of them). The **Used by** column names the usage profiles and agents that reference the prompt, with a dash for a prompt nothing uses.
+
+Click a row to open a quick view, use the arrow keys to walk through the list, and double-click a row to open the prompt for editing.
 
 ![The Prompts list showing each prompt's ID, role, and content excerpt](../images/prompts-list.png)
 
-*Figure: the Prompts list — each prompt shows its ID, role, and a content excerpt.*
-
-Since 2026.0.0-ft3, the prompts list uses a **stale-while-revalidate** cache: when you revisit the page, the previously loaded prompts are rendered immediately while a silent background request refreshes the list. A loading indicator is only shown on the first visit when no cached data is available.
+*Figure: the Prompts list.*
 
 ## Create a prompt
 
-1. Click "Add prompt".
-2. Fill in the required fields:
-   - **ID**: unique identifier. Used in request content items (`type: prompt`, `value: <id>`).
-   - **Role**: `SYSTEM`, `USER`, or `ASSISTANT`.
+1. Click "Create prompt".
+2. Fill in the cards of the editor. Only the **Prompt name** and the **Content** are required:
+   - **Prompt name**: unique identifier, used in request content items (`type: prompt`, `value: <id>`). A name already in use is reported while you type.
    - **Content**: Thymeleaf template text. Use `[[${variable}]]` for expressions.
-3. Set optional flags:
-   - **Requires multimodal model**: enable if the prompt includes images.
-   - **Requires function calling model**: enable if the prompt requires tool calling.
-   - **Disable reasoning**: enable to prevent tool calls during this prompt's processing.
-   - **Default LLM provider**: override the LLM provider for requests using this prompt.
-   - **Default LLM model**: override the LLM model.
-4. Save.
+   - **Model**: the role (`SYSTEM`, `USER`, or `ASSISTANT`), the LLM provider and model the prompt runs on, the temperature, and the capability switches (see below).
+   - **Answer format**: an optional structured answer format.
+   - **Time saved** and **Quick prompt**: optional, see below.
+3. Click "Create prompt".
 
 ## Prompt detail page
 
-Click on a prompt in the list to open its detail page (route `/prompts/:promptId`). Since 2026.0.0-ft5, every prompt is a **series of versions** with an explicit draft → publish lifecycle (UXOAI-216) rather than a single flat record: a **Published** version serves live traffic, an optional **Draft** holds in-progress edits, and every previously-published version is kept, browsable, and restorable from **History**.
+Click on a prompt in the list to open it (route `/prompts/:promptId`). Every prompt is a **series of versions** with an explicit draft → publish lifecycle: a **published** version serves live traffic, an optional **draft** holds in-progress edits, and every previously published version is kept, browsable, and restorable.
 
-The page has two levels of navigation, and they are two different widgets:
+The page is made of foldable cards — **Prompt name**, **Content**, **Model**, **Time saved**, **Quick prompt** — that show a one-line summary of their content when folded, so the whole prompt can be read at a glance. The editor always works on the **draft**: when no draft exists, it opens pre-filled with the published version's content, and nothing is saved until you act.
 
-- **Mode** — a segmented control (a pill-shaped group of buttons) in the action bar at the top of the page, next to the Save/Publish toolbar buttons: **Published**, **Draft**, **History** (only rendered once the prompt has more than one version), and **Statistics**. It selects *which version* you are working on. A small dot appears on **Draft** when a draft actually exists.
-- **Sub-views** — tabs in a vertical rail down the left side of the content card, listing what is available *for the selected mode*: **Overview** / **Test** in Published mode, **Edit** / **Display** / **Test** in Draft mode. History and Statistics modes have no sub-views, so the rail disappears entirely for them.
+At the top of the page:
+
+- A **version selector** (a badge showing the version you are on) lists every version in three groups: **In progress** (the draft), **Active** (the published version) and **Archived** (versions published before and then superseded). Choosing a version other than the draft opens it read-only, with its own usage figures.
+- A **usage badge** tells whether other entities use the prompt, and an **Unsaved** badge appears while edits have not been saved as a draft.
+- The **tags** of the prompt, which can be edited in place. Tags are not versioned: they belong to the prompt and are shared by all its versions.
+- The action bar: **Test**, **Discard** (only when there are unsaved edits), **Save draft**, **Publish**, and a "..." menu with **Discard draft…** (only when a draft exists) and **Delete prompt…**.
 
 ```mermaid
 graph LR
-    A[Prompt list] --> B[Prompt detail]
-    B --> P[Published mode]
-    B --> D[Draft mode]
-    B --> H["History mode<br/>(only once 2+ versions exist)"]
-    B --> S[Statistics mode]
-    P --> P1["Overview tab /<br/>Test tab"]
-    D --> D1["Edit tab /<br/>Display Settings tab /<br/>Test tab"]
-    H --> H1["No tab rail —<br/>version list + per-version stats + Restore"]
-    S --> S1["No tab rail —<br/>usage count / token cost /<br/>feedback chart / PDF export"]
+    A[Prompt list] --> B[Prompt page: draft cards]
+    B --> T[Test window]
+    B --> V[Version selector]
+    V --> P[Active version, read-only]
+    V --> H[Archived version, read-only]
+    H --> R[Restore as draft]
 ```
 
-*Figure: Prompt detail page — the mode segmented control at the top selects the version; the left tab rail selects the sub-view within that mode.*
+*Figure: Prompt page — the cards edit the draft; the version selector opens other versions read-only.*
 
-**Published mode** shows the live version read-only, with **Overview** (a summary of its settings and content) and **Test** sub-views — there is no Edit sub-view here, since a published version can never be edited directly (attempting to update a non-draft version is rejected with `409 Conflict`).
+The actions of the editor:
 
-**Draft mode** (also used when creating a new prompt) is where editing actually happens, with **Edit**, **Display**, and **Test** sub-views. Opening Draft mode when no draft exists yet pre-fills the editor with the published version's content — nothing is saved until you act. The toolbar in this mode offers:
-
-- **Save Draft** — persists your edits as the draft (creates one on first save if none existed yet: `POST /api/v1/admin/prompts/{id}/versions`, then `PUT .../versions/{version}` on subsequent saves). The draft is never live; only publishing makes it so.
-- **Publish** — promotes the current draft to Published (`PUT .../versions/{version}` with `draft:false`). The previously-published version becomes an archived entry in History.
-- **Discard** — deletes the draft without publishing, keeping the currently-published version untouched (`DELETE .../versions/{version}`).
-- **Reset** — reverts unsaved edits in the editor back to the last-saved draft (or published content), without calling the API.
-
-An unsaved-changes badge appears while edits haven't been saved as a draft; the Test sub-view is disabled until you save.
+- **Save draft** persists your edits as the draft (creates one on first save if none existed yet: `POST /api/v1/admin/prompts/{id}/versions`, then `PUT .../versions/{version}` on subsequent saves). The draft is never live; only publishing makes it so.
+- **Publish** promotes the current draft to Active (`PUT .../versions/{version}` with `draft:false`) after a confirmation. The previously published version becomes an archived entry. A published version can never be edited directly: attempting to update a non-draft version is rejected with `409 Conflict`.
+- **Discard** reverts unsaved edits in the editor to the last saved state, without calling the API.
+- **Discard draft…** deletes the draft without publishing, keeping the published version untouched (`DELETE .../versions/{version}`).
 
 :::tip[The point of a draft: try it for real before it goes live]
-A draft isn't limited to the admin Test sub-view — any caller can target it directly from a normal conversation request by setting the `version` field on a `type: prompt` content item (see [Conversations and requests](../understanding/conversations_and_requests.md#content-types)) to the draft's version number. That's what the draft → publish separation is actually for: validate the new wording against real conversations, real payloads, and real callers first, with zero risk to the currently published version, then **Publish** once you're satisfied.
+A draft isn't limited to the admin Test window — any caller can target it directly from a normal conversation request by setting the `version` field on a `type: prompt` content item (see [Conversations and requests](../understanding/conversations_and_requests.md#content-types)) to the draft's version number. That's what the draft → publish separation is actually for: validate the new wording against real conversations, real payloads, and real callers first, with zero risk to the currently published version, then **Publish** once you're satisfied.
 :::
 
-### Edit sub-view
+### Content card
 
-The left pane contains a Thymeleaf template editor with auto-completion. The editor fetches completion metadata from `GET /api/v1/admin/templating/completion`, providing suggestions for available service helpers and variables.
+A Thymeleaf template editor with auto-completion. The editor fetches completion metadata from `GET /api/v1/admin/templating/completion`, providing suggestions for available service helpers and variables, and keeps suggesting a path's fields while you type (`user.us`).
 
 Since 2026.0.0-ft4, the editor also autocompletes the **context variables** available to [Quick Prompt](../understanding/quick_prompt.md) templates. Typing inside a `[[${ … }]]` expression suggests the root variables (`tenant`, `user`, `documents`, `tasks`, `folders`, `injected`, `capabilities`), their object properties after a dot (e.g. `${user.` → `username`, `roles`, …), and array-item attributes (e.g. `${documents[0].` → `title`, `properties`, `tags`, …). Each suggestion shows its type and a short description.
 
-The right pane contains the settings panel:
+### Model card
 
 | Setting | Description |
 |---|---|
 | Role | `SYSTEM`, `USER`, or `ASSISTANT` |
-| Temperature | Sampling temperature override (0.0 to 2.0) |
-| Default LLM provider | Override the provider for requests using this prompt |
-| Default LLM model | Override the model for requests using this prompt |
-| Time saved estimation | Estimated time saved per execution (used in statistics) |
-| Requires multimodal | Model must support image inputs |
-| Requires function calling | Model must support tool calling |
-| Disable reasoning | Prevent tool calls during processing |
+| LLM provider and model | The provider and model this prompt runs on. They take precedence over the [usage profile](./managing_applications.md#resolution-order)'s defaults; when the prompt names none, the usage profile's are used. There is no system-wide fallback |
+| Temperature | Sampling temperature, a number between 0 and 2 (default 1). A value outside this range is refused when saving. The default was 0 before 2026.0.0, which made some reasoning models answer `400` |
+| Can use tools | When off, no tool is offered to the model for this prompt (the `reasoningDisabled` flag, inverted) |
+| Only on models that can use tools | The prompt refuses to run on a model that cannot call tools (`requiresFunctionCallingModel`) |
+| Only on models that read images | The prompt refuses to run on a model that cannot read images and files (`requiresMultiModalModel`) |
 
-Use **Save Draft** (see above) to persist changes — nothing here is live until you also **Publish**.
+### Answer format card
 
-### Display Settings sub-view (Quick Prompt)
+Leave it empty for a free-text answer. Otherwise the answer must follow a structure, and reaches the caller as JSON. Two syntaxes are available, chosen with a segmented control:
 
-Since 2026.0.0-ft4, the **Display** sub-view (titled *Display Settings*, available in Draft mode) controls whether and how the prompt appears in the [Quick Prompt](../understanding/quick_prompt.md) panel. A prompt is offered in Quick Prompt only when it is **enabled here** and its **display condition** matches the current context.
+- a **simple notation**, such as `{ "answer": "string: the answer in one sentence", "sources": ["string"] }`: each field has a type (`string`, `number`, `integer` or `boolean`) optionally followed by `: description`, `{ }` makes an object and `[ ]` a list. It is converted to a strict JSON Schema in which every field is required;
+- a **JSON Schema**.
+
+Errors are shown on the field and Save is disabled while the format is invalid. This stores the `outputSchema` of the prompt version.
+
+### Quick prompt card
+
+Since 2026.0.0-ft4, this card controls whether and how the prompt appears in the [Quick Prompt](../understanding/quick_prompt.md) panel. A prompt is offered in Quick Prompt only when it is **enabled here** and its **display condition** matches the current context.
 
 ![The Display Settings tab of a prompt, with label, category, priority, description, and a display-condition editor](../images/prompt-display-settings.png)
 
-*Figure: the Display Settings tab. The display-condition editor validates the expression and provides a test panel with a sample context.*
+*Figure: the display settings of a prompt. The display-condition editor validates the expression and provides a test panel with a sample context.*
 
 | Setting | Description |
 |---|---|
 | Enabled | Whether the prompt is offered in Quick Prompt |
 | Label | Short title shown on the prompt card |
 | Category | Free-form category used to group prompt cards. The selector suggests categories already in use across the tenant. |
-| Priority | Ordering of prompt cards (higher priority appears first) |
+| Priority | Ordering of prompt cards (lower numbers show up first in Quick Prompt) |
 | Description | Markdown description shown to the user under the prompt card |
 | Display condition | A JavaScript expression evaluated client-side against the current context; the prompt is shown only when it returns `true` |
 
@@ -119,33 +117,36 @@ documents.length === 1 && documents[0].type === 'pdf'
 user.roles.includes('REVIEWER')
 ```
 
+The condition editor is a single card that expands whole. Conditions on data keys named like reserved properties (for example `properties.__type`) are read instead of silently evaluating to `false`.
+
 End users only ever receive the display settings (label, category, priority, description, condition) — never the prompt's template content or LLM configuration.
 
-### Test sub-view
+### Test window
 
-Available in both Published and Draft mode — lets you execute that specific version interactively. It is disabled in Draft mode while there are unsaved changes; save the draft first.
+**Test** opens a window from the page header. It stays available while the form has unsaved edits: it runs a **saved** version, picked in its own version selector (the draft, the active version, or an archived one), and says so — **unsaved edits in the editor are not included**, and opening the window keeps them. Save the draft first to test your latest wording.
 
-1. The tester auto-detects variables from the template content.
-2. Fill in variable values. For multimodal prompts, upload images directly.
-3. Click "Execute" to send the prompt to the configured LLM provider.
+1. The tester auto-detects the variables of the template.
+2. Fill in variable values. A value can be text or an uploaded image.
+3. Click "Run" (or press Ctrl+Enter) to send the prompt to the configured LLM provider.
 4. View the response, response time, and token usage.
-5. Use the "Copy cURL" button to generate a reproducible cURL command.
 
-The test calls the render endpoint, targeting the draft's version number when testing from Draft mode:
+A second version can be picked to **compare** the two answers side by side with the same values ("Run both"). The previous answer is cleared when the version or the content changes, and results are not kept when the window is closed.
+
+The test calls the render endpoint, targeting the selected version number:
 
 ```
 GET /api/v1/admin/prompts/{id}/render?version={version}
 ```
 
-### History mode
+### Archived versions and restore
 
-Only shown once a prompt has more than one version. A two-pane view: the left pane lists every version (newest first) with a status badge — **DRAFT**, **ACTIVE** (currently published), or **ARCHIVED** (a version that was published before, then superseded) — and its last-updated date. Selecting a version in the list shows its settings/content summary and its own **per-version statistics** on the right.
+Selecting an **archived** version in the version selector shows its settings, content and its own **per-version statistics** (usage count, token cost, feedback) read-only. A **Restore as draft** button copies that version's content into the draft (`POST .../versions` with the old content); publish it afterwards to make it live. A confirmation dialog warns that this overwrites any existing draft. It does not resurrect the old version number: publishing creates a new one with the old content.
 
-For any **ARCHIVED** version, a **Restore this version** button is available. Restoring copies that version's content into a new draft and immediately publishes it (`POST .../versions` with the old content, then `PUT .../versions/{version}` with `draft:false`) — it does not resurrect the old version number, it creates a new one with the old content. A confirmation dialog warns that this overwrites any existing draft.
+Each version carries who created it and when it was last updated; versions stored before 2026.0.0 only get these stamps on their next write.
 
-### Statistics mode
+### Statistics
 
-Usage analytics **aggregated across every version** of the prompt (per-version breakdowns live in History instead):
+Usage analytics **aggregated across every version** of the prompt (per-version figures are shown when you open a version instead):
 
 | Metric | Description |
 |---|---|
@@ -155,33 +156,35 @@ Usage analytics **aggregated across every version** of the prompt (per-version b
 | Feedback distribution | Pie chart of user feedback (positive, negative, neutral) |
 | Time saved | Cumulative time saved based on the estimation setting |
 
-Use the "Export PDF" button to download the statistics view as a PDF file.
-
-Fetched from `GET /api/v1/admin/prompts/{id}/statistics` (aggregate) or `GET /api/v1/admin/prompts/{id}/versions/{version}/statistics` (the per-version figures shown in History).
+Fetched from `GET /api/v1/admin/prompts/{id}/statistics` (aggregate) or `GET /api/v1/admin/prompts/{id}/versions/{version}/statistics` (per version).
 
 ## Delete a prompt
 
-On the prompt detail page, click "Delete". A confirmation dialog is displayed. A prompt that is a base prompt, or referenced as an [Application](./managing_applications.md)'s system prompt, cannot be deleted while referenced — the API returns `409 Conflict` naming the Application(s) using it. Remove the reference (or delete the Application) first.
+In the "..." menu of the prompt page, click "Delete prompt…". A confirmation dialog is displayed. A prompt that is the base prompt, or that is referenced by a [usage profile](./managing_applications.md) as its system prompt or by an agent as its objective, cannot be deleted while referenced — the API returns `409 Conflict` naming the entities using it. Remove the reference first.
 
 ## REST API endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/api/v1/admin/prompts` | List every prompt for the current tenant (feeds the list page) |
+| `GET` | `/api/v1/admin/prompts` | List the prompts of the current tenant (feeds the list page): a page `{ collection, total, facets }` of prompts with usage. Each item carries the active version and the draft, never the other versions. Filters: `search`, `model`, `quick`, `tag` (repeatable), `workspaceId` (repeatable); pagination: `offset`, `limit` (default 20), `orderBy`, `ascending` — `offset + limit` must stay at or under 10000 |
 | `POST` | `/api/v1/admin/prompts` | Create a new prompt — its initial version, v0 (`201`; `409` if the ID already exists) |
-| `GET` | `/api/v1/admin/prompts/{id}` | Get the prompt aggregate: `{ id, versions: [...] }` — every version, not a flat prompt |
-| `GET` | `/api/v1/admin/prompts/{id}/versions` | List every version, ordered |
-| `GET` | `/api/v1/admin/prompts/{id}/versions/{version}` | Get one specific version |
+| `GET` | `/api/v1/admin/prompts/availability?id={id}` | `true` when a new prompt can take this ID, `false` when it is taken or blank |
+| `GET` | `/api/v1/admin/prompts/{id}` | Get the prompt detail: its active version, its draft, the summary of every version (version, draft flag, created/updated by and at), its tags and workspace |
+| `GET` | `/api/v1/admin/prompts/{id}/versions/{version}` | Get one specific version, whole |
 | `POST` | `/api/v1/admin/prompts/{id}/versions` | Create the draft (409 if a draft already exists) |
 | `PUT` | `/api/v1/admin/prompts/{id}/versions/{version}` | Edit the draft, or publish it with `draft:false` (409 if the target isn't the draft — published versions are read-only) |
 | `DELETE` | `/api/v1/admin/prompts/{id}/versions/{version}` | Discard the draft, keeping published versions intact (409 if not the draft) |
 | `GET` | `/api/v1/admin/prompts/{id}/render` | Render the active version, or a specific one via `?version=`. The variable values go in an optional JSON body. |
 | `GET` | `/api/v1/admin/prompts/{id}/statistics` | Usage statistics aggregated across every version |
 | `GET` | `/api/v1/admin/prompts/{id}/versions/{version}/statistics` | Usage statistics for a single version |
-| `GET` | `/api/v1/admin/prompts/{id}/usage` | Whether the prompt is deletable, and which Applications reference it — what drives the *Used by N apps* label and the disabled Delete button |
+| `GET` | `/api/v1/admin/prompts/{id}/usage` | Whether the prompt is deletable, and what uses it (`usedBy`: usage profiles and agents, typed like `usage-profile Support` or `agent reader`) — what drives the *Used by* column and the disabled Delete button |
+| `PUT` | `/api/v1/admin/prompts/{id}/tags` | Replace the tags of the prompt (`404` if unknown) |
+| `GET` | `/api/v1/admin/prompts/tags` | List the distinct tags currently in use (feeds the tag filter) |
 | `DELETE` | `/api/v1/admin/prompts/{id}` | Delete the prompt and every version (`204`) |
 | `GET` | `/api/v1/admin/prompts/categories` | List the distinct Quick Prompt categories currently in use (feeds the category selector) |
 | `GET` | `/api/v1/admin/templating/completion` | Get auto-completion metadata for the template editor |
+
+The former `GET /api/v1/admin/prompts/{id}/versions` and `GET /api/v1/admin/prompts/{id}/tags` routes no longer exist: read the versions and tags from `GET /api/v1/admin/prompts/{id}`. In `/usage`, the former `referencedBy` field (application names) is replaced by `usedBy`.
 
 The Quick Prompt panel reads each prompt's display settings (never the template content) via the user-facing endpoint `GET /api/v1/prompts/display`.
 

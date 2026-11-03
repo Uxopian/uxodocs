@@ -44,6 +44,10 @@ flowchart LR
 **<a href={require('../how_to/uxopian-icn-plugin.zip').default} download="uxopian-icn-plugin.zip">uxopian-icn-plugin.zip</a>** — Maven source project to build for your environment. Does not bundle IBM's proprietary `navigatorAPI.jar` (see [Phase 1.1](../how_to/integrate_with_filenet.mdx#11-supply-navigatorapijar)).
 :::
 
+## Admin console session
+
+The **AI Admin** button opens the console on a session built from a 30-second ICN token. When that session lapses, the console asks the ICN window for a fresh login by itself, provided the plugin is the 2026.0.0 build. See [Keep the admin console session alive](../how_to/integrate_with_filenet.mdx#keep-the-admin-console-session-alive).
+
 ## Next step
 
 Follow **[Integrate with FileNet](../how_to/integrate_with_filenet.mdx)** for the full, phase-by-phase guide — connector configuration, plugin build and deployment, gateway setup, OIDC trust on the Content Platform Engine, and a validation checklist for each phase.

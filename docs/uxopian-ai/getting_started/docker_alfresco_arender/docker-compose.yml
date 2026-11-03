@@ -376,13 +376,16 @@ services:
   # Pre-built image pulled from the registry — no local build needed.
   # Not exposed directly — accessed through the gateway at /share/uxopian-ai/
   uxopian-ai:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft5}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
     container_name: uxopian-ai
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
       - OPENSEARCH_HOST=uxopian-ai-opensearch
       - OPENSEARCH_PORT=9200
-      - OPENSEARCH_FORCE_REFRESH_INDEX=false
+      # Shared secret the gateway signs its identity assertion with and uxopian-ai verifies.
+      # Required (32 bytes or more). The default below is for a local demo only: set your own with
+      # `openssl rand -base64 48` in .env for anything else.
+      - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:-dev-only-internal-auth-secret-change-me-0123456789}
       - RENDITION_BASE_URL=http://service-broker:8761
       - APP_BASE_URL=${UXOPIAN_AI_PUBLIC_URL:-http://localhost:8085}
       - UXOPIAN_AI_PORT=8080
@@ -406,10 +409,12 @@ services:
   # Pre-built image pulled from the registry — no local build needed.
   # Exposes uxopian-ai at /share/uxopian-ai/ — validates Alfresco Share sessions.
   gateway-service:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
     container_name: gateway-service
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
+      # Same secret as uxopian-ai: the gateway signs the identity assertion with it.
+      - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:-dev-only-internal-auth-secret-change-me-0123456789}
     networks:
       - alfresco-arender-net
     ports:

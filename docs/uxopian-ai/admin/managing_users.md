@@ -22,15 +22,15 @@ Navigate to "Users" in the admin panel. The table lists all users with sortable 
 | Output tokens | Aggregate output token count |
 | Request count | Total number of LLM requests |
 
-Use the search field at the top to filter users by ID.
+Use the search field at the top to filter users by ID. The list is paginated and sorted on the server: only one page of users is fetched at a time, and the columns can be sorted, resized and hidden.
 
-Data is fetched from `GET /api/v1/admin/users/statistics`.
+Data is fetched from `GET /api/v1/admin/users/statistics`, which takes `search` (a term looked for in the user ID) and the pagination parameters `offset`, `limit` (default 20), `orderBy` and `ascending`, and answers a page `{ collection, total, facets }`. By default the users with the most conversations come first; `orderBy` accepts `userId`, `conversationCount`, `requestCount`, `inputToken` and `outputToken`.
 
 ![The Users list with per-user conversation, token, and request counts](../images/users-list.png)
 
 *Figure: the Users list — per-user conversation count, input/output tokens, and request count, with sortable columns.*
 
-Click a row to open the user detail page.
+Click a row — or double-click it — to open the user detail page.
 
 ## User detail page
 
@@ -39,8 +39,8 @@ Route: `/users/:userId`.
 ```mermaid
 graph LR
     A[User list] --> B[User detail]
-    B --> C[Summary card<br/>Conversations / Requests / Tokens]
-    B --> D[Conversation sidebar]
+    B --> C[Activity card<br/>Conversations / Requests / Tokens]
+    B --> D[Conversations card]
     D --> E[Request display<br/>User message / Assistant response /<br/>Provider / Token counts]
 ```
 
@@ -48,21 +48,21 @@ graph LR
 
 ### User summary
 
-A header card shows aggregate statistics for the selected user:
+An **Activity** card shows aggregate statistics for the selected user, with the date of the last activity:
 
 | Stat | Description |
 |---|---|
 | Conversations | Number of conversations |
 | Requests | Total LLM requests |
-| Total tokens | Input + output tokens |
+| Tokens | Total tokens, split into input and output |
 
-A refresh button reloads the conversation list.
+A refresh button reloads the statistics.
 
 Fetched from `GET /api/v1/admin/users/details?userId={userId}`.
 
 ### Conversation list
 
-A scrollable sidebar lists all conversations for the user. Click a conversation to display its requests in the main panel. The selected conversation is highlighted.
+A **Conversations** card lists the user's conversations, loaded page by page (*Show more conversations*). Click a conversation to display its requests.
 
 ### Request display
 
@@ -72,19 +72,22 @@ For the selected conversation, the main panel shows each request in chronologica
 - The assistant response
 - The LLM provider and model used
 - Token counts (input and output)
+- The tools the assistant used, in a collapsed *Tools used (n)* section, and the files the request references
 
-Requests are paginated. Fetched from `GET /api/v1/admin/requests?conversation={conversationId}&from={offset}&size={limit}`.
+Requests are paginated. Fetched from `GET /api/v1/admin/requests?conversation={conversationId}&offset={offset}&limit={limit}`. The list answers lightweight request summaries, without the context payload: fetch `GET /api/v1/admin/requests/{id}` for a request in full.
+
+Token counts include every completion of the tool-calling loop of a request, so totals are higher than before 2026.0.0 for conversations that use tools.
 
 ## REST API endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/api/v1/admin/users/statistics` | List all users with conversation stats |
-| `GET` | `/api/v1/admin/users/details?userId={id}` | Get user profile with conversations |
-| `GET` | `/api/v1/admin/conversations` | List all conversations (paginated) |
+| `GET` | `/api/v1/admin/users/statistics` | List users with conversation stats (paginated, `search` filter) |
+| `GET` | `/api/v1/admin/users/details?userId={id}` | Get the statistics of one user |
+| `GET` | `/api/v1/admin/conversations` | List conversations (paginated; `userId` keeps one user's conversations, `workspaceId` filters by workspace) |
 | `GET` | `/api/v1/admin/conversations/{id}` | Get a conversation by ID |
 | `DELETE` | `/api/v1/admin/conversations/{id}` | Delete a conversation |
-| `GET` | `/api/v1/admin/requests?conversation={id}&from={n}&size={n}` | Paginated requests for a conversation |
+| `GET` | `/api/v1/admin/requests?conversation={id}&offset={n}&limit={n}` | Paginated request summaries for a conversation |
 | `GET` | `/api/v1/admin/requests/{id}` | Get a specific request |
 | `DELETE` | `/api/v1/admin/requests/{id}` | Delete a request |
 

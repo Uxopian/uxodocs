@@ -356,6 +356,10 @@ The plugin registers 13 tools in three groups, all tagged `alfresco`.
 |---|---|
 | `getAlfrescoDocumentProperties` | Returns all metadata properties of a node |
 
+## How documents are read
+
+Alfresco documents are handed to ARender through the Alfresco file connector (reference `{ "connector": "alfresco", "nodeId": "..." }`), which renders them and then runs OCR in one shared path. If no OCR parser is installed, the tool refuses up front instead of failing later. A document with no pages now yields an empty text instead of an error. The helper methods used from prompt templates (`alfrescoService`) and the tool names and parameters are unchanged. The same connector lets a [human review task](./human_in_the_loop_review.md) point to an Alfresco node.
+
 ## Common issues
 
 | Symptom | Cause | Solution |
