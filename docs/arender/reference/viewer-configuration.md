@@ -136,7 +136,7 @@ These properties control the viewer UI. Override them in `configurations/arender
 |----------|---------|-------------|
 | `topPanel.print` | `true` | Enables the print button |
 | `topPanel.search` | `true` | Enables the search box in the toolbar |
-| `topPanel.search.default` | `false` | If `false`, opens the advanced search panel instead of inline search |
+| `topPanel.search.default` | `false` | If `false`, opens the advanced search panel instead of inline search. The search then uses the scope selected in the panel, `advanced.searchexplorer.default.scope` by default. Inline search (`true`) only searches the current document |
 | `topPanel.search.displayResultsInExplorer` | `false` | Displays search results in the advanced search explorer |
 | `topPanel.search.searchByVisiblePage` | `true` | "Next result" jumps to the next match on the visible page |
 | `topPanel.fullscreen` | `true` | Enables the full-screen button |
@@ -347,6 +347,7 @@ These properties control the viewer UI. Override them in `configurations/arender
 | `advanced.searchexplorer.max.characterLength` | `255` | Maximum characters allowed |
 | `advanced.searchexplorer.updates.enabled` | `false` | Updates search results when annotations are refreshed |
 | `advanced.searchexplorer.search.highlight.enabled` | `false` | Enables the search and highlight button |
+| `advanced.searchexplorer.default.scope` | `AllDocuments` | Search scope selected by default in the advanced search panel: `AllDocuments` (every open document, searched one after the other), `AllPages` (current document) or `CurrentPage`. The panel returns to this scope when the search is cleared. Any other value falls back to `AllDocuments`.|
 
 ---
 
