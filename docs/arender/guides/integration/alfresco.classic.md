@@ -118,6 +118,8 @@ Set `arender.server.alfresco.renditions.enabled=false` to disable this behavior.
 
 By default, the connector authenticates using the `alf_ticket` URL parameter (user-delegated). To use a technical service account instead, set `user` and `password`. When a service account is configured, all access to Alfresco uses that account regardless of the user's own ticket.
 
+With user-delegated authentication, the connector asks Alfresco on every opening whether the ticket can read the document, even when the document is already in the ARender cache. Since 2026.4.0, an expired or invalid ticket therefore makes the opening fail, and the user must get a new ticket from Alfresco.
+
 | Environment variable | Property | Default | Description |
 |---|---|---|---|
 | `ARENDERSRV_ARENDER_SERVER_ALFRESCO_USER` | `arender.server.alfresco.user` | (empty) | Service account login. Leave empty to use user-delegated authentication |

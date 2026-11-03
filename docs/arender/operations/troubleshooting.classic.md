@@ -179,6 +179,20 @@ docker compose logs ui | grep -i "filenet\|jace\|authentication"
 
 ---
 
+### Viewer says the document is password-protected or corrupted
+
+**Symptoms:** Since 2026.4.0, the viewer shows "The document is password protected and cannot be opened" or "The document is corrupted and cannot be opened". The message can also appear for one attachment of an email or one file of an archive, while the other parts open.
+
+**Cause:** the Rendition services could not open the document itself: it requires a password, or its content is damaged or truncated. This is not a configuration problem, and retrying gives the same result. The broker answers `422` with an `errorCode` of `PASSWORD_PROTECTED` or `CORRUPTED`, see [Broker API → Error responses](../reference/rest-api/broker-api.md#error-responses). These documents are logged at `INFO`, not `ERROR`.
+
+**Diagnosis:**
+```bash
+# Find the refused documents in the broker logs
+docker compose logs service-broker | grep "Document refused"
+```
+
+---
+
 ### Office or email documents do not render (conversion failure)
 
 **Symptoms:** PDF and image documents load correctly. Office documents (Word, Excel, PowerPoint) or email files (.eml, .msg) fail with a conversion error. Converter logs show LibreOffice or `soffice` errors.
