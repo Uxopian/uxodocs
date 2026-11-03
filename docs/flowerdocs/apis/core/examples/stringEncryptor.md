@@ -19,6 +19,8 @@ The `Encryption` service displays the encryption operation of `character strings
 
 The examples below show how to secure a character string using the `post` operation.
 
+The operation returns the bare encrypted value. Where a property or a header expects the `ENC(...)` form, wrap it yourself as `ENC(<value>)`.
+
 <Tabs>
   <TabItem value="rest" label="REST">
 

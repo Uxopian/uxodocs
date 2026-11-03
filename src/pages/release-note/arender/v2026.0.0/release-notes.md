@@ -251,12 +251,4 @@ See the <DocLink version="v2026.0.0" product="arender-horizon" to="guides/integr
 | Document rotation causes blank page in GWT HMI | Regression | AR-18283 | |
 | CVE React | Evolution | AR-18303 | |
 
----
-
-## Download
-
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
-
-<ARenderDownloads version="2026.0.0" filter={["rendition", "web-ui", "connector-filenet", "plugin-filenet", "plugin-alfresco", "plugin-alfresco-adf", "client-api", "rendition-api"]} />
-
 </div>

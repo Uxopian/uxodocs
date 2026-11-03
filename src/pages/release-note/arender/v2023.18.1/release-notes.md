@@ -9,7 +9,6 @@ description: "Patch release with two annotation fixes: arrow annotation comments
 _build:
   list: never
 ---
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
 
 > **Upgrade note:** See [v2023.18.1](../upgrade-notes) for detailed instructions.
 
@@ -40,4 +39,3 @@ Related issues: [AR-18205](https://arondor.atlassian.net/browse/AR-18205)
 | Comments associated with arrow annotation not saved            | Issue      | [AR-18121](https://arondor.atlassian.net/browse/AR-18121) | [TMAPR-6698](https://arondor.atlassian.net/servicedesk/customer/portal/59/TMAPR-6698) |
 | Ghost broken-image icon on arrow annotation creation           | Evolution  | [AR-18205](https://arondor.atlassian.net/browse/AR-18205) | |
 
-<ARenderDownloads version="2023.18.1" />

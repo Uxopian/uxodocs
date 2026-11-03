@@ -155,6 +155,21 @@ The `?` after `/uxopian-ai/` makes the trailing slash optional, so both `/uxopia
 `rewritePath` is parsed by splitting on the **first comma**. Do not wrap the value in quotes — Spring YAML binding will include them in the regex.
 :::
 
+## Routes the review screen needs
+
+A route that forwards the whole application (`path: /**` or `path: <prefix>/**`) already carries everything. If you list the paths of your route one by one, or restrict them with security rules, make sure the [human review screen](./human_in_the_loop_review.md) can reach these, with the same authentication as the rest of the API:
+
+| Path (relative to the route prefix) | Used for |
+|---|---|
+| `/api/v1/tasks/**` | The task queue API |
+| `/viewer/**` | The review page |
+| `/rendition/**` | The relay to ARender, so the browser never calls ARender directly |
+| `/api/web-components/viewer/**` | The `viewer-element` script and stylesheet |
+
+The page and the API are found under any prefix, for example `/gui/gateway/uxopian-ai/viewer`. The admin and viewer pages cannot be framed (`Content-Security-Policy: frame-ancestors 'none'` and `X-Frame-Options: DENY`, relayed by the gateway), so an `iframe` on them stays blank.
+
+The Swagger groups also changed: `/v3/api-docs/Admin` and `/v3/api-docs/User` no longer exist. Allow `/v3/api-docs` or `/v3/api-docs/<group>` (one group per type: Agents, Code modules, Conversations, Files, LLM providers, MCP servers, Plans, Prompts, Requests, Scripts, Statistics, Tasks, Tools, Usage profiles, Users) in route allow-lists.
+
 ## YAML anchors for shared configuration
 
 When multiple routes share the same URI or security rules, use YAML anchors (`&`) and aliases (`*`) to avoid duplication:

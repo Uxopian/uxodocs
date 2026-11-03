@@ -16,7 +16,7 @@ The LLM providers section of the admin panel lets you add, edit, and delete LLM 
 
 ## Navigate to LLM providers
 
-In the admin panel, click "LLM Providers" in the navigation. The page lists all provider configurations for the current tenant.
+In the admin panel, click "LLM providers" in the navigation. The page lists the provider configurations of the current tenant — paginated, with server-side search and filters (provider type, model, whether an API key is set) and sorting. A *Used by* column names the usage profiles, agents and prompts that run on each provider, with a dash for an unused one. Single-click a row for a quick view, double-click it to edit.
 
 ## Add a provider
 
@@ -32,34 +32,35 @@ In the admin panel, click "LLM Providers" in the navigation. The page lists all 
 4. Add at least one model configuration:
    - **Model conf name**: internal identifier for this model.
    - **Model name**: actual model name sent to the provider API.
-   - **Multimodal supported**: check if the model accepts image inputs.
-   - **Function calling supported**: check if the model supports tool calling.
+   - **Reads images** (`multiModalSupported`): check if the model accepts image inputs.
+   - **Reads documents** (`documentSupported`, off by default): check if the model accepts documents. A document attached to a conversation is sent as a PDF only to models with this flag; otherwise the request is refused with `422 LLM_CAPABILITY_ERROR`.
+   - **Can use tools** (`functionCallSupported`): check if the model supports tool calling.
+   - **Max document size (MB)** (`maxDocumentSizeMb`, an advanced setting): the largest document this model accepts; a larger one is refused with `422 DOCUMENT_TOO_LARGE`. The global bound is `llm.document.max-size` (default 20 MB).
 5. Save.
 
 Changes take effect immediately for new requests. Existing in-progress requests continue using their original configuration.
 
 ## Provider detail page
 
-Click on a provider in the list to open its detail page (route `/llm-providers/:id`). The detail page has three tabs: Settings, Models, and Test.
+Click on a provider in the list to open its detail page (route `/llm-providers/:id`). Since 2026.0.0 the page is made of three foldable cards — **Provider**, **Connection** and **Models** — instead of tabs, and every model can be tested from its own row.
 
-![The LLM provider detail page on the Settings tab, with endpoint, API secret, and capability toggles](../images/llm-provider-detail.png)
+![The LLM provider detail page, with endpoint, API secret, and capability toggles](../images/llm-provider-detail.png)
 
-*Figure: the provider detail page (Settings tab) — provider id, default model, endpoint, API secret, and capability toggles. The Models tab shows a warning indicator when a model configuration is incomplete or duplicated.*
+*Figure: the provider detail page — provider id, default model, endpoint, API secret, and capability toggles.*
 
 ```mermaid
 graph LR
     A[Provider list] --> B[Provider detail]
-    B --> C[Configuration tab]
-    B --> D[Models tab]
-    B --> E[Test tab]
-    C --> C1[Credentials / Endpoint /<br/>Temperature / Timeout /<br/>Extra parameters]
-    D --> D1[Add / Edit / Remove<br/>model configurations]
-    E --> E1[Select model /<br/>Send test request /<br/>View result]
+    B --> C[Connection card]
+    B --> D[Models card]
+    C --> C1[Credentials / Endpoint /<br/>Timeout / Max retries /<br/>Extra parameters]
+    D --> D1[Add / Edit / Duplicate / Remove<br/>model configurations]
+    D --> E1[Test one model or Test all /<br/>View result]
 ```
 
-*Figure: Provider detail page tab structure.*
+*Figure: Provider detail page structure.*
 
-### Configuration tab
+### Connection card
 
 Edit the provider settings. The API secret field is masked; enter a new value only if you need to update the credential.
 
@@ -76,36 +77,38 @@ Edit the provider settings. The API secret field is masked; enter a new value on
 
 Extra parameters vary by provider type. For example, Azure requires `deploymentName`, Bedrock requires `region`.
 
-### Models tab
+### Models card
 
 Manage the model configurations attached to this provider. Each model entry has:
 
 | Field | Description |
 |---|---|
-| Model conf name | Internal identifier used in prompt and request overrides |
+| Model conf name | Internal identifier used when a prompt or usage profile selects this model |
 | Model name | Actual model name sent to the provider API |
-| Multimodal supported | Whether the model accepts image inputs |
-| Function calling supported | Whether the model supports tool calling |
+| Reads images | Whether the model accepts image inputs |
+| Reads documents | Whether the model accepts documents (sent as PDF) |
+| Can use tools | Whether the model supports tool calling |
+| Advanced settings | Optional per-model generation settings (temperature, max output tokens, top p, top k, seed, penalties, max document size); empty means "inherit from the provider". Provider-declared options such as the NuExtract `project` or `output` appear here too |
 
-Add new models, edit existing ones, or remove models. A provider must have at least one model configuration.
+Add new models, edit, duplicate or remove existing ones, and mark one as the default. A provider must have at least one model configuration. A model row shows what runs on it (*Used by*) and blocks its removal while it is in use.
 
-### Test tab
+### Testing a provider
 
-Test the provider connectivity without leaving the admin panel.
+Each model row has a **Test** button, and **Test all** tests every model of the provider. The result shows a success or error status and the answer preview. Under the hood, the admin UI calls `POST /api/v1/admin/llm/provider-conf/{id}/test?model={model}`, which sends a ping to one model of the provider (or its default model when `model` is omitted) and answers `{ model, answer }`.
 
-1. Select a model from the provider's configured models.
-2. Click "Test" to send a request to the provider.
-3. The result shows a success or error status badge with the response preview.
+Save the provider before testing it, since the test runs against the saved configuration.
 
-The test tab is disabled when creating a new provider or when there are unsaved changes. Save first, then test.
+If an LLM request fails because the provider reports an exhausted quota or credit balance, the API answers `402 LLM_QUOTA_EXCEEDED` instead of a generic `500`, and Chat and Quick Prompt display an explanation instead of "No response received". This is a billing matter on the provider side: top up the account, retrying will not help.
 
 ## Delete a provider
 
-On the provider detail page, click "Delete". A confirmation dialog is displayed. Requests that were using this provider will fail until a different provider is configured as default.
+On the provider detail page, click "Delete". A confirmation dialog is displayed. Prompts and usage profiles that run on this provider will fail until they are pointed at another provider; the *Used by* column and `GET /api/v1/admin/llm/provider-conf/{id}/usage` tell which ones.
 
-## Set the default provider
+## Default provider and model
 
-The default provider is set via `llm.default.provider` in `llm-clients-config.yml` or the `LLM_DEFAULT_PROVIDER` environment variable. It cannot be changed via the admin UI; a configuration change and restart are required.
+The provider and model of a conversation turn come from the prompt, then from the [usage profile](./managing_applications.md#resolution-order) of the calling surface. Both are set in the admin UI.
+
+The `llm.default.provider` property (`LLM_DEFAULT_PROVIDER`) of `llm-clients-config.yml` is **no longer a call-time fallback**: since 2026.0.0 it only fills the usage profile that is auto-created the first time a connection provider is used. Changing it requires a configuration change and a restart, and has no effect on usage profiles that already exist.
 
 ## REST API endpoints
 
@@ -113,9 +116,11 @@ The default provider is set via `llm.default.provider` in `llm-clients-config.ym
 |---|---|---|
 | `GET` | `/api/v1/admin/llm/providers` | List all available provider type names |
 | `GET` | `/api/v1/admin/llm/providers/{name}/extra-params` | Get extra parameter descriptors for a provider type |
-| `GET` | `/api/v1/admin/llm/provider-conf` | List all provider configurations |
+| `GET` | `/api/v1/admin/llm/provider-conf` | List provider configurations — a page `{ collection, total, facets }` of masked summaries (secrets hidden, with what runs on each model). Filters: `search`, `provider`, `model`, `hasApiKey`, `workspaceId`; pagination: `offset`, `limit`, `orderBy`, `ascending` |
+| `GET` | `/api/v1/admin/llm/provider-conf/{id}/usage` | The usage profiles, agents and prompts that run on this provider |
+| `POST` | `/api/v1/admin/llm/provider-conf/{id}/test` | Ping one model of the provider (`?model=`), or its default model |
 | `POST` | `/api/v1/admin/llm/provider-conf` | Create a new provider configuration |
-| `GET` | `/api/v1/admin/llm/provider-conf/{id}` | Get a provider configuration by ID |
+| `GET` | `/api/v1/admin/llm/provider-conf/{id}` | Get a provider configuration by ID (the full entity) |
 | `PUT` | `/api/v1/admin/llm/provider-conf/{id}` | Update a provider configuration |
 | `DELETE` | `/api/v1/admin/llm/provider-conf/{id}` | Delete a provider configuration |
 

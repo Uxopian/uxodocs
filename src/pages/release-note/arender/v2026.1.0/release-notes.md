@@ -175,12 +175,4 @@ Backend, conversion and login changes that apply regardless of the viewer.
 | Error when downloading 2 documents with the same name as a zip | Both | Bug fix | AR-18412 | TMAPR-6688 |
 | PDF with a single non-viewable attachment shown as a container instead of the document itself | Both | Bug fix | AR-18418 | |
 
----
-
-## Download
-
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
-
-<ARenderDownloads version="2026.1.0" filter={["rendition", "web-ui", "connector-filenet", "plugin-filenet", "plugin-alfresco", "plugin-alfresco-adf", "client-api", "rendition-api"]} />
-
 </div>

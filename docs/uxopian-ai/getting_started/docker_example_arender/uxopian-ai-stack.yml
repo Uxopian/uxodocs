@@ -112,11 +112,13 @@ services:
   # The gateway is the only service exposed to the host (port 8085).
   # DevProvider always injects a fixed dev identity (dev/dev/ADMIN) — suitable for local development only.
   gateway:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}
-    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0-ft5}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
+    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
     container_name: gateway-service
     environment:
       - JAVA_OPTS=-Xmx256m -Xms128m
+      # Same secret as uxopian-ai: the gateway signs the identity assertion with it.
+      - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:-dev-only-internal-auth-secret-change-me-0123456789}
     volumes:
       - ./gateway-application.yaml:/app/application.yaml
     ports:
@@ -127,14 +129,17 @@ services:
   # ── Uxopian AI ───────────────────────────────────────────────────────────────
   # Served at /uxopian-ai/ through the gateway. Not exposed directly to the host.
   uxopian-ai-standalone:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft5}
-    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0-ft5}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
+    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
     container_name: uxopian-ai-standalone-service
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
       - OPENSEARCH_HOST=opensearch-node1
       - OPENSEARCH_PORT=9200
-      - OPENSEARCH_FORCE_REFRESH_INDEX=false
+      # Shared secret the gateway signs its identity assertion with and uxopian-ai verifies.
+      # Required (32 bytes or more). The default below is for a local demo only: set your own with
+      # `openssl rand -base64 48` in .env for anything else.
+      - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:-dev-only-internal-auth-secret-change-me-0123456789}
       - RENDITION_BASE_URL=http://dsb-service:8761
       - APP_BASE_URL=${UXOPIAN_AI_HOST:-http://localhost:8085/uxopian-ai}
       - CONTEXT_PATH=/uxopian-ai

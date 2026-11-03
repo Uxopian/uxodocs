@@ -22,6 +22,6 @@ Properties for configuring Plume and its connectors can be provided in a number 
     java -D<name>=<value> -jar plume-<version>.jar
     ```
 
-- By a property file. The name of this file (without extension) must be supplied as a JVM property `spring.config.name`. At runtime, Spring will search for this file in the following directories:
+- By a property file named `application.properties`. At runtime, Spring will search for this file in the following directories:
     - The `/config` subdirectory of the current (/ runtime) directory
     - The current directory

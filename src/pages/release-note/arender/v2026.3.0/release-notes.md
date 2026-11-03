@@ -2,6 +2,7 @@
 title: "ARender v2026.3.0 - Release Notes"
 draft: false
 date: "2026-10-02"
+download_version: "2026.3.1"
 weight: -202603
 aliases:
   - /release/2026.3/
@@ -302,13 +303,5 @@ Backend, conversion and integration changes that apply regardless of the viewer.
 | Copy and paste from justified PDF text loses spaces | Both | Bug fix | AR-18642 | TMAPR-6798 |
 | Memory leak in signature verification causes freezes | Both | Bug fix | AR-18580 | TMAPR-6933 |
 | Orphaned LibreOffice processes cause a crash loop on Windows | Both | Bug fix | AR-18308 | TMAPR-6783 |
-
----
-
-## Download
-
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
-
-<ARenderDownloads version="2026.3.0" filter={["rendition", "web-ui", "connector-filenet", "plugin-filenet", "plugin-alfresco", "plugin-alfresco-adf", "client-api", "rendition-api"]} />
 
 </div>

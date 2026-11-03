@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software versions as prerequisites:
 
 - **ARender**: 4.8.7
@@ -304,4 +302,3 @@ Ses objectifs : permettre la consultation d'informations en parallèle et répon
 
 🔴 L'action de Lasso n'est plus affichée sur les tags en lecture seule à la création d'un composant
 
-<FlowerDocsDownloads version="2.6.0" />

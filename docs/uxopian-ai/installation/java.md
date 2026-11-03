@@ -37,8 +37,8 @@ flowchart TD
 Releases publish a self-contained ZIP named `ai-standalone-<version>-complete-package.zip`:
 
 ```text
-ai-standalone-2026.0.0-ft5/
-  ai-standalone-2026.0.0-ft5.jar   ← Spring Boot fat JAR
+ai-standalone-2026.0.0/
+  ai-standalone-2026.0.0.jar   ← Spring Boot fat JAR
   application.yaml                  ← Spring config (imports ./config/* files)
   config/
     application.yml
@@ -50,21 +50,21 @@ ai-standalone-2026.0.0-ft5/
     hazelcast.yml
     mcp-server.yml
   plugins/
-    flowerdocs-2026.0.0-ft5.jar     ← FlowerDocs integration
-    alfresco-2026.0.0-ft5.jar       ← Alfresco integration
-    filenet-2026.0.0-ft5.jar        ← FileNet integration
-    arender-2026.0.0-ft5.jar        ← ARender integration
-    files-2026.0.0-ft5.jar          ← File tools
-    interaction-2026.0.0-ft5.jar    ← Interactive choices tools
-    common-2026.0.0-ft5.jar         ← Shared tools (text chunking, etc.)
+    flowerdocs-2026.0.0.jar     ← FlowerDocs integration
+    alfresco-2026.0.0.jar       ← Alfresco integration
+    filenet-2026.0.0.jar        ← FileNet integration
+    arender-2026.0.0.jar        ← ARender integration
+    files-2026.0.0.jar          ← File tools
+    interaction-2026.0.0.jar    ← Interactive choices tools
+    common-2026.0.0.jar         ← Shared tools (text chunking, etc.)
   llm-clients/
-    llm-clients-2026.0.0-ft5.jar
+    llm-clients-2026.0.0.jar
 ```
 
 The `plugins/` directory is scanned at runtime by `IntegrationLoader`. Only the JARs present at startup are activated. Remove plugin JARs for integrations you do not use.
 
 :::tip[Download]
-**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.0.0-ft5/ai-standalone-2026.0.0-ft5-complete-package.zip" download="ai-standalone-2026.0.0-ft5-complete-package.zip">ai-standalone-2026.0.0-ft5-complete-package.zip</a>**
+**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.0.0/ai-standalone-2026.0.0-complete-package.zip" download="ai-standalone-2026.0.0-complete-package.zip">ai-standalone-2026.0.0-complete-package.zip</a>**
 :::
 
 ### Configure LLM provider
@@ -110,15 +110,34 @@ server:
   port: 8080
 ```
 
+### Set the internal authentication secret
+
+`INTERNAL_AUTH_JWT_SECRET` is required, in every profile: ai-standalone refuses to start without it. Set the same value, 32 bytes or more, on the gateway, which signs the `X-Gateway-Auth` assertion that ai-standalone verifies.
+
+```bash
+export INTERNAL_AUTH_JWT_SECRET="$(openssl rand -base64 48)"
+```
+
+### Optional features
+
+| Feature | Setting |
+|---|---|
+| Filesystem connector, `persist` attachments | `FILECONNECTOR_FILESYSTEM_ROOT`, a folder the application user can read and write. The service stops at startup otherwise. `FILECONNECTOR_FILESYSTEM_ALLOWEDEXTENSIONS` narrows the default `pdf,png,jpg,jpeg,tif,tiff` |
+| Review screen, rendition | `RENDITION_BASE_URL`, the ARender service. uxopian-ai relays `/rendition/` to it |
+| [Code modules](../how_to/code_modules.md) | `code-sandbox.url` and `code-sandbox.secret` (environment `CODESANDBOX_URL`, `CODESANDBOX_SECRET`) |
+| Single node, no multicast on the network | `HAZELCAST_MULTICAST_ENABLED=false` |
+
 ### Start
 
 From the extraction directory:
 
 ```bash
-java --enable-native-access=ALL-UNNAMED -Xmx768m -Xms512m -jar ai-standalone-2026.0.0-ft5.jar
+java --enable-native-access=ALL-UNNAMED -Xmx768m -Xms512m -jar ai-standalone-2026.0.0.jar
 ```
 
 The service starts on port `8080` by default. Override with `UXOPIAN_AI_PORT`.
+
+When upgrading from 2026.0.0-ft5, follow [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5) for what to do with your data: no automatic migration is provided, so your data must be transferred.
 
 ---
 
@@ -145,7 +164,7 @@ uxopian-gateway-<version>/
 Providers are scanned from the `provider/` directory at runtime by `AuthProviderLoader`. Remove provider JARs that are not needed.
 
 :::tip[Download]
-**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/gateway/standalone/2026.0.0-ft5/standalone-2026.0.0-ft5-complete-package.zip" download="standalone-2026.0.0-ft5-complete-package.zip">standalone-2026.0.0-ft5-complete-package.zip</a>**
+**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/gateway/standalone/2026.0.0/standalone-2026.0.0-complete-package.zip" download="standalone-2026.0.0-complete-package.zip">standalone-2026.0.0-complete-package.zip</a>**
 :::
 
 ### Configure routes
@@ -188,6 +207,8 @@ For other authentication providers, replace `FlowerDocsProvider` with the approp
 
 ### Start
 
+Export the same `INTERNAL_AUTH_JWT_SECRET` as ai-standalone in the gateway's environment first.
+
 ```bash
 java --enable-native-access=ALL-UNNAMED -Xmx256m -Xms256m \
   -jar bff-standalone-<version>.jar \
@@ -208,7 +229,7 @@ java --enable-native-access=ALL-UNNAMED -Xmx256m -Xms256m \
 | Default LLM provider | `llm.default.provider` | `config/llm-clients-config.yml` |
 | Default model | `llm.default.model` | `config/llm-clients-config.yml` |
 | Default prompt | `llm.default.base-prompt` | `config/llm-clients-config.yml` |
-| Conversation context size | `llm.context` | `config/llm-clients-config.yml` |
+| Conversation context size | `llm.context.size` (environment `LLM_CONTEXT_SIZE`) | `config/llm-clients-config.yml` (the shipped `llm.context` line is not read; use the environment variable) |
 | OpenAI API key | `openai.api-key` | `config/llm-clients-config.yml` |
 | Anthropic API key | `anthropic.api-key` | `config/llm-clients-config.yml` |
 | Google Gemini API key | `gemini.api-key` | `config/llm-clients-config.yml` |

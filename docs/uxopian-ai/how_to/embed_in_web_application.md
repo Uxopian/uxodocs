@@ -112,6 +112,8 @@ window.createChat({
 });
 ```
 
+`request` is mandatory in `window.createChat()`. There is no `promptId` option (it never had any effect): to launch a prompt, put a `prompt` content in the request, as above. The `image` content type was renamed `base64` and is no longer accepted.
+
 **Reopen an existing conversation:**
 
 ```javascript
@@ -130,6 +132,10 @@ With `DevProvider` (development only), the browser must include identity headers
 
 With `FlowerDocsProvider` or `Fast2Provider`, the browser passes its JWT via `Authorization: Bearer` or a session cookie. The gateway validates the token and injects the identity headers before forwarding to uxopian-ai.
 
+## Content Security Policy
+
+The pages served by uxopian-ai (`/admin`, `/viewer`) send a strict `Content-Security-Policy` and `X-Frame-Options: DENY`: no inline script, no `eval`, and they cannot be framed. Embed the chat and Quick Prompt through the web components as described here, not through an `iframe`. The policy concerns the pages uxopian-ai serves itself: the web components loaded as scripts into your page are not affected by it.
+
 ## Configuration
 
 The `<chat-element>` custom element is created by the `window.createChat()` and `window.openChat()` functions, which pass configuration as HTML attributes. The following attributes are supported:
@@ -138,7 +144,7 @@ The `<chat-element>` custom element is created by the `window.createChat()` and 
 |---|---|---|
 | `endpoint` | yes | Gateway origin as reachable from the browser (e.g., `https://your-gateway`). The component appends `/api/v1` itself — do **not** include it. |
 | `wsendpoint` | no | WebSocket base URL (e.g., `wss://your-gateway`). If omitted, the component falls back to `endpoint` for the WebSocket connection |
-| `request` | no | JSON-serialized request object passed to `window.createChat()`. Encodes the initial message, prompt reference, and payload |
+| `request` | yes for `createChat` | JSON-serialized request object passed to `window.createChat()`. Encodes the initial message, prompt reference, and payload. `window.openChat()` sets it for you, to the conversation it reopens |
 
 Authentication is not configured in the element itself. The gateway handles authentication before forwarding requests to uxopian-ai. When using `FlowerDocsProvider` or `Fast2Provider`, the browser must pass its JWT via `Authorization: Bearer` or a session cookie. When using `DevProvider` (development only), identity headers must be injected by a proxy layer.
 
@@ -148,7 +154,8 @@ Authentication is not configured in the element itself. The gateway handles auth
 |---|---|---|
 | `text` | Free text sent as-is | Not used |
 | `prompt` | Prompt ID (e.g., `arenderContext`) | Variables for Thymeleaf template |
-| `image` | Base64-encoded image data | Not used |
+| `base64` | Inline data URL of any file type (an image, a PDF). Limited by `llm.inline.max-size` (5 MB) | Not used |
+| `document` | Not used: carries a file reference, for example `{ "connector": "request", "part": "<name>" }` for an uploaded part, or any [file connector](./human_in_the_loop_review.md#file-references) | Not used |
 
 ## Verification
 

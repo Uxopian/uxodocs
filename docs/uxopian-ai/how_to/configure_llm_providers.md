@@ -146,9 +146,18 @@ Ollama requires only an endpoint URL:
 
 API keys are encrypted with AES/GCM before being stored in OpenSearch. The encryption key is set via `app.security.secret-key` in `application.yml`. Use a unique key in production to prevent decryption if the OpenSearch data is exposed.
 
-## Set the default provider and model
+## Which provider and model runs a call
 
-The default provider and model are used when a request does not specify them:
+Each turn of a conversation resolves its provider and model on its own, in this order:
+
+1. The `defaultLlmProvider` and `defaultLlmModel` of the prompt the turn executes.
+2. If the prompt names none, the `defaultLlmProvider` and `defaultLlmModel` of the usage profile of the calling surface (chat, Quick Prompt, an integration).
+
+Temperature, the reasoning switch and the multimodal and function-calling requirements always come from the prompt. The maximum number of tool cycles comes from the usage profile.
+
+There is no per-request override: the `llm_provider`, `llm_model`, `temperature` and `reasoning` query parameters that earlier versions accepted are ignored, not rejected. There is no fallback on `llm.default.*` at call time either. A call whose prompt and usage profile name no provider fails with *No LLM provider for this call: set a default LLM provider on the usage profile 'ID' or on the prompt*.
+
+The `llm.default.provider` and `llm.default.model` properties (environment variables `LLM_DEFAULT_PROVIDER` and `LLM_DEFAULT_MODEL`) now have a single role: they fill the usage profile that is created automatically for a connection provider that has none.
 
 ```ini
 # In .env or Docker Compose environment:
@@ -156,16 +165,96 @@ LLM_DEFAULT_PROVIDER=openai
 LLM_DEFAULT_MODEL=gpt-5.1
 ```
 
-Or in `llm-clients-config.yml`:
+If these are unset, the automatically created usage profile takes the first LLM provider configuration of the tenant and that provider's default model. A usage profile entered in the admin console must name a provider and a model.
+
+:::caution Upgrading from 2026.0.0-ft5
+A prompt that relied on the system default at call time, without a provider of its own, now fails until you set a provider on the prompt or on its usage profile. Clients that passed `llm_provider` or `llm_model` on `POST /api/v1/requests` must set them on the prompt instead.
+:::
+
+## Send documents to a model
+
+Models read PDF files natively only when you allow it. Two settings control it, on the provider (`globalConf`) or on a single model (`llModelConfs`):
+
+| Setting | Default | Description |
+|---|---|---|
+| `documentSupported` | `false` | The model accepts documents sent with a request. Without it, a request that carries a document is refused with `422 LLM_CAPABILITY_ERROR` before any provider call |
+| `maxDocumentSizeMb` | `llm.document.max-size` (20 MB) | Largest document, in megabytes, sent to this model. Above it the request is refused with `422 DOCUMENT_TOO_LARGE` |
 
 ```yaml
-llm:
-  default:
-    provider: anthropic
-    model: claude-sonnet-4-20250514
+llModelConfs:
+  - llmModelConfName: gpt5
+    modelName: gpt-5.1
+    multiModalSupported: true
+    functionCallSupported: true
+    documentSupported: true
+    maxDocumentSizeMb: 20
 ```
 
-Per-request overrides are possible via the `provider` and `model` query parameters on `POST /api/v1/requests`.
+Enable `documentSupported` only for models whose provider accepts PDF input. A file that is not a PDF is first rendered to PDF through ARender, so ARender must be configured for that case.
+
+Files travel with the request in `multipart/form-data`, or inline in base64. Inline data is limited by `llm.inline.max-size` (5 MB, `413 PAYLOAD_TOO_LARGE`). To keep the files a request sent, see the `persist` flag and the `fileConnector.filesystem.*` Helm values in [Install on Kubernetes](../installation/kubernetes.mdx).
+
+## NuExtract document extraction
+
+The `nu-extract` provider reads a PDF through the NuMind platform and answers with structured JSON. It does not chat: send a document with the request.
+
+```yaml
+- provider: nu-extract
+  defaultLlmModelConfName: nu-extract
+  globalConf:
+    apiSecret: ${NUEXTRACT_API_KEY:}
+    endpointUrl: https://bbox.nuextract.ai
+    timeout: 60
+  llModelConfs:
+    - llmModelConfName: nu-extract
+      modelName: nuextract
+      multiModalSupported: false
+      functionCallSupported: false
+      documentSupported: true
+      extras:
+        project: sprj_your-numind-project-id
+```
+
+The provider runs an extraction job on the platform, polls it every second and gives up after 10 minutes, then asks for the positions of the extracted values. It works in two modes.
+
+| Mode | How to select it | What the message carries |
+|---|---|---|
+| Template | Leave `project` empty | The message text starts with a JSON template such as `{"invoiceNumber": "string", "total": "number"}`. Anything after the template is sent as extraction instructions. Text before the template is refused |
+| Project | Set the extra `project` to a NuMind project id (`sprj_...`) | The template and instructions of the project replace those of the message |
+
+A project id given as the model name still works, with a warning in the log: put it in the `project` extra.
+
+The answer is JSON, with the parts that are empty left out:
+
+```json
+{
+  "result": { "invoiceNumber": "FA-2026-0142", "total": 1280.5 },
+  "localization": { "invoiceNumber": [ { "page": 1, "bbox": [0.1, 0.1, 0.3, 0.15] } ] }
+}
+```
+
+Extras, set on the provider or on a model (empty means inherit from the provider):
+
+| Extra | Description |
+|---|---|
+| `project` | NuMind project id, starts with `sprj_` |
+| `output` | `values`, `positions` or `values-and-positions` (default). With `values-and-positions`, a failure to localize the values is logged and the values are still returned. With `positions` alone the failure is raised |
+| `rasterizationDPI` | Resolution the pages are read at: automatic, or 1 to 600 |
+| `enableThinking` | `true` or `false`: let the model reason before answering |
+| `thinkingTokenBudget` | Most tokens the model may reason with when thinking is enabled |
+| `loopDetection` | `true` or `false`: stop the model when it repeats itself |
+
+The model temperature, seed and maximum output tokens are sent to the job. A request without a document only checks the API key (and reads the project), which is what the **Test** tab of the admin console does. When a job fails, the error carries the reason given by NuMind, for example a quota error.
+
+:::warning Streaming is not supported
+`POST /api/v1/requests/stream` with a NuExtract model answers `422`. Use `POST /api/v1/requests`.
+:::
+
+:::caution Upgrading from 2026.0.0-ft5
+The legacy call to `https://nuextract.ai/api/projects/` was removed together with the `modelId` extra and the `model-id` YAML key. Change the endpoint to `https://bbox.nuextract.ai`, drop `modelId`, set the `project` extra or start your prompt with a JSON template, and expect a different answer shape and no streaming. Prompts written for the legacy flow need rewriting.
+:::
+
+The result of an extraction is what the [human review screen](./human_in_the_loop_review.md) shows to a reviewer: the positions let it draw one box per value on the document.
 
 ## YAML vs database: how configuration is applied
 
@@ -262,10 +351,23 @@ curl -X DELETE https://your-gateway/api/v1/admin/llm/provider-conf/{providerId}
 
 See also [Managing LLM providers in the admin UI](../admin/managing_llm_providers.md).
 
+In 2026.0.0 every admin list answers a page of summaries (`{ "collection": [...], "total": n, "facets": {...} }`), with `offset`, `limit`, `orderBy` and `ascending` parameters, so the list call above returns a page rather than a bare array. Use `GET .../provider-conf/{providerId}` for the full configuration. `POST .../provider-conf/{providerId}/test` checks that a stored provider can be reached.
+
+## Troubleshooting
+
+| Symptom | Cause | Action |
+|---|---|---|
+| Chat or Quick Prompt shows "The AI provider quota or credit balance is exhausted", REST answer `402 LLM_QUOTA_EXCEEDED` | The provider reported an exhausted quota or credit balance. Retrying does not help | Top up the account or change the API key. The provider's own message is in the uxopian-ai log, never in the answer |
+| `429 LLM_RATE_LIMITED` | The provider limits the request rate | Retry later. Key retry logic on 429 and 504, not on 400 or 500 |
+| `504 LLM_TIMEOUT` | The provider did not answer in time | Retry later, or raise `timeout` on the provider |
+| `422 LLM_CAPABILITY_ERROR` on a request with a document | The model does not have `documentSupported: true` | Enable it on the model, or choose another model |
+| *No LLM provider for this call* | Neither the prompt nor its usage profile names a provider | See [Which provider and model runs a call](#which-provider-and-model-runs-a-call) |
+
 ## Related pages
 
 - [LLM providers](../understanding/llm_providers.md)
 - [Write a custom LLM client](../extending/custom_llm_client.md)
 - [Managing LLM providers in the admin UI](../admin/managing_llm_providers.md)
+- [Human review](./human_in_the_loop_review.md)
 - [Configuration file reference](../reference/configuration.md)
 - [Environment variables reference](../reference/environment_variables.md)

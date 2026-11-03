@@ -4,7 +4,7 @@
     "majorVersion": "2026",
     "date": "2026-08-04",
     "description": "Agentic Plan engine, gateway-signed request authentication, prompt versioning, Applications, named multi-tenant gateway providers, and FileNet search/write tools.",
-    "latest": true,
+    "latest": false,
     "slug": "release-note-2026.0.0-ft5"
   },
   {
@@ -38,5 +38,13 @@
     "description": "General availability of uxopian-ai — a standalone framework for enterprise GenAI integrations built on Java 21 LTS and Spring 3.5, with conversation management, orchestration, and native multi-tenant security.",
     "latest": false,
     "slug": "release-note-2026.0.0-ft1-rc2"
+  },
+  {
+    "version": "2026.0.0",
+    "majorVersion": "2026",
+    "date": "2026-10-24",
+    "description": "General availability of 2026.0.0: Usage Profiles, code modules, human review of extracted fields, document and PDF inputs, paginated admin APIs, mandatory network policy and internal auth, and a redesigned admin console.",
+    "latest": true,
+    "slug": "release-note-2026.0.0"
   }
 ]

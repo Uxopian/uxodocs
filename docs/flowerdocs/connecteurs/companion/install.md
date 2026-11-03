@@ -7,12 +7,11 @@ last_update:
   author: CI/CD Bot
 content_hash: 3c81c85e93a1a404b9a4246fd3d4896159f6790e4d415c325a567e868cc46737
 ---
-import FlowerDocsCompanionDownload from '@site/src/components/FlowerDocsCompanionDownload';
 
 ## Install FlowerDocs Companion
 
 
-- Download the <FlowerDocsCompanionDownload /> installer
+- Ask support team to get FlowerDocs Companion installer
 - Run the downloaded msi file
 - Follow the different installer steps
 - Once installation is complete, check the "Launch FlowerDocs Companion" box to start the Companion on your workstation

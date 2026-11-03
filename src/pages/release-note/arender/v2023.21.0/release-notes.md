@@ -87,12 +87,4 @@ The release also hardens **text search** against documents that mix scripts such
 | Race condition in MainScreenSplitPresenter.openDocLink() causes IndexOutOfBoundsException when topPanel.docLink.activateOnStartup=true | Issue | AR-18245 | TMAPR-6395 |
 | [Security] Fix CVEs vulnerability of critical/high level on Tomcat and Netty library | Dev W/O UX | AR-18391 | |
 
----
-
-## Download
-
-import ARenderDownloads from '@site/src/components/ARenderDownloads';
-
-<ARenderDownloads version="2023.21.0" filter={["rendition", "web-ui", "connector-filenet", "hmi-cm", "plugin-filenet", "plugin-alfresco", "plugin-alfresco-adf", "client-api", "rendition-api"]} />
-
 </div>

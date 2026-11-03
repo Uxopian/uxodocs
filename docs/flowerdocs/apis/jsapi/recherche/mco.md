@@ -42,7 +42,7 @@ To search for components via the JS API, use the `search` function for the vario
 | `getName()`                   | Retrieves the name of the criterion                                                                                                                                      |
 | `setName(String name)`        | Defines the name of the criterion                                                                                                                                        |
 | `getOperator()`               | Retrieves the criterion operator                                                                                                                                         |
-| `setOperator(String operator)` | Defines the criterion operator. Possible values are : `EQUALS_TO` `CONTAINS`, `LESS_THAN`, `GREATER_THAN`, `STARTS_WITH`, `ENDS_WITH`, `DISPLAY`, `DIFFERENT`, `BETWEEN` |
+| `setOperator(String operator)` | Defines the criterion operator (default: `EQUALS_TO`). Possible values are : `EQUALS_TO`, `CONTAINS`, `NOT_CONTAINS`, `LESS_THAN`, `GREATER_THAN`, `STARTS_WITH`, `ENDS_WITH`, `DISPLAY`, `DIFFERENT`, `BETWEEN`, `EMPTY`, `NOT_EMPTY` |
 | `getType()`                   | Retrieves the criterion type                                                                                                                                             |
 | `setType(String type)`        | Defines the criterion type. Possible values are : `STRING`, `TIMESTAMP`, `BOOLEAN`, `INTEGER`, `CURRENCY`                                                                |
 | `getValues()`                 | Retrieves criterion values                                                                                                                                               |
@@ -52,6 +52,16 @@ To search for components via the JS API, use the `search` function for the vario
 :::info
 The `EQUALS_TO` and `DIFFERENT` operators are case-sensitive (differentiate between upper and lower case).
 :::
+
+The `EMPTY` and `NOT_EMPTY` operators take no value: do not call `addValue`. On a tag, `EMPTY` only returns components whose class declares the tag. The operators available for each criterion type, and their behaviour on the `content` criterion, are described in [Criterion types and operators](/docs/flowerdocs/config/gui/search/configure#criterion-types-and-operators).
+
+```javascript
+var criterion = new Criterion();
+criterion.setName("Matricule");
+criterion.setType("STRING");
+criterion.setOperator("EMPTY");
+filters.addCriterion(criterion);
+```
 
 ## Sorting
 

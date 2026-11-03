@@ -22,7 +22,39 @@ Every tool runs under real FlowerDocs user credentials, and the whole server is 
 - **Java 25**
 - Running **FlowerDocs Core** and **FlowerDocs GUI** instances.
 - **FlowerDocs user credentials**: the MCP always authenticates; there is no anonymous access.
-- The **MCP access key** for your deployment (ask your administrator).
+- The **MCP URL** and the **MCP access key** for your deployment, the key already encrypted as `ENC(...)` (ask your administrator).
+
+### Encrypt your password
+
+The MCP only accepts your FlowerDocs password encrypted as `ENC(...)`, and only one encrypted with the key of the MCP server you connect to. The MCP server encrypts it for you through its `POST /encrypt` endpoint. This call needs no FlowerDocs login or role, only the MCP access key you received.
+
+In the steps below, replace `https://<flowerdocs-host>/flowerdocs-mcp` with the MCP URL your administrator gave you, without the trailing `/mcp`.
+
+1. Open the Swagger UI of the MCP server: `https://<flowerdocs-host>/flowerdocs-mcp/swagger-ui/index.html`.
+2. Expand the **Encryption** section, then the **POST /encrypt** operation.
+3. Click **Try it out**.
+4. In the **X-FlowerDocs-Access-Key** field, paste the encrypted access key exactly as you received it, `ENC(...)` included.
+5. In the **Request body**, keep the `text/plain` media type and replace the sample value with your FlowerDocs password, without quotes.
+6. Click **Execute**.
+7. Under **Server response**, a `200` code returns your encrypted password in the **Response body**, already wrapped as `ENC(...)`. Copy the whole value into the `X-FlowerDocs-Password` header of your client configuration (see below).
+
+The same call with `curl`:
+
+```bash
+curl -X POST https://<flowerdocs-host>/flowerdocs-mcp/encrypt \
+  -H "X-FlowerDocs-Access-Key: ENC(yourEncryptedAccessKey)" \
+  -H "Content-Type: text/plain" \
+  --data-raw 'yourPassword'
+# -> ENC(Nhbs45YyYLhmY44udE2fAitLoJywdoSm)
+```
+
+:::tip The call returns 403
+The access key is checked before anything else. The server answers `403` when the `X-FlowerDocs-Access-Key` header is missing, when its value is not wrapped as `ENC(...)`, or when it does not match the access key configured on this MCP server. Paste the key exactly as your administrator gave it to you, and check that it was produced for this server: an access key encrypted for another server cannot be used here.
+:::
+
+:::info When to encrypt again
+An encrypted password only works with the MCP server that produced it. Encrypt it again after changing your FlowerDocs password, or when you connect to another MCP server. If the MCP answers that it could not decrypt the `ENC(...)` password, the value was not produced by this server: run the steps above again.
+:::
 
 ### Connect your AI client
 

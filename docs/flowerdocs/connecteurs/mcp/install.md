@@ -82,12 +82,17 @@ Once the server is up, use its own `/encrypt` endpoint. It holds the same `secre
 curl -X POST http://localhost:8086/flowerdocs-mcp/encrypt \
   -H "X-FlowerDocs-Access-Key: ENC(yourEncryptedAccessKey)" \
   -H "Content-Type: text/plain" \
-  -d "yourPassword"
+  --data-raw 'yourPassword'
 # -> ENC(Nhbs45YyYLhmY44udE2fAitLoJywdoSm)
 ```
 
-A Swagger UI is served at `/flowerdocs-mcp/swagger-ui/index.html`: enter the access key and the value to encrypt, and copy the `ENC(...)` result.
+The endpoint needs no FlowerDocs login or role: the access key is its only check. A Swagger UI is served at `/flowerdocs-mcp/swagger-ui/index.html`; users follow [Encrypt your password](./getting-started.md#encrypt-your-password) to produce their own `ENC(...)` password with it. Give them the access key already encrypted, since they need it for this call too.
 
 :::warning Bootstrapping the access key
-`/encrypt` is itself gated by the access key, so you cannot use it to encrypt the access key the first time. Produce that first `ENC(...)` value out-of-band. See [Encrypting a character string](../../apis/core/examples/stringEncryptor.md) or the [CLM documentation](../../install/clm/clm.md).
+`/encrypt` is itself gated by the access key, so you cannot use it to encrypt the access key the first time. Produce that first `ENC(...)` value out-of-band, with the MCP's `secret`:
+
+- the CLM `string-encrypt` job, passing the MCP's `secret` as `--secret` (see [String encryption](../../config/core/securite/files.md#string-encryption)), or
+- FlowerDocs Core's `POST /rest/encrypt` (see [Encrypting a character string](../../apis/core/examples/stringEncryptor.md)), only if the MCP runs with the same `secret` as Core.
+
+Both return the bare encrypted value: wrap it yourself as `ENC(<value>)` before using it as the `X-FlowerDocs-Access-Key` header.
 :::

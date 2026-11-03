@@ -58,6 +58,7 @@ It is preferable to add the name of all groups/profiles as an entity.
 ### ACL Proxy
 
 This feature is in beta. For any integration requirements using ACl's proxies, please contact the FlowerDocs team to help you find the best solution for your needs.
+The default scope already relies on it: the `acl-preferences` proxy secures user preferences, such as stamps shared with a team, with conditions on the connected user (see [Conditions on the connected user](#conditions-on-the-connected-user)).
 
 A proxy can be used to define dynamic security based on one or more rules.
 
@@ -66,9 +67,9 @@ If all the conditions of a rule are met, the user's permissions are determined a
 
 Three types of conditions are supported by the application:
 
-- [Condition on tags](/docs/flowerdocs/concepts/tags/conditionnel#condition-sur-les-tags)
-- [Condition on class](/docs/flowerdocs/concepts/tags/conditionnel#condition-sur-la-class)
-- [Condition on user](/docs/flowerdocs/concepts/tags/conditionnel#condition-sur-l-user)
+- [Condition on tags](/docs/flowerdocs/concepts/tags/conditionnel#tag-conditions), for example `${tags.B_Status}==Validated`
+- Condition on class: `${data.classid}==<class identifier>`, or `!=` for any other class
+- [Condition on the connected user](#conditions-on-the-connected-user)
 
 :::note[Example]
 
@@ -100,6 +101,19 @@ Three types of conditions are supported by the application:
 <br/>
 :::info
 Like ACLs, if none of the rules is satisfied, the user is considered to have no access rights to the component.
+:::
+
+#### Conditions on the connected user
+
+A rule can compare the connected user with the `contains` operator in two ways:
+
+- `${user.authorities}.contains("DSI")`: the user holds the authority `DSI`. The authorities of a user are the identifiers of his profiles and groups.
+- `${tags.User}.contains("${user.authorities}")` or `${tags.User}.contains("${user.id}")`: the `User` tag of the component holds one of the authorities of the user, or his identifier.
+
+In both cases, `contains` compares whole values: a value matches only if it is exactly equal to one of the values on the other side, never a part of it. One matching value is enough. The comparison is the same when search results are filtered and when the permissions on a single component are checked.
+
+:::warning
+A rule that relies on a partial name grants nothing for that name. `${user.authorities}.contains("DSI")` does not match a user who only belongs to the `DSI_PARIS` group, and a `User` tag holding `DSI_PARIS` does not match a member of the `DSI` group. List the full values: one rule per authority, and the full identifiers in the tag values.
 :::
 
 ## Security object Association

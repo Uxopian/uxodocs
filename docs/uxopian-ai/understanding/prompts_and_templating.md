@@ -20,7 +20,11 @@ A prompt has:
 - `requiresMultiModalModel`: if `true`, the request requires a multimodal LLM
 - `requiresFunctionCallingModel`: if `true`, the request requires a function-calling LLM
 - `reasoningDisabled`: if `true`, tool calls are disabled for this prompt
-- `defaultLlmProvider` and `defaultLlmModel`: optional model override for this specific prompt
+- `defaultLlmProvider` and `defaultLlmModel`: the LLM provider and model the prompt runs on. They take precedence over the usage profile's defaults
+- `temperature`: a number between 0 and 2 (default 1), validated when the version is saved (`400` otherwise). Always taken from the prompt, never from the request
+- `outputSchema`: an optional JSON Schema (a JSON object with a `type`) validated at save. Any conversation that runs this prompt asks the LLM for an answer in that format, and the answer reaches the caller as JSON. In the admin editor it is entered in the **Answer format** card, either as a simple notation such as `{ "answer": "string: the answer in one sentence" }` (converted to a strict schema where every field is required) or as a JSON Schema
+
+The provider and model of a turn come from the prompt of that turn; when the prompt names none, from the [usage profile](../admin/managing_applications.md#resolution-order) of the calling surface. There is no fallback on the system-wide `llm.default.*` properties at call time, so a prompt with no provider running on a usage profile with none fails with an explicit error.
 
 ## Rendering pipeline
 
@@ -59,7 +63,7 @@ ServiceHelpers are Spring beans annotated with `@HelperService(name="...")`. The
 [[${documentService.extractTextualContent(documentId)}]]
 ```
 
-Here `documentService` is the name of the helper, and `documentId` is a variable passed in the request payload. See [ServiceHelpers](../extending/custom_service_helpers.md) for how to write custom ones.
+Here `documentService` is the name of the helper, and `documentId` is a variable passed in the request payload. On FileNet, the equivalent helper is `fileNetService.extractTextualContent(objectId)`, which reads the text of a FileNet document through the connector. See [ServiceHelpers](../extending/custom_service_helpers.md) for how to write custom ones.
 
 ## Built-in prompts
 
@@ -67,7 +71,7 @@ The default `prompts.yml` ships with several ready-to-use prompts:
 
 | Prompt ID | Role | Purpose |
 |---|---|---|
-| `basePrompt` | SYSTEM | Default assistant persona and safety rules |
+| `basePrompt` | SYSTEM | Default assistant persona and safety rules. A usage profile whose *system prompt* is set **replaces** it for the calls it serves (persona and safety rules of the base prompt are then no longer sent unless the usage profile's prompt includes them). Agents get no base prompt |
 | `arenderContext` | USER | Extracts document text via `documentService.extractTextualContent(documentId)` |
 | `summarizeDocumentText` | USER | Summarizes document content as plain text |
 | `summarizeDocumentMarkdown` | USER | Summarizes document content with Markdown formatting |

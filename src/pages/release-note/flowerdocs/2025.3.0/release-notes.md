@@ -3,8 +3,6 @@ title: FlowerDocs 2025.3.0 Release notes
 description: FlowerDocs 2025.3.0 Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software versions as prerequisites:
 
 - **ARender**: 2023.15.0
@@ -163,4 +161,3 @@ The token is no longer passed through the URL but is now transmitted via an **HT
 
 The Companion MSI installer is available [here](/uxodocs/docs/flowerdocs/connecteurs/companion/install)
 
-<FlowerDocsDownloads version="2025.3.0" arenderVersion="2023.15.0" />

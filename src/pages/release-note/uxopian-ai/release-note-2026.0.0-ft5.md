@@ -4,7 +4,7 @@ title: "Uxopian AI release notes - 2026.0.0-ft5"
 date: 2026-08-04
 version: "2026.0.0-ft5"
 major_version: "2026"
-latest: true
+latest: false
 description: "Agentic Plan engine, gateway-signed request authentication, prompt versioning, Applications, named multi-tenant gateway providers, and FileNet search/write tools."
 ---
 

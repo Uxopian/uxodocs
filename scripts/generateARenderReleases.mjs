@@ -118,6 +118,8 @@ function main() {
             description: frontmatter.description || extractDescription(content),
             slug: `/release-note/arender/${versionDir}/release-notes`,
             hasUpgradeNotes: existsSync(upgradeNotesPath),
+            // Version served by the download portal when it differs from the release note (e.g. patch without its own page)
+            ...(frontmatter.download_version && { downloadVersion: frontmatter.download_version }),
         };
 
         releases.push(release);

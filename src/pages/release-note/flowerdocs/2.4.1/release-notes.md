@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 # Evolutions
 
 - Lors de la création d'une tâche, visualisation des pièces jointes ().
@@ -83,4 +81,3 @@ import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
 
 - La tentative de mise à jour d'une annotation par un utilisateur non autorisé ne lui empêche plus de mettre à jour les annotations pour lesquelles il est autorisé ().
 
-<FlowerDocsDownloads version="2.4.1" />

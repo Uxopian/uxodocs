@@ -3,8 +3,6 @@ title: FlowerDocs 2026.0.0 Release notes
 description: FlowerDocs 2026.0.0 Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software prerequisites:
 
 - **ARender**: 2026.0.1
@@ -203,4 +201,3 @@ This version includes the migration to Spring Boot 4 and Spring Framework 6, alo
 - Document template — Data automatically populated from FlowerDocs data is not visible in the viewer. Once the document is downloaded, the data is present.
 - Copy — Unable to access the copied mail from the success notification.
 
-<FlowerDocsDownloads version="2026.0.0" arenderVersion="2026.0.1" />

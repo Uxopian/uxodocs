@@ -1,14 +1,7 @@
 import React from 'react';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-export default function FlowerDocsCompanionDownload(): JSX.Element {
-    const { siteConfig } = useDocusaurusContext();
-    const version = siteConfig.customFields?.flowerDocsCompanionVersion as string;
-    return (
-        <Link
-            href={`https://artifactory.arondor.cloud/artifactory/arondor-release/com/flower/docs/companion/flowerdocs-companion-${version}.msi`}>
-            FlowerDocs Companion
-        </Link>
-    );
+// Conservé pour les docs versionnées (branches flowerdocs-v*) qui importent encore ce composant.
+// Le lien de téléchargement Artifactory a été retiré : l'installeur est fourni par le support.
+export default function FlowerDocsCompanionDownload(): React.JSX.Element {
+    return <>FlowerDocs Companion</>;
 }

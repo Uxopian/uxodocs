@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 This version requires the following software versions as prerequisites:
 
 - **ARender**: 4.8.21
@@ -205,4 +203,3 @@ Ex: a user who has the right to download or print the document can do so again.
 
 ✅ ARender version upgrade to 4.8.21
 
-<FlowerDocsDownloads version="2.8" arenderVersion="4.8.21" />

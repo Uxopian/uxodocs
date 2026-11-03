@@ -364,6 +364,10 @@ If the panel does not appear, open browser developer tools and check:
 | `consts/wsGatewayUrl` | Scope file, optional | `uxopian-gateway`'s own public Ingress URL, as seen by **user browsers** — only needed for the WebSocket channel, see [Configure FlowerDocs scope files](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint) |
 | `gateway-service` `ingress.*` | Helm values (`uxopian-gateway`) | Exposes the gateway directly, for the WebSocket channel only |
 
+## How documents are read
+
+FlowerDocs documents are handed to ARender through the FlowerDocs file connector (reference `{ "connector": "flowerdocs", "documentId": "...", "fileId": "...", "version": "..." }`), which renders them and then runs OCR in one shared path; it refuses up front when no OCR parser is installed. The connector reads with the **reviewer's own token**, so FlowerDocs rights apply and a refusal comes back as `401`. Date criteria of the search tools are read in UTC. The helper methods (`flowerDocsService`) and the tool names and parameters are unchanged. The same connector lets a [human review task](./human_in_the_loop_review.md) point to a FlowerDocs document.
+
 ## Common issues
 
 | Error | Cause | Solution |

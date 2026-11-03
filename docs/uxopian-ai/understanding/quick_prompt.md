@@ -82,6 +82,10 @@ injected.viewType === 'folder'
 
 End users only ever receive each prompt's display settings (label, category, priority, description, condition) — never the prompt template content or its LLM configuration.
 
+## Errors shown in place of the answer
+
+When the API answers with an explanation, Quick Prompt and the chat display the server's message in place of the answer instead of a generic "No response received". The main case is an LLM provider whose quota or credit balance is exhausted: the API answers `402 LLM_QUOTA_EXCEEDED` with a fixed message asking the user to contact the Uxopian AI administrator. Network failures and `401`/`502` answers still read "No response received".
+
 ## Relationship to the chat component
 
 Quick Prompt and the chat (`<chat-element>`) share the same backend (conversations, requests, streaming, prompts) but serve different needs:

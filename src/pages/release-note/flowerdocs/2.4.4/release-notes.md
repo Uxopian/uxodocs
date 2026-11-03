@@ -3,8 +3,6 @@ title: Release notes
 description: Release notes
 ---
 
-import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
-
 # Evolutions
 
 ## Administration
@@ -77,4 +75,3 @@ import FlowerDocsDownloads from '@site/src/components/FlowerDocsDownloads';
 
 - **Montée de version :** ARender : 4.0.8-11145 à 4.0.8-11145-2 ().
 
-<FlowerDocsDownloads version="2.4.4" />
