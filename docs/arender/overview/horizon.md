@@ -15,13 +15,13 @@ ARender Horizon is a React-based document viewer distributed as an npm package (
 
 ## Feature availability
 
-Status as of ARender 2026.3.0.
+Status as of ARender 2026.4.0.
 
 | Area | Available | Coming soon |
 |------|-----------|-------------|
-| Viewing | All formats including AutoCAD, [Excel data view](/release-note/arender/v2026.3.0/release-notes#excel-data-view) (`.xlsx`), full-text search | Multi-view (split screen), table of contents, comparison (text and image) |
+| Viewing | All formats including AutoCAD, [Excel data view](/release-note/arender/v2026.3.0/release-notes#excel-data-view) (`.xlsx`), full-text search, multi-view (several documents side by side), table of contents (the document's outline) | Comparison (text and image) |
 | Annotations | Rectangle, circle, free text, arrow, freehand, highlight, underline, strikethrough | Stamp, link, polyline, measure, bookmarks |
-| Comments | Comment pinned to a point, with replies, status and a comments panel | Comment on a zone, comment on a text selection |
+| Comments | Comment pinned to a point or on a zone, with replies, status and a comments panel | Comment on a text selection |
 | Download and print | Download in original format or as PDF, print | Download as PDF with annotations (flattened or editable), print with annotations |
 | Document builder | | Split, merge, page manipulation |
 | Security | [OAuth2 authentication](../installation/configuration.md#authentication-and-bff) on the rendition backend (JWT validation) | Redaction, watermarks, per-user and per-document permissions defined by your repository (download, print, annotate, redact...) |

@@ -7,7 +7,7 @@ import remarkVariables from "./scripts/remark-variables.mjs";
 // Update these when releasing a new version. They are injected into all
 // markdown files at build time via the remarkVariables script,
 // replacing {{version}} placeholders.
-const arenderVersion = "2026.3.1";
+const arenderVersion = "2026.4.0";
 
 // Suppress the "unmaintained" banner only on the LTS — the highest snapshot
 // major strictly below `current`. We allow at most two maintained majors in
@@ -47,13 +47,13 @@ function arenderVersionOverrides(): Record<string, { banner?: "none" }> {
     return { [list[0].name]: { banner: "none" } };
 }
 
-const flowerDocsVersion = "2026.2.0";
-const flowerDocsArenderVersion = "2026.3.1";
+const flowerDocsVersion = "2026.1.0";
+const flowerDocsArenderVersion = "2026.1.0";
 const flowerDocsOSVersion = "3.6.0";
 const flowerDocsRedisVersion = "8.8";
 const flowerDocsJavaVersion = "25";
-const flowerDocsJavaMinVersion = "25.0.5+8";
-const flowerDocsPlumeVersion ="2026.2.0";
+const flowerDocsCompanionVersion = "2026.0.0";
+const flowerDocsPlumeVersion ="2026.0.0";
 
 const getPdfFileName = (
     siteConfig: any,
@@ -104,7 +104,7 @@ const config: Config = {
     ],
 
 	customFields: {
-	    flowerDocsPlumeVersion,
+	    flowerDocsCompanionVersion, flowerDocsPlumeVersion,
 	},
 
     plugins: [
@@ -170,7 +170,7 @@ const config: Config = {
                 lastVersion: "current",
                 versions: { current: { label: `v${flowerDocsVersion}` } },
                 showLastUpdateTime: true,
-                remarkPlugins: [[remarkVariables, { variables: { version: flowerDocsVersion, arenderVersion: flowerDocsArenderVersion, osVersion: flowerDocsOSVersion, redisVersion: flowerDocsRedisVersion, javaVersion: flowerDocsJavaVersion, javaMinVersion: flowerDocsJavaMinVersion } }]],
+                remarkPlugins: [[remarkVariables, { variables: { version: flowerDocsVersion, arenderVersion: flowerDocsArenderVersion, osVersion: flowerDocsOSVersion, redisVersion: flowerDocsRedisVersion, javaVersion: flowerDocsJavaVersion } }]],
             },
         ],
         [
