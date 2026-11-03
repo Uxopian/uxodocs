@@ -50,6 +50,14 @@ OpenSearch `3.6.0` is the supported version. uxopian-ai connects to OpenSearch o
 
 For production, allocate at least 1 Gi heap to OpenSearch and configure persistent volumes for the data directory.
 
+## Optional components
+
+| Component | Needed for |
+|---|---|
+| ARender (rendition broker) | Rendering documents in the [human review screen](../how_to/human_in_the_loop_review.md), reading non-PDF files with the document tools, OCR |
+| uxopian-code-sandbox | Running [code modules](../how_to/code_modules.md). Without it the feature is off |
+| A writable shared folder | The filesystem file connector and request attachments kept with `persist` |
+
 ## Image registry access
 
 Container images are distributed through two registries:

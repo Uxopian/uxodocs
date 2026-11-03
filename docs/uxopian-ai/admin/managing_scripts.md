@@ -1,26 +1,26 @@
 ---
 title: Managing scripts in the admin UI
 last_update:
-  date: '2026-08-13T13:08:15.927Z'
+  date: '2026-10-25T08:39:17.266Z'
   author: CI/CD Bot
 sidebar_label: Scripts
 sidebar_position: 7
-content_hash: e07cd5398e68891deed89f14a26270539398170c15ae4715e9527255f16a50b0
+content_hash: ad4dd003b65aaf7461ce66deff8ebe8f2bcf838b72027285867babcb74326717
 ---
 
-The **Scripts** section of the admin panel lets administrators author and deploy custom front-end JavaScript through a governed lifecycle that includes an **LLM-based security scan**. A typical use is the host connector that wires [Quick Prompt](../understanding/quick_prompt.md) into a business application: instead of hand-deploying a static `.js` file, the connector is authored in the admin panel, scanned, and served by uxopian-ai to authenticated users.
+The **Scripts** section of the admin panel lets administrators author and deploy custom front-end JavaScript through a governed lifecycle that includes an **LLM-based security scan**. A typical use is the host connector that wires [Quick Prompt](../understanding/quick_prompt.md) into a business application: instead of hand-deploying a static `.js` file, the connector is authored in the admin panel, scanned, and served by uxopian-ai to authenticated users. The same mechanism carries the quick AI actions of the [IBM Content Navigator plugin](../how_to/integrate_with_filenet.mdx#add-quick-ai-actions) and the AI menu of the [ARender viewer](../how_to/integrate_with_arender.mdx#define-the-ai-menu-as-uxopian-ai-scripts).
 
 Scripts are managed per tenant. Changes take effect without restarting the application.
 
 ![The Scripts section of the admin panel listing scripts with their status](../images/scripts-list.png)
 
-*Figure: the Scripts section lists each script with its publication status (here, a force-published script and a draft).*
+*Figure: the Scripts section lists each script with its publication status (here, a force-published script and a draft). The list is paginated and filtered on the server (`search`, `status`).*
 
 ## The script lifecycle
 
 ```mermaid
 flowchart LR
-    Create["Create<br/>(name only)"]
+    Create["Create<br/>(id only)"]
     Draft["Edit draft<br/>content"]
     Scan["Scan & publish"]
     Certified["Certified →<br/>auto-published"]
@@ -46,7 +46,7 @@ A script always has two faces:
 ## Create a script
 
 1. In the admin panel, open **Scripts** and click **New Script**.
-2. Enter a **name**. The name becomes the script's immutable **ID** and may contain only letters, digits, `_`, and `-`. Creation fails with a conflict if the name is already used.
+2. Enter a **name**. The name is the script's **ID**: it is immutable and may contain only letters, digits, `_`, and `-`. A name already used by another script is reported while you type, and Save is refused.
 3. Save. The script is created empty; add its content on the detail page.
 
 ## Edit a script
@@ -99,7 +99,7 @@ A deployed script is served to any authenticated user as `application/javascript
 GET /api/v1/scripts/{id}
 ```
 
-A script that has never been deployed is **not servable** and returns `401 Unauthorized`. A draft can be previewed (for development) via `GET /api/v1/scripts/{id}/draft`.
+The `ETag` is a hash of the script's ID and its deployed content, so a browser picks up a new deployment instead of keeping the old script on `304`. A script that has never been deployed is **not servable** and returns `401 Unauthorized`. A draft can be previewed (for development) via `GET /api/v1/scripts/{id}/draft`.
 
 To load a deployed script in a host page:
 
@@ -113,9 +113,10 @@ To load a deployed script in a host page:
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/api/v1/admin/scripts` | List scripts with full metadata |
+| `GET` | `/api/v1/admin/scripts` | List scripts — a page `{ collection, total, facets }` of summaries (without the code: derived status and line count). Filters: `search`, `status`, `workspaceId`; pagination: `offset`, `limit`, `orderBy` (`id`, not `name`), `ascending` |
 | `GET` | `/api/v1/admin/scripts/{id}` | Get a script by ID |
-| `POST` | `/api/v1/admin/scripts` | Create a script (name only; `409` if the name exists) |
+| `GET` | `/api/v1/admin/scripts/availability?id={id}` | Whether a new script can take this ID (`true` / `false`) |
+| `POST` | `/api/v1/admin/scripts` | Create a script from its ID only — body `{"id": "my-script"}`; `409` if the ID exists |
 | `PUT` | `/api/v1/admin/scripts/{id}` | Update the draft content |
 | `POST` | `/api/v1/admin/scripts/{id}/scan` | Run the security scan |
 | `POST` | `/api/v1/admin/scripts/{id}/publish` | Publish a certified draft |

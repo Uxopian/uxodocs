@@ -20,9 +20,11 @@ Each node in a Plan has one of three types:
 
 | Type | Runs | Configuration |
 |---|---|---|
-| `AGENT` | An LLM agent, built from an agent configuration (an objective [prompt](./prompts_and_templating.md), tool permissions, and an optional success criteria) | `agentConfId` |
+| `AGENT` | An LLM agent, built from an agent configuration (a required objective [prompt](./prompts_and_templating.md), tool permissions, an optional list of success criteria, and an optional maximum number of tool cycles) | `agentConfId` |
 | `DIRECT_TOOL` | A single native tool call, with **no LLM in the loop** | `toolName`, `toolArgumentBindings` |
 | `SUBPLAN` | Another Plan, run in-process as this node's body | `subPlanId` |
+
+An agent configuration **must have an objective**: saving one without it is refused with `400`, since an agent with no prompt could never run. An agent runs on the provider, model and temperature of its objective prompt (the agent configuration itself carries none), and the prompt must therefore name a provider; a plan whose agent objective prompt has none is refused before the run. The objective prompt can also declare a *response format* (`outputSchema`, a JSON Schema): the agent then returns its output as JSON, which downstream nodes receive as such.
 
 `DIRECT_TOOL` nodes are the cheapest and most deterministic step type — useful for anything that doesn't need judgment (fetching a document, chunking text, calling a deterministic API) before handing off to an `AGENT` node for the parts that do.
 
@@ -78,9 +80,30 @@ When called, the sub-plan runs synchronously and returns its result as the tool'
 
 ## Execution model
 
-Running a Plan creates a **Plan execution**: a record of the run, holding the overall status and one **node execution** per node (its own status, timing, token usage, tool call trace, and output). Execution statuses are `PENDING`, `RUNNING`, `PAUSED`, `COMPLETED`, `FAILED`, `CANCELLED`. A node's status additionally distinguishes `SKIPPED` (a downstream node whose dependency failed) and `UNSATISFIED` — an `AGENT` node whose agent configuration has a `successCriteria` that the run's own output didn't meet, which is treated as a distinct outcome from an outright failure.
+Running a Plan creates a **Plan execution**: a record of the run, holding the overall status and one **node execution** per node (its own status, timing, token usage, tool call trace, and output). Execution statuses are `PENDING`, `RUNNING`, `PAUSED`, `COMPLETED`, `FAILED`, `CANCELLED`. A node's status additionally distinguishes `SKIPPED` (a downstream node that did not run, because its dependency ended in a state its own *execution condition* does not accept) and `UNSATISFIED` — an `AGENT` node whose success criteria were not all met, which is treated as a distinct outcome from an outright failure.
 
-An execution can be **paused** (in-flight nodes finish, then the execution stops advancing), **resumed** (continues from its persisted state without re-running nodes that already completed), or **stopped** (moves permanently to `CANCELLED`, keeping the partial trace for inspection). A sub-plan run started by a `SUBPLAN` node is a **nested** execution — same model, linked to its parent execution and node, one level deeper.
+### Success criteria
+
+An agent's `successCriteria` is a list of statements. For each one, the model returns a verdict with its evidence, and the engine itself derives the node's outcome: `SUCCESS` when every criterion is met, `UNSATISFIED` when one is not, `FAILURE` when the run failed. The model no longer reports the status itself.
+
+### Execution condition: recovery branches
+
+Every node has an `executionCondition` that says in which outcome of its dependencies it runs:
+
+| Value | The node runs when its dependencies ended… |
+|---|---|
+| `ON_SUCCESS` (default) | successfully |
+| `ON_UNSATISFIED` | with an unsatisfied outcome |
+| `ON_ERROR` | in error |
+| `ON_ANY` | in any outcome |
+
+This makes recovery branches expressible: a node that fails can be followed by an `ON_ERROR` node that handles the failure, and a failure consumed by an `ON_ERROR` or `ON_ANY` branch no longer fails the run. For instance, a plan can try to read a page as text, and fall back to reading it as an image when the page holds no text.
+
+### Pause, resume and stop
+
+An execution can be **paused** (in-flight nodes finish, then the execution stops advancing), **resumed** (continues from its persisted state without re-running nodes that already completed — a resumed run needs no payload, it is rebuilt from the nodes marked *persist output*), or **stopped** (moves permanently to `CANCELLED`, keeping the partial trace for inspection). All three go through one endpoint, `POST /api/v1/admin/plan-executions/{id}/signal`, with a body `{ "type": "PAUSE" | "RESUME" | "STOP" }`. The former `/pause`, `/resume` and `/stop` endpoints no longer exist. A sub-plan run started by a `SUBPLAN` node is a **nested** execution — same model, linked to its parent execution and node, one level deeper — and is driven through the run that started it.
+
+If the LLM provider reports an exhausted quota or credit balance (HTTP `402`, `LLM_QUOTA_EXCEEDED`), the whole run is aborted, also across sub-plan boundaries, and the failed node keeps the tokens the provider billed.
 
 See [Managing Plans in the admin UI](../admin/managing_plans.md) for how to build, run, and monitor a Plan in practice.
 

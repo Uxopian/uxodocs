@@ -23,6 +23,13 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | `TOOLS_ENABLED` | `true` | Set to `false` to disable all tool execution |
 | `JAVA_OPTS` | (empty) | JVM options (e.g., `-Xmx768m -Xms512m`) |
 
+### Internal authentication
+
+| Variable | Default | Description |
+|---|---|---|
+| `INTERNAL_AUTH_JWT_SECRET` | (none — **required**) | HS256 secret shared with the gateway, **at least 32 bytes** (`openssl rand -base64 48`). Since 2026.0.0 `uxopian-ai` refuses to start without it, in every profile, `dev` included. Set the same value on the gateway. |
+| `INTERNAL_AUTH_JWT_ISSUER` | `uxopian-gateway-internal` | Expected `iss` claim of the gateway assertion. |
+
 ### OpenSearch
 
 | Variable | Default | Description |
@@ -32,15 +39,14 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | `OPENSEARCH_SCHEME` | `http` | Connection scheme (`http` or `https`) |
 | `OPENSEARCH_USERNAME` | (empty) | OpenSearch username (if auth enabled) |
 | `OPENSEARCH_PASSWORD` | (empty) | OpenSearch password (if auth enabled) |
-| `OPENSEARCH_FORCE_REFRESH_INDEX` | `false` | Force index refresh after each write. Set `true` only for testing. |
 
 ### LLM providers
 
 | Variable | Default | Description |
 |---|---|---|
-| `LLM_DEFAULT_PROVIDER` | `openai` | Default LLM provider identifier |
-| `LLM_DEFAULT_MODEL` | `gpt-5.1` | Default model name |
-| `LLM_DEFAULT_PROMPT` | `basePrompt` | Default base prompt ID |
+| `LLM_DEFAULT_PROVIDER` | `openai` | Provider of the usage profile auto-created for a connection provider that has none. No longer a fallback at call time. |
+| `LLM_DEFAULT_MODEL` | `gpt-5.1` | Model of that auto-created usage profile |
+| `LLM_DEFAULT_PROMPT` | `basePrompt` | Default base prompt ID (replaced, for its calls, by the `prompt` of a usage profile) |
 | `LLM_CONTEXT_SIZE` | `10` | Number of previous requests included in each LLM call |
 | `LLM_DEBUG` | `false` | Enable verbose LLM request/response logging |
 | `OPENAI_API_KEY` | (empty) | OpenAI API key |
@@ -53,22 +59,38 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | `BEDROCK_AWS_ACCESS_KEY` | (empty) | AWS access key for Bedrock |
 | `BEDROCK_AWS_SECRET_KEY` | (empty) | AWS secret key for Bedrock |
 
+The limits and the retention of the files sent to models (`llm.inline.max-size`, `llm.document.max-size`, `llm.files.retention`) are described in the [configuration reference](./configuration.md#default-llm-settings).
+
 ### Plugins
 
 | Variable | Default | Description |
 |---|---|---|
 | `PLUGINS_ROOT_PATH` | `plugins/` | Path to the directory containing plugin JARs |
-| `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files` | Comma-separated `@ToolService(tags=…)` list. Since 2026.0.0-ft5, this no longer gates which tools get *registered* at startup — every tool in every plugin JAR present in `plugins/` is always registered, regardless of this value. It now only seeds the tool-tag whitelist of the [Application](../admin/managing_applications.md) auto-created the first time a connection provider is used (empty = `allowAllTools`). See [Plugin system — Filtering tools by tag](../understanding/plugin_system.md#filtering-tools-by-tag). **Do not whitelist more than one of `flowerdocs`, `alfresco`, `filenet` on the same Application** — they all expose overlapping document search/read/redact operations for different ECM backends, and exposing more than one confuses the LLM about which to call. Pick exactly one, e.g. `flowerdocs,files` (default), `alfresco,files`, `filenet,files,interaction`, or `files` alone if no ECM backend is needed. |
+| `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files,interaction` | Comma-separated `@ToolService(tags=…)` list. Since 2026.0.0-ft5, this no longer gates which tools get *registered* at startup — every tool in every plugin JAR present in `plugins/` is always registered, regardless of this value. It now only seeds the tool-tag whitelist of the [usage profile](../admin/managing_applications.md) auto-created the first time a connection provider is used (empty = `allowAllTools`). See [Plugin system — Filtering tools by tag](../understanding/plugin_system.md#filtering-tools-by-tag). **Do not whitelist more than one of `flowerdocs`, `alfresco`, `filenet` on the same usage profile** — they all expose overlapping document search/read/redact operations for different ECM backends, and exposing more than one confuses the LLM about which to call. Pick exactly one, e.g. `flowerdocs,files,interaction` (default), `alfresco,files`, `filenet,files,interaction`, or `files` alone if no ECM backend is needed. |
 
 ### Integration connectors
 
 | Variable | Default | Description |
 |---|---|---|
-| `RENDITION_BASE_URL` | (empty) | ARender DSB base URL. Required if the ARender plugin is deployed. |
+| `RENDITION_BASE_URL` | (empty) | ARender base URL. Required if the ARender plugin is deployed. Also relayed at `<app>/rendition/` for the human review screen. |
+| `FILECONNECTOR_FILESYSTEM_ROOT` | (empty — connector off) | Root folder of the filesystem file connector (`<root>/<tenant>/`). The application fails to start if it is not a readable and writable folder. Required to accept `persist: true` attachments. |
+| `FILECONNECTOR_FILESYSTEM_ALLOWEDEXTENSIONS` | `pdf,png,jpg,jpeg,tif,tiff` | Extensions the filesystem connector accepts (comma-separated) |
 | `FD_WS_URL` | (empty) | FlowerDocs core web service URL (e.g. `http://<flowerdocs-endpoint>/core/`). Required if the FlowerDocs plugin is deployed. |
 | `ALFRESCO_BASE_URL` | (empty) | Alfresco REST API v1 base URL. Required if the Alfresco plugin is deployed (via `PLUGINS_TOOLS_ENABLED_TAGS=alfresco,…`). |
 | `ALFRESCO_LEGACY_BASE_URL` | (auto-derived) | Base URL for Alfresco legacy Web Script endpoints. Auto-derived from `ALFRESCO_BASE_URL` when not set (e.g., `https://host/alfresco-api` → `https://host/alfresco`; `https://host/alfresco/api` → `https://host/alfresco/s`). Set explicitly only if the auto-derivation does not match your deployment. |
 | `ALFRESCO_CMM_ENABLED` | `false` | Enable Alfresco Custom Content Model lookup. When disabled, the LLM sees only the built-in `cm:*` system properties. |
+
+### Code sandbox
+
+Optional: [code modules](./rest_api.md#code-modules--apiv1admincode-modules) run in a separate uxopian-code-sandbox service. These names are the Spring relaxed-binding forms of the `code-sandbox.*` properties described in the [configuration reference](./configuration.md#code-sandbox).
+
+| Variable | Default | Description |
+|---|---|---|
+| `CODESANDBOX_URL` | (empty — sandbox off) | Base URL of uxopian-code-sandbox. Without it, no code tool is offered. |
+| `CODESANDBOX_SECRET` | (empty) | Shared secret used to call the sandbox |
+| `CODESANDBOX_CALLERNAME` | `uxopian-ai` | Caller name presented to the sandbox |
+| `CODESANDBOX_CAPABILITYPROFILE` | `uxoai` | Capability profile the code runs with |
+| `CODESANDBOX_MAXACTIVESESSIONS` | `16` | Executions allowed at once |
 
 ### Script security scan
 
@@ -97,6 +119,7 @@ Since 2026.0.0-ft3, MCP servers are registered from the admin UI — see [Managi
 
 | Variable | Default | Description |
 |---|---|---|
+| `HAZELCAST_MULTICAST_ENABLED` | `true` | Multicast discovery, local (non-Kubernetes) mode only. Hazelcast auto-detection is always disabled since 2026.0.0: set this to `false` for single-node or Docker Compose setups on a shared network. |
 | `HAZELCAST_KUBERNETES_ENABLED` | `false` | Enable Kubernetes-based Hazelcast discovery |
 | `HAZELCAST_KUBERNETES_SERVICE_DNS` | `ai-standalone-headless` | Kubernetes headless service DNS |
 | `HAZELCAST_KUBERNETES_NAMESPACE` | `default` | Kubernetes namespace |
@@ -108,7 +131,7 @@ The gateway is configured primarily via the mounted `gateway-application.yaml` f
 | Variable | Default | Description |
 |---|---|---|
 | `REGISTRY` | `artifactory.arondor.cloud:5001` | Docker registry host for Artifactory-based image pull. Not used when switching to Cloudsmith images (see [Registry access](../getting_started/registry_access.md)). |
-| `UXOPIAN_VERSION` | `2026.0.0-ft5` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
+| `UXOPIAN_VERSION` | `2026.0.0` | Version tag for `uxopian-gateway` and `uxopian-ai` images |
 
 In the gateway `gateway-application.yaml`, the URIs for backend services are hardcoded Docker Compose service names (e.g., `http://uxopian-ai:8080`).
 

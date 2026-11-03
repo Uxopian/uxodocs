@@ -12,7 +12,7 @@ The **Plans** section of the admin panel lets you build, run, and monitor [Agent
 
 ## Navigate to Plans
 
-In the admin panel, click *Plans* in the navigation. The page lists all plans for the current tenant with a search box, and a *New Plan* button.
+In the admin panel, click *Plans* in the navigation. The page lists the plans of the current tenant — paginated, with server-side search, filters (agent, used by) and sorting — and a *New Plan* button. Each plan shows its step count, the agents and plans it calls, and the plans that call it. Double-clicking a row opens the plan.
 
 ![The Plans list showing a plan's ID, description, and step count](../images/plans-list.png)
 
@@ -21,7 +21,7 @@ In the admin panel, click *Plans* in the navigation. The page lists all plans fo
 ## Create a plan
 
 1. Click *New Plan*. This opens the plan editor on the **Flow** tab.
-2. Set the **Plan ID** (immutable once saved) and an optional **Description**.
+2. Set the **Plan name** (the plan's ID, immutable once saved; a name already in use is reported while you type) and an optional **Description**.
 3. Click *Add Node* to add a node to the graph, then drag from one node's edge to another to connect them — a connection sets a dependency: the target node waits for the source node to complete.
 4. Select a node to open its configuration panel.
 
@@ -37,15 +37,16 @@ Every node, regardless of type, has:
 |---|---|
 | Name | Short label shown on the node in the graph |
 | Description | Free text describing what the node does |
+| Runs when | The outcome of its dependencies in which this node runs: on success (default), on unsatisfied, on error, or in any outcome. Used to build recovery branches — see [Agentic Plans — execution condition](../understanding/agentic_plans.md#execution-condition-recovery-branches) |
 | Fan out over a list | Runs this node once per element of a list instead of once — see [Fan-out](#fan-out-run-a-node-once-per-list-element) below |
 | Output Key | The payload key under which this node's result is published |
 | Persist output to shared payload | When on, the output becomes visible to every downstream node, not just direct dependents |
 
 Then pick the **node type** — Agent, Sub-plan, or Direct tool — each with its own fields:
 
-- **Agent**: select an existing agent configuration from the dropdown, or click *New agent* to create one inline without leaving the plan editor. Once an agent is selected, its objective prompt is shown with the variables currently available to this node (dependency outputs, persisted outputs, plan input parameters, and — if fan-out is on — the `item` variable) highlighted, so you can see at a glance what the prompt can reference.
+- **Agent**: select an existing agent configuration from the dropdown, or click *New agent* to create one inline without leaving the plan editor. An agent needs an **objective** prompt — the editor marks the field as required, and saving an agent without one is refused. The agent editor also takes a *description*, a list of **success criteria** entered one by one (the model gives a verdict on each, and any unmet criterion makes the node *unsatisfied*) and a *Max tool cycles* limit. An agent carries no model of its own: it runs on the provider, model and temperature of its objective prompt. Once an agent is selected, its objective prompt is shown with the variables currently available to this node (dependency outputs, persisted outputs, plan input parameters, and — if fan-out is on — the `item` variable) highlighted, so you can see at a glance what the prompt can reference.
 - **Sub-plan**: select another plan from this tenant to run as this node's body.
-- **Direct tool**: select a native tool from the dropdown (grouped by tag). Once selected, each of the tool's arguments gets its own source dropdown, listing every value currently available to this node (fan-out item, a connected dependency's output, a persisted output, or a plan input parameter) — the argument is auto-bound automatically when there is exactly one possible source.
+- **Direct tool**: select a tool from the dropdown (grouped by tag) — a native tool, or a code module exposed as a tool. Once selected, each of the tool's arguments gets its own source dropdown, listing every value currently available to this node (fan-out item, a connected dependency's output, a persisted output, or a plan input parameter) — the argument is auto-bound automatically when there is exactly one possible source.
 
 ### Fan-out: run a node once per list element
 
@@ -90,20 +91,23 @@ A plan exposed this way is only actually callable by an agent whose configuratio
 
 ## Run a plan
 
-Click *Run* (available once the plan is saved). If the plan declares input parameters, a modal collects a value for each (required ones are enforced) before starting; otherwise the run starts immediately with no payload. The editor switches to the **Runs** tab and opens the new execution.
+Click *Run* (available once the plan is saved). If the plan declares input parameters, a window collects a value for each (required ones are enforced) before starting; otherwise the run starts immediately with no payload. The run then opens in its own page.
 
 ## Monitor an execution
 
-The **Runs** tab shows, for a saved plan, a selector over its past executions (when there is more than one) and the currently selected execution's detail:
+The plan page has a **Runs** card listing the plan's past executions (newest first, loaded page by page). Opening one shows the run view:
 
-- Overall **status** badge (`Pending`, `Running`, `Paused`, `Completed`, `Failed`, `Cancelled`), execution id, creation time, node count, and total token/tool-call consumption.
-- A **Pause** button while `Running`, **Resume** while `Paused`, and **Stop** while `Running` or `Paused` — pausing lets in-flight nodes finish before the execution actually stops; resuming continues from where it left off without re-running completed nodes; stopping moves the execution permanently to `Cancelled`, keeping the trace.
-- A visual graph of the plan's nodes, color-coded by their own status (`Pending`, `Running`, `Completed`, `Failed`, `Skipped`, `Unsatisfied`). Selecting a node shows its start/completion time, input/output token counts, error message (if any), full output, and every tool call it made — each expandable to see the exact arguments, result, and (if it failed) error.
-- If the whole execution failed, the failure reason is shown at the top.
+- The overall **status** badge (`Pending`, `Running`, `Paused`, `Completed`, `Failed`, `Cancelled`), and key figures: start time, duration, steps, tokens and tool calls.
+- A **Pause** button while `Running`, **Resume** while `Paused`, **Stop** while `Running` or `Paused`, and a refresh button — pausing lets in-flight nodes finish before the execution actually stops; resuming continues from where it left off without re-running completed nodes; stopping moves the execution permanently to `Cancelled`, keeping the trace.
+- A **Steps** flow, which can be expanded to full screen, with each node color-coded by its own status (`Pending`, `Running`, `Completed`, `Failed`, `Skipped`, `Unsatisfied`) and showing its input and output token counts. Selecting a node opens its panel with its start/completion time, error message (if any), its **output**, its `log(...)` lines when it ran a code module, and every tool call it made — each expandable to see the exact arguments, result, and (if it failed) error. The selected step is kept in the URL (`?step=<id>`), so a link opens the run on that step.
+- A **Shared payload** card showing what the plan holds: its input, and the output of each step under its key.
+- If the whole execution failed, the failure reason is shown at the top. If the LLM provider reports an exhausted quota or credit balance (HTTP `402`), the whole run is aborted, and the failed node keeps the tokens the provider billed.
 
-![An execution's Runs tab: chunk completed (green), summarize-chunks failed (red) with its error, combine skipped (gray)](../images/plan-run-detail.png)
+Token counts include every completion of a tool-calling loop, not only the last one, so figures are higher than before 2026.0.0 for nodes that call tools.
 
-*Figure: A failed run — each node's status is color-coded, and its own detail panel (not pictured selected here) shows timing, tokens, and errors.*
+![An execution's run page: status, duration, steps, tokens and tool calls, then the Steps flow with chunk, summarize-chunks and combine all completed](../images/plan-run-detail.png)
+
+*Figure: A completed run — each node's status is color-coded, and selecting a node opens its detail panel with timing, tokens, and errors.*
 
 ## REST API
 
@@ -113,22 +117,23 @@ The admin UI is a thin wrapper around two controllers. All endpoints require the
 
 | Method | Path | Description |
 |---|---|---|
-| `GET` | `/` | List all plans |
+| `GET` | `/` | List plans — a page `{ collection, total, facets }` of plan summaries (step count, agents and plans called, callers). Filters: `search`, `agentId`, `usedBy`, `workspaceId`; pagination: `offset`, `limit`, `orderBy`, `ascending` |
+| `GET` | `/availability?id={id}` | `true` when a new plan can take this ID |
 | `GET` | `/{id}` | Get one plan |
 | `POST` | `/` | Create a plan |
 | `PUT` | `/{id}` | Update a plan |
 | `DELETE` | `/{id}` | Delete a plan |
 
+The former `POST /{id}/pause`, `/resume` and `/stop` endpoints of plan executions were replaced by the single `/signal` endpoint below.
+
 **Plan executions** — `/api/v1/admin/plan-executions`
 
 | Method | Path | Description |
 |---|---|---|
-| `GET` | `/` | List main (non-nested) plan executions; nested runs are reachable through their parent execution |
+| `GET` | `/` | List main (non-nested) plan executions, newest first, as a page of summaries (token total computed server side; node outputs and tool calls are left out — fetch `/{id}` for them). Filters: `planId`, `status`, `workspaceId`; pagination: `offset`, `limit` |
 | `GET` | `/{id}` | Get one execution, including every node's state |
 | `POST` | `/run` | Create and immediately start an execution (`{ "planId": "...", "inputPayload": { ... } }`); returns `202 Accepted` with the initial execution |
-| `POST` | `/{id}/pause` | Request a cooperative pause (`409` if not `RUNNING`) |
-| `POST` | `/{id}/resume` | Resume a paused execution (`409` if not `PAUSED`) |
-| `POST` | `/{id}/stop` | Stop permanently — moves to `CANCELLED` (`409` if already terminal) |
+| `POST` | `/{id}/signal` | Send a signal with the body `{ "type": "PAUSE" \| "RESUME" \| "STOP" }`: pause cooperatively, resume a paused execution, or stop permanently (moves to `CANCELLED`). Returns the execution; `400` if the type is missing or unknown, `404` if the execution is unknown, `409` if its state does not allow the signal |
 | `DELETE` | `/{id}` | Delete an execution record |
 
 ## Related pages

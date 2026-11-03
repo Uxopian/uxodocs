@@ -142,6 +142,7 @@ fetch(UXO_AI_ENDPOINT).then(() =>
   createChat({
     endpoint:   UXO_AI_ENDPOINT,       // through FlowerDocs' proxy — REST/SSE
     wsEndpoint: WS_UXO_AI_ENDPOINT,    // direct, own Ingress — WebSocket (or '' — degrades)
+    request:    { inputs: [] },        // mandatory: the initial request, empty for a blank panel
   })
 );
 ```
@@ -194,7 +195,7 @@ Registers a circled shortcut icon in the FlowerDocs shortcut bar (bottom-left). 
 createChat({
   endpoint: UXO_AI_ENDPOINT,
   wsEndpoint: WS_UXO_AI_ENDPOINT,
-  // no request payload — no contextual input
+  request: { inputs: [] },  // mandatory since 2026.0.0: an empty request, no contextual input
 });
 ```
 

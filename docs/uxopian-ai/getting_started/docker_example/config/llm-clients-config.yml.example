@@ -204,19 +204,26 @@ llm:
             functionCallSupported: true
 
       # ── NuExtract (Specialized) ────────────────────────────────────
+      # Reads a PDF through the NuMind platform and answers with structured JSON.
+      # Send a document with the request; streaming is not supported.
       - provider: nu-extract
-        defaultLlmModelConfName: nu-extract-report
+        defaultLlmModelConfName: nu-extract
         globalConf:
           apiSecret: ${NUEXTRACT_API_KEY:}
-          endpointUrl: https://nuextract.ai/api/projects/
+          endpointUrl: https://bbox.nuextract.ai
           timeout: 60
         llModelConfs:
-          - llmModelConfName: nu-extract-report
-            modelName: nu-extract-accident-report
+          - llmModelConfName: nu-extract
+            modelName: nuextract
             multiModalSupported: false
             functionCallSupported: false
+            documentSupported: true
+            # Template mode: leave `project` out and start the prompt with a JSON
+            # template such as {"invoiceNumber": "string", "total": "number"}.
+            # Project mode: set the NuMind project id (starts with sprj_).
             extras:
-              modelId: c13ef081-1791-4882-8ba9-2d2ade17b0e2
+              project: sprj_your-numind-project-id
+              # output: values-and-positions   # values | positions | values-and-positions
 
     # ── Tenant-specific overrides ──────────────────────────────────
     # Uncomment and adapt to customize providers per tenant.

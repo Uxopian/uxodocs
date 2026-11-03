@@ -8,7 +8,7 @@ last_update:
 content_hash: 96e9f130a9b5290f98a46281817f68aa3638309d8a25a756262f5b666d4c75b6
 ---
 
-Uxopian AI ships standard HTML custom elements: `<chat-element>` and `<admin-element>`, plus the `quick-prompt-element` / `qp-toggle-button` pair introduced in 2026.0.0-ft4. They are built with React 19 and wrapped using `@r2wc/react-to-web-component`. They are self-contained and require no build step on the consuming application side.
+Uxopian AI ships standard HTML custom elements: `<chat-element>` and `<admin-element>`, plus the `quick-prompt-element` / `qp-toggle-button` pair introduced in 2026.0.0-ft4 and the `<viewer-element>` review screen. As of 2026.0.0, the admin console, chat and Quick Prompt share one look and one dark theme. They are built with React 19 and wrapped using `@r2wc/react-to-web-component`. They are self-contained and require no build step on the consuming application side.
 
 ## How the bundle is served
 
@@ -38,6 +38,8 @@ The served endpoints are:
 | Admin CSS | `/api/web-components/admin/style` |
 | Quick Prompt JavaScript | `/api/web-components/quick-prompt/script` |
 | Quick Prompt CSS | `/api/web-components/quick-prompt/style` |
+| Viewer (review screen) JavaScript | `/api/web-components/viewer/script` |
+| Viewer (review screen) CSS | `/api/web-components/viewer/style` |
 
 To load the chat component, add these tags to the host application:
 
@@ -54,9 +56,9 @@ The chat interface custom element. Registered as `<chat-element>`. Accepts these
 |---|---|---|
 | `endpoint` | string | Gateway origin as reachable from the browser (e.g., `https://gateway-host`). The component appends `/api/v1` itself — do **not** include it. |
 | `wsendpoint` | string | WebSocket base URL (e.g., `wss://gateway-host/ws`) |
-| `conversationid` | string | Conversation ID to open (for `openChat`) |
-| `request` | string | JSON-serialized `Request` object (for `createChat`) |
-| `promptid` | string | Prompt ID to pre-load when creating a new conversation |
+| `request` | string | JSON-serialized `Request` object. For a new conversation it holds the first request; to reopen a conversation it holds `{ "conversation": "<id>", "inputs": [] }` (this is what `openChat` builds) |
+
+The element declares only these three attributes (`endpoint`, `wsendpoint`, `request`). The former `conversationid` and `promptid` attributes were never read and are gone: use `window.openChat` / `window.createChat` below.
 
 ## admin-element
 
@@ -65,13 +67,22 @@ The admin interface custom element. Registered as `<admin-element>`. Uses React 
 | Route | Content |
 |---|---|
 | `/` | Dashboard |
-| `/prompts` | Prompt list |
-| `/prompts/:id` | Prompt detail and editor |
-| `/llm-providers` | LLM provider list |
-| `/llm-providers/:id` | LLM provider configuration |
-| `/users` | User list with conversation statistics |
-| `/users/:id` | User detail |
+| `/prompts`, `/prompts/:id` | Prompt list, prompt detail and editor |
+| `/llm-providers`, `/llm-providers/:id` | LLM provider list and configuration |
+| `/mcp-servers`, `/mcp-servers/:id` | MCP server list and configuration |
+| `/usage-profiles`, `/usage-profiles/:id` | Usage profile list and configuration |
+| `/scripts`, `/scripts/:id` | Script list and editor |
+| `/code-modules`, `/code-modules/:id` | Code module list and editor |
+| `/agents`, `/agents/:id` | Agent list and editor |
+| `/plans`, `/plans/:id` | Plan list, flow editor and runs |
+| `/users`, `/users/:id` | User list with conversation statistics, user detail |
 | `/statistics` | Usage statistics and charts |
+
+Creation pages live under `/<section>/new/edit`. The admin console is served with a strict Content-Security-Policy and cannot be framed: embed it through the `<admin-element>` web component, not an `<iframe>`.
+
+## viewer-element
+
+The human-review screen, registered as `<viewer-element>`, served from its own bundle (`/api/web-components/viewer/script` + `/style`) and also available as a page at `<app>/viewer`. It accepts an `endpoint` attribute (the gateway origin, as for the other elements) and a boolean `mock` attribute (`?mock=true` on the page) that serves a mock task queue. The bundle exposes `window.createViewer({ endpoint?, mock?, target? })` to mount it. The admin sidebar links to it as **Review tasks**, which opens it in a new tab.
 
 ## quick-prompt-element
 
@@ -93,7 +104,7 @@ The chat bundle exposes these functions on the `window` object:
 
 ### `window.openChat(params)`
 
-Reopens an existing conversation.
+Reopens an existing conversation. It sets the conversation in the `request` of the chat element, so the history of that conversation is displayed and the next message continues it.
 
 ```javascript
 window.openChat({
@@ -105,16 +116,27 @@ window.openChat({
 
 ### `window.createChat(params)`
 
-Creates a new conversation, optionally with an initial request.
+Creates a new conversation by sending an initial request. `request` is **mandatory**.
 
 ```javascript
 window.createChat({
   endpoint: 'https://gateway',
   wsEndpoint: 'wss://gateway/ws',
-  promptId: 'arenderContext',         // optional: pre-load a prompt
-  request: requestObject              // optional: send an initial request
+  request: requestObject
 });
 ```
+
+To start the conversation from a prompt, put a `prompt` input in the request:
+
+```javascript
+const request = window.RequestBuilder.builder()
+  .addInput(window.InputBuilder.promptAsUser('arenderContext', { documentId: 'doc-123' }))
+  .build();
+```
+
+:::warning[`promptId` was removed]
+Earlier versions documented an optional `promptId` parameter on `createChat`. It never had any effect and has been removed from the parameters; calling `createChat` without `request` is no longer valid. Replace it with a `prompt` input as shown above.
+:::
 
 ### `window.connectWebSocket(wsEndpoint, userId)`
 
@@ -126,14 +148,14 @@ const disconnect = window.connectWebSocket('wss://gateway/ws', 'user-123');
 disconnect();
 ```
 
-## Builder classes
+## Builders
 
-Three fluent builder classes are exposed on `window` for constructing request payloads:
+The chat bundle exposes three builders on `window` for constructing request payloads.
 
 ### `RequestBuilder`
 
 ```javascript
-const request = new window.RequestBuilder()
+const request = window.RequestBuilder.builder()
   .addInput(inputObject)
   .build();
 ```
@@ -141,28 +163,26 @@ const request = new window.RequestBuilder()
 ### `InputBuilder`
 
 ```javascript
-const input = new window.InputBuilder()
+const input = window.InputBuilder.builder()
   .role('USER')
   .addContent(contentObject)
   .build();
+
+// Shortcuts
+const asText = window.InputBuilder.textAsUser('Summarize this document.');
+const asPrompt = window.InputBuilder.promptAsUser('arenderContext', { documentId: 'doc-123' });
 ```
+
+`textAsSystem` and `promptAsSystem` are the system-role equivalents.
 
 ### `ContentBuilder`
 
 ```javascript
-const content = new window.ContentBuilder()
-  .type('prompt')
-  .value('arenderContext')
-  .payload({ documentId: 'doc-123' })
-  .build();
-
-const textContent = new window.ContentBuilder()
-  .type('text')
-  .value('Summarize this document.')
-  .build();
+const promptContent = window.ContentBuilder.ofPrompt('arenderContext', { documentId: 'doc-123' });
+const textContent = window.ContentBuilder.ofText('Summarize this document.');
 ```
 
-Content types: `text`, `prompt`, `image`.
+Content types: `text`, `prompt`, `base64` (inline data URL), `document` (file reference). See [Conversations and requests](./conversations_and_requests.md#content-types).
 
 ## Related pages
 
