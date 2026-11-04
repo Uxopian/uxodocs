@@ -72,6 +72,8 @@ _Discover the details below..._
 - **Packaging**: The package no longer carries OpenSearch Dashboards, which is repackaged on demand and will return as a sidecar. The Linux startup scripts have been reworked, and the SDK package embeds its restricted-access binaries.
 - **Dependencies and security**: iText has been removed from the converter, EML and PDF analysis modules; JJWT, Drools, Jackson, Svelte, npm and Node have been upgraded; and the vulnerabilities reported by Mend have been resolved, including those reaching Fast2 through transitive dependencies.
 - **Content encryption**: Can be turned off where a deployment does not want it.
+- **ARender 2026**: The annotation tasks are built on ARender 2026.3.1 instead of 3.1.15. Several annotation options and conversions that ARender no longer offers are gone; see _Upgrading to 2026.0.0_.
+- **FlowerDocs REST API**: The FlowerDocs connector uses the FlowerDocs 2026 REST API, as FlowerDocs 2026 no longer serves SOAP. An endpoint configured as `.../services` is mapped to `.../rest`, the login token is shared between worker threads and renewed before it expires.
 
 ### 🐞 Bug Fixes
 - **JSTransform**: Works again, warns when it is not running under a GraalVM JDK, and no longer fails on newer JDKs.
@@ -131,6 +133,11 @@ _Discover the details below..._
 - **`AlterDocumentProperty` is deprecated.** Use `AlterDocumentProperties`.
 - **`Tiff2PdfIText` has been removed.** Use `Tiff2PdfBox`.
 - **Null property names and values are refused.** Maps relying on the previous `null_value` sentinel must be reviewed.
+- **FlowerDocs 2026 is required by the FlowerDocs connector.** It uses the REST API only; SOAP is no longer supported. The FlowerDocs tasks no longer read or write validity codes, and the retention start and end dates are now the operational and legal retention periods. A punnet without a category is injected as `DOCUMENT` instead of being skipped with a warning.
+- **IS to FDF (`ConvertISToFDF`) is removed.** The task fails with an explicit error: ARender 2026 no longer provides the FDF annotation adder.
+- **P8 polygon annotations are no longer converted.** Highlight, redaction and open polygons, and their `Ext` variants, are not handled by ARender 2026. A P8 annotation of these kinds is reported as an error.
+- **Some annotation options no longer have an effect.** The INI converter parameters `defaultTextPosition` and `noteFontAlwaysBlack`, the TIFF exception to the page ratio, the CM to P8 watermark and transparent-rectangle handling, and the CM to P8 font-ratio and black-note options are ignored. The page ratio is always applied.
+- **Annotation output can differ from 2025.** Check the position of annotations converted from P8 on TIFF and JPEG, the line width of IS pens and arrows, and the rotation of IS stamps before migrating a production campaign.
 
 ---
 
@@ -141,6 +148,10 @@ _Discover the details below..._
 - **Authentication**: Linux doesn't auto-logout on Fast2 kill.
 - **Undo/Redo**: Undo may leave ghost tasks or fail to revert config until place is reloaded.
 - **Punnet Tracker**: `Copy to clipboard` currently non-functional.
+- **INI annotations**: A malformed, empty or wrong-page annotation is logged and skipped by the converter instead of failing the punnet, so a campaign can succeed with annotations missing. Check the logs.
+- **IS annotations**: Some IS annotations (pens, arrows, stamps, texts) are converted with a different line width, rotation or count than in 2025.
+- **P8 annotations**: Positions on TIFF and JPEG can differ from 2025, and the forced rotation parameter is ignored.
+- **CMOD annotations**: The document resolution is fixed at 96 dpi.
 
 ---
 
