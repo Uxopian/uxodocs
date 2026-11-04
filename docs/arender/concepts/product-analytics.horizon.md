@@ -6,7 +6,7 @@ sidebar_position: 7
 
 # Product analytics
 
-ARender can report how the viewer is used to Mixpanel, so the Uxopian team can see which capabilities are used, by which deployment, and where users hit failures. It is turned on by setting a Mixpanel project token in the configuration file shipped with the viewer, or in an attribute of the Web Component, and the integrator can switch it off at any time with `analytics="false"`.
+ARender can report how the viewer is used to Mixpanel, so the Uxopian team can see which capabilities are used, by which deployment, and where users hit failures. It is on by default: the viewer ships with the token of the ARender Mixpanel project in its configuration file. The integrator can switch it off at any time with `analytics="false"`.
 
 ## Why product analytics
 
@@ -94,15 +94,15 @@ The viewer ships with a file named `arender-analytics.json`, next to its scripts
 
 ```json
 {
-    "token": "",
+    "token": "<ARender project token>",
     "host": "https://api-eu.mixpanel.com"
 }
 ```
 
-| Key     | Description                                                                    |
-| ------- | ------------------------------------------------------------------------------ |
-| `token` | Mixpanel project token. Shipped empty: nothing is reported until it is filled. |
-| `host`  | Address the events are sent to.                                                |
+| Key     | Description                                                                                            |
+| ------- | ------------------------------------------------------------------------------------------------------ |
+| `token` | Mixpanel project token. Shipped with the token of the ARender project; an empty token reports nothing. |
+| `host`  | Address the events are sent to.                                                                        |
 
 The file is served as is and never built into the scripts, so the token and the destination change without a new release of the viewer.
 
