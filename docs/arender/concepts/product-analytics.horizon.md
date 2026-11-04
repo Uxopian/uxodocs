@@ -6,7 +6,7 @@ sidebar_position: 7
 
 # Product analytics
 
-ARender can report how the viewer is used to Mixpanel, so the Uxopian team can see which capabilities are used, by which deployment, and where users hit failures. The integrator turns it on with the `analytics-token` attribute and can switch it off at any time with `analytics="false"`.
+ARender can report how the viewer is used to Mixpanel, so the Uxopian team can see which capabilities are used, by which deployment, and where users hit failures. It is turned on by setting a Mixpanel project token in the configuration file shipped with the viewer, or in an attribute of the Web Component, and the integrator can switch it off at any time with `analytics="false"`.
 
 ## Why product analytics
 
@@ -88,19 +88,41 @@ To count consultations, add up `100 / Sampling Rate` over the `Document` events 
 
 ## Configuration
 
-Product analytics is configured with attributes of the [Web Component](../reference/web-component.md#html-attributes):
+### Configuration file
 
-| Attribute         | Default                       | Description                                              |
-| ----------------- | ----------------------------- | -------------------------------------------------------- |
-| `analytics-token` | none                          | Mixpanel project token. Without it, nothing is reported. |
-| `analytics`       | `true`                        | `false` switches product analytics off entirely.         |
-| `analytics-host`  | `https://api-eu.mixpanel.com` | Address the events are sent to.                          |
+The viewer ships with a file named `arender-analytics.json`, next to its scripts: next to `embed.js` in the `dist/embed/` folder of the package, and next to the scripts of the standalone viewer. It is read when the viewer starts.
+
+```json
+{
+    "token": "",
+    "host": "https://api-eu.mixpanel.com"
+}
+```
+
+| Key     | Description                                                                    |
+| ------- | ------------------------------------------------------------------------------ |
+| `token` | Mixpanel project token. Shipped empty: nothing is reported until it is filled. |
+| `host`  | Address the events are sent to.                                                |
+
+The file is served as is and never built into the scripts, so the token and the destination change without a new release of the viewer.
+
+A host application that bundles the `arender-ui` package with its own build tool serves its own scripts: the file is not next to them, and analytics stays off unless the host serves the file there or sets the attributes below.
+
+### Attributes
+
+The attributes of the [Web Component](../reference/web-component.md#html-attributes) win over the file:
+
+| Attribute         | Default                       | Description                                                           |
+| ----------------- | ----------------------------- | --------------------------------------------------------------------- |
+| `analytics-token` | none                          | Mixpanel project token. When set, the configuration file is not read. |
+| `analytics`       | `true`                        | `false` switches product analytics off entirely.                      |
+| `analytics-host`  | `https://api-eu.mixpanel.com` | Address the events are sent to.                                       |
 
 ```html
 <arender-element rendition="/" analytics-token="YOUR_PROJECT_TOKEN"></arender-element>
 ```
 
-When product analytics is off, or no token is given, the viewer sends no request to Mixpanel and does not even load the Mixpanel library.
+When product analytics is switched off, the viewer sends no request at all: not for the configuration file, not to Mixpanel, and it does not load the Mixpanel library. Without a token, it only reads the configuration file.
 
 ### Network and Content Security Policy
 
