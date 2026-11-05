@@ -6,7 +6,7 @@ sidebar_position: 7
 
 # Product analytics
 
-ARender can report how the viewer is used to Mixpanel, so the Uxopian team can see which capabilities are used, by which deployment, and where users hit failures. It is on by default: the viewer ships with the token of the ARender Mixpanel project in its configuration file. The integrator can switch it off at any time with `analytics="false"`.
+ARender can report how the viewer is used to Mixpanel, so the Uxopian team can see which capabilities are used, by which deployment, and where users hit failures. It is on by default: the viewer ships with the token of the ARender Mixpanel project in its configuration file. The integrator can switch it off with `analytics="false"`, and whoever deploys the viewer with `"enabled": false` in that file.
 
 ## Why product analytics
 
@@ -94,15 +94,17 @@ The viewer ships with a file named `arender-analytics.json`, next to its scripts
 
 ```json
 {
+    "enabled": true,
     "token": "<ARender project token>",
     "host": "https://api-eu.mixpanel.com"
 }
 ```
 
-| Key     | Description                                                                                            |
-| ------- | ------------------------------------------------------------------------------------------------------ |
-| `token` | Mixpanel project token. Shipped with the token of the ARender project; an empty token reports nothing. |
-| `host`  | Address the events are sent to.                                                                        |
+| Key       | Description                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------ |
+| `enabled` | `false` switches product analytics off for this deployment, whatever the attributes say.               |
+| `token`   | Mixpanel project token. Shipped with the token of the ARender project; an empty token reports nothing. |
+| `host`    | Address the events are sent to.                                                                        |
 
 The file is served as is and never built into the scripts, so the token and the destination change without a new release of the viewer.
 
@@ -110,19 +112,22 @@ A host application that bundles the `arender-ui` package with its own build tool
 
 ### Attributes
 
-The attributes of the [Web Component](../reference/web-component.md#html-attributes) win over the file:
+The token and host attributes of the [Web Component](../reference/web-component.md#html-attributes) win over the file. The `enabled` key of the file does not give way: a deployment switched off in the file stays off.
 
-| Attribute         | Default                       | Description                                                           |
-| ----------------- | ----------------------------- | --------------------------------------------------------------------- |
-| `analytics-token` | none                          | Mixpanel project token. When set, the configuration file is not read. |
-| `analytics`       | `true`                        | `false` switches product analytics off entirely.                      |
-| `analytics-host`  | `https://api-eu.mixpanel.com` | Address the events are sent to.                                       |
+| Attribute         | Default                       | Description                                              |
+| ----------------- | ----------------------------- | -------------------------------------------------------- |
+| `analytics-token` | none                          | Mixpanel project token. Wins over the token of the file. |
+| `analytics`       | `true`                        | `false` switches product analytics off entirely.         |
+| `analytics-host`  | `https://api-eu.mixpanel.com` | Address the events are sent to.                          |
 
 ```html
 <arender-element rendition="/" analytics-token="YOUR_PROJECT_TOKEN"></arender-element>
 ```
 
-When product analytics is switched off, the viewer sends no request at all: not for the configuration file, not to Mixpanel, and it does not load the Mixpanel library. Without a token, it only reads the configuration file.
+There are two switches, for two people:
+
+- **The integrator** sets `analytics="false"` on the Web Component. The viewer then sends no request at all: not for the configuration file, not to Mixpanel, and it does not load the Mixpanel library.
+- **Whoever deploys the viewer** sets `"enabled": false` in `arender-analytics.json`. The viewer reads the file and stops there.
 
 ### Network and Content Security Policy
 
