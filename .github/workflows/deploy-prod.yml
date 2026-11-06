@@ -147,7 +147,7 @@ jobs:
 
       - name: Build for Production
         env:
-          NODE_OPTIONS: "--max_old_space_size=4096"
+          NODE_OPTIONS: "--max_old_space_size=8192"
         run: BUILD_PDF=1 npm run build
 
       - name: Configure AWS credentials
