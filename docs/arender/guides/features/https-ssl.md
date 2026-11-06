@@ -54,8 +54,10 @@ server:
 
 Replace `keystore.p12` with an absolute path if the file is not in the working directory. The `key-alias` must match the alias used when the certificate was imported into the keystore.
 
-:::warning The certificate must include a SAN
-The certificate's Subject Alternative Name (SAN) must list every hostname and IP that clients use to reach the broker (the host in `arender.server.rendition.hosts` and the broker's discovery hostname). ARender's REST client enforces hostname verification, so a certificate with only a Common Name, or a SAN that does not match the URL, is rejected even after it is trusted.
+:::warning The certificate must match every name used to reach the broker
+ARender's REST clients enforce hostname verification: a certificate is rejected, even after it is trusted, when it does not match the host in the URL. The broker is reached under two names, which often differ: the rendition microservices use the discovery hostname (`localhost` by default), and the viewer uses the host in `arender.server.rendition.hosts`.
+
+List all of these names in the certificate's Subject Alternative Name (SAN), along with any IP address used in a URL: an IP address is only matched against the SAN. A certificate without a SAN is accepted only for the single hostname in its Common Name (CN), for example `CN=localhost` when the viewer and the rendition run on the same machine and both use `localhost`. If the SAN lists any hostname, the CN is no longer checked.
 :::
 
 ### Step 3: Activate the HTTPS profile
@@ -80,7 +82,7 @@ The viewer must be configured to connect to the rendition backend over HTTPS:
 | ------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `arender.server.rendition.hosts`      | Base URL of the rendition engine. Must start with `https://` when SSL is enabled.            |
 
-The viewer's REST client validates the rendition certificate against the **JVM trust store**; there is no ARender property that configures a custom trust store or skips verification. If the certificate is issued by a trusted CA (public, or a corporate CA already present in the trust store), nothing else is required.
+The viewer's REST client validates the rendition certificate against the **JVM trust store**; there is no ARender property that configures a custom trust store or skips verification. The `arender.rest.ssl.custom.use` property found in older configurations, which disabled both the certificate and hostname checks, no longer has any effect. If the certificate is issued by a trusted CA (public, or a corporate CA already present in the trust store), nothing else is required.
 
 If the certificate is **self-signed or issued by a private CA**, make the viewer JVM trust it in one of two ways. The same applies to every rendition microservice, since they also contact the broker.
 
@@ -130,7 +132,7 @@ Refer to the [Environment variables](../../installation/environment-variables.md
 
 ## Generating a self-signed keystore
 
-For development or testing, generate a PKCS12 keystore with `keytool`. The `-ext san=...` is required, otherwise hostname verification rejects the certificate:
+For development or testing, generate a PKCS12 keystore with `keytool`. The `-ext san=...` option lists every name and IP address the certificate is valid for: replace `<broker-host>` with the host in `arender.server.rendition.hosts`, and keep `localhost` for the rendition microservices. Without it, the certificate only matches the hostname in its CN, and never an IP address:
 
 ```bash
 keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 \
