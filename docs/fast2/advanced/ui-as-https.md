@@ -161,7 +161,7 @@ server.ssl.key-store-type=PKCS12
 server.ssl.key-alias=fast2_ui
 ```
 
-The broker also calls its own endpoints through `server.protocol`, `server.host` and `server.port` (disk-space monitoring, broker log download). The broker JVM must therefore trust the certificate too. With option A of step 4, this is automatic when the broker and the worker use the same JDK. With option B, add the same two `-D` options to the `java` line of `startup-broker.sh` (or `startup-broker.bat`).
+The broker also calls its own endpoints through `server.protocol`, `server.host` and `server.port` (for instance, the broker log download). The broker JVM must therefore trust the certificate too. With option A of step 4, this is automatic when the broker and the worker use the same JDK. With option B, add the same two `-D` options to the `java` line of `startup-broker.sh` (or `startup-broker.bat`).
 
 </TabItem>
 </Tabs>
