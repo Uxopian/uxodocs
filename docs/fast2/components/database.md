@@ -238,6 +238,12 @@ Caused by: org.opensearch.OpenSearchStatusException: OpenSearch exception [type=
 
 Each index of the embedded database counts for **2 shards** (one primary and one replica, as shown by the `[2] total shards` of the log above), and the limit counts both. To free shards, delete the indices of the campaigns you no longer need, **one by one, by name**.
 
+:::info[Deleting a campaign does not delete its index]
+
+Deleting a campaign in Fast2 (from the UI, by deleting its map, or through the REST API) removes its documents from the campaign index and removes the campaign from `f2_campaigns` and `f2_campaigns_sources`, but it **never deletes the index itself**. The empty index keeps its shards (and its disk space) until you delete it in the database.
+
+:::
+
 :::danger[Never delete indices with a wildcard]
 
 Do not use a pattern such as `f2_*`, even with exclusions: it also matches the [service indices](#indexes) (`f2_maps`, `f2_users`, ...) and deletes all your maps and user accounts.
@@ -246,7 +252,7 @@ Back up the database before deleting anything.
 
 :::
 
-1.  **Delete the campaign in the Fast2 UI first**, with all its runs, and only then its index. The index of a campaign is shared by all its runs: delete it only when no run of this campaign is left.
+1.  **Delete the campaign in the Fast2 UI first**, with all its runs. Its index stays in the database, empty. The index of a campaign is shared by all its runs: delete it only when no run of this campaign is left.
 
     :::warning
 
@@ -260,7 +266,7 @@ Back up the database before deleting anything.
     curl "http://<Fast2-server>:<database-port>/_cat/indices/f2_*?v"
     ```
 
-3.  Delete the indices of the deleted campaigns, by name, separated by commas (without spaces):
+3.  Delete the now-empty indices of the deleted campaigns, by their exact name, separated by commas (without spaces):
 
     ```shell
     curl -X DELETE -i "http://<Fast2-server>:<database-port>/f2_<campaign1>,f2_<campaign2>"
