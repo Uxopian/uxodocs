@@ -23,23 +23,41 @@ In addition, we can easily rollback or resume operations in case of server crash
 
 There is the logic behind real-time backups in ES.
 
-## <i class="fas fa-list"></i> Indexes
+## <i class="fas fa-list"></i> Indexes {#indexes}
 
 Each database index referenced by Fast2 will be registered with a `f2_` prefix. An index is always written in lower case even if the campaign name in Fast2 contains characters in upper cases.
 
-For example, the campaign `MyCampaign_Try10` will be stored in the index f2_mycampaign_try15.
+:::note[Fast2 v2025]
 
-During the step of broker intantiation at Fast2 startup, some indices are automatically created:
+The index names below apply to Fast2 v2025 (checked on v2025.9.0).
 
-|            Index key | Description                                                        |
-| -------------------: | ------------------------------------------------------------------ |
-|         f2_campaigns | List of existing campaigns with processing dates and status        |
-| f2_campaigns_sources | Links between campaigns and workers having performed this campaign |
-|    f2_queue_settings | Reference information about source and task threads                |
-|     f2_jobs_settings | Gather the configuration of save jobs                              |
-|         f2_jobs_info | Information about jobs past execution details                      |
+:::
 
-For each new campaign of Fast2, an index will be created: if you decided to run a new campaign named `EcmInjection`, the new index will be `f2_ecminjection_try1`.
+Fast2 uses two kinds of indices: **service indices**, which hold the configuration and the state of the platform, and one **campaign index** per campaign.
+
+The broker uses the following service indices:
+
+|                Index key | Description                                                        |
+| -----------------------: | ------------------------------------------------------------------ |
+|             f2_campaigns | List of existing campaigns with processing dates and status        |
+|     f2_campaigns_sources | Links between campaigns and workers having performed this campaign |
+|        f2_queue_settings | Reference information about source and task threads                |
+|         f2_jobs_settings | Gather the configuration of save jobs                              |
+|             f2_jobs_info | Information about jobs past execution details                      |
+|                  f2_maps | All the maps and their versions                                    |
+|                 f2_users | All the user accounts, Super Admin included                        |
+|            f2_exceptions | Exceptions recorded during processing                              |
+|                  f2_logs | Messages sent by the workers, read by the worker logs page of the UI |
+| f2_global_shared_object | Global shared objects                                              |
+|                f2_emails | E-mail notifications                                               |
+
+:::danger
+
+Never delete a service index. Deleting `f2_maps` or `f2_users` deletes all your maps or all your user accounts.
+
+:::
+
+Each campaign has its own index, named `f2_` followed by the campaign name in lower case, **without** the run suffix: the runs of the campaign `EcmInjection` (`EcmInjection_Run1`, `EcmInjection_Run2`, ...) all share the index `f2_ecminjection`.
 
 ## <i class="fas fa-cog"></i> Configuration
 
@@ -218,29 +236,35 @@ The symptom of this limitations comes as a regular 500 server error toast in the
 Caused by: org.opensearch.OpenSearchStatusException: OpenSearch exception [type=validation_exception, reason=Validation Failed: 1: this action would add [2] total shards, but this cluster currently has [1000]/[1000] maximum shards open;]
 ```
 
-As mentioned in the [database technicalities](#index-names), Fast2 records data under indices prefixed with `f2_`. Thus it implies to begin each index to delete with this prefix.
+Each index of the embedded database counts for **2 shards** (one primary and one replica, as shown by the `[2] total shards` of the log above), and the limit counts both. To free shards, delete the indices of the campaigns you no longer need, **one by one, by name**.
 
-Although a drastic cleanup induced by a `curl -X DELETE -i "http://<database-server>:<database-port>/f2_*` would resolve our issue, you might be interested in keeping some campaigns or indices. As any _curl_ query allows, exceptions can be added to the deletion operation to prevent them from being removed of the backup database. The syntax goes as follows:
+:::danger[Never delete indices with a wildcard]
 
-```shell
-curl -X DELETE -i "http://<Fast2-server>:<database-port>/f2_*,-f2_campaigns,-f2_campaigns_sources[,-f2_<campaign-name>]"
-```
+Do not use a pattern such as `f2_*`, even with exclusions: it also matches the [service indices](#indexes) (`f2_maps`, `f2_users`, ...) and deletes all your maps and user accounts.
 
-<br/>
-<br/>
-Let us now study this query:
-<br/>
-<br/>
+Back up the database before deleting anything.
 
-| Section                               | Purpose                                                                                                                                                                                                                                        |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `http://server:port/f2_*`             | Here we ask to aim at all indices starting with the `f2_` prefix. This will prevent the deletion of additional indices which could be related to parallel work on the same database instance, such as Kibana reports, charts or data analysis. |
-| `-f2_campaigns,-f2_campaigns_sources` | These 2 indices are needed if you decide to keep any other campaign. The `-` sign declares them as exception from the delete action.                                                                                                           |
-| `[,-f2_<campaign-name>]`              | Then you can list all the campaigns you are willing to preserve, <ul><li>without space,</li><li>separated by commas (`,`)</li><li>mentioning the `-` exclusion character</li></ul>Do not forget to begin each name with the indice prefix.     |
+:::
 
-<br/>
+1.  **Delete the campaign in the Fast2 UI first**, with all its runs, and only then its index. The index of a campaign is shared by all its runs: delete it only when no run of this campaign is left.
 
-Wildcards are supported, therefore an exception written `-f2_mycampaign*` will protect all the campaign with this _myCampaign_ radical (ex/ myCampaign_Try1, myCampaign_Try2...).
+    :::warning
+
+    Do not do it the other way round. If the index is deleted while the campaign is still listed, the campaign can no longer be deleted: it stays listed in the `Deleting` status.
+
+    :::
+
+2.  Make sure no campaign is running, then list the campaign indices still present in the database:
+
+    ```shell
+    curl "http://<Fast2-server>:<database-port>/_cat/indices/f2_*?v"
+    ```
+
+3.  Delete the indices of the deleted campaigns, by name, separated by commas (without spaces):
+
+    ```shell
+    curl -X DELETE -i "http://<Fast2-server>:<database-port>/f2_<campaign1>,f2_<campaign2>"
+    ```
 
 ### Impossible to get results from Explorer place
 
