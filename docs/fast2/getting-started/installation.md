@@ -316,7 +316,7 @@ The Broker starts an embedded worker by default.
 </Tabs>
 
 If the worker and broker are not booted up on the same machine, you need to setup the Broker host name in the worker configuration file.
-Edit the file `config/application.properties` and modify `broker.host` accordingly.
+Edit the file `config/application.properties` of the worker and set `server.host` (and, if needed, `server.protocol` and `server.port`) to reach the broker: `broker.url` is built from them. See the [remote worker guide](../components/worker.md#remote-worker-configuration-guide).
 
 You can setup Fast2 Worker as a service the same way you did for the Fast2 Broker.
 
