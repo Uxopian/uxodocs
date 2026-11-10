@@ -65,3 +65,6 @@ All the content of every remote campaign accumulates under `broker.files.dir`. K
 DeleteContent does not clean this folder in remote mode: purge `<broker.files.dir>/<campaign>/` once the campaign is finished.
 :::
 
+:::note[No disk-space alert]
+`config/application.properties` delivers `server.database.warning.threshold=90` and `server.database.critical.threshold=95`. Since v2025.3.0, these properties have no effect: the disk-space monitor that reads them is disabled, and Fast2 writes no disk-space warning in the logs. Monitor the disk space of the broker server (contents and database) with your own supervision tools.
+:::

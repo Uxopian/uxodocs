@@ -54,7 +54,9 @@ This feature allows you to import new JAR libraries or replace existing ones dir
 
 ## Good Things to Know
 
-- If one or more campaigns are running, they are stopped before upload
+- If one or more campaigns are running, the UI stops them before the upload (**Stopping campaigns...**, then **Campaigns has been stopped**) and then imports the JAR. The same applies to **Restore jar**. Let your campaigns finish before importing a JAR if you do not want them stopped.
+- The REST API does not stop campaigns: while a campaign is running, `POST /workers/upload-library` is refused with `At least one campaign is currently running, upload library not allowed`, and `POST /workers/restore-library` with `At least one campaign is currently running, restoring library not allowed.`
+- The library to replace is identified by the **base name** of the JAR, i.e. the part of the file name before the version number (`fast2-alter-punnet` in `fast2-alter-punnet-2025.9.0.jar`). Do not rename a JAR, such as a patch received from the support, before importing it: with another base name, it is not recognised as a new version: it can end up next to the existing library instead of replacing it.
 - Attempting to upload a non-.jar file will result in an error message
 
 > To perform any operation, ensure you are logged in with the appropriate role (**ADMIN** or **SUPER ADMIN**) and use valid JAR files. Version management and campaign protection ensure Fast2 remains stable and available during library updates.

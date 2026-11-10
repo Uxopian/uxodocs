@@ -269,10 +269,10 @@ ping <broker_public_ip_address>
 ```
 If the ping works, proceed to the next step. If the ping does not work, there may be an issue with the router, firewall, or routing configuration.
 
-**Step 2: Update the broker.url in the Worker Configuration**
+**Step 2: Point the worker to the broker**
 On the worker machine, update the **server.host** property in your *config/application.properties* file to the local IP address of the broker.
 
-If needed, you can change the protocol and port information as well. The **broker.url** variable is automatically updated. Do not change it.
+If needed, you can change the protocol and port information as well (for HTTPS, see [UI as HTTPS](../advanced/ui-as-https.md)). The **broker.url** variable is built from these three properties: do not change it.
 
 ```properties
 server.protocol=http

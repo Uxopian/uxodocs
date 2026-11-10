@@ -133,6 +133,8 @@ Improvement: A link to the logs added in the error toasts.
 
 Improvement: Prevent database over-storage: at 90% and 95% disk consumption, a warning written in the worker logs
 
+> **Update:** this disk-space warning is disabled since v2025.3.0. The `server.database.warning.threshold` and `server.database.critical.threshold` properties of `config/application.properties` have no effect: monitor disk space with your own supervision tools.
+
 <br />
 
 ## <b>Edit Place</b>
