@@ -127,6 +127,11 @@ To end the Fast2 process, just hit `Ctrl+C` in the command line the startup file
 
     Go into the Fast2 installation folder, and open the Windows Command Prompt.
 
+    Before installing, check two points:
+
+    - **Start mode.** The delivered `service\windows\Fast2_broker_service.xml` contains `<startmode>Manual</startmode>`: the service does not start with the machine. To have it start automatically, change it to `<startmode>Automatic</startmode>` before running `install`.
+    - **Java.** A Windows service does not see the `JAVA_HOME` variable of your user account, only system environment variables. If `startup-broker.bat` cannot find Java, it waits on a `pause` and the service never starts. Set `JAVA_HOME` (the JDK root folder) in `config\env.properties`, or as a system environment variable.
+
     To install the service :
 
     ```cmd
@@ -149,34 +154,37 @@ To end the Fast2 process, just hit `Ctrl+C` in the command line the startup file
 
     ##### <i class="fas fa-circle-1"></i> Create a user for Fast2
 
-    Since the embedded database cannot be started in sudo mode, you must use an existing user that meets your requirements or create a new one on the Linux machine. This will allow the broker to successfully initiate the database startup
+    Since the embedded database cannot be started as root, you must use an existing user that meets your requirements or create a new one on the Linux machine. The service will run under this account, which allows the broker to start the database.
 
-    Let's condider here our user to be *fast2user*.
+    Let's consider here our user to be *fast2user*.
 
-    Open the `./startup-broker.sh` file and update the last line to switch users (with `su fast2user -c`) for the Java command:  
+    Make sure the Fast2 installation folder belongs to this user. The service writes into it: the broker logs (`logs/`) and the data and logs of the embedded database (`opensearch-X.Y.Z/`). If the package was unzipped as root, the service starts but the database then fails for lack of write permissions.
 
-    <table>
-    <tr style={{color: "red"}}>
-    <td style={{fontWeight: "bold"}}>Original line</td>
-    <td>`"$JAVA" -Xmx$BROKER_MAX_MEMORY ... -jar fast2-broker-package-X.Y.Z.jar`</td>
-    </tr>
-    <tr style={{color: "green"}}>
-    <td style={{fontWeight: "bold"}}>Your updated line</td>
-    <td><mark>`su fast2user -c`</mark>`"$JAVA -Xmx$BROKER_MAX_MEMORY ... -jar fast2-broker-package-X.Y.Z.jar"`</td>
-    </tr>
-    </table>
+    ```sh
+    $ sudo chown -R fast2user:fast2user /home/userName/fast2-complete-package-X.Y.Z
+    ```
+
+    :::note
+
+        Do not edit `startup-broker.sh` to switch users (`su fast2user -c ...`). With `User=` and `Group=` in the service file (step 2), systemd already runs the whole script, embedded database included, under this account.
+
+    :::
+
     <br/>
 
-    ##### <i class="fas fa-circle-2"></i> Execution path
+    ##### <i class="fas fa-circle-2"></i> Service file
 
-    Edit the `ExecStart` field from the file `service/linux/fast2-broker.service`: it must point out to the Fast2 installation path.
+    Edit the file `service/linux/fast2-broker.service`. As delivered, it only contains the `Description`, an `ExecStart` placeholder (`/PATH/TO/FAST2/startup-broker.sh`) and `WantedBy`:
 
-    ```sh {2,6}
+    - replace `/PATH/TO/FAST2` with the Fast2 installation path;
+    - **add** the `Environment`, `User` and `Group` lines.
+
+    ```sh {5-8}
     [Unit]
     Description=Fast2 Broker vX.Y.Z
 
     [Service]
-    Environment="JAVA_HOME=/home/JDK/bin/java"
+    Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
     ExecStart=/home/userName/fast2-complete-package-X.Y.Z/startup-broker.sh
     User=fast2user
     Group=fast2user
@@ -191,21 +199,21 @@ To end the Fast2 process, just hit `Ctrl+C` in the command line the startup file
 
         - `Environment`: Sets environment variables that the service will use during execution.
 
-            This line sets the `JAVA_HOME` environment variable, which is required for the Fast2 Broker service to run. The value is set to `/home/JDK/java`, which should be the path to the Java installation used by the service.
-            However, the link to Java must be the final link (and not Ubuntu internal link to the Java installation).
+            This line sets the `JAVA_HOME` environment variable used by `startup-broker.sh`. Its value is the **root folder of the JDK**, not the `java` binary: the script runs `$JAVA_HOME/bin/java` and stops if that file does not exist.
+            The path must be the final one (and not the Ubuntu internal link to the Java installation).
             ```sh
-            ubuntu@ip-...:~/2.11.0$ which java
+            ubuntu@ip-...:~/fast2$ which java
             /usr/bin/java ❌
 
-            ubuntu@ip-...:~/2.11.0$ readlink -f $(which java)
-            /usr/lib/jvm/java-11-openjdk-amd64/bin/java ✅
+            ubuntu@ip-...:~/fast2$ readlink -f $(which java)
+            /usr/lib/jvm/java-11-openjdk-amd64/bin/java
             ```
 
-            The value to set the `JAVA_HOME` environment variable will be, in this case, `Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"`.
+            Remove the trailing `/bin/java`: the value to set is, in this case, `Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"` ✅. You can also set `JAVA_HOME` in `config/env.properties` instead.
 
-        - `ExecStart`: Specifies the command that will be executed to start the service. This line specifies the startup command for the Fast2 Broker service. It points to the `startup-broker.sh` script located in the `fast2-complete-package-2.0.0` directory. When the service starts, this script is executed.
-        - `User`: Specifies the user account under which the service will run. This line indicates that the service should be run under the `fast2-user` user account. Running services as a non-root user is a security best practice.
-        - `Group`: Specifies the group under which the service will run. This line sets the group ownership for the service process to `fast2-user`. This ensures that the service process has the correct permissions as defined by the user and group.
+        - `ExecStart`: Specifies the command that will be executed to start the service. It points to the `startup-broker.sh` script located in the Fast2 installation folder (here `fast2-complete-package-X.Y.Z`). When the service starts, this script is executed.
+        - `User`: Specifies the user account under which the service will run. This line indicates that the service should be run under the `fast2user` user account. Running services as a non-root user is a security best practice.
+        - `Group`: Specifies the group under which the service will run. This line sets the group ownership for the service process to `fast2user`. This ensures that the service process has the correct permissions as defined by the user and group.
     - The `[Install]` section defines how the service should be installed or integrated with systemd.
         - `WantedBy`: Specifies the target in which this service should be started. This line indicates that the service should be started as part of the `default.target`, which is the default system runlevel (usually equivalent to multi-user mode or graphical mode, depending on the system configuration).
 
@@ -278,7 +286,7 @@ To end the Fast2 process, just hit `Ctrl+C` in the command line the startup file
     You can restart or stop the service at anytime with the commands :
 
     ```sh
-    $ service fast2 start | restart | stop | status
+    $ sudo service fast2-broker start | restart | stop | status
     ```
 
 </TabItem>
@@ -310,35 +318,71 @@ The Broker starts an embedded worker by default.
 If the worker and broker are not booted up on the same machine, you need to setup the Broker host name in the worker configuration file.
 Edit the file `config/application.properties` and modify `broker.host` accordingly.
 
-You can setup Fast2 Worker as a service the same way you did for the Fast2 Broker. For a worker installed on a Windows machine, you need to edit 2 files :
+You can setup Fast2 Worker as a service the same way you did for the Fast2 Broker.
 
-- The `Fast2_broker_service.exe` file in the `service/windows` folder has to be renamed to `Fast2_worker_service.exe`
-- The `Fast2_broker_service.xml` file in the `service/windows` folder has to be renamed to `Fast2_worker_service.xml` and requires some changes :
-    - The `id` tag has to be changed to something different than `Fast2` in case the broker has already been installed as a service on this machine. For instance,`Fast2-worker`.
-    - The `name` tag has to be changed to something different than `Fast2 Broker` to avoid any confusion in case the broker has already been installed as a service on this machine. For instance, `Fast2 Worker`.
-    - The `description` tag has to be changed to something different than `Fast2 Broker vX.Y.Z` to avoid any confusion in case the broker has already been installed as a service on this machine. For instance, `Fast2 Worker vX.Y.Z`.
-    - The `executable` tag has to be changed to point to the `startup-worker.bat` file which is at Fast2 root level.
+<Tabs groupId="operating-system">
+<TabItem value="windows" label="Windows" default>
 
-The `Fast2_worker_service.xml` file will look like this :
+    For a worker installed on a Windows machine, create the worker service files next to the broker ones:
 
-```xml
-<service>
-    <id>Fast2WorkerDCTM</id>
-    <name>Fast2 Worker DCTM</name>
-    <description>Fast2 Worker DCTM v-2.12.1</description>
-    <env name="FAST2_HOME" value="%BASE%\..\.." />
-    <executable>%BASE%\..\..\startup-worker.bat</executable>
-    <logpath>%BASE%\..\log</logpath>
-    <startmode>Manual</startmode>
-    <log mode="roll-by-size">
-        <sizeThreshold>10240</sizeThreshold>
-        <keepFiles>8</keepFiles>
-    </log>
-</service>
-```
+    - **Copy** (do not rename) `Fast2_broker_service.exe` in the `service/windows` folder to `Fast2_worker_service.exe`. The broker service needs its own `.exe` and `.xml`: renaming them breaks the broker service if it is (or will be) installed on this machine.
+    - **Copy** `Fast2_broker_service.xml` in the `service/windows` folder to `Fast2_worker_service.xml`. The `.exe` and the `.xml` must have the same name. Then edit `Fast2_worker_service.xml`:
+        - The `id` tag has to be changed to something different than `Fast2` in case the broker has already been installed as a service on this machine. For instance,`Fast2-worker`.
+        - The `name` tag has to be changed to something different than `Fast2 Broker` to avoid any confusion in case the broker has already been installed as a service on this machine. For instance, `Fast2 Worker`.
+        - The `description` tag has to be changed to something different than `Fast2 Broker vX.Y.Z` to avoid any confusion in case the broker has already been installed as a service on this machine. For instance, `Fast2 Worker vX.Y.Z`.
+        - The `executable` tag has to be changed to point to the `startup-worker.bat` file which is at Fast2 root level.
+        - The `startmode` tag is `Manual` in the delivered file. Set it to `Automatic` if the worker must start with the machine.
 
-And then, to install the worker as a service :
+    The `Fast2_worker_service.xml` file will look like this :
 
-```cmd
-C:\path-to-fast2\service\windows> Fast2_worker_service.exe install
-```
+    ```xml
+    <service>
+        <id>Fast2WorkerDCTM</id>
+        <name>Fast2 Worker DCTM</name>
+        <description>Fast2 Worker DCTM vX.Y.Z</description>
+        <env name="FAST2_HOME" value="%BASE%\..\.." />
+        <executable>%BASE%\..\..\startup-worker.bat</executable>
+        <logpath>%BASE%\..\log</logpath>
+        <startmode>Automatic</startmode>
+        <log mode="roll-by-size">
+            <sizeThreshold>10240</sizeThreshold>
+            <keepFiles>8</keepFiles>
+        </log>
+    </service>
+    ```
+
+    And then, to install the worker as a service :
+
+    ```cmd
+    C:\path-to-fast2\service\windows> Fast2_worker_service.exe install
+    ```
+
+</TabItem>
+<TabItem value="linux" label="Linux">
+
+    The package also delivers `service/linux/fast2-worker.service`, with an `ExecStart` placeholder pointing to `/PATH/TO/FAST2/startup-worker.sh`. Follow the same steps as for the broker (dedicated user owning the installation folder, `Environment="JAVA_HOME=..."`, `User=`, `Group=`, symbolic link, `daemon-reload`, `enable`):
+
+    ```sh {5-8}
+    [Unit]
+    Description=Fast2 Worker vX.Y.Z
+
+    [Service]
+    Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
+    ExecStart=/home/userName/fast2-complete-package-X.Y.Z/startup-worker.sh
+    User=fast2user
+    Group=fast2user
+
+    [Install]
+    WantedBy=default.target
+    ```
+
+    ```sh
+    $ sudo ln -s /home/userName/fast2-complete-package-X.Y.Z/service/linux/fast2-worker.service /etc/systemd/system
+    $ sudo systemctl daemon-reload
+    $ sudo systemctl enable fast2-worker.service
+    $ sudo systemctl start fast2-worker.service
+    ```
+
+</TabItem>
+</Tabs>
+
