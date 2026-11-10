@@ -6,7 +6,7 @@
  * Prompt context, and exposes window.qpHandleToggle for qp-button.
  *
  * Requires:
- *   - consts     → GATEWAY_ENDPOINT, UXO_AI_ENDPOINT
+ *   - consts     → UXO_AI_ENDPOINT, WS_UXO_AI_ENDPOINT
  *   - qp-search  → searchCapture, getCategoryFromUrl
  *   - qp-loader  → the Quick Prompt bundle (window.createQuickPromptIntegration,
  *                  window.uxopian.mapComponent)
@@ -170,9 +170,9 @@ function handleToggle(open) {
 
 async function initIntegration() {
     if (integration) return;
-    await fetch(GATEWAY_ENDPOINT);
+    await fetch(UXO_AI_ENDPOINT + '/');
 
-    integration = window.createQuickPromptIntegration({ endpoint: UXO_AI_ENDPOINT, onClose: function () { handleToggle(false); } });
+    integration = window.createQuickPromptIntegration({ endpoint: UXO_AI_ENDPOINT, wsEndpoint: WS_UXO_AI_ENDPOINT, onClose: function () { handleToggle(false); } });
 
     var userApi = JSAPI.get().getUserAPI();
     integration.setTenant(userApi.getScope());

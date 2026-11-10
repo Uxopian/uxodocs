@@ -10,8 +10,8 @@ content_hash: 70a0d74ab1553fe6c1b960d6e312c451cdefaa13e79428a7d38d83e7fda5e8fa
 
 This guide adds the Uxopian AI chat panel to a FlowerDocs deployment running locally with Docker Compose. The result is a FlowerDocs instance where users can open an AI chat panel via keyboard shortcut, with document context provided by the FlowerDocs tools.
 
-:::warning Development configuration only
-This quickstart uses `DevProvider` (authentication disabled) and is intended to validate the scope file installation quickly. **It is not suitable for production.** For a production deployment — with `FlowerDocsProvider`, token validation, and a proper LLM check before UI integration — follow the phased [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) guide instead.
+:::warning Local evaluation only
+This quickstart is meant to validate the scope file installation quickly, with the demo secret and plain HTTP of the quickstart stack. **It is not suitable for production.** For a production deployment — with your own secrets, TLS, and a proper LLM check before UI integration — follow the phased [Integrate with FlowerDocs](../how_to/integrate_with_flowerdocs.mdx) guide instead.
 :::
 
 ## Prerequisites
@@ -37,7 +37,7 @@ flowchart LR
 
 ### 1. Start the uxopian-ai stack on FlowerDocs' network
 
-Download `uxopian-ai-stack.yml` and `gateway-application.yaml` from [Quickstart with Docker Compose](./quickstart.mdx#steps) — same files, no FlowerDocs-specific variant needed. Two changes to that compose file before starting it:
+Download `uxopian-ai-stack.yml` and the `config/` folder from [Quickstart with Docker Compose](./quickstart.mdx#steps). You don't need its `gateway-application.yaml`: the gateway's built-in routes already handle FlowerDocs, with `FlowerDocsProvider` and the user's FlowerDocs session. Four changes to that compose file before starting it:
 
 1. **Join FlowerDocs' own Docker network** instead of creating a new one — replace the `networks:` block at the bottom with the network FlowerDocs is already running on, marked external:
 
@@ -49,14 +49,29 @@ Download `uxopian-ai-stack.yml` and `gateway-application.yaml` from [Quickstart 
 
    and point every service's `networks:` list at `flowerdocs-net` instead of `uxopian-ai-net`.
 
-2. **Name the gateway service/container `gateway-service`.** The scope files downloaded in the next step ship a FlowerDocs Route pointing at `http://gateway-service:8085` — the gateway container must resolve under that exact name on the shared network for FlowerDocs' internal proxy to reach it:
+2. **Rename the two services.** The scope files downloaded in the next step ship a FlowerDocs Route pointing at `http://gateway-service:8085/gui/gateway`, and the gateway's built-in routes call `http://ai-standalone-service:8080`. Both names must resolve on the shared network:
 
    ```yaml
    services:
+     ai-standalone-service: # renamed from uxopian-ai
+       # ...
      gateway-service: # renamed from uxopian-gateway
-       container_name: gateway-service
-       # ...unchanged otherwise
+       depends_on:
+         - ai-standalone-service
+       # ...
    ```
+
+3. **Set the context path and the FlowerDocs Core URL on uxopian-ai.** FlowerDocs' proxy forwards `/gui/plugins/<scope>/gateway/uxopian-ai/…` to the gateway as `/gui/gateway/uxopian-ai/…`; the FlowerDocs tools call FlowerDocs Core by its service name:
+
+   ```yaml
+     ai-standalone-service:
+       environment:
+         # ...existing variables
+         - CONTEXT_PATH=/gui/gateway/uxopian-ai
+         - FD_WS_URL=http://flower-docs-core:8081/core/
+   ```
+
+4. **Remove the `gateway-application.yaml` volume** from the gateway service, so that its built-in routes apply.
 
 Then start it:
 
@@ -96,7 +111,7 @@ docker run --rm --network=flowerdocs-net \
 If the chat panel does not appear, check the uxopian-ai logs:
 
 ```bash
-docker compose -f uxopian-ai-stack.yml logs uxopian-ai gateway-service
+docker compose -f uxopian-ai-stack.yml logs ai-standalone-service gateway-service
 ```
 
 ## Architecture in this stack
@@ -111,7 +126,7 @@ flowchart LR
     LLM["LLM Provider"]
 
     User -->|"Keyboard shortcut"| FD
-    FD -->|"openChat() via /gateway/**"| GW
+    FD -->|"openChat() via /gui/plugins/scope/gateway/**"| GW
     GW -->|"proxy"| AI
     AI -->|"Tool calls"| FDAPI
     AI --> LLM

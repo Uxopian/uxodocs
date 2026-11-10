@@ -18,7 +18,7 @@
             <ns2:value>/gateway/**</ns2:value>
         </ns2:tags>
         <ns2:tags name="URL" readOnly="false">
-            <ns2:value>http://gateway-service:8085</ns2:value>
+            <ns2:value>http://gateway-service:8085/gui/gateway</ns2:value>
         </ns2:tags>
     </ns2:Tags>
     <ns2:versionSeriesId>Gateway</ns2:versionSeriesId>

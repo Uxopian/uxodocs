@@ -1,6 +1,6 @@
 (function () {
-    var jsUrl = GATEWAY_ENDPOINT + '/api/web-components/chat/script';
-    var cssUrl = GATEWAY_ENDPOINT + '/api/web-components/chat/style';
+    var jsUrl = UXO_AI_ENDPOINT + '/api/web-components/chat/script';
+    var cssUrl = UXO_AI_ENDPOINT + '/api/web-components/chat/style';
 
     function loadAssets(jsUrl, cssUrl) {
         if (!document.querySelector('link[href="' + cssUrl + '"]')) {

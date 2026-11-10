@@ -264,10 +264,12 @@ logging:
 
 ### Why two routes?
 
-The FlowerDocs scope files define `GATEWAY_ENDPOINT` as:
+This example is for a FlowerDocs `Gateway.xml` Route whose URL is the bare gateway address (`http://gateway:8085`). The scope files shipped with this documentation use `http://gateway-service:8085/gui/gateway` instead, so that the path already matches uxopian-ai's context path and the gateway's built-in routes need no `rewritePath` — see [Gateway.xml (Route)](./configure_flowerdocs_scope.mdx#gatewayxml-route).
+
+The FlowerDocs scope files define `UXO_AI_ENDPOINT` as:
 
 ```javascript
-const GATEWAY_ENDPOINT = window.location.origin + '/gui'
+const UXO_AI_ENDPOINT = window.location.origin + '/gui'
     + '/plugins/' + scope + '/gateway/uxopian-ai';
 ```
 

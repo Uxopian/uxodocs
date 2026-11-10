@@ -5,7 +5,7 @@
  * gateway. The connector (qp-connector) initializes lazily the first time
  * the panel is toggled open, so the callback below stays empty.
  *
- * Requires: consts → GATEWAY_ENDPOINT.
+ * Requires: consts → UXO_AI_ENDPOINT.
  */
 
 function loadQuickPrompt(endpointOrUrls, onReady) {
@@ -42,7 +42,7 @@ function loadQuickPrompt(endpointOrUrls, onReady) {
 }
 
 try {
-    loadQuickPrompt(GATEWAY_ENDPOINT, function () {
+    loadQuickPrompt(UXO_AI_ENDPOINT, function () {
         // Bundle ready — the connector initializes on first toggle.
     });
 } catch {
