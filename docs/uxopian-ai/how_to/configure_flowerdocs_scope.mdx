@@ -102,16 +102,12 @@ const BASE_URL = window.location.origin + '/gui';
 const GATEWAY_PATH = '/gateway/uxopian-ai';
 const SCOPE = JSAPI.get().getUserAPI().getScope();
 
-// Through FlowerDocs' own internal proxy (the /gateway/** Route). Used for the JS/CSS
-// bundle, REST calls and SSE streaming — this proxy forwards plain HTTP fine.
+// Through FlowerDocs' own proxy (the Gateway Route): JS/CSS bundle, REST calls and SSE streaming.
 const UXO_AI_ENDPOINT = `${BASE_URL}/plugins/${SCOPE}${GATEWAY_PATH}`;
 
-// Direct, browser-reachable address of uxopian-gateway's OWN Ingress, bypassing
-// FlowerDocs' proxy entirely. Optional: only needed for the WebSocket channel.
-// Set this to the gateway's public URL by hand before deploying the scope
-// (e.g. https://ai-gateway.<your-domain>) — leave it blank to degrade
-// gracefully: chat/Quick Prompt keep working, only server-to-client push
-// actions stay silent.
+// Optional. Public address of uxopian-gateway itself (e.g. https://ai-gateway.example.com),
+// used only for the WebSocket channel, which FlowerDocs' proxy cannot forward.
+// Left blank, chat and Quick Prompt still answer; only server-to-client push actions stay silent.
 const WS_GATEWAY_URL_RAW = '';
 const WS_UXO_AI_ENDPOINT = WS_GATEWAY_URL_RAW
   ? `${WS_GATEWAY_URL_RAW}/gui${GATEWAY_PATH}`
@@ -123,6 +119,8 @@ const WS_UXO_AI_ENDPOINT = WS_GATEWAY_URL_RAW
 | `UXO_AI_ENDPOINT` | `/gui/plugins/<scope>/gateway/uxopian-ai` | Through FlowerDocs' internal proxy |
 | `WS_UXO_AI_ENDPOINT` | `<wsGatewayUrl>/gui/gateway/uxopian-ai` | Direct, cross-origin, own Ingress — empty if unset |
 
+Every other script uses `UXO_AI_ENDPOINT` only. With the `Gateway.xml` Route below, a browser request to `/gui/plugins/<scope>/gateway/uxopian-ai/…` reaches uxopian-ai as `/gui/gateway/uxopian-ai/…`, which is why uxopian-ai runs with `CONTEXT_PATH=/gui/gateway/uxopian-ai`. The same context path serves the direct WebSocket address.
+
 #### Why WebSocket needs a separate, direct endpoint
 
 FlowerDocs' internal proxy (the one behind the `/gateway/**` Route) forwards plain HTTP requests fine — REST calls and SSE streaming both work through it on FlowerDocs 2026. **It cannot forward a WebSocket upgrade at all**, on any FlowerDocs version:
@@ -132,13 +130,14 @@ FlowerDocs' internal proxy (the one behind the `/gateway/**` Route) forwards pla
 
 So unlike REST/SSE, the WebSocket channel needs `uxopian-gateway` to be reachable **directly**, on its own address, bypassing FlowerDocs' proxy layer entirely — see `uxopian-gateway/ops/helm/gateway-service`'s `ingress.*` values for exposing it. This is necessarily a **different origin** from the FlowerDocs page (a same-origin reverse-proxy merge is not required and not assumed):
 
-- **No cookie is involved.** The gateway's WebSocket routes (`uxopian-ai-ws`, `uxopian-ai-plugin-ws` in `gateway-service`'s `application.yml`) are declared fully public (`security: *secPublicAll`) — no `FlowerDocsProvider` validation happens on them, so there is nothing for a same-origin cookie to carry. The channel is gated only by the (unguessable) conversation id, checked downstream by `uxopian-ai`.
-- **CORS is still required**, because the browser enforces it independently of authentication: list the FlowerDocs GUI's own origin (e.g. `https://fd.<env>.uxopian.com`) in the gateway's `cors.allowedOrigins`. This is a Helm value on `gateway-service`, not on this scope.
+- **No cookie is involved.** The gateway's WebSocket route (`uxopian-ai-ws` in the gateway's built-in `application.yml`) is public: no `FlowerDocsProvider` validation happens on it, so there is nothing for a same-origin cookie to carry. The channel is gated only by the (unguessable) conversation id, checked downstream by `uxopian-ai`.
+- **CORS is not needed for the WebSocket.** Browsers do not apply CORS to a WebSocket handshake, and the gateway accepts it from any origin. Leave the gateway's `cors.allowedOrigins` empty: the `CORS disabled` line in the gateway log is expected. A non-empty list would apply to the WebSocket too, so if you set it, it must include the FlowerDocs GUI's origin.
+- **The FlowerDocs Content Security Policy must allow it.** FlowerDocs' default `connect-src` (`'self' https: …`) does not allow `wss:` or `ws:`, so the browser blocks the connection before it leaves the page. Add the gateway's WebSocket origin (e.g. `wss://ai-gateway.example.com`) to `connect-src` in the GUI's `content.security.policy.directives` property, keeping the rest of the default policy.
 
-If `wsGatewayUrl` is left unset, `WS_UXO_AI_ENDPOINT` is empty and the chat/Quick Prompt panels degrade gracefully: they keep working over `UXO_AI_ENDPOINT` (REST/SSE), only the server→client action-push channel stays silent.
+If `WS_GATEWAY_URL_RAW` is left blank, `WS_UXO_AI_ENDPOINT` is empty. Chat and Quick Prompt keep answering over `UXO_AI_ENDPOINT` (REST/SSE), but in 2026.0.0 the bundle then tries the WebSocket on `UXO_AI_ENDPOINT` itself, through FlowerDocs' proxy, which refuses it. The attempt is retried every 3 seconds and each failure logs `[WS] error` in the browser console. These errors are harmless; only the server→client action-push channel is lost.
 
 ```javascript
-fetch(UXO_AI_ENDPOINT).then(() =>
+fetch(UXO_AI_ENDPOINT + '/').then(() =>
   createChat({
     endpoint:   UXO_AI_ENDPOINT,       // through FlowerDocs' proxy — REST/SSE
     wsEndpoint: WS_UXO_AI_ENDPOINT,    // direct, own Ingress — WebSocket (or '' — degrades)
@@ -147,17 +146,17 @@ fetch(UXO_AI_ENDPOINT).then(() =>
 );
 ```
 
+The warm-up `fetch` ends with `/`. Without it, uxopian-ai answers `302` with a `Location` built on the gateway's internal host name (for example `http://gateway-service:8085/…`), which the browser cannot reach: the call fails with `Failed to fetch` and the panel never opens.
+
 #### Required gateway routes
 
-`gateway-service`'s `application.yml` already declares both the scoped, FlowerDocs-proxied routes (`uxopian-ai-plugin`, `uxopian-ai-plugin-ws`) and the direct, unscoped ones (`uxopian-ai`, `uxopian-ai-ws`) — nothing to add there. See [Configure gateway routes](./configure_gateway_routes.md) for how these are derived, and the chart's `ingress.*` values to expose the direct ones publicly.
-
-**Before importing**, update the `GATEWAY_PATH` value in `consts/` to match the route name defined in `Gateway.xml`.
+The gateway image ships an `application.yml` whose routes already cover FlowerDocs: `uxopian-ai` (`/**/uxopian-ai/**`, `FlowerDocsProvider`) and `uxopian-ai-ws` (`/**/uxopian-ai/ws/**`, public). Both forward the path unchanged to `http://ai-standalone-service:8080`. Nothing to add there, as long as the uxopian-ai service is reachable under that name — see [Docker installation](../installation/docker.md#flowerdocs-deployment). See [Configure gateway routes](./configure_gateway_routes.md) to change them, and the chart's `ingress.*` values to expose the gateway publicly for the WebSocket.
 
 ### uxoai-utils.xml / uxoai-utils/ — Order 1 · Required
 
 Provides three shared functions used by `openChat` and `translate`:
 
-- `openChatComp(request)` — performs a warm-up `fetch(UXO_AI_ENDPOINT)`, then calls `createChat()` (the function exposed by `web-comp`) with the given request routed through `UXO_AI_ENDPOINT` / `WS_UXO_AI_ENDPOINT`.
+- `openChatComp(request)` — performs a warm-up `fetch(UXO_AI_ENDPOINT + '/')`, then calls `createChat()` (the function exposed by `web-comp`) with the given request routed through `UXO_AI_ENDPOINT` / `WS_UXO_AI_ENDPOINT`.
 - `contextualInput()` — builds a `SYSTEM` role input containing the current FlowerDocs component ID and the ARender document ID (see [Contextual input](#contextual-input) below).
 - `createAIAction({ label, onExecute, icon })` — registers a contextual action in the component header bar, re-evaluated on every component navigation. The menu id is derived from `label.name` (e.g. `ai-action-openChat`), so each action gets a distinct id. `label` carries the action's `name` plus its `FR`/`EN` translations; `icon` defaults to `fa-solid fa-robot`.
 
@@ -276,11 +275,13 @@ Defines a FlowerDocs reverse-proxy route that forwards `/gateway/**` requests to
     <ns2:value>/gateway/**</ns2:value>
 </ns2:tags>
 <ns2:tags name="URL">
-    <ns2:value>http://gateway-service:8085</ns2:value>
+    <ns2:value>http://gateway-service:8085/gui/gateway</ns2:value>
 </ns2:tags>
 ```
 
-Update the `URL` value to match the hostname and port of your `uxopian-gateway` as seen from the FlowerDocs server.
+FlowerDocs' proxy removes `/gui/plugins/<scope>/gateway` from the request path and appends the rest to this URL. A browser call to `/gui/plugins/<scope>/gateway/uxopian-ai/api/v1/prompts` therefore reaches the gateway as `/gui/gateway/uxopian-ai/api/v1/prompts`, which matches uxopian-ai's `CONTEXT_PATH=/gui/gateway/uxopian-ai`. Keep the `/gui/gateway` suffix: without it the gateway receives `/uxopian-ai/…` and uxopian-ai answers `404`.
+
+Update the host and port to those of your `uxopian-gateway` as seen from the FlowerDocs server.
 
 ## Wire Quick Prompt into FlowerDocs
 
@@ -360,10 +361,10 @@ The `conf/` directory is a standard FlowerDocs [scope](/docs/flowerdocs/concepts
 
 Before importing the scope files into FlowerDocs, update the following:
 
-1. `conf/Route/Gateway.xml` — set the `URL` tag to the URL of your uxopian-gateway as seen by the **FlowerDocs server**.
-2. `conf/Script/consts/` — verify `GATEWAY_PATH` matches the route path defined in `Gateway.xml`.
+1. `conf/Route/Gateway.xml` — set the `URL` tag to your uxopian-gateway as seen by the **FlowerDocs server**, followed by `/gui/gateway` (e.g. `http://gateway-service:8085/gui/gateway`).
+2. uxopian-ai runs with `CONTEXT_PATH=/gui/gateway/uxopian-ai`.
 3. Confirm that `UXO_AI_ENDPOINT` resolves to a URL reachable from **user browsers** (not just the server), because `web-comp` fetches the JS bundle client-side.
-4. **Optional** — if `uxopian-gateway` has its own public Ingress, set `WS_GATEWAY_URL_RAW` in `consts/` (or pass `--var wsGatewayUrl=…` on a client that supports it) to enable the WebSocket action-push channel. See [Why WebSocket needs a separate, direct endpoint](#why-websocket-needs-a-separate-direct-endpoint). Leave it unset otherwise — the chat still works without it.
+4. **Optional** — if `uxopian-gateway` has its own public address, set `WS_GATEWAY_URL_RAW` in `consts/` to enable the WebSocket action-push channel, and add that address to FlowerDocs' Content Security Policy. See [Why WebSocket needs a separate, direct endpoint](#why-websocket-needs-a-separate-direct-endpoint). Leave it blank otherwise — the chat still works without it.
 
 ## Related pages
 

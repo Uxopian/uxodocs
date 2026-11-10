@@ -8,7 +8,7 @@
       "Chat",
       "Open chat",
       function () {
-        fetch(GATEWAY_ENDPOINT).then(() =>
+        fetch(UXO_AI_ENDPOINT + '/').then(() =>
           createChat({
             endpoint: UXO_AI_ENDPOINT,
             wsEndpoint: WS_UXO_AI_ENDPOINT,

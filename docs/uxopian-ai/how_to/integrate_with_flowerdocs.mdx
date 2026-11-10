@@ -56,14 +56,16 @@ At minimum, the stack must include:
 
 | Service | Purpose |
 |---|---|
-| `uxopian-ai` | Core application — handles conversations, LLM calls, and FlowerDocs tool calls |
-| `uxopian-gateway` | Public entry point — authenticates requests before forwarding to uxopian-ai |
+| `uxopian-ai` | Core application — handles conversations, LLM calls, and FlowerDocs tool calls. Name the service `ai-standalone-service`: the gateway's built-in routes call that host |
+| `uxopian-gateway` | Public entry point — authenticates requests before forwarding to uxopian-ai. Name the service `gateway-service`: the scope's `Gateway.xml` Route calls that host |
 | `opensearch` | Persistence store for conversations, prompts, and provider configuration |
+
+Both uxopian-ai and the gateway need the same `INTERNAL_AUTH_JWT_SECRET` (32 bytes or more, e.g. `openssl rand -base64 48`). uxopian-ai refuses to start without it. The gateway starts anyway, but then every request to uxopian-ai is refused with `401`. See [Internal authentication secret](../installation/docker.md#internal-authentication-secret).
 
 ### Checkpoint 1 — Stack is up
 
 ```bash
-curl http://<gateway-host>:<port>/actuator/health
+curl http://<gateway-host>:8085/actuator/health
 ```
 
 Expected response:
@@ -76,7 +78,7 @@ If the gateway does not respond, check that the containers or services have star
 
 ```bash
 # Docker
-docker compose logs uxopian-gateway uxopian-ai
+docker compose logs gateway-service ai-standalone-service
 
 # Java service
 journalctl -u uxopian-gateway -n 50
@@ -95,17 +97,14 @@ Container-to-container URLs must use **Docker service names** as hostnames, not 
 Set `FD_WS_URL` to the FlowerDocs Core URL **as seen by uxopian-ai** — not by user browsers:
 
 ```yaml
-# Same Docker Compose stack — use the FlowerDocs Core service name
-FD_WS_URL=http://flowerdocs-core:8080/core/
-
-# FlowerDocs in a separate Docker stack — join its network first, then use its service name
-FD_WS_URL=http://flowerdocs-core:8080/core/
+# Docker — FlowerDocs Core service name (join FlowerDocs' network first if it runs in another stack)
+FD_WS_URL=http://flower-docs-core:8081/core/
 
 # Java service on the same host (no Docker isolation)
-FD_WS_URL=http://localhost:8080/core/
+FD_WS_URL=http://localhost:8081/core/
 ```
 
-If FlowerDocs runs in a separate Compose stack, `uxopian-ai` must join its Docker network. Find the FlowerDocs Core container name and network:
+If FlowerDocs runs in a separate Compose stack, uxopian-ai and the gateway must join its Docker network: uxopian-ai calls FlowerDocs Core, and FlowerDocs' proxy calls the gateway. Find the FlowerDocs Core container name and network:
 
 ```bash
 docker ps --format '{{.Names}}' | grep -i flower
@@ -117,10 +116,14 @@ Then declare the external network in the Uxopian AI Compose file:
 ```yaml
 # docker-compose.yml (Uxopian AI)
 services:
-  uxopian-ai:
+  ai-standalone-service:
     networks:
       - uxopian-ai-net
       - flowerdocs-net   # Join the FlowerDocs network
+  gateway-service:
+    networks:
+      - uxopian-ai-net
+      - flowerdocs-net
 
 networks:
   uxopian-ai-net:
@@ -135,10 +138,10 @@ From inside the `uxopian-ai` container, confirm that FlowerDocs Core is reachabl
 
 ```bash
 docker exec -it <uxopian-ai-container> sh
-curl http://flowerdocs-core:8080/core/rest/actuator/health
+curl http://flower-docs-core:8081/core/actuator/status
 ```
 
-If `nslookup flowerdocs-core` returns `NXDOMAIN`, the containers are not on the same network. FlowerDocs tool calls will fail silently at query time if this URL is unreachable.
+If `curl` answers `Could not resolve host`, the containers are not on the same network. FlowerDocs tool calls will fail silently at query time if this URL is unreachable.
 
 ### Checkpoint 2 — Connectivity verified
 
@@ -154,56 +157,57 @@ If `nslookup flowerdocs-core` returns `NXDOMAIN`, the containers are not on the 
 
 ### 3.1 Configure FlowerDocsProvider on the gateway
 
-In `gateway-application.yaml`, set the route provider to `FlowerDocsProvider`:
+Nothing to configure: the routes built into the gateway image already use `FlowerDocsProvider` for every path containing `/uxopian-ai/` (see [Docker installation — FlowerDocs deployment](../installation/docker.md#flowerdocs-deployment)). Do not mount a `gateway-application.yaml` for FlowerDocs. If you need to change the routes, replace the whole file at `/app/application.yml` as described there.
 
-```yaml
-app:
-  routes:
-    - id: uxopian-ai
-      uri: http://uxopian-ai:8080
-      path: /**
-      provider: FlowerDocsProvider
-```
-
-`FlowerDocsProvider` validates FlowerDocs JWTs from `Authorization: Bearer` headers or `SESSION` cookies. It caches valid sessions in Hazelcast to reduce validation overhead.
+`FlowerDocsProvider` reads the FlowerDocs JWT from the `token` request header, or from the FlowerDocs `SESSION` cookie that the browser sends through FlowerDocs' proxy. It caches sessions in Hazelcast; on a single gateway node, Hazelcast needs no configuration. No FlowerDocs `token.key` has to be set on the gateway.
 
 :::warning[The provider name must match exactly]
-The `provider` value must match a Spring bean name registered in the gateway. If `FlowerDocsProvider` is misspelled or missing from the classpath, the gateway will reject all requests with 500 or start without any provider, falling through to an unconfigured state. Check gateway startup logs for `Registered provider: FlowerDocsProvider`.
+If you replace the routes, the `provider` value must match a provider registered in the gateway. Check the gateway startup logs for `Successfully registered Auth Provider: 'FlowerDocsProvider'`.
 :::
 
 ### 3.2 Verify the LLM default provider exists
 
-In `config/llm-clients-config.yml`, check that the provider referenced in `llm.default.provider` is actually defined under `llm.provider.globals`:
+In `config/llm-clients-config.yml`, check that the provider referenced in `llm.default.provider` is actually defined under `llm.provider.globals`, and that `llm.default.model` names one of its `llmModelConfName` values (not a model id):
 
 ```yaml
 llm:
   default:
     provider: openai          # ← this value must match a provider below
-    model: gpt-5.1
+    model: gpt5               # ← an llmModelConfName below, not the model id
   provider:
     globals:
       - provider: openai      # ← must match the default above
         defaultLlmModelConfName: gpt5
         globalConf:
           apiSecret: ${OPENAI_API_KEY:}
+        llModelConfs:
+          - llmModelConfName: gpt5
+            modelName: gpt-5.1
 ```
+
+A `model` that matches no `llmModelConfName` is not an error: uxopian-ai logs `Requested model '…' is unavailable for provider '…'` and falls back to `defaultLlmModelConfName`.
 
 If the `default.provider` names a provider that does not appear in `globals`, every request will fail at the LLM call stage with a "provider not found" error — with no useful message in the chat panel.
 
 ### 3.3 Test authentication with a FlowerDocs token
 
-Log in to FlowerDocs and retrieve a JWT token. Then test the gateway directly:
+Get a FlowerDocs JWT from FlowerDocs Core, then call the gateway directly with it in the `token` header:
 
 ```bash
-curl -H "Authorization: Bearer <your-flowerdocs-jwt>" \
-  http://<gateway-host>:<port>/api/v1/prompts
+curl -X POST http://<flowerdocs-core-host>:8081/core/rest/authentication \
+  -H "Content-Type: application/json" \
+  -d '{"user":"<user>","password":"<password>","scope":"<scope>"}'
+# → {"value":"<your-flowerdocs-jwt>"}
+
+curl -H "token: <your-flowerdocs-jwt>" \
+  http://<gateway-host>:8085/gui/gateway/uxopian-ai/api/v1/prompts
 ```
 
 Expected: HTTP 200 with a JSON list of prompts.
 
 If you get HTTP 401, check:
-- The token format (FlowerDocs JWT vs session cookie)
-- The Hazelcast configuration (session caching must be reachable)
+- The header name: `FlowerDocsProvider` reads `token`, not `Authorization: Bearer` (the gateway log then says `Authentication token is missing`)
+- The `INTERNAL_AUTH_JWT_SECRET` value, which must be the same on both services
 - Gateway logs for the specific validation failure
 
 :::tip[Test interface — Swagger UI]
@@ -226,7 +230,7 @@ This phase validates the full chain: gateway → uxopian-ai → LLM → response
 
 ### 4.1 Open the admin UI
 
-The admin UI is available at `http://<gateway-host>:<port>/admin`. It requires an `ADMIN` or `SYSTEM_ADMIN` role in your FlowerDocs token.
+Once the scope files are installed (Phase 5), the admin UI opens from FlowerDocs at `/gui/plugins/<scope>/gateway/uxopian-ai/admin/`, or from the **Uxopian-ai** entry of the FlowerDocs application menu. It requires an `ADMIN` or `SYSTEM_ADMIN` profile. Before that, use the REST calls below.
 
 From the admin UI you can:
 - Verify that the LLM provider is loaded and active
@@ -238,8 +242,8 @@ From the admin UI you can:
 With an authenticated FlowerDocs token, send a minimal chat request:
 
 ```bash
-curl -X POST http://<gateway-host>:<port>/api/v1/requests \
-  -H "Authorization: Bearer <your-flowerdocs-jwt>" \
+curl -X POST http://<gateway-host>:8085/gui/gateway/uxopian-ai/api/v1/requests \
+  -H "token: <your-flowerdocs-jwt>" \
   -H "Content-Type: application/json" \
   -d '{
     "inputs": [{
@@ -261,8 +265,8 @@ If the request times out or returns an LLM error:
 To confirm that the FlowerDocs plugin is wired correctly, ask the LLM to list documents:
 
 ```bash
-curl -X POST http://<gateway-host>:<port>/api/v1/requests \
-  -H "Authorization: Bearer <your-flowerdocs-jwt>" \
+curl -X POST http://<gateway-host>:8085/gui/gateway/uxopian-ai/api/v1/requests \
+  -H "token: <your-flowerdocs-jwt>" \
   -H "Content-Type: application/json" \
   -d '{
     "inputs": [{
@@ -309,7 +313,7 @@ Extract the ZIP. The archive contains scope files loaded by FlowerDocs in depend
 | 3 | `qp-connector.xml` / `qp-connector/` | Quick Prompt — maps FlowerDocs context; exposes `window.qpHandleToggle` |
 | 3 | `qp-loader.xml` / `qp-loader/` | Quick Prompt — loads the Quick Prompt bundle |
 | 4 | `qp-button.xml` / `qp-button/` | Quick Prompt — header toggle button (optional) |
-| — | `Route/Gateway.xml` | Reverse-proxy route: FlowerDocs `/gateway/**` → uxopian-gateway |
+| — | `Route/Gateway.xml` | Reverse-proxy route: FlowerDocs `/gateway/**` → `http://gateway-service:8085/gui/gateway` |
 
 :::danger[web-comp is a hard prerequisite for all other scripts]
 `web-comp` fetches the Uxopian AI JavaScript bundle and stylesheet from the gateway and injects them into the FlowerDocs page. This is what registers the `createChat()` function. Without it, every script that opens the chat panel will fail silently — no error, no panel.
@@ -324,10 +328,10 @@ See [Configure FlowerDocs scope files](./configure_flowerdocs_scope.mdx) for a d
 
 ### 5.2 Customize the scope files
 
-Before importing, update two values:
+Before importing, check two values:
 
-1. **`conf/Route/Gateway.xml`** — set the `URL` tag to the uxopian-gateway URL as seen from the **FlowerDocs server**.
-2. **`conf/Script/consts/`** — verify that `GATEWAY_PATH` matches the route path in `Gateway.xml` and that `UXO_AI_ENDPOINT` resolves to a URL reachable from **user browsers**.
+1. **`conf/Route/Gateway.xml`** — the `URL` tag is the uxopian-gateway as seen from the **FlowerDocs server**, followed by `/gui/gateway` (default `http://gateway-service:8085/gui/gateway`). Keep the `/gui/gateway` suffix: it is what makes the path match `CONTEXT_PATH=/gui/gateway/uxopian-ai`.
+2. **`conf/Script/consts/`** — optional: set `WS_GATEWAY_URL_RAW` to the gateway's public address to enable the WebSocket channel, and allow that address in FlowerDocs' Content Security Policy. See [Why WebSocket needs a separate, direct endpoint](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint).
 
 ### 5.3 Install the scope files into FlowerDocs
 
@@ -357,11 +361,13 @@ If the panel does not appear, open browser developer tools and check:
 
 | Parameter | Where | Description |
 |---|---|---|
-| `provider: FlowerDocsProvider` | `gateway-application.yaml` | Activates FlowerDocs JWT validation |
+| `provider: FlowerDocsProvider` | Gateway built-in `application.yml` | Activates FlowerDocs JWT validation — already set on the `uxopian-ai` route |
+| `CONTEXT_PATH=/gui/gateway/uxopian-ai` | uxopian-ai environment | Matches the path FlowerDocs' Route sends to the gateway |
+| `INTERNAL_AUTH_JWT_SECRET` | uxopian-ai and gateway environment | Same value on both, 32 bytes or more |
 | `FD_WS_URL` | uxopian-ai environment | FlowerDocs core **web service** URL for tool calls (unrelated to the browser WebSocket below, despite the name) |
 | `llm.default.provider` | `llm-clients-config.yml` | Must match an entry in `llm.provider.globals` |
-| `Gateway.xml` URL | Scope file | Gateway URL as seen by the **FlowerDocs server** — feeds the scoped, proxied `UXO_AI_ENDPOINT` |
-| `consts/wsGatewayUrl` | Scope file, optional | `uxopian-gateway`'s own public Ingress URL, as seen by **user browsers** — only needed for the WebSocket channel, see [Configure FlowerDocs scope files](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint) |
+| `Gateway.xml` URL | Scope file | Gateway URL as seen by the **FlowerDocs server**, followed by `/gui/gateway` — serves the scoped, proxied `UXO_AI_ENDPOINT` |
+| `WS_GATEWAY_URL_RAW` in `consts/` | Scope file, optional | `uxopian-gateway`'s own public URL, as seen by **user browsers** — only needed for the WebSocket channel, and must be allowed in FlowerDocs' Content Security Policy, see [Configure FlowerDocs scope files](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint) |
 | `gateway-service` `ingress.*` | Helm values (`uxopian-gateway`) | Exposes the gateway directly, for the WebSocket channel only |
 
 ## How documents are read
@@ -373,13 +379,15 @@ FlowerDocs documents are handed to ARender through the FlowerDocs file connector
 | Error | Cause | Solution |
 |---|---|---|
 | 401 on all gateway requests | `FlowerDocsProvider` failing to validate token | Check FlowerDocs JWT format and gateway logs |
-| Gateway starts but all requests fail with 500 | Provider name misspelled or not registered | Check gateway logs for `Registered provider` entries |
+| Gateway starts but all requests fail with 500 | The gateway cannot reach `ai-standalone-service` (`UnknownHostException`), or a provider name is misspelled | Name the uxopian-ai service `ai-standalone-service`, or replace the routes at `/app/application.yml`; check `Successfully registered Auth Provider` in the gateway logs |
+| `404` on every call through FlowerDocs | `Gateway.xml` URL without the `/gui/gateway` suffix, or `CONTEXT_PATH` not set to `/gui/gateway/uxopian-ai` | See [Gateway.xml (Route)](./configure_flowerdocs_scope.mdx#gatewayxml-route) |
+| `Failed to fetch` when opening the panel | Warm-up `fetch(UXO_AI_ENDPOINT)` without a trailing `/`, redirected to the gateway's internal host | Use the current scope files: they call `fetch(UXO_AI_ENDPOINT + '/')` |
 | LLM returns "provider not found" | `llm.default.provider` names a non-existent provider | Align `default.provider` with an entry in `llm.provider.globals` |
 | Tool calls fail silently | `FD_WS_URL` unreachable from uxopian-ai | Verify with `docker exec … curl FD_WS_URL` — if `NXDOMAIN`, join the FlowerDocs Docker network |
 | `FD_WS_URL=http://localhost/core/` fails | `localhost` = the container, not the host | Use the FlowerDocs Core Docker service name instead |
 | Chat panel does not appear | `web-comp` not loaded or gateway URL wrong | Check browser console for `createChat is not defined` |
-| Session not found after login | Hazelcast not configured or unreachable | Check Hazelcast configuration in `hazelcast.yml` |
-| Chat/Quick Prompt answer OK but server→client actions don't fire | `wsGatewayUrl` unset, or the gateway has no direct Ingress | Expected degraded state if unset — see [Why WebSocket needs a separate, direct endpoint](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint); this never worked through FlowerDocs' own proxy on any version |
+| Session not found after login | Hazelcast unreachable between gateway nodes | A single node needs no Hazelcast configuration; with several nodes, check `hazelcast.yml` |
+| Chat/Quick Prompt answer OK but server→client actions don't fire, `[WS] error` in the console | `WS_GATEWAY_URL_RAW` blank, the gateway has no public address, or FlowerDocs' Content Security Policy blocks it | Expected degraded state if blank — see [Why WebSocket needs a separate, direct endpoint](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint); this never worked through FlowerDocs' own proxy on any version |
 
 ## Troubleshooting
 
@@ -408,7 +416,7 @@ A 504 means a proxy gave up waiting for an upstream response. Most common causes
 
 **Legacy FlowerDocs (Zuul-based proxy) buffering a streaming request.** Check the request URL in the Network tab. If it contains `/plugins/<scope>/gateway/` on a pre-2026 FlowerDocs, the request goes through Zuul, which is HTTP/1.1 and buffers responses — SSE streaming times out. This is a legacy-only issue: FlowerDocs 2026's proxy (Spring Cloud Gateway Server MVC) forwards streaming HTTP responses fine, so `UXO_AI_ENDPOINT` stays on the scoped, proxied path there — do not "fix" this on 2026 by bypassing it.
 
-**A WebSocket request timing out or hanging with no useful status.** This is not a proxy-timeout scenario to fix by tuning timeouts — FlowerDocs' proxy (Zuul or, on 2026, Spring Cloud Gateway Server MVC) **cannot forward a WebSocket upgrade at all**, on any version. See [Configure FlowerDocs scope files — Why WebSocket needs a separate, direct endpoint](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint). The fix is `wsGatewayUrl` pointing at a direct, public Ingress on `uxopian-gateway` itself — never route the WebSocket back through FlowerDocs' `/gateway/**` Route.
+**A WebSocket request timing out or hanging with no useful status.** This is not a proxy-timeout scenario to fix by tuning timeouts — FlowerDocs' proxy (Zuul or, on 2026, Spring Cloud Gateway Server MVC) **cannot forward a WebSocket upgrade at all**, on any version. See [Configure FlowerDocs scope files — Why WebSocket needs a separate, direct endpoint](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint). The fix is `WS_GATEWAY_URL_RAW` pointing at the public address of `uxopian-gateway` itself — never route the WebSocket back through FlowerDocs' `/gateway/**` Route.
 
 **uxopian-ai itself timed out.** The LLM call took longer than the proxy's timeout. Increase the proxy timeout, or reduce the LLM response time by tuning the model (see [LLM response timeout](#llm-response-times-out) below).
 
@@ -416,7 +424,7 @@ A 504 means a proxy gave up waiting for an upstream response. Most common causes
 
 ```bash
 docker exec -it <gateway-container> sh
-curl http://ai-standalone-service:8080/actuator/health
+curl http://ai-standalone-service:8080/gui/gateway/uxopian-ai/actuator/health
 ```
 
 If this fails, the gateway cannot reach uxopian-ai — check that both containers are on the same Docker network.
@@ -425,8 +433,10 @@ If this fails, the gateway cannot reach uxopian-ai — check that both container
 
 The request reaches a server but the path doesn't match any route. Common causes:
 
-- `UXO_AI_ENDPOINT` uses the wrong path — check `consts/` and compare with the `CONTEXT_PATH` set on uxopian-ai.
-- The gateway route `path` doesn't match what the browser sends — run `curl http://localhost:8085/actuator/gateway/routes` from the gateway container to inspect loaded routes.
+- The `Gateway.xml` Route URL lacks the `/gui/gateway` suffix — the gateway then receives `/uxopian-ai/…` while uxopian-ai expects `/gui/gateway/uxopian-ai/…`. The request URL in the 404 body shows the path uxopian-ai received.
+- `CONTEXT_PATH` on uxopian-ai is not `/gui/gateway/uxopian-ai`.
+- The browser calls `/gui/gateway/uxopian-ai/…` instead of `/gui/plugins/<scope>/gateway/uxopian-ai/…`: the `consts/` file comes from an old scope archive. FlowerDocs answers 404 itself.
+- You replaced the gateway routes and the route `path` doesn't match what the browser sends.
 - `rewritePath` is misconfigured — the backend receives a path it doesn't recognise. Enable gateway route debug logging:
 
   ```yaml
@@ -442,27 +452,30 @@ The request reaches a server but the path doesn't match any route. Common causes
 
 The gateway rejected the request. Check in order:
 
-1. **Session warm-up ping not fired.** The `fetch(UXO_AI_ENDPOINT)` call in `OpenChatShortcut` must succeed before `createChat()` is called. Open the Network tab and look for a request to `UXO_AI_ENDPOINT` (the scoped, FlowerDocs-proxied path at `/gui/plugins/<scope>/gateway/uxopian-ai`). If it returned 401, the user's FlowerDocs session was not forwarded correctly.
+1. **Session warm-up ping not fired.** The `fetch(UXO_AI_ENDPOINT + '/')` call in `OpenChatShortcut` must succeed before `createChat()` is called. Open the Network tab and look for a request to `UXO_AI_ENDPOINT` (the scoped, FlowerDocs-proxied path at `/gui/plugins/<scope>/gateway/uxopian-ai`). If it returned 401, the user's FlowerDocs session was not forwarded correctly.
 
-2. **FlowerDocsProvider not loaded.** Check gateway startup logs for `Registered provider: FlowerDocsProvider`. A missing or misspelled provider name causes 401 on every request.
+2. **FlowerDocsProvider not loaded.** Check gateway startup logs for `Successfully registered Auth Provider: 'FlowerDocsProvider'`.
 
-3. **Hazelcast session cache not reachable.** `FlowerDocsProvider` stores validated sessions in Hazelcast. If Hazelcast is down, session lookups fail. Check `hazelcast.yml` and gateway logs for Hazelcast connection errors.
+3. **Internal secret missing or different.** The gateway starts without `INTERNAL_AUTH_JWT_SECRET`, without any warning, and uxopian-ai then refuses every request it forwards. Set the same value on both services.
 
-4. **Token format mismatch.** Verify that the FlowerDocs session is sent as a `SESSION` cookie or `Authorization: Bearer` header, as expected by `FlowerDocsProvider`.
+4. **Hazelcast session cache not reachable.** `FlowerDocsProvider` stores validated sessions in Hazelcast. If Hazelcast is down, session lookups fail. Check `hazelcast.yml` and gateway logs for Hazelcast connection errors.
+
+5. **Token format mismatch.** Verify that the FlowerDocs session is sent as the `SESSION` cookie (through FlowerDocs' proxy) or as the `token` header, as expected by `FlowerDocsProvider`. An `Authorization: Bearer` header is not read.
 
 Rerun the Checkpoint 3 curl from Phase 3 to verify authentication end-to-end:
 
 ```bash
-curl -H "Authorization: Bearer <your-flowerdocs-jwt>" \
-  http://<gateway-host>:<port>/api/v1/prompts
+curl -H "token: <your-flowerdocs-jwt>" \
+  http://<gateway-host>:8085/gui/gateway/uxopian-ai/api/v1/prompts
 ```
 
 #### Network error / CORS
 
 The browser shows a network error or CORS warning in the console with no HTTP status.
 
-- **`wsGatewayUrl` unset or unreachable.** If `WS_UXO_AI_ENDPOINT` is empty, no WebSocket connection is attempted at all — this is the graceful-degradation default, not an error (chat/Quick Prompt still answer over `UXO_AI_ENDPOINT`). If it is set, confirm the direct Ingress on `gateway-service` actually resolves and terminates TLS (`curl -I https://<wsGatewayUrl>/actuator/health`).
-- **CORS on the direct gateway Ingress.** A cross-origin call from the FlowerDocs page's origin to `wsGatewayUrl` needs that origin listed in `gateway-service`'s `cors.allowedOrigins` Helm value — an empty list means no CORS headers at all, not a permissive default. This has no effect on the WebSocket routes themselves (they carry no auth either way) but the browser still enforces CORS on the handshake.
+- **`WS_GATEWAY_URL_RAW` blank.** The bundle then tries the WebSocket through FlowerDocs' proxy, which refuses it, and retries every 3 seconds: `[WS] error` lines pile up in the console. Chat and Quick Prompt still answer over `UXO_AI_ENDPOINT`; only server→client push actions are lost.
+- **`WS_GATEWAY_URL_RAW` set but the connection fails at once.** Check FlowerDocs' Content Security Policy first: its default `connect-src` does not allow `wss:` or `ws:`, so the browser blocks the connection (`Refused to connect` in the console). Add the gateway's WebSocket origin to `content.security.policy.directives`. Then confirm the gateway's public address answers (`curl -I https://<gateway-public-host>/actuator/health`).
+- **CORS.** Not needed for the WebSocket: browsers do not apply CORS to the handshake, and the gateway accepts any origin while its `cors.allowedOrigins` list is empty (the `CORS disabled` log line is expected). If you set that list, include the FlowerDocs GUI's origin.
 - **Do not try to fix this by routing through FlowerDocs' proxy.** `UXO_AI_ENDPOINT` (the scoped, FlowerDocs-proxied path) works for REST/SSE on FlowerDocs 2026, but forwarding a WebSocket through it will never work, on any FlowerDocs version — see [504 — proxy timeout](#504--proxy-timeout) above.
 
 ---
@@ -473,10 +486,10 @@ The chat panel shows a loading indicator but the response never arrives, or arri
 
 **Increase the LLM timeout via the admin UI (live, no restart):**
 
-1. Open the admin UI at `http://<gateway-host>:<port>/admin`.
+1. Open the admin UI from FlowerDocs (`/gui/plugins/<scope>/gateway/uxopian-ai/admin/`).
 2. Navigate to **LLM providers** and open the active provider.
 3. Find the **model configuration** for the model in use.
-4. Increase `timeout` (in milliseconds). A value of `120000` (2 minutes) is reasonable for long documents.
+4. Increase `timeout` (in **seconds**). A value of `120` (2 minutes) is reasonable for long documents.
 5. Save. The change takes effect immediately without restarting uxopian-ai.
 
 **Persist the timeout in `llm-clients-config.yml`:**
@@ -488,17 +501,17 @@ llm:
       - provider: openai
         globalConf:
           apiSecret: ${OPENAI_API_KEY:}
-          timeout: 120000          # ms — applies to all models for this provider
-    models:
-      - name: gpt-4.1
-        conf:
-          timeout: 180000          # ms — overrides the provider-level timeout for this model
+          timeout: 120             # seconds — applies to all models for this provider
+        llModelConfs:
+          - llmModelConfName: gpt5
+            modelName: gpt-5.1
+            timeout: 180           # seconds — overrides the provider-level timeout for this model
 ```
 
 If the timeout happens before the LLM even responds (e.g., the request itself hangs), the problem is likely in the network path, not the LLM. Check uxopian-ai logs for the actual error:
 
 ```bash
-docker compose logs uxopian-ai --tail=50
+docker compose logs ai-standalone-service --tail=50
 ```
 
 Look for `TimeoutException`, `ConnectException`, or `ReadTimeoutException`. A `ConnectException` means uxopian-ai cannot reach the LLM provider API — check firewall rules and that the API key is valid.

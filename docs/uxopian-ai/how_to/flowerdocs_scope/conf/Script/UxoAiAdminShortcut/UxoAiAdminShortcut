@@ -3,7 +3,7 @@
 
   const NEW_APP_CONFIG = {
     id: "uxo-ai-app-link",
-    url: `${GATEWAY_ENDPOINT}/admin`,
+    url: `${UXO_AI_ENDPOINT}/admin`,
     title: "Uxopian-ai",
     description: "Uxopian-ai administration pannel",
     iconClass: "fas fa-robot",

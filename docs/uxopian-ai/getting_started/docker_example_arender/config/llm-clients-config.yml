@@ -1,7 +1,7 @@
 llm:
   # Default LLM configuration (provider, model)
   default:
-    model: ${LLM_DEFAULT_MODEL:gpt-5.1}
+    model: ${LLM_DEFAULT_MODEL:gpt5}
     provider: ${LLM_DEFAULT_PROVIDER:openai}
     base-prompt: ${LLM_DEFAULT_PROMPT:basePrompt}
 

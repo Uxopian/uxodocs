@@ -12,8 +12,8 @@ The [Getting Started quickstarts](../getting_started/quickstart.mdx) use `DevPro
 
 ```mermaid
 flowchart TD
-    A[Create config/ directory] --> B[Write gateway-application.yaml]
-    B --> C[Create .env with LLM API keys]
+    A[Create config/ directory] --> B[Check the gateway routes]
+    B --> C[Create .env with LLM API keys and the internal secret]
     C --> D[docker compose up -d]
     D --> E{All services healthy?}
     E -->|Yes| F[Verify health endpoint]
@@ -57,7 +57,8 @@ services:
       retries: 5
       start_period: 20s
 
-  uxopian-ai:
+  # The service name is the host name the gateway's built-in routes call.
+  ai-standalone-service:
     image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
     # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
     depends_on:
@@ -69,8 +70,9 @@ services:
       - OPENSEARCH_PORT=9200
       - APP_BASE_URL=https://your-domain.example.com
       - CONTEXT_PATH=/gui/gateway/uxopian-ai
+      - FD_WS_URL=http://flower-docs-core:8081/core/
       - LLM_DEFAULT_PROVIDER=openai
-      - LLM_DEFAULT_MODEL=gpt-4.1
+      - LLM_DEFAULT_MODEL=gpt5
       - LLM_DEFAULT_PROMPT=basePrompt
       - LLM_CONTEXT_SIZE=10
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
@@ -78,60 +80,57 @@ services:
     volumes:
       - ./config:/app/config:ro
 
-  uxopian-gateway:
+  gateway-service:
     image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
     # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
     depends_on:
-      - uxopian-ai
+      - ai-standalone-service
     ports:
       - "8085:8085"
     environment:
       - JAVA_OPTS=-Xmx256m -Xms256m
       - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:?set it in .env}
-    volumes:
-      - ./gateway-application.yaml:/app/application.yaml:ro
 
 volumes:
   opensearch-data:
 ```
 
+`LLM_DEFAULT_MODEL` names a model **configuration** (`llmModelConfName` in `config/llm-clients-config.yml`), not a model id. See [Configure LLM providers](../how_to/configure_llm_providers.md#which-provider-and-model-runs-a-call).
+
 The Cloudsmith public registry (`docker.uxopian.com/preview/`) does not require login. Uncomment the `docker.uxopian.com` image lines and remove the default registry lines to use it instead of Artifactory.
 
 ## Gateway configuration
 
-The `gateway-application.yaml` file mounted into uxopian-gateway defines the routes and authentication provider. For a FlowerDocs deployment:
+### FlowerDocs deployment
+
+The gateway image ships its own `/app/application.yml`. Its routes already cover FlowerDocs, so a FlowerDocs deployment mounts no gateway file:
+
+| Route | Path | Target | Provider |
+|---|---|---|---|
+| `uxopian-ai` | `/**/uxopian-ai/**` | `http://ai-standalone-service:8080` | `FlowerDocsProvider` |
+| `uxopian-ai-ws` | `/**/uxopian-ai/ws/**` | `ws://ai-standalone-service:8080` | public |
+
+Both forward the path unchanged. Hence the two names in the Compose file above: the uxopian-ai service is called `ai-standalone-service`, and uxopian-ai runs with `CONTEXT_PATH=/gui/gateway/uxopian-ai`, the path FlowerDocs' Route sends (see [Configure FlowerDocs scope files](../how_to/configure_flowerdocs_scope.mdx#gatewayxml-route)).
+
+### Replacing the built-in configuration
+
+To change the routes (another provider, another service name, extra security rules), mount your own file **at `/app/application.yml`**:
 
 ```yaml
-app:
-  routes:
-    - id: uxopian-ai
-      uri: http://uxopian-ai:8080
-      prefix: /gui/gateway/uxopian-ai/
-      path: /gui/gateway/uxopian-ai/**
-      provider: FlowerDocsProvider
-      security:
-        - path: /.well-known/**
-          public: true
-        - path: /assets/**
-          public: true
-        - path: /actuator/health
-          public: true
-        - path: /prompt/**
-          roles: ["ADMIN"]
-        - path: /goal/**
-          roles: ["ADMIN"]
-        - path: /prompt-statistics
-          roles: ["ADMIN"]
-    - id: uxopian-ai-ws
-      uri: ws://uxopian-ai:8080
-      path: /gui/gateway/uxopian-ai/ws/**
-      prefix: /gui/gateway/uxopian-ai/ws/
-      security:
-        - path: /**
-          public: true
-server:
-  port: 8085
+    volumes:
+      - ./gateway-application.yml:/app/application.yml:ro
 ```
+
+The mounted file replaces the built-in one entirely, so start from a copy of it:
+
+```bash
+docker run --rm --entrypoint cat \
+  artifactory.arondor.cloud:5001/uxopian-gateway:2026.0.0 /app/application.yml > gateway-application.yml
+```
+
+:::warning[Mount at `application.yml`, not `application.yaml`]
+A file mounted at `/app/application.yaml` sits next to the built-in `/app/application.yml`, and the `.yml` file wins for every key both define. The route list comes entirely from the built-in file: your routes are ignored and the gateway keeps calling `ai-standalone-service` (`500`, `UnknownHostException` in the gateway log).
+:::
 
 For other authentication providers, replace `FlowerDocsProvider` with the appropriate provider name. See [Authentication and gateway](../understanding/authentication.md).
 
@@ -206,7 +205,7 @@ Every URL in the stack belongs to one of two contexts:
 | Context | Who resolves it | Use |
 |---|---|---|
 | **Container → container** | Docker DNS, inside the network | Service-to-service calls (uxopian-ai → OpenSearch, uxopian-ai → FlowerDocs core, gateway → uxopian-ai) |
-| **Browser → server** | Public DNS / host machine | URLs loaded in user browsers (gateway public URL, `UXOPIAN_AI_HOST`, JS `GATEWAY_ENDPOINT`) |
+| **Browser → server** | Public DNS / host machine | URLs loaded in user browsers (gateway public URL, `UXOPIAN_AI_HOST`, JS `UXO_AI_ENDPOINT`) |
 
 **Container-to-container URLs use the Docker service name as hostname.** This name is the key under `services:` in the Compose file (not `container_name`). Docker's embedded DNS resolves it to the container's internal IP automatically.
 
@@ -234,10 +233,10 @@ The variables listed below split cleanly into the two contexts. Set them accordi
 | Variable | Who reads it | Points to |
 |---|---|---|
 | `OPENSEARCH_HOST` | uxopian-ai | OpenSearch service name (e.g. `opensearch`) |
-| `FD_WS_URL` | uxopian-ai | FlowerDocs Core service (e.g. `http://flowerdocs-core:8080/core/`) |
+| `FD_WS_URL` | uxopian-ai | FlowerDocs Core service (e.g. `http://flower-docs-core:8081/core/`) |
 | `RENDITION_BASE_URL` | uxopian-ai | ARender DSB service (e.g. `http://dsb-service:8761`). Also the target of the `/rendition/` relay |
 | `ALFRESCO_BASE_URL` | uxopian-ai | Alfresco repository (e.g. `http://alfresco:8080`) |
-| `app.routes[].uri` | gateway | uxopian-ai service (e.g. `http://uxopian-ai:8080`) |
+| `app.routes[].uri` | gateway | uxopian-ai service (`http://ai-standalone-service:8080` in the built-in routes) |
 
 **Browser-side (use public host URL or IP):**
 
@@ -245,7 +244,8 @@ The variables listed below split cleanly into the two contexts. Set them accordi
 |---|---|---|
 | `APP_BASE_URL` | uxopian-ai (link generation) | Public gateway URL (e.g. `https://my-server.example.com`) |
 | `UXOPIAN_AI_HOST` | ARender UI, Alfresco Share | Public gateway URL as seen by browsers |
-| `GATEWAY_ENDPOINT` (in FlowerDocs scope JS `consts/`) | User's browser | Public gateway URL routed through FlowerDocs |
+| `UXO_AI_ENDPOINT` (in FlowerDocs scope JS `consts/`) | User's browser | FlowerDocs' own address, `/gui/plugins/<scope>/gateway/uxopian-ai`, proxied to the gateway |
+| `WS_GATEWAY_URL_RAW` (in FlowerDocs scope JS `consts/`, optional) | User's browser | Public gateway URL, for the WebSocket channel only |
 
 ### All services on the same network
 
@@ -284,7 +284,7 @@ When the host application runs in a separate Docker Compose stack, uxopian-ai mu
 services:
   uxopian-ai:
     environment:
-      - FD_WS_URL=http://flowerdocs-core:8080/core/   # Service name from the FD stack
+      - FD_WS_URL=http://flower-docs-core:8081/core/   # Service name from the FD stack
     networks:
       - uxopian-ai-net
       - flowerdocs-net                                  # Join the FD network
@@ -305,44 +305,43 @@ docker inspect <flowerdocs-container> | grep -i network
 **Option B — Use the host machine IP:**
 
 ```yaml
-FD_WS_URL=http://172.17.0.1:8080/core/   # Docker bridge gateway IP (Linux default)
+FD_WS_URL=http://172.17.0.1:8081/core/   # Docker bridge gateway IP (Linux default)
 # or
-FD_WS_URL=http://host.docker.internal:8080/core/   # Works on Mac/Windows Docker Desktop
+FD_WS_URL=http://host.docker.internal:8081/core/   # Works on Mac/Windows Docker Desktop
 ```
 
 This option works without network changes but binds the config to a specific IP. Prefer Option A in production.
 
 ### FlowerDocs integration — complete network picture
 
-In a FlowerDocs deployment, three URL contexts coexist:
+In a FlowerDocs deployment, the browser only talks to FlowerDocs, except for the optional WebSocket:
 
 ```mermaid
 flowchart LR
     Browser["Browser"]
 
     subgraph pub ["Public — browser-resolved"]
-        FDGUI["FlowerDocs GUI<br/>(Zuul)"]
-        GW["uxopian-gateway"]
+        FDGUI["FlowerDocs GUI<br/>(proxy)"]
+        GW["gateway-service"]
     end
 
     subgraph dock ["Docker network — Docker DNS"]
-        AI["uxopian-ai"]
-        FDCore["flowerdocs-core"]
+        AI["ai-standalone-service"]
+        FDCore["flower-docs-core"]
         OS["opensearch"]
     end
 
-    Browser -->|"GATEWAY_ENDPOINT<br/>session ping"| FDGUI
-    Browser -->|"UXO_AI_ENDPOINT<br/>LLM calls / SSE"| GW
-    FDGUI -->|"Zuul /gateway/**"| GW
+    Browser -->|"UXO_AI_ENDPOINT<br/>bundle, REST, SSE"| FDGUI
+    Browser -.->|"WS_UXO_AI_ENDPOINT<br/>WebSocket (optional)"| GW
+    FDGUI -->|"Gateway Route<br/>/gui/gateway/uxopian-ai/**"| GW
     GW -->|"service name"| AI
     AI -->|"FD_WS_URL"| FDCore
     AI -->|"OPENSEARCH_HOST"| OS
 ```
 
-Three URL contexts:
-- **`GATEWAY_ENDPOINT`** (`/gui/plugins/<scope>/gateway/**`) — goes through FlowerDocs Zuul for the session warm-up ping.
-- **`UXO_AI_ENDPOINT`** (`/gui/gateway/**`) — goes directly to uxopian-gateway for all LLM calls and SSE streaming.
-- **`FD_WS_URL`** — container-to-container, must use the Docker service name (`flowerdocs-core`), never `localhost`.
+- **`UXO_AI_ENDPOINT`** (`/gui/plugins/<scope>/gateway/uxopian-ai`) — the warm-up ping, the JS bundle, every REST call and SSE stream go through FlowerDocs' proxy, which forwards them to the gateway's Route URL (`http://gateway-service:8085/gui/gateway`).
+- **`WS_UXO_AI_ENDPOINT`** (optional) — the WebSocket goes straight to the gateway's public address, because FlowerDocs' proxy cannot forward it. See [Configure FlowerDocs scope files](../how_to/configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint).
+- **`FD_WS_URL`** — container-to-container, must use the Docker service name (`flower-docs-core`), never `localhost`.
 
 ### Checking service name resolution
 
@@ -353,11 +352,11 @@ From inside a container, verify DNS resolution and connectivity:
 docker exec -it <uxopian-ai-container> sh
 
 # Check service name resolution
-nslookup flowerdocs-core
-ping -c1 flowerdocs-core
+nslookup flower-docs-core
+ping -c1 flower-docs-core
 
 # Check the actual URL works
-curl http://flowerdocs-core:8080/core/actuator/health
+curl http://flower-docs-core:8081/core/actuator/status
 curl http://dsb-service:8761/ActionsAPI
 curl http://opensearch:9200/_cluster/health
 ```

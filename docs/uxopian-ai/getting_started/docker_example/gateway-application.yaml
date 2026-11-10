@@ -5,7 +5,6 @@ app:
     - id: uxopian-ai
       uri: http://uxopian-ai:8080
       path: /**
-      rewritePath: /?(?<segment>.*), /$\{segment}
       provider: DevProvider
       security:
         - path: /.well-known/**
