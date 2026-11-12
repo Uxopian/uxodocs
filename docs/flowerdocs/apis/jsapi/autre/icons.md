@@ -27,7 +27,7 @@ An _Icon Resolver_ can be registered using the function `registerComponentIconRe
 The `resolver` parameter corresponds to a function accepting two parameters:
 
 - `component`: the component whose icon is to be defined
-- `callback`: object whose `onSuccess()` function must be called once the icon calculation has been completed (in the case where the icon is not defined by the _Icon Resolver_, the `onSuccess()` function must be called with no value)
+- `callback`: object whose `onSuccess()` function must be called **once per component**, when the icon calculation has been completed. When the _Icon Resolver_ defines no icon for the component, call `onSuccess()` with no value or with `null`: the default icon of the component is shown. Only the first call counts, later calls are ignored.
 
 The `tags` parameter corresponds to the list of tags according to which the icon will be resolved.
 <br/>
@@ -39,7 +39,7 @@ JSAPI.get().getHelperFactory().registerComponentIconResolver(function(component,
     callback.onSuccess('fa fa-search');
   }else{
     callback.onSuccess(null);
-
+  }
 });
 ```
 
@@ -48,7 +48,7 @@ JSAPI.get().getHelperFactory().registerComponentIconResolver(function(component,
 
 ```javascript
 JSAPI.get().getHelperFactory().registerComponentIconResolver(function (component, callback) {
-	if (component.getTagValue('MailType') == 'Order' && component.getTagValue('Status') == ‘TODO') {
+	if (component.getTagValue('MailType') == 'Order' && component.getTagValue('Status') == 'TODO') {
 		callback.onSuccess('fa fa-search');
 	} else {
 		callback.onSuccess(null);
