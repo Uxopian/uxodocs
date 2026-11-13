@@ -77,7 +77,7 @@ _Discover the details below..._
 - **Packaging**: The package no longer carries OpenSearch Dashboards, which is repackaged on demand and will return as a sidecar. The Linux startup scripts have been reworked, and the SDK package embeds its restricted-access binaries.
 - **Dependencies and security**: iText has been removed from the converter, EML and PDF analysis modules; JJWT, Drools, Jackson, Svelte, npm and Node have been upgraded; and the vulnerabilities reported by Mend have been resolved, including those reaching Fast2 through transitive dependencies.
 - **Content encryption**: Can be turned off where a deployment does not want it.
-- **Content storage in Docker**: In the Docker images, workers upload document contents to the broker, which keeps them under `/files`. The zip package keeps them on each worker's disk, as before.
+- **Content storage in Docker**: In the Docker images, workers upload document contents to the broker, which keeps them under `/files`. Local content storage on the workers (`worker.content.factory=local`) is not supported with Docker. The zip package keeps contents on each worker's disk, as before.
 - **Allowed URLs**: When Fast2 is reached through a VPN, a proxy or a public URL, that URL must be listed in `security.csp.allowed-urls`, with its protocol and port.
 - **ARender 2026**: The annotation tasks are built on ARender 2026.4.0 instead of 3.1.15. Several annotation options and conversions that ARender no longer offers are gone; see _Upgrading to 2026.0.0_.
 - **FlowerDocs REST API**: The FlowerDocs connector uses the FlowerDocs 2026 REST API, as FlowerDocs 2026 no longer serves SOAP. An endpoint configured as `.../services` is mapped to `.../rest`, the login token is shared between worker threads and renewed before it expires.
@@ -152,6 +152,7 @@ _Discover the details below..._
 - **`Tiff2PdfIText` has been removed.** Use `Tiff2PdfBox`.
 - **`WkHtmlToPdfConverter` is deprecated.** Use `HtmlToPdfConverter`.
 - **Docker deployments must persist `/files`.** The broker image keeps the contents uploaded by the workers under `/files`: mount a volume there, or they are lost when the container is recreated.
+- **Docker workers use remote content only.** Local content storage on the workers (`worker.content.factory=local`) is not supported with the Docker images: do not set it on a Docker worker.
 - **Null property names and values are refused.** Maps relying on the previous `null_value` sentinel must be reviewed.
 - **FlowerDocs 2026 is required by the FlowerDocs connector.** It uses the REST API only; SOAP is no longer supported. The FlowerDocs tasks no longer read or write validity codes, and the retention start and end dates are now the operational and legal retention periods. A punnet without a category is injected as `DOCUMENT` instead of being skipped with a warning.
 - **IS to FDF (`ConvertISToFDF`) is removed.** The task fails with an explicit error: ARender 2026 no longer provides the FDF annotation adder.
