@@ -54,7 +54,7 @@ _Discover the details below..._
 - **Authentication is mandatory**: Every Fast2 instance now requires users to sign in. The `security.authentication.required` property has been removed, along with the option to run without authentication, which no longer worked with multitenancy.
 - **Super admin creation**: The `default.super.admin.*` properties have been removed: a super admin password no longer sits in configuration. A deployment script creates the first super admin with `POST /api/users/register-super-admin`, whose request must give the email, the password and the role `SUPER_ADMIN`. A second call is refused with 409.
 - **Worker registration**: The public worker registration endpoint has been removed. Workers are registered by an administrator and stored in the database.
-- **Worker tokens**: The `/generate-token` endpoint now answers 404 for an unknown worker instead of silently issuing a token, and its request parameter has been renamed to `workerLogin`.
+- **Worker tokens**: A standalone worker authenticates with a token generated from the Team place, passed in the `WORKER_AUTH_TOKEN` environment variable; the startup script stops if it is missing. The `/generate-token` endpoint now answers 404 for an unknown worker instead of silently issuing a token, and its request parameter has been renamed to `workerLogin`.
 
 ### 🐞 Bug Fixes
 - **Sessions**: A refresh no longer disconnects the user, and the interface no longer hangs at launch.
@@ -72,11 +72,14 @@ _Discover the details below..._
 ### 🔧 Improvements
 - **Java 21**: Fast2 now runs on JDK 21.
 - **Spring Boot 4**: The broker and worker have moved from Spring Boot 2 to Spring Boot 4, with the `javax` libraries replaced by their `jakarta` equivalents.
-- **OpenSearch 3.5**: The embedded store moves from 1.3.15 to 3.5.0. Existing data is migrated in place. The broker keeps working while OpenSearch is down and recovers on its own when it returns, instead of latching into a dead state or looping on a counter.
+- **REST API under `/api`**: Every REST endpoint now sits under `/api` (`/api/campaigns`, `/api/maps`, `/api/broker`…), which separates the API from the interface's own routes.
+- **OpenSearch 3.5**: The embedded store moves from 1.3.15 to 3.5.0. The broker does not migrate 2025 data on start: see _Upgrading to 2026.0.0_. The broker keeps working while OpenSearch is down and recovers on its own when it returns, instead of latching into a dead state or looping on a counter.
 - **Packaging**: The package no longer carries OpenSearch Dashboards, which is repackaged on demand and will return as a sidecar. The Linux startup scripts have been reworked, and the SDK package embeds its restricted-access binaries.
 - **Dependencies and security**: iText has been removed from the converter, EML and PDF analysis modules; JJWT, Drools, Jackson, Svelte, npm and Node have been upgraded; and the vulnerabilities reported by Mend have been resolved, including those reaching Fast2 through transitive dependencies.
 - **Content encryption**: Can be turned off where a deployment does not want it.
-- **ARender 2026**: The annotation tasks are built on ARender 2026.3.1 instead of 3.1.15. Several annotation options and conversions that ARender no longer offers are gone; see _Upgrading to 2026.0.0_.
+- **Content storage in Docker**: In the Docker images, workers upload document contents to the broker, which keeps them under `/files`. The zip package keeps them on each worker's disk, as before.
+- **Allowed URLs**: When Fast2 is reached through a VPN, a proxy or a public URL, that URL must be listed in `security.csp.allowed-urls`, with its protocol and port.
+- **ARender 2026**: The annotation tasks are built on ARender 2026.4.0 instead of 3.1.15. Several annotation options and conversions that ARender no longer offers are gone; see _Upgrading to 2026.0.0_.
 - **FlowerDocs REST API**: The FlowerDocs connector uses the FlowerDocs 2026 REST API, as FlowerDocs 2026 no longer serves SOAP. An endpoint configured as `.../services` is mapped to `.../rest`, the login token is shared between worker threads and renewed before it expires.
 
 ### 🐞 Bug Fixes
@@ -113,7 +116,8 @@ _Discover the details below..._
 - **Catalog**: `AlterDocumentProperty` is marked deprecated in favour of `AlterDocumentProperties`, where a reader can see it.
 - **CSV exports**: Headers omit the redundant `doc.` prefix for single-document punnets, columns can be filtered by whitelist or blacklist, and the deprecated "New column headers" parameter has been removed.
 - **FlowerDocs**: A delete task has been added, and the querier can extract `selectClause` fields directly into the punnet dataset.
-- **Converters**: The HTML-to-PDF converter processes child documents, and Eml2Pdf takes the language as a parameter.
+- **Converters**: The HTML-to-PDF converter processes child documents, and Eml2Pdf takes the language as a parameter. `WkHtmlToPdfConverter` is deprecated in favour of `HtmlToPdfConverter`.
+- **AWS**: The connection provider offers four typed authentication strategies: the AWS default credential chain, static keys, a named profile (including SSO), and an assumed role.
 - **LocalSource**: Files are handed to punnets while folders are still being scanned, so the first punnet arrives within milliseconds and large trees no longer run out of memory. The number of scanning threads can be set, and a "Skip JSON parsing" option joins the XML one. Files are no longer returned in any particular order.
 
 ### 🐞 Bug Fixes
@@ -131,7 +135,13 @@ _Discover the details below..._
 ## ⚠️ Upgrading to 2026.0.0
 
 - **Java 21 is required.** Earlier JDKs are not supported.
-- **OpenSearch is migrated in place** from 1.3.15 to 3.5.0 on first start. Back up the data directory before upgrading.
+- **2025 data is not migrated on start.** The broker does not convert a 2025.x installation: its OpenSearch data (1.3.15 to 3.5.0, and into the tenant layout below) and its `queues/` folder must be migrated before the first 2026 start. Back up the OpenSearch data directory and `queues/` first.
+- **Data is stored per tenant.** An upgraded installation becomes the `default` tenant. OpenSearch indices are named `f2_<tenant>_…` (`f2_default_campaigns`, `f2_default_campaign_<campaign>`, `f2_default_maps`…) instead of `f2_…`, and queued punnets live under `queues/<tenant>/<status>/`. Scripts or queries that address the old index names must be updated.
+- **Every REST endpoint moved under `/api`.** Update scripts and integrations: `/auth/login` becomes `/api/auth/login`, `/campaigns/…` becomes `/api/campaigns/…`, and so on. A worker configured with an explicit `broker.url` must point to `…/api/broker`.
+- **A standalone worker needs a token.** Generate one from the Team place for the worker's account and set it in `WORKER_AUTH_TOKEN` before running the worker startup script.
+- **Maps and shared objects are no longer imported from files on start.** The broker no longer reads the `maps/` folder or `config/sharedObjects.xml`. Import maps through the interface or the API.
+- **Campaign e-mail notifications have been removed.**
+- **URLs used to reach Fast2 must be allowed.** Behind a VPN, a proxy or a public URL, list them in `security.csp.allowed-urls`.
 - **OpenSearch Dashboards is no longer shipped** with the package. It returns as a separately installed sidecar.
 - **Authentication can no longer be disabled.** `security.authentication.required` has been removed and is ignored if still present in `application.properties`. On first start, create the super admin from the registration page or with `POST /api/users/register-super-admin`.
 - **The `default.super.admin.*` properties have been removed.** Scripts that create the super admin must call `POST /api/users/register-super-admin` with `"role": "SUPER_ADMIN"` in the request; a request without it is refused with 400.
@@ -140,6 +150,8 @@ _Discover the details below..._
 - **LocalSource's deprecated `fileScanner` option has been removed.** Maps that still use it must move their paths to "Files paths"; otherwise the task stops with "No file path provided".
 - **`AlterDocumentProperty` is deprecated.** Use `AlterDocumentProperties`.
 - **`Tiff2PdfIText` has been removed.** Use `Tiff2PdfBox`.
+- **`WkHtmlToPdfConverter` is deprecated.** Use `HtmlToPdfConverter`.
+- **Docker deployments must persist `/files`.** The broker image keeps the contents uploaded by the workers under `/files`: mount a volume there, or they are lost when the container is recreated.
 - **Null property names and values are refused.** Maps relying on the previous `null_value` sentinel must be reviewed.
 - **FlowerDocs 2026 is required by the FlowerDocs connector.** It uses the REST API only; SOAP is no longer supported. The FlowerDocs tasks no longer read or write validity codes, and the retention start and end dates are now the operational and legal retention periods. A punnet without a category is injected as `DOCUMENT` instead of being skipped with a warning.
 - **IS to FDF (`ConvertISToFDF`) is removed.** The task fails with an explicit error: ARender 2026 no longer provides the FDF annotation adder.
