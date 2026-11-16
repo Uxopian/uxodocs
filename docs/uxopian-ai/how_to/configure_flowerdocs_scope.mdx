@@ -123,7 +123,7 @@ Every other script uses `UXO_AI_ENDPOINT` only. With the `Gateway.xml` Route bel
 
 #### Why WebSocket needs a separate, direct endpoint
 
-FlowerDocs' internal proxy (the one behind the `/gateway/**` Route) forwards plain HTTP requests fine — REST calls and SSE streaming both work through it on FlowerDocs 2026. **It cannot forward a WebSocket upgrade at all**, on any FlowerDocs version:
+FlowerDocs' internal proxy (the one behind the `/gateway/**` Route) forwards plain HTTP requests fine — REST calls and `text/event-stream` responses both work through it on FlowerDocs 2026 (with uxopian-ai 2026.0.0, see [The answer appears all at once instead of streaming](./integrate_with_flowerdocs.mdx#the-answer-appears-all-at-once-instead-of-streaming)). **It cannot forward a WebSocket upgrade at all**, on any FlowerDocs version:
 
 - **Legacy FlowerDocs (Zuul-based proxy):** Zuul 1 has no WebSocket proxying support.
 - **FlowerDocs 2026 (Spring Cloud Gateway Server MVC):** this proxy variant has no WebSocket support either — it is built on `HandlerFunctions.http()`, a blocking request/response forwarder with no concept of a protocol upgrade. This is an open, unimplemented upstream limitation: [spring-cloud/spring-cloud-gateway#3442](https://github.com/spring-cloud/spring-cloud-gateway/issues/3442).
