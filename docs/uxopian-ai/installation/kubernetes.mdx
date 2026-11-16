@@ -192,9 +192,7 @@ helm upgrade ai-standalone ./component-ai \
 
 Create a `values-gateway.yaml`. The most important section is `files.application.yaml`, which defines the routes and authentication provider.
 
-:::warning[FlowerDocs 2026.0 and 2026.1: the Route URL differs on Kubernetes]
-FlowerDocs 2026.0 and 2026.1 send an `X-Forwarded-Prefix` header, and on Kubernetes the gateway applies it: calls made through the FlowerDocs Route then reach it as `/gui/plugins/<scope>/gateway/uxopian-ai/…`. The chart's default `application.yml` has a `uxopian-ai-plugin` route that rewrites this path to `/gui/gateway/uxopian-ai/…`; the routes in the example below do not. With these FlowerDocs versions, keep that route and set the `Gateway.xml` Route URL to the bare gateway address (`http://gateway-service:8085`). FlowerDocs 2026.2.0 and later no longer send the header and use the `/gui/gateway` suffix, as everywhere else. See [Choose the Route URL and the context path together](../how_to/configure_flowerdocs_scope.mdx#choose-the-route-url-and-the-context-path-together).
-:::
+For FlowerDocs, the `uxopian-ai` route below serves `/gui/gateway/uxopian-ai/**`: the path the FlowerDocs Route shipped in the scope files (`http://gateway-service:8085/gui/gateway`) sends, and uxopian-ai's `/gui/gateway/uxopian-ai` context path. It is the same setup as in Docker, see [Keep the Route URL and the context path together](../how_to/configure_flowerdocs_scope.mdx#keep-the-route-url-and-the-context-path-together).
 
 <Tabs>
   <TabItem value="flowerdocs" label="FlowerDocsProvider">

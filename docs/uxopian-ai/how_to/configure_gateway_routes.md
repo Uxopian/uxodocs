@@ -86,12 +86,12 @@ If no context path is set (default), paths are `/api/v1/requests`, `/assets/...`
 
 ### Step 2 — What path arrives at the gateway?
 
-Determine what path the gateway receives. This depends on whether a proxy (Zuul, nginx, etc.) strips a prefix before forwarding:
+Determine what path the gateway receives. This depends on whether a proxy (FlowerDocs, nginx, etc.) strips a prefix before forwarding:
 
 | Entry point | Incoming path at the gateway |
 |---|---|
 | Direct browser | Same path as in the browser URL |
-| FlowerDocs Zuul proxy | Zuul strips the scope prefix; e.g. `/plugins/<scope>/gateway/uxopian-ai/api/v1/requests` → `/uxopian-ai/api/v1/requests` |
+| FlowerDocs Route | FlowerDocs strips `/gui/plugins/<scope>/gateway` and prepends the Route URL's path. With the Route URL shipped in the scope files (`…/gui/gateway`), `/gui/plugins/<scope>/gateway/uxopian-ai/api/v1/requests` → `/gui/gateway/uxopian-ai/api/v1/requests` |
 | nginx `proxy_pass /;` | Full path preserved |
 | nginx `proxy_pass /prefix/;` | Prefix stripped |
 
@@ -100,7 +100,7 @@ Determine what path the gateway receives. This depends on whether a proxy (Zuul,
 `path` must be the Ant pattern that matches the path the gateway actually receives:
 
 ```yaml
-path: /uxopian-ai/**     # if Zuul strips and sends /uxopian-ai/...
+path: /uxopian-ai/**     # if a proxy strips a prefix and sends /uxopian-ai/...
 path: /gui/gateway/**    # if direct with full path
 ```
 
@@ -200,11 +200,15 @@ app:
       ...
 ```
 
-Changing the URI or security rules in one place updates all routes that reference the anchor. This is especially useful when managing multiple entry points (Zuul + direct) for the same backend.
+Changing the URI or security rules in one place updates all routes that reference the anchor. This is especially useful when managing multiple entry points (a stripped prefix and the full path) for the same backend.
 
-## FlowerDocs example: two entry points for one backend
+## Example: two entry points for one backend
 
-In a FlowerDocs deployment, the Uxopian AI chat is loaded via the FlowerDocs reverse proxy (Zuul), and optionally also accessible at a canonical URL. Two routes handle the same backend:
+Here a reverse proxy in front of the gateway strips its own prefix and sends `/uxopian-ai/…`, while monitoring and admin calls reach the gateway at the full path `/gui/gateway/uxopian-ai/…`. Two routes serve the same backend:
+
+:::note[Not needed for FlowerDocs]
+The FlowerDocs scope files ship a Route URL that already sends `/gui/gateway/uxopian-ai/…`, which the gateway's default routes serve without any `rewritePath`. See [Keep the Route URL and the context path together](./configure_flowerdocs_scope.mdx#keep-the-route-url-and-the-context-path-together).
+:::
 
 ```yaml
 ai-standalone-service-uri: &UXOPIAN_AI_URI http://ai-standalone-service:8080
@@ -231,7 +235,7 @@ app:
   gateway:
     provider-header: X-Provider-ID
   routes:
-    - id: uxopian-ai-zuul      # Entry point: via FlowerDocs Zuul proxy
+    - id: uxopian-ai-stripped  # Entry point: proxy that strips its prefix
       uri: *UXOPIAN_AI_URI
       prefix: /uxopian-ai/
       path: /uxopian-ai/**
@@ -264,29 +268,19 @@ logging:
 
 ### Why two routes?
 
-This example is for a FlowerDocs `Gateway.xml` Route whose URL is the bare gateway address (`http://gateway:8085`). The scope files shipped with this documentation use `http://gateway-service:8085/gui/gateway` instead, so that the path already matches uxopian-ai's context path and the gateway's built-in routes need no `rewritePath` — see [Gateway.xml (Route)](./configure_flowerdocs_scope.mdx#gatewayxml-route).
-
-The FlowerDocs scope files define `UXO_AI_ENDPOINT` as:
-
-```javascript
-const UXO_AI_ENDPOINT = window.location.origin + '/gui'
-    + '/plugins/' + scope + '/gateway/uxopian-ai';
-```
-
-A browser request to `GET /gui/plugins/GEC/gateway/uxopian-ai/api/v1/requests` flows through FlowerDocs:
+A request to `GET /uxopian-ai/api/v1/requests` from the proxy flows as follows:
 
 ```mermaid
 flowchart TD
-    Browser["Browser<br/>GET /gui/plugins/GEC/gateway/uxopian-ai/api/v1/requests"]
-    Zuul["FlowerDocs Zuul<br/>Route: /gateway/** → http://gateway:8085<br/>strips /gui/plugins/GEC prefix"]
-    GW["uxopian-gateway<br/>route: uxopian-ai-zuul<br/>receives: /uxopian-ai/api/v1/requests"]
+    Proxy["Reverse proxy<br/>strips its own prefix"]
+    GW["uxopian-gateway<br/>route: uxopian-ai-stripped<br/>receives: /uxopian-ai/api/v1/requests"]
     RW["rewritePath<br/>/uxopian-ai/** → /gui/gateway/uxopian-ai/**"]
     AI["uxopian-ai<br/>GET /gui/gateway/uxopian-ai/api/v1/requests<br/>context-path: /gui/gateway/uxopian-ai"]
 
-    Browser --> Zuul --> GW --> RW --> AI
+    Proxy --> GW --> RW --> AI
 ```
 
-The `uxopian-ai-direct` route handles requests that arrive at the canonical path directly (admin access, health checks from monitoring, etc.) without going through Zuul.
+The `uxopian-ai-direct` route handles requests that arrive at the canonical path directly (admin access, health checks from monitoring, etc.) without going through that proxy.
 
 ### Why the same security rules work for both routes
 
@@ -294,7 +288,7 @@ The YAML anchor `*UXOPIAN_AI_SECURITY` defines rules with **relative** paths lik
 
 | Route | `prefix` | Formatted rule for `/assets/**` |
 |---|---|---|
-| `uxopian-ai-zuul` | `/uxopian-ai/` | `/uxopian-ai/assets/**` |
+| `uxopian-ai-stripped` | `/uxopian-ai/` | `/uxopian-ai/assets/**` |
 | `uxopian-ai-direct` | `/gui/gateway/uxopian-ai/` | `/gui/gateway/uxopian-ai/assets/**` |
 
 Both formatted rules match their respective incoming paths, so authentication is applied consistently regardless of entry point.
@@ -313,7 +307,7 @@ With DEBUG enabled, the gateway logs:
 
 | Log message | What it means |
 |---|---|
-| `Matched route [uxopian-ai-zuul] for path [/uxopian-ai/api/v1/requests]` | Route matched via `path` field |
+| `Matched route [uxopian-ai-stripped] for path [/uxopian-ai/api/v1/requests]` | Route matched via `path` field |
 | `No provider header found for path [/uxopian-ai/assets/...]` — with `public: true` following | Path matched a public rule, auth skipped |
 | `Provider [FlowerDocsProvider] resolved for path [/uxopian-ai/api/v1/...]` | `DefaultProviderHeaderFilter` injected the provider header |
 | `Authenticated user [john@example.com] tenant [GEC]` | FlowerDocsProvider validated the token |
@@ -353,7 +347,7 @@ logging:
 | `prefix` doesn't end with `/` | Security rules for `/assets/**` formatted as `/prefixassets/**` | Always end `prefix` with `/` |
 | `path` doesn't include `/**` | Only the root path matches, sub-paths return 404 | Use `path: /prefix/**` |
 | `rewritePath` has quotes around the value | Regex includes literal quote characters | Remove quotes — YAML scalar, not string |
-| Zuul strips a different prefix than expected | Route doesn't match, gateway returns 404 | Log the incoming path (Step 1 above) and adjust `path` |
+| A proxy strips a different prefix than expected | Route doesn't match, gateway returns 404 | Log the incoming path (Step 1 above) and adjust `path` |
 | Security rule path starts with `/` and prefix ends with `/` | Double-slash in formatted path: `/prefix//asset/**` | `formatRule()` handles this — but verify with debug logs |
 | YAML anchor defined inside `app:` | Alias resolution fails | Define anchors at root level, before `app:` |
 

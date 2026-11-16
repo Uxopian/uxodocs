@@ -279,34 +279,26 @@ Defines a FlowerDocs reverse-proxy route that forwards `/gateway/**` requests to
 </ns2:tags>
 ```
 
-FlowerDocs' proxy removes `/gui/plugins/<scope>/gateway` from the request path and appends the rest to this URL. A browser call to `/gui/plugins/<scope>/gateway/uxopian-ai/api/v1/prompts` therefore reaches the gateway as `/gui/gateway/uxopian-ai/api/v1/prompts`, which matches uxopian-ai's `CONTEXT_PATH=/gui/gateway/uxopian-ai`. FlowerDocs 2026.0 and 2026.1 on Kubernetes behave differently, see below.
+FlowerDocs' proxy removes `/gui/plugins/<scope>/gateway` from the request path and appends the rest to this URL. A browser call to `/gui/plugins/<scope>/gateway/uxopian-ai/api/v1/prompts` therefore reaches the gateway as `/gui/gateway/uxopian-ai/api/v1/prompts`, which matches uxopian-ai's `CONTEXT_PATH=/gui/gateway/uxopian-ai`.
 
 Update the host and port to those of your `uxopian-gateway` as seen from the FlowerDocs server.
 
-#### Choose the Route URL and the context path together
+#### Keep the Route URL and the context path together
 
-The gateway sees **Route URL path + `/uxopian-ai/…`**, with one exception. FlowerDocs 2026.0 and 2026.1 also send an `X-Forwarded-Prefix: /gui/plugins/<scope>/gateway` header, and a gateway running on Kubernetes applies it (Spring Boot honours forwarded headers by default there). That gateway then sees the browser's full path, `/gui/plugins/<scope>/gateway/uxopian-ai/…`, whatever the Route URL's path. The [gateway Helm chart](../installation/kubernetes.mdx)'s default configuration has a `uxopian-ai-plugin` route that rewrites this path to `/gui/gateway/uxopian-ai/…`. FlowerDocs 2026.2.0 and later no longer send the header.
+One setup works on every platform, Docker, Java and Kubernetes, with FlowerDocs 2026.2.0 or later:
 
-Pick the row that matches your deployment and keep the Route URL and `CONTEXT_PATH` together:
+| Setting | Value |
+|---|---|
+| `Gateway.xml` Route URL | gateway address followed by `/gui/gateway`, e.g. `http://gateway-service:8085/gui/gateway` |
+| uxopian-ai `CONTEXT_PATH` | `/gui/gateway/uxopian-ai` (also the default of the uxopian-ai Helm chart) |
+| Gateway routes | the defaults: the image's built-in `application.yml`, or the gateway Helm chart's |
+| `UXO_AI_ENDPOINT` in `consts/` | `/gui/plugins/<scope>/gateway/uxopian-ai`, as shipped |
 
-| Deployment | Route URL | uxopian-ai `CONTEXT_PATH` | Gateway configuration |
-|---|---|---|---|
-| FlowerDocs 2026.2.0 or later, any platform; FlowerDocs 2026.0 or 2026.1 in Docker or Java. **This is what the scope archive above ships.** | `http://gateway-service:8085/gui/gateway` | `/gui/gateway/uxopian-ai` | Built-in routes, or the Helm chart's default |
-| Same, with the bare gateway address in the Route (Docker or Java only) | `http://gateway-service:8085` | `/uxopian-ai` | Built-in routes |
-| FlowerDocs 2026.0 or 2026.1, gateway on Kubernetes | `http://gateway-service:8085` (no suffix) | `/gui/gateway/uxopian-ai` (chart default) | Chart's default `application.yml`, which includes `uxopian-ai-plugin` |
+Change only the host and port of the Route URL. The `/gui/gateway` suffix and the context path go together: if one changes without the other, every call through FlowerDocs answers `404`.
 
-Check the last row again when you upgrade FlowerDocs to 2026.2.0 or later: the gateway then receives `/uxopian-ai/…`, which the chart's routes do not serve. Switch the Route URL to the first row.
-
-With a mismatched pair, every call through FlowerDocs answers `404`. For example, a bare Route URL with `CONTEXT_PATH=/gui/gateway/uxopian-ai` and the built-in routes makes uxopian-ai receive `/uxopian-ai/…`. If you run your own gateway configuration, a `rewritePath` can translate the path the gateway receives into uxopian-ai's context path: see [Configure gateway routes](./configure_gateway_routes.md#why-two-routes).
-
-#### Calling the gateway directly instead of through FlowerDocs
-
-Some deployments also expose the gateway on the FlowerDocs host under `/gui/gateway` (an Ingress or reverse-proxy rule in front of FlowerDocs), and point the scope's REST calls at `/gui/gateway/uxopian-ai` instead of `/gui/plugins/<scope>/gateway/uxopian-ai`. With FlowerDocs 2026.2 and uxopian-gateway 2026.0.0, those direct calls answer `401`:
-
-- FlowerDocs' proxy does not forward its own `SESSION` cookie to the gateway, so the gateway cannot link a FlowerDocs session to a token.
-- The gateway's `GATEWAY_SESSION` cookie, set when a call through the Route authenticates, comes back with its path rewritten to `/gui/plugins/<scope>/gateway`. The browser therefore never sends it to `/gui/gateway/…`.
-
-Keep `UXO_AI_ENDPOINT` on the scoped path. Expose the gateway directly only for the WebSocket channel: its route is public, so it needs no session (see [Why WebSocket needs a separate, direct endpoint](#why-websocket-needs-a-separate-direct-endpoint)).
+:::warning[Keep every call on the Route]
+Do not send the scope's REST calls straight to `/gui/gateway/uxopian-ai` through an Ingress on the FlowerDocs host: they answer `401`. FlowerDocs' proxy does not forward its own `SESSION` cookie to the gateway, and it rewrites the path of the gateway's `GATEWAY_SESSION` cookie to `/gui/plugins/<scope>/gateway`, so a direct call carries no credential. Expose the gateway directly only for the WebSocket channel, whose route is public (see [Why WebSocket needs a separate, direct endpoint](#why-websocket-needs-a-separate-direct-endpoint)).
+:::
 
 ## Wire Quick Prompt into FlowerDocs
 
@@ -386,7 +378,7 @@ The `conf/` directory is a standard FlowerDocs [scope](/docs/flowerdocs/concepts
 
 Before importing the scope files into FlowerDocs, update the following:
 
-1. `conf/Route/Gateway.xml` — set the `URL` tag to your uxopian-gateway as seen by the **FlowerDocs server**, followed by `/gui/gateway` (e.g. `http://gateway-service:8085/gui/gateway`). The one exception is FlowerDocs 2026.0 or 2026.1 with the gateway on Kubernetes: use the bare address there (`http://gateway-service:8085`). See [Choose the Route URL and the context path together](#choose-the-route-url-and-the-context-path-together).
+1. `conf/Route/Gateway.xml` — set the `URL` tag to your uxopian-gateway as seen by the **FlowerDocs server**, followed by `/gui/gateway` (e.g. `http://gateway-service:8085/gui/gateway`). See [Keep the Route URL and the context path together](#keep-the-route-url-and-the-context-path-together).
 2. uxopian-ai runs with `CONTEXT_PATH=/gui/gateway/uxopian-ai`.
 3. Confirm that `UXO_AI_ENDPOINT` resolves to a URL reachable from **user browsers** (not just the server), because `web-comp` fetches the JS bundle client-side.
 4. **Optional** — if `uxopian-gateway` has its own public address, set `WS_GATEWAY_URL_RAW` in `consts/` to enable the WebSocket action-push channel, and add that address to FlowerDocs' Content Security Policy. See [Why WebSocket needs a separate, direct endpoint](#why-websocket-needs-a-separate-direct-endpoint). Leave it blank otherwise — the chat still works without it.
