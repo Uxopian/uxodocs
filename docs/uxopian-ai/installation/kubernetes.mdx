@@ -192,6 +192,10 @@ helm upgrade ai-standalone ./component-ai \
 
 Create a `values-gateway.yaml`. The most important section is `files.application.yaml`, which defines the routes and authentication provider.
 
+:::warning[FlowerDocs on Kubernetes: bare Route URL, and keep the plugin route]
+On Kubernetes the gateway applies the `X-Forwarded-Prefix` header sent by FlowerDocs' proxy, so calls made through the FlowerDocs Route reach it as `/gui/plugins/<scope>/gateway/uxopian-ai/…`. The chart's default `application.yml` has a `uxopian-ai-plugin` route that rewrites this path to `/gui/gateway/uxopian-ai/…`; the routes in the example below do not. Keep that route if you write your own configuration, and set the FlowerDocs `Gateway.xml` Route URL to the bare gateway address (`http://gateway-service:8085`), without the `/gui/gateway` suffix used in Docker. See [Choose the Route URL and the context path together](../how_to/configure_flowerdocs_scope.mdx#choose-the-route-url-and-the-context-path-together).
+:::
+
 <Tabs>
   <TabItem value="flowerdocs" label="FlowerDocsProvider">
 
