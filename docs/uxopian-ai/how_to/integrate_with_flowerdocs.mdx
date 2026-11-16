@@ -330,7 +330,7 @@ See [Configure FlowerDocs scope files](./configure_flowerdocs_scope.mdx) for a d
 
 Before importing, check two values:
 
-1. **`conf/Route/Gateway.xml`** — the `URL` tag is the uxopian-gateway as seen from the **FlowerDocs server**, followed by `/gui/gateway` (default `http://gateway-service:8085/gui/gateway`). Keep the `/gui/gateway` suffix: it is what makes the path match `CONTEXT_PATH=/gui/gateway/uxopian-ai`.
+1. **`conf/Route/Gateway.xml`** — the `URL` tag is the uxopian-gateway as seen from the **FlowerDocs server**, followed by `/gui/gateway` (default `http://gateway-service:8085/gui/gateway`). Keep the `/gui/gateway` suffix: it is what makes the path match `CONTEXT_PATH=/gui/gateway/uxopian-ai`. A bare gateway address also works with `CONTEXT_PATH=/uxopian-ai`: see [Choose the Route URL and the context path together](./configure_flowerdocs_scope.mdx#choose-the-route-url-and-the-context-path-together).
 2. **`conf/Script/consts/`** — optional: set `WS_GATEWAY_URL_RAW` to the gateway's public address to enable the WebSocket channel, and allow that address in FlowerDocs' Content Security Policy. See [Why WebSocket needs a separate, direct endpoint](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint).
 
 ### 5.3 Install the scope files into FlowerDocs
@@ -362,7 +362,7 @@ If the panel does not appear, open browser developer tools and check:
 | Parameter | Where | Description |
 |---|---|---|
 | `provider: FlowerDocsProvider` | Gateway built-in `application.yml` | Activates FlowerDocs JWT validation — already set on the `uxopian-ai` route |
-| `CONTEXT_PATH=/gui/gateway/uxopian-ai` | uxopian-ai environment | Matches the path FlowerDocs' Route sends to the gateway |
+| `CONTEXT_PATH=/gui/gateway/uxopian-ai` | uxopian-ai environment | Matches the path FlowerDocs' Route sends to the gateway. Goes in a pair with the `Gateway.xml` URL, see [Choose the Route URL and the context path together](./configure_flowerdocs_scope.mdx#choose-the-route-url-and-the-context-path-together) |
 | `INTERNAL_AUTH_JWT_SECRET` | uxopian-ai and gateway environment | Same value on both, 32 bytes or more |
 | `FD_WS_URL` | uxopian-ai environment | FlowerDocs core **web service** URL for tool calls (unrelated to the browser WebSocket below, despite the name) |
 | `llm.default.provider` | `llm-clients-config.yml` | Must match an entry in `llm.provider.globals` |
@@ -380,7 +380,8 @@ FlowerDocs documents are handed to ARender through the FlowerDocs file connector
 |---|---|---|
 | 401 on all gateway requests | `FlowerDocsProvider` failing to validate token | Check FlowerDocs JWT format and gateway logs |
 | Gateway starts but all requests fail with 500 | The gateway cannot reach `ai-standalone-service` (`UnknownHostException`), or a provider name is misspelled | Name the uxopian-ai service `ai-standalone-service`, or replace the routes at `/app/application.yml`; check `Successfully registered Auth Provider` in the gateway logs |
-| `404` on every call through FlowerDocs | `Gateway.xml` URL without the `/gui/gateway` suffix, or `CONTEXT_PATH` not set to `/gui/gateway/uxopian-ai` | See [Gateway.xml (Route)](./configure_flowerdocs_scope.mdx#gatewayxml-route) |
+| `404` on every call through FlowerDocs | The `Gateway.xml` URL and `CONTEXT_PATH` do not form a matching pair | See [Choose the Route URL and the context path together](./configure_flowerdocs_scope.mdx#choose-the-route-url-and-the-context-path-together) |
+| `401` on `/gui/gateway/uxopian-ai/…` called from the FlowerDocs page, `200` on `/gui/plugins/<scope>/gateway/uxopian-ai/…` | The scope calls the gateway directly, through an Ingress on the FlowerDocs host, instead of through the Route | Keep `UXO_AI_ENDPOINT` on the scoped path: see [Calling the gateway directly](./configure_flowerdocs_scope.mdx#calling-the-gateway-directly-instead-of-through-flowerdocs) |
 | `Failed to fetch` when opening the panel | Warm-up `fetch(UXO_AI_ENDPOINT)` without a trailing `/`, redirected to the gateway's internal host | Use the current scope files: they call `fetch(UXO_AI_ENDPOINT + '/')` |
 | LLM returns "provider not found" | `llm.default.provider` names a non-existent provider | Align `default.provider` with an entry in `llm.provider.globals` |
 | Tool calls fail silently | `FD_WS_URL` unreachable from uxopian-ai | Verify with `docker exec … curl FD_WS_URL` — if `NXDOMAIN`, join the FlowerDocs Docker network |
@@ -433,9 +434,8 @@ If this fails, the gateway cannot reach uxopian-ai — check that both container
 
 The request reaches a server but the path doesn't match any route. Common causes:
 
-- The `Gateway.xml` Route URL lacks the `/gui/gateway` suffix — the gateway then receives `/uxopian-ai/…` while uxopian-ai expects `/gui/gateway/uxopian-ai/…`. The request URL in the 404 body shows the path uxopian-ai received.
-- `CONTEXT_PATH` on uxopian-ai is not `/gui/gateway/uxopian-ai`.
-- The browser calls `/gui/gateway/uxopian-ai/…` instead of `/gui/plugins/<scope>/gateway/uxopian-ai/…`: the `consts/` file comes from an old scope archive. FlowerDocs answers 404 itself.
+- The `Gateway.xml` Route URL and `CONTEXT_PATH` do not match: for example a bare Route URL (`http://gateway-service:8085`) with `CONTEXT_PATH=/gui/gateway/uxopian-ai`. The gateway then receives `/uxopian-ai/…` while uxopian-ai expects `/gui/gateway/uxopian-ai/…`. The request URL in the 404 body shows the path uxopian-ai received. See [Choose the Route URL and the context path together](./configure_flowerdocs_scope.mdx#choose-the-route-url-and-the-context-path-together).
+- The browser calls `/gui/gateway/uxopian-ai/…` instead of `/gui/plugins/<scope>/gateway/uxopian-ai/…`: the `consts/` file comes from an old scope archive. FlowerDocs answers 404 itself, unless an Ingress sends `/gui/gateway` to the gateway, which then answers 401 (see [Calling the gateway directly](./configure_flowerdocs_scope.mdx#calling-the-gateway-directly-instead-of-through-flowerdocs)).
 - You replaced the gateway routes and the route `path` doesn't match what the browser sends.
 - `rewritePath` is misconfigured — the backend receives a path it doesn't recognise. Enable gateway route debug logging:
 
