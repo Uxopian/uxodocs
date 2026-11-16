@@ -1,6 +1,6 @@
 llm:
   default:
-    model: ${LLM_DEFAULT_MODEL:gpt-4o}
+    model: ${LLM_DEFAULT_MODEL:gpt4o}
     provider: ${LLM_DEFAULT_PROVIDER:openai}
     base-prompt: ${LLM_DEFAULT_PROMPT:basePrompt}
 
@@ -39,16 +39,15 @@ llm:
         globalConf:
           apiSecret: ${ANTHROPIC_API_KEY:REMPLACER_PAR_VOTRE_CLE}
           endpointUrl: https://api.anthropic.com/v1/
-          temperature: 0.7
           maxRetries: 3
           timeout: 60
         llModelConfs:
           - llmModelConfName: claude-sonnet
-            modelName: claude-sonnet-4-20250514
+            modelName: claude-sonnet-5-5
             multiModalSupported: true
             functionCallSupported: true
           - llmModelConfName: claude-haiku
-            modelName: claude-haiku-4-20250514
+            modelName: claude-haiku-5-5
             multiModalSupported: true
             functionCallSupported: true
 

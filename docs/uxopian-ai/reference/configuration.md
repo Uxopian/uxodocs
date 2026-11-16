@@ -451,7 +451,7 @@ Since 2026.0.0-ft5, the gateway can sign every proxied request so uxopian-ai no 
 
 | Key | Env variable | Default | Description |
 |---|---|---|---|
-| `internal-auth.jwt.secret` | `INTERNAL_AUTH_JWT_SECRET` | (empty, signing off) | HS256 shared secret, **at least 32 bytes**. Signing is simply inactive when unset — no error. Since 2026.0.0 `uxopian-ai` will not start without its own copy of this secret, so set it here too, with the same value. |
+| `internal-auth.jwt.secret` | `INTERNAL_AUTH_JWT_SECRET` | (empty) | HS256 shared secret, **at least 32 bytes**. **Required in practice**: `uxopian-ai` will not start without its own copy, and it refuses every request that does not carry an assertion signed with it. The gateway itself starts when it is unset, without any warning, but then signs nothing, so every forwarded request ends in `401`. Set the same value on both services. |
 | `internal-auth.jwt.issuer` | `INTERNAL_AUTH_JWT_ISSUER` | `uxopian-gateway-internal` | `iss` claim stamped on the issued assertion. |
 | `internal-auth.jwt.ttl-seconds` | `INTERNAL_AUTH_JWT_TTL_SECONDS` | `30` | Assertion lifetime. |
 

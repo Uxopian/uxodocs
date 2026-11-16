@@ -120,7 +120,7 @@ services:
       # Same secret as uxopian-ai: the gateway signs the identity assertion with it.
       - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:-dev-only-internal-auth-secret-change-me-0123456789}
     volumes:
-      - ./gateway-application.yaml:/app/application.yaml
+      - ./gateway-application.yaml:/app/application.yml
     ports:
       - "8085:8085"
     networks:

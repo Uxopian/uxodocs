@@ -81,7 +81,7 @@ appConfig:
   externalUrls:
     appBaseUrl: "https://your-domain.example.com"
     renditionBaseUrl: "http://arender-rendition-broker:8761"   # ARender only
-    flowerDocsWsUrl: "http://flowerdocs-core:8081/core/"       # FlowerDocs only
+    flowerDocsWsUrl: "http://flower-docs-core:8081/core/"       # FlowerDocs only
   contextPath: "/gui/gateway/uxopian-ai"
   llm:
     defaultProvider: "openai"
@@ -191,6 +191,8 @@ helm upgrade ai-standalone ./component-ai \
 ### Configure values
 
 Create a `values-gateway.yaml`. The most important section is `files.application.yaml`, which defines the routes and authentication provider.
+
+For FlowerDocs, the `uxopian-ai` route below serves `/gui/gateway/uxopian-ai/**`: the path the FlowerDocs Route shipped in the scope files (`http://gateway-service:8085/gui/gateway`) sends, and uxopian-ai's `/gui/gateway/uxopian-ai` context path. It is the same setup as in Docker, see [Keep the Route URL and the context path together](../how_to/configure_flowerdocs_scope.mdx#keep-the-route-url-and-the-context-path-together).
 
 <Tabs>
   <TabItem value="flowerdocs" label="FlowerDocsProvider">

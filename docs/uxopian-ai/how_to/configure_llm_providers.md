@@ -25,7 +25,7 @@ The `config/llm-clients-config.yml` file defines all provider configurations. Co
 llm:
   default:
     provider: ${LLM_DEFAULT_PROVIDER:openai}
-    model: ${LLM_DEFAULT_MODEL:gpt-5.1}
+    model: ${LLM_DEFAULT_MODEL:gpt5}
     base-prompt: ${LLM_DEFAULT_PROMPT:basePrompt}
   context: ${LLM_CONTEXT_SIZE:10}
   provider:
@@ -45,6 +45,12 @@ llm:
 ```
 
 Set `OPENAI_API_KEY` in your `.env` file before starting the stack.
+
+Three rules apply to every provider:
+
+- **`llm.default.model` names a model configuration**, the `llmModelConfName` (`gpt5` above), not the model id sent to the provider (`gpt-5.1`). A value that matches no `llmModelConfName` is not an error: uxopian-ai logs `Requested model '…' is unavailable for provider '…'` and uses `defaultLlmModelConfName` instead.
+- **`timeout` is in seconds.** `60` waits one minute. It can be set in `globalConf` for the whole provider, or on one entry of `llModelConfs` to override it for that model.
+- **Only `llm.provider.globals` is read.** A provider block written at the root of the file (`openai:`, `anthropic:` …) is ignored without any message, as is a list item placed outside `llm.provider.globals`. The snippets below for Azure, Bedrock and Ollama are entries of that list.
 
 ### Add multiple providers
 
@@ -72,15 +78,16 @@ llm:
         globalConf:
           apiSecret: ${ANTHROPIC_API_KEY:}
           endpointUrl: https://api.anthropic.com/v1/
-          temperature: 0.7
           maxRetries: 3
           timeout: 60
         llModelConfs:
           - llmModelConfName: claude-sonnet
-            modelName: claude-sonnet-4-20250514
+            modelName: claude-sonnet-5-5
             multiModalSupported: true
             functionCallSupported: true
 ```
+
+Leave `temperature` out of the Anthropic configuration: some recent Claude models reject a request that sets it (`temperature is deprecated for this model`). The temperature actually sent with a call comes from the prompt — see [Which provider and model runs a call](#which-provider-and-model-runs-a-call).
 
 ### Configure Azure OpenAI
 
@@ -162,7 +169,7 @@ The `llm.default.provider` and `llm.default.model` properties (environment varia
 ```ini
 # In .env or Docker Compose environment:
 LLM_DEFAULT_PROVIDER=openai
-LLM_DEFAULT_MODEL=gpt-5.1
+LLM_DEFAULT_MODEL=gpt5   # an llmModelConfName of that provider
 ```
 
 If these are unset, the automatically created usage profile takes the first LLM provider configuration of the tenant and that provider's default model. A usage profile entered in the admin console must name a provider and a model.

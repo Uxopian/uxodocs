@@ -420,7 +420,7 @@ services:
     ports:
       - "8085:8085"
     volumes:
-      - ./gateway-application.yaml:/app/application.yaml
+      - ./gateway-application.yaml:/app/application.yml
 
 volumes:
   alfresco-data:
