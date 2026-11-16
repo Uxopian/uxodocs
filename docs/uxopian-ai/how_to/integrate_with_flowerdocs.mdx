@@ -415,7 +415,7 @@ The status code points directly to the layer that failed:
 
 A 504 means a proxy gave up waiting for an upstream response. Most common causes:
 
-**Legacy FlowerDocs (Zuul-based proxy) buffering a streaming request.** Check the request URL in the Network tab. If it contains `/plugins/<scope>/gateway/` on a pre-2026 FlowerDocs, the request goes through Zuul, which is HTTP/1.1 and buffers responses — SSE streaming times out. This is a legacy-only issue: FlowerDocs 2026's proxy (Spring Cloud Gateway Server MVC) streams `text/event-stream` responses, so `UXO_AI_ENDPOINT` stays on the scoped, proxied path there — do not "fix" this on 2026 by bypassing it. If the answer arrives in one block instead, see [The answer appears all at once instead of streaming](#the-answer-appears-all-at-once-instead-of-streaming).
+**Legacy FlowerDocs (Zuul-based proxy) buffering a streaming request.** Check the request URL in the Network tab. If it contains `/plugins/<scope>/gateway/` on a pre-2026 FlowerDocs, the request goes through Zuul, which is HTTP/1.1 and buffers responses — SSE streaming times out. This is a legacy-only issue: FlowerDocs 2026's proxy (Spring Cloud Gateway Server MVC) forwards streaming HTTP responses fine, so `UXO_AI_ENDPOINT` stays on the scoped, proxied path there — do not "fix" this on 2026 by bypassing it.
 
 **A WebSocket request timing out or hanging with no useful status.** This is not a proxy-timeout scenario to fix by tuning timeouts — FlowerDocs' proxy (Zuul or, on 2026, Spring Cloud Gateway Server MVC) **cannot forward a WebSocket upgrade at all**, on any version. See [Configure FlowerDocs scope files — Why WebSocket needs a separate, direct endpoint](./configure_flowerdocs_scope.mdx#why-websocket-needs-a-separate-direct-endpoint). The fix is `WS_GATEWAY_URL_RAW` pointing at the public address of `uxopian-gateway` itself — never route the WebSocket back through FlowerDocs' `/gateway/**` Route.
 
@@ -516,16 +516,6 @@ docker compose logs ai-standalone-service --tail=50
 ```
 
 Look for `TimeoutException`, `ConnectException`, or `ReadTimeoutException`. A `ConnectException` means uxopian-ai cannot reach the LLM provider API — check firewall rules and that the API key is valid.
-
-### The answer appears all at once instead of streaming
-
-The chat or the Quick Prompt shows nothing while the LLM answers, then the whole answer at once.
-
-**How to recognize it.** In DevTools, open the `…/api/v1/requests/stream` request. The response has `content-type: text/plain` and `content-encoding: gzip`.
-
-**Cause.** The chat and the Quick Prompt of uxopian-ai 2026.0.0 do not ask for `text/event-stream`, so uxopian-ai answers `text/plain`. The FlowerDocs proxy compresses `text/plain` and sends it only when the answer is complete. It passes `text/event-stream` through as it arrives.
-
-**Fix.** Upgrade uxopian-ai: from the next release, the chat and the Quick Prompt ask for `text/event-stream`.
 
 ---
 
