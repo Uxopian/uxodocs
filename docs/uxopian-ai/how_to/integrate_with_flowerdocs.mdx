@@ -523,20 +523,9 @@ The chat or the Quick Prompt shows nothing while the LLM answers, then the whole
 
 **How to recognize it.** In DevTools, open the `…/api/v1/requests/stream` request. The response has `content-type: text/plain` and `content-encoding: gzip`.
 
-**Cause.** The chat and the Quick Prompt of uxopian-ai 2026.0.0 do not ask for `text/event-stream`, so uxopian-ai answers `text/plain`. The FlowerDocs proxy compresses `text/plain` and sends it only when the answer is complete. It passes `text/event-stream` through as it arrives. The next uxopian-ai release asks for `text/event-stream` and does not need the workaround below.
+**Cause.** The chat and the Quick Prompt of uxopian-ai 2026.0.0 do not ask for `text/event-stream`, so uxopian-ai answers `text/plain`. The FlowerDocs proxy compresses `text/plain` and sends it only when the answer is complete. It passes `text/event-stream` through as it arrives.
 
-**Workaround on the gateway.** Add a route that labels this one response `text/event-stream`. The body is unchanged and the 2026.0.0 clients read it as it arrives. Authentication still applies. Set these variables on the gateway, then restart it:
-
-```bash
-SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_ID=uxopian-ai-stream-content-type
-SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_URI=http://ai-standalone-service:8080
-SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_ORDER=-1
-SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_PREDICATES_0=Path=/gui/gateway/uxopian-ai/api/v1/requests/stream
-SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_FILTERS_0=PreserveHostHeader
-SPRING_CLOUD_GATEWAY_SERVER_WEBFLUX_ROUTES_0_FILTERS_1=SetResponseHeader=Content-Type, text/event-stream
-```
-
-`URI` is the address of uxopian-ai, the same as in the gateway's `uxopian-ai` route. The path matches the setup in [Keep the Route URL and the context path together](./configure_flowerdocs_scope.mdx#keep-the-route-url-and-the-context-path-together). Remove the variables after upgrading uxopian-ai.
+**Fix.** Upgrade uxopian-ai: from the next release, the chat and the Quick Prompt ask for `text/event-stream`.
 
 ---
 
