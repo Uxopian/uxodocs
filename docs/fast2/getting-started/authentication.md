@@ -35,11 +35,25 @@ It is essential to remember your password. Fast2 does not offer password recover
 
 :::
 
+The first account created on a new installation becomes the **Super Admin**, the only account of this role. On a new server, create this account yourself before giving the UI address to anyone, and keep its password in a safe place: no other account can reset it (see [Resetting a member's password](#resetting-a-members-password)).
+
 ## Login
 
 Once you have registered, you can log in to the Fast2 UI using your email and password.
 
 <img src={require('../assets/img/authentication/login_page.png').default} alt="Fast2 login page" style={{width:'100%',maxWidth:'600px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />
+
+### Failed login attempts
+
+After **3** failed login attempts in a row, the account is locked for **30 seconds**: wait, then log in again. A successful login resets the counter. Both values are set in `config/application.properties`:
+
+```properties title="config/application.properties"
+# Maximum failed authentication attempts before temporary account lock
+security.authentication.maximum-failed-attempts=3
+
+# Account lock duration after reaching maximum failed attempts (in seconds)
+security.authentication.lock-time-duration=30
+```
 
 ## Team management
 
@@ -60,6 +74,11 @@ To access Team Place: Click on your account avatar in the bottom left corner of 
 - **Super Admin/Admins**: Full access to Team Place.
 - **Users**: If a user tries to access the Team Place, he will be redirected to EditPlace with error toast:
     > `You do not have permission to access this Place`
+
+Outside the Team Place, the **User** role also has restricted rights in **SERVERS**:
+
+- **Logs**: the **Broker logs** button and the **WORKER LOGS** column of the **WORKERS & LOGS** tab are shown to Super Admins and Admins only. Reading and downloading the broker log require an **Admin** or **Super Admin** account.
+- **Libraries**: the **Import jar** button of the **LIBRARIES** tab is shown to Super Admins and Admins only (see [Importing or replacing JAR files](../catalog/uploadjar.md)).
 
 ### Adding a new member
 
@@ -131,5 +150,12 @@ To access Team Place: Click on your account avatar in the bottom left corner of 
 - Confirmation popup appears before action.
 - Success notification confirms the password reset.
 - Do not forget to send the new password to the user.
+
+Who can reset whom:
+
+- A **Super Admin** can reset the password of Admins and Users.
+- An **Admin** can reset the password of Users only.
+- Nobody can reset their own password from the Members table.
+- The **Super Admin** has no role above it: its password cannot be reset from the UI. If it is lost, contact the support.
 
 <img src={require('../assets/img/authentication/resetPassword.gif').default} alt="Resetting a member's password" style={{width:'100%',maxWidth:'720px',display:'block',margin:'1.25rem auto',borderRadius:'12px',boxShadow:'0 10px 28px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.08)'}} />

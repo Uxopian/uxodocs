@@ -161,7 +161,7 @@ server.ssl.key-store-type=PKCS12
 server.ssl.key-alias=fast2_ui
 ```
 
-The broker also calls its own endpoints through `server.protocol`, `server.host` and `server.port` (disk-space monitoring, broker log download). The broker JVM must therefore trust the certificate too. With option A of step 4, this is automatic when the broker and the worker use the same JDK. With option B, add the same two `-D` options to the `java` line of `startup-broker.sh` (or `startup-broker.bat`).
+The broker also calls its own endpoints through `server.protocol`, `server.host` and `server.port` (for instance, the broker log download). The broker JVM must therefore trust the certificate too. With option A of step 4, this is automatic when the broker and the worker use the same JDK. With option B, add the same two `-D` options to the `java` line of `startup-broker.sh` (or `startup-broker.bat`).
 
 </TabItem>
 </Tabs>
@@ -231,8 +231,31 @@ On Windows, add the same two options to the `java` line of `startup-worker.bat`.
 
 A remote worker runs on its own machine, with its own JDK. On each machine:
 
-- set `broker.url=https://<fqdn>:1789/broker` in its `config/application.properties`, with a `<fqdn>` listed in the certificate SAN;
+- point it to the broker over HTTPS in its `config/application.properties`, with a `<fqdn>` listed in the certificate SAN (see below);
 - apply option A or option B with the broker certificate.
+
+<Tabs groupId="fast2-version">
+<TabItem value="v2.10-2.12" label="v2.10 to v2.12">
+
+```properties
+broker.url=https://<fqdn>:1789/broker
+```
+
+</TabItem>
+<TabItem value="v2025" label="v2025">
+
+Keep the delivered `broker.url=${server.protocol}://${server.host}:${server.port}/broker` line and change the properties it is built from, as in the [remote worker guide](../components/worker.md#remote-worker-configuration-guide):
+
+```properties
+server.protocol=https
+server.host=<fqdn>
+server.port=1789
+```
+
+The resulting URL is `https://<fqdn>:1789/broker`.
+
+</TabItem>
+</Tabs>
 
 ---
 

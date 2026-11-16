@@ -38,6 +38,8 @@ _Details below..._
     - _Admin_: Can manage users only
     - _User_: Cannot manage other members
 - **Log Access Restriction**: Only admins and superadmins can now download worker and broker logs.
+
+    > **Update (checked on v2025.9.0):** for a User, the UI also hides the **Broker logs** button and the **WORKER LOGS** column, so reading the logs from the UI is restricted as well. Reading and downloading the broker log require an Admin or Super Admin account. See [User Access Restrictions](/docs/fast2/getting-started/authentication#user-access-restrictions).
 - **Profile Info**: Team member roles are now visible on their profile leaflets.
 
 ### 🐞 Bug Fixes
