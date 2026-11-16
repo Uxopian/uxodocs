@@ -133,7 +133,7 @@ Improvement: A link to the logs added in the error toasts.
 
 Improvement: Prevent database over-storage: at 90% and 95% disk consumption, a warning written in the worker logs
 
-> **Update:** this disk-space warning is disabled since v2025.3.0. The `server.database.warning.threshold` and `server.database.critical.threshold` properties of `config/application.properties` have no effect: monitor disk space with your own supervision tools.
+> **Update:** this disk-space warning was disabled before the v2025.0.0 release and is still disabled up to v2025.9.2: Fast2 writes no disk-space warning in the logs. The `server.database.warning.threshold` and `server.database.critical.threshold` properties of `config/application.properties` have no effect: monitor disk space with your own supervision tools.
 
 <br />
 

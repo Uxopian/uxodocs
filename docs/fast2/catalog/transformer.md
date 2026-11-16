@@ -179,7 +179,7 @@ Easily convert date properties from one format to another.
 | Input locale       | `String`       | Locale of the input date format (Ex: en-US, fr-FR, de-DE)               |
 | Output locale      | `String`       | Locale of the output date format (Ex: en-GB, es-ES, pt-BR)              |
 
-## DeleteContent <small> - Delete local content </small> {#DeleteContent data-toc-label="DeleteContent"}
+## DeleteContent <small> - Delete local content </small> {#DeleteContent}
 
 Delete the content of your document within your file system. It will retrieve the files targeted by the URL of all the document contents in your punnet
 

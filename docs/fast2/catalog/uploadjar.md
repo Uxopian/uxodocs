@@ -52,6 +52,21 @@ This feature allows you to import new JAR libraries or replace existing ones dir
 
 ---
 
+### 3. Restoring a previous version
+
+The JAR moved to `/worker-libs/versions` by a replacement can be put back from the same tab:
+
+1. Go to **Servers Place** → **LIBRARIES** tab
+2. Click the **N versioned jar** badge: the table only lists the JARs that have older versions
+3. Unfold the row of the current JAR (chevron): its older versions are listed below it, with the `.old` suffix
+4. On the `.old` line, click the **Restore jar** icon, then **Restore** in the **Restore Jar** confirmation window
+5. The current JAR is moved to `/worker-libs/versions` with the `.old` suffix, and the older one goes back to `/worker-libs` (without `.old`)
+6. Embedded workers are restarted, as for an import: **Restarting worker...**, then **‹jar name›.old successfully restored**
+
+As for an import, only embedded workers are concerned.
+
+---
+
 ## Good Things to Know
 
 - If one or more campaigns are running, the UI stops them before the upload (**Stopping campaigns...**, then **Campaigns has been stopped**) and then imports the JAR. The same applies to **Restore jar**. Let your campaigns finish before importing a JAR if you do not want them stopped.

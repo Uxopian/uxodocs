@@ -66,5 +66,5 @@ DeleteContent does not clean this folder in remote mode: purge `<broker.files.di
 :::
 
 :::note[No disk-space alert]
-`config/application.properties` delivers `server.database.warning.threshold=90` and `server.database.critical.threshold=95`. Since v2025.3.0, these properties have no effect: the disk-space monitor that reads them is disabled, and Fast2 writes no disk-space warning in the logs. Monitor the disk space of the broker server (contents and database) with your own supervision tools.
+`config/application.properties` delivers `server.database.warning.threshold=90` and `server.database.critical.threshold=95`. In Fast2 v2025 (checked from v2025.0.0 to v2025.9.2), these properties have no effect: the disk-space monitor that reads them is disabled, and Fast2 writes no disk-space warning in the logs. Monitor the disk space of the broker server (contents and database) with your own supervision tools.
 :::

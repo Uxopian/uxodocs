@@ -23,7 +23,7 @@ The installation of Fast2 requires a few environment specifications to run prope
 | OS        | Windows&nbsp;7+, Linux | All versions of Windows 7+ are supported. <br/><br/>All common distros of Linux are supported (Ubuntu, RedHat, CentOS, etc)<br /><br />Power architecture are supported as well (except the ones running in AIX), but only Java parts will work seamlessly whereas third-party software (_e.g._ imagemagick, libreoffice, etc) might not, as they have not all have been developed for such platforms. <br/><br/> Although the broker will not run correctly on an Windows 2003, a worker can still run on it, remotely, and communicate with a broker installed on a more recent version. |
 | Bandwidth | 1GB                    | The more calls, payloads, and contents Fast2 will have to deal with, the bigger the network bandwidth must be to reduce latency. If 250-500MB might do for lower environments, we recommend 1GB for Production environments.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
-While setting up the production server for Fast2, make sure to scale the Fast2 machine accordingly. You may need to increase the allocated memory for both the broker and the background database. If you planned to deal with campaigns of a few millions of documents, setting **8GB** of memory for the [broker](../components/broker.md#configure-the-broker) and **8GB** for the [database](../components/database.md#configuration) as well is a good starting point.
+While setting up the production server for Fast2, make sure to scale the Fast2 machine accordingly. You may need to increase the allocated memory for both the broker and the background database. If you planned to deal with campaigns of a few millions of documents, setting **8GB** of memory for the [broker](../components/broker.md#-configure-the-broker) and **8GB** for the [database](../components/database.md#-configuration) as well is a good starting point.
 
 :::warning
 
@@ -66,11 +66,21 @@ Each distribution ships the following
 
 When Fast2 is started, either as a standalone application or a service, its different modules share a precisely defined roll-out schedule:
 
-- First, the broker and its internal databse are started. The connection between these 2 components has to be effective, otherwise Fast2 will automatically shut down after a couple of attempts to reach the database;
-- The worker is then triggered, and has to register itself to the broker.
-- Finally, the dashboard will be started if asked so, and if the binaries have been detected. First, Fast2 will try to connect to any dashboard instance running on the configured port.
+- First, the broker and its internal database are started. The connection between these 2 components has to be effective: the broker tries to reach the database once per second for up to 5 minutes, and Fast2 automatically shuts down if the database still does not answer;
+- The dashboards are then started if asked so, and if the binaries have been detected. First, Fast2 will try to connect to any dashboard instance running on the configured port. They do not wait for the worker: in v2025.9.0, they start right after the broker, before the embedded worker.
+- The embedded worker is then triggered, and has to register itself to the broker.
 
 There is no direct connection between the broker and the dashboard. The only exchange area is the Elasticsearch database, as explained in the [architecture section](overall-concepts.md#architecture).
+
+### Start-up log lines
+
+Three lines of the broker log (`logs/broker.log`, also shown in the console when Fast2 is started from the command line) tell you how far the start-up went:
+
+| Log line | Meaning |
+| --- | --- |
+| `OpenSearch cluster health: <status>` | Written once per second while the broker waits for the database. `RED` means the database is not ready yet. On a single server, the status then stays `YELLOW`: this is normal, the replica shards have no second node to live on. |
+| `Interface available at <protocol>://<host>:<port>/` | The address of the UI served by the broker (`http://localhost:1789/` with the delivered settings). |
+| `Worker <id> provided N accessible classes !` | A worker (the embedded one first) has registered to the broker with its task catalog. Wait for this line before starting a campaign. |
 
 ## Start Fast2 Broker
 
