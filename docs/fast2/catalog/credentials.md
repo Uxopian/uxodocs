@@ -7,7 +7,7 @@ last_update:
 content_hash: fd5f90f9fe24de0ba238fa8abb4843a90ab28b3b7926b5fdd58df16c4dafc42a
 ---
 
-## AWSConnectionProvider <small> - AWS S3 user credentials </small> {#AWSConnectionProvider data-toc-label="AWSConnectionProvider"}
+## AWSConnectionProvider <small> - AWS S3 user credentials </small> {#AWSConnectionProvider}
 
 With an access key id and the secret access key, you have the option to connect to an AWS S3 instance by specifying the region concerned. However, to perform this king of connection, Fast2 required the permission : AmazonS3FullAccess
 
@@ -30,7 +30,7 @@ With an access key id and the secret access key, you have the option to connect 
 | sessionName                                         | `String`            |                                                                                                       |
 | AWS extra Client Configuration                      | ClientConfiguration | Use this AWS class to fine-tune connection details to S3, such as timeouts, connection pool size, ... |
 
-## AlfrescoCMISConnectionProvider <small> - CMIS connection provider </small> {#AlfrescoCMISConnectionProvider data-toc-label="AlfrescoCMISConnectionProvider"}
+## AlfrescoCMISConnectionProvider <small> - CMIS connection provider </small> {#AlfrescoCMISConnectionProvider}
 
 From a URI and giving a username with password, this class allow you to access any Alfresco instance
 
@@ -42,7 +42,7 @@ From a URI and giving a username with password, this class allow you to access a
 | Username                    | `String` |             |
 | URI for connection settings | `String` |             |
 
-## AlfrescoRESTConnectionProvider <small> - </small> {#AlfrescoRESTConnectionProvider data-toc-label="AlfrescoRESTConnectionProvider"}
+## AlfrescoRESTConnectionProvider <small> - </small> {#AlfrescoRESTConnectionProvider}
 
 <b>Mandatory settings</b>
 
@@ -52,7 +52,7 @@ From a URI and giving a username with password, this class allow you to access a
 | URL to connect to Alfresco | `String` |             |
 | Username                   | `String` |             |
 
-## AzureConnectionProvider <small> - Azure Blob Storage connection credentials </small> {#AzureConnectionProvider data-toc-label="AzureConnectionProvider"}
+## AzureConnectionProvider <small> - Azure Blob Storage connection credentials </small> {#AzureConnectionProvider}
 
 Connection to Azure Blob Storage can be established using either a connection string or account name with account key. The connection string is the recommended approach as it contains all necessary authentication information.
 
@@ -65,7 +65,7 @@ Connection to Azure Blob Storage can be established using either a connection st
 | Account key       | `String` | Azure Storage account key. Mandatory if connection string is not provided.                                                                                                                                                                    |                     |
 | Endpoint suffix   | `String` | Azure Storage endpoint suffix. <br/> <p> Ex/ `core.windows.net`, `core.cloudapi.de`</p>                                                                                                                                                     | `core.windows.net ` |
 
-## CMConnectionProvider <small> - Connection provider for Content Manager solution </small> {#CMConnectionProvider data-toc-label="CMConnectionProvider"}
+## CMConnectionProvider <small> - Connection provider for Content Manager solution </small> {#CMConnectionProvider}
 
 The CM connection provider will help you to manage a pool of connections. For performance reasons, it is sometimes desirable to limit the number of connections created by the pool.The connection pool will allow you to specify the maximum number of connections that should exist at one time, whether in use or in the pool.Once this maximum value is reached, an error may be thrown or you may optionally wait for an existing connection to be freed
 
@@ -87,7 +87,7 @@ The CM connection provider will help you to manage a pool of connections. For pe
 | Internal connection       | `Integer` | Maximum number of connections for internal side                 | `64 `         |
 | Connection duration       | `Long`    | Length of time to kill a free connection in milliseconds        | `100000 `     |
 
-## CMODConnectionProvider <small> - CMOD connection provider </small> {#CMODConnectionProvider data-toc-label="CMODConnectionProvider"}
+## CMODConnectionProvider <small> - CMOD connection provider </small> {#CMODConnectionProvider}
 
 With a username / password and an IP address, this class allow you to connect at your CMOD instance.To optimize connections between Fast2 and CMOD you can use a single connection
 
@@ -106,7 +106,7 @@ With a username / password and an IP address, this class allow you to connect at
 | Port number          | `Integer` |                                                         | `1445 `       |
 | Singleton connection | `Boolean` | Optimization of the connection in case of regular calls | `false `      |
 
-## DctmConnectionProvider <small> - Documentum connection provider </small> {#DctmConnectionProvider data-toc-label="DctmConnectionProvider"}
+## DctmConnectionProvider <small> - Documentum connection provider </small> {#DctmConnectionProvider}
 
 Module used by Fast2 to establish to communication with the destination Documentum instance.
 
@@ -118,7 +118,7 @@ Module used by Fast2 to establish to communication with the destination Document
 | Password     | `String` | Password of the aforementioned username.                   |
 | Username     | `String` | Login with scope to access the docbase with proper rights. |
 
-## DctmSshClient <small> - Documentum SSH client" </small> {#DctmSshClient data-toc-label="DctmSshClient"}
+## DctmSshClient <small> - Documentum SSH client" </small> {#DctmSshClient}
 
 Module used by Fast2 to establish the connection with the destination Documentum server.
 
@@ -136,7 +136,7 @@ Module used by Fast2 to establish the connection with the destination Documentum
 | IP | `String` | Documentum machine IP |
 
 
-## EmbeddedDbConnectionProvider <small> - OpenSearch connection provider </small> {#EmbeddedDbConnectionProvider data-toc-label="EmbeddedDbConnectionProvider"}
+## EmbeddedDbConnectionProvider <small> - OpenSearch connection provider </small> {#EmbeddedDbConnectionProvider}
 
 Module used by Fast2 to connect to its own database.
 
@@ -146,7 +146,7 @@ Module used by Fast2 to connect to its own database.
 | ----------------- | -------- | ---------------------------------- | ------------------------- |
 | Database endPoint | `String` | The endpoint of the Fast2 database | `"http://localhost:1790 ` |
 
-## FileNet35ConnectionProvider <small> - Connection provider for FileNet 3.5 solution </small> {#FileNet35ConnectionProvider data-toc-label="FileNet35ConnectionProvider"}
+## FileNet35ConnectionProvider <small> - Connection provider for FileNet 3.5 solution </small> {#FileNet35ConnectionProvider}
 
 This task is used to provide connection information to connect specifically to the FileNet P8 3.5 ECM.
 
@@ -163,9 +163,9 @@ This task is used to provide connection information to connect specifically to t
 | ------------------- | --------------------------------------------------- | ---------------------------------------------------------- |
 | WCM Config resource | `String`                                            |                                                            |
 | Object store name   | `String`                                            | Name of the docbase involved in the migration              |
-| URL settings        | [WcmApiConfigSettings](helper#WcmApiConfigSettings) | Class used for setting multiple URLs (download, upload...) |
+| URL settings        | [WcmApiConfigSettings](helper.md#WcmApiConfigSettings) | Class used for setting multiple URLs (download, upload...) |
 
-## FileNetConnectionProvider <small> - Connection provider for FileNet P8 solution </small> {#FileNetConnectionProvider data-toc-label="FileNetConnectionProvider"}
+## FileNetConnectionProvider <small> - Connection provider for FileNet P8 solution </small> {#FileNetConnectionProvider}
 
 Using this class allows you to provide connection information to specifically connect to your FileNet P8 5.x ECM
 
@@ -185,7 +185,7 @@ Using this class allows you to provide connection information to specifically co
 | Singleton connection                     | `Boolean` | Reuse the same connection to optimize calls                                                        | `false `      |
 | Initial naming factory                   | `String`  |                                                                                                    |
 
-## FlowerDocsConnectionProvider <small> - Connection module for FlowerDocs ECM </small> {#FlowerDocsConnectionProvider data-toc-label="FlowerDocsConnectionProvider"}
+## FlowerDocsConnectionProvider <small> - Connection module for FlowerDocs ECM </small> {#FlowerDocsConnectionProvider}
 
 Module responsible for authentication of Fast2 for FlowerDocs
 
@@ -204,7 +204,7 @@ Module responsible for authentication of Fast2 for FlowerDocs
 | ---------------------------- | --------- | ---------------------------------------- | ------------- |
 | Overrides authenticated user | `Boolean` | Allows connections to multiple endpoints | `false `      |
 
-## GenericRestClient <small> - Generic REST client connection </small> {#GenericRestClient data-toc-label="GenericRestClient"}
+## GenericRestClient <small> - Generic REST client connection </small> {#GenericRestClient}
 
 Allows Fast2 to connect to any REST API.
 
@@ -234,7 +234,7 @@ Allows Fast2 to connect to any REST API.
 | Raw body | `Pattern` | Field used when the request body is a single content. Required for: text/plain, application/xml, and all single binary file uploads (e.g., image/*, application/pdf). FILE UPLOADS : Enter the file path and check the file path option. Otherwise, enter the literal content (text or XML string). | | |
 | File Path | `Boolean` | Indicates if the raw body contains a file path | | `false ` |
 
-## MailBoxProvider <small> - Mail box connection </small> {#MailBoxProvider data-toc-label="MailBoxProvider"}
+## MailBoxProvider <small> - Mail box connection </small> {#MailBoxProvider}
 
 This class is used to access any mailbox from some connection information.
 
@@ -258,7 +258,7 @@ This class is used to access any mailbox from some connection information.
 | Extended properties map      | `String/String map` | Additional Jakarta Mail session properties, applied on top of the worker's JVM system properties (so an entry here overrides a `-D` flag). This is where mail-session tuning belongs — notably the IMAP fetch size when extraction is slow, see [Performance tuning](../advanced/performance-tuning.md). <br/> <p> Ex/ `mail.imaps.fetchsize = 1048576`</p> |
 | Time between two connections | `Integer`           | Time in milliseconds between each connection attempt                                      | `1000 `       |
 
-## MailSenderProvider <small> - Email connection provider </small> {#MailSenderProvider data-toc-label="MailSenderProvider"}
+## MailSenderProvider <small> - Email connection provider </small> {#MailSenderProvider}
 
 This module will grant Fast2 access to send emails on behalf of a given user
 
@@ -276,7 +276,7 @@ This module will grant Fast2 access to send emails on behalf of a given user
 | ----- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Debug | `Boolean` | Set the debug setting for this Session. Since the debug setting can be turned on only after the Session has been created, to turn on debugging in the Session constructor, set the property `mail.debug` in the Properties object passed in to the constructor to `true` |
 
-## MFilesConnectionProvider <small> - Connection settings for MFiles </small> {#MFilesConnectionProvider data-toc-label="MFilesConnectionProvider"}
+## MFilesConnectionProvider <small> - Connection settings for MFiles </small> {#MFilesConnectionProvider}
 
 Credentials to connect to M-Files remote system via its REST API.
 
@@ -289,7 +289,7 @@ Credentials to connect to M-Files remote system via its REST API.
 | Password              | `String` |                                               |                        |
 | Vault GUID            | `String` | ex : `{15c876e7-8462-4a35-83d6-c8c21694eed6}` |                        |
 
-## MobiusConnectionProvider <small> - Mobius connection provider </small> {#MobiusConnectionProvider data-toc-label="MobiusConnectionProvider"}
+## MobiusConnectionProvider <small> - Mobius connection provider </small> {#MobiusConnectionProvider}
 
 > ⚠️ **Deleted**: The `MobiusConnectionProvider` module is deleted and no longer available in Fast2 from v2025.0.0.
 
@@ -308,7 +308,7 @@ This Mobius connection module is required for Fast2 to successfully establish th
 | -------------------------- | -------- | ----------------------------------------------------------- |
 | Authentication REST Header | `String` | The value of the 'Authorization' header of the REST request |
 
-## NuxeoConnectionProvider <small> - Connection settings for Nuxeo </small> {#NuxeoConnectionProvider data-toc-label="NuxeoConnectionProvider"}
+## NuxeoConnectionProvider <small> - Connection settings for Nuxeo </small> {#NuxeoConnectionProvider}
 
 <b>Mandatory settings</b>
 
@@ -324,7 +324,7 @@ This Mobius connection module is required for Fast2 to successfully establish th
 | ------------------ | -------- | ------------------------------------------------------------------------ | ------------- | ------- |
 | Accessible schemas | `String` | List of document schemas accessible with this connexion | `* ` | |                                                              |
 
-## OpenTextCredentials <small> - OpenText user credentials </small> {#OpenTextCredentials data-toc-label="OpenTextCredentials"}
+## OpenTextCredentials <small> - OpenText user credentials </small> {#OpenTextCredentials}
 
 <b>Mandatory settings</b>
 
@@ -333,7 +333,7 @@ This Mobius connection module is required for Fast2 to successfully establish th
 | Password | `String` |             |
 | Username | `String` |             |
 
-## SQLQueryGenericCaller <small> - Generic query caller </small> {#SQLQueryGenericCaller data-toc-label="SQLQueryGenericCaller"}
+## SQLQueryGenericCaller <small> - Generic query caller </small> {#SQLQueryGenericCaller}
 
 This modules is responsible of establishing the connection between Fast2 and the designated database
 

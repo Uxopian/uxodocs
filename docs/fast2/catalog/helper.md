@@ -8,7 +8,7 @@ content_hash: 426d771b5e9a2259996589fa02703f7cb17766398c4d608a5d7dc224cee73000
 
 # Helper
 
-## DctmConfiguration <small> - Module for customized Documentum configuration </small> {#DctmConfiguration data-toc-label="DctmConfiguration"}
+## DctmConfiguration <small> - Module for customized Documentum configuration </small> {#DctmConfiguration}
 
 <b>Optional settings</b>
 
@@ -21,7 +21,7 @@ content_hash: 426d771b5e9a2259996589fa02703f7cb17766398c4d608a5d7dc224cee73000
 | Date format                     | `String`  | Date format which the documents will have to match in order to properly be loaded into Documentum.                                 | `dd/MM/yyyy `                               |
 | Annotation path                 | `String`  | Path to the folder where the annotations will be retrieved by Fast2. If not set, an error will be thrown.                          | `/System/Applications/ARender/Annotations ` |
 
-## WcmApiConfigSettings <small> - URL configuration </small> {#WcmApiConfigSettings data-toc-label="WcmApiConfigSettings"}
+## WcmApiConfigSettings <small> - URL configuration </small> {#WcmApiConfigSettings}
 
 This class allows to configure several elements associated with a URL.
 
