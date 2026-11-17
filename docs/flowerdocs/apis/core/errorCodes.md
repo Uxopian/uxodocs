@@ -64,7 +64,9 @@ about it.
 | T0230 | OpenSearch reindex                          |
 | T0231 | Shares                                      |
 
-## F000xx · Components and search
+## Functional errors
+
+### F000xx · Components and search
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -95,7 +97,7 @@ about it.
 | `F00039` | `{0}` | 500 | A business rule refused the operation; the message comes from the rule. | FlowerDocs itself never raises it; it is for custom operation handlers. The GUI shows its message as it is. | Read the message: it is the rule's own text. |
 | `F00040` | `The component {0} is invalid: the tag name ''{1}'' is duplicated` | 500 | The same tag appears twice on the component. | Creating or updating a component. | Send each tag once. |
 
-## F001xx · Folders
+### F001xx · Folders
 
 | Code     | Message (EN)                                                                                          | HTTP | Meaning                                                  | When it is returned          | What you can do                                             |
 | -------- | ----------------------------------------------------------------------------------------------------- | ---- | -------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------- |
@@ -118,7 +120,7 @@ about it.
 | `F00118` | `Folder {0} has a child with class {1} but it is not allowed for folder class {2}` | 500  | The folder class does not accept children of this class. | Adding children to a folder. | Add the child class to the folder class's allowed children. |
 | `F00119` | `Folders {0} can not be deleted since they have at least a child` | 500  | A folder that still has children cannot be deleted.      | Deleting folders.            | Remove its children first.                                  |
 
-## F002xx · Classes
+### F002xx · Classes
 
 | Code     | Message (EN)                                                                            | HTTP | Meaning                                              | When it is returned                                                    | What you can do                                            |
 | -------- | --------------------------------------------------------------------------------------- | ---- | ---------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------- |
@@ -131,7 +133,7 @@ about it.
 | `F00207` | `The component class {0} category has been changed from {1} to {2}` | 500  | The category of an existing class cannot be changed. | Updating a class.                                                      | Create a new class with the other category.                |
 | `F00208` | `The component class {0} of category {1} does not reference a valid security object: {2}` | 500  | The class does not point to a valid ACL.             | Creating or updating a class.                                          | Set an existing ACL as the class's security object.        |
 
-## F003xx · Security, sign-in and roles
+### F003xx · Security, sign-in and roles
 
 | Code     | Message (EN)                                                                                                                                                                                                 | HTTP | Meaning                                                                                                        | When it is returned                                                                                                                             | What you can do                                                                      |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
@@ -163,7 +165,7 @@ about it.
 | `F00333` | `Not allowed to modify the privileged profile {0}` | 403  | The user cannot add people to a privileged profile (e.g. ADMIN, SYSTEM_ADMIN).                                 | Editing users, groups or scope profiles.                                                                                                        | Ask someone who holds that profile's role.                                           |
 | `F00335` | `Your {0} role lets you change the profiles of the scope {1}, not {2}. This action is reserved for the ADMIN or SYSTEM_ADMIN profile.` | 403  | An identity manager may change the scope's profiles, not the scope itself.                                     | Updating a scope's description, languages, display names or ACL.                                                                                | Ask an ADMIN or SYSTEM_ADMIN.                                                        |
 
-## F004xx · Tasks
+### F004xx · Tasks
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -182,7 +184,7 @@ about it.
 | `F00433` | `The answer is invalid: the tag {0} is mandatory` | 500 | The answer is missing a mandatory tag. | Answering a task. | Fill in the tag the message names. |
 | `F00434` | `The answer is invalid: the tag {0} is monovalued` | 500 | The answer gives several values for a single-valued tag. | Answering a task. | Send a single value. |
 
-## F006xx · Scopes
+### F006xx · Scopes
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -193,7 +195,7 @@ about it.
 | `F00605` | `The provided list of scope must not be empty` | 500 | The request carries no scope. | Creating scopes. | Send at least one scope. |
 | `F00606` | `The id of scope {0} must not be changed` | 500 | A scope's id cannot be changed. | Never returned. | - |
 
-## F007xx · Document files
+### F007xx · Document files
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -202,7 +204,7 @@ about it.
 | `F00703` | `At least one of the files in document {0} has no identifier` | 500 | A file of the document has no id. | Creating or updating a document. | Give every file an id (the temporary file id from the upload). |
 | `F00704` | `The file {0} cannot be found` | 500 | The file does not exist on the document. | Renaming or getting a file. | Check the file id. |
 
-## F008xx · Shares
+### F008xx · Shares
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -227,7 +229,7 @@ about it.
 | `F00831` | `Document {0} is not part of share {1}: the share history only records the documents the share gives access to.` | 403 | The document is not part of the share. | Recording a recipient's view or download. | Record only the share's documents. |
 | `F00833` | `Only the share application can record what a recipient of share {0} viewed or downloaded: it does so with a system administrator account, and you are not a system administrator.` | 403 | Only the share application records what a recipient viewed or downloaded. | Recording a recipient's view or download. | Call it with the share application's system administrator account. |
 
-## F009xx · Tag categories and tag classes
+### F009xx · Tag categories and tag classes
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -237,14 +239,14 @@ about it.
 | `F00902` | `A valid tag value type must be set on tag class (actual=''{0}'')` | 500 | The tag class has no valid value type. | Creating or updating a tag class. | Set a supported type (string, date, integer…). |
 | `F00903` | `A tag class with id {0} already exists` | 500 | A tag class with this id already exists. | Creating a tag class. | Pick another id. |
 
-## F010xx · Reservations
+### F010xx · Reservations
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `F01002` | `Components are already reserved: {0}` | 500 | The components are already reserved. | Reserving components; versioning a reserved document. | Wait for the reservation to be released. |
 | `F01003` | `The reservations for components {0} could not be released because they are reserved by other user(s).` | 500 | The reservations belong to other users and cannot be released. | Releasing reservations. | Ask the users who hold them, or an administrator. |
 
-## F011xx · Delegations
+### F011xx · Delegations
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -254,7 +256,7 @@ about it.
 | `F01104` | `The delegation must have coherent dates.` | 500 | The delegation's dates are missing or incoherent, or fixed values were changed. | Creating or updating a delegation. | Set a start date before the end date; do not change fixed fields. |
 | `F01105` | `Delegation(s) asked to be updated is not found in the database.` | 500 | The delegation to update does not exist. | Updating a delegation. | Check the delegation id. |
 
-## F013xx · Annotations and data masking
+### F013xx · Annotations and data masking
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -264,13 +266,13 @@ about it.
 | `F01305` | `Current user is not allowed to update annotations for document {0}` | 500 | The user is not allowed to update annotations on this document. | Updating annotations. | Grant the update-annotation permission. |
 | `F01306` | `Current user is not allowed to delete annotations for document {0}` | 500 | The user is not allowed to delete annotations on this document. | Deleting annotations. | Grant the delete-annotation permission. |
 
-## F014xx · Processes (workflows)
+### F014xx · Processes (workflows)
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `F01401` | `A workflow with id {0} already exists` | 500 | A process with this id already exists. | Creating a process (workflow). | Pick another id. |
 
-## F015xx · Versions
+### F015xx · Versions
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -283,20 +285,20 @@ about it.
 | `F01508` | `Not allowed to delete version {0} of class {1}` | 500 | The user is not allowed to delete this version. | Deleting a version. | Grant the delete permission. |
 | `F01509` | `Not allowed to update file on version {0} of class {1}` | 500 | The user is not allowed to change files on this version. | Reverting a version. | Grant the update-content permission. |
 
-## F016xx · Status (closed, draft)
+### F016xx · Status (closed, draft)
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `F01601` | `Not allowed to update a closed component {0} of class {1}` | 500 | A closed component cannot be changed. | Updating a closed component, adding children to a closed folder, answering or assigning a closed task. | Reopen it first, if the class allows it. |
 | `F01602` | `Not allowed to answer a draft task {0} of class {1}` | 500 | A draft task cannot be answered. | Answering a task. | Submit the task first. |
 
-## F017xx · Favorites
+### F017xx · Favorites
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `F01701` | `Favorites concurrent modification is not supported` | 500 | Two updates of the same favorites happened at once. | Updating favorites. | Reload and try again. |
 
-## F018xx · Text content index
+### F018xx · Text content index
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -304,20 +306,22 @@ about it.
 | `F01802` | `Cannot de-index document content with invalid identifiers : document={0}, file={1}` | 500 | The document or file id is invalid. | Removing a file's text content from the index. | Check the document and file ids. |
 | `F01803` | `Cannot get document content with invalid identifiers : document={0}, file={1}` | 500 | The document or file id is invalid. | Getting a file's indexed text content. | Check the document and file ids. |
 
-## F019xx · Feature flags
+### F019xx · Feature flags
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `F01901` | `External share feature is disabled` | 403 | External sharing is turned off. | Any share operation; the share application's logo. | Turn the external share feature on. |
 
-## F020xx · Logos
+### F020xx · Logos
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `F02001` | `No logo of type {0} is configured. Please contact your administrator.` | 404 | No logo of this type is configured. | Getting a logo (GUI, share application). | Configure the logo in the administration. |
 | `F02002` | `The logo {0} of type {1} cannot be shown: {2,choice,0#it has no file&#124;1#its file format {3} is not a PNG, JPEG or SVG image}. Please contact your administrator.` | 404 | The logo has no file, or its file is not a PNG, JPEG or SVG image. | Getting a logo. | Upload a PNG, JPEG or SVG file for the logo. |
 
-## T000xx · General technical errors
+## Technical errors
+
+### T000xx · General technical errors
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -328,7 +332,7 @@ about it.
 | `T00012` | `The {0} object cannot be serialized to String using JAXB` | 500 | An object could not be written as XML. | Exporting a scope, classes or components through CLM; merging. | Contact support with the server log. |
 | `T00013` | `XML cannot be parsed to {0}` | 500 | An XML file could not be read. | Importing through CLM. | Check the XML file is well-formed and matches the expected schema. |
 
-## T001xx · Component storage
+### T001xx · Component storage
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -342,7 +346,7 @@ about it.
 | `T00108` | `Components {0} already exist` | 500 | Components with these ids already exist. | Creating components with explicit ids. | Use new ids. |
 | `T10102` | `Some component cannot be updated due to a technical error: {0}` | 500 | Some components of a batch could not be updated. | Updating several components in one call. | Read which ones in the message; retry them. |
 
-## T002xx · Class, scope, fact and saved-search storage
+### T002xx · Class, scope, fact and saved-search storage
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -352,7 +356,7 @@ about it.
 | `T00205` | `Component classes cannot be removed for ids={0}` | 500 | Classes or saved searches could not be deleted. | Deleting classes or saved searches. | Check OpenSearch; retry. |
 | `T00206` | `Component classes cannot be found for category={1}` | 500 | The classes of a category could not be listed. | Listing all classes. | Check OpenSearch. |
 
-## T003xx · Process storage
+### T003xx · Process storage
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -362,14 +366,14 @@ about it.
 | `T00304` | `Workflows {0} cannot be updated` | 500 | Processes could not be updated. | Updating processes. | Check OpenSearch; retry. |
 | `T00305` | `Workflows {0} cannot be deleted` | 500 | Processes could not be deleted. | Deleting processes. | Check OpenSearch; retry. |
 
-## T005xx · Login history storage
+### T005xx · Login history storage
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `T00501` | `Baskets cannot be added` | 500 | The sign-in history could not be saved. | Signing in (the login history entry). | Check OpenSearch. |
 | `T00503` | `All baskets cannot be fetched` | 500 | The sign-in history could not be read or purged. | Reading or purging login history. | Check OpenSearch. |
 
-## T006xx · Scope storage
+### T006xx · Scope storage
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -377,7 +381,7 @@ about it.
 | `T00604` | `Scopes {0} cannot be updated` | 500 | The scope could not be updated. | Updating a scope. | Check OpenSearch; retry. |
 | `T00605` | `Scopes {0} cannot be deleted` | 500 | The scope could not be deleted. | Deleting a scope. | Check OpenSearch; retry. |
 
-## T007xx · File storage
+### T007xx · File storage
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -390,7 +394,7 @@ about it.
 | `T00708` | `Integrity of file {0} has been violated` | 500 | The stored file is corrupted: its checksum no longer matches. | Reading or copying a file. | Restore the file from backup; contact support. |
 | `T00709` | `File {0} cannot be indexed` | 500 | The file could not be renamed or indexed. | Renaming a file. | Check the storage and the server log. |
 
-## T0080x · Tag class storage
+### T0080x · Tag class storage
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -400,7 +404,7 @@ about it.
 | `T00805` | `Tag classes {0} cannot be updated` | 500 | Tag classes could not be updated. | Updating tag classes. | Check OpenSearch; retry. |
 | `T00806` | `Tag classes {0} cannot be deleted` | 500 | Tag classes could not be deleted. | Deleting tag classes. | Check OpenSearch; retry. |
 
-## T0085x · Tag category storage
+### T0085x · Tag category storage
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -410,7 +414,7 @@ about it.
 | `T00855` | `Tag categories {0} cannot be updated` | 500 | Tag categories could not be updated. | Updating tag categories. | Check OpenSearch; retry. |
 | `T00856` | `Tag categories {0} cannot be deleted` | 500 | Tag categories could not be deleted. | Deleting tag categories. | Check OpenSearch; retry. |
 
-## T010xx · ACL storage, users, groups and tokens
+### T010xx · ACL storage, users, groups and tokens
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -438,7 +442,7 @@ about it.
 | `T01024` | `The user {0} could not be deleted` | 500 | The user could not be deleted. | Deleting a user. | Check the directory and the server log. |
 | `T01025` | `The group {0} could not be deleted` | 500 | The group could not be deleted. | Deleting a group. | Check the directory and the server log. |
 
-## T011xx · Dates and other
+### T011xx · Dates and other
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -446,7 +450,7 @@ about it.
 | `T01102` | `Uncategorized error: {0}` | 500 | An unexpected error while changing a password. | Changing a password in the GUI. | Read the server log. |
 | `T01103` | `Failed to download search result due to an internal error` | 500 | The search result could not be downloaded. | Never returned. | - |
 
-## T013xx · Delegation storage
+### T013xx · Delegation storage
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -455,13 +459,13 @@ about it.
 | `T01303` | `Delegation cannot be fetched from ids={0}` | 500 | Delegations could not be read. | Getting or searching delegations. | Check OpenSearch. |
 | `T01304` | `Delegation cannot be removed for ids={0}` | 500 | The delegation could not be deleted. | Deleting a delegation. | Check OpenSearch; retry. |
 
-## T014xx · GUI labels
+### T014xx · GUI labels
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `T01401` | `Labels from internal cannot be fetched for locale={0}` | 500 | The GUI labels could not be loaded. | Loading the GUI's labels for a language. | Check the server log. |
 
-## T015xx · Archives and exports
+### T015xx · Archives and exports
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -470,7 +474,7 @@ about it.
 | `T01503` | `Folder does not exist or is empty, its content cannot be exported.` | 500 | The folder does not exist or is empty: nothing to export. | Exporting a folder's content. | Check the folder has documents. |
 | `T01504` | `Could not convert file {0} of document {1} as PDF` | 500 | A file could not be converted to PDF. | Never returned. | - |
 
-## T016xx · Jobs
+### T016xx · Jobs
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -478,7 +482,7 @@ about it.
 | `T01602` | `Result of job {0} cannot be get` | 500 | The job's result could not be read. | Never returned. | - |
 | `T01603` | `No job can be found for jobId {0}` | 500 | No job has this id. | Getting a job's result. | Check the id; the job may have been purged. |
 
-## T018xx · Text content index
+### T018xx · Text content index
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -486,7 +490,7 @@ about it.
 | `T01802` | `Could not de-index document content for file {1} of document {0}` | 500 | A file's text could not be removed from the index. | Removing a file's text content. | Check OpenSearch. |
 | `T01803` | `Could not get document content for file {1} of document {0}` | 500 | A file's indexed text could not be read. | Getting a file's text content. | Check OpenSearch. |
 
-## T019xx · Text extraction
+### T019xx · Text extraction
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -494,7 +498,7 @@ about it.
 | `T01902` | `Could not extract document content for file {1} of document {0}. Cannot fetch page informations for Layout ''{2}''` | 500 | The page layout of the file could not be read for text extraction. | Indexing a file's text content. | Check the rendition server (ARender) is reachable from Core. |
 | `T01903` | `Could not extract document content for file {1} of document {0}` | 500 | The text of the file could not be extracted. | Indexing or getting a file's text content. | Check the rendition server (ARender) and the server log. |
 
-## T020xx · Annotations
+### T020xx · Annotations
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -504,7 +508,7 @@ about it.
 | `T02004` | `Could not transform annotation to document={0}, annotation={1}` | 500 | An annotation could not be converted for storage. | Saving annotations. | Contact support with the server log. |
 | `T02005` | `Could not serialize XFDF to document={0} for annotation={1}` | 500 | An annotation could not be written as XFDF. | Saving annotations. | Contact support with the server log. |
 
-## T021xx · History entries (facts)
+### T021xx · History entries (facts)
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -513,13 +517,13 @@ about it.
 | `T02103` | `The object type must be set on fact` | 500 | The history entry has no object type. | Creating a fact. | Set the object type. |
 | `T02104` | `The object id must be set on fact` | 500 | The history entry has no object id. | Creating a fact. | Set the object id. |
 
-## T022xx · Caches
+### T022xx · Caches
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `T02201` | `Cache={0} for FlowerDocs GUI does not exist` | 500 | The GUI cache does not exist. | Clearing a GUI cache by name. | Use one of the existing cache names. |
 
-## T0230x · OpenSearch reindex
+### T0230x · OpenSearch reindex
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
@@ -527,7 +531,7 @@ about it.
 | `T02302` | `OpenSearch reindex failed due to a communication error: {0}` | 500 | Reindexing failed: a cluster could not be reached. | OpenSearch reindex through CLM. | Check both clusters are reachable. |
 | `T02303` | `OpenSearch reindex was interrupted` | 500 | Reindexing was interrupted. | OpenSearch reindex through CLM. | Run it again. |
 
-## T0231x · Shares
+### T0231x · Shares
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
