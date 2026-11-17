@@ -76,7 +76,7 @@ about it.
 | `F00008` | `Class must be set for each component` | 500 | A component was sent without a class. | Creating or updating a component. | Set the class id on every component. |
 | `F00009` | `The component class with id {classId} does not exits but is set to component with id {componentId}` | 500 | The class set on the component does not exist in the scope. | Creating or updating a component. | Check the class id, or create the class first. |
 | `F00012` | `The component {componentId} does not exist` | 500 | The component does not exist. | Getting, updating, versioning or deleting a component by id; getting a document's files; thumbnails. | Check the id and the scope. |
-| `F00013` | `The provided creation date ''{creationDate}'' is later than server one.` | 500 | The creation date sent is later than the server's clock. | Creating a component with an explicit creation date. | Send a date in the past, or let the server set it. |
+| `F00013` | `The provided creation date '{creationDate}' is later than server one.` | 500 | The creation date sent is later than the server's clock. | Creating a component with an explicit creation date. | Send a date in the past, or let the server set it. |
 | `F00016` | `The category of component {componentId} is {componentCategory} whereas the category of class {classId} is {classCategory}` | 500 | The component's category does not match its class's category (e.g. a folder with a document class). | Creating or updating a component. | Use a class of the same category as the component. |
 | `F00020` | `The component {componentId} is invalid: the value {value} is not an allowed choice for tag {tagName}` | 500 | A tag value is not one of the allowed choices of its choice list. | Creating or updating a component. | Use a value listed in the tag class. |
 | `F00023` | `Criterion operator is not correctly set, correct values are {allowedOperators}` | 500 | A search criterion has an unknown operator. | Search requests. | Use one of the operators the message lists. |
@@ -88,13 +88,13 @@ about it.
 | `F00031` | `Criteria item is not correctly set, correct values are {allowedItemTypes}` | 500 | A search criteria item is malformed. | Search requests. | Use one of the item types the message lists. |
 | `F00032` | `The tags {tagNames} are not allowed for component {componentId} of class {classId}` | 500 | The component carries tags its class does not declare. | Creating or updating a component. | Remove the tags, or add them to the class. |
 | `F00033` | `The component {componentId} is invalid: the tag {tagName} is mandatory for class {classId}` | 500 | A mandatory tag is missing. | Creating or updating a component; answering a task whose answer requires the tag. | Fill in the tag the message names. |
-| `F00034` | `The component {componentId} is invalid: the value ''{value}'' does not match expected pattern for tag ''{tagName}''` | 500 | A tag value does not match the pattern set on its tag class. | Creating or updating a component. | Enter a value in the expected format. |
+| `F00034` | `The component {componentId} is invalid: the value '{value}' does not match expected pattern for tag '{tagName}'` | 500 | A tag value does not match the pattern set on its tag class. | Creating or updating a component. | Enter a value in the expected format. |
 | `F00035` | `Component to update has no Id set` | 500 | The component to update has no id. | Updating a component. | Send the id of the component to update. |
-| `F00036` | `The component {componentId} is invalid: the value ''{value}'' is not valid for tag {tagName}` | 500 | A tag value is not valid for its type (date, number, boolean…). | Creating or updating a component. | Enter a value of the tag's type. |
+| `F00036` | `The component {componentId} is invalid: the value '{value}' is not valid for tag {tagName}` | 500 | A tag value is not valid for its type (date, number, boolean…). | Creating or updating a component. | Enter a value of the tag's type. |
 | `F00037` | `Component {componentId} of class {classId} has a multivalued tag {tagName} whereas it is not referenced as multivalued` | 500 | Several values were sent for a tag that takes only one. | Creating or updating a component. | Send a single value, or make the tag multivalued in the class. |
 | `F00038` | `The component {componentId} has an invalid conditional tag {tagName} with value {value}` | 500 | A conditional tag value is not allowed for the value of the tag it depends on. | Creating or updating a component. | Pick a value allowed for the parent tag's value. |
 | `F00039` | `{message}` | 500 | A business rule refused the operation; the message comes from the rule. | FlowerDocs itself never raises it; it is for custom operation handlers. The GUI shows its message as it is. | Read the message: it is the rule's own text. |
-| `F00040` | `The component {componentId} is invalid: the tag name ''{tagName}'' is duplicated` | 500 | The same tag appears twice on the component. | Creating or updating a component. | Send each tag once. |
+| `F00040` | `The component {componentId} is invalid: the tag name '{tagName}' is duplicated` | 500 | The same tag appears twice on the component. | Creating or updating a component. | Send each tag once. |
 
 ### F001xx · Folders
 
@@ -132,9 +132,9 @@ about it.
 | `F00316` | `User {userId} is not allowed to access to {scopeId}` | 500  | The user is not allowed in this scope.                                                                         | Signing in to a scope; any request to a scope.                                                                                                  | Add the user (or a group) to the scope's ACL.                                        |
 | `F00317` | `You are not allowed to modify the scope {scopeId}` | 403  | The user is not allowed to modify this scope.                                                                  | Updating a scope.                                                                                                                               | Use an administrator account.                                                        |
 | `F00318` | `ACL {aclId} has no ACE set` | 500  | An ACL has no entry.                                                                                           | Creating or updating an ACL.                                                                                                                    | Add at least one entry.                                                              |
-| `F00319` | `ACL {aclId} ''s ACE has no grant value set` | 500  | An ACL entry does not say whether it grants or denies.                                                         | Creating or updating an ACL.                                                                                                                    | Set the grant value of each entry.                                                   |
-| `F00320` | `ACL {aclId} ''s ACE has no principal` | 500  | An ACL entry has no principal (user or group).                                                                 | Creating or updating an ACL.                                                                                                                    | Name at least one principal per entry.                                               |
-| `F00321` | `ACL {aclId} ''s ACE has no permission` | 500  | An ACL entry has no permission.                                                                                | Creating or updating an ACL.                                                                                                                    | Give each entry at least one permission.                                             |
+| `F00319` | `ACL {aclId} 's ACE has no grant value set` | 500  | An ACL entry does not say whether it grants or denies.                                                         | Creating or updating an ACL.                                                                                                                    | Set the grant value of each entry.                                                   |
+| `F00320` | `ACL {aclId} 's ACE has no principal` | 500  | An ACL entry has no principal (user or group).                                                                 | Creating or updating an ACL.                                                                                                                    | Name at least one principal per entry.                                               |
+| `F00321` | `ACL {aclId} 's ACE has no permission` | 500  | An ACL entry has no permission.                                                                                | Creating or updating an ACL.                                                                                                                    | Give each entry at least one permission.                                             |
 | `F00322` | `ACL(s) {aclIds} do not exist` | 500  | The ACL does not exist.                                                                                        | Getting, updating or deleting an ACL.                                                                                                           | Check the ACL id.                                                                    |
 | `F00323` | `Failed to change password for user {userId}: given passwords are null or mismatch` | 500  | The new passwords are empty or do not match.                                                                   | Changing a password in the GUI.                                                                                                                 | Enter the same new password twice.                                                   |
 | `F00324` | `The credentials of user {userId} are invalid` | 500  | The user name or password is wrong.                                                                            | Signing in (GUI, REST, token); changing a password.                                                                                             | Check the credentials.                                                               |
@@ -191,7 +191,7 @@ about it.
 | `F00804` | `The ending date must be set` | 500 | The share has no end date. | Creating a share. | Set an end date. |
 | `F00805` | `The ending date {endDate} is beyond the maximum share duration of {maxDurationDays} days` | 500 | The share's end date is beyond the maximum share duration. | Creating a share. | Pick an earlier end date, or raise the maximum duration. |
 | `F00806` | `The share cannot be created without a recipient: add at least one recipient email address.` | 500 | The share has no recipient. | Creating a share. | Add at least one recipient email address. |
-| `F00807` | `The recipient address ''{recipientAddress}'' is not a valid email address. Enter it in the form name@example.com.` | 500 | A recipient address is not a valid email address. | Creating a share. | Enter it as name@example.com. |
+| `F00807` | `The recipient address '{recipientAddress}' is not a valid email address. Enter it in the form name@example.com.` | 500 | A recipient address is not a valid email address. | Creating a share. | Enter it as name@example.com. |
 | `F00808` | `The address {address} is not allowed to open share {shareId}: only the addresses chosen by the person who shared it can.` | 403 | The address given is not a recipient of the share. | A recipient signing in to a share; recording a recipient's view or download. | Use the address the share was sent to. |
 | `F00810` | `The share search cannot filter on {field} with the operator {operator} and the values {values}. It filters on: {allowedFields}.` | 400 | The share search cannot filter this way. | Searching shares. | Filter on one of the fields the message lists. |
 | `F00811` | `The share search cannot sort on {field}. It sorts on: {allowedFields}.` | 400 | The share search cannot sort on this field. | Searching shares. | Sort on one of the fields the message lists. |
@@ -210,10 +210,10 @@ about it.
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
-| `F00898` | `A valid identifier must be set on tag category (actual=''{id}'')` | 500 | The tag category or process has an invalid id. | Creating or updating a tag category or a process (workflow). | Set a valid id. |
+| `F00898` | `A valid identifier must be set on tag category (actual='{id}')` | 500 | The tag category or process has an invalid id. | Creating or updating a tag category or a process (workflow). | Set a valid id. |
 | `F00900` | `A tag category with id {tagCategoryId} already exists` | 500 | A tag category with this id already exists. | Creating a tag category. | Pick another id. |
-| `F00901` | `A valid identifier must be set on tag class (actual=''{id}'')` | 500 | The tag class has an invalid id. | Creating or updating a tag class. | Use a valid id. |
-| `F00902` | `A valid tag value type must be set on tag class (actual=''{valueType}'')` | 500 | The tag class has no valid value type. | Creating or updating a tag class. | Set a supported type (string, date, integer…). |
+| `F00901` | `A valid identifier must be set on tag class (actual='{id}')` | 500 | The tag class has an invalid id. | Creating or updating a tag class. | Use a valid id. |
+| `F00902` | `A valid tag value type must be set on tag class (actual='{valueType}')` | 500 | The tag class has no valid value type. | Creating or updating a tag class. | Set a supported type (string, date, integer…). |
 | `F00903` | `A tag class with id {tagClassId} already exists` | 500 | A tag class with this id already exists. | Creating a tag class. | Pick another id. |
 
 ### F010xx · Reservations
@@ -405,8 +405,8 @@ about it.
 | `T01010` | `Could not find users for {searchCriteria}` | 500 | Users could not be searched. | Searching users. | Check the directory. |
 | `T01012` | `Could not found LDAP Distinguished Name for user {userId}` | 500 | The user's entry was not found in the directory. | Signing in; reading a user (LDAP). | Check the user exists under the configured base DN. |
 | `T01013` | `Could not map attribute {attributeName} on identity` | 500 | A directory attribute could not be mapped to the user. | Reading a user (LDAP). | Check the attribute mapping configuration. |
-| `T01014` | `The user token is invalid: ''{token}''` | 500 | The token is not valid: it was not signed by this platform, or it is malformed. | Any request with a token; opening a share link. | Sign in again; check every server shares the same token key. |
-| `T01015` | `The user token has expired: ''{token}''` | 500 | The token has expired. | Any request with a token; opening a share link. | Sign in again, or ask for a new link. |
+| `T01014` | `The user token is invalid: '{token}'` | 500 | The token is not valid: it was not signed by this platform, or it is malformed. | Any request with a token; opening a share link. | Sign in again; check every server shares the same token key. |
+| `T01015` | `The user token has expired: '{token}'` | 500 | The token has expired. | Any request with a token; opening a share link. | Sign in again, or ask for a new link. |
 | `T01016` | `The password does not meet the length, complexity, or history requirements of the domain` | 500 | The password does not meet the directory's password rules. | Changing a password (LDAP). | Choose a longer or more complex password. |
 | `T01017` | `LDAP action could not be performed within non-secure connection` | 500 | The directory refuses this change over an unencrypted connection. | Changing a password (LDAP). | Configure LDAPS. |
 | `T01018` | `The user {userId} could not be created because it already exists in the directory` | 500 | The user already exists in the directory. | Creating a user (LDAP). | Use another login. |
@@ -452,7 +452,7 @@ about it.
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
-| `T01601` | `Job identifier ''{jobId}'' is invalid` | 500 | The job id is invalid. | Getting the file a job produced (CSV export…). | Check the job id. |
+| `T01601` | `Job identifier '{jobId}' is invalid` | 500 | The job id is invalid. | Getting the file a job produced (CSV export…). | Check the job id. |
 | `T01603` | `No job can be found for jobId {jobId}` | 500 | No job has this id. | Getting a job's result. | Check the id; the job may have been purged. |
 
 ### T018xx · Text content index
@@ -468,7 +468,7 @@ about it.
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `T01901` | `Could not extract document content for file {fileId} of document {documentId}. Mime type {mimeType} is not supported` | 500 | The file type is not supported for text extraction. | Indexing a file's text content. | Nothing to fix: that file's text is not searchable. |
-| `T01902` | `Could not extract document content for file {fileId} of document {documentId}. Cannot fetch page informations for Layout ''{layout}''` | 500 | The page layout of the file could not be read for text extraction. | Indexing a file's text content. | Check the rendition server (ARender) is reachable from Core. |
+| `T01902` | `Could not extract document content for file {fileId} of document {documentId}. Cannot fetch page informations for Layout '{layout}'` | 500 | The page layout of the file could not be read for text extraction. | Indexing a file's text content. | Check the rendition server (ARender) is reachable from Core. |
 | `T01903` | `Could not extract document content for file {fileId} of document {documentId}` | 500 | The text of the file could not be extracted. | Indexing or getting a file's text content. | Check the rendition server (ARender) and the server log. |
 
 ### T020xx · Annotations
