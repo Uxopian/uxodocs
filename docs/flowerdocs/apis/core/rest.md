@@ -59,6 +59,7 @@ REST updates operate on a **cancel and replace** basis: unset fields will be cle
 
 A refused or failed call returns an error code, in the JSON body and in the `code` response header.
 Refusals caused by an administration role return HTTP 403: see [Administration roles](/docs/flowerdocs/concepts/securite/administration-roles#error-codes).
+See the [error codes reference](/docs/flowerdocs/apis/core/errorCodes/) for what every code means and what to do about it.
 
 ## Swagger documentation
 
