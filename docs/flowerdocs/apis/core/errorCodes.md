@@ -72,7 +72,6 @@ about it.
 |---|---|---|---|---|---|
 | `F00000` | `{0}` | 500 | A generic refusal whose message says what went wrong. | An operation handler changed a component or content in a way the operation does not allow; updating a favorite of a user who has none. | Read the message: it names the object. Check the operation handlers configured on the scope. |
 | `F00001` | `Cannot process an empty list of documents` | 500 | The request carries no document or component to process. | Creating, updating or deleting components with an empty list. | Send at least one component. |
-| `F00002` | `The document {0} cannot be deleted because it is attached to a closed folder {1}` | 500 | A document attached to a closed folder cannot be deleted. | Never returned. | - |
 | `F00005` | `The supplied document {0} is invalid. It must contain data` | 500 | The component sent has no data (class, tags…). | Creating or updating a component. | Send the component with its data block. |
 | `F00008` | `Class must be set for each component` | 500 | A component was sent without a class. | Creating or updating a component. | Set the class id on every component. |
 | `F00009` | `The component class with id {0} does not exits but is set to component with id {1}` | 500 | The class set on the component does not exist in the scope. | Creating or updating a component. | Check the class id, or create the class first. |
@@ -101,21 +100,6 @@ about it.
 
 | Code     | Message (EN)                                                                                          | HTTP | Meaning                                                  | When it is returned          | What you can do                                             |
 | -------- | ----------------------------------------------------------------------------------------------------- | ---- | -------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------- |
-| `F00101` | `Cannot process an empty list of folders` | 500  | No folder to process.                                    | Never returned.              | -                                                           |
-| `F00102` | `A folder already exists with the name {0} in scope {1}` | 500  | A folder with this name already exists in the scope.     | Never returned.              | -                                                           |
-| `F00104` | `Scope must be set and non Empty for folders. The scope of folder {0} is not set` | 500  | A folder has no scope.                                   | Never returned.              | -                                                           |
-| `F00105` | `Scope must be unique for provided folders. Some folders have scope {0} and others {1}` | 500  | Folders processed together belong to different scopes.   | Never returned.              | -                                                           |
-| `F00106` | `There is more than one folder with name {0} to process` | 500  | Two folders sent together have the same name.            | Never returned.              | -                                                           |
-| `F00107` | `Folders data must be set` | 500  | Folder data is missing.                                  | Never returned.              | -                                                           |
-| `F00108` | `Status code is a mandatory data for folder. The folder with name {0} does not have status code` | 500  | A folder has no status.                                  | Never returned.              | -                                                           |
-| `F00109` | `The folder class {0} must be active` | 500  | The folder class is not active.                          | Never returned.              | -                                                           |
-| `F00110` | `The tag {0} is mandatory for folder {1} but it is not set or is empty` | 500  | A folder is missing a mandatory tag.                     | Never returned.              | -                                                           |
-| `F00111` | `Folder name must be set` | 500  | A folder has no name.                                    | Never returned.              | -                                                           |
-| `F00112` | `Owner is a mandatory data for folder. Owner is not set for folder with name {0}` | 500  | A folder has no owner.                                   | Never returned.              | -                                                           |
-| `F00113` | `The folder with name {0} has no class set.` | 500  | A folder has no class.                                   | Never returned.              | -                                                           |
-| `F00114` | `The tag {0} must match pattern {1}. Value of this tag set for folder {2} is not matching` | 500  | A folder tag value does not match its pattern.           | Never returned.              | -                                                           |
-| `F00115` | `The tag {0} is choice list type. The folder {1} has {2} value set which is not part of allowed values` | 500  | A folder tag value is not an allowed choice.             | Never returned.              | -                                                           |
-| `F00116` | `The folder {0} is closed, it cannot be updated` | 500  | A closed folder cannot be updated.                       | Never returned.              | -                                                           |
 | `F00117` | `The component {1} is already a child of {0}` | 500  | The component is already a child of this folder.         | Adding children to a folder. | Do not add it twice.                                        |
 | `F00118` | `Folder {0} has a child with class {1} but it is not allowed for folder class {2}` | 500  | The folder class does not accept children of this class. | Adding children to a folder. | Add the child class to the folder class's allowed children. |
 | `F00119` | `Folders {0} can not be deleted since they have at least a child` | 500  | A folder that still has children cannot be deleted.      | Deleting folders.            | Remove its children first.                                  |
@@ -189,17 +173,12 @@ about it.
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `F00601` | `The symbolic name of a scope must be unique. One of {0} already exists` | 500 | A scope with this id already exists. | Creating a scope. | Pick another id. |
-| `F00602` | `The supplied scope(s) {0} does not exist` | 500 | The scope does not exist. | Never returned. | - |
-| `F00603` | `The symbolic name of a scope must not be empty` | 500 | The scope id is empty. | Never returned. | - |
-| `F00604` | `The symbolic name of a scope must be unique. More than one  scope with {0} name has been provided` | 500 | Two scopes sent together have the same id. | Never returned. | - |
 | `F00605` | `The provided list of scope must not be empty` | 500 | The request carries no scope. | Creating scopes. | Send at least one scope. |
-| `F00606` | `The id of scope {0} must not be changed` | 500 | A scope's id cannot be changed. | Never returned. | - |
 
 ### F007xx · Document files
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
-| `F00701` | `The supplied file has no content` | 500 | The file sent has no content. | Never returned. | - |
 | `F00702` | `The access to files of document {0} is not allowed.` | 500 | The user is not allowed to read this document's files. | Downloading or viewing a document's files. | Grant the read-content permission on the document's ACL. |
 | `F00703` | `At least one of the files in document {0} has no identifier` | 500 | A file of the document has no id. | Creating or updating a document. | Give every file an id (the temporary file id from the upload). |
 | `F00704` | `The file {0} cannot be found` | 500 | The file does not exist on the document. | Renaming or getting a file. | Check the file id. |
@@ -208,9 +187,7 @@ about it.
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
-| `F00801` | `The starting date {0} is after the ending date {1}` | 500 | The share's start date is after its end date. | Never returned. | - |
 | `F00802` | `The ending date {0} is after the current date {1}` | 500 | The share's end date is in the past. | Creating a share. | Pick an end date in the future. |
-| `F00803` | `The starting date must be set` | 500 | The share has no start date. | Never returned. | - |
 | `F00804` | `The ending date must be set` | 500 | The share has no end date. | Creating a share. | Set an end date. |
 | `F00805` | `The ending date {0} is beyond the maximum share duration of {1} days` | 500 | The share's end date is beyond the maximum share duration. | Creating a share. | Pick an earlier end date, or raise the maximum duration. |
 | `F00806` | `The share cannot be created without a recipient: add at least one recipient email address.` | 500 | The share has no recipient. | Creating a share. | Add at least one recipient email address. |
@@ -341,7 +318,6 @@ about it.
 | `T00103` | `Components cannot be fetched due to a technical error for ids={0}` | 500 | Components could not be read. | Getting components or versions. | Check OpenSearch. |
 | `T00104` | `Components cannot be found due to a technical error for {0}` | 500 | The search could not run. | Searching; exports. | Check OpenSearch and the search request. |
 | `T00105` | `Components cannot be deleted due to a technical error for ids={0}` | 500 | Components could not be deleted. | Deleting components or versions. | Check OpenSearch; retry. |
-| `T00106` | `Components search results count exceed search count limit` | 500 | The search returned more results than the allowed limit. | Never returned. | - |
 | `T00107` | `Components {0} could not be updated due to conflict version: {1}` | 500 | The component was changed by someone else in the meantime. | Updating a component. | Reload it and apply the change again. |
 | `T00108` | `Components {0} already exist` | 500 | Components with these ids already exist. | Creating components with explicit ids. | Use new ids. |
 | `T10102` | `Some component cannot be updated due to a technical error: {0}` | 500 | Some components of a batch could not be updated. | Updating several components in one call. | Read which ones in the message; retry them. |
@@ -448,7 +424,6 @@ about it.
 |---|---|---|---|---|---|
 | `T01101` | `The date {0} cannot be parsed. The valid format is {1}` | 500 | A date could not be read; the message gives the expected format. | Any request carrying a date. | Send the date in the format the message gives. |
 | `T01102` | `Uncategorized error: {0}` | 500 | An unexpected error while changing a password. | Changing a password in the GUI. | Read the server log. |
-| `T01103` | `Failed to download search result due to an internal error` | 500 | The search result could not be downloaded. | Never returned. | - |
 
 ### T013xx · Delegation storage
 
@@ -472,14 +447,12 @@ about it.
 | `T01501` | `Content cannot be fetched for search : {0}` | 500 | The content of a search could not be gathered. | Downloading the documents of a search as an archive. | Check the search and the server log. |
 | `T01502` | `Content cannot be fetched for {0} with id {1}` | 500 | The content of a component could not be gathered. | Downloading a folder or documents as an archive. | Check the server log. |
 | `T01503` | `Folder does not exist or is empty, its content cannot be exported.` | 500 | The folder does not exist or is empty: nothing to export. | Exporting a folder's content. | Check the folder has documents. |
-| `T01504` | `Could not convert file {0} of document {1} as PDF` | 500 | A file could not be converted to PDF. | Never returned. | - |
 
 ### T016xx · Jobs
 
 | Code | Message (EN) | HTTP | Meaning | When it is returned | What you can do |
 |---|---|---|---|---|---|
 | `T01601` | `Job identifier ''{0}'' is invalid` | 500 | The job id is invalid. | Getting the file a job produced (CSV export…). | Check the job id. |
-| `T01602` | `Result of job {0} cannot be get` | 500 | The job's result could not be read. | Never returned. | - |
 | `T01603` | `No job can be found for jobId {0}` | 500 | No job has this id. | Getting a job's result. | Check the id; the job may have been purged. |
 
 ### T018xx · Text content index
