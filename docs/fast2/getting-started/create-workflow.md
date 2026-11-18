@@ -231,6 +231,8 @@ Fast2 allows you to create multiple versions of the same map. This feature provi
 
 Seamless version creation for the user: they have nothing to do and cannot create a version themselves (there is no manual version creation). The version number is incremented automatically. Current version you are working on is always available in the top right corner.
 
+A campaign always runs with the map version it was started with. Saving changes to a map creates a new version that is used only by campaigns started afterwards: a campaign that is already running, including one that is stopped and then resumed, keeps its original version.
+
 <img src={require('../assets/img/create_workflow/current map version.png').default} alt="Map version position" style={{width: '80%'}} />
 
 ### Map versions history
