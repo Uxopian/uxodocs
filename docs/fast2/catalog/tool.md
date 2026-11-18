@@ -256,12 +256,12 @@ This task is responsible for moving content of documents from a given folder int
 | Key                                       | Type          | Description                                                                                                                                                                                | Default value |
 | ----------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | Copy files                                | `Boolean`     | Copy the file to the destination folder instead of moving it                                                                                                                               | `false `      |
-| Delete original copy                      | `Boolean`     | Delete the file in the source folder when it has been migrated                                                                                                                             | `false `      |
+| Delete original copy                      | `Boolean`     | Does **not** delete source files. When enabled, the parent folder of each moved file is removed once it is empty. In move mode, the file always leaves the source folder; in copy mode (`Copy files`), source files are kept. See the caution below | `false `      |
 | Process annotation contents               | `Boolean`     | If annotations are asked to be migrated, you can filter here to process their content(s) or only their metadata                                                                            | `false `      |
 | Checking interval                         | `Integer`     | Time to wait between two checks if target file exists                                                                                                                                      | `1000 `       |
 | Scan recursive content                    | `Boolean`     | Only convert terminal contents and not container ones                                                                                                                                      | `false `      |
 | Exclude file name for renaming file       | `Boolean`     | Renamed the file based on the value of the destination folder only                                                                                                                         | `false `      |
-| Wait until target file exists             | `Boolean`     | Only process next document when the current has successfully been migrated                                                                                                                 | `false `      |
+| Wait until target file exists             | `Boolean`     | Check that the target file exists before moving on to the next document. If it is missing, Fast2 checks again every `Checking interval` up to `Allowed retries` times, then fails. After a successful local move this is a single existence check, with no wait | `false `      |
 | Supported mime-types                      | `String list` | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
 | Allowed retries                           | `Integer`     | Number of checks before despair and exception                                                                                                                                              | `60 `         |
 | Source folder                             | `String`      | Set here the common prefix of all document contents to move. If null use file folder                                                                                                       |
@@ -271,6 +271,15 @@ This task is responsible for moving content of documents from a given folder int
 | Keep original filename                    | `Boolean`     | Set the destination file name to the 'title' property defined at the content level. Otherwise, keep the name of the file pointed by the URL                                                | `false `      |
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 | Files to exclude                          | `String list` | The path of the folder to exclude. Its whole content will remain in place. Leave empty to move all folders children <br/> <p> Ex/ \*.out, folder/\*\*/exclude</p>                          |
+
+:::warning[Delete original copy: performance and empty folders]
+
+- With `Delete original copy` enabled, every moved file triggers a listing of its source folder, and this check is shared by all threads of the step. On source folders that hold many files, throughput can drop sharply, and with several threads some punnets may end in exception (for example `Could not convert <file>` or a `NullPointerException`) even though their file has already been moved. Check the destination before retrying such punnets.
+- If the files sit directly in the configured source folder, that folder itself is removed when its last file is moved. Keep this in mind for drop or hot folders that other processes expect to exist.
+- On large folders, prefer leaving the option off and removing empty folders once the campaign is finished, for example on Linux: run `find <source> -mindepth 1 -depth -type d -empty -print` first to review the list, then `find <source> -mindepth 1 -depth -type d -empty -delete`.
+- `Wait until target file exists` can safely be disabled for local moves, as long as `Throw conversion exceptions` stays enabled (default), so that a failed move still puts the punnet in exception.
+
+:::
 
 ## MovePunnet <small> - Move a punnet from folder to folder </small> {#MovePunnet data-toc-label="MovePunnet"}
 
