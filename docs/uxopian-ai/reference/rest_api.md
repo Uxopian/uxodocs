@@ -34,14 +34,14 @@ Since 2026.0.0, every admin list is **paginated on the server** and answers a pa
 | `ascending` | `true` or `false`. |
 
 - `offset + limit` must not exceed **10 000**, otherwise the call answers `400` ("narrow the filters instead"). `total` stays exact beyond that number.
-- Items are **summaries** (for instance a script without its code, a plan execution without its node outputs, an agent with its secrets masked). Fetch the full entity with `GET …/{id}`. There is no switch to get full entities from a list.
+- Items are **summaries** (for instance a script without its code, a plan run without its node runs or input, an agent with its secrets masked). Fetch the full entity with `GET …/{id}`. There is no switch to get full entities from a list.
 - Each list takes its own **filters**, as query parameters (a repeatable one may be given several times); `search` exists on every list:
 
   | List | Filters |
   |---|---|
   | Prompts | `model`, `quick`, `tag`, `workspaceId` |
   | Plans | `agentId`, `usedBy`, `workspaceId` |
-  | Plan executions | `planId`, `status`, `workspaceId` |
+  | Plan runs | `planId`, `status`, `workspaceId`, `callerRunId` |
   | Scripts | `status`, `workspaceId` |
   | Agent configurations | `objective`, `usedBy`, `workspaceId` |
   | MCP servers | `transport`, `enabled`, `workspaceId` |
@@ -88,7 +88,8 @@ Common error codes and their HTTP status:
 | `LLM_PROVIDER_NOT_FOUND` | 404 | Referenced LLM provider does not exist |
 | `MCP_SERVER_NOT_FOUND` | 404 | Referenced MCP server does not exist |
 | `NOT_IMPLEMENTED` | 405 | Operation not supported |
-| `CONFLICT` | 409 | Duplicate entity (e.g. creating an LLM provider or script with an existing ID) |
+| `CONFLICT` | 409 | Duplicate entity (e.g. creating an LLM provider or script with an existing ID), a plan run signal its state does not allow, or deleting a run that has not ended |
+| `RUN_ALREADY_ACTIVE` | 409 | Since 2026.1.0. A run of the plan with the same values for its unique inputs is active; the body carries `existingRunId` |
 | `PAYLOAD_TOO_LARGE` | 413 | An inline `base64` file exceeds `llm.inline.max-size` (default 5 MB); nothing is stored. Also raised by the Tasks API when a payload exceeds `task.max-payload-bytes`. |
 | `LLM_CAPABILITY_ERROR` | 422 | The selected model lacks a required capability (multimodal, function calling, document input — `documentSupported`, or streaming for a NuExtract model) |
 | `DOCUMENT_TOO_LARGE` | 422 | A document exceeds `llm.document.max-size` (default 20 MB) or the model's `maxDocumentSizeMb` |
@@ -225,20 +226,23 @@ There is **no separate upload endpoint**: files enter a conversation either as `
 
 ### Tasks — `/api/v1/tasks`
 
-The task queue behind the human review screen. Tasks are tenant-scoped; the caller is the holder of a reservation. A task is `{ id, type, status, tags, payload, reservation }`, with `status` one of `PENDING`, `OK`, `KO`, and a `reservation` of `{ reservedBy, reservedAt, expiresAt }` (epoch milliseconds). A lapsed reservation reads as free.
+The task queue behind the human review screen. Tasks are tenant-scoped; the caller is the holder of a reservation. A task is `{ id, type, status, tags, archived, payload, reservation }`, with `status` one of `PENDING`, `OK`, `KO`, and a `reservation` of `{ reservedBy, reservedAt, expiresAt }` (epoch milliseconds). A lapsed reservation reads as free. Since 2026.1.0 it also carries `reviewedAt`/`reviewedBy` (set on completion) and `lastModifiedAt`/`lastModifiedBy` (set when a decision is saved or the task is completed).
 
 | Method | Path | Description |
 |---|---|---|
-| `GET` | `/api/v1/tasks` | List tasks as summaries (document, counts of pending / accepted / corrected values), paginated, oldest first by default. Filters: `status` (repeatable), `type`, `tag` (repeatable, all must match), `search` (document name or id, tags, extracted values). `orderBy`: `document`, `status`, `touched`, `created`. |
-| `GET` | `/api/v1/tasks/export` | Export the matching tasks as CSV (one line per extracted value), same filters, `orderBy` and `ascending`. Every match is streamed, with no row ceiling; the `X-Task-Count` header gives the number of tasks. Cells starting with `=`, `+`, `-`, `@`, tab or carriage return are prefixed with a quote. |
-| `GET` | `/api/v1/tasks/filter-counts` | Status and tag counts, each ignoring its own filter. |
+| `GET` | `/api/v1/tasks` | List tasks as summaries (document, counts of pending / accepted / corrected values), paginated, oldest first by default. Filters: `status` (repeatable: `PENDING` for waiting and free, `RESERVED` for waiting and held, `OK`, `KO`), `type`, `tag` (repeatable, **any** tag matches), `search` (document name or id, tags, extracted or corrected values, ignoring case and accents), `archived` (`true` only archived, `false` none; omitted, archived tasks are included), `createdFrom`, `createdTo`, `reviewedFrom`, `reviewedTo` (a day `2026-11-18` or a time `2026-11-18T09:30`, inclusive, server local time; `400` when a start is after its end). `orderBy`: `document`, `status`, `modified`, `created` (`400` otherwise). |
+| `GET` | `/api/v1/tasks/export` | Export the matching tasks as CSV — one line per task, with three columns per field (`<field>_extracted`, `<field>_final`, `<field>_status`), see [Export the decisions](../how_to/human_in_the_loop_review.md#export-the-decisions) — same filters, `orderBy` and `ascending`. Every match is streamed, with no row ceiling; the `X-Task-Count` header gives the number of tasks. Cells starting with `=`, `+`, `-`, `@`, tab or carriage return are prefixed with a quote. |
+| `GET` | `/api/v1/tasks/filter-counts` | Status (`PENDING`, `RESERVED`, `OK`, `KO`) and tag counts, each ignoring its own filter. |
 | `POST` | `/api/v1/tasks` | Create a task (`201`). `413` if the payload exceeds `task.max-payload-bytes`. |
 | `GET` | `/api/v1/tasks/{id}` | Get a whole task (`404` if unknown). |
 | `POST` | `/api/v1/tasks/{id}/reserve` | Reserve the task for the caller for `task.reservation-seconds`. `409` if held by someone else or already done. |
 | `POST` | `/api/v1/tasks/{id}/release` | Release the caller's reservation. `409` if not held by the caller. |
 | `PUT` | `/api/v1/tasks/{id}/payload` | Replace the payload; the caller must hold the reservation. `413` above the size limit. |
 | `POST` | `/api/v1/tasks/{id}/complete` | Complete the task — body `{ "status": "OK" }` or `{ "status": "KO" }`. |
-| `POST` | `/api/v1/tasks/{id}/rendition` | Render the task's document: the server reads it through its file connector as the caller, uploads it to ARender and answers `{ "id": "..." }`. |
+| `POST` | `/api/v1/tasks/{id}/rendition` | Render the task's document: the server reads it through its file connector as the caller, hands it to ARender (uploaded, or read from a shared folder when `file-connector.filesystem.rendition-root` is set) and answers `{ "renditionId": "..." }`. |
+| `POST` | `/api/v1/tasks/{id}/archive` | Archive a reviewed task and return it. `409` while it is `PENDING`. |
+| `POST` | `/api/v1/tasks/{id}/unarchive` | Put an archived task back in the queue. `409` while it is `PENDING`. |
+| `DELETE` | `/api/v1/tasks/{id}` | Delete the task, whatever its status. `deleteContent=true` also deletes its `filesystem` document and the copies its requests kept (other connectors are never touched). `204`; `404` if unknown; `409` if someone else holds it. |
 
 The payload type available today is `FIELD_LEVEL_VALIDATION`: the `document` to review and its `extractionItems`, each with its `result`, `userInput`, `reviewStatus` (`PENDING`, `OK`, `KO`), `confidence`, `provenance` and `evidences` (page number and position of the value on the page).
 
@@ -365,25 +369,30 @@ Since 2026.0.0-ft5. See [Agentic Plans](../understanding/agentic_plans.md).
 
 | Method | Path | Description |
 |---|---|---|
-| `GET` | `/api/v1/admin/plans` | List the Plan definitions of the current tenant (paginated summaries: step count, agents and plans called, callers). |
+| `GET` | `/api/v1/admin/plans` | List the Plan definitions of the current tenant (paginated summaries: node count, `inputCount`, `hasOutputSchema`, agents and plans called, callers). |
 | `GET` | `/api/v1/admin/plans/{id}` | Get one Plan definition. |
+| `GET` | `/api/v1/admin/plans/{id}/budget` | Since 2026.1.0. The plan's token budget and use: `{ "limit": …, "period": "DAY" \| "MONTH", "used": … }`. `404` if the plan has no budget. |
 | `GET` | `/api/v1/admin/plans/availability?id={id}` | Whether a new Plan can take this ID (`true` / `false`). |
-| `POST` | `/api/v1/admin/plans` | Create a Plan (`201`). `400` if invalid or the title already exists. |
-| `PUT` | `/api/v1/admin/plans/{id}` | Update a Plan. |
+| `POST` | `/api/v1/admin/plans` | Create a Plan (`201`, with the stored plan). `400` if invalid or the title already exists. |
+| `PUT` | `/api/v1/admin/plans/{id}` | Update a Plan (`200`, with the stored plan). |
 | `DELETE` | `/api/v1/admin/plans/{id}` | Delete a Plan (`204`). |
 
-### Plan executions — `/api/v1/admin/plan-executions`
+Since 2026.1.0, a plan also carries `inputs` (was `toolInputParameters`), `outputSchema`, `uniqueKeys`, `budget` and `runValidityMinutes`, and its nodes carry `condition` (was `executionCondition`), `allOrNothing` and the type `TOOL` (was `DIRECT_TOOL`). The old names are still read.
+
+### Plan runs — `/api/v1/admin/plan-runs`
+
+Since 2026.1.0, replaces `/api/v1/admin/plan-executions`, which no longer exists. See [Agentic Plans — execution model](../understanding/agentic_plans.md#execution-model).
 
 | Method | Path | Description |
 |---|---|---|
-| `GET` | `/api/v1/admin/plan-executions` | List main (non-nested) executions, newest first (paginated summaries, without node outputs, tool calls or input); nested runs are reachable through their parent. |
-| `GET` | `/api/v1/admin/plan-executions/{id}` | Get one execution, including every node's state. Poll this for progress. |
-| `POST` | `/api/v1/admin/plan-executions/run` | Create and immediately start an execution — body `{ "planId": "...", "inputPayload": { ... } }` (`202`). |
-| `POST` | `/api/v1/admin/plan-executions/{id}/signal` | Drive a run — body `{ "type": "PAUSE" }`, `{ "type": "RESUME" }` or `{ "type": "STOP" }`. `PAUSE` requests a cooperative pause (in-flight nodes finish first); `RESUME` restarts from persisted state without re-running terminal nodes and needs no payload; `STOP` cancels permanently (`CANCELLED`), keeping the partial trace. Returns the execution. `400` on a missing or unknown type, `404` if unknown, `409` if the state does not allow the signal. A nested run is driven through the run that started it. |
-| `DELETE` | `/api/v1/admin/plan-executions/{id}` | Delete an execution record (`204`). |
+| `GET` | `/api/v1/admin/plan-runs` | List runs, child runs included, newest first (paginated summaries, without node runs or input). Filters: `planId`, `status`, `workspaceId`, `callerRunId`. |
+| `GET` | `/api/v1/admin/plan-runs/{id}` | Get one run, with its node runs. Poll this for progress. |
+| `POST` | `/api/v1/admin/plan-runs` | Start a run — body `{ "planId": "...", "input": { ... } }` (`202`). `400` if a required input is missing, an input is not declared by the plan, or the plan cannot start; `409 RUN_ALREADY_ACTIVE` for a unique plan. |
+| `POST` | `/api/v1/admin/plan-runs/{id}/signal` | Drive a run — body `{ "signal": "PAUSE" }`, `{ "signal": "RESUME" }` or `{ "signal": "STOP" }`. `PAUSE` lets running nodes finish and starts no other; `RESUME` continues without re-running completed nodes; `STOP` ends the run as `STOPPED`, keeping the partial trace. The signal reaches the child runs. Returns the run. `400` on a missing or unknown signal, `404` if unknown, `409` if the state does not allow it. |
+| `DELETE` | `/api/v1/admin/plan-runs/{id}` | Delete a run (`204`). `409` if it has not ended. |
 
-:::caution Replaces `/pause`, `/resume` and `/stop`
-Since 2026.0.0, the three endpoints `POST /api/v1/admin/plan-executions/{id}/pause`, `/resume` and `/stop` no longer exist: use `/signal`.
+:::caution Changed in 2026.1.0
+Moving from `/plan-executions`: `POST …/run` becomes `POST /plan-runs`; the request fields `inputPayload` and `type` become `input` and `signal`; in the run, `nodeExecutions` becomes `nodes`, `outputData` becomes `output`, `controlSignal` becomes `signal`, and the parent fields become a `caller` object. Statuses: `CANCELLED` becomes `STOPPED`, `PENDING` is gone, `EXPIRED` is new; node runs add `READY`, `WAITING_CHILDREN`, `PARTIAL` and `STOPPED`. Runs of 2026.0.0 are not migrated.
 :::
 
 ### Tools — `/api/v1/admin/tools`

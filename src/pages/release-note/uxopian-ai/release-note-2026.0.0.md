@@ -4,7 +4,7 @@ title: "Uxopian AI release notes - 2026.0.0"
 date: 2026-10-24
 version: "2026.0.0"
 major_version: "2026"
-latest: true
+latest: false
 description: "General availability of 2026.0.0: Usage Profiles, code modules, human review of extracted fields, document and PDF inputs, paginated admin APIs, mandatory network policy and internal auth, and a redesigned admin console."
 ---
 

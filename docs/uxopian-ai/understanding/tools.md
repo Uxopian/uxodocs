@@ -101,7 +101,7 @@ The `flowerdocs/tool` plugin (tag `flowerdocs`) ships tools the LLM can use to s
 | `doSearch` | Executes the search and returns matching documents |
 | `getDocumentIdsByName` | Looks up document IDs by name |
 | `getDocumentContent` | Returns the textual content of a document |
-| `extractDocumentText` | Same content as `getDocumentContent`, under a name/description aimed at [Agentic Plans](./agentic_plans.md) `DIRECT_TOOL` nodes — e.g. the first step of a document-summarization plan |
+| `extractDocumentText` | Same content as `getDocumentContent`, under a name/description aimed at [Agentic Plans](./agentic_plans.md) `TOOL` nodes — e.g. the first step of a document-summarization plan |
 | `getDocumentProperties` | Returns a document's metadata (properties, tags, author) |
 | `updateDocumentProperty` | Updates a tag / metadata value on a document |
 | `previewRevertToPreviousVersion` | Non-destructive preview of a version restore |
@@ -209,11 +209,11 @@ The assistant emits the choices as a JSON block in its message content; the stan
 
 | Tool name | Description |
 |---|---|
-| `throwIfEmptyString` | Tag `flow`. Returns its `value` argument, or fails when it is blank. Placed in a [plan](./agentic_plans.md) as a `DIRECT_TOOL` node, it lets the plan branch: nodes set to run on success continue with the value, nodes set to run on error take the other path (see [execution condition](./agentic_plans.md#execution-condition-recovery-branches)). |
+| `throwIfEmptyString` | Tag `flow`. Returns its `value` argument, or fails when it is blank. Placed in a [plan](./agentic_plans.md) as a `TOOL` node, it lets the plan branch: nodes set to run on success continue with the value, nodes set to run on error take the other path (see [execution condition](./agentic_plans.md#conditions-recovery-branches)). |
 
 ## Code tools
 
-Besides Java `@Tool` methods and MCP tools, a tool can be written as a **code module** in the admin panel: a JavaScript module, with a published and a draft version, run in an isolated code sandbox. A code module that declares a `tool` section is callable from a `DIRECT_TOOL` plan node, from an agent, and from the chat (only when it is flagged *expose in chat*, and subject to the usage profile's tool permissions and tags). Code tools are listed with the other tools by `GET /api/v1/admin/tools`, each entry carrying a call type, `LOCAL` for a Java tool or `CODE` for a code module. Running them requires the code sandbox: when `code-sandbox.url` is unset, no code tool is offered.
+Besides Java `@Tool` methods and MCP tools, a tool can be written as a **code module** in the admin panel: a JavaScript module, with a published and a draft version, run in an isolated code sandbox. A code module that declares a `tool` section is callable from a `TOOL` plan node, from an agent, and from the chat (only when it is flagged *expose in chat*, and subject to the usage profile's tool permissions and tags). Code tools are listed with the other tools by `GET /api/v1/admin/tools`, each entry carrying a call type, `LOCAL` for a Java tool or `CODE` for a code module. Running them requires the code sandbox: when `code-sandbox.url` is unset, no code tool is offered.
 
 When two tools share a name, the tool is resolved in this order: MCP tool, native `@Tool`, plan exposed as a tool, code module. The name of a code module is checked against all of them when it is created.
 
@@ -230,4 +230,4 @@ When two tools share a name, the tool is resolved in this order: MCP tool, nativ
 - [Integrate with Alfresco](../how_to/integrate_with_alfresco.mdx)
 - [Integrate with FileNet](../how_to/integrate_with_filenet.mdx)
 - [Managing MCP servers in the admin UI](../admin/managing_mcp_servers.md)
-- [Agentic Plans](./agentic_plans.md) — DIRECT_TOOL nodes call a native tool directly, no LLM in the loop; a Plan can itself be exposed as a callable tool
+- [Agentic Plans](./agentic_plans.md) — TOOL nodes call a native tool directly, no LLM in the loop; a Plan can itself be exposed as a callable tool

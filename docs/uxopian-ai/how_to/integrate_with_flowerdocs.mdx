@@ -105,6 +105,10 @@ FD_WS_URL=http://flowerdocs-core:8080/core/
 FD_WS_URL=http://localhost:8080/core/
 ```
 
+:::tip One uxopian-ai for several FlowerDocs
+Since 2026.1.0, `FD_WS_URL` is only the default. A gateway route can name another FlowerDocs for its requests with the `FLOWERDOCS_ENDPOINT` attribute, for example one route per client host. See [Per-client routes](./configure_gateway_routes.md#per-client-routes-host-and-attributes). With gateway 2026.1.0, a route can also send a browser that is not logged in to the FlowerDocs login page (`login-url: https://<flowerdocs>/gui/login`, `login-redirect-param: redirect`) instead of answering `401`.
+:::
+
 If FlowerDocs runs in a separate Compose stack, `uxopian-ai` must join its Docker network. Find the FlowerDocs Core container name and network:
 
 ```bash

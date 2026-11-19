@@ -37,8 +37,8 @@ flowchart TD
 Releases publish a self-contained ZIP named `ai-standalone-<version>-complete-package.zip`:
 
 ```text
-ai-standalone-2026.0.0/
-  ai-standalone-2026.0.0.jar   ← Spring Boot fat JAR
+ai-standalone-2026.1.0/
+  ai-standalone-2026.1.0.jar   ← Spring Boot fat JAR
   application.yaml                  ← Spring config (imports ./config/* files)
   config/
     application.yml
@@ -50,21 +50,21 @@ ai-standalone-2026.0.0/
     hazelcast.yml
     mcp-server.yml
   plugins/
-    flowerdocs-2026.0.0.jar     ← FlowerDocs integration
-    alfresco-2026.0.0.jar       ← Alfresco integration
-    filenet-2026.0.0.jar        ← FileNet integration
-    arender-2026.0.0.jar        ← ARender integration
-    files-2026.0.0.jar          ← File tools
-    interaction-2026.0.0.jar    ← Interactive choices tools
-    common-2026.0.0.jar         ← Shared tools (text chunking, etc.)
+    flowerdocs-2026.1.0.jar     ← FlowerDocs integration
+    alfresco-2026.1.0.jar       ← Alfresco integration
+    filenet-2026.1.0.jar        ← FileNet integration
+    arender-2026.1.0.jar        ← ARender integration
+    files-2026.1.0.jar          ← File tools
+    interaction-2026.1.0.jar    ← Interactive choices tools
+    common-2026.1.0.jar         ← Shared tools (text chunking, etc.)
   llm-clients/
-    llm-clients-2026.0.0.jar
+    llm-clients-2026.1.0.jar
 ```
 
 The `plugins/` directory is scanned at runtime by `IntegrationLoader`. Only the JARs present at startup are activated. Remove plugin JARs for integrations you do not use.
 
 :::tip[Download]
-**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.0.0/ai-standalone-2026.0.0-complete-package.zip" download="ai-standalone-2026.0.0-complete-package.zip">ai-standalone-2026.0.0-complete-package.zip</a>**
+**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.1.0/ai-standalone-2026.1.0-complete-package.zip" download="ai-standalone-2026.1.0-complete-package.zip">ai-standalone-2026.1.0-complete-package.zip</a>**
 :::
 
 ### Configure LLM provider
@@ -118,6 +118,15 @@ server:
 export INTERNAL_AUTH_JWT_SECRET="$(openssl rand -base64 48)"
 ```
 
+### Set your own encryption key (recommended)
+
+Stored LLM provider secrets, and the user token kept with a running plan, are encrypted with `APP_SECURITY_SECRET_KEY` (Base64 of 16, 24 or 32 bytes). Unset, a public built-in key is used. Keep the built-in key as the previous one so the secrets already stored stay readable:
+
+```bash
+export APP_SECURITY_SECRET_KEY="$(openssl rand -base64 32)"
+export APP_SECURITY_PREVIOUS_SECRET_KEY="RGFucyBsZSBkb3V0ZSwgcmVib290Li4u"
+```
+
 ### Optional features
 
 | Feature | Setting |
@@ -132,12 +141,14 @@ export INTERNAL_AUTH_JWT_SECRET="$(openssl rand -base64 48)"
 From the extraction directory:
 
 ```bash
-java --enable-native-access=ALL-UNNAMED -Xmx768m -Xms512m -jar ai-standalone-2026.0.0.jar
+java --enable-native-access=ALL-UNNAMED -Xmx768m -Xms512m -jar ai-standalone-2026.1.0.jar
 ```
 
 The service starts on port `8080` by default. Override with `UXOPIAN_AI_PORT`.
 
-When upgrading from 2026.0.0-ft5, follow [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5) for what to do with your data: no automatic migration is provided, so your data must be transferred.
+On Temurin 25, add `-XX:-UseBASE64Intrinsics` to the command (CVE-2026-114938, an out-of-bounds write in the Base64 decoding intrinsic, with no fixed Temurin build at the time of 2026.1.0), as the Docker images do. Do the same for the gateway.
+
+When upgrading from 2026.0.0, the upgrade is in place: see [Upgrading from 2026.0.0](./kubernetes.mdx#upgrading-from-202600) for the few points to check. When upgrading from 2026.0.0-ft5, follow [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5) for what to do with your data: no automatic migration is provided, so your data must be transferred.
 
 ---
 
@@ -164,7 +175,7 @@ uxopian-gateway-<version>/
 Providers are scanned from the `provider/` directory at runtime by `AuthProviderLoader`. Remove provider JARs that are not needed.
 
 :::tip[Download]
-**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/gateway/standalone/2026.0.0/standalone-2026.0.0-complete-package.zip" download="standalone-2026.0.0-complete-package.zip">standalone-2026.0.0-complete-package.zip</a>**
+**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/gateway/standalone/2026.1.0/standalone-2026.1.0-complete-package.zip" download="standalone-2026.1.0-complete-package.zip">standalone-2026.1.0-complete-package.zip</a>**
 :::
 
 ### Configure routes

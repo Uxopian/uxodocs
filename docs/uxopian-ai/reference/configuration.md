@@ -23,6 +23,8 @@ Controls the base URL, server port, Spring profiles, and tool settings.
 | `plugins.root.path` | `PLUGINS_ROOT_PATH` | `plugins/` | Directory scanned at startup for plugin JARs |
 | `plugins.tools.enabled-tags` | `PLUGINS_TOOLS_ENABLED_TAGS` | `flowerdocs,files,interaction` | Since 2026.0.0-ft5, this no longer gates which tools get *registered* at startup — every `@ToolService` in every plugin JAR present in `plugins/` is always registered. It now only seeds the default tool-tag whitelist on an auto-created [usage profile](../admin/managing_applications.md) (empty = `allowAllTools`). See [Plugin system](../understanding/plugin_system.md#filtering-tools-by-tag). |
 | `spring.profiles.active` | `SPRING_PROFILES_ACTIVE` | (empty) | Active Spring profiles. Add `dev` to disable auth. |
+| `app.security.secret-key` | `APP_SECURITY_SECRET_KEY` | (built-in key) | AES key that encrypts the stored LLM provider secrets and, since 2026.1.0, the user token kept with a plan run. Base64 of 16, 24 or 32 bytes (`openssl rand -base64 32`); since 2026.1.0 any other value stops the startup. Unset, a built-in key is used and a warning is logged: that key is public, set your own in production. Every replica must use the same key |
+| `app.security.previous-secret-key` | `APP_SECURITY_PREVIOUS_SECRET_KEY` | (empty) | Since 2026.1.0. The former key, still accepted for decryption; values are encrypted again with the new key on their next save. When you set your first key, put the built-in one here: `RGFucyBsZSBkb3V0ZSwgcmVib290Li4u` |
 
 Example:
 
@@ -67,6 +69,11 @@ OpenSearch connection settings.
 | `opensearch.username` | `OPENSEARCH_USERNAME` | (empty) | Username for authenticated OpenSearch |
 | `opensearch.password` | `OPENSEARCH_PASSWORD` | (empty) | Password for authenticated OpenSearch |
 | `opensearch.index-prefix` | `OPENSEARCH_INDEX_PREFIX` | `uxopian-ai` | Prefix used in index names: `{tenant}-{prefix}-{base}` |
+| `opensearch.index.auto-expand-replicas` | `OPENSEARCH_INDEX_AUTO_EXPAND_REPLICAS` | `0-1` | Since 2026.1.0. `auto_expand_replicas` of the indices created from now on: no replica on a single node, one as soon as a second node joins. Empty: one fixed replica. Existing indices keep their settings |
+| `opensearch.max-connections` | `OPENSEARCH_MAX_CONNECTIONS` | `100` | Since 2026.1.0. Size of the connection pool to OpenSearch (`0`: the client library's pool of 10) |
+| `opensearch.index-shards` | `OPENSEARCH_INDEX_SHARDS` | (empty) | Since 2026.1.0. Shards per index, applied when the index is created, e.g. `plan_run_nodes=3,plan_runs=3` |
+| `opensearch.async-translog-indexes` | `OPENSEARCH_ASYNC_TRANSLOG_INDEXES` | (empty) | Since 2026.1.0. Indices written with an asynchronous translog, faster at the cost of the last second of writes on a crash. Suggested for heavy plan use: `plan_runs,plan_run_nodes` |
+| `opensearch.async-translog-sync-interval` | — | `1s` | Since 2026.1.0. Sync interval of those indices |
 
 Example:
 
@@ -223,7 +230,7 @@ Micrometer metrics and actuator configuration.
 
 ## hazelcast.yml
 
-Hazelcast cluster configuration. Used by the gateway for session caching.
+Hazelcast cluster configuration. Used for the session cache and, since 2026.1.0, to pass plan run signals and wake-ups between the uxopian-ai replicas: the replicas of one deployment must form one cluster.
 
 Since 2026.0.0, Hazelcast **auto-detection is always disabled**: only the explicit mechanisms below (Kubernetes discovery, or multicast when enabled) are used. A deployment that silently relied on auto-detection — for instance a Docker network without multicast and without Kubernetes mode — no longer forms a cluster. Set `HAZELCAST_MULTICAST_ENABLED=false` for single-node or Docker Compose setups on a shared network, so that a node never tries to join the cluster of another `uxopian-ai`.
 
@@ -246,9 +253,41 @@ Properties of `application.yml` (or any file imported by it) for the file connec
 | `task.reservation-seconds` | — | `900` | How long a reservation on a review [task](./rest_api.md#tasks--apiv1tasks) lasts. |
 | `task.max-payload-bytes` | — | `262144` | Largest task payload (`413` beyond). |
 | `rendition.base-url` | `RENDITION_BASE_URL` | (unset) | ARender base URL. `uxopian-ai` relays it at `<app>/rendition/` behind the same gateway authentication, so the review screen needs no direct browser access to ARender. |
-| `agent.execution.reservation-millis` | — | `60000` | Lease a runner holds on a plan execution before another may take it over. |
+| `file-connector.filesystem.rendition-root` | `FILECONNECTOR_FILESYSTEM_RENDITIONROOT` | (unset) | Since 2026.1.0. Folder where the ARender rendition broker mounts the same documents. Set, ARender reads `<rendition-root>/<tenant>/<path>` instead of receiving an upload, and uxopian-ai falls back to the upload when ARender refuses. See [Let ARender read the documents from a shared folder](../how_to/human_in_the_loop_review.md#let-arender-read-the-documents-from-a-shared-folder) |
 
-With Helm, set `fileConnector.filesystem.existingClaim` (a PersistentVolumeClaim), `mountPath` (default `/data/documents`) and `allowedExtensions`: the chart mounts the claim and sets the two environment variables. Without a claim nothing is mounted and `persist` stays disabled.
+With Helm, set `fileConnector.filesystem.existingClaim` (a PersistentVolumeClaim), `mountPath` (default `/data/documents`), `allowedExtensions` and `renditionRoot`: the chart mounts the claim and sets the environment variables. Without a claim nothing is mounted and `persist` stays disabled.
+
+Since 2026.1.0, `rendition.base-url` is the default ARender: a gateway route can replace it for its requests with the `ARENDER_ENDPOINT` attribute, and `ws.url` (`FD_WS_URL`) with `FLOWERDOCS_ENDPOINT`. See [Per-client routes](../how_to/configure_gateway_routes.md#per-client-routes-host-and-attributes).
+
+## Agentic plan engine
+
+Properties of the [plan](../understanding/agentic_plans.md) engine, under `agentic.*`, since 2026.1.0. None is in the shipped `application.yml`: add the ones you change. As environment variables, write them in upper case without dashes, for example `AGENTIC_ROLE` or `AGENTIC_RUNVALIDITYMINUTES`.
+
+| Key | Default | Description |
+|---|---|---|
+| `agentic.role` | `both` | `both`, `broker` (serves the API, runs no node) or `worker` (runs nodes, answers `404` on `/api/**`, runs no scheduled job). Every role uses the same image |
+| `agentic.slots` | `1024` | Nodes a replica runs at once. Also caps its concurrent LLM calls |
+| `agentic.pickup-interval-millis` | `2000` | How often a worker looks for nodes to run when no wake-up arrives |
+| `agentic.node-reservation-millis` | `60000` | Lease a worker holds on a node before another may take it over |
+| `agentic.node-timeout-seconds` | `900` | Longest time a node may run |
+| `agentic.max-node-output-bytes` | `1048576` | Largest node output |
+| `agentic.node-token-limit` | `1000000` | Input and output tokens an agent's tool loop may use |
+| `agentic.run-validity-minutes` | `1440` | How long a run may last when its plan sets no validity. `0`: runs never expire |
+| `agentic.fan-out-max-parallel-elements` | `32` | Elements of a fan-out run at once when the node sets no value |
+| `agentic.conversation-wait-seconds` | `300` | How long a conversation waits for a plan it called as a tool |
+| `agentic.signal-reconcile-interval-millis` | `30000` | How often a replica checks the signals it may have missed |
+| `agentic.save-interval-millis` | `2` | Delay between two batches of node writes |
+| `agentic.save-queue-capacity` | `50` | Node writes batched together |
+| `agentic.finished-children-window-millis` | `20` | Window in which finished fan-out elements are counted together |
+| `agentic.run-flags-ttl-millis` | `3000` | How long a replica trusts the run state it cached. `0` turns the cache and the wake-up hints off |
+| `agentic.run-cache-size` | `500` | Runs kept in that cache |
+| `agentic.ready-hints-enabled` | `true` | Wake workers through Hazelcast when a node becomes ready |
+
+:::caution Removed in 2026.1.0
+`agent.execution.reservation-millis`, `agent.execution.pickup-interval-millis` and `agent.execution.supervisor-enabled` are ignored. Use `agentic.node-reservation-millis` and `agentic.pickup-interval-millis`.
+:::
+
+The replicas of one deployment must form one Hazelcast cluster and run in the same time zone.
 
 ## code-sandbox
 
@@ -371,6 +410,10 @@ Gateway (uxopian-gateway) configuration.
 | `app.routes[].prefix` | Base prefix prepended to all security rule paths for matching against incoming requests |
 | `app.routes[].rewritePath` | Comma-separated `regex, replacement` — rewrites the request path **before** forwarding to the backend. Uses Java named capture groups (`(?<name>...)`), referenced as `$\{name}` in the replacement. |
 | `app.routes[].provider` | AuthProvider bean name — either a built-in singleton (`DevProvider`, `FlowerDocsProvider`, `Fast2Provider`, `AlfrescoProvider`, `FileNetProvider`) or a name declared under `app.providers` below |
+| `app.routes[].host` | Since gateway 2026.1.0. Pattern of the request's `Host` header (`.` separated, `*.example.com`). Empty: any host |
+| `app.routes[].attributes` | Since gateway 2026.1.0. Flat map of strings signed into the `X-Gateway-Auth` assertion (claim `attrs`). uxopian-ai reads `FLOWERDOCS_ENDPOINT` and `ARENDER_ENDPOINT`. At most 16 entries, keys up to 64 characters, values up to 512; checked at startup |
+| `app.routes[].login-url` | Since gateway 2026.1.0. Where a browser that is not authenticated is sent (`302`). API calls still get `401` |
+| `app.routes[].login-redirect-param` | Since gateway 2026.1.0. Query parameter of `login-url` that receives the path to come back to |
 | `app.routes[].security[].path` | Path pattern for security rule (relative — combined with `prefix` at startup) |
 | `app.routes[].security[].public` | If `true`, no authentication required for this path |
 | `app.routes[].security[].roles` | List of required roles for this path |
@@ -409,7 +452,7 @@ Since 2026.0.0-ft5, a provider type that ships an `AuthProviderFactory` (current
 | `app.providers.<name>.type` | One of the provider types above that supports named instances |
 | `app.providers.<name>.config.*` | Arbitrary key/value configuration passed to that provider type's factory (same keys as the type's own dedicated config block) |
 
-Config keys mirror each provider's own dedicated block, kebab-cased: `public-key` / `issuer` / `tenant-id` / `clock-skew-seconds` for `FileNetProvider`, `share-url` / `tenant-id` / `cache-ttl-minutes` for `AlfrescoProvider`, `public-key-url` / `tenant-id` for `Fast2Provider`. These are the **gateway's** JWT-validation settings — not to be confused with `uxopian-ai`'s own FileNet connector settings (`filenet.ce-api-url`, `filenet.oidc-realm`, configured on the `ai-standalone` side, see [Integrate with FileNet](../how_to/integrate_with_filenet.mdx#03-configure-the-filenet-connection)).
+Config keys mirror each provider's own dedicated block, kebab-cased: `public-key` / `issuer` / `tenant-id` / `clock-skew-seconds` for `FileNetProvider`, `share-url` / `tenant-id` / `cache-ttl-minutes` for `AlfrescoProvider`, `public-key-url` / `tenant-id` for `Fast2Provider` (since gateway 2026.1.0 and 2026.0.1, the Fast2 tenant comes from the `tenantId` claim of the token, and `tenant-id` is only used for tokens without it). These are the **gateway's** JWT-validation settings — not to be confused with `uxopian-ai`'s own FileNet connector settings (`filenet.ce-api-url`, `filenet.oidc-realm`, configured on the `ai-standalone` side, see [Integrate with FileNet](../how_to/integrate_with_filenet.mdx#03-configure-the-filenet-connection)).
 
 ```yaml
 app:

@@ -41,7 +41,7 @@ Three built-in providers are included:
 |---|---|
 | `DevProvider` | Local development only. Since 2026.0.0-ft5, always returns a **fixed** identity (`dev`, tenant `dev`, role `ADMIN`) — it no longer reads any client-supplied header, so it can never be used to forge an arbitrary user or tenant (previously it trusted `X-User-Id`/`X-User-Roles`/`X-User-Tenant` with no validation). |
 | `FlowerDocsProvider` | FlowerDocs deployments. Validates FlowerDocs JWTs from `Authorization: Bearer` or `SESSION` cookie. Caches sessions in Hazelcast. |
-| `Fast2Provider` | Fast2 deployments. Validates Fast2 JWT tokens from `Authorization: Bearer`. |
+| `Fast2Provider` | Fast2 deployments. Validates Fast2 JWT tokens from `Authorization: Bearer`. Since gateway 2026.1.0 (and 2026.0.1), the tenant is the `tenantId` claim of the token; `fast2.tenant.id` (or the `tenant-id` of a named instance) is only used for tokens without that claim. A token whose `token_use` claim is present and is not `access` (a refresh or worker token) is refused. |
 
 The active provider is set per route in `gateway-application.yaml`:
 
@@ -71,13 +71,19 @@ After authentication, the gateway forwards four headers to `uxopian-ai`:
 
 The identity headers above are, by themselves, just headers: anything able to reach `uxopian-ai` directly (bypassing the gateway) could set `X-User-Id`/`X-User-TenantId`/`X-User-Roles` to impersonate any user. To close that gap, the gateway **signs** every request it forwards with a short-lived HS256 JWT, carried in the `X-Gateway-Auth` header, which `uxopian-ai` verifies before trusting the identity headers alongside it.
 
-The assertion carries `sub` (user id), `tenantId`, `roles`, and `provider` as claims, with a default 30-second lifetime. It must carry an `exp` claim: an assertion without one is refused with `401`. The official gateway always sets it, so only hand-made tokens are affected. Both sides share one secret — the gateway signs with `internal-auth.jwt.secret`, `uxopian-ai` verifies with the same key under the identical property name (environment variable `INTERNAL_AUTH_JWT_SECRET`).
+The assertion carries `sub` (user id), `tenantId`, `roles`, and `provider` as claims, plus, since gateway 2026.1.0, `attrs`: the `attributes` of the route that served the request (see [Per-client routes](../how_to/configure_gateway_routes.md#per-client-routes-host-and-attributes)). The claim is left out when the route has none, with a default 30-second lifetime. It must carry an `exp` claim: an assertion without one is refused with `401`. The official gateway always sets it, so only hand-made tokens are affected. Both sides share one secret — the gateway signs with `internal-auth.jwt.secret`, `uxopian-ai` verifies with the same key under the identical property name (environment variable `INTERNAL_AUTH_JWT_SECRET`).
 
 Since 2026.0.0, this secret is **mandatory** on `uxopian-ai` in every profile, `dev` included: the service refuses to start without it (previously, a missing secret silently disabled verification and bare `X-User-*` headers were accepted). The secret must be at least 32 bytes and identical on the gateway and on `uxopian-ai`; `internal-auth.jwt.issuer` defaults to `uxopian-gateway-internal`. Docker, Docker Compose and plain Java deployments must therefore set `INTERNAL_AUTH_JWT_SECRET` on both services; the official Helm charts already required it. See [Configuration — gateway-signed request authentication](../reference/configuration.md#gateway-signed-request-authentication) for every key and the exact rotation procedure.
 
 ## AuthFilter in uxopian-ai
 
 `AuthFilter` (`OncePerRequestFilter`) reads these headers on every incoming request. It builds an `AuthenticatedUser` and opens an `AiResourceContext` scope using `AiContext.builder().withUser(authUser).open()`. All downstream services read tenant identity from `AiContext` rather than receiving it as parameters.
+
+Since 2026.1.0, `AuthFilter` also copies the `attrs` claim of the assertion into `AiContext` (string values only). The FlowerDocs connector reads `FLOWERDOCS_ENDPOINT` from it instead of `ws.url`, and the ARender connector reads `ARENDER_ENDPOINT` instead of `rendition.base-url`. Without the attribute, the connector uses its own setting.
+
+## Login redirect
+
+Since gateway 2026.1.0, a route with a `login-url` sends a browser that is not authenticated, or whose session expired, to that login page (`302`) instead of answering `401`. Only page loads (`Accept: text/html`) are redirected: API and `fetch` calls still get `401`, and a missing role still gets `403`. See [Send the browser to the login page](../how_to/configure_gateway_routes.md#send-the-browser-to-the-login-page).
 
 If `X-User-TenantId` is absent and the `dev` profile is not active, the request proceeds without a security context. Operations that require tenant data will fail because no tenant is resolvable.
 

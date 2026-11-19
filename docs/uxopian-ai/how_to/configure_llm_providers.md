@@ -217,6 +217,10 @@ The `nu-extract` provider reads a PDF through the NuMind platform and answers wi
 
 The provider runs an extraction job on the platform, polls it every second and gives up after 10 minutes, then asks for the positions of the extracted values. It works in two modes.
 
+:::note Positions missing in 2026.0.0
+NuMind changed its localization API after 2026.0.0 was released: with 2026.0.0, extractions come back without positions. 2026.1.0 uses the new API and gets them again, with no configuration change. A value NuMind leaves empty arrives without a result, and a position without a box carries its page only; the review screen accepts both.
+:::
+
 | Mode | How to select it | What the message carries |
 |---|---|---|
 | Template | Leave `project` empty | The message text starts with a JSON template such as `{"invoiceNumber": "string", "total": "number"}`. Anything after the template is sent as extraction instructions. Text before the template is refused |

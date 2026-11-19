@@ -34,8 +34,8 @@ services:
   # ── Uxopian AI ──────────────────────────────────────────────────────────────
   # Not exposed to the host. All browser traffic goes through the gateway.
   uxopian-ai:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
-    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.1.0}
+    # image: docker.uxopian.com/preview/uxopian-ai:${UXOPIAN_VERSION:-2026.1.0}
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
       - OPENSEARCH_HOST=opensearch
@@ -66,8 +66,8 @@ services:
   # DevProvider always injects a fixed dev identity (dev/dev/ADMIN) — suitable for local development.
   # Replace with FlowerDocsProvider or Fast2Provider for production.
   uxopian-gateway:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
-    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.1.0}
+    # image: docker.uxopian.com/preview/uxopian-gateway:${UXOPIAN_VERSION:-2026.1.0}
     environment:
       # Same secret as uxopian-ai: the gateway signs the identity assertion with it.
       - INTERNAL_AUTH_JWT_SECRET=${INTERNAL_AUTH_JWT_SECRET:-dev-only-internal-auth-secret-change-me-0123456789}
