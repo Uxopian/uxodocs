@@ -71,6 +71,17 @@ public class MyHelperService {
 
 The `name` value is the identifier you use in prompt templates. Choose a short, descriptive name. Do not use a name already used by a built-in helper (`documentService`, `fdService`).
 
+Since 2026.1.0, a method can also give the label the prompt editor shows for its calls, with `@HelperMethod` (`com.uxopian.ai.model.annotation.helper.HelperMethod`). `{0}`, `{1}`… stand for the arguments of the call, written as readable words (`documents[0].documentId` reads *document 1*):
+
+```java
+@HelperMethod(label = "Profile of {0} (MySystem)")
+public String getUserProfile(String userId) {
+    return "Profile for user: " + userId;
+}
+```
+
+Without a label, the editor shows the call itself.
+
 ### 2. Inject dependencies
 
 Your helper can autowire other Spring beans that are also in the plugin JAR. Internal `@Service` and `@Component` beans in the same JAR are registered before `@HelperService` beans, so they are available for injection.
