@@ -25,6 +25,11 @@ app:
       rewritePath: /incoming/?(?<segment>.*), /backend/$\{segment}
                             # (3) Transform — path sent to the backend
       provider: FlowerDocsProvider
+      host: ai.example.com  # (optional) Match on the incoming host as well
+      attributes:           # (optional) Signed and sent to uxopian-ai
+        FLOWERDOCS_ENDPOINT: https://flowerdocs.example.com/core
+      login-url: https://flowerdocs.example.com/gui/login  # (optional)
+      login-redirect-param: redirect                       # (optional)
       security:
         - path: /assets/**
           public: true
@@ -39,6 +44,10 @@ app:
 | `rewritePath` | Regex + replacement applied to the path **before** forwarding to the backend | Spring Cloud Gateway `rewritePath` filter |
 | `provider` | AuthProvider bean name called to validate credentials | `AuthFilter` |
 | `security` | Per-path rules (public or role-restricted). Paths are **relative** to `prefix` | `AuthFilter`, `SecurityConfig` |
+| `host` | Since 2026.1.0. Pattern for the `Host` header of the request, with `.` as separator (`ai.client-a.com`, `*.example.com`). Empty: any host | Request routing, `AuthFilter`, `SecurityConfig` |
+| `attributes` | Since 2026.1.0. Flat map of strings signed into the `X-Gateway-Auth` assertion of every request the route serves. See [Per-client routes](#per-client-routes-host-and-attributes) | `AuthFilter` |
+| `login-url` | Since 2026.1.0. Login page a browser is sent to when it is not authenticated. See [Send the browser to the login page](#send-the-browser-to-the-login-page) | `AuthFilter` |
+| `login-redirect-param` | Since 2026.1.0. Query parameter of `login-url` that receives the page to come back to. Optional | `AuthFilter` |
 
 ## How the three fields work together
 
@@ -296,6 +305,54 @@ The YAML anchor `*UXOPIAN_AI_SECURITY` defines rules with **relative** paths lik
 | `uxopian-ai-direct` | `/gui/gateway/uxopian-ai/` | `/gui/gateway/uxopian-ai/assets/**` |
 
 Both formatted rules match their respective incoming paths, so authentication is applied consistently regardless of entry point.
+
+## Per-client routes: host and attributes
+
+Since gateway 2026.1.0, one gateway can serve several clients, each with its own FlowerDocs or ARender, in front of a single uxopian-ai. Give each client a route that matches on its host, and put the client's endpoints in the route's `attributes`:
+
+```yaml
+app:
+  routes:
+    - id: client-a
+      host: ai.client-a.example.com
+      uri: http://uxopian-ai:8080
+      path: /gui/gateway/uxopian-ai/**
+      prefix: /gui/gateway/uxopian-ai/
+      provider: FlowerDocsProvider
+      attributes:
+        FLOWERDOCS_ENDPOINT: https://flowerdocs.client-a.example.com/core
+        ARENDER_ENDPOINT: https://flowerdocs.client-a.example.com/rendition
+      security: *AI_SECURITY   # the rules anchored in "YAML anchors" above
+```
+
+- **`host`** is compared with the `Host` header that reaches the gateway. The gateway does not read `X-Forwarded-Host`: your ingress or reverse proxy must keep the original `Host`.
+- **`attributes`** are signed into the `X-Gateway-Auth` assertion, as the `attrs` claim. uxopian-ai reads two of them: `FLOWERDOCS_ENDPOINT` replaces `ws.url` (`FD_WS_URL`), and `ARENDER_ENDPOINT` replaces `rendition.base-url` (`RENDITION_BASE_URL`), for the requests of that route. Both are URLs that uxopian-ai calls, not URLs for the browser. Without the attribute, uxopian-ai uses its own setting.
+- The gateway checks the attributes at startup and refuses to start when a rule is broken: at most 16 attributes, keys of at most 64 characters, values of at most 512 characters.
+
+:::warning First match wins
+Routes are tried in order. A client route on `/gui/gateway/uxopian-ai/**` also catches the `ws/` and `filenet/` paths of that host, so it hides the built-in WebSocket and FileNet routes. If the client needs them, declare its own `ws/` and `filenet/` routes **before** its main route.
+:::
+
+The Helm chart of the gateway exposes this as `extraRoutes` (rendered before the built-in routes) and `routeAttributes` (attributes added to a built-in route), see [Install on Kubernetes](../installation/kubernetes.mdx).
+
+## Send the browser to the login page
+
+By default, an unauthenticated request gets `401`. Since gateway 2026.1.0, a route can send a **browser** to its login page instead:
+
+```yaml
+    - id: uxopian-ai
+      # ...
+      login-url: https://flowerdocs.example.com/gui/login
+      login-redirect-param: redirect
+```
+
+| Request | Answer |
+|---|---|
+| Page loaded by the browser (`Accept` lists `text/html`), not authenticated or session expired, on a route with `login-url` | `302` to `login-url` |
+| API or `fetch` call, route without `login-url`, path served by no route | `401`, as before |
+| Authenticated, but without the required role | `403`, as before |
+
+With `login-redirect-param`, the gateway adds `?<param>=<path and query of the request>` to the login URL, for example `https://flowerdocs.example.com/gui/login?redirect=/gui/gateway/uxopian-ai/admin`. The value is a path, relative to the public origin of the gateway, not a full URL.
 
 ## Debug logging
 
