@@ -11,7 +11,7 @@ Use a code module for what is too small to justify a Java plugin: reformat a val
 ```mermaid
 flowchart LR
     Admin["Admin console<br/>Code modules"] -->|"save draft, publish"| Index[("code_modules<br/>(OpenSearch)")]
-    Plan["Plan node<br/>DIRECT_TOOL"] --> Catalog["ToolCatalog"]
+    Plan["Plan node<br/>TOOL"] --> Catalog["ToolCatalog"]
     Agent["Agent"] --> Catalog
     Chat["Chat<br/>(exposeInChat)"] --> Catalog
     Catalog -->|"published version<br/>+ imports"| Sandbox["uxopian-code-sandbox"]
@@ -72,7 +72,7 @@ exports.run = function (input) {
 | `log(value)` | Writes to the service log at INFO level and to the tool-call trace (`logs`, 50 lines of 500 characters at most), which the plan run detail shows |
 | `ai.context()` | Returns the user (id, roles, locale), the tenant, the provider, the usage profile, the conversation, the request and the plan run that triggered the call. It never returns the user's token |
 
-A code module cannot call other tools. What it returns becomes the tool result: the output of a `DIRECT_TOOL` node, or the text the LLM reads.
+A code module cannot call other tools. What it returns becomes the tool result: the output of a `TOOL` node, or the text the LLM reads.
 
 Limits checked when you save: 256 Ki characters of code, 20 tags, 30 parameters, 20 imports. A module cannot import itself, and an import cycle is refused.
 
@@ -105,7 +105,7 @@ Switch on **Call it as a tool** to add the tool section:
 
 A code tool is called from:
 
-- a **`DIRECT_TOOL` plan node**, by naming the module as `toolName`: no LLM is in the loop, the step is cheap and deterministic. See [Agentic plans](../understanding/agentic_plans.md);
+- a **`TOOL` plan node**, by naming the module as `toolName`: no LLM is in the loop, the step is cheap and deterministic. See [Agentic plans](../understanding/agentic_plans.md);
 - an **agent**, when the module is in its allowed tools;
 - the **chat**, when **Callable in chat** is on, and only within the tool permissions of the usage profile (allowed tools and tags).
 
@@ -131,7 +131,7 @@ Behind the **...** menu:
 
 - **Discard draft** drops the draft code and imports and returns to the published version. It is refused when there is no draft, and when the module was never published (delete it instead).
 - **Duplicate** starts a new module from this one.
-- **Delete code module** is refused while another module imports it, while a plan calls it through a `DIRECT_TOOL` node, or while an agent is allowed to use it. The **Used by** list names them.
+- **Delete code module** is refused while another module imports it, while a plan calls it through a `TOOL` node, or while an agent is allowed to use it. The **Used by** list names them.
 
 The list page shows each module's state: `PUBLISHED`, `DRAFT` (published with a pending draft) or `UNPUBLISHED`. It supports search, state, role (tool or not) and used-by filters, server side.
 
