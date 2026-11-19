@@ -209,7 +209,7 @@ The assistant emits the choices as a JSON block in its message content; the stan
 
 | Tool name | Description |
 |---|---|
-| `throwIfEmptyString` | Tag `flow`. Returns its `value` argument, or fails when it is blank. Placed in a [plan](./agentic_plans.md) as a `TOOL` node, it lets the plan branch: nodes set to run on success continue with the value, nodes set to run on error take the other path (see [execution condition](./agentic_plans.md#execution-condition-recovery-branches)). |
+| `throwIfEmptyString` | Tag `flow`. Returns its `value` argument, or fails when it is blank. Placed in a [plan](./agentic_plans.md) as a `TOOL` node, it lets the plan branch: nodes set to run on success continue with the value, nodes set to run on error take the other path (see [execution condition](./agentic_plans.md#conditions-recovery-branches)). |
 
 ## Code tools
 
