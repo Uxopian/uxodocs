@@ -37,8 +37,8 @@ flowchart TD
 Releases publish a self-contained ZIP named `ai-standalone-<version>-complete-package.zip`:
 
 ```text
-ai-standalone-2026.0.0/
-  ai-standalone-2026.0.0.jar   ← Spring Boot fat JAR
+ai-standalone-2026.1.0/
+  ai-standalone-2026.1.0.jar   ← Spring Boot fat JAR
   application.yaml                  ← Spring config (imports ./config/* files)
   config/
     application.yml
@@ -50,21 +50,21 @@ ai-standalone-2026.0.0/
     hazelcast.yml
     mcp-server.yml
   plugins/
-    flowerdocs-2026.0.0.jar     ← FlowerDocs integration
-    alfresco-2026.0.0.jar       ← Alfresco integration
-    filenet-2026.0.0.jar        ← FileNet integration
-    arender-2026.0.0.jar        ← ARender integration
-    files-2026.0.0.jar          ← File tools
-    interaction-2026.0.0.jar    ← Interactive choices tools
-    common-2026.0.0.jar         ← Shared tools (text chunking, etc.)
+    flowerdocs-2026.1.0.jar     ← FlowerDocs integration
+    alfresco-2026.1.0.jar       ← Alfresco integration
+    filenet-2026.1.0.jar        ← FileNet integration
+    arender-2026.1.0.jar        ← ARender integration
+    files-2026.1.0.jar          ← File tools
+    interaction-2026.1.0.jar    ← Interactive choices tools
+    common-2026.1.0.jar         ← Shared tools (text chunking, etc.)
   llm-clients/
-    llm-clients-2026.0.0.jar
+    llm-clients-2026.1.0.jar
 ```
 
 The `plugins/` directory is scanned at runtime by `IntegrationLoader`. Only the JARs present at startup are activated. Remove plugin JARs for integrations you do not use.
 
 :::tip[Download]
-**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.0.0/ai-standalone-2026.0.0-complete-package.zip" download="ai-standalone-2026.0.0-complete-package.zip">ai-standalone-2026.0.0-complete-package.zip</a>**
+**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/ai/ai-standalone/2026.1.0/ai-standalone-2026.1.0-complete-package.zip" download="ai-standalone-2026.1.0-complete-package.zip">ai-standalone-2026.1.0-complete-package.zip</a>**
 :::
 
 ### Configure LLM provider
@@ -132,7 +132,7 @@ export INTERNAL_AUTH_JWT_SECRET="$(openssl rand -base64 48)"
 From the extraction directory:
 
 ```bash
-java --enable-native-access=ALL-UNNAMED -Xmx768m -Xms512m -jar ai-standalone-2026.0.0.jar
+java --enable-native-access=ALL-UNNAMED -Xmx768m -Xms512m -jar ai-standalone-2026.1.0.jar
 ```
 
 The service starts on port `8080` by default. Override with `UXOPIAN_AI_PORT`.
@@ -164,7 +164,7 @@ uxopian-gateway-<version>/
 Providers are scanned from the `provider/` directory at runtime by `AuthProviderLoader`. Remove provider JARs that are not needed.
 
 :::tip[Download]
-**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/gateway/standalone/2026.0.0/standalone-2026.0.0-complete-package.zip" download="standalone-2026.0.0-complete-package.zip">standalone-2026.0.0-complete-package.zip</a>**
+**<a href="https://artifactory.arondor.cloud/artifactory/arondor-release/com/uxopian/gateway/standalone/2026.1.0/standalone-2026.1.0-complete-package.zip" download="standalone-2026.1.0-complete-package.zip">standalone-2026.1.0-complete-package.zip</a>**
 :::
 
 ### Configure routes
