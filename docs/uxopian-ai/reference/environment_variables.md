@@ -39,6 +39,10 @@ All environment variables accepted by `uxopian-ai` and `uxopian-gateway`. Variab
 | `OPENSEARCH_SCHEME` | `http` | Connection scheme (`http` or `https`) |
 | `OPENSEARCH_USERNAME` | (empty) | OpenSearch username (if auth enabled) |
 | `OPENSEARCH_PASSWORD` | (empty) | OpenSearch password (if auth enabled) |
+| `OPENSEARCH_INDEX_AUTO_EXPAND_REPLICAS` | `0-1` | Since 2026.1.0. Replicas of the indices created from now on. Empty: one fixed replica |
+| `OPENSEARCH_MAX_CONNECTIONS` | `100` | Since 2026.1.0. Connection pool size |
+| `OPENSEARCH_INDEX_SHARDS` | (empty) | Since 2026.1.0. Shards per index at creation, e.g. `plan_run_nodes=3,plan_runs=3` |
+| `OPENSEARCH_ASYNC_TRANSLOG_INDEXES` | (empty) | Since 2026.1.0. Indices written with an asynchronous translog, e.g. `plan_runs,plan_run_nodes` |
 
 ### LLM providers
 
@@ -72,10 +76,11 @@ The limits and the retention of the files sent to models (`llm.inline.max-size`,
 
 | Variable | Default | Description |
 |---|---|---|
-| `RENDITION_BASE_URL` | (empty) | ARender base URL. Required if the ARender plugin is deployed. Also relayed at `<app>/rendition/` for the human review screen. |
+| `RENDITION_BASE_URL` | (empty) | ARender base URL. Required if the ARender plugin is deployed. Also relayed at `<app>/rendition/` for the human review screen. Since 2026.1.0, a gateway route can replace it for its requests with the `ARENDER_ENDPOINT` attribute. |
 | `FILECONNECTOR_FILESYSTEM_ROOT` | (empty — connector off) | Root folder of the filesystem file connector (`<root>/<tenant>/`). The application fails to start if it is not a readable and writable folder. Required to accept `persist: true` attachments. |
 | `FILECONNECTOR_FILESYSTEM_ALLOWEDEXTENSIONS` | `pdf,png,jpg,jpeg,tif,tiff` | Extensions the filesystem connector accepts (comma-separated) |
-| `FD_WS_URL` | (empty) | FlowerDocs core web service URL (e.g. `http://<flowerdocs-endpoint>/core/`). Required if the FlowerDocs plugin is deployed. |
+| `FILECONNECTOR_FILESYSTEM_RENDITIONROOT` | (empty) | Since 2026.1.0. Folder where the ARender rendition broker mounts the same documents, so that ARender reads them instead of receiving an upload |
+| `FD_WS_URL` | (empty) | FlowerDocs core web service URL (e.g. `http://<flowerdocs-endpoint>/core/`). Required if the FlowerDocs plugin is deployed. Since 2026.1.0, a gateway route can replace it for its requests with the `FLOWERDOCS_ENDPOINT` attribute. |
 | `ALFRESCO_BASE_URL` | (empty) | Alfresco REST API v1 base URL. Required if the Alfresco plugin is deployed (via `PLUGINS_TOOLS_ENABLED_TAGS=alfresco,…`). |
 | `ALFRESCO_LEGACY_BASE_URL` | (auto-derived) | Base URL for Alfresco legacy Web Script endpoints. Auto-derived from `ALFRESCO_BASE_URL` when not set (e.g., `https://host/alfresco-api` → `https://host/alfresco`; `https://host/alfresco/api` → `https://host/alfresco/s`). Set explicitly only if the auto-derivation does not match your deployment. |
 | `ALFRESCO_CMM_ENABLED` | `false` | Enable Alfresco Custom Content Model lookup. When disabled, the LLM sees only the built-in `cm:*` system properties. |
@@ -105,7 +110,19 @@ Used by the admin-managed [scripts](../admin/managing_scripts.md) feature (2026.
 
 | Variable | Default | Description |
 |---|---|---|
-| `app.security.secret-key` | (dev default) | AES/GCM encryption key for stored API secrets. Set a unique value in production. |
+| `APP_SECURITY_SECRET_KEY` | (built-in key) | AES/GCM key that encrypts the stored LLM provider secrets and, since 2026.1.0, the user token kept with a plan run. Base64 of 16, 24 or 32 bytes (`openssl rand -base64 32`); any other value stops the startup. Unset, a public built-in key is used and a warning is logged: set your own in production, the same on every replica. |
+| `APP_SECURITY_PREVIOUS_SECRET_KEY` | (empty) | Since 2026.1.0. The former key, still accepted for decryption. When you set your first key, put the built-in one here: `RGFucyBsZSBkb3V0ZSwgcmVib290Li4u`. |
+
+### Agentic plans
+
+Since 2026.1.0. The upper-case forms of the [`agentic.*` properties](./configuration.md#agentic-plan-engine), without dashes. The most useful:
+
+| Variable | Default | Description |
+|---|---|---|
+| `AGENTIC_ROLE` | `both` | `both`, `broker` or `worker` |
+| `AGENTIC_SLOTS` | `1024` | Nodes a replica runs at once |
+| `AGENTIC_RUNVALIDITYMINUTES` | `1440` | Validity of a run when its plan sets none. `0`: no expiry |
+| `AGENTIC_FANOUTMAXPARALLELELEMENTS` | `32` | Fan-out elements run at once by default |
 
 ### MCP (Model Context Protocol)
 
@@ -139,7 +156,7 @@ In the gateway `gateway-application.yaml`, the URIs for backend services are har
 
 | Variable | Default | Description |
 |---|---|---|
-| `OPENSEARCH_VERSION` | `3.0.0` | OpenSearch image version (used in compose `.env`) |
+| `OPENSEARCH_VERSION` | `3.6.0` | OpenSearch image version (used in compose `.env`) |
 | `DISABLE_SECURITY_PLUGIN` | — | Set to `true` to disable OpenSearch security plugin (development only) |
 | `DISABLE_INSTALL_DEMO_CONFIG` | — | Set to `true` to skip demo config installation |
 | `discovery.type` | — | Set to `single-node` for single-node deployments |
