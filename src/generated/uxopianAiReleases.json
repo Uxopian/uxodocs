@@ -1,5 +1,13 @@
 [
   {
+    "version": "2026.1.0",
+    "majorVersion": "2026",
+    "date": "2026-11-18",
+    "description": "A rebuilt plan engine with child runs, partial fan-out, budgets and limits; a review queue with dates, archive, delete and a per-task export; per-client gateway routes; and an in-place upgrade from 2026.0.0.",
+    "latest": true,
+    "slug": "release-note-2026.1.0"
+  },
+  {
     "version": "2026.0.0-ft5",
     "majorVersion": "2026",
     "date": "2026-08-04",
@@ -44,7 +52,7 @@
     "majorVersion": "2026",
     "date": "2026-10-24",
     "description": "General availability of 2026.0.0: Usage Profiles, code modules, human review of extracted fields, document and PDF inputs, paginated admin APIs, mandatory network policy and internal auth, and a redesigned admin console.",
-    "latest": true,
+    "latest": false,
     "slug": "release-note-2026.0.0"
   }
 ]

@@ -181,7 +181,7 @@ const config: Config = {
                 routeBasePath: "docs/uxopian-ai",
                 sidebarPath: require.resolve("./sidebars_uxopian_ai.ts"),
                 lastVersion: "current",
-                versions: { current: { label: "v2026.0.0" } },
+                versions: { current: { label: "v2026.1.0" } },
                 showLastUpdateTime: true,
             },
         ],

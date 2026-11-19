@@ -33,7 +33,7 @@ flowchart LR
 *Figure: Quick Prompt opens a side panel of context-relevant prompts; selecting one streams an answer.*
 
 - A **toggle button** opens the panel from the host application's UI.
-- The panel lists the prompts that apply to the current screen, **grouped by category** and **ordered by priority**.
+- The panel lists the prompts that apply to the current screen, **grouped by category** and **ordered by priority**, highest first (since 2026.1.0).
 - Selecting a prompt runs it against the captured context and **streams** the answer.
 - The panel keeps a **conversation history** (searchable), and supports copy, feedback, retry, and speech-to-text input.
 - It can be **docked, dragged as a floating window, resized, or popped out** as a browser Picture-in-Picture window.

@@ -376,7 +376,7 @@ services:
   # Pre-built image pulled from the registry — no local build needed.
   # Not exposed directly — accessed through the gateway at /share/uxopian-ai/
   uxopian-ai:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.0.0}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-ai:${UXOPIAN_VERSION:-2026.1.0}
     container_name: uxopian-ai
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m
@@ -409,7 +409,7 @@ services:
   # Pre-built image pulled from the registry — no local build needed.
   # Exposes uxopian-ai at /share/uxopian-ai/ — validates Alfresco Share sessions.
   gateway-service:
-    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.0.0}
+    image: ${REGISTRY:-artifactory.arondor.cloud:5001}/uxopian-gateway:${UXOPIAN_VERSION:-2026.1.0}
     container_name: gateway-service
     environment:
       - JAVA_OPTS=-Xmx768m -Xms512m

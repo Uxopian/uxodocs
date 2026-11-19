@@ -73,6 +73,8 @@ A Thymeleaf template editor with auto-completion. The editor fetches completion 
 
 Since 2026.0.0-ft4, the editor also autocompletes the **context variables** available to [Quick Prompt](../understanding/quick_prompt.md) templates. Typing inside a `[[${ … }]]` expression suggests the root variables (`tenant`, `user`, `documents`, `tasks`, `folders`, `injected`, `capabilities`), their object properties after a dot (e.g. `${user.` → `username`, `roles`, …), and array-item attributes (e.g. `${documents[0].` → `title`, `properties`, `tags`, …). Each suggestion shows its type and a short description.
 
+Since 2026.1.0, a helper call shows in the editor and the preview as a readable label, for example *Text of document 1 (FlowerDocs)*, *Page 2 of document 1 as an image (ARender)* or *Summary of document 1*.
+
 ### Model card
 
 | Setting | Description |
@@ -106,7 +108,7 @@ Since 2026.0.0-ft4, this card controls whether and how the prompt appears in the
 | Enabled | Whether the prompt is offered in Quick Prompt |
 | Label | Short title shown on the prompt card |
 | Category | Free-form category used to group prompt cards. The selector suggests categories already in use across the tenant. |
-| Priority | Ordering of prompt cards (lower numbers show up first in Quick Prompt) |
+| Priority | Ordering of prompt cards: **higher numbers show up first** in Quick Prompt (since 2026.1.0; lower numbers came first before, so invert the priorities you set in 2026.0.0) |
 | Description | Markdown description shown to the user under the prompt card |
 | Display condition | A JavaScript expression evaluated client-side against the current context; the prompt is shown only when it returns `true` |
 

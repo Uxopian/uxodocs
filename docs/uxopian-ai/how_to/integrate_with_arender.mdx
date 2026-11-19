@@ -87,6 +87,8 @@ RENDITION_BASE_URL=http://dsb-service:8761
 RENDITION_BASE_URL=http://localhost:8761
 ```
 
+Since 2026.1.0, `RENDITION_BASE_URL` is only the default: a gateway route can name another ARender for its requests with the `ARENDER_ENDPOINT` attribute (see [Per-client routes](./configure_gateway_routes.md#per-client-routes-host-and-attributes)). For documents of the filesystem connector, ARender can also read the files from a shared folder instead of receiving an upload, see [Let ARender read the documents from a shared folder](./human_in_the_loop_review.md#let-arender-read-the-documents-from-a-shared-folder).
+
 If ARender runs in a separate Compose stack, `uxopian-ai` must join its Docker network:
 
 ```yaml

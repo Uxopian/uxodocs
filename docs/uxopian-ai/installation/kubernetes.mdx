@@ -72,7 +72,7 @@ Create a `values-ai.yaml` overriding the defaults for your environment:
 image:
   registry: artifactory.arondor.cloud:5001
   repository: uxopian-ai
-  tag: "2026.0.0"
+  tag: "2026.1.0"
 
 appConfig:
   openSearch:
@@ -140,6 +140,23 @@ networkPolicy:
 
 An empty list fails the render, so exposing the port is always explicit. Check that the namespace and labels match your gateway chart. The cluster needs a CNI that enforces NetworkPolicy.
 
+### Set your own encryption key (recommended)
+
+ai-standalone encrypts the stored LLM provider secrets, and the user token it keeps with a running plan, with an AES key. Without one, it uses a built-in key, which is public, and logs a warning. Since 2026.1.0 the chart can pass your own key (Base64 of 16, 24 or 32 bytes; any other value stops the startup):
+
+```bash
+openssl rand -base64 32 | tr -d '\n' > encryption.key
+printf 'RGFucyBsZSBkb3V0ZSwgcmVib290Li4u' > previous.key   # the built-in key, still used to read existing secrets
+
+helm upgrade --install ai-standalone ./component-ai \
+  -f values-ai.yaml \
+  --set-file appConfig.encryption.secretKey=encryption.key \
+  --set-file appConfig.encryption.previousSecretKey=previous.key \
+  --namespace <your-namespace>
+```
+
+The previous key is only read: each secret is encrypted again with the new key on its next save. The chart creates the Secret `<release>-encryption-key` only when a key is set; with `appConfig.encryption.existingSecret`, name your own Secret instead, carrying `APP_SECURITY_SECRET_KEY` and optionally `APP_SECURITY_PREVIOUS_SECRET_KEY`. Every replica uses the same key.
+
 ### Mount a document folder (optional)
 
 Two features write or read files from a folder shared with the pod: the filesystem connector (documents the review screen and tools read by path) and request attachments sent with `persist: true`. Both use the same root. Nothing mounted means the filesystem connector does not exist and `persist` is refused with `422 FILE_STORAGE_UNAVAILABLE`.
@@ -153,6 +170,18 @@ fileConnector:
 ```
 
 When `existingClaim` is set, the chart mounts the claim at `mountPath` and sets `FILECONNECTOR_FILESYSTEM_ROOT` and `FILECONNECTOR_FILESYSTEM_ALLOWEDEXTENSIONS`. Each tenant works under `<root>/<tenant>/`. Paths with `..`, absolute paths, hidden segments, extensions outside the list and symbolic links that leave the root are refused. The application **fails fast at startup** if the root is not a folder, not readable, or not writable by the application user (it writes a temporary probe file). Make the volume writable for the container user.
+
+Since 2026.1.0, ARender can read these documents from the same claim instead of receiving an upload for each one:
+
+1. Mount the claim **read-only** in the `rendition-broker` pod, for example at `/arender/uxoai-docs`.
+2. Add that folder to the broker's `authorized.paths`: `authorized.paths=/arender/tmp/,/arender/samples/,/arender/uxoai-docs/`.
+3. Set `fileConnector.filesystem.renditionRoot=/arender/uxoai-docs`. The chart renders it only when `existingClaim` is set.
+
+If ARender refuses a document, uxopian-ai uploads it as before.
+
+:::danger Keep the rendition broker inside the cluster
+The broker's REST API needs no authentication, and `authorized.paths` knows nothing about tenants: whoever reaches the broker can download the mounted files. Never expose it outside the cluster, and leave `DefaultURLParser` out of the viewer's `arender.server.url.parsers.beanNames`.
+:::
 
 ### Code sandbox (optional)
 
@@ -198,7 +227,7 @@ Create a `values-gateway.yaml`. The most important section is `files.application
 ```yaml
 image:
   repository: artifactory.arondor.cloud:5001/uxopian-gateway
-  tag: "2026.0.0"
+  tag: "2026.1.0"
 
 hazelcast:
   enabled: true
@@ -274,6 +303,19 @@ helm install gateway-service ./gateway-service \
   -f values-gateway.yaml \
   --namespace <your-namespace>
 ```
+
+## Upgrading from 2026.0.0
+
+2026.1.0 is an in-place upgrade: `helm upgrade` on the same OpenSearch keeps prompts, agents, plans, conversations, usage profiles, providers and review tasks. The fields the new version adds are added to the existing indices at startup.
+
+1. **Finish or stop the running plans.** Plan runs moved to new indices (`plan_runs`, `plan_run_nodes`, `plan_run_locks`, `plan_budget_counters`). The runs of 2026.0.0, in `plan_executions`, are neither resumed nor shown: you can delete those indices once you no longer need them.
+2. **Move the `agent.execution.*` properties** you may have set to `agentic.*` (see [Configuration — agentic plan engine](../reference/configuration.md#agentic-plan-engine)). The old ones are ignored.
+3. **Check your encryption key.** If you set `APP_SECURITY_SECRET_KEY`, it must be Base64 of 16, 24 or 32 bytes, or the pod does not start. If you did not, nothing changes; setting your own is recommended (see [Set your own encryption key](#set-your-own-encryption-key-recommended)).
+4. **Replicas:** they must form one Hazelcast cluster (plan signals go through it) and run in the same time zone.
+5. **Upgrade the gateway too.** uxopian-ai 2026.1.0 works behind gateway 2026.0.x, but the route attributes, the login redirect and host matching need gateway 2026.1.0.
+6. **Fast2 behind a multi-tenant Fast2:** since gateway 2026.0.1, users land in the tenant named in their Fast2 token instead of `fast2.tenant.id`. If the names differ, their earlier data stays in the old tenant.
+
+New indices get `auto_expand_replicas: 0-1`; existing indices keep their replica settings.
 
 ## Upgrading from 2026.0.0-ft5
 
@@ -354,7 +396,7 @@ Expected response:
 
 | Path | Description |
 |---|---|
-| `image.tag` | Image version — use `2026.0.0` |
+| `image.tag` | Image version — use `2026.1.0` |
 | `appConfig.openSearch.host` | OpenSearch service hostname |
 | `appConfig.openSearch.port` | OpenSearch port (default `9200`) |
 | `appConfig.externalUrls.appBaseUrl` | Public URL of the application (used in generated links) |
@@ -368,6 +410,10 @@ Expected response:
 | `fileConnector.filesystem.existingClaim` | PVC holding the documents. Empty = no filesystem connector |
 | `fileConnector.filesystem.mountPath` | Mount point and connector root (default `/data/documents`) |
 | `fileConnector.filesystem.allowedExtensions` | Comma-separated extensions the connector accepts |
+| `fileConnector.filesystem.renditionRoot` | Since 2026.1.0. Folder where the ARender rendition broker mounts the same claim. Empty = documents are uploaded to ARender |
+| `appConfig.encryption.secretKey` | Since 2026.1.0. AES key, Base64 of 16, 24 or 32 bytes. Empty = the built-in key. Pass it with `--set-file` |
+| `appConfig.encryption.previousSecretKey` | Since 2026.1.0. The former key, still read |
+| `appConfig.encryption.existingSecret` | Since 2026.1.0. Existing Secret carrying `APP_SECURITY_SECRET_KEY` and optionally `APP_SECURITY_PREVIOUS_SECRET_KEY` |
 | `appConfig.llm.defaultProvider` | Default LLM provider (`openai`, `anthropic`, `gemini`, etc.) |
 | `appConfig.llm.defaultModel` | Default model name |
 | `appConfig.llm.defaultPrompt` | ID of the default system prompt (default `basePrompt`) |
@@ -385,10 +431,14 @@ Expected response:
 
 | Path | Description |
 |---|---|
-| `image.tag` | Image version — use `2026.0.0` |
+| `image.tag` | Image version — use `2026.1.0` |
 | `hazelcast.javaOpts` | JVM flags (default `-Xmx256m -Xms256m`) |
 | `hazelcast.clusterName` | Hazelcast cluster name — keep distinct from ai-standalone |
-| `files.application.yaml` | Full gateway config: routes, providers, security rules |
+| `loginUrls.<route-id>.url` | Since 2026.1.0. Login page a browser is sent to on the built-in route `uxopian-ai`, `uxopian-ai-plugin` or `uxopian-ai-filenet` |
+| `loginUrls.<route-id>.redirectParam` | Since 2026.1.0. Query parameter that receives the path to come back to |
+| `routeAttributes.<route-id>.<KEY>` | Since 2026.1.0. Attributes signed for every request of a built-in route, e.g. `FLOWERDOCS_ENDPOINT`, `ARENDER_ENDPOINT` |
+| `extraRoutes` | Since 2026.1.0. Routes rendered before the built-in ones, for example one per client `host`. See [Per-client routes](../how_to/configure_gateway_routes.md#per-client-routes-host-and-attributes) |
+| `files.application.yml` | Full gateway config: routes, providers, security rules. Replacing it also drops `loginUrls`, `routeAttributes` and `extraRoutes`, which only exist in the chart's own file |
 
   </TabItem>
 </Tabs>
