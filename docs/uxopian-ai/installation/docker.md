@@ -33,7 +33,7 @@ flowchart TD
 | TLS | None | Handled by reverse proxy |
 
 :::note[No Java needed on the host]
-The `uxopian-ai` and `uxopian-gateway` images embed their own Temurin 25 runtime, already started with `--enable-native-access=ALL-UNNAMED`. No JDK is required on the Docker host. See [Requirements](./requirements.md#java-runtime).
+The `uxopian-ai` and `uxopian-gateway` images embed their own Temurin 25 runtime, already started with `--enable-native-access=ALL-UNNAMED` and, since 2026.1.0, with `-XX:-UseBASE64Intrinsics` (CVE-2026-114938). The images no longer contain APT: an image built from them cannot run `apt-get`. No JDK is required on the Docker host. See [Requirements](./requirements.md#java-runtime).
 :::
 
 ## Compose file structure
@@ -167,6 +167,17 @@ echo "INTERNAL_AUTH_JWT_SECRET=$(openssl rand -base64 48)" >> .env
 
 `INTERNAL_AUTH_JWT_ISSUER` (default `uxopian-gateway-internal`) must match the issuer the gateway uses. An assertion without an `exp` claim is refused.
 
+### Encryption key (recommended)
+
+uxopian-ai encrypts the stored LLM provider secrets, and the user token it keeps with a running plan, with `APP_SECURITY_SECRET_KEY`. Unset, a public built-in key is used and a warning is logged. To set your own (Base64 of 16, 24 or 32 bytes), keep the built-in one as the previous key so the secrets already stored stay readable:
+
+```bash
+echo "APP_SECURITY_SECRET_KEY=$(openssl rand -base64 32)" >> .env
+echo "APP_SECURITY_PREVIOUS_SECRET_KEY=RGFucyBsZSBkb3V0ZSwgcmVib290Li4u" >> .env
+```
+
+Pass both variables to the `uxopian-ai` service.
+
 ## Optional services and folders
 
 | Feature | What to add |
@@ -187,6 +198,10 @@ echo "INTERNAL_AUTH_JWT_SECRET=$(openssl rand -base64 48)" >> .env
 ## Hazelcast on a shared network
 
 Hazelcast auto-detection is always off. Outside Kubernetes, nodes find each other by multicast, which is on by default (`HAZELCAST_MULTICAST_ENABLED=true`). On a single node, or on a Docker network without multicast, set `HAZELCAST_MULTICAST_ENABLED=false`: it also stops a node from trying to join a cluster of another version that happens to run on the same machine. A deployment that silently relied on auto-detection no longer forms a cluster.
+
+## Upgrading from 2026.0.0
+
+Change `UXOPIAN_VERSION` to `2026.1.0` and restart the stack on the same OpenSearch: the data is kept. Before that, finish or stop the running plans, move any `agent.execution.*` property to `agentic.*`, and check that a custom `APP_SECURITY_SECRET_KEY` is Base64 of 16, 24 or 32 bytes. The full list is in [Upgrading from 2026.0.0](./kubernetes.mdx#upgrading-from-202600).
 
 ## Upgrading from 2026.0.0-ft5
 

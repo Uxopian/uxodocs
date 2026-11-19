@@ -118,6 +118,15 @@ server:
 export INTERNAL_AUTH_JWT_SECRET="$(openssl rand -base64 48)"
 ```
 
+### Set your own encryption key (recommended)
+
+Stored LLM provider secrets, and the user token kept with a running plan, are encrypted with `APP_SECURITY_SECRET_KEY` (Base64 of 16, 24 or 32 bytes). Unset, a public built-in key is used. Keep the built-in key as the previous one so the secrets already stored stay readable:
+
+```bash
+export APP_SECURITY_SECRET_KEY="$(openssl rand -base64 32)"
+export APP_SECURITY_PREVIOUS_SECRET_KEY="RGFucyBsZSBkb3V0ZSwgcmVib290Li4u"
+```
+
 ### Optional features
 
 | Feature | Setting |
@@ -137,7 +146,9 @@ java --enable-native-access=ALL-UNNAMED -Xmx768m -Xms512m -jar ai-standalone-202
 
 The service starts on port `8080` by default. Override with `UXOPIAN_AI_PORT`.
 
-When upgrading from 2026.0.0-ft5, follow [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5) for what to do with your data: no automatic migration is provided, so your data must be transferred.
+On Temurin 25, add `-XX:-UseBASE64Intrinsics` to the command (CVE-2026-114938, an out-of-bounds write in the Base64 decoding intrinsic, with no fixed Temurin build at the time of 2026.1.0), as the Docker images do. Do the same for the gateway.
+
+When upgrading from 2026.0.0, the upgrade is in place: see [Upgrading from 2026.0.0](./kubernetes.mdx#upgrading-from-202600) for the few points to check. When upgrading from 2026.0.0-ft5, follow [Upgrading from 2026.0.0-ft5](./kubernetes.mdx#upgrading-from-202600-ft5) for what to do with your data: no automatic migration is provided, so your data must be transferred.
 
 ---
 
