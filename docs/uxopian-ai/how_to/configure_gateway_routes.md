@@ -328,6 +328,7 @@ app:
 - **`host`** is compared with the `Host` header that reaches the gateway. The gateway does not read `X-Forwarded-Host`: your ingress or reverse proxy must keep the original `Host`.
 - **`attributes`** are signed into the `X-Gateway-Auth` assertion, as the `attrs` claim. uxopian-ai reads two of them: `FLOWERDOCS_ENDPOINT` replaces `ws.url` (`FD_WS_URL`), and `ARENDER_ENDPOINT` replaces `rendition.base-url` (`RENDITION_BASE_URL`), for the requests of that route. Both are URLs that uxopian-ai calls, not URLs for the browser. Without the attribute, uxopian-ai uses its own setting.
 - The gateway checks the attributes at startup and refuses to start when a rule is broken: at most 16 attributes, keys of at most 64 characters, values of at most 512 characters.
+- Two places still use uxopian-ai's own settings in 2026.1.0: the `/rendition/` relay of the review screen always goes to `rendition.base-url`, and the nodes of a [plan run](../understanding/agentic_plans.md) carry no route attribute. On a route that serves the review screen, do not set an `ARENDER_ENDPOINT` different from `RENDITION_BASE_URL`: the document would be sent to one ARender and displayed through the other.
 
 :::warning First match wins
 Routes are tried in order. A client route on `/gui/gateway/uxopian-ai/**` also catches the `ws/` and `filenet/` paths of that host, so it hides the built-in WebSocket and FileNet routes. If the client needs them, declare its own `ws/` and `filenet/` routes **before** its main route.
