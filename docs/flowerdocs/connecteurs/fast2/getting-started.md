@@ -13,10 +13,10 @@ we suggest you use the Fast2 documentary ETL published by Arondor.
 
 
 ## Extraction
-Use Fast2 to extract documents from FlowerDocs : [FlowerSource](/docs/fast2/catalog/source/#FlowerSource%20data-toc-label=%22FlowerSource%22)
+Use Fast2 to extract documents from FlowerDocs : [FlowerSource](/docs/fast2/catalog/source#FlowerSource)
 
 ## Injection
-Use Fast2 to inject documents into FlowerDocs : [FlowerInjector](/docs/fast2/catalog/loader/#FlowerInjector%20data-toc-label=%22FlowerInjector%22)
+Use Fast2 to inject documents into FlowerDocs : [FlowerInjector](/docs/fast2/catalog/loader#FlowerInjector)
 
 :::info
 This section does not describe how to install or configure the Fast2 product. For this, please refer to dedicated documentation

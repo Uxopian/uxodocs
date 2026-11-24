@@ -8,7 +8,7 @@ content_hash: 6aa278f6d7ce001a49c765ad93340be6b330a301dc7f4b90e305d5a23e09b1b3
 
 # Transformation tasks
 
-## AlterDocumentContent <small> - Create, embed, delete or update document content </small> {#AlterDocumentContent data-toc-label="AlterDocumentContent"}
+## AlterDocumentContent <small> - Create, embed, delete or update document content </small> {#AlterDocumentContent}
 
 Use this task to remove existing content of a processed document, add content to this document based on a dynamically resolved path, of even more.
 
@@ -27,7 +27,7 @@ Use this task to remove existing content of a processed document, add content to
 | Add content as annotation | `Boolean`     | Check this option to add the content as annotation for document. If disabled, the content will be added as regular content to the document.                                                                           |
 | Delete in-place content   | `Boolean`     | Override existing content with the new one, or remove the content attached to the document                                                                                                                            |
 
-## AlterDocumentFolder <small> - Change document folders classification </small> {#AlterDocumentFolder data-toc-label="AlterDocumentFolder"}
+## AlterDocumentFolder <small> - Change document folders classification </small> {#AlterDocumentFolder}
 
 <b>Optional settings</b>
 
@@ -40,7 +40,7 @@ Use this task to remove existing content of a processed document, add content to
 | Folder name to create              | Pattern              | Leave empty to not create folder                            |
 | Property map                       | `String/Pattern map` | <br/> <p> Ex/ targetProperty = `${variableName}`</p>        |
 
-## AlterDocumentProperties <small> - Alter multiple document properties </small> {#AlterDocumentProperties data-toc-label="AlterDocumentProperties"}
+## AlterDocumentProperties <small> - Alter multiple document properties </small> {#AlterDocumentProperties}
 
 Dive into the punnet to go and modify one or more properties carried by the document
 
@@ -50,7 +50,7 @@ Dive into the punnet to go and modify one or more properties carried by the docu
 | ------------ | -------------------- | --------------------------------------------------------------------------------------------------------------- |
 | Property map | `String/Pattern map` | List of the properties to modify. One line per property <br/> <p> Ex/ targetProperty = documentStringGetter</p> |
 
-## AlterPunnetProperty <small> - Create or update a punnet metadata </small> {#AlterPunnetProperty data-toc-label="AlterPunnetProperty"}
+## AlterPunnetProperty <small> - Create or update a punnet metadata </small> {#AlterPunnetProperty}
 
 Dive at the punnet level to add (or udpate) one or more properties carried by the punnet itself
 
@@ -66,7 +66,7 @@ Dive at the punnet level to add (or udpate) one or more properties carried by th
 | --------------- | -------- | --------------------------------------------------------------------------------- |
 | Target property | `String` | Name of the porperty to change. If not set or empty, Fast2 will skip the document |
 
-## ApplyDroolsTask <small> - Rules from Excel file </small> {#ApplyDroolsTask data-toc-label="ApplyDroolsTask"}
+## ApplyDroolsTask <small> - Rules from Excel file </small> {#ApplyDroolsTask}
 
 Apply functional and/or technical rules from an Excel file. Mainly used for mapping properties during complex migrations but can be used for simple data transformations.
 
@@ -85,7 +85,7 @@ Apply functional and/or technical rules from an Excel file. Mainly used for mapp
 | worksheet                     | `String`  |                                                                                                 |
 | Worksheets character encoding | `String`  | Inform Fast2 of character encoding used by the worksheet                                        | `Cp1252 `     |
 
-## CSVKeyValueParser <small> - CSV parser </small> {#CSVKeyValueParser data-toc-label="CSVKeyValueParser"}
+## CSVKeyValueParser <small> - CSV parser </small> {#CSVKeyValueParser}
 
 Parse a CSV content and put parsed values as document data
 
@@ -101,7 +101,7 @@ Parse a CSV content and put parsed values as document data
 | ------------------------ | -------- | ---------------------------------------- | ---------------------------------- |
 | Regex to parse each line | `String` | The regex used for parsing each document | `^\"?([^\"]*)\"?;\"?([^\"]*)\"?$ ` |
 
-## CSVQueryTask <small> - CSV Mapping: fetch data from a CSV file </small> {#CSVQueryTask data-toc-label="CSVQueryTask"}
+## CSVQueryTask <small> - CSV Mapping: fetch data from a CSV file </small> {#CSVQueryTask}
 
 Fetch data from CSV using a key and and extra data from the CSV columns.
 
@@ -114,7 +114,7 @@ Fetch data from CSV using a key and and extra data from the CSV columns.
 | Definition of the CSV to read | CsvDescriptor |                                                                          |
 | Skip exception                | `Boolean`     | Silent fail instead of throwing exceptions                               | `false `              |
 
-## ContentURLResolver <small> - Build absolute URL for content </small> {#ContentURLResolver data-toc-label="ContentURLResolver"}
+## ContentURLResolver <small> - Build absolute URL for content </small> {#ContentURLResolver}
 
 Simple Content URL renaming task : if target property (a list of string) is set, try to find the first path in this list which exists, converting this path to a fully-defined path including intermediary paths, corresponding documentId, extension, .... Otherwise, use Content URL included in Punnet as a wildcarded path (e.g. C:/input/_/_.xml), and resolve to a fully-defined path.
 
@@ -141,7 +141,7 @@ Simple Content URL renaming task : if target property (a list of string) is set,
 | findMimeType                              | `Boolean`     |                                                                                                                                                                                            |
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 
-## ConvertAndSaveIS <small> - Convert FileNet Image Services annotations </small> {#ConvertAndSaveIS data-toc-label="ConvertAndSaveIS"}
+## ConvertAndSaveIS <small> - Convert FileNet Image Services annotations </small> {#ConvertAndSaveIS}
 
 This task is used to perform the IS annotation conversion and its save into a target referential
 
@@ -165,7 +165,7 @@ This task is used to perform the IS annotation conversion and its save into a ta
 | Document layout DPI                      | `Float`            | Set here the layout DPI for the document                                                                               | `72.0 `                       |
 | Status for no-conversion annotation      | `String`           | Value when no annotation has been converted                                                                            | `9 `                          |
 
-## ConvertDateProperties <small> - Convert multiple document/folder date properties </small> {#ConvertDateProperties data-toc-label="ConvertDateProperties"}
+## ConvertDateProperties <small> - Convert multiple document/folder date properties </small> {#ConvertDateProperties}
 
 Easily convert date properties from one format to another.
 
@@ -198,7 +198,7 @@ With `worker.content.factory=remote`, this task deletes the worker's temporary c
 | Delete content entry                 | `Boolean` | Erase the URL entry from the document, in the punnet.                                                                                                                         | `true `       |
 | Exception when file does not exist   | `Boolean` | Throw an exception if file does not exist. Otherwise, silent fail                                                                                                             | `true `       |
 
-## EmbeddedDbQuery <small> - Query the embedded OpenSearch database </small> {#EmbeddedDbQuery data-toc-label="EmbeddedDbQuery"}
+## EmbeddedDbQuery <small> - Query the embedded OpenSearch database </small> {#EmbeddedDbQuery}
 
 Provide a campaign name, task name, and unique ID field to find a single punnet in the embedded OpenSearch database.
 
@@ -206,12 +206,12 @@ Provide a campaign name, task name, and unique ID field to find a single punnet 
 
 | Key                             | Type                                                                     | Description                                                                                                                                                                                                                                                  |
 | ------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Embedded Db connection provider | [EmbeddedDbConnectionProvider](credentials#EmbeddedDbConnectionProvider) |                                                                                                                                                                                                                                                              |
+| Embedded Db connection provider | [EmbeddedDbConnectionProvider](credentials.md#EmbeddedDbConnectionProvider) |                                                                                                                                                                                                                                                              |
 | Campaign prefix                 | `String`                                                                 | Generally Map name, but can be changed, so the part that comes before \_Run#                                                                                                                                                                                 |
 | Fields for OpenSearch query     | `String/Pattern map`                                                     | Fields used to construct OpenSearch query. Recommended to include at least the following 3: campaign.keyword, stepName.keyword, punnet.documents.documentId.keyword (or similar unique ID). The query should only return one punnet.                         |
 | Data to enrich current punnet   | `String/Pattern map`                                                     | List of data coming from the OpenSearch fetched punnet to add to the current punnet. Give a literal name such as edb-hash and an expression to fill the value like `${hash}` or `${property('file:content:digest')}` for properties with colons in the name. |
 
-## FileNet35ExtraSearchTask <small> - File Net search </small> {#FileNet35ExtraSearchTask data-toc-label="FileNet35ExtraSearchTask"}
+## FileNet35ExtraSearchTask <small> - File Net search </small> {#FileNet35ExtraSearchTask}
 
 Find your documents inside your File Net 3.5 instance.
 
@@ -221,7 +221,7 @@ Find your documents inside your File Net 3.5 instance.
 | --- | -------------------------------- | ----------- |
 |     | FileNet35ExtraSearchTaskSettings |             |
 
-## JSTransform <small> - JavaScript evaluation task </small> {#JSTransform data-toc-label="JSTransform"}
+## JSTransform <small> - JavaScript evaluation task </small> {#JSTransform}
 
 This task serves the purpose of modifying a punnet based on instructions embedded into a JavaScript snippet. The latter can be either directly pasted as task parameter, or read from a given path. If both these ways are used, the task will only consider the script pasted in.
 
@@ -245,7 +245,7 @@ The new engine is configured to be **fully backward-compatible**. All existing J
 | (Deprecated) Script file path | `String` | Path to JavaScript file with preloaded script. Deprecated: use script property instead.                                             |
 | Script engine                 | `String` | Script engine to use for the JS execution. Use 'nashorn' for JDK8. Other options are available, such as js, javascript, ecmascript. | `nashorn `    |
 
-## MailDeleter <small> - Remove mails </small> {#MailDeleter data-toc-label="MailDeleter"}
+## MailDeleter <small> - Remove mails </small> {#MailDeleter}
 
 This class allow you to connect to your mail box and select mails to delete. You can search among your mails by term or properties
 
@@ -253,14 +253,14 @@ This class allow you to connect to your mail box and select mails to delete. You
 
 | Key                           | Type                                           | Description                                                           | Default value    |
 | ----------------------------- | ---------------------------------------------- | --------------------------------------------------------------------- | ---------------- |
-| Mail connection provider      | [MailBoxProvider](credentials#MailBoxProvider) |                                                                       |
+| Mail connection provider      | [MailBoxProvider](credentials.md#MailBoxProvider) |                                                                       |
 | Maximum connection ttl        | `Long`                                         | Time in milliseconds                                                  | `60 `            |
 | Search term type              | `String`                                       |                                                                       | `Message-Id `    |
 | Pattern to evaluate property  | `String`                                       |                                                                       | `${Message-Id} ` |
 | Exception when mail not found | `Boolean`                                      | Throw an exception when the mail is not found. Otherwise, silent fail | `true `          |
 | Save message changes          | `Boolean`                                      |                                                                       | `true `          |
 
-## RenameDocumentProperties <small> - Rename multiple document properties </small> {#RenameDocumentProperties data-toc-label="RenameDocumentProperties"}
+## RenameDocumentProperties <small> - Rename multiple document properties </small> {#RenameDocumentProperties}
 
 Dive into the punnet to rename one or more properties carried by the document.
 
@@ -277,7 +277,7 @@ Dive into the punnet to rename one or more properties carried by the document.
 | Exception when property rename conflict | `Boolean` | Throws an exception if the target property exists, otherwise fails silently            | `true `       |
 | Exception when property is missing      | `Boolean` | Throws an exception if the property to rename does not exist on the document           | `true `       |
 
-## UpdateSharedObject <small> - Update a shared object value from its name </small> {#UpdateSharedObject data-toc-label="UpdateSharedObject"}
+## UpdateSharedObject <small> - Update a shared object value from its name </small> {#UpdateSharedObject}
 
 Use this task to change a system-wide configuration setting at runtime. Mainly used for dynamic campaign variables built as a shared object in Fast2. Be careful: only works with shared object set with Global scope
 
@@ -294,7 +294,7 @@ Use this task to change a system-wide configuration setting at runtime. Mainly u
 | -------------------- | --------- | ------------------------------------------- | ------------- |
 | Number of executions | `Integer` | Means the number of executions per campaign | `1 `          |
 
-## XSLTransform <small> - Apply a XSL transformation on XML Punnets </small> {#XSLTransform data-toc-label="XSLTransform"}
+## XSLTransform <small> - Apply a XSL transformation on XML Punnets </small> {#XSLTransform}
 
 With pretty much straight-forward task you can fine-tune any punnet or document metadata, or even the content targetted by the migration. Build your custom XSL file, and ask Fast2 to apply the changes onto the migration-related data
 

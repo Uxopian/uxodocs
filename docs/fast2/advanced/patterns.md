@@ -24,7 +24,7 @@ For a successful pattern recognition, only use the data known by Fast2, such as 
 
 :::
 
-## Patterns, what are they anyway ? {#context-and-definition data-toc-label="Context and definition" }
+## Patterns, what are they anyway ? {#context-and-definition}
 
 In Fast2, several data can be retrieved and accessed dynamically from a dedicated syntax which Fast2 supports for your convenience. This `${...}` syntax can be used in most of the configuration fields of the tasks composing your migration workflow.
 
@@ -92,9 +92,9 @@ From now on, if the 'missingData' is not fount either at the punnet or document 
 
 ### Access data of Fast2 objects
 
-Whether you need [subtypes](/docs/fast2/getting-started/overall-concepts#fast2-objects) properties for conditional routing or metadata elaboration, Fast2 gives you access to any data stored in the punnet.
+Whether you need [subtypes](/docs/fast2/getting-started/overall-concepts#-fast2-objects) properties for conditional routing or metadata elaboration, Fast2 gives you access to any data stored in the punnet.
 
-However targetting object is not always intuitive, so here are the different keywords required to access the [Fast2 objects](/docs/fast2/getting-started/overall-concepts#fast2-objects) :
+However targetting object is not always intuitive, so here are the different keywords required to access the [Fast2 objects](/docs/fast2/getting-started/overall-concepts#-fast2-objects) :
 
 | Keyword                | Description                                                                                                                                      | Examples                                                                                        |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |

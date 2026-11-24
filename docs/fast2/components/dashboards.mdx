@@ -145,7 +145,7 @@ However data manipulations in this tool are not always intuitive nor straight fo
 
 Several use-cases can be envisioned, we will only relate here the data conversion steps to go through given the widespread necessity of such a basic task.
 
-### Imports objects into the dashboards feature {#how-to-import data-toc-label="How to import"}
+### Imports objects into the dashboards feature {#how-to-import}
 
 This section will guide you through the import process of resources (such as indices, visualization as `.ndjson` files and others).
 
@@ -161,7 +161,7 @@ as shown on the screen-capture below :
 
 ![Dashboards : choose already existing Fast2 index](../assets/img/components/Dashboards-select-existing-index.png)
 
-### Resource #1 : Exception table {#visualisation-exception-table data-toc-label="Exception table"}
+### Resource #1 : Exception table {#visualisation-exception-table}
 
 :::info
 
@@ -191,12 +191,12 @@ To get started with this visualisation, or to add it to your existing dashboard,
 **<a href="/files/fast2/dashboards_exception-data-table.ndjson" download>Download this resource</a>**
 :::
 
-This resources can be imported as [explained previously](#imports-objects-into-the-dashboards-feature)
+This resources can be imported as [explained previously](#how-to-import)
 <br/>
 <br/>
 <br/>
 
-### Resource #2 : Campaign success ratio {#visualisation-campaign-ration data-toc-label="Ratio per campaign"}
+### Resource #2 : Campaign success ratio {#visualisation-campaign-ration}
 
 :::info
 
@@ -214,12 +214,12 @@ To get started with this visualisation, or to add it to your existing dashboard,
 **<a href="/files/fast2/dashboards_Campaign-success-ratio-per-day.ndjson" download>Download this visualization</a>**
 :::
 
-This resources can be imported as [explained previously](#imports-objects-into-the-dashboards-feature).
+This resources can be imported as [explained previously](#how-to-import).
 <br/>
 <br/>
 <br/>
 
-### Resource #3 : Processing speed per task {#visualisation-processing-speed data-toc-label="Processing speed"}
+### Resource #3 : Processing speed per task {#visualisation-processing-speed}
 
 :::info
 
@@ -237,7 +237,7 @@ To get started with this visualisation, or to add it to your existing dashboard,
 **<a href="/files/fast2/dashboards_processing_speed_per_task.ndjson" download>Download this visualization</a>**
 :::
 
-This resources can be imported as [explained previously](#imports-objects-into-the-dashboards-feature).
+This resources can be imported as [explained previously](#how-to-import).
 <br/>
 <br/>
 <br/>
@@ -427,15 +427,15 @@ This new dimension of data analysis via Kibana opens up way more possibilities, 
 
 ## <i class="fas fa-bug"></i> Troubleshooting
 
-### <i class="fas fa-plug"></i> Dashboards do not reach the database {#cannot-reach-db data-toc-label="Unable to access database"}
+### <i class="fas fa-plug"></i> Dashboards do not reach the database {#cannot-reach-db}
 
-Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database#port) for more details.
+Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database.md#port) for more details.
 
-### <i class="fas fa-network-wired"></i> Could not ping dashboard on port 1791 {#port-not-showing data-toc-label="Unable to access dashboards"}
+### <i class="fas fa-network-wired"></i> Could not ping dashboard on port 1791 {#port-not-showing}
 
 Make sure declaring your port in the 2 expected places. Head to the [port section](#ports) for more details.
 
-### <i class="fas fa-ban"></i> Connection refused when accessing the dashboards port {#connection-refused data-toc-label="Connection refused"}
+### <i class="fas fa-ban"></i> Connection refused when accessing the dashboards port {#connection-refused}
 
 In case you cannot reach the dashboards UI remotely, you might want to check several things :
 
@@ -465,10 +465,10 @@ The latter option gives access to the tool even when Fast2 is not running.
 
 Since the dashboards fetch data directly from the database, it is not possible to populate the visualizations with migration data if the database is not running as well.
 
-### <i class="fas fa-question-circle"></i> Dashboards do not reach the database {#cannot-reach-db data-toc-label="Unable to access database"}
+### <i class="fas fa-question-circle"></i> Dashboards do not reach the database {#cannot-reach-db}
 
-Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database#port) for more details.
+Make sure the database port has been correctly configured in the YAML file of the dashboards. Head to the [port section](database.md#port) for more details.
 
-### <i class="fas fa-question-circle"></i> Could not ping dashboard on port 1791 {#port-not-showing data-toc-label="Unable to access dashboards"}
+### <i class="fas fa-question-circle"></i> Could not ping dashboard on port 1791 {#port-not-showing}
 
 Make sure declaring your port in the 2 expected places. Head to the [port section](#ports) for more details.

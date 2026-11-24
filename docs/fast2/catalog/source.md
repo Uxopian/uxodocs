@@ -8,7 +8,7 @@ content_hash: f6614cf5758a762887457462e463c654953582619c4e02cb393dec8a489bd21e
 
 # Sources
 
-## AWSSource <small> - Complete extractor module from AWS S3 </small> {#AWSSource data-toc-label="AWSSource"}
+## AWSSource <small> - Complete extractor module from AWS S3 </small> {#AWSSource}
 
 This AWS extractor performs from a list of sources the extraction of your document content. Many options (suffix, prefix...) exist to optimally specify the documents you want to take into account
 
@@ -44,7 +44,7 @@ This AWS extractor performs from a list of sources the extraction of your docume
 
 
 
-## AlfrescoRestSource <small> - Alfresco extractor using Alfresco REST protocol </small> {#AlfrescoRestSource data-toc-label="AlfrescoRestSource"}
+## AlfrescoRestSource <small> - Alfresco extractor using Alfresco REST protocol </small> {#AlfrescoRestSource}
 
 This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco REST client) to retrieve documents and metadata into a given Alfresco instance
 
@@ -65,7 +65,7 @@ This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco RE
 
 
 
-## AlfrescoSource <small> - Alfresco extractor using CMIS technology </small> {#AlfrescoSource data-toc-label="AlfrescoSource"}
+## AlfrescoSource <small> - Alfresco extractor using CMIS technology </small> {#AlfrescoSource}
 
 Through an SQL query, this alfresco extractor will use the CMIS technology to fetch the content, the metadata and the annotations of your documents from a given Alfresco repository
 
@@ -90,7 +90,7 @@ Through an SQL query, this alfresco extractor will use the CMIS technology to fe
 
 
 
-## AzureBlobSource <small> - Complete extractor module from Azure Blob Storage </small> {#AzureBlobSource data-toc-label="AzureBlobSource"}
+## AzureBlobSource <small> - Complete extractor module from Azure Blob Storage </small> {#AzureBlobSource}
 
 This Azure Blob extractor performs from a list of sources the extraction of your document content. Many options (suffix, prefix...) exist to optimally specify the documents you want to take into account
 
@@ -119,7 +119,7 @@ This Azure Blob extractor performs from a list of sources the extraction of your
 
 
 
-## BlankSource <small> - Empty punnet generator </small> {#BlankSource data-toc-label="BlankSource"}
+## BlankSource <small> - Empty punnet generator </small> {#BlankSource}
 
 This source builds a punnet list containing one or more empty documents. Each document will only contain its identifier : documentId. This punnet can then be enriched by other steps in the processing chain.
 
@@ -138,7 +138,7 @@ This source builds a punnet list containing one or more empty documents. Each do
 
 
 
-## CMODSource <small> - Complete extraction module from a CMOD environment </small> {#CMODSource data-toc-label="CMODSource"}
+## CMODSource <small> - Complete extraction module from a CMOD environment </small> {#CMODSource}
 
 This task is used to extract documents in the Content-Manager On Demand ECM. One CMOD document is equivalent of 1 punnet of 1 document. Indexes, optional content and annotations will also be extracted. A WAL request is made to find the corresponding documentId in ImageServices. The metadata extraction is then carried out. Relative data are stored in each document of the punnet being processed.Note: All Image Services properties are exported systematically. This task is not a real source task. The documents to be extracted are identified by an BlankSource task generating a set of empty Punnets, i.e. containing only documents each bearing a document number (documentId) to extract.This task relies on the 'libCMOD.dll' library. This library must be in a directory of the Windows PATH. In the wrapper.conf or hmi-wrapper.conf file, activate the use of this library: wrapper.java.library.path. \<increment\> = ../libCMOD/dll32For the moment, only 32-bit libraries are configured
 
@@ -162,7 +162,7 @@ This task is used to extract documents in the Content-Manager On Demand ECM. One
 
 
 
-## CMSource <small> - Complete extractor from Content Manager solution </small> {#CMSource data-toc-label="CMSource"}
+## CMSource <small> - Complete extractor from Content Manager solution </small> {#CMSource}
 
 <b>Mandatory settings</b>
 
@@ -185,7 +185,7 @@ This task is used to extract documents in the Content-Manager On Demand ECM. One
 
 
 
-## CSVSource <small> - CSV file parser </small> {#CSVSource data-toc-label="CSVSource"}
+## CSVSource <small> - CSV file parser </small> {#CSVSource}
 
 This task can be used to start a migration from a CSV file. By default, the first line of your file is considered as the column headers. Whether the column values are surrounded with double-quotes (`\_`) or not, the CSVSource task will process either way. If you need to force the document ID for the whole process, use the metadata `documentId`.
 
@@ -224,7 +224,7 @@ This task can be used to start a migration from a CSV file. By default, the firs
 
 
 
-## DctmSource <small> - Complete extractor from Documentum </small> {#DctmSource data-toc-label="DctmSource"}
+## DctmSource <small> - Complete extractor from Documentum </small> {#DctmSource}
 
 This connector will extract basic information from the source Documentum repository. Since Documentum architecture involves particular port and access management, a worker should be started on the same server where Documentum is running.<br/><br/>Make sure to check the basic requirements at <a href="https://www.fast2.tech/documentation/setup-with-environment/documentum/">the setup for Documentum</a> on the official Fast2 documentation.
 
@@ -244,7 +244,7 @@ This connector will extract basic information from the source Documentum reposit
  | SSH client | [DctmSshClient](credentials.md#DctmSshClient) | SSH client used to establish the connection with the Documentum server |
 
 
-## EmbeddedDbSourceRest <small> - Perform requests on Fast2 database without any size restriction </small> {#EmbeddedDbSourceRest data-toc-label="EmbeddedDbSourceRest"}
+## EmbeddedDbSourceRest <small> - Perform requests on Fast2 database without any size restriction </small> {#EmbeddedDbSourceRest}
 
 This task is used to retrieve punnets from a previously executed campaign.
 
@@ -260,7 +260,7 @@ This task is used to retrieve punnets from a previously executed campaign.
 
 
 
-## FileNet35Source <small> - Complete extractor from FileNet 3.5 </small> {#FileNet35Source data-toc-label="FileNet35Source"}
+## FileNet35Source <small> - Complete extractor from FileNet 3.5 </small> {#FileNet35Source}
 
 The FileNet35Source retrieves existing documents from the FileNet P8 3.5 ECM through a query. This punnet will contain the metadata of the recovered document, its content and annotations
 
@@ -283,7 +283,7 @@ The FileNet35Source retrieves existing documents from the FileNet P8 3.5 ECM thr
 
 
 
-## FileNetSource <small> - Complete extractor from FileNet P8 </small> {#FileNetSource data-toc-label="FileNetSource"}
+## FileNetSource <small> - Complete extractor from FileNet P8 </small> {#FileNetSource}
 
 The FileNetSource source retrieves existing documents from the FileNet P8 5.x ECM through an SQL query. This punnet will contain the metadata of the recovered document, security information and parent folders.
 
@@ -312,7 +312,7 @@ The FileNetSource source retrieves existing documents from the FileNet P8 5.x EC
 
 
 
-## FlowerSource <small> - Flower extractor </small> {#FlowerSource data-toc-label="FlowerSource"}
+## FlowerSource <small> - Flower extractor </small> {#FlowerSource}
 
 Allows components extraction from Flower using JSON formatted Flower request.
 Components can be documents, folders, virtual folders or tasks.
@@ -327,7 +327,7 @@ Components can be documents, folders, virtual folders or tasks.
 
 
 
-## LocalSource <small> - A generic broker for wildcarded punnet lists </small> {#LocalSource data-toc-label="LocalSource"}
+## LocalSource <small> - A generic broker for wildcarded punnet lists </small> {#LocalSource}
 
 This class will search for local files to analyze them from a defined path
 
@@ -353,7 +353,7 @@ This class will search for local files to analyze them from a defined path
 
 
 
-## MailSource <small> - Complete extractor from mail box </small> {#MailSource data-toc-label="MailSource"}
+## MailSource <small> - Complete extractor from mail box </small> {#MailSource}
 
 The MailSource task extracts messages from an e-mail box. Each extracted message will correspond to a punnet, one document per punnet
 
@@ -383,7 +383,7 @@ If extraction is unexpectedly slow — hours for a few dozen messages, with the 
 | Search in Body                             | `String`      |                                                                                                                                                                                               |
 | Only unread messages                       | `Boolean`     |                                                                                                                                                                                               |
 
-## OpenTextSource <small> - OpenText extractor using OpenText REST protocol </small> {#OpenTextSource data-toc-label="OpenTextSource"}
+## OpenTextSource <small> - OpenText extractor using OpenText REST protocol </small> {#OpenTextSource}
 
 <b>Mandatory settings</b>
 
@@ -403,7 +403,7 @@ If extraction is unexpectedly slow — hours for a few dozen messages, with the 
 
 
 
-## RandomSource <small> - Random punnet generator </small> {#RandomSource data-toc-label="RandomSource"}
+## RandomSource <small> - Random punnet generator </small> {#RandomSource}
 
 Randomly produces punnets containing documents, metadata, content...
 
@@ -428,7 +428,7 @@ Randomly produces punnets containing documents, metadata, content...
 
 
 
-## SQLSource <small> - Complete extractor from SQL database </small> {#SQLSource data-toc-label="SQLSource"}
+## SQLSource <small> - Complete extractor from SQL database </small> {#SQLSource}
 
 Extract and map to punnet or document layout specified properties
 
@@ -453,4 +453,4 @@ Extract and map to punnet or document layout specified properties
 
 
 
-## ZipSource <small> -  </small> {#ZipSource data-toc-label="ZipSource"}
+## ZipSource <small> -  </small> {#ZipSource}
