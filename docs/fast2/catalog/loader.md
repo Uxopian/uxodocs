@@ -8,7 +8,7 @@ content_hash: 326e29429843883af6bf64fac575f604b5828e1fd72d91c48b0231a5d0bb86ff
 
 # Injectors
 
-## AlfrescoBulkImporter <small> - Perform a bulk import on Alfresco </small> {#AlfrescoBulkImporter data-toc-label="AlfrescoBulkImporter"}
+## AlfrescoBulkImporter <small> - Perform a bulk import on Alfresco </small> {#AlfrescoBulkImporter}
 
 Load documents and metadata into Alfresco without changing the current tree structure of those same documents. The good performances of such injection are restrained with the complexity of the tree-view setup
 
@@ -33,7 +33,7 @@ Load documents and metadata into Alfresco without changing the current tree stru
 | Copy files        | `Boolean` | Leave all documents in the source folder                                                             | `false `      |
 | Batch size        | `Integer` | Size of the batch to build for upload                                                                | `0 `          |
 
-## AlfrescoInjector <small> - Injection into Alfresco ECM using CMIS protocol </small> {#AlfrescoInjector data-toc-label="AlfrescoInjector"}
+## AlfrescoInjector <small> - Injection into Alfresco ECM using CMIS protocol </small> {#AlfrescoInjector}
 
 This task can be used to inject documents into Alfresco, using the CMIS protocol on top of HTTP. We rely on v1.0 of the opencmis module made available by Alfresco.
 
@@ -41,7 +41,7 @@ This task can be used to inject documents into Alfresco, using the CMIS protocol
 
 | Key                          | Type                                                                         | Description                                                                                                 |
 | ---------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Alfresco connection provider | [AlfrescoCMISConnectionProvider](credentials#AlfrescoCMISConnectionProvider) | This modules is responsible of the two-way communication between Fast2 and the designated Alfresco instance |
+| Alfresco connection provider | [AlfrescoCMISConnectionProvider](credentials.md#AlfrescoCMISConnectionProvider) | This modules is responsible of the two-way communication between Fast2 and the designated Alfresco instance |
 
 <b>Optional settings</b>
 
@@ -58,7 +58,7 @@ This task can be used to inject documents into Alfresco, using the CMIS protocol
 | Force update             | `Boolean`      | Throw an error if the document did not exist prior to the loading call                             |
 | Prevent duplicate        | `Boolean`      | Fast2 will throw an error if the document has already been injected                                |
 
-## AlfrescoRestInjector <small> - Alfresco injector using Alfresco REST protocol </small> {#AlfrescoRestInjector data-toc-label="AlfrescoRestInjector"}
+## AlfrescoRestInjector <small> - Alfresco injector using Alfresco REST protocol </small> {#AlfrescoRestInjector}
 
 This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco REST client) to load documents and metadata into a given Alfresco instance. <br /><br />To force the type of resource to create in the destination system, use the `nodeType` data into the document dataset. Default value is `cm:content`.
 
@@ -66,7 +66,7 @@ This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco RE
 
 | Key                          | Type                                                                         | Description |
 | ---------------------------- | ---------------------------------------------------------------------------- | ----------- |
-| Alfresco connection provider | [AlfrescoRESTConnectionProvider](credentials#AlfrescoRESTConnectionProvider) |             |
+| Alfresco connection provider | [AlfrescoRESTConnectionProvider](credentials.md#AlfrescoRESTConnectionProvider) |             |
 
 <b>Optional settings</b>
 
@@ -81,7 +81,7 @@ This task relies on the Alfresco public REST API (with v1.0.4 of the Alfresco RE
 | Overwrite documents when they already exist         | `Boolean` | Triggers the Alfresco overwrite feature, where the incoming document will replace an existing document having the same key.                                                                                                                                                                                                                                | `false `      |
 | Alfresco ID for update                              | `String`  | Specify here the Alfresco UUID of the document to update. The value will be resolved by Fast2, syntax `${...}` is supported. This value can start with 'workspace://SpacesStore/' <br/> <p> Ex/ `${property('alfcmis:nodeRef')}`</p>                                                                                                                       |
 
-## AwsInjector <small> - Injector into AWS S3 buckets </small> {#AwsInjector data-toc-label="AwsInjector"}
+## AwsInjector <small> - Injector into AWS S3 buckets </small> {#AwsInjector}
 
 Fast2 proposes this task to load your documents, metadata and more within designated S3 buckets. Both client- and server-side encryption are supported (v1.6 of AWS encyption SDK). This loader relies on v1.11.848 of AWS Java SDK. The uploaded file will be title according to the `name` metadata of the processed document.
 
@@ -90,7 +90,7 @@ Fast2 proposes this task to load your documents, metadata and more within design
 | Key                | Type                                                       | Description                                                     | Default value    |
 | ------------------ | ---------------------------------------------------------- | --------------------------------------------------------------- | ---------------- |
 | Destination bucket | `String`                                                   | The name of the bucket where the documents will be migrated to. | `fast2-default ` |
-| AWS credentials    | [AWSConnectionProvider](credentials#AWSConnectionProvider) | Must have granted AmazonS3FullAccess permission                 |
+| AWS credentials    | [AWSConnectionProvider](credentials.md#AWSConnectionProvider) | Must have granted AmazonS3FullAccess permission                 |
 
 <b>Optional settings</b>
 
@@ -104,7 +104,7 @@ Fast2 proposes this task to load your documents, metadata and more within design
 | ARN key               | `String`  | Key used for client-side encryption, before loading the document into S3. <br/> <p> Ex/ arn:aws:kms::111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</p>    |
 | Update only           | `Boolean` | Only changing metadata, content is left as is                                                                                                                               | `false `      |
 
-## AzureBlobInjector <small> - Injector into Azure Blob Storage containers </small> {#AzureBlobInjector data-toc-label="AzureBlobInjector"}
+## AzureBlobInjector <small> - Injector into Azure Blob Storage containers </small> {#AzureBlobInjector}
 
 Fast2 proposes this task to load your documents, metadata and more within designated Azure Blob Storage containers. This loader relies on Azure Storage Blob SDK v12.25.0. The uploaded file will be titled according to the `name` metadata of the processed document.
 
@@ -112,7 +112,7 @@ Fast2 proposes this task to load your documents, metadata and more within design
 
 | Key                            | Type                                                            | Description                                                                                                                                                          | Default value    |
 | ------------------------------ | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| Azure Blob Storage credentials | [AzureConnectionProvider](credentials#AzureConnectionProvider) | Must have appropriate permissions to create containers and upload blobs.                                                                                             |                  |
+| Azure Blob Storage credentials | [AzureConnectionProvider](credentials.md#AzureConnectionProvider) | Must have appropriate permissions to create containers and upload blobs.                                                                                             |                  |
 | Destination container          | `String`                                                        | The name of the container where the documents will be migrated to. This field supports pattern resolution (using punnet, document or campaign metadata). <br/> <p> Ex/ `${documentType}`</p> | `fast2-default ` |
 
 <b>Optional settings</b>
@@ -123,7 +123,7 @@ Fast2 proposes this task to load your documents, metadata and more within design
 | Destination folder | `String`  | The parent folder of the documents to inject. Supports pattern resolution. Leave empty for storing at the root of the container. If the document has the `azure_destination_folder` metadata, that value takes priority.    |               |
 | Destination name   | `String`  | The name/path of the blob file to inject. Supports pattern resolution. Leave empty to use the document's `name` metadata. If the document has the `azure_destination_name` metadata, that value takes priority. <br/> <p> Ex/ `${documentType}_${documentId}`</p> | |
 
-## CSVWriter <small> - CSV file writer </small> {#CSVWriter data-toc-label="CSVWriter"}
+## CSVWriter <small> - CSV file writer </small> {#CSVWriter}
 
 Use this task to write punnet and document related data into a CSV. You can specify the name of such file as well as the path where your want Fast2 to create and populate it.
 
@@ -155,7 +155,7 @@ CSVWriter folders behavior and limitations (v2025.5.0):
 
 :::
 
-## DctmInjector <small> - Injection into Documentum </small> {#DctmInjector data-toc-label="DctmInjector"}
+## DctmInjector <small> - Injection into Documentum </small> {#DctmInjector}
 
 Use this task to inject into Documentum ECM system. Fast2 embeds v6.7 of Documentum modules to take the most out of of this injection phase.
 
@@ -172,7 +172,7 @@ Use this task to inject into Documentum ECM system. Fast2 embeds v6.7 of Documen
 | Documentum configuration | [DctmConfiguration](helper.md#DctmConfiguration) | Customize here the Documentum details related to the instance you are planning to inject documents into. For more, refer to the appropriate section. |
 | SSH client | [DctmSshClient](credentials.md#DctmSshClient) | SSH client used to establish the connection with the Documentum server |
 
-## FileNet35Injector <small> - Injector for FileNet P8 3.5 </small> {#FileNet35Injector data-toc-label="FileNet35Injector"}
+## FileNet35Injector <small> - Injector for FileNet P8 3.5 </small> {#FileNet35Injector}
 
 Use this task to inject documents and data into a FileNet P8 3.5
 
@@ -180,7 +180,7 @@ Use this task to inject documents and data into a FileNet P8 3.5
 
 | Key                             | Type                                                                   | Description                                                                            |
 | ------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| The FileNet connection provider | [FileNet35ConnectionProvider](credentials#FileNet35ConnectionProvider) | Module to establish the connection with the destination FileNet infrastructure         |
+| The FileNet connection provider | [FileNet35ConnectionProvider](credentials.md#FileNet35ConnectionProvider) | Module to establish the connection with the destination FileNet infrastructure         |
 | ObjectStore name                | `String`                                                               | Name of the destination object-store where the documents and metadata will be injected |
 
 <b>Optional settings</b>
@@ -213,7 +213,7 @@ Use this task to inject documents and data into a FileNet P8 3.5
 | Force to perform update                        | `Boolean` | In case the document did not exist, an error is thrown                                                                                          |
 | WHERE clause for update                        | `String`  | Fast2 will update all documents matching the following WHERE statement <br/> <p> Ex/ [Id]=`${myFileNetDocumentId}`)</p>                         |
 
-## FileNetInjector <small> - Injector for FileNet </small> {#FileNetInjector data-toc-label="FileNetInjector"}
+## FileNetInjector <small> - Injector for FileNet </small> {#FileNetInjector}
 
 Use this task to inject documents and data into a FileNet. If all documents have the same UUID for the VersionSeries data provided in the task configuration, then the FileNet versionable object will be created based on the 'MajorVersionNumber' and 'MinorVersionNumber' properties. 'Custom objects' and 'Referential Containment Relationship' are supported. If a document is injected with a folder having a FileNet compatible ID, then the folder will be created with this UUID, if not existing already.
 
@@ -221,14 +221,14 @@ Use this task to inject documents and data into a FileNet. If all documents have
 
 | Key                             | Type                                                               | Description                                                                                                                                    |
 | ------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| The FileNet connection provider | [FileNetConnectionProvider](credentials#FileNetConnectionProvider) | The module establishing the connection to the remote FileNet instance. For more configuration about this object, refer to appropriate section. |
+| The FileNet connection provider | [FileNetConnectionProvider](credentials.md#FileNetConnectionProvider) | The module establishing the connection to the remote FileNet instance. For more configuration about this object, refer to appropriate section. |
 | ObjectStore name                | `String`                                                           | Name of the destination object-store where the documents and metadata will be injected                                                         |
 
 <b>Optional settings</b>
 
 | Key                                            | Type                                  | Description                                                                                                                                                                                                                                                                  | Default value        |
 | ---------------------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| Property Helper                                | [PropertyHelper](tool#PropertyHelper) |                                                                                                                                                                                                                                                                              |
+| Property Helper                                | [PropertyHelper](tool.md#PropertyHelper) |                                                                                                                                                                                                                                                                              |
 | Try using 'DocumentTitle' property             | `Boolean`                             | When filing a document into a folder, try to use the FileNet 'DocumentTitle' for the RelationShip name                                                                                                                                                                       |
 | Process multi-pages content as multi-content   | `Boolean`                             | Treat the content of multi-pages document as multi-content document in FileNet                                                                                                                                                                                               |
 | Keep original VersionSeries ID                 | `Boolean`                             | If true, Fast2 will create the multiversion documents with the VersionSeries ID specified in the 'VersionSeries metadata' configuration field.                                                                                                                               |
@@ -264,7 +264,7 @@ Use this task to inject documents and data into a FileNet. If all documents have
 | Force to perform update                        | `Boolean`                             | Force document Update action. In case the document did not exist, an error is thrown                                                                                                                                                                                         |
 | WHERE clause for update                        | `String`                              | The criteria which the documents to update will have to match <br/> <p> Ex/ [Id]=`${myFileNetDocumentId}`</p>   
 
-## FlowerDocsIndexPlainText <small> - Push input for plain-text search indexing in FlowerDocs </small> {#FlowerDocsIndexPlainText data-toc-label="FlowerDocsIndexPlainText"}
+## FlowerDocsIndexPlainText <small> - Push input for plain-text search indexing in FlowerDocs </small> {#FlowerDocsIndexPlainText}
 
 <b>Mandatory settings</b>
 
@@ -282,7 +282,7 @@ Use this task to inject documents and data into a FileNet. If all documents have
 | - | - | - |
 | FlowerDocs document ID | Pattern |  |                                                                                                                                                             |
 
-## FlowerInjector <small> - Fast2 injector module for FlowerDocs </small> {#FlowerInjector data-toc-label="FlowerInjector"}
+## FlowerInjector <small> - Fast2 injector module for FlowerDocs </small> {#FlowerInjector}
 
 Allows to load a component (document, task, folder or virtual folder) into Flower. Can load facts, document content and annotations
 
@@ -290,7 +290,7 @@ Allows to load a component (document, task, folder or virtual folder) into Flowe
 
 | Key                            | Type                                                                     | Description                                                                   |
 | ------------------------------ | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
-| FlowerDocs connection provider | [FlowerDocsConnectionProvider](credentials#FlowerDocsConnectionProvider) |                                                                               |
+| FlowerDocs connection provider | [FlowerDocsConnectionProvider](credentials.md#FlowerDocsConnectionProvider) |                                                                               |
 | Component category             | `String`                                                                 | FlowerDocs component category can be DOCUMENT, TASK, FOLDER or VIRTUAL_FOLDER |
 
 <b>Optional settings</b>
@@ -303,7 +303,7 @@ Allows to load a component (document, task, folder or virtual folder) into Flowe
 | Load component facts       | `Boolean` |                         | `false `      |
 | Mode update                | `Boolean` | Does not update content | `false `      |
 
-## MailSender <small> - Email sender task </small> {#MailSender data-toc-label="MailSender"}
+## MailSender <small> - Email sender task </small> {#MailSender}
 
 This task will send custom built emails to specific people or mailing list of your choice.
 
@@ -311,7 +311,7 @@ This task will send custom built emails to specific people or mailing list of yo
 
 | Key            | Type                                                 | Description                                                                                                                                                                                 |
 | -------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Email provider | [MailSenderProvider](credentials#MailSenderProvider) | The Fast2 module establishing the connection to the email server, from the account of a given user. For more about the configuration of the object, please refer to the appropriate section |
+| Email provider | [MailSenderProvider](credentials.md#MailSenderProvider) | The Fast2 module establishing the connection to the email server, from the account of a given user. For more about the configuration of the object, please refer to the appropriate section |
 
 <b>Optional settings</b>
 
@@ -322,7 +322,7 @@ This task will send custom built emails to specific people or mailing list of yo
 | Recipient address(es) | `String list` | The value of this field can be resolved by Fast2 (ie you can use dynamic values)                                                             |
 | Multi-line content    | `String list` | The content of the email. It can be composed with different paragraphs, please note Fast2 is not responsible for the text formatting though. |
 
-## MFilesInjector <small> - Module to inject into M-Files via its public REST API. Java 11 is required for this module. </small> {#MFilesInjector data-toc-label="MFilesInjector"}
+## MFilesInjector <small> - Module to inject into M-Files via its public REST API. Java 11 is required for this module. </small> {#MFilesInjector}
 
 Module to inject into M-Files via its public REST API. Java 11 is required for this module.
 
@@ -332,7 +332,7 @@ Module to inject into M-Files via its public REST API. Java 11 is required for t
 | --------------------------- | -------------------------- | ----------------------------------------------------------------- |
 | M-Files connection provider | `MFilesConnectionProvider` | Credentials to connect to M-Files remote system via its REST API. |
 
-## MobiusInjector <small> - Inject documents into your ASG Mobius system </small> {#MobiusInjector data-toc-label="MobiusInjector"}
+## MobiusInjector <small> - Inject documents into your ASG Mobius system </small> {#MobiusInjector}
 
 > ⚠️ **Deleted**: The `MobiusInjector` task is deleted and no longer available in Fast2 from v2025.0.0.
 
@@ -342,7 +342,7 @@ This task will upload documents and metadata onto Mobius, from version 8 up to v
 
 | Key                        | Type                                                             | Description                                                                                   |
 | -------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Mobius connection provider | [MobiusConnectionProvider](credentials#MobiusConnectionProvider) | The Fast2 module required to establish the communication with the destination Mobius instance |
+| Mobius connection provider | [MobiusConnectionProvider](credentials.md#MobiusConnectionProvider) | The Fast2 module required to establish the communication with the destination Mobius instance |
 
 <b>Optional settings</b>
 
@@ -350,14 +350,14 @@ This task will upload documents and metadata onto Mobius, from version 8 up to v
 | -------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | Properties to inject into Mobius | `String list` | List of names of the properties which will be added to the topic of the document. These properties have to be attached to the document |
 
-## MultiUpdateSQLQueryTask <small> - Update a database with several document data </small> {#MultiUpdateSQLQueryTask data-toc-label="MultiUpdateSQLQueryTask"}
+## MultiUpdateSQLQueryTask <small> - Update a database with several document data </small> {#MultiUpdateSQLQueryTask}
 
 <b>Mandatory settings</b>
 
 | Key          | Type                                                       | Description                                                                                          |
 | ------------ | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | WHERE clause | `String`                                                   | All matching rows will be updated. This field will be resolved by Fast2 before the task is executed  |
-| Query caller | [SQLQueryGenericCaller](credentials#SQLQueryGenericCaller) | This modules is responsible of establishing the connection between Fast2 and the designated database |
+| Query caller | [SQLQueryGenericCaller](credentials.md#SQLQueryGenericCaller) | This modules is responsible of establishing the connection between Fast2 and the designated database |
 | Table name   | `String`                                                   | The table of the row to update                                                                       |
 
 <b>Optional settings</b>
@@ -367,7 +367,7 @@ This task will upload documents and metadata onto Mobius, from version 8 up to v
 | Skip exception | `Boolean`     | Fast2 will either throw an error if no update action has been executed, or proceed to next document            | `true `       |
 | Data to update | `String list` | The list of all key-values pairs to update the given rows with <br/> <p> Ex/ targetColumnName/documentData</p> |
 
-## NuxeoInjector <small> - Nuxeo injector using Nuxeo REST API </small> {#NuxeoInjector data-toc-label="NuxeoInjector"}
+## NuxeoInjector <small> - Nuxeo injector using Nuxeo REST API </small> {#NuxeoInjector}
 
 This task load documents and metadata into a given Nuxeo instance using the Nuxeo REST API. If the document does not have any folder property, he will be injected in the workspace root folder. The documents **have to be in the correct version order** before entering the Nuxeo task. For Nuxeo to identify the versions as different, either the 'name' or the 'dc:description' data needs to be different.
 
@@ -375,7 +375,7 @@ This task load documents and metadata into a given Nuxeo instance using the Nuxe
 
 | Key                       | Type                                                           | Description |
 | ------------------------- | -------------------------------------------------------------- | ----------- |
-| Nuxeo connection provider | [NuxeoConnectionProvider](credentials#NuxeoConnectionProvider) |             |
+| Nuxeo connection provider | [NuxeoConnectionProvider](credentials.md#NuxeoConnectionProvider) |             |
 
 <b>Optional settings</b>
 
@@ -390,14 +390,14 @@ This task load documents and metadata into a given Nuxeo instance using the Nuxe
 | Replace document if already present        | `Boolean`     | Check this option to replace all versions of a document in Nuxeo, based on the data `documentId`. This feature acts like a replacement. If the document did not already exist, then it will be created from scratch. |
 | Attach content                             | `Boolean`     |                                                                                                                                                                                                                      | `true `       |
 
-## OpenTextInjector <small> - OpenText Content Server injector based on custom Rest API </small> {#OpenTextInjector data-toc-label="OpenTextInjector"}
+## OpenTextInjector <small> - OpenText Content Server injector based on custom Rest API </small> {#OpenTextInjector}
 
 <b>Mandatory settings</b>
 
 | Key                          | Type                                                   | Description                                                                                                                                                                                                     |
 | ---------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Attribute file path          | `String`                                               | OpenText category must be associated with their ids within the file. Fast2 will automatically translate the data name to the correct id specified by the file <br/> <p> Ex/ ../config/attributes.properties</p> |
-| OpenText credentials         | [OpenTextCredentials](credentials#OpenTextCredentials) |                                                                                                                                                                                                                 |
+| OpenText credentials         | [OpenTextCredentials](credentials.md#OpenTextCredentials) |                                                                                                                                                                                                                 |
 | Expected folder architecture | `String list`                                          |                                                                                                                                                                                                                 |
 | OpenText client              | OpenTextRestClient                                     |                                                                                                                                                                                                                 |
 
@@ -411,7 +411,7 @@ This task load documents and metadata into a given Nuxeo instance using the Nuxe
 | Version document if data exists          | `String`      | Fast2 will check if the data filled in this field for carrying the version and the 'nodeId' data are available at document level. If so, the document will be injected within OpenText and its version increased by one. A new data 'createdVersion' will be added to the document |
 | Ticket period                            | `Integer`     | Time in seconds between two ticket creation                                                                                                                                                                                                                                        | `60 `         |
 
-## SQLQueryTask <small> - Add data to documents in database </small> {#SQLQueryTask data-toc-label="SQLQueryTask"}
+## SQLQueryTask <small> - Add data to documents in database </small> {#SQLQueryTask}
 
 Simple task to query a SQL database and fill each Document data with results
 
@@ -429,7 +429,7 @@ Simple task to query a SQL database and fill each Document data with results
 | ----------------- | --------- | ---------------------------------------- | ------------- |
 | Reset target data | `Boolean` | Clean content when target already exists | `true `       |
 
-## SQLStatementTask <small> - Insert or updated database </small> {#SQLStatementTask data-toc-label="SQLStatementTask"}
+## SQLStatementTask <small> - Insert or updated database </small> {#SQLStatementTask}
 
 With this task, you will be able to perform any SQL instruction (such as insertions and updates) on any given table of the specified database
 
@@ -438,7 +438,7 @@ With this task, you will be able to perform any SQL instruction (such as inserti
 | Key           | Type                                                       | Description                                                                                                                                                                                                                     |
 | ------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | SQL statement | `String`                                                   | The statement you want Fast2 to run on the database. The syntax needs to match SQL standards. Use a ? to reference your annotation <br/> <p> Ex/ INSERT INTO table_name (doc_id, annotation) VALUES (`'${documentId}'`, ?);</p> |
-| Query caller  | [SQLQueryGenericCaller](credentials#SQLQueryGenericCaller) | This modules is responsible of establishing the connection between Fast2 and the designated database                                                                                                                            |
+| Query caller  | [SQLQueryGenericCaller](credentials.md#SQLQueryGenericCaller) | This modules is responsible of establishing the connection between Fast2 and the designated database                                                                                                                            |
 
 <b>Optional settings</b>
 
@@ -447,7 +447,7 @@ With this task, you will be able to perform any SQL instruction (such as inserti
 | Inject annotations | `Boolean` | Fast2 will either throw an error if the statement has not properly been executed, or fail silently |
 | Skip exceptions    | `Boolean` |                                                                                                    |
 
-## UpdateSQLQueryTask <small> - Update SQL database </small> {#UpdateSQLQueryTask data-toc-label="UpdateSQLQueryTask"}
+## UpdateSQLQueryTask <small> - Update SQL database </small> {#UpdateSQLQueryTask}
 
 This task will perform update instructions base on document data onto a given SQL database
 
@@ -455,7 +455,7 @@ This task will perform update instructions base on document data onto a given SQ
 
 | Key                     | Type                                                       | Description                                                                         |
 | ----------------------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| SQL connection provider | [SQLQueryGenericCaller](credentials#SQLQueryGenericCaller) | The module establishing the communication between Fast2 and the designated database |
+| SQL connection provider | [SQLQueryGenericCaller](credentials.md#SQLQueryGenericCaller) | The module establishing the communication between Fast2 and the designated database |
 | Name of the new column  | `String`                                                   | The name of the column which will be added to the row with the value to update      |
 | Table name              | `String`                                                   | The name of the SQL table on which all update statements will be performed          |
 

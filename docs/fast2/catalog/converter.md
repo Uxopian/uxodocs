@@ -8,7 +8,7 @@ content_hash: c796bd8217993e37f9645d377b32c199ac55819a5d954e6c78014f064b4262b9
 
 # Convertion tasks
 
-## ArchiveBuilder <small> - Punnet zipper </small> {#ArchiveBuilder data-toc-label="ArchiveBuilder"}
+## ArchiveBuilder <small> - Punnet zipper </small> {#ArchiveBuilder}
 
 Zip punnets into a zip file. A zip cannot contains a few punnets but documents carried by the punnet can be splitted into multiple zip files.
 
@@ -22,7 +22,7 @@ Zip punnets into a zip file. A zip cannot contains a few punnets but documents c
 | The compression level between 0 and 9 (included) | `Integer` | Use large number for stronger compression |
 | Also include annotation contents                 | `Boolean` |                                           | `false `      |
 
-## ConvertCMToP8 <small> - Convert CM annotations to FileNet P8 annotations. Input annotation format is INI from a JSON file. Only supports one document per punnet. Supported contents are PDF, TIFF and PNG files </small> {#ConvertCMToP8 data-toc-label="ConvertCMToP8"}
+## ConvertCMToP8 <small> - Convert CM annotations to FileNet P8 annotations. Input annotation format is INI from a JSON file. Only supports one document per punnet. Supported contents are PDF, TIFF and PNG files </small> {#ConvertCMToP8}
 
 Supported types : <ul><li>CMBAnnotationConstants.ANN_TEXT</li><li>CMBAnnotationConstants.ANN_ARROW</li><li>CMBAnnotationConstants.ANN_HIGHLIGHT</li><li>CMBAnnotationConstants.ANN_NOTE</li><li>CMBAnnotationConstants.ANN_RECT</li><li>CMBAnnotationConstants.ANN_LINE</li><li>CMBAnnotationConstants.ANN_STAMP</li><li>CMBAnnotationConstants.ANN_NOTE</li><li>CMBAnnotationConstants.ANN_MASK</li><li>Polygon</li><li>Freehand</li></ul>
 
@@ -36,7 +36,7 @@ Supported types : <ul><li>CMBAnnotationConstants.ANN_TEXT</li><li>CMBAnnotationC
 | Transform rectangle into highlight | `Boolean`                  | Rectangles does not support transparency. Turn them into highlight to keep tranparency | `false `      |
 | Watermarks on all pages            | `Boolean`                  | Apply watermark annotations on each pages of the document                              | `false `      |
 
-## ConvertDoc <small> - Document conversion </small> {#ConvertDoc data-toc-label="ConvertDoc"}
+## ConvertDoc <small> - Document conversion </small> {#ConvertDoc}
 
 Convert your documents using the ConvertDoc library.
 
@@ -59,7 +59,7 @@ Convert your documents using the ConvertDoc library.
 | Temp folder to copy source files to       | `String`      |                                                                                                                                                                                            |
 | Convert to PDFA                           | `Boolean`     | Convert your document to PDFA format                                                                                                                                                       | `false `          |
 
-## ConvertINIToXFDF <small> - Annotation converter from INI to XFDF </small> {#ConvertINIToXFDF data-toc-label="ConvertINIToXFDF"}
+## ConvertINIToXFDF <small> - Annotation converter from INI to XFDF </small> {#ConvertINIToXFDF}
 
 Convert ViewOne annotations to XML Form Data Format (XFDF). These operations are supported only for PDF and Tiff files. Content dimensions will be fetched to convert these annotations
 To improve the performances add these 3 parameters to the startup-worker.bat script before the -jar : <br />'-Dorg.ini4j.spi.IniBuilder=org.ini4j.spi.IniBuilder'<br />'-Djavax.xml.transform.TransformerFactory=com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl'<br />'-Dorg.ini4j.spi.IniParser=org.ini4j.spi.IniParser'<br /><br />Supported types : <br />- [TEXT]<br />- [RECTANGLE]<br />- [FREEHAND]
@@ -75,7 +75,7 @@ To improve the performances add these 3 parameters to the startup-worker.bat scr
 | Keep converted annotations                                                    | `Boolean`            | Do not interrupt punnets if at least one annotation has been converted. Punnets carrying annotations that haven't been converted will be flagged with a data named 'ToReplay' | `false `      |
 | Text annotation position                                                      | PageRelativePosition | Default position when an exception is thrown                                                                                                                                  |
 
-## ConvertISToFDF <small> - Annotation converter from IS to FDF </small> {#ConvertISToFDF data-toc-label="ConvertISToFDF"}
+## ConvertISToFDF <small> - Annotation converter from IS to FDF </small> {#ConvertISToFDF}
 
 Convert your old IS annoations to Form Data Format (FDF). FDF file are used to represents form data and annotations in a PDF file with key/value format. They usually contain more information than XFDFs
 
@@ -88,7 +88,7 @@ Convert your old IS annoations to Form Data Format (FDF). FDF file are used to r
 | IsAnnotation parser               | ParseISAnnotation              |                                                          |
 | FDF annotation adder              | FdfAnnotationAdder             |                                                          |
 
-## ConvertISToXFDF <small> - Annotation converter from IS to XFDF </small> {#ConvertISToXFDF data-toc-label="ConvertISToXFDF"}
+## ConvertISToXFDF <small> - Annotation converter from IS to XFDF </small> {#ConvertISToXFDF}
 
 Convert your old IS annoations to XML Form Data Format (XFDF). XFDF file are used to represents form data and annotations in a PDF file through an XML. They usually contain more information than XFDFs
 
@@ -102,7 +102,7 @@ Convert your old IS annoations to XML Form Data Format (XFDF). XFDF file are use
 | IsAnnotation parser               | ParseISAnnotation              |                                                          |
 | Popup height                      | `Float`                        | Sticky note default popup height                         | `30 `         |
 
-## ConvertLighterPdf <small> - PDF converter </small> {#ConvertLighterPdf data-toc-label="ConvertLighterPdf"}
+## ConvertLighterPdf <small> - PDF converter </small> {#ConvertLighterPdf}
 
 This class allows you to compress your PDF files in order to be lighter than original ones.
 
@@ -127,7 +127,7 @@ This class allows you to compress your PDF files in order to be lighter than ori
 | Target compression quality                | `Float`       |                                                                                                                                                                                            | `0.7 `        |
 | Target DPI                                | `Integer`     | Required target Image dpi                                                                                                                                                                  | `300 `        |
 
-## ConvertP8ToXFDF <small> - Annotation converter from IS to XFDF </small> {#ConvertP8ToXFDF data-toc-label="ConvertP8ToXFDF"}
+## ConvertP8ToXFDF <small> - Annotation converter from IS to XFDF </small> {#ConvertP8ToXFDF}
 
 Convert your old IS annotations to XML Form Data Format (XFDF). XFDF file are used to represents form data and annotations in a PDF file through an XML. They usually contain more information than XFDFs
 
@@ -148,7 +148,7 @@ Convert your old IS annotations to XML Form Data Format (XFDF). XFDF file are us
 | Date format                                    | `String`                   | Date format of your properties stored by annotations <br/> <p> Ex/ 2021-10-01T12:04:56.0000765+0200</p> | `yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ ` |
 | Highlight opacity                              | `Integer`                  | Overwrite the opacity in percent of highlights annotations <br/> <p> Ex/ 30</p>                         |
 
-## ConvertRipole <small> - Convert ripole files </small> {#ConvertRipole data-toc-label="ConvertRipole"}
+## ConvertRipole <small> - Convert ripole files </small> {#ConvertRipole}
 
 > ⚠️ **Deleted**: The `ConvertRipole` task is deleted and no longer available in Fast2 from v2025.0.0.
 
@@ -161,7 +161,7 @@ Convert ripoles files to PDF format.
 | Temp executable path   | `String` |             | `/tmp/temp_ ` |
 | Ripole executable path | `String` |             |
 
-## ConvertTalk <small> - Talk converter </small> {#ConvertTalk data-toc-label="ConvertTalk"}
+## ConvertTalk <small> - Talk converter </small> {#ConvertTalk}
 
 Convert your talk files to PDF using iText Library.
 
@@ -182,7 +182,7 @@ Convert your talk files to PDF using iText Library.
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                                | `true `        |
 | Font description                          | `String`      | Format as \{font family\} \{size\} \{style\} where font family is one of \{COURIER, HELVETICA, TIMES_ROMAN, SYMBOL, ZAPFDINGBATS\} and style is 0:normal 1:bold 2:italic 4:underline 8:strikethru |
 
-## ConvertText <small> - Text converter </small> {#ConvertText data-toc-label="ConvertText"}
+## ConvertText <small> - Text converter </small> {#ConvertText}
 
 <b>Optional settings</b>
 
@@ -200,7 +200,7 @@ Convert your talk files to PDF using iText Library.
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                                | `true `        |
 | Font description                          | `String`      | Format as \{font family\} \{size\} \{style\} where font family is one of \{COURIER, HELVETICA, TIMES_ROMAN, SYMBOL, ZAPFDINGBATS\} and style is 0:normal 1:bold 2:italic 4:underline 8:strikethru |
 
-## ConvertWangToXFDF <small> - Convert Wang annotations to XFDF </small> {#ConvertWangToXFDF data-toc-label="ConvertWangToXFDF"}
+## ConvertWangToXFDF <small> - Convert Wang annotations to XFDF </small> {#ConvertWangToXFDF}
 
 <b>Optional settings</b>
 
@@ -213,7 +213,7 @@ Convert your talk files to PDF using iText Library.
 | Skip annotation parse exceptions | `Boolean` |                                                                                                                                |
 |                                  | `Integer` |                                                                                                                                |
 
-## ConvertXFDFToP8 <small> - Annotation converter from XFDF to IS </small> {#ConvertXFDFToP8 data-toc-label="ConvertXFDFToP8"}
+## ConvertXFDFToP8 <small> - Annotation converter from XFDF to IS </small> {#ConvertXFDFToP8}
 
 Convert your XFDF annotations P8 format. This is mostly used to rollback from P8 to XFDF during complex migration.
 
@@ -223,7 +223,7 @@ Convert your XFDF annotations P8 format. This is mostly used to rollback from P8
 | --------------------- | --------- | -------------------------------------------------------- | ------------- |
 | Skip conversion error | `Boolean` | Do not throw an exception when a conversion is triggered | `true `       |
 
-## ConverterCMToXFDF <small> - Convert CM annotations to XFDF annotations </small> {#ConverterCMToXFDF data-toc-label="ConverterCMToXFDF"}
+## ConverterCMToXFDF <small> - Convert CM annotations to XFDF annotations </small> {#ConverterCMToXFDF}
 
 Supported types : <ul><li>CMBAnnotationConstants.ANN_TEXT</li><li>CMBAnnotationConstants.ANN_ARROW</li><li>CMBAnnotationConstants.ANN_HIGHLIGHT</li><li>CMBAnnotationConstants.ANN_STAMP</li><li>CMBAnnotationConstants.ANN_RECT</li></ul>
 
@@ -250,7 +250,7 @@ Supported types : <ul><li>CMBAnnotationConstants.ANN_TEXT</li><li>CMBAnnotationC
 |                    | `String`             |             |
 |                    | `Float`              |             |
 
-## DispatchingArchive <small> - Unzip files </small> {#DispatchingArchive data-toc-label="DispatchingArchive"}
+## DispatchingArchive <small> - Unzip files </small> {#DispatchingArchive}
 
 This class allow you to unzip the content of archive files. Multiple mime types are supported : application/zip, application/x-zip, application/x-zip-compressed, application/x-rar-compressed, application/x-rar and application/java-archive. Tar or gz folders are not supported yet.
 
@@ -270,7 +270,7 @@ This class allow you to unzip the content of archive files. Multiple mime types 
 | Mime-type : Check document before content         | `Boolean`     | You can assume the file extension is accurate, or ask Fast2 to check the content encoding to identify more precisely the document mime-type. By default, Fast2 will check at content level | `false `      |
 | Process all contents                              | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 
-## Eml2Pdf <small> - Convert email to PDF </small> {#Eml2Pdf data-toc-label="Eml2Pdf"}
+## Eml2Pdf <small> - Convert email to PDF </small> {#Eml2Pdf}
 
 This class allow you to convert emails to a PDF format. Formats supported are application/msword, rfc822 and outlook.
 
@@ -295,7 +295,7 @@ This class allow you to convert emails to a PDF format. Formats supported are ap
 | Supported inline body mime-types          | `String list`        |                                                                                                                                                                                            |
 | Process all contents                      | `Boolean`            | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 
-## ExcelConvert <small> - Convert Excel to PDF </small> {#ExcelConvert data-toc-label="ExcelConvert"}
+## ExcelConvert <small> - Convert Excel to PDF </small> {#ExcelConvert}
 
 > ⚠️ **Deleted**: The `ExcelConvert` module is deleted and no longer available in Fast2 from v2025.0.0.
 
@@ -312,7 +312,7 @@ This class allow you to convert an Excel file to a PDF format.
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 | Supported mime-types                      | `String list` | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
 
-## GenericConvertDoc <small> - Convert from URL to PDF from its URL </small> {#GenericConvertDoc data-toc-label="GenericConvertDoc"}
+## GenericConvertDoc <small> - Convert from URL to PDF from its URL </small> {#GenericConvertDoc}
 
 This task will convert the content of any document into PDF format. All Fast2 needs is you to specify the URL/path of the initial document. The input file will be automatically resolved by the documents carried by the punnet. The ouput file path got his own field that can be used with a patternThe location of options are managed through an int value specifying the index within the cmd line starting to 0.
 
@@ -343,7 +343,7 @@ This task will convert the content of any document into PDF format. All Fast2 ne
 | Extension to append                       | `String`      | The extension to add to the original file name before any conversion. This value should not start with a dot (ex : html)                                                                   |
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 
-## HtmlCleanup <small> - HTML cleaner </small> {#HtmlCleanup data-toc-label="HtmlCleanup"}
+## HtmlCleanup <small> - HTML cleaner </small> {#HtmlCleanup}
 
 Utility Class to cleanup inconsistent HTML
 
@@ -358,7 +358,7 @@ Utility Class to cleanup inconsistent HTML
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 | Supported mime-types                      | `String list` | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
 
-## IdentifyImageFormat <small> - Detect image format using ImageMagick </small> {#IdentifyImageFormat data-toc-label="IdentifyImageFormat"}
+## IdentifyImageFormat <small> - Detect image format using ImageMagick </small> {#IdentifyImageFormat}
 
 Find automatically the image format with ImageMagick in command line. Several properties can be added and the assiociated command line filled int the property pattern field
 
@@ -374,7 +374,7 @@ Find automatically the image format with ImageMagick in command line. Several pr
 | ----------------- | -------- | ------------------------------------ |
 | identify.exe path | `String` | ImageMagick identify.exe path to use |
 
-## JaTiffMerger <small> - Merge tiff files </small> {#JaTiffMerger data-toc-label="JaTiffMerger"}
+## JaTiffMerger <small> - Merge tiff files </small> {#JaTiffMerger}
 
 From a tiff content punnet, merges all its subcontent merge together. All content must be in tiff format. If the subcontents are already lower than 2 images, the merge is cancelled.
 
@@ -389,7 +389,7 @@ From a tiff content punnet, merges all its subcontent merge together. All conten
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 | Supported mime-types                      | `String list` | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
 
-## JaTiffSplitter <small> - Tiff document splitter </small> {#JaTiffSplitter data-toc-label="JaTiffSplitter"}
+## JaTiffSplitter <small> - Tiff document splitter </small> {#JaTiffSplitter}
 
 <b>Optional settings</b>
 
@@ -405,7 +405,7 @@ From a tiff content punnet, merges all its subcontent merge together. All conten
 | Dispatch multi-pages tiff to a bunch of single-page tiff | `Boolean`    | Only the first one will be processed when source contains multiple multi-page tiffs                     | `false `             |
 | Minimum number of pages before dispatch errors           | `Integer`    |                                                                                                         | `1 `                 |
 
-## JaTiffWang <small> - Extract wang annotations from Tiff document </small> {#JaTiffWang data-toc-label="JaTiffWang"}
+## JaTiffWang <small> - Extract wang annotations from Tiff document </small> {#JaTiffWang}
 
 Creates one annotation file perf tiff page where annotations are found. A property is set to the annotation content to get back the page
 
@@ -417,7 +417,7 @@ Creates one annotation file perf tiff page where annotations are found. A proper
 | Fail if no annotation was found | `Boolean` |             |
 | Skip exceptions                 | `Boolean` |             |
 
-## MDOWriter <small> - Write punnet description to a MDO-format </small> {#MDOWriter data-toc-label="MDOWriter"}
+## MDOWriter <small> - Write punnet description to a MDO-format </small> {#MDOWriter}
 
 This task serializes document metadata in an MDO file format with a fixed length.
 
@@ -440,7 +440,7 @@ This task serializes document metadata in an MDO file format with a fixed length
 | MDO-format with internal content             | `Boolean` | Generate MDO-format document with internal content                                         | `false `      |
 | Data name containing original text content   | `String`  | If null text content isn't added to MDO file, internal content only                        |
 
-## MergeAllContents <small> - Merge multiple content </small> {#MergeAllContents data-toc-label="MergeAllContents"}
+## MergeAllContents <small> - Merge multiple content </small> {#MergeAllContents}
 
 Merge all contents of document from the first depth level. Can be used after Eml2Pdf task to merge header and body.
 
@@ -455,7 +455,7 @@ Merge all contents of document from the first depth level. Can be used after Eml
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 | Supported mime-types                      | `String list` | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
 
-## MergeAllMails <small> - Merge multiple mails </small> {#MergeAllMails data-toc-label="MergeAllMails"}
+## MergeAllMails <small> - Merge multiple mails </small> {#MergeAllMails}
 
 Merge mail header and body after a mail conversion
 
@@ -470,7 +470,7 @@ Merge mail header and body after a mail conversion
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 | Supported mime-types                      | `String list` | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
 
-## MergePdfBox <small> - PDF merger </small> {#MergePdfBox data-toc-label="MergePdfBox"}
+## MergePdfBox <small> - PDF merger </small> {#MergePdfBox}
 
 Merge your tiff files into PDF format using the PDFBox library (v1.2.1).
 
@@ -483,7 +483,7 @@ Merge your tiff files into PDF format using the PDFBox library (v1.2.1).
 | Ignore conversion exceptions   | `Boolean`     | Each exception during the conversion becomes a silent fail indexed in logs | `false `      |
 | Supported source mime types    | `String list` | List of all accepted mime types                                            |
 
-## OOConvert <small> - Convert office file to PDF </small> {#OOConvert data-toc-label="OOConvert"}
+## OOConvert <small> - Convert office file to PDF </small> {#OOConvert}
 
 > ⚠️ **Deleted**: The `OOConvert` module is deleted and no longer available in Fast2 from v2025.0.0.
 
@@ -517,7 +517,7 @@ Complete converter from office file to PDF format using OpenOffice / LibreOffice
 | Process all contents                       | `Boolean`                         | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `            |
 | Stop cmd for LibreOffice / OpenOffice      | `String`                          | Command to use to force LibreOffice or OpenOffice process to stop                                                                                                                          |
 
-## PdfAConverter <small> - Convert from PDF to PDF/A </small> {#PdfAConverter data-toc-label="PdfAConverter"}
+## PdfAConverter <small> - Convert from PDF to PDF/A </small> {#PdfAConverter}
 
 A PDF/A is a PDF file with some constraints to ensure its long time conservation. These constraints are described in ISO 19005. This task takes PDF files as input, and generated a PDF/A-`{1A, 1B, 2A, 2B, 3A, 3B}`.
 
@@ -527,7 +527,7 @@ A PDF/A is a PDF file with some constraints to ensure its long time conservation
 | ----------------------------- | -------- | ---------------------------------- | ------------- |
 | Expected pdf conformity level | `String` | If empty default level is PDF/A-1B | `1B `         |
 
-## PdfAnnotationRenderer <small> - Renders annotations into a new PDF document </small> {#PdfAnnotationRenderer data-toc-label="PdfAnnotationRenderer"}
+## PdfAnnotationRenderer <small> - Renders annotations into a new PDF document </small> {#PdfAnnotationRenderer}
 
 Requires itext-5.5.13, xmlworker-5.5.13 and jsoup-1.12.2 libs
 
@@ -548,7 +548,7 @@ Requires itext-5.5.13, xmlworker-5.5.13 and jsoup-1.12.2 libs
 |           | `String`            |             |
 | extraFont | `String/String map` |             |
 
-## PunnetXSLSerializer <small> - Export punnet metadata using XSL script </small> {#PunnetXSLSerializer data-toc-label="PunnetXSLSerializer"}
+## PunnetXSLSerializer <small> - Export punnet metadata using XSL script </small> {#PunnetXSLSerializer}
 
 Serialize a punnet to any file (CSV, JSON, XML, custom format) using an XSL stylesheet.
 
@@ -568,7 +568,7 @@ Serialize a punnet to any file (CSV, JSON, XML, custom format) using an XSL styl
 | Replace                 | `Boolean`           | Replace punnet documents by the new produced document (requires Append to be set)                                                                                                                                                                                                                                               | `false `      |
 | Encoding                | `String`            | Enter here your script file encoding.                                                                                                                                                                                                                                                                                           | `UTF-8 `      |
 
-## SanitizeTiff <small> - Tiff cleaner </small> {#SanitizeTiff data-toc-label="SanitizeTiff"}
+## SanitizeTiff <small> - Tiff cleaner </small> {#SanitizeTiff}
 
 Converts your tiff files to jpeg format.
 
@@ -581,7 +581,7 @@ Converts your tiff files to jpeg format.
 | Convert path                | `String`      |                                         | `convert -quiet ` |
 | Supported source mime types | `String list` |                                         |
 
-## SplitPdfItext <small> - PDF splitter </small> {#SplitPdfItext data-toc-label="SplitPdfItext"}
+## SplitPdfItext <small> - PDF splitter </small> {#SplitPdfItext}
 
 <b>Mandatory settings</b>
 
@@ -600,7 +600,7 @@ Converts your tiff files to jpeg format.
 | Process all contents                      | `Boolean`     | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 | Supported mime-types                      | `String list` | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
 
-## TesseractInvoker <small> - Transform your PDFs and images with text to make them searchable using OCR engine </small> {#TesseractInvoker data-toc-label="TesseractInvoker"}
+## TesseractInvoker <small> - Transform your PDFs and images with text to make them searchable using OCR engine </small> {#TesseractInvoker}
 
 Based on Tesseract solution, this task will parse each page of your images (TIFF, JPG and PNG) or PDF to extract text and create a new searchable PDF
 CCITT T.6 image compression is supported but not LZW compression\nBe careful if you are doing multi-document or multi-content : if names are identicals it will overwrite contents
@@ -628,7 +628,7 @@ CCITT T.6 image compression is supported but not LZW compression\nBe careful if 
 | Add file sizes                            | `Boolean`     | If true, add input and output file sizes in the data set                                                                                                                                                                 |
 | Allow enhanced orientation detection      | `Boolean`     | Only used if allow rotation is set to true. Enable the use of an enhanced rotation detection, thus giving more accurate results but with the downside of being slower. Activate it for low-quality images for example.   | `false `      |
 
-## Text2PDFConverter <small> - Convert Text file to PDF </small> {#Text2PDFConverter data-toc-label="Text2PDFConverter"}
+## Text2PDFConverter <small> - Convert Text file to PDF </small> {#Text2PDFConverter}
 
 Convert your text files into PDF format.
 
@@ -646,7 +646,7 @@ Convert your text files into PDF format.
 | Formatted page text converter             | FormattedPageTextConverter |                                                                                                                                                                                            |
 | Supported mime-types                      | `String list`              | Specify the list of all mime-types of documents which Fast2 will convert                                                                                                                   |
 
-## Tiff2PDFIText <small> - Converter from Tiff to PDF </small> {#Tiff2PDFIText data-toc-label="Tiff2PDFIText"}
+## Tiff2PDFIText <small> - Converter from Tiff to PDF </small> {#Tiff2PDFIText}
 
 This task uses the IText library to convert content of TIFF documents into PDF format
 
@@ -671,7 +671,7 @@ This task uses the IText library to convert content of TIFF documents into PDF f
 | Process all contents                      | `Boolean`       | Fast2 will either only focus on the first encountered content, or process them all                                                                                                         | `true `       |
 | imageSourceWidthProperty                  | `String`        |                                                                                                                                                                                            |
 
-## Tiff2PdfBox <small> - Convert TIFF to PDF </small> {#Tiff2PdfBox data-toc-label="Tiff2PdfBox"}
+## Tiff2PdfBox <small> - Convert TIFF to PDF </small> {#Tiff2PdfBox}
 
 This task converts TIFF images into PDF documents using the Apache PDFBox lib
 
@@ -685,7 +685,7 @@ This task converts TIFF images into PDF documents using the Apache PDFBox lib
 | Unsupported producers                   | `String list` | List of unsupported tiff software producers                                                                   |
 | Default DPI used for PDF transformation | `Integer`     |                                                                                                               | `200 `        |
 
-## WkHtmlToPdfConverter <small> - Converter from Html To PDF </small> {#WkHtmlToPdfConverter data-toc-label="WkHtmlToPdfConverter"}
+## WkHtmlToPdfConverter <small> - Converter from Html To PDF </small> {#WkHtmlToPdfConverter}
 
 This task will be used to convert HTML content into a PDF document. Fast2 embeds the wkhtmltopdf command-line utility in order to carry out this conversion.
 
