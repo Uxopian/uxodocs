@@ -1,0 +1,23 @@
+---
+viewer: horizon
+slug: /overview/horizon-readiness
+title: Is Horizon ready for my project?
+sidebar_position: 0.5
+---
+import {CoverageProfiles} from '@site/src/components/HorizonCoverage';
+import data from './horizon-coverage.json';
+
+# Is Horizon ready for my project?
+
+Find the use case closest to your project and read its verdict. Each card links to the matching features in the [Horizon feature coverage](./horizon-feature-coverage.mdx) table.
+
+- **Covered**: every feature planned for Horizon is available.
+- **Covered with limits**: part of the features are available, the others are on the roadmap. The card counts them.
+- **Not ready yet**: none of the features is available in Horizon yet. Keep the Classic viewer for it.
+- **New in a version**: the use case arrived in Horizon with that version.
+
+Features not planned for Horizon are left out of these verdicts. The detailed table lists them.
+
+<CoverageProfiles data={data} detailPath="/docs/arender-horizon/overview/horizon-feature-coverage/" />
+
+A project can mix use cases. If one of them is marked **Not ready yet**, check the features it needs in the [detailed table](./horizon-feature-coverage.mdx) before you choose.
