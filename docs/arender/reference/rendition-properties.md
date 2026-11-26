@@ -138,6 +138,7 @@ These properties configure REST providers used by ARender Horizon.
 | `registry.default-provider` | — | Default provider name when `X-Provider-ID` header is absent |
 | `registry.providers.<name>.base-url` | — | Base URL of the provider microservice |
 | `registry.providers.<name>.whitelisted-params` | — | Comma-separated parameter names used for document ID generation and request filtering |
+| `registry.providers.<name>.denied-permissions` | _(empty)_ | Since 2026.5.0. Permissions withdrawn from every user of the provider, whatever it grants. See [Permissions: Broker deny-list](/docs/arender-horizon/guides/features/permissions#broker-deny-list) |
 
 The `whitelisted-params` property serves two purposes:
 
@@ -153,6 +154,28 @@ REGISTRY_PROVIDERS_FILENET_WHITELISTED_PARAMS=objectStoreName,id,vsId,objectType
 REGISTRY_PROVIDERS_ALFRESCO_BASE_URL=http://alfresco-provider:8788
 REGISTRY_PROVIDERS_ALFRESCO_WHITELISTED_PARAMS=nodeRef,alf_ticket,user,versionLabel
 ```
+
+### Permissions, watermarks and redactions
+
+Since 2026.5.0, the broker enforces the [permissions](/docs/arender-horizon/guides/features/permissions) that providers grant on the documents they serve. Watermarking and redaction are always on; these properties tune how long their results are reused.
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `watermark.on-the-fly.route-ttl-ms` | `600000` | How long a viewing session keeps its view decision and its watermarked view copy. It is the time a revoked `VIEW_UNMARKED` or a changed view watermark takes to reach the page images. See [Watermarks](/docs/arender-horizon/guides/features/watermarks) |
+| `watermark.on-the-fly.build-timeout-ms` | `60000` | How long a request waits for a watermarked copy to be built (ms) |
+| `redaction.on-the-fly.route-ttl-ms` | `600000` | How long the broker reuses what it knows of a document's redactions. It is the time a redaction changed directly in the repository takes to be seen. See [Permissions: Redactions](/docs/arender-horizon/guides/features/permissions#redactions) |
+| `redaction.on-the-fly.build-timeout-ms` | `60000` | How long a request waits for the redacted copy of a document to be built (ms) |
+
+### Authentication
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `arender.security.enabled` | `false` | Requires every request to carry a valid JWT, or the provider token below. Requests without one get `401` |
+| `spring.security.oauth2.resourceserver.jwt.issuer-uri` | `${keycloak.realm-url}` | Issuer of the JWTs the broker accepts |
+| `arender.security.provider-token.header` | — | Since 2026.5.0. Request header carrying a token that a provider validates. Requests carrying it are authenticated by the provider, even with `arender.security.enabled=false` |
+| `arender.security.provider-token.provider` | — | Since 2026.5.0. Registry provider that validates the token on `GET /auth/user`. Set together with the header |
+
+See [Security](/docs/arender-horizon/concepts/security-model) for the authentication modes.
 
 ### Docker/Kubernetes runtime mode
 

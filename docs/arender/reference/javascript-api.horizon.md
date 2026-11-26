@@ -149,6 +149,20 @@ await window.ARender.download({ format: "pdf", documents: "all" }); // one merge
 
 Resolves once the file has been handed to the browser. A download already running is not queued — the call resolves without starting a second one.
 
+Since 2026.5.0, `download` follows the user's [permissions](../guides/features/permissions.md) on each document, and rejects with `FORBIDDEN` before any request when they do not cover the file asked for:
+
+| File asked for                                  | Source is a PDF | Other source            |
+| ----------------------------------------------- | --------------- | ----------------------- |
+| `format: 'original'`                            | `DOWNLOAD`      | `DOWNLOAD`              |
+| `format: 'pdf'`, `annotations: 'none'`          | `DOWNLOAD`      | `DOWNLOAD_RENDERED`     |
+| `format: 'pdf'` with annotations, or a merge    | `DOWNLOAD`      | `DOWNLOAD_RENDERED` and `DOWNLOAD` |
+
+- A bare `download()` asks for a PDF with annotations: on a document that is not a PDF, it needs both `DOWNLOAD_RENDERED` and `DOWNLOAD`. Ask for `{format: 'original', annotations: 'none'}` when the user only holds `DOWNLOAD`.
+- The file only carries the annotations the user may read: every redaction, plus the other annotations with `ANNOTATION_READ`.
+- `documents: 'all'` merges the documents the user may download, and leaves out the others; the viewer names them to the user.
+- `download` rejects with `NOT_READY` until the user's permissions have arrived, and with `documents: 'all'` until every document of the set has loaded.
+- The broker draws the [download watermark](../guides/features/watermarks.md) into the file when the user lacks `DOWNLOAD_UNMARKED`.
+
 ## Annotations
 
 `window.ARender.annotations` covers the annotations of the documents displayed in a panel. An annotation belongs to its document, not to a panel: a command given no document acts on the document on screen, and one given a document acts on it as long as a panel displays it.
@@ -190,6 +204,12 @@ When the other system writes to a document inside a container, its REST route wr
 `update` takes the same shape minus `type` (immutable once created) and `documentId` (an annotation does not move to another document), every field optional.
 
 `update` and `delete` act on the types `create` can place — `highlight`, `square` and `circle` — and refuse any other with `UNSUPPORTED`. Reading is not restricted.
+
+Since 2026.5.0, the commands follow the user's [permissions](../guides/features/permissions.md) and the [flags](../guides/features/permissions.md#annotation-flags) of each annotation, and reject with `FORBIDDEN` before any request:
+
+- `create` needs `ANNOTATION_CREATE` on the document. It waits for the user's permissions when they have not arrived yet.
+- `update` is refused on an annotation flagged `readonly`, and `delete` on one flagged `locked`.
+- `refresh` does not refuse a user without `ANNOTATION_READ`: it brings in the redactions and page rotations, the only annotations such a user receives.
 
 An `Annotation` read back (from `get()` or an event) adds: `id`, `documentId`, `creator` (`null` unless written by another system), and reads `type` as a plain `string` — wider than `CreatableAnnotationType`, since reading is not restricted.
 
@@ -293,13 +313,13 @@ try {
 
 | Code           | Meaning                                                                                                                                |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `NOT_READY`    | Nothing is open, its layout has not arrived yet, or its first panel is not open yet                                                    |
+| `NOT_READY`    | Nothing is open, its layout has not arrived yet, its first panel is not open yet, or the user's permissions have not arrived yet       |
 | `NOT_FOUND`    | The identifier given (document, annotation, panel) is not part of the open set, or not displayed in a panel where the command needs it |
 | `OUT_OF_RANGE` | A page or document position outside what exists                                                                                        |
 | `UNSUPPORTED`  | A value outside what the command accepts — unknown format, unlisted annotation type                                                    |
 | `STALE_HANDLE` | A handle (search, open) another call has since replaced                                                                                |
 | `SERVER_ERROR` | The request failed — the server answered with an error, or could not be reached                                                        |
-| `FORBIDDEN`    | The server refused the request (HTTP 401 or 403). No command checks a user's rights on its own yet                                     |
+| `FORBIDDEN`    | The user's [permissions](../guides/features/permissions.md) do not allow the command, or the server refused the request (HTTP 401 or 403). `download`, `annotations.create`, `annotations.update` and `annotations.delete` check the permissions before any request |
 
 A command that reaches the server takes its code from the server's answer: `NOT_FOUND` on a 404, `FORBIDDEN` on a 401 or 403, `UNSUPPORTED` on a 415 or 422, and `SERVER_ERROR` on any other failure or when the server cannot be reached. This holds for `openDocument`, the annotation writes, `annotations.refresh` and `download`, and `document.loadFailed` carries the same code. `getDocumentMetadata` always rejects with `SERVER_ERROR`.
 

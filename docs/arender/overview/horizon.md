@@ -15,7 +15,7 @@ ARender Horizon is a React-based document viewer distributed as an npm package (
 
 ## Feature availability
 
-Status as of ARender 2026.4.0.
+Status as of ARender 2026.5.0.
 
 | Area | Available | Coming soon |
 |------|-----------|-------------|
@@ -24,7 +24,7 @@ Status as of ARender 2026.4.0.
 | Comments | Comment pinned to a point or on a zone, with replies, status and a comments panel | Comment on a text selection |
 | Download and print | Download one document at a time (the document on screen), in original format or as PDF; print. Merging all open documents into one PDF is only available through the [JavaScript API](../reference/javascript-api.md#download) | Download several documents at once from the viewer (one merged PDF), download all documents as originals in a ZIP, download as PDF with annotations (flattened or editable), print with annotations |
 | Document builder | | Split, merge, page manipulation |
-| Security | [OAuth2 authentication](../installation/configuration.md#authentication-and-bff) on the rendition backend (JWT validation) | Redaction, watermarks, per-user and per-document permissions defined by your repository (download, print, annotate, redact...) |
+| Security | [OAuth2 authentication](../concepts/security-model.md) on the rendition backend (JWT validation, or a token validated by the provider), [per-user and per-document permissions](../guides/features/permissions.md) defined by your repository (view, download, print, annotate), [watermarks](../guides/features/watermarks.md) on views, downloads and prints, redactions stored in the repository applied to what each user is served | Redaction tools in the viewer |
 | Integration | [Web Component](../reference/web-component.md), [public JavaScript API](../reference/javascript-api.md), interface in 15 languages | |
 
 To follow what is planned next or vote for a feature, see the [ARender product portal](https://portal.productboard.com/uxopian/2-arender/tabs/7--under-consideration).

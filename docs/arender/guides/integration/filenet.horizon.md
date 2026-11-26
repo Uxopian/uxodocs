@@ -183,6 +183,72 @@ The provider exposes annotation CRUD endpoints:
 | `/annotations` | POST | Create an annotation |
 | `/annotations/{annotationId}` | PUT | Update an annotation |
 | `/annotations/{annotationId}` | DELETE | Delete an annotation |
+| `/documents/permissions` | GET | Since 2026.5.0. The user's [permissions](../features/permissions.md) on a document |
+| `/documents/watermarks` | GET | Since 2026.5.0. The [watermarks](../features/watermarks.md) of a document |
+| `/auth/user` | GET | Since 2026.5.0. Validates the user's token for the broker, in the OAuth2 mode. See [Broker authentication](#broker-authentication) |
+
+### Permissions
+
+Since 2026.5.0, the provider computes the user's permissions on each document from its [permission policy](../features/permissions.md#permission-policy), and the flags of each annotation from its annotation rules. The facts come from FileNet, for the user the provider connects as.
+
+The FileNet provider supports the `groups` and `rights` conditions:
+
+| Condition | Values |
+|---|---|
+| `groups` | The short names and the full names of the user's FileNet groups. |
+| `rights` | The rights mapped from the user's access rights on the document, below. |
+
+| Right | Granted when the user holds the FileNet access right |
+|---|---|
+| `READ` | `VIEW_CONTENT` |
+| `WRITE` | `WRITE` |
+| `DELETE` | `DELETE` |
+| `VERSION` | `MAJOR_VERSION` or `MINOR_VERSION`, unless the document is reserved or declared as a record |
+| `ANNOTATE` | `LINK` |
+
+#### Shipped policy
+
+| Users | Permissions |
+|---|---|
+| Every user | `DOCUMENT_READ`, `DOWNLOAD`, `DOWNLOAD_RENDERED`, `PRINT`, `VIEW_UNMARKED`, `DOWNLOAD_UNMARKED`, `PRINT_UNMARKED`, `DOCUMENT_CREATE`, `VERSION_CREATE`, `ANNOTATION_READ`, `ANNOTATION_CREATE`, `REDACTION_CREATE` |
+| Users with the `WRITE` right on the document | Also `REDACTION_SEE_THROUGH` |
+
+The [repository limits](../features/permissions.md#repository-limits) keep the rights of the FileNet connector of the Classic viewer:
+
+- Only users with `VIEW_CONTENT` open the document.
+- Annotating needs `LINK`.
+- Updating and deleting the annotations of other users needs `WRITE` on the document, and updating their redactions needs `LINK`. Each user may update and delete their own annotations.
+
+Nothing is watermarked and nobody uploads.
+
+```properties title="application.properties (shipped)"
+arender.permissions.policy.defaults=\
+  DOCUMENT_READ,DOWNLOAD,DOWNLOAD_RENDERED,PRINT,VIEW_UNMARKED,DOWNLOAD_UNMARKED,PRINT_UNMARKED,\
+  DOCUMENT_CREATE,VERSION_CREATE,ANNOTATION_READ,ANNOTATION_CREATE,REDACTION_CREATE
+arender.permissions.policy.rules[0].name=writers see through redactions
+arender.permissions.policy.rules[0].when.rights=WRITE
+arender.permissions.policy.rules[0].grant=REDACTION_SEE_THROUGH
+arender.permissions.policy.annotation-rules[0].name=moderation follows the repository rights
+arender.permissions.policy.annotation-rules[0].grant=\
+  ANNOTATION_UPDATE,ANNOTATION_DELETE,REDACTION_UPDATE,REDACTION_DELETE
+arender.permissions.facts-cache-ttl=60s
+```
+
+To change it, set your own `defaults`, `rules` or `annotation-rules`: see [Changing the shipped policy](../features/permissions.md#changing-the-shipped-policy). To watermark documents, see [Watermarks](../features/watermarks.md).
+
+### Broker authentication
+
+In the OAuth2 mode (`oauth2ObjectStoreProvider`), the provider can validate the user's token for the broker. Declare it as the validating provider in the broker configuration:
+
+```yaml title="application.yml (broker)"
+arender:
+    security:
+        provider-token:
+            header: Authorization
+            provider: filenet
+```
+
+The broker then calls `GET /auth/user` on the provider with the user's `Authorization` header, and forwards the token to it. See [Security: Token validated by a provider](../../concepts/security-model.md#token-validated-by-a-provider).
 
 ## 5. Verification
 

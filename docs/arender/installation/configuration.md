@@ -76,6 +76,8 @@ The BFF sits between the browser and the broker:
 
 From the viewer's perspective, it calls the BFF exactly as it would call the broker — no change is needed in how you configure the `rendition` attribute on `<arender-element>`.
 
+The broker can also delegate authentication to a provider that validates the repository's own tokens. See [Security](../concepts/security-model.md) for both modes.
+
 ### Routes to proxy through the BFF
 
 | Route | Purpose |

@@ -42,3 +42,5 @@ This edition describes **ARender Horizon 2026.5**. The Horizon interface evolves
 - **[Opening documents](./opening-documents.md)** — URL parameters and document loading
 - **[Document ID generators](./document-id-generators.md)** — customize how documents are identified
 - **[HTTPS and SSL](./https-ssl.md)** — secure communication between services
+- **[Permissions](./permissions.md)** — per-user and per-document permissions from your repository
+- **[Watermarks](./watermarks.md)** — watermark what users view, download and print

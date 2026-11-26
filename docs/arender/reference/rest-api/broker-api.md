@@ -79,6 +79,10 @@ When a call fails because of the document, the response body is an `ExceptionCap
 
 A `422` is final: the same document fails the same way on every call, so clients and retry policies must not retry it. PDF, Office and OpenDocument files, ZIP and 7z archives, and the parts of emails and archives are all checked. An archive is extracted during [Upload a document](#upload-a-document), which still answers `200`: its failure is reported on the first [Get document layout](#get-document-layout) call.
 
+### Permission refusals
+
+Since 2026.5.0, a document opened through a provider is subject to the user's [permissions](/docs/arender-horizon/guides/features/permissions). A request the user is not permitted to make returns `403`, with an `ExceptionCapsule` whose `message` names the missing permission, such as `PRINT denied on document b64_YzQy...`. Every request that names such a document needs `DOCUMENT_READ`, including the documents named in a request body (comparisons, transformations, conversions). Users without a clearance are served [watermarked](/docs/arender-horizon/guides/features/watermarks) copies, and users without `REDACTION_SEE_THROUGH` copies with the redactions burned in.
+
 ---
 
 ## Document operations
@@ -1142,6 +1146,97 @@ curl http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGI
 [
   {"id": "b26207dc-22b8-4cc4-a448-9b377ad5b706"}
 ]
+```
+
+---
+
+### Get the user's permissions
+
+`GET` `/documents/{documentId}/permissions`
+
+Since 2026.5.0. Returns the permissions the calling user holds on a document opened through a provider. ARender Horizon calls it when a document set opens, to show only the actions the user may perform. This endpoint answers even when the user lacks `DOCUMENT_READ`.
+
+#### Parameters
+
+| Name | In | Type | Required | Description |
+|------|----|------|----------|-------------|
+| `documentId` | path | string | Yes | The document ID |
+
+#### Response
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `permissions` | `String[]` | The granted permissions, after the broker's deny-list. See [Permissions](/docs/arender-horizon/guides/features/permissions#permission-reference). |
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Permissions returned |
+| 403 | The provider could not answer |
+| 404 | Document not found |
+
+#### Example request
+
+```bash
+curl http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGIyNTQ5Nzgw/permissions
+```
+
+#### Example response
+
+```json
+{
+  "permissions": ["DOCUMENT_READ", "DOWNLOAD_RENDERED", "PRINT", "ANNOTATION_READ"]
+}
+```
+
+---
+
+### Get the view watermark
+
+`GET` `/documents/{documentId}/watermarks`
+
+Since 2026.5.0. Returns the view watermark of a document for the calling user, with its placeholders filled. The answer is empty when the user holds `VIEW_UNMARKED`. ARender Horizon calls it to draw the view watermark over the spreadsheet data view; the page images are already watermarked by the broker. See [Watermarks](/docs/arender-horizon/guides/features/watermarks).
+
+#### Parameters
+
+| Name | In | Type | Required | Description |
+|------|----|------|----------|-------------|
+| `documentId` | path | string | Yes | The document ID |
+
+#### Response
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `view` | `Stamp` | The view watermark, text filled. Absent when the user holds `VIEW_UNMARKED`. The `Stamp` fields are described in [Provider API: Retrieve the watermarks](./provider-api.md#retrieve-the-watermarks). |
+
+#### Errors
+
+| Status | Description |
+|--------|-------------|
+| 200 | Watermark returned |
+| 403 | The provider could not answer |
+| 404 | Document not found |
+
+#### Example request
+
+```bash
+curl http://localhost:8761/documents/b64_NDNiMmI0NjctZGZlOS00MjgzLWExZWYtMjVkNGIyNTQ5Nzgw/watermarks
+```
+
+#### Example response
+
+```json
+{
+  "view": {
+    "type": "TEXT",
+    "text": "Viewed by Jean Dupont at 2026/11/26 14:05",
+    "placement": "TILED",
+    "fontSize": 14,
+    "rotation": 330,
+    "color": "#455A64"
+  }
+}
 ```
 
 ---
@@ -2299,6 +2394,14 @@ curl -X POST http://localhost:8761/accessor/load \
 
 These endpoints are used by the React UI to open documents through REST providers and manage annotations on provider-loaded documents. For the provider-side API contract, see [Provider API](./provider-api.md).
 
+Since 2026.5.0, the annotation endpoints enforce the user's [permissions](/docs/arender-horizon/guides/features/permissions) and the [flags](./provider-api.md#annotation-flags) of each annotation:
+
+- Reading the annotations needs `ANNOTATION_READ`. A user without it receives only the redactions and page rotations.
+- Creating needs `ANNOTATION_CREATE`, or `REDACTION_CREATE` for a redaction. Page rotations need no permission.
+- Updating also needs the stored annotation not `readonly`, and deleting needs it, and each of its replies, not `locked`.
+- Every response carries the final `readonly`, `locked` and `obfuscate` flags for the calling user.
+- The broker sets the author and dates of the annotations it creates and updates from the authenticated user.
+
 ---
 
 ### Open document through provider
@@ -2552,8 +2655,8 @@ The updated annotation object.
 | Status | Description |
 |--------|-------------|
 | 200 | Annotation updated |
-| 400 | Bad request (invalid annotation data) |
-| 403 | Access denied by the provider |
+| 400 | Bad request (invalid annotation data, or an annotation ID in the body that differs from the path) |
+| 403 | Refused by the user's permissions, the annotation's flags, or the provider |
 | 404 | Document or annotation not found |
 | 500 | Internal server error |
 | 502 | Provider unreachable |

@@ -234,6 +234,20 @@ At minimum, implement:
 GET /documents?<your-parameters>
 ```
 
-Return the document binary as the response body, with appropriate `Content-Type` and `Content-Disposition` headers. For annotation support, implement the annotation endpoints listed above.
+Return the document binary as the response body, with appropriate `Content-Type` and `Content-Disposition` headers. For annotation support, implement the annotation endpoints listed above. Answer `501 Not Implemented` on the annotation endpoints you do not implement.
 
 See the [Provider API reference](../../reference/rest-api/provider-api.md) for the full endpoint specification with request/response details and status codes.
+
+### Permissions, watermarks and authentication
+
+Since 2026.5.0, a provider can also control what each user may do with its documents. Each of these endpoints is optional:
+
+| Endpoint | Implement it to | Without it |
+|---|---|---|
+| [`GET /documents/permissions`](../../reference/rest-api/provider-api.md#retrieve-the-permissions) | Grant each user their [permissions](../features/permissions.md) on a document. | The broker grants every permission, except its deny-list. |
+| [`GET /documents/watermarks`](../../reference/rest-api/provider-api.md#retrieve-the-watermarks) | Set the text and style of the [watermarks](../features/watermarks.md). | The broker draws the built-in watermarks. |
+| [`GET /auth/user`](../../reference/rest-api/provider-api.md#retrieve-the-current-user) | Validate the user's token for the broker. See [Security](../../concepts/security-model.md#token-validated-by-a-provider). | The broker authenticates users with a JWT, or not at all. |
+
+A provider that grants permissions must also set the [annotation flags](../../reference/rest-api/provider-api.md#annotation-flags) for the calling user, and return every redaction and page rotation of the document.
+
+The `rest-provider-api` library provides the shared types: `Permission`, `GrantedPermissions`, `CurrentUser`, `Stamp` and `Watermarks`.

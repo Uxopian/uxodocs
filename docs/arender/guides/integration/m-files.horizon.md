@@ -203,6 +203,34 @@ The `mfiles-provider` implements only the document endpoint:
 
 It does **not** expose annotation endpoints. Annotations therefore fall back to the broker's default storage (XFDF files or JDBC, depending on your backend configuration). See [Providers — Annotations through providers](./providers.md#annotations-through-providers).
 
+### Permissions
+
+Since 2026.5.0, the provider answers the user's [permissions](../features/permissions.md) from its [permission policy](../features/permissions.md#permission-policy), on `GET /documents/permissions`, and the [watermarks](../features/watermarks.md) on `GET /documents/watermarks`.
+
+The shipped policy grants every permission except `DOCUMENT_UPLOAD`. Nothing is watermarked.
+
+```properties title="application.properties (shipped)"
+arender.permissions.policy.defaults=\
+  DOCUMENT_READ,DOWNLOAD,DOWNLOAD_RENDERED,PRINT,VIEW_UNMARKED,DOWNLOAD_UNMARKED,PRINT_UNMARKED,\
+  DOCUMENT_CREATE,VERSION_CREATE,\
+  ANNOTATION_READ,ANNOTATION_CREATE,REDACTION_CREATE,REDACTION_SEE_THROUGH
+```
+
+To change what the users may do, set your own `defaults`. For example, to watermark every view and every print, and forbid downloads:
+
+```yaml title="application.yml (provider)"
+arender:
+    permissions:
+        policy:
+            defaults:
+                - DOCUMENT_READ
+                - PRINT
+                - ANNOTATION_READ
+                - ANNOTATION_CREATE
+```
+
+A custom `defaults` must include `DOCUMENT_READ`. See [Changing the shipped policy](../features/permissions.md#changing-the-shipped-policy), and [Watermarks](../features/watermarks.md#configuring-the-watermarks) to change the watermark texts.
+
 ## 5. Verification
 
 After starting the provider, verify the integration:

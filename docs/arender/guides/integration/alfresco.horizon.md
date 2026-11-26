@@ -137,6 +137,68 @@ The provider exposes annotation CRUD endpoints alongside the document endpoint. 
 | `/annotations` | POST | Create an annotation |
 | `/annotations/{annotationId}` | PUT | Update an annotation |
 | `/annotations/{annotationId}` | DELETE | Delete an annotation |
+| `/documents/permissions` | GET | Since 2026.5.0. The user's [permissions](../features/permissions.md) on a document |
+| `/documents/watermarks` | GET | Since 2026.5.0. The [watermarks](../features/watermarks.md) of a document |
+
+### Permissions
+
+Since 2026.5.0, the provider computes the user's permissions on each document from its [permission policy](../features/permissions.md#permission-policy), and the flags of each annotation from its annotation rules. The facts come from Alfresco, for the user owning the ticket.
+
+The Alfresco provider supports the three conditions:
+
+| Condition | Values |
+|---|---|
+| `groups` | The `GROUP_…` authorities of the user, such as `GROUP_legal`. |
+| `roles` | The user's role on the site of the document (`SiteConsumer`, `SiteContributor`, `SiteCollaborator`, `SiteManager`), and the roles the document's ACL gives the user, one of their groups or `GROUP_EVERYONE` (such as `Consumer`, `Contributor`, `Collaborator`, `Coordinator`). A rule on a site role also matches the higher site roles, in the order `SiteConsumer` < `SiteContributor` < `SiteCollaborator` < `SiteManager`. |
+| `rights` | The rights mapped from the operations Alfresco allows the user on the document, below. |
+
+| Right | Granted when Alfresco allows the user |
+|---|---|
+| `READ` | To read the document |
+| `WRITE` | To update the document |
+| `DELETE` | To delete the document |
+| `VERSION` | To update the document, unless the document is locked |
+| `ANNOTATE` | To update or delete the document |
+
+When Alfresco refuses the user (expired ticket, document they may not read, deleted document), the provider grants nothing.
+
+#### Shipped policy
+
+The provider ships the role mapping of the Alfresco connector of the Classic viewer:
+
+| Users | Permissions |
+|---|---|
+| Every user who may read the document | `DOCUMENT_READ`, `DOWNLOAD`, `DOWNLOAD_RENDERED`, `PRINT`, `VIEW_UNMARKED`, `DOWNLOAD_UNMARKED`, `PRINT_UNMARKED`, `VERSION_CREATE`, `ANNOTATION_READ` |
+| Contributors: `SiteContributor` and above, `Contributor`, `Collaborator`, `Coordinator` | Also `ANNOTATION_CREATE`, `REDACTION_CREATE`, `DOCUMENT_CREATE`. They may also update the redactions of other users. |
+| Collaborators: `SiteCollaborator` and above, `Collaborator`, `Coordinator` | Also `REDACTION_SEE_THROUGH`. They may also update and delete the annotations and redactions of other users. |
+| Users who may update or delete the document (`ANNOTATE` right) | Also `ANNOTATION_CREATE`, `DOCUMENT_CREATE` |
+
+Nothing is watermarked and nobody uploads. Each user may update and delete their own annotations. The [repository limits](../features/permissions.md#repository-limits) drop every write on a document the user may only read.
+
+```properties title="application.properties (shipped)"
+arender.permissions.policy.defaults=\
+  DOCUMENT_READ,DOWNLOAD,DOWNLOAD_RENDERED,PRINT,VIEW_UNMARKED,DOWNLOAD_UNMARKED,PRINT_UNMARKED,\
+  VERSION_CREATE,ANNOTATION_READ
+arender.permissions.policy.rules[0].name=contributors annotate and redact
+arender.permissions.policy.rules[0].when.roles=SiteContributor,Contributor,Collaborator,Coordinator
+arender.permissions.policy.rules[0].grant=ANNOTATION_CREATE,REDACTION_CREATE,DOCUMENT_CREATE
+arender.permissions.policy.rules[1].name=collaborators see through redactions
+arender.permissions.policy.rules[1].when.roles=SiteCollaborator,Collaborator,Coordinator
+arender.permissions.policy.rules[1].grant=REDACTION_SEE_THROUGH
+arender.permissions.policy.rules[2].name=callers who may update the document annotate it
+arender.permissions.policy.rules[2].when.rights=ANNOTATE
+arender.permissions.policy.rules[2].grant=ANNOTATION_CREATE,DOCUMENT_CREATE
+arender.permissions.policy.annotation-rules[0].name=contributors update redactions
+arender.permissions.policy.annotation-rules[0].when.roles=SiteContributor,Contributor,Collaborator,Coordinator
+arender.permissions.policy.annotation-rules[0].grant=REDACTION_UPDATE
+arender.permissions.policy.annotation-rules[1].name=collaborators moderate annotations and redactions
+arender.permissions.policy.annotation-rules[1].when.roles=SiteCollaborator,Collaborator,Coordinator
+arender.permissions.policy.annotation-rules[1].grant=\
+  ANNOTATION_UPDATE,ANNOTATION_DELETE,REDACTION_UPDATE,REDACTION_DELETE
+arender.permissions.facts-cache-ttl=60s
+```
+
+To change it, set your own `defaults`, `rules` or `annotation-rules`: see [Changing the shipped policy](../features/permissions.md#changing-the-shipped-policy). To watermark documents, see [Watermarks](../features/watermarks.md).
 
 ## 5. Verification
 
