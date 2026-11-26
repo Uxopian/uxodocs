@@ -15,19 +15,9 @@ ARender Horizon is a React-based document viewer distributed as an npm package (
 
 ## Feature availability
 
-Status as of ARender 2026.4.0.
+To check whether Horizon covers your project, start with [Is Horizon ready for my project?](./horizon-readiness.mdx). It gives a verdict for seven common use cases. For the status of each feature compared with the Classic viewer, see [Horizon feature coverage](./horizon-feature-coverage.mdx).
 
-| Area | Available | Coming soon |
-|------|-----------|-------------|
-| Viewing | All formats including AutoCAD, [Excel data view](/release-note/arender/v2026.3.0/release-notes#excel-data-view) (`.xlsx`), full-text search, multi-view (several documents side by side), table of contents (the document's outline) | Comparison (text and image) |
-| Annotations | Rectangle, circle, free text, arrow, freehand, highlight, underline, strikethrough | Stamp, link, polyline, measure, bookmarks |
-| Comments | Comment pinned to a point or on a zone, with replies, status and a comments panel | Comment on a text selection |
-| Download and print | Download one document at a time (the document on screen), in original format or as PDF; print. Merging all open documents into one PDF is only available through the [JavaScript API](../reference/javascript-api.md#download) | Download several documents at once from the viewer (one merged PDF), download all documents as originals in a ZIP, download as PDF with annotations (flattened or editable), print with annotations |
-| Document builder | | Split, merge, page manipulation |
-| Security | [OAuth2 authentication](../installation/configuration.md#authentication-and-bff) on the rendition backend (JWT validation) | Redaction, watermarks, per-user and per-document permissions defined by your repository (download, print, annotate, redact...) |
-| Integration | [Web Component](../reference/web-component.md), [public JavaScript API](../reference/javascript-api.md), interface in 15 languages | |
-
-To follow what is planned next or vote for a feature, see the [ARender product portal](https://portal.productboard.com/uxopian/2-arender/tabs/7--under-consideration).
+For a feature that matters to your project, contact your Uxopian account manager.
 
 ## Architecture overview
 

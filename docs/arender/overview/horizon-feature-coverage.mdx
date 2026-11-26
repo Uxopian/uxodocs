@@ -1,0 +1,25 @@
+---
+viewer: horizon
+slug: /overview/horizon-feature-coverage
+title: Horizon feature coverage
+sidebar_position: 0.6
+---
+import {CoverageTable} from '@site/src/components/HorizonCoverage';
+import data from './horizon-coverage.json';
+
+# Horizon feature coverage
+
+This table lists the features of the Classic viewer and their status in Horizon. Search a feature, or filter by use case or status. For a summary per use case, see [Is Horizon ready for my project?](./horizon-readiness.mdx).
+
+- **Available**: released in Horizon, since the version shown.
+- **Preview**: released but off by default. Turn it on to try it. Its behavior can still change.
+- **Now**: in development for the coming releases.
+- **Next**: designed, development starts after the Now items.
+- **Later**: planned, not scheduled yet.
+- **Not in Horizon**: not available in Horizon and not planned.
+
+Now, Next and Later are not a commitment: items, their order and their scope can change.
+
+<CoverageTable data={data} />
+
+For a feature that matters to your project, contact your Uxopian account manager.
