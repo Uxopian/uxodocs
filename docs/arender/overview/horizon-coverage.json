@@ -1,0 +1,1014 @@
+{
+  "asOf": "2026.4.0",
+  "profiles": [
+    {
+      "id": "view",
+      "title": "View documents",
+      "summary": "PDF, Office, emails, CAD, spreadsheets with an interactive view, video, audio and images. Navigation, search, thumbnails, table of contents, several documents side by side. On the roadmap: PDF layers, image adjustments."
+    },
+    {
+      "id": "download",
+      "title": "Download and print",
+      "summary": "Download the original file or a PDF, print the current document or a whole set. In preview: download with annotations, one merged PDF for a set. On the roadmap: all originals as a ZIP, print with annotations."
+    },
+    {
+      "id": "annotate",
+      "title": "Annotate and review",
+      "summary": "Highlight, underline, strikethrough, rectangles, circles, arrows, freehand, text, comments with replies and status. In development: stamps and shape styles. On the roadmap: user bookmarks. Not in Horizon: polygon and polyline."
+    },
+    {
+      "id": "embed",
+      "title": "Embed in your application",
+      "summary": "Web Component, JavaScript API and events, TypeScript definitions, repository connectors, REST APIs."
+    },
+    {
+      "id": "customize",
+      "title": "Customize the viewer",
+      "summary": "Your colors and styles with CSS, no ARender branding, interface in 15 languages. On the roadmap: toolbar configuration and default annotation styles. Not in Horizon: Classic plugins and custom toolbar buttons."
+    },
+    {
+      "id": "rights",
+      "title": "Control who can do what",
+      "summary": "Authentication by the host application or OAuth2. In development for 2026.5.0: permissions per user and per document from your repository (view, download, print, upload, annotate)."
+    },
+    {
+      "id": "advanced",
+      "title": "Redact, compare, build documents",
+      "summary": "Redaction is in preview, off by default. Watermarks are in development. Document builder and text comparison are on the roadmap."
+    }
+  ],
+  "rows": [
+    {
+      "id": "pdf-documents-pdf-1-x-to-2-0-pdf-a-portfolios",
+      "area": "Viewing",
+      "feature": "PDF documents (PDF 1.x to 2.0, PDF/A, portfolios)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Both viewers use the same Rendition engine."
+    },
+    {
+      "id": "office-documents-word-powerpoint-visio-project-publisher-ope",
+      "area": "Viewing",
+      "feature": "Office documents (Word, PowerPoint, Visio, Project, Publisher, OpenDocument)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Converted on the server (LibreOffice by default; DirectOffice or Microsoft Office as options)."
+    },
+    {
+      "id": "emails-msg-eml-with-attachments",
+      "area": "Viewing",
+      "feature": "Emails (MSG, EML) with attachments",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "text-html-and-svg-files",
+      "area": "Viewing",
+      "feature": "Text, HTML and SVG files",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "archives-zip-and-compound-documents-shown-as-a-document-tree",
+      "area": "Viewing",
+      "feature": "Archives (ZIP) and compound documents shown as a document tree",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Horizon shows the tree in the thumbnails panel, with the document path in the top bar since 2026.4.0."
+    },
+    {
+      "id": "cad-drawings-autocad-dwg-dxf",
+      "area": "Viewing",
+      "feature": "CAD drawings (AutoCAD DWG, DXF)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Add-on."
+    },
+    {
+      "id": "afp-documents",
+      "area": "Viewing",
+      "feature": "AFP documents",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Add-on."
+    },
+    {
+      "id": "xfa-forms",
+      "area": "Viewing",
+      "feature": "XFA forms",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Add-on."
+    },
+    {
+      "id": "zoom-in-zoom-out-fit-to-width-fit-to-page",
+      "area": "Viewing",
+      "feature": "Zoom in, zoom out, fit to width, fit to page",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "page-rotation-saved-with-the-document",
+      "area": "Viewing",
+      "feature": "Page rotation, saved with the document",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "full-screen-mode",
+      "area": "Viewing",
+      "feature": "Full-screen mode",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "reading-guide-ruler",
+      "area": "Viewing",
+      "feature": "Reading guide ruler",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "pdf-layers-show-or-hide-optional-content",
+      "area": "Viewing",
+      "feature": "PDF layers (show or hide optional content)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Later"
+    },
+    {
+      "id": "text-selection-and-copy",
+      "area": "Viewing",
+      "feature": "Text selection and copy",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "capture-a-page-area-as-an-image",
+      "area": "Viewing",
+      "feature": "Capture a page area as an image",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "several-documents-side-by-side-multi-view",
+      "area": "Viewing",
+      "feature": "Several documents side by side (multi-view)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.4.0",
+      "note": "Resizable views, open a document in a new view from its thumbnail, annotate in any view."
+    },
+    {
+      "id": "open-several-documents-as-one-set",
+      "area": "Viewing",
+      "feature": "Open several documents as one set",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Previous and next document, search across the whole set."
+    },
+    {
+      "id": "open-a-local-file-from-the-viewer",
+      "area": "Viewing",
+      "feature": "Open a local file from the viewer",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Classic can also open a URL typed by the user."
+    },
+    {
+      "id": "reason-shown-when-a-document-cannot-be-opened-password-prote",
+      "area": "Viewing",
+      "feature": "Reason shown when a document cannot be opened (password-protected, corrupted)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Next",
+      "note": "Horizon shows a generic message with a download fallback."
+    },
+    {
+      "id": "digital-signature-check-panel-signed-or-invalid-status",
+      "area": "Viewing",
+      "feature": "Digital signature check panel (signed or invalid status)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Next"
+    },
+    {
+      "id": "image-adjustments-brightness-contrast-invert",
+      "area": "Viewing",
+      "feature": "Image adjustments (brightness, contrast, invert)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Later"
+    },
+    {
+      "id": "page-navigation-first-previous-next-last-go-to-page",
+      "area": "Navigation and search",
+      "feature": "Page navigation (first, previous, next, last, go to page)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "thumbnails-panel",
+      "area": "Navigation and search",
+      "feature": "Thumbnails panel",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "One or four thumbnails per line. Annotated pages are marked since 2026.3.0."
+    },
+    {
+      "id": "table-of-contents-pdf-outline",
+      "area": "Navigation and search",
+      "feature": "Table of contents (PDF outline)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.4.0",
+      "note": "Read-only. Hidden when the document has no outline."
+    },
+    {
+      "id": "follow-links-inside-pdf-documents-to-a-page-or-a-web-address",
+      "area": "Navigation and search",
+      "feature": "Follow links inside PDF documents (to a page or a web address)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Now",
+      "version": "2026.5.0"
+    },
+    {
+      "id": "text-search-with-highlighted-results",
+      "area": "Navigation and search",
+      "feature": "Text search with highlighted results",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Searches every document of a set. Floating search bar since 2026.4.0."
+    },
+    {
+      "id": "advanced-search-options-and-result-list-case-accents-regular",
+      "area": "Navigation and search",
+      "feature": "Advanced search options and result list (case, accents, regular expressions)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "keyboard-shortcuts",
+      "area": "Navigation and search",
+      "feature": "Keyboard shortcuts",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Horizon shortcuts are fixed (search, print, text markup, delete, Tab and Escape on annotations); Classic shortcuts are configurable."
+    },
+    {
+      "id": "print-the-current-document-or-all-documents-of-a-set",
+      "area": "Download and print",
+      "feature": "Print the current document or all documents of a set",
+      "profile": "download",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "New print dialog in 2026.4.0."
+    },
+    {
+      "id": "print-with-annotations",
+      "area": "Download and print",
+      "feature": "Print with annotations",
+      "profile": "download",
+      "classic": "Available",
+      "horizon": "Later",
+      "note": "Horizon prints pages without their annotations."
+    },
+    {
+      "id": "download-the-original-file-or-a-pdf",
+      "area": "Download and print",
+      "feature": "Download the original file or a PDF",
+      "profile": "download",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "In Horizon the PDF keeps the document's annotations as editable objects."
+    },
+    {
+      "id": "download-with-annotations-flattened-or-removed",
+      "area": "Download and print",
+      "feature": "Download with annotations flattened or removed",
+      "profile": "download",
+      "classic": "Available",
+      "horizon": "Preview",
+      "note": "Off by default in the viewer menu. Available through the JavaScript API."
+    },
+    {
+      "id": "download-all-documents-of-a-set-as-one-merged-pdf",
+      "area": "Download and print",
+      "feature": "Download all documents of a set as one merged PDF",
+      "profile": "download",
+      "classic": "Available",
+      "horizon": "Preview",
+      "note": "Off by default in the viewer menu. Available through the JavaScript API."
+    },
+    {
+      "id": "download-all-original-files-as-a-zip",
+      "area": "Download and print",
+      "feature": "Download all original files as a ZIP",
+      "profile": "download",
+      "classic": "Available",
+      "horizon": "Now"
+    },
+    {
+      "id": "import-and-export-annotations-xfdf-fdf",
+      "area": "Annotations",
+      "feature": "Import and export annotations (XFDF, FDF)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "rectangle-annotations",
+      "area": "Annotations",
+      "feature": "Rectangle annotations",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0"
+    },
+    {
+      "id": "circle-and-ellipse-annotations",
+      "area": "Annotations",
+      "feature": "Circle and ellipse annotations",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.2.0"
+    },
+    {
+      "id": "arrow-and-line-annotations",
+      "area": "Annotations",
+      "feature": "Arrow and line annotations",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.3.0"
+    },
+    {
+      "id": "polygon-and-polyline-annotations",
+      "area": "Annotations",
+      "feature": "Polygon and polyline annotations",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "freehand-drawing-ink",
+      "area": "Annotations",
+      "feature": "Freehand drawing (ink)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.3.0"
+    },
+    {
+      "id": "free-text-annotations",
+      "area": "Annotations",
+      "feature": "Free text annotations",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0",
+      "note": "Horizon has no font or text size options."
+    },
+    {
+      "id": "highlight-text",
+      "area": "Annotations",
+      "feature": "Highlight text",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0"
+    },
+    {
+      "id": "underline-text",
+      "area": "Annotations",
+      "feature": "Underline text",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.2.0"
+    },
+    {
+      "id": "strikethrough-text",
+      "area": "Annotations",
+      "feature": "Strikethrough text",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.3.0"
+    },
+    {
+      "id": "audio-annotations-voice-note",
+      "area": "Annotations",
+      "feature": "Audio annotations (voice note)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "hyperlink-annotations-link-to-a-page-an-area-or-a-web-addres",
+      "area": "Annotations",
+      "feature": "Hyperlink annotations (link to a page, an area or a web address)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Next"
+    },
+    {
+      "id": "move-resize-and-delete-annotations",
+      "area": "Annotations",
+      "feature": "Move, resize and delete annotations",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0"
+    },
+    {
+      "id": "duplicate-an-annotation",
+      "area": "Annotations",
+      "feature": "Duplicate an annotation",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0",
+      "note": "In Horizon, duplicate with the Ctrl+D keyboard shortcut. Horizon has no repeat mode for creating several annotations in a row."
+    },
+    {
+      "id": "color-of-text-markup-annotations",
+      "area": "Annotations",
+      "feature": "Color of text markup annotations",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0",
+      "note": "Highlight, underline and strikethrough."
+    },
+    {
+      "id": "style-of-shapes-and-text-boxes-color-border-opacity",
+      "area": "Annotations",
+      "feature": "Style of shapes and text boxes (color, border, opacity)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Now",
+      "note": "In Horizon, shapes and text boxes keep their default style."
+    },
+    {
+      "id": "show-or-hide-all-annotations",
+      "area": "Annotations",
+      "feature": "Show or hide all annotations",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Later"
+    },
+    {
+      "id": "automatic-save-of-annotations",
+      "area": "Annotations",
+      "feature": "Automatic save of annotations",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0",
+      "note": "Horizon saves each change as it is made. Classic saves automatically or on demand, by configuration."
+    },
+    {
+      "id": "annotations-shared-between-classic-and-horizon-same-storage-",
+      "area": "Annotations",
+      "feature": "Annotations shared between Classic and Horizon (same storage: XFDF files, database, repository)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0",
+      "note": "Annotation types Horizon does not draw yet (polygon, polyline, measure, stamps, audio) are kept but not shown."
+    },
+    {
+      "id": "annotation-list-panel-with-filters-author-my-annotations",
+      "area": "Annotations",
+      "feature": "Annotation list panel with filters (author, my annotations)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Later",
+      "note": "Horizon lists comments in the comments panel."
+    },
+    {
+      "id": "user-bookmarks-create-delete",
+      "area": "Annotations",
+      "feature": "User bookmarks (create, delete)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Next"
+    },
+    {
+      "id": "text-and-image-stamps",
+      "area": "Annotations",
+      "feature": "Text and image stamps",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Now"
+    },
+    {
+      "id": "comment-on-a-point-of-the-page-sticky-note",
+      "area": "Comments",
+      "feature": "Comment on a point of the page (sticky note)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0"
+    },
+    {
+      "id": "comment-on-a-zone-of-the-page",
+      "area": "Comments",
+      "feature": "Comment on a zone of the page",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.4.0"
+    },
+    {
+      "id": "attach-a-comment-to-any-annotation",
+      "area": "Comments",
+      "feature": "Comment on any annotation, including a text selection",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Next"
+    },
+    {
+      "id": "comment-replies-and-threads",
+      "area": "Comments",
+      "feature": "Comment replies and threads",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0"
+    },
+    {
+      "id": "review-status-on-comments-accepted-rejected-completed-cancel",
+      "area": "Comments",
+      "feature": "Review status on comments (accepted, rejected, completed, cancelled)",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0",
+      "note": "Open and closed grouping since 2026.2.0."
+    },
+    {
+      "id": "comments-panel-listing-all-document-comments",
+      "area": "Comments",
+      "feature": "Comments panel listing all document comments",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.1.0",
+      "note": "Comments are grouped as open or closed since 2026.2.0."
+    },
+    {
+      "id": "comment-color",
+      "area": "Comments",
+      "feature": "Comment color",
+      "profile": "annotate",
+      "classic": "Available",
+      "horizon": "Next"
+    },
+    {
+      "id": "spreadsheets-excel-ods-shown-as-pages",
+      "area": "Spreadsheets and media",
+      "feature": "Spreadsheets (Excel, ODS) shown as pages",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "interactive-spreadsheet-view-xlsx-with-sheet-tabs-and-formul",
+      "area": "Spreadsheets and media",
+      "feature": "Interactive spreadsheet view (.xlsx) with sheet tabs and formula bar",
+      "profile": "view",
+      "classic": "n/a",
+      "horizon": "Available",
+      "version": "2026.3.0",
+      "note": "Switch between page view and data view. Search and annotations work in the page view."
+    },
+    {
+      "id": "watermark-on-the-spreadsheet-data-view",
+      "area": "Spreadsheets and media",
+      "feature": "Watermark on the spreadsheet data view",
+      "profile": "view",
+      "classic": "n/a",
+      "horizon": "Now",
+      "version": "2026.5.0"
+    },
+    {
+      "id": "images-and-scans-tiff-jpeg-png-dicom-and-more",
+      "area": "Spreadsheets and media",
+      "feature": "Images and scans (TIFF, JPEG, PNG, DICOM and more)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "video-playback",
+      "area": "Spreadsheets and media",
+      "feature": "Video playback",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Speed, volume, picture-in-picture, full screen."
+    },
+    {
+      "id": "audio-playback-mp3-wav",
+      "area": "Spreadsheets and media",
+      "feature": "Audio playback (MP3, WAV)",
+      "profile": "view",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "per-user-and-per-document-permissions-view-download-print-up",
+      "area": "Security and permissions",
+      "feature": "Per-user and per-document permissions (view, download, print, upload, annotate)",
+      "profile": "rights",
+      "classic": "Available",
+      "horizon": "Now",
+      "version": "2026.5.0",
+      "note": "Read from the document repository through the provider."
+    },
+    {
+      "id": "read-only-and-locked-annotations",
+      "area": "Security and permissions",
+      "feature": "Read-only and locked annotations",
+      "profile": "rights",
+      "classic": "Available",
+      "horizon": "Now",
+      "version": "2026.5.0"
+    },
+    {
+      "id": "annotation-visibility-by-user-rights-security-levels",
+      "area": "Security and permissions",
+      "feature": "Annotation visibility by user rights (security levels)",
+      "profile": "rights",
+      "classic": "Available",
+      "horizon": "Now",
+      "version": "2026.5.0"
+    },
+    {
+      "id": "annotation-permissions-create-reply-change-status",
+      "area": "Security and permissions",
+      "feature": "Annotation permissions (create, reply, change status)",
+      "profile": "rights",
+      "classic": "Available",
+      "horizon": "Now",
+      "version": "2026.5.0"
+    },
+    {
+      "id": "authentication-handled-by-the-host-application",
+      "area": "Security and permissions",
+      "feature": "Authentication handled by the host application",
+      "profile": "rights",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0"
+    },
+    {
+      "id": "oauth2-openid-connect",
+      "area": "Security and permissions",
+      "feature": "OAuth2 / OpenID Connect",
+      "profile": "rights",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Horizon: optional token check on the Rendition backend."
+    },
+    {
+      "id": "custom-request-headers-from-the-host-page-for-example-a-csrf",
+      "area": "Security and permissions",
+      "feature": "Custom request headers from the host page (for example a CSRF token)",
+      "profile": "rights",
+      "classic": "n/a",
+      "horizon": "Now",
+      "version": "2026.5.0",
+      "note": "Set through the JavaScript API."
+    },
+    {
+      "id": "encrypted-document-ids-with-expiry",
+      "area": "Security and permissions",
+      "feature": "Encrypted document IDs with expiry",
+      "profile": "rights",
+      "classic": "Available",
+      "horizon": "Not in Horizon",
+      "note": "Replaced by OAuth2 authentication on the rendition backend."
+    },
+    {
+      "id": "server-side-audit-of-downloads-and-prints",
+      "area": "Security and permissions",
+      "feature": "Server-side audit of downloads and prints",
+      "profile": "rights",
+      "classic": "n/a",
+      "horizon": "Next"
+    },
+    {
+      "id": "web-component-arender-element-no-iframe",
+      "area": "Integration",
+      "feature": "Web Component <arender-element> (no iframe)",
+      "profile": "embed",
+      "classic": "n/a",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Framework wrappers were removed in 2026.1.0; use the Web Component directly."
+    },
+    {
+      "id": "embed-in-an-iframe-with-url-parameters",
+      "area": "Integration",
+      "feature": "Embed in an iframe with URL parameters",
+      "profile": "embed",
+      "classic": "Available",
+      "horizon": "Not in Horizon",
+      "note": "Horizon is embedded as a Web Component; the page URL is not read to open a document (only ?locale=)."
+    },
+    {
+      "id": "open-documents-by-url-or-document-id",
+      "area": "Integration",
+      "feature": "Open documents by URL or document ID",
+      "profile": "embed",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "One entry point (openDocument, document attribute) since 2026.2.0."
+    },
+    {
+      "id": "javascript-api-navigation-layout-search-and-download",
+      "area": "Integration",
+      "feature": "JavaScript API: navigation, layout, search and download",
+      "profile": "embed",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.3.0",
+      "note": "A new API: Classic calls must be rewritten (a call table is provided)."
+    },
+    {
+      "id": "javascript-api-annotations",
+      "area": "Integration",
+      "feature": "JavaScript API: annotations",
+      "profile": "embed",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.3.0",
+      "note": "Creation through the API covers highlight, rectangle and circle."
+    },
+    {
+      "id": "javascript-api-multi-view",
+      "area": "Integration",
+      "feature": "JavaScript API: multi-view",
+      "profile": "embed",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.4.0"
+    },
+    {
+      "id": "javascript-events-page-document-load-failure-annotation-chan",
+      "area": "Integration",
+      "feature": "JavaScript events (page, document, load failure, annotation changes, panels)",
+      "profile": "embed",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.3.0",
+      "note": "Panel events since 2026.4.0."
+    },
+    {
+      "id": "typescript-definitions-for-the-javascript-api",
+      "area": "Integration",
+      "feature": "TypeScript definitions for the JavaScript API",
+      "profile": "embed",
+      "classic": "n/a",
+      "horizon": "Available",
+      "version": "2026.3.0"
+    },
+    {
+      "id": "repository-connectors-alfresco-filenet-m-files-custom",
+      "area": "Integration",
+      "feature": "Repository connectors (Alfresco, FileNet, M-Files, custom)",
+      "profile": "embed",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Horizon uses REST providers: FileNet and Alfresco since 2026.0.0, M-Files since 2026.2.0, custom providers in any language. IBM Content Navigator is Classic only."
+    },
+    {
+      "id": "rest-apis-rendition-annotations-transformations",
+      "area": "Integration",
+      "feature": "REST APIs (rendition, annotations, transformations)",
+      "profile": "embed",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Server-side, shared by both viewers."
+    },
+    {
+      "id": "faster-first-display-on-demand-loading-of-the-viewer",
+      "area": "Integration",
+      "feature": "Faster first display (on-demand loading of the viewer)",
+      "profile": "embed",
+      "classic": "n/a",
+      "horizon": "Available",
+      "version": "2026.4.0"
+    },
+    {
+      "id": "custom-styling-with-css",
+      "area": "Customization",
+      "feature": "Custom styling with CSS",
+      "profile": "customize",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Horizon uses scoped styles and CSS variables since 2026.4.0."
+    },
+    {
+      "id": "white-labeling",
+      "area": "Customization",
+      "feature": "White labeling",
+      "profile": "customize",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.3.0",
+      "note": "No ARender branding is shown inside the Horizon viewer."
+    },
+    {
+      "id": "user-interface-in-15-languages",
+      "area": "Customization",
+      "feature": "User interface in 15 languages",
+      "profile": "customize",
+      "classic": "Available",
+      "horizon": "Available",
+      "version": "2026.0.0",
+      "note": "Arabic and Hebrew are translated; the Horizon layout is not mirrored right to left."
+    },
+    {
+      "id": "toolbar-configuration-and-visual-profiles",
+      "area": "Customization",
+      "feature": "Toolbar configuration and visual profiles",
+      "profile": "customize",
+      "classic": "Available",
+      "horizon": "Later"
+    },
+    {
+      "id": "plugins-and-custom-toolbar-buttons",
+      "area": "Customization",
+      "feature": "Plugins and custom toolbar buttons",
+      "profile": "customize",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "annotation-templates-and-creation-defaults",
+      "area": "Customization",
+      "feature": "Default style of new annotations (integrator settings and user preferences)",
+      "profile": "customize",
+      "classic": "Available",
+      "horizon": "Later",
+      "version": ""
+    },
+    {
+      "id": "redaction-of-areas-and-selected-text",
+      "area": "Document processing",
+      "feature": "Redaction of areas and selected text",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Preview",
+      "note": "Off by default in Horizon. Full-page redaction is Classic only."
+    },
+    {
+      "id": "see-through-redactions-authorized-users",
+      "area": "Document processing",
+      "feature": "See through redactions (authorized users)",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Preview",
+      "note": "Off by default in Horizon."
+    },
+    {
+      "id": "download-or-publish-a-redacted-pdf-content-removed",
+      "area": "Document processing",
+      "feature": "Download or publish a redacted PDF (content removed)",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Preview",
+      "note": "Download with redactions burned in is off by default in the viewer and reachable through the JavaScript API download command."
+    },
+    {
+      "id": "search-and-redact-with-rules-patterns-keywords",
+      "area": "Document processing",
+      "feature": "Search-and-redact with rules (patterns, keywords)",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "redaction-list-panel",
+      "area": "Document processing",
+      "feature": "Redaction list panel",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Later"
+    },
+    {
+      "id": "text-comparison-of-two-documents",
+      "area": "Document processing",
+      "feature": "Text comparison of two documents",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Later"
+    },
+    {
+      "id": "synchronized-scrolling-between-side-by-side-views",
+      "area": "Document processing",
+      "feature": "Synchronized scrolling between side-by-side views",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "document-builder-merge-split-reorder-delete-pages",
+      "area": "Document processing",
+      "feature": "Document builder (merge, split, reorder, delete pages)",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Next"
+    },
+    {
+      "id": "sign-with-a-saved-visual-signature",
+      "area": "Document processing",
+      "feature": "Sign with a saved visual signature",
+      "profile": "advanced",
+      "classic": "n/a",
+      "horizon": "Later"
+    },
+    {
+      "id": "watermarks-on-displayed-downloaded-and-printed-pages",
+      "area": "Document processing",
+      "feature": "Watermarks on displayed, downloaded and printed pages",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Now"
+    },
+    {
+      "id": "distance-measurement",
+      "area": "Document processing",
+      "feature": "Distance measurement",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Not in Horizon"
+    },
+    {
+      "id": "links-between-areas-of-different-documents",
+      "area": "Document processing",
+      "feature": "Links between areas of different documents",
+      "profile": "advanced",
+      "classic": "Available",
+      "horizon": "Later"
+    }
+  ]
+}
